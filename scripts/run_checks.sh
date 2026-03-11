@@ -18,10 +18,10 @@ run_check() {
     echo "--- $name ---"
     if eval "$cmd"; then
         echo "PASS: $name"
-        ((PASS++))
+        PASS=$((PASS + 1))
     else
         echo "FAIL: $name"
-        ((FAIL++))
+        FAIL=$((FAIL + 1))
     fi
     echo ""
 }
