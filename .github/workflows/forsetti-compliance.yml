@@ -151,6 +151,9 @@ jobs:
 
           errors = []
 
+          # Map of valid core engine directory names
+          CORE_ENGINES = {"cosmology_engine", "realm_engine", "ash_pattern_engine", "narrative_engine", "perception_engine"}
+
           # Every core engine must have engine_interface.json
           core_dir = "core"
           for engine in os.listdir(core_dir):
@@ -165,21 +168,22 @@ jobs:
               with open(interface_file) as f:
                   iface = json.load(f)
 
-              # Validate required fields
-              for field in ["engine", "purpose", "layer", "methods"]:
+              # Validate required fields (engine_id, purpose, layer, methods)
+              for field in ["engine_id", "purpose", "layer", "methods"]:
                   if field not in iface:
                       errors.append(f"{interface_file}: missing required field '{field}'")
 
-              # Validate layer is "Core"
-              if iface.get("layer") != "Core":
-                  errors.append(f"{interface_file}: layer must be 'Core', got '{iface.get('layer')}'")
+              # Validate layer is "core"
+              if iface.get("layer") != "core":
+                  errors.append(f"{interface_file}: layer must be 'core', got '{iface.get('layer')}'")
 
-              # Validate dependencies don't reference higher layers
+              # Validate dependencies reference valid core engines (fully qualified IDs)
               deps = iface.get("dependencies", [])
-              # Core engines can only depend on other core engines
               for dep in deps:
-                  if not os.path.exists(os.path.join(core_dir, dep)):
-                      errors.append(f"{interface_file}: dependency '{dep}' is not a core engine")
+                  # Dependencies use fully qualified IDs like "ywe.core.cosmology_engine"
+                  dep_name = dep.split(".")[-1] if "." in dep else dep
+                  if dep_name not in CORE_ENGINES:
+                      errors.append(f"{interface_file}: dependency '{dep}' does not reference a known core engine")
 
           # Every expansion module must have an interface
           modules_dir = "modules"
@@ -187,7 +191,7 @@ jobs:
               module_path = os.path.join(modules_dir, module)
               if not os.path.isdir(module_path):
                   continue
-              # Find interface file (pattern: *_engine_interface.json)
+              # Find interface file (pattern: *_interface.json)
               iface_files = [f for f in os.listdir(module_path) if f.endswith("_interface.json")]
               if not iface_files:
                   errors.append(f"Missing module interface in: {module_path}")
@@ -198,17 +202,18 @@ jobs:
                       iface = json.load(f)
 
                   # Validate required fields
-                  for field in ["engine", "purpose", "layer", "methods"]:
+                  for field in ["engine_id", "purpose", "layer", "methods"]:
                       if field not in iface:
                           errors.append(f"{module_path}/{iface_file}: missing required field '{field}'")
 
-                  # Modules must be Runtime layer
-                  if iface.get("layer") != "Runtime":
-                      errors.append(f"{module_path}/{iface_file}: expansion modules must be 'Runtime' layer, got '{iface.get('layer')}'")
+                  # Modules must be "module" layer
+                  if iface.get("layer") != "module":
+                      errors.append(f"{module_path}/{iface_file}: expansion modules must be 'module' layer, got '{iface.get('layer')}'")
 
-                  # Modules must depend on ash_pattern_engine
+                  # Modules must depend on ash_pattern_engine (fully qualified)
                   deps = iface.get("dependencies", [])
-                  if "ash_pattern_engine" not in deps:
+                  dep_names = [d.split(".")[-1] if "." in d else d for d in deps]
+                  if "ash_pattern_engine" not in dep_names:
                       errors.append(f"{module_path}/{iface_file}: expansion module must depend on ash_pattern_engine")
 
           if errors:
