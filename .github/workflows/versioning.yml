@@ -1,0 +1,184 @@
+name: Versioning & Changelog
+
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: 'Version bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+permissions:
+  contents: write
+
+jobs:
+  version-bump:
+    name: Update Version & Changelog
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.pull_request.merged == true)
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Determine bump type
+        id: bump
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "type=${{ github.event.inputs.bump }}" >> "$GITHUB_OUTPUT"
+          else
+            TITLE="${{ github.event.pull_request.title }}"
+            LABELS="${{ join(github.event.pull_request.labels.*.name, ' ') }}"
+
+            if echo "$LABELS $TITLE" | grep -iqE "breaking|major"; then
+              echo "type=major" >> "$GITHUB_OUTPUT"
+            elif echo "$LABELS $TITLE" | grep -iqE "feature|minor|enhancement"; then
+              echo "type=minor" >> "$GITHUB_OUTPUT"
+            else
+              echo "type=patch" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
+      - name: Read current version
+        id: current
+        run: |
+          VERSION=$(cat version.txt | tr -d '[:space:]')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+          echo "major=$MAJOR" >> "$GITHUB_OUTPUT"
+          echo "minor=$MINOR" >> "$GITHUB_OUTPUT"
+          echo "patch=$PATCH" >> "$GITHUB_OUTPUT"
+
+      - name: Calculate new version
+        id: new
+        run: |
+          MAJOR=${{ steps.current.outputs.major }}
+          MINOR=${{ steps.current.outputs.minor }}
+          PATCH=${{ steps.current.outputs.patch }}
+          BUMP=${{ steps.bump.outputs.type }}
+
+          if [ "$BUMP" = "major" ]; then
+            MAJOR=$((MAJOR + 1))
+            MINOR=0
+            PATCH=0
+          elif [ "$BUMP" = "minor" ]; then
+            MINOR=$((MINOR + 1))
+            PATCH=0
+          else
+            PATCH=$((PATCH + 1))
+          fi
+
+          echo "version=${MAJOR}.${MINOR}.${PATCH}" >> "$GITHUB_OUTPUT"
+
+      - name: Update version.txt
+        run: echo "${{ steps.new.outputs.version }}" > version.txt
+
+      - name: Generate changelog entry
+        id: changelog
+        run: |
+          NEW_VERSION="${{ steps.new.outputs.version }}"
+          OLD_VERSION="${{ steps.current.outputs.version }}"
+          DATE=$(date -u +%Y-%m-%d)
+
+          # Get commits since last tag (or all if no tags)
+          if git rev-parse "v${OLD_VERSION}" >/dev/null 2>&1; then
+            RANGE="v${OLD_VERSION}..HEAD"
+          else
+            RANGE="HEAD"
+          fi
+
+          # Build changelog entry
+          ENTRY="## [${NEW_VERSION}] — ${DATE}"$'\n'$'\n'
+
+          # Categorize commits
+          ADDED=$(git log ${RANGE} --pretty=format:"- %s" --grep="[Aa]dd" --grep="[Nn]ew" --grep="[Cc]reate" --grep="[Ii]mplement" | head -20)
+          CHANGED=$(git log ${RANGE} --pretty=format:"- %s" --grep="[Uu]pdate" --grep="[Cc]hange" --grep="[Rr]efactor" --grep="[Ii]mprove" | head -20)
+          FIXED=$(git log ${RANGE} --pretty=format:"- %s" --grep="[Ff]ix" --grep="[Bb]ug" --grep="[Rr]esolve" | head -20)
+
+          # If no categorized commits, list all
+          if [ -z "$ADDED" ] && [ -z "$CHANGED" ] && [ -z "$FIXED" ]; then
+            ALL=$(git log ${RANGE} --pretty=format:"- %s" | head -20)
+            if [ -n "$ALL" ]; then
+              ENTRY+="### Changes"$'\n'
+              ENTRY+="${ALL}"$'\n'
+            fi
+          else
+            if [ -n "$ADDED" ]; then
+              ENTRY+="### Added"$'\n'
+              ENTRY+="${ADDED}"$'\n'$'\n'
+            fi
+            if [ -n "$CHANGED" ]; then
+              ENTRY+="### Changed"$'\n'
+              ENTRY+="${CHANGED}"$'\n'$'\n'
+            fi
+            if [ -n "$FIXED" ]; then
+              ENTRY+="### Fixed"$'\n'
+              ENTRY+="${FIXED}"$'\n'$'\n'
+            fi
+          fi
+
+          # Write the entry to a temp file
+          echo "$ENTRY" > /tmp/changelog_entry.md
+
+      - name: Update CHANGELOG.md
+        run: |
+          NEW_VERSION="${{ steps.new.outputs.version }}"
+
+          if [ ! -f CHANGELOG.md ]; then
+            echo "# Changelog" > CHANGELOG.md
+            echo "" >> CHANGELOG.md
+            echo "All notable changes to the Yggdrasil World Engine are documented here." >> CHANGELOG.md
+            echo "" >> CHANGELOG.md
+            echo "---" >> CHANGELOG.md
+            echo "" >> CHANGELOG.md
+          fi
+
+          # Insert new entry after the header block
+          {
+            head -6 CHANGELOG.md
+            echo ""
+            cat /tmp/changelog_entry.md
+            echo "---"
+            echo ""
+            tail -n +7 CHANGELOG.md
+          } > CHANGELOG.tmp
+          mv CHANGELOG.tmp CHANGELOG.md
+
+      - name: Update governance file versions
+        run: |
+          NEW_VERSION="${{ steps.new.outputs.version }}"
+          OLD_VERSION="${{ steps.current.outputs.version }}"
+
+          # Update yggdrasil-instructions.json version
+          if [ -f yggdrasil-instructions.json ]; then
+            sed -i "s/\"artifact_version\": \"${OLD_VERSION}\"/\"artifact_version\": \"${NEW_VERSION}\"/" yggdrasil-instructions.json
+          fi
+
+          # Update agentic-coding-policy.json version
+          if [ -f agentic-coding-policy.json ]; then
+            sed -i "s/\"artifact_version\": \"${OLD_VERSION}\"/\"artifact_version\": \"${NEW_VERSION}\"/" agentic-coding-policy.json
+          fi
+
+      - name: Commit and tag
+        run: |
+          NEW_VERSION="${{ steps.new.outputs.version }}"
+          git add version.txt CHANGELOG.md yggdrasil-instructions.json agentic-coding-policy.json
+          git commit -m "Release v${NEW_VERSION}"
+          git tag -a "v${NEW_VERSION}" -m "Release v${NEW_VERSION}"
+          git push origin main --follow-tags
