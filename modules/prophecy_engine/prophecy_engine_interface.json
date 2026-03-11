@@ -1,0 +1,54 @@
+{
+  "engine_id": "ywe.modules.prophecy_engine",
+  "version": "2.0.0",
+  "description": "Interface definition for the Prophecy Engine",
+  "purpose": "Generates and tracks prophecies that act as future narrative attractors by adjusting cosmic pattern probability weights",
+  "layer": "module",
+  "dependencies": [
+    "ywe.core.ash_pattern_engine",
+    "ywe.core.narrative_engine",
+    "ywe.core.realm_engine"
+  ],
+  "methods": [
+    {
+      "name": "generate_prophecy",
+      "description": "Generate a prophecy from cosmic pattern conditions",
+      "parameters": ["pattern_node", "player_state"],
+      "returns": "Prophecy"
+    },
+    {
+      "name": "check_prophecy_conditions",
+      "description": "Evaluate whether a prophecy's activation conditions are met",
+      "parameters": ["prophecy_id", "cosmic_state"],
+      "returns": "boolean"
+    },
+    {
+      "name": "activate_prophecy",
+      "description": "Activate a prophecy and apply its pattern weight adjustments",
+      "parameters": ["prophecy_id"],
+      "returns": "ProphecyActivationResult"
+    },
+    {
+      "name": "get_active_prophecies",
+      "description": "Return all prophecies with non-dormant status",
+      "parameters": [],
+      "returns": "Prophecy[]"
+    }
+  ],
+  "events_published": [
+    "prophecy_generated",
+    "prophecy_activated",
+    "prophecy_fulfilled",
+    "prophecy_broken"
+  ],
+  "events_subscribed": [
+    "pattern_detected",
+    "myth_formed",
+    "quest_completed"
+  ],
+  "invariants": [
+    "Prophecies are probability weights, not fixed scripts",
+    "Prophecy generation derives from ASH patterns",
+    "Prophecies influence future pattern emergence"
+  ]
+}

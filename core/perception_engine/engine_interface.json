@@ -1,0 +1,74 @@
+{
+  "engine_id": "ywe.core.perception_engine",
+  "version": "2.0.0",
+  "description": "Interface definition for the Perception Engine",
+  "purpose": "Determines player-specific perception of the world based on cosmic state, attunement, alignment, and narrative memory",
+  "layer": "core",
+  "dependencies": [
+    "ywe.core.cosmology_engine",
+    "ywe.core.realm_engine",
+    "ywe.core.ash_pattern_engine",
+    "ywe.core.narrative_engine"
+  ],
+  "inputs": [
+    {
+      "name": "player_state",
+      "type": "PlayerState",
+      "description": "Full player state including attunement, alignment, bloodline, and memory"
+    },
+    {
+      "name": "location",
+      "type": "Location",
+      "description": "The world location being perceived"
+    },
+    {
+      "name": "active_patterns",
+      "type": "PatternNode[]",
+      "description": "Currently active cosmic patterns"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "perception_overlay",
+      "type": "PerceptionOverlay",
+      "description": "Player-specific overlay for the current location"
+    }
+  ],
+  "methods": [
+    {
+      "name": "calculate_perception",
+      "description": "Calculate the perception overlay for a player at a given location",
+      "parameters": ["player_state", "location", "active_patterns"],
+      "returns": "PerceptionOverlay"
+    },
+    {
+      "name": "get_visible_entities",
+      "description": "Determine which entities are visible to this player based on their perception state",
+      "parameters": ["player_state", "location"],
+      "returns": "Entity[]"
+    },
+    {
+      "name": "get_npc_variants",
+      "description": "Get the player-specific NPC variants for a location",
+      "parameters": ["player_state", "location"],
+      "returns": "NPCVariant[]"
+    }
+  ],
+  "events_published": [
+    "perception_updated",
+    "entity_revealed",
+    "entity_hidden"
+  ],
+  "events_subscribed": [
+    "realm_shift_completed",
+    "attunement_changed",
+    "consequence_recorded",
+    "pattern_detected"
+  ],
+  "invariants": [
+    "The world itself does not change -- only player perception changes",
+    "Perception is always player-specific",
+    "Multiple players can perceive the same location differently",
+    "Perception derives from cosmic state, never arbitrary"
+  ]
+}

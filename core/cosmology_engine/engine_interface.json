@@ -1,0 +1,52 @@
+{
+  "engine_id": "ywe.core.cosmology_engine",
+  "version": "2.0.0",
+  "description": "Interface definition for the Cosmology Engine",
+  "purpose": "Manages primordial state, Divine Core creation event, and the foundation of all cosmic structures",
+  "layer": "core",
+  "dependencies": [],
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "cosmic_state",
+      "type": "CosmicState",
+      "description": "The current state of the cosmos including primordial entities and realm configuration"
+    },
+    {
+      "name": "realm_definitions",
+      "type": "RealmDefinition[]",
+      "description": "Definitions for all nine canonical realms"
+    }
+  ],
+  "methods": [
+    {
+      "name": "initialize_cosmos",
+      "description": "Set up the primordial state and trigger the creation event",
+      "parameters": [],
+      "returns": "CosmicState"
+    },
+    {
+      "name": "get_realm_definitions",
+      "description": "Return the definitions for all nine realms",
+      "parameters": [],
+      "returns": "RealmDefinition[]"
+    },
+    {
+      "name": "get_wolf_state",
+      "description": "Return the current state of White Wolf and Dark Wolf primordial entities",
+      "parameters": [],
+      "returns": "WolfState"
+    }
+  ],
+  "events_published": [
+    "cosmos_initialized",
+    "divine_core_ignited"
+  ],
+  "events_subscribed": [],
+  "invariants": [
+    "Nine realms are fixed and canonical",
+    "White Wolf and Dark Wolf predate all realms",
+    "Divine Core is the origin center of all reality",
+    "Wolves cannot be destroyed"
+  ]
+}

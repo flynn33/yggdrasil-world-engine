@@ -1,0 +1,64 @@
+{
+  "engine_id": "ywe.core.ash_pattern_engine",
+  "version": "2.0.0",
+  "description": "Interface definition for the ASH Pattern Engine",
+  "purpose": "Detects cosmic patterns from ASH state analysis and provides generation seeds to all other engines",
+  "layer": "core",
+  "dependencies": ["ywe.core.cosmology_engine", "ywe.core.realm_engine"],
+  "inputs": [
+    {
+      "name": "cosmic_state",
+      "type": "CosmicState",
+      "description": "Current state of the cosmos from the Cosmology Engine"
+    },
+    {
+      "name": "player_state",
+      "type": "PlayerState",
+      "description": "Current player state for pattern personalization"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "detected_patterns",
+      "type": "PatternNode[]",
+      "description": "Array of detected cosmic patterns"
+    }
+  ],
+  "methods": [
+    {
+      "name": "detect_patterns",
+      "description": "Analyze current ASH state and detect active cosmic patterns",
+      "parameters": ["cosmic_state", "player_state"],
+      "returns": "PatternNode[]"
+    },
+    {
+      "name": "get_pattern_by_id",
+      "description": "Retrieve a specific pattern by its ID",
+      "parameters": ["pattern_id"],
+      "returns": "PatternNode"
+    },
+    {
+      "name": "evaluate_pattern_strength",
+      "description": "Calculate the strength of a pattern given current cosmic conditions",
+      "parameters": ["pattern_id", "cosmic_state"],
+      "returns": "float"
+    }
+  ],
+  "events_published": [
+    "pattern_detected",
+    "pattern_strength_changed",
+    "pattern_expired"
+  ],
+  "events_subscribed": [
+    "cosmos_initialized",
+    "realm_shift_completed",
+    "quest_completed",
+    "myth_formed"
+  ],
+  "invariants": [
+    "All patterns must derive from ASH cosmological state analysis",
+    "No independent random generation of meaningful content",
+    "Pattern strength is always between 0 and 1",
+    "All expansion engines must read from detected patterns"
+  ]
+}

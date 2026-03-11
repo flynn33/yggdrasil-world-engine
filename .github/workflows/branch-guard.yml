@@ -1,0 +1,41 @@
+name: Branch Guard
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-no-engine-code:
+    name: No Engine-Specific Code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for engine-specific imports
+        run: |
+          VIOLATIONS=0
+
+          # Check for Unity-specific code
+          if grep -r "using UnityEngine" --include="*.cs" . 2>/dev/null; then
+            echo "VIOLATION: Unity-specific code found on main branch"
+            VIOLATIONS=$((VIOLATIONS + 1))
+          fi
+
+          # Check for Unreal-specific code
+          if grep -r "#include \"Engine" --include="*.h" --include="*.cpp" . 2>/dev/null; then
+            echo "VIOLATION: Unreal-specific code found on main branch"
+            VIOLATIONS=$((VIOLATIONS + 1))
+          fi
+
+          # Check for Godot-specific code
+          if grep -r "extends Node" --include="*.gd" . 2>/dev/null; then
+            echo "VIOLATION: Godot-specific code found on main branch"
+            VIOLATIONS=$((VIOLATIONS + 1))
+          fi
+
+          if [ $VIOLATIONS -gt 0 ]; then
+            echo "Main branch must remain code-agnostic"
+            exit 1
+          fi
+
+          echo "No engine-specific code found. Main branch is clean."

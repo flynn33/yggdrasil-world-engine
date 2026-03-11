@@ -1,0 +1,45 @@
+{
+  "engine_id": "ywe.modules.artifact_engine",
+  "version": "2.0.0",
+  "description": "Interface definition for the Artifact Engine",
+  "purpose": "Generates and manages artifacts derived from ASH cosmic patterns",
+  "layer": "module",
+  "dependencies": [
+    "ywe.core.ash_pattern_engine",
+    "ywe.core.realm_engine",
+    "ywe.core.narrative_engine"
+  ],
+  "methods": [
+    {
+      "name": "generate_artifact",
+      "description": "Generate an artifact from a cosmic pattern",
+      "parameters": ["pattern_node", "realm_context"],
+      "returns": "Artifact"
+    },
+    {
+      "name": "destroy_artifact",
+      "description": "Destroy an artifact and trigger associated events",
+      "parameters": ["artifact_id"],
+      "returns": "ArtifactDestructionResult"
+    },
+    {
+      "name": "get_artifact_properties",
+      "description": "Get the cosmic properties of an artifact",
+      "parameters": ["artifact_id"],
+      "returns": "ArtifactProperties"
+    }
+  ],
+  "events_published": [
+    "artifact_created",
+    "artifact_destroyed",
+    "artifact_transformed"
+  ],
+  "events_subscribed": [
+    "pattern_detected",
+    "quest_completed"
+  ],
+  "invariants": [
+    "All artifacts derive from ASH patterns",
+    "Artifact destruction may trigger myth formation"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "engine_id": "ywe.modules.creature_engine",
+  "version": "2.0.0",
+  "description": "Interface definition for the Creature Engine",
+  "purpose": "Generates and manages creatures derived from ASH cosmic patterns",
+  "layer": "module",
+  "dependencies": [
+    "ywe.core.ash_pattern_engine",
+    "ywe.core.realm_engine",
+    "ywe.core.cosmology_engine"
+  ],
+  "methods": [
+    {
+      "name": "generate_creature",
+      "description": "Generate a creature from a cosmic pattern and realm context",
+      "parameters": ["pattern_node", "realm_context"],
+      "returns": "Creature"
+    },
+    {
+      "name": "get_creature_behavior",
+      "description": "Get the behavior pattern for a creature",
+      "parameters": ["creature_id", "cosmic_state"],
+      "returns": "CreatureBehavior"
+    },
+    {
+      "name": "spawn_encounter",
+      "description": "Spawn a creature encounter at a location based on active patterns",
+      "parameters": ["location", "active_patterns"],
+      "returns": "CreatureEncounter"
+    }
+  ],
+  "events_published": [
+    "creature_spawned",
+    "creature_encountered",
+    "creature_defeated"
+  ],
+  "events_subscribed": [
+    "pattern_detected",
+    "realm_shift_completed"
+  ],
+  "invariants": [
+    "All creatures derive from ASH patterns",
+    "Creature properties are influenced by realm context"
+  ]
+}

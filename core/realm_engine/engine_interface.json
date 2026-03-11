@@ -1,0 +1,73 @@
+{
+  "engine_id": "ywe.core.realm_engine",
+  "version": "2.0.0",
+  "description": "Interface definition for the Realm Engine",
+  "purpose": "Manages the nine fixed cosmological realms, player attunement, realm shifts, and thin veil locations",
+  "layer": "core",
+  "dependencies": ["ywe.core.cosmology_engine"],
+  "inputs": [
+    {
+      "name": "player_state",
+      "type": "PlayerState",
+      "description": "Current player state including realm attunement values"
+    },
+    {
+      "name": "location",
+      "type": "Location",
+      "description": "Current player location to check for thin veil sites"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "active_realm",
+      "type": "Realm",
+      "description": "The realm the player currently resonates with"
+    },
+    {
+      "name": "realm_overlay",
+      "type": "RealmOverlay",
+      "description": "Realm-specific overlay data for the current location"
+    }
+  ],
+  "methods": [
+    {
+      "name": "get_realm_attunement",
+      "description": "Return player attunement level for a specific realm",
+      "parameters": ["player_id", "realm_id"],
+      "returns": "float"
+    },
+    {
+      "name": "check_realm_shift_eligible",
+      "description": "Check if a player can shift to a target realm at their current location",
+      "parameters": ["player_id", "target_realm_id", "location_id"],
+      "returns": "boolean"
+    },
+    {
+      "name": "execute_realm_shift",
+      "description": "Shift a player to a target realm",
+      "parameters": ["player_id", "target_realm_id"],
+      "returns": "RealmShiftResult"
+    },
+    {
+      "name": "add_attunement",
+      "description": "Add realm attunement to a player for a specific realm",
+      "parameters": ["player_id", "realm_id", "amount"],
+      "returns": "void"
+    }
+  ],
+  "events_published": [
+    "realm_shift_started",
+    "realm_shift_completed",
+    "attunement_changed",
+    "realm_unlocked"
+  ],
+  "events_subscribed": [
+    "quest_completed",
+    "cosmic_pattern_detected"
+  ],
+  "invariants": [
+    "Realms are fixed cosmological states and cannot be created or destroyed",
+    "Players always have access to the Physical Realm",
+    "Realm shift requires both attunement threshold and thin veil location"
+  ]
+}

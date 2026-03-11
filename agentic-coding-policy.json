@@ -1,0 +1,108 @@
+{
+  "artifact_type": "agentic_coding_policy",
+  "artifact_version": "2.0.0",
+  "owner": "Jim Daley",
+  "project": "Yggdrasil World Engine",
+  "framework": "Forsetti Framework v0.1.0",
+  "description": "Machine-readable instructions for coding agents working with the Yggdrasil World Engine",
+  "operating_modes": {
+    "spec_repo_mode": {
+      "description": "Working on main branch (engine-agnostic specification)",
+      "applies_when": "branch == main",
+      "goal": "Preserve specification integrity and ASH cosmological compliance"
+    },
+    "engine_repo_mode": {
+      "description": "Working on engine implementation branch",
+      "applies_when": "branch != main",
+      "goal": "Implement specification using native engine idioms"
+    }
+  },
+  "mandatory_rules": [
+    {
+      "id": "R001",
+      "severity": "MUST",
+      "rule": "Keep main branch code-agnostic -- no engine-specific imports or code",
+      "applies_to": ["spec_repo_mode"]
+    },
+    {
+      "id": "R002",
+      "severity": "MUST",
+      "rule": "Preserve all ASH cosmological invariants (nine realms, wolf parity, pattern-driven generation, Divine Core origin)",
+      "applies_to": ["spec_repo_mode", "engine_repo_mode"]
+    },
+    {
+      "id": "R003",
+      "severity": "MUST",
+      "rule": "Define engine interfaces in core/*/engine_interface.json before implementation",
+      "applies_to": ["spec_repo_mode"]
+    },
+    {
+      "id": "R004",
+      "severity": "MUST",
+      "rule": "Respect layer dependency direction: Core <- Data <- Runtime <- Presentation <- Editor",
+      "applies_to": ["spec_repo_mode", "engine_repo_mode"]
+    },
+    {
+      "id": "R005",
+      "severity": "MUST",
+      "rule": "No data files in core/ -- data belongs in data/",
+      "applies_to": ["spec_repo_mode"]
+    },
+    {
+      "id": "R006",
+      "severity": "MUST",
+      "rule": "Validate all schemas against the master specification before marking work complete",
+      "applies_to": ["spec_repo_mode", "engine_repo_mode"]
+    },
+    {
+      "id": "R007",
+      "severity": "MUST",
+      "rule": "Run scripts/run_checks.sh before marking work complete",
+      "applies_to": ["spec_repo_mode", "engine_repo_mode"]
+    },
+    {
+      "id": "R008",
+      "severity": "MUST",
+      "rule": "Respect proprietary licensing -- all rights reserved",
+      "applies_to": ["spec_repo_mode", "engine_repo_mode"]
+    },
+    {
+      "id": "R009",
+      "severity": "MUST",
+      "rule": "Use dependency injection, not hidden globals or singletons",
+      "applies_to": ["engine_repo_mode"]
+    },
+    {
+      "id": "R010",
+      "severity": "MUST",
+      "rule": "In engine_repo_mode, use native engine idioms (C# for Unity, C++ for Unreal, GDScript for Godot)",
+      "applies_to": ["engine_repo_mode"]
+    },
+    {
+      "id": "R011",
+      "severity": "MUST",
+      "rule": "All procedural generation must derive from ASH Pattern Detection -- no independent random generators",
+      "applies_to": ["spec_repo_mode", "engine_repo_mode"]
+    },
+    {
+      "id": "R012",
+      "severity": "MUST",
+      "rule": "Do not invent systems outside the master specification",
+      "applies_to": ["spec_repo_mode"]
+    }
+  ],
+  "required_verification_commands": {
+    "spec_repo_mode": [
+      "bash scripts/run_checks.sh",
+      "python scripts/validate_architecture.py",
+      "python scripts/validate_schemas.py"
+    ],
+    "engine_repo_mode": [
+      "bash scripts/run_checks.sh"
+    ]
+  },
+  "violation_handling": {
+    "on_rule_conflict": "Stop, explain the conflicting request, propose a compliant alternative, await approval",
+    "on_failed_guardrails": "Do not mark task complete. Fix failures or report exact blockers with command outputs"
+  }
+}

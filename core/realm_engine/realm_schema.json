@@ -1,0 +1,35 @@
+{
+  "schema_id": "ywe.core.realm",
+  "version": "2.0.0",
+  "description": "Schema for realm state and attunement tracking",
+  "realm_definition": {
+    "realm_id": "",
+    "name": "",
+    "meaning": "",
+    "attunement_threshold": 0,
+    "is_starting_realm": false
+  },
+  "realm_shift_requirements": {
+    "realm_attunement_threshold_met": true,
+    "veil_location_required": true,
+    "player_form_changes": true
+  },
+  "realm_shift_effects": {
+    "npc_change": true,
+    "vendor_change": true,
+    "trainer_change": true,
+    "quest_giver_change": true,
+    "realm_only_players_visible": true
+  },
+  "thin_veil_location": {
+    "location_id": "",
+    "realm_id": "",
+    "type": "",
+    "types_allowed": [
+      "place_of_power",
+      "thin_veil_site",
+      "sacred_ruin",
+      "dimensionally_unstable_location"
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "engine_id": "ywe.modules.quest_engine",
+  "version": "2.0.0",
+  "description": "Interface definition for the Quest Engine",
+  "purpose": "Generates quests from ASH cosmic patterns with multiple completion paths and narrative consequences",
+  "layer": "module",
+  "dependencies": [
+    "ywe.core.ash_pattern_engine",
+    "ywe.core.narrative_engine",
+    "ywe.core.realm_engine"
+  ],
+  "methods": [
+    {
+      "name": "generate_quest",
+      "description": "Generate a quest from a cosmic pattern and player state",
+      "parameters": ["pattern_node", "player_state"],
+      "returns": "QuestSeed"
+    },
+    {
+      "name": "get_completion_paths",
+      "description": "Return available completion paths for a quest",
+      "parameters": ["quest_seed_id"],
+      "returns": "CompletionPath[]"
+    },
+    {
+      "name": "complete_quest",
+      "description": "Complete a quest via a chosen path and return consequences",
+      "parameters": ["quest_seed_id", "completion_path_id", "player_id"],
+      "returns": "QuestCompletionResult"
+    }
+  ],
+  "events_published": [
+    "quest_generated",
+    "quest_started",
+    "quest_completed",
+    "quest_abandoned"
+  ],
+  "events_subscribed": [
+    "pattern_detected",
+    "realm_shift_completed"
+  ],
+  "invariants": [
+    "All quests derive from ASH patterns",
+    "Every quest has at least two completion paths",
+    "Quest completion always produces narrative consequences"
+  ]
+}

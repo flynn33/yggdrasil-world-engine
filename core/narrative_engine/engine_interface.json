@@ -1,0 +1,77 @@
+{
+  "engine_id": "ywe.core.narrative_engine",
+  "version": "2.0.0",
+  "description": "Interface definition for the Narrative Engine",
+  "purpose": "Transforms cosmic patterns into player-specific narrative, manages narrative memory, and drives myth/prophecy formation",
+  "layer": "core",
+  "dependencies": [
+    "ywe.core.cosmology_engine",
+    "ywe.core.realm_engine",
+    "ywe.core.ash_pattern_engine"
+  ],
+  "inputs": [
+    {
+      "name": "detected_patterns",
+      "type": "PatternNode[]",
+      "description": "Cosmic patterns from the ASH Pattern Engine"
+    },
+    {
+      "name": "player_state",
+      "type": "PlayerState",
+      "description": "Current player state including attunement and alignment"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "narrative_events",
+      "type": "NarrativeEvent[]",
+      "description": "Generated narrative events for the player"
+    },
+    {
+      "name": "player_memory_update",
+      "type": "MemoryUpdate",
+      "description": "Updates to the player's narrative memory"
+    }
+  ],
+  "methods": [
+    {
+      "name": "interpret_pattern",
+      "description": "Transform a cosmic pattern into a player-specific narrative interpretation",
+      "parameters": ["pattern_node", "player_state"],
+      "returns": "NarrativeInterpretation"
+    },
+    {
+      "name": "record_consequence",
+      "description": "Record a narrative consequence in player memory",
+      "parameters": ["player_id", "event_id", "consequence"],
+      "returns": "void"
+    },
+    {
+      "name": "get_player_memory",
+      "description": "Retrieve the full narrative memory for a player",
+      "parameters": ["player_id"],
+      "returns": "PlayerNarrativeMemory"
+    },
+    {
+      "name": "evaluate_myth_eligibility",
+      "description": "Determine if a narrative event qualifies for myth formation",
+      "parameters": ["narrative_event"],
+      "returns": "boolean"
+    }
+  ],
+  "events_published": [
+    "narrative_interpreted",
+    "consequence_recorded",
+    "myth_eligible_event"
+  ],
+  "events_subscribed": [
+    "pattern_detected",
+    "quest_completed",
+    "realm_shift_completed"
+  ],
+  "invariants": [
+    "All narrative generation derives from ASH patterns",
+    "Player narrative memory persists across sessions",
+    "Consequences are irreversible once recorded"
+  ]
+}

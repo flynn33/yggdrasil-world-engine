@@ -1,0 +1,34 @@
+{
+  "schema_id": "ywe.core.perception",
+  "version": "2.0.0",
+  "description": "Schema for the perception layer that determines player-specific world interpretation",
+  "perception_state": {
+    "player_id": "",
+    "active_realm": "physical",
+    "perception_modifiers": {
+      "realm_attunement": {},
+      "wolf_alignment": {
+        "white_wolf": 0,
+        "dark_wolf": 0
+      },
+      "bloodline_resonance": {},
+      "narrative_memory_flags": {}
+    }
+  },
+  "perception_overlay": {
+    "location_id": "",
+    "base_description": "",
+    "perceived_description": "",
+    "npc_variants": [],
+    "vendor_variants": [],
+    "quest_giver_variants": [],
+    "visible_entities": [],
+    "hidden_entities": []
+  },
+  "perception_rules": {
+    "world_is_static": true,
+    "perception_is_player_specific": true,
+    "multiplayer_compatible": true,
+    "same_location_different_views": true
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema_id": "ywe.core.narrative",
+  "version": "2.0.0",
+  "description": "Schema for the narrative engine state and player narrative memory",
+  "player_narrative_memory": {
+    "player_id": "",
+    "memory_entries": {},
+    "quests_completed": [],
+    "myths_participated": [],
+    "prophecies_activated": [],
+    "narrative_flags": {}
+  },
+  "narrative_event": {
+    "event_id": "",
+    "event_type": "",
+    "source_pattern_id": "",
+    "player_id": "",
+    "realm_context": "",
+    "consequence": "",
+    "myth_eligible": false
+  },
+  "narrative_loop_stages": [
+    "ash_state_read",
+    "cosmic_pattern_interpretation",
+    "player_interpretation",
+    "quest_manifestation",
+    "consequence_memory",
+    "myth_formation",
+    "prophecy_generation"
+  ]
+}

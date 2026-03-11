@@ -1,0 +1,44 @@
+{
+  "schema_id": "ywe.core.cosmology",
+  "version": "2.0.0",
+  "description": "Schema for the cosmological state of the Yggdrasil World Engine",
+  "primordial_state": {
+    "darkness": true,
+    "entities": [
+      {
+        "name": "white_wolf",
+        "type": "cosmic_informational_force",
+        "attributes": ["illumination", "revelation", "knowledge", "truth_exposure", "consuming_ignorance"],
+        "predates": ["time", "matter", "realms", "gods", "civilizations"],
+        "destructible": false
+      },
+      {
+        "name": "dark_wolf",
+        "type": "cosmic_informational_force",
+        "attributes": ["hiddenness", "fear", "unseen_forces", "concealment", "depth"],
+        "predates": ["time", "matter", "realms", "gods", "civilizations"],
+        "destructible": false
+      }
+    ]
+  },
+  "creation_event": {
+    "trigger": "divine_core_ignition",
+    "sequence": [
+      "gravity_emerges",
+      "information_compresses",
+      "realm_layers_form"
+    ]
+  },
+  "realm_count": 9,
+  "realms": [
+    "divine_core",
+    "celestial",
+    "causal",
+    "mental",
+    "astral",
+    "etheric",
+    "physical",
+    "shadow",
+    "void"
+  ]
+}

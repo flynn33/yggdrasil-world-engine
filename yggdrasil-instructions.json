@@ -1,0 +1,89 @@
+{
+  "artifact_type": "codex_build_instructions",
+  "artifact_version": "2.0.0",
+  "project": {
+    "name": "Yggdrasil World Engine",
+    "summary": "Code-agnostic cosmic narrative simulation engine based on the ASH cosmological model",
+    "owner": "Jim Daley",
+    "framework": "Forsetti Framework v0.1.0"
+  },
+  "principles": [
+    "Native-first: engine implementations use native idioms",
+    "Contract-first: interfaces defined before implementation",
+    "Boundary-first: dependency direction is intentional and enforced",
+    "Policy-first: ASH compliance rules are hard constraints",
+    "Host-agnostic modules: core specification is engine-agnostic"
+  ],
+  "architecture": {
+    "layers": [
+      {
+        "name": "Core",
+        "role": "Engine interfaces, cosmology rules, pattern detection logic, invariants",
+        "allowed_dependencies": []
+      },
+      {
+        "name": "Data",
+        "role": "JSON schemas, data loading, registry parsing, data models",
+        "allowed_dependencies": ["Core"]
+      },
+      {
+        "name": "Runtime",
+        "role": "Quest generation, myth formation, prophecy tracking, creature spawning",
+        "allowed_dependencies": ["Core", "Data"]
+      },
+      {
+        "name": "Presentation",
+        "role": "Realm overlays, perception rendering, UI integration, temporary environments",
+        "allowed_dependencies": ["Core", "Data", "Runtime"]
+      },
+      {
+        "name": "Editor",
+        "role": "Build tools, inspectors, world builders, testing utilities",
+        "allowed_dependencies": ["Core", "Data", "Runtime", "Presentation"]
+      }
+    ]
+  },
+  "core_engines": [
+    "cosmology_engine",
+    "realm_engine",
+    "ash_pattern_engine",
+    "narrative_engine",
+    "perception_engine"
+  ],
+  "expansion_engines": [
+    "quest_engine",
+    "myth_engine",
+    "prophecy_engine",
+    "artifact_engine",
+    "creature_engine"
+  ],
+  "future_engines": [
+    "civilization_engine",
+    "economy_engine",
+    "religion_engine",
+    "faction_engine",
+    "politics_engine"
+  ],
+  "cosmological_invariants": [
+    "Nine canonical realms are fixed and immutable",
+    "Realms are cosmological states, not locations",
+    "White Wolf and Dark Wolf predate all realms and cannot be destroyed",
+    "Divine Core is the origin center of all reality",
+    "All procedural generation derives from ASH pattern detection",
+    "No independent random generators for meaningful content",
+    "Wolf alignment is accumulation-only, never subtracted",
+    "Bloodlines influence cosmic eligibility, never lock destiny",
+    "The world does not change; player perception changes",
+    "Prophecies are probability weights, not fixed scripts"
+  ],
+  "document_references": {
+    "master_specification": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+    "architecture": "docs/architecture/README.md",
+    "architecture_layers": "docs/architecture/ARCHITECTURE_LAYERS.md",
+    "ash_compliance": "docs/ash_compliance/README.md",
+    "guide": "guide.md",
+    "developer_guide": "developer-guide.md",
+    "wiki": "wiki.md",
+    "agentic_policy": "agentic-coding-policy.json"
+  }
+}
