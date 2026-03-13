@@ -2,6 +2,12 @@
 
 All notable changes to this repository are documented in this file.
 
+## [0.4.0] - 2026-03-13
+
+- Automatic minor version bump.
+- Included commits:
+- feat: add faction topology state schema
+
 ## [0.3.0] - 2026-03-13
 
 - Automatic minor version bump.
