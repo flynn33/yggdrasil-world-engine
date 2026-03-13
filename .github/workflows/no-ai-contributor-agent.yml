@@ -1,0 +1,25 @@
+name: No AI Contributor Agent
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  no-ai-contributor:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate contributor identities
+        shell: pwsh
+        run: ./scripts/github/Test-NoAIContributors.ps1

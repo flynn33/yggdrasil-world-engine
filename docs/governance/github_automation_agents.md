@@ -97,6 +97,16 @@ It checks:
 - adapter profiles remain non-truth-owning downstream execution connectors
 - adapter docs continue to describe host work as realization rather than canon authorship
 
+## No AI Contributor Agent
+
+The no-ai-contributor workflow protects repository attribution hygiene.
+
+It checks:
+- pushed and pull request commit authors do not use blocked AI identity terms
+- committers do not use blocked AI identity terms
+- commit messages do not include `Co-authored-by` trailers for blocked AI identities
+- infrastructure bots remain allowed unless they present themselves as blocked AI contributors
+
 ## Release Readiness Agent
 
 The release-readiness workflow is a final gate for tagged or manually requested release checks.
@@ -105,7 +115,7 @@ It verifies:
 - version and changelog state are coherent
 - the missing source inventory is current
 - wiki sync configuration is intact
-- the repository passes the Forsetti, schema, module, docs, and truth-boundary checks
+- the repository passes the Forsetti, schema, module, docs, truth-boundary, and contributor-identity checks
 
 ## Operating Notes
 

@@ -51,5 +51,6 @@ Invoke-CheckScript -Name 'Schema integrity' -Path './scripts/github/Test-SchemaI
 Invoke-CheckScript -Name 'Module contract coverage' -Path './scripts/github/Test-ModuleContractCoverage.ps1'
 Invoke-CheckScript -Name 'Docs and glossary validation' -Path './scripts/github/Test-DocsAndGlossary.ps1'
 Invoke-CheckScript -Name 'Canonical truth-boundary validation' -Path './scripts/github/Test-CanonicalTruthBoundaries.ps1'
+Invoke-CheckScript -Name 'Contributor identity validation' -Path './scripts/github/Test-NoAIContributors.ps1'
 
 Write-Host "Release readiness checks passed for version $version." -ForegroundColor Green
