@@ -2,6 +2,12 @@
 
 All notable changes to this repository are documented in this file.
 
+## [0.3.0] - 2026-03-13
+
+- Automatic minor version bump.
+- Included commits:
+- feat: add no-ai contributor validation agent
+
 ## [0.2.0] - 2026-03-13
 
 - Automatic minor version bump.
