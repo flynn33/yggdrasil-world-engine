@@ -328,6 +328,90 @@ function Test-AshRegistryFile {
   }
 }
 
+function Test-FactionTopologySchema {
+  param([string]$Path)
+
+  $content = Read-TextFile -Path $Path
+  if (-not $content) {
+    return
+  }
+
+  if ($content -match 'placeholder awaiting finalized content|placeholder_awaiting_finalized_content') {
+    $violations.Add("$Path must not remain placeholder-backed once faction topology has been stabilized.")
+  }
+
+  $requiredPatterns = @(
+    @{
+      Pattern = '(?m)^version:\s+"0\.2"\s*$'
+      Message = "$Path must declare version 0.2."
+    },
+    @{
+      Pattern = '(?m)^meta:\s*$'
+      Message = "$Path must define metadata."
+    },
+    @{
+      Pattern = '(?m)^  system:\s+faction_topology_state\s*$'
+      Message = "$Path must keep meta.system set to faction_topology_state."
+    },
+    @{
+      Pattern = '(?m)^core_schema:\s*$'
+      Message = "$Path must define core_schema."
+    },
+    @{
+      Pattern = '(?m)^  FactionTopologyState:\s*$'
+      Message = "$Path must define FactionTopologyState."
+    },
+    @{
+      Pattern = '(?m)^  FactionNode:\s*$'
+      Message = "$Path must define FactionNode."
+    },
+    @{
+      Pattern = '(?m)^  FactionEdge:\s*$'
+      Message = "$Path must define FactionEdge."
+    },
+    @{
+      Pattern = '(?m)^  ClaimRecord:\s*$'
+      Message = "$Path must define ClaimRecord."
+    },
+    @{
+      Pattern = '(?m)^  ReformCurrent:\s*$'
+      Message = "$Path must define ReformCurrent."
+    },
+    @{
+      Pattern = '(?m)^  SuccessionTrack:\s*$'
+      Message = "$Path must define SuccessionTrack."
+    },
+    @{
+      Pattern = '(?m)^relation_types:\s*$'
+      Message = "$Path must define supported relation types."
+    },
+    @{
+      Pattern = '(?m)^topology_update_packet_schema:\s*$'
+      Message = "$Path must define topology_update_packet_schema."
+    },
+    @{
+      Pattern = '(?m)^  FactionTopologyUpdatePacket:\s*$'
+      Message = "$Path must define FactionTopologyUpdatePacket."
+    },
+    @{
+      Pattern = '(?m)^validation_rules:\s*$'
+      Message = "$Path must define validation_rules."
+    },
+    @{
+      Pattern = '(?m)^implementation_notes:\s*$'
+      Message = "$Path must define implementation_notes."
+    },
+    @{
+      Pattern = '(?m)^    canonical_schema:\s+data/factions/faction_topology_state_schema\.yaml\s*$'
+      Message = "$Path must keep implementation_notes.recommended_repo_locations.canonical_schema pointed at data/factions/faction_topology_state_schema.yaml."
+    }
+  )
+
+  foreach ($requiredPattern in $requiredPatterns) {
+    Require-TextMatch -Content $content -Pattern $requiredPattern.Pattern -Message $requiredPattern.Message
+  }
+}
+
 $requiredFiles = @(
   'data/schemas/player_schema.json',
   'data/schemas/prophecy_schema.json',
@@ -474,6 +558,7 @@ foreach ($placeholderSchema in $placeholderExpansionFiles) {
 }
 
 Test-AshSchemaFile -Path 'data/pattern_archetypes/ash_pattern_registry_schema.yaml'
+Test-FactionTopologySchema -Path 'data/factions/faction_topology_state_schema.yaml'
 
 $ashRegistryFiles = @(
   @{

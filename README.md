@@ -32,7 +32,7 @@ YWE separates universal truth engines from downstream manifestation systems.
 
 - Core truth engines: cosmology, realm, ASH pattern, narrative, and perception.
 - Feature modules: quest, myth, prophecy, artifact, and creature systems that consume core truth.
-- Shared data: schemas, registries, and archetypes that define canonical structures.
+- Shared data: schemas, registries, archetypes, and faction topology state that define canonical structures.
 - Lore and docs: canonical reference material, contracts, governance, and handoff guidance.
 
 ## Forsetti Relationship

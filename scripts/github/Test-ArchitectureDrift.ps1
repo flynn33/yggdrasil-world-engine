@@ -84,12 +84,15 @@ $rules = @(
     Watched = @(
       'data/schemas/*.json',
       'data/*/*schema*.json',
+      'data/factions/*.yaml',
       'data/realm_registry/realms.json'
     )
     RequiredDocs = @(
       'docs/architecture/ywe_canonical_data_domains.md',
       'docs/master_specification/YWE_MASTER_SPECIFICATION.md',
-      'docs/glossary/ywe_design_glossary.md'
+      'docs/glossary/ywe_design_glossary.md',
+      'data/factions/README.md',
+      'data/factions/schema_notes.md'
     )
   },
   [pscustomobject]@{

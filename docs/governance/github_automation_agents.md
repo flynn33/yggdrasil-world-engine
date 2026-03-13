@@ -56,6 +56,7 @@ It checks:
 - placeholder expansion schema structure
 - cross-file dependency references for shared schema expansions
 - the ASH registry schema exists and the canonical family registries keep required fields, family values, ID prefixes, and allowed status values
+- the canonical faction-topology schema exists in `data/factions/` and preserves the required relational state surfaces
 
 ## Module Contract Coverage Agent
 
@@ -84,6 +85,7 @@ The architecture-drift workflow guards against design changes landing without th
 It requires related documentation updates when:
 - runtime interface contracts or manifest templates change
 - canonical schemas or realm registry files change
+- faction topology schema files change
 - core and feature rule files change
 - adapter capability profiles change
 - ASH foundation authority files or family registries change

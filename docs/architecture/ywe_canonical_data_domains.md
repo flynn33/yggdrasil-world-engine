@@ -13,6 +13,7 @@ This document defines which folders under `data/` are canonical YWE truth assets
 - `data/realm_registry`: canonical realm list and realm ontology anchors
 - `data/pattern_archetypes`: symbolic grammar and pattern references
 - `data/quest_archetypes`: quest seed and quest structure references
+- `data/factions`: faction topology, claim, succession, and relational collective-state schemas
 - `data/myth_archetypes`: myth record structures
 - `data/bloodline_registry`: bloodline resonance data
 - `data/schemas`: shared payload, persistence, and state contracts

@@ -2,13 +2,14 @@
 
 Date: 2026-03-13
 Project: Yggdrasil World Engine
-Status: updated after ASH foundation normalization
+Status: updated after ASH foundation normalization and faction topology stabilization
 
 ## Source bundles merged
 
 - C:\Users\james\Downloads\yggdrasil-world-engine-codex-handoff.zip
 - C:\Users\james\Downloads\Forsetti-Framework-Windows-main.zip
 - C:\Users\james\Downloads\ASH_FOUNDATION_PACK_FOR_CODEX.zip
+- C:\Users\james\Downloads\faction_topology_state_schema.yaml
 
 ## Finalized source documents now present
 
@@ -19,6 +20,7 @@ Status: updated after ASH foundation normalization
 - ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2_PRIOR_HANDOFF.md
 - ash_pattern_registry_schema.yaml
 - ash_downstream_contract.md
+- faction_topology_state_schema.yaml
 - ywe_design_glossary.md
 - ash_compliance_checklist.md
 - artifact_system_rules.yaml
@@ -48,6 +50,11 @@ Status: updated after ASH foundation normalization
 - data/pattern_archetypes/compatibility_matrix.yaml
 - docs/architecture/COMPATIBILITY_MATRIX_NOTES.md
 - docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2.md
+
+## Locally Authored During Faction Topology Stabilization Pass
+
+- data/factions/README.md
+- data/factions/schema_notes.md
 
 ## Still Placeholder-Backed
 
