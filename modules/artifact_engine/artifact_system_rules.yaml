@@ -1,0 +1,467 @@
+version: "0.1"
+
+meta:
+  system: artifact_engine
+  purpose: >
+    Defines how YWE generates meaningful artifacts as symbolic, consequential,
+    pattern-derived objects rather than generic loot. Artifacts should carry
+    narrative pressure, world relevance, myth potential, prophecy relevance,
+    and player-interpretive weight.
+  doctrine:
+    - artifacts_are_meaningful_objects_not_loot_filler
+    - artifact_generation_must_begin_from_ash_pattern_state
+    - artifact_significance_requires_symbolic_and_contextual_grounding
+    - artifacts_should_bind_to_quest_myth_prophecy_or_identity_pressure
+    - artifact_power_without_meaning_is_invalid
+    - artifacts_may_change_interpretation_visibility_or_consequence_not_only_stats
+    - the_same_artifact_may_be_understood_differently_by_different actors
+    - artifacts_should_leave_residue_when_their_use_was_significant
+
+position_in_stack:
+  conceptual_order:
+    - cosmology_engine
+    - realm_engine
+    - ash_pattern_engine
+    - narrative_engine
+    - artifact_engine
+    - worldstate_delta_rules
+    - myth_engine
+    - prophecy_engine
+    - perception_engine
+  notes:
+    - artifact generation is downstream of symbolic pattern interpretation
+    - artifact outcomes may feed myth, prophecy, and perception later
+    - artifact_engine must not become an independent meaning source
+
+core_concepts:
+  definitions:
+    artifact:
+      description: >
+        A meaningful object whose form, resonance, use, and consequence derive
+        from ASH pattern state and world context.
+    artifact_manifest:
+      description: >
+        A runtime or persistent record describing the artifact's symbolic role,
+        operational traits, linked pressures, and eligibility hooks.
+    artifact_resonance:
+      description: >
+        The degree and manner in which an artifact responds to realms,
+        bloodlines, players, sites, wolves, myths, and prophecy pressure.
+    artifact_identity:
+      description: >
+        The symbolic role of an artifact in the engine, independent of surface
+        appearance. Example roles include key, witness, seal, burden, lure,
+        inheritance, memory vessel, catalyst.
+    artifact_residue:
+      description: >
+        Persistent aftermath left by an artifact's significant use, loss,
+        concealment, damage, activation, or transfer.
+    artifact_interpretation:
+      description: >
+        Social or player-specific understanding of what the artifact means.
+        Interpretation may differ without changing core world fact.
+
+artifact_classes:
+  primary_classes:
+    - relic
+    - seal
+    - key
+    - vessel
+    - weapon
+    - focus
+    - regalia
+    - shard
+    - token
+    - anchor
+    - archive_object
+    - burden_object
+    - omen_object
+
+  class_guidance:
+    relic: ancient significance with inherited or recovered meaning
+    seal: binds, suppresses, protects, or restricts access
+    key: reveals, opens, translates, permits, or attunes
+    vessel: stores memory, force, oath, essence, or pattern charge
+    weapon: expresses force through meaningful consequence, not raw DPS abstraction
+    focus: amplifies alignment, realm, ritual, or interpretive force
+    regalia: confers legitimacy, office, lineage symbolism, or claim pressure
+    shard: partial truth-object or broken remnant of larger significance
+    token: carries covenant, passage, recognition, or social proof
+    anchor: stabilizes sites, forms, memory states, or temporary narrative spaces
+    archive_object: preserves truth, distortion, record, or evidence
+    burden_object: costs the bearer something to hold, use, or keep
+    omen_object: broadcasts attractor pressure, warning, or convergence signs
+
+artifact_role_taxonomy:
+  roles:
+    - unlocks
+    - reveals
+    - conceals
+    - binds
+    - severs
+    - stabilizes
+    - destabilizes
+    - witnesses
+    - records
+    - transmits
+    - judges
+    - legitimizes
+    - tempts
+    - burdens
+    - remembers
+    - attracts
+    - protects
+    - corrupts
+    - purifies
+  rules:
+    - every major artifact should have one primary role
+    - supporting artifacts may have one primary and one secondary role
+    - contradictory roles are allowed only when symbolically justified
+
+artifact_generation_inputs:
+  required:
+    - cosmic_pattern_snapshot
+    - player_narrative_snapshot
+    - local_world_state
+    - realm_relevance
+    - site_relevance
+    - myth_pressure
+    - prophecy_pressure
+    - bloodline_resonance_state
+  optional:
+    - faction_legitimacy_state
+    - prior_artifact_history
+    - temporary_space_residue
+    - authored_constraints
+    - wolf_manifestation_relevance
+
+artifact_schema:
+  ArtifactManifest:
+    artifact_id: string
+    artifact_class: string
+    artifact_role_primary: string
+    artifact_role_secondary: string | null
+    title: string
+    symbolic_signature: [string]
+    linked_patterns: [string]
+    linked_realms: [string]
+    linked_sites: [string]
+    linked_bloodlines: [string]
+    linked_factions: [string]
+    linked_prophecies: [string]
+    linked_myth_lines: [string]
+    linked_wolf_pressure: [string]
+    significance_score: float
+    resonance_profile:
+      player_eligibility: [string]
+      realm_affinities: [string]
+      bloodline_affinities: [string]
+      alignment_affinities: [string]
+      site_affinities: [string]
+    interaction_profile:
+      activation_modes: [string]
+      costs: [string]
+      risks: [string]
+      outputs: [string]
+    identity_profile:
+      truth_status: string
+      legitimacy_weight: float
+      concealment_level: float
+      corruption_risk: float
+    persistence_profile:
+      can_be_lost: boolean
+      can_be_broken: boolean
+      can_be_transferred: boolean
+      residue_weight: float
+      recurrence_weight: float
+    narrative_hooks:
+      quest_hooks: [string]
+      omen_hooks: [string]
+      perception_hooks: [string]
+      consequence_hooks: [string]
+
+significance_scoring:
+  score_bands:
+    minor: 0.2_to_0.4
+    notable: 0.41_to_0.6
+    major: 0.61_to_0.8
+    mythic: 0.81_to_1.0
+  contributing_factors:
+    - pattern_strength
+    - realm_threshold_relevance
+    - bloodline_relevance
+    - site_of_power_relevance
+    - faction_contestation
+    - myth_line_relevance
+    - prophecy_linkage
+    - player_identity_pressure_fit
+    - symbolic_density
+    - cost_or_burden_weight
+  modifiers:
+    if_only_tactical_reward:
+      significance_penalty: 0.65
+    if_site_bound_and_history_loaded:
+      significance_bonus: 1.15
+    if_multiple_systems_link:
+      significance_bonus: 1.2
+    if_myth_and_prophecy_both_linked:
+      significance_bonus: 1.1
+
+generation_pipeline:
+  steps:
+    - collect_context
+    - score_artifact_need
+    - select_artifact_class
+    - select_primary_role
+    - select_secondary_role_if_needed
+    - assign_symbolic_signature
+    - assign_realm_and_site_affinities
+    - assign_bloodline_and_alignment affinities
+    - assign_cost_risk_output_profile
+    - assign_truth_and_concealment_state
+    - bind_narrative_hooks
+    - validate_meaning_density
+    - emit_artifact_manifest
+
+artifact_need_rules:
+  valid_generation_intents:
+    - quest_unlock
+    - memory_recovery
+    - oath_binding
+    - legitimacy_conflict
+    - threshold_crossing
+    - myth_seed_intensification
+    - prophecy_omen_expression
+    - site_stabilization
+    - player_identity_reckoning
+    - faction_claim_contest
+  anti_spam_rules:
+    - do_not_generate_artifact_without_clear_role
+    - do_not_spawn_artifacts_as_generic_reward filler
+    - prefer_existing_artifact_reuse_when_history_matters
+    - major_artifacts_should_be_rare_relative_to support artifacts
+
+symbolic_signature_rules:
+  minimum_symbols: 1
+  recommended_symbols: 2_to_4
+  symbol_sources:
+    - active_pattern_symbols
+    - linked_bloodline_symbols
+    - realm_bias_symbols
+    - site_symbols
+    - myth_symbols
+    - prophecy_symbols
+    - wolf_omen_symbols
+  guidance:
+    - at_least_one_symbol_should_connect_to broader recurrence when possible
+    - artifacts should be legible in myth and omen language later
+    - purely cosmetic symbolic tagging is insufficient
+
+resonance_rules:
+  resonance_axes:
+    - realm_resonance
+    - bloodline_resonance
+    - wolf_alignment_resonance
+    - site_resonance
+    - myth_resonance
+    - prophecy_resonance
+    - player_phase_resonance
+  rules:
+    - resonance modifies access and meaning more often than raw power
+    - artifacts may respond differently to different players without changing ontology
+    - a non-eligible player may still carry or misuse an artifact depending on class
+    - misuse should create consequence, not silent failure only
+
+interaction_modes:
+  supported:
+    - bear
+    - wield
+    - wear
+    - present
+    - offer
+    - sacrifice
+    - attune
+    - unlock
+    - seal
+    - consult
+    - witness
+    - bury
+    - hide
+    - break
+    - awaken
+    - refuse
+  notes:
+    - interaction should express role and cost
+    - every major artifact should have at least one non-combat meaningful interaction
+
+cost_and_risk_rules:
+  cost_types:
+    - fatigue
+    - memory_loss
+    - oath_binding
+    - visibility_exposure
+    - corruption_pressure
+    - legitimacy_burden
+    - relationship_cost
+    - realm_strain
+    - bloodline_awakening_pressure
+    - prophecy_amplification
+  risk_types:
+    - false_destiny_pull
+    - faction_pursuit
+    - corruption_spread
+    - site_destabilization
+    - myth_distortion
+    - omen_escalation
+    - bond_strain
+    - attractor_intensification
+  doctrine:
+    - major artifacts should usually cost or risk something
+    - cost should fit the artifact's symbolic role
+    - free power artifacts should be rare and suspicious
+
+truth_and_concealment_rules:
+  truth_statuses:
+    - known_truth
+    - partial_truth
+    - misnamed_truth
+    - hidden_truth
+    - false_public_understanding
+    - sealed_truth
+  concealment_levels:
+    minimum: 0.0
+    maximum: 1.0
+  rules:
+    - artifact identity and public interpretation may differ
+    - hidden artifacts may still generate myths or omens indirectly
+    - truth recovery around artifacts should create recontextualization opportunities
+
+artifact_origin_modes:
+  supported:
+    - primordial_remnant
+    - bloodline_inheritance
+    - faction_craft
+    - ritual_forging
+    - site_emergence
+    - fracture_relic
+    - wolf_marked_manifestation
+    - prophecy_convergence_object
+    - memory_recovered_object
+    - founder_regalia
+  guidance:
+    - origin mode should bias later legitimacy and myth treatment
+    - origin should never contradict cosmology or realm ontology
+
+faction_rules:
+  relation_modes:
+    - sacred_object
+    - restricted_object
+    - contested_object
+    - state_object
+    - heretical_object
+    - stolen_object
+    - unknown_object
+  effects:
+    - factions may claim authority over interpretation or custody
+    - contested artifacts should bias schism, accusation, or succession content
+    - artifact possession can alter standing, trust, and threat response
+
+quest_integration_rules:
+  artifact_quest_functions:
+    - gate_key
+    - truth_fragment
+    - burden_test
+    - oath_medium
+    - false_solution
+    - witness_object
+    - sacrifice_target
+    - bargaining leverage
+    - identity_mirror
+    - site_anchor
+  rules:
+    - artifacts may initiate quests, complicate quests, or resolve quests
+    - an artifact should not reduce a quest to simple delivery unless meaning remains active
+    - the same artifact may support reveal, conceal, or weaponize interpretations
+
+myth_and_prophecy_rules:
+  myth_links:
+    - significant artifact use may emit myth seeds
+    - artifact loss, sealing, breaking, or recovery can become myth line anchors
+    - factional retellings may dispute artifact origin or rightful bearer
+  prophecy_links:
+    - artifacts may amplify omen density or become prophecy markers
+    - some artifacts should function as attractor condensers rather than script triggers
+    - prophecy linkage must remain probabilistic rather than deterministic
+  notes:
+    - myth interprets what the artifact meant in history
+    - prophecy pressures what the artifact may make more likely
+
+perception_rules:
+  doctrine:
+    - artifacts may alter perception salience without rewriting shared-world fact
+    - different players may perceive different signatures or meanings from the same artifact
+    - perception changes should reflect eligibility, resonance, or myth/prophecy pressure
+  outputs:
+    - symbolic_glow
+    - hidden_inscription_visibility
+    - altered_name_heard
+    - npc_reaction_shift
+    - site_overlay_change
+
+worldstate_delta_hooks:
+  supported_delta_domains:
+    - player_memory
+    - player_identity
+    - wolf_alignment
+    - realm_attunement
+    - bloodline_resonance
+    - npc_relationships
+    - faction_standing
+    - myth_seed_state
+    - prophecy_weight_state
+    - site_activation_state
+    - recurring_symbol_state
+    - temporary_space_residue
+  rules:
+    - major artifact interactions should emit at least one persistent delta
+    - artifacts with no consequence hook should remain minor support objects
+    - artifact residue should be preserved even when the object is lost or destroyed
+
+persistence_rules:
+  categories:
+    - ephemeral_support
+    - recurring_support
+    - persistent_major
+    - historical_mythic
+  guidance:
+    ephemeral_support: low-residue utility object
+    recurring_support: returns across a content arc
+    persistent_major: durable meaningful object with tracked history
+    historical_mythic: artifact whose story matters even beyond direct possession
+
+forbidden_scope:
+  - generic_loot_table_authorship
+  - arbitrary_stat_stick_generation
+  - cosmology_authorship
+  - standalone_prophecy_authorship
+  - bypassing_ash_pattern_interpretation
+  - power_scaling_detached_from symbolic relevance
+  - persistent_geography_rewriting
+
+invariants:
+  - every_meaningful_artifact_must_trace_back_to_pattern_state
+  - artifact_meaning_must_exceed_raw_mechanics
+  - interpretation_may_branch_but_core_world_fact_must_remain_trackable
+  - artifacts_may_influence_identity_but_must_not hard-lock destiny
+  - artifact_use_should_be_capable_of_consequence
+  - artifacts_should_fit_module_boundary_and_not_replace quest_myth_or_prophecy ownership
+
+implementation_notes:
+  recommended_repo_location:
+    - modules/artifact_engine/artifact_system_rules.yaml
+  companion_files_likely_needed_later:
+    - artifact_manifest_schema.json
+    - artifact_tag_registry.yaml
+    - artifact_origin_modes.yaml
+    - artifact_rarity_and_significance_notes.md
+    - artifact_authoring_notes.md

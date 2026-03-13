@@ -1,0 +1,861 @@
+# YGGDRASIL WORLD ENGINE (YWE)
+## Master Specification Document
+
+Version: **1.0**  
+Status: **Foundational Canon**  
+Framework Alignment: **Forsetti Framework**  
+Cosmology Model: **ASH Model**
+
+---
+
+# 1. PROJECT OVERVIEW
+
+The **Yggdrasil World Engine (YWE)** is a **code-agnostic cosmic narrative simulation engine** designed to generate:
+
+- infinite quests
+- mythologies
+- artifacts
+- creatures
+- civilizations
+- player mythic identities
+
+All procedural systems derive from **ASH cosmological mathematics**.
+
+YWE functions as a **reality simulation layer**, not a rendering engine.
+
+Rendering engines (Unity, Unreal, Godot) function as **host environments**.
+
+## Design Goals
+
+```yaml
+design_goals:
+  - infinite narrative generation
+  - cosmology-consistent simulation
+  - player-driven myth formation
+  - modular engine architecture
+  - engine agnostic implementation
+  - compatibility with RPG, MMO, and TTRPG
+```
+
+---
+
+# 2. COSMOLOGY CANON
+
+## Primordial State
+
+Before existence:
+
+```text
+Primordial Darkness
+```
+
+Two primordial entities existed within the darkness:
+
+```text
+White Wolf
+Dark Wolf
+```
+
+These beings predate:
+
+- time
+- matter
+- realms
+- gods
+- civilizations
+
+They are **cosmic informational forces**.
+
+## Creation Event
+
+Creation begins with the formation of the **Divine Core**.
+
+```text
+Divine Core Ignition
+→ gravity emerges
+→ information compresses
+→ realm layers form
+```
+
+## Realm Formation
+
+Realms are created through **compression of cosmic data** around the Divine Core.
+
+The universe stabilizes into **nine realms**.
+
+---
+
+# 3. REALM SYSTEM
+
+Realms are **fixed cosmological states**.
+
+Players do not move the realms.
+
+Players **change resonance with realms**.
+
+## Canonical Realms
+
+```yaml
+realms:
+  - divine_core
+  - celestial
+  - causal
+  - mental
+  - astral
+  - etheric
+  - physical
+  - shadow
+  - void
+```
+
+## Realm Interpretation
+
+| Realm | Meaning |
+|------|------|
+| Divine Core | origin of gravity and reality |
+| Celestial | order, creation |
+| Causal | law, fate |
+| Mental | cognition |
+| Astral | energetic patterns |
+| Etheric | life force |
+| Physical | material world |
+| Shadow | hidden truths |
+| Void | dissolution |
+
+## Realm Travel Rules
+
+Players start in:
+
+```text
+Physical Realm
+```
+
+Travel to other realms requires:
+
+```text
+Realm Attunement ≥ Threshold
++
+Thin Veil Location
+```
+
+---
+
+# 4. PLAYER MODEL
+
+Players begin as **mortals who have forgotten their celestial heritage**.
+
+Identity emerges through gameplay.
+
+## Player Origin State
+
+```json
+{
+  "origin": "mortal",
+  "celestial_memory": "veiled",
+  "realm_attunement": {},
+  "wolf_alignment": {
+    "white_wolf": 0,
+    "dark_wolf": 0
+  },
+  "bloodline_resonance": {},
+  "awakening_fragments": []
+}
+```
+
+## Character Arc
+
+All players originate as mortals. They unlock fragments of their celestial heritage through quests. The engine generates their personal backstory over time based on:
+
+- quests completed
+- realm attunement
+- White Wolf accumulation
+- Dark Wolf accumulation
+- bloodline resonance
+- mythic encounters
+- prophecy activation
+
+Identity is **revealed through play**, not chosen at character creation.
+
+---
+
+# 5. ALIGNMENT SYSTEM
+
+White Wolf and Dark Wolf represent **informational forces**, not morality.
+
+## White Wolf
+
+Represents:
+
+- illumination
+- revelation
+- knowledge
+- truth exposure
+- consuming ignorance
+
+## Dark Wolf
+
+Represents:
+
+- hiddenness
+- fear
+- unseen forces
+- concealment
+- depth
+
+## Alignment Rules
+
+```yaml
+alignment_rules:
+  accumulation_only: true
+  subtraction: false
+  morality_system: false
+```
+
+Both alignments may increase simultaneously.
+
+A single quest may award both White Wolf and Dark Wolf attunement depending on how the player completes it.
+
+---
+
+# 6. REALM ATTUNEMENT SYSTEM
+
+Realm attunement represents player resonance with specific realms.
+
+Players gain realm attunement through quests aligned with those realms.
+
+Example:
+
+- Shadow-aligned quest completion → Shadow Attunement
+- Astral-aligned quest completion → Astral Attunement
+- Celestial-aligned quest completion → Celestial Attunement
+
+## Realm Unlock Rule
+
+A realm becomes travel-accessible when:
+
+```text
+Realm Attunement ≥ Realm Threshold
+AND
+Player is at a thin veil / place of power
+```
+
+## Physical Realm Rule
+
+Players always have access to the Physical Realm.
+
+Even outside realm-shift locations, players may activate realm-aligned abilities while remaining in the Physical Realm.
+
+---
+
+# 7. BLOODLINE SYSTEM
+
+Bloodlines represent **ancestral resonance with mythic structures**.
+
+Example:
+
+```text
+Ravenson lineage
+```
+
+Bloodlines affect:
+
+- quest interpretation
+- prophecy activation
+- myth formation
+- access to certain visions
+- mythic entity response
+
+## Bloodline Schema
+
+```json
+{
+  "bloodline_id": "ravenson",
+  "mythic_origin": "odin_lineage",
+  "resonance_effects": [
+    "raven_symbols",
+    "gate_patterns",
+    "shadow_knowledge"
+  ]
+}
+```
+
+Bloodlines do not lock destiny. They influence **cosmic eligibility**.
+
+---
+
+# 8. PERCEPTION LAYER
+
+The world itself does **not change**.
+
+Player perception changes.
+
+Example:
+
+Player A sees:
+
+```text
+normal marketplace
+```
+
+Player B sees:
+
+```text
+shadow cult marketplace
+```
+
+The same world location can be interpreted differently depending on:
+
+- realm attunement
+- active realm form
+- White Wolf / Dark Wolf accumulation
+- bloodline resonance
+- player narrative memory
+
+This rule is critical for multiplayer compatibility.
+
+---
+
+# 9. REALM SHIFT SYSTEM
+
+Players begin in the Physical Realm and may fully shift into other realms only at:
+
+- places of power
+- thin veil sites
+- sacred ruins
+- dimensionally unstable locations
+
+## Realm Shift Conditions
+
+```yaml
+realm_shift_requirements:
+  realm_attunement_threshold_met: true
+  veil_location_required: true
+  player_form_changes: true
+```
+
+When shifted, the player experiences a realm-specific overlay:
+
+- NPCs change
+- vendors change
+- trainers change
+- quest givers change
+- realm-only players become visible
+
+If a player remains in the Physical Realm but channels alignment, they may use realm-based abilities without changing world layer.
+
+---
+
+# 10. COSMIC PATTERN ENGINE
+
+All procedural generation originates from **ASH cosmological state analysis**.
+
+## Pattern Detection
+
+Example pattern:
+
+```json
+{
+  "pattern_id": "PTN_00451",
+  "type": "hidden_knowledge",
+  "realm_bias": "shadow",
+  "strength": 0.72
+}
+```
+
+Patterns generate:
+
+- quests
+- artifacts
+- creatures
+- myths
+- prophecies
+- narrative spaces
+
+## Core Rule
+
+All procedural systems must derive from **ASH Pattern Detection**.
+
+No subsystem may generate meaningful content independently of the cosmic state.
+
+---
+
+# 11. QUEST GENERATION ENGINE
+
+Quests derive from **cosmic patterns**.
+
+## Quest Seed
+
+```json
+{
+  "quest_seed_id": "QS_212",
+  "pattern_id": "PTN_00451",
+  "interpretations": [
+    "reveal",
+    "conceal",
+    "study"
+  ]
+}
+```
+
+## Quest Completion Modes
+
+Every quest must support multiple completion paths.
+
+Example:
+
+- Reveal truth
+- Hide truth
+- Weaponize truth
+
+Each path grants different:
+
+- White Wolf gains
+- Dark Wolf gains
+- realm attunement
+- myth consequences
+- prophecy weights
+
+## Infinite Quest Principle
+
+Quests are not random templates. They are generated from:
+
+```text
+ASH state
+→ pattern detection
+→ player interpretation
+→ quest manifestation
+```
+
+---
+
+# 12. NARRATIVE ENGINE
+
+The Narrative Engine transforms cosmic patterns into player-specific story.
+
+## Narrative Loop
+
+```text
+ASH state
+→ cosmic pattern
+→ player interpretation
+→ quest manifestation
+→ consequence memory
+→ myth formation
+→ prophecy generation
+```
+
+## Player Narrative Memory
+
+Each player stores interpretation-specific memory.
+
+Example:
+
+```json
+{
+  "player_memory": {
+    "ravenfall_gate": "sealed_by_player",
+    "shadow_keeper_trusted": true,
+    "artifact_4512_status": "hidden"
+  }
+}
+```
+
+This changes future dialogue, quests, and myth perception for that player.
+
+---
+
+# 13. MYTH GENERATION ENGINE
+
+Significant events become mythology.
+
+Example event:
+
+```text
+artifact destroyed
+```
+
+Generated myth:
+
+```text
+The Shattering of Ravenfall
+```
+
+Myths influence:
+
+- books
+- songs
+- cult beliefs
+- shrine inscriptions
+- future quests
+- world rumors
+
+Different factions can produce different versions of the same myth.
+
+---
+
+# 14. PROPHECY ENGINE
+
+Prophecies generate **future narrative attractors**.
+
+Example:
+
+```json
+{
+  "prophecy_id": "PR_0082",
+  "condition": "shadow_gate_pattern",
+  "status": "dormant"
+}
+```
+
+Prophecies are not fixed scripts. They are probability weights that make related patterns more likely to emerge later.
+
+Prophecies should be influenced by:
+
+- bloodline resonance
+- high realm attunement
+- repeated myth participation
+- major cosmic imbalances
+
+---
+
+# 15. WOLF MANIFESTATION SYSTEM
+
+White Wolf and Dark Wolf:
+
+- cannot be killed
+- exist outside the realm system
+- appear during cosmic events
+- can guide the player
+- can assist in combat
+
+## Wolf Interaction Types
+
+```yaml
+wolf_interactions:
+ - vision
+ - quest_guidance
+ - combat_assistance
+ - prophecy_trigger
+ - dream_sequence
+```
+
+If defeated in combat:
+
+```text
+wolf dematerializes
+cooldown timer
+rematerializes later
+```
+
+The wolves are never enemies.
+
+They are primordial beings and cosmic regulators.
+
+---
+
+# 16. DIVINE CORE ENDGAME
+
+The Divine Core is the **ultimate destination** and endgame objective.
+
+Requirements to approach may include:
+
+- major realm mastery
+- high wolf alignment totals
+- prophecy completion
+- bloodline resonance thresholds
+- mythic identity completion
+
+The Divine Core should behave unlike normal realms:
+
+- altered space
+- altered time
+- altered causality
+- mythic-only entities
+- origin-level cosmological events
+
+---
+
+# 17. TERRAIN GENERATION MODEL
+
+Persistent terrain is created by developers in the host engine.
+
+YWE only generates **temporary narrative environments**.
+
+Examples:
+
+- vision realms
+- celestial trials
+- shadow labyrinths
+- ancestral memories
+- prophecy chambers
+- awakening quests
+
+## Terrain Lifecycle
+
+```text
+generate
+instantiate
+play
+resolve
+dissolve
+```
+
+## Terrain Scope Rule
+
+Persistent world geography is not generated by YWE.
+
+YWE only generates procedural terrain for:
+
+- character-specific quest phases
+- mythic instanced events
+- symbolic narrative spaces
+
+---
+
+# 18. ENGINE-FIRST ARCHITECTURE
+
+YWE is organized as an **engine-first** architecture.
+
+The root engine defines cosmology and procedural truth.
+
+Additional systems can be implemented as separate engines/modules later.
+
+## Core Engines
+
+```yaml
+core_engines:
+  - cosmology_engine
+  - realm_engine
+  - ash_pattern_engine
+  - narrative_engine
+  - perception_engine
+```
+
+## Expansion Engines
+
+```yaml
+expansion_engines:
+  - quest_engine
+  - myth_engine
+  - prophecy_engine
+  - artifact_engine
+  - creature_engine
+  - civilization_engine
+  - religion_engine
+  - economy_engine
+  - faction_engine
+```
+
+All expansion engines must read from the same cosmic state.
+
+---
+
+# 19. REPOSITORY STRUCTURE
+
+```yaml
+repository_structure:
+  root: yggdrasil-world-engine
+
+  folders:
+    core:
+      - cosmology_engine
+      - realm_engine
+      - ash_pattern_engine
+      - narrative_engine
+      - perception_engine
+
+    modules:
+      - quest_engine
+      - myth_engine
+      - prophecy_engine
+      - artifact_engine
+      - creature_engine
+
+    data:
+      - realm_registry
+      - pattern_archetypes
+      - myth_archetypes
+      - quest_archetypes
+      - bloodline_registry
+
+    lore:
+      - wrw_cosmology
+      - wolf_canon
+      - bloodline_history
+
+    adapters:
+      - unity
+      - unreal
+      - godot
+
+    docs:
+      - master_specification
+      - architecture
+      - ash_compliance
+```
+
+---
+
+# 20. DATA SCHEMAS
+
+## Player State Schema
+
+```json
+{
+  "origin": "mortal",
+  "celestial_memory": "veiled",
+  "realm_attunement": {},
+  "wolf_alignment": {
+    "white_wolf": 0,
+    "dark_wolf": 0
+  },
+  "bloodline_resonance": {},
+  "awakening_fragments": []
+}
+```
+
+## Pattern Node Schema
+
+```json
+{
+  "pattern_id": "",
+  "type": "",
+  "realm_bias": "",
+  "strength": 0
+}
+```
+
+## Quest Seed Schema
+
+```json
+{
+  "quest_seed_id": "",
+  "pattern_id": "",
+  "interpretations": []
+}
+```
+
+## Myth Record Schema
+
+```json
+{
+  "myth_id": "",
+  "source_event": "",
+  "title": "",
+  "faction_versions": {}
+}
+```
+
+## Prophecy Schema
+
+```json
+{
+  "prophecy_id": "",
+  "condition": "",
+  "status": "dormant"
+}
+```
+
+## Bloodline Schema
+
+```json
+{
+  "bloodline_id": "",
+  "mythic_origin": "",
+  "resonance_effects": []
+}
+```
+
+---
+
+# 21. ENGINE ADAPTERS
+
+Adapters translate YWE systems to host engines.
+
+Supported engines:
+
+```yaml
+adapters:
+ - unity
+ - unreal
+ - godot
+```
+
+Adapters handle:
+
+- environment generation hooks
+- entity spawning bridges
+- UI integration
+- temporary narrative space loading
+- realm overlay presentation
+
+---
+
+# 22. ASH COMPLIANCE RULES
+
+YWE must never violate the ASH cosmological model.
+
+## Compliance Rules
+
+```yaml
+ash_rules:
+  realms_are_fixed: true
+  player_resonance_changes: true
+  patterns_drive_generation: true
+  information_states_govern_events: true
+  divine_core_is_origin_center: true
+  wolves_predate_realms: true
+```
+
+## Final Compliance Principle
+
+At every major milestone, the engine should undergo a sanity check to ensure gameplay systems do not violate:
+
+- fixed realm cosmology
+- informational-force interpretation of White/Dark
+- pattern-driven generation rules
+- Divine Core creation model
+- bloodline cosmological resonance
+
+---
+
+# 23. FORSETTI FRAMEWORK ALIGNMENT
+
+The engine follows Forsetti Framework principles:
+
+- modular structure
+- clear boundaries
+- data-driven design
+- host-engine separation
+- code-agnostic architecture
+
+All modules should communicate through stable interfaces and explicit data definitions.
+
+---
+
+# 24. IMPLEMENTATION PRINCIPLES
+
+```yaml
+implementation:
+  language_independent: true
+  engine_agnostic: true
+  data_driven: true
+  modular_expansion: true
+  cosmology_locked: true
+```
+
+---
+
+# 25. FINAL RULE
+
+All procedural systems must derive from:
+
+```text
+ASH Pattern Detection
+```
+
+No subsystem may become an independent random generator detached from the cosmic state.
+
+---
+
+# END OF SPECIFICATION

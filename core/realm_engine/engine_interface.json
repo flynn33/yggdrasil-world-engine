@@ -1,0 +1,58 @@
+{
+    "schemaVersion":  "1.0",
+    "status":  "forsetti_aligned_design_contract",
+    "moduleID":  "com.ywe.core.realm-engine",
+    "displayName":  "YWE Realm Engine",
+    "plannedForsettiModuleType":  "service",
+    "entryPointContract":  "RealmEngineModule",
+    "supportedPlatforms":  [
+                               "windows"
+                           ],
+    "minForsettiVersion":  {
+                               "minor":  1,
+                               "patch":  0,
+                               "prerelease":  null,
+                               "major":  0
+                           },
+    "truthDomain":  "realm attunement and lawful access",
+    "activationProfile":  "required_first_party",
+    "lifecycle":  [
+                      "discover",
+                      "validate",
+                      "activate",
+                      "deactivate"
+                  ],
+    "compatibilityCheckRequired":  true,
+    "entitlementPolicy":  "defined_by_host_policy",
+    "directRuntimeDependencies":  [
+                                      "com.ywe.core.cosmology-engine"
+                                  ],
+    "semanticInputs":  [
+                           "cosmology service outputs",
+                           "realm registry",
+                           "player realm attunement state"
+                       ],
+    "outputs":  [
+                    "realm access evaluations",
+                    "realm resonance interpretations"
+                ],
+    "communication":  {
+                          "allowedChannels":  [
+                                                  "service_container",
+                                                  "event_bus",
+                                                  "framework_logger"
+                                              ],
+                          "forbiddenChannels":  [
+                                                    "direct_module_calls",
+                                                    "self_messaging",
+                                                    "reserved_namespace:forsetti.internal.*"
+                                                ]
+                      },
+    "plannedCapabilities":  [
+
+                            ],
+    "forbiddenCapabilities":  [
+                                  "ui_theme_mask"
+                              ],
+    "branchStatus":  "template_only_no_runtime_code"
+}
