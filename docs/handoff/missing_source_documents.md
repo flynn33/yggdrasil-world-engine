@@ -57,9 +57,6 @@ Status: updated after Forsetti compliance alignment
 - MYTH_EMERGENCE_RULES_NOTES.md
 - prophecy_activation_rules.yaml
 - PROPHECY_ACTIVATION_RULES_NOTES.md
-- myth_record_schema_expansion.json
-- prophecy_schema_expansion.json
-- perception_layer_persistence_schema.json
 
 ## Extra Handoff Documents Added
 

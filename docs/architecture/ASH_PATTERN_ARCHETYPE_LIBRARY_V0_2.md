@@ -23,7 +23,7 @@ That is a clean progression, not drift.
 
 I packaged the handoff here:
 
-[Download the next-thread briefing](sandbox:/mnt/data/YWE_NEXT_THREAD_BRIEF_2026-03-13.md)
+[Download the next-thread briefing](../handoff/YWE_NEXT_THREAD_BRIEF_2026-03-13_v2.md)
 
 Use this as the opener in the new thread:
 > Continue YWE design from the current state summary. We have completed the ASH archetype stack, compatibility matrix, player origin arc rules, NPC synthesis rules, quest chain templates, runtime generation flow, and worldstate delta rules. Do a brief sanity confirmation, then design `myth_emergence_rules.yaml` and its companion notes file.

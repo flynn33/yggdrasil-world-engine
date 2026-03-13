@@ -55,3 +55,10 @@ This repository includes GitHub automation for:
 - changelog maintenance in `CHANGELOG.md`
 - wiki synchronization from selected docs
 - Forsetti compliance checks on pushes and pull requests
+- source completeness inventory refresh for placeholder-backed source artifacts
+- schema integrity validation for canonical data contracts
+- module contract coverage checks for all core and feature engine folders
+- docs link and glossary validation
+- architecture drift checks when contracts, rules, or schemas change
+- canonical truth-boundary enforcement for adapters and host bridges
+- release readiness validation before tagged releases

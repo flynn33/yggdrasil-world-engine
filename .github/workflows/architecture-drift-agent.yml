@@ -1,0 +1,25 @@
+name: Architecture Drift Agent
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  architecture-drift:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate architecture drift rules
+        shell: pwsh
+        run: ./scripts/github/Test-ArchitectureDrift.ps1

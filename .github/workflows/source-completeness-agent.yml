@@ -1,0 +1,49 @@
+name: Source Completeness Agent
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  source-completeness:
+    if: github.event_name != 'push' || github.actor != 'github-actions[bot]'
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure workflow git identity
+        if: github.event_name != 'pull_request'
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Check source inventory freshness
+        if: github.event_name == 'pull_request'
+        shell: pwsh
+        run: ./scripts/github/Update-MissingSourceDocuments.ps1 -CheckOnly
+
+      - name: Refresh source inventory
+        if: github.event_name != 'pull_request'
+        id: refresh
+        shell: pwsh
+        run: ./scripts/github/Update-MissingSourceDocuments.ps1
+
+      - name: Commit refreshed source inventory
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && github.actor != 'github-actions[bot]' && steps.refresh.outputs.report_changed == 'true'
+        shell: pwsh
+        run: |
+          git add docs/handoff/missing_source_documents.md
+          git commit -m "docs: refresh missing source inventory [skip version]"
+          git pull --rebase origin main
+          git push origin HEAD:main

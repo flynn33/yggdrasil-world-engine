@@ -1,0 +1,23 @@
+name: Module Contract Coverage Agent
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  module-contract-coverage:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate module contract coverage
+        shell: pwsh
+        run: ./scripts/github/Test-ModuleContractCoverage.ps1

@@ -1,0 +1,23 @@
+name: Schema Integrity Agent
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  schema-integrity:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate schema integrity
+        shell: pwsh
+        run: ./scripts/github/Test-SchemaIntegrity.ps1
