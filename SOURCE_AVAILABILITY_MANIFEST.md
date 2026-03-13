@@ -1,23 +1,16 @@
 # Source Availability Manifest
 This bundle was created to prevent Codex from failing on missing referenced files.
 ## Supplied with content
-- `ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2.md` -> `docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2.md`
+- `ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md` -> `docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md`
+- `ash_pattern_registry_schema.yaml` -> `data/pattern_archetypes/ash_pattern_registry_schema.yaml`
+- `ash_downstream_contract.md` -> `docs/architecture/ash_downstream_contract.md`
+- `ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2_PRIOR_HANDOFF.md` -> `docs/history/ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2_PRIOR_HANDOFF.md`
 - `ywe_design_glossary.md` -> `docs/glossary/ywe_design_glossary.md`
 - `ash_compliance_checklist.md` -> `docs/ash_compliance/ash_compliance_checklist.md`
 - `artifact_system_rules.yaml` -> `modules/artifact_engine/artifact_system_rules.yaml`
 - `creature_system_rules.yaml` -> `modules/creature_engine/creature_system_rules.yaml`
 
 ## Present as placeholders
-- `character_archetypes.yaml` -> `data/pattern_archetypes/character_archetypes.yaml`
-- `quest_archetypes.yaml` -> `data/quest_archetypes/quest_archetypes.yaml`
-- `region_archetypes.yaml` -> `data/pattern_archetypes/region_archetypes.yaml`
-- `faction_archetypes.yaml` -> `data/pattern_archetypes/faction_archetypes.yaml`
-- `transformation_archetypes.yaml` -> `data/pattern_archetypes/transformation_archetypes.yaml`
-- `event_archetypes.yaml` -> `data/pattern_archetypes/event_archetypes.yaml`
-- `pattern_clusters.yaml` -> `data/pattern_archetypes/pattern_clusters.yaml`
-- `generation_rules.yaml` -> `data/pattern_archetypes/generation_rules.yaml`
-- `compatibility_matrix.yaml` -> `data/pattern_archetypes/compatibility_matrix.yaml`
-- `COMPATIBILITY_MATRIX_NOTES.md` -> `docs/architecture/COMPATIBILITY_MATRIX_NOTES.md`
 - `player_origin_arc_rules.yaml` -> `core/narrative_engine/player_origin_arc_rules.yaml`
 - `PLAYER_ORIGIN_ARC_NOTES.md` -> `docs/architecture/PLAYER_ORIGIN_ARC_NOTES.md`
 - `npc_synthesis_rules.yaml` -> `core/narrative_engine/npc_synthesis_rules.yaml`

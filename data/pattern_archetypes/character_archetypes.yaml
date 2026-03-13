@@ -1,10 +1,215 @@
-version: "0.1"
-status: placeholder_awaiting_finalized_content
-meta:
-  system: character_archetypes
-  purpose: Placeholder awaiting finalized content for character_archetypes.
-  invariants:
-    - all_meaningful_generation_must_be_ash_derived
-    - fixed_cosmology_must_remain_locked
-    - perception_must_not_rewrite_shared_world_truth
-    - forsetti_governs_activation_ywe_governs_truth
+registry_version: "1.0"
+status: canonical
+authority:
+  prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+  schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+  downstream_contract: docs/architecture/ash_downstream_contract.md
+family: character
+records:
+  - id: char_seeker
+    family: character
+    name: Seeker
+    summary: Pursuit of hidden truth through longing, crossing, and discovery.
+    symbolic_function: [pursuit, discovery, threshold_crossing]
+    truth_modes: [revealed_fragment, hard_won_learning]
+    shadow_modes: [obsession, trespass, destabilizing_curiosity]
+    realm_bias: [mental, astral, celestial]
+    wolf_bias: {white: 0.4, dark: 0.2}
+    player_phase_bias: [mortal_unknowing, first_stirrings, memory_recovery]
+    compatible_with: [char_weaver, char_harbinger, char_exile]
+    friction_with: [char_guardian, char_judge]
+    contradicts: []
+    downstream_affinities:
+      npc: [witness, guide, claimant]
+      quest: [quest_discovery_arc, quest_retrieval_arc, quest_threshold_arc]
+      myth: [lost_truth, secret_lineage, hidden_archive]
+      prophecy: [omen_search, hidden_sign, awakening_call]
+      artifact: [key, map, encoded_relic]
+      creature: [watcher, guide_beast, archive_keeper]
+    manifestation_hints: [hidden_archives, sealed_paths, incomplete_maps]
+    invariant_notes: [do_not_reduce_to_generic_explorer, curiosity_requires_cost]
+    status: canonical
+  - id: char_guardian
+    family: character
+    name: Guardian
+    summary: Protection, stewardship, warding, and burden-bearing under constraint.
+    symbolic_function: [protection, containment, stewardship]
+    truth_modes: [tested_access, entrusted_revelation]
+    shadow_modes: [control, stagnation, gatekeeping]
+    realm_bias: [etheric, physical, celestial]
+    wolf_bias: {white: 0.5, dark: 0.1}
+    player_phase_bias: [first_stirrings, memory_recovery, identity_conflict]
+    compatible_with: [char_builder, char_judge, char_sovereign]
+    friction_with: [char_trickster, char_seeker]
+    contradicts: []
+    downstream_affinities:
+      npc: [keeper, warden, oath_bearer]
+      quest: [quest_defense_arc, quest_restoration_arc, quest_succession_arc]
+      myth: [sacred_ward, oath_keeper, last_stand]
+      prophecy: [gate_warning, seal_break, final_defense]
+      artifact: [seal, wardstone, oath_blade]
+      creature: [sentinel, bonded_beast, threshold_guardian]
+    manifestation_hints: [gates, watch_posts, held_relics, protected_routes]
+    invariant_notes: [do_not_treat_as_simple_tank_role, access_is_never_free]
+    status: canonical
+  - id: char_exile
+    family: character
+    name: Exile
+    summary: Displacement, severed belonging, adaptive survival, and return-or-refusal tension.
+    symbolic_function: [estrangement, survival, dislocated_identity]
+    truth_modes: [outsider_witness, painful_memory_return]
+    shadow_modes: [resentment, self-erasure, alienation_spread]
+    realm_bias: [shadow, physical, astral]
+    wolf_bias: {white: 0.1, dark: 0.4}
+    player_phase_bias: [mortal_unknowing, memory_recovery, identity_conflict]
+    compatible_with: [char_seeker, char_harbinger, char_trickster]
+    friction_with: [char_builder, char_sovereign]
+    contradicts: []
+    downstream_affinities:
+      npc: [wanderer, survivor, displaced_heir]
+      quest: [quest_threshold_arc, quest_discovery_arc, quest_succession_arc]
+      myth: [banished_lineage, lost_heir, wandering_saint]
+      prophecy: [returning_name, hidden_blood, unclaimed_throne]
+      artifact: [token, inheritance_shard, road_relic]
+      creature: [scout_beast, shadow_hound, return_omen]
+    manifestation_hints: [roadside_shrines, broken_homes, denied_thresholds]
+    invariant_notes: [exile_is_not_only_victimhood, return_must_change_the_self]
+    status: canonical
+  - id: char_builder
+    family: character
+    name: Builder
+    summary: Making, restoring, organizing, and giving durable form to shared meaning.
+    symbolic_function: [craft, restoration, order_shaping]
+    truth_modes: [revealed_structure, repaired_continuity]
+    shadow_modes: [rigidity, possessive_order, sterile_control]
+    realm_bias: [physical, etheric, causal]
+    wolf_bias: {white: 0.3, dark: 0.1}
+    player_phase_bias: [first_stirrings, chosen_becoming, world_actor]
+    compatible_with: [char_guardian, char_weaver, char_sovereign]
+    friction_with: [char_exile, char_trickster]
+    contradicts: []
+    downstream_affinities:
+      npc: [craftmaster, renovator, founder]
+      quest: [quest_restoration_arc, quest_defense_arc, quest_succession_arc]
+      myth: [city_founding, bridge_maker, renewal_oath]
+      prophecy: [house_restored, tower_raised, order_rekindled]
+      artifact: [anchor, regalia, crafted_focus]
+      creature: [labor_spirit, bonded_stag, keep_guardian]
+    manifestation_hints: [repair_sites, workshops, civic_thresholds, broken_institutions]
+    invariant_notes: [order_requires_meaning, restoration_must_leave_residue]
+    status: canonical
+  - id: char_judge
+    family: character
+    name: Judge
+    summary: Weighing, discernment, reckoning, and the exposure of consequence-bearing truth.
+    symbolic_function: [discernment, reckoning, boundary_enforcement]
+    truth_modes: [tested_truth, unveiled_guilt, rightful_measure]
+    shadow_modes: [cruel_certainty, spectacle_punishment, false_equivalence]
+    realm_bias: [causal, celestial, mental]
+    wolf_bias: {white: 0.4, dark: 0.2}
+    player_phase_bias: [memory_recovery, identity_conflict, chosen_becoming]
+    compatible_with: [char_guardian, char_harbinger, char_sovereign]
+    friction_with: [char_seeker, char_trickster]
+    contradicts: []
+    downstream_affinities:
+      npc: [arbiter, examiner, witness_of_oath]
+      quest: [quest_reckoning_arc, quest_succession_arc, quest_threshold_arc]
+      myth: [final_measure, avenging_record, throne_trial]
+      prophecy: [reckoning_sign, oath_due, verdict_day]
+      artifact: [scales, sentence_blade, witness_tablet]
+      creature: [trial_beast, omen_raven, threshold_tester]
+    manifestation_hints: [tribunal_halls, sealed_testimony, public_squares]
+    invariant_notes: [judgment_must_not_flatten_morality, reckoning_requires_context]
+    status: canonical
+  - id: char_weaver
+    family: character
+    name: Weaver
+    summary: Interconnection, hidden relation, thread-binding, and subtle assembly of meaning.
+    symbolic_function: [relation_binding, pattern_assembly, hidden_interdependence]
+    truth_modes: [context_reveal, hidden_linkage, distributed_understanding]
+    shadow_modes: [manipulation, entanglement, invisible_control]
+    realm_bias: [astral, causal, mental]
+    wolf_bias: {white: 0.3, dark: 0.3}
+    player_phase_bias: [first_stirrings, memory_recovery, chosen_becoming]
+    compatible_with: [char_seeker, char_builder, char_harbinger]
+    friction_with: [char_judge, char_trickster]
+    contradicts: []
+    downstream_affinities:
+      npc: [networker, interpreter, hidden_ally]
+      quest: [quest_discovery_arc, quest_restoration_arc, quest_retrieval_arc]
+      myth: [thread_of_fate, hidden_line, stitched_memory]
+      prophecy: [woven_omen, converging_sign, knot_of_futures]
+      artifact: [loom_focus, thread_token, memory_vessel]
+      creature: [spider_omen, whispering_bird, path_weaver]
+    manifestation_hints: [converging_symbols, layered_maps, cross-bound_histories]
+    invariant_notes: [interconnection_is_not_authorial_control, subtlety_must_remain_legible]
+    status: canonical
+  - id: char_harbinger
+    family: character
+    name: Harbinger
+    summary: Warning, approach, omen-bearing transition, and signals that change is already underway.
+    symbolic_function: [warning, transition_signal, future_pressure]
+    truth_modes: [omenic_reveal, threshold_notice, early_pattern_legibility]
+    shadow_modes: [panic_spread, false_alarm, dread_amplification]
+    realm_bias: [astral, shadow, celestial]
+    wolf_bias: {white: 0.2, dark: 0.4}
+    player_phase_bias: [first_stirrings, memory_recovery, identity_conflict]
+    compatible_with: [char_seeker, char_exile, char_judge]
+    friction_with: [char_guardian, char_sovereign]
+    contradicts: []
+    downstream_affinities:
+      npc: [messenger, omen_witness, threshold_guide]
+      quest: [quest_threshold_arc, quest_discovery_arc, quest_reckoning_arc]
+      myth: [black_banner, coming_storm, herald_of_return]
+      prophecy: [rising_omen, threshold_call, convergence_warning]
+      artifact: [horn, omen_token, warning_seal]
+      creature: [crow_flock, stag_of_warning, storm_hound]
+    manifestation_hints: [omens, broken_processions, sky_signs, restless_sites]
+    invariant_notes: [warning_is_not_determinism, omens_require_interpretation]
+    status: canonical
+  - id: char_sovereign
+    family: character
+    name: Sovereign
+    summary: Rule, legitimacy, inheritance, central responsibility, and the cost of authority.
+    symbolic_function: [rule, legitimacy, central_burden]
+    truth_modes: [recognized_claim, burdened_command, lawful_inheritance]
+    shadow_modes: [domination, entitlement, possessive_rule]
+    realm_bias: [celestial, causal, physical]
+    wolf_bias: {white: 0.3, dark: 0.2}
+    player_phase_bias: [identity_conflict, chosen_becoming, world_actor]
+    compatible_with: [char_guardian, char_builder, char_judge]
+    friction_with: [char_exile, char_harbinger]
+    contradicts: [char_trickster]
+    downstream_affinities:
+      npc: [ruler, claimant, burdened_heir]
+      quest: [quest_succession_arc, quest_defense_arc, quest_reckoning_arc]
+      myth: [rightful_king, fallen_crown, burdened_throne]
+      prophecy: [throne_sign, crown_of_return, divided_rule]
+      artifact: [regalia, signet, throne_key]
+      creature: [lion_guardian, throne_hawk, heraldic_beast]
+    manifestation_hints: [crowns, disputed_seats, public_oaths, succession_sites]
+    invariant_notes: [authority_requires_legitimacy, rule_must_cost_the_bearer]
+    status: canonical
+  - id: char_trickster
+    family: character
+    name: Trickster
+    summary: Inversion, disruption, loophole movement, and revelation through destabilizing play.
+    symbolic_function: [inversion, adaptive_subversion, exposure_through_disruption]
+    truth_modes: [accidental_reveal, masked_truth, loophole_discovery]
+    shadow_modes: [betrayal, chaos_farming, trust_erosion]
+    realm_bias: [shadow, mental, astral]
+    wolf_bias: {white: 0.1, dark: 0.5}
+    player_phase_bias: [mortal_unknowing, identity_conflict, chosen_becoming]
+    compatible_with: [char_exile, char_weaver]
+    friction_with: [char_guardian, char_builder, char_judge]
+    contradicts: [char_sovereign]
+    downstream_affinities:
+      npc: [saboteur, fox_ally, false_guide]
+      quest: [quest_threshold_arc, quest_discovery_arc, quest_succession_arc]
+      myth: [laughing_thief, sacred_fool, crown_breaker]
+      prophecy: [false_sign, hidden_door, inversion_omen]
+      artifact: [mask, decoy_key, burdened_token]
+      creature: [fox_spirit, mirroring_crow, laughing_hare]
+    manifestation_hints: [masked_processions, misdirection, broken_protocols]
+    invariant_notes: [trickster_is_not_random_chaos, disruption_must_reveal_structure]
+    status: canonical

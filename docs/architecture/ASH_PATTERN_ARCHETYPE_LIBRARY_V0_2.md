@@ -1,31 +1,26 @@
-Yes — I did the sanity check, and the stack still holds together.
+# ASH Pattern Archetype Library V0.2
+## Deprecated compatibility redirect
 
-## Sanity check verdict
+Date: 2026-03-13
+Project: Yggdrasil World Engine
+Status: deprecated redirect
 
-The design is still aligned with the locked YWE canon:
+This path remains in the repository only so older handoff references can resolve
+without blocking the normalized ASH foundation.
 
-- nine fixed realms, with players changing **resonance**, not realm structure fileciteturn5file15turn5file6
-- players begin as **mortals with veiled celestial memory**, and identity is revealed through play fileciteturn5file15turn5file17
-- White Wolf / Dark Wolf remain **informational forces**, not morality, and alignment only accumulates fileciteturn5file17turn5file9
-- all meaningful procedural generation still derives from **ASH Pattern Detection** rather than independent random systems fileciteturn5file18turn5file4
-- persistent geography is still developer-authored, while YWE only generates **temporary narrative environments** fileciteturn5file18turn5file10
-- the architecture is still **engine-first, modular, data-driven, and host-engine-agnostic** fileciteturn5file10turn5file11
+## Canonical ASH authority
 
-The new work also fits the correct order:
-- archetype / symbolic grammar
-- compatibility and player/NPC/quest logic
-- runtime orchestration
-- consequence persistence
+Use these files as the active ASH source of truth:
 
-That is a clean progression, not drift.
+- `docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md`
+- `data/pattern_archetypes/ash_pattern_registry_schema.yaml`
+- `docs/architecture/ash_downstream_contract.md`
 
-## Briefing for the next thread
+## Historical context
 
-I packaged the handoff here:
+The earlier handoff-oriented prose is retained only as historical context:
 
-[Download the next-thread briefing](../handoff/YWE_NEXT_THREAD_BRIEF_2026-03-13_v2.md)
+- `docs/history/ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2_PRIOR_HANDOFF.md`
 
-Use this as the opener in the new thread:
-> Continue YWE design from the current state summary. We have completed the ASH archetype stack, compatibility matrix, player origin arc rules, NPC synthesis rules, quest chain templates, runtime generation flow, and worldstate delta rules. Do a brief sanity confirmation, then design `myth_emergence_rules.yaml` and its companion notes file.
-
-That is the right next move.
+No active design, validation, or downstream system should treat this file as
+the canonical ASH authority.

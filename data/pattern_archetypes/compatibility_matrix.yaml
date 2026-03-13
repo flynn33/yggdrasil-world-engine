@@ -1,10 +1,225 @@
-version: "0.1"
-status: placeholder_awaiting_finalized_content
-meta:
-  system: compatibility_matrix
-  purpose: Placeholder awaiting finalized content for compatibility_matrix.
-  invariants:
-    - all_meaningful_generation_must_be_ash_derived
-    - fixed_cosmology_must_remain_locked
-    - perception_must_not_rewrite_shared_world_truth
-    - forsetti_governs_activation_ywe_governs_truth
+version: "1.0"
+status: canonical_derived_reference
+authority:
+  canonical_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+  schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+  source_registries:
+    - data/pattern_archetypes/character_archetypes.yaml
+    - data/quest_archetypes/quest_archetypes.yaml
+    - data/pattern_archetypes/region_archetypes.yaml
+    - data/pattern_archetypes/faction_archetypes.yaml
+    - data/pattern_archetypes/transformation_archetypes.yaml
+    - data/pattern_archetypes/event_archetypes.yaml
+    - data/pattern_archetypes/pattern_clusters.yaml
+
+relation_weights:
+  compatible: 0.75
+  friction: -0.35
+  contradiction: -1.0
+  neutral: 0.0
+
+derivation_rules:
+  precedence: [contradiction, friction, compatibility, neutral]
+  semantics:
+    compatible: Reinforcing pressure that strengthens lawful co-selection.
+    friction: Tension that is valid only when expressed deliberately in downstream systems.
+    contradiction: Structurally unstable pairing that requires explicit higher-order design handling.
+  note: >
+    This file is a normalized relationship view. Family registries remain the
+    primary source of canonical record meaning and downstream affinity hints.
+
+relationship_index:
+  char_seeker:
+    compatible: [char_weaver, char_harbinger, char_exile]
+    friction: [char_guardian, char_judge]
+    contradiction: []
+  char_guardian:
+    compatible: [char_builder, char_judge, char_sovereign]
+    friction: [char_trickster, char_seeker]
+    contradiction: []
+  char_exile:
+    compatible: [char_seeker, char_harbinger, char_trickster]
+    friction: [char_builder, char_sovereign]
+    contradiction: []
+  char_builder:
+    compatible: [char_guardian, char_weaver, char_sovereign]
+    friction: [char_exile, char_trickster]
+    contradiction: []
+  char_judge:
+    compatible: [char_guardian, char_harbinger, char_sovereign]
+    friction: [char_seeker, char_trickster]
+    contradiction: []
+  char_weaver:
+    compatible: [char_seeker, char_builder, char_harbinger]
+    friction: [char_judge, char_trickster]
+    contradiction: []
+  char_harbinger:
+    compatible: [char_seeker, char_exile, char_judge]
+    friction: [char_guardian, char_sovereign]
+    contradiction: []
+  char_sovereign:
+    compatible: [char_guardian, char_builder, char_judge]
+    friction: [char_exile, char_harbinger]
+    contradiction: [char_trickster]
+  char_trickster:
+    compatible: [char_exile, char_weaver]
+    friction: [char_guardian, char_builder, char_judge]
+    contradiction: [char_sovereign]
+
+  quest_discovery_arc:
+    compatible: [quest_retrieval_arc, quest_threshold_arc, quest_restoration_arc]
+    friction: [quest_defense_arc, quest_succession_arc]
+    contradiction: []
+  quest_retrieval_arc:
+    compatible: [quest_discovery_arc, quest_defense_arc, quest_restoration_arc]
+    friction: [quest_reckoning_arc, quest_threshold_arc]
+    contradiction: []
+  quest_threshold_arc:
+    compatible: [quest_discovery_arc, quest_reckoning_arc, quest_restoration_arc]
+    friction: [quest_defense_arc, quest_succession_arc]
+    contradiction: []
+  quest_defense_arc:
+    compatible: [quest_retrieval_arc, quest_restoration_arc, quest_succession_arc]
+    friction: [quest_discovery_arc, quest_threshold_arc]
+    contradiction: []
+  quest_reckoning_arc:
+    compatible: [quest_threshold_arc, quest_restoration_arc, quest_succession_arc]
+    friction: [quest_retrieval_arc, quest_defense_arc]
+    contradiction: []
+  quest_restoration_arc:
+    compatible: [quest_discovery_arc, quest_retrieval_arc, quest_defense_arc]
+    friction: [quest_succession_arc, quest_reckoning_arc]
+    contradiction: []
+  quest_succession_arc:
+    compatible: [quest_defense_arc, quest_reckoning_arc, quest_restoration_arc]
+    friction: [quest_discovery_arc, quest_threshold_arc]
+    contradiction: []
+
+  region_hidden_archive:
+    compatible: [region_threshold_ruin, region_sanctum, region_borderland_refuge]
+    friction: [region_crowned_seat]
+    contradiction: []
+  region_threshold_ruin:
+    compatible: [region_hidden_archive, region_wild_confluence, region_borderland_refuge]
+    friction: [region_sanctum, region_crowned_seat]
+    contradiction: []
+  region_sanctum:
+    compatible: [region_hidden_archive, region_crowned_seat]
+    friction: [region_threshold_ruin, region_wild_confluence]
+    contradiction: []
+  region_wild_confluence:
+    compatible: [region_threshold_ruin, region_borderland_refuge]
+    friction: [region_sanctum, region_crowned_seat]
+    contradiction: []
+  region_borderland_refuge:
+    compatible: [region_threshold_ruin, region_wild_confluence, region_hidden_archive]
+    friction: [region_crowned_seat]
+    contradiction: []
+  region_crowned_seat:
+    compatible: [region_sanctum, region_hidden_archive]
+    friction: [region_threshold_ruin, region_wild_confluence, region_borderland_refuge]
+    contradiction: []
+
+  faction_custodian_order:
+    compatible: [faction_foundry_covenant, faction_judgment_seat, faction_claimant_court]
+    friction: [faction_revelation_circle, faction_veil_brokers, faction_exile_compact]
+    contradiction: []
+  faction_revelation_circle:
+    compatible: [faction_exile_compact, faction_judgment_seat, faction_veil_brokers]
+    friction: [faction_custodian_order, faction_claimant_court]
+    contradiction: []
+  faction_exile_compact:
+    compatible: [faction_revelation_circle, faction_veil_brokers]
+    friction: [faction_claimant_court, faction_foundry_covenant, faction_judgment_seat]
+    contradiction: []
+  faction_foundry_covenant:
+    compatible: [faction_custodian_order, faction_judgment_seat, faction_claimant_court]
+    friction: [faction_exile_compact, faction_veil_brokers]
+    contradiction: []
+  faction_judgment_seat:
+    compatible: [faction_custodian_order, faction_foundry_covenant, faction_claimant_court]
+    friction: [faction_veil_brokers, faction_exile_compact]
+    contradiction: []
+  faction_claimant_court:
+    compatible: [faction_custodian_order, faction_foundry_covenant, faction_judgment_seat]
+    friction: [faction_revelation_circle, faction_exile_compact, faction_veil_brokers]
+    contradiction: []
+  faction_veil_brokers:
+    compatible: [faction_revelation_circle, faction_exile_compact]
+    friction: [faction_custodian_order, faction_foundry_covenant, faction_judgment_seat, faction_claimant_court]
+    contradiction: []
+
+  transformation_awakening:
+    compatible: [transformation_consecration, transformation_exile_return, transformation_unmasking]
+    friction: [transformation_binding, transformation_corruption]
+    contradiction: []
+  transformation_consecration:
+    compatible: [transformation_awakening, transformation_binding, transformation_exile_return]
+    friction: [transformation_unmasking]
+    contradiction: [transformation_corruption]
+  transformation_binding:
+    compatible: [transformation_consecration, transformation_awakening]
+    friction: [transformation_unmasking, transformation_corruption, transformation_exile_return]
+    contradiction: []
+  transformation_exile_return:
+    compatible: [transformation_awakening, transformation_consecration, transformation_unmasking]
+    friction: [transformation_binding, transformation_corruption]
+    contradiction: []
+  transformation_corruption:
+    compatible: [transformation_unmasking]
+    friction: [transformation_awakening, transformation_binding, transformation_exile_return]
+    contradiction: [transformation_consecration]
+  transformation_unmasking:
+    compatible: [transformation_awakening, transformation_exile_return, transformation_corruption]
+    friction: [transformation_binding, transformation_consecration]
+    contradiction: []
+
+  event_revelation:
+    compatible: [event_omen_convergence, event_return, event_judgment]
+    friction: [event_oath_swearing]
+    contradiction: []
+  event_breach:
+    compatible: [event_omen_convergence, event_succession_crisis]
+    friction: [event_oath_swearing, event_judgment]
+    contradiction: []
+  event_omen_convergence:
+    compatible: [event_revelation, event_breach, event_return]
+    friction: [event_judgment, event_oath_swearing]
+    contradiction: []
+  event_oath_swearing:
+    compatible: [event_judgment, event_return, event_succession_crisis]
+    friction: [event_breach, event_omen_convergence, event_revelation]
+    contradiction: []
+  event_succession_crisis:
+    compatible: [event_breach, event_oath_swearing, event_judgment]
+    friction: [event_return]
+    contradiction: []
+  event_return:
+    compatible: [event_revelation, event_oath_swearing, event_omen_convergence]
+    friction: [event_succession_crisis]
+    contradiction: []
+  event_judgment:
+    compatible: [event_revelation, event_oath_swearing, event_succession_crisis]
+    friction: [event_breach, event_omen_convergence]
+    contradiction: []
+
+  cluster_hidden_knowledge:
+    compatible: [cluster_awakening_origin_discovery]
+    friction: [cluster_protection_oath_continuity]
+    contradiction: []
+  cluster_protection_oath_continuity:
+    compatible: [cluster_civilization_order_founding]
+    friction: [cluster_hidden_knowledge, cluster_catastrophe_reckoning]
+    contradiction: []
+  cluster_civilization_order_founding:
+    compatible: [cluster_protection_oath_continuity]
+    friction: [cluster_catastrophe_reckoning, cluster_awakening_origin_discovery]
+    contradiction: []
+  cluster_catastrophe_reckoning:
+    compatible: [cluster_awakening_origin_discovery]
+    friction: [cluster_protection_oath_continuity, cluster_civilization_order_founding]
+    contradiction: []
+  cluster_awakening_origin_discovery:
+    compatible: [cluster_hidden_knowledge, cluster_catastrophe_reckoning]
+    friction: [cluster_civilization_order_founding]
+    contradiction: []

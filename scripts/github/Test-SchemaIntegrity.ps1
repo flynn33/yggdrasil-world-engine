@@ -21,6 +21,17 @@ function Read-JsonFile {
   }
 }
 
+function Read-TextFile {
+  param([string]$Path)
+
+  if (-not (Test-Path $Path -PathType Leaf)) {
+    $violations.Add("Missing required text file: $Path")
+    return $null
+  }
+
+  return Get-Content -Raw $Path
+}
+
 function Require-Properties {
   param(
     $Object,
@@ -48,6 +59,272 @@ function Require-ArrayContains {
 
   if (-not (@($Values) -contains $Expected)) {
     $violations.Add("$Label must contain '$Expected'.")
+  }
+}
+
+function Require-TextMatch {
+  param(
+    [string]$Content,
+    [string]$Pattern,
+    [string]$Message
+  )
+
+  if ($Content -notmatch $Pattern) {
+    $violations.Add($Message)
+  }
+}
+
+function Test-AshSchemaFile {
+  param([string]$Path)
+
+  $content = Read-TextFile -Path $Path
+  if (-not $content) {
+    return
+  }
+
+  $requiredPatterns = @(
+    @{
+      Pattern = '(?m)^version:\s+"1\.0"\s*$'
+      Message = "$Path must declare version 1.0."
+    },
+    @{
+      Pattern = '(?m)^meta:\s*$'
+      Message = "$Path must define a meta section."
+    },
+    @{
+      Pattern = '(?m)^  system:\s+ash_pattern_registry_schema\s*$'
+      Message = "$Path must define meta.system as ash_pattern_registry_schema."
+    },
+    @{
+      Pattern = '(?m)^enums:\s*$'
+      Message = "$Path must define the canonical enum set."
+    },
+    @{
+      Pattern = '(?m)^  record_status:\s*$'
+      Message = "$Path must define record_status enum values."
+    },
+    @{
+      Pattern = '(?m)^  cluster_stability:\s*$'
+      Message = "$Path must define cluster_stability enum values."
+    },
+    @{
+      Pattern = '(?m)^schema:\s*$'
+      Message = "$Path must define the schema section."
+    },
+    @{
+      Pattern = '(?m)^  ArchetypeRecord:\s*$'
+      Message = "$Path must define ArchetypeRecord."
+    },
+    @{
+      Pattern = '(?m)^  ClusterRecord:\s*$'
+      Message = "$Path must define ClusterRecord."
+    },
+    @{
+      Pattern = '(?m)^registry_shape:\s*$'
+      Message = "$Path must define registry_shape."
+    }
+  )
+
+  foreach ($requiredPattern in $requiredPatterns) {
+    Require-TextMatch -Content $content -Pattern $requiredPattern.Pattern -Message $requiredPattern.Message
+  }
+}
+
+function Test-AshRegistryRecord {
+  param(
+    [string]$Block,
+    [string]$Path,
+    [string]$RecordId,
+    [string]$Family,
+    [string]$IdPrefix,
+    [bool]$IsCluster
+  )
+
+  if ($RecordId -notmatch ("^{0}[a-z0-9_]+$" -f [regex]::Escape($IdPrefix))) {
+    $violations.Add("$Path contains record '$RecordId' which does not use the required $IdPrefix canonical ID prefix.")
+  }
+
+  $requiredFieldPatterns = @(
+    @{
+      Pattern = "(?m)^    family:\s+$Family\s*$"
+      Message = "$Path record '$RecordId' must keep family set to '$Family'."
+    },
+    @{
+      Pattern = '(?m)^    name:\s+.+$'
+      Message = "$Path record '$RecordId' is missing name."
+    },
+    @{
+      Pattern = '(?m)^    summary:\s+.+$'
+      Message = "$Path record '$RecordId' is missing summary."
+    },
+    @{
+      Pattern = '(?m)^    symbolic_function:\s+\[.+\]\s*$'
+      Message = "$Path record '$RecordId' is missing symbolic_function."
+    },
+    @{
+      Pattern = '(?m)^    truth_modes:\s+\[.+\]\s*$'
+      Message = "$Path record '$RecordId' is missing truth_modes."
+    },
+    @{
+      Pattern = '(?m)^    shadow_modes:\s+\[.*\]\s*$'
+      Message = "$Path record '$RecordId' is missing shadow_modes."
+    },
+    @{
+      Pattern = '(?m)^    realm_bias:\s+\[.+\]\s*$'
+      Message = "$Path record '$RecordId' is missing realm_bias."
+    },
+    @{
+      Pattern = '(?m)^    wolf_bias:\s+\{white:\s*-?\d+(?:\.\d+)?,\s*dark:\s*-?\d+(?:\.\d+)?\}\s*$'
+      Message = "$Path record '$RecordId' must define wolf_bias.white and wolf_bias.dark."
+    },
+    @{
+      Pattern = '(?m)^    player_phase_bias:\s+\[.+\]\s*$'
+      Message = "$Path record '$RecordId' is missing player_phase_bias."
+    },
+    @{
+      Pattern = '(?m)^    compatible_with:\s+\[.*\]\s*$'
+      Message = "$Path record '$RecordId' is missing compatible_with."
+    },
+    @{
+      Pattern = '(?m)^    friction_with:\s+\[.*\]\s*$'
+      Message = "$Path record '$RecordId' is missing friction_with."
+    },
+    @{
+      Pattern = '(?m)^    contradicts:\s+\[.*\]\s*$'
+      Message = "$Path record '$RecordId' is missing contradicts."
+    },
+    @{
+      Pattern = '(?m)^    downstream_affinities:\s*$'
+      Message = "$Path record '$RecordId' is missing downstream_affinities."
+    },
+    @{
+      Pattern = '(?m)^    manifestation_hints:\s+\[.+\]\s*$'
+      Message = "$Path record '$RecordId' is missing manifestation_hints."
+    },
+    @{
+      Pattern = '(?m)^    invariant_notes:\s+\[.+\]\s*$'
+      Message = "$Path record '$RecordId' is missing invariant_notes."
+    },
+    @{
+      Pattern = '(?m)^    status:\s+(canonical|provisional|deprecated)\s*$'
+      Message = "$Path record '$RecordId' must keep status within canonical, provisional, or deprecated."
+    }
+  )
+
+  foreach ($requiredField in $requiredFieldPatterns) {
+    Require-TextMatch -Content $Block -Pattern $requiredField.Pattern -Message $requiredField.Message
+  }
+
+  foreach ($downstreamKey in @('npc', 'quest', 'myth', 'prophecy', 'artifact', 'creature')) {
+    Require-TextMatch `
+      -Content $Block `
+      -Pattern ("(?m)^      {0}:\s+\[.*\]\s*$" -f [regex]::Escape($downstreamKey)) `
+      -Message "$Path record '$RecordId' must define downstream_affinities.$downstreamKey."
+  }
+
+  if ($IsCluster) {
+    $clusterPatterns = @(
+      @{
+        Pattern = '(?m)^    members:\s+\[.+\]\s*$'
+        Message = "$Path cluster '$RecordId' must define members."
+      },
+      @{
+        Pattern = '(?m)^    combined_summary:\s+.+$'
+        Message = "$Path cluster '$RecordId' must define combined_summary."
+      },
+      @{
+        Pattern = '(?m)^    lawful_basis:\s+\[.+\]\s*$'
+        Message = "$Path cluster '$RecordId' must define lawful_basis."
+      },
+      @{
+        Pattern = '(?m)^    contradiction_risk:\s+.+$'
+        Message = "$Path cluster '$RecordId' must define contradiction_risk."
+      },
+      @{
+        Pattern = '(?m)^    stability_mode:\s+(stable|unstable|cyclical|threshold_based)\s*$'
+        Message = "$Path cluster '$RecordId' must define stability_mode using the allowed schema values."
+      }
+    )
+
+    foreach ($clusterPattern in $clusterPatterns) {
+      Require-TextMatch -Content $Block -Pattern $clusterPattern.Pattern -Message $clusterPattern.Message
+    }
+  }
+}
+
+function Test-AshRegistryFile {
+  param(
+    [string]$Path,
+    [string]$Family,
+    [string]$IdPrefix,
+    [bool]$IsCluster = $false
+  )
+
+  $content = Read-TextFile -Path $Path
+  if (-not $content) {
+    return
+  }
+
+  $requiredRootPatterns = @(
+    @{
+      Pattern = '(?m)^registry_version:\s+"1\.0"\s*$'
+      Message = "$Path must declare registry_version 1.0."
+    },
+    @{
+      Pattern = '(?m)^status:\s+canonical\s*$'
+      Message = "$Path must keep top-level status set to canonical."
+    },
+    @{
+      Pattern = '(?m)^authority:\s*$'
+      Message = "$Path must define authority metadata."
+    },
+    @{
+      Pattern = '(?m)^  prose_spec:\s+docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL\.md\s*$'
+      Message = "$Path must point authority.prose_spec to the canonical ASH specification."
+    },
+    @{
+      Pattern = '(?m)^  schema_ref:\s+data/pattern_archetypes/ash_pattern_registry_schema\.yaml\s*$'
+      Message = "$Path must point authority.schema_ref to data/pattern_archetypes/ash_pattern_registry_schema.yaml."
+    },
+    @{
+      Pattern = '(?m)^  downstream_contract:\s+docs/architecture/ash_downstream_contract\.md\s*$'
+      Message = "$Path must point authority.downstream_contract to the canonical ASH downstream contract."
+    },
+    @{
+      Pattern = "(?m)^family:\s+$Family\s*$"
+      Message = "$Path must keep top-level family set to '$Family'."
+    },
+    @{
+      Pattern = '(?m)^records:\s*$'
+      Message = "$Path must define a records list."
+    }
+  )
+
+  foreach ($requiredRootPattern in $requiredRootPatterns) {
+    Require-TextMatch -Content $content -Pattern $requiredRootPattern.Pattern -Message $requiredRootPattern.Message
+  }
+
+  if ($content -match 'placeholder awaiting finalized content|placeholder_awaiting_finalized_content') {
+    $violations.Add("$Path must not remain placeholder-backed after ASH normalization.")
+  }
+
+  $recordMatches = [regex]::Matches($content, '(?m)^  - id:\s+([a-z0-9_]+)\s*$')
+  if ($recordMatches.Count -eq 0) {
+    $violations.Add("$Path must contain at least one canonical archetype record.")
+    return
+  }
+
+  for ($index = 0; $index -lt $recordMatches.Count; $index++) {
+    $start = $recordMatches[$index].Index
+    $end = if ($index -lt ($recordMatches.Count - 1)) {
+      $recordMatches[$index + 1].Index
+    } else {
+      $content.Length
+    }
+
+    $recordId = $recordMatches[$index].Groups[1].Value
+    $block = $content.Substring($start, $end - $start)
+    Test-AshRegistryRecord -Block $block -Path $Path -RecordId $recordId -Family $Family -IdPrefix $IdPrefix -IsCluster:$IsCluster
   }
 }
 
@@ -194,6 +471,61 @@ foreach ($placeholderSchema in $placeholderExpansionFiles) {
   foreach ($invariant in $requiredPlaceholderInvariants) {
     Require-ArrayContains -Values @($content.invariants) -Expected $invariant -Label "$($placeholderSchema.Path) invariants"
   }
+}
+
+Test-AshSchemaFile -Path 'data/pattern_archetypes/ash_pattern_registry_schema.yaml'
+
+$ashRegistryFiles = @(
+  @{
+    Path = 'data/pattern_archetypes/character_archetypes.yaml'
+    Family = 'character'
+    IdPrefix = 'char_'
+    IsCluster = $false
+  },
+  @{
+    Path = 'data/quest_archetypes/quest_archetypes.yaml'
+    Family = 'quest'
+    IdPrefix = 'quest_'
+    IsCluster = $false
+  },
+  @{
+    Path = 'data/pattern_archetypes/region_archetypes.yaml'
+    Family = 'region'
+    IdPrefix = 'region_'
+    IsCluster = $false
+  },
+  @{
+    Path = 'data/pattern_archetypes/faction_archetypes.yaml'
+    Family = 'faction'
+    IdPrefix = 'faction_'
+    IsCluster = $false
+  },
+  @{
+    Path = 'data/pattern_archetypes/transformation_archetypes.yaml'
+    Family = 'transformation'
+    IdPrefix = 'transformation_'
+    IsCluster = $false
+  },
+  @{
+    Path = 'data/pattern_archetypes/event_archetypes.yaml'
+    Family = 'event'
+    IdPrefix = 'event_'
+    IsCluster = $false
+  },
+  @{
+    Path = 'data/pattern_archetypes/pattern_clusters.yaml'
+    Family = 'cluster'
+    IdPrefix = 'cluster_'
+    IsCluster = $true
+  }
+)
+
+foreach ($ashRegistryFile in $ashRegistryFiles) {
+  Test-AshRegistryFile `
+    -Path $ashRegistryFile.Path `
+    -Family $ashRegistryFile.Family `
+    -IdPrefix $ashRegistryFile.IdPrefix `
+    -IsCluster:$ashRegistryFile.IsCluster
 }
 
 if ($violations.Count -gt 0) {

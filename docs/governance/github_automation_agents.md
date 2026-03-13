@@ -55,6 +55,7 @@ It checks:
 - required fields in player, prophecy, myth, pattern, quest, bloodline, and realm records
 - placeholder expansion schema structure
 - cross-file dependency references for shared schema expansions
+- the ASH registry schema exists and the canonical family registries keep required fields, family values, ID prefixes, and allowed status values
 
 ## Module Contract Coverage Agent
 
@@ -85,6 +86,7 @@ It requires related documentation updates when:
 - canonical schemas or realm registry files change
 - core and feature rule files change
 - adapter capability profiles change
+- ASH foundation authority files or family registries change
 
 ## Canonical Truth Boundary Agent
 

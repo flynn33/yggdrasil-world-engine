@@ -16,6 +16,16 @@ ASH State -> Pattern Detection -> Narrative Interpretation -> Quest Manifestatio
 
 All meaningful procedural content must derive from ASH Pattern Detection. No independent random generator may own meaningful content generation.
 
+## ASH Authority
+
+The normalized ASH foundation is now anchored by:
+
+- `docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md`
+- `data/pattern_archetypes/ash_pattern_registry_schema.yaml`
+- `docs/architecture/ash_downstream_contract.md`
+
+The older `docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2.md` path remains only as a deprecated redirect for historical references.
+
 ## Engine-First Architecture
 
 YWE separates universal truth engines from downstream manifestation systems.

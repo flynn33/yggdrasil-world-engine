@@ -93,6 +93,26 @@ $rules = @(
     )
   },
   [pscustomobject]@{
+    Name = 'ASH foundation drift'
+    Watched = @(
+      'docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md',
+      'docs/architecture/ash_downstream_contract.md',
+      'data/pattern_archetypes/ash_pattern_registry_schema.yaml',
+      'data/pattern_archetypes/*_archetypes.yaml',
+      'data/pattern_archetypes/pattern_clusters.yaml',
+      'data/pattern_archetypes/generation_rules.yaml',
+      'data/pattern_archetypes/compatibility_matrix.yaml',
+      'data/quest_archetypes/quest_archetypes.yaml'
+    )
+    RequiredDocs = @(
+      'docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md',
+      'docs/architecture/ash_downstream_contract.md',
+      'docs/architecture/COMPATIBILITY_MATRIX_NOTES.md',
+      'data/pattern_archetypes/README.md',
+      'data/quest_archetypes/README.md'
+    )
+  },
+  [pscustomobject]@{
     Name = 'Rule-set drift'
     Watched = @(
       'core/narrative_engine/*.yaml',

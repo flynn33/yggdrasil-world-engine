@@ -1,0 +1,250 @@
+version: "1.0"
+meta:
+  system: ash_pattern_registry_schema
+  purpose: >
+    Machine-readable schema contract for canonical ASH pattern archetype
+    registries. This schema exists so Codex and later engineers can create,
+    validate, and extend archetype data without inventing local field shapes.
+  status: canonical
+  authority_note: >
+    Pair this schema with docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md.
+
+enums:
+  family:
+    - character
+    - quest
+    - region
+    - faction
+    - transformation
+    - event
+    - cluster
+  record_status:
+    - canonical
+    - provisional
+    - deprecated
+  cluster_stability:
+    - stable
+    - unstable
+    - cyclical
+    - threshold_based
+  player_phase:
+    - mortal_unknowing
+    - first_stirrings
+    - memory_recovery
+    - identity_conflict
+    - chosen_becoming
+    - world_actor
+  realm:
+    - divine_core
+    - celestial
+    - causal
+    - mental
+    - astral
+    - etheric
+    - physical
+    - shadow
+    - void
+
+schema:
+  ArchetypeRecord:
+    type: map
+    required:
+      - id
+      - family
+      - name
+      - summary
+      - symbolic_function
+      - truth_modes
+      - shadow_modes
+      - realm_bias
+      - wolf_bias
+      - player_phase_bias
+      - compatible_with
+      - friction_with
+      - contradicts
+      - downstream_affinities
+      - manifestation_hints
+      - invariant_notes
+      - status
+    properties:
+      id:
+        type: string
+        pattern_hint: "family-prefixed snake_case identifier"
+      family:
+        type: enum
+        values_ref: family
+      name:
+        type: string
+      summary:
+        type: string
+      symbolic_function:
+        type: list
+        items: string
+      truth_modes:
+        type: list
+        items: string
+      shadow_modes:
+        type: list
+        items: string
+      realm_bias:
+        type: list
+        items_ref: realm
+      wolf_bias:
+        type: map
+        required: [white, dark]
+        properties:
+          white:
+            type: float
+            range_hint: "-1.0 to 1.0"
+          dark:
+            type: float
+            range_hint: "-1.0 to 1.0"
+      player_phase_bias:
+        type: list
+        items_ref: player_phase
+      compatible_with:
+        type: list
+        items: string
+      friction_with:
+        type: list
+        items: string
+      contradicts:
+        type: list
+        items: string
+      downstream_affinities:
+        type: map
+        required: [npc, quest, myth, prophecy, artifact, creature]
+        properties:
+          npc:
+            type: list
+            items: string
+          quest:
+            type: list
+            items: string
+          myth:
+            type: list
+            items: string
+          prophecy:
+            type: list
+            items: string
+          artifact:
+            type: list
+            items: string
+          creature:
+            type: list
+            items: string
+      manifestation_hints:
+        type: list
+        items: string
+      invariant_notes:
+        type: list
+        items: string
+      status:
+        type: enum
+        values_ref: record_status
+
+  ClusterRecord:
+    extends: ArchetypeRecord
+    additional_required:
+      - members
+      - combined_summary
+      - lawful_basis
+      - contradiction_risk
+      - stability_mode
+    properties:
+      members:
+        type: list
+        items: string
+        min_items: 2
+      combined_summary:
+        type: string
+      lawful_basis:
+        type: list
+        items: string
+      contradiction_risk:
+        type: string
+      stability_mode:
+        type: enum
+        values_ref: cluster_stability
+
+registry_shape:
+  registry_version: string
+  families:
+    character:
+      type: list
+      items_ref: ArchetypeRecord
+    quest:
+      type: list
+      items_ref: ArchetypeRecord
+    region:
+      type: list
+      items_ref: ArchetypeRecord
+    faction:
+      type: list
+      items_ref: ArchetypeRecord
+    transformation:
+      type: list
+      items_ref: ArchetypeRecord
+    event:
+      type: list
+      items_ref: ArchetypeRecord
+    cluster:
+      type: list
+      items_ref: ClusterRecord
+
+seed_registry:
+  registry_version: "1.0"
+  families:
+    character:
+      - id: char_seeker
+        family: character
+        name: Seeker
+        summary: Pursuit of hidden truth through longing, crossing, and discovery.
+        symbolic_function: [pursuit, discovery, threshold_crossing]
+        truth_modes: [revealed_fragment, hard_won_learning]
+        shadow_modes: [obsession, trespass, destabilizing_curiosity]
+        realm_bias: [mental, astral, celestial]
+        wolf_bias: {white: 0.4, dark: 0.2}
+        player_phase_bias: [mortal_unknowing, first_stirrings, memory_recovery]
+        compatible_with: [char_weaver, char_harbinger, char_exile]
+        friction_with: [char_guardian, char_judge]
+        contradicts: []
+        downstream_affinities:
+          npc: [witness, guide, claimant]
+          quest: [discovery_arc, retrieval_arc, threshold_arc]
+          myth: [lost_truth, secret_lineage]
+          prophecy: [omen_search, hidden_sign]
+          artifact: [key, map, encoded_relic]
+          creature: [watcher, guide_beast]
+        manifestation_hints: [hidden_archives, sealed_paths, incomplete_maps]
+        invariant_notes: [do_not_reduce_to_generic_explorer]
+        status: canonical
+      - id: char_guardian
+        family: character
+        name: Guardian
+        summary: Protection, stewardship, warding, and burden-bearing under constraint.
+        symbolic_function: [protection, containment, stewardship]
+        truth_modes: [tested_access, entrusted_revelation]
+        shadow_modes: [control, stagnation, gatekeeping]
+        realm_bias: [etheric, physical, celestial]
+        wolf_bias: {white: 0.5, dark: 0.1}
+        player_phase_bias: [first_stirrings, memory_recovery, identity_conflict]
+        compatible_with: [char_builder, char_judge, char_weaver]
+        friction_with: [char_trickster, char_seeker]
+        contradicts: []
+        downstream_affinities:
+          npc: [keeper, warden]
+          quest: [defense_arc, custody_arc]
+          myth: [sacred_ward, oath_keeper]
+          prophecy: [last_guard, gate_warning]
+          artifact: [seal, wardstone, oath_blade]
+          creature: [sentinel, bonded_beast]
+        manifestation_hints: [gates, thresholds, watch_posts, held_relics]
+        invariant_notes: [do_not_treat_as_simple_tank_role]
+        status: canonical
+    quest: []
+    region: []
+    faction: []
+    transformation: []
+    event: []
+    cluster: []

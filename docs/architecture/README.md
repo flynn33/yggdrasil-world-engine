@@ -2,26 +2,45 @@
 
 Date: 2026-03-13
 Project: Yggdrasil World Engine
-Status: placeholder awaiting finalized content
+Status: active architecture index
 
 ## Purpose
-Introduces the documents stored in `docs/architecture` and their role in the YWE repository.
+Introduces the canonical architecture documents that define YWE truth, system boundaries, and downstream consumption rules.
 
-## Expected responsibilities
-- describe the purpose of this documentation domain
-- identify the kinds of documents expected here
-- support future document population without structural guessing
+## Active ASH Authority
+
+Use these files together as the active ASH symbolic grammar authority:
+
+- `ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md`
+- `ash_downstream_contract.md`
+- `COMPATIBILITY_MATRIX_NOTES.md`
+- `../data/pattern_archetypes/ash_pattern_registry_schema.yaml`
+
+The older `ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2.md` path is retained only as a deprecated compatibility redirect. Historical context belongs in `docs/history/`.
+
+## Other Core Architecture References
+
+This folder also contains:
+
+- engine interface and Forsetti contract surfaces
+- module design contracts
+- canonical dependency and invariant guardrails
+- specialized notes that explain how symbolic grammar becomes downstream runtime behavior
 
 ## Inputs
-- repository architecture and handoff expectations
+- canonical YWE cosmology and design law
+- normalized ASH authority documents
+- Forsetti governance alignment rules
 
 ## Outputs
-- documentation domain overview
-- navigation guidance for future contributors
+- architecture-safe design references
+- navigation for future design and implementation work
+- boundary guidance for downstream modules and adapters
 
 ## Dependencies
-- overall repository structure
-- handoff package
+- repository structure
+- canonical data domains
+- governance documentation
 
 ## Invariants
 - all meaningful generation must remain ASH-derived

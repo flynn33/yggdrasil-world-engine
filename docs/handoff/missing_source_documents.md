@@ -2,19 +2,23 @@
 
 Date: 2026-03-13
 Project: Yggdrasil World Engine
-Status: updated after Forsetti compliance alignment
+Status: updated after ASH foundation normalization
 
 ## Source bundles merged
 
 - C:\Users\james\Downloads\yggdrasil-world-engine-codex-handoff.zip
 - C:\Users\james\Downloads\Forsetti-Framework-Windows-main.zip
+- C:\Users\james\Downloads\ASH_FOUNDATION_PACK_FOR_CODEX.zip
 
 ## Finalized source documents now present
 
 - YWE_CODEX_GITHUB_BUILD_PACKAGE.md
 - YWE_MASTER_SPECIFICATION.md
 - YWE_REPOSITORY_BOOTSTRAP_PROMPT.md
-- ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2.md
+- ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+- ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2_PRIOR_HANDOFF.md
+- ash_pattern_registry_schema.yaml
+- ash_downstream_contract.md
 - ywe_design_glossary.md
 - ash_compliance_checklist.md
 - artifact_system_rules.yaml
@@ -31,18 +35,22 @@ Status: updated after Forsetti compliance alignment
 - docs/handoff/repo_implementation_mapping.md
 - docs/architecture/forsetti_module_manifest_conventions.md
 
+## Locally Authored During ASH Normalization Pass
+
+- data/pattern_archetypes/character_archetypes.yaml
+- data/quest_archetypes/quest_archetypes.yaml
+- data/pattern_archetypes/region_archetypes.yaml
+- data/pattern_archetypes/faction_archetypes.yaml
+- data/pattern_archetypes/transformation_archetypes.yaml
+- data/pattern_archetypes/event_archetypes.yaml
+- data/pattern_archetypes/pattern_clusters.yaml
+- data/pattern_archetypes/generation_rules.yaml
+- data/pattern_archetypes/compatibility_matrix.yaml
+- docs/architecture/COMPATIBILITY_MATRIX_NOTES.md
+- docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2.md
+
 ## Still Placeholder-Backed
 
-- character_archetypes.yaml
-- quest_archetypes.yaml
-- region_archetypes.yaml
-- faction_archetypes.yaml
-- transformation_archetypes.yaml
-- event_archetypes.yaml
-- pattern_clusters.yaml
-- generation_rules.yaml
-- compatibility_matrix.yaml
-- COMPATIBILITY_MATRIX_NOTES.md
 - player_origin_arc_rules.yaml
 - PLAYER_ORIGIN_ARC_NOTES.md
 - npc_synthesis_rules.yaml
