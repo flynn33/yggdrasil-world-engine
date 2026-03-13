@@ -1,0 +1,48 @@
+name: Release Governance Agent
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release-governance:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure workflow git identity
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Update version and changelog
+        id: versioning
+        shell: pwsh
+        run: ./scripts/github/Update-VersionAndChangelog.ps1
+
+      - name: Commit release metadata
+        if: steps.versioning.outputs.version_changed == 'true'
+        shell: pwsh
+        run: |
+          git add VERSION CHANGELOG.md
+          git commit -m "chore: update version and changelog to v${{ steps.versioning.outputs.version }} [skip version]"
+          git tag "v${{ steps.versioning.outputs.version }}"
+          git push origin HEAD:main --follow-tags
+
+      - name: Sync GitHub wiki
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ./scripts/github/Sync-Wiki.ps1 -Repository '${{ github.repository }}' -Token $env:GITHUB_TOKEN

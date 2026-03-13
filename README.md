@@ -46,3 +46,12 @@ Adapter scaffolding is provided for Unity, Unreal, and Godot as downstream execu
 ## Truth Engines vs. Execution Connectors
 
 Core engines and data domains are authoritative for YWE truth. Adapters remain downstream bridges that realize outputs in host environments. They may instantiate content, but they may not redefine fixed realms, wolf doctrine, player-origin rules, myth systems, or prophecy systems.
+
+## GitHub Automation
+
+This repository includes GitHub automation for:
+
+- version tracking through `VERSION`
+- changelog maintenance in `CHANGELOG.md`
+- wiki synchronization from selected docs
+- Forsetti compliance checks on pushes and pull requests
