@@ -1,0 +1,27 @@
+name: No-AI Contributor Agent
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  enforce-human-contributors:
+    name: Enforce Human Contributors
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate commit identities
+        shell: bash
+        run: |
+          pwsh -NoLogo -NoProfile -File scripts/github/Test-NoAIContributors.ps1 \
+            -EventPath "${{ github.event_path }}" \
+            -EventName "${{ github.event_name }}"
