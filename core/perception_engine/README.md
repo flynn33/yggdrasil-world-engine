@@ -32,3 +32,4 @@ Both players are in the same location, but their perception differs based on the
 
 - `perception_schema.json` -- Data schema for perception state
 - `engine_interface.json` -- Interface definition for implementations
+- `../../data/perception/perception_overlay_rules.yaml` -- Canonical overlay rule doctrine and truth-boundary constraints

@@ -105,6 +105,7 @@ yggdrasil-world-engine/
     quest_archetypes/  -- Quest seed schemas
     myth_archetypes/   -- Myth record schemas
     bloodline_registry/-- Bloodline schemas
+    perception/        -- Perception overlay canonical rules
 
   lore/               -- Cosmological lore and canon
     wrw_cosmology/     -- Creation and realm formation
@@ -129,7 +130,7 @@ yggdrasil-world-engine/
 1. Clone this repository.
 2. Review the master specification: `docs/master_specification/YWE_MASTER_SPECIFICATION.md`
 3. Review the architecture documentation: `docs/architecture/`
-4. Load data JSON schemas into your host engine.
+4. Load data schemas and canonical rule artifacts into your host engine.
 5. Implement core engines following interface definitions in `core/*/engine_interface.json`.
 6. Extend with expansion modules following `modules/*/`.
 

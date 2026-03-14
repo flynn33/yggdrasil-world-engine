@@ -1,0 +1,543 @@
+version: "0.2"
+
+meta:
+  system: perception_overlay_rules
+  purpose: >
+    Defines how YWE presents divergent, player-specific, faction-specific, and
+    state-sensitive interpretations of the same underlying world truth without
+    rewriting canonical geography or breaking multiplayer coherence.
+  doctrine:
+    - perception_is_not_world_rewrite
+    - shared_world_truth_and_personal_interpretation_must_remain_distinct
+    - overlays_must_be_pattern_derived_not_cosmetic_only
+    - visibility_variance_should_follow_realm_attunement_memory_myth_and_prophecy_pressure
+    - perception_changes_more_often_than_geography
+    - overlay_rules_must_preserve_multiplayer_safe_coexistence
+    - hidden_layers_may_be_private_partial_factional_or_publicly_contested
+    - perception_should_recontextualize_sites_npcs_and_events_without_falsifying_canon
+
+position_in_stack:
+  dependency_order:
+    - cosmology_truth
+    - realm_truth
+    - ash_pattern_interpretation
+    - narrative_direction
+    - quest_manifestation
+    - worldstate_delta
+    - myth_pressure
+    - prophecy_pressure
+    - perception_overlay
+  notes:
+    - >
+      Perception is downstream of truth, manifestation, and consequence. It
+      changes how reality is seen, accessed, emphasized, or interpreted, but it
+      does not become the source of canonical world fact.
+
+core_concepts:
+  definitions:
+    base_world_state:
+      description: >
+        The shared canonical state of locations, sites, actors, objects, and
+        events before player-specific or group-specific interpretation.
+    overlay:
+      description: >
+        A structured interpretation layer applied to a world anchor, actor,
+        event, site, or interaction surface.
+    overlay_family:
+      description: >
+        A set of related variants for the same base anchor, such as mundane,
+        threshold, cultic, prophetic, bloodline, or shadow-biased versions.
+    perception_anchor:
+      description: >
+        The canonical shared-world referent to which one or more overlays attach.
+    visibility_gate:
+      description: >
+        The rule set that determines which actors can perceive a given overlay.
+    truth_boundary:
+      description: >
+        The invariant that prevents overlays from silently rewriting canonical
+        cosmology, geography, or event truth.
+    interpretation_density:
+      description: >
+        The amount of symbolic, omen, factional, prophetic, or hidden-sign
+        information exposed by an overlay.
+    contested_overlay:
+      description: >
+        An overlay that is differently interpreted by multiple carriers,
+        factions, or players without fully collapsing into one authoritative
+        reading.
+
+overlay_domains:
+  supported_targets:
+    - location
+    - site
+    - npc
+    - faction_presence
+    - vendor_surface
+    - ritual_surface
+    - encounter_surface
+    - event_surface
+    - omen_surface
+    - artifact_surface
+    - route_or_threshold
+    - dialogue_surface
+    - memory_echo_surface
+
+core_schema:
+  PerceptionOverlayRecord:
+    overlay_id: string
+    overlay_family_id: string
+    anchor_type: string
+    anchor_id: string
+    overlay_class: string
+    visibility_class: string
+    activation_state: string
+    truth_boundary_profile:
+      canonical_anchor_preserved: boolean
+      canonical_geography_preserved: boolean
+      cosmology_preserved: boolean
+      shared_event_truth_preserved: boolean
+    gating_profile:
+      required_realm_attunement: [string]
+      required_player_phase: [string]
+      required_bloodline_tags: [string]
+      required_memory_tags: [string]
+      required_oath_tags: [string]
+      required_myth_lines: [string]
+      required_prophecy_lines: [string]
+      required_faction_standing: [string]
+      forbidden_states: [string]
+    interpretation_profile:
+      visible_npcs: [string]
+      hidden_npcs: [string]
+      visible_signs: [string]
+      hidden_signs: [string]
+      symbolic_density: float
+      threat_reading: string
+      sanctity_reading: string
+      legitimacy_reading: string
+      omen_intensity: float
+    interaction_profile:
+      vendor_variants: [string]
+      dialogue_variants: [string]
+      encounter_variants: [string]
+      ritual_variants: [string]
+      threshold_variants: [string]
+    multiplayer_profile:
+      shareable_with_party: boolean
+      visible_to_same_faction_only: boolean
+      requires_private_channel: boolean
+      objective_state_changes_for_all: boolean
+    residue_profile:
+      leaves_memory_trace: boolean
+      leaves_symbol_trace: boolean
+      recurrence_weight_delta: float
+    canon_safety_tags: [string]
+
+overlay_classes:
+  supported:
+    - mundane_surface
+    - heightened_symbolic_surface
+    - shadow_surface
+    - astral_surface
+    - bloodline_surface
+    - omen_surface
+    - myth_surface
+    - prophetic_surface
+    - cultic_surface
+    - faction_surface
+    - threshold_surface
+    - memory_echo_surface
+    - contested_surface
+    - sanctified_surface
+    - corrupted_surface
+
+visibility_classes:
+  supported:
+    - universal
+    - player_private
+    - party_shared
+    - bloodline_restricted
+    - faction_restricted
+    - cult_restricted
+    - realm_restricted
+    - omen_sensitive
+    - myth_sensitive
+    - prophecy_sensitive
+    - contested_public
+
+activation_states:
+  supported:
+    - dormant
+    - latent
+    - available
+    - active
+    - unstable
+    - fading
+    - locked
+    - residue_only
+
+activation_pipeline:
+  steps:
+    - read_base_world_anchor
+    - read_player_perception_state
+    - read_worldstate_delta_residue
+    - read_myth_pressure
+    - read_prophecy_pressure
+    - read_realm_access_relevance
+    - evaluate_visibility_gates
+    - score_overlay_candidates
+    - select_primary_overlay
+    - optionally_select_secondary_contested_overlay
+    - apply_surface_transforms
+    - validate_truth_boundary
+    - emit_overlay_manifest
+    - store_perception_trace_if_needed
+
+player_inputs:
+  required:
+    - realm_attunement
+    - wolf_alignment
+    - bloodline_resonance
+    - active_player_phase
+    - player_memory
+    - oath_bindings
+    - active_prophecy_links
+    - active_myth_links
+    - symbolic_signature
+  optional:
+    - party_visibility_mode
+    - current_realm_shift_state
+    - active_quest_chain
+    - recent_site_exposure
+    - current_faction_masking
+
+world_inputs:
+  required:
+    - base_location_state
+    - site_activation_state
+    - faction_topology_state
+    - local_world_condition
+    - myth_pressure_state
+    - prophecy_pressure_state
+    - npc_presence_state
+    - recurring_symbol_state
+  optional:
+    - temporary_space_residue
+    - ritual_activity_state
+    - authored_overlay_constraints
+
+gating_rules:
+  doctrine:
+    - overlays_require_visibility_justification
+    - no_overlay_should_activate_only_because_it_is_cool
+    - early_players_should_receive_partial_or_misleading_readability_more_often_than_full_truth
+    - bloodline_and_prophecy_gates_should_bias_visibility_without_becoming_total_destiny_locks
+    - faction_sensitive_overlays_should_respect_faction_topology_and_legitimacy_state
+
+  gate_types:
+    - realm_attunement_gate
+    - bloodline_gate
+    - memory_gate
+    - oath_gate
+    - myth_participation_gate
+    - prophecy_pressure_gate
+    - faction_legitimacy_gate
+    - site_activation_gate
+    - wolf_pressure_gate
+    - authored_story_gate
+
+  gate_strength_bands:
+    weak: 0.2_to_0.35
+    moderate: 0.36_to_0.6
+    strong: 0.61_to_0.85
+    absolute: 0.86_to_1.0
+
+overlay_selection_scoring:
+  contributing_factors:
+    - anchor_symbolic_relevance
+    - realm_resonance_match
+    - player_phase_match
+    - bloodline_visibility_relevance
+    - myth_pressure_relevance
+    - prophecy_pressure_relevance
+    - faction_presence_relevance
+    - recurring_symbol_match
+    - active_shadow_risk
+    - recent_memory_trace_match
+    - site_activation_relevance
+    - quest_stage_relevance
+  modifiers:
+    repeated_overlay_fatigue:
+      multiplier: 0.8
+    thin_veil_site:
+      multiplier: 1.15
+    active_prophecy_link:
+      prophetic_overlay_bonus: 1.2
+    linked_myth_line:
+      myth_overlay_bonus: 1.15
+    unresolved_identity_pressure:
+      symbolic_and_memory_overlay_bonus: 1.1
+    high_shadow_attunement:
+      shadow_surface_bonus: 1.15
+    strong_celestial_or_causal_relevance:
+      sanctified_and_threshold_bonus: 1.1
+
+truth_boundary_rules:
+  hard_invariants:
+    - no_overlay_may_change_canonical_geography
+    - no_overlay_may_invent_or_remove_realms
+    - no_overlay_may_overwrite_shared_event_truth
+    - no_overlay_may_replace_consequence_state_with_only_perception_state
+    - no_overlay_may_convert_private_symbolic_reading_into_global_fact_without_worldstate_support
+    - no_overlay_may_turn_myth_or_prophecy_interpretation_into_cosmology_truth
+
+  examples:
+    allowed:
+      - same_marketplace_seen_as_normal_by_one_player_and_cultic_by_another
+      - same_npc_seen_as_vendor_by_one_player_and_gatekeeper_by_another
+      - same_ruin_seen_as_inert_stone_by_one_player_and_oath_threshold_by_another
+      - same_event_understood_as_omen_by_one_faction_and_rumor_by_another
+    forbidden:
+      - one_player_sees_bridge_exists_while_others_see_no_bridge_if_bridge_has_objective_traversal_consequences_for_all
+      - private_overlay_changes_realm_ontology
+      - perception_only_shrine_activation_counted_as_global_historical_fact
+      - prophecy_overlay_creates_fulfilled_event_that_did_not_happen
+
+overlay_family_rules:
+  doctrine:
+    - every_major_anchor_may_support_multiple_overlay_families
+    - overlays_should_branch_around_meaning_not_only_visuals
+    - family_members_should_preserve_the_same_anchor_identity
+    - contested_families_may_present_incompatible_interpretations_while_preserving_shared_referent
+
+  family_examples:
+    marketplace_anchor:
+      base: mundane_surface
+      variants:
+        - cultic_surface
+        - omen_surface
+        - faction_surface
+        - prophetic_surface
+    ruined_gate_anchor:
+      base: mundane_surface
+      variants:
+        - threshold_surface
+        - memory_echo_surface
+        - shadow_surface
+        - sanctified_surface
+    elder_npc_anchor:
+      base: mundane_surface
+      variants:
+        - myth_surface
+        - bloodline_surface
+        - faction_surface
+        - contested_surface
+
+location_overlay_rules:
+  supported_effects:
+    - hidden_symbols_visible
+    - sanctity_or_corruption_readability_changes
+    - threshold_lines_visible
+    - route_significance_changes
+    - ambient_omen_density_changes
+    - site_name_variant_changes
+    - localized_audio_or_whisper_payloads
+    - ritual_traces_revealed
+  constraints:
+    - location_overlays_must_preserve_shared_navigation_truth_unless_explicitly_marked_private_nonblocking
+    - hidden_routes_may_be_perceivable_only_if_they_do_not_violate_shared_world_collision_truth_or_are_instantiated_as_gated_private_narrative_spaces
+    - thin_veil_overlays_should_often_alter_significance_before_full_accessibility
+
+npc_overlay_rules:
+  doctrine:
+    - the_same_npc_may_read_differently_to_different_observers
+    - overlay_may_change_perceived_role_without_always_changing_the_npc_base_identity
+    - truth_distribution_should_remain_phase_sensitive
+
+  supported_effects:
+    - role_reframing
+    - title_variant
+    - symbolic_signature_visibility
+    - dialogue_track_shift
+    - trust_cue_shift
+    - faction_mark_visibility
+    - omen_emitter_visibility
+    - bloodline_recognition_trigger
+    - memory_echo_presence
+
+  constraints:
+    - overlays_must_not_create_false_omniscience_in_early_game
+    - private_recognition_can_reveal_significance_without_globally_reclassifying_the_npc
+    - if_npc_objective_behavior_changes_for_all_players_that_change_belongs_to_worldstate_or_encounter_state_not_perception_alone
+
+vendor_and_service_surface_rules:
+  doctrine:
+    - service_overlays_are_valid_manifestations_of_perception_variance
+    - the_same_stall_may_be_mundane_commerce_to_one_player_and_occult_exchange_to_another
+    - overlay_service_surfaces_must_map_to_legitimate_underlying_interaction_contracts
+
+  supported_effects:
+    - vendor_catalog_variant
+    - ritual_service_variant
+    - trainer_identity_variant
+    - hidden_service_unlock
+    - bloodline_keyed_exchange
+    - faction_restricted_menu
+
+  constraints:
+    - economic_or_reward_differences_that_affect_shared_balance_should_route_through_explicit_service_contracts_not_only_cosmetic_overlay_flags
+    - service_overlays_should_preserve_auditability_for_implementation
+
+event_overlay_rules:
+  doctrine:
+    - overlays_may_change_the_meaning_of_an_event_before_they_change_its_historical_status
+    - contested_events_should_support_multiple_valid_interpretations
+  supported_effects:
+    - omen_reading
+    - blame_reading
+    - sanctification_reading
+    - legitimacy_reading
+    - hidden_cause_visibility
+    - prophecy_link_visibility
+  constraints:
+    - event_overlays_do_not_alter_whether_the_event_occurred
+    - factional_disagreement_belongs_here_objective_occurrence_belongs_elsewhere
+
+myth_and_prophecy_integration:
+  myth_rules:
+    - active_myth_lines_may_increase_myth_surface_and_contested_surface_likelihood
+    - institutionalized_myths_may_alter_site_inscriptions_and_npc_language
+    - secret_myths_may_unlock_cultic_or_rumor_biased_overlays_before_public_adoption
+  prophecy_rules:
+    - rising_or_active_prophecy_lines_may_increase_omen_surface_and_prophetic_surface_likelihood
+    - fulfilled_prophecy_may_leave_residue_overlays_even_after_activation_peak_passes
+    - misread_prophecies_may_create_false_read_overlays_without_rewriting_shared_fact
+  combined_rules:
+    - myths_reinterpret_the_past
+    - prophecies_weight_the_future
+    - perception_surfaces_both_without_confusing_them_with_canonical_truth
+
+faction_integration:
+  doctrine:
+    - faction_topology_should_influence_who_sees_what_who_names_what_and_who_can_publicly_acknowledge_what
+    - legitimacy_contests_should_create_contested_overlays
+  supported_inputs:
+    - faction_presence
+    - faction_legitimacy
+    - schism_state
+    - reform_state
+    - covert_relations
+    - archive_control
+    - ritual_control
+  outputs:
+    - faction_restricted_visibility
+    - doctrine_colored_site_readings
+    - claimant_specific_titles
+    - dissident_markers
+    - covert_presence_hints
+  constraints:
+    - faction_overlay_does_not_replace_faction_topology
+    - faction_overlay_explains_interpretation_pressure_not_the_entire_social_state
+
+multiplayer_rules:
+  doctrine:
+    - players_may_coexist_in_the_same_anchor_while_reading_different_meaning_layers
+    - shared_objective_interactions_must_remain_reconcilable
+    - private_overlays_should_enrich_multiplayer_not_fracture_it_beyond_repair
+
+  supported_patterns:
+    - asymmetric_visibility_same_anchor
+    - party_shared_reveal
+    - observer_disagreement
+    - role_specific_overlay
+    - hostable_private_threshold_space
+
+  hard_constraints:
+    - no_contradictory_objective_collision_geometry
+    - no_contradictory_realm_occupancy_facts_for_shared_public_state
+    - no_progression_critical_event_may_exist_only_in_one_player_perception_if_party_wide_completion_is_required
+    - if_private_content_has_objective_consequences_those_consequences_must_reconcile_through_worldstate_delta_or_scoped_private_state
+
+residue_and_persistence_rules:
+  doctrine:
+    - perception_may_leave_memory_and_symbol_residue
+    - not_every_overlay_should_persist
+    - repeated_exposure_should_alter_future_readability
+
+  residue_outputs:
+    - memory_trace
+    - symbol_trace
+    - omen_sensitivity_increase
+    - faction_recognition_seed
+    - site_revisit_bias
+    - dream_payload_seed
+
+  persistence_bands:
+    transient: 0.1_to_0.25
+    lingering: 0.26_to_0.55
+    durable: 0.56_to_0.8
+    historical: 0.81_to_1.0
+
+validation_rules:
+  required_checks:
+    - truth_boundary_check
+    - shared_anchor_preservation_check
+    - gate_justification_check
+    - multiplayer_reconciliation_check
+    - myth_vs_prophecy_separation_check
+    - faction_topology_dependency_check
+    - no_flat_skin_swap_check
+
+  failure_modes:
+    - overlay_is_only_visual_reskin
+    - overlay_rewrites_geography
+    - overlay_claims_prophecy_as_completed_fact
+    - overlay_collapses_myth_and_worldstate
+    - overlay_ignores_required_gate
+    - overlay_creates_unreconcilable_multiplayer_state
+    - overlay_duplicates_topology_logic_instead_of_consuming_it
+
+example_overlay_patterns:
+  - id: pov_market_shadow_cellar
+    anchor_type: location
+    anchor_id: market_square_north
+    overlay_class: cultic_surface
+    visibility_class: bloodline_restricted
+    notes: >
+      A normal market for most players; for a bloodline-sensitive player with
+      linked shadow resonance, merchant patterns align into a covert cultic
+      exchange map without changing the base square's public existence.
+
+  - id: pov_ruin_threshold_call
+    anchor_type: site
+    anchor_id: ravenfall_lower_gate
+    overlay_class: threshold_surface
+    visibility_class: realm_restricted
+    notes: >
+      The ruin appears inert to mundane observers but reveals threshold lines,
+      oath marks, and dormant gate geometry to players meeting attunement and
+      memory requirements.
+
+  - id: pov_elder_two_truths
+    anchor_type: npc
+    anchor_id: npc_elder_herrow
+    overlay_class: contested_surface
+    visibility_class: contested_public
+    notes: >
+      Different faction-aligned players perceive different legitimacy signals
+      from the same elder, shaping trust and dialogue interpretation while
+      preserving the elder's shared presence.
+
+implementation_handoff_notes:
+  recommended_repo_location: data/perception/perception_overlay_rules.yaml
+  consumes:
+    - faction_topology_state_schema.yaml
+    - worldstate_delta_rules.yaml
+    - myth_emergence_rules.yaml
+    - prophecy_activation_rules.yaml
+    - ywe_invariant_guardrails.md
+  companion_files_recommended:
+    - perception_state_schema.json
+    - perception_overlay_examples.yaml
+    - perception_multiplayer_contract.md

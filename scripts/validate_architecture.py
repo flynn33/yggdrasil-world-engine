@@ -24,6 +24,7 @@ def check_directory_structure(root):
         "data/quest_archetypes",
         "data/myth_archetypes",
         "data/bloodline_registry",
+        "data/perception",
         "lore/wrw_cosmology",
         "lore/wolf_canon",
         "lore/bloodline_history",
@@ -108,6 +109,18 @@ def check_data_schemas(root):
     return errors
 
 
+def check_canonical_data_artifacts(root):
+    """Verify required canonical non-JSON data artifacts exist."""
+    required_artifacts = [
+        "data/perception/perception_overlay_rules.yaml",
+    ]
+    errors = []
+    for artifact_path in required_artifacts:
+        if not os.path.isfile(os.path.join(root, artifact_path)):
+            errors.append(f"Missing canonical artifact: {artifact_path}")
+    return errors
+
+
 def check_governance_files(root):
     """Verify governance files exist."""
     required_files = [
@@ -158,6 +171,7 @@ def main():
         ("Core Engine Files", check_core_engine_files),
         ("Module Files", check_module_files),
         ("Data Schemas", check_data_schemas),
+        ("Canonical Data Artifacts", check_canonical_data_artifacts),
         ("Governance Files", check_governance_files),
         ("Adapter Files", check_adapter_files),
     ]

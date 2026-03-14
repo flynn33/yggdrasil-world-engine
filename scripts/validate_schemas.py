@@ -78,6 +78,36 @@ def check_player_schema(root):
     return errors
 
 
+def check_perception_overlay_rules(root):
+    """Verify the canonical perception overlay rules artifact exists and has key sections."""
+    rules_path = os.path.join(
+        root, "data", "perception", "perception_overlay_rules.yaml"
+    )
+    if not os.path.isfile(rules_path):
+        return ["Perception overlay rules artifact not found"]
+
+    with open(rules_path) as f:
+        content = f.read()
+
+    required_markers = [
+        "truth_boundary_rules:",
+        "multiplayer_rules:",
+        "myth_and_prophecy_integration:",
+        "faction_integration:",
+        "validation_rules:",
+        "perception_is_not_world_rewrite",
+    ]
+
+    errors = []
+    for marker in required_markers:
+        if marker not in content:
+            errors.append(
+                f"Perception overlay rules missing required marker: {marker}"
+            )
+
+    return errors
+
+
 def main():
     root = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
     print(f"Validating schemas at: {root}")
@@ -115,6 +145,16 @@ def main():
         errors.extend(player_errors)
     else:
         print("  PASS: Player Schema")
+
+    # Check canonical perception overlay rules
+    perception_errors = check_perception_overlay_rules(root)
+    if perception_errors:
+        print("  FAIL: Perception Overlay Rules")
+        for e in perception_errors:
+            print(f"    - {e}")
+        errors.extend(perception_errors)
+    else:
+        print("  PASS: Perception Overlay Rules")
 
     if errors:
         print(f"\n{len(errors)} schema error(s) found.")

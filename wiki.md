@@ -111,6 +111,7 @@ All data schemas are in the `data/` directory:
 - `quest_archetypes/quest_seed_schema.json` -- Quest seeds
 - `myth_archetypes/myth_schema.json` -- Myth records
 - `bloodline_registry/bloodline_schema.json` -- Bloodlines
+- `perception/perception_overlay_rules.yaml` -- Canonical perception overlay rules and truth-boundary constraints
 - `modules/prophecy_engine/prophecy_schema.json` -- Prophecies
 
 ---
