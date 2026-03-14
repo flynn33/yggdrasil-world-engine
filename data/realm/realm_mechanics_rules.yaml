@@ -1,0 +1,553 @@
+version: "0.2"
+
+meta:
+  system: realm_mechanics
+  purpose: >
+    Defines the canonical agnostic rules governing how realms behave, how realm
+    relevance manifests, how attunement and boundary conditions operate, and
+    how realm law constrains quests, perception, prophecy, myth, artifacts,
+    creatures, factions, and site activation within YWE.
+  doctrine:
+    - realms_are_fixed_cosmological_states_not_moveable_zones
+    - players_change_resonance_not_realm_structure
+    - realm_mechanics_define_lawful_conditions_of_manifestation
+    - realm_logic_must_remain_distinct_from_perception_overlay_logic
+    - realm_logic_must_remain_distinct_from_myth_and_prophecy_interpretation
+    - physical_realm_continuity_is_preserved
+    - cross_realm_contact_requires_lawful_thresholds_not_generic_fast_travel
+    - realm_effects_must_change_meaning_not_only_aesthetics
+
+canonical_position:
+  place_in_stack:
+    upstream_of:
+      - quest_manifestation
+      - artifact_manifestation
+      - creature_manifestation
+      - perception_overlay_expression
+      - prophecy_site_pressure
+      - mythic_site_significance
+    downstream_of:
+      - cosmology_canon
+      - realm_ontology
+      - ash_pattern_interpretation
+  notes:
+    - realm mechanics do not create new realms
+    - realm mechanics do not rewrite cosmology
+    - realm mechanics do not own player perception history
+    - realm mechanics provide lawful conditions that downstream systems must respect
+
+core_concepts:
+  definitions:
+    realm_state:
+      description: >
+        The lawful cosmological condition of one canonical realm, including its
+        baseline symbolic tendency, threshold behavior, and interaction law.
+    realm_relevance:
+      description: >
+        The degree to which a place, event, object, NPC, quest, or player is
+        currently meaningfully resonant with a given realm.
+    attunement:
+      description: >
+        Player or actor resonance with a realm. Attunement changes access,
+        expression, eligibility, and susceptibility, but does not alter the
+        realm itself.
+    threshold_condition:
+      description: >
+        A lawful gating condition required before strong cross-realm influence,
+        shift, or manifestation can occur.
+    thin_veil_site:
+      description: >
+        A place where boundary resistance is lower and cross-realm contact,
+        travel, or manifestation becomes more viable.
+    realm_bleed:
+      description: >
+        Limited lawful spillover of realm pressure into another context,
+        especially the Physical Realm, without converting shared world truth
+        into a different canonical realm.
+    manifestation_window:
+      description: >
+        A bounded opportunity in which realm-linked entities, symbols, effects,
+        quests, or temporary spaces can emerge with elevated coherence.
+    boundary_resistance:
+      description: >
+        The current strength of separation between realms in a given place,
+        event, or moment.
+    stabilizer:
+      description: >
+        Anything that lowers volatility and keeps realm-linked effects ordered,
+        bounded, or lawful.
+    destabilizer:
+      description: >
+        Anything that raises volatility, weakens separation, or amplifies
+        uncontrolled symbolic pressure.
+
+canonical_realm_set:
+  locked_realms:
+    - divine_core
+    - celestial
+    - causal
+    - mental
+    - astral
+    - etheric
+    - physical
+    - shadow
+    - void
+  invariant_rules:
+    - no_new_canonical_realms_may_be_generated
+    - canonical_realms_may_not_be_removed_merged_or_reordered
+    - realm_mechanics_may_change_access_pressure_not_ontology
+    - physical_realm_remains_the_baseline_shared_world_anchor
+
+realm_profiles:
+  divine_core:
+    baseline_meaning:
+      - origin
+      - compression
+      - gravity_of_truth
+      - reality_source
+    behavior_tags:
+      - ultimate_threshold
+      - causality_pressure_extreme
+      - access_highly_restricted
+      - not_routine_traversal_space
+    lawful_bias:
+      stability: very_high
+      volatility: mythically_high_if_breached
+      permeability: near_none
+    notes:
+      - divine_core_is_not_an_ordinary_realm_destination
+      - divine_core_contact_should_transform interpretation and consequence scale
+
+  celestial:
+    baseline_meaning:
+      - order
+      - creation
+      - radiance
+      - harmonizing_pattern
+    behavior_tags:
+      - structuring
+      - clarifying
+      - oath_sensitive
+      - revelation_but_not_total_exposure
+    lawful_bias:
+      stability: high
+      volatility: low_to_moderate
+      permeability: moderate_at_sanctified_sites
+
+  causal:
+    baseline_meaning:
+      - law
+      - fate
+      - consequence_binding
+      - inevitability_pressure
+    behavior_tags:
+      - threshold_binding
+      - oath_weighting
+      - recursion_of_consequence
+      - legitimacy_testing
+    lawful_bias:
+      stability: high
+      volatility: moderate
+      permeability: low_except_under_convergent_conditions
+
+  mental:
+    baseline_meaning:
+      - cognition
+      - interpretation
+      - memory_ordering
+      - thought_form
+    behavior_tags:
+      - symbolic_translation
+      - memory_pressure
+      - interpretation_multiplication
+      - identity_reflection
+    lawful_bias:
+      stability: moderate
+      volatility: moderate
+      permeability: moderate
+
+  astral:
+    baseline_meaning:
+      - energetic_pattern
+      - motion_between_states
+      - connective resonance
+      - symbolic current
+    behavior_tags:
+      - transmissive
+      - pattern_amplifying
+      - omen_friendly
+      - travel_sensitive
+    lawful_bias:
+      stability: moderate
+      volatility: moderate_to_high
+      permeability: high_at_open_routes
+
+  etheric:
+    baseline_meaning:
+      - vitality
+      - life_force
+      - growth
+      - living linkage
+    behavior_tags:
+      - restorative
+      - animating
+      - bond_sensitive
+      - corruption_reactive
+    lawful_bias:
+      stability: moderate
+      volatility: moderate
+      permeability: moderate
+
+  physical:
+    baseline_meaning:
+      - embodiment
+      - material persistence
+      - shared geography
+      - baseline habitation
+    behavior_tags:
+      - anchor_state
+      - common_access
+      - manifestation_host
+      - multiplayer_truth_base
+    lawful_bias:
+      stability: very_high
+      volatility: low_locally_variable
+      permeability: controlled_by_thresholds
+    notes:
+      - all_players_retain_physical_realm_access
+      - most realm mechanics are expressed against the physical realm as host context
+
+  shadow:
+    baseline_meaning:
+      - hidden_truth
+      - concealment
+      - fear_depth
+      - veiled_knowledge
+    behavior_tags:
+      - obscuring
+      - revealing_through_concealment
+      - secrecy_sensitive
+      - asymmetric_information
+    lawful_bias:
+      stability: moderate
+      volatility: high_under_exposure_pressure
+      permeability: high_at_sealed_or_buried_sites
+
+  void:
+    baseline_meaning:
+      - dissolution
+      - absence_pressure
+      - unmaking
+      - release_of_form
+    behavior_tags:
+      - eroding
+      - ending
+      - reducing
+      - destabilizing_if_unchecked
+    lawful_bias:
+      stability: low_to_paradoxical
+      volatility: high
+      permeability: very_low_normally_high_if_catastrophic
+
+attunement_rules:
+  attunement_model:
+    doctrine:
+      - attunement_is_resonance_not_ownership
+      - attunement_may_increase_access_without_granting_mastery
+      - multiple_realm_attunements_may_coexist
+      - high_attunement_in_one_realm_does_not_erase_other_realm_pressures
+    fields:
+      - realm_id
+      - attunement_score
+      - threshold_status
+      - recent_exposure_flags
+      - stabilization_factors
+      - distortion_risks
+  acquisition_paths:
+    - realm_aligned_quest_completion
+    - threshold_contact
+    - site_of_power_exposure
+    - artifact_resonance
+    - bloodline_activation
+    - wolf_pressure_interaction
+    - oath_binding
+    - temporary_space_resolution
+  attenuation_rules:
+    - attunement_may_plateau_without_deeper_consequence
+    - attunement_pressure_may_be_suppressed_but_not_retroactively_erased
+    - false_or_forced_contact_can_raise_distortion_without_true_attunement_gain
+  threshold_bands:
+    dormant: 0.0_to_0.19
+    aware: 0.2_to_0.39
+    resonant: 0.4_to_0.59
+    threshold_ready: 0.6_to_0.79
+    shift_capable: 0.8_to_1.0
+  invariants:
+    - physical_realm_access_is_always_true
+    - nonphysical_realm_travel_requires_attunement_plus_threshold_condition
+    - attunement_flags_readiness_not_automatic_shift
+
+boundary_condition_rules:
+  boundary_resistance_bands:
+    sealed: 0.85_to_1.0
+    stable: 0.65_to_0.84
+    thin: 0.4_to_0.64
+    permeable: 0.2_to_0.39
+    breach_risk: 0.0_to_0.19
+  threshold_factors:
+    stabilizers:
+      - sanctified_order
+      - ward_network
+      - oath_kept
+      - ritual_integrity
+      - collective_stewardship
+      - site_restoration
+      - lawful_guardianship
+    destabilizers:
+      - broken_oath
+      - unresolved_bloodline_reckoning
+      - repeated_sacrifice_without_reconciliation
+      - void_pressure
+      - schism_at_site
+      - corrupted_ritual
+      - predator_activity
+      - prophecy_convergence
+  rules:
+    - thin_veil_sites_lower_boundary_resistance_without_rewriting_shared geography
+    - catastrophic_breach_should_be_rare_and_high_cost
+    - stabilized_sites_can_support_lawful_contact_without_full_shift
+    - boundary_state_should_inform quests creatures artifacts omens and npc behavior
+
+travel_and_shift_rules:
+  lawful_requirements:
+    required_for_nonphysical_shift:
+      - realm_attunement_threshold_met
+      - thin_veil_or_equivalent_site_condition
+      - no_hard_canonical_block
+    optional_amplifiers:
+      - bloodline_resonance_match
+      - prophecy_convergence
+      - mythically_significant_timing
+      - artifact_key
+      - ritual_guidance
+  shift_outcomes:
+    - full_realm_shift
+    - partial_overlay_contact
+    - failed_contact_with_residue
+    - symbolic_only_resonance
+  constraints:
+    - realm_shift_is_not_generic_fast_travel
+    - failed_shift_may_generate memory residue distortion risk or omen pressure
+    - some sites_permit_contact_without_transit
+    - divine_core_access_requires extraordinary gating
+  multiplayer_rules:
+    - one_player_shift_does_not_rewrite_shared_geography_for_all_players
+    - co-located_players_may_experience_different_overlay_depths
+    - shared_event_truth_must_remain_reconcilable_after_shift episodes
+
+realm_bleed_rules:
+  doctrine:
+    - realm_bleed_is_lawful_spillover_not_realm_replacement
+    - bleed_should_change meaning pressure access or manifestation viability
+    - bleed_should_not_convert_physical_realm_into_a_new_canonical_realm_state
+  supported_bleed_modes:
+    - symbol_density_increase
+    - npc_visibility_shift
+    - omen_cluster
+    - site_activation
+    - temporary_space_opening
+    - artifact_resonance_spike
+    - creature_presence_window
+    - dialogue_interpretation_shift
+  controls:
+    - bleed_requires scope_tags
+    - bleed_requires duration_or_stabilization_rule
+    - bleed_must_specify whether_public_private_or_faction_limited
+  forbidden_modes:
+    - permanent_geography_rewrite_by_bleed_alone
+    - canonical_realm_substitution
+    - universal_multiplayer_forced_hallucination
+
+manifestation_window_rules:
+  opening_triggers:
+    - threshold_crossing
+    - prophecy_activation
+    - mythically_charged_anniversary
+    - bloodline_revelation
+    - broken_or_fulfilled_oath
+    - wolf_manifestation
+    - faction_schism_at_site
+    - artifact_unsealing
+  supported_outputs:
+    - quest_stage_elevation
+    - artifact_appearance_or_relevance
+    - creature_emergence
+    - realm_specific_npc_access
+    - temporary_narrative_space_generation
+    - omen_intensification
+    - faction_claim_activation
+  closure_conditions:
+    - ritual_completion
+    - stabilizer_restored
+    - cost_paid_and_integrated
+    - site_sealed
+    - pressure_dissipated
+    - manifestation_window_timeout
+  anti_drift_rules:
+    - windows_should_express_pattern_pressure_not_random spectacle
+    - windows_should_leave residue_or consequence_if significant
+    - windows_should_not_become_permanent_content_channels_without explicit canon support
+
+site_rules:
+  canonical_site_classes:
+    - thin_veil_site
+    - place_of_power
+    - sanctuary
+    - ruin
+    - shrine
+    - threshold_gate
+    - corrupted_site
+    - sealed_site
+    - dream_anchor
+    - oath_site
+  site_properties:
+    - boundary_resistance
+    - linked_realms
+    - stabilizers
+    - destabilizers
+    - access_conditions
+    - public_visibility_mode
+    - faction_interest
+    - bloodline_relevance
+    - myth_density
+    - prophecy_sensitivity
+  rules:
+    - sites_are_primary mediators_of_realm_expression_in_the_physical_world
+    - sites_may_change_state_without_altering_canonical_geography_class
+    - a_site_can_be_relevant_to_multiple_realms_without collapsing them together
+
+interaction_with_other_systems:
+  quest_engine:
+    supports:
+      - realm_attunement_opportunities
+      - threshold_trials
+      - site_gated progression
+      - lawful realm-shift stages
+    forbids:
+      - quest_defined_new_realm_creation
+      - arbitrary_realm_access_rewarding
+
+  myth_engine:
+    supports:
+      - realm_significant_sites_as myth carriers
+      - realm-biased retellings
+      - materializations linked to realm law
+    forbids:
+      - myth_rewriting_realm_ontology
+      - social_retelling_as_substitute_for_boundary_state
+
+  prophecy_engine:
+    supports:
+      - site_sensitivity
+      - convergence_at_thresholds
+      - omen emission bias by realm
+      - activation pressure through realm imbalance
+    forbids:
+      - prophecy_bypassing_realm_access_rules
+      - prophecy_claims_overriding_cosmological legality
+
+  perception_engine:
+    supports:
+      - overlay eligibility
+      - visibility asymmetry
+      - player-specific interpretation depth
+    forbids:
+      - perception_overlays_redefining_realm_law
+      - realm_mechanics_owning_perception_memory_or_ui_expression
+
+  artifact_engine:
+    supports:
+      - resonance gating
+      - lawful artifact awakening conditions
+      - realm-bias amplification
+    forbids:
+      - standalone_loot_logic_ignoring_realm_conditions
+
+  creature_engine:
+    supports:
+      - creature emergence windows
+      - habitat relevance by realm pressure
+      - lawful encounter intensification
+    forbids:
+      - generic_spawn_logic_detached_from realm and pattern conditions
+
+  faction_topology:
+    supports:
+      - site claims
+      - stewardship legitimacy
+      - schism pressure around threshold sites
+    forbids:
+      - faction_belief_alone_rewriting_site_or_realm_law
+
+truth_boundary_rules:
+  distinctions:
+    - realm_truth_is_not_perception_overlay
+    - realm_truth_is_not_mythic_retelling
+    - realm_truth_is_not_prophetic_prediction
+    - realm_truth_is_not_faction_claim
+  enforcement:
+    - downstream_systems_may_interpret_realm_law_but_not_define_it
+    - any_conflict_between_interpretation_and_realm_truth_resolves_in_favor_of_realm_truth
+    - player_experience_may_diverge_while_realm_conditions_remain canonical
+
+validation_rules:
+  hard_fails:
+    - adds_or_removes_canonical_realms
+    - allows_nonphysical_travel_without_threshold_condition
+    - rewrites_shared_geography_as_perception_or_bleed_side_effect
+    - treats_realms_as_cosmetic_theme_tags_only
+    - lets_prophecy_or_myth_override_realm_law
+    - lets_faction_belief_define_cosmology
+  soft_fails:
+    - uses_realm_bias_without_manifestation_consequence
+    - site_has_realm_tags_but_no_boundary_logic
+    - attunement_changes_without cause_or consequence
+    - bleed_event_has_no_scope_or_closure_rule
+  quality_checks:
+    - does_the_realm_rule_change_meaning_not_only_art
+    - is_the_boundary_state_specified
+    - is_physical_realm_continuity_preserved
+    - are_threshold_conditions_explicit
+    - are_downstream_boundaries_clear
+
+example_patterns:
+  lawful_examples:
+    - id: ex_shadow_market_overlay
+      summary: >
+        A Shadow-relevant marketplace at a thin veil site reveals hidden vendors
+        only to players with sufficient shadow attunement and matching
+        perception eligibility, while the shared location remains the same
+        physical market.
+    - id: ex_astral_crossing_window
+      summary: >
+        Repeated astral omens plus a restored route create a temporary
+        manifestation window that enables a quest stage and creature emergence,
+        then closes after ritual completion.
+    - id: ex_causal_oath_gate
+      summary: >
+        A Causal-threshold site remains sealed until an oath chain is resolved;
+        prophecy can intensify pressure around the site but cannot bypass the
+        oath condition.
+  unlawful_examples:
+    - id: bad_new_realm_reward
+      summary: >
+        Completing a quest generates a brand-new canonical realm and adds it to
+        travel selection.
+    - id: bad_perception_world_rewrite
+      summary: >
+        One player's overlay permanently converts a shared city district into a
+        different canonical realm for all players.
+    - id: bad_prophecy_override
+      summary: >
+        A prophecy claim grants direct access to the Divine Core regardless of
+        attunement, threshold, or cosmological legality.

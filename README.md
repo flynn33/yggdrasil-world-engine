@@ -101,6 +101,7 @@ yggdrasil-world-engine/
 
   data/               -- Canonical schemas and registries
     realm_registry/    -- Nine canonical realms
+    realm/             -- Realm-law and transition canonical rules
     pattern_archetypes/-- Pattern node schemas
     quest_archetypes/  -- Quest seed schemas
     myth_archetypes/   -- Myth record schemas
@@ -155,6 +156,7 @@ Forsetti governs the engine through **five design principles**:
 | [guide.md](guide.md) | Concise integration rules |
 | [developer-guide.md](developer-guide.md) | Extended guide for engine implementors |
 | [wiki.md](wiki.md) | Comprehensive reference and playbook |
+| [missing_source_documents.md](missing_source_documents.md) | Canonical artifact inventory and pending placeholder tracking |
 | [agentic-coding-policy.json](agentic-coding-policy.json) | Machine-readable AI agent constraints |
 | [yggdrasil-instructions.json](yggdrasil-instructions.json) | Machine-readable architecture rules |
 

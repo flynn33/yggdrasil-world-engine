@@ -20,6 +20,7 @@ def check_directory_structure(root):
         "modules/artifact_engine",
         "modules/creature_engine",
         "data/realm_registry",
+        "data/realm",
         "data/pattern_archetypes",
         "data/quest_archetypes",
         "data/myth_archetypes",
@@ -112,6 +113,7 @@ def check_data_schemas(root):
 def check_canonical_data_artifacts(root):
     """Verify required canonical non-JSON data artifacts exist."""
     required_artifacts = [
+        "data/realm/realm_mechanics_rules.yaml",
         "data/perception/perception_overlay_rules.yaml",
     ]
     errors = []
@@ -129,6 +131,7 @@ def check_governance_files(root):
         "guide.md",
         "developer-guide.md",
         "wiki.md",
+        "missing_source_documents.md",
         "README.md",
         "LICENSE",
         "CONTRIBUTING.md",

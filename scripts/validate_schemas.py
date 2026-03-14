@@ -108,6 +108,68 @@ def check_perception_overlay_rules(root):
     return errors
 
 
+def check_realm_mechanics_rules(root):
+    """Verify the canonical realm mechanics rules artifact exists and has key sections."""
+    rules_path = os.path.join(
+        root, "data", "realm", "realm_mechanics_rules.yaml"
+    )
+    if not os.path.isfile(rules_path):
+        return ["Realm mechanics rules artifact not found"]
+
+    with open(rules_path) as f:
+        content = f.read()
+
+    required_markers = [
+        "canonical_realm_set:",
+        "attunement_rules:",
+        "boundary_condition_rules:",
+        "travel_and_shift_rules:",
+        "realm_bleed_rules:",
+        "manifestation_window_rules:",
+        "site_rules:",
+        "interaction_with_other_systems:",
+        "truth_boundary_rules:",
+        "validation_rules:",
+        "physical_realm_access_is_always_true",
+        "realm_shift_is_not_generic_fast_travel",
+        "realm_truth_is_not_perception_overlay",
+        "thin_veil_site",
+    ]
+
+    errors = []
+    for marker in required_markers:
+        if marker not in content:
+            errors.append(
+                f"Realm mechanics rules missing required marker: {marker}"
+            )
+
+    return errors
+
+
+def check_source_inventory(root):
+    """Verify source inventory exists and references promoted canonical artifacts."""
+    inventory_path = os.path.join(root, "missing_source_documents.md")
+    if not os.path.isfile(inventory_path):
+        return ["Source inventory file not found: missing_source_documents.md"]
+
+    with open(inventory_path) as f:
+        content = f.read()
+
+    required_entries = [
+        "data/perception/perception_overlay_rules.yaml",
+        "data/realm/realm_mechanics_rules.yaml",
+    ]
+
+    errors = []
+    for entry in required_entries:
+        if entry not in content:
+            errors.append(
+                f"Source inventory missing canonical entry: {entry}"
+            )
+
+    return errors
+
+
 def main():
     root = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
     print(f"Validating schemas at: {root}")
@@ -155,6 +217,26 @@ def main():
         errors.extend(perception_errors)
     else:
         print("  PASS: Perception Overlay Rules")
+
+    # Check canonical realm mechanics rules
+    realm_mechanics_errors = check_realm_mechanics_rules(root)
+    if realm_mechanics_errors:
+        print("  FAIL: Realm Mechanics Rules")
+        for e in realm_mechanics_errors:
+            print(f"    - {e}")
+        errors.extend(realm_mechanics_errors)
+    else:
+        print("  PASS: Realm Mechanics Rules")
+
+    # Check source inventory reflects promoted canonical artifacts
+    source_inventory_errors = check_source_inventory(root)
+    if source_inventory_errors:
+        print("  FAIL: Source Inventory")
+        for e in source_inventory_errors:
+            print(f"    - {e}")
+        errors.extend(source_inventory_errors)
+    else:
+        print("  PASS: Source Inventory")
 
     if errors:
         print(f"\n{len(errors)} schema error(s) found.")

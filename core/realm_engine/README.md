@@ -35,3 +35,4 @@ Realms are fixed cosmological states. Players do not move the realms -- players 
 
 - `realm_schema.json` -- Data schema for realm state
 - `engine_interface.json` -- Interface definition for implementations
+- `../../data/realm/realm_mechanics_rules.yaml` -- Canonical realm-law rules for boundaries, attunement, and transitions

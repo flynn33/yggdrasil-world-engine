@@ -107,6 +107,7 @@ Modules communicate through events, not direct references. The event bus pattern
 All data schemas are in the `data/` directory:
 - `player_schema.json` -- Player state
 - `realm_registry/realms.json` -- Nine canonical realms
+- `realm/realm_mechanics_rules.yaml` -- Canonical realm-law rules for boundaries, attunement, manifestation, and transitions
 - `pattern_archetypes/pattern_schema.json` -- Pattern nodes
 - `quest_archetypes/quest_seed_schema.json` -- Quest seeds
 - `myth_archetypes/myth_schema.json` -- Myth records
@@ -135,6 +136,7 @@ CI workflows block merges on any failure.
 | `guide.md` | Concise Forsetti integration rules |
 | `developer-guide.md` | Extended guide for engine implementors |
 | `wiki.md` | This file -- comprehensive reference |
+| `missing_source_documents.md` | Canonical artifact inventory and placeholder-backed tracking |
 | `yggdrasil-instructions.json` | Machine-readable architecture rules |
 | `agentic-coding-policy.json` | Machine-readable AI agent constraints |
 | `docs/ash_compliance/` | ASH compliance rules and checklist |
