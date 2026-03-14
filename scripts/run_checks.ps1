@@ -54,6 +54,7 @@ Invoke-ValidationCheck -Name 'Architecture Validation' -Command ($pythonCmd + @(
 Invoke-ValidationCheck -Name 'Schema Validation' -Command ($pythonCmd + @("$scriptDir\validate_schemas.py", $rootDir))
 Invoke-ValidationCheck -Name 'ASH Compliance Validation' -Command ($pythonCmd + @("$scriptDir\validate_ash_compliance.py", $rootDir))
 Invoke-ValidationCheck -Name 'Discussion Agent Validation' -Command ($pythonCmd + @("$scriptDir\github\discussion_agent.py", "--validate-config", "--root", $rootDir))
+Invoke-ValidationCheck -Name 'Discussion Topic Generator Validation' -Command ($pythonCmd + @("$scriptDir\github\discussion_topic_agent.py", "--validate-config", "--root", $rootDir))
 
 Write-Host "=========================================="
 Write-Host "Results: $pass passed, $fail failed"

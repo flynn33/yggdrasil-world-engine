@@ -123,6 +123,22 @@ Boundary rules:
 - support responses prefer README, guides, governance docs, and operating instructions
 - technical responses prefer engine, module, schema, workflow, adapter, and architecture surfaces
 
+## Discussion Topic Seeder Agent
+
+The discussion-topic-seeder workflow scans repository truth on a schedule and opens category-level GitHub Discussions topics when equivalent seeded topics do not already exist.
+
+It works by:
+- reading repository-driven topic sources such as `wiki.md`, `.github/wiki-sync.json`, and `docs/architecture/README.md`
+- deriving candidate topics from wiki sections, wiki-sync pages, and architecture headings
+- classifying each candidate into the technical, support, or lore family using the same repo-grounded routing logic as the response agents
+- selecting at most one new topic per family and at most three total topics per run
+- creating discussions only when the seeded topic marker or exact topic title is not already present on the discussion board
+
+Boundary rules:
+- generated topics must be derived from repository truth, not invented freeform prompts
+- topic bodies must point back to the repository source path and include a repository-grounded summary
+- when no new seeded topics are needed, the workflow exits without creating anything
+
 ## No AI Contributor Agent
 
 The no-ai-contributor workflow protects repository attribution hygiene.

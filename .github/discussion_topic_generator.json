@@ -1,0 +1,59 @@
+{
+  "version": "1.0",
+  "max_topics_per_run": 3,
+  "max_topics_per_family_per_run": 1,
+  "family_order": [
+    "technical",
+    "support",
+    "lore"
+  ],
+  "seed_marker_prefix": "ywe-discussion-seed",
+  "category_preferences": {
+    "technical": [
+      "technical",
+      "engineering",
+      "development",
+      "ideas",
+      "general"
+    ],
+    "support": [
+      "support",
+      "q-a",
+      "questions",
+      "help",
+      "general"
+    ],
+    "lore": [
+      "lore",
+      "worldbuilding",
+      "canon",
+      "general",
+      "ideas"
+    ]
+  },
+  "seed_sources": [
+    {
+      "id": "wiki_sections",
+      "kind": "markdown_headings",
+      "source_path": "wiki.md",
+      "heading_level": 2,
+      "title_prefix": "Wiki Section",
+      "body_intro": "This topic was generated from the repository wiki reference."
+    },
+    {
+      "id": "wiki_topics",
+      "kind": "wiki_sync_pages",
+      "source_path": ".github/wiki-sync.json",
+      "title_prefix": "Wiki Topic",
+      "body_intro": "This topic was generated from the repository wiki-sync mapping."
+    },
+    {
+      "id": "architecture_topics",
+      "kind": "markdown_headings",
+      "source_path": "docs/architecture/README.md",
+      "heading_level": 2,
+      "title_prefix": "Architecture Topic",
+      "body_intro": "This topic was generated from the architecture overview."
+    }
+  ]
+}

@@ -55,6 +55,7 @@ run_check "Architecture Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/validate_arc
 run_check "Schema Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/validate_schemas.py" "$ROOT_DIR"
 run_check "ASH Compliance Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/validate_ash_compliance.py" "$ROOT_DIR"
 run_check "Discussion Agent Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/github/discussion_agent.py" --validate-config --root "$ROOT_DIR"
+run_check "Discussion Topic Generator Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/github/discussion_topic_agent.py" --validate-config --root "$ROOT_DIR"
 
 echo "=========================================="
 echo "Results: $PASS passed, $FAIL failed"

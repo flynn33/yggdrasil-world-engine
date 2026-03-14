@@ -800,6 +800,108 @@ def check_discussion_agent_configuration(root):
     return errors
 
 
+def check_discussion_topic_generator_configuration(root):
+    """Verify the scheduled discussion topic generator is configured and repo-grounded."""
+    config_path = os.path.join(root, ".github", "discussion_topic_generator.json")
+    workflow_path = os.path.join(
+        root, ".github", "workflows", "discussion-topic-seeder.yml"
+    )
+
+    if not os.path.isfile(config_path):
+        return [
+            "Discussion topic generator config not found: .github/discussion_topic_generator.json"
+        ]
+
+    if not os.path.isfile(workflow_path):
+        return [
+            "Discussion topic generator workflow not found: .github/workflows/discussion-topic-seeder.yml"
+        ]
+
+    config = load_json_file(config_path)
+    workflow_content = read_text_file(workflow_path)
+    errors = []
+
+    if config.get("version") != "1.0":
+        errors.append("Discussion topic generator config must declare version 1.0")
+
+    if config.get("max_topics_per_run") != 3:
+        errors.append("Discussion topic generator config must cap max_topics_per_run at 3")
+
+    if config.get("max_topics_per_family_per_run") != 1:
+        errors.append(
+            "Discussion topic generator config must cap max_topics_per_family_per_run at 1"
+        )
+
+    if config.get("family_order") != ["technical", "support", "lore"]:
+        errors.append(
+            "Discussion topic generator config must keep family_order as technical, support, lore"
+        )
+
+    if config.get("seed_marker_prefix") != "ywe-discussion-seed":
+        errors.append(
+            "Discussion topic generator config must preserve the ywe-discussion-seed marker prefix"
+        )
+
+    category_preferences = config.get("category_preferences", {})
+    for family in ("technical", "support", "lore"):
+        values = category_preferences.get(family)
+        if not isinstance(values, list) or not values:
+            errors.append(
+                f"Discussion topic generator config must define non-empty category preferences for {family}"
+            )
+
+    seed_sources = config.get("seed_sources", [])
+    required_source_ids = {"wiki_sections", "wiki_topics", "architecture_topics"}
+    actual_source_ids = {
+        source.get("id") for source in seed_sources if isinstance(source, dict)
+    }
+    if actual_source_ids != required_source_ids:
+        errors.append(
+            "Discussion topic generator config must define wiki_sections, wiki_topics, and architecture_topics"
+        )
+
+    for source in seed_sources:
+        if not isinstance(source, dict):
+            errors.append("Each discussion topic generator source must be a JSON object")
+            continue
+
+        source_id = source.get("id", "<unknown>")
+        source_path = source.get("source_path")
+        if not source_path:
+            errors.append(
+                f"Discussion topic generator source '{source_id}' must define source_path"
+            )
+        elif not os.path.exists(os.path.join(root, source_path)):
+            errors.append(
+                f"Discussion topic generator source '{source_id}' references a missing path: {source_path}"
+            )
+
+        if not source.get("title_prefix"):
+            errors.append(
+                f"Discussion topic generator source '{source_id}' must define title_prefix"
+            )
+
+        if not source.get("body_intro"):
+            errors.append(
+                f"Discussion topic generator source '{source_id}' must define body_intro"
+            )
+
+    required_workflow_markers = [
+        "schedule:",
+        "workflow_dispatch:",
+        "discussions: write",
+        "python3 scripts/github/discussion_topic_agent.py --root .",
+    ]
+
+    for marker in required_workflow_markers:
+        if marker not in workflow_content:
+            errors.append(
+                f"Discussion topic generator workflow missing required marker: {marker}"
+            )
+
+    return errors
+
+
 def check_authored_override_notes(root):
     """Verify canonical authored override and tooling control notes exist and contain guardrail sections."""
     notes_path = os.path.join(
@@ -996,6 +1098,15 @@ def main():
         errors.extend(discussion_agent_errors)
     else:
         print("  PASS: Discussion Agent Configuration")
+
+    discussion_topic_generator_errors = check_discussion_topic_generator_configuration(root)
+    if discussion_topic_generator_errors:
+        print("  FAIL: Discussion Topic Generator Configuration")
+        for e in discussion_topic_generator_errors:
+            print(f"    - {e}")
+        errors.extend(discussion_topic_generator_errors)
+    else:
+        print("  PASS: Discussion Topic Generator Configuration")
 
     # Check authored override and tooling control notes
     authored_notes_errors = check_authored_override_notes(root)
