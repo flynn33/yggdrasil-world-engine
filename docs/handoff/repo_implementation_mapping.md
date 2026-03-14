@@ -19,6 +19,10 @@ This branch stores planning manifests beside the runtime folders:
 - `core/*/forsetti_module_manifest.template.json`
 - `modules/*/forsetti_module_manifest.template.json`
 
+Canonical capability-declaration semantics and applied YWE declarations live in:
+- `data/module_capability/module_capability_manifest_schema.yaml`
+- `data/module_capability/manifests/*.yaml`
+
 Concrete Forsetti implementation branches may relocate those manifests into the resource layout their host build expects.
 
 ## Entry Point Mapping

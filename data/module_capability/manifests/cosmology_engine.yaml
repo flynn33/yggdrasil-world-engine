@@ -1,0 +1,68 @@
+manifest_version: "0.2"
+manifest_id: mcm_ywe_core_cosmology_engine
+module_id: com.ywe.core.cosmology-engine
+module_name: YWE Cosmology Engine
+module_classification: core_engine
+authority_class: foundational_truth
+owned_scope:
+  - cosmology
+purpose: >
+  Maintains primordial-state truth, Divine Core origin law, canonical realm
+  ontology, and the baseline constraints every downstream YWE module must obey.
+activation_state: required
+activation_priority: 10
+dependency_order_index: 10
+provides_capabilities:
+  - capability_id: provide_cosmology_constraints
+    scope: cosmology
+    description: Emits the foundational cosmological constraints that govern all YWE meaning.
+    truth_sensitive: true
+  - capability_id: provide_canonical_realm_list
+    scope: realm
+    description: Publishes the fixed nine-realm ontology derived from cosmological truth.
+    truth_sensitive: true
+requires_capabilities: []
+consumes_state: []
+emits_state:
+  - state_id: CosmologyConstraints
+    persistence: persistent_runtime
+    notes: Foundational cosmology and Divine Core constraints for all downstream interpretation.
+  - state_id: CanonicalRealmList
+    persistence: static_canonical
+    notes: Canonical nine-realm ontology for realm-law and pattern systems.
+non_delegable_responsibilities:
+  - responsibility_id: ndr_cosmology_origin_truth
+    description: Owns primordial-state truth, Divine Core origin law, and wolf-origin invariants.
+    rationale: External environments may not redefine cosmological source truth.
+  - responsibility_id: ndr_canonical_realm_ontology
+    description: Owns the canonical nine-realm set and its foundational identity.
+    rationale: Realm existence and ontology remain internal YWE truth.
+delegable_compatible_responsibilities:
+  - responsibility_id: dcr_cosmology_visualization
+    description: External environments may visualize cosmology state for debugging or presentation.
+    delegation_rule: presentation_only
+    guardrails:
+      - rendered_cosmology_views_must_not_modify_cosmology_constraints
+      - presentation_layers_may_not_add_or_remove_realms
+suppression_conditions:
+  - condition_id: sc_impl_not_ready
+    reason: implementation_not_ready
+    description: Canonical declaration is present before a concrete host runtime lands.
+incompatible_with: []
+compatible_external_capabilities:
+  - capability_class: analytics_observability
+    constraints:
+      - analytics_layers_may_observe_but_not_author_cosmology_truth
+invariant_guardrails:
+  - guardrail_id: ig_nine_realms_fixed
+    description: The nine canonical realms remain fixed and may not be created or destroyed at runtime.
+  - guardrail_id: ig_wolves_predate_creation
+    description: White Wolf and Dark Wolf remain primordial informational forces outside ordinary runtime ownership.
+validation_requirements:
+  - validation_id: vr_foundational_truth_is_internal
+    description: Verify no execution bridge or host layer claims cosmology or realm-ontology ownership.
+  - validation_id: vr_realm_list_matches_registry
+    description: Verify emitted realm ontology remains aligned with the canonical realm registry.
+notes:
+  - Companion to core/cosmology_engine/forsetti_module_manifest.template.json.
+  - Main branch remains design-first and template-only for host runtime code.

@@ -20,6 +20,10 @@ YWE is not a system where reality is rewritten casually. Meaningful variation em
 
 ## Authority Order
 
+For repository structure and design-baseline questions, consult
+`docs/master_specification/YWE_MASTER_SPECIFICATION.md` together with
+`YWE_REPOSITORY_BOOTSTRAP_PROMPT.md` before applying the layer precedence below.
+
 When two layers appear to conflict, precedence resolves in this order:
 
 1. **Canonical Cosmology and Fixed World Truth**

@@ -102,6 +102,7 @@ yggdrasil-world-engine/
   data/               -- Canonical schemas and registries
     realm_registry/    -- Nine canonical realms
     realm/             -- Realm-law and transition canonical rules
+    module_capability/ -- Module capability schemas and applied manifests
     faction_topology/  -- Faction topology canonical schema surfaces
     pattern_archetypes/-- Pattern node schemas
     quest_archetypes/  -- Quest seed schemas
@@ -131,10 +132,11 @@ yggdrasil-world-engine/
 
 1. Clone this repository.
 2. Review the master specification: `docs/master_specification/YWE_MASTER_SPECIFICATION.md`
-3. Review the architecture documentation: `docs/architecture/`
-4. Load data schemas and canonical rule artifacts into your host engine.
-5. Implement core engines following interface definitions in `core/*/engine_interface.json`.
-6. Extend with expansion modules following `modules/*/`.
+3. Review the repository bootstrap baseline: `YWE_REPOSITORY_BOOTSTRAP_PROMPT.md`
+4. Review the architecture documentation: `docs/architecture/`
+5. Load data schemas and canonical rule artifacts into your host engine.
+6. Implement core engines following interface definitions in `core/*/engine_interface.json`.
+7. Extend with expansion modules following `modules/*/`.
 
 ---
 
@@ -157,11 +159,25 @@ Forsetti governs the engine through **five design principles**:
 | [guide.md](guide.md) | Concise integration rules |
 | [developer-guide.md](developer-guide.md) | Extended guide for engine implementors |
 | [wiki.md](wiki.md) | Comprehensive reference and playbook |
+| [docs/master_specification/YWE_MASTER_SPECIFICATION.md](docs/master_specification/YWE_MASTER_SPECIFICATION.md) | Foundational engine-first design baseline |
+| [YWE_REPOSITORY_BOOTSTRAP_PROMPT.md](YWE_REPOSITORY_BOOTSTRAP_PROMPT.md) | Repository-structure baseline paired with the master spec |
 | [missing_source_documents.md](missing_source_documents.md) | Canonical artifact inventory and pending placeholder tracking |
 | [docs/architecture/authored_override_and_tooling_notes.md](docs/architecture/authored_override_and_tooling_notes.md) | Canonical authored override and tooling guardrail rules |
 | [docs/architecture/realm_truth_boundary_contract.md](docs/architecture/realm_truth_boundary_contract.md) | Canonical boundary contract for realm truth vs interpretive layers |
 | [agentic-coding-policy.json](agentic-coding-policy.json) | Machine-readable AI agent constraints |
 | [yggdrasil-instructions.json](yggdrasil-instructions.json) | Machine-readable architecture rules |
+
+### Canonical Rule Artifacts
+
+| File | Description |
+|------|-------------|
+| [data/perception/perception_overlay_rules.yaml](data/perception/perception_overlay_rules.yaml) | Canonical perception overlay rules and truth-boundary constraints |
+| [data/realm/realm_mechanics_rules.yaml](data/realm/realm_mechanics_rules.yaml) | Canonical realm-law rules for attunement, bleed, manifestation, and shifts |
+| [data/realm/realm_boundary_profiles.yaml](data/realm/realm_boundary_profiles.yaml) | Canonical boundary profile catalog for lawful threshold behavior |
+| [data/realm/realm_transition_examples.yaml](data/realm/realm_transition_examples.yaml) | Canonical lawful and unlawful transition examples |
+| [data/module_capability/module_capability_manifest_schema.yaml](data/module_capability/module_capability_manifest_schema.yaml) | Canonical module capability and delegation-governance schema |
+| `data/module_capability/manifests/*.yaml` | Applied canonical capability declarations for the current YWE core engines and feature modules |
+| [data/faction_topology/faction_topology_state_schema.yaml](data/faction_topology/faction_topology_state_schema.yaml) | Canonical faction-topology state schema |
 
 ---
 

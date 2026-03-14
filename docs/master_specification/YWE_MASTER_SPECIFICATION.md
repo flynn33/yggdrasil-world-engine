@@ -49,39 +49,37 @@ Before existence:
 Primordial Darkness
 ```
 
-Two primordial entities existed within the darkness:
+Within that darkness, consciousness began to gather.
+
+Dark matter compacted into the first conscious singularity:
 
 ```text
-White Wolf
-Dark Wolf
+Dark Star
 ```
-
-These beings predate:
-
-- time
-- matter
-- realms
-- gods
-- civilizations
-
-They are **cosmic informational forces**.
 
 ## Creation Event
 
-Creation begins with the formation of the **Divine Core**.
+Creation continues through the collapse of the Dark Star into the **Divine Core**.
 
 ```text
-Divine Core Ignition
+Dark Star Formation
 → gravity emerges
-→ information compresses
-→ realm layers form
+→ time emerges
+→ Void forms as containment
+→ Dark Star collapses into the Divine Core
+→ nine realms / planes stabilize
+→ Architects emerge from contained consciousness
+→ first wolves emerge to preserve balance
 ```
 
 ## Realm Formation
 
-Realms are created through **compression of cosmic data** around the Divine Core.
+In YWE canon, **realm** and **plane** are equivalent terms.
+`Realm` remains the preferred repository term.
 
-The universe stabilizes into **nine realms**.
+The universe stabilizes into **nine fixed realms or planes**.
+They are layered states of existence separated by liminal space.
+They do not change structure.
 
 ---
 
@@ -92,6 +90,7 @@ Realms are **fixed cosmological states**.
 Players do not move the realms.
 
 Players **change resonance with realms**.
+Players change access, perception, and consequence, not realm structure.
 
 ## Canonical Realms
 
@@ -180,7 +179,8 @@ Identity is **revealed through play**, not chosen at character creation.
 
 # 5. ALIGNMENT SYSTEM
 
-White Wolf and Dark Wolf represent **informational forces**, not morality.
+White Wolf and Dark Wolf are **paired symbiotic companions of consciousness**, not morality markers.
+The healthiest path is balance, not domination of one over the other.
 
 ## White Wolf
 
@@ -214,6 +214,7 @@ alignment_rules:
 Both alignments may increase simultaneously.
 
 A single quest may award both White Wolf and Dark Wolf attunement depending on how the player completes it.
+Every conscious being carries both wolves.
 
 ---
 
@@ -539,23 +540,23 @@ wolf_interactions:
  - dream_sequence
 ```
 
-If defeated in combat:
+If a wolf loses coherence in manifestation:
 
 ```text
-wolf dematerializes
-cooldown timer
-rematerializes later
+temporary coherence loss
+withdrawal from active manifestation
+later return
 ```
 
 The wolves are never enemies.
 
-They are primordial beings and cosmic regulators.
+They are paired balance-keepers and visible companions where canonically appropriate.
 
 ---
 
 # 16. DIVINE CORE ENDGAME
 
-The Divine Core is the **ultimate destination** and endgame objective.
+The Divine Core is the **ultimate destination**, one of the nine realms or planes, and the endgame objective.
 
 Requirements to approach may include:
 
@@ -565,7 +566,7 @@ Requirements to approach may include:
 - bloodline resonance thresholds
 - mythic identity completion
 
-The Divine Core should behave unlike normal realms:
+The Divine Core should behave unlike most other realms:
 
 - altered space
 - altered time

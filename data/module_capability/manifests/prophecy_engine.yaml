@@ -1,0 +1,93 @@
+manifest_version: "0.2"
+manifest_id: mcm_ywe_module_prophecy_engine
+module_id: com.ywe.module.prophecy-engine
+module_name: YWE Prophecy Engine
+module_classification: feature_module
+authority_class: interpretive_logic
+owned_scope:
+  - prophecy
+purpose: >
+  Resolves future attractor pressure, prophecy activation thresholds, and omen
+  clustering as probability pressure rather than rigid scripted destiny.
+activation_state: available
+activation_priority: 80
+dependency_order_index: 80
+provides_capabilities:
+  - capability_id: provide_prophecy_record
+    scope: prophecy
+    description: Emits prophecy records capturing activation status and interpretive framing.
+    truth_sensitive: true
+  - capability_id: provide_attractor_pressure
+    scope: prophecy
+    description: Emits future-attractor pressure derived from patterns, bloodline relevance, and consequence state.
+    truth_sensitive: true
+requires_capabilities:
+  - capability_id: provide_cosmic_pattern_snapshot
+    scope: ash_pattern
+    dependency_strength: hard_required
+    rationale: Prophecy emergence must derive from ASH recurrence and symbolic pressure.
+  - capability_id: provide_player_narrative_snapshot
+    scope: narrative
+    dependency_strength: hard_required
+    rationale: Activation pressure depends on player-specific narrative state and resonance.
+  - capability_id: provide_myth_record
+    scope: myth
+    dependency_strength: preferred
+    rationale: Existing myth pressure may amplify, deflect, or transmute prophecy salience.
+consumes_state:
+  - state_id: CosmicPatternSnapshot
+    required: true
+    notes: Pattern recurrence and symbolic convergence input.
+  - state_id: PlayerNarrativeSnapshot
+    required: true
+    notes: Player history and resonance context for activation weighting.
+  - state_id: MythRecord
+    required: false
+    notes: Optional myth pressure input for amplification or deflection.
+emits_state:
+  - state_id: ProphecyRecord
+    persistence: persistent_probabilistic_pressure
+    notes: Prophecy record and activation state for downstream interpretation and realization.
+non_delegable_responsibilities:
+  - responsibility_id: ndr_attractor_weight_resolution
+    description: Owns probability-pressure weighting and prophecy activation semantics.
+    rationale: External environments may present omens but may not author attractor truth.
+  - responsibility_id: ndr_fulfillment_deflection_logic
+    description: Owns fulfillment, deflection, and transmutation logic for prophecy outcomes.
+    rationale: Prophecy remains a governed probabilistic system rather than a host-scripted event rail.
+delegable_compatible_responsibilities:
+  - responsibility_id: dcr_omen_presentation
+    description: External environments may present omens, visions, and warning surfaces derived from emitted prophecy state.
+    delegation_rule: presentation_only
+    guardrails:
+      - omen_surfaces_must_not_claim_certainty_where_prophecy_state_is_probabilistic
+suppression_conditions:
+  - condition_id: sc_no_prophecy_context
+    reason: runtime_context_not_required
+    description: Module may remain dormant when no active attractor pressure warrants prophecy emission.
+  - condition_id: sc_impl_not_ready
+    reason: implementation_not_ready
+    description: Canonical declaration exists before concrete runtime implementation.
+incompatible_with: []
+compatible_external_capabilities:
+  - capability_class: overlay_rendering
+    constraints:
+      - omen_visualization_must_follow_emitted_probability_state
+  - capability_class: ui_presentation
+    constraints:
+      - ui_layers_must_not_present_prophecy_as_rigid_script
+  - capability_class: analytics_observability
+    constraints:
+      - analytics_layers_may_observe_activation_pressure_without_editing_it
+invariant_guardrails:
+  - guardrail_id: ig_prophecy_is_probability_pressure
+    description: Prophecy remains attractor bias and may not collapse into rigid preauthored destiny.
+  - guardrail_id: ig_activation_remains_contextual
+    description: Activation thresholds must remain sensitive to runtime state, bloodline, and consequence context.
+validation_requirements:
+  - validation_id: vr_pattern_dependency_required
+    description: Verify prophecy logic remains downstream of ASH pattern recurrence.
+  - validation_id: vr_non_scripted_outcomes
+    description: Verify prophecy outputs do not encode rigid scripted completion paths.
+notes:
+  - Companion to modules/prophecy_engine/forsetti_module_manifest.template.json.

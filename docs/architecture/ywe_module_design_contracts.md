@@ -32,4 +32,6 @@ Status: Forsetti-compatible module baseline
 - modules communicate through framework-mediated channels only
 - direct runtime dependencies remain one-way
 - peer awareness may exist through events, not direct ownership inversion
+- truth-sensitive responsibilities must be declared as non-delegable even when realization support is delegable-compatible
+- suppression conditions may defer activation but may not transfer YWE truth ownership to adapters or external environments
 - truth modules never request framework-reserved `ui_theme_mask`

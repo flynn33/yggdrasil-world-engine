@@ -17,6 +17,7 @@ Use this checklist at every major milestone to verify ASH cosmological complianc
 - [ ] Alignment is accumulation-only (no subtraction)
 - [ ] Both alignments can increase simultaneously
 - [ ] Single quests can award both wolf attunements
+- [ ] Balance is treated as the healthy target state, not domination of one wolf over the other
 
 ## Pattern Generation
 
@@ -28,9 +29,10 @@ Use this checklist at every major milestone to verify ASH cosmological complianc
 ## Cosmology
 
 - [ ] Divine Core is the origin center
-- [ ] White Wolf and Dark Wolf predate all realms
-- [ ] Wolves cannot be destroyed (only dematerialize and rematerialize)
-- [ ] Creation event sequence is preserved
+- [ ] White Wolf and Dark Wolf emerge with Divine Core creation as paired companions of consciousness
+- [ ] Wolves cannot die permanently and may only lose coherence temporarily before returning
+- [ ] Creation event sequence is preserved from Dark Star through Divine Core and the nine fixed realms
+- [ ] Realm and plane terminology remains normalized as one ontology category
 
 ## Perception
 

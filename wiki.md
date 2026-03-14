@@ -18,15 +18,15 @@ For the concise integration rules, see [`guide.md`](guide.md).
 
 ### Primordial State
 
-Before existence, there was Primordial Darkness. Two cosmic informational forces existed within it: the White Wolf (illumination, revelation, knowledge) and the Dark Wolf (hiddenness, fear, concealment). These forces predate time, matter, realms, gods, and civilizations.
+Before existence, there was Primordial Darkness. Consciousness gathered within that darkness until dark matter compacted into the first conscious singularity: the Dark Star.
 
 ### Creation Event
 
-The Divine Core ignites, gravity emerges, information compresses, and realm layers form. Realms are created through compression of cosmic data around the Divine Core.
+The Dark Star creates gravity, increasing gravity creates time, Void forms as containment, and the Dark Star collapses into the first light: the Divine Core. The collapse stabilizes the nine fixed realms or planes and transforms contained consciousness into the first Architects. The first wolves emerge with that creation event to preserve balance against decoherence and Void.
 
 ### The Nine Realms
 
-The universe stabilizes into nine fixed cosmological states. These are not locations -- they are states of being that players resonate with. The nine realms are: Divine Core, Celestial, Causal, Mental, Astral, Etheric, Physical, Shadow, and Void.
+The universe stabilizes into nine fixed cosmological states. In YWE canon, planes and realms are the same ontology category, with `realm` as the preferred repo term. These are not locations -- they are layered states of being separated by liminal space and symbolically understood through ASH cosmology and Yggdrasil. The nine realms are: Divine Core, Celestial, Causal, Mental, Astral, Etheric, Physical, Shadow, and Void.
 
 ---
 
@@ -38,7 +38,7 @@ Players begin as mortals who have forgotten their celestial heritage. Identity e
 
 ## 3. Alignment System
 
-White Wolf and Dark Wolf are informational forces, not morality. Both can increase simultaneously. A single quest may award both alignments. Alignment is accumulation-only -- it can never decrease.
+White Wolf and Dark Wolf are paired symbiotic companions of consciousness, not morality markers. Every conscious being carries both. Both can increase simultaneously, a single quest may award both alignments, and the healthiest path is balance rather than domination of one wolf over the other. Alignment is accumulation-only -- it can never decrease.
 
 ---
 
@@ -74,7 +74,7 @@ Prophecies are probability weights that make related cosmic patterns more likely
 
 ## 9. Wolf Manifestation
 
-White Wolf and Dark Wolf cannot be killed, exist outside the realm system, and appear during cosmic events. They can guide players, assist in combat, trigger prophecies, and appear in dreams. If defeated in combat, they dematerialize and rematerialize later. They are never enemies.
+White Wolf and Dark Wolf cannot die permanently and appear during cosmic events as visible companions of consciousness. They can guide players, assist in combat, trigger prophecies, and appear in dreams. If they lose coherence in manifestation, they may withdraw temporarily and later return. They are never enemies and must never be framed as rival moral sides.
 
 ---
 
@@ -110,6 +110,8 @@ All data schemas are in the `data/` directory:
 - `realm/realm_mechanics_rules.yaml` -- Canonical realm-law rules for boundaries, attunement, manifestation, and transitions
 - `realm/realm_boundary_profiles.yaml` -- Canonical boundary profile catalog for lawful threshold behavior
 - `realm/realm_transition_examples.yaml` -- Canonical lawful/unlawful transition examples for shift/contact behavior
+- `module_capability/module_capability_manifest_schema.yaml` -- Canonical module capability, delegation, and suppression governance schema
+- `module_capability/manifests/*.yaml` -- Applied canonical capability declarations for the current YWE core engines and feature modules
 - `faction_topology/faction_topology_state_schema.yaml` -- Canonical faction-topology state schema (claims, legitimacy, reform, schism, succession)
 - `pattern_archetypes/pattern_schema.json` -- Pattern nodes
 - `quest_archetypes/quest_seed_schema.json` -- Quest seeds
@@ -124,9 +126,9 @@ All data schemas are in the `data/` directory:
 
 Every change must pass:
 1. `scripts/validate_architecture.py` -- directory structure and dependency checks
-2. `scripts/validate_schemas.py` -- JSON schema validation
+2. `scripts/validate_schemas.py` -- JSON schema plus canonical YAML/doc artifact validation
 3. `scripts/validate_ash_compliance.py` -- ASH cosmological compliance
-4. `scripts/run_checks.sh` -- all of the above
+4. `scripts/run_checks.sh` on POSIX shells or `scripts/run_checks.ps1` on Windows -- all of the above
 
 CI workflows block merges on any failure.
 
@@ -139,6 +141,8 @@ CI workflows block merges on any failure.
 | `guide.md` | Concise Forsetti integration rules |
 | `developer-guide.md` | Extended guide for engine implementors |
 | `wiki.md` | This file -- comprehensive reference |
+| `docs/master_specification/YWE_MASTER_SPECIFICATION.md` | Foundational engine-first design and cosmology baseline |
+| `YWE_REPOSITORY_BOOTSTRAP_PROMPT.md` | Repository bootstrap and structure baseline paired with the master spec |
 | `missing_source_documents.md` | Canonical artifact inventory and placeholder-backed tracking |
 | `docs/architecture/authored_override_and_tooling_notes.md` | Authored override authority and tooling safety guardrails |
 | `docs/architecture/realm_truth_boundary_contract.md` | Boundary contract separating realm truth from interpretive layers |

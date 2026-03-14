@@ -5,7 +5,8 @@ This bundle was created to prevent Codex from failing on missing referenced file
 - `ash_pattern_registry_schema.yaml` -> `data/pattern_archetypes/ash_pattern_registry_schema.yaml`
 - `ash_downstream_contract.md` -> `docs/architecture/ash_downstream_contract.md`
 - `ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2_PRIOR_HANDOFF.md` -> `docs/history/ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2_PRIOR_HANDOFF.md`
-- `faction_topology_state_schema.yaml` -> `data/factions/faction_topology_state_schema.yaml`
+- `faction_topology_state_schema.yaml` -> `data/faction_topology/faction_topology_state_schema.yaml`
+- `module_capability_manifest_schema.yaml` -> `data/module_capability/module_capability_manifest_schema.yaml`
 - `ywe_design_glossary.md` -> `docs/glossary/ywe_design_glossary.md`
 - `ash_compliance_checklist.md` -> `docs/ash_compliance/ash_compliance_checklist.md`
 - `artifact_system_rules.yaml` -> `modules/artifact_engine/artifact_system_rules.yaml`

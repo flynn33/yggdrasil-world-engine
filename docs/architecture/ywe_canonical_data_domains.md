@@ -11,9 +11,12 @@ This document defines which folders under `data/` are canonical YWE truth assets
 ## Data Domains
 
 - `data/realm_registry`: canonical realm list and realm ontology anchors
+- `data/realm`: canonical realm-law, boundary-profile, and transition-rule assets
+- `data/module_capability`: canonical module capability and delegation-governance schemas
 - `data/pattern_archetypes`: symbolic grammar and pattern references
 - `data/quest_archetypes`: quest seed and quest structure references
-- `data/factions`: faction topology, claim, succession, and relational collective-state schemas
+- `data/faction_topology`: faction topology, claim, succession, and relational collective-state schemas
+- `data/perception`: canonical perception overlay and truth-boundary rule assets
 - `data/myth_archetypes`: myth record structures
 - `data/bloodline_registry`: bloodline resonance data
 - `data/schemas`: shared payload, persistence, and state contracts
@@ -28,4 +31,5 @@ Changes to canonical data domains must preserve:
 - ASH-first generation
 - fixed cosmology
 - multiplayer-safe perception divergence
+- Forsetti lifecycle governance without external truth transfer
 - the split where Forsetti governs activation and YWE governs truth

@@ -1,0 +1,86 @@
+manifest_version: "0.2"
+manifest_id: mcm_ywe_module_myth_engine
+module_id: com.ywe.module.myth-engine
+module_name: YWE Myth Engine
+module_classification: feature_module
+authority_class: interpretive_logic
+owned_scope:
+  - myth
+purpose: >
+  Interprets persistent consequence into myth seeds, myth records, and
+  faction-aware retellings without replacing source consequence truth.
+activation_state: available
+activation_priority: 70
+dependency_order_index: 70
+provides_capabilities:
+  - capability_id: provide_myth_record
+    scope: myth
+    description: Emits myth records that preserve consequence origin while allowing interpretive retellings.
+    truth_sensitive: true
+  - capability_id: provide_faction_myth_variants
+    scope: myth
+    description: Emits faction-aware myth variants derived from common consequence truth.
+    truth_sensitive: true
+requires_capabilities:
+  - capability_id: provide_player_narrative_snapshot
+    scope: narrative
+    dependency_strength: hard_required
+    rationale: Myth emergence depends on persistent narrative consequence and memory.
+  - capability_id: provide_consequence_routing
+    scope: narrative
+    dependency_strength: hard_required
+    rationale: Myth interpretation must remain downstream of recorded consequence truth.
+consumes_state:
+  - state_id: PlayerNarrativeSnapshot
+    required: true
+    notes: Narrative memory and significance context for myth eligibility.
+  - state_id: WorldstateDeltaPacket
+    required: true
+    notes: Consequence source packet for myth formation and interpretation.
+  - state_id: FactionTopologyState
+    required: false
+    notes: Optional structural context for faction-specific myth retellings.
+emits_state:
+  - state_id: MythRecord
+    persistence: persistent_cultural_memory
+    notes: Persistent myth output that remains traceable to source consequence.
+non_delegable_responsibilities:
+  - responsibility_id: ndr_myth_eligibility_resolution
+    description: Owns the decision of when consequence rises to myth significance.
+    rationale: External environments may present myth but may not author myth eligibility truth.
+  - responsibility_id: ndr_consequence_traceability
+    description: Preserves traceability from myth interpretation back to source consequence.
+    rationale: Myth interprets consequence; it does not replace source truth.
+delegable_compatible_responsibilities:
+  - responsibility_id: dcr_myth_presentation
+    description: External environments may render books, rumors, shrine text, or codex presentation for emitted myth records.
+    delegation_rule: presentation_only
+    guardrails:
+      - presented_myth_variants_must_trace_back_to_emitted_myth_records
+suppression_conditions:
+  - condition_id: sc_no_myth_context
+    reason: runtime_context_not_required
+    description: Module may remain dormant when no consequence meets myth-emergence thresholds.
+  - condition_id: sc_impl_not_ready
+    reason: implementation_not_ready
+    description: Canonical declaration exists before a runtime module is implemented.
+incompatible_with: []
+compatible_external_capabilities:
+  - capability_class: ui_presentation
+    constraints:
+      - myth_presentation_layers_must_not_claim_to_replace_source_consequence
+  - capability_class: analytics_observability
+    constraints:
+      - analytics_layers_may_observe_myth_spread_but_not_author_myth_semantics
+invariant_guardrails:
+  - guardrail_id: ig_myth_interprets_not_replaces
+    description: Myth remains an interpretive layer over consequence and may not overwrite source truth.
+  - guardrail_id: ig_faction_variants_share_origin
+    description: Divergent retellings must remain anchored to the same source consequence record.
+validation_requirements:
+  - validation_id: vr_myth_traceability
+    description: Verify emitted myth records preserve source-event traceability.
+  - validation_id: vr_consequence_upstream_required
+    description: Verify myth logic remains downstream of persistent consequence routing.
+notes:
+  - Companion to modules/myth_engine/forsetti_module_manifest.template.json.

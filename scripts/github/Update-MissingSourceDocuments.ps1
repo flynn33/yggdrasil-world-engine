@@ -5,6 +5,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+$PlaceholderSectionHeader = '## Intentional Placeholder-Backed Artifacts'
 
 function Set-WorkflowOutput {
   param(
@@ -79,7 +80,7 @@ function Set-PlaceholderSection {
   )
 
   $replacementLines = New-Object System.Collections.Generic.List[string]
-  $replacementLines.Add('## Still Placeholder-Backed')
+  $replacementLines.Add($PlaceholderSectionHeader)
   $replacementLines.Add('')
 
   if ($Items.Count -eq 0) {
@@ -95,7 +96,7 @@ function Set-PlaceholderSection {
   $endIndex = $lines.Length
 
   for ($index = 0; $index -lt $lines.Length; $index++) {
-    if ($lines[$index] -eq '## Still Placeholder-Backed') {
+    if ($lines[$index] -eq '## Still Placeholder-Backed' -or $lines[$index] -eq $PlaceholderSectionHeader) {
       $startIndex = $index
       continue
     }

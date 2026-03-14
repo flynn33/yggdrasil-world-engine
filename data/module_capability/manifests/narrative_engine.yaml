@@ -1,0 +1,91 @@
+manifest_version: "0.2"
+manifest_id: mcm_ywe_core_narrative_engine
+module_id: com.ywe.core.narrative-engine
+module_name: YWE Narrative Engine
+module_classification: core_engine
+authority_class: consequence_logic
+owned_scope:
+  - narrative
+purpose: >
+  Transforms active pattern pressure into player-specific interpretation,
+  persistent narrative memory, and consequence routing for downstream modules.
+activation_state: required
+activation_priority: 40
+dependency_order_index: 40
+provides_capabilities:
+  - capability_id: provide_player_narrative_snapshot
+    scope: narrative
+    description: Emits the current player-specific narrative interpretation and memory state.
+    truth_sensitive: true
+  - capability_id: provide_consequence_routing
+    scope: narrative
+    description: Emits persistent consequence updates and downstream consequence handoff signals.
+    truth_sensitive: true
+requires_capabilities:
+  - capability_id: provide_cosmic_pattern_snapshot
+    scope: ash_pattern
+    dependency_strength: hard_required
+    rationale: Narrative meaning must derive from current ASH pattern pressure.
+  - capability_id: provide_realm_mechanics_profile
+    scope: realm
+    dependency_strength: preferred
+    rationale: Realm law and resonance shape how patterns are interpreted for a player.
+consumes_state:
+  - state_id: CosmicPatternSnapshot
+    required: true
+    notes: Symbolic pattern input for player-specific interpretation.
+  - state_id: RealmMechanicsProfile
+    required: false
+    notes: Realm-law context for narrative salience and access interpretation.
+emits_state:
+  - state_id: PlayerNarrativeSnapshot
+    persistence: persistent_runtime
+    notes: Player-specific narrative memory and unresolved-tension state.
+  - state_id: WorldstateDeltaPacket
+    persistence: persistent_consequence
+    notes: Consequence packet for myth, prophecy, quest, artifact, and creature downstream processing.
+non_delegable_responsibilities:
+  - responsibility_id: ndr_player_memory_truth
+    description: Owns persistent player narrative memory and identity-through-play progression.
+    rationale: Host layers may store or display narrative state but may not author it.
+  - responsibility_id: ndr_irreversible_consequence_recording
+    description: Owns irreversible consequence recording and downstream consequence routing.
+    rationale: Persistent consequence is canonical YWE truth.
+delegable_compatible_responsibilities:
+  - responsibility_id: dcr_narrative_presentation
+    description: External environments may present dialogue, log entries, or recap surfaces derived from emitted narrative state.
+    delegation_rule: presentation_only
+    guardrails:
+      - presented_narrative_surfaces_must_not_rewrite_emitted_memory_or_consequence
+  - responsibility_id: dcr_narrative_persistence_bridge
+    description: External save-load bridges may persist emitted snapshots without authoring them.
+    delegation_rule: delegable_with_guardrails
+    guardrails:
+      - save_load_bridges_must_round_trip_emitted_state_without_transforming_truth
+suppression_conditions:
+  - condition_id: sc_impl_not_ready
+    reason: implementation_not_ready
+    description: Canonical declaration may exist before host runtime code is implemented.
+incompatible_with: []
+compatible_external_capabilities:
+  - capability_class: save_load_bridge
+    constraints:
+      - persistence_layers_must_store_emitted_state_without_authoring_new_narrative_truth
+  - capability_class: ui_presentation
+    constraints:
+      - ui_surfaces_must_reflect_emitted_narrative_state_only
+  - capability_class: analytics_observability
+    constraints:
+      - analytics_layers_may_observe_consequence_trends_but_not_edit_consequence_history
+invariant_guardrails:
+  - guardrail_id: ig_identity_revealed_through_play
+    description: Identity emerges through play and may not be hard-authored as static destiny.
+  - guardrail_id: ig_consequence_persists
+    description: Once recorded, meaningful consequence remains persistent and downstream-visible.
+validation_requirements:
+  - validation_id: vr_narrative_depends_on_patterns
+    description: Verify narrative interpretation remains downstream of ASH pattern outputs.
+  - validation_id: vr_consequence_not_soft_reset
+    description: Verify consequence records are not silently reversible through presentation or persistence layers.
+notes:
+  - Companion to core/narrative_engine/forsetti_module_manifest.template.json.

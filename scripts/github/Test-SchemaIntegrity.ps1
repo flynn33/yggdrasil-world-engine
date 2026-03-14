@@ -342,6 +342,86 @@ function Test-FactionTopologySchema {
 
   $requiredPatterns = @(
     @{
+      Pattern = '(?m)^version:\s+"0\.1"\s*$'
+      Message = "$Path must declare version 0.1."
+    },
+    @{
+      Pattern = '(?m)^meta:\s*$'
+      Message = "$Path must define metadata."
+    },
+    @{
+      Pattern = '(?m)^  system:\s+faction_topology_state_schema\s*$'
+      Message = "$Path must keep meta.system set to faction_topology_state_schema."
+    },
+    @{
+      Pattern = '(?m)^core_surfaces:\s*$'
+      Message = "$Path must define core_surfaces."
+    },
+    @{
+      Pattern = '(?m)^  topology_state_record:\s*$'
+      Message = "$Path must define topology_state_record."
+    },
+    @{
+      Pattern = '(?m)^  FactionClaimRecord:\s*$'
+      Message = "$Path must define FactionClaimRecord."
+    },
+    @{
+      Pattern = '(?m)^  FactionLegitimacyRecord:\s*$'
+      Message = "$Path must define FactionLegitimacyRecord."
+    },
+    @{
+      Pattern = '(?m)^  FactionSuccessionRecord:\s*$'
+      Message = "$Path must define FactionSuccessionRecord."
+    },
+    @{
+      Pattern = '(?m)^  FactionSchismRecord:\s*$'
+      Message = "$Path must define FactionSchismRecord."
+    },
+    @{
+      Pattern = '(?m)^  FactionReformRecord:\s*$'
+      Message = "$Path must define FactionReformRecord."
+    },
+    @{
+      Pattern = '(?m)^  FactionPresenceRecord:\s*$'
+      Message = "$Path must define FactionPresenceRecord."
+    },
+    @{
+      Pattern = '(?m)^  FactionCovertRelationRecord:\s*$'
+      Message = "$Path must define FactionCovertRelationRecord."
+    },
+    @{
+      Pattern = '(?m)^invariants:\s*$'
+      Message = "$Path must define invariants."
+    },
+    @{
+      Pattern = '(?m)^validation_rules:\s*$'
+      Message = "$Path must define validation_rules."
+    },
+    @{
+      Pattern = '(?m)^    - faction_topology_is_structural_not_moral_slider\s*$'
+      Message = "$Path must preserve the structural-not-reputation-bar invariant."
+    }
+  )
+
+  foreach ($requiredPattern in $requiredPatterns) {
+    Require-TextMatch -Content $content -Pattern $requiredPattern.Pattern -Message $requiredPattern.Message
+  }
+}
+
+function Test-ModuleCapabilityManifestSchema {
+  param([string]$Path)
+
+  $content = Read-TextFile -Path $Path
+  if (-not $content) {
+    return
+  }
+
+  if ($content -match 'placeholder awaiting finalized content|placeholder_awaiting_finalized_content') {
+    $violations.Add("$Path must not remain placeholder-backed once module capability governance has been stabilized.")
+  }
+
+  $requiredPatterns = @(
+    @{
       Pattern = '(?m)^version:\s+"0\.2"\s*$'
       Message = "$Path must declare version 0.2."
     },
@@ -350,64 +430,170 @@ function Test-FactionTopologySchema {
       Message = "$Path must define metadata."
     },
     @{
-      Pattern = '(?m)^  system:\s+faction_topology_state\s*$'
-      Message = "$Path must keep meta.system set to faction_topology_state."
+      Pattern = '(?m)^  system:\s+module_capability_manifest_schema\s*$'
+      Message = "$Path must keep meta.system set to module_capability_manifest_schema."
+    },
+    @{
+      Pattern = '(?m)^classification_enums:\s*$'
+      Message = "$Path must define classification_enums."
     },
     @{
       Pattern = '(?m)^core_schema:\s*$'
       Message = "$Path must define core_schema."
     },
     @{
-      Pattern = '(?m)^  FactionTopologyState:\s*$'
-      Message = "$Path must define FactionTopologyState."
+      Pattern = '(?m)^  ModuleCapabilityManifest:\s*$'
+      Message = "$Path must define ModuleCapabilityManifest."
     },
     @{
-      Pattern = '(?m)^  FactionNode:\s*$'
-      Message = "$Path must define FactionNode."
+      Pattern = '(?m)^    provides_capabilities:\s*$'
+      Message = "$Path must define provides_capabilities."
     },
     @{
-      Pattern = '(?m)^  FactionEdge:\s*$'
-      Message = "$Path must define FactionEdge."
+      Pattern = '(?m)^    requires_capabilities:\s*$'
+      Message = "$Path must define requires_capabilities."
     },
     @{
-      Pattern = '(?m)^  ClaimRecord:\s*$'
-      Message = "$Path must define ClaimRecord."
+      Pattern = '(?m)^    non_delegable_responsibilities:\s*$'
+      Message = "$Path must define non_delegable_responsibilities."
     },
     @{
-      Pattern = '(?m)^  ReformCurrent:\s*$'
-      Message = "$Path must define ReformCurrent."
+      Pattern = '(?m)^    delegable_compatible_responsibilities:\s*$'
+      Message = "$Path must define delegable_compatible_responsibilities."
     },
     @{
-      Pattern = '(?m)^  SuccessionTrack:\s*$'
-      Message = "$Path must define SuccessionTrack."
+      Pattern = '(?m)^    suppression_conditions:\s*$'
+      Message = "$Path must define suppression_conditions."
     },
     @{
-      Pattern = '(?m)^relation_types:\s*$'
-      Message = "$Path must define supported relation types."
+      Pattern = '(?m)^canonical_validation_rules:\s*$'
+      Message = "$Path must define canonical_validation_rules."
     },
     @{
-      Pattern = '(?m)^topology_update_packet_schema:\s*$'
-      Message = "$Path must define topology_update_packet_schema."
+      Pattern = '(?m)^  truth_boundary_rules:\s*$'
+      Message = "$Path must define truth_boundary_rules."
     },
     @{
-      Pattern = '(?m)^  FactionTopologyUpdatePacket:\s*$'
-      Message = "$Path must define FactionTopologyUpdatePacket."
+      Pattern = '(?m)^  anti_drift_rules:\s*$'
+      Message = "$Path must define anti_drift_rules."
     },
     @{
-      Pattern = '(?m)^validation_rules:\s*$'
-      Message = "$Path must define validation_rules."
+      Pattern = '(?m)^    - forsetti_governs_module_lifecycle\s*$'
+      Message = "$Path must preserve the Forsetti lifecycle doctrine."
     },
     @{
-      Pattern = '(?m)^implementation_notes:\s*$'
-      Message = "$Path must define implementation_notes."
-    },
-    @{
-      Pattern = '(?m)^    canonical_schema:\s+data/factions/faction_topology_state_schema\.yaml\s*$'
-      Message = "$Path must keep implementation_notes.recommended_repo_locations.canonical_schema pointed at data/factions/faction_topology_state_schema.yaml."
+      Pattern = '(?m)^    - external_environments_may_realize_but_may_not_author_ywe_truth\s*$'
+      Message = "$Path must preserve the external realization truth-boundary doctrine."
     }
   )
 
   foreach ($requiredPattern in $requiredPatterns) {
+    Require-TextMatch -Content $content -Pattern $requiredPattern.Pattern -Message $requiredPattern.Message
+  }
+}
+
+function Test-AppliedModuleCapabilityManifest {
+  param(
+    [string]$Path,
+    [string]$ExpectedModuleId,
+    [string]$ExpectedModuleClassification,
+    [string]$TemplatePath
+  )
+
+  $content = Read-TextFile -Path $Path
+  if (-not $content) {
+    return
+  }
+
+  if ($content -match 'placeholder awaiting finalized content|placeholder_awaiting_finalized_content') {
+    $violations.Add("$Path must not remain placeholder-backed once applied module capability manifests are canonical.")
+  }
+
+  $requiredPatterns = @(
+    @{
+      Pattern = '(?m)^manifest_version:\s+"0\.2"\s*$'
+      Message = "$Path must declare manifest_version 0.2."
+    },
+    @{
+      Pattern = "(?m)^module_id:\s+$([regex]::Escape($ExpectedModuleId))\s*$"
+      Message = "$Path must keep module_id aligned with its runtime template."
+    },
+    @{
+      Pattern = "(?m)^module_classification:\s+$ExpectedModuleClassification\s*$"
+      Message = "$Path must keep module_classification aligned with the planned runtime role."
+    },
+    @{
+      Pattern = '(?m)^authority_class:\s+[a-z_]+\s*$'
+      Message = "$Path must define authority_class."
+    },
+    @{
+      Pattern = '(?m)^provides_capabilities:\s*$'
+      Message = "$Path must define provides_capabilities."
+    },
+    @{
+      Pattern = '(?m)^requires_capabilities:\s*(?:\[\])?\s*$'
+      Message = "$Path must define requires_capabilities."
+    },
+    @{
+      Pattern = '(?m)^consumes_state:\s*(?:\[\])?\s*$'
+      Message = "$Path must define consumes_state."
+    },
+    @{
+      Pattern = '(?m)^emits_state:\s*$'
+      Message = "$Path must define emits_state."
+    },
+    @{
+      Pattern = '(?m)^non_delegable_responsibilities:\s*$'
+      Message = "$Path must define non_delegable_responsibilities."
+    },
+    @{
+      Pattern = '(?m)^delegable_compatible_responsibilities:\s*$'
+      Message = "$Path must define delegable_compatible_responsibilities."
+    },
+    @{
+      Pattern = '(?m)^suppression_conditions:\s*$'
+      Message = "$Path must define suppression_conditions."
+    },
+    @{
+      Pattern = '(?m)^compatible_external_capabilities:\s*$'
+      Message = "$Path must define compatible_external_capabilities."
+    },
+    @{
+      Pattern = '(?m)^invariant_guardrails:\s*$'
+      Message = "$Path must define invariant_guardrails."
+    },
+    @{
+      Pattern = '(?m)^validation_requirements:\s*$'
+      Message = "$Path must define validation_requirements."
+    }
+  )
+
+  foreach ($requiredPattern in $requiredPatterns) {
+    Require-TextMatch -Content $content -Pattern $requiredPattern.Pattern -Message $requiredPattern.Message
+  }
+
+  $template = Read-JsonFile -Path $TemplatePath
+  if ($template -and $template.moduleID -ne $ExpectedModuleId) {
+    $violations.Add("$Path must stay aligned with moduleID '$ExpectedModuleId' in $TemplatePath.")
+  }
+}
+
+function Test-LoreCanonDocument {
+  param(
+    [string]$Path,
+    [hashtable[]]$RequiredPatterns
+  )
+
+  $content = Read-TextFile -Path $Path
+  if (-not $content) {
+    return
+  }
+
+  if ($content -match 'placeholder awaiting finalized content|placeholder_awaiting_finalized_content') {
+    $violations.Add("$Path must not remain placeholder-backed once promoted as canonical lore.")
+  }
+
+  foreach ($requiredPattern in $RequiredPatterns) {
     Require-TextMatch -Content $content -Pattern $requiredPattern.Pattern -Message $requiredPattern.Message
   }
 }
@@ -558,7 +744,160 @@ foreach ($placeholderSchema in $placeholderExpansionFiles) {
 }
 
 Test-AshSchemaFile -Path 'data/pattern_archetypes/ash_pattern_registry_schema.yaml'
-Test-FactionTopologySchema -Path 'data/factions/faction_topology_state_schema.yaml'
+Test-FactionTopologySchema -Path 'data/faction_topology/faction_topology_state_schema.yaml'
+Test-ModuleCapabilityManifestSchema -Path 'data/module_capability/module_capability_manifest_schema.yaml'
+
+Test-LoreCanonDocument -Path 'lore/wrw_cosmology/first_darkness_and_divine_core.md' -RequiredPatterns @(
+  @{
+    Pattern = '(?m)^# First Darkness and Divine Core\s*$'
+    Message = 'lore/wrw_cosmology/first_darkness_and_divine_core.md must keep its canonical title.'
+  },
+  @{
+    Pattern = 'Dark Star'
+    Message = 'lore/wrw_cosmology/first_darkness_and_divine_core.md must preserve the Dark Star cosmology step.'
+  },
+  @{
+    Pattern = '\*\*realm\*\* and \*\*plane\*\* are equivalent'
+    Message = 'lore/wrw_cosmology/first_darkness_and_divine_core.md must normalize plane and realm terminology.'
+  },
+  @{
+    Pattern = 'Architects'
+    Message = 'lore/wrw_cosmology/first_darkness_and_divine_core.md must preserve the Architect emergence step.'
+  },
+  @{
+    Pattern = 'Grand Architect'
+    Message = 'lore/wrw_cosmology/first_darkness_and_divine_core.md must preserve Grand Architect staging rules.'
+  }
+)
+
+Test-LoreCanonDocument -Path 'lore/wolf_canon/two_wolves_and_balance.md' -RequiredPatterns @(
+  @{
+    Pattern = 'paired symbiotic companions of consciousness'
+    Message = 'lore/wolf_canon/two_wolves_and_balance.md must preserve wolf symbiosis.'
+  },
+  @{
+    Pattern = 'Every conscious being carries both'
+    Message = 'lore/wolf_canon/two_wolves_and_balance.md must preserve shared wolf presence in consciousness.'
+  },
+  @{
+    Pattern = 'balance'
+    Message = 'lore/wolf_canon/two_wolves_and_balance.md must preserve balance as the target state.'
+  },
+  @{
+    Pattern = 'lose coherence temporarily'
+    Message = 'lore/wolf_canon/two_wolves_and_balance.md must preserve temporary coherence loss.'
+  },
+  @{
+    Pattern = 'fight beside the player'
+    Message = 'lore/wolf_canon/two_wolves_and_balance.md must preserve companion gameplay presence.'
+  }
+)
+
+Test-LoreCanonDocument -Path 'lore/wrw_cosmology/trial_of_return_michael_lucifer_odin.md' -RequiredPatterns @(
+  @{
+    Pattern = 'First War'
+    Message = 'lore/wrw_cosmology/trial_of_return_michael_lucifer_odin.md must preserve First War context.'
+  },
+  @{
+    Pattern = 'Great Trial'
+    Message = 'lore/wrw_cosmology/trial_of_return_michael_lucifer_odin.md must preserve the Great Trial.'
+  },
+  @{
+    Pattern = 'Seventh Gate'
+    Message = 'lore/wrw_cosmology/trial_of_return_michael_lucifer_odin.md must preserve Lucifer''s Seventh Gate role.'
+  },
+  @{
+    Pattern = 'Odin'
+    Message = 'lore/wrw_cosmology/trial_of_return_michael_lucifer_odin.md must preserve Odin''s corrected path.'
+  },
+  @{
+    Pattern = 'Yggdrasil'
+    Message = 'lore/wrw_cosmology/trial_of_return_michael_lucifer_odin.md must preserve Yggdrasil''s role.'
+  }
+)
+
+$masterSpecLoreContent = Read-TextFile -Path 'docs/master_specification/YWE_MASTER_SPECIFICATION.md'
+if ($masterSpecLoreContent) {
+  Require-TextMatch -Content $masterSpecLoreContent -Pattern 'Dark Star' -Message 'docs/master_specification/YWE_MASTER_SPECIFICATION.md must preserve the Dark Star cosmology step.'
+  Require-TextMatch -Content $masterSpecLoreContent -Pattern '\*\*realm\*\* and \*\*plane\*\* are equivalent' -Message 'docs/master_specification/YWE_MASTER_SPECIFICATION.md must normalize realm and plane terminology.'
+  Require-TextMatch -Content $masterSpecLoreContent -Pattern 'balance, not domination' -Message 'docs/master_specification/YWE_MASTER_SPECIFICATION.md must preserve balance as the wolf target state.'
+  Require-TextMatch -Content $masterSpecLoreContent -Pattern 'temporary coherence loss' -Message 'docs/master_specification/YWE_MASTER_SPECIFICATION.md must preserve temporary wolf coherence loss.'
+
+  if ($masterSpecLoreContent -match 'White Wolf and Dark Wolf predate all realms|wolf dematerializes|rematerializes later') {
+    $violations.Add('docs/master_specification/YWE_MASTER_SPECIFICATION.md must not retain stale wolf timing or dematerialize/rematerialize phrasing.')
+  }
+}
+
+$appliedModuleCapabilityManifests = @(
+  @{
+    Path = 'data/module_capability/manifests/cosmology_engine.yaml'
+    ModuleId = 'com.ywe.core.cosmology-engine'
+    ModuleClassification = 'core_engine'
+    TemplatePath = 'core/cosmology_engine/forsetti_module_manifest.template.json'
+  },
+  @{
+    Path = 'data/module_capability/manifests/realm_engine.yaml'
+    ModuleId = 'com.ywe.core.realm-engine'
+    ModuleClassification = 'core_engine'
+    TemplatePath = 'core/realm_engine/forsetti_module_manifest.template.json'
+  },
+  @{
+    Path = 'data/module_capability/manifests/ash_pattern_engine.yaml'
+    ModuleId = 'com.ywe.core.ash-pattern-engine'
+    ModuleClassification = 'core_engine'
+    TemplatePath = 'core/ash_pattern_engine/forsetti_module_manifest.template.json'
+  },
+  @{
+    Path = 'data/module_capability/manifests/narrative_engine.yaml'
+    ModuleId = 'com.ywe.core.narrative-engine'
+    ModuleClassification = 'core_engine'
+    TemplatePath = 'core/narrative_engine/forsetti_module_manifest.template.json'
+  },
+  @{
+    Path = 'data/module_capability/manifests/perception_engine.yaml'
+    ModuleId = 'com.ywe.core.perception-engine'
+    ModuleClassification = 'core_engine'
+    TemplatePath = 'core/perception_engine/forsetti_module_manifest.template.json'
+  },
+  @{
+    Path = 'data/module_capability/manifests/quest_engine.yaml'
+    ModuleId = 'com.ywe.module.quest-engine'
+    ModuleClassification = 'feature_module'
+    TemplatePath = 'modules/quest_engine/forsetti_module_manifest.template.json'
+  },
+  @{
+    Path = 'data/module_capability/manifests/myth_engine.yaml'
+    ModuleId = 'com.ywe.module.myth-engine'
+    ModuleClassification = 'feature_module'
+    TemplatePath = 'modules/myth_engine/forsetti_module_manifest.template.json'
+  },
+  @{
+    Path = 'data/module_capability/manifests/prophecy_engine.yaml'
+    ModuleId = 'com.ywe.module.prophecy-engine'
+    ModuleClassification = 'feature_module'
+    TemplatePath = 'modules/prophecy_engine/forsetti_module_manifest.template.json'
+  },
+  @{
+    Path = 'data/module_capability/manifests/artifact_engine.yaml'
+    ModuleId = 'com.ywe.module.artifact-engine'
+    ModuleClassification = 'feature_module'
+    TemplatePath = 'modules/artifact_engine/forsetti_module_manifest.template.json'
+  },
+  @{
+    Path = 'data/module_capability/manifests/creature_engine.yaml'
+    ModuleId = 'com.ywe.module.creature-engine'
+    ModuleClassification = 'feature_module'
+    TemplatePath = 'modules/creature_engine/forsetti_module_manifest.template.json'
+  }
+)
+
+foreach ($appliedManifest in $appliedModuleCapabilityManifests) {
+  Test-AppliedModuleCapabilityManifest `
+    -Path $appliedManifest.Path `
+    -ExpectedModuleId $appliedManifest.ModuleId `
+    -ExpectedModuleClassification $appliedManifest.ModuleClassification `
+    -TemplatePath $appliedManifest.TemplatePath
+}
 
 $ashRegistryFiles = @(
   @{

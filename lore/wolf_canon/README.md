@@ -1,53 +1,32 @@
 # Wolf Canon
 
-## White Wolf and Dark Wolf
+## Canonical Lore File
 
-White Wolf and Dark Wolf represent **informational forces**, not morality.
+- `two_wolves_and_balance.md` -- Locked canon for symbiosis, balance, consciousness, gameplay presence, and temporary coherence loss
 
-### White Wolf
+## Canon Summary
 
-Represents:
-- Illumination
-- Revelation
-- Knowledge
-- Truth exposure
-- Consuming ignorance
-
-### Dark Wolf
-
-Represents:
-- Hiddenness
-- Fear
-- Unseen forces
-- Concealment
-- Depth
+White Wolf and Dark Wolf are informational forces, but they are not opposites,
+not enemies, and not moral rivals.
+They are paired symbiotic companions of consciousness, and every conscious
+being carries both.
 
 ## Alignment Rules
 
-- Accumulation only -- alignment can only increase, never decrease
-- Both alignments may increase simultaneously
-- A single quest may award both White Wolf and Dark Wolf attunement
-- This is NOT a morality system
+- Alignment is accumulation-only and does not subtract
+- Both wolves may strengthen through the same event
+- The target state is balance, not domination of one wolf over the other
+- Wolf growth is not a morality system
 
-## Wolf Manifestation
+## Manifestation Rules
 
 White Wolf and Dark Wolf:
-- Cannot be killed
-- Exist outside the realm system
-- Appear during cosmic events
-- Can guide the player
-- Can assist in combat
 
-### Wolf Interaction Types
+- may appear in visions or dreams
+- may guide the player
+- may fight beside the player
+- may mark prophecy or threshold pressure
+- cannot die permanently
+- may lose coherence temporarily and later return
 
-- Vision
-- Quest guidance
-- Combat assistance
-- Prophecy trigger
-- Dream sequence
-
-### If Defeated in Combat
-
-The wolf dematerializes, enters a cooldown timer, and rematerializes later.
-
-The wolves are never enemies. They are primordial beings and cosmic regulators.
+The wolves should never be framed as enemies to choose between or permanent kill targets.

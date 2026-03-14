@@ -1,33 +1,39 @@
 # Cosmology Engine
 
-The Cosmology Engine is the foundational core engine of the Yggdrasil World Engine. It defines the origin of reality, the creation event, and the structure of the nine realms.
+The Cosmology Engine is the foundational core engine of the Yggdrasil World Engine. It defines the origin of reality, the corrected creation chain, and the structure of the nine fixed realms or planes.
 
 ## Purpose
 
-Manages the primordial state, Divine Core ignition, and realm formation. All other engines derive their cosmic context from the Cosmology Engine.
+Manages primordial darkness, Dark Star formation, Divine Core emergence, Architect transformation, wolf-balance origin, and realm formation. All other engines derive their cosmic context from the Cosmology Engine.
 
 ## Cosmology Canon
 
 Before existence: **Primordial Darkness**.
 
-Two primordial entities existed within the darkness:
-- **White Wolf** -- illumination, revelation, knowledge, truth exposure
-- **Dark Wolf** -- hiddenness, fear, unseen forces, concealment, depth
-
-These beings predate time, matter, realms, gods, and civilizations. They are cosmic informational forces.
+Consciousness gathered within that darkness until dark matter compacted into the
+first conscious singularity:
+- **Dark Star**
 
 ## Creation Event
 
-Creation begins with the formation of the Divine Core:
+Creation continues through the Dark Star collapse into the Divine Core:
 
 ```
-Divine Core Ignition
+Dark Star Formation
   -> gravity emerges
-  -> information compresses
-  -> realm layers form
+  -> time emerges
+  -> Void forms as containment
+  -> Dark Star collapses into the Divine Core
+  -> nine fixed realms / planes stabilize
+  -> Architects emerge from contained consciousness
+  -> first wolves emerge to preserve balance
 ```
 
-Realms are created through compression of cosmic data around the Divine Core. The universe stabilizes into nine realms.
+In YWE canon, realms and planes are equivalent terms, with `realm` preferred in
+repo docs. The nine realms remain fixed layered states separated by liminal
+space. White Wolf and Dark Wolf emerge with Divine Core creation as paired
+symbiotic companions of consciousness and may lose coherence temporarily, but
+they do not die permanently.
 
 ## Dependencies
 

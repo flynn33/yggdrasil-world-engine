@@ -83,6 +83,13 @@ Archetypes are not merely storytelling labels. They are part of the machine-usab
 - transformations
 - events
 
+## Architect
+One of the consciousnesses transformed out of the Dark Star when it collapsed
+into the Divine Core and the nine realms stabilized.
+
+Architects are not interchangeable with ordinary celestials, gods, or later
+pantheon figures.
+
 ## Artifact Engine
 A specialized manifestation module responsible for symbolic objects, relics, and item-like mythic outputs.
 
@@ -158,6 +165,14 @@ A discrete persistent state change emitted from meaningful resolution.
 
 A delta may affect a player, NPC, site, faction, myth seed, prophecy weight, or perception state.
 
+## Dark Wolf
+One of the two paired symbiotic wolf forces that emerge with Divine Core
+creation.
+
+Dark Wolf is associated with hiddenness, concealment, depth, and the guarding of
+what must pass through darkness without being lost to Void.
+It is not an evil marker.
+
 ## Design Guardrail
 A non-negotiable boundary that protects YWE from architectural or canonical drift.
 
@@ -167,7 +182,7 @@ Guardrails exist because later modules may otherwise produce content that is mec
 The cosmological origin point of reality and the deepest origin-level layer in the YWE canon.
 
 It is not just another travel zone or optional high-tier dungeon space.
-It is origin-level reality.
+It is origin-level reality and one of the nine realms or planes.
 
 ## Dormant
 A state in which a system, prophecy, module, or possibility exists but is not actively manifesting or exerting full current pressure.
@@ -367,6 +382,12 @@ A player-specific or state-specific version of how a location, event, or actor i
 
 Perception variants support hidden truths, realm overlays, cult visibility, omen density, and multiplayer-safe divergence.
 
+## Plane
+In YWE canon, **plane** and **realm** are equivalent ontology terms.
+
+`Realm` is the preferred repository term.
+The term `plane` should not be used to imply a separate category of existence.
+
 ## Persistent Geography
 The stable world topology authored by developers.
 
@@ -499,7 +520,8 @@ A category describing who can perceive, access, or circulate a given myth, proph
 Examples include private, factional, local public, cult internal, or broader public scopes.
 
 ## White Wolf
-One of the two primordial informational forces predating creation.
+One of the two paired symbiotic wolf forces that emerge with Divine Core
+creation.
 
 White Wolf is associated with illumination, revelation, knowledge, and truth exposure.
 It is not a morality marker.
@@ -509,12 +531,14 @@ The cumulative relationship between the player and the informational pressures r
 
 Wolf alignment only accumulates.
 It does not subtract.
-The two tracks are not moral opposites.
+The two tracks are not moral opposites, and the healthiest target state is
+balance rather than domination of one over the other.
 
 ## Wolf Manifestation
 An event, vision, appearance, combat aid, omen, or presence in which one or both wolves become experientially active.
 
-The wolves cannot be killed and should never be reduced to ordinary boss encounters.
+The wolves cannot die permanently, may lose coherence temporarily, and should
+never be reduced to ordinary boss encounters.
 
 ## World Actor
 A player who has progressed far enough that their identity and actions have meaningful influence on larger collective or systemic conditions.
@@ -526,6 +550,14 @@ The current persistent state of the world across relevant domains such as factio
 A structured record of what changed after meaningful resolution.
 
 This is the persistence spine of consequence.
+
+## Yggdrasil
+The symbolic and real connective architecture through which the realms are
+understood and crossed.
+
+Yggdrasil is not decorative metaphor alone.
+It is part of the lawful connective structure of existence, and the wolves tend
+its roots to preserve balance.
 
 ## YWE
 Short for **Yggdrasil World Engine**, the code-agnostic cosmology-driven narrative simulation engine being designed in this project.

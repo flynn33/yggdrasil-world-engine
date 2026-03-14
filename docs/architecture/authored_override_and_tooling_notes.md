@@ -41,6 +41,10 @@ It is never the final source of metaphysical, historical, or structural authorit
 
 ## Authority Order
 
+For repository baseline and engine-first structure, keep
+`docs/master_specification/YWE_MASTER_SPECIFICATION.md` and
+`YWE_REPOSITORY_BOOTSTRAP_PROMPT.md` in view before evaluating override legality.
+
 When multiple sources disagree, the following precedence order applies:
 
 1. Canonical truth and invariant guardrails

@@ -21,6 +21,8 @@ def check_directory_structure(root):
         "modules/creature_engine",
         "data/realm_registry",
         "data/realm",
+        "data/module_capability",
+        "data/module_capability/manifests",
         "data/faction_topology",
         "data/pattern_archetypes",
         "data/quest_archetypes",
@@ -117,6 +119,17 @@ def check_canonical_data_artifacts(root):
         "data/realm/realm_mechanics_rules.yaml",
         "data/realm/realm_boundary_profiles.yaml",
         "data/realm/realm_transition_examples.yaml",
+        "data/module_capability/module_capability_manifest_schema.yaml",
+        "data/module_capability/manifests/cosmology_engine.yaml",
+        "data/module_capability/manifests/realm_engine.yaml",
+        "data/module_capability/manifests/ash_pattern_engine.yaml",
+        "data/module_capability/manifests/narrative_engine.yaml",
+        "data/module_capability/manifests/perception_engine.yaml",
+        "data/module_capability/manifests/quest_engine.yaml",
+        "data/module_capability/manifests/myth_engine.yaml",
+        "data/module_capability/manifests/prophecy_engine.yaml",
+        "data/module_capability/manifests/artifact_engine.yaml",
+        "data/module_capability/manifests/creature_engine.yaml",
         "data/faction_topology/faction_topology_state_schema.yaml",
         "data/perception/perception_overlay_rules.yaml",
     ]
@@ -140,6 +153,20 @@ def check_canonical_docs_artifacts(root):
     return errors
 
 
+def check_canonical_lore_artifacts(root):
+    """Verify required canonical lore artifacts exist."""
+    required_artifacts = [
+        "lore/wrw_cosmology/first_darkness_and_divine_core.md",
+        "lore/wrw_cosmology/trial_of_return_michael_lucifer_odin.md",
+        "lore/wolf_canon/two_wolves_and_balance.md",
+    ]
+    errors = []
+    for artifact_path in required_artifacts:
+        if not os.path.isfile(os.path.join(root, artifact_path)):
+            errors.append(f"Missing canonical lore artifact: {artifact_path}")
+    return errors
+
+
 def check_governance_files(root):
     """Verify governance files exist."""
     required_files = [
@@ -149,6 +176,8 @@ def check_governance_files(root):
         "developer-guide.md",
         "wiki.md",
         "missing_source_documents.md",
+        "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+        "YWE_REPOSITORY_BOOTSTRAP_PROMPT.md",
         "README.md",
         "LICENSE",
         "CONTRIBUTING.md",
@@ -193,6 +222,7 @@ def main():
         ("Data Schemas", check_data_schemas),
         ("Canonical Data Artifacts", check_canonical_data_artifacts),
         ("Canonical Doc Artifacts", check_canonical_docs_artifacts),
+        ("Canonical Lore Artifacts", check_canonical_lore_artifacts),
         ("Governance Files", check_governance_files),
         ("Adapter Files", check_adapter_files),
     ]

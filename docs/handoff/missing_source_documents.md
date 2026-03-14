@@ -2,7 +2,7 @@
 
 Date: 2026-03-13
 Project: Yggdrasil World Engine
-Status: updated after ASH foundation normalization and faction topology stabilization
+Status: updated after ASH foundation normalization, faction topology stabilization, and module capability application
 
 ## Source bundles merged
 
@@ -10,6 +10,33 @@ Status: updated after ASH foundation normalization and faction topology stabiliz
 - C:\Users\james\Downloads\Forsetti-Framework-Windows-main.zip
 - C:\Users\james\Downloads\ASH_FOUNDATION_PACK_FOR_CODEX.zip
 - C:\Users\james\Downloads\faction_topology_state_schema.yaml
+
+## Inventory Status Summary
+
+- Resolved canonical artifacts in active repo inventory: `12`
+- Blocking missing artifacts in active repo inventory: `0`
+- Intentional placeholder-backed artifacts still tracked: `14`
+- Master spec authority artifact: present at `docs/master_specification/YWE_MASTER_SPECIFICATION.md`
+- Bootstrap prompt authority artifact: present at `YWE_REPOSITORY_BOOTSTRAP_PROMPT.md`
+
+## Resolved Canonical Artifacts (Active Repo Inventory)
+
+- data/perception/perception_overlay_rules.yaml
+- data/realm/realm_mechanics_rules.yaml
+- data/module_capability/module_capability_manifest_schema.yaml
+- data/module_capability/manifests/*.yaml
+- data/faction_topology/faction_topology_state_schema.yaml
+- data/realm/realm_boundary_profiles.yaml
+- data/realm/realm_transition_examples.yaml
+- lore/wrw_cosmology/first_darkness_and_divine_core.md
+- lore/wrw_cosmology/trial_of_return_michael_lucifer_odin.md
+- lore/wolf_canon/two_wolves_and_balance.md
+- docs/architecture/authored_override_and_tooling_notes.md
+- docs/architecture/realm_truth_boundary_contract.md
+
+## Blocking Missing Artifacts (Active Repo Inventory)
+
+- none currently tracked
 
 ## Finalized source documents now present
 
@@ -53,10 +80,29 @@ Status: updated after ASH foundation normalization and faction topology stabiliz
 
 ## Locally Authored During Faction Topology Stabilization Pass
 
-- data/factions/README.md
-- data/factions/schema_notes.md
+- data/faction_topology/README.md
+- legacy data/factions duplicate surfaces were retired during later canonical reconciliation
 
-## Still Placeholder-Backed
+## Locally Authored During Module Capability Application Pass
+
+- data/module_capability/manifests/cosmology_engine.yaml
+- data/module_capability/manifests/realm_engine.yaml
+- data/module_capability/manifests/ash_pattern_engine.yaml
+- data/module_capability/manifests/narrative_engine.yaml
+- data/module_capability/manifests/perception_engine.yaml
+- data/module_capability/manifests/quest_engine.yaml
+- data/module_capability/manifests/myth_engine.yaml
+- data/module_capability/manifests/prophecy_engine.yaml
+- data/module_capability/manifests/artifact_engine.yaml
+- data/module_capability/manifests/creature_engine.yaml
+
+## Locally Authored During Lore Canon Correction Pass
+
+- lore/wrw_cosmology/first_darkness_and_divine_core.md
+- lore/wrw_cosmology/trial_of_return_michael_lucifer_odin.md
+- lore/wolf_canon/two_wolves_and_balance.md
+
+## Intentional Placeholder-Backed Artifacts
 
 - player_origin_arc_rules.yaml
 - PLAYER_ORIGIN_ARC_NOTES.md

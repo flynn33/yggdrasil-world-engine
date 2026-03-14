@@ -43,7 +43,7 @@ The source-completeness workflow refreshes `docs/handoff/missing_source_document
 
 It:
 - preserves the manually authored context in the report
-- regenerates the `Still Placeholder-Backed` section from repository truth
+- regenerates the `Intentional Placeholder-Backed Artifacts` section from repository truth
 - auto-commits the refreshed inventory on `main` when the placeholder set changes
 
 ## Schema Integrity Agent
@@ -56,7 +56,10 @@ It checks:
 - placeholder expansion schema structure
 - cross-file dependency references for shared schema expansions
 - the ASH registry schema exists and the canonical family registries keep required fields, family values, ID prefixes, and allowed status values
-- the canonical faction-topology schema exists in `data/factions/` and preserves the required relational state surfaces
+- the canonical faction-topology schema exists in `data/faction_topology/` and preserves the required relational state surfaces
+- the canonical module capability manifest schema exists in `data/module_capability/` and preserves delegation and truth-boundary rules
+- the applied module capability manifests in `data/module_capability/manifests/` exist for the current core engines and feature modules and stay aligned with their Forsetti template module IDs
+- the canonical lore files under `lore/wrw_cosmology/` and `lore/wolf_canon/` exist and preserve the corrected Dark Star, wolf-balance, and Trial of Return canon
 
 ## Module Contract Coverage Agent
 
@@ -85,6 +88,8 @@ The architecture-drift workflow guards against design changes landing without th
 It requires related documentation updates when:
 - runtime interface contracts or manifest templates change
 - canonical schemas or realm registry files change
+- applied module capability manifests change
+- lore canon documents change
 - faction topology schema files change
 - core and feature rule files change
 - adapter capability profiles change

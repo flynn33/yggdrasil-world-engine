@@ -11,12 +11,32 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 PASS=0
 FAIL=0
+PYTHON_CMD=()
+
+resolve_python() {
+    if command -v python3 >/dev/null 2>&1; then
+        PYTHON_CMD=(python3)
+        return 0
+    fi
+
+    if command -v python >/dev/null 2>&1; then
+        PYTHON_CMD=(python)
+        return 0
+    fi
+
+    if command -v py >/dev/null 2>&1; then
+        PYTHON_CMD=(py -3)
+        return 0
+    fi
+
+    return 1
+}
 
 run_check() {
     local name="$1"
-    local cmd="$2"
+    shift
     echo "--- $name ---"
-    if eval "$cmd"; then
+    if "$@"; then
         echo "PASS: $name"
         PASS=$((PASS + 1))
     else
@@ -26,9 +46,14 @@ run_check() {
     echo ""
 }
 
-run_check "Architecture Validation" "python3 '$SCRIPT_DIR/validate_architecture.py' '$ROOT_DIR'"
-run_check "Schema Validation" "python3 '$SCRIPT_DIR/validate_schemas.py' '$ROOT_DIR'"
-run_check "ASH Compliance Validation" "python3 '$SCRIPT_DIR/validate_ash_compliance.py' '$ROOT_DIR'"
+if ! resolve_python; then
+    echo "No supported Python launcher found (tried python3, python, py -3)."
+    exit 1
+fi
+
+run_check "Architecture Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/validate_architecture.py" "$ROOT_DIR"
+run_check "Schema Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/validate_schemas.py" "$ROOT_DIR"
+run_check "ASH Compliance Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/validate_ash_compliance.py" "$ROOT_DIR"
 
 echo "=========================================="
 echo "Results: $PASS passed, $FAIL failed"

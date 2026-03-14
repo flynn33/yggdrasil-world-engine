@@ -1,0 +1,97 @@
+manifest_version: "0.2"
+manifest_id: mcm_ywe_module_artifact_engine
+module_id: com.ywe.module.artifact-engine
+module_name: YWE Artifact Engine
+module_classification: feature_module
+authority_class: manifestation_logic
+owned_scope:
+  - artifact
+purpose: >
+  Manifests artifacts from upstream pattern, narrative, and realm context while
+  preserving symbolic meaning and downstream consequence bindings.
+activation_state: available
+activation_priority: 90
+dependency_order_index: 90
+provides_capabilities:
+  - capability_id: provide_artifact_manifest
+    scope: artifact
+    description: Emits artifact manifestations and symbolic property bundles for downstream realization.
+    truth_sensitive: true
+  - capability_id: provide_artifact_consequence_hooks
+    scope: artifact
+    description: Emits artifact consequence hooks tied to emitted artifact meaning.
+    truth_sensitive: true
+requires_capabilities:
+  - capability_id: provide_cosmic_pattern_snapshot
+    scope: ash_pattern
+    dependency_strength: hard_required
+    rationale: Artifact meaning must derive from ASH pattern state.
+  - capability_id: provide_player_narrative_snapshot
+    scope: narrative
+    dependency_strength: hard_required
+    rationale: Artifact manifestation must reflect player history and consequence context.
+  - capability_id: provide_realm_mechanics_profile
+    scope: realm
+    dependency_strength: preferred
+    rationale: Realm-law context shapes lawful artifact manifestation and boundary behavior.
+consumes_state:
+  - state_id: CosmicPatternSnapshot
+    required: true
+    notes: Symbolic pressure input for artifact meaning.
+  - state_id: PlayerNarrativeSnapshot
+    required: true
+    notes: Player and consequence context for artifact salience.
+  - state_id: RealmMechanicsProfile
+    required: false
+    notes: Optional realm-law context for lawful manifestation and boundary constraints.
+emits_state:
+  - state_id: ArtifactManifest
+    persistence: persistent_until_consumed
+    notes: Artifact manifestation package for downstream realization and persistence.
+  - state_id: WorldstateDeltaPacket
+    persistence: post_use
+    notes: Consequence packet emitted when artifact interaction produces persistent change.
+non_delegable_responsibilities:
+  - responsibility_id: ndr_artifact_symbolic_binding
+    description: Owns the binding between pattern meaning, narrative consequence, and artifact properties.
+    rationale: External environments may realize artifacts but may not author their YWE meaning.
+  - responsibility_id: ndr_artifact_consequence_semantics
+    description: Owns the consequence semantics attached to artifact use, discovery, or activation.
+    rationale: Persistent consequence remains internal YWE truth.
+delegable_compatible_responsibilities:
+  - responsibility_id: dcr_artifact_realization
+    description: Host environments may realize meshes, props, FX, and interaction affordances for emitted artifacts.
+    delegation_rule: delegable_with_guardrails
+    guardrails:
+      - realized_artifacts_must_follow_emitted_manifest_semantics
+      - host_layers_must_not_add_new_meaningful_powers_outside_emitted_state
+suppression_conditions:
+  - condition_id: sc_no_artifact_context
+    reason: runtime_context_not_required
+    description: Module may remain dormant when current runtime scope does not require artifact manifestation.
+  - condition_id: sc_impl_not_ready
+    reason: implementation_not_ready
+    description: Canonical declaration exists before runtime implementation is available.
+incompatible_with: []
+compatible_external_capabilities:
+  - capability_class: environment_instantiation
+    constraints:
+      - environment_instantiation_must_follow_emitted_artifact_manifest
+  - capability_class: scene_realization
+    constraints:
+      - scene_layers_may_realize_artifact_presence_but_not_author_properties
+  - capability_class: rendering
+    constraints:
+      - rendering_layers_are_presentation_only
+invariant_guardrails:
+  - guardrail_id: ig_artifacts_are_pattern_derived
+    description: Artifact manifestation remains downstream of ASH pattern and consequence inputs.
+  - guardrail_id: ig_no_filler_loot_generation
+    description: Meaningful artifact output may not degrade into detached filler generation.
+validation_requirements:
+  - validation_id: vr_pattern_and_narrative_inputs_present
+    description: Verify artifact activation requires ASH and narrative inputs.
+  - validation_id: vr_artifact_rules_alignment
+    description: Verify artifact manifestation remains aligned with canonical artifact system rules.
+notes:
+  - Companion to modules/artifact_engine/forsetti_module_manifest.template.json.

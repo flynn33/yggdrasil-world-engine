@@ -34,26 +34,68 @@ def check_cosmology_schema(root):
 
     errors = []
 
-    # Check primordial entities
     primordial = data.get("primordial_state", {})
-    entities = primordial.get("entities", [])
-    entity_names = [e.get("name") for e in entities]
-    if "white_wolf" not in entity_names:
-        errors.append("ASH violation: White Wolf missing from primordial state")
-    if "dark_wolf" not in entity_names:
-        errors.append("ASH violation: Dark Wolf missing from primordial state")
+    if primordial.get("darkness") is not True:
+        errors.append("ASH violation: primordial darkness must remain true")
+    if primordial.get("consciousness_gathering") is not True:
+        errors.append(
+            "ASH violation: cosmology schema must record consciousness gathering in primordial darkness"
+        )
 
-    # Check wolves are indestructible
-    for entity in entities:
-        if entity.get("name") in ("white_wolf", "dark_wolf"):
-            if entity.get("destructible") is not False:
-                errors.append(
-                    f"ASH violation: {entity['name']} must be indestructible"
-                )
+    first_singularity = primordial.get("first_singularity", {})
+    if first_singularity.get("name") != "dark_star":
+        errors.append("ASH violation: first singularity must remain the Dark Star")
+
+    creation_event = data.get("creation_event", {})
+    if creation_event.get("trigger") != "dark_star_collapse":
+        errors.append(
+            "ASH violation: creation event trigger must remain dark_star_collapse"
+        )
+
+    required_sequence = [
+        "gravity_emerges",
+        "time_emerges",
+        "void_forms_as_containment",
+        "dark_star_collapses_into_divine_core",
+        "nine_realms_stabilize",
+        "architects_emerge_from_contained_consciousness",
+        "first_wolves_emerge_from_light_dark_consciousness_matter_energy",
+    ]
+    sequence = creation_event.get("sequence", [])
+    for step in required_sequence:
+        if step not in sequence:
+            errors.append(
+                f"ASH violation: cosmology creation sequence missing {step}"
+            )
 
     # Check realm count in cosmology
     if data.get("realm_count") != 9:
         errors.append("ASH violation: cosmology realm_count must be 9")
+
+    realm_terms = data.get("realm_term_equivalence", {})
+    if realm_terms.get("plane_equals_realm") is not True:
+        errors.append("ASH violation: planes and realms must remain equivalent")
+
+    wolf_canon = data.get("wolf_canon", {})
+    if (
+        wolf_canon.get("relationship")
+        != "paired_symbiotic_companions_of_consciousness"
+    ):
+        errors.append(
+            "ASH violation: wolves must remain paired symbiotic companions of consciousness"
+        )
+    if wolf_canon.get("all_consciousness_carries_both") is not True:
+        errors.append(
+            "ASH violation: cosmology schema must preserve that all consciousness carries both wolves"
+        )
+    if wolf_canon.get("ideal_state") != "balance":
+        errors.append("ASH violation: wolf ideal state must remain balance")
+    if wolf_canon.get("permanent_death") is not False:
+        errors.append("ASH violation: wolves must remain permanently indestructible")
+    if wolf_canon.get("temporary_loss_state") != "coherence_loss":
+        errors.append(
+            "ASH violation: wolves must use coherence_loss as their temporary loss state"
+        )
 
     return errors
 

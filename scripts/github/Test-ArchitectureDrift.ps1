@@ -84,15 +84,20 @@ $rules = @(
     Watched = @(
       'data/schemas/*.json',
       'data/*/*schema*.json',
-      'data/factions/*.yaml',
+      'data/faction_topology/*.yaml',
+      'data/module_capability/*.yaml',
+      'data/module_capability/manifests/*.yaml',
       'data/realm_registry/realms.json'
     )
     RequiredDocs = @(
       'docs/architecture/ywe_canonical_data_domains.md',
       'docs/master_specification/YWE_MASTER_SPECIFICATION.md',
+      'YWE_REPOSITORY_BOOTSTRAP_PROMPT.md',
       'docs/glossary/ywe_design_glossary.md',
-      'data/factions/README.md',
-      'data/factions/schema_notes.md'
+      'data/faction_topology/README.md',
+      'data/module_capability/README.md',
+      'docs/architecture/forsetti_module_manifest_conventions.md',
+      'missing_source_documents.md'
     )
   },
   [pscustomobject]@{
@@ -113,6 +118,20 @@ $rules = @(
       'docs/architecture/COMPATIBILITY_MATRIX_NOTES.md',
       'data/pattern_archetypes/README.md',
       'data/quest_archetypes/README.md'
+    )
+  },
+  [pscustomobject]@{
+    Name = 'Lore canon drift'
+    Watched = @(
+      'lore/wrw_cosmology/*.md',
+      'lore/wolf_canon/*.md',
+      'lore/bloodline_history/*.md'
+    )
+    RequiredDocs = @(
+      'docs/master_specification/YWE_MASTER_SPECIFICATION.md',
+      'docs/glossary/ywe_design_glossary.md',
+      'wiki.md',
+      'missing_source_documents.md'
     )
   },
   [pscustomobject]@{

@@ -47,11 +47,12 @@ All procedural generation must derive from the ASH Pattern Engine. Do not create
 
 ## 4. Data Loading
 
-All data schemas are defined as JSON in the `data/` directory. Your engine implementation should:
+The `data/` directory contains JSON schemas plus canonical YAML rule artifacts. Your engine implementation should:
 
 1. Parse these JSON schemas into engine-native data structures.
-2. Validate data against schemas at load time.
-3. Use the data to drive engine behavior -- do not hardcode values.
+2. Load canonical YAML rule artifacts from `data/perception/`, `data/realm/`, `data/faction_topology/`, and `data/module_capability/`, including `data/module_capability/manifests/*.yaml`, as authoritative design inputs.
+3. Validate data against schemas and rule contracts at load time.
+4. Use the data to drive engine behavior -- do not hardcode values.
 
 ## 5. Adapter Implementation
 
@@ -75,7 +76,8 @@ Every engine implementation should include tests for:
 
 Before submitting any pull request:
 
-1. Run `scripts/run_checks.sh` from the repository root.
+1. Run `bash scripts/run_checks.sh` on POSIX shells or `pwsh -File scripts/run_checks.ps1` on Windows from the repository root.
 2. Verify all JSON schemas are valid.
-3. Verify no ASH compliance violations.
-4. Verify no layer boundary violations.
+3. Verify canonical YAML/doc artifact checks pass.
+4. Verify no ASH compliance violations.
+5. Verify no layer boundary violations.

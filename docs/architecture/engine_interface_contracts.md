@@ -12,6 +12,8 @@ This document defines the shared runtime contract every future YWE module must s
 
 Every YWE runtime module must be representable as a Forsetti module with:
 - a manifest using schema version `1.0`
+- a capability declaration compatible with `data/module_capability/module_capability_manifest_schema.yaml`
+- an applied canonical capability declaration in `data/module_capability/manifests/*.yaml`
 - a module descriptor
 - a start and stop lifecycle
 - public service or event contracts exposed through framework-approved channels only
@@ -55,3 +57,10 @@ This repository stores manifest templates beside the runtime design folders:
 - `modules/*/forsetti_module_manifest.template.json`
 
 Those files are planning artifacts for later Forsetti implementation work; they are not claims that the Windows host code already exists here.
+
+Their capability semantics should remain consistent with
+`data/module_capability/module_capability_manifest_schema.yaml` and the applied
+canonical declarations in `data/module_capability/manifests/*.yaml`, which
+define how modules describe authority class, dependency order,
+delegable-compatible responsibilities, and suppression conditions without
+transferring YWE truth to external execution layers.

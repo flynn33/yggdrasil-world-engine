@@ -1,0 +1,87 @@
+manifest_version: "0.2"
+manifest_id: mcm_ywe_core_perception_engine
+module_id: com.ywe.core.perception-engine
+module_name: YWE Perception Engine
+module_classification: core_engine
+authority_class: interpretive_logic
+owned_scope:
+  - perception
+purpose: >
+  Resolves player-specific overlays, entity revelation, and interpretive
+  divergence without rewriting shared world truth or fixed realm law.
+activation_state: required
+activation_priority: 50
+dependency_order_index: 50
+provides_capabilities:
+  - capability_id: provide_perception_overlay_record
+    scope: perception
+    description: Emits multiplayer-safe player-specific perception overlays for the current world context.
+    truth_sensitive: true
+requires_capabilities:
+  - capability_id: provide_realm_mechanics_profile
+    scope: realm
+    dependency_strength: hard_required
+    rationale: Perception overlays must remain consistent with realm law and lawful access.
+  - capability_id: provide_cosmic_pattern_snapshot
+    scope: ash_pattern
+    dependency_strength: hard_required
+    rationale: Symbolic pressure shapes what is revealed or concealed.
+  - capability_id: provide_player_narrative_snapshot
+    scope: narrative
+    dependency_strength: hard_required
+    rationale: Perception divergence depends on memory, alignment, and narrative state.
+consumes_state:
+  - state_id: RealmMechanicsProfile
+    required: true
+    notes: Realm-law context for lawful perception divergence.
+  - state_id: CosmicPatternSnapshot
+    required: true
+    notes: Active pattern pressure for perception weighting and reveal rules.
+  - state_id: PlayerNarrativeSnapshot
+    required: true
+    notes: Player memory and resonance context for overlay generation.
+emits_state:
+  - state_id: PerceptionOverlayRecord
+    persistence: session_runtime
+    notes: Player-specific overlay record that must not overwrite shared truth.
+non_delegable_responsibilities:
+  - responsibility_id: ndr_truth_safe_perception_resolution
+    description: Owns the split between shared world truth and player-specific interpretive overlays.
+    rationale: External renderers may realize overlays but may not redefine world truth.
+  - responsibility_id: ndr_multiplayer_overlay_isolation
+    description: Preserves player-specific divergence without corrupting multiplayer safety.
+    rationale: Shared-state safety remains internal YWE responsibility.
+delegable_compatible_responsibilities:
+  - responsibility_id: dcr_overlay_rendering
+    description: External environments may render perception overlays, reveal cues, and player-specific variants.
+    delegation_rule: delegable_with_guardrails
+    guardrails:
+      - rendered_overlays_must_not_modify_shared_world_truth
+      - host_layers_must_keep_player_specific_variants_isolated_per_viewer
+suppression_conditions:
+  - condition_id: sc_impl_not_ready
+    reason: implementation_not_ready
+    description: Canonical declaration exists even if runtime realization remains pending.
+  - condition_id: sc_no_overlay_context
+    reason: runtime_context_not_required
+    description: Overlay realization may remain dormant when no player-specific divergence is active.
+incompatible_with: []
+compatible_external_capabilities:
+  - capability_class: overlay_rendering
+    constraints:
+      - overlays_are_downstream_presentation_only
+  - capability_class: ui_presentation
+    constraints:
+      - ui_surfaces_must_not_claim_to_be_shared_world_truth
+invariant_guardrails:
+  - guardrail_id: ig_perception_is_not_world_rewrite
+    description: Perception layers must never rewrite canonical shared world truth.
+  - guardrail_id: ig_multiplayer_divergence_is_safe
+    description: Different players may perceive the same location differently without breaking shared-state truth.
+validation_requirements:
+  - validation_id: vr_perception_boundary_rules
+    description: Verify perception outputs remain aligned with the canonical perception overlay rules artifact.
+  - validation_id: vr_not_sole_truth_source
+    description: Verify perception is never treated as the sole source of world truth.
+notes:
+  - Companion to core/perception_engine/forsetti_module_manifest.template.json.

@@ -27,6 +27,7 @@ Bloodlines affect:
 - Bloodlines influence **cosmic eligibility**
 - Bloodline resonance is one factor in how players perceive the world
 - Multiple bloodlines may exist, each with different mythic origins
+- Odin-lineage bloodlines point to Odin's unique mortal-origin ritual path and do not imply Odin created all pantheons
 
 ## Bloodline Schema
 

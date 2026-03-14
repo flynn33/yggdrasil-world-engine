@@ -1,0 +1,73 @@
+manifest_version: "0.2"
+manifest_id: mcm_ywe_core_ash_pattern_engine
+module_id: com.ywe.core.ash-pattern-engine
+module_name: YWE ASH Pattern Engine
+module_classification: core_engine
+authority_class: structural_runtime_truth
+owned_scope:
+  - ash_pattern
+purpose: >
+  Interprets current cosmological and runtime state into active symbolic pattern
+  pressure, eligibility, and conflict signals for downstream generation.
+activation_state: required
+activation_priority: 30
+dependency_order_index: 30
+provides_capabilities:
+  - capability_id: provide_cosmic_pattern_snapshot
+    scope: ash_pattern
+    description: Emits ranked ASH-derived pattern pressure and eligibility state.
+    truth_sensitive: true
+requires_capabilities:
+  - capability_id: provide_cosmology_constraints
+    scope: cosmology
+    dependency_strength: hard_required
+    rationale: Pattern interpretation must remain subordinate to cosmological truth.
+  - capability_id: provide_realm_mechanics_profile
+    scope: realm
+    dependency_strength: hard_required
+    rationale: Realm bias and lawful access shape pattern activation and salience.
+consumes_state:
+  - state_id: CosmologyConstraints
+    required: true
+    notes: Foundational cosmology law for symbolic interpretation.
+  - state_id: CanonicalRealmList
+    required: true
+    notes: Required to preserve canonical realm bias in pattern detection.
+  - state_id: RealmMechanicsProfile
+    required: true
+    notes: Realm-law context for activation eligibility and manifestation pressure.
+emits_state:
+  - state_id: CosmicPatternSnapshot
+    persistence: transient_runtime
+    notes: Primary symbolic pressure output consumed by narrative and manifestation systems.
+non_delegable_responsibilities:
+  - responsibility_id: ndr_symbolic_pattern_interpretation
+    description: Owns ASH-derived symbolic interpretation and pattern selection logic.
+    rationale: External environments may not author meaningful pattern law.
+delegable_compatible_responsibilities:
+  - responsibility_id: dcr_pattern_debug_visualization
+    description: Pattern weights and conflict signals may be visualized externally for debugging or presentation.
+    delegation_rule: presentation_only
+    guardrails:
+      - visualization_layers_must_not_modify_pattern_strength_or_selection
+suppression_conditions:
+  - condition_id: sc_impl_not_ready
+    reason: implementation_not_ready
+    description: Canonical declaration exists before a concrete runtime module is implemented.
+incompatible_with: []
+compatible_external_capabilities:
+  - capability_class: analytics_observability
+    constraints:
+      - analytics_layers_may_observe_pattern_output_but_not_author_pattern_truth
+invariant_guardrails:
+  - guardrail_id: ig_all_meaningful_generation_is_ash_derived
+    description: Every meaningful downstream generation path remains subordinate to ASH pattern state.
+  - guardrail_id: ig_no_independent_random_meaning
+    description: No host or feature module may invent meaningful content independently of emitted pattern truth.
+validation_requirements:
+  - validation_id: vr_pattern_first_generation
+    description: Verify downstream quest, artifact, creature, myth, and prophecy flows continue to read ASH outputs.
+  - validation_id: vr_truth_boundary_preserved
+    description: Verify no execution bridge claims symbolic pattern ownership.
+notes:
+  - Companion to core/ash_pattern_engine/forsetti_module_manifest.template.json.

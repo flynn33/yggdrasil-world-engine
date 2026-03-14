@@ -63,8 +63,9 @@ All systems must comply with the ASH cosmological model:
 ## 7. Enforcement
 
 - `scripts/validate_architecture.py` checks structural compliance
-- `scripts/validate_schemas.py` validates JSON schemas
-- `scripts/run_checks.sh` runs the full validation suite
+- `scripts/validate_schemas.py` validates JSON schemas plus canonical YAML and doc artifacts
+- `scripts/run_checks.sh` runs the full validation suite on POSIX shells
+- `scripts/run_checks.ps1` runs the full validation suite on Windows PowerShell
 - CI guardrails block merges on any violation
 
 ## 8. Developer Workflow
@@ -72,7 +73,7 @@ All systems must comply with the ASH cosmological model:
 1. Fork or clone the repository.
 2. Branch from the appropriate engine branch (or `main` for spec changes).
 3. Implement against the interfaces defined in `core/*/engine_interface.json`.
-4. Run `scripts/run_checks.sh` and confirm all checks pass.
+4. Run `bash scripts/run_checks.sh` on POSIX shells or `pwsh -File scripts/run_checks.ps1` on Windows and confirm all checks pass.
 5. Open a pull request against the appropriate branch.
 
 ## 9. Non-Compliance

@@ -1,0 +1,85 @@
+manifest_version: "0.2"
+manifest_id: mcm_ywe_core_realm_engine
+module_id: com.ywe.core.realm-engine
+module_name: YWE Realm Engine
+module_classification: core_engine
+authority_class: structural_runtime_truth
+owned_scope:
+  - realm
+purpose: >
+  Resolves lawful realm access, attunement, shift eligibility, and
+  multiplayer-safe realm-state interpretation while preserving fixed cosmology.
+activation_state: required
+activation_priority: 20
+dependency_order_index: 20
+provides_capabilities:
+  - capability_id: provide_realm_mechanics_profile
+    scope: realm
+    description: Emits the active realm-law profile governing attunement, access, and shift legality.
+    truth_sensitive: true
+  - capability_id: provide_realm_shift_resolution
+    scope: realm
+    description: Resolves whether a requested shift or threshold crossing is lawful in context.
+    truth_sensitive: true
+requires_capabilities:
+  - capability_id: provide_cosmology_constraints
+    scope: cosmology
+    dependency_strength: hard_required
+    rationale: Realm legality is subordinate to cosmological source truth.
+  - capability_id: provide_canonical_realm_list
+    scope: realm
+    dependency_strength: hard_required
+    rationale: Realm operations must reference the fixed canonical realm set.
+consumes_state:
+  - state_id: CosmologyConstraints
+    required: true
+    notes: Foundational cosmology law for realm access and boundary interpretation.
+  - state_id: CanonicalRealmList
+    required: true
+    notes: Canonical realm ontology required for shift legality and attunement.
+emits_state:
+  - state_id: RealmMechanicsProfile
+    persistence: persistent_runtime
+    notes: Runtime realm-law profile used by downstream pattern, perception, and manifestation systems.
+non_delegable_responsibilities:
+  - responsibility_id: ndr_realm_shift_legality
+    description: Owns the final legality decision for realm shifts, crossings, and attunement gates.
+    rationale: Host environments may realize shifts but may not author realm law.
+  - responsibility_id: ndr_physical_realm_continuity
+    description: Preserves the invariant that Physical Realm continuity remains always available.
+    rationale: Core realm truth must not be rewritten by downstream execution layers.
+delegable_compatible_responsibilities:
+  - responsibility_id: dcr_threshold_visualization
+    description: Host environments may realize lawful threshold visuals, portal effects, or transition staging.
+    delegation_rule: delegable_with_guardrails
+    guardrails:
+      - realized_transition_sequences_must_follow_emitted_realm_shift_resolution
+      - presentation_layers_must_not_override_access_denial_or_attunement_thresholds
+suppression_conditions:
+  - condition_id: sc_impl_not_ready
+    reason: implementation_not_ready
+    description: Runtime declaration may precede executable implementation on main.
+  - condition_id: sc_no_transition_context
+    reason: runtime_context_not_required
+    description: Specific realm-transition realization paths may remain dormant when no crossing is active.
+incompatible_with: []
+compatible_external_capabilities:
+  - capability_class: temporary_space_realization
+    constraints:
+      - temporary_spaces_must_realize_only_lawful_transitions_or_bleed_events
+  - capability_class: scene_realization
+    constraints:
+      - scene_realization_is_downstream_of_realm_shift_resolution
+invariant_guardrails:
+  - guardrail_id: ig_realms_are_fixed_states
+    description: Realms remain fixed cosmological states and cannot be authored dynamically.
+  - guardrail_id: ig_shift_requires_lawful_context
+    description: Realm shift must continue to require lawful attunement and boundary conditions.
+validation_requirements:
+  - validation_id: vr_physical_realm_always_available
+    description: Verify Physical Realm access remains always true.
+  - validation_id: vr_boundary_profiles_align
+    description: Verify runtime realm decisions align with canonical boundary profiles and transition examples.
+notes:
+  - Companion to core/realm_engine/forsetti_module_manifest.template.json.
+  - Realm-law truth remains internal even when transition realization is delegated compatibly.

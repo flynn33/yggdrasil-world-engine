@@ -1,0 +1,389 @@
+version: "0.2"
+
+meta:
+  system: module_capability_manifest_schema
+  purpose: >
+    Defines the canonical manifest shape used to describe YWE modules and engines
+    for Forsetti-governed activation, suppression, delegation compatibility, and
+    dependency validation. This schema exists to express module truth and
+    capability boundaries without transferring YWE authority to external
+    execution environments.
+  doctrine:
+    - forsetti_governs_module_lifecycle
+    - ywe_truth_remains_internal_to_forsetti_governed_ywe
+    - external_environments_may_realize_but_may_not_author_ywe_truth
+    - every_module_must_declare_what_it_provides_requires_and_must_never_delegate
+    - activation_metadata_must_not_override_canonical_design_truth
+    - module_manifests_are_governance_metadata_not_gameplay_content
+
+classification_enums:
+  module_classification:
+    - core_engine
+    - feature_module
+    - shared_data_service
+    - integration_bridge
+    - validation_service
+    - authoring_support
+
+  authority_class:
+    - foundational_truth
+    - structural_runtime_truth
+    - manifestation_logic
+    - consequence_logic
+    - interpretive_logic
+    - execution_bridge
+    - tooling_only
+
+  activation_state:
+    - required
+    - available
+    - dormant
+    - suppressed
+    - delegated_compatible
+
+  dependency_strength:
+    - hard_required
+    - preferred
+    - optional
+    - contextual
+
+  capability_scope:
+    - cosmology
+    - realm
+    - ash_pattern
+    - narrative
+    - quest
+    - myth
+    - prophecy
+    - perception
+    - artifact
+    - creature
+    - faction_topology
+    - authored_override
+    - validation
+    - integration
+    - tooling
+
+  external_capability_class:
+    - rendering
+    - scene_realization
+    - npc_embodiment
+    - animation
+    - physics_execution
+    - input_runtime
+    - ui_presentation
+    - overlay_rendering
+    - encounter_presentation
+    - environment_instantiation
+    - temporary_space_realization
+    - save_load_bridge
+    - analytics_observability
+
+  suppression_reason:
+    - runtime_context_not_required
+    - policy_disallows_activation
+    - overlapping_execution_capability_available
+    - unresolved_dependency
+    - incompatible_truth_boundary
+    - implementation_not_ready
+    - authored_scope_exclusion
+    - environment_limit
+
+  delegation_rule:
+    - never_delegable
+    - delegable_compatible
+    - delegable_with_guardrails
+    - presentation_only
+
+core_schema:
+  ModuleCapabilityManifest:
+    manifest_version: string
+    manifest_id: string
+    module_id: string
+    module_name: string
+    module_classification: >
+      core_engine | feature_module | shared_data_service | integration_bridge |
+      validation_service | authoring_support
+    authority_class: >
+      foundational_truth | structural_runtime_truth | manifestation_logic |
+      consequence_logic | interpretive_logic | execution_bridge | tooling_only
+    owned_scope: [string]
+    purpose: string
+    activation_state: required | available | dormant | suppressed | delegated_compatible
+    activation_priority: integer
+    dependency_order_index: integer
+    provides_capabilities:
+      - capability_id: string
+        scope: string
+        description: string
+        truth_sensitive: boolean
+    requires_capabilities:
+      - capability_id: string
+        scope: string
+        dependency_strength: hard_required | preferred | optional | contextual
+        rationale: string
+    consumes_state:
+      - state_id: string
+        required: boolean
+        notes: string
+    emits_state:
+      - state_id: string
+        persistence: string
+        notes: string
+    non_delegable_responsibilities:
+      - responsibility_id: string
+        description: string
+        rationale: string
+    delegable_compatible_responsibilities:
+      - responsibility_id: string
+        description: string
+        delegation_rule: >
+          never_delegable | delegable_compatible | delegable_with_guardrails |
+          presentation_only
+        guardrails: [string]
+    suppression_conditions:
+      - condition_id: string
+        reason: >
+          runtime_context_not_required | policy_disallows_activation |
+          overlapping_execution_capability_available | unresolved_dependency |
+          incompatible_truth_boundary | implementation_not_ready |
+          authored_scope_exclusion | environment_limit
+        description: string
+    incompatible_with:
+      - target_module_id: string
+        rationale: string
+    compatible_external_capabilities:
+      - capability_class: >
+          rendering | scene_realization | npc_embodiment | animation |
+          physics_execution | input_runtime | ui_presentation |
+          overlay_rendering | encounter_presentation |
+          environment_instantiation | temporary_space_realization |
+          save_load_bridge | analytics_observability
+        constraints: [string]
+    invariant_guardrails:
+      - guardrail_id: string
+        description: string
+    validation_requirements:
+      - validation_id: string
+        description: string
+    notes: [string]
+
+canonical_validation_rules:
+  required_fields:
+    - manifest_version
+    - manifest_id
+    - module_id
+    - module_name
+    - module_classification
+    - authority_class
+    - owned_scope
+    - purpose
+    - activation_state
+    - activation_priority
+    - dependency_order_index
+    - provides_capabilities
+    - requires_capabilities
+    - non_delegable_responsibilities
+    - invariant_guardrails
+    - validation_requirements
+
+  uniqueness_constraints:
+    - manifest_id_must_be_unique
+    - module_id_must_be_unique
+    - provided_capability_ids_should_be_unique_within_manifest
+    - non_delegable_responsibility_ids_should_be_unique_within_manifest
+
+  truth_boundary_rules:
+    - >
+      Any module with authority_class foundational_truth or structural_runtime_truth
+      must declare at least one non_delegable responsibility.
+    - >
+      Integration bridges may not declare ownership of cosmology, realm ontology,
+      ASH pattern law, myth law, prophecy law, or worldstate truth.
+    - >
+      A module marked delegated_compatible must still retain its truth-sensitive
+      responsibilities internally if its authority_class is not execution_bridge.
+    - >
+      compatible_external_capabilities must describe realization support only and
+      may not redefine canonical design truth.
+    - >
+      suppression conditions may suppress realization paths but may not transfer
+      canonical authority to external environments.
+
+  dependency_rules:
+    - core_engine dependency_order_index should precede feature_module indices
+    - >
+      Modules owning manifestation_logic or consequence_logic must depend on at
+      least one upstream truth or interpretation capability.
+    - >
+      perception-related modules must not be the sole source of canonical world
+      truth.
+    - >
+      quest, artifact, and creature modules should not declare independence from
+      ash_pattern or narrative capabilities when marked truth_sensitive.
+
+  anti_drift_rules:
+    - no_module_may_self_describe_as_owner_of_all_truth
+    - no_external_capability_may_be_listed_as_non_delegable_ywe_truth
+    - activation_metadata_must_not_encode_gameplay_outcomes
+    - manifests_must_describe_capability_and_boundary_not_story_content
+
+recommended_state_ids:
+  upstream_truth:
+    - CosmologyConstraints
+    - CanonicalRealmList
+    - RealmMechanicsProfile
+    - CosmicPatternSnapshot
+    - PlayerNarrativeSnapshot
+    - FactionTopologyState
+    - PerceptionOverlayRecord
+  downstream_outputs:
+    - QuestChainManifest
+    - WorldstateDeltaPacket
+    - MythRecord
+    - ProphecyRecord
+    - ArtifactManifest
+    - CreatureManifest
+    - ModuleValidationReport
+
+example_manifests:
+  - manifest_version: "0.2"
+    manifest_id: mcm_ash_pattern_engine
+    module_id: ash_pattern_engine
+    module_name: ASH Pattern Engine
+    module_classification: core_engine
+    authority_class: structural_runtime_truth
+    owned_scope:
+      - ash_pattern
+    purpose: >
+      Interprets current cosmic and runtime state into active symbolic pattern
+      pressure, eligibility, and conflict signals for downstream generation.
+    activation_state: required
+    activation_priority: 20
+    dependency_order_index: 30
+    provides_capabilities:
+      - capability_id: provide_cosmic_pattern_snapshot
+        scope: ash_pattern
+        description: Emits ranked active pattern pressure and symbolic eligibility.
+        truth_sensitive: true
+    requires_capabilities:
+      - capability_id: require_cosmology_constraints
+        scope: cosmology
+        dependency_strength: hard_required
+        rationale: Cosmological legality must exist before symbolic interpretation.
+      - capability_id: require_realm_truth
+        scope: realm
+        dependency_strength: hard_required
+        rationale: Realm bias and access meaning shape pattern interpretation.
+    consumes_state:
+      - state_id: CosmologyConstraints
+        required: true
+        notes: Foundational truth input.
+      - state_id: CanonicalRealmList
+        required: true
+        notes: Required for realm-biased pattern interpretation.
+    emits_state:
+      - state_id: CosmicPatternSnapshot
+        persistence: transient_runtime
+        notes: Primary symbolic pressure output.
+    non_delegable_responsibilities:
+      - responsibility_id: ndr_symbolic_interpretation
+        description: Owns ASH-derived symbolic pattern interpretation.
+        rationale: External environments may not author YWE pattern law.
+    delegable_compatible_responsibilities:
+      - responsibility_id: dcr_debug_visualization
+        description: Debug visualization of pattern weights may be rendered externally.
+        delegation_rule: presentation_only
+        guardrails:
+          - rendered_output_must_not_modify_pattern_truth
+    suppression_conditions:
+      - condition_id: sc_impl_not_ready
+        reason: implementation_not_ready
+        description: Manifest may exist before full implementation lands.
+    incompatible_with: []
+    compatible_external_capabilities:
+      - capability_class: analytics_observability
+        constraints:
+          - analytics_layer_may_observe_but_not_author_pattern_selection
+    invariant_guardrails:
+      - guardrail_id: ig_pattern_first
+        description: Meaningful generation remains downstream of ASH pattern state.
+    validation_requirements:
+      - validation_id: vr_truth_boundary
+        description: Verify no execution bridge claims ASH truth ownership.
+    notes:
+      - Core symbolic grammar engine.
+
+  - manifest_version: "0.2"
+    manifest_id: mcm_quest_engine
+    module_id: quest_engine
+    module_name: Quest Engine
+    module_classification: feature_module
+    authority_class: manifestation_logic
+    owned_scope:
+      - quest
+    purpose: >
+      Manifests playable quest chains from upstream pattern and narrative
+      direction without owning cosmology or symbolic truth.
+    activation_state: available
+    activation_priority: 50
+    dependency_order_index: 60
+    provides_capabilities:
+      - capability_id: provide_quest_chain_manifest
+        scope: quest
+        description: Emits staged playable quest structure.
+        truth_sensitive: true
+    requires_capabilities:
+      - capability_id: require_pattern_snapshot
+        scope: ash_pattern
+        dependency_strength: hard_required
+        rationale: Quest meaning must derive from ASH state.
+      - capability_id: require_narrative_direction
+        scope: narrative
+        dependency_strength: hard_required
+        rationale: Quest manifestation follows runtime orchestration.
+    consumes_state:
+      - state_id: CosmicPatternSnapshot
+        required: true
+        notes: Symbolic pressure input.
+      - state_id: PlayerNarrativeSnapshot
+        required: true
+        notes: Identity phase and unresolved tension input.
+    emits_state:
+      - state_id: QuestChainManifest
+        persistence: active_until_resolved
+        notes: Playable structured output.
+      - state_id: WorldstateDeltaPacket
+        persistence: post_resolution
+        notes: Consequence handoff after completion.
+    non_delegable_responsibilities:
+      - responsibility_id: ndr_quest_interpretive_binding
+        description: Owns interpretive binding between templates and upstream YWE meaning.
+        rationale: External execution environments may realize but not author quest truth.
+    delegable_compatible_responsibilities:
+      - responsibility_id: dcr_scene_instantiation
+        description: External engine may instantiate quest scenes and objective presentation.
+        delegation_rule: delegable_with_guardrails
+        guardrails:
+          - no_rewrite_of_completion_meaning
+          - no_bypass_of_worldstate_delta_emission
+    suppression_conditions:
+      - condition_id: sc_no_quest_context
+        reason: runtime_context_not_required
+        description: May remain dormant when current runtime scope does not require quest manifestation.
+    incompatible_with: []
+    compatible_external_capabilities:
+      - capability_class: scene_realization
+        constraints:
+          - scene_realization_is_downstream_only
+      - capability_class: encounter_presentation
+        constraints:
+          - encounter_presentation_must_follow_emitted_quest_chain_manifest
+    invariant_guardrails:
+      - guardrail_id: ig_no_independent_random_meaning
+        description: Quest engine may not generate meaningful content independently of ASH.
+    validation_requirements:
+      - validation_id: vr_upstream_dependency_check
+        description: Verify ash_pattern and narrative dependencies are present.
+    notes:
+      - Feature module under Forsetti-governed activation.

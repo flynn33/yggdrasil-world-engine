@@ -70,8 +70,9 @@ The strongest design choice preserved throughout is still this:
 
 ## Cosmology
 - Primordial Darkness precedes creation.
-- White Wolf and Dark Wolf predate realms, gods, matter, and time.
-- Creation begins with **Divine Core ignition**.
+- Consciousness gathers within darkness until dark matter compacts into the Dark Star.
+- The Dark Star creates gravity and time, then collapses into the **Divine Core**.
+- White Wolf and Dark Wolf emerge with Divine Core creation as paired companions of consciousness.
 - The universe stabilizes into **nine fixed realms**:
   - divine_core
   - celestial

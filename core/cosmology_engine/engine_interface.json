@@ -2,7 +2,7 @@
   "engine_id": "ywe.core.cosmology_engine",
   "version": "2.0.0",
   "description": "Interface definition for the Cosmology Engine",
-  "purpose": "Manages primordial state, Divine Core creation event, and the foundation of all cosmic structures",
+  "purpose": "Manages primordial darkness, Dark Star collapse into the Divine Core, and the foundation of all cosmic structures",
   "layer": "core",
   "dependencies": [],
   "inputs": [],
@@ -10,7 +10,7 @@
     {
       "name": "cosmic_state",
       "type": "CosmicState",
-      "description": "The current state of the cosmos including primordial entities and realm configuration"
+      "description": "The current state of the cosmos including Dark Star and Divine Core creation chain, wolf balance state, and realm configuration"
     },
     {
       "name": "realm_definitions",
@@ -33,7 +33,7 @@
     },
     {
       "name": "get_wolf_state",
-      "description": "Return the current state of White Wolf and Dark Wolf primordial entities",
+      "description": "Return the current state of White Wolf and Dark Wolf companion balance or coherence pressure",
       "parameters": [],
       "returns": "WolfState"
     }
@@ -45,8 +45,9 @@
   "events_subscribed": [],
   "invariants": [
     "Nine realms are fixed and canonical",
-    "White Wolf and Dark Wolf predate all realms",
+    "White Wolf and Dark Wolf emerge with Divine Core creation as paired companions of consciousness",
     "Divine Core is the origin center of all reality",
-    "Wolves cannot be destroyed"
+    "Realms and planes are equivalent terms in YWE canon",
+    "Wolves may lose coherence temporarily but cannot die permanently"
   ]
 }
