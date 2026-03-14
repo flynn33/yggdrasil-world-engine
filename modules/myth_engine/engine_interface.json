@@ -1,0 +1,59 @@
+{
+    "schemaVersion":  "1.0",
+    "status":  "forsetti_aligned_design_contract",
+    "moduleID":  "com.ywe.module.myth-engine",
+    "displayName":  "YWE Myth Engine",
+    "plannedForsettiModuleType":  "service",
+    "entryPointContract":  "MythEngineModule",
+    "supportedPlatforms":  [
+                               "windows"
+                           ],
+    "minForsettiVersion":  {
+                               "minor":  1,
+                               "patch":  0,
+                               "prerelease":  null,
+                               "major":  0
+                           },
+    "truthDomain":  "myth emergence and myth persistence",
+    "activationProfile":  "host_policy_defined",
+    "lifecycle":  [
+                      "discover",
+                      "validate",
+                      "activate",
+                      "deactivate"
+                  ],
+    "compatibilityCheckRequired":  true,
+    "entitlementPolicy":  "defined_by_host_policy",
+    "directRuntimeDependencies":  [
+                                      "com.ywe.core.narrative-engine"
+                                  ],
+    "semanticInputs":  [
+                           "narrative consequence events",
+                           "myth archetype schemas",
+                           "faction interpretation pressure"
+                       ],
+    "outputs":  [
+                    "myth seeds",
+                    "myth records",
+                    "faction myth variants"
+                ],
+    "communication":  {
+                          "allowedChannels":  [
+                                                  "service_container",
+                                                  "event_bus",
+                                                  "framework_logger"
+                                              ],
+                          "forbiddenChannels":  [
+                                                    "direct_module_calls",
+                                                    "self_messaging",
+                                                    "reserved_namespace:forsetti.internal.*"
+                                                ]
+                      },
+    "plannedCapabilities":  [
+
+                            ],
+    "forbiddenCapabilities":  [
+                                  "ui_theme_mask"
+                              ],
+    "branchStatus":  "template_only_no_runtime_code"
+}

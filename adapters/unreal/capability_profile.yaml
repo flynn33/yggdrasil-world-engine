@@ -1,0 +1,23 @@
+version: "1.0"
+status: forsetti_alignment_baseline
+adapter: unreal
+host_role: downstream_execution_connector
+truth_ownership:
+  owns_canonical_truth: false
+  may_realize_outputs: true
+  may_rewrite_shared_world_truth: false
+planned_forsetti_integration:
+  runtime_placement: platform_specific_host_or_app_module
+  manifest_template_included_here: false
+  activation_governance: forsetti_controls_activation
+  communication_boundary:
+    allowed:
+      - public_module_contracts
+      - service_container_resolution
+      - event_bus_subscriptions
+    forbidden:
+      - direct_truth_redefinition
+      - direct_module_to_module_calls
+      - reserved_namespace_forsetti_internal
+  forbidden_capabilities:
+    - ui_theme_mask

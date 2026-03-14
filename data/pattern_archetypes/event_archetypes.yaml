@@ -1,0 +1,169 @@
+registry_version: "1.0"
+status: canonical
+authority:
+  prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+  schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+  downstream_contract: docs/architecture/ash_downstream_contract.md
+family: event
+records:
+  - id: event_revelation
+    family: event
+    name: Revelation
+    summary: An event pressure in which hidden truth becomes legible enough to reorder interpretation.
+    symbolic_function: [disclosure, recontextualization, pattern_legibility]
+    truth_modes: [secret_exposed, hidden_relation_revealed, named_truth]
+    shadow_modes: [misread_exposure, weaponized_truth, incomplete_disclosure]
+    realm_bias: [mental, celestial, astral]
+    wolf_bias: {white: 0.3, dark: 0.2}
+    player_phase_bias: [first_stirrings, memory_recovery, identity_conflict]
+    compatible_with: [event_omen_convergence, event_return, event_judgment]
+    friction_with: [event_oath_swearing]
+    contradicts: []
+    downstream_affinities:
+      npc: [witness, accuser, hidden_keeper]
+      quest: [quest_discovery_arc, quest_reckoning_arc, quest_threshold_arc]
+      myth: [revealed_name, broken_secret, sacred_disclosure]
+      prophecy: [sign_made_legible, unveiled_omen, exposed_future]
+      artifact: [tablet, mirror, unsealing_key]
+      creature: [omen_bird, witnessing_beast, truth_hound]
+    manifestation_hints: [opened_records, broken_masks, exposed_relations]
+    invariant_notes: [revelation_requires_consequence, truth_must_not_arrive_as_flat_exposition]
+    status: canonical
+  - id: event_breach
+    family: event
+    name: Breach
+    summary: An event pressure in which a boundary fails and consequences pour through before order can adapt.
+    symbolic_function: [rupture, crossing_failure, destabilization]
+    truth_modes: [broken_boundary, revealed_vulnerability, forced_contact]
+    shadow_modes: [collapse_spread, panic, lawless_opening]
+    realm_bias: [shadow, astral, void]
+    wolf_bias: {white: 0.0, dark: 0.5}
+    player_phase_bias: [first_stirrings, memory_recovery, chosen_becoming]
+    compatible_with: [event_omen_convergence, event_succession_crisis]
+    friction_with: [event_oath_swearing, event_judgment]
+    contradicts: []
+    downstream_affinities:
+      npc: [breach_survivor, emergency_keeper, opportunist]
+      quest: [quest_threshold_arc, quest_defense_arc, quest_reckoning_arc]
+      myth: [broken_gate, night_of_opening, falling_wall]
+      prophecy: [breach_omen, collapse_sign, open_threshold]
+      artifact: [broken_seal, shard, wardstone]
+      creature: [ruin_dweller, omen_pack, devourer]
+    manifestation_hints: [ripped_wards, broken_gates, sudden_intrusions]
+    invariant_notes: [breach_must_not_be_generic_disaster, rupture_requires_follow-on_residue]
+    status: canonical
+  - id: event_omen_convergence
+    family: event
+    name: Omen Convergence
+    summary: An event pressure in which signs, repetitions, and symbolic echoes cluster into undeniable pattern visibility.
+    symbolic_function: [convergence, warning, rising_future_pressure]
+    truth_modes: [pattern_visibility, omen_density, attractor_legibility]
+    shadow_modes: [false_patterning, panic_reading, obsession_loop]
+    realm_bias: [astral, shadow, celestial]
+    wolf_bias: {white: 0.2, dark: 0.4}
+    player_phase_bias: [mortal_unknowing, first_stirrings, identity_conflict]
+    compatible_with: [event_revelation, event_breach, event_return]
+    friction_with: [event_judgment, event_oath_swearing]
+    contradicts: []
+    downstream_affinities:
+      npc: [omen_reader, herald, cult_interpreter]
+      quest: [quest_threshold_arc, quest_discovery_arc, quest_succession_arc]
+      myth: [sky_sign, repeating_bird, converging_dream]
+      prophecy: [rising_omen, attractor_cluster, warning_cycle]
+      artifact: [omen_object, horn, marked_token]
+      creature: [omen_flock, heraldic_beast, shadow_hound]
+    manifestation_hints: [repeating_symbols, unusual_flocks, sky_events]
+    invariant_notes: [omens_remain_interpretive, convergence_is_not_fate_lock]
+    status: canonical
+  - id: event_oath_swearing
+    family: event
+    name: Oath Swearing
+    summary: An event pressure in which commitment becomes binding enough to change future consequence and identity pressure.
+    symbolic_function: [commitment, binding, public_declaration]
+    truth_modes: [spoken_vow, recognized_burden, mutual_obligation]
+    shadow_modes: [false_oath, coerced_vow, ceremonial_hollowness]
+    realm_bias: [celestial, etheric, physical]
+    wolf_bias: {white: 0.3, dark: 0.1}
+    player_phase_bias: [memory_recovery, chosen_becoming, world_actor]
+    compatible_with: [event_judgment, event_return, event_succession_crisis]
+    friction_with: [event_breach, event_omen_convergence, event_revelation]
+    contradicts: []
+    downstream_affinities:
+      npc: [sworn_guard, witness, reluctant_vower]
+      quest: [quest_defense_arc, quest_restoration_arc, quest_succession_arc]
+      myth: [oath_of_the_gate, blood_promise, vow_kept]
+      prophecy: [vow_omen, binding_sign, last_promise]
+      artifact: [oath_blade, seal, witness_token]
+      creature: [bonded_beast, sentinel_bird, vow_hound]
+    manifestation_hints: [public_rituals, threshold_pledges, witness_circles]
+    invariant_notes: [oaths_must_bind_future_state, vows_require_social_memory]
+    status: canonical
+  - id: event_succession_crisis
+    family: event
+    name: Succession Crisis
+    summary: An event pressure in which legitimacy fractures and multiple claims compete for public recognition.
+    symbolic_function: [legitimacy_conflict, contested_inheritance, public_division]
+    truth_modes: [revealed_claim, lineage_test, burdened_choice]
+    shadow_modes: [usurpation, factional_fracture, bloodline_fetish]
+    realm_bias: [celestial, causal, physical]
+    wolf_bias: {white: 0.1, dark: 0.3}
+    player_phase_bias: [identity_conflict, chosen_becoming, world_actor]
+    compatible_with: [event_breach, event_oath_swearing, event_judgment]
+    friction_with: [event_return]
+    contradicts: []
+    downstream_affinities:
+      npc: [claimant, herald, steward]
+      quest: [quest_succession_arc, quest_reckoning_arc, quest_defense_arc]
+      myth: [divided_crown, broken_line, throne_dispute]
+      prophecy: [crown_omen, split_rule, heir_sign]
+      artifact: [regalia, signet, witness_blade]
+      creature: [heraldic_beast, throne_hawk, omen_stag]
+    manifestation_hints: [public_claims, split_courts, ritualized_tests]
+    invariant_notes: [succession_conflict_requires_social_witness, legitimacy_is_not_private_only]
+    status: canonical
+  - id: event_return
+    family: event
+    name: Return
+    summary: An event pressure in which a person, truth, relic, memory, or name comes back and reopens unfinished consequence.
+    symbolic_function: [return, reopened_continuity, delayed_claim]
+    truth_modes: [restored_presence, remembered_name, recovered_relation]
+    shadow_modes: [false_return, nostalgia_trap, unresolved_burden]
+    realm_bias: [physical, celestial, shadow]
+    wolf_bias: {white: 0.2, dark: 0.2}
+    player_phase_bias: [memory_recovery, identity_conflict, chosen_becoming]
+    compatible_with: [event_revelation, event_oath_swearing, event_omen_convergence]
+    friction_with: [event_succession_crisis]
+    contradicts: []
+    downstream_affinities:
+      npc: [returning_heir, lost_guard, home_witness]
+      quest: [quest_retrieval_arc, quest_succession_arc, quest_restoration_arc]
+      myth: [the_returned, song_of_homecoming, reopened_line]
+      prophecy: [return_sign, reopened_path, named_coming]
+      artifact: [token, inheritance_relic, road_key]
+      creature: [return_omen, road_stag, herald_hound]
+    manifestation_hints: [homecomings, reopened_paths, remembered_sites]
+    invariant_notes: [return_requires_change, what_returns_must_recontextualize_the_present]
+    status: canonical
+  - id: event_judgment
+    family: event
+    name: Judgment
+    summary: An event pressure in which witness, measure, and consequence align into a public decision point.
+    symbolic_function: [verdict, measure, consequence_visibility]
+    truth_modes: [weighed_claim, named_guilt, recognized_due]
+    shadow_modes: [spectacle_punishment, false_verdict, manipulated_measure]
+    realm_bias: [causal, celestial, mental]
+    wolf_bias: {white: 0.3, dark: 0.2}
+    player_phase_bias: [memory_recovery, chosen_becoming, world_actor]
+    compatible_with: [event_revelation, event_oath_swearing, event_succession_crisis]
+    friction_with: [event_breach, event_omen_convergence]
+    contradicts: []
+    downstream_affinities:
+      npc: [arbiter, witness, accuser]
+      quest: [quest_reckoning_arc, quest_succession_arc, quest_defense_arc]
+      myth: [day_of_measure, restored_order, named_shame]
+      prophecy: [verdict_omen, due_account, last_measure]
+      artifact: [scales, tablet, witness_token]
+      creature: [trial_beast, omen_raven, pursuing_hound]
+    manifestation_hints: [public_trials, named_records, consequence_markers]
+    invariant_notes: [judgment_must_emit_deltas, verdict_requires_witness]
+    status: canonical

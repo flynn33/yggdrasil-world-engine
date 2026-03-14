@@ -1,0 +1,534 @@
+version: "0.2"
+
+meta:
+  system: creature_system
+  purpose: >
+    Defines how creatures are generated, classified, manifested, and persisted
+    within YWE as pattern-derived living presences rather than generic combat
+    units. Creatures should express cosmology, realm pressure, ecological
+    meaning, omen potential, myth relevance, and quest function without
+    collapsing into filler encounters.
+  doctrine:
+    - creatures_are_pattern_bearers_not_only_enemies
+    - creature_generation_must_begin_from_ash_pattern_state
+    - creatures_should_express_realm_bias_symbolic_pressure_and_local_condition
+    - some_creatures_exist_to_warn_test_guard_or_witness_not_only_to_attack
+    - creature_presence_should_be_usable_for_authored_and_generated_content
+    - myth_prophecy_and_perception_may_change_creature_meaning_without_rewriting_species_truth
+
+creature_classification:
+  tiers:
+    - id: creature_tier_incidental
+      name: Incidental
+      description: >
+        Lightweight local fauna or minor symbolic presences used to reinforce
+        atmosphere, omen language, or low-stakes encounter pressure.
+      required_fields:
+        - creature_role
+        - manifestation_mode
+        - realm_bias
+      optional_fields:
+        - omen_tags
+        - flock_or_pack_behavior
+
+    - id: creature_tier_significant
+      name: Significant
+      description: >
+        Creatures with pattern identity, quest utility, symbolic function, and
+        durable local relevance.
+      required_fields:
+        - creature_role
+        - ecological_function
+        - manifestation_mode
+        - realm_bias
+        - symbolic_signature
+        - encounter_functions
+        - threat_profile
+        - persistence_state
+      optional_fields:
+        - linked_myth_pressure
+        - linked_prophecy_pressure
+
+    - id: creature_tier_mythic
+      name: Mythic
+      description: >
+        High-importance creatures whose presence alters interpretation,
+        legitimacy, omen density, quest pressure, or site significance.
+      required_fields:
+        - creature_role
+        - ecological_function
+        - manifestation_mode
+        - realm_bias
+        - symbolic_signature
+        - encounter_functions
+        - threat_profile
+        - truth_function
+        - mythic_weight
+        - persistence_state
+        - consequence_profile
+        - perception_variance_profile
+
+core_schema:
+  CreatureTemplate:
+    id: string
+    tier: creature_tier_incidental | creature_tier_significant | creature_tier_mythic
+    creature_role: string
+    ecological_function: string | null
+    manifestation_mode: string
+    origin_pattern_cluster: string
+    realm_bias: string
+    wolf_pressure_bias:
+      white_wolf: float
+      dark_wolf: float
+    symbolic_signature: [string]
+    omen_tags: [string]
+    encounter_functions: [string]
+    threat_profile:
+      aggression_mode: string
+      lethality: float
+      volatility: float
+      pursuit_logic: string
+    truth_function: string | null
+    relationship_to_site: string | null
+    relationship_to_faction: string | null
+    mythic_weight: float | null
+    perception_variance_profile:
+      allowed: boolean
+      variants: [string]
+    persistence_state:
+      can_recur: boolean
+      world_reactivity: float
+      loss_weight: float
+    consequence_profile:
+      death_significance: string | null
+      residue_type: string | null
+      myth_seed_bias: float | null
+
+creature_generation_pipeline:
+  steps:
+    - read_active_pattern_snapshot
+    - read_local_world_condition
+    - determine_generation_need
+    - choose_creature_tier
+    - choose_manifestation_mode
+    - choose_creature_role
+    - assign_realm_bias
+    - assign_symbolic_signature
+    - assign_ecological_function
+    - assign_omen_and_truth_functions
+    - assign_encounter_functions
+    - assign_threat_profile
+    - bind_site_and_faction_relevance
+    - assign_myth_prophecy_hooks
+    - validate_against_guardrails
+    - emit_creature_manifest
+
+manifestation_modes:
+  supported:
+    - natural_fauna
+    - altered_fauna
+    - threshold_guardian
+    - omen_flock
+    - ruin_dweller
+    - sacred_beast
+    - corrupted_beast
+    - dream_intrusion_form
+    - temporary_manifestation
+    - realm_overlay_variant
+    - bloodline_reactive_presence
+    - mythic_recurrence_presence
+
+  rules:
+    - incidental_creatures_prefer_natural_fauna_or_omen_flock
+    - significant_creatures_may_use_altered_fauna_threshold_guardian_or_ruin_dweller
+    - mythic_creatures_may_use_sacred_beast_temporary_manifestation_or_mythic_recurrence_presence
+    - manifestation_mode_must_match_realm_bias_and_local_site_logic
+    - temporary_manifestation_does_not_create_new_persistent_species_truth
+
+creature_role_rules:
+  roles:
+    - scavenger
+    - sentinel
+    - pursuer
+    - guardian
+    - witness
+    - carrier
+    - devourer
+    - shepherd
+    - herald
+    - corrupter
+    - purifier
+    - companion_candidate
+    - threshold_tester
+    - memory_trigger
+    - omen_bearer
+
+  role_bias_by_pattern_cluster:
+    cluster_hidden_knowledge:
+      preferred:
+        - witness
+        - omen_bearer
+        - threshold_tester
+        - memory_trigger
+    cluster_protection_oath_continuity:
+      preferred:
+        - guardian
+        - sentinel
+        - shepherd
+    cluster_civilization_order_founding:
+      preferred:
+        - sentinel
+        - carrier
+        - companion_candidate
+    cluster_catastrophe_reckoning:
+      preferred:
+        - devourer
+        - pursuer
+        - herald
+        - corrupter
+    cluster_awakening_origin_discovery:
+      preferred:
+        - witness
+        - herald
+        - memory_trigger
+        - threshold_tester
+
+realm_bias_rules:
+  celestial:
+    favored_traits:
+      - luminous_order
+      - harmonic_motion
+      - law_bound_response
+    discouraged_traits:
+      - indiscriminate_decay
+  causal:
+    favored_traits:
+      - inevitability
+      - pattern_repetition
+      - fate_marking
+    discouraged_traits:
+      - random_behavior
+  mental:
+    favored_traits:
+      - mimicry
+      - cognition_pressure
+      - memory_reflection
+    discouraged_traits:
+      - purely_instinctive_reading
+  astral:
+    favored_traits:
+      - energetic_flux
+      - symbolic_motion
+      - resonance_reactivity
+    discouraged_traits:
+      - inert_presence
+  etheric:
+    favored_traits:
+      - life_intensity
+      - restorative_or_parasitic_flow
+      - growth_binding
+    discouraged_traits:
+      - abstract_nonliving_behavior
+  physical:
+    favored_traits:
+      - embodied_plausibility
+      - ecological_specificity
+      - grounded_presence
+    discouraged_traits:
+      - lawless_manifestation
+  shadow:
+    favored_traits:
+      - concealment
+      - doubled_meaning
+      - indirect_revelation
+    discouraged_traits:
+      - total_transparency
+  void:
+    favored_traits:
+      - dissolution
+      - silence_pressure
+      - absence_marking
+    discouraged_traits:
+      - abundant_social_familiarity
+  divine_core:
+    favored_traits:
+      - gravity_of_presence
+      - origin_resonance
+      - extreme_rarity
+    discouraged_traits:
+      - casual_recurrence
+
+wolf_pressure_bias_rules:
+  white_wolf_bias_effects:
+    favored:
+      - revelatory_behavior
+      - guidance_moments
+      - ignorance_consumption
+      - exposure_of_hidden_paths
+  dark_wolf_bias_effects:
+    favored:
+      - concealment_pressure
+      - dread_presence
+      - unseen_tracking
+      - depth_calling
+  constraints:
+    - wolf_pressure_is_not_morality
+    - both_biases_may_be_high_simultaneously
+    - wolf_bias_modifies_interpretation_and_behavior_not_species_alignment_label
+
+symbolic_signature_rules:
+  source_pools:
+    - active_pattern_symbols
+    - realm_symbols
+    - local_site_symbols
+    - recurring_symbol_state
+    - bloodline_symbols_when_relevant
+    - myth_line_symbols_when_relevant
+  requirements:
+    minimum: 1
+    recommended: 2_to_4
+    rules:
+      - at_least_one_symbol_should_bind_creature_to_current_pattern_pressure
+      - mythic_creatures_should_prefer_existing_symbol_recurrence_when_possible
+      - creature_symbols_should_support_omens_tracks_and_memory_hooks
+
+truth_function_rules:
+  truth_functions:
+    - no_truth_function
+    - reveals_hidden_path
+    - marks_unseen_danger
+    - mirrors_player_state
+    - confirms_site_significance
+    - carries_false_omen
+    - tests_readiness
+    - witnesses_for_future_myth
+    - embodies_distortion
+    - announces_threshold
+
+  distribution_guidance:
+    incidental:
+      likely:
+        - no_truth_function
+        - marks_unseen_danger
+        - carries_false_omen
+    significant:
+      likely:
+        - reveals_hidden_path
+        - confirms_site_significance
+        - tests_readiness
+        - mirrors_player_state
+    mythic:
+      likely:
+        - witnesses_for_future_myth
+        - announces_threshold
+        - embodies_distortion
+        - reveals_hidden_path
+
+encounter_function_rules:
+  encounter_functions:
+    - combat_pressure
+    - tracking_pressure
+    - escort_or_follow
+    - environmental_warning
+    - threshold_guard
+    - relic_guard
+    - omen_delivery
+    - ritual_disruption
+    - memory_trigger
+    - bloodline_recognition
+    - quest_pursuit_hook
+    - myth_materialization_hook
+
+  mandatory_rules:
+    - every_significant_or_mythic_creature_requires_at_least_one_noncombat_function
+    - quest_critical_creatures_should_not_be_only_stat_blocks
+    - omen_delivery_and_memory_trigger_should_be_used_when_creature_exists_to_mean_more_than_fight
+
+threat_profile_rules:
+  aggression_modes:
+    - passive
+    - reactive
+    - territorial
+    - hunting
+    - ritualized
+    - protective
+    - corruptive
+    - testing
+    - omenic_only
+
+  lethality_guidance:
+    incidental:
+      range: low_to_moderate
+    significant:
+      range: low_to_high
+    mythic:
+      range: moderate_to_extreme
+  constraints:
+    - threat_must_match_role_and_local_condition
+    - not_all_mythic_creatures_should_be_high_lethality
+    - omenic_or_witness_creatures_may_be_low_lethality_but_high_significance
+
+site_binding_rules:
+  relationship_to_site_options:
+    - native_to_site
+    - bound_guardian
+    - temporary_intruder
+    - omen_attracted
+    - relic_bound
+    - bloodline_bound
+    - threshold_bound
+    - myth_recurrence_bound
+  rules:
+    - site_binding_should_explain_presence
+    - threshold_and_realm_shift_sites_prefer_threshold_bound_or_omen_attracted_creatures
+    - sacred_sites_prefer_bound_guardian_or_witness forms
+    - temporary_spaces_may_use_temporary_intruder_or_myth_recurrence_bound without creating permanent ecology
+
+faction_binding_rules:
+  relationship_to_faction_options:
+    - domesticated
+    - revered
+    - feared
+    - hunted
+    - guarded_by
+    - used_as_omen
+    - denied_publicly
+    - secretly_tended
+    - not_faction_bound
+  rules:
+    - faction_binding_should affect myth_and_perception_readings
+    - same_creature_may_have_different_meanings_across_factions
+    - domestication_does_not_remove_symbolic significance
+
+myth_and_prophecy_hooks:
+  myth_hooks:
+    - can_seed_myth_when_witnessed_in_rare_context
+    - can_stabilize_existing_myth_symbols
+    - can_carry_faction_specific retellings
+    - can_materialize_myth_line_locally
+  prophecy_hooks:
+    - can_increase_omen_density
+    - can_mark_prophecy_rising_state
+    - can_appear_before_activation_as ambiguous warning
+    - can shift from omen_bearer_to_threshold_herald during escalation
+  rules:
+    - mythic_creatures_should_have_at_least_one_myth_or_prophecy_hook
+    - incidental_creatures_may_gain_hooks_only when symbolic convergence is high
+
+perception_variance_rules:
+  doctrine:
+    - perception_may_change_creature_reading_without rewriting_shared_world_fact
+    - different_players_may see different symbolic overlays_or_significance
+    - major variance must preserve multiplayer coherence
+  allowed_variants:
+    - ordinary_animal_vs_omenic_presence
+    - mundane_pack_vs_shadow_hunters
+    - silent_bird_vs_bloodline_messenger
+    - ruined_beast_vs_threshold_guardian
+  forbidden_variants:
+    - one_player_can_be_physically_attacked_while creature_does_not_exist_for_shared_combat_model_without reconciliation
+    - perception_variant_creates_new_persistent_species_truth
+
+persistence_rules:
+  recurrence_classes:
+    - one_off
+    - local_recurring
+    - migratory_recurring
+    - omen_recurring
+    - mythic_recurring
+  loss_weight_guidance:
+    incidental:
+      default: low
+    significant:
+      default: medium
+    mythic:
+      default: high
+  rules:
+    - mythic_recurrence_requires consequence_or_symbolic support
+    - slain_or_lost_creatures_may_leave residue_tracks_or_myth seeds
+    - recurrence_should_bias future region_or_quest interpretation when meaningful
+
+consequence_rules:
+  outcome_domains:
+    - local_world_condition
+    - player_memory
+    - player_identity_pressure
+    - realm_attunement_bias
+    - myth_seed_state
+    - prophecy_weight_state
+    - faction_reaction
+    - site_activation_state
+    - perception_layer_state
+  rules:
+    - significant_creature_resolution_should_emit_worldstate_deltas
+    - killing_is_not_the_only_valid_resolution
+    - preservation_binding_release_or_witnessing may be more meaningful than combat victory
+    - mythic_creature_outcomes_should_bias myth_or_prophecy systems unless explicitly suppressed by context
+
+forbidden_scope:
+  - no_independent_random_creature_generation_for_meaningful_encounters
+  - no_creature_system_rewrite_of_cosmology_or_realm_ontology
+  - no_filler_predator_spam_without_pattern_or_local_need
+  - no_creature_generation_that_creates_persistent_world_geography
+  - no_good_evil_species_labels_based_on_wolf_pressure
+  - no_mythic_creature_usage_as_generic_boss_only_content
+
+validation_rules:
+  hard_fail:
+    - creature_has_no_pattern_origin_for_meaningful_generation
+    - creature_role_conflicts_with_realm_bias_without explicit contradiction support
+    - mythic_creature_has_no_noncombat_or_symbolic function
+    - manifestation_mode_breaks_fixed_realm_or_shared_world rules
+    - design_reduces_wolf_pressure_to_morality
+  soft_fail:
+    - creature_only_exists_as_combat_stat_block_despite significant tier
+    - symbolic_signature_is_generic_or_unbound_to_current_pattern
+    - site_binding_is_missing_or implausible
+    - prophecy_or_myth_hooks_are absent where expected
+
+example_generation_frames:
+  - id: ex_shadow_threshold_ravens
+    description: >
+      A flock of ravens at a thin veil ruin that function as omen-bearers,
+      memory triggers, and witnesses to hidden gate pressure rather than simple
+      enemies.
+    likely_configuration:
+      tier: creature_tier_significant
+      manifestation_mode: omen_flock
+      creature_role: witness
+      realm_bias: shadow
+      encounter_functions:
+        - omen_delivery
+        - memory_trigger
+        - threshold_guard
+      truth_function: reveals_hidden_path
+
+  - id: ex_etheric_sanctuary_stag
+    description: >
+      A sanctuary-bound stag whose appearance marks purification pressure,
+      nonviolent testing, and a possible oath-binding path.
+    likely_configuration:
+      tier: creature_tier_mythic
+      manifestation_mode: sacred_beast
+      creature_role: threshold_tester
+      realm_bias: etheric
+      encounter_functions:
+        - threshold_guard
+        - bloodline_recognition
+        - myth_materialization_hook
+      truth_function: tests_readiness
+
+  - id: ex_void_ruin_devourer
+    description: >
+      A ruin-dwelling devourer that expresses dissolution pressure and failed
+      continuity, with consequences for myth and prophecy if released or slain.
+    likely_configuration:
+      tier: creature_tier_significant
+      manifestation_mode: corrupted_beast
+      creature_role: devourer
+      realm_bias: void
+      encounter_functions:
+        - combat_pressure
+        - ritual_disruption
+        - quest_pursuit_hook
+      truth_function: embodies_distortion

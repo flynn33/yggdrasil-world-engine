@@ -1,0 +1,146 @@
+registry_version: "1.0"
+status: canonical
+authority:
+  prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+  schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+  downstream_contract: docs/architecture/ash_downstream_contract.md
+family: region
+records:
+  - id: region_hidden_archive
+    family: region
+    name: Hidden Archive
+    summary: A place where preserved truth, concealed memory, and incomplete revelation remain under pressure.
+    symbolic_function: [preservation, concealment, delayed_revelation]
+    truth_modes: [stored_memory, fragment_recovery, curated_access]
+    shadow_modes: [hoarding, redacted_history, hidden_gatekeeping]
+    realm_bias: [mental, astral, shadow]
+    wolf_bias: {white: 0.3, dark: 0.2}
+    player_phase_bias: [mortal_unknowing, first_stirrings, memory_recovery]
+    compatible_with: [region_threshold_ruin, region_sanctum, region_borderland_refuge]
+    friction_with: [region_crowned_seat]
+    contradicts: []
+    downstream_affinities:
+      npc: [librarian, hidden_keeper, witness]
+      quest: [quest_discovery_arc, quest_retrieval_arc, quest_threshold_arc]
+      myth: [lost_archive, forbidden_name, hidden_line]
+      prophecy: [sealed_sign, archive_omen, returning_record]
+      artifact: [tablet, key, encoded_relic]
+      creature: [archive_guardian, watcher_bird, memory_hound]
+    manifestation_hints: [sealed_wings, redacted_chambers, layered_maps]
+    invariant_notes: [archives_hold_pressure_not_only_lore, access_requires_condition]
+    status: canonical
+  - id: region_threshold_ruin
+    family: region
+    name: Threshold Ruin
+    summary: A broken place where old boundaries fail unevenly and crossings remain half-open.
+    symbolic_function: [liminality, collapse, unstable_passage]
+    truth_modes: [broken_barrier, threshold_memory, residue_reveal]
+    shadow_modes: [lawless_crossing, ruin_fixation, collapse_loop]
+    realm_bias: [shadow, astral, physical]
+    wolf_bias: {white: 0.1, dark: 0.4}
+    player_phase_bias: [first_stirrings, memory_recovery, identity_conflict]
+    compatible_with: [region_hidden_archive, region_wild_confluence, region_borderland_refuge]
+    friction_with: [region_sanctum, region_crowned_seat]
+    contradicts: []
+    downstream_affinities:
+      npc: [ruin_guard, scavenger_witness, threshold_guide]
+      quest: [quest_threshold_arc, quest_discovery_arc, quest_reckoning_arc]
+      myth: [fallen_gate, broken_watch, lost_passage]
+      prophecy: [breach_sign, unstable_path, collapse_warning]
+      artifact: [shard, broken_seal, gate_key]
+      creature: [ruin_dweller, omen_flock, threshold_hound]
+    manifestation_hints: [breached_walls, broken_gates, unstable_paths]
+    invariant_notes: [ruins_hold_history_pressure, collapse_must_leave_legible_residue]
+    status: canonical
+  - id: region_sanctum
+    family: region
+    name: Sanctum
+    summary: A consecrated place of lawful protection, concentrated meaning, and restricted approach.
+    symbolic_function: [consecration, custody, ordered_refuge]
+    truth_modes: [entrusted_revelation, proven_access, protected_truth]
+    shadow_modes: [sanctified_exclusion, pious_control, static_purity]
+    realm_bias: [celestial, etheric, physical]
+    wolf_bias: {white: 0.4, dark: 0.1}
+    player_phase_bias: [memory_recovery, chosen_becoming, world_actor]
+    compatible_with: [region_hidden_archive, region_crowned_seat]
+    friction_with: [region_threshold_ruin, region_wild_confluence]
+    contradicts: []
+    downstream_affinities:
+      npc: [abbot, oath_keeper, steward]
+      quest: [quest_defense_arc, quest_restoration_arc, quest_succession_arc]
+      myth: [holy_refuge, protected_name, sealed_vow]
+      prophecy: [sanctum_sign, ward_warning, blessed_return]
+      artifact: [wardstone, regalia, oath_object]
+      creature: [sanctuary_stag, sentinel_bird, consecrated_guardian]
+    manifestation_hints: [inner_courts, warded_halls, vow_bound_paths]
+    invariant_notes: [sanctity_requires_cost, refuge_must_not_become_stasis]
+    status: canonical
+  - id: region_wild_confluence
+    family: region
+    name: Wild Confluence
+    summary: A living intersection where natural forces, realm pressure, and symbolic recurrence gather without full domestication.
+    symbolic_function: [convergence, ecological_pressure, raw_resonance]
+    truth_modes: [pattern_visibility, omen_density, instinctive_reading]
+    shadow_modes: [overgrowth, lawless_spread, feral_confusion]
+    realm_bias: [etheric, astral, shadow]
+    wolf_bias: {white: 0.2, dark: 0.3}
+    player_phase_bias: [mortal_unknowing, first_stirrings, memory_recovery]
+    compatible_with: [region_threshold_ruin, region_borderland_refuge]
+    friction_with: [region_sanctum, region_crowned_seat]
+    contradicts: []
+    downstream_affinities:
+      npc: [wanderer, forager, omen_reader]
+      quest: [quest_threshold_arc, quest_discovery_arc, quest_retrieval_arc]
+      myth: [wild_sign, beast_story, sacred_grove]
+      prophecy: [convergence_omen, storm_call, path_warning]
+      artifact: [root_token, omen_branch, resonance_focus]
+      creature: [omen_flock, sacred_beast, threshold_pack]
+    manifestation_hints: [crossroads, overgrown_shrines, converging_streams]
+    invariant_notes: [wildness_must_remain_meaningful, ecology_is_not_random_filler]
+    status: canonical
+  - id: region_borderland_refuge
+    family: region
+    name: Borderland Refuge
+    summary: An edge-space of temporary belonging, hard shelter, and contested safety for the displaced.
+    symbolic_function: [shelter, edge_life, fragile_belonging]
+    truth_modes: [outsider_witness, provisional_home, chosen_kinship]
+    shadow_modes: [siege_fear, exclusion, scarcity_hardening]
+    realm_bias: [physical, shadow, etheric]
+    wolf_bias: {white: 0.1, dark: 0.3}
+    player_phase_bias: [mortal_unknowing, memory_recovery, identity_conflict]
+    compatible_with: [region_threshold_ruin, region_wild_confluence, region_hidden_archive]
+    friction_with: [region_crowned_seat]
+    contradicts: []
+    downstream_affinities:
+      npc: [survivor, exile_keeper, hidden_helper]
+      quest: [quest_retrieval_arc, quest_threshold_arc, quest_restoration_arc]
+      myth: [last_hearth, road_kin, hidden_shelter]
+      prophecy: [return_sign, shelter_warning, wandering_name]
+      artifact: [token, burden_bundle, road_relic]
+      creature: [camp_hound, watch_raven, refuge_stag]
+    manifestation_hints: [edge_camps, improvised_wards, hidden_roads]
+    invariant_notes: [refuge_requires_pressure, safety_must_remain_fragile_and_meaningful]
+    status: canonical
+  - id: region_crowned_seat
+    family: region
+    name: Crowned Seat
+    summary: A center of legitimacy, public memory, and authority where succession becomes socially visible.
+    symbolic_function: [legitimacy_center, public_witness, institutional_weight]
+    truth_modes: [recognized_claim, public_testimony, burdened_rule]
+    shadow_modes: [ceremonial_hollowing, usurpation, memory_capture]
+    realm_bias: [celestial, causal, physical]
+    wolf_bias: {white: 0.3, dark: 0.2}
+    player_phase_bias: [identity_conflict, chosen_becoming, world_actor]
+    compatible_with: [region_sanctum, region_hidden_archive]
+    friction_with: [region_threshold_ruin, region_wild_confluence, region_borderland_refuge]
+    contradicts: []
+    downstream_affinities:
+      npc: [claimant, herald, steward]
+      quest: [quest_succession_arc, quest_reckoning_arc, quest_defense_arc]
+      myth: [crowned_name, fallen_throne, burdened_rule]
+      prophecy: [crown_omen, division_sign, returning_line]
+      artifact: [regalia, signet, throne_key]
+      creature: [heraldic_beast, throne_hawk, court_hound]
+    manifestation_hints: [great_halls, public_steps, oath_chambers]
+    invariant_notes: [authority_requires_public_memory, centers_of_rule_must_cost_someone]
+    status: canonical

@@ -1,0 +1,148 @@
+registry_version: "1.0"
+status: canonical
+authority:
+  prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+  schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+  downstream_contract: docs/architecture/ash_downstream_contract.md
+family: cluster
+records:
+  - id: cluster_hidden_knowledge
+    family: cluster
+    name: Hidden Knowledge
+    summary: Compound pressure around concealed truth, layered interpretation, and discovery through earned access.
+    symbolic_function: [concealed_truth, layered_revelation, interpretive_pressure]
+    truth_modes: [fragment_recovery, pattern_reveal, archive_access]
+    shadow_modes: [elitist_secrecy, hoarded_truth, initiatory_gatekeeping]
+    realm_bias: [mental, astral, shadow]
+    wolf_bias: {white: 0.3, dark: 0.2}
+    player_phase_bias: [mortal_unknowing, first_stirrings, memory_recovery]
+    compatible_with: [cluster_awakening_origin_discovery]
+    friction_with: [cluster_protection_oath_continuity]
+    contradicts: []
+    downstream_affinities:
+      npc: [guide, witness, hidden_keeper]
+      quest: [quest_discovery_arc, quest_threshold_arc, quest_retrieval_arc]
+      myth: [lost_truth, forbidden_archive, hidden_line]
+      prophecy: [hidden_sign, layered_omen, awakening_call]
+      artifact: [key, encoded_relic, map]
+      creature: [watcher, archive_guardian, omen_bird]
+    manifestation_hints: [sealed_archives, incomplete_maps, hidden_thresholds]
+    invariant_notes: [knowledge_requires_cost, secrecy_must_not_replace_symbolic_logic]
+    members: [char_seeker, char_weaver, quest_discovery_arc, region_hidden_archive, event_revelation]
+    combined_summary: Seeking, weaving, archives, and revelation create a lawful pressure toward discovery through interpretation.
+    lawful_basis: [concealed_truth_requires_interpreters, archives_concentrate_revelation_pressure, discovery_and_revelation_form_a_coherent_loop]
+    contradiction_risk: Secrecy can harden into hoarding if access becomes control instead of revelation.
+    stability_mode: threshold_based
+    status: canonical
+  - id: cluster_protection_oath_continuity
+    family: cluster
+    name: Protection Oath Continuity
+    summary: Compound pressure around defense, stewardship, vows, and the preservation of charged continuity.
+    symbolic_function: [warding, continuity, vow_bound_protection]
+    truth_modes: [proven_stewardship, entrusted_burden, protected_access]
+    shadow_modes: [stagnation, custodial_capture, sanctified_control]
+    realm_bias: [etheric, physical, celestial]
+    wolf_bias: {white: 0.4, dark: 0.1}
+    player_phase_bias: [memory_recovery, identity_conflict, chosen_becoming]
+    compatible_with: [cluster_civilization_order_founding]
+    friction_with: [cluster_hidden_knowledge, cluster_catastrophe_reckoning]
+    contradicts: []
+    downstream_affinities:
+      npc: [warden, oath_keeper, steward]
+      quest: [quest_defense_arc, quest_restoration_arc, quest_succession_arc]
+      myth: [last_watch, oath_line, sacred_ward]
+      prophecy: [seal_warning, last_guard, binding_sign]
+      artifact: [seal, wardstone, oath_blade]
+      creature: [sentinel, threshold_guardian, bonded_beast]
+    manifestation_hints: [watch_posts, sanctums, guarded_relics]
+    invariant_notes: [protection_requires_cost, continuity_must_not_become_stasis]
+    members: [char_guardian, char_builder, quest_defense_arc, transformation_binding, event_oath_swearing]
+    combined_summary: Guardianship, building, binding, and public vows create coherent pressure toward held continuity under threat.
+    lawful_basis: [oaths_bind_future_consequence, stewardship_requires_structure, guarded_continuity_needs_public_witness]
+    contradiction_risk: Protection drifts toward oppressive control when custody ceases to serve meaning.
+    stability_mode: stable
+    status: canonical
+  - id: cluster_civilization_order_founding
+    family: cluster
+    name: Civilization Order Founding
+    summary: Compound pressure around rule, structure, institution, and the making of lasting social order.
+    symbolic_function: [institution_building, legitimacy, durable_order]
+    truth_modes: [public_foundation, recognized_authority, repaired_structure]
+    shadow_modes: [authoritarian_capture, hollow_institution, ceremonial_rule]
+    realm_bias: [physical, causal, celestial]
+    wolf_bias: {white: 0.3, dark: 0.1}
+    player_phase_bias: [chosen_becoming, world_actor]
+    compatible_with: [cluster_protection_oath_continuity]
+    friction_with: [cluster_catastrophe_reckoning, cluster_awakening_origin_discovery]
+    contradicts: []
+    downstream_affinities:
+      npc: [founder, steward, claimant]
+      quest: [quest_restoration_arc, quest_succession_arc, quest_defense_arc]
+      myth: [city_founding, rightful_rule, rebuilt_house]
+      prophecy: [crown_sign, tower_raised, order_rekindled]
+      artifact: [regalia, anchor, signet]
+      creature: [heraldic_beast, keep_guardian, omen_stag]
+    manifestation_hints: [great_halls, repair_sites, civic_oaths]
+    invariant_notes: [institutions_require_legitimacy, order_must_remain_symbolically_grounded]
+    members: [char_builder, char_sovereign, quest_restoration_arc, region_crowned_seat, faction_foundry_covenant]
+    combined_summary: Builders, sovereign burden, civic restoration, and institutional craft combine into lawful founding pressure.
+    lawful_basis: [lasting_order_requires_structure_and_claim, institutions_must_be_socially_visible, restoration_and_rule_can_reinforce_each_other]
+    contradiction_risk: Order turns hollow when institution survives but legitimacy decays.
+    stability_mode: cyclical
+    status: canonical
+  - id: cluster_catastrophe_reckoning
+    family: cluster
+    name: Catastrophe Reckoning
+    summary: Compound pressure around breach, distortion, judgment, and the forced settlement of deferred consequence.
+    symbolic_function: [collapse, reckoning, consequence_due]
+    truth_modes: [revealed_failure, public_measure, unavoidable_due]
+    shadow_modes: [panic_rule, scapegoating, collapse_spiral]
+    realm_bias: [void, shadow, causal]
+    wolf_bias: {white: 0.1, dark: 0.5}
+    player_phase_bias: [identity_conflict, chosen_becoming, world_actor]
+    compatible_with: [cluster_awakening_origin_discovery]
+    friction_with: [cluster_protection_oath_continuity, cluster_civilization_order_founding]
+    contradicts: []
+    downstream_affinities:
+      npc: [arbiter, survivor, doomed_keeper]
+      quest: [quest_reckoning_arc, quest_threshold_arc, quest_defense_arc]
+      myth: [falling_gate, judged_city, broken_vow]
+      prophecy: [collapse_sign, final_measure, breach_omen]
+      artifact: [broken_seal, burden_object, sentence_tablet]
+      creature: [corrupted_beast, ruin_devourer, omen_pack]
+    manifestation_hints: [breaches, failing_wards, exposed_records]
+    invariant_notes: [collapse_must_have_prior_structure, reckoning_requires_witness]
+    members: [char_judge, quest_reckoning_arc, region_threshold_ruin, transformation_corruption, event_breach]
+    combined_summary: Judgment, breach, corruption, and ruin produce lawful pressure toward exposed failure and consequence settlement.
+    lawful_basis: [rupture_surfaces_hidden_debt, corruption_requires_reckoning, ruin_makes_prior_order_legible]
+    contradiction_risk: Reckoning collapses into spectacle if witness and measure are abandoned.
+    stability_mode: unstable
+    status: canonical
+  - id: cluster_awakening_origin_discovery
+    family: cluster
+    name: Awakening Origin Discovery
+    summary: Compound pressure around veiled identity, return, warning, and the discovery of origin through change.
+    symbolic_function: [identity_reveal, return_pressure, omen_guided_discovery]
+    truth_modes: [origin_recovery, awakened_memory, lawful_return]
+    shadow_modes: [false_identity, premature_claim, dread_fascination]
+    realm_bias: [astral, shadow, celestial]
+    wolf_bias: {white: 0.2, dark: 0.3}
+    player_phase_bias: [mortal_unknowing, first_stirrings, memory_recovery, identity_conflict]
+    compatible_with: [cluster_hidden_knowledge, cluster_catastrophe_reckoning]
+    friction_with: [cluster_civilization_order_founding]
+    contradicts: []
+    downstream_affinities:
+      npc: [returning_heir, omen_guide, hidden_witness]
+      quest: [quest_threshold_arc, quest_discovery_arc, quest_succession_arc]
+      myth: [forgotten_line, first_stag, road_of_names]
+      prophecy: [awakening_call, returning_sign, threshold_omen]
+      artifact: [mirror_token, inheritance_shard, path_key]
+      creature: [return_omen, stag_of_warning, shadow_hound]
+    manifestation_hints: [thin_veils, remembered_paths, heraldic_signs]
+    invariant_notes: [identity_is_revealed_through_play, return_must_transform_the_self]
+    members: [char_exile, char_harbinger, transformation_awakening, quest_threshold_arc, event_return]
+    combined_summary: Exile, omen, awakening, threshold crossing, and return create lawful pressure toward identity discovery through changed re-entry.
+    lawful_basis: [origin_is_discovered_at_thresholds, warning_precedes_return, awakening_makes_hidden_lineage_legible]
+    contradiction_risk: Return narratives degrade if discovery becomes predetermined rather than consequence-shaped.
+    stability_mode: threshold_based
+    status: canonical

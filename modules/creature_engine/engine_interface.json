@@ -1,0 +1,61 @@
+{
+    "schemaVersion":  "1.0",
+    "status":  "forsetti_aligned_design_contract",
+    "moduleID":  "com.ywe.module.creature-engine",
+    "displayName":  "YWE Creature Engine",
+    "plannedForsettiModuleType":  "service",
+    "entryPointContract":  "CreatureEngineModule",
+    "supportedPlatforms":  [
+                               "windows"
+                           ],
+    "minForsettiVersion":  {
+                               "minor":  1,
+                               "patch":  0,
+                               "prerelease":  null,
+                               "major":  0
+                           },
+    "truthDomain":  "creature manifestation",
+    "activationProfile":  "host_policy_defined",
+    "lifecycle":  [
+                      "discover",
+                      "validate",
+                      "activate",
+                      "deactivate"
+                  ],
+    "compatibilityCheckRequired":  true,
+    "entitlementPolicy":  "defined_by_host_policy",
+    "directRuntimeDependencies":  [
+                                      "com.ywe.core.ash-pattern-engine",
+                                      "com.ywe.core.realm-engine",
+                                      "com.ywe.core.narrative-engine"
+                                  ],
+    "semanticInputs":  [
+                           "pattern signatures",
+                           "realm pressure",
+                           "narrative consequence"
+                       ],
+    "outputs":  [
+                    "creature manifestation specifications",
+                    "encounter hooks",
+                    "creature consequence hooks"
+                ],
+    "communication":  {
+                          "allowedChannels":  [
+                                                  "service_container",
+                                                  "event_bus",
+                                                  "framework_logger"
+                                              ],
+                          "forbiddenChannels":  [
+                                                    "direct_module_calls",
+                                                    "self_messaging",
+                                                    "reserved_namespace:forsetti.internal.*"
+                                                ]
+                      },
+    "plannedCapabilities":  [
+
+                            ],
+    "forbiddenCapabilities":  [
+                                  "ui_theme_mask"
+                              ],
+    "branchStatus":  "template_only_no_runtime_code"
+}

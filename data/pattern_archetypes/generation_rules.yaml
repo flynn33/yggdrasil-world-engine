@@ -1,0 +1,148 @@
+version: "1.0"
+status: canonical
+authority:
+  canonical_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+  schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+  downstream_contract: docs/architecture/ash_downstream_contract.md
+
+purpose: >
+  Defines how ASH pattern registries are evaluated into usable symbolic packets
+  before narrative interpretation and downstream manifestation begin.
+
+evaluation_order:
+  - ingest_active_ash_state
+  - detect_pattern_candidates
+  - gather_realm_pressure
+  - gather_wolf_pressure
+  - gather_player_phase_bias
+  - gather_recent_worldstate_delta_bias
+  - score_candidate_archetypes
+  - resolve_same_family_relationships
+  - propose_cluster_candidates
+  - validate_cluster_lawfulness
+  - select_dominant_and_secondary_archetypes
+  - emit_archetype_evaluation_packet
+  - hand_off_to_narrative_interpretation
+
+required_inputs:
+  - active_pattern_symbols
+  - dominant_realm_pressure
+  - current_player_origin_phase
+  - relevant_worldstate_deltas
+  - canonical_archetype_registries
+  - compatibility_matrix
+
+optional_inputs:
+  - bloodline_resonance
+  - myth_pressure
+  - prophecy_pressure
+  - site_activation_state
+  - faction_legitimacy_pressure
+  - perception_visibility_bias
+
+weighting_rules:
+  base_match:
+    matching_symbolic_function: 1.0
+    matching_truth_mode: 0.8
+    matching_shadow_mode: 0.6
+  bias_modifiers:
+    realm_bias_match: 0.35
+    wolf_bias_alignment: 0.2
+    player_phase_match: 0.25
+    recent_delta_recurrence: 0.15
+    myth_pressure_link: 0.1
+    prophecy_pressure_link: 0.1
+  penalties:
+    contradiction_penalty: -1.0
+    friction_penalty: -0.35
+    unsupported_cluster_penalty: -0.5
+    shallow_affinity_penalty: -0.2
+
+same_family_resolution:
+  precedence: [contradiction, friction, compatibility, neutral]
+  rules:
+    - contradictions must suppress casual co-selection unless an explicit higher-order design basis exists
+    - friction pairs may coexist only when tension is intended to remain legible in quest, myth, prophecy, or consequence output
+    - compatibility strengthens dominant selection and raises cluster formation likelihood
+    - neutral pairs may coexist without bonus or penalty
+
+cluster_formation:
+  requirements:
+    - at_least_two_member_records_must_score_above_selection_threshold
+    - cluster_members_must_map_to_the_canonical_members_list
+    - lawful_basis_must_fit_current_pattern_pressure
+    - contradiction_risk_must_be_acceptable_for_the_selected_generation_intent
+  stability_bias:
+    stable: 0.2
+    cyclical: 0.15
+    threshold_based: 0.25
+    unstable: -0.1
+  rejection_rules:
+    - reject_cluster_if_members_are_present_but_lawful_basis_is_not_satisfied
+    - reject_cluster_if_selected_contradictions_are_not_explicitly_supported
+    - reject_cluster_if_output_would_reduce_symbolic_pressure_to_generic_flavor
+
+selection_thresholds:
+  dominant_archetype_minimum: 1.2
+  secondary_archetype_minimum: 0.8
+  cluster_activation_minimum: 2.1
+  contradiction_override_requires: explicit_design_basis
+
+downstream_packet_shape:
+  ArchetypeEvaluationPacket:
+    dominant_archetypes: [string]
+    secondary_archetypes: [string]
+    friction_pairs: [string]
+    contradiction_pairs: [string]
+    activated_clusters: [string]
+    realm_pressure_map: {}
+    wolf_pressure_map: {}
+    player_phase_map: {}
+    downstream_affinity_hints: {}
+    manifestation_hints: [string]
+
+packet_population_rules:
+  - dominant_archetypes should contain the highest-scoring lawful records
+  - secondary_archetypes should contain supporting pressure rather than filler tags
+  - friction_pairs should only include pairs intentionally allowed to coexist
+  - contradiction_pairs should be empty unless later systems are explicitly handling designed contradiction
+  - downstream_affinity_hints should be derived from canonical downstream_affinities fields rather than rewritten locally
+  - manifestation_hints should preserve symbolic fit without becoming direct content generation scripts
+
+downstream_boundaries:
+  npc_synthesis:
+    allowed: [motive_bias, truth_function, shadow_risk, relationship_stance, transformation_potential]
+    forbidden: [local_archetype_redefinition]
+  quest_engine:
+    allowed: [pressure_curve, threshold_form, cost_profile, residue_shape]
+    forbidden: [bypassing_narrative_intent_selection]
+  myth_engine:
+    allowed: [memory_bias, retelling_emphasis, legitimacy_pressure]
+    forbidden: [treating_myth_as_archetype_source]
+  prophecy_engine:
+    allowed: [omen_style, attractor_profile, activation_tendency]
+    forbidden: [deterministic_fate_lock]
+  artifact_engine:
+    allowed: [symbolic_role, resonance_hooks, risk_profile]
+    forbidden: [loot_logic_detached_from_meaning]
+  creature_engine:
+    allowed: [encounter_symbolism, role_bias, omen_presence]
+    forbidden: [standalone_ecology_detached_from_ash]
+  perception_engine:
+    allowed: [legibility_shift, emphasis_shift, interpretation_visibility]
+    forbidden: [rewriting_shared_world_truth]
+
+maintenance_rules:
+  - family registries remain the primary machine-readable authority
+  - compatibility_matrix.yaml is a derived reference and must be updated when family relationships change
+  - downstream systems should reference canonical IDs instead of cloning prose definitions
+  - new archetype families are not allowed without canonical spec and schema updates
+
+invariants:
+  - all_meaningful_generation_must_begin_from_detected_pattern_state
+  - archetype_evaluation_must_precede_narrative_interpretation
+  - friction_is_a_designed_tension_not_a_random_mismatch
+  - contradiction_requires_explicit_handling
+  - realm_bias_is_weighted_relevance_not_hard_locking
+  - wolf_bias_is_informational_pressure_not_morality
+  - emitted_packets_must_not_allow_downstream_systems_to_redefine_canonical_meaning

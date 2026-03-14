@@ -1,0 +1,169 @@
+registry_version: "1.0"
+status: canonical
+authority:
+  prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+  schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+  downstream_contract: docs/architecture/ash_downstream_contract.md
+family: quest
+records:
+  - id: quest_discovery_arc
+    family: quest
+    name: Discovery Arc
+    summary: Quest pressure centered on hidden truth becoming legible through search, risk, and interpretation.
+    symbolic_function: [discovery, revelation, pursuit]
+    truth_modes: [partial_reveal, recovered_memory, hidden_path]
+    shadow_modes: [false_clue_loop, obsession, misread_sign]
+    realm_bias: [mental, astral, shadow]
+    wolf_bias: {white: 0.3, dark: 0.2}
+    player_phase_bias: [mortal_unknowing, first_stirrings, memory_recovery]
+    compatible_with: [quest_retrieval_arc, quest_threshold_arc, quest_restoration_arc]
+    friction_with: [quest_defense_arc, quest_succession_arc]
+    contradicts: []
+    downstream_affinities:
+      npc: [guide, witness, rival_seeker]
+      quest: [layered_reveal, secret_route, interrupted_testimony]
+      myth: [lost_truth_returns, buried_name, hidden_archive]
+      prophecy: [hidden_sign, omen_search, path_of_return]
+      artifact: [key, map, encoded_relic]
+      creature: [watcher, archive_guardian, omen_bird]
+    manifestation_hints: [sealed_rooms, missing_records, unmarked_trails]
+    invariant_notes: [discovery_requires_cost, do_not_flatten_into_fetch_chain]
+    status: canonical
+  - id: quest_retrieval_arc
+    family: quest
+    name: Retrieval Arc
+    summary: Quest pressure centered on recovering a person, relic, truth fragment, or rightfully held burden.
+    symbolic_function: [recovery, custody, return_of_value]
+    truth_modes: [recovered_fragment, rightful_return, custody_test]
+    shadow_modes: [hoarding, extraction_without_understanding, false_possession]
+    realm_bias: [physical, etheric, astral]
+    wolf_bias: {white: 0.2, dark: 0.2}
+    player_phase_bias: [first_stirrings, memory_recovery, identity_conflict]
+    compatible_with: [quest_discovery_arc, quest_defense_arc, quest_restoration_arc]
+    friction_with: [quest_reckoning_arc, quest_threshold_arc]
+    contradicts: []
+    downstream_affinities:
+      npc: [escort_target, reluctant_keeper, claimant]
+      quest: [recovery_chain, custody_transfer, burdened_return]
+      myth: [relic_recovered, name_restored, forgotten_heirloom]
+      prophecy: [return_marker, keeper_sign, reclaimed_symbol]
+      artifact: [seal, shard, witness_object]
+      creature: [pack_guardian, relic_guard, road_tracker]
+    manifestation_hints: [lost_paths, guarded_relics, custody_disputes]
+    invariant_notes: [retrieval_must_change_future_state, object_value_requires_meaning]
+    status: canonical
+  - id: quest_threshold_arc
+    family: quest
+    name: Threshold Arc
+    summary: Quest pressure centered on crossing, refusal, initiation, or lawful passage through a charged boundary.
+    symbolic_function: [crossing, initiation, boundary_test]
+    truth_modes: [readiness_reveal, lawful_entry, gate_condition]
+    shadow_modes: [premature_crossing, false_readiness, sealed_stagnation]
+    realm_bias: [astral, shadow, etheric]
+    wolf_bias: {white: 0.2, dark: 0.3}
+    player_phase_bias: [first_stirrings, memory_recovery, identity_conflict]
+    compatible_with: [quest_discovery_arc, quest_reckoning_arc, quest_restoration_arc]
+    friction_with: [quest_defense_arc, quest_succession_arc]
+    contradicts: []
+    downstream_affinities:
+      npc: [gatekeeper, omen_guide, threshold_tester]
+      quest: [initiation_chain, sealed_gate, passage_trial]
+      myth: [crossing_song, opened_way, forbidden_gate]
+      prophecy: [threshold_call, gate_omen, passage_warning]
+      artifact: [key, oath_token, boundary_seal]
+      creature: [threshold_guardian, omen_flock, hidden_hound]
+    manifestation_hints: [thin_veils, sealed_bridges, ritual_passages]
+    invariant_notes: [crossings_require_conditions, thresholds_must_not_be_generic_doors]
+    status: canonical
+  - id: quest_defense_arc
+    family: quest
+    name: Defense Arc
+    summary: Quest pressure centered on preserving a person, site, relic, lineage, or truth under active threat.
+    symbolic_function: [protection, warding, continuity]
+    truth_modes: [tested_loyalty, protected_value, proven_stewardship]
+    shadow_modes: [siege_mindset, possessive_control, defensive_paralysis]
+    realm_bias: [physical, etheric, celestial]
+    wolf_bias: {white: 0.4, dark: 0.1}
+    player_phase_bias: [memory_recovery, identity_conflict, chosen_becoming]
+    compatible_with: [quest_retrieval_arc, quest_restoration_arc, quest_succession_arc]
+    friction_with: [quest_discovery_arc, quest_threshold_arc]
+    contradicts: []
+    downstream_affinities:
+      npc: [warden, sworn_guard, embattled_keeper]
+      quest: [hold_the_line, ward_the_site, escort_under_siege]
+      myth: [last_defense, oath_held, sanctuary_kept]
+      prophecy: [fall_warning, last_guard, defended_name]
+      artifact: [wardstone, seal, oath_blade]
+      creature: [sentinel, guardian_beast, omen_hawk]
+    manifestation_hints: [besieged_sites, threatened_lines, strained_wards]
+    invariant_notes: [defense_must_preserve_meaning_not_only_hit_points, threat_requires_consequence]
+    status: canonical
+  - id: quest_reckoning_arc
+    family: quest
+    name: Reckoning Arc
+    summary: Quest pressure centered on exposure, judgment, settlement of debt, and consequence coming due.
+    symbolic_function: [reckoning, exposure, settlement]
+    truth_modes: [verdict, unveiled_guilt, measured_due]
+    shadow_modes: [vengeance_spiral, false_balance, scapegoating]
+    realm_bias: [causal, celestial, mental]
+    wolf_bias: {white: 0.3, dark: 0.2}
+    player_phase_bias: [memory_recovery, identity_conflict, chosen_becoming]
+    compatible_with: [quest_threshold_arc, quest_restoration_arc, quest_succession_arc]
+    friction_with: [quest_retrieval_arc, quest_defense_arc]
+    contradicts: []
+    downstream_affinities:
+      npc: [arbiter, accuser, witness]
+      quest: [trial_chain, exposed_record, debt_due]
+      myth: [judged_line, public_shame, avenged_name]
+      prophecy: [verdict_omen, day_of_accounting, burden_due]
+      artifact: [tablet, scales, sentence_object]
+      creature: [trial_beast, omen_raven, pursuing_hound]
+    manifestation_hints: [tribunal_sites, exposed_secrets, long-deferred_conflicts]
+    invariant_notes: [reckoning_must_change_worldstate, judgment_requires_context]
+    status: canonical
+  - id: quest_restoration_arc
+    family: quest
+    name: Restoration Arc
+    summary: Quest pressure centered on repair, renewal, reconnection, and returning lawful function to damaged continuity.
+    symbolic_function: [repair, renewal, continuity_restoration]
+    truth_modes: [rejoined_line, healed_site, resumed_function]
+    shadow_modes: [forced_restoration, hollow_reconstruction, nostalgia_trap]
+    realm_bias: [etheric, physical, celestial]
+    wolf_bias: {white: 0.4, dark: 0.1}
+    player_phase_bias: [first_stirrings, chosen_becoming, world_actor]
+    compatible_with: [quest_discovery_arc, quest_retrieval_arc, quest_defense_arc]
+    friction_with: [quest_succession_arc, quest_reckoning_arc]
+    contradicts: []
+    downstream_affinities:
+      npc: [restorer, oath_renewal_guide, founder]
+      quest: [repair_chain, renewal_vow, rejoined_passage]
+      myth: [house_restored, shrine_rekindled, line_renewed]
+      prophecy: [renewal_sign, rekindled_light, repaired_fate]
+      artifact: [anchor, regalia, repair_focus]
+      creature: [sanctuary_stag, bond_keeper, site_guardian]
+    manifestation_hints: [ruined_sites, broken_oaths, damaged_relays]
+    invariant_notes: [restoration_must_not_erase_cost, repair_requires_residue]
+    status: canonical
+  - id: quest_succession_arc
+    family: quest
+    name: Succession Arc
+    summary: Quest pressure centered on legitimacy, inheritance, contested office, and who may lawfully carry authority forward.
+    symbolic_function: [legitimacy, inheritance, contested_authority]
+    truth_modes: [recognized_claim, revealed_lineage, burdened_office]
+    shadow_modes: [usurpation, bloodline_idolatry, ceremonial_empty_rule]
+    realm_bias: [celestial, causal, physical]
+    wolf_bias: {white: 0.2, dark: 0.2}
+    player_phase_bias: [identity_conflict, chosen_becoming, world_actor]
+    compatible_with: [quest_defense_arc, quest_reckoning_arc, quest_restoration_arc]
+    friction_with: [quest_discovery_arc, quest_threshold_arc]
+    contradicts: []
+    downstream_affinities:
+      npc: [claimant, steward, reluctant_heir]
+      quest: [lineage_test, crown_trial, succession_dispute]
+      myth: [rightful_heir, fallen_court, contested_throne]
+      prophecy: [crown_sign, divided_rule, returning_name]
+      artifact: [regalia, signet, witness_blade]
+      creature: [heraldic_beast, throne_hawk, omen_stag]
+    manifestation_hints: [claim_seats, public_rituals, split_loyalties]
+    invariant_notes: [succession_is_not_simple_title_transfer, legitimacy_requires_social_memory]
+    status: canonical
