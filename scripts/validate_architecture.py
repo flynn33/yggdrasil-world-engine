@@ -181,6 +181,9 @@ def check_governance_files(root):
         "README.md",
         "LICENSE",
         "CONTRIBUTING.md",
+        ".github/discussion_agents.json",
+        ".github/workflows/discussion-agents.yml",
+        "scripts/github/discussion_agent.py",
     ]
     errors = []
     for f in required_files:

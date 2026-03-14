@@ -1,0 +1,133 @@
+{
+  "version": "1.0",
+  "default_agent_id": "support",
+  "response_policy": {
+    "fallback_message": "There is not information available at this time. Check back soon.",
+    "max_sources": 3,
+    "max_excerpt_chars": 280
+  },
+  "agents": [
+    {
+      "id": "technical",
+      "display_name": "Technical Discussion Agent",
+      "category_hints": [
+        "technical",
+        "engineering",
+        "development",
+        "architecture",
+        "integration",
+        "workflow",
+        "ci"
+      ],
+      "keywords": {
+        "technical": 6,
+        "engine": 5,
+        "module": 5,
+        "schema": 6,
+        "manifest": 5,
+        "workflow": 5,
+        "github action": 6,
+        "adapter": 4,
+        "interface": 4,
+        "contract": 4,
+        "validation": 5,
+        "json": 4,
+        "yaml": 4,
+        "build": 4,
+        "ci": 5,
+        "automation": 4,
+        "api": 4
+      },
+      "source_paths": [
+        "guide.md",
+        "developer-guide.md",
+        "wiki.md",
+        "core",
+        "modules",
+        "data",
+        "adapters",
+        "docs/architecture",
+        "docs/ash_compliance",
+        "scripts"
+      ]
+    },
+    {
+      "id": "support",
+      "display_name": "Support Discussion Agent",
+      "category_hints": [
+        "support",
+        "help",
+        "questions",
+        "q&a"
+      ],
+      "keywords": {
+        "support": 6,
+        "help": 6,
+        "how do i": 7,
+        "how can i": 7,
+        "getting started": 7,
+        "setup": 6,
+        "install": 6,
+        "configuration": 5,
+        "configure": 5,
+        "run checks": 6,
+        "where can i find": 7,
+        "unable": 5,
+        "cannot": 5,
+        "can't": 5,
+        "contributing": 5,
+        "guide": 4,
+        "documentation": 4
+      },
+      "source_paths": [
+        "README.md",
+        "guide.md",
+        "developer-guide.md",
+        "wiki.md",
+        "CONTRIBUTING.md",
+        "docs/architecture/README.md",
+        "docs/governance",
+        "docs/master_specification"
+      ]
+    },
+    {
+      "id": "lore",
+      "display_name": "Lore Discussion Agent",
+      "category_hints": [
+        "lore",
+        "canon",
+        "worldbuilding",
+        "cosmology"
+      ],
+      "keywords": {
+        "lore": 6,
+        "canon": 7,
+        "cosmology": 7,
+        "divine core": 8,
+        "architect": 7,
+        "architects": 7,
+        "yggdrasil": 8,
+        "odin": 8,
+        "michael": 7,
+        "lucifer": 7,
+        "wolf": 7,
+        "wolves": 7,
+        "white wolf": 8,
+        "dark wolf": 8,
+        "realm": 4,
+        "plane": 4,
+        "celestial": 6,
+        "mortal": 5,
+        "great trial": 8
+      },
+      "source_paths": [
+        "lore",
+        "docs/master_specification",
+        "docs/glossary",
+        "wiki.md",
+        "data/realm",
+        "data/realm_registry"
+      ]
+    }
+  ]
+}

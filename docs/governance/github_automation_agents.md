@@ -104,6 +104,25 @@ It checks:
 - adapter profiles remain non-truth-owning downstream execution connectors
 - adapter docs continue to describe host work as realization rather than canon authorship
 
+## Discussion Response Agents
+
+The discussion-response workflow routes new GitHub Discussions topics and new discussion comments to one of three repo-grounded agents:
+- Technical Discussion Agent
+- Support Discussion Agent
+- Lore Discussion Agent
+
+It works by:
+- classifying each new discussion post or comment into technical, support, or lore scope
+- searching only repository-tracked source material for matching information
+- replying with file-grounded references from the repo when relevant sources exist
+- falling back to `There is not information available at this time. Check back soon.` when the repository does not currently answer the question
+
+Boundary rules:
+- the agents respond only from repository truth and do not invent unsupported answers
+- lore responses are grounded in canonical lore and master-spec surfaces
+- support responses prefer README, guides, governance docs, and operating instructions
+- technical responses prefer engine, module, schema, workflow, adapter, and architecture surfaces
+
 ## No AI Contributor Agent
 
 The no-ai-contributor workflow protects repository attribution hygiene.
@@ -129,3 +148,4 @@ It verifies:
 - workflow-authored commits use `github-actions[bot]`
 - automation commits that should not cause release bumps include `[skip version]`
 - validation agents fail fast when design structure drifts; they do not invent or rewrite canon on their own
+- discussion agents answer from repo truth only; when the repo has no answer they must use the configured fallback response

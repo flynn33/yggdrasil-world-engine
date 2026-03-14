@@ -722,6 +722,84 @@ def check_source_inventory(root):
     return errors
 
 
+def check_discussion_agent_configuration(root):
+    """Verify the repo-grounded discussion agents are configured and scoped correctly."""
+    config_path = os.path.join(root, ".github", "discussion_agents.json")
+    workflow_path = os.path.join(root, ".github", "workflows", "discussion-agents.yml")
+
+    if not os.path.isfile(config_path):
+        return ["Discussion agent config not found: .github/discussion_agents.json"]
+
+    if not os.path.isfile(workflow_path):
+        return ["Discussion agent workflow not found: .github/workflows/discussion-agents.yml"]
+
+    config = load_json_file(config_path)
+    workflow_content = read_text_file(workflow_path)
+
+    errors = []
+
+    if config.get("version") != "1.0":
+        errors.append("Discussion agent config must declare version 1.0")
+
+    if config.get("default_agent_id") != "support":
+        errors.append("Discussion agent config must keep support as the default fallback agent")
+
+    response_policy = config.get("response_policy", {})
+    if (
+        response_policy.get("fallback_message")
+        != "There is not information available at this time. Check back soon."
+    ):
+        errors.append("Discussion agent config must preserve the required fallback message")
+
+    agents = config.get("agents", [])
+    expected_agents = {"technical", "support", "lore"}
+    actual_agents = {agent.get("id") for agent in agents if isinstance(agent, dict)}
+    if actual_agents != expected_agents:
+        errors.append("Discussion agent config must define exactly technical, support, and lore agents")
+
+    for expected_agent in expected_agents:
+        matching_agents = [
+            agent for agent in agents
+            if isinstance(agent, dict) and agent.get("id") == expected_agent
+        ]
+        if not matching_agents:
+            continue
+
+        agent = matching_agents[0]
+        if not agent.get("display_name"):
+            errors.append(f"Discussion agent '{expected_agent}' must define display_name")
+
+        if not agent.get("category_hints"):
+            errors.append(f"Discussion agent '{expected_agent}' must define category_hints")
+
+        if not agent.get("keywords"):
+            errors.append(f"Discussion agent '{expected_agent}' must define keywords")
+
+        source_paths = agent.get("source_paths", [])
+        if not source_paths:
+            errors.append(f"Discussion agent '{expected_agent}' must define source_paths")
+
+        for source_path in source_paths:
+            if not os.path.exists(os.path.join(root, source_path)):
+                errors.append(
+                    f"Discussion agent '{expected_agent}' references a missing repo source path: {source_path}"
+                )
+
+    required_workflow_markers = [
+        "discussion:",
+        "discussion_comment:",
+        "types: [created]",
+        "discussions: write",
+        "python3 scripts/github/discussion_agent.py --root .",
+    ]
+
+    for marker in required_workflow_markers:
+        if marker not in workflow_content:
+            errors.append(f"Discussion agent workflow missing required marker: {marker}")
+
+    return errors
+
+
 def check_authored_override_notes(root):
     """Verify canonical authored override and tooling control notes exist and contain guardrail sections."""
     notes_path = os.path.join(
@@ -909,6 +987,15 @@ def main():
         errors.extend(source_inventory_errors)
     else:
         print("  PASS: Source Inventory")
+
+    discussion_agent_errors = check_discussion_agent_configuration(root)
+    if discussion_agent_errors:
+        print("  FAIL: Discussion Agent Configuration")
+        for e in discussion_agent_errors:
+            print(f"    - {e}")
+        errors.extend(discussion_agent_errors)
+    else:
+        print("  PASS: Discussion Agent Configuration")
 
     # Check authored override and tooling control notes
     authored_notes_errors = check_authored_override_notes(root)
