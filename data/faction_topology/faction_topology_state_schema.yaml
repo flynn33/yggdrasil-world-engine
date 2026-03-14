@@ -1,0 +1,224 @@
+version: "0.1"
+
+meta:
+  system: faction_topology_state_schema
+  purpose: >
+    Defines canonical, engine-agnostic schema surfaces for faction topology
+    state so social and political structure can influence downstream systems
+    without collapsing into reputation bars or overriding canonical truth.
+  doctrine:
+    - faction_topology_is_structural_not_moral_slider
+    - topology_tracks_claims_legitimacy_presence_and_relations
+    - topology_informs_but_does_not_replace_worldstate_or_realm_truth
+    - faction_claims_do_not_equal_cosmological_fact
+    - schema_valid_state_changes_are_required_for_topology_mutation
+
+core_surfaces:
+  topology_state_record:
+    topology_id: string
+    region_id: string
+    updated_at: datetime
+    active_factions: [string]
+    claims: [FactionClaimRecord]
+    legitimacy_state: [FactionLegitimacyRecord]
+    succession_state: [FactionSuccessionRecord]
+    schism_state: [FactionSchismRecord]
+    reform_state: [FactionReformRecord]
+    presence_state: [FactionPresenceRecord]
+    covert_relations: [FactionCovertRelationRecord]
+    public_relations: [FactionPublicRelationRecord]
+    archive_control: [FactionControlRecord]
+    ritual_control: [FactionControlRecord]
+    conflict_markers: [string]
+    notes: [string]
+
+  FactionClaimRecord:
+    claim_id: string
+    faction_id: string
+    target_anchor_id: string
+    claim_type: string
+    claim_strength: float
+    claim_basis_tags: [string]
+    status: string
+
+  FactionLegitimacyRecord:
+    faction_id: string
+    legitimacy_score: float
+    legitimacy_band: string
+    legitimacy_sources: [string]
+    legitimacy_contests: [string]
+
+  FactionSuccessionRecord:
+    faction_id: string
+    succession_state: string
+    contender_ids: [string]
+    succession_pressure: float
+
+  FactionSchismRecord:
+    faction_id: string
+    schism_state: string
+    splinter_ids: [string]
+    schism_pressure: float
+
+  FactionReformRecord:
+    faction_id: string
+    reform_state: string
+    reform_direction_tags: [string]
+    reform_pressure: float
+
+  FactionPresenceRecord:
+    faction_id: string
+    anchor_id: string
+    presence_mode: string
+    visibility_mode: string
+    influence_weight: float
+
+  FactionCovertRelationRecord:
+    relation_id: string
+    faction_a: string
+    faction_b: string
+    relation_type: string
+    secrecy_band: string
+    pressure_weight: float
+
+  FactionPublicRelationRecord:
+    relation_id: string
+    faction_a: string
+    faction_b: string
+    relation_type: string
+    status: string
+
+  FactionControlRecord:
+    control_id: string
+    faction_id: string
+    control_surface: string
+    control_strength: float
+    status: string
+
+enum_surfaces:
+  claim_type:
+    - stewardship_claim
+    - succession_claim
+    - ritual_claim
+    - archive_claim
+    - territorial_claim
+    - doctrinal_claim
+
+  claim_status:
+    - asserted
+    - contested
+    - recognized
+    - suspended
+    - collapsed
+
+  legitimacy_band:
+    - fragile
+    - contested
+    - stable
+    - consolidated
+
+  succession_state:
+    - stable_line
+    - disputed_line
+    - vacant
+    - transition
+
+  schism_state:
+    - none
+    - latent
+    - active
+    - fracture
+
+  reform_state:
+    - none
+    - proposed
+    - active
+    - institutionalized
+    - failed
+
+  presence_mode:
+    - absent
+    - covert
+    - advisory
+    - administrative
+    - dominant
+
+  visibility_mode:
+    - public
+    - mixed
+    - covert
+
+  relation_type:
+    - alliance
+    - truce
+    - rivalry
+    - proxy_conflict
+    - covert_collaboration
+    - covert_subversion
+
+  secrecy_band:
+    - disclosed
+    - partially_hidden
+    - hidden
+
+value_bands:
+  normalized_range:
+    min: 0.0
+    max: 1.0
+  claim_strength_bands:
+    weak: 0.0_to_0.29
+    moderate: 0.3_to_0.59
+    strong: 0.6_to_0.84
+    dominant: 0.85_to_1.0
+  pressure_bands:
+    low: 0.0_to_0.25
+    medium: 0.26_to_0.55
+    high: 0.56_to_0.8
+    critical: 0.81_to_1.0
+
+invariants:
+  hard_rules:
+    - topology_must_not_be_reduced_to_single_reputation_value
+    - faction_claims_cannot_overwrite_realm_truth_or_cosmology
+    - topology_changes_require_schema_valid_state_records
+    - covert_relations_and_public_relations_must_be_distinct_surfaces
+    - legitimacy_history_must_not_be_erased_for_convenience
+
+integration_contract:
+  influences:
+    - perception_overlay_visibility_and_labeling
+    - myth_interpretation_pressure
+    - prophecy_visibility_pressure
+    - quest_branch_emphasis
+    - npc_role_legitimacy_signals
+  does_not_override:
+    - canonical_realm_set
+    - realm_mechanics_rules
+    - ash_pattern_law
+    - persistent_worldstate_occurrence_truth
+
+validation_rules:
+  required_checks:
+    - required_field_presence_check
+    - enum_membership_check
+    - normalized_value_range_check
+    - topology_not_reputation_bar_check
+    - legitimacy_history_preservation_check
+    - claim_vs_truth_boundary_check
+  failure_modes:
+    - missing_claim_structure
+    - invalid_legitimacy_band
+    - invalid_presence_mode
+    - out_of_range_strength_or_pressure
+    - topology_flattened_to_single_alignment_value
+    - faction_claim_presented_as_cosmological_fact
+
+example_state_patterns:
+  - id: topo_contested_archive_region_north
+    summary: >
+      Two factions maintain competing archive claims with different legitimacy
+      bands; covert subversion is active while public relation is truce.
+  - id: topo_schism_threshold_city
+    summary: >
+      Dominant faction enters active schism with splinter claims around a
+      threshold gate, increasing reform pressure and perception divergence.

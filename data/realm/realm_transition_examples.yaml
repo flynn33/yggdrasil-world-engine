@@ -1,0 +1,129 @@
+version: "0.1"
+
+meta:
+  system: realm_transition_examples
+  purpose: >
+    Provides canonical, implementation-agnostic transition examples showing
+    lawful realm shift and contact outcomes under realm mechanics rules.
+  doctrine:
+    - examples_are_contract_guidance_not_engine_scripts
+    - each_example_must_preserve_shared_truth_boundaries
+    - transitions_require_attunement_and_boundary_conditions
+
+transition_example_schema:
+  RealmTransitionExampleRecord:
+    example_id: string
+    source_realm: string
+    target_realm: string
+    site_class: string
+    boundary_profile_id: string
+    preconditions:
+      attunement_band: string
+      boundary_state: string
+      required_flags: [string]
+      blocked_by: [string]
+    attempted_mode: string
+    allowed_outcome: string
+    side_effects: [string]
+    reconciliation_requirements: [string]
+    notes: [string]
+
+lawful_examples:
+  - example_id: rte_shadow_threshold_contact
+    source_realm: physical
+    target_realm: shadow
+    site_class: threshold_gate
+    boundary_profile_id: rbp_threshold_gate_contested
+    preconditions:
+      attunement_band: threshold_ready
+      boundary_state: thin
+      required_flags:
+        - memory_link_verified
+        - anchor_truth_verified
+      blocked_by:
+        - hard_canonical_block
+    attempted_mode: threshold_trial
+    allowed_outcome: partial_overlay_contact
+    side_effects:
+      - omen_sensitivity_increase
+      - symbolic_residue_trace
+    reconciliation_requirements:
+      - preserve_shared_collision_truth
+      - log_transition_trace
+    notes:
+      - lawful_partial_contact_without_forcing_full_shared_shift
+
+  - example_id: rte_astral_route_window
+    source_realm: physical
+    target_realm: astral
+    site_class: thin_veil_site
+    boundary_profile_id: rbp_thin_veil_shrine
+    preconditions:
+      attunement_band: shift_capable
+      boundary_state: permeable
+      required_flags:
+        - active_manifestation_window
+        - ritual_integrity_true
+      blocked_by:
+        - unresolved_consequence_block
+    attempted_mode: full_shift
+    allowed_outcome: qualified_full_shift
+    side_effects:
+      - quest_stage_elevation
+      - creature_presence_window
+    reconciliation_requirements:
+      - shared_event_truth_reconcilable
+      - persist_worldstate_delta_if_objective_effects_occur
+    notes:
+      - full_shift_allowed_only_during_lawful_window_conditions
+
+  - example_id: rte_causal_oath_resolution
+    source_realm: physical
+    target_realm: causal
+    site_class: oath_site
+    boundary_profile_id: rbp_threshold_gate_contested
+    preconditions:
+      attunement_band: threshold_ready
+      boundary_state: stable
+      required_flags:
+        - oath_chain_resolved
+      blocked_by:
+        - active_legitimacy_dispute_unreconciled
+    attempted_mode: threshold_trial
+    allowed_outcome: full_shift
+    side_effects:
+      - legitimacy_signal_update
+      - prophecy_pressure_adjustment
+    reconciliation_requirements:
+      - record_consequence_before_followup_branches
+    notes:
+      - prophecy_pressure_may_intensify_visibility_but_cannot_skip_oath_condition
+
+unlawful_examples:
+  - example_id: rte_invalid_fast_travel_bypass
+    summary: >
+      Direct nonphysical shift granted without attunement threshold or boundary
+      condition due to authored convenience flag.
+    violated_rules:
+      - nonphysical_realm_travel_requires_attunement_plus_threshold_condition
+      - realm_shift_is_not_generic_fast_travel
+
+  - example_id: rte_invalid_shared_truth_mutation
+    summary: >
+      One player transition rewrites shared geography for all players through
+      perception-only state.
+    violated_rules:
+      - no_rule_may_change_canonical_geography_through_perception_only
+      - shared_objective_state_must_remain_reconcilable
+
+validation_rules:
+  required_checks:
+    - canonical_realm_reference_check
+    - required_precondition_presence_check
+    - unlawful_example_rule_binding_check
+    - reconciliation_requirement_presence_check
+  failure_modes:
+    - noncanonical_realm_in_example
+    - missing_boundary_profile_reference
+    - preconditions_missing_required_flags
+    - lawful_example_without_reconciliation_requirements

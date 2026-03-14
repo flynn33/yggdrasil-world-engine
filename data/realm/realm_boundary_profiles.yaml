@@ -1,0 +1,151 @@
+version: "0.1"
+
+meta:
+  system: realm_boundary_profiles
+  purpose: >
+    Defines canonical boundary profile records used by realm mechanics to
+    classify boundary behavior, resistance, lawful interaction modes, and
+    stabilization requirements at sites and thresholds.
+  doctrine:
+    - boundary_profiles_constrain_behavior_not_cosmology
+    - profiles_attach_to_canonical_anchors_and_site_classes
+    - profile_use_must_preserve_shared_geography_truth
+
+boundary_profile_schema:
+  RealmBoundaryProfileRecord:
+    profile_id: string
+    profile_name: string
+    boundary_class: string
+    applicable_site_classes: [string]
+    linked_realms: [string]
+    resistance_band: string
+    permeability_band: string
+    volatility_band: string
+    lawful_interaction_modes: [string]
+    required_stabilizers: [string]
+    known_destabilizers: [string]
+    multiplayer_constraints: [string]
+    transition_permissions: [string]
+    notes: [string]
+
+enum_surfaces:
+  boundary_class:
+    - hard_seam
+    - thin_veil
+    - symbolic_gradient
+    - contested_threshold
+    - unstable_rift
+    - sealed_threshold
+
+  site_class:
+    - thin_veil_site
+    - place_of_power
+    - sanctuary
+    - shrine
+    - ruin
+    - threshold_gate
+    - corrupted_site
+    - sealed_site
+    - oath_site
+
+  resistance_band:
+    - sealed
+    - stable
+    - thin
+    - permeable
+    - breach_risk
+
+  permeability_band:
+    - near_none
+    - limited
+    - moderate
+    - high
+
+  volatility_band:
+    - quiescent
+    - responsive
+    - turbulent
+    - critical
+
+  lawful_interaction_mode:
+    - symbolic_contact
+    - partial_overlay
+    - threshold_trial
+    - full_shift
+    - emergency_recoil
+
+  transition_permission:
+    - no_shift
+    - partial_only
+    - qualified_full_shift
+    - emergency_only
+
+profile_catalog:
+  - profile_id: rbp_thin_veil_shrine
+    profile_name: thin_veil_shrine_profile
+    boundary_class: thin_veil
+    applicable_site_classes: [thin_veil_site, shrine]
+    linked_realms: [physical, shadow, astral]
+    resistance_band: thin
+    permeability_band: moderate
+    volatility_band: responsive
+    lawful_interaction_modes: [symbolic_contact, partial_overlay, threshold_trial]
+    required_stabilizers: [ritual_integrity, lawful_guardianship]
+    known_destabilizers: [corrupted_ritual, unresolved_bloodline_reckoning]
+    multiplayer_constraints:
+      - preserve_shared_navigation_and_collision_truth
+    transition_permissions: [partial_only, qualified_full_shift]
+    notes:
+      - suitable_for_controlled_contact_and_gate-checked_transition
+
+  - profile_id: rbp_threshold_gate_contested
+    profile_name: contested_threshold_gate_profile
+    boundary_class: contested_threshold
+    applicable_site_classes: [threshold_gate, ruin]
+    linked_realms: [physical, causal, shadow]
+    resistance_band: stable
+    permeability_band: limited
+    volatility_band: turbulent
+    lawful_interaction_modes: [threshold_trial, full_shift, emergency_recoil]
+    required_stabilizers: [oath_kept, ward_network]
+    known_destabilizers: [schism_at_site, broken_oath, prophecy_convergence]
+    multiplayer_constraints:
+      - reconcile_shared_objective_state_before_party_progression_commit
+    transition_permissions: [qualified_full_shift, emergency_only]
+    notes:
+      - high_legitimacy_conflict_requires_explicit_reconciliation_path
+
+  - profile_id: rbp_sealed_origin
+    profile_name: sealed_origin_profile
+    boundary_class: sealed_threshold
+    applicable_site_classes: [sealed_site, place_of_power]
+    linked_realms: [physical, divine_core]
+    resistance_band: sealed
+    permeability_band: near_none
+    volatility_band: quiescent
+    lawful_interaction_modes: [symbolic_contact, emergency_recoil]
+    required_stabilizers: [collective_stewardship, ritual_integrity]
+    known_destabilizers: [void_pressure, catastrophic_breach]
+    multiplayer_constraints:
+      - no_unreviewed_public_shift_permissions
+    transition_permissions: [no_shift, emergency_only]
+    notes:
+      - divine_core_proximity_requires_extraordinary_gate_validation
+
+invariants:
+  - profile_must_reference_canonical_realm_ids
+  - boundary_profile_must_not_introduce_new_realm_ids
+  - profile_usage_must_not_bypass_attunement_or_threshold_requirements
+  - no_profile_may_authorize_geography_rewrite_by_perception_only
+
+validation_rules:
+  required_checks:
+    - profile_field_presence_check
+    - enum_membership_check
+    - canonical_realm_reference_check
+    - transition_permission_consistency_check
+  failure_modes:
+    - invalid_boundary_class
+    - noncanonical_realm_reference
+    - missing_multiplayer_constraint
+    - impossible_transition_permission

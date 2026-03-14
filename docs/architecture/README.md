@@ -35,6 +35,11 @@ The architecture supports additional engines:
 
 All expansion engines must read from the Cosmic Pattern Engine. No module may generate meaningful content independently.
 
+## Control Documents
+
+- `authored_override_and_tooling_notes.md` -- Canonical authored override authority order, allowed/forbidden override categories, and tooling guardrails
+- `realm_truth_boundary_contract.md` -- Canonical separation contract for realm truth, perception, myth, prophecy, faction claims, and authored overrides
+
 ## Dependency Direction
 
 All modules read from the same cosmic state. The dependency flow is:

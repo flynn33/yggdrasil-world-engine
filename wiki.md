@@ -108,6 +108,9 @@ All data schemas are in the `data/` directory:
 - `player_schema.json` -- Player state
 - `realm_registry/realms.json` -- Nine canonical realms
 - `realm/realm_mechanics_rules.yaml` -- Canonical realm-law rules for boundaries, attunement, manifestation, and transitions
+- `realm/realm_boundary_profiles.yaml` -- Canonical boundary profile catalog for lawful threshold behavior
+- `realm/realm_transition_examples.yaml` -- Canonical lawful/unlawful transition examples for shift/contact behavior
+- `faction_topology/faction_topology_state_schema.yaml` -- Canonical faction-topology state schema (claims, legitimacy, reform, schism, succession)
 - `pattern_archetypes/pattern_schema.json` -- Pattern nodes
 - `quest_archetypes/quest_seed_schema.json` -- Quest seeds
 - `myth_archetypes/myth_schema.json` -- Myth records
@@ -137,6 +140,8 @@ CI workflows block merges on any failure.
 | `developer-guide.md` | Extended guide for engine implementors |
 | `wiki.md` | This file -- comprehensive reference |
 | `missing_source_documents.md` | Canonical artifact inventory and placeholder-backed tracking |
+| `docs/architecture/authored_override_and_tooling_notes.md` | Authored override authority and tooling safety guardrails |
+| `docs/architecture/realm_truth_boundary_contract.md` | Boundary contract separating realm truth from interpretive layers |
 | `yggdrasil-instructions.json` | Machine-readable architecture rules |
 | `agentic-coding-policy.json` | Machine-readable AI agent constraints |
 | `docs/ash_compliance/` | ASH compliance rules and checklist |

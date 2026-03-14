@@ -21,6 +21,7 @@ def check_directory_structure(root):
         "modules/creature_engine",
         "data/realm_registry",
         "data/realm",
+        "data/faction_topology",
         "data/pattern_archetypes",
         "data/quest_archetypes",
         "data/myth_archetypes",
@@ -114,12 +115,28 @@ def check_canonical_data_artifacts(root):
     """Verify required canonical non-JSON data artifacts exist."""
     required_artifacts = [
         "data/realm/realm_mechanics_rules.yaml",
+        "data/realm/realm_boundary_profiles.yaml",
+        "data/realm/realm_transition_examples.yaml",
+        "data/faction_topology/faction_topology_state_schema.yaml",
         "data/perception/perception_overlay_rules.yaml",
     ]
     errors = []
     for artifact_path in required_artifacts:
         if not os.path.isfile(os.path.join(root, artifact_path)):
             errors.append(f"Missing canonical artifact: {artifact_path}")
+    return errors
+
+
+def check_canonical_docs_artifacts(root):
+    """Verify required canonical non-JSON documentation artifacts exist."""
+    required_artifacts = [
+        "docs/architecture/authored_override_and_tooling_notes.md",
+        "docs/architecture/realm_truth_boundary_contract.md",
+    ]
+    errors = []
+    for artifact_path in required_artifacts:
+        if not os.path.isfile(os.path.join(root, artifact_path)):
+            errors.append(f"Missing canonical doc artifact: {artifact_path}")
     return errors
 
 
@@ -175,6 +192,7 @@ def main():
         ("Module Files", check_module_files),
         ("Data Schemas", check_data_schemas),
         ("Canonical Data Artifacts", check_canonical_data_artifacts),
+        ("Canonical Doc Artifacts", check_canonical_docs_artifacts),
         ("Governance Files", check_governance_files),
         ("Adapter Files", check_adapter_files),
     ]

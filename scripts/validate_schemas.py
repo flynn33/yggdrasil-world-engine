@@ -146,6 +146,135 @@ def check_realm_mechanics_rules(root):
     return errors
 
 
+def check_faction_topology_schema(root):
+    """Verify canonical faction topology schema exists and has required sections."""
+    schema_path = os.path.join(
+        root, "data", "faction_topology", "faction_topology_state_schema.yaml"
+    )
+    if not os.path.isfile(schema_path):
+        return ["Faction topology state schema artifact not found"]
+
+    with open(schema_path) as f:
+        content = f.read()
+
+    required_markers = [
+        "core_surfaces:",
+        "topology_state_record:",
+        "FactionClaimRecord:",
+        "FactionLegitimacyRecord:",
+        "FactionSuccessionRecord:",
+        "FactionSchismRecord:",
+        "FactionReformRecord:",
+        "FactionPresenceRecord:",
+        "FactionCovertRelationRecord:",
+        "invariants:",
+        "validation_rules:",
+        "faction_topology_is_structural_not_moral_slider",
+    ]
+
+    errors = []
+    for marker in required_markers:
+        if marker not in content:
+            errors.append(
+                f"Faction topology schema missing required marker: {marker}"
+            )
+
+    return errors
+
+
+def check_realm_boundary_profiles(root):
+    """Verify canonical realm boundary profiles artifact exists and has key sections."""
+    rules_path = os.path.join(
+        root, "data", "realm", "realm_boundary_profiles.yaml"
+    )
+    if not os.path.isfile(rules_path):
+        return ["Realm boundary profiles artifact not found"]
+
+    with open(rules_path) as f:
+        content = f.read()
+
+    required_markers = [
+        "boundary_profile_schema:",
+        "RealmBoundaryProfileRecord:",
+        "profile_catalog:",
+        "invariants:",
+        "validation_rules:",
+        "boundary_class:",
+        "transition_permissions:",
+    ]
+
+    errors = []
+    for marker in required_markers:
+        if marker not in content:
+            errors.append(
+                f"Realm boundary profiles missing required marker: {marker}"
+            )
+
+    return errors
+
+
+def check_realm_transition_examples(root):
+    """Verify canonical realm transition examples artifact exists and has key sections."""
+    rules_path = os.path.join(
+        root, "data", "realm", "realm_transition_examples.yaml"
+    )
+    if not os.path.isfile(rules_path):
+        return ["Realm transition examples artifact not found"]
+
+    with open(rules_path) as f:
+        content = f.read()
+
+    required_markers = [
+        "transition_example_schema:",
+        "RealmTransitionExampleRecord:",
+        "lawful_examples:",
+        "unlawful_examples:",
+        "validation_rules:",
+        "realm_shift_is_not_generic_fast_travel",
+    ]
+
+    errors = []
+    for marker in required_markers:
+        if marker not in content:
+            errors.append(
+                f"Realm transition examples missing required marker: {marker}"
+            )
+
+    return errors
+
+
+def check_realm_truth_boundary_contract(root):
+    """Verify canonical realm truth boundary contract exists and has required sections."""
+    contract_path = os.path.join(
+        root, "docs", "architecture", "realm_truth_boundary_contract.md"
+    )
+    if not os.path.isfile(contract_path):
+        return ["Realm truth boundary contract not found"]
+
+    with open(contract_path) as f:
+        content = f.read()
+
+    required_markers = [
+        "## Authority Order",
+        "## Truth Layers",
+        "## Boundary Rules",
+        "## Cross-System Contracts",
+        "## Multiplayer Safety Rules",
+        "## Validation Requirements",
+        "## Forbidden Design Moves",
+        "## Status",
+    ]
+
+    errors = []
+    for marker in required_markers:
+        if marker not in content:
+            errors.append(
+                f"Realm truth boundary contract missing required marker: {marker}"
+            )
+
+    return errors
+
+
 def check_source_inventory(root):
     """Verify source inventory exists and references promoted canonical artifacts."""
     inventory_path = os.path.join(root, "missing_source_documents.md")
@@ -158,6 +287,11 @@ def check_source_inventory(root):
     required_entries = [
         "data/perception/perception_overlay_rules.yaml",
         "data/realm/realm_mechanics_rules.yaml",
+        "data/realm/realm_boundary_profiles.yaml",
+        "data/realm/realm_transition_examples.yaml",
+        "data/faction_topology/faction_topology_state_schema.yaml",
+        "docs/architecture/realm_truth_boundary_contract.md",
+        "docs/architecture/authored_override_and_tooling_notes.md",
     ]
 
     errors = []
@@ -165,6 +299,42 @@ def check_source_inventory(root):
         if entry not in content:
             errors.append(
                 f"Source inventory missing canonical entry: {entry}"
+            )
+
+    return errors
+
+
+def check_authored_override_notes(root):
+    """Verify canonical authored override and tooling control notes exist and contain guardrail sections."""
+    notes_path = os.path.join(
+        root, "docs", "architecture", "authored_override_and_tooling_notes.md"
+    )
+    if not os.path.isfile(notes_path):
+        return ["Authored override and tooling notes not found"]
+
+    with open(notes_path) as f:
+        content = f.read()
+
+    required_markers = [
+        "## Authority Order",
+        "## Allowed Override Types",
+        "## Forbidden Override Types",
+        "## Override Strength Bands",
+        "## Required Metadata for Every Override",
+        "## Tooling Categories",
+        "## Required Debug / Explainability Surfaces",
+        "## Logging and Audit Rules",
+        "## Multiplayer and Shared-State Safety",
+        "## Forbidden Tooling Behaviors",
+        "## Final Rule",
+        "Authored content may guide YWE.",
+    ]
+
+    errors = []
+    for marker in required_markers:
+        if marker not in content:
+            errors.append(
+                f"Authored override notes missing required marker: {marker}"
             )
 
     return errors
@@ -228,6 +398,36 @@ def main():
     else:
         print("  PASS: Realm Mechanics Rules")
 
+    # Check canonical faction topology schema
+    faction_topology_errors = check_faction_topology_schema(root)
+    if faction_topology_errors:
+        print("  FAIL: Faction Topology Schema")
+        for e in faction_topology_errors:
+            print(f"    - {e}")
+        errors.extend(faction_topology_errors)
+    else:
+        print("  PASS: Faction Topology Schema")
+
+    # Check canonical realm boundary profiles
+    boundary_profile_errors = check_realm_boundary_profiles(root)
+    if boundary_profile_errors:
+        print("  FAIL: Realm Boundary Profiles")
+        for e in boundary_profile_errors:
+            print(f"    - {e}")
+        errors.extend(boundary_profile_errors)
+    else:
+        print("  PASS: Realm Boundary Profiles")
+
+    # Check canonical realm transition examples
+    transition_example_errors = check_realm_transition_examples(root)
+    if transition_example_errors:
+        print("  FAIL: Realm Transition Examples")
+        for e in transition_example_errors:
+            print(f"    - {e}")
+        errors.extend(transition_example_errors)
+    else:
+        print("  PASS: Realm Transition Examples")
+
     # Check source inventory reflects promoted canonical artifacts
     source_inventory_errors = check_source_inventory(root)
     if source_inventory_errors:
@@ -237,6 +437,26 @@ def main():
         errors.extend(source_inventory_errors)
     else:
         print("  PASS: Source Inventory")
+
+    # Check authored override and tooling control notes
+    authored_notes_errors = check_authored_override_notes(root)
+    if authored_notes_errors:
+        print("  FAIL: Authored Override Notes")
+        for e in authored_notes_errors:
+            print(f"    - {e}")
+        errors.extend(authored_notes_errors)
+    else:
+        print("  PASS: Authored Override Notes")
+
+    # Check canonical realm truth boundary contract
+    boundary_contract_errors = check_realm_truth_boundary_contract(root)
+    if boundary_contract_errors:
+        print("  FAIL: Realm Truth Boundary Contract")
+        for e in boundary_contract_errors:
+            print(f"    - {e}")
+        errors.extend(boundary_contract_errors)
+    else:
+        print("  PASS: Realm Truth Boundary Contract")
 
     if errors:
         print(f"\n{len(errors)} schema error(s) found.")
