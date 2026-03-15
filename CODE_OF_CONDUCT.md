@@ -16,12 +16,14 @@ Examples of behavior that contributes to a positive environment:
 Examples of unacceptable behavior:
 
 - Harassment, trolling, or personal attacks
+- Racist, hateful, vulgar, obscene, or profane language
+- Threats, intimidation, or encouraging self-harm
 - Publishing others' private information without consent
 - Any conduct which could reasonably be considered inappropriate in a professional setting
 
 ## Enforcement
 
-Instances of unacceptable behavior may be reported to the project maintainer. All complaints will be reviewed and investigated. The project maintainer reserves the right to remove, edit, or reject contributions and to ban contributors for behavior deemed inappropriate.
+Instances of unacceptable behavior may be reported to the project maintainer. All complaints will be reviewed and investigated. The project maintainer reserves the right to remove, edit, or reject contributions and to ban contributors for behavior deemed inappropriate. Project discussions may also be moderated automatically against these standards.
 
 ## Scope
 

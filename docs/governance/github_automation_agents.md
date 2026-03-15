@@ -139,6 +139,23 @@ Boundary rules:
 - topic bodies must point back to the repository source path and include a repository-grounded summary
 - when no new seeded topics are needed, the workflow exits without creating anything
 
+## Discussion Moderation Agent
+
+The discussion-moderation workflow enforces the repository code of conduct on GitHub Discussions content.
+
+It works by:
+- moderating newly created or edited discussions and discussion comments
+- rescanning recent discussion content on a six-hour schedule
+- deleting discussion threads or comments that match the repository moderation policy
+- logging moderation incidents to a repository-owned issue for maintainer review
+- attempting user blocking for severe violations only when an owner-supplied admin token is available
+
+Boundary rules:
+- the moderation rules come from `CODE_OF_CONDUCT.md` and `docs/governance/discussion_moderation_policy.md`
+- the bot removes content rather than rewriting it in place
+- owner reporting stays inside the repository issue tracker
+- automated blocking is best-effort only and requires `DISCUSSION_MODERATION_ADMIN_TOKEN`
+
 ## No AI Contributor Agent
 
 The no-ai-contributor workflow protects repository attribution hygiene.
@@ -165,3 +182,4 @@ It verifies:
 - automation commits that should not cause release bumps include `[skip version]`
 - validation agents fail fast when design structure drifts; they do not invent or rewrite canon on their own
 - discussion agents answer from repo truth only; when the repo has no answer they must use the configured fallback response
+- discussion moderation removes violating discussion content and records the action for maintainer review

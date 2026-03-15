@@ -39,4 +39,4 @@ All contributors must agree to the Contributor License Agreement before any cont
 
 ## Code of Conduct
 
-All contributors must follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+All contributors must follow the [Code of Conduct](CODE_OF_CONDUCT.md). GitHub Discussions are subject to automated moderation for racist, vulgar, profane, threatening, or harassing content.

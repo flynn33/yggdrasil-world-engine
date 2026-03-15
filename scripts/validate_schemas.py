@@ -902,6 +902,142 @@ def check_discussion_topic_generator_configuration(root):
     return errors
 
 
+def check_discussion_moderation_configuration(root):
+    """Verify the discussion moderation workflow and policy stay repo-defined."""
+    config_path = os.path.join(root, ".github", "discussion_moderation_policy.json")
+    workflow_path = os.path.join(
+        root, ".github", "workflows", "discussion-moderation.yml"
+    )
+    code_of_conduct_path = os.path.join(root, "CODE_OF_CONDUCT.md")
+    policy_doc_path = os.path.join(
+        root, "docs", "governance", "discussion_moderation_policy.md"
+    )
+
+    if not os.path.isfile(config_path):
+        return [
+            "Discussion moderation config not found: .github/discussion_moderation_policy.json"
+        ]
+
+    if not os.path.isfile(workflow_path):
+        return [
+            "Discussion moderation workflow not found: .github/workflows/discussion-moderation.yml"
+        ]
+
+    errors = []
+    if not os.path.isfile(code_of_conduct_path):
+        errors.append("Discussion moderation requires CODE_OF_CONDUCT.md")
+    if not os.path.isfile(policy_doc_path):
+        errors.append(
+            "Discussion moderation requires docs/governance/discussion_moderation_policy.md"
+        )
+
+    config = load_json_file(config_path)
+    workflow_content = read_text_file(workflow_path)
+
+    if config.get("version") != "1.0":
+        errors.append("Discussion moderation config must declare version 1.0")
+
+    policy_sources = config.get("policy_sources", {})
+    if policy_sources.get("code_of_conduct_path") != "CODE_OF_CONDUCT.md":
+        errors.append(
+            "Discussion moderation config must anchor policy_sources.code_of_conduct_path to CODE_OF_CONDUCT.md"
+        )
+    if (
+        policy_sources.get("moderation_policy_path")
+        != "docs/governance/discussion_moderation_policy.md"
+    ):
+        errors.append(
+            "Discussion moderation config must anchor policy_sources.moderation_policy_path to docs/governance/discussion_moderation_policy.md"
+        )
+
+    scan_limits = config.get("scan_limits", {})
+    if scan_limits.get("max_discussions_per_scan") != 75:
+        errors.append(
+            "Discussion moderation config must keep scan_limits.max_discussions_per_scan at 75"
+        )
+    if scan_limits.get("max_comments_per_discussion") != 40:
+        errors.append(
+            "Discussion moderation config must keep scan_limits.max_comments_per_discussion at 40"
+        )
+
+    exempt_logins = config.get("exempt_logins", [])
+    for login in ("github-actions[bot]", "dependabot[bot]"):
+        if login not in exempt_logins:
+            errors.append(f"Discussion moderation config must exempt {login}")
+
+    owner_notification = config.get("owner_notification", {})
+    if owner_notification.get("enabled") is not True:
+        errors.append(
+            "Discussion moderation config must keep owner_notification.enabled true"
+        )
+    if owner_notification.get("issue_title") != "Discussion Moderation Incident Log":
+        errors.append(
+            "Discussion moderation config must keep the Discussion Moderation Incident Log issue title"
+        )
+
+    admin_blocking = config.get("admin_blocking", {})
+    if admin_blocking.get("enabled_when_token_present") is not True:
+        errors.append(
+            "Discussion moderation config must keep admin_blocking.enabled_when_token_present true"
+        )
+    if admin_blocking.get("token_env_var") != "DISCUSSION_MODERATION_ADMIN_TOKEN":
+        errors.append(
+            "Discussion moderation config must use DISCUSSION_MODERATION_ADMIN_TOKEN for admin blocking"
+        )
+
+    rules = config.get("rules", [])
+    expected_rule_ids = {
+        "hate_speech",
+        "vulgar_language",
+        "harassment",
+        "violent_threats",
+    }
+    actual_rule_ids = {
+        rule.get("id") for rule in rules if isinstance(rule, dict)
+    }
+    if actual_rule_ids != expected_rule_ids:
+        errors.append(
+            "Discussion moderation config must define hate_speech, vulgar_language, harassment, and violent_threats rules"
+        )
+
+    for rule in rules:
+        if not isinstance(rule, dict):
+            errors.append("Each discussion moderation rule must be a JSON object")
+            continue
+
+        rule_id = rule.get("id", "<unknown>")
+        if not rule.get("description"):
+            errors.append(
+                f"Discussion moderation rule '{rule_id}' must define description"
+            )
+        if not isinstance(rule.get("block_candidate"), bool):
+            errors.append(
+                f"Discussion moderation rule '{rule_id}' must define boolean block_candidate"
+            )
+        if not isinstance(rule.get("terms"), list) or not rule.get("terms"):
+            errors.append(
+                f"Discussion moderation rule '{rule_id}' must define a non-empty terms list"
+            )
+
+    required_workflow_markers = [
+        "discussion:",
+        "discussion_comment:",
+        "schedule:",
+        "types: [created, edited]",
+        "issues: write",
+        "DISCUSSION_MODERATION_ADMIN_TOKEN",
+        "python3 scripts/github/discussion_moderation_agent.py --root .",
+    ]
+
+    for marker in required_workflow_markers:
+        if marker not in workflow_content:
+            errors.append(
+                f"Discussion moderation workflow missing required marker: {marker}"
+            )
+
+    return errors
+
+
 def check_authored_override_notes(root):
     """Verify canonical authored override and tooling control notes exist and contain guardrail sections."""
     notes_path = os.path.join(
@@ -1107,6 +1243,15 @@ def main():
         errors.extend(discussion_topic_generator_errors)
     else:
         print("  PASS: Discussion Topic Generator Configuration")
+
+    discussion_moderation_errors = check_discussion_moderation_configuration(root)
+    if discussion_moderation_errors:
+        print("  FAIL: Discussion Moderation Configuration")
+        for e in discussion_moderation_errors:
+            print(f"    - {e}")
+        errors.extend(discussion_moderation_errors)
+    else:
+        print("  PASS: Discussion Moderation Configuration")
 
     # Check authored override and tooling control notes
     authored_notes_errors = check_authored_override_notes(root)

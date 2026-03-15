@@ -56,6 +56,7 @@ run_check "Schema Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/validate_schemas.p
 run_check "ASH Compliance Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/validate_ash_compliance.py" "$ROOT_DIR"
 run_check "Discussion Agent Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/github/discussion_agent.py" --validate-config --root "$ROOT_DIR"
 run_check "Discussion Topic Generator Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/github/discussion_topic_agent.py" --validate-config --root "$ROOT_DIR"
+run_check "Discussion Moderation Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/github/discussion_moderation_agent.py" --validate-config --root "$ROOT_DIR"
 
 echo "=========================================="
 echo "Results: $PASS passed, $FAIL failed"
