@@ -9,6 +9,9 @@ permissions:
   contents: read
   discussions: write
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   seed-topics:
     name: Seed Repo-Grounded Discussion Topics
