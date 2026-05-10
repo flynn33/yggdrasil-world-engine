@@ -4,6 +4,35 @@ All notable changes to the Yggdrasil World Engine are documented here.
 
 ---
 
+
+## [2.0.1] — 2026-05-10
+
+### Added
+- Add discussion moderation bot
+- Add repo-grounded discussion topic seeder
+- Add repo-grounded discussion response agents
+- Add no-AI contributor enforcement workflow
+- feat: add faction topology state schema
+- feat: add no-ai contributor validation agent
+- feat: add repository governance agents [skip version]
+- feat: add GitHub automation agents [skip version]
+- Add GitHub automation: wiki sync, versioning, changelog, and Forsetti compliance
+
+### Changed
+- Merge duplicate repo history from flynn33/Yggdrasil-World-Engine-v2.0 into authoritative main (excluding workflow file changes)
+- chore: update version and changelog to v0.4.0 [skip version]
+- chore: update version and changelog to v0.3.0 [skip version]
+- chore: update version and changelog to v0.2.0 [skip version]
+- Add GitHub automation: wiki sync, versioning, changelog, and Forsetti compliance
+
+### Fixed
+- Fix Forsetti engine contract compliance
+- Fix Forsetti compliance workflow to match actual schema field names
+- Fix bash arithmetic in run_checks.sh for Linux compatibility
+
+
+---
+
 ## [2.0.0] — 2026-03-11
 
 ### Added
