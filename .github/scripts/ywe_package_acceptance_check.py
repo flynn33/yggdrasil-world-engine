@@ -270,11 +270,28 @@ def test_all_engine_interfaces_carry_ash_math_contract(root: Path, sink: Failure
         "DiagnosticEnvelope",
         "GenerationPlan",
     ]
+    required_core_fields = ["engine_id", "purpose", "layer", "methods"]
+    required_module_fields = [*required_core_fields, "dependencies"]
     sink.require(bool(interface_paths), "No engine interface files found for ASH math contract coverage")
     for path in interface_paths:
         text = read_text(path)
         for marker in required_markers:
             sink.require(marker in text, f"Engine interface missing {marker!r}: {rel(path, root)}")
+        try:
+            data = load_json(path)
+        except Exception as exc:
+            sink.require(False, f"Engine interface JSON failed to load: {rel(path, root)}: {exc}")
+            continue
+        required_fields = required_module_fields if rel(path, root).startswith("modules/") else required_core_fields
+        for field in required_fields:
+            sink.require(field in data, f"Engine interface missing required field {field!r}: {rel(path, root)}")
+        if rel(path, root).startswith("modules/"):
+            sink.require(data.get("layer") == "module", f"Module engine interface must have layer 'module': {rel(path, root)}")
+            deps = data.get("dependencies", [])
+            dep_names = [dep.split(".")[-1] if isinstance(dep, str) and "." in dep else dep for dep in deps]
+            sink.require("ash_pattern_engine" in dep_names, f"Module engine interface must depend on ash_pattern_engine: {rel(path, root)}")
+        elif path.name == "engine_interface.json":
+            sink.require(data.get("layer") == "core", f"Core engine interface must have layer 'core': {rel(path, root)}")
 
 
 def test_character_creation_requires_ash_provenance(root: Path, sink: FailureSink) -> None:

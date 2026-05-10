@@ -89,5 +89,38 @@
       "DiagnosticEnvelope": "required for validity, fallback, no-op, and recovery semantics",
       "GenerationPlan": "required before materialized host output"
     }
-  }
+  },
+  "engine_id": "ywe.modules.artifact_engine",
+  "purpose": "Declares the Artifact Engine service contract for ASH-derived artifact manifestation and consequence hooks.",
+  "dependencies": [
+    "ywe.core.ash_pattern_engine",
+    "ywe.core.narrative_engine"
+  ],
+  "methods": [
+    {
+      "name": "validate_artifact_engine_contract",
+      "description": "Validate Artifact Engine activation against Forsetti lifecycle rules and ASH provenance requirements.",
+      "parameters": [
+        "CosmicPatternSnapshot",
+        "DiagnosticEnvelope",
+        "GenerationPlan"
+      ],
+      "returns": "DiagnosticEnvelope"
+    },
+    {
+      "name": "materialize_artifact_plan",
+      "description": "Materialize an ArtifactManifest from a GenerationPlan without authoring ASH truth or YWE domain truth.",
+      "parameters": [
+        "GenerationPlan",
+        "source_ash_refs"
+      ],
+      "returns": "ArtifactManifest"
+    }
+  ],
+  "layer": "module",
+  "invariants": [
+    "Module engine interface fields must satisfy Forsetti Framework Compliance checks.",
+    "CosmicPatternSnapshot, DiagnosticEnvelope, and GenerationPlan provenance is required before meaningful generation.",
+    "The module must not author ASH truth or YWE domain truth."
+  ]
 }

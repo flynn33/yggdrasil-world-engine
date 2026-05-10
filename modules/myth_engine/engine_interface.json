@@ -91,5 +91,39 @@
       "DiagnosticEnvelope": "required for validity, fallback, no-op, and recovery semantics",
       "GenerationPlan": "required before materialized host output"
     }
-  }
+  },
+  "engine_id": "ywe.modules.myth_engine",
+  "purpose": "Declares the Myth Engine service contract for retrospective ASH-derived myth records and social distribution deltas.",
+  "dependencies": [
+    "ywe.core.ash_pattern_engine",
+    "ywe.core.narrative_engine"
+  ],
+  "methods": [
+    {
+      "name": "validate_myth_engine_contract",
+      "description": "Validate Myth Engine activation against Forsetti lifecycle rules and ASH provenance requirements.",
+      "parameters": [
+        "CosmicPatternSnapshot",
+        "DiagnosticEnvelope",
+        "GenerationPlan"
+      ],
+      "returns": "DiagnosticEnvelope"
+    },
+    {
+      "name": "record_retrospective_myth_plan",
+      "description": "Record a MythRecord from GenerationPlan provenance while preserving the no world-truth-rewrite boundary.",
+      "parameters": [
+        "GenerationPlan",
+        "WorldstateDeltaPacket",
+        "source_ash_refs"
+      ],
+      "returns": "MythRecord"
+    }
+  ],
+  "layer": "module",
+  "invariants": [
+    "Module engine interface fields must satisfy Forsetti Framework Compliance checks.",
+    "CosmicPatternSnapshot, DiagnosticEnvelope, and GenerationPlan provenance is required before meaningful generation.",
+    "The module must not author ASH truth or YWE domain truth."
+  ]
 }

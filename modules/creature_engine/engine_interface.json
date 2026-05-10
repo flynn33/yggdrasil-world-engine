@@ -91,5 +91,39 @@
       "DiagnosticEnvelope": "required for validity, fallback, no-op, and recovery semantics",
       "GenerationPlan": "required before materialized host output"
     }
-  }
+  },
+  "engine_id": "ywe.modules.creature_engine",
+  "purpose": "Declares the Creature Engine service contract for ASH-derived creature manifests, encounter plans, and behavior pressure.",
+  "dependencies": [
+    "ywe.core.ash_pattern_engine",
+    "ywe.core.realm_engine",
+    "ywe.core.cosmology_engine"
+  ],
+  "methods": [
+    {
+      "name": "validate_creature_engine_contract",
+      "description": "Validate Creature Engine activation against Forsetti lifecycle rules and ASH provenance requirements.",
+      "parameters": [
+        "CosmicPatternSnapshot",
+        "DiagnosticEnvelope",
+        "GenerationPlan"
+      ],
+      "returns": "DiagnosticEnvelope"
+    },
+    {
+      "name": "materialize_creature_plan",
+      "description": "Materialize a CreatureManifest and EncounterPlan from a GenerationPlan without authoring ASH truth or YWE domain truth.",
+      "parameters": [
+        "GenerationPlan",
+        "source_ash_refs"
+      ],
+      "returns": "CreatureManifest"
+    }
+  ],
+  "layer": "module",
+  "invariants": [
+    "Module engine interface fields must satisfy Forsetti Framework Compliance checks.",
+    "CosmicPatternSnapshot, DiagnosticEnvelope, and GenerationPlan provenance is required before meaningful generation.",
+    "The module must not author ASH truth or YWE domain truth."
+  ]
 }
