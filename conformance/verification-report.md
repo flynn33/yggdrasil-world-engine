@@ -46,13 +46,14 @@ The package acceptance script implements the following required test families:
 5. `test_all_generation_requires_cosmic_pattern_snapshot`
 6. `test_all_generation_requires_diagnostic_envelope`
 7. `test_all_materialization_requires_generation_plan`
-8. `test_character_creation_requires_ash_provenance`
-9. `test_creature_creation_requires_ash_provenance`
-10. `test_quest_generation_requires_multiple_interpretations_and_delta_route`
-11. `test_myth_is_retrospective_not_world_truth_rewrite`
-12. `test_prophecy_is_attractor_not_script`
-13. `test_perception_overlay_does_not_rewrite_shared_world_truth`
-14. `test_adapters_cannot_author_ywe_truth`
+8. `test_all_engine_interfaces_carry_ash_math_contract`
+9. `test_character_creation_requires_ash_provenance`
+10. `test_creature_creation_requires_ash_provenance`
+11. `test_quest_generation_requires_multiple_interpretations_and_delta_route`
+12. `test_myth_is_retrospective_not_world_truth_rewrite`
+13. `test_prophecy_is_attractor_not_script`
+14. `test_perception_overlay_does_not_rewrite_shared_world_truth`
+15. `test_adapters_cannot_author_ywe_truth`
 
 ## Acceptance Boundary
 

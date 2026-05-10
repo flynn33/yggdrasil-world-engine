@@ -61,5 +61,28 @@
     "Every CharacterSeedManifest carries source_ash_refs with normalized_state, source_orbit_id, active_codeword_sequence, diagnostic_ref, and generation_plan_ref.",
     "Identity is revealed through play and must not lock destiny at creation.",
     "Wolf balance fields are not a good/evil or zero-sum morality axis."
-  ]
+  ],
+  "ash_remediation_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide character seed and progression materialization; character systems must not author ASH truth or YWE domain truth.",
+    "module_records": [
+      "CharacterSeedManifest",
+      "IdentityPressureVector",
+      "ProgressionDelta",
+      "PlayerStateDelta"
+    ],
+    "engine_contract_rule": "Character creation and progression requests must reject meaningful generation when CosmicPatternSnapshot, DiagnosticEnvelope, or GenerationPlan provenance is missing."
+  }
 }

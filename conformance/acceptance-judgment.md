@@ -31,7 +31,7 @@ codewords, diagnostics, generation semantics, or conformance acceptance.
 | G-003 ASH semantic integrity passes | PASS | `.github/scripts/semantic_integrity_check.py` is included in local validation. |
 | G-004 YWE validation suite passes | PASS | `scripts/run_checks.sh` includes the package acceptance check. |
 | G-005 No active stale decomposition math language | PASS | Package stale-math rejection tests. |
-| G-006 Every meaningful generator consumes ASH packets | PASS | `data/validation/ash_generation_gate_contract.json` and package acceptance tests. |
+| G-006 Every meaningful generator consumes ASH packets | PASS | `data/validation/ash_generation_gate_contract.json`, engine-interface contract coverage, and package acceptance tests. |
 | G-007 Character creation and progression rebuilt or blocked | PASS | `core/narrative_engine/character_creation_progression_interface.json`, rules, and schema. |
 | G-008 Creature/quest/artifact generation rebuilt or blocked | PASS | Module interfaces and manifest schemas for creature, quest, and artifact systems. |
 | G-009 Worldstate/myth/prophecy/perception/faction deltas trace to ASH provenance | PASS | Shared packet schemas, worldstate delta schema, expansion schemas, and faction topology updates. |

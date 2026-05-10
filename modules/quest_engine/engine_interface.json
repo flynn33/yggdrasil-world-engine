@@ -1,61 +1,97 @@
 {
-    "schemaVersion":  "1.0",
-    "status":  "forsetti_aligned_design_contract",
-    "moduleID":  "com.ywe.module.quest-engine",
-    "displayName":  "YWE Quest Engine",
-    "plannedForsettiModuleType":  "service",
-    "entryPointContract":  "QuestEngineModule",
-    "supportedPlatforms":  [
-                               "windows"
-                           ],
-    "minForsettiVersion":  {
-                               "minor":  1,
-                               "patch":  0,
-                               "prerelease":  null,
-                               "major":  0
-                           },
-    "truthDomain":  "quest manifestation",
-    "activationProfile":  "host_policy_defined",
-    "lifecycle":  [
-                      "discover",
-                      "validate",
-                      "activate",
-                      "deactivate"
-                  ],
-    "compatibilityCheckRequired":  true,
-    "entitlementPolicy":  "defined_by_host_policy",
-    "directRuntimeDependencies":  [
-                                      "com.ywe.core.ash-pattern-engine",
-                                      "com.ywe.core.narrative-engine",
-                                      "com.ywe.core.realm-engine"
-                                  ],
-    "semanticInputs":  [
-                           "pattern detections",
-                           "narrative interpretations",
-                           "quest archetypes"
-                       ],
-    "outputs":  [
-                    "quest chains",
-                    "quest state transitions",
-                    "quest consequence signals"
-                ],
-    "communication":  {
-                          "allowedChannels":  [
-                                                  "service_container",
-                                                  "event_bus",
-                                                  "framework_logger"
-                                              ],
-                          "forbiddenChannels":  [
-                                                    "direct_module_calls",
-                                                    "self_messaging",
-                                                    "reserved_namespace:forsetti.internal.*"
-                                                ]
-                      },
-    "plannedCapabilities":  [
-
-                            ],
-    "forbiddenCapabilities":  [
-                                  "ui_theme_mask"
-                              ],
-    "branchStatus":  "template_only_no_runtime_code"
+  "schemaVersion": "1.0",
+  "status": "forsetti_aligned_design_contract",
+  "moduleID": "com.ywe.module.quest-engine",
+  "displayName": "YWE Quest Engine",
+  "plannedForsettiModuleType": "service",
+  "entryPointContract": "QuestEngineModule",
+  "supportedPlatforms": [
+    "windows"
+  ],
+  "minForsettiVersion": {
+    "minor": 1,
+    "patch": 0,
+    "prerelease": null,
+    "major": 0
+  },
+  "truthDomain": "quest manifestation",
+  "activationProfile": "host_policy_defined",
+  "lifecycle": [
+    "discover",
+    "validate",
+    "activate",
+    "deactivate"
+  ],
+  "compatibilityCheckRequired": true,
+  "entitlementPolicy": "defined_by_host_policy",
+  "directRuntimeDependencies": [
+    "com.ywe.core.ash-pattern-engine",
+    "com.ywe.core.narrative-engine",
+    "com.ywe.core.realm-engine"
+  ],
+  "semanticInputs": [
+    "pattern detections",
+    "narrative interpretations",
+    "quest archetypes",
+    "CosmicPatternSnapshot",
+    "DiagnosticEnvelope",
+    "GenerationPlan",
+    "F2^9 ASH state provenance"
+  ],
+  "outputs": [
+    "quest chains",
+    "quest state transitions",
+    "quest consequence signals",
+    "generation_plan_ref",
+    "cosmic_pattern_snapshot_ref",
+    "diagnostic_ref",
+    "source_ash_refs"
+  ],
+  "communication": {
+    "allowedChannels": [
+      "service_container",
+      "event_bus",
+      "framework_logger"
+    ],
+    "forbiddenChannels": [
+      "direct_module_calls",
+      "self_messaging",
+      "reserved_namespace:forsetti.internal.*"
+    ]
+  },
+  "plannedCapabilities": [],
+  "forbiddenCapabilities": [
+    "ui_theme_mask"
+  ],
+  "branchStatus": "template_only_no_runtime_code",
+  "ash_remediation_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "module_records": [
+      "QuestChainManifest",
+      "StageManifest",
+      "CompletionModeSet",
+      "QuestResolutionPayload",
+      "WorldstateDeltaPacket",
+      "minimum_mode_count"
+    ],
+    "engine_contract_rule": "Module activation and service entrypoints must reject meaningful generation requests that lack CosmicPatternSnapshot, DiagnosticEnvelope, and GenerationPlan provenance.",
+    "entrypoint_requirements": {
+      "CosmicPatternSnapshot": "required before generation or interpretation",
+      "DiagnosticEnvelope": "required for validity, fallback, no-op, and recovery semantics",
+      "GenerationPlan": "required before materialized host output"
+    }
+  }
 }

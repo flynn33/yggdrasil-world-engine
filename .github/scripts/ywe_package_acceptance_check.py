@@ -254,6 +254,29 @@ def test_all_materialization_requires_generation_plan(root: Path, sink: FailureS
         sink.require("procedural generation" not in text.lower(), f"Adapter may not claim procedural generation authority: {adapter_path}")
 
 
+def test_all_engine_interfaces_carry_ash_math_contract(root: Path, sink: FailureSink) -> None:
+    interface_paths = sorted(
+        {
+            *root.glob("core/*/engine_interface.json"),
+            *root.glob("modules/*/engine_interface.json"),
+            *root.glob("modules/*/*_engine_interface.json"),
+            root / "core" / "narrative_engine" / "character_creation_progression_interface.json",
+        }
+    )
+    required_markers = [
+        "ash_remediation_contract",
+        "F2^9",
+        "CosmicPatternSnapshot",
+        "DiagnosticEnvelope",
+        "GenerationPlan",
+    ]
+    sink.require(bool(interface_paths), "No engine interface files found for ASH math contract coverage")
+    for path in interface_paths:
+        text = read_text(path)
+        for marker in required_markers:
+            sink.require(marker in text, f"Engine interface missing {marker!r}: {rel(path, root)}")
+
+
 def test_character_creation_requires_ash_provenance(root: Path, sink: FailureSink) -> None:
     require_markers(
         root,
@@ -427,6 +450,7 @@ TESTS = [
     test_all_generation_requires_cosmic_pattern_snapshot,
     test_all_generation_requires_diagnostic_envelope,
     test_all_materialization_requires_generation_plan,
+    test_all_engine_interfaces_carry_ash_math_contract,
     test_character_creation_requires_ash_provenance,
     test_creature_creation_requires_ash_provenance,
     test_quest_generation_requires_multiple_interpretations_and_delta_route,
