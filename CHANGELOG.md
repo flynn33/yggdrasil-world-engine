@@ -4,6 +4,20 @@ All notable changes to the Yggdrasil World Engine are documented here.
 
 ---
 
+
+## [2.0.2] — 2026-05-10
+
+### Added
+- Merge pull request #38 from flynn33/codex/ash-upstream-authority-clean
+- Address upstream authority packet requirements
+- Add ASH upstream authority contract
+
+### Changed
+- Update project documentation
+
+
+---
+
 ## [Unreleased] — 2026-05-10
 
 ### Documentation
