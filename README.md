@@ -1,4 +1,4 @@
-# Yggdrasil World Engine (YWE) v2.0
+# Yggdrasil World Engine (YWE) v2.0.1
 
 A cosmology-driven procedural narrative simulation engine based on the ASH Model and the Forsetti Framework.
 
@@ -19,6 +19,10 @@ All procedural systems derive from **ASH cosmological mathematics**.
 
 YWE functions as a **reality simulation layer**, not a rendering engine.
 Rendering engines (Unity, Unreal, Godot) function as **host environments**.
+
+The public reference wiki is available at:
+
+[Yggdrasil World Engine Wiki](https://github.com/flynn33/yggdrasil-world-engine/wiki)
 
 ---
 
@@ -71,16 +75,82 @@ All procedural generation originates from ASH cosmological state analysis. No su
 
 ### ASH/ASP Core Math Baseline
 
-The active remediation branch uses `YWE_ASP_CORE_MATH_REBUILD_PACKAGE` as the
-controlling ASH/ASP math authority. The ASH state space is `F2^9`: 512 complete
-9-coordinate states, transformed only by the fixed 16 canonical full-state
-codewords. State transitions use `x' = x XOR c`.
+The active ASH/ASP math authority is the accepted
+`YWE_ASP_CORE_MATH_REBUILD_PACKAGE` baseline. The ASH state space is `F2^9`:
+512 complete 9-coordinate states, transformed only by the fixed 16 canonical
+full-state codewords. State transitions use `x' = x XOR c`.
 
 Meaningful YWE generation now carries `CosmicPatternSnapshot`,
 `DiagnosticEnvelope`, and `GenerationPlan` provenance through the character,
 creature, quest, NPC, artifact, myth, prophecy, perception, faction,
 worldstate, codex/lore, and realm contracts. Host adapters may materialize from
 those plans, but they must not author ASH truth or YWE domain truth.
+
+---
+
+## System Map
+
+```mermaid
+flowchart TB
+  Cosmology["Cosmology Engine<br/>Dark Star, Divine Core, nine fixed realms"]
+  Realm["Realm Engine<br/>realm law, attunement, boundaries"]
+  ASH["ASH Pattern Engine<br/>F2^9 state, 16 codewords, XOR transitions"]
+  Narrative["Narrative Engine<br/>NPCs, worldstate, memory, codex/lore"]
+  Perception["Perception Engine<br/>player-specific overlays"]
+  Quest["Quest Engine"]
+  Myth["Myth Engine"]
+  Prophecy["Prophecy Engine"]
+  Artifact["Artifact Engine"]
+  Creature["Creature Engine"]
+  Adapters["Unity / Unreal / Godot adapters<br/>materialization only"]
+
+  Cosmology --> Realm
+  Cosmology --> ASH
+  Realm --> ASH
+  ASH --> Narrative
+  ASH --> Perception
+  Narrative --> Quest
+  Narrative --> Myth
+  Narrative --> Prophecy
+  Narrative --> Artifact
+  Narrative --> Creature
+  Perception --> Adapters
+  Quest --> Adapters
+  Myth --> Adapters
+  Prophecy --> Adapters
+  Artifact --> Adapters
+  Creature --> Adapters
+```
+
+## Generation Flow
+
+```mermaid
+sequenceDiagram
+  participant C as Cosmology / Realm State
+  participant A as ASH Pattern Engine
+  participant D as Diagnostics
+  participant P as Generation Planner
+  participant Y as YWE Domain Engine
+  participant H as Host Adapter
+
+  C->>A: complete F2^9 state
+  A->>A: x' = x XOR c
+  A->>D: validate state, orbit, fallback route
+  D-->>A: DiagnosticEnvelope
+  A->>P: CosmicPatternSnapshot + DiagnosticEnvelope
+  P-->>Y: GenerationPlan
+  Y-->>H: domain manifest with source ASH refs
+  H-->>H: materialize without authoring YWE truth
+```
+
+## Authority Boundary
+
+| Surface | Owns | Must Not Own |
+|---|---|---|
+| ASH canonical specs | State space, codewords, transitions, diagnostics | Host rendering, game-engine implementation |
+| YWE core repo | Code-agnostic engines, schemas, lore, conformance, adapter contracts | Engine-specific runtime code |
+| Forsetti governance | Module lifecycle, contracts, validation, policy enforcement | ASH math, YWE cosmology truth, codeword authority |
+| Unity / Unreal / Godot adapters | Host materialization from `GenerationPlan` | ASH truth or YWE domain truth |
 
 ---
 
@@ -145,11 +215,13 @@ yggdrasil-world-engine/
 
 1. Clone this repository.
 2. Review the master specification: `docs/master_specification/YWE_MASTER_SPECIFICATION.md`
-3. Review the repository bootstrap baseline: `YWE_REPOSITORY_BOOTSTRAP_PROMPT.md`
-4. Review the architecture documentation: `docs/architecture/`
-5. Load data schemas and canonical rule artifacts into your host engine.
-6. Implement core engines following interface definitions in `core/*/engine_interface.json`.
-7. Extend with expansion modules following `modules/*/`.
+3. Review the GitHub wiki: `https://github.com/flynn33/yggdrasil-world-engine/wiki`
+4. Review the repository bootstrap baseline: `YWE_REPOSITORY_BOOTSTRAP_PROMPT.md`
+5. Review the architecture documentation: `docs/architecture/`
+6. Load data schemas and canonical rule artifacts into your host engine.
+7. Implement core engines following interface definitions in `core/*/engine_interface.json`.
+8. Extend with expansion modules following `modules/*/`.
+9. Run `bash scripts/run_checks.sh` before proposing any repository change.
 
 ---
 

@@ -4,6 +4,14 @@ All notable changes to the Yggdrasil World Engine are documented here.
 
 ---
 
+## [Unreleased] — 2026-05-10
+
+### Documentation
+- Expanded README coverage for the ASH/ASP math baseline, system architecture, packet flow, and validation surfaces.
+- Rebuilt the GitHub wiki as a comprehensive reference for architecture, engines, schemas, adapters, validation, and lore.
+- Added visual workflow and logic diagrams for ASH state transformation, generation planning, materialization boundaries, realm/lore structure, and module interactions.
+- Updated wiki lore coverage for WRW cosmology, wolf canon, and bloodline history.
+
 
 ## [2.0.1] — 2026-05-10
 
