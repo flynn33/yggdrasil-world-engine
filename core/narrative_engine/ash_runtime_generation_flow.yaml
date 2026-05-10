@@ -81,6 +81,8 @@ canonical_flow:
     name: handoff_to_feature_engine
     inputs:
       - YWEInterpretationPacket
+      - YWEGenerationContextPacket
+      - ASHUpstreamGenerationEnvelope
     emits:
       - SystemManifestHandoff
     allowed_feature_engines:
