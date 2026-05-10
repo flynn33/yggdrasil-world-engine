@@ -284,6 +284,7 @@ Required concepts:
 source_ash_refs
 diagnostic_ref
 generation_plan_ref
+requested_manifest_kind
 realm_interpretation
 player_relevance
 manifestation_target
