@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.schemas.character_progression",
+  "version": "1.0.0",
+  "purpose": "ASH-derived character creation and progression contract for the Narrative Engine.",
+  "required_inputs": [
+    "CosmicPatternSnapshot",
+    "PlayerState",
+    "RealmIdentity",
+    "DiagnosticEnvelope",
+    "GenerationPlan"
+  ],
+  "required_outputs": [
+    "CharacterSeedManifest",
+    "IdentityPressureVector",
+    "ProgressionDelta",
+    "PlayerStateDelta"
+  ],
+  "records": {
+    "CharacterSeedManifest": {
+      "required": [
+        "character_seed_id",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "mortal_origin_state",
+        "realm_attunement_seed",
+        "bloodline_resonance_seed",
+        "wolf_balance_fields",
+        "identity_pressure_vector_ref"
+      ],
+      "forbidden": [
+        "class_first_creation",
+        "locked_destiny",
+        "wolf_alignment_as_good_evil_axis"
+      ]
+    },
+    "IdentityPressureVector": {
+      "required": [
+        "pressure_id",
+        "source_ash_refs",
+        "realm_pressure",
+        "bloodline_pressure",
+        "memory_pressure",
+        "reveal_through_play_rules"
+      ]
+    },
+    "ProgressionDelta": {
+      "required": [
+        "progression_delta_id",
+        "character_seed_ref",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "worldstate_delta_packet_ref"
+      ]
+    },
+    "PlayerStateDelta": {
+      "required": [
+        "player_state_delta_id",
+        "progression_delta_ref",
+        "changed_fields",
+        "diagnostic_ref",
+        "generation_plan_ref"
+      ]
+    }
+  }
+}

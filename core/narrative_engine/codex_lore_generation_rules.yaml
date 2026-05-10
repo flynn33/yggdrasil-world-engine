@@ -1,0 +1,41 @@
+version: "1.0"
+
+canonical_ash_derivation:
+  required_input: CosmicPatternSnapshot
+  required_delta: WorldstateDeltaPacket
+  required_myth_context: MythRecord
+  required_faction_context: FactionTopologyState
+  required_diagnostic: DiagnosticEnvelope
+  required_plan: GenerationPlan
+  independent_random_generation_allowed: false
+
+required_outputs:
+  - CodexRecord
+  - LoreRecordVariant
+  - VisibilityScope
+
+truth_layer_rules:
+  locked_canon:
+    may_be_referenced: true
+    may_be_overwritten_by_generation: false
+  worldstate_occurrence:
+    source: WorldstateDeltaPacket
+    requires_diagnostic_ref: true
+  myth_variant:
+    source: MythRecord
+    must_remain_interpretation: true
+  faction_claim:
+    source: FactionTopologyState
+    must_not_be_factual_substrate: true
+  perception_overlay:
+    source: PerceptionStateRecord
+    must_not_rewrite_shared_world_truth: true
+
+validation_rules:
+  - codex_records_require_cosmic_pattern_snapshot_ref
+  - codex_records_require_worldstate_delta_packet_ref
+  - codex_records_require_diagnostic_ref
+  - codex_records_require_generation_plan_ref
+  - lore_record_variants_must_declare_truth_layer
+  - visibility_scope_must_protect_endgame_truths
+  - generated_lore_must_not_overwrite_locked_canon

@@ -12,13 +12,19 @@
     {
       "name": "generate_myth",
       "description": "Generate a myth from a significant narrative event",
-      "parameters": ["narrative_event", "faction_contexts"],
+      "parameters": [
+        "narrative_event",
+        "faction_contexts"
+      ],
       "returns": "MythRecord"
     },
     {
       "name": "get_faction_version",
       "description": "Get a specific faction's version of a myth",
-      "parameters": ["myth_id", "faction_id"],
+      "parameters": [
+        "myth_id",
+        "faction_id"
+      ],
       "returns": "MythVersion"
     },
     {
@@ -26,6 +32,17 @@
       "description": "Return all currently active myths in the world",
       "parameters": [],
       "returns": "MythRecord[]"
+    },
+    {
+      "name": "record_retrospective_myth",
+      "description": "Persist MythRecord as retrospective interpretation, with factual_world_truth_rewrite forbidden.",
+      "parameters": [
+        "CosmicPatternSnapshot",
+        "DiagnosticEnvelope",
+        "GenerationPlan",
+        "WorldstateDeltaPacket"
+      ],
+      "returns": "MythRecord"
     }
   ],
   "events_published": [
@@ -39,6 +56,73 @@
   "invariants": [
     "Myths derive from significant narrative events",
     "Myths are permanent once generated",
-    "Different factions may hold different versions"
-  ]
+    "Different factions may hold different versions",
+    "CosmicPatternSnapshot and DiagnosticEnvelope provenance is required for meaningful generation.",
+    "GenerationPlan is required before any materialized output.",
+    "source_ash_refs, diagnostic_ref, and generation_plan_ref must remain traceable."
+  ],
+  "inputs": [
+    {
+      "name": "cosmic_pattern_snapshot",
+      "type": "CosmicPatternSnapshot",
+      "description": "CosmicPatternSnapshot required by ASH remediation contract."
+    },
+    {
+      "name": "diagnostic_envelope",
+      "type": "DiagnosticEnvelope",
+      "description": "DiagnosticEnvelope required by ASH remediation contract."
+    },
+    {
+      "name": "generation_plan",
+      "type": "GenerationPlan",
+      "description": "GenerationPlan required by ASH remediation contract."
+    },
+    {
+      "name": "worldstate_delta_packet",
+      "type": "WorldstateDeltaPacket",
+      "description": "WorldstateDeltaPacket required by ASH remediation contract."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "myth_seed_candidate",
+      "type": "MythSeedCandidate",
+      "description": "MythSeedCandidate emitted under ASH remediation contract."
+    },
+    {
+      "name": "myth_record",
+      "type": "MythRecord",
+      "description": "MythRecord emitted under ASH remediation contract."
+    },
+    {
+      "name": "social_distribution_delta",
+      "type": "SocialDistributionDelta",
+      "description": "SocialDistributionDelta emitted under ASH remediation contract."
+    }
+  ],
+  "ash_remediation_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "records": [
+      "WorldstateDeltaPacket",
+      "MythSeedCandidate",
+      "MythRecord",
+      "MythLine",
+      "SocialDistributionDelta",
+      "factual_world_truth_rewrite",
+      "retrospective"
+    ]
+  }
 }

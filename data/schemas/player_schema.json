@@ -7,5 +7,27 @@
     "dark_wolf": 0
   },
   "bloodline_resonance": {},
-  "awakening_fragments": []
+  "awakening_fragments": [],
+  "ash_provenance": {
+    "CharacterSeedManifest": {
+      "required": true,
+      "cosmic_pattern_snapshot_ref": "CosmicPatternSnapshot"
+    },
+    "IdentityPressureVector": {
+      "required": true,
+      "source_ash_refs": []
+    },
+    "ProgressionDelta": {
+      "required": true,
+      "diagnostic_ref": "DiagnosticEnvelope"
+    },
+    "PlayerStateDelta": {
+      "required": true,
+      "generation_plan_ref": "GenerationPlan"
+    },
+    "cosmic_pattern_snapshot_ref": "CosmicPatternSnapshot",
+    "diagnostic_ref": "DiagnosticEnvelope",
+    "generation_plan_ref": "GenerationPlan",
+    "source_ash_refs": "SourceASHRefs"
+  }
 }

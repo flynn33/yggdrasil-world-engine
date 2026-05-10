@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.schemas.npc_manifest",
+  "version": "1.0.0",
+  "required_inputs": [
+    "CosmicPatternSnapshot",
+    "GenerationPlan",
+    "QuestIntent",
+    "FactionTopologyState"
+  ],
+  "required_outputs": [
+    "NPCManifest",
+    "RelationshipVector",
+    "TruthFunction",
+    "PersistenceState"
+  ],
+  "records": {
+    "NPCManifest": {
+      "required": [
+        "npc_manifest_id",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "quest_intent_ref",
+        "faction_topology_state_ref",
+        "relationship_vector_ref",
+        "truth_function_ref",
+        "persistence_state_ref"
+      ],
+      "forbidden": [
+        "generic_major_npc_without_pattern_provenance",
+        "untracked_relationship_change"
+      ]
+    },
+    "RelationshipVector": {
+      "required": [
+        "relationship_vector_id",
+        "source_ash_refs",
+        "faction_delta_ref",
+        "worldstate_delta_packet_ref"
+      ]
+    },
+    "TruthFunction": {
+      "required": [
+        "truth_function_id",
+        "known_claims",
+        "hidden_claims",
+        "contested_claims",
+        "truth_boundary"
+      ]
+    },
+    "PersistenceState": {
+      "required": [
+        "persistence_state_id",
+        "scope",
+        "duration",
+        "worldstate_delta_packet_ref",
+        "diagnostic_ref"
+      ]
+    }
+  }
+}

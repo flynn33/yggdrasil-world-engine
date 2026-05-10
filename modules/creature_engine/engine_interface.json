@@ -1,61 +1,129 @@
 {
-    "schemaVersion":  "1.0",
-    "status":  "forsetti_aligned_design_contract",
-    "moduleID":  "com.ywe.module.creature-engine",
-    "displayName":  "YWE Creature Engine",
-    "plannedForsettiModuleType":  "service",
-    "entryPointContract":  "CreatureEngineModule",
-    "supportedPlatforms":  [
-                               "windows"
-                           ],
-    "minForsettiVersion":  {
-                               "minor":  1,
-                               "patch":  0,
-                               "prerelease":  null,
-                               "major":  0
-                           },
-    "truthDomain":  "creature manifestation",
-    "activationProfile":  "host_policy_defined",
-    "lifecycle":  [
-                      "discover",
-                      "validate",
-                      "activate",
-                      "deactivate"
-                  ],
-    "compatibilityCheckRequired":  true,
-    "entitlementPolicy":  "defined_by_host_policy",
-    "directRuntimeDependencies":  [
-                                      "com.ywe.core.ash-pattern-engine",
-                                      "com.ywe.core.realm-engine",
-                                      "com.ywe.core.narrative-engine"
-                                  ],
-    "semanticInputs":  [
-                           "pattern signatures",
-                           "realm pressure",
-                           "narrative consequence"
-                       ],
-    "outputs":  [
-                    "creature manifestation specifications",
-                    "encounter hooks",
-                    "creature consequence hooks"
-                ],
-    "communication":  {
-                          "allowedChannels":  [
-                                                  "service_container",
-                                                  "event_bus",
-                                                  "framework_logger"
-                                              ],
-                          "forbiddenChannels":  [
-                                                    "direct_module_calls",
-                                                    "self_messaging",
-                                                    "reserved_namespace:forsetti.internal.*"
-                                                ]
-                      },
-    "plannedCapabilities":  [
-
-                            ],
-    "forbiddenCapabilities":  [
-                                  "ui_theme_mask"
-                              ],
-    "branchStatus":  "template_only_no_runtime_code"
+  "schemaVersion": "1.0",
+  "status": "forsetti_aligned_design_contract",
+  "moduleID": "com.ywe.module.creature-engine",
+  "displayName": "YWE Creature Engine",
+  "plannedForsettiModuleType": "service",
+  "entryPointContract": "CreatureEngineModule",
+  "supportedPlatforms": [
+    "windows"
+  ],
+  "minForsettiVersion": {
+    "minor": 1,
+    "patch": 0,
+    "prerelease": null,
+    "major": 0
+  },
+  "truthDomain": "creature manifestation",
+  "activationProfile": "host_policy_defined",
+  "lifecycle": [
+    "discover",
+    "validate",
+    "activate",
+    "deactivate"
+  ],
+  "compatibilityCheckRequired": true,
+  "entitlementPolicy": "defined_by_host_policy",
+  "directRuntimeDependencies": [
+    "com.ywe.core.ash-pattern-engine",
+    "com.ywe.core.realm-engine",
+    "com.ywe.core.narrative-engine"
+  ],
+  "semanticInputs": [
+    "pattern signatures",
+    "realm pressure",
+    "narrative consequence",
+    "CosmicPatternSnapshot",
+    "DiagnosticEnvelope",
+    "GenerationPlan",
+    "F2^9 ASH state provenance"
+  ],
+  "outputs": [
+    "creature manifestation specifications",
+    "encounter hooks",
+    "creature consequence hooks",
+    "generation_plan_ref",
+    "cosmic_pattern_snapshot_ref",
+    "diagnostic_ref",
+    "source_ash_refs"
+  ],
+  "communication": {
+    "allowedChannels": [
+      "service_container",
+      "event_bus",
+      "framework_logger"
+    ],
+    "forbiddenChannels": [
+      "direct_module_calls",
+      "self_messaging",
+      "reserved_namespace:forsetti.internal.*"
+    ]
+  },
+  "plannedCapabilities": [],
+  "forbiddenCapabilities": [
+    "ui_theme_mask"
+  ],
+  "branchStatus": "template_only_no_runtime_code",
+  "ash_remediation_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "module_records": [
+      "CreatureManifest",
+      "EncounterPlan",
+      "BehaviorPressureVector",
+      "source_ash_refs"
+    ],
+    "engine_contract_rule": "Module activation and service entrypoints must reject meaningful generation requests that lack CosmicPatternSnapshot, DiagnosticEnvelope, and GenerationPlan provenance.",
+    "entrypoint_requirements": {
+      "CosmicPatternSnapshot": "required before generation or interpretation",
+      "DiagnosticEnvelope": "required for validity, fallback, no-op, and recovery semantics",
+      "GenerationPlan": "required before materialized host output"
+    }
+  },
+  "engine_id": "ywe.modules.creature_engine",
+  "purpose": "Declares the Creature Engine service contract for ASH-derived creature manifests, encounter plans, and behavior pressure.",
+  "dependencies": [
+    "ywe.core.ash_pattern_engine",
+    "ywe.core.realm_engine",
+    "ywe.core.cosmology_engine"
+  ],
+  "methods": [
+    {
+      "name": "validate_creature_engine_contract",
+      "description": "Validate Creature Engine activation against Forsetti lifecycle rules and ASH provenance requirements.",
+      "parameters": [
+        "CosmicPatternSnapshot",
+        "DiagnosticEnvelope",
+        "GenerationPlan"
+      ],
+      "returns": "DiagnosticEnvelope"
+    },
+    {
+      "name": "materialize_creature_plan",
+      "description": "Materialize a CreatureManifest and EncounterPlan from a GenerationPlan without authoring ASH truth or YWE domain truth.",
+      "parameters": [
+        "GenerationPlan",
+        "source_ash_refs"
+      ],
+      "returns": "CreatureManifest"
+    }
+  ],
+  "layer": "module",
+  "invariants": [
+    "Module engine interface fields must satisfy Forsetti Framework Compliance checks.",
+    "CosmicPatternSnapshot, DiagnosticEnvelope, and GenerationPlan provenance is required before meaningful generation.",
+    "The module must not author ASH truth or YWE domain truth."
+  ]
 }

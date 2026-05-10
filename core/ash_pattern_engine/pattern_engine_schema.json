@@ -32,5 +32,54 @@
     "myth_seed",
     "prophecy_seed",
     "narrative_space_seed"
-  ]
+  ],
+  "ash_state_space_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "AshState": {
+      "coordinates": 9,
+      "field": "F2",
+      "state_count": 512
+    },
+    "CanonicalCodewordSet": {
+      "count": 16,
+      "transition": "x' = x XOR c"
+    },
+    "CosmicPatternSnapshot": {
+      "required_fields": [
+        "source_orbit_id",
+        "active_codeword_sequence",
+        "diagnostic_ref",
+        "generation_plan_ref"
+      ]
+    },
+    "DiagnosticEnvelope": {
+      "required_fields": [
+        "diagnostic_ref",
+        "rule_id",
+        "status",
+        "source_ash_refs"
+      ]
+    },
+    "GenerationPlan": {
+      "required_fields": [
+        "generation_plan_ref",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "target_domain"
+      ]
+    }
+  }
 }

@@ -30,5 +30,35 @@
     "perception_is_player_specific": true,
     "multiplayer_compatible": true,
     "same_location_different_views": true
+  },
+  "ash_remediation_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "records": [
+      "PerceptionStateRecord",
+      "OverlayManifest",
+      "VisibilityRules",
+      "truth_substrate_ref",
+      "perception_overlay_does_not_rewrite_shared_world_truth",
+      "geography_rewrite"
+    ]
+  },
+  "ash_required_fields": {
+    "cosmic_pattern_snapshot_ref": "CosmicPatternSnapshot",
+    "diagnostic_ref": "DiagnosticEnvelope",
+    "generation_plan_ref": "GenerationPlan",
+    "source_ash_refs": "SourceASHRefs"
   }
 }

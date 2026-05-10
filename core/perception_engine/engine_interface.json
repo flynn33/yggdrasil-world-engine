@@ -25,6 +25,26 @@
       "name": "active_patterns",
       "type": "PatternNode[]",
       "description": "Currently active cosmic patterns"
+    },
+    {
+      "name": "cosmic_pattern_snapshot",
+      "type": "CosmicPatternSnapshot",
+      "description": "CosmicPatternSnapshot required by ASH remediation contract."
+    },
+    {
+      "name": "diagnostic_envelope",
+      "type": "DiagnosticEnvelope",
+      "description": "DiagnosticEnvelope required by ASH remediation contract."
+    },
+    {
+      "name": "generation_plan",
+      "type": "GenerationPlan",
+      "description": "GenerationPlan required by ASH remediation contract."
+    },
+    {
+      "name": "truth_substrate_ref",
+      "type": "WorldTruthReference",
+      "description": "WorldTruthReference required by ASH remediation contract."
     }
   ],
   "outputs": [
@@ -32,26 +52,70 @@
       "name": "perception_overlay",
       "type": "PerceptionOverlay",
       "description": "Player-specific overlay for the current location"
+    },
+    {
+      "name": "perception_state_record",
+      "type": "PerceptionStateRecord",
+      "description": "PerceptionStateRecord emitted under ASH remediation contract."
+    },
+    {
+      "name": "overlay_manifest",
+      "type": "OverlayManifest",
+      "description": "OverlayManifest emitted under ASH remediation contract."
+    },
+    {
+      "name": "visibility_rules",
+      "type": "VisibilityRules",
+      "description": "VisibilityRules emitted under ASH remediation contract."
     }
   ],
   "methods": [
     {
       "name": "calculate_perception",
       "description": "Calculate the perception overlay for a player at a given location",
-      "parameters": ["player_state", "location", "active_patterns"],
+      "parameters": [
+        "player_state",
+        "location",
+        "active_patterns"
+      ],
       "returns": "PerceptionOverlay"
     },
     {
       "name": "get_visible_entities",
       "description": "Determine which entities are visible to this player based on their perception state",
-      "parameters": ["player_state", "location"],
+      "parameters": [
+        "player_state",
+        "location"
+      ],
       "returns": "Entity[]"
     },
     {
       "name": "get_npc_variants",
       "description": "Get the player-specific NPC variants for a location",
-      "parameters": ["player_state", "location"],
+      "parameters": [
+        "player_state",
+        "location"
+      ],
       "returns": "NPCVariant[]"
+    },
+    {
+      "name": "compose_overlay_manifest",
+      "description": "Compose OverlayManifest from ASH provenance and player perception state.",
+      "parameters": [
+        "CosmicPatternSnapshot",
+        "DiagnosticEnvelope",
+        "GenerationPlan",
+        "truth_substrate_ref"
+      ],
+      "returns": "OverlayManifest"
+    },
+    {
+      "name": "validate_no_world_truth_rewrite",
+      "description": "Reject geography_rewrite and other shared-world edits from perception overlays.",
+      "parameters": [
+        "OverlayManifest"
+      ],
+      "returns": "DiagnosticEnvelope"
     }
   ],
   "events_published": [
@@ -69,6 +133,33 @@
     "The world itself does not change -- only player perception changes",
     "Perception is always player-specific",
     "Multiple players can perceive the same location differently",
-    "Perception derives from cosmic state, never arbitrary"
-  ]
+    "Perception derives from cosmic state, never arbitrary",
+    "CosmicPatternSnapshot and DiagnosticEnvelope provenance is required for meaningful generation.",
+    "GenerationPlan is required before any materialized output.",
+    "source_ash_refs, diagnostic_ref, and generation_plan_ref must remain traceable."
+  ],
+  "ash_remediation_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "records": [
+      "PerceptionStateRecord",
+      "OverlayManifest",
+      "VisibilityRules",
+      "truth_substrate_ref",
+      "perception_overlay_does_not_rewrite_shared_world_truth",
+      "geography_rewrite"
+    ]
+  }
 }

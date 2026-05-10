@@ -13,19 +13,27 @@
     {
       "name": "generate_prophecy",
       "description": "Generate a prophecy from cosmic pattern conditions",
-      "parameters": ["pattern_node", "player_state"],
+      "parameters": [
+        "pattern_node",
+        "player_state"
+      ],
       "returns": "Prophecy"
     },
     {
       "name": "check_prophecy_conditions",
       "description": "Evaluate whether a prophecy's activation conditions are met",
-      "parameters": ["prophecy_id", "cosmic_state"],
+      "parameters": [
+        "prophecy_id",
+        "cosmic_state"
+      ],
       "returns": "boolean"
     },
     {
       "name": "activate_prophecy",
       "description": "Activate a prophecy and apply its pattern weight adjustments",
-      "parameters": ["prophecy_id"],
+      "parameters": [
+        "prophecy_id"
+      ],
       "returns": "ProphecyActivationResult"
     },
     {
@@ -33,6 +41,16 @@
       "description": "Return all prophecies with non-dormant status",
       "parameters": [],
       "returns": "Prophecy[]"
+    },
+    {
+      "name": "shape_prophecy_attractor",
+      "description": "Emit ProphecyRecord as an attractor with deflection_routes and transmutation_routes, never a fixed_script.",
+      "parameters": [
+        "CosmicPatternSnapshot",
+        "DiagnosticEnvelope",
+        "GenerationPlan"
+      ],
+      "returns": "ProphecyRecord"
     }
   ],
   "events_published": [
@@ -49,6 +67,69 @@
   "invariants": [
     "Prophecies are probability weights, not fixed scripts",
     "Prophecy generation derives from ASH patterns",
-    "Prophecies influence future pattern emergence"
-  ]
+    "Prophecies influence future pattern emergence",
+    "CosmicPatternSnapshot and DiagnosticEnvelope provenance is required for meaningful generation.",
+    "GenerationPlan is required before any materialized output.",
+    "source_ash_refs, diagnostic_ref, and generation_plan_ref must remain traceable."
+  ],
+  "inputs": [
+    {
+      "name": "cosmic_pattern_snapshot",
+      "type": "CosmicPatternSnapshot",
+      "description": "CosmicPatternSnapshot required by ASH remediation contract."
+    },
+    {
+      "name": "diagnostic_envelope",
+      "type": "DiagnosticEnvelope",
+      "description": "DiagnosticEnvelope required by ASH remediation contract."
+    },
+    {
+      "name": "generation_plan",
+      "type": "GenerationPlan",
+      "description": "GenerationPlan required by ASH remediation contract."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "prophecy_record",
+      "type": "ProphecyRecord",
+      "description": "ProphecyRecord emitted under ASH remediation contract."
+    },
+    {
+      "name": "omen_cluster",
+      "type": "OmenCluster",
+      "description": "OmenCluster emitted under ASH remediation contract."
+    },
+    {
+      "name": "runtime_bias_effect",
+      "type": "RuntimeBiasEffect",
+      "description": "RuntimeBiasEffect emitted under ASH remediation contract."
+    }
+  ],
+  "ash_remediation_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "records": [
+      "ProphecyRecord",
+      "OmenCluster",
+      "RuntimeBiasEffect",
+      "RecurringSymbolState",
+      "attractor",
+      "fixed_script",
+      "deflection_routes",
+      "transmutation_routes"
+    ]
+  }
 }

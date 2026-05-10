@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.schemas.artifact_manifest",
+  "version": "1.0.0",
+  "required_inputs": [
+    "GenerationPlan",
+    "ArtifactDescription",
+    "CosmicPatternSnapshot",
+    "DiagnosticEnvelope"
+  ],
+  "required_outputs": [
+    "ArtifactManifest",
+    "UseConsequenceRoute",
+    "MythSeedCandidate"
+  ],
+  "records": {
+    "ArtifactManifest": {
+      "required": [
+        "artifact_manifest_id",
+        "artifact_description_ref",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "use_consequence_route_ref",
+        "myth_seed_candidate_ref"
+      ],
+      "forbidden": [
+        "filler_loot_generation",
+        "materialization_before_generation_plan",
+        "artifact_power_without_ash_state_basis"
+      ]
+    },
+    "UseConsequenceRoute": {
+      "required": [
+        "route_id",
+        "artifact_manifest_ref",
+        "worldstate_delta_packet_ref",
+        "diagnostic_ref"
+      ]
+    },
+    "MythSeedCandidate": {
+      "required": [
+        "myth_seed_candidate_id",
+        "artifact_manifest_ref",
+        "source_ash_refs",
+        "worldstate_delta_packet_ref"
+      ]
+    }
+  }
+}

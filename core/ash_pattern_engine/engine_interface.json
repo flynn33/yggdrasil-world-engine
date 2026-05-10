@@ -4,7 +4,10 @@
   "description": "Interface definition for the ASH Pattern Engine",
   "purpose": "Detects cosmic patterns from ASH state analysis and provides generation seeds to all other engines",
   "layer": "core",
-  "dependencies": ["ywe.core.cosmology_engine", "ywe.core.realm_engine"],
+  "dependencies": [
+    "ywe.core.cosmology_engine",
+    "ywe.core.realm_engine"
+  ],
   "inputs": [
     {
       "name": "cosmic_state",
@@ -15,6 +18,16 @@
       "name": "player_state",
       "type": "PlayerState",
       "description": "Current player state for pattern personalization"
+    },
+    {
+      "name": "ash_state",
+      "type": "AshState",
+      "description": "Nine-coordinate F2^9 ASH state vector consumed as a complete state."
+    },
+    {
+      "name": "canonical_codeword",
+      "type": "CanonicalCodeword",
+      "description": "One of the fixed 16 full-state ASH codewords."
     }
   ],
   "outputs": [
@@ -22,26 +35,94 @@
       "name": "detected_patterns",
       "type": "PatternNode[]",
       "description": "Array of detected cosmic patterns"
+    },
+    {
+      "name": "cosmic_pattern_snapshot",
+      "type": "CosmicPatternSnapshot",
+      "description": "Normalized ASH snapshot carrying source orbit, codeword sequence, and diagnostic reference."
+    },
+    {
+      "name": "diagnostic_envelope",
+      "type": "DiagnosticEnvelope",
+      "description": "Structured ASH diagnostic record for valid, recoverable, fallback, or no-op conditions."
+    },
+    {
+      "name": "generation_plan",
+      "type": "GenerationPlan",
+      "description": "Side-effect-free generation plan emitted across the materialization boundary."
     }
   ],
   "methods": [
     {
       "name": "detect_patterns",
       "description": "Analyze current ASH state and detect active cosmic patterns",
-      "parameters": ["cosmic_state", "player_state"],
+      "parameters": [
+        "cosmic_state",
+        "player_state"
+      ],
       "returns": "PatternNode[]"
     },
     {
       "name": "get_pattern_by_id",
       "description": "Retrieve a specific pattern by its ID",
-      "parameters": ["pattern_id"],
+      "parameters": [
+        "pattern_id"
+      ],
       "returns": "PatternNode"
     },
     {
       "name": "evaluate_pattern_strength",
       "description": "Calculate the strength of a pattern given current cosmic conditions",
-      "parameters": ["pattern_id", "cosmic_state"],
+      "parameters": [
+        "pattern_id",
+        "cosmic_state"
+      ],
       "returns": "float"
+    },
+    {
+      "name": "normalize_ash_state",
+      "description": "Validate and normalize a complete F2^9 ASH state.",
+      "parameters": [
+        "ash_state"
+      ],
+      "returns": "AshState"
+    },
+    {
+      "name": "transform_by_codeword",
+      "description": "Apply x' = x XOR c with a canonical full-state codeword.",
+      "parameters": [
+        "ash_state",
+        "canonical_codeword"
+      ],
+      "returns": "AshState"
+    },
+    {
+      "name": "build_cosmic_pattern_snapshot",
+      "description": "Produce the CosmicPatternSnapshot required by downstream YWE engines.",
+      "parameters": [
+        "ash_state",
+        "active_codeword_sequence"
+      ],
+      "returns": "CosmicPatternSnapshot"
+    },
+    {
+      "name": "emit_diagnostic_envelope",
+      "description": "Emit DiagnosticEnvelope records for state validity and recovery decisions.",
+      "parameters": [
+        "ash_state",
+        "rule_id"
+      ],
+      "returns": "DiagnosticEnvelope"
+    },
+    {
+      "name": "plan_generation",
+      "description": "Emit a GenerationPlan without materializing artifacts or authoring downstream truth.",
+      "parameters": [
+        "cosmic_pattern_snapshot",
+        "diagnostic_envelope",
+        "target_domain"
+      ],
+      "returns": "GenerationPlan"
     }
   ],
   "events_published": [
@@ -59,6 +140,33 @@
     "All patterns must derive from ASH cosmological state analysis",
     "No independent random generation of meaningful content",
     "Pattern strength is always between 0 and 1",
-    "All expansion engines must read from detected patterns"
-  ]
+    "All expansion engines must read from detected patterns",
+    "ASH math uses F2^9 full-state vectors only.",
+    "Only the fixed 16 canonical codewords may transform ASH state.",
+    "State transition semantics are x' = x XOR c.",
+    "CosmicPatternSnapshot, DiagnosticEnvelope, and GenerationPlan are required before downstream materialization."
+  ],
+  "ash_remediation_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "records": [
+      "AshState",
+      "CanonicalCodeword",
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope",
+      "GenerationPlan"
+    ]
+  }
 }

@@ -29,3 +29,14 @@ At every major milestone, the engine should undergo a sanity check to ensure gam
 All procedural systems must derive from ASH Pattern Detection. No subsystem may become an independent random generator detached from the cosmic state.
 
 See `ash_compliance_checklist.md` for the milestone review checklist.
+
+## ASH/ASP Core Math Rebuild
+
+The active ASH/ASP math baseline is `F2^9` with exactly 512 full-state vectors,
+16 fixed canonical full-state codewords, and transitions defined by
+`x' = x XOR c`.
+
+Meaningful generation systems must retain `CosmicPatternSnapshot`,
+`DiagnosticEnvelope`, `GenerationPlan`, `cosmic_pattern_snapshot_ref`,
+`diagnostic_ref`, `generation_plan_ref`, and `source_ash_refs` through their
+schemas, rules, and adapter materialization boundaries.

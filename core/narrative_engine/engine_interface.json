@@ -19,6 +19,21 @@
       "name": "player_state",
       "type": "PlayerState",
       "description": "Current player state including attunement and alignment"
+    },
+    {
+      "name": "cosmic_pattern_snapshot",
+      "type": "CosmicPatternSnapshot",
+      "description": "CosmicPatternSnapshot required by ASH remediation contract."
+    },
+    {
+      "name": "diagnostic_envelope",
+      "type": "DiagnosticEnvelope",
+      "description": "DiagnosticEnvelope required by ASH remediation contract."
+    },
+    {
+      "name": "generation_plan",
+      "type": "GenerationPlan",
+      "description": "GenerationPlan required by ASH remediation contract."
     }
   ],
   "outputs": [
@@ -31,32 +46,77 @@
       "name": "player_memory_update",
       "type": "MemoryUpdate",
       "description": "Updates to the player's narrative memory"
+    },
+    {
+      "name": "npc_manifest",
+      "type": "NPCManifest",
+      "description": "NPCManifest emitted under ASH remediation contract."
+    },
+    {
+      "name": "worldstate_delta_packet",
+      "type": "WorldstateDeltaPacket",
+      "description": "WorldstateDeltaPacket emitted under ASH remediation contract."
+    },
+    {
+      "name": "faction_topology_state",
+      "type": "FactionTopologyState",
+      "description": "FactionTopologyState emitted under ASH remediation contract."
     }
   ],
   "methods": [
     {
       "name": "interpret_pattern",
       "description": "Transform a cosmic pattern into a player-specific narrative interpretation",
-      "parameters": ["pattern_node", "player_state"],
+      "parameters": [
+        "pattern_node",
+        "player_state"
+      ],
       "returns": "NarrativeInterpretation"
     },
     {
       "name": "record_consequence",
       "description": "Record a narrative consequence in player memory",
-      "parameters": ["player_id", "event_id", "consequence"],
+      "parameters": [
+        "player_id",
+        "event_id",
+        "consequence"
+      ],
       "returns": "void"
     },
     {
       "name": "get_player_memory",
       "description": "Retrieve the full narrative memory for a player",
-      "parameters": ["player_id"],
+      "parameters": [
+        "player_id"
+      ],
       "returns": "PlayerNarrativeMemory"
     },
     {
       "name": "evaluate_myth_eligibility",
       "description": "Determine if a narrative event qualifies for myth formation",
-      "parameters": ["narrative_event"],
+      "parameters": [
+        "narrative_event"
+      ],
       "returns": "boolean"
+    },
+    {
+      "name": "synthesize_npc_manifest",
+      "description": "Build an NPCManifest from ASH provenance without authoring cosmological truth.",
+      "parameters": [
+        "CosmicPatternSnapshot",
+        "DiagnosticEnvelope",
+        "GenerationPlan"
+      ],
+      "returns": "NPCManifest"
+    },
+    {
+      "name": "emit_worldstate_delta_packet",
+      "description": "Return a WorldstateDeltaPacket and FutureGenerationBiasUpdate or DiagnosticNoOp.",
+      "parameters": [
+        "GenerationPlan",
+        "SourceASHRefs"
+      ],
+      "returns": "WorldstateDeltaPacket"
     }
   ],
   "events_published": [
@@ -72,6 +132,36 @@
   "invariants": [
     "All narrative generation derives from ASH patterns",
     "Player narrative memory persists across sessions",
-    "Consequences are irreversible once recorded"
-  ]
+    "Consequences are irreversible once recorded",
+    "CosmicPatternSnapshot and DiagnosticEnvelope provenance is required for meaningful generation.",
+    "GenerationPlan is required before any materialized output.",
+    "source_ash_refs, diagnostic_ref, and generation_plan_ref must remain traceable."
+  ],
+  "ash_remediation_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "records": [
+      "NPCManifest",
+      "RelationshipVector",
+      "TruthFunction",
+      "PersistenceState",
+      "FactionTopologyState",
+      "WorldstateDeltaPacket",
+      "FutureGenerationBiasUpdate",
+      "DiagnosticNoOp",
+      "SourceASHRefs"
+    ]
+  }
 }

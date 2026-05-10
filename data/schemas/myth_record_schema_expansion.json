@@ -1,22 +1,53 @@
 {
-    "status":  "placeholder_awaiting_finalized_content",
-    "system":  "myth_record_schema_expansion",
-    "purpose":  "Placeholder for expanded myth record persistence schema.",
-    "inputs":  [
-                   "myth engine outputs",
-                   "canonical myth schema"
-               ],
-    "outputs":  [
-                    "expanded myth record schema contract"
-                ],
-    "dependencies":  [
-                         "data/myth_archetypes/myth_schema.json",
-                         "modules/myth_engine"
-                     ],
-    "invariants":  [
-                       "all_meaningful_generation_must_be_ash_derived",
-                       "fixed_cosmology_must_remain_locked",
-                       "perception_must_not_rewrite_shared_world_truth",
-                       "forsetti_governs_activation_ywe_governs_truth"
-                   ]
+  "status": "placeholder_awaiting_finalized_content",
+  "system": "myth_record_schema_expansion",
+  "purpose": "Placeholder for expanded myth record persistence schema.",
+  "inputs": [
+    "myth engine outputs",
+    "canonical myth schema"
+  ],
+  "outputs": [
+    "expanded myth record schema contract"
+  ],
+  "dependencies": [
+    "data/myth_archetypes/myth_schema.json",
+    "modules/myth_engine"
+  ],
+  "invariants": [
+    "all_meaningful_generation_must_be_ash_derived",
+    "fixed_cosmology_must_remain_locked",
+    "perception_must_not_rewrite_shared_world_truth",
+    "forsetti_governs_activation_ywe_governs_truth"
+  ],
+  "ash_remediation_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "records": [
+      "WorldstateDeltaPacket",
+      "MythSeedCandidate",
+      "MythRecord",
+      "MythLine",
+      "SocialDistributionDelta",
+      "factual_world_truth_rewrite",
+      "retrospective"
+    ]
+  },
+  "ash_required_fields": {
+    "cosmic_pattern_snapshot_ref": "CosmicPatternSnapshot",
+    "diagnostic_ref": "DiagnosticEnvelope",
+    "generation_plan_ref": "GenerationPlan",
+    "source_ash_refs": "SourceASHRefs"
+  }
 }

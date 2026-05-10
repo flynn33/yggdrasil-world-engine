@@ -13,6 +13,7 @@ This inventory tracks three distinct repo-truth states:
 - Intentional placeholder-backed artifacts: `14`
 - Master spec authority artifact: present at `docs/master_specification/YWE_MASTER_SPECIFICATION.md`
 - Bootstrap prompt authority artifact: present at `YWE_REPOSITORY_BOOTSTRAP_PROMPT.md`
+- ASH/ASP core math rebuild overlay: present on `ash-remediation`
 
 ## Resolved Canonical Artifacts
 
@@ -30,6 +31,21 @@ This inventory tracks three distinct repo-truth states:
 | `lore/wolf_canon/two_wolves_and_balance.md` | Canonical | Promoted as the corrected wolf canon authority for symbiosis, balance, and temporary coherence loss |
 | `docs/architecture/authored_override_and_tooling_notes.md` | Canonical | Promoted as authored-control and tooling boundary authority |
 | `docs/architecture/realm_truth_boundary_contract.md` | Canonical | Promoted as boundary contract separating truth and interpretive layers |
+
+## ASH/ASP Core Math Rebuild Artifacts
+
+These artifacts are present as the active remediation overlay. They do not
+replace the restored planning documents; they extend the existing engine,
+schema, and rule surfaces with the required ASH math provenance.
+
+| Artifact | Status | Notes |
+|---|---|---|
+| `specs/` | Canonical math overlay | Mirrors the ASH `F2^9` state-space, codeword, transition, diagnostics, and verification specifications |
+| `core/ash_pattern_engine/canonical/` | Canonical math overlay | Repo-local copy of the ASH canonical pseudo-spec surface |
+| `data/schemas/ash_generation_packet_schema.json` | Canonical packet schema | Defines `CosmicPatternSnapshot`, `DiagnosticEnvelope`, and `GenerationPlan` |
+| `data/validation/ash_generation_gate_contract.json` | Validation contract | Enumerates the rebuilt YWE generation systems and adapter boundaries |
+| `conformance/` | Evidence | Records governance, deviation, materialization, module mapping, verification, and acceptance judgment |
+| `.github/scripts/ywe_package_acceptance_check.py` | Validator | Blocks stale math language and missing ASH provenance across the rebuilt systems |
 
 ## Blocking Missing Artifacts
 

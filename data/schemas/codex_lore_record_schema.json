@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.schemas.codex_lore_record",
+  "version": "1.0.0",
+  "required_inputs": [
+    "CosmicPatternSnapshot",
+    "WorldstateDeltaPacket",
+    "MythRecord",
+    "FactionTopologyState"
+  ],
+  "required_outputs": [
+    "CodexRecord",
+    "LoreRecordVariant",
+    "VisibilityScope"
+  ],
+  "records": {
+    "CodexRecord": {
+      "required": [
+        "codex_record_id",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "worldstate_delta_packet_ref",
+        "myth_record_ref",
+        "faction_topology_state_ref",
+        "visibility_scope_ref"
+      ],
+      "forbidden": [
+        "locked_canon_overwrite",
+        "faction_myth_as_factual_substrate"
+      ]
+    },
+    "LoreRecordVariant": {
+      "required": [
+        "lore_variant_id",
+        "codex_record_ref",
+        "layer",
+        "source_claim_type",
+        "visibility_scope_ref"
+      ],
+      "allowed_layers": [
+        "locked_canon",
+        "worldstate_occurrence",
+        "myth_variant",
+        "faction_claim",
+        "perception_overlay"
+      ]
+    },
+    "VisibilityScope": {
+      "required": [
+        "visibility_scope_id",
+        "audience",
+        "realm_constraints",
+        "progression_constraints",
+        "endgame_truth_protection"
+      ]
+    }
+  }
+}

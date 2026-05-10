@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.schemas.ash_generation_packet",
+  "version": "1.0.0",
+  "authority": {
+    "state_space": "F2^9",
+    "codeword_set": "fixed_16_member_C_subset_F2_9",
+    "transition_rule": "x_prime = x XOR c",
+    "independent_meaningful_random_generation_allowed": false
+  },
+  "shared_provenance_fields": [
+    "state_space",
+    "normalized_state",
+    "source_orbit_id",
+    "active_codeword_sequence",
+    "realm_identity",
+    "diagnostic_ref",
+    "generation_plan_ref",
+    "cosmic_pattern_snapshot_ref"
+  ],
+  "records": {
+    "AshState": {
+      "required": ["state_space", "bits"],
+      "properties": {
+        "state_space": "F2^9",
+        "bits": "full_9_bit_vector"
+      }
+    },
+    "CanonicalCodeword": {
+      "required": ["state_space", "bits", "membership"],
+      "properties": {
+        "state_space": "F2^9",
+        "bits": "full_9_bit_vector",
+        "membership": "must_be_member_of_canonical_C"
+      }
+    },
+    "CosmicPatternSnapshot": {
+      "required": [
+        "snapshot_type",
+        "state_space",
+        "normalized_state",
+        "source_orbit_id",
+        "active_codeword_sequence",
+        "realm_identity",
+        "diagnostic_ref",
+        "generation_plan_ref"
+      ],
+      "properties": {
+        "snapshot_type": "CosmicPatternSnapshot",
+        "state_space": "F2^9",
+        "diagnostic_ref": "DiagnosticEnvelope",
+        "generation_plan_ref": "GenerationPlan | null"
+      }
+    },
+    "DiagnosticEnvelope": {
+      "required": [
+        "diagnostic_kind",
+        "severity",
+        "stage",
+        "disposition",
+        "subject_reference",
+        "rule_ids"
+      ],
+      "properties": {
+        "rule_id_taxonomy": "specs/interfaces/rule-id-taxonomy.md",
+        "state_validity_schema": "specs/interfaces/diagnostic-schema.md"
+      }
+    },
+    "GenerationPlan": {
+      "required": [
+        "plan_type",
+        "plan_ref",
+        "cosmic_pattern_snapshot_ref",
+        "normalized_state",
+        "diagnostic_ref",
+        "artifacts",
+        "metadata"
+      ],
+      "properties": {
+        "plan_type": "GenerationPlan",
+        "side_effects_allowed": false,
+        "planner_contract": "GenerationPlanner",
+        "emitter_contract": "ArtifactEmitter"
+      }
+    },
+    "SourceASHRefs": {
+      "required": [
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "normalized_state",
+        "source_orbit_id",
+        "active_codeword_sequence"
+      ],
+      "properties": {
+        "truth_authority": "ASH Pattern System",
+        "consumer_authority": "YWE domain interpretation"
+      }
+    }
+  }
+}

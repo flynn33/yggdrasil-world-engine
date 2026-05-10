@@ -1,59 +1,129 @@
 {
-    "schemaVersion":  "1.0",
-    "status":  "forsetti_aligned_design_contract",
-    "moduleID":  "com.ywe.module.myth-engine",
-    "displayName":  "YWE Myth Engine",
-    "plannedForsettiModuleType":  "service",
-    "entryPointContract":  "MythEngineModule",
-    "supportedPlatforms":  [
-                               "windows"
-                           ],
-    "minForsettiVersion":  {
-                               "minor":  1,
-                               "patch":  0,
-                               "prerelease":  null,
-                               "major":  0
-                           },
-    "truthDomain":  "myth emergence and myth persistence",
-    "activationProfile":  "host_policy_defined",
-    "lifecycle":  [
-                      "discover",
-                      "validate",
-                      "activate",
-                      "deactivate"
-                  ],
-    "compatibilityCheckRequired":  true,
-    "entitlementPolicy":  "defined_by_host_policy",
-    "directRuntimeDependencies":  [
-                                      "com.ywe.core.narrative-engine"
-                                  ],
-    "semanticInputs":  [
-                           "narrative consequence events",
-                           "myth archetype schemas",
-                           "faction interpretation pressure"
-                       ],
-    "outputs":  [
-                    "myth seeds",
-                    "myth records",
-                    "faction myth variants"
-                ],
-    "communication":  {
-                          "allowedChannels":  [
-                                                  "service_container",
-                                                  "event_bus",
-                                                  "framework_logger"
-                                              ],
-                          "forbiddenChannels":  [
-                                                    "direct_module_calls",
-                                                    "self_messaging",
-                                                    "reserved_namespace:forsetti.internal.*"
-                                                ]
-                      },
-    "plannedCapabilities":  [
-
-                            ],
-    "forbiddenCapabilities":  [
-                                  "ui_theme_mask"
-                              ],
-    "branchStatus":  "template_only_no_runtime_code"
+  "schemaVersion": "1.0",
+  "status": "forsetti_aligned_design_contract",
+  "moduleID": "com.ywe.module.myth-engine",
+  "displayName": "YWE Myth Engine",
+  "plannedForsettiModuleType": "service",
+  "entryPointContract": "MythEngineModule",
+  "supportedPlatforms": [
+    "windows"
+  ],
+  "minForsettiVersion": {
+    "minor": 1,
+    "patch": 0,
+    "prerelease": null,
+    "major": 0
+  },
+  "truthDomain": "myth emergence and myth persistence",
+  "activationProfile": "host_policy_defined",
+  "lifecycle": [
+    "discover",
+    "validate",
+    "activate",
+    "deactivate"
+  ],
+  "compatibilityCheckRequired": true,
+  "entitlementPolicy": "defined_by_host_policy",
+  "directRuntimeDependencies": [
+    "com.ywe.core.narrative-engine"
+  ],
+  "semanticInputs": [
+    "narrative consequence events",
+    "myth archetype schemas",
+    "faction interpretation pressure",
+    "CosmicPatternSnapshot",
+    "DiagnosticEnvelope",
+    "GenerationPlan",
+    "F2^9 ASH state provenance"
+  ],
+  "outputs": [
+    "myth seeds",
+    "myth records",
+    "faction myth variants",
+    "generation_plan_ref",
+    "cosmic_pattern_snapshot_ref",
+    "diagnostic_ref",
+    "source_ash_refs"
+  ],
+  "communication": {
+    "allowedChannels": [
+      "service_container",
+      "event_bus",
+      "framework_logger"
+    ],
+    "forbiddenChannels": [
+      "direct_module_calls",
+      "self_messaging",
+      "reserved_namespace:forsetti.internal.*"
+    ]
+  },
+  "plannedCapabilities": [],
+  "forbiddenCapabilities": [
+    "ui_theme_mask"
+  ],
+  "branchStatus": "template_only_no_runtime_code",
+  "ash_remediation_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "module_records": [
+      "WorldstateDeltaPacket",
+      "MythSeedCandidate",
+      "MythRecord",
+      "MythLine",
+      "SocialDistributionDelta",
+      "retrospective"
+    ],
+    "engine_contract_rule": "Module activation and service entrypoints must reject meaningful generation requests that lack CosmicPatternSnapshot, DiagnosticEnvelope, and GenerationPlan provenance.",
+    "entrypoint_requirements": {
+      "CosmicPatternSnapshot": "required before generation or interpretation",
+      "DiagnosticEnvelope": "required for validity, fallback, no-op, and recovery semantics",
+      "GenerationPlan": "required before materialized host output"
+    }
+  },
+  "engine_id": "ywe.modules.myth_engine",
+  "purpose": "Declares the Myth Engine service contract for retrospective ASH-derived myth records and social distribution deltas.",
+  "dependencies": [
+    "ywe.core.ash_pattern_engine",
+    "ywe.core.narrative_engine"
+  ],
+  "methods": [
+    {
+      "name": "validate_myth_engine_contract",
+      "description": "Validate Myth Engine activation against Forsetti lifecycle rules and ASH provenance requirements.",
+      "parameters": [
+        "CosmicPatternSnapshot",
+        "DiagnosticEnvelope",
+        "GenerationPlan"
+      ],
+      "returns": "DiagnosticEnvelope"
+    },
+    {
+      "name": "record_retrospective_myth_plan",
+      "description": "Record a MythRecord from GenerationPlan provenance while preserving the no world-truth-rewrite boundary.",
+      "parameters": [
+        "GenerationPlan",
+        "WorldstateDeltaPacket",
+        "source_ash_refs"
+      ],
+      "returns": "MythRecord"
+    }
+  ],
+  "layer": "module",
+  "invariants": [
+    "Module engine interface fields must satisfy Forsetti Framework Compliance checks.",
+    "CosmicPatternSnapshot, DiagnosticEnvelope, and GenerationPlan provenance is required before meaningful generation.",
+    "The module must not author ASH truth or YWE domain truth."
+  ]
 }

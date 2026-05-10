@@ -5,7 +5,13 @@
   "purpose": "Manages primordial darkness, Dark Star collapse into the Divine Core, and the foundation of all cosmic structures",
   "layer": "core",
   "dependencies": [],
-  "inputs": [],
+  "inputs": [
+    {
+      "name": "ash_baseline_contract",
+      "type": "ASHBaselineContract",
+      "description": "F2^9 state-space and fixed canonical codeword baseline used by downstream ASH pattern generation."
+    }
+  ],
   "outputs": [
     {
       "name": "cosmic_state",
@@ -16,6 +22,16 @@
       "name": "realm_definitions",
       "type": "RealmDefinition[]",
       "description": "Definitions for all nine canonical realms"
+    },
+    {
+      "name": "ash_state",
+      "type": "AshState",
+      "description": "Complete F2^9 cosmic state vector supplied to the ASH Pattern Engine."
+    },
+    {
+      "name": "diagnostic_envelope",
+      "type": "DiagnosticEnvelope",
+      "description": "Cosmology baseline diagnostic record carried into downstream CosmicPatternSnapshot generation."
     }
   ],
   "methods": [
@@ -36,6 +52,14 @@
       "description": "Return the current state of White Wolf and Dark Wolf companion balance or coherence pressure",
       "parameters": [],
       "returns": "WolfState"
+    },
+    {
+      "name": "emit_ash_state_baseline",
+      "description": "Expose the complete F2^9 AshState and DiagnosticEnvelope consumed by the ASH Pattern Engine to build CosmicPatternSnapshot and GenerationPlan records.",
+      "parameters": [
+        "cosmic_state"
+      ],
+      "returns": "AshState"
     }
   ],
   "events_published": [
@@ -48,6 +72,35 @@
     "White Wolf and Dark Wolf emerge with Divine Core creation as paired companions of consciousness",
     "Divine Core is the origin center of all reality",
     "Realms and planes are equivalent terms in YWE canon",
-    "Wolves may lose coherence temporarily but cannot die permanently"
-  ]
+    "Wolves may lose coherence temporarily but cannot die permanently",
+    "Cosmology output must be representable as a complete F2^9 ASH state before pattern generation.",
+    "Downstream transitions use x' = x XOR c over the fixed 16 canonical codewords.",
+    "Cosmology does not materialize GenerationPlan outputs or author downstream adapter truth.",
+    "CosmicPatternSnapshot, DiagnosticEnvelope, and GenerationPlan remain downstream ASH provenance requirements."
+  ],
+  "ash_remediation_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "module_records": [
+      "AshState",
+      "CosmicState",
+      "RealmDefinition",
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope",
+      "GenerationPlan"
+    ],
+    "engine_contract_rule": "Cosmology is the upstream source of complete ASH state; materialization remains downstream of GenerationPlan."
+  }
 }
