@@ -7,10 +7,24 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ## [Unreleased] — 2026-05-10
 
 ### Documentation
+- Added the ASH upstream mathematical and generative authority contract and
+  linked it through the downstream, runtime generation, master specification,
+  module contract, dependency map, and invariant guardrail documentation.
+- Added the shared upstream generation packet spine for exploration-driven
+  world generation, player-action-driven quest/NPC generation, and
+  consequence-driven future generation bias.
 - Expanded README coverage for the ASH/ASP math baseline, system architecture, packet flow, and validation surfaces.
 - Rebuilt the GitHub wiki as a comprehensive reference for architecture, engines, schemas, adapters, validation, and lore.
 - Added visual workflow and logic diagrams for ASH state transformation, generation planning, materialization boundaries, realm/lore structure, and module interactions.
 - Updated wiki lore coverage for WRW cosmology, wolf canon, and bloodline history.
+
+### Schemas
+- Added upstream-generation packet schemas for
+  `ASHUpstreamGenerationEnvelope`, `YWEGenerationContextPacket`,
+  `YWEInterpretationPacket`, `PlayerActionTrace`,
+  `ExplorationFrontierRequest`, and `FutureGenerationBiasUpdate`.
+- Added `ash_upstream_authority_gate_contract.json` and expanded the existing
+  generation gate with upstream packet-spine markers and provenance fields.
 
 
 ## [2.0.1] — 2026-05-10

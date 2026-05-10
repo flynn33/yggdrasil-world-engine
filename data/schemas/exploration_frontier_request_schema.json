@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/exploration_frontier_request_schema.json",
+  "schema_id": "ywe.schemas.exploration_frontier_request",
+  "title": "ExplorationFrontierRequest",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "request_id",
+    "frontier_kind",
+    "player_runtime_state_ref",
+    "realm_context_ref",
+    "known_boundary_refs",
+    "requested_manifest_kind"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string"
+    },
+    "frontier_kind": {
+      "type": "string",
+      "enum": [
+        "unresolved_frontier",
+        "realm_threshold",
+        "thin_veil_site",
+        "unresolved_yggdrasil_node",
+        "temporary_narrative_space",
+        "authored_anchor_expansion"
+      ]
+    },
+    "player_runtime_state_ref": {
+      "type": "string"
+    },
+    "realm_context_ref": {
+      "type": "string"
+    },
+    "known_boundary_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requested_manifest_kind": {
+      "type": "string",
+      "enum": [
+        "world_region",
+        "realm_site",
+        "threshold",
+        "encounter_field",
+        "environmental_omen"
+      ]
+    },
+    "generation_boundary": {
+      "type": "object",
+      "properties": {
+        "requires_ash_upstream_generation": {
+          "const": true
+        },
+        "host_adapter_may_author_truth": {
+          "const": false
+        }
+      }
+    }
+  }
+}

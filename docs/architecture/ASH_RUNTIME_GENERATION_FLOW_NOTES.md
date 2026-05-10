@@ -2,30 +2,38 @@
 
 Date: 2026-03-13
 Project: Yggdrasil World Engine
-Status: placeholder awaiting finalized content
+Status: superseded by active runtime flow contract
 
 ## Purpose
-Placeholder for ASH Runtime Generation Flow Notes until finalized source content is supplied.
+Historical notes for the ASH runtime generation flow. The active contract is
+now `../../core/narrative_engine/ash_runtime_generation_flow.yaml`, governed by
+`ash_upstream_authority_contract.md`.
 
-## Expected responsibilities
-- capture the intended document scope
-- preserve architecture and canon boundaries
-- support a future finalized authoring pass
+## Active Flow
 
-## Inputs
-- approved YWE design source material
-- locked canon and architecture rules
+```text
+RuntimeGenerationTrigger
+  -> YWEGenerationContextPacket
+  -> ASHUpstreamGenerationEnvelope
+  -> YWEInterpretationPacket
+  -> SystemManifestHandoff
+  -> HostAdapterMaterializationRequest
+  -> MaterializationResult
+  -> ResolutionPayload
+  -> WorldstateDeltaPacket or DiagnosticNoOp
+  -> FutureGenerationBiasUpdate
+```
 
-## Outputs
-- document structure placeholder
-- implementation guidance for future authors
+## Authority Rule
 
-## Dependencies
-- handoff package
-- governance and invariant guardrails
+ASH is the upstream mathematical and generative authority for YWE. YWE consumes
+ASH-derived state, diagnostics, codeword traces, and generation plans, then
+interprets them into world and gameplay manifestations.
 
 ## Invariants
 - all meaningful generation must remain ASH-derived
+- player actions influence future generation context; they do not mutate ASH math
+- host adapters materialize approved manifests but do not author truth
 - fixed cosmology must remain locked
 - perception must not rewrite shared-world truth
 - Forsetti governs activation; YWE governs truth

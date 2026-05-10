@@ -1,13 +1,22 @@
-version: "0.1"
-status: placeholder_awaiting_finalized_content
+version: "1.0.0"
+status: active_contract
+flow_id: ywe.core.narrative_engine.ash_runtime_generation_flow.v1
+authority_contract: docs/architecture/ash_upstream_authority_contract.md
+
 meta:
   system: ash_runtime_generation_flow
-  purpose: Placeholder awaiting finalized content for ash_runtime_generation_flow.
-  invariants:
-    - all_meaningful_generation_must_be_ash_derived
-    - fixed_cosmology_must_remain_locked
-    - perception_must_not_rewrite_shared_world_truth
-    - forsetti_governs_activation_ywe_governs_truth
+  purpose: Defines how YWE submits context into ASH-governed generation and routes ASH-derived output into engine-agnostic manifests.
+  package_basis:
+    - YWE_ASP_CORE_MATH_REBUILD_PACKAGE
+    - YWE_ASH_UPSTREAM_AUTHORITY_PACKAGE
+
+global_invariants:
+  - ASH is the upstream mathematical and generative authority for YWE.
+  - YWE consumes ASH-derived state, diagnostics, codeword traces, and generation plans.
+  - Player actions influence future generation context; they do not mutate ASH math.
+  - All meaningful generation must preserve source_ash_refs, diagnostic_ref, generation_plan_ref, requested_manifest_kind, and worldstate_delta_policy.
+  - Planning precedes materialization.
+  - Host adapters materialize approved manifests but do not author truth.
 
 ash_asp_core_math_rebuild_addendum:
   authority: YWE_ASP_CORE_MATH_REBUILD_PACKAGE
@@ -17,15 +26,199 @@ ash_asp_core_math_rebuild_addendum:
     - CosmicPatternSnapshot
     - DiagnosticEnvelope
     - GenerationPlan
+    - SourceASHRefs
   provenance_fields:
     - cosmic_pattern_snapshot_ref
     - diagnostic_ref
     - generation_plan_ref
     - source_ash_refs
-  boundary_rule: generation planning may guide materialization but must not author ASH truth or YWE domain truth
+  boundary_rule: Generation planning may guide materialization but must not author ASH truth or YWE domain truth.
 
-  flow_records:
-    - CosmicPatternSnapshot
-    - DiagnosticEnvelope
-    - GenerationPlan
-  materialization_rule: runtime flow stops at GenerationPlan before adapter materialization.
+canonical_flow:
+  - step: 1
+    name: receive_runtime_generation_trigger
+    inputs:
+      - player_action
+      - exploration_frontier
+      - worldstate_delta
+      - system_request
+    emits:
+      - RuntimeGenerationTrigger
+
+  - step: 2
+    name: assemble_ywe_generation_context
+    inputs:
+      - RuntimeGenerationTrigger
+      - PlayerRuntimeState
+      - RealmContext
+      - WorldstateDeltaHistory
+      - PerceptionStateRecord
+    emits:
+      - YWEGenerationContextPacket
+
+  - step: 3
+    name: request_ash_governed_generation
+    inputs:
+      - YWEGenerationContextPacket
+    requires:
+      - AshStateSnapshot
+      - CanonicalCodewordTrace
+      - DiagnosticEnvelope
+      - GenerationPlan
+      - SourceASHRefs
+    emits:
+      - ASHUpstreamGenerationEnvelope
+
+  - step: 4
+    name: produce_ywe_interpretation_packet
+    inputs:
+      - ASHUpstreamGenerationEnvelope
+      - YWEGenerationContextPacket
+    emits:
+      - YWEInterpretationPacket
+
+  - step: 5
+    name: handoff_to_feature_engine
+    inputs:
+      - YWEInterpretationPacket
+      - YWEGenerationContextPacket
+      - ASHUpstreamGenerationEnvelope
+    emits:
+      - SystemManifestHandoff
+    allowed_feature_engines:
+      - realm_engine
+      - quest_engine
+      - npc_synthesis
+      - creature_engine
+      - artifact_engine
+      - myth_engine
+      - prophecy_engine
+      - perception_engine
+      - faction_topology
+      - character_progression
+      - wolf_companion_engine
+      - ability_engine
+
+  - step: 6
+    name: emit_system_manifest
+    inputs:
+      - SystemManifestHandoff
+    emits:
+      - WorldRegionManifest
+      - QuestChainManifest
+      - NPCManifest
+      - CreatureManifest
+      - ArtifactManifest
+      - MythRecord
+      - ProphecyRecord
+      - PerceptionStateRecord
+      - FactionDelta
+      - ProgressionDelta
+    requires:
+      - source_ash_refs
+      - diagnostic_ref
+      - generation_plan_ref
+      - requested_manifest_kind
+      - worldstate_delta_policy
+
+  - step: 7
+    name: request_host_adapter_materialization
+    inputs:
+      - SystemManifest
+      - GenerationPlan
+    emits:
+      - HostAdapterMaterializationRequest
+    forbidden:
+      - adapter_authored_truth
+      - adapter_originated_symbolic_meaning
+      - materialization_before_generation_plan
+
+  - step: 8
+    name: materialize_via_host_adapter
+    inputs:
+      - HostAdapterMaterializationRequest
+    emits:
+      - MaterializationResult
+    boundary: Host adapters materialize approved manifests but do not author symbolic truth.
+
+  - step: 9
+    name: resolve_consequence
+    inputs:
+      - MaterializationResult
+      - player_or_world_response
+    emits:
+      - ResolutionPayload
+
+  - step: 10
+    name: record_worldstate_delta_or_noop
+    inputs:
+      - ResolutionPayload
+    emits:
+      - WorldstateDeltaPacket
+      - DiagnosticNoOp
+
+  - step: 11
+    name: derive_future_generation_bias
+    inputs:
+      - WorldstateDeltaPacket
+      - DiagnosticNoOp
+    emits:
+      - FutureGenerationBiasUpdate
+
+named_flows:
+  exploration_driven_world_generation:
+    sequence:
+      - ExplorationFrontierRequest
+      - YWEGenerationContextPacket
+      - ASHUpstreamGenerationEnvelope
+      - YWEInterpretationPacket
+      - WorldRegionManifest
+      - RealmSiteManifest
+      - ThresholdManifest
+      - EncounterFieldManifest
+      - HostAdapterMaterializationRequest
+      - MaterializationResult
+      - WorldstateDeltaPacket
+      - DiagnosticNoOp
+    rule: Unresolved frontiers, realm thresholds, thin veil sites, and unresolved Yggdrasil nodes require ASH-governed generation before any meaningful manifestation.
+
+  player_action_driven_quest_generation:
+    sequence:
+      - PlayerActionTrace
+      - WorldstateDeltaPacket
+      - FutureGenerationBiasUpdate
+      - YWEGenerationContextPacket
+      - ASHUpstreamGenerationEnvelope
+      - YWEInterpretationPacket
+      - QuestChainManifest
+      - QuestResolutionPayload
+    rule: Quest templates are interpretive containers and do not generate symbolic truth independently.
+
+  player_action_driven_npc_generation:
+    sequence:
+      - PlayerActionTrace
+      - LocalWorldstateContext
+      - YWEGenerationContextPacket
+      - ASHUpstreamGenerationEnvelope
+      - YWEInterpretationPacket
+      - NPCManifest
+      - NPCMemoryHooks
+      - WorldstateDeltaPacket
+      - DiagnosticNoOp
+    rule: NPC beliefs, faction claims, myths, and partial interpretations may affect context without rewriting shared world truth.
+
+  consequence_driven_future_generation_bias:
+    sequence:
+      - ResolutionPayload
+      - WorldstateDeltaPacket
+      - FutureGenerationBiasUpdate
+      - YWEGenerationContextPacket
+      - ASHUpstreamGenerationEnvelope
+    rule: Consequences influence later generation context and never mutate ASH canonical math.
+
+materialization_boundary:
+  planning_required_before_materialization: true
+  host_adapter_may_author_truth: false
+  host_adapter_may_author_ash_state: false
+  host_adapter_may_create_codewords: false
+  allowed_host_role: materialize approved manifests into platform-specific scenes, actors, entities, UI, audio, navigation surfaces, or persistence formats.

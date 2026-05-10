@@ -25,6 +25,32 @@ YWE functions as a **reality simulation layer**, not a rendering engine.
 
 Rendering engines (Unity, Unreal, Godot) function as **host environments**.
 
+## ASH Upstream Authority
+
+ASH is the upstream mathematical and generative authority for YWE.
+
+```text
+ASH Pattern System
+  -> Yggdrasil World Engine
+    -> YWE game systems / feature engines
+      -> platform-specific runtime implementations
+```
+
+YWE is the downstream world, narrative, and manifestation engine built on ASH
+authority. YWE consumes ASH-derived state, diagnostics, codeword traces, and
+generation plans, then interprets them into realm, quest, NPC, creature,
+artifact, myth, prophecy, perception, faction, progression, wolf, and ability
+manifestations.
+
+YWE is not the origin of ASH math. YWE must not redefine ASH state space,
+codeword sets, transition rules, diagnostics, or generation-planning semantics.
+Player actions influence future generation context; they do not mutate ASH
+math. Host adapters materialize approved manifests but do not author symbolic
+truth.
+
+The canonical architecture contract for this boundary is
+`docs/architecture/ash_upstream_authority_contract.md`.
+
 ## Design Goals
 
 ```yaml
@@ -349,6 +375,8 @@ If a player remains in the Physical Realm but channels alignment, they may use r
 # 10. COSMIC PATTERN ENGINE
 
 All procedural generation originates from **ASH cosmological state analysis**.
+Meaningful generation is routed through ASH-governed generation planning before
+YWE interpretation and host materialization.
 
 ## Pattern Detection
 
@@ -378,11 +406,17 @@ All procedural systems must derive from **ASH Pattern Detection**.
 
 No subsystem may generate meaningful content independently of the cosmic state.
 
+Every meaningful generated manifest must preserve `source_ash_refs`,
+`diagnostic_ref`, `generation_plan_ref`, `requested_manifest_kind`, and
+`worldstate_delta_policy`.
+
 ---
 
 # 11. QUEST GENERATION ENGINE
 
-Quests derive from **cosmic patterns**.
+Quests derive from ASH-governed cosmic patterns interpreted through player
+history, local worldstate, faction topology, myth pressure, prophecy pressure,
+realm context, and consequence memory.
 
 ## Quest Seed
 
@@ -421,11 +455,17 @@ Each path grants different:
 Quests are not random templates. They are generated from:
 
 ```text
-ASH state
-→ pattern detection
-→ player interpretation
-→ quest manifestation
+PlayerActionTrace
+→ WorldstateDeltaPacket
+→ FutureGenerationBiasUpdate
+→ YWEGenerationContextPacket
+→ ASHUpstreamGenerationEnvelope
+→ YWEInterpretationPacket
+→ QuestChainManifest
 ```
+
+Quest templates are interpretive containers. They do not generate symbolic
+truth independently.
 
 ---
 
@@ -436,13 +476,15 @@ The Narrative Engine transforms cosmic patterns into player-specific story.
 ## Narrative Loop
 
 ```text
-ASH state
-→ cosmic pattern
-→ player interpretation
-→ quest manifestation
-→ consequence memory
-→ myth formation
-→ prophecy generation
+Player explores or acts
+→ YWE records action/context and worldstate deltas
+→ YWE submits generation context to ASH-governed generation
+→ ASH provides lawful pattern structure, diagnostics, and generation plan
+→ YWE interprets output into world/game-domain meaning
+→ feature engines emit manifests
+→ host adapter materializes approved content
+→ result creates worldstate delta or DiagnosticNoOp
+→ future generation bias updates context for later ASH-governed generation
 ```
 
 ## Player Narrative Memory
@@ -617,7 +659,8 @@ YWE only generates procedural terrain for:
 
 YWE is organized as an **engine-first** architecture.
 
-The root engine defines cosmology and procedural truth.
+ASH defines upstream mathematical and generative authority. YWE interprets and
+manifests ASH-derived truth through engine-first contracts.
 
 Additional systems can be implemented as separate engines/modules later.
 

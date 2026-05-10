@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ash_upstream_generation_envelope_schema.json",
+  "schema_id": "ywe.schemas.ash_upstream_generation_envelope",
+  "title": "ASHUpstreamGenerationEnvelope",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "packet_type",
+    "version",
+    "request_id",
+    "requested_manifest_kind",
+    "ywe_context_packet_ref",
+    "ash_state_snapshot_ref",
+    "canonical_codeword_trace_ref",
+    "diagnostic_ref",
+    "generation_plan_ref",
+    "source_ash_refs",
+    "authority_chain"
+  ],
+  "properties": {
+    "packet_type": {
+      "const": "ASHUpstreamGenerationEnvelope"
+    },
+    "version": {
+      "type": "string"
+    },
+    "request_id": {
+      "type": "string"
+    },
+    "requested_manifest_kind": {
+      "type": "string",
+      "enum": [
+        "world_region",
+        "realm_site",
+        "threshold",
+        "encounter_field",
+        "quest_chain",
+        "npc_manifest",
+        "creature_manifest",
+        "artifact_manifest",
+        "myth_seed",
+        "myth_record",
+        "prophecy_candidate",
+        "prophecy_record",
+        "perception_overlay",
+        "faction_delta",
+        "character_progression_delta",
+        "wolf_companion_state_delta",
+        "ability_unlock_pressure"
+      ]
+    },
+    "ywe_context_packet_ref": {
+      "type": "string"
+    },
+    "ash_state_snapshot_ref": {
+      "type": "string"
+    },
+    "canonical_codeword_trace_ref": {
+      "type": "string"
+    },
+    "diagnostic_ref": {
+      "type": "string"
+    },
+    "generation_plan_ref": {
+      "type": "string"
+    },
+    "source_ash_refs": {
+      "type": "object",
+      "required": [
+        "state_space",
+        "codeword_set",
+        "transition_rule"
+      ],
+      "properties": {
+        "state_space": {
+          "const": "F2^9"
+        },
+        "codeword_set": {
+          "const": "fixed_16_member_C_subset_F2_9"
+        },
+        "transition_rule": {
+          "const": "x_prime = x XOR c"
+        },
+        "diagnostic_ref": {
+          "type": "string"
+        },
+        "generation_plan_ref": {
+          "type": "string"
+        },
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string"
+        }
+      }
+    },
+    "authority_chain": {
+      "type": "object",
+      "required": [
+        "upstream_math",
+        "downstream_interpretation",
+        "materialization_boundary"
+      ],
+      "properties": {
+        "upstream_math": {
+          "const": "ASH Pattern System"
+        },
+        "downstream_interpretation": {
+          "const": "Yggdrasil World Engine"
+        },
+        "materialization_boundary": {
+          "const": "host_adapter_materializes_but_does_not_author_truth"
+        }
+      }
+    },
+    "forbidden_authority_sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "local_symbolic_rng_as_source_of_meaning",
+        "ywe_defined_codeword_set",
+        "ywe_defined_ash_state_space",
+        "derived_ninth_bit",
+        "eight_plus_one_state_model",
+        "materialization_before_generation_plan",
+        "adapter_authored_truth"
+      ]
+    }
+  }
+}

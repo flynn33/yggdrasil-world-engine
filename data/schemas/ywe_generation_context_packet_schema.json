@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ywe_generation_context_packet_schema.json",
+  "schema_id": "ywe.schemas.ywe_generation_context_packet",
+  "title": "YWEGenerationContextPacket",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "packet_type",
+    "version",
+    "request_id",
+    "trigger_kind",
+    "requested_manifest_kind",
+    "player_runtime_state_ref",
+    "realm_context_ref",
+    "worldstate_delta_refs",
+    "perception_state_ref"
+  ],
+  "properties": {
+    "packet_type": {
+      "const": "YWEGenerationContextPacket"
+    },
+    "version": {
+      "type": "string"
+    },
+    "request_id": {
+      "type": "string"
+    },
+    "trigger_kind": {
+      "type": "string",
+      "enum": [
+        "exploration_frontier",
+        "realm_threshold_crossing",
+        "thin_veil_site_entry",
+        "yggdrasil_node_discovery",
+        "quest_resolution",
+        "npc_memory_update",
+        "artifact_use",
+        "creature_encounter_resolution",
+        "faction_reaction",
+        "myth_threshold_crossed",
+        "prophecy_pressure_changed",
+        "player_progression_event"
+      ]
+    },
+    "requested_manifest_kind": {
+      "type": "string"
+    },
+    "player_runtime_state_ref": {
+      "type": "string"
+    },
+    "realm_context_ref": {
+      "type": "string"
+    },
+    "worldstate_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "perception_state_ref": {
+      "type": "string"
+    },
+    "optional_context": {
+      "type": "object",
+      "properties": {
+        "player_action_trace_ref": {
+          "type": "string"
+        },
+        "faction_topology_ref": {
+          "type": "string"
+        },
+        "myth_record_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prophecy_pressure_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "artifact_binding_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "creature_encounter_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exploration_frontier_ref": {
+          "type": "string"
+        },
+        "yggdrasil_threshold_ref": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

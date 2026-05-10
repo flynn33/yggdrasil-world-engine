@@ -13,11 +13,20 @@ materialization boundaries, and conformance evidence. Runtime host
 implementations must still run these checks before claiming adapter-level
 conformance.
 
+The `YWE_ASH_UPSTREAM_AUTHORITY_PACKAGE` is an accepted post-remediation
+architecture extension. It does not reopen ASH remediation; it records ASH as
+the upstream mathematical and generative authority for YWE and defines the
+shared generation packet spine.
+
 ## Authority
 
 `YWE_ASP_CORE_MATH_REBUILD_PACKAGE` is the active controlling package for the
 ASH/ASP core-math rebuild and supersedes older remediation or build packages
 where they conflict.
+
+`YWE_ASH_UPSTREAM_AUTHORITY_PACKAGE` is the active architecture extension
+package for upstream generative authority. It is subordinate to the accepted
+ASH/ASP math baseline and does not change ASH canonical math.
 
 Forsetti is not the active authority for ASH/ASP math, YWE cosmology truth,
 codewords, diagnostics, generation semantics, or conformance acceptance.
@@ -38,6 +47,9 @@ codewords, diagnostics, generation semantics, or conformance acceptance.
 | G-010 Adapters materialize only and do not author truth | PASS | Unity, Unreal, and Godot adapter boundary docs require `GenerationPlan` materialization only. |
 | G-011 Docs/inventories/conformance reports updated | PASS | Source inventories, governance boot record, generation conformance report, verification report, and README branch note. |
 | G-012 Deviation log contains every uncompleted or deferred item | PASS | `conformance/deviation-log.md` contains resolved package conflicts and no open deviations. |
+| G-013 ASH upstream authority contract exists | PASS | `docs/architecture/ash_upstream_authority_contract.md` records ASH upstream mathematical and generative authority. |
+| G-014 Upstream packet spine exists | PASS | `core/narrative_engine/ash_runtime_generation_flow.yaml`, `data/schemas/ash_generation_packet_schema.json`, and dedicated packet schemas define the upstream-to-downstream generation flow. |
+| G-015 Player action and exploration route through ASH-governed generation | PASS | `YWEGenerationContextPacket`, `ExplorationFrontierRequest`, `PlayerActionTrace`, and `FutureGenerationBiasUpdate` preserve downstream context without mutating ASH math. |
 
 ## Validation Surface
 

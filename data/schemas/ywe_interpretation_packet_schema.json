@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ywe_interpretation_packet_schema.json",
+  "schema_id": "ywe.schemas.ywe_interpretation_packet",
+  "title": "YWEInterpretationPacket",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "packet_type",
+    "version",
+    "interpretation_id",
+    "source_ash_refs",
+    "diagnostic_ref",
+    "generation_plan_ref",
+    "requested_manifest_kind",
+    "realm_interpretation",
+    "player_relevance",
+    "manifestation_target",
+    "allowed_feature_engine",
+    "worldstate_delta_policy"
+  ],
+  "properties": {
+    "packet_type": {
+      "const": "YWEInterpretationPacket"
+    },
+    "version": {
+      "type": "string"
+    },
+    "interpretation_id": {
+      "type": "string"
+    },
+    "source_ash_refs": {
+      "type": "object"
+    },
+    "diagnostic_ref": {
+      "type": "string"
+    },
+    "generation_plan_ref": {
+      "type": "string"
+    },
+    "requested_manifest_kind": {
+      "type": "string"
+    },
+    "realm_interpretation": {
+      "type": "object"
+    },
+    "player_relevance": {
+      "type": "object"
+    },
+    "manifestation_target": {
+      "type": "string"
+    },
+    "allowed_feature_engine": {
+      "type": "string",
+      "enum": [
+        "realm_engine",
+        "quest_engine",
+        "npc_synthesis",
+        "creature_engine",
+        "artifact_engine",
+        "myth_engine",
+        "prophecy_engine",
+        "perception_engine",
+        "faction_topology",
+        "character_progression",
+        "wolf_companion_engine",
+        "ability_engine"
+      ]
+    },
+    "worldstate_delta_policy": {
+      "type": "string",
+      "enum": [
+        "must_emit_worldstate_delta",
+        "may_emit_worldstate_delta",
+        "diagnostic_noop_allowed",
+        "perception_only_delta",
+        "myth_candidate_delta",
+        "prophecy_pressure_delta",
+        "faction_claim_delta",
+        "player_progression_delta"
+      ]
+    }
+  }
+}

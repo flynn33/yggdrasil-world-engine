@@ -6,12 +6,56 @@ Status: YWE and Forsetti guardrail baseline
 
 ## Canon Guardrails
 
+- ASH is the upstream mathematical and generative authority for YWE
+- No YWE system may redefine ASH math
+- YWE consumes ASH-derived state, diagnostics, codeword traces, and generation plans
+- Player actions influence generation context; they do not mutate ASH math
+- feature engines specialize ASH-derived interpretation into manifests
+- host adapters materialize approved manifests but do not author truth
+- meaningful generation is invalid unless it preserves ASH provenance
 - all meaningful generation remains ASH-derived
 - fixed cosmology and the nine realms remain locked
 - White Wolf and Dark Wolf remain primordial informational forces
 - players begin as mortals with veiled celestial memory
 - perception may diverge experience but may not rewrite shared-world truth
 - myth and prophecy remain distinct systems
+
+## Shared Packet Spine Guardrails
+
+Every meaningful generation flow must preserve this order:
+
+```text
+YWEGenerationContextPacket
+  -> ASHUpstreamGenerationEnvelope
+  -> YWEInterpretationPacket
+  -> SystemManifestHandoff
+  -> WorldstateDeltaPacket or DiagnosticNoOp
+  -> FutureGenerationBiasUpdate
+```
+
+Every meaningful manifest must retain:
+
+- `source_ash_refs`
+- `diagnostic_ref`
+- `generation_plan_ref`
+- `requested_manifest_kind`
+- `worldstate_delta_policy`
+
+## Red-Team Forbidden Language Checks
+
+The following claims are invalid outside rejection tests, red-team checklists,
+or explicit explanations of invalid design patterns:
+
+- YWE owns ASH math
+- YWE defines ASH math
+- YWE mutates ASH math
+- YWE replaces ASH math
+- YWE core math
+- local ASH math
+- local ASH codeword set
+- feature engine authored pattern truth
+- adapter authored truth
+- materialization before generation planning
 
 ## Forsetti Guardrails
 
