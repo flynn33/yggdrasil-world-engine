@@ -16,18 +16,31 @@
     "realm_identity",
     "diagnostic_ref",
     "generation_plan_ref",
-    "cosmic_pattern_snapshot_ref"
+    "cosmic_pattern_snapshot_ref",
+    "source_ash_refs",
+    "requested_manifest_kind",
+    "worldstate_delta_policy",
+    "ywe_context_packet_ref",
+    "ash_state_snapshot_ref",
+    "canonical_codeword_trace_ref"
   ],
   "records": {
     "AshState": {
-      "required": ["state_space", "bits"],
+      "required": [
+        "state_space",
+        "bits"
+      ],
       "properties": {
         "state_space": "F2^9",
         "bits": "full_9_bit_vector"
       }
     },
     "CanonicalCodeword": {
-      "required": ["state_space", "bits", "membership"],
+      "required": [
+        "state_space",
+        "bits",
+        "membership"
+      ],
       "properties": {
         "state_space": "F2^9",
         "bits": "full_9_bit_vector",
@@ -96,6 +109,164 @@
         "truth_authority": "ASH Pattern System",
         "consumer_authority": "YWE domain interpretation"
       }
+    },
+    "YWEGenerationContextPacket": {
+      "schema_ref": "ywe_generation_context_packet_schema.json",
+      "role": "Carries YWE-side player, world, realm, perception, and consequence context into ASH-governed generation.",
+      "required": [
+        "packet_type",
+        "version",
+        "request_id",
+        "trigger_kind",
+        "requested_manifest_kind",
+        "player_runtime_state_ref",
+        "realm_context_ref",
+        "worldstate_delta_refs",
+        "perception_state_ref"
+      ],
+      "boundary": "Player and world context may influence generation requests but must not mutate ASH math."
+    },
+    "ASHUpstreamGenerationEnvelope": {
+      "schema_ref": "ash_upstream_generation_envelope_schema.json",
+      "role": "Proves upstream ASH authority and binds diagnostics, plan, codeword trace, state snapshot, and provenance.",
+      "required": [
+        "packet_type",
+        "version",
+        "request_id",
+        "requested_manifest_kind",
+        "ywe_context_packet_ref",
+        "ash_state_snapshot_ref",
+        "canonical_codeword_trace_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "authority_chain"
+      ],
+      "authority": "ASH Pattern System"
+    },
+    "YWEInterpretationPacket": {
+      "schema_ref": "ywe_interpretation_packet_schema.json",
+      "role": "Binds ASH-derived output to YWE domain interpretation and feature-engine handoff.",
+      "required": [
+        "packet_type",
+        "version",
+        "interpretation_id",
+        "source_ash_refs",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "realm_interpretation",
+        "player_relevance",
+        "manifestation_target",
+        "allowed_feature_engine",
+        "worldstate_delta_policy"
+      ],
+      "boundary": "YWE interprets ASH-derived pattern truth and does not create an independent symbolic grammar."
+    },
+    "PlayerActionTrace": {
+      "schema_ref": "player_action_trace_schema.json",
+      "role": "Records player action and consequence channels that may influence future ASH-governed context.",
+      "required": [
+        "trace_id",
+        "player_ref",
+        "action_kind",
+        "local_context_ref",
+        "timestamp_or_sequence_ref",
+        "consequence_channels"
+      ],
+      "boundary": "Player actions influence future generation context; they do not mutate ASH math."
+    },
+    "ExplorationFrontierRequest": {
+      "schema_ref": "exploration_frontier_request_schema.json",
+      "role": "Represents unresolved frontier, threshold, thin-veil, or Yggdrasil-node generation triggers.",
+      "required": [
+        "request_id",
+        "frontier_kind",
+        "player_runtime_state_ref",
+        "realm_context_ref",
+        "known_boundary_refs",
+        "requested_manifest_kind"
+      ],
+      "boundary": "Unresolved meaningful space requires ASH-governed generation before manifestation."
+    },
+    "FutureGenerationBiasUpdate": {
+      "schema_ref": "future_generation_bias_update_schema.json",
+      "role": "Records downstream consequence pressure for future ASH-governed generation context.",
+      "required": [
+        "bias_update_id",
+        "source_worldstate_delta_ref",
+        "affected_context_channels",
+        "bias_strength",
+        "expiration_policy",
+        "authority_boundary"
+      ],
+      "boundary": "Bias updates alter downstream context only and never ASH canonical math."
+    },
+    "SystemManifestHandoff": {
+      "role": "Transfers a YWEInterpretationPacket to an allowed feature engine before host materialization.",
+      "required": [
+        "handoff_id",
+        "requested_manifest_kind",
+        "source_ash_refs",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "allowed_feature_engine",
+        "worldstate_delta_policy"
+      ],
+      "properties": {
+        "planning_precedes_materialization": true,
+        "host_adapter_may_author_truth": false,
+        "feature_engine_claims_math_authority": false
+      }
+    },
+    "AshStateSnapshot": {
+      "role": "Names an ASH state snapshot emitted by the upstream authority for a generation request.",
+      "required": [
+        "snapshot_type",
+        "state_space",
+        "normalized_state",
+        "source_orbit_id",
+        "diagnostic_ref"
+      ],
+      "properties": {
+        "snapshot_type": "AshStateSnapshot",
+        "state_space": "F2^9",
+        "truth_authority": "ASH Pattern System"
+      }
+    },
+    "CanonicalCodewordTrace": {
+      "role": "Names the ASH codeword sequence used by upstream generation planning.",
+      "required": [
+        "trace_type",
+        "state_space",
+        "active_codeword_sequence",
+        "transition_rule",
+        "diagnostic_ref"
+      ],
+      "properties": {
+        "trace_type": "CanonicalCodewordTrace",
+        "state_space": "F2^9",
+        "transition_rule": "x_prime = x XOR c",
+        "codeword_set": "fixed_16_member_C_subset_F2_9"
+      }
     }
-  }
+  },
+  "authority_contract": "docs/architecture/ash_upstream_authority_contract.md",
+  "architecture_law": [
+    "ASH Pattern System",
+    "Yggdrasil World Engine",
+    "YWE game systems / feature engines",
+    "platform-specific runtime implementations"
+  ],
+  "shared_generation_spine": [
+    "RuntimeGenerationTrigger",
+    "YWEGenerationContextPacket",
+    "ASHUpstreamGenerationEnvelope",
+    "YWEInterpretationPacket",
+    "SystemManifestHandoff",
+    "HostAdapterMaterializationRequest",
+    "MaterializationResult",
+    "ResolutionPayload",
+    "WorldstateDeltaPacket|DiagnosticNoOp",
+    "FutureGenerationBiasUpdate"
+  ]
 }

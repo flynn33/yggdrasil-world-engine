@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/future_generation_bias_update_schema.json",
+  "schema_id": "ywe.schemas.future_generation_bias_update",
+  "title": "FutureGenerationBiasUpdate",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "bias_update_id",
+    "source_worldstate_delta_ref",
+    "affected_context_channels",
+    "bias_strength",
+    "expiration_policy",
+    "authority_boundary"
+  ],
+  "properties": {
+    "bias_update_id": {
+      "type": "string"
+    },
+    "source_worldstate_delta_ref": {
+      "type": "string"
+    },
+    "affected_context_channels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "quest_generation",
+          "npc_synthesis",
+          "realm_site_generation",
+          "encounter_generation",
+          "artifact_eligibility",
+          "creature_eligibility",
+          "myth_emergence",
+          "prophecy_pressure",
+          "perception_overlay",
+          "faction_reaction",
+          "ability_unlock_pressure",
+          "wolf_companion_behavior"
+        ]
+      }
+    },
+    "bias_strength": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "expiration_policy": {
+      "type": "string",
+      "enum": [
+        "persistent",
+        "until_resolved",
+        "timeboxed",
+        "realm_local",
+        "player_local",
+        "diagnostic_noop"
+      ]
+    },
+    "authority_boundary": {
+      "type": "object",
+      "required": [
+        "influences_generation_context",
+        "mutates_ash_math"
+      ],
+      "properties": {
+        "influences_generation_context": {
+          "const": true
+        },
+        "mutates_ash_math": {
+          "const": false
+        }
+      }
+    }
+  }
+}

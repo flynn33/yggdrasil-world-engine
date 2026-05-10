@@ -433,6 +433,200 @@ def test_adapters_cannot_author_ywe_truth(root: Path, sink: FailureSink) -> None
         )
 
 
+def test_ash_upstream_authority_contract_integrated(root: Path, sink: FailureSink) -> None:
+    contract_path = "docs/architecture/ash_upstream_authority_contract.md"
+    require_markers(
+        root,
+        sink,
+        [contract_path],
+        [
+            "ASH is the upstream mathematical and generative authority",
+            "ASH Pattern System",
+            "Yggdrasil World Engine",
+            "YWEGenerationContextPacket",
+            "ASHUpstreamGenerationEnvelope",
+            "YWEInterpretationPacket",
+            "FutureGenerationBiasUpdate",
+            "Host adapters may materialize approved manifests",
+        ],
+    )
+    required_references = {
+        "docs/architecture/ash_downstream_contract.md": [
+            "ash_upstream_authority_contract.md",
+            "subordinate",
+            "upstream mathematical and generative authority",
+        ],
+        "docs/master_specification/YWE_MASTER_SPECIFICATION.md": [
+            "ASH Upstream Authority",
+            "generative authority",
+            "YWE consumes ASH-derived",
+        ],
+        "docs/architecture/ywe_module_design_contracts.md": [
+            "ASH Upstream Authority Rule",
+            "shared packet spine",
+        ],
+        "docs/architecture/ywe_cross_module_dependency_map.md": [
+            "ASH Pattern System",
+            "host adapters",
+        ],
+        "docs/architecture/ywe_invariant_guardrails.md": [
+            "No YWE system may redefine ASH math",
+            "Player actions influence generation context",
+        ],
+        "docs/architecture/README.md": [
+            "ash_upstream_authority_contract.md",
+            "ASH defines upstream mathematical and generative authority",
+        ],
+    }
+    for path_name, markers in required_references.items():
+        require_markers(root, sink, [path_name], markers)
+
+
+def test_runtime_generation_flow_has_upstream_spine(root: Path, sink: FailureSink) -> None:
+    path_name = "core/narrative_engine/ash_runtime_generation_flow.yaml"
+    require_markers(
+        root,
+        sink,
+        [path_name],
+        [
+            "status: active_contract",
+            "YWEGenerationContextPacket",
+            "ASHUpstreamGenerationEnvelope",
+            "YWEInterpretationPacket",
+            "SystemManifestHandoff",
+            "HostAdapterMaterializationRequest",
+            "MaterializationResult",
+            "ResolutionPayload",
+            "WorldstateDeltaPacket",
+            "DiagnosticNoOp",
+            "FutureGenerationBiasUpdate",
+            "exploration_driven_world_generation",
+            "player_action_driven_quest_generation",
+            "player_action_driven_npc_generation",
+            "consequence_driven_future_generation_bias",
+        ],
+    )
+    text = read_text(root / path_name)
+    sink.require(
+        "placeholder_awaiting_finalized_content" not in text,
+        "Runtime generation flow must not remain placeholder-only",
+    )
+    materialization_index = text.find("HostAdapterMaterializationRequest")
+    plan_index = text.find("GenerationPlan")
+    sink.require(
+        plan_index != -1 and materialization_index != -1 and plan_index < materialization_index,
+        "Runtime generation flow must require planning before host materialization",
+    )
+
+
+def test_upstream_packet_spine_records_exist(root: Path, sink: FailureSink) -> None:
+    required_schema_files = [
+        "data/schemas/ash_upstream_generation_envelope_schema.json",
+        "data/schemas/ywe_generation_context_packet_schema.json",
+        "data/schemas/ywe_interpretation_packet_schema.json",
+        "data/schemas/player_action_trace_schema.json",
+        "data/schemas/exploration_frontier_request_schema.json",
+        "data/schemas/future_generation_bias_update_schema.json",
+    ]
+    require_paths(root, sink, required_schema_files)
+    packet_schema = load_json(root / "data" / "schemas" / "ash_generation_packet_schema.json")
+    records = packet_schema.get("records", {})
+    for record_name in (
+        "ASHUpstreamGenerationEnvelope",
+        "YWEGenerationContextPacket",
+        "YWEInterpretationPacket",
+        "PlayerActionTrace",
+        "ExplorationFrontierRequest",
+        "FutureGenerationBiasUpdate",
+        "SystemManifestHandoff",
+    ):
+        sink.require(record_name in records, f"Missing upstream packet record: {record_name}")
+    spine = packet_schema.get("shared_generation_spine", [])
+    for step in (
+        "RuntimeGenerationTrigger",
+        "YWEGenerationContextPacket",
+        "ASHUpstreamGenerationEnvelope",
+        "YWEInterpretationPacket",
+        "SystemManifestHandoff",
+        "HostAdapterMaterializationRequest",
+        "MaterializationResult",
+        "ResolutionPayload",
+        "WorldstateDeltaPacket|DiagnosticNoOp",
+        "FutureGenerationBiasUpdate",
+    ):
+        sink.require(step in spine, f"Shared generation spine missing step: {step}")
+
+
+def test_generation_gate_requires_upstream_authority(root: Path, sink: FailureSink) -> None:
+    contract = load_contract(root)
+    upstream_gate_path = root / "data" / "validation" / "ash_upstream_authority_gate_contract.json"
+    sink.require(upstream_gate_path.is_file(), "Missing upstream authority gate contract")
+    upstream_gate = load_json(upstream_gate_path)
+
+    for marker in (
+        "ASHUpstreamGenerationEnvelope",
+        "YWEGenerationContextPacket",
+        "YWEInterpretationPacket",
+        "PlayerActionTrace",
+        "ExplorationFrontierRequest",
+        "FutureGenerationBiasUpdate",
+    ):
+        sink.require(marker in contract.get("shared_required_markers", []), f"Generation gate missing marker: {marker}")
+
+    for field in (
+        "source_ash_refs",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "requested_manifest_kind",
+        "worldstate_delta_policy",
+    ):
+        sink.require(field in contract.get("required_provenance_fields", []), f"Generation gate missing provenance field: {field}")
+        sink.require(field in upstream_gate.get("required_provenance_fields", []), f"Upstream gate missing provenance field: {field}")
+
+    for rejection in (
+        "local_symbolic_rng_as_source_of_meaning",
+        "ywe_defined_ash_state_space",
+        "ywe_defined_codeword_set",
+        "materialization_before_generation_plan",
+        "adapter_authored_truth",
+        "feature_engine_claims_math_authority",
+        "player_action_mutates_ash_math",
+    ):
+        sink.require(rejection in contract.get("reject_if", []), f"Generation gate missing rejection: {rejection}")
+        sink.require(rejection in upstream_gate.get("reject_if", []), f"Upstream gate missing rejection: {rejection}")
+
+
+def test_forbidden_upstream_authority_drift_absent(root: Path, sink: FailureSink) -> None:
+    forbidden = [
+        "The root engine defines cosmology and procedural truth",
+        "YWE owns ASH math",
+        "YWE defines ASH math",
+        "YWE mutates ASH math",
+        "YWE replaces ASH math",
+        "YWE core math",
+        "local ASH math",
+        "local ASH codeword set",
+        "adapter authored truth",
+        "materialization before generation planning",
+    ]
+    allowed_context_paths = {
+        "docs/architecture/ash_upstream_authority_contract.md",
+        "docs/architecture/ywe_invariant_guardrails.md",
+    }
+    hits = []
+    for path in scan_text_files(root):
+        rp = rel(path, root)
+        text = read_text(path)
+        if rp in allowed_context_paths:
+            continue
+        for line_no, line in enumerate(text.splitlines(), start=1):
+            for phrase in forbidden:
+                if phrase in line:
+                    hits.append(f"{rp}:{line_no}: {line.strip()}")
+                    break
+    sink.require(not hits, "Forbidden upstream authority drift found: " + "; ".join(hits[:10]))
+
+
 def check_governance_records(root: Path, sink: FailureSink) -> None:
     contract = load_contract(root)
     for _, path_name in contract["governance"].items():
@@ -475,6 +669,11 @@ TESTS = [
     test_prophecy_is_attractor_not_script,
     test_perception_overlay_does_not_rewrite_shared_world_truth,
     test_adapters_cannot_author_ywe_truth,
+    test_ash_upstream_authority_contract_integrated,
+    test_runtime_generation_flow_has_upstream_spine,
+    test_upstream_packet_spine_records_exist,
+    test_generation_gate_requires_upstream_authority,
+    test_forbidden_upstream_authority_drift_absent,
 ]
 
 

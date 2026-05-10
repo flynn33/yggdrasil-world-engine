@@ -71,7 +71,9 @@ The world does not change -- player perception changes. The same location can be
 
 ### Cosmic Pattern Engine
 
-All procedural generation originates from ASH cosmological state analysis. No subsystem may generate meaningful content independently of the cosmic state.
+ASH is the upstream mathematical and generative authority for YWE. No subsystem
+may generate meaningful content independently of ASH-derived state,
+diagnostics, codeword traces, and generation plans.
 
 ### ASH/ASP Core Math Baseline
 
@@ -86,6 +88,25 @@ creature, quest, NPC, artifact, myth, prophecy, perception, faction,
 worldstate, codex/lore, and realm contracts. Host adapters may materialize from
 those plans, but they must not author ASH truth or YWE domain truth.
 
+### ASH Upstream Generation Authority
+
+The repository now records ASH upstream generative authority in
+`docs/architecture/ash_upstream_authority_contract.md`.
+
+```text
+ASH Pattern System
+  -> Yggdrasil World Engine
+    -> YWE game systems / feature engines
+      -> platform-specific runtime implementations
+```
+
+Player actions and exploration create YWE context packets and worldstate
+deltas. YWE submits that context into ASH-governed generation, receives lawful
+pattern structure, diagnostics, and generation plans, then interprets the output
+into world, quest, NPC, creature, artifact, myth, prophecy, perception, faction,
+progression, wolf, and ability manifests. Host adapters materialize approved
+manifests but do not author symbolic truth.
+
 ---
 
 ## System Map
@@ -95,6 +116,7 @@ flowchart TB
   Cosmology["Cosmology Engine<br/>Dark Star, Divine Core, nine fixed realms"]
   Realm["Realm Engine<br/>realm law, attunement, boundaries"]
   ASH["ASH Pattern Engine<br/>F2^9 state, 16 codewords, XOR transitions"]
+  Upstream["ASH Upstream Authority<br/>diagnostics, codeword traces, generation plans"]
   Narrative["Narrative Engine<br/>NPCs, worldstate, memory, codex/lore"]
   Perception["Perception Engine<br/>player-specific overlays"]
   Quest["Quest Engine"]
@@ -107,8 +129,9 @@ flowchart TB
   Cosmology --> Realm
   Cosmology --> ASH
   Realm --> ASH
-  ASH --> Narrative
-  ASH --> Perception
+  ASH --> Upstream
+  Upstream --> Narrative
+  Upstream --> Perception
   Narrative --> Quest
   Narrative --> Myth
   Narrative --> Prophecy
@@ -128,6 +151,7 @@ flowchart TB
 sequenceDiagram
   participant C as Cosmology / Realm State
   participant A as ASH Pattern Engine
+  participant U as ASH Upstream Authority
   participant D as Diagnostics
   participant P as Generation Planner
   participant Y as YWE Domain Engine
@@ -137,8 +161,9 @@ sequenceDiagram
   A->>A: x' = x XOR c
   A->>D: validate state, orbit, fallback route
   D-->>A: DiagnosticEnvelope
-  A->>P: CosmicPatternSnapshot + DiagnosticEnvelope
-  P-->>Y: GenerationPlan
+  A->>U: CosmicPatternSnapshot + codeword trace
+  U->>P: SourceASHRefs + DiagnosticEnvelope
+  P-->>Y: ASHUpstreamGenerationEnvelope + GenerationPlan
   Y-->>H: domain manifest with source ASH refs
   H-->>H: materialize without authoring YWE truth
 ```
@@ -148,7 +173,8 @@ sequenceDiagram
 | Surface | Owns | Must Not Own |
 |---|---|---|
 | ASH canonical specs | State space, codewords, transitions, diagnostics | Host rendering, game-engine implementation |
-| YWE core repo | Code-agnostic engines, schemas, lore, conformance, adapter contracts | Engine-specific runtime code |
+| ASH upstream authority | Lawful pattern generation, diagnostics, codeword traces, generation plans | YWE domain manifestation, host materialization |
+| YWE core repo | Code-agnostic engines, schemas, lore, conformance, adapter contracts | ASH math, engine-specific runtime code |
 | Forsetti governance | Module lifecycle, contracts, validation, policy enforcement | ASH math, YWE cosmology truth, codeword authority |
 | Unity / Unreal / Godot adapters | Host materialization from `GenerationPlan` | ASH truth or YWE domain truth |
 
@@ -277,7 +303,12 @@ Forsetti governs the engine through **five design principles**:
 | [specs/core/ash-state-space.pseudo.md](specs/core/ash-state-space.pseudo.md) | Canonical `F2^9` state-space specification |
 | [specs/core/codeword-set.pseudo.md](specs/core/codeword-set.pseudo.md) | Fixed 16-codeword ASH transition set |
 | [data/schemas/ash_generation_packet_schema.json](data/schemas/ash_generation_packet_schema.json) | Shared `CosmicPatternSnapshot`, `DiagnosticEnvelope`, and `GenerationPlan` packet schema |
+| [docs/architecture/ash_upstream_authority_contract.md](docs/architecture/ash_upstream_authority_contract.md) | Canonical upstream mathematical and generative authority contract |
+| [data/schemas/ash_upstream_generation_envelope_schema.json](data/schemas/ash_upstream_generation_envelope_schema.json) | Shared `ASHUpstreamGenerationEnvelope` provenance schema |
+| [data/schemas/ywe_generation_context_packet_schema.json](data/schemas/ywe_generation_context_packet_schema.json) | Shared `YWEGenerationContextPacket` schema for player/world context |
+| [data/schemas/ywe_interpretation_packet_schema.json](data/schemas/ywe_interpretation_packet_schema.json) | Shared `YWEInterpretationPacket` schema for feature-engine handoff |
 | [data/validation/ash_generation_gate_contract.json](data/validation/ash_generation_gate_contract.json) | Required package gate contract for rebuilt generation systems |
+| [data/validation/ash_upstream_authority_gate_contract.json](data/validation/ash_upstream_authority_gate_contract.json) | Dedicated upstream authority gate contract |
 | [conformance/acceptance-judgment.md](conformance/acceptance-judgment.md) | Current conformance judgment for the code-agnostic repository scope |
 | [.github/scripts/ywe_package_acceptance_check.py](.github/scripts/ywe_package_acceptance_check.py) | Blocking package acceptance test runner |
 

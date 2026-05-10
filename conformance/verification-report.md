@@ -13,6 +13,13 @@ downstream manifest dependencies, and ASH-derived data wrappers.
 The ASH/ASP core-math rebuild adds a blocking package acceptance check for all
 meaningful YWE generation systems.
 
+The ASH upstream authority extension adds an engine-agnostic architecture
+contract that makes ASH the upstream mathematical and generative authority for
+YWE. It defines the generation spine from `YWEGenerationContextPacket` through
+`ASHUpstreamGenerationEnvelope`, `YWEInterpretationPacket`, feature manifests,
+host materialization, `WorldstateDeltaPacket` or `DiagnosticNoOp`, and
+`FutureGenerationBiasUpdate`.
+
 This verification pass is additive against the restored planning baseline.
 Existing engine, rule, data, and handoff files retain their original design
 content and now carry ASH provenance and materialization contract extensions.
@@ -26,6 +33,14 @@ Blocking acceptance script:
 Gate contract:
 
 `data/validation/ash_generation_gate_contract.json`
+
+Upstream authority contract:
+
+`docs/architecture/ash_upstream_authority_contract.md`
+
+Upstream authority gate:
+
+`data/validation/ash_upstream_authority_gate_contract.json`
 
 Generation conformance evidence:
 
@@ -55,9 +70,26 @@ The package acceptance script implements the following required test families:
 14. `test_perception_overlay_does_not_rewrite_shared_world_truth`
 15. `test_adapters_cannot_author_ywe_truth`
 
+The upstream authority extension also requires manual and scripted inspection
+for:
+
+1. `ash_upstream_authority_contract.md` existence and references.
+2. Runtime generation flow coverage for `YWEGenerationContextPacket`,
+   `ASHUpstreamGenerationEnvelope`, `YWEInterpretationPacket`,
+   `WorldstateDeltaPacket`, and `FutureGenerationBiasUpdate`.
+3. Packet schema coverage for `PlayerActionTrace`,
+   `ExplorationFrontierRequest`, and `SystemManifestHandoff`.
+4. Gate-contract provenance fields: `source_ash_refs`, `diagnostic_ref`,
+   `generation_plan_ref`, `requested_manifest_kind`, and
+   `worldstate_delta_policy`.
+
 ## Acceptance Boundary
 
 YWE remains code-agnostic. This repository defines contracts, schemas,
 validators, data records, diagnostics, and conformance evidence. Engine
 adapters and host implementations may materialize only from `GenerationPlan`
 outputs and must not author ASH truth or YWE domain truth.
+
+Player actions influence future generation context; they do not mutate ASH
+math. Host adapters materialize approved manifests but do not author symbolic
+truth.

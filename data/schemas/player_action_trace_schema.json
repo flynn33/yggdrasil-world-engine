@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/player_action_trace_schema.json",
+  "schema_id": "ywe.schemas.player_action_trace",
+  "title": "PlayerActionTrace",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "trace_id",
+    "player_ref",
+    "action_kind",
+    "local_context_ref",
+    "timestamp_or_sequence_ref",
+    "consequence_channels"
+  ],
+  "properties": {
+    "trace_id": {
+      "type": "string"
+    },
+    "player_ref": {
+      "type": "string"
+    },
+    "action_kind": {
+      "type": "string",
+      "enum": [
+        "explore",
+        "reveal",
+        "conceal",
+        "bind",
+        "study",
+        "weaponize",
+        "aid",
+        "betray",
+        "refuse",
+        "accept",
+        "cross_threshold",
+        "use_artifact",
+        "resolve_encounter",
+        "speak_claim",
+        "alter_faction_relation"
+      ]
+    },
+    "local_context_ref": {
+      "type": "string"
+    },
+    "timestamp_or_sequence_ref": {
+      "type": "string"
+    },
+    "consequence_channels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "worldstate_delta",
+          "wolf_resonance",
+          "realm_attunement",
+          "bloodline_resonance",
+          "ability_unlock_pressure",
+          "perception_overlay",
+          "faction_claim",
+          "myth_seed",
+          "prophecy_pressure",
+          "artifact_binding",
+          "creature_memory",
+          "npc_memory"
+        ]
+      }
+    },
+    "authority_boundary": {
+      "type": "object",
+      "properties": {
+        "may_influence_future_generation_context": {
+          "const": true
+        },
+        "may_mutate_ash_math": {
+          "const": false
+        }
+      }
+    }
+  }
+}

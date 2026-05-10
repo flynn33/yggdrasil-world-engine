@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.validation.ash_upstream_authority_gate_contract",
+  "version": "1.0.0",
+  "authority_contract": "docs/architecture/ash_upstream_authority_contract.md",
+  "required_packet_spine": [
+    "YWEGenerationContextPacket",
+    "ASHUpstreamGenerationEnvelope",
+    "YWEInterpretationPacket",
+    "SystemManifestHandoff",
+    "WorldstateDeltaPacket|DiagnosticNoOp",
+    "FutureGenerationBiasUpdate"
+  ],
+  "required_provenance_fields": [
+    "source_ash_refs",
+    "diagnostic_ref",
+    "generation_plan_ref",
+    "requested_manifest_kind",
+    "worldstate_delta_policy"
+  ],
+  "meaningful_manifest_targets": [
+    "WorldRegionManifest",
+    "RealmSiteManifest",
+    "ThresholdManifest",
+    "QuestChainManifest",
+    "NPCManifest",
+    "CreatureManifest",
+    "ArtifactManifest",
+    "MythRecord",
+    "ProphecyRecord",
+    "PerceptionStateRecord",
+    "FactionDelta",
+    "ProgressionDelta"
+  ],
+  "reject_if": [
+    "local_symbolic_rng_as_source_of_meaning",
+    "ywe_defined_ash_state_space",
+    "ywe_defined_codeword_set",
+    "derived_ninth_bit",
+    "eight_plus_one_state_model",
+    "materialization_before_generation_plan",
+    "adapter_authored_truth",
+    "feature_engine_claims_math_authority",
+    "player_action_mutates_ash_math"
+  ],
+  "required_validation_command": "bash scripts/run_checks.sh"
+}

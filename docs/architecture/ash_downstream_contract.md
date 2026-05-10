@@ -7,6 +7,20 @@ Status: canonical contract
 
 ---
 
+## Upstream authority reference
+
+This downstream contract is subordinate to
+`ash_upstream_authority_contract.md`.
+
+ASH is the upstream mathematical and generative authority for YWE. ASH owns
+canonical math, lawful pattern generation, diagnostics, codeword traces, and
+generation planning. YWE systems consume ASH-derived state, diagnostics,
+codeword traces, and generation plans.
+
+Downstream systems may specialize ASH-derived pattern outputs into game-domain
+manifests, but they must not become independent authorities over symbolic
+grammar, generation planning, or mathematical truth.
+
 # 1. Purpose
 
 This document defines how downstream YWE systems may consume ASH archetypes
@@ -29,14 +43,16 @@ Downstream systems may **consume** archetype outputs.
 They may **not** become independent authorities on archetype meaning.
 
 ASH owns symbolic grammar.
-Other systems own specialized manifestation of that grammar.
+Other systems own specialized manifestation of that grammar through the shared
+packet spine defined by `ash_upstream_authority_contract.md`.
 
 ---
 
 # 3. Allowed downstream use
 
 ## NPC synthesis
-May use archetypes to determine:
+May use ASH-derived archetypes and `YWEInterpretationPacket` context to
+determine:
 - motive bias
 - truth function
 - shadow risk
@@ -46,7 +62,7 @@ May use archetypes to determine:
 Must not invent new canonical meanings for archetypes.
 
 ## Quest engine
-May use archetypes to determine:
+May use ASH-derived archetypes and generation plans to determine:
 - quest chain pressure curve
 - threshold form
 - reversal form
@@ -56,7 +72,7 @@ May use archetypes to determine:
 Must not bypass narrative_engine intent selection.
 
 ## Myth engine
-May use archetypes to determine:
+May use ASH-derived archetypes and recorded worldstate deltas to determine:
 - what becomes memorable
 - what becomes sainted, feared, taboo, or legitimized
 - faction-specific retelling emphasis
@@ -64,7 +80,7 @@ May use archetypes to determine:
 Must not treat myth as the source of archetype truth.
 
 ## Prophecy engine
-May use archetypes to determine:
+May use ASH-derived archetypes and lawful generation pressure to determine:
 - omen style
 - attractor profile
 - activation tendency
@@ -73,7 +89,7 @@ May use archetypes to determine:
 Must not convert archetype bias into deterministic fate.
 
 ## Artifact engine
-May use archetypes to determine:
+May use ASH-derived archetypes and generation plans to determine:
 - symbolic object role
 - resonance hooks
 - costs and risks
@@ -82,7 +98,7 @@ May use archetypes to determine:
 Must not generate loot logic detached from archetype meaning.
 
 ## Creature engine
-May use archetypes to determine:
+May use ASH-derived archetypes and encounter context to determine:
 - encounter symbolism
 - creature role
 - omen presence
@@ -91,7 +107,7 @@ May use archetypes to determine:
 Must not create standalone ecology divorced from ASH state.
 
 ## Perception engine
-May use archetypes to determine:
+May use ASH-derived archetypes and perception context to determine:
 - what becomes legible
 - what is concealed or emphasized
 - which interpretation variants become visible to a player
@@ -104,6 +120,21 @@ Must not rewrite shared-world truth.
 
 Codex should prefer a normalized packet shape whenever a downstream system reads
 ASH outputs.
+
+For meaningful generated content, the required shared packet spine is:
+
+```text
+YWEGenerationContextPacket
+  -> ASHUpstreamGenerationEnvelope
+  -> YWEInterpretationPacket
+  -> SystemManifestHandoff
+  -> WorldstateDeltaPacket or DiagnosticNoOp
+  -> FutureGenerationBiasUpdate
+```
+
+Every meaningful manifest must preserve `source_ash_refs`, `diagnostic_ref`,
+`generation_plan_ref`, `requested_manifest_kind`, and
+`worldstate_delta_policy`.
 
 Suggested shared packet:
 
@@ -128,6 +159,10 @@ It is not a replacement for the underlying registry.
 
 Downstream systems must never:
 
+- redefine ASH math
+- create local symbolic grammar authority
+- claim generation-planning authority independent of ASH
+- materialize meaningful content before an ASH-derived `GenerationPlan`
 - rename canonical archetypes locally
 - quietly alter canonical summaries
 - define incompatible local field shapes without an adapter layer

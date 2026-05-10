@@ -10,6 +10,12 @@ planning. YWE is the downstream domain interpretation layer. Adapters and host
 implementations may materialize emitted plans, but they must not author ASH
 truth or YWE domain truth.
 
+ASH is also the upstream generative authority for meaningful YWE generation.
+YWE consumes ASH-derived state, diagnostics, codeword traces, and generation
+plans, then interprets lawful pattern output into world, quest, NPC, creature,
+artifact, myth, prophecy, perception, faction, progression, wolf, and ability
+manifests.
+
 Forsetti is not the active authority for ASH/ASP math, YWE cosmology truth,
 codewords, diagnostics, generation semantics, or conformance acceptance.
 
@@ -17,9 +23,27 @@ codewords, diagnostics, generation semantics, or conformance acceptance.
 
 Shared packet contracts are defined in:
 
+- `docs/architecture/ash_upstream_authority_contract.md`
 - `core/ash_pattern_engine/pattern_engine_schema.json`
+- `core/narrative_engine/ash_runtime_generation_flow.yaml`
 - `data/schemas/ash_generation_packet_schema.json`
 - `data/validation/ash_generation_gate_contract.json`
+- `data/validation/ash_upstream_authority_gate_contract.json`
+
+The upstream generation spine is:
+
+```text
+RuntimeGenerationTrigger
+  -> YWEGenerationContextPacket
+  -> ASHUpstreamGenerationEnvelope
+  -> YWEInterpretationPacket
+  -> SystemManifestHandoff
+  -> HostAdapterMaterializationRequest
+  -> MaterializationResult
+  -> ResolutionPayload
+  -> WorldstateDeltaPacket or DiagnosticNoOp
+  -> FutureGenerationBiasUpdate
+```
 
 Every meaningful generator consumes or cites:
 
@@ -27,11 +51,17 @@ Every meaningful generator consumes or cites:
 - `DiagnosticEnvelope`
 - `GenerationPlan`
 - `SourceASHRefs`
+- `YWEGenerationContextPacket`
+- `ASHUpstreamGenerationEnvelope`
+- `YWEInterpretationPacket`
 
 Every meaningful resolution emits:
 
 - `WorldstateDeltaPacket`, or
 - explicit `DiagnosticNoOp`
+
+Player action and exploration inputs may influence `YWEGenerationContextPacket`
+and `FutureGenerationBiasUpdate`. They must not mutate ASH math.
 
 ## System Coverage Matrix
 
@@ -58,6 +88,8 @@ surfaces must preserve `CosmicPatternSnapshot`, `DiagnosticEnvelope`, and
 `generation_plan_ref` provenance and must not author ASH state, codewords,
 diagnostics, cosmology, myths, prophecies, character meaning, or YWE domain
 truth.
+
+Host adapters materialize approved manifests but do not author symbolic truth.
 
 ## Validation
 
