@@ -551,3 +551,25 @@ example_patterns:
       summary: >
         A prophecy claim grants direct access to the Divine Core regardless of
         attunement, threshold, or cosmological legality.
+
+ash_asp_core_math_rebuild_addendum:
+  authority: YWE_ASP_CORE_MATH_REBUILD_PACKAGE
+  math_basis: F2^9 full-state ASH vector with fixed 16 canonical codewords
+  transition_semantics: "x' = x XOR c"
+  required_packets:
+    - CosmicPatternSnapshot
+    - DiagnosticEnvelope
+    - GenerationPlan
+  provenance_fields:
+    - cosmic_pattern_snapshot_ref
+    - diagnostic_ref
+    - generation_plan_ref
+    - source_ash_refs
+  boundary_rule: generation planning may guide materialization but must not author ASH truth or YWE domain truth
+
+  realm_records:
+    - RealmTransitionResolution
+    - WorldstateDeltaPacket
+    - RealmBoundaryProfileRecord
+    - CosmicPatternSnapshot
+  transition_rule: RealmTransitionResolution must be derived from CosmicPatternSnapshot, DiagnosticEnvelope, and RealmBoundaryProfileRecord.

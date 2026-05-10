@@ -18,6 +18,7 @@ Status: updated after ASH foundation normalization, faction topology stabilizati
 - Intentional placeholder-backed artifacts still tracked: `14`
 - Master spec authority artifact: present at `docs/master_specification/YWE_MASTER_SPECIFICATION.md`
 - Bootstrap prompt authority artifact: present at `YWE_REPOSITORY_BOOTSTRAP_PROMPT.md`
+- ASH/ASP core math rebuild overlay: present on `ash-remediation`
 
 ## Resolved Canonical Artifacts (Active Repo Inventory)
 
@@ -52,6 +53,21 @@ Status: updated after ASH foundation normalization, faction topology stabilizati
 - ash_compliance_checklist.md
 - artifact_system_rules.yaml
 - creature_system_rules.yaml
+- specs/
+- core/ash_pattern_engine/canonical/
+- data/schemas/ash_generation_packet_schema.json
+- data/validation/ash_generation_gate_contract.json
+- conformance/
+- .github/scripts/ywe_package_acceptance_check.py
+
+## ASH/ASP Core Math Rebuild Overlay
+
+The active `ash-remediation` branch applies the
+`YWE_ASP_CORE_MATH_REBUILD_PACKAGE` to the restored repository baseline.
+Existing planning documents, engine interfaces, rule files, data records, and
+handoff records remain present. The rebuild extends those files with
+`CosmicPatternSnapshot`, `DiagnosticEnvelope`, `GenerationPlan`, and
+source-ASH provenance contracts rather than replacing the design content.
 
 ## Locally Authored During Forsetti Compliance Pass
 

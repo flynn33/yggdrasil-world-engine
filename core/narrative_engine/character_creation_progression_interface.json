@@ -1,0 +1,65 @@
+{
+  "engine_id": "ywe.core.narrative_engine.character_creation_progression",
+  "version": "1.0.0",
+  "description": "Code-agnostic interface for ASH-derived character creation and progression within the Narrative Engine.",
+  "layer": "core_subsystem",
+  "dependencies": [
+    "ywe.core.ash_pattern_engine",
+    "ywe.core.realm_engine",
+    "ywe.core.narrative_engine"
+  ],
+  "methods": [
+    {
+      "name": "create_character_seed",
+      "description": "Create a CharacterSeedManifest from ASH-derived pressure without locking destiny at creation.",
+      "parameters": [
+        "CosmicPatternSnapshot",
+        "PlayerState",
+        "RealmIdentity",
+        "DiagnosticEnvelope",
+        "GenerationPlan"
+      ],
+      "returns": "CharacterSeedManifest"
+    },
+    {
+      "name": "derive_identity_pressure",
+      "description": "Derive identity pressure for progressive revelation through play.",
+      "parameters": [
+        "CharacterSeedManifest",
+        "CosmicPatternSnapshot",
+        "DiagnosticEnvelope",
+        "GenerationPlan"
+      ],
+      "returns": "IdentityPressureVector"
+    },
+    {
+      "name": "record_progression_delta",
+      "description": "Persist progression as a traced delta instead of untracked character mutation.",
+      "parameters": [
+        "CharacterSeedManifest",
+        "IdentityPressureVector",
+        "WorldstateDeltaPacket",
+        "DiagnosticEnvelope",
+        "GenerationPlan"
+      ],
+      "returns": "ProgressionDelta"
+    },
+    {
+      "name": "apply_player_state_delta",
+      "description": "Apply a PlayerStateDelta that cites the progression delta and ASH provenance.",
+      "parameters": [
+        "ProgressionDelta",
+        "PlayerState",
+        "DiagnosticEnvelope",
+        "GenerationPlan"
+      ],
+      "returns": "PlayerStateDelta"
+    }
+  ],
+  "invariants": [
+    "Character creation requires CosmicPatternSnapshot, DiagnosticEnvelope, and GenerationPlan.",
+    "Every CharacterSeedManifest carries source_ash_refs with normalized_state, source_orbit_id, active_codeword_sequence, diagnostic_ref, and generation_plan_ref.",
+    "Identity is revealed through play and must not lock destiny at creation.",
+    "Wolf balance fields are not a good/evil or zero-sum morality axis."
+  ]
+}

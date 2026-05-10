@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.quest_archetypes.quest_chain_manifest",
+  "version": "1.0.0",
+  "required_inputs": [
+    "CosmicPatternSnapshot",
+    "GenerationPlan",
+    "PlayerNarrativeSnapshot",
+    "WorldState",
+    "DiagnosticEnvelope"
+  ],
+  "required_outputs": [
+    "QuestChainManifest",
+    "StageManifest",
+    "CompletionModeSet",
+    "QuestResolutionPayload"
+  ],
+  "records": {
+    "QuestChainManifest": {
+      "required": [
+        "quest_chain_manifest_id",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "stage_manifests",
+        "completion_mode_set_ref",
+        "quest_resolution_payload_ref"
+      ],
+      "forbidden": [
+        "independent_random_quest_template",
+        "single_outcome_only_quest"
+      ]
+    },
+    "StageManifest": {
+      "required": [
+        "stage_manifest_id",
+        "quest_chain_manifest_ref",
+        "source_state",
+        "source_codeword",
+        "diagnostic_ref",
+        "interpretation_options"
+      ]
+    },
+    "CompletionModeSet": {
+      "required": [
+        "completion_mode_set_id",
+        "minimum_mode_count",
+        "completion_interpretations",
+        "diagnostic_ref"
+      ],
+      "minimum_mode_count": 2
+    },
+    "QuestResolutionPayload": {
+      "required": [
+        "quest_resolution_payload_id",
+        "completion_mode_ref",
+        "worldstate_delta_packet_ref",
+        "future_generation_bias_update_ref",
+        "diagnostic_ref"
+      ]
+    }
+  }
+}

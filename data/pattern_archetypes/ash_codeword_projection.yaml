@@ -1,0 +1,43 @@
+version: "2.0"
+status: canonical_ash_derived
+canonical_ash_derivation:
+  state_space: F2^9
+  codeword_spec: specs/core/codeword-set.pseudo.md
+  transition_spec: specs/algorithms/codeword-transformation-semantics.pseudo.md
+  averaging_spec: specs/algorithms/averaging-operator-semantics.pseudo.md
+  branching_spec: specs/algorithms/branching-semantics.pseudo.md
+  contracts:
+    - StateModel
+    - TransitionRegistry
+    - Diagnostics
+    - GenerationPlanner
+    - ArtifactEmitter
+projection_rule: >
+  Archetype pressure records are generated from canonical codeword transitions.
+  They are structural labels for downstream interpretation and are not
+  independent narrative templates.
+codeword_projection_records:
+  - {id: ash_codeword_00, codeword: "000000000", weight: 0, branch_role: identity}
+  - {id: ash_codeword_01, codeword: "000011110", weight: 4, branch_role: transition}
+  - {id: ash_codeword_02, codeword: "001100110", weight: 4, branch_role: transition}
+  - {id: ash_codeword_03, codeword: "001111000", weight: 4, branch_role: transition}
+  - {id: ash_codeword_04, codeword: "010101010", weight: 4, branch_role: transition}
+  - {id: ash_codeword_05, codeword: "010110100", weight: 4, branch_role: transition}
+  - {id: ash_codeword_06, codeword: "011001100", weight: 4, branch_role: transition}
+  - {id: ash_codeword_07, codeword: "011010010", weight: 4, branch_role: transition}
+  - {id: ash_codeword_08, codeword: "100101100", weight: 4, branch_role: transition}
+  - {id: ash_codeword_09, codeword: "100110010", weight: 4, branch_role: transition}
+  - {id: ash_codeword_10, codeword: "101001010", weight: 4, branch_role: transition}
+  - {id: ash_codeword_11, codeword: "101010100", weight: 4, branch_role: transition}
+  - {id: ash_codeword_12, codeword: "110000110", weight: 4, branch_role: transition}
+  - {id: ash_codeword_13, codeword: "110011000", weight: 4, branch_role: transition}
+  - {id: ash_codeword_14, codeword: "111100000", weight: 4, branch_role: transition}
+  - {id: ash_codeword_15, codeword: "111111110", weight: 8, branch_role: full_span_transition}
+downstream_rule:
+  allowed: >
+    Downstream modules may interpret active codeword pressure into quest,
+    artifact, creature, myth, prophecy, perception, or narrative plans.
+  forbidden: >
+    Downstream modules may not define archetype, compatibility, or generation
+    truth without an ASH state, codeword transition, diagnostic envelope, and
+    GenerationPlan boundary.

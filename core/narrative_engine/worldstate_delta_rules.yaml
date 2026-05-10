@@ -8,3 +8,25 @@ meta:
     - fixed_cosmology_must_remain_locked
     - perception_must_not_rewrite_shared_world_truth
     - forsetti_governs_activation_ywe_governs_truth
+
+ash_asp_core_math_rebuild_addendum:
+  authority: YWE_ASP_CORE_MATH_REBUILD_PACKAGE
+  math_basis: F2^9 full-state ASH vector with fixed 16 canonical codewords
+  transition_semantics: "x' = x XOR c"
+  required_packets:
+    - CosmicPatternSnapshot
+    - DiagnosticEnvelope
+    - GenerationPlan
+  provenance_fields:
+    - cosmic_pattern_snapshot_ref
+    - diagnostic_ref
+    - generation_plan_ref
+    - source_ash_refs
+  boundary_rule: generation planning may guide materialization but must not author ASH truth or YWE domain truth
+
+  worldstate_delta_records:
+    - WorldstateDeltaPacket
+    - FutureGenerationBiasUpdate
+    - DiagnosticNoOp
+    - SourceASHRefs
+  delta_rule: WorldstateDeltaPacket may bias future generation through FutureGenerationBiasUpdate only when SourceASHRefs and DiagnosticEnvelope remain attached.

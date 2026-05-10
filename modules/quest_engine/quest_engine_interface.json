@@ -13,20 +13,39 @@
     {
       "name": "generate_quest",
       "description": "Generate a quest from a cosmic pattern and player state",
-      "parameters": ["pattern_node", "player_state"],
+      "parameters": [
+        "pattern_node",
+        "player_state"
+      ],
       "returns": "QuestSeed"
     },
     {
       "name": "get_completion_paths",
       "description": "Return available completion paths for a quest",
-      "parameters": ["quest_seed_id"],
+      "parameters": [
+        "quest_seed_id"
+      ],
       "returns": "CompletionPath[]"
     },
     {
       "name": "complete_quest",
       "description": "Complete a quest via a chosen path and return consequences",
-      "parameters": ["quest_seed_id", "completion_path_id", "player_id"],
+      "parameters": [
+        "quest_seed_id",
+        "completion_path_id",
+        "player_id"
+      ],
       "returns": "QuestCompletionResult"
+    },
+    {
+      "name": "build_quest_chain_manifest",
+      "description": "Create QuestChainManifest with multiple StageManifest routes from ASH provenance.",
+      "parameters": [
+        "CosmicPatternSnapshot",
+        "DiagnosticEnvelope",
+        "GenerationPlan"
+      ],
+      "returns": "QuestChainManifest"
     }
   ],
   "events_published": [
@@ -42,6 +61,67 @@
   "invariants": [
     "All quests derive from ASH patterns",
     "Every quest has at least two completion paths",
-    "Quest completion always produces narrative consequences"
-  ]
+    "Quest completion always produces narrative consequences",
+    "CosmicPatternSnapshot and DiagnosticEnvelope provenance is required for meaningful generation.",
+    "GenerationPlan is required before any materialized output.",
+    "source_ash_refs, diagnostic_ref, and generation_plan_ref must remain traceable."
+  ],
+  "inputs": [
+    {
+      "name": "cosmic_pattern_snapshot",
+      "type": "CosmicPatternSnapshot",
+      "description": "CosmicPatternSnapshot required by ASH remediation contract."
+    },
+    {
+      "name": "diagnostic_envelope",
+      "type": "DiagnosticEnvelope",
+      "description": "DiagnosticEnvelope required by ASH remediation contract."
+    },
+    {
+      "name": "generation_plan",
+      "type": "GenerationPlan",
+      "description": "GenerationPlan required by ASH remediation contract."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "quest_chain_manifest",
+      "type": "QuestChainManifest",
+      "description": "QuestChainManifest emitted under ASH remediation contract."
+    },
+    {
+      "name": "quest_resolution_payload",
+      "type": "QuestResolutionPayload",
+      "description": "QuestResolutionPayload emitted under ASH remediation contract."
+    },
+    {
+      "name": "worldstate_delta_packet",
+      "type": "WorldstateDeltaPacket",
+      "description": "WorldstateDeltaPacket emitted under ASH remediation contract."
+    }
+  ],
+  "ash_remediation_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "records": [
+      "QuestChainManifest",
+      "StageManifest",
+      "CompletionModeSet",
+      "QuestResolutionPayload",
+      "WorldstateDeltaPacket",
+      "minimum_mode_count"
+    ]
+  }
 }

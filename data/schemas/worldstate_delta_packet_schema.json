@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.schemas.worldstate_delta_packet",
+  "version": "1.0.0",
+  "purpose": "Persistent consequence packet for meaningful YWE resolutions.",
+  "required_records": {
+    "WorldstateDeltaPacket": {
+      "required": [
+        "delta_id",
+        "source_resolution_payload",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "scope",
+        "persistence",
+        "reversibility",
+        "future_generation_bias_update"
+      ],
+      "properties": {
+        "source_ash_refs": "SourceASHRefs",
+        "diagnostic_ref": "DiagnosticEnvelope",
+        "generation_plan_ref": "GenerationPlan",
+        "future_generation_bias_update": "FutureGenerationBiasUpdate"
+      }
+    },
+    "FutureGenerationBiasUpdate": {
+      "required": [
+        "bias_id",
+        "affected_domains",
+        "pressure_tags",
+        "source_delta_ref",
+        "diagnostic_ref"
+      ]
+    },
+    "DiagnosticNoOp": {
+      "required": [
+        "no_op_id",
+        "reason",
+        "diagnostic_ref",
+        "cosmic_pattern_snapshot_ref",
+        "generation_plan_ref"
+      ],
+      "rule": "Every meaningful completion emits WorldstateDeltaPacket or explicit DiagnosticNoOp."
+    }
+  },
+  "invariants": [
+    "worldstate_changes_require_source_ash_refs",
+    "meaningful_resolutions_cannot_reset_consequences_without_delta",
+    "untraceable_state_changes_are_forbidden"
+  ]
+}

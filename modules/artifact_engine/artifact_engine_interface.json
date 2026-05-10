@@ -13,20 +13,37 @@
     {
       "name": "generate_artifact",
       "description": "Generate an artifact from a cosmic pattern",
-      "parameters": ["pattern_node", "realm_context"],
+      "parameters": [
+        "pattern_node",
+        "realm_context"
+      ],
       "returns": "Artifact"
     },
     {
       "name": "destroy_artifact",
       "description": "Destroy an artifact and trigger associated events",
-      "parameters": ["artifact_id"],
+      "parameters": [
+        "artifact_id"
+      ],
       "returns": "ArtifactDestructionResult"
     },
     {
       "name": "get_artifact_properties",
       "description": "Get the cosmic properties of an artifact",
-      "parameters": ["artifact_id"],
+      "parameters": [
+        "artifact_id"
+      ],
       "returns": "ArtifactProperties"
+    },
+    {
+      "name": "build_artifact_manifest",
+      "description": "Create ArtifactManifest and UseConsequenceRoute from ASH provenance.",
+      "parameters": [
+        "CosmicPatternSnapshot",
+        "DiagnosticEnvelope",
+        "GenerationPlan"
+      ],
+      "returns": "ArtifactManifest"
     }
   ],
   "events_published": [
@@ -40,6 +57,65 @@
   ],
   "invariants": [
     "All artifacts derive from ASH patterns",
-    "Artifact destruction may trigger myth formation"
-  ]
+    "Artifact destruction may trigger myth formation",
+    "CosmicPatternSnapshot and DiagnosticEnvelope provenance is required for meaningful generation.",
+    "GenerationPlan is required before any materialized output.",
+    "source_ash_refs, diagnostic_ref, and generation_plan_ref must remain traceable."
+  ],
+  "inputs": [
+    {
+      "name": "cosmic_pattern_snapshot",
+      "type": "CosmicPatternSnapshot",
+      "description": "CosmicPatternSnapshot required by ASH remediation contract."
+    },
+    {
+      "name": "diagnostic_envelope",
+      "type": "DiagnosticEnvelope",
+      "description": "DiagnosticEnvelope required by ASH remediation contract."
+    },
+    {
+      "name": "generation_plan",
+      "type": "GenerationPlan",
+      "description": "GenerationPlan required by ASH remediation contract."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "artifact_manifest",
+      "type": "ArtifactManifest",
+      "description": "ArtifactManifest emitted under ASH remediation contract."
+    },
+    {
+      "name": "use_consequence_route",
+      "type": "UseConsequenceRoute",
+      "description": "UseConsequenceRoute emitted under ASH remediation contract."
+    },
+    {
+      "name": "myth_seed_candidate",
+      "type": "MythSeedCandidate",
+      "description": "MythSeedCandidate emitted under ASH remediation contract."
+    }
+  ],
+  "ash_remediation_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "records": [
+      "ArtifactManifest",
+      "UseConsequenceRoute",
+      "MythSeedCandidate",
+      "ArtifactDescription"
+    ]
+  }
 }

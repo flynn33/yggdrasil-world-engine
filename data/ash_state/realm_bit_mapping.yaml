@@ -1,0 +1,55 @@
+version: "1.0"
+status: canonical_ywe_projection
+canonical_ash_derivation:
+  state_space: F2^9
+  canonical_spec: specs/core/ash-state-space.pseudo.md
+  codeword_spec: specs/core/codeword-set.pseudo.md
+  realm_identity_spec: specs/core/realm-identity.pseudo.md
+  transition_rule: xor_by_codeword
+  note: >
+    YWE's nine named realms are semantic anchors projected onto full ASH
+    9-bit states. This projection does not privilege a coordinate in ASH math;
+    it only gives YWE a deterministic bridge from named cosmology to ASH state
+    and orbit identity.
+realm_state_anchors:
+  - realm_id: divine_core
+    ash_state: "100000000"
+    bit_index: 0
+    orbit_basis: canonical_codeword_orbit
+  - realm_id: celestial
+    ash_state: "010000000"
+    bit_index: 1
+    orbit_basis: canonical_codeword_orbit
+  - realm_id: causal
+    ash_state: "001000000"
+    bit_index: 2
+    orbit_basis: canonical_codeword_orbit
+  - realm_id: mental
+    ash_state: "000100000"
+    bit_index: 3
+    orbit_basis: canonical_codeword_orbit
+  - realm_id: astral
+    ash_state: "000010000"
+    bit_index: 4
+    orbit_basis: canonical_codeword_orbit
+  - realm_id: etheric
+    ash_state: "000001000"
+    bit_index: 5
+    orbit_basis: canonical_codeword_orbit
+  - realm_id: physical
+    ash_state: "000000100"
+    bit_index: 6
+    orbit_basis: canonical_codeword_orbit
+  - realm_id: shadow
+    ash_state: "000000010"
+    bit_index: 7
+    orbit_basis: canonical_codeword_orbit
+  - realm_id: void
+    ash_state: "000000001"
+    bit_index: 8
+    orbit_basis: canonical_codeword_orbit
+invariants:
+  - all_states_are_full_9_bit_vectors
+  - every_meaningful_transition_uses_canonical_codeword_xor
+  - ywe_realm_names_are_projection_labels_not_alternate_ash_math
+  - diagnostics_required_before_downstream_generation

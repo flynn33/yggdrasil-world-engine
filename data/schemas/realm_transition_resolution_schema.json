@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.schemas.realm_transition_resolution",
+  "version": "1.0.0",
+  "required_inputs": [
+    "CosmicPatternSnapshot",
+    "GenerationPlan",
+    "DiagnosticEnvelope",
+    "RealmBoundaryProfileRecord",
+    "PlayerState"
+  ],
+  "required_outputs": [
+    "RealmTransitionResolution",
+    "WorldstateDeltaPacket",
+    "DiagnosticNoOp"
+  ],
+  "records": {
+    "RealmTransitionResolution": {
+      "required": [
+        "transition_resolution_id",
+        "source_realm",
+        "destination_realm",
+        "boundary_profile_ref",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "worldstate_delta_packet_ref"
+      ],
+      "forbidden": [
+        "generic_fast_travel",
+        "realm_truth_rewrite_by_perception_overlay"
+      ]
+    }
+  }
+}

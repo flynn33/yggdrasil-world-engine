@@ -69,6 +69,19 @@ The world does not change -- player perception changes. The same location can be
 
 All procedural generation originates from ASH cosmological state analysis. No subsystem may generate meaningful content independently of the cosmic state.
 
+### ASH/ASP Core Math Baseline
+
+The active remediation branch uses `YWE_ASP_CORE_MATH_REBUILD_PACKAGE` as the
+controlling ASH/ASP math authority. The ASH state space is `F2^9`: 512 complete
+9-coordinate states, transformed only by the fixed 16 canonical full-state
+codewords. State transitions use `x' = x XOR c`.
+
+Meaningful YWE generation now carries `CosmicPatternSnapshot`,
+`DiagnosticEnvelope`, and `GenerationPlan` provenance through the character,
+creature, quest, NPC, artifact, myth, prophecy, perception, faction,
+worldstate, codex/lore, and realm contracts. Host adapters may materialize from
+those plans, but they must not author ASH truth or YWE domain truth.
+
 ---
 
 ## Supported Host Engines
@@ -144,6 +157,10 @@ yggdrasil-world-engine/
 
 The Yggdrasil World Engine is built on the [Forsetti Framework](https://github.com/flynn33/Forsetti-Framework) -- an architecture governance framework that enforces module contracts, runtime policy, and structural integrity. The framework ensures that every module, contract, and integration follows a consistent set of rules.
 
+Forsetti governs module lifecycle and activation policy. It does not override
+the ASH/ASP core math baseline, YWE cosmology truth, canonical codeword set,
+diagnostics, generation semantics, or package acceptance gates.
+
 Forsetti governs the engine through **five design principles**:
 
 1. **Native-first** -- Engine implementations use native idioms (C# for Unity, C++ for Unreal, GDScript for Godot)
@@ -178,6 +195,19 @@ Forsetti governs the engine through **five design principles**:
 | [data/module_capability/module_capability_manifest_schema.yaml](data/module_capability/module_capability_manifest_schema.yaml) | Canonical module capability and delegation-governance schema |
 | `data/module_capability/manifests/*.yaml` | Applied canonical capability declarations for the current YWE core engines and feature modules |
 | [data/faction_topology/faction_topology_state_schema.yaml](data/faction_topology/faction_topology_state_schema.yaml) | Canonical faction-topology state schema |
+
+---
+
+## ASH Rebuild Evidence
+
+| File | Description |
+|------|-------------|
+| [specs/core/ash-state-space.pseudo.md](specs/core/ash-state-space.pseudo.md) | Canonical `F2^9` state-space specification |
+| [specs/core/codeword-set.pseudo.md](specs/core/codeword-set.pseudo.md) | Fixed 16-codeword ASH transition set |
+| [data/schemas/ash_generation_packet_schema.json](data/schemas/ash_generation_packet_schema.json) | Shared `CosmicPatternSnapshot`, `DiagnosticEnvelope`, and `GenerationPlan` packet schema |
+| [data/validation/ash_generation_gate_contract.json](data/validation/ash_generation_gate_contract.json) | Required package gate contract for rebuilt generation systems |
+| [conformance/acceptance-judgment.md](conformance/acceptance-judgment.md) | Current conformance judgment for the code-agnostic repository scope |
+| [.github/scripts/ywe_package_acceptance_check.py](.github/scripts/ywe_package_acceptance_check.py) | Blocking package acceptance test runner |
 
 ---
 

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.schemas.creature_manifest",
+  "version": "1.0.0",
+  "required_inputs": [
+    "CosmicPatternSnapshot",
+    "GenerationPlan",
+    "RealmRelevanceMap",
+    "DiagnosticEnvelope"
+  ],
+  "required_outputs": [
+    "CreatureManifest",
+    "EncounterPlan",
+    "BehaviorPressureVector"
+  ],
+  "records": {
+    "CreatureManifest": {
+      "required": [
+        "creature_manifest_id",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "realm_relevance_map",
+        "behavior_pressure_vector_ref",
+        "encounter_plan_ref"
+      ],
+      "forbidden": [
+        "standalone_spawn_table_truth",
+        "taxonomy_without_ash_provenance"
+      ]
+    },
+    "EncounterPlan": {
+      "required": [
+        "encounter_plan_id",
+        "generation_plan_ref",
+        "diagnostic_ref",
+        "worldstate_delta_route"
+      ]
+    },
+    "BehaviorPressureVector": {
+      "required": [
+        "behavior_pressure_id",
+        "source_ash_refs",
+        "realm_pressure",
+        "myth_pressure",
+        "faction_pressure"
+      ]
+    }
+  }
+}

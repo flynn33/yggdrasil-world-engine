@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.validation.ash_generation_gate_contract",
+  "version": "1.0.0",
+  "active_package": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+  "governance": {
+    "mcp_record": "conformance/governance-boot-record.md",
+    "subagent_record": "conformance/governance-boot-record.md",
+    "acceptance_record": "conformance/acceptance-judgment.md",
+    "deviation_record": "conformance/deviation-log.md"
+  },
+  "shared_required_markers": [
+    "CosmicPatternSnapshot",
+    "DiagnosticEnvelope",
+    "GenerationPlan"
+  ],
+  "systems": [
+    {
+      "system": "character_creation_and_progression",
+      "paths": [
+        "core/narrative_engine/character_creation_progression_interface.json",
+        "core/narrative_engine/character_creation_progression_rules.yaml",
+        "data/schemas/character_progression_schema.json"
+      ],
+      "required_markers": [
+        "CharacterSeedManifest",
+        "IdentityPressureVector",
+        "ProgressionDelta",
+        "PlayerStateDelta",
+        "source_ash_refs"
+      ]
+    },
+    {
+      "system": "quest_generation",
+      "paths": [
+        "modules/quest_engine/quest_engine_interface.json",
+        "data/quest_archetypes/quest_chain_manifest_schema.json"
+      ],
+      "required_markers": [
+        "QuestChainManifest",
+        "StageManifest",
+        "CompletionModeSet",
+        "QuestResolutionPayload",
+        "WorldstateDeltaPacket"
+      ]
+    },
+    {
+      "system": "creature_creation",
+      "paths": [
+        "modules/creature_engine/creature_engine_interface.json",
+        "data/schemas/creature_manifest_schema.json"
+      ],
+      "required_markers": [
+        "CreatureManifest",
+        "EncounterPlan",
+        "BehaviorPressureVector",
+        "source_ash_refs"
+      ]
+    },
+    {
+      "system": "artifact_engine",
+      "paths": [
+        "modules/artifact_engine/artifact_engine_interface.json",
+        "data/schemas/artifact_manifest_schema.json"
+      ],
+      "required_markers": [
+        "ArtifactManifest",
+        "UseConsequenceRoute",
+        "MythSeedCandidate",
+        "ArtifactDescription"
+      ]
+    },
+    {
+      "system": "npc_synthesis",
+      "paths": [
+        "core/narrative_engine/engine_interface.json",
+        "data/schemas/npc_manifest_schema.json"
+      ],
+      "required_markers": [
+        "NPCManifest",
+        "RelationshipVector",
+        "TruthFunction",
+        "PersistenceState",
+        "FactionTopologyState"
+      ]
+    },
+    {
+      "system": "worldstate_delta_engine",
+      "paths": [
+        "core/narrative_engine/engine_interface.json",
+        "core/narrative_engine/worldstate_delta_rules.yaml",
+        "data/schemas/worldstate_delta_packet_schema.json"
+      ],
+      "required_markers": [
+        "WorldstateDeltaPacket",
+        "FutureGenerationBiasUpdate",
+        "DiagnosticNoOp",
+        "SourceASHRefs"
+      ]
+    },
+    {
+      "system": "myth_engine",
+      "paths": [
+        "modules/myth_engine/myth_engine_interface.json",
+        "data/schemas/myth_record_schema_expansion.json"
+      ],
+      "required_markers": [
+        "MythRecord",
+        "MythLine",
+        "SocialDistributionDelta",
+        "WorldstateDeltaPacket"
+      ]
+    },
+    {
+      "system": "prophecy_engine",
+      "paths": [
+        "modules/prophecy_engine/prophecy_engine_interface.json",
+        "data/schemas/prophecy_schema_expansion.json"
+      ],
+      "required_markers": [
+        "ProphecyRecord",
+        "OmenCluster",
+        "RuntimeBiasEffect",
+        "RecurringSymbolState"
+      ]
+    },
+    {
+      "system": "perception_engine",
+      "paths": [
+        "core/perception_engine/engine_interface.json",
+        "core/perception_engine/perception_schema.json",
+        "data/schemas/perception_layer_persistence_schema.json"
+      ],
+      "required_markers": [
+        "PerceptionStateRecord",
+        "OverlayManifest",
+        "VisibilityRules",
+        "truth_substrate_ref"
+      ]
+    },
+    {
+      "system": "faction_topology",
+      "paths": [
+        "data/faction_topology/faction_topology_state_schema.yaml"
+      ],
+      "required_markers": [
+        "FactionDelta",
+        "ClaimRecord",
+        "ReformCurrent",
+        "SuccessionTrack",
+        "WorldstateDeltaPacket"
+      ]
+    },
+    {
+      "system": "codex_and_lore_generation",
+      "paths": [
+        "core/narrative_engine/codex_lore_generation_rules.yaml",
+        "data/schemas/codex_lore_record_schema.json"
+      ],
+      "required_markers": [
+        "CodexRecord",
+        "LoreRecordVariant",
+        "VisibilityScope",
+        "locked_canon"
+      ]
+    },
+    {
+      "system": "realm_mechanics_and_transitions",
+      "paths": [
+        "core/realm_engine/engine_interface.json",
+        "data/schemas/realm_transition_resolution_schema.json",
+        "data/realm/realm_mechanics_rules.yaml",
+        "data/realm/realm_boundary_profiles.yaml"
+      ],
+      "required_markers": [
+        "RealmTransitionResolution",
+        "WorldstateDeltaPacket",
+        "RealmBoundaryProfileRecord",
+        "CosmicPatternSnapshot"
+      ]
+    }
+  ],
+  "adapter_paths": [
+    "adapters/unity/adapter_interface.md",
+    "adapters/unity/entity_spawn_bridge.md",
+    "adapters/unity/environment_bridge.md",
+    "adapters/unreal/adapter_interface.md",
+    "adapters/unreal/entity_spawn_bridge.md",
+    "adapters/unreal/environment_bridge.md",
+    "adapters/godot/adapter_interface.md",
+    "adapters/godot/entity_spawn_bridge.md",
+    "adapters/godot/environment_bridge.md"
+  ]
+}

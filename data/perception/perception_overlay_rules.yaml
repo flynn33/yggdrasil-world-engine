@@ -541,3 +541,27 @@ implementation_handoff_notes:
     - perception_state_schema.json
     - perception_overlay_examples.yaml
     - perception_multiplayer_contract.md
+
+ash_asp_core_math_rebuild_addendum:
+  authority: YWE_ASP_CORE_MATH_REBUILD_PACKAGE
+  math_basis: F2^9 full-state ASH vector with fixed 16 canonical codewords
+  transition_semantics: "x' = x XOR c"
+  required_packets:
+    - CosmicPatternSnapshot
+    - DiagnosticEnvelope
+    - GenerationPlan
+  provenance_fields:
+    - cosmic_pattern_snapshot_ref
+    - diagnostic_ref
+    - generation_plan_ref
+    - source_ash_refs
+  boundary_rule: generation planning may guide materialization but must not author ASH truth or YWE domain truth
+
+  perception_records:
+    - PerceptionStateRecord
+    - OverlayManifest
+    - VisibilityRules
+    - truth_substrate_ref
+    - perception_overlay_does_not_rewrite_shared_world_truth
+    - geography_rewrite
+  overlay_rule: geography_rewrite is forbidden by perception_overlay_does_not_rewrite_shared_world_truth.

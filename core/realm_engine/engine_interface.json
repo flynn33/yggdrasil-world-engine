@@ -4,7 +4,9 @@
   "description": "Interface definition for the Realm Engine",
   "purpose": "Manages the nine fixed cosmological realms, player attunement, realm shifts, and thin veil locations",
   "layer": "core",
-  "dependencies": ["ywe.core.cosmology_engine"],
+  "dependencies": [
+    "ywe.core.cosmology_engine"
+  ],
   "inputs": [
     {
       "name": "player_state",
@@ -15,6 +17,21 @@
       "name": "location",
       "type": "Location",
       "description": "Current player location to check for thin veil sites"
+    },
+    {
+      "name": "cosmic_pattern_snapshot",
+      "type": "CosmicPatternSnapshot",
+      "description": "CosmicPatternSnapshot required by ASH remediation contract."
+    },
+    {
+      "name": "diagnostic_envelope",
+      "type": "DiagnosticEnvelope",
+      "description": "DiagnosticEnvelope required by ASH remediation contract."
+    },
+    {
+      "name": "generation_plan",
+      "type": "GenerationPlan",
+      "description": "GenerationPlan required by ASH remediation contract."
     }
   ],
   "outputs": [
@@ -27,32 +44,72 @@
       "name": "realm_overlay",
       "type": "RealmOverlay",
       "description": "Realm-specific overlay data for the current location"
+    },
+    {
+      "name": "realm_transition_resolution",
+      "type": "RealmTransitionResolution",
+      "description": "RealmTransitionResolution emitted under ASH remediation contract."
+    },
+    {
+      "name": "worldstate_delta_packet",
+      "type": "WorldstateDeltaPacket",
+      "description": "WorldstateDeltaPacket emitted under ASH remediation contract."
+    },
+    {
+      "name": "realm_boundary_profile_record",
+      "type": "RealmBoundaryProfileRecord",
+      "description": "RealmBoundaryProfileRecord emitted under ASH remediation contract."
     }
   ],
   "methods": [
     {
       "name": "get_realm_attunement",
       "description": "Return player attunement level for a specific realm",
-      "parameters": ["player_id", "realm_id"],
+      "parameters": [
+        "player_id",
+        "realm_id"
+      ],
       "returns": "float"
     },
     {
       "name": "check_realm_shift_eligible",
       "description": "Check if a player can shift to a target realm at their current location",
-      "parameters": ["player_id", "target_realm_id", "location_id"],
+      "parameters": [
+        "player_id",
+        "target_realm_id",
+        "location_id"
+      ],
       "returns": "boolean"
     },
     {
       "name": "execute_realm_shift",
       "description": "Shift a player to a target realm",
-      "parameters": ["player_id", "target_realm_id"],
+      "parameters": [
+        "player_id",
+        "target_realm_id"
+      ],
       "returns": "RealmShiftResult"
     },
     {
       "name": "add_attunement",
       "description": "Add realm attunement to a player for a specific realm",
-      "parameters": ["player_id", "realm_id", "amount"],
+      "parameters": [
+        "player_id",
+        "realm_id",
+        "amount"
+      ],
       "returns": "void"
+    },
+    {
+      "name": "resolve_realm_transition",
+      "description": "Resolve realm transition permissions from ASH provenance and boundary profile.",
+      "parameters": [
+        "CosmicPatternSnapshot",
+        "DiagnosticEnvelope",
+        "GenerationPlan",
+        "RealmBoundaryProfileRecord"
+      ],
+      "returns": "RealmTransitionResolution"
     }
   ],
   "events_published": [
@@ -68,6 +125,31 @@
   "invariants": [
     "Realms are fixed cosmological states and cannot be created or destroyed",
     "Players always have access to the Physical Realm",
-    "Realm shift requires both attunement threshold and thin veil location"
-  ]
+    "Realm shift requires both attunement threshold and thin veil location",
+    "CosmicPatternSnapshot and DiagnosticEnvelope provenance is required for meaningful generation.",
+    "GenerationPlan is required before any materialized output.",
+    "source_ash_refs, diagnostic_ref, and generation_plan_ref must remain traceable."
+  ],
+  "ash_remediation_contract": {
+    "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
+    "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
+    "required_inputs": [
+      "CosmicPatternSnapshot",
+      "DiagnosticEnvelope"
+    ],
+    "required_materialization": "GenerationPlan",
+    "provenance_fields": [
+      "cosmic_pattern_snapshot_ref",
+      "diagnostic_ref",
+      "generation_plan_ref",
+      "source_ash_refs"
+    ],
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "records": [
+      "RealmTransitionResolution",
+      "WorldstateDeltaPacket",
+      "RealmBoundaryProfileRecord",
+      "CosmicPatternSnapshot"
+    ]
+  }
 }

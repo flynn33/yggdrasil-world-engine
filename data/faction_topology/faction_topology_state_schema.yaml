@@ -222,3 +222,26 @@ example_state_patterns:
     summary: >
       Dominant faction enters active schism with splinter claims around a
       threshold gate, increasing reform pressure and perception divergence.
+
+ash_asp_core_math_rebuild_addendum:
+  authority: YWE_ASP_CORE_MATH_REBUILD_PACKAGE
+  math_basis: F2^9 full-state ASH vector with fixed 16 canonical codewords
+  transition_semantics: "x' = x XOR c"
+  required_packets:
+    - CosmicPatternSnapshot
+    - DiagnosticEnvelope
+    - GenerationPlan
+  provenance_fields:
+    - cosmic_pattern_snapshot_ref
+    - diagnostic_ref
+    - generation_plan_ref
+    - source_ash_refs
+  boundary_rule: generation planning may guide materialization but must not author ASH truth or YWE domain truth
+
+  faction_records:
+    - FactionDelta
+    - ClaimRecord
+    - ReformCurrent
+    - SuccessionTrack
+    - WorldstateDeltaPacket
+  topology_rule: FactionDelta must attach WorldstateDeltaPacket provenance when claims, reforms, or succession tracks change.

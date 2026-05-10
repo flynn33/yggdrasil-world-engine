@@ -11,6 +11,9 @@ This bundle was created to prevent Codex from failing on missing referenced file
 - `ash_compliance_checklist.md` -> `docs/ash_compliance/ash_compliance_checklist.md`
 - `artifact_system_rules.yaml` -> `modules/artifact_engine/artifact_system_rules.yaml`
 - `creature_system_rules.yaml` -> `modules/creature_engine/creature_system_rules.yaml`
+- `YWE_ASP_CORE_MATH_REBUILD_PACKAGE` -> `specs/`, `core/ash_pattern_engine/canonical/`, `data/schemas/ash_generation_packet_schema.json`, `data/validation/ash_generation_gate_contract.json`
+- `YWE_ASP_CORE_MATH_REBUILD_PACKAGE.conformance` -> `conformance/`
+- `YWE_ASP_CORE_MATH_REBUILD_PACKAGE.validators` -> `.github/scripts/ywe_package_acceptance_check.py`, `.github/scripts/semantic_integrity_check.py`, `.github/scripts/downstream_conformance_check.py`, `.github/scripts/math_integrity_check.py`
 
 ## Present as placeholders
 - `player_origin_arc_rules.yaml` -> `core/narrative_engine/player_origin_arc_rules.yaml`
@@ -34,3 +37,11 @@ This bundle was created to prevent Codex from failing on missing referenced file
 - `ywe_canonical_data_domains.md` -> `docs/architecture/ywe_canonical_data_domains.md`
 - `ywe_cross_module_dependency_map.md` -> `docs/architecture/ywe_cross_module_dependency_map.md`
 - `ywe_invariant_guardrails.md` -> `docs/architecture/ywe_invariant_guardrails.md`
+
+## ASH/ASP core math rebuild overlay
+
+The active `ash-remediation` branch applies the
+`YWE_ASP_CORE_MATH_REBUILD_PACKAGE` as an overlay on the restored repository
+baseline. Existing planning, engine, rule, data, and handoff documents remain
+present; the remediation adds ASH provenance, diagnostic, and materialization
+contracts in place rather than replacing the original design content.
