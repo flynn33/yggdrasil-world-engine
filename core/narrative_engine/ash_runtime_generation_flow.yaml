@@ -14,7 +14,7 @@ global_invariants:
   - ASH is the upstream mathematical and generative authority for YWE.
   - YWE consumes ASH-derived state, diagnostics, codeword traces, and generation plans.
   - Player actions influence future generation context; they do not mutate ASH math.
-  - All meaningful generation must preserve source_ash_refs, diagnostic_ref, and generation_plan_ref.
+  - All meaningful generation must preserve source_ash_refs, diagnostic_ref, generation_plan_ref, requested_manifest_kind, and worldstate_delta_policy.
   - Planning precedes materialization.
   - Host adapters materialize approved manifests but do not author truth.
 
