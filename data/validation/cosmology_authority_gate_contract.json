@@ -1,0 +1,20 @@
+{
+  "schema_id": "ywe.cosmology_authority_gate_contract.v1",
+  "version": "0.1.0",
+  "required_authority_stack": "Where Ravens Wait: Eternal Reckoning is the game/narrative layer; Yggdrasil World Engine is the agnostic engine; the ASH Cosmological Model is the upstream foundation for YWE and its systems; the ASH Pattern System is a YWE component for diagnostics, pattern integrity, recovery, containment, resilience, conformance, and update/patch stability.",
+  "required_files": [
+    "docs/architecture/ywe_cosmology_authority_contract.md",
+    "docs/architecture/ash_pattern_system_component_contract.md"
+  ],
+  "required_roles": {
+    "Where Ravens Wait: Eternal Reckoning": "game/narrative layer",
+    "Yggdrasil World Engine": "agnostic game engine",
+    "ASH Cosmological Model": "upstream foundation for YWE and its systems",
+    "ASH Pattern System": "YWE component for diagnostics/resilience/stability"
+  },
+  "reject_if_unqualified": [
+    "ASH Pattern System is upstream from YWE",
+    "ASH Pattern System is the upstream authority",
+    "all systems are based on ASH Pattern System math"
+  ]
+}

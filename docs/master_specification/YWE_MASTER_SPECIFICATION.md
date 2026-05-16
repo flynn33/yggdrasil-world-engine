@@ -8,6 +8,24 @@ Cosmology Model: **ASH Model**
 
 ---
 
+## Current Authority Stack
+
+Where Ravens Wait: Eternal Reckoning is the game/narrative layer. Yggdrasil
+World Engine is the agnostic game engine. The ASH Cosmological Model is the
+upstream foundation for YWE and its systems. The ASH Pattern System is a YWE
+component for diagnostics, pattern integrity, recovery, containment,
+resilience, conformance, and update/patch stability.
+
+YWE systems interpret and manifest the ASH Cosmological Model through
+engine-agnostic contracts. ASH Pattern System checks and contracts preserve
+pattern integrity, diagnostic coverage, recovery behavior, safe failure,
+conformance, and patch/update stability.
+
+The controlling authority contract for this clarification is
+`docs/architecture/ywe_cosmology_authority_contract.md`.
+
+---
+
 # 1. PROJECT OVERVIEW
 
 The **Yggdrasil World Engine (YWE)** is a **code-agnostic cosmic narrative simulation engine** designed to generate:
@@ -27,7 +45,12 @@ Rendering engines (Unity, Unreal, Godot) function as **host environments**.
 
 ## ASH Upstream Authority
 
-ASH is the upstream mathematical and generative authority for YWE.
+Historical note: earlier repository language described ASH Pattern System as
+the upstream mathematical and generative authority for YWE. That framing is now
+superseded by the current authority stack: ASH Cosmological Model is the
+foundation for YWE and its systems, and ASH Pattern System is a YWE component
+for diagnostics, integrity, recovery, containment, resilience, conformance, and
+update/patch stability.
 
 ```text
 ASH Pattern System

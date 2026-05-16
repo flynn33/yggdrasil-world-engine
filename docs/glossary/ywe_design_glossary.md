@@ -38,6 +38,24 @@ When a future document introduces a new important term, it should either:
 
 # 3. Glossary
 
+## ASH Cosmological Model
+The upstream foundation for YWE and its systems.
+
+The ASH Cosmological Model owns the cosmological meaning layer: nine planes of
+existence, axioms A1-A6, existence potential Φ, pattern vectors, branching
+choice realization, leaf branch realities, wolf attractor logic, bloodline
+resonance meaning, and Shadow / Void / Divine Core roles.
+
+## ASH Pattern System
+A YWE component for diagnostics, pattern integrity, recovery, containment,
+resilience, conformance, and update/patch stability.
+
+Earlier planning sometimes used ASH Pattern System as shorthand for the
+upstream mathematical layer. That shorthand is superseded by the current
+authority stack: ASH Cosmological Model is the upstream foundation for YWE,
+while ASH Pattern System is a YWE component that protects and stabilizes engine
+systems.
+
 ## Activation
 The framework-level act of making a module or subsystem operational in a runtime context.
 
@@ -71,6 +89,21 @@ The process by which current cosmic and symbolic state is interpreted into activ
 
 This is the root of all meaningful procedural generation.
 No major content system should bypass it.
+
+## Where Ravens Wait: Eternal Reckoning
+The game and narrative layer built on the Yggdrasil World Engine.
+
+Where Ravens Wait: Eternal Reckoning owns player-facing story identity,
+specific quests, specific locations, scenes, characters, prose, dialogue, and
+content direction. It is not the agnostic engine.
+
+## Yggdrasil World Engine
+The agnostic game engine.
+
+Yggdrasil World Engine owns engine-agnostic contracts, runtime systems,
+worldstate deltas, feature engine interfaces, host adapter boundaries, and
+repository governance. It is not merely the game title.
+
 
 ## Archetype
 A reusable symbolic pattern category used by the engine to interpret meaning.

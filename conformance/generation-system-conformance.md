@@ -4,11 +4,14 @@ Date: 2026-05-09
 
 ## Authority Boundary
 
-The ASH Pattern System is the operating-math authority for state space,
-codewords, transitions, diagnostics, recovery, containment, and generation
-planning. YWE is the downstream domain interpretation layer. Adapters and host
-implementations may materialize emitted plans, but they must not author ASH
-truth or YWE domain truth.
+Current authority clarification, 2026-05-16: this conformance file is preserved
+as ASH Pattern System component stability and generation-packet evidence. The
+ASH Cosmological Model is the upstream foundation for YWE and its systems. The
+ASH Pattern System is a YWE component for state consistency, diagnostics,
+recovery, containment, conformance, generation-plan consistency, and
+update/patch stability. YWE is the downstream domain interpretation layer.
+Adapters and host implementations may materialize emitted plans, but they must
+not author ASH truth or YWE domain truth.
 
 ASH is also the upstream generative authority for meaningful YWE generation.
 YWE consumes ASH-derived state, diagnostics, codeword traces, and generation

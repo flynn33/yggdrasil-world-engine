@@ -2,6 +2,15 @@
 
 Use this checklist at every major milestone to verify ASH cosmological compliance.
 
+## Authority Clarification
+
+This checklist is now interpreted as ASH Pattern System component integrity,
+stability, conformance, recovery, containment, and drift-prevention guidance.
+It does not make ASH Pattern System the source of cosmology. The ASH
+Cosmological Model is the upstream foundation for YWE and its systems; ASH
+Pattern System is the YWE component that helps preserve conformance through
+diagnostics and update/patch safety.
+
 ## Realm System
 
 - [ ] Nine canonical realms are present and unmodified

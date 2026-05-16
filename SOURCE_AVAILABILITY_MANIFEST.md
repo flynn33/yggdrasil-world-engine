@@ -14,6 +14,7 @@ This bundle was created to prevent Codex from failing on missing referenced file
 - `YWE_ASP_CORE_MATH_REBUILD_PACKAGE` -> `specs/`, `core/ash_pattern_engine/canonical/`, `data/schemas/ash_generation_packet_schema.json`, `data/validation/ash_generation_gate_contract.json`
 - `YWE_ASP_CORE_MATH_REBUILD_PACKAGE.conformance` -> `conformance/`
 - `YWE_ASP_CORE_MATH_REBUILD_PACKAGE.validators` -> `.github/scripts/ywe_package_acceptance_check.py`, `.github/scripts/semantic_integrity_check.py`, `.github/scripts/downstream_conformance_check.py`, `.github/scripts/math_integrity_check.py`
+- `YWE_COSMOLOGY_AUTHORITY_REPOSITORY_REMEDIATION_PACKAGE` -> `docs/architecture/ywe_cosmology_authority_contract.md`, `docs/architecture/ash_pattern_system_component_contract.md`, `docs/architecture/ash_cosmological_model_source_map.md`, `data/validation/cosmology_authority_gate_contract.json`, `data/validation/repository_drift_guardrail_rules.json`
 
 ## Present as placeholders
 - `player_origin_arc_rules.yaml` -> `core/narrative_engine/player_origin_arc_rules.yaml`
@@ -45,3 +46,12 @@ The active `ash-remediation` branch applies the
 baseline. Existing planning, engine, rule, data, and handoff documents remain
 present; the remediation adds ASH provenance, diagnostic, and materialization
 contracts in place rather than replacing the original design content.
+
+## Cosmology authority remediation overlay
+
+The active cosmology authority remediation clarifies that the ASH Cosmological
+Model is the upstream foundation for YWE and its systems, while the ASH Pattern
+System is a YWE component for diagnostics, pattern integrity, recovery,
+containment, resilience, conformance, and update/patch stability. Prior ASH
+Pattern System conformance work remains accepted and preserved as component
+evidence under the corrected authority stack.

@@ -6,21 +6,34 @@ Status: Forsetti-compatible module baseline
 
 ## ASH Upstream Authority Rule
 
-ASH is the upstream mathematical and generative authority for YWE. All core
-and feature modules consume ASH authority through the shared packet spine
-defined in `ash_upstream_authority_contract.md`.
+This section title is retained as a superseded acceptance marker. Current
+module authority language is the ASH Cosmology Authority Rule below.
+
+## ASH Cosmology Authority Rule
+
+ASH Cosmological Model is the upstream foundation for YWE and its systems. ASH
+Pattern System is a YWE component for diagnostics, pattern integrity, recovery,
+containment, resilience, conformance, and update/patch stability. All core and
+feature modules interpret the ASH Cosmological Model through YWE contracts and
+may consume ASH Pattern System component diagnostics through the shared packet
+spine defined in `ash_upstream_authority_contract.md`. The shared packet spine
+remains valid as component-level diagnostic, conformance, and stability
+evidence.
 
 The module authority chain is:
 
 ```text
-ASH Pattern System
+ASH Cosmological Model
   -> Yggdrasil World Engine
-    -> YWE game systems / feature engines
-      -> platform-specific runtime implementations
+    -> ASH Pattern System component and YWE runtime systems
+      -> YWE feature engines
+        -> platform-specific runtime implementations
 ```
 
 YWE consumes ASH-derived state, diagnostics, codeword traces, and generation
-plans. Feature engines specialize ASH-derived interpretation into manifests.
+plans. Feature engines specialize ASH Cosmological Model-derived
+interpretation into manifests and may use ASH Pattern System component checks
+for stability.
 No module may redefine ASH math, author local symbolic grammar, bypass ASH
 diagnostics, or materialize meaningful content before a `GenerationPlan`.
 

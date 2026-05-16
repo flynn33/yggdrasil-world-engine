@@ -2,15 +2,20 @@ version: "1.0.0"
 status: active_contract
 flow_id: ywe.core.narrative_engine.ash_runtime_generation_flow.v1
 authority_contract: docs/architecture/ash_upstream_authority_contract.md
+cosmology_authority_contract: docs/architecture/ywe_cosmology_authority_contract.md
+component_contract: docs/architecture/ash_pattern_system_component_contract.md
 
 meta:
   system: ash_runtime_generation_flow
-  purpose: Defines how YWE submits context into ASH-governed generation and routes ASH-derived output into engine-agnostic manifests.
+  purpose: Defines how YWE submits context into ASH-governed generation and routes ASH Cosmological Model-derived output into engine-agnostic manifests with ASH Pattern System component diagnostics and stability checks.
   package_basis:
     - YWE_ASP_CORE_MATH_REBUILD_PACKAGE
     - YWE_ASH_UPSTREAM_AUTHORITY_PACKAGE
+    - YWE_COSMOLOGY_AUTHORITY_REPOSITORY_REMEDIATION_PACKAGE
 
 global_invariants:
+  - ASH Cosmological Model is the upstream foundation for YWE and its systems.
+  - ASH Pattern System is a YWE component for diagnostics, pattern integrity, recovery, containment, resilience, conformance, and update/patch stability.
   - ASH is the upstream mathematical and generative authority for YWE.
   - YWE consumes ASH-derived state, diagnostics, codeword traces, and generation plans.
   - Player actions influence future generation context; they do not mutate ASH math.

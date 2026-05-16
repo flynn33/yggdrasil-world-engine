@@ -14,6 +14,7 @@ This inventory tracks three distinct repo-truth states:
 - Master spec authority artifact: present at `docs/master_specification/YWE_MASTER_SPECIFICATION.md`
 - Bootstrap prompt authority artifact: present at `YWE_REPOSITORY_BOOTSTRAP_PROMPT.md`
 - ASH/ASP core math rebuild overlay: present on `ash-remediation`
+- Cosmology authority remediation overlay: present as current authority-stack clarification; separate from placeholder-backed gameplay artifacts
 
 ## Resolved Canonical Artifacts
 
@@ -31,6 +32,9 @@ This inventory tracks three distinct repo-truth states:
 | `lore/wolf_canon/two_wolves_and_balance.md` | Canonical | Promoted as the corrected wolf canon authority for symbiosis, balance, and temporary coherence loss |
 | `docs/architecture/authored_override_and_tooling_notes.md` | Canonical | Promoted as authored-control and tooling boundary authority |
 | `docs/architecture/realm_truth_boundary_contract.md` | Canonical | Promoted as boundary contract separating truth and interpretive layers |
+| `docs/architecture/ywe_cosmology_authority_contract.md` | Canonical | Promoted as current game/engine/foundation/component authority stack |
+| `docs/architecture/ash_pattern_system_component_contract.md` | Canonical | Promoted as ASH Pattern System component role contract |
+| `docs/architecture/ash_cosmological_model_source_map.md` | Canonical support | Maps ASH Cosmological Model source concepts to repository target areas |
 
 ## ASH/ASP Core Math Rebuild Artifacts
 

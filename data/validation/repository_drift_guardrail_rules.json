@@ -1,0 +1,55 @@
+{
+  "schema_id": "ywe.repository_drift_guardrail_rules.v1",
+  "version": "0.1.0",
+  "scan_extensions": [
+    ".md",
+    ".json",
+    ".yaml",
+    ".yml"
+  ],
+  "ignore_paths": [
+    ".git/",
+    "__MACOSX/",
+    "core/ash_pattern_engine/canonical/",
+    "specs/"
+  ],
+  "forbidden_unqualified_phrases": [
+    {
+      "phrase": "ASH Pattern System is upstream from YWE",
+      "severity": "fail"
+    },
+    {
+      "phrase": "ASH is upstream from YWE",
+      "severity": "fail"
+    },
+    {
+      "phrase": "ASH Pattern System is the upstream authority",
+      "severity": "fail"
+    },
+    {
+      "phrase": "all systems are based on ASH Pattern System math",
+      "severity": "fail"
+    },
+    {
+      "phrase": "YWE is based on ASH Pattern System math",
+      "severity": "fail"
+    },
+    {
+      "phrase": "ASH Pattern System is the source of cosmology",
+      "severity": "fail"
+    }
+  ],
+  "allowed_context_terms": [
+    "superseded",
+    "historical",
+    "earlier draft",
+    "legacy phrasing",
+    "incorrect framing"
+  ],
+  "required_present_phrases": [
+    "Where Ravens Wait: Eternal Reckoning is the game/narrative layer",
+    "Yggdrasil World Engine is the agnostic engine",
+    "ASH Cosmological Model is the upstream foundation for YWE",
+    "ASH Pattern System is a YWE component"
+  ]
+}

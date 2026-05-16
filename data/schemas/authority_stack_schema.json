@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ywe.authority_stack.schema.v1",
+  "title": "YWE Authority Stack Schema",
+  "type": "object",
+  "required": [
+    "game_layer",
+    "engine_layer",
+    "foundation_layer",
+    "component_layer"
+  ],
+  "properties": {
+    "game_layer": {
+      "const": "Where Ravens Wait: Eternal Reckoning"
+    },
+    "engine_layer": {
+      "const": "Yggdrasil World Engine"
+    },
+    "foundation_layer": {
+      "const": "ASH Cosmological Model"
+    },
+    "component_layer": {
+      "const": "ASH Pattern System"
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}
