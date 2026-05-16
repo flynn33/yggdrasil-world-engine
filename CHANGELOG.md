@@ -5,6 +5,15 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.3] — 2026-05-16
+
+### Changes
+- Merge pull request #39 from flynn33/remediation/cosmology-authority-stack
+- docs: align cosmology authority stack
+
+---
+
+
 ## [2.0.2] — 2026-05-10
 
 ### Added
