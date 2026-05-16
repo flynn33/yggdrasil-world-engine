@@ -2,8 +2,25 @@
 
 Date: 2026-05-10  
 Project: Yggdrasil World Engine  
-Status: Canonical architecture contract  
+Status: Superseded component packet-spine contract
 Scope: Engine-agnostic authority, generation flow, feature-engine boundaries
+
+---
+
+## Supersession Notice
+
+This document is superseded by `ywe_cosmology_authority_contract.md` and
+`ash_pattern_system_component_contract.md`.
+
+Current authority stack: ASH Cosmological Model is the upstream foundation for
+YWE and its systems. ASH Pattern System remains important, but it is a
+component of YWE for pattern integrity, diagnostics, recovery, containment,
+resilience, conformance, and update/patch stability. The packet spine,
+diagnostic, conformance, and materialization-boundary content in this document
+is preserved as ASH Pattern System component evidence.
+
+Historical wording below may describe ASH Pattern System as upstream authority.
+That framing is no longer current.
 
 ---
 

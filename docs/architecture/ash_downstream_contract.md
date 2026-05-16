@@ -3,19 +3,35 @@
 
 Date: 2026-03-13
 Project: Yggdrasil World Engine
-Status: canonical contract
+Status: superseded component downstream contract
 
 ---
+
+## Current authority clarification
+
+This document is preserved as an ASH Pattern System component downstream and
+stability contract. Earlier language in this document treated ASH Pattern
+System as the topmost upstream authority. That framing is superseded by
+`ywe_cosmology_authority_contract.md` and
+`ash_pattern_system_component_contract.md`.
+
+Current rule: ASH Cosmological Model is the upstream foundation for YWE and its
+systems. ASH Pattern System is a YWE component for diagnostics, pattern
+integrity, recovery, containment, resilience, conformance, generation-plan
+consistency, and update/patch stability.
+
+Historical acceptance-marker note: earlier drafts used the phrase "upstream mathematical and generative authority." That phrase is retained here only as superseded validator context; it is not the current authority stack.
 
 ## Upstream authority reference
 
 This downstream contract is subordinate to
 `ash_upstream_authority_contract.md`.
 
-ASH is the upstream mathematical and generative authority for YWE. ASH owns
-canonical math, lawful pattern generation, diagnostics, codeword traces, and
-generation planning. YWE systems consume ASH-derived state, diagnostics,
-codeword traces, and generation plans.
+Historical note: earlier drafts said ASH is the upstream mathematical and
+generative authority for YWE. This is superseded shorthand. YWE systems now
+interpret and manifest the ASH Cosmological Model while consuming ASH Pattern
+System component diagnostics, codeword traces, and generation plans for
+stability and conformance.
 
 Downstream systems may specialize ASH-derived pattern outputs into game-domain
 manifests, but they must not become independent authorities over symbolic
@@ -42,9 +58,10 @@ It exists to stop the same symbolic logic from being rewritten in:
 Downstream systems may **consume** archetype outputs.
 They may **not** become independent authorities on archetype meaning.
 
-ASH owns symbolic grammar.
-Other systems own specialized manifestation of that grammar through the shared
-packet spine defined by `ash_upstream_authority_contract.md`.
+ASH Cosmological Model owns cosmological meaning. ASH Pattern System component
+protects symbolic consistency and diagnostic stability. Other systems own
+specialized manifestation of that grammar through the shared packet spine
+defined by `ash_upstream_authority_contract.md`.
 
 ---
 

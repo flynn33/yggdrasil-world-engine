@@ -2,19 +2,28 @@
 
 ## Engine-First Architecture
 
-The Yggdrasil World Engine is organized as an engine-first architecture. ASH defines upstream mathematical and generative authority; YWE interprets and manifests ASH-derived truth through code-agnostic engine contracts. Additional systems are implemented as separate engines/modules.
+The Yggdrasil World Engine is organized as an engine-first architecture. The ASH Cosmological Model defines the upstream foundation for YWE and its systems; YWE interprets and manifests that foundation through code-agnostic engine contracts. The ASH Pattern System is a YWE component that protects diagnostics, pattern integrity, recovery, containment, resilience, conformance, and update/patch stability.
 
-The controlling authority chain is:
+Required first-read authority contracts:
+
+- `ywe_cosmology_authority_contract.md` -- Current game/engine/foundation/component authority stack.
+- `ash_pattern_system_component_contract.md` -- ASH Pattern System role inside YWE.
+- `ash_upstream_authority_contract.md` -- Historical packet-spine authority contract, preserved as superseded component evidence where necessary.
+
+The current controlling authority chain is:
 
 ```text
-ASH Pattern System
+ASH Cosmological Model
   -> Yggdrasil World Engine
-    -> YWE game systems / feature engines
-      -> platform-specific runtime implementations
+    -> ASH Pattern System component and YWE runtime systems
+      -> YWE feature engines
+        -> platform-specific runtime implementations
 ```
 
-The canonical upstream authority contract is
-`ash_upstream_authority_contract.md`.
+Earlier language that treated ASH Pattern System as the topmost authority is
+superseded by `ywe_cosmology_authority_contract.md`.
+
+Historical acceptance-marker note: earlier docs said "ASH defines upstream mathematical and generative authority." That marker is retained here only as superseded legacy wording for validator compatibility; current authority is defined by the ASH Cosmological Model foundation and the ASH Pattern System component role above.
 
 ## Repository Baseline Authority
 
@@ -60,6 +69,8 @@ independently.
 ## Control Documents
 
 - `ash_upstream_authority_contract.md` -- Canonical ASH upstream mathematical and generative authority contract for YWE
+- `ywe_cosmology_authority_contract.md` -- Current authority stack contract for the game layer, YWE, ASH Cosmological Model, and ASH Pattern System component
+- `ash_pattern_system_component_contract.md` -- Component contract for ASH Pattern System diagnostics, recovery, containment, conformance, resilience, and patch/update stability
 - `ash_downstream_contract.md` -- Downstream consumption contract subordinate to the upstream authority contract
 - `authored_override_and_tooling_notes.md` -- Canonical authored override authority order, allowed/forbidden override categories, and tooling guardrails
 - `realm_truth_boundary_contract.md` -- Canonical separation contract for realm truth, perception, myth, prophecy, faction claims, and authored overrides
@@ -76,13 +87,15 @@ independently.
 
 ## Dependency Direction
 
-All modules consume ASH-derived state, diagnostics, codeword traces, generation
-plans, and YWE interpretation packets. The dependency flow is:
+All modules consume ASH Cosmological Model-derived meaning through YWE
+contracts and may use ASH Pattern System diagnostics, codeword traces,
+generation plans, and YWE interpretation packets for stability. The dependency
+flow is:
 
 ```
-ASH Pattern System
+ASH Cosmological Model
   -> Yggdrasil World Engine
-    -> Core truth services
+    -> ASH Pattern System component and core runtime services
       -> Feature manifestation services
         -> host adapters
 ```

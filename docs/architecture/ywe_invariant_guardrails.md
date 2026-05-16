@@ -6,7 +6,8 @@ Status: YWE and Forsetti guardrail baseline
 
 ## Canon Guardrails
 
-- ASH is the upstream mathematical and generative authority for YWE
+- `cosmology_authority_invariant`: ASH Cosmological Model is the upstream foundation for YWE and its systems
+- `asp_component_invariant`: ASH Pattern System is a YWE component for diagnostics, pattern integrity, recovery, containment, resilience, conformance, and update/patch stability
 - No YWE system may redefine ASH math
 - YWE consumes ASH-derived state, diagnostics, codeword traces, and generation plans
 - Player actions influence generation context; they do not mutate ASH math
@@ -46,6 +47,12 @@ Every meaningful manifest must retain:
 The following claims are invalid outside rejection tests, red-team checklists,
 or explicit explanations of invalid design patterns:
 
+- ASH Pattern System is the topmost authority
+- ASH Pattern System owns the cosmology
+- ASH Pattern System is upstream from YWE
+- all systems are based on ASH Pattern System math
+- Where Ravens Wait is the engine
+- Yggdrasil World Engine is only the game title
 - YWE owns ASH math
 - YWE defines ASH math
 - YWE mutates ASH math

@@ -18,6 +18,14 @@ architecture extension. It does not reopen ASH remediation; it records ASH as
 the upstream mathematical and generative authority for YWE and defines the
 shared generation packet spine.
 
+Current authority clarification, 2026-05-16: this acceptance evidence is
+preserved as ASH Pattern System component conformance and packet-spine evidence.
+The current repository authority stack is defined by
+`docs/architecture/ywe_cosmology_authority_contract.md`: ASH Cosmological Model
+is the upstream foundation for YWE and its systems, while ASH Pattern System is
+a YWE component for diagnostics, pattern integrity, recovery, containment,
+resilience, conformance, and update/patch stability.
+
 ## Authority
 
 `YWE_ASP_CORE_MATH_REBUILD_PACKAGE` is the active controlling package for the

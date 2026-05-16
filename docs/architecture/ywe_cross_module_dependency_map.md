@@ -6,26 +6,33 @@ Status: one-way dependency baseline
 
 ## Dependency Law
 
-YWE aligns to ASH upstream authority and Forsetti's one-way dependency rule:
+YWE aligns to ASH Cosmological Model authority and Forsetti's one-way
+dependency rule:
 
 ```text
-ASH Pattern System -> YWE
-ASH Pattern System
-  -> YWE ASH consumption / interpretation layer
-  -> Core truth services
-  -> Feature manifestation services
-  -> host adapters
+ASH Cosmological Model
+  -> YWE Core Contracts
+      -> ASH Pattern System component and runtime systems
+          -> Feature Engines
+              -> Host Adapters
 ```
 
-ASH is the upstream mathematical and generative authority for YWE. YWE
-consumes ASH-derived state, diagnostics, codeword traces, and generation plans,
-then interprets them into world and gameplay manifests. Host adapters remain
-downstream materialization surfaces.
+ASH Cosmological Model is the upstream foundation for YWE and its systems. ASH
+Pattern System is a YWE component that provides diagnostics, pattern integrity,
+recovery, containment, resilience, conformance, and update/patch stability.
+YWE interprets ASH-derived meaning into world and gameplay manifests. Host
+adapters remain downstream materialization surfaces.
 
 ## Direct Runtime Dependencies
 
-- `ash_upstream_authority_contract.md`: authoritative architecture contract
-  for upstream ASH authority and downstream YWE interpretation.
+- `ywe_cosmology_authority_contract.md`: authoritative architecture contract
+  for current game/engine/foundation/component authority.
+- `ash_pattern_system_component_contract.md`: component contract for ASH
+  Pattern System diagnostics, conformance, recovery, containment, resilience,
+  and update/patch stability.
+- `ash_upstream_authority_contract.md`: preserved packet-spine contract; earlier
+  ASH Pattern System as topmost authority phrasing is superseded by the current
+  cosmology authority contract.
 - `com.ywe.core.cosmology-engine`: none
 - `com.ywe.core.realm-engine`: cosmology
 - `com.ywe.core.ash-pattern-engine`: cosmology, realm

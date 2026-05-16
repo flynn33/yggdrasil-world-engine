@@ -4,6 +4,27 @@ A cosmology-driven procedural narrative simulation engine based on the ASH Model
 
 ---
 
+## Current Authority Stack
+
+Where Ravens Wait: Eternal Reckoning is the game/narrative layer. Yggdrasil
+World Engine is the agnostic game engine. The ASH Cosmological Model is the
+upstream foundation for YWE and its systems. The ASH Pattern System is a YWE
+component for diagnostics, pattern integrity, recovery, containment,
+resilience, conformance, and update/patch stability.
+
+Yggdrasil World Engine is the agnostic engine.
+
+Current authority contracts:
+
+- `docs/architecture/ywe_cosmology_authority_contract.md`
+- `docs/architecture/ash_pattern_system_component_contract.md`
+
+Earlier repository language may use ASH Pattern System as shorthand for the
+upstream mathematical layer. That shorthand is superseded by the current
+authority stack above.
+
+---
+
 ## Overview
 
 The Yggdrasil World Engine is a **code-agnostic cosmic narrative simulation engine** designed to generate:
@@ -71,9 +92,12 @@ The world does not change -- player perception changes. The same location can be
 
 ### Cosmic Pattern Engine
 
-ASH is the upstream mathematical and generative authority for YWE. No subsystem
-may generate meaningful content independently of ASH-derived state,
-diagnostics, codeword traces, and generation plans.
+The ASH Cosmological Model is the upstream cosmological and generative
+foundation for YWE and its systems. The ASH Pattern System is a YWE component
+that protects pattern integrity, diagnostics, recovery, containment,
+conformance, code resilience, and update/patch stability. No subsystem may
+generate meaningful content independently of ASH-derived state, diagnostics,
+codeword traces, and generation plans.
 
 ### ASH/ASP Core Math Baseline
 
@@ -90,8 +114,9 @@ those plans, but they must not author ASH truth or YWE domain truth.
 
 ### ASH Upstream Generation Authority
 
-The repository now records ASH upstream generative authority in
-`docs/architecture/ash_upstream_authority_contract.md`.
+The historical upstream-generation contract remains as ASH Pattern System
+component and packet-spine evidence, but the current repository authority stack
+is defined by `docs/architecture/ywe_cosmology_authority_contract.md`.
 
 ```text
 ASH Pattern System

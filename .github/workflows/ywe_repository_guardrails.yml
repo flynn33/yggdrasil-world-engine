@@ -1,0 +1,38 @@
+name: YWE Repository Guardrails
+
+on:
+  pull_request:
+    branches: [ main, master ]
+  push:
+    branches: [ main, master ]
+
+jobs:
+  guardrails:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run existing repository checks
+        run: |
+          if [ -f scripts/run_checks.sh ]; then bash scripts/run_checks.sh; fi
+
+      - name: Validate JSON files
+        run: python scripts/check_json_integrity.py
+
+      - name: Check required authority contracts
+        run: python scripts/check_required_contracts.py
+
+      - name: Scan for authority-stack drift
+        run: python scripts/check_authority_stack.py --config data/validation/repository_drift_guardrail_rules.json
+
+      - name: Check non-destructive diff
+        if: github.event_name == 'pull_request'
+        run: python scripts/check_non_destructive_diff.py --base origin/${{ github.base_ref }} --head HEAD
