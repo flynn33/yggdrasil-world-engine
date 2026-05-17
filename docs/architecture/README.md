@@ -23,6 +23,10 @@ Phase 10 player-state contract:
 
 - `player_runtime_state_v1.md` -- Canonical player-specific runtime state, runtime-state deltas, branch context references, and generation-context boundary rules.
 
+Phase 11 worldstate and location mutation contract:
+
+- `worldstate_location_mutation_v1.md` -- Canonical persistent consequence, scoped location mutation, worldstate commit records, diagnostic no-ops, and future-generation bias boundary rules.
+
 The current controlling authority chain is:
 
 ```text
@@ -136,4 +140,14 @@ Leaf Branch Reality
   -> Player Runtime State
     -> YWEGenerationContextPacket.player_runtime_state_ref
       -> ASH-governed generation
+```
+
+Phase 11 worldstate-location dependency flow:
+
+```text
+Player Runtime State
+  -> WorldstateDeltaPacket
+    -> LocationMutationState
+      -> FutureGenerationBiasUpdate
+        -> YWEGenerationContextPacket
 ```

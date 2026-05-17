@@ -40,7 +40,9 @@
         "faction_reaction",
         "myth_threshold_crossed",
         "prophecy_pressure_changed",
-        "player_progression_event"
+        "player_progression_event",
+        "worldstate_mutation",
+        "location_mutation"
       ]
     },
     "requested_manifest_kind": {
@@ -74,6 +76,21 @@
           "type": "string"
         },
         "branch_event_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "location_state_ref": {
+          "type": "string"
+        },
+        "location_mutation_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "worldstate_mutation_commit_refs": {
           "type": "array",
           "items": {
             "type": "string"

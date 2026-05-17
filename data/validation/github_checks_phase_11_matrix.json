@@ -1,0 +1,22 @@
+{
+  "contract_id": "ywe.phase_11.github_checks_matrix",
+  "version": "0.1.0",
+  "implemented_workflow": ".github/workflows/ywe_repository_guardrails.yml",
+  "implemented_job": "guardrails",
+  "implemented_steps": [
+    "Check worldstate and location mutation"
+  ],
+  "recommended_checks": [
+    {
+      "name": "YWE / Worldstate Location Mutation Guardrail",
+      "purpose": "Ensures Phase 11 worldstate and location mutation contracts, schema records, authority boundaries, packet-spine markers, and examples remain present.",
+      "required_for_pr": true
+    }
+  ],
+  "do_not_auto_enable_branch_protection": true,
+  "owner_approval_required_for": [
+    "branch_protection_changes",
+    "required_status_check_changes",
+    "workflow_permission_changes"
+  ]
+}

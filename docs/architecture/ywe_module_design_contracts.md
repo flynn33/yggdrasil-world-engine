@@ -66,6 +66,8 @@ diagnostics, or materialize meaningful content before a `GenerationPlan`.
 - generation context enters ASH-governed generation through `YWEGenerationContextPacket`
 - `YWEGenerationContextPacket.player_runtime_state_ref` points to `PlayerRuntimeState`, the Phase 10 player-specific runtime truth contract
 - player branch context must flow through `current_leaf_branch_ref`, `branch_generation_context_refs`, and `branch_event_refs`; feature modules may read those refs but may not author canonical player state directly
+- persistent consequence must flow through `WorldstateDeltaPacket`; scoped site changes must flow through `LocationMutationState` and `LocationMutationDelta`
+- location mutation may influence future generation context through `FutureGenerationBiasUpdate`, but it may not rewrite base ontology or bypass diagnostic evidence
 - feature modules receive ASH-derived interpretation through `YWEInterpretationPacket`
 - modules activate through Forsetti lifecycle rules
 - modules communicate through framework-mediated channels only

@@ -62,6 +62,7 @@ run_check "Discussion Agent Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/github/d
 run_check "Discussion Topic Generator Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/github/discussion_topic_agent.py" --validate-config --root "$ROOT_DIR"
 run_check "Discussion Moderation Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/github/discussion_moderation_agent.py" --validate-config --root "$ROOT_DIR"
 run_check "Player Runtime State Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_player_runtime_state.py" "$ROOT_DIR"
+run_check "Worldstate Location Mutation Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_worldstate_location_mutation.py" "$ROOT_DIR"
 
 echo "=========================================="
 echo "Results: $PASS passed, $FAIL failed"

@@ -1,0 +1,84 @@
+{
+  "record_type": "WorldstateDeltaPacket",
+  "version": "1.0.0",
+  "delta_id": "worldstate_delta.ravenfall_gate.oath_revealed.0001",
+  "sequence_id": 1,
+  "source_resolution_payload": "resolution_payload.ravenfall_gate.reveal_oath.0001",
+  "source_branch_event_ref": "branch_event.ravenfall_gate.reveal_oath.0001",
+  "player_runtime_state_ref": "player_runtime_state.current",
+  "current_leaf_branch_ref": "leaf_branch.ravenfall_gate.reveal_oath.0001",
+  "affected_location_refs": [
+    "location.ravenfall_gate"
+  ],
+  "location_mutation_refs": [
+    "location_mutation_delta.ravenfall_gate.oath_revealed.0001"
+  ],
+  "consequence_domains": [
+    "local_world_condition",
+    "location_state",
+    "myth_seed_state",
+    "future_generation_bias"
+  ],
+  "mutations": [
+    {
+      "operation_id": "mutation.ravenfall_gate.public_oath_state.0001",
+      "domain": "location_state",
+      "operation": "set_status",
+      "target_ref": "location_state.ravenfall_gate.current",
+      "evidence_refs": [
+        "branch_event.ravenfall_gate.reveal_oath.0001",
+        "diagnostic.ravenfall_gate.reveal_oath.0001"
+      ]
+    },
+    {
+      "operation_id": "mutation.ravenfall_gate.public_myth_seed.0001",
+      "domain": "myth_seed_state",
+      "operation": "append_ref",
+      "target_ref": "myth_seed.ravenfall_gate.public_oath.0001",
+      "evidence_refs": [
+        "worldstate_delta.ravenfall_gate.oath_revealed.0001"
+      ]
+    }
+  ],
+  "persistence": {
+    "scope": "leaf_branch",
+    "visibility": "branch_local",
+    "retention_policy": "persistent",
+    "append_only": true
+  },
+  "reversibility": {
+    "reversible": true,
+    "requires_new_delta": true,
+    "reversal_constraints": [
+      "requires_followup_oath_resolution",
+      "public_memory_residue_remains_auditable"
+    ]
+  },
+  "authority_boundary": {
+    "can_influence_generation_context": true,
+    "may_mutate_ash_math": false,
+    "may_rewrite_shared_world_truth": false,
+    "may_mutate_base_world_ontology": false,
+    "host_adapter_may_author": false
+  },
+  "ash_provenance": {
+    "cosmic_pattern_snapshot_ref": "cosmic_pattern_snapshot.ravenfall_gate.reveal_oath.0001",
+    "diagnostic_ref": "diagnostic.ravenfall_gate.reveal_oath.0001",
+    "generation_plan_ref": "generation_plan.ravenfall_gate.reveal_oath.0001",
+    "source_ash_refs": [
+      "ASH_Cosmological_Model.A6",
+      "ASH_Cosmological_Model.A1"
+    ],
+    "axiom_diagnostic_refs": [
+      "axiom_diagnostic.ravenfall_gate.reveal_oath.0001"
+    ],
+    "pattern_vector_refs": [
+      "pattern_vector.location.ravenfall_gate.reveal_oath.0001"
+    ],
+    "existence_potential_ref": "existence_potential.ravenfall_gate.reveal_oath.0001"
+  },
+  "future_generation_bias_update_refs": [
+    "future_generation_bias.ravenfall_gate.oath_revealed.0001"
+  ],
+  "diagnostic_noop_ref": null
+}
