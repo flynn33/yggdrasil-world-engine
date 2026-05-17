@@ -5,6 +5,15 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.6] — 2026-05-17
+
+### Changes
+- Merge pull request #42 from flynn33/phase/phase-8-baseline-freeze
+- docs: freeze post-remediation baseline
+
+---
+
+
 ## [2.0.5] — 2026-05-17
 
 ### Changes
