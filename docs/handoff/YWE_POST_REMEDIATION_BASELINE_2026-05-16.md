@@ -102,7 +102,7 @@ docs/handoff/YWE_COSMOLOGY_AUTHORITY_REMEDIATION_HANDOFF_2026-05-16.md
 ## Known Deferred Items
 
 The following design work remains deferred and must be introduced by a separate
-design package:
+design package. This list is roadmap context only, not executable authority.
 
 ```text
 Player Runtime State v1

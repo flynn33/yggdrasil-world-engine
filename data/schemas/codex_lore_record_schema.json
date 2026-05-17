@@ -2,14 +2,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "ywe.schemas.codex_lore_record",
   "version": "1.0.0",
-  "canonical_phase_12_schema_ref": "data/schemas/quest_npc_lore_generation_schema.json",
   "required_inputs": [
     "CosmicPatternSnapshot",
     "WorldstateDeltaPacket",
     "MythRecord",
-    "FactionTopologyState",
-    "NPCManifest",
-    "YWEGenerationContextPacket"
+    "FactionTopologyState"
   ],
   "required_outputs": [
     "CodexRecord",
@@ -23,13 +20,10 @@
         "cosmic_pattern_snapshot_ref",
         "diagnostic_ref",
         "generation_plan_ref",
-        "source_ash_refs",
-        "ywe_generation_context_packet_ref",
         "worldstate_delta_packet_ref",
         "myth_record_ref",
         "faction_topology_state_ref",
-        "visibility_scope_ref",
-        "authority_boundary"
+        "visibility_scope_ref"
       ],
       "forbidden": [
         "locked_canon_overwrite",
@@ -49,7 +43,6 @@
         "worldstate_occurrence",
         "myth_variant",
         "faction_claim",
-        "npc_claim",
         "perception_overlay"
       ]
     },

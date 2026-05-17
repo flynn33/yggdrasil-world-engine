@@ -99,7 +99,8 @@ none
 
 ## Remaining design work
 
-Do not start these in this remediation unless explicitly instructed:
+Do not start these in this remediation unless explicitly instructed. This list
+is roadmap context only, not executable authority.
 
 ```text
 Player Runtime State v1

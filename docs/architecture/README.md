@@ -19,18 +19,6 @@ Phase 9 runtime-cosmology foundation contracts:
 - `existential_gameplay_kernel_contract.md` -- A1-A6 diagnostics and existence potential evaluation.
 - `pattern_vector_runtime_contract.md` -- Runtime semantics for H, K, D, S, and L pattern vector components.
 
-Phase 10 player-state contract:
-
-- `player_runtime_state_v1.md` -- Canonical player-specific runtime state, runtime-state deltas, branch context references, and generation-context boundary rules.
-
-Phase 11 worldstate and location mutation contract:
-
-- `worldstate_location_mutation_v1.md` -- Canonical persistent consequence, scoped location mutation, worldstate commit records, diagnostic no-ops, and future-generation bias boundary rules.
-
-Phase 12 quest, NPC, and lore generation contract:
-
-- `quest_npc_lore_generation_v1.md` -- Canonical quest-chain, NPC-manifest, NPC-memory, codex-lore, myth-record, and social-distribution generation boundary rules.
-
 The current controlling authority chain is:
 
 ```text
@@ -135,33 +123,4 @@ ASH Cosmological Model
 
 ASH Pattern System Component
   -> diagnostics, conformance, recovery, and containment support
-```
-
-Phase 10 player-runtime dependency flow:
-
-```text
-Leaf Branch Reality
-  -> Player Runtime State
-    -> YWEGenerationContextPacket.player_runtime_state_ref
-      -> ASH-governed generation
-```
-
-Phase 11 worldstate-location dependency flow:
-
-```text
-Player Runtime State
-  -> WorldstateDeltaPacket
-    -> LocationMutationState
-      -> FutureGenerationBiasUpdate
-      -> YWEGenerationContextPacket
-```
-
-Phase 12 quest-NPC-lore dependency flow:
-
-```text
-WorldstateDeltaPacket + FutureGenerationBiasUpdate
-  -> YWEGenerationContextPacket
-    -> QuestChainManifest / NPCManifest / CodexRecord / MythRecord
-      -> QuestResolutionPayload / NPCMemoryDelta / SocialDistributionDelta
-        -> WorldstateDeltaPacket or DiagnosticNoOp
 ```

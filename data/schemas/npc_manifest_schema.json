@@ -2,15 +2,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "ywe.schemas.npc_manifest",
   "version": "1.0.0",
-  "canonical_phase_12_schema_ref": "data/schemas/quest_npc_lore_generation_schema.json",
   "required_inputs": [
     "CosmicPatternSnapshot",
     "GenerationPlan",
     "QuestIntent",
-    "FactionTopologyState",
-    "YWEGenerationContextPacket",
-    "WorldstateDeltaPacket",
-    "QuestResolutionPayload"
+    "FactionTopologyState"
   ],
   "required_outputs": [
     "NPCManifest",
@@ -26,14 +22,11 @@
         "diagnostic_ref",
         "generation_plan_ref",
         "source_ash_refs",
-        "ywe_generation_context_packet_ref",
-        "worldstate_delta_refs",
         "quest_intent_ref",
         "faction_topology_state_ref",
         "relationship_vector_ref",
         "truth_function_ref",
-        "persistence_state_ref",
-        "authority_boundary"
+        "persistence_state_ref"
       ],
       "forbidden": [
         "generic_major_npc_without_pattern_provenance",
@@ -54,8 +47,7 @@
         "known_claims",
         "hidden_claims",
         "contested_claims",
-        "truth_boundary",
-        "factual_world_truth_rewrite_allowed"
+        "truth_boundary"
       ]
     },
     "PersistenceState": {
@@ -65,25 +57,6 @@
         "duration",
         "worldstate_delta_packet_ref",
         "diagnostic_ref"
-      ]
-    },
-    "NPCMemoryDelta": {
-      "required": [
-        "npc_memory_delta_id",
-        "npc_manifest_ref",
-        "source_resolution_payload_ref",
-        "player_runtime_state_ref",
-        "current_leaf_branch_ref",
-        "memory_claim_refs",
-        "relationship_vector_ref",
-        "persistence_scope",
-        "diagnostic_ref",
-        "generation_plan_ref",
-        "source_ash_refs"
-      ],
-      "forbidden": [
-        "npc_claim_as_shared_world_truth_without_worldstate_delta_packet_ref",
-        "host_adapter_authored_npc_truth"
       ]
     }
   }

@@ -1,16 +1,12 @@
-version: "1.0.0"
-status: active_contract
-phase: 12
+version: "1.0"
 
 canonical_ash_derivation:
   required_input: CosmicPatternSnapshot
   required_delta: WorldstateDeltaPacket
   required_myth_context: MythRecord
   required_faction_context: FactionTopologyState
-  optional_npc_context: NPCManifest
   required_diagnostic: DiagnosticEnvelope
   required_plan: GenerationPlan
-  required_context_packet: YWEGenerationContextPacket
   independent_random_generation_allowed: false
 
 required_outputs:
@@ -31,31 +27,15 @@ truth_layer_rules:
   faction_claim:
     source: FactionTopologyState
     must_not_be_factual_substrate: true
-  npc_claim:
-    source: NPCManifest
-    must_not_be_factual_substrate: true
   perception_overlay:
     source: PerceptionStateRecord
     must_not_rewrite_shared_world_truth: true
-
-authority_boundary:
-  can_influence_generation_context: true
-  may_mutate_ash_math: false
-  may_rewrite_shared_world_truth: false
-  may_mutate_base_world_ontology: false
-  host_adapter_may_author: false
-  may_create_independent_random_content: false
-  lore_may_overwrite_locked_canon: false
-  myth_may_rewrite_factual_world_truth: false
 
 validation_rules:
   - codex_records_require_cosmic_pattern_snapshot_ref
   - codex_records_require_worldstate_delta_packet_ref
   - codex_records_require_diagnostic_ref
   - codex_records_require_generation_plan_ref
-  - codex_records_require_ywe_generation_context_packet_ref
-  - codex_records_preserve_source_ash_refs
   - lore_record_variants_must_declare_truth_layer
   - visibility_scope_must_protect_endgame_truths
   - generated_lore_must_not_overwrite_locked_canon
-  - npc_claim_variants_must_not_be_factual_substrate

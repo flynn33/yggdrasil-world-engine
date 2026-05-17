@@ -109,16 +109,12 @@ canonical_flow:
     inputs:
       - SystemManifestHandoff
     emits:
-      - QuestGenerationRequest
       - WorldRegionManifest
       - QuestChainManifest
       - NPCManifest
       - CreatureManifest
       - ArtifactManifest
       - MythRecord
-      - MythSeedCandidate
-      - CodexRecord
-      - SocialDistributionDelta
       - ProphecyRecord
       - PerceptionStateRecord
       - FactionDelta
@@ -167,40 +163,12 @@ canonical_flow:
       - DiagnosticNoOp
 
   - step: 11
-    name: apply_worldstate_location_mutation
-    inputs:
-      - WorldstateDeltaPacket
-    emits:
-      - LocationMutationDelta
-      - LocationMutationState
-      - WorldstateMutationCommit
-      - DiagnosticNoOp
-
-  - step: 12
     name: derive_future_generation_bias
     inputs:
       - WorldstateDeltaPacket
-      - LocationMutationState
       - DiagnosticNoOp
     emits:
       - FutureGenerationBiasUpdate
-
-  - step: 13
-    name: route_phase_12_generation_outputs
-    inputs:
-      - QuestChainManifest
-      - NPCManifest
-      - CodexRecord
-      - MythRecord
-      - QuestResolutionPayload
-      - FutureGenerationBiasUpdate
-    emits:
-      - YWEGenerationContextPacket
-      - NPCMemoryDelta
-      - SocialDistributionDelta
-      - WorldstateDeltaPacket
-      - DiagnosticNoOp
-    boundary: Quest, NPC, lore, and myth outputs may influence later context only through accepted worldstate, location mutation, diagnostic no-op, or future generation bias records.
 
 named_flows:
   exploration_driven_world_generation:
@@ -216,7 +184,6 @@ named_flows:
       - HostAdapterMaterializationRequest
       - MaterializationResult
       - WorldstateDeltaPacket
-      - LocationMutationState
       - DiagnosticNoOp
     rule: Unresolved frontiers, realm thresholds, thin veil sites, and unresolved Yggdrasil nodes require ASH-governed generation before any meaningful manifestation.
 
@@ -228,13 +195,8 @@ named_flows:
       - YWEGenerationContextPacket
       - ASHUpstreamGenerationEnvelope
       - YWEInterpretationPacket
-      - QuestGenerationRequest
       - QuestChainManifest
       - QuestResolutionPayload
-      - NPCMemoryDelta
-      - CodexRecord
-      - MythSeedCandidate
-      - LocationMutationDelta
     rule: Quest templates are interpretive containers and do not generate symbolic truth independently.
 
   player_action_driven_npc_generation:
@@ -245,31 +207,15 @@ named_flows:
       - ASHUpstreamGenerationEnvelope
       - YWEInterpretationPacket
       - NPCManifest
-      - NPCMemoryDelta
+      - NPCMemoryHooks
       - WorldstateDeltaPacket
-      - LocationMutationState
       - DiagnosticNoOp
     rule: NPC beliefs, faction claims, myths, and partial interpretations may affect context without rewriting shared world truth.
-
-  consequence_driven_lore_and_myth_generation:
-    sequence:
-      - QuestResolutionPayload
-      - WorldstateDeltaPacket
-      - YWEGenerationContextPacket
-      - ASHUpstreamGenerationEnvelope
-      - YWEInterpretationPacket
-      - CodexRecord
-      - MythSeedCandidate
-      - MythRecord
-      - SocialDistributionDelta
-      - FutureGenerationBiasUpdate
-    rule: Lore and myth records are layered interpretations of accepted consequence and cannot overwrite locked canon or factual world truth.
 
   consequence_driven_future_generation_bias:
     sequence:
       - ResolutionPayload
       - WorldstateDeltaPacket
-      - LocationMutationState
       - FutureGenerationBiasUpdate
       - YWEGenerationContextPacket
       - ASHUpstreamGenerationEnvelope

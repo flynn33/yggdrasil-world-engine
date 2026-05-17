@@ -150,6 +150,10 @@ Gate 9.8 Existing Checks Still Pass: pass
 
 ## 6. Known Deferred Work
 
+The following list is roadmap context only. It is not executable authority and
+must not be used to begin work without a user-supplied instruction package or
+later explicit user instruction.
+
 ```text
 Phase 10 - Player Runtime State v1
 Phase 11 - Worldstate and Location Mutation

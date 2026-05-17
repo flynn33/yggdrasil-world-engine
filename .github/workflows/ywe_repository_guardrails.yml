@@ -33,6 +33,9 @@ jobs:
       - name: Check required Phase 8-9 artifacts
         run: python scripts/check_phase_8_9_required_artifacts.py
 
+      - name: Check package authority scope
+        run: python scripts/check_package_authority_scope.py
+
       - name: Scan for authority-stack drift
         run: python scripts/check_authority_stack.py --config data/validation/repository_drift_guardrail_rules.json
 
@@ -41,15 +44,6 @@ jobs:
 
       - name: Check Phase 9 schema semantics
         run: python scripts/check_phase_9_schema_semantics.py
-
-      - name: Check player runtime state
-        run: python scripts/check_player_runtime_state.py
-
-      - name: Check worldstate and location mutation
-        run: python scripts/check_worldstate_location_mutation.py
-
-      - name: Check quest, NPC, and lore generation
-        run: python scripts/check_quest_npc_lore_generation.py
 
       - name: Check non-destructive diff
         if: github.event_name == 'pull_request'

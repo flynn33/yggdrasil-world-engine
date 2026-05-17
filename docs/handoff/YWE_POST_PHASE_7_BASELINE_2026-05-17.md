@@ -95,6 +95,10 @@ Phase 9 schemas, examples, validation metadata, and guardrail scripts
 
 ## Deferred Later-Phase Work
 
+The following list is roadmap context only. It is not executable authority and
+must not be used to begin work without a user-supplied instruction package or
+later explicit user instruction.
+
 ```text
 Phase 10 - Player Runtime State v1
 Phase 11 - Worldstate and Location Mutation

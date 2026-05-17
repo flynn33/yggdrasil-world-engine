@@ -1,82 +1,33 @@
-version: "1.0.0"
-status: active_contract
-contract_id: ywe.core.narrative_engine.npc_synthesis_rules.v1
-phase: 12
-
+version: "0.1"
+status: placeholder_awaiting_finalized_content
 meta:
   system: npc_synthesis_rules
-  purpose: Defines ASH-derived NPCManifest, TruthFunction, RelationshipVector, PersistenceState, and NPCMemoryDelta behavior for branch-safe NPC generation.
-  schema: data/schemas/quest_npc_lore_generation_schema.json
+  purpose: Placeholder awaiting finalized content for npc_synthesis_rules.
+  invariants:
+    - all_meaningful_generation_must_be_ash_derived
+    - fixed_cosmology_must_remain_locked
+    - perception_must_not_rewrite_shared_world_truth
+    - forsetti_governs_activation_ywe_governs_truth
 
-authority:
-  current_authority_sequence:
-    - ASH Cosmological Model
-    - Yggdrasil World Engine
-    - ASH Pattern System component diagnostics
-    - Narrative Engine NPC synthesis contract
+ash_asp_core_math_rebuild_addendum:
+  authority: YWE_ASP_CORE_MATH_REBUILD_PACKAGE
+  math_basis: F2^9 full-state ASH vector with fixed 16 canonical codewords
+  transition_semantics: "x' = x XOR c"
   required_packets:
     - CosmicPatternSnapshot
     - DiagnosticEnvelope
     - GenerationPlan
-    - YWEGenerationContextPacket
-    - YWEInterpretationPacket
   provenance_fields:
     - cosmic_pattern_snapshot_ref
     - diagnostic_ref
     - generation_plan_ref
     - source_ash_refs
-    - ywe_generation_context_packet_ref
-    - worldstate_delta_refs
+  boundary_rule: generation planning may guide materialization but must not author ASH truth or YWE domain truth
 
-npc_records:
-  - NPCManifest
-  - RelationshipVector
-  - TruthFunction
-  - PersistenceState
-  - NPCMemoryDelta
-  - FactionTopologyState
-  - WorldstateDeltaPacket
-
-synthesis_laws:
-  independent_random_npc_allowed: false
-  materialization_requires_generation_plan: true
-  host_adapter_may_author_npc_truth: false
-  npc_claims_are_interpretive: true
-  npc_claim_may_rewrite_shared_world_truth: false
-  relationship_change_requires_worldstate_delta_packet_ref: true
-  npc_memory_delta_requires_resolution_payload: true
-  append_only_memory: true
-
-truth_boundaries:
-  npc_claim_only:
-    may_drive_dialogue: true
-    may_drive_memory: true
-    may_rewrite_shared_world_truth: false
-  faction_claim_only:
-    may_drive_social_pressure: true
-    may_rewrite_shared_world_truth: false
-  branch_local_claim:
-    requires_current_leaf_branch_ref: true
-    may_escape_branch_without_worldstate_delta: false
-  worldstate_backed_fact:
-    requires_worldstate_delta_packet_ref: true
-    may_mutate_ash_math: false
-
-forbidden_synthesis:
-  - generic_major_npc_without_pattern_provenance
-  - untracked_relationship_change
-  - npc_memory_without_source_resolution_payload
-  - npc_claim_as_shared_world_truth_without_worldstate_delta_packet_ref
-  - host_adapter_authored_npc_truth
-
-validation_markers:
-  - NPCManifest
-  - NPCMemoryDelta
-  - RelationshipVector
-  - TruthFunction
-  - PersistenceState
-  - WorldstateDeltaPacket
-  - source_ash_refs
-  - diagnostic_ref
-  - generation_plan_ref
-  - ywe_generation_context_packet_ref
+  npc_records:
+    - NPCManifest
+    - RelationshipVector
+    - TruthFunction
+    - PersistenceState
+    - FactionTopologyState
+  synthesis_rule: NPCManifest may instantiate local social truth only from GenerationPlan and retained source_ash_refs.

@@ -21,14 +21,6 @@
     "requested_manifest_kind",
     "worldstate_delta_policy",
     "ywe_context_packet_ref",
-    "ywe_generation_context_packet_ref",
-    "player_runtime_state_ref",
-    "current_leaf_branch_ref",
-    "worldstate_delta_refs",
-    "quest_chain_manifest_refs",
-    "npc_manifest_refs",
-    "codex_record_refs",
-    "myth_record_refs",
     "ash_state_snapshot_ref",
     "canonical_codeword_trace_ref"
   ],
@@ -134,40 +126,6 @@
       ],
       "boundary": "Player and world context may influence generation requests but must not mutate ASH math."
     },
-    "PlayerRuntimeState": {
-      "schema_ref": "player_runtime_state_schema.json",
-      "role": "Defines the player-specific runtime state referenced by YWEGenerationContextPacket.player_runtime_state_ref.",
-      "required": [
-        "record_type",
-        "state_id",
-        "player_ref",
-        "current_phase",
-        "current_leaf_branch_ref",
-        "branch_generation_context_refs",
-        "branch_event_refs",
-        "authority_boundary",
-        "ash_provenance",
-        "update_policy"
-      ],
-      "boundary": "Player Runtime State may influence generation context and branch context but must not mutate ASH math, shared world truth, or base world ontology."
-    },
-    "PlayerRuntimeStateDelta": {
-      "schema_ref": "player_runtime_state_schema.json",
-      "role": "Records an auditable accepted, rejected, deferred, or merged change to PlayerRuntimeState.",
-      "required": [
-        "record_type",
-        "delta_id",
-        "target_state_ref",
-        "trigger_trace_ref",
-        "branch_event_ref",
-        "changed_fields",
-        "disposition",
-        "diagnostic_ref",
-        "generation_plan_ref",
-        "source_ash_refs"
-      ],
-      "boundary": "Runtime deltas require player trace, branch evidence where relevant, diagnostic evidence, generation plan evidence, and source ASH references."
-    },
     "ASHUpstreamGenerationEnvelope": {
       "schema_ref": "ash_upstream_generation_envelope_schema.json",
       "role": "Proves upstream ASH authority and binds diagnostics, plan, codeword trace, state snapshot, and provenance.",
@@ -243,224 +201,6 @@
       ],
       "boundary": "Bias updates alter downstream context only and never ASH canonical math."
     },
-    "WorldstateDeltaPacket": {
-      "schema_ref": "worldstate_location_mutation_schema.json",
-      "role": "Records persistent Phase 11 consequence after meaningful resolution.",
-      "required": [
-        "record_type",
-        "delta_id",
-        "source_resolution_payload",
-        "source_branch_event_ref",
-        "player_runtime_state_ref",
-        "current_leaf_branch_ref",
-        "affected_location_refs",
-        "location_mutation_refs",
-        "consequence_domains",
-        "authority_boundary",
-        "ash_provenance"
-      ],
-      "boundary": "Worldstate deltas persist YWE consequence and may influence future generation context but must not mutate ASH math or base world ontology."
-    },
-    "LocationMutationState": {
-      "schema_ref": "worldstate_location_mutation_schema.json",
-      "role": "Stores scoped location state changed through accepted worldstate consequence.",
-      "required": [
-        "record_type",
-        "location_state_id",
-        "location_ref",
-        "base_world_ref",
-        "current_leaf_branch_ref",
-        "status",
-        "active_mutation_refs",
-        "worldstate_delta_refs",
-        "authority_boundary",
-        "ash_provenance"
-      ],
-      "boundary": "Location mutation is scoped to player, branch, shared-world, or realm-local persistence and does not rewrite the nine-plane ontology."
-    },
-    "LocationMutationDelta": {
-      "schema_ref": "worldstate_location_mutation_schema.json",
-      "role": "Records an auditable change to LocationMutationState from an accepted WorldstateDeltaPacket.",
-      "required": [
-        "record_type",
-        "mutation_delta_id",
-        "target_location_state_ref",
-        "source_worldstate_delta_ref",
-        "source_player_runtime_state_ref",
-        "mutation_kind",
-        "diagnostic_ref",
-        "generation_plan_ref",
-        "source_ash_refs",
-        "authority_boundary"
-      ],
-      "boundary": "LocationMutationDelta must remain downstream of worldstate evidence, diagnostics, and source ASH references."
-    },
-    "WorldstateMutationCommit": {
-      "schema_ref": "worldstate_location_mutation_schema.json",
-      "role": "Commits accepted worldstate and location mutation records with an explicit contradiction policy.",
-      "required": [
-        "record_type",
-        "commit_id",
-        "source_worldstate_delta_ref",
-        "committed_record_refs",
-        "commit_scope",
-        "contradiction_policy",
-        "authority_boundary",
-        "ash_provenance"
-      ],
-      "boundary": "Commit records preserve append-first consequence and do not silently erase previous worldstate."
-    },
-    "DiagnosticNoOp": {
-      "schema_ref": "worldstate_location_mutation_schema.json",
-      "role": "Records a rejected or non-committing mutation request with diagnostic provenance.",
-      "required": [
-        "record_type",
-        "no_op_id",
-        "reason",
-        "diagnostic_ref",
-        "cosmic_pattern_snapshot_ref",
-        "generation_plan_ref",
-        "source_ash_refs"
-      ],
-      "boundary": "Unsupported or unlawful mutation requests fail explicitly instead of silently changing worldstate."
-    },
-    "QuestGenerationRequest": {
-      "schema_ref": "quest_npc_lore_generation_schema.json",
-      "role": "Binds Phase 12 quest, NPC, lore, or myth generation to player runtime state, branch context, worldstate deltas, future generation bias, diagnostics, and source ASH references.",
-      "required": [
-        "record_type",
-        "request_id",
-        "trigger_kind",
-        "requested_manifest_kind",
-        "ywe_generation_context_packet_ref",
-        "player_runtime_state_ref",
-        "current_leaf_branch_ref",
-        "worldstate_delta_refs",
-        "future_generation_bias_update_refs",
-        "authority_boundary",
-        "ash_provenance"
-      ],
-      "boundary": "Generation requests may influence context but may not create independent random content, mutate ASH math, or rewrite accepted world truth."
-    },
-    "QuestChainManifest": {
-      "schema_ref": "quest_npc_lore_generation_schema.json",
-      "role": "Declares an ASH-derived quest chain with staged interpretation and multiple lawful completion modes.",
-      "required": [
-        "record_type",
-        "quest_chain_manifest_id",
-        "quest_generation_request_ref",
-        "stage_manifests",
-        "completion_mode_set",
-        "quest_resolution_payload_ref",
-        "affected_location_refs",
-        "authority_boundary",
-        "ash_provenance"
-      ],
-      "boundary": "Quest chains are interpretive containers and must expose CompletionModeSet.minimum_mode_count >= 2."
-    },
-    "QuestResolutionPayload": {
-      "schema_ref": "quest_npc_lore_generation_schema.json",
-      "role": "Records selected quest completion mode and downstream worldstate, location, NPC memory, lore, myth, and future bias references.",
-      "required": [
-        "record_type",
-        "quest_resolution_payload_id",
-        "quest_chain_manifest_ref",
-        "selected_completion_mode_ref",
-        "player_runtime_state_ref",
-        "current_leaf_branch_ref",
-        "worldstate_delta_packet_ref",
-        "location_mutation_delta_refs",
-        "future_generation_bias_update_ref",
-        "npc_memory_delta_refs",
-        "codex_record_refs",
-        "myth_record_refs",
-        "authority_boundary",
-        "ash_provenance"
-      ],
-      "boundary": "Quest resolution persists consequence through Phase 11 worldstate and location mutation contracts."
-    },
-    "NPCManifest": {
-      "schema_ref": "quest_npc_lore_generation_schema.json",
-      "role": "Declares ASH-derived NPC identity, relationship, truth-function, and persistence state.",
-      "required": [
-        "record_type",
-        "npc_manifest_id",
-        "source_quest_refs",
-        "relationship_vector",
-        "truth_function",
-        "persistence_state",
-        "worldstate_delta_packet_ref",
-        "authority_boundary",
-        "ash_provenance"
-      ],
-      "boundary": "NPC claims and relationships remain interpretive unless backed by an accepted WorldstateDeltaPacket."
-    },
-    "NPCMemoryDelta": {
-      "schema_ref": "quest_npc_lore_generation_schema.json",
-      "role": "Records append-only NPC memory change from a quest or consequence resolution.",
-      "required": [
-        "record_type",
-        "npc_memory_delta_id",
-        "npc_manifest_ref",
-        "source_resolution_payload_ref",
-        "player_runtime_state_ref",
-        "current_leaf_branch_ref",
-        "memory_claim_refs",
-        "diagnostic_ref",
-        "generation_plan_ref",
-        "source_ash_refs",
-        "authority_boundary"
-      ],
-      "boundary": "NPC memory changes cannot promote claims into shared world truth without worldstate evidence."
-    },
-    "CodexRecord": {
-      "schema_ref": "quest_npc_lore_generation_schema.json",
-      "role": "Stores layered lore with explicit visibility scope and truth boundary.",
-      "required": [
-        "record_type",
-        "codex_record_id",
-        "layer",
-        "worldstate_delta_packet_ref",
-        "visibility_scope",
-        "lore_variants",
-        "authority_boundary",
-        "ash_provenance"
-      ],
-      "boundary": "Generated lore may reference locked canon but cannot overwrite locked canon or protected endgame truth."
-    },
-    "MythRecord": {
-      "schema_ref": "quest_npc_lore_generation_schema.json",
-      "role": "Stores retrospective myth interpretation and faction-visible myth lines from worldstate-backed consequence.",
-      "required": [
-        "record_type",
-        "myth_record_id",
-        "myth_seed_candidate_ref",
-        "source_worldstate_delta_ref",
-        "myth_lines",
-        "social_distribution_delta_ref",
-        "factual_world_truth_rewrite_allowed",
-        "authority_boundary",
-        "ash_provenance"
-      ],
-      "boundary": "Myth records distribute interpretations and may not rewrite factual world truth."
-    },
-    "SocialDistributionDelta": {
-      "schema_ref": "quest_npc_lore_generation_schema.json",
-      "role": "Records faction and social propagation of myth or lore pressure.",
-      "required": [
-        "record_type",
-        "social_distribution_delta_id",
-        "myth_record_ref",
-        "affected_faction_refs",
-        "propagation_scope",
-        "worldstate_delta_packet_ref",
-        "diagnostic_ref",
-        "generation_plan_ref",
-        "source_ash_refs",
-        "authority_boundary"
-      ],
-      "boundary": "Social distribution may influence future generation context but cannot authorize factual truth changes."
-    },
     "SystemManifestHandoff": {
       "role": "Transfers a YWEInterpretationPacket to an allowed feature engine before host materialization.",
       "required": [
@@ -523,12 +263,10 @@
     "ASHUpstreamGenerationEnvelope",
     "YWEInterpretationPacket",
     "SystemManifestHandoff",
-    "QuestChainManifest|NPCManifest|CodexRecord|MythRecord|SocialDistributionDelta",
     "HostAdapterMaterializationRequest",
     "MaterializationResult",
     "ResolutionPayload",
     "WorldstateDeltaPacket|DiagnosticNoOp",
-    "LocationMutationState|LocationMutationDelta|WorldstateMutationCommit",
     "FutureGenerationBiasUpdate"
   ]
 }

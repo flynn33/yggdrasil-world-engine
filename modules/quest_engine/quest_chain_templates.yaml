@@ -1,79 +1,34 @@
-version: "1.0.0"
-status: active_contract
-contract_id: ywe.modules.quest_engine.quest_chain_templates.v1
-phase: 12
-
+version: "0.1"
+status: placeholder_awaiting_finalized_content
 meta:
   system: quest_chain_templates
-  purpose: Defines ASH-derived quest-chain template constraints for QuestChainManifest records without creating independent random quest truth.
-  schema: data/schemas/quest_npc_lore_generation_schema.json
+  purpose: Placeholder awaiting finalized content for quest_chain_templates.
+  invariants:
+    - all_meaningful_generation_must_be_ash_derived
+    - fixed_cosmology_must_remain_locked
+    - perception_must_not_rewrite_shared_world_truth
+    - forsetti_governs_activation_ywe_governs_truth
 
-authority:
-  current_authority_sequence:
-    - ASH Cosmological Model
-    - Yggdrasil World Engine
-    - ASH Pattern System component diagnostics
-    - Quest Engine manifestation contract
+ash_asp_core_math_rebuild_addendum:
+  authority: YWE_ASP_CORE_MATH_REBUILD_PACKAGE
+  math_basis: F2^9 full-state ASH vector with fixed 16 canonical codewords
+  transition_semantics: "x' = x XOR c"
   required_packets:
     - CosmicPatternSnapshot
     - DiagnosticEnvelope
     - GenerationPlan
-    - YWEGenerationContextPacket
-    - YWEInterpretationPacket
   provenance_fields:
     - cosmic_pattern_snapshot_ref
     - diagnostic_ref
     - generation_plan_ref
     - source_ash_refs
-    - ywe_generation_context_packet_ref
-    - worldstate_delta_refs
+  boundary_rule: generation planning may guide materialization but must not author ASH truth or YWE domain truth
 
-quest_records:
-  - QuestGenerationRequest
-  - QuestChainManifest
-  - StageManifest
-  - CompletionModeSet
-  - CompletionMode
-  - QuestResolutionPayload
-  - WorldstateDeltaPacket
-  - LocationMutationDelta
-  - FutureGenerationBiasUpdate
-
-template_laws:
-  independent_random_quest_template_allowed: false
-  materialization_requires_generation_plan: true
-  host_adapter_may_author_quest_truth: false
-  minimum_mode_count: 2
-  completion_rule: Every QuestChainManifest exposes multiple StageManifest routes through CompletionModeSet.minimum_mode_count >= 2.
-  worldstate_rule: QuestResolutionPayload must reference WorldstateDeltaPacket and FutureGenerationBiasUpdate when a resolution commits consequence.
-  branch_rule: Quest manifestations must preserve player_runtime_state_ref and current_leaf_branch_ref when tied to a player branch.
-
-allowed_completion_modes:
-  - reveal
-  - conceal
-  - contain
-  - reconcile
-  - sacrifice
-  - defer
-
-forbidden_templates:
-  - independent_random_quest_template
-  - single_outcome_only_quest
-  - quest_without_source_ash_refs
-  - quest_without_diagnostic_ref
-  - quest_without_generation_plan_ref
-  - quest_resolution_without_worldstate_delta_packet_ref
-  - host_adapter_authored_quest_truth
-
-validation_markers:
-  - QuestGenerationRequest
-  - QuestChainManifest
-  - StageManifest
-  - CompletionModeSet
-  - QuestResolutionPayload
-  - minimum_mode_count
-  - WorldstateDeltaPacket
-  - FutureGenerationBiasUpdate
-  - source_ash_refs
-  - diagnostic_ref
-  - generation_plan_ref
+  quest_records:
+    - QuestChainManifest
+    - StageManifest
+    - CompletionModeSet
+    - QuestResolutionPayload
+    - WorldstateDeltaPacket
+    - minimum_mode_count
+  completion_rule: every QuestChainManifest exposes multiple StageManifest routes through CompletionModeSet.

@@ -12,6 +12,9 @@
 | Phase 7 - Post-Remediation Acceptance Audit | passed | Human-reviewed Gate 7.2 resolved; required handoff path added; Phase 7 gates passed. |
 | Phase 8 - Baseline Freeze and Restore Point | passed | Post-remediation baseline recorded at `v2.0.5` / `1a8ccfc`; historical handoff provenance clarified. |
 | Phase 9 - Runtime Cosmology and Leaf Branch Reality Foundation | passed | Base ontology, runtime leaf branch, branch event, existential kernel, pattern vector, and Phase 9 guardrail contracts added. |
-| Phase 10 - Player Runtime State v1 | passed | Player-specific runtime state contract, schema, branch context refs, provenance boundaries, examples, and guardrail check added. |
-| Phase 11 - Worldstate and Location Mutation | passed | Persistent worldstate consequence, scoped location mutation, commit records, diagnostic no-ops, examples, and guardrail check added. |
-| Phase 12 - Quest, NPC, and Lore Generation | passed | Quest-chain, NPC-manifest, NPC-memory, codex-lore, myth-record, social-distribution, examples, and guardrail check added. |
+
+## Package Authority Compliance
+
+| Control | Status | Notes |
+|---|---|---|
+| Package-bound execution scope | remediated | Active scope is limited to the user-supplied Phase 7 and Phase 8-9 packages unless later explicit user instruction authorizes additional work. Repository roadmaps, readiness notes, handoff forward references, deferred work lists, and inferred phase sequences are not implementation authority. |

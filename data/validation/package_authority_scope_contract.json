@@ -1,0 +1,102 @@
+{
+  "contract_id": "ywe.package_authority_scope_contract",
+  "version": "0.1.0",
+  "date": "2026-05-17",
+  "purpose": "Constrain the current remediation branch to user-supplied Phase 7 and Phase 8-9 package authority.",
+  "active_scope": {
+    "authority_source": "user_supplied_instruction_packages",
+    "authorized_packages": [
+      "YWE_PHASE_7_POST_REMEDIATION_ACCEPTANCE_AUDIT_PACKAGE",
+      "YWE_PHASE_8_TO_9_BASELINE_AND_BRANCH_REALITY_FOUNDATION_PACKAGE"
+    ],
+    "authorized_phases": [
+      "Phase 7",
+      "Phase 8",
+      "Phase 9"
+    ],
+    "non_authority_sources": [
+      "repository roadmap text",
+      "readiness notes",
+      "handoff forward references",
+      "deferred work lists",
+      "inferred phase sequences"
+    ]
+  },
+  "required_artifacts": [
+    "docs/handoff/YWE_PHASE_7_POST_REMEDIATION_ACCEPTANCE_AUDIT_2026-05-16.md",
+    "data/validation/phase_7_acceptance_audit_contract.json",
+    "data/validation/phase_7_required_artifacts.json",
+    "data/validation/phase_7_forbidden_language_patterns.json",
+    "data/validation/phase_7_non_destructive_diff_policy.json",
+    "data/validation/phase_7_github_checks_matrix.json",
+    "docs/handoff/YWE_POST_PHASE_7_BASELINE_2026-05-17.md",
+    "docs/architecture/base_world_ontology_contract.md",
+    "docs/architecture/leaf_branch_reality_contract.md",
+    "docs/architecture/branch_event_contract.md",
+    "docs/architecture/existential_gameplay_kernel_contract.md",
+    "docs/architecture/pattern_vector_runtime_contract.md",
+    "docs/architecture/runtime_cosmology_foundation_contract.md",
+    "data/schemas/base_world_ontology_schema.json",
+    "data/schemas/branch_event_schema.json",
+    "data/schemas/leaf_branch_reality_state_schema.json",
+    "data/schemas/branch_generation_context_schema.json",
+    "data/schemas/pattern_vector_schema.json",
+    "data/schemas/existence_potential_schema.json",
+    "data/schemas/axiom_diagnostic_packet_schema.json",
+    "data/schemas/plane_pressure_state_schema.json",
+    "data/schemas/future_generation_bias_update_schema.json",
+    "data/validation/phase_8_9_acceptance_contract.json",
+    "data/validation/branch_reality_guardrail_rules.json",
+    "data/validation/required_phase_8_9_artifacts.json",
+    "data/validation/forbidden_branch_language_patterns.json",
+    "data/validation/non_destructive_change_budget_phase_9.json",
+    "data/validation/github_checks_phase_9_matrix.json"
+  ],
+  "forbidden_artifacts": [
+    "core/narrative_engine/player_runtime_state_rules.yaml",
+    "core/narrative_engine/worldstate_location_mutation_rules.yaml",
+    "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+    "data/schemas/player_runtime_state_schema.json",
+    "data/schemas/worldstate_location_mutation_schema.json",
+    "data/schemas/quest_npc_lore_generation_schema.json",
+    "data/validation/github_checks_phase_10_matrix.json",
+    "data/validation/github_checks_phase_11_matrix.json",
+    "data/validation/github_checks_phase_12_matrix.json",
+    "data/validation/player_runtime_state_gate_contract.json",
+    "data/validation/worldstate_location_mutation_gate_contract.json",
+    "data/validation/quest_npc_lore_generation_gate_contract.json",
+    "docs/architecture/player_runtime_state_v1.md",
+    "docs/architecture/worldstate_location_mutation_v1.md",
+    "docs/architecture/quest_npc_lore_generation_v1.md",
+    "docs/handoff/YWE_PHASE_10_PLAYER_RUNTIME_STATE_HANDOFF_2026-05-17.md",
+    "docs/handoff/YWE_PHASE_11_WORLDSTATE_LOCATION_MUTATION_HANDOFF_2026-05-17.md",
+    "docs/handoff/YWE_PHASE_12_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-17.md",
+    "scripts/check_player_runtime_state.py",
+    "scripts/check_worldstate_location_mutation.py",
+    "scripts/check_quest_npc_lore_generation.py"
+  ],
+  "forbidden_prefixes": [
+    "examples/player_runtime_state/",
+    "examples/worldstate_location_mutation/",
+    "examples/quest_npc_lore_generation/"
+  ],
+  "required_text_markers": [
+    {
+      "path": "docs/handoff/YWE_POST_PHASE_7_BASELINE_2026-05-17.md",
+      "contains": "not executable authority"
+    },
+    {
+      "path": "docs/handoff/YWE_PHASE_9_RUNTIME_COSMOLOGY_BRANCH_REALITY_HANDOFF_2026-05-17.md",
+      "contains": "not executable authority"
+    },
+    {
+      "path": "docs/handoff/YWE_COSMOLOGY_AUTHORITY_REMEDIATION_HANDOFF_2026-05-16.md",
+      "contains": "not executable authority"
+    },
+    {
+      "path": "docs/handoff/YWE_POST_REMEDIATION_BASELINE_2026-05-16.md",
+      "contains": "not executable authority"
+    }
+  ],
+  "required_stop_condition": "If a proposed remediation action cannot be traced to one of the active user-supplied packages or a later explicit user instruction, stop and ask before editing."
+}

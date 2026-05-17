@@ -1,22 +1,13 @@
-version: "1.0"
-status: canonical_phase_11_contract
-system: worldstate_delta_rules
-
-authority_stack:
-  game_layer: "Where Ravens Wait: Eternal Reckoning"
-  engine_layer: "Yggdrasil World Engine"
-  foundation: "ASH Cosmological Model"
-  stability_component: "ASH Pattern System"
-
-purpose:
-  summary: >
-    WorldstateDeltaPacket is the memory spine of YWE consequence. It records
-    persistent changes after meaningful resolution and routes lawful location
-    mutation, future generation bias, and DiagnosticNoOp outcomes.
-  boundary_rule: >
-    Generation planning may guide materialization, but worldstate commits must
-    remain downstream of SourceASHRefs, DiagnosticEnvelope, GenerationPlan,
-    PlayerRuntimeState, BranchEvent, and LeafBranchReality evidence.
+version: "0.1"
+status: placeholder_awaiting_finalized_content
+meta:
+  system: worldstate_delta_rules
+  purpose: Placeholder awaiting finalized content for worldstate_delta_rules.
+  invariants:
+    - all_meaningful_generation_must_be_ash_derived
+    - fixed_cosmology_must_remain_locked
+    - perception_must_not_rewrite_shared_world_truth
+    - forsetti_governs_activation_ywe_governs_truth
 
 ash_asp_core_math_rebuild_addendum:
   authority: YWE_ASP_CORE_MATH_REBUILD_PACKAGE
@@ -26,80 +17,16 @@ ash_asp_core_math_rebuild_addendum:
     - CosmicPatternSnapshot
     - DiagnosticEnvelope
     - GenerationPlan
-    - SourceASHRefs
   provenance_fields:
     - cosmic_pattern_snapshot_ref
     - diagnostic_ref
     - generation_plan_ref
     - source_ash_refs
+  boundary_rule: generation planning may guide materialization but must not author ASH truth or YWE domain truth
 
-worldstate_delta_records:
-  - WorldstateDeltaPacket
-  - LocationMutationState
-  - LocationMutationDelta
-  - WorldstateMutationCommit
-  - FutureGenerationBiasUpdate
-  - DiagnosticNoOp
-  - SourceASHRefs
-
-required_context:
-  - ResolutionPayload
-  - PlayerRuntimeState
-  - BranchEvent
-  - LeafBranchReality
-  - BranchGenerationContext
-  - current_leaf_branch_ref
-  - player_runtime_state_ref
-  - location_state_ref
-  - location_mutation_refs
-  - worldstate_delta_refs
-
-delta_rule: >
-  WorldstateDeltaPacket may bias future generation through
-  FutureGenerationBiasUpdate only when SourceASHRefs, DiagnosticEnvelope, and
-  GenerationPlan remain attached.
-
-location_mutation_rule: >
-  LocationMutationState and LocationMutationDelta may change scoped site
-  condition, threshold status, plane pressure, residue, or activation only
-  through an accepted WorldstateDeltaPacket or explicit DiagnosticNoOp.
-
-persistence_rules:
-  - meaningful_resolution_emits_worldstate_delta_or_DiagnosticNoOp
-  - accepted_worldstate_delta_requires_source_ash_refs
-  - accepted_worldstate_delta_requires_diagnostic_ref
-  - accepted_worldstate_delta_requires_generation_plan_ref
-  - accepted_worldstate_delta_requires_player_runtime_state_ref
-  - accepted_worldstate_delta_requires_current_leaf_branch_ref
-  - location_mutation_refs_must_be_scoped
-  - reversals_require_new_worldstate_delta
-  - future_generation_bias_is_pressure_not_script
-
-forbidden_mutations:
-  - worldstate_delta_mutates_ash_math
-  - location_mutation_rewrites_base_world_ontology
-  - perception_overlay_as_objective_location_mutation
-  - host_adapter_authored_worldstate
-  - silent_consequence_reset
-  - unscoped_shared_world_change
-
-validation_markers:
-  - WorldstateDeltaPacket
-  - LocationMutationState
-  - LocationMutationDelta
-  - WorldstateMutationCommit
-  - FutureGenerationBiasUpdate
-  - DiagnosticNoOp
-  - SourceASHRefs
-  - PlayerRuntimeState
-  - BranchEvent
-  - LeafBranchReality
-  - BranchGenerationContext
-  - current_leaf_branch_ref
-  - player_runtime_state_ref
-  - location_state_ref
-  - location_mutation_refs
-  - worldstate_delta_refs
-  - source_ash_refs
-  - diagnostic_ref
-  - generation_plan_ref
+  worldstate_delta_records:
+    - WorldstateDeltaPacket
+    - FutureGenerationBiasUpdate
+    - DiagnosticNoOp
+    - SourceASHRefs
+  delta_rule: WorldstateDeltaPacket may bias future generation through FutureGenerationBiasUpdate only when SourceASHRefs and DiagnosticEnvelope remain attached.
