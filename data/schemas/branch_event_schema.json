@@ -1,0 +1,90 @@
+{
+  "schema_id": "ywe.branch_event.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_9",
+  "description": "Records a meaningful conscious player choice that creates or mutates a leaf branch reality.",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "stability_component": "ASH Pattern System"
+  },
+  "required_fields": [
+    "branch_event_id",
+    "agent_ref",
+    "decision_context",
+    "available_actions",
+    "chosen_action",
+    "choice_significance",
+    "base_world_ref",
+    "parent_branch_ref",
+    "location_state_ref",
+    "player_context_ref",
+    "cosmology_source_refs",
+    "asp_component_refs",
+    "worldstate_delta_refs",
+    "future_generation_bias_refs"
+  ],
+  "choice_significance_values": [
+    "minor",
+    "meaningful",
+    "major",
+    "threshold",
+    "cosmological"
+  ],
+  "branch_qualifiers": [
+    "quest_resolution",
+    "truth_revealed_or_concealed",
+    "oath_made_broken_or_bound",
+    "bloodline_awakening",
+    "wolf_resonance_shift",
+    "plane_attunement_threshold",
+    "artifact_binding",
+    "life_death_consequence",
+    "shadow_void_celestial_threshold_event",
+    "location_threshold_crossing"
+  ],
+  "non_qualifiers": [
+    "routine_movement",
+    "ordinary_loot_pickup",
+    "repeated_menu_choice",
+    "no_significant_consequence"
+  ],
+  "example_shape": {
+    "branch_event_id": "branch_event.ravenfall_gate.reveal_oath.0001",
+    "agent_ref": "player.current",
+    "decision_context": {
+      "location_ref": "location.ravenfall_gate",
+      "prompt_ref": "quest.buried_oath.resolution_choice",
+      "decision_time_ref": "runtime.time.current"
+    },
+    "available_actions": [
+      "reveal_oath",
+      "conceal_oath",
+      "bind_oath",
+      "study_oath",
+      "weaponize_oath"
+    ],
+    "chosen_action": "reveal_oath",
+    "choice_significance": "major",
+    "base_world_ref": "base_world.nine_planes.v1",
+    "parent_branch_ref": "branch.current",
+    "location_state_ref": "location_state.ravenfall_gate.current",
+    "player_context_ref": "player_runtime_state.current",
+    "cosmology_source_refs": [
+      "ASH_Cosmological_Model.A6"
+    ],
+    "asp_component_refs": [
+      "asp.diagnostic.current"
+    ],
+    "worldstate_delta_refs": [],
+    "future_generation_bias_refs": []
+  },
+  "forbidden_interpretations": [
+    "every_input_action_is_branch_event",
+    "branch_event_as_randomizer_only",
+    "branch_event_without_player_consequence",
+    "branch_event_without_cosmology_provenance",
+    "branch_event_mutates_base_ontology"
+  ]
+}

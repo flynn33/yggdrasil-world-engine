@@ -1,0 +1,59 @@
+{
+  "schema_id": "ywe.branch_generation_context.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_9",
+  "description": "Gathers all player, world, location, and cosmology context needed to instantiate or mutate a leaf branch reality.",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "stability_component": "ASH Pattern System"
+  },
+  "required_fields": [
+    "branch_generation_context_id",
+    "branch_event_ref",
+    "base_world_ref",
+    "parent_branch_ref",
+    "player_context",
+    "world_context",
+    "location_context",
+    "cosmology_context",
+    "asp_component_context",
+    "diagnostic_refs",
+    "future_generation_bias_refs"
+  ],
+  "player_context_fields": [
+    "plane_attunement_ref",
+    "bloodline_resonance_ref",
+    "wolf_resonance_ref",
+    "perception_state_ref",
+    "quest_history_refs",
+    "artifact_binding_refs",
+    "myth_exposure_refs",
+    "prophecy_pressure_refs"
+  ],
+  "world_context_fields": [
+    "worldstate_delta_refs",
+    "faction_topology_ref",
+    "active_myth_refs",
+    "active_prophecy_refs"
+  ],
+  "location_context_fields": [
+    "location_state_ref",
+    "location_mutation_refs",
+    "threshold_status_ref",
+    "plane_pressure_ref"
+  ],
+  "cosmology_context_fields": [
+    "axiom_diagnostic_refs",
+    "existence_potential_ref",
+    "pattern_vector_refs",
+    "base_world_ontology_ref"
+  ],
+  "asp_component_context_fields": [
+    "diagnostic_ref",
+    "recovery_status_ref",
+    "conformance_ref",
+    "containment_ref"
+  ]
+}

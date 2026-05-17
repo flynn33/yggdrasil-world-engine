@@ -8,6 +8,10 @@ Status: YWE and Forsetti guardrail baseline
 
 - `cosmology_authority_invariant`: ASH Cosmological Model is the upstream foundation for YWE and its systems
 - `asp_component_invariant`: ASH Pattern System is a YWE component for diagnostics, pattern integrity, recovery, containment, resilience, conformance, and update/patch stability
+- `base_world_ontology_invariant`: the nine planes define the base world ontology and are not generated branch realities
+- `leaf_branch_reality_invariant`: leaf branch realities are runtime-generated player realities created from meaningful branch events and cosmology-grounded context
+- `no_pregenerated_branch_tree_invariant`: YWE must not model branch reality as a pre-authored alternate-reality catalog
+- `wolf_non_morality_invariant`: White Wolf and Dark Wolf are symbiotic attractors, not moral opposites or morality meters
 - No YWE system may redefine ASH math
 - YWE consumes ASH-derived state, diagnostics, codeword traces, and generation plans
 - Player actions influence generation context; they do not mutate ASH math

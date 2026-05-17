@@ -2,9 +2,18 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ywe.local/schemas/future_generation_bias_update_schema.json",
   "schema_id": "ywe.schemas.future_generation_bias_update",
+  "schema_version": "0.1.0",
+  "status": "phase_9_extended",
   "title": "FutureGenerationBiasUpdate",
+  "description": "Records how branch events and worldstate deltas influence future runtime generation eligibility without forcing scripted outcomes.",
   "type": "object",
   "additionalProperties": true,
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "stability_component": "ASH Pattern System"
+  },
   "required": [
     "bias_update_id",
     "source_worldstate_delta_ref",
@@ -20,6 +29,27 @@
     "source_worldstate_delta_ref": {
       "type": "string"
     },
+    "future_generation_bias_update_id": {
+      "type": "string"
+    },
+    "source_branch_event_ref": {
+      "type": "string"
+    },
+    "source_worldstate_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "affected_branch_ref": {
+      "type": "string"
+    },
+    "affected_location_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "affected_context_channels": {
       "type": "array",
       "items": {
@@ -31,13 +61,48 @@
           "encounter_generation",
           "artifact_eligibility",
           "creature_eligibility",
+          "creature_pressure",
           "myth_emergence",
+          "myth_seed_pressure",
+          "lore_visibility",
           "prophecy_pressure",
           "perception_overlay",
+          "location_mutation",
           "faction_reaction",
           "ability_unlock_pressure",
+          "ability_pressure",
           "wolf_companion_behavior"
         ]
+      }
+    },
+    "bias_domains": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "quest_eligibility",
+          "npc_eligibility",
+          "lore_visibility",
+          "artifact_eligibility",
+          "creature_pressure",
+          "myth_seed_pressure",
+          "prophecy_pressure",
+          "location_mutation",
+          "perception_overlay",
+          "ability_pressure"
+        ]
+      }
+    },
+    "expires": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "diagnostic_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
       }
     },
     "bias_strength": {
@@ -71,5 +136,10 @@
         }
       }
     }
-  }
+  },
+  "forbidden_interpretations": [
+    "bias_as_forced_script",
+    "bias_without_source_event",
+    "bias_without_worldstate_or_branch_context"
+  ]
 }

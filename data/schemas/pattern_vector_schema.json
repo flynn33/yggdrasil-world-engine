@@ -1,0 +1,80 @@
+{
+  "schema_id": "ywe.pattern_vector.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_9",
+  "description": "Defines compact runtime descriptors for entities, locations, branch realities, myths, prophecies, artifacts, creatures, and players.",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "stability_component": "ASH Pattern System"
+  },
+  "components": {
+    "H_entropy": {
+      "type": "number",
+      "range": [
+        0,
+        1
+      ],
+      "meaning": "instability_disorder_void_pressure_collapse_risk"
+    },
+    "K_algorithmic_complexity": {
+      "type": "number",
+      "range": [
+        0,
+        1
+      ],
+      "meaning": "layered_identity_depth_description_complexity"
+    },
+    "D_fractal_dimension": {
+      "type": "number",
+      "suggested_range": [
+        1,
+        2
+      ],
+      "meaning": "branching_influence_multi_scale_recurrence_lore_richness"
+    },
+    "S_symmetry_index": {
+      "type": "number",
+      "range": [
+        0,
+        1
+      ],
+      "meaning": "coherence_balance_celestial_stability_harmonic_structure"
+    },
+    "L_generator_length": {
+      "type": "number",
+      "range": [
+        0,
+        1
+      ],
+      "meaning": "compactness_or_complexity_of_generating_rule"
+    }
+  },
+  "required_fields": [
+    "pattern_vector_id",
+    "target_ref",
+    "target_kind",
+    "components",
+    "interpretation_notes",
+    "source_refs"
+  ],
+  "target_kinds": [
+    "player",
+    "npc",
+    "location",
+    "artifact",
+    "creature",
+    "myth",
+    "prophecy",
+    "branch",
+    "faction",
+    "lore_fragment"
+  ],
+  "forbidden_uses": [
+    "morality_score",
+    "single_component_total_identity",
+    "numeric_optimization_without_narrative_consequence",
+    "replacement_for_cosmology_context"
+  ]
+}

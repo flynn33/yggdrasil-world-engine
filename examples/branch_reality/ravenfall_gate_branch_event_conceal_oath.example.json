@@ -1,0 +1,51 @@
+{
+  "schema_id": "ywe.branch_event.v1.example",
+  "branch_event_id": "branch_event.ravenfall_gate.conceal_oath.0001",
+  "agent_ref": "player.current",
+  "decision_context": {
+    "location_ref": "location.ravenfall_gate",
+    "quest_ref": "quest.the_buried_oath_at_ravenfall_gate",
+    "decision_prompt": "What will the player do with the buried oath?"
+  },
+  "available_actions": [
+    "reveal_oath",
+    "conceal_oath",
+    "bind_oath",
+    "study_oath",
+    "weaponize_oath"
+  ],
+  "chosen_action": "conceal_oath",
+  "choice_significance": "major",
+  "base_world_ref": "base_world.nine_planes.v1",
+  "parent_branch_ref": "branch.current",
+  "location_state_ref": "location_state.ravenfall_gate.pre_resolution",
+  "player_context_ref": "player_runtime_state.current",
+  "cosmology_source_refs": [
+    "A6_Branching_Choice_Realization",
+    "A4_Energetic_Cost_of_Erasure"
+  ],
+  "asp_component_refs": [
+    "asp.diagnostic.current",
+    "asp.conformance.current"
+  ],
+  "worldstate_delta_refs": [
+    "worldstate_delta.ravenfall_gate.oath_concealed.0001"
+  ],
+  "future_generation_bias_refs": [
+    "future_generation_bias.ravenfall_gate.oath_concealed.0001"
+  ],
+  "expected_effects": {
+    "location_phase": "oath_concealed",
+    "plane_pressure": [
+      "P7_Shadow",
+      "P4_Mental"
+    ],
+    "wolf_resonance": [
+      "dark_wolf_memory_containment_pressure"
+    ],
+    "future_generation_bias": [
+      "secret_keeper_npc_eligibility",
+      "hidden_path_eligibility"
+    ]
+  }
+}

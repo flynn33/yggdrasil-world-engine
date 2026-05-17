@@ -1,0 +1,69 @@
+{
+  "schema_id": "ywe.leaf_branch_reality_state.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_9",
+  "description": "Stores compact player-specific runtime-generated branch reality state.",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "stability_component": "ASH Pattern System"
+  },
+  "required_fields": [
+    "leaf_branch_id",
+    "base_world_ref",
+    "parent_branch_ref",
+    "created_by_branch_event_ref",
+    "generation_context_ref",
+    "active_plane_pressure_ref",
+    "branch_status",
+    "worldstate_delta_refs",
+    "location_overlay_refs",
+    "manifest_refs",
+    "future_generation_bias_refs"
+  ],
+  "branch_status_values": [
+    "potential",
+    "active",
+    "stabilized",
+    "unstable",
+    "contained",
+    "merged",
+    "archived"
+  ],
+  "persistence_policy": {
+    "persist": [
+      "branch_id",
+      "branch_event_ref",
+      "generation_context_ref",
+      "worldstate_delta_refs",
+      "location_overlay_refs",
+      "materialized_manifest_refs",
+      "future_generation_bias_refs"
+    ],
+    "do_not_persist_as_source_truth": [
+      "massive_pregenerated_world_content",
+      "unbounded_alternate_reality_catalog",
+      "platform_generated_assets"
+    ]
+  },
+  "allowed_divergence_domains": [
+    "location_state",
+    "npc_availability",
+    "quest_eligibility",
+    "lore_visibility",
+    "artifact_eligibility",
+    "creature_pressure",
+    "myth_seed_status",
+    "prophecy_pressure",
+    "perception_overlays",
+    "plane_pressure",
+    "faction_claims",
+    "future_generation_bias"
+  ],
+  "forbidden_divergence_domains": [
+    "nine_plane_ontology",
+    "ASH_Cosmological_Model_axioms",
+    "ASH_Pattern_System_component_integrity_rules"
+  ]
+}

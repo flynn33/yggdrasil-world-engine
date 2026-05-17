@@ -1,0 +1,48 @@
+{
+  "schema_id": "ywe.axiom_diagnostic_packet.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_9",
+  "description": "Translates ASH Cosmological Model axioms A1-A6 into runtime diagnostic packets.",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "stability_component": "ASH Pattern System"
+  },
+  "axioms": {
+    "A1": "Relational_Existence",
+    "A2": "Structural_Compressibility",
+    "A3": "Multi_Scale_Persistence",
+    "A4": "Energetic_Cost_of_Erasure",
+    "A5": "Self_Reference_for_Consciousness",
+    "A6": "Branching_Choice_Realization"
+  },
+  "required_fields": [
+    "axiom_diagnostic_id",
+    "target_ref",
+    "target_kind",
+    "evaluated_axioms",
+    "violations",
+    "pressures",
+    "stabilizers",
+    "recommended_kernel_actions",
+    "asp_component_refs"
+  ],
+  "recommended_kernel_actions": [
+    "no_action",
+    "generate_quest_pressure",
+    "generate_npc_pressure",
+    "generate_lore_pressure",
+    "mutate_location_state",
+    "increase_myth_seed_pressure",
+    "increase_prophecy_pressure",
+    "trigger_recovery",
+    "trigger_containment",
+    "create_branch_event"
+  ],
+  "forbidden_interpretations": [
+    "axioms_as_flavor_only",
+    "diagnostic_without_target",
+    "quest_generation_without_axiom_or_worldstate_pressure"
+  ]
+}

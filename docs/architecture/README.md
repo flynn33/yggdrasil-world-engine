@@ -10,6 +10,15 @@ Required first-read authority contracts:
 - `ash_pattern_system_component_contract.md` -- ASH Pattern System role inside YWE.
 - `ash_upstream_authority_contract.md` -- Historical packet-spine authority contract, preserved as superseded component evidence where necessary.
 
+Phase 9 runtime-cosmology foundation contracts:
+
+- `runtime_cosmology_foundation_contract.md` -- Phase 9 foundation flow for base world ontology, branch events, diagnostics, and manifestation boundaries.
+- `base_world_ontology_contract.md` -- Nine-plane substrate rules; planes are base ontology, not generated branch realities.
+- `leaf_branch_reality_contract.md` -- Runtime-generated player branch reality rules and divergence boundaries.
+- `branch_event_contract.md` -- Meaningful player-choice event contract for branch creation and bias updates.
+- `existential_gameplay_kernel_contract.md` -- A1-A6 diagnostics and existence potential evaluation.
+- `pattern_vector_runtime_contract.md` -- Runtime semantics for H, K, D, S, and L pattern vector components.
+
 The current controlling authority chain is:
 
 ```text
@@ -103,3 +112,15 @@ ASH Cosmological Model
 No reverse dependencies. No circular dependencies.
 
 Host adapters materialize approved manifests but do not author symbolic truth.
+
+Phase 9 branch-reality dependency flow:
+
+```text
+ASH Cosmological Model
+  -> YWE Runtime Cosmology Contracts
+    -> Branch Reality Resolver
+      -> Feature Engines
+
+ASH Pattern System Component
+  -> diagnostics, conformance, recovery, and containment support
+```

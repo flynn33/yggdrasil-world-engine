@@ -23,6 +23,19 @@ recovery, containment, resilience, conformance, and update/patch stability.
 YWE interprets ASH-derived meaning into world and gameplay manifests. Host
 adapters remain downstream materialization surfaces.
 
+Phase 9 adds the runtime-cosmology foundation between the ASH Cosmological
+Model and later feature systems:
+
+```text
+ASH Cosmological Model
+  -> YWE Runtime Cosmology Contracts
+    -> Branch Reality Resolver
+      -> Feature Engines
+
+ASH Pattern System Component
+  -> diagnostics, conformance, recovery, and containment support across those systems
+```
+
 ## Direct Runtime Dependencies
 
 - `ywe_cosmology_authority_contract.md`: authoritative architecture contract
@@ -33,6 +46,13 @@ adapters remain downstream materialization surfaces.
 - `ash_upstream_authority_contract.md`: preserved packet-spine contract; earlier
   ASH Pattern System as topmost authority phrasing is superseded by the current
   cosmology authority contract.
+- `runtime_cosmology_foundation_contract.md`: Phase 9 contract for base ontology,
+  branch events, branch-generation context, diagnostics, and manifestation
+  boundaries.
+- `leaf_branch_reality_contract.md`: Phase 9 contract for runtime-generated
+  player branch realities and branch divergence boundaries.
+- `branch_event_contract.md`: Phase 9 contract for meaningful player-choice
+  events that may create branch realities and future generation bias.
 - `com.ywe.core.cosmology-engine`: none
 - `com.ywe.core.realm-engine`: cosmology
 - `com.ywe.core.ash-pattern-engine`: cosmology, realm
