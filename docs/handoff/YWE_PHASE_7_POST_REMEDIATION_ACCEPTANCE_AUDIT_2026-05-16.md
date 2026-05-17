@@ -57,18 +57,73 @@ ASH Pattern System
 
 ## Commands Run
 
+Local machine-specific roots were represented by these variables so the audit
+record remains reproducible without committing contributor-specific absolute
+paths:
+
 ```text
-find /Users/jimdaley/Documents/RavenForge/YWE_PHASE_7_POST_REMEDIATION_ACCEPTANCE_AUDIT_PACKAGE -type f | sort
-python3 <package checksum validation script>
-git worktree add -b phase/phase-7-acceptance-audit-package /Users/jimdaley/Documents/RavenForge/AI/Yggdrasil-World-Engine-phase7-package-audit origin/main
-cp -R /Users/jimdaley/Documents/RavenForge/YWE_PHASE_7_POST_REMEDIATION_ACCEPTANCE_AUDIT_PACKAGE/payload/. /Users/jimdaley/Documents/RavenForge/AI/Yggdrasil-World-Engine-phase7-package-audit/
+PHASE7_PACKAGE_ROOT=<local path to YWE_PHASE_7_POST_REMEDIATION_ACCEPTANCE_AUDIT_PACKAGE>
+PHASE7_AUDIT_WORKTREE=<local path to fresh Phase 7 audit worktree>
+```
+
+```bash
+find "$PHASE7_PACKAGE_ROOT" -type f | sort
+python3 - "$PHASE7_PACKAGE_ROOT" <<'PY'
+import hashlib
+import json
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1]).resolve()
+manifest = json.loads((root / "manifests/package_checksums.json").read_text(encoding="utf-8-sig"))
+errors = []
+seen = set()
+for item in manifest["files"]:
+    path = root / item["path"]
+    seen.add(item["path"])
+    if not path.is_file():
+        errors.append(f"missing {item['path']}")
+        continue
+    data = path.read_bytes()
+    digest = hashlib.sha256(data).hexdigest()
+    if digest != item["sha256"]:
+        errors.append(f"sha256 mismatch {item['path']}: {digest} != {item['sha256']}")
+    if len(data) != item["bytes"]:
+        errors.append(f"byte mismatch {item['path']}: {len(data)} != {item['bytes']}")
+actual = sorted(str(p.relative_to(root)) for p in root.rglob("*") if p.is_file())
+missing_from_manifest = [p for p in actual if p not in seen and p != "manifests/package_checksums.json"]
+if missing_from_manifest:
+    errors.append("files not listed in checksum manifest: " + ", ".join(missing_from_manifest))
+if errors:
+    raise SystemExit("\\n".join(errors))
+print(f"PACKAGE CHECKSUM VALIDATION PASSED ({len(seen)} manifest entries, {len(actual)} files present)")
+PY
+git worktree add -b phase/phase-7-acceptance-audit-package "$PHASE7_AUDIT_WORKTREE" origin/main
+cp -R "$PHASE7_PACKAGE_ROOT/payload/." "$PHASE7_AUDIT_WORKTREE/"
 git branch --show-current
 git rev-parse HEAD
 git log --oneline -5
 git status --short
 git diff --name-status
 git diff --stat
-python3 <Phase 7 required artifact presence check>
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+root = Path(".").resolve()
+contract = json.loads((root / "data/validation/phase_7_required_artifacts.json").read_text(encoding="utf-8-sig"))
+missing = []
+for group in ("phase_0_6_required_artifacts", "phase_7_required_artifacts"):
+    for path in contract[group]:
+        if not (root / path).is_file():
+            missing.append((group, path))
+if missing:
+    print("PHASE 7 REQUIRED ARTIFACT CHECK FAILED")
+    for group, path in missing:
+        print(f" - {group}: {path}")
+    raise SystemExit(1)
+print("PHASE 7 REQUIRED ARTIFACT CHECK PASSED")
+PY
 ```
 
 ## Files Added During Phase 7
