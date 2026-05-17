@@ -17,6 +17,8 @@ handoff records.
 | `YWE_Planning_Phase_0.md` | Original planning phase record |
 | `YWE_ASP_CORE_MATH_REBUILD_HANDOFF_2026-05-09.md` | Accepted ASH/ASP core-math rebuild handoff |
 | `YWE_ASH_UPSTREAM_AUTHORITY_HANDOFF_2026-05-10.md` | Post-remediation ASH upstream authority architecture handoff |
+| `YWE_COSMOLOGY_AUTHORITY_REMEDIATION_HANDOFF_2026-05-16.md` | Accepted Phase 0-6 cosmology-authority remediation handoff |
+| `YWE_PHASE_7_POST_REMEDIATION_ACCEPTANCE_AUDIT_2026-05-16.md` | Phase 7 post-remediation acceptance audit |
 | `repo_implementation_mapping.md` | Repository implementation mapping |
 | `missing_source_documents.md` | Missing source document inventory |
 
@@ -25,14 +27,25 @@ handoff records.
 The active architecture authority sequence is:
 
 ```text
+Where Ravens Wait: Eternal Reckoning
+  = game / narrative layer
+
+Yggdrasil World Engine
+  = agnostic game engine
+
+ASH Cosmological Model
+  = upstream foundation for YWE and its systems
+
 ASH Pattern System
-  -> Yggdrasil World Engine
-    -> YWE game systems / feature engines
-      -> platform-specific runtime implementations
+  = component inside YWE for pattern integrity, diagnostics, recovery,
+    containment, code resilience, conformance, and update/patch stability
 ```
 
-ASH is the upstream mathematical and generative authority for YWE. YWE
-consumes ASH-derived state, diagnostics, codeword traces, and generation plans.
+The ASH Cosmological Model is the upstream foundation for YWE and its systems.
+The ASH Pattern System is a component inside YWE for integrity, diagnostics,
+recovery, containment, conformance, code resilience, and update/patch stability.
+YWE consumes ASH-derived state, diagnostics, codeword traces, and generation
+plans without making ASH Pattern System the topmost cosmology authority.
 
 ## Invariants
 - all meaningful generation must remain ASH-derived
