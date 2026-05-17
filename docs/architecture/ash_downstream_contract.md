@@ -20,6 +20,12 @@ systems. ASH Pattern System is a YWE component for diagnostics, pattern
 integrity, recovery, containment, resilience, conformance, generation-plan
 consistency, and update/patch stability.
 
+Phase 9 note: this document is historical/partial if it frames ASH Pattern
+System as the top-level authority. Current hierarchy: ASH Cosmological Model is
+the upstream foundation for YWE and its systems; ASH Pattern System is a YWE
+component for pattern integrity, diagnostics, recovery, containment,
+conformance, resilience, and update/patch stability.
+
 Historical acceptance-marker note: earlier drafts used the phrase "upstream mathematical and generative authority." That phrase is retained here only as superseded validator context; it is not the current authority stack.
 
 ## Upstream authority reference

@@ -1,0 +1,33 @@
+{
+  "schema_id": "ywe.axiom_diagnostic_packet.v1.example",
+  "axiom_diagnostic_id": "axiom_diag.a1.isolated_witness.0001",
+  "target_ref": "npc.unborn_witness.ravenfall_gate",
+  "target_kind": "npc",
+  "evaluated_axioms": [
+    "A1",
+    "A2",
+    "A5"
+  ],
+  "violations": [
+    {
+      "axiom": "A1",
+      "severity": "high",
+      "reason": "candidate witness has no relation to player, oath, faction, or location"
+    }
+  ],
+  "pressures": [
+    "relation_restoration_needed"
+  ],
+  "stabilizers": [
+    "bind_npc_to_oath_event",
+    "bind_npc_to_location_memory",
+    "bind_npc_to_faction_claim"
+  ],
+  "recommended_kernel_actions": [
+    "generate_npc_pressure",
+    "generate_lore_pressure"
+  ],
+  "asp_component_refs": [
+    "asp.diagnostic.current"
+  ]
+}

@@ -74,6 +74,25 @@ truth.
 The canonical architecture contract for this boundary is
 `docs/architecture/ash_upstream_authority_contract.md`.
 
+## Phase 9 Runtime Cosmology Foundation
+
+Where Ravens Wait: Eternal Reckoning remains the game and narrative layer.
+Yggdrasil World Engine remains the agnostic game engine. The ASH Cosmological
+Model remains the upstream foundation for YWE and its systems. The ASH Pattern
+System remains a YWE component for pattern integrity, diagnostics, recovery,
+containment, conformance, resilience, and update/patch stability.
+
+The nine planes define the base world ontology. They are the substrate from
+which runtime manifestation is interpreted, not a generated branch tree and not
+ordinary gameplay zones.
+
+Leaf branch realities are runtime-generated player realities. Each
+runtime-generated leaf branch is created from meaningful player choice and
+cosmology-grounded context. Meaningful player choices can create branch events,
+and those events condition branch state through attunement, bloodline
+resonance, wolf resonance, perception, location state, worldstate deltas, and
+cosmological law. Leaf branches are not pre-generated.
+
 ## Design Goals
 
 ```yaml

@@ -1,0 +1,46 @@
+{
+  "schema_id": "ywe.branch_event.v1.example",
+  "branch_event_id": "branch_event.ravenfall_gate.reveal_oath.0001",
+  "agent_ref": "player.current",
+  "decision_context": {
+    "location_ref": "location.ravenfall_gate",
+    "quest_ref": "quest.the_buried_oath_at_ravenfall_gate",
+    "decision_prompt": "What will the player do with the buried oath?"
+  },
+  "available_actions": [
+    "reveal_oath",
+    "conceal_oath",
+    "bind_oath",
+    "study_oath",
+    "weaponize_oath"
+  ],
+  "chosen_action": "reveal_oath",
+  "choice_significance": "major",
+  "base_world_ref": "base_world.nine_planes.v1",
+  "parent_branch_ref": "branch.current",
+  "location_state_ref": "location_state.ravenfall_gate.pre_resolution",
+  "player_context_ref": "player_runtime_state.current",
+  "cosmology_source_refs": [
+    "A6_Branching_Choice_Realization",
+    "A1_Relational_Existence"
+  ],
+  "asp_component_refs": [
+    "asp.diagnostic.current",
+    "asp.conformance.current"
+  ],
+  "expected_effects": {
+    "location_phase": "oath_revealed",
+    "plane_pressure": [
+      "P4_Mental",
+      "P5_Causal",
+      "P6_Celestial"
+    ],
+    "wolf_resonance": [
+      "white_wolf_revelation_pressure"
+    ],
+    "future_generation_bias": [
+      "witness_npc_eligibility",
+      "public_myth_seed_eligibility"
+    ]
+  }
+}

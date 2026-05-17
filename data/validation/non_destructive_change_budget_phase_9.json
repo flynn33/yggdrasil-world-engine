@@ -1,0 +1,24 @@
+{
+  "contract_id": "ywe.phase_9.non_destructive_change_budget",
+  "version": "0.1.0",
+  "policy": "Phase 9 should be primarily additive with narrow contextual patches.",
+  "max_existing_files_substantively_patched_without_review": 10,
+  "max_major_doc_rewrite_percentage_without_review": 15,
+  "always_forbidden": [
+    "delete_existing_source_docs",
+    "delete_accepted_conformance_artifacts",
+    "delete_lore_or_canon_files",
+    "flatten_repository",
+    "mass_rename_directories",
+    "rewrite_master_spec_wholesale",
+    "modify_ash_canonical_math",
+    "introduce_platform_specific_runtime_code"
+  ],
+  "requires_owner_review": [
+    "changing_more_than_10_existing_files",
+    "rewriting_major_spec_sections",
+    "deleting_any_existing_file",
+    "renaming_existing_directories",
+    "modifying_ci_required_checks"
+  ]
+}

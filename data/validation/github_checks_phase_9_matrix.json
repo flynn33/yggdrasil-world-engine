@@ -1,0 +1,54 @@
+{
+  "contract_id": "ywe.phase_9.github_checks_matrix",
+  "version": "0.1.0",
+  "implemented_workflow": ".github/workflows/ywe_repository_guardrails.yml",
+  "implemented_job": "guardrails",
+  "implemented_steps": [
+    "Check required Phase 8-9 artifacts",
+    "Check branch reality guardrail",
+    "Check Phase 9 schema semantics"
+  ],
+  "recommended_checks": [
+    {
+      "name": "YWE / JSON Integrity",
+      "purpose": "All JSON files parse successfully.",
+      "required_for_pr": true
+    },
+    {
+      "name": "YWE / Required Phase 9 Contracts",
+      "purpose": "Required Phase 9 contracts and schemas exist.",
+      "required_for_pr": true
+    },
+    {
+      "name": "YWE / Authority Stack Guardrail",
+      "purpose": "Prevents drift from corrected game/engine/cosmology/ASP hierarchy.",
+      "required_for_pr": true
+    },
+    {
+      "name": "YWE / Branch Reality Guardrail",
+      "purpose": "Prevents pregenerated branch-tree and branch-without-provenance drift.",
+      "required_for_pr": true
+    },
+    {
+      "name": "YWE / Pattern Vector Schema Guardrail",
+      "purpose": "Ensures pattern vector components H,K,D,S,L remain defined.",
+      "required_for_pr": false
+    },
+    {
+      "name": "YWE / Axiom Diagnostic Guardrail",
+      "purpose": "Ensures A1-A6 and Phi remain represented in existential kernel docs.",
+      "required_for_pr": false
+    },
+    {
+      "name": "YWE / Non-Destructive Diff Guardrail",
+      "purpose": "Flags deletions, large rewrites, and destructive repository changes.",
+      "required_for_pr": true
+    }
+  ],
+  "do_not_auto_enable_branch_protection": true,
+  "owner_approval_required_for": [
+    "branch_protection_changes",
+    "required_status_check_changes",
+    "workflow_permission_changes"
+  ]
+}

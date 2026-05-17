@@ -1,0 +1,48 @@
+{
+  "schema_id": "ywe.plane_pressure_state.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_9",
+  "description": "Captures active pressure from the nine-plane base ontology within a branch, player, location, or event context.",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "stability_component": "ASH Pattern System"
+  },
+  "required_fields": [
+    "plane_pressure_id",
+    "target_ref",
+    "target_kind",
+    "base_world_ref",
+    "pressures",
+    "dominant_planes",
+    "interpretation_notes"
+  ],
+  "pressures": {
+    "P1_Physical": 0,
+    "P2_Etheric": 0,
+    "P3_Astral": 0,
+    "P4_Mental": 0,
+    "P5_Causal": 0,
+    "P6_Celestial": 0,
+    "P7_Shadow": 0,
+    "P8_Void": 0,
+    "P9_Divine_Core": 0
+  },
+  "target_kinds": [
+    "player",
+    "location",
+    "branch",
+    "quest",
+    "npc",
+    "artifact",
+    "creature",
+    "myth",
+    "prophecy"
+  ],
+  "validation_notes": [
+    "plane_pressure_must_reference_base_world_ontology",
+    "dominant_planes_must_not_delete_other_planes",
+    "void_pressure_requires_careful_recovery_or_containment_context"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "contract_id": "ywe.phase_8_9.acceptance_contract",
+  "version": "0.1.0",
+  "status": "active_phase_8_9_acceptance_contract",
+  "phases": {
+    "phase_8": {
+      "name": "Baseline Freeze and Recovery Point",
+      "required_artifacts": [
+        "docs/handoff/YWE_POST_PHASE_7_BASELINE_2026-05-17.md"
+      ],
+      "must_pass": [
+        "existing_checks",
+        "non_destructive_review"
+      ]
+    },
+    "phase_9": {
+      "name": "Runtime Cosmology and Leaf Branch Reality Foundation",
+      "required_artifacts_ref": "data/validation/required_phase_8_9_artifacts.json",
+      "must_pass": [
+        "json_integrity",
+        "required_contracts_present",
+        "required_schemas_present",
+        "branch_reality_guardrail",
+        "authority_stack_guardrail",
+        "non_destructive_diff_guardrail"
+      ]
+    }
+  },
+  "acceptance_outcome_values": [
+    "pass",
+    "pass_with_notes",
+    "fail_stop_required"
+  ]
+}

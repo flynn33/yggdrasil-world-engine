@@ -22,6 +22,12 @@ is preserved as ASH Pattern System component evidence.
 Historical wording below may describe ASH Pattern System as upstream authority.
 That framing is no longer current.
 
+Phase 9 note: this document is historical/partial if it frames ASH Pattern
+System as the top-level authority. Current hierarchy: ASH Cosmological Model is
+the upstream foundation for YWE and its systems; ASH Pattern System is a YWE
+component for pattern integrity, diagnostics, recovery, containment,
+conformance, resilience, and update/patch stability.
+
 ---
 
 ## 1. Purpose
