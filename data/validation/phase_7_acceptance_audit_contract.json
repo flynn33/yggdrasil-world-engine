@@ -1,0 +1,34 @@
+{
+  "contract_id": "ywe.phase_7.acceptance_audit_contract",
+  "version": "0.1.0",
+  "status": "required_for_post_remediation_acceptance",
+  "phase": 7,
+  "phase_name": "Post-Remediation Acceptance Audit",
+  "authority_stack": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "engine_component": "ASH Pattern System"
+  },
+  "acceptance_status_values": [
+    "PHASE_7_ACCEPTED",
+    "PHASE_7_ACCEPTED_WITH_DEFERRED_NON_BLOCKING_ITEMS",
+    "PHASE_7_FAILED_REQUIRES_HUMAN_REVIEW"
+  ],
+  "required_gates": [
+    "7.1",
+    "7.2",
+    "7.3",
+    "7.4",
+    "7.5",
+    "7.6",
+    "7.7"
+  ],
+  "required_report": "docs/handoff/YWE_PHASE_7_POST_REMEDIATION_ACCEPTANCE_AUDIT_2026-05-16.md",
+  "phase_8_allowed_only_if": [
+    "PHASE_7_ACCEPTED",
+    "PHASE_7_ACCEPTED_WITH_DEFERRED_NON_BLOCKING_ITEMS with explicit human approval"
+  ],
+  "non_destructive_required": true,
+  "feature_design_allowed": false
+}

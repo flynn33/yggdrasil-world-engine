@@ -1,0 +1,38 @@
+{
+  "contract_id": "ywe.phase_7.github_checks_matrix",
+  "version": "0.1.0",
+  "expected_workflow": ".github/workflows/ywe_repository_guardrails.yml",
+  "expected_triggers": [
+    "pull_request",
+    "push"
+  ],
+  "expected_scripts": [
+    "scripts/check_json_integrity.py",
+    "scripts/check_required_contracts.py",
+    "scripts/check_authority_stack.py",
+    "scripts/check_non_destructive_diff.py"
+  ],
+  "expected_checks": [
+    {
+      "name": "YWE / JSON Integrity",
+      "purpose": "Reject invalid JSON artifacts."
+    },
+    {
+      "name": "YWE / Required Contracts",
+      "purpose": "Ensure authority and component contracts exist."
+    },
+    {
+      "name": "YWE / Authority Stack Guardrail",
+      "purpose": "Reject active canonical drift back to superseded authority hierarchy."
+    },
+    {
+      "name": "YWE / Non-Destructive Diff Guardrail",
+      "purpose": "Flag unexplained deletions or destructive rewrites."
+    },
+    {
+      "name": "YWE / Existing Repository Checks",
+      "purpose": "Run existing repository validation suite."
+    }
+  ],
+  "phase_7_policy": "If workflow or scripts are missing after Phase 0-6 claimed installation, mark Phase 7 as failed unless human explicitly defers GitHub guardrails."
+}

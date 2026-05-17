@@ -1,0 +1,50 @@
+{
+  "contract_id": "ywe.phase_7.non_destructive_diff_policy",
+  "version": "0.1.0",
+  "phase": 7,
+  "default_deletion_classification": "requires_human_review",
+  "forbidden_commands": [
+    "git reset --hard",
+    "git clean -fd",
+    "git clean -fdx",
+    "rm -rf docs",
+    "rm -rf data",
+    "rm -rf core",
+    "rm -rf modules",
+    "rm -rf specs",
+    "rm -rf conformance"
+  ],
+  "protected_paths": [
+    "docs/",
+    "data/",
+    "core/",
+    "modules/",
+    "specs/",
+    "conformance/",
+    "README.md",
+    "SOURCE_AVAILABILITY_MANIFEST.md",
+    "missing_source_documents.md"
+  ],
+  "allowed_phase_7_change_types": [
+    "add_phase_7_docs",
+    "add_phase_7_validation_contracts",
+    "add_phase_7_acceptance_report",
+    "update_documentation_index_link"
+  ],
+  "disallowed_phase_7_change_types": [
+    "broad_refactor",
+    "mass_rewrite",
+    "large_scale_deletion",
+    "feature_implementation",
+    "platform_specific_code",
+    "canonical_math_change",
+    "cosmology_redefinition"
+  ],
+  "failure_conditions": [
+    "unexplained_deletions",
+    "conformance_artifact_removal",
+    "source_canon_removal",
+    "directory_flattening",
+    "replacement_with_stubs"
+  ]
+}

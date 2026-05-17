@@ -1,0 +1,44 @@
+{
+  "contract_id": "ywe.phase_7.forbidden_language_patterns",
+  "version": "0.1.0",
+  "policy": "Forbidden or superseded patterns fail only when they appear as active canonical language. They may appear in historical or superseded sections when explicitly marked as such.",
+  "forbidden_active_patterns": [
+    {
+      "pattern": "ASH Pattern System is upstream from YWE",
+      "severity": "blocking",
+      "replacement": "ASH Cosmological Model is the upstream foundation for YWE and its systems. ASH Pattern System is a component inside YWE."
+    },
+    {
+      "pattern": "ASH Pattern System is the upstream authority",
+      "severity": "blocking",
+      "replacement": "ASH Cosmological Model is the upstream foundation; ASP is a YWE component for integrity and stability."
+    },
+    {
+      "pattern": "ASH is the upstream mathematical and generative authority for YWE",
+      "severity": "blocking",
+      "replacement": "ASH Cosmological Model is the upstream foundation; ASP supports pattern integrity and resilience."
+    },
+    {
+      "pattern": "All YWE systems are based on ASH Pattern System math",
+      "severity": "blocking",
+      "replacement": "YWE systems are based on the ASH Cosmological Model; ASP provides pattern integrity and resilience."
+    },
+    {
+      "pattern": "Where Ravens Wait is the engine",
+      "severity": "blocking",
+      "replacement": "Where Ravens Wait: Eternal Reckoning is the game / narrative layer. YWE is the engine."
+    }
+  ],
+  "required_active_phrases": [
+    "Where Ravens Wait: Eternal Reckoning is the game / narrative layer",
+    "Yggdrasil World Engine is the agnostic game engine",
+    "The ASH Cosmological Model is the upstream foundation for YWE and its systems",
+    "The ASH Pattern System is a component inside YWE"
+  ],
+  "allowed_context_markers_for_historical_language": [
+    "superseded historical framing",
+    "retained for audit context",
+    "do not use as active architecture authority",
+    "superseded by the cosmology authority clarification"
+  ]
+}
