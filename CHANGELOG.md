@@ -5,6 +5,17 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.4] — 2026-05-17
+
+### Added
+- Merge pull request #40 from flynn33/phase/phase-7-acceptance-audit-package
+- docs: address phase 7 review feedback
+- docs: add phase 7 acceptance audit
+
+
+---
+
+
 ## [2.0.3] — 2026-05-16
 
 ### Changes
