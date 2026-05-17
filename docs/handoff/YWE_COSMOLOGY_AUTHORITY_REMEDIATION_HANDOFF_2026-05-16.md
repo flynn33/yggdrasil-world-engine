@@ -1,4 +1,12 @@
-# Remediation Handoff
+# YWE Cosmology Authority Remediation Handoff - 2026-05-16
+
+Date: 2026-05-16
+Copied into `docs/handoff`: 2026-05-17
+Status: accepted Phase 0-6 cosmology-authority remediation handoff
+
+Provenance: this file is a path-stable copy of root `REMEDIATION_HANDOFF.md`,
+created during Phase 7 to satisfy the required artifact path
+`docs/handoff/YWE_COSMOLOGY_AUTHORITY_REMEDIATION_HANDOFF_2026-05-16.md`.
 
 ## Summary
 
