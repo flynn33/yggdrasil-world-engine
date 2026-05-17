@@ -13,7 +13,7 @@ CONTRACT_PATH = "data/validation/required_phase_8_9_artifacts.json"
 def load_required_paths(root: Path) -> list[str]:
     path = root / CONTRACT_PATH
     if not path.is_file():
-        return []
+        return [CONTRACT_PATH]
 
     contract = json.loads(path.read_text(encoding="utf-8-sig"))
     required: list[str] = [CONTRACT_PATH]

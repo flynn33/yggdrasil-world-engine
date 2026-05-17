@@ -11,6 +11,8 @@ PATTERN_VECTOR_PATH = "data/schemas/pattern_vector_schema.json"
 AXIOM_SCHEMA_PATH = "data/schemas/axiom_diagnostic_packet_schema.json"
 EXISTENCE_SCHEMA_PATH = "data/schemas/existence_potential_schema.json"
 KERNEL_CONTRACT_PATH = "docs/architecture/existential_gameplay_kernel_contract.md"
+BRANCH_EVENT_SCHEMA_PATH = "data/schemas/branch_event_schema.json"
+BRANCH_EVENT_EXAMPLES_DIR = "examples/branch_reality"
 PATTERN_COMPONENTS = (
     "H_entropy",
     "K_algorithmic_complexity",
@@ -61,9 +63,27 @@ def check_axioms(root: Path) -> list[str]:
     return errors
 
 
+def check_branch_event_examples(root: Path) -> list[str]:
+    errors: list[str] = []
+    schema_path = root / BRANCH_EVENT_SCHEMA_PATH
+    examples_dir = root / BRANCH_EVENT_EXAMPLES_DIR
+    if not schema_path.is_file() or not examples_dir.is_dir():
+        return errors
+
+    required = set(load_json(root, BRANCH_EVENT_SCHEMA_PATH).get("required_fields", []))
+    for path in sorted(examples_dir.glob("*branch_event*.example.json")):
+        data = json.loads(path.read_text(encoding="utf-8-sig"))
+        missing = sorted(required - set(data.keys()))
+        if missing:
+            errors.append(
+                f"{path.relative_to(root).as_posix()}: missing required fields {', '.join(missing)}"
+            )
+    return errors
+
+
 def main() -> int:
     root = Path(sys.argv[1] if len(sys.argv) > 1 else ".").resolve()
-    errors = check_pattern_vector(root) + check_axioms(root)
+    errors = check_pattern_vector(root) + check_axioms(root) + check_branch_event_examples(root)
     if errors:
         print("Phase 9 schema semantic check failed:")
         for error in errors:

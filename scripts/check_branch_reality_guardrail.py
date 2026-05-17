@@ -41,12 +41,15 @@ def rel(path: Path, root: Path) -> str:
     return path.relative_to(root).as_posix()
 
 
-def load_patterns(root: Path) -> list[str]:
+def load_patterns(root: Path) -> list[tuple[str, str]]:
     data = json.loads((root / PATTERN_PATH).read_text(encoding="utf-8-sig"))
-    return [
-        item["pattern"] if isinstance(item, dict) else str(item)
-        for item in data.get("patterns", [])
-    ]
+    patterns: list[tuple[str, str]] = []
+    for item in data.get("patterns", []):
+        if isinstance(item, dict):
+            patterns.append((str(item["pattern"]), str(item.get("severity", "fail"))))
+        else:
+            patterns.append((str(item), "fail"))
+    return patterns
 
 
 def surrounding_context(lines: list[str], index: int) -> str:
@@ -69,19 +72,19 @@ def iter_scannable(root: Path):
             yield path
 
 
-def forbidden_hits(root: Path, patterns: list[str]) -> list[str]:
-    hits: list[str] = []
+def forbidden_hits(root: Path, patterns: list[tuple[str, str]]) -> list[tuple[str, str]]:
+    hits: list[tuple[str, str]] = []
     for path in iter_scannable(root):
         lines = path.read_text(encoding="utf-8-sig").splitlines()
         for index, line in enumerate(lines):
             lowered = line.lower()
-            for pattern in patterns:
+            for pattern, severity in patterns:
                 if pattern.lower() not in lowered:
                     continue
                 context = surrounding_context(lines, index)
                 if any(term in context for term in ALLOWED_CONTEXT_TERMS):
                     continue
-                hits.append(f"{rel(path, root)}:{index + 1}: {line.strip()}")
+                hits.append((severity, f"{rel(path, root)}:{index + 1}: {line.strip()}"))
     return hits
 
 
@@ -111,13 +114,20 @@ def main() -> int:
 
     hits = forbidden_hits(root, load_patterns(root))
     missing = missing_required_phrases(root)
-    if hits or missing:
+    fail_hits = [hit for severity, hit in hits if severity == "fail"]
+    warn_hits = [hit for severity, hit in hits if severity == "warn"]
+    if fail_hits or missing:
         print("Branch reality guardrail failed:")
-        for hit in hits:
+        for hit in fail_hits:
             print(f"  - forbidden unqualified phrase: {hit}")
         for phrase in missing:
             print(f"  - missing required phrase: {phrase}")
         return 1
+
+    if warn_hits:
+        print("Branch reality guardrail warnings:")
+        for hit in warn_hits:
+            print(f"  - discouraged unqualified phrase: {hit}")
 
     print("Branch reality guardrail passed.")
     return 0
