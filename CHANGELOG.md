@@ -5,6 +5,20 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.7] — 2026-05-17
+
+### Added
+- Merge pull request #43 from flynn33/phase/phase-8-9-branch-reality-foundation
+- fix: address phase 9 review comments
+- docs: add phase 9 branch reality foundation
+
+### Fixed
+- fix: address phase 9 review comments
+
+
+---
+
+
 ## [2.0.6] — 2026-05-17
 
 ### Changes
