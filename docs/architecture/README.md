@@ -21,6 +21,12 @@ Phase 9 runtime-cosmology foundation contracts:
 
 Phase 10 player-state contract:
 
+DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
+The Phase 10 through Phase 12 entries below are retained as owner-review
+records only. The nine planes of existence define the base world ontology.
+Leaf branch realities are runtime-generated player realities. Leaf branches
+are not pre-generated.
+
 - `player_runtime_state_v1.md` -- Canonical player-specific runtime state, runtime-state deltas, branch context references, and generation-context boundary rules.
 
 Phase 11 worldstate and location mutation contract:
@@ -138,6 +144,9 @@ ASH Pattern System Component
 ```
 
 Phase 10 player-runtime dependency flow:
+
+Boundary note: this later-phase flow is deferred owner-review context only and
+is not active Phase 9 implementation authority.
 
 ```text
 Leaf Branch Reality

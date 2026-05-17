@@ -15,3 +15,10 @@
 | Phase 10 - Player Runtime State v1 | passed | Player-specific runtime state contract, schema, branch context refs, provenance boundaries, examples, and guardrail check added. |
 | Phase 11 - Worldstate and Location Mutation | passed | Persistent worldstate consequence, scoped location mutation, commit records, diagnostic no-ops, examples, and guardrail check added. |
 | Phase 12 - Quest, NPC, and Lore Generation | passed | Quest-chain, NPC-manifest, NPC-memory, codex-lore, myth-record, social-distribution, examples, and guardrail check added. |
+
+## Phase 8-9 Remediation Boundary Note
+
+DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
+The Phase 10 through Phase 12 rows above are superseded for the active
+Phase 8-9 remediation boundary. They are retained as owner-review records only,
+not as acceptance authority for this branch.

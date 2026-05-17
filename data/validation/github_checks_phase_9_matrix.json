@@ -6,7 +6,8 @@
   "implemented_steps": [
     "Check required Phase 8-9 artifacts",
     "Check branch reality guardrail",
-    "Check Phase 9 schema semantics"
+    "Check Phase 9 schema semantics",
+    "Check Phase 8-9 package boundary"
   ],
   "recommended_checks": [
     {
@@ -42,6 +43,11 @@
     {
       "name": "YWE / Non-Destructive Diff Guardrail",
       "purpose": "Flags deletions, large rewrites, and destructive repository changes.",
+      "required_for_pr": true
+    },
+    {
+      "name": "YWE / Phase 8-9 Package Boundary",
+      "purpose": "Ensures Phase 10 through Phase 12 artifacts are deferred owner-review records and not active Phase 9 authority.",
       "required_for_pr": true
     }
   ],

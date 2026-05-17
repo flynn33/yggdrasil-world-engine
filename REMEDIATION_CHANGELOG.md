@@ -1,5 +1,28 @@
 # Remediation Changelog
 
+## 2026-05-17 - Phase 8-9 Remediation Boundary Correction
+
+### Added
+
+- Added a Phase 8-9 package-boundary guardrail contract and script.
+- Added explicit deferred-owner-review language for Phase 10 through Phase 12 artifacts that appeared before owner-approved package acceptance.
+- Added Phase 9 handoff remediation notes using the Phase 8-9 review and handoff template.
+
+### Changed
+
+- Narrowly patched handoff, schema, architecture, and remediation indexes to state that Phase 10 through Phase 12 material is retained for owner review only.
+- Added a master-spec supersession note using the Phase 8-9 authority language: the ASH Cosmological Model is the upstream foundation for YWE and its systems, and the ASH Pattern System is a YWE component for pattern integrity, diagnostics, recovery, containment, conformance, code resilience, and update/patch stability.
+- Added controlled invalid-JSON and unreadable-file failure reporting to the Phase 8-9 package-boundary guardrail.
+- Aligned `YWEInterpretationPacket` packet-index required fields with the referenced schema by adding `requested_manifest_kind`.
+- Tightened the Phase 8-9 boundary guardrail so every deferred Phase 10 through Phase 12 artifact must carry the deferred owner-review marker.
+- Scoped `data/schemas/README.md` so active Phase 8-9 schema rows remain active and only Phase 10 through Phase 12 rows carry the deferred marker inline.
+
+### Preserved
+
+- Deleted no files.
+- Preserved existing later-phase artifacts for owner review.
+- Preserved accepted Phase 7 and Phase 8-9 artifacts.
+
 ## 2026-05-16 - Cosmology Authority Stack Alignment
 
 ### Added

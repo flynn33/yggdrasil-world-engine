@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Validate Phase 11 worldstate and location mutation contract coverage."""
+# DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
 
 from __future__ import annotations
 

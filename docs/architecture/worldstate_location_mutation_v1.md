@@ -4,6 +4,8 @@ Date: 2026-05-17
 Project: Yggdrasil World Engine
 Status: canonical Phase 11 worldstate and location mutation contract
 
+Phase 8-9 Boundary: DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
+
 ## Purpose
 
 Worldstate and Location Mutation v1 defines the canonical YWE contract for

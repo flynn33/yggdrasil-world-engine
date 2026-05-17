@@ -4,6 +4,8 @@ Date: 2026-05-17
 Project: Yggdrasil World Engine
 Status: canonical Phase 10 runtime-state contract
 
+Phase 8-9 Boundary: DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
+
 ## Purpose
 
 Player Runtime State v1 defines the canonical YWE record for player-specific
