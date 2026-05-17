@@ -10,3 +10,4 @@
 | Phase 5 - GitHub Pull Request Checks | passed | Guardrail scripts, workflow, and PR template updates added. |
 | Phase 6 - Post-Remediation Audit and Handoff | passed | Final handoff, changelog, and gate results produced. |
 | Phase 7 - Post-Remediation Acceptance Audit | passed | Human-reviewed Gate 7.2 resolved; required handoff path added; Phase 7 gates passed. |
+| Phase 8 - Baseline Freeze and Restore Point | passed | Post-remediation baseline recorded at `v2.0.5` / `1a8ccfc`; historical handoff provenance clarified. |

@@ -16,11 +16,20 @@ handoff records.
 | `YWE_NEXT_THREAD_BRIEF_2026-03-13_v2.md` | Earlier thread brief and repository continuity notes |
 | `YWE_Planning_Phase_0.md` | Original planning phase record |
 | `YWE_ASP_CORE_MATH_REBUILD_HANDOFF_2026-05-09.md` | Accepted ASH/ASP core-math rebuild handoff |
-| `YWE_ASH_UPSTREAM_AUTHORITY_HANDOFF_2026-05-10.md` | Post-remediation ASH upstream authority architecture handoff |
+| `YWE_ASH_UPSTREAM_AUTHORITY_HANDOFF_2026-05-10.md` | Historical/superseded ASH upstream authority handoff; retained for packet-spine provenance, not as the current top-level authority diagram |
 | `YWE_COSMOLOGY_AUTHORITY_REMEDIATION_HANDOFF_2026-05-16.md` | Accepted Phase 0-6 cosmology-authority remediation handoff |
 | `YWE_PHASE_7_POST_REMEDIATION_ACCEPTANCE_AUDIT_2026-05-16.md` | Phase 7 post-remediation acceptance audit |
+| `YWE_POST_REMEDIATION_BASELINE_2026-05-16.md` | Phase 8 post-remediation baseline freeze and restore point |
 | `repo_implementation_mapping.md` | Repository implementation mapping |
 | `missing_source_documents.md` | Missing source document inventory |
+
+## Historical Handoff Note
+
+`YWE_ASH_UPSTREAM_AUTHORITY_HANDOFF_2026-05-10.md` is retained as historical
+evidence for the ASH-derived packet spine and generation-flow work. Its
+`Architecture law` diagram is superseded by the 2026-05-16 cosmology-authority
+remediation and the Phase 7 acceptance audit. The current authority sequence is
+the one recorded below.
 
 ## Authority Sequence
 

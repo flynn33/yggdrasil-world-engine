@@ -2,7 +2,28 @@
 
 ## Status
 
-ASH remediation is complete and accepted. This handoff records a post-remediation architecture extension: ASH upstream mathematical and generative authority.
+Historical/superseded as a current top-level authority diagram. This handoff is
+retained for provenance of the ASH-derived packet spine and generation-flow
+work completed on 2026-05-10.
+
+The `Architecture law` diagram below is superseded by the 2026-05-16
+cosmology-authority remediation and Phase 7 acceptance audit. The current
+authority sequence is:
+
+```text
+Where Ravens Wait: Eternal Reckoning
+  = game / narrative layer
+
+Yggdrasil World Engine
+  = agnostic game engine
+
+ASH Cosmological Model
+  = upstream foundation for YWE and its systems
+
+ASH Pattern System
+  = component inside YWE for pattern integrity, diagnostics, recovery,
+    containment, code resilience, conformance, and update/patch stability
+```
 
 ## Architecture law
 
