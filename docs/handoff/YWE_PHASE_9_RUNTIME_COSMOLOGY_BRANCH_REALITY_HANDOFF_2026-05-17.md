@@ -273,6 +273,32 @@ scripts/run_checks.sh
 reason for patch: include Phase 8-9 boundary validation in local checks
 summary of changes: added boundary guardrail check and deferred-integrity note before later-phase checks
 whether patch was additive or replacement: additive
+
+data/validation/phase_8_9_package_boundary_guardrail.json
+reason for patch: require direct deferred-marker coverage for all listed Phase 10 through Phase 12 deferred artifacts
+summary of changes: added architecture, schema, validation contract, and guardrail script files to required marker locations
+whether patch was additive or replacement: additive
+
+scripts/check_phase_8_9_package_boundary.py
+reason for patch: enforce deferred-marker coverage directly on deferred artifacts
+summary of changes: marker validation now checks the union of required marker locations and deferred artifact paths
+whether patch was additive or replacement: additive
+
+docs/architecture/player_runtime_state_v1.md
+docs/architecture/worldstate_location_mutation_v1.md
+docs/architecture/quest_npc_lore_generation_v1.md
+data/schemas/player_runtime_state_schema.json
+data/schemas/worldstate_location_mutation_schema.json
+data/schemas/quest_npc_lore_generation_schema.json
+data/validation/player_runtime_state_gate_contract.json
+data/validation/worldstate_location_mutation_gate_contract.json
+data/validation/quest_npc_lore_generation_gate_contract.json
+scripts/check_player_runtime_state.py
+scripts/check_worldstate_location_mutation.py
+scripts/check_quest_npc_lore_generation.py
+reason for patch: prevent direct consumption of preserved Phase 10 through Phase 12 artifacts as active authority
+summary of changes: added the exact deferred owner-review marker to each direct deferred artifact
+whether patch was additive or replacement: additive
 ```
 
 ### 4. Checks

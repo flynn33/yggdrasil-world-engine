@@ -69,11 +69,13 @@ def main() -> int:
         if not (root / rel).is_file():
             errors.append(f"missing Phase 8-9 artifact: {rel}")
 
-    for rel in contract.get("deferred_phase_artifacts", []):
+    deferred_artifacts = contract.get("deferred_phase_artifacts", [])
+    for rel in deferred_artifacts:
         if not (root / rel).is_file():
             errors.append(f"missing preserved deferred artifact: {rel}")
 
-    for rel in contract.get("required_marker_locations", []):
+    marker_locations = list(dict.fromkeys([*contract.get("required_marker_locations", []), *deferred_artifacts]))
+    for rel in marker_locations:
         path = root / rel
         if not path.is_file():
             errors.append(f"missing marker file: {rel}")

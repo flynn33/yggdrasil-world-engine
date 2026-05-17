@@ -33,10 +33,9 @@ YWEGenerationContextPacket
 
 ## Core Files
 
-DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
-Phase 10 through Phase 12 schema rows below are retained owner-review records
-only. The active Phase 8-9 schema boundary is the base world ontology, leaf
-branch reality, branch event, branch generation context, pattern vector,
+Rows without an inline deferred marker remain active within their accepted
+phase boundary. The active Phase 8-9 schema boundary is the base world ontology,
+leaf branch reality, branch event, branch generation context, pattern vector,
 existence potential, axiom diagnostic packet, plane pressure state, and future
 generation bias update foundation.
 
@@ -49,9 +48,9 @@ generation bias update foundation.
 | `player_action_trace_schema.json` | Player action and consequence inputs that may influence future generation context |
 | `exploration_frontier_request_schema.json` | Frontier, threshold, thin-veil, and unresolved-node generation requests |
 | `future_generation_bias_update_schema.json` | Consequence-derived pressure for later ASH-governed generation context |
-| `player_runtime_state_schema.json` | Phase 10 player-specific runtime truth, branch context references, and provenance boundaries |
-| `worldstate_location_mutation_schema.json` | Phase 11 persistent worldstate consequence, scoped location mutation, commit records, and diagnostic no-ops |
-| `quest_npc_lore_generation_schema.json` | Phase 12 quest chains, NPC manifests, NPC memory deltas, codex lore records, myth records, and social distribution deltas |
+| `player_runtime_state_schema.json` | DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted. Phase 10 player-specific runtime truth, branch context references, and provenance boundaries |
+| `worldstate_location_mutation_schema.json` | DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted. Phase 11 persistent worldstate consequence, scoped location mutation, commit records, and diagnostic no-ops |
+| `quest_npc_lore_generation_schema.json` | DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted. Phase 12 quest chains, NPC manifests, NPC memory deltas, codex lore records, myth records, and social distribution deltas |
 
 ## Required Provenance
 
