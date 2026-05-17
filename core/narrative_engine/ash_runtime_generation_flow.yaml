@@ -109,12 +109,16 @@ canonical_flow:
     inputs:
       - SystemManifestHandoff
     emits:
+      - QuestGenerationRequest
       - WorldRegionManifest
       - QuestChainManifest
       - NPCManifest
       - CreatureManifest
       - ArtifactManifest
       - MythRecord
+      - MythSeedCandidate
+      - CodexRecord
+      - SocialDistributionDelta
       - ProphecyRecord
       - PerceptionStateRecord
       - FactionDelta
@@ -181,6 +185,23 @@ canonical_flow:
     emits:
       - FutureGenerationBiasUpdate
 
+  - step: 13
+    name: route_phase_12_generation_outputs
+    inputs:
+      - QuestChainManifest
+      - NPCManifest
+      - CodexRecord
+      - MythRecord
+      - QuestResolutionPayload
+      - FutureGenerationBiasUpdate
+    emits:
+      - YWEGenerationContextPacket
+      - NPCMemoryDelta
+      - SocialDistributionDelta
+      - WorldstateDeltaPacket
+      - DiagnosticNoOp
+    boundary: Quest, NPC, lore, and myth outputs may influence later context only through accepted worldstate, location mutation, diagnostic no-op, or future generation bias records.
+
 named_flows:
   exploration_driven_world_generation:
     sequence:
@@ -207,8 +228,12 @@ named_flows:
       - YWEGenerationContextPacket
       - ASHUpstreamGenerationEnvelope
       - YWEInterpretationPacket
+      - QuestGenerationRequest
       - QuestChainManifest
       - QuestResolutionPayload
+      - NPCMemoryDelta
+      - CodexRecord
+      - MythSeedCandidate
       - LocationMutationDelta
     rule: Quest templates are interpretive containers and do not generate symbolic truth independently.
 
@@ -220,11 +245,25 @@ named_flows:
       - ASHUpstreamGenerationEnvelope
       - YWEInterpretationPacket
       - NPCManifest
-      - NPCMemoryHooks
+      - NPCMemoryDelta
       - WorldstateDeltaPacket
       - LocationMutationState
       - DiagnosticNoOp
     rule: NPC beliefs, faction claims, myths, and partial interpretations may affect context without rewriting shared world truth.
+
+  consequence_driven_lore_and_myth_generation:
+    sequence:
+      - QuestResolutionPayload
+      - WorldstateDeltaPacket
+      - YWEGenerationContextPacket
+      - ASHUpstreamGenerationEnvelope
+      - YWEInterpretationPacket
+      - CodexRecord
+      - MythSeedCandidate
+      - MythRecord
+      - SocialDistributionDelta
+      - FutureGenerationBiasUpdate
+    rule: Lore and myth records are layered interpretations of accepted consequence and cannot overwrite locked canon or factual world truth.
 
   consequence_driven_future_generation_bias:
     sequence:

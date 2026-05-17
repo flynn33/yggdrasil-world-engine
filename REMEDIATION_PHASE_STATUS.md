@@ -14,3 +14,4 @@
 | Phase 9 - Runtime Cosmology and Leaf Branch Reality Foundation | passed | Base ontology, runtime leaf branch, branch event, existential kernel, pattern vector, and Phase 9 guardrail contracts added. |
 | Phase 10 - Player Runtime State v1 | passed | Player-specific runtime state contract, schema, branch context refs, provenance boundaries, examples, and guardrail check added. |
 | Phase 11 - Worldstate and Location Mutation | passed | Persistent worldstate consequence, scoped location mutation, commit records, diagnostic no-ops, examples, and guardrail check added. |
+| Phase 12 - Quest, NPC, and Lore Generation | passed | Quest-chain, NPC-manifest, NPC-memory, codex-lore, myth-record, social-distribution, examples, and guardrail check added. |

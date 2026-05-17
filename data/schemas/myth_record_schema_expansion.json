@@ -1,24 +1,70 @@
 {
-  "status": "placeholder_awaiting_finalized_content",
-  "system": "myth_record_schema_expansion",
-  "purpose": "Placeholder for expanded myth record persistence schema.",
-  "inputs": [
-    "myth engine outputs",
-    "canonical myth schema"
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.schemas.myth_record_schema_expansion",
+  "version": "1.0.0",
+  "status": "active_contract",
+  "phase": 12,
+  "purpose": "Expanded myth record persistence contract for retrospective ASH-derived myths, myth lines, and social distribution deltas.",
+  "canonical_schema_ref": "data/schemas/quest_npc_lore_generation_schema.json",
+  "required_inputs": [
+    "CosmicPatternSnapshot",
+    "DiagnosticEnvelope",
+    "GenerationPlan",
+    "WorldstateDeltaPacket",
+    "QuestResolutionPayload",
+    "FactionTopologyState"
   ],
-  "outputs": [
-    "expanded myth record schema contract"
+  "required_outputs": [
+    "MythSeedCandidate",
+    "MythRecord",
+    "MythLine",
+    "SocialDistributionDelta"
   ],
-  "dependencies": [
-    "data/myth_archetypes/myth_schema.json",
-    "modules/myth_engine"
-  ],
-  "invariants": [
-    "all_meaningful_generation_must_be_ash_derived",
-    "fixed_cosmology_must_remain_locked",
-    "perception_must_not_rewrite_shared_world_truth",
-    "forsetti_governs_activation_ywe_governs_truth"
-  ],
+  "records": {
+    "MythSeedCandidate": {
+      "required": [
+        "myth_seed_candidate_id",
+        "source_worldstate_delta_ref",
+        "source_quest_resolution_payload_ref",
+        "eligible_faction_refs",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ]
+    },
+    "MythRecord": {
+      "required": [
+        "myth_record_id",
+        "myth_seed_candidate_ref",
+        "source_worldstate_delta_ref",
+        "myth_lines",
+        "social_distribution_delta_ref",
+        "factual_world_truth_rewrite_allowed"
+      ],
+      "factual_world_truth_rewrite_allowed": false
+    },
+    "MythLine": {
+      "required": [
+        "myth_line_id",
+        "faction_ref",
+        "claim_text",
+        "source_claim_type",
+        "visibility_scope_ref"
+      ]
+    },
+    "SocialDistributionDelta": {
+      "required": [
+        "social_distribution_delta_id",
+        "myth_record_ref",
+        "affected_faction_refs",
+        "propagation_scope",
+        "worldstate_delta_packet_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ]
+    }
+  },
   "ash_remediation_contract": {
     "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
     "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
@@ -31,23 +77,24 @@
       "cosmic_pattern_snapshot_ref",
       "diagnostic_ref",
       "generation_plan_ref",
-      "source_ash_refs"
+      "source_ash_refs",
+      "ywe_generation_context_packet_ref",
+      "worldstate_delta_refs"
     ],
-    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth.",
+    "truth_boundary": "GenerationPlan may guide materialization; downstream engines and adapters must not author ASH truth or YWE domain truth. MythRecord is retrospective interpretation and cannot rewrite factual world truth.",
     "records": [
-      "WorldstateDeltaPacket",
       "MythSeedCandidate",
       "MythRecord",
       "MythLine",
       "SocialDistributionDelta",
-      "factual_world_truth_rewrite",
-      "retrospective"
+      "WorldstateDeltaPacket",
+      "QuestResolutionPayload"
     ]
   },
-  "ash_required_fields": {
-    "cosmic_pattern_snapshot_ref": "CosmicPatternSnapshot",
-    "diagnostic_ref": "DiagnosticEnvelope",
-    "generation_plan_ref": "GenerationPlan",
-    "source_ash_refs": "SourceASHRefs"
-  }
+  "forbidden": [
+    "factual_world_truth_rewrite",
+    "myth_record_without_worldstate_delta_packet_ref",
+    "social_distribution_delta_without_worldstate_delta_packet_ref",
+    "host_adapter_authored_myth_truth"
+  ]
 }

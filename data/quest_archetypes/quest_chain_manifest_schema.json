@@ -2,12 +2,16 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "ywe.quest_archetypes.quest_chain_manifest",
   "version": "1.0.0",
+  "canonical_phase_12_schema_ref": "data/schemas/quest_npc_lore_generation_schema.json",
   "required_inputs": [
     "CosmicPatternSnapshot",
     "GenerationPlan",
     "PlayerNarrativeSnapshot",
     "WorldState",
-    "DiagnosticEnvelope"
+    "DiagnosticEnvelope",
+    "YWEGenerationContextPacket",
+    "WorldstateDeltaPacket",
+    "FutureGenerationBiasUpdate"
   ],
   "required_outputs": [
     "QuestChainManifest",
@@ -22,10 +26,13 @@
         "cosmic_pattern_snapshot_ref",
         "diagnostic_ref",
         "generation_plan_ref",
+        "ywe_generation_context_packet_ref",
+        "worldstate_delta_refs",
         "source_ash_refs",
         "stage_manifests",
         "completion_mode_set_ref",
-        "quest_resolution_payload_ref"
+        "quest_resolution_payload_ref",
+        "authority_boundary"
       ],
       "forbidden": [
         "independent_random_quest_template",
@@ -56,7 +63,11 @@
         "quest_resolution_payload_id",
         "completion_mode_ref",
         "worldstate_delta_packet_ref",
+        "location_mutation_delta_refs",
         "future_generation_bias_update_ref",
+        "npc_memory_delta_refs",
+        "codex_record_refs",
+        "myth_record_refs",
         "diagnostic_ref"
       ]
     }

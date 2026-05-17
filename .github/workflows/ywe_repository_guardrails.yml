@@ -48,6 +48,9 @@ jobs:
       - name: Check worldstate and location mutation
         run: python scripts/check_worldstate_location_mutation.py
 
+      - name: Check quest, NPC, and lore generation
+        run: python scripts/check_quest_npc_lore_generation.py
+
       - name: Check non-destructive diff
         if: github.event_name == 'pull_request'
         run: python scripts/check_non_destructive_diff.py --base origin/${{ github.base_ref }} --head HEAD
