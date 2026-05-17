@@ -5,6 +5,19 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.9] — 2026-05-17
+
+### Added
+- Merge pull request #45 from flynn33/codex/phase-11-worldstate-location-mutation-v1
+- docs: add phase 11 worldstate location mutation
+
+### Fixed
+- fix: tighten worldstate mutation validation
+
+
+---
+
+
 ## [2.0.8] — 2026-05-17
 
 ### Added
