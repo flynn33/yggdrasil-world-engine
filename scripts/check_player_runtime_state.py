@@ -20,6 +20,28 @@ def load_json(path: Path):
         return json.load(handle)
 
 
+def relative_name(root: Path, path: Path) -> str:
+    try:
+        return path.relative_to(root).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
+def load_json_checked(root: Path, path: Path, errors: list[str]):
+    path_name = relative_name(root, path)
+    if not path.is_file():
+        errors.append(f"Missing required JSON file: {path_name}")
+        return None
+
+    try:
+        return load_json(path)
+    except json.JSONDecodeError as exc:
+        errors.append(f"Invalid JSON in {path_name}: line {exc.lineno}, column {exc.colno}: {exc.msg}")
+    except OSError as exc:
+        errors.append(f"Unable to read {path_name}: {exc}")
+    return None
+
+
 def require(condition: bool, message: str, errors: list[str]) -> None:
     if not condition:
         errors.append(message)
@@ -32,11 +54,10 @@ def check_required_files(root: Path, contract: dict, errors: list[str]) -> None:
 
 def check_schema(root: Path, contract: dict, errors: list[str]) -> None:
     schema_path = root / "data" / "schemas" / "player_runtime_state_schema.json"
-    if not schema_path.is_file():
-        errors.append("Missing player runtime state schema.")
+    schema = load_json_checked(root, schema_path, errors)
+    if schema is None:
         return
 
-    schema = load_json(schema_path)
     defs = schema.get("$defs", {})
     for record_name in contract.get("required_schema_records", []):
         require(record_name in defs, f"Missing schema record: {record_name}", errors)
@@ -82,25 +103,40 @@ def check_markers(root: Path, contract: dict, errors: list[str]) -> None:
 
 
 def check_packet_spine(root: Path, errors: list[str]) -> None:
-    context_schema = load_json(root / "data" / "schemas" / "ywe_generation_context_packet_schema.json")
-    require(
-        "player_runtime_state_ref" in context_schema.get("required", []),
-        "YWEGenerationContextPacket must require player_runtime_state_ref.",
+    context_schema = load_json_checked(
+        root,
+        root / "data" / "schemas" / "ywe_generation_context_packet_schema.json",
         errors,
     )
+    if context_schema is not None:
+        require(
+            "player_runtime_state_ref" in context_schema.get("required", []),
+            "YWEGenerationContextPacket must require player_runtime_state_ref.",
+            errors,
+        )
 
-    packet_schema = load_json(root / "data" / "schemas" / "ash_generation_packet_schema.json")
-    records = packet_schema.get("records", {})
-    require("PlayerRuntimeState" in records, "ASH packet schema missing PlayerRuntimeState record.", errors)
-    require("PlayerRuntimeStateDelta" in records, "ASH packet schema missing PlayerRuntimeStateDelta record.", errors)
-
-    branch_context = load_json(root / "data" / "schemas" / "branch_generation_context_schema.json")
-    player_context_fields = branch_context.get("player_context_fields", [])
-    require(
-        "player_runtime_state_ref" in player_context_fields,
-        "BranchGenerationContext must include player_runtime_state_ref.",
+    packet_schema = load_json_checked(
+        root,
+        root / "data" / "schemas" / "ash_generation_packet_schema.json",
         errors,
     )
+    if packet_schema is not None:
+        records = packet_schema.get("records", {})
+        require("PlayerRuntimeState" in records, "ASH packet schema missing PlayerRuntimeState record.", errors)
+        require("PlayerRuntimeStateDelta" in records, "ASH packet schema missing PlayerRuntimeStateDelta record.", errors)
+
+    branch_context = load_json_checked(
+        root,
+        root / "data" / "schemas" / "branch_generation_context_schema.json",
+        errors,
+    )
+    if branch_context is not None:
+        player_context_fields = branch_context.get("player_context_fields", [])
+        require(
+            "player_runtime_state_ref" in player_context_fields,
+            "BranchGenerationContext must include player_runtime_state_ref.",
+            errors,
+        )
 
 
 def check_examples(root: Path, errors: list[str]) -> None:
@@ -109,15 +145,30 @@ def check_examples(root: Path, errors: list[str]) -> None:
         errors.append("Missing examples/player_runtime_state.")
         return
 
-    schema = load_json(root / "data" / "schemas" / "player_runtime_state_schema.json")
-    runtime_required = set(schema["$defs"]["PlayerRuntimeState"]["required"])
-    delta_required = set(schema["$defs"]["PlayerRuntimeStateDelta"]["required"])
+    schema = load_json_checked(root, root / "data" / "schemas" / "player_runtime_state_schema.json", errors)
+    if schema is None:
+        return
+
+    defs = schema.get("$defs", {})
+    runtime_required = defs.get("PlayerRuntimeState", {}).get("required")
+    delta_required = defs.get("PlayerRuntimeStateDelta", {}).get("required")
+    if not isinstance(runtime_required, list):
+        errors.append("PlayerRuntimeState schema missing required field list.")
+        return
+    if not isinstance(delta_required, list):
+        errors.append("PlayerRuntimeStateDelta schema missing required field list.")
+        return
+
+    runtime_required_set = set(runtime_required)
+    delta_required_set = set(delta_required)
     for path in sorted(examples_dir.glob("*.json")):
-        data = load_json(path)
+        data = load_json_checked(root, path, errors)
+        if data is None:
+            continue
         if data.get("record_type") == "PlayerRuntimeState":
-            missing = runtime_required - set(data.keys())
+            missing = runtime_required_set - set(data.keys())
         elif data.get("record_type") == "PlayerRuntimeStateDelta":
-            missing = delta_required - set(data.keys())
+            missing = delta_required_set - set(data.keys())
         else:
             missing = {"record_type"}
         for field in sorted(missing):
@@ -148,7 +199,17 @@ def main() -> int:
         print(f"Player Runtime State check failed: missing {DEFAULT_CONTRACT}")
         return 1
 
-    contract = load_json(contract_path)
+    try:
+        contract = load_json(contract_path)
+    except json.JSONDecodeError as exc:
+        print(
+            "Player Runtime State check failed: "
+            f"invalid {DEFAULT_CONTRACT} at line {exc.lineno}, column {exc.colno}: {exc.msg}"
+        )
+        return 1
+    except OSError as exc:
+        print(f"Player Runtime State check failed: unable to read {DEFAULT_CONTRACT}: {exc}")
+        return 1
     errors: list[str] = []
 
     check_required_files(root, contract, errors)
