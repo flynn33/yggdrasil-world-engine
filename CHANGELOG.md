@@ -5,6 +5,19 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.8] — 2026-05-17
+
+### Added
+- Merge pull request #44 from flynn33/phase/phase-10-player-runtime-state-v1
+- docs: add phase 10 player runtime state
+
+### Fixed
+- fix: harden player runtime guardrail JSON handling
+
+
+---
+
+
 ## [2.0.7] — 2026-05-17
 
 ### Added
