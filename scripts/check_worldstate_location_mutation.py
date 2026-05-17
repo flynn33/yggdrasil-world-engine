@@ -73,6 +73,17 @@ def check_schema(root: Path, contract: dict, errors: list[str]) -> None:
     delta_required = required_fields(defs, "WorldstateDeltaPacket", errors)
     for field in contract.get("required_worldstate_delta_fields", []):
         require(field in delta_required, f"WorldstateDeltaPacket missing required field: {field}", errors)
+    delta_props = defs.get("WorldstateDeltaPacket", {}).get("properties", {})
+    require(
+        delta_props.get("affected_location_refs", {}).get("$ref") == "#/$defs/NonEmptyStringRefList",
+        "WorldstateDeltaPacket.affected_location_refs must use NonEmptyStringRefList.",
+        errors,
+    )
+    require(
+        defs.get("NonEmptyStringRefList", {}).get("minItems") == 1,
+        "NonEmptyStringRefList must require at least one item.",
+        errors,
+    )
 
     location_delta_required = required_fields(defs, "LocationMutationDelta", errors)
     for field in contract.get("required_location_delta_fields", []):
@@ -189,7 +200,12 @@ def check_examples(root: Path, errors: list[str]) -> None:
         if data is None:
             continue
         record_type = data.get("record_type")
-        missing = required_by_record.get(record_type, {"record_type"}) - set(data.keys())
+        if record_type not in required_by_record:
+            errors.append(
+                f"{path.relative_to(root).as_posix()} has unrecognized record_type: {record_type!r}"
+            )
+            continue
+        missing = required_by_record[record_type] - set(data.keys())
         for field in sorted(missing):
             errors.append(f"{path.relative_to(root).as_posix()} missing required field: {field}")
 
