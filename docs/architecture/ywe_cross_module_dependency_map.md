@@ -62,6 +62,13 @@ ASH Pattern System Component
 - `quest_npc_lore_generation_v1.md`: Phase 12 contract for ASH-derived quest
   chains, NPC manifests, NPC memory deltas, codex lore records, myth records,
   and social distribution deltas.
+
+DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
+The three Phase 10 through Phase 12 entries above are retained as
+owner-review records only. The active Phase 8-9 dependency boundary remains:
+ASH Cosmological Model -> YWE Runtime Cosmology Contracts -> Branch Reality
+Resolver -> Feature Engines.
+
 - `com.ywe.core.cosmology-engine`: none
 - `com.ywe.core.realm-engine`: cosmology
 - `com.ywe.core.ash-pattern-engine`: cosmology, realm

@@ -1,0 +1,64 @@
+{
+  "contract_id": "ywe.phase_8_9.package_boundary_guardrail",
+  "version": "0.1.0",
+  "date": "2026-05-17",
+  "purpose": "Keep the active repository boundary aligned to the user-supplied Phase 7 and Phase 8-9 instruction packages.",
+  "active_boundary": {
+    "authorized_phases": [
+      "Phase 7 - Post-Remediation Acceptance Audit",
+      "Phase 8 - Baseline Freeze and Restore Point",
+      "Phase 9 - Runtime Cosmology and Leaf Branch Reality Foundation"
+    ],
+    "approved_branch_language": [
+      "The nine planes of existence define the base world ontology.",
+      "Leaf branch realities are runtime-generated player realities.",
+      "Leaf branches are not pre-generated."
+    ],
+    "approved_authority_language": [
+      "Where Ravens Wait: Eternal Reckoning is the game and narrative layer.",
+      "Yggdrasil World Engine is the agnostic game engine.",
+      "The ASH Cosmological Model is the upstream foundation for YWE and its systems.",
+      "The ASH Pattern System is a YWE component for pattern integrity, diagnostics, recovery, containment, conformance, code resilience, and update/patch stability."
+    ]
+  },
+  "deferred_phase_artifacts": [
+    "docs/architecture/player_runtime_state_v1.md",
+    "docs/architecture/worldstate_location_mutation_v1.md",
+    "docs/architecture/quest_npc_lore_generation_v1.md",
+    "data/schemas/player_runtime_state_schema.json",
+    "data/schemas/worldstate_location_mutation_schema.json",
+    "data/schemas/quest_npc_lore_generation_schema.json",
+    "data/validation/player_runtime_state_gate_contract.json",
+    "data/validation/worldstate_location_mutation_gate_contract.json",
+    "data/validation/quest_npc_lore_generation_gate_contract.json",
+    "docs/handoff/YWE_PHASE_10_PLAYER_RUNTIME_STATE_HANDOFF_2026-05-17.md",
+    "docs/handoff/YWE_PHASE_11_WORLDSTATE_LOCATION_MUTATION_HANDOFF_2026-05-17.md",
+    "docs/handoff/YWE_PHASE_12_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-17.md",
+    "scripts/check_player_runtime_state.py",
+    "scripts/check_worldstate_location_mutation.py",
+    "scripts/check_quest_npc_lore_generation.py"
+  ],
+  "deferred_marker": "DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.",
+  "required_marker_locations": [
+    "REMEDIATION_PHASE_STATUS.md",
+    "docs/architecture/README.md",
+    "data/schemas/README.md",
+    "docs/handoff/README.md",
+    "docs/handoff/YWE_PHASE_9_RUNTIME_COSMOLOGY_BRANCH_REALITY_HANDOFF_2026-05-17.md",
+    "docs/handoff/YWE_PHASE_10_PLAYER_RUNTIME_STATE_HANDOFF_2026-05-17.md",
+    "docs/handoff/YWE_PHASE_11_WORLDSTATE_LOCATION_MUTATION_HANDOFF_2026-05-17.md",
+    "docs/handoff/YWE_PHASE_12_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-17.md"
+  ],
+  "required_handoff_markers": [
+    "git diff --name-status",
+    "git diff --stat",
+    "Owner review is required before merging this remediation branch."
+  ],
+  "non_authority_sources": [
+    "repository roadmap text",
+    "readiness notes",
+    "handoff forward references",
+    "deferred work lists",
+    "inferred phase sequences"
+  ]
+}

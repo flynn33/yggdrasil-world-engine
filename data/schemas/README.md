@@ -33,6 +33,13 @@ YWEGenerationContextPacket
 
 ## Core Files
 
+DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
+Phase 10 through Phase 12 schema rows below are retained owner-review records
+only. The active Phase 8-9 schema boundary is the base world ontology, leaf
+branch reality, branch event, branch generation context, pattern vector,
+existence potential, axiom diagnostic packet, plane pressure state, and future
+generation bias update foundation.
+
 | File | Role |
 |---|---|
 | `ash_generation_packet_schema.json` | Shared ASH/YWE packet index and provenance spine |

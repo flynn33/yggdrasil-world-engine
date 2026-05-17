@@ -39,6 +39,13 @@ The **Yggdrasil World Engine (YWE)** is a **code-agnostic cosmic narrative simul
 
 All procedural systems derive from **ASH cosmological mathematics**.
 
+Phase 8-9 supersession note: The ASH Cosmological Model is the upstream
+foundation for YWE and its systems. The ASH Pattern System is a YWE component
+for pattern integrity, diagnostics, recovery, containment, conformance, code
+resilience, and update/patch stability. Generated content must be grounded in
+cosmological provenance, branch context, axiom diagnostics,
+pattern-vector semantics, existence potential, and worldstate evidence.
+
 YWE functions as a **reality simulation layer**, not a rendering engine.
 
 Rendering engines (Unity, Unreal, Godot) function as **host environments**.
