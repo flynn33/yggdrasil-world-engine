@@ -19,6 +19,10 @@ Phase 9 runtime-cosmology foundation contracts:
 - `existential_gameplay_kernel_contract.md` -- A1-A6 diagnostics and existence potential evaluation.
 - `pattern_vector_runtime_contract.md` -- Runtime semantics for H, K, D, S, and L pattern vector components.
 
+Phase 10 player-state contract:
+
+- `player_runtime_state_v1.md` -- Canonical player-specific runtime state, runtime-state deltas, branch context references, and generation-context boundary rules.
+
 The current controlling authority chain is:
 
 ```text
@@ -123,4 +127,13 @@ ASH Cosmological Model
 
 ASH Pattern System Component
   -> diagnostics, conformance, recovery, and containment support
+```
+
+Phase 10 player-runtime dependency flow:
+
+```text
+Leaf Branch Reality
+  -> Player Runtime State
+    -> YWEGenerationContextPacket.player_runtime_state_ref
+      -> ASH-governed generation
 ```

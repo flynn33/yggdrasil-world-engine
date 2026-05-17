@@ -22,6 +22,7 @@ handoff records.
 | `YWE_POST_REMEDIATION_BASELINE_2026-05-16.md` | Phase 8 post-remediation baseline freeze and restore point |
 | `YWE_POST_PHASE_7_BASELINE_2026-05-17.md` | Phase 8-9 package baseline freeze before Phase 9 foundation work |
 | `YWE_PHASE_9_RUNTIME_COSMOLOGY_BRANCH_REALITY_HANDOFF_2026-05-17.md` | Phase 9 runtime cosmology and branch reality foundation handoff |
+| `YWE_PHASE_10_PLAYER_RUNTIME_STATE_HANDOFF_2026-05-17.md` | Phase 10 Player Runtime State v1 handoff |
 | `repo_implementation_mapping.md` | Repository implementation mapping |
 | `missing_source_documents.md` | Missing source document inventory |
 

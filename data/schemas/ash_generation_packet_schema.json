@@ -126,6 +126,40 @@
       ],
       "boundary": "Player and world context may influence generation requests but must not mutate ASH math."
     },
+    "PlayerRuntimeState": {
+      "schema_ref": "player_runtime_state_schema.json",
+      "role": "Defines the player-specific runtime state referenced by YWEGenerationContextPacket.player_runtime_state_ref.",
+      "required": [
+        "record_type",
+        "state_id",
+        "player_ref",
+        "current_phase",
+        "current_leaf_branch_ref",
+        "branch_generation_context_refs",
+        "branch_event_refs",
+        "authority_boundary",
+        "ash_provenance",
+        "update_policy"
+      ],
+      "boundary": "Player Runtime State may influence generation context and branch context but must not mutate ASH math, shared world truth, or base world ontology."
+    },
+    "PlayerRuntimeStateDelta": {
+      "schema_ref": "player_runtime_state_schema.json",
+      "role": "Records an auditable accepted, rejected, deferred, or merged change to PlayerRuntimeState.",
+      "required": [
+        "record_type",
+        "delta_id",
+        "target_state_ref",
+        "trigger_trace_ref",
+        "branch_event_ref",
+        "changed_fields",
+        "disposition",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ],
+      "boundary": "Runtime deltas require player trace, branch evidence where relevant, diagnostic evidence, generation plan evidence, and source ASH references."
+    },
     "ASHUpstreamGenerationEnvelope": {
       "schema_ref": "ash_upstream_generation_envelope_schema.json",
       "role": "Proves upstream ASH authority and binds diagnostics, plan, codeword trace, state snapshot, and provenance.",

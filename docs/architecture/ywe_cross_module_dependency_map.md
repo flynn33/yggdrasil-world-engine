@@ -53,6 +53,9 @@ ASH Pattern System Component
   player branch realities and branch divergence boundaries.
 - `branch_event_contract.md`: Phase 9 contract for meaningful player-choice
   events that may create branch realities and future generation bias.
+- `player_runtime_state_v1.md`: Phase 10 contract for player-specific runtime
+  truth, branch context references, identity phase, resonance, perception,
+  worldstate consequence refs, and generation-context references.
 - `com.ywe.core.cosmology-engine`: none
 - `com.ywe.core.realm-engine`: cosmology
 - `com.ywe.core.ash-pattern-engine`: cosmology, realm
