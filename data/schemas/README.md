@@ -26,6 +26,7 @@ YWEGenerationContextPacket
   -> YWEInterpretationPacket
   -> SystemManifestHandoff
   -> WorldstateDeltaPacket or DiagnosticNoOp
+  -> LocationMutationState or LocationMutationDelta
   -> FutureGenerationBiasUpdate
 ```
 
@@ -41,6 +42,7 @@ YWEGenerationContextPacket
 | `exploration_frontier_request_schema.json` | Frontier, threshold, thin-veil, and unresolved-node generation requests |
 | `future_generation_bias_update_schema.json` | Consequence-derived pressure for later ASH-governed generation context |
 | `player_runtime_state_schema.json` | Phase 10 player-specific runtime truth, branch context references, and provenance boundaries |
+| `worldstate_location_mutation_schema.json` | Phase 11 persistent worldstate consequence, scoped location mutation, commit records, and diagnostic no-ops |
 
 ## Required Provenance
 

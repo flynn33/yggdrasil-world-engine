@@ -1,0 +1,36 @@
+{
+  "record_type": "LocationMutationDelta",
+  "version": "1.0.0",
+  "mutation_delta_id": "location_mutation_delta.ravenfall_gate.oath_revealed.0001",
+  "target_location_state_ref": "location_state.ravenfall_gate.current",
+  "source_worldstate_delta_ref": "worldstate_delta.ravenfall_gate.oath_revealed.0001",
+  "source_branch_event_ref": "branch_event.ravenfall_gate.reveal_oath.0001",
+  "source_player_runtime_state_ref": "player_runtime_state.current",
+  "mutation_kind": "site_activation",
+  "changed_fields": [
+    {
+      "field_path": "status",
+      "change_kind": "set_status",
+      "reason": "The buried oath became branch-visible and activated Ravenfall Gate as a consequence-bearing site."
+    },
+    {
+      "field_path": "active_mutation_refs",
+      "change_kind": "append_ref",
+      "reason": "The accepted worldstate delta created a scoped location mutation."
+    }
+  ],
+  "persistence_scope": "leaf_branch",
+  "diagnostic_ref": "diagnostic.ravenfall_gate.reveal_oath.0001",
+  "generation_plan_ref": "generation_plan.ravenfall_gate.reveal_oath.0001",
+  "source_ash_refs": [
+    "cosmic_pattern_snapshot.ravenfall_gate.reveal_oath.0001",
+    "axiom_diagnostic.ravenfall_gate.reveal_oath.0001"
+  ],
+  "authority_boundary": {
+    "can_influence_generation_context": true,
+    "may_mutate_ash_math": false,
+    "may_rewrite_shared_world_truth": false,
+    "may_mutate_base_world_ontology": false,
+    "host_adapter_may_author": false
+  }
+}

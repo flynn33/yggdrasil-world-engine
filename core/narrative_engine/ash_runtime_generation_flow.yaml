@@ -163,9 +163,20 @@ canonical_flow:
       - DiagnosticNoOp
 
   - step: 11
+    name: apply_worldstate_location_mutation
+    inputs:
+      - WorldstateDeltaPacket
+    emits:
+      - LocationMutationDelta
+      - LocationMutationState
+      - WorldstateMutationCommit
+      - DiagnosticNoOp
+
+  - step: 12
     name: derive_future_generation_bias
     inputs:
       - WorldstateDeltaPacket
+      - LocationMutationState
       - DiagnosticNoOp
     emits:
       - FutureGenerationBiasUpdate
@@ -184,6 +195,7 @@ named_flows:
       - HostAdapterMaterializationRequest
       - MaterializationResult
       - WorldstateDeltaPacket
+      - LocationMutationState
       - DiagnosticNoOp
     rule: Unresolved frontiers, realm thresholds, thin veil sites, and unresolved Yggdrasil nodes require ASH-governed generation before any meaningful manifestation.
 
@@ -197,6 +209,7 @@ named_flows:
       - YWEInterpretationPacket
       - QuestChainManifest
       - QuestResolutionPayload
+      - LocationMutationDelta
     rule: Quest templates are interpretive containers and do not generate symbolic truth independently.
 
   player_action_driven_npc_generation:
@@ -209,6 +222,7 @@ named_flows:
       - NPCManifest
       - NPCMemoryHooks
       - WorldstateDeltaPacket
+      - LocationMutationState
       - DiagnosticNoOp
     rule: NPC beliefs, faction claims, myths, and partial interpretations may affect context without rewriting shared world truth.
 
@@ -216,6 +230,7 @@ named_flows:
     sequence:
       - ResolutionPayload
       - WorldstateDeltaPacket
+      - LocationMutationState
       - FutureGenerationBiasUpdate
       - YWEGenerationContextPacket
       - ASHUpstreamGenerationEnvelope

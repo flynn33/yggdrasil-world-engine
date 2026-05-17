@@ -56,6 +56,9 @@ ASH Pattern System Component
 - `player_runtime_state_v1.md`: Phase 10 contract for player-specific runtime
   truth, branch context references, identity phase, resonance, perception,
   worldstate consequence refs, and generation-context references.
+- `worldstate_location_mutation_v1.md`: Phase 11 contract for persistent
+  consequence, scoped location mutation, worldstate commit records,
+  diagnostic no-ops, and future generation bias routing.
 - `com.ywe.core.cosmology-engine`: none
 - `com.ywe.core.realm-engine`: cosmology
 - `com.ywe.core.ash-pattern-engine`: cosmology, realm
@@ -77,6 +80,8 @@ Examples:
 - artifact and creature systems may react to consequence events without owning narrative truth
 - future generation bias may react to `WorldstateDeltaPacket` records without
   mutating ASH math
+- location mutation may react to accepted `WorldstateDeltaPacket` records but
+  must stay scoped and event-mediated
 
 ## Forbidden Dependencies
 

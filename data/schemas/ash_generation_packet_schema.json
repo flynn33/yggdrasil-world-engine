@@ -235,6 +235,87 @@
       ],
       "boundary": "Bias updates alter downstream context only and never ASH canonical math."
     },
+    "WorldstateDeltaPacket": {
+      "schema_ref": "worldstate_location_mutation_schema.json",
+      "role": "Records persistent Phase 11 consequence after meaningful resolution.",
+      "required": [
+        "record_type",
+        "delta_id",
+        "source_resolution_payload",
+        "source_branch_event_ref",
+        "player_runtime_state_ref",
+        "current_leaf_branch_ref",
+        "affected_location_refs",
+        "location_mutation_refs",
+        "consequence_domains",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "boundary": "Worldstate deltas persist YWE consequence and may influence future generation context but must not mutate ASH math or base world ontology."
+    },
+    "LocationMutationState": {
+      "schema_ref": "worldstate_location_mutation_schema.json",
+      "role": "Stores scoped location state changed through accepted worldstate consequence.",
+      "required": [
+        "record_type",
+        "location_state_id",
+        "location_ref",
+        "base_world_ref",
+        "current_leaf_branch_ref",
+        "status",
+        "active_mutation_refs",
+        "worldstate_delta_refs",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "boundary": "Location mutation is scoped to player, branch, shared-world, or realm-local persistence and does not rewrite the nine-plane ontology."
+    },
+    "LocationMutationDelta": {
+      "schema_ref": "worldstate_location_mutation_schema.json",
+      "role": "Records an auditable change to LocationMutationState from an accepted WorldstateDeltaPacket.",
+      "required": [
+        "record_type",
+        "mutation_delta_id",
+        "target_location_state_ref",
+        "source_worldstate_delta_ref",
+        "source_player_runtime_state_ref",
+        "mutation_kind",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "authority_boundary"
+      ],
+      "boundary": "LocationMutationDelta must remain downstream of worldstate evidence, diagnostics, and source ASH references."
+    },
+    "WorldstateMutationCommit": {
+      "schema_ref": "worldstate_location_mutation_schema.json",
+      "role": "Commits accepted worldstate and location mutation records with an explicit contradiction policy.",
+      "required": [
+        "record_type",
+        "commit_id",
+        "source_worldstate_delta_ref",
+        "committed_record_refs",
+        "commit_scope",
+        "contradiction_policy",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "boundary": "Commit records preserve append-first consequence and do not silently erase previous worldstate."
+    },
+    "DiagnosticNoOp": {
+      "schema_ref": "worldstate_location_mutation_schema.json",
+      "role": "Records a rejected or non-committing mutation request with diagnostic provenance.",
+      "required": [
+        "record_type",
+        "no_op_id",
+        "reason",
+        "diagnostic_ref",
+        "cosmic_pattern_snapshot_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ],
+      "boundary": "Unsupported or unlawful mutation requests fail explicitly instead of silently changing worldstate."
+    },
     "SystemManifestHandoff": {
       "role": "Transfers a YWEInterpretationPacket to an allowed feature engine before host materialization.",
       "required": [
@@ -301,6 +382,7 @@
     "MaterializationResult",
     "ResolutionPayload",
     "WorldstateDeltaPacket|DiagnosticNoOp",
+    "LocationMutationState|LocationMutationDelta|WorldstateMutationCommit",
     "FutureGenerationBiasUpdate"
   ]
 }

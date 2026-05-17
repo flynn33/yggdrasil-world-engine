@@ -1,0 +1,171 @@
+version: "1.0"
+status: canonical_phase_11_contract
+system: worldstate_location_mutation_v1
+
+authority_stack:
+  game_layer: "Where Ravens Wait: Eternal Reckoning"
+  engine_layer: "Yggdrasil World Engine"
+  foundation: "ASH Cosmological Model"
+  stability_component: "ASH Pattern System"
+
+purpose:
+  summary: >
+    Worldstate and Location Mutation is the canonical YWE persistence layer for
+    meaningful consequence after a resolution. It commits worldstate deltas,
+    scoped location mutation, future generation bias, and diagnostic no-ops
+    downstream of PlayerRuntimeState and LeafBranchReality.
+  boundary: >
+    Worldstate deltas may change lawful world conditions, local site state,
+    branch-local location state, consequence memory, and future generation
+    pressure. They must not mutate ASH math, rewrite the base nine-plane
+    ontology, convert perception overlays into objective world truth, or let
+    host adapters author canonical state.
+
+owned_records:
+  - WorldstateDeltaPacket
+  - LocationMutationState
+  - LocationMutationDelta
+  - WorldstateMutationCommit
+  - DiagnosticNoOp
+
+schema_refs:
+  worldstate_location_mutation: data/schemas/worldstate_location_mutation_schema.json
+  worldstate_delta_packet: data/schemas/worldstate_delta_packet_schema.json
+  player_runtime_state: data/schemas/player_runtime_state_schema.json
+  branch_event: data/schemas/branch_event_schema.json
+  branch_generation_context: data/schemas/branch_generation_context_schema.json
+  leaf_branch_reality_state: data/schemas/leaf_branch_reality_state_schema.json
+  future_generation_bias: data/schemas/future_generation_bias_update_schema.json
+
+required_inputs:
+  - ResolutionPayload
+  - PlayerRuntimeState
+  - BranchEvent
+  - LeafBranchRealityState
+  - BranchGenerationContext
+  - YWEInterpretationPacket
+  - CosmicPatternSnapshot
+  - DiagnosticEnvelope
+  - GenerationPlan
+  - SourceASHRefs
+
+emitted_outputs:
+  - WorldstateDeltaPacket
+  - LocationMutationState
+  - LocationMutationDelta
+  - WorldstateMutationCommit
+  - DiagnosticNoOp
+  - FutureGenerationBiasUpdate
+
+worldstate_domains:
+  - player_memory
+  - player_identity
+  - wolf_resonance
+  - realm_attunement
+  - bloodline_resonance
+  - npc_availability
+  - faction_standing
+  - local_world_condition
+  - location_state
+  - myth_seed_state
+  - prophecy_weight_state
+  - perception_layer
+  - site_activation
+  - temporary_space_residue
+  - recurring_symbol_recurrence
+  - future_generation_bias
+
+location_mutation_states:
+  base:
+    meaning: Location remains in its base registered state.
+  observed:
+    meaning: Player or branch has observed state without objective mutation.
+  altered:
+    meaning: Persistent conditions changed under worldstate evidence.
+  activated:
+    meaning: Site or threshold became active through lawful consequence.
+  suppressed:
+    meaning: Site or threshold became suppressed through lawful consequence.
+  threatened:
+    meaning: Site is under active pressure but not yet resolved.
+  consecrated:
+    meaning: Site has durable ritual or realm-law consequence.
+  unstable:
+    meaning: Site requires containment, diagnostics, or follow-up generation.
+  contained:
+    meaning: Instability has been bounded without deleting residue.
+  archived:
+    meaning: Site mutation is no longer active but remains auditable.
+
+mutation_pipeline:
+  - step: receive_resolution_payload
+    input: ResolutionPayload
+    output: worldstate_candidate
+  - step: reconcile_player_and_branch_context
+    input:
+      - PlayerRuntimeState
+      - BranchEvent
+      - LeafBranchRealityState
+      - BranchGenerationContext
+    output: scoped_consequence_context
+  - step: validate_authority_and_diagnostics
+    input:
+      - CosmicPatternSnapshot
+      - DiagnosticEnvelope
+      - GenerationPlan
+      - SourceASHRefs
+    output: accepted_delta_or_DiagnosticNoOp
+  - step: commit_worldstate_delta
+    input: accepted_delta
+    output: WorldstateDeltaPacket
+  - step: apply_location_mutation
+    input: WorldstateDeltaPacket
+    output:
+      - LocationMutationDelta
+      - LocationMutationState
+  - step: publish_future_generation_bias
+    input: WorldstateDeltaPacket
+    output: FutureGenerationBiasUpdate
+  - step: append_player_runtime_refs
+    input:
+      - WorldstateDeltaPacket
+      - FutureGenerationBiasUpdate
+    output: PlayerRuntimeState.active_worldstate_delta_refs
+
+rejected_mutations:
+  - mutation: host_adapter_direct_worldstate_write
+    reason: Host adapters materialize approved manifests but do not author canonical worldstate or location state.
+  - mutation: perception_overlay_as_objective_mutation
+    reason: Perception may influence presentation and player-local interpretation but cannot become world truth without a worldstate delta.
+  - mutation: ash_math_mutation
+    reason: Worldstate consequence changes YWE context only.
+  - mutation: base_ontology_rewrite
+    reason: Location mutation occurs within the nine-plane base ontology and cannot alter it.
+  - mutation: unscoped_location_change
+    reason: Location mutation must declare player-local, leaf-branch, shared-world, or realm-local persistence scope.
+  - mutation: missing_provenance
+    reason: Meaningful consequence requires source_ash_refs, diagnostic_ref, and generation_plan_ref.
+
+validation_markers:
+  - WorldstateDeltaPacket
+  - LocationMutationState
+  - LocationMutationDelta
+  - WorldstateMutationCommit
+  - DiagnosticNoOp
+  - FutureGenerationBiasUpdate
+  - PlayerRuntimeState
+  - BranchEvent
+  - LeafBranchReality
+  - BranchGenerationContext
+  - current_leaf_branch_ref
+  - location_state_ref
+  - location_mutation_refs
+  - worldstate_delta_refs
+  - source_ash_refs
+  - diagnostic_ref
+  - generation_plan_ref
+  - can_influence_generation_context
+  - may_mutate_ash_math
+  - may_rewrite_shared_world_truth
+  - may_mutate_base_world_ontology
+  - host_adapter_may_author
