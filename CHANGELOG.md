@@ -5,6 +5,18 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.11] — 2026-05-17
+
+### Added
+- Add Phase 8-9 boundary remediation
+
+### Fixed
+- Merge pull request #48 from flynn33/audit-fix/phase-8-9-remediation
+
+
+---
+
+
 ## [2.0.10] — 2026-05-17
 
 ### Added
