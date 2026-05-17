@@ -1,0 +1,75 @@
+{
+  "record_type": "NPCManifest",
+  "version": "1.0.0",
+  "npc_manifest_id": "npc_manifest:ragna_oathkeeper",
+  "npc_kind": "keeper",
+  "source_quest_refs": [
+    "quest_chain:ravenfall_gate:oath_under_gate"
+  ],
+  "relationship_vector": {
+    "relationship_vector_id": "relationship_vector:ragna_oathkeeper:player",
+    "vector_scope": "leaf_branch",
+    "subject_ref": "npc_manifest:ragna_oathkeeper",
+    "target_refs": [
+      "player_runtime_state:example_player:ravenfall_gate"
+    ],
+    "faction_delta_ref": "faction_delta:raven_wardens:oath_revealed",
+    "worldstate_delta_packet_ref": "worldstate_delta:ravenfall_gate:oath_revealed",
+    "source_ash_refs": [
+      "ash_state:ravenfall_gate:thin_veil_pressure",
+      "codeword:ravenfall_gate:oath_pressure"
+    ]
+  },
+  "truth_function": {
+    "truth_function_id": "truth_function:ragna_oathkeeper",
+    "known_claims": [
+      "claim:ragna_knows_gate_oath"
+    ],
+    "hidden_claims": [
+      "claim:ragna_withholds_threshold_name"
+    ],
+    "contested_claims": [
+      "claim:raven_wardens_dispute_oath_scope"
+    ],
+    "truth_boundary": "branch_local_claim",
+    "factual_world_truth_rewrite_allowed": false
+  },
+  "persistence_state": {
+    "persistence_state_id": "persistence_state:ragna_oathkeeper",
+    "scope": "leaf_branch",
+    "duration": "persistent",
+    "worldstate_delta_packet_ref": "worldstate_delta:ravenfall_gate:oath_revealed",
+    "diagnostic_ref": "diagnostic:ravenfall_gate:oath_valid",
+    "append_only": true
+  },
+  "memory_hook_refs": [
+    "npc_memory_delta:ragna_oathkeeper:oath_revealed"
+  ],
+  "faction_topology_state_ref": "faction_topology:raven_wardens:ravenfall_gate",
+  "worldstate_delta_packet_ref": "worldstate_delta:ravenfall_gate:oath_revealed",
+  "authority_boundary": {
+    "can_influence_generation_context": true,
+    "may_mutate_ash_math": false,
+    "may_rewrite_shared_world_truth": false,
+    "may_mutate_base_world_ontology": false,
+    "host_adapter_may_author": false,
+    "may_create_independent_random_content": false,
+    "quest_must_offer_multiple_completion_modes": true,
+    "npc_claims_are_interpretive": true,
+    "lore_may_overwrite_locked_canon": false,
+    "myth_may_rewrite_factual_world_truth": false
+  },
+  "ash_provenance": {
+    "cosmic_pattern_snapshot_ref": "cosmic_pattern_snapshot:ravenfall_gate:oath_pressure",
+    "diagnostic_ref": "diagnostic:ravenfall_gate:oath_valid",
+    "generation_plan_ref": "generation_plan:ravenfall_gate:oath_under_gate",
+    "source_ash_refs": [
+      "ash_state:ravenfall_gate:thin_veil_pressure",
+      "codeword:ravenfall_gate:oath_pressure"
+    ],
+    "ywe_generation_context_packet_ref": "ywe_generation_context:ravenfall_gate:oath_under_gate",
+    "worldstate_delta_refs": [
+      "worldstate_delta:ravenfall_gate:oath_revealed"
+    ]
+  }
+}

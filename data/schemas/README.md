@@ -25,6 +25,7 @@ YWEGenerationContextPacket
   -> ASHUpstreamGenerationEnvelope
   -> YWEInterpretationPacket
   -> SystemManifestHandoff
+  -> QuestChainManifest / NPCManifest / CodexRecord / MythRecord
   -> WorldstateDeltaPacket or DiagnosticNoOp
   -> LocationMutationState or LocationMutationDelta
   -> FutureGenerationBiasUpdate
@@ -43,6 +44,7 @@ YWEGenerationContextPacket
 | `future_generation_bias_update_schema.json` | Consequence-derived pressure for later ASH-governed generation context |
 | `player_runtime_state_schema.json` | Phase 10 player-specific runtime truth, branch context references, and provenance boundaries |
 | `worldstate_location_mutation_schema.json` | Phase 11 persistent worldstate consequence, scoped location mutation, commit records, and diagnostic no-ops |
+| `quest_npc_lore_generation_schema.json` | Phase 12 quest chains, NPC manifests, NPC memory deltas, codex lore records, myth records, and social distribution deltas |
 
 ## Required Provenance
 

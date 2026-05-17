@@ -1,0 +1,1180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/quest_npc_lore_generation_schema.json",
+  "schema_id": "ywe.schemas.quest_npc_lore_generation",
+  "title": "Quest, NPC, and Lore Generation v1",
+  "version": "1.0.0",
+  "purpose": "Canonical Phase 12 contract for ASH-derived quest chains, NPC manifests, NPC memory deltas, lore records, myth records, and their worldstate-safe authority boundaries.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/QuestGenerationRequest"
+    },
+    {
+      "$ref": "#/$defs/QuestChainManifest"
+    },
+    {
+      "$ref": "#/$defs/StageManifest"
+    },
+    {
+      "$ref": "#/$defs/QuestResolutionPayload"
+    },
+    {
+      "$ref": "#/$defs/NPCManifest"
+    },
+    {
+      "$ref": "#/$defs/NPCMemoryDelta"
+    },
+    {
+      "$ref": "#/$defs/CodexRecord"
+    },
+    {
+      "$ref": "#/$defs/MythSeedCandidate"
+    },
+    {
+      "$ref": "#/$defs/MythRecord"
+    },
+    {
+      "$ref": "#/$defs/SocialDistributionDelta"
+    }
+  ],
+  "$defs": {
+    "QuestGenerationRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "version",
+        "request_id",
+        "trigger_kind",
+        "requested_manifest_kind",
+        "ywe_generation_context_packet_ref",
+        "player_runtime_state_ref",
+        "current_leaf_branch_ref",
+        "worldstate_delta_refs",
+        "future_generation_bias_update_refs",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "QuestGenerationRequest"
+        },
+        "version": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "trigger_kind": {
+          "type": "string",
+          "enum": [
+            "quest_generation",
+            "npc_synthesis",
+            "lore_generation",
+            "quest_resolution",
+            "worldstate_mutation",
+            "location_mutation",
+            "future_generation_bias"
+          ]
+        },
+        "requested_manifest_kind": {
+          "type": "string",
+          "enum": [
+            "QuestChainManifest",
+            "NPCManifest",
+            "CodexRecord",
+            "MythRecord",
+            "SocialDistributionDelta"
+          ]
+        },
+        "ywe_generation_context_packet_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "player_runtime_state_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_leaf_branch_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "worldstate_delta_refs": {
+          "$ref": "#/$defs/StringRefList"
+        },
+        "future_generation_bias_update_refs": {
+          "$ref": "#/$defs/StringRefList"
+        },
+        "authority_boundary": {
+          "$ref": "#/$defs/AuthorityBoundary"
+        },
+        "ash_provenance": {
+          "$ref": "#/$defs/AshProvenance"
+        }
+      }
+    },
+    "QuestChainManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "version",
+        "quest_chain_manifest_id",
+        "quest_generation_request_ref",
+        "title",
+        "stage_manifests",
+        "completion_mode_set",
+        "quest_resolution_payload_ref",
+        "affected_location_refs",
+        "npc_manifest_refs",
+        "codex_record_refs",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "QuestChainManifest"
+        },
+        "version": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "quest_chain_manifest_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quest_generation_request_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stage_manifests": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/StageManifest"
+          }
+        },
+        "completion_mode_set": {
+          "$ref": "#/$defs/CompletionModeSet"
+        },
+        "quest_resolution_payload_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "affected_location_refs": {
+          "$ref": "#/$defs/NonEmptyStringRefList"
+        },
+        "npc_manifest_refs": {
+          "$ref": "#/$defs/StringRefList"
+        },
+        "codex_record_refs": {
+          "$ref": "#/$defs/StringRefList"
+        },
+        "worldstate_delta_policy": {
+          "type": "string",
+          "enum": [
+            "must_emit_worldstate_delta",
+            "may_emit_worldstate_delta",
+            "diagnostic_noop_allowed"
+          ]
+        },
+        "authority_boundary": {
+          "$ref": "#/$defs/AuthorityBoundary"
+        },
+        "ash_provenance": {
+          "$ref": "#/$defs/AshProvenance"
+        }
+      }
+    },
+    "StageManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "stage_manifest_id",
+        "quest_chain_manifest_ref",
+        "stage_order",
+        "source_state",
+        "source_codeword",
+        "diagnostic_ref",
+        "interpretation_options",
+        "allowed_completion_mode_refs"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "StageManifest"
+        },
+        "stage_manifest_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quest_chain_manifest_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stage_order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_state": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_codeword": {
+          "type": "string",
+          "minLength": 1
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "interpretation_options": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allowed_completion_mode_refs": {
+          "$ref": "#/$defs/NonEmptyStringRefList"
+        }
+      }
+    },
+    "CompletionModeSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "completion_mode_set_id",
+        "minimum_mode_count",
+        "completion_modes",
+        "diagnostic_ref"
+      ],
+      "properties": {
+        "completion_mode_set_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minimum_mode_count": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "completion_modes": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/$defs/CompletionMode"
+          }
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "CompletionMode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "completion_mode_id",
+        "mode_kind",
+        "interpretation",
+        "consequence_channels"
+      ],
+      "properties": {
+        "completion_mode_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mode_kind": {
+          "type": "string",
+          "enum": [
+            "reveal",
+            "conceal",
+            "contain",
+            "reconcile",
+            "sacrifice",
+            "defer"
+          ]
+        },
+        "interpretation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "consequence_channels": {
+          "$ref": "#/$defs/NonEmptyStringRefList"
+        }
+      }
+    },
+    "QuestResolutionPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "version",
+        "quest_resolution_payload_id",
+        "quest_chain_manifest_ref",
+        "selected_completion_mode_ref",
+        "player_runtime_state_ref",
+        "current_leaf_branch_ref",
+        "worldstate_delta_packet_ref",
+        "location_mutation_delta_refs",
+        "future_generation_bias_update_ref",
+        "npc_memory_delta_refs",
+        "codex_record_refs",
+        "myth_record_refs",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "QuestResolutionPayload"
+        },
+        "version": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "quest_resolution_payload_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quest_chain_manifest_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "selected_completion_mode_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "player_runtime_state_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_leaf_branch_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "location_mutation_delta_refs": {
+          "$ref": "#/$defs/StringRefList"
+        },
+        "future_generation_bias_update_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "npc_memory_delta_refs": {
+          "$ref": "#/$defs/StringRefList"
+        },
+        "codex_record_refs": {
+          "$ref": "#/$defs/StringRefList"
+        },
+        "myth_record_refs": {
+          "$ref": "#/$defs/StringRefList"
+        },
+        "authority_boundary": {
+          "$ref": "#/$defs/AuthorityBoundary"
+        },
+        "ash_provenance": {
+          "$ref": "#/$defs/AshProvenance"
+        }
+      }
+    },
+    "NPCManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "version",
+        "npc_manifest_id",
+        "npc_kind",
+        "source_quest_refs",
+        "relationship_vector",
+        "truth_function",
+        "persistence_state",
+        "memory_hook_refs",
+        "faction_topology_state_ref",
+        "worldstate_delta_packet_ref",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "NPCManifest"
+        },
+        "version": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "npc_manifest_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "npc_kind": {
+          "type": "string",
+          "enum": [
+            "witness",
+            "keeper",
+            "rival",
+            "companion_candidate",
+            "faction_agent",
+            "threshold_guide",
+            "echo"
+          ]
+        },
+        "source_quest_refs": {
+          "$ref": "#/$defs/StringRefList"
+        },
+        "relationship_vector": {
+          "$ref": "#/$defs/RelationshipVector"
+        },
+        "truth_function": {
+          "$ref": "#/$defs/TruthFunction"
+        },
+        "persistence_state": {
+          "$ref": "#/$defs/PersistenceState"
+        },
+        "memory_hook_refs": {
+          "$ref": "#/$defs/StringRefList"
+        },
+        "faction_topology_state_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_boundary": {
+          "$ref": "#/$defs/AuthorityBoundary"
+        },
+        "ash_provenance": {
+          "$ref": "#/$defs/AshProvenance"
+        }
+      }
+    },
+    "NPCMemoryDelta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "version",
+        "npc_memory_delta_id",
+        "npc_manifest_ref",
+        "source_resolution_payload_ref",
+        "player_runtime_state_ref",
+        "current_leaf_branch_ref",
+        "memory_claim_refs",
+        "relationship_vector_ref",
+        "persistence_scope",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "authority_boundary"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "NPCMemoryDelta"
+        },
+        "version": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "npc_memory_delta_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "npc_manifest_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_resolution_payload_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "player_runtime_state_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_leaf_branch_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "memory_claim_refs": {
+          "$ref": "#/$defs/NonEmptyStringRefList"
+        },
+        "relationship_vector_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "persistence_scope": {
+          "$ref": "#/$defs/PersistenceScope"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ash_refs": {
+          "$ref": "#/$defs/NonEmptyStringRefList"
+        },
+        "authority_boundary": {
+          "$ref": "#/$defs/AuthorityBoundary"
+        }
+      }
+    },
+    "RelationshipVector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relationship_vector_id",
+        "vector_scope",
+        "subject_ref",
+        "target_refs",
+        "faction_delta_ref",
+        "worldstate_delta_packet_ref",
+        "source_ash_refs"
+      ],
+      "properties": {
+        "relationship_vector_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vector_scope": {
+          "type": "string",
+          "enum": [
+            "player_local",
+            "leaf_branch",
+            "shared_world",
+            "realm_local"
+          ]
+        },
+        "subject_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_refs": {
+          "$ref": "#/$defs/NonEmptyStringRefList"
+        },
+        "faction_delta_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ash_refs": {
+          "$ref": "#/$defs/NonEmptyStringRefList"
+        }
+      }
+    },
+    "TruthFunction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "truth_function_id",
+        "known_claims",
+        "hidden_claims",
+        "contested_claims",
+        "truth_boundary",
+        "factual_world_truth_rewrite_allowed"
+      ],
+      "properties": {
+        "truth_function_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "known_claims": {
+          "$ref": "#/$defs/StringRefList"
+        },
+        "hidden_claims": {
+          "$ref": "#/$defs/StringRefList"
+        },
+        "contested_claims": {
+          "$ref": "#/$defs/StringRefList"
+        },
+        "truth_boundary": {
+          "type": "string",
+          "enum": [
+            "npc_claim_only",
+            "faction_claim_only",
+            "branch_local_claim",
+            "worldstate_backed_fact"
+          ]
+        },
+        "factual_world_truth_rewrite_allowed": {
+          "const": false
+        }
+      }
+    },
+    "PersistenceState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "persistence_state_id",
+        "scope",
+        "duration",
+        "worldstate_delta_packet_ref",
+        "diagnostic_ref",
+        "append_only"
+      ],
+      "properties": {
+        "persistence_state_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "$ref": "#/$defs/PersistenceScope"
+        },
+        "duration": {
+          "type": "string",
+          "enum": [
+            "persistent",
+            "until_resolved",
+            "timeboxed",
+            "diagnostic_noop"
+          ]
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "append_only": {
+          "const": true
+        }
+      }
+    },
+    "CodexRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "version",
+        "codex_record_id",
+        "title",
+        "layer",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "worldstate_delta_packet_ref",
+        "myth_record_ref",
+        "faction_topology_state_ref",
+        "visibility_scope",
+        "lore_variants",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "CodexRecord"
+        },
+        "version": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "codex_record_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "layer": {
+          "$ref": "#/$defs/LoreLayer"
+        },
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "myth_record_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "faction_topology_state_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "visibility_scope": {
+          "$ref": "#/$defs/VisibilityScope"
+        },
+        "lore_variants": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/LoreRecordVariant"
+          }
+        },
+        "authority_boundary": {
+          "$ref": "#/$defs/AuthorityBoundary"
+        },
+        "ash_provenance": {
+          "$ref": "#/$defs/AshProvenance"
+        }
+      }
+    },
+    "LoreRecordVariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lore_variant_id",
+        "codex_record_ref",
+        "layer",
+        "source_claim_type",
+        "visibility_scope_ref",
+        "claim_text",
+        "truth_boundary"
+      ],
+      "properties": {
+        "lore_variant_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "codex_record_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "layer": {
+          "$ref": "#/$defs/LoreLayer"
+        },
+        "source_claim_type": {
+          "type": "string",
+          "enum": [
+            "worldstate_occurrence",
+            "myth_variant",
+            "faction_claim",
+            "npc_claim",
+            "perception_overlay"
+          ]
+        },
+        "visibility_scope_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claim_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "truth_boundary": {
+          "type": "string",
+          "enum": [
+            "fact_backed_by_worldstate_delta",
+            "interpretive_variant",
+            "player_or_branch_local_claim",
+            "hidden_until_progression"
+          ]
+        }
+      }
+    },
+    "VisibilityScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "visibility_scope_id",
+        "audience",
+        "realm_constraints",
+        "progression_constraints",
+        "endgame_truth_protection"
+      ],
+      "properties": {
+        "visibility_scope_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "audience": {
+          "type": "string",
+          "enum": [
+            "player_local",
+            "npc_local",
+            "faction_local",
+            "leaf_branch",
+            "shared_world",
+            "owner_review"
+          ]
+        },
+        "realm_constraints": {
+          "$ref": "#/$defs/StringRefList"
+        },
+        "progression_constraints": {
+          "$ref": "#/$defs/StringRefList"
+        },
+        "endgame_truth_protection": {
+          "const": true
+        }
+      }
+    },
+    "MythSeedCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "version",
+        "myth_seed_candidate_id",
+        "source_worldstate_delta_ref",
+        "source_quest_resolution_payload_ref",
+        "eligible_faction_refs",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "authority_boundary"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "MythSeedCandidate"
+        },
+        "version": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "myth_seed_candidate_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_worldstate_delta_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_quest_resolution_payload_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "eligible_faction_refs": {
+          "$ref": "#/$defs/NonEmptyStringRefList"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ash_refs": {
+          "$ref": "#/$defs/NonEmptyStringRefList"
+        },
+        "authority_boundary": {
+          "$ref": "#/$defs/AuthorityBoundary"
+        }
+      }
+    },
+    "MythRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "version",
+        "myth_record_id",
+        "myth_seed_candidate_ref",
+        "source_worldstate_delta_ref",
+        "myth_lines",
+        "social_distribution_delta_ref",
+        "factual_world_truth_rewrite_allowed",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "MythRecord"
+        },
+        "version": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "myth_record_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "myth_seed_candidate_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_worldstate_delta_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "myth_lines": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/MythLine"
+          }
+        },
+        "social_distribution_delta_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "factual_world_truth_rewrite_allowed": {
+          "const": false
+        },
+        "authority_boundary": {
+          "$ref": "#/$defs/AuthorityBoundary"
+        },
+        "ash_provenance": {
+          "$ref": "#/$defs/AshProvenance"
+        }
+      }
+    },
+    "MythLine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "myth_line_id",
+        "faction_ref",
+        "claim_text",
+        "source_claim_type",
+        "visibility_scope_ref"
+      ],
+      "properties": {
+        "myth_line_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "faction_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claim_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_claim_type": {
+          "type": "string",
+          "enum": [
+            "worldstate_occurrence",
+            "faction_claim",
+            "npc_claim",
+            "perception_overlay"
+          ]
+        },
+        "visibility_scope_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "SocialDistributionDelta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "version",
+        "social_distribution_delta_id",
+        "myth_record_ref",
+        "affected_faction_refs",
+        "propagation_scope",
+        "worldstate_delta_packet_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "authority_boundary"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "SocialDistributionDelta"
+        },
+        "version": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "social_distribution_delta_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "myth_record_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "affected_faction_refs": {
+          "$ref": "#/$defs/NonEmptyStringRefList"
+        },
+        "propagation_scope": {
+          "type": "string",
+          "enum": [
+            "player_local",
+            "leaf_branch",
+            "realm_local",
+            "shared_world"
+          ]
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ash_refs": {
+          "$ref": "#/$defs/NonEmptyStringRefList"
+        },
+        "authority_boundary": {
+          "$ref": "#/$defs/AuthorityBoundary"
+        }
+      }
+    },
+    "AshProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "ywe_generation_context_packet_ref",
+        "worldstate_delta_refs"
+      ],
+      "properties": {
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ash_refs": {
+          "$ref": "#/$defs/NonEmptyStringRefList"
+        },
+        "ywe_generation_context_packet_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "worldstate_delta_refs": {
+          "$ref": "#/$defs/StringRefList"
+        }
+      }
+    },
+    "AuthorityBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "can_influence_generation_context",
+        "may_mutate_ash_math",
+        "may_rewrite_shared_world_truth",
+        "may_mutate_base_world_ontology",
+        "host_adapter_may_author",
+        "may_create_independent_random_content",
+        "quest_must_offer_multiple_completion_modes",
+        "npc_claims_are_interpretive",
+        "lore_may_overwrite_locked_canon",
+        "myth_may_rewrite_factual_world_truth"
+      ],
+      "properties": {
+        "can_influence_generation_context": {
+          "const": true
+        },
+        "may_mutate_ash_math": {
+          "const": false
+        },
+        "may_rewrite_shared_world_truth": {
+          "const": false
+        },
+        "may_mutate_base_world_ontology": {
+          "const": false
+        },
+        "host_adapter_may_author": {
+          "const": false
+        },
+        "may_create_independent_random_content": {
+          "const": false
+        },
+        "quest_must_offer_multiple_completion_modes": {
+          "const": true
+        },
+        "npc_claims_are_interpretive": {
+          "const": true
+        },
+        "lore_may_overwrite_locked_canon": {
+          "const": false
+        },
+        "myth_may_rewrite_factual_world_truth": {
+          "const": false
+        }
+      }
+    },
+    "LoreLayer": {
+      "type": "string",
+      "enum": [
+        "locked_canon",
+        "worldstate_occurrence",
+        "myth_variant",
+        "faction_claim",
+        "npc_claim",
+        "perception_overlay"
+      ]
+    },
+    "PersistenceScope": {
+      "type": "string",
+      "enum": [
+        "player_local",
+        "leaf_branch",
+        "shared_world",
+        "realm_local"
+      ]
+    },
+    "StringRefList": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "NonEmptyStringRefList": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "forbidden_interpretations": [
+    "quest_generated_without_ash_provenance",
+    "single_outcome_only_quest",
+    "npc_claim_as_shared_world_truth_without_worldstate_delta",
+    "lore_overwrites_locked_canon",
+    "myth_rewrites_factual_world_truth",
+    "host_adapter_authored_quest_npc_or_lore_truth",
+    "generation_bypasses_worldstate_location_mutation_contract"
+  ]
+}

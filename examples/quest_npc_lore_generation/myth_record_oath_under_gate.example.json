@@ -1,0 +1,50 @@
+{
+  "record_type": "MythRecord",
+  "version": "1.0.0",
+  "myth_record_id": "myth:ravenfall_gate:oath_under_gate",
+  "myth_seed_candidate_ref": "myth_seed:ravenfall_gate:oath_under_gate",
+  "source_worldstate_delta_ref": "worldstate_delta:ravenfall_gate:oath_revealed",
+  "myth_lines": [
+    {
+      "myth_line_id": "myth_line:ravenfall_gate:raven_wardens",
+      "faction_ref": "faction:raven_wardens",
+      "claim_text": "The Raven Wardens remember the revealed oath as a branch-local binding.",
+      "source_claim_type": "faction_claim",
+      "visibility_scope_ref": "visibility_scope:ravenfall_gate:oath_under_gate"
+    },
+    {
+      "myth_line_id": "myth_line:ravenfall_gate:travelers",
+      "faction_ref": "faction:gate_travelers",
+      "claim_text": "Travelers repeat the event as a warning about speaking promises at thin places.",
+      "source_claim_type": "worldstate_occurrence",
+      "visibility_scope_ref": "visibility_scope:ravenfall_gate:oath_under_gate"
+    }
+  ],
+  "social_distribution_delta_ref": "social_distribution_delta:ravenfall_gate:oath_under_gate",
+  "factual_world_truth_rewrite_allowed": false,
+  "authority_boundary": {
+    "can_influence_generation_context": true,
+    "may_mutate_ash_math": false,
+    "may_rewrite_shared_world_truth": false,
+    "may_mutate_base_world_ontology": false,
+    "host_adapter_may_author": false,
+    "may_create_independent_random_content": false,
+    "quest_must_offer_multiple_completion_modes": true,
+    "npc_claims_are_interpretive": true,
+    "lore_may_overwrite_locked_canon": false,
+    "myth_may_rewrite_factual_world_truth": false
+  },
+  "ash_provenance": {
+    "cosmic_pattern_snapshot_ref": "cosmic_pattern_snapshot:ravenfall_gate:oath_pressure",
+    "diagnostic_ref": "diagnostic:ravenfall_gate:oath_valid",
+    "generation_plan_ref": "generation_plan:ravenfall_gate:oath_under_gate",
+    "source_ash_refs": [
+      "ash_state:ravenfall_gate:thin_veil_pressure",
+      "codeword:ravenfall_gate:oath_pressure"
+    ],
+    "ywe_generation_context_packet_ref": "ywe_generation_context:ravenfall_gate:oath_under_gate",
+    "worldstate_delta_refs": [
+      "worldstate_delta:ravenfall_gate:oath_revealed"
+    ]
+  }
+}

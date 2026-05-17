@@ -1,5 +1,36 @@
 {
-  "quest_seed_id": "",
-  "pattern_id": "",
-  "interpretations": []
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.quest_archetypes.quest_seed",
+  "version": "1.0.0",
+  "canonical_phase_12_schema_ref": "data/schemas/quest_npc_lore_generation_schema.json",
+  "required": [
+    "quest_seed_id",
+    "cosmic_pattern_snapshot_ref",
+    "diagnostic_ref",
+    "generation_plan_ref",
+    "source_ash_refs",
+    "ywe_generation_context_packet_ref",
+    "player_runtime_state_ref",
+    "current_leaf_branch_ref",
+    "worldstate_delta_refs",
+    "requested_manifest_kind"
+  ],
+  "properties": {
+    "quest_seed_id": "string",
+    "cosmic_pattern_snapshot_ref": "CosmicPatternSnapshot",
+    "diagnostic_ref": "DiagnosticEnvelope",
+    "generation_plan_ref": "GenerationPlan",
+    "source_ash_refs": "SourceASHRefs",
+    "ywe_generation_context_packet_ref": "YWEGenerationContextPacket",
+    "player_runtime_state_ref": "PlayerRuntimeState",
+    "current_leaf_branch_ref": "LeafBranchReality",
+    "worldstate_delta_refs": "WorldstateDeltaPacket[]",
+    "requested_manifest_kind": "QuestChainManifest"
+  },
+  "forbidden": [
+    "independent_random_quest_template",
+    "single_outcome_only_quest",
+    "quest_without_diagnostic_ref",
+    "quest_without_generation_plan_ref"
+  ]
 }

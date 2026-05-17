@@ -59,6 +59,9 @@ ASH Pattern System Component
 - `worldstate_location_mutation_v1.md`: Phase 11 contract for persistent
   consequence, scoped location mutation, worldstate commit records,
   diagnostic no-ops, and future generation bias routing.
+- `quest_npc_lore_generation_v1.md`: Phase 12 contract for ASH-derived quest
+  chains, NPC manifests, NPC memory deltas, codex lore records, myth records,
+  and social distribution deltas.
 - `com.ywe.core.cosmology-engine`: none
 - `com.ywe.core.realm-engine`: cosmology
 - `com.ywe.core.ash-pattern-engine`: cosmology, realm
@@ -82,6 +85,10 @@ Examples:
   mutating ASH math
 - location mutation may react to accepted `WorldstateDeltaPacket` records but
   must stay scoped and event-mediated
+- quest, NPC, lore, myth, and social distribution records may react to
+  `WorldstateDeltaPacket` and `FutureGenerationBiasUpdate` records but must
+  route new persistence through worldstate, diagnostic no-op, or future-bias
+  contracts
 
 ## Forbidden Dependencies
 
@@ -93,3 +100,5 @@ Examples:
 - adapters must not invert truth ownership
 - host adapters must not materialize meaningful content before
   `GenerationPlan`
+- quest, NPC, lore, myth, and social distribution modules must not turn claims,
+  myths, or perception overlays into shared truth without worldstate evidence

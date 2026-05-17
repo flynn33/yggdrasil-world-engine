@@ -1,0 +1,107 @@
+{
+  "record_type": "QuestChainManifest",
+  "version": "1.0.0",
+  "quest_chain_manifest_id": "quest_chain:ravenfall_gate:oath_under_gate",
+  "quest_generation_request_ref": "quest_generation_request:ravenfall_gate:oath_under_gate",
+  "title": "Oath Under the Gate",
+  "stage_manifests": [
+    {
+      "record_type": "StageManifest",
+      "stage_manifest_id": "stage:ravenfall_gate:oath_under_gate:listen",
+      "quest_chain_manifest_ref": "quest_chain:ravenfall_gate:oath_under_gate",
+      "stage_order": 0,
+      "source_state": "ash_state:ravenfall_gate:thin_veil_pressure",
+      "source_codeword": "codeword:ravenfall_gate:oath_pressure",
+      "diagnostic_ref": "diagnostic:ravenfall_gate:oath_valid",
+      "interpretation_options": [
+        "listen_to_the_gate_oath",
+        "test_the_witness_memory"
+      ],
+      "allowed_completion_mode_refs": [
+        "completion_mode:ravenfall_gate:reveal",
+        "completion_mode:ravenfall_gate:contain"
+      ]
+    },
+    {
+      "record_type": "StageManifest",
+      "stage_manifest_id": "stage:ravenfall_gate:oath_under_gate:resolve",
+      "quest_chain_manifest_ref": "quest_chain:ravenfall_gate:oath_under_gate",
+      "stage_order": 1,
+      "source_state": "ash_state:ravenfall_gate:threshold_choice",
+      "source_codeword": "codeword:ravenfall_gate:threshold_choice",
+      "diagnostic_ref": "diagnostic:ravenfall_gate:oath_valid",
+      "interpretation_options": [
+        "reveal_the_oath_publicly",
+        "contain_the_oath_until_the_branch_stabilizes"
+      ],
+      "allowed_completion_mode_refs": [
+        "completion_mode:ravenfall_gate:reveal",
+        "completion_mode:ravenfall_gate:contain"
+      ]
+    }
+  ],
+  "completion_mode_set": {
+    "completion_mode_set_id": "completion_modes:ravenfall_gate:oath_under_gate",
+    "minimum_mode_count": 2,
+    "completion_modes": [
+      {
+        "completion_mode_id": "completion_mode:ravenfall_gate:reveal",
+        "mode_kind": "reveal",
+        "interpretation": "Reveal the old oath and commit a public branch-local consequence.",
+        "consequence_channels": [
+          "worldstate_delta",
+          "npc_memory",
+          "codex_lore",
+          "myth_seed"
+        ]
+      },
+      {
+        "completion_mode_id": "completion_mode:ravenfall_gate:contain",
+        "mode_kind": "contain",
+        "interpretation": "Contain the oath pressure and defer public myth formation.",
+        "consequence_channels": [
+          "worldstate_delta",
+          "location_mutation",
+          "future_generation_bias"
+        ]
+      }
+    ],
+    "diagnostic_ref": "diagnostic:ravenfall_gate:oath_valid"
+  },
+  "quest_resolution_payload_ref": "quest_resolution:ravenfall_gate:oath_revealed",
+  "affected_location_refs": [
+    "location:ravenfall_gate"
+  ],
+  "npc_manifest_refs": [
+    "npc_manifest:ragna_oathkeeper"
+  ],
+  "codex_record_refs": [
+    "codex:ravenfall_gate:oath_under_gate"
+  ],
+  "worldstate_delta_policy": "must_emit_worldstate_delta",
+  "authority_boundary": {
+    "can_influence_generation_context": true,
+    "may_mutate_ash_math": false,
+    "may_rewrite_shared_world_truth": false,
+    "may_mutate_base_world_ontology": false,
+    "host_adapter_may_author": false,
+    "may_create_independent_random_content": false,
+    "quest_must_offer_multiple_completion_modes": true,
+    "npc_claims_are_interpretive": true,
+    "lore_may_overwrite_locked_canon": false,
+    "myth_may_rewrite_factual_world_truth": false
+  },
+  "ash_provenance": {
+    "cosmic_pattern_snapshot_ref": "cosmic_pattern_snapshot:ravenfall_gate:oath_pressure",
+    "diagnostic_ref": "diagnostic:ravenfall_gate:oath_valid",
+    "generation_plan_ref": "generation_plan:ravenfall_gate:oath_under_gate",
+    "source_ash_refs": [
+      "ash_state:ravenfall_gate:thin_veil_pressure",
+      "codeword:ravenfall_gate:oath_pressure"
+    ],
+    "ywe_generation_context_packet_ref": "ywe_generation_context:ravenfall_gate:oath_under_gate",
+    "worldstate_delta_refs": [
+      "worldstate_delta:ravenfall_gate:oath_signal"
+    ]
+  }
+}

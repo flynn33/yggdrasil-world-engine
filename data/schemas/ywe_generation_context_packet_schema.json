@@ -42,7 +42,11 @@
         "prophecy_pressure_changed",
         "player_progression_event",
         "worldstate_mutation",
-        "location_mutation"
+        "location_mutation",
+        "quest_generation",
+        "npc_synthesis",
+        "lore_generation",
+        "future_generation_bias"
       ]
     },
     "requested_manifest_kind": {
@@ -91,6 +95,48 @@
           }
         },
         "worldstate_mutation_commit_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "future_generation_bias_update_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "quest_chain_manifest_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "quest_resolution_payload_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "npc_manifest_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "npc_memory_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "codex_record_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "social_distribution_delta_refs": {
           "type": "array",
           "items": {
             "type": "string"
