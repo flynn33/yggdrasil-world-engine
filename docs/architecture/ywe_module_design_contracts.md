@@ -64,6 +64,8 @@ diagnostics, or materialize meaningful content before a `GenerationPlan`.
 
 - modules that emit meaningful manifests preserve `source_ash_refs`, `diagnostic_ref`, `generation_plan_ref`, `requested_manifest_kind`, and `worldstate_delta_policy`
 - generation context enters ASH-governed generation through `YWEGenerationContextPacket`
+- `YWEGenerationContextPacket.player_runtime_state_ref` points to `PlayerRuntimeState`, the Phase 10 player-specific runtime truth contract
+- player branch context must flow through `current_leaf_branch_ref`, `branch_generation_context_refs`, and `branch_event_refs`; feature modules may read those refs but may not author canonical player state directly
 - feature modules receive ASH-derived interpretation through `YWEInterpretationPacket`
 - modules activate through Forsetti lifecycle rules
 - modules communicate through framework-mediated channels only

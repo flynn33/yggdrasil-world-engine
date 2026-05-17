@@ -1,0 +1,22 @@
+{
+  "contract_id": "ywe.phase_10.github_checks_matrix",
+  "version": "0.1.0",
+  "implemented_workflow": ".github/workflows/ywe_repository_guardrails.yml",
+  "implemented_job": "guardrails",
+  "implemented_steps": [
+    "Check player runtime state"
+  ],
+  "recommended_checks": [
+    {
+      "name": "YWE / Player Runtime State Guardrail",
+      "purpose": "Ensures Player Runtime State v1 contracts, schema records, branch references, authority boundaries, and packet-spine markers remain present.",
+      "required_for_pr": true
+    }
+  ],
+  "do_not_auto_enable_branch_protection": true,
+  "owner_approval_required_for": [
+    "branch_protection_changes",
+    "required_status_check_changes",
+    "workflow_permission_changes"
+  ]
+}

@@ -9,8 +9,12 @@ Documents the shared schema contracts used by YWE systems to consume
 ASH-derived state, diagnostics, codeword traces, generation plans, and
 downstream interpretation packets.
 
-ASH is the upstream mathematical and generative authority for YWE. YWE is the
-downstream world, narrative, and manifestation engine built on ASH authority.
+Current authority clarification: ASH Cosmological Model is the upstream
+foundation for YWE and its systems. ASH Pattern System is a YWE component for
+pattern integrity, diagnostics, recovery, containment, conformance, code
+resilience, and update/patch stability. Earlier shorthand that described ASH as
+upstream mathematical and generative authority should be read as referring to
+the ASH Cosmological Model, not ASH Pattern System as an upstream authority.
 
 ## Upstream Generation Packet Spine
 
@@ -36,6 +40,7 @@ YWEGenerationContextPacket
 | `player_action_trace_schema.json` | Player action and consequence inputs that may influence future generation context |
 | `exploration_frontier_request_schema.json` | Frontier, threshold, thin-veil, and unresolved-node generation requests |
 | `future_generation_bias_update_schema.json` | Consequence-derived pressure for later ASH-governed generation context |
+| `player_runtime_state_schema.json` | Phase 10 player-specific runtime truth, branch context references, and provenance boundaries |
 
 ## Required Provenance
 

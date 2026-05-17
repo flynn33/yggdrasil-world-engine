@@ -61,6 +61,7 @@ run_check "YWE Package Acceptance Tests" "${PYTHON_CMD[@]}" "$ROOT_DIR/.github/s
 run_check "Discussion Agent Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/github/discussion_agent.py" --validate-config --root "$ROOT_DIR"
 run_check "Discussion Topic Generator Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/github/discussion_topic_agent.py" --validate-config --root "$ROOT_DIR"
 run_check "Discussion Moderation Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/github/discussion_moderation_agent.py" --validate-config --root "$ROOT_DIR"
+run_check "Player Runtime State Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_player_runtime_state.py" "$ROOT_DIR"
 
 echo "=========================================="
 echo "Results: $PASS passed, $FAIL failed"
