@@ -234,10 +234,38 @@ def git_ref_exists(root: Path, ref: str) -> bool:
     return result.returncode == 0
 
 
+def git_fetch_origin_branch(root: Path, branch: str) -> bool:
+    try:
+        result = subprocess.run(
+            [
+                "git",
+                "-C",
+                str(root),
+                "fetch",
+                "--no-tags",
+                "--depth=1",
+                "origin",
+                f"{branch}:refs/remotes/origin/{branch}",
+            ],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except OSError:
+        return False
+    return result.returncode == 0
+
+
 def default_base_ref(root: Path) -> str | None:
     candidates: list[str] = []
-    if os.environ.get("GITHUB_BASE_REF"):
-        candidates.append(f"origin/{os.environ['GITHUB_BASE_REF']}")
+    github_base_ref = os.environ.get("GITHUB_BASE_REF")
+    if github_base_ref:
+        github_base_candidate = f"origin/{github_base_ref}"
+        if git_ref_exists(root, github_base_candidate):
+            return github_base_candidate
+        if git_fetch_origin_branch(root, github_base_ref) and git_ref_exists(root, github_base_candidate):
+            return github_base_candidate
+        candidates.append(github_base_candidate)
     if os.environ.get("BASE_REF"):
         candidates.append(os.environ["BASE_REF"])
     candidates.extend(["origin/main", "main"])
@@ -280,10 +308,14 @@ def git_change_paths(root: Path, errors: list[str]) -> list[tuple[str, str]]:
     paths: dict[str, str] = {}
     base_ref = default_base_ref(root)
     if not base_ref:
-        errors.append("Unable to resolve git base ref for Phase 10 diff checks.")
-        return []
-    for status, path in git_diff_paths(root, base_ref):
-        paths[path] = status
+        if os.environ.get("GITHUB_BASE_REF") or os.environ.get("BASE_REF"):
+            message = "Unable to resolve git base ref for Phase 10 diff checks."
+            if message not in errors:
+                errors.append(message)
+            return []
+    else:
+        for status, path in git_diff_paths(root, base_ref):
+            paths[path] = status
     for status, path in git_status_paths(root):
         paths.setdefault(path, status)
     return [(status, path) for path, status in paths.items()]
