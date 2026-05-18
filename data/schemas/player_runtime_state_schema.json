@@ -109,23 +109,14 @@
       "type": "string"
     },
     "identity": {
-      "type": "object",
-      "required": [
-        "mortal_identity_ref",
-        "celestial_identity_state_ref"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "mortal_identity_ref": {
-          "type": "string"
+      "oneOf": [
+        {
+          "$ref": "#/$defs/initial_identity"
         },
-        "celestial_identity_state_ref": {
-          "type": "string"
-        },
-        "celestial_identity_initial_state": {
-          "const": "veiled"
+        {
+          "$ref": "#/$defs/continuing_identity"
         }
-      }
+      ]
     },
     "state_refs": {
       "type": "object",
@@ -459,6 +450,46 @@
         "feature_engine_direct_mutation",
         "ash_pattern_system_as_top_level_cosmology"
       ]
+    }
+  },
+  "$defs": {
+    "initial_identity": {
+      "title": "Initial player identity",
+      "type": "object",
+      "required": [
+        "mortal_identity_ref",
+        "celestial_identity_state_ref",
+        "celestial_identity_initial_state"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "mortal_identity_ref": {
+          "type": "string"
+        },
+        "celestial_identity_state_ref": {
+          "type": "string"
+        },
+        "celestial_identity_initial_state": {
+          "const": "veiled"
+        }
+      }
+    },
+    "continuing_identity": {
+      "title": "Continuing player identity",
+      "type": "object",
+      "required": [
+        "mortal_identity_ref",
+        "celestial_identity_state_ref"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "mortal_identity_ref": {
+          "type": "string"
+        },
+        "celestial_identity_state_ref": {
+          "type": "string"
+        }
+      }
     }
   }
 }

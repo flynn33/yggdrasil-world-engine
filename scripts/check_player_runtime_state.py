@@ -143,10 +143,17 @@ def check_runtime_schema(root: Path, spec: dict[str, Any], errors: list[str]) ->
     )
 
 
-def check_required_terms(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
-    targets = spec.get("targets") or [spec.get("target")]
-    target_texts = []
-    target_json_values = []
+def parse_json_target(rel_path: str, text: str, errors: list[str]) -> Any | None:
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError as exc:
+        errors.append(f"Invalid JSON in {rel_path}: line {exc.lineno}, column {exc.colno}: {exc.msg}")
+    return None
+
+
+def load_check_targets(root: Path, targets: list[str], errors: list[str]) -> tuple[list[tuple[str, str]], list[tuple[str, Any]]]:
+    target_texts: list[tuple[str, str]] = []
+    target_json_values: list[tuple[str, Any]] = []
     for rel_path in targets:
         if not rel_path:
             continue
@@ -157,12 +164,14 @@ def check_required_terms(root: Path, spec: dict[str, Any], errors: list[str]) ->
         text = read_text(path)
         target_texts.append((rel_path, text))
         if rel_path.endswith(".json"):
-            try:
-                parsed = json.loads(text)
+            parsed = parse_json_target(rel_path, text, errors)
+            if parsed is not None:
                 target_json_values.append((rel_path, parsed))
-            except json.JSONDecodeError as exc:
-                errors.append(f"Invalid JSON in {rel_path}: line {exc.lineno}, column {exc.colno}: {exc.msg}")
+    return target_texts, target_json_values
 
+
+def check_required_terms(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
+    target_texts, target_json_values = load_check_targets(root, spec.get("targets") or [spec.get("target")], errors)
     combined = "\n".join(text for _, text in target_texts)
     schema_terms = {term for _, data in target_json_values for term in iter_schema_terms(data)}
     all_targets_are_json = bool(target_texts) and len(target_json_values) == len(target_texts)
