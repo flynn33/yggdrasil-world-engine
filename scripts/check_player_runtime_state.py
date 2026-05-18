@@ -276,12 +276,14 @@ def git_diff_paths(root: Path, base_ref: str, head_ref: str = "HEAD") -> list[tu
     return paths
 
 
-def git_change_paths(root: Path) -> list[tuple[str, str]]:
+def git_change_paths(root: Path, errors: list[str]) -> list[tuple[str, str]]:
     paths: dict[str, str] = {}
     base_ref = default_base_ref(root)
-    if base_ref:
-        for status, path in git_diff_paths(root, base_ref):
-            paths[path] = status
+    if not base_ref:
+        errors.append("Unable to resolve git base ref for Phase 10 diff checks.")
+        return []
+    for status, path in git_diff_paths(root, base_ref):
+        paths[path] = status
     for status, path in git_status_paths(root):
         paths.setdefault(path, status)
     return [(status, path) for path, status in paths.items()]
@@ -289,7 +291,7 @@ def git_change_paths(root: Path) -> list[tuple[str, str]]:
 
 def check_no_platform_code(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
     forbidden_extensions = set(spec.get("forbidden_extensions", []))
-    for status, rel_path in git_change_paths(root):
+    for status, rel_path in git_change_paths(root, errors):
         is_added = status == "??" or status.startswith("A")
         if not is_added:
             continue
@@ -299,7 +301,7 @@ def check_no_platform_code(root: Path, spec: dict[str, Any], errors: list[str]) 
 
 
 def check_non_destructive_diff(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
-    statuses = git_change_paths(root)
+    statuses = git_change_paths(root, errors)
     deleted = [path for status, path in statuses if status.startswith("D")]
     existing_touched = [
         path
