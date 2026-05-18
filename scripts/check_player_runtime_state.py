@@ -309,15 +309,25 @@ def check_no_platform_code(root: Path, spec: dict[str, Any], errors: list[str]) 
             errors.append(f"Phase 10 added forbidden platform/code file: {rel_path}")
 
 
+def classify_change_paths(statuses: list[tuple[str, str]]) -> tuple[list[str], list[str], list[str]]:
+    deleted: list[str] = []
+    renamed_or_copied: list[str] = []
+    existing_touched: list[str] = []
+    for status, path in statuses:
+        if status.startswith("A"):
+            continue
+        if status.startswith("D"):
+            deleted.append(path)
+            continue
+        if status.startswith(("R", "C")):
+            renamed_or_copied.append(path)
+            continue
+        existing_touched.append(path)
+    return deleted, renamed_or_copied, existing_touched
+
+
 def check_non_destructive_diff(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
-    statuses = git_change_paths(root, errors)
-    deleted = [path for status, path in statuses if status.startswith("D")]
-    renamed_or_copied = [path for status, path in statuses if status.startswith(("R", "C"))]
-    existing_touched = [
-        path
-        for status, path in statuses
-        if not status.startswith(("A", "D", "R", "C"))
-    ]
+    deleted, renamed_or_copied, existing_touched = classify_change_paths(git_change_paths(root, errors))
 
     max_deleted = int(spec.get("max_existing_file_deletions", 0))
     max_renamed = int(spec.get("max_directory_renames", 0))

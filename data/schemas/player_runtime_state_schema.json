@@ -18,12 +18,36 @@
     "update_control",
     "forbidden"
   ],
-  "oneOf": [
+  "allOf": [
     {
-      "$ref": "#/$defs/initial_player_runtime_state"
+      "if": {
+        "required": [
+          "state_lifecycle"
+        ],
+        "properties": {
+          "state_lifecycle": {
+            "const": "initial"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/initial_player_runtime_state"
+      }
     },
     {
-      "$ref": "#/$defs/continuing_player_runtime_state"
+      "if": {
+        "required": [
+          "state_lifecycle"
+        ],
+        "properties": {
+          "state_lifecycle": {
+            "const": "continuing"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/continuing_player_runtime_state"
+      }
     }
   ],
   "additionalProperties": false,
