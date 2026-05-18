@@ -61,18 +61,6 @@ def require(condition: bool, message: str, errors: list[str]) -> None:
         errors.append(message)
 
 
-def iter_keys(value: Any, under_forbidden: bool = False):
-    if isinstance(value, dict):
-        for key, child in value.items():
-            child_under_forbidden = under_forbidden or key == "forbidden"
-            if not child_under_forbidden:
-                yield key
-            yield from iter_keys(child, child_under_forbidden)
-    elif isinstance(value, list):
-        for child in value:
-            yield from iter_keys(child, under_forbidden)
-
-
 def iter_schema_terms(value: Any, under_forbidden: bool = False):
     if isinstance(value, dict):
         for key, child in value.items():
@@ -183,9 +171,8 @@ def check_required_terms(root: Path, spec: dict[str, Any], errors: list[str]) ->
         else:
             require(term in combined, f"Missing required Phase 10 term `{term}` in {', '.join(t for t, _ in target_texts)}", errors)
 
-    active_terms = {term for _, data in target_json_values for term in iter_schema_terms(data)}
     for term in spec.get("forbidden_terms", []):
-        require(term not in active_terms, f"Forbidden term used as active schema construct: {term}", errors)
+        require(term not in schema_terms, f"Forbidden term used as active schema construct: {term}", errors)
 
 
 def check_celestial_initial_state(root: Path, errors: list[str]) -> None:
@@ -314,7 +301,7 @@ def git_change_paths(root: Path, errors: list[str]) -> list[tuple[str, str]]:
 def check_no_platform_code(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
     forbidden_extensions = set(spec.get("forbidden_extensions", []))
     for status, rel_path in git_change_paths(root, errors):
-        is_added = status == "??" or status.startswith("A")
+        is_added = status.startswith("A")
         if not is_added:
             continue
         suffix = Path(rel_path).suffix
@@ -325,15 +312,22 @@ def check_no_platform_code(root: Path, spec: dict[str, Any], errors: list[str]) 
 def check_non_destructive_diff(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
     statuses = git_change_paths(root, errors)
     deleted = [path for status, path in statuses if status.startswith("D")]
+    renamed_or_copied = [path for status, path in statuses if status.startswith(("R", "C"))]
     existing_touched = [
         path
         for status, path in statuses
-        if status != "??" and not status.startswith(("A", "D"))
+        if not status.startswith(("A", "D", "R", "C"))
     ]
 
     max_deleted = int(spec.get("max_existing_file_deletions", 0))
+    max_renamed = int(spec.get("max_directory_renames", 0))
     max_touched = int(spec.get("max_existing_files_touched_without_review", 25))
     require(len(deleted) <= max_deleted, f"Existing file deletions exceed budget: {deleted}", errors)
+    require(
+        len(renamed_or_copied) <= max_renamed,
+        f"Renamed or copied paths exceed budget {max_renamed}: {renamed_or_copied}",
+        errors,
+    )
     require(
         len(existing_touched) <= max_touched,
         f"Existing files touched exceed budget {max_touched}: {len(existing_touched)}",

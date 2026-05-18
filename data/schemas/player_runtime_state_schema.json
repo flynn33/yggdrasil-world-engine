@@ -20,43 +20,10 @@
   ],
   "oneOf": [
     {
-      "title": "Initial mortal veiled player runtime state",
-      "required": [
-        "state_lifecycle"
-      ],
-      "properties": {
-        "state_lifecycle": {
-          "const": "initial"
-        },
-        "identity": {
-          "required": [
-            "celestial_identity_initial_state"
-          ],
-          "properties": {
-            "celestial_identity_initial_state": {
-              "const": "veiled"
-            }
-          }
-        }
-      }
+      "$ref": "#/$defs/initial_player_runtime_state"
     },
     {
-      "title": "Continuing player runtime state",
-      "required": [
-        "state_lifecycle"
-      ],
-      "properties": {
-        "state_lifecycle": {
-          "const": "continuing"
-        },
-        "identity": {
-          "not": {
-            "required": [
-              "celestial_identity_initial_state"
-            ]
-          }
-        }
-      }
+      "$ref": "#/$defs/continuing_player_runtime_state"
     }
   ],
   "additionalProperties": false,
@@ -109,14 +76,7 @@
       "type": "string"
     },
     "identity": {
-      "oneOf": [
-        {
-          "$ref": "#/$defs/initial_identity"
-        },
-        {
-          "$ref": "#/$defs/continuing_identity"
-        }
-      ]
+      "type": "object"
     },
     "state_refs": {
       "type": "object",
@@ -453,6 +413,36 @@
     }
   },
   "$defs": {
+    "initial_player_runtime_state": {
+      "title": "Initial mortal veiled player runtime state",
+      "required": [
+        "state_lifecycle",
+        "identity"
+      ],
+      "properties": {
+        "state_lifecycle": {
+          "const": "initial"
+        },
+        "identity": {
+          "$ref": "#/$defs/initial_identity"
+        }
+      }
+    },
+    "continuing_player_runtime_state": {
+      "title": "Continuing player runtime state",
+      "required": [
+        "state_lifecycle",
+        "identity"
+      ],
+      "properties": {
+        "state_lifecycle": {
+          "const": "continuing"
+        },
+        "identity": {
+          "$ref": "#/$defs/continuing_identity"
+        }
+      }
+    },
     "initial_identity": {
       "title": "Initial player identity",
       "type": "object",
