@@ -1,0 +1,29 @@
+{
+  "schema_id": "ywe.celestial_identity_state.v1",
+  "schema_version": "0.1.0",
+  "identity_state": "fragmented",
+  "reveal_status": "fragment_revealed",
+  "known_fragments": [
+    {
+      "fragment_id": "fragment.name.thal",
+      "fragment_kind": "name_syllable",
+      "source_refs": [
+        "memory.ravenfall_gate.oath_revealed",
+        "wolf_resonance.white.revelation_001"
+      ]
+    }
+  ],
+  "celestial_name_ref": "celestial_name.pending_fragmented",
+  "epithet_ref": "epithet.pending",
+  "evidence_refs": [
+    "branch_event.ravenfall_gate.reveal_oath",
+    "bloodline.ravenson.echo_001",
+    "plane_attunement.mental.rising"
+  ],
+  "last_reveal_event_ref": "player_state_update.identity_fragment_001",
+  "forbidden": [
+    "full_celestial_identity_at_character_creation",
+    "class_selection_as_celestial_identity",
+    "identity_reveal_without_provenance"
+  ]
+}

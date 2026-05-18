@@ -12,8 +12,8 @@ handoff records.
 ## Current Handoff Records
 
 DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
-Phase 10 through Phase 12 handoff records below are retained for owner review
-only. They are not executable authority for the active Phase 8-9 boundary.
+Phase 11 through Phase 12 handoff records below are retained for owner review
+only. They are not executable authority until their matching packages are accepted.
 
 | File | Purpose |
 |---|---|

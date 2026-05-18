@@ -167,8 +167,15 @@ def check_packet_spine(root: Path, errors: list[str]) -> None:
     player_schema = load_json_checked(root, root / "data" / "schemas" / "player_runtime_state_schema.json", errors)
     if player_schema is not None:
         runtime_required = player_schema.get("$defs", {}).get("PlayerRuntimeState", {}).get("required", [])
-        for field in ("active_worldstate_delta_refs", "future_generation_bias_refs"):
-            require(field in runtime_required, f"PlayerRuntimeState missing required field: {field}", errors)
+        if runtime_required:
+            for field in ("active_worldstate_delta_refs", "future_generation_bias_refs"):
+                require(field in runtime_required, f"PlayerRuntimeState missing required field: {field}", errors)
+        else:
+            top_required = player_schema.get("required", [])
+            world_links = player_schema.get("properties", {}).get("world_links", {}).get("properties", {})
+            require("world_links" in top_required, "PlayerRuntimeState must require world_links.", errors)
+            for field in ("worldstate_delta_refs", "future_generation_bias_refs"):
+                require(field in world_links, f"PlayerRuntimeState.world_links missing property: {field}", errors)
 
 
 def check_examples(root: Path, errors: list[str]) -> None:

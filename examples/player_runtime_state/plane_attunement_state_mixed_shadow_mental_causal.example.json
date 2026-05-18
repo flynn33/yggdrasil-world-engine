@@ -1,0 +1,94 @@
+{
+  "schema_id": "ywe.plane_attunement_state.v1",
+  "schema_version": "0.1.0",
+  "planes": {
+    "P1_Physical": {
+      "score": 0.3,
+      "pressure_state": "latent",
+      "trend": "stable",
+      "source_refs": [
+        "branch_event.ravenfall_gate.reveal_oath"
+      ]
+    },
+    "P2_Etheric": {
+      "score": 0.2,
+      "pressure_state": "dormant",
+      "trend": "stable",
+      "source_refs": [
+        "branch_event.ravenfall_gate.reveal_oath"
+      ]
+    },
+    "P3_Astral": {
+      "score": 0.35,
+      "pressure_state": "latent",
+      "trend": "stable",
+      "source_refs": [
+        "branch_event.ravenfall_gate.reveal_oath"
+      ]
+    },
+    "P4_Mental": {
+      "score": 0.7,
+      "pressure_state": "rising",
+      "trend": "stable",
+      "source_refs": [
+        "branch_event.ravenfall_gate.reveal_oath"
+      ]
+    },
+    "P5_Causal": {
+      "score": 0.6,
+      "pressure_state": "rising",
+      "trend": "stable",
+      "source_refs": [
+        "branch_event.ravenfall_gate.reveal_oath"
+      ]
+    },
+    "P6_Celestial": {
+      "score": 0.45,
+      "pressure_state": "latent",
+      "trend": "stable",
+      "source_refs": [
+        "branch_event.ravenfall_gate.reveal_oath"
+      ]
+    },
+    "P7_Shadow": {
+      "score": 0.65,
+      "pressure_state": "rising",
+      "trend": "stable",
+      "source_refs": [
+        "branch_event.ravenfall_gate.reveal_oath"
+      ]
+    },
+    "P8_Void": {
+      "score": 0.15,
+      "pressure_state": "dormant",
+      "trend": "stable",
+      "source_refs": [
+        "branch_event.ravenfall_gate.reveal_oath"
+      ]
+    },
+    "P9_Divine_Core": {
+      "score": 0.1,
+      "pressure_state": "dormant",
+      "trend": "stable",
+      "source_refs": [
+        "branch_event.ravenfall_gate.reveal_oath"
+      ]
+    }
+  },
+  "dominant_plane_refs": [
+    "P4_Mental",
+    "P7_Shadow",
+    "P5_Causal"
+  ],
+  "threshold_access_flags": [
+    "ravenfall_gate.thin_veil.sensed"
+  ],
+  "source_refs": [
+    "action_trace.ravenfall_gate.reveal_oath"
+  ],
+  "forbidden": [
+    "fixed_plane_class",
+    "plane_attunement_without_provenance",
+    "plane_attunement_mutating_base_ontology"
+  ]
+}

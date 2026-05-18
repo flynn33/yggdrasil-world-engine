@@ -45,7 +45,7 @@ jobs:
       - name: Check Phase 8-9 package boundary
         run: python scripts/check_phase_8_9_package_boundary.py
 
-      - name: Check player runtime state
+      - name: Check Phase 10 player runtime state
         run: python scripts/check_player_runtime_state.py
 
       - name: Check worldstate and location mutation

@@ -1,0 +1,12 @@
+{
+  "check_id": "check_required_phase_10_contracts",
+  "description": "Verify Phase 10 required docs and JSON artifacts exist.",
+  "inputs": [
+    "data/validation/required_phase_10_artifacts.json"
+  ],
+  "fail_if": [
+    "missing_required_markdown",
+    "missing_required_json"
+  ],
+  "severity": "block"
+}

@@ -1,0 +1,25 @@
+{
+  "schema_id": "ywe.phase_10_invalid_player_state_rejection_cases.v1",
+  "cases": [
+    {
+      "case_id": "reject_full_celestial_identity_at_creation",
+      "reason": "Celestial identity must be veiled and revealed through play."
+    },
+    {
+      "case_id": "reject_wolf_morality_meter",
+      "reason": "Wolf resonance is not good/evil scoring."
+    },
+    {
+      "case_id": "reject_pre_generated_branch_tree",
+      "reason": "Player state must reference generated branch realities, not store prebuilt branch trees."
+    },
+    {
+      "case_id": "reject_direct_feature_mutation",
+      "reason": "Feature systems must use PlayerStateUpdatePacket."
+    },
+    {
+      "case_id": "reject_ash_pattern_top_level_cosmology_language",
+      "reason": "ASH Pattern System is a YWE component, not top-level cosmology."
+    }
+  ]
+}

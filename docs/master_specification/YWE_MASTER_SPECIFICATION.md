@@ -100,6 +100,14 @@ and those events condition branch state through attunement, bloodline
 resonance, wolf resonance, perception, location state, worldstate deltas, and
 cosmological law. Leaf branches are not pre-generated.
 
+## Phase 10 Player Runtime State v1
+
+Player Runtime State v1 is the Phase 10 state spine for player branch,
+identity, resonance, memory, and ASH Pattern System resilience references.
+It keeps the current leaf branch reality as a reference, starts the player as
+a mortal instance with veiled celestial identity, and requires meaningful
+state mutation to flow through `PlayerStateUpdatePacket`.
+
 ## Design Goals
 
 ```yaml

@@ -1,0 +1,17 @@
+{
+  "check_id": "check_no_platform_runtime_code_phase_10",
+  "description": "Prevent platform runtime code from being added in Phase 10.",
+  "forbidden_extensions": [
+    ".cs",
+    ".cpp",
+    ".h",
+    ".hpp",
+    ".java",
+    ".gd",
+    ".js",
+    ".ts",
+    ".py"
+  ],
+  "allowed_exception": "repository_existing_check_scripts_only_if_explicitly_requested",
+  "severity": "block"
+}

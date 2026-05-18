@@ -19,15 +19,16 @@ Phase 9 runtime-cosmology foundation contracts:
 - `existential_gameplay_kernel_contract.md` -- A1-A6 diagnostics and existence potential evaluation.
 - `pattern_vector_runtime_contract.md` -- Runtime semantics for H, K, D, S, and L pattern vector components.
 
-Phase 10 player-state contract:
+Phase 10 player runtime state contracts:
 
-DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
-The Phase 10 through Phase 12 entries below are retained as owner-review
-records only. The nine planes of existence define the base world ontology.
-Leaf branch realities are runtime-generated player realities. Leaf branches
-are not pre-generated.
-
-- `player_runtime_state_v1.md` -- Canonical player-specific runtime state, runtime-state deltas, branch context references, and generation-context boundary rules.
+- `player_runtime_state_contract.md` -- Persistent player state spine for branch, identity, resonance, memory, world links, and ASH Pattern System resilience references.
+- `player_agent_state_contract.md` -- Player agent state reference contract for branch-bound agency and current runtime context.
+- `celestial_identity_progression_contract.md` -- Veiled identity and reveal-through-play progression rules.
+- `plane_attunement_runtime_contract.md` -- Dynamic plane attunement pressure contract.
+- `bloodline_resonance_runtime_contract.md` -- Dynamic bloodline resonance pressure contract.
+- `player_memory_and_action_trace_contract.md` -- Player memory, action trace, and provenance reference contract.
+- `player_state_branch_integration_contract.md` -- Leaf branch reality and branch event integration rules.
+- `player_state_asp_resilience_contract.md` -- ASH Pattern System component diagnostics, recovery, containment, conformance, resilience, and patch/update stability rules.
 
 Phase 11 worldstate and location mutation contract:
 
@@ -145,14 +146,13 @@ ASH Pattern System Component
 
 Phase 10 player-runtime dependency flow:
 
-Boundary note: this later-phase flow is deferred owner-review context only and
-is not active Phase 9 implementation authority.
-
 ```text
 Leaf Branch Reality
   -> Player Runtime State
-    -> YWEGenerationContextPacket.player_runtime_state_ref
-      -> ASH-governed generation
+    -> PlayerStateUpdatePacket
+      -> YWE generation context references
+        -> ASH Cosmological Model-grounded generation
+          -> ASH Pattern System diagnostics and resilience support
 ```
 
 Phase 11 worldstate-location dependency flow:

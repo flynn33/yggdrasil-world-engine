@@ -1,0 +1,14 @@
+{
+  "check_id": "check_celestial_identity_no_upfront_reveal",
+  "description": "Prevent celestial identity from being fully revealed at character creation.",
+  "target": "data/schemas/celestial_identity_state_schema.json",
+  "must_include": [
+    "veiled",
+    "evidence_refs"
+  ],
+  "forbidden_terms": [
+    "full_celestial_identity_at_character_creation",
+    "class_selection_as_celestial_identity"
+  ],
+  "severity": "block"
+}

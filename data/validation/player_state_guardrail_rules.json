@@ -1,0 +1,51 @@
+{
+  "guardrail_id": "ywe.player_state_guardrails.v1",
+  "version": "0.1.0",
+  "rules": [
+    {
+      "id": "psg_001",
+      "name": "current_branch_required",
+      "require": "player_runtime_state.current_leaf_branch_ref"
+    },
+    {
+      "id": "psg_002",
+      "name": "branch_history_refs_only",
+      "forbid": "embedding_full_branch_tree_inside_player_state"
+    },
+    {
+      "id": "psg_003",
+      "name": "celestial_identity_veiled_initially",
+      "require": "celestial_identity_state.identity_state == veiled for initial player state"
+    },
+    {
+      "id": "psg_004",
+      "name": "no_wolf_morality_meter",
+      "forbid": "white_good_dark_evil_scoring"
+    },
+    {
+      "id": "psg_005",
+      "name": "bloodline_dynamic_signal",
+      "forbid": "bloodline_as_static_class_lock"
+    },
+    {
+      "id": "psg_006",
+      "name": "plane_attunement_dynamic_signal",
+      "forbid": "plane_attunement_as_static_class_lock"
+    },
+    {
+      "id": "psg_007",
+      "name": "state_updates_require_packet",
+      "require": "PlayerStateUpdatePacket for all meaningful state mutations"
+    },
+    {
+      "id": "psg_008",
+      "name": "asp_component_role",
+      "require": "ASH Pattern System described as YWE component for diagnostics/resilience/stability"
+    },
+    {
+      "id": "psg_009",
+      "name": "no_platform_code",
+      "forbid": "platform-specific runtime code in Phase 10"
+    }
+  ]
+}

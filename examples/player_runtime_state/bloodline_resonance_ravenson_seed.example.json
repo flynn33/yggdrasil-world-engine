@@ -1,0 +1,33 @@
+{
+  "schema_id": "ywe.bloodline_resonance_state.v1",
+  "schema_version": "0.1.0",
+  "signals": [
+    {
+      "bloodline_id": "ravenson",
+      "status": "suspected",
+      "score": 0.42,
+      "stability": "rising",
+      "known_publicly": false,
+      "revealed_to_player": false,
+      "faction_claim_refs": [],
+      "ancestral_memory_refs": [
+        "memory.ravenson.echo_001"
+      ],
+      "source_refs": [
+        "location.ravenfall_gate.thin_veil"
+      ]
+    }
+  ],
+  "dominant_bloodline_refs": [
+    "ravenson"
+  ],
+  "source_refs": [
+    "player_profile.seed",
+    "location.ravenfall_gate"
+  ],
+  "forbidden": [
+    "bloodline_as_static_class_lock",
+    "bloodline_reveal_without_evidence",
+    "faction_claim_as_automatic_truth"
+  ]
+}

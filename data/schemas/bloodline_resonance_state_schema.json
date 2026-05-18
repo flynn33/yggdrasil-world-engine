@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ywe.bloodline_resonance_state.v1",
+  "title": "Bloodline Resonance State",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "signals",
+    "source_refs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.bloodline_resonance_state.v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "0.1.0"
+    },
+    "signals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "bloodline_id",
+          "status",
+          "score",
+          "stability",
+          "revealed_to_player",
+          "source_refs"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "bloodline_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "unknown",
+              "dormant",
+              "suspected",
+              "active",
+              "awakened",
+              "unstable",
+              "integrated"
+            ]
+          },
+          "score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "stability": {
+            "type": "string",
+            "enum": [
+              "stable",
+              "rising",
+              "declining",
+              "unstable",
+              "contained"
+            ]
+          },
+          "known_publicly": {
+            "type": "boolean",
+            "default": false
+          },
+          "revealed_to_player": {
+            "type": "boolean",
+            "default": false
+          },
+          "faction_claim_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "ancestral_memory_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          }
+        }
+      }
+    },
+    "dominant_bloodline_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "bloodline_as_static_class_lock",
+        "bloodline_reveal_without_evidence",
+        "faction_claim_as_automatic_truth"
+      ]
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ywe.player_memory_record.v1",
+  "title": "Player Memory Record",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "memory_id",
+    "memory_kind",
+    "visibility_state",
+    "source_action_trace_ref",
+    "source_refs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.player_memory_record.v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "0.1.0"
+    },
+    "memory_id": {
+      "type": "string"
+    },
+    "memory_kind": {
+      "type": "string",
+      "enum": [
+        "quest_memory",
+        "branch_memory",
+        "bloodline_memory",
+        "wolf_memory",
+        "location_memory",
+        "artifact_memory",
+        "npc_memory",
+        "myth_memory",
+        "prophecy_memory",
+        "identity_memory"
+      ]
+    },
+    "visibility_state": {
+      "type": "string",
+      "enum": [
+        "hidden",
+        "felt",
+        "suspected",
+        "known_to_player",
+        "public_in_branch",
+        "mythologized"
+      ]
+    },
+    "source_action_trace_ref": {
+      "type": "string"
+    },
+    "branch_ref": {
+      "type": "string"
+    },
+    "location_ref": {
+      "type": "string"
+    },
+    "cosmological_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    }
+  }
+}

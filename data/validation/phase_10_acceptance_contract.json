@@ -1,0 +1,30 @@
+{
+  "contract_id": "ywe.phase_10_acceptance_contract",
+  "version": "0.1.0",
+  "phase": "10_player_runtime_state_v1",
+  "required_gates": [
+    "10.1_prerequisite_gate",
+    "10.2_authority_stack_gate",
+    "10.3_required_artifact_gate",
+    "10.4_json_integrity_gate",
+    "10.5_player_state_semantics_gate",
+    "10.6_non_destructive_gate",
+    "10.7_existing_checks_gate"
+  ],
+  "acceptance_requires": {
+    "all_required_artifacts_present": true,
+    "all_json_parses": true,
+    "no_destructive_changes": true,
+    "existing_checks_pass": true,
+    "authority_stack_preserved": true,
+    "phase_11_not_implemented": true
+  },
+  "block_if": [
+    "phase_8_9_prerequisites_missing",
+    "ASH_Pattern_System_reintroduced_as_top_level_cosmology",
+    "player_state_uses_wolf_morality_meter",
+    "celestial_identity_revealed_at_creation",
+    "platform_runtime_code_added",
+    "existing_checks_fail"
+  ]
+}

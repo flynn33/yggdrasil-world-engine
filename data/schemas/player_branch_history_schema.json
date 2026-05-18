@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ywe.player_branch_history.v1",
+  "title": "Player Branch History",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "player_id",
+    "current_leaf_branch_ref",
+    "entries"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.player_branch_history.v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "0.1.0"
+    },
+    "player_id": {
+      "type": "string"
+    },
+    "current_leaf_branch_ref": {
+      "type": "string"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "branch_event_ref",
+          "leaf_branch_ref",
+          "chosen_action",
+          "source_action_trace_ref",
+          "source_refs"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "branch_event_ref": {
+            "type": "string"
+          },
+          "leaf_branch_ref": {
+            "type": "string"
+          },
+          "parent_branch_ref": {
+            "type": "string"
+          },
+          "chosen_action": {
+            "type": "string"
+          },
+          "source_action_trace_ref": {
+            "type": "string"
+          },
+          "resulting_worldstate_delta_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "resulting_player_state_update_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          }
+        }
+      }
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "pre_generated_branch_tree",
+        "branch_without_branch_event",
+        "player_state_owning_all_branch_data"
+      ]
+    }
+  }
+}

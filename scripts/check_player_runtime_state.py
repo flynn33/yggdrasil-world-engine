@@ -1,24 +1,34 @@
 #!/usr/bin/env python3
-"""Validate Player Runtime State v1 contract coverage."""
-# DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
+"""Validate Phase 10 Player Runtime State v1 package artifacts."""
 
 from __future__ import annotations
 
 import json
+import os
+import subprocess
 import sys
 from pathlib import Path
+from typing import Any
 
 TEXT_ENCODING = "utf-8-sig"
-DEFAULT_CONTRACT = "data/validation/player_runtime_state_gate_contract.json"
+REQUIRED_ARTIFACTS = "data/validation/required_phase_10_artifacts.json"
 
+SPEC_PATHS = {
+    "runtime_schema": "data/validation/check_player_runtime_state_schema.spec.json",
+    "branch_refs": "data/validation/check_player_state_branch_refs.spec.json",
+    "celestial_identity": "data/validation/check_celestial_identity_no_upfront_reveal.spec.json",
+    "wolf_resonance": "data/validation/check_wolf_non_morality_state.spec.json",
+    "authority_role": "data/validation/check_ash_pattern_component_role_phase_10.spec.json",
+    "platform_code": "data/validation/check_no_platform_runtime_code_phase_10.spec.json",
+    "non_destructive": "data/validation/check_non_destructive_diff_phase_10.spec.json",
+}
 
-def read_text(path: Path) -> str:
-    return path.read_text(encoding=TEXT_ENCODING)
-
-
-def load_json(path: Path):
-    with path.open(encoding=TEXT_ENCODING) as handle:
-        return json.load(handle)
+AUTHORITY_SCAN_PATHS = [
+    "docs/architecture/player_runtime_state_contract.md",
+    "docs/architecture/player_state_asp_resilience_contract.md",
+    "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+    "data/schemas/README.md",
+]
 
 
 def relative_name(root: Path, path: Path) -> str:
@@ -28,18 +38,21 @@ def relative_name(root: Path, path: Path) -> str:
         return path.as_posix()
 
 
-def load_json_checked(root: Path, path: Path, errors: list[str]):
-    path_name = relative_name(root, path)
-    if not path.is_file():
-        errors.append(f"Missing required JSON file: {path_name}")
-        return None
+def read_text(path: Path) -> str:
+    return path.read_text(encoding=TEXT_ENCODING)
 
+
+def load_json_checked(root: Path, rel_path: str, errors: list[str]) -> Any | None:
+    path = root / rel_path
+    if not path.is_file():
+        errors.append(f"Missing required JSON file: {rel_path}")
+        return None
     try:
-        return load_json(path)
+        return json.loads(path.read_text(encoding=TEXT_ENCODING))
     except json.JSONDecodeError as exc:
-        errors.append(f"Invalid JSON in {path_name}: line {exc.lineno}, column {exc.colno}: {exc.msg}")
+        errors.append(f"Invalid JSON in {rel_path}: line {exc.lineno}, column {exc.colno}: {exc.msg}")
     except OSError as exc:
-        errors.append(f"Unable to read {path_name}: {exc}")
+        errors.append(f"Unable to read {rel_path}: {exc}")
     return None
 
 
@@ -48,177 +61,312 @@ def require(condition: bool, message: str, errors: list[str]) -> None:
         errors.append(message)
 
 
-def check_required_files(root: Path, contract: dict, errors: list[str]) -> None:
-    for path_name in contract.get("required_files", []):
-        require((root / path_name).is_file(), f"Missing required file: {path_name}", errors)
+def iter_schema_terms(value: Any, under_forbidden: bool = False):
+    if isinstance(value, dict):
+        for key, child in value.items():
+            child_under_forbidden = under_forbidden or key == "forbidden"
+            if not child_under_forbidden:
+                yield key
+                if key == "const" and isinstance(child, str):
+                    yield child
+                elif key in {"enum", "required", "default"} and isinstance(child, list):
+                    for item in child:
+                        if isinstance(item, str):
+                            yield item
+            yield from iter_schema_terms(child, child_under_forbidden)
+    elif isinstance(value, list):
+        for child in value:
+            yield from iter_schema_terms(child, under_forbidden)
 
 
-def check_schema(root: Path, contract: dict, errors: list[str]) -> None:
-    schema_path = root / "data" / "schemas" / "player_runtime_state_schema.json"
-    schema = load_json_checked(root, schema_path, errors)
+def load_specs(root: Path, errors: list[str]) -> dict[str, Any]:
+    specs: dict[str, Any] = {}
+    for name, rel_path in SPEC_PATHS.items():
+        spec = load_json_checked(root, rel_path, errors)
+        if spec is not None:
+            specs[name] = spec
+    return specs
+
+
+def check_required_artifacts(root: Path, errors: list[str]) -> None:
+    contract = load_json_checked(root, REQUIRED_ARTIFACTS, errors)
+    if contract is None:
+        return
+
+    for section in ("required_markdown", "required_json"):
+        for rel_path in contract.get(section, []):
+            require((root / rel_path).is_file(), f"Missing Phase 10 artifact: {rel_path}", errors)
+
+
+def check_runtime_schema(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
+    target = spec.get("target", "data/schemas/player_runtime_state_schema.json")
+    schema = load_json_checked(root, target, errors)
     if schema is None:
         return
 
-    defs = schema.get("$defs", {})
-    for record_name in contract.get("required_schema_records", []):
-        require(record_name in defs, f"Missing schema record: {record_name}", errors)
+    properties = schema.get("properties", {})
+    required = set(schema.get("required", []))
+    for field in spec.get("required_properties", []):
+        require(field in properties, f"{target} missing property: {field}", errors)
+        require(field in required, f"{target} must require property: {field}", errors)
 
-    runtime_required = defs.get("PlayerRuntimeState", {}).get("required", [])
-    for field in contract.get("required_runtime_state_fields", []):
-        require(field in runtime_required, f"PlayerRuntimeState missing required field: {field}", errors)
+    authority_role = (
+        properties.get("authority", {})
+        .get("properties", {})
+        .get("ash_pattern_system_role", {})
+        .get("const", "")
+    )
+    require("YWE component" in authority_role, f"{target} must keep ASH Pattern System in YWE component role.", errors)
 
-    delta_required = defs.get("PlayerRuntimeStateDelta", {}).get("required", [])
-    for field in contract.get("required_delta_fields", []):
-        require(field in delta_required, f"PlayerRuntimeStateDelta missing required field: {field}", errors)
-
-    boundary_props = defs.get("AuthorityBoundary", {}).get("properties", {})
-    expected_boundary = {
-        "can_influence_generation_context": True,
-        "may_mutate_ash_math": False,
-        "may_rewrite_shared_world_truth": False,
-        "may_mutate_base_world_ontology": False,
-        "host_adapter_may_author": False,
-    }
-    for field, expected in expected_boundary.items():
-        require(field in boundary_props, f"AuthorityBoundary missing property: {field}", errors)
-        require(
-            boundary_props.get(field, {}).get("const") is expected,
-            f"AuthorityBoundary must set {field} to {str(expected).lower()}.",
-            errors,
-        )
-
-
-def check_markers(root: Path, contract: dict, errors: list[str]) -> None:
-    paths = [
-        "data/schemas/player_runtime_state_schema.json",
-        "core/narrative_engine/player_runtime_state_rules.yaml",
-        "docs/architecture/player_runtime_state_v1.md",
-        "data/schemas/ywe_generation_context_packet_schema.json",
-        "data/schemas/ash_generation_packet_schema.json",
-        "data/schemas/branch_generation_context_schema.json",
-        "data/schemas/leaf_branch_reality_state_schema.json",
-    ]
-    text = "\n".join(read_text(root / path_name) for path_name in paths if (root / path_name).is_file())
-    for marker in contract.get("required_markers", []):
-        require(marker in text, f"Missing required marker: {marker}", errors)
-
-
-def check_packet_spine(root: Path, errors: list[str]) -> None:
-    context_schema = load_json_checked(
-        root,
-        root / "data" / "schemas" / "ywe_generation_context_packet_schema.json",
+    update_control = properties.get("update_control", {}).get("properties", {})
+    require(
+        update_control.get("requires_update_packet", {}).get("const") is True,
+        f"{target} must require update packets for state mutation.",
         errors,
     )
-    if context_schema is not None:
-        require(
-            "player_runtime_state_ref" in context_schema.get("required", []),
-            "YWEGenerationContextPacket must require player_runtime_state_ref.",
-            errors,
-        )
-
-    packet_schema = load_json_checked(
-        root,
-        root / "data" / "schemas" / "ash_generation_packet_schema.json",
+    require(
+        update_control.get("allowed_update_packet_schema", {}).get("const") == "ywe.player_state_update_packet.v1",
+        f"{target} must reference ywe.player_state_update_packet.v1.",
         errors,
     )
-    if packet_schema is not None:
-        records = packet_schema.get("records", {})
-        require("PlayerRuntimeState" in records, "ASH packet schema missing PlayerRuntimeState record.", errors)
-        require("PlayerRuntimeStateDelta" in records, "ASH packet schema missing PlayerRuntimeStateDelta record.", errors)
-
-    branch_context = load_json_checked(
-        root,
-        root / "data" / "schemas" / "branch_generation_context_schema.json",
-        errors,
-    )
-    if branch_context is not None:
-        player_context_fields = branch_context.get("player_context_fields", [])
-        require(
-            "player_runtime_state_ref" in player_context_fields,
-            "BranchGenerationContext must include player_runtime_state_ref.",
-            errors,
-        )
 
 
-def check_examples(root: Path, errors: list[str]) -> None:
-    examples_dir = root / "examples" / "player_runtime_state"
-    if not examples_dir.is_dir():
-        errors.append("Missing examples/player_runtime_state.")
-        return
+def parse_json_target(rel_path: str, text: str, errors: list[str]) -> Any | None:
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError as exc:
+        errors.append(f"Invalid JSON in {rel_path}: line {exc.lineno}, column {exc.colno}: {exc.msg}")
+    return None
 
-    schema = load_json_checked(root, root / "data" / "schemas" / "player_runtime_state_schema.json", errors)
-    if schema is None:
-        return
 
-    defs = schema.get("$defs", {})
-    runtime_required = defs.get("PlayerRuntimeState", {}).get("required")
-    delta_required = defs.get("PlayerRuntimeStateDelta", {}).get("required")
-    if not isinstance(runtime_required, list):
-        errors.append("PlayerRuntimeState schema missing required field list.")
-        return
-    if not isinstance(delta_required, list):
-        errors.append("PlayerRuntimeStateDelta schema missing required field list.")
-        return
-
-    runtime_required_set = set(runtime_required)
-    delta_required_set = set(delta_required)
-    for path in sorted(examples_dir.glob("*.json")):
-        data = load_json_checked(root, path, errors)
-        if data is None:
+def load_check_targets(root: Path, targets: list[str], errors: list[str]) -> list[tuple[str, str, Any | None]]:
+    loaded_targets: list[tuple[str, str, Any | None]] = []
+    for rel_path in targets:
+        if not rel_path:
             continue
-        if data.get("record_type") == "PlayerRuntimeState":
-            missing = runtime_required_set - set(data.keys())
-        elif data.get("record_type") == "PlayerRuntimeStateDelta":
-            missing = delta_required_set - set(data.keys())
+        path = root / rel_path
+        if not path.is_file():
+            errors.append(f"Missing check target: {rel_path}")
+            continue
+        text = read_text(path)
+        parsed = parse_json_target(rel_path, text, errors) if rel_path.endswith(".json") else None
+        loaded_targets.append((rel_path, text, parsed))
+    return loaded_targets
+
+
+def check_required_terms(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
+    loaded_targets = load_check_targets(root, spec.get("targets") or [spec.get("target")], errors)
+    target_texts = [(rel_path, text) for rel_path, text, _ in loaded_targets]
+    target_json_values = [(rel_path, parsed) for rel_path, _, parsed in loaded_targets if parsed is not None]
+    combined = "\n".join(text for _, text in target_texts)
+    schema_terms = {term for _, data in target_json_values for term in iter_schema_terms(data)}
+    all_targets_are_json = bool(target_texts) and len(target_json_values) == len(target_texts)
+    for term in spec.get("required_terms", []) + spec.get("must_include", []):
+        if all_targets_are_json:
+            require(
+                term in schema_terms,
+                f"Missing required Phase 10 schema construct `{term}` in {', '.join(t for t, _ in target_texts)}",
+                errors,
+            )
         else:
-            missing = {"record_type"}
-        for field in sorted(missing):
-            errors.append(f"{path.relative_to(root).as_posix()} missing required field: {field}")
+            require(term in combined, f"Missing required Phase 10 term `{term}` in {', '.join(t for t, _ in target_texts)}", errors)
+
+    for term in spec.get("forbidden_terms", []):
+        require(term not in schema_terms, f"Forbidden term used as active schema construct: {term}", errors)
 
 
-def check_forbidden_claims(root: Path, contract: dict, errors: list[str]) -> None:
-    scan_paths = [
-        "data/schemas/player_runtime_state_schema.json",
-        "core/narrative_engine/player_runtime_state_rules.yaml",
-        "docs/architecture/player_runtime_state_v1.md",
-        "examples/player_runtime_state/player_runtime_state_initial.example.json",
-        "examples/player_runtime_state/player_runtime_state_delta_branch_event.example.json",
-    ]
-    combined = "\n".join(
-        read_text(root / path_name)
-        for path_name in scan_paths
-        if (root / path_name).is_file()
-    ).lower()
-    for claim in contract.get("forbidden_current_truth_claims", []):
-        require(claim.lower() not in combined, f"Forbidden current-truth claim found: {claim}", errors)
+def check_celestial_initial_state(root: Path, errors: list[str]) -> None:
+    example_path = "examples/player_runtime_state/player_runtime_state_initial_mortal_veiled.example.json"
+    example = load_json_checked(root, example_path, errors)
+    if example is None:
+        return
+    require(example.get("state_lifecycle") == "initial", f"{example_path} must declare state_lifecycle as initial.", errors)
+    initial_state = example.get("identity", {}).get("celestial_identity_initial_state")
+    require(initial_state == "veiled", f"{example_path} must start celestial identity as veiled.", errors)
+
+
+def check_authority_role(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
+    text = "\n".join(read_text(root / rel_path) for rel_path in AUTHORITY_SCAN_PATHS if (root / rel_path).is_file())
+    required_phrase = spec.get("required_phrase")
+    if required_phrase:
+        require(required_phrase in text, f"Missing required authority phrase: {required_phrase}", errors)
+    for phrase in spec.get("forbidden_phrases", []):
+        require(phrase not in text, f"Forbidden authority phrase found: {phrase}", errors)
+
+
+def git_ref_exists(root: Path, ref: str) -> bool:
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(root), "rev-parse", "--verify", "--quiet", ref],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except OSError:
+        return False
+    return result.returncode == 0
+
+
+def git_fetch_origin_branch(root: Path, branch: str) -> bool:
+    try:
+        result = subprocess.run(
+            [
+                "git",
+                "-C",
+                str(root),
+                "fetch",
+                "--no-tags",
+                "--depth=1",
+                "origin",
+                f"{branch}:refs/remotes/origin/{branch}",
+            ],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except OSError:
+        return False
+    return result.returncode == 0
+
+
+def default_base_ref(root: Path) -> str | None:
+    github_base_ref = os.environ.get("GITHUB_BASE_REF")
+    if github_base_ref:
+        github_base_candidate = f"origin/{github_base_ref}"
+        if git_ref_exists(root, github_base_candidate):
+            return github_base_candidate
+        if git_fetch_origin_branch(root, github_base_ref) and git_ref_exists(root, github_base_candidate):
+            return github_base_candidate
+
+    base_ref = os.environ.get("BASE_REF")
+    if base_ref:
+        if git_ref_exists(root, base_ref):
+            return base_ref
+        if base_ref.startswith("origin/"):
+            branch = base_ref.removeprefix("origin/")
+            if git_fetch_origin_branch(root, branch) and git_ref_exists(root, base_ref):
+                return base_ref
+
+    if git_ref_exists(root, "origin/main"):
+        return "origin/main"
+    if git_fetch_origin_branch(root, "main") and git_ref_exists(root, "origin/main"):
+        return "origin/main"
+    if git_ref_exists(root, "main"):
+        return "main"
+    return None
+
+
+def parse_name_status(line: str) -> tuple[str, str] | None:
+    parts = line.split("\t")
+    if len(parts) < 2:
+        return None
+    status = parts[0]
+    path = parts[-1]
+    return status, path
+
+
+def git_diff_paths(root: Path, base_ref: str, head_ref: str = "HEAD") -> list[tuple[str, str]]:
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(root), "diff", "--name-status", "--find-renames", f"{base_ref}...{head_ref}"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except OSError:
+        return []
+    if result.returncode != 0:
+        return []
+    paths: list[tuple[str, str]] = []
+    for line in result.stdout.splitlines():
+        parsed = parse_name_status(line)
+        if parsed is not None:
+            paths.append(parsed)
+    return paths
+
+
+def git_change_paths(root: Path, errors: list[str]) -> list[tuple[str, str]]:
+    paths: dict[str, str] = {}
+    base_ref = default_base_ref(root)
+    if not base_ref:
+        message = "Unable to resolve git base ref for Phase 10 diff checks."
+        if message not in errors:
+            errors.append(message)
+        return []
+    for status, path in git_diff_paths(root, base_ref):
+        paths[path] = status
+    return [(status, path) for path, status in paths.items()]
+
+
+def check_no_platform_code(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
+    forbidden_extensions = set(spec.get("forbidden_extensions", []))
+    for status, rel_path in git_change_paths(root, errors):
+        is_added = status.startswith("A")
+        if not is_added:
+            continue
+        suffix = Path(rel_path).suffix
+        if suffix in forbidden_extensions:
+            errors.append(f"Phase 10 added forbidden platform/code file: {rel_path}")
+
+
+def classify_change_paths(statuses: list[tuple[str, str]]) -> tuple[list[str], list[str], list[str]]:
+    deleted: list[str] = []
+    renamed_or_copied: list[str] = []
+    existing_touched: list[str] = []
+    for status, path in statuses:
+        if status.startswith("A"):
+            continue
+        if status.startswith("D"):
+            deleted.append(path)
+            continue
+        if status.startswith(("R", "C")):
+            renamed_or_copied.append(path)
+            continue
+        existing_touched.append(path)
+    return deleted, renamed_or_copied, existing_touched
+
+
+def check_non_destructive_diff(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
+    deleted, renamed_or_copied, existing_touched = classify_change_paths(git_change_paths(root, errors))
+
+    max_deleted = int(spec.get("max_existing_file_deletions", 0))
+    max_renamed = int(spec.get("max_directory_renames", 0))
+    max_touched = int(spec.get("max_existing_files_touched_without_review", 25))
+    require(len(deleted) <= max_deleted, f"Existing file deletions exceed budget: {deleted}", errors)
+    require(
+        len(renamed_or_copied) <= max_renamed,
+        f"Renamed or copied paths exceed budget {max_renamed}: {renamed_or_copied}",
+        errors,
+    )
+    require(
+        len(existing_touched) <= max_touched,
+        f"Existing files touched exceed budget {max_touched}: {len(existing_touched)}",
+        errors,
+    )
 
 
 def main() -> int:
     root = Path(sys.argv[1] if len(sys.argv) > 1 else ".").resolve()
-    contract_path = root / DEFAULT_CONTRACT
-    if not contract_path.is_file():
-        print(f"Player Runtime State check failed: missing {DEFAULT_CONTRACT}")
-        return 1
-
-    try:
-        contract = load_json(contract_path)
-    except json.JSONDecodeError as exc:
-        print(
-            "Player Runtime State check failed: "
-            f"invalid {DEFAULT_CONTRACT} at line {exc.lineno}, column {exc.colno}: {exc.msg}"
-        )
-        return 1
-    except OSError as exc:
-        print(f"Player Runtime State check failed: unable to read {DEFAULT_CONTRACT}: {exc}")
-        return 1
     errors: list[str] = []
 
-    check_required_files(root, contract, errors)
-    check_schema(root, contract, errors)
-    check_markers(root, contract, errors)
-    check_packet_spine(root, errors)
-    check_examples(root, errors)
-    check_forbidden_claims(root, contract, errors)
+    specs = load_specs(root, errors)
+    check_required_artifacts(root, errors)
+
+    if "runtime_schema" in specs:
+        check_runtime_schema(root, specs["runtime_schema"], errors)
+    if "branch_refs" in specs:
+        check_required_terms(root, specs["branch_refs"], errors)
+    if "celestial_identity" in specs:
+        check_required_terms(root, specs["celestial_identity"], errors)
+    if "wolf_resonance" in specs:
+        check_required_terms(root, specs["wolf_resonance"], errors)
+    if "authority_role" in specs:
+        check_authority_role(root, specs["authority_role"], errors)
+    if "platform_code" in specs:
+        check_no_platform_code(root, specs["platform_code"], errors)
+    if "non_destructive" in specs:
+        check_non_destructive_diff(root, specs["non_destructive"], errors)
+    check_celestial_initial_state(root, errors)
 
     if errors:
         print("Player Runtime State check failed:")

@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ywe.player_state_update_packet.v1",
+  "title": "Player State Update Packet",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "update_id",
+    "player_id",
+    "source_system",
+    "update_kind",
+    "proposed_changes",
+    "provenance",
+    "validation_requirements"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.player_state_update_packet.v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "0.1.0"
+    },
+    "update_id": {
+      "type": "string"
+    },
+    "player_id": {
+      "type": "string"
+    },
+    "source_system": {
+      "type": "string",
+      "enum": [
+        "branch_reality_resolver",
+        "quest_engine",
+        "npc_synthesis",
+        "location_state_resolver",
+        "worldstate_delta_resolver",
+        "wolf_companion_engine",
+        "ability_engine",
+        "artifact_engine",
+        "creature_engine",
+        "myth_engine",
+        "prophecy_engine",
+        "perception_engine",
+        "manual_authoring_tool"
+      ]
+    },
+    "update_kind": {
+      "type": "string",
+      "enum": [
+        "branch_ref_update",
+        "identity_progression",
+        "plane_attunement_update",
+        "bloodline_resonance_update",
+        "wolf_resonance_update",
+        "memory_addition",
+        "progression_signal_update",
+        "relationship_update",
+        "artifact_binding_update",
+        "diagnostic_update",
+        "snapshot_update"
+      ]
+    },
+    "proposed_changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "operation",
+          "value"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "operation": {
+            "type": "string",
+            "enum": [
+              "set",
+              "append",
+              "increment",
+              "decrement",
+              "merge",
+              "flag",
+              "clear"
+            ]
+          },
+          "value": {}
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "source_refs",
+        "requires_worldstate_delta_or_noop",
+        "asp_diagnostic_refs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "player_action_trace_ref": {
+          "type": "string"
+        },
+        "branch_event_ref": {
+          "type": "string"
+        },
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "diagnostic_noop_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "requires_worldstate_delta_or_noop": {
+          "type": "boolean"
+        },
+        "asp_diagnostic_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    },
+    "validation_requirements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "authority_stack_valid",
+        "branch_refs_valid",
+        "celestial_identity_not_forced",
+        "wolf_non_morality_valid",
+        "provenance_present",
+        "json_schema_valid"
+      ]
+    },
+    "acceptance_status": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "accepted",
+        "rejected",
+        "contained",
+        "requires_review"
+      ],
+      "default": "proposed"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "check_id": "check_wolf_non_morality_state",
+  "description": "Ensure wolf resonance is not modeled as morality.",
+  "target": "data/schemas/wolf_resonance_summary_schema.json",
+  "must_include": [
+    "twin_coherence",
+    "revelation",
+    "memory",
+    "containment",
+    "consequence"
+  ],
+  "forbidden_terms": [
+    "good",
+    "evil",
+    "morality"
+  ],
+  "severity": "block"
+}
