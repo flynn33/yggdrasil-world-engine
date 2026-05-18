@@ -151,9 +151,8 @@ def parse_json_target(rel_path: str, text: str, errors: list[str]) -> Any | None
     return None
 
 
-def load_check_targets(root: Path, targets: list[str], errors: list[str]) -> tuple[list[tuple[str, str]], list[tuple[str, Any]]]:
-    target_texts: list[tuple[str, str]] = []
-    target_json_values: list[tuple[str, Any]] = []
+def load_check_targets(root: Path, targets: list[str], errors: list[str]) -> list[tuple[str, str, Any | None]]:
+    loaded_targets: list[tuple[str, str, Any | None]] = []
     for rel_path in targets:
         if not rel_path:
             continue
@@ -162,16 +161,15 @@ def load_check_targets(root: Path, targets: list[str], errors: list[str]) -> tup
             errors.append(f"Missing check target: {rel_path}")
             continue
         text = read_text(path)
-        target_texts.append((rel_path, text))
-        if rel_path.endswith(".json"):
-            parsed = parse_json_target(rel_path, text, errors)
-            if parsed is not None:
-                target_json_values.append((rel_path, parsed))
-    return target_texts, target_json_values
+        parsed = parse_json_target(rel_path, text, errors) if rel_path.endswith(".json") else None
+        loaded_targets.append((rel_path, text, parsed))
+    return loaded_targets
 
 
 def check_required_terms(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
-    target_texts, target_json_values = load_check_targets(root, spec.get("targets") or [spec.get("target")], errors)
+    loaded_targets = load_check_targets(root, spec.get("targets") or [spec.get("target")], errors)
+    target_texts = [(rel_path, text) for rel_path, text, _ in loaded_targets]
+    target_json_values = [(rel_path, parsed) for rel_path, _, parsed in loaded_targets if parsed is not None]
     combined = "\n".join(text for _, text in target_texts)
     schema_terms = {term for _, data in target_json_values for term in iter_schema_terms(data)}
     all_targets_are_json = bool(target_texts) and len(target_json_values) == len(target_texts)
