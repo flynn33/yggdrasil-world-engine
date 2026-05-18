@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -72,6 +73,24 @@ def iter_keys(value: Any, under_forbidden: bool = False):
             yield from iter_keys(child, under_forbidden)
 
 
+def iter_schema_terms(value: Any, under_forbidden: bool = False):
+    if isinstance(value, dict):
+        for key, child in value.items():
+            child_under_forbidden = under_forbidden or key == "forbidden"
+            if not child_under_forbidden:
+                yield key
+                if key == "const" and isinstance(child, str):
+                    yield child
+                elif key in {"enum", "required", "default"} and isinstance(child, list):
+                    for item in child:
+                        if isinstance(item, str):
+                            yield item
+            yield from iter_schema_terms(child, child_under_forbidden)
+    elif isinstance(value, list):
+        for child in value:
+            yield from iter_schema_terms(child, under_forbidden)
+
+
 def load_specs(root: Path, errors: list[str]) -> dict[str, Any]:
     specs: dict[str, Any] = {}
     for name, rel_path in SPEC_PATHS.items():
@@ -138,17 +157,28 @@ def check_required_terms(root: Path, spec: dict[str, Any], errors: list[str]) ->
         text = read_text(path)
         target_texts.append((rel_path, text))
         if rel_path.endswith(".json"):
-            parsed = load_json_checked(root, rel_path, errors)
-            if parsed is not None:
+            try:
+                parsed = json.loads(text)
                 target_json_values.append((rel_path, parsed))
+            except json.JSONDecodeError as exc:
+                errors.append(f"Invalid JSON in {rel_path}: line {exc.lineno}, column {exc.colno}: {exc.msg}")
 
     combined = "\n".join(text for _, text in target_texts)
+    schema_terms = {term for _, data in target_json_values for term in iter_schema_terms(data)}
+    all_targets_are_json = bool(target_texts) and len(target_json_values) == len(target_texts)
     for term in spec.get("required_terms", []) + spec.get("must_include", []):
-        require(term in combined, f"Missing required Phase 10 term `{term}` in {', '.join(t for t, _ in target_texts)}", errors)
+        if all_targets_are_json:
+            require(
+                term in schema_terms,
+                f"Missing required Phase 10 schema construct `{term}` in {', '.join(t for t, _ in target_texts)}",
+                errors,
+            )
+        else:
+            require(term in combined, f"Missing required Phase 10 term `{term}` in {', '.join(t for t, _ in target_texts)}", errors)
 
-    active_keys = {key for _, data in target_json_values for key in iter_keys(data)}
+    active_terms = {term for _, data in target_json_values for term in iter_schema_terms(data)}
     for term in spec.get("forbidden_terms", []):
-        require(term not in active_keys, f"Forbidden term used as active schema key: {term}", errors)
+        require(term not in active_terms, f"Forbidden term used as active schema construct: {term}", errors)
 
 
 def check_celestial_initial_state(root: Path, errors: list[str]) -> None:
@@ -191,10 +221,76 @@ def git_status_paths(root: Path) -> list[tuple[str, str]]:
     return paths
 
 
+def git_ref_exists(root: Path, ref: str) -> bool:
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(root), "rev-parse", "--verify", "--quiet", ref],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except OSError:
+        return False
+    return result.returncode == 0
+
+
+def default_base_ref(root: Path) -> str | None:
+    candidates: list[str] = []
+    if os.environ.get("GITHUB_BASE_REF"):
+        candidates.append(f"origin/{os.environ['GITHUB_BASE_REF']}")
+    if os.environ.get("BASE_REF"):
+        candidates.append(os.environ["BASE_REF"])
+    candidates.extend(["origin/main", "main"])
+    for candidate in candidates:
+        if git_ref_exists(root, candidate):
+            return candidate
+    return None
+
+
+def parse_name_status(line: str) -> tuple[str, str] | None:
+    parts = line.split("\t")
+    if len(parts) < 2:
+        return None
+    status = parts[0]
+    path = parts[-1]
+    return status, path
+
+
+def git_diff_paths(root: Path, base_ref: str, head_ref: str = "HEAD") -> list[tuple[str, str]]:
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(root), "diff", "--name-status", "--find-renames", f"{base_ref}...{head_ref}"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except OSError:
+        return []
+    if result.returncode != 0:
+        return []
+    paths: list[tuple[str, str]] = []
+    for line in result.stdout.splitlines():
+        parsed = parse_name_status(line)
+        if parsed is not None:
+            paths.append(parsed)
+    return paths
+
+
+def git_change_paths(root: Path) -> list[tuple[str, str]]:
+    paths: dict[str, str] = {}
+    base_ref = default_base_ref(root)
+    if base_ref:
+        for status, path in git_diff_paths(root, base_ref):
+            paths[path] = status
+    for status, path in git_status_paths(root):
+        paths.setdefault(path, status)
+    return [(status, path) for path, status in paths.items()]
+
+
 def check_no_platform_code(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
     forbidden_extensions = set(spec.get("forbidden_extensions", []))
-    for status, rel_path in git_status_paths(root):
-        is_added = status == "??" or "A" in status
+    for status, rel_path in git_change_paths(root):
+        is_added = status == "??" or status.startswith("A")
         if not is_added:
             continue
         suffix = Path(rel_path).suffix
@@ -203,9 +299,13 @@ def check_no_platform_code(root: Path, spec: dict[str, Any], errors: list[str]) 
 
 
 def check_non_destructive_diff(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
-    statuses = git_status_paths(root)
-    deleted = [path for status, path in statuses if "D" in status]
-    existing_touched = [path for status, path in statuses if status != "??" and "D" not in status]
+    statuses = git_change_paths(root)
+    deleted = [path for status, path in statuses if status.startswith("D")]
+    existing_touched = [
+        path
+        for status, path in statuses
+        if status != "??" and not status.startswith(("A", "D"))
+    ]
 
     max_deleted = int(spec.get("max_existing_file_deletions", 0))
     max_touched = int(spec.get("max_existing_files_touched_without_review", 25))
