@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ywe.player_progression_signal.v1",
+  "title": "Player Progression Signal",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "signal_id",
+    "signal_kind",
+    "status",
+    "source_refs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.player_progression_signal.v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "0.1.0"
+    },
+    "signal_id": {
+      "type": "string"
+    },
+    "signal_kind": {
+      "type": "string",
+      "enum": [
+        "ability_pressure",
+        "identity_reveal_pressure",
+        "plane_attunement_threshold",
+        "bloodline_threshold",
+        "wolf_coherence_shift",
+        "myth_participation",
+        "prophecy_exposure",
+        "artifact_binding_pressure",
+        "location_threshold_access"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "latent",
+        "pressured",
+        "eligible",
+        "unlocked",
+        "unstable",
+        "integrated"
+      ]
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "related_system_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    }
+  }
+}

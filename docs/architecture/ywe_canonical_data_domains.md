@@ -20,6 +20,7 @@ This document defines which folders under `data/` are canonical YWE truth assets
 - `data/myth_archetypes`: myth record structures
 - `data/bloodline_registry`: bloodline resonance data
 - `data/schemas`: shared payload, persistence, and state contracts
+- `data/validation`: guardrail contracts, required artifact manifests, and check specifications for package-scoped acceptance gates
 
 ## Runtime Rule
 
@@ -31,5 +32,6 @@ Changes to canonical data domains must preserve:
 - ASH-first generation
 - fixed cosmology
 - multiplayer-safe perception divergence
+- player runtime state updates through controlled update packets
 - Forsetti lifecycle governance without external truth transfer
 - the split where Forsetti governs activation and YWE governs truth

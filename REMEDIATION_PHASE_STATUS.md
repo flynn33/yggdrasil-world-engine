@@ -19,6 +19,6 @@
 ## Phase 8-9 Remediation Boundary Note
 
 DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
-The Phase 10 through Phase 12 rows above are superseded for the active
-Phase 8-9 remediation boundary. They are retained as owner-review records only,
+The Phase 11 through Phase 12 rows above remain superseded for the active
+Phase 10 remediation boundary. They are retained as owner-review records only,
 not as acceptance authority for this branch.

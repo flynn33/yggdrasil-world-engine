@@ -1,0 +1,17 @@
+{
+  "check_id": "check_player_state_branch_refs",
+  "description": "Verify player state references branch reality artifacts and must not embed pre-generated branch trees.",
+  "targets": [
+    "data/schemas/player_runtime_state_schema.json",
+    "data/schemas/player_branch_history_schema.json"
+  ],
+  "required_terms": [
+    "current_leaf_branch_ref",
+    "branch_event_ref",
+    "leaf_branch_ref"
+  ],
+  "forbidden_terms": [
+    "pre_generated_branch_tree"
+  ],
+  "severity": "block"
+}

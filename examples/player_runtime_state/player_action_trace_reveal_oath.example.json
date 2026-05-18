@@ -1,0 +1,25 @@
+{
+  "schema_id": "ywe.player_action_trace.v1",
+  "schema_version": "0.1.0",
+  "action_trace_id": "action_trace.ravenfall_gate.reveal_oath",
+  "player_id": "player.example.kaelen_seed",
+  "action_kind": "truth_revealed",
+  "significance": "branch_forming",
+  "branch_relevance": "branch_event_created",
+  "location_ref": "location.ravenfall_gate",
+  "branch_ref": "leaf_branch.ravenfall_gate.oath_revealed",
+  "branch_event_ref": "branch_event.ravenfall_gate.reveal_oath",
+  "affected_entity_refs": [
+    "location.ravenfall_gate",
+    "faction.oathkeepers"
+  ],
+  "resulting_worldstate_delta_refs": [
+    "worldstate_delta.ravenfall_gate.oath_public"
+  ],
+  "resulting_player_state_update_refs": [
+    "player_state_update.reveal_oath_001"
+  ],
+  "source_refs": [
+    "quest.the_buried_oath.resolution.reveal"
+  ]
+}

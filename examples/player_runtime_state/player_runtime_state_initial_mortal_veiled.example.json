@@ -1,0 +1,89 @@
+{
+  "schema_id": "ywe.player_runtime_state.v1",
+  "schema_version": "0.1.0",
+  "authority": {
+    "game_layer": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "cosmology_foundation": "ASH Cosmological Model",
+    "ash_pattern_system_role": "YWE component for diagnostics, recovery, containment, conformance, pattern integrity, code resilience, and patch/update stability"
+  },
+  "player_id": "player.example.kaelen_seed",
+  "current_leaf_branch_ref": "leaf_branch.initial.base_entry",
+  "current_location_ref": "location.ravenfall_gate.base",
+  "identity": {
+    "mortal_identity_ref": "mortal_identity.kaelen_seed",
+    "celestial_identity_state_ref": "celestial_identity.kaelen_seed",
+    "celestial_identity_initial_state": "veiled"
+  },
+  "state_refs": {
+    "player_agent_state_ref": "player_agent.kaelen_seed",
+    "plane_attunement_state_ref": "plane_attunement.kaelen_seed",
+    "bloodline_resonance_state_ref": "bloodline.kaelen_seed",
+    "wolf_resonance_summary_ref": "wolf_resonance.kaelen_seed",
+    "player_branch_history_ref": "branch_history.kaelen_seed",
+    "pattern_vector_ref": "pattern_vector.kaelen_seed",
+    "existence_potential_ref": "existence_potential.kaelen_seed"
+  },
+  "memory_refs": {
+    "player_action_trace_refs": [],
+    "player_memory_record_refs": [],
+    "quest_history_refs": [],
+    "major_choice_refs": [],
+    "oath_refs": [],
+    "discovery_refs": []
+  },
+  "progression_refs": {
+    "progression_signal_refs": [],
+    "ability_pressure_refs": [],
+    "identity_reveal_pressure_refs": [],
+    "threshold_access_refs": []
+  },
+  "world_links": {
+    "worldstate_delta_refs": [],
+    "location_state_refs": [],
+    "location_mutation_refs": [],
+    "future_generation_bias_refs": [],
+    "diagnostic_noop_refs": []
+  },
+  "relationship_links": {
+    "npc_relationship_refs": [],
+    "faction_standing_refs": [],
+    "faction_claim_exposure_refs": []
+  },
+  "manifestation_links": {
+    "artifact_binding_refs": [],
+    "creature_encounter_refs": [],
+    "myth_participation_refs": [],
+    "myth_seed_refs": [],
+    "prophecy_pressure_refs": [],
+    "perception_overlay_refs": []
+  },
+  "asp_resilience": {
+    "state_integrity_status": "valid",
+    "asp_diagnostic_refs": [
+      "asp_diag.initial_state.valid"
+    ],
+    "last_valid_snapshot_ref": "player_snapshot.initial",
+    "recovery_status": "none",
+    "schema_version_history": [
+      "0.1.0"
+    ]
+  },
+  "update_control": {
+    "requires_update_packet": true,
+    "allowed_update_packet_schema": "ywe.player_state_update_packet.v1",
+    "pending_update_packet_refs": [],
+    "accepted_update_packet_refs": [],
+    "rejected_update_packet_refs": []
+  },
+  "forbidden": [
+    "mutating_base_cosmology",
+    "pre_generated_branch_tree",
+    "full_celestial_identity_at_character_creation",
+    "wolf_morality_meter",
+    "bloodline_static_class_lock",
+    "plane_attunement_static_class_lock",
+    "feature_engine_direct_mutation",
+    "ash_pattern_system_as_top_level_cosmology"
+  ]
+}

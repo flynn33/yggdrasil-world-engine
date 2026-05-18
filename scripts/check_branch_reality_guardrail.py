@@ -13,6 +13,7 @@ SCANNABLE_SUFFIXES = {".md", ".json", ".yaml", ".yml"}
 SKIP_EXACT = {
     PATTERN_PATH,
     "data/validation/branch_reality_guardrail_rules.json",
+    "data/validation/forbidden_player_state_language_patterns.json",
     "scripts/check_branch_reality_guardrail.py",
 }
 ALLOWED_CONTEXT_TERMS = {

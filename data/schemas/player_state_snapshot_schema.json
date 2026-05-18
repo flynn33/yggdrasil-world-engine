@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ywe.player_state_snapshot.v1",
+  "title": "Player State Snapshot",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "snapshot_id",
+    "player_id",
+    "snapshot_kind",
+    "captured_state_ref",
+    "integrity_status",
+    "source_refs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.player_state_snapshot.v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "0.1.0"
+    },
+    "snapshot_id": {
+      "type": "string"
+    },
+    "player_id": {
+      "type": "string"
+    },
+    "snapshot_kind": {
+      "type": "string",
+      "enum": [
+        "baseline",
+        "pre_update",
+        "post_update",
+        "last_valid",
+        "recovery_point",
+        "handoff"
+      ]
+    },
+    "captured_state_ref": {
+      "type": "string"
+    },
+    "integrity_status": {
+      "type": "string",
+      "enum": [
+        "valid",
+        "recoverable",
+        "contained",
+        "invalid"
+      ]
+    },
+    "schema_version_history": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    }
+  }
+}

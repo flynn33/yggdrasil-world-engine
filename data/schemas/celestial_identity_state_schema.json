@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ywe.celestial_identity_state.v1",
+  "title": "Celestial Identity State",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "identity_state",
+    "reveal_status",
+    "evidence_refs",
+    "forbidden"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.celestial_identity_state.v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "0.1.0"
+    },
+    "identity_state": {
+      "type": "string",
+      "enum": [
+        "veiled",
+        "suspected",
+        "fragmented",
+        "named_fragment",
+        "partial_revelation",
+        "coherent_revelation",
+        "integrated"
+      ]
+    },
+    "reveal_status": {
+      "type": "string",
+      "enum": [
+        "not_revealed",
+        "player_suspects",
+        "fragment_revealed",
+        "name_partially_revealed",
+        "role_partially_revealed",
+        "identity_coherent",
+        "identity_integrated"
+      ]
+    },
+    "known_fragments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "fragment_id",
+          "fragment_kind",
+          "source_refs"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "fragment_id": {
+            "type": "string"
+          },
+          "fragment_kind": {
+            "type": "string",
+            "enum": [
+              "name_syllable",
+              "memory",
+              "symbol",
+              "role",
+              "plane_echo",
+              "wolf_echo",
+              "bloodline_echo",
+              "prophecy_echo",
+              "artifact_echo"
+            ]
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          }
+        }
+      }
+    },
+    "celestial_name_ref": {
+      "type": "string"
+    },
+    "epithet_ref": {
+      "type": "string"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "last_reveal_event_ref": {
+      "type": "string"
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "full_celestial_identity_at_character_creation",
+        "class_selection_as_celestial_identity",
+        "identity_reveal_without_provenance"
+      ]
+    }
+  }
+}

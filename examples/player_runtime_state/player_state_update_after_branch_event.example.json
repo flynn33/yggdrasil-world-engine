@@ -1,0 +1,49 @@
+{
+  "schema_id": "ywe.player_state_update_packet.v1",
+  "schema_version": "0.1.0",
+  "update_id": "player_state_update.reveal_oath_001",
+  "player_id": "player.example.kaelen_seed",
+  "source_system": "branch_reality_resolver",
+  "update_kind": "branch_ref_update",
+  "proposed_changes": [
+    {
+      "path": "current_leaf_branch_ref",
+      "operation": "set",
+      "value": "leaf_branch.ravenfall_gate.oath_revealed"
+    },
+    {
+      "path": "memory_refs.major_choice_refs",
+      "operation": "append",
+      "value": "action_trace.ravenfall_gate.reveal_oath"
+    },
+    {
+      "path": "world_links.worldstate_delta_refs",
+      "operation": "append",
+      "value": "worldstate_delta.ravenfall_gate.oath_public"
+    }
+  ],
+  "provenance": {
+    "source_refs": [
+      "branch_event.ravenfall_gate.reveal_oath"
+    ],
+    "player_action_trace_ref": "action_trace.ravenfall_gate.reveal_oath",
+    "branch_event_ref": "branch_event.ravenfall_gate.reveal_oath",
+    "worldstate_delta_refs": [
+      "worldstate_delta.ravenfall_gate.oath_public"
+    ],
+    "diagnostic_noop_refs": [],
+    "requires_worldstate_delta_or_noop": true,
+    "asp_diagnostic_refs": [
+      "asp_diag.player_state_update.valid"
+    ]
+  },
+  "validation_requirements": [
+    "authority_stack_valid",
+    "branch_refs_valid",
+    "celestial_identity_not_forced",
+    "wolf_non_morality_valid",
+    "provenance_present",
+    "json_schema_valid"
+  ],
+  "acceptance_status": "proposed"
+}

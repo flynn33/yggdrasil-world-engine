@@ -45,10 +45,20 @@ generation bias update foundation.
 | `ash_upstream_generation_envelope_schema.json` | ASH provenance envelope for meaningful generated output |
 | `ywe_generation_context_packet_schema.json` | Player, realm, perception, and worldstate context submitted into ASH-governed generation |
 | `ywe_interpretation_packet_schema.json` | YWE interpretation of ASH-derived output for feature-engine handoff |
-| `player_action_trace_schema.json` | Player action and consequence inputs that may influence future generation context |
+| `player_action_trace_schema.json` | Phase 10 player action trace records that provide provenance for meaningful player-state updates |
+| `player_runtime_state_schema.json` | Phase 10 player runtime state spine for branch, identity, resonance, memory, world links, and ASH Pattern System resilience references |
+| `player_agent_state_schema.json` | Phase 10 branch-bound player agency state |
+| `celestial_identity_state_schema.json` | Phase 10 veiled celestial identity and reveal-through-play evidence state |
+| `plane_attunement_state_schema.json` | Phase 10 dynamic plane attunement pressure state |
+| `bloodline_resonance_state_schema.json` | Phase 10 dynamic bloodline resonance pressure state |
+| `wolf_resonance_summary_schema.json` | Phase 10 wolf resonance summary; not a morality meter |
+| `player_memory_record_schema.json` | Phase 10 player memory record references |
+| `player_branch_history_schema.json` | Phase 10 player branch history references |
+| `player_progression_signal_schema.json` | Phase 10 progression signal references |
+| `player_state_update_packet_schema.json` | Phase 10 controlled player-state mutation packet |
+| `player_state_snapshot_schema.json` | Phase 10 player-state snapshot reference contract |
 | `exploration_frontier_request_schema.json` | Frontier, threshold, thin-veil, and unresolved-node generation requests |
 | `future_generation_bias_update_schema.json` | Consequence-derived pressure for later ASH-governed generation context |
-| `player_runtime_state_schema.json` | DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted. Phase 10 player-specific runtime truth, branch context references, and provenance boundaries |
 | `worldstate_location_mutation_schema.json` | DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted. Phase 11 persistent worldstate consequence, scoped location mutation, commit records, and diagnostic no-ops |
 | `quest_npc_lore_generation_schema.json` | DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted. Phase 12 quest chains, NPC manifests, NPC memory deltas, codex lore records, myth records, and social distribution deltas |
 

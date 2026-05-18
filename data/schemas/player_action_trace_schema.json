@@ -1,81 +1,109 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ywe.local/schemas/player_action_trace_schema.json",
-  "schema_id": "ywe.schemas.player_action_trace",
-  "title": "PlayerActionTrace",
+  "$id": "ywe.player_action_trace.v1",
+  "title": "Player Action Trace",
   "type": "object",
-  "additionalProperties": true,
   "required": [
-    "trace_id",
-    "player_ref",
+    "schema_id",
+    "schema_version",
+    "action_trace_id",
+    "player_id",
     "action_kind",
-    "local_context_ref",
-    "timestamp_or_sequence_ref",
-    "consequence_channels"
+    "significance",
+    "branch_relevance",
+    "source_refs"
   ],
+  "additionalProperties": false,
   "properties": {
-    "trace_id": {
+    "schema_id": {
+      "const": "ywe.player_action_trace.v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "0.1.0"
+    },
+    "action_trace_id": {
       "type": "string"
     },
-    "player_ref": {
+    "player_id": {
       "type": "string"
     },
     "action_kind": {
       "type": "string",
       "enum": [
-        "explore",
-        "reveal",
-        "conceal",
-        "bind",
-        "study",
-        "weaponize",
-        "aid",
-        "betray",
-        "refuse",
-        "accept",
-        "cross_threshold",
-        "use_artifact",
-        "resolve_encounter",
-        "speak_claim",
-        "alter_faction_relation"
+        "choice",
+        "quest_resolution",
+        "oath_made",
+        "oath_broken",
+        "truth_revealed",
+        "truth_concealed",
+        "artifact_bound",
+        "bloodline_awakened",
+        "wolf_resonance_shift",
+        "plane_threshold_crossed",
+        "npc_relationship_changed",
+        "faction_standing_changed",
+        "myth_seeded",
+        "prophecy_pressure_changed",
+        "location_state_changed",
+        "other_meaningful_action"
       ]
     },
-    "local_context_ref": {
+    "significance": {
+      "type": "string",
+      "enum": [
+        "minor_record",
+        "meaningful",
+        "branch_forming",
+        "mythic",
+        "prophetic"
+      ]
+    },
+    "branch_relevance": {
+      "type": "string",
+      "enum": [
+        "none",
+        "contextual",
+        "branch_event_candidate",
+        "branch_event_created"
+      ]
+    },
+    "location_ref": {
       "type": "string"
     },
-    "timestamp_or_sequence_ref": {
+    "branch_ref": {
       "type": "string"
     },
-    "consequence_channels": {
+    "branch_event_ref": {
+      "type": "string"
+    },
+    "affected_entity_refs": {
       "type": "array",
       "items": {
-        "type": "string",
-        "enum": [
-          "worldstate_delta",
-          "wolf_resonance",
-          "realm_attunement",
-          "bloodline_resonance",
-          "ability_unlock_pressure",
-          "perception_overlay",
-          "faction_claim",
-          "myth_seed",
-          "prophecy_pressure",
-          "artifact_binding",
-          "creature_memory",
-          "npc_memory"
-        ]
-      }
+        "type": "string"
+      },
+      "default": []
     },
-    "authority_boundary": {
-      "type": "object",
-      "properties": {
-        "may_influence_future_generation_context": {
-          "const": true
-        },
-        "may_mutate_ash_math": {
-          "const": false
-        }
-      }
+    "resulting_worldstate_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "resulting_player_state_update_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
     }
   }
 }

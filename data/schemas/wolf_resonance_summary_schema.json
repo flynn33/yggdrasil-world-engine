@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ywe.wolf_resonance_summary.v1",
+  "title": "Wolf Resonance Summary",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "white_wolf",
+    "dark_wolf",
+    "twin_coherence",
+    "source_refs",
+    "forbidden"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.wolf_resonance_summary.v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "0.1.0"
+    },
+    "white_wolf": {
+      "type": "object",
+      "required": [
+        "resonance",
+        "signal_state",
+        "source_refs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "resonance": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "signal_state": {
+          "type": "string",
+          "enum": [
+            "latent",
+            "active",
+            "dominant",
+            "unstable",
+            "integrated"
+          ]
+        },
+        "function_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "revelation",
+            "harmony",
+            "pattern_visibility"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    },
+    "dark_wolf": {
+      "type": "object",
+      "required": [
+        "resonance",
+        "signal_state",
+        "source_refs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "resonance": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "signal_state": {
+          "type": "string",
+          "enum": [
+            "latent",
+            "active",
+            "dominant",
+            "unstable",
+            "integrated"
+          ]
+        },
+        "function_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "memory",
+            "gravity",
+            "containment",
+            "consequence"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    },
+    "twin_coherence": {
+      "type": "object",
+      "required": [
+        "coherence_score",
+        "coherence_state",
+        "source_refs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "coherence_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "coherence_state": {
+          "type": "string",
+          "enum": [
+            "unresolved",
+            "balanced",
+            "asymmetric",
+            "integrating",
+            "fractured",
+            "coherent"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    },
+    "recent_wolf_resonance_event_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "wolf_morality_meter",
+        "white_equals_good_dark_equals_evil",
+        "wolf_state_without_source_refs"
+      ]
+    }
+  }
+}

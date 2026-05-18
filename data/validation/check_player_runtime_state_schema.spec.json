@@ -1,0 +1,18 @@
+{
+  "check_id": "check_player_runtime_state_schema",
+  "description": "Verify PlayerRuntimeState schema includes required top-level sections.",
+  "target": "data/schemas/player_runtime_state_schema.json",
+  "required_properties": [
+    "authority",
+    "player_id",
+    "current_leaf_branch_ref",
+    "identity",
+    "state_refs",
+    "memory_refs",
+    "world_links",
+    "asp_resilience",
+    "update_control",
+    "forbidden"
+  ],
+  "severity": "block"
+}

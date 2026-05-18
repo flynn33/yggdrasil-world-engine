@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ywe.player_agent_state.v1",
+  "title": "Player Agent State",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "agent_id",
+    "agent_kind",
+    "current_leaf_branch_ref",
+    "self_reference_status",
+    "choice_capacity_status",
+    "asp_resilience"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.player_agent_state.v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "0.1.0"
+    },
+    "agent_id": {
+      "type": "string",
+      "description": "Stable runtime ID for the player agent."
+    },
+    "agent_kind": {
+      "type": "string",
+      "enum": [
+        "player_mortal_instance",
+        "player_celestial_projection",
+        "player_branch_echo",
+        "player_memory_fragment"
+      ]
+    },
+    "mortal_instance_id": {
+      "type": "string"
+    },
+    "current_leaf_branch_ref": {
+      "type": "string",
+      "description": "Reference to LeafBranchRealityState."
+    },
+    "current_location_ref": {
+      "type": "string"
+    },
+    "current_plane_pressure_ref": {
+      "type": "string"
+    },
+    "self_reference_status": {
+      "type": "string",
+      "enum": [
+        "stable_self_model",
+        "fragmented_self_model",
+        "veiled_self_model",
+        "challenged_self_model",
+        "lost_self_model"
+      ]
+    },
+    "choice_capacity_status": {
+      "type": "string",
+      "enum": [
+        "ordinary_choice_capacity",
+        "meaningful_choice_available",
+        "branch_event_pending",
+        "choice_capacity_impaired",
+        "choice_capacity_suspended"
+      ]
+    },
+    "recent_action_trace_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "branch_event_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "pattern_vector_ref": {
+      "type": "string"
+    },
+    "existence_potential_ref": {
+      "type": "string"
+    },
+    "asp_resilience": {
+      "type": "object",
+      "required": [
+        "state_integrity_status",
+        "asp_diagnostic_refs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "state_integrity_status": {
+          "type": "string",
+          "enum": [
+            "valid",
+            "requires_review",
+            "recoverable",
+            "contained",
+            "invalid"
+          ]
+        },
+        "asp_diagnostic_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "last_valid_snapshot_ref": {
+          "type": "string"
+        },
+        "diagnostic_noop_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    }
+  }
+}
