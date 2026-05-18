@@ -186,6 +186,7 @@ def check_celestial_initial_state(root: Path, errors: list[str]) -> None:
     example = load_json_checked(root, example_path, errors)
     if example is None:
         return
+    require(example.get("state_lifecycle") == "initial", f"{example_path} must declare state_lifecycle as initial.", errors)
     initial_state = example.get("identity", {}).get("celestial_identity_initial_state")
     require(initial_state == "veiled", f"{example_path} must start celestial identity as veiled.", errors)
 
@@ -197,28 +198,6 @@ def check_authority_role(root: Path, spec: dict[str, Any], errors: list[str]) ->
         require(required_phrase in text, f"Missing required authority phrase: {required_phrase}", errors)
     for phrase in spec.get("forbidden_phrases", []):
         require(phrase not in text, f"Forbidden authority phrase found: {phrase}", errors)
-
-
-def git_status_paths(root: Path) -> list[tuple[str, str]]:
-    try:
-        result = subprocess.run(
-            ["git", "-C", str(root), "status", "--porcelain"],
-            check=False,
-            capture_output=True,
-            text=True,
-        )
-    except OSError:
-        return []
-    paths: list[tuple[str, str]] = []
-    for line in result.stdout.splitlines():
-        if not line:
-            continue
-        status = line[:2]
-        path = line[3:]
-        if " -> " in path:
-            path = path.split(" -> ", 1)[1]
-        paths.append((status, path))
-    return paths
 
 
 def git_ref_exists(root: Path, ref: str) -> bool:
@@ -322,8 +301,6 @@ def git_change_paths(root: Path, errors: list[str]) -> list[tuple[str, str]]:
         return []
     for status, path in git_diff_paths(root, base_ref):
         paths[path] = status
-    for status, path in git_status_paths(root):
-        paths.setdefault(path, status)
     return [(status, path) for path, status in paths.items()]
 
 

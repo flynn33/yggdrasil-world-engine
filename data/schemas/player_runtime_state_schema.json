@@ -6,6 +6,7 @@
   "required": [
     "schema_id",
     "schema_version",
+    "state_lifecycle",
     "authority",
     "player_id",
     "current_leaf_branch_ref",
@@ -17,6 +18,47 @@
     "update_control",
     "forbidden"
   ],
+  "oneOf": [
+    {
+      "title": "Initial mortal veiled player runtime state",
+      "required": [
+        "state_lifecycle"
+      ],
+      "properties": {
+        "state_lifecycle": {
+          "const": "initial"
+        },
+        "identity": {
+          "required": [
+            "celestial_identity_initial_state"
+          ],
+          "properties": {
+            "celestial_identity_initial_state": {
+              "const": "veiled"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Continuing player runtime state",
+      "required": [
+        "state_lifecycle"
+      ],
+      "properties": {
+        "state_lifecycle": {
+          "const": "continuing"
+        },
+        "identity": {
+          "not": {
+            "required": [
+              "celestial_identity_initial_state"
+            ]
+          }
+        }
+      }
+    }
+  ],
   "additionalProperties": false,
   "properties": {
     "schema_id": {
@@ -25,6 +67,13 @@
     "schema_version": {
       "type": "string",
       "default": "0.1.0"
+    },
+    "state_lifecycle": {
+      "type": "string",
+      "enum": [
+        "initial",
+        "continuing"
+      ]
     },
     "authority": {
       "type": "object",
@@ -63,8 +112,7 @@
       "type": "object",
       "required": [
         "mortal_identity_ref",
-        "celestial_identity_state_ref",
-        "celestial_identity_initial_state"
+        "celestial_identity_state_ref"
       ],
       "additionalProperties": false,
       "properties": {

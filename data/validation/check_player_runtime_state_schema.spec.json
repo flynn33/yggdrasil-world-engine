@@ -3,6 +3,7 @@
   "description": "Verify PlayerRuntimeState schema includes required top-level sections.",
   "target": "data/schemas/player_runtime_state_schema.json",
   "required_properties": [
+    "state_lifecycle",
     "authority",
     "player_id",
     "current_leaf_branch_ref",
