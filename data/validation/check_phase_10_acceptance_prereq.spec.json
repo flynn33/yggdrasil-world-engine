@@ -1,0 +1,9 @@
+{
+  "id": "check_phase_10_acceptance_prereq",
+  "purpose": "Verify Phase 10 artifacts exist before Phase 11 implementation.",
+  "fail_if_missing": [
+    "docs/architecture/player_runtime_state_contract.md",
+    "data/schemas/player_runtime_state_schema.json",
+    "data/schemas/player_state_update_packet_schema.json"
+  ]
+}

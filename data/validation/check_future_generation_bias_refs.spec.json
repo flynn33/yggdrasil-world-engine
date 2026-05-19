@@ -1,0 +1,13 @@
+{
+  "id": "check_future_generation_bias_refs",
+  "purpose": "Verify FutureGenerationBiasUpdate does not materialize content.",
+  "forbidden_patterns": [
+    "directly emits quest",
+    "directly emits NPC",
+    "directly writes lore",
+    "materializes content"
+  ],
+  "required_terms": [
+    "does_not_materialize_content"
+  ]
+}

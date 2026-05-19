@@ -1,0 +1,28 @@
+{
+  "schema_id": "ywe.diagnostic_noop.v1",
+  "version": "1.0.0",
+  "noop_id": "noop.ravenfall_gate.study_oath",
+  "reason": "deferred_insufficient_context",
+  "source_context": {
+    "player_id": "player.example",
+    "branch_id": "branch.ravenfall.example",
+    "location_id": "ravenfall_gate",
+    "player_action_trace_ref": "trace.ravenfall_gate.study_oath",
+    "branch_event_ref": "branch_event.ravenfall_gate.study_oath"
+  },
+  "evaluation": {
+    "summary": "The player studies the oath but does not yet reveal, conceal, bind, or weaponize it. No persistent location mutation is applied yet.",
+    "truth_scope": "player_perception",
+    "guardrail_notes": [
+      "Study creates interpretive context only.",
+      "No shared truth or branch truth changed yet."
+    ]
+  },
+  "provenance": {
+    "ash_pattern_diagnostic_ref": "asp.diagnostic.ravenfall_gate.study",
+    "source_cosmology_refs": [
+      "P4_Mental",
+      "P5_Causal"
+    ]
+  }
+}

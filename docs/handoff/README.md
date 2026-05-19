@@ -11,9 +11,9 @@ handoff records.
 
 ## Current Handoff Records
 
-DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
-Phase 11 through Phase 12 handoff records below are retained for owner review
-only. They are not executable authority until their matching packages are accepted.
+Phase 11's owner-approved package has landed as an active review artifact.
+Phase 12 handoff records remain retained for owner review only and are not
+executable authority until the matching package is accepted.
 
 | File | Purpose |
 |---|---|
@@ -27,7 +27,8 @@ only. They are not executable authority until their matching packages are accept
 | `YWE_POST_PHASE_7_BASELINE_2026-05-17.md` | Phase 8-9 package baseline freeze before Phase 9 foundation work |
 | `YWE_PHASE_9_RUNTIME_COSMOLOGY_BRANCH_REALITY_HANDOFF_2026-05-17.md` | Phase 9 runtime cosmology and branch reality foundation handoff |
 | `YWE_PHASE_10_PLAYER_RUNTIME_STATE_HANDOFF_2026-05-17.md` | Phase 10 Player Runtime State v1 handoff |
-| `YWE_PHASE_11_WORLDSTATE_LOCATION_MUTATION_HANDOFF_2026-05-17.md` | Phase 11 worldstate and location mutation handoff |
+| `YWE_PHASE_11_WORLDSTATE_AND_LOCATION_MUTATION_HANDOFF_2026-05-18.md` | Active Phase 11 worldstate and location mutation handoff |
+| `YWE_PHASE_11_WORLDSTATE_LOCATION_MUTATION_HANDOFF_2026-05-17.md` | Earlier Phase 11-adjacent handoff retained for historical review |
 | `YWE_PHASE_12_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-17.md` | Phase 12 quest, NPC, and lore generation handoff |
 | `repo_implementation_mapping.md` | Repository implementation mapping |
 | `missing_source_documents.md` | Missing source document inventory |

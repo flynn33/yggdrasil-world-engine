@@ -1,0 +1,27 @@
+{
+  "id": "ywe.phase_11.github_checks_matrix",
+  "version": "1.0.0",
+  "required_checks": [
+    "check_phase_10_acceptance_prereq",
+    "check_required_phase_11_contracts",
+    "check_phase_11_json_integrity",
+    "check_worldstate_delta_schema",
+    "check_location_mutation_contracts",
+    "check_truth_scope_guardrail",
+    "check_no_static_only_location_model",
+    "check_no_pregenerated_branch_tree_phase_11",
+    "check_no_feature_consequence_without_packet",
+    "check_future_generation_bias_refs",
+    "check_ravenfall_gate_phase_11_examples",
+    "check_non_destructive_diff_phase_11"
+  ],
+  "paths": [
+    "docs/architecture/**",
+    "data/schemas/**",
+    "data/validation/**",
+    "examples/**",
+    "conformance/**",
+    ".github/workflows/**",
+    "scripts/**"
+  ]
+}

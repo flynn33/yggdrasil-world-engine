@@ -1,0 +1,45 @@
+{
+  "schema_id": "ywe.worldstate_delta_packet.v1",
+  "version": "1.0.0",
+  "delta_id": "delta.myth_pressure.example.001",
+  "truth_scope": "mythic_interpretation",
+  "consequence_classes": [
+    "myth_pressure_change",
+    "future_generation_bias_update"
+  ],
+  "source_context": {
+    "player_id": "player.example",
+    "branch_id": "branch.example",
+    "location_id": "location.example",
+    "player_action_trace_ref": "trace.example"
+  },
+  "delta_body": {
+    "summary": "A repeated public act became eligible for mythic interpretation.",
+    "operations": [
+      {
+        "operation": "increase_myth_pressure",
+        "target": "myth.seed.example",
+        "value": 0.25
+      }
+    ]
+  },
+  "provenance": {
+    "source_cosmology_refs": [
+      "A2_Structural_Compressibility",
+      "A3_Multi_Scale_Persistence"
+    ],
+    "ash_pattern_diagnostic_ref": "asp.diagnostic.example"
+  },
+  "outputs": {
+    "future_generation_bias_update_refs": [
+      "bias.myth.example"
+    ]
+  },
+  "validation": {
+    "requires_delta_or_noop": true,
+    "passes_truth_scope_guardrail": true,
+    "notes": [
+      "Myth pressure does not rewrite history."
+    ]
+  }
+}

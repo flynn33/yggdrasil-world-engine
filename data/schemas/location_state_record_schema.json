@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ywe.location_state_record.v1.json",
+  "title": "Location State Record",
+  "description": "Persistent state record for meaningful locations.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "location_id",
+    "base_location_ref",
+    "current_state",
+    "truth_scope",
+    "mutation_history",
+    "provenance"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ywe.location_state_record.v1"
+    },
+    "version": {
+      "type": "string"
+    },
+    "location_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "base_location_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "location_kind": {
+      "type": "string"
+    },
+    "truth_scope": {
+      "type": "string",
+      "enum": [
+        "base_world_truth",
+        "shared_world_truth",
+        "leaf_branch_truth",
+        "player_perception",
+        "mythic_interpretation",
+        "prophetic_pressure",
+        "faction_claim",
+        "host_materialization",
+        "diagnostic_noop"
+      ]
+    },
+    "current_state": {
+      "type": "object",
+      "properties": {
+        "phase": {
+          "type": "string"
+        },
+        "stability": {
+          "type": "string",
+          "enum": [
+            "dormant",
+            "stable",
+            "unstable",
+            "contained",
+            "collapsing",
+            "mythicized",
+            "prophecy_charged"
+          ]
+        },
+        "active_plane_pressures": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "P1_Physical",
+              "P2_Etheric",
+              "P3_Astral",
+              "P4_Mental",
+              "P5_Causal",
+              "P6_Celestial",
+              "P7_Shadow",
+              "P8_Void",
+              "P9_Divine_Core"
+            ]
+          }
+        },
+        "access_state_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "content_eligibility_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "branch_overlay_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "worldstate_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "mutation_history": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "future_generation_bias_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "source_cosmology_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ash_pattern_diagnostic_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

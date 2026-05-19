@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ywe.consequence_classification.v1.json",
+  "title": "Consequence Classification",
+  "description": "Enumerates Phase 11 consequence classes.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "allowed_consequence_classes"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ywe.consequence_classification.v1"
+    },
+    "version": {
+      "type": "string"
+    },
+    "allowed_consequence_classes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "shared_world_truth_change",
+          "leaf_branch_truth_change",
+          "location_state_change",
+          "location_access_change",
+          "perception_overlay_change",
+          "myth_pressure_change",
+          "prophecy_pressure_change",
+          "faction_claim_change",
+          "npc_relationship_change",
+          "artifact_binding_change",
+          "creature_ecology_change",
+          "ability_pressure_change",
+          "player_state_reference",
+          "future_generation_bias_update",
+          "diagnostic_noop"
+        ]
+      },
+      "minItems": 1
+    },
+    "classification_descriptions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

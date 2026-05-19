@@ -1,0 +1,20 @@
+{
+  "id": "ywe.phase_11.ravenfall_gate_example_validation",
+  "version": "1.0.0",
+  "required_examples": [
+    "ravenfall_gate_base_location_state.example.json",
+    "ravenfall_gate_reveal_oath_worldstate_delta.example.json",
+    "ravenfall_gate_conceal_oath_worldstate_delta.example.json",
+    "ravenfall_gate_bind_oath_worldstate_delta.example.json",
+    "ravenfall_gate_study_oath_diagnostic_noop.example.json",
+    "ravenfall_gate_weaponize_oath_worldstate_delta.example.json",
+    "ravenfall_gate_future_generation_bias_update.example.json",
+    "ravenfall_gate_location_resolution_context.example.json"
+  ],
+  "must_not_contain": [
+    "full quest dialogue",
+    "combat encounter implementation",
+    "vertical slice implementation",
+    "platform runtime code"
+  ]
+}

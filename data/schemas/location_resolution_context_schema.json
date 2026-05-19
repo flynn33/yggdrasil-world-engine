@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ywe.location_resolution_context.v1.json",
+  "title": "Location Resolution Context",
+  "description": "Inputs used by the Location State Resolver.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "resolution_context_id",
+    "location_id",
+    "branch_id",
+    "player_context_refs",
+    "world_context_refs",
+    "resolver_policy"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ywe.location_resolution_context.v1"
+    },
+    "version": {
+      "type": "string"
+    },
+    "resolution_context_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "location_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "branch_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "player_context_refs": {
+      "type": "object",
+      "properties": {
+        "player_runtime_state_ref": {
+          "type": "string"
+        },
+        "player_state_snapshot_ref": {
+          "type": "string"
+        },
+        "player_action_trace_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "plane_attunement_state_ref": {
+          "type": "string"
+        },
+        "bloodline_resonance_state_ref": {
+          "type": "string"
+        },
+        "wolf_resonance_summary_ref": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "world_context_refs": {
+      "type": "object",
+      "properties": {
+        "leaf_branch_reality_ref": {
+          "type": "string"
+        },
+        "location_state_record_ref": {
+          "type": "string"
+        },
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "location_branch_overlay_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "future_generation_bias_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "cosmology_context_refs": {
+      "type": "object",
+      "properties": {
+        "plane_pressure_state_ref": {
+          "type": "string"
+        },
+        "axiom_diagnostic_packet_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "existence_potential_ref": {
+          "type": "string"
+        },
+        "pattern_vector_ref": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ash_pattern_context_refs": {
+      "type": "object",
+      "properties": {
+        "diagnostic_envelope_ref": {
+          "type": "string"
+        },
+        "recovery_event_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "resolver_policy": {
+      "type": "object",
+      "properties": {
+        "resolve_branch_overlay_first": {
+          "type": "boolean"
+        },
+        "preserve_base_ontology": {
+          "const": true
+        },
+        "require_delta_or_noop": {
+          "const": true
+        }
+      },
+      "required": [
+        "preserve_base_ontology",
+        "require_delta_or_noop"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,45 @@
+{
+  "schema_id": "ywe.worldstate_delta_packet.v1",
+  "version": "1.0.0",
+  "delta_id": "delta.prophecy_pressure.example.001",
+  "truth_scope": "prophetic_pressure",
+  "consequence_classes": [
+    "prophecy_pressure_change",
+    "future_generation_bias_update"
+  ],
+  "source_context": {
+    "player_id": "player.example",
+    "branch_id": "branch.example",
+    "location_id": "location.example",
+    "player_action_trace_ref": "trace.example"
+  },
+  "delta_body": {
+    "summary": "A choice increased future-facing prophetic pressure but did not script a guaranteed outcome.",
+    "operations": [
+      {
+        "operation": "increase_prophecy_pressure",
+        "target": "prophecy.pressure.example",
+        "value": 0.15
+      }
+    ]
+  },
+  "provenance": {
+    "source_cosmology_refs": [
+      "P5_Causal",
+      "A6_Branching_Choice_Realization"
+    ],
+    "ash_pattern_diagnostic_ref": "asp.diagnostic.example"
+  },
+  "outputs": {
+    "future_generation_bias_update_refs": [
+      "bias.prophecy.example"
+    ]
+  },
+  "validation": {
+    "requires_delta_or_noop": true,
+    "passes_truth_scope_guardrail": true,
+    "notes": [
+      "Prophecy pressure is not a scripted future."
+    ]
+  }
+}

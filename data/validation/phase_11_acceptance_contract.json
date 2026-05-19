@@ -1,0 +1,68 @@
+{
+  "id": "ywe.phase_11.acceptance_contract",
+  "version": "1.0.0",
+  "phase": "Phase 11 — Worldstate and Location Mutation",
+  "prerequisite": "Phase 10 Player Runtime State v1 accepted",
+  "gates": [
+    {
+      "gate": "11.0",
+      "name": "phase_10_prerequisite",
+      "required": true
+    },
+    {
+      "gate": "11.1",
+      "name": "required_artifact_presence",
+      "required": true
+    },
+    {
+      "gate": "11.2",
+      "name": "json_integrity",
+      "required": true
+    },
+    {
+      "gate": "11.3",
+      "name": "truth_scope_integrity",
+      "required": true
+    },
+    {
+      "gate": "11.4",
+      "name": "consequence_classification_integrity",
+      "required": true
+    },
+    {
+      "gate": "11.5",
+      "name": "delta_or_diagnostic_noop_rule",
+      "required": true
+    },
+    {
+      "gate": "11.6",
+      "name": "location_mutability_contract",
+      "required": true
+    },
+    {
+      "gate": "11.7",
+      "name": "branch_overlay_boundary",
+      "required": true
+    },
+    {
+      "gate": "11.8",
+      "name": "future_generation_bias_boundary",
+      "required": true
+    },
+    {
+      "gate": "11.9",
+      "name": "ravenfall_gate_examples",
+      "required": true
+    },
+    {
+      "gate": "11.10",
+      "name": "non_destructive_diff",
+      "required": true
+    }
+  ],
+  "accepted_status_values": [
+    "PHASE_11_ACCEPTED_FOR_REVIEW",
+    "PHASE_11_BLOCKED_NEEDS_REVIEW",
+    "PHASE_11_FAILED_GATE"
+  ]
+}

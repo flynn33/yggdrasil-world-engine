@@ -1,0 +1,50 @@
+{
+  "id": "ywe.phase_11.truth_scope_validation_rules",
+  "version": "1.0.0",
+  "allowed_truth_scopes": [
+    "base_world_truth",
+    "shared_world_truth",
+    "leaf_branch_truth",
+    "player_perception",
+    "mythic_interpretation",
+    "prophetic_pressure",
+    "faction_claim",
+    "host_materialization",
+    "diagnostic_noop"
+  ],
+  "rules": [
+    {
+      "name": "perception_not_shared_truth",
+      "if_truth_scope": "player_perception",
+      "forbid_consequence_classes": [
+        "shared_world_truth_change"
+      ]
+    },
+    {
+      "name": "myth_not_history_without_delta",
+      "if_truth_scope": "mythic_interpretation",
+      "requires_source_delta": true
+    },
+    {
+      "name": "prophecy_not_script",
+      "if_truth_scope": "prophetic_pressure",
+      "forbid_terms": [
+        "guaranteed future",
+        "scripted outcome"
+      ]
+    },
+    {
+      "name": "faction_claim_not_truth",
+      "if_truth_scope": "faction_claim",
+      "requires_separate_truth_delta_for_shared_truth": true
+    },
+    {
+      "name": "host_materialization_not_authorship",
+      "if_truth_scope": "host_materialization",
+      "forbid_consequence_classes": [
+        "shared_world_truth_change",
+        "leaf_branch_truth_change"
+      ]
+    }
+  ]
+}

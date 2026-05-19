@@ -1,0 +1,66 @@
+{
+  "schema_id": "ywe.worldstate_delta_packet.v1",
+  "version": "1.0.0",
+  "delta_id": "delta.ravenfall_gate.oath_concealed",
+  "timestamp_policy": "branch_event_time",
+  "truth_scope": "leaf_branch_truth",
+  "consequence_classes": [
+    "leaf_branch_truth_change",
+    "location_access_change",
+    "faction_claim_change",
+    "future_generation_bias_update"
+  ],
+  "source_context": {
+    "player_id": "player.example",
+    "branch_id": "branch.ravenfall.example",
+    "location_id": "ravenfall_gate",
+    "branch_event_ref": "branch_event.ravenfall_gate.oath_concealed",
+    "player_action_trace_ref": "trace.ravenfall_gate.oath_concealed",
+    "player_state_snapshot_ref": "player_state.snapshot.example",
+    "location_resolution_context_ref": "location_resolution.ravenfall_gate.example"
+  },
+  "delta_body": {
+    "summary": "The buried oath is concealed in the player's leaf branch, opening hidden Shadow-path eligibility.",
+    "before_refs": [
+      "ravenfall_gate.unawakened"
+    ],
+    "after_refs": [
+      "ravenfall_gate.oath_concealed"
+    ],
+    "operations": [
+      {
+        "operation": "set_branch_location_phase",
+        "target": "ravenfall_gate",
+        "value": "ravenfall_gate.oath_concealed"
+      },
+      {
+        "operation": "open_branch_specific_access",
+        "target": "ravenfall_gate.shadow_path",
+        "value": "conditional_hidden"
+      }
+    ]
+  },
+  "provenance": {
+    "source_cosmology_refs": [
+      "A6_Branching_Choice_Realization",
+      "P7_Shadow",
+      "P4_Mental",
+      "P5_Causal"
+    ],
+    "ash_pattern_diagnostic_ref": "asp.diagnostic.ravenfall_gate.example",
+    "generation_plan_ref": "generation.plan.ravenfall_gate.example"
+  },
+  "outputs": {
+    "location_branch_overlay_ref": "overlay.ravenfall_gate.oath_concealed",
+    "future_generation_bias_update_refs": [
+      "bias.ravenfall_gate.oath_concealed"
+    ]
+  },
+  "validation": {
+    "requires_delta_or_noop": true,
+    "passes_truth_scope_guardrail": true,
+    "notes": [
+      "Phase 11 state/mutation example only."
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema_id": "ywe.future_generation_bias_update.v1",
+  "version": "1.0.0",
+  "bias_update_id": "bias.ravenfall_gate.oath_bound",
+  "source_refs": {
+    "worldstate_delta_refs": [
+      "delta.ravenfall_gate.oath_bound"
+    ],
+    "location_state_record_ref": "location_state.ravenfall_gate.oath_bound",
+    "location_branch_overlay_ref": "overlay.ravenfall_gate.oath_bound",
+    "player_state_snapshot_ref": "player_state.snapshot.example",
+    "branch_event_ref": "branch_event.ravenfall_gate.oath_bound",
+    "ash_pattern_diagnostic_ref": "asp.diagnostic.ravenfall_gate.example"
+  },
+  "bias_targets": [
+    {
+      "target_system": "quest_generation",
+      "bias_kind": "open_candidate",
+      "weight": 0.35,
+      "notes": "Enable threshold-stabilization quest candidates in Phase 12."
+    },
+    {
+      "target_system": "npc_generation",
+      "bias_kind": "increase_eligibility",
+      "weight": 0.2,
+      "notes": "Keeper or witness NPC candidates may become eligible."
+    },
+    {
+      "target_system": "myth_seed",
+      "bias_kind": "increase_pressure",
+      "weight": 0.25,
+      "notes": "Bound oath becomes myth-seed material."
+    },
+    {
+      "target_system": "location_access",
+      "bias_kind": "open_candidate",
+      "weight": 0.4,
+      "notes": "Yggdrasil threshold access may become conditionally eligible."
+    }
+  ],
+  "validation": {
+    "does_not_materialize_content": true,
+    "has_worldstate_or_noop_source": true
+  }
+}

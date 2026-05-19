@@ -1,0 +1,64 @@
+{
+  "schema_id": "ywe.location_mutation_rule.v1",
+  "version": "1.0.0",
+  "rule_id": "ravenfall_gate.rule.reveal_oath",
+  "location_id": "ravenfall_gate",
+  "source_phase": "ravenfall_gate.unawakened",
+  "target_phase": "ravenfall_gate.oath_revealed",
+  "trigger": {
+    "trigger_kind": "player_choice_reveal_buried_oath",
+    "player_action_trace_ref_required": true,
+    "branch_event_ref_required": true,
+    "worldstate_delta_ref_required": true
+  },
+  "truth_scope": "shared_world_truth",
+  "preconditions": {
+    "required_plane_pressures": [
+      "P4_Mental",
+      "P5_Causal"
+    ],
+    "required_resonance_refs": [
+      "wolf_resonance.white_or_balanced",
+      "bloodline_resonance.optional_ravenson"
+    ],
+    "required_delta_refs": []
+  },
+  "effects": [
+    {
+      "effect_kind": "set_location_phase",
+      "target": "ravenfall_gate",
+      "value": "ravenfall_gate.oath_revealed"
+    },
+    {
+      "effect_kind": "open_eligibility",
+      "target": "witness_npc_generation_candidate",
+      "value": true
+    },
+    {
+      "effect_kind": "increase_myth_pressure",
+      "target": "myth.seed.ravenfall_gate.public_oath",
+      "value": 0.4
+    }
+  ],
+  "forbidden_effects": [
+    "redefine_base_ontology",
+    "directly_generate_quest",
+    "make_prophecy_guaranteed"
+  ],
+  "provenance_requirements": {
+    "requires_cosmology_ref": true,
+    "requires_ash_pattern_diagnostic_ref": true,
+    "requires_generation_plan_ref": false
+  },
+  "outputs": {
+    "worldstate_delta_packet": true,
+    "diagnostic_noop": false,
+    "location_branch_overlay": true,
+    "future_generation_bias_update": true
+  },
+  "validation": {
+    "reject_if_base_ontology_mutation": true,
+    "reject_if_static_only": true,
+    "reject_if_no_provenance": true
+  }
+}

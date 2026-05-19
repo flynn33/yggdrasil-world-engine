@@ -1,0 +1,27 @@
+{
+  "id": "ywe.phase_11.non_destructive_change_budget",
+  "version": "1.0.0",
+  "allowed_change_types": [
+    "add_phase_11_contract",
+    "add_phase_11_schema",
+    "add_phase_11_validation_rule",
+    "add_phase_11_example",
+    "add_cross_reference",
+    "append_versioned_section"
+  ],
+  "requires_human_review": [
+    "delete_existing_file",
+    "rename_major_directory",
+    "rewrite_master_specification",
+    "remove_conformance_artifact",
+    "modify_ash_pattern_canonical_specs",
+    "modify_phase_8_9_or_phase_10_artifacts_beyond_cross_reference"
+  ],
+  "automatic_fail": [
+    "rm_rf",
+    "git_clean_fd",
+    "git_reset_hard",
+    "bulk_content_replacement",
+    "platform_specific_runtime_implementation"
+  ]
+}

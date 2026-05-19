@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ywe.worldstate_resolution_result.v1.json",
+  "title": "Worldstate Resolution Result",
+  "description": "Result packet from resolving a consequence into delta/no-op and secondary updates.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "resolution_result_id",
+    "input_refs",
+    "result_kind"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ywe.worldstate_resolution_result.v1"
+    },
+    "version": {
+      "type": "string"
+    },
+    "resolution_result_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "input_refs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "result_kind": {
+      "enum": [
+        "worldstate_delta_packet",
+        "diagnostic_noop",
+        "delta_plus_bias",
+        "delta_plus_location_update",
+        "blocked"
+      ]
+    },
+    "output_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "gate_results": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": false
+}

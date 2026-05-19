@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ywe.location_content_eligibility.v1.json",
+  "title": "Location Content Eligibility",
+  "description": "Eligibility record for downstream generation systems without materializing content.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "eligibility_id",
+    "location_id",
+    "branch_id",
+    "eligible_systems",
+    "source_refs"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ywe.location_content_eligibility.v1"
+    },
+    "version": {
+      "type": "string"
+    },
+    "eligibility_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "location_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "branch_id": {
+      "type": "string"
+    },
+    "eligible_systems": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "quest_generation",
+          "npc_generation",
+          "lore_generation",
+          "artifact_generation",
+          "creature_generation",
+          "myth_engine",
+          "prophecy_engine",
+          "ability_engine",
+          "wolf_companion_engine"
+        ]
+      }
+    },
+    "eligibility_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_refs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "does_not_materialize_content": {
+      "const": true
+    }
+  },
+  "additionalProperties": false
+}

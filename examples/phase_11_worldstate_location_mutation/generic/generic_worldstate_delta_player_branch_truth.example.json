@@ -1,0 +1,46 @@
+{
+  "schema_id": "ywe.worldstate_delta_packet.v1",
+  "version": "1.0.0",
+  "delta_id": "delta.branch_truth.example.001",
+  "truth_scope": "leaf_branch_truth",
+  "consequence_classes": [
+    "leaf_branch_truth_change",
+    "location_access_change",
+    "future_generation_bias_update"
+  ],
+  "source_context": {
+    "player_id": "player.example",
+    "branch_id": "branch.example",
+    "location_id": "location.example",
+    "branch_event_ref": "branch_event.example",
+    "player_action_trace_ref": "trace.example"
+  },
+  "delta_body": {
+    "summary": "A branch-specific path opened only in the player's leaf branch.",
+    "operations": [
+      {
+        "operation": "open_branch_specific_access",
+        "target": "shadow_path.example"
+      }
+    ]
+  },
+  "provenance": {
+    "source_cosmology_refs": [
+      "A6_Branching_Choice_Realization"
+    ],
+    "ash_pattern_diagnostic_ref": "asp.diagnostic.example"
+  },
+  "outputs": {
+    "location_branch_overlay_ref": "overlay.example.branch",
+    "future_generation_bias_update_refs": [
+      "bias.example.branch"
+    ]
+  },
+  "validation": {
+    "requires_delta_or_noop": true,
+    "passes_truth_scope_guardrail": true,
+    "notes": [
+      "Does not rewrite shared truth."
+    ]
+  }
+}

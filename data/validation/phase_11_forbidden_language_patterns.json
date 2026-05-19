@@ -1,0 +1,51 @@
+{
+  "id": "ywe.phase_11.forbidden_language_patterns",
+  "version": "1.0.0",
+  "patterns": [
+    {
+      "pattern": "static-only location model",
+      "severity": "fail",
+      "reason": "Locations must be stateful and mutable at runtime."
+    },
+    {
+      "pattern": "pre-generated branch tree",
+      "severity": "fail",
+      "reason": "Leaf branches are runtime generated from player action and consequence."
+    },
+    {
+      "pattern": "perception rewrites shared truth",
+      "severity": "fail",
+      "reason": "Perception may change interpretation, not shared truth."
+    },
+    {
+      "pattern": "prophecy guarantees the future",
+      "severity": "fail",
+      "reason": "Prophecy is pressure, not script."
+    },
+    {
+      "pattern": "faction belief is truth",
+      "severity": "fail",
+      "reason": "Faction claim is a truth scope distinct from shared truth."
+    },
+    {
+      "pattern": "world changes without delta",
+      "severity": "fail",
+      "reason": "Meaningful consequence requires delta or DiagnosticNoOp."
+    },
+    {
+      "pattern": "location mutation without provenance",
+      "severity": "fail",
+      "reason": "Mutation requires context and provenance."
+    },
+    {
+      "pattern": "wolf morality meter",
+      "severity": "fail",
+      "reason": "Wolf resonance must not be morality."
+    },
+    {
+      "pattern": "ASH Pattern System is top-level cosmology",
+      "severity": "fail",
+      "reason": "ASH Pattern System is a YWE component, not the upstream cosmological model."
+    }
+  ]
+}

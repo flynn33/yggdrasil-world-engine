@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ywe.location_mutation_rule.v1.json",
+  "title": "Location Mutation Rule",
+  "description": "Rule for transitioning a location from one state to another.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "rule_id",
+    "location_id",
+    "trigger",
+    "truth_scope",
+    "preconditions",
+    "effects",
+    "provenance_requirements",
+    "validation"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ywe.location_mutation_rule.v1"
+    },
+    "version": {
+      "type": "string"
+    },
+    "rule_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "location_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_phase": {
+      "type": "string"
+    },
+    "target_phase": {
+      "type": "string"
+    },
+    "trigger": {
+      "type": "object",
+      "properties": {
+        "trigger_kind": {
+          "type": "string"
+        },
+        "player_action_trace_ref_required": {
+          "type": "boolean"
+        },
+        "branch_event_ref_required": {
+          "type": "boolean"
+        },
+        "worldstate_delta_ref_required": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "truth_scope": {
+      "type": "string",
+      "enum": [
+        "base_world_truth",
+        "shared_world_truth",
+        "leaf_branch_truth",
+        "player_perception",
+        "mythic_interpretation",
+        "prophetic_pressure",
+        "faction_claim",
+        "host_materialization",
+        "diagnostic_noop"
+      ]
+    },
+    "preconditions": {
+      "type": "object",
+      "properties": {
+        "required_plane_pressures": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "P1_Physical",
+              "P2_Etheric",
+              "P3_Astral",
+              "P4_Mental",
+              "P5_Causal",
+              "P6_Celestial",
+              "P7_Shadow",
+              "P8_Void",
+              "P9_Divine_Core"
+            ]
+          }
+        },
+        "required_resonance_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "effects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "effect_kind": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "value": {}
+        },
+        "required": [
+          "effect_kind",
+          "target"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "forbidden_effects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "provenance_requirements": {
+      "type": "object",
+      "properties": {
+        "requires_cosmology_ref": {
+          "type": "boolean"
+        },
+        "requires_ash_pattern_diagnostic_ref": {
+          "type": "boolean"
+        },
+        "requires_generation_plan_ref": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "outputs": {
+      "type": "object",
+      "properties": {
+        "worldstate_delta_packet": {
+          "type": "boolean"
+        },
+        "diagnostic_noop": {
+          "type": "boolean"
+        },
+        "location_branch_overlay": {
+          "type": "boolean"
+        },
+        "future_generation_bias_update": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "validation": {
+      "type": "object",
+      "properties": {
+        "reject_if_base_ontology_mutation": {
+          "const": true
+        },
+        "reject_if_static_only": {
+          "const": true
+        },
+        "reject_if_no_provenance": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

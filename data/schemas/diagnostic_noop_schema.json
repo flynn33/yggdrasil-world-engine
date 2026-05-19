@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ywe.diagnostic_noop.v1.json",
+  "title": "Diagnostic NoOp",
+  "description": "Explicitly records an evaluated event that produced no persistent consequence.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "noop_id",
+    "reason",
+    "source_context",
+    "evaluation"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ywe.diagnostic_noop.v1"
+    },
+    "version": {
+      "type": "string"
+    },
+    "noop_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "minor_non_branching_action",
+        "presentation_only",
+        "rejected_by_guardrail",
+        "deferred_insufficient_context",
+        "no_persistent_consequence",
+        "diagnostic_only"
+      ]
+    },
+    "source_context": {
+      "type": "object",
+      "properties": {
+        "player_id": {
+          "type": "string"
+        },
+        "branch_id": {
+          "type": "string"
+        },
+        "location_id": {
+          "type": "string"
+        },
+        "player_action_trace_ref": {
+          "type": "string"
+        },
+        "branch_event_ref": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "evaluation": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "truth_scope": {
+          "enum": [
+            "base_world_truth",
+            "shared_world_truth",
+            "leaf_branch_truth",
+            "player_perception",
+            "mythic_interpretation",
+            "prophetic_pressure",
+            "faction_claim",
+            "host_materialization",
+            "diagnostic_noop"
+          ]
+        },
+        "guardrail_notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "ash_pattern_diagnostic_ref": {
+          "type": "string"
+        },
+        "source_cosmology_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
