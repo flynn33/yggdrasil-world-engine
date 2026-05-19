@@ -305,6 +305,34 @@ def enum_values(schema: dict[str, Any], property_name: str) -> set[str]:
     return {item for item in raw_enum if isinstance(item, str)}
 
 
+def property_schema(schema: dict[str, Any], schema_label: str, property_name: str, errors: list[str]) -> dict[str, Any]:
+    properties = schema.get("properties")
+    if not isinstance(properties, dict):
+        errors.append(f"{schema_label}.properties must be an object.")
+        return {}
+    prop = properties.get(property_name)
+    if not isinstance(prop, dict):
+        errors.append(f"{schema_label}.{property_name} must be an object schema.")
+        return {}
+    return prop
+
+
+def object_field(value: dict[str, Any], field_name: str, label: str, errors: list[str]) -> dict[str, Any]:
+    field = value.get(field_name)
+    if not isinstance(field, dict):
+        errors.append(f"{label}.{field_name} must be an object.")
+        return {}
+    return field
+
+
+def enum_list(value: dict[str, Any], field_name: str, label: str, errors: list[str]) -> set[str]:
+    raw_enum = value.get(field_name)
+    if not isinstance(raw_enum, list):
+        errors.append(f"{label}.{field_name} must be an enum list.")
+        return set()
+    return {item for item in raw_enum if isinstance(item, str)}
+
+
 def required_fields(defs: dict, record_name: str, errors: list[str]) -> set[str]:
     fields = defs.get(record_name, {}).get("required")
     if not isinstance(fields, list):
@@ -503,23 +531,24 @@ def check_phase_10_prerequisite(root: Path, errors: list[str]) -> None:
                 require((root / path_name).is_file(), f"Missing Phase 10 prerequisite artifact: {path_name}", errors)
 
     text = "\n".join(read_text(root / path_name) for path_name in PHASE_10_SEMANTIC_TARGETS if (root / path_name).is_file())
-    require("current leaf branch reality" in text, "Phase 10 must reference current leaf branch reality.", errors)
+    normalized_text = text.lower()
+    require("current leaf branch reality" in normalized_text, "Phase 10 must reference current leaf branch reality.", errors)
     require(
-        "without replacing it" in text or "replace leaf branch reality state" in text,
+        "without replacing it" in normalized_text or "replace leaf branch reality state" in normalized_text,
         "Phase 10 must preserve that player state does not own or replace branch reality.",
         errors,
     )
-    require("revealed through play" in text, "Phase 10 must preserve reveal-through-play identity progression.", errors)
+    require("revealed through play" in normalized_text, "Phase 10 must preserve reveal-through-play identity progression.", errors)
     require(
-        "celestial_identity_initial_state" in text and '"const": "veiled"' in text,
+        "celestial_identity_initial_state" in normalized_text and '"const": "veiled"' in normalized_text,
         "Phase 10 must preserve veiled initial celestial identity.",
         errors,
     )
-    require("runtime pressure signal" in text, "Phase 10 must preserve plane attunement as dynamic pressure.", errors)
-    require("not a static class lock" in text, "Phase 10 must preserve bloodline resonance as pressure, not class lock.", errors)
-    require("treat wolf resonance as morality" in text, "Phase 10 must preserve wolf resonance non-morality guardrail.", errors)
-    require("PlayerStateUpdatePacket" in text, "Phase 10 must preserve PlayerStateUpdatePacket update control.", errors)
-    require("ASH Pattern System is a YWE component" in text, "Phase 10 must preserve ASH Pattern System component role.", errors)
+    require("runtime pressure signal" in normalized_text, "Phase 10 must preserve plane attunement as dynamic pressure.", errors)
+    require("not a static class lock" in normalized_text, "Phase 10 must preserve bloodline resonance as pressure, not class lock.", errors)
+    require("treat wolf resonance as morality" in normalized_text, "Phase 10 must preserve wolf resonance non-morality guardrail.", errors)
+    require("playerstateupdatepacket" in normalized_text, "Phase 10 must preserve PlayerStateUpdatePacket update control.", errors)
+    require("ash pattern system is a ywe component" in normalized_text, "Phase 10 must preserve ASH Pattern System component role.", errors)
 
 
 def check_phase_11_required_artifacts(root: Path, errors: list[str]) -> None:
@@ -549,28 +578,49 @@ def check_phase_11_schema_contracts(root: Path, errors: list[str]) -> None:
             "WorldstateDeltaPacket truth_scope enum must match Phase 11 allowed scopes.",
             errors,
         )
-        classes_prop = object_property(worldstate_schema, "consequence_classes")
-        class_enum = set(classes_prop.get("items", {}).get("enum", []))
+        classes_prop = property_schema(worldstate_schema, "WorldstateDeltaPacket", "consequence_classes", errors)
+        classes_items = object_field(classes_prop, "items", "WorldstateDeltaPacket.consequence_classes", errors)
+        class_enum = enum_list(classes_items, "enum", "WorldstateDeltaPacket.consequence_classes.items", errors)
         require(
             class_enum == ALLOWED_CONSEQUENCE_CLASSES,
             "WorldstateDeltaPacket consequence_classes enum must match Phase 11 allowed classes.",
             errors,
         )
-        validation = object_property(worldstate_schema, "validation")
+        validation = property_schema(worldstate_schema, "WorldstateDeltaPacket", "validation", errors)
+        validation_props = object_field(validation, "properties", "WorldstateDeltaPacket.validation", errors)
         require(
-            "requires_delta_or_noop" in validation.get("properties", {}),
+            "requires_delta_or_noop" in validation_props,
             "WorldstateDeltaPacket validation must include requires_delta_or_noop.",
             errors,
         )
 
     truth_scope_schema = load_json_checked(root, root / "data/schemas/truth_scope_schema.json", errors)
     if isinstance(truth_scope_schema, dict):
-        allowed = object_property(truth_scope_schema, "allowed_truth_scopes").get("items", {}).get("enum", [])
+        allowed_prop = property_schema(truth_scope_schema, "TruthScope", "allowed_truth_scopes", errors)
+        allowed_items = object_field(allowed_prop, "items", "TruthScope.allowed_truth_scopes", errors)
+        allowed = enum_list(allowed_items, "enum", "TruthScope.allowed_truth_scopes.items", errors)
         require(set(allowed) == ALLOWED_TRUTH_SCOPES, "TruthScope schema must enumerate all Phase 11 truth scopes.", errors)
 
     consequence_schema = load_json_checked(root, root / "data/schemas/consequence_classification_schema.json", errors)
     if isinstance(consequence_schema, dict):
-        allowed = object_property(consequence_schema, "allowed_consequence_classes").get("items", {}).get("enum", [])
+        allowed_prop = property_schema(
+            consequence_schema,
+            "ConsequenceClassification",
+            "allowed_consequence_classes",
+            errors,
+        )
+        allowed_items = object_field(
+            allowed_prop,
+            "items",
+            "ConsequenceClassification.allowed_consequence_classes",
+            errors,
+        )
+        allowed = enum_list(
+            allowed_items,
+            "enum",
+            "ConsequenceClassification.allowed_consequence_classes.items",
+            errors,
+        )
         require(
             set(allowed) == ALLOWED_CONSEQUENCE_CLASSES,
             "ConsequenceClassification schema must enumerate all Phase 11 consequence classes.",
@@ -579,9 +629,16 @@ def check_phase_11_schema_contracts(root: Path, errors: list[str]) -> None:
 
     future_bias_schema = load_json_checked(root, root / "data/schemas/future_generation_bias_update_schema.json", errors)
     if isinstance(future_bias_schema, dict):
-        validation = object_property(future_bias_schema, "validation")
+        validation = property_schema(future_bias_schema, "FutureGenerationBiasUpdate", "validation", errors)
+        validation_props = object_field(validation, "properties", "FutureGenerationBiasUpdate.validation", errors)
+        does_not_materialize_content = object_field(
+            validation_props,
+            "does_not_materialize_content",
+            "FutureGenerationBiasUpdate.validation.properties",
+            errors,
+        )
         require(
-            validation.get("properties", {}).get("does_not_materialize_content", {}).get("const") is True,
+            does_not_materialize_content.get("const") is True,
             "FutureGenerationBiasUpdate must require does_not_materialize_content.",
             errors,
         )

@@ -11,10 +11,10 @@ Every meaningful consequence must produce `WorldstateDeltaPacket` or `Diagnostic
 ```text
 branch_name: codex/phase-11-worldstate-location-mutation
 commit_hash_or_worktree_ref: PR branch head commit on codex/phase-11-worldstate-location-mutation
-package_source: /Users/flynn/Documents/RavenForge/YWE_PHASE_11_WORLDSTATE_AND_LOCATION_MUTATION_HANDOFF_PACKAGE
+package_source: owner-supplied Phase 11 handoff package located on the implementation workstation
 ```
 
-The user-provided lowercase `/users/jim.daley/...` package path was not present on this machine. The matching package was located under `/Users/flynn/Documents/RavenForge/...` and used as the instruction authority.
+The originally supplied package path was not present exactly as typed. The matching Phase 11 package was located on the implementation workstation and used as the instruction authority.
 
 ## Phase 10 prerequisite status
 
@@ -144,7 +144,7 @@ Ravenfall Gate examples exist only as state and mutation fixtures. They cover ba
 
 ## Known deviations
 
-No package-scope deviations. The supplied path spelling did not exist locally, so the matching package under `/Users/flynn/Documents/RavenForge/` was used.
+No package-scope deviations. The supplied path spelling did not exist locally, so the matching owner-supplied Phase 11 package on the implementation workstation was used.
 
 ## Deferred work
 
