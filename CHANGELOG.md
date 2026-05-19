@@ -5,6 +5,19 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.13] — 2026-05-19
+
+### Added
+- Address Phase 11 review feedback
+- Implement Phase 11 worldstate location mutation
+
+### Fixed
+- Clarify Phase 11 review fixes
+
+
+---
+
+
 ## [2.0.12] — 2026-05-18
 
 ### Added
