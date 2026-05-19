@@ -57,6 +57,36 @@ PHASE_10_SEMANTIC_TARGETS = [
     "data/schemas/player_runtime_state_schema.json",
 ]
 
+PHASE_10_SEMANTIC_REQUIREMENTS = [
+    ((("current leaf branch reality",),), "Phase 10 must reference current leaf branch reality."),
+    (
+        (("without replacing it",), ("replace leaf branch reality state",)),
+        "Phase 10 must preserve that player state does not own or replace branch reality.",
+    ),
+    ((("revealed through play",),), "Phase 10 must preserve reveal-through-play identity progression."),
+    (
+        (("celestial_identity_initial_state", '"const": "veiled"'),),
+        "Phase 10 must preserve veiled initial celestial identity.",
+    ),
+    ((("runtime pressure signal",),), "Phase 10 must preserve plane attunement as dynamic pressure."),
+    (
+        (("not a static class lock",),),
+        "Phase 10 must preserve bloodline resonance as pressure, not class lock.",
+    ),
+    ((("treat wolf resonance as morality",),), "Phase 10 must preserve wolf resonance non-morality guardrail."),
+    ((("playerstateupdatepacket",),), "Phase 10 must preserve PlayerStateUpdatePacket update control."),
+    (
+        (("ash pattern system is a ywe component",),),
+        "Phase 10 must preserve ASH Pattern System component role.",
+    ),
+]
+
+PHASE_11_JSON_SCAN_DIRS = (
+    "data/schemas",
+    "data/validation",
+    "examples",
+)
+
 PHASE_11_SCAN_PATHS = [
     "docs/architecture/worldstate_delta_contract.md",
     "docs/architecture/location_state_resolver_contract.md",
@@ -285,7 +315,7 @@ def classify_change_paths(statuses: list[tuple[str, str]]) -> tuple[list[str], l
 
 def collect_json_files(root: Path) -> list[Path]:
     paths: list[Path] = []
-    for rel_dir in ("data/schemas", "data/validation", PHASE_11_EXAMPLE_ROOT):
+    for rel_dir in PHASE_11_JSON_SCAN_DIRS:
         directory = root / rel_dir
         if directory.is_dir():
             paths.extend(sorted(directory.rglob("*.json")))
@@ -530,25 +560,17 @@ def check_phase_10_prerequisite(root: Path, errors: list[str]) -> None:
             for path_name in contract.get(section, []):
                 require((root / path_name).is_file(), f"Missing Phase 10 prerequisite artifact: {path_name}", errors)
 
-    text = "\n".join(read_text(root / path_name) for path_name in PHASE_10_SEMANTIC_TARGETS if (root / path_name).is_file())
-    normalized_text = text.lower()
-    require("current leaf branch reality" in normalized_text, "Phase 10 must reference current leaf branch reality.", errors)
-    require(
-        "without replacing it" in normalized_text or "replace leaf branch reality state" in normalized_text,
-        "Phase 10 must preserve that player state does not own or replace branch reality.",
-        errors,
-    )
-    require("revealed through play" in normalized_text, "Phase 10 must preserve reveal-through-play identity progression.", errors)
-    require(
-        "celestial_identity_initial_state" in normalized_text and '"const": "veiled"' in normalized_text,
-        "Phase 10 must preserve veiled initial celestial identity.",
-        errors,
-    )
-    require("runtime pressure signal" in normalized_text, "Phase 10 must preserve plane attunement as dynamic pressure.", errors)
-    require("not a static class lock" in normalized_text, "Phase 10 must preserve bloodline resonance as pressure, not class lock.", errors)
-    require("treat wolf resonance as morality" in normalized_text, "Phase 10 must preserve wolf resonance non-morality guardrail.", errors)
-    require("playerstateupdatepacket" in normalized_text, "Phase 10 must preserve PlayerStateUpdatePacket update control.", errors)
-    require("ash pattern system is a ywe component" in normalized_text, "Phase 10 must preserve ASH Pattern System component role.", errors)
+    normalized_text = "\n".join(
+        read_text(root / path_name)
+        for path_name in PHASE_10_SEMANTIC_TARGETS
+        if (root / path_name).is_file()
+    ).lower()
+    for accepted_term_groups, message in PHASE_10_SEMANTIC_REQUIREMENTS:
+        require(
+            any(all(term in normalized_text for term in group) for group in accepted_term_groups),
+            message,
+            errors,
+        )
 
 
 def check_phase_11_required_artifacts(root: Path, errors: list[str]) -> None:

@@ -1,9 +1,10 @@
 {
   "id": "check_phase_11_json_integrity",
-  "purpose": "Parse all JSON files in data/schemas, data/validation, and examples.",
+  "purpose": "Parse repository-scoped JSON artifacts that Phase 11 depends on.",
   "json_paths": [
     "data/schemas/**/*.json",
     "data/validation/**/*.json",
     "examples/**/*.json"
-  ]
+  ],
+  "scope_note": "This check scans repository JSON sources only; workstation package paths and non-JSON manifests are outside this check."
 }
