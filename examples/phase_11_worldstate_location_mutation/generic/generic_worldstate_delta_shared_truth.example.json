@@ -1,0 +1,52 @@
+{
+  "schema_id": "ywe.worldstate_delta_packet.v1",
+  "version": "1.0.0",
+  "delta_id": "delta.shared_truth.example.001",
+  "timestamp_policy": "logical_tick",
+  "truth_scope": "shared_world_truth",
+  "consequence_classes": [
+    "shared_world_truth_change",
+    "location_state_change"
+  ],
+  "source_context": {
+    "player_id": "player.example",
+    "branch_id": "branch.example",
+    "location_id": "location.example",
+    "player_action_trace_ref": "trace.example"
+  },
+  "delta_body": {
+    "summary": "A shared location fact changed after meaningful action.",
+    "before_refs": [
+      "location.example.phase.previous"
+    ],
+    "after_refs": [
+      "location.example.phase.changed"
+    ],
+    "operations": [
+      {
+        "operation": "set_location_phase",
+        "value": "changed"
+      }
+    ]
+  },
+  "provenance": {
+    "source_cosmology_refs": [
+      "ASH_Cosmological_Model.Axioms"
+    ],
+    "ash_pattern_diagnostic_ref": "asp.diagnostic.example",
+    "generation_plan_ref": "generation.plan.example"
+  },
+  "outputs": {
+    "location_state_record_ref": "location_state.example.changed",
+    "future_generation_bias_update_refs": [
+      "bias.example.001"
+    ]
+  },
+  "validation": {
+    "requires_delta_or_noop": true,
+    "passes_truth_scope_guardrail": true,
+    "notes": [
+      "Example only."
+    ]
+  }
+}

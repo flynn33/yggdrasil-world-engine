@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ywe.truth_scope.v1.json",
+  "title": "Truth Scope",
+  "description": "Enumerates Phase 11 truth scopes.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "allowed_truth_scopes"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ywe.truth_scope.v1"
+    },
+    "version": {
+      "type": "string"
+    },
+    "allowed_truth_scopes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "base_world_truth",
+          "shared_world_truth",
+          "leaf_branch_truth",
+          "player_perception",
+          "mythic_interpretation",
+          "prophetic_pressure",
+          "faction_claim",
+          "host_materialization",
+          "diagnostic_noop"
+        ]
+      },
+      "minItems": 1
+    },
+    "scope_descriptions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

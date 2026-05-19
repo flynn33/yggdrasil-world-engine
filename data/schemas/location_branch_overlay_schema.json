@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ywe.location_branch_overlay.v1.json",
+  "title": "Location Branch Overlay",
+  "description": "Player-specific branch overlay for location state, access, visibility, and eligibility.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "overlay_id",
+    "location_id",
+    "branch_id",
+    "truth_scope",
+    "source_refs",
+    "overlay_body",
+    "validation"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ywe.location_branch_overlay.v1"
+    },
+    "version": {
+      "type": "string"
+    },
+    "overlay_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "location_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "branch_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "truth_scope": {
+      "const": "leaf_branch_truth"
+    },
+    "source_refs": {
+      "type": "object",
+      "properties": {
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "branch_event_ref": {
+          "type": "string"
+        },
+        "player_state_snapshot_ref": {
+          "type": "string"
+        },
+        "location_state_record_ref": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "overlay_body": {
+      "type": "object",
+      "properties": {
+        "visible_changes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "access_changes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "eligibility_changes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "perception_changes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "myth_pressure_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prophecy_pressure_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "future_generation_bias_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "validation": {
+      "type": "object",
+      "properties": {
+        "does_not_rewrite_base_ontology": {
+          "const": true
+        },
+        "does_not_claim_shared_truth_without_delta": {
+          "const": true
+        },
+        "is_runtime_generated_not_pregenerated_tree": {
+          "const": true
+        }
+      },
+      "required": [
+        "does_not_rewrite_base_ontology",
+        "does_not_claim_shared_truth_without_delta",
+        "is_runtime_generated_not_pregenerated_tree"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

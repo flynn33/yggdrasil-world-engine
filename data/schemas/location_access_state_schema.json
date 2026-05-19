@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ywe.location_access_state.v1.json",
+  "title": "Location Access State",
+  "description": "Represents access/open/closed/sealed/conditional state for a location route, gate, path, or threshold.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "access_state_id",
+    "location_id",
+    "access_kind",
+    "state",
+    "truth_scope"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ywe.location_access_state.v1"
+    },
+    "version": {
+      "type": "string"
+    },
+    "access_state_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "location_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "access_kind": {
+      "enum": [
+        "gate",
+        "path",
+        "threshold",
+        "route",
+        "root",
+        "door",
+        "vision_layer",
+        "shadow_path",
+        "market_access"
+      ]
+    },
+    "state": {
+      "enum": [
+        "open",
+        "closed",
+        "sealed",
+        "hidden",
+        "conditional",
+        "unstable",
+        "contained"
+      ]
+    },
+    "truth_scope": {
+      "enum": [
+        "base_world_truth",
+        "shared_world_truth",
+        "leaf_branch_truth",
+        "player_perception",
+        "mythic_interpretation",
+        "prophetic_pressure",
+        "faction_claim",
+        "host_materialization",
+        "diagnostic_noop"
+      ]
+    },
+    "condition_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

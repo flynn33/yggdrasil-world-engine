@@ -1,103 +1,198 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "schema_id": "ywe.schemas.worldstate_delta_packet",
-  "version": "1.0.0",
-  "status": "phase_11_extended",
-  "purpose": "Persistent consequence packet for meaningful YWE resolutions.",
-  "phase_11_schema_ref": "worldstate_location_mutation_schema.json",
-  "required_records": {
-    "WorldstateDeltaPacket": {
+  "$id": "https://ywe.local/schemas/ywe.worldstate_delta_packet.v1.json",
+  "title": "Worldstate Delta Packet",
+  "description": "Records meaningful consequences to world, branch, location, perception, myth, prophecy, faction, and future generation state.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "delta_id",
+    "truth_scope",
+    "consequence_classes",
+    "source_context",
+    "delta_body",
+    "provenance",
+    "validation"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ywe.worldstate_delta_packet.v1"
+    },
+    "version": {
+      "type": "string"
+    },
+    "delta_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp_policy": {
+      "type": "string",
+      "enum": [
+        "logical_tick",
+        "branch_event_time",
+        "host_runtime_time_optional"
+      ]
+    },
+    "truth_scope": {
+      "type": "string",
+      "enum": [
+        "base_world_truth",
+        "shared_world_truth",
+        "leaf_branch_truth",
+        "player_perception",
+        "mythic_interpretation",
+        "prophetic_pressure",
+        "faction_claim",
+        "host_materialization",
+        "diagnostic_noop"
+      ]
+    },
+    "consequence_classes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "shared_world_truth_change",
+          "leaf_branch_truth_change",
+          "location_state_change",
+          "location_access_change",
+          "perception_overlay_change",
+          "myth_pressure_change",
+          "prophecy_pressure_change",
+          "faction_claim_change",
+          "npc_relationship_change",
+          "artifact_binding_change",
+          "creature_ecology_change",
+          "ability_pressure_change",
+          "player_state_reference",
+          "future_generation_bias_update",
+          "diagnostic_noop"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "source_context": {
+      "type": "object",
+      "properties": {
+        "player_id": {
+          "type": "string"
+        },
+        "branch_id": {
+          "type": "string"
+        },
+        "location_id": {
+          "type": "string"
+        },
+        "branch_event_ref": {
+          "type": "string"
+        },
+        "player_action_trace_ref": {
+          "type": "string"
+        },
+        "player_state_snapshot_ref": {
+          "type": "string"
+        },
+        "location_resolution_context_ref": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "delta_body": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "before_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "after_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "source_cosmology_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ash_pattern_diagnostic_ref": {
+          "type": "string"
+        },
+        "ash_pattern_recovery_ref": {
+          "type": "string"
+        },
+        "generation_plan_ref": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "outputs": {
+      "type": "object",
+      "properties": {
+        "location_state_record_ref": {
+          "type": "string"
+        },
+        "location_branch_overlay_ref": {
+          "type": "string"
+        },
+        "future_generation_bias_update_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "player_state_update_packet_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "validation": {
+      "type": "object",
       "required": [
-        "delta_id",
-        "source_resolution_payload",
-        "source_branch_event_ref",
-        "player_runtime_state_ref",
-        "current_leaf_branch_ref",
-        "affected_location_refs",
-        "location_mutation_refs",
-        "cosmic_pattern_snapshot_ref",
-        "diagnostic_ref",
-        "generation_plan_ref",
-        "source_ash_refs",
-        "scope",
-        "persistence",
-        "reversibility",
-        "future_generation_bias_update"
+        "requires_delta_or_noop",
+        "passes_truth_scope_guardrail"
       ],
       "properties": {
-        "source_ash_refs": "SourceASHRefs",
-        "diagnostic_ref": "DiagnosticEnvelope",
-        "generation_plan_ref": "GenerationPlan",
-        "player_runtime_state_ref": "PlayerRuntimeState",
-        "current_leaf_branch_ref": "LeafBranchReality",
-        "location_mutation_refs": "LocationMutationDelta",
-        "future_generation_bias_update": "FutureGenerationBiasUpdate"
-      }
-    },
-    "LocationMutationState": {
-      "required": [
-        "location_state_id",
-        "location_ref",
-        "base_world_ref",
-        "current_leaf_branch_ref",
-        "status",
-        "active_mutation_refs",
-        "worldstate_delta_refs",
-        "authority_boundary",
-        "ash_provenance"
-      ],
-      "rule": "LocationMutationState changes only through accepted WorldstateDeltaPacket evidence or explicit DiagnosticNoOp."
-    },
-    "LocationMutationDelta": {
-      "required": [
-        "mutation_delta_id",
-        "target_location_state_ref",
-        "source_worldstate_delta_ref",
-        "source_player_runtime_state_ref",
-        "mutation_kind",
-        "diagnostic_ref",
-        "generation_plan_ref",
-        "source_ash_refs"
-      ],
-      "rule": "LocationMutationDelta must be scoped and cannot rewrite base ontology."
-    },
-    "WorldstateMutationCommit": {
-      "required": [
-        "commit_id",
-        "source_worldstate_delta_ref",
-        "committed_record_refs",
-        "commit_scope",
-        "contradiction_policy"
-      ]
-    },
-    "FutureGenerationBiasUpdate": {
-      "required": [
-        "bias_id",
-        "affected_domains",
-        "pressure_tags",
-        "source_delta_ref",
-        "diagnostic_ref"
-      ]
-    },
-    "DiagnosticNoOp": {
-      "required": [
-        "no_op_id",
-        "reason",
-        "diagnostic_ref",
-        "cosmic_pattern_snapshot_ref",
-        "generation_plan_ref"
-      ],
-      "rule": "Every meaningful completion emits WorldstateDeltaPacket or explicit DiagnosticNoOp."
+        "requires_delta_or_noop": {
+          "const": true
+        },
+        "passes_truth_scope_guardrail": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
     }
   },
-  "invariants": [
-    "worldstate_changes_require_source_ash_refs",
-    "meaningful_resolutions_cannot_reset_consequences_without_delta",
-    "untraceable_state_changes_are_forbidden",
-    "location_mutation_refs_must_be_scoped",
-    "perception_overlay_cannot_author_location_mutation",
-    "host_adapter_may_not_author_worldstate",
-    "worldstate_delta_must_not_mutate_ash_math",
-    "location_mutation_must_not_mutate_base_world_ontology"
-  ]
+  "additionalProperties": false
 }

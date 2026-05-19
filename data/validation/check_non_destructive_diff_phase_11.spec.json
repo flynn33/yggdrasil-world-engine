@@ -1,0 +1,11 @@
+{
+  "id": "check_non_destructive_diff_phase_11",
+  "purpose": "Flag destructive changes during Phase 11.",
+  "fail_on": [
+    "deleted architecture files",
+    "deleted schemas",
+    "deleted conformance artifacts",
+    "deleted Phase 8-10 artifacts",
+    "mass rewrite of master specification"
+  ]
+}

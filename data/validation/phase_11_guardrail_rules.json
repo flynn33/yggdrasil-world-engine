@@ -1,0 +1,22 @@
+{
+  "id": "ywe.phase_11.guardrail_rules",
+  "version": "1.0.0",
+  "required_rules": [
+    "meaningful_consequence_requires_worldstate_delta_or_diagnostic_noop",
+    "player_action_can_change_branch_reality",
+    "player_action_can_change_location_state",
+    "player_action_does_not_redefine_base_ontology",
+    "locations_are_stateful",
+    "locations_can_mutate_at_runtime",
+    "location_mutation_requires_context_and_provenance",
+    "branch_specific_location_state_must_not_be_confused_with_base_world_truth",
+    "perception_does_not_rewrite_shared_truth",
+    "myth_does_not_rewrite_history_without_delta_evidence",
+    "prophecy_does_not_guarantee_scripted_future",
+    "faction_claim_is_not_automatically_truth",
+    "no_static_only_location_model",
+    "no_pregenerated_branch_tree",
+    "no_random_location_mutation_without_cosmological_context",
+    "no_feature_engine_writes_consequence_without_packet"
+  ]
+}

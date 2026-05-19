@@ -1,0 +1,46 @@
+{
+  "schema_id": "ywe.location_state_record.v1",
+  "version": "1.0.0",
+  "location_id": "ravenfall_gate",
+  "base_location_ref": "locations.ravenfall_gate.base",
+  "display_name": "Ravenfall Gate",
+  "location_kind": "ruin_marketplace_threshold",
+  "truth_scope": "shared_world_truth",
+  "current_state": {
+    "phase": "ravenfall_gate.oath_bound",
+    "stability": "stable",
+    "active_plane_pressures": [
+      "P7_Shadow",
+      "P4_Mental",
+      "P5_Causal"
+    ],
+    "access_state_refs": [
+      "access.ravenfall_gate.market",
+      "access.ravenfall_gate.threshold.partially_stable"
+    ],
+    "content_eligibility_refs": [
+      "eligibility.ravenfall_gate.bound_threshold"
+    ]
+  },
+  "branch_overlay_refs": [
+    "overlay.ravenfall_gate.oath_bound"
+  ],
+  "worldstate_delta_refs": [
+    "delta.ravenfall_gate.oath_bound"
+  ],
+  "mutation_history": [
+    "mutation.ravenfall_gate.unawakened_to_oath_bound"
+  ],
+  "future_generation_bias_refs": [
+    "bias.ravenfall_gate.oath_bound"
+  ],
+  "provenance": {
+    "source_cosmology_refs": [
+      "nine_planes_of_existence",
+      "A6_Branching_Choice_Realization"
+    ],
+    "ash_pattern_diagnostic_refs": [
+      "asp.diagnostic.initial"
+    ]
+  }
+}

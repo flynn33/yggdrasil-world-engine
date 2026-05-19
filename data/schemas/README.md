@@ -58,8 +58,20 @@ generation bias update foundation.
 | `player_state_update_packet_schema.json` | Phase 10 controlled player-state mutation packet |
 | `player_state_snapshot_schema.json` | Phase 10 player-state snapshot reference contract |
 | `exploration_frontier_request_schema.json` | Frontier, threshold, thin-veil, and unresolved-node generation requests |
-| `future_generation_bias_update_schema.json` | Consequence-derived pressure for later ASH-governed generation context |
-| `worldstate_location_mutation_schema.json` | DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted. Phase 11 persistent worldstate consequence, scoped location mutation, commit records, and diagnostic no-ops |
+| `worldstate_delta_packet_schema.json` | Phase 11 meaningful consequence packet with truth scope, consequence classification, provenance, and delta/no-op validation |
+| `diagnostic_noop_schema.json` | Phase 11 explicit no-op record for evaluated events with no persistent consequence |
+| `location_state_record_schema.json` | Phase 11 persistent location state record |
+| `location_mutation_rule_schema.json` | Phase 11 location mutation trigger, context, effect, provenance, and fallback rule |
+| `location_branch_overlay_schema.json` | Phase 11 player-specific leaf branch location overlay |
+| `location_resolution_context_schema.json` | Phase 11 resolver input context spanning player, branch, location, cosmology, and diagnostics |
+| `future_generation_bias_update_schema.json` | Phase 11 consequence-derived eligibility and weighting bias for later generation context |
+| `truth_scope_schema.json` | Phase 11 allowed truth scopes |
+| `consequence_classification_schema.json` | Phase 11 allowed consequence classes |
+| `worldstate_resolution_result_schema.json` | Phase 11 resolution result packet for delta/no-op and secondary updates |
+| `location_access_state_schema.json` | Phase 11 access state for gates, paths, thresholds, routes, and related location surfaces |
+| `location_content_eligibility_schema.json` | Phase 11 downstream content eligibility record without content materialization |
+| `location_mutation_history_schema.json` | Phase 11 append-only mutation history |
+| `worldstate_location_mutation_schema.json` | Earlier Phase 11-adjacent packet-spine schema retained for compatibility and historical validation |
 | `quest_npc_lore_generation_schema.json` | DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted. Phase 12 quest chains, NPC manifests, NPC memory deltas, codex lore records, myth records, and social distribution deltas |
 
 ## Required Provenance

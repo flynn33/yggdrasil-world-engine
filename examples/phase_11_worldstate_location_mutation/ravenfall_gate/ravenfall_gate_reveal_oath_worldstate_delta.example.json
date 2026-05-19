@@ -1,0 +1,66 @@
+{
+  "schema_id": "ywe.worldstate_delta_packet.v1",
+  "version": "1.0.0",
+  "delta_id": "delta.ravenfall_gate.oath_revealed",
+  "timestamp_policy": "branch_event_time",
+  "truth_scope": "shared_world_truth",
+  "consequence_classes": [
+    "shared_world_truth_change",
+    "location_state_change",
+    "myth_pressure_change",
+    "future_generation_bias_update"
+  ],
+  "source_context": {
+    "player_id": "player.example",
+    "branch_id": "branch.ravenfall.example",
+    "location_id": "ravenfall_gate",
+    "branch_event_ref": "branch_event.ravenfall_gate.oath_revealed",
+    "player_action_trace_ref": "trace.ravenfall_gate.oath_revealed",
+    "player_state_snapshot_ref": "player_state.snapshot.example",
+    "location_resolution_context_ref": "location_resolution.ravenfall_gate.example"
+  },
+  "delta_body": {
+    "summary": "The buried oath at Ravenfall Gate is publicly revealed.",
+    "before_refs": [
+      "ravenfall_gate.unawakened"
+    ],
+    "after_refs": [
+      "ravenfall_gate.oath_revealed"
+    ],
+    "operations": [
+      {
+        "operation": "set_location_phase",
+        "target": "ravenfall_gate",
+        "value": "ravenfall_gate.oath_revealed"
+      },
+      {
+        "operation": "increase_myth_pressure",
+        "target": "myth.seed.ravenfall_gate.public_oath",
+        "value": 0.4
+      }
+    ]
+  },
+  "provenance": {
+    "source_cosmology_refs": [
+      "A6_Branching_Choice_Realization",
+      "P7_Shadow",
+      "P4_Mental",
+      "P5_Causal"
+    ],
+    "ash_pattern_diagnostic_ref": "asp.diagnostic.ravenfall_gate.example",
+    "generation_plan_ref": "generation.plan.ravenfall_gate.example"
+  },
+  "outputs": {
+    "location_state_record_ref": "location_state.ravenfall_gate.oath_revealed",
+    "future_generation_bias_update_refs": [
+      "bias.ravenfall_gate.oath_revealed"
+    ]
+  },
+  "validation": {
+    "requires_delta_or_noop": true,
+    "passes_truth_scope_guardrail": true,
+    "notes": [
+      "Phase 11 state/mutation example only."
+    ]
+  }
+}

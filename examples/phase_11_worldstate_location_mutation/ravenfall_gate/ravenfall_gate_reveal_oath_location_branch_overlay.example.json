@@ -1,0 +1,43 @@
+{
+  "schema_id": "ywe.location_branch_overlay.v1",
+  "version": "1.0.0",
+  "overlay_id": "overlay.ravenfall_gate.oath_revealed",
+  "location_id": "ravenfall_gate",
+  "branch_id": "branch.ravenfall.example",
+  "truth_scope": "leaf_branch_truth",
+  "source_refs": {
+    "worldstate_delta_refs": [
+      "delta.ravenfall_gate.oath_revealed"
+    ],
+    "branch_event_ref": "branch_event.ravenfall_gate.oath_revealed",
+    "player_state_snapshot_ref": "player_state.snapshot.example",
+    "location_state_record_ref": "location_state.ravenfall_gate.oath_revealed"
+  },
+  "overlay_body": {
+    "visible_changes": [
+      "public oath markings visible on threshold stones"
+    ],
+    "access_changes": [
+      "witness path eligible"
+    ],
+    "eligibility_changes": [
+      "witness_npc_generation_candidate",
+      "public_myth_seed_candidate"
+    ],
+    "perception_changes": [
+      "Mental-plane symbols more legible"
+    ],
+    "myth_pressure_refs": [
+      "myth.seed.ravenfall_gate.public_oath"
+    ],
+    "prophecy_pressure_refs": []
+  },
+  "future_generation_bias_refs": [
+    "bias.ravenfall_gate.oath_revealed"
+  ],
+  "validation": {
+    "does_not_rewrite_base_ontology": true,
+    "does_not_claim_shared_truth_without_delta": true,
+    "is_runtime_generated_not_pregenerated_tree": true
+  }
+}

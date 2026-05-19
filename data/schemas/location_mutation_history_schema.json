@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ywe.location_mutation_history.v1.json",
+  "title": "Location Mutation History",
+  "description": "Append-only history of location mutations.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "history_id",
+    "location_id",
+    "entries"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ywe.location_mutation_history.v1"
+    },
+    "version": {
+      "type": "string"
+    },
+    "history_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "location_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "mutation_id",
+          "source_delta_ref",
+          "from_phase",
+          "to_phase"
+        ],
+        "properties": {
+          "mutation_id": {
+            "type": "string"
+          },
+          "source_delta_ref": {
+            "type": "string"
+          },
+          "from_phase": {
+            "type": "string"
+          },
+          "to_phase": {
+            "type": "string"
+          },
+          "truth_scope": {
+            "enum": [
+              "base_world_truth",
+              "shared_world_truth",
+              "leaf_branch_truth",
+              "player_perception",
+              "mythic_interpretation",
+              "prophetic_pressure",
+              "faction_claim",
+              "host_materialization",
+              "diagnostic_noop"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

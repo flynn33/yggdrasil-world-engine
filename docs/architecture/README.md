@@ -30,9 +30,17 @@ Phase 10 player runtime state contracts:
 - `player_state_branch_integration_contract.md` -- Leaf branch reality and branch event integration rules.
 - `player_state_asp_resilience_contract.md` -- ASH Pattern System component diagnostics, recovery, containment, conformance, resilience, and patch/update stability rules.
 
-Phase 11 worldstate and location mutation contract:
+Phase 11 worldstate and location mutation contracts:
 
-- `worldstate_location_mutation_v1.md` -- Canonical persistent consequence, scoped location mutation, worldstate commit records, diagnostic no-ops, and future-generation bias boundary rules.
+- `worldstate_delta_contract.md` -- WorldstateDeltaPacket and DiagnosticNoOp rule for meaningful consequences.
+- `location_state_resolver_contract.md` -- Location resolution inputs and outputs for revisits, branch overlays, diagnostics, and future bias.
+- `location_branch_overlay_contract.md` -- Player-specific leaf branch location overlays that do not rewrite base ontology.
+- `location_mutation_rule_contract.md` -- Mutation trigger, provenance, forbidden effect, fallback, and output-packet rules.
+- `future_generation_bias_contract.md` -- Eligibility and weighting bias rules for later systems without direct content materialization.
+- `shared_truth_vs_branch_truth_contract.md` -- Boundary among base world truth, shared truth, leaf branch truth, perception, myth, prophecy, faction claim, and host materialization.
+- `consequence_classification_contract.md` -- Auditable consequence classes for worldstate deltas.
+- `worldstate_location_integration_map.md` -- Phase 8-10 inputs, Phase 11 records, and Phase 12+ consumers.
+- `worldstate_location_mutation_v1.md` -- Earlier Phase 11-adjacent packet-spine contract retained for compatibility and historical validation.
 
 Phase 12 quest, NPC, and lore generation contract:
 
@@ -160,9 +168,9 @@ Phase 11 worldstate-location dependency flow:
 ```text
 Player Runtime State
   -> WorldstateDeltaPacket
-    -> LocationMutationState
+    -> LocationStateRecord / LocationBranchOverlay / LocationMutationRule
       -> FutureGenerationBiasUpdate
-      -> YWEGenerationContextPacket
+        -> YWEGenerationContextPacket
 ```
 
 Phase 12 quest-NPC-lore dependency flow:

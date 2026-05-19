@@ -1,151 +1,117 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ywe.local/schemas/future_generation_bias_update_schema.json",
-  "schema_id": "ywe.schemas.future_generation_bias_update",
-  "schema_version": "0.1.0",
-  "status": "phase_9_extended",
-  "title": "FutureGenerationBiasUpdate",
-  "description": "Records how branch events and worldstate deltas influence future runtime generation eligibility without forcing scripted outcomes.",
+  "$id": "https://ywe.local/schemas/ywe.future_generation_bias_update.v1.json",
+  "title": "Future Generation Bias Update",
+  "description": "Records how consequences influence future content eligibility and weighting.",
   "type": "object",
-  "additionalProperties": true,
-  "authority": {
-    "game": "Where Ravens Wait: Eternal Reckoning",
-    "engine": "Yggdrasil World Engine",
-    "foundation": "ASH Cosmological Model",
-    "stability_component": "ASH Pattern System"
-  },
   "required": [
+    "schema_id",
+    "version",
     "bias_update_id",
-    "source_worldstate_delta_ref",
-    "affected_context_channels",
-    "bias_strength",
-    "expiration_policy",
-    "authority_boundary"
+    "source_refs",
+    "bias_targets",
+    "validation"
   ],
   "properties": {
+    "schema_id": {
+      "const": "ywe.future_generation_bias_update.v1"
+    },
+    "version": {
+      "type": "string"
+    },
     "bias_update_id": {
-      "type": "string"
-    },
-    "source_worldstate_delta_ref": {
-      "type": "string"
-    },
-    "future_generation_bias_update_id": {
-      "type": "string"
-    },
-    "source_branch_event_ref": {
-      "type": "string"
-    },
-    "source_location_mutation_refs": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "source_worldstate_delta_refs": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "affected_branch_ref": {
-      "type": "string"
-    },
-    "affected_location_refs": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "affected_context_channels": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "quest_generation",
-          "npc_synthesis",
-          "realm_site_generation",
-          "encounter_generation",
-          "artifact_eligibility",
-          "creature_eligibility",
-          "creature_pressure",
-          "myth_emergence",
-          "myth_seed_pressure",
-          "lore_visibility",
-          "prophecy_pressure",
-          "perception_overlay",
-          "location_mutation",
-          "faction_reaction",
-          "ability_unlock_pressure",
-          "ability_pressure",
-          "wolf_companion_behavior"
-        ]
-      }
-    },
-    "bias_domains": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "quest_eligibility",
-          "npc_eligibility",
-          "lore_visibility",
-          "artifact_eligibility",
-          "creature_pressure",
-          "myth_seed_pressure",
-          "prophecy_pressure",
-          "location_mutation",
-          "perception_overlay",
-          "ability_pressure"
-        ]
-      }
-    },
-    "expires": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "diagnostic_refs": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "bias_strength": {
-      "type": "number",
-      "minimum": 0,
-      "maximum": 1
-    },
-    "expiration_policy": {
       "type": "string",
-      "enum": [
-        "persistent",
-        "until_resolved",
-        "timeboxed",
-        "realm_local",
-        "player_local",
-        "diagnostic_noop"
-      ]
+      "minLength": 1
     },
-    "authority_boundary": {
+    "source_refs": {
+      "type": "object",
+      "properties": {
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "location_state_record_ref": {
+          "type": "string"
+        },
+        "location_branch_overlay_ref": {
+          "type": "string"
+        },
+        "player_state_snapshot_ref": {
+          "type": "string"
+        },
+        "branch_event_ref": {
+          "type": "string"
+        },
+        "ash_pattern_diagnostic_ref": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "bias_targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "target_system",
+          "bias_kind"
+        ],
+        "properties": {
+          "target_system": {
+            "enum": [
+              "quest_generation",
+              "npc_generation",
+              "lore_generation",
+              "artifact_eligibility",
+              "creature_ecology",
+              "myth_seed",
+              "prophecy_pressure",
+              "location_access",
+              "ability_pressure",
+              "wolf_manifestation",
+              "bloodline_echo",
+              "faction_attention"
+            ]
+          },
+          "bias_kind": {
+            "enum": [
+              "increase_eligibility",
+              "decrease_eligibility",
+              "open_candidate",
+              "close_candidate",
+              "increase_pressure",
+              "decrease_pressure",
+              "mark_deferred"
+            ]
+          },
+          "weight": {
+            "type": "number"
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "validation": {
       "type": "object",
       "required": [
-        "influences_generation_context",
-        "mutates_ash_math"
+        "does_not_materialize_content",
+        "has_worldstate_or_noop_source"
       ],
       "properties": {
-        "influences_generation_context": {
+        "does_not_materialize_content": {
           "const": true
         },
-        "mutates_ash_math": {
-          "const": false
+        "has_worldstate_or_noop_source": {
+          "type": "boolean"
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
-  "forbidden_interpretations": [
-    "bias_as_forced_script",
-    "bias_without_source_event",
-    "bias_without_worldstate_or_branch_context"
-  ]
+  "additionalProperties": false
 }
