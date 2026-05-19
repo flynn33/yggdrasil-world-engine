@@ -1,0 +1,35 @@
+{
+  "schema_id": "ywe.lore_visibility_rule.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Rules controlling when lore becomes visible to a player or branch.",
+  "required_fields": [
+    "visibility_rule_id",
+    "lore_fragment_ref",
+    "required_player_state_refs",
+    "required_location_state_refs",
+    "required_branch_refs",
+    "required_truth_scope",
+    "visibility_mode"
+  ],
+  "optional_fields": [
+    "bloodline_resonance_requirements",
+    "wolf_resonance_requirements",
+    "plane_attunement_requirements",
+    "perception_overlay_requirements"
+  ],
+  "forbidden": [
+    "always_visible_canon_without_scope"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

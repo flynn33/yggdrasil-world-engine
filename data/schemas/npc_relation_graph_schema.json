@@ -1,0 +1,36 @@
+{
+  "schema_id": "ywe.npc_relation_graph.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Relation graph proving why an NPC exists in the current context.",
+  "required_fields": [
+    "relation_graph_id",
+    "nodes",
+    "edges",
+    "primary_relation_kind",
+    "relation_to_player",
+    "relation_to_location",
+    "relation_to_branch",
+    "truth_scope"
+  ],
+  "optional_fields": [
+    "relation_to_faction",
+    "relation_to_quest",
+    "relation_to_lore",
+    "relation_to_axiom_pressure"
+  ],
+  "forbidden": [
+    "empty_relation_graph"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

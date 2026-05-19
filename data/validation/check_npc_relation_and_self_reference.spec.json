@@ -1,0 +1,9 @@
+{
+  "check_id": "check_npc_relation_and_self_reference",
+  "purpose": "Ensure meaningful NPC generation requires relation graph and self-reference classification for conscious NPCs.",
+  "required_fields": [
+    "relation_graph_ref",
+    "self_reference_state_ref"
+  ],
+  "failure_action": "fail_pr"
+}

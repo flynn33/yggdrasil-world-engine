@@ -1,0 +1,66 @@
+{
+  "contract_id": "ywe.phase_12.acceptance_contract",
+  "version": "0.1.0",
+  "phase": 12,
+  "name": "Existential Quest, NPC, and Lore Generation",
+  "acceptance_gates": [
+    {
+      "gate": "12.0",
+      "name": "Phase 11 prerequisite gate",
+      "required": true
+    },
+    {
+      "gate": "12.1",
+      "name": "Required artifact presence",
+      "required": true
+    },
+    {
+      "gate": "12.2",
+      "name": "JSON integrity",
+      "required": true
+    },
+    {
+      "gate": "12.3",
+      "name": "Quest generation guardrails",
+      "required": true
+    },
+    {
+      "gate": "12.4",
+      "name": "NPC generation guardrails",
+      "required": true
+    },
+    {
+      "gate": "12.5",
+      "name": "Lore generation guardrails",
+      "required": true
+    },
+    {
+      "gate": "12.6",
+      "name": "Truth-scope boundaries",
+      "required": true
+    },
+    {
+      "gate": "12.7",
+      "name": "Provenance",
+      "required": true
+    },
+    {
+      "gate": "12.8",
+      "name": "Non-destructive diff",
+      "required": true
+    },
+    {
+      "gate": "12.9",
+      "name": "Handoff report",
+      "required": true
+    }
+  ],
+  "reject_if": [
+    "generic_random_quest_generation",
+    "npc_without_relation_context",
+    "conscious_npc_without_self_reference_classification",
+    "lore_without_pattern_trace",
+    "content_without_truth_scope",
+    "content_without_provenance"
+  ]
+}

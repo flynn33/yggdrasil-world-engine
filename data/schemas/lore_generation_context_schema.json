@@ -1,0 +1,41 @@
+{
+  "schema_id": "ywe.lore_generation_context.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Context packet used to generate lore from pattern trace, branch context, player discovery, location state, and worldstate evidence.",
+  "required_fields": [
+    "context_id",
+    "branch_reality_ref",
+    "player_runtime_state_ref",
+    "location_state_ref",
+    "pattern_trace_ref",
+    "source_worldstate_delta_refs",
+    "axiom_diagnostic_refs",
+    "existence_potential_ref",
+    "truth_scope",
+    "visibility_rule_ref",
+    "provenance"
+  ],
+  "optional_fields": [
+    "npc_testimony_refs",
+    "artifact_refs",
+    "myth_pressure_refs",
+    "prophecy_pressure_refs",
+    "faction_claim_refs"
+  ],
+  "forbidden": [
+    "lore_without_pattern_trace",
+    "random_lore_text_as_canon"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

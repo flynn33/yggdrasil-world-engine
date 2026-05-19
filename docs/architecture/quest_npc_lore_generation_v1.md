@@ -4,7 +4,7 @@ Date: 2026-05-17
 Project: Yggdrasil World Engine
 Status: canonical Phase 12 quest, NPC, and lore generation contract
 
-Phase 8-9 Boundary: DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
+Phase 12 Status: active package authority after Phase 11 acceptance.
 
 ## Purpose
 

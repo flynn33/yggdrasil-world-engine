@@ -1,0 +1,42 @@
+{
+  "schema_id": "ywe.npc_generation_context.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Context packet used to generate meaningful NPC candidates from branch, player, location, relation, axiom, and existence-pressure state.",
+  "required_fields": [
+    "context_id",
+    "branch_reality_ref",
+    "player_runtime_state_ref",
+    "location_state_ref",
+    "worldstate_delta_refs",
+    "axiom_diagnostic_refs",
+    "existence_potential_ref",
+    "pattern_vector_ref",
+    "relation_graph_ref",
+    "truth_scope",
+    "provenance"
+  ],
+  "optional_fields": [
+    "quest_context_refs",
+    "lore_context_refs",
+    "faction_claim_refs",
+    "plane_pressure_refs",
+    "self_reference_state_ref",
+    "asp_diagnostic_refs"
+  ],
+  "forbidden": [
+    "npc_without_relation_context",
+    "npc_spawn_table_as_primary_source"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

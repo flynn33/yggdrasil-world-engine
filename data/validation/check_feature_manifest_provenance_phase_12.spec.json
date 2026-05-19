@@ -1,0 +1,12 @@
+{
+  "check_id": "check_feature_manifest_provenance_phase_12",
+  "purpose": "Ensure generated content candidates require provenance.",
+  "required_fields": [
+    "provenance",
+    "truth_scope",
+    "branch_context_ref",
+    "player_runtime_state_ref",
+    "worldstate_or_location_ref"
+  ],
+  "failure_action": "fail_pr"
+}

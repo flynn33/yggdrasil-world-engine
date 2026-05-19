@@ -1,0 +1,35 @@
+{
+  "schema_id": "ywe.quest_chain_seed.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Seed record for a quest chain derived from existential pressure and prior consequence memory.",
+  "required_fields": [
+    "seed_id",
+    "quest_generation_context_ref",
+    "source_pressure_refs",
+    "initial_stage_kind",
+    "allowed_resolution_modes",
+    "expected_consequence_classes",
+    "downstream_resolver_target",
+    "provenance"
+  ],
+  "optional_fields": [
+    "ravenfall_gate_example_ref",
+    "npc_anchor_refs",
+    "lore_fragment_refs"
+  ],
+  "forbidden": [
+    "static_template_without_runtime_context"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

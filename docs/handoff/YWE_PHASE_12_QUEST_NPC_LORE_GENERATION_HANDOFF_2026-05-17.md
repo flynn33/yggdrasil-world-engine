@@ -5,15 +5,15 @@ Status: `pass`
 Phase: `12`
 Phase Name: `Quest, NPC, and Lore Generation`
 
-DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
-This handoff is retained for owner review only and is not executable authority
-for the active Phase 8-9 remediation branch.
+This earlier Phase 12 handoff is retained as historical scaffold evidence.
+The active Phase 12 acceptance authority is the 2026-05-18 existential quest,
+NPC, and lore generation handoff produced from the owner-approved package.
 
 ## 1. Summary
 
 ```text
 Phase 12 status: pass
-Branch name: codex/phase-12-quest-npc-lore-generation-v1
+Branch name: historical Phase 12 scaffold branch
 Baseline commit: 2fba76c
 Baseline tag: v2.0.9
 Checks run: JSON integrity; Phase 8-9 guardrails; Player Runtime State guardrail; Worldstate Location Mutation guardrail; Quest NPC Lore Generation guardrail; non-destructive diff; full repository validation suite

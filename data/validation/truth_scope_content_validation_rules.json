@@ -1,0 +1,20 @@
+{
+  "ruleset_id": "ywe.phase_12.truth_scope_content_validation_rules",
+  "allowed_truth_scopes": [
+    "base_world_truth",
+    "shared_world_truth",
+    "leaf_branch_truth",
+    "player_perception",
+    "mythic_interpretation",
+    "prophetic_pressure",
+    "faction_claim",
+    "host_materialization"
+  ],
+  "rules": [
+    "perception_does_not_rewrite_shared_truth",
+    "myth_does_not_rewrite_history_without_delta_evidence",
+    "prophecy_does_not_guarantee_scripted_future",
+    "faction_claim_is_not_automatically_truth",
+    "branch_truth_must_not_be_confused_with_base_world_truth"
+  ]
+}

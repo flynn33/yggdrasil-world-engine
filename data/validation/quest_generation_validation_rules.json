@@ -1,0 +1,13 @@
+{
+  "ruleset_id": "ywe.phase_12.quest_generation_validation_rules",
+  "rules": [
+    "require QuestGenerationContext",
+    "require at least one axiom_diagnostic_ref or consequence_pressure_ref",
+    "require branch_reality_ref",
+    "require player_runtime_state_ref",
+    "require location_state_ref",
+    "require truth_scope",
+    "require expected_consequence_classes",
+    "reject generic_random_quest_generation"
+  ]
+}

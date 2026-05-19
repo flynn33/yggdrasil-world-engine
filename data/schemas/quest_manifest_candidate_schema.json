@@ -1,0 +1,43 @@
+{
+  "schema_id": "ywe.quest_manifest_candidate.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Candidate quest manifest emitted by Phase 12 before final quest reward resolution.",
+  "required_fields": [
+    "quest_candidate_id",
+    "quest_kind",
+    "quest_title_policy",
+    "quest_pressure_summary",
+    "source_axiom_pressure_refs",
+    "source_branch_context_refs",
+    "source_player_context_refs",
+    "source_location_context_refs",
+    "source_worldstate_delta_refs",
+    "truth_scope",
+    "resolution_mode_options",
+    "expected_consequence_classes",
+    "content_provenance",
+    "handoff_target"
+  ],
+  "optional_fields": [
+    "npc_candidate_refs",
+    "lore_fragment_refs",
+    "artifact_eligibility_refs",
+    "creature_eligibility_refs"
+  ],
+  "forbidden": [
+    "quest_reward_finalization",
+    "generic_random_quest_generation"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

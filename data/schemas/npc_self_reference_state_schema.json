@@ -1,0 +1,33 @@
+{
+  "schema_id": "ywe.npc_self_reference_state.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Classifies self-reference eligibility for generated NPC candidates.",
+  "required_fields": [
+    "self_reference_state_id",
+    "npc_candidate_ref",
+    "classification",
+    "consciousness_policy",
+    "internal_model_status",
+    "truth_scope"
+  ],
+  "optional_fields": [
+    "fracture_notes",
+    "restoration_quest_refs",
+    "mirror_role_refs"
+  ],
+  "forbidden": [
+    "conscious_npc_without_internal_model_classification"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

@@ -72,7 +72,15 @@ generation bias update foundation.
 | `location_content_eligibility_schema.json` | Phase 11 downstream content eligibility record without content materialization |
 | `location_mutation_history_schema.json` | Phase 11 append-only mutation history |
 | `worldstate_location_mutation_schema.json` | Earlier Phase 11-adjacent packet-spine schema retained for compatibility and historical validation |
-| `quest_npc_lore_generation_schema.json` | DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted. Phase 12 quest chains, NPC manifests, NPC memory deltas, codex lore records, myth records, and social distribution deltas |
+| `quest_npc_lore_generation_schema.json` | Phase 12 quest chains, NPC manifests, NPC memory deltas, lore records, myth records, and social distribution deltas |
+| `quest_generation_context_schema.json` | Phase 12 context packet for quest generation from axiom pressure, branch reality, player state, location state, and worldstate consequences |
+| `npc_generation_context_schema.json` | Phase 12 context packet for NPC generation from branch, relation, location, pattern, and self-reference context |
+| `lore_generation_context_schema.json` | Phase 12 context packet for lore generation from pattern trace, source events, truth scope, and visibility rules |
+| `generated_lore_fragment_schema.json` | Phase 12 generated lore fragment contract with pattern trace, source context, truth scope, visibility, and provenance |
+| `content_generation_provenance_schema.json` | Phase 12 shared provenance spine for generated content candidates |
+| `content_generation_candidate_schema.json` | Phase 12 generic candidate handoff contract for quest, NPC, and lore outputs |
+| `content_manifest_handoff_schema.json` | Phase 12 downstream handoff contract for generated content manifests |
+| `quest_npc_lore_linkage_schema.json` | Phase 12 linkage contract connecting quests, NPC candidates, lore fragments, and shared provenance |
 
 ## Required Provenance
 

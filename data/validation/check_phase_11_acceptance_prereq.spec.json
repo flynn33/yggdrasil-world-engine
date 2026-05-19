@@ -1,0 +1,9 @@
+{
+  "check_id": "check_phase_11_acceptance_prereq",
+  "purpose": "Ensure Phase 11 contracts and schemas exist before Phase 12 is implemented.",
+  "inputs": [
+    "repository_file_tree"
+  ],
+  "required_paths_ref": "payload/data/validation/phase_12_prerequisite_gate.json",
+  "failure_action": "fail_pr_and_stop_phase_12"
+}

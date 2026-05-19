@@ -1,0 +1,38 @@
+{
+  "schema_id": "ywe.content_generation_candidate.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Generic candidate wrapper for Phase 12 content before final handoff.",
+  "required_fields": [
+    "candidate_id",
+    "candidate_kind",
+    "generation_context_ref",
+    "provenance_ref",
+    "truth_scope",
+    "eligibility_gate_ref",
+    "rejection_policy",
+    "handoff_target"
+  ],
+  "optional_fields": [
+    "quest_candidate_ref",
+    "npc_candidate_ref",
+    "lore_fragment_ref",
+    "confidence_score",
+    "risk_flags"
+  ],
+  "forbidden": [
+    "candidate_without_context",
+    "candidate_without_truth_scope"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

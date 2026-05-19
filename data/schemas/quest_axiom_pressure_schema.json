@@ -1,0 +1,38 @@
+{
+  "schema_id": "ywe.quest_axiom_pressure.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Classifies axiom pressure for quest generation.",
+  "required_fields": [
+    "pressure_id",
+    "primary_axiom",
+    "secondary_axioms",
+    "pressure_kind",
+    "severity",
+    "affected_entities",
+    "affected_location_refs",
+    "recommended_quest_verbs",
+    "truth_scope",
+    "provenance"
+  ],
+  "optional_fields": [
+    "existence_potential_ref",
+    "pattern_vector_ref",
+    "branch_event_ref"
+  ],
+  "forbidden": [
+    "axiom_free_quest_pressure",
+    "unclassified_pressure"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

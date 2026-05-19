@@ -1,0 +1,10 @@
+{
+  "check_id": "check_no_generic_random_quest_generation",
+  "purpose": "Reject arbitrary quest generator language or schemas lacking axiom/consequence/context pressure.",
+  "forbidden_patterns": [
+    "generic random quest generator",
+    "random quest table as primary",
+    "quest_without_context"
+  ],
+  "failure_action": "fail_pr"
+}

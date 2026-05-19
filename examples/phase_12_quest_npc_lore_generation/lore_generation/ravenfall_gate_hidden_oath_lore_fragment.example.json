@@ -1,0 +1,27 @@
+{
+  "lore_fragment_id": "lore.ravenfall_gate.hidden_oath_record",
+  "lore_kind": "hidden_oath_record",
+  "pattern_trace_ref": "trace.ravenfall_gate.oath_concealed.shadow_path",
+  "source_axiom_pressure_refs": [
+    "axiom.A1.private_relation_preserved",
+    "axiom.A4.erasure_cost_deferred"
+  ],
+  "source_worldstate_delta_refs": [
+    "delta.ravenfall_gate.oath_concealed"
+  ],
+  "source_branch_refs": [
+    "branch.ravenfall_gate.oath_concealed"
+  ],
+  "source_location_refs": [
+    "location.ravenfall_gate.oath_concealed"
+  ],
+  "truth_scope": "leaf_branch_truth",
+  "visibility_conditions": [
+    "player_branch_oath_concealed",
+    "shadow_attunement_or_dark_wolf_memory_pressure"
+  ],
+  "generated_text_policy": "summarize_from_pattern_trace_not_freeform_canon",
+  "myth_eligibility": "private_myth_seed_candidate",
+  "prophecy_eligibility": "branch_specific_pressure",
+  "provenance": "phase12.example"
+}

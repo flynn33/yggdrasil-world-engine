@@ -1,0 +1,12 @@
+{
+  "ruleset_id": "ywe.phase_12.lore_generation_validation_rules",
+  "rules": [
+    "require LoreGenerationContext",
+    "require pattern_trace_ref",
+    "require truth_scope",
+    "require visibility_rule_ref",
+    "require source_worldstate_delta_refs or source_branch_refs or source_location_refs",
+    "reject random_lore_text_as_canon",
+    "reject lore_rewrites_shared_truth_without_delta"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "schema_id": "ywe.content_generation_provenance.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Common provenance spine for quest, NPC, and lore generation.",
+  "required_fields": [
+    "provenance_id",
+    "cosmology_source_ref",
+    "branch_context_ref",
+    "player_runtime_state_ref",
+    "worldstate_or_location_ref",
+    "existence_potential_ref",
+    "pattern_vector_refs",
+    "truth_scope"
+  ],
+  "optional_fields": [
+    "axiom_diagnostic_refs",
+    "asp_diagnostic_refs",
+    "source_package_refs",
+    "validation_refs"
+  ],
+  "forbidden": [
+    "content_without_provenance"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

@@ -11,9 +11,8 @@ handoff records.
 
 ## Current Handoff Records
 
-Phase 11's owner-approved package has landed as an active review artifact.
-Phase 12 handoff records remain retained for owner review only and are not
-executable authority until the matching package is accepted.
+Phase 11 and Phase 12 owner-approved packages have landed as active review
+artifacts. Earlier adjacent records remain retained for historical review.
 
 | File | Purpose |
 |---|---|
@@ -29,7 +28,8 @@ executable authority until the matching package is accepted.
 | `YWE_PHASE_10_PLAYER_RUNTIME_STATE_HANDOFF_2026-05-17.md` | Phase 10 Player Runtime State v1 handoff |
 | `YWE_PHASE_11_WORLDSTATE_AND_LOCATION_MUTATION_HANDOFF_2026-05-18.md` | Active Phase 11 worldstate and location mutation handoff |
 | `YWE_PHASE_11_WORLDSTATE_LOCATION_MUTATION_HANDOFF_2026-05-17.md` | Earlier Phase 11-adjacent handoff retained for historical review |
-| `YWE_PHASE_12_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-17.md` | Phase 12 quest, NPC, and lore generation handoff |
+| `YWE_PHASE_12_EXISTENTIAL_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-18.md` | Active Phase 12 existential quest, NPC, and lore generation handoff |
+| `YWE_PHASE_12_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-17.md` | Earlier Phase 12-adjacent handoff retained for historical review |
 | `repo_implementation_mapping.md` | Repository implementation mapping |
 | `missing_source_documents.md` | Missing source document inventory |
 
