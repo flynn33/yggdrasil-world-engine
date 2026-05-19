@@ -1,0 +1,35 @@
+{
+  "schema_id": "ywe.quest_npc_lore_linkage.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Linkage record connecting generated quest, NPC, and lore candidates.",
+  "required_fields": [
+    "linkage_id",
+    "quest_candidate_refs",
+    "npc_candidate_refs",
+    "lore_fragment_refs",
+    "shared_context_refs",
+    "shared_provenance_ref",
+    "truth_scope"
+  ],
+  "optional_fields": [
+    "worldstate_delta_refs",
+    "location_overlay_refs",
+    "myth_seed_refs",
+    "prophecy_pressure_refs"
+  ],
+  "forbidden": [
+    "linkage_without_shared_context"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

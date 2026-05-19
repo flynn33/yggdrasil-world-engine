@@ -1,0 +1,21 @@
+{
+  "gate_id": "ywe.phase_12.prerequisite_gate",
+  "requires_phase_11": true,
+  "required_phase_11_artifacts": [
+    "docs/architecture/worldstate_delta_contract.md",
+    "docs/architecture/location_state_resolver_contract.md",
+    "docs/architecture/location_branch_overlay_contract.md",
+    "docs/architecture/location_mutation_rule_contract.md",
+    "docs/architecture/future_generation_bias_contract.md",
+    "docs/architecture/shared_truth_vs_branch_truth_contract.md",
+    "data/schemas/worldstate_delta_packet_schema.json",
+    "data/schemas/location_state_record_schema.json",
+    "data/schemas/location_mutation_rule_schema.json",
+    "data/schemas/location_branch_overlay_schema.json",
+    "data/schemas/location_resolution_context_schema.json",
+    "data/schemas/future_generation_bias_update_schema.json",
+    "data/schemas/truth_scope_schema.json",
+    "data/schemas/consequence_classification_schema.json"
+  ],
+  "on_missing": "stop_and_report"
+}

@@ -15,6 +15,7 @@ SKIP_EXACT = {
     "data/validation/branch_reality_guardrail_rules.json",
     "data/validation/forbidden_player_state_language_patterns.json",
     "data/validation/phase_11_forbidden_language_patterns.json",
+    "data/validation/phase_12_forbidden_language_patterns.json",
     "scripts/check_branch_reality_guardrail.py",
 }
 ALLOWED_CONTEXT_TERMS = {

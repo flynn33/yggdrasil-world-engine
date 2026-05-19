@@ -1,0 +1,34 @@
+{
+  "schema_id": "ywe.content_eligibility_gate.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Eligibility gate for generated quest/NPC/lore content.",
+  "required_fields": [
+    "gate_id",
+    "candidate_kind",
+    "required_context_refs",
+    "required_truth_scope",
+    "required_provenance_refs",
+    "required_validation_rules",
+    "failure_policy"
+  ],
+  "optional_fields": [
+    "minimum_phi_score",
+    "allowed_axiom_pressures",
+    "required_plane_pressure"
+  ],
+  "forbidden": [
+    "gate_without_failure_policy"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

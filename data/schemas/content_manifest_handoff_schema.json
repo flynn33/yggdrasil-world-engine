@@ -1,0 +1,36 @@
+{
+  "schema_id": "ywe.content_manifest_handoff.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Handoff packet from Phase 12 to downstream feature engines.",
+  "required_fields": [
+    "handoff_id",
+    "candidate_refs",
+    "target_engine",
+    "required_downstream_contracts",
+    "truth_scope",
+    "provenance_ref",
+    "status"
+  ],
+  "optional_fields": [
+    "quest_reward_resolver_ref",
+    "npc_engine_ref",
+    "lore_codex_ref",
+    "myth_engine_ref",
+    "prophecy_engine_ref"
+  ],
+  "forbidden": [
+    "handoff_without_target_engine"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

@@ -16,9 +16,9 @@
 | Phase 11 - Worldstate and Location Mutation | passed | Persistent worldstate consequence, scoped location mutation, commit records, diagnostic no-ops, examples, and guardrail check added. |
 | Phase 12 - Quest, NPC, and Lore Generation | passed | Quest-chain, NPC-manifest, NPC-memory, codex-lore, myth-record, social-distribution, examples, and guardrail check added. |
 
-## Phase 8-9 Remediation Boundary Note
+## Phase Boundary Note
 
-DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
-The Phase 11 through Phase 12 rows above remain superseded for the active
-Phase 10 remediation boundary. They are retained as owner-review records only,
-not as acceptance authority for this branch.
+Phase 7 through Phase 12 have owner-approved package records in this repository.
+Earlier Phase 11-adjacent scaffold files are retained as historical validation
+evidence where explicitly marked, but the active acceptance authority now flows
+through the Phase 10, Phase 11, and Phase 12 handoff records listed above.

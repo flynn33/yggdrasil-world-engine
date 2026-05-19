@@ -1,0 +1,13 @@
+{
+  "ruleset_id": "ywe.phase_12.npc_generation_validation_rules",
+  "rules": [
+    "require NPCGenerationContext",
+    "require relation_graph_ref",
+    "require branch_reality_ref or shared_world_context_ref",
+    "require location_state_ref",
+    "require pattern_vector_ref",
+    "require existence_potential_ref",
+    "require self_reference_state_ref for conscious NPCs",
+    "reject npc_spawn_table_as_primary_source"
+  ]
+}

@@ -45,6 +45,14 @@ Phase 11 worldstate and location mutation contracts:
 Phase 12 quest, NPC, and lore generation contract:
 
 - `quest_npc_lore_generation_v1.md` -- Canonical quest-chain, NPC-manifest, NPC-memory, codex-lore, myth-record, and social-distribution generation boundary rules.
+- `quest_generation_from_axioms_contract.md` -- Quest candidate generation from axiom pressure, existence potential, branch reality, player state, location state, and worldstate consequences.
+- `npc_generation_from_branch_context_contract.md` -- NPC candidate generation from branch, player, location, relation, and axiom context.
+- `lore_generation_from_pattern_trace_contract.md` -- Lore fragment generation from pattern trace, source context, truth scope, and visibility rules.
+- `existential_content_generation_integration_map.md` -- Phase 9-11 inputs, Phase 12 content-generation records, and Phase 13+ consumers.
+- `quest_npc_lore_truth_boundary_contract.md` -- Truth-scope boundaries for generated quests, NPC claims, lore fragments, myth, prophecy, and faction claims.
+- `quest_npc_lore_manifest_provenance_contract.md` -- Shared provenance spine for generated content candidates and downstream handoff.
+- `content_generation_acceptance_contract.md` -- Acceptance and rejection conditions for generated content candidates.
+- `axiom_to_content_pressure_map.md` -- A1-A6 pressure mapping into quest, NPC, and lore generation surfaces.
 
 The current controlling authority chain is:
 

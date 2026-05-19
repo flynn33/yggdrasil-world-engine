@@ -62,7 +62,7 @@ run_check "Phase 8-9 Package Boundary Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR
 run_check "Discussion Agent Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/github/discussion_agent.py" --validate-config --root "$ROOT_DIR"
 run_check "Discussion Topic Generator Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/github/discussion_topic_agent.py" --validate-config --root "$ROOT_DIR"
 run_check "Discussion Moderation Validation" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/github/discussion_moderation_agent.py" --validate-config --root "$ROOT_DIR"
-echo "Phase 10 and Phase 11 guardrails are active; Phase 12 guardrails remain deferred artifact integrity checks."
+echo "Phase 10, Phase 11, and Phase 12 guardrails are active."
 run_check "Player Runtime State Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_player_runtime_state.py" "$ROOT_DIR"
 run_check "Worldstate Location Mutation Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_worldstate_location_mutation.py" "$ROOT_DIR"
 run_check "Quest NPC Lore Generation Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_quest_npc_lore_generation.py" "$ROOT_DIR"

@@ -1,0 +1,10 @@
+{
+  "check_id": "check_lore_pattern_trace_provenance",
+  "purpose": "Ensure lore generation requires pattern trace, truth scope, and source refs.",
+  "required_fields": [
+    "pattern_trace_ref",
+    "truth_scope",
+    "source_worldstate_delta_refs"
+  ],
+  "failure_action": "fail_pr"
+}

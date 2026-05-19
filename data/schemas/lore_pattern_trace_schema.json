@@ -1,0 +1,37 @@
+{
+  "schema_id": "ywe.lore_pattern_trace.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Trace evidence from which generated lore may be derived.",
+  "required_fields": [
+    "pattern_trace_id",
+    "trace_kind",
+    "source_event_refs",
+    "source_branch_refs",
+    "source_location_refs",
+    "source_player_action_refs",
+    "pattern_vector_refs",
+    "axiom_pressure_refs",
+    "truth_scope"
+  ],
+  "optional_fields": [
+    "repeat_count",
+    "scale_levels",
+    "myth_eligibility",
+    "prophecy_eligibility"
+  ],
+  "forbidden": [
+    "trace_without_source_refs"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

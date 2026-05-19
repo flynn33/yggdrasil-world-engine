@@ -1,0 +1,12 @@
+{
+  "check_id": "check_no_content_generation_without_context",
+  "purpose": "Ensure content candidate schemas require branch, player, location/worldstate, and provenance context.",
+  "required_contexts": [
+    "branch",
+    "player",
+    "location",
+    "worldstate",
+    "provenance"
+  ],
+  "failure_action": "fail_pr"
+}

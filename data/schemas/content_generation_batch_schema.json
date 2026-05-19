@@ -1,0 +1,33 @@
+{
+  "schema_id": "ywe.content_generation_batch.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Batch record for grouped quest, NPC, and lore candidates generated from the same context.",
+  "required_fields": [
+    "batch_id",
+    "generation_context_refs",
+    "candidate_refs",
+    "shared_provenance_ref",
+    "location_state_ref",
+    "branch_reality_ref",
+    "truth_scope_summary"
+  ],
+  "optional_fields": [
+    "ravenfall_gate_example_refs",
+    "batch_resolution_ref"
+  ],
+  "forbidden": [
+    "batch_without_shared_context"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

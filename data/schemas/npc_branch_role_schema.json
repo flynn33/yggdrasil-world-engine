@@ -1,0 +1,34 @@
+{
+  "schema_id": "ywe.npc_branch_role.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Classifies why an NPC appears in a specific leaf branch reality.",
+  "required_fields": [
+    "branch_role_id",
+    "npc_candidate_ref",
+    "branch_reality_ref",
+    "role_class",
+    "source_branch_event_refs",
+    "worldstate_delta_refs",
+    "location_overlay_refs",
+    "provenance"
+  ],
+  "optional_fields": [
+    "alternate_branch_notes",
+    "celestial_pattern_refs"
+  ],
+  "forbidden": [
+    "branchless_branch_role"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

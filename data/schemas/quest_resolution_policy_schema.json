@@ -1,0 +1,34 @@
+{
+  "schema_id": "ywe.quest_resolution_policy.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Policy describing allowed resolution modes and expected consequence categories for a generated quest.",
+  "required_fields": [
+    "policy_id",
+    "quest_candidate_ref",
+    "allowed_resolution_modes",
+    "required_consequence_packet_types",
+    "diagnostic_noop_allowed",
+    "future_generation_bias_policy",
+    "truth_scope_policy"
+  ],
+  "optional_fields": [
+    "reward_resolver_ref",
+    "ability_pressure_policy"
+  ],
+  "forbidden": [
+    "silent_resolution",
+    "reward_without_consequence_packet"
+  ],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

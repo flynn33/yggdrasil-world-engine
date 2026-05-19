@@ -1,0 +1,19 @@
+{
+  "check_id": "check_non_destructive_diff_phase_12",
+  "purpose": "Reject destructive diffs in Phase 12 PRs.",
+  "forbidden_diff_patterns": [
+    "deleted accepted docs",
+    "deleted schemas",
+    "folder flattening",
+    "mass rewrite",
+    "platform-specific code"
+  ],
+  "budget_ref": "data/validation/phase_12_non_destructive_change_budget.json",
+  "enforced_budget_limits": [
+    "max_existing_files_touched_without_review",
+    "max_existing_file_deletions",
+    "max_directory_renames",
+    "max_copied_paths"
+  ],
+  "failure_action": "fail_pr"
+}

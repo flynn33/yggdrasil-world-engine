@@ -1,0 +1,29 @@
+{
+  "schema_id": "ywe.content_rejection_reason.v1",
+  "schema_version": "0.1.0",
+  "status": "draft_for_phase_12_implementation",
+  "authority": {
+    "game": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "resilience_component": "ASH Pattern System"
+  },
+  "purpose": "Standard rejection reasons for generated content.",
+  "required_fields": [
+    "reason_id",
+    "reason_kind",
+    "description",
+    "failed_requirements",
+    "recommended_fix"
+  ],
+  "optional_fields": [
+    "candidate_ref",
+    "validation_ref"
+  ],
+  "forbidden": [],
+  "validation_notes": [
+    "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
+    "Field names may be adapted to existing repository conventions while preserving semantics.",
+    "Generated content must be provenance-bearing, truth-scoped, and context-derived."
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "check_id": "check_quest_npc_lore_truth_scope",
+  "purpose": "Prevent generated content from collapsing truth scopes.",
+  "forbidden_patterns": [
+    "perception rewrites shared truth",
+    "faction claim is truth",
+    "prophecy guarantees the future",
+    "myth rewrites history without evidence"
+  ],
+  "failure_action": "fail_pr"
+}
