@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -69,16 +70,29 @@ PHASE_12_ACTIVE_PROMOTED_FILES = [
     "scripts/check_quest_npc_lore_generation.py",
 ]
 
-ALLOWED_CONTEXT_TERMS = {
+ALLOWED_CONTEXT_MARKERS = {
     "forbidden",
     "invalid",
     "reject",
+    "rejected",
+    "rejection",
+    "disallow",
+    "disallowed",
+    "prohibit",
+    "prohibited",
+    "should_fail_rules",
+}
+
+DIRECT_NEGATION_PREFIXES = (
     "do not",
     "must not",
-    "not ",
+    "should not",
+    "may not",
     "does not",
     "cannot",
-}
+    "can't",
+    "not",
+)
 
 
 def read_text(path: Path) -> str:
@@ -232,6 +246,47 @@ def git_change_paths(root: Path, errors: list[str]) -> list[tuple[str, str]]:
     for status, path in git_untracked_paths(root):
         paths.setdefault(path, status)
     return [(status, path) for path, status in paths.items()]
+
+
+def classify_change_paths(statuses: list[tuple[str, str]]) -> tuple[list[str], list[str], list[str], list[str]]:
+    deleted: list[str] = []
+    renamed: list[str] = []
+    copied: list[str] = []
+    existing_touched: list[str] = []
+    for status, path in statuses:
+        if status.startswith("A"):
+            continue
+        if status.startswith("D"):
+            deleted.append(path)
+            continue
+        if status.startswith("R"):
+            renamed.append(path)
+            continue
+        if status.startswith("C"):
+            copied.append(path)
+            continue
+        existing_touched.append(path)
+    return deleted, renamed, copied, existing_touched
+
+
+def budget_limit(budget: dict, key: str, default: int) -> int:
+    limits = budget.get("limits")
+    raw_value = limits.get(key, default) if isinstance(limits, dict) else budget.get(key, default)
+    try:
+        return int(raw_value)
+    except (TypeError, ValueError):
+        return default
+
+
+def allowed_forbidden_pattern_context(pattern: str, line: str, context: str) -> bool:
+    lowered_line = line.lower()
+    lowered_context = context.lower()
+    if any(marker in lowered_line or marker in lowered_context for marker in ALLOWED_CONTEXT_MARKERS):
+        return True
+
+    pattern_re = re.escape(pattern.lower())
+    negation_prefix_re = "|".join(re.escape(prefix) for prefix in DIRECT_NEGATION_PREFIXES)
+    return re.search(rf"\b(?:{negation_prefix_re})\b[\w\s\"'`-]{{0,80}}{pattern_re}", lowered_line) is not None
 
 
 def required_fields(defs: dict, record_name: str, errors: list[str]) -> set[str]:
@@ -804,20 +859,30 @@ def check_phase_12_forbidden_patterns(root: Path, errors: list[str]) -> None:
                     if pattern.lower() not in lowered:
                         continue
                     context = "\n".join(lines[max(0, index - 4) : min(len(lines), index + 4)]).lower()
-                    if any(term in context for term in ALLOWED_CONTEXT_TERMS):
+                    if allowed_forbidden_pattern_context(pattern, line, context):
                         continue
                     errors.append(f"Forbidden Phase 12 claim found in {path.relative_to(root).as_posix()}:{index + 1}: {line.strip()}")
 
 
 def check_phase_12_non_destructive_diff(root: Path, errors: list[str]) -> None:
     budget = load_json_checked(root, root / PHASE_12_NON_DESTRUCTIVE_BUDGET, errors)
-    if budget is None:
+    if not isinstance(budget, dict):
         return
-    for status, path in git_change_paths(root, errors):
-        if status.startswith("D"):
-            errors.append(f"Phase 12 non-destructive diff forbids file deletion: {path}")
-        if status.startswith("R"):
-            errors.append(f"Phase 12 non-destructive diff forbids file rename: {path}")
+    deleted, renamed, copied, existing_touched = classify_change_paths(git_change_paths(root, errors))
+
+    max_deleted = budget_limit(budget, "max_existing_file_deletions", 0)
+    max_renamed = budget_limit(budget, "max_directory_renames", 0)
+    max_copied = budget_limit(budget, "max_copied_paths", 0)
+    max_touched = budget_limit(budget, "max_existing_files_touched_without_review", 25)
+
+    require(len(deleted) <= max_deleted, f"Phase 12 file deletions exceed budget {max_deleted}: {deleted}", errors)
+    require(len(renamed) <= max_renamed, f"Phase 12 renamed paths exceed budget {max_renamed}: {renamed}", errors)
+    require(len(copied) <= max_copied, f"Phase 12 copied paths exceed budget {max_copied}: {copied}", errors)
+    require(
+        len(existing_touched) <= max_touched,
+        f"Phase 12 existing files touched exceed budget {max_touched}: {len(existing_touched)}",
+        errors,
+    )
 
 
 def check_phase_12_promoted_boundary(root: Path, errors: list[str]) -> None:

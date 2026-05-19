@@ -8,5 +8,12 @@
     "mass rewrite",
     "platform-specific code"
   ],
+  "budget_ref": "data/validation/phase_12_non_destructive_change_budget.json",
+  "enforced_budget_limits": [
+    "max_existing_files_touched_without_review",
+    "max_existing_file_deletions",
+    "max_directory_renames",
+    "max_copied_paths"
+  ],
   "failure_action": "fail_pr"
 }
