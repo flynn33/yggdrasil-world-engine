@@ -4,6 +4,8 @@
   "inputs": [
     "repository_file_tree"
   ],
-  "required_paths_ref": "data/validation/phase_12_prerequisite_gate.json",
+  "required_repository_paths": [
+    "data/validation/phase_12_prerequisite_gate.json"
+  ],
   "failure_action": "fail_pr_and_stop_phase_12"
 }

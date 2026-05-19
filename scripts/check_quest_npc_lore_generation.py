@@ -70,7 +70,7 @@ PHASE_12_ACTIVE_PROMOTED_FILES = [
     "scripts/check_quest_npc_lore_generation.py",
 ]
 
-ALLOWED_CONTEXT_MARKERS = {
+ALLOWED_LINE_MARKERS = {
     "forbidden",
     "invalid",
     "reject",
@@ -278,10 +278,9 @@ def budget_limit(budget: dict, key: str, default: int) -> int:
         return default
 
 
-def allowed_forbidden_pattern_context(pattern: str, line: str, context: str) -> bool:
+def allowed_forbidden_pattern_reference(pattern: str, line: str) -> bool:
     lowered_line = line.lower()
-    lowered_context = context.lower()
-    if any(marker in lowered_line or marker in lowered_context for marker in ALLOWED_CONTEXT_MARKERS):
+    if any(marker in lowered_line for marker in ALLOWED_LINE_MARKERS):
         return True
 
     pattern_re = re.escape(pattern.lower())
@@ -604,6 +603,26 @@ def check_phase_12_json_integrity(root: Path, errors: list[str]) -> None:
         load_json_checked(root, path, errors)
 
 
+def check_phase_12_check_spec_references(root: Path, errors: list[str]) -> None:
+    scalar_path_keys = ("budget_ref",)
+    list_path_keys = ("required_repository_paths",)
+    for path_name in PHASE_12_CHECK_SPECS:
+        spec = load_json_checked(root, root / path_name, errors)
+        if not isinstance(spec, dict):
+            continue
+        for key in scalar_path_keys:
+            ref = spec.get(key)
+            if isinstance(ref, str):
+                require((root / ref).is_file(), f"{path_name} {key} does not resolve to a repository file: {ref}", errors)
+        for key in list_path_keys:
+            refs = spec.get(key, [])
+            if not isinstance(refs, list) or not all(isinstance(ref, str) for ref in refs):
+                errors.append(f"{path_name} {key} must be a list of repository-relative paths.")
+                continue
+            for ref in refs:
+                require((root / ref).is_file(), f"{path_name} {key} entry does not resolve to a repository file: {ref}", errors)
+
+
 def check_phase_12_code_agnostic_schemas(root: Path, errors: list[str]) -> None:
     expected_fields = {
         "data/schemas/quest_generation_context_schema.json": {
@@ -858,8 +877,7 @@ def check_phase_12_forbidden_patterns(root: Path, errors: list[str]) -> None:
                 for pattern in patterns:
                     if pattern.lower() not in lowered:
                         continue
-                    context = "\n".join(lines[max(0, index - 4) : min(len(lines), index + 4)]).lower()
-                    if allowed_forbidden_pattern_context(pattern, line, context):
+                    if allowed_forbidden_pattern_reference(pattern, line):
                         continue
                     errors.append(f"Forbidden Phase 12 claim found in {path.relative_to(root).as_posix()}:{index + 1}: {line.strip()}")
 
@@ -924,6 +942,7 @@ def main() -> int:
     check_phase_11_prerequisite(root, errors)
     check_phase_12_required_artifacts(root, errors)
     check_phase_12_json_integrity(root, errors)
+    check_phase_12_check_spec_references(root, errors)
     check_phase_12_code_agnostic_schemas(root, errors)
     check_phase_12_contract_terms(root, errors)
     check_phase_12_examples(root, errors)

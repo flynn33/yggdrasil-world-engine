@@ -128,7 +128,7 @@ but it cannot force a fixed future or bypass player choice.
 | Mutation Source | Allowed Scope | Rejected Scope |
 |---|---|---|
 | Narrative Engine | Identity phase, memory refs, unresolved tension refs, runtime deltas | ASH math, fixed realm ontology |
-| Runtime Cosmology Contracts | Branch refs, branch-generation context refs, branch event refs | Pre-generated branch trees or base ontology mutation |
+| Runtime Cosmology Contracts | Branch refs, branch-generation context refs, branch event refs | Rejected: pre-generated branch trees or base ontology mutation |
 | Realm Engine | Realm-law context, threshold eligibility, active realm-form support | Player destiny, narrative memory |
 | Perception Engine | Player-specific overlay refs and perception persistence refs | Shared world truth rewrites |
 | Quest Engine | Quest resolution refs and approved consequence payloads | Direct player-state writes without a delta |
