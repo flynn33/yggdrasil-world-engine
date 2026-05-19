@@ -5,6 +5,20 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.14] — 2026-05-19
+
+### Added
+- Merge pull request #51 from flynn33/codex/phase-12-existential-quest-npc-lore
+- Address Phase 12 review comments
+- Implement Phase 12 quest NPC lore generation
+
+### Fixed
+- Tighten Phase 12 review fixes
+
+
+---
+
+
 ## [2.0.13] — 2026-05-19
 
 ### Added
