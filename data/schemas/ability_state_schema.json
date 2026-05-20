@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_state_schema.json",
+  "title": "AbilityState",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_state.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "ability_id": {
+      "type": "string"
+    },
+    "player_ref": {
+      "type": "object",
+      "description": "Player runtime state reference",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "current_state": {
+      "type": "string",
+      "enum": [
+        "latent",
+        "pressured",
+        "eligible",
+        "unlocked",
+        "unstable",
+        "coherent",
+        "mastered",
+        "transformed",
+        "decohered",
+        "sealed"
+      ]
+    },
+    "state_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Ability progression event reference",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Ability source reference",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      },
+      "minItems": 1
+    },
+    "branch_scope_ref": {
+      "type": "object",
+      "description": "Leaf branch scope reference",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "coherence": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "number"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "sealed_reason_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Seal reason reference",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "ability_id",
+    "current_state",
+    "source_refs"
+  ]
+}

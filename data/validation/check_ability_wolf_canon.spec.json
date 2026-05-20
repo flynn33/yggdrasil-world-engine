@@ -1,0 +1,20 @@
+{
+  "check_id": "check_ability_wolf_canon",
+  "description": "Verify wolf-linked abilities preserve companion canon.",
+  "recommended_trigger": "pull_request",
+  "inputs": [
+    "docs",
+    "data",
+    "examples"
+  ],
+  "failure_conditions": [
+    "wolf as meter only",
+    "wolf companion presence missing in wolf-linked ability",
+    "wolf death cost"
+  ],
+  "output": [
+    "pass",
+    "fail",
+    "blocked"
+  ]
+}

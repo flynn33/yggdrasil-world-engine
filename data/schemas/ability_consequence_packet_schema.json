@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_consequence_packet_schema.json",
+  "title": "AbilityConsequencePacket",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_consequence_packet.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "packet_id": {
+      "type": "string"
+    },
+    "ability_id": {
+      "type": "string"
+    },
+    "use_context_ref": {
+      "type": "object",
+      "description": "Reference object",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "consequence_kinds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "worldstate_delta",
+          "diagnostic_noop",
+          "player_state_update",
+          "location_mutation_candidate",
+          "future_generation_bias",
+          "quest_progress_signal",
+          "npc_relationship_change",
+          "myth_seed_candidate",
+          "prophecy_pressure_update",
+          "wolf_coherence_event",
+          "ability_state_update"
+        ]
+      },
+      "minItems": 1
+    },
+    "worldstate_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "player_state_update_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "wolf_coherence_event_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "future_generation_bias_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "diagnostic_noop_ref": {
+      "type": "object",
+      "description": "Diagnostic no-op reference",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "packet_id",
+    "ability_id",
+    "use_context_ref",
+    "consequence_kinds"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "schema_id": "ywe.ability_use_context.v1",
+  "schema_version": "0.1.0",
+  "use_context_id": "combat.dark_anchor.ravenfall",
+  "ability_id": "ability.grave_anchor",
+  "use_mode": "combat",
+  "player_ref": {
+    "ref_id": "player.current"
+  },
+  "branch_ref": {
+    "ref_id": "branch.ravenfall.conceal_oath"
+  },
+  "location_ref": {
+    "ref_id": "location.ravenfall_gate"
+  },
+  "target_refs": [
+    {
+      "ref_id": "encounter.threshold_intrusion"
+    }
+  ],
+  "wolf_companion_refs": [
+    {
+      "ref_id": "wolf.dark.current",
+      "ref_type": "DarkWolfCompanion"
+    }
+  ],
+  "source_refs": [
+    {
+      "ref_id": "ability.grave_anchor.manifest"
+    }
+  ],
+  "expected_consequence_kinds": [
+    "worldstate_delta",
+    "wolf_coherence_event"
+  ]
+}

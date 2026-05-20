@@ -1,0 +1,18 @@
+{
+  "schema_id": "ywe.ability_wolf_synergy.v1",
+  "schema_version": "0.1.0",
+  "synergy_id": "synergy.twin_threshold_step",
+  "ability_id": "ability.twin_threshold_step",
+  "wolf_scope": "twin_wolves",
+  "companion_presence_required": true,
+  "synergy_description": "Both wolves assist by holding complementary sides of the threshold: revelation and containment, not morality.",
+  "not_morality_system": true,
+  "decoherence_risk_ref": {
+    "ref_id": "risk.twin_threshold_step.decoherence"
+  },
+  "recovery_path_refs": [
+    {
+      "ref_id": "recovery.rest_at_stable_threshold"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "check_id": "check_required_phase_14_contracts",
+  "description": "Verify required Phase 14 artifacts exist.",
+  "recommended_trigger": "pull_request",
+  "inputs": [
+    "docs/architecture",
+    "data/schemas",
+    "data/validation"
+  ],
+  "failure_conditions": [
+    "missing required architecture doc",
+    "missing required schema",
+    "missing validation file"
+  ],
+  "output": [
+    "pass",
+    "fail",
+    "blocked"
+  ]
+}

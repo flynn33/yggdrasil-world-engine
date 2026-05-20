@@ -1,0 +1,19 @@
+{
+  "check_id": "check_ability_combat_quest_use",
+  "description": "Verify ability contracts include combat and quest use support.",
+  "recommended_trigger": "pull_request",
+  "inputs": [
+    "docs/architecture",
+    "data/schemas"
+  ],
+  "failure_conditions": [
+    "major ability no combat use",
+    "major ability no quest use",
+    "wolf-linked ability no companion assist semantics"
+  ],
+  "output": [
+    "pass",
+    "fail",
+    "blocked"
+  ]
+}

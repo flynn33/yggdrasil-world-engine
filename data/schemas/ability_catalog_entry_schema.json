@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_catalog_entry_schema.json",
+  "title": "AbilityCatalogEntry",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_catalog_entry.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "ability_id": {
+      "type": "string"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "family": {
+      "type": "string"
+    },
+    "source_categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "plane_attunement",
+          "lineage_resonance",
+          "bloodline_resonance",
+          "wolf_companion_state",
+          "leaf_branch_history",
+          "branch_event",
+          "worldstate_delta",
+          "location_threshold_event",
+          "quest_resolution",
+          "artifact_binding",
+          "myth_participation",
+          "prophecy_exposure",
+          "celestial_identity_progression",
+          "existence_potential_shift",
+          "pattern_vector_shift",
+          "asp_diagnostic",
+          "recovery_event"
+        ]
+      },
+      "minItems": 1
+    },
+    "supported_use_modes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "combat",
+          "quest",
+          "exploration",
+          "perception",
+          "social",
+          "recovery_or_containment",
+          "ritual",
+          "threshold_traversal"
+        ]
+      },
+      "minItems": 1
+    },
+    "initial_state": {
+      "type": "string",
+      "enum": [
+        "latent",
+        "pressured",
+        "eligible",
+        "unlocked",
+        "unstable",
+        "coherent",
+        "mastered",
+        "transformed",
+        "decohered",
+        "sealed"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "ability_id",
+    "display_name",
+    "source_categories",
+    "supported_use_modes"
+  ]
+}

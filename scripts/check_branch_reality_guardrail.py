@@ -18,6 +18,8 @@ SKIP_EXACT = {
     "data/validation/github_checks_matrix.json",
     "data/validation/phase_11_forbidden_language_patterns.json",
     "data/validation/phase_12_forbidden_language_patterns.json",
+    "data/validation/phase_14_forbidden_language_patterns.json",
+    "data/validation/check_no_wolf_morality_ability_drift.spec.json",
     "scripts/check_branch_reality_guardrail.py",
 }
 ALLOWED_CONTEXT_TERMS = {

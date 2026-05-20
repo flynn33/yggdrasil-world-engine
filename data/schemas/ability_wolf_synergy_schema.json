@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_wolf_synergy_schema.json",
+  "title": "AbilityWolfSynergy",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_wolf_synergy.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "synergy_id": {
+      "type": "string"
+    },
+    "ability_id": {
+      "type": "string"
+    },
+    "wolf_scope": {
+      "type": "string",
+      "enum": [
+        "white_wolf",
+        "dark_wolf",
+        "twin_wolves",
+        "none"
+      ]
+    },
+    "companion_presence_required": {
+      "type": "boolean"
+    },
+    "synergy_description": {
+      "type": "string"
+    },
+    "not_morality_system": {
+      "type": "boolean"
+    },
+    "decoherence_risk_ref": {
+      "type": "object",
+      "description": "Reference object",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "recovery_path_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "synergy_id",
+    "ability_id",
+    "wolf_scope",
+    "not_morality_system"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "check_id": "check_no_generic_skill_tree",
+  "description": "Block generic XP/class/currency-only unlocks.",
+  "recommended_trigger": "pull_request",
+  "inputs": [
+    "docs",
+    "data",
+    "examples"
+  ],
+  "failure_conditions": [
+    "XP-only unlock",
+    "class-only unlock",
+    "skill point purchase only"
+  ],
+  "output": [
+    "pass",
+    "fail",
+    "blocked"
+  ]
+}

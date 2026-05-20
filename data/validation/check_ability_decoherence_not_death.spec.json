@@ -1,0 +1,20 @@
+{
+  "check_id": "check_ability_decoherence_not_death",
+  "description": "Verify ability risks use decoherence/recovery not wolf death.",
+  "recommended_trigger": "pull_request",
+  "inputs": [
+    "docs",
+    "data",
+    "examples"
+  ],
+  "failure_conditions": [
+    "permanent wolf death",
+    "kill wolf",
+    "unrecoverable wolf loss"
+  ],
+  "output": [
+    "pass",
+    "fail",
+    "blocked"
+  ]
+}

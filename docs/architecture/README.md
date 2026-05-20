@@ -63,6 +63,22 @@ Phase 12 quest, NPC, and lore generation contract:
 - `content_generation_acceptance_contract.md` -- Acceptance and rejection conditions for generated content candidates.
 - `axiom_to_content_pressure_map.md` -- A1-A6 pressure mapping into quest, NPC, and lore generation surfaces.
 
+Phase 14 ability and power engine contracts:
+
+- `ability_power_engine_contract.md` -- Ability emergence, unlock, stabilization, transformation, decoherence, and consequence boundary.
+- `ability_unlock_pressure_contract.md` -- Unlock pressure from branch history, worldstate consequences, lineage, plane attunement, wolf state, artifacts, myth, and prophecy exposure.
+- `ability_source_model_contract.md` -- Required source provenance for every meaningful ability.
+- `ability_state_progression_contract.md` -- Ability state progression, recoverable decoherence, and state update packet boundaries.
+- `ability_manifestation_contract.md` -- Manifestation modes and safe runtime handoff rules.
+- `ability_consequence_integration_contract.md` -- AbilityConsequencePacket requirements for meaningful use.
+- `ability_wolf_companion_integration_contract.md` -- Wolf-linked ability integration while preserving embodied companion canon.
+- `ability_combat_and_quest_use_contract.md` -- Combat and quest-use surfaces without platform runtime implementation.
+- `ability_branch_reality_integration_contract.md` -- Leaf-branch influence rules for abilities.
+- `ability_lineage_and_plane_integration_contract.md` -- Lineage, bloodline, and plane-attunement ability links.
+- `ability_artifact_myth_prophecy_integration_contract.md` -- Artifact binding, myth participation, and prophecy pressure links.
+- `ability_safety_and_decoherence_contract.md` -- Safety, recovery, and decoherence handling.
+- `ability_engine_integration_map.md` -- Phase 10-12 inputs, Phase 14 records, and Phase 15 handoff packets.
+
 The current controlling authority chain is:
 
 ```text

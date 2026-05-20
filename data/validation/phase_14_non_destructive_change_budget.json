@@ -1,0 +1,20 @@
+{
+  "budget_id": "ywe.phase14.non_destructive_change_budget",
+  "allowed": {
+    "new_phase14_contracts": true,
+    "new_phase14_schemas": true,
+    "new_phase14_validation_rules": true,
+    "small_references_in_existing_docs": true
+  },
+  "requires_manual_review": [
+    "deleting files",
+    "renaming directories",
+    "rewriting master spec extensively",
+    "modifying Phase 8-13 accepted contracts beyond references"
+  ],
+  "forbidden": [
+    "destructive git commands",
+    "blind global find/replace",
+    "copying package-level templates into repo"
+  ]
+}

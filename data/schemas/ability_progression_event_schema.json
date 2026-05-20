@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_progression_event_schema.json",
+  "title": "AbilityProgressionEvent",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_progression_event.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "event_id": {
+      "type": "string"
+    },
+    "ability_id": {
+      "type": "string"
+    },
+    "from_state": {
+      "type": "string",
+      "enum": [
+        "latent",
+        "pressured",
+        "eligible",
+        "unlocked",
+        "unstable",
+        "coherent",
+        "mastered",
+        "transformed",
+        "decohered",
+        "sealed",
+        "none"
+      ]
+    },
+    "to_state": {
+      "type": "string",
+      "enum": [
+        "latent",
+        "pressured",
+        "eligible",
+        "unlocked",
+        "unstable",
+        "coherent",
+        "mastered",
+        "transformed",
+        "decohered",
+        "sealed"
+      ]
+    },
+    "trigger_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      },
+      "minItems": 1
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      },
+      "minItems": 1
+    },
+    "consequence_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "diagnostic_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "event_id",
+    "ability_id",
+    "from_state",
+    "to_state",
+    "trigger_refs"
+  ]
+}

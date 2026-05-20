@@ -1,0 +1,22 @@
+{
+  "check_id": "check_no_wolf_morality_ability_drift",
+  "description": "Block White=good/Dark=evil ability drift.",
+  "recommended_trigger": "pull_request",
+  "inputs": [
+    "docs",
+    "data",
+    "examples"
+  ],
+  "failure_conditions": [
+    "White Wolf = good",
+    "Dark Wolf = evil",
+    "wolf morality meter",
+    "corruption meter",
+    "purity meter"
+  ],
+  "output": [
+    "pass",
+    "fail",
+    "blocked"
+  ]
+}

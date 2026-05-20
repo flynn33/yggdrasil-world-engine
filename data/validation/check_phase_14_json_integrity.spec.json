@@ -1,0 +1,19 @@
+{
+  "check_id": "check_phase_14_json_integrity",
+  "description": "Verify Phase 14 JSON parses.",
+  "recommended_trigger": "pull_request",
+  "inputs": [
+    "data/schemas",
+    "data/validation",
+    "examples/ability_power_engine"
+  ],
+  "failure_conditions": [
+    "invalid JSON",
+    "schema_id missing"
+  ],
+  "output": [
+    "pass",
+    "fail",
+    "blocked"
+  ]
+}

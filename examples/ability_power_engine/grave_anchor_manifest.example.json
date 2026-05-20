@@ -1,0 +1,55 @@
+{
+  "schema_id": "ywe.ability_manifest.v1",
+  "schema_version": "0.1.0",
+  "ability_id": "ability.grave_anchor",
+  "display_name": "Grave-Anchor",
+  "description": "The Dark Wolf braces beside the player and anchors a hostile force or collapsing threshold without moral polarity.",
+  "ability_family": "containment_anchor",
+  "state_ref": {
+    "ref_id": "ability.grave_anchor.state",
+    "ref_type": "AbilityState"
+  },
+  "source_refs": [
+    {
+      "ref_id": "dark_wolf.anchor.event",
+      "ref_type": "WolfGuidanceEvent",
+      "source_system": "twin_wolf_companion"
+    },
+    {
+      "ref_id": "plane.shadow_etheric.pressure",
+      "ref_type": "PlaneAttunementState",
+      "source_system": "player_runtime"
+    },
+    {
+      "ref_id": "ravenfall_gate.threshold_instability",
+      "ref_type": "LocationStateRecord",
+      "source_system": "location_state"
+    }
+  ],
+  "use_modes": [
+    "combat",
+    "quest",
+    "recovery_or_containment"
+  ],
+  "manifestation_rule_refs": [
+    {
+      "ref_id": "ability.grave_anchor.manifestation_rule",
+      "ref_type": "AbilityManifestationRule"
+    }
+  ],
+  "risk_profile_ref": {
+    "ref_id": "ability.grave_anchor.risk",
+    "ref_type": "AbilityRiskProfile"
+  },
+  "consequence_policy_ref": {
+    "ref_id": "ability.grave_anchor.consequence_policy",
+    "ref_type": "AbilityConsequencePacket"
+  },
+  "wolf_scope": "dark_wolf",
+  "forbidden_interpretations": [
+    "generic_skill_tree_reward",
+    "wolf_morality_meter",
+    "white_good_dark_evil",
+    "permanent_wolf_death_cost"
+  ]
+}

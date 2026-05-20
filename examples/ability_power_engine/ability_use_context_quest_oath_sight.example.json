@@ -1,0 +1,35 @@
+{
+  "schema_id": "ywe.ability_use_context.v1",
+  "schema_version": "0.1.0",
+  "use_context_id": "quest.oath_sight.inspect_buried_oath",
+  "ability_id": "ability.oath_sight",
+  "use_mode": "quest",
+  "player_ref": {
+    "ref_id": "player.current"
+  },
+  "branch_ref": {
+    "ref_id": "branch.ravenfall.initial"
+  },
+  "location_ref": {
+    "ref_id": "location.ravenfall_gate"
+  },
+  "target_refs": [
+    {
+      "ref_id": "object.buried_oath"
+    }
+  ],
+  "wolf_companion_refs": [
+    {
+      "ref_id": "wolf.white.current"
+    }
+  ],
+  "source_refs": [
+    {
+      "ref_id": "quest.buried_oath.context"
+    }
+  ],
+  "expected_consequence_kinds": [
+    "quest_progress_signal",
+    "future_generation_bias"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_permission_gate_schema.json",
+  "title": "AbilityPermissionGate",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_permission_gate.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "gate_id": {
+      "type": "string"
+    },
+    "ability_id": {
+      "type": "string"
+    },
+    "required_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "blocked_by_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "gate_result": {
+      "type": "string",
+      "enum": [
+        "allow",
+        "deny",
+        "defer",
+        "requires_recovery",
+        "requires_branch_context"
+      ]
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "gate_id",
+    "ability_id",
+    "gate_result"
+  ]
+}

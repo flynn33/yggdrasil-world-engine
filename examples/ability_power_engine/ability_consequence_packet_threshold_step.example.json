@@ -1,0 +1,35 @@
+{
+  "schema_id": "ywe.ability_consequence_packet.v1",
+  "schema_version": "0.1.0",
+  "packet_id": "ability_consequence.twin_threshold_step.ravenfall",
+  "ability_id": "ability.twin_threshold_step",
+  "use_context_ref": {
+    "ref_id": "use.threshold_step.ravenfall"
+  },
+  "consequence_kinds": [
+    "worldstate_delta",
+    "future_generation_bias",
+    "wolf_coherence_event",
+    "ability_state_update"
+  ],
+  "worldstate_delta_refs": [
+    {
+      "ref_id": "delta.ravenfall.threshold_crossed"
+    }
+  ],
+  "player_state_update_refs": [
+    {
+      "ref_id": "player_update.threshold_step"
+    }
+  ],
+  "wolf_coherence_event_refs": [
+    {
+      "ref_id": "wolf_event.twin_coherence_strain"
+    }
+  ],
+  "future_generation_bias_refs": [
+    {
+      "ref_id": "bias.ravenfall.threshold_routes"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "check_id": "check_non_destructive_diff_phase_14",
+  "description": "Verify Phase 14 diff is conservative.",
+  "recommended_trigger": "pull_request",
+  "inputs": [
+    "git diff",
+    "repository tree"
+  ],
+  "failure_conditions": [
+    "deleted accepted Phase 8-13 artifacts",
+    "large unrelated rewrite",
+    "package templates copied into repo",
+    "destructive directory flattening"
+  ],
+  "output": [
+    "pass",
+    "fail",
+    "blocked"
+  ]
+}

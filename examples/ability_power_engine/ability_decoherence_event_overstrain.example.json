@@ -1,0 +1,28 @@
+{
+  "schema_id": "ywe.ability_decoherence_state.v1",
+  "schema_version": "0.1.0",
+  "decoherence_id": "decoherence.twin_threshold_step.overstrain",
+  "affected_ref": {
+    "ref_id": "ability.twin_threshold_step"
+  },
+  "affected_kind": "ability",
+  "cause_refs": [
+    {
+      "ref_id": "use.threshold_step.overstrained"
+    }
+  ],
+  "temporary": true,
+  "recovery_condition_refs": [
+    {
+      "ref_id": "condition.location_stabilized"
+    },
+    {
+      "ref_id": "condition.wolves_recohere"
+    }
+  ],
+  "forbidden_interpretations": [
+    "permanent_wolf_death",
+    "punishment_for_evil",
+    "corruption_meter"
+  ]
+}

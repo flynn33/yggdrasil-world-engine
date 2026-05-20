@@ -1,0 +1,19 @@
+{
+  "check_id": "check_source_truth_remediation_prereq",
+  "description": "Verify source-of-truth remediation landed before Phase 14.",
+  "recommended_trigger": "pull_request",
+  "inputs": [
+    "docs/architecture",
+    "data/validation"
+  ],
+  "failure_conditions": [
+    "ASH Model foundation contract missing",
+    "ASH Pattern System component role missing",
+    "Where Ravens Wait game layer separation missing"
+  ],
+  "output": [
+    "pass",
+    "fail",
+    "blocked"
+  ]
+}

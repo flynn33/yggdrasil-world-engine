@@ -1,0 +1,56 @@
+{
+  "schema_id": "ywe.ability_manifest.v1",
+  "schema_version": "0.1.0",
+  "ability_id": "ability.twin_threshold_step",
+  "display_name": "Twin Threshold Step",
+  "description": "Both wolves circle the player to stabilize a partial threshold crossing between branch-local realities.",
+  "ability_family": "threshold_traversal",
+  "state_ref": {
+    "ref_id": "ability.twin_threshold_step.state",
+    "ref_type": "AbilityState"
+  },
+  "source_refs": [
+    {
+      "ref_id": "twin_wolf.coherence.bind_oath",
+      "ref_type": "TwinWolfState",
+      "source_system": "twin_wolf_companion"
+    },
+    {
+      "ref_id": "branch.ravenfall.bound_oath",
+      "ref_type": "LeafBranchRealityState",
+      "source_system": "branch_reality"
+    },
+    {
+      "ref_id": "location.ravenfall.threshold_partially_awakened",
+      "ref_type": "LocationStateRecord",
+      "source_system": "location_state"
+    }
+  ],
+  "use_modes": [
+    "exploration",
+    "quest",
+    "combat",
+    "threshold_traversal"
+  ],
+  "manifestation_rule_refs": [
+    {
+      "ref_id": "ability.twin_threshold_step.manifestation_rule",
+      "ref_type": "AbilityManifestationRule"
+    }
+  ],
+  "risk_profile_ref": {
+    "ref_id": "ability.twin_threshold_step.risk",
+    "ref_type": "AbilityRiskProfile"
+  },
+  "consequence_policy_ref": {
+    "ref_id": "ability.twin_threshold_step.consequence_policy",
+    "ref_type": "AbilityConsequencePacket"
+  },
+  "wolf_scope": "twin_wolves",
+  "forbidden_interpretations": [
+    "generic_skill_tree_reward",
+    "wolf_morality_meter",
+    "white_good_dark_evil",
+    "permanent_wolf_death_cost"
+  ]
+}

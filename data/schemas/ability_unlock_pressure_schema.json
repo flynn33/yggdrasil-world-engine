@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_unlock_pressure_schema.json",
+  "title": "AbilityUnlockPressure",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_unlock_pressure.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "ability_id": {
+      "type": "string"
+    },
+    "player_ref": {
+      "type": "object",
+      "description": "Reference object",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "pressure_score": {
+      "type": "number"
+    },
+    "pressure_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Ability source reference",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      },
+      "minItems": 1
+    },
+    "pressure_breakdown": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "eligibility_state": {
+      "type": "string",
+      "enum": [
+        "none",
+        "latent",
+        "pressured",
+        "eligible",
+        "unstable",
+        "blocked"
+      ]
+    },
+    "blocking_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "recommended_state_transition": {
+      "type": "string",
+      "enum": [
+        "latent",
+        "pressured",
+        "eligible",
+        "unlocked",
+        "unstable",
+        "coherent",
+        "mastered",
+        "transformed",
+        "decohered",
+        "sealed",
+        "no_change"
+      ]
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "ability_id",
+    "pressure_score",
+    "pressure_sources"
+  ]
+}
