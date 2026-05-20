@@ -6,6 +6,14 @@ import os
 import sys
 
 
+def ash_layer_set(ash_model, errors):
+    layers = ash_model.get("layers", [])
+    if not isinstance(layers, list) or not all(isinstance(layer, str) for layer in layers):
+        errors.append("ASH Model violation: cosmology schema layers must be a list of strings")
+        return None
+    return set(layers)
+
+
 def check_realm_count(root):
     """Verify exactly nine canonical realms exist."""
     realms_path = os.path.join(root, "data", "realm_registry", "realms.json")
@@ -84,10 +92,8 @@ def check_cosmology_schema(root):
     if ash_model.get("engine_framework_foundation") is not True:
         errors.append("ASH Model violation: cosmology schema must mark the ASH Model as engine framework foundation")
     required_layers = {"archetype", "symbolic", "harmonic"}
-    layers = ash_model.get("layers", [])
-    if not isinstance(layers, list) or not all(isinstance(layer, str) for layer in layers):
-        errors.append("ASH Model violation: cosmology schema layers must be a list of strings")
-    elif set(layers) != required_layers:
+    layers = ash_layer_set(ash_model, errors)
+    if layers is not None and layers != required_layers:
         errors.append("ASH Model violation: cosmology schema must preserve archetype, symbolic, and harmonic layers")
 
     framework = data.get("engine_cosmology_framework", {})

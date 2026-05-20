@@ -53,12 +53,15 @@ FORBIDDEN_CONTEXT_HEADINGS = {
     "superseded",
 }
 
-DIRECT_NEGATION_CONTEXT_MARKERS = {
-    "does not introduce",
-    "does not treat",
-    "is not the",
-    "is not a",
-    "must not",
+NON_DESTRUCTIVE_SPEC_KEYS = {
+    "fail_on_deleted_protected_paths",
+    "max_deleted_files",
+    "max_directory_renames",
+    "max_files_deleted_without_human_review",
+    "max_files_modified_without_human_review",
+    "max_modified_files_without_review",
+    "max_renamed_files",
+    "protected_paths",
 }
 
 
@@ -135,22 +138,30 @@ def check_required_language(root: Path, errors: list[str]) -> None:
     if isinstance(wolf_rules, dict):
         for phrase in wolf_rules.get("required_canon_phrases", []):
             require(isinstance(phrase, str) and phrase.lower() in corpus.lower(), f"Missing required wolf canon phrase: {phrase}", errors)
-        required_truth_phrases = {
-            "complementary_non_moral_opposites": "complementary opposites",
-            "not_good_and_evil": "not good and evil",
-            "not_morality_system": "not a morality system",
-            "each_has_what_the_other_needs": "each wolf has what the other needs",
-            "physical_companion_presence": "physically walk",
-            "quest_assistance": "assist in quests",
-            "combat_assistance": "assist in combat",
-            "cannot_be_killed": "cannot be killed",
-            "temporary_decoherence": "temporarily decohere",
-            "return_after_decoherence": "later return",
-        }
+        required_truth_phrases = required_truth_phrase_map(wolf_rules, errors)
         for truth in wolf_rules.get("required_truths", []):
+            if not isinstance(truth, str):
+                errors.append(f"{TWIN_WOLF_RULES} required_truths entries must be strings.")
+                continue
             phrase = required_truth_phrases.get(truth)
-            if phrase:
-                require(phrase in corpus.lower(), f"Missing required wolf canon truth: {truth}", errors)
+            if not phrase:
+                errors.append(f"{TWIN_WOLF_RULES} missing required truth phrase mapping for: {truth}")
+                continue
+            require(phrase in corpus.lower(), f"Missing required wolf canon truth: {truth}", errors)
+
+
+def required_truth_phrase_map(wolf_rules: dict, errors: list[str]) -> dict[str, str]:
+    phrase_map = wolf_rules.get("required_truth_phrases", {})
+    if not isinstance(phrase_map, dict):
+        errors.append(f"{TWIN_WOLF_RULES} required_truth_phrases must be an object.")
+        return {}
+    normalized: dict[str, str] = {}
+    for truth, phrase in phrase_map.items():
+        if not isinstance(truth, str) or not isinstance(phrase, str) or not phrase.strip():
+            errors.append(f"{TWIN_WOLF_RULES} required_truth_phrases entries must map strings to non-empty strings.")
+            continue
+        normalized[truth] = phrase.strip().lower()
+    return normalized
 
 
 def active_scan_files(root: Path) -> list[Path]:
@@ -185,7 +196,6 @@ def path_matches(path_name: str, pattern: str) -> bool:
 
 
 def allowed_forbidden_context(lines: list[str], index: int) -> bool:
-    current_line = lines[index].lower()
     context_lines = [lines[index]]
     for line in reversed(lines[max(0, index - 3) : index]):
         if line.strip():
@@ -198,8 +208,6 @@ def allowed_forbidden_context(lines: list[str], index: int) -> bool:
             return True
         if any(marker in normalized for marker in FORBIDDEN_CONTEXT_MARKERS):
             return True
-    if any(marker in current_line for marker in DIRECT_NEGATION_CONTEXT_MARKERS):
-        return True
     return False
 
 
@@ -454,7 +462,8 @@ def check_forbidden_spec_phrases(root: Path, spec_name: str, spec: dict, errors:
                 patterns.append(normalized)
             else:
                 errors.append(f"{spec_name} contains empty forbidden phrase in {key}")
-    check_forbidden_patterns(root, patterns, f"{spec_name} forbidden phrase", errors)
+    allow_paths = as_string_list(spec.get("allow_in_paths")) + as_string_list(spec.get("allow_historical_paths"))
+    check_forbidden_patterns(root, patterns, f"{spec_name} forbidden phrase", errors, allow_paths)
 
 
 def check_spec(root: Path, spec_name: str, spec: dict, errors: list[str]) -> None:
@@ -462,7 +471,7 @@ def check_spec(root: Path, spec_name: str, spec: dict, errors: list[str]) -> Non
         require((root / path_name).is_file(), f"{spec_name} missing required file: {path_name}", errors)
     check_required_spec_phrases(root, spec_name, spec, errors)
     check_forbidden_spec_phrases(root, spec_name, spec, errors)
-    if "max_deleted_files" in spec or "max_modified_files_without_review" in spec:
+    if any(key in spec for key in NON_DESTRUCTIVE_SPEC_KEYS):
         check_non_destructive_changes(root, spec, spec_name, errors)
 
 

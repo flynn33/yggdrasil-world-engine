@@ -23,9 +23,9 @@ Brief description of changes.
 - [ ] Yggdrasil World Engine remains the agnostic simulation framework
 - [ ] ASH Pattern System remains a YWE component for pattern integrity, diagnostics, recovery, containment, conformance, code resilience, update safety, and patch stability
 - [ ] Where Ravens Wait: Eternal Reckoning remains the game and narrative layer
-- [ ] This PR does not treat ASH Pattern System as top-level cosmology
+- [ ] This PR keeps ASH Pattern System subordinate to the ASH Model of the Universe
 - [ ] This PR preserves wolves as complementary non-moral companion opposites
-- [ ] This PR does not introduce permanent wolf death
+- [ ] This PR preserves wolf indestructibility
 - [ ] This PR preserves engine/game separation
 - [ ] Files deleted: none/list
 - [ ] Accepted canon or architecture files deleted: none/list

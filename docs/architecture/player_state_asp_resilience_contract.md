@@ -6,7 +6,7 @@ This contract defines how Player Runtime State uses the ASH Pattern System compo
 
 ## Correct role of ASH Pattern System
 
-The ASH Pattern System is a YWE component. It is not the top-level cosmology.
+The ASH Pattern System is a YWE component subordinate to the ASH Model of the Universe.
 
 It provides:
 

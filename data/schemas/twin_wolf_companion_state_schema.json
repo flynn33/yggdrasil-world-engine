@@ -15,6 +15,16 @@
     "death_policy",
     "decoherence_policy"
   ],
+  "allOf": [
+    {
+      "required": [
+        "each_has_what_the_other_needs",
+        "physical_companion_presence",
+        "quest_assistance_enabled",
+        "combat_assistance_enabled"
+      ]
+    }
+  ],
   "properties": {
     "relationship": {
       "const": "complementary_non_moral_opposites"
