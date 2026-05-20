@@ -300,9 +300,12 @@ def git_change_paths(root: Path, errors: list[str]) -> list[tuple[str, str]]:
 
 def check_no_platform_code(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
     forbidden_extensions = set(spec.get("forbidden_extensions", []))
+    allowed_added_paths = set(spec.get("allowed_added_paths", []))
     for status, rel_path in git_change_paths(root, errors):
         is_added = status.startswith("A")
         if not is_added:
+            continue
+        if rel_path in allowed_added_paths:
             continue
         suffix = Path(rel_path).suffix
         if suffix in forbidden_extensions:
