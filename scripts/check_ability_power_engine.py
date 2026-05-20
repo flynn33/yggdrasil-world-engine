@@ -89,6 +89,20 @@ PHASE_14_SCAN_GLOBS = [
     "examples/ability_power_engine/**/*.json",
 ]
 
+CONSEQUENCE_KIND_REF_FIELDS = {
+    "worldstate_delta": "worldstate_delta_refs",
+    "diagnostic_noop": "diagnostic_noop_ref",
+    "player_state_update": "player_state_update_refs",
+    "location_mutation_candidate": "location_mutation_candidate_refs",
+    "future_generation_bias": "future_generation_bias_refs",
+    "quest_progress_signal": "quest_progress_signal_refs",
+    "npc_relationship_change": "npc_relationship_change_refs",
+    "myth_seed_candidate": "myth_seed_candidate_refs",
+    "prophecy_pressure_update": "prophecy_pressure_update_refs",
+    "wolf_coherence_event": "wolf_coherence_event_refs",
+    "ability_state_update": "ability_state_update_refs",
+}
+
 ALLOWED_FORBIDDEN_CONTEXT_TERMS = {
     "forbidden",
     "invalid",
@@ -335,7 +349,13 @@ def has_nonempty_list(data: dict, key: str) -> bool:
 
 
 def schema_const(data: dict) -> str | None:
-    value = data.get("properties", {}).get("schema_id", {}).get("const")
+    properties = data.get("properties", {})
+    if not isinstance(properties, dict):
+        return None
+    schema_id = properties.get("schema_id", {})
+    if not isinstance(schema_id, dict):
+        return None
+    value = schema_id.get("const")
     return value if isinstance(value, str) else None
 
 
@@ -482,10 +502,19 @@ def check_schema_contracts(root: Path, errors: list[str]) -> None:
         if not isinstance(data, dict):
             continue
         require(schema_const(data) == contract["schema_id"], f"{path_name} has wrong schema_id const.", errors)
-        required = set(data.get("required", []))
+        raw_required = data.get("required", [])
+        if not isinstance(raw_required, list):
+            errors.append(f"{path_name} required must be a list.")
+            raw_required = []
+        required = {field for field in raw_required if isinstance(field, str)}
+        if len(required) != len(raw_required):
+            errors.append(f"{path_name} required entries must be strings.")
         for field in contract["required"]:
             require(field in required, f"{path_name} required missing {field}.", errors)
         properties = data.get("properties", {})
+        if not isinstance(properties, dict):
+            errors.append(f"{path_name} properties must be an object.")
+            properties = {}
         for field in contract["properties"]:
             require(field in properties, f"{path_name} properties missing {field}.", errors)
 
@@ -497,6 +526,25 @@ def example_key(path: Path) -> str:
         if key.endswith(suffix):
             key = key.removesuffix(suffix)
     return key
+
+
+def has_consequence_ref_payload(data: dict, field: str) -> bool:
+    if field.endswith("_refs"):
+        return has_nonempty_list(data, field)
+    return isinstance(data.get(field), dict)
+
+
+def check_consequence_ref_alignment(data: dict, rel: str, errors: list[str]) -> None:
+    raw_kinds = data.get("consequence_kinds")
+    if not isinstance(raw_kinds, list):
+        return
+    kinds = {kind for kind in raw_kinds if isinstance(kind, str)}
+    for kind, ref_field in CONSEQUENCE_KIND_REF_FIELDS.items():
+        has_payload = has_consequence_ref_payload(data, ref_field)
+        if kind in kinds:
+            require(has_payload, f"{rel} declares {kind} but missing {ref_field}.", errors)
+        if has_payload:
+            require(kind in kinds, f"{rel} populates {ref_field} but consequence_kinds missing {kind}.", errors)
 
 
 def check_examples(root: Path, errors: list[str]) -> None:
@@ -552,6 +600,7 @@ def check_examples(root: Path, errors: list[str]) -> None:
             require(has_nonempty_list(data, "expected_consequence_kinds"), f"{rel} missing expected_consequence_kinds.", errors)
         elif schema_id == "ywe.ability_consequence_packet.v1":
             require(has_nonempty_list(data, "consequence_kinds"), f"{rel} missing consequence_kinds.", errors)
+            check_consequence_ref_alignment(data, rel, errors)
         elif schema_id == "ywe.ability_wolf_synergy.v1":
             require(data.get("companion_presence_required") is True, f"{rel} companion_presence_required must be true.", errors)
             require(data.get("not_morality_system") is True, f"{rel} not_morality_system must be true.", errors)

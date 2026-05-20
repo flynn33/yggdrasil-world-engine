@@ -8,6 +8,7 @@
   },
   "consequence_kinds": [
     "worldstate_delta",
+    "player_state_update",
     "future_generation_bias",
     "wolf_coherence_event",
     "ability_state_update"
@@ -25,6 +26,11 @@
   "wolf_coherence_event_refs": [
     {
       "ref_id": "wolf_event.twin_coherence_strain"
+    }
+  ],
+  "ability_state_update_refs": [
+    {
+      "ref_id": "ability_update.twin_threshold_step.available"
     }
   ],
   "future_generation_bias_refs": [
