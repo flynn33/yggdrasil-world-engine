@@ -74,6 +74,10 @@ non_destructive_diff_result: pass
   schema and example files.
   Solution: added `scripts/check_ability_power_engine.py`, wired it into
   `scripts/run_checks.sh`, and added a dedicated GitHub workflow step.
+- Issue: PR CI showed the Phase 10 platform-runtime guardrail classifying the
+  new Phase 14 check script as a forbidden platform/runtime file.
+  Solution: added the Phase 14 repository check script to the explicit
+  Phase 10 allowed check-script exceptions.
 
 ## Deviations
 
