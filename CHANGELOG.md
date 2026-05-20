@@ -5,6 +5,21 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.16] — 2026-05-20
+
+### Added
+- Merge pull request #53 from flynn33/codex/phase-14-ability-power-engine
+- Address Phase 14 follow-up review
+- Address Phase 14 review feedback
+- Implement Phase 14 ability power engine
+
+### Fixed
+- Harden Phase 14 review fixes
+
+
+---
+
+
 ## [2.0.15] — 2026-05-20
 
 ### Changed
