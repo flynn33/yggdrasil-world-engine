@@ -297,9 +297,8 @@ def classify_change_paths(statuses: list[tuple[str, str]]) -> tuple[list[str], l
     return deleted, renamed, copied, existing_touched
 
 
-def budget_limit(budget: dict, key: str, default: int) -> int:
-    limits = budget.get("limits")
-    raw_value = limits.get(key, default) if isinstance(limits, dict) else budget.get(key, default)
+def budget_limit(limits: dict, key: str, default: int) -> int:
+    raw_value = limits.get(key, default)
     try:
         return int(raw_value)
     except (TypeError, ValueError):
@@ -520,7 +519,7 @@ def check_examples(root: Path, errors: list[str]) -> None:
         for invalid_name in rules.get("invalid_examples_must_be_rejected", []):
             require(
                 isinstance(invalid_name, str) and invalid_name in invalid_keys,
-                f"Missing required invalid Phase 14 example: {invalid_name}",
+                f"Missing required invalid Phase 14 example key: {invalid_name}",
                 errors,
             )
 
@@ -635,12 +634,16 @@ def check_non_destructive_diff(root: Path, errors: list[str]) -> None:
     budget = load_json_checked(root, root / PHASE_14_NON_DESTRUCTIVE_BUDGET, errors)
     if not isinstance(budget, dict):
         return
+    limits = budget.get("limits")
+    if not isinstance(limits, dict):
+        errors.append(f"{PHASE_14_NON_DESTRUCTIVE_BUDGET} limits must be an object.")
+        return
     deleted, renamed, copied, existing_touched = classify_change_paths(git_change_paths(root, errors))
 
-    max_deleted = budget_limit(budget, "max_existing_file_deletions", 0)
-    max_renamed = budget_limit(budget, "max_directory_renames", 0)
-    max_copied = budget_limit(budget, "max_copied_paths", 0)
-    max_touched = budget_limit(budget, "max_existing_files_touched_without_review", 25)
+    max_deleted = budget_limit(limits, "max_existing_file_deletions", 0)
+    max_renamed = budget_limit(limits, "max_directory_renames", 0)
+    max_copied = budget_limit(limits, "max_copied_paths", 0)
+    max_touched = budget_limit(limits, "max_existing_files_touched_without_review", 25)
 
     require(len(deleted) <= max_deleted, f"Phase 14 file deletions exceed budget {max_deleted}: {deleted}", errors)
     require(len(renamed) <= max_renamed, f"Phase 14 renames exceed budget {max_renamed}: {renamed}", errors)

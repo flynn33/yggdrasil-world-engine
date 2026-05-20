@@ -32,4 +32,5 @@ source_refs
 player_ref
 branch_ref
 consequence_policy_ref
+expected_consequence_kinds
 ```
