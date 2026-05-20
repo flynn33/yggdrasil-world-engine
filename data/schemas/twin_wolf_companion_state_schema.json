@@ -25,6 +25,11 @@
       ]
     }
   ],
+  "$defs": {
+    "required_true_invariant": {
+      "const": true
+    }
+  },
   "properties": {
     "relationship": {
       "const": "complementary_non_moral_opposites"
@@ -33,16 +38,16 @@
       "const": false
     },
     "each_has_what_the_other_needs": {
-      "const": true
+      "$ref": "#/$defs/required_true_invariant"
     },
     "physical_companion_presence": {
-      "const": true
+      "$ref": "#/$defs/required_true_invariant"
     },
     "quest_assistance_enabled": {
-      "const": true
+      "$ref": "#/$defs/required_true_invariant"
     },
     "combat_assistance_enabled": {
-      "const": true
+      "$ref": "#/$defs/required_true_invariant"
     },
     "death_policy": {
       "const": "cannot_be_killed"
@@ -55,10 +60,10 @@
       ],
       "properties": {
         "temporary_decoherence_allowed": {
-          "const": true
+          "$ref": "#/$defs/required_true_invariant"
         },
         "return_after_decoherence": {
-          "const": true
+          "$ref": "#/$defs/required_true_invariant"
         }
       }
     },

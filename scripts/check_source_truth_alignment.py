@@ -237,6 +237,11 @@ def check_forbidden_language(root: Path, errors: list[str]) -> None:
     data = load_json_checked(root, FORBIDDEN_LANGUAGE, errors)
     if not isinstance(data, dict):
         return
+    patterns = forbidden_language_patterns(data, errors)
+    check_forbidden_patterns(root, patterns, "source-truth phrase", errors, allowed_path_patterns(data))
+
+
+def forbidden_language_patterns(data: dict, errors: list[str]) -> list[str]:
     pattern_items = data.get("forbidden_patterns", data.get("patterns", []))
     patterns: list[str] = []
     for index, item in enumerate(pattern_items):
@@ -248,12 +253,15 @@ def check_forbidden_language(root: Path, errors: list[str]) -> None:
             errors.append(f"{FORBIDDEN_LANGUAGE} contains empty forbidden pattern: {pattern_id}")
             continue
         patterns.append(pattern)
-    allow_in_paths = [
+    return patterns
+
+
+def allowed_path_patterns(data: dict) -> list[str]:
+    return [
         path_name
         for path_name in data.get("allow_in_paths", [])
         if isinstance(path_name, str) and path_name.strip()
     ]
-    check_forbidden_patterns(root, patterns, "source-truth phrase", errors, allow_in_paths)
 
 
 def git_ref_exists(root: Path, ref: str) -> bool:
@@ -471,8 +479,12 @@ def check_spec(root: Path, spec_name: str, spec: dict, errors: list[str]) -> Non
         require((root / path_name).is_file(), f"{spec_name} missing required file: {path_name}", errors)
     check_required_spec_phrases(root, spec_name, spec, errors)
     check_forbidden_spec_phrases(root, spec_name, spec, errors)
-    if any(key in spec for key in NON_DESTRUCTIVE_SPEC_KEYS):
+    if has_non_destructive_controls(spec):
         check_non_destructive_changes(root, spec, spec_name, errors)
+
+
+def has_non_destructive_controls(spec: dict) -> bool:
+    return any(key in spec for key in NON_DESTRUCTIVE_SPEC_KEYS)
 
 
 def check_github_checks_matrix(root: Path, errors: list[str]) -> None:
