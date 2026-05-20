@@ -1,0 +1,39 @@
+{
+  "workflow": "ywe-source-truth-guardrails",
+  "checks": [
+    {
+      "name": "JSON Integrity",
+      "required": true
+    },
+    {
+      "name": "Authority Stack",
+      "required": true,
+      "spec": "check_ash_model_authority.spec.json"
+    },
+    {
+      "name": "ASP Component Role",
+      "required": true,
+      "spec": "check_ash_pattern_system_component_role.spec.json"
+    },
+    {
+      "name": "Twin Wolf Canon",
+      "required": true,
+      "spec": "check_wolf_companion_canon.spec.json"
+    },
+    {
+      "name": "No Wolf Morality Meter",
+      "required": true,
+      "spec": "check_no_wolf_morality_meter.spec.json"
+    },
+    {
+      "name": "Engine/Game Separation",
+      "required": true,
+      "spec": "check_engine_game_layer_separation.spec.json"
+    },
+    {
+      "name": "Non-Destructive Diff",
+      "required": true,
+      "spec": "check_non_destructive_diff_source_truth.spec.json"
+    }
+  ]
+}

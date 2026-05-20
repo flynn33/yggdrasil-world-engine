@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.engine_authority_stack.v1",
+  "title": "YWE Engine Authority Stack",
+  "type": "object",
+  "required": [
+    "ash_model_of_universe",
+    "yggdrasil_world_engine",
+    "ash_pattern_system",
+    "game_layer"
+  ],
+  "properties": {
+    "ash_model_of_universe": {
+      "type": "object",
+      "required": [
+        "role",
+        "foundation_type"
+      ],
+      "properties": {
+        "role": {
+          "const": "mathematical_and_ontological_foundation"
+        },
+        "foundation_type": {
+          "const": "engine_simulation_layer"
+        },
+        "layers": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "archetype",
+              "symbolic",
+              "harmonic"
+            ]
+          }
+        }
+      }
+    },
+    "yggdrasil_world_engine": {
+      "type": "object",
+      "required": [
+        "role"
+      ],
+      "properties": {
+        "role": {
+          "const": "agnostic_simulation_framework"
+        }
+      }
+    },
+    "ash_pattern_system": {
+      "type": "object",
+      "required": [
+        "role",
+        "responsibilities"
+      ],
+      "properties": {
+        "role": {
+          "const": "engine_component"
+        },
+        "responsibilities": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "pattern_integrity",
+              "diagnostics",
+              "recovery",
+              "containment",
+              "conformance",
+              "code_resilience",
+              "update_safety",
+              "patch_stability",
+              "drift_detection",
+              "generation_plan_consistency"
+            ]
+          }
+        }
+      }
+    },
+    "game_layer": {
+      "type": "object",
+      "required": [
+        "name",
+        "role"
+      ],
+      "properties": {
+        "name": {
+          "const": "Where Ravens Wait: Eternal Reckoning"
+        },
+        "role": {
+          "const": "game_narrative_layer"
+        }
+      }
+    }
+  }
+}

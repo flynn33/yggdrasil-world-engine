@@ -6,9 +6,9 @@ Status: YWE and Forsetti guardrail baseline
 
 ## Canon Guardrails
 
-- `cosmology_authority_invariant`: ASH Cosmological Model is the upstream foundation for YWE and its systems
+- `cosmology_authority_invariant`: ASH Model of the Universe is the mathematical and ontological foundation for YWE and its systems
 - `asp_component_invariant`: ASH Pattern System is a YWE component for diagnostics, pattern integrity, recovery, containment, resilience, conformance, and update/patch stability
-- `base_world_ontology_invariant`: the nine planes define the base world ontology and are not generated branch realities
+- `base_world_ontology_invariant`: the default nine planes define engine-level structural state layers and are not generated branch realities or mandatory fictional locations
 - `leaf_branch_reality_invariant`: leaf branch realities are runtime-generated player realities created from meaningful branch events and cosmology-grounded context
 - `no_pregenerated_branch_tree_invariant`: YWE must not model branch reality as a pre-authored alternate-reality catalog
 - `wolf_non_morality_invariant`: White Wolf and Dark Wolf are symbiotic attractors, not moral opposites or morality meters
@@ -19,8 +19,8 @@ Status: YWE and Forsetti guardrail baseline
 - host adapters materialize approved manifests but do not author truth
 - meaningful generation is invalid unless it preserves ASH provenance
 - all meaningful generation remains ASH-derived
-- fixed cosmology and the nine realms remain locked
-- White Wolf and Dark Wolf remain primordial informational forces
+- engine cosmology remains structural simulation law while game lore, gods, factions, histories, and worlds remain extensible
+- White Wolf and Dark Wolf remain complementary non-moral embodied companions and primordial informational forces
 - players begin as mortals with veiled celestial memory
 - perception may diverge experience but may not rewrite shared-world truth
 - myth and prophecy remain distinct systems

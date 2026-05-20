@@ -30,6 +30,7 @@ artifacts. Earlier adjacent records remain retained for historical review.
 | `YWE_PHASE_11_WORLDSTATE_LOCATION_MUTATION_HANDOFF_2026-05-17.md` | Earlier Phase 11-adjacent handoff retained for historical review |
 | `YWE_PHASE_12_EXISTENTIAL_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-18.md` | Active Phase 12 existential quest, NPC, and lore generation handoff |
 | `YWE_PHASE_12_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-17.md` | Earlier Phase 12-adjacent handoff retained for historical review |
+| `YWE_SOURCE_TRUTH_ALIGNMENT_HANDOFF_2026-05-19.md` | Source-truth and Twin Wolf alignment remediation handoff |
 | `repo_implementation_mapping.md` | Repository implementation mapping |
 | `missing_source_documents.md` | Missing source document inventory |
 
@@ -50,26 +51,27 @@ Where Ravens Wait: Eternal Reckoning
   = game / narrative layer
 
 Yggdrasil World Engine
-  = agnostic game engine
+  = agnostic simulation framework
 
-ASH Cosmological Model
-  = upstream foundation for YWE and its systems
+ASH Model of the Universe
+  = mathematical and ontological foundation for YWE and its systems
 
 ASH Pattern System
-  = component inside YWE for pattern integrity, diagnostics, recovery,
-    containment, code resilience, conformance, and update/patch stability
+  = YWE component for pattern integrity, diagnostics, recovery, containment,
+    conformance, code resilience, update safety, and patch stability
 ```
 
-The ASH Cosmological Model is the upstream foundation for YWE and its systems.
-The ASH Pattern System is a component inside YWE for integrity, diagnostics,
-recovery, containment, conformance, code resilience, and update/patch stability.
-YWE consumes ASH-derived state, diagnostics, codeword traces, and generation
-plans without making ASH Pattern System the topmost cosmology authority.
+The ASH Model of the Universe is the mathematical and ontological foundation
+for YWE and its systems. The ASH Pattern System is a YWE component for
+integrity, diagnostics, recovery, containment, conformance, code resilience,
+update safety, and patch stability. YWE consumes ASH-derived state,
+diagnostics, codeword traces, and generation plans without making ASH Pattern
+System the topmost cosmology authority.
 
 ## Invariants
 - all meaningful generation must remain ASH-derived
 - player actions influence future generation context; they do not mutate ASH math
 - host adapters materialize approved manifests but do not author truth
-- fixed cosmology must remain locked
+- engine structural ontology remains stable while narrative skins remain extensible
 - perception must not rewrite shared-world truth
 - Forsetti governs activation; YWE governs truth

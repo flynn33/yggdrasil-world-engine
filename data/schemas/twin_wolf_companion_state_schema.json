@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.twin_wolf_companion_state.v1",
+  "title": "Twin Wolf Companion State",
+  "type": "object",
+  "required": [
+    "white_wolf",
+    "dark_wolf",
+    "relationship",
+    "morality_system",
+    "death_policy",
+    "decoherence_policy"
+  ],
+  "properties": {
+    "relationship": {
+      "const": "complementary_non_moral_opposites"
+    },
+    "morality_system": {
+      "const": false
+    },
+    "each_has_what_the_other_needs": {
+      "const": true
+    },
+    "physical_companion_presence": {
+      "const": true
+    },
+    "quest_assistance_enabled": {
+      "const": true
+    },
+    "combat_assistance_enabled": {
+      "const": true
+    },
+    "death_policy": {
+      "const": "cannot_be_killed"
+    },
+    "decoherence_policy": {
+      "type": "object",
+      "required": [
+        "temporary_decoherence_allowed",
+        "return_after_decoherence"
+      ],
+      "properties": {
+        "temporary_decoherence_allowed": {
+          "const": true
+        },
+        "return_after_decoherence": {
+          "const": true
+        }
+      }
+    },
+    "white_wolf": {
+      "type": "object",
+      "properties": {
+        "functions": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "illuminates",
+              "protects",
+              "reveals",
+              "clarifies",
+              "pattern_visibility"
+            ]
+          }
+        },
+        "coherence_state": {
+          "enum": [
+            "coherent",
+            "stressed",
+            "decohered",
+            "recovering",
+            "returned"
+          ]
+        }
+      }
+    },
+    "dark_wolf": {
+      "type": "object",
+      "properties": {
+        "functions": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "endures",
+              "conceals",
+              "transforms",
+              "contains",
+              "memory",
+              "gravity"
+            ]
+          }
+        },
+        "coherence_state": {
+          "enum": [
+            "coherent",
+            "stressed",
+            "decohered",
+            "recovering",
+            "returned"
+          ]
+        }
+      }
+    }
+  }
+}

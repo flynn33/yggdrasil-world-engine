@@ -29,5 +29,30 @@
     "diagnostic_ref": "DiagnosticEnvelope",
     "generation_plan_ref": "GenerationPlan",
     "source_ash_refs": "SourceASHRefs"
+  },
+  "wolf_resonance": {
+    "white_wolf": 0,
+    "dark_wolf": 0,
+    "morality_system": false,
+    "good_evil_axis": false,
+    "both_can_increase_from_same_event": true,
+    "preferred_model_name": "dual_variable_alignment",
+    "legacy_field_alias": "wolf_alignment"
+  },
+  "dual_variable_alignment": {
+    "model": "non_moral_dual_variable_alignment",
+    "both_variables_may_grow_from_same_event": true,
+    "balance_driven_consequences": true
+  },
+  "lineage_resonance": {
+    "simulation_level_mechanic": true,
+    "theming_options": [
+      "ancestry",
+      "inheritance",
+      "faction_legacy",
+      "house_memory",
+      "oath_chain"
+    ],
+    "does_not_determine_destiny": true
   }
 }

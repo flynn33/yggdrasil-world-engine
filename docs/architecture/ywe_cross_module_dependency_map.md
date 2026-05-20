@@ -6,28 +6,29 @@ Status: one-way dependency baseline
 
 ## Dependency Law
 
-YWE aligns to ASH Cosmological Model authority and Forsetti's one-way
+YWE aligns to ASH Model of the Universe authority and Forsetti's one-way
 dependency rule:
 
 ```text
-ASH Cosmological Model
+ASH Model of the Universe
   -> YWE Core Contracts
       -> ASH Pattern System component and runtime systems
           -> Feature Engines
               -> Host Adapters
 ```
 
-ASH Cosmological Model is the upstream foundation for YWE and its systems. ASH
-Pattern System is a YWE component that provides diagnostics, pattern integrity,
-recovery, containment, resilience, conformance, and update/patch stability.
-YWE interprets ASH-derived meaning into world and gameplay manifests. Host
-adapters remain downstream materialization surfaces.
+ASH Model of the Universe is the mathematical and ontological foundation for
+YWE and its systems. ASH Pattern System is a YWE component that provides
+diagnostics, pattern integrity, recovery, containment, resilience, conformance,
+code resilience, update safety, and patch stability. YWE interprets ASH-derived
+meaning into world and gameplay manifests. Host adapters remain downstream
+materialization surfaces.
 
-Phase 9 adds the runtime-cosmology foundation between the ASH Cosmological
-Model and later feature systems:
+Phase 9 adds the runtime-cosmology foundation between the ASH Model of the
+Universe and later feature systems:
 
 ```text
-ASH Cosmological Model
+ASH Model of the Universe
   -> YWE Runtime Cosmology Contracts
     -> Branch Reality Resolver
       -> Feature Engines
@@ -66,7 +67,7 @@ ASH Pattern System Component
 DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
 The three Phase 10 through Phase 12 entries above are retained as
 owner-review records only. The active Phase 8-9 dependency boundary remains:
-ASH Cosmological Model -> YWE Runtime Cosmology Contracts -> Branch Reality
+ASH Model of the Universe -> YWE Runtime Cosmology Contracts -> Branch Reality
 Resolver -> Feature Engines.
 
 - `com.ywe.core.cosmology-engine`: none

@@ -10,34 +10,39 @@ Status: superseded component downstream contract
 ## Current authority clarification
 
 This document is preserved as an ASH Pattern System component downstream and
-stability contract. Earlier language in this document treated ASH Pattern
-System as the topmost upstream authority. That framing is superseded by
-`ywe_cosmology_authority_contract.md` and
+stability contract. Its authority language is subordinate to
+`ash_model_engine_cosmology_contract.md`,
+`ywe_cosmology_authority_contract.md`, and
 `ash_pattern_system_component_contract.md`.
 
-Current rule: ASH Cosmological Model is the upstream foundation for YWE and its
-systems. ASH Pattern System is a YWE component for diagnostics, pattern
-integrity, recovery, containment, resilience, conformance, generation-plan
-consistency, and update/patch stability.
+Current rule: The ASH Model of the Universe is the mathematical and ontological
+foundation of Yggdrasil World Engine. The ASH Pattern System is a YWE component
+for diagnostics, pattern integrity, recovery, containment, resilience,
+conformance, generation-plan consistency, code resilience, update safety, and
+patch stability.
 
 Phase 9 note: this document is historical/partial if it frames ASH Pattern
-System as the top-level authority. Current hierarchy: ASH Cosmological Model is
-the upstream foundation for YWE and its systems; ASH Pattern System is a YWE
+System as the top-level authority. Current hierarchy: ASH Model of the Universe
+is the upstream foundation for YWE and its systems; ASH Pattern System is a YWE
 component for pattern integrity, diagnostics, recovery, containment,
-conformance, resilience, and update/patch stability.
+conformance, resilience, code resilience, update safety, and patch stability.
 
 Historical acceptance-marker note: earlier drafts used the phrase "upstream mathematical and generative authority." That phrase is retained here only as superseded validator context; it is not the current authority stack.
 
 ## Upstream authority reference
 
 This downstream contract is subordinate to
-`ash_upstream_authority_contract.md`.
+`ash_model_engine_cosmology_contract.md`,
+`ywe_cosmology_authority_contract.md`, and
+`ash_pattern_system_component_contract.md`. The older
+`ash_upstream_authority_contract.md` remains useful for packet-spine
+provenance rules when read through the current authority stack.
 
 Historical note: earlier drafts said ASH is the upstream mathematical and
 generative authority for YWE. This is superseded shorthand. YWE systems now
-interpret and manifest the ASH Cosmological Model while consuming ASH Pattern
-System component diagnostics, codeword traces, and generation plans for
-stability and conformance.
+interpret and manifest the ASH Model of the Universe while consuming ASH
+Pattern System component diagnostics, codeword traces, and generation plans
+for stability and conformance.
 
 Downstream systems may specialize ASH-derived pattern outputs into game-domain
 manifests, but they must not become independent authorities over symbolic
@@ -64,10 +69,11 @@ It exists to stop the same symbolic logic from being rewritten in:
 Downstream systems may **consume** archetype outputs.
 They may **not** become independent authorities on archetype meaning.
 
-ASH Cosmological Model owns cosmological meaning. ASH Pattern System component
-protects symbolic consistency and diagnostic stability. Other systems own
-specialized manifestation of that grammar through the shared packet spine
-defined by `ash_upstream_authority_contract.md`.
+The ASH Model of the Universe defines the structural cosmological grammar. The
+ASH Pattern System preserves, validates, and stabilizes pattern operations
+within YWE. Downstream systems interpret validated pattern outputs through the
+engine cosmology and the shared packet spine defined by
+`ash_upstream_authority_contract.md`.
 
 ---
 
@@ -141,8 +147,8 @@ Must not rewrite shared-world truth.
 
 # 4. Consumption packet expectation
 
-Codex should prefer a normalized packet shape whenever a downstream system reads
-ASH outputs.
+Implementations should prefer a normalized packet shape whenever a downstream
+system reads ASH outputs.
 
 For meaningful generated content, the required shared packet spine is:
 
@@ -195,13 +201,13 @@ Downstream systems must never:
 
 ---
 
-# 6. Codex implementation note
+# 6. Implementation note
 
-When Codex encounters a downstream rule file that relies on archetype language,
-it should prefer references to canonical IDs like `char_guardian` rather than
-rewriting prose meanings inside each subsystem.
+When a downstream rule file relies on archetype language, prefer references to
+canonical IDs like `char_guardian` rather than rewriting prose meanings inside
+each subsystem.
 
-If a subsystem needs local specialization, Codex should use:
+If a subsystem needs local specialization, use:
 - affinity mappings
 - role mappings
 - manifestation hints
@@ -213,6 +219,6 @@ It should not clone the canonical definitions into every file.
 
 # 7. Final rule
 
-ASH defines symbolic truth.
-Downstream systems define what that truth becomes in play.
+The ASH Model of the Universe defines structural cosmological truth.
+Downstream systems define what validated pattern outputs become in play.
 The repo stays coherent only if that boundary is kept clean.

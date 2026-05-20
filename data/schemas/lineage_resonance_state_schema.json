@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.lineage_resonance_state.v1",
+  "title": "Lineage Resonance State",
+  "type": "object",
+  "required": [
+    "model_role",
+    "destiny_lock",
+    "resonance_sources"
+  ],
+  "properties": {
+    "model_role": {
+      "const": "inherited_cosmological_attunement_propagation"
+    },
+    "destiny_lock": {
+      "const": false
+    },
+    "thematic_expression": {
+      "enum": [
+        "bloodline",
+        "ancestry",
+        "inheritance",
+        "faction_legacy",
+        "spiritual_lineage",
+        "tradition",
+        "synthetic_lineage",
+        "other"
+      ]
+    },
+    "resonance_sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "realm_attunement_effects": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "dual_variable_effects": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "mythic_potential_effects": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    }
+  }
+}

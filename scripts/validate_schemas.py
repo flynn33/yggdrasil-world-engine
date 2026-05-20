@@ -492,12 +492,20 @@ def check_two_wolves_and_balance(root):
 
     content = read_text_file(path)
     required_markers = [
+        "complementary opposites",
+        "not moral opposites",
+        "not good and evil",
+        "not a morality system",
         "paired symbiotic companions of consciousness",
         "Every conscious being carries both",
+        "Each wolf has what the other needs",
         "balance",
-        "lose coherence temporarily",
-        "fight beside the player",
-        "not opposites",
+        "physically walk",
+        "assist in quests",
+        "assist in combat",
+        "cannot be killed",
+        "temporarily decohere",
+        "later return",
         "not enemies",
     ]
 

@@ -1,61 +1,50 @@
 # ASH Pattern System Component Contract
 
-Status: `required_repository_alignment_contract`  
-Version: `0.1.0`  
-Scope: `ASH Pattern System role inside Yggdrasil World Engine`
+Date: 2026-05-19
+Status: canonical source-truth contract
 
 ## Purpose
 
-This contract defines the ASH Pattern System as a component of the Yggdrasil World Engine.
+Defines the ASH Pattern System as a YWE engine component, not the top-level cosmological authority.
 
-The ASH Pattern System provides pattern integrity, diagnostics, recovery, containment, conformance, code resilience, and update/patch stability. It helps prevent engine drift and stabilizes systems built from the ASH Cosmological Model.
+## Correct role
 
-## Component role
+The ASH Pattern System is a YWE component inside the Yggdrasil World Engine.
 
-The ASH Pattern System is responsible for:
+It provides:
 
-```text
-validating pattern consistency
-supporting diagnostic envelopes
-supporting recovery and containment semantics
-protecting against invalid state drift
-preserving conformance through updates and patches
-supporting generation-plan consistency where applicable
-providing stable contracts for downstream engine systems
-```
+- pattern integrity;
+- diagnostics;
+- recovery;
+- containment;
+- conformance checks;
+- generation-plan consistency;
+- code resilience;
+- update safety;
+- patch stability;
+- drift detection.
 
-## Non-role
+## Relationship to ASH Model
 
-The ASH Pattern System is not:
+The ASH Model of the Universe is the mathematical and ontological foundation.
+The ASH Pattern System operationalizes stability, diagnostics, and pattern integrity inside the engine.
 
-```text
-the game title
-the topmost cosmological authority
-a replacement for the ASH Cosmological Model
-a platform runtime
-a content authoring layer
-a destructive migration tool
-```
+## Relationship to generation
 
-## Relationship to the ASH Cosmological Model
+Meaningful generation derives from ASH cosmic pattern state under the ASH Model and is stabilized by the ASH Pattern System component.
 
-```text
-ASH Cosmological Model
-  -> defines cosmological meaning and existence law
+The Pattern System may classify, validate, gate, and recover generation operations.
 
-ASH Pattern System component
-  -> protects and stabilizes engine systems through diagnostics, integrity,
-     recovery, and conformance mechanisms
-```
-
-## Relationship to YWE systems
-
-YWE systems may depend on ASP diagnostics, gates, and recovery contracts to remain stable. They must not treat the component as a license to redefine the cosmology.
+It must not replace the ASH Model or become the topmost source of cosmological meaning.
 
 ## Update and patch safety
 
-Every patch or update touching engine contracts should pass ASP component checks where applicable. If a patch changes authority language, generation flow, diagnostics, state schema, or recovery behavior, it must pass repository drift guardrails and existing YWE checks.
+The ASH Pattern System exists partly to keep the engine stable through updates and patches. It should help detect and contain drift when systems change.
 
-## Preservation rule
+## Forbidden
 
-Existing ASH Pattern System conformance evidence should be preserved. If documents previously describe ASP as topmost upstream authority, add a supersession note rather than deleting the document.
+- ASH Pattern System as the top-level cosmology;
+- ASH Pattern System as a setting bible;
+- feature engines bypassing Pattern System diagnostics;
+- updates bypassing pattern integrity checks;
+- runtime generation with no conformance or recovery pathway.

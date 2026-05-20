@@ -2,13 +2,22 @@
 
 ## Engine-First Architecture
 
-The Yggdrasil World Engine is organized as an engine-first architecture. The ASH Cosmological Model defines the upstream foundation for YWE and its systems; YWE interprets and manifests that foundation through code-agnostic engine contracts. The ASH Pattern System is a YWE component that protects diagnostics, pattern integrity, recovery, containment, resilience, conformance, and update/patch stability.
+The Yggdrasil World Engine is organized as an engine-first architecture. The ASH Model of the Universe is the mathematical and ontological foundation for YWE and its systems; YWE interprets and manifests that foundation through code-agnostic engine contracts. The ASH Pattern System is a YWE component that protects diagnostics, pattern integrity, recovery, containment, resilience, conformance, code resilience, update safety, and patch stability.
 
 Required first-read authority contracts:
 
+- `ash_model_engine_cosmology_contract.md` -- ASH Model of the Universe as the mathematical and ontological engine foundation.
 - `ywe_cosmology_authority_contract.md` -- Current game/engine/foundation/component authority stack.
 - `ash_pattern_system_component_contract.md` -- ASH Pattern System role inside YWE.
+- `engine_vs_game_layer_contract.md` -- YWE engine layer and Where Ravens Wait game/narrative layer separation.
+- `cosmology_framework_extensibility_contract.md` -- Engine cosmology as structural framework, not fixed setting bible.
 - `ash_upstream_authority_contract.md` -- Historical packet-spine authority contract, preserved as superseded component evidence where necessary.
+
+Source-truth and Twin Wolf remediation contracts:
+
+- `twin_wolf_companion_canon_contract.md` -- White Wolf and Dark Wolf as complementary non-moral embodied companions.
+- `dual_variable_alignment_model_contract.md` -- Non-moral dual-variable alignment where both variables can grow through the same event.
+- `lineage_resonance_model_contract.md` -- Simulation-level lineage resonance propagation without destiny locks.
 
 Phase 9 runtime-cosmology foundation contracts:
 
@@ -57,7 +66,7 @@ Phase 12 quest, NPC, and lore generation contract:
 The current controlling authority chain is:
 
 ```text
-ASH Cosmological Model
+ASH Model of the Universe
   -> Yggdrasil World Engine
     -> ASH Pattern System component and YWE runtime systems
       -> YWE feature engines
@@ -67,7 +76,7 @@ ASH Cosmological Model
 Earlier language that treated ASH Pattern System as the topmost authority is
 superseded by `ywe_cosmology_authority_contract.md`.
 
-Historical acceptance-marker note: earlier docs said "ASH defines upstream mathematical and generative authority." That marker is retained here only as superseded legacy wording for validator compatibility; current authority is defined by the ASH Cosmological Model foundation and the ASH Pattern System component role above.
+Historical acceptance-marker note: earlier docs said "ASH defines upstream mathematical and generative authority." That marker is retained here only as superseded legacy wording for validator compatibility; current authority is defined by the ASH Model of the Universe foundation and the ASH Pattern System component role above.
 
 ## Repository Baseline Authority
 
@@ -81,8 +90,8 @@ baseline in view:
 
 | Engine | Purpose |
 |--------|---------|
-| Cosmology Engine | Origin of gravity, reality, and the nine realms |
-| Realm Engine | Fixed cosmological state management and player attunement |
+| Cosmology Engine | Structural cosmology state and default realm-layer constants |
+| Realm Engine | Cosmological state-layer management and player attunement |
 | ASH Pattern Engine | ASH-derived state, diagnostics, codeword traces, and generation planning |
 | Narrative Engine | Player-specific interpretation, story transformation, and memory |
 | Perception Engine | Player perception overlay based on cosmic state |
@@ -112,8 +121,8 @@ independently.
 
 ## Control Documents
 
-- `ash_upstream_authority_contract.md` -- Canonical ASH upstream mathematical and generative authority contract for YWE
-- `ywe_cosmology_authority_contract.md` -- Current authority stack contract for the game layer, YWE, ASH Cosmological Model, and ASH Pattern System component
+- `ash_upstream_authority_contract.md` -- Historical packet-spine authority contract retained for provenance rules under the current authority stack
+- `ywe_cosmology_authority_contract.md` -- Current authority stack contract for the game layer, YWE, ASH Model of the Universe, and ASH Pattern System component
 - `ash_pattern_system_component_contract.md` -- Component contract for ASH Pattern System diagnostics, recovery, containment, conformance, resilience, and patch/update stability
 - `ash_downstream_contract.md` -- Downstream consumption contract subordinate to the upstream authority contract
 - `authored_override_and_tooling_notes.md` -- Canonical authored override authority order, allowed/forbidden override categories, and tooling guardrails
@@ -131,13 +140,13 @@ independently.
 
 ## Dependency Direction
 
-All modules consume ASH Cosmological Model-derived meaning through YWE
+All modules consume ASH Model of the Universe-derived meaning through YWE
 contracts and may use ASH Pattern System diagnostics, codeword traces,
 generation plans, and YWE interpretation packets for stability. The dependency
 flow is:
 
 ```
-ASH Cosmological Model
+ASH Model of the Universe
   -> Yggdrasil World Engine
     -> ASH Pattern System component and core runtime services
       -> Feature manifestation services
@@ -151,7 +160,7 @@ Host adapters materialize approved manifests but do not author symbolic truth.
 Phase 9 branch-reality dependency flow:
 
 ```text
-ASH Cosmological Model
+ASH Model of the Universe
   -> YWE Runtime Cosmology Contracts
     -> Branch Reality Resolver
       -> Feature Engines
@@ -167,7 +176,7 @@ Leaf Branch Reality
   -> Player Runtime State
     -> PlayerStateUpdatePacket
       -> YWE generation context references
-        -> ASH Cosmological Model-grounded generation
+        -> ASH Model of the Universe-grounded generation
           -> ASH Pattern System diagnostics and resilience support
 ```
 
