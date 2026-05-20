@@ -78,6 +78,28 @@ non_destructive_diff_result: pass
   new Phase 14 check script as a forbidden platform/runtime file.
   Solution: added the Phase 14 repository check script to the explicit
   Phase 10 allowed check-script exceptions.
+- Issue: PR review found duplicate CI coverage for the Phase 14 guardrail.
+  Solution: kept the guardrail inside `scripts/run_checks.sh` and removed the
+  extra standalone workflow step.
+- Issue: PR review found schema/guardrail mismatches for manifest and use
+  context required fields.
+  Solution: made `consequence_policy_ref`, `forbidden_interpretations`, and
+  `expected_consequence_kinds` required where the guardrail and examples already
+  treated them as core contract fields.
+- Issue: PR review found incomplete consequence reference fields.
+  Solution: added explicit reference arrays for every enumerated consequence
+  kind modeled by `AbilityConsequencePacket`.
+- Issue: PR review found Phase 14 example detection could pass on substring
+  matches.
+  Solution: changed the guardrail to compare exact normalized example keys.
+- Issue: PR review found the Phase 14 diff budget file was loaded but not used
+  for thresholds.
+  Solution: added budget limits to the JSON and enforced those values in the
+  Phase 14 guardrail.
+- Issue: PR review found manifestation contract terminology drift from schema
+  field names.
+  Solution: aligned required proof terms with `player_ref` and
+  `consequence_policy_ref`.
 
 ## Deviations
 

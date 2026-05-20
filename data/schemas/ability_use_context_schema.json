@@ -171,7 +171,8 @@
           "wolf_coherence_event",
           "ability_state_update"
         ]
-      }
+      },
+      "minItems": 1
     }
   },
   "required": [
@@ -182,6 +183,7 @@
     "use_mode",
     "player_ref",
     "branch_ref",
-    "source_refs"
+    "source_refs",
+    "expected_consequence_kinds"
   ]
 }

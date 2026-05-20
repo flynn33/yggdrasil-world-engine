@@ -297,6 +297,15 @@ def classify_change_paths(statuses: list[tuple[str, str]]) -> tuple[list[str], l
     return deleted, renamed, copied, existing_touched
 
 
+def budget_limit(budget: dict, key: str, default: int) -> int:
+    limits = budget.get("limits")
+    raw_value = limits.get(key, default) if isinstance(limits, dict) else budget.get(key, default)
+    try:
+        return int(raw_value)
+    except (TypeError, ValueError):
+        return default
+
+
 def all_phase_14_json_files(root: Path) -> list[Path]:
     paths: set[Path] = set()
     for path_name in PHASE_14_VALIDATION_FILES + PHASE_14_CHECK_SPECS:
@@ -423,7 +432,7 @@ def check_schema_contracts(root: Path, errors: list[str]) -> None:
     expected = {
         "data/schemas/ability_manifest_schema.json": {
             "schema_id": "ywe.ability_manifest.v1",
-            "required": {"source_refs", "use_modes"},
+            "required": {"source_refs", "use_modes", "consequence_policy_ref", "forbidden_interpretations"},
             "properties": {"consequence_policy_ref", "forbidden_interpretations"},
         },
         "data/schemas/ability_unlock_pressure_schema.json": {
@@ -433,13 +442,25 @@ def check_schema_contracts(root: Path, errors: list[str]) -> None:
         },
         "data/schemas/ability_use_context_schema.json": {
             "schema_id": "ywe.ability_use_context.v1",
-            "required": {"use_mode", "player_ref", "branch_ref", "source_refs"},
+            "required": {"use_mode", "player_ref", "branch_ref", "source_refs", "expected_consequence_kinds"},
             "properties": {"expected_consequence_kinds", "wolf_companion_refs"},
         },
         "data/schemas/ability_consequence_packet_schema.json": {
             "schema_id": "ywe.ability_consequence_packet.v1",
             "required": {"use_context_ref", "consequence_kinds"},
-            "properties": {"worldstate_delta_refs", "diagnostic_noop_ref", "wolf_coherence_event_refs"},
+            "properties": {
+                "worldstate_delta_refs",
+                "diagnostic_noop_ref",
+                "player_state_update_refs",
+                "location_mutation_candidate_refs",
+                "future_generation_bias_refs",
+                "quest_progress_signal_refs",
+                "npc_relationship_change_refs",
+                "myth_seed_candidate_refs",
+                "prophecy_pressure_update_refs",
+                "wolf_coherence_event_refs",
+                "ability_state_update_refs",
+            },
         },
         "data/schemas/ability_wolf_synergy_schema.json": {
             "schema_id": "ywe.ability_wolf_synergy.v1",
@@ -470,6 +491,15 @@ def check_schema_contracts(root: Path, errors: list[str]) -> None:
             require(field in properties, f"{path_name} properties missing {field}.", errors)
 
 
+def example_key(path: Path) -> str:
+    key = path.name.removesuffix(".example.json")
+    key = key.removeprefix("invalid_")
+    for suffix in ("_manifest", "_ability"):
+        if key.endswith(suffix):
+            key = key.removesuffix(suffix)
+    return key
+
+
 def check_examples(root: Path, errors: list[str]) -> None:
     rules = load_json_checked(root, root / PHASE_14_EXAMPLE_VALIDATION, errors)
     example_root = root / PHASE_14_EXAMPLE_ROOT
@@ -477,18 +507,19 @@ def check_examples(root: Path, errors: list[str]) -> None:
         errors.append(f"Missing Phase 14 examples directory: {PHASE_14_EXAMPLE_ROOT}")
         return
     files = sorted(example_root.glob("*.json"))
-    stems = {path.stem for path in files}
+    valid_keys = {example_key(path) for path in files if not path.name.startswith("invalid_")}
+    invalid_keys = {example_key(path) for path in files if path.name.startswith("invalid_")}
 
     if isinstance(rules, dict):
         for required_name in rules.get("required_examples", []):
             require(
-                isinstance(required_name, str) and any(required_name in stem for stem in stems),
+                isinstance(required_name, str) and required_name in valid_keys,
                 f"Missing required Phase 14 example: {required_name}",
                 errors,
             )
         for invalid_name in rules.get("invalid_examples_must_be_rejected", []):
             require(
-                isinstance(invalid_name, str) and any(invalid_name in stem for stem in stems),
+                isinstance(invalid_name, str) and invalid_name in invalid_keys,
                 f"Missing required invalid Phase 14 example: {invalid_name}",
                 errors,
             )
@@ -605,12 +636,18 @@ def check_non_destructive_diff(root: Path, errors: list[str]) -> None:
     if not isinstance(budget, dict):
         return
     deleted, renamed, copied, existing_touched = classify_change_paths(git_change_paths(root, errors))
-    require(not deleted, f"Phase 14 file deletions require manual review: {deleted}", errors)
-    require(not renamed, f"Phase 14 renames require manual review: {renamed}", errors)
-    require(len(copied) <= 0, f"Phase 14 copied paths require manual review: {copied}", errors)
+
+    max_deleted = budget_limit(budget, "max_existing_file_deletions", 0)
+    max_renamed = budget_limit(budget, "max_directory_renames", 0)
+    max_copied = budget_limit(budget, "max_copied_paths", 0)
+    max_touched = budget_limit(budget, "max_existing_files_touched_without_review", 25)
+
+    require(len(deleted) <= max_deleted, f"Phase 14 file deletions exceed budget {max_deleted}: {deleted}", errors)
+    require(len(renamed) <= max_renamed, f"Phase 14 renames exceed budget {max_renamed}: {renamed}", errors)
+    require(len(copied) <= max_copied, f"Phase 14 copied paths exceed budget {max_copied}: {copied}", errors)
     require(
-        len(existing_touched) <= 25,
-        f"Phase 14 existing files touched exceed budget 25: {len(existing_touched)}",
+        len(existing_touched) <= max_touched,
+        f"Phase 14 existing files touched exceed budget {max_touched}: {len(existing_touched)}",
         errors,
     )
 

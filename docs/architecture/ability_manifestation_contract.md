@@ -29,7 +29,7 @@ A manifestation must reference:
 AbilityManifest
 AbilityUseContext
 source_refs
-player_state_ref
+player_ref
 branch_ref
-consequence_policy
+consequence_policy_ref
 ```

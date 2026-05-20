@@ -146,7 +146,8 @@
       "type": "array",
       "items": {
         "type": "string"
-      }
+      },
+      "minItems": 1
     }
   },
   "required": [
@@ -155,6 +156,8 @@
     "ability_id",
     "display_name",
     "source_refs",
-    "use_modes"
+    "use_modes",
+    "consequence_policy_ref",
+    "forbidden_interpretations"
   ]
 }
