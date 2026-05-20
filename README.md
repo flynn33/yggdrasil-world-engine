@@ -1,27 +1,41 @@
-# Yggdrasil World Engine (YWE) v2.0.1
+# Yggdrasil World Engine (YWE) v2.0.14
 
-A cosmology-driven procedural narrative simulation engine based on the ASH Model and the Forsetti Framework.
+A cosmology-driven procedural narrative simulation engine built on the ASH Model of the Universe and governed by code-agnostic engine contracts.
 
 ---
 
 ## Current Authority Stack
 
-Where Ravens Wait: Eternal Reckoning is the game/narrative layer. Yggdrasil
-World Engine is the agnostic game engine. The ASH Cosmological Model is the
-upstream foundation for YWE and its systems. The ASH Pattern System is a YWE
-component for diagnostics, pattern integrity, recovery, containment,
-resilience, conformance, and update/patch stability.
+The ASH Model of the Universe is the mathematical and ontological foundation of
+Yggdrasil World Engine. Yggdrasil World Engine is an agnostic simulation
+framework built on that model. The ASH Pattern System is a YWE component that
+provides pattern integrity, diagnostics, recovery, containment, conformance,
+code resilience, update safety, and patch stability. Where Ravens Wait: Eternal
+Reckoning is the game and narrative layer built on the engine.
 
-Yggdrasil World Engine is the agnostic engine.
+Mandatory source-truth statements:
+
+- Yggdrasil World Engine is built on the ASH Model of the Universe.
+- The ASH Model of the Universe is the mathematical and ontological foundation of the engine simulation layer.
+- The ASH Pattern System is a YWE component for pattern integrity, diagnostics, recovery, containment, conformance, code resilience, update safety, and patch stability.
+- Where Ravens Wait: Eternal Reckoning is the game and narrative layer.
+
+The engine is a framework foundation, not a fixed setting bible. Designers may
+define their own lore, gods, mythologies, factions, histories, and worlds on top
+of the structural ontology.
 
 Current authority contracts:
 
+- `docs/architecture/ash_model_engine_cosmology_contract.md`
 - `docs/architecture/ywe_cosmology_authority_contract.md`
 - `docs/architecture/ash_pattern_system_component_contract.md`
+- `docs/architecture/engine_vs_game_layer_contract.md`
+- `docs/architecture/cosmology_framework_extensibility_contract.md`
 
 Earlier repository language may use ASH Pattern System as shorthand for the
 upstream mathematical layer. That shorthand is superseded by the current
-authority stack above.
+authority stack above: the ASH Model of the Universe is the foundation, and the
+ASH Pattern System is a YWE component.
 
 ---
 
@@ -36,7 +50,9 @@ The Yggdrasil World Engine is a **code-agnostic cosmic narrative simulation engi
 - Civilizations
 - Player mythic identities
 
-All procedural systems derive from **ASH cosmological mathematics**.
+All procedural systems derive from the **ASH Model of the Universe** through
+ASH cosmic pattern state, diagnostics, generation plans, and YWE interpretation
+contracts.
 
 YWE functions as a **reality simulation layer**, not a rendering engine.
 Rendering engines (Unity, Unreal, Godot) function as **host environments**.
@@ -62,7 +78,11 @@ The public reference wiki is available at:
 
 ### Canonical 9-Realm Cosmology
 
-The core cosmology is based on nine fixed cosmological states:
+The default nine realms are engine-level structural state layers and simulation
+constants. They are not mandatory fictional map locations at the engine layer.
+Where Ravens Wait: Eternal Reckoning may narratively express them as realms of
+being, while other implementations may rename or reskin them if the structural
+relationships remain stable.
 
 1. Divine Core
 2. Celestial
@@ -92,12 +112,12 @@ The world does not change -- player perception changes. The same location can be
 
 ### Cosmic Pattern Engine
 
-The ASH Cosmological Model is the upstream cosmological and generative
-foundation for YWE and its systems. The ASH Pattern System is a YWE component
-that protects pattern integrity, diagnostics, recovery, containment,
-conformance, code resilience, and update/patch stability. No subsystem may
-generate meaningful content independently of ASH-derived state, diagnostics,
-codeword traces, and generation plans.
+The ASH Model of the Universe is the mathematical and ontological foundation of
+the engine simulation layer. The ASH Pattern System is a YWE component that
+protects pattern integrity, diagnostics, recovery, containment, conformance,
+code resilience, update safety, and patch stability. No subsystem may generate
+meaningful content independently of ASH-derived state, diagnostics, codeword
+traces, and generation plans.
 
 ### ASH/ASP Core Math Baseline
 
@@ -119,10 +139,11 @@ component and packet-spine evidence, but the current repository authority stack
 is defined by `docs/architecture/ywe_cosmology_authority_contract.md`.
 
 ```text
-ASH Pattern System
+ASH Model of the Universe
   -> Yggdrasil World Engine
-    -> YWE game systems / feature engines
-      -> platform-specific runtime implementations
+    -> ASH Pattern System component and YWE runtime systems
+      -> YWE feature engines
+        -> platform-specific runtime implementations
 ```
 
 Player actions and exploration create YWE context packets and worldstate

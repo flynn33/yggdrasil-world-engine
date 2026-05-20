@@ -12,6 +12,9 @@
     ".ts",
     ".py"
   ],
-  "allowed_exception": "repository_existing_check_scripts_only_if_explicitly_requested",
+  "allowed_exception": "repository_check_scripts_only_if_explicitly_requested",
+  "allowed_added_paths": [
+    "scripts/check_source_truth_alignment.py"
+  ],
   "severity": "block"
 }

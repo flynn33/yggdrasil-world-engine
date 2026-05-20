@@ -4,25 +4,28 @@
 Version: **1.0**  
 Status: **Foundational Canon**  
 Framework Alignment: **Forsetti Framework**  
-Cosmology Model: **ASH Model**
+Cosmology Model: **ASH Model of the Universe**
 
 ---
 
 ## Current Authority Stack
 
-Where Ravens Wait: Eternal Reckoning is the game/narrative layer. Yggdrasil
-World Engine is the agnostic game engine. The ASH Cosmological Model is the
-upstream foundation for YWE and its systems. The ASH Pattern System is a YWE
-component for diagnostics, pattern integrity, recovery, containment,
-resilience, conformance, and update/patch stability.
+The ASH Model of the Universe is the mathematical and ontological foundation of
+Yggdrasil World Engine. Yggdrasil World Engine is an agnostic simulation
+framework built on that model. The ASH Pattern System is a YWE component for
+pattern integrity, diagnostics, recovery, containment, conformance, code
+resilience, update safety, and patch stability. Where Ravens Wait: Eternal
+Reckoning is the game and narrative layer built on the engine.
 
-YWE systems interpret and manifest the ASH Cosmological Model through
+YWE systems interpret and manifest the ASH Model of the Universe through
 engine-agnostic contracts. ASH Pattern System checks and contracts preserve
 pattern integrity, diagnostic coverage, recovery behavior, safe failure,
 conformance, and patch/update stability.
 
-The controlling authority contract for this clarification is
-`docs/architecture/ywe_cosmology_authority_contract.md`.
+The controlling authority contracts for this clarification are
+`docs/architecture/ash_model_engine_cosmology_contract.md`,
+`docs/architecture/ywe_cosmology_authority_contract.md`, and
+`docs/architecture/ash_pattern_system_component_contract.md`.
 
 ---
 
@@ -37,13 +40,15 @@ The **Yggdrasil World Engine (YWE)** is a **code-agnostic cosmic narrative simul
 - civilizations
 - player mythic identities
 
-All procedural systems derive from **ASH cosmological mathematics**.
+All procedural systems derive from the **ASH Model of the Universe** through
+ASH cosmic pattern state, diagnostics, generation plans, and YWE interpretation
+contracts.
 
-Phase 8-9 supersession note: The ASH Cosmological Model is the upstream
+Phase 8-9 supersession note: The ASH Model of the Universe is the upstream
 foundation for YWE and its systems. The ASH Pattern System is a YWE component
 for pattern integrity, diagnostics, recovery, containment, conformance, code
-resilience, and update/patch stability. Generated content must be grounded in
-cosmological provenance, branch context, axiom diagnostics,
+resilience, update safety, and patch stability. Generated content must be
+grounded in cosmological provenance, branch context, axiom diagnostics,
 pattern-vector semantics, existence potential, and worldstate evidence.
 
 YWE functions as a **reality simulation layer**, not a rendering engine.
@@ -54,23 +59,24 @@ Rendering engines (Unity, Unreal, Godot) function as **host environments**.
 
 Historical note: earlier repository language described ASH Pattern System as
 the upstream mathematical and generative authority for YWE. That framing is now
-superseded by the current authority stack: ASH Cosmological Model is the
+superseded by the current authority stack: ASH Model of the Universe is the
 foundation for YWE and its systems, and ASH Pattern System is a YWE component
-for diagnostics, integrity, recovery, containment, resilience, conformance, and
-update/patch stability.
+for diagnostics, integrity, recovery, containment, resilience, conformance,
+code resilience, update safety, and patch stability.
 
 ```text
-ASH Pattern System
+ASH Model of the Universe
   -> Yggdrasil World Engine
-    -> YWE game systems / feature engines
-      -> platform-specific runtime implementations
+    -> ASH Pattern System component and YWE runtime systems
+      -> YWE feature engines
+        -> platform-specific runtime implementations
 ```
 
-YWE is the downstream world, narrative, and manifestation engine built on ASH
-authority. YWE consumes ASH-derived state, diagnostics, codeword traces, and
-generation plans, then interprets them into realm, quest, NPC, creature,
-artifact, myth, prophecy, perception, faction, progression, wolf, and ability
-manifestations.
+YWE is the downstream world, narrative, and manifestation engine built on the
+ASH Model of the Universe. YWE consumes ASH-derived state, diagnostics,
+codeword traces, and generation plans, then interprets them into realm, quest,
+NPC, creature, artifact, myth, prophecy, perception, faction, progression,
+wolf, and ability manifestations.
 
 YWE is not the origin of ASH math. YWE must not redefine ASH state space,
 codeword sets, transition rules, diagnostics, or generation-planning semantics.
@@ -84,14 +90,16 @@ The canonical architecture contract for this boundary is
 ## Phase 9 Runtime Cosmology Foundation
 
 Where Ravens Wait: Eternal Reckoning remains the game and narrative layer.
-Yggdrasil World Engine remains the agnostic game engine. The ASH Cosmological
-Model remains the upstream foundation for YWE and its systems. The ASH Pattern
-System remains a YWE component for pattern integrity, diagnostics, recovery,
-containment, conformance, resilience, and update/patch stability.
+Yggdrasil World Engine remains the agnostic simulation framework. The ASH Model
+of the Universe remains the upstream foundation for YWE and its systems. The
+ASH Pattern System remains a YWE component for pattern integrity, diagnostics,
+recovery, containment, conformance, code resilience, update safety, and patch
+stability.
 
-The nine planes define the base world ontology. They are the substrate from
-which runtime manifestation is interpreted, not a generated branch tree and not
-ordinary gameplay zones.
+The default nine planes define engine-level structural state layers and
+simulation constants. They are the substrate from which runtime manifestation
+is interpreted, not a generated branch tree, not mandatory fictional locations,
+and not ordinary gameplay zones.
 
 Leaf branch realities are runtime-generated player realities. Each
 runtime-generated leaf branch is created from meaningful player choice and
@@ -163,6 +171,11 @@ In YWE canon, **realm** and **plane** are equivalent terms.
 The universe stabilizes into **nine fixed realms or planes**.
 They are layered states of existence separated by liminal space.
 They do not change structure.
+
+At the engine layer, the default nine realms are structural simulation layers
+and implementation categories, not mandatory fictional map locations. Where
+Ravens Wait: Eternal Reckoning expresses them as realms of being; other games
+may rename or reskin them while preserving their structural relationships.
 
 ---
 
@@ -262,7 +275,15 @@ Identity is **revealed through play**, not chosen at character creation.
 
 # 5. ALIGNMENT SYSTEM
 
-White Wolf and Dark Wolf are **paired symbiotic companions of consciousness**, not morality markers.
+White Wolf and Dark Wolf are **complementary opposites**, but not moral
+opposites. They are not good and evil, and they are not a morality system. The
+player may act morally or immorally, but the wolves are not moral poles.
+
+The wolves are embodied companions that physically walk with the player, assist
+in quest completion and combat, appear in visions, and signal major changes.
+They cannot be killed. They can only temporarily decohere and later return.
+Each wolf carries what the other needs.
+
 The healthiest path is balance, not domination of one over the other.
 
 ## White Wolf
@@ -270,10 +291,12 @@ The healthiest path is balance, not domination of one over the other.
 Represents:
 
 - illumination
+- protection
 - revelation
 - knowledge
 - truth exposure
-- consuming ignorance
+- clarification
+- making patterns visible
 
 ## Dark Wolf
 
@@ -284,6 +307,9 @@ Represents:
 - unseen forces
 - concealment
 - depth
+- endurance
+- transformation
+- gravity and memory
 
 ## Alignment Rules
 
@@ -298,6 +324,10 @@ Both alignments may increase simultaneously.
 
 A single quest may award both White Wolf and Dark Wolf attunement depending on how the player completes it.
 Every conscious being carries both wolves.
+
+The legacy `wolf_alignment` field is a non-moral dual-variable alignment
+surface. Preferred prose should use `wolf_resonance` or
+`dual_variable_alignment` when describing the model.
 
 ---
 
@@ -333,7 +363,10 @@ Even outside realm-shift locations, players may activate realm-aligned abilities
 
 # 7. BLOODLINE SYSTEM
 
-Bloodlines represent **ancestral resonance with mythic structures**.
+Bloodlines represent **lineage resonance with mythic structures**.
+Lineage resonance is a simulation-level propagation mechanic. Designers may
+theme it as ancestry, inheritance, faction legacy, house memory, oath-chain
+pressure, or other lineage systems.
 
 Example:
 
@@ -363,7 +396,8 @@ Bloodlines affect:
 }
 ```
 
-Bloodlines do not lock destiny. They influence **cosmic eligibility**.
+Lineage resonance does not lock destiny. It influences **cosmic eligibility**,
+interpretive pressure, and inherited cosmological attunements.
 
 ---
 
@@ -655,7 +689,9 @@ They are paired balance-keepers and visible companions where canonically appropr
 
 # 16. DIVINE CORE ENDGAME
 
-The Divine Core is the **ultimate destination**, one of the nine realms or planes, and the endgame objective.
+In the Where Ravens Wait narrative layer, the Divine Core is the **ultimate
+destination**, expressed through the nine-realm structural ontology and the
+endgame objective.
 
 Requirements to approach may include:
 
@@ -716,8 +752,11 @@ YWE only generates procedural terrain for:
 
 YWE is organized as an **engine-first** architecture.
 
-ASH defines upstream mathematical and generative authority. YWE interprets and
-manifests ASH-derived truth through engine-first contracts.
+The ASH Model of the Universe defines the mathematical and ontological
+foundation. YWE interprets and manifests ASH-derived truth through engine-first
+contracts. The ASH Pattern System component stabilizes pattern operations,
+diagnostics, recovery, containment, conformance, code resilience, update
+safety, and patch stability.
 
 Additional systems can be implemented as separate engines/modules later.
 
@@ -952,10 +991,12 @@ implementation:
 All procedural systems must derive from:
 
 ```text
-ASH Pattern Detection
+ASH cosmic pattern state under the ASH Model of the Universe
 ```
 
-No subsystem may become an independent random generator detached from the cosmic state.
+ASH Pattern Detection is the component-level validation and stabilization
+surface. No subsystem may become an independent random generator detached from
+the cosmic state.
 
 ---
 

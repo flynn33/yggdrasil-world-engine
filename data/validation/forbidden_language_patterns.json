@@ -1,0 +1,71 @@
+{
+  "contract_id": "ywe.forbidden_source_truth_drift_patterns.v1",
+  "allow_in_paths": [
+    "docs/handoff/",
+    "docs/history/",
+    "*_PRIOR_*",
+    "*_superseded*"
+  ],
+  "patterns": [
+    {
+      "id": "asp_topmost_cosmology",
+      "pattern": "ASH Pattern System is the top-level cosmology",
+      "severity": "fail"
+    },
+    {
+      "id": "asp_upstream_ontology",
+      "pattern": "ASH Pattern System is the upstream ontology",
+      "severity": "fail"
+    },
+    {
+      "id": "asp_source_all_meaning",
+      "pattern": "ASH Pattern System is the source of all meaning",
+      "severity": "fail"
+    },
+    {
+      "id": "white_good_dark_evil",
+      "pattern": "White Wolf is good",
+      "severity": "fail"
+    },
+    {
+      "id": "dark_evil",
+      "pattern": "Dark Wolf is evil",
+      "severity": "fail"
+    },
+    {
+      "id": "wolf_morality_meter",
+      "pattern": "wolf morality meter",
+      "severity": "fail"
+    },
+    {
+      "id": "wolf_corruption_meter",
+      "pattern": "corruption meter",
+      "severity": "fail"
+    },
+    {
+      "id": "wolf_purity_meter",
+      "pattern": "purity meter",
+      "severity": "fail"
+    },
+    {
+      "id": "permanent_wolf_death",
+      "pattern": "permanent wolf death",
+      "severity": "fail"
+    },
+    {
+      "id": "kill_wolf",
+      "pattern": "kill the White Wolf",
+      "severity": "fail"
+    },
+    {
+      "id": "kill_dark_wolf",
+      "pattern": "kill the Dark Wolf",
+      "severity": "fail"
+    },
+    {
+      "id": "wolves_not_opposites",
+      "pattern": "White Wolf and Dark Wolf are not opposites",
+      "severity": "fail"
+    }
+  ]
+}

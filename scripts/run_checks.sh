@@ -66,6 +66,7 @@ echo "Phase 10, Phase 11, and Phase 12 guardrails are active."
 run_check "Player Runtime State Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_player_runtime_state.py" "$ROOT_DIR"
 run_check "Worldstate Location Mutation Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_worldstate_location_mutation.py" "$ROOT_DIR"
 run_check "Quest NPC Lore Generation Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_quest_npc_lore_generation.py" "$ROOT_DIR"
+run_check "Source Truth Alignment Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_source_truth_alignment.py" "$ROOT_DIR"
 
 echo "=========================================="
 echo "Results: $PASS passed, $FAIL failed"

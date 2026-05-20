@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.dual_variable_alignment_state.v1",
+  "title": "Dual Variable Alignment State",
+  "type": "object",
+  "required": [
+    "model_role",
+    "morality_system",
+    "variables"
+  ],
+  "properties": {
+    "model_role": {
+      "const": "paired_complementary_simulation_variables"
+    },
+    "morality_system": {
+      "const": false
+    },
+    "both_variables_may_grow_from_same_event": {
+      "const": true
+    },
+    "theme_skin": {
+      "type": "string"
+    },
+    "variables": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "balance_state": {
+      "enum": [
+        "balanced",
+        "asymmetric",
+        "dominant_a",
+        "dominant_b",
+        "integrating",
+        "unstable"
+      ]
+    }
+  }
+}

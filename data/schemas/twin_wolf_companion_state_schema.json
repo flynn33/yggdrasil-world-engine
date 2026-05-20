@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.twin_wolf_companion_state.v1",
+  "title": "Twin Wolf Companion State",
+  "type": "object",
+  "required": [
+    "white_wolf",
+    "dark_wolf",
+    "relationship",
+    "morality_system",
+    "each_has_what_the_other_needs",
+    "physical_companion_presence",
+    "quest_assistance_enabled",
+    "combat_assistance_enabled",
+    "death_policy",
+    "decoherence_policy"
+  ],
+  "allOf": [
+    {
+      "required": [
+        "each_has_what_the_other_needs",
+        "physical_companion_presence",
+        "quest_assistance_enabled",
+        "combat_assistance_enabled"
+      ]
+    }
+  ],
+  "$defs": {
+    "required_true_invariant": {
+      "const": true
+    }
+  },
+  "properties": {
+    "relationship": {
+      "const": "complementary_non_moral_opposites"
+    },
+    "morality_system": {
+      "const": false
+    },
+    "each_has_what_the_other_needs": {
+      "$ref": "#/$defs/required_true_invariant"
+    },
+    "physical_companion_presence": {
+      "$ref": "#/$defs/required_true_invariant"
+    },
+    "quest_assistance_enabled": {
+      "$ref": "#/$defs/required_true_invariant"
+    },
+    "combat_assistance_enabled": {
+      "$ref": "#/$defs/required_true_invariant"
+    },
+    "death_policy": {
+      "const": "cannot_be_killed"
+    },
+    "decoherence_policy": {
+      "type": "object",
+      "required": [
+        "temporary_decoherence_allowed",
+        "return_after_decoherence"
+      ],
+      "properties": {
+        "temporary_decoherence_allowed": {
+          "$ref": "#/$defs/required_true_invariant"
+        },
+        "return_after_decoherence": {
+          "$ref": "#/$defs/required_true_invariant"
+        }
+      }
+    },
+    "white_wolf": {
+      "type": "object",
+      "properties": {
+        "functions": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "illuminates",
+              "protects",
+              "reveals",
+              "clarifies",
+              "pattern_visibility"
+            ]
+          }
+        },
+        "coherence_state": {
+          "enum": [
+            "coherent",
+            "stressed",
+            "decohered",
+            "recovering",
+            "returned"
+          ]
+        }
+      }
+    },
+    "dark_wolf": {
+      "type": "object",
+      "properties": {
+        "functions": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "endures",
+              "conceals",
+              "transforms",
+              "contains",
+              "memory",
+              "gravity"
+            ]
+          }
+        },
+        "coherence_state": {
+          "enum": [
+            "coherent",
+            "stressed",
+            "decohered",
+            "recovering",
+            "returned"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "contract_id": "ywe.source_truth_non_destructive_change_budget.v1",
+  "max_files_modified_without_human_review": 25,
+  "max_files_deleted_without_human_review": 0,
+  "forbidden_operations": [
+    "rm -rf",
+    "git reset --hard",
+    "delete_directory",
+    "mass_find_replace_without_review",
+    "overwrite_repository"
+  ],
+  "requires_human_review_if": [
+    "any_file_deleted",
+    "more_than_25_files_modified",
+    "validation_script_rewritten_wholesale",
+    "existing_lore_file_removed",
+    "existing_schema_removed"
+  ]
+}

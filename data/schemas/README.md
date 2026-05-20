@@ -2,19 +2,20 @@
 
 Date: 2026-05-10
 Project: Yggdrasil World Engine
-Status: ASH upstream authority schema index
+Status: source-truth schema index
 
 ## Purpose
 Documents the shared schema contracts used by YWE systems to consume
 ASH-derived state, diagnostics, codeword traces, generation plans, and
 downstream interpretation packets.
 
-Current authority clarification: ASH Cosmological Model is the upstream
-foundation for YWE and its systems. ASH Pattern System is a YWE component for
-pattern integrity, diagnostics, recovery, containment, conformance, code
-resilience, and update/patch stability. Earlier shorthand that described ASH as
-upstream mathematical and generative authority should be read as referring to
-the ASH Cosmological Model, not ASH Pattern System as an upstream authority.
+Current authority clarification: ASH Model of the Universe is the mathematical
+and ontological foundation for YWE and its systems. ASH Pattern System is a YWE
+component for pattern integrity, diagnostics, recovery, containment,
+conformance, code resilience, update safety, and patch stability. Earlier
+shorthand that described ASH as upstream mathematical and generative authority
+should be read as referring to the ASH Model of the Universe, not ASH Pattern
+System as an upstream authority.
 
 ## Upstream Generation Packet Spine
 
@@ -81,6 +82,12 @@ generation bias update foundation.
 | `content_generation_candidate_schema.json` | Phase 12 generic candidate handoff contract for quest, NPC, and lore outputs |
 | `content_manifest_handoff_schema.json` | Phase 12 downstream handoff contract for generated content manifests |
 | `quest_npc_lore_linkage_schema.json` | Phase 12 linkage contract connecting quests, NPC candidates, lore fragments, and shared provenance |
+| `engine_authority_stack_schema.json` | Source-truth authority stack contract for ASH Model, YWE, ASH Pattern System component, and game layer |
+| `engine_cosmology_framework_schema.json` | Engine cosmology framework contract for structural layers and extensible implementation lore |
+| `ash_pattern_system_component_role_schema.json` | ASH Pattern System component-role schema for diagnostics, recovery, containment, conformance, resilience, update safety, and patch stability |
+| `twin_wolf_companion_state_schema.json` | Twin Wolf companion canon schema for complementary non-moral embodied companions, quest/combat assistance, and decoherence return |
+| `dual_variable_alignment_state_schema.json` | Non-moral dual-variable alignment schema where both variables may grow from the same event |
+| `lineage_resonance_state_schema.json` | Simulation-level lineage resonance schema for ancestry, inheritance, faction legacy, and related thematic skins |
 
 ## Required Provenance
 
@@ -96,6 +103,6 @@ Every meaningful manifest must preserve:
 - all meaningful generation must remain ASH-derived
 - player actions influence future generation context; they do not mutate ASH math
 - host adapters materialize approved manifests but do not author truth
-- fixed cosmology must remain locked
+- engine structural ontology remains stable while narrative skins remain extensible
 - perception must not rewrite shared-world truth
 - Forsetti governs activation; YWE governs truth

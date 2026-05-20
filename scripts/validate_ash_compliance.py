@@ -6,6 +6,21 @@ import os
 import sys
 
 
+def ash_layer_set(ash_model, errors):
+    layers = ash_model.get("layers", [])
+    if not isinstance(layers, list) or not all(isinstance(layer, str) for layer in layers):
+        errors.append("ASH Model violation: cosmology schema layers must be a list of strings")
+        return None
+    return set(layers)
+
+
+def check_ash_layers(ash_model, errors):
+    required_layers = {"archetype", "symbolic", "harmonic"}
+    layers = ash_layer_set(ash_model, errors)
+    if layers is not None and layers != required_layers:
+        errors.append("ASH Model violation: cosmology schema must preserve archetype, symbolic, and harmonic layers")
+
+
 def check_realm_count(root):
     """Verify exactly nine canonical realms exist."""
     realms_path = os.path.join(root, "data", "realm_registry", "realms.json")
@@ -76,6 +91,23 @@ def check_cosmology_schema(root):
     if realm_terms.get("plane_equals_realm") is not True:
         errors.append("ASH violation: planes and realms must remain equivalent")
 
+    ash_model = data.get("ash_model_foundation", {})
+    if ash_model.get("model_name") != "ASH Model of the Universe":
+        errors.append("ASH Model violation: cosmology schema must name ASH Model of the Universe as foundation")
+    if ash_model.get("role") != "mathematical_and_ontological_foundation":
+        errors.append("ASH Model violation: cosmology schema must record mathematical and ontological foundation role")
+    if ash_model.get("engine_framework_foundation") is not True:
+        errors.append("ASH Model violation: cosmology schema must mark the ASH Model as engine framework foundation")
+    check_ash_layers(ash_model, errors)
+
+    framework = data.get("engine_cosmology_framework", {})
+    if framework.get("fixed_setting_bible") is not False:
+        errors.append("YWE cosmology violation: engine cosmology must not be a fixed setting bible")
+    if framework.get("designer_lore_extensible") is not True:
+        errors.append("YWE cosmology violation: designer lore extensibility must remain true")
+    if framework.get("realm_layers_are_structural_simulation_constants") is not True:
+        errors.append("YWE cosmology violation: realm layers must remain structural simulation constants")
+
     wolf_canon = data.get("wolf_canon", {})
     if (
         wolf_canon.get("relationship")
@@ -92,10 +124,24 @@ def check_cosmology_schema(root):
         errors.append("ASH violation: wolf ideal state must remain balance")
     if wolf_canon.get("permanent_death") is not False:
         errors.append("ASH violation: wolves must remain permanently indestructible")
-    if wolf_canon.get("temporary_loss_state") != "coherence_loss":
+    if wolf_canon.get("opposition_type") != "complementary_non_moral_opposites":
+        errors.append("ASH violation: wolves must remain complementary non-moral opposites")
+    if wolf_canon.get("morality_system") is not False:
+        errors.append("ASH violation: wolves must not become a morality system")
+    if wolf_canon.get("physical_companion_presence") is not True:
+        errors.append("ASH violation: wolves must physically accompany the player")
+    if wolf_canon.get("quest_assistance") is not True:
+        errors.append("ASH violation: wolves must preserve quest assistance")
+    if wolf_canon.get("combat_assistance") is not True:
+        errors.append("ASH violation: wolves must preserve combat assistance")
+    if wolf_canon.get("temporary_loss_state") != "decoherence":
         errors.append(
-            "ASH violation: wolves must use coherence_loss as their temporary loss state"
+            "ASH violation: wolves must use decoherence as their temporary loss state"
         )
+    if wolf_canon.get("return_after_decoherence") is not True:
+        errors.append("ASH violation: wolves must return after decoherence")
+    if wolf_canon.get("each_has_what_the_other_needs") is not True:
+        errors.append("ASH violation: wolf canon must preserve mutual need")
 
     return errors
 

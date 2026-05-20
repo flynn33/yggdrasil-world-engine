@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "ywe.ash_pattern_system_component_role.v1",
+  "title": "ASH Pattern System Component Role",
+  "type": "object",
+  "required": [
+    "role",
+    "not_topmost_cosmology",
+    "responsibilities"
+  ],
+  "properties": {
+    "role": {
+      "const": "ywe_engine_component"
+    },
+    "not_topmost_cosmology": {
+      "const": true
+    },
+    "foundation_ref": {
+      "const": "ASH_Model_of_the_Universe"
+    },
+    "responsibilities": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "enum": [
+          "pattern_integrity",
+          "diagnostics",
+          "recovery",
+          "containment",
+          "conformance",
+          "code_resilience",
+          "update_safety",
+          "patch_stability",
+          "drift_detection",
+          "generation_plan_consistency"
+        ]
+      }
+    }
+  }
+}

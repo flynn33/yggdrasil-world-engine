@@ -14,6 +14,8 @@ SKIP_EXACT = {
     PATTERN_PATH,
     "data/validation/branch_reality_guardrail_rules.json",
     "data/validation/forbidden_player_state_language_patterns.json",
+    "data/validation/forbidden_language_patterns.json",
+    "data/validation/github_checks_matrix.json",
     "data/validation/phase_11_forbidden_language_patterns.json",
     "data/validation/phase_12_forbidden_language_patterns.json",
     "scripts/check_branch_reality_guardrail.py",
@@ -93,6 +95,7 @@ def forbidden_hits(root: Path, patterns: list[tuple[str, str]]) -> list[tuple[st
 
 def missing_required_phrases(root: Path) -> list[str]:
     candidates = [
+        root / "docs/architecture/base_world_ontology_contract.md",
         root / "docs/architecture/leaf_branch_reality_contract.md",
         root / "docs/architecture/runtime_cosmology_foundation_contract.md",
         root / "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
