@@ -5,6 +5,15 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.15] — 2026-05-20
+
+### Changed
+- Update authority drift guardrail
+
+
+---
+
+
 ## [2.0.14] — 2026-05-19
 
 ### Added
