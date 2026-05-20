@@ -1,0 +1,55 @@
+{
+  "schema_id": "ywe.ability_manifest.v1",
+  "schema_version": "0.1.0",
+  "ability_id": "ability.causal_thread_mark",
+  "display_name": "Causal Thread Mark",
+  "description": "The player marks an unresolved consequence so future generation keeps the thread alive.",
+  "ability_family": "consequence_marker",
+  "state_ref": {
+    "ref_id": "ability.causal_thread_mark.state",
+    "ref_type": "AbilityState"
+  },
+  "source_refs": [
+    {
+      "ref_id": "plane.causal.pressure",
+      "ref_type": "PlaneAttunementState",
+      "source_system": "player_runtime"
+    },
+    {
+      "ref_id": "quest.buried_oath.unresolved_thread",
+      "ref_type": "QuestGenerationContext",
+      "source_system": "quest_generation"
+    },
+    {
+      "ref_id": "future_generation_bias.ravenfall.oath_thread",
+      "ref_type": "FutureGenerationBiasUpdate",
+      "source_system": "worldstate"
+    }
+  ],
+  "use_modes": [
+    "quest",
+    "exploration",
+    "perception"
+  ],
+  "manifestation_rule_refs": [
+    {
+      "ref_id": "ability.causal_thread_mark.manifestation_rule",
+      "ref_type": "AbilityManifestationRule"
+    }
+  ],
+  "risk_profile_ref": {
+    "ref_id": "ability.causal_thread_mark.risk",
+    "ref_type": "AbilityRiskProfile"
+  },
+  "consequence_policy_ref": {
+    "ref_id": "ability.causal_thread_mark.consequence_policy",
+    "ref_type": "AbilityConsequencePacket"
+  },
+  "wolf_scope": "none",
+  "forbidden_interpretations": [
+    "generic_skill_tree_reward",
+    "wolf_morality_meter",
+    "white_good_dark_evil",
+    "permanent_wolf_death_cost"
+  ]
+}

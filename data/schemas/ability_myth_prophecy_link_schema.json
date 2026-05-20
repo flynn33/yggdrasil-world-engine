@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_myth_prophecy_link_schema.json",
+  "title": "AbilityMythProphecyLink",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_myth_prophecy_link.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "link_id": {
+      "type": "string"
+    },
+    "ability_id": {
+      "type": "string"
+    },
+    "myth_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "prophecy_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "activation_window_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "guaranteed_future": {
+      "type": "boolean",
+      "description": "Must be false. Prophecy may create pressure, not fixed scripting."
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "link_id",
+    "ability_id"
+  ]
+}

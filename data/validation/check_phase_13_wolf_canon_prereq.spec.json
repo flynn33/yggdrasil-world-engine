@@ -1,0 +1,20 @@
+{
+  "check_id": "check_phase_13_wolf_canon_prereq",
+  "description": "Verify Phase 13 wolf companion canon before ability integration.",
+  "recommended_trigger": "pull_request",
+  "inputs": [
+    "docs/architecture",
+    "data/schemas",
+    "data/validation"
+  ],
+  "failure_conditions": [
+    "wolves framed as morality",
+    "wolf death language present",
+    "wolf companion presence missing"
+  ],
+  "output": [
+    "pass",
+    "fail",
+    "blocked"
+  ]
+}

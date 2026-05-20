@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_combat_role_schema.json",
+  "title": "AbilityCombatRole",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_combat_role.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "ability_id": {
+      "type": "string"
+    },
+    "combat_roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "defense",
+          "reveal_pattern",
+          "anchor",
+          "containment",
+          "strike",
+          "mobility",
+          "recovery",
+          "companion_assist",
+          "control",
+          "support"
+        ]
+      }
+    },
+    "wolf_participation": {
+      "type": "object",
+      "properties": {
+        "white_wolf_role": {
+          "type": "string"
+        },
+        "dark_wolf_role": {
+          "type": "string"
+        },
+        "twin_role": {
+          "type": "string"
+        },
+        "not_morality": {
+          "type": "boolean"
+        }
+      }
+    },
+    "risk_profile_ref": {
+      "type": "object",
+      "description": "Reference object",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "consequence_policy_ref": {
+      "type": "object",
+      "description": "Reference object",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "ability_id",
+    "combat_roles"
+  ]
+}

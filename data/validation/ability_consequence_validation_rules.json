@@ -1,0 +1,18 @@
+{
+  "rules_id": "ywe.ability_consequence.validation_rules",
+  "meaningful_use_requires_one_of": [
+    "worldstate_delta",
+    "diagnostic_noop",
+    "player_state_update",
+    "location_mutation_candidate",
+    "future_generation_bias",
+    "quest_progress_signal",
+    "npc_relationship_change",
+    "myth_seed_candidate",
+    "prophecy_pressure_update",
+    "wolf_coherence_event",
+    "ability_state_update"
+  ],
+  "allow_diagnostic_noop_for_no_effect": true,
+  "reject_silent_effects": true
+}

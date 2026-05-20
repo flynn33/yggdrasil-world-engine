@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_manifestation_rule_schema.json",
+  "title": "AbilityManifestationRule",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_manifestation_rule.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "rule_id": {
+      "type": "string"
+    },
+    "ability_id": {
+      "type": "string"
+    },
+    "allowed_states": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "latent",
+          "pressured",
+          "eligible",
+          "unlocked",
+          "unstable",
+          "coherent",
+          "mastered",
+          "transformed",
+          "decohered",
+          "sealed"
+        ]
+      }
+    },
+    "required_context_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "manifestation_modes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "host_materialization_boundary": {
+      "type": "string"
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "rule_id",
+    "ability_id",
+    "allowed_states"
+  ]
+}

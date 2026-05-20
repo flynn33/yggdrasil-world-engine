@@ -1,0 +1,29 @@
+{
+  "guardrail_id": "ywe.phase14.guardrails",
+  "rules": [
+    {
+      "id": "no_generic_skill_tree",
+      "reject_if": "ability unlock depends only on XP, level, class, currency, or skill point purchase"
+    },
+    {
+      "id": "source_provenance_required",
+      "reject_if": "ability lacks source_refs or provenance"
+    },
+    {
+      "id": "consequence_required",
+      "reject_if": "meaningful ability use lacks consequence packet or DiagnosticNoOp"
+    },
+    {
+      "id": "wolf_non_morality",
+      "reject_if": "ability maps White Wolf to good or Dark Wolf to evil"
+    },
+    {
+      "id": "wolf_no_death",
+      "reject_if": "ability cost or failure permanently kills a wolf"
+    },
+    {
+      "id": "asp_component_role",
+      "reject_if": "ASH Pattern System is framed as topmost cosmology"
+    }
+  ]
+}

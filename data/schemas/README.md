@@ -88,6 +88,29 @@ generation bias update foundation.
 | `twin_wolf_companion_state_schema.json` | Twin Wolf companion canon schema for complementary non-moral embodied companions, quest/combat assistance, and decoherence return |
 | `dual_variable_alignment_state_schema.json` | Non-moral dual-variable alignment schema where both variables may grow from the same event |
 | `lineage_resonance_state_schema.json` | Simulation-level lineage resonance schema for ancestry, inheritance, faction legacy, and related thematic skins |
+| `ability_state_schema.json` | Phase 14 ability state record for latent, pressured, eligible, unlocked, transformed, decohered, or sealed abilities |
+| `ability_unlock_pressure_schema.json` | Phase 14 unlock pressure record derived from branch, worldstate, lineage, plane, wolf, artifact, myth, and prophecy sources |
+| `ability_source_ref_schema.json` | Phase 14 source provenance reference for ability eligibility and manifestation |
+| `ability_manifest_schema.json` | Phase 14 ability manifest contract for use modes, source refs, and consequence policy refs |
+| `ability_manifestation_rule_schema.json` | Phase 14 manifestation rule contract for state-bound ability expression |
+| `ability_progression_event_schema.json` | Phase 14 ability progression event record |
+| `ability_use_context_schema.json` | Phase 14 combat, quest, exploration, perception, social, ritual, recovery, and threshold-use context |
+| `ability_consequence_packet_schema.json` | Phase 14 AbilityConsequencePacket for meaningful use outcomes |
+| `ability_combat_role_schema.json` | Phase 14 combat role mapping for ability surfaces |
+| `ability_quest_application_schema.json` | Phase 14 quest application mapping for ability use |
+| `ability_wolf_synergy_schema.json` | Phase 14 wolf synergy record preserving companion presence and non-morality constraints |
+| `ability_decoherence_state_schema.json` | Phase 14 temporary decoherence and recovery condition record |
+| `ability_branch_influence_schema.json` | Phase 14 leaf-branch influence record |
+| `ability_plane_attunement_link_schema.json` | Phase 14 plane attunement link record |
+| `ability_lineage_resonance_link_schema.json` | Phase 14 lineage resonance link record |
+| `ability_artifact_binding_link_schema.json` | Phase 14 artifact binding link record |
+| `ability_myth_prophecy_link_schema.json` | Phase 14 myth and prophecy link record |
+| `ability_permission_gate_schema.json` | Phase 14 permission gate result record |
+| `ability_cooldown_and_recovery_schema.json` | Phase 14 cooldown, containment, and recovery reference record |
+| `ability_risk_profile_schema.json` | Phase 14 risk profile record |
+| `ability_catalog_entry_schema.json` | Phase 14 catalog entry for supported use modes and source categories |
+| `ability_state_update_packet_schema.json` | Phase 14 AbilityStateUpdatePacket for downstream state mutation handoff |
+| `ability_loadout_state_schema.json` | Phase 14 player ability loadout state record |
 
 ## Required Provenance
 

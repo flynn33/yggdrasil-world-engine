@@ -11,8 +11,9 @@ handoff records.
 
 ## Current Handoff Records
 
-Phase 11 and Phase 12 owner-approved packages have landed as active review
-artifacts. Earlier adjacent records remain retained for historical review.
+Phase 11, Phase 12, source-truth alignment, and Phase 14 package records have
+landed as active review artifacts. Earlier adjacent records remain retained for
+historical review.
 
 | File | Purpose |
 |---|---|
@@ -31,6 +32,7 @@ artifacts. Earlier adjacent records remain retained for historical review.
 | `YWE_PHASE_12_EXISTENTIAL_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-18.md` | Active Phase 12 existential quest, NPC, and lore generation handoff |
 | `YWE_PHASE_12_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-17.md` | Earlier Phase 12-adjacent handoff retained for historical review |
 | `YWE_SOURCE_TRUTH_ALIGNMENT_HANDOFF_2026-05-19.md` | Source-truth and Twin Wolf alignment remediation handoff |
+| `YWE_PHASE_14_ABILITY_POWER_ENGINE_COMPLETION_REPORT_2026-05-19.md` | Phase 14 Ability / Power Engine completion report |
 | `repo_implementation_mapping.md` | Repository implementation mapping |
 | `missing_source_documents.md` | Missing source document inventory |
 

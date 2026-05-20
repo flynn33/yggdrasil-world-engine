@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_source_ref_schema.json",
+  "title": "AbilitySourceRef",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_source_ref.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "source_kind": {
+      "type": "string",
+      "enum": [
+        "plane_attunement",
+        "lineage_resonance",
+        "bloodline_resonance",
+        "wolf_companion_state",
+        "leaf_branch_history",
+        "branch_event",
+        "worldstate_delta",
+        "location_threshold_event",
+        "quest_resolution",
+        "artifact_binding",
+        "myth_participation",
+        "prophecy_exposure",
+        "celestial_identity_progression",
+        "existence_potential_shift",
+        "pattern_vector_shift",
+        "asp_diagnostic",
+        "recovery_event"
+      ]
+    },
+    "source_ref": {
+      "type": "object",
+      "description": "Reference object",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "weight": {
+      "type": "number"
+    },
+    "interpretation": {
+      "type": "string"
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      },
+      "minItems": 1
+    },
+    "wolf_canon_guard": {
+      "type": "object",
+      "properties": {
+        "not_morality": {
+          "type": "boolean"
+        },
+        "not_wolf_death": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "source_id",
+    "source_kind",
+    "source_ref"
+  ]
+}

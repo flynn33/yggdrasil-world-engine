@@ -1,0 +1,36 @@
+{
+  "schema_id": "ywe.ability_use_context.v1",
+  "schema_version": "0.1.0",
+  "use_context_id": "combat.white_guard.ravenfall",
+  "ability_id": "ability.oath_sight",
+  "use_mode": "combat",
+  "player_ref": {
+    "ref_id": "player.current"
+  },
+  "branch_ref": {
+    "ref_id": "branch.ravenfall.reveal_oath"
+  },
+  "location_ref": {
+    "ref_id": "location.ravenfall_gate"
+  },
+  "target_refs": [
+    {
+      "ref_id": "encounter.oathbreaker_shadow"
+    }
+  ],
+  "wolf_companion_refs": [
+    {
+      "ref_id": "wolf.white.current",
+      "ref_type": "WhiteWolfCompanion"
+    }
+  ],
+  "source_refs": [
+    {
+      "ref_id": "ability.oath_sight.manifest"
+    }
+  ],
+  "expected_consequence_kinds": [
+    "diagnostic_noop",
+    "quest_progress_signal"
+  ]
+}

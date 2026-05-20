@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_loadout_state_schema.json",
+  "title": "AbilityLoadoutState",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_loadout_state.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "player_ref": {
+      "type": "object",
+      "description": "Reference object",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "active_ability_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "branch_scope_ref": {
+      "type": "object",
+      "description": "Reference object",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "combat_available_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "quest_available_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "sealed_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "decohered_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "player_ref"
+  ]
+}

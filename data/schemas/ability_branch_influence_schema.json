@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_branch_influence_schema.json",
+  "title": "AbilityBranchInfluence",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_branch_influence.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "influence_id": {
+      "type": "string"
+    },
+    "ability_id": {
+      "type": "string"
+    },
+    "branch_ref": {
+      "type": "object",
+      "description": "Reference object",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "influence_kind": {
+      "type": "string",
+      "enum": [
+        "availability",
+        "seal",
+        "transform",
+        "stabilize",
+        "open_path",
+        "close_path",
+        "bias_future_generation"
+      ]
+    },
+    "worldstate_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "future_generation_bias_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "influence_id",
+    "ability_id",
+    "branch_ref",
+    "influence_kind"
+  ]
+}

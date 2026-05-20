@@ -153,6 +153,22 @@ into world, quest, NPC, creature, artifact, myth, prophecy, perception, faction,
 progression, wolf, and ability manifests. Host adapters materialize approved
 manifests but do not author symbolic truth.
 
+### Ability / Power Engine
+
+Phase 14 defines the code-agnostic Ability / Power Engine surface. Abilities
+emerge from source provenance rather than a generic unlock ladder: branch
+history, worldstate deltas, player runtime state, plane attunement, lineage and
+bloodline resonance, wolf companion state, artifact binding, myth participation,
+prophecy exposure, and location threshold events may all contribute pressure.
+
+The core Phase 14 contracts live in `docs/architecture/ability_*.md`, with
+schemas in `data/schemas/ability_*_schema.json`, validation rules in
+`data/validation/ability_*_validation_rules.json`, and Ravenfall Gate examples
+in `examples/ability_power_engine/`. Meaningful use records
+`AbilityConsequencePacket`; state mutation hands off through
+`AbilityStateUpdatePacket`; eligibility and pressure are represented by
+`AbilityUnlockPressure`.
+
 ---
 
 ## System Map

@@ -1,0 +1,32 @@
+{
+  "schema_id": "ywe.ability_unlock_pressure.v1",
+  "schema_version": "0.1.0",
+  "ability_id": "ability.grave_anchor",
+  "player_ref": {
+    "ref_id": "player.current",
+    "ref_type": "PlayerRuntimeState"
+  },
+  "pressure_score": 0.72,
+  "pressure_sources": [
+    {
+      "ref_id": "ravenfall_gate.conceal_oath.delta",
+      "ref_type": "WorldstateDeltaPacket"
+    },
+    {
+      "ref_id": "dark_wolf.memory_anchor",
+      "ref_type": "WolfResonanceEvent"
+    },
+    {
+      "ref_id": "plane.shadow_mental.pressure",
+      "ref_type": "PlaneAttunementState"
+    }
+  ],
+  "pressure_breakdown": {
+    "worldstate_delta": 0.2,
+    "dark_wolf_anchor": 0.34,
+    "shadow_mental_attunement": 0.18
+  },
+  "eligibility_state": "eligible",
+  "blocking_refs": [],
+  "recommended_state_transition": "eligible"
+}

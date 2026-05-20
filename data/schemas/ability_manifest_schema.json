@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_manifest_schema.json",
+  "title": "AbilityManifest",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_manifest.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "ability_id": {
+      "type": "string"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "ability_family": {
+      "type": "string"
+    },
+    "state_ref": {
+      "type": "object",
+      "description": "Ability state reference",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      },
+      "minItems": 1
+    },
+    "use_modes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "combat",
+          "quest",
+          "exploration",
+          "perception",
+          "social",
+          "recovery_or_containment",
+          "ritual",
+          "threshold_traversal"
+        ]
+      },
+      "minItems": 1
+    },
+    "manifestation_rule_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "risk_profile_ref": {
+      "type": "object",
+      "description": "Ability risk profile reference",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "consequence_policy_ref": {
+      "type": "object",
+      "description": "Ability consequence policy reference",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "forbidden_interpretations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "ability_id",
+    "consequence_policy_ref",
+    "forbidden_interpretations",
+    "display_name",
+    "source_refs",
+    "use_modes"
+  ]
+}

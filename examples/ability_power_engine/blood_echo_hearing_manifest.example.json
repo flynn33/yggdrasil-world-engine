@@ -1,0 +1,55 @@
+{
+  "schema_id": "ywe.ability_manifest.v1",
+  "schema_version": "0.1.0",
+  "ability_id": "ability.blood_echo_hearing",
+  "display_name": "Blood-Echo Hearing",
+  "description": "The player hears ancestral resonance in a place without being forced into a fixed destiny.",
+  "ability_family": "lineage_memory",
+  "state_ref": {
+    "ref_id": "ability.blood_echo_hearing.state",
+    "ref_type": "AbilityState"
+  },
+  "source_refs": [
+    {
+      "ref_id": "lineage.ravenson.echo",
+      "ref_type": "LineageResonanceState",
+      "source_system": "player_runtime"
+    },
+    {
+      "ref_id": "plane.astral_mental.pressure",
+      "ref_type": "PlaneAttunementState",
+      "source_system": "player_runtime"
+    },
+    {
+      "ref_id": "ravenfall_gate.hidden_history",
+      "ref_type": "LorePatternTrace",
+      "source_system": "lore_generation"
+    }
+  ],
+  "use_modes": [
+    "quest",
+    "perception",
+    "exploration"
+  ],
+  "manifestation_rule_refs": [
+    {
+      "ref_id": "ability.blood_echo_hearing.manifestation_rule",
+      "ref_type": "AbilityManifestationRule"
+    }
+  ],
+  "risk_profile_ref": {
+    "ref_id": "ability.blood_echo_hearing.risk",
+    "ref_type": "AbilityRiskProfile"
+  },
+  "consequence_policy_ref": {
+    "ref_id": "ability.blood_echo_hearing.consequence_policy",
+    "ref_type": "AbilityConsequencePacket"
+  },
+  "wolf_scope": "none",
+  "forbidden_interpretations": [
+    "generic_skill_tree_reward",
+    "wolf_morality_meter",
+    "white_good_dark_evil",
+    "permanent_wolf_death_cost"
+  ]
+}

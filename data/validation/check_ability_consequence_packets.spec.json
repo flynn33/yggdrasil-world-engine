@@ -1,0 +1,17 @@
+{
+  "check_id": "check_ability_consequence_packets",
+  "description": "Verify meaningful ability use records consequence.",
+  "recommended_trigger": "pull_request",
+  "inputs": [
+    "data/schemas",
+    "examples/ability_power_engine"
+  ],
+  "failure_conditions": [
+    "meaningful use without AbilityConsequencePacket, WorldstateDeltaPacket, or DiagnosticNoOp"
+  ],
+  "output": [
+    "pass",
+    "fail",
+    "blocked"
+  ]
+}

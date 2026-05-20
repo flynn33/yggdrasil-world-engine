@@ -685,6 +685,27 @@ The wolves are never enemies.
 
 They are paired balance-keepers and visible companions where canonically appropriate.
 
+## Ability / Power Engine Integration
+
+Abilities are YWE feature-engine manifests grounded in source provenance. They
+do not unlock only from level, class, currency, or skill-point purchase. Valid
+ability pressure may come from player branch history, worldstate deltas, player
+runtime state, plane attunement, bloodline and lineage resonance, wolf
+companion state, artifact binding, myth participation, prophecy exposure, or
+location threshold events.
+
+Meaningful ability use must resolve through an `AbilityConsequencePacket`,
+`WorldstateDeltaPacket`, player state update, future generation bias, wolf
+coherence event, or explicit `DiagnosticNoOp`. Ability state mutation is
+represented by `AbilityStateUpdatePacket`; eligibility and pressure are
+represented by `AbilityUnlockPressure`.
+
+Wolf-linked abilities preserve Twin Wolf companion canon. White Wolf and Dark
+Wolf can participate in combat, quest guidance, perception, threshold traversal,
+and containment without becoming moral poles. Ability strain can cause temporary
+decoherence with recovery conditions; it cannot make the wolves enemies or
+remove recovery.
+
 ---
 
 # 16. DIVINE CORE ENDGAME

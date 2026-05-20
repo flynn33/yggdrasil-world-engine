@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_use_context_schema.json",
+  "title": "AbilityUseContext",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_use_context.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "use_context_id": {
+      "type": "string"
+    },
+    "ability_id": {
+      "type": "string"
+    },
+    "use_mode": {
+      "type": "string",
+      "enum": [
+        "combat",
+        "quest",
+        "exploration",
+        "perception",
+        "social",
+        "recovery_or_containment",
+        "ritual",
+        "threshold_traversal"
+      ]
+    },
+    "player_ref": {
+      "type": "object",
+      "description": "Reference object",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "branch_ref": {
+      "type": "object",
+      "description": "Reference object",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "location_ref": {
+      "type": "object",
+      "description": "Reference object",
+      "additionalProperties": true,
+      "properties": {
+        "ref_id": {
+          "type": "string"
+        },
+        "ref_type": {
+          "type": "string"
+        },
+        "source_system": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref_id"
+      ]
+    },
+    "target_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "wolf_companion_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      },
+      "minItems": 1
+    },
+    "expected_consequence_kinds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "worldstate_delta",
+          "diagnostic_noop",
+          "player_state_update",
+          "location_mutation_candidate",
+          "future_generation_bias",
+          "quest_progress_signal",
+          "npc_relationship_change",
+          "myth_seed_candidate",
+          "prophecy_pressure_update",
+          "wolf_coherence_event",
+          "ability_state_update"
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "use_context_id",
+    "ability_id",
+    "expected_consequence_kinds",
+    "use_mode",
+    "player_ref",
+    "branch_ref",
+    "source_refs"
+  ]
+}

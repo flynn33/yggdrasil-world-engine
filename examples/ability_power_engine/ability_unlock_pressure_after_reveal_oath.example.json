@@ -1,0 +1,32 @@
+{
+  "schema_id": "ywe.ability_unlock_pressure.v1",
+  "schema_version": "0.1.0",
+  "ability_id": "ability.oath_sight",
+  "player_ref": {
+    "ref_id": "player.current",
+    "ref_type": "PlayerRuntimeState"
+  },
+  "pressure_score": 0.76,
+  "pressure_sources": [
+    {
+      "ref_id": "ravenfall_gate.reveal_oath.delta",
+      "ref_type": "WorldstateDeltaPacket"
+    },
+    {
+      "ref_id": "white_wolf.revelation_resonance",
+      "ref_type": "WolfResonanceEvent"
+    },
+    {
+      "ref_id": "plane.mental_causal.pressure",
+      "ref_type": "PlaneAttunementState"
+    }
+  ],
+  "pressure_breakdown": {
+    "worldstate_delta": 0.25,
+    "white_wolf_pattern_visibility": 0.3,
+    "mental_causal_attunement": 0.21
+  },
+  "eligibility_state": "eligible",
+  "blocking_refs": [],
+  "recommended_state_transition": "eligible"
+}

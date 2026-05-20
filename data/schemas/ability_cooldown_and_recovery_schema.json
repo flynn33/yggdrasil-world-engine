@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_cooldown_and_recovery_schema.json",
+  "title": "AbilityCooldownAndRecovery",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_cooldown_and_recovery.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "ability_id": {
+      "type": "string"
+    },
+    "cooldown_policy": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "recovery_policy": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "asp_recovery_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    },
+    "wolf_decoherence_recovery_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Reference object",
+        "additionalProperties": true,
+        "properties": {
+          "ref_id": {
+            "type": "string"
+          },
+          "ref_type": {
+            "type": "string"
+          },
+          "source_system": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ref_id"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "ability_id"
+  ]
+}
