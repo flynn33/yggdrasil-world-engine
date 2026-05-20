@@ -7,6 +7,7 @@ import json
 import os
 import subprocess
 import sys
+from fnmatch import fnmatch
 from pathlib import Path
 
 TEXT_ENCODING = "utf-8-sig"
@@ -28,18 +29,36 @@ SCAN_PATHS = [
 ]
 
 FORBIDDEN_CONTEXT_MARKERS = {
+    "forbidden:",
+    "forbidden framing",
+    "forbidden pattern",
+    "forbidden source-truth",
+    "non-canonical:",
+    "non-canonical framing",
+    "reject:",
+    "reject_if",
+    "rejected:",
+    "rejected framing",
+    "superseded:",
+    "historical:",
+    "historical note:",
+}
+
+FORBIDDEN_CONTEXT_HEADINGS = {
     "forbidden",
+    "historical",
     "non-canonical",
     "reject",
     "rejected",
-    "rejection",
     "superseded",
-    "historical",
+}
+
+DIRECT_NEGATION_CONTEXT_MARKERS = {
+    "does not introduce",
+    "does not treat",
+    "is not the",
+    "is not a",
     "must not",
-    "does not",
-    "do not",
-    "not the",
-    "not a",
 }
 
 
@@ -126,7 +145,7 @@ def check_required_language(root: Path, errors: list[str]) -> None:
             "combat_assistance": "assist in combat",
             "cannot_be_killed": "cannot be killed",
             "temporary_decoherence": "temporarily decohere",
-            "return_after_decoherence": "return",
+            "return_after_decoherence": "later return",
         }
         for truth in wolf_rules.get("required_truths", []):
             phrase = required_truth_phrases.get(truth)
@@ -154,22 +173,55 @@ def active_scan_files(root: Path) -> list[Path]:
     return files
 
 
-def allowed_forbidden_context(context: str) -> bool:
-    lowered = context.lower()
-    return any(marker in lowered for marker in FORBIDDEN_CONTEXT_MARKERS)
+def path_matches(path_name: str, pattern: str) -> bool:
+    normalized = pattern.rstrip("/")
+    if pattern.endswith("/") and path_name.startswith(pattern):
+        return True
+    return (
+        path_name == normalized
+        or path_name.startswith(f"{normalized}/")
+        or fnmatch(path_name, pattern)
+    )
 
 
-def check_forbidden_patterns(root: Path, patterns: list[str], label: str, errors: list[str]) -> None:
+def allowed_forbidden_context(lines: list[str], index: int) -> bool:
+    current_line = lines[index].lower()
+    context_lines = [lines[index]]
+    for line in reversed(lines[max(0, index - 3) : index]):
+        if line.strip():
+            context_lines.append(line)
+            break
+    for line in context_lines:
+        normalized = line.lower().strip().lstrip("-* ").strip()
+        heading = normalized.lstrip("#").strip().rstrip(":")
+        if heading in FORBIDDEN_CONTEXT_HEADINGS:
+            return True
+        if any(marker in normalized for marker in FORBIDDEN_CONTEXT_MARKERS):
+            return True
+    if any(marker in current_line for marker in DIRECT_NEGATION_CONTEXT_MARKERS):
+        return True
+    return False
+
+
+def check_forbidden_patterns(
+    root: Path,
+    patterns: list[str],
+    label: str,
+    errors: list[str],
+    allow_in_paths: list[str] | None = None,
+) -> None:
+    allow_patterns = allow_in_paths or []
     for path in active_scan_files(root):
         rel = path.relative_to(root).as_posix()
         if rel.startswith("docs/handoff/"):
+            continue
+        if any(path_matches(rel, pattern) for pattern in allow_patterns):
             continue
         lines = read_text(path).splitlines()
         for index, line in enumerate(lines):
             lowered = line.lower()
             for pattern in patterns:
-                context = "\n".join(lines[max(0, index - 3) : index + 1])
-                if pattern.lower() in lowered and not allowed_forbidden_context(context):
+                if pattern.lower() in lowered and not allowed_forbidden_context(lines, index):
                     errors.append(f"Forbidden {label} in {rel}:{index + 1}: {line.strip()}")
 
 
@@ -178,12 +230,22 @@ def check_forbidden_language(root: Path, errors: list[str]) -> None:
     if not isinstance(data, dict):
         return
     pattern_items = data.get("forbidden_patterns", data.get("patterns", []))
-    patterns = [
-        item.get("pattern", "")
-        for item in pattern_items
-        if isinstance(item, dict) and isinstance(item.get("pattern"), str)
+    patterns: list[str] = []
+    for index, item in enumerate(pattern_items):
+        if not isinstance(item, dict) or not isinstance(item.get("pattern"), str):
+            continue
+        pattern = item["pattern"].strip()
+        if not pattern:
+            pattern_id = item.get("id", index)
+            errors.append(f"{FORBIDDEN_LANGUAGE} contains empty forbidden pattern: {pattern_id}")
+            continue
+        patterns.append(pattern)
+    allow_in_paths = [
+        path_name
+        for path_name in data.get("allow_in_paths", [])
+        if isinstance(path_name, str) and path_name.strip()
     ]
-    check_forbidden_patterns(root, patterns, "source-truth phrase", errors)
+    check_forbidden_patterns(root, patterns, "source-truth phrase", errors, allow_in_paths)
 
 
 def git_ref_exists(root: Path, ref: str) -> bool:
@@ -250,29 +312,51 @@ def git_change_paths(root: Path, errors: list[str]) -> list[tuple[str, str]]:
     for status, path_name in git_name_status(root, f"{base_ref}...HEAD"):
         paths[path_name] = status
     for status, path_name in git_name_status(root):
-        paths[path_name] = status
+        if status.startswith("D") or path_name not in paths:
+            paths[path_name] = status
     for status, path_name in git_name_status(root, "--cached"):
-        paths[path_name] = status
+        if status.startswith("D") or path_name not in paths:
+            paths[path_name] = status
     for status, path_name in git_untracked_paths(root):
         paths.setdefault(path_name, status)
     return [(status, path_name) for path_name, status in paths.items()]
 
 
-def int_budget_value(data: dict, names: tuple[str, ...], default: int) -> int:
+def int_budget_value(data: dict, names: tuple[str, ...], default: int, label: str, errors: list[str]) -> int:
     for name in names:
         if name in data:
-            return int(data[name])
+            try:
+                return int(data[name])
+            except (TypeError, ValueError):
+                errors.append(f"{label} budget value {name} must be an integer: {data[name]!r}")
+                return default
     return default
 
 
+def protected_deleted_paths(deleted: list[str], protected_paths: list[str]) -> list[str]:
+    return [
+        path_name
+        for path_name in deleted
+        if any(path_matches(path_name, protected_path) for protected_path in protected_paths)
+    ]
+
+
 def check_non_destructive_changes(root: Path, data: dict, label: str, errors: list[str]) -> None:
-    max_deleted = int_budget_value(data, ("max_deleted_files", "max_files_deleted_without_human_review"), 0)
+    max_deleted = int_budget_value(
+        data,
+        ("max_deleted_files", "max_files_deleted_without_human_review"),
+        0,
+        label,
+        errors,
+    )
     max_modified = int_budget_value(
         data,
         ("max_modified_files_without_review", "max_files_modified_without_human_review"),
         25,
+        label,
+        errors,
     )
-    max_renames = int_budget_value(data, ("max_directory_renames", "max_renamed_files"), 0)
+    max_renames = int_budget_value(data, ("max_directory_renames", "max_renamed_files"), 0, label, errors)
     deleted = []
     modified = []
     renamed = []
@@ -284,6 +368,18 @@ def check_non_destructive_changes(root: Path, data: dict, label: str, errors: li
         elif not status.startswith(("A", "C")):
             modified.append(path_name)
     require(len(deleted) <= max_deleted, f"{label} file deletions exceed budget {max_deleted}: {deleted}", errors)
+    if data.get("fail_on_deleted_protected_paths") is True:
+        protected_paths = [
+            path_name
+            for path_name in data.get("protected_paths", [])
+            if isinstance(path_name, str) and path_name.strip()
+        ]
+        protected_deleted = protected_deleted_paths(deleted, protected_paths)
+        require(
+            not protected_deleted,
+            f"{label} deleted protected paths: {protected_deleted}",
+            errors,
+        )
     require(len(renamed) <= max_renames, f"{label} file renames exceed budget {max_renames}: {renamed}", errors)
     require(
         len(modified) <= max_modified,
@@ -352,7 +448,12 @@ def check_required_spec_phrases(root: Path, spec_name: str, spec: dict, errors: 
 def check_forbidden_spec_phrases(root: Path, spec_name: str, spec: dict, errors: list[str]) -> None:
     patterns: list[str] = []
     for key in ("forbidden_phrases", "forbidden_semantics", "forbidden_terms", "forbidden_patterns"):
-        patterns.extend(as_string_list(spec.get(key)))
+        for phrase in as_string_list(spec.get(key)):
+            normalized = phrase.strip()
+            if normalized:
+                patterns.append(normalized)
+            else:
+                errors.append(f"{spec_name} contains empty forbidden phrase in {key}")
     check_forbidden_patterns(root, patterns, f"{spec_name} forbidden phrase", errors)
 
 

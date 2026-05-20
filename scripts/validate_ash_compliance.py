@@ -84,7 +84,10 @@ def check_cosmology_schema(root):
     if ash_model.get("engine_framework_foundation") is not True:
         errors.append("ASH Model violation: cosmology schema must mark the ASH Model as engine framework foundation")
     required_layers = {"archetype", "symbolic", "harmonic"}
-    if set(ash_model.get("layers", [])) != required_layers:
+    layers = ash_model.get("layers", [])
+    if not isinstance(layers, list) or not all(isinstance(layer, str) for layer in layers):
+        errors.append("ASH Model violation: cosmology schema layers must be a list of strings")
+    elif set(layers) != required_layers:
         errors.append("ASH Model violation: cosmology schema must preserve archetype, symbolic, and harmonic layers")
 
     framework = data.get("engine_cosmology_framework", {})
