@@ -4,14 +4,24 @@ All notable changes to the Yggdrasil World Engine are documented here.
 
 ---
 
+## [Unreleased] — 2026-05-21
+
+### Documentation
+- Refresh README release baseline, repository reading paths, and Phase 14 Ability / Power Engine orientation.
+- Replace placeholder documentation indexes for master specification, governance, and glossary with current navigation guidance.
+- Expand wiki coverage with Phase 14 ability workflows, authority-stack visuals, validation maps, and current release navigation.
+- Align wiki synchronization content so future main-branch syncs preserve current authority and workflow language.
+
+---
+
 
 ## [2.0.16] — 2026-05-20
 
 ### Added
-- Merge pull request #53 from flynn33/codex/phase-14-ability-power-engine
-- Address Phase 14 follow-up review
-- Address Phase 14 review feedback
-- Implement Phase 14 ability power engine
+- Merge Phase 14 Ability / Power Engine package through PR #53.
+- Address Phase 14 follow-up review.
+- Address Phase 14 review feedback.
+- Implement Phase 14 Ability / Power Engine.
 
 ### Fixed
 - Harden Phase 14 review fixes
@@ -32,7 +42,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ## [2.0.14] — 2026-05-19
 
 ### Added
-- Merge pull request #51 from flynn33/codex/phase-12-existential-quest-npc-lore
+- Merge Phase 12 quest, NPC, and lore generation package through PR #51.
 - Address Phase 12 review comments
 - Implement Phase 12 quest NPC lore generation
 
@@ -89,7 +99,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ## [2.0.10] — 2026-05-17
 
 ### Added
-- Merge pull request #46 from flynn33/codex/phase-12-quest-npc-lore-generation-v1
+- Merge Phase 12 quest, NPC, and lore generation documentation package through PR #46.
 - docs: add phase 12 quest npc lore generation
 
 
@@ -99,7 +109,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ## [2.0.9] — 2026-05-17
 
 ### Added
-- Merge pull request #45 from flynn33/codex/phase-11-worldstate-location-mutation-v1
+- Merge Phase 11 worldstate and location mutation documentation package through PR #45.
 - docs: add phase 11 worldstate location mutation
 
 ### Fixed
@@ -177,7 +187,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ## [2.0.2] — 2026-05-10
 
 ### Added
-- Merge pull request #38 from flynn33/codex/ash-upstream-authority-clean
+- Merge ASH upstream authority cleanup through PR #38.
 - Address upstream authority packet requirements
 - Add ASH upstream authority contract
 
@@ -216,9 +226,9 @@ All notable changes to the Yggdrasil World Engine are documented here.
 - Add discussion moderation bot
 - Add repo-grounded discussion topic seeder
 - Add repo-grounded discussion response agents
-- Add no-AI contributor enforcement workflow
+- Add contributor identity enforcement workflow
 - feat: add faction topology state schema
-- feat: add no-ai contributor validation agent
+- feat: add contributor identity validation workflow
 - feat: add repository governance agents [skip version]
 - feat: add GitHub automation agents [skip version]
 - Add GitHub automation: wiki sync, versioning, changelog, and Forsetti compliance

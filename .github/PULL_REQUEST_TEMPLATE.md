@@ -45,3 +45,22 @@ Brief description of changes.
 - [ ] No engine-specific code on main branch (if targeting main)
 - [ ] Layer dependencies respected
 - [ ] Documentation updated (if applicable)
+
+## Full Local Guardrail Reproduction
+
+```bash
+bash scripts/run_checks.sh
+python3 scripts/check_json_integrity.py .
+python3 scripts/check_required_contracts.py .
+python3 scripts/check_phase_8_9_required_artifacts.py .
+python3 scripts/check_authority_stack.py --config data/validation/repository_drift_guardrail_rules.json .
+python3 scripts/check_branch_reality_guardrail.py .
+python3 scripts/check_phase_9_schema_semantics.py .
+python3 scripts/check_phase_8_9_package_boundary.py .
+python3 scripts/check_player_runtime_state.py .
+python3 scripts/check_worldstate_location_mutation.py .
+python3 scripts/check_quest_npc_lore_generation.py .
+python3 scripts/check_source_truth_alignment.py .
+python3 scripts/check_non_destructive_diff.py --base origin/main --head HEAD .
+git diff --check
+```

@@ -1,30 +1,39 @@
-# glossary Documentation Index
+# Glossary Documentation Index
 
-Date: 2026-03-13
 Project: Yggdrasil World Engine
-Status: placeholder awaiting finalized content
+Status: active glossary index
+Current baseline: `v2.0.16`
 
 ## Purpose
-Introduces the documents stored in `docs/glossary` and their role in the YWE repository.
 
-## Expected responsibilities
-- describe the purpose of this documentation domain
-- identify the kinds of documents expected here
-- support future document population without structural guessing
+The glossary keeps repository terminology stable across architecture
+contracts, schemas, lore documents, validation checks, and wiki pages. It is a
+reader-facing routing surface for terms that carry acceptance or retrieval
+value.
 
-## Inputs
-- repository architecture and handoff expectations
+## Documents
 
-## Outputs
-- documentation domain overview
-- navigation guidance for future contributors
+| File | Role |
+|---|---|
+| `ywe_design_glossary.md` | Active design glossary for YWE architecture, lore, runtime, and validation terms. |
+| `YWE_Design_Glossary_source.txt` | Source note record retained for provenance review. |
 
-## Dependencies
-- overall repository structure
-- handoff package
+## High-Value Term Families
 
-## Invariants
-- all meaningful generation must remain ASH-derived
-- fixed cosmology must remain locked
-- perception must not rewrite shared-world truth
-- Forsetti governs activation; YWE governs truth
+| Family | Examples |
+|---|---|
+| Authority stack | ASH Model of the Universe, Yggdrasil World Engine, ASH Pattern System component, Where Ravens Wait |
+| ASH math | `F2^9`, codeword, XOR transition, orbit, diagnostic envelope |
+| Runtime truth | base ontology, leaf branch reality, player runtime state, worldstate delta |
+| Generation | generation context packet, interpretation packet, manifest handoff, future generation bias |
+| Lore and perception | Twin Wolf, realm attunement, bloodline resonance, myth variant, perception overlay |
+| Ability engine | unlock pressure, ability source provenance, ability state update, ability consequence packet |
+
+## Maintenance Rules
+
+- Preserve exact names used by schemas, scripts, and architecture contracts.
+- Do not collapse player-local perception, NPC/faction claims, myth variants,
+  and committed worldstate into one truth layer.
+- Prefer current authority terms from `docs/architecture/README.md` and
+  `docs/architecture/ywe_cosmology_authority_contract.md`.
+- Keep glossary updates synchronized with wiki navigation and validation docs.

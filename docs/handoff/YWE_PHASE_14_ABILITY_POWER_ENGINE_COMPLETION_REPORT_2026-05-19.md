@@ -2,9 +2,9 @@
 
 phase: Phase 14 — Ability / Power Engine
 
-branch: `codex/phase-14-ability-power-engine`
+branch: Phase 14 implementation branch, merged by PR #53
 
-commit: pending PR publication
+commit: PR #53 merge `94a4b8c`; release baseline `f99c7c1`
 
 ## Summary
 

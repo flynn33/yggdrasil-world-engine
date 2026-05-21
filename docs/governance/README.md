@@ -1,30 +1,44 @@
-# governance Documentation Index
+# Governance Documentation Index
 
-Date: 2026-03-13
 Project: Yggdrasil World Engine
-Status: placeholder awaiting finalized content
+Status: active governance index
+Current baseline: `v2.0.16`
 
 ## Purpose
-Introduces the documents stored in `docs/governance` and their role in the YWE repository.
 
-## Expected responsibilities
-- describe the purpose of this documentation domain
-- identify the kinds of documents expected here
-- support future document population without structural guessing
+Governance documents describe how the repository preserves architecture
+authority, contributor workflow, discussion policy, automation, validation, and
+Forsetti-aligned lifecycle rules.
 
-## Inputs
-- repository architecture and handoff expectations
+## Documents
 
-## Outputs
-- documentation domain overview
-- navigation guidance for future contributors
+| File | Role |
+|---|---|
+| `forsetti_governance_alignment.md` | Maps YWE truth ownership to Forsetti-compatible governance boundaries. |
+| `github_automation_agents.md` | Documents repository workflow automation and validation responsibilities. |
+| `discussion_moderation_policy.md` | Defines GitHub Discussions moderation policy and enforcement scope. |
 
-## Dependencies
-- overall repository structure
-- handoff package
+## Workflow Entry Points
 
-## Invariants
-- all meaningful generation must remain ASH-derived
-- fixed cosmology must remain locked
-- perception must not rewrite shared-world truth
-- Forsetti governs activation; YWE governs truth
+| Workflow | File |
+|---|---|
+| Main validation | `../../.github/workflows/main-ci.yml` |
+| Repository guardrails | `../../.github/workflows/ywe_repository_guardrails.yml` |
+| Forsetti compliance | `../../.github/workflows/forsetti-compliance.yml` |
+| Wiki sync | `../../.github/workflows/wiki-sync.yml` |
+| Version and changelog | `../../.github/workflows/versioning.yml` |
+| Discussion routing | `../../.github/workflows/discussion-agents.yml` |
+| Discussion moderation | `../../.github/workflows/discussion-moderation.yml` |
+| Discussion topic seeding | `../../.github/workflows/discussion-topic-seeder.yml` |
+| Contributor identity gate | configured GitHub Actions contributor-identity workflow |
+
+## Governance Rules
+
+- Forsetti governs module lifecycle, activation policy, and structural
+  consistency.
+- YWE governs cosmology truth, source-truth hierarchy, runtime contracts, and
+  domain meaning.
+- ASH Pattern System remains a YWE component for diagnostics, recovery,
+  containment, conformance, code resilience, update safety, and patch stability.
+- Automation may validate, sync, seed, and moderate within documented
+  boundaries; it does not invent canon or bypass accepted package gates.

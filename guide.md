@@ -4,7 +4,7 @@
 
 ## 1. Purpose
 
-The Yggdrasil World Engine (YWE) is a code-agnostic cosmic narrative simulation engine governed by the [Forsetti Framework](https://github.com/flynn33/Forsetti-Framework) -- an architecture governance framework that enforces module contracts, runtime policy, and structural integrity. The `main` branch is the sealed, code-agnostic specification. Engine branches implement it in native idioms. This guide defines the Forsetti rules every contributor and AI agent must follow.
+The Yggdrasil World Engine (YWE) is a code-agnostic cosmic narrative simulation engine governed by the [Forsetti Framework](https://github.com/flynn33/Forsetti-Framework) -- an architecture governance framework that enforces module contracts, runtime policy, and structural integrity. The `main` branch is the sealed, code-agnostic specification. Engine branches implement it in native idioms. This guide defines the Forsetti rules every contributor, reviewer, and automation workflow must follow.
 
 ## 2. Design Principles
 
@@ -57,15 +57,15 @@ All systems must comply with the ASH cosmological model:
 - Each module owns exactly one responsibility
 - No reverse dependencies
 - No dependency cycles
-- All expansion modules must read from the ASH Pattern Engine
+- All expansion modules must consume ASH Model-grounded state through YWE contracts and may use ASH Pattern System component diagnostics
 - Modules communicate through events and framework services
 
 ## 7. Enforcement
 
 - `scripts/validate_architecture.py` checks structural compliance
 - `scripts/validate_schemas.py` validates JSON schemas plus canonical YAML and doc artifacts
-- `scripts/run_checks.sh` runs the full validation suite on POSIX shells
-- `scripts/run_checks.ps1` runs the full validation suite on Windows PowerShell
+- `bash scripts/run_checks.sh` runs the authoritative local validation suite on POSIX shells
+- `scripts/run_checks.ps1` runs the Windows PowerShell wrapper where available; verify parity before treating it as a full replacement for the Bash suite
 - CI guardrails block merges on any violation
 
 ## 8. Developer Workflow
@@ -73,7 +73,7 @@ All systems must comply with the ASH cosmological model:
 1. Fork or clone the repository.
 2. Branch from the appropriate engine branch (or `main` for spec changes).
 3. Implement against the interfaces defined in `core/*/engine_interface.json`.
-4. Run `bash scripts/run_checks.sh` on POSIX shells or `pwsh -File scripts/run_checks.ps1` on Windows and confirm all checks pass.
+4. Run `bash scripts/run_checks.sh` from the repository root and confirm all checks pass. On Windows, use `pwsh -File scripts/run_checks.ps1` only where it is known to cover the same active guardrail set.
 5. Open a pull request against the appropriate branch.
 
 ## 9. Non-Compliance

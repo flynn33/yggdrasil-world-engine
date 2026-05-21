@@ -36,6 +36,15 @@ historical review.
 | `repo_implementation_mapping.md` | Repository implementation mapping |
 | `missing_source_documents.md` | Missing source document inventory |
 
+## Phase Ordering Note
+
+Phase 13 remains intentionally deferred in earlier quest/NPC/lore planning
+records. The accepted source-truth and Twin Wolf alignment remediation landed
+between Phase 12 and Phase 14 as a prerequisite gate, and Phase 14 then added
+the Ability / Power Engine without implementing a separate Phase 13 feature
+package. Future Phase 13 work must still be accepted through its own package
+before it becomes an active surface.
+
 ## Historical Handoff Note
 
 `YWE_ASH_UPSTREAM_AUTHORITY_HANDOFF_2026-05-10.md` is retained as historical

@@ -2,7 +2,7 @@
 
 > Built on the [Forsetti Framework v0.1.0](https://github.com/flynn33/Forsetti-Framework)
 
-This document is the comprehensive reference for contributors, integrators, and AI agents working with the Yggdrasil World Engine.
+This document is the comprehensive reference for contributors, integrators, reviewers, and repository automation working with the Yggdrasil World Engine.
 
 ---
 
@@ -36,7 +36,7 @@ Players begin as mortals who have forgotten their celestial heritage. Identity e
 
 ---
 
-## 3. Alignment System
+## 3. Twin Wolf Companion and Alignment Model
 
 White Wolf and Dark Wolf are paired symbiotic companions of consciousness, not morality markers. Every conscious being carries both. Both can increase simultaneously, a single quest may award both alignments, and the healthiest path is balance rather than domination of one wolf over the other. Alignment is accumulation-only -- it can never decrease.
 
@@ -128,7 +128,8 @@ Every change must pass:
 1. `scripts/validate_architecture.py` -- directory structure and dependency checks
 2. `scripts/validate_schemas.py` -- JSON schema plus canonical YAML/doc artifact validation
 3. `scripts/validate_ash_compliance.py` -- ASH cosmological compliance
-4. `scripts/run_checks.sh` on POSIX shells or `scripts/run_checks.ps1` on Windows -- all of the above
+4. `bash scripts/run_checks.sh` on POSIX shells -- authoritative local suite for architecture, schemas, ASH compliance, conformance, package acceptance, Phase 10-12 guardrails, source-truth alignment, and Phase 14 ability-power checks
+5. `scripts/run_checks.ps1` on Windows PowerShell where available -- core validation wrapper; verify parity before treating it as a full replacement for the Bash suite
 
 CI workflows block merges on any failure.
 
@@ -147,7 +148,7 @@ CI workflows block merges on any failure.
 | `docs/architecture/authored_override_and_tooling_notes.md` | Authored override authority and tooling safety guardrails |
 | `docs/architecture/realm_truth_boundary_contract.md` | Boundary contract separating realm truth from interpretive layers |
 | `yggdrasil-instructions.json` | Machine-readable architecture rules |
-| `agentic-coding-policy.json` | Machine-readable AI agent constraints |
+| `agentic-coding-policy.json` | Machine-readable contributor automation constraints |
 | `docs/ash_compliance/` | ASH compliance rules and checklist |
 
 ---
