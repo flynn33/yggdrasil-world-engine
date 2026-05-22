@@ -14,25 +14,25 @@ QuestResolutionPayload
   -> write resolution report
 ```
 
-## Required consequence classes
+## Required RewardDeltaBundle.delta_types values
 
 ```text
-player_state_delta
-branch_reality_delta
-worldstate_delta
-location_state_delta
-wolf_companion_delta
-plane_attunement_delta
-lineage_resonance_delta
-ability_pressure_delta
-perception_overlay_delta
-myth_seed_delta
-prophecy_pressure_delta
-npc_relationship_delta
-faction_state_delta
-artifact_eligibility_delta
-creature_eligibility_delta
-future_generation_bias_delta
+player_state
+branch
+worldstate
+location
+wolf
+ability
+plane_attunement
+lineage
+perception
+myth_seed
+prophecy_pressure
+npc_relationship
+faction
+artifact_eligibility
+creature_eligibility
+future_generation_bias
 ```
 
 ## Diagnostic no-op

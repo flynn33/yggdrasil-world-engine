@@ -1,14 +1,26 @@
 {
+  "schema_id": "ywe.diagnostic_noop.v1",
+  "version": "1.0.0",
   "noop_id": "diag_noop.quest.minor_noop.example",
-  "quest_ref": "quest.example.minor_observation",
-  "reason": "Player inspected an already-known object and produced no new state, perception, branch, myth, prophecy, or eligibility change.",
-  "systems_checked": [
-    "player_state",
-    "branch_reality",
-    "worldstate",
-    "location_state",
-    "wolf_companions",
-    "ability_pressure",
-    "future_generation_bias"
-  ]
+  "reason": "no_persistent_consequence",
+  "source_context": {
+    "player_id": "player.example",
+    "branch_id": "branch.example",
+    "location_id": "location.example.known_object",
+    "player_action_trace_ref": "trace.quest.minor_observation"
+  },
+  "evaluation": {
+    "summary": "Player inspected an already-known quest object and produced no player, branch, worldstate, location, wolf, ability, myth, prophecy, or eligibility change.",
+    "truth_scope": "diagnostic_noop",
+    "guardrail_notes": [
+      "Quest reward resolution emitted DiagnosticNoOp instead of a silent completion."
+    ]
+  },
+  "provenance": {
+    "ash_pattern_diagnostic_ref": "asp.diagnostic.quest.minor_noop",
+    "source_cosmology_refs": [
+      "P4_Mental",
+      "P5_Causal"
+    ]
+  }
 }

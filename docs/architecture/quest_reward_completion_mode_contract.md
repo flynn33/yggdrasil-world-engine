@@ -6,14 +6,18 @@ quest was resolved.
 ## Required fields
 
 ```text
-completion_mode_id
+mode_id
 quest_ref
 chosen_action
-available_actions
-player_action_trace_ref
-branch_event_ref
+is_morality_grade
 truth_scope
-resolution_intent
+```
+
+## Optional fields
+
+```text
+mode_label
+available_actions
 consequence_profile
 ```
 

@@ -42,13 +42,12 @@ CreatureEligibilityDelta
 DiagnosticNoOp
 ```
 
-## Depends on accepted phases
+## Depends on accepted upstream phases
 
 ```text
 Phase 8–9: branch reality foundation
 Phase 10: player runtime state
 Phase 11: worldstate and location mutation
 Phase 12: quest/NPC/lore generation
-Phase 13: twin wolf companion engine
 Phase 14: ability/power engine
 ```

@@ -614,9 +614,14 @@ def check_examples(root: Path, errors: list[str]) -> None:
             continue
 
         if path.name == "quest_reward_diagnostic_noop_example.json":
-            for field in ("noop_id", "quest_ref", "reason", "systems_checked"):
+            for field in ("schema_id", "version", "noop_id", "reason", "source_context", "evaluation"):
                 require(field in data, f"{rel} missing {field}.", errors)
-            require(isinstance(data.get("systems_checked"), list) and data["systems_checked"], f"{rel} systems_checked must not be empty.", errors)
+            require(data.get("schema_id") == "ywe.diagnostic_noop.v1", f"{rel} must use canonical DiagnosticNoOp schema_id.", errors)
+            require(isinstance(data.get("source_context"), dict), f"{rel} source_context must be an object.", errors)
+            evaluation = data.get("evaluation")
+            require(isinstance(evaluation, dict), f"{rel} evaluation must be an object.", errors)
+            if isinstance(evaluation, dict):
+                require(evaluation.get("truth_scope") == "diagnostic_noop", f"{rel} evaluation truth_scope must be diagnostic_noop.", errors)
             continue
 
         if path.name == "quest_reward_input_context_ravenfall_gate.example.json":

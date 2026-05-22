@@ -7,6 +7,8 @@ Quest rewards may affect the wolves as embodied companions.
 The White Wolf and Dark Wolf are complementary opposites, not good and evil.
 They walk with the player, assist in quests and combat, appear in visions, and
 cannot truly die. They may temporarily decohere and later return.
+Twin Wolf reward deltas update companion presence, assistance, coherence, or
+temporary decoherence without turning either companion into a morality meter.
 
 ## Reward effects
 
