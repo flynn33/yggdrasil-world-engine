@@ -4,6 +4,16 @@ All notable changes to the Yggdrasil World Engine are documented here.
 
 ---
 
+
+## [2.0.17] — 2026-05-22
+
+### Changes
+- Merge pull request #54 from flynn33/docs/wiki-architecture-refresh
+- Link contributor identity workflow in governance docs
+- Refresh documentation architecture and release guidance
+
+---
+
 ## [Unreleased] — 2026-05-21
 
 ### Documentation
