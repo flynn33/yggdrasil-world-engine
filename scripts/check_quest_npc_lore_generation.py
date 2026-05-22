@@ -94,6 +94,20 @@ DIRECT_NEGATION_PREFIXES = (
     "can't",
 )
 
+DIRECT_NEGATION_PREFIX_RE = "|".join(re.escape(prefix) for prefix in DIRECT_NEGATION_PREFIXES)
+ALLOWED_LINE_MARKER_TOKEN_RE = (
+    rf"(?<!\w)(?:{'|'.join(re.escape(marker) for marker in sorted(ALLOWED_LINE_MARKERS))})(?!\w)"
+)
+DIRECT_NEGATION_CONTEXT_RE = re.compile(
+    rf"\b(?:{DIRECT_NEGATION_PREFIX_RE})\b[\w\s\"'`-]{{0,80}}$"
+)
+ALLOWED_LINE_MARKER_PREFIX_RE = re.compile(
+    rf"{ALLOWED_LINE_MARKER_TOKEN_RE}[^.!?;]{{0,80}}$"
+)
+ALLOWED_LINE_MARKER_SUFFIX_RE = re.compile(
+    rf"^[^.!?;]{{0,80}}{ALLOWED_LINE_MARKER_TOKEN_RE}"
+)
+
 
 def read_text(path: Path) -> str:
     return path.read_text(encoding=TEXT_ENCODING)
@@ -279,34 +293,34 @@ def budget_limit(budget: dict, key: str, default: int) -> int:
 
 
 def allowed_forbidden_pattern_reference(pattern: str, line: str) -> bool:
-    lowered_line = line.lower()
-    pattern_re = re.escape(pattern.lower())
-    matches = list(re.finditer(pattern_re, lowered_line))
-    return bool(matches) and all(
-        allowed_forbidden_pattern_occurrence(lowered_line, pattern_re, match) for match in matches
+    return allowed_forbidden_pattern_regex_reference(
+        re.compile(re.escape(pattern.lower())),
+        line.lower(),
     )
 
 
-def allowed_forbidden_pattern_occurrence(lowered_line: str, pattern_re: str, match: re.Match[str]) -> bool:
-    negation_prefix_re = "|".join(re.escape(prefix) for prefix in DIRECT_NEGATION_PREFIXES)
+def allowed_forbidden_pattern_regex_reference(pattern_re: re.Pattern[str], lowered_line: str) -> bool:
+    matches = list(pattern_re.finditer(lowered_line))
+    return bool(matches) and all(allowed_forbidden_pattern_occurrence(lowered_line, match) for match in matches)
+
+
+def allowed_forbidden_pattern_occurrence(lowered_line: str, match: re.Match[str]) -> bool:
     context_start = max(0, match.start() - 80)
     if has_clause_bound_marker(lowered_line, match):
         return True
 
     prefix_context = lowered_line[context_start:match.start()]
-    if re.search(rf"\b(?:{negation_prefix_re})\b[\w\s\"'`-]{{0,80}}$", prefix_context):
+    if DIRECT_NEGATION_CONTEXT_RE.search(prefix_context):
         return True
     return False
 
 
 def has_clause_bound_marker(lowered_line: str, match: re.Match[str]) -> bool:
-    marker_re = "|".join(re.escape(marker) for marker in ALLOWED_LINE_MARKERS)
     prefix_context = lowered_line[max(0, match.start() - 80):match.start()]
     suffix_context = lowered_line[match.end():min(len(lowered_line), match.end() + 80)]
-    marker_token = rf"(?<!\w)(?:{marker_re})(?!\w)"
     return (
-        re.search(rf"{marker_token}[^.!?;]{{0,80}}$", prefix_context) is not None
-        or re.search(rf"^[^.!?;]{{0,80}}{marker_token}", suffix_context) is not None
+        ALLOWED_LINE_MARKER_PREFIX_RE.search(prefix_context) is not None
+        or ALLOWED_LINE_MARKER_SUFFIX_RE.search(suffix_context) is not None
     )
 
 
@@ -355,6 +369,10 @@ def check_phase_12_forbidden_pattern_probe(root: Path, errors: list[str]) -> Non
 
 
 def check_phase_12_forbidden_patterns_in_paths(root: Path, scan_roots: list[Path], patterns: list[str], errors: list[str]) -> None:
+    prepared_patterns = [
+        (pattern.lower(), re.compile(re.escape(pattern.lower())))
+        for pattern in patterns
+    ]
     for scan_root in scan_roots:
         if not scan_root.exists():
             continue
@@ -364,10 +382,10 @@ def check_phase_12_forbidden_patterns_in_paths(root: Path, scan_roots: list[Path
             lines = read_text(path).splitlines()
             for index, line in enumerate(lines):
                 lowered = line.lower()
-                for pattern in patterns:
-                    if pattern.lower() not in lowered:
+                for pattern_lower, pattern_re in prepared_patterns:
+                    if pattern_lower not in lowered:
                         continue
-                    if allowed_forbidden_pattern_reference(pattern, line):
+                    if allowed_forbidden_pattern_regex_reference(pattern_re, lowered):
                         continue
                     errors.append(forbidden_pattern_message(root, path, index + 1, line))
 
