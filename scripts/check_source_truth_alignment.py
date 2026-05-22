@@ -204,14 +204,20 @@ def allowed_forbidden_context(lines: list[str], index: int) -> bool:
     return any(is_forbidden_context_marker_line(line) for line in context_lines)
 
 
-def is_forbidden_context_marker_line(line: str) -> bool:
+def forbidden_context_marker_candidates(line: str) -> tuple[str, str, str]:
     normalized = line.lower().strip().lstrip("-* ").strip()
-    heading = normalized.lstrip("#").strip().rstrip(":")
+    heading_line = normalized.lstrip("#").strip()
+    heading = heading_line.rstrip(":")
+    return normalized, heading_line, heading
+
+
+def is_forbidden_context_marker_line(line: str) -> bool:
+    normalized, heading_line, heading = forbidden_context_marker_candidates(line)
     if heading in FORBIDDEN_CONTEXT_HEADINGS:
         return True
-    heading_line = normalized.lstrip("#").strip()
     return any(
-        normalized.startswith(marker) or heading_line.startswith(marker)
+        candidate.startswith(marker)
+        for candidate in (normalized, heading_line, heading)
         for marker in FORBIDDEN_CONTEXT_MARKERS
     )
 
@@ -223,11 +229,14 @@ def check_forbidden_context_marker_contract(errors: list[str]) -> None:
         ["## Forbidden", "ASH Pattern System is the top-level cosmology"],
         ["## Historical note:", "ASH Pattern System is the top-level cosmology"],
         ["## Forbidden pattern", "ASH Pattern System is the top-level cosmology"],
+        ["## Forbidden Framings", "ASH Pattern System is the top-level cosmology"],
         ["## Rejected framing", "ASH Pattern System is the top-level cosmology"],
+        ["## Rejected: archived false claim", "ASH Pattern System is the top-level cosmology"],
     ]
     blocked_cases = [
         ["This sentence is not historical: it is unrelated context.", "ASH Pattern System is the top-level cosmology"],
         ["The rejected: field name is unrelated metadata.", "ASH Pattern System is the top-level cosmology"],
+        ["## This heading mentions rejected: metadata", "ASH Pattern System is the top-level cosmology"],
     ]
     for lines in allowed_cases:
         if not allowed_forbidden_context(lines, len(lines) - 1):
