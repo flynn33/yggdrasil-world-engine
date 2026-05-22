@@ -21,11 +21,13 @@ The authoritative Phase 15 shape is
 
 ## Optional fields
 
-```text
-mode_label
-available_actions
-consequence_profile
-```
+The current schema allows only these optional completion-mode fields:
+
+| Field | Schema rule |
+| --- | --- |
+| `mode_label` | Human-readable label for the mode. |
+| `available_actions` | Candidate actions that were available when the mode was chosen. |
+| `consequence_profile` | Consequence-routing categories attached to the mode. |
 
 ## Ravenfall Gate baseline modes
 
