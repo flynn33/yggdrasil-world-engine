@@ -223,9 +223,11 @@ def is_forbidden_context_marker_line(line: str) -> bool:
 
 
 def check_forbidden_context_marker_contract(errors: list[str]) -> None:
-    allowed_cases = [
+    line_marker_cases = [
         ["Rejected: ASH Pattern System is the top-level cosmology"],
         ["Historical:", "ASH Pattern System is the top-level cosmology"],
+    ]
+    heading_marker_cases = [
         ["## Forbidden", "ASH Pattern System is the top-level cosmology"],
         ["## Historical note:", "ASH Pattern System is the top-level cosmology"],
         ["## Forbidden pattern", "ASH Pattern System is the top-level cosmology"],
@@ -233,15 +235,25 @@ def check_forbidden_context_marker_contract(errors: list[str]) -> None:
         ["## Rejected framing", "ASH Pattern System is the top-level cosmology"],
         ["## Rejected: archived false claim", "ASH Pattern System is the top-level cosmology"],
     ]
-    blocked_cases = [
-        ["This sentence is not historical: it is unrelated context.", "ASH Pattern System is the top-level cosmology"],
-        ["The rejected: field name is unrelated metadata.", "ASH Pattern System is the top-level cosmology"],
-        ["## This heading mentions rejected: metadata", "ASH Pattern System is the top-level cosmology"],
+    embedded_marker_cases = [
+        [
+            "This sentence is not historical: it is unrelated context.",
+            "ASH Pattern System is the top-level cosmology",
+        ],
+        [
+            "The rejected: field name is unrelated metadata.",
+            "ASH Pattern System is the top-level cosmology",
+        ],
+        [
+            "## This heading mentions rejected: metadata",
+            "ASH Pattern System is the top-level cosmology",
+        ],
     ]
+    allowed_cases = line_marker_cases + heading_marker_cases
     for lines in allowed_cases:
         if not allowed_forbidden_context(lines, len(lines) - 1):
             errors.append(f"Forbidden context marker contract rejected explicit marker: {lines[0]}")
-    for lines in blocked_cases:
+    for lines in embedded_marker_cases:
         if allowed_forbidden_context(lines, len(lines) - 1):
             errors.append(f"Forbidden context marker contract allowed embedded marker: {lines[0]}")
 
