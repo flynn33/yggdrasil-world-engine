@@ -201,14 +201,68 @@ def allowed_forbidden_context(lines: list[str], index: int) -> bool:
         if line.strip():
             context_lines.append(line)
             break
-    for line in context_lines:
-        normalized = line.lower().strip().lstrip("-* ").strip()
-        heading = normalized.lstrip("#").strip().rstrip(":")
-        if heading in FORBIDDEN_CONTEXT_HEADINGS:
-            return True
-        if any(marker in normalized for marker in FORBIDDEN_CONTEXT_MARKERS):
-            return True
-    return False
+    return any(is_forbidden_context_marker_line(line) for line in context_lines)
+
+
+def is_forbidden_context_marker_line(line: str) -> bool:
+    normalized = line.lower().strip().lstrip("-* ").strip()
+    heading = normalized.lstrip("#").strip().rstrip(":")
+    if heading in FORBIDDEN_CONTEXT_HEADINGS:
+        return True
+    return any(normalized.startswith(marker) for marker in FORBIDDEN_CONTEXT_MARKERS)
+
+
+def check_forbidden_context_marker_contract(errors: list[str]) -> None:
+    allowed_cases = [
+        ["Rejected: ASH Pattern System is the top-level cosmology"],
+        ["Historical:", "ASH Pattern System is the top-level cosmology"],
+        ["## Forbidden", "ASH Pattern System is the top-level cosmology"],
+    ]
+    blocked_cases = [
+        ["This sentence is not historical: it is unrelated context.", "ASH Pattern System is the top-level cosmology"],
+        ["The rejected: field name is unrelated metadata.", "ASH Pattern System is the top-level cosmology"],
+    ]
+    for lines in allowed_cases:
+        if not allowed_forbidden_context(lines, len(lines) - 1):
+            errors.append(f"Forbidden context marker contract rejected explicit marker: {lines[0]}")
+    for lines in blocked_cases:
+        if allowed_forbidden_context(lines, len(lines) - 1):
+            errors.append(f"Forbidden context marker contract allowed embedded marker: {lines[0]}")
+
+
+def check_forbidden_language_allowlist_contract(root: Path, errors: list[str]) -> None:
+    data = load_json_checked(root, FORBIDDEN_LANGUAGE, errors)
+    if not isinstance(data, dict):
+        return
+    allow_paths = allowed_path_patterns(data)
+    require(
+        "docs/history/" in allow_paths and path_matches("docs/history/example.md", "docs/history/"),
+        f"{FORBIDDEN_LANGUAGE} allow_in_paths must honor docs/history/ directory entries.",
+        errors,
+    )
+    pattern_errors: list[str] = []
+    patterns = forbidden_language_patterns({"patterns": [{"id": "empty_probe", "pattern": "   "}]}, pattern_errors)
+    require(not patterns and bool(pattern_errors), "Forbidden language patterns must reject empty patterns.", errors)
+
+
+def check_non_destructive_contract_probe(root: Path, errors: list[str]) -> None:
+    spec = load_json_checked(root, "data/validation/check_non_destructive_diff_source_truth.spec.json", errors)
+    if not isinstance(spec, dict):
+        return
+    require(has_non_destructive_controls(spec), "Source-truth non-destructive spec controls must be enforced.", errors)
+    protected_paths = [
+        path_name
+        for path_name in spec.get("protected_paths", [])
+        if isinstance(path_name, str) and path_name.strip()
+    ]
+    require(
+        "docs/removed.md" in protected_deleted_paths(["docs/removed.md"], protected_paths),
+        "Source-truth protected path deletion probe must classify docs/removed.md as protected.",
+        errors,
+    )
+    budget_errors: list[str] = []
+    value = int_budget_value({"max_deleted_files": "many"}, ("max_deleted_files",), 0, "probe", budget_errors)
+    require(value == 0 and bool(budget_errors), "Source-truth budget probe must report invalid integer values.", errors)
 
 
 def check_forbidden_patterns(
@@ -517,6 +571,9 @@ def main() -> int:
     errors: list[str] = []
     check_required_artifacts(root, errors)
     check_required_language(root, errors)
+    check_forbidden_context_marker_contract(errors)
+    check_forbidden_language_allowlist_contract(root, errors)
+    check_non_destructive_contract_probe(root, errors)
     check_forbidden_language(root, errors)
     check_non_destructive_diff(root, errors)
     check_github_checks_matrix(root, errors)
