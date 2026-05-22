@@ -15,8 +15,8 @@ rejected
 ```
 
 `QuestRewardResolutionPacket.resolution_status` must use only those schema enum
-values. A rejected reward candidate never emits a `rejected_due_to_*` status.
-It emits `rejected`, and the specific cause is stored separately in
+values. A rejected reward candidate never emits a status string that embeds the
+cause. It emits `rejected`, and the specific cause is stored separately in
 `QuestRewardRejectionReason.reason_code`.
 
 | `QuestRewardRejectionReason.reason_code` | Use |

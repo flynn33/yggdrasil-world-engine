@@ -614,14 +614,51 @@ def check_examples(root: Path, errors: list[str]) -> None:
             continue
 
         if path.name == "quest_reward_diagnostic_noop_example.json":
+            allowed_top_level = {"schema_id", "version", "noop_id", "reason", "source_context", "evaluation", "provenance"}
             for field in ("schema_id", "version", "noop_id", "reason", "source_context", "evaluation"):
                 require(field in data, f"{rel} missing {field}.", errors)
+            require(set(data) <= allowed_top_level, f"{rel} contains non-canonical DiagnosticNoOp fields: {sorted(set(data) - allowed_top_level)}", errors)
             require(data.get("schema_id") == "ywe.diagnostic_noop.v1", f"{rel} must use canonical DiagnosticNoOp schema_id.", errors)
+            require(
+                data.get("reason")
+                in {
+                    "minor_non_branching_action",
+                    "presentation_only",
+                    "rejected_by_guardrail",
+                    "deferred_insufficient_context",
+                    "no_persistent_consequence",
+                    "diagnostic_only",
+                },
+                f"{rel} reason must use the canonical DiagnosticNoOp reason enum.",
+                errors,
+            )
             require(isinstance(data.get("source_context"), dict), f"{rel} source_context must be an object.", errors)
+            source_context = data.get("source_context")
+            if isinstance(source_context, dict):
+                allowed_source_context = {"player_id", "branch_id", "location_id", "player_action_trace_ref", "branch_event_ref"}
+                require(
+                    set(source_context) <= allowed_source_context,
+                    f"{rel} source_context contains non-canonical fields: {sorted(set(source_context) - allowed_source_context)}",
+                    errors,
+                )
             evaluation = data.get("evaluation")
             require(isinstance(evaluation, dict), f"{rel} evaluation must be an object.", errors)
             if isinstance(evaluation, dict):
+                allowed_evaluation = {"summary", "truth_scope", "guardrail_notes"}
+                require(
+                    set(evaluation) <= allowed_evaluation,
+                    f"{rel} evaluation contains non-canonical fields: {sorted(set(evaluation) - allowed_evaluation)}",
+                    errors,
+                )
                 require(evaluation.get("truth_scope") == "diagnostic_noop", f"{rel} evaluation truth_scope must be diagnostic_noop.", errors)
+            provenance = data.get("provenance")
+            if isinstance(provenance, dict):
+                allowed_provenance = {"ash_pattern_diagnostic_ref", "source_cosmology_refs"}
+                require(
+                    set(provenance) <= allowed_provenance,
+                    f"{rel} provenance contains non-canonical fields: {sorted(set(provenance) - allowed_provenance)}",
+                    errors,
+                )
             continue
 
         if path.name == "quest_reward_input_context_ravenfall_gate.example.json":
