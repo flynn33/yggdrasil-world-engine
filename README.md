@@ -1,4 +1,4 @@
-# Yggdrasil World Engine (YWE) v2.0.14
+# Yggdrasil World Engine (YWE) v2.0.16
 
 A cosmology-driven procedural narrative simulation engine built on the ASH Model of the Universe and governed by code-agnostic engine contracts.
 
@@ -57,9 +57,19 @@ contracts.
 YWE functions as a **reality simulation layer**, not a rendering engine.
 Rendering engines (Unity, Unreal, Godot) function as **host environments**.
 
-The public reference wiki is available at:
+The authenticated reference wiki for this private repository is available at:
 
 [Yggdrasil World Engine Wiki](https://github.com/flynn33/yggdrasil-world-engine/wiki)
+
+Current release baseline:
+
+| Baseline | Status | Primary Surface |
+|---|---|---|
+| `v2.0.16` | Current accepted repository baseline | Phase 14 Ability / Power Engine and source-truth-aligned authority stack |
+| `v2.0.15` | Authority-drift guardrail baseline | Source-truth and Twin Wolf alignment |
+| `v2.0.14` | Phase 12 accepted baseline | Quest, NPC, lore, myth, and social-distribution generation |
+| `v2.0.13` | Phase 11 accepted baseline | Worldstate and location mutation |
+| `v2.0.12` | Phase 10 accepted baseline | Player Runtime State v1 |
 
 ---
 
@@ -311,6 +321,16 @@ yggdrasil-world-engine/
 8. Extend with expansion modules following `modules/*/`.
 9. Run `bash scripts/run_checks.sh` before proposing any repository change.
 
+Recommended reading paths:
+
+| Reader | Start Here | Then Read |
+|---|---|---|
+| Repository reviewer | `docs/architecture/README.md` | `conformance/`, `scripts/run_checks.sh`, `.github/workflows/ywe_repository_guardrails.yml` |
+| Engine implementor | `developer-guide.md` | `adapters/`, `core/`, `data/schemas/README.md` |
+| Systems designer | `wiki.md` | `docs/architecture/`, `lore/`, `modules/` |
+| Ability / power designer | `docs/architecture/ability_power_engine_contract.md` | `docs/architecture/ability_*_contract.md`, `examples/ability_power_engine/` |
+| Wiki reader | GitHub wiki `Home` | `System Workflow Atlas`, `Runtime Generation Flow`, `Validation And Conformance` |
+
 ---
 
 ## Built on the Forsetti Framework (v0.1.0)
@@ -341,7 +361,7 @@ Forsetti governs the engine through **five design principles**:
 | [missing_source_documents.md](missing_source_documents.md) | Canonical artifact inventory and pending placeholder tracking |
 | [docs/architecture/authored_override_and_tooling_notes.md](docs/architecture/authored_override_and_tooling_notes.md) | Canonical authored override and tooling guardrail rules |
 | [docs/architecture/realm_truth_boundary_contract.md](docs/architecture/realm_truth_boundary_contract.md) | Canonical boundary contract for realm truth vs interpretive layers |
-| [agentic-coding-policy.json](agentic-coding-policy.json) | Machine-readable AI agent constraints |
+| [agentic-coding-policy.json](agentic-coding-policy.json) | Machine-readable contributor automation constraints |
 | [yggdrasil-instructions.json](yggdrasil-instructions.json) | Machine-readable architecture rules |
 
 ### Canonical Rule Artifacts
@@ -378,9 +398,39 @@ Forsetti governs the engine through **five design principles**:
 
 ## ASH Compliance
 
-All procedural systems must derive from ASH Pattern Detection. No subsystem may become an independent random generator detached from the cosmic state.
+All meaningful procedural systems must derive from ASH Model-grounded state,
+diagnostics, codeword traces, generation plans, and YWE interpretation
+contracts. No subsystem may become an independent random generator detached
+from cosmic state and diagnostic provenance.
 
 See `docs/ash_compliance/` for the full compliance rules and checklist.
+
+## Local Validation
+
+Run the authoritative local suite from the repository root:
+
+```bash
+bash scripts/run_checks.sh
+```
+
+For PR-equivalent reproduction, add the guardrail checks that GitHub runs as
+standalone steps:
+
+```bash
+python3 scripts/check_json_integrity.py .
+python3 scripts/check_required_contracts.py .
+python3 scripts/check_phase_8_9_required_artifacts.py .
+python3 scripts/check_authority_stack.py --config data/validation/repository_drift_guardrail_rules.json .
+python3 scripts/check_branch_reality_guardrail.py .
+python3 scripts/check_phase_9_schema_semantics.py .
+python3 scripts/check_phase_8_9_package_boundary.py .
+python3 scripts/check_player_runtime_state.py .
+python3 scripts/check_worldstate_location_mutation.py .
+python3 scripts/check_quest_npc_lore_generation.py .
+python3 scripts/check_source_truth_alignment.py .
+python3 scripts/check_non_destructive_diff.py --base origin/main --head HEAD .
+git diff --check
+```
 
 ---
 

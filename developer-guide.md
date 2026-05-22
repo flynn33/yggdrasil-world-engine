@@ -41,9 +41,11 @@ Core <- Data <- Runtime <- Presentation <- Editor
 
 Lower layers must never depend on higher layers.
 
-### ASH Pattern Compliance
+### ASH-Derived Generation Compliance
 
-All procedural generation must derive from the ASH Pattern Engine. Do not create independent random generators for meaningful content.
+All meaningful procedural generation must derive from ASH Model-grounded state,
+diagnostics, codeword traces, generation plans, and YWE interpretation
+contracts. Do not create independent random generators for meaningful content.
 
 ## 4. Data Loading
 
@@ -76,8 +78,12 @@ Every engine implementation should include tests for:
 
 Before submitting any pull request:
 
-1. Run `bash scripts/run_checks.sh` on POSIX shells or `pwsh -File scripts/run_checks.ps1` on Windows from the repository root.
+1. Run `bash scripts/run_checks.sh` from the repository root.
 2. Verify all JSON schemas are valid.
 3. Verify canonical YAML/doc artifact checks pass.
 4. Verify no ASH compliance violations.
 5. Verify no layer boundary violations.
+
+PowerShell environments may use `pwsh -File scripts/run_checks.ps1` where
+available, but the Bash suite is the current authoritative local check path
+for the complete phase guardrail set.

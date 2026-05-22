@@ -4,7 +4,9 @@ Date: 2026-05-17
 Project: Yggdrasil World Engine
 Status: canonical Phase 11 worldstate and location mutation contract
 
-Phase 8-9 Boundary: DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
+Phase 8-9 Boundary: ACCEPTED - Phase 11 consumes the accepted Phase 9 runtime
+cosmology foundation and accepted Phase 10 player-runtime state, preserving
+base ontology while appending consequence and location mutation records.
 
 ## Purpose
 

@@ -64,11 +64,12 @@ ASH Pattern System Component
   chains, NPC manifests, NPC memory deltas, codex lore records, myth records,
   and social distribution deltas.
 
-DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
-The three Phase 10 through Phase 12 entries above are retained as
-owner-review records only. The active Phase 8-9 dependency boundary remains:
-ASH Model of the Universe -> YWE Runtime Cosmology Contracts -> Branch Reality
-Resolver -> Feature Engines.
+ACCEPTED - Phase 10 through Phase 12 entries are active contracts layered on
+the accepted Phase 9 runtime cosmology foundation. The active dependency
+boundary remains: ASH Model of the Universe -> YWE Runtime Cosmology Contracts
+-> Branch Reality Resolver -> Feature Engines. Player state, worldstate,
+location mutation, and quest/NPC/lore generation consume that boundary through
+records and references; they do not rewrite base ontology or ASH math.
 
 - `com.ywe.core.cosmology-engine`: none
 - `com.ywe.core.realm-engine`: cosmology

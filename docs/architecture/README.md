@@ -146,13 +146,13 @@ independently.
 
 ## Canonical Data Companions
 
-- `../data/perception/perception_overlay_rules.yaml` -- Perception-layer truth-boundary rules
-- `../data/realm/realm_mechanics_rules.yaml` -- Realm-law and attunement rules
-- `../data/realm/realm_boundary_profiles.yaml` -- Boundary profile catalog for lawful threshold behavior
-- `../data/realm/realm_transition_examples.yaml` -- Lawful and unlawful transition examples
-- `../data/module_capability/module_capability_manifest_schema.yaml` -- Module capability, delegation, and suppression governance schema
-- `../data/module_capability/manifests/*.yaml` -- Applied canonical capability declarations for current YWE engines and modules
-- `../data/faction_topology/faction_topology_state_schema.yaml` -- Faction topology state schema
+- `../../data/perception/perception_overlay_rules.yaml` -- Perception-layer truth-boundary rules
+- `../../data/realm/realm_mechanics_rules.yaml` -- Realm-law and attunement rules
+- `../../data/realm/realm_boundary_profiles.yaml` -- Boundary profile catalog for lawful threshold behavior
+- `../../data/realm/realm_transition_examples.yaml` -- Lawful and unlawful transition examples
+- `../../data/module_capability/module_capability_manifest_schema.yaml` -- Module capability, delegation, and suppression governance schema
+- `../../data/module_capability/manifests/*.yaml` -- Applied canonical capability declarations for current YWE engines and modules
+- `../../data/faction_topology/faction_topology_state_schema.yaml` -- Faction topology state schema
 
 ## Dependency Direction
 
@@ -172,6 +172,25 @@ ASH Model of the Universe
 No reverse dependencies. No circular dependencies.
 
 Host adapters materialize approved manifests but do not author symbolic truth.
+
+## Phase Contract Pipeline
+
+```mermaid
+flowchart LR
+  P9["Phase 9<br/>Runtime cosmology<br/>branch reality"]
+  P10["Phase 10<br/>Player runtime state"]
+  P11["Phase 11<br/>Worldstate + location mutation"]
+  P12["Phase 12<br/>Quest / NPC / lore"]
+  STR["Source-truth + Twin Wolf<br/>alignment remediation"]
+  P14["Phase 14<br/>Ability / Power Engine"]
+  P15["Phase 15+<br/>Quest reward resolver<br/>deferred"]
+
+  P9 --> P10 --> P11 --> P12 --> STR --> P14 --> P15
+```
+
+The Phase 14 Ability / Power Engine consumes the accepted Phase 9-12 surfaces
+and the source-truth/Twin Wolf remediation gate. It does not imply a completed
+Phase 13 feature package; Phase 13 remains deferred until separately accepted.
 
 Phase 9 branch-reality dependency flow:
 

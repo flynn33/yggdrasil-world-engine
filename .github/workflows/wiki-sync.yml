@@ -54,7 +54,7 @@ jobs:
           cat > Home.md << 'HOMEEOF'
           # Yggdrasil World Engine Wiki
 
-          Welcome to the **Yggdrasil World Engine** wiki — the comprehensive reference for the ASH Model cosmology-driven narrative simulation engine.
+          Welcome to the **Yggdrasil World Engine** wiki — the comprehensive reference for the ASH Model of the Universe-driven narrative simulation engine.
           HOMEEOF
 
           VERSION="${{ steps.version.outputs.version }}"
@@ -70,16 +70,23 @@ jobs:
           - [[Master Specification]] — Complete canonical design document
           - [[Architecture Overview]] — Engine-first architecture and dependency graph
           - [[Architecture Layers]] — Layer hierarchy and dependency rules
+          - [[System Workflow Atlas]] — Runtime, validation, and handoff workflow maps
 
           ### Cosmology & Lore
           - [[WRW Cosmology]] — Primordial state, creation event, realm formation
-          - [[Wolf Canon]] — White Wolf and Dark Wolf informational forces
+          - [[Wolf Canon]] — White Wolf and Dark Wolf companion canon
           - [[Bloodline History]] — Ancestral resonance and mythic lineages
 
           ### Engine Reference
           - [[Core Engines]] — Cosmology, Realm, ASH Pattern, Narrative, Perception
           - [[Expansion Modules]] — Quest, Myth, Prophecy, Artifact, Creature
+          - [[Ability Power Engine]] — Phase 14 source-provenance, unlock pressure, and consequence handling
           - [[Data Schemas]] — Player, realm, pattern, quest, myth, bloodline schemas
+
+          ### Visual Atlases
+          - [[Phase Contract Atlas]] — Accepted phase sequence and contract handoff map
+          - [[Validation Matrix]] — Local and GitHub validation gate map
+          - [[Wiki Publication Process]] — Generated and manually maintained wiki surfaces
 
           ### Integration
           - [[Forsetti Integration Rules]] — Design principles and compliance rules
@@ -93,7 +100,7 @@ jobs:
 
           ---
 
-          > This wiki is automatically synchronized from the repository documentation. Changes should be made in the repository, not directly in the wiki.
+          > Core wiki pages are synchronized from repository documentation. Manual wiki pages should stay aligned with the same source-truth and validation surfaces.
           HOMEEOF
 
           # --- Architecture Overview ---
@@ -146,7 +153,7 @@ jobs:
           {
             echo "# Expansion Modules"
             echo ""
-            echo "Expansion modules extend the core engines with gameplay-facing systems. All modules read from the ASH Pattern Engine."
+            echo "Expansion modules extend the core engines with gameplay-facing systems. All meaningful generation consumes ASH Model-grounded state through YWE contracts and may use ASH Pattern System component diagnostics."
             echo ""
             for mod in quest_engine myth_engine prophecy_engine artifact_engine creature_engine; do
               echo "---"
@@ -172,6 +179,12 @@ jobs:
             echo "| Myth Records | \`data/myth_archetypes/myth_schema.json\` |"
             echo "| Bloodlines | \`data/bloodline_registry/bloodline_schema.json\` |"
             echo "| Prophecies | \`modules/prophecy_engine/prophecy_schema.json\` |"
+            echo "| Player Runtime State | \`data/schemas/player_runtime_state_schema.json\` |"
+            echo "| Worldstate Location Mutation | \`data/schemas/worldstate_location_mutation_schema.json\` |"
+            echo "| Quest / NPC / Lore Generation | \`data/schemas/quest_npc_lore_generation_schema.json\` |"
+            echo "| Ability Manifest | \`data/schemas/ability_manifest_schema.json\` |"
+            echo "| Ability Consequence | \`data/schemas/ability_consequence_packet_schema.json\` |"
+            echo "| Ability State Update | \`data/schemas/ability_state_update_packet_schema.json\` |"
             echo ""
             for dir in pattern_archetypes quest_archetypes myth_archetypes bloodline_registry; do
               if [ -f "../main-repo/data/${dir}/README.md" ]; then

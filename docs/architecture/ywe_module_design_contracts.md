@@ -63,12 +63,11 @@ diagnostics, or materialize meaningful content before a `GenerationPlan`.
 
 ## Shared Rules
 
-DEFERRED - Phase 9 boundary violation; do not consume until the matching owner-approved package is accepted.
-Rules below that mention Phase 10 through Phase 12 records are retained as
-owner-review context only. The active Phase 8-9 module boundary remains the
-runtime cosmology foundation: base ontology, runtime-generated leaf branches,
-branch events, pattern vectors, existence potential, axiom diagnostics, plane
-pressure, and future generation bias.
+ACCEPTED - Rules below that mention Phase 10 through Phase 12 records are
+active contract rules layered on the accepted runtime cosmology foundation:
+base ontology, runtime-generated leaf branches, branch events, pattern
+vectors, existence potential, axiom diagnostics, plane pressure, and future
+generation bias.
 
 - modules that emit meaningful manifests preserve `source_ash_refs`, `diagnostic_ref`, `generation_plan_ref`, `requested_manifest_kind`, and `worldstate_delta_policy`
 - generation context enters ASH-governed generation through `YWEGenerationContextPacket`
