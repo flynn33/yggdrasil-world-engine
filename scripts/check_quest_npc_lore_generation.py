@@ -8,6 +8,7 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 TEXT_ENCODING = "utf-8-sig"
@@ -91,7 +92,20 @@ DIRECT_NEGATION_PREFIXES = (
     "does not",
     "cannot",
     "can't",
-    "not",
+)
+
+DIRECT_NEGATION_PREFIX_RE = "|".join(re.escape(prefix) for prefix in DIRECT_NEGATION_PREFIXES)
+ALLOWED_LINE_MARKER_TOKEN_RE = (
+    rf"(?<!\w)(?:{'|'.join(re.escape(marker) for marker in sorted(ALLOWED_LINE_MARKERS))})(?!\w)"
+)
+DIRECT_NEGATION_CONTEXT_RE = re.compile(
+    rf"\b(?:{DIRECT_NEGATION_PREFIX_RE})\b[\w\s\"'`-]{{0,80}}$"
+)
+ALLOWED_LINE_MARKER_PREFIX_RE = re.compile(
+    rf"{ALLOWED_LINE_MARKER_TOKEN_RE}[^.!?;]{{0,80}}$"
+)
+ALLOWED_LINE_MARKER_SUFFIX_RE = re.compile(
+    rf"^[^.!?;]{{0,80}}{ALLOWED_LINE_MARKER_TOKEN_RE}"
 )
 
 
@@ -279,13 +293,101 @@ def budget_limit(budget: dict, key: str, default: int) -> int:
 
 
 def allowed_forbidden_pattern_reference(pattern: str, line: str) -> bool:
-    lowered_line = line.lower()
-    if any(marker in lowered_line for marker in ALLOWED_LINE_MARKERS):
+    return allowed_forbidden_pattern_regex_reference(
+        re.compile(re.escape(pattern.lower())),
+        line.lower(),
+    )
+
+
+def allowed_forbidden_pattern_regex_reference(pattern_re: re.Pattern[str], lowered_line: str) -> bool:
+    matches = list(pattern_re.finditer(lowered_line))
+    return bool(matches) and all(allowed_forbidden_pattern_occurrence(lowered_line, match) for match in matches)
+
+
+def allowed_forbidden_pattern_occurrence(lowered_line: str, match: re.Match[str]) -> bool:
+    context_start = max(0, match.start() - 80)
+    if has_clause_bound_marker(lowered_line, match):
         return True
 
-    pattern_re = re.escape(pattern.lower())
-    negation_prefix_re = "|".join(re.escape(prefix) for prefix in DIRECT_NEGATION_PREFIXES)
-    return re.search(rf"\b(?:{negation_prefix_re})\b[\w\s\"'`-]{{0,80}}{pattern_re}", lowered_line) is not None
+    prefix_context = lowered_line[context_start:match.start()]
+    if DIRECT_NEGATION_CONTEXT_RE.search(prefix_context):
+        return True
+    return False
+
+
+def has_clause_bound_marker(lowered_line: str, match: re.Match[str]) -> bool:
+    prefix_context = lowered_line[max(0, match.start() - 80):match.start()]
+    suffix_context = lowered_line[match.end():min(len(lowered_line), match.end() + 80)]
+    return (
+        ALLOWED_LINE_MARKER_PREFIX_RE.search(prefix_context) is not None
+        or ALLOWED_LINE_MARKER_SUFFIX_RE.search(suffix_context) is not None
+    )
+
+
+def check_forbidden_pattern_exemption_contract(errors: list[str]) -> None:
+    pattern = "generic random quest generator"
+    allowed_lines = [
+        "Forbidden pattern example: generic random quest generator.",
+        "Reject generic random quest generator outputs.",
+        "Do not use a generic random quest generator.",
+        "The generic random quest generator pattern is invalid.",
+    ]
+    blocked_lines = [
+        "This paragraph is not related to a generic random quest generator being active.",
+        "Invalid metadata appears here. A generic random quest generator is active.",
+        "Forbidden pattern example: generic random quest generator. This line endorses a generic random quest generator.",
+    ]
+    for line in allowed_lines:
+        require(
+            allowed_forbidden_pattern_reference(pattern, line),
+            f"Phase 12 forbidden-pattern exemption contract rejected explicit context: {line}",
+            errors,
+        )
+    for line in blocked_lines:
+        require(
+            not allowed_forbidden_pattern_reference(pattern, line),
+            f"Phase 12 forbidden-pattern exemption contract allowed incidental context: {line}",
+            errors,
+        )
+
+
+def forbidden_pattern_message(root: Path, path: Path, line_number: int, line: str) -> str:
+    return f"Forbidden Phase 12 claim found in {relative_name(root, path)}:{line_number}: {line.strip()}"
+
+
+def check_phase_12_forbidden_pattern_probe(root: Path, errors: list[str]) -> None:
+    with tempfile.TemporaryDirectory(prefix="ywe_phase_12_forbidden_probe_") as probe_root:
+        probe_dir = Path(probe_root)
+        probe_file = probe_dir / "phase_12_probe.md"
+        probe_file.write_text(
+            "This line is not enough context for a generic random quest generator to be active.\n",
+            encoding=TEXT_ENCODING,
+        )
+        probe_errors: list[str] = []
+        check_phase_12_forbidden_patterns_in_paths(root, [probe_dir], ["generic random quest generator"], probe_errors)
+        require(bool(probe_errors), "Phase 12 forbidden-pattern probe failed to reject incidental not/context wording.", errors)
+
+
+def check_phase_12_forbidden_patterns_in_paths(root: Path, scan_roots: list[Path], patterns: list[str], errors: list[str]) -> None:
+    prepared_patterns = [
+        (pattern.lower(), re.compile(re.escape(pattern.lower())))
+        for pattern in patterns
+    ]
+    for scan_root in scan_roots:
+        if not scan_root.exists():
+            continue
+        for path in scan_root.rglob("*"):
+            if not path.is_file() or path.suffix not in {".md", ".json"}:
+                continue
+            lines = read_text(path).splitlines()
+            for index, line in enumerate(lines):
+                lowered = line.lower()
+                for pattern_lower, pattern_re in prepared_patterns:
+                    if pattern_lower not in lowered:
+                        continue
+                    if allowed_forbidden_pattern_regex_reference(pattern_re, lowered):
+                        continue
+                    errors.append(forbidden_pattern_message(root, path, index + 1, line))
 
 
 def required_fields(defs: dict, record_name: str, errors: list[str]) -> set[str]:
@@ -865,21 +967,7 @@ def check_phase_12_forbidden_patterns(root: Path, errors: list[str]) -> None:
         for item in data.get("forbidden_patterns", [])
         if isinstance(item, dict) and isinstance(item.get("pattern"), str)
     ]
-    for scan_root in scan_roots:
-        if not scan_root.exists():
-            continue
-        for path in scan_root.rglob("*"):
-            if not path.is_file() or path.suffix not in {".md", ".json"}:
-                continue
-            lines = read_text(path).splitlines()
-            for index, line in enumerate(lines):
-                lowered = line.lower()
-                for pattern in patterns:
-                    if pattern.lower() not in lowered:
-                        continue
-                    if allowed_forbidden_pattern_reference(pattern, line):
-                        continue
-                    errors.append(f"Forbidden Phase 12 claim found in {path.relative_to(root).as_posix()}:{index + 1}: {line.strip()}")
+    check_phase_12_forbidden_patterns_in_paths(root, scan_roots, patterns, errors)
 
 
 def check_phase_12_non_destructive_diff(root: Path, errors: list[str]) -> None:
@@ -946,6 +1034,8 @@ def main() -> int:
     check_phase_12_code_agnostic_schemas(root, errors)
     check_phase_12_contract_terms(root, errors)
     check_phase_12_examples(root, errors)
+    check_forbidden_pattern_exemption_contract(errors)
+    check_phase_12_forbidden_pattern_probe(root, errors)
     check_phase_12_forbidden_patterns(root, errors)
     check_phase_12_non_destructive_diff(root, errors)
     check_phase_12_promoted_boundary(root, errors)
