@@ -3,15 +3,21 @@
 Completion mode is the player-facing and system-facing classification of how a
 quest was resolved.
 
+## Schema-aligned fields
+
+The authoritative Phase 15 shape is
+`data/schemas/quest_completion_mode_schema.json`. Completion-mode records use
+`mode_id`; they do not emit `completion_mode_id` or `resolution_intent`.
+
 ## Required fields
 
-```text
-mode_id
-quest_ref
-chosen_action
-is_morality_grade
-truth_scope
-```
+| Field | Schema rule |
+| --- | --- |
+| `mode_id` | Stable completion-mode identifier. |
+| `quest_ref` | Quest or quest-manifest reference. |
+| `chosen_action` | Player action that selected the mode. |
+| `is_morality_grade` | Must be `false`. |
+| `truth_scope` | One of the schema truth-scope enum values. |
 
 ## Optional fields
 

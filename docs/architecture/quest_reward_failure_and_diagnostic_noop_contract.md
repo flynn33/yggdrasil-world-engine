@@ -14,20 +14,21 @@ resolved_as_diagnostic_noop
 rejected
 ```
 
-Rejected resolutions keep `QuestRewardResolutionPacket.resolution_status` set to
-`rejected`. The specific rejection cause is carried by
+`QuestRewardResolutionPacket.resolution_status` must use only those schema enum
+values. A rejected reward candidate never emits a `rejected_due_to_*` status.
+It emits `rejected`, and the specific cause is stored separately in
 `QuestRewardRejectionReason.reason_code`.
 
-```text
-missing_provenance
-invalid_truth_scope
-random_reward_table_primary_model
-wolf_morality_language
-ability_without_source_ref
-quest_without_consequence
-unsafe_destructive_patch
-unknown
-```
+| `QuestRewardRejectionReason.reason_code` | Use |
+| --- | --- |
+| `missing_provenance` | Required source reference or trace evidence is absent. |
+| `invalid_truth_scope` | The reward tries to write through the wrong truth layer. |
+| `random_reward_table_primary_model` | Random reward tables are being treated as the primary model. |
+| `wolf_morality_language` | Wolf reward text frames the Twin Wolf system as moral grading. |
+| `ability_without_source_ref` | Ability pressure lacks required source provenance. |
+| `quest_without_consequence` | Quest completion has neither consequence delta nor DiagnosticNoOp. |
+| `unsafe_destructive_patch` | The candidate would rewrite or delete protected state. |
+| `unknown` | The resolver rejected the candidate but no narrower code applies. |
 
 ## DiagnosticNoOp requirements
 
