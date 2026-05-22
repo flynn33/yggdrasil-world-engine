@@ -5,6 +5,16 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.18] — 2026-05-22
+
+### Changes
+- Merge pull request #56 from flynn33/codex/pr51-phase12-review-remediation
+- Precompute Phase 12 forbidden-pattern regexes
+- Harden Phase 12 forbidden-language guardrail
+
+---
+
+
 ## [2.0.17] — 2026-05-22
 
 ### Changes
