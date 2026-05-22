@@ -23,7 +23,7 @@ publication, and contributor identity boundaries.
 | Discussion Agents | `.github/workflows/discussion-agents.yml` | Routes GitHub Discussion events to repository-grounded response handlers. |
 | Discussion Topic Seeder | `.github/workflows/discussion-topic-seeder.yml` | Seeds discussion topics from repository truth on a schedule. |
 | Discussion Moderation | `.github/workflows/discussion-moderation.yml` | Enforces the code of conduct for GitHub Discussions. |
-| Contributor Identity Gate | configured contributor-identity workflow | Blocks prohibited contributor identity strings in commit metadata. |
+| Contributor Identity Gate | [`.github/workflows/no-ai-contributor-agent.yml`](../../.github/workflows/no-ai-contributor-agent.yml) | Blocks prohibited contributor identity strings in commit metadata. |
 | Stale Issues | `.github/workflows/stale.yml` | Manages stale issue labeling and closure policy. |
 
 ## Local Script Map
@@ -45,7 +45,7 @@ publication, and contributor identity boundaries.
 | `scripts/check_ability_power_engine.py` | Repository guardrails | Protects Phase 14 Ability / Power Engine contracts, schemas, examples, and budgets. |
 | `scripts/check_non_destructive_diff.py` | Repository guardrails | Blocks silent deletion or broad removal of accepted artifacts. |
 | `scripts/github/Test-DocsAndGlossary.ps1` | Release readiness, PowerShell-capable environments | Checks markdown links, wiki-sync config, and glossary terms. |
-| PowerShell contributor identity validation | Contributor identity gate | Validates commit author, committer, and message identity strings. |
+| [`scripts/github/Test-NoAIContributors.ps1`](../../scripts/github/Test-NoAIContributors.ps1) | Contributor identity gate | Validates commit author, committer, and message identity strings. |
 
 ## Wiki Sync Behavior
 

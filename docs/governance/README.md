@@ -30,7 +30,7 @@ Forsetti-aligned lifecycle rules.
 | Discussion routing | `../../.github/workflows/discussion-agents.yml` |
 | Discussion moderation | `../../.github/workflows/discussion-moderation.yml` |
 | Discussion topic seeding | `../../.github/workflows/discussion-topic-seeder.yml` |
-| Contributor identity gate | configured GitHub Actions contributor-identity workflow |
+| Contributor identity gate | [`../../.github/workflows/no-ai-contributor-agent.yml`](../../.github/workflows/no-ai-contributor-agent.yml) |
 
 ## Governance Rules
 
