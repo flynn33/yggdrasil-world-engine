@@ -209,7 +209,11 @@ def is_forbidden_context_marker_line(line: str) -> bool:
     heading = normalized.lstrip("#").strip().rstrip(":")
     if heading in FORBIDDEN_CONTEXT_HEADINGS:
         return True
-    return any(normalized.startswith(marker) for marker in FORBIDDEN_CONTEXT_MARKERS)
+    heading_line = normalized.lstrip("#").strip()
+    return any(
+        normalized.startswith(marker) or heading_line.startswith(marker)
+        for marker in FORBIDDEN_CONTEXT_MARKERS
+    )
 
 
 def check_forbidden_context_marker_contract(errors: list[str]) -> None:
@@ -217,6 +221,9 @@ def check_forbidden_context_marker_contract(errors: list[str]) -> None:
         ["Rejected: ASH Pattern System is the top-level cosmology"],
         ["Historical:", "ASH Pattern System is the top-level cosmology"],
         ["## Forbidden", "ASH Pattern System is the top-level cosmology"],
+        ["## Historical note:", "ASH Pattern System is the top-level cosmology"],
+        ["## Forbidden pattern", "ASH Pattern System is the top-level cosmology"],
+        ["## Rejected framing", "ASH Pattern System is the top-level cosmology"],
     ]
     blocked_cases = [
         ["This sentence is not historical: it is unrelated context.", "ASH Pattern System is the top-level cosmology"],
