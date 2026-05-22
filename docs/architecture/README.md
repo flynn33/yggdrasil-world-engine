@@ -79,6 +79,23 @@ Phase 14 ability and power engine contracts:
 - `ability_safety_and_decoherence_contract.md` -- Safety, recovery, and decoherence handling.
 - `ability_engine_integration_map.md` -- Phase 10-12 inputs, Phase 14 records, and Phase 15 handoff packets.
 
+Phase 15 quest reward resolver contracts:
+
+- `quest_reward_resolver_contract.md` -- QuestRewardResolutionPacket surface for completion-to-consequence routing.
+- `quest_reward_completion_mode_contract.md` -- Completion-mode classification without moral grading.
+- `quest_reward_consequence_pipeline_contract.md` -- Consequence-resolution pipeline from quest completion to deltas or DiagnosticNoOp.
+- `quest_reward_truth_scope_contract.md` -- Truth-scope boundaries for shared truth, branch truth, perception, myth, prophecy, faction claim, and host materialization.
+- `quest_reward_player_state_integration_contract.md` -- PlayerStateUpdatePacket integration after quest resolution.
+- `quest_reward_worldstate_location_integration_contract.md` -- Worldstate, location mutation, and location overlay updates.
+- `quest_reward_branch_reality_integration_contract.md` -- Leaf-branch update and branch-history integration.
+- `quest_reward_wolf_companion_integration_contract.md` -- Twin Wolf companion-state reward deltas without morality framing.
+- `quest_reward_ability_integration_contract.md` -- Ability reward deltas through source provenance, AbilityUnlockPressure, and AbilityStateUpdatePacket.
+- `quest_reward_myth_prophecy_integration_contract.md` -- Myth seed and prophecy pressure integration without guaranteed scripted futures.
+- `quest_reward_artifact_creature_eligibility_contract.md` -- Artifact and creature eligibility updates without immediate forced materialization.
+- `quest_reward_npc_faction_integration_contract.md` -- NPC relationship and faction claim reward deltas with explicit truth scope.
+- `quest_reward_failure_and_diagnostic_noop_contract.md` -- Explicit DiagnosticNoOp handling for evaluated completions with no durable consequence.
+- `quest_reward_resolver_integration_map.md` -- Phase 10-14 inputs, Phase 15 packets, and Phase 16+ consumers.
+
 The current controlling authority chain is:
 
 ```text
@@ -183,7 +200,7 @@ flowchart LR
   P12["Phase 12<br/>Quest / NPC / lore"]
   STR["Source-truth + Twin Wolf<br/>alignment remediation"]
   P14["Phase 14<br/>Ability / Power Engine"]
-  P15["Phase 15+<br/>Quest reward resolver<br/>deferred"]
+  P15["Phase 15<br/>Quest reward resolver"]
 
   P9 --> P10 --> P11 --> P12 --> STR --> P14 --> P15
 ```
@@ -191,6 +208,10 @@ flowchart LR
 The Phase 14 Ability / Power Engine consumes the accepted Phase 9-12 surfaces
 and the source-truth/Twin Wolf remediation gate. It does not imply a completed
 Phase 13 feature package; Phase 13 remains deferred until separately accepted.
+
+The Phase 15 Quest Reward Resolver consumes the Phase 14 ability surface and
+turns quest completion into validated consequence bundles, reward deltas,
+truth-scoped state updates, future generation bias, or explicit DiagnosticNoOp.
 
 Phase 9 branch-reality dependency flow:
 

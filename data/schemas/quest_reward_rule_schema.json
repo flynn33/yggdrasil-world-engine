@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.yggdrasilworldengine.local/ywe.quest_reward_rule.v1.json",
+  "title": "ywe.quest_reward_rule.v1",
+  "description": "Defines a rule for mapping quest outcomes to consequence deltas.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "rule_id": {
+      "type": "string"
+    },
+    "quest_kind": {
+      "type": "string"
+    },
+    "completion_mode": {
+      "type": "string",
+      "enum": [
+        "reveal_oath",
+        "conceal_oath",
+        "bind_oath",
+        "study_oath",
+        "weaponize_oath",
+        "restore_relation",
+        "contain_anomaly",
+        "stabilize_threshold",
+        "refuse_resolution",
+        "custom"
+      ]
+    },
+    "conditions": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "emits_delta_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forbidden_outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requires_provenance": {
+      "type": "boolean",
+      "const": true
+    }
+  },
+  "required": [
+    "rule_id",
+    "completion_mode",
+    "emits_delta_types",
+    "requires_provenance"
+  ]
+}

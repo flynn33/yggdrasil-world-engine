@@ -1,0 +1,16 @@
+{
+  "gate_id": "ywe.phase_15.prerequisite_gate",
+  "requires": [
+    "ability_power_engine_contract.md",
+    "ability_unlock_pressure_contract.md",
+    "ability_state_schema.json",
+    "ability_unlock_pressure_schema.json",
+    "ability_source_ref_schema.json"
+  ],
+  "must_reject_if": [
+    "ability_unlock_without_source_provenance",
+    "wolf_good_evil_language",
+    "wolf_death_as_cost",
+    "ash_pattern_system_as_topmost_cosmology"
+  ]
+}

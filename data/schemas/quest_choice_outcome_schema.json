@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.yggdrasilworldengine.local/ywe.quest_choice_outcome.v1.json",
+  "title": "ywe.quest_choice_outcome.v1",
+  "description": "Records the player choice that produced the quest resolution.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "outcome_id": {
+      "type": "string"
+    },
+    "quest_ref": {
+      "type": "string"
+    },
+    "chosen_action": {
+      "type": "string"
+    },
+    "completion_mode": {
+      "type": "string",
+      "enum": [
+        "reveal_oath",
+        "conceal_oath",
+        "bind_oath",
+        "study_oath",
+        "weaponize_oath",
+        "restore_relation",
+        "contain_anomaly",
+        "stabilize_threshold",
+        "refuse_resolution",
+        "custom"
+      ]
+    },
+    "player_action_trace_ref": {
+      "type": "string"
+    },
+    "branch_event_ref": {
+      "type": "string"
+    },
+    "choice_significance": {
+      "type": "string",
+      "enum": [
+        "minor",
+        "meaningful",
+        "major",
+        "branch_forming"
+      ]
+    },
+    "available_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "outcome_id",
+    "quest_ref",
+    "chosen_action",
+    "completion_mode",
+    "choice_significance"
+  ]
+}

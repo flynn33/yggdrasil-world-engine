@@ -111,6 +111,39 @@ generation bias update foundation.
 | `ability_catalog_entry_schema.json` | Phase 14 catalog entry for supported use modes and source categories |
 | `ability_state_update_packet_schema.json` | Phase 14 AbilityStateUpdatePacket for downstream state mutation handoff |
 | `ability_loadout_state_schema.json` | Phase 14 player ability loadout state record |
+| `quest_reward_resolution_packet_schema.json` | Phase 15 QuestRewardResolutionPacket emitted after quest completion |
+| `consequence_resolution_packet_schema.json` | Phase 15 ConsequenceResolutionPacket for reward delta aggregation |
+| `quest_completion_mode_schema.json` | Phase 15 completion-mode classification without moral grading |
+| `quest_reward_input_context_schema.json` | Phase 15 resolver input context spanning player, branch, location, wolf, ability, and source refs |
+| `quest_choice_outcome_schema.json` | Phase 15 chosen-action outcome record for quest resolution |
+| `reward_delta_bundle_schema.json` | Phase 15 reward delta bundle requiring worldstate delta or DiagnosticNoOp |
+| `player_state_reward_delta_schema.json` | Phase 15 player-state reward delta |
+| `branch_reward_delta_schema.json` | Phase 15 leaf-branch reward delta |
+| `worldstate_reward_delta_schema.json` | Phase 15 worldstate reward delta |
+| `location_reward_delta_schema.json` | Phase 15 location mutation or overlay reward delta |
+| `wolf_reward_delta_schema.json` | Phase 15 Twin Wolf companion reward delta without morality update |
+| `ability_reward_delta_schema.json` | Phase 15 source-referenced ability reward delta |
+| `plane_attunement_reward_delta_schema.json` | Phase 15 plane-attunement reward delta |
+| `lineage_reward_delta_schema.json` | Phase 15 lineage-resonance reward delta |
+| `perception_reward_delta_schema.json` | Phase 15 perception overlay reward delta |
+| `myth_seed_reward_delta_schema.json` | Phase 15 myth seed reward delta with evidence requirements |
+| `prophecy_pressure_reward_delta_schema.json` | Phase 15 prophecy pressure reward delta without guaranteed future |
+| `faction_reward_delta_schema.json` | Phase 15 faction claim reward delta |
+| `npc_relationship_reward_delta_schema.json` | Phase 15 NPC relationship reward delta |
+| `artifact_eligibility_reward_delta_schema.json` | Phase 15 artifact eligibility reward delta |
+| `creature_eligibility_reward_delta_schema.json` | Phase 15 creature eligibility reward delta |
+| `future_generation_bias_reward_delta_schema.json` | Phase 15 future generation bias reward delta |
+| `quest_reward_decoherence_event_schema.json` | Phase 15 temporary decoherence event record |
+| `quest_reward_risk_schema.json` | Phase 15 reward risk record |
+| `quest_reward_rule_schema.json` | Phase 15 quest reward rule contract |
+| `quest_reward_resolver_ruleset_schema.json` | Phase 15 resolver ruleset contract using consequence routing as primary model |
+| `quest_reward_validation_result_schema.json` | Phase 15 reward packet validation result |
+| `quest_reward_manifest_handoff_schema.json` | Phase 15 downstream manifest handoff record |
+| `quest_reward_diagnostic_noop_link_schema.json` | Phase 15 DiagnosticNoOp linkage record |
+| `quest_reward_source_ref_schema.json` | Phase 15 source reference spine for quest reward resolution |
+| `quest_reward_resolver_trace_schema.json` | Phase 15 resolver trace record |
+| `quest_reward_rejection_reason_schema.json` | Phase 15 rejection reason record |
+| `quest_reward_resolution_summary_schema.json` | Phase 15 quest reward resolution summary |
 
 ## Required Provenance
 

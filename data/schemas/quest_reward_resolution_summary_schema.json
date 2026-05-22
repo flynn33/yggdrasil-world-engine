@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.yggdrasilworldengine.local/ywe.quest_reward_resolution_summary.v1.json",
+  "title": "ywe.quest_reward_resolution_summary.v1",
+  "description": "Human-readable summary of a quest reward resolution for debugging and tooling.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "summary_id": {
+      "type": "string"
+    },
+    "quest_ref": {
+      "type": "string"
+    },
+    "completion_mode": {
+      "type": "string"
+    },
+    "changed_systems": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "noops": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "summary_id",
+    "quest_ref",
+    "completion_mode"
+  ]
+}

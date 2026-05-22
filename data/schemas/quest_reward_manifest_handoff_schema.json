@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.yggdrasilworldengine.local/ywe.quest_reward_manifest_handoff.v1.json",
+  "title": "ywe.quest_reward_manifest_handoff.v1",
+  "description": "Handoff from reward resolver to downstream feature systems.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "handoff_id": {
+      "type": "string"
+    },
+    "quest_reward_resolution_packet_ref": {
+      "type": "string"
+    },
+    "target_systems": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "payload_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requires_acknowledgement": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "handoff_id",
+    "quest_reward_resolution_packet_ref",
+    "target_systems"
+  ]
+}

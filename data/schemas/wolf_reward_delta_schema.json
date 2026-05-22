@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.yggdrasilworldengine.local/ywe.wolf_reward_delta.v1.json",
+  "title": "ywe.wolf_reward_delta.v1",
+  "description": "Updates Twin Wolf companion state without morality framing.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "delta_id": {
+      "type": "string"
+    },
+    "quest_ref": {
+      "type": "string"
+    },
+    "completion_mode": {
+      "type": "string",
+      "enum": [
+        "reveal_oath",
+        "conceal_oath",
+        "bind_oath",
+        "study_oath",
+        "weaponize_oath",
+        "restore_relation",
+        "contain_anomaly",
+        "stabilize_threshold",
+        "refuse_resolution",
+        "custom"
+      ]
+    },
+    "truth_scope": {
+      "type": "string",
+      "enum": [
+        "base_world_truth",
+        "shared_world_truth",
+        "leaf_branch_truth",
+        "player_perception",
+        "mythic_interpretation",
+        "prophetic_pressure",
+        "faction_claim",
+        "host_materialization",
+        "diagnostic_noop"
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "ash_model_ref": {
+          "type": "string"
+        },
+        "ash_pattern_system_diagnostic_ref": {
+          "type": "string"
+        },
+        "quest_manifest_ref": {
+          "type": "string"
+        },
+        "player_action_trace_ref": {
+          "type": "string"
+        },
+        "branch_event_ref": {
+          "type": "string"
+        },
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "wolf_state_update_packet_ref": {
+      "type": "string"
+    },
+    "white_wolf_effects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dark_wolf_effects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "twin_wolf_coherence_effects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "is_morality_update": {
+      "type": "boolean",
+      "const": false
+    }
+  },
+  "required": [
+    "delta_id",
+    "quest_ref",
+    "completion_mode",
+    "truth_scope",
+    "provenance"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.yggdrasilworldengine.local/ywe.quest_reward_rejection_reason.v1.json",
+  "title": "ywe.quest_reward_rejection_reason.v1",
+  "description": "Reasons a quest reward candidate may be rejected.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "reason_id": {
+      "type": "string"
+    },
+    "reason_code": {
+      "type": "string",
+      "enum": [
+        "missing_provenance",
+        "invalid_truth_scope",
+        "random_reward_table_primary_model",
+        "wolf_morality_language",
+        "ability_without_source_ref",
+        "quest_without_consequence",
+        "unsafe_destructive_patch",
+        "unknown"
+      ]
+    },
+    "details": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "reason_id",
+    "reason_code"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.yggdrasilworldengine.local/ywe.quest_completion_mode.v1.json",
+  "title": "ywe.quest_completion_mode.v1",
+  "description": "Classifies how a quest was resolved without assigning morality.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "mode_id": {
+      "type": "string"
+    },
+    "mode_label": {
+      "type": "string"
+    },
+    "quest_ref": {
+      "type": "string"
+    },
+    "chosen_action": {
+      "type": "string"
+    },
+    "available_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "is_morality_grade": {
+      "type": "boolean",
+      "const": false
+    },
+    "consequence_profile": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "truth_scope": {
+      "type": "string",
+      "enum": [
+        "base_world_truth",
+        "shared_world_truth",
+        "leaf_branch_truth",
+        "player_perception",
+        "mythic_interpretation",
+        "prophetic_pressure",
+        "faction_claim",
+        "host_materialization",
+        "diagnostic_noop"
+      ]
+    }
+  },
+  "required": [
+    "mode_id",
+    "quest_ref",
+    "chosen_action",
+    "is_morality_grade",
+    "truth_scope"
+  ]
+}

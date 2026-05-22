@@ -1,0 +1,15 @@
+{
+  "spec_id": "check_quest_reward_delta_coverage",
+  "description": "Ensure reward deltas cover player, branch, worldstate, location, wolves, abilities, myth, prophecy, factions, artifacts, creatures, and future bias.",
+  "phase": "15",
+  "suggested_runner": "repository_guardrail_script_or_github_action",
+  "severity": "error",
+  "inputs": [
+    "docs/",
+    "data/schemas/",
+    "data/validation/",
+    "examples/"
+  ],
+  "failure_behavior": "fail_pull_request",
+  "notes": "This is a JSON check specification. Repository automation may convert it to repository script logic if the repo uses executable validation scripts."
+}

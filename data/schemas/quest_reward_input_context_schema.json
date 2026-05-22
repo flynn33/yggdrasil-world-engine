@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.yggdrasilworldengine.local/ywe.quest_reward_input_context.v1.json",
+  "title": "ywe.quest_reward_input_context.v1",
+  "description": "Context required before resolving quest rewards.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "context_id": {
+      "type": "string"
+    },
+    "quest_ref": {
+      "type": "string"
+    },
+    "player_runtime_state_ref": {
+      "type": "string"
+    },
+    "leaf_branch_reality_ref": {
+      "type": "string"
+    },
+    "location_state_ref": {
+      "type": "string"
+    },
+    "worldstate_delta_history_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "twin_wolf_state_ref": {
+      "type": "string"
+    },
+    "ability_state_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "plane_attunement_state_ref": {
+      "type": "string"
+    },
+    "lineage_resonance_state_ref": {
+      "type": "string"
+    },
+    "phase_14_ability_gate_passed": {
+      "type": "boolean"
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "ash_model_ref": {
+          "type": "string"
+        },
+        "ash_pattern_system_diagnostic_ref": {
+          "type": "string"
+        },
+        "quest_manifest_ref": {
+          "type": "string"
+        },
+        "player_action_trace_ref": {
+          "type": "string"
+        },
+        "branch_event_ref": {
+          "type": "string"
+        },
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "context_id",
+    "quest_ref",
+    "player_runtime_state_ref",
+    "leaf_branch_reality_ref",
+    "phase_14_ability_gate_passed"
+  ]
+}

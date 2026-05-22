@@ -706,6 +706,28 @@ and containment without becoming moral poles. Ability strain can cause temporary
 decoherence with recovery conditions; it cannot make the wolves enemies or
 remove recovery.
 
+## Quest Reward Resolver Integration
+
+Quest reward resolution is the Phase 15 consequence-routing surface between
+quest completion and durable engine state. A meaningful quest completion emits
+a `QuestRewardResolutionPacket`, a `ConsequenceResolutionPacket`, and a reward
+delta bundle, or it emits an explicit `DiagnosticNoOp` when evaluation confirms
+that no durable consequence applies.
+
+Completion modes describe resolution shape, not moral grade. Valid reward
+deltas may update player state, leaf branch reality, worldstate, location
+state, Twin Wolf companion state, ability pressure, plane attunement, lineage
+resonance, perception overlays, myth seeds, prophecy pressure, NPC
+relationships, faction claims, artifact eligibility, creature eligibility, and
+future generation bias. Every meaningful reward delta carries truth scope and
+source provenance.
+
+The resolver does not materialize Phase 16 content. It records eligibility,
+pressure, state mutation candidates, and future generation bias for later
+systems to consume. Twin Wolf updates preserve companion canon, ability effects
+route through source-referenced ability deltas, and prophecy pressure remains a
+probability weight rather than a guaranteed scripted future.
+
 ---
 
 # 16. DIVINE CORE ENDGAME

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.yggdrasilworldengine.local/ywe.quest_reward_source_ref.v1.json",
+  "title": "ywe.quest_reward_source_ref.v1",
+  "description": "Common source reference packet for quest reward resolution.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "source_ref_id": {
+      "type": "string"
+    },
+    "quest_manifest_ref": {
+      "type": "string"
+    },
+    "quest_resolution_payload_ref": {
+      "type": "string"
+    },
+    "player_action_trace_ref": {
+      "type": "string"
+    },
+    "branch_event_ref": {
+      "type": "string"
+    },
+    "diagnostic_ref": {
+      "type": "string"
+    },
+    "ash_model_ref": {
+      "type": "string"
+    },
+    "ash_pattern_system_component_ref": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_ref_id",
+    "quest_manifest_ref",
+    "player_action_trace_ref"
+  ]
+}

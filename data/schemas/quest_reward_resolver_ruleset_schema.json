@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.yggdrasilworldengine.local/ywe.quest_reward_resolver_ruleset.v1.json",
+  "title": "ywe.quest_reward_resolver_ruleset.v1",
+  "description": "A non-random ruleset for quest reward resolution.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "ruleset_id": {
+      "type": "string"
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "quest_reward_rule_schema.json"
+      }
+    },
+    "is_random_reward_table": {
+      "type": "boolean",
+      "const": false
+    },
+    "primary_model": {
+      "type": "string",
+      "const": "consequence_routing"
+    }
+  },
+  "required": [
+    "ruleset_id",
+    "is_random_reward_table",
+    "primary_model"
+  ]
+}

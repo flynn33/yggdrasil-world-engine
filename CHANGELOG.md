@@ -17,6 +17,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ## [Unreleased] — 2026-05-21
 
 ### Documentation
+- Add Phase 15 Quest Reward Resolver contracts, schemas, validation specs, examples, and guardrail wiring.
 - Refresh README release baseline, repository reading paths, and Phase 14 Ability / Power Engine orientation.
 - Replace placeholder documentation indexes for master specification, governance, and glossary with current navigation guidance.
 - Expand wiki coverage with Phase 14 ability workflows, authority-stack visuals, validation maps, and current release navigation.

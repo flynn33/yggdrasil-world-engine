@@ -1,0 +1,43 @@
+{
+  "packet_id": "qrr.ravenfall_gate.conceal_oath.v0_1",
+  "schema_version": "0.1",
+  "quest_ref": "quest.ravenfall_gate.buried_oath",
+  "completion_mode": "conceal_oath",
+  "resolution_status": "resolved_with_consequence",
+  "truth_scope": "leaf_branch_truth",
+  "input_context_ref": "qric.ravenfall_gate.conceal_oath.v0_1",
+  "consequence_resolution_packet_ref": "crp.ravenfall_gate.conceal_oath.v0_1",
+  "reward_delta_bundle_ref": "rdb.ravenfall_gate.conceal_oath.v0_1",
+  "emitted_delta_refs": [
+    "location_branch_overlay.hidden_shadow_path",
+    "player_state_delta.dark_wolf_conceal_support",
+    "plane_attunement_delta.shadow_mental",
+    "myth_seed_delta.private_keeper_memory",
+    "npc_relationship_delta.hidden_keepers",
+    "future_generation_bias.hidden_oath_quests"
+  ],
+  "future_generation_bias_refs": [
+    "future_generation_bias.hidden_oath_quests",
+    "future_generation_bias.keeper_npc_eligibility"
+  ],
+  "wolf_summary": {
+    "white_wolf": "remains companion and may warn about hidden costs",
+    "dark_wolf": "endure/conceal/transform quest support increases",
+    "twin_coherence": "asymmetric but not moral"
+  },
+  "ability_summary": {
+    "ability_pressure": [
+      "ability.grave_anchor.pressure_increase",
+      "ability.blood_echo_hearing.pressure_increase"
+    ]
+  },
+  "provenance": {
+    "ash_model_ref": "ASH_Model_of_the_Universe",
+    "ash_pattern_system_diagnostic_ref": "asp.diagnostic.ravenfall_gate.phase15.example",
+    "quest_manifest_ref": "quest_manifest.ravenfall_gate.buried_oath",
+    "player_action_trace_ref": "player_action.ravenfall_gate.conceal_oath",
+    "branch_event_ref": "branch_event.ravenfall_gate.conceal_oath",
+    "worldstate_delta_refs": []
+  },
+  "validation_status": "valid"
+}

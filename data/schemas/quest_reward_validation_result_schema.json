@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.yggdrasilworldengine.local/ywe.quest_reward_validation_result.v1.json",
+  "title": "ywe.quest_reward_validation_result.v1",
+  "description": "Validation result for reward resolution.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "validation_id": {
+      "type": "string"
+    },
+    "packet_ref": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "fail",
+        "warning"
+      ]
+    },
+    "failed_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "validation_id",
+    "packet_ref",
+    "status"
+  ]
+}

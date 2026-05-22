@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.yggdrasilworldengine.local/ywe.quest_reward_resolution_packet.v1.json",
+  "title": "ywe.quest_reward_resolution_packet.v1",
+  "description": "Primary packet emitted by Quest Reward Resolver after quest completion.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "packet_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "quest_ref": {
+      "type": "string"
+    },
+    "completion_mode": {
+      "type": "string",
+      "enum": [
+        "reveal_oath",
+        "conceal_oath",
+        "bind_oath",
+        "study_oath",
+        "weaponize_oath",
+        "restore_relation",
+        "contain_anomaly",
+        "stabilize_threshold",
+        "refuse_resolution",
+        "custom"
+      ]
+    },
+    "resolution_status": {
+      "type": "string",
+      "enum": [
+        "resolved_with_consequence",
+        "resolved_with_partial_consequence",
+        "resolved_as_branch_only",
+        "resolved_as_perception_only",
+        "resolved_as_diagnostic_noop",
+        "rejected"
+      ]
+    },
+    "truth_scope": {
+      "type": "string",
+      "enum": [
+        "base_world_truth",
+        "shared_world_truth",
+        "leaf_branch_truth",
+        "player_perception",
+        "mythic_interpretation",
+        "prophetic_pressure",
+        "faction_claim",
+        "host_materialization",
+        "diagnostic_noop"
+      ]
+    },
+    "input_context_ref": {
+      "type": "string"
+    },
+    "consequence_resolution_packet_ref": {
+      "type": "string"
+    },
+    "reward_delta_bundle_ref": {
+      "type": "string"
+    },
+    "emitted_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "diagnostic_noop_ref": {
+      "type": "string"
+    },
+    "future_generation_bias_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "ash_model_ref": {
+          "type": "string"
+        },
+        "ash_pattern_system_diagnostic_ref": {
+          "type": "string"
+        },
+        "quest_manifest_ref": {
+          "type": "string"
+        },
+        "player_action_trace_ref": {
+          "type": "string"
+        },
+        "branch_event_ref": {
+          "type": "string"
+        },
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "validation_status": {
+      "type": "string",
+      "enum": [
+        "valid",
+        "invalid",
+        "requires_review"
+      ]
+    }
+  },
+  "required": [
+    "packet_id",
+    "schema_version",
+    "quest_ref",
+    "completion_mode",
+    "resolution_status",
+    "truth_scope",
+    "provenance",
+    "validation_status"
+  ]
+}

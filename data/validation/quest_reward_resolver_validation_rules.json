@@ -1,0 +1,25 @@
+{
+  "rule_set": "quest_reward_resolver_validation_rules",
+  "rules": [
+    {
+      "id": "QRR-001",
+      "statement": "QuestRewardResolutionPacket must include completion_mode, truth_scope, provenance, and validation_status."
+    },
+    {
+      "id": "QRR-002",
+      "statement": "A meaningful quest resolution must emit at least one consequence delta or DiagnosticNoOp."
+    },
+    {
+      "id": "QRR-003",
+      "statement": "Quest rewards must not be random reward tables as the primary model."
+    },
+    {
+      "id": "QRR-004",
+      "statement": "Quest rewards must support future_generation_bias updates."
+    },
+    {
+      "id": "QRR-005",
+      "statement": "Quest rewards must route ability effects through source-referenced ability deltas."
+    }
+  ]
+}

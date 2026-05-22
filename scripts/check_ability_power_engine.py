@@ -326,7 +326,11 @@ def all_phase_14_json_files(root: Path) -> list[Path]:
     for rel_dir in ("data/schemas", PHASE_14_EXAMPLE_ROOT):
         base = root / rel_dir
         if base.is_dir():
-            paths.update(base.rglob("ability_*.json"))
+            paths.update(
+                path
+                for path in base.rglob("ability_*.json")
+                if path.name != "ability_reward_delta_schema.json"
+            )
             paths.update(base.rglob("*.example.json"))
     return sorted(paths)
 

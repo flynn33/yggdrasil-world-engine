@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.yggdrasilworldengine.local/ywe.quest_reward_resolver_trace.v1.json",
+  "title": "ywe.quest_reward_resolver_trace.v1",
+  "description": "Debuggable trace for how a quest reward was resolved.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "trace_id": {
+      "type": "string"
+    },
+    "quest_ref": {
+      "type": "string"
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "rejection_reason": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "trace_id",
+    "quest_ref",
+    "steps"
+  ]
+}

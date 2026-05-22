@@ -11,9 +11,9 @@ handoff records.
 
 ## Current Handoff Records
 
-Phase 11, Phase 12, source-truth alignment, and Phase 14 package records have
-landed as active review artifacts. Earlier adjacent records remain retained for
-historical review.
+Phase 11, Phase 12, source-truth alignment, Phase 14, and Phase 15 package
+records have landed as active review artifacts. Earlier adjacent records remain
+retained for historical review.
 
 | File | Purpose |
 |---|---|
@@ -33,6 +33,7 @@ historical review.
 | `YWE_PHASE_12_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-17.md` | Earlier Phase 12-adjacent handoff retained for historical review |
 | `YWE_SOURCE_TRUTH_ALIGNMENT_HANDOFF_2026-05-19.md` | Source-truth and Twin Wolf alignment remediation handoff |
 | `YWE_PHASE_14_ABILITY_POWER_ENGINE_COMPLETION_REPORT_2026-05-19.md` | Phase 14 Ability / Power Engine completion report |
+| `YWE_PHASE_15_QUEST_REWARD_RESOLVER_COMPLETION_REPORT_2026-05-20.md` | Phase 15 Quest Reward Resolver completion report |
 | `repo_implementation_mapping.md` | Repository implementation mapping |
 | `missing_source_documents.md` | Missing source document inventory |
 
@@ -42,8 +43,9 @@ Phase 13 remains intentionally deferred in earlier quest/NPC/lore planning
 records. The accepted source-truth and Twin Wolf alignment remediation landed
 between Phase 12 and Phase 14 as a prerequisite gate, and Phase 14 then added
 the Ability / Power Engine without implementing a separate Phase 13 feature
-package. Future Phase 13 work must still be accepted through its own package
-before it becomes an active surface.
+package. Phase 15 adds the Quest Reward Resolver on top of the accepted Phase
+14 ability surface. Future Phase 13 work must still be accepted through its own
+package before it becomes an active surface.
 
 ## Historical Handoff Note
 

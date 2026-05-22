@@ -65,7 +65,8 @@ Current release baseline:
 
 | Baseline | Status | Primary Surface |
 |---|---|---|
-| `v2.0.16` | Current accepted repository baseline | Phase 14 Ability / Power Engine and source-truth-aligned authority stack |
+| `v2.0.17` | Current accepted repository baseline | Documentation architecture refresh and release guidance |
+| `v2.0.16` | Phase 14 accepted baseline | Ability / Power Engine and source-truth-aligned authority stack |
 | `v2.0.15` | Authority-drift guardrail baseline | Source-truth and Twin Wolf alignment |
 | `v2.0.14` | Phase 12 accepted baseline | Quest, NPC, lore, myth, and social-distribution generation |
 | `v2.0.13` | Phase 11 accepted baseline | Worldstate and location mutation |
@@ -178,6 +179,21 @@ in `examples/ability_power_engine/`. Meaningful use records
 `AbilityConsequencePacket`; state mutation hands off through
 `AbilityStateUpdatePacket`; eligibility and pressure are represented by
 `AbilityUnlockPressure`.
+
+### Quest Reward Resolver
+
+Phase 15 defines the code-agnostic Quest Reward Resolver surface. Quest reward
+resolution converts quest completion into validated consequence bundles, state
+deltas, truth-scoped reward deltas, explicit DiagnosticNoOp records, and future
+generation eligibility.
+
+The core Phase 15 contracts live in `docs/architecture/quest_reward_*.md`, with
+schemas in `data/schemas/*reward*_schema.json`, validation rules and check
+specs in `data/validation/`, and Ravenfall Gate examples in
+`examples/quest_reward_resolver/`. Meaningful completion emits
+`QuestRewardResolutionPacket` and `ConsequenceResolutionPacket` references,
+routes ability effects through source provenance, and keeps Twin Wolf updates
+outside morality framing.
 
 ---
 
@@ -329,6 +345,7 @@ Recommended reading paths:
 | Engine implementor | `developer-guide.md` | `adapters/`, `core/`, `data/schemas/README.md` |
 | Systems designer | `wiki.md` | `docs/architecture/`, `lore/`, `modules/` |
 | Ability / power designer | `docs/architecture/ability_power_engine_contract.md` | `docs/architecture/ability_*_contract.md`, `examples/ability_power_engine/` |
+| Quest reward designer | `docs/architecture/quest_reward_resolver_contract.md` | `docs/architecture/quest_reward_*_contract.md`, `examples/quest_reward_resolver/` |
 | Wiki reader | GitHub wiki `Home` | `System Workflow Atlas`, `Runtime Generation Flow`, `Validation And Conformance` |
 
 ---
