@@ -79,15 +79,6 @@ Phase 14 ability and power engine contracts:
 - `ability_safety_and_decoherence_contract.md` -- Safety, recovery, and decoherence handling.
 - `ability_engine_integration_map.md` -- Phase 10-12 inputs, Phase 14 records, and Phase 15 handoff packets.
 
-Phase 15A companion and reward foundation contracts:
-
-- `product_runtime_boundary_contract.md` -- Agnostic YWE repository and downstream product runtime boundary.
-- `companion_presence_model_contract.md` -- Persistent Raven Companion and conditional wolf manifestation presence model.
-- `raven_companion_engine_contract.md` -- Persistent Raven Companion state ownership and Floki first-campaign binding.
-- `wolf_manifestation_resolver_contract.md` -- Conditional wolf manifestation trigger, duration, and rejection rules.
-- `quest_reward_resolver_contract.md` -- QuestRewardResolutionPacket and ConsequenceResolutionPacket routing foundation.
-- `companion_reward_integration_map.md` -- Companion-safe reward delta routing map.
-
 The current controlling authority chain is:
 
 ```text
@@ -192,9 +183,9 @@ flowchart LR
   P12["Phase 12<br/>Quest / NPC / lore"]
   STR["Source-truth + Twin Wolf<br/>alignment remediation"]
   P14["Phase 14<br/>Ability / Power Engine"]
-  P15A["Phase 15A<br/>Companion + reward<br/>foundation"]
+  P15["Phase 15+<br/>Quest reward resolver<br/>deferred"]
 
-  P9 --> P10 --> P11 --> P12 --> STR --> P14 --> P15A
+  P9 --> P10 --> P11 --> P12 --> STR --> P14 --> P15
 ```
 
 The Phase 14 Ability / Power Engine consumes the accepted Phase 9-12 surfaces
@@ -242,14 +233,4 @@ WorldstateDeltaPacket + FutureGenerationBiasUpdate
     -> QuestChainManifest / NPCManifest / CodexRecord / MythRecord
       -> QuestResolutionPayload / NPCMemoryDelta / SocialDistributionDelta
         -> WorldstateDeltaPacket or DiagnosticNoOp
-```
-
-Phase 15A companion-reward dependency flow:
-
-```text
-QuestResolutionPayload + Player Runtime State
-  -> QuestRewardResolutionPacket
-    -> ConsequenceResolutionPacket
-      -> player, companion, ability, worldstate, location, myth, prophecy,
-         faction/social, and future-generation refs
 ```

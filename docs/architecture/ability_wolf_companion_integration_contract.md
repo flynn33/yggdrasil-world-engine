@@ -22,14 +22,6 @@ twin_wolf_coherence_restoration
 twin_wolf_branch_stabilization
 ```
 
-## Phase 15A manifestation boundary
-
-Ability and wolf integration applies when White Wolf, Dark Wolf, or both are
-manifested through a valid wolf manifestation event. Ability pressure may help
-justify manifestation, extend a manifestation duration, or record companion
-guidance, but it must not convert either wolf into a permanent default party
-member.
-
 ## Forbidden
 
 ```text

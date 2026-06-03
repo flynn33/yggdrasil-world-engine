@@ -116,23 +116,6 @@ It keeps the current leaf branch reality as a reference, starts the player as
 a mortal instance with veiled celestial identity, and requires meaningful
 state mutation to flow through `PlayerStateUpdatePacket`.
 
-## Phase 15A WRW:ER Companion and Reward Foundation
-
-Where Ravens Wait: Eternal Reckoning is the first single-player RPG game layer
-built with YWE. The first playthrough is the authored Nathruun campaign, with
-custom-origin mode deferred until Nathruun main-story completion.
-
-Floki Hrafen Vilgerson is Nathruun's persistent Raven Companion. The Raven
-Companion remains attached to player runtime state even when offscreen or
-temporarily noninteractive for presentation. White Wolf and Dark Wolf presence
-is conditional and must be represented through source-referenced manifestation
-events.
-
-Quest resolution does not mutate player, world, ability, companion, myth,
-prophecy, or future-generation systems directly. It emits a
-`QuestRewardResolutionPacket` that references a `ConsequenceResolutionPacket`
-and routes downstream updates by refs.
-
 ## Design Goals
 
 ```yaml

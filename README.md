@@ -179,22 +179,6 @@ in `examples/ability_power_engine/`. Meaningful use records
 `AbilityStateUpdatePacket`; eligibility and pressure are represented by
 `AbilityUnlockPressure`.
 
-### Phase 15A Companion and Reward Foundation
-
-Phase 15A records the Where Ravens Wait: Eternal Reckoning game identity,
-Nathruun-first campaign identity, persistent Raven Companion law, conditional
-Wolf Manifestation Resolver foundation, and Quest Reward Resolver packet
-foundation.
-
-The Raven Companion is persistent player runtime state. In the canonical
-Nathruun campaign, Floki Hrafen Vilgerson occupies that role. White Wolf and
-Dark Wolf presence is conditional and must be represented by source-referenced
-manifestation events rather than default party membership.
-
-Quest Reward Resolver output uses `QuestRewardResolutionPacket` and
-`ConsequenceResolutionPacket` records to route player, world, location,
-companion, ability, myth, prophecy, and future-generation consequences by refs.
-
 ---
 
 ## System Map
@@ -345,7 +329,6 @@ Recommended reading paths:
 | Engine implementor | `developer-guide.md` | `adapters/`, `core/`, `data/schemas/README.md` |
 | Systems designer | `wiki.md` | `docs/architecture/`, `lore/`, `modules/` |
 | Ability / power designer | `docs/architecture/ability_power_engine_contract.md` | `docs/architecture/ability_*_contract.md`, `examples/ability_power_engine/` |
-| Companion / reward designer | `docs/architecture/companion_presence_model_contract.md` | `docs/architecture/raven_companion_engine_contract.md`, `docs/architecture/wolf_manifestation_resolver_contract.md`, `docs/architecture/quest_reward_resolver_contract.md` |
 | Wiki reader | GitHub wiki `Home` | `System Workflow Atlas`, `Runtime Generation Flow`, `Validation And Conformance` |
 
 ---
@@ -445,7 +428,6 @@ python3 scripts/check_player_runtime_state.py .
 python3 scripts/check_worldstate_location_mutation.py .
 python3 scripts/check_quest_npc_lore_generation.py .
 python3 scripts/check_source_truth_alignment.py .
-python3 scripts/check_phase_15a_companion_reward_foundation.py .
 python3 scripts/check_non_destructive_diff.py --base origin/main --head HEAD .
 git diff --check
 ```
