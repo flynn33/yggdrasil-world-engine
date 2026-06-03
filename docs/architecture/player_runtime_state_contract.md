@@ -48,6 +48,9 @@ celestial_identity_state_ref
 plane_attunement_state_ref
 bloodline_resonance_state_ref
 wolf_resonance_summary_ref
+raven_companion_state_ref
+wolf_manifestation_event_refs
+companion_reward_delta_refs
 perception_state_refs
 ability_pressure_refs
 quest_history_refs
@@ -95,6 +98,18 @@ feature system result
 ```
 
 Direct mutation by feature engines is forbidden.
+
+## Phase 15A companion-state references
+
+Phase 15A adds companion references without changing the Phase 10 mutation
+rule. `raven_companion_state_ref` points to the persistent Raven Companion
+state for the active player runtime state. `wolf_manifestation_event_refs`
+records conditional wolf manifestation events only when accepted trigger,
+duration, and source-reference criteria are present.
+
+Companion reward consequences remain packet-routed. Feature engines may append
+`companion_reward_delta_refs` only through validated update or consequence
+packets; they must not mutate companion state directly.
 
 ## Initial state expectation
 

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasil.world.engine/schemas/consequence_resolution_packet_schema.json",
+  "title": "Consequence Resolution Packet Schema",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "packet_id",
+    "cause_ref",
+    "truth_scope",
+    "routes",
+    "source_refs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "consequence_resolution_packet_schema"
+    },
+    "version": {
+      "type": "string"
+    },
+    "packet_id": {
+      "type": "string"
+    },
+    "cause_ref": {
+      "type": "string"
+    },
+    "truth_scope": {
+      "enum": [
+        "player_branch",
+        "shared_world",
+        "perception_only",
+        "mythic_record",
+        "prophetic_pressure",
+        "diagnostic_noop"
+      ]
+    },
+    "routes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "route_type",
+          "target_ref"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "route_type": {
+            "enum": [
+              "player_state",
+              "raven_companion_state",
+              "wolf_manifestation",
+              "ability_pressure",
+              "worldstate_delta",
+              "location_mutation",
+              "myth_signal",
+              "prophecy_pressure",
+              "faction_social_signal",
+              "future_generation_bias"
+            ]
+          },
+          "target_ref": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "source_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema_id": "wolf_manifestation_event_schema",
+  "version": "1.0.0",
+  "manifestation_event_id": "wolf_manifestation.ravenfall_gate.buried_oath.white_and_dark.v1",
+  "manifesting_companions": [
+    "white_wolf",
+    "dark_wolf"
+  ],
+  "manifestation_trigger": {
+    "trigger_type": "quest_chain_requirement",
+    "trigger_ref": "quest_chain.the_buried_oath_at_ravenfall_gate",
+    "criteria_met": [
+      "ravenfall_gate_threshold_active",
+      "buried_oath_discovered",
+      "player_branch_choice_pending"
+    ]
+  },
+  "manifestation_duration": {
+    "duration_type": "entire_quest_chain",
+    "begins_at": "quest_step.buried_oath.discovery",
+    "ends_at": "quest_step.buried_oath.resolution_recorded"
+  },
+  "allowed_functions": [
+    "quest_signal",
+    "threshold_guidance",
+    "combat_assist",
+    "ability_pressure_signal",
+    "branch_consequence_witness"
+  ],
+  "dismissal_condition": "Quest chain resolution recorded and no active follow-up threshold condition remains.",
+  "forbidden_interpretations": [
+    "morality_meter",
+    "good_vs_evil_binary",
+    "default_party_member",
+    "generic_pet_system",
+    "permanent_wolf_loss"
+  ],
+  "source_refs": [
+    "wolf_manifestation_resolver_contract",
+    "companion_presence_model_contract"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "rules_model_id": "quest_reward_resolver_rules.v1",
+  "core_law": "Quest completion emits a QuestRewardResolutionPacket that references a ConsequenceResolutionPacket.",
+  "required_inputs": [
+    "quest_ref",
+    "quest_resolution_payload_ref",
+    "player_runtime_state_ref",
+    "leaf_branch_reality_state_ref",
+    "worldstate_context_ref",
+    "location_state_ref",
+    "source_refs"
+  ],
+  "required_outputs": [
+    "quest_reward_resolution_packet",
+    "consequence_resolution_packet"
+  ],
+  "routing_targets": [
+    "player_state",
+    "raven_companion_state",
+    "wolf_manifestation",
+    "ability_pressure",
+    "worldstate_delta",
+    "location_mutation",
+    "myth_signal",
+    "prophecy_pressure",
+    "faction_social_signal",
+    "future_generation_bias"
+  ],
+  "forbidden_outputs": [
+    "ad_hoc_state_mutation_without_packet",
+    "reward_without_source_refs",
+    "reward_without_consequence_resolution_packet"
+  ]
+}

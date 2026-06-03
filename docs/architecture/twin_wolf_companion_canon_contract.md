@@ -26,6 +26,17 @@ They may:
 - respond to branch and consequence states;
 - temporarily withdraw if decohered.
 
+## Phase 15A manifestation boundary
+
+Phase 15A distinguishes wolf resonance from wolf presence. White Wolf and Dark
+Wolf may physically accompany the player when canonically appropriate, but
+runtime presence is expressed through conditional manifestations with explicit
+trigger, duration, dismissal, and source-reference evidence.
+
+They are not default party members. Their appearance must be justified by
+quest, branch, location threshold, wolf resonance, myth, prophecy, combat, or
+ability pressure rather than assumed as permanent baseline presence.
+
 ## Functional poles
 
 White Wolf:
