@@ -1,0 +1,24 @@
+{
+  "rules_model_id": "raven_companion_rules.v1",
+  "invariants": [
+    "raven_companion_state.presence_rule == always_with_player",
+    "first_campaign.raven_companion_id == floki_hrafen_vilgerson"
+  ],
+  "allowed_functions": [
+    "travel_companion",
+    "witness",
+    "ancestral_memory_signal",
+    "quest_signal",
+    "danger_warning",
+    "scouting",
+    "threshold_recognition",
+    "lore_recovery",
+    "player_identity_reflection"
+  ],
+  "forbidden_functions": [
+    "generic_pet_inventory",
+    "cosmetic_familiar_only",
+    "standard_mortal_companion_death",
+    "replaceable_pet_slot"
+  ]
+}

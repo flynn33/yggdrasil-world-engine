@@ -1,0 +1,45 @@
+{
+  "schema_id": "consequence_resolution_packet_schema",
+  "version": "1.0.0",
+  "packet_id": "consequence.ravenfall_gate.reveal_oath.v1",
+  "cause_ref": "quest_reward.ravenfall_gate.reveal_oath.v1",
+  "truth_scope": "player_branch",
+  "routes": [
+    {
+      "route_type": "player_state",
+      "target_ref": "player_state_update.ravenfall_gate.reveal_oath"
+    },
+    {
+      "route_type": "raven_companion_state",
+      "target_ref": "companion_delta.floki.oath_witnessed"
+    },
+    {
+      "route_type": "wolf_manifestation",
+      "target_ref": "wolf_manifestation.ravenfall_gate.buried_oath.white_and_dark.v1"
+    },
+    {
+      "route_type": "ability_pressure",
+      "target_ref": "ability_pressure.oath_sight.reveal_oath"
+    },
+    {
+      "route_type": "worldstate_delta",
+      "target_ref": "worldstate_delta.ravenfall_gate.oath_revealed"
+    },
+    {
+      "route_type": "location_mutation",
+      "target_ref": "location_mutation.ravenfall_gate.oath_revealed"
+    },
+    {
+      "route_type": "myth_signal",
+      "target_ref": "myth_seed.oath_under_gate"
+    },
+    {
+      "route_type": "future_generation_bias",
+      "target_ref": "future_bias.ravenfall_gate.oath_revealed"
+    }
+  ],
+  "source_refs": [
+    "quest_reward.ravenfall_gate.reveal_oath.v1",
+    "branch_event.ravenfall_gate.reveal_oath"
+  ]
+}

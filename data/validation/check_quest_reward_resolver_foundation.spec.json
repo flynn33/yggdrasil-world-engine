@@ -1,0 +1,19 @@
+{
+  "check_id": "check_quest_reward_resolver_foundation",
+  "purpose": "Verify Quest Reward Resolver emits traceable consequence packets.",
+  "required_examples": [
+    "examples/quest_reward_resolver/ravenfall_gate_reveal_oath_reward_resolution.example.json",
+    "examples/quest_reward_resolver/ravenfall_gate_conceal_oath_reward_resolution.example.json",
+    "examples/quest_reward_resolver/consequence_resolution_reveal_oath.example.json",
+    "examples/quest_reward_resolver/invalid_reward_without_consequence_packet.example.json"
+  ],
+  "must_assert": [
+    "consequence_resolution_packet_ref is non-empty",
+    "source_refs present",
+    "routes present"
+  ],
+  "must_reject": [
+    "ad_hoc_state_mutation_without_packet",
+    "reward_without_source_refs"
+  ]
+}

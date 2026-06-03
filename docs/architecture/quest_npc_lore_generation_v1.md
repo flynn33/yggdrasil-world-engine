@@ -20,6 +20,12 @@ single auditable generation surface. It does not implement companion behavior,
 abilities, reward resolution, save/load adapters, platform runtime code, or the
 Ravenfall Gate vertical slice.
 
+Phase 15A establishes the downstream Quest Reward Resolver foundation. Phase 12
+continues to emit quest manifests and `QuestResolutionPayload` records; Phase
+15A consumes those records through `QuestRewardResolutionPacket` and
+`ConsequenceResolutionPacket` routing rather than allowing direct ad hoc reward
+mutation.
+
 ## Authority Position
 
 ```text
