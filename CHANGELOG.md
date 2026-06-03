@@ -5,6 +5,19 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.19] — 2026-06-03
+
+### Added
+- Merge pull request #60 from flynn33/phase-15a-companion-reward-foundation
+- Add Phase 15A companion reward foundation
+
+### Changed
+- Revise software license terms and conditions
+
+
+---
+
+
 ## [2.0.18] — 2026-05-22
 
 ### Changes
