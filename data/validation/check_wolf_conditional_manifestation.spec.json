@@ -1,0 +1,18 @@
+{
+  "check_id": "check_wolf_conditional_manifestation",
+  "purpose": "Verify wolves are conditional manifestations, not permanent party members or morality meters.",
+  "required_examples": [
+    "examples/companions/wolf_manifestation_event_ravenfall_gate_buried_oath.example.json",
+    "examples/quest_reward_resolver/invalid_always_present_wolves.example.json"
+  ],
+  "must_assert": [
+    "trigger exists",
+    "duration exists",
+    "forbidden_interpretations include morality_meter"
+  ],
+  "must_reject": [
+    "always_present_wolves",
+    "default_party_member",
+    "white_good_dark_evil_score"
+  ]
+}

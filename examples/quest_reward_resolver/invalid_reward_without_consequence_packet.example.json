@@ -1,0 +1,18 @@
+{
+  "schema_id": "quest_reward_resolution_packet_schema",
+  "version": "1.0.0",
+  "packet_id": "invalid.quest_reward.no_consequence_packet",
+  "quest_ref": "quest_chain.invalid_example",
+  "resolution_mode": "reveal",
+  "source_refs": [
+    "invalid_example_source"
+  ],
+  "consequence_resolution_packet_ref": "",
+  "reward_outputs": {
+    "player_state_update_refs": [
+      "player_state_update.invalid_direct_mutation"
+    ]
+  },
+  "validation_status": "invalid",
+  "expected_rejection_reason": "Quest reward resolution cannot mutate systems without a consequence_resolution_packet_ref."
+}

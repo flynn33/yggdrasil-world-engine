@@ -1,0 +1,17 @@
+{
+  "check_id": "check_no_platform_runtime_code_phase_15a",
+  "purpose": "Verify Phase 15A remains agnostic and introduces no platform-specific runtime implementation.",
+  "forbidden_extensions": [
+    ".swift",
+    ".metal",
+    ".xcodeproj",
+    ".xcworkspace"
+  ],
+  "forbidden_terms": [
+    "SwiftUI View",
+    "AppKit lifecycle",
+    "Metal renderer",
+    "GameController input implementation",
+    "macOS save directory implementation"
+  ]
+}

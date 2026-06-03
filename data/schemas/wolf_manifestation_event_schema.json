@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasil.world.engine/schemas/wolf_manifestation_event_schema.json",
+  "title": "Wolf Manifestation Event Schema",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "manifestation_event_id",
+    "manifesting_companions",
+    "manifestation_trigger",
+    "manifestation_duration",
+    "allowed_functions",
+    "dismissal_condition",
+    "forbidden_interpretations",
+    "source_refs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "wolf_manifestation_event_schema"
+    },
+    "version": {
+      "type": "string"
+    },
+    "manifestation_event_id": {
+      "type": "string"
+    },
+    "manifesting_companions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "enum": [
+          "white_wolf",
+          "dark_wolf"
+        ]
+      }
+    },
+    "manifestation_trigger": {
+      "type": "object",
+      "required": [
+        "trigger_type",
+        "criteria_met"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "trigger_type": {
+          "enum": [
+            "quest_chain_requirement",
+            "quest_step_requirement",
+            "branch_threshold_crossed",
+            "location_threshold_state",
+            "wolf_resonance_condition",
+            "myth_pressure",
+            "prophecy_pressure",
+            "ability_unlock_requirement",
+            "combat_intervention_requirement",
+            "vision_or_dream_trigger"
+          ]
+        },
+        "trigger_ref": {
+          "type": "string"
+        },
+        "criteria_met": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "manifestation_duration": {
+      "type": "object",
+      "required": [
+        "duration_type",
+        "begins_at",
+        "ends_at"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "duration_type": {
+          "enum": [
+            "single_scene",
+            "temporary_time_window",
+            "combat_event",
+            "quest_step",
+            "entire_quest_chain",
+            "vision_or_dream_sequence",
+            "threshold_crossing"
+          ]
+        },
+        "begins_at": {
+          "type": "string"
+        },
+        "ends_at": {
+          "type": "string"
+        }
+      }
+    },
+    "allowed_functions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dismissal_condition": {
+      "type": "string"
+    },
+    "forbidden_interpretations": {
+      "type": "array",
+      "contains": {
+        "const": "morality_meter"
+      },
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
