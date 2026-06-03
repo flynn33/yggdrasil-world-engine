@@ -41,7 +41,7 @@ worldstate_delta_refs
 location_mutation_refs
 myth_signal_refs
 prophecy_pressure_refs
-faction_or_social_signal_refs
+faction_social_signal_refs
 future_generation_bias_refs
 validation_status
 ```

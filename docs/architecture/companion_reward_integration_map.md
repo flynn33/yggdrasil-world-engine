@@ -52,13 +52,19 @@ wolf_death_as_standard_pet_loss
 
 ```text
 QuestRewardResolutionPacket
-  -> ConsequenceResolutionPacket
+  -> reward_outputs
     -> player_state_update_refs
-    -> raven_companion_state_delta_refs
-    -> wolf_manifestation_event_refs
+    -> companion_state_delta_refs
     -> ability_pressure_update_refs
     -> worldstate_delta_refs
     -> location_mutation_refs
-    -> myth_prophecy_signal_refs
+    -> myth_signal_refs
+    -> prophecy_pressure_refs
+    -> faction_social_signal_refs
     -> future_generation_bias_refs
+
+ConsequenceResolutionPacket
+  -> routes[]
+    -> route_type
+    -> target_ref
 ```

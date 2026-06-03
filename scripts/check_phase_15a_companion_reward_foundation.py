@@ -12,12 +12,13 @@ TEXT_ENCODING = "utf-8-sig"
 
 REQUIRED_ARTIFACTS = "data/validation/phase_15a_required_artifacts.json"
 ACCEPTANCE_CONTRACT = "data/validation/phase_15a_acceptance_contract.json"
+PLATFORM_RUNTIME_SPEC = "data/validation/check_no_platform_runtime_code_phase_15a.spec.json"
 PHASE_15A_VALIDATION_FILES = [
     "data/validation/check_wrw_er_game_identity_lock.spec.json",
     "data/validation/check_raven_companion_persistent_presence.spec.json",
     "data/validation/check_wolf_conditional_manifestation.spec.json",
     "data/validation/check_quest_reward_resolver_foundation.spec.json",
-    "data/validation/check_no_platform_runtime_code_phase_15a.spec.json",
+    PLATFORM_RUNTIME_SPEC,
     "data/validation/phase_15a_forbidden_language_patterns.json",
     REQUIRED_ARTIFACTS,
     ACCEPTANCE_CONTRACT,
@@ -54,7 +55,27 @@ PHASE_15A_CROSS_REFERENCE_FILES = [
     "README.md",
 ]
 
-FORBIDDEN_PLATFORM_EXTENSIONS = (".swift", ".metal", ".xcodeproj", ".xcworkspace")
+PLATFORM_RUNTIME_TERM_REGISTRIES = {
+    PLATFORM_RUNTIME_SPEC,
+    "data/validation/phase_15a_forbidden_language_patterns.json",
+}
+
+TEXT_SCAN_EXTENSIONS = {
+    ".json",
+    ".md",
+    ".py",
+    ".sh",
+    ".txt",
+    ".yaml",
+    ".yml",
+}
+
+FORBIDDEN_REFERENCE_HEADINGS = (
+    "not allowed",
+    "forbidden",
+    "rejected",
+    "invalid",
+)
 
 
 def read_text(path: Path) -> str:
@@ -112,6 +133,37 @@ def git_changed_paths(root: Path) -> list[str]:
         if result.returncode == 0:
             paths.update(line.strip() for line in result.stdout.splitlines() if line.strip())
     return sorted(paths)
+
+
+def line_allows_forbidden_platform_reference(active_heading: str, lowered_line: str) -> bool:
+    return any(marker in active_heading for marker in FORBIDDEN_REFERENCE_HEADINGS) or any(
+        marker in lowered_line
+        for marker in (
+            "not allowed",
+            "must not",
+            "no platform-specific",
+            "forbidden",
+            "rejected",
+            "invalid",
+        )
+    )
+
+
+def forbidden_platform_term_hits(rel_path: str, text: str, forbidden_terms: list[str]) -> list[str]:
+    if rel_path in PLATFORM_RUNTIME_TERM_REGISTRIES:
+        return []
+
+    hits: list[str] = []
+    active_heading = ""
+    for line_number, line in enumerate(text.splitlines(), start=1):
+        lowered_line = line.lower()
+        stripped = lowered_line.strip()
+        if stripped.startswith("#"):
+            active_heading = stripped.lstrip("#").strip()
+        for term in forbidden_terms:
+            if term and term in lowered_line and not line_allows_forbidden_platform_reference(active_heading, lowered_line):
+                hits.append(f"{term} at line {line_number}")
+    return hits
 
 
 def check_required_artifacts(root: Path, errors: list[str]) -> None:
@@ -180,6 +232,27 @@ def check_raven_companion(root: Path, errors: list[str]) -> None:
         require("raven_companion_state_ref" in state_refs, "PlayerRuntimeState.state_refs must expose raven_companion_state_ref.", errors)
         require("wolf_manifestation_event_refs" in state_refs, "PlayerRuntimeState.state_refs must expose wolf_manifestation_event_refs.", errors)
 
+    companion_delta_schema = load_json_checked(root, "data/schemas/companion_reward_delta_schema.json", errors)
+    if isinstance(companion_delta_schema, dict):
+        delta_types = (
+            companion_delta_schema.get("properties", {})
+            .get("delta_type", {})
+            .get("enum", [])
+        )
+        require(
+            "raven_commentary_state_updated" in delta_types,
+            "CompanionRewardDelta.delta_type must expose raven_commentary_state_updated.",
+            errors,
+        )
+
+    routing_rules = load_json_checked(root, "modules/quest_engine/companion_reward_routing_rules_model.json", errors)
+    if isinstance(routing_rules, dict):
+        require(
+            "raven_commentary_state_updated" in routing_rules.get("raven_allowed_delta_types", []),
+            "Companion reward routing rules must allow raven_commentary_state_updated.",
+            errors,
+        )
+
 
 def check_wolf_manifestation(root: Path, errors: list[str]) -> None:
     example = load_json_checked(root, "examples/companions/wolf_manifestation_event_ravenfall_gate_buried_oath.example.json", errors)
@@ -205,8 +278,32 @@ def check_wolf_manifestation(root: Path, errors: list[str]) -> None:
         require(trigger.get("criteria_met") == [], "Invalid always-present wolves example must carry empty criteria.", errors)
         require(duration.get("ends_at") == "never", "Invalid always-present wolves example must show unbounded duration.", errors)
 
+    for rel_path in (
+        "modules/companion_engine/companion_presence_rules_model.json",
+        "modules/companion_engine/engine_interface.json",
+    ):
+        text = read_text(root / rel_path)
+        require(
+            '"wolf_manifestation_event_ref"' not in text and '"require wolf_manifestation_event_ref"' not in text,
+            f"{rel_path} must use plural wolf_manifestation_event_refs for list-valued state refs.",
+            errors,
+        )
+
 
 def check_quest_reward(root: Path, errors: list[str]) -> None:
+    reward_schema = load_json_checked(root, "data/schemas/quest_reward_resolution_packet_schema.json", errors)
+    if isinstance(reward_schema, dict):
+        reward_output_props = (
+            reward_schema.get("properties", {})
+            .get("reward_outputs", {})
+            .get("properties", {})
+        )
+        require(
+            "faction_social_signal_refs" in reward_output_props,
+            "QuestRewardResolutionPacket.reward_outputs must expose faction_social_signal_refs.",
+            errors,
+        )
+
     valid_examples = [
         "examples/quest_reward_resolver/ravenfall_gate_reveal_oath_reward_resolution.example.json",
         "examples/quest_reward_resolver/ravenfall_gate_conceal_oath_reward_resolution.example.json",
@@ -226,7 +323,18 @@ def check_quest_reward(root: Path, errors: list[str]) -> None:
         routes = consequence.get("routes", [])
         route_types = {route.get("route_type") for route in routes if isinstance(route, dict)}
         require(consequence.get("cause_ref") == "quest_reward.ravenfall_gate.reveal_oath.v1", "Consequence packet cause_ref is incorrect.", errors)
-        require({"player_state", "raven_companion_state", "wolf_manifestation", "worldstate_delta", "location_mutation"} <= route_types, "Consequence routes are incomplete.", errors)
+        require(
+            {
+                "player_state",
+                "raven_companion_state",
+                "wolf_manifestation",
+                "worldstate_delta",
+                "location_mutation",
+                "faction_social_signal",
+            } <= route_types,
+            "Consequence routes are incomplete.",
+            errors,
+        )
 
     invalid = load_json_checked(root, "examples/quest_reward_resolver/invalid_reward_without_consequence_packet.example.json", errors)
     if isinstance(invalid, dict):
@@ -255,11 +363,30 @@ def check_cross_references(root: Path, errors: list[str]) -> None:
 
 
 def check_no_platform_runtime_code(root: Path, errors: list[str]) -> None:
+    spec = load_json_checked(root, PLATFORM_RUNTIME_SPEC, errors)
+    if not isinstance(spec, dict):
+        return
+    forbidden_extensions = tuple(str(ext).lower() for ext in spec.get("forbidden_extensions", []))
+    forbidden_terms = [str(term).lower() for term in spec.get("forbidden_terms", [])]
     changed_paths = git_changed_paths(root)
     for rel_path in changed_paths:
         lower_path = rel_path.lower()
-        if lower_path.endswith(FORBIDDEN_PLATFORM_EXTENSIONS):
+        if forbidden_extensions and lower_path.endswith(forbidden_extensions):
             errors.append(f"Phase 15A added forbidden platform runtime artifact: {rel_path}")
+        if rel_path == PLATFORM_RUNTIME_SPEC or Path(rel_path).suffix.lower() not in TEXT_SCAN_EXTENSIONS:
+            continue
+        path = root / rel_path
+        if not path.is_file():
+            continue
+        try:
+            lowered_text = read_text(path).lower()
+        except UnicodeDecodeError:
+            continue
+        except OSError as exc:
+            errors.append(f"Unable to scan Phase 15A changed file for platform terms: {rel_path}: {exc}")
+            continue
+        for hit in forbidden_platform_term_hits(rel_path, lowered_text, forbidden_terms):
+            errors.append(f"Phase 15A changed file contains forbidden platform runtime term `{hit}`: {rel_path}")
 
 
 def main() -> int:
