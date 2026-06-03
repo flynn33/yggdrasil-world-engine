@@ -268,14 +268,6 @@ The highest authority layer of YWE design truth.
 
 Foundational canon is rarely or never altered by runtime play. Lower layers may express it, react to it, or interpret it, but not rewrite it.
 
-## Floki Hrafen Vilgerson
-Nathruun's persistent Raven Companion in the first Where Ravens Wait: Eternal
-Reckoning campaign.
-
-Floki is a raven companion, ancestor, historical identity, and bloodline memory
-vector. He is not a generic pet, cosmetic familiar, or replaceable companion
-slot.
-
 ## Generation Intent
 The narrative-direction choice describing what kind of meaningful content should emerge at a given moment.
 
@@ -471,15 +463,6 @@ A quest chain should carry:
 - relationship consequence
 - world or identity effect
 
-## Quest Reward Resolver
-The downstream resolver that converts quest resolution into auditable
-consequence packets.
-
-The Quest Reward Resolver emits `QuestRewardResolutionPacket` records that
-reference `ConsequenceResolutionPacket` records. Those packets route changes to
-player state, companion state, ability pressure, worldstate, location mutation,
-myth, prophecy, faction/social signals, and future generation bias by refs.
-
 ## Quest Template
 A reusable scaffold that organizes quest chains into coherent stage structures without flattening them into filler loops.
 
@@ -490,14 +473,6 @@ A fixed cosmological state within the nine-realm YWE ontology.
 
 Realms do not move in response to player activity.
 Players change resonance and lawful access.
-
-## Raven Companion
-A persistent player-bound companion state represented in player runtime state.
-
-For the canonical Nathruun campaign, the Raven Companion is Floki Hrafen
-Vilgerson. The Raven Companion may be offscreen or temporarily noninteractive
-for presentation, but is not absent from runtime state unless an explicit
-story-state records the exception.
 
 ## Realm Engine
 The core engine responsible for realm relevance, attunement interpretation, access checks, and lawful realm-shift gating.
