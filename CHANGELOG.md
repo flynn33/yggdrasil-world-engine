@@ -5,6 +5,17 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.20] — 2026-06-04
+
+### Added
+- Address Phase 15A review feedback
+- Merge pull request #61 from flynn33/revert-60-phase-15a-companion-reward-foundation
+- Revert "Add Phase 15A companion reward foundation"
+
+
+---
+
+
 ## [2.0.19] — 2026-06-03
 
 ### Added
