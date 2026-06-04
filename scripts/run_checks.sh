@@ -68,6 +68,7 @@ run_check "Worldstate Location Mutation Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_D
 run_check "Quest NPC Lore Generation Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_quest_npc_lore_generation.py" "$ROOT_DIR"
 run_check "Source Truth Alignment Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_source_truth_alignment.py" "$ROOT_DIR"
 run_check "Ability Power Engine Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_ability_power_engine.py" "$ROOT_DIR"
+run_check "Phase 15A Companion and Reward Foundation Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_phase_15a_companion_reward_foundation.py" "$ROOT_DIR"
 
 echo "=========================================="
 echo "Results: $PASS passed, $FAIL failed"

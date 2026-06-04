@@ -1,0 +1,13 @@
+{
+  "check_id": "check_wrw_er_game_identity_lock",
+  "purpose": "Verify WRW:ER game identity and engine/product boundary are locked.",
+  "must_assert": [
+    "Where Ravens Wait: Eternal Reckoning is the game layer.",
+    "Yggdrasil World Engine is the agnostic engine blueprint.",
+    "native macOS is a downstream product runtime target."
+  ],
+  "must_reject": [
+    "WRW:ER is the engine",
+    "YWE is a macOS engine"
+  ]
+}

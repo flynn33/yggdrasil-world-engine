@@ -1,0 +1,16 @@
+{
+  "check_id": "check_raven_companion_persistent_presence",
+  "purpose": "Verify Raven Companion is persistent and Floki is Nathruun's first-campaign Raven Companion.",
+  "required_examples": [
+    "examples/companions/raven_companion_floki_initial_state.example.json"
+  ],
+  "must_assert": [
+    "presence_rule == always_with_player",
+    "companion_id == floki_hrafen_vilgerson for canonical Nathruun campaign"
+  ],
+  "must_reject": [
+    "generic_pet_system",
+    "raven_optional_by_default",
+    "standard_mortal_companion_death"
+  ]
+}

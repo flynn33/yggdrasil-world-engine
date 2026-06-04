@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasil.world.engine/schemas/companion_presence_model_schema.json",
+  "title": "Companion Presence Model Schema",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "persistent_companions",
+    "conditional_companions",
+    "canonical_laws"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "companion_presence_model_schema"
+    },
+    "version": {
+      "type": "string"
+    },
+    "persistent_companions": {
+      "type": "object",
+      "required": [
+        "raven_companion"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "raven_companion": {
+          "type": "object",
+          "required": [
+            "presence_rule",
+            "runtime_category"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "presence_rule": {
+              "const": "always_with_player"
+            },
+            "runtime_category": {
+              "const": "persistent_player_bound_companion"
+            }
+          }
+        }
+      }
+    },
+    "conditional_companions": {
+      "type": "object",
+      "required": [
+        "white_wolf",
+        "dark_wolf"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "white_wolf": {
+          "$ref": "#/$defs/conditional_companion"
+        },
+        "dark_wolf": {
+          "$ref": "#/$defs/conditional_companion"
+        }
+      }
+    },
+    "canonical_laws": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "conditional_companion": {
+      "type": "object",
+      "required": [
+        "presence_rule",
+        "runtime_category",
+        "manifestation_duration_options"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "presence_rule": {
+          "const": "conditional_manifestation"
+        },
+        "runtime_category": {
+          "const": "conditional_threshold_presence"
+        },
+        "manifestation_duration_options": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

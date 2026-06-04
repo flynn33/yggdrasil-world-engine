@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasil.world.engine/schemas/quest_reward_resolution_packet_schema.json",
+  "title": "Quest Reward Resolution Packet Schema",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "packet_id",
+    "quest_ref",
+    "resolution_mode",
+    "source_refs",
+    "consequence_resolution_packet_ref",
+    "reward_outputs",
+    "validation_status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "quest_reward_resolution_packet_schema"
+    },
+    "version": {
+      "type": "string"
+    },
+    "packet_id": {
+      "type": "string"
+    },
+    "quest_ref": {
+      "type": "string"
+    },
+    "resolution_mode": {
+      "enum": [
+        "reveal",
+        "conceal",
+        "bind",
+        "break",
+        "heal",
+        "weaponize",
+        "witness",
+        "study_noop",
+        "refuse",
+        "sacrifice",
+        "restore"
+      ]
+    },
+    "source_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "consequence_resolution_packet_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reward_outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "player_state_update_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "companion_state_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ability_pressure_update_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "location_mutation_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "myth_signal_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prophecy_pressure_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "faction_social_signal_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "future_generation_bias_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "validation_status": {
+      "enum": [
+        "valid",
+        "invalid",
+        "diagnostic_noop"
+      ]
+    }
+  }
+}

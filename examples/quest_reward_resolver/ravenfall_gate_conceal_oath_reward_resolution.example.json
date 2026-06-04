@@ -1,0 +1,43 @@
+{
+  "schema_id": "quest_reward_resolution_packet_schema",
+  "version": "1.0.0",
+  "packet_id": "quest_reward.ravenfall_gate.conceal_oath.v1",
+  "quest_ref": "quest_chain.the_buried_oath_at_ravenfall_gate",
+  "resolution_mode": "conceal",
+  "source_refs": [
+    "quest_resolution_payload.ravenfall_gate.oath_concealed",
+    "branch_event.ravenfall_gate.conceal_oath",
+    "player_action_trace.conceal_oath"
+  ],
+  "consequence_resolution_packet_ref": "consequence.ravenfall_gate.conceal_oath.v1",
+  "reward_outputs": {
+    "player_state_update_refs": [
+      "player_state_update.ravenfall_gate.conceal_oath"
+    ],
+    "companion_state_delta_refs": [
+      "companion_delta.floki.oath_concealment_witnessed"
+    ],
+    "ability_pressure_update_refs": [
+      "ability_pressure.grave_anchor.conceal_oath"
+    ],
+    "worldstate_delta_refs": [
+      "worldstate_delta.ravenfall_gate.oath_concealed"
+    ],
+    "location_mutation_refs": [
+      "location_mutation.ravenfall_gate.oath_concealed"
+    ],
+    "myth_signal_refs": [
+      "myth_seed.oath_still_buried"
+    ],
+    "prophecy_pressure_refs": [
+      "prophecy_pressure.oath_hidden"
+    ],
+    "faction_social_signal_refs": [
+      "faction_social_signal.ravenfall_gate.oath_concealed"
+    ],
+    "future_generation_bias_refs": [
+      "future_bias.ravenfall_gate.oath_concealed"
+    ]
+  },
+  "validation_status": "valid"
+}

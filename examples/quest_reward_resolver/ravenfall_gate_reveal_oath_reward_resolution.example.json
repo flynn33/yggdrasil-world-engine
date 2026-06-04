@@ -1,0 +1,44 @@
+{
+  "schema_id": "quest_reward_resolution_packet_schema",
+  "version": "1.0.0",
+  "packet_id": "quest_reward.ravenfall_gate.reveal_oath.v1",
+  "quest_ref": "quest_chain.the_buried_oath_at_ravenfall_gate",
+  "resolution_mode": "reveal",
+  "source_refs": [
+    "quest_resolution_payload.ravenfall_gate.oath_revealed",
+    "branch_event.ravenfall_gate.reveal_oath",
+    "player_action_trace.reveal_oath"
+  ],
+  "consequence_resolution_packet_ref": "consequence.ravenfall_gate.reveal_oath.v1",
+  "reward_outputs": {
+    "player_state_update_refs": [
+      "player_state_update.ravenfall_gate.reveal_oath"
+    ],
+    "companion_state_delta_refs": [
+      "companion_delta.floki.oath_witnessed",
+      "wolf_manifestation.ravenfall_gate.buried_oath.white_and_dark.v1"
+    ],
+    "ability_pressure_update_refs": [
+      "ability_pressure.oath_sight.reveal_oath"
+    ],
+    "worldstate_delta_refs": [
+      "worldstate_delta.ravenfall_gate.oath_revealed"
+    ],
+    "location_mutation_refs": [
+      "location_mutation.ravenfall_gate.oath_revealed"
+    ],
+    "myth_signal_refs": [
+      "myth_seed.oath_under_gate"
+    ],
+    "prophecy_pressure_refs": [
+      "prophecy_pressure.oath_revealed"
+    ],
+    "faction_social_signal_refs": [
+      "faction_social_signal.ravenfall_gate.oath_revealed"
+    ],
+    "future_generation_bias_refs": [
+      "future_bias.ravenfall_gate.oath_revealed"
+    ]
+  },
+  "validation_status": "valid"
+}
