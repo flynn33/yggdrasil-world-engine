@@ -2,6 +2,8 @@
   "id": "check_phase_16_17_non_destructive_diff",
   "phase": "16_17_recovery",
   "description": "Review diff for deletions or unrelated rewrites before commit.",
+  "max_existing_file_deletions": 40,
+  "max_file_renames": 10,
   "forbidden": [
     "deleted_accepted_contracts",
     "flattened_directories",

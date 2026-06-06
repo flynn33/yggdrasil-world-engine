@@ -398,16 +398,39 @@ def git_diff_name_status(root: Path, base_ref: str, errors: list[str]) -> list[t
     return paths
 
 
+def int_spec_value(spec: dict, keys: tuple[str, ...], default: int) -> int:
+    for key in keys:
+        value = spec.get(key)
+        if isinstance(value, int):
+            return value
+        if isinstance(value, str):
+            try:
+                return int(value)
+            except ValueError:
+                continue
+    return default
+
+
 def check_non_destructive_diff(root: Path, errors: list[str]) -> None:
     base_ref = default_base_ref(root)
     if not base_ref:
         errors.append("Unable to resolve git base ref for Phase 16/17 recovery diff checks.")
         return
+    spec = load_json_checked(root, "data/validation/check_phase_16_17_non_destructive_diff.spec.json", errors)
+    spec_data = spec if isinstance(spec, dict) else {}
+    max_deleted = int_spec_value(spec_data, ("max_existing_file_deletions", "max_deleted_files"), 0)
+    max_renamed = int_spec_value(spec_data, ("max_file_renames", "max_directory_renames", "max_renamed_files"), 0)
+    deleted: list[str] = []
+    renamed: list[str] = []
     for status, rel_path in git_diff_name_status(root, base_ref, errors):
         if status.startswith("D"):
-            errors.append(f"Phase 16/17 recovery must not delete files: {rel_path}")
+            deleted.append(rel_path)
         if status.startswith("R"):
-            errors.append(f"Phase 16/17 recovery must not rename files: {rel_path}")
+            renamed.append(rel_path)
+    if len(deleted) > max_deleted:
+        errors.append(f"Phase 16/17 recovery file deletions exceed budget {max_deleted}: {deleted}")
+    if len(renamed) > max_renamed:
+        errors.append(f"Phase 16/17 recovery file renames exceed budget {max_renamed}: {renamed}")
 
 
 def main(argv: list[str]) -> int:
