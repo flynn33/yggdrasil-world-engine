@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/vertical_slice_playtest_trace.json",
+  "title": "vertical_slice_playtest_trace",
+  "description": "YWE Phase 17 schema for vertical_slice_playtest_trace.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "phase": {
+      "const": "17"
+    },
+    "vertical_slice": {
+      "const": "ravenfall_gate"
+    },
+    "quest_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "completion_mode": {
+      "enum": [
+        "reveal",
+        "conceal",
+        "bind",
+        "study",
+        "weaponize"
+      ]
+    },
+    "choice_to_consequence_trace_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "wolf_companion_trace_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "acceptance_result_ref": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_id",
+    "trace_id",
+    "phase",
+    "vertical_slice",
+    "quest_ref",
+    "completion_mode",
+    "choice_to_consequence_trace_ref",
+    "wolf_companion_trace_ref",
+    "acceptance_result_ref"
+  ]
+}

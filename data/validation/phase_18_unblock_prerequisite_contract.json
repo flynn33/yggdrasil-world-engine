@@ -1,0 +1,28 @@
+{
+  "id": "ywe.validation.phase_18_unblock_prerequisite_contract",
+  "version": "1.0.0",
+  "status": "active_after_phase_16_17_recovery",
+  "blocks_phase": "18",
+  "unblocks_when": {
+    "schemas_present": [
+      "vertical_slice_playtest_trace_schema.json",
+      "ravenfall_gate_playtest_path_schema.json",
+      "wolf_companion_trace_schema.json",
+      "quest_reward_trace_schema.json",
+      "future_generation_bias_trace_schema.json"
+    ],
+    "choice_paths_present": [
+      "reveal",
+      "conceal",
+      "bind",
+      "study",
+      "weaponize"
+    ],
+    "validation": [
+      "json_integrity_passed",
+      "wolf_canon_passed",
+      "platform_boundary_passed"
+    ]
+  },
+  "failure_behavior": "stop_and_report_missing_prerequisites"
+}

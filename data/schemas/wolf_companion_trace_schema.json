@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/wolf_companion_trace.json",
+  "title": "wolf_companion_trace",
+  "description": "YWE Phase 17 schema for wolf_companion_trace.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "white_wolf_presence": {
+      "enum": [
+        "physical_companion",
+        "vision_presence",
+        "temporarily_decohered"
+      ]
+    },
+    "dark_wolf_presence": {
+      "enum": [
+        "physical_companion",
+        "vision_presence",
+        "temporarily_decohered"
+      ]
+    },
+    "assistance_modes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "quest_assist",
+          "combat_assist",
+          "vision_signal",
+          "protection",
+          "revelation",
+          "concealment",
+          "containment",
+          "threshold_guidance"
+        ]
+      }
+    },
+    "decoherence_events": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "permanent_death": {
+      "const": false
+    },
+    "morality_model": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema_id",
+    "trace_id",
+    "white_wolf_presence",
+    "dark_wolf_presence",
+    "assistance_modes",
+    "decoherence_events",
+    "permanent_death",
+    "morality_model"
+  ]
+}

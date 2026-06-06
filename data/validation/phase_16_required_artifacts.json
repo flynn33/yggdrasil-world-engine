@@ -1,0 +1,24 @@
+{
+  "schema_id": "ywe.phase16.required_artifacts.v1",
+  "phase_id": "phase_16",
+  "status": "phase_16_recovery",
+  "required_docs": [
+    "docs/architecture/vertical_slice_design_contract.md",
+    "docs/architecture/ravenfall_gate_vertical_slice_integration_map.md",
+    "docs/architecture/vertical_slice_playtest_trace_contract.md",
+    "docs/game/vertical_slices/ravenfall_gate/00_ravenfall_gate_vertical_slice_overview.md",
+    "docs/game/vertical_slices/ravenfall_gate/01_ravenfall_gate_location_brief.md",
+    "docs/game/vertical_slices/ravenfall_gate/02_the_buried_oath_quest_design.md",
+    "docs/game/vertical_slices/ravenfall_gate/03_branch_outcome_matrix.md",
+    "docs/game/vertical_slices/ravenfall_gate/05_wolf_companion_scene_plan.md",
+    "docs/game/vertical_slices/ravenfall_gate/06_ability_use_plan.md",
+    "docs/game/vertical_slices/ravenfall_gate/12_reward_resolution_plan.md",
+    "docs/game/vertical_slices/ravenfall_gate/14_vertical_slice_acceptance_matrix.md"
+  ],
+  "required_schema_patterns": [
+    "data/schemas/*ravenfall*schema.json",
+    "data/schemas/*vertical_slice*schema.json",
+    "data/schemas/*phase_16*schema.json"
+  ],
+  "required_example_directory": "examples/vertical_slices/ravenfall_gate"
+}

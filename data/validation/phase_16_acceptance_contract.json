@@ -1,0 +1,60 @@
+{
+  "schema_id": "ywe.phase16.acceptance_contract.v1",
+  "phase_id": "phase_16",
+  "status": "phase_16_recovery",
+  "gates": [
+    {
+      "id": "16.0",
+      "name": "source_truth_alignment",
+      "required": true
+    },
+    {
+      "id": "16.1",
+      "name": "phase_15_prerequisite",
+      "required": true
+    },
+    {
+      "id": "16.2",
+      "name": "required_artifacts",
+      "required": true
+    },
+    {
+      "id": "16.3",
+      "name": "ravenfall_choice_coverage",
+      "required": true,
+      "choices": [
+        "reveal",
+        "conceal",
+        "bind",
+        "study",
+        "weaponize"
+      ]
+    },
+    {
+      "id": "16.4",
+      "name": "cross_system_traceability",
+      "required": true
+    },
+    {
+      "id": "16.5",
+      "name": "wolf_companion_canon",
+      "required": true
+    },
+    {
+      "id": "16.6",
+      "name": "vertical_slice_boundary",
+      "required": true
+    },
+    {
+      "id": "16.7",
+      "name": "non_destructive_diff",
+      "required": true
+    },
+    {
+      "id": "16.8",
+      "name": "github_check_readiness",
+      "required": true
+    }
+  ],
+  "acceptance_requires": "all_gates_pass_or_explicit_blocked_status"
+}

@@ -1,0 +1,21 @@
+{
+  "schema_id": "ywe.wolf_companion_trace.v1",
+  "trace_id": "trace.wolf.ravenfall_gate.weaponize",
+  "white_wolf_presence": "physical_companion",
+  "dark_wolf_presence": "physical_companion",
+  "assistance_modes": [
+    "quest_assist",
+    "vision_signal",
+    "combat_assist"
+  ],
+  "decoherence_events": [
+    {
+      "wolf": "dark_wolf",
+      "state": "temporarily_decohered",
+      "return_rule_ref": "wolf.return_after_recoherence"
+    }
+  ],
+  "permanent_death": false,
+  "morality_model": false,
+  "notes": "Wolves are companion presences, not moral poles."
+}

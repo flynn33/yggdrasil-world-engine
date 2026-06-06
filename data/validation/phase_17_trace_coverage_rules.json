@@ -1,0 +1,30 @@
+{
+  "rule_id": "phase_17.trace_coverage",
+  "required_paths": [
+    "reveal",
+    "conceal",
+    "bind",
+    "study",
+    "weaponize"
+  ],
+  "required_refs_per_trace": [
+    "branch_event_ref",
+    "quest_reward_resolution_ref",
+    "wolf_companion_trace_ref",
+    "acceptance_result_ref"
+  ],
+  "requires_one_of_per_trace": [
+    [
+      "worldstate_delta_refs",
+      "diagnostic_noop_refs"
+    ],
+    [
+      "location_mutation_refs",
+      "location_noop_reason"
+    ],
+    [
+      "future_generation_bias_refs",
+      "future_generation_bias_noop_reason"
+    ]
+  ]
+}

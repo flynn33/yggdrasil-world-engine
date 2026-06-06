@@ -1,0 +1,38 @@
+{
+  "schema_id": "ywe.ravenfall_gate.ability_use.example",
+  "phase_id": "phase_16",
+  "slice_id": "ravenfall_gate",
+  "status": "example_draft",
+  "source_truth_refs": [
+    "ASH_Model_of_the_Universe",
+    "YWE_engine_cosmology_model",
+    "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+  ],
+  "requires_phase_refs": [
+    "phase_9",
+    "phase_10",
+    "phase_11",
+    "phase_12",
+    "phase_13",
+    "phase_14",
+    "phase_15"
+  ],
+  "ability_id": "grave_anchor",
+  "source_refs": [
+    "Dark Wolf companion state",
+    "Shadow/Etheric pressure",
+    "threshold instability"
+  ],
+  "combat_use": {
+    "summary": "anchors hostile force"
+  },
+  "quest_use": {
+    "summary": "stabilizes collapsing threshold"
+  },
+  "requires_phase_14_acceptance": true,
+  "forbidden": [
+    "generic XP-only unlock",
+    "wolf morality source",
+    "ability without provenance"
+  ]
+}

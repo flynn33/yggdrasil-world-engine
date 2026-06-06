@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/future_generation_bias_trace.json",
+  "title": "future_generation_bias_trace",
+  "description": "YWE Phase 17 schema for future_generation_bias_trace.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "bias_update_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "affected_systems": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "quest_generation",
+          "npc_generation",
+          "lore_generation",
+          "location_resolution",
+          "artifact_eligibility",
+          "creature_eligibility",
+          "myth_emergence",
+          "prophecy_pressure",
+          "ability_pressure",
+          "faction_response",
+          "wolf_companion_state"
+        ]
+      }
+    },
+    "source_consequence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_id",
+    "trace_id",
+    "bias_update_ref",
+    "affected_systems",
+    "source_consequence_refs"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/playtest_trace_batch.json",
+  "title": "playtest_trace_batch",
+  "description": "YWE Phase 17 schema for playtest_trace_batch.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "batch_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "phase": {
+      "const": "17"
+    },
+    "trace_refs": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "completion_modes_covered": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "reveal",
+          "conceal",
+          "bind",
+          "study",
+          "weaponize"
+        ]
+      }
+    },
+    "batch_acceptance_result_ref": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_id",
+    "batch_id",
+    "phase",
+    "trace_refs",
+    "completion_modes_covered",
+    "batch_acceptance_result_ref"
+  ]
+}

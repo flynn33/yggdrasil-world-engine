@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/branch_reality_trace.json",
+  "title": "branch_reality_trace",
+  "description": "YWE Phase 17 schema for branch_reality_trace.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "branch_event_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "leaf_branch_reality_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "parent_branch_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "branch_generated_at_runtime": {
+      "const": true
+    },
+    "pre_generated_branch_tree": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema_id",
+    "trace_id",
+    "branch_event_ref",
+    "leaf_branch_reality_ref",
+    "parent_branch_ref",
+    "branch_generated_at_runtime",
+    "pre_generated_branch_tree"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/worldstate_delta_trace.json",
+  "title": "worldstate_delta_trace",
+  "description": "YWE Phase 17 schema for worldstate_delta_trace.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "worldstate_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "diagnostic_noop_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "truth_scopes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "no_silent_consequence": {
+      "const": true
+    }
+  },
+  "required": [
+    "schema_id",
+    "trace_id",
+    "worldstate_delta_refs",
+    "diagnostic_noop_refs",
+    "truth_scopes",
+    "no_silent_consequence"
+  ]
+}

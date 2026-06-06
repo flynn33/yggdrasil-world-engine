@@ -1,0 +1,16 @@
+{
+  "id": "ywe.validation.phase_16_17_repository_payload_policy",
+  "version": "1.0.0",
+  "repository_safe_roots": [
+    "docs/",
+    "data/",
+    "examples/",
+    "data/validation/"
+  ],
+  "do_not_copy_roots": [
+    "manifests/",
+    "README.md",
+    "00_*_EXECUTION_PROMPT.md"
+  ],
+  "raw_template_policy": "do_not_copy_raw_templates; create completed handoff reports only"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "ywe.validation.phase_sequence_guardrail_rules",
+  "version": "1.0.0",
+  "sequence": [
+    "phase_15a",
+    "phase_16",
+    "phase_17",
+    "phase_18"
+  ],
+  "rules": [
+    {
+      "rule": "phase_18_requires_phase_17",
+      "severity": "error"
+    },
+    {
+      "rule": "phase_17_requires_phase_16",
+      "severity": "error"
+    },
+    {
+      "rule": "phase_16_requires_phase_15a_or_later",
+      "severity": "warning"
+    },
+    {
+      "rule": "missing_required_artifact_blocks_next_phase",
+      "severity": "error"
+    }
+  ]
+}

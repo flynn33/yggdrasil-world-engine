@@ -1,0 +1,57 @@
+{
+  "artifact_group": "phase_17_required_artifacts",
+  "architecture_docs": [
+    "docs/architecture/vertical_slice_acceptance_contract.md",
+    "docs/architecture/playtest_trace_contract.md",
+    "docs/architecture/ravenfall_gate_acceptance_trace_contract.md",
+    "docs/architecture/vertical_slice_issue_classification_contract.md",
+    "docs/architecture/wolf_companion_playtest_validation_contract.md",
+    "docs/architecture/choice_to_consequence_traceability_contract.md",
+    "docs/architecture/phase_17_repository_guardrails.md",
+    "docs/architecture/ravenfall_gate_playtest_path_contract.md",
+    "docs/architecture/vertical_slice_regression_contract.md",
+    "docs/architecture/phase_17_github_check_contract.md"
+  ],
+  "game_docs": [
+    "docs/game/vertical_slices/ravenfall_gate/16_phase_17_acceptance_plan.md",
+    "docs/game/vertical_slices/ravenfall_gate/17_playtest_trace_matrix.md",
+    "docs/game/vertical_slices/ravenfall_gate/18_choice_path_validation.md",
+    "docs/game/vertical_slices/ravenfall_gate/19_wolf_companion_validation.md",
+    "docs/game/vertical_slices/ravenfall_gate/20_ability_and_combat_validation.md",
+    "docs/game/vertical_slices/ravenfall_gate/21_worldstate_location_validation.md",
+    "docs/game/vertical_slices/ravenfall_gate/22_npc_lore_myth_prophecy_validation.md",
+    "docs/game/vertical_slices/ravenfall_gate/23_future_generation_bias_validation.md",
+    "docs/game/vertical_slices/ravenfall_gate/24_phase_17_acceptance_report_requirements.md"
+  ],
+  "schemas": [
+    "data/schemas/vertical_slice_playtest_trace_schema.json",
+    "data/schemas/vertical_slice_acceptance_result_schema.json",
+    "data/schemas/choice_to_consequence_trace_schema.json",
+    "data/schemas/ravenfall_gate_playtest_path_schema.json",
+    "data/schemas/wolf_companion_trace_schema.json",
+    "data/schemas/ability_use_trace_schema.json",
+    "data/schemas/combat_assist_trace_schema.json",
+    "data/schemas/location_mutation_trace_schema.json",
+    "data/schemas/quest_reward_trace_schema.json",
+    "data/schemas/future_generation_bias_trace_schema.json",
+    "data/schemas/vertical_slice_issue_record_schema.json",
+    "data/schemas/vertical_slice_regression_record_schema.json",
+    "data/schemas/npc_faction_lore_trace_schema.json",
+    "data/schemas/myth_prophecy_trace_schema.json",
+    "data/schemas/worldstate_delta_trace_schema.json",
+    "data/schemas/player_state_trace_schema.json",
+    "data/schemas/branch_reality_trace_schema.json",
+    "data/schemas/playtest_trace_batch_schema.json",
+    "data/schemas/vertical_slice_acceptance_matrix_schema.json"
+  ],
+  "validation_rules": [
+    "data/validation/phase_17_acceptance_contract.json",
+    "data/validation/phase_17_required_artifacts.json",
+    "data/validation/phase_17_prerequisite_gate.json",
+    "data/validation/phase_17_guardrail_rules.json",
+    "data/validation/phase_17_forbidden_language_patterns.json",
+    "data/validation/phase_17_trace_coverage_rules.json",
+    "data/validation/phase_17_wolf_validation_rules.json",
+    "data/validation/phase_17_non_destructive_change_budget.json"
+  ]
+}

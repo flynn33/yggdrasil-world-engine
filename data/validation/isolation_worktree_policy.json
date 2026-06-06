@@ -1,0 +1,18 @@
+{
+  "id": "ywe.validation.isolation_worktree_policy",
+  "version": "1.0.0",
+  "purpose": "Prevent unrelated uncommitted work from being modified while applying recovery payloads.",
+  "preferred": "git worktree add from current remote baseline",
+  "required": [
+    "record_base_branch",
+    "record_base_commit",
+    "do_not_touch_unrelated_uncommitted_edits",
+    "do_not_reset_or_clean_without_user_approval"
+  ],
+  "forbidden_commands": [
+    "git reset --hard",
+    "git clean -fdx",
+    "git checkout -- .",
+    "mass_delete_without_explicit_approval"
+  ]
+}

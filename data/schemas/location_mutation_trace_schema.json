@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/location_mutation_trace.json",
+  "title": "location_mutation_trace",
+  "description": "YWE Phase 17 schema for location_mutation_trace.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "location_ref": {
+      "const": "ravenfall_gate"
+    },
+    "before_state_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "after_state_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mutation_rule_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "truth_scope": {
+      "enum": [
+        "base_world_truth",
+        "shared_world_truth",
+        "leaf_branch_truth",
+        "player_perception",
+        "mythic_interpretation",
+        "prophetic_pressure",
+        "faction_claim",
+        "diagnostic_noop"
+      ]
+    },
+    "worldstate_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_id",
+    "trace_id",
+    "location_ref",
+    "before_state_ref",
+    "after_state_ref",
+    "mutation_rule_refs",
+    "truth_scope",
+    "worldstate_delta_refs"
+  ]
+}

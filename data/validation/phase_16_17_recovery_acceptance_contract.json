@@ -1,0 +1,32 @@
+{
+  "id": "ywe.validation.phase_16_17_recovery_acceptance_contract",
+  "version": "1.0.0",
+  "status": "repository_safe_payload",
+  "purpose": "Validate that Phase 16 and Phase 17 prerequisite artifacts exist before Phase 18 is applied.",
+  "required_gates": [
+    "isolated_clean_worktree",
+    "phase_16_required_artifacts_present",
+    "phase_16_platform_boundary_clean",
+    "phase_17_required_artifacts_present",
+    "ravenfall_choice_path_coverage_complete",
+    "wolf_companion_canon_preserved",
+    "quest_reward_trace_refs_present",
+    "future_generation_bias_trace_refs_present",
+    "phase_18_unblock_prerequisites_present",
+    "non_destructive_diff_review_passed"
+  ],
+  "required_phase_18_unblock_artifacts": [
+    "data/schemas/vertical_slice_playtest_trace_schema.json",
+    "data/schemas/ravenfall_gate_playtest_path_schema.json",
+    "data/schemas/wolf_companion_trace_schema.json",
+    "data/schemas/quest_reward_trace_schema.json",
+    "data/schemas/future_generation_bias_trace_schema.json"
+  ],
+  "forbidden": [
+    "applying_phase_18_before_phase_17_acceptance",
+    "platform_specific_runtime_code_in_ywe",
+    "permanent_wolf_death",
+    "wolf_morality_meter",
+    "destructive_git_operations"
+  ]
+}

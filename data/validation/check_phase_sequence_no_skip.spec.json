@@ -1,0 +1,13 @@
+{
+  "id": "check_phase_sequence_no_skip",
+  "phase": "16_17_recovery",
+  "description": "Fail if Phase 18 artifacts are added while Phase 17 prerequisites are missing.",
+  "required_before_phase_18": [
+    "data/schemas/vertical_slice_playtest_trace_schema.json",
+    "data/schemas/ravenfall_gate_playtest_path_schema.json",
+    "data/schemas/wolf_companion_trace_schema.json",
+    "data/schemas/quest_reward_trace_schema.json",
+    "data/schemas/future_generation_bias_trace_schema.json"
+  ],
+  "failure": "block_phase_18"
+}

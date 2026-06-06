@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/choice_to_consequence_trace.json",
+  "title": "choice_to_consequence_trace",
+  "description": "YWE Phase 17 schema for choice_to_consequence_trace.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "choice": {
+      "type": "object",
+      "properties": {
+        "completion_mode": {
+          "enum": [
+            "reveal",
+            "conceal",
+            "bind",
+            "study",
+            "weaponize"
+          ]
+        },
+        "branch_event_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "completion_mode",
+        "branch_event_ref"
+      ]
+    },
+    "quest_reward_resolution_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "consequence_resolution_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "player_state_update_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "worldstate_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "diagnostic_noop_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "location_mutation_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "future_generation_bias_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_id",
+    "trace_id",
+    "choice",
+    "quest_reward_resolution_ref",
+    "consequence_resolution_refs",
+    "player_state_update_refs",
+    "worldstate_delta_refs",
+    "diagnostic_noop_refs",
+    "location_mutation_refs",
+    "future_generation_bias_refs"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x_ywe_phase": "16",
+  "x_status": "phase_16_recovery",
+  "title": "Ravenfall Wolf Scene",
+  "description": "Ravenfall Wolf Scene",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "phase_id",
+    "slice_id",
+    "wolf_scene_id",
+    "wolf_presence"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string"
+    },
+    "phase_id": {
+      "const": "phase_16"
+    },
+    "slice_id": {
+      "const": "ravenfall_gate"
+    },
+    "status": {
+      "type": "string"
+    },
+    "source_truth_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requires_phase_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "wolf_scene_id": {
+      "type": "string"
+    },
+    "wolf_presence": {
+      "type": "object"
+    },
+    "decoherence_allowed": {
+      "type": "boolean"
+    },
+    "death_allowed": {
+      "const": false
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,14 @@
+{
+  "check_id": "check_phase_15_acceptance_prereq",
+  "phase_id": "phase_16",
+  "intent": "Confirm Phase 15 Quest Reward Resolver artifacts exist or Phase 16 is explicitly marked pending.",
+  "required_refs": [
+    "QuestRewardResolutionPacket",
+    "ConsequenceResolutionPacket",
+    "RewardDeltaBundle"
+  ],
+  "fail_on": [
+    "quest complete flag only",
+    "fake Phase 15 output"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "check_phase_16_17_non_destructive_diff",
+  "phase": "16_17_recovery",
+  "description": "Review diff for deletions or unrelated rewrites before commit.",
+  "forbidden": [
+    "deleted_accepted_contracts",
+    "flattened_directories",
+    "mass_rewrite_unrelated_docs",
+    "deleted_schemas_without_replacement"
+  ]
+}

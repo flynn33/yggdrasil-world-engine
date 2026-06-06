@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ability_use_trace.json",
+  "title": "ability_use_trace",
+  "description": "YWE Phase 17 schema for ability_use_trace.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.ability_use_trace.v1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ability_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "use_context": {
+      "enum": [
+        "quest",
+        "combat",
+        "exploration",
+        "perception",
+        "threshold",
+        "recovery",
+        "social"
+      ]
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "consequence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "diagnostic_noop_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_id",
+    "schema_version",
+    "trace_id",
+    "ability_ref",
+    "use_context",
+    "source_refs",
+    "consequence_refs",
+    "diagnostic_noop_refs"
+  ]
+}

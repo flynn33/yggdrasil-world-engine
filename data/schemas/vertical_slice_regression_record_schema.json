@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/vertical_slice_regression_record.json",
+  "title": "vertical_slice_regression_record",
+  "description": "YWE Phase 17 schema for vertical_slice_regression_record.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "regression_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_phase": {
+      "const": "17"
+    },
+    "guardrail": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_result": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observed_result": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "pass",
+        "fail",
+        "not_run"
+      ]
+    }
+  },
+  "required": [
+    "schema_id",
+    "regression_id",
+    "source_phase",
+    "guardrail",
+    "expected_result",
+    "observed_result",
+    "status"
+  ]
+}
