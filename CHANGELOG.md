@@ -5,6 +5,15 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.21] — 2026-06-06
+
+### Added
+- Address Phase 16-17 guardrail review
+
+
+---
+
+
 ## [2.0.20] — 2026-06-04
 
 ### Added
