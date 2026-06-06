@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x_ywe_phase": "16",
+  "x_status": "phase_16_recovery",
+  "title": "Ravenfall Combat Encounter Candidate",
+  "description": "Ravenfall Combat Encounter Candidate",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "phase_id",
+    "slice_id",
+    "encounter_id",
+    "wolf_assistance"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string"
+    },
+    "phase_id": {
+      "const": "phase_16"
+    },
+    "slice_id": {
+      "const": "ravenfall_gate"
+    },
+    "status": {
+      "type": "string"
+    },
+    "source_truth_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requires_phase_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "encounter_id": {
+      "type": "string"
+    },
+    "wolf_assistance": {
+      "type": "object"
+    },
+    "non_platform_design_only": {
+      "const": true
+    }
+  },
+  "additionalProperties": true
+}

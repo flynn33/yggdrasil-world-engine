@@ -1,0 +1,15 @@
+{
+  "id": "check_no_platform_specific_runtime_phase_16_17",
+  "phase": "16_17_recovery",
+  "description": "YWE remains agnostic; reject platform runtime implementation code.",
+  "forbidden_patterns": [
+    "import SwiftUI",
+    "import Metal",
+    "UnityEngine",
+    "UCLASS(",
+    "extends Node",
+    "Godot",
+    "MTKView"
+  ],
+  "allowed_context": "documentation examples only when explicitly marked as forbidden or deferred"
+}

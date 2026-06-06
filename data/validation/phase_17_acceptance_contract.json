@@ -1,0 +1,30 @@
+{
+  "contract_id": "ywe.phase_17.acceptance_contract",
+  "phase": "17",
+  "name": "Ravenfall Gate Vertical Slice Acceptance and Playtest Trace Expansion",
+  "required_gates": [
+    "phase_16_prerequisite",
+    "required_artifacts",
+    "json_integrity",
+    "choice_path_coverage",
+    "consequence_traceability",
+    "wolf_companion_canon",
+    "engine_game_boundary",
+    "non_destructive_diff"
+  ],
+  "acceptance_requires": {
+    "required_completion_modes": [
+      "reveal",
+      "conceal",
+      "bind",
+      "study",
+      "weaponize"
+    ],
+    "all_json_parses": true,
+    "no_platform_specific_runtime_code": true,
+    "no_wolf_morality_language": true,
+    "no_permanent_wolf_death": true,
+    "quest_reward_resolution_refs_required": true,
+    "future_generation_bias_refs_required_or_justified_noop": true
+  }
+}

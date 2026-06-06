@@ -1,0 +1,16 @@
+{
+  "schema_id": "ywe.phase16.prerequisite_gate.v1",
+  "phase_id": "phase_16",
+  "required_previous_phase": "phase_15_quest_reward_resolver",
+  "required_concepts": [
+    "QuestRewardResolutionPacket",
+    "ConsequenceResolutionPacket",
+    "RewardDeltaBundle",
+    "FutureGenerationBiasRewardDelta"
+  ],
+  "if_missing": "mark_phase_16_blocked_pending_phase_15_acceptance",
+  "must_not": [
+    "fake_phase_15_outputs",
+    "resolve_quest_as_completed_flag_only"
+  ]
+}

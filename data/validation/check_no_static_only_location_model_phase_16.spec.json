@@ -1,0 +1,14 @@
+{
+  "check_id": "check_no_static_only_location_model_phase_16",
+  "phase_id": "phase_16",
+  "fail_on": [
+    "Ravenfall Gate is static",
+    "location never changes",
+    "single fixed location state"
+  ],
+  "require_terms": [
+    "location mutation",
+    "branch overlay",
+    "worldstate delta"
+  ]
+}

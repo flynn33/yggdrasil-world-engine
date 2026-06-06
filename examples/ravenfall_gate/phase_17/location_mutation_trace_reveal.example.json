@@ -1,0 +1,14 @@
+{
+  "schema_id": "ywe.location_mutation_trace.v1",
+  "trace_id": "trace.location_mutation.ravenfall_gate.reveal",
+  "location_ref": "ravenfall_gate",
+  "before_state_ref": "location.ravenfall_gate.oath_buried",
+  "after_state_ref": "location.ravenfall_gate.oath_publicly_revealed",
+  "mutation_rule_refs": [
+    "location_mutation_rule.ravenfall_gate.reveal_oath"
+  ],
+  "truth_scope": "shared_world_truth",
+  "worldstate_delta_refs": [
+    "worldstate_delta.ravenfall_gate.reveal_oath"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x_ywe_phase": "16",
+  "x_status": "phase_16_recovery",
+  "title": "Vertical Slice Acceptance Trace",
+  "description": "Vertical Slice Acceptance Trace",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "phase_id",
+    "slice_id",
+    "gate_results"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string"
+    },
+    "phase_id": {
+      "const": "phase_16"
+    },
+    "slice_id": {
+      "const": "ravenfall_gate"
+    },
+    "status": {
+      "type": "string"
+    },
+    "source_truth_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requires_phase_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "gate_results": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "accepted": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true
+}

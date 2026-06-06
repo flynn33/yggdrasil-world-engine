@@ -69,6 +69,7 @@ run_check "Quest NPC Lore Generation Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/
 run_check "Source Truth Alignment Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_source_truth_alignment.py" "$ROOT_DIR"
 run_check "Ability Power Engine Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_ability_power_engine.py" "$ROOT_DIR"
 run_check "Phase 15A Companion and Reward Foundation Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_phase_15a_companion_reward_foundation.py" "$ROOT_DIR"
+run_check "Phase 16-17 Recovery and Phase 18 Unblock Guardrail" "${PYTHON_CMD[@]}" "$SCRIPT_DIR/check_phase_16_17_recovery.py" "$ROOT_DIR"
 
 echo "=========================================="
 echo "Results: $PASS passed, $FAIL failed"

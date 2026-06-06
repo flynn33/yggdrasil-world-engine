@@ -1,0 +1,25 @@
+{
+  "schema_id": "ywe.choice_to_consequence_trace.v1",
+  "trace_id": "trace.choice_to_consequence.ravenfall_gate.study",
+  "choice": {
+    "completion_mode": "study",
+    "branch_event_ref": "branch.ravenfall_gate.study_oath"
+  },
+  "quest_reward_resolution_ref": "quest_reward.ravenfall_gate.study_oath",
+  "consequence_resolution_refs": [
+    "consequence.ravenfall_gate.study_oath"
+  ],
+  "player_state_update_refs": [
+    "player_state_update.ravenfall_gate.study_oath"
+  ],
+  "worldstate_delta_refs": [],
+  "diagnostic_noop_refs": [
+    "diagnostic_noop.ravenfall_gate.study_oath.low_mutation"
+  ],
+  "location_mutation_refs": [],
+  "location_noop_reason": "Study path records interpretation without changing shared location truth.",
+  "future_generation_bias_refs": [
+    "future_generation_bias.ravenfall_gate.study_oath"
+  ],
+  "future_generation_bias_noop_reason": null
+}

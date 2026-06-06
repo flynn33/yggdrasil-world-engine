@@ -1,0 +1,32 @@
+{
+  "schema_id": "ywe.ravenfall_gate.reward_resolution.example",
+  "phase_id": "phase_16",
+  "slice_id": "ravenfall_gate",
+  "status": "example_draft",
+  "source_truth_refs": [
+    "ASH_Model_of_the_Universe",
+    "YWE_engine_cosmology_model",
+    "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+  ],
+  "requires_phase_refs": [
+    "phase_9",
+    "phase_10",
+    "phase_11",
+    "phase_12",
+    "phase_13",
+    "phase_14",
+    "phase_15"
+  ],
+  "completion_mode": "bind",
+  "reward_resolution_ref": "QuestRewardResolutionPacket.ravenfall_gate.bind",
+  "delta_refs": [
+    "player_state_reward_delta.ravenfall_gate.bind",
+    "branch_reward_delta.ravenfall_gate.bind",
+    "location_reward_delta.ravenfall_gate.bind",
+    "wolf_reward_delta.ravenfall_gate.bind",
+    "ability_reward_delta.ravenfall_gate.bind",
+    "future_generation_bias_reward_delta.ravenfall_gate.bind"
+  ],
+  "requires_phase_15_acceptance": true,
+  "must_not_resolve_as": "completed_flag_only"
+}

@@ -1,0 +1,39 @@
+{
+  "guardrail_id": "ywe.phase_17.guardrails",
+  "rules": [
+    {
+      "id": "no_platform_specific_runtime",
+      "reject_terms": [
+        "Unity",
+        "Unreal",
+        "Godot",
+        "MonoBehaviour",
+        "Blueprint class",
+        "GDScript runtime"
+      ]
+    },
+    {
+      "id": "no_static_only_location_model",
+      "reject_terms": [
+        "static-only location",
+        "fixed map only",
+        "no location mutation"
+      ]
+    },
+    {
+      "id": "no_pregenerated_branch_tree",
+      "reject_terms": [
+        "pre-generated branch tree",
+        "prebuilt branch tree",
+        "all branches authored up front"
+      ]
+    },
+    {
+      "id": "no_ash_pattern_system_topmost_authority",
+      "reject_terms": [
+        "ASH Pattern System is the topmost cosmology",
+        "ASH Pattern System replaces the ASH Model"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "rule_id": "phase_17.wolf_validation",
+  "requires": {
+    "physical_or_vision_presence": true,
+    "quest_assistance_somewhere": true,
+    "combat_assistance_somewhere": true,
+    "temporary_decoherence_only": true,
+    "permanent_death_false": true,
+    "morality_model_false": true
+  },
+  "forbidden": [
+    "good_vs_evil",
+    "morality_meter",
+    "permanent_death",
+    "enemy_wolf_design"
+  ]
+}

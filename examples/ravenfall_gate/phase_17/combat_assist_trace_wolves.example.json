@@ -1,0 +1,16 @@
+{
+  "schema_id": "ywe.combat_assist_trace.v1",
+  "trace_id": "trace.combat_assist.ravenfall_gate.threshold_ambush",
+  "encounter_ref": "encounter.ravenfall_gate.threshold_ambush",
+  "assistants": [
+    "both_wolves",
+    "player_ability"
+  ],
+  "combat_outcome_ref": "combat_outcome.threshold_ambush.contained",
+  "decoherence_pressure_refs": [
+    "wolf_decoherence_pressure.threshold_shadow_surge"
+  ],
+  "consequence_refs": [
+    "worldstate_delta.threshold_threat_contained"
+  ]
+}

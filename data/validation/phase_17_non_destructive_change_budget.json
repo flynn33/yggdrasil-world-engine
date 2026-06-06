@@ -1,0 +1,17 @@
+{
+  "change_budget_id": "phase_17.non_destructive_change_budget",
+  "expected_primary_change": "additive",
+  "allowed_modifications": [
+    "README links",
+    "docs index links",
+    "validation manifest registration",
+    "workflow/check-spec registration"
+  ],
+  "forbidden_modifications": [
+    "delete accepted phases",
+    "replace repository tree",
+    "flatten directories",
+    "mass rewrite unrelated docs",
+    "copy root package prompts into repo"
+  ]
+}

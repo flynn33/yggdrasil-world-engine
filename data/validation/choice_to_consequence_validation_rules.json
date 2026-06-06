@@ -1,0 +1,14 @@
+{
+  "rule_id": "phase_17.choice_to_consequence",
+  "chain": [
+    "choice",
+    "branch_event",
+    "quest_reward_resolution",
+    "consequence_resolution",
+    "player_state_update",
+    "worldstate_delta_or_diagnostic_noop",
+    "location_mutation_or_noop",
+    "future_generation_bias_or_noop"
+  ],
+  "reject_if_chain_breaks": true
+}

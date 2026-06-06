@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x_ywe_phase": "16",
+  "x_status": "phase_16_recovery",
+  "title": "Ravenfall Branch Outcome Matrix",
+  "description": "Ravenfall Branch Outcome Matrix",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "phase_id",
+    "slice_id",
+    "outcomes"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string"
+    },
+    "phase_id": {
+      "const": "phase_16"
+    },
+    "slice_id": {
+      "const": "ravenfall_gate"
+    },
+    "status": {
+      "type": "string"
+    },
+    "source_truth_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requires_phase_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "outcomes": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "coverage_required": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

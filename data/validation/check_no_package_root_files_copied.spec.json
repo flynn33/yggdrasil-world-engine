@@ -1,0 +1,10 @@
+{
+  "check_id": "check_no_package_root_files_copied",
+  "purpose": "Ensure root package instruction files were not copied into repo.",
+  "reject_filename_globs": [
+    "00_*_EXECUTION_PROMPT.md",
+    "12_*_COPY_PASTE_TASK.md",
+    "12_REVIEW_AND_HANDOFF_TEMPLATE.md",
+    "15_*_COPY_PASTE_TASK.md"
+  ]
+}

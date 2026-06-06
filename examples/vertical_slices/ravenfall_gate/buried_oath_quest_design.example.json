@@ -1,0 +1,50 @@
+{
+  "schema_id": "ywe.buried_oath.quest_design.example",
+  "phase_id": "phase_16",
+  "slice_id": "ravenfall_gate",
+  "status": "example_draft",
+  "source_truth_refs": [
+    "ASH_Model_of_the_Universe",
+    "YWE_engine_cosmology_model",
+    "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+  ],
+  "requires_phase_refs": [
+    "phase_9",
+    "phase_10",
+    "phase_11",
+    "phase_12",
+    "phase_13",
+    "phase_14",
+    "phase_15"
+  ],
+  "quest_id": "the_buried_oath_at_ravenfall_gate",
+  "completion_modes": [
+    "reveal",
+    "conceal",
+    "bind",
+    "study",
+    "weaponize"
+  ],
+  "quest_stages": [
+    {
+      "stage_id": "approach_gate",
+      "purpose": "introduce location pressure and wolf companion response"
+    },
+    {
+      "stage_id": "discover_oath",
+      "purpose": "reveal pattern/lore/choice pressure"
+    },
+    {
+      "stage_id": "choose_oath_response",
+      "purpose": "player selects meaningful branch action"
+    },
+    {
+      "stage_id": "resolve_consequence",
+      "purpose": "quest reward resolver emits delta bundle"
+    },
+    {
+      "stage_id": "revisit_gate",
+      "purpose": "prove location changed"
+    }
+  ]
+}

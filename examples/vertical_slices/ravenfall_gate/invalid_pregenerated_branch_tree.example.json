@@ -1,0 +1,23 @@
+{
+  "schema_id": "ywe.ravenfall_gate.invalid.example",
+  "phase_id": "phase_16",
+  "slice_id": "ravenfall_gate",
+  "status": "example_draft",
+  "source_truth_refs": [
+    "ASH_Model_of_the_Universe",
+    "YWE_engine_cosmology_model",
+    "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+  ],
+  "requires_phase_refs": [
+    "phase_9",
+    "phase_10",
+    "phase_11",
+    "phase_12",
+    "phase_13",
+    "phase_14",
+    "phase_15"
+  ],
+  "invalid_reason": "branches_must_form_from_player_actions",
+  "invalid_content": "all Ravenfall branches are pre-generated and selected from a static tree",
+  "must_reject": true
+}

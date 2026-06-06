@@ -1,0 +1,18 @@
+{
+  "policy_id": "phase_17.repository_payload_policy",
+  "copy_payload_only": true,
+  "do_not_copy_root_package_files": true,
+  "allowed_payload_prefixes": [
+    "docs/",
+    "data/",
+    "data/validation/",
+    "examples/"
+  ],
+  "unresolved_marker_scan": [
+    "{{",
+    "}}",
+    "UNRESOLVED:",
+    "UNFILLED:",
+    "REPLACE_ME"
+  ]
+}

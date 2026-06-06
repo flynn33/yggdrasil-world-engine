@@ -1,0 +1,10 @@
+{
+  "check_id": "check_worldstate_location_trace_refs",
+  "purpose": "Require worldstate/location consequence refs or justified no-op.",
+  "required_one_of": [
+    "worldstate_delta_refs",
+    "diagnostic_noop_refs",
+    "location_mutation_refs",
+    "location_noop_reason"
+  ]
+}

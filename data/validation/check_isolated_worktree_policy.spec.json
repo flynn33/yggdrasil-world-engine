@@ -1,0 +1,12 @@
+{
+  "id": "check_isolated_worktree_policy",
+  "phase": "16_17_recovery",
+  "description": "Verify recovery work was performed on an isolated branch/worktree and unrelated uncommitted edits were not modified.",
+  "evidence_required": [
+    "base_commit",
+    "work_branch",
+    "git_status_before",
+    "git_status_after",
+    "handoff_report"
+  ]
+}

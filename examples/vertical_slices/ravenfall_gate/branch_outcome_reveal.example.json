@@ -1,0 +1,33 @@
+{
+  "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+  "phase_id": "phase_16",
+  "slice_id": "ravenfall_gate",
+  "status": "example_draft",
+  "source_truth_refs": [
+    "ASH_Model_of_the_Universe",
+    "YWE_engine_cosmology_model",
+    "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+  ],
+  "requires_phase_refs": [
+    "phase_9",
+    "phase_10",
+    "phase_11",
+    "phase_12",
+    "phase_13",
+    "phase_14",
+    "phase_15"
+  ],
+  "completion_mode": "reveal",
+  "truth_scope": "shared_world_truth",
+  "location_phase": "oath_revealed",
+  "wolf_companion_emphasis": "white_wolf_reveal_protect",
+  "ability_pressure": "oath_sight",
+  "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+  "worldstate_delta_refs": [
+    "worldstate_delta.ravenfall_gate.reveal"
+  ],
+  "diagnostic_noop_ref": null,
+  "future_generation_bias_refs": [
+    "future_generation_bias.ravenfall_gate.public_witness_threads"
+  ]
+}

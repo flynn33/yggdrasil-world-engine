@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/myth_prophecy_trace.json",
+  "title": "myth_prophecy_trace",
+  "description": "YWE Phase 17 schema for myth_prophecy_trace.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "myth_seed_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "prophecy_pressure_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "source_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "guaranteed_future": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema_id",
+    "trace_id",
+    "myth_seed_refs",
+    "prophecy_pressure_refs",
+    "source_delta_refs",
+    "guaranteed_future"
+  ]
+}

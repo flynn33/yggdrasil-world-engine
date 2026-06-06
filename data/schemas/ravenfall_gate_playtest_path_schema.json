@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/ravenfall_gate_playtest_path.json",
+  "title": "ravenfall_gate_playtest_path",
+  "description": "YWE Phase 17 schema for ravenfall_gate_playtest_path.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "path_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "completion_mode": {
+      "enum": [
+        "reveal",
+        "conceal",
+        "bind",
+        "study",
+        "weaponize"
+      ]
+    },
+    "starting_state_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "major_choice": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_branch_outcome_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required_trace_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_id",
+    "path_id",
+    "completion_mode",
+    "starting_state_ref",
+    "major_choice",
+    "expected_branch_outcome_ref",
+    "required_trace_refs",
+    "acceptance_criteria"
+  ]
+}

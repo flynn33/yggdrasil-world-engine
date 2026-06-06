@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "x_ywe_phase": "16",
+  "x_status": "phase_16_recovery",
+  "title": "Ravenfall Future Generation Bias Example",
+  "description": "Ravenfall Future Generation Bias Example",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "phase_id",
+    "slice_id",
+    "bias_id",
+    "bias_threads"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string"
+    },
+    "phase_id": {
+      "const": "phase_16"
+    },
+    "slice_id": {
+      "const": "ravenfall_gate"
+    },
+    "status": {
+      "type": "string"
+    },
+    "source_truth_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requires_phase_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "bias_id": {
+      "type": "string"
+    },
+    "bias_threads": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_resolution_ref": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/combat_assist_trace.json",
+  "title": "combat_assist_trace",
+  "description": "YWE Phase 17 schema for combat_assist_trace.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "encounter_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assistants": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "white_wolf",
+          "dark_wolf",
+          "both_wolves",
+          "player_ability",
+          "npc_ally"
+        ]
+      }
+    },
+    "combat_outcome_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "decoherence_pressure_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "consequence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_id",
+    "trace_id",
+    "encounter_ref",
+    "assistants",
+    "combat_outcome_ref",
+    "decoherence_pressure_refs",
+    "consequence_refs"
+  ]
+}

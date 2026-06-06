@@ -1,0 +1,19 @@
+{
+  "id": "check_phase18_unblock_prerequisites",
+  "phase": "17_to_18_gate",
+  "description": "Verify exact prerequisites named in the sequencing blocker report.",
+  "required_artifacts": [
+    "data/schemas/vertical_slice_playtest_trace_schema.json",
+    "data/schemas/ravenfall_gate_playtest_path_schema.json",
+    "data/schemas/wolf_companion_trace_schema.json",
+    "data/schemas/quest_reward_trace_schema.json",
+    "data/schemas/future_generation_bias_trace_schema.json"
+  ],
+  "required_choice_paths": [
+    "reveal",
+    "conceal",
+    "bind",
+    "study",
+    "weaponize"
+  ]
+}

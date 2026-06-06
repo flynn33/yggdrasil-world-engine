@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/vertical_slice_issue_record.json",
+  "title": "vertical_slice_issue_record",
+  "description": "YWE Phase 17 schema for vertical_slice_issue_record.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "issue_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "severity": {
+      "enum": [
+        "blocking",
+        "major",
+        "minor",
+        "observation"
+      ]
+    },
+    "classification": {
+      "enum": [
+        "missing_trace",
+        "broken_consequence_chain",
+        "wolf_canon_violation",
+        "truth_scope_violation",
+        "platform_specific_leak",
+        "schema_gap",
+        "source_of_truth_drift",
+        "non_destructive_policy_violation"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "affected_artifact_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "resolution_status": {
+      "enum": [
+        "open",
+        "resolved",
+        "accepted_deviation",
+        "deferred"
+      ]
+    }
+  },
+  "required": [
+    "schema_id",
+    "issue_id",
+    "severity",
+    "classification",
+    "description",
+    "affected_artifact_refs",
+    "resolution_status"
+  ]
+}

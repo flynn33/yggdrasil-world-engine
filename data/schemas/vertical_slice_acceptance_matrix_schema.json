@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yggdrasilworldengine.local/schemas/vertical_slice_acceptance_matrix.json",
+  "title": "vertical_slice_acceptance_matrix",
+  "description": "YWE Phase 17 schema for vertical_slice_acceptance_matrix.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "matrix_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vertical_slice": {
+      "const": "ravenfall_gate"
+    },
+    "required_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "required_systems": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "coverage_results": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "required": [
+    "schema_id",
+    "matrix_id",
+    "vertical_slice",
+    "required_paths",
+    "required_systems",
+    "coverage_results"
+  ]
+}
