@@ -15,7 +15,7 @@ Its purpose is to prevent implementation convenience from silently becoming arch
 This file governs:
 
 - authored overrides applied to quests, sites, factions, NPC roles, symbolic pressure, and presentation layers
-- tooling used by designers, engineers, testers, and AI coding agents
+- tooling used by designers, engineers, testers, and implementation tools
 - inspection surfaces used to understand why generation resolved a certain way
 - emergency controls used to stabilize content or unblock production
 
@@ -43,7 +43,7 @@ It is never the final source of metaphysical, historical, or structural authorit
 
 For repository baseline and engine-first structure, keep
 `docs/master_specification/YWE_MASTER_SPECIFICATION.md` and
-`YWE_REPOSITORY_BOOTSTRAP_PROMPT.md` in view before evaluating override legality.
+`docs/project/repository_map.md` in view before evaluating override legality.
 
 When multiple sources disagree, the following precedence order applies:
 
@@ -442,7 +442,7 @@ Tooling may not:
 - hide contradiction reports to produce “clean” outputs
 - promote preview settings into published truth without review
 - treat placeholders or missing source documents as canonical authority
-- infer architecture from deprecated handoff files when canonical files exist
+- infer architecture from deprecated exchange files when canonical files exist
 - bypass validation to make content “just work”
 
 Convenience is not a valid reason to break authority order.

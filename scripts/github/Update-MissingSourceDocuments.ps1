@@ -1,6 +1,6 @@
 param(
   [string]$ManifestPath = 'SOURCE_AVAILABILITY_MANIFEST.md',
-  [string]$ReportPath = 'docs/handoff/missing_source_documents.md',
+  [string]$ReportPath = 'missing_source_documents.md',
   [switch]$CheckOnly
 )
 

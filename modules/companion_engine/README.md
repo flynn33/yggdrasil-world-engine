@@ -22,7 +22,7 @@ Wolves = conditional threshold presences.
 ```text
 platform animation
 pathfinding
-combat AI behavior trees
+combat behavior trees
 pet inventory implementation
 summon UI
 morality meters

@@ -65,42 +65,42 @@
     {
       "name": "cosmic_pattern_snapshot",
       "type": "CosmicPatternSnapshot",
-      "description": "CosmicPatternSnapshot required by ASH remediation contract."
+      "description": "CosmicPatternSnapshot required by ASH generation contract."
     },
     {
       "name": "diagnostic_envelope",
       "type": "DiagnosticEnvelope",
-      "description": "DiagnosticEnvelope required by ASH remediation contract."
+      "description": "DiagnosticEnvelope required by ASH generation contract."
     },
     {
       "name": "generation_plan",
       "type": "GenerationPlan",
-      "description": "GenerationPlan required by ASH remediation contract."
+      "description": "GenerationPlan required by ASH generation contract."
     },
     {
       "name": "worldstate_delta_packet",
       "type": "WorldstateDeltaPacket",
-      "description": "WorldstateDeltaPacket required by ASH remediation contract."
+      "description": "WorldstateDeltaPacket required by ASH generation contract."
     }
   ],
   "outputs": [
     {
       "name": "myth_seed_candidate",
       "type": "MythSeedCandidate",
-      "description": "MythSeedCandidate emitted under ASH remediation contract."
+      "description": "MythSeedCandidate emitted under ASH generation contract."
     },
     {
       "name": "myth_record",
       "type": "MythRecord",
-      "description": "MythRecord emitted under ASH remediation contract."
+      "description": "MythRecord emitted under ASH generation contract."
     },
     {
       "name": "social_distribution_delta",
       "type": "SocialDistributionDelta",
-      "description": "SocialDistributionDelta emitted under ASH remediation contract."
+      "description": "SocialDistributionDelta emitted under ASH generation contract."
     }
   ],
-  "ash_remediation_contract": {
+  "ash_alignment_contract": {
     "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
     "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
     "required_inputs": [

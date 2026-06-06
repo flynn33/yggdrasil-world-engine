@@ -21,7 +21,7 @@ Placeholder for Prophecy Activation Rules Notes until finalized source content i
 - implementation guidance for future authors
 
 ## Dependencies
-- handoff package
+- transition package
 - governance and invariant guardrails
 
 ## Invariants

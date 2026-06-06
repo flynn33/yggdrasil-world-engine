@@ -30,10 +30,10 @@ foreach ($doc in $requiredDocs) {
 
 $coreManifestFiles = Get-ChildItem 'core' -Recurse -Filter 'forsetti_module_manifest.template.json' -ErrorAction SilentlyContinue
 $moduleManifestFiles = Get-ChildItem 'modules' -Recurse -Filter 'forsetti_module_manifest.template.json' -ErrorAction SilentlyContinue
-$allManifestFiles = @($coreManifestFiles + $moduleManifestFiles)
+$allTemplateFiles = @($coreManifestFiles + $moduleManifestFiles)
 
-if ($allManifestFiles.Count -ne 10) {
-  $violations.Add("Expected 10 Forsetti manifest templates across core and modules, found $($allManifestFiles.Count).")
+if ($allTemplateFiles.Count -ne 10) {
+  $violations.Add("Expected 10 Forsetti manifest templates across core and modules, found $($allTemplateFiles.Count).")
 }
 
 $requiredManifestFields = @(
@@ -47,7 +47,7 @@ $requiredManifestFields = @(
   'entryPoint'
 )
 
-foreach ($manifestFile in $allManifestFiles) {
+foreach ($manifestFile in $allTemplateFiles) {
   $manifest = Read-JsonFile -Path $manifestFile.FullName
 
   foreach ($field in $requiredManifestFields) {

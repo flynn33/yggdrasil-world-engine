@@ -77,7 +77,7 @@ generation bias.
 - location mutation may influence future generation context through `FutureGenerationBiasUpdate`, but it may not rewrite base ontology or bypass diagnostic evidence
 - quest chains must preserve `QuestGenerationRequest`, `QuestChainManifest`, `StageManifest`, `CompletionModeSet`, and `QuestResolutionPayload` boundaries and must expose at least two completion modes
 - NPC manifests must preserve `NPCManifest`, `RelationshipVector`, `TruthFunction`, `PersistenceState`, and `NPCMemoryDelta` boundaries; NPC claims remain interpretive unless backed by worldstate evidence
-- codex lore and myth records must preserve `CodexRecord`, `LoreRecordVariant`, `VisibilityScope`, `MythRecord`, and `SocialDistributionDelta` boundaries and may not overwrite locked canon or factual world truth
+- lore archive and myth records must preserve `LoreArchiveRecord`, `LoreRecordVariant`, `VisibilityScope`, `MythRecord`, and `SocialDistributionDelta` boundaries and may not overwrite locked canon or factual world truth
 - feature modules receive ASH-derived interpretation through `YWEInterpretationPacket`
 - modules activate through Forsetti lifecycle rules
 - modules communicate through framework-mediated channels only

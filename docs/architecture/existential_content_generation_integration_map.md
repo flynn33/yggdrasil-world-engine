@@ -45,7 +45,7 @@ NPCManifestCandidate
 GeneratedLoreFragment
 ContentGenerationCandidate
 ContentGenerationResolution
-ContentManifestHandoff
+ContentManifestExchange
 QuestNPCLoreLinkage
 ```
 

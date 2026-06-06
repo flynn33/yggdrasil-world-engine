@@ -26,7 +26,7 @@ adapter boundaries, validation expectations, and implementation principles.
    consuming runtime or feature contracts.
 3. Use `docs/architecture/README.md` for the accepted phase contract order and
    current package surfaces.
-4. Use `docs/handoff/README.md` for provenance and package-history context.
+4. Use `docs/project/repository_status.md` for provenance and package-history context.
 
 ## Active Companion Surfaces
 
@@ -34,8 +34,8 @@ adapter boundaries, validation expectations, and implementation principles.
 |---|---|
 | Architecture index | `../architecture/README.md` |
 | Authority stack contract | `../architecture/ywe_cosmology_authority_contract.md` |
-| Source-truth remediation handoff | `../handoff/YWE_SOURCE_TRUTH_ALIGNMENT_HANDOFF_2026-05-19.md` |
-| Phase 14 completion report | `../handoff/YWE_PHASE_14_ABILITY_POWER_ENGINE_COMPLETION_REPORT_2026-05-19.md` |
+| Source-truth alignment | `../project/source_inventory.md` |
+| Phase 14 completion report | `../exchange/YWE_PHASE_14_ABILITY_POWER_ENGINE_COMPLETION_REPORT_2026-05-19.md` |
 | Validation suite | `../../scripts/run_checks.sh` |
 
 ## Invariants

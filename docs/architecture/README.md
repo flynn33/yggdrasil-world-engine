@@ -13,7 +13,7 @@ Required first-read authority contracts:
 - `cosmology_framework_extensibility_contract.md` -- Engine cosmology as structural framework, not fixed setting bible.
 - `ash_upstream_authority_contract.md` -- Historical packet-spine authority contract, preserved as superseded component evidence where necessary.
 
-Source-truth and Twin Wolf remediation contracts:
+Source-truth and Twin Wolf alignment contracts:
 
 - `twin_wolf_companion_canon_contract.md` -- White Wolf and Dark Wolf as complementary non-moral embodied companions.
 - `dual_variable_alignment_model_contract.md` -- Non-moral dual-variable alignment where both variables can grow through the same event.
@@ -53,13 +53,13 @@ Phase 11 worldstate and location mutation contracts:
 
 Phase 12 quest, NPC, and lore generation contract:
 
-- `quest_npc_lore_generation_v1.md` -- Canonical quest-chain, NPC-manifest, NPC-memory, codex-lore, myth-record, and social-distribution generation boundary rules.
+- `quest_npc_lore_generation_v1.md` -- Canonical quest-chain, NPC-manifest, NPC-memory, lore-archive, myth-record, and social-distribution generation boundary rules.
 - `quest_generation_from_axioms_contract.md` -- Quest candidate generation from axiom pressure, existence potential, branch reality, player state, location state, and worldstate consequences.
 - `npc_generation_from_branch_context_contract.md` -- NPC candidate generation from branch, player, location, relation, and axiom context.
 - `lore_generation_from_pattern_trace_contract.md` -- Lore fragment generation from pattern trace, source context, truth scope, and visibility rules.
 - `existential_content_generation_integration_map.md` -- Phase 9-11 inputs, Phase 12 content-generation records, and Phase 13+ consumers.
 - `quest_npc_lore_truth_boundary_contract.md` -- Truth-scope boundaries for generated quests, NPC claims, lore fragments, myth, prophecy, and faction claims.
-- `quest_npc_lore_manifest_provenance_contract.md` -- Shared provenance spine for generated content candidates and downstream handoff.
+- `quest_npc_lore_manifest_provenance_contract.md` -- Shared provenance spine for generated content candidates and downstream exchange.
 - `content_generation_acceptance_contract.md` -- Acceptance and rejection conditions for generated content candidates.
 - `axiom_to_content_pressure_map.md` -- A1-A6 pressure mapping into quest, NPC, and lore generation surfaces.
 
@@ -69,7 +69,7 @@ Phase 14 ability and power engine contracts:
 - `ability_unlock_pressure_contract.md` -- Unlock pressure from branch history, worldstate consequences, lineage, plane attunement, wolf state, artifacts, myth, and prophecy exposure.
 - `ability_source_model_contract.md` -- Required source provenance for every meaningful ability.
 - `ability_state_progression_contract.md` -- Ability state progression, recoverable decoherence, and state update packet boundaries.
-- `ability_manifestation_contract.md` -- Manifestation modes and safe runtime handoff rules.
+- `ability_manifestation_contract.md` -- Manifestation modes and safe runtime exchange rules.
 - `ability_consequence_integration_contract.md` -- AbilityConsequencePacket requirements for meaningful use.
 - `ability_wolf_companion_integration_contract.md` -- Wolf-linked ability integration while preserving embodied companion canon.
 - `ability_combat_and_quest_use_contract.md` -- Combat and quest-use surfaces without platform runtime implementation.
@@ -77,7 +77,7 @@ Phase 14 ability and power engine contracts:
 - `ability_lineage_and_plane_integration_contract.md` -- Lineage, bloodline, and plane-attunement ability links.
 - `ability_artifact_myth_prophecy_integration_contract.md` -- Artifact binding, myth participation, and prophecy pressure links.
 - `ability_safety_and_decoherence_contract.md` -- Safety, recovery, and decoherence handling.
-- `ability_engine_integration_map.md` -- Phase 10-12 inputs, Phase 14 records, and Phase 15 handoff packets.
+- `ability_engine_integration_map.md` -- Phase 10-12 inputs, Phase 14 records, and Phase 15 exchange packets.
 
 Phase 15A companion and reward foundation contracts:
 
@@ -109,7 +109,7 @@ Before applying downstream architecture guidance, keep the original repository
 baseline in view:
 
 - `../master_specification/YWE_MASTER_SPECIFICATION.md` -- foundational engine-first design and canonical cosmology baseline
-- `../../YWE_REPOSITORY_BOOTSTRAP_PROMPT.md` -- repository structure and scaffolding baseline paired with the master specification
+- `../../docs/project/repository_map.md` -- repository structure and scaffolding baseline paired with the master specification
 
 ## Core Engines
 
@@ -190,7 +190,7 @@ flowchart LR
   P10["Phase 10<br/>Player runtime state"]
   P11["Phase 11<br/>Worldstate + location mutation"]
   P12["Phase 12<br/>Quest / NPC / lore"]
-  STR["Source-truth + Twin Wolf<br/>alignment remediation"]
+  STR["Source-truth + Twin Wolf<br/>alignment alignment"]
   P14["Phase 14<br/>Ability / Power Engine"]
   P15A["Phase 15A<br/>Companion + reward<br/>foundation"]
 
@@ -198,7 +198,7 @@ flowchart LR
 ```
 
 The Phase 14 Ability / Power Engine consumes the accepted Phase 9-12 surfaces
-and the source-truth/Twin Wolf remediation gate. It does not imply a completed
+and the source-truth/Twin Wolf alignment gate. It does not imply a completed
 Phase 13 feature package; Phase 13 remains deferred until separately accepted.
 
 Phase 9 branch-reality dependency flow:
@@ -239,7 +239,7 @@ Phase 12 quest-NPC-lore dependency flow:
 ```text
 WorldstateDeltaPacket + FutureGenerationBiasUpdate
   -> YWEGenerationContextPacket
-    -> QuestChainManifest / NPCManifest / CodexRecord / MythRecord
+    -> QuestChainManifest / NPCManifest / LoreArchiveRecord / MythRecord
       -> QuestResolutionPayload / NPCMemoryDelta / SocialDistributionDelta
         -> WorldstateDeltaPacket or DiagnosticNoOp
 ```

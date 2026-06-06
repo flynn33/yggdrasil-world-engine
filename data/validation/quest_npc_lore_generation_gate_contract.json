@@ -2,16 +2,16 @@
   "schema_id": "ywe.validation.quest_npc_lore_generation_gate_contract",
   "version": "1.0.0",
   "active_package": "Phase 12 - Quest, NPC, and Lore Generation",
-  "scope_source": "docs/handoff/YWE_PHASE_12_EXISTENTIAL_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-18.md",
+  "scope_source": "docs/architecture/quest_npc_lore_generation_v1.md",
   "required_files": [
     "data/schemas/quest_npc_lore_generation_schema.json",
     "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
     "core/narrative_engine/npc_synthesis_rules.yaml",
-    "core/narrative_engine/codex_lore_generation_rules.yaml",
+    "core/narrative_engine/lore_archive_generation_rules.yaml",
     "modules/quest_engine/quest_chain_templates.yaml",
     "data/schemas/myth_record_schema_expansion.json",
     "docs/architecture/quest_npc_lore_generation_v1.md",
-    "docs/handoff/YWE_PHASE_12_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-17.md"
+    "docs/architecture/quest_npc_lore_generation_v1.md"
   ],
   "required_schema_records": [
     "QuestGenerationRequest",
@@ -25,7 +25,7 @@
     "RelationshipVector",
     "TruthFunction",
     "PersistenceState",
-    "CodexRecord",
+    "LoreArchiveRecord",
     "LoreRecordVariant",
     "VisibilityScope",
     "MythSeedCandidate",
@@ -57,7 +57,7 @@
     "location_mutation_delta_refs",
     "future_generation_bias_update_ref",
     "npc_memory_delta_refs",
-    "codex_record_refs",
+    "lore_archive_record_refs",
     "myth_record_refs",
     "authority_boundary",
     "ash_provenance"
@@ -73,9 +73,9 @@
     "authority_boundary",
     "ash_provenance"
   ],
-  "required_codex_record_fields": [
+  "required_lore_archive_record_fields": [
     "record_type",
-    "codex_record_id",
+    "lore_archive_record_id",
     "layer",
     "worldstate_delta_packet_ref",
     "visibility_scope",
@@ -105,7 +105,7 @@
     "RelationshipVector",
     "TruthFunction",
     "PersistenceState",
-    "CodexRecord",
+    "LoreArchiveRecord",
     "LoreRecordVariant",
     "VisibilityScope",
     "MythSeedCandidate",

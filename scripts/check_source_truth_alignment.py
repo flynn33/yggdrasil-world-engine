@@ -221,7 +221,7 @@ def check_forbidden_patterns(
     allow_patterns = allow_in_paths or []
     for path in active_scan_files(root):
         rel = path.relative_to(root).as_posix()
-        if rel.startswith("docs/handoff/"):
+        if rel.startswith("docs/exchange/"):
             continue
         if any(path_matches(rel, pattern) for pattern in allow_patterns):
             continue

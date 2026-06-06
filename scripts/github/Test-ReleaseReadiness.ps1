@@ -41,8 +41,8 @@ if (-not @($wikiConfig.pages).Count) {
   throw '.github/wiki-sync.json must define at least one wiki page.'
 }
 
-if (-not (Test-Path 'docs/handoff/missing_source_documents.md' -PathType Leaf)) {
-  throw 'docs/handoff/missing_source_documents.md is required for release readiness.'
+if (-not (Test-Path 'missing_source_documents.md' -PathType Leaf)) {
+  throw 'missing_source_documents.md is required for release readiness.'
 }
 
 Invoke-CheckScript -Name 'Missing source inventory freshness' -Path './scripts/github/Update-MissingSourceDocuments.ps1' -Arguments @('-CheckOnly')
@@ -51,6 +51,6 @@ Invoke-CheckScript -Name 'Schema integrity' -Path './scripts/github/Test-SchemaI
 Invoke-CheckScript -Name 'Module contract coverage' -Path './scripts/github/Test-ModuleContractCoverage.ps1'
 Invoke-CheckScript -Name 'Docs and glossary validation' -Path './scripts/github/Test-DocsAndGlossary.ps1'
 Invoke-CheckScript -Name 'Canonical truth-boundary validation' -Path './scripts/github/Test-CanonicalTruthBoundaries.ps1'
-Invoke-CheckScript -Name 'Contributor identity validation' -Path './scripts/github/Test-NoAIContributors.ps1'
+Invoke-CheckScript -Name 'Contributor identity validation' -Path './scripts/github/Test-ContributorIdentityPolicy.ps1'
 
 Write-Host "Release readiness checks passed for version $version." -ForegroundColor Green

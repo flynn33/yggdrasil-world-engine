@@ -33,7 +33,7 @@ Every meaningful generation flow must preserve this order:
 YWEGenerationContextPacket
   -> ASHUpstreamGenerationEnvelope
   -> YWEInterpretationPacket
-  -> SystemManifestHandoff
+  -> SystemManifestExchange
   -> WorldstateDeltaPacket or DiagnosticNoOp
   -> FutureGenerationBiasUpdate
 ```

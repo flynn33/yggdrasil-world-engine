@@ -105,7 +105,7 @@ artifact manifestation
 myth and prophecy boundaries
 perception boundaries
 faction claim boundaries
-host adapter handoff contracts
+host adapter exchange contracts
 ```
 
 YWE consumes:
@@ -258,7 +258,7 @@ Every meaningful generation request should pass through this packet spine:
 YWEGenerationContextPacket
   -> ASHUpstreamGenerationEnvelope
   -> YWEInterpretationPacket
-  -> SystemManifestHandoff
+  -> SystemManifestExchange
   -> WorldstateDeltaPacket or DiagnosticNoOp
   -> FutureGenerationBiasUpdate
 ```

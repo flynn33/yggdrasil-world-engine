@@ -1,4 +1,4 @@
-# Phase 16 Handoff Notes
+# Phase 16 Transition Notes
 
 Status: `phase_16_recovery`
 

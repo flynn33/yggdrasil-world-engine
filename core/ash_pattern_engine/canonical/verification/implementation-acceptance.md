@@ -63,7 +63,7 @@ All invariants pass, all 5 categories are covered, all contracts are satisfied, 
 All of the above, plus: one or more caveats exist that do not affect core conformance. The caveat must name the specific item.
 
 ### NON-CONFORMANT
-Any acceptance condition is not met. The judgment must include: failing invariants (by ID), failing categories, and recommendations for remediation.
+Any acceptance condition is not met. The judgment must include: failing invariants (by ID), failing categories, and recommendations for alignment.
 
 ### PARTIAL — not a valid judgment
 There is no "partial conformance." An implementation is CONFORMANT, CONFORMANT WITH CAVEATS, or NON-CONFORMANT.

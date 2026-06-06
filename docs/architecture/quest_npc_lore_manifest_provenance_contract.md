@@ -20,12 +20,12 @@ Define a shared provenance spine for all Phase 12 generated content.
 }
 ```
 
-## Manifest Handoff
+## Manifest Transition
 
-Phase 12 generates candidates and handoffs. Final consequence resolution is not owned by Phase 12.
+Phase 12 generates candidates and exchanges. Final consequence resolution is not owned by Phase 12.
 
 ```text
 QuestManifestCandidate -> Quest Reward Resolver later
 NPCManifestCandidate -> NPC system later
-GeneratedLoreFragment -> Lore/Codex/Perception/Myth/Prophecy systems later
+GeneratedLoreFragment -> Lore Archive/Perception/Myth/Prophecy systems later
 ```

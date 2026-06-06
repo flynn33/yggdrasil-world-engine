@@ -25,7 +25,7 @@
       "$ref": "#/$defs/NPCMemoryDelta"
     },
     {
-      "$ref": "#/$defs/CodexRecord"
+      "$ref": "#/$defs/LoreArchiveRecord"
     },
     {
       "$ref": "#/$defs/MythSeedCandidate"
@@ -84,7 +84,7 @@
           "enum": [
             "QuestChainManifest",
             "NPCManifest",
-            "CodexRecord",
+            "LoreArchiveRecord",
             "MythRecord",
             "SocialDistributionDelta"
           ]
@@ -129,7 +129,7 @@
         "quest_resolution_payload_ref",
         "affected_location_refs",
         "npc_manifest_refs",
-        "codex_record_refs",
+        "lore_archive_record_refs",
         "authority_boundary",
         "ash_provenance"
       ],
@@ -173,7 +173,7 @@
         "npc_manifest_refs": {
           "$ref": "#/$defs/StringRefList"
         },
-        "codex_record_refs": {
+        "lore_archive_record_refs": {
           "$ref": "#/$defs/StringRefList"
         },
         "worldstate_delta_policy": {
@@ -327,7 +327,7 @@
         "location_mutation_delta_refs",
         "future_generation_bias_update_ref",
         "npc_memory_delta_refs",
-        "codex_record_refs",
+        "lore_archive_record_refs",
         "myth_record_refs",
         "authority_boundary",
         "ash_provenance"
@@ -374,7 +374,7 @@
         "npc_memory_delta_refs": {
           "$ref": "#/$defs/StringRefList"
         },
-        "codex_record_refs": {
+        "lore_archive_record_refs": {
           "$ref": "#/$defs/StringRefList"
         },
         "myth_record_refs": {
@@ -662,13 +662,13 @@
         }
       }
     },
-    "CodexRecord": {
+    "LoreArchiveRecord": {
       "type": "object",
       "additionalProperties": false,
       "required": [
         "record_type",
         "version",
-        "codex_record_id",
+        "lore_archive_record_id",
         "title",
         "layer",
         "cosmic_pattern_snapshot_ref",
@@ -684,13 +684,13 @@
       ],
       "properties": {
         "record_type": {
-          "const": "CodexRecord"
+          "const": "LoreArchiveRecord"
         },
         "version": {
           "type": "string",
           "const": "1.0.0"
         },
-        "codex_record_id": {
+        "lore_archive_record_id": {
           "type": "string",
           "minLength": 1
         },
@@ -750,7 +750,7 @@
       "additionalProperties": false,
       "required": [
         "lore_variant_id",
-        "codex_record_ref",
+        "lore_archive_record_ref",
         "layer",
         "source_claim_type",
         "visibility_scope_ref",
@@ -762,7 +762,7 @@
           "type": "string",
           "minLength": 1
         },
-        "codex_record_ref": {
+        "lore_archive_record_ref": {
           "type": "string",
           "minLength": 1
         },

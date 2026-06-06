@@ -21,7 +21,7 @@ Placeholder for Myth Emergence Rules Notes until finalized source content is sup
 - implementation guidance for future authors
 
 ## Dependencies
-- handoff package
+- transition package
 - governance and invariant guardrails
 
 ## Invariants

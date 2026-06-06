@@ -76,37 +76,37 @@
     {
       "name": "cosmic_pattern_snapshot",
       "type": "CosmicPatternSnapshot",
-      "description": "CosmicPatternSnapshot required by ASH remediation contract."
+      "description": "CosmicPatternSnapshot required by ASH generation contract."
     },
     {
       "name": "diagnostic_envelope",
       "type": "DiagnosticEnvelope",
-      "description": "DiagnosticEnvelope required by ASH remediation contract."
+      "description": "DiagnosticEnvelope required by ASH generation contract."
     },
     {
       "name": "generation_plan",
       "type": "GenerationPlan",
-      "description": "GenerationPlan required by ASH remediation contract."
+      "description": "GenerationPlan required by ASH generation contract."
     }
   ],
   "outputs": [
     {
       "name": "prophecy_record",
       "type": "ProphecyRecord",
-      "description": "ProphecyRecord emitted under ASH remediation contract."
+      "description": "ProphecyRecord emitted under ASH generation contract."
     },
     {
       "name": "omen_cluster",
       "type": "OmenCluster",
-      "description": "OmenCluster emitted under ASH remediation contract."
+      "description": "OmenCluster emitted under ASH generation contract."
     },
     {
       "name": "runtime_bias_effect",
       "type": "RuntimeBiasEffect",
-      "description": "RuntimeBiasEffect emitted under ASH remediation contract."
+      "description": "RuntimeBiasEffect emitted under ASH generation contract."
     }
   ],
-  "ash_remediation_contract": {
+  "ash_alignment_contract": {
     "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
     "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
     "required_inputs": [

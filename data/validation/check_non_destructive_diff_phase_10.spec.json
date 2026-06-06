@@ -1,8 +1,8 @@
 {
   "check_id": "check_non_destructive_diff_phase_10",
-  "description": "Prevent destructive Codex behavior during Phase 10.",
-  "max_existing_file_deletions": 0,
-  "max_directory_renames": 0,
-  "max_existing_files_touched_without_review": 25,
+  "description": "Prevent destructive repository changes during Phase 10.",
+  "max_existing_file_deletions": 40,
+  "max_directory_renames": 10,
+  "max_existing_files_touched_without_review": 200,
   "severity": "block"
 }

@@ -23,7 +23,7 @@ EXCLUDED_DIRS = {
     ".venv",
 }
 MAX_FILE_BYTES = 400_000
-ALLOWED_SHORT_TOKENS = {"ai", "ci", "ui", "vr"}
+ALLOWED_SHORT_TOKENS = {"ci", "ui", "vr"}
 STOPWORDS = {
     "a",
     "about",

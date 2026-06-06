@@ -40,7 +40,7 @@ RuntimeGenerationTrigger
   -> YWEGenerationContextPacket
   -> ASHUpstreamGenerationEnvelope
   -> YWEInterpretationPacket
-  -> SystemManifestHandoff
+  -> SystemManifestExchange
   -> HostAdapterMaterializationRequest
   -> MaterializationResult
   -> ResolutionPayload
@@ -80,7 +80,7 @@ and `FutureGenerationBiasUpdate`. They must not mutate ASH math.
 | Prophecy activation | `modules/prophecy_engine/prophecy_engine_interface.json`, `data/schemas/prophecy_schema_expansion.json` | `ProphecyRecord`, `OmenCluster`, `RuntimeBiasEffect` |
 | Perception overlays | `core/perception_engine/engine_interface.json`, `core/perception_engine/perception_schema.json`, `data/schemas/perception_layer_persistence_schema.json` | `PerceptionStateRecord`, `OverlayManifest`, `VisibilityRules` |
 | Faction topology | `data/faction_topology/faction_topology_state_schema.yaml` | `FactionDelta`, `ClaimRecord`, `ReformCurrent`, `SuccessionTrack` |
-| Codex/lore generation | `core/narrative_engine/codex_lore_generation_rules.yaml`, `data/schemas/codex_lore_record_schema.json` | `CodexRecord`, `LoreRecordVariant`, `VisibilityScope` |
+| Lore archive generation | `core/narrative_engine/lore_archive_generation_rules.yaml`, `data/schemas/lore_archive_record_schema.json` | `LoreArchiveRecord`, `LoreRecordVariant`, `VisibilityScope` |
 | Realm mechanics and transitions | `core/realm_engine/engine_interface.json`, `data/schemas/realm_transition_resolution_schema.json`, `data/realm/realm_mechanics_rules.yaml`, `data/realm/realm_boundary_profiles.yaml` | `RealmTransitionResolution`, `WorldstateDeltaPacket`, `DiagnosticNoOp` |
 
 ## Adapter Materialization Boundary

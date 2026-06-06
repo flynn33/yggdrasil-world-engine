@@ -34,7 +34,7 @@ REQUIRED_WIKI_FILES = {
     "Recovery-and-Safety-Semantics.md",
     "Contracts-and-Verification.md",
     "Governance-and-Agents.md",
-    "Downstream-Handoff-Guide.md",
+    "Downstream-Transition-Guide.md",
     "Wiki-Maintenance-Playbook.md",
     "Glossary.md",
 }
@@ -46,7 +46,7 @@ NAV_REQUIRED_PAGES = {
     "Recovery-and-Safety-Semantics",
     "Contracts-and-Verification",
     "Governance-and-Agents",
-    "Downstream-Handoff-Guide",
+    "Downstream-Transition-Guide",
     "Wiki-Maintenance-Playbook",
     "Glossary",
 }
@@ -56,7 +56,7 @@ WATCHED_PREFIXES = (
     "docs/",
     "specs/",
     "governance/",
-    "handoff-templates/",
+    "implementation-templates/",
     ".github/workflows/",
     ".github/scripts/",
 )

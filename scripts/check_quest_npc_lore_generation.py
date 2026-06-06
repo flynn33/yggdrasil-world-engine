@@ -67,7 +67,7 @@ PHASE_12_ACTIVE_PROMOTED_FILES = [
     "docs/architecture/quest_npc_lore_generation_v1.md",
     "data/schemas/quest_npc_lore_generation_schema.json",
     "data/validation/quest_npc_lore_generation_gate_contract.json",
-    "docs/handoff/YWE_PHASE_12_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-17.md",
+    "docs/architecture/quest_npc_lore_generation_v1.md",
     "scripts/check_quest_npc_lore_generation.py",
 ]
 
@@ -417,7 +417,7 @@ def check_schema(root: Path, contract: dict, errors: list[str]) -> None:
         "QuestChainManifest": contract.get("required_quest_manifest_fields", []),
         "QuestResolutionPayload": contract.get("required_quest_resolution_fields", []),
         "NPCManifest": contract.get("required_npc_manifest_fields", []),
-        "CodexRecord": contract.get("required_codex_record_fields", []),
+        "LoreArchiveRecord": contract.get("required_lore_archive_record_fields", []),
         "MythRecord": contract.get("required_myth_record_fields", []),
     }
     for record_name, fields in field_contracts.items():
@@ -477,7 +477,7 @@ def check_markers(root: Path, contract: dict, errors: list[str]) -> None:
         "data/schemas/quest_npc_lore_generation_schema.json",
         "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
         "core/narrative_engine/npc_synthesis_rules.yaml",
-        "core/narrative_engine/codex_lore_generation_rules.yaml",
+        "core/narrative_engine/lore_archive_generation_rules.yaml",
         "modules/quest_engine/quest_chain_templates.yaml",
         "data/schemas/myth_record_schema_expansion.json",
         "docs/architecture/quest_npc_lore_generation_v1.md",
@@ -487,7 +487,7 @@ def check_markers(root: Path, contract: dict, errors: list[str]) -> None:
         "core/narrative_engine/ash_runtime_generation_flow.yaml",
         "data/quest_archetypes/quest_chain_manifest_schema.json",
         "data/schemas/npc_manifest_schema.json",
-        "data/schemas/codex_lore_record_schema.json",
+        "data/schemas/lore_archive_record_schema.json",
     ]
     text = "\n".join(read_text(root / path_name) for path_name in paths if (root / path_name).is_file())
     for marker in contract.get("required_markers", []):
@@ -504,7 +504,7 @@ def check_packet_spine(root: Path, errors: list[str]) -> None:
             "QuestResolutionPayload",
             "NPCManifest",
             "NPCMemoryDelta",
-            "CodexRecord",
+            "LoreArchiveRecord",
             "MythRecord",
             "SocialDistributionDelta",
         ):
@@ -526,7 +526,7 @@ def check_packet_spine(root: Path, errors: list[str]) -> None:
             "quest_resolution_payload_refs",
             "npc_manifest_refs",
             "npc_memory_delta_refs",
-            "codex_record_refs",
+            "lore_archive_record_refs",
             "myth_record_refs",
             "social_distribution_delta_refs",
         ):
@@ -585,7 +585,7 @@ def check_examples(root: Path, errors: list[str]) -> None:
         "QuestResolutionPayload",
         "NPCManifest",
         "NPCMemoryDelta",
-        "CodexRecord",
+        "LoreArchiveRecord",
         "MythSeedCandidate",
         "MythRecord",
         "SocialDistributionDelta",
@@ -638,7 +638,7 @@ def check_forbidden_claims(root: Path, contract: dict, errors: list[str]) -> Non
         "data/schemas/quest_npc_lore_generation_schema.json",
         "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
         "core/narrative_engine/npc_synthesis_rules.yaml",
-        "core/narrative_engine/codex_lore_generation_rules.yaml",
+        "core/narrative_engine/lore_archive_generation_rules.yaml",
         "modules/quest_engine/quest_chain_templates.yaml",
         "data/schemas/myth_record_schema_expansion.json",
         "docs/architecture/quest_npc_lore_generation_v1.md",

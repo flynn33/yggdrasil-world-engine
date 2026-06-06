@@ -707,7 +707,7 @@ def check_source_inventory(root):
         "docs/architecture/realm_truth_boundary_contract.md",
         "docs/architecture/authored_override_and_tooling_notes.md",
         "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
-        "YWE_REPOSITORY_BOOTSTRAP_PROMPT.md",
+        "docs/project/repository_map.md",
     ]
 
     errors = []

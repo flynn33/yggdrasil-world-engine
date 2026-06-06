@@ -143,12 +143,12 @@ CI workflows block merges on any failure.
 | `developer-guide.md` | Extended guide for engine implementors |
 | `wiki.md` | This file -- comprehensive reference |
 | `docs/master_specification/YWE_MASTER_SPECIFICATION.md` | Foundational engine-first design and cosmology baseline |
-| `YWE_REPOSITORY_BOOTSTRAP_PROMPT.md` | Repository bootstrap and structure baseline paired with the master spec |
+| `docs/project/repository_map.md` | Repository bootstrap and structure baseline paired with the master spec |
 | `missing_source_documents.md` | Canonical artifact inventory and placeholder-backed tracking |
 | `docs/architecture/authored_override_and_tooling_notes.md` | Authored override authority and tooling safety guardrails |
 | `docs/architecture/realm_truth_boundary_contract.md` | Boundary contract separating realm truth from interpretive layers |
 | `yggdrasil-instructions.json` | Machine-readable architecture rules |
-| `agentic-coding-policy.json` | Machine-readable contributor automation constraints |
+| `repository-contribution-policy.json` | Machine-readable contributor automation constraints |
 | `docs/ash_compliance/` | ASH compliance rules and checklist |
 
 ---

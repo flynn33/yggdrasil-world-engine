@@ -6,7 +6,7 @@ Project: Yggdrasil World Engine
 Status: canonical foundation spec
 Authority: design truth for ASH symbolic grammar
 Replaces as authority: `ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2.md`
-Retains as historical context only: prior assistant handoff / summary text versions
+Retains as historical context only: prior assistant exchange / summary text versions
 
 ---
 
@@ -27,7 +27,7 @@ This file exists to answer these questions cleanly:
 - how archetypes may influence downstream systems
 - what archetypes must never be treated as
 
-This document is **not** a handoff diary, progress memo, or conversational
+This document is **not** a exchange diary, progress memo, or conversational
 summary.
 
 ---
@@ -369,7 +369,7 @@ Downstream systems may consume archetype outputs, but may not redefine their
 canonical meaning locally.
 
 ## Invariant 7
-Historical notes, conversation summaries, and handoff files are not canonical
+Historical notes, conversation summaries, and exchange files are not canonical
 unless explicitly migrated into this specification or its registries.
 
 ---
@@ -391,26 +391,26 @@ data/pattern_archetypes/pattern_clusters.yaml
 data/quest_archetypes/quest_archetypes.yaml
 ```
 
-Historical prior handoff:
+Historical prior exchange:
 
 ```text
-docs/history/ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2_PRIOR_HANDOFF.md
+docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2.md
 ```
 
 ---
 
-# 14. Migration rule for Codex
+# 14. Migration rule
 
-Codex should treat the older `ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2.md` as one of
+Repository maintainers should treat the older `ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2.md` as one of
 these:
 
 - historical context to preserve
 - a source to mine for definitions that can be normalized into canonical fields
 - not the final architecture authority
 
-Codex should not block repository creation because the earlier file reads like a
+Repository maintainers should not block repository creation because the earlier file reads like a
 summary.
-Codex should instead create this normalized canonical file and route historical
+Repository maintainers should instead create this normalized canonical file and route historical
 content to the history folder.
 
 ---

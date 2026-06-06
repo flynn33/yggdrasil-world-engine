@@ -11,7 +11,7 @@ The `main` branch is the **sealed specification**. It contains:
 - Cosmological lore (`lore/`)
 - Adapter specifications (`adapters/`)
 - Documentation (`docs/`)
-- Governance files (`guide.md`, `wiki.md`, `agentic-coding-policy.json`, `yggdrasil-instructions.json`)
+- Governance files (`guide.md`, `wiki.md`, `repository-contribution-policy.json`, `yggdrasil-instructions.json`)
 
 No engine-specific code belongs on `main`.
 

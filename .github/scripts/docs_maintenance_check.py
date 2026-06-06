@@ -5,8 +5,8 @@ Checks:
   (a) Required documentation/governance files exist and are non-empty.
   (b) Required core headings remain present in key canonical docs.
   (c) README repository-map path references resolve to real files.
-  (d) Internal markdown links across README/docs/governance/handoff/wiki resolve.
-  (e) Drift signal: docs/governance/handoff updates without README update.
+  (d) Internal markdown links across README/docs/governance/exchange/wiki resolve.
+  (e) Drift signal: docs/governance/exchange updates without README update.
 
 Blocking when REPORT_ONLY is unset or "0".
 Exits 0 with full report when REPORT_ONLY=1.
@@ -30,13 +30,13 @@ REQUIRED_FILES = {
     "docs/02-target-repository-shape.md",
     "docs/03-design-roadmap.md",
     "governance/repository-governance.md",
-    "governance/ai-coding-handoff.md",
+    "governance/ai-coding-exchange.md",
     "governance/github-agents-governance.md",
-    "handoff-templates/README.md",
-    "handoff-templates/common-downstream-handoff-requirements.md",
-    "handoff-templates/desktop-implementation-handoff-template.md",
-    "handoff-templates/mobile-implementation-handoff-template.md",
-    "handoff-templates/service-implementation-handoff-template.md",
+    "implementation-templates/README.md",
+    "implementation-templates/common-downstream-exchange-requirements.md",
+    "implementation-templates/desktop-implementation-exchange-template.md",
+    "implementation-templates/mobile-implementation-exchange-template.md",
+    "implementation-templates/service-implementation-exchange-template.md",
 }
 
 REQUIRED_HEADINGS = {
@@ -55,7 +55,7 @@ REQUIRED_HEADINGS = {
         "## Governance rules",
         "## Main-repository closeout",
     ],
-    "governance/ai-coding-handoff.md": [
+    "governance/ai-coding-exchange.md": [
         "## Required coding-agent workflow",
         "## What the coding agent must preserve",
     ],
@@ -70,8 +70,8 @@ README_REQUIRED_MARKERS = (
     "maintenance mode",
 )
 
-DOC_SCAN_PREFIXES = ("README.md", "docs/", "governance/", "handoff-templates/", "wiki/")
-DRIFT_PREFIXES = ("docs/", "governance/", "handoff-templates/", "specs/")
+DOC_SCAN_PREFIXES = ("README.md", "docs/", "governance/", "implementation-templates/", "wiki/")
+DRIFT_PREFIXES = ("docs/", "governance/", "implementation-templates/", "specs/")
 
 MD_LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
 README_MAP_PATH_RE = re.compile(r"^-\s+`([^`]+)`\s+—", re.MULTILINE)

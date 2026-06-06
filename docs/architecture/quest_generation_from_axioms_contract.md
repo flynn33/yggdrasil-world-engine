@@ -58,7 +58,7 @@ select quest pressure class
 build QuestGenerationContext
 emit QuestManifestCandidate
 validate provenance and truth scope
-handoff to later quest reward/resolution systems
+exchange to later quest reward/resolution systems
 ```
 
 ## Required Quest Candidate Properties

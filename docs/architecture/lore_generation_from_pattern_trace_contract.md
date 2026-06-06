@@ -13,7 +13,7 @@ Define how YWE generates lore fragments from pattern traces, branch records, wor
 Pattern first. Text second.
 ```
 
-YWE may generate text, inscriptions, codex entries, testimonies, visions, dreams, and records only after a valid pattern trace and truth scope exist.
+YWE may generate text, inscriptions, lore archive entries, testimonies, visions, dreams, and records only after a valid pattern trace and truth scope exist.
 
 ## Required Inputs
 
@@ -34,7 +34,7 @@ VisibilityRule
 ## Lore Fragment Kinds
 
 ```text
-codex_entry
+lore_archive_entry
 location_memory
 branch_record
 npc_testimony

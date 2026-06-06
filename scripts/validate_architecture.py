@@ -171,13 +171,13 @@ def check_governance_files(root):
     """Verify governance files exist."""
     required_files = [
         "yggdrasil-instructions.json",
-        "agentic-coding-policy.json",
+        "repository-contribution-policy.json",
         "guide.md",
         "developer-guide.md",
         "wiki.md",
         "missing_source_documents.md",
         "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
-        "YWE_REPOSITORY_BOOTSTRAP_PROMPT.md",
+        "docs/project/repository_map.md",
         "README.md",
         "LICENSE",
         "CONTRIBUTING.md",

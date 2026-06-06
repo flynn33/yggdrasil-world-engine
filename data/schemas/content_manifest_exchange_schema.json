@@ -1,5 +1,5 @@
 {
-  "schema_id": "ywe.content_manifest_handoff.v1",
+  "schema_id": "ywe.content_manifest_exchange.v1",
   "schema_version": "0.1.0",
   "status": "draft_for_phase_12_implementation",
   "authority": {
@@ -8,9 +8,9 @@
     "foundation": "ASH Cosmological Model",
     "resilience_component": "ASH Pattern System"
   },
-  "purpose": "Handoff packet from Phase 12 to downstream feature engines.",
+  "purpose": "Exchange packet from Phase 12 content generation to downstream feature engines.",
   "required_fields": [
-    "handoff_id",
+    "exchange_id",
     "candidate_refs",
     "target_engine",
     "required_downstream_contracts",
@@ -21,12 +21,12 @@
   "optional_fields": [
     "quest_reward_resolver_ref",
     "npc_engine_ref",
-    "lore_codex_ref",
+    "lore_record_ref",
     "myth_engine_ref",
     "prophecy_engine_ref"
   ],
   "forbidden": [
-    "handoff_without_target_engine"
+    "exchange_without_target_engine"
   ],
   "validation_notes": [
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",

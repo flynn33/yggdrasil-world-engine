@@ -23,17 +23,17 @@
     {
       "name": "cosmic_pattern_snapshot",
       "type": "CosmicPatternSnapshot",
-      "description": "CosmicPatternSnapshot required by ASH remediation contract."
+      "description": "CosmicPatternSnapshot required by ASH generation contract."
     },
     {
       "name": "diagnostic_envelope",
       "type": "DiagnosticEnvelope",
-      "description": "DiagnosticEnvelope required by ASH remediation contract."
+      "description": "DiagnosticEnvelope required by ASH generation contract."
     },
     {
       "name": "generation_plan",
       "type": "GenerationPlan",
-      "description": "GenerationPlan required by ASH remediation contract."
+      "description": "GenerationPlan required by ASH generation contract."
     }
   ],
   "outputs": [
@@ -50,17 +50,17 @@
     {
       "name": "npc_manifest",
       "type": "NPCManifest",
-      "description": "NPCManifest emitted under ASH remediation contract."
+      "description": "NPCManifest emitted under ASH generation contract."
     },
     {
       "name": "worldstate_delta_packet",
       "type": "WorldstateDeltaPacket",
-      "description": "WorldstateDeltaPacket emitted under ASH remediation contract."
+      "description": "WorldstateDeltaPacket emitted under ASH generation contract."
     },
     {
       "name": "faction_topology_state",
       "type": "FactionTopologyState",
-      "description": "FactionTopologyState emitted under ASH remediation contract."
+      "description": "FactionTopologyState emitted under ASH generation contract."
     }
   ],
   "methods": [
@@ -137,7 +137,7 @@
     "GenerationPlan is required before any materialized output.",
     "source_ash_refs, diagnostic_ref, and generation_plan_ref must remain traceable."
   ],
-  "ash_remediation_contract": {
+  "ash_alignment_contract": {
     "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
     "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",
     "required_inputs": [

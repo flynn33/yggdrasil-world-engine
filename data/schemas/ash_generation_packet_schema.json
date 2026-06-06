@@ -27,7 +27,7 @@
     "worldstate_delta_refs",
     "quest_chain_manifest_refs",
     "npc_manifest_refs",
-    "codex_record_refs",
+    "lore_archive_record_refs",
     "myth_record_refs",
     "ash_state_snapshot_ref",
     "canonical_codeword_trace_ref"
@@ -188,7 +188,7 @@
     },
     "YWEInterpretationPacket": {
       "schema_ref": "ywe_interpretation_packet_schema.json",
-      "role": "Binds ASH-derived output to YWE domain interpretation and feature-engine handoff.",
+      "role": "Binds ASH-derived output to YWE domain interpretation and feature-engine exchange.",
       "required": [
         "packet_type",
         "version",
@@ -373,7 +373,7 @@
         "location_mutation_delta_refs",
         "future_generation_bias_update_ref",
         "npc_memory_delta_refs",
-        "codex_record_refs",
+        "lore_archive_record_refs",
         "myth_record_refs",
         "authority_boundary",
         "ash_provenance"
@@ -414,12 +414,12 @@
       ],
       "boundary": "NPC memory changes cannot promote claims into shared world truth without worldstate evidence."
     },
-    "CodexRecord": {
+    "LoreArchiveRecord": {
       "schema_ref": "quest_npc_lore_generation_schema.json",
       "role": "Stores layered lore with explicit visibility scope and truth boundary.",
       "required": [
         "record_type",
-        "codex_record_id",
+        "lore_archive_record_id",
         "layer",
         "worldstate_delta_packet_ref",
         "visibility_scope",
@@ -462,10 +462,10 @@
       ],
       "boundary": "Social distribution may influence future generation context but cannot authorize factual truth changes."
     },
-    "SystemManifestHandoff": {
+    "SystemManifestExchange": {
       "role": "Transfers a YWEInterpretationPacket to an allowed feature engine before host materialization.",
       "required": [
-        "handoff_id",
+        "exchange_id",
         "requested_manifest_kind",
         "source_ash_refs",
         "diagnostic_ref",
@@ -523,8 +523,8 @@
     "YWEGenerationContextPacket",
     "ASHUpstreamGenerationEnvelope",
     "YWEInterpretationPacket",
-    "SystemManifestHandoff",
-    "QuestChainManifest|NPCManifest|CodexRecord|MythRecord|SocialDistributionDelta",
+    "SystemManifestExchange",
+    "QuestChainManifest|NPCManifest|LoreArchiveRecord|MythRecord|SocialDistributionDelta",
     "HostAdapterMaterializationRequest",
     "MaterializationResult",
     "ResolutionPayload",

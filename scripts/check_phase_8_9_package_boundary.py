@@ -88,16 +88,19 @@ def main() -> int:
         if marker and marker not in marker_text:
             errors.append(f"missing deferred marker in {rel}")
 
-    handoff = root / "docs/handoff/YWE_PHASE_9_RUNTIME_COSMOLOGY_BRANCH_REALITY_HANDOFF_2026-05-17.md"
-    handoff_text = ""
-    if handoff.is_file():
+    status_doc = root / "docs/project/repository_status.md"
+    status_text = ""
+    if status_doc.is_file():
         try:
-            handoff_text = handoff.read_text(encoding=TEXT_ENCODING)
+            status_text = status_doc.read_text(encoding=TEXT_ENCODING)
         except OSError as exc:
-            errors.append(f"unable to read Phase 9 handoff: {exc}")
-    for expected in contract.get("required_handoff_markers", []):
-        if expected not in handoff_text:
-            errors.append(f"Phase 9 handoff missing marker: {expected}")
+            errors.append(f"unable to read repository status: {exc}")
+    else:
+        errors.append("missing repository status file: docs/project/repository_status.md")
+
+    for expected in contract.get("required_status_markers", []):
+        if expected not in status_text:
+            errors.append(f"repository status missing marker: {expected}")
 
     if errors:
         print("Phase 8-9 package boundary check failed:")
