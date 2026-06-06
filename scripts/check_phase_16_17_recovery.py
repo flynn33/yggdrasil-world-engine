@@ -76,6 +76,7 @@ REQUIRED_CHECK_SPECS = [
 
 PHASE_17_EXAMPLE_DIR = "examples/ravenfall_gate/phase_17"
 RECOVERY_EXAMPLE_DIR = "examples/phase_16_17_recovery"
+WOLF_COMPANION_TRACE_SCHEMA = "data/schemas/wolf_companion_trace_schema.json"
 
 ALLOWED_PLATFORM_CONTEXT = (
     "forbidden",
@@ -137,6 +138,25 @@ def non_empty(value) -> bool:
     if isinstance(value, (str, list, dict, tuple, set)):
         return bool(value)
     return True
+
+
+def schema_enum_values(root: Path, rel_path: str, property_name: str, errors: list[str]) -> set[str]:
+    schema = load_json_checked(root, rel_path, errors)
+    if not isinstance(schema, dict):
+        return set()
+    properties = schema.get("properties", {})
+    if not isinstance(properties, dict):
+        errors.append(f"Schema has invalid properties object: {rel_path}")
+        return set()
+    property_schema = properties.get(property_name, {})
+    if not isinstance(property_schema, dict):
+        errors.append(f"Schema property is missing or invalid: {rel_path}#{property_name}")
+        return set()
+    values = property_schema.get("enum", [])
+    if not isinstance(values, list) or not all(isinstance(value, str) for value in values):
+        errors.append(f"Schema property enum is missing or invalid: {rel_path}#{property_name}")
+        return set()
+    return set(values)
 
 
 def check_phase_16_artifacts(root: Path, errors: list[str]) -> None:
@@ -251,6 +271,8 @@ def check_wolf_canon(root: Path, errors: list[str]) -> None:
     saw_quest_assist = False
     saw_combat_assist = False
     saw_vision_signal = False
+    wolf_presence_values = schema_enum_values(root, WOLF_COMPANION_TRACE_SCHEMA, "white_wolf_presence", errors)
+    dark_wolf_presence_values = schema_enum_values(root, WOLF_COMPANION_TRACE_SCHEMA, "dark_wolf_presence", errors)
     for mode in REQUIRED_PATHS:
         rel_path = f"{PHASE_17_EXAMPLE_DIR}/wolf_companion_trace_{mode}_oath.example.json"
         trace = load_json_checked(root, rel_path, errors)
@@ -259,8 +281,8 @@ def check_wolf_canon(root: Path, errors: list[str]) -> None:
 
         white_presence = trace.get("white_wolf_presence")
         dark_presence = trace.get("dark_wolf_presence")
-        require(white_presence in {"physical_companion", "vision_signal"}, f"Invalid White Wolf presence for {mode}: {white_presence}", errors)
-        require(dark_presence in {"physical_companion", "vision_signal"}, f"Invalid Dark Wolf presence for {mode}: {dark_presence}", errors)
+        require(white_presence in wolf_presence_values, f"Invalid White Wolf presence for {mode}: {white_presence}", errors)
+        require(dark_presence in dark_wolf_presence_values, f"Invalid Dark Wolf presence for {mode}: {dark_presence}", errors)
         require(trace.get("permanent_death") is False, f"Wolf trace allows permanent death for {mode}", errors)
         require(trace.get("morality_model") is False, f"Wolf trace models wolves as morality for {mode}", errors)
         require(isinstance(trace.get("decoherence_events"), list), f"Wolf trace must record decoherence events as a list for {mode}", errors)
@@ -284,7 +306,7 @@ def check_platform_boundary(root: Path, errors: list[str]) -> None:
     spec = load_json_checked(root, "data/validation/check_no_platform_specific_runtime_phase_16_17.spec.json", errors)
     if not isinstance(spec, dict):
         return
-    forbidden = [item for item in spec.get("forbidden_patterns", []) if isinstance(item, str)]
+    forbidden = [(item, item.lower()) for item in spec.get("forbidden_patterns", []) if isinstance(item, str)]
     scan_files = {root / rel_path for rel_path in PHASE_16_DOCS + PHASE_17_DOCS}
     scan_files.update((root / "docs" / "architecture").glob("*vertical_slice*.md"))
     scan_files.update((root / "docs" / "architecture").glob("*ravenfall_gate*.md"))
@@ -305,8 +327,9 @@ def check_platform_boundary(root: Path, errors: list[str]) -> None:
             continue
         rel_path = path.relative_to(root).as_posix()
         for line_number, line in enumerate(read_text(path).splitlines(), start=1):
-            for term in forbidden:
-                if term in line and not platform_line_allowed(line):
+            lowered_line = line.lower()
+            for term, lowered_term in forbidden:
+                if lowered_term in lowered_line and not platform_line_allowed(line):
                     errors.append(f"Platform runtime term outside allowed context: {rel_path}:{line_number}: {term}")
 
 
@@ -326,26 +349,65 @@ def check_package_root_files_not_copied(root: Path, errors: list[str]) -> None:
                 errors.append(f"Package-root instruction file must not be copied: {rel_path}")
 
 
-def git_status_lines(root: Path) -> list[str]:
+def git_ref_exists(root: Path, ref: str) -> bool:
     try:
         result = subprocess.run(
-            ["git", "-C", str(root), "status", "--porcelain=v1"],
+            ["git", "-C", str(root), "rev-parse", "--verify", "--quiet", ref],
             check=False,
             capture_output=True,
             text=True,
         )
     except OSError:
+        return False
+    return result.returncode == 0
+
+
+def default_base_ref(root: Path) -> str:
+    for ref in ("origin/main", "origin/master", "main", "master"):
+        if git_ref_exists(root, ref):
+            return ref
+    return ""
+
+
+def parse_name_status(line: str) -> tuple[str, str] | None:
+    parts = line.split("\t")
+    if len(parts) < 2:
+        return None
+    return parts[0], parts[-1]
+
+
+def git_diff_name_status(root: Path, base_ref: str, errors: list[str]) -> list[tuple[str, str]]:
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(root), "diff", "--name-status", "--find-renames", f"{base_ref}..HEAD"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except OSError as exc:
+        errors.append(f"Unable to inspect Phase 16/17 recovery git diff: {exc}")
         return []
     if result.returncode != 0:
+        errors.append(f"Unable to inspect Phase 16/17 recovery git diff against {base_ref}: {result.stderr.strip()}")
         return []
-    return [line for line in result.stdout.splitlines() if line]
+    paths: list[tuple[str, str]] = []
+    for line in result.stdout.splitlines():
+        parsed = parse_name_status(line)
+        if parsed is not None:
+            paths.append(parsed)
+    return paths
 
 
 def check_non_destructive_diff(root: Path, errors: list[str]) -> None:
-    for line in git_status_lines(root):
-        status = line[:2]
-        if "D" in status:
-            errors.append(f"Phase 16/17 recovery must not delete files: {line[3:]}")
+    base_ref = default_base_ref(root)
+    if not base_ref:
+        errors.append("Unable to resolve git base ref for Phase 16/17 recovery diff checks.")
+        return
+    for status, rel_path in git_diff_name_status(root, base_ref, errors):
+        if status.startswith("D"):
+            errors.append(f"Phase 16/17 recovery must not delete files: {rel_path}")
+        if status.startswith("R"):
+            errors.append(f"Phase 16/17 recovery must not rename files: {rel_path}")
 
 
 def main(argv: list[str]) -> int:
