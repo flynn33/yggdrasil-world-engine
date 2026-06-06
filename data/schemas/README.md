@@ -25,8 +25,8 @@ Meaningful generation uses this packet spine:
 YWEGenerationContextPacket
   -> ASHUpstreamGenerationEnvelope
   -> YWEInterpretationPacket
-  -> SystemManifestHandoff
-  -> QuestChainManifest / NPCManifest / CodexRecord / MythRecord
+  -> SystemManifestExchange
+  -> QuestChainManifest / NPCManifest / LoreArchiveRecord / MythRecord
   -> WorldstateDeltaPacket or DiagnosticNoOp
   -> LocationMutationState or LocationMutationDelta
   -> FutureGenerationBiasUpdate
@@ -45,7 +45,7 @@ generation bias update foundation.
 | `ash_generation_packet_schema.json` | Shared ASH/YWE packet index and provenance spine |
 | `ash_upstream_generation_envelope_schema.json` | ASH provenance envelope for meaningful generated output |
 | `ywe_generation_context_packet_schema.json` | Player, realm, perception, and worldstate context submitted into ASH-governed generation |
-| `ywe_interpretation_packet_schema.json` | YWE interpretation of ASH-derived output for feature-engine handoff |
+| `ywe_interpretation_packet_schema.json` | YWE interpretation of ASH-derived output for feature-engine exchange |
 | `player_action_trace_schema.json` | Phase 10 player action trace records that provide provenance for meaningful player-state updates |
 | `player_runtime_state_schema.json` | Phase 10 player runtime state spine for branch, identity, resonance, memory, world links, and ASH Pattern System resilience references |
 | `player_agent_state_schema.json` | Phase 10 branch-bound player agency state |
@@ -79,8 +79,8 @@ generation bias update foundation.
 | `lore_generation_context_schema.json` | Phase 12 context packet for lore generation from pattern trace, source events, truth scope, and visibility rules |
 | `generated_lore_fragment_schema.json` | Phase 12 generated lore fragment contract with pattern trace, source context, truth scope, visibility, and provenance |
 | `content_generation_provenance_schema.json` | Phase 12 shared provenance spine for generated content candidates |
-| `content_generation_candidate_schema.json` | Phase 12 generic candidate handoff contract for quest, NPC, and lore outputs |
-| `content_manifest_handoff_schema.json` | Phase 12 downstream handoff contract for generated content manifests |
+| `content_generation_candidate_schema.json` | Phase 12 generic candidate exchange contract for quest, NPC, and lore outputs |
+| `content_manifest_exchange_schema.json` | Phase 12 downstream exchange contract for generated content manifests |
 | `quest_npc_lore_linkage_schema.json` | Phase 12 linkage contract connecting quests, NPC candidates, lore fragments, and shared provenance |
 | `engine_authority_stack_schema.json` | Source-truth authority stack contract for ASH Model, YWE, ASH Pattern System component, and game layer |
 | `engine_cosmology_framework_schema.json` | Engine cosmology framework contract for structural layers and extensible implementation lore |
@@ -109,7 +109,7 @@ generation bias update foundation.
 | `ability_cooldown_and_recovery_schema.json` | Phase 14 cooldown, containment, and recovery reference record |
 | `ability_risk_profile_schema.json` | Phase 14 risk profile record |
 | `ability_catalog_entry_schema.json` | Phase 14 catalog entry for supported use modes and source categories |
-| `ability_state_update_packet_schema.json` | Phase 14 AbilityStateUpdatePacket for downstream state mutation handoff |
+| `ability_state_update_packet_schema.json` | Phase 14 AbilityStateUpdatePacket for downstream state mutation exchange |
 | `ability_loadout_state_schema.json` | Phase 14 player ability loadout state record |
 
 ## Required Provenance

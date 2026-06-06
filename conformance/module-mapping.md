@@ -8,7 +8,7 @@ state, orbit, transition, diagnostic, and plan records.
 Package rebuild surfaces map as follows:
 
 - `core/narrative_engine/` owns character creation/progression, NPC synthesis,
-  worldstate delta routing, and codex/lore generation contracts.
+  worldstate delta routing, and lore archive generation contracts.
 - `modules/quest_engine/` owns `QuestChainManifest`, `StageManifest`,
   `CompletionModeSet`, and `QuestResolutionPayload`.
 - `modules/creature_engine/` owns `CreatureManifest`, `EncounterPlan`, and

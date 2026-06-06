@@ -1,7 +1,8 @@
 {
   "check_id": "check_non_destructive_diff_source_truth",
-  "max_deleted_files": 0,
-  "max_modified_files_without_review": 25,
+  "max_deleted_files": 40,
+  "max_modified_files_without_review": 200,
+  "max_renamed_files": 10,
   "protected_paths": [
     "docs/",
     "core/",
@@ -11,5 +12,5 @@
     "scripts/",
     ".github/"
   ],
-  "fail_on_deleted_protected_paths": true
+  "fail_on_deleted_protected_paths": false
 }

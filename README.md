@@ -139,7 +139,7 @@ full-state codewords. State transitions use `x' = x XOR c`.
 Meaningful YWE generation now carries `CosmicPatternSnapshot`,
 `DiagnosticEnvelope`, and `GenerationPlan` provenance through the character,
 creature, quest, NPC, artifact, myth, prophecy, perception, faction,
-worldstate, codex/lore, and realm contracts. Host adapters may materialize from
+worldstate, lore archive, and realm contracts. Host adapters may materialize from
 those plans, but they must not author ASH truth or YWE domain truth.
 
 ### ASH Upstream Generation Authority
@@ -205,7 +205,7 @@ flowchart TB
   Realm["Realm Engine<br/>realm law, attunement, boundaries"]
   ASH["ASH Pattern Engine<br/>F2^9 state, 16 codewords, XOR transitions"]
   Upstream["ASH Upstream Authority<br/>diagnostics, codeword traces, generation plans"]
-  Narrative["Narrative Engine<br/>NPCs, worldstate, memory, codex/lore"]
+  Narrative["Narrative Engine<br/>NPCs, worldstate, memory, lore archive"]
   Perception["Perception Engine<br/>player-specific overlays"]
   Quest["Quest Engine"]
   Myth["Myth Engine"]
@@ -330,7 +330,7 @@ yggdrasil-world-engine/
 1. Clone this repository.
 2. Review the master specification: `docs/master_specification/YWE_MASTER_SPECIFICATION.md`
 3. Review the GitHub wiki: `https://github.com/flynn33/yggdrasil-world-engine/wiki`
-4. Review the repository bootstrap baseline: `YWE_REPOSITORY_BOOTSTRAP_PROMPT.md`
+4. Review the repository bootstrap baseline: `docs/project/repository_map.md`
 5. Review the architecture documentation: `docs/architecture/`
 6. Load data schemas and canonical rule artifacts into your host engine.
 7. Implement core engines following interface definitions in `core/*/engine_interface.json`.
@@ -374,11 +374,11 @@ Forsetti governs the engine through **five design principles**:
 | [developer-guide.md](developer-guide.md) | Extended guide for engine implementors |
 | [wiki.md](wiki.md) | Comprehensive reference and playbook |
 | [docs/master_specification/YWE_MASTER_SPECIFICATION.md](docs/master_specification/YWE_MASTER_SPECIFICATION.md) | Foundational engine-first design baseline |
-| [YWE_REPOSITORY_BOOTSTRAP_PROMPT.md](YWE_REPOSITORY_BOOTSTRAP_PROMPT.md) | Repository-structure baseline paired with the master spec |
+| [docs/project/repository_map.md](docs/project/repository_map.md) | Repository-structure baseline paired with the master spec |
 | [missing_source_documents.md](missing_source_documents.md) | Canonical artifact inventory and pending placeholder tracking |
 | [docs/architecture/authored_override_and_tooling_notes.md](docs/architecture/authored_override_and_tooling_notes.md) | Canonical authored override and tooling guardrail rules |
 | [docs/architecture/realm_truth_boundary_contract.md](docs/architecture/realm_truth_boundary_contract.md) | Canonical boundary contract for realm truth vs interpretive layers |
-| [agentic-coding-policy.json](agentic-coding-policy.json) | Machine-readable contributor automation constraints |
+| [repository-contribution-policy.json](repository-contribution-policy.json) | Machine-readable contributor automation constraints |
 | [yggdrasil-instructions.json](yggdrasil-instructions.json) | Machine-readable architecture rules |
 
 ### Canonical Rule Artifacts
@@ -405,7 +405,7 @@ Forsetti governs the engine through **five design principles**:
 | [docs/architecture/ash_upstream_authority_contract.md](docs/architecture/ash_upstream_authority_contract.md) | Canonical upstream mathematical and generative authority contract |
 | [data/schemas/ash_upstream_generation_envelope_schema.json](data/schemas/ash_upstream_generation_envelope_schema.json) | Shared `ASHUpstreamGenerationEnvelope` provenance schema |
 | [data/schemas/ywe_generation_context_packet_schema.json](data/schemas/ywe_generation_context_packet_schema.json) | Shared `YWEGenerationContextPacket` schema for player/world context |
-| [data/schemas/ywe_interpretation_packet_schema.json](data/schemas/ywe_interpretation_packet_schema.json) | Shared `YWEInterpretationPacket` schema for feature-engine handoff |
+| [data/schemas/ywe_interpretation_packet_schema.json](data/schemas/ywe_interpretation_packet_schema.json) | Shared `YWEInterpretationPacket` schema for feature-engine exchange |
 | [data/validation/ash_generation_gate_contract.json](data/validation/ash_generation_gate_contract.json) | Required package gate contract for rebuilt generation systems |
 | [data/validation/ash_upstream_authority_gate_contract.json](data/validation/ash_upstream_authority_gate_contract.json) | Dedicated upstream authority gate contract |
 | [conformance/acceptance-judgment.md](conformance/acceptance-judgment.md) | Current conformance judgment for the code-agnostic repository scope |

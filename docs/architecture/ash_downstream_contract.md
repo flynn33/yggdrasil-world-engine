@@ -156,7 +156,7 @@ For meaningful generated content, the required shared packet spine is:
 YWEGenerationContextPacket
   -> ASHUpstreamGenerationEnvelope
   -> YWEInterpretationPacket
-  -> SystemManifestHandoff
+  -> SystemManifestExchange
   -> WorldstateDeltaPacket or DiagnosticNoOp
   -> FutureGenerationBiasUpdate
 ```

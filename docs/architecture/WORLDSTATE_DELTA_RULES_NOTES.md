@@ -21,7 +21,7 @@ Placeholder for Worldstate Delta Rules Notes until finalized source content is s
 - implementation guidance for future authors
 
 ## Dependencies
-- handoff package
+- transition package
 - governance and invariant guardrails
 
 ## Invariants

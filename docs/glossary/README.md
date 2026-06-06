@@ -25,7 +25,7 @@ value.
 | Authority stack | ASH Model of the Universe, Yggdrasil World Engine, ASH Pattern System component, Where Ravens Wait |
 | ASH math | `F2^9`, codeword, XOR transition, orbit, diagnostic envelope |
 | Runtime truth | base ontology, leaf branch reality, player runtime state, worldstate delta |
-| Generation | generation context packet, interpretation packet, manifest handoff, future generation bias |
+| Generation | generation context packet, interpretation packet, manifest exchange, future generation bias |
 | Lore and perception | Twin Wolf, realm attunement, bloodline resonance, myth variant, perception overlay |
 | Ability engine | unlock pressure, ability source provenance, ability state update, ability consequence packet |
 

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "schema_id": "ywe.schemas.codex_lore_record",
+  "schema_id": "ywe.schemas.lore_archive_record",
   "version": "1.0.0",
   "canonical_phase_12_schema_ref": "data/schemas/quest_npc_lore_generation_schema.json",
   "required_inputs": [
@@ -12,14 +12,14 @@
     "YWEGenerationContextPacket"
   ],
   "required_outputs": [
-    "CodexRecord",
+    "LoreArchiveRecord",
     "LoreRecordVariant",
     "VisibilityScope"
   ],
   "records": {
-    "CodexRecord": {
+    "LoreArchiveRecord": {
       "required": [
-        "codex_record_id",
+        "lore_archive_record_id",
         "cosmic_pattern_snapshot_ref",
         "diagnostic_ref",
         "generation_plan_ref",
@@ -39,7 +39,7 @@
     "LoreRecordVariant": {
       "required": [
         "lore_variant_id",
-        "codex_record_ref",
+        "lore_archive_record_ref",
         "layer",
         "source_claim_type",
         "visibility_scope_ref"

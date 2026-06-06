@@ -41,7 +41,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ## [2.0.18] — 2026-05-22
 
 ### Changes
-- Merge pull request #56 from flynn33/codex/pr51-phase12-review-remediation
+- Merge pull request #56 with Phase 12 review alignment updates
 - Precompute Phase 12 forbidden-pattern regexes
 - Harden Phase 12 forbidden-language guardrail
 
@@ -140,10 +140,10 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ## [2.0.11] — 2026-05-17
 
 ### Added
-- Add Phase 8-9 boundary remediation
+- Add Phase 8-9 boundary alignment
 
 ### Fixed
-- Merge pull request #48 from flynn33/audit-fix/phase-8-9-remediation
+- Merge pull request #48 from flynn33/audit-fix/phase-8-9-alignment
 
 
 ---
@@ -203,7 +203,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 
 ### Changes
 - Merge pull request #42 from flynn33/phase/phase-8-baseline-freeze
-- docs: freeze post-remediation baseline
+- docs: freeze post-alignment baseline
 
 ---
 
@@ -231,7 +231,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ## [2.0.3] — 2026-05-16
 
 ### Changes
-- Merge pull request #39 from flynn33/remediation/cosmology-authority-stack
+- Merge pull request #39 from flynn33/alignment/cosmology-authority-stack
 - docs: align cosmology authority stack
 
 ---

@@ -33,7 +33,7 @@ jobs:
       - name: Verify governance files exist
         run: |
           MISSING=0
-          for f in yggdrasil-instructions.json agentic-coding-policy.json guide.md developer-guide.md wiki.md; do
+          for f in yggdrasil-instructions.json repository-contribution-policy.json guide.md developer-guide.md wiki.md; do
             if [ ! -f "$f" ]; then
               echo "MISSING: $f"
               MISSING=$((MISSING + 1))
@@ -109,33 +109,33 @@ jobs:
           if len(invariants) < 10:
               errors.append(f"yggdrasil-instructions.json: expected >= 10 cosmological invariants, got {len(invariants)}")
 
-          # Validate agentic-coding-policy.json
-          with open("agentic-coding-policy.json") as f:
+          # Validate repository-contribution-policy.json
+          with open("repository-contribution-policy.json") as f:
               policy = json.load(f)
 
           if policy.get("owner") != "Jim Daley":
-              errors.append("agentic-coding-policy.json: owner must be 'Jim Daley'")
+              errors.append("repository-contribution-policy.json: owner must be 'Jim Daley'")
 
           if "Forsetti" not in policy.get("framework", ""):
-              errors.append("agentic-coding-policy.json: must reference Forsetti Framework")
+              errors.append("repository-contribution-policy.json: must reference Forsetti Framework")
 
           rules = policy.get("mandatory_rules", [])
           if len(rules) < 10:
-              errors.append(f"agentic-coding-policy.json: expected >= 10 mandatory rules, got {len(rules)}")
+              errors.append(f"repository-contribution-policy.json: expected >= 10 mandatory rules, got {len(rules)}")
 
           # Check critical rules exist
           rule_ids = [r.get("id") for r in rules]
           critical_rules = ["R001", "R002", "R003", "R004", "R011"]
           for rid in critical_rules:
               if rid not in rule_ids:
-                  errors.append(f"agentic-coding-policy.json: missing critical rule {rid}")
+                  errors.append(f"repository-contribution-policy.json: missing critical rule {rid}")
 
           # Check operating modes
           modes = policy.get("operating_modes", {})
           if "spec_repo_mode" not in modes:
-              errors.append("agentic-coding-policy.json: missing spec_repo_mode")
+              errors.append("repository-contribution-policy.json: missing spec_repo_mode")
           if "engine_repo_mode" not in modes:
-              errors.append("agentic-coding-policy.json: missing engine_repo_mode")
+              errors.append("repository-contribution-policy.json: missing engine_repo_mode")
 
           # Report
           if errors:

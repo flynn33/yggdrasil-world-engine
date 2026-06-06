@@ -21,7 +21,7 @@ Placeholder for Quest Chain Template Notes until finalized source content is sup
 - implementation guidance for future authors
 
 ## Dependencies
-- handoff package
+- transition package
 - governance and invariant guardrails
 
 ## Invariants

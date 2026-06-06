@@ -1,18 +1,18 @@
 {
-  "artifact_type": "agentic_coding_policy",
+  "artifact_type": "repository_contribution_policy",
   "artifact_version": "2.0.21",
   "owner": "Jim Daley",
   "project": "Yggdrasil World Engine",
   "framework": "Forsetti Framework v0.1.0",
-  "description": "Machine-readable instructions for coding agents working with the Yggdrasil World Engine",
+  "description": "Machine-readable contribution rules for implementation, documentation, validation, and release work in the Yggdrasil World Engine repository",
   "operating_modes": {
     "spec_repo_mode": {
-      "description": "Working on main branch (engine-agnostic specification)",
+      "description": "Working on the main branch code-agnostic specification",
       "applies_when": "branch == main",
       "goal": "Preserve specification integrity and ASH cosmological compliance"
     },
     "engine_repo_mode": {
-      "description": "Working on engine implementation branch",
+      "description": "Working on an engine implementation branch",
       "applies_when": "branch != main",
       "goal": "Implement specification using native engine idioms"
     }
@@ -57,7 +57,7 @@
     {
       "id": "R007",
       "severity": "MUST",
-      "rule": "Run scripts/run_checks.sh before marking work complete",
+      "rule": "Run scripts/run_checks.sh and the repository contribution policy checks before marking work complete",
       "applies_to": ["spec_repo_mode", "engine_repo_mode"]
     },
     {
@@ -95,7 +95,8 @@
     "spec_repo_mode": [
       "bash scripts/run_checks.sh",
       "python scripts/validate_architecture.py",
-      "python scripts/validate_schemas.py"
+      "python scripts/validate_schemas.py",
+      "python scripts/check_repository_attribution_policy.py"
     ],
     "engine_repo_mode": [
       "bash scripts/run_checks.sh"

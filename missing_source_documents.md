@@ -12,9 +12,9 @@ This inventory tracks three distinct repo-truth states:
 - Blocking missing artifacts: `0`
 - Intentional placeholder-backed artifacts: `14`
 - Master spec authority artifact: present at `docs/master_specification/YWE_MASTER_SPECIFICATION.md`
-- Bootstrap prompt authority artifact: present at `YWE_REPOSITORY_BOOTSTRAP_PROMPT.md`
-- ASH/ASP core math rebuild overlay: present on `ash-remediation`
-- Cosmology authority remediation overlay: present as current authority-stack clarification; separate from placeholder-backed gameplay artifacts
+- Repository map: present at `docs/project/repository_map.md`
+- ASH/ASP core math rebuild: present in the current repository state
+- Cosmology authority alignment overlay: present as current authority-stack clarification; separate from placeholder-backed gameplay artifacts
 
 ## Resolved Canonical Artifacts
 
@@ -38,7 +38,7 @@ This inventory tracks three distinct repo-truth states:
 
 ## ASH/ASP Core Math Rebuild Artifacts
 
-These artifacts are present as the active remediation overlay. They do not
+These artifacts are present as the active alignment surface. They do not
 replace the restored planning documents; they extend the existing engine,
 schema, and rule surfaces with the required ASH math provenance.
 

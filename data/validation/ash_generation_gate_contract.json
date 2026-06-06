@@ -158,13 +158,13 @@
       ]
     },
     {
-      "system": "codex_and_lore_generation",
+      "system": "lore_archive_generation",
       "paths": [
-        "core/narrative_engine/codex_lore_generation_rules.yaml",
-        "data/schemas/codex_lore_record_schema.json"
+        "core/narrative_engine/lore_archive_generation_rules.yaml",
+        "data/schemas/lore_archive_record_schema.json"
       ],
       "required_markers": [
-        "CodexRecord",
+        "LoreArchiveRecord",
         "LoreRecordVariant",
         "VisibilityScope",
         "locked_canon"
@@ -205,7 +205,7 @@
     "YWEGenerationContextPacket",
     "ASHUpstreamGenerationEnvelope",
     "YWEInterpretationPacket",
-    "SystemManifestHandoff",
+    "SystemManifestExchange",
     "HostAdapterMaterializationRequest",
     "MaterializationResult",
     "ResolutionPayload",

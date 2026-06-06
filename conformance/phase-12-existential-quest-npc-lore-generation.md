@@ -14,7 +14,7 @@ existence potential
 pattern vector
 truth scope
 rejection policy
-downstream handoff target
+downstream exchange target
 ```
 
 ## Non-Conformant Cases

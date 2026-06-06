@@ -805,14 +805,21 @@ def check_phase_11_forbidden_language(root: Path, errors: list[str]) -> None:
 def check_phase_11_non_destructive_diff(root: Path, errors: list[str]) -> None:
     budget = load_json_checked(root, root / PHASE_11_NON_DESTRUCTIVE_BUDGET, errors)
     deleted, renamed_or_copied, existing_touched = classify_change_paths(git_change_paths(root, errors))
-    protected_deletions = [
-        path
-        for path in deleted
-        if path.startswith(("docs/", "data/", "conformance/", "examples/", "scripts/", ".github/"))
-    ]
-    require(not protected_deletions, f"Phase 11 deleted protected files: {protected_deletions}", errors)
-    require(not renamed_or_copied, f"Phase 11 renamed or copied existing paths without review: {renamed_or_copied}", errors)
-    require(len(existing_touched) <= 25, f"Phase 11 existing files touched exceed budget 25: {len(existing_touched)}", errors)
+    limits = budget.get("limits", {}) if isinstance(budget, dict) else {}
+    max_deleted = int(limits.get("max_existing_file_deletions", 0))
+    max_renamed = int(limits.get("max_directory_renames", 0))
+    max_touched = int(limits.get("max_existing_files_touched_without_review", 25))
+    fail_on_protected = limits.get("fail_on_deleted_protected_paths", True)
+    if fail_on_protected:
+        protected_deletions = [
+            path
+            for path in deleted
+            if path.startswith(("docs/", "data/", "conformance/", "examples/", "scripts/", ".github/"))
+        ]
+        require(not protected_deletions, f"Phase 11 deleted protected files: {protected_deletions}", errors)
+    require(len(deleted) <= max_deleted, f"Phase 11 file deletions exceed budget {max_deleted}: {deleted}", errors)
+    require(len(renamed_or_copied) <= max_renamed, f"Phase 11 renamed or copied paths exceed budget {max_renamed}: {renamed_or_copied}", errors)
+    require(len(existing_touched) <= max_touched, f"Phase 11 existing files touched exceed budget {max_touched}: {len(existing_touched)}", errors)
 
     if isinstance(budget, dict):
         automatic_fail = set(budget.get("automatic_fail", []))

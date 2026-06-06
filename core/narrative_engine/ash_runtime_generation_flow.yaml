@@ -11,7 +11,7 @@ meta:
   package_basis:
     - YWE_ASP_CORE_MATH_REBUILD_PACKAGE
     - YWE_ASH_UPSTREAM_AUTHORITY_PACKAGE
-    - YWE_COSMOLOGY_AUTHORITY_REPOSITORY_REMEDIATION_PACKAGE
+    - cosmology_authority_contracts
 
 global_invariants:
   - ASH Cosmological Model is the upstream foundation for YWE and its systems.
@@ -83,13 +83,13 @@ canonical_flow:
       - YWEInterpretationPacket
 
   - step: 5
-    name: handoff_to_feature_engine
+    name: exchange_to_feature_engine
     inputs:
       - YWEInterpretationPacket
       - YWEGenerationContextPacket
       - ASHUpstreamGenerationEnvelope
     emits:
-      - SystemManifestHandoff
+      - SystemManifestExchange
     allowed_feature_engines:
       - realm_engine
       - quest_engine
@@ -107,7 +107,7 @@ canonical_flow:
   - step: 6
     name: emit_system_manifest
     inputs:
-      - SystemManifestHandoff
+      - SystemManifestExchange
     emits:
       - QuestGenerationRequest
       - WorldRegionManifest
@@ -117,7 +117,7 @@ canonical_flow:
       - ArtifactManifest
       - MythRecord
       - MythSeedCandidate
-      - CodexRecord
+      - LoreArchiveRecord
       - SocialDistributionDelta
       - ProphecyRecord
       - PerceptionStateRecord
@@ -190,7 +190,7 @@ canonical_flow:
     inputs:
       - QuestChainManifest
       - NPCManifest
-      - CodexRecord
+      - LoreArchiveRecord
       - MythRecord
       - QuestResolutionPayload
       - FutureGenerationBiasUpdate
@@ -232,7 +232,7 @@ named_flows:
       - QuestChainManifest
       - QuestResolutionPayload
       - NPCMemoryDelta
-      - CodexRecord
+      - LoreArchiveRecord
       - MythSeedCandidate
       - LocationMutationDelta
     rule: Quest templates are interpretive containers and do not generate symbolic truth independently.
@@ -258,7 +258,7 @@ named_flows:
       - YWEGenerationContextPacket
       - ASHUpstreamGenerationEnvelope
       - YWEInterpretationPacket
-      - CodexRecord
+      - LoreArchiveRecord
       - MythSeedCandidate
       - MythRecord
       - SocialDistributionDelta

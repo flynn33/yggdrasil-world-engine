@@ -1,6 +1,6 @@
 # Phase 17 Acceptance Report Requirements
 
-Generate a completed handoff report after implementation.
+Generate a completed completion report after implementation.
 
 ## Required sections
 

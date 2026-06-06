@@ -14,7 +14,7 @@ canonical_ash_derivation:
   independent_random_generation_allowed: false
 
 required_outputs:
-  - CodexRecord
+  - LoreArchiveRecord
   - LoreRecordVariant
   - VisibilityScope
 
@@ -49,12 +49,12 @@ authority_boundary:
   myth_may_rewrite_factual_world_truth: false
 
 validation_rules:
-  - codex_records_require_cosmic_pattern_snapshot_ref
-  - codex_records_require_worldstate_delta_packet_ref
-  - codex_records_require_diagnostic_ref
-  - codex_records_require_generation_plan_ref
-  - codex_records_require_ywe_generation_context_packet_ref
-  - codex_records_preserve_source_ash_refs
+  - lore_archive_records_require_cosmic_pattern_snapshot_ref
+  - lore_archive_records_require_worldstate_delta_packet_ref
+  - lore_archive_records_require_diagnostic_ref
+  - lore_archive_records_require_generation_plan_ref
+  - lore_archive_records_require_ywe_generation_context_packet_ref
+  - lore_archive_records_preserve_source_ash_refs
   - lore_record_variants_must_declare_truth_layer
   - visibility_scope_must_protect_endgame_truths
   - generated_lore_must_not_overwrite_locked_canon

@@ -32,7 +32,7 @@ PHASE_16_DOCS = [
     "docs/game/vertical_slices/ravenfall_gate/12_reward_resolution_plan.md",
     "docs/game/vertical_slices/ravenfall_gate/13_playtest_scenarios.md",
     "docs/game/vertical_slices/ravenfall_gate/14_vertical_slice_acceptance_matrix.md",
-    "docs/game/vertical_slices/ravenfall_gate/15_phase_16_handoff_notes.md",
+    "docs/game/vertical_slices/ravenfall_gate/15_phase_16_transition_notes.md",
 ]
 
 PHASE_17_DOCS = [

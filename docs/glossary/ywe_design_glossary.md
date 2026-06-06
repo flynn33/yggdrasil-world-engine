@@ -17,7 +17,7 @@ Its job is to reduce terminology drift across:
 - runtime orchestration
 - consequence persistence
 - myth and prophecy systems
-- repo handoff and implementation planning
+- repo exchange and implementation planning
 - future cross-thread continuation
 
 This is a **design glossary**, not a lore encyclopedia and not a code dictionary.
@@ -302,7 +302,7 @@ The active symbolic and narrative forces pulling the player toward self-discover
 Identity pressure is central to YWE because player identity is revealed through play, not fully preselected.
 
 ## Implementation Mapping
-A handoff-oriented mapping from conceptual design artifacts to repository locations, schemas, contracts, or engine ownership zones.
+A exchange-oriented mapping from conceptual design artifacts to repository locations, schemas, contracts, or engine ownership zones.
 
 Implementation mapping helps coding agents avoid misplacing system logic.
 
@@ -649,5 +649,5 @@ This glossary should now be treated as a reference layer for:
 - repo documentation normalization
 - naming cleanup
 - schema naming consistency
-- coding-agent handoff clarification
+- coding-agent exchange clarification
 - future thread continuation

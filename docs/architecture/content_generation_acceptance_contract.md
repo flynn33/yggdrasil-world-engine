@@ -15,7 +15,7 @@ has existence potential classification
 has pattern vector reference
 has truth scope
 has rejection policy
-has downstream handoff target
+has downstream exchange target
 ```
 
 ## Reject If

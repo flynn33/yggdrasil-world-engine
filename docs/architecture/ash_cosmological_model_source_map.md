@@ -11,7 +11,7 @@ This document maps ASH Cosmological Model source concepts into the Yggdrasil Wor
 
 | Source concept | Repository interpretation |
 |---|---|
-| Where Ravens Wait Universal Codex | Source-family authority for game/narrative cosmology concepts that must be separated from engine contracts. |
+| Where Ravens Wait Universal Lore Archive | Source-family authority for game/narrative cosmology concepts that must be separated from engine contracts. |
 | Nine planes of existence | Base world ontology and plane-pressure interpretation. |
 | Axioms A1-A6 | Existence validity, quest pressure, branch event, and narrative coherence rules. |
 | Existence potential Φ | Stability/coherence/collapse pressure scoring model. |

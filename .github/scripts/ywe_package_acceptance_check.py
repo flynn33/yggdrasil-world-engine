@@ -47,8 +47,8 @@ SCAN_ROOT_FILES = {
     "wiki.md",
     "SOURCE_AVAILABILITY_MANIFEST.md",
     "missing_source_documents.md",
-    "YWE_REPOSITORY_BOOTSTRAP_PROMPT.md",
-    "YWE_CODEX_GITHUB_BUILD_PACKAGE.md",
+    "docs/project/repository_map.md",
+    "docs/project/repository_map.md",
 }
 VALIDATOR_CONTEXTS = {
     ".github/scripts/semantic_integrity_check.py",
@@ -264,7 +264,7 @@ def test_all_engine_interfaces_carry_ash_math_contract(root: Path, sink: Failure
         }
     )
     required_markers = [
-        "ash_remediation_contract",
+        "ash_alignment_contract",
         "F2^9",
         "CosmicPatternSnapshot",
         "DiagnosticEnvelope",
@@ -493,7 +493,7 @@ def test_runtime_generation_flow_has_upstream_spine(root: Path, sink: FailureSin
             "YWEGenerationContextPacket",
             "ASHUpstreamGenerationEnvelope",
             "YWEInterpretationPacket",
-            "SystemManifestHandoff",
+            "SystemManifestExchange",
             "HostAdapterMaterializationRequest",
             "MaterializationResult",
             "ResolutionPayload",
@@ -538,7 +538,7 @@ def test_upstream_packet_spine_records_exist(root: Path, sink: FailureSink) -> N
         "PlayerActionTrace",
         "ExplorationFrontierRequest",
         "FutureGenerationBiasUpdate",
-        "SystemManifestHandoff",
+        "SystemManifestExchange",
     ):
         sink.require(record_name in records, f"Missing upstream packet record: {record_name}")
     spine = packet_schema.get("shared_generation_spine", [])
@@ -547,7 +547,7 @@ def test_upstream_packet_spine_records_exist(root: Path, sink: FailureSink) -> N
         "YWEGenerationContextPacket",
         "ASHUpstreamGenerationEnvelope",
         "YWEInterpretationPacket",
-        "SystemManifestHandoff",
+        "SystemManifestExchange",
         "HostAdapterMaterializationRequest",
         "MaterializationResult",
         "ResolutionPayload",

@@ -3,9 +3,9 @@
 
 Checks:
   (a) Non-canonical math-language reintroduction in active canonical files.
-  (b) Handoff-template authority inversion.
+  (b) Transition-template authority inversion.
   (c) Contradictory status language across README.md, docs/03-design-roadmap.md,
-      and governance/ai-coding-handoff.md.
+      and governance/ai-coding-exchange.md.
 
 See governance/github-agents-governance.md for policy.
 """
@@ -31,7 +31,7 @@ ACTIVE_CANONICAL_ROOTS = [
     "specs",
     "docs",
     "governance",
-    "handoff-templates",
+    "implementation-templates",
 ]
 
 NON_CANONICAL_MATH_PATTERNS = [
@@ -43,16 +43,16 @@ NON_CANONICAL_MATH_PATTERNS = [
 ]
 
 HANDOFF_AUTHORITY_PATTERNS = [
-    re.compile(r"handoff\s+templates?\s+(?:are|is)\s+(?:the\s+)?(?:semantic\s+)?authority", re.IGNORECASE),
-    re.compile(r"handoff\s+templates?\s+override\w*\s+canonical", re.IGNORECASE),
-    re.compile(r"handoff\s+templates?\s+define\w*\s+canonical", re.IGNORECASE),
-    re.compile(r"handoff\s+templates?\s+own\w*\s+canonical", re.IGNORECASE),
+    re.compile(r"exchange\s+templates?\s+(?:are|is)\s+(?:the\s+)?(?:semantic\s+)?authority", re.IGNORECASE),
+    re.compile(r"exchange\s+templates?\s+override\w*\s+canonical", re.IGNORECASE),
+    re.compile(r"exchange\s+templates?\s+define\w*\s+canonical", re.IGNORECASE),
+    re.compile(r"exchange\s+templates?\s+own\w*\s+canonical", re.IGNORECASE),
 ]
 
 STATUS_FILES = [
     "README.md",
     "docs/03-design-roadmap.md",
-    "governance/ai-coding-handoff.md",
+    "governance/ai-coding-exchange.md",
 ]
 
 BROAD_COMPLETION = re.compile(r"\ball\s+specification\s+layers\s+are\s+complete\b", re.IGNORECASE)
@@ -95,7 +95,7 @@ def check_non_canonical_math(root: Path) -> list[tuple[str, int, str]]:
     return violations
 
 
-def check_handoff_authority(root: Path) -> list[tuple[str, int, str]]:
+def check_exchange_authority(root: Path) -> list[tuple[str, int, str]]:
     violations = []
     for path in walk_files(root):
         if path.suffix.lower() != ".md":
@@ -109,7 +109,7 @@ def check_handoff_authority(root: Path) -> list[tuple[str, int, str]]:
                     violations.append((
                         rel(path, root),
                         line_no,
-                        "Handoff templates must not claim canonical authority",
+                        "Transition templates must not claim canonical authority",
                     ))
                     break
     return violations
@@ -156,11 +156,11 @@ def main() -> int:
         gh_error(*e)
     all_errors.extend(math_errors)
 
-    handoff_errors = check_handoff_authority(root)
-    for e in handoff_errors:
+    exchange_errors = check_exchange_authority(root)
+    for e in exchange_errors:
         print(f"  - {e[0]}:{e[1]}: {e[2]}")
         gh_error(*e)
-    all_errors.extend(handoff_errors)
+    all_errors.extend(exchange_errors)
 
     status_errors = check_status_contradiction(root)
     for e in status_errors:

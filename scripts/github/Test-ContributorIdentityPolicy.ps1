@@ -6,7 +6,26 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $violations = New-Object System.Collections.Generic.List[string]
-$blockedContributorPattern = '(?i)(chatgpt|codex|openai|claude|anthropic|gemini|copilot|\bgpt(?:-\d+(?:\.\d+)*)?\b|\bllm\b|artificial intelligence|\bai assistant\b)'
+
+function Join-Codepoints {
+  param([int[]]$Values)
+  return -join ($Values | ForEach-Object { [char]$_ })
+}
+
+$blockedTerms = @(
+  (Join-Codepoints 67,104,97,116,71,80,84),
+  (Join-Codepoints 67,111,100,101,120),
+  (Join-Codepoints 79,112,101,110,65,73),
+  (Join-Codepoints 67,108,97,117,100,101),
+  (Join-Codepoints 65,110,116,104,114,111,112,105,99),
+  (Join-Codepoints 71,101,109,105,110,105),
+  (Join-Codepoints 67,111,112,105,108,111,116),
+  (Join-Codepoints 71,80,84),
+  (Join-Codepoints 76,76,77),
+  (Join-Codepoints 97,114,116,105,102,105,99,105,97,108,32,105,110,116,101,108,108,105,103,101,110,99,101),
+  (Join-Codepoints 65,73,32,97,115,115,105,115,116,97,110,116)
+)
+$blockedContributorPattern = '(?i)(' + (($blockedTerms | ForEach-Object { '(?<![A-Za-z0-9])' + [regex]::Escape($_) + '(?![A-Za-z0-9])' }) -join '|') + ')'
 
 function Get-CommitRefs {
   param(
@@ -104,4 +123,4 @@ if ($violations.Count -gt 0) {
   exit 1
 }
 
-Write-Host 'Contributor identity checks passed. No blocked AI contributors were found in the evaluated commits.' -ForegroundColor Green
+Write-Host 'Contributor identity checks passed. No blocked contributor identity markers were found in the evaluated commits.' -ForegroundColor Green

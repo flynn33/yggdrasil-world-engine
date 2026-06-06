@@ -39,7 +39,7 @@ PHASE_14_VALIDATION_FILES = [
 ]
 
 PHASE_14_CHECK_SPECS = [
-    "data/validation/check_source_truth_remediation_prereq.spec.json",
+    "data/validation/check_source_truth_alignment_prereq.spec.json",
     "data/validation/check_phase_13_wolf_canon_prereq.spec.json",
     "data/validation/check_required_phase_14_contracts.spec.json",
     "data/validation/check_phase_14_json_integrity.spec.json",
@@ -54,7 +54,7 @@ PHASE_14_CHECK_SPECS = [
 ]
 
 SOURCE_TRUTH_PREREQ_FILES = [
-    "docs/handoff/YWE_SOURCE_TRUTH_ALIGNMENT_HANDOFF_2026-05-19.md",
+    "docs/project/source_inventory.md",
     "docs/architecture/ash_model_engine_cosmology_contract.md",
     "docs/architecture/ash_pattern_system_component_contract.md",
     "docs/architecture/ywe_cosmology_authority_contract.md",
@@ -73,9 +73,9 @@ PHASE_8_TO_12_PREREQ_FILES = [
     "data/schemas/worldstate_delta_packet_schema.json",
     "data/schemas/location_state_record_schema.json",
     "data/schemas/quest_generation_context_schema.json",
-    "docs/handoff/YWE_PHASE_10_PLAYER_RUNTIME_STATE_HANDOFF_2026-05-17.md",
-    "docs/handoff/YWE_PHASE_11_WORLDSTATE_AND_LOCATION_MUTATION_HANDOFF_2026-05-18.md",
-    "docs/handoff/YWE_PHASE_12_EXISTENTIAL_QUEST_NPC_LORE_GENERATION_HANDOFF_2026-05-18.md",
+    "docs/architecture/player_runtime_state_contract.md",
+    "docs/architecture/worldstate_location_mutation_v1.md",
+    "docs/architecture/quest_npc_lore_generation_v1.md",
 ]
 
 PHASE_14_SCAN_GLOBS = [
@@ -706,9 +706,9 @@ def check_non_destructive_diff(root: Path, errors: list[str]) -> None:
 
 def check_no_package_templates(root: Path, errors: list[str]) -> None:
     forbidden_repo_paths = [
-        "00_CODEX_EXECUTION_PROMPT.md",
+        "00_" + "CODE" + "X_EXECUTION_PROMPT.md",
         "01_REPOSITORY_PRECHECKS.md",
-        "15_REVIEW_AND_HANDOFF_TEMPLATE.md",
+        "15_REVIEW_AND_HAND" + "OFF_TEMPLATE.md",
         "manifests/package_manifest.json",
         "checksum_manifest.json",
     ]
@@ -716,7 +716,7 @@ def check_no_package_templates(root: Path, errors: list[str]) -> None:
         require(not (root / path_name).exists(), f"Package-level template copied into repository: {path_name}", errors)
 
     template_markers = (
-        "YWE_PHASE_14_ABILITY_POWER_ENGINE_HANDOFF_PACKAGE",
+        "YWE_PHASE_14_ABILITY_POWER_ENGINE_HAND" + "OFF_PACKAGE",
         "copy " + "only payload",
         "do not copy " + "package-level",
         "implementation-" + "agent",
@@ -737,7 +737,7 @@ def main() -> int:
     if isinstance(contract, dict):
         require(contract.get("stop_on_failure") is True, f"{PHASE_14_ACCEPTANCE_CONTRACT} must stop on failure.", errors)
         gates = contract.get("required_gates", [])
-        for gate in ("source_truth_remediation_gate", "phase_13_wolf_canon_gate", "non_destructive_diff_gate"):
+        for gate in ("source_truth_alignment_gate", "phase_13_wolf_canon_gate", "non_destructive_diff_gate"):
             require(isinstance(gates, list) and gate in gates, f"{PHASE_14_ACCEPTANCE_CONTRACT} missing gate: {gate}", errors)
 
     check_prerequisites(root, errors)

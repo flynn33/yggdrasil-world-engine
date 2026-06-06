@@ -61,7 +61,7 @@ ASH Pattern System Component
   consequence, scoped location mutation, worldstate commit records,
   diagnostic no-ops, and future generation bias routing.
 - `quest_npc_lore_generation_v1.md`: Phase 12 contract for ASH-derived quest
-  chains, NPC manifests, NPC memory deltas, codex lore records, myth records,
+  chains, NPC manifests, NPC memory deltas, lore archive records, myth records,
   and social distribution deltas.
 
 ACCEPTED - Phase 10 through Phase 12 entries are active contracts layered on

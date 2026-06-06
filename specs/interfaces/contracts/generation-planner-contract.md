@@ -47,7 +47,7 @@ The `GenerationPlanner` module is the single authority for:
 - The planner must not emit artifacts — that is the exclusive responsibility of `ArtifactEmitter`
 - If a side effect occurs during planning, the implementation is nonconformant
 
-### Explicit handoff boundary
+### Explicit exchange boundary
 - The plan is the complete interface between `GenerationPlanner` and `ArtifactEmitter`
 - `ArtifactEmitter` must be able to materialize entirely from the plan without calling back to the planner
 - The planner must not retain state that the emitter needs but the plan does not contain
@@ -64,7 +64,7 @@ The `GenerationPlanner` module is the single authority for:
 2. Planning produces no side effects
 3. The plan is self-contained — the emitter needs only the plan
 4. The plan is inspectable before materialization
-5. The handoff boundary is complete — nothing is left implicit
+5. The exchange boundary is complete — nothing is left implicit
 
 ## Prohibited shortcuts
 

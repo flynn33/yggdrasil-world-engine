@@ -21,7 +21,7 @@ Placeholder for Player Origin Arc Notes until finalized source content is suppli
 - implementation guidance for future authors
 
 ## Dependencies
-- handoff package
+- transition package
 - governance and invariant guardrails
 
 ## Invariants

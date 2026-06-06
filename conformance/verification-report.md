@@ -21,7 +21,7 @@ host materialization, `WorldstateDeltaPacket` or `DiagnosticNoOp`, and
 `FutureGenerationBiasUpdate`.
 
 This verification pass is additive against the restored planning baseline.
-Existing engine, rule, data, and handoff files retain their original design
+Existing engine, rule, data, and exchange files retain their original design
 content and now carry ASH provenance and materialization contract extensions.
 
 ## Package Acceptance Surface
@@ -78,7 +78,7 @@ for:
    `ASHUpstreamGenerationEnvelope`, `YWEInterpretationPacket`,
    `WorldstateDeltaPacket`, and `FutureGenerationBiasUpdate`.
 3. Packet schema coverage for `PlayerActionTrace`,
-   `ExplorationFrontierRequest`, and `SystemManifestHandoff`.
+   `ExplorationFrontierRequest`, and `SystemManifestExchange`.
 4. Gate-contract provenance fields: `source_ash_refs`, `diagnostic_ref`,
    `generation_plan_ref`, `requested_manifest_kind`, and
    `worldstate_delta_policy`.

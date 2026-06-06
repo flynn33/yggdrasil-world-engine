@@ -16,7 +16,7 @@ RuntimeGenerationTrigger
   -> YWEGenerationContextPacket
   -> ASHUpstreamGenerationEnvelope
   -> YWEInterpretationPacket
-  -> SystemManifestHandoff
+  -> SystemManifestExchange
   -> HostAdapterMaterializationRequest
   -> MaterializationResult
   -> ResolutionPayload

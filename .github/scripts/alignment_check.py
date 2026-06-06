@@ -77,7 +77,7 @@ HIERARCHY_SCAN_GLOBS = [
     "README.md",
     "docs",
     "governance",
-    "handoff-templates",
+    "implementation-templates",
 ]
 
 DOWNSTREAM_REFERENT = r"(aeostara|downstream\s+repo\w*|implementation\s+repo\w*|a\s+downstream|any\s+downstream|the\s+downstream)"

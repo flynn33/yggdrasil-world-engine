@@ -92,7 +92,7 @@ $rules = @(
     RequiredDocs = @(
       'docs/architecture/ywe_canonical_data_domains.md',
       'docs/master_specification/YWE_MASTER_SPECIFICATION.md',
-      'YWE_REPOSITORY_BOOTSTRAP_PROMPT.md',
+      'docs/project/repository_map.md',
       'docs/glossary/ywe_design_glossary.md',
       'data/faction_topology/README.md',
       'data/module_capability/README.md',
@@ -153,7 +153,7 @@ $rules = @(
       'docs/architecture/PROPHECY_ACTIVATION_RULES_NOTES.md',
       'docs/architecture/QUEST_CHAIN_TEMPLATE_NOTES.md',
       'docs/architecture/YWE_Myth_Emergence_Design.md',
-      'docs/handoff/repo_implementation_mapping.md'
+      'docs/project/repository_map.md'
     )
   },
   [pscustomobject]@{

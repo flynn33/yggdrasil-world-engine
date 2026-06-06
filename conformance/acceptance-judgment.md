@@ -7,14 +7,14 @@ Date: 2026-05-10
 ## Scope
 
 This judgment applies to the code-agnostic YWE repository after the
-`YWE_ASP_CORE_MATH_REBUILD_PACKAGE` remediation pass. The judgment covers
+`YWE_ASP_CORE_MATH_REBUILD_PACKAGE` alignment pass. The judgment covers
 schemas, interfaces, validation contracts, data records, diagnostics,
 materialization boundaries, and conformance evidence. Runtime host
 implementations must still run these checks before claiming adapter-level
 conformance.
 
-The `YWE_ASH_UPSTREAM_AUTHORITY_PACKAGE` is an accepted post-remediation
-architecture extension. It does not reopen ASH remediation; it records ASH as
+The `YWE_ASH_UPSTREAM_AUTHORITY_PACKAGE` is an accepted post-alignment
+architecture extension. It does not reopen ASH alignment; it records ASH as
 the upstream mathematical and generative authority for YWE and defines the
 shared generation packet spine.
 
@@ -29,7 +29,7 @@ resilience, conformance, and update/patch stability.
 ## Authority
 
 `YWE_ASP_CORE_MATH_REBUILD_PACKAGE` is the active controlling package for the
-ASH/ASP core-math rebuild and supersedes older remediation or build packages
+ASH/ASP core-math rebuild and supersedes older alignment or build packages
 where they conflict.
 
 `YWE_ASH_UPSTREAM_AUTHORITY_PACKAGE` is the active architecture extension

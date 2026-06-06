@@ -6,7 +6,7 @@ phase_name: Quest, NPC, and Lore Generation
 
 meta:
   system: quest_npc_lore_generation_rules
-  purpose: Defines how ASH-derived generation requests become quest chains, NPC manifests, NPC memory deltas, codex lore records, myth records, and social distribution deltas without rewriting ASH math, base ontology, or accepted worldstate.
+  purpose: Defines how ASH-derived generation requests become quest chains, NPC manifests, NPC memory deltas, lore archive records, myth records, and social distribution deltas without rewriting ASH math, base ontology, or accepted worldstate.
   schema: data/schemas/quest_npc_lore_generation_schema.json
   upstream_dependencies:
     - PlayerRuntimeState
@@ -27,9 +27,9 @@ global_invariants:
   - Quest, NPC, and lore generation must preserve source_ash_refs, diagnostic_ref, generation_plan_ref, ywe_generation_context_packet_ref, and worldstate_delta_refs.
   - Quest chains must expose multiple lawful completion modes through CompletionModeSet.minimum_mode_count >= 2.
   - NPC claims, faction claims, and myth variants are interpretive layers unless backed by an accepted WorldstateDeltaPacket.
-  - Codex lore may record locked canon, worldstate occurrence, myth variant, faction claim, NPC claim, or perception overlay layers, but generated lore may not overwrite locked canon.
+  - Lore archive may record locked canon, worldstate occurrence, myth variant, faction claim, NPC claim, or perception overlay layers, but generated lore may not overwrite locked canon.
   - MythRecord is retrospective interpretation of worldstate-backed consequence and may not rewrite factual world truth.
-  - Host adapters may materialize approved manifests but may not author QuestChainManifest, NPCManifest, CodexRecord, MythRecord, or SocialDistributionDelta truth.
+  - Host adapters may materialize approved manifests but may not author QuestChainManifest, NPCManifest, LoreArchiveRecord, MythRecord, or SocialDistributionDelta truth.
 
 ash_asp_core_math_rebuild_addendum:
   authority: YWE_ASP_CORE_MATH_REBUILD_PACKAGE
@@ -79,7 +79,7 @@ pipeline:
       - ASHUpstreamGenerationEnvelope
       - YWEInterpretationPacket
     emits:
-      - SystemManifestHandoff
+      - SystemManifestExchange
     forbidden:
       - independent_random_quest_template
       - npc_without_pattern_provenance
@@ -88,12 +88,12 @@ pipeline:
   - step: 3
     name: emit_phase_12_manifest
     inputs:
-      - SystemManifestHandoff
+      - SystemManifestExchange
       - YWEInterpretationPacket
     emits:
       - QuestChainManifest
       - NPCManifest
-      - CodexRecord
+      - LoreArchiveRecord
       - MythSeedCandidate
       - MythRecord
       - SocialDistributionDelta
@@ -109,7 +109,7 @@ pipeline:
     inputs:
       - QuestChainManifest
       - NPCManifest
-      - CodexRecord
+      - LoreArchiveRecord
       - MythRecord
       - player_choice
     emits:
@@ -147,7 +147,7 @@ quest_generation_rules:
       - location_mutation_delta_refs
       - future_generation_bias_update_ref
       - npc_memory_delta_refs
-      - codex_record_refs
+      - lore_archive_record_refs
       - myth_record_refs
 
 npc_generation_rules:
@@ -177,7 +177,7 @@ npc_generation_rules:
 
 lore_generation_rules:
   required_records:
-    - CodexRecord
+    - LoreArchiveRecord
     - LoreRecordVariant
     - VisibilityScope
   allowed_layers:
@@ -238,7 +238,7 @@ rejection_cases:
   - npc_manifest_without_truth_function
   - npc_memory_delta_without_resolution_payload
   - npc_claim_promoted_to_shared_world_truth_without_worldstate_delta_packet_ref
-  - codex_record_overwrites_locked_canon
+  - lore_archive_record_overwrites_locked_canon
   - lore_variant_treats_myth_or_faction_claim_as_factual_substrate
   - myth_record_rewrites_factual_world_truth
   - social_distribution_delta_without_worldstate_delta_packet_ref
@@ -255,7 +255,7 @@ validation_markers:
   - RelationshipVector
   - TruthFunction
   - PersistenceState
-  - CodexRecord
+  - LoreArchiveRecord
   - LoreRecordVariant
   - VisibilityScope
   - MythSeedCandidate

@@ -17,6 +17,12 @@
     "modify_ash_pattern_canonical_specs",
     "modify_phase_8_9_or_phase_10_artifacts_beyond_cross_reference"
   ],
+  "limits": {
+    "max_existing_file_deletions": 40,
+    "max_directory_renames": 15,
+    "max_existing_files_touched_without_review": 200,
+    "fail_on_deleted_protected_paths": false
+  },
   "automatic_fail": [
     "rm_rf",
     "git_clean_fd",

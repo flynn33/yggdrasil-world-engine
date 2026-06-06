@@ -41,6 +41,7 @@ Brief description of changes.
 - [ ] `python scripts/check_json_integrity.py` passes
 - [ ] `python scripts/check_required_contracts.py` passes
 - [ ] `python scripts/check_authority_stack.py --config data/validation/repository_drift_guardrail_rules.json` passes
+- [ ] `python scripts/check_repository_attribution_policy.py .` passes
 - [ ] `python scripts/check_non_destructive_diff.py --base origin/main --head HEAD` passes when applicable
 - [ ] No engine-specific code on main branch (if targeting main)
 - [ ] Layer dependencies respected
@@ -61,6 +62,7 @@ python3 scripts/check_player_runtime_state.py .
 python3 scripts/check_worldstate_location_mutation.py .
 python3 scripts/check_quest_npc_lore_generation.py .
 python3 scripts/check_source_truth_alignment.py .
+python3 scripts/check_repository_attribution_policy.py .
 python3 scripts/check_non_destructive_diff.py --base origin/main --head HEAD .
 git diff --check
 ```

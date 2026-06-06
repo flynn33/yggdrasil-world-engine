@@ -2,7 +2,7 @@
 """Downstream Conformance Agent — reusable sentinel for downstream repos.
 
 Validates the six canonical downstream conformance artifacts defined in
-`handoff-templates/common-downstream-handoff-requirements.md`:
+`implementation-templates/common-downstream-exchange-requirements.md`:
 
   1. module mapping
   2. verification report

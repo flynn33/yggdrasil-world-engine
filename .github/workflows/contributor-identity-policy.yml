@@ -1,4 +1,4 @@
-name: No-AI Contributor Agent
+name: Contributor Identity Policy
 
 on:
   push:
@@ -13,8 +13,8 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  enforce-human-contributors:
-    name: Enforce Human Contributors
+  contributor-identity-check:
+    name: Contributor Identity Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -22,9 +22,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Validate commit identities
+      - name: Validate commit identity policy
         shell: bash
         run: |
-          pwsh -NoLogo -NoProfile -File scripts/github/Test-NoAIContributors.ps1 \
+          pwsh -NoLogo -NoProfile -File scripts/github/Test-ContributorIdentityPolicy.ps1 \
             -EventPath "${{ github.event_path }}" \
             -EventName "${{ github.event_name }}"

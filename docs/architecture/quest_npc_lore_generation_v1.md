@@ -9,13 +9,13 @@ Phase 12 Status: active package authority after Phase 11 acceptance.
 ## Purpose
 
 Quest, NPC, and Lore Generation v1 defines the canonical YWE contract for
-ASH-derived quest chains, NPC manifests, NPC memory deltas, codex lore records,
+ASH-derived quest chains, NPC manifests, NPC memory deltas, lore archive records,
 myth records, and social distribution deltas. It sits downstream of Phase 10
 `PlayerRuntimeState` and Phase 11 `WorldstateDeltaPacket`,
 `LocationMutationState`, `LocationMutationDelta`, and
 `FutureGenerationBiasUpdate`.
 
-This phase promotes existing quest, NPC, myth, and codex placeholders into a
+This phase promotes existing quest, NPC, myth, and lore archive placeholders into a
 single auditable generation surface. It does not implement companion behavior,
 abilities, reward resolution, save/load adapters, platform runtime code, or the
 Ravenfall Gate vertical slice.
@@ -60,7 +60,7 @@ throughout this flow.
 |---|---|---|---|
 | Quest generation | `QuestGenerationRequest`, `QuestChainManifest`, `StageManifest`, `CompletionModeSet`, `QuestResolutionPayload` | Quest Engine with Narrative Engine context | Quests are ASH-derived interpretive containers and must expose at least two completion modes |
 | NPC generation | `NPCManifest`, `RelationshipVector`, `TruthFunction`, `PersistenceState`, `NPCMemoryDelta` | Narrative Engine NPC synthesis | NPC beliefs and claims are interpretive unless backed by accepted worldstate |
-| Lore generation | `CodexRecord`, `LoreRecordVariant`, `VisibilityScope` | Narrative Engine codex/lore layer | Lore may record layers but may not overwrite locked canon or endgame truth protection |
+| Lore generation | `LoreArchiveRecord`, `LoreRecordVariant`, `VisibilityScope` | Narrative Engine lore archive layer | Lore may record layers but may not overwrite locked canon or endgame truth protection |
 | Myth generation | `MythSeedCandidate`, `MythRecord`, `MythLine`, `SocialDistributionDelta` | Myth Engine | Myth is retrospective social interpretation and may not rewrite factual world truth |
 
 ## Runtime Workflow
@@ -75,10 +75,10 @@ flowchart TD
   Context["YWEGenerationContextPacket"]
   ASH["ASHUpstreamGenerationEnvelope"]
   Interpret["YWEInterpretationPacket"]
-  Handoff["SystemManifestHandoff"]
+  Transition["SystemManifestExchange"]
   Quest["QuestChainManifest"]
   NPC["NPCManifest"]
-  Lore["CodexRecord"]
+  Lore["LoreArchiveRecord"]
   Myth["MythRecord"]
   Resolution["QuestResolutionPayload"]
   Memory["NPCMemoryDelta"]
@@ -92,11 +92,11 @@ flowchart TD
   Bias --> Context
   Context --> ASH
   ASH --> Interpret
-  Interpret --> Handoff
-  Handoff --> Quest
-  Handoff --> NPC
-  Handoff --> Lore
-  Handoff --> Myth
+  Interpret --> Transition
+  Transition --> Quest
+  Transition --> NPC
+  Transition --> Lore
+  Transition --> Myth
   Quest --> Resolution
   NPC --> Memory
   Myth --> Social
@@ -120,15 +120,15 @@ flowchart LR
   Faction["Faction Claim"]
   NPC["NPC Claim"]
   Perception["Perception Overlay"]
-  Codex["CodexRecord"]
+  Archive["LoreArchiveRecord"]
   Shared["Shared World Truth"]
 
-  Canon --> Codex
-  Delta --> Codex
-  Myth --> Codex
-  Faction --> Codex
-  NPC --> Codex
-  Perception --> Codex
+  Canon --> Archive
+  Delta --> Archive
+  Myth --> Archive
+  Faction --> Archive
+  NPC --> Archive
+  Perception --> Archive
   Delta --> Shared
   Myth -. "cannot rewrite" .-> Shared
   Faction -. "cannot rewrite" .-> Shared
@@ -178,7 +178,7 @@ Allowed completion mode kinds:
    `LocationMutationDelta`, and `FutureGenerationBiasUpdate`.
 5. NPC memory changes require `NPCMemoryDelta` and remain append-only.
 6. NPC and faction claims are claims, not ontology.
-7. Codex records must preserve layer and visibility scope.
+7. Lore archive records must preserve layer and visibility scope.
 8. Myth records are retrospective interpretations of consequences and cannot
    rewrite factual world truth.
 9. Host adapters materialize approved manifests and cannot author Phase 12
@@ -194,7 +194,7 @@ These are hard failures for a conforming implementation:
 - An NPC memory delta lacks a source resolution payload.
 - An NPC, faction, myth, or perception claim is promoted to shared truth
   without `WorldstateDeltaPacket`.
-- A codex record overwrites locked canon.
+- A lore archive record overwrites locked canon.
 - A myth record rewrites factual world truth.
 - A social distribution delta lacks worldstate evidence.
 - A host adapter authors quest, NPC, lore, myth, or social truth.

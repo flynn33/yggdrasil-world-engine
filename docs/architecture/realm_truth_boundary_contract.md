@@ -22,7 +22,7 @@ YWE is not a system where reality is rewritten casually. Meaningful variation em
 
 For repository structure and design-baseline questions, consult
 `docs/master_specification/YWE_MASTER_SPECIFICATION.md` together with
-`YWE_REPOSITORY_BOOTSTRAP_PROMPT.md` before applying the layer precedence below.
+`docs/project/repository_map.md` before applying the layer precedence below.
 
 When two layers appear to conflict, precedence resolves in this order:
 
@@ -257,7 +257,7 @@ All future systems touching truth surfaces must validate:
 The following are hard failures:
 - turning perception overlays into world rewrites
 - letting faction control define reality by assertion alone
-- using prophecy as guaranteed script fulfillment
+- using prophecy as guaranteed script completion
 - using myth as retroactive fact replacement
 - allowing authored content to bypass canonical law without declared authority
 - treating realm behavior as cosmetic flavor text rather than lawful constraint
