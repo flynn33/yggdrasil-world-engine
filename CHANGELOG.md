@@ -5,6 +5,15 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.22] — 2026-06-06
+
+### Added
+- Add repository policy hygiene guardrails
+
+
+---
+
+
 ## [2.0.21] — 2026-06-06
 
 ### Added
