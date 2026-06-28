@@ -7,8 +7,8 @@ Current baseline: `v2.0.16`
 ## Purpose
 
 Governance documents describe how the repository preserves architecture
-authority, contributor workflow, discussion policy, automation, validation, and
-Forsetti-aligned lifecycle rules.
+authority, contributor workflow, automation, validation, and Forsetti-aligned
+lifecycle rules.
 
 ## Documents
 
@@ -16,7 +16,6 @@ Forsetti-aligned lifecycle rules.
 |---|---|
 | `forsetti_governance_alignment.md` | Maps YWE truth ownership to Forsetti-compatible governance boundaries. |
 | `github_automation_agents.md` | Documents repository workflow automation and validation responsibilities. |
-| `discussion_moderation_policy.md` | Defines GitHub Discussions moderation policy and enforcement scope. |
 
 ## Workflow Entry Points
 
@@ -27,9 +26,6 @@ Forsetti-aligned lifecycle rules.
 | Forsetti compliance | `../../.github/workflows/forsetti-compliance.yml` |
 | Wiki sync | `../../.github/workflows/wiki-sync.yml` |
 | Version and changelog | `../../.github/workflows/versioning.yml` |
-| Discussion routing | `../../.github/workflows/discussion-agents.yml` |
-| Discussion moderation | `../../.github/workflows/discussion-moderation.yml` |
-| Discussion topic seeding | `../../.github/workflows/discussion-topic-seeder.yml` |
 | Contributor identity gate | [`../../.github/workflows/contributor-identity-policy.yml`](../../.github/workflows/contributor-identity-policy.yml) |
 
 ## Governance Rules

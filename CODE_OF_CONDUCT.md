@@ -23,7 +23,7 @@ Examples of unacceptable behavior:
 
 ## Enforcement
 
-Instances of unacceptable behavior may be reported to the project maintainer. All complaints will be reviewed and investigated. The project maintainer reserves the right to remove, edit, or reject contributions and to ban contributors for behavior deemed inappropriate. Project discussions may also be moderated automatically against these standards.
+Instances of unacceptable behavior may be reported to the project maintainer. All complaints will be reviewed and investigated. The project maintainer reserves the right to remove, edit, or reject contributions and to ban contributors for behavior deemed inappropriate.
 
 ## Scope
 

@@ -88,7 +88,7 @@ def git_active_files(root: Path) -> list[Path]:
             stderr=subprocess.PIPE,
         )
         names = [name for name in result.stdout.decode("utf-8").split("\0") if name]
-        return [root / name for name in names]
+        return [root / name for name in names if (root / name).is_file()]
     except (OSError, subprocess.CalledProcessError):
         return [
             path
