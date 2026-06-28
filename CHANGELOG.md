@@ -5,6 +5,21 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ---
 
 
+## [2.0.23] — 2026-06-28
+
+### Changes
+- Merge pull request #65 from flynn33/remove-discussion-board-automation
+- Remove discussion board automation
+- Delete .github/workflows/discussion-topic-seeder.yml
+- Delete .github/discussion_moderation_policy.json
+- Delete .github/discussion_topic_generator.json
+- Delete .github/workflows/discussion-moderation.yml
+- Delete .github/discussion_agents.json
+- Delete .github/workflows/discussion-agents.yml
+
+---
+
+
 ## [2.0.22] — 2026-06-06
 
 ### Added
