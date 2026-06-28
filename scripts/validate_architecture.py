@@ -181,16 +181,6 @@ def check_governance_files(root):
         "README.md",
         "LICENSE",
         "CONTRIBUTING.md",
-        ".github/discussion_agents.json",
-        ".github/discussion_moderation_policy.json",
-        ".github/discussion_topic_generator.json",
-        ".github/workflows/discussion-agents.yml",
-        ".github/workflows/discussion-moderation.yml",
-        ".github/workflows/discussion-topic-seeder.yml",
-        "scripts/github/discussion_agent.py",
-        "scripts/github/discussion_moderation_agent.py",
-        "scripts/github/discussion_topic_agent.py",
-        "docs/governance/discussion_moderation_policy.md",
     ]
     errors = []
     for f in required_files:

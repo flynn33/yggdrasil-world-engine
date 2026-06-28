@@ -7,8 +7,8 @@ Status: active automation governance baseline
 ## Purpose
 
 This document describes the repository automation that validates release
-readiness, documentation hygiene, Forsetti alignment, discussion policy, wiki
-publication, and contributor identity boundaries.
+readiness, documentation hygiene, Forsetti alignment, wiki publication, and
+contributor identity boundaries.
 
 ## Active Workflow Map
 
@@ -20,9 +20,6 @@ publication, and contributor identity boundaries.
 | Branch Guard | `.github/workflows/branch-guard.yml` | Blocks engine-specific runtime code on the sealed specification branch. |
 | Wiki Sync | `.github/workflows/wiki-sync.yml` | Publishes selected repository documentation into the GitHub wiki. |
 | Versioning & Changelog | `.github/workflows/versioning.yml` | Updates `version.txt`, `CHANGELOG.md`, governance file versions, and release tags. |
-| Discussion Agents | `.github/workflows/discussion-agents.yml` | Routes GitHub Discussion events to repository-grounded response handlers. |
-| Discussion Topic Seeder | `.github/workflows/discussion-topic-seeder.yml` | Seeds discussion topics from repository truth on a schedule. |
-| Discussion Moderation | `.github/workflows/discussion-moderation.yml` | Enforces the code of conduct for GitHub Discussions. |
 | Contributor Identity Gate | [`.github/workflows/contributor-identity-policy.yml`](../../.github/workflows/contributor-identity-policy.yml) | Blocks prohibited contributor identity strings in commit metadata. |
 | Stale Issues | `.github/workflows/stale.yml` | Manages stale issue labeling and closure policy. |
 
@@ -89,9 +86,6 @@ that resolves the mismatch without weakening the guardrail.
 
 | Automation | Limit |
 |---|---|
-| Discussion topic seeding | At most `3` new topics per run and `1` per discussion family. |
-| Discussion response retrieval | At most `3` source matches with bounded excerpts. |
-| Discussion moderation scan | At most `75` discussions and `40` comments per scheduled scan. |
 | Non-destructive package budget | Phase 12 and Phase 14 allow `0` deletions, `0` renames, `0` copies, and cap existing-file touches at `25`. |
 
 ## Operating Rules
@@ -99,7 +93,6 @@ that resolves the mismatch without weakening the guardrail.
 - Automation validates repository truth; it does not invent canon.
 - Wiki publication must preserve the current authority stack and accepted phase
   surfaces.
-- Discussion responses must be grounded in tracked repository sources.
 - Contributor identity checks are hard gates for protected branch hygiene.
 - Non-destructive diff checks protect accepted package artifacts from silent
   removal or broad rewrites.
