@@ -61,6 +61,60 @@ The authenticated reference wiki for this repository is available at:
 
 [Yggdrasil World Engine Wiki](https://github.com/flynn33/yggdrasil-world-engine/wiki)
 
+<!-- roadmap-status:start -->
+## Specification Roadmap
+
+YWE is under active development as a platform-neutral specification. Platform
+products remain deferred until the M10 specification gate is accepted.
+
+[View the detailed specification roadmap](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md) · [View machine-readable roadmap status](data/governance/specification_roadmap.json)
+
+### Current status
+
+| Indicator | Current state |
+|---|---|
+| Repository baseline | `v2.0.23` |
+| Current milestone | 🟡 `M0` — Establish one truthful baseline (`in_progress`) |
+| Accepted milestone gates | `0 of 11` |
+| Milestone queue | `1` in progress; `10` planned; `0` blocked; `0` deferred |
+| Release-ready subsystems | `0 of 15` |
+| Specification publication | `unreleased`; `0` GitHub Release objects; `0` agnostic specification releases (verified `2026-07-18`) |
+| Platform product work | ⏸️ `deferred`; authorization requires `M10` acceptance |
+
+Milestone indicators: 🟢 `complete` · 🟡 `in_progress` · ⚪ `planned` · 🔴 `blocked` · ⏸️ `deferred`.
+
+| Milestone | Indicator | Status | Dependencies | Objective |
+|---|:---:|---|---|---|
+| M0 | 🟡 | `in_progress` | None | Establish one truthful baseline |
+| M1 | ⚪ | `planned` | M0 | Normalize canon terminology and governance |
+| M2 | ⚪ | `planned` | M1 | Build the canonical contract and schema foundation |
+| M3 | ⚪ | `planned` | M2 | Complete core deterministic semantics and the reference oracle |
+| M4 | ⚪ | `planned` | M3 | Complete state persistence branching and multiplayer |
+| M5 | ⚪ | `planned` | M3, M4 | Finish narrative and content generation engines |
+| M6 | ⚪ | `planned` | M4, M5 | Close ability companion reward and vertical slice phases |
+| M7 | ⚪ | `planned` | M6 | Build the combat and encounter system foundation |
+| M8 | ⚪ | `planned` | M5, M7 | Complete environment world and society profiles |
+| M9 | ⚪ | `planned` | M3, M4, M5, M6, M7, M8 | Prove agnosticism and whole-system conformance |
+| M10 | ⚪ | `planned` | M9 | Freeze and release the agnostic specification |
+
+### Subsystem maturity snapshot
+
+| Dimension | Complete | Partial | Not started | Not applicable | Deferred | Not ready |
+|---|---:|---:|---:|---:|---:|---:|
+| Historical phase gate | 6 | 3 | 1 | 5 | 0 | 0 |
+| Normative artifact | 1 | 10 | 4 | 0 | 0 | 0 |
+| Executable schema | 0 | 9 | 6 | 0 | 0 | 0 |
+| Conformance tested | 1 | 11 | 3 | 0 | 0 | 0 |
+| Release readiness | 0 | 0 | 0 | 0 | 0 | 15 |
+
+These five maturity dimensions are independent. Accepted gates and maturity
+counts are not an estimated completion percentage: milestones differ in scope
+and effort, and historical foundations do not pass a new gate without its
+required acceptance evidence.
+
+See the roadmap inventories of [completed or verified foundations](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#completed-or-verified-foundations), [material work remaining](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#material-work-remaining), and the [15-subsystem maturity matrix](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#subsystem-maturity-matrix).
+<!-- roadmap-status:end -->
+
 Current repository baseline. Existing `v2.0.x` Git tags, including historical
 annotations that use release wording, identify baselines only; no GitHub Release
 objects or YWE Agnostic Specification releases have been published.
@@ -270,13 +324,13 @@ sequenceDiagram
 
 ---
 
-## Supported Host Engines
+## Future Host Targets
 
-| Engine | Status |
-|--------|--------|
-| Unity | Planned |
-| Unreal | Planned |
-| Godot | Planned |
+| Engine | Eligibility gate |
+|--------|------------------|
+| Unity | M10 specification acceptance |
+| Unreal | M10 specification acceptance |
+| Godot | M10 specification acceptance |
 
 ---
 
@@ -442,8 +496,14 @@ checks locally:
 bash scripts/run_checks.sh --context pull_request --base origin/main
 ```
 
-The development roadmap and current specification maturity are recorded in
-`docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md`.
+Repository validation keeps this README dashboard synchronized with the
+[development roadmap](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md) and
+its machine-readable status authority. To render the canonical dashboard after
+a roadmap status change, run:
+
+```bash
+python3 scripts/check_specification_roadmap.py --print-readme-status
+```
 
 ---
 
