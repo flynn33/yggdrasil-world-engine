@@ -2,7 +2,7 @@
 
 Project: Yggdrasil World Engine
 Status: active governance index
-Current baseline: `v2.0.16`
+Current baseline: `v2.0.23`
 
 ## Purpose
 
@@ -21,9 +21,9 @@ lifecycle rules.
 
 | Workflow | File |
 |---|---|
-| Main validation | `../../.github/workflows/main-ci.yml` |
-| Repository guardrails | `../../.github/workflows/ywe_repository_guardrails.yml` |
-| Forsetti compliance | `../../.github/workflows/forsetti-compliance.yml` |
+| Canonical validation | `../../scripts/validate_repository.py` |
+| Check catalog | `../../data/validation/repository_checks.json` |
+| Main validation workflow | `../../.github/workflows/main-ci.yml` |
 | Wiki sync | `../../.github/workflows/wiki-sync.yml` |
 | Version and changelog | `../../.github/workflows/versioning.yml` |
 | Contributor identity gate | [`../../.github/workflows/contributor-identity-policy.yml`](../../.github/workflows/contributor-identity-policy.yml) |

@@ -1,4 +1,4 @@
-# Yggdrasil World Engine (YWE) v2.0.16
+# Yggdrasil World Engine (YWE) v2.0.23
 
 A cosmology-driven procedural narrative simulation engine built on the ASH Model of the Universe and governed by code-agnostic engine contracts.
 
@@ -57,15 +57,17 @@ contracts.
 YWE functions as a **reality simulation layer**, not a rendering engine.
 Rendering engines (Unity, Unreal, Godot) function as **host environments**.
 
-The authenticated reference wiki for this private repository is available at:
+The authenticated reference wiki for this repository is available at:
 
 [Yggdrasil World Engine Wiki](https://github.com/flynn33/yggdrasil-world-engine/wiki)
 
-Current release baseline:
+Current repository baseline. Existing `v2.0.x` Git tags, including historical
+annotations that use release wording, identify baselines only; no GitHub Release
+objects or YWE Agnostic Specification releases have been published.
 
 | Baseline | Status | Primary Surface |
 |---|---|---|
-| `v2.0.16` | Current accepted repository baseline | Phase 14 Ability / Power Engine and source-truth-aligned authority stack |
+| `v2.0.23` | Current accepted repository baseline | Repository policy hygiene and accepted Phase 16/17 foundation |
 | `v2.0.15` | Authority-drift guardrail baseline | Source-truth and Twin Wolf alignment |
 | `v2.0.14` | Phase 12 accepted baseline | Quest, NPC, lore, myth, and social-distribution generation |
 | `v2.0.13` | Phase 11 accepted baseline | Worldstate and location mutation |
@@ -424,31 +426,24 @@ See `docs/ash_compliance/` for the full compliance rules and checklist.
 
 ## Local Validation
 
-Run the authoritative local suite from the repository root:
+Install the pinned validation dependencies and run the authoritative suite from
+the repository root:
 
 ```bash
+python3 -m pip install -r scripts/requirements.txt
 bash scripts/run_checks.sh
 ```
 
-For PR-equivalent reproduction, add the guardrail checks that GitHub runs as
-standalone steps:
+The check catalog at `data/validation/repository_checks.json` is the single
+source for local and GitHub validation. To reproduce pull-request-only diff
+checks locally:
 
 ```bash
-python3 scripts/check_json_integrity.py .
-python3 scripts/check_required_contracts.py .
-python3 scripts/check_phase_8_9_required_artifacts.py .
-python3 scripts/check_authority_stack.py --config data/validation/repository_drift_guardrail_rules.json .
-python3 scripts/check_branch_reality_guardrail.py .
-python3 scripts/check_phase_9_schema_semantics.py .
-python3 scripts/check_phase_8_9_package_boundary.py .
-python3 scripts/check_player_runtime_state.py .
-python3 scripts/check_worldstate_location_mutation.py .
-python3 scripts/check_quest_npc_lore_generation.py .
-python3 scripts/check_source_truth_alignment.py .
-python3 scripts/check_phase_15a_companion_reward_foundation.py .
-python3 scripts/check_non_destructive_diff.py --base origin/main --head HEAD .
-git diff --check
+bash scripts/run_checks.sh --context pull_request --base origin/main
 ```
+
+The development roadmap and current specification maturity are recorded in
+`docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md`.
 
 ---
 

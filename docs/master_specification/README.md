@@ -2,7 +2,7 @@
 
 Project: Yggdrasil World Engine
 Status: active specification index
-Current baseline: `v2.0.16`
+Current baseline: `v2.0.23`
 
 ## Purpose
 
@@ -35,7 +35,7 @@ adapter boundaries, validation expectations, and implementation principles.
 | Architecture index | `../architecture/README.md` |
 | Authority stack contract | `../architecture/ywe_cosmology_authority_contract.md` |
 | Source-truth alignment | `../project/source_inventory.md` |
-| Phase 14 completion report | `../exchange/YWE_PHASE_14_ABILITY_POWER_ENGINE_COMPLETION_REPORT_2026-05-19.md` |
+| Phase 14 acceptance contract | `../../data/validation/phase_14_acceptance_contract.json` |
 | Validation suite | `../../scripts/run_checks.sh` |
 
 ## Invariants

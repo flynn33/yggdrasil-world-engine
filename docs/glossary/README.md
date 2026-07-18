@@ -2,7 +2,7 @@
 
 Project: Yggdrasil World Engine
 Status: active glossary index
-Current baseline: `v2.0.16`
+Current baseline: `v2.0.23`
 
 ## Purpose
 

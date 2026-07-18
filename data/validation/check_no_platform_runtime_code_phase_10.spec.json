@@ -14,11 +14,18 @@
   ],
   "allowed_exception": "repository_check_scripts_only_if_explicitly_requested",
   "allowed_added_paths": [
+    "scripts/check_governance_contracts.py",
+    "scripts/check_machine_readable_artifacts.py",
+    "scripts/check_platform_agnosticism.py",
+    "scripts/check_specification_roadmap.py",
     "scripts/check_source_truth_alignment.py",
     "scripts/check_ability_power_engine.py",
     "scripts/check_phase_15a_companion_reward_foundation.py",
     "scripts/check_phase_16_17_recovery.py",
-    "scripts/check_repository_attribution_policy.py"
+    "scripts/check_repository_attribution_policy.py",
+    "scripts/update_version_references.py",
+    "scripts/validate_repository.py",
+    "tests/test_validation_foundation.py"
   ],
   "severity": "block"
 }

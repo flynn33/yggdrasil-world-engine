@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/specification_roadmap_schema.json",
+  "title": "YWE Agnostic Specification Roadmap",
+  "type": "object",
+  "required": [
+    "artifact_type",
+    "artifact_version",
+    "repository_baseline",
+    "publication",
+    "current_milestone",
+    "status_vocabulary",
+    "maturity_dimensions",
+    "maturity_status_vocabulary",
+    "platform_gate",
+    "version_sources",
+    "status_sources",
+    "subsystems",
+    "milestones",
+    "definition_of_done",
+    "release_measures"
+  ],
+  "properties": {
+    "artifact_type": {
+      "const": "ywe_agnostic_specification_roadmap"
+    },
+    "artifact_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "repository_baseline": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "publication": {
+      "type": "object",
+      "required": [
+        "state",
+        "published_releases",
+        "github_release_objects",
+        "agnostic_specification_releases",
+        "verified_on",
+        "tag_policy"
+      ],
+      "properties": {
+        "state": {"enum": ["unreleased", "published"]},
+        "published_releases": {"type": "integer", "minimum": 0},
+        "github_release_objects": {"type": "integer", "minimum": 0},
+        "agnostic_specification_releases": {"type": "integer", "minimum": 0},
+        "verified_on": {"type": "string", "format": "date"},
+        "tag_policy": {"type": "string", "minLength": 20}
+      },
+      "additionalProperties": false
+    },
+    "current_milestone": {
+      "type": "string",
+      "pattern": "^M(?:[0-9]|10)$"
+    },
+    "status_vocabulary": {
+      "type": "array",
+      "minItems": 5,
+      "uniqueItems": true,
+      "items": {
+        "enum": ["complete", "in_progress", "planned", "blocked", "deferred"]
+      }
+    },
+    "maturity_dimensions": {
+      "type": "array",
+      "minItems": 5,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "phase_gate_accepted",
+          "normative_artifact_complete",
+          "executable_schema_complete",
+          "conformance_tested",
+          "release_ready"
+        ]
+      }
+    },
+    "maturity_status_vocabulary": {
+      "type": "array",
+      "minItems": 6,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/maturity_status"}
+    },
+    "platform_gate": {
+      "type": "object",
+      "required": ["authorized_after", "status", "platform_work_authorized"],
+      "properties": {
+        "authorized_after": {"const": "M10"},
+        "status": {"enum": ["deferred", "authorized"]},
+        "platform_work_authorized": {"type": "boolean"},
+        "rule": {"type": "string", "minLength": 20}
+      },
+      "additionalProperties": false
+    },
+    "version_sources": {
+      "type": "array",
+      "minItems": 7,
+      "items": {
+        "type": "object",
+        "required": ["path", "kind"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "kind": {"enum": ["plain", "json_field", "text_template"]},
+          "field": {"type": "string"},
+          "template": {"type": "string"}
+        },
+        "allOf": [
+          {
+            "if": {"properties": {"kind": {"const": "json_field"}}},
+            "then": {"required": ["field"]}
+          },
+          {
+            "if": {"properties": {"kind": {"const": "text_template"}}},
+            "then": {"required": ["template"]}
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    "status_sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["path", "required_markers"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "required_markers": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 10}
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "subsystems": {
+      "type": "array",
+      "minItems": 12,
+      "items": {"$ref": "#/$defs/subsystem"}
+    },
+    "milestones": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": {"$ref": "#/$defs/milestone"}
+    },
+    "definition_of_done": {
+      "type": "array",
+      "minItems": 10,
+      "items": {"type": "string", "minLength": 10}
+    },
+    "release_measures": {
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "type": "object",
+        "required": ["id", "target"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^RM-[0-9]{2}$"},
+          "target": {"type": "string", "minLength": 10}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "$defs": {
+    "maturity_status": {
+      "type": "string",
+      "enum": ["complete", "partial", "not_started", "not_applicable", "deferred", "not_ready"]
+    },
+    "subsystem": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "next_milestone",
+        "owner_role",
+        "maturity",
+        "evidence_refs",
+        "open_work"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]+$"},
+        "name": {"type": "string", "minLength": 8},
+        "next_milestone": {"type": "string", "pattern": "^M(?:[0-9]|10)$"},
+        "owner_role": {"type": "string", "minLength": 8},
+        "maturity": {
+          "type": "object",
+          "required": [
+            "phase_gate_accepted",
+            "normative_artifact_complete",
+            "executable_schema_complete",
+            "conformance_tested",
+            "release_ready"
+          ],
+          "properties": {
+            "phase_gate_accepted": {"$ref": "#/$defs/maturity_status"},
+            "normative_artifact_complete": {"$ref": "#/$defs/maturity_status"},
+            "executable_schema_complete": {"$ref": "#/$defs/maturity_status"},
+            "conformance_tested": {"$ref": "#/$defs/maturity_status"},
+            "release_ready": {"$ref": "#/$defs/maturity_status"}
+          },
+          "additionalProperties": false
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 3}
+        },
+        "open_work": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 10}
+        }
+      },
+      "additionalProperties": false
+    },
+    "milestone": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "status",
+        "dependencies",
+        "effort_weeks",
+        "owner_role",
+        "acceptance_evidence",
+        "deliverables",
+        "exit_criteria"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^M(?:[0-9]|10)$"},
+        "title": {"type": "string", "minLength": 8},
+        "status": {"enum": ["complete", "in_progress", "planned", "blocked", "deferred"]},
+        "dependencies": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^M(?:[0-9]|10)$"}
+        },
+        "effort_weeks": {
+          "type": "object",
+          "required": ["minimum", "maximum"],
+          "properties": {
+            "minimum": {"type": "integer", "minimum": 1},
+            "maximum": {"type": "integer", "minimum": 1}
+          },
+          "additionalProperties": false
+        },
+        "owner_role": {"type": "string", "minLength": 8},
+        "acceptance_evidence": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 3}
+        },
+        "deliverables": {
+          "type": "array",
+          "minItems": 3,
+          "items": {"type": "string", "minLength": 10}
+        },
+        "exit_criteria": {
+          "type": "array",
+          "minItems": 2,
+          "items": {"type": "string", "minLength": 10}
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

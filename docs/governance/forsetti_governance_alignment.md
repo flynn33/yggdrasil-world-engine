@@ -6,7 +6,7 @@ Status: framework-aligned governance baseline
 
 ## Purpose
 
-This document defines how YWE stays compatible with the attached Forsetti Framework - Windows branch while remaining code-agnostic on main.
+This document defines how YWE stays compatible with the Forsetti Framework while remaining code-agnostic on main.
 
 ## Forsetti Rules That Bind YWE
 
@@ -36,7 +36,7 @@ This document defines how YWE stays compatible with the attached Forsetti Framew
 ## Branch Boundary
 
 - this repository does not vendor Forsetti implementation files
-- this repository remains MIT-licensed even though the attached Forsetti framework is proprietary
+- this repository remains governed by its proprietary license and does not inherit a host framework license
 - compliance here means architectural compatibility, not code inclusion
 - platform-specific Forsetti host code belongs in later implementation branches or companion repositories
 

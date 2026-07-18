@@ -15,7 +15,7 @@ function Invoke-CheckScript {
 }
 
 if (-not (Test-Path 'VERSION' -PathType Leaf)) {
-  throw 'VERSION file is required for release readiness.'
+  throw 'VERSION file is required for specification publication readiness.'
 }
 
 $version = (Get-Content -Raw 'VERSION').Trim()
@@ -24,16 +24,16 @@ if ($version -notmatch '^\d+\.\d+\.\d+$') {
 }
 
 if (-not (Test-Path 'CHANGELOG.md' -PathType Leaf)) {
-  throw 'CHANGELOG.md is required for release readiness.'
+  throw 'CHANGELOG.md is required for specification publication readiness.'
 }
 
 $changelogContent = Get-Content -Raw 'CHANGELOG.md'
-if ($changelogContent -notmatch "(?m)^## \[$([regex]::Escape($version))\]\s+-\s+\d{4}-\d{2}-\d{2}\s*$") {
+if ($changelogContent -notmatch "(?m)^## \[$([regex]::Escape($version))\]\s+(?:-|—)\s+\d{4}-\d{2}-\d{2}\s*$") {
   throw "CHANGELOG.md must include a heading for version $version."
 }
 
 if (-not (Test-Path '.github/wiki-sync.json' -PathType Leaf)) {
-  throw '.github/wiki-sync.json is required for release readiness.'
+  throw '.github/wiki-sync.json is required for specification publication readiness.'
 }
 
 $wikiConfig = Get-Content -Raw '.github/wiki-sync.json' | ConvertFrom-Json
@@ -42,7 +42,7 @@ if (-not @($wikiConfig.pages).Count) {
 }
 
 if (-not (Test-Path 'missing_source_documents.md' -PathType Leaf)) {
-  throw 'missing_source_documents.md is required for release readiness.'
+  throw 'missing_source_documents.md is required for specification publication readiness.'
 }
 
 Invoke-CheckScript -Name 'Missing source inventory freshness' -Path './scripts/github/Update-MissingSourceDocuments.ps1' -Arguments @('-CheckOnly')
@@ -53,4 +53,4 @@ Invoke-CheckScript -Name 'Docs and glossary validation' -Path './scripts/github/
 Invoke-CheckScript -Name 'Canonical truth-boundary validation' -Path './scripts/github/Test-CanonicalTruthBoundaries.ps1'
 Invoke-CheckScript -Name 'Contributor identity validation' -Path './scripts/github/Test-ContributorIdentityPolicy.ps1'
 
-Write-Host "Release readiness checks passed for version $version." -ForegroundColor Green
+Write-Host "Specification publication-readiness checks passed for baseline $version." -ForegroundColor Green
