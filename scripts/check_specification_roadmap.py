@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+from collections import Counter
 from pathlib import Path
 
 try:
@@ -20,6 +21,15 @@ CHECKS_PATH = "data/validation/repository_checks.json"
 CHECKS_SCHEMA_PATH = "data/schemas/repository_check_manifest_schema.json"
 ROADMAP_DOCUMENT_PATH = "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md"
 DEBT_PATH = "data/validation/schema_quality_baseline.json"
+README_STATUS_START = "<!-- roadmap-status:start -->"
+README_STATUS_END = "<!-- roadmap-status:end -->"
+STATUS_INDICATORS = {
+    "complete": "🟢",
+    "in_progress": "🟡",
+    "planned": "⚪",
+    "blocked": "🔴",
+    "deferred": "⏸️",
+}
 REQUIRED_CHECK_CONTRACTS = [
     ("roadmap_governance", "scripts/check_specification_roadmap.py", ["bootstrap", "status", "governance"]),
     ("machine_readable_artifacts", "scripts/check_machine_readable_artifacts.py", ["syntax", "schema", "machine-readable"]),
@@ -210,15 +220,145 @@ def markdown_bullets(value: str) -> list[str]:
     return bullets
 
 
+def render_readme_status(roadmap: dict) -> str:
+    """Render the README projection of canonical roadmap status."""
+    milestones = roadmap["milestones"]
+    milestone_counts = Counter(item["status"] for item in milestones)
+    current = next(item for item in milestones if item["id"] == roadmap["current_milestone"])
+    subsystems = roadmap["subsystems"]
+    release_ready = sum(
+        item["maturity"]["release_ready"] == "complete" for item in subsystems
+    )
+    publication = roadmap["publication"]
+    platform_gate = roadmap["platform_gate"]
+    if platform_gate["platform_work_authorized"]:
+        program_intro = (
+            "The platform-neutral YWE specification has passed its M10 acceptance gate. Platform",
+            "product work is authorized under the recorded post-specification program.",
+        )
+    else:
+        program_intro = (
+            "YWE is under active development as a platform-neutral specification. Platform",
+            "products remain deferred until the M10 specification gate is accepted.",
+        )
+    platform_summary = (
+        f"🟢 `authorized`; `{platform_gate['authorized_after']}` acceptance recorded"
+        if platform_gate["platform_work_authorized"]
+        else f"⏸️ `{platform_gate['status']}`; authorization requires "
+        f"`{platform_gate['authorized_after']}` acceptance"
+    )
+
+    lines = [
+        "## Specification Roadmap",
+        "",
+        *program_intro,
+        "",
+        "[View the detailed specification roadmap]"
+        "(docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md) · "
+        "[View machine-readable roadmap status]"
+        "(data/governance/specification_roadmap.json)",
+        "",
+        "### Current status",
+        "",
+        "| Indicator | Current state |",
+        "|---|---|",
+        f"| Repository baseline | `v{roadmap['repository_baseline']}` |",
+        f"| Current milestone | {STATUS_INDICATORS[current['status']]} `{current['id']}` — "
+        f"{current['title']} (`{current['status']}`) |",
+        f"| Accepted milestone gates | `{milestone_counts['complete']} of {len(milestones)}` |",
+        f"| Milestone queue | `{milestone_counts['in_progress']}` in progress; "
+        f"`{milestone_counts['planned']}` planned; `{milestone_counts['blocked']}` blocked; "
+        f"`{milestone_counts['deferred']}` deferred |",
+        f"| Release-ready subsystems | `{release_ready} of {len(subsystems)}` |",
+        f"| Specification publication | `{publication['state']}`; "
+        f"`{publication['github_release_objects']}` GitHub Release objects; "
+        f"`{publication['agnostic_specification_releases']}` agnostic specification releases "
+        f"(verified `{publication['verified_on']}`) |",
+        f"| Platform product work | {platform_summary} |",
+        "",
+        "Milestone indicators: 🟢 `complete` · 🟡 `in_progress` · ⚪ `planned` · "
+        "🔴 `blocked` · ⏸️ `deferred`.",
+        "",
+        "| Milestone | Indicator | Status | Dependencies | Objective |",
+        "|---|:---:|---|---|---|",
+    ]
+    for milestone in milestones:
+        dependencies = ", ".join(milestone["dependencies"]) or "None"
+        lines.append(
+            f"| {milestone['id']} | {STATUS_INDICATORS[milestone['status']]} | "
+            f"`{milestone['status']}` | {dependencies} | {milestone['title']} |"
+        )
+
+    maturity_labels = {
+        "phase_gate_accepted": "Historical phase gate",
+        "normative_artifact_complete": "Normative artifact",
+        "executable_schema_complete": "Executable schema",
+        "conformance_tested": "Conformance tested",
+        "release_ready": "Release readiness",
+    }
+    maturity_statuses = [
+        "complete",
+        "partial",
+        "not_started",
+        "not_applicable",
+        "deferred",
+        "not_ready",
+    ]
+    lines.extend(
+        [
+            "",
+            "### Subsystem maturity snapshot",
+            "",
+            "| Dimension | Complete | Partial | Not started | Not applicable | Deferred | Not ready |",
+            "|---|---:|---:|---:|---:|---:|---:|",
+        ]
+    )
+    for dimension in roadmap["maturity_dimensions"]:
+        counts = Counter(item["maturity"][dimension] for item in subsystems)
+        values = " | ".join(str(counts[status]) for status in maturity_statuses)
+        lines.append(f"| {maturity_labels[dimension]} | {values} |")
+
+    lines.extend(
+        [
+            "",
+            "These five maturity dimensions are independent. Accepted gates and maturity",
+            "counts are not an estimated completion percentage: milestones differ in scope",
+            "and effort, and historical foundations do not pass a new gate without its",
+            "required acceptance evidence.",
+            "",
+            "See the roadmap inventories of "
+            "[completed or verified foundations]"
+            "(docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#completed-or-verified-foundations), "
+            "[material work remaining]"
+            "(docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#material-work-remaining), "
+            "and the "
+            "[15-subsystem maturity matrix]"
+            "(docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#subsystem-maturity-matrix).",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def readme_status_errors(text: str, roadmap: dict) -> list[str]:
+    """Reject a missing, duplicated, or stale README roadmap projection."""
+    if text.count(README_STATUS_START) != 1 or text.count(README_STATUS_END) != 1:
+        return ["README roadmap status markers must each appear exactly once"]
+    start_index = text.index(README_STATUS_START)
+    end_index = text.index(README_STATUS_END)
+    if end_index < start_index:
+        return ["README roadmap status markers are out of order"]
+    actual = text[start_index + len(README_STATUS_START) : end_index].strip()
+    expected = render_readme_status(roadmap)
+    if actual != expected:
+        return [
+            "README roadmap status block is not synchronized with "
+            "data/governance/specification_roadmap.json"
+        ]
+    return []
+
+
 def document_errors(text: str, milestones: list[dict]) -> list[str]:
     errors = []
-    indicators = {
-        "complete": "🟢",
-        "in_progress": "🟡",
-        "planned": "⚪",
-        "blocked": "🔴",
-        "deferred": "⏸️",
-    }
     for milestone in milestones:
         milestone_id = milestone["id"]
         heading = f"## {milestone_id} — {milestone['title']}"
@@ -252,7 +392,7 @@ def document_errors(text: str, milestones: list[dict]) -> list[str]:
             errors.append(f"Roadmap document deliverables are not synchronized for {milestone_id}")
         if not exit_match or markdown_bullets(exit_match.group(1)) != milestone["exit_criteria"]:
             errors.append(f"Roadmap document exit criteria are not synchronized for {milestone_id}")
-        indicator = indicators[milestone["status"]]
+        indicator = STATUS_INDICATORS[milestone["status"]]
         dashboard_pattern = (
             rf"(?m)^\| {re.escape(milestone_id)} \| {re.escape(indicator)} \| "
             rf"`{re.escape(milestone['status'])}` \|"
@@ -385,7 +525,28 @@ def publication_workflow_errors(root: Path, before_specification_release: bool) 
 
 
 def main() -> int:
-    root = Path(sys.argv[1] if len(sys.argv) > 1 else ".").resolve()
+    arguments = sys.argv[1:]
+    print_readme_status = bool(arguments and arguments[0] == "--print-readme-status")
+    if print_readme_status:
+        arguments = arguments[1:]
+    if len(arguments) > 1:
+        print(
+            "Usage: check_specification_roadmap.py "
+            "[--print-readme-status] [repository-root]"
+        )
+        return 2
+    root = Path(arguments[0] if arguments else ".").resolve()
+    if print_readme_status:
+        try:
+            roadmap = load_json(root / ROADMAP_PATH)
+        except (OSError, json.JSONDecodeError) as exc:
+            print(f"Unable to render README roadmap status: {exc}")
+            return 1
+        print(README_STATUS_START)
+        print(render_readme_status(roadmap))
+        print(README_STATUS_END)
+        return 0
+
     errors: list[str] = []
     try:
         roadmap = load_json(root / ROADMAP_PATH)
@@ -455,6 +616,14 @@ def main() -> int:
 
     errors.extend(version_errors(root, roadmap))
     errors.extend(status_source_errors(root, roadmap))
+
+    readme_path = root / "README.md"
+    if not readme_path.is_file():
+        errors.append("README.md is missing")
+    else:
+        errors.extend(
+            readme_status_errors(readme_path.read_text(encoding="utf-8-sig"), roadmap)
+        )
 
     check_ids = [item["id"] for item in checks["checks"]]
     errors.extend(catalog_contract_errors(checks))

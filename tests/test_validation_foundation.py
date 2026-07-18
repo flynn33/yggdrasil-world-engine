@@ -67,6 +67,50 @@ class RoadmapValidationTests(unittest.TestCase):
         errors = roadmap_check.document_errors(drifted, self.roadmap["milestones"])
         self.assertTrue(any("deliverables" in error.lower() for error in errors))
 
+    def test_readme_status_projection_matches_machine_status(self):
+        text = (ROOT / "README.md").read_text(encoding="utf-8-sig")
+        self.assertEqual([], roadmap_check.readme_status_errors(text, self.roadmap))
+
+    def test_readme_status_projection_content_drift_is_rejected(self):
+        text = (ROOT / "README.md").read_text(encoding="utf-8-sig")
+        rendered = roadmap_check.render_readme_status(self.roadmap)
+        accepted_line = next(
+            line
+            for line in rendered.splitlines()
+            if line.startswith("| Accepted milestone gates |")
+        )
+        drifted = text.replace(accepted_line, accepted_line.replace("gates", "gate"), 1)
+        errors = roadmap_check.readme_status_errors(drifted, self.roadmap)
+        self.assertTrue(any("not synchronized" in error.lower() for error in errors))
+
+    def test_readme_status_projection_machine_drift_is_rejected(self):
+        text = (ROOT / "README.md").read_text(encoding="utf-8-sig")
+        drifted_roadmap = copy.deepcopy(self.roadmap)
+        drifted_roadmap["milestones"][0]["title"] += " changed"
+        errors = roadmap_check.readme_status_errors(text, drifted_roadmap)
+        self.assertTrue(any("not synchronized" in error.lower() for error in errors))
+
+    def test_readme_status_projection_does_not_claim_a_percentage(self):
+        rendered = roadmap_check.render_readme_status(self.roadmap)
+        self.assertNotIn("%", rendered)
+
+    def test_readme_status_projection_rejects_reversed_markers(self):
+        text = (
+            f"{roadmap_check.README_STATUS_END}\n"
+            f"{roadmap_check.README_STATUS_START}\n"
+        )
+        errors = roadmap_check.readme_status_errors(text, self.roadmap)
+        self.assertTrue(any("out of order" in error.lower() for error in errors))
+
+    def test_readme_status_projection_tracks_platform_authorization(self):
+        completed_roadmap = copy.deepcopy(self.roadmap)
+        completed_roadmap["platform_gate"]["status"] = "authorized"
+        completed_roadmap["platform_gate"]["platform_work_authorized"] = True
+        rendered = roadmap_check.render_readme_status(completed_roadmap)
+        self.assertIn("platform-neutral YWE specification has passed", rendered)
+        self.assertIn("Platform product work | 🟢 `authorized`", rendered)
+        self.assertNotIn("products remain deferred", rendered)
+
     def test_subsystem_matrix_and_evidence_are_valid(self):
         text = (ROOT / "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md").read_text(
             encoding="utf-8-sig"
