@@ -37,12 +37,10 @@ Brief description of changes.
 ## Checklist
 
 - [ ] `scripts/run_checks.sh` passes
-- [ ] JSON schemas are valid
-- [ ] `python scripts/check_json_integrity.py` passes
-- [ ] `python scripts/check_required_contracts.py` passes
-- [ ] `python scripts/check_authority_stack.py --config data/validation/repository_drift_guardrail_rules.json` passes
+- [ ] Machine-readable artifacts and declared JSON Schemas are valid
+- [ ] Roadmap, repository status, and version sources are synchronized
 - [ ] `python scripts/check_repository_attribution_policy.py .` passes
-- [ ] `python scripts/check_non_destructive_diff.py --base origin/main --head HEAD` passes when applicable
+- [ ] `scripts/run_checks.sh --context pull_request --base origin/main` passes when applicable
 - [ ] No engine-specific code on main branch (if targeting main)
 - [ ] Layer dependencies respected
 - [ ] Documentation updated (if applicable)
@@ -50,19 +48,7 @@ Brief description of changes.
 ## Full Local Guardrail Reproduction
 
 ```bash
+python3 -m pip install -r scripts/requirements.txt
 bash scripts/run_checks.sh
-python3 scripts/check_json_integrity.py .
-python3 scripts/check_required_contracts.py .
-python3 scripts/check_phase_8_9_required_artifacts.py .
-python3 scripts/check_authority_stack.py --config data/validation/repository_drift_guardrail_rules.json .
-python3 scripts/check_branch_reality_guardrail.py .
-python3 scripts/check_phase_9_schema_semantics.py .
-python3 scripts/check_phase_8_9_package_boundary.py .
-python3 scripts/check_player_runtime_state.py .
-python3 scripts/check_worldstate_location_mutation.py .
-python3 scripts/check_quest_npc_lore_generation.py .
-python3 scripts/check_source_truth_alignment.py .
-python3 scripts/check_repository_attribution_policy.py .
-python3 scripts/check_non_destructive_diff.py --base origin/main --head HEAD .
-git diff --check
+bash scripts/run_checks.sh --context pull_request --base origin/main
 ```

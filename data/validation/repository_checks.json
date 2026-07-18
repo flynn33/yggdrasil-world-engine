@@ -1,0 +1,250 @@
+{
+  "artifact_type": "repository_check_manifest",
+  "artifact_version": "1.0.0",
+  "roadmap_ref": "data/governance/specification_roadmap.json",
+  "checks": [
+    {
+      "id": "roadmap_governance",
+      "name": "Roadmap and repository truth",
+      "command": ["{python}", "scripts/check_specification_roadmap.py", "{root}"],
+      "groups": ["bootstrap", "status", "governance"],
+      "roadmap_milestones": ["M0", "M1", "M10"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "machine_readable_artifacts",
+      "name": "JSON YAML and schema integrity",
+      "command": ["{python}", "scripts/check_machine_readable_artifacts.py", "{root}"],
+      "groups": ["syntax", "schema", "machine-readable"],
+      "roadmap_milestones": ["M0", "M2", "M9"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "validation_unit_tests",
+      "name": "Validation foundation unit tests",
+      "command": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-p", "test_*.py"],
+      "groups": ["bootstrap", "tests"],
+      "roadmap_milestones": ["M0", "M2", "M9"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "architecture_structure",
+      "name": "Repository architecture structure",
+      "command": ["{python}", "scripts/validate_architecture.py", "{root}"],
+      "groups": ["architecture", "governance", "legacy-structural"],
+      "roadmap_milestones": ["M0", "M3"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "governance_contracts",
+      "name": "Governance interface and generation boundaries",
+      "command": ["{python}", "scripts/check_governance_contracts.py", "{root}"],
+      "groups": ["governance", "architecture"],
+      "roadmap_milestones": ["M0", "M1", "M3"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "legacy_schema_contracts",
+      "name": "Legacy schema and marker contracts",
+      "command": ["{python}", "scripts/validate_schemas.py", "{root}"],
+      "groups": ["schema", "legacy-structural", "phase"],
+      "roadmap_milestones": ["M0", "M2"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "ash_compliance",
+      "name": "ASH compliance",
+      "command": ["{python}", "scripts/validate_ash_compliance.py", "{root}"],
+      "groups": ["ash", "governance"],
+      "roadmap_milestones": ["M1", "M3"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "ash_semantic_integrity",
+      "name": "ASH canonical semantic integrity",
+      "command": ["{python}", ".github/scripts/semantic_integrity_check.py", "{root}"],
+      "groups": ["ash"],
+      "roadmap_milestones": ["M1", "M3"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "ash_math_integrity",
+      "name": "ASH math integrity",
+      "command": ["{python}", ".github/scripts/math_integrity_check.py", "{root}"],
+      "groups": ["ash"],
+      "roadmap_milestones": ["M1", "M3"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "ash_downstream_conformance",
+      "name": "ASH downstream conformance artifacts",
+      "command": ["{python}", ".github/scripts/downstream_conformance_check.py", "{root}"],
+      "groups": ["ash", "conformance"],
+      "roadmap_milestones": ["M3", "M9"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "package_acceptance",
+      "name": "YWE package acceptance",
+      "command": ["{python}", ".github/scripts/ywe_package_acceptance_check.py", "{root}"],
+      "groups": ["ash", "conformance", "legacy-structural"],
+      "roadmap_milestones": ["M3", "M9"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "required_authority_contracts",
+      "name": "Required authority contracts",
+      "command": ["{python}", "scripts/check_required_contracts.py", "{root}"],
+      "groups": ["governance", "phase"],
+      "roadmap_milestones": ["M0", "M1"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "phase_8_9_required_artifacts",
+      "name": "Phase 8 and 9 required artifacts",
+      "command": ["{python}", "scripts/check_phase_8_9_required_artifacts.py", "{root}"],
+      "groups": ["phase", "legacy-structural"],
+      "roadmap_milestones": ["M0", "M4"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "authority_stack",
+      "name": "Authority stack drift",
+      "command": ["{python}", "scripts/check_authority_stack.py", "--config", "data/validation/repository_drift_guardrail_rules.json", "{root}"],
+      "groups": ["governance", "phase"],
+      "roadmap_milestones": ["M0", "M1"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "branch_reality",
+      "name": "Branch reality guardrail",
+      "command": ["{python}", "scripts/check_branch_reality_guardrail.py", "{root}"],
+      "groups": ["phase", "legacy-structural"],
+      "roadmap_milestones": ["M4"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "phase_9_schema_semantics",
+      "name": "Phase 9 schema semantics",
+      "command": ["{python}", "scripts/check_phase_9_schema_semantics.py", "{root}"],
+      "groups": ["phase", "legacy-structural"],
+      "roadmap_milestones": ["M2", "M4"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "phase_8_9_package_boundary",
+      "name": "Phase 8 and 9 package boundary",
+      "command": ["{python}", "scripts/check_phase_8_9_package_boundary.py", "{root}"],
+      "groups": ["phase", "legacy-structural"],
+      "roadmap_milestones": ["M0", "M4"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "player_runtime_state",
+      "name": "Player runtime state guardrail",
+      "command": ["{python}", "scripts/check_player_runtime_state.py", "{root}"],
+      "groups": ["phase", "legacy-structural"],
+      "roadmap_milestones": ["M4"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "worldstate_location_mutation",
+      "name": "Worldstate and location mutation guardrail",
+      "command": ["{python}", "scripts/check_worldstate_location_mutation.py", "{root}"],
+      "groups": ["phase", "legacy-structural"],
+      "roadmap_milestones": ["M4"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "quest_npc_lore",
+      "name": "Quest NPC and lore guardrail",
+      "command": ["{python}", "scripts/check_quest_npc_lore_generation.py", "{root}"],
+      "groups": ["phase", "legacy-structural"],
+      "roadmap_milestones": ["M5"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "source_truth_alignment",
+      "name": "Source truth alignment guardrail",
+      "command": ["{python}", "scripts/check_source_truth_alignment.py", "{root}"],
+      "groups": ["phase", "governance", "legacy-structural"],
+      "roadmap_milestones": ["M0", "M1", "M5"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "ability_power_engine",
+      "name": "Ability and power guardrail",
+      "command": ["{python}", "scripts/check_ability_power_engine.py", "{root}"],
+      "groups": ["phase", "legacy-structural"],
+      "roadmap_milestones": ["M6", "M7"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "phase_15a_companion_reward",
+      "name": "Phase 15A companion and reward guardrail",
+      "command": ["{python}", "scripts/check_phase_15a_companion_reward_foundation.py", "{root}"],
+      "groups": ["phase", "legacy-structural"],
+      "roadmap_milestones": ["M6"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "phase_16_17_recovery",
+      "name": "Phase 16 and 17 recovery guardrail",
+      "command": ["{python}", "scripts/check_phase_16_17_recovery.py", "{root}"],
+      "groups": ["phase", "legacy-structural"],
+      "roadmap_milestones": ["M6", "M7"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "platform_agnosticism",
+      "name": "Platform product boundary",
+      "command": ["{python}", "scripts/check_platform_agnosticism.py", "{root}"],
+      "groups": ["platform", "governance"],
+      "roadmap_milestones": ["M0", "M3", "M9", "M10"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "repository_attribution_policy",
+      "name": "Repository attribution policy",
+      "command": ["{python}", "scripts/check_repository_attribution_policy.py", "{root}"],
+      "groups": ["attribution", "governance"],
+      "roadmap_milestones": ["M0", "M10"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "non_destructive_diff",
+      "name": "Non-destructive pull request diff",
+      "command": ["{python}", "scripts/check_non_destructive_diff.py", "--base", "{base}", "--head", "HEAD", "{root}"],
+      "groups": ["diff", "change-safety"],
+      "roadmap_milestones": ["M0", "M10"],
+      "contexts": ["pull_request"],
+      "blocking": true
+    }
+  ]
+}

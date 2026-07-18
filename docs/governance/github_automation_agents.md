@@ -6,20 +6,20 @@ Status: active automation governance baseline
 
 ## Purpose
 
-This document describes the repository automation that validates release
-readiness, documentation hygiene, Forsetti alignment, wiki publication, and
+This document describes the repository automation that validates specification
+integrity, documentation hygiene, Forsetti alignment, wiki publication, and
 contributor identity boundaries.
 
 ## Active Workflow Map
 
 | Workflow | File | Responsibility |
 |---|---|---|
-| Main CI | `.github/workflows/main-ci.yml` | Runs the primary validation suite and JSON lint checks. |
-| YWE Repository Guardrails | `.github/workflows/ywe_repository_guardrails.yml` | Runs repository package checks, authority scans, phase guardrails, source-truth alignment, and non-destructive diff checks. |
-| Forsetti Compliance | `.github/workflows/forsetti-compliance.yml` | Verifies Forsetti governance files, manifest templates, dependency boundaries, and independent-generator restrictions. |
-| Branch Guard | `.github/workflows/branch-guard.yml` | Blocks engine-specific runtime code on the sealed specification branch. |
+| Main CI | `.github/workflows/main-ci.yml` | Runs the complete canonical check catalog and machine-readable artifact group. |
+| YWE Repository Guardrails | `.github/workflows/ywe_repository_guardrails.yml` | Runs phase, attribution, and pull-request change-safety catalog groups. |
+| Forsetti Compliance | `.github/workflows/forsetti-compliance.yml` | Runs the catalog governance group. |
+| Branch Guard | `.github/workflows/branch-guard.yml` | Runs the catalog platform-boundary check. |
 | Wiki Sync | `.github/workflows/wiki-sync.yml` | Publishes selected repository documentation into the GitHub wiki. |
-| Versioning & Changelog | `.github/workflows/versioning.yml` | Updates `version.txt`, `CHANGELOG.md`, governance file versions, and release tags. |
+| Version Baseline & Changelog | `.github/workflows/versioning.yml` | Manually updates synchronized baseline versions and the changelog; it does not publish a release. |
 | Contributor Identity Gate | [`.github/workflows/contributor-identity-policy.yml`](../../.github/workflows/contributor-identity-policy.yml) | Blocks prohibited contributor identity strings in commit metadata. |
 | Stale Issues | `.github/workflows/stale.yml` | Manages stale issue labeling and closure policy. |
 
@@ -27,7 +27,9 @@ contributor identity boundaries.
 
 | Script | Used By | Responsibility |
 |---|---|---|
-| `scripts/run_checks.sh` | Main CI, Forsetti Compliance, repository guardrails | Authoritative POSIX validation suite. |
+| `scripts/validate_repository.py` | All validation workflows | Canonical catalog-driven validation runner. |
+| `data/validation/repository_checks.json` | All validation workflows | Stable check identifiers, groups, contexts, and roadmap ownership. |
+| `scripts/run_checks.sh` | Local POSIX environments | Thin launcher for the canonical runner. |
 | `scripts/check_json_integrity.py` | Repository guardrails | Parses and validates JSON artifacts. |
 | `scripts/check_required_contracts.py` | Repository guardrails | Confirms required authority contracts remain present. |
 | `scripts/check_phase_8_9_required_artifacts.py` | Repository guardrails | Confirms Phase 8-9 runtime foundation artifacts remain present. |
@@ -41,7 +43,7 @@ contributor identity boundaries.
 | `scripts/check_source_truth_alignment.py` | Repository guardrails | Protects source-truth and Twin Wolf alignment. |
 | `scripts/check_ability_power_engine.py` | Repository guardrails | Protects Phase 14 Ability / Power Engine contracts, schemas, examples, and budgets. |
 | `scripts/check_non_destructive_diff.py` | Repository guardrails | Blocks silent deletion or broad removal of accepted artifacts. |
-| `scripts/github/Test-DocsAndGlossary.ps1` | Release readiness, PowerShell-capable environments | Checks markdown links, wiki-sync config, and glossary terms. |
+| `scripts/github/Test-DocsAndGlossary.ps1` | Publication-readiness utility, PowerShell-capable environments | Checks markdown links, wiki-sync config, and glossary terms. |
 | [`scripts/github/Test-ContributorIdentityPolicy.ps1`](../../scripts/github/Test-ContributorIdentityPolicy.ps1) | Contributor identity gate | Validates commit author, committer, and message identity strings. |
 
 ## Wiki Sync Behavior
@@ -58,10 +60,10 @@ script remains useful as a local or future workflow implementation detail, but
 the two mechanisms must stay synchronized when page names, source files, or
 wiki navigation change.
 
-Phase 14 ability validation is reached through `bash scripts/run_checks.sh` in
-the hosted guardrail workflow and through the same script in local validation.
+Phase 14 ability validation is registered in the canonical check catalog and is
+reached through the same runner locally and in hosted workflows.
 
-## Release And Review Gates
+## Review Gates
 
 Every pull request should preserve these gates:
 
@@ -73,7 +75,7 @@ flowchart LR
   Forsetti["Forsetti compliance"]
   Identity["Contributor identity"]
   Review["Code review"]
-  Merge["Merge / release"]
+  Merge["Merge"]
 
   PR --> Main --> Guard --> Forsetti --> Identity --> Review --> Merge
 ```

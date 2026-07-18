@@ -1,8 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/quest_seed_schema.json",
   "schema_id": "ywe.quest_archetypes.quest_seed",
   "version": "1.0.0",
   "canonical_phase_12_schema_ref": "data/schemas/quest_npc_lore_generation_schema.json",
+  "type": "object",
   "required": [
     "quest_seed_id",
     "cosmic_pattern_snapshot_ref",
@@ -16,21 +18,29 @@
     "requested_manifest_kind"
   ],
   "properties": {
-    "quest_seed_id": "string",
-    "cosmic_pattern_snapshot_ref": "CosmicPatternSnapshot",
-    "diagnostic_ref": "DiagnosticEnvelope",
-    "generation_plan_ref": "GenerationPlan",
-    "source_ash_refs": "SourceASHRefs",
-    "ywe_generation_context_packet_ref": "YWEGenerationContextPacket",
-    "player_runtime_state_ref": "PlayerRuntimeState",
-    "current_leaf_branch_ref": "LeafBranchReality",
-    "worldstate_delta_refs": "WorldstateDeltaPacket[]",
-    "requested_manifest_kind": "QuestChainManifest"
+    "quest_seed_id": {"type": "string", "minLength": 1},
+    "cosmic_pattern_snapshot_ref": {"type": "string", "minLength": 1},
+    "diagnostic_ref": {"type": "string", "minLength": 1},
+    "generation_plan_ref": {"type": "string", "minLength": 1},
+    "source_ash_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "ywe_generation_context_packet_ref": {"type": "string", "minLength": 1},
+    "player_runtime_state_ref": {"type": "string", "minLength": 1},
+    "current_leaf_branch_ref": {"type": "string", "minLength": 1},
+    "worldstate_delta_refs": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "requested_manifest_kind": {"const": "QuestChainManifest"}
   },
   "forbidden": [
     "independent_random_quest_template",
     "single_outcome_only_quest",
     "quest_without_diagnostic_ref",
     "quest_without_generation_plan_ref"
-  ]
+  ],
+  "additionalProperties": false
 }

@@ -4,6 +4,24 @@ This index records the current Yggdrasil World Engine project state in durable
 repository terms. Canonical contracts, schemas, validation rules, examples, and
 conformance files remain the active authority for implementation details.
 
+The active specification roadmap is
+`docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md`. Historical phase acceptance
+below records package provenance; it does not by itself assert normative,
+schema, conformance, or release completion.
+
+## Specification Maturity
+
+| Dimension | Current status |
+|---|---|
+| Historical phase gates | Accepted through the Phase 16/17 foundation |
+| Normative artifact completion | Partial |
+| Executable schema completion | Partial; tracked under M2 |
+| Whole-system conformance | Not complete |
+| Agnostic specification release readiness | Not ready |
+| Published releases | None; no GitHub Release objects or agnostic specification releases have been published |
+| Current roadmap milestone | M0 - Establish one truthful baseline |
+| Platform product work | Deferred through M10 |
+
 ## Authority Stack
 
 | Layer | Current authority |
@@ -43,7 +61,5 @@ conformance files remain the active authority for implementation details.
 
 - `bash scripts/run_checks.sh`
 - `pwsh -File scripts/run_checks.ps1`
-- `python3 scripts/check_json_integrity.py .`
-- `python3 scripts/check_required_contracts.py .`
-- `python3 scripts/check_source_truth_alignment.py .`
-- `python3 scripts/check_repository_attribution_policy.py .`
+- `python3 scripts/validate_repository.py --list`
+- `data/validation/repository_checks.json`

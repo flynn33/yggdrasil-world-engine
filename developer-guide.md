@@ -78,12 +78,12 @@ Every engine implementation should include tests for:
 
 Before submitting any pull request:
 
-1. Run `bash scripts/run_checks.sh` from the repository root.
-2. Verify all JSON schemas are valid.
-3. Verify canonical YAML/doc artifact checks pass.
-4. Verify no ASH compliance violations.
-5. Verify no layer boundary violations.
+1. Install dependencies with `python3 -m pip install -r scripts/requirements.txt`.
+2. Run `bash scripts/run_checks.sh` from the repository root.
+3. Verify all JSON schemas are valid.
+4. Verify canonical YAML/doc artifact checks pass.
+5. Verify no ASH compliance violations.
+6. Verify no layer boundary violations.
 
 PowerShell environments may use `pwsh -File scripts/run_checks.ps1` where
-available, but the Bash suite is the current authoritative local check path
-for the complete phase guardrail set.
+available. Both wrappers invoke the same canonical check catalog.

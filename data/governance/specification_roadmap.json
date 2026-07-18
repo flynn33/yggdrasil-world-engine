@@ -1,0 +1,782 @@
+{
+  "artifact_type": "ywe_agnostic_specification_roadmap",
+  "artifact_version": "1.0.0",
+  "repository_baseline": "2.0.23",
+  "publication": {
+    "state": "unreleased",
+    "published_releases": 0,
+    "github_release_objects": 0,
+    "agnostic_specification_releases": 0,
+    "verified_on": "2026-07-18",
+    "tag_policy": "Existing v2.0.x Git tags, including historical annotations that use release wording, identify repository baselines; they are not published releases."
+  },
+  "current_milestone": "M0",
+  "status_vocabulary": [
+    "complete",
+    "in_progress",
+    "planned",
+    "blocked",
+    "deferred"
+  ],
+  "maturity_dimensions": [
+    "phase_gate_accepted",
+    "normative_artifact_complete",
+    "executable_schema_complete",
+    "conformance_tested",
+    "release_ready"
+  ],
+  "maturity_status_vocabulary": [
+    "complete",
+    "partial",
+    "not_started",
+    "not_applicable",
+    "deferred",
+    "not_ready"
+  ],
+  "platform_gate": {
+    "authorized_after": "M10",
+    "status": "deferred",
+    "platform_work_authorized": false,
+    "rule": "Platform products may be designed, built, or shipped only after the M10 agnostic specification freeze is accepted."
+  },
+  "version_sources": [
+    {
+      "path": "version.txt",
+      "kind": "plain"
+    },
+    {
+      "path": "VERSION",
+      "kind": "plain"
+    },
+    {
+      "path": "yggdrasil-instructions.json",
+      "kind": "json_field",
+      "field": "artifact_version"
+    },
+    {
+      "path": "repository-contribution-policy.json",
+      "kind": "json_field",
+      "field": "artifact_version"
+    },
+    {
+      "path": "README.md",
+      "kind": "text_template",
+      "template": "# Yggdrasil World Engine (YWE) v{version}"
+    },
+    {
+      "path": "README.md",
+      "kind": "text_template",
+      "template": "| `v{version}` | Current accepted repository baseline"
+    },
+    {
+      "path": "docs/master_specification/README.md",
+      "kind": "text_template",
+      "template": "Current baseline: `v{version}`"
+    },
+    {
+      "path": "docs/glossary/README.md",
+      "kind": "text_template",
+      "template": "Current baseline: `v{version}`"
+    },
+    {
+      "path": "docs/governance/README.md",
+      "kind": "text_template",
+      "template": "Current baseline: `v{version}`"
+    },
+    {
+      "path": "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md",
+      "kind": "text_template",
+      "template": "Repository baseline: `v{version}`"
+    }
+  ],
+  "status_sources": [
+    {
+      "path": "docs/project/repository_status.md",
+      "required_markers": [
+        "| Agnostic specification release readiness | Not ready |",
+        "| Published releases | None; no GitHub Release objects or agnostic specification releases have been published |",
+        "| Current roadmap milestone | M0 - Establish one truthful baseline |",
+        "| Platform product work | Deferred through M10 |"
+      ]
+    }
+  ],
+  "subsystems": [
+    {
+      "id": "authority_boundaries",
+      "name": "Authority and engine-game boundaries",
+      "next_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "maturity": {
+        "phase_gate_accepted": "not_applicable",
+        "normative_artifact_complete": "partial",
+        "executable_schema_complete": "partial",
+        "conformance_tested": "partial",
+        "release_ready": "not_ready"
+      },
+      "evidence_refs": [
+        "docs/architecture/ywe_cosmology_authority_contract.md",
+        "docs/architecture/engine_vs_game_layer_contract.md"
+      ],
+      "open_work": [
+        "Resolve remaining authority and terminology contradictions"
+      ]
+    },
+    {
+      "id": "ash_algebra_oracle",
+      "name": "ASH algebra and reference oracle",
+      "next_milestone": "M3",
+      "owner_role": "ASH mathematics maintainers",
+      "maturity": {
+        "phase_gate_accepted": "complete",
+        "normative_artifact_complete": "complete",
+        "executable_schema_complete": "partial",
+        "conformance_tested": "complete",
+        "release_ready": "not_ready"
+      },
+      "evidence_refs": [
+        "core/ash_pattern_engine/ash_canonical.py",
+        "specs/verification/invariant-spec.md"
+      ],
+      "open_work": [
+        "Complete diagnostics recovery topology and emitter traceability"
+      ]
+    },
+    {
+      "id": "cosmology_realm_branch",
+      "name": "Cosmology realms and branch reality",
+      "next_milestone": "M4",
+      "owner_role": "Core semantics maintainers",
+      "maturity": {
+        "phase_gate_accepted": "complete",
+        "normative_artifact_complete": "partial",
+        "executable_schema_complete": "partial",
+        "conformance_tested": "partial",
+        "release_ready": "not_ready"
+      },
+      "evidence_refs": [
+        "data/realm/realm_mechanics_rules.yaml",
+        "docs/architecture/leaf_branch_reality_contract.md"
+      ],
+      "open_work": [
+        "Normalize realm coordinates mutable state and branch merge semantics"
+      ]
+    },
+    {
+      "id": "player_runtime",
+      "name": "Player runtime origin and progression",
+      "next_milestone": "M4",
+      "owner_role": "Player-state maintainers",
+      "maturity": {
+        "phase_gate_accepted": "complete",
+        "normative_artifact_complete": "partial",
+        "executable_schema_complete": "partial",
+        "conformance_tested": "partial",
+        "release_ready": "not_ready"
+      },
+      "evidence_refs": [
+        "docs/architecture/player_runtime_state_contract.md"
+      ],
+      "open_work": [
+        "Finish origin progression persistence replay and multiplayer rules"
+      ]
+    },
+    {
+      "id": "perception_worldstate",
+      "name": "Perception worldstate and location",
+      "next_milestone": "M4",
+      "owner_role": "State and synchronization maintainers",
+      "maturity": {
+        "phase_gate_accepted": "complete",
+        "normative_artifact_complete": "partial",
+        "executable_schema_complete": "partial",
+        "conformance_tested": "partial",
+        "release_ready": "not_ready"
+      },
+      "evidence_refs": [
+        "docs/architecture/worldstate_location_mutation_v1.md",
+        "data/schemas/perception_layer_persistence_schema.json"
+      ],
+      "open_work": [
+        "Resolve static ontology language and complete perception persistence"
+      ]
+    },
+    {
+      "id": "quest_npc_lore",
+      "name": "Quest NPC and lore generation",
+      "next_milestone": "M5",
+      "owner_role": "Narrative-system maintainers",
+      "maturity": {
+        "phase_gate_accepted": "complete",
+        "normative_artifact_complete": "partial",
+        "executable_schema_complete": "partial",
+        "conformance_tested": "partial",
+        "release_ready": "not_ready"
+      },
+      "evidence_refs": [
+        "docs/architecture/quest_npc_lore_generation_v1.md"
+      ],
+      "open_work": [
+        "Complete lifecycles semantic validation and neutral fixtures"
+      ]
+    },
+    {
+      "id": "artifact_creature",
+      "name": "Artifact and creature engines",
+      "next_milestone": "M5",
+      "owner_role": "Content-system maintainers",
+      "maturity": {
+        "phase_gate_accepted": "not_applicable",
+        "normative_artifact_complete": "partial",
+        "executable_schema_complete": "not_started",
+        "conformance_tested": "partial",
+        "release_ready": "not_ready"
+      },
+      "evidence_refs": [
+        "modules/artifact_engine/artifact_system_rules.yaml",
+        "modules/creature_engine/creature_system_rules.yaml"
+      ],
+      "open_work": [
+        "Complete executable schemas lifecycle semantics and conformance"
+      ]
+    },
+    {
+      "id": "myth_prophecy",
+      "name": "Myth and prophecy engines",
+      "next_milestone": "M5",
+      "owner_role": "Content-system maintainers",
+      "maturity": {
+        "phase_gate_accepted": "partial",
+        "normative_artifact_complete": "not_started",
+        "executable_schema_complete": "not_started",
+        "conformance_tested": "partial",
+        "release_ready": "not_ready"
+      },
+      "evidence_refs": [
+        "modules/myth_engine/myth_emergence_rules.yaml",
+        "modules/prophecy_engine/prophecy_activation_rules.yaml"
+      ],
+      "open_work": [
+        "Replace placeholders and complete bounded lifecycle semantics"
+      ]
+    },
+    {
+      "id": "ability_power",
+      "name": "Ability and power system",
+      "next_milestone": "M6",
+      "owner_role": "Player-system maintainers",
+      "maturity": {
+        "phase_gate_accepted": "complete",
+        "normative_artifact_complete": "partial",
+        "executable_schema_complete": "partial",
+        "conformance_tested": "partial",
+        "release_ready": "not_ready"
+      },
+      "evidence_refs": [
+        "docs/architecture/ability_power_engine_contract.md"
+      ],
+      "open_work": [
+        "Establish canonical ownership lifecycle capability and integration"
+      ]
+    },
+    {
+      "id": "companion_reward",
+      "name": "Companion and reward resolution",
+      "next_milestone": "M6",
+      "owner_role": "Player-system maintainers",
+      "maturity": {
+        "phase_gate_accepted": "partial",
+        "normative_artifact_complete": "partial",
+        "executable_schema_complete": "partial",
+        "conformance_tested": "partial",
+        "release_ready": "not_ready"
+      },
+      "evidence_refs": [
+        "modules/companion_engine/engine_interface.json",
+        "docs/architecture/quest_reward_resolver_contract.md"
+      ],
+      "open_work": [
+        "Complete Phase 13 and transactional reward semantics"
+      ]
+    },
+    {
+      "id": "combat_encounter",
+      "name": "Combat and encounter system",
+      "next_milestone": "M7",
+      "owner_role": "Encounter-system maintainers",
+      "maturity": {
+        "phase_gate_accepted": "not_started",
+        "normative_artifact_complete": "not_started",
+        "executable_schema_complete": "not_started",
+        "conformance_tested": "not_started",
+        "release_ready": "not_ready"
+      },
+      "evidence_refs": [
+        "data/validation/phase_18_unblock_prerequisite_contract.json"
+      ],
+      "open_work": [
+        "Build the complete Phase 18 normative and conformance package"
+      ]
+    },
+    {
+      "id": "persistence_multiplayer",
+      "name": "Persistence replay migration and multiplayer",
+      "next_milestone": "M4",
+      "owner_role": "State and synchronization maintainers",
+      "maturity": {
+        "phase_gate_accepted": "not_applicable",
+        "normative_artifact_complete": "not_started",
+        "executable_schema_complete": "not_started",
+        "conformance_tested": "not_started",
+        "release_ready": "not_ready"
+      },
+      "evidence_refs": [
+        "docs/architecture/realm_truth_boundary_contract.md"
+      ],
+      "open_work": [
+        "Define snapshots logs migration replay authority conflicts and merge"
+      ]
+    },
+    {
+      "id": "environment_society",
+      "name": "Environment manifests and society profiles",
+      "next_milestone": "M8",
+      "owner_role": "World-system profile maintainers",
+      "maturity": {
+        "phase_gate_accepted": "not_applicable",
+        "normative_artifact_complete": "not_started",
+        "executable_schema_complete": "not_started",
+        "conformance_tested": "not_started",
+        "release_ready": "not_ready"
+      },
+      "evidence_refs": [
+        "data/faction_topology/faction_topology_state_schema.yaml"
+      ],
+      "open_work": [
+        "Build environment faction civilization economy religion and politics profiles"
+      ]
+    },
+    {
+      "id": "authoring_adapter",
+      "name": "Authoring and generic adapter protocol",
+      "next_milestone": "M9",
+      "owner_role": "Adapter and authoring maintainers",
+      "maturity": {
+        "phase_gate_accepted": "not_applicable",
+        "normative_artifact_complete": "partial",
+        "executable_schema_complete": "not_started",
+        "conformance_tested": "partial",
+        "release_ready": "not_ready"
+      },
+      "evidence_refs": [
+        "docs/architecture/authored_override_and_tooling_notes.md",
+        "conformance/materialization-boundary.md"
+      ],
+      "open_work": [
+        "Complete trust security resource capability and mock-adapter contracts"
+      ]
+    },
+    {
+      "id": "validation_governance",
+      "name": "Schema conformance and publication governance",
+      "next_milestone": "M10",
+      "owner_role": "Conformance and release maintainers",
+      "maturity": {
+        "phase_gate_accepted": "partial",
+        "normative_artifact_complete": "partial",
+        "executable_schema_complete": "partial",
+        "conformance_tested": "partial",
+        "release_ready": "not_ready"
+      },
+      "evidence_refs": [
+        "data/governance/specification_roadmap.json",
+        "data/validation/schema_quality_baseline.json"
+      ],
+      "open_work": [
+        "Eliminate debt prove traceability and complete independent review"
+      ]
+    }
+  ],
+  "milestones": [
+    {
+      "id": "M0",
+      "title": "Establish one truthful baseline",
+      "status": "in_progress",
+      "dependencies": [],
+      "effort_weeks": {
+        "minimum": 1,
+        "maximum": 2
+      },
+      "owner_role": "Repository governance maintainers",
+      "acceptance_evidence": [],
+      "deliverables": [
+        "Canonical roadmap and machine-readable milestone status.",
+        "Status vocabulary separating historical acceptance, normative completion, schema completion, conformance, and release readiness.",
+        "One synchronized repository baseline version source and explicit publication process.",
+        "Correct phase, source, placeholder, deviation, license, and ownership records.",
+        "Classify artifacts as normative, informative, example, historical, deprecated, superseded, or placeholder.",
+        "Divide YWE Core, extension profiles, ASH dependency material, the WRW reference profile, and later-release work.",
+        "Keep the platform implementation gate closed through M10."
+      ],
+      "exit_criteria": [
+        "No conflicting release, status, licensing, scope, or authority claims.",
+        "Every public product promise is assigned to a milestone or formally excluded.",
+        "Every current quality exception is registered in a ratcheted debt inventory."
+      ]
+    },
+    {
+      "id": "M1",
+      "title": "Normalize canon terminology and governance",
+      "status": "planned",
+      "dependencies": [
+        "M0"
+      ],
+      "effort_weeks": {
+        "minimum": 2,
+        "maximum": 3
+      },
+      "owner_role": "Canon and governance maintainers",
+      "acceptance_evidence": [],
+      "deliverables": [
+        "Normative keyword policy and stable requirement identifiers.",
+        "Architecture-decision, change-proposal, risk, deviation, and question registers.",
+        "Resolve immutable ontology versus mutable worldstate.",
+        "Distinguish realm bit position, structural coordinate, ordinal, and presentation order.",
+        "Resolve symbolic-grammar ownership and pin the ASH dependency identity.",
+        "Normalize companion resonance terminology and migration aliases.",
+        "Distinguish append-only history from reversible state effects.",
+        "Formal truth and authority lattice.",
+        "Separate normative YWE Core from WRW-specific content.",
+        "One authoritative source or generated mirror for ASH specifications."
+      ],
+      "exit_criteria": [
+        "No contradictory normative invariant statement remains.",
+        "Every material decision has a durable rationale.",
+        "Every concept has one canonical glossary definition."
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Build the canonical contract and schema foundation",
+      "status": "planned",
+      "dependencies": [
+        "M1"
+      ],
+      "effort_weeks": {
+        "minimum": 4,
+        "maximum": 6
+      },
+      "owner_role": "Contract and schema maintainers",
+      "acceptance_evidence": [],
+      "deliverables": [
+        "One JSON Schema 2020-12 profile, URI namespace, catalog, and offline resolver.",
+        "Convert descriptive schema-named records into schemas or rename them by their actual role.",
+        "Common identifier, reference, version, time, ordering, request, result, event, provenance, diagnostic, error, transaction, compensation, idempotency, retry, extension, and deprecation contracts.",
+        "YAML structural schemas.",
+        "Explicit fixture catalog mapping schema, instance pointer, expected result, and expected requirement or error identifiers.",
+        "Positive, boundary, reject, recovery, replay, and migration fixtures.",
+        "Meta-schema, instance, reference, identifier, dependency, negative, property, and mutation validation."
+      ],
+      "exit_criteria": [
+        "Every normative schema passes its meta-schema.",
+        "Every reference resolves without a network dependency.",
+        "Every normative fixture is bound to a schema.",
+        "Every reject fixture fails for its intended requirement.",
+        "The schema-quality debt inventory is empty."
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Complete core deterministic semantics and the reference oracle",
+      "status": "planned",
+      "dependencies": [
+        "M2"
+      ],
+      "effort_weeks": {
+        "minimum": 5,
+        "maximum": 7
+      },
+      "owner_role": "Core semantics maintainers",
+      "acceptance_evidence": [],
+      "deliverables": [
+        "Final Cosmology, Realm, ASH Pattern, Narrative, Perception, and orchestration contracts.",
+        "Context-aware state classification and complete diagnostics.",
+        "Recovery, normalization, fallback selection, containment, and safe-halt state machines.",
+        "Topology generation, role assignment, axiom evaluation, complete generation planning, and artifact-emitter traceability.",
+        "Deterministic seed, selection, tie-break, numeric, canonical serialization, bias merge, decay, normalization, and conflict semantics.",
+        "Standard platform-neutral module lifecycle and interface contract.",
+        "Complete core failure, no-op, diagnostic, and resource-bound behavior."
+      ],
+      "exit_criteria": [
+        "All 28 canonical invariants have executable tests.",
+        "All five conformance categories pass.",
+        "All states and transitions have exhaustive reference coverage.",
+        "Identical input produces byte-stable canonical output.",
+        "No core placeholder remains."
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Complete state persistence branching and multiplayer",
+      "status": "planned",
+      "dependencies": [
+        "M3"
+      ],
+      "effort_weeks": {
+        "minimum": 4,
+        "maximum": 6
+      },
+      "owner_role": "State and synchronization maintainers",
+      "acceptance_evidence": [],
+      "deliverables": [
+        "Final branch-reality and player-runtime-state schemas.",
+        "Player origin, creation, progression, identity, bloodline, attunement, companion resonance, memory, and ability-state rules.",
+        "Snapshot, event-log, save, load, replay, rollback, compensation, retry, idempotency, and migration protocols.",
+        "Shared, branch, realm, local, player, and perception truth synchronization.",
+        "Multiplayer authority, ordering, conflict detection, deterministic resolution, reconciliation, and branch merge."
+      ],
+      "exit_criteria": [
+        "Save/load and migration preserve normative truth.",
+        "Replaying the event log reproduces the same state.",
+        "Repeated packets cannot duplicate consequences.",
+        "Concurrent-order vectors resolve deterministically.",
+        "Perception cannot mutate shared truth."
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Finish narrative and content generation engines",
+      "status": "planned",
+      "dependencies": [
+        "M3",
+        "M4"
+      ],
+      "effort_weeks": {
+        "minimum": 6,
+        "maximum": 8
+      },
+      "owner_role": "Content-system maintainers",
+      "acceptance_evidence": [],
+      "deliverables": [
+        "Final Quest, NPC, Lore, Artifact, Creature, Myth, and Prophecy packages.",
+        "Complete creation, activation, progress, correction, rejection, recovery, persistence, completion, failure, and archival lifecycles.",
+        "Artifact binding, transfer, transformation, loss, destruction, residue, and consequence semantics.",
+        "Creature intent, ecology, recurrence, death, persistence, and consequence semantics.",
+        "Myth emergence, variation, propagation, correction, and bounded social distribution.",
+        "Prophecy creation, weighting, activation, fulfillment, deflection, transmutation, breaking, and expiry.",
+        "Setting-neutral content fixtures."
+      ],
+      "exit_criteria": [
+        "Generation context through plan, manifest, consequence or no-op, and future bias works end to end.",
+        "Myth cannot silently rewrite fact.",
+        "Prophecy cannot become a deterministic script.",
+        "No placeholder remains in a declared release content module."
+      ]
+    },
+    {
+      "id": "M6",
+      "title": "Close ability companion reward and vertical slice phases",
+      "status": "planned",
+      "dependencies": [
+        "M4",
+        "M5"
+      ],
+      "effort_weeks": {
+        "minimum": 5,
+        "maximum": 7
+      },
+      "owner_role": "Player-system maintainers",
+      "acceptance_evidence": [],
+      "deliverables": [
+        "Canonical Ability and Power ownership, interface, lifecycle, and capability declaration.",
+        "Complete Phase 13 Companion Engine registration, recruitment, presence, autonomy, action, dismissal, incapacity, coherence loss, recovery, persistence, replay, and multiplayer behavior.",
+        "Transactional Quest Reward Resolver with atomicity, rollback, idempotency, provenance, and diagnostics.",
+        "Cross-system ability, companion, artifact, creature, quest, player, and worldstate integration.",
+        "Reconciled Phase 16 status and durable Phase 17 acceptance report.",
+        "Neutral scenario coverage alongside Ravenfall."
+      ],
+      "exit_criteria": [
+        "Every feature engine has exactly one authoritative interface and capability declaration.",
+        "Phases 13, 15, 16, and 17 have complete acceptance evidence.",
+        "Ravenfall and the neutral scenario pass the same normative contracts."
+      ]
+    },
+    {
+      "id": "M7",
+      "title": "Build the combat and encounter system foundation",
+      "status": "planned",
+      "dependencies": [
+        "M6"
+      ],
+      "effort_weeks": {
+        "minimum": 5,
+        "maximum": 7
+      },
+      "owner_role": "Encounter-system maintainers",
+      "acceptance_evidence": [],
+      "deliverables": [
+        "Encounter definition, eligibility, composition, participants, lifecycle, timing, ordering, and deterministic seed rules.",
+        "Action, target, cost, resource, effect, resistance, status, interruption, outcome, and recovery contracts.",
+        "Combat, threat, social, environmental, ritual, and diagnostic/no-op profiles.",
+        "Nonlethal, retreat, negotiation, surrender, interruption, and failure paths.",
+        "Ability, companion, artifact, creature, quest, location, myth, prophecy, future-bias, and worldstate integration.",
+        "Atomic persistence, replay, rollback, multiplayer, validation, and conformance evidence."
+      ],
+      "exit_criteria": [
+        "A complete encounter input-to-persistence trace passes deterministic replay.",
+        "Every result has a consequence packet or diagnostic no-op.",
+        "No rendering, device, library, or platform assumption enters normative encounter contracts."
+      ]
+    },
+    {
+      "id": "M8",
+      "title": "Complete environment world and society profiles",
+      "status": "planned",
+      "dependencies": [
+        "M5",
+        "M7"
+      ],
+      "effort_weeks": {
+        "minimum": 6,
+        "maximum": 10
+      },
+      "owner_role": "World-system profile maintainers",
+      "acceptance_evidence": [],
+      "deliverables": [
+        "World region, realm site, threshold, and encounter field manifests.",
+        "Temporary narrative environment and terrain-plan lifecycle.",
+        "Faction Engine built on existing topology contracts.",
+        "Civilization, Economy, Religion, and Politics extension profiles.",
+        "Claims, legitimacy, succession, resources, exchange, institutions, belief, diplomacy, cultural memory, and conflict models.",
+        "Cross-scale integration with quests, lore, encounters, myths, worldstate, and future generation."
+      ],
+      "exit_criteria": [
+        "Every public engine promise is conformant or formally excluded.",
+        "Cross-module dependency cycles are resolved.",
+        "No world-scale engine creates an independent source of canonical truth."
+      ]
+    },
+    {
+      "id": "M9",
+      "title": "Prove agnosticism and whole-system conformance",
+      "status": "planned",
+      "dependencies": [
+        "M3",
+        "M4",
+        "M5",
+        "M6",
+        "M7",
+        "M8"
+      ],
+      "effort_weeks": {
+        "minimum": 4,
+        "maximum": 6
+      },
+      "owner_role": "Conformance maintainers",
+      "acceptance_evidence": [],
+      "deliverables": [
+        "One consolidated validation entry point and stable check catalog.",
+        "Complete requirement-to-contract-to-schema-to-fixture-to-validator-to-report traceability.",
+        "Unit, exhaustive, property, reject, fuzz, model, replay, and mutation tests.",
+        "Authoring and content-package provenance, override, audit, trust, security, resource, cancellation, and backpressure contracts.",
+        "Generic materialization request/result, capability negotiation, and mock adapter.",
+        "WRW/Ravenfall and an unrelated neutral setting profile.",
+        "Portable repository-local evidence, complexity budgets, security review, and independent evaluation."
+      ],
+      "exit_criteria": [
+        "Every normative MUST requirement maps to a passing test or intended rejection.",
+        "All positive fixtures pass and all reject fixtures fail for the intended requirement.",
+        "Two independent evaluators reproduce the same normative results."
+      ]
+    },
+    {
+      "id": "M10",
+      "title": "Freeze and release the agnostic specification",
+      "status": "planned",
+      "dependencies": [
+        "M9"
+      ],
+      "effort_weeks": {
+        "minimum": 2,
+        "maximum": 4
+      },
+      "owner_role": "Specification release authority",
+      "acceptance_evidence": [],
+      "deliverables": [
+        "Frozen normative corpus with checksums.",
+        "Final specification manifest, glossary, schema registry, and conformance kit.",
+        "Platform-neutral reference oracle.",
+        "Clean-room implementation, migration, compatibility, and deprecation guides.",
+        "Independent architecture, mathematics, data, security, multiplayer, and implementability reviews.",
+        "Resolved risk and deviation registers.",
+        "Final acceptance report and platform-program authorization checklist."
+      ],
+      "exit_criteria": [
+        "No priority-zero or priority-one issue remains.",
+        "No normative artifact is draft, placeholder, or status-conflicted.",
+        "All acceptance checks run from a clean offline clone.",
+        "Independent review confirms that implementation requires no invented core behavior.",
+        "Platform work is explicitly authorized only after this gate passes."
+      ]
+    }
+  ],
+  "definition_of_done": [
+    "Normative responsibility and authority boundary are explicit",
+    "Lifecycle and state-transition model are complete",
+    "Inputs, outputs, events, and dependencies are formalized",
+    "Deterministic algorithm or pseudocode is provided",
+    "Failure, recovery, diagnostic, and no-op behavior are defined",
+    "Formal schemas and registry entries are present",
+    "Valid, boundary, reject, recovery, replay, and migration fixtures are present",
+    "Semantic validators plus negative and property tests are present",
+    "Cross-module requirements are traceable to evidence",
+    "A conformance report and explicit acceptance record exist",
+    "Version, changelog, catalog, and source inventories are synchronized",
+    "No unresolved placeholder remains in accepted scope"
+  ],
+  "release_measures": [
+    {
+      "id": "RM-01",
+      "target": "One authoritative artifact exists for every normative concern"
+    },
+    {
+      "id": "RM-02",
+      "target": "Every normative schema is meta-schema valid and resolves offline"
+    },
+    {
+      "id": "RM-03",
+      "target": "Every positive fixture passes and every reject fixture fails for its intended rule"
+    },
+    {
+      "id": "RM-04",
+      "target": "All 28 ASH invariants and all five conformance categories pass"
+    },
+    {
+      "id": "RM-05",
+      "target": "Canonical outputs and replay results are byte-stable"
+    },
+    {
+      "id": "RM-06",
+      "target": "Exactly one authoritative interface exists per engine"
+    },
+    {
+      "id": "RM-07",
+      "target": "Every normative MUST requirement maps to validation evidence"
+    },
+    {
+      "id": "RM-08",
+      "target": "The frozen normative corpus contains no placeholders"
+    },
+    {
+      "id": "RM-09",
+      "target": "WRW and an unrelated neutral profile pass the same conformance suite"
+    },
+    {
+      "id": "RM-10",
+      "target": "All acceptance evidence reproduces from a clean offline clone"
+    },
+    {
+      "id": "RM-11",
+      "target": "Normative Core contains no platform product dependency"
+    }
+  ]
+}

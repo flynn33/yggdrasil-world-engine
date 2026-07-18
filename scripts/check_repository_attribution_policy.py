@@ -143,6 +143,20 @@ def git_ref_exists(root: Path, ref: str) -> bool:
     return result.returncode == 0
 
 
+def event_payload() -> dict:
+    path = os.environ.get("GITHUB_EVENT_PATH")
+    if not path:
+        return {}
+    event_path = Path(path)
+    if not event_path.is_file():
+        return {}
+    try:
+        value = json.loads(event_path.read_text(encoding=TEXT_ENCODING))
+    except (OSError, json.JSONDecodeError, UnicodeDecodeError):
+        return {}
+    return value if isinstance(value, dict) else {}
+
+
 def tracked_paths(root: Path) -> list[str]:
     return git_lines(root, ["ls-files"])
 
@@ -176,6 +190,28 @@ def non_deleted_diff_paths(root: Path, *args: str) -> list[str]:
 
 
 def commit_refs(root: Path) -> list[str]:
+    event = event_payload()
+    before = event.get("before")
+    after = event.get("after")
+    pull_request = event.get("pull_request")
+    if isinstance(pull_request, dict):
+        base = pull_request.get("base", {})
+        head = pull_request.get("head", {})
+        if isinstance(base, dict) and isinstance(head, dict):
+            before = base.get("sha")
+            after = head.get("sha")
+    if isinstance(after, str) and git_ref_exists(root, after):
+        if (
+            isinstance(before, str)
+            and before
+            and not re.fullmatch(r"0+", before)
+            and git_ref_exists(root, before)
+        ):
+            refs = git_lines(root, ["rev-list", f"{before}..{after}"])
+            if refs:
+                return refs
+        return [after]
+
     base = base_ref(root)
     if base:
         refs = git_lines(root, ["rev-list", f"{base}..HEAD"])
@@ -195,16 +231,7 @@ def commit_metadata(root: Path) -> list[tuple[str, str]]:
 
 
 def event_metadata() -> list[tuple[str, str]]:
-    path = os.environ.get("GITHUB_EVENT_PATH")
-    if not path:
-        return []
-    event_path = Path(path)
-    if not event_path.is_file():
-        return []
-    try:
-        event = json.loads(event_path.read_text(encoding=TEXT_ENCODING))
-    except (OSError, json.JSONDecodeError, UnicodeDecodeError):
-        return []
+    event = event_payload()
     entries: list[tuple[str, str]] = []
     pull_request = event.get("pull_request")
     if isinstance(pull_request, dict):
@@ -224,7 +251,8 @@ def is_text_path(path: Path) -> bool:
 
 def iter_text_files(root: Path) -> list[Path]:
     files: list[Path] = []
-    for rel in tracked_paths(root):
+    repository_paths = list(dict.fromkeys([*tracked_paths(root), *changed_paths(root)]))
+    for rel in repository_paths:
         if rel == SELF_PATH:
             continue
         path = root / rel
