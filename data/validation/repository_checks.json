@@ -49,6 +49,15 @@
       "blocking": true
     },
     {
+      "id": "m0_truthful_baseline",
+      "name": "M0 truthful baseline closure",
+      "command": ["{python}", "scripts/check_m0_truthful_baseline.py", "{root}"],
+      "groups": ["governance", "status", "traceability"],
+      "roadmap_milestones": ["M0", "M1", "M10"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
       "id": "legacy_schema_contracts",
       "name": "Legacy schema and marker contracts",
       "command": ["{python}", "scripts/validate_schemas.py", "{root}"],

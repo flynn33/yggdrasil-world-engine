@@ -144,7 +144,7 @@ CI workflows block merges on any failure.
 | `wiki.md` | This file -- comprehensive reference |
 | `docs/master_specification/YWE_MASTER_SPECIFICATION.md` | Foundational engine-first design and cosmology baseline |
 | `docs/project/repository_map.md` | Repository bootstrap and structure baseline paired with the master spec |
-| `missing_source_documents.md` | Canonical artifact inventory and placeholder-backed tracking |
+| `missing_source_documents.md` | Synchronized placeholder and missing-source summary |
 | `docs/architecture/authored_override_and_tooling_notes.md` | Authored override authority and tooling safety guardrails |
 | `docs/architecture/realm_truth_boundary_contract.md` | Boundary contract separating realm truth from interpretive layers |
 | `yggdrasil-instructions.json` | Machine-readable architecture rules |
@@ -155,7 +155,7 @@ CI workflows block merges on any failure.
 
 ## 16. Pre-PR Checklist
 
-- [ ] No engine-specific code on main
+- [ ] No platform-specific runtime code on any repository branch
 - [ ] All JSON schemas valid
 - [ ] ASH compliance checklist satisfied
 - [ ] Layer dependencies respected

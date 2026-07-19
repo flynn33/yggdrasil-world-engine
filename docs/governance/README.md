@@ -16,6 +16,13 @@ lifecycle rules.
 |---|---|
 | `forsetti_governance_alignment.md` | Maps YWE truth ownership to Forsetti-compatible governance boundaries. |
 | `github_automation_agents.md` | Documents repository workflow automation and validation responsibilities. |
+| `../project/artifact_classification_policy.md` | Defines primary maturity classes and exact-one classification. |
+| `../project/scope_partition_map.md` | Defines exact-one repository scope partitions. |
+| `../project/release_and_publication_policy.md` | Defines baseline, tag, changelog, and publication semantics. |
+| `../../data/governance/repository_truth_manifest.json` | Records current machine-readable repository truth. |
+| `../../data/governance/public_promise_register.json` | Assigns or excludes reviewed public promises. |
+| `../../data/validation/repository_quality_debt_inventory.json` | Registers ratcheted repository quality debt. |
+| `../project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md` | Records the human-readable M0 acceptance evidence. |
 
 ## Workflow Entry Points
 
@@ -38,3 +45,5 @@ lifecycle rules.
   containment, conformance, code resilience, update safety, and patch stability.
 - Automation may validate, sync, seed, and moderate within documented
   boundaries; it does not invent canon or bypass accepted package gates.
+- `VERSION` is the canonical repository-baseline source; publication remains
+  unreleased until the M10 eligibility gate is accepted.

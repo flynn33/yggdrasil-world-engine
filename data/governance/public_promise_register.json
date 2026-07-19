@@ -1,0 +1,1271 @@
+{
+  "artifact_type": "ywe_public_promise_register",
+  "artifact_version": "1.0.0",
+  "schema_ref": "data/schemas/public_promise_register_schema.json",
+  "repository_baseline": "2.0.23",
+  "roadmap_ref": "data/governance/specification_roadmap.json",
+  "publication_state": "unreleased",
+  "reviewed_surfaces": [
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "0e1444716bba551942993e6fe25aed2efaea2b584b9a79326f44118a48b2557e"
+    },
+    {
+      "path": "README.md",
+      "sha256": "37eeeeeb50b927d15575ec4a6b7543485926dc92332047446d93a0e055d9f30b"
+    },
+    {
+      "path": "adapters/godot/README.md",
+      "sha256": "28db6c9ac2bacd97ee1c523915db01736f5c29ec218855c15c4c3c000a14d6f3"
+    },
+    {
+      "path": "adapters/godot/activation_policy_notes.md",
+      "sha256": "be2519c861c984d09119c734223a700316a021603dd35fae5a81ebae1df8a94e"
+    },
+    {
+      "path": "adapters/godot/adapter_interface.md",
+      "sha256": "1515c2de3f014f59dbfb89433b70ae5cfef4b50cbab2eaad64f8cd2df55bb88b"
+    },
+    {
+      "path": "adapters/godot/capability_profile.yaml",
+      "sha256": "cb759a07c99912a514863c38779a9c9c834e90273960f9848e3c217ef3e43cd9"
+    },
+    {
+      "path": "adapters/godot/delegation_boundary.md",
+      "sha256": "d09ab777e5df2e44a7984fb8586857b307ca3d22955245416192b0927773b739"
+    },
+    {
+      "path": "adapters/godot/entity_spawn_bridge.md",
+      "sha256": "420656c7636427d8e23f9543bdf1220458e154cca3761e0cfbd58d31fe3da0a1"
+    },
+    {
+      "path": "adapters/godot/environment_bridge.md",
+      "sha256": "1916b3f512c30cdba3daf8383a6bd6557f1fcb2bb529fe7aa391a6f0a0b4dbf1"
+    },
+    {
+      "path": "adapters/unity/README.md",
+      "sha256": "d218226bb3c7db31ec2e5307d44b4dbf6857606920d3841d94b50b9726ebb9b5"
+    },
+    {
+      "path": "adapters/unity/activation_policy_notes.md",
+      "sha256": "cda70fc96fa48a3709affec19f014cd741c95f9856200c1d5d273642a30fe941"
+    },
+    {
+      "path": "adapters/unity/adapter_interface.md",
+      "sha256": "1531d2aa9b1a567770b3b68fe64731360abcd2f2f0a6324cf1d5dfa110c666ff"
+    },
+    {
+      "path": "adapters/unity/capability_profile.yaml",
+      "sha256": "56f79cc3f83e981f5e9415744564e2faa3cf2d251a75e9c22d92e4a475c45d91"
+    },
+    {
+      "path": "adapters/unity/delegation_boundary.md",
+      "sha256": "5bede5592e5c9ccc28f1ff7cd7c8e8b303f23690b9b827e79e95d5ecbe7c1cbe"
+    },
+    {
+      "path": "adapters/unity/entity_spawn_bridge.md",
+      "sha256": "eecdb44dd80fb61dcc3bfabc00f3210f316c80df7326cf7a93e4bad96f2ea912"
+    },
+    {
+      "path": "adapters/unity/environment_bridge.md",
+      "sha256": "0593cad81a5d841e9c032278378fb61ef3a281d18448834aeaa4c78f3d36d2a6"
+    },
+    {
+      "path": "adapters/unreal/README.md",
+      "sha256": "ebb478c4e89cd8d890ac9abcdbde171df1c3308203c32e6fe85111063acf69c4"
+    },
+    {
+      "path": "adapters/unreal/activation_policy_notes.md",
+      "sha256": "9bdc1ae0c0c654d2a42e1bd13a908210e7241ea688d7669383a9ab8989ae5718"
+    },
+    {
+      "path": "adapters/unreal/adapter_interface.md",
+      "sha256": "350e63a16cbc1db6d01fadb09f386a6fa5ef25a3ce2afc6b25e35e61d11fa571"
+    },
+    {
+      "path": "adapters/unreal/capability_profile.yaml",
+      "sha256": "0ddf7a6620aaefc5044ee1288e6c393095ab27ea3508e67f392815154d35c990"
+    },
+    {
+      "path": "adapters/unreal/delegation_boundary.md",
+      "sha256": "cf3414f67ea34471b50522452dac757ca348811aa02672ecef7549157b48022e"
+    },
+    {
+      "path": "adapters/unreal/entity_spawn_bridge.md",
+      "sha256": "bf35a0418fc2f8585370bbbc018859dbc475e16dd6b282b704cd5f58b558af7f"
+    },
+    {
+      "path": "adapters/unreal/environment_bridge.md",
+      "sha256": "5641cadfb7706f114d103ef25d47307957fb24532142a2f05c5a2ecd5dcd9b0d"
+    },
+    {
+      "path": "data/game/where_ravens_wait_eternal_reckoning/campaign_identity_manifest.json",
+      "sha256": "1f1c8ffc425d3f136300c016c927208b67a3a8d5a09b2a192b73e3e7271ab6f5"
+    },
+    {
+      "path": "data/game/where_ravens_wait_eternal_reckoning/game_identity_manifest.json",
+      "sha256": "22ccf636481d28adb1f9e67d9d22fe8dfdeccab990c50e1bb8836e825370361b"
+    },
+    {
+      "path": "data/schemas/README.md",
+      "sha256": "bf0652296e249244bfa642e29bc1824c29194765cbbe911ad7b314b34f5de274"
+    },
+    {
+      "path": "developer-guide.md",
+      "sha256": "286bd187a4678b3555db78cdbe9d7ba8604af8b1f8c06d413752e3f7c0fd0916"
+    },
+    {
+      "path": "docs/architecture/README.md",
+      "sha256": "89794e5a739f8040410b59aaf38088238971ebe603b53b2ef2b8893db46a373b"
+    },
+    {
+      "path": "docs/game/companions/floki_hrafen_vilgerson_companion_brief.md",
+      "sha256": "bc5e669e3e9b57f448c48d1d4d073c540540977340c3ea440f85f160eabd6b60"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/00_ravenfall_gate_vertical_slice_overview.md",
+      "sha256": "d7d69092e6a07cdd67d785b7ee2a173bc9a3e7417b1a1a0c9f5e876a9e1b9809"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/01_ravenfall_gate_location_brief.md",
+      "sha256": "9942d4ab51b7a3b9deaa25b9ede223a87b90ded993038a965b3414904c50da66"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/02_the_buried_oath_quest_design.md",
+      "sha256": "efdd7a87c831697efc7ba10acbfff940bb2529e13fdf5e30d6a7aa6eba288719"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/03_branch_outcome_matrix.md",
+      "sha256": "dee62bec337a43895a6ad55f0a4ee6f142aab9e4f950a69a444b0f1380825e24"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/04_location_mutation_plan.md",
+      "sha256": "da213cf9a2fd63c6494dec5ab07e33cdaa9d6172da9bd02621c4eccb419f5419"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/05_wolf_companion_scene_plan.md",
+      "sha256": "6fa3124cef56cdbdfbee6e097061910d7c38756160ed30f5ab1e29c132343ff8"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/06_ability_use_plan.md",
+      "sha256": "9f289aa163e8a83362be9e41abe25ca1360094ff3e234f72b87e44e896e83f17"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/07_combat_encounter_plan.md",
+      "sha256": "1bb4c73bce6521e43a076d4187fa28c68e619bec2c823ef8ba74898e0c990c26"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/08_npc_and_faction_hooks.md",
+      "sha256": "ed5ca0f4a4ff7d0e7354693158ad48733b8d7b6733f68df6cf5b86db11b3cb2d"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/09_lore_and_myth_hooks.md",
+      "sha256": "155b42e640b708a70f738c93b14018577f187c59c0358df68ae32f22c2edfed7"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/10_prophecy_and_future_bias_hooks.md",
+      "sha256": "8c7dd645cc80f49fb35164157c4e0bd105dff02fd56e909402e1ff9c0fa25cb9"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/11_artifact_and_creature_eligibility.md",
+      "sha256": "9747ccf8a4fc86bd293865c0704bf88ce022122eb0d5b504c442ee835e973c56"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/12_reward_resolution_plan.md",
+      "sha256": "a0fe9a693c56963ff0db86a2b9f430606049ebdc2491b80c08ababc30d5d6e12"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/13_playtest_scenarios.md",
+      "sha256": "2a481148b4104043c6b1bf2367c48416ece146a7c1c9e6fe945fcb9f42f6f138"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/14_vertical_slice_acceptance_matrix.md",
+      "sha256": "18d3cc2cb19b2ca43f8a6e441319fb2f991072da298a8162546387ab30c1c76c"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/15_phase_16_transition_notes.md",
+      "sha256": "16aff8671bfafe54e0b6cb879c17042b6070718c60dd52c5cdc75832ab890477"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/16_phase_17_acceptance_plan.md",
+      "sha256": "3bea9e068ebfc5f1cb0bb1179e48877894f9ec127ad3760b91e96ffb768ff336"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/17_playtest_trace_matrix.md",
+      "sha256": "2f4d15dafe574b8b799e50a6bf5d7c5b651c9ace7b9db3ff639965ad67cda557"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/18_choice_path_validation.md",
+      "sha256": "c194d71d797fca425c2444eb181e1f3ef45bf6a955717d9e3e9aba9d02493230"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/19_wolf_companion_validation.md",
+      "sha256": "8f355c125a46cbaa2d84e2805f20f0fa9211ab40ee788f35a2abee7d454a99dc"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/20_ability_and_combat_validation.md",
+      "sha256": "7d0d88353f229fd4d5f635b9d1e83f8b6fb9c7baccefbee0e4ac38361f3ab446"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/21_worldstate_location_validation.md",
+      "sha256": "2c153bdeceb85dc65ca1683abff47c53942d29be7d350847dd0b338b809f3dab"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/22_npc_lore_myth_prophecy_validation.md",
+      "sha256": "e8e989f77c96b0f2d0225aa2c2ddb61aea9b423a4b8a2db72f8da8222f8fd778"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/23_future_generation_bias_validation.md",
+      "sha256": "fd818e931e694c24c4eced2d5d2b87bfe369b15eb705fc84923de75e2b79dd1f"
+    },
+    {
+      "path": "docs/game/vertical_slices/ravenfall_gate/24_phase_17_acceptance_report_requirements.md",
+      "sha256": "cdcd367b073e22f4b08bea3dbebedbed5775b3ded5c941f7bfaabfb4ef1591fa"
+    },
+    {
+      "path": "docs/game/where_ravens_wait_eternal_reckoning/campaign_identity_model.md",
+      "sha256": "242ef8a2de40882f7b76190f97cc1d0daaca5072e5ab3d3cd34f1be6db367d5d"
+    },
+    {
+      "path": "docs/game/where_ravens_wait_eternal_reckoning_game_identity.md",
+      "sha256": "6d996bb2c3c81f19cdf091556f0ae81523558e26024aead959c01c38d1c19683"
+    },
+    {
+      "path": "docs/governance/README.md",
+      "sha256": "3803b98c11f7ade7974c6477d6355a06bcf7877d1c7c1e43a1c1624ed0b4608a"
+    },
+    {
+      "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+      "sha256": "6c888a9a59632ae6a91362047a735faaa21fc0f658589c60e60392054e115aa0"
+    },
+    {
+      "path": "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md",
+      "sha256": "f3e71c905317d537ee93debd1a513f6c11a43aee1a310c88cd4954bde9145da7"
+    },
+    {
+      "path": "docs/project/repository_map.md",
+      "sha256": "a6b1adfc912baba99336572ee401bc7aca01614cef7811d3edcb2617caf854c7"
+    },
+    {
+      "path": "docs/project/repository_status.md",
+      "sha256": "6abb3741b874819fcf8728b2845319d676d1d17b9e72de770a060cd5724deeef"
+    },
+    {
+      "path": "guide.md",
+      "sha256": "aa6a6c3b6b091e82a2deafee2e898af2a8f3ae4a1a3adf032a08f66b3c1fa2cd"
+    },
+    {
+      "path": "repository-contribution-policy.json",
+      "sha256": "c5850a09bbb4f3656efb259ef010dcfe14c600e2b5a198224bb6a4304183cca0"
+    },
+    {
+      "path": "wiki.md",
+      "sha256": "0c38542ce8414aef499afba72f745affa70a6dcbf7c9240c09e5e76ebbf518cf"
+    },
+    {
+      "path": "yggdrasil-instructions.json",
+      "sha256": "a92d757759ef1a4a9f39f2a19fd3ecaf5dcddf8c8908596c966bc05eca74720c"
+    }
+  ],
+  "reviewed_surface_aggregate_sha256": "c1030061ede3b41ada2da1d91ece9f5f2799c24279e215c4c12eba4d73f4d50d",
+  "promises": [
+    {
+      "promise_id": "PRM-001",
+      "claim": "Procedural quest generation derived from lawful cosmological and player context.",
+      "claim_type": "narrative_generation",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M5",
+        "M9"
+      ],
+      "owner_role": "Content-system maintainers",
+      "interpretation_constraint": "Current publication remains unreleased. Quest generation must not become independent random template selection.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Features"
+        },
+        {
+          "path": "wiki.md",
+          "locator_type": "exact_text",
+          "locator": "6. Quest Generation"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "11. QUEST GENERATION ENGINE"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-002",
+      "claim": "Dynamic myth formation from significant events and bounded social interpretation.",
+      "claim_type": "narrative_generation",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M5",
+        "M9"
+      ],
+      "owner_role": "Content-system maintainers",
+      "interpretation_constraint": "Myth cannot silently rewrite factual world truth. Current publication remains unreleased.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Dynamic Myth Formation"
+        },
+        {
+          "path": "wiki.md",
+          "locator_type": "exact_text",
+          "locator": "7. Myth Formation"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "13. MYTH GENERATION ENGINE"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-003",
+      "claim": "Prophecy generation as future-facing narrative pressure.",
+      "claim_type": "narrative_generation",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M5",
+        "M9"
+      ],
+      "owner_role": "Content-system maintainers",
+      "interpretation_constraint": "Prophecy is a probability-weighted attractor, not a deterministic script. Current publication remains unreleased.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Prophecy Generation"
+        },
+        {
+          "path": "wiki.md",
+          "locator_type": "exact_text",
+          "locator": "8. Prophecy System"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "14. PROPHECY ENGINE"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-004",
+      "claim": "Artifact generation, lifecycle semantics, and cross-system gameplay integration.",
+      "claim_type": "content_generation",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M5",
+        "M6",
+        "M7",
+        "M9"
+      ],
+      "owner_role": "Content-system maintainers",
+      "interpretation_constraint": "Artifact eligibility requires lawful provenance and a complete lifecycle. Artifact use cannot bypass consequence routing.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "ASH Upstream Generation Authority"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "Pattern Detection"
+        },
+        {
+          "path": "docs/game/vertical_slices/ravenfall_gate/11_artifact_and_creature_eligibility.md",
+          "locator_type": "exact_text",
+          "locator": "Rule"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-005",
+      "claim": "Creature generation, lifecycle semantics, and lawful encounter participation.",
+      "claim_type": "content_generation",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M5",
+        "M7",
+        "M9"
+      ],
+      "owner_role": "Content-system maintainers",
+      "interpretation_constraint": "Creatures cannot be generic random enemies detached from branch and world evidence. Encounter semantics remain incomplete until M7.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "ASH Upstream Generation Authority"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "Pattern Detection"
+        },
+        {
+          "path": "docs/game/vertical_slices/ravenfall_gate/11_artifact_and_creature_eligibility.md",
+          "locator_type": "exact_text",
+          "locator": "Rule"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-006",
+      "claim": "Player mythic identity, origin, and backstory revealed through play.",
+      "claim_type": "player_system",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M4",
+        "M6",
+        "M9"
+      ],
+      "owner_role": "Player-system maintainers",
+      "interpretation_constraint": "Identity is not reduced to a class-only character creator. Origin and progression state require persistence and replay semantics.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Overview"
+        },
+        {
+          "path": "wiki.md",
+          "locator_type": "exact_text",
+          "locator": "2. Player Model"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "4. PLAYER MODEL"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-007",
+      "claim": "Civilization, faction, economy, religion, and politics extension profiles.",
+      "claim_type": "world_system",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M8",
+        "M9"
+      ],
+      "owner_role": "World-system profile maintainers",
+      "interpretation_constraint": "Extension profiles cannot create an independent source of canonical truth. Current publication remains unreleased.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Current Authority Stack"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "Expansion Engines"
+        },
+        {
+          "path": "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md",
+          "locator_type": "exact_text",
+          "locator": "M8 — Complete environment world and society profiles"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-008",
+      "claim": "Multiplayer and MMO applicability at the specification and conformance level.",
+      "claim_type": "applicability",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M4",
+        "M9"
+      ],
+      "owner_role": "State and synchronization maintainers",
+      "interpretation_constraint": "This is a specification capability claim, not a published MMO product promise. Shared truth and player perception must remain distinct.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Design Goals"
+        },
+        {
+          "path": "wiki.md",
+          "locator_type": "exact_text",
+          "locator": "5. Perception Layer"
+        },
+        {
+          "path": "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md",
+          "locator_type": "exact_text",
+          "locator": "M4 — Complete state persistence branching and multiplayer"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-009",
+      "claim": "RPG and TTRPG applicability through profiles and conformance.",
+      "claim_type": "applicability",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M8",
+        "M9"
+      ],
+      "owner_role": "World-system profile maintainers",
+      "interpretation_constraint": "No shipped RPG or TTRPG product is implied. Applicability must be demonstrated through setting-neutral profiles.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Design Goals"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "Design Goals"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-010",
+      "claim": "Unity, Unreal, and Godot are future host eligibility targets.",
+      "claim_type": "platform_target",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M10"
+      ],
+      "owner_role": "Specification release authority",
+      "interpretation_constraint": "M10 is an eligibility gate, not an implementation promise. Platform work must occur in separate downstream repositories.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Future Host Targets"
+        },
+        {
+          "path": "developer-guide.md",
+          "locator_type": "exact_text",
+          "locator": "## 2. Preparing a Downstream Engine Implementation"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "21. ENGINE ADAPTERS"
+        },
+        {
+          "path": "adapters/unity/README.md",
+          "locator_type": "exact_text",
+          "locator": "Status"
+        },
+        {
+          "path": "adapters/unreal/README.md",
+          "locator_type": "exact_text",
+          "locator": "Status"
+        },
+        {
+          "path": "adapters/godot/README.md",
+          "locator_type": "exact_text",
+          "locator": "Status"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-011",
+      "claim": "Native macOS is the initial downstream product target for Where Ravens Wait: Eternal Reckoning.",
+      "claim_type": "platform_target",
+      "status": "active",
+      "disposition": "formally_excluded",
+      "milestones": [],
+      "owner_role": "WRW product maintainers",
+      "interpretation_constraint": "The YWE repository contains no native macOS runtime implementation. Platform work remains unauthorized until M10.",
+      "source_refs": [
+        {
+          "path": "docs/game/where_ravens_wait_eternal_reckoning_game_identity.md",
+          "locator_type": "exact_text",
+          "locator": "Product Law"
+        },
+        {
+          "path": "data/game/where_ravens_wait_eternal_reckoning/game_identity_manifest.json",
+          "locator_type": "json_pointer",
+          "locator": "/game_identity/initial_platform_target"
+        },
+        {
+          "path": "data/game/where_ravens_wait_eternal_reckoning/game_identity_manifest.json",
+          "locator_type": "json_pointer",
+          "locator": "/game_identity/runtime_strategy"
+        }
+      ],
+      "exclusion_reason": "Native macOS implementation is a separate downstream WRW product and is outside YWE Core implementation scope.",
+      "exclusion_authority_ref": "docs/game/where_ravens_wait_eternal_reckoning_game_identity.md"
+    },
+    {
+      "promise_id": "PRM-012",
+      "claim": "Infinite generation wording means open-ended lawful generation.",
+      "claim_type": "interpretation_constraint",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M5",
+        "M9"
+      ],
+      "owner_role": "Content-system maintainers",
+      "interpretation_constraint": "It does not mean unbounded resources. It does not guarantee globally unique content. All generation remains constrained by provenance and conformance.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Features"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "Infinite Quest Principle"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-013",
+      "claim": "Designers may define custom settings, lore, mythologies, factions, histories, and worlds on the structural ontology.",
+      "claim_type": "applicability",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M1",
+        "M8",
+        "M9"
+      ],
+      "owner_role": "World-system profile maintainers",
+      "interpretation_constraint": "Extensions may reskin presentation but cannot replace structural ontology. WRW-specific content must remain outside normative YWE Core.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Current Authority Stack"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "18. ENGINE-FIRST ARCHITECTURE"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-014",
+      "claim": "YWE is a code-agnostic and platform-neutral specification.",
+      "claim_type": "architecture",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M9",
+        "M10"
+      ],
+      "owner_role": "Conformance and release maintainers",
+      "interpretation_constraint": "Agnosticism must be proven by conformance evidence. No platform-specific runtime assumption may enter normative YWE Core.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Specification Roadmap"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "24. IMPLEMENTATION PRINCIPLES"
+        },
+        {
+          "path": "docs/project/repository_map.md",
+          "locator_type": "exact_text",
+          "locator": "Runtime Boundary"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-015",
+      "claim": "The nine-plane ontology is a fixed structural simulation foundation.",
+      "claim_type": "world_system",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M1",
+        "M3",
+        "M9"
+      ],
+      "owner_role": "Core semantics maintainers",
+      "interpretation_constraint": "Planes are structural states, not arbitrary generated biomes. Presentation may be renamed or reskinned only when structural relationships remain stable.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Canonical 9-Realm Cosmology"
+        },
+        {
+          "path": "wiki.md",
+          "locator_type": "exact_text",
+          "locator": "The Nine Realms"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "3. REALM SYSTEM"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-016",
+      "claim": "Realm attunement, access, travel, and shift behavior respond to player state and location conditions.",
+      "claim_type": "player_system",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M3",
+        "M4",
+        "M9"
+      ],
+      "owner_role": "Core semantics maintainers",
+      "interpretation_constraint": "Realm structure itself is not moved by the player. Travel and shift require normative threshold and location semantics.",
+      "source_refs": [
+        {
+          "path": "wiki.md",
+          "locator_type": "exact_text",
+          "locator": "4. Realm Attunement and Travel"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "9. REALM SHIFT SYSTEM"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-017",
+      "claim": "Player-specific perception overlays can differ without mutating shared world truth.",
+      "claim_type": "player_system",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M4",
+        "M9"
+      ],
+      "owner_role": "State and synchronization maintainers",
+      "interpretation_constraint": "Perception cannot rewrite shared truth. Multiplayer ordering and persistence remain M4 obligations.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Perception Layer"
+        },
+        {
+          "path": "wiki.md",
+          "locator_type": "exact_text",
+          "locator": "5. Perception Layer"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "8. PERCEPTION LAYER"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-018",
+      "claim": "Bloodline and lineage resonance influence eligibility and interpretation without locking destiny.",
+      "claim_type": "player_system",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M4",
+        "M9"
+      ],
+      "owner_role": "Player-state maintainers",
+      "interpretation_constraint": "Lineage resonance is not deterministic destiny. Persistence and migration behavior remain M4 obligations.",
+      "source_refs": [
+        {
+          "path": "wiki.md",
+          "locator_type": "exact_text",
+          "locator": "8. Prophecy System"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "7. BLOODLINE SYSTEM"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-019",
+      "claim": "Meaningful player choices generate runtime leaf-branch realities.",
+      "claim_type": "world_system",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M4",
+        "M9"
+      ],
+      "owner_role": "State and synchronization maintainers",
+      "interpretation_constraint": "Leaf branches are not pre-generated. Branch creation must preserve cosmological and worldstate provenance.",
+      "source_refs": [
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "Phase 9 Runtime Cosmology Foundation"
+        },
+        {
+          "path": "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md",
+          "locator_type": "exact_text",
+          "locator": "M4 — Complete state persistence branching and multiplayer"
+        },
+        {
+          "path": "docs/game/vertical_slices/ravenfall_gate/00_ravenfall_gate_vertical_slice_overview.md",
+          "locator_type": "exact_text",
+          "locator": "Core promise"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-020",
+      "claim": "Player action creates persistent worldstate and location consequences that bias later generation.",
+      "claim_type": "world_system",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M4",
+        "M5",
+        "M6",
+        "M9"
+      ],
+      "owner_role": "State and synchronization maintainers",
+      "interpretation_constraint": "Every meaningful mutation requires a consequence packet or explicit diagnostic no-op. Future bias is pressure, not a predetermined script.",
+      "source_refs": [
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "12. NARRATIVE ENGINE"
+        },
+        {
+          "path": "docs/game/vertical_slices/ravenfall_gate/00_ravenfall_gate_vertical_slice_overview.md",
+          "locator_type": "exact_text",
+          "locator": "Core promise"
+        },
+        {
+          "path": "docs/game/vertical_slices/ravenfall_gate/23_future_generation_bias_validation.md",
+          "locator_type": "exact_text",
+          "locator": "Future Generation Bias Validation"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-021",
+      "claim": "NPC synthesis and lore generation preserve relation, pattern, branch, and truth-scope evidence.",
+      "claim_type": "narrative_generation",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M5",
+        "M9"
+      ],
+      "owner_role": "Narrative-system maintainers",
+      "interpretation_constraint": "NPC claims and lore interpretations cannot silently become shared factual truth. Independent random NPC or lore generation is prohibited.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "ASH Upstream Generation Authority"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "12. NARRATIVE ENGINE"
+        },
+        {
+          "path": "docs/game/vertical_slices/ravenfall_gate/08_npc_and_faction_hooks.md",
+          "locator_type": "exact_text",
+          "locator": "Rule"
+        },
+        {
+          "path": "docs/game/vertical_slices/ravenfall_gate/09_lore_and_myth_hooks.md",
+          "locator_type": "exact_text",
+          "locator": "Lore generation rule"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-022",
+      "claim": "White Wolf and Dark Wolf are embodied complementary companions that may guide, assist, temporarily decohere, and recover.",
+      "claim_type": "player_system",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M6",
+        "M7",
+        "M9"
+      ],
+      "owner_role": "Player-system maintainers",
+      "interpretation_constraint": "The wolves are not moral opposites or enemies. Permanent wolf death is prohibited. Combat participation depends on M7 encounter semantics.",
+      "source_refs": [
+        {
+          "path": "wiki.md",
+          "locator_type": "exact_text",
+          "locator": "9. Wolf Manifestation"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "15. WOLF MANIFESTATION SYSTEM"
+        },
+        {
+          "path": "docs/game/vertical_slices/ravenfall_gate/05_wolf_companion_scene_plan.md",
+          "locator_type": "exact_text",
+          "locator": "Wolf Companion Scene Plan"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-023",
+      "claim": "Abilities and powers emerge from source-backed pressure and route consequences through normative packets.",
+      "claim_type": "player_system",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M6",
+        "M7",
+        "M9"
+      ],
+      "owner_role": "Player-system maintainers",
+      "interpretation_constraint": "Abilities are not a generic level, class, currency, or skill-point ladder. Combat integration remains dependent on M7.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Ability / Power Engine"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "Ability / Power Engine Integration"
+        },
+        {
+          "path": "docs/game/vertical_slices/ravenfall_gate/06_ability_use_plan.md",
+          "locator_type": "exact_text",
+          "locator": "Rule"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-024",
+      "claim": "Floki Hrafen Vilgerson is Nathruun's persistent Raven Companion in the WRW reference campaign.",
+      "claim_type": "reference_profile",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M6",
+        "M9"
+      ],
+      "owner_role": "Player-system maintainers",
+      "interpretation_constraint": "This is WRW reference-profile law, not universal YWE Core character content. Persistence, replay, and multiplayer behavior remain M6 obligations.",
+      "source_refs": [
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "Phase 15A WRW:ER Companion and Reward Foundation"
+        },
+        {
+          "path": "docs/game/companions/floki_hrafen_vilgerson_companion_brief.md",
+          "locator_type": "exact_text",
+          "locator": "Death / Removal Rule"
+        },
+        {
+          "path": "data/game/where_ravens_wait_eternal_reckoning/campaign_identity_manifest.json",
+          "locator_type": "json_pointer",
+          "locator": "/campaign_identity_model/canonical_first_campaign/persistent_raven_companion"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-025",
+      "claim": "Quest rewards resolve through structured, transactional consequence routing.",
+      "claim_type": "player_system",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M6",
+        "M9"
+      ],
+      "owner_role": "Player-system maintainers",
+      "interpretation_constraint": "A single completed flag is insufficient. Atomicity, rollback, idempotency, provenance, and diagnostics remain M6 obligations.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Phase 15A Companion and Reward Foundation"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "Phase 15A WRW:ER Companion and Reward Foundation"
+        },
+        {
+          "path": "docs/game/vertical_slices/ravenfall_gate/12_reward_resolution_plan.md",
+          "locator_type": "exact_text",
+          "locator": "Rule"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-026",
+      "claim": "YWE will define a platform-neutral combat and encounter system.",
+      "claim_type": "player_system",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M7",
+        "M9"
+      ],
+      "owner_role": "Encounter-system maintainers",
+      "interpretation_constraint": "Combat is not started at the audited baseline. No rendering, device, library, or platform assumption may enter normative encounter contracts.",
+      "source_refs": [
+        {
+          "path": "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md",
+          "locator_type": "exact_text",
+          "locator": "M7 — Build the combat and encounter system foundation"
+        },
+        {
+          "path": "docs/game/vertical_slices/ravenfall_gate/07_combat_encounter_plan.md",
+          "locator_type": "exact_text",
+          "locator": "Canon rule"
+        },
+        {
+          "path": "docs/game/vertical_slices/ravenfall_gate/20_ability_and_combat_validation.md",
+          "locator_type": "exact_text",
+          "locator": "Ability and Combat Validation"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-027",
+      "claim": "YWE may generate temporary narrative environments while persistent geography remains host-authored.",
+      "claim_type": "world_system",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M8",
+        "M9"
+      ],
+      "owner_role": "World-system profile maintainers",
+      "interpretation_constraint": "Persistent world geography is formally outside YWE generation. Temporary environments require a bounded lifecycle.",
+      "source_refs": [
+        {
+          "path": "wiki.md",
+          "locator_type": "exact_text",
+          "locator": "10. Terrain Generation"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "17. TERRAIN GENERATION MODEL"
+        },
+        {
+          "path": "adapters/unity/environment_bridge.md",
+          "locator_type": "exact_text",
+          "locator": "Purpose"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-028",
+      "claim": "A generic host materialization protocol can translate approved YWE manifests without authoring truth.",
+      "claim_type": "architecture",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M9"
+      ],
+      "owner_role": "Adapter and authoring maintainers",
+      "interpretation_constraint": "The generic protocol is not a shipped Unity, Unreal, or Godot runtime. Host adapters cannot author ASH or YWE domain truth.",
+      "source_refs": [
+        {
+          "path": "developer-guide.md",
+          "locator_type": "exact_text",
+          "locator": "5. Adapter Implementation"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "21. ENGINE ADAPTERS"
+        },
+        {
+          "path": "adapters/unity/adapter_interface.md",
+          "locator_type": "exact_text",
+          "locator": "Purpose"
+        },
+        {
+          "path": "adapters/unreal/adapter_interface.md",
+          "locator_type": "exact_text",
+          "locator": "Purpose"
+        },
+        {
+          "path": "adapters/godot/adapter_interface.md",
+          "locator_type": "exact_text",
+          "locator": "Purpose"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-029",
+      "claim": "The Nathruun campaign and Ravenfall Gate serve as the WRW reference profile and vertical slice.",
+      "claim_type": "reference_profile",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M6",
+        "M9"
+      ],
+      "owner_role": "Player-system maintainers",
+      "interpretation_constraint": "Reference-profile evidence does not claim that the downstream game product is complete. A setting-neutral scenario must pass the same normative contracts.",
+      "source_refs": [
+        {
+          "path": "docs/game/where_ravens_wait_eternal_reckoning/campaign_identity_model.md",
+          "locator_type": "exact_text",
+          "locator": "Campaign Structure"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "Phase 15A WRW:ER Companion and Reward Foundation"
+        },
+        {
+          "path": "docs/game/vertical_slices/ravenfall_gate/00_ravenfall_gate_vertical_slice_overview.md",
+          "locator_type": "exact_text",
+          "locator": "Purpose"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-030",
+      "claim": "Custom WRW origin mode unlocks after the Nathruun campaign.",
+      "claim_type": "reference_profile",
+      "status": "active",
+      "disposition": "formally_excluded",
+      "milestones": [],
+      "owner_role": "WRW product maintainers",
+      "interpretation_constraint": "The resolver remains deferred. This record does not authorize product implementation before M10.",
+      "source_refs": [
+        {
+          "path": "docs/game/where_ravens_wait_eternal_reckoning/campaign_identity_model.md",
+          "locator_type": "exact_text",
+          "locator": "Custom-Origin Deferral"
+        },
+        {
+          "path": "data/game/where_ravens_wait_eternal_reckoning/campaign_identity_manifest.json",
+          "locator_type": "json_pointer",
+          "locator": "/campaign_identity_model/unlock_conditions/custom_wrw_origin"
+        }
+      ],
+      "exclusion_reason": "Custom-origin mode is a downstream WRW product feature and is not an agnostic YWE Core implementation obligation.",
+      "exclusion_authority_ref": "docs/game/where_ravens_wait_eternal_reckoning/campaign_identity_model.md"
+    },
+    {
+      "promise_id": "PRM-031",
+      "claim": "The Divine Core is the WRW narrative endgame destination.",
+      "claim_type": "reference_profile",
+      "status": "active",
+      "disposition": "formally_excluded",
+      "milestones": [],
+      "owner_role": "WRW product maintainers",
+      "interpretation_constraint": "The nine-plane ontology remains YWE structural authority. The specific endgame is WRW narrative content, not universal YWE Core behavior.",
+      "source_refs": [
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "16. DIVINE CORE ENDGAME"
+        }
+      ],
+      "exclusion_reason": "The specific Divine Core endgame is game-layer narrative content and is outside normative YWE Core product implementation.",
+      "exclusion_authority_ref": "docs/architecture/engine_vs_game_layer_contract.md"
+    },
+    {
+      "promise_id": "PRM-032",
+      "claim": "YWE supports modular engines and event-driven expansion through stable interfaces.",
+      "claim_type": "architecture",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M3",
+        "M8",
+        "M9"
+      ],
+      "owner_role": "Core semantics maintainers",
+      "interpretation_constraint": "Modules cannot create dependency cycles or independent truth. Interface and lifecycle semantics must be completed before release.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "System Map"
+        },
+        {
+          "path": "wiki.md",
+          "locator_type": "exact_text",
+          "locator": "12. Module Communication"
+        },
+        {
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator_type": "exact_text",
+          "locator": "18. ENGINE-FIRST ARCHITECTURE"
+        },
+        {
+          "path": "guide.md",
+          "locator_type": "exact_text",
+          "locator": "6. Module Rules"
+        }
+      ]
+    },
+    {
+      "promise_id": "PRM-033",
+      "claim": "The agnostic specification will be frozen and published only through M10 acceptance and an explicit release record.",
+      "claim_type": "publication",
+      "status": "active",
+      "disposition": "milestone_assigned",
+      "milestones": [
+        "M10"
+      ],
+      "owner_role": "Specification release authority",
+      "interpretation_constraint": "Current publication remains unreleased. Repository baselines, tags, changelog entries, and GitHub Release objects are not sufficient publication evidence.",
+      "source_refs": [
+        {
+          "path": "README.md",
+          "locator_type": "exact_text",
+          "locator": "Current status"
+        },
+        {
+          "path": "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md",
+          "locator_type": "exact_text",
+          "locator": "M10 — Freeze and release the agnostic specification"
+        },
+        {
+          "path": "docs/project/repository_status.md",
+          "locator_type": "exact_text",
+          "locator": "Specification Maturity"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "reviewed_surface_count": 65,
+    "promise_count": 33,
+    "assigned_count": 30,
+    "excluded_count": 3,
+    "unresolved_count": 0
+  }
+}

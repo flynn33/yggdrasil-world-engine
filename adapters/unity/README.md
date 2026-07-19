@@ -10,6 +10,9 @@ Translates YWE systems into Unity-specific implementations using native Unity AP
 
 Planned.
 
+This is a platform-neutral planning surface. Concrete Unity implementation
+belongs in a separately authorized downstream repository after M10 acceptance.
+
 ## Files
 
 - `adapter_interface.md` -- Interface specification for the Unity adapter

@@ -6,10 +6,10 @@ Thank you for your interest in contributing to the Yggdrasil World Engine.
 
 All contributors must agree to the Contributor License Agreement before any contribution can be merged. By submitting a pull request, you agree to the terms outlined in [CLA.md](CLA.md).
 
-## Branch Model
+## Repository and Branch Model
 
-- **main**: The sealed, code-agnostic specification. Contains contracts, schemas, documentation, and governance. No engine-specific code.
-- **Engine branches** (e.g., `unity`, `unreal`, `godot`): Engine-specific implementations. These do not merge with `main`.
+- **All branches in this repository**: Agnostic specification work only. A branch name never activates platform implementation mode.
+- **Downstream platform repositories**: Concrete Unity, Unreal, Godot, or other product implementations may begin only after M10 acceptance and explicit platform authorization.
 
 ## How to Contribute
 
@@ -21,13 +21,13 @@ All contributors must agree to the Contributor License Agreement before any cont
 4. Ensure all validation scripts pass: `bash scripts/run_checks.sh`
 5. Open a pull request against `main`.
 
-### Engine Implementations (engine branches)
+### Engine Implementations (separate downstream repositories after M10)
 
-1. Fork the repository.
-2. Create a feature branch from the appropriate engine branch.
+1. Use a separately authorized downstream platform repository.
+2. Create a feature branch in that downstream repository.
 3. Implement against the contracts defined in `core/*/engine_interface.json`.
 4. Use native engine idioms (C# for Unity, C++ for Unreal, GDScript for Godot).
-5. Open a pull request against the engine branch.
+5. Open a pull request against that downstream repository.
 
 ## Rules
 

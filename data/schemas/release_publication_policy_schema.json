@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/release_publication_policy_schema.json",
+  "title": "YWE Release and Publication Policy",
+  "type": "object",
+  "required": [
+    "artifact_type",
+    "artifact_version",
+    "schema_ref",
+    "recorded_on",
+    "baseline_authority_ref",
+    "repository_baseline",
+    "concepts",
+    "version_mirror_registry_ref",
+    "publication_state_authority_ref",
+    "platform_gate_authority_ref",
+    "pre_m10_constraints",
+    "historical_exception_ref",
+    "tag_semantics",
+    "changelog_semantics",
+    "eligibility_gate",
+    "allowed_while_unreleased",
+    "prohibited_while_unreleased"
+  ],
+  "properties": {
+    "artifact_type": {"const": "release_publication_policy"},
+    "artifact_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "schema_ref": {"const": "data/schemas/release_publication_policy_schema.json"},
+    "recorded_on": {"type": "string", "format": "date"},
+    "baseline_authority_ref": {"const": "VERSION"},
+    "repository_baseline": {
+      "type": "object",
+      "required": ["canonical_source", "value", "mirrors"],
+      "properties": {
+        "canonical_source": {"const": "VERSION"},
+        "value": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "mirrors": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "additionalProperties": false
+    },
+    "concepts": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": ["id", "definition", "creates_specification_publication"],
+        "properties": {
+          "id": {
+            "enum": [
+              "repository_baseline_version",
+              "git_tag",
+              "changelog_entry",
+              "github_release_object",
+              "agnostic_specification_release",
+              "downstream_product_release"
+            ]
+          },
+          "definition": {"type": "string", "minLength": 20},
+          "creates_specification_publication": {"type": "boolean"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "version_mirror_registry_ref": {"const": "data/governance/specification_roadmap.json#/version_sources"},
+    "publication_state_authority_ref": {"const": "data/governance/specification_roadmap.json#/publication"},
+    "platform_gate_authority_ref": {"const": "data/governance/specification_roadmap.json#/platform_gate"},
+    "pre_m10_constraints": {
+      "type": "object",
+      "required": ["publication_state", "published_releases", "github_release_objects", "agnostic_specification_releases", "platform_work_authorized"],
+      "properties": {
+        "publication_state": {"const": "unreleased"},
+        "published_releases": {"const": 0},
+        "github_release_objects": {"const": 0},
+        "agnostic_specification_releases": {"const": 0},
+        "platform_work_authorized": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "historical_exception_ref": {"type": "string", "pattern": "^QD-[0-9]{3}$"},
+    "tag_semantics": {
+      "type": "object",
+      "required": ["prefix", "classification", "existing_tag_count", "tags_at_current_head", "publication_effect"],
+      "properties": {
+        "prefix": {"const": "v"},
+        "classification": {"const": "repository_baseline_marker"},
+        "existing_tag_count": {"type": "integer", "minimum": 0},
+        "tags_at_current_head": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"}
+        },
+        "publication_effect": {"const": "none"}
+      },
+      "additionalProperties": false
+    },
+    "changelog_semantics": {
+      "type": "object",
+      "required": ["path", "classification", "unreleased_heading_semantics", "versioned_heading_semantics"],
+      "properties": {
+        "path": {"const": "CHANGELOG.md"},
+        "classification": {"const": "repository_history"},
+        "unreleased_heading_semantics": {"type": "string", "minLength": 20},
+        "versioned_heading_semantics": {"type": "string", "minLength": 20}
+      },
+      "additionalProperties": false
+    },
+    "eligibility_gate": {
+      "type": "object",
+      "required": ["required_milestone", "m10_accepted", "release_eligible", "platform_work_authorized", "downstream_platform_repositories_required"],
+      "properties": {
+        "required_milestone": {"const": "M10"},
+        "m10_accepted": {"type": "boolean"},
+        "release_eligible": {"type": "boolean"},
+        "platform_work_authorized": {"type": "boolean"},
+        "downstream_platform_repositories_required": {"const": true}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"m10_accepted": {"const": false}}},
+          "then": {
+            "properties": {
+              "release_eligible": {"const": false},
+              "platform_work_authorized": {"const": false}
+            }
+          }
+        },
+        {
+          "if": {
+            "anyOf": [
+              {"properties": {"release_eligible": {"const": true}}},
+              {"properties": {"platform_work_authorized": {"const": true}}}
+            ]
+          },
+          "then": {"properties": {"m10_accepted": {"const": true}}}
+        }
+      ],
+      "additionalProperties": false
+    },
+    "allowed_while_unreleased": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 8}
+    },
+    "prohibited_while_unreleased": {
+      "type": "array",
+      "minItems": 4,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 8}
+    }
+  },
+  "additionalProperties": false
+}

@@ -33,7 +33,7 @@ The controlling authority contracts for this clarification are
 
 The **Yggdrasil World Engine (YWE)** is a **code-agnostic cosmic narrative simulation engine** designed to generate:
 
-- infinite quests
+- open-ended quest generation within deterministic resource and conformance bounds
 - mythologies
 - artifacts
 - creatures
@@ -69,7 +69,7 @@ ASH Model of the Universe
   -> Yggdrasil World Engine
     -> ASH Pattern System component and YWE runtime systems
       -> YWE feature engines
-        -> platform-specific runtime implementations
+        -> post-M10 downstream platform implementations
 ```
 
 YWE is the downstream world, narrative, and manifestation engine built on the
@@ -81,8 +81,8 @@ wolf, and ability manifestations.
 YWE is not the origin of ASH math. YWE must not redefine ASH state space,
 codeword sets, transition rules, diagnostics, or generation-planning semantics.
 Player actions influence future generation context; they do not mutate ASH
-math. Host adapters materialize approved manifests but do not author symbolic
-truth.
+math. After M10 acceptance, separately authorized downstream host adapters may
+materialize approved manifests but do not author symbolic truth.
 
 The canonical architecture contract for this boundary is
 `docs/architecture/ash_upstream_authority_contract.md`.

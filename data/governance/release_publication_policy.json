@@ -1,0 +1,89 @@
+{
+  "artifact_type": "release_publication_policy",
+  "artifact_version": "1.0.0",
+  "schema_ref": "data/schemas/release_publication_policy_schema.json",
+  "recorded_on": "2026-07-19",
+  "baseline_authority_ref": "VERSION",
+  "repository_baseline": {
+    "canonical_source": "VERSION",
+    "value": "2.0.23",
+    "mirrors": [
+      "version.txt"
+    ]
+  },
+  "concepts": [
+    {
+      "id": "repository_baseline_version",
+      "definition": "The versioned identity of a validated repository state.",
+      "creates_specification_publication": false
+    },
+    {
+      "id": "git_tag",
+      "definition": "A repository baseline marker attached to a Git object.",
+      "creates_specification_publication": false
+    },
+    {
+      "id": "changelog_entry",
+      "definition": "A repository history record for pending or completed changes.",
+      "creates_specification_publication": false
+    },
+    {
+      "id": "github_release_object",
+      "definition": "A hosting-platform release record that is distinct from specification acceptance.",
+      "creates_specification_publication": false
+    },
+    {
+      "id": "agnostic_specification_release",
+      "definition": "The explicit publication event for the accepted agnostic specification.",
+      "creates_specification_publication": true
+    },
+    {
+      "id": "downstream_product_release",
+      "definition": "A release from a separately authorized downstream platform product repository.",
+      "creates_specification_publication": false
+    }
+  ],
+  "version_mirror_registry_ref": "data/governance/specification_roadmap.json#/version_sources",
+  "publication_state_authority_ref": "data/governance/specification_roadmap.json#/publication",
+  "platform_gate_authority_ref": "data/governance/specification_roadmap.json#/platform_gate",
+  "pre_m10_constraints": {
+    "publication_state": "unreleased",
+    "published_releases": 0,
+    "github_release_objects": 0,
+    "agnostic_specification_releases": 0,
+    "platform_work_authorized": false
+  },
+  "historical_exception_ref": "QD-071",
+  "tag_semantics": {
+    "prefix": "v",
+    "classification": "repository_baseline_marker",
+    "existing_tag_count": 23,
+    "tags_at_current_head": [],
+    "publication_effect": "none"
+  },
+  "changelog_semantics": {
+    "path": "CHANGELOG.md",
+    "classification": "repository_history",
+    "unreleased_heading_semantics": "Records pending repository changes and does not declare publication.",
+    "versioned_heading_semantics": "Records repository baselines and history and does not create a published release."
+  },
+  "eligibility_gate": {
+    "required_milestone": "M10",
+    "m10_accepted": false,
+    "release_eligible": false,
+    "platform_work_authorized": false,
+    "downstream_platform_repositories_required": true
+  },
+  "allowed_while_unreleased": [
+    "agnostic specification roadmap work",
+    "repository baseline maintenance",
+    "repository validation and conformance"
+  ],
+  "prohibited_while_unreleased": [
+    "claim an agnostic specification publication",
+    "create a GitHub Release object",
+    "implement a platform product in this repository",
+    "represent a repository tag as publication",
+    "ship a downstream platform product"
+  ]
+}

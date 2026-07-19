@@ -19,7 +19,8 @@ schema, conformance, or release completion.
 | Whole-system conformance | Not complete |
 | Agnostic specification release readiness | Not ready |
 | Published releases | None; no GitHub Release objects or agnostic specification releases have been published |
-| Current roadmap milestone | M0 - Establish one truthful baseline |
+| M0 truthful baseline | Complete; evidence recorded in `data/governance/m0_acceptance_evidence.json` and `docs/project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md` |
+| Current roadmap milestone | M1 - Normalize canon terminology and governance |
 | Platform product work | Deferred through M10 |
 
 ## Authority Stack
@@ -55,7 +56,7 @@ schema, conformance, or release completion.
 - Player runtime state references branch reality; it does not replace branch reality.
 - Worldstate and location mutation use scoped consequence packets and preserve base ontology.
 - Quest, NPC, lore archive, myth, and prophecy outputs require provenance and truth scope.
-- Ability, companion, reward, vertical-slice, and playtest artifacts are code-agnostic repository contracts unless an engine adapter contract explicitly owns host realization.
+- Ability, companion, reward, vertical-slice, and playtest artifacts are code-agnostic repository contracts; only a future post-M10 downstream adapter contract may own host realization.
 
 ## Validation Entry Points
 

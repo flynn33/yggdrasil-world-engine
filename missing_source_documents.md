@@ -6,11 +6,16 @@ This inventory tracks three distinct repo-truth states:
 - blocking missing artifacts that would break the active authority or canonical chain
 - intentional placeholder-backed artifacts that remain tracked follow-up work
 
+Current authority: `data/governance/artifact_classification_manifest.json`
+governs maturity, `docs/project/source_inventory.md` governs human routing,
+and `SOURCE_AVAILABILITY_MANIFEST.md` is historical source-ingest provenance.
+
 ## Inventory Status Summary
 
-- Resolved canonical artifacts: `12`
+- Resolved canonical artifacts: `15`
 - Blocking missing artifacts: `0`
-- Intentional placeholder-backed artifacts: `14`
+- Intentional placeholder-backed artifacts: `9`
+- Current placeholder artifacts: `46`
 - Master spec authority artifact: present at `docs/master_specification/YWE_MASTER_SPECIFICATION.md`
 - Repository map: present at `docs/project/repository_map.md`
 - ASH/ASP core math rebuild: present in the current repository state
@@ -57,23 +62,17 @@ schema, and rule surfaces with the required ASH math provenance.
 
 ## Intentional Placeholder-Backed Artifacts
 
-These items remain intentionally placeholder-backed and are the clearest
-remaining concrete follow-up targets before inventing new subsystem layers.
+- player_origin_arc_rules.yaml
+- PLAYER_ORIGIN_ARC_NOTES.md
+- NPC_SYNTHESIS_NOTES.md
+- QUEST_CHAIN_TEMPLATE_NOTES.md
+- WORLDSTATE_DELTA_RULES_NOTES.md
+- myth_emergence_rules.yaml
+- MYTH_EMERGENCE_RULES_NOTES.md
+- prophecy_activation_rules.yaml
+- PROPHECY_ACTIVATION_RULES_NOTES.md
 
-- `player_origin_arc_rules.yaml`
-- `PLAYER_ORIGIN_ARC_NOTES.md`
-- `npc_synthesis_rules.yaml`
-- `NPC_SYNTHESIS_NOTES.md`
-- `quest_chain_templates.yaml`
-- `QUEST_CHAIN_TEMPLATE_NOTES.md`
-- `ash_runtime_generation_flow.yaml`
-- `ASH_RUNTIME_GENERATION_FLOW_NOTES.md`
-- `worldstate_delta_rules.yaml`
-- `WORLDSTATE_DELTA_RULES_NOTES.md`
-- `myth_emergence_rules.yaml`
-- `MYTH_EMERGENCE_RULES_NOTES.md`
-- `prophecy_activation_rules.yaml`
-- `PROPHECY_ACTIVATION_RULES_NOTES.md`
+## Inventory Context
 
 ### Support Pass Status (2026-03-14)
 
@@ -92,7 +91,8 @@ remaining concrete follow-up targets before inventing new subsystem layers.
 - The canonical promotion list above is current and validated.
 - No blocking missing authority-chain or canonical artifacts are currently tracked.
 - The placeholder-backed list above reflects tracked repo work that still needs finalized source-backed content.
-- Structural placeholders outside this tracked set may still exist elsewhere in the repo, but they are not currently treated as promoted canonical-support gaps.
+- The broader repository placeholder class is recorded independently in the
+  artifact classification manifest; this section covers source-manifest items.
 
 ## Update Discipline
 

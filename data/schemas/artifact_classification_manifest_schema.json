@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/artifact_classification_manifest_schema.json",
+  "title": "YWE Repository Artifact Classification Manifest",
+  "type": "object",
+  "required": [
+    "schema_ref",
+    "artifact_type",
+    "artifact_version",
+    "repository_baseline",
+    "policy_ref",
+    "scope_manifest_ref",
+    "tracked_path_snapshot",
+    "classes",
+    "matching_policy",
+    "ordered_rules",
+    "overrides",
+    "sensitive_source_hash_algorithm",
+    "sensitive_sources",
+    "coverage"
+  ],
+  "properties": {
+    "schema_ref": {"const": "data/schemas/artifact_classification_manifest_schema.json"},
+    "artifact_type": {"const": "repository_artifact_classification_manifest"},
+    "artifact_version": {"$ref": "#/$defs/semantic_version"},
+    "repository_baseline": {"$ref": "#/$defs/semantic_version"},
+    "policy_ref": {"$ref": "#/$defs/repository_path"},
+    "scope_manifest_ref": {"const": "data/governance/scope_partition_manifest.json"},
+    "tracked_path_snapshot": {"$ref": "#/$defs/path_snapshot"},
+    "classes": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {"$ref": "#/$defs/class_definition"}
+    },
+    "matching_policy": {"$ref": "#/$defs/matching_policy"},
+    "ordered_rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/rule"}
+    },
+    "overrides": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/override"}
+    },
+    "sensitive_source_hash_algorithm": {"const": "sha256_utf8_lf_normalized"},
+    "sensitive_sources": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/sensitive_source"}
+    },
+    "coverage": {
+      "type": "object",
+      "required": ["counts_by_class"],
+      "properties": {
+        "counts_by_class": {"$ref": "#/$defs/class_counts"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "semantic_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "repository_path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    },
+    "milestone": {"type": "string", "pattern": "^M(?:[1-9]|10)$"},
+    "classification": {
+      "enum": [
+        "normative",
+        "informative",
+        "example",
+        "historical",
+        "deprecated",
+        "superseded",
+        "placeholder"
+      ]
+    },
+    "path_snapshot": {
+      "type": "object",
+      "required": ["source", "path_count", "path_digest", "digest_algorithm"],
+      "properties": {
+        "source": {"const": "git_tracked_and_nonignored_untracked"},
+        "path_count": {"type": "integer", "minimum": 1},
+        "path_digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "digest_algorithm": {"const": "sha256_sorted_posix_paths_nul"}
+      },
+      "additionalProperties": false
+    },
+    "matching_policy": {
+      "type": "object",
+      "required": [
+        "path_style",
+        "case_sensitive",
+        "overrides_terminal",
+        "fail_on_zero_matches",
+        "fail_on_multiple_matches",
+        "fail_on_path_snapshot_drift"
+      ],
+      "properties": {
+        "path_style": {"const": "repository_relative_posix"},
+        "case_sensitive": {"const": true},
+        "overrides_terminal": {"const": true},
+        "fail_on_zero_matches": {"const": true},
+        "fail_on_multiple_matches": {"const": true},
+        "fail_on_path_snapshot_drift": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "class_definition": {
+      "type": "object",
+      "required": ["id", "definition"],
+      "properties": {
+        "id": {"$ref": "#/$defs/classification"},
+        "definition": {"type": "string", "minLength": 10}
+      },
+      "additionalProperties": false
+    },
+    "common_assignment": {
+      "type": "object",
+      "required": ["classification", "owner_role", "governing_source", "rationale"],
+      "properties": {
+        "classification": {"$ref": "#/$defs/classification"},
+        "owner_role": {"type": "string", "minLength": 3},
+        "governing_source": {"$ref": "#/$defs/repository_path"},
+        "rationale": {"type": "string", "minLength": 10},
+        "origin_phase": {"type": "string", "minLength": 2},
+        "current_milestone": {"type": "string", "pattern": "^M(?:[0-9]|10)$"},
+        "future_milestone": {"$ref": "#/$defs/milestone"},
+        "superseded_by": {"$ref": "#/$defs/repository_path"},
+        "migration_ref": {"$ref": "#/$defs/repository_path"},
+        "debt_ref": {"$ref": "#/$defs/debt_id"},
+        "authority_role": {
+          "enum": ["primary", "synchronized_mirror", "generated_projection", "supporting", "not_applicable"]
+        },
+        "mirror_of": {"$ref": "#/$defs/repository_path"},
+        "synchronization_check_ref": {"$ref": "#/$defs/repository_path"},
+        "secondary_tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"}
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"classification": {"const": "placeholder"}}},
+          "then": {"required": ["future_milestone", "debt_ref"]}
+        },
+        {
+          "if": {"properties": {"classification": {"const": "superseded"}}},
+          "then": {"required": ["superseded_by"]}
+        },
+        {
+          "if": {"properties": {"classification": {"const": "deprecated"}}},
+          "then": {"required": ["migration_ref"]}
+        },
+        {
+          "if": {
+            "required": ["authority_role"],
+            "properties": {"authority_role": {"const": "synchronized_mirror"}}
+          },
+          "then": {"required": ["mirror_of", "synchronization_check_ref"]}
+        }
+      ]
+    },
+    "rule": {
+      "allOf": [
+        {"$ref": "#/$defs/common_assignment"},
+        {
+          "type": "object",
+          "required": ["priority", "id", "include", "exclude"],
+          "properties": {
+            "priority": {"type": "integer", "minimum": 0},
+            "id": {"type": "string", "pattern": "^ACR-[0-9]{3,}$"},
+            "include": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {"type": "string", "minLength": 1}
+            },
+            "exclude": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "override": {
+      "allOf": [
+        {"$ref": "#/$defs/common_assignment"},
+        {
+          "type": "object",
+          "required": ["path"],
+          "properties": {"path": {"$ref": "#/$defs/repository_path"}}
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "class_counts": {
+      "type": "object",
+      "required": ["normative", "informative", "example", "historical", "deprecated", "superseded", "placeholder"],
+      "properties": {
+        "normative": {"type": "integer", "minimum": 0},
+        "informative": {"type": "integer", "minimum": 0},
+        "example": {"type": "integer", "minimum": 0},
+        "historical": {"type": "integer", "minimum": 0},
+        "deprecated": {"type": "integer", "minimum": 0},
+        "superseded": {"type": "integer", "minimum": 0},
+        "placeholder": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "sensitive_source": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"$ref": "#/$defs/repository_path"},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      },
+      "additionalProperties": false
+    },
+    "debt_id": {
+      "type": "string",
+      "pattern": "^QD-(?:[0-9]{3,}|PH-[a-f0-9]{8,64}|OW-[0-9]{3,})$"
+    }
+  },
+  "additionalProperties": false
+}

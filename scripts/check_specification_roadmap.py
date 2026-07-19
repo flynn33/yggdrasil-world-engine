@@ -36,6 +36,11 @@ REQUIRED_CHECK_CONTRACTS = [
     ("validation_unit_tests", "<unit-tests>", ["bootstrap", "tests"]),
     ("architecture_structure", "scripts/validate_architecture.py", ["architecture", "governance", "legacy-structural"]),
     ("governance_contracts", "scripts/check_governance_contracts.py", ["governance", "architecture"]),
+    (
+        "m0_truthful_baseline",
+        "scripts/check_m0_truthful_baseline.py",
+        ["governance", "status", "traceability"],
+    ),
     ("legacy_schema_contracts", "scripts/validate_schemas.py", ["schema", "legacy-structural", "phase"]),
     ("ash_compliance", "scripts/validate_ash_compliance.py", ["ash", "governance"]),
     ("ash_semantic_integrity", ".github/scripts/semantic_integrity_check.py", ["ash"]),
@@ -69,9 +74,12 @@ def load_json(path: Path):
 def dotted_value(value: dict, dotted_path: str):
     current = value
     for part in dotted_path.split("."):
-        if not isinstance(current, dict) or part not in current:
+        if isinstance(current, dict) and part in current:
+            current = current[part]
+        elif isinstance(current, list) and part.isdigit() and int(part) < len(current):
+            current = current[int(part)]
+        else:
             raise KeyError(dotted_path)
-        current = current[part]
     return current
 
 
@@ -463,14 +471,14 @@ def subsystem_errors(root: Path, roadmap: dict, document_text: str | None = None
 
 def version_errors(root: Path, roadmap: dict) -> list[str]:
     errors = []
-    canonical_path = root / "version.txt"
+    canonical_path = root / "VERSION"
     try:
         version = canonical_path.read_text(encoding="utf-8-sig").strip()
     except OSError as exc:
         return [f"Unable to read canonical version source: {exc}"]
     if roadmap.get("repository_baseline") != version:
         errors.append(
-            f"Roadmap repository_baseline {roadmap.get('repository_baseline')!r} does not match version.txt {version!r}"
+            f"Roadmap repository_baseline {roadmap.get('repository_baseline')!r} does not match VERSION {version!r}"
         )
 
     for source in roadmap.get("version_sources", []):
@@ -502,6 +510,21 @@ def version_errors(root: Path, roadmap: dict) -> list[str]:
         heading = rf"(?m)^## \[{re.escape(version)}\]\s+(?:-|—)\s+\d{{4}}-\d{{2}}-\d{{2}}\s*$"
         if not re.search(heading, changelog_path.read_text(encoding="utf-8-sig")):
             errors.append(f"CHANGELOG.md has no baseline heading for {version}")
+    return errors
+
+
+def wiki_version_workflow_errors(root: Path) -> list[str]:
+    workflow = root / ".github/workflows/wiki-sync.yml"
+    if not workflow.is_file():
+        return ["Wiki synchronization workflow is missing"]
+    text = workflow.read_text(encoding="utf-8-sig")
+    errors = []
+    if "main-repo/VERSION" not in text:
+        errors.append("Wiki synchronization must read the canonical VERSION source")
+    if "main-repo/version.txt" in text:
+        errors.append("Wiki synchronization must not read the version.txt mirror as authority")
+    if "- 'VERSION'" not in text:
+        errors.append("Wiki synchronization must trigger when VERSION changes")
     return errors
 
 
@@ -615,6 +638,7 @@ def main() -> int:
             errors.append("Version baseline workflow must not create publication-like tags")
 
     errors.extend(version_errors(root, roadmap))
+    errors.extend(wiki_version_workflow_errors(root))
     errors.extend(status_source_errors(root, roadmap))
 
     readme_path = root / "README.md"

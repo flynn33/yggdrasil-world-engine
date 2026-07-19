@@ -1,0 +1,532 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/milestone_acceptance_evidence_schema.json",
+  "title": "YWE M0 Milestone Acceptance Evidence",
+  "type": "object",
+  "required": [
+    "artifact_type",
+    "artifact_version",
+    "schema_ref",
+    "milestone_id",
+    "outcome",
+    "recorded_at",
+    "baseline",
+    "authority_and_phase_alignment",
+    "repository_state_digest_algorithm",
+    "repository_state_digest",
+    "digest_exclusions",
+    "check_catalog",
+    "validation_runs",
+    "deliverables",
+    "exit_criteria",
+    "safety_criteria",
+    "foundation_gates",
+    "classification_metrics",
+    "scope_metrics",
+    "promise_metrics",
+    "promise_source_evidence",
+    "debt_metrics",
+    "debt_ownership_metrics",
+    "source_inventory_result",
+    "diff_review",
+    "protected_path_diff",
+    "roadmap_transition",
+    "deferred_work",
+    "unresolved_issues"
+  ],
+  "properties": {
+    "artifact_type": {"const": "milestone_acceptance_evidence"},
+    "artifact_version": {"const": "1.0.0"},
+    "schema_ref": {"const": "data/schemas/milestone_acceptance_evidence_schema.json"},
+    "milestone_id": {"const": "M0"},
+    "outcome": {"const": "pass"},
+    "recorded_at": {"type": "string", "format": "date-time"},
+    "baseline": {"$ref": "#/$defs/baseline"},
+    "authority_and_phase_alignment": {"$ref": "#/$defs/authority_and_phase_alignment"},
+    "repository_state_digest_algorithm": {
+      "const": "sha256_sorted_path_nul_normalized_utf8_lf_sha256_nul"
+    },
+    "repository_state_digest": {"$ref": "#/$defs/sha256"},
+    "digest_exclusions": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        {"const": "data/governance/m0_acceptance_evidence.json"},
+        {"const": "docs/project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md"}
+      ],
+      "items": false
+    },
+    "check_catalog": {
+      "type": "object",
+      "required": ["path", "hash_algorithm", "sha256"],
+      "properties": {
+        "path": {"const": "data/validation/repository_checks.json"},
+        "hash_algorithm": {"const": "sha256_utf8_lf_normalized"},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "additionalProperties": false
+    },
+    "validation_runs": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        {
+          "allOf": [
+            {"$ref": "#/$defs/validation_run"},
+            {"properties": {"context": {"const": "local"}}}
+          ]
+        },
+        {
+          "allOf": [
+            {"$ref": "#/$defs/validation_run"},
+            {"properties": {"context": {"const": "pull_request"}}}
+          ]
+        }
+      ],
+      "items": false
+    },
+    "deliverables": {"$ref": "#/$defs/deliverables"},
+    "exit_criteria": {"$ref": "#/$defs/exit_criteria"},
+    "safety_criteria": {"$ref": "#/$defs/safety_criteria"},
+    "foundation_gates": {"$ref": "#/$defs/foundation_gates"},
+    "classification_metrics": {"$ref": "#/$defs/classification_metrics"},
+    "scope_metrics": {"$ref": "#/$defs/scope_metrics"},
+    "promise_metrics": {"$ref": "#/$defs/promise_metrics"},
+    "promise_source_evidence": {"$ref": "#/$defs/promise_source_evidence"},
+    "debt_metrics": {"$ref": "#/$defs/debt_metrics"},
+    "debt_ownership_metrics": {"$ref": "#/$defs/debt_ownership_metrics"},
+    "source_inventory_result": {"const": "pass"},
+    "diff_review": {"$ref": "#/$defs/diff_review"},
+    "protected_path_diff": {"$ref": "#/$defs/protected_path_diff"},
+    "roadmap_transition": {
+      "type": "object",
+      "required": ["completed_milestone", "activated_milestone", "current_milestone"],
+      "properties": {
+        "completed_milestone": {"const": "M0"},
+        "activated_milestone": {"const": "M1"},
+        "current_milestone": {"const": "M1"}
+      },
+      "additionalProperties": false
+    },
+    "deferred_work": {"$ref": "#/$defs/deferred_work"},
+    "unresolved_issues": {
+      "type": "array",
+      "maxItems": 0,
+      "items": false
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "git_sha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "repository_path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*//)(?!.*(?:^|/)\\.\\.?(?:/|$))[^\\u0000-\\u001f\\u007f]+$"
+    },
+    "baseline": {
+      "type": "object",
+      "required": [
+        "repository_version",
+        "base_ref",
+        "base_sha",
+        "merge_base",
+        "branch",
+        "publication_state",
+        "tags_at_head",
+        "platform_work_authorized"
+      ],
+      "properties": {
+        "repository_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "base_ref": {"const": "origin/main"},
+        "base_sha": {"$ref": "#/$defs/git_sha"},
+        "merge_base": {"$ref": "#/$defs/git_sha"},
+        "branch": {"type": "string", "pattern": "^[a-z0-9][a-z0-9./-]*$"},
+        "publication_state": {"const": "unreleased"},
+        "tags_at_head": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"}
+        },
+        "platform_work_authorized": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "authority_and_phase_alignment": {
+      "type": "object",
+      "required": [
+        "authority_stack",
+        "phase_8_9_anchors_present",
+        "protected_paths_changed",
+        "platform_code_added"
+      ],
+      "properties": {
+        "authority_stack": {"const": "pass"},
+        "phase_8_9_anchors_present": {"const": "pass"},
+        "protected_paths_changed": {"const": false},
+        "platform_code_added": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "check_result": {
+      "type": "object",
+      "required": [
+        "check_id",
+        "command",
+        "exit_code",
+        "outcome",
+        "result_summary",
+        "result_summary_hash_algorithm",
+        "result_summary_sha256"
+      ],
+      "properties": {
+        "check_id": {"type": "string", "pattern": "^[a-z][a-z0-9_]+$"},
+        "command": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "exit_code": {"const": 0},
+        "outcome": {"const": "pass"},
+        "result_summary": {"type": "string", "minLength": 3},
+        "result_summary_hash_algorithm": {"const": "sha256_utf8_lf_normalized"},
+        "result_summary_sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "additionalProperties": false
+    },
+    "validation_run": {
+      "type": "object",
+      "required": ["context", "executed_at", "results"],
+      "properties": {
+        "context": {"enum": ["local", "pull_request"]},
+        "executed_at": {"type": "string", "format": "date-time"},
+        "results": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/check_result"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "judgment": {
+      "type": "object",
+      "required": ["id", "outcome", "evidence_refs"],
+      "properties": {
+        "id": {"type": "string", "minLength": 2},
+        "outcome": {"const": "pass"},
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 2}
+        }
+      },
+      "additionalProperties": false
+    },
+    "deliverables": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "prefixItems": [
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m0-d1"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m0-d2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m0-d3"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m0-d4"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m0-d5"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m0-d6"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m0-d7"}}}]}
+      ],
+      "items": false
+    },
+    "exit_criteria": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m0-e1"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m0-e2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m0-e3"}}}]}
+      ],
+      "items": false
+    },
+    "safety_criteria": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m0-s1"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m0-s2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m0-s3"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m0-s4"}}}]}
+      ],
+      "items": false
+    },
+    "foundation_gates": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "prefixItems": [
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "9.3"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "9.4"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "9.5"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "9.6"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "9.7"}}}]},
+        {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "9.8"}}}]}
+      ],
+      "items": false
+    },
+    "classification_metrics": {
+      "type": "object",
+      "required": [
+        "tracked_paths",
+        "classified_paths",
+        "unclassified_paths",
+        "multiply_classified_paths",
+        "normative",
+        "informative",
+        "example",
+        "historical",
+        "deprecated",
+        "superseded",
+        "placeholder"
+      ],
+      "properties": {
+        "tracked_paths": {"type": "integer", "minimum": 1},
+        "classified_paths": {"type": "integer", "minimum": 1},
+        "unclassified_paths": {"const": 0},
+        "multiply_classified_paths": {"const": 0},
+        "normative": {"type": "integer", "minimum": 0},
+        "informative": {"type": "integer", "minimum": 0},
+        "example": {"type": "integer", "minimum": 0},
+        "historical": {"type": "integer", "minimum": 0},
+        "deprecated": {"type": "integer", "minimum": 0},
+        "superseded": {"type": "integer", "minimum": 0},
+        "placeholder": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "scope_metrics": {
+      "type": "object",
+      "required": [
+        "ywe_core",
+        "ywe_extension_profile",
+        "ash_dependency_material",
+        "wrw_reference_profile",
+        "governance_validation",
+        "historical_evidence",
+        "later_release_work"
+      ],
+      "properties": {
+        "ywe_core": {"type": "integer", "minimum": 0},
+        "ywe_extension_profile": {"type": "integer", "minimum": 0},
+        "ash_dependency_material": {"type": "integer", "minimum": 0},
+        "wrw_reference_profile": {"type": "integer", "minimum": 0},
+        "governance_validation": {"type": "integer", "minimum": 0},
+        "historical_evidence": {"type": "integer", "minimum": 0},
+        "later_release_work": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "promise_metrics": {
+      "type": "object",
+      "required": ["reviewed_surfaces", "total", "assigned", "excluded", "unresolved"],
+      "properties": {
+        "reviewed_surfaces": {"type": "integer", "minimum": 1},
+        "total": {"type": "integer", "minimum": 1},
+        "assigned": {"type": "integer", "minimum": 0},
+        "excluded": {"type": "integer", "minimum": 0},
+        "unresolved": {"const": 0}
+      },
+      "additionalProperties": false
+    },
+    "promise_source_evidence": {
+      "type": "object",
+      "required": [
+        "register_ref",
+        "hash_algorithm",
+        "source_hash_count",
+        "reviewed_surface_aggregate_sha256"
+      ],
+      "properties": {
+        "register_ref": {"const": "data/governance/public_promise_register.json"},
+        "hash_algorithm": {"const": "sha256_utf8_lf_normalized"},
+        "source_hash_count": {"type": "integer", "minimum": 1},
+        "reviewed_surface_aggregate_sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "additionalProperties": false
+    },
+    "debt_metrics": {
+      "type": "object",
+      "required": [
+        "total",
+        "open",
+        "accepted_exception",
+        "resolved",
+        "milestone_m0",
+        "milestone_m1",
+        "milestone_m2",
+        "milestone_m3",
+        "milestone_m4",
+        "milestone_m5",
+        "milestone_m6",
+        "milestone_m7",
+        "milestone_m8",
+        "milestone_m9",
+        "milestone_m10"
+      ],
+      "properties": {
+        "total": {"type": "integer", "minimum": 1},
+        "open": {"type": "integer", "minimum": 0},
+        "accepted_exception": {"type": "integer", "minimum": 0},
+        "resolved": {"type": "integer", "minimum": 0},
+        "milestone_m0": {"type": "integer", "minimum": 0},
+        "milestone_m1": {"type": "integer", "minimum": 0},
+        "milestone_m2": {"type": "integer", "minimum": 0},
+        "milestone_m3": {"type": "integer", "minimum": 0},
+        "milestone_m4": {"type": "integer", "minimum": 0},
+        "milestone_m5": {"type": "integer", "minimum": 0},
+        "milestone_m6": {"type": "integer", "minimum": 0},
+        "milestone_m7": {"type": "integer", "minimum": 0},
+        "milestone_m8": {"type": "integer", "minimum": 0},
+        "milestone_m9": {"type": "integer", "minimum": 0},
+        "milestone_m10": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "debt_ownership_metrics": {
+      "type": "object",
+      "required": ["unowned_open_count", "unassigned_open_count"],
+      "properties": {
+        "unowned_open_count": {"const": 0},
+        "unassigned_open_count": {"const": 0}
+      },
+      "additionalProperties": false
+    },
+    "change_budget_exception": {
+      "type": "object",
+      "required": [
+        "path",
+        "original_lines",
+        "additions",
+        "deletions",
+        "percentage",
+        "authorized_ceiling",
+        "rationale",
+        "authority_refs",
+        "result"
+      ],
+      "properties": {
+        "path": {"$ref": "#/$defs/repository_path"},
+        "original_lines": {"type": "integer", "minimum": 1},
+        "additions": {"type": "integer", "minimum": 0},
+        "deletions": {"type": "integer", "minimum": 0},
+        "percentage": {"type": "number", "minimum": 0, "maximum": 100},
+        "authorized_ceiling": {"type": "number", "minimum": 0, "maximum": 100},
+        "rationale": {"type": "string", "minLength": 10},
+        "authority_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 3}
+        },
+        "result": {"const": "within_authorized_ceiling"}
+      },
+      "additionalProperties": false
+    },
+    "diff_review": {
+      "type": "object",
+      "required": [
+        "base_ref",
+        "files_created",
+        "files_patched",
+        "files_deleted",
+        "files_renamed",
+        "diff_stat",
+        "implementation_tree_hash_algorithm",
+        "implementation_tree_hash",
+        "diff_hash_algorithm",
+        "diff_hash",
+        "hash_scope",
+        "change_budget_exceptions"
+      ],
+      "properties": {
+        "base_ref": {"const": "origin/main"},
+        "files_created": {"type": "integer", "minimum": 1},
+        "files_patched": {"type": "integer", "minimum": 0},
+        "files_deleted": {"const": 0},
+        "files_renamed": {"const": 0},
+        "diff_stat": {"type": "string", "minLength": 5},
+        "implementation_tree_hash_algorithm": {
+          "const": "sha256_sorted_path_nul_normalized_utf8_lf_sha256_nul"
+        },
+        "implementation_tree_hash": {"$ref": "#/$defs/sha256"},
+        "diff_hash_algorithm": {"const": "sha256_git_diff_binary"},
+        "diff_hash": {"$ref": "#/$defs/sha256"},
+        "hash_scope": {
+          "const": "implementation-state-and-diff-excluding-the-two-m0-acceptance-evidence-files"
+        },
+        "change_budget_exceptions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/change_budget_exception"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "protected_path_diff": {
+      "type": "object",
+      "required": ["base_ref", "query", "empty_output", "changed_paths"],
+      "properties": {
+        "base_ref": {"const": "origin/main"},
+        "query": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "empty_output": {"const": true},
+        "changed_paths": {
+          "type": "array",
+          "maxItems": 0,
+          "items": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "deferred_item": {
+      "type": "object",
+      "required": ["milestone", "status", "scope"],
+      "properties": {
+        "milestone": {"type": "string", "pattern": "^M(?:[1-9]|10)$"},
+        "status": {"const": "deferred"},
+        "scope": {"type": "string", "minLength": 5}
+      },
+      "additionalProperties": false
+    },
+    "deferred_work": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "prefixItems": [
+        {"allOf": [{"$ref": "#/$defs/deferred_item"}, {"properties": {"milestone": {"const": "M1"}}}]},
+        {"allOf": [{"$ref": "#/$defs/deferred_item"}, {"properties": {"milestone": {"const": "M2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/deferred_item"}, {"properties": {"milestone": {"const": "M3"}}}]},
+        {"allOf": [{"$ref": "#/$defs/deferred_item"}, {"properties": {"milestone": {"const": "M4"}}}]},
+        {"allOf": [{"$ref": "#/$defs/deferred_item"}, {"properties": {"milestone": {"const": "M5"}}}]},
+        {"allOf": [{"$ref": "#/$defs/deferred_item"}, {"properties": {"milestone": {"const": "M6"}}}]},
+        {"allOf": [{"$ref": "#/$defs/deferred_item"}, {"properties": {"milestone": {"const": "M7"}}}]},
+        {"allOf": [{"$ref": "#/$defs/deferred_item"}, {"properties": {"milestone": {"const": "M8"}}}]},
+        {"allOf": [{"$ref": "#/$defs/deferred_item"}, {"properties": {"milestone": {"const": "M9"}}}]},
+        {"allOf": [{"$ref": "#/$defs/deferred_item"}, {"properties": {"milestone": {"const": "M10"}}}]}
+      ],
+      "items": false
+    }
+  },
+  "additionalProperties": false
+}

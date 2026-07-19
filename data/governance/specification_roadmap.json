@@ -7,10 +7,10 @@
     "published_releases": 0,
     "github_release_objects": 0,
     "agnostic_specification_releases": 0,
-    "verified_on": "2026-07-18",
+    "verified_on": "2026-07-19",
     "tag_policy": "Existing v2.0.x Git tags, including historical annotations that use release wording, identify repository baselines; they are not published releases."
   },
-  "current_milestone": "M0",
+  "current_milestone": "M1",
   "status_vocabulary": [
     "complete",
     "in_progress",
@@ -41,11 +41,11 @@
   },
   "version_sources": [
     {
-      "path": "version.txt",
+      "path": "VERSION",
       "kind": "plain"
     },
     {
-      "path": "VERSION",
+      "path": "version.txt",
       "kind": "plain"
     },
     {
@@ -57,6 +57,41 @@
       "path": "repository-contribution-policy.json",
       "kind": "json_field",
       "field": "artifact_version"
+    },
+    {
+      "path": "data/governance/artifact_classification_manifest.json",
+      "kind": "json_field",
+      "field": "repository_baseline"
+    },
+    {
+      "path": "data/governance/scope_partition_manifest.json",
+      "kind": "json_field",
+      "field": "repository_baseline"
+    },
+    {
+      "path": "data/governance/repository_truth_manifest.json",
+      "kind": "json_field",
+      "field": "repository_baseline.value"
+    },
+    {
+      "path": "data/governance/repository_truth_manifest.json",
+      "kind": "json_field",
+      "field": "repository_baseline.mirrors.0.value"
+    },
+    {
+      "path": "data/governance/release_publication_policy.json",
+      "kind": "json_field",
+      "field": "repository_baseline.value"
+    },
+    {
+      "path": "data/governance/public_promise_register.json",
+      "kind": "json_field",
+      "field": "repository_baseline"
+    },
+    {
+      "path": "data/validation/repository_quality_debt_inventory.json",
+      "kind": "json_field",
+      "field": "repository_baseline"
     },
     {
       "path": "README.md",
@@ -95,7 +130,7 @@
       "required_markers": [
         "| Agnostic specification release readiness | Not ready |",
         "| Published releases | None; no GitHub Release objects or agnostic specification releases have been published |",
-        "| Current roadmap milestone | M0 - Establish one truthful baseline |",
+        "| Current roadmap milestone | M1 - Normalize canon terminology and governance |",
         "| Platform product work | Deferred through M10 |"
       ]
     },
@@ -407,14 +442,17 @@
     {
       "id": "M0",
       "title": "Establish one truthful baseline",
-      "status": "in_progress",
+      "status": "complete",
       "dependencies": [],
       "effort_weeks": {
         "minimum": 1,
         "maximum": 2
       },
       "owner_role": "Repository governance maintainers",
-      "acceptance_evidence": [],
+      "acceptance_evidence": [
+        "data/governance/m0_acceptance_evidence.json",
+        "docs/project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md"
+      ],
       "deliverables": [
         "Canonical roadmap and machine-readable milestone status.",
         "Status vocabulary separating historical acceptance, normative completion, schema completion, conformance, and release readiness.",
@@ -433,7 +471,7 @@
     {
       "id": "M1",
       "title": "Normalize canon terminology and governance",
-      "status": "planned",
+      "status": "in_progress",
       "dependencies": [
         "M0"
       ],

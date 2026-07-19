@@ -26,8 +26,8 @@ What actually happens.
 
 ## Environment
 
-- Branch: main / engine branch name
-- Engine (if applicable): Unity / Unreal / Godot
+- Repository branch:
+- Downstream host target (post-M10 work only, if applicable): Unity / Unreal / Godot
 - OS:
 - Python version (if running scripts):
 

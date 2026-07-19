@@ -46,7 +46,7 @@ jobs:
       - name: Read current baseline
         id: current
         run: |
-          VERSION=$(tr -d '[:space:]' < version.txt)
+          VERSION=$(tr -d '[:space:]' < VERSION)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
           echo "major=$MAJOR" >> "$GITHUB_OUTPUT"
@@ -81,7 +81,7 @@ jobs:
         run: |
           NEW_VERSION="${{ steps.new.outputs.version }}"
           DATE=$(date -u +%Y-%m-%d)
-          BASE_COMMIT=$(git log -1 --format=%H -- version.txt)
+          BASE_COMMIT=$(git log -1 --format=%H -- VERSION)
           RANGE="${BASE_COMMIT}..HEAD"
           ENTRY="## [${NEW_VERSION}] — ${DATE}"$'\n'$'\n'
 
@@ -114,14 +114,20 @@ jobs:
 
       - name: Update changelog
         run: |
-          {
-            head -6 CHANGELOG.md
-            echo ""
-            cat /tmp/ywe_changelog_entry.md
-            echo "---"
-            echo ""
-            tail -n +7 CHANGELOG.md
-          } > CHANGELOG.tmp
+          awk '
+            { print }
+            $0 == "## Unreleased" { in_unreleased = 1 }
+            in_unreleased && $0 == "---" {
+              print ""
+              while ((getline line < "/tmp/ywe_changelog_entry.md") > 0) print line
+              close("/tmp/ywe_changelog_entry.md")
+              print "---"
+              print ""
+              in_unreleased = 0
+              inserted = 1
+            }
+            END { if (!inserted) exit 42 }
+          ' CHANGELOG.md > CHANGELOG.tmp
           mv CHANGELOG.tmp CHANGELOG.md
 
       - name: Validate baseline update
@@ -132,11 +138,7 @@ jobs:
           NEW_VERSION="${{ steps.new.outputs.version }}"
           BRANCH="baseline/v${NEW_VERSION}"
           git switch -c "$BRANCH"
-          git add version.txt VERSION README.md CHANGELOG.md
-          git add yggdrasil-instructions.json repository-contribution-policy.json
-          git add data/governance/specification_roadmap.json
-          git add docs/master_specification/README.md docs/glossary/README.md docs/governance/README.md
-          git add docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md
+          git add --all
           git commit -m "Update repository baseline to v${NEW_VERSION}"
           git push --set-upstream origin "$BRANCH"
 

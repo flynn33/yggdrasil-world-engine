@@ -1,10 +1,10 @@
 # Yggdrasil World Engine -- Developer Guide
 
-This guide is for teams implementing YWE on specific game engines (Unity, Unreal, Godot) or extending the specification.
+This guide is for contributors extending the YWE specification and for teams preparing separate downstream implementations after M10 acceptance.
 
 ## 1. Understanding the Repository
 
-The `main` branch is the **sealed specification**. It contains:
+Every branch in this repository is platform-neutral specification work. The `main` branch is the current accepted repository baseline and contains:
 
 - Engine interface definitions (`core/*/engine_interface.json`)
 - Data schemas (`data/`)
@@ -13,15 +13,15 @@ The `main` branch is the **sealed specification**. It contains:
 - Documentation (`docs/`)
 - Governance files (`guide.md`, `wiki.md`, `repository-contribution-policy.json`, `yggdrasil-instructions.json`)
 
-No engine-specific code belongs on `main`.
+No platform-specific runtime code belongs on any branch in this repository.
 
-## 2. Starting an Engine Implementation
+## 2. Preparing a Downstream Engine Implementation
 
-1. Create a new branch from `main` named for your target engine (e.g., `unity`, `unreal`, `godot`).
+1. After M10 acceptance and explicit authorization, create a separate downstream product repository for the target host.
 2. Read all engine interfaces in `core/*/engine_interface.json`.
 3. Read the data schemas in `data/`.
 4. Read the ASH compliance rules in `docs/ash_compliance/`.
-5. Implement each engine interface using native engine idioms.
+5. Implement each engine interface in that downstream repository using native host idioms.
 
 ## 3. Implementation Rules
 
