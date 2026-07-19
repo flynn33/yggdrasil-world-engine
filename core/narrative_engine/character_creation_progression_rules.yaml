@@ -3,10 +3,14 @@ version: "1.0"
 canonical_ash_derivation:
   required_input: CosmicPatternSnapshot
   required_player_state: PlayerState
-  required_realm_identity: RealmIdentity
+  required_state_identity: StateIdentity
   required_diagnostic: DiagnosticEnvelope
   required_plan: GenerationPlan
   independent_random_generation_allowed: false
+
+compatibility_aliases:
+  RealmIdentity: StateIdentity
+  realm_id: vertex_id
 
 required_outputs:
   - CharacterSeedManifest

@@ -1,8 +1,11 @@
 version: "1.0"
-status: canonical_derived_reference
+status: canonical_ywe_extension_reference
 authority:
+  owner: ywe_extension_profile
   canonical_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
   schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+  upstream_constraint_ref: data/governance/ash_dependency_identity.json
+  dependency_identity_inclusion: excluded
   source_registries:
     - data/pattern_archetypes/character_archetypes.yaml
     - data/quest_archetypes/quest_archetypes.yaml

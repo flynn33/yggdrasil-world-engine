@@ -11,7 +11,9 @@ S = (b0, b1, b2, b3, b4, b5, b6, b7, b8)
 where each bi ∈ F2
 ```
 
-There are **512 states** (vertices / realms) in the state space.
+There are **512 states** (vertices) in the state space. A profile may bind a
+named Realm to a selected structural coordinate or state anchor, but the 512
+ASH states are not themselves realms.
 
 ## Structural interpretation
 

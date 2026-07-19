@@ -1,0 +1,336 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/truth_authority_lattice_schema.json",
+  "title": "YWE Truth and Authority Lattice",
+  "type": "object",
+  "required": [
+    "schema_ref",
+    "artifact_type",
+    "artifact_version",
+    "repository_baseline",
+    "status",
+    "authority_contract_ref",
+    "requirement_ids",
+    "nodes",
+    "relationships",
+    "truth_scopes",
+    "scope_routing",
+    "ash_dependency",
+    "invariants"
+  ],
+  "properties": {
+    "schema_ref": {
+      "const": "data/schemas/truth_authority_lattice_schema.json"
+    },
+    "artifact_type": {
+      "const": "ywe_truth_authority_lattice"
+    },
+    "artifact_version": {
+      "const": "1.0.0"
+    },
+    "repository_baseline": {
+      "const": "2.0.23"
+    },
+    "status": {
+      "const": "canonical"
+    },
+    "authority_contract_ref": {
+      "const": "docs/architecture/truth_authority_lattice.md"
+    },
+    "requirement_ids": {
+      "type": "array",
+      "minItems": 5,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^YWE-REQ-00(?:09|10|14|15|16)$"
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/relationship"
+      }
+    },
+    "truth_scopes": {
+      "type": "array",
+      "minItems": 13,
+      "items": {
+        "$ref": "#/$defs/truth_scope"
+      }
+    },
+    "scope_routing": {
+      "$ref": "#/$defs/scope_routing"
+    },
+    "ash_dependency": {
+      "$ref": "#/$defs/ash_dependency"
+    },
+    "invariants": {
+      "type": "array",
+      "minItems": 11,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]+$"
+      }
+    }
+  },
+  "$defs": {
+    "node_id": {
+      "enum": [
+        "ash_cosmological_model",
+        "ywe_core",
+        "ywe_extension_profile",
+        "wrw_reference_profile",
+        "shared_worldstate",
+        "branch_local_state",
+        "player_local_state",
+        "perception_social_interpretation",
+        "host_materialization",
+        "forsetti_lifecycle_governance"
+      ]
+    },
+    "node": {
+      "type": "object",
+      "required": [
+        "node_id",
+        "node_kind",
+        "authority_scope",
+        "mutability",
+        "orthogonal",
+        "owns",
+        "writable_truth_scopes",
+        "forbidden_override_targets"
+      ],
+      "properties": {
+        "node_id": {
+          "$ref": "#/$defs/node_id"
+        },
+        "node_kind": {
+          "enum": [
+            "authority",
+            "state",
+            "interpretive",
+            "materialization",
+            "lifecycle_governance"
+          ]
+        },
+        "authority_scope": {
+          "enum": [
+            "ash_dependency_material",
+            "ywe_core",
+            "ywe_extension_profile",
+            "wrw_reference_profile",
+            "governance_validation",
+            "later_release_work",
+            "cross_scope"
+          ]
+        },
+        "mutability": {
+          "enum": [
+            "governance_revision_only",
+            "append_only_transition",
+            "derived_view"
+          ]
+        },
+        "orthogonal": {
+          "type": "boolean"
+        },
+        "owns": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]+$"
+          }
+        },
+        "writable_truth_scopes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]+$"
+          }
+        },
+        "forbidden_override_targets": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/node_id"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "relationship": {
+      "type": "object",
+      "required": [
+        "source_node",
+        "target_node",
+        "relation"
+      ],
+      "properties": {
+        "source_node": {
+          "$ref": "#/$defs/node_id"
+        },
+        "target_node": {
+          "$ref": "#/$defs/node_id"
+        },
+        "relation": {
+          "enum": [
+            "constrains",
+            "specializes",
+            "records_within",
+            "projects_to",
+            "materializes",
+            "governs_activation"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "truth_scope": {
+      "type": "object",
+      "required": [
+        "scope_id",
+        "mutability",
+        "record_node",
+        "change_mechanism",
+        "objective_state"
+      ],
+      "properties": {
+        "scope_id": {
+          "enum": [
+            "base_world_ontology",
+            "ywe_normative_contract",
+            "extension_profile_contract",
+            "wrw_reference_canon",
+            "shared_worldstate",
+            "leaf_branch_state",
+            "player_state",
+            "player_perception",
+            "mythic_interpretation",
+            "prophetic_pressure",
+            "faction_claim",
+            "host_materialization",
+            "diagnostic_noop"
+          ]
+        },
+        "mutability": {
+          "enum": [
+            "immutable_runtime",
+            "mutable_scoped_state",
+            "derived_view",
+            "append_only_record"
+          ]
+        },
+        "record_node": {
+          "$ref": "#/$defs/node_id"
+        },
+        "change_mechanism": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]+$"
+        },
+        "objective_state": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "scope_routing": {
+      "type": "object",
+      "required": [
+        "ywe_core",
+        "wrw_reference_profile"
+      ],
+      "properties": {
+        "ywe_core": {
+          "type": "object",
+          "required": [
+            "normative_reach",
+            "must_be_setting_neutral",
+            "may_require_wrw_identity"
+          ],
+          "properties": {
+            "normative_reach": {
+              "const": "all_conforming_ywe_implementations"
+            },
+            "must_be_setting_neutral": {
+              "const": true
+            },
+            "may_require_wrw_identity": {
+              "const": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "wrw_reference_profile": {
+          "type": "object",
+          "required": [
+            "normative_reach",
+            "must_conform_to_ywe_core",
+            "may_universalize_profile_content"
+          ],
+          "properties": {
+            "normative_reach": {
+              "const": "declared_wrw_profile_conformance"
+            },
+            "must_conform_to_ywe_core": {
+              "const": true
+            },
+            "may_universalize_profile_content": {
+              "const": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "ash_dependency": {
+      "type": "object",
+      "required": [
+        "dependency_identity_ref",
+        "canonical_source_root",
+        "generated_mirror_root",
+        "canonical_source_exclusions",
+        "synchronization_script_ref",
+        "synchronization_mode"
+      ],
+      "properties": {
+        "dependency_identity_ref": {
+          "const": "data/governance/ash_dependency_identity.json"
+        },
+        "canonical_source_root": {
+          "const": "core/ash_pattern_engine/canonical"
+        },
+        "generated_mirror_root": {
+          "const": "specs"
+        },
+        "canonical_source_exclusions": {
+          "const": [
+            "README.md"
+          ]
+        },
+        "synchronization_script_ref": {
+          "const": "scripts/sync_ash_specifications.py"
+        },
+        "synchronization_mode": {
+          "const": "normalized_utf8_lf_relative_paths"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

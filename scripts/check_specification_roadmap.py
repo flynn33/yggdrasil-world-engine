@@ -43,8 +43,18 @@ REQUIRED_CHECK_CONTRACTS = [
     ),
     ("legacy_schema_contracts", "scripts/validate_schemas.py", ["schema", "legacy-structural", "phase"]),
     ("ash_compliance", "scripts/validate_ash_compliance.py", ["ash", "governance"]),
+    (
+        "ash_specification_sync",
+        "scripts/sync_ash_specifications.py",
+        ["m1", "ash", "governance", "traceability"],
+    ),
     ("ash_semantic_integrity", ".github/scripts/semantic_integrity_check.py", ["ash"]),
     ("ash_math_integrity", ".github/scripts/math_integrity_check.py", ["ash"]),
+    (
+        "m1_canon_governance",
+        "scripts/check_m1_canon_governance.py",
+        ["m1", "governance", "status", "traceability", "ash"],
+    ),
     ("ash_downstream_conformance", ".github/scripts/downstream_conformance_check.py", ["ash", "conformance"]),
     ("package_acceptance", ".github/scripts/ywe_package_acceptance_check.py", ["ash", "conformance", "legacy-structural"]),
     ("required_authority_contracts", "scripts/check_required_contracts.py", ["governance", "phase"]),
@@ -113,6 +123,8 @@ def expected_check_command(check_id: str, script: str) -> list[str]:
             "HEAD",
             "{root}",
         ]
+    if check_id == "ash_specification_sync":
+        return ["{python}", script, "--check", "--root", "{root}"]
     return ["{python}", script, "{root}"]
 
 

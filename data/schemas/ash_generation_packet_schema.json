@@ -13,6 +13,7 @@
     "normalized_state",
     "source_orbit_id",
     "active_codeword_sequence",
+    "state_identity",
     "realm_identity",
     "diagnostic_ref",
     "generation_plan_ref",
@@ -62,13 +63,15 @@
         "normalized_state",
         "source_orbit_id",
         "active_codeword_sequence",
-        "realm_identity",
+        "state_identity",
         "diagnostic_ref",
         "generation_plan_ref"
       ],
       "properties": {
         "snapshot_type": "CosmicPatternSnapshot",
         "state_space": "F2^9",
+        "state_identity": "StateIdentity containing state_signature and vertex_id",
+        "realm_identity": "Deprecated lossless alias of state_identity",
         "diagnostic_ref": "DiagnosticEnvelope",
         "generation_plan_ref": "GenerationPlan | null"
       }
@@ -93,12 +96,18 @@
         "plan_ref",
         "cosmic_pattern_snapshot_ref",
         "normalized_state",
+        "source_state_identity",
+        "destination_state_identity",
         "diagnostic_ref",
         "artifacts",
         "metadata"
       ],
       "properties": {
         "plan_type": "GenerationPlan",
+        "source_state_identity": "Canonical StateIdentity for the normalized source state",
+        "destination_state_identity": "Canonical StateIdentity for the transformed destination state",
+        "source_realm": "Deprecated lossless alias of source_state_identity",
+        "destination_realm": "Deprecated lossless alias of destination_state_identity",
         "side_effects_allowed": false,
         "planner_contract": "GenerationPlanner",
         "emitter_contract": "ArtifactEmitter"
@@ -510,6 +519,14 @@
         "codeword_set": "fixed_16_member_C_subset_F2_9"
       }
     }
+  },
+  "compatibility_aliases": {
+    "realm_identity": "state_identity",
+    "source_realm": "source_state_identity",
+    "destination_realm": "destination_state_identity",
+    "RealmIdentity": "StateIdentity",
+    "realm_id": "vertex_id",
+    "encode_realm_identity": "encode_state_identity"
   },
   "authority_contract": "docs/architecture/ash_upstream_authority_contract.md",
   "architecture_law": [

@@ -1,5 +1,10 @@
 version: "0.1"
 
+compatibility_aliases:
+  wolf_alignment: wolf_resonance
+  wolf_alignment_resonance: wolf_resonance
+  policy: read_or_migration_only
+
 meta:
   system: artifact_engine
   purpose: >
@@ -261,7 +266,7 @@ resonance_rules:
   resonance_axes:
     - realm_resonance
     - bloodline_resonance
-    - wolf_alignment_resonance
+    - wolf_resonance
     - site_resonance
     - myth_resonance
     - prophecy_resonance
@@ -412,7 +417,7 @@ worldstate_delta_hooks:
   supported_delta_domains:
     - player_memory
     - player_identity
-    - wolf_alignment
+    - wolf_resonance
     - realm_attunement
     - bloodline_resonance
     - npc_relationships

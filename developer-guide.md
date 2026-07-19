@@ -68,7 +68,7 @@ The `adapters/` directory contains specifications for each engine adapter. Your 
 
 Every engine implementation should include tests for:
 
-- Cosmological invariant preservation (nine realms, wolf rules)
+- Cosmological invariant preservation (nine-coordinate structure, explicit realm mappings, and wolf rules)
 - Engine interface compliance
 - Data schema validation
 - ASH pattern generation compliance

@@ -1,59 +1,90 @@
-# Realm Identity — canonical specification (Canonical Baseline)
+# State / Vertex Identity — canonical specification (Canonical Baseline)
 
 ## Purpose
 
-Realm identity is the stable semantic encoding of an ASH state.
-It provides a deterministic identifier for a state (vertex) in the F2^9 state space.
+State identity is the stable semantic encoding of an ASH state. Every state
+`x ∈ F2^9` denotes exactly one of the state space's 512 vertices, and every
+vertex denotes exactly one full 9-bit state. The canonical identity therefore
+identifies the state-space vertex directly.
 
-Each of the 512 states in F2^9 corresponds to a realm. Realm identity encodes this correspondence.
+YWE may present a vertex as a realm. `RealmIdentity` and `realm_id` remain
+compatibility aliases for that same state / vertex identity; they do not define
+a second identity system or collapse distinct vertices.
 
 ## Inputs
 
-Realm identity is computed from a **full 9-bit ASH state** in F2^9.
+State identity is computed from a **full 9-bit ASH state** in `F2^9`.
 
-## Realm record
+## Canonical identity record
 
 ```text
-TYPE RealmIdentity
+TYPE StateIdentity
     state_signature: String
-    realm_id: String
+    vertex_id: String
 END TYPE
 ```
 
-The realm record encodes the full 9-bit state as a single signature.
+The canonical record encodes the full 9-bit state as a single signature and
+derives the stable vertex identifier from that signature.
+
+## Compatibility aliases
+
+```text
+TYPE RealmIdentity = StateIdentity
+FIELD RealmIdentity.realm_id = StateIdentity.vertex_id
+```
+
+The aliases are lossless names for the canonical identity. Reading or writing
+`realm_id` is semantically identical to reading or writing `vertex_id` for the
+same record. Compatibility handling must not recalculate, remap, or otherwise
+change the identifier.
 
 ## Semantic rule
 
-The same ASH state must always yield the same realm identity.
-Different states must yield different realm identities unless the system deliberately defines an equivalence relation that merges them.
+The same ASH state must always yield the same state / vertex identity. Different
+states must yield different vertex identities. Domain-level groupings or
+equivalence relations, when separately specified, relate vertices but do not
+replace their canonical identities.
 
 ## Pseudocode
 
 ```text
-FUNCTION encode_realm_identity(state: AshState) -> RealmIdentity
+FUNCTION encode_state_identity(state: AshState) -> StateIdentity
     PRECONDITION: state.bits has length 9
     PRECONDITION: all elements are in F2
 
-    realm.state_signature = encode_state_signature(state.bits)
-    realm.realm_id = derive_realm_id(realm.state_signature)
+    identity.state_signature = encode_state_signature(state.bits)
+    identity.vertex_id = derive_vertex_id(identity.state_signature)
 
-    RETURN realm
+    RETURN identity
+END FUNCTION
+```
+
+```text
+FUNCTION encode_realm_identity(state: AshState) -> RealmIdentity
+    identity = encode_state_identity(state)
+    RETURN identity AS RealmIdentity
 END FUNCTION
 ```
 
 ## Notes
 
-This specification intentionally leaves the external string format open.
-A downstream implementation may use different formatting conventions so long as the mapping remains deterministic and semantically faithful.
+This specification intentionally leaves the external string format open. A
+downstream implementation may use a different formatting convention so long as
+the mapping is deterministic, injective over `F2^9`, and semantically faithful.
+Existing integrations may continue to expose `RealmIdentity` and `realm_id` as
+compatibility aliases.
 
 ## Required invariants
 
-1. Equal states yield equal realm identities
-2. Realm identity is computed from the full 9-bit state
-3. The encoding is deterministic — same input always produces same output
-4. All 9 coordinates of the state participate in the identity encoding
+1. Equal states yield equal state / vertex identities.
+2. Different states yield different state / vertex identities.
+3. Identity is computed from the full 9-bit state.
+4. The encoding is deterministic — the same input always produces the same output.
+5. All 9 coordinates of the state participate in the identity encoding.
+6. `RealmIdentity` is an alias of `StateIdentity`, and `realm_id` is an alias of `vertex_id`.
 
 ## Relation to other specifications
 
-- **ash-state-space.pseudo.md** — defines the canonical F2^9 state space from which realm identity is computed
-- **codeword-transformation-semantics.pseudo.md** — codeword transformations map between realms
+- **ash-state-space.pseudo.md** — defines the canonical `F2^9` state space and its 512 vertices.
+- **codeword-transformation-semantics.pseudo.md** — codeword transformations map between vertices.

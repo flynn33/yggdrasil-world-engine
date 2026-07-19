@@ -40,6 +40,19 @@ leaf branch reality, branch event, branch generation context, pattern vector,
 existence potential, axiom diagnostic packet, plane pressure state, and future
 generation bias update foundation.
 
+### M1 governance schemas
+
+| File | Role |
+|---|---|
+| `normative_requirement_register_schema.json` | Stable M1 requirement identifiers, lifecycle, authority, scope, and verification references |
+| `governance_record_register_schema.json` | Typed decision, change-proposal, risk, deviation, and question records |
+| `truth_authority_lattice_schema.json` | Ten-node truth, state, interpretation, host, and lifecycle-governance lattice |
+| `ash_dependency_identity_schema.json` | Content-addressed authoritative ASH source identity |
+| `canonical_term_index_schema.json` | One glossary heading and index record per canonical concept |
+| `m1_acceptance_evidence_schema.json` | Immutable M1 closure evidence contract |
+
+### Runtime and compatibility schemas
+
 | File | Role |
 |---|---|
 | `ash_generation_packet_schema.json` | Shared ASH/YWE packet index and provenance spine |

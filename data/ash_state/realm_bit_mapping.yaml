@@ -1,55 +1,133 @@
-version: "1.0"
-status: canonical_ywe_projection
+version: "1.1"
+status: canonical_wrw_projection
+profile_id: wrw_reference_profile
+
 canonical_ash_derivation:
   state_space: F2^9
-  canonical_spec: specs/core/ash-state-space.pseudo.md
-  codeword_spec: specs/core/codeword-set.pseudo.md
-  realm_identity_spec: specs/core/realm-identity.pseudo.md
+  canonical_spec: core/ash_pattern_engine/canonical/core/ash-state-space.pseudo.md
+  codeword_spec: core/ash_pattern_engine/canonical/core/codeword-set.pseudo.md
+  state_identity_spec: core/ash_pattern_engine/canonical/core/realm-identity.pseudo.md
   transition_rule: xor_by_codeword
   note: >
-    YWE's nine named realms are semantic anchors projected onto full ASH
-    9-bit states. This projection does not privilege a coordinate in ASH math;
-    it only gives YWE a deterministic bridge from named cosmology to ASH state
-    and orbit identity.
+    These nine one-hot state anchors are a WRW reference-profile projection
+    from named cosmology into full ASH states. They are not an exhaustive
+    definition of the 512 ASH states, not the complete meaning of any named
+    realm, and not an alternate source of ASH mathematics. No coordinate is
+    structurally privileged by the projection.
+
+coordinate_vocabulary:
+  structural_coordinate: named_position_b0_through_b8
+  coordinate_index: zero_based_integer_0_through_8
+  ordinal: one_based_coordinate_index_plus_one
+  presentation_order: wrw_divine_core_to_void
+  state_identity: complete_9_bit_ash_state_signature
+  identity_rule: >
+    No Structural Coordinate, Coordinate Index, Ordinal, or presentation order
+    is a complete State Identity or establishes algebraic priority.
+
+compatibility_fields:
+  bit_index:
+    status: deprecated
+    canonical_field: coordinate_index
+    behavior: exact_numeric_alias
+    conflict_behavior: reject_record
+  ash_state:
+    status: deprecated
+    canonical_field: state_identity
+    behavior: exact_string_alias
+    conflict_behavior: reject_record
+
 realm_state_anchors:
   - realm_id: divine_core
+    state_identity: "100000000"
+    structural_coordinate: b0
+    coordinate_index: 0
+    ordinal: 1
+    presentation_order: 1
     ash_state: "100000000"
     bit_index: 0
     orbit_basis: canonical_codeword_orbit
   - realm_id: celestial
+    state_identity: "010000000"
+    structural_coordinate: b1
+    coordinate_index: 1
+    ordinal: 2
+    presentation_order: 2
     ash_state: "010000000"
     bit_index: 1
     orbit_basis: canonical_codeword_orbit
   - realm_id: causal
+    state_identity: "001000000"
+    structural_coordinate: b2
+    coordinate_index: 2
+    ordinal: 3
+    presentation_order: 3
     ash_state: "001000000"
     bit_index: 2
     orbit_basis: canonical_codeword_orbit
   - realm_id: mental
+    state_identity: "000100000"
+    structural_coordinate: b3
+    coordinate_index: 3
+    ordinal: 4
+    presentation_order: 4
     ash_state: "000100000"
     bit_index: 3
     orbit_basis: canonical_codeword_orbit
   - realm_id: astral
+    state_identity: "000010000"
+    structural_coordinate: b4
+    coordinate_index: 4
+    ordinal: 5
+    presentation_order: 5
     ash_state: "000010000"
     bit_index: 4
     orbit_basis: canonical_codeword_orbit
   - realm_id: etheric
+    state_identity: "000001000"
+    structural_coordinate: b5
+    coordinate_index: 5
+    ordinal: 6
+    presentation_order: 6
     ash_state: "000001000"
     bit_index: 5
     orbit_basis: canonical_codeword_orbit
   - realm_id: physical
+    state_identity: "000000100"
+    structural_coordinate: b6
+    coordinate_index: 6
+    ordinal: 7
+    presentation_order: 7
     ash_state: "000000100"
     bit_index: 6
     orbit_basis: canonical_codeword_orbit
   - realm_id: shadow
+    state_identity: "000000010"
+    structural_coordinate: b7
+    coordinate_index: 7
+    ordinal: 8
+    presentation_order: 8
     ash_state: "000000010"
     bit_index: 7
     orbit_basis: canonical_codeword_orbit
   - realm_id: void
+    state_identity: "000000001"
+    structural_coordinate: b8
+    coordinate_index: 8
+    ordinal: 9
+    presentation_order: 9
     ash_state: "000000001"
     bit_index: 8
     orbit_basis: canonical_codeword_orbit
+
 invariants:
   - all_states_are_full_9_bit_vectors
+  - state_identity_uses_all_9_coordinates
+  - structural_coordinate_is_not_ordinal
+  - coordinate_index_is_not_presentation_order
+  - coordinate_index_is_not_state_identity
+  - one_hot_anchors_are_wrw_projection_records
+  - one_hot_anchors_do_not_exhaust_ash_state_or_realm_meaning
   - every_meaningful_transition_uses_canonical_codeword_xor
   - ywe_realm_names_are_projection_labels_not_alternate_ash_math
   - diagnostics_required_before_downstream_generation

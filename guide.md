@@ -47,11 +47,11 @@ Reverse dependencies are forbidden. No circular dependencies.
 
 All systems must comply with the ASH cosmological model:
 
-- Nine realms are fixed and immutable
+- The nine structural coordinates are fixed; named realm bindings belong to an explicit profile
 - All procedural generation derives from ASH pattern detection
 - No independent random generators for meaningful content
 - White Wolf and Dark Wolf are informational forces, not morality
-- The world does not change; player perception changes
+- The structural ontology is immutable; governed shared and scoped worldstate may change, while perception derives overlays without rewriting authoritative worldstate
 - Prophecies are probability weights, not fixed scripts
 - Bloodlines influence eligibility, never lock destiny
 

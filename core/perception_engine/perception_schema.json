@@ -7,7 +7,7 @@
     "active_realm": "physical",
     "perception_modifiers": {
       "realm_attunement": {},
-      "wolf_alignment": {
+      "wolf_resonance": {
         "white_wolf": 0,
         "dark_wolf": 0
       },
@@ -26,10 +26,30 @@
     "hidden_entities": []
   },
   "perception_rules": {
+    "base_ontology_is_immutable": true,
+    "scoped_worldstate_may_change": true,
+    "objective_state_change_requires_accepted_delta": true,
+    "perception_is_derived_view": true,
     "world_is_static": true,
     "perception_is_player_specific": true,
     "multiplayer_compatible": true,
     "same_location_different_views": true
+  },
+  "terminology_compatibility": {
+    "world_is_static": {
+      "status": "deprecated",
+      "canonical_rule": "base_ontology_is_immutable",
+      "interpretation": "The legacy true value applies only to base ontology; it does not prohibit scoped worldstate transitions."
+    },
+    "wolf_alignment": {
+      "status": "deprecated",
+      "canonical_field": "wolf_resonance",
+      "legacy_read_behavior": "resolve_as_wolf_resonance",
+      "dual_field_requirement": "white_wolf_and_dark_wolf_values_must_match",
+      "conflict_behavior": "reject_record",
+      "canonical_write_target": "wolf_resonance",
+      "creates_independent_state": false
+    }
   },
   "ash_alignment_contract": {
     "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",

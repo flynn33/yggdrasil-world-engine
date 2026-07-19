@@ -12,10 +12,10 @@ and `SOURCE_AVAILABILITY_MANIFEST.md` is historical source-ingest provenance.
 
 ## Inventory Status Summary
 
-- Resolved canonical artifacts: `15`
+- Resolved canonical artifacts: `17`
 - Blocking missing artifacts: `0`
 - Intentional placeholder-backed artifacts: `9`
-- Current placeholder artifacts: `46`
+- Current placeholder artifacts: `44`
 - Master spec authority artifact: present at `docs/master_specification/YWE_MASTER_SPECIFICATION.md`
 - Repository map: present at `docs/project/repository_map.md`
 - ASH/ASP core math rebuild: present in the current repository state
@@ -34,6 +34,8 @@ and `SOURCE_AVAILABILITY_MANIFEST.md` is historical source-ingest provenance.
 | `data/realm/realm_transition_examples.yaml` | Canonical | Promoted as lawful/unlawful transition guidance support artifact |
 | `lore/wrw_cosmology/first_darkness_and_divine_core.md` | Canonical | Promoted as the corrected origin cosmology authority covering Dark Star, Divine Core, realms or planes, Architects, and first wolves |
 | `lore/wrw_cosmology/trial_of_return_michael_lucifer_odin.md` | Canonical | Promoted as the corrected lore authority for the Great Trial, Michael, Lucifer, Odin, Yggdrasil, and mortal reintegration |
+| `lore/wrw_cosmology/canon_scope.md` | Canonical scope | Defines the normative WRW reference-profile boundary, invariants, exclusions, and Core non-universalization rules |
+| `lore/wrw_cosmology/source_notes.md` | Informative provenance | Indexes the accepted WRW cosmology authorities and records source-admission review rules |
 | `lore/wolf_canon/two_wolves_and_balance.md` | Canonical | Promoted as the corrected wolf canon authority for symbiosis, balance, and temporary coherence loss |
 | `docs/architecture/authored_override_and_tooling_notes.md` | Canonical | Promoted as authored-control and tooling boundary authority |
 | `docs/architecture/realm_truth_boundary_contract.md` | Canonical | Promoted as boundary contract separating truth and interpretive layers |
@@ -49,8 +51,8 @@ schema, and rule surfaces with the required ASH math provenance.
 
 | Artifact | Status | Notes |
 |---|---|---|
-| `specs/` | Canonical math overlay | Mirrors the ASH `F2^9` state-space, codeword, transition, diagnostics, and verification specifications |
-| `core/ash_pattern_engine/canonical/` | Canonical math overlay | Repo-local copy of the ASH canonical pseudo-spec surface |
+| `core/ash_pattern_engine/canonical/` | Authoritative source | Repository-local ASH dependency source for the `F2^9` state-space, codeword, transition, diagnostics, and verification specifications |
+| `specs/` | Generated mirror | Deterministic mirror maintained by `scripts/sync_ash_specifications.py` |
 | `data/schemas/ash_generation_packet_schema.json` | Canonical packet schema | Defines `CosmicPatternSnapshot`, `DiagnosticEnvelope`, and `GenerationPlan` |
 | `data/validation/ash_generation_gate_contract.json` | Validation contract | Enumerates the rebuilt YWE generation systems and adapter boundaries |
 | `conformance/` | Evidence | Records governance, deviation, materialization, module mapping, verification, and acceptance judgment |

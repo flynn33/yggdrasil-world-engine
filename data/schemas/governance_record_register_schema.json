@@ -1,0 +1,348 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/governance_record_register_schema.json",
+  "title": "YWE Governance Record Register",
+  "type": "object",
+  "required": [
+    "artifact_type",
+    "artifact_version",
+    "schema_ref",
+    "recorded_on",
+    "repository_baseline",
+    "policy_ref",
+    "requirement_register_ref",
+    "records",
+    "summary"
+  ],
+  "properties": {
+    "artifact_type": {"const": "governance_record_register"},
+    "artifact_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "schema_ref": {"const": "data/schemas/governance_record_register_schema.json"},
+    "recorded_on": {"type": "string", "format": "date"},
+    "repository_baseline": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "policy_ref": {"const": "docs/governance/governance_records_policy.md"},
+    "requirement_register_ref": {"const": "data/governance/normative_requirement_register.json"},
+    "records": {
+      "type": "array",
+      "minItems": 27,
+      "uniqueItems": true,
+      "prefixItems": [
+        {"allOf": [{"$ref": "#/$defs/decision"}, {"properties": {"id": {"const": "ADR-0001"}}}]},
+        {"allOf": [{"$ref": "#/$defs/decision"}, {"properties": {"id": {"const": "ADR-0002"}}}]},
+        {"allOf": [{"$ref": "#/$defs/decision"}, {"properties": {"id": {"const": "ADR-0003"}}}]},
+        {"allOf": [{"$ref": "#/$defs/decision"}, {"properties": {"id": {"const": "ADR-0004"}}}]},
+        {"allOf": [{"$ref": "#/$defs/decision"}, {"properties": {"id": {"const": "ADR-0005"}}}]},
+        {"allOf": [{"$ref": "#/$defs/decision"}, {"properties": {"id": {"const": "ADR-0006"}}}]},
+        {"allOf": [{"$ref": "#/$defs/decision"}, {"properties": {"id": {"const": "ADR-0007"}}}]},
+        {"allOf": [{"$ref": "#/$defs/decision"}, {"properties": {"id": {"const": "ADR-0008"}}}]},
+        {"allOf": [{"$ref": "#/$defs/decision"}, {"properties": {"id": {"const": "ADR-0009"}}}]},
+        {"allOf": [{"$ref": "#/$defs/decision"}, {"properties": {"id": {"const": "ADR-0010"}}}]},
+        {"allOf": [{"$ref": "#/$defs/change_proposal"}, {"properties": {"id": {"const": "CP-0001"}}}]},
+        {"allOf": [{"$ref": "#/$defs/risk"}, {"properties": {"id": {"const": "RISK-0001"}}}]},
+        {"allOf": [{"$ref": "#/$defs/risk"}, {"properties": {"id": {"const": "RISK-0002"}}}]},
+        {"allOf": [{"$ref": "#/$defs/risk"}, {"properties": {"id": {"const": "RISK-0003"}}}]},
+        {"allOf": [{"$ref": "#/$defs/deviation"}, {"properties": {"id": {"const": "DEV-0001"}, "legacy_ids": {"const": ["D-001"]}}}]},
+        {"allOf": [{"$ref": "#/$defs/deviation"}, {"properties": {"id": {"const": "DEV-0002"}, "legacy_ids": {"const": ["D-002"]}}}]},
+        {"allOf": [{"$ref": "#/$defs/deviation"}, {"properties": {"id": {"const": "DEV-0003"}, "legacy_ids": {"const": ["D-003"]}}}]},
+        {"allOf": [{"$ref": "#/$defs/deviation"}, {"properties": {"id": {"const": "DEV-0004"}, "legacy_ids": {"const": ["D-004"]}}}]},
+        {"allOf": [{"$ref": "#/$defs/deviation"}, {"properties": {"id": {"const": "DEV-0005"}, "legacy_ids": {"const": ["D-005"]}}}]},
+        {"allOf": [{"$ref": "#/$defs/question"}, {"properties": {"id": {"const": "Q-0001"}, "resolution_record_ref": {"const": "ADR-0003"}}}]},
+        {"allOf": [{"$ref": "#/$defs/question"}, {"properties": {"id": {"const": "Q-0002"}, "resolution_record_ref": {"const": "ADR-0004"}}}]},
+        {"allOf": [{"$ref": "#/$defs/question"}, {"properties": {"id": {"const": "Q-0003"}, "resolution_record_ref": {"const": "ADR-0005"}}}]},
+        {"allOf": [{"$ref": "#/$defs/question"}, {"properties": {"id": {"const": "Q-0004"}, "resolution_record_ref": {"const": "ADR-0006"}}}]},
+        {"allOf": [{"$ref": "#/$defs/question"}, {"properties": {"id": {"const": "Q-0005"}, "resolution_record_ref": {"const": "ADR-0007"}}}]},
+        {"allOf": [{"$ref": "#/$defs/question"}, {"properties": {"id": {"const": "Q-0006"}, "resolution_record_ref": {"const": "ADR-0008"}}}]},
+        {"allOf": [{"$ref": "#/$defs/question"}, {"properties": {"id": {"const": "Q-0007"}, "resolution_record_ref": {"const": "ADR-0009"}}}]},
+        {"allOf": [{"$ref": "#/$defs/question"}, {"properties": {"id": {"const": "Q-0008"}, "resolution_record_ref": {"const": "ADR-0010"}}}]}
+      ],
+      "items": {
+        "oneOf": [
+          {"$ref": "#/$defs/decision"},
+          {"$ref": "#/$defs/change_proposal"},
+          {"$ref": "#/$defs/risk"},
+          {"$ref": "#/$defs/deviation"},
+          {"$ref": "#/$defs/question"}
+        ]
+      }
+    },
+    "summary": {"$ref": "#/$defs/summary"}
+  },
+  "$defs": {
+    "repository_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\).+$"
+    },
+    "requirement_ref": {"type": "string", "pattern": "^YWE-REQ-[0-9]{4}$"},
+    "debt_ref": {"type": "string", "pattern": "^(?:QD-[0-9]{3}|QD-OW-[0-9]{3}|QD-PH-[0-9a-f]{12})$"},
+    "record_ref": {"type": "string", "pattern": "^(?:ADR|CP|RISK|DEV|Q)-[0-9]{4}$"},
+    "record_core": {
+      "type": "object",
+      "required": [
+        "id",
+        "record_type",
+        "title",
+        "status",
+        "recorded_on",
+        "owner_role",
+        "scope",
+        "context",
+        "rationale",
+        "disposition",
+        "consequences",
+        "source_refs",
+        "requirement_refs",
+        "debt_refs",
+        "supersedes",
+        "superseded_by",
+        "legacy_ids"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^(?:ADR|CP|RISK|DEV|Q)-[0-9]{4}$"},
+        "record_type": {"enum": ["decision", "change_proposal", "risk", "deviation", "question"]},
+        "title": {"type": "string", "minLength": 5},
+        "status": {"type": "string", "minLength": 3},
+        "recorded_on": {"type": "string", "format": "date"},
+        "owner_role": {"type": "string", "minLength": 3},
+        "scope": {
+          "enum": [
+            "ywe_core",
+            "ywe_extension_profile",
+            "ash_dependency_material",
+            "wrw_reference_profile",
+            "governance_validation",
+            "historical_evidence",
+            "later_release_work"
+          ]
+        },
+        "context": {"type": "string", "minLength": 20},
+        "rationale": {"type": "string", "minLength": 20},
+        "disposition": {"type": "string", "minLength": 15},
+        "consequences": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 10}
+        },
+        "requirement_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/requirement_ref"}
+        },
+        "source_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/repository_ref"}
+        },
+        "debt_refs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/debt_ref"}
+        },
+        "supersedes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/record_ref"}
+        },
+        "superseded_by": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/record_ref"}
+        },
+        "legacy_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^D-[0-9]{3}$"}
+        }
+      }
+    },
+    "decision": {
+      "allOf": [
+        {"$ref": "#/$defs/record_core"},
+        {
+          "type": "object",
+          "required": ["context", "decision", "rationale", "consequences"],
+          "properties": {
+            "id": {"type": "string", "pattern": "^ADR-[0-9]{4}$"},
+            "record_type": {"const": "decision"},
+            "status": {"enum": ["proposed", "accepted", "superseded", "rejected"]},
+            "context": {"type": "string", "minLength": 20},
+            "decision": {"type": "string", "minLength": 20},
+            "rationale": {"type": "string", "minLength": 20},
+            "consequences": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {"type": "string", "minLength": 10}
+            }
+          },
+          "allOf": [
+            {
+              "if": {"properties": {"status": {"const": "superseded"}}, "required": ["status"]},
+              "then": {"properties": {"superseded_by": {"minItems": 1}}},
+              "else": {"properties": {"superseded_by": {"maxItems": 0}}}
+            }
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "change_proposal": {
+      "allOf": [
+        {"$ref": "#/$defs/record_core"},
+        {
+          "type": "object",
+          "required": ["proposal", "rationale", "affected_record_refs"],
+          "properties": {
+            "id": {"type": "string", "pattern": "^CP-[0-9]{4}$"},
+            "record_type": {"const": "change_proposal"},
+            "status": {"enum": ["draft", "under_review", "accepted", "implemented", "rejected", "withdrawn"]},
+            "proposal": {"type": "string", "minLength": 20},
+            "rationale": {"type": "string", "minLength": 20},
+            "affected_record_refs": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {"$ref": "#/$defs/record_ref"}
+            },
+            "implementation_refs": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {"$ref": "#/$defs/repository_ref"}
+            }
+          },
+          "allOf": [
+            {
+              "if": {"properties": {"status": {"const": "implemented"}}, "required": ["status"]},
+              "then": {"required": ["implementation_refs"]},
+              "else": {"not": {"required": ["implementation_refs"]}}
+            }
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "risk": {
+      "allOf": [
+        {"$ref": "#/$defs/record_core"},
+        {
+          "type": "object",
+          "required": ["description", "likelihood", "impact", "mitigation", "controls", "residual_risk", "related_record_refs"],
+          "properties": {
+            "id": {"type": "string", "pattern": "^RISK-[0-9]{4}$"},
+            "record_type": {"const": "risk"},
+            "status": {"enum": ["open", "mitigated", "accepted", "closed"]},
+            "description": {"type": "string", "minLength": 20},
+            "likelihood": {"enum": ["low", "medium", "high"]},
+            "impact": {"enum": ["low", "medium", "high", "critical"]},
+            "mitigation": {"type": "string", "minLength": 20},
+            "controls": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {"type": "string", "minLength": 10}
+            },
+            "residual_risk": {"type": "string", "minLength": 20},
+            "related_record_refs": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {"$ref": "#/$defs/record_ref"}
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "deviation": {
+      "allOf": [
+        {"$ref": "#/$defs/record_core"},
+        {
+          "type": "object",
+          "required": ["legacy_ids", "legacy_recorded_on", "context", "resolution", "follow_up"],
+          "properties": {
+            "id": {"type": "string", "pattern": "^DEV-[0-9]{4}$"},
+            "record_type": {"const": "deviation"},
+            "status": {"enum": ["requested", "approved", "expired", "resolved", "rejected"]},
+            "legacy_ids": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {"type": "string", "pattern": "^D-[0-9]{3}$"}
+            },
+            "legacy_recorded_on": {"type": "string", "format": "date"},
+            "context": {"type": "string", "minLength": 20},
+            "resolution": {"type": "string", "minLength": 20},
+            "follow_up": {"type": "string", "minLength": 10}
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "question": {
+      "allOf": [
+        {"$ref": "#/$defs/record_core"},
+        {
+          "type": "object",
+          "required": ["question"],
+          "properties": {
+            "id": {"type": "string", "pattern": "^Q-[0-9]{4}$"},
+            "record_type": {"const": "question"},
+            "status": {"enum": ["open", "resolved", "deferred", "withdrawn"]},
+            "question": {"type": "string", "minLength": 15},
+            "resolution": {"type": "string", "minLength": 15},
+            "resolution_record_ref": {"type": "string", "pattern": "^ADR-[0-9]{4}$"},
+            "deferred_until": {"type": "string", "minLength": 2}
+          },
+          "allOf": [
+            {
+              "if": {"properties": {"status": {"const": "resolved"}}, "required": ["status"]},
+              "then": {"required": ["resolution", "resolution_record_ref"]}
+            },
+            {
+              "if": {"properties": {"status": {"const": "deferred"}}, "required": ["status"]},
+              "then": {"required": ["deferred_until"]}
+            }
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "total_records",
+        "architecture_decisions",
+        "accepted_decisions",
+        "change_proposals",
+        "implemented_change_proposals",
+        "risks",
+        "mitigated_risks",
+        "deviations",
+        "resolved_deviations",
+        "questions",
+        "resolved_questions",
+        "open_records"
+      ],
+      "properties": {
+        "total_records": {"type": "integer", "minimum": 27},
+        "architecture_decisions": {"type": "integer", "minimum": 10},
+        "accepted_decisions": {"type": "integer", "minimum": 0},
+        "change_proposals": {"type": "integer", "minimum": 1},
+        "implemented_change_proposals": {"type": "integer", "minimum": 0},
+        "risks": {"type": "integer", "minimum": 3},
+        "mitigated_risks": {"type": "integer", "minimum": 0},
+        "deviations": {"type": "integer", "minimum": 5},
+        "resolved_deviations": {"type": "integer", "minimum": 0},
+        "questions": {"type": "integer", "minimum": 8},
+        "resolved_questions": {"type": "integer", "minimum": 0},
+        "open_records": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

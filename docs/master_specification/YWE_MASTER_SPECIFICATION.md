@@ -2,7 +2,7 @@
 ## Master Specification Document
 
 Version: **1.0**  
-Status: **Foundational Canon**  
+Status: **Informative WRW-backed mixed-scope composite**
 Framework Alignment: **Forsetti Framework**  
 Cosmology Model: **ASH Model of the Universe**
 
@@ -26,6 +26,45 @@ The controlling authority contracts for this clarification are
 `docs/architecture/ash_model_engine_cosmology_contract.md`,
 `docs/architecture/ywe_cosmology_authority_contract.md`, and
 `docs/architecture/ash_pattern_system_component_contract.md`.
+
+## M1 Scope and Normativity Notice
+
+This master specification is a mixed-scope synthesis and navigation document.
+It is not, by document title or path alone, a standalone universal normative
+authority. Normative force comes from the controlling artifact for the claim's
+declared scope.
+
+- ASH mathematical, ontological, and symbolic-grammar claims route to the
+  canonical ASH dependency identified by
+  `data/governance/ash_dependency_identity.json`.
+- Setting-neutral engine requirements route to YWE Core contracts and schemas
+  under `docs/architecture/` and `data/schemas/`.
+- Authority order and runtime truth scopes route to
+  `docs/architecture/truth_authority_lattice.md` and its machine-readable
+  lattice.
+- Scope separation routes to
+  `docs/architecture/ywe_core_wrw_scope_contract.md`.
+- Named WRW story, character, companion, quest, location, and endgame claims
+  route to the WRW reference profile and its canonical lore sources.
+- Embedded JSON, YAML, diagrams, examples, design goals, and implementation
+  sketches are non-normative illustrations unless they cite a controlling
+  normative contract or schema explicitly.
+
+| Master-specification content | Routed scope | Normative treatment |
+|---|---|---|
+| Setting-neutral truth boundaries, state/delta semantics, interfaces, and invariants | YWE Core | Informative summary here; the cited Core contract or schema is normative. |
+| Named story, character, companion, location, campaign, creation-narrative, and endgame content | WRW reference profile | Binding only within the WRW profile when supported by a canonical WRW source; never universal Core truth. |
+| Optional setting-neutral feature-engine behavior | YWE extension profile | Binding only for implementations that declare the extension; it cannot weaken Core. |
+| Authority, requirement, decision, deviation, validation, and repository-process statements | Governance and validation | The applicable governance policy, register, roadmap, or validator controls. |
+| Host adapters, platform products, and implementation realization | Deferred/downstream | Non-authoritative here and unauthorized until the roadmap platform gate permits downstream work. |
+| Embedded examples and design sketches | Non-normative illustration | Creates no requirement unless an explicit controlling contract or schema is cited. |
+
+Sections that require White Wolf, Dark Wolf, Floki, Nathruun, Ravenfall,
+Michael, Lucifer, Odin, a specific campaign, or a specific Divine Core endgame
+are WRW reference-profile material. They may demonstrate or specialize YWE Core
+but do not bind setting-neutral implementations. When this synthesis conflicts
+with a controlling authority, the controlling authority wins and this document
+must be corrected without treating the stale passage as an alternate rule.
 
 ---
 
@@ -265,7 +304,7 @@ Identity emerges through gameplay.
   "origin": "mortal",
   "celestial_memory": "veiled",
   "realm_attunement": {},
-  "wolf_alignment": {
+  "wolf_resonance": {
     "white_wolf": 0,
     "dark_wolf": 0
   },
@@ -290,7 +329,7 @@ Identity is **revealed through play**, not chosen at character creation.
 
 ---
 
-# 5. ALIGNMENT SYSTEM
+# 5. WOLF RESONANCE SYSTEM
 
 White Wolf and Dark Wolf are **complementary opposites**, but not moral
 opposites. They are not good and evil, and they are not a morality system. The
@@ -328,7 +367,7 @@ Represents:
 - transformation
 - gravity and memory
 
-## Alignment Rules
+## Resonance Rules
 
 ```yaml
 alignment_rules:
@@ -337,7 +376,7 @@ alignment_rules:
   morality_system: false
 ```
 
-Both alignments may increase simultaneously.
+Both resonance values may increase simultaneously.
 
 A single quest may award both White Wolf and Dark Wolf attunement depending on how the player completes it.
 Every conscious being carries both wolves.
@@ -734,7 +773,7 @@ endgame objective.
 Requirements to approach may include:
 
 - major realm mastery
-- high wolf alignment totals
+- high wolf resonance totals
 - prophecy completion
 - bloodline resonance thresholds
 - mythic identity completion
@@ -883,7 +922,7 @@ repository_structure:
   "origin": "mortal",
   "celestial_memory": "veiled",
   "realm_attunement": {},
-  "wolf_alignment": {
+  "wolf_resonance": {
     "white_wolf": 0,
     "dark_wolf": 0
   },

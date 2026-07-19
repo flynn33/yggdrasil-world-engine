@@ -827,12 +827,12 @@
       "category": "placeholder_backed_artifact",
       "title": "Placeholder artifact: lore/wrw_cosmology/canon_scope.md",
       "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M1.",
-      "status": "open",
+      "status": "resolved",
       "source_refs": [
         {
           "kind": "repository_path",
           "path": "lore/wrw_cosmology/canon_scope.md",
-          "locator": "self-declared placeholder marker"
+          "locator": "Status; Canonical Sources; Cross-Scope Rules"
         }
       ],
       "owner_role": "Canon and governance maintainers",
@@ -841,19 +841,31 @@
       "ratchet_key": "placeholder:dd00c6d30da8",
       "introduced_baseline": "2.0.23",
       "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
-      "resolution_evidence": []
+      "resolution_evidence": [
+        "lore/wrw_cosmology/canon_scope.md",
+        "lore/wrw_cosmology/first_darkness_and_divine_core.md",
+        "lore/wrw_cosmology/trial_of_return_michael_lucifer_odin.md",
+        "docs/architecture/ywe_core_wrw_scope_contract.md"
+      ],
+      "resolution_evidence_details": [
+        {
+          "kind": "heading",
+          "path": "lore/wrw_cosmology/canon_scope.md",
+          "locator": "Canonical Sources; In Scope; Out of Scope; Cross-Scope Rules"
+        }
+      ]
     },
     {
       "debt_id": "QD-PH-37cd25fd2cac",
       "category": "placeholder_backed_artifact",
       "title": "Placeholder artifact: lore/wrw_cosmology/source_notes.md",
       "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M1.",
-      "status": "open",
+      "status": "resolved",
       "source_refs": [
         {
           "kind": "repository_path",
           "path": "lore/wrw_cosmology/source_notes.md",
-          "locator": "self-declared placeholder marker"
+          "locator": "Source Register; Provenance Rules; Source-to-Claim Map"
         }
       ],
       "owner_role": "Canon and governance maintainers",
@@ -862,7 +874,19 @@
       "ratchet_key": "placeholder:37cd25fd2cac",
       "introduced_baseline": "2.0.23",
       "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
-      "resolution_evidence": []
+      "resolution_evidence": [
+        "lore/wrw_cosmology/source_notes.md",
+        "lore/wrw_cosmology/first_darkness_and_divine_core.md",
+        "lore/wrw_cosmology/trial_of_return_michael_lucifer_odin.md",
+        "data/governance/artifact_classification_manifest.json"
+      ],
+      "resolution_evidence_details": [
+        {
+          "kind": "heading",
+          "path": "lore/wrw_cosmology/source_notes.md",
+          "locator": "Source Register; Provenance Rules; Source-to-Claim Map"
+        }
+      ]
     },
     {
       "debt_id": "QD-PH-61393803b79b",
@@ -1016,12 +1040,12 @@
       "category": "roadmap_open_work",
       "title": "Roadmap open work: Authority and engine-game boundaries",
       "description": "Resolve remaining authority and terminology contradictions",
-      "status": "open",
+      "status": "resolved",
       "source_refs": [
         {
           "kind": "json_pointer",
           "path": "data/governance/specification_roadmap.json",
-          "locator": "/subsystems/0/open_work/0"
+          "locator": "/subsystems/0"
         }
       ],
       "owner_role": "Canon and governance maintainers",
@@ -1030,7 +1054,21 @@
       "ratchet_key": "roadmap_open_work:authority_boundaries",
       "introduced_baseline": "2.0.23",
       "resolution_criteria": "The M1 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
-      "resolution_evidence": []
+      "resolution_evidence": [
+        "data/governance/specification_roadmap.json",
+        "data/governance/truth_authority_lattice.json",
+        "docs/architecture/truth_authority_lattice.md",
+        "docs/architecture/ywe_core_wrw_scope_contract.md",
+        "data/governance/canonical_term_index.json",
+        "docs/glossary/ywe_design_glossary.md"
+      ],
+      "resolution_evidence_details": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/0/open_work"
+        }
+      ]
     },
     {
       "debt_id": "QD-OW-002",
@@ -1057,7 +1095,7 @@
       "debt_id": "QD-OW-003",
       "category": "roadmap_open_work",
       "title": "Roadmap open work: Cosmology realms and branch reality",
-      "description": "Normalize realm coordinates mutable state and branch merge semantics",
+      "description": "Complete branch-merge and runtime-state semantics",
       "status": "open",
       "source_refs": [
         {
@@ -1071,7 +1109,7 @@
       "severity": "high",
       "ratchet_key": "roadmap_open_work:cosmology_realm_branch",
       "introduced_baseline": "2.0.23",
-      "resolution_criteria": "The M4 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_criteria": "The M4 acceptance evidence completes branch-merge and runtime-state semantics and the roadmap no longer reports this exact work as open.",
       "resolution_evidence": []
     },
     {
@@ -1099,7 +1137,7 @@
       "debt_id": "QD-OW-005",
       "category": "roadmap_open_work",
       "title": "Roadmap open work: Perception worldstate and location",
-      "description": "Resolve static ontology language and complete perception persistence",
+      "description": "Complete perception persistence and location conformance",
       "status": "open",
       "source_refs": [
         {
@@ -1113,7 +1151,7 @@
       "severity": "high",
       "ratchet_key": "roadmap_open_work:perception_worldstate",
       "introduced_baseline": "2.0.23",
-      "resolution_criteria": "The M4 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_criteria": "The M4 acceptance evidence completes perception persistence and location conformance and the roadmap no longer reports this exact work as open.",
       "resolution_evidence": []
     },
     {
@@ -1331,17 +1369,17 @@
       "category": "terminology_and_authority_normalization",
       "title": "Immutable ontology versus mutable worldstate wording",
       "description": "Current surfaces use static-world language alongside lawful worldstate and location mutation contracts; M1 must distinguish immutable ontology from mutable scoped state.",
-      "status": "open",
+      "status": "resolved",
       "source_refs": [
         {
           "kind": "json_pointer",
           "path": "yggdrasil-instructions.json",
-          "locator": "/cosmological_invariants/8"
+          "locator": "/cosmological_invariants/2"
         },
         {
           "kind": "repository_path",
           "path": "docs/architecture/worldstate_location_mutation_v1.md",
-          "locator": "Purpose and truth-scope rules"
+          "locator": "Purpose; Persistence Scopes"
         },
         {
           "kind": "json_pointer",
@@ -1355,19 +1393,32 @@
       "ratchet_key": "m1:ontology_worldstate",
       "introduced_baseline": "2.0.23",
       "resolution_criteria": "One canonical distinction between immutable ontology and mutable scoped worldstate is adopted and all normative references agree.",
-      "resolution_evidence": []
+      "resolution_evidence": [
+        "docs/glossary/ywe_design_glossary.md",
+        "data/governance/truth_authority_lattice.json",
+        "docs/architecture/truth_authority_lattice.md",
+        "docs/architecture/worldstate_location_mutation_v1.md",
+        "core/narrative_engine/worldstate_delta_rules.yaml"
+      ],
+      "resolution_evidence_details": [
+        {
+          "kind": "heading",
+          "path": "docs/glossary/ywe_design_glossary.md",
+          "locator": "Ontology; Perception Overlay; Worldstate"
+        }
+      ]
     },
     {
       "debt_id": "QD-064",
       "category": "terminology_and_authority_normalization",
       "title": "Realm and plane coordinate terminology",
       "description": "Realm, plane, coordinate, bit position, ordinal, and presentation-order language is not yet normalized into one canonical model.",
-      "status": "open",
+      "status": "resolved",
       "source_refs": [
         {
           "kind": "repository_path",
           "path": "wiki.md",
-          "locator": "1. Cosmology Deep Dive > The Nine Realms"
+          "locator": "1. Cosmology Deep Dive > WRW Reference Profile: The Nine Realms"
         },
         {
           "kind": "json_pointer",
@@ -1381,14 +1432,26 @@
       "ratchet_key": "m1:realm_coordinate_terms",
       "introduced_baseline": "2.0.23",
       "resolution_criteria": "M1 defines each term, migrates conflicting normative usage, and supplies durable rationale.",
-      "resolution_evidence": []
+      "resolution_evidence": [
+        "docs/glossary/ywe_design_glossary.md",
+        "data/governance/canonical_term_index.json",
+        "data/ash_state/realm_bit_mapping.yaml",
+        "core/ash_pattern_engine/canonical/core/realm-identity.pseudo.md"
+      ],
+      "resolution_evidence_details": [
+        {
+          "kind": "heading",
+          "path": "docs/glossary/ywe_design_glossary.md",
+          "locator": "Structural Coordinate; Coordinate Index; Presentation Order; Realm; Ordinal; ASH State Vector; State Identity"
+        }
+      ]
     },
     {
       "debt_id": "QD-065",
       "category": "terminology_and_authority_normalization",
       "title": "Symbolic grammar ownership and ASH dependency identity",
       "description": "The repository has corrected top-level authority references, but the exact symbolic-grammar owner and pinned ASH dependency identity remain M1 work.",
-      "status": "open",
+      "status": "resolved",
       "source_refs": [
         {
           "kind": "repository_path",
@@ -1407,19 +1470,31 @@
       "ratchet_key": "m1:ash_dependency_identity",
       "introduced_baseline": "2.0.23",
       "resolution_criteria": "M1 records one authoritative symbolic-grammar owner and one pinned ASH dependency identity.",
-      "resolution_evidence": []
+      "resolution_evidence": [
+        "data/governance/truth_authority_lattice.json",
+        "docs/architecture/truth_authority_lattice.md",
+        "data/governance/ash_dependency_identity.json",
+        "core/ash_pattern_engine/canonical/README.md"
+      ],
+      "resolution_evidence_details": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/ash_dependency_identity.json",
+          "locator": "/dependency_id"
+        }
+      ]
     },
     {
       "debt_id": "QD-066",
       "category": "terminology_and_authority_normalization",
       "title": "Companion resonance and alignment aliases",
       "description": "Historical wolf_alignment fields coexist with preferred wolf_resonance and dual-variable terminology.",
-      "status": "open",
+      "status": "resolved",
       "source_refs": [
         {
           "kind": "repository_path",
           "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
-          "locator": "5. ALIGNMENT SYSTEM > Alignment Rules"
+          "locator": "5. WOLF RESONANCE SYSTEM > Resonance Rules"
         },
         {
           "kind": "json_pointer",
@@ -1433,14 +1508,26 @@
       "ratchet_key": "m1:companion_resonance_aliases",
       "introduced_baseline": "2.0.23",
       "resolution_criteria": "M1 defines the canonical term and explicit migration aliases without changing Twin Wolf canon.",
-      "resolution_evidence": []
+      "resolution_evidence": [
+        "docs/glossary/ywe_design_glossary.md",
+        "data/governance/canonical_term_index.json",
+        "data/player_schema.json",
+        "modules/artifact_engine/artifact_system_rules.yaml"
+      ],
+      "resolution_evidence_details": [
+        {
+          "kind": "heading",
+          "path": "docs/glossary/ywe_design_glossary.md",
+          "locator": "Wolf Resonance"
+        }
+      ]
     },
     {
       "debt_id": "QD-067",
       "category": "terminology_and_authority_normalization",
       "title": "Append-only history versus reversible effects",
       "description": "Append-only history requirements coexist with lawful reversals expressed as new state deltas; their semantic boundary needs one normative statement.",
-      "status": "open",
+      "status": "resolved",
       "source_refs": [
         {
           "kind": "repository_path",
@@ -1450,7 +1537,7 @@
         {
           "kind": "repository_path",
           "path": "core/narrative_engine/worldstate_delta_rules.yaml",
-          "locator": "persistence_rules.reversals_require_new_worldstate_delta"
+          "locator": "history_and_reversal_semantics.compatibility_aliases.reversals_require_new_worldstate_delta"
         },
         {
           "kind": "json_pointer",
@@ -1464,14 +1551,26 @@
       "ratchet_key": "m1:history_reversible_effects",
       "introduced_baseline": "2.0.23",
       "resolution_criteria": "M1 distinguishes immutable event history from reversible current-state effects and updates all normative terms.",
-      "resolution_evidence": []
+      "resolution_evidence": [
+        "docs/glossary/ywe_design_glossary.md",
+        "data/governance/canonical_term_index.json",
+        "core/narrative_engine/npc_synthesis_rules.yaml",
+        "core/narrative_engine/worldstate_delta_rules.yaml"
+      ],
+      "resolution_evidence_details": [
+        {
+          "kind": "yaml_path",
+          "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+          "locator": "history_and_reversal_semantics.compatibility_aliases.reversals_require_new_worldstate_delta"
+        }
+      ]
     },
     {
       "debt_id": "QD-068",
       "category": "terminology_and_authority_normalization",
       "title": "YWE Core and WRW content separation",
       "description": "WRW reference material appears beside YWE Core contracts and needs complete normative scope separation.",
-      "status": "open",
+      "status": "resolved",
       "source_refs": [
         {
           "kind": "repository_path",
@@ -1490,14 +1589,25 @@
       "ratchet_key": "m1:core_wrw_separation",
       "introduced_baseline": "2.0.23",
       "resolution_criteria": "Every normative YWE Core artifact and WRW reference-profile artifact has an unambiguous scope and no WRW-specific rule becomes universal core truth.",
-      "resolution_evidence": []
+      "resolution_evidence": [
+        "docs/architecture/ywe_core_wrw_scope_contract.md",
+        "data/governance/scope_partition_manifest.json",
+        "docs/master_specification/YWE_MASTER_SPECIFICATION.md"
+      ],
+      "resolution_evidence_details": [
+        {
+          "kind": "heading",
+          "path": "docs/architecture/ywe_core_wrw_scope_contract.md",
+          "locator": "YWE Core; WRW Reference Profile; Dependency Direction; Routing Rules"
+        }
+      ]
     },
     {
       "debt_id": "QD-069",
       "category": "terminology_and_authority_normalization",
       "title": "Duplicated ASH specification mirrors",
       "description": "The specs tree and core/ash_pattern_engine/canonical tree each contain 32 files; 31 matching relative paths are byte-identical, while each tree has one unique file.",
-      "status": "open",
+      "status": "resolved",
       "source_refs": [
         {
           "kind": "classification_selector",
@@ -1519,7 +1629,19 @@
       "ratchet_key": "m1:ash_mirror_authority",
       "introduced_baseline": "2.0.23",
       "resolution_criteria": "M1 declares one authoritative source or generated-mirror relationship and validates synchronization deterministically.",
-      "resolution_evidence": []
+      "resolution_evidence": [
+        "data/governance/ash_dependency_identity.json",
+        "scripts/sync_ash_specifications.py",
+        "docs/architecture/truth_authority_lattice.md",
+        "core/ash_pattern_engine/canonical/README.md"
+      ],
+      "resolution_evidence_details": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/ash_dependency_identity.json",
+          "locator": "/aggregate_sha256"
+        }
+      ]
     },
     {
       "debt_id": "QD-070",
@@ -1899,8 +2021,8 @@
   ],
   "summary": {
     "total": 81,
-    "open": 70,
-    "resolved": 10,
+    "open": 60,
+    "resolved": 20,
     "accepted_exception": 1,
     "by_milestone": {
       "M0": 11,
@@ -1915,9 +2037,9 @@
       "M9": 7,
       "M10": 1
     },
-    "placeholder_count": 46,
-    "roadmap_open_work_count": 15,
-    "placeholder_paths_sha256": "88732d2f26350ec8e1b5c24209906d161e7b186e7453111db98a776216f43bef",
-    "roadmap_open_work_sha256": "349bfee43e2b0aefc6971aa191e5bf05c87f3e8eaec21bbd612d6af58129f240"
+    "placeholder_count": 44,
+    "roadmap_open_work_count": 14,
+    "placeholder_paths_sha256": "975d37a5e3e72ec2e1a0f8b25276fd8e922f6f390c5e67895256746fc164a331",
+    "roadmap_open_work_sha256": "7e5d52d42066724bae754120600dee21d167baaa3f242639c80927824bdc7cfa"
   }
 }

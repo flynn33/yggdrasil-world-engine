@@ -2,6 +2,22 @@
 
 Date: 2026-05-10
 
+## Current Authority and Identifier Mapping
+
+Current typed deviation authority is
+`data/governance/governance_record_register.json`, governed by
+`docs/governance/governance_records_policy.md`. The historical `D-NNN`
+records below remain unchanged as provenance. Current `DEV-NNNN` identifiers
+supplement them and do not erase, rename, or reopen the historical entries.
+
+| Current record | Historical record | Current status |
+| --- | --- | --- |
+| `DEV-0001` | `D-001` | `resolved` |
+| `DEV-0002` | `D-002` | `resolved` |
+| `DEV-0003` | `D-003` | `resolved` |
+| `DEV-0004` | `D-004` | `resolved` |
+| `DEV-0005` | `D-005` | `resolved` |
+
 ## Active Status
 
 No open deviations remain for the code-agnostic repository alignment scope.

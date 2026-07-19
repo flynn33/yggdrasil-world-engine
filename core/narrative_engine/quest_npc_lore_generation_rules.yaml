@@ -171,9 +171,17 @@ npc_generation_rules:
       requires_worldstate_delta_packet_ref: true
       still_may_not_rewrite_ash_math: true
   persistence_policy:
+    event_history_append_only: true
+    accepted_history_records_immutable: true
+    reversible_effect_requires_compensating_delta: true
     append_only: true
     memory_delta_requires_resolution_payload: true
     relationship_change_requires_worldstate_delta_packet_ref: true
+    compatibility_aliases:
+      append_only:
+        status: deprecated
+        canonical_rule: event_history_append_only
+        behavior: exact_semantic_alias
 
 lore_generation_rules:
   required_records:

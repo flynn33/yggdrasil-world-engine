@@ -6,8 +6,7 @@
   "required": [
     "ash_model_of_universe",
     "yggdrasil_world_engine",
-    "ash_pattern_system",
-    "game_layer"
+    "ash_pattern_system"
   ],
   "properties": {
     "ash_model_of_universe": {
@@ -75,7 +74,7 @@
         }
       }
     },
-    "game_layer": {
+    "profile_layer": {
       "type": "object",
       "required": [
         "name",
@@ -83,10 +82,37 @@
       ],
       "properties": {
         "name": {
-          "const": "Where Ravens Wait: Eternal Reckoning"
+          "type": "string",
+          "minLength": 1
         },
         "role": {
-          "const": "game_narrative_layer"
+          "enum": [
+            "game_narrative_layer",
+            "simulation_profile_layer",
+            "extension_profile_layer"
+          ]
+        }
+      }
+    },
+    "game_layer": {
+      "type": "object",
+      "deprecated": true,
+      "description": "Deprecated compatibility property for profile_layer; no named game is required by YWE Core.",
+      "required": [
+        "name",
+        "role"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "enum": [
+            "game_narrative_layer",
+            "simulation_profile_layer",
+            "extension_profile_layer"
+          ]
         }
       }
     }

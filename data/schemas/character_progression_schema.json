@@ -6,7 +6,7 @@
   "required_inputs": [
     "CosmicPatternSnapshot",
     "PlayerState",
-    "RealmIdentity",
+    "StateIdentity",
     "DiagnosticEnvelope",
     "GenerationPlan"
   ],
@@ -16,6 +16,10 @@
     "ProgressionDelta",
     "PlayerStateDelta"
   ],
+  "compatibility_aliases": {
+    "RealmIdentity": "StateIdentity",
+    "realm_id": "vertex_id"
+  },
   "records": {
     "CharacterSeedManifest": {
       "required": [

@@ -10,7 +10,7 @@
     "verified_on": "2026-07-19",
     "tag_policy": "Existing v2.0.x Git tags, including historical annotations that use release wording, identify repository baselines; they are not published releases."
   },
-  "current_milestone": "M1",
+  "current_milestone": "M2",
   "status_vocabulary": [
     "complete",
     "in_progress",
@@ -130,7 +130,7 @@
       "required_markers": [
         "| Agnostic specification release readiness | Not ready |",
         "| Published releases | None; no GitHub Release objects or agnostic specification releases have been published |",
-        "| Current roadmap milestone | M1 - Normalize canon terminology and governance |",
+        "| Current roadmap milestone | M2 - Build the canonical contract and schema foundation |",
         "| Platform product work | Deferred through M10 |"
       ]
     },
@@ -150,18 +150,19 @@
       "owner_role": "Canon and governance maintainers",
       "maturity": {
         "phase_gate_accepted": "not_applicable",
-        "normative_artifact_complete": "partial",
-        "executable_schema_complete": "partial",
-        "conformance_tested": "partial",
-        "release_ready": "not_ready"
+        "normative_artifact_complete": "complete",
+        "executable_schema_complete": "complete",
+        "conformance_tested": "complete",
+        "release_ready": "complete"
       },
       "evidence_refs": [
-        "docs/architecture/ywe_cosmology_authority_contract.md",
-        "docs/architecture/engine_vs_game_layer_contract.md"
+        "data/governance/truth_authority_lattice.json",
+        "docs/architecture/truth_authority_lattice.md",
+        "docs/architecture/ywe_core_wrw_scope_contract.md",
+        "data/governance/canonical_term_index.json",
+        "docs/glossary/ywe_design_glossary.md"
       ],
-      "open_work": [
-        "Resolve remaining authority and terminology contradictions"
-      ]
+      "open_work": []
     },
     {
       "id": "ash_algebra_oracle",
@@ -200,7 +201,7 @@
         "docs/architecture/leaf_branch_reality_contract.md"
       ],
       "open_work": [
-        "Normalize realm coordinates mutable state and branch merge semantics"
+        "Complete branch-merge and runtime-state semantics"
       ]
     },
     {
@@ -239,7 +240,7 @@
         "data/schemas/perception_layer_persistence_schema.json"
       ],
       "open_work": [
-        "Resolve static ontology language and complete perception persistence"
+        "Complete perception persistence and location conformance"
       ]
     },
     {
@@ -471,7 +472,7 @@
     {
       "id": "M1",
       "title": "Normalize canon terminology and governance",
-      "status": "in_progress",
+      "status": "complete",
       "dependencies": [
         "M0"
       ],
@@ -480,7 +481,10 @@
         "maximum": 3
       },
       "owner_role": "Canon and governance maintainers",
-      "acceptance_evidence": [],
+      "acceptance_evidence": [
+        "data/governance/m1_acceptance_evidence.json",
+        "docs/project/M1_CANON_TERMINOLOGY_GOVERNANCE_ACCEPTANCE.md"
+      ],
       "deliverables": [
         "Normative keyword policy and stable requirement identifiers.",
         "Architecture-decision, change-proposal, risk, deviation, and question registers.",
@@ -502,7 +506,7 @@
     {
       "id": "M2",
       "title": "Build the canonical contract and schema foundation",
-      "status": "planned",
+      "status": "in_progress",
       "dependencies": [
         "M1"
       ],

@@ -3,6 +3,11 @@
 Date: 2026-05-19
 Status: canonical source-truth contract
 
+Scope note: WRW names in this document identify an informative reference-profile
+boundary example only. They do not establish universal YWE Core behavior;
+authority remains with
+`docs/architecture/ywe_core_wrw_scope_contract.md`.
+
 ## Layer definitions
 
 ```text

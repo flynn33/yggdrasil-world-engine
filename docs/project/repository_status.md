@@ -14,13 +14,14 @@ schema, conformance, or release completion.
 | Dimension | Current status |
 |---|---|
 | Historical phase gates | Accepted through the Phase 16/17 foundation |
-| Normative artifact completion | Partial |
+| Normative artifact completion | Partial overall; M1 authority-boundary artifacts complete |
 | Executable schema completion | Partial; tracked under M2 |
 | Whole-system conformance | Not complete |
 | Agnostic specification release readiness | Not ready |
 | Published releases | None; no GitHub Release objects or agnostic specification releases have been published |
 | M0 truthful baseline | Complete; evidence recorded in `data/governance/m0_acceptance_evidence.json` and `docs/project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md` |
-| Current roadmap milestone | M1 - Normalize canon terminology and governance |
+| M1 canon terminology and governance | Complete; evidence recorded in `data/governance/m1_acceptance_evidence.json` and `docs/project/M1_CANON_TERMINOLOGY_GOVERNANCE_ACCEPTANCE.md` |
+| Current roadmap milestone | M2 - Build the canonical contract and schema foundation |
 | Platform product work | Deferred through M10 |
 
 ## Authority Stack

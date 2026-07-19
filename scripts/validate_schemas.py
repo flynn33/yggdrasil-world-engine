@@ -234,18 +234,38 @@ def check_player_schema(root):
 
     required_fields = [
         "origin", "celestial_memory", "realm_attunement",
-        "wolf_alignment", "bloodline_resonance", "awakening_fragments",
+        "wolf_resonance", "bloodline_resonance", "awakening_fragments",
     ]
     errors = []
     for field in required_fields:
         if field not in data:
             errors.append(f"Missing required field in player schema: {field}")
 
-    wolf = data.get("wolf_alignment", {})
-    if "white_wolf" not in wolf:
-        errors.append("Missing white_wolf in wolf_alignment")
-    if "dark_wolf" not in wolf:
-        errors.append("Missing dark_wolf in wolf_alignment")
+    canonical_wolf = data.get("wolf_resonance")
+    if not isinstance(canonical_wolf, dict):
+        errors.append("wolf_resonance must be an object")
+    else:
+        for field in ("white_wolf", "dark_wolf"):
+            if field not in canonical_wolf:
+                errors.append(f"Missing {field} in wolf_resonance")
+
+    if "wolf_alignment" in data:
+        legacy_wolf = data["wolf_alignment"]
+        if not isinstance(legacy_wolf, dict):
+            errors.append("Deprecated input alias wolf_alignment must be an object")
+        else:
+            for field in ("white_wolf", "dark_wolf"):
+                if field not in legacy_wolf:
+                    errors.append(f"Missing {field} in deprecated input alias wolf_alignment")
+                    continue
+                if isinstance(canonical_wolf, dict) and field in canonical_wolf:
+                    canonical_value = canonical_wolf[field]
+                    legacy_value = legacy_wolf[field]
+                    if type(canonical_value) is not type(legacy_value) or canonical_value != legacy_value:
+                        errors.append(
+                            "Conflicting wolf_resonance and deprecated wolf_alignment "
+                            f"values for {field}"
+                        )
 
     return errors
 

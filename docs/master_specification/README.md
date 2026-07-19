@@ -15,7 +15,7 @@ adapter boundaries, validation expectations, and implementation principles.
 
 | File | Role |
 |---|---|
-| `YWE_MASTER_SPECIFICATION.md` | Foundational 25-section design specification for the code-agnostic engine layer. |
+| `YWE_MASTER_SPECIFICATION.md` | Informative WRW-backed 25-section mixed-scope composite; route binding claims to focused authorities. |
 
 ## How To Read It
 

@@ -7,6 +7,10 @@ Version: `0.1.0`
 
 This document maps ASH Cosmological Model source concepts into the Yggdrasil World Engine repository so systems can align without redefining the cosmology.
 
+Scope note: named WRW concepts below are informative cross-scope routing
+examples only. They do not establish YWE Core requirements; authority remains
+with `docs/architecture/ywe_core_wrw_scope_contract.md`.
+
 ## Source concept map
 
 | Source concept | Repository interpretation |

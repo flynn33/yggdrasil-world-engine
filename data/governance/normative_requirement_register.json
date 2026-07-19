@@ -1,0 +1,376 @@
+{
+  "artifact_type": "normative_requirement_register",
+  "artifact_version": "1.0.0",
+  "schema_ref": "data/schemas/normative_requirement_register_schema.json",
+  "recorded_on": "2026-07-19",
+  "repository_baseline": "2.0.23",
+  "policy_ref": "docs/governance/normative_language_and_requirement_id_policy.md",
+  "id_policy": {
+    "series": "YWE-REQ",
+    "format": "YWE-REQ-NNNN",
+    "allocation": "monotonic",
+    "next_available_id": "YWE-REQ-0019",
+    "renumbering_allowed": false,
+    "reuse_allowed": false,
+    "deletion_allowed": false,
+    "terminal_records_retained": true
+  },
+  "requirements": [
+    {
+      "requirement_id": "YWE-REQ-0001",
+      "title": "Uppercase normative keyword force",
+      "normative_statement": "Only the exact uppercase keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY carry normative force; lowercase uses are descriptive.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": ["scripts/check_m1_canon_governance.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0001"],
+      "source_refs": [
+        "docs/governance/normative_language_and_requirement_id_policy.md#normative-keywords",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/0"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0002",
+      "title": "Stable identifiers on normative clauses",
+      "normative_statement": "Every new or materially changed normative clause MUST cite at least one stable requirement identifier.",
+      "normative_level": "MUST",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": ["scripts/check_m1_canon_governance.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0001"],
+      "source_refs": [
+        "docs/governance/normative_language_and_requirement_id_policy.md#requirement-identifiers",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/0"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0003",
+      "title": "Permanent requirement identity",
+      "normative_statement": "Allocated requirement identifiers MUST NOT be renumbered, reused for another meaning, or deleted, and terminal requirement records MUST be retained.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": ["scripts/check_m1_canon_governance.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0001"],
+      "source_refs": [
+        "docs/governance/normative_language_and_requirement_id_policy.md#requirement-identifiers",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/0"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0004",
+      "title": "Durable typed governance records",
+      "normative_statement": "Material architecture decisions, change proposals, risks, deviations, and semantic questions MUST have durable typed governance records.",
+      "normative_level": "MUST",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": ["scripts/check_m1_canon_governance.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0002"],
+      "source_refs": [
+        "docs/governance/governance_records_policy.md#record-types",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/1"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0005",
+      "title": "Immutable base ontology",
+      "normative_statement": "The nine-coordinate base ontology MUST remain immutable.",
+      "normative_level": "MUST",
+      "authority_node": "ash_cosmological_model",
+      "scope_partition": "ash_dependency_material",
+      "verification_refs": ["scripts/check_m1_canon_governance.py", "scripts/check_authority_stack.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0003"],
+      "source_refs": [
+        "yggdrasil-instructions.json#/cosmological_invariants/2",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/2"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0006",
+      "title": "Scoped mutable state",
+      "normative_statement": "Every mutable state change MUST be truth-scoped, typed, and provenance-bearing.",
+      "normative_level": "MUST",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": ["scripts/check_m1_canon_governance.py", "scripts/check_worldstate_location_mutation.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0003"],
+      "source_refs": [
+        "docs/architecture/worldstate_location_mutation_v1.md#persistence-scopes",
+        "data/schemas/truth_scope_schema.json"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0007",
+      "title": "Perception cannot rewrite shared truth",
+      "normative_statement": "Perception state MUST NOT rewrite shared truth.",
+      "normative_level": "MUST_NOT",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": ["scripts/check_m1_canon_governance.py", "scripts/check_worldstate_location_mutation.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0003"],
+      "source_refs": [
+        "docs/architecture/truth_authority_lattice.md#lattice-laws",
+        "core/perception_engine/perception_schema.json",
+        "data/governance/specification_roadmap.json#/milestones/4/exit_criteria/4"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0008",
+      "title": "Distinct coordinate and identity concepts",
+      "normative_statement": "A coordinate index or bit position, an ordinal, a presentation order, a realm or plane identity, and a full vector or state identity MUST be treated as distinct concepts and MUST NOT be inferred from one another without an explicit mapping.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": ["scripts/check_m1_canon_governance.py", "scripts/check_authority_stack.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0004"],
+      "source_refs": [
+        "docs/glossary/ywe_design_glossary.md",
+        "data/realm_registry/realms.json",
+        "data/ash_state/realm_bit_mapping.yaml",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/3"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0009",
+      "title": "ASH symbolic grammar ownership",
+      "normative_statement": "The ASH Cosmological Model MUST own the upstream symbolic grammar used by YWE.",
+      "normative_level": "MUST",
+      "authority_node": "ash_cosmological_model",
+      "scope_partition": "ash_dependency_material",
+      "verification_refs": ["scripts/check_m1_canon_governance.py", "scripts/check_authority_stack.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0005"],
+      "source_refs": [
+        "docs/architecture/truth_authority_lattice.md#symbolic-grammar-ownership",
+        "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/4"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0010",
+      "title": "Pinned ASH dependency identity",
+      "normative_statement": "The ASH dependency identity MUST be content-addressed and pinned by a deterministic digest.",
+      "normative_level": "MUST",
+      "authority_node": "ash_cosmological_model",
+      "scope_partition": "ash_dependency_material",
+      "verification_refs": ["scripts/check_m1_canon_governance.py", "scripts/sync_ash_specifications.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0005"],
+      "source_refs": [
+        "data/governance/ash_dependency_identity.json",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/4"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0011",
+      "title": "Wolf resonance canonical term and alias",
+      "normative_statement": "wolf_resonance MUST be the canonical field, wolf_alignment MAY be accepted only as a read or migration alias, and the dual-variable model MUST NOT be interpreted as a moral axis.",
+      "normative_level": "mixed",
+      "authority_node": "wrw_reference_profile",
+      "scope_partition": "wrw_reference_profile",
+      "verification_refs": ["scripts/check_m1_canon_governance.py", "scripts/check_phase_15a_companion_reward_foundation.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0006"],
+      "source_refs": [
+        "docs/glossary/ywe_design_glossary.md#wolf-resonance",
+        "data/schemas/player_schema.json",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/5"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0012",
+      "title": "Append-only accepted event history",
+      "normative_statement": "Accepted event history MUST be append-only.",
+      "normative_level": "MUST",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": ["scripts/check_m1_canon_governance.py", "scripts/check_worldstate_location_mutation.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0007"],
+      "source_refs": [
+        "core/narrative_engine/npc_synthesis_rules.yaml",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/6"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0013",
+      "title": "Compensating reversal and correction",
+      "normative_statement": "A reversal or correction MUST be represented by a new compensating delta and MUST NOT erase or rewrite the accepted event.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": ["scripts/check_m1_canon_governance.py", "scripts/check_worldstate_location_mutation.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0007"],
+      "source_refs": [
+        "core/narrative_engine/worldstate_delta_rules.yaml",
+        "docs/architecture/worldstate_location_mutation_v1.md#update-rules"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0014",
+      "title": "Truth-authority monotonicity",
+      "normative_statement": "A lower truth-authority layer MUST NOT overwrite a higher layer's constraints.",
+      "normative_level": "MUST_NOT",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": ["scripts/check_m1_canon_governance.py", "scripts/check_worldstate_location_mutation.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0008"],
+      "source_refs": [
+        "docs/architecture/truth_authority_lattice.md#lattice-laws",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/7"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0015",
+      "title": "YWE Core and WRW scope separation",
+      "normative_statement": "A WRW-specific rule MUST NOT become normative YWE Core truth.",
+      "normative_level": "MUST_NOT",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": ["scripts/check_m1_canon_governance.py", "scripts/check_m0_truthful_baseline.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0009"],
+      "source_refs": [
+        "docs/architecture/ywe_core_wrw_scope_contract.md",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/8"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0016",
+      "title": "Authoritative ASH source and deterministic mirror",
+      "normative_statement": "core/ash_pattern_engine/canonical MUST be the authoritative ASH specification source, and specs MUST remain its deterministically synchronized generated mirror.",
+      "normative_level": "MUST",
+      "authority_node": "ash_cosmological_model",
+      "scope_partition": "ash_dependency_material",
+      "verification_refs": ["scripts/check_m1_canon_governance.py", "scripts/sync_ash_specifications.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0010"],
+      "source_refs": [
+        "data/governance/ash_dependency_identity.json",
+        "scripts/sync_ash_specifications.py",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/9"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0017",
+      "title": "Durable decision rationale",
+      "normative_statement": "Every material decision MUST retain a durable rationale.",
+      "normative_level": "MUST",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": ["scripts/check_m1_canon_governance.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0002"],
+      "source_refs": [
+        "docs/governance/governance_records_policy.md#required-record-content",
+        "data/governance/specification_roadmap.json#/milestones/1/exit_criteria/1"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0018",
+      "title": "Single canonical glossary definition",
+      "normative_statement": "Each glossary concept MUST have exactly one canonical definition.",
+      "normative_level": "MUST",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": ["scripts/check_m1_canon_governance.py"],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M1",
+      "owner_role": "Canon and governance maintainers",
+      "decision_refs": ["ADR-0002"],
+      "source_refs": [
+        "docs/glossary/ywe_design_glossary.md",
+        "data/governance/canonical_term_index.json",
+        "data/governance/specification_roadmap.json#/milestones/1/exit_criteria/2"
+      ]
+    }
+  ],
+  "summary": {
+    "total_requirements": 18,
+    "active": 18,
+    "proposed": 0,
+    "terminal": 0,
+    "next_identifier": "YWE-REQ-0019"
+  }
+}

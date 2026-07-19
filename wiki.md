@@ -24,21 +24,21 @@ Before existence, there was Primordial Darkness. Consciousness gathered within t
 
 The Dark Star creates gravity, increasing gravity creates time, Void forms as containment, and the Dark Star collapses into the first light: the Divine Core. The collapse stabilizes the nine fixed realms or planes and transforms contained consciousness into the first Architects. The first wolves emerge with that creation event to preserve balance against decoherence and Void.
 
-### The Nine Realms
+### WRW Reference Profile: The Nine Realms
 
-The universe stabilizes into nine fixed cosmological states. In YWE canon, planes and realms are the same ontology category, with `realm` as the preferred repo term. These are not locations -- they are layered states of being separated by liminal space and symbolically understood through ASH cosmology and Yggdrasil. The nine realms are: Divine Core, Celestial, Causal, Mental, Astral, Etheric, Physical, Shadow, and Void.
+In WRW canon, the universe stabilizes into nine named realms bound one-to-one to the immutable structural coordinates. Plane is a presentation alias for realm in this profile, with realm preferred in repository prose. These are not ordinary map locations: they are layered states of being separated by liminal space and symbolically understood through ASH cosmology and Yggdrasil. The nine WRW realms are Divine Core, Celestial, Causal, Mental, Astral, Etheric, Physical, Shadow, and Void.
 
 ---
 
 ## 2. Player Model
 
-Players begin as mortals who have forgotten their celestial heritage. Identity emerges through gameplay, not character creation. The engine generates personal backstory over time based on quests completed, realm attunement, wolf alignment, bloodline resonance, mythic encounters, and prophecy activation.
+Players begin as mortals who have forgotten their celestial heritage. Identity emerges through gameplay, not character creation. The engine generates personal backstory over time based on quests completed, realm attunement, wolf resonance, bloodline resonance, mythic encounters, and prophecy activation.
 
 ---
 
-## 3. Twin Wolf Companion and Alignment Model
+## 3. Twin Wolf Companion and Resonance Model
 
-White Wolf and Dark Wolf are paired symbiotic companions of consciousness, not morality markers. Every conscious being carries both. Both can increase simultaneously, a single quest may award both alignments, and the healthiest path is balance rather than domination of one wolf over the other. Alignment is accumulation-only -- it can never decrease.
+White Wolf and Dark Wolf are paired symbiotic companions of consciousness, not morality markers. Every conscious being carries both. Both resonance values can increase simultaneously, a single quest may award both, and the healthiest path is balance rather than domination of one wolf over the other. Wolf resonance is accumulation-only -- it can never decrease.
 
 ---
 
@@ -50,7 +50,7 @@ Players gain realm attunement through realm-aligned quests. A realm becomes acce
 
 ## 5. Perception Layer
 
-The world does not change. Player perception changes. Two players at the same location may see entirely different things based on their cosmic state. This is critical for multiplayer compatibility.
+The structural ontology is immutable, while governed shared and scoped worldstate may change through recorded deltas. Perception derives player-specific interpretations without rewriting authoritative worldstate, so two players at the same location may see different things based on their cosmic state. This distinction is critical for multiplayer compatibility.
 
 ---
 
@@ -142,7 +142,7 @@ CI workflows block merges on any failure.
 | `guide.md` | Concise Forsetti integration rules |
 | `developer-guide.md` | Extended guide for engine implementors |
 | `wiki.md` | This file -- comprehensive reference |
-| `docs/master_specification/YWE_MASTER_SPECIFICATION.md` | Foundational engine-first design and cosmology baseline |
+| `docs/master_specification/YWE_MASTER_SPECIFICATION.md` | Informative WRW-backed mixed-scope composite; focused contracts and canon sources remain authoritative |
 | `docs/project/repository_map.md` | Repository bootstrap and structure baseline paired with the master spec |
 | `missing_source_documents.md` | Synchronized placeholder and missing-source summary |
 | `docs/architecture/authored_override_and_tooling_notes.md` | Authored override authority and tooling safety guardrails |

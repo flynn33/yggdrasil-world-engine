@@ -1,5 +1,10 @@
 version: "2.0"
-status: canonical_ash_derived
+status: canonical_ywe_extension_mapping
+authority:
+  owner: ywe_extension_profile
+  prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+  upstream_constraint_ref: data/governance/ash_dependency_identity.json
+  dependency_identity_inclusion: excluded
 canonical_ash_derivation:
   state_space: F2^9
   codeword_spec: specs/core/codeword-set.pseudo.md

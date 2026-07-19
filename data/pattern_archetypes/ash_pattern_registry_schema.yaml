@@ -2,12 +2,19 @@ version: "1.0"
 meta:
   system: ash_pattern_registry_schema
   purpose: >
-    Machine-readable schema contract for canonical ASH pattern archetype
+    Machine-readable schema contract for YWE pattern-archetype extension
     registries. This schema exists so repository maintainers can create,
-    validate, and extend archetype data without inventing local field shapes.
-  status: canonical
+    validate, and extend downstream mapping data without inventing local field
+    shapes or redefining upstream symbolic meaning.
+  status: canonical_ywe_extension_profile
   authority_note: >
-    Pair this schema with docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md.
+    Pair this YWE-owned extension schema with
+    docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md.
+
+authority:
+  owner: ywe_extension_profile
+  upstream_constraint_ref: data/governance/ash_dependency_identity.json
+  dependency_identity_inclusion: excluded
 
 enums:
   family:

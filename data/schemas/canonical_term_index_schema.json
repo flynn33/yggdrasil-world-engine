@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/canonical_term_index_schema.json",
+  "title": "YWE Canonical Term Index",
+  "type": "object",
+  "required": [
+    "schema_ref",
+    "artifact_type",
+    "artifact_version",
+    "repository_baseline",
+    "glossary_path",
+    "terms",
+    "summary"
+  ],
+  "properties": {
+    "schema_ref": {
+      "const": "data/schemas/canonical_term_index_schema.json"
+    },
+    "artifact_type": {
+      "const": "ywe_canonical_term_index"
+    },
+    "artifact_version": {
+      "const": "1.0.0"
+    },
+    "repository_baseline": {
+      "const": "2.0.23"
+    },
+    "glossary_path": {
+      "const": "docs/glossary/ywe_design_glossary.md"
+    },
+    "terms": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/term"
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "term_count",
+        "canonical_count",
+        "deprecated_alias_count"
+      ],
+      "properties": {
+        "term_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "canonical_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "deprecated_alias_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "alias": {
+      "type": "object",
+      "required": [
+        "label",
+        "status",
+        "migration"
+      ],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "presentation_alias",
+            "compatibility_alias",
+            "deprecated"
+          ]
+        },
+        "migration": {
+          "type": "string",
+          "minLength": 8
+        }
+      },
+      "additionalProperties": false
+    },
+    "term": {
+      "type": "object",
+      "required": [
+        "term_key",
+        "canonical_label",
+        "glossary_heading",
+        "scope",
+        "status",
+        "aliases",
+        "requirement_ids"
+      ],
+      "properties": {
+        "term_key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$"
+        },
+        "canonical_label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "glossary_heading": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "enum": [
+            "ash_dependency_material",
+            "ywe_core",
+            "ywe_extension_profile",
+            "wrw_reference_profile",
+            "governance_validation",
+            "cross_scope"
+          ]
+        },
+        "status": {
+          "const": "canonical"
+        },
+        "aliases": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/alias"
+          }
+        },
+        "requirement_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^(?:YWE-REQ-[0-9]{4}|ASH-[A-Z0-9-]+|INV-[A-Z0-9-]+)$"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -45,7 +45,7 @@ diagnostics and update/patch safety.
 
 ## Perception
 
-- [ ] The world does not change; player perception changes
+- [ ] The structural ontology is immutable; governed shared and scoped worldstate may change, while perception derives overlays without rewriting authoritative worldstate
 - [ ] Same location can be perceived differently by different players
 - [ ] Perception is driven by cosmic state (attunement, alignment, bloodline, memory)
 

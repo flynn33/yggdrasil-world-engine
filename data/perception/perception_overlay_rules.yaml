@@ -197,7 +197,7 @@ activation_pipeline:
 player_inputs:
   required:
     - realm_attunement
-    - wolf_alignment
+    - wolf_resonance
     - bloodline_resonance
     - active_player_phase
     - player_memory
@@ -205,6 +205,14 @@ player_inputs:
     - active_prophecy_links
     - active_myth_links
     - symbolic_signature
+  compatibility_aliases:
+    wolf_alignment:
+      status: deprecated
+      canonical_field: wolf_resonance
+      legacy_read_behavior: resolve_as_wolf_resonance
+      dual_field_requirement: white_wolf_and_dark_wolf_values_must_match
+      conflict_behavior: reject_record
+      canonical_write_target: wolf_resonance
   optional:
     - party_visibility_mode
     - current_realm_shift_state

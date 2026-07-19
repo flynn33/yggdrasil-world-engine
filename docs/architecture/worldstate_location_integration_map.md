@@ -14,7 +14,7 @@ PlayerRuntimeState
 PlayerActionTrace
 PlaneAttunementState
 BloodlineResonanceState
-WolfResonanceSummary
+ProfileResonanceSummary
 AxiomDiagnosticPacket
 PatternVector
 ExistencePotential
@@ -41,10 +41,10 @@ ConsequenceClassification
 Quest Generation from Axioms
 NPC Generation from Branch Context
 Lore Generation from Pattern Trace
-Twin Wolf Companion Engine
+Paired Companion Profile Engine
 Ability / Power Engine
 Quest Reward Resolver
-Ravenfall Gate Vertical Slice
+Reference-Profile Vertical Slice
 ```
 
 ## Rule

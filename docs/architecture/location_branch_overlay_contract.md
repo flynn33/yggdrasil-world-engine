@@ -4,6 +4,10 @@
 
 A LocationBranchOverlay represents how a location resolves inside a specific player leaf branch without rewriting the base world ontology.
 
+Scope note: the named location below is an informative WRW fixture only. It
+does not establish a required YWE Core location; authority remains with
+`docs/architecture/ywe_core_wrw_scope_contract.md`.
+
 ## Example
 
 ```text

@@ -1,13 +1,16 @@
 version: "1.0"
 status: canonical
 authority:
+  owner: ywe_extension_profile
   canonical_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
   schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
   downstream_contract: docs/architecture/ash_downstream_contract.md
+  upstream_constraint_ref: data/governance/ash_dependency_identity.json
+  dependency_identity_inclusion: excluded
 
 purpose: >
-  Defines how ASH pattern registries are evaluated into usable symbolic packets
-  before narrative interpretation and downstream manifestation begin.
+  Defines how YWE extension pattern registries map pinned ASH-governed input
+  into usable interpretation packets before downstream manifestation begins.
 
 evaluation_order:
   - ingest_active_ash_state
