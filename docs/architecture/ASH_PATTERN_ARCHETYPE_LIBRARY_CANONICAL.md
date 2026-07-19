@@ -1,26 +1,28 @@
-# ASH Pattern Archetype Library — Canonical Specification
-## Normalized foundation document for Yggdrasil World Engine
+# YWE Pattern Archetype Extension Library — Canonical Extension Specification
+## Downstream interpretation profile constrained by the pinned ASH dependency
 
 Date: 2026-03-13
 Project: Yggdrasil World Engine
-Status: canonical foundation spec
-Authority: design truth for ASH symbolic grammar
+Status: canonical YWE extension-profile specification
+Authority: YWE-owned downstream mapping constrained by pinned ASH symbolic grammar
 Replaces as authority: `ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2.md`
-Retains as historical context only: prior assistant exchange / summary text versions
+Retains as historical context only: prior design-summary text versions
 
 ---
 
 # 1. Purpose
 
-This document defines the canonical architecture for the ASH Pattern Archetype
-Library.
+This document defines the canonical architecture, within the optional YWE
+extension-profile scope, for the YWE Pattern Archetype Library.
 
-It is the upstream symbolic grammar used by YWE to derive meaning before quest,
-NPC, myth, prophecy, artifact, creature, or perception-layer manifestation.
+It maps symbolic input from the upstream grammar owned by the ASH Cosmological
+Model into YWE-owned interpretation records used before quest, NPC, myth,
+prophecy, artifact, creature, or perception-layer manifestation. It does not
+add to or redefine the upstream grammar. [YWE-REQ-0009]
 
 This file exists to answer these questions cleanly:
 
-- what an ASH archetype is
+- what a YWE extension archetype is
 - what archetype families exist
 - what fields every archetype record must define
 - what relationships between archetypes are allowed
@@ -36,23 +38,32 @@ summary.
 
 For repository and implementation purposes:
 
-- this file is the **canonical prose spec** for ASH archetypes
-- machine-readable registries in family-specific YAML files under
-  `data/pattern_archetypes/` and `data/quest_archetypes/` are the operational
-  source of archetype records
-- downstream systems must treat this file plus the machine-readable registries
-  together as the authoritative ASH foundation
+- this file is canonical only for the optional **YWE extension-profile
+  mapping**; it is not an upstream ASH specification or a separate owner of
+  symbolic grammar
+- family-specific YAML registries under `data/pattern_archetypes/` are the
+  corresponding YWE-owned machine-readable extension mappings
+- quest archetypes under `data/quest_archetypes/` are downstream YWE extension
+  mappings and cannot add to or redefine upstream symbolic grammar
+- the pinned ASH dependency constrains the symbolic inputs consumed by these
+  mappings, but does not own the downstream YWE mapping records
+- this file and every artifact under `data/pattern_archetypes/` are explicitly
+  excluded from the upstream dependency identity in
+  `data/governance/ash_dependency_identity.json`; only the dependency paths
+  enumerated by that identity contribute to its digest [YWE-REQ-0010]
 - the older `ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2.md` should be preserved only as
   historical context unless its contents are explicitly migrated into canonical
   fields here
 
-If historical prose conflicts with this document, this document wins.
+If historical prose conflicts with this document, this document controls only
+within the YWE extension-profile scope. It cannot override the pinned ASH
+dependency, YWE Core, or a declared game profile.
 
 ---
 
 # 3. Core design law
 
-All meaningful YWE generation must follow this order:
+Generation using this YWE extension profile must follow this order:
 
 ```text
 ASH State
@@ -64,15 +75,17 @@ ASH State
   -> Future Pattern Pressure
 ```
 
-The archetype library therefore does **not** directly generate content.
-It defines the symbolic vocabulary from which meaningful content can be derived.
+The archetype library therefore does **not** directly generate content or
+define upstream symbolic meaning. It defines deterministic downstream mapping
+vocabulary from which YWE content can be derived.
 
 ---
 
 # 4. What an archetype is
 
-An ASH archetype is a canonical symbolic pattern shape recognized within YWE's
-cosmology-driven narrative simulation.
+A YWE extension archetype is a downstream mapping record that interprets a
+symbolic pattern shape supplied under the pinned ASH grammar for use within
+YWE's cosmology-driven narrative simulation.
 
 An archetype is not merely a trope label.
 It is a structured meaning unit that can:
@@ -99,7 +112,8 @@ An archetype may describe:
 
 # 5. Archetype families
 
-ASH supports these canonical families.
+This YWE extension profile defines these families as canonical within its own
+scope.
 
 ## A. Character archetypes
 Used for people, role-bearers, recurring NPC identities, and player-facing
@@ -146,8 +160,8 @@ configurations with defined combined significance.
 
 # 6. Character archetype meanings
 
-These baseline definitions are canonical starting points for the character
-family.
+These baseline definitions are canonical extension-profile starting points for
+the character family.
 
 ## `char_seeker`
 Meaning pressure centered on pursuit, hidden truth, longing, discovery,
@@ -217,7 +231,7 @@ downstream_affinities:
   creature: [string]
 manifestation_hints: [string]
 invariant_notes: [string]
-status: canonical | provisional | deprecated
+status: canonical | provisional | deprecated  # within the YWE extension profile
 ```
 
 ## Field meaning rules
@@ -258,13 +272,15 @@ unless an explicit contradiction design is intended.
 
 ### `downstream_affinities`
 Explicit hints for downstream consumption.
-These are guidance weights, not permission to bypass ASH-driven evaluation.
+These are guidance weights, not permission to bypass evaluation constrained by
+the pinned ASH dependency.
 
 ---
 
 # 8. Relationship semantics
 
-Archetype relationships use three canonical modes.
+Archetype relationships use three modes canonical within this YWE extension
+profile.
 
 ## Compatibility
 The pair reinforces each other and tends to produce coherent pressure.
@@ -334,7 +350,7 @@ without rewriting shared-world fact.
 
 # 11. Forbidden interpretations
 
-The ASH archetype library must never be treated as:
+The YWE pattern-archetype extension library must never be treated as:
 
 - a random trope bag
 - a flavor-only writing aid
@@ -376,7 +392,7 @@ unless explicitly migrated into this specification or its registries.
 
 # 13. Repository placement
 
-Canonical placement recommendation:
+Canonical YWE extension-profile placement:
 
 ```text
 docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
@@ -417,6 +433,8 @@ content to the history folder.
 
 # 15. Final statement
 
-The ASH Pattern Archetype Library is the symbolic grammar foundation of YWE.
-If this file is vague, every downstream system drifts.
-If this file is clean, the rest of the stack has a stable meaning spine.
+The YWE Pattern Archetype Library is a downstream, YWE-owned extension mapping
+constrained by the symbolic grammar foundation owned by the ASH Cosmological
+Model. It is excluded from upstream ASH dependency identity and cannot alter
+that identity or grammar. Clear extension mappings give downstream systems a
+stable interpretation spine without claiming upstream authority.

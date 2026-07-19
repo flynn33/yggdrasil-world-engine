@@ -15,7 +15,7 @@
       "parameters": [
         "CosmicPatternSnapshot",
         "PlayerState",
-        "RealmIdentity",
+        "StateIdentity",
         "DiagnosticEnvelope",
         "GenerationPlan"
       ],
@@ -62,6 +62,10 @@
     "Identity is revealed through play and must not lock destiny at creation.",
     "Wolf balance fields are not a good/evil or zero-sum morality axis."
   ],
+  "compatibility_aliases": {
+    "RealmIdentity": "StateIdentity",
+    "realm_id": "vertex_id"
+  },
   "ash_alignment_contract": {
     "authority": "YWE_ASP_CORE_MATH_REBUILD_PACKAGE",
     "math_basis": "F2^9 full-state ASH vector with exactly 16 canonical codewords and x' = x XOR c transitions",

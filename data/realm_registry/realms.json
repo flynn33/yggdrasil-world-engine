@@ -1,4 +1,5 @@
 {
+  "profile_id": "wrw_reference_profile",
   "realms": [
     "divine_core",
     "celestial",
@@ -9,5 +10,70 @@
     "physical",
     "shadow",
     "void"
+  ],
+  "coordinate_vocabulary": {
+    "structural_coordinate": "Named algebraic position b0 through b8 in a full ASH State Vector.",
+    "coordinate_index": "Zero-based integer index of a Structural Coordinate.",
+    "ordinal": "One-based integer equal to coordinate_index plus one for this profile mapping.",
+    "presentation_label": "Human-readable realm label; it does not determine structure or identity.",
+    "state_identity": "Complete deterministic nine-bit ASH state signature.",
+    "identity_rule": "No Structural Coordinate, Coordinate Index, Ordinal, or presentation label is a complete State Identity."
+  },
+  "presentation_order_id": "wrw_divine_core_to_void",
+  "coordinate_bindings": [
+    {
+      "realm_id": "divine_core",
+      "coordinate_index": 0,
+      "ordinal": 1,
+      "presentation_label": "Divine Core"
+    },
+    {
+      "realm_id": "celestial",
+      "coordinate_index": 1,
+      "ordinal": 2,
+      "presentation_label": "Celestial"
+    },
+    {
+      "realm_id": "causal",
+      "coordinate_index": 2,
+      "ordinal": 3,
+      "presentation_label": "Causal"
+    },
+    {
+      "realm_id": "mental",
+      "coordinate_index": 3,
+      "ordinal": 4,
+      "presentation_label": "Mental"
+    },
+    {
+      "realm_id": "astral",
+      "coordinate_index": 4,
+      "ordinal": 5,
+      "presentation_label": "Astral"
+    },
+    {
+      "realm_id": "etheric",
+      "coordinate_index": 5,
+      "ordinal": 6,
+      "presentation_label": "Etheric"
+    },
+    {
+      "realm_id": "physical",
+      "coordinate_index": 6,
+      "ordinal": 7,
+      "presentation_label": "Physical"
+    },
+    {
+      "realm_id": "shadow",
+      "coordinate_index": 7,
+      "ordinal": 8,
+      "presentation_label": "Shadow"
+    },
+    {
+      "realm_id": "void",
+      "coordinate_index": 8,
+      "ordinal": 9,
+      "presentation_label": "Void"
+    }
   ]
 }

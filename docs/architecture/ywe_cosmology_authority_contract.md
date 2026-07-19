@@ -8,6 +8,10 @@ Scope: `Yggdrasil World Engine repository authority stack`
 
 This contract defines the authority hierarchy for the Yggdrasil World Engine repository and prevents drift between the game layer, the engine layer, the ASH Cosmological Model, and the ASH Pattern System component.
 
+Scope note: WRW names and cosmology terms below are informative cross-scope
+boundary examples only. They do not establish YWE Core requirements; authority
+remains with `docs/architecture/ywe_core_wrw_scope_contract.md`.
+
 ## Canonical hierarchy
 
 ```text

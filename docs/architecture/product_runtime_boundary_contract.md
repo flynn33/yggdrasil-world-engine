@@ -4,6 +4,10 @@
 
 This contract separates the agnostic YWE repository from future platform-specific product/runtime repositories.
 
+Scope note: the named game layer below is an informative cross-scope routing
+example only. It does not establish YWE Core behavior; authority remains with
+`docs/architecture/ywe_core_wrw_scope_contract.md`.
+
 ## Authority Chain
 
 ```text

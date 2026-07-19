@@ -27,8 +27,10 @@ END TYPE
 ```text
 TYPE GenerationPlan
     normalized_state: AshState
-    source_realm: RealmIdentity
-    destination_realm: RealmIdentity
+    source_state_identity: StateIdentity
+    destination_state_identity: StateIdentity
+    source_realm: StateIdentity  // deprecated compatibility alias
+    destination_realm: StateIdentity  // deprecated compatibility alias
     topology_nodes: List<TopologyNode>
     role_assignments: List<RoleAssignment>
     axiom_diagnostic: AxiomDiagnostic
@@ -43,14 +45,16 @@ END TYPE
 ```text
 FUNCTION generate_plan(request: GenerationRequest) -> GenerationPlan
     plan.normalized_state = normalize_state(request.seed_state)
-    plan.source_realm = encode_realm_identity(plan.normalized_state)
+    plan.source_state_identity = encode_state_identity(plan.normalized_state)
+    plan.source_realm = plan.source_state_identity
 
     transformed_state = apply_transition_chain(
         plan.normalized_state,
         resolve_transition_sequence(request.transition_sequence)
     )
 
-    plan.destination_realm = encode_realm_identity(transformed_state)
+    plan.destination_state_identity = encode_state_identity(transformed_state)
+    plan.destination_realm = plan.destination_state_identity
     plan.topology_nodes = generate_topology(request.topology_depth)
     plan.role_assignments = assign_roles(plan.topology_nodes, request.profile_id)
 
@@ -90,9 +94,18 @@ A downstream adapter is responsible for converting a `GenerationPlan` into concr
 
 That boundary must remain explicit.
 
+## Compatibility aliases
+
+`source_realm` and `destination_realm` are deprecated, lossless aliases for
+`source_state_identity` and `destination_state_identity`, respectively. They
+must carry the same records and must not be independently recalculated or
+interpreted as profile-level realm identifiers. `encode_realm_identity` is the
+corresponding deprecated function alias for `encode_state_identity`.
+
 ## Required invariants
 
 1. planning precedes side effects
 2. equal request => equal plan, assuming identical registries and policies
 3. axiom diagnostics are included in the plan
 4. planning semantics are portable across implementations
+5. compatibility identity aliases are value-equivalent to their canonical fields

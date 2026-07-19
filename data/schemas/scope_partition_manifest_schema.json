@@ -172,7 +172,20 @@
         {
           "type": "object",
           "required": ["path"],
-          "properties": {"path": {"$ref": "#/$defs/repository_path"}}
+          "properties": {
+            "path": {"$ref": "#/$defs/repository_path"},
+            "wrw_reference_exception": {"$ref": "#/$defs/wrw_reference_exception"}
+          },
+          "allOf": [
+            {
+              "if": {"required": ["wrw_reference_exception"]},
+              "then": {
+                "properties": {
+                  "primary_partition": {"const": "ywe_core"}
+                }
+              }
+            }
+          ]
         }
       ],
       "unevaluatedProperties": false
@@ -209,6 +222,27 @@
       "properties": {
         "rationale": {"type": "string", "minLength": 10},
         "authority_ref": {"$ref": "#/$defs/repository_path"}
+      },
+      "additionalProperties": false
+    },
+    "wrw_reference_exception": {
+      "type": "object",
+      "required": ["markers", "rationale", "authority_ref"],
+      "properties": {
+        "markers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^*?\\[\\]]+$"
+          }
+        },
+        "rationale": {"type": "string", "minLength": 40},
+        "authority_ref": {
+          "const": "docs/architecture/ywe_core_wrw_scope_contract.md"
+        }
       },
       "additionalProperties": false
     }

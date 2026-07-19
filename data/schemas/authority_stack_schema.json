@@ -4,14 +4,21 @@
   "title": "YWE Authority Stack Schema",
   "type": "object",
   "required": [
-    "game_layer",
     "engine_layer",
     "foundation_layer",
     "component_layer"
   ],
   "properties": {
+    "profile_layer": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional profile-supplied game or simulation layer identifier."
+    },
     "game_layer": {
-      "const": "Where Ravens Wait: Eternal Reckoning"
+      "type": "string",
+      "minLength": 1,
+      "deprecated": true,
+      "description": "Deprecated compatibility name for profile_layer; no specific game is required by YWE Core."
     },
     "engine_layer": {
       "const": "Yggdrasil World Engine"

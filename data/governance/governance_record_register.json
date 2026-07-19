@@ -1,0 +1,817 @@
+{
+  "artifact_type": "governance_record_register",
+  "artifact_version": "1.0.0",
+  "schema_ref": "data/schemas/governance_record_register_schema.json",
+  "recorded_on": "2026-07-19",
+  "repository_baseline": "2.0.23",
+  "policy_ref": "docs/governance/governance_records_policy.md",
+  "requirement_register_ref": "data/governance/normative_requirement_register.json",
+  "records": [
+    {
+      "id": "ADR-0001",
+      "record_type": "decision",
+      "title": "Normative language and stable requirement identifiers",
+      "status": "accepted",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "governance_validation",
+      "disposition": "Only exact uppercase MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY terms carry normative force. Every new or materially changed normative clause cites a monotonic YWE-REQ-NNNN identifier, and allocated identifiers are never renumbered, reused, or deleted.",
+      "debt_refs": [
+        "QD-OW-001"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "The repository needs one explicit vocabulary for binding clauses and permanent identifiers that remain stable across revisions.",
+      "decision": "Only exact uppercase MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY terms carry normative force. Every new or materially changed normative clause cites a monotonic YWE-REQ-NNNN identifier, and allocated identifiers are never renumbered, reused, or deleted.",
+      "rationale": "Explicit force and permanent identifiers make conformance claims testable and preserve traceability when prose moves or is superseded.",
+      "consequences": [
+        "Lowercase keyword uses remain descriptive rather than implicitly binding.",
+        "Terminal requirement records remain in the register and material semantic changes allocate new identifiers."
+      ],
+      "requirement_refs": ["YWE-REQ-0001", "YWE-REQ-0002", "YWE-REQ-0003"],
+      "source_refs": [
+        "docs/governance/normative_language_and_requirement_id_policy.md",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/0"
+      ]
+    },
+    {
+      "id": "ADR-0002",
+      "record_type": "decision",
+      "title": "Typed governance records and durable rationale",
+      "status": "accepted",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "governance_validation",
+      "disposition": "Material governance work is recorded in typed ADR, CP, RISK, DEV, or Q records. Every material decision retains durable rationale, and each glossary concept has one canonical definition.",
+      "debt_refs": [
+        "QD-OW-001"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Material decisions, proposals, risks, deviations, and questions previously lived across prose and historical logs without one typed lifecycle authority.",
+      "decision": "Material governance work is recorded in typed ADR, CP, RISK, DEV, or Q records. Every material decision retains durable rationale, and each glossary concept has one canonical definition.",
+      "rationale": "Typed records preserve history, make lifecycle state reviewable, and prevent transient discussion from becoming hidden authority.",
+      "consequences": [
+        "The machine register is the current record authority while historical logs remain provenance.",
+        "Semantic questions close only through a linked accepted decision, and duplicate concept definitions are governance defects."
+      ],
+      "requirement_refs": ["YWE-REQ-0004", "YWE-REQ-0017", "YWE-REQ-0018"],
+      "source_refs": [
+        "docs/governance/governance_records_policy.md",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/1",
+        "data/governance/specification_roadmap.json#/milestones/1/exit_criteria"
+      ]
+    },
+    {
+      "id": "ADR-0003",
+      "record_type": "decision",
+      "title": "Immutable ontology and mutable truth-scoped worldstate",
+      "status": "accepted",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ywe_core",
+      "disposition": "The nine-coordinate base ontology is immutable. Mutable consequences are separate truth-scoped, typed, provenance-bearing state deltas. Perception may vary an observer's view but cannot rewrite shared truth.",
+      "debt_refs": [
+        "QD-063"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Static-world wording conflicted with lawful worldstate and location mutation contracts and left perception boundaries implicit.",
+      "decision": "The nine-coordinate base ontology is immutable. Mutable consequences are separate truth-scoped, typed, provenance-bearing state deltas. Perception may vary an observer's view but cannot rewrite shared truth.",
+      "rationale": "Separating structural ontology from scoped state preserves cosmological invariants while allowing auditable consequences and observer-specific knowledge.",
+      "consequences": [
+        "Ontology changes are not represented as ordinary worldstate deltas.",
+        "State mutation and perception outputs require explicit truth scope and provenance."
+      ],
+      "requirement_refs": ["YWE-REQ-0005", "YWE-REQ-0006", "YWE-REQ-0007"],
+      "source_refs": [
+        "yggdrasil-instructions.json#/cosmological_invariants/8",
+        "docs/architecture/worldstate_location_mutation_v1.md",
+        "data/schemas/truth_scope_schema.json"
+      ]
+    },
+    {
+      "id": "ADR-0004",
+      "record_type": "decision",
+      "title": "Realm and coordinate vocabulary",
+      "status": "accepted",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ywe_core",
+      "disposition": "Realm and plane remain equivalent labels for one ontology category. Coordinate index and bit position identify a structural slot; ordinal identifies sequence rank; presentation order controls display only; realm or plane identity names the ontology member; and a full vector or state identity is the complete value. None is inferred from another without an explicit mapping.",
+      "debt_refs": [
+        "QD-064"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Realm, plane, coordinate, bit position, ordinal, presentation order, and full state identity were used without one explicit distinction.",
+      "decision": "Realm and plane remain equivalent labels for one ontology category. Coordinate index and bit position identify a structural slot; ordinal identifies sequence rank; presentation order controls display only; realm or plane identity names the ontology member; and a full vector or state identity is the complete value. None is inferred from another without an explicit mapping.",
+      "rationale": "The distinction prevents a display convention or sequence rank from silently changing structural or state identity.",
+      "consequences": [
+        "Mappings between presentation, ordinal, coordinate, and identity representations must be explicit.",
+        "Realm and plane remain aliases for the same ontology category rather than separate structures."
+      ],
+      "requirement_refs": ["YWE-REQ-0008"],
+      "source_refs": [
+        "lore/wrw_cosmology/first_darkness_and_divine_core.md#the-nine-realms-or-planes",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/3"
+      ]
+    },
+    {
+      "id": "ADR-0005",
+      "record_type": "decision",
+      "title": "Symbolic grammar ownership and ASH dependency identity",
+      "status": "accepted",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ash_dependency_material",
+      "disposition": "The ASH Cosmological Model owns upstream symbolic grammar. The ASH dependency is pinned by the deterministic content digest recorded in data/governance/ash_dependency_identity.json; a path, branch name, or mutable label alone is not a dependency identity.",
+      "debt_refs": [
+        "QD-065"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "The repository identified ASH as upstream authority but did not bind symbolic-grammar ownership to one content-addressed dependency identity.",
+      "decision": "The ASH Cosmological Model owns upstream symbolic grammar. The ASH dependency is pinned by the deterministic content digest recorded in data/governance/ash_dependency_identity.json; a path, branch name, or mutable label alone is not a dependency identity.",
+      "rationale": "A named owner resolves semantic authority while a content digest makes the exact dependency state reproducible and reviewable.",
+      "consequences": [
+        "YWE interpretation may consume ASH symbolic output but cannot redefine the upstream grammar.",
+        "Any accepted ASH dependency change updates the pinned digest and receives durable governance review."
+      ],
+      "requirement_refs": ["YWE-REQ-0009", "YWE-REQ-0010"],
+      "source_refs": [
+        "docs/architecture/ash_upstream_authority_contract.md",
+        "data/governance/ash_dependency_identity.json",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/4"
+      ]
+    },
+    {
+      "id": "ADR-0006",
+      "record_type": "decision",
+      "title": "Wolf resonance canonical term and migration alias",
+      "status": "accepted",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "wrw_reference_profile",
+      "disposition": "wolf_resonance is the canonical read/write field. wolf_alignment is accepted only as a compatibility read or migration alias and is never emitted as new canonical state. The dual-variable model describes distinct resonance pressures and is non-moral.",
+      "debt_refs": [
+        "QD-066"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Historical wolf_alignment fields coexist with preferred wolf_resonance wording and can be misread as a moral scale.",
+      "decision": "wolf_resonance is the canonical read/write field. wolf_alignment is accepted only as a compatibility read or migration alias and is never emitted as new canonical state. The dual-variable model describes distinct resonance pressures and is non-moral.",
+      "rationale": "A one-way alias preserves legacy readability without maintaining two competing write authorities or changing Twin Wolf canon.",
+      "consequences": [
+        "New normative schemas and examples use wolf_resonance.",
+        "Legacy wolf_alignment input is normalized without treating either variable as good or evil."
+      ],
+      "requirement_refs": ["YWE-REQ-0011"],
+      "source_refs": [
+        "docs/master_specification/YWE_MASTER_SPECIFICATION.md#5-alignment-system",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/5"
+      ]
+    },
+    {
+      "id": "ADR-0007",
+      "record_type": "decision",
+      "title": "Append-only history and compensating reversal",
+      "status": "accepted",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ywe_core",
+      "disposition": "Accepted events remain append-only. A reversal or correction is a new provenance-bearing compensating delta that changes current state; it never deletes or rewrites the accepted event that produced the earlier effect.",
+      "debt_refs": [
+        "QD-067"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Append-only history requirements coexist with lawful correction and reversal of current-state effects.",
+      "decision": "Accepted events remain append-only. A reversal or correction is a new provenance-bearing compensating delta that changes current state; it never deletes or rewrites the accepted event that produced the earlier effect.",
+      "rationale": "Separating historical fact from current effect preserves auditability while allowing lawful recovery, correction, and reversal.",
+      "consequences": [
+        "Histories retain both the original event and its compensating delta.",
+        "Current state is derived by applying accepted deltas in deterministic order."
+      ],
+      "requirement_refs": ["YWE-REQ-0012", "YWE-REQ-0013"],
+      "source_refs": [
+        "core/narrative_engine/npc_synthesis_rules.yaml",
+        "core/narrative_engine/worldstate_delta_rules.yaml",
+        "docs/architecture/worldstate_location_mutation_v1.md#update-rules"
+      ]
+    },
+    {
+      "id": "ADR-0008",
+      "record_type": "decision",
+      "title": "Truth authority lattice",
+      "status": "accepted",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ywe_core",
+      "disposition": "Truth authority is monotonic: a lower-authority layer may specialize only within freedoms left by higher constraints and cannot overwrite them. Conflicts are rejected or contained rather than resolved in favor of the lower layer.",
+      "debt_refs": [
+        "QD-OW-001"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Multiple truth scopes and authored overlays require a formal rule for conflicts between authority layers.",
+      "decision": "Truth authority is monotonic: a lower-authority layer may specialize only within freedoms left by higher constraints and cannot overwrite them. Conflicts are rejected or contained rather than resolved in favor of the lower layer.",
+      "rationale": "Monotonic authority prevents local, player, perception, or authored overlays from silently rewriting shared structural truth.",
+      "consequences": [
+        "Resolvers compare proposed changes against all higher applicable constraints.",
+        "A blocked lower-layer change produces an explicit rejection or diagnostic rather than a hidden overwrite."
+      ],
+      "requirement_refs": ["YWE-REQ-0014"],
+      "source_refs": [
+        "docs/architecture/authored_override_and_tooling_notes.md",
+        "data/schemas/truth_scope_schema.json",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/7"
+      ]
+    },
+    {
+      "id": "ADR-0009",
+      "record_type": "decision",
+      "title": "Normative YWE Core and WRW reference-profile separation",
+      "status": "accepted",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ywe_core",
+      "disposition": "YWE Core contains platform-neutral reusable normative contracts. Where Ravens Wait content remains a reference profile, fixture, or game-layer specialization and cannot create universal YWE Core rules merely by exercising a core contract.",
+      "debt_refs": [
+        "QD-PH-dd00c6d30da8",
+        "QD-PH-37cd25fd2cac",
+        "QD-068"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "WRW reference material appears beside reusable YWE contracts and can be mistaken for universal engine truth.",
+      "decision": "YWE Core contains platform-neutral reusable normative contracts. Where Ravens Wait content remains a reference profile, fixture, or game-layer specialization and cannot create universal YWE Core rules merely by exercising a core contract.",
+      "rationale": "Explicit scope preserves reuse and prevents one reference game from silently constraining every conforming YWE world.",
+      "consequences": [
+        "Every material artifact receives an unambiguous scope classification.",
+        "WRW fixtures may prove a generic contract but do not promote WRW-specific canon into YWE Core."
+      ],
+      "requirement_refs": ["YWE-REQ-0015"],
+      "source_refs": [
+        "docs/project/scope_partition_map.md",
+        "data/governance/scope_partition_manifest.json",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/8"
+      ]
+    },
+    {
+      "id": "ADR-0010",
+      "record_type": "decision",
+      "title": "Authoritative ASH source and generated specification mirror",
+      "status": "accepted",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ash_dependency_material",
+      "disposition": "core/ash_pattern_engine/canonical is the authoritative source. specs is a deterministic generated mirror maintained by scripts/sync_ash_specifications.py and bound to the digest in data/governance/ash_dependency_identity.json. Direct independent edits to the mirror are not authoritative.",
+      "debt_refs": [
+        "QD-069"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "core/ash_pattern_engine/canonical and specs contain parallel ASH specification trees without a single declared source/mirror direction.",
+      "decision": "core/ash_pattern_engine/canonical is the authoritative source. specs is a deterministic generated mirror maintained by scripts/sync_ash_specifications.py and bound to the digest in data/governance/ash_dependency_identity.json. Direct independent edits to the mirror are not authoritative.",
+      "rationale": "A one-way source/mirror relationship eliminates split authority while retaining the existing consumer-facing specs path.",
+      "consequences": [
+        "ASH changes begin in the canonical source and regenerate the mirror deterministically.",
+        "Synchronization validation blocks drift, untracked mirror-only content, and digest mismatch."
+      ],
+      "requirement_refs": ["YWE-REQ-0016"],
+      "source_refs": [
+        "data/governance/ash_dependency_identity.json",
+        "scripts/sync_ash_specifications.py",
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/9"
+      ]
+    },
+    {
+      "id": "CP-0001",
+      "record_type": "change_proposal",
+      "title": "Establish the M1 canon terminology and governance foundation",
+      "status": "implemented",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "governance_validation",
+      "context": "The M1 roadmap requires one coherent governance and semantic authority foundation before later milestones can rely on canonical meaning.",
+      "disposition": "Implemented through the listed artifacts and accepted records; milestone acceptance remains a separate evidence judgment.",
+      "consequences": [
+        "All eighteen M1 requirements and all seeded typed records have durable machine-readable authorities.",
+        "Later M1 acceptance can evaluate terminology and authority closure against one governance baseline."
+      ],
+      "debt_refs": [
+        "QD-PH-dd00c6d30da8",
+        "QD-PH-37cd25fd2cac",
+        "QD-OW-001",
+        "QD-063",
+        "QD-064",
+        "QD-065",
+        "QD-066",
+        "QD-067",
+        "QD-068",
+        "QD-069"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "proposal": "Adopt stable normative requirements, typed governance records, and the ten accepted M1 decisions that normalize authority and canon terminology.",
+      "rationale": "The M1 roadmap requires durable governance before later contract, schema, lifecycle, and conformance milestones can depend on one meaning.",
+      "affected_record_refs": [
+        "ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005",
+        "ADR-0006", "ADR-0007", "ADR-0008", "ADR-0009", "ADR-0010"
+      ],
+      "implementation_refs": [
+        "docs/governance/normative_language_and_requirement_id_policy.md",
+        "data/governance/normative_requirement_register.json",
+        "data/schemas/normative_requirement_register_schema.json",
+        "docs/governance/governance_records_policy.md",
+        "data/governance/governance_record_register.json",
+        "data/schemas/governance_record_register_schema.json",
+        "conformance/deviation-log.md",
+        "data/governance/ash_dependency_identity.json",
+        "scripts/sync_ash_specifications.py"
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0001", "YWE-REQ-0002", "YWE-REQ-0003", "YWE-REQ-0004",
+        "YWE-REQ-0005", "YWE-REQ-0006", "YWE-REQ-0007", "YWE-REQ-0008",
+        "YWE-REQ-0009", "YWE-REQ-0010", "YWE-REQ-0011", "YWE-REQ-0012",
+        "YWE-REQ-0013", "YWE-REQ-0014", "YWE-REQ-0015", "YWE-REQ-0016",
+        "YWE-REQ-0017", "YWE-REQ-0018"
+      ],
+      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1"]
+    },
+    {
+      "id": "RISK-0001",
+      "record_type": "risk",
+      "title": "Wolf terminology alias ambiguity",
+      "status": "mitigated",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "wrw_reference_profile",
+      "context": "Treating wolf_alignment and wolf_resonance as independent write authorities could fork companion state or reintroduce moral alignment semantics.",
+      "rationale": "A single write authority is necessary to prevent legacy alias compatibility from forking companion meaning.",
+      "disposition": "ADR-0006 and YWE-REQ-0011 establish wolf_resonance as the sole canonical write field and constrain wolf_alignment to one-way read or migration compatibility.",
+      "consequences": [
+        "Reject new canonical writes that use wolf_alignment.",
+        "Normalize legacy alias input to wolf_resonance without moral interpretation."
+      ],
+      "debt_refs": [
+        "QD-066"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "description": "Treating wolf_alignment and wolf_resonance as independent write authorities could fork companion state or reintroduce moral alignment semantics.",
+      "likelihood": "medium",
+      "impact": "high",
+      "mitigation": "ADR-0006 and YWE-REQ-0011 establish wolf_resonance as the sole canonical write field and constrain wolf_alignment to one-way read or migration compatibility.",
+      "controls": [
+        "Reject new canonical writes that use wolf_alignment.",
+        "Normalize legacy alias input to wolf_resonance without moral interpretation."
+      ],
+      "residual_risk": "Legacy artifacts may retain the historical token until migrated, so compatibility reads remain bounded and reviewable.",
+      "related_record_refs": ["ADR-0006"],
+      "requirement_refs": ["YWE-REQ-0011"],
+      "source_refs": ["data/validation/repository_quality_debt_inventory.json#/debts/69"]
+    },
+    {
+      "id": "RISK-0002",
+      "record_type": "risk",
+      "title": "WRW scope leakage into YWE Core",
+      "status": "mitigated",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ywe_core",
+      "context": "A WRW-specific rule or fixture could be mistaken for universal YWE Core truth because both scopes coexist in the repository.",
+      "rationale": "Exact scope controls are necessary because repository proximity does not confer YWE Core authority.",
+      "disposition": "ADR-0009 and YWE-REQ-0015 prohibit promotion by proximity, while the exact-one scope partition manifest provides a machine-readable boundary.",
+      "consequences": [
+        "Require every governed artifact to have one scope partition.",
+        "Treat WRW fixtures as evidence for generic contracts rather than as Core authority."
+      ],
+      "debt_refs": [
+        "QD-068"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "description": "A WRW-specific rule or fixture could be mistaken for universal YWE Core truth because both scopes coexist in the repository.",
+      "likelihood": "medium",
+      "impact": "high",
+      "mitigation": "ADR-0009 and YWE-REQ-0015 prohibit promotion by proximity, while the exact-one scope partition manifest provides a machine-readable boundary.",
+      "controls": [
+        "Require every governed artifact to have one scope partition.",
+        "Treat WRW fixtures as evidence for generic contracts rather than as Core authority."
+      ],
+      "residual_risk": "Mixed prose still requires review where generic contract language and WRW examples appear together.",
+      "related_record_refs": ["ADR-0009"],
+      "requirement_refs": ["YWE-REQ-0015"],
+      "source_refs": [
+        "data/governance/scope_partition_manifest.json",
+        "docs/project/scope_partition_map.md"
+      ]
+    },
+    {
+      "id": "RISK-0003",
+      "record_type": "risk",
+      "title": "ASH authoritative-source and mirror drift",
+      "status": "mitigated",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ash_dependency_material",
+      "context": "Independent edits to the canonical ASH tree and specs mirror could create two competing normative specifications.",
+      "rationale": "A deterministic source-to-mirror control is necessary to prevent two divergent ASH specifications.",
+      "disposition": "ADR-0010 declares a one-way source/mirror relationship, scripts/sync_ash_specifications.py performs deterministic synchronization, and data/governance/ash_dependency_identity.json pins the content digest.",
+      "consequences": [
+        "Regenerate specs only from core/ash_pattern_engine/canonical.",
+        "Fail synchronization validation on path, content, or pinned-digest drift."
+      ],
+      "debt_refs": [
+        "QD-069"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "description": "Independent edits to the canonical ASH tree and specs mirror could create two competing normative specifications.",
+      "likelihood": "high",
+      "impact": "high",
+      "mitigation": "ADR-0010 declares a one-way source/mirror relationship, scripts/sync_ash_specifications.py performs deterministic synchronization, and data/governance/ash_dependency_identity.json pins the content digest.",
+      "controls": [
+        "Regenerate specs only from core/ash_pattern_engine/canonical.",
+        "Fail synchronization validation on path, content, or pinned-digest drift."
+      ],
+      "residual_risk": "A governance-reviewed canonical ASH change still requires regeneration and digest refresh in the same accepted change.",
+      "related_record_refs": ["ADR-0005", "ADR-0010"],
+      "requirement_refs": ["YWE-REQ-0010", "YWE-REQ-0016"],
+      "source_refs": [
+        "data/governance/ash_dependency_identity.json",
+        "scripts/sync_ash_specifications.py"
+      ]
+    },
+    {
+      "id": "DEV-0001",
+      "record_type": "deviation",
+      "legacy_ids": ["D-001"],
+      "title": "Superseded authority-chain package",
+      "status": "resolved",
+      "recorded_on": "2026-07-19",
+      "legacy_recorded_on": "2026-05-10",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "historical_evidence",
+      "rationale": "The recorded resolution preserves current authority and historical traceability without reopening accepted alignment work.",
+      "disposition": "The rebuilt ASH authority model supersedes the earlier package, which remains historical and is not active authority.",
+      "consequences": [
+        "Preserve the legacy record and prevent the superseded package from re-entering active authority routing."
+      ],
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "context": "A superseded authority-chain package predated the accepted ASH and ASP core-math rebuild.",
+      "resolution": "The rebuilt ASH authority model supersedes the earlier package, which remains historical and is not active authority.",
+      "follow_up": "Preserve the legacy record and prevent the superseded package from re-entering active authority routing.",
+      "requirement_refs": ["YWE-REQ-0009", "YWE-REQ-0017"],
+      "source_refs": ["conformance/deviation-log.md#resolved-items"]
+    },
+    {
+      "id": "DEV-0002",
+      "record_type": "deviation",
+      "legacy_ids": ["D-002"],
+      "title": "Fallback policy semantic alignment",
+      "status": "resolved",
+      "recorded_on": "2026-07-19",
+      "legacy_recorded_on": "2026-05-10",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "historical_evidence",
+      "rationale": "The recorded resolution preserves current authority and historical traceability without reopening accepted alignment work.",
+      "disposition": "The live fallback registry and semantic-integrity validation are current authority; the obsolete blocker claim is resolved.",
+      "consequences": [
+        "Preserve blocking semantic-integrity checks."
+      ],
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "context": "An earlier package described a fallback-policy blocker after the live registry had adopted full nine-bit VALID and STABLE semantics.",
+      "resolution": "The live fallback registry and semantic-integrity validation are current authority; the obsolete blocker claim is resolved.",
+      "follow_up": "Preserve blocking semantic-integrity checks.",
+      "requirement_refs": ["YWE-REQ-0014", "YWE-REQ-0017"],
+      "source_refs": [
+        "conformance/deviation-log.md#resolved-items",
+        "specs/registries/fallback-policy-registry.md"
+      ]
+    },
+    {
+      "id": "DEV-0003",
+      "record_type": "deviation",
+      "legacy_ids": ["D-003"],
+      "title": "Code-agnostic runtime implementation boundary",
+      "status": "resolved",
+      "recorded_on": "2026-07-19",
+      "legacy_recorded_on": "2026-05-10",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "historical_evidence",
+      "rationale": "The recorded resolution preserves current authority and historical traceability without reopening accepted alignment work.",
+      "disposition": "Required behavior is represented here as schemas, interfaces, rule records, fixtures, and validators; concrete host implementations remain outside this repository.",
+      "consequences": [
+        "Future authorized hosts must materialize accepted outputs and prove adapter-level conformance separately."
+      ],
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "context": "Historical gates referred to runtime implementation surfaces even though this repository is a platform-neutral specification repository.",
+      "resolution": "Required behavior is represented here as schemas, interfaces, rule records, fixtures, and validators; concrete host implementations remain outside this repository.",
+      "follow_up": "Future authorized hosts must materialize accepted outputs and prove adapter-level conformance separately.",
+      "requirement_refs": ["YWE-REQ-0015", "YWE-REQ-0017"],
+      "source_refs": [
+        "conformance/deviation-log.md#resolved-items",
+        "data/governance/repository_truth_manifest.json#/platform_gate"
+      ]
+    },
+    {
+      "id": "DEV-0004",
+      "record_type": "deviation",
+      "legacy_ids": ["D-004"],
+      "title": "Preservation of restored planning and engine design records",
+      "status": "resolved",
+      "recorded_on": "2026-07-19",
+      "legacy_recorded_on": "2026-05-10",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "historical_evidence",
+      "rationale": "The recorded resolution preserves current authority and historical traceability without reopening accepted alignment work.",
+      "disposition": "Existing records were extended in place with ASH provenance, diagnostics, and materialization contracts.",
+      "consequences": [
+        "Continue additive maintenance and retain durable rationale for material replacements."
+      ],
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "context": "Alignment work needed to preserve and extend existing engine and planning records instead of replacing them with package-only summaries.",
+      "resolution": "Existing records were extended in place with ASH provenance, diagnostics, and materialization contracts.",
+      "follow_up": "Continue additive maintenance and retain durable rationale for material replacements.",
+      "requirement_refs": ["YWE-REQ-0014", "YWE-REQ-0017"],
+      "source_refs": ["conformance/deviation-log.md#resolved-items"]
+    },
+    {
+      "id": "DEV-0005",
+      "record_type": "deviation",
+      "legacy_ids": ["D-005"],
+      "title": "ASH upstream authority architecture extension",
+      "status": "resolved",
+      "recorded_on": "2026-07-19",
+      "legacy_recorded_on": "2026-05-10",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "historical_evidence",
+      "rationale": "The recorded resolution preserves current authority and historical traceability without reopening accepted alignment work.",
+      "disposition": "The additive authority contract, generation flow, packet schemas, and validation references preserve existing design content and do not alter canonical ASH math.",
+      "consequences": [
+        "Bind continuing ASH authority to ADR-0005, ADR-0010, and the pinned dependency identity."
+      ],
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "context": "The ASH upstream authority package added an architecture extension after the accepted alignment baseline.",
+      "resolution": "The additive authority contract, generation flow, packet schemas, and validation references preserve existing design content and do not alter canonical ASH math.",
+      "follow_up": "Bind continuing ASH authority to ADR-0005, ADR-0010, and the pinned dependency identity.",
+      "requirement_refs": ["YWE-REQ-0009", "YWE-REQ-0010", "YWE-REQ-0017"],
+      "source_refs": [
+        "conformance/deviation-log.md#resolved-items",
+        "docs/architecture/ash_upstream_authority_contract.md",
+        "data/governance/ash_dependency_identity.json"
+      ]
+    },
+    {
+      "id": "Q-0001",
+      "record_type": "question",
+      "title": "Can immutable ontology coexist with mutable worldstate?",
+      "status": "resolved",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ywe_core",
+      "context": "Does lawful worldstate mutation alter the nine-coordinate ontology, and may perception change shared truth?",
+      "rationale": "A durable answer is required to prevent competing normative interpretations of this M1 semantic boundary.",
+      "disposition": "No. The ontology is immutable; mutable state is represented by scoped, typed, provenance-bearing deltas, and perception cannot rewrite shared truth.",
+      "consequences": [
+        "The linked accepted ADR controls this question, and dependent artifacts must conform to that decision."
+      ],
+      "debt_refs": [
+        "QD-063"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "question": "Does lawful worldstate mutation alter the nine-coordinate ontology, and may perception change shared truth?",
+      "resolution": "No. The ontology is immutable; mutable state is represented by scoped, typed, provenance-bearing deltas, and perception cannot rewrite shared truth.",
+      "resolution_record_ref": "ADR-0003",
+      "requirement_refs": ["YWE-REQ-0005", "YWE-REQ-0006", "YWE-REQ-0007"],
+      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/2"]
+    },
+    {
+      "id": "Q-0002",
+      "record_type": "question",
+      "title": "Which realm and coordinate terms are equivalent?",
+      "status": "resolved",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ywe_core",
+      "context": "Are realm, plane, bit position, coordinate, ordinal, presentation order, and full state identity interchangeable?",
+      "rationale": "A durable answer is required to prevent competing normative interpretations of this M1 semantic boundary.",
+      "disposition": "Realm and plane are equivalent ontology labels; coordinate index or bit position, ordinal, presentation order, realm or plane identity, and full vector or state identity are distinct concepts.",
+      "consequences": [
+        "The linked accepted ADR controls this question, and dependent artifacts must conform to that decision."
+      ],
+      "debt_refs": [
+        "QD-064"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "question": "Are realm, plane, bit position, coordinate, ordinal, presentation order, and full state identity interchangeable?",
+      "resolution": "Realm and plane are equivalent ontology labels; coordinate index or bit position, ordinal, presentation order, realm or plane identity, and full vector or state identity are distinct concepts.",
+      "resolution_record_ref": "ADR-0004",
+      "requirement_refs": ["YWE-REQ-0008"],
+      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/3"]
+    },
+    {
+      "id": "Q-0003",
+      "record_type": "question",
+      "title": "Who owns symbolic grammar and how is ASH pinned?",
+      "status": "resolved",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ash_dependency_material",
+      "context": "Which authority owns upstream symbolic grammar, and what identifies the exact ASH dependency state?",
+      "rationale": "A durable answer is required to prevent competing normative interpretations of this M1 semantic boundary.",
+      "disposition": "The ASH Cosmological Model owns symbolic grammar, and data/governance/ash_dependency_identity.json pins the dependency with a deterministic content digest.",
+      "consequences": [
+        "The linked accepted ADR controls this question, and dependent artifacts must conform to that decision."
+      ],
+      "debt_refs": [
+        "QD-065"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "question": "Which authority owns upstream symbolic grammar, and what identifies the exact ASH dependency state?",
+      "resolution": "The ASH Cosmological Model owns symbolic grammar, and data/governance/ash_dependency_identity.json pins the dependency with a deterministic content digest.",
+      "resolution_record_ref": "ADR-0005",
+      "requirement_refs": ["YWE-REQ-0009", "YWE-REQ-0010"],
+      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/4"]
+    },
+    {
+      "id": "Q-0004",
+      "record_type": "question",
+      "title": "What is the canonical wolf resonance field?",
+      "status": "resolved",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "wrw_reference_profile",
+      "context": "Do wolf_alignment and wolf_resonance remain independent fields, and does the dual-variable model encode morality?",
+      "rationale": "A durable answer is required to prevent competing normative interpretations of this M1 semantic boundary.",
+      "disposition": "wolf_resonance is canonical; wolf_alignment is a read or migration alias only; the dual-variable model is non-moral.",
+      "consequences": [
+        "The linked accepted ADR controls this question, and dependent artifacts must conform to that decision."
+      ],
+      "debt_refs": [
+        "QD-066"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "question": "Do wolf_alignment and wolf_resonance remain independent fields, and does the dual-variable model encode morality?",
+      "resolution": "wolf_resonance is canonical; wolf_alignment is a read or migration alias only; the dual-variable model is non-moral.",
+      "resolution_record_ref": "ADR-0006",
+      "requirement_refs": ["YWE-REQ-0011"],
+      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/5"]
+    },
+    {
+      "id": "Q-0005",
+      "record_type": "question",
+      "title": "How can effects reverse without rewriting history?",
+      "status": "resolved",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ywe_core",
+      "context": "Does reversing a current-state effect permit deletion or mutation of the accepted event history?",
+      "rationale": "A durable answer is required to prevent competing normative interpretations of this M1 semantic boundary.",
+      "disposition": "No. Accepted history is append-only, and reversal or correction is a new compensating delta.",
+      "consequences": [
+        "The linked accepted ADR controls this question, and dependent artifacts must conform to that decision."
+      ],
+      "debt_refs": [
+        "QD-067"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "question": "Does reversing a current-state effect permit deletion or mutation of the accepted event history?",
+      "resolution": "No. Accepted history is append-only, and reversal or correction is a new compensating delta.",
+      "resolution_record_ref": "ADR-0007",
+      "requirement_refs": ["YWE-REQ-0012", "YWE-REQ-0013"],
+      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/6"]
+    },
+    {
+      "id": "Q-0006",
+      "record_type": "question",
+      "title": "How are truth-authority conflicts resolved?",
+      "status": "resolved",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ywe_core",
+      "context": "May a lower truth-authority layer overwrite a conflicting higher-layer constraint?",
+      "rationale": "A durable answer is required to prevent competing normative interpretations of this M1 semantic boundary.",
+      "disposition": "No. Lower layers may specialize only within higher constraints; conflicts are rejected or contained.",
+      "consequences": [
+        "The linked accepted ADR controls this question, and dependent artifacts must conform to that decision."
+      ],
+      "debt_refs": [
+        "QD-OW-001"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "question": "May a lower truth-authority layer overwrite a conflicting higher-layer constraint?",
+      "resolution": "No. Lower layers may specialize only within higher constraints; conflicts are rejected or contained.",
+      "resolution_record_ref": "ADR-0008",
+      "requirement_refs": ["YWE-REQ-0014"],
+      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/7"]
+    },
+    {
+      "id": "Q-0007",
+      "record_type": "question",
+      "title": "Can WRW-specific rules become YWE Core truth?",
+      "status": "resolved",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ywe_core",
+      "context": "Does a WRW reference-profile rule become normative YWE Core merely by residing beside or exercising a Core contract?",
+      "rationale": "A durable answer is required to prevent competing normative interpretations of this M1 semantic boundary.",
+      "disposition": "No. WRW remains a reference profile, fixture, or game-layer specialization and cannot create universal Core truth.",
+      "consequences": [
+        "The linked accepted ADR controls this question, and dependent artifacts must conform to that decision."
+      ],
+      "debt_refs": [
+        "QD-PH-dd00c6d30da8",
+        "QD-PH-37cd25fd2cac",
+        "QD-068"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "question": "Does a WRW reference-profile rule become normative YWE Core merely by residing beside or exercising a Core contract?",
+      "resolution": "No. WRW remains a reference profile, fixture, or game-layer specialization and cannot create universal Core truth.",
+      "resolution_record_ref": "ADR-0009",
+      "requirement_refs": ["YWE-REQ-0015"],
+      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/8"]
+    },
+    {
+      "id": "Q-0008",
+      "record_type": "question",
+      "title": "Which ASH specification tree is authoritative?",
+      "status": "resolved",
+      "recorded_on": "2026-07-19",
+      "owner_role": "Canon and governance maintainers",
+      "scope": "ash_dependency_material",
+      "context": "Do core/ash_pattern_engine/canonical and specs have independent authority, or is one a generated mirror?",
+      "rationale": "A durable answer is required to prevent competing normative interpretations of this M1 semantic boundary.",
+      "disposition": "core/ash_pattern_engine/canonical is authoritative; specs is a deterministic generated mirror maintained by scripts/sync_ash_specifications.py and pinned by data/governance/ash_dependency_identity.json.",
+      "consequences": [
+        "The linked accepted ADR controls this question, and dependent artifacts must conform to that decision."
+      ],
+      "debt_refs": [
+        "QD-069"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "question": "Do core/ash_pattern_engine/canonical and specs have independent authority, or is one a generated mirror?",
+      "resolution": "core/ash_pattern_engine/canonical is authoritative; specs is a deterministic generated mirror maintained by scripts/sync_ash_specifications.py and pinned by data/governance/ash_dependency_identity.json.",
+      "resolution_record_ref": "ADR-0010",
+      "requirement_refs": ["YWE-REQ-0016"],
+      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/9"]
+    }
+  ],
+  "summary": {
+    "total_records": 27,
+    "architecture_decisions": 10,
+    "accepted_decisions": 10,
+    "change_proposals": 1,
+    "implemented_change_proposals": 1,
+    "risks": 3,
+    "mitigated_risks": 3,
+    "deviations": 5,
+    "resolved_deviations": 5,
+    "questions": 8,
+    "resolved_questions": 8,
+    "open_records": 0
+  }
+}

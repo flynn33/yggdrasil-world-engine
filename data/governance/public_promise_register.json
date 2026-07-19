@@ -12,7 +12,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "37eeeeeb50b927d15575ec4a6b7543485926dc92332047446d93a0e055d9f30b"
+      "sha256": "5f992b72a3203ea7e3488fdd39ea9a5714cce068113f9c6a54ae8ef7b34ea3f7"
     },
     {
       "path": "adapters/godot/README.md",
@@ -108,15 +108,19 @@
     },
     {
       "path": "data/schemas/README.md",
-      "sha256": "bf0652296e249244bfa642e29bc1824c29194765cbbe911ad7b314b34f5de274"
+      "sha256": "2af4668090ac07da8f4003f5fc47fe14a0dd1b9a9dca878419da54033f31dd3d"
     },
     {
       "path": "developer-guide.md",
-      "sha256": "286bd187a4678b3555db78cdbe9d7ba8604af8b1f8c06d413752e3f7c0fd0916"
+      "sha256": "627ea15f81818e2a2fc07444f83c857e958cedb818da841cae7400e04760feb5"
     },
     {
       "path": "docs/architecture/README.md",
-      "sha256": "89794e5a739f8040410b59aaf38088238971ebe603b53b2ef2b8893db46a373b"
+      "sha256": "c48d3acbf079fc6685875c6afae7e53b30d38483f123b6adf35534cd8b82be00"
+    },
+    {
+      "path": "docs/architecture/ywe_core_wrw_scope_contract.md",
+      "sha256": "5a677d4090e5192e31d0ca2a025d996f3ef6a3675585b473cdd3620172178e7f"
     },
     {
       "path": "docs/game/companions/floki_hrafen_vilgerson_companion_brief.md",
@@ -231,12 +235,16 @@
       "sha256": "6d996bb2c3c81f19cdf091556f0ae81523558e26024aead959c01c38d1c19683"
     },
     {
+      "path": "docs/glossary/ywe_design_glossary.md",
+      "sha256": "37fe3833b78c472c389c2bc1fae3a7467731a2862781f286d96354c7f2fb96b8"
+    },
+    {
       "path": "docs/governance/README.md",
-      "sha256": "3803b98c11f7ade7974c6477d6355a06bcf7877d1c7c1e43a1c1624ed0b4608a"
+      "sha256": "73a1a41500f79d0946e50746c59aab4a398a12a258a309bafba17d14b6bc5630"
     },
     {
       "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
-      "sha256": "6c888a9a59632ae6a91362047a735faaa21fc0f658589c60e60392054e115aa0"
+      "sha256": "9ed433cb83b7fcef997a5f948b944ac0ec80de0307b28f26ecd709eeca21fb48"
     },
     {
       "path": "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md",
@@ -244,7 +252,7 @@
     },
     {
       "path": "docs/project/repository_map.md",
-      "sha256": "a6b1adfc912baba99336572ee401bc7aca01614cef7811d3edcb2617caf854c7"
+      "sha256": "2665afc8085f8d866b63abd39282eebf1d64ec5dc369854ba3a305f1a2400bf1"
     },
     {
       "path": "docs/project/repository_status.md",
@@ -252,7 +260,7 @@
     },
     {
       "path": "guide.md",
-      "sha256": "aa6a6c3b6b091e82a2deafee2e898af2a8f3ae4a1a3adf032a08f66b3c1fa2cd"
+      "sha256": "7184180bf5d07e68f72302389325615d75e85973fabbdbb23240cc5532439f9f"
     },
     {
       "path": "repository-contribution-policy.json",
@@ -260,14 +268,14 @@
     },
     {
       "path": "wiki.md",
-      "sha256": "0c38542ce8414aef499afba72f745affa70a6dcbf7c9240c09e5e76ebbf518cf"
+      "sha256": "39c89518d0a5a9f2d3f2238138c38cef81bafc9e2446d1ae847a32d92857ce9f"
     },
     {
       "path": "yggdrasil-instructions.json",
-      "sha256": "a92d757759ef1a4a9f39f2a19fd3ecaf5dcddf8c8908596c966bc05eca74720c"
+      "sha256": "dd62a156f20b8476a8964fe4e128641c76d974f2c0a8d1038dcb71725e92619f"
     }
   ],
-  "reviewed_surface_aggregate_sha256": "c1030061ede3b41ada2da1d91ece9f5f2799c24279e215c4c12eba4d73f4d50d",
+  "reviewed_surface_aggregate_sha256": "e398e4d7491745414160885bf6f94b6868a6a187030589be97cd4bfa87f7d8b8",
   "promises": [
     {
       "promise_id": "PRM-001",
@@ -651,14 +659,14 @@
       "interpretation_constraint": "Extensions may reskin presentation but cannot replace structural ontology. WRW-specific content must remain outside normative YWE Core.",
       "source_refs": [
         {
-          "path": "README.md",
-          "locator_type": "exact_text",
-          "locator": "Current Authority Stack"
+          "path": "docs/architecture/ywe_core_wrw_scope_contract.md",
+          "locator_type": "markdown_heading",
+          "locator": "YWE Core; WRW Reference Profile; Dependency Direction"
         },
         {
-          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
-          "locator_type": "exact_text",
-          "locator": "18. ENGINE-FIRST ARCHITECTURE"
+          "path": "docs/glossary/ywe_design_glossary.md",
+          "locator_type": "markdown_heading",
+          "locator": "YWE Core; WRW Reference Profile"
         }
       ]
     },
@@ -694,7 +702,7 @@
     },
     {
       "promise_id": "PRM-015",
-      "claim": "The nine-plane ontology is a fixed structural simulation foundation.",
+      "claim": "The nine-coordinate ontology is a fixed structural simulation foundation; the WRW reference profile binds nine named realms or planes through explicit mappings.",
       "claim_type": "world_system",
       "status": "active",
       "disposition": "milestone_assigned",
@@ -704,22 +712,17 @@
         "M9"
       ],
       "owner_role": "Core semantics maintainers",
-      "interpretation_constraint": "Planes are structural states, not arbitrary generated biomes. Presentation may be renamed or reskinned only when structural relationships remain stable.",
+      "interpretation_constraint": "Structural coordinates remain fixed. Realm or plane names are profile identities, presentation order may vary, and a complete ASH state vector is one of 512 state identities rather than one of nine named realms.",
       "source_refs": [
         {
-          "path": "README.md",
-          "locator_type": "exact_text",
-          "locator": "Canonical 9-Realm Cosmology"
+          "path": "docs/architecture/ywe_core_wrw_scope_contract.md",
+          "locator_type": "markdown_heading",
+          "locator": "YWE Core; WRW Reference Profile; Compatibility Rule"
         },
         {
-          "path": "wiki.md",
-          "locator_type": "exact_text",
-          "locator": "The Nine Realms"
-        },
-        {
-          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
-          "locator_type": "exact_text",
-          "locator": "3. REALM SYSTEM"
+          "path": "docs/glossary/ywe_design_glossary.md",
+          "locator_type": "markdown_heading",
+        "locator": "Ontology; Structural Coordinate; Realm; ASH State Vector; State Identity"
         }
       ]
     },
@@ -1262,7 +1265,7 @@
     }
   ],
   "summary": {
-    "reviewed_surface_count": 65,
+    "reviewed_surface_count": 67,
     "promise_count": 33,
     "assigned_count": 30,
     "excluded_count": 3,

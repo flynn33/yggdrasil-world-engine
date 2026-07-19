@@ -7,6 +7,10 @@ Status: canonical source-truth contract
 
 Defines the engine baseline dual-variable alignment model.
 
+Scope note: the named WRW implementation below is an informative cross-scope
+example only. Its identities do not become YWE Core requirements; authority
+remains with `docs/architecture/ywe_core_wrw_scope_contract.md`.
+
 ## Core statement
 
 The Yggdrasil World Engine supports a paired dual-variable alignment model of complementary simulation variables.

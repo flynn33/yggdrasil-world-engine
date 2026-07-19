@@ -7,8 +7,8 @@
   "scope_manifest_ref": "data/governance/scope_partition_manifest.json",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 986,
-    "path_digest": "eeb8dd6be84c12413676d5e488cea8c533878fba6dc9f175adcbd569eafc83a9",
+    "path_count": 1008,
+    "path_digest": "65238b870f35705e0441c06af687a6c672f80c124768584025c348c320bdc7ef",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "classes": [
@@ -566,6 +566,18 @@
       ]
     },
     {
+      "path": "core/ash_pattern_engine/canonical/registries/fallback-policy-registry.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/registries/fallback-policy-registry.md",
+      "rationale": "This repository-local canonical ASH registry is the authoritative source for fallback-policy semantics.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_source"
+      ]
+    },
+    {
       "path": "core/ash_pattern_engine/canonical/verification/conformance-categories.md",
       "classification": "normative",
       "owner_role": "ASH mathematics maintainers",
@@ -957,6 +969,18 @@
       ]
     },
     {
+      "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+      "classification": "informative",
+      "owner_role": "Canon and governance maintainers",
+      "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
+      "rationale": "This WRW-backed composite explains how reusable YWE contracts participate in the reference game without becoming a second normative Core or WRW authority.",
+      "authority_role": "supporting",
+      "secondary_tags": [
+        "wrw",
+        "composite"
+      ]
+    },
+    {
       "path": "docs/project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md",
       "classification": "historical",
       "owner_role": "Repository governance maintainers",
@@ -1052,23 +1076,27 @@
     },
     {
       "path": "lore/wrw_cosmology/canon_scope.md",
-      "classification": "placeholder",
-      "owner_role": "Canon and governance maintainers",
-      "governing_source": "data/governance/specification_roadmap.json",
-      "rationale": "The artifact self-declares incomplete content and is routed to M1.",
-      "future_milestone": "M1",
-      "debt_ref": "QD-PH-dd00c6d30da8",
-      "authority_role": "not_applicable"
+      "classification": "normative",
+      "owner_role": "WRW reference-profile maintainers",
+      "governing_source": "lore/wrw_cosmology/canon_scope.md",
+      "rationale": "The reviewed artifact now defines the normative WRW cosmology scope and its boundary from reusable YWE Core contracts.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "wrw",
+        "canon_scope"
+      ]
     },
     {
       "path": "lore/wrw_cosmology/source_notes.md",
-      "classification": "placeholder",
-      "owner_role": "Canon and governance maintainers",
-      "governing_source": "data/governance/specification_roadmap.json",
-      "rationale": "The artifact self-declares incomplete content and is routed to M1.",
-      "future_milestone": "M1",
-      "debt_ref": "QD-PH-37cd25fd2cac",
-      "authority_role": "not_applicable"
+      "classification": "informative",
+      "owner_role": "WRW reference-profile maintainers",
+      "governing_source": "lore/wrw_cosmology/canon_scope.md",
+      "rationale": "These reviewed notes preserve supporting source context for WRW cosmology without creating a second normative authority.",
+      "authority_role": "supporting",
+      "secondary_tags": [
+        "wrw",
+        "source_notes"
+      ]
     },
     {
       "path": "modules/artifact_engine/schema_notes.md",
@@ -1186,7 +1214,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/algorithms/averaging-operator-semantics.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1200,7 +1228,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/algorithms/axiom-evaluation.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1214,7 +1242,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/algorithms/branching-semantics.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1228,7 +1256,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/algorithms/codeword-transformation-semantics.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1242,7 +1270,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/algorithms/containment-safe-failure-semantics.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1256,7 +1284,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/algorithms/generation-planning.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1270,7 +1298,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/algorithms/recovery-fallback-semantics.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1284,7 +1312,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/algorithms/topology-expansion.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1298,7 +1326,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/algorithms/transition-system.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1312,7 +1340,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/core/ash-state-space.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1326,7 +1354,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/core/codeword-set.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1340,7 +1368,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/core/realm-identity.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1354,7 +1382,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/core/recoverability-semantics.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1368,7 +1396,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/core/state-admissibility.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1382,7 +1410,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/core/state-validity-diagnostics.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1396,7 +1424,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/core/system-state-classification.pseudo.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1410,7 +1438,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/artifact-emitter-contract.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1424,7 +1452,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/axiom-evaluator-contract.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1438,7 +1466,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1452,7 +1480,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/generation-planner-contract.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1466,7 +1494,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/realm-encoder-contract.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1480,7 +1508,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/recovery-engine-contract.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1494,7 +1522,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/state-model-contract.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1508,7 +1536,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/topology-generator-contract.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1522,7 +1550,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/transition-registry-contract.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1536,7 +1564,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1550,7 +1578,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1564,7 +1592,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/interfaces/semantic-contracts.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1574,11 +1602,14 @@
       "path": "specs/registries/fallback-policy-registry.md",
       "classification": "normative",
       "owner_role": "ASH mathematics maintainers",
-      "governing_source": "specs/registries/fallback-policy-registry.md",
-      "rationale": "This canonical fallback-policy registry currently has no repository-local mirror counterpart.",
-      "authority_role": "primary",
+      "governing_source": "core/ash_pattern_engine/canonical/registries/fallback-policy-registry.md",
+      "rationale": "This native-shape ASH registry is synchronized from the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/registries/fallback-policy-registry.md",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
-        "ash_dependency"
+        "ash_dependency",
+        "ash_mirror"
       ]
     },
     {
@@ -1589,7 +1620,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/verification/conformance-categories.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1603,7 +1634,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/verification/implementation-acceptance.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1617,7 +1648,7 @@
       "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
       "authority_role": "synchronized_mirror",
       "mirror_of": "core/ash_pattern_engine/canonical/verification/invariant-spec.md",
-      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "synchronization_check_ref": "scripts/sync_ash_specifications.py",
       "secondary_tags": [
         "ash_dependency",
         "ash_mirror"
@@ -1651,26 +1682,26 @@
     },
     {
       "path": "docs/project/scope_partition_map.md",
-      "sha256": "7113c62e302dfdfc8077fb6090531ac2de96eb7316682a5dbe2e4c3a924fd945"
+      "sha256": "110bba228ac17fbf3ea7ddb329619fae63ba36da5ee1de77c891c3fde5dbe032"
     },
     {
       "path": "docs/project/source_inventory.md",
-      "sha256": "2f182d1e924a145a3647db244f02028178023fe6b1c9232a6085f35aa4e34496"
+      "sha256": "e45725f28122e8f7f832d77a7ff308a1803ed085a94cc886dc704fae301413e1"
     },
     {
       "path": "missing_source_documents.md",
-      "sha256": "9a7cdf9ab4fbd89419cbbc14b22e0158dc85f93a4615c09da7dee10f9cc797cd"
+      "sha256": "1732712adedf2bf3c2e87fb9365e8b48255a8450553c986d738abd50b2439cc6"
     }
   ],
   "coverage": {
     "counts_by_class": {
-      "normative": 722,
-      "informative": 41,
+      "normative": 744,
+      "informative": 43,
       "example": 160,
       "historical": 10,
       "deprecated": 1,
       "superseded": 6,
-      "placeholder": 46
+      "placeholder": 44
     }
   }
 }

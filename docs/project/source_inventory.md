@@ -1,6 +1,6 @@
 # Source Inventory
 
-This index lists current source-truth assets and open placeholder-backed areas.
+This index lists current source-truth assets and remaining placeholder-backed areas.
 It replaces process-era source notes with stable repository routing.
 
 Current source routing uses the following precedence:
@@ -34,16 +34,25 @@ Current source routing uses the following precedence:
 
 | Area | Current source |
 |---|---|
-| Master specification | `docs/master_specification/YWE_MASTER_SPECIFICATION.md` |
+| Mixed-scope synthesis (informative) | `docs/master_specification/YWE_MASTER_SPECIFICATION.md` |
 | Repository map | `docs/project/repository_map.md` |
 | Cosmology authority | `docs/architecture/ywe_cosmology_authority_contract.md` |
 | ASH component role | `docs/architecture/ash_pattern_system_component_contract.md` |
+| Truth and authority lattice | `docs/architecture/truth_authority_lattice.md`, `data/governance/truth_authority_lattice.json` |
+| YWE Core and WRW scope | `docs/architecture/ywe_core_wrw_scope_contract.md` |
 | Realm truth boundary | `docs/architecture/realm_truth_boundary_contract.md` |
 | Authored override boundary | `docs/architecture/authored_override_and_tooling_notes.md` |
-| ASH math surface | `specs/`, `core/ash_pattern_engine/canonical/` |
+| ASH authoritative source | `core/ash_pattern_engine/canonical/` |
+| ASH generated mirror | `specs/` |
+| ASH dependency identity | `data/governance/ash_dependency_identity.json` |
 | Generation packets | `data/schemas/ash_generation_packet_schema.json` |
 | Source-truth validation | `data/validation/source_truth_alignment_contract.json` |
 | Twin Wolf validation | `data/validation/twin_wolf_canon_validation_rules.json` |
+| Canonical terminology | `docs/glossary/ywe_design_glossary.md`, `data/governance/canonical_term_index.json` |
+| Normative requirements | `docs/governance/normative_language_and_requirement_id_policy.md`, `data/governance/normative_requirement_register.json` |
+| Typed governance records | `docs/governance/governance_records_policy.md`, `data/governance/governance_record_register.json` |
+| WRW cosmology scope | `lore/wrw_cosmology/canon_scope.md` |
+| WRW cosmology provenance | `lore/wrw_cosmology/source_notes.md` |
 | Repository truth | `data/governance/repository_truth_manifest.json` |
 | Release and publication policy | `data/governance/release_publication_policy.json` |
 | Tracked-artifact classification | `data/governance/artifact_classification_manifest.json` |
@@ -54,7 +63,7 @@ Current source routing uses the following precedence:
 
 These source-manifest entries still contain an explicit placeholder marker.
 The classification manifest governs the broader repository placeholder class.
-Current placeholder artifacts: `46`
+Current placeholder artifacts: `44`
 
 - `core/narrative_engine/player_origin_arc_rules.yaml`
 - `docs/architecture/PLAYER_ORIGIN_ARC_NOTES.md`

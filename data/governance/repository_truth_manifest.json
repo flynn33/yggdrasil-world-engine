@@ -47,9 +47,14 @@
       "precedence": 1,
       "category": "machine_governance",
       "paths": [
+        "data/governance/ash_dependency_identity.json",
+        "data/governance/canonical_term_index.json",
+        "data/governance/governance_record_register.json",
+        "data/governance/normative_requirement_register.json",
         "data/governance/specification_roadmap.json",
         "data/governance/repository_truth_manifest.json",
-        "data/governance/release_publication_policy.json"
+        "data/governance/release_publication_policy.json",
+        "data/governance/truth_authority_lattice.json"
       ]
     },
     {
@@ -64,8 +69,14 @@
       "precedence": 3,
       "category": "normative_policy_and_validation",
       "paths": [
+        "docs/architecture/truth_authority_lattice.md",
+        "docs/architecture/ywe_core_wrw_scope_contract.md",
+        "docs/governance/governance_records_policy.md",
+        "docs/governance/normative_language_and_requirement_id_policy.md",
         "docs/project/artifact_classification_policy.md",
-        "scripts/check_m0_truthful_baseline.py"
+        "scripts/check_m0_truthful_baseline.py",
+        "scripts/check_m1_canon_governance.py",
+        "scripts/sync_ash_specifications.py"
       ]
     },
     {
@@ -100,7 +111,8 @@
       "paths": [
         "CHANGELOG.md",
         "SOURCE_AVAILABILITY_MANIFEST.md",
-        "conformance/deviation-log.md"
+        "conformance/deviation-log.md",
+        "governance/math-change-notes/2026-07-19-ash-source-authority-and-realm-identity.md"
       ]
     }
   ],
@@ -166,6 +178,7 @@
   "quality_governance": {
     "debt_inventory": "data/validation/repository_quality_debt_inventory.json",
     "schema_quality_baseline": "data/validation/schema_quality_baseline.json",
-    "deviation_record": "conformance/deviation-log.md"
+    "governance_record_authority": "data/governance/governance_record_register.json",
+    "historical_deviation_provenance": "conformance/deviation-log.md"
   }
 }

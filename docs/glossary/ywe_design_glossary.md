@@ -44,7 +44,37 @@ The upstream foundation for YWE and its systems.
 The ASH Cosmological Model owns the cosmological meaning layer: nine planes of
 existence, axioms A1-A6, existence potential Φ, pattern vectors, branching
 choice realization, leaf branch realities, wolf attractor logic, bloodline
-resonance meaning, and Shadow / Void / Divine Core roles.
+resonance meaning, symbolic-grammar meaning, and Shadow / Void / Divine Core
+roles. YWE consumes this authority; it does not acquire ownership of it.
+
+## Structural Coordinate
+One named algebraic position `b0` through `b8` in an ASH State Vector in
+`F2^9`.
+
+`ASH Coordinate` is a presentation alias. A Structural Coordinate is not a
+named realm, an ordinal, a presentation rank, or a complete state identity.
+The WRW realm-anchor projection may associate a named realm with a one-hot
+vector for interchange, but that association does not privilege the coordinate
+in ASH mathematics.
+
+## ASH Dependency Identity
+The machine-verifiable pin for the repository's upstream ASH specification
+snapshot.
+
+The current identity is recorded in
+`data/governance/ash_dependency_identity.json`. It names the authoritative
+source tree, its generated mirror, the digest algorithm, and the aggregate
+digest. Repository prose must reference that identity rather than inventing a
+second version label.
+
+## ASH State Vector
+One complete nine-coordinate value `x = (b0, ..., b8)` in `F2^9`.
+
+All nine Structural Coordinates participate in the vector. A vector determines
+one state/vertex identity; a coordinate, Coordinate Index, ordinal, or
+presentation order does not. The nine one-hot WRW realm anchors are projection
+records, not an exhaustive definition of the 512 possible ASH states or of a
+named realm's full meaning.
 
 ## ASH Pattern System
 A YWE component for diagnostics, pattern integrity, recovery, containment,
@@ -54,7 +84,8 @@ Earlier planning sometimes used ASH Pattern System as shorthand for the
 upstream mathematical layer. That shorthand is superseded by the current
 authority stack: ASH Cosmological Model is the upstream foundation for YWE,
 while ASH Pattern System is a YWE component that protects and stabilizes engine
-systems.
+systems. It does not own ASH mathematics, base ontology, or symbolic-grammar
+meaning.
 
 ## Activation
 The framework-level act of making a module or subsystem operational in a runtime context.
@@ -95,14 +126,16 @@ The game and narrative layer built on the Yggdrasil World Engine.
 
 Where Ravens Wait: Eternal Reckoning owns player-facing story identity,
 specific quests, specific locations, scenes, characters, prose, dialogue, and
-content direction. It is not the agnostic engine.
+content direction. It is the WRW Reference Profile, not the agnostic engine,
+and cannot make its game-specific content universal YWE Core truth.
 
 ## Yggdrasil World Engine
 The agnostic game engine.
 
 Yggdrasil World Engine owns engine-agnostic contracts, runtime systems,
 worldstate deltas, feature engine interfaces, host adapter boundaries, and
-repository governance. It is not merely the game title.
+repository governance. Its mandatory setting-neutral layer is YWE Core. It is
+not merely the game title and does not own upstream ASH meaning.
 
 
 ## Archetype
@@ -133,6 +166,22 @@ A measurable form of resonance between a player and a realm, symbolic pressure, 
 
 In practice, realm attunement governs lawful access and relevance, not ownership of a realm.
 
+## Authoritative Source
+The sole repository path or external dependency identity whose content controls
+a declared concern.
+
+An authoritative source may have generated mirrors, indexes, or summaries.
+Those derivatives improve access but do not acquire override authority.
+
+## Ontology
+The immutable-at-runtime definition of what kinds of entities, states, and
+relations may exist under the governing authority. `Base World Ontology` is the
+compatibility label for the cosmological substrate governed by upstream ASH.
+
+Ontology constrains runtime state. It is not the current condition of every
+entity, site, branch, or player, and it cannot be changed by a worldstate delta,
+perception overlay, game profile, or host adapter.
+
 ## Bloodline
 An inherited pattern of mythic resonance tied to lineage.
 
@@ -145,10 +194,27 @@ Bloodline affects:
 
 Bloodline does **not** hard-lock destiny.
 
+## Coordinate Index
+The zero-based integer index `0` through `8` of a Structural Coordinate in an
+ASH State Vector.
+
+`Bit Position` and `bit_index` are deprecated compatibility aliases. A
+Coordinate Index describes storage or interchange position; it does not
+establish an ordinal, presentation order, cosmological priority, or State
+Identity.
+
 ## Canon
 The highest-order design truth that lower systems must not contradict.
 
 Canon includes cosmology, realm ontology, player origin law, wolf law, and other non-negotiable foundations.
+
+## Canonical Term
+The single preferred label and definition for one material YWE concept within a
+declared scope.
+
+Aliases may route legacy or presentation vocabulary to a canonical term, but
+they do not create another definition or state field. Every level-two concept
+heading in this glossary has one entry in the canonical term index.
 
 ## Canonical Data Domain
 A major category of truth the engine must preserve distinctly, such as cosmology, realm ontology, player identity, myth, prophecy, or perception.
@@ -176,6 +242,13 @@ A meaningful outcome that changes future state.
 
 In YWE, consequence should not vanish after local completion. It should feed persistence, memory, myth, prophecy, faction response, perception, or future weighting.
 
+## Compensating Delta
+A new append-only state-transition record whose accepted effect changes or
+counterbalances a prior reversible Current-State Effect.
+
+It references the prior record and carries ordinary provenance. It does not
+edit, delete, reorder, or make the prior event cease to have happened.
+
 ## Contradiction
 A tension, clash, or mismatch between system elements.
 
@@ -197,6 +270,22 @@ Dependency does not automatically imply ownership.
 A discrete persistent state change emitted from meaningful resolution.
 
 A delta may affect a player, NPC, site, faction, myth seed, prophecy weight, or perception state.
+
+## Current State
+The result of deterministically folding accepted historical records for a
+declared truth scope at a specified point in the event sequence.
+
+Current state may change. The event history from which it is derived remains
+append-only, and a later state does not erase the records that produced an
+earlier state.
+
+## Current-State Effect
+The presently effective result of one or more accepted history records after
+they are folded for a declared truth scope.
+
+The effect may be reversible when its domain contract permits. Reversing it
+requires a Compensating Delta; the source event and original delta remain in
+Event History.
 
 ## Dark Wolf
 One of the two paired symbiotic wolf forces that emerge with Divine Core
@@ -222,6 +311,22 @@ A state in which a system, prophecy, module, or possibility exists but is not ac
 
 The term is contextual and should not be confused with deletion or absence.
 
+## Dual-Variable Alignment
+A compatibility model name for the two non-moral, independently accumulating
+White Wolf and Dark Wolf resonance values.
+
+It describes the shape of `wolf_resonance`; it is not a third state ledger.
+New state and prose use **Wolf Resonance**. Historical
+`dual_variable_alignment` metadata may remain to explain the migration model.
+
+## Durable Rationale
+An auditable explanation of why a material requirement, authority boundary,
+terminology choice, or exception was adopted, including the decision context
+and consequences needed for later review.
+
+A durable rationale is stored in a governed decision record or controlling
+contract. A transient discussion or unexplained edit is not a substitute.
+
 ## Emergence
 The process by which higher-order meaning or social structure arises from prior state and consequence.
 
@@ -244,6 +349,14 @@ A design-level statement of what a given engine:
 
 These contracts protect boundaries before coding begins.
 
+## Event History
+The ordered, append-only sequence of accepted events, deltas, commits, and
+diagnostic no-ops that records how state was reached.
+
+Accepted history records are immutable. Correction, containment, compensation,
+or reversal is expressed by appending a new record with provenance, never by
+editing or deleting a prior record.
+
 ## External Execution Environment
 A non-YWE runtime environment such as Unreal, Unity, or Godot that may realize YWE outputs.
 
@@ -262,6 +375,18 @@ In the corrected model:
 - Forsetti governs module lifecycle
 - Forsetti negotiates with external execution environments
 - YWE remains the owner of its internal truth rules
+
+## Synchronized Mirror
+A mechanically produced repository copy of an Authoritative Source, maintained
+for compatibility, tooling, or path-local consumption and verified by a
+deterministic synchronization check.
+
+A Synchronized Mirror must identify its source and synchronization mechanism.
+`Generated Mirror` is a presentation alias. The mirror must be
+content-equivalent within its declared mapping and cannot override the source.
+The ASH mirror under `specs/` is generated from
+`core/ash_pattern_engine/canonical/` by
+`scripts/sync_ash_specifications.py`.
 
 ## Foundational Canon
 The highest authority layer of YWE design truth.
@@ -414,20 +539,25 @@ A reusable grouping of related symbolic patterns that helps organize higher-orde
 Clusters help connect archetype selection, quest families, transformation logic, and future consequence.
 
 ## Perception Layer
-The system layer that changes how players perceive locations, NPCs, symbols, access, or meaning without necessarily rewriting shared world fact.
+The system layer that derives a player-specific view of locations, NPCs,
+symbols, access, or meaning from authoritative ontology and scoped state.
 
-This is one of the most important YWE concepts.
+Perception may change visibility, interpretation, description, or eligible
+interaction. A perception record is not objective worldstate and cannot mutate
+base ontology or shared truth. An action prompted by perception may later cause
+an independently validated worldstate delta.
+
+## Perception Overlay
+The derived, player- or observer-scoped output of the Perception Layer.
+
+An overlay references its truth substrate and may alter presentation or
+visibility only. It is recomputable, must not be used as the source of an
+objective location mutation, and cannot escape its declared observer scope.
 
 ## Perception Variant
 A player-specific or state-specific version of how a location, event, or actor is perceived.
 
 Perception variants support hidden truths, realm overlays, cult visibility, omen density, and multiplayer-safe divergence.
-
-## Plane
-In YWE canon, **plane** and **realm** are equivalent ontology terms.
-
-`Realm` is the preferred repository term.
-The term `plane` should not be used to imply a separate category of existence.
 
 ## Persistent Geography
 The stable world topology authored by developers.
@@ -461,6 +591,15 @@ A family of related prophetic interpretations centered on the same future attrac
 
 As with myths, multiple interpretations may coexist.
 
+## Presentation Order
+The one-based order in which a document, user interface, or registry displays
+the nine named realms.
+
+Presentation order is contextual and may differ between surfaces. It is not an
+Ordinal, Structural Coordinate, Coordinate Index, State Identity, authority
+rank, or cosmological priority. A surface that records it must name the ordering
+scheme.
+
 ## Quest Chain
 A structured multi-stage manifestation of meaningful narrative pressure.
 
@@ -486,10 +625,16 @@ A reusable scaffold that organizes quest chains into coherent stage structures w
 Templates are symbolic structures, not generic task lists.
 
 ## Realm
-A fixed cosmological state within the nine-realm YWE ontology.
+A profile-level semantic identity assigned to one ontology member by a named
+extension or reference profile. Within that profile, each Realm is bound
+one-to-one to one Structural Coordinate for deterministic interchange.
 
-Realms do not move in response to player activity.
-Players change resonance and lawful access.
+Realm is not a universal nine-member YWE Core ontology, a Coordinate Index, an
+Ordinal, a Presentation Order, or the State Identity of an ASH vector. A
+profile may define its own realm vocabulary and mapping without changing ASH
+mathematics. Realm is the preferred ontology-member term. **Plane** and
+`plane` are accepted presentation aliases for Realm; they do not define a
+competing ontology type.
 
 ## Raven Companion
 A persistent player-bound companion state represented in player runtime state.
@@ -505,9 +650,22 @@ The core engine responsible for realm relevance, attunement interpretation, acce
 It does not invent new realms.
 
 ## Realm Ontology
-The fixed truth of what realms exist and what kind of cosmological states they represent.
+The profile-scoped, immutable-at-runtime truth of which named realms exist
+within a declared profile and what category of cosmological state they
+represent.
 
-Realm ontology is foundational canon.
+Realm ontology is a profile-specialized view of Ontology, not a universal list
+of named YWE Core realms. Within its declared profile it constrains mutable
+branch, location, player, and shared worldstate but is not itself one of those
+state records.
+
+## Ordinal
+The one-based integer equal to `Coordinate Index + 1` in the canonical WRW
+realm-anchor mapping.
+
+`Realm Ordinal` is a presentation alias. The ordinal is a human-facing count of
+the mapped anchor position. It is not a Structural Coordinate, Coordinate
+Index, presentation order, State Identity, power level, or runtime location.
 
 ## Realm Shift
 A lawful change in world-layer access or experiential state allowing deeper interaction with a non-Physical realm.
@@ -522,6 +680,15 @@ The design-to-repository placement reference that says where rules, schemas, doc
 A meaningful alignment or responsiveness between an entity and a realm, symbol, bloodline, site, oath, myth, or other higher-order pressure source.
 
 Resonance is broader than mechanical affinity. It is lawful meaningful fit.
+
+## Reversal
+A lawful later transition that changes a reversible current-state effect by
+appending a Compensating Delta.
+
+Reversal never deletes, edits, negates the occurrence of, or reorders the
+original history. A domain contract may declare an effect irreversible; the
+existence of the reversal mechanism does not guarantee that every effect can be
+reversed.
 
 ## Runtime Generation Flow
 The canonical orchestration sequence that transforms current state into live manifestations and then routes outcomes back into persistence.
@@ -544,11 +711,29 @@ The collectively held and circulated memory-form of events, often carried throug
 
 Social memory is one of the main bridges between consequence and future behavior.
 
-## Symbolic Grammar
-The full archetypal language used by YWE to interpret patterns into meaningful structures.
+## State Identity
+The deterministic identity of one complete state value.
 
-This is why the archetype library matters so much.
-Without symbolic grammar, procedural content collapses toward filler.
+For ASH, state identity is derived from all nine coordinates of the full `F2^9`
+vector. A one-hot named-realm anchor is one complete state used by the WRW
+projection; neither its active Coordinate Index, Ordinal, nor presentation
+order is the State Identity by itself.
+
+`RealmIdentity` is the deprecated type alias for `StateIdentity` in legacy ASH
+records. Within that legacy object, `realm_id` is the deprecated field alias
+for canonical `vertex_id`; it is not an alias for the entire identity record.
+New records use `StateIdentity` or `state_identity` and expose `vertex_id`.
+Neither deprecated alias defines a profile-level Realm.
+
+## Symbolic Grammar
+The canonical archetypal language by which ASH-derived patterns carry meaning
+into deterministic YWE interpretation.
+
+The ASH Cosmological Model owns symbolic-grammar meaning. YWE owns the contracts
+that consume and route that meaning; the ASH Pattern System component validates
+and stabilizes the operations; WRW specializes outputs into game content. A
+feature engine, game profile, or host must not create an independent symbolic
+grammar authority.
 
 ## Temporary Narrative Environment
 A generated experiential space used for visions, trials, prophecy chambers, memory descent spaces, or other bounded narrative manifestations.
@@ -572,6 +757,14 @@ Examples include:
 
 Truth function matters because YWE does not want flat exposition delivery.
 
+## Truth and Authority Lattice
+The partial order that identifies who may author each kind of truth and how a
+lower scope may specialize, interpret, or materialize a higher authority.
+
+The lattice combines authority layer, truth scope, mutability, and lawful
+derivation. Repository path prominence is not authority. The normative machine
+form is `data/governance/truth_authority_lattice.json`.
+
 ## Visibility Class
 A category describing who can perceive, access, or circulate a given myth, prophecy, perception variant, or related state.
 
@@ -584,30 +777,52 @@ creation.
 White Wolf is associated with illumination, revelation, knowledge, and truth exposure.
 It is not a morality marker.
 
-## Wolf Alignment
-The cumulative relationship between the player and the informational pressures represented by White Wolf and Dark Wolf.
-
-Wolf alignment only accumulates.
-It does not subtract.
-The two tracks are not moral opposites, and the healthiest target state is
-balance rather than domination of one over the other.
-
 ## Wolf Manifestation
 An event, vision, appearance, combat aid, omen, or presence in which one or both wolves become experientially active.
 
 The wolves cannot die permanently, may lose coherence temporarily, and should
 never be reduced to ordinary boss encounters.
 
+## Wolf Resonance
+The canonical two-value, non-moral relationship between a subject and the
+informational pressures represented by White Wolf and Dark Wolf.
+
+Both values accumulate independently, both may increase from one event, and
+neither is subtracted. Balance is a consequence target, not a requirement that
+the values be equal after every event. `wolf_alignment` is the deprecated
+compatibility field; `dual_variable_alignment` is a compatibility model name.
+All three names resolve to one canonical resonance state. Readers may accept
+the deprecated alias in legacy records; writers use `wolf_resonance`. If both
+fields occur, their White Wolf and Dark Wolf values must be identical, and a
+conflict is invalid.
+
 ## World Actor
 A player who has progressed far enough that their identity and actions have meaningful influence on larger collective or systemic conditions.
 
+## WRW Reference Profile
+The Where Ravens Wait: Eternal Reckoning game- and narrative-specific
+specialization of YWE contracts.
+
+It owns named story canon, characters, quests, locations, dialogue, campaign
+rules, and profile-specific manifestations. It may demonstrate and specialize
+YWE Core but cannot override ASH or Core or make WRW-specific identities
+universal requirements.
+
 ## Worldstate
-The current persistent state of the world across relevant domains such as factions, sites, NPC conditions, myth seeds, prophecy weights, and local conditions.
+The current mutable, persistent state for an explicitly declared scope, derived
+by folding accepted append-only history under YWE state contracts.
+
+Worldstate may include faction, site, NPC, myth, prophecy, location, branch, or
+shared-world conditions. It changes within Ontology; it does not
+change what the ontology permits to exist. Player perception is a derived view
+of state, not an objective worldstate mutation.
 
 ## Worldstate Delta
 A structured record of what changed after meaningful resolution.
 
-This is the persistence spine of consequence.
+This is the persistence spine of consequence. An accepted delta is appended to
+event history. A later compensating delta may reverse a reversible current-state
+effect without erasing the original record.
 
 ## Yggdrasil
 The symbolic and real connective architecture through which the realms are
@@ -618,10 +833,19 @@ It is part of the lawful connective structure of existence, and the wolves tend
 its roots to preserve balance.
 
 ## YWE
-Short for **Yggdrasil World Engine**, the code-agnostic cosmology-driven narrative simulation engine being designed in this project.
+The canonical initialism and presentation alias for **Yggdrasil World Engine**.
 
-YWE is not a rendering engine.
-It is a meaning, consequence, myth, prophecy, and narrative simulation engine.
+It does not name Where Ravens Wait: Eternal Reckoning, a host renderer, or an
+independent ASH authority.
+
+## YWE Core
+The mandatory setting-neutral and platform-neutral contract layer of the
+Yggdrasil World Engine.
+
+YWE Core defines truth boundaries, deterministic state and delta behavior,
+provenance, diagnostics, engine interfaces, and extension points required of
+every conforming implementation. It may be tested with WRW fixtures, but it
+must not require WRW-specific identities, stories, locations, or endings.
 
 ---
 

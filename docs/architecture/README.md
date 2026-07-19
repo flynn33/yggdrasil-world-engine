@@ -13,7 +13,7 @@ Required first-read authority contracts:
 - `cosmology_framework_extensibility_contract.md` -- Engine cosmology as structural framework, not fixed setting bible.
 - `ash_upstream_authority_contract.md` -- Historical packet-spine authority contract, preserved as superseded component evidence where necessary.
 
-Source-truth and Twin Wolf alignment contracts:
+Source-truth and Twin Wolf resonance contracts:
 
 - `twin_wolf_companion_canon_contract.md` -- White Wolf and Dark Wolf as complementary non-moral embodied companions.
 - `dual_variable_alignment_model_contract.md` -- Non-moral dual-variable alignment where both variables can grow through the same event.
@@ -108,7 +108,7 @@ Historical acceptance-marker note: earlier docs said "ASH defines upstream mathe
 Before applying downstream architecture guidance, keep the original repository
 baseline in view:
 
-- `../master_specification/YWE_MASTER_SPECIFICATION.md` -- foundational engine-first design and canonical cosmology baseline
+- `../master_specification/YWE_MASTER_SPECIFICATION.md` -- informative WRW-backed mixed-scope composite; focused architecture and canon sources remain authoritative
 - `../../docs/project/repository_map.md` -- repository structure and scaffolding baseline paired with the master specification
 
 ## Core Engines
@@ -198,7 +198,7 @@ flowchart LR
 ```
 
 The Phase 14 Ability / Power Engine consumes the accepted Phase 9-12 surfaces
-and the source-truth/Twin Wolf alignment gate. It does not imply a completed
+and the source-truth/Twin Wolf resonance gate. It does not imply a completed
 Phase 13 feature package; Phase 13 remains deferred until separately accepted.
 
 Phase 9 branch-reality dependency flow:

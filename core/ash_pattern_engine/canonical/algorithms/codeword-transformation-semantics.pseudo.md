@@ -23,7 +23,8 @@ where `⊕` denotes coordinate-wise XOR (addition in F2).
 ## State space
 
 - The state space is **F2^9** — the set of all 9-bit binary vectors.
-- There are **512 states** (vertices / realms) in the state space.
+- There are **512 states** (vertices) in the state space; profile-level Realms
+  are named semantic identities and do not rename all ASH states.
 - Each state is a full 9-bit vector `(b0, b1, b2, b3, b4, b5, b6, b7, b8)` where each `bi ∈ F2`.
 - No coordinate is structurally privileged over any other at the foundational transformation level.
 

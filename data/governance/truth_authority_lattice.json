@@ -1,0 +1,449 @@
+{
+  "schema_ref": "data/schemas/truth_authority_lattice_schema.json",
+  "artifact_type": "ywe_truth_authority_lattice",
+  "artifact_version": "1.0.0",
+  "repository_baseline": "2.0.23",
+  "status": "canonical",
+  "authority_contract_ref": "docs/architecture/truth_authority_lattice.md",
+  "requirement_ids": [
+    "YWE-REQ-0009",
+    "YWE-REQ-0010",
+    "YWE-REQ-0014",
+    "YWE-REQ-0015",
+    "YWE-REQ-0016"
+  ],
+  "nodes": [
+    {
+      "node_id": "ash_cosmological_model",
+      "node_kind": "authority",
+      "authority_scope": "ash_dependency_material",
+      "mutability": "governance_revision_only",
+      "orthogonal": false,
+      "owns": [
+        "cosmological_and_mathematical_foundation",
+        "base_ontology_meaning",
+        "axioms_and_existence_potential",
+        "pattern_vector_meaning",
+        "branching_foundations",
+        "symbolic_grammar_meaning"
+      ],
+      "writable_truth_scopes": [
+        "base_world_ontology"
+      ],
+      "forbidden_override_targets": []
+    },
+    {
+      "node_id": "ywe_core",
+      "node_kind": "authority",
+      "authority_scope": "ywe_core",
+      "mutability": "governance_revision_only",
+      "orthogonal": false,
+      "owns": [
+        "engine_agnostic_contracts",
+        "truth_scope_rules",
+        "runtime_state_and_delta_rules",
+        "deterministic_interpretation",
+        "provenance_and_diagnostics",
+        "extension_and_host_boundaries"
+      ],
+      "writable_truth_scopes": [
+        "ywe_normative_contract",
+        "diagnostic_noop"
+      ],
+      "forbidden_override_targets": [
+        "ash_cosmological_model"
+      ]
+    },
+    {
+      "node_id": "ywe_extension_profile",
+      "node_kind": "authority",
+      "authority_scope": "ywe_extension_profile",
+      "mutability": "governance_revision_only",
+      "orthogonal": false,
+      "owns": [
+        "optional_setting_neutral_capability_contracts"
+      ],
+      "writable_truth_scopes": [
+        "extension_profile_contract"
+      ],
+      "forbidden_override_targets": [
+        "ash_cosmological_model",
+        "ywe_core"
+      ]
+    },
+    {
+      "node_id": "wrw_reference_profile",
+      "node_kind": "authority",
+      "authority_scope": "wrw_reference_profile",
+      "mutability": "governance_revision_only",
+      "orthogonal": false,
+      "owns": [
+        "wrw_canon",
+        "named_game_content",
+        "campaign_and_profile_specializations"
+      ],
+      "writable_truth_scopes": [
+        "wrw_reference_canon"
+      ],
+      "forbidden_override_targets": [
+        "ash_cosmological_model",
+        "ywe_core",
+        "ywe_extension_profile"
+      ]
+    },
+    {
+      "node_id": "shared_worldstate",
+      "node_kind": "state",
+      "authority_scope": "ywe_core",
+      "mutability": "append_only_transition",
+      "orthogonal": false,
+      "owns": [
+        "committed_shared_world_facts"
+      ],
+      "writable_truth_scopes": [
+        "shared_worldstate"
+      ],
+      "forbidden_override_targets": [
+        "ash_cosmological_model",
+        "ywe_core",
+        "ywe_extension_profile",
+        "wrw_reference_profile"
+      ]
+    },
+    {
+      "node_id": "branch_local_state",
+      "node_kind": "state",
+      "authority_scope": "ywe_core",
+      "mutability": "append_only_transition",
+      "orthogonal": false,
+      "owns": [
+        "committed_leaf_branch_facts"
+      ],
+      "writable_truth_scopes": [
+        "leaf_branch_state"
+      ],
+      "forbidden_override_targets": [
+        "ash_cosmological_model",
+        "ywe_core",
+        "ywe_extension_profile",
+        "wrw_reference_profile",
+        "shared_worldstate"
+      ]
+    },
+    {
+      "node_id": "player_local_state",
+      "node_kind": "state",
+      "authority_scope": "ywe_core",
+      "mutability": "append_only_transition",
+      "orthogonal": false,
+      "owns": [
+        "committed_player_local_facts"
+      ],
+      "writable_truth_scopes": [
+        "player_state"
+      ],
+      "forbidden_override_targets": [
+        "ash_cosmological_model",
+        "ywe_core",
+        "ywe_extension_profile",
+        "wrw_reference_profile",
+        "shared_worldstate",
+        "branch_local_state"
+      ]
+    },
+    {
+      "node_id": "perception_social_interpretation",
+      "node_kind": "interpretive",
+      "authority_scope": "cross_scope",
+      "mutability": "derived_view",
+      "orthogonal": false,
+      "owns": [
+        "player_perception",
+        "mythic_interpretation",
+        "prophetic_pressure",
+        "faction_claim"
+      ],
+      "writable_truth_scopes": [
+        "player_perception",
+        "mythic_interpretation",
+        "prophetic_pressure",
+        "faction_claim"
+      ],
+      "forbidden_override_targets": [
+        "ash_cosmological_model",
+        "ywe_core",
+        "ywe_extension_profile",
+        "wrw_reference_profile",
+        "shared_worldstate",
+        "branch_local_state",
+        "player_local_state"
+      ]
+    },
+    {
+      "node_id": "host_materialization",
+      "node_kind": "materialization",
+      "authority_scope": "later_release_work",
+      "mutability": "derived_view",
+      "orthogonal": false,
+      "owns": [
+        "rendering_input_storage_network_and_execution_realization"
+      ],
+      "writable_truth_scopes": [
+        "host_materialization"
+      ],
+      "forbidden_override_targets": [
+        "ash_cosmological_model",
+        "ywe_core",
+        "ywe_extension_profile",
+        "wrw_reference_profile",
+        "shared_worldstate",
+        "branch_local_state",
+        "player_local_state",
+        "perception_social_interpretation"
+      ]
+    },
+    {
+      "node_id": "forsetti_lifecycle_governance",
+      "node_kind": "lifecycle_governance",
+      "authority_scope": "governance_validation",
+      "mutability": "governance_revision_only",
+      "orthogonal": true,
+      "owns": [
+        "activation",
+        "module_lifecycle",
+        "external_execution_negotiation"
+      ],
+      "writable_truth_scopes": [],
+      "forbidden_override_targets": [
+        "ash_cosmological_model",
+        "ywe_core",
+        "ywe_extension_profile",
+        "wrw_reference_profile",
+        "shared_worldstate",
+        "branch_local_state",
+        "player_local_state",
+        "perception_social_interpretation"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "source_node": "ash_cosmological_model",
+      "target_node": "ywe_core",
+      "relation": "constrains"
+    },
+    {
+      "source_node": "ywe_core",
+      "target_node": "ywe_extension_profile",
+      "relation": "specializes"
+    },
+    {
+      "source_node": "ywe_core",
+      "target_node": "wrw_reference_profile",
+      "relation": "specializes"
+    },
+    {
+      "source_node": "ywe_extension_profile",
+      "target_node": "wrw_reference_profile",
+      "relation": "specializes"
+    },
+    {
+      "source_node": "ywe_core",
+      "target_node": "shared_worldstate",
+      "relation": "records_within"
+    },
+    {
+      "source_node": "ywe_core",
+      "target_node": "branch_local_state",
+      "relation": "records_within"
+    },
+    {
+      "source_node": "ywe_core",
+      "target_node": "player_local_state",
+      "relation": "records_within"
+    },
+    {
+      "source_node": "shared_worldstate",
+      "target_node": "perception_social_interpretation",
+      "relation": "projects_to"
+    },
+    {
+      "source_node": "branch_local_state",
+      "target_node": "perception_social_interpretation",
+      "relation": "projects_to"
+    },
+    {
+      "source_node": "player_local_state",
+      "target_node": "perception_social_interpretation",
+      "relation": "projects_to"
+    },
+    {
+      "source_node": "wrw_reference_profile",
+      "target_node": "perception_social_interpretation",
+      "relation": "projects_to"
+    },
+    {
+      "source_node": "shared_worldstate",
+      "target_node": "host_materialization",
+      "relation": "materializes"
+    },
+    {
+      "source_node": "branch_local_state",
+      "target_node": "host_materialization",
+      "relation": "materializes"
+    },
+    {
+      "source_node": "player_local_state",
+      "target_node": "host_materialization",
+      "relation": "materializes"
+    },
+    {
+      "source_node": "perception_social_interpretation",
+      "target_node": "host_materialization",
+      "relation": "materializes"
+    },
+    {
+      "source_node": "forsetti_lifecycle_governance",
+      "target_node": "ywe_core",
+      "relation": "governs_activation"
+    },
+    {
+      "source_node": "forsetti_lifecycle_governance",
+      "target_node": "ywe_extension_profile",
+      "relation": "governs_activation"
+    },
+    {
+      "source_node": "forsetti_lifecycle_governance",
+      "target_node": "wrw_reference_profile",
+      "relation": "governs_activation"
+    }
+  ],
+  "truth_scopes": [
+    {
+      "scope_id": "base_world_ontology",
+      "mutability": "immutable_runtime",
+      "record_node": "ash_cosmological_model",
+      "change_mechanism": "governance_controlled_dependency_revision",
+      "objective_state": true
+    },
+    {
+      "scope_id": "ywe_normative_contract",
+      "mutability": "immutable_runtime",
+      "record_node": "ywe_core",
+      "change_mechanism": "reviewed_governance_revision_with_rationale",
+      "objective_state": true
+    },
+    {
+      "scope_id": "extension_profile_contract",
+      "mutability": "immutable_runtime",
+      "record_node": "ywe_extension_profile",
+      "change_mechanism": "reviewed_extension_profile_revision",
+      "objective_state": true
+    },
+    {
+      "scope_id": "wrw_reference_canon",
+      "mutability": "immutable_runtime",
+      "record_node": "wrw_reference_profile",
+      "change_mechanism": "reviewed_profile_canon_revision",
+      "objective_state": true
+    },
+    {
+      "scope_id": "shared_worldstate",
+      "mutability": "mutable_scoped_state",
+      "record_node": "shared_worldstate",
+      "change_mechanism": "accepted_append_only_worldstate_delta",
+      "objective_state": true
+    },
+    {
+      "scope_id": "leaf_branch_state",
+      "mutability": "mutable_scoped_state",
+      "record_node": "branch_local_state",
+      "change_mechanism": "accepted_branch_event_and_append_only_delta",
+      "objective_state": true
+    },
+    {
+      "scope_id": "player_state",
+      "mutability": "mutable_scoped_state",
+      "record_node": "player_local_state",
+      "change_mechanism": "accepted_player_state_update_packet",
+      "objective_state": true
+    },
+    {
+      "scope_id": "player_perception",
+      "mutability": "derived_view",
+      "record_node": "perception_social_interpretation",
+      "change_mechanism": "recompute_overlay_from_authoritative_state",
+      "objective_state": false
+    },
+    {
+      "scope_id": "mythic_interpretation",
+      "mutability": "derived_view",
+      "record_node": "perception_social_interpretation",
+      "change_mechanism": "evidence_linked_interpretation",
+      "objective_state": false
+    },
+    {
+      "scope_id": "prophetic_pressure",
+      "mutability": "derived_view",
+      "record_node": "perception_social_interpretation",
+      "change_mechanism": "weighted_future_attractor_update",
+      "objective_state": false
+    },
+    {
+      "scope_id": "faction_claim",
+      "mutability": "derived_view",
+      "record_node": "perception_social_interpretation",
+      "change_mechanism": "source_and_visibility_scoped_claim",
+      "objective_state": false
+    },
+    {
+      "scope_id": "host_materialization",
+      "mutability": "derived_view",
+      "record_node": "host_materialization",
+      "change_mechanism": "materialize_approved_manifest",
+      "objective_state": false
+    },
+    {
+      "scope_id": "diagnostic_noop",
+      "mutability": "append_only_record",
+      "record_node": "ywe_core",
+      "change_mechanism": "append_diagnostic_evaluation",
+      "objective_state": false
+    }
+  ],
+  "scope_routing": {
+    "ywe_core": {
+      "normative_reach": "all_conforming_ywe_implementations",
+      "must_be_setting_neutral": true,
+      "may_require_wrw_identity": false
+    },
+    "wrw_reference_profile": {
+      "normative_reach": "declared_wrw_profile_conformance",
+      "must_conform_to_ywe_core": true,
+      "may_universalize_profile_content": false
+    }
+  },
+  "ash_dependency": {
+    "dependency_identity_ref": "data/governance/ash_dependency_identity.json",
+    "canonical_source_root": "core/ash_pattern_engine/canonical",
+    "generated_mirror_root": "specs",
+    "canonical_source_exclusions": [
+      "README.md"
+    ],
+    "synchronization_script_ref": "scripts/sync_ash_specifications.py",
+    "synchronization_mode": "normalized_utf8_lf_relative_paths"
+  },
+  "invariants": [
+    "relationships_reference_declared_nodes",
+    "constrains_and_specializes_are_acyclic",
+    "lower_authority_cannot_override_higher_authority",
+    "writes_are_limited_to_declared_truth_scopes",
+    "immutable_ontology_is_not_mutable_worldstate",
+    "event_history_is_append_only",
+    "reversal_appends_a_compensating_delta",
+    "derived_views_do_not_author_objective_state",
+    "wrw_profile_content_is_not_universal_ywe_core",
+    "generated_mirror_cannot_override_canonical_source",
+    "forsetti_lifecycle_governance_is_orthogonal_to_truth_ownership"
+  ]
+}

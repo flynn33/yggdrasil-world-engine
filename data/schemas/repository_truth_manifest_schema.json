@@ -198,11 +198,19 @@
     },
     "quality_governance": {
       "type": "object",
-      "required": ["debt_inventory", "schema_quality_baseline", "deviation_record"],
+      "required": [
+        "debt_inventory",
+        "schema_quality_baseline",
+        "governance_record_authority",
+        "historical_deviation_provenance"
+      ],
       "properties": {
         "debt_inventory": {"const": "data/validation/repository_quality_debt_inventory.json"},
         "schema_quality_baseline": {"const": "data/validation/schema_quality_baseline.json"},
-        "deviation_record": {"const": "conformance/deviation-log.md"}
+        "governance_record_authority": {
+          "const": "data/governance/governance_record_register.json"
+        },
+        "historical_deviation_provenance": {"const": "conformance/deviation-log.md"}
       },
       "additionalProperties": false
     }

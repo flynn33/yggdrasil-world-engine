@@ -17,6 +17,14 @@ CORE_ENGINES = {
     "perception_engine",
 }
 CRITICAL_RULES = {"R001", "R002", "R003", "R004", "R006", "R007", "R008", "R011"}
+WRW_CORE_MARKERS = (
+    "Where Ravens Wait",
+    "White Wolf",
+    "Dark Wolf",
+    "Divine Core",
+    "Wolf resonance",
+    "Wolf alignment",
+)
 
 
 def load_json(path: Path):
@@ -33,6 +41,38 @@ def find_true_flag(value, key: str, pointer=""):
     elif isinstance(value, list):
         for index, child in enumerate(value):
             yield from find_true_flag(child, key, f"{pointer}/{index}")
+
+
+def instruction_invariant_errors(instructions: dict) -> list[str]:
+    """Validate the neutral-Core and WRW-profile invariant partitions."""
+    errors: list[str] = []
+    core = instructions.get("cosmological_invariants")
+    wrw = instructions.get("wrw_reference_profile_invariants")
+    if not isinstance(core, list) or any(not isinstance(item, str) or not item.strip() for item in core):
+        errors.append("yggdrasil-instructions.json cosmological_invariants must be non-empty strings")
+        core = []
+    if not isinstance(wrw, list) or any(not isinstance(item, str) or not item.strip() for item in wrw):
+        errors.append(
+            "yggdrasil-instructions.json wrw_reference_profile_invariants must be non-empty strings"
+        )
+        wrw = []
+    if len(core) < 3:
+        errors.append("yggdrasil-instructions.json must define at least three neutral Core invariants")
+    if len(wrw) < 7:
+        errors.append("yggdrasil-instructions.json must define at least seven WRW profile invariants")
+    if len(core) + len(wrw) < 10:
+        errors.append("yggdrasil-instructions.json must define at least ten partitioned invariants")
+    combined = [*core, *wrw]
+    if len(combined) != len(set(combined)):
+        errors.append("yggdrasil-instructions.json invariant partitions contain duplicate entries")
+    for item in core:
+        markers = [marker for marker in WRW_CORE_MARKERS if marker.casefold() in item.casefold()]
+        if markers:
+            errors.append(
+                "yggdrasil-instructions.json neutral Core invariant contains WRW identity markers: "
+                f"{markers}"
+            )
+    return errors
 
 
 def main() -> int:
@@ -54,6 +94,7 @@ def main() -> int:
         "core_engines",
         "expansion_engines",
         "cosmological_invariants",
+        "wrw_reference_profile_invariants",
     }
     missing = sorted(required_instruction_keys - set(instructions))
     if missing:
@@ -64,8 +105,7 @@ def main() -> int:
         errors.append("yggdrasil-instructions.json must identify the Forsetti framework")
     if len(instructions.get("principles", [])) < 5:
         errors.append("yggdrasil-instructions.json must define at least five principles")
-    if len(instructions.get("cosmological_invariants", [])) < 10:
-        errors.append("yggdrasil-instructions.json must define at least ten cosmological invariants")
+    errors.extend(instruction_invariant_errors(instructions))
 
     layers = instructions.get("architecture", {}).get("layers", [])
     layer_names = [layer.get("name") for layer in layers]

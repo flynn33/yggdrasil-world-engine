@@ -45,7 +45,19 @@ synthesis_laws:
   npc_claim_may_rewrite_shared_world_truth: false
   relationship_change_requires_worldstate_delta_packet_ref: true
   npc_memory_delta_requires_resolution_payload: true
+  npc_memory_history_append_only: true
+  npc_memory_effect_reversal_requires_compensating_delta: true
   append_only_memory: true
+
+history_compatibility:
+  append_only_memory:
+    status: deprecated
+    canonical_rule: npc_memory_history_append_only
+    behavior: exact_semantic_alias
+  interpretation: >
+    NPC memory history is append-only. A reversible current memory effect is
+    changed by appending a provenance-bearing compensating NPCMemoryDelta or
+    WorldstateDeltaPacket; the original memory event remains recorded.
 
 truth_boundaries:
   npc_claim_only:
@@ -80,3 +92,5 @@ validation_markers:
   - diagnostic_ref
   - generation_plan_ref
   - ywe_generation_context_packet_ref
+  - npc_memory_history_append_only
+  - npc_memory_effect_reversal_requires_compensating_delta

@@ -1,0 +1,528 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m1_acceptance_evidence_schema.json",
+  "title": "YWE M1 Milestone Acceptance Evidence",
+  "type": "object",
+  "required": [
+    "schema_ref",
+    "artifact_type",
+    "artifact_version",
+    "milestone_id",
+    "outcome",
+    "recorded_at",
+    "baseline",
+    "repository_state_digest_algorithm",
+    "repository_state_digest",
+    "digest_exclusions",
+    "check_catalog",
+    "validation_runs",
+    "deliverables",
+    "exit_criteria",
+    "debt_closures",
+    "authority_metrics",
+    "diff_review",
+    "math_change_review",
+    "roadmap_transition",
+    "publication_state",
+    "platform_work_authorized",
+    "unresolved_issues"
+  ],
+  "properties": {
+    "schema_ref": {
+      "const": "data/schemas/m1_acceptance_evidence_schema.json"
+    },
+    "artifact_type": {
+      "const": "milestone_acceptance_evidence"
+    },
+    "artifact_version": {
+      "const": "1.0.0"
+    },
+    "milestone_id": {
+      "const": "M1"
+    },
+    "outcome": {
+      "const": "pass"
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "baseline": {
+      "$ref": "#/$defs/baseline"
+    },
+    "repository_state_digest_algorithm": {
+      "const": "sha256_sorted_path_nul_normalized_utf8_lf_sha256_nul"
+    },
+    "repository_state_digest": {
+      "$ref": "#/$defs/sha256"
+    },
+    "digest_exclusions": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        {
+          "const": "data/governance/m1_acceptance_evidence.json"
+        },
+        {
+          "const": "docs/project/M1_CANON_TERMINOLOGY_GOVERNANCE_ACCEPTANCE.md"
+        }
+      ],
+      "items": false
+    },
+    "check_catalog": {
+      "type": "object",
+      "required": [
+        "path",
+        "hash_algorithm",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "const": "data/validation/repository_checks.json"
+        },
+        "hash_algorithm": {
+          "const": "sha256_utf8_lf_normalized"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "validation_runs": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/validation_run"
+            },
+            {
+              "properties": {
+                "context": {
+                  "const": "local"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/validation_run"
+            },
+            {
+              "properties": {
+                "context": {
+                  "const": "pull_request"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "items": false
+    },
+    "deliverables": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "prefixItems": [
+        {"$ref": "#/$defs/m1_d1"},
+        {"$ref": "#/$defs/m1_d2"},
+        {"$ref": "#/$defs/m1_d3"},
+        {"$ref": "#/$defs/m1_d4"},
+        {"$ref": "#/$defs/m1_d5"},
+        {"$ref": "#/$defs/m1_d6"},
+        {"$ref": "#/$defs/m1_d7"},
+        {"$ref": "#/$defs/m1_d8"},
+        {"$ref": "#/$defs/m1_d9"},
+        {"$ref": "#/$defs/m1_d10"}
+      ],
+      "items": false
+    },
+    "exit_criteria": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        {"$ref": "#/$defs/m1_e1"},
+        {"$ref": "#/$defs/m1_e2"},
+        {"$ref": "#/$defs/m1_e3"}
+      ],
+      "items": false
+    },
+    "debt_closures": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/debt_closure"
+      }
+    },
+    "authority_metrics": {
+      "$ref": "#/$defs/authority_metrics"
+    },
+    "diff_review": {
+      "$ref": "#/$defs/diff_review"
+    },
+    "math_change_review": {
+      "$ref": "#/$defs/math_change_review"
+    },
+    "roadmap_transition": {
+      "type": "object",
+      "required": [
+        "completed_milestone",
+        "activated_milestone",
+        "current_milestone"
+      ],
+      "properties": {
+        "completed_milestone": {
+          "const": "M1"
+        },
+        "activated_milestone": {
+          "const": "M2"
+        },
+        "current_milestone": {
+          "const": "M2"
+        }
+      },
+      "additionalProperties": false
+    },
+    "publication_state": {
+      "const": "unreleased"
+    },
+    "platform_work_authorized": {
+      "const": false
+    },
+    "unresolved_issues": {
+      "type": "array",
+      "maxItems": 0,
+      "items": false
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "git_sha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "repository_path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*//)(?!.*(?:^|/)\\.\\.?(?:/|$)).+$"
+    },
+    "baseline": {
+      "type": "object",
+      "required": [
+        "repository_version",
+        "base_ref",
+        "base_sha",
+        "merge_base",
+        "branch"
+      ],
+      "properties": {
+        "repository_version": {
+          "const": "2.0.23"
+        },
+        "base_ref": {
+          "const": "origin/main"
+        },
+        "base_sha": {
+          "$ref": "#/$defs/git_sha"
+        },
+        "merge_base": {
+          "$ref": "#/$defs/git_sha"
+        },
+        "branch": {
+          "const": "governance/m1-canon-terminology"
+        }
+      },
+      "additionalProperties": false
+    },
+    "validation_run": {
+      "type": "object",
+      "required": [
+        "context",
+        "executed_at",
+        "check_count",
+        "passed",
+        "blocking_failures",
+        "advisories",
+        "result_summary",
+        "result_summary_sha256"
+      ],
+      "properties": {
+        "context": {
+          "enum": [
+            "local",
+            "pull_request"
+          ]
+        },
+        "executed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "check_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "passed": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "blocking_failures": {
+          "const": 0
+        },
+        "advisories": {
+          "const": 0
+        },
+        "result_summary": {
+          "type": "string",
+          "minLength": 5
+        },
+        "result_summary_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "judgment": {
+      "type": "object",
+      "required": [
+        "id",
+        "outcome",
+        "evidence_refs"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "outcome": {
+          "const": "pass"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/repository_path"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "m1_d1": {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m1-d1"}}}]},
+    "m1_d2": {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m1-d2"}}}]},
+    "m1_d3": {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m1-d3"}}}]},
+    "m1_d4": {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m1-d4"}}}]},
+    "m1_d5": {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m1-d5"}}}]},
+    "m1_d6": {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m1-d6"}}}]},
+    "m1_d7": {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m1-d7"}}}]},
+    "m1_d8": {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m1-d8"}}}]},
+    "m1_d9": {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m1-d9"}}}]},
+    "m1_d10": {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m1-d10"}}}]},
+    "m1_e1": {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m1-e1"}}}]},
+    "m1_e2": {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m1-e2"}}}]},
+    "m1_e3": {"allOf": [{"$ref": "#/$defs/judgment"}, {"properties": {"id": {"const": "m1-e3"}}}]},
+    "debt_closure": {
+      "type": "object",
+      "required": [
+        "debt_id",
+        "outcome",
+        "evidence_refs"
+      ],
+      "properties": {
+        "debt_id": {
+          "enum": [
+            "QD-PH-dd00c6d30da8",
+            "QD-PH-37cd25fd2cac",
+            "QD-OW-001",
+            "QD-063",
+            "QD-064",
+            "QD-065",
+            "QD-066",
+            "QD-067",
+            "QD-068",
+            "QD-069"
+          ]
+        },
+        "outcome": {
+          "const": "resolved"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/repository_path"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "authority_metrics": {
+      "type": "object",
+      "required": [
+        "requirement_count",
+        "governance_record_count",
+        "term_count",
+        "authority_node_count",
+        "ash_source_file_count",
+        "ash_source_aggregate_sha256"
+      ],
+      "properties": {
+        "requirement_count": {
+          "const": 18
+        },
+        "governance_record_count": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "term_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "authority_node_count": {
+          "const": 10
+        },
+        "ash_source_file_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "ash_source_aggregate_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "diff_review": {
+      "type": "object",
+      "required": [
+        "base_ref",
+        "files_created",
+        "files_patched",
+        "files_deleted",
+        "files_renamed",
+        "m0_acceptance_files_changed",
+        "diff_hash_algorithm",
+        "diff_sha256"
+      ],
+      "properties": {
+        "base_ref": {
+          "const": "origin/main"
+        },
+        "files_created": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "files_patched": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "files_deleted": {
+          "const": 0
+        },
+        "files_renamed": {
+          "const": 0
+        },
+        "m0_acceptance_files_changed": {
+          "const": false
+        },
+        "diff_hash_algorithm": {
+          "const": "sha256_git_diff_binary_excluding_m1_evidence"
+        },
+        "diff_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "math_change_review": {
+      "type": "object",
+      "required": [
+        "note_path",
+        "required_label",
+        "pull_request",
+        "label_observation",
+        "baseline_shape_preserved"
+      ],
+      "properties": {
+        "note_path": {
+          "$ref": "#/$defs/repository_path"
+        },
+        "required_label": {
+          "enum": [
+            "math-reviewed",
+            "human-reviewed",
+            "baseline-approved"
+          ]
+        },
+        "pull_request": {
+          "type": "object",
+          "required": [
+            "repository",
+            "number",
+            "url"
+          ],
+          "properties": {
+            "repository": {
+              "const": "flynn33/yggdrasil-world-engine"
+            },
+            "number": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "url": {
+              "type": "string",
+              "pattern": "^https://github\\.com/flynn33/yggdrasil-world-engine/pull/[1-9][0-9]*$"
+            }
+          },
+          "additionalProperties": false
+        },
+        "label_observation": {
+          "type": "object",
+          "required": [
+            "label",
+            "state",
+            "actor",
+            "observed_at"
+          ],
+          "properties": {
+            "label": {
+              "enum": [
+                "math-reviewed",
+                "human-reviewed",
+                "baseline-approved"
+              ]
+            },
+            "state": {
+              "const": "present"
+            },
+            "actor": {
+              "type": "string",
+              "minLength": 1
+            },
+            "observed_at": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": false
+        },
+        "baseline_shape_preserved": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

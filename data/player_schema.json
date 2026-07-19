@@ -2,10 +2,6 @@
   "origin": "mortal",
   "celestial_memory": "veiled",
   "realm_attunement": {},
-  "wolf_alignment": {
-    "white_wolf": 0,
-    "dark_wolf": 0
-  },
   "bloodline_resonance": {},
   "awakening_fragments": [],
   "ash_provenance": {
@@ -36,13 +32,28 @@
     "morality_system": false,
     "good_evil_axis": false,
     "both_can_increase_from_same_event": true,
-    "preferred_model_name": "dual_variable_alignment",
-    "legacy_field_alias": "wolf_alignment"
+    "canonical_model_name": "wolf_resonance",
+    "preferred_model_name": "wolf_resonance",
+    "compatibility_model_alias": "dual_variable_alignment"
+  },
+  "wolf_alias_policy": {
+    "canonical_field": "wolf_resonance",
+    "canonical_write_target": "wolf_resonance",
+    "deprecated_field_alias": "wolf_alignment",
+    "compatibility_model_alias": "dual_variable_alignment",
+    "legacy_read_behavior": "resolve_as_wolf_resonance",
+    "dual_field_requirement": "white_wolf_and_dark_wolf_values_must_match",
+    "conflict_behavior": "reject_record",
+    "creates_independent_state": false,
+    "morality_axis": false
   },
   "dual_variable_alignment": {
+    "status": "compatibility_model_alias",
+    "canonical_field": "wolf_resonance",
     "model": "non_moral_dual_variable_alignment",
     "both_variables_may_grow_from_same_event": true,
-    "balance_driven_consequences": true
+    "balance_driven_consequences": true,
+    "creates_independent_state": false
   },
   "lineage_resonance": {
     "simulation_level_mechanic": true,

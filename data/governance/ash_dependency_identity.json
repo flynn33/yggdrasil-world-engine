@@ -1,0 +1,155 @@
+{
+  "schema_ref": "data/schemas/ash_dependency_identity_schema.json",
+  "artifact_type": "ash_dependency_identity",
+  "artifact_version": "1.0.0",
+  "repository_baseline": "2.0.23",
+  "dependency_id": "ash_cosmological_model.f2_9.canonical",
+  "symbolic_grammar_owner": "ash_cosmological_model",
+  "consumers": [
+    "yggdrasil_world_engine",
+    "ash_pattern_system"
+  ],
+  "canonical_source_root": "core/ash_pattern_engine/canonical",
+  "mirror_root": "specs",
+  "excluded_source_paths": [
+    "README.md"
+  ],
+  "text_normalization": "utf8_optional_bom_crlf_cr_to_lf_preserve_final_newline",
+  "aggregate_algorithm": "sha256_sorted_relative_path_nul_file_sha256_lf",
+  "canonical_profile": {
+    "field_dimension": 9,
+    "state_count": 512,
+    "codeword_count": 16
+  },
+  "files": [
+    {
+      "relative_path": "algorithms/averaging-operator-semantics.pseudo.md",
+      "sha256": "c5e2b9a6ca20118bbe887eae5d172ead0b9d46e5adb0fc7a68f5682ae4e10c36"
+    },
+    {
+      "relative_path": "algorithms/axiom-evaluation.pseudo.md",
+      "sha256": "0f205842840399aaf08932e20cde34761874a3296b260f139dc6a04df0e707ba"
+    },
+    {
+      "relative_path": "algorithms/branching-semantics.pseudo.md",
+      "sha256": "e8344b2d25b33875986e59e43809af460af25b5e319fa861e2670589083f5c57"
+    },
+    {
+      "relative_path": "algorithms/codeword-transformation-semantics.pseudo.md",
+      "sha256": "80623862ac8dfe72bdecea670f15f4f339c0096da1f63b9058a73458eeedd88e"
+    },
+    {
+      "relative_path": "algorithms/containment-safe-failure-semantics.pseudo.md",
+      "sha256": "83f1a19c1a0f375e02f2044c238786514d64b122ab6ab5a8bda6e6fa307c8256"
+    },
+    {
+      "relative_path": "algorithms/generation-planning.pseudo.md",
+      "sha256": "88d474a4e25e297ef59f28245bc6a0f4cfa375d4173433240d993639d8e30ec1"
+    },
+    {
+      "relative_path": "algorithms/recovery-fallback-semantics.pseudo.md",
+      "sha256": "0fb8a0750acae0fb263cd842e186ff35881f77b8e498a8f11f159a5d2db270b7"
+    },
+    {
+      "relative_path": "algorithms/topology-expansion.pseudo.md",
+      "sha256": "1b6ab5d3d13b678c67f185f2f91a60d0dae7a976dcbb6df2b169efa6d15c9a3d"
+    },
+    {
+      "relative_path": "algorithms/transition-system.pseudo.md",
+      "sha256": "26c456f60fbb5c847714c4a9a49cf8d11ac48ef0a7d0c127da53bd893dd527c2"
+    },
+    {
+      "relative_path": "core/ash-state-space.pseudo.md",
+      "sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+    },
+    {
+      "relative_path": "core/codeword-set.pseudo.md",
+      "sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+    },
+    {
+      "relative_path": "core/realm-identity.pseudo.md",
+      "sha256": "43f274d9c8c1b7269938bf8661c42e91cf020d215683cb6dfa4b340ff975cad5"
+    },
+    {
+      "relative_path": "core/recoverability-semantics.pseudo.md",
+      "sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd"
+    },
+    {
+      "relative_path": "core/state-admissibility.pseudo.md",
+      "sha256": "5d9231331849a6359a8d8e537d0434ee78787bb14efe5da03f60e68ba3c1978e"
+    },
+    {
+      "relative_path": "core/state-validity-diagnostics.pseudo.md",
+      "sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e"
+    },
+    {
+      "relative_path": "core/system-state-classification.pseudo.md",
+      "sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff"
+    },
+    {
+      "relative_path": "interfaces/contracts/artifact-emitter-contract.md",
+      "sha256": "cca1c794405f2d85c80f5de2e1efd6a8f1bc395985a39ebf7ebc6daf64b53243"
+    },
+    {
+      "relative_path": "interfaces/contracts/axiom-evaluator-contract.md",
+      "sha256": "dc2edf80d2ded0b89b31df15416e24c13139988ab6fd38adaa6195921a692faf"
+    },
+    {
+      "relative_path": "interfaces/contracts/diagnostics-module-contract.md",
+      "sha256": "88b8d682fa826f128787e6154151c68b32d677239e17ddf4344a084461554a37"
+    },
+    {
+      "relative_path": "interfaces/contracts/generation-planner-contract.md",
+      "sha256": "09f2a6c99fa4b39484e5c5497103b3e09d274a6ddfda2c97dc9eba5cfd685708"
+    },
+    {
+      "relative_path": "interfaces/contracts/realm-encoder-contract.md",
+      "sha256": "b3fa0deb71ae136c712f402f2b8159b7448ef8756a884369931ab7098bc83fbb"
+    },
+    {
+      "relative_path": "interfaces/contracts/recovery-engine-contract.md",
+      "sha256": "27ffacc6218812b280ed236bf9052ee825e903498365d735bf57ee9cb338955b"
+    },
+    {
+      "relative_path": "interfaces/contracts/state-model-contract.md",
+      "sha256": "02193e701bf4e565ca92dbcea05b7c7420cc0926e0d0c90e9d4bedd163972ab8"
+    },
+    {
+      "relative_path": "interfaces/contracts/topology-generator-contract.md",
+      "sha256": "a408b335ecacff01e38113bcd6cc6089142e40219d521e7081e87406fac11147"
+    },
+    {
+      "relative_path": "interfaces/contracts/transition-registry-contract.md",
+      "sha256": "f123b02c3390253cba5f50a04e9c69e9c20771c6dc7cff5bcdc7a3c85aa6471f"
+    },
+    {
+      "relative_path": "interfaces/diagnostic-schema.md",
+      "sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7"
+    },
+    {
+      "relative_path": "interfaces/rule-id-taxonomy.md",
+      "sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    {
+      "relative_path": "interfaces/semantic-contracts.md",
+      "sha256": "c2b965d3155443d45421542056b1fb2934df00a0d858542aaf26c4bacf4c97d3"
+    },
+    {
+      "relative_path": "registries/fallback-policy-registry.md",
+      "sha256": "b108d6c4127da9ea375899e97c34048ded4ea3a7cb624ef24f18bfda5f8deaaa"
+    },
+    {
+      "relative_path": "verification/conformance-categories.md",
+      "sha256": "979f287e3521a750997814d1bc3a85893433ce885cde6669c919511656799bf2"
+    },
+    {
+      "relative_path": "verification/implementation-acceptance.md",
+      "sha256": "7d26c54bca61f92fc054b2b03e65c0634afb66449d5d100dc254ea47ac5f4028"
+    },
+    {
+      "relative_path": "verification/invariant-spec.md",
+      "sha256": "2b7dbd52b539810b3f957ed23bcbcd7fffd068b3f01ea43f24b51a0e8f98866b"
+    }
+  ],
+  "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb"
+}

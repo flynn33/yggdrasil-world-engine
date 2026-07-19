@@ -3,7 +3,7 @@ status: canonical_phase_11_contract
 system: worldstate_delta_rules
 
 authority_stack:
-  game_layer: "Where Ravens Wait: Eternal Reckoning"
+  profile_layer: "profile_supplied"
   engine_layer: "Yggdrasil World Engine"
   foundation: "ASH Cosmological Model"
   stability_component: "ASH Pattern System"
@@ -64,6 +64,26 @@ location_mutation_rule: >
   condition, threshold status, plane pressure, residue, or activation only
   through an accepted WorldstateDeltaPacket or explicit DiagnosticNoOp.
 
+history_and_reversal_semantics:
+  event_history:
+    mutability: append_only
+    accepted_records_are_immutable: true
+    deletion_or_in_place_edit_allowed: false
+  current_state_effects:
+    derived_by: deterministic_fold_of_accepted_history
+    may_be_reversible: true
+    reversibility_requires_domain_authorization: true
+  reversal:
+    canonical_operation: append_compensating_worldstate_delta
+    requires_provenance: true
+    preserves_original_event: true
+    may_reorder_history: false
+  compatibility_aliases:
+    reversals_require_new_worldstate_delta:
+      status: deprecated
+      canonical_rule: reversal_appends_compensating_worldstate_delta
+      behavior: exact_semantic_alias
+
 persistence_rules:
   - meaningful_resolution_emits_worldstate_delta_or_DiagnosticNoOp
   - accepted_worldstate_delta_requires_source_ash_refs
@@ -72,6 +92,11 @@ persistence_rules:
   - accepted_worldstate_delta_requires_player_runtime_state_ref
   - accepted_worldstate_delta_requires_current_leaf_branch_ref
   - location_mutation_refs_must_be_scoped
+  - event_history_is_append_only
+  - accepted_history_records_are_immutable
+  - current_state_effects_may_be_reversible_when_domain_authorizes
+  - reversal_appends_compensating_worldstate_delta
+  - reversal_never_erases_original_event
   - reversals_require_new_worldstate_delta
   - future_generation_bias_is_pressure_not_script
 
@@ -103,3 +128,5 @@ validation_markers:
   - source_ash_refs
   - diagnostic_ref
   - generation_plan_ref
+  - event_history_is_append_only
+  - reversal_appends_compensating_worldstate_delta

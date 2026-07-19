@@ -17,12 +17,43 @@ if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
 import check_machine_readable_artifacts as machine_artifacts
+import check_governance_contracts as governance_contracts
 import check_platform_agnosticism as platform_check
 import check_repository_attribution_policy as attribution_policy
 import check_specification_roadmap as roadmap_check
 import update_version_references as version_updater
 import validate_repository as repository_runner
 import yaml
+
+
+class GovernanceInvariantPartitionTests(unittest.TestCase):
+    def setUp(self):
+        self.instructions = json.loads(
+            (ROOT / "yggdrasil-instructions.json").read_text(encoding="utf-8-sig")
+        )
+
+    def test_live_partition_is_valid(self):
+        self.assertEqual([], governance_contracts.instruction_invariant_errors(self.instructions))
+
+    def test_missing_wrw_partition_is_rejected(self):
+        changed = copy.deepcopy(self.instructions)
+        del changed["wrw_reference_profile_invariants"]
+        errors = governance_contracts.instruction_invariant_errors(changed)
+        self.assertTrue(any("WRW profile invariants" in error for error in errors))
+
+    def test_wrw_identity_in_neutral_core_is_rejected(self):
+        changed = copy.deepcopy(self.instructions)
+        changed["cosmological_invariants"].append("White Wolf is a universal Core identity")
+        errors = governance_contracts.instruction_invariant_errors(changed)
+        self.assertTrue(any("WRW identity markers" in error for error in errors))
+
+    def test_duplicate_partition_entry_is_rejected(self):
+        changed = copy.deepcopy(self.instructions)
+        changed["wrw_reference_profile_invariants"].append(
+            changed["cosmological_invariants"][0]
+        )
+        errors = governance_contracts.instruction_invariant_errors(changed)
+        self.assertTrue(any("duplicate" in error for error in errors))
 
 
 class RoadmapValidationTests(unittest.TestCase):

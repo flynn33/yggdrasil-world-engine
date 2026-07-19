@@ -627,7 +627,7 @@ Require-Properties -Object $playerSchema -Properties @(
   'origin',
   'celestial_memory',
   'realm_attunement',
-  'wolf_alignment',
+  'wolf_resonance',
   'bloodline_resonance',
   'awakening_fragments'
 ) -Label 'data/schemas/player_schema.json'
@@ -641,10 +641,36 @@ if ($playerSchema) {
     $violations.Add("data/schemas/player_schema.json must keep celestial_memory set to 'veiled'.")
   }
 
-  if (-not $playerSchema.PSObject.Properties['wolf_alignment']) {
-    $violations.Add("data/schemas/player_schema.json must define wolf_alignment.")
+  $canonicalWolf = $playerSchema.wolf_resonance
+  $canonicalWolfIsObject = $null -ne $canonicalWolf -and $canonicalWolf -is [PSCustomObject]
+
+  if (-not $playerSchema.PSObject.Properties['wolf_resonance']) {
+    $violations.Add("data/schemas/player_schema.json must define wolf_resonance.")
+  } elseif (-not $canonicalWolfIsObject) {
+    $violations.Add("data/schemas/player_schema.json wolf_resonance must be an object.")
   } else {
-    Require-Properties -Object $playerSchema.wolf_alignment -Properties @('white_wolf', 'dark_wolf') -Label 'data/schemas/player_schema.json wolf_alignment'
+    Require-Properties -Object $canonicalWolf -Properties @('white_wolf', 'dark_wolf') -Label 'data/schemas/player_schema.json wolf_resonance'
+  }
+
+  if ($playerSchema.PSObject.Properties['wolf_alignment']) {
+    $legacyWolf = $playerSchema.wolf_alignment
+    $legacyWolfIsObject = $null -ne $legacyWolf -and $legacyWolf -is [PSCustomObject]
+
+    if (-not $legacyWolfIsObject) {
+      $violations.Add("data/schemas/player_schema.json deprecated input alias wolf_alignment must be an object.")
+    } else {
+      Require-Properties -Object $legacyWolf -Properties @('white_wolf', 'dark_wolf') -Label 'data/schemas/player_schema.json deprecated input alias wolf_alignment'
+
+      foreach ($field in @('white_wolf', 'dark_wolf')) {
+        if ($canonicalWolfIsObject -and $canonicalWolf.PSObject.Properties[$field] -and $legacyWolf.PSObject.Properties[$field]) {
+          $canonicalValue = $canonicalWolf.$field | ConvertTo-Json -Compress
+          $legacyValue = $legacyWolf.$field | ConvertTo-Json -Compress
+          if ($canonicalValue -cne $legacyValue) {
+            $violations.Add("data/schemas/player_schema.json has conflicting wolf_resonance and deprecated wolf_alignment values for '$field'.")
+          }
+        }
+      }
+    }
   }
 }
 

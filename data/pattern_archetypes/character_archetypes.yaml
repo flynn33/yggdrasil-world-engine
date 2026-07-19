@@ -1,9 +1,12 @@
 registry_version: "1.0"
 status: canonical
 authority:
+  owner: ywe_extension_profile
   prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
   schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
   downstream_contract: docs/architecture/ash_downstream_contract.md
+  upstream_constraint_ref: data/governance/ash_dependency_identity.json
+  dependency_identity_inclusion: excluded
 family: character
 records:
   - id: char_seeker

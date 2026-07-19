@@ -76,6 +76,15 @@
       "blocking": true
     },
     {
+      "id": "ash_specification_sync",
+      "name": "ASH canonical source and mirror synchronization",
+      "command": ["{python}", "scripts/sync_ash_specifications.py", "--check", "--root", "{root}"],
+      "groups": ["m1", "ash", "governance", "traceability"],
+      "roadmap_milestones": ["M1", "M3", "M9"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
       "id": "ash_semantic_integrity",
       "name": "ASH canonical semantic integrity",
       "command": ["{python}", ".github/scripts/semantic_integrity_check.py", "{root}"],
@@ -90,6 +99,15 @@
       "command": ["{python}", ".github/scripts/math_integrity_check.py", "{root}"],
       "groups": ["ash"],
       "roadmap_milestones": ["M1", "M3"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
+      "id": "m1_canon_governance",
+      "name": "M1 canon terminology and governance closure",
+      "command": ["{python}", "scripts/check_m1_canon_governance.py", "{root}"],
+      "groups": ["m1", "governance", "status", "traceability", "ash"],
+      "roadmap_milestones": ["M1", "M2", "M10"],
       "contexts": ["always"],
       "blocking": true
     },

@@ -122,7 +122,7 @@ objects or YWE Agnostic Specification releases have been published.
 | Baseline | Status | Primary Surface |
 |---|---|---|
 | `v2.0.23` | Current accepted repository baseline | Repository policy hygiene and accepted Phase 16/17 foundation |
-| `v2.0.15` | Authority-drift guardrail baseline | Source-truth and Twin Wolf alignment |
+| `v2.0.15` | Authority-drift guardrail baseline | Source-truth and Twin Wolf resonance |
 | `v2.0.14` | Phase 12 accepted baseline | Quest, NPC, lore, myth, and social-distribution generation |
 | `v2.0.13` | Phase 11 accepted baseline | Worldstate and location mutation |
 | `v2.0.12` | Phase 10 accepted baseline | Player Runtime State v1 |
@@ -142,13 +142,13 @@ objects or YWE Agnostic Specification releases have been published.
 
 ## Features
 
-### Canonical 9-Realm Cosmology
+### WRW Reference 9-Realm Cosmology
 
-The default nine realms are engine-level structural state layers and simulation
-constants. They are not mandatory fictional map locations at the engine layer.
-Where Ravens Wait: Eternal Reckoning may narratively express them as realms of
-being, while other implementations may rename or reskin them if the structural
-relationships remain stable.
+The WRW reference profile binds nine named realms one-to-one to the immutable
+nine-coordinate structural ontology. YWE Core requires explicit structural
+mappings, not these names as universal fictional locations. Other profiles may
+use different presentation labels while preserving their declared coordinate
+relationships.
 
 1. Divine Core
 2. Celestial
@@ -174,7 +174,7 @@ Prophecies generate future narrative attractors as probability weights, making r
 
 ### Perception Layer
 
-The world does not change -- player perception changes. The same location can be interpreted differently depending on realm attunement, wolf alignment, bloodline resonance, and narrative memory.
+The structural ontology is immutable, while governed shared, branch-local, and player-local worldstate may change through recorded deltas. The perception layer derives player-specific interpretations without rewriting authoritative worldstate, so the same location can be interpreted differently depending on realm attunement, wolf resonance, bloodline resonance, and narrative memory.
 
 ### Cosmic Pattern Engine
 
@@ -340,7 +340,7 @@ sequenceDiagram
 yggdrasil-world-engine/
   core/               -- Core engine specifications
     cosmology_engine/  -- Origin of gravity and reality
-    realm_engine/      -- Fixed cosmological state management
+    realm_engine/      -- Profile realm projection and scoped state management
     ash_pattern_engine/-- ASH pattern detection and generation
     narrative_engine/  -- Player-specific story transformation
     perception_engine/ -- Player perception and realm overlay
@@ -429,7 +429,7 @@ Forsetti governs the engine through **five design principles**:
 | [guide.md](guide.md) | Concise integration rules |
 | [developer-guide.md](developer-guide.md) | Extended guide for engine implementors |
 | [wiki.md](wiki.md) | Comprehensive reference and playbook |
-| [docs/master_specification/YWE_MASTER_SPECIFICATION.md](docs/master_specification/YWE_MASTER_SPECIFICATION.md) | Foundational engine-first design baseline |
+| [docs/master_specification/YWE_MASTER_SPECIFICATION.md](docs/master_specification/YWE_MASTER_SPECIFICATION.md) | Informative WRW-backed mixed-scope composite; route binding claims to focused authorities |
 | [docs/project/repository_map.md](docs/project/repository_map.md) | Repository-structure baseline paired with the master spec |
 | [missing_source_documents.md](missing_source_documents.md) | Synchronized placeholder and missing-source summary |
 | [docs/architecture/authored_override_and_tooling_notes.md](docs/architecture/authored_override_and_tooling_notes.md) | Canonical authored override and tooling guardrail rules |

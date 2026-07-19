@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ash_dependency_identity_schema.json",
+  "title": "YWE ASH Dependency Identity",
+  "type": "object",
+  "required": [
+    "schema_ref",
+    "artifact_type",
+    "artifact_version",
+    "repository_baseline",
+    "dependency_id",
+    "symbolic_grammar_owner",
+    "consumers",
+    "canonical_source_root",
+    "mirror_root",
+    "excluded_source_paths",
+    "text_normalization",
+    "aggregate_algorithm",
+    "canonical_profile",
+    "files",
+    "aggregate_sha256"
+  ],
+  "properties": {
+    "schema_ref": {
+      "const": "data/schemas/ash_dependency_identity_schema.json"
+    },
+    "artifact_type": {
+      "const": "ash_dependency_identity"
+    },
+    "artifact_version": {
+      "const": "1.0.0"
+    },
+    "repository_baseline": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)$"
+    },
+    "dependency_id": {
+      "const": "ash_cosmological_model.f2_9.canonical"
+    },
+    "symbolic_grammar_owner": {
+      "const": "ash_cosmological_model"
+    },
+    "consumers": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        {
+          "const": "yggdrasil_world_engine"
+        },
+        {
+          "const": "ash_pattern_system"
+        }
+      ],
+      "items": false
+    },
+    "canonical_source_root": {
+      "const": "core/ash_pattern_engine/canonical"
+    },
+    "mirror_root": {
+      "const": "specs"
+    },
+    "excluded_source_paths": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "prefixItems": [
+        {
+          "const": "README.md"
+        }
+      ],
+      "items": false
+    },
+    "text_normalization": {
+      "const": "utf8_optional_bom_crlf_cr_to_lf_preserve_final_newline"
+    },
+    "aggregate_algorithm": {
+      "const": "sha256_sorted_relative_path_nul_file_sha256_lf"
+    },
+    "canonical_profile": {
+      "type": "object",
+      "required": [
+        "field_dimension",
+        "state_count",
+        "codeword_count"
+      ],
+      "properties": {
+        "field_dimension": {
+          "const": 9
+        },
+        "state_count": {
+          "const": 512
+        },
+        "codeword_count": {
+          "const": 16
+        }
+      },
+      "additionalProperties": false
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/source_file"
+      }
+    },
+    "aggregate_sha256": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "source_file": {
+      "type": "object",
+      "required": [
+        "relative_path",
+        "sha256"
+      ],
+      "properties": {
+        "relative_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*\\\\).+$"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

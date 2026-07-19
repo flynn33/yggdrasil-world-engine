@@ -21,7 +21,7 @@ Phase 10:
   player agent state
   plane attunement
   bloodline resonance
-  wolf resonance summary
+  profile resonance summary
   player action trace
   player memory record
   player branch history
@@ -52,10 +52,10 @@ QuestNPCLoreLinkage
 ## Downstream Consumers
 
 ```text
-Phase 13 Twin Wolf Companion Engine
+Phase 13 Paired Companion Profile Engine
 Phase 14 Ability / Power Engine
 Phase 15 Quest Reward Resolver
-Phase 16 Ravenfall Gate Vertical Slice
+Phase 16 Reference-Profile Vertical Slice
 Myth engine
 Prophecy engine
 Artifact engine

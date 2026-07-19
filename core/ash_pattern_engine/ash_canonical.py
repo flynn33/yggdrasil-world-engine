@@ -116,13 +116,26 @@ def orbit_id(state: Sequence[int] | str) -> str:
     return orbit(state)[0]
 
 
-def encode_realm_identity(state: Sequence[int] | str) -> dict[str, str]:
+def encode_state_identity(state: Sequence[int] | str) -> dict[str, str]:
+    """Return the canonical identity of one full ASH state-space vertex.
+
+    ``realm_id`` is retained as a lossless compatibility alias of
+    ``vertex_id``. ``orbit_id`` remains supplemental relation metadata; it is
+    not a substitute for the identity of the individual vertex.
+    """
     signature = encode_state_signature(state)
+    vertex_id = f"ash_state_{signature}"
     return {
         "state_signature": signature,
-        "realm_id": f"ash_state_{signature}",
+        "vertex_id": vertex_id,
+        "realm_id": vertex_id,
         "orbit_id": orbit_id(signature),
     }
+
+
+def encode_realm_identity(state: Sequence[int] | str) -> dict[str, str]:
+    """Compatibility alias for :func:`encode_state_identity`."""
+    return encode_state_identity(state)
 
 
 def _known_valid_orbits() -> set[str]:
@@ -197,6 +210,7 @@ def build_cosmic_pattern_snapshot(
         )
 
     diagnostic = diagnose_state(current.bits)
+    state_identity = encode_state_identity(current.bits)
     return {
         "snapshot_type": "CosmicPatternSnapshot",
         "state_space": "F2^9",
@@ -204,7 +218,8 @@ def build_cosmic_pattern_snapshot(
         "normalized_state": current.signature,
         "source_orbit_id": orbit_id(current.bits),
         "active_codeword_sequence": active_codeword_sequence,
-        "realm_identity": encode_realm_identity(current.bits),
+        "state_identity": state_identity,
+        "realm_identity": state_identity,
         "diagnostic": diagnostic,
         "diagnostic_ref": diagnostic,
         "generation_plan_ref": None,
@@ -221,6 +236,8 @@ def plan_generation(
 ) -> dict[str, object]:
     snapshot = build_cosmic_pattern_snapshot(seed_state, transition_codewords)
     plan_ref = f"GenerationPlan:{project_name}:{snapshot['normalized_state']}:{emission_target_kind}"
+    source_state_identity = encode_state_identity(seed_state)
+    destination_state_identity = snapshot["state_identity"]
     return {
         "plan_type": "GenerationPlan",
         "plan_ref": plan_ref,
@@ -233,8 +250,10 @@ def plan_generation(
             "active_codeword_sequence": snapshot["active_codeword_sequence"],
             "diagnostic_ref": snapshot["diagnostic_ref"],
         },
-        "source_realm": encode_realm_identity(seed_state),
-        "destination_realm": snapshot["realm_identity"],
+        "source_state_identity": source_state_identity,
+        "destination_state_identity": destination_state_identity,
+        "source_realm": source_state_identity,
+        "destination_realm": destination_state_identity,
         "axiom_diagnostic": snapshot["diagnostic"],
         "diagnostic_ref": snapshot["diagnostic_ref"],
         "artifacts": [
