@@ -43,7 +43,7 @@ ASH Pattern System is a YWE component.
 
 The Yggdrasil World Engine is a **code-agnostic cosmic narrative simulation engine** designed to generate:
 
-- Infinite quests
+- Open-ended quest generation
 - Mythologies
 - Artifacts
 - Creatures
@@ -74,19 +74,19 @@ products remain deferred until the M10 specification gate is accepted.
 | Indicator | Current state |
 |---|---|
 | Repository baseline | `v2.0.23` |
-| Current milestone | 🟡 `M0` — Establish one truthful baseline (`in_progress`) |
-| Accepted milestone gates | `0 of 11` |
-| Milestone queue | `1` in progress; `10` planned; `0` blocked; `0` deferred |
+| Current milestone | 🟡 `M1` — Normalize canon terminology and governance (`in_progress`) |
+| Accepted milestone gates | `1 of 11` |
+| Milestone queue | `1` in progress; `9` planned; `0` blocked; `0` deferred |
 | Release-ready subsystems | `0 of 15` |
-| Specification publication | `unreleased`; `0` GitHub Release objects; `0` agnostic specification releases (verified `2026-07-18`) |
+| Specification publication | `unreleased`; `0` GitHub Release objects; `0` agnostic specification releases (verified `2026-07-19`) |
 | Platform product work | ⏸️ `deferred`; authorization requires `M10` acceptance |
 
 Milestone indicators: 🟢 `complete` · 🟡 `in_progress` · ⚪ `planned` · 🔴 `blocked` · ⏸️ `deferred`.
 
 | Milestone | Indicator | Status | Dependencies | Objective |
 |---|:---:|---|---|---|
-| M0 | 🟡 | `in_progress` | None | Establish one truthful baseline |
-| M1 | ⚪ | `planned` | M0 | Normalize canon terminology and governance |
+| M0 | 🟢 | `complete` | None | Establish one truthful baseline |
+| M1 | 🟡 | `in_progress` | M0 | Normalize canon terminology and governance |
 | M2 | ⚪ | `planned` | M1 | Build the canonical contract and schema foundation |
 | M3 | ⚪ | `planned` | M2 | Complete core deterministic semantics and the reference oracle |
 | M4 | ⚪ | `planned` | M3 | Complete state persistence branching and multiplayer |
@@ -131,7 +131,7 @@ objects or YWE Agnostic Specification releases have been published.
 
 ## Design Goals
 
-- Infinite narrative generation
+- Open-ended narrative generation within deterministic resource and conformance bounds
 - Cosmology-consistent simulation
 - Player-driven myth formation
 - Modular engine architecture
@@ -160,7 +160,7 @@ relationships remain stable.
 8. Shadow
 9. Void
 
-### Infinite Quest Generation
+### Open-Ended Quest Generation
 
 Quests are not random templates. They are generated from ASH cosmic pattern state through pattern detection and player interpretation.
 
@@ -209,7 +209,7 @@ ASH Model of the Universe
   -> Yggdrasil World Engine
     -> ASH Pattern System component and YWE runtime systems
       -> YWE feature engines
-        -> platform-specific runtime implementations
+        -> post-M10 downstream platform implementations
 ```
 
 Player actions and exploration create YWE context packets and worldstate
@@ -388,9 +388,9 @@ yggdrasil-world-engine/
 3. Review the GitHub wiki: `https://github.com/flynn33/yggdrasil-world-engine/wiki`
 4. Review the repository bootstrap baseline: `docs/project/repository_map.md`
 5. Review the architecture documentation: `docs/architecture/`
-6. Load data schemas and canonical rule artifacts into your host engine.
-7. Implement core engines following interface definitions in `core/*/engine_interface.json`.
-8. Extend with expansion modules following `modules/*/`.
+6. Review data schemas and canonical rule artifacts as platform-neutral specification inputs.
+7. Review core engine interfaces in `core/*/engine_interface.json`.
+8. Review expansion-module contracts under `modules/*/`.
 9. Run `bash scripts/run_checks.sh` before proposing any repository change.
 
 Recommended reading paths:
@@ -416,11 +416,11 @@ diagnostics, generation semantics, or package acceptance gates.
 
 Forsetti governs the engine through **five design principles**:
 
-1. **Native-first** -- Engine implementations use native idioms (C# for Unity, C++ for Unreal, GDScript for Godot)
+1. **Native-first** -- Separately authorized downstream implementations use native host idioms after M10 acceptance
 2. **Contract-first** -- Interfaces are defined in `core/*/engine_interface.json` before any implementation begins
 3. **Boundary-first** -- Engine architecture enforces strict one-way dependencies
 4. **Policy-first** -- Modules declare capabilities; the host evaluates policy before activation
-5. **Host-agnostic modules** -- The core specification is engine-agnostic; engine-specific code lives only in implementation branches
+5. **Host-agnostic modules** -- The core specification is engine-agnostic; platform code belongs only in separate downstream repositories after M10 acceptance
 
 ### Governance Files
 
@@ -431,7 +431,7 @@ Forsetti governs the engine through **five design principles**:
 | [wiki.md](wiki.md) | Comprehensive reference and playbook |
 | [docs/master_specification/YWE_MASTER_SPECIFICATION.md](docs/master_specification/YWE_MASTER_SPECIFICATION.md) | Foundational engine-first design baseline |
 | [docs/project/repository_map.md](docs/project/repository_map.md) | Repository-structure baseline paired with the master spec |
-| [missing_source_documents.md](missing_source_documents.md) | Canonical artifact inventory and pending placeholder tracking |
+| [missing_source_documents.md](missing_source_documents.md) | Synchronized placeholder and missing-source summary |
 | [docs/architecture/authored_override_and_tooling_notes.md](docs/architecture/authored_override_and_tooling_notes.md) | Canonical authored override and tooling guardrail rules |
 | [docs/architecture/realm_truth_boundary_contract.md](docs/architecture/realm_truth_boundary_contract.md) | Canonical boundary contract for realm truth vs interpretive layers |
 | [repository-contribution-policy.json](repository-contribution-policy.json) | Machine-readable contributor automation constraints |

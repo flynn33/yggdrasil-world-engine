@@ -2,26 +2,36 @@
   "artifact_type": "repository_contribution_policy",
   "artifact_version": "2.0.23",
   "owner": "Jim Daley",
+  "legal_owner": "James Daley",
+  "owner_aliases": [
+    "Jim Daley"
+  ],
   "project": "Yggdrasil World Engine",
   "framework": "Forsetti Framework v0.1.0",
   "description": "Machine-readable contribution rules for implementation, documentation, validation, and release work in the Yggdrasil World Engine repository",
   "operating_modes": {
     "spec_repo_mode": {
-      "description": "Working on the main branch code-agnostic specification",
-      "applies_when": "branch == main",
+      "description": "Working on any branch of the YWE agnostic specification repository",
+      "applies_when": "repository == flynn33/yggdrasil-world-engine on any branch",
       "goal": "Preserve specification integrity and ASH cosmological compliance"
     },
     "engine_repo_mode": {
-      "description": "Working on an engine implementation branch",
-      "applies_when": "branch != main",
+      "description": "Working in a separately authorized downstream platform repository after M10 acceptance",
+      "applies_when": "repository != flynn33/yggdrasil-world-engine and M10 == complete and platform_work_authorized == true",
       "goal": "Implement specification using native engine idioms"
     }
+  },
+  "platform_gate": {
+    "authorized_after": "M10",
+    "status": "deferred",
+    "platform_work_authorized": false,
+    "downstream_repository_required": true
   },
   "mandatory_rules": [
     {
       "id": "R001",
       "severity": "MUST",
-      "rule": "Keep main branch code-agnostic -- no engine-specific imports or code",
+      "rule": "Keep every branch in this repository code-agnostic -- no engine-specific imports or code",
       "applies_to": ["spec_repo_mode"]
     },
     {
@@ -89,6 +99,18 @@
       "severity": "MUST",
       "rule": "Do not invent systems outside the master specification",
       "applies_to": ["spec_repo_mode"]
+    },
+    {
+      "id": "R013",
+      "severity": "MUST",
+      "rule": "Do not treat a branch name as authorization for platform implementation",
+      "applies_to": ["spec_repo_mode"]
+    },
+    {
+      "id": "R014",
+      "severity": "MUST",
+      "rule": "Keep concrete platform products in separate downstream repositories and defer them until M10 is accepted",
+      "applies_to": ["spec_repo_mode", "engine_repo_mode"]
     }
   ],
   "required_verification_commands": {

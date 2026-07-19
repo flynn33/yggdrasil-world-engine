@@ -1,0 +1,171 @@
+{
+  "artifact_type": "repository_truth_manifest",
+  "artifact_version": "1.0.0",
+  "schema_ref": "data/schemas/repository_truth_manifest_schema.json",
+  "recorded_on": "2026-07-19",
+  "repository_baseline": {
+    "canonical_source": "VERSION",
+    "value": "2.0.23",
+    "mirrors": [
+      {
+        "path": "version.txt",
+        "value": "2.0.23"
+      }
+    ],
+    "version_workflow": ".github/workflows/versioning.yml"
+  },
+  "roadmap": {
+    "machine_authority": "data/governance/specification_roadmap.json",
+    "human_mirror": "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md",
+    "status_summary": "docs/project/repository_status.md",
+    "current_milestone": "M1"
+  },
+  "publication": {
+    "state": "unreleased",
+    "github_release_objects": 0,
+    "agnostic_specification_releases": 0
+  },
+  "authority_stack": {
+    "game_layer": "Where Ravens Wait: Eternal Reckoning",
+    "engine": "Yggdrasil World Engine",
+    "foundation": "ASH Cosmological Model",
+    "pattern_component": "ASH Pattern System",
+    "pattern_component_responsibilities": [
+      "code resilience",
+      "conformance",
+      "containment",
+      "diagnostics",
+      "patch stability",
+      "pattern integrity",
+      "recovery",
+      "resilience",
+      "update safety"
+    ]
+  },
+  "repository_authority_precedence": [
+    {
+      "precedence": 1,
+      "category": "machine_governance",
+      "paths": [
+        "data/governance/specification_roadmap.json",
+        "data/governance/repository_truth_manifest.json",
+        "data/governance/release_publication_policy.json"
+      ]
+    },
+    {
+      "precedence": 2,
+      "category": "protected_foundation",
+      "paths": [
+        "data/validation/phase_8_9_acceptance_contract.json",
+        "data/validation/branch_reality_guardrail_rules.json"
+      ]
+    },
+    {
+      "precedence": 3,
+      "category": "normative_policy_and_validation",
+      "paths": [
+        "docs/project/artifact_classification_policy.md",
+        "scripts/check_m0_truthful_baseline.py"
+      ]
+    },
+    {
+      "precedence": 4,
+      "category": "human_roadmap_and_status",
+      "paths": [
+        "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md",
+        "docs/project/repository_status.md"
+      ]
+    },
+    {
+      "precedence": 5,
+      "category": "source_routing_and_classification",
+      "paths": [
+        "data/governance/artifact_classification_manifest.json",
+        "docs/project/source_inventory.md",
+        "missing_source_documents.md"
+      ]
+    },
+    {
+      "precedence": 6,
+      "category": "informative_guidance",
+      "paths": [
+        "README.md",
+        "guide.md",
+        "developer-guide.md"
+      ]
+    },
+    {
+      "precedence": 7,
+      "category": "historical_and_provenance",
+      "paths": [
+        "CHANGELOG.md",
+        "SOURCE_AVAILABILITY_MANIFEST.md",
+        "conformance/deviation-log.md"
+      ]
+    }
+  ],
+  "ownership": {
+    "legal_name": "James Daley",
+    "recognized_aliases": [
+      "Jim Daley"
+    ],
+    "commercial_contact": {
+      "email": "contact@ravenforgesoftware.com",
+      "purpose": "commercial_licensing"
+    },
+    "identity_surfaces": [
+      {
+        "path": "CLA.md",
+        "name_form": "recognized_alias"
+      },
+      {
+        "path": "LICENSE",
+        "name_form": "legal"
+      },
+      {
+        "path": "repository-contribution-policy.json",
+        "name_form": "legal_with_alias"
+      },
+      {
+        "path": "yggdrasil-instructions.json",
+        "name_form": "recognized_alias"
+      }
+    ]
+  },
+  "license": {
+    "authority": "LICENSE",
+    "model": "proprietary",
+    "rights_reserved": true,
+    "commercial_use_requires_separate_written_license": true
+  },
+  "publication_policy_ref": "data/governance/release_publication_policy.json",
+  "classification_manifest_ref": "data/governance/artifact_classification_manifest.json",
+  "scope_partition_manifest_ref": "data/governance/scope_partition_manifest.json",
+  "public_promise_register_ref": "data/governance/public_promise_register.json",
+  "quality_debt_inventory_ref": "data/validation/repository_quality_debt_inventory.json",
+  "platform_gate_ref": "data/governance/specification_roadmap.json#/platform_gate",
+  "platform_gate": {
+    "authorized_after": "M10",
+    "status": "deferred",
+    "platform_work_authorized": false,
+    "branch_name_activates_platform_mode": false,
+    "downstream_repository_required": true
+  },
+  "protected_foundation": {
+    "status": "preserved",
+    "change_budget": "zero",
+    "acceptance_authority": "data/validation/phase_8_9_acceptance_contract.json",
+    "guardrail_authority": "data/validation/branch_reality_guardrail_rules.json"
+  },
+  "source_routing": {
+    "classification_authority": "data/governance/artifact_classification_manifest.json",
+    "human_routing_index": "docs/project/source_inventory.md",
+    "current_placeholder_summary": "missing_source_documents.md",
+    "historical_provenance": "SOURCE_AVAILABILITY_MANIFEST.md"
+  },
+  "quality_governance": {
+    "debt_inventory": "data/validation/repository_quality_debt_inventory.json",
+    "schema_quality_baseline": "data/validation/schema_quality_baseline.json",
+    "deviation_record": "conformance/deviation-log.md"
+  }
+}

@@ -1,0 +1,1923 @@
+{
+  "schema_ref": "data/schemas/repository_quality_debt_inventory_schema.json",
+  "artifact_type": "repository_quality_debt_inventory",
+  "artifact_version": "1.0.0",
+  "repository_baseline": "2.0.23",
+  "roadmap_ref": "data/governance/specification_roadmap.json",
+  "classification_manifest_ref": "data/governance/artifact_classification_manifest.json",
+  "ratchet_policy": {
+    "new_debt_requires_registration": true,
+    "resolved_debt_requires_evidence": true,
+    "open_debt_requires_owner_and_milestone": true
+  },
+  "schema_debt_subledger": {
+    "path": "data/validation/schema_quality_baseline.json",
+    "hash_algorithm": "sha256_utf8_lf_normalized",
+    "sha256": "6f4047645d1c0437529a2761d0d9145db8db22d25a66bcc46d042050542f3a84",
+    "category_occurrence_count": 132,
+    "unique_path_count": 119,
+    "counts_by_category": {
+      "declared_schema_missing_id": 31,
+      "annotation_only_schema_documents": 13,
+      "schema_named_json_without_schema_declaration": 49,
+      "unbound_json_examples": 39
+    }
+  },
+  "debts": [
+    {
+      "debt_id": "QD-001",
+      "category": "schema_quality_subledger",
+      "title": "Existing schema-quality debt",
+      "description": "The linked schema-quality baseline ratchets known schema and fixture debt without duplicating its path lists in this inventory.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "data/validation/schema_quality_baseline.json",
+          "locator": "known_debt"
+        }
+      ],
+      "owner_role": "Contract and schema maintainers",
+      "assigned_milestone": "M2",
+      "severity": "high",
+      "ratchet_key": "schema_quality:subledger",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "All four known-debt categories are empty and the M2 fixture catalog and offline schema-resolution gates pass.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-505f98a09bce",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: adapters/godot/activation_policy_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M9.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "adapters/godot/activation_policy_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Adapter and authoring maintainers",
+      "assigned_milestone": "M9",
+      "severity": "medium",
+      "ratchet_key": "placeholder:505f98a09bce",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-7d4b2f24c468",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: adapters/godot/delegation_boundary.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M9.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "adapters/godot/delegation_boundary.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Adapter and authoring maintainers",
+      "assigned_milestone": "M9",
+      "severity": "medium",
+      "ratchet_key": "placeholder:7d4b2f24c468",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-f14aa312cb9c",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: adapters/unity/activation_policy_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M9.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "adapters/unity/activation_policy_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Adapter and authoring maintainers",
+      "assigned_milestone": "M9",
+      "severity": "medium",
+      "ratchet_key": "placeholder:f14aa312cb9c",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-4fab3b7b451a",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: adapters/unity/delegation_boundary.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M9.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "adapters/unity/delegation_boundary.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Adapter and authoring maintainers",
+      "assigned_milestone": "M9",
+      "severity": "medium",
+      "ratchet_key": "placeholder:4fab3b7b451a",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-4ec4aa349920",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: adapters/unreal/activation_policy_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M9.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "adapters/unreal/activation_policy_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Adapter and authoring maintainers",
+      "assigned_milestone": "M9",
+      "severity": "medium",
+      "ratchet_key": "placeholder:4ec4aa349920",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-b1aee4b74d09",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: adapters/unreal/delegation_boundary.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M9.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "adapters/unreal/delegation_boundary.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Adapter and authoring maintainers",
+      "assigned_milestone": "M9",
+      "severity": "medium",
+      "ratchet_key": "placeholder:b1aee4b74d09",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-0e2382efbb3a",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: core/ash_pattern_engine/module_description.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M3.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "core/ash_pattern_engine/module_description.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Core semantics maintainers",
+      "assigned_milestone": "M3",
+      "severity": "medium",
+      "ratchet_key": "placeholder:0e2382efbb3a",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-f44561a21008",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: core/ash_pattern_engine/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M3.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "core/ash_pattern_engine/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Core semantics maintainers",
+      "assigned_milestone": "M3",
+      "severity": "medium",
+      "ratchet_key": "placeholder:f44561a21008",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-ea3e561e2bd6",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: core/cosmology_engine/module_description.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M3.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "core/cosmology_engine/module_description.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Core semantics maintainers",
+      "assigned_milestone": "M3",
+      "severity": "medium",
+      "ratchet_key": "placeholder:ea3e561e2bd6",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-203397f8ec8b",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: core/cosmology_engine/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M3.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "core/cosmology_engine/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Core semantics maintainers",
+      "assigned_milestone": "M3",
+      "severity": "medium",
+      "ratchet_key": "placeholder:203397f8ec8b",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-b1779ee4b306",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: core/narrative_engine/module_description.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M3.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "core/narrative_engine/module_description.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Core semantics maintainers",
+      "assigned_milestone": "M3",
+      "severity": "medium",
+      "ratchet_key": "placeholder:b1779ee4b306",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-d6f260b2a191",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: core/narrative_engine/player_origin_arc_rules.yaml",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M4.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "core/narrative_engine/player_origin_arc_rules.yaml",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "State and synchronization maintainers",
+      "assigned_milestone": "M4",
+      "severity": "medium",
+      "ratchet_key": "placeholder:d6f260b2a191",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-34d905ffbc63",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: core/narrative_engine/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M3.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "core/narrative_engine/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Core semantics maintainers",
+      "assigned_milestone": "M3",
+      "severity": "medium",
+      "ratchet_key": "placeholder:34d905ffbc63",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-fe755f90d742",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: core/perception_engine/module_description.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M3.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "core/perception_engine/module_description.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Core semantics maintainers",
+      "assigned_milestone": "M3",
+      "severity": "medium",
+      "ratchet_key": "placeholder:fe755f90d742",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-8a1b553f2965",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: core/perception_engine/perception_layer_persistence_schema.json",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M4.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "core/perception_engine/perception_layer_persistence_schema.json",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "State and synchronization maintainers",
+      "assigned_milestone": "M4",
+      "severity": "medium",
+      "ratchet_key": "placeholder:8a1b553f2965",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-2b36ea100917",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: core/perception_engine/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M3.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "core/perception_engine/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Core semantics maintainers",
+      "assigned_milestone": "M3",
+      "severity": "medium",
+      "ratchet_key": "placeholder:2b36ea100917",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-70fb761fb72f",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: core/realm_engine/module_description.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M3.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "core/realm_engine/module_description.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Core semantics maintainers",
+      "assigned_milestone": "M3",
+      "severity": "medium",
+      "ratchet_key": "placeholder:70fb761fb72f",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-a530bd384362",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: core/realm_engine/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M3.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "core/realm_engine/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Core semantics maintainers",
+      "assigned_milestone": "M3",
+      "severity": "medium",
+      "ratchet_key": "placeholder:a530bd384362",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-d268639c54c4",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: data/bloodline_registry/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M4.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "data/bloodline_registry/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "State and synchronization maintainers",
+      "assigned_milestone": "M4",
+      "severity": "medium",
+      "ratchet_key": "placeholder:d268639c54c4",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-315c76ece83d",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: data/myth_archetypes/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M5.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "data/myth_archetypes/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Content-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "medium",
+      "ratchet_key": "placeholder:315c76ece83d",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-98b83e320af5",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: data/pattern_archetypes/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M3.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "data/pattern_archetypes/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Core semantics maintainers",
+      "assigned_milestone": "M3",
+      "severity": "medium",
+      "ratchet_key": "placeholder:98b83e320af5",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-9e57acf5fad4",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: data/quest_archetypes/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M5.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "data/quest_archetypes/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Content-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "medium",
+      "ratchet_key": "placeholder:9e57acf5fad4",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-448afb2353c6",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: data/realm_registry/README.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M3.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "data/realm_registry/README.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Core semantics maintainers",
+      "assigned_milestone": "M3",
+      "severity": "medium",
+      "ratchet_key": "placeholder:448afb2353c6",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-b795fa216a01",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: data/realm_registry/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M3.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "data/realm_registry/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Core semantics maintainers",
+      "assigned_milestone": "M3",
+      "severity": "medium",
+      "ratchet_key": "placeholder:b795fa216a01",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-5497aa404f1d",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: data/schemas/perception_layer_persistence_schema.json",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M4.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "data/schemas/perception_layer_persistence_schema.json",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "State and synchronization maintainers",
+      "assigned_milestone": "M4",
+      "severity": "medium",
+      "ratchet_key": "placeholder:5497aa404f1d",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-ef585793944f",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: data/schemas/prophecy_schema_expansion.json",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M3.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "data/schemas/prophecy_schema_expansion.json",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Core semantics maintainers",
+      "assigned_milestone": "M3",
+      "severity": "medium",
+      "ratchet_key": "placeholder:ef585793944f",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-af300d2d8d6e",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: data/schemas/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M2.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "data/schemas/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Contract and schema maintainers",
+      "assigned_milestone": "M2",
+      "severity": "medium",
+      "ratchet_key": "placeholder:af300d2d8d6e",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-9307d896b969",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: docs/architecture/MYTH_EMERGENCE_RULES_NOTES.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M5.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "docs/architecture/MYTH_EMERGENCE_RULES_NOTES.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Content-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "medium",
+      "ratchet_key": "placeholder:9307d896b969",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-d3cbb5542fb6",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: docs/architecture/NPC_SYNTHESIS_NOTES.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M5.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "docs/architecture/NPC_SYNTHESIS_NOTES.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Content-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "medium",
+      "ratchet_key": "placeholder:d3cbb5542fb6",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-a669c6cb06ca",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: docs/architecture/PLAYER_ORIGIN_ARC_NOTES.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M4.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "docs/architecture/PLAYER_ORIGIN_ARC_NOTES.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "State and synchronization maintainers",
+      "assigned_milestone": "M4",
+      "severity": "medium",
+      "ratchet_key": "placeholder:a669c6cb06ca",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-9d63847472d5",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: docs/architecture/PROPHECY_ACTIVATION_RULES_NOTES.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M5.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "docs/architecture/PROPHECY_ACTIVATION_RULES_NOTES.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Content-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "medium",
+      "ratchet_key": "placeholder:9d63847472d5",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-3e2c091e1f11",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: docs/architecture/QUEST_CHAIN_TEMPLATE_NOTES.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M5.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "docs/architecture/QUEST_CHAIN_TEMPLATE_NOTES.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Content-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "medium",
+      "ratchet_key": "placeholder:3e2c091e1f11",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-d4648070d12a",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: docs/architecture/WORLDSTATE_DELTA_RULES_NOTES.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M4.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "docs/architecture/WORLDSTATE_DELTA_RULES_NOTES.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "State and synchronization maintainers",
+      "assigned_milestone": "M4",
+      "severity": "medium",
+      "ratchet_key": "placeholder:d4648070d12a",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-18e23d8fd76e",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: lore/bloodline_history/canon_scope.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M4.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "lore/bloodline_history/canon_scope.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "State and synchronization maintainers",
+      "assigned_milestone": "M4",
+      "severity": "medium",
+      "ratchet_key": "placeholder:18e23d8fd76e",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-fe3c556d6927",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: lore/bloodline_history/source_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M4.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "lore/bloodline_history/source_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "State and synchronization maintainers",
+      "assigned_milestone": "M4",
+      "severity": "medium",
+      "ratchet_key": "placeholder:fe3c556d6927",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-88f47ace7732",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: lore/wolf_canon/canon_scope.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M6.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "lore/wolf_canon/canon_scope.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Player-system maintainers",
+      "assigned_milestone": "M6",
+      "severity": "medium",
+      "ratchet_key": "placeholder:88f47ace7732",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-1f046ddf9c0e",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: lore/wolf_canon/source_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M6.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "lore/wolf_canon/source_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Player-system maintainers",
+      "assigned_milestone": "M6",
+      "severity": "medium",
+      "ratchet_key": "placeholder:1f046ddf9c0e",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-dd00c6d30da8",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: lore/wrw_cosmology/canon_scope.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M1.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "lore/wrw_cosmology/canon_scope.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Canon and governance maintainers",
+      "assigned_milestone": "M1",
+      "severity": "medium",
+      "ratchet_key": "placeholder:dd00c6d30da8",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-37cd25fd2cac",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: lore/wrw_cosmology/source_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M1.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "lore/wrw_cosmology/source_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Canon and governance maintainers",
+      "assigned_milestone": "M1",
+      "severity": "medium",
+      "ratchet_key": "placeholder:37cd25fd2cac",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-61393803b79b",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: modules/artifact_engine/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M5.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "modules/artifact_engine/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Content-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "medium",
+      "ratchet_key": "placeholder:61393803b79b",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-3b4f4967cd04",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: modules/creature_engine/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M5.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "modules/creature_engine/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Content-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "medium",
+      "ratchet_key": "placeholder:3b4f4967cd04",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-1a0e9e8c8cbc",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: modules/myth_engine/myth_emergence_rules.yaml",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M5.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "modules/myth_engine/myth_emergence_rules.yaml",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Content-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "medium",
+      "ratchet_key": "placeholder:1a0e9e8c8cbc",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-a7df30bdd32f",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: modules/myth_engine/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M5.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "modules/myth_engine/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Content-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "medium",
+      "ratchet_key": "placeholder:a7df30bdd32f",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-543eeef7249f",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: modules/prophecy_engine/prophecy_activation_rules.yaml",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M5.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "modules/prophecy_engine/prophecy_activation_rules.yaml",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Content-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "medium",
+      "ratchet_key": "placeholder:543eeef7249f",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-627da1e33d8e",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: modules/prophecy_engine/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M5.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "modules/prophecy_engine/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Content-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "medium",
+      "ratchet_key": "placeholder:627da1e33d8e",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-PH-5a43050666fe",
+      "category": "placeholder_backed_artifact",
+      "title": "Placeholder artifact: modules/quest_engine/schema_notes.md",
+      "description": "The tracked artifact self-declares placeholder status or placeholder semantics and requires source-backed completion at M5.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "modules/quest_engine/schema_notes.md",
+          "locator": "self-declared placeholder marker"
+        }
+      ],
+      "owner_role": "Content-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "medium",
+      "ratchet_key": "placeholder:5a43050666fe",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Replace the placeholder with reviewed source-backed content, remove the marker, and update classification and resolution evidence in the same accepted milestone change.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-OW-001",
+      "category": "roadmap_open_work",
+      "title": "Roadmap open work: Authority and engine-game boundaries",
+      "description": "Resolve remaining authority and terminology contradictions",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/0/open_work/0"
+        }
+      ],
+      "owner_role": "Canon and governance maintainers",
+      "assigned_milestone": "M1",
+      "severity": "high",
+      "ratchet_key": "roadmap_open_work:authority_boundaries",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The M1 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-OW-002",
+      "category": "roadmap_open_work",
+      "title": "Roadmap open work: ASH algebra and reference oracle",
+      "description": "Complete diagnostics recovery topology and emitter traceability",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/1/open_work/0"
+        }
+      ],
+      "owner_role": "ASH mathematics maintainers",
+      "assigned_milestone": "M3",
+      "severity": "high",
+      "ratchet_key": "roadmap_open_work:ash_algebra_oracle",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The M3 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-OW-003",
+      "category": "roadmap_open_work",
+      "title": "Roadmap open work: Cosmology realms and branch reality",
+      "description": "Normalize realm coordinates mutable state and branch merge semantics",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/2/open_work/0"
+        }
+      ],
+      "owner_role": "Core semantics maintainers",
+      "assigned_milestone": "M4",
+      "severity": "high",
+      "ratchet_key": "roadmap_open_work:cosmology_realm_branch",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The M4 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-OW-004",
+      "category": "roadmap_open_work",
+      "title": "Roadmap open work: Player runtime origin and progression",
+      "description": "Finish origin progression persistence replay and multiplayer rules",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/3/open_work/0"
+        }
+      ],
+      "owner_role": "Player-state maintainers",
+      "assigned_milestone": "M4",
+      "severity": "high",
+      "ratchet_key": "roadmap_open_work:player_runtime",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The M4 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-OW-005",
+      "category": "roadmap_open_work",
+      "title": "Roadmap open work: Perception worldstate and location",
+      "description": "Resolve static ontology language and complete perception persistence",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/4/open_work/0"
+        }
+      ],
+      "owner_role": "State and synchronization maintainers",
+      "assigned_milestone": "M4",
+      "severity": "high",
+      "ratchet_key": "roadmap_open_work:perception_worldstate",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The M4 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-OW-006",
+      "category": "roadmap_open_work",
+      "title": "Roadmap open work: Quest NPC and lore generation",
+      "description": "Complete lifecycles semantic validation and neutral fixtures",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/5/open_work/0"
+        }
+      ],
+      "owner_role": "Narrative-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "high",
+      "ratchet_key": "roadmap_open_work:quest_npc_lore",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The M5 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-OW-007",
+      "category": "roadmap_open_work",
+      "title": "Roadmap open work: Artifact and creature engines",
+      "description": "Complete executable schemas lifecycle semantics and conformance",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/6/open_work/0"
+        }
+      ],
+      "owner_role": "Content-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "high",
+      "ratchet_key": "roadmap_open_work:artifact_creature",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The M5 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-OW-008",
+      "category": "roadmap_open_work",
+      "title": "Roadmap open work: Myth and prophecy engines",
+      "description": "Replace placeholders and complete bounded lifecycle semantics",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/7/open_work/0"
+        }
+      ],
+      "owner_role": "Content-system maintainers",
+      "assigned_milestone": "M5",
+      "severity": "high",
+      "ratchet_key": "roadmap_open_work:myth_prophecy",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The M5 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-OW-009",
+      "category": "roadmap_open_work",
+      "title": "Roadmap open work: Ability and power system",
+      "description": "Establish canonical ownership lifecycle capability and integration",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/8/open_work/0"
+        }
+      ],
+      "owner_role": "Player-system maintainers",
+      "assigned_milestone": "M6",
+      "severity": "high",
+      "ratchet_key": "roadmap_open_work:ability_power",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The M6 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-OW-010",
+      "category": "roadmap_open_work",
+      "title": "Roadmap open work: Companion and reward resolution",
+      "description": "Complete Phase 13 and transactional reward semantics",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/9/open_work/0"
+        }
+      ],
+      "owner_role": "Player-system maintainers",
+      "assigned_milestone": "M6",
+      "severity": "high",
+      "ratchet_key": "roadmap_open_work:companion_reward",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The M6 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-OW-011",
+      "category": "roadmap_open_work",
+      "title": "Roadmap open work: Combat and encounter system",
+      "description": "Build the complete Phase 18 normative and conformance package",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/10/open_work/0"
+        }
+      ],
+      "owner_role": "Encounter-system maintainers",
+      "assigned_milestone": "M7",
+      "severity": "high",
+      "ratchet_key": "roadmap_open_work:combat_encounter",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The M7 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-OW-012",
+      "category": "roadmap_open_work",
+      "title": "Roadmap open work: Persistence replay migration and multiplayer",
+      "description": "Define snapshots logs migration replay authority conflicts and merge",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/11/open_work/0"
+        }
+      ],
+      "owner_role": "State and synchronization maintainers",
+      "assigned_milestone": "M4",
+      "severity": "high",
+      "ratchet_key": "roadmap_open_work:persistence_multiplayer",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The M4 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-OW-013",
+      "category": "roadmap_open_work",
+      "title": "Roadmap open work: Environment manifests and society profiles",
+      "description": "Build environment faction civilization economy religion and politics profiles",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/12/open_work/0"
+        }
+      ],
+      "owner_role": "World-system profile maintainers",
+      "assigned_milestone": "M8",
+      "severity": "high",
+      "ratchet_key": "roadmap_open_work:environment_society",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The M8 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-OW-014",
+      "category": "roadmap_open_work",
+      "title": "Roadmap open work: Authoring and generic adapter protocol",
+      "description": "Complete trust security resource capability and mock-adapter contracts",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/13/open_work/0"
+        }
+      ],
+      "owner_role": "Adapter and authoring maintainers",
+      "assigned_milestone": "M9",
+      "severity": "high",
+      "ratchet_key": "roadmap_open_work:authoring_adapter",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The M9 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-OW-015",
+      "category": "roadmap_open_work",
+      "title": "Roadmap open work: Schema conformance and publication governance",
+      "description": "Eliminate debt prove traceability and complete independent review",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/14/open_work/0"
+        }
+      ],
+      "owner_role": "Conformance and release maintainers",
+      "assigned_milestone": "M10",
+      "severity": "high",
+      "ratchet_key": "roadmap_open_work:validation_governance",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The M10 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-063",
+      "category": "terminology_and_authority_normalization",
+      "title": "Immutable ontology versus mutable worldstate wording",
+      "description": "Current surfaces use static-world language alongside lawful worldstate and location mutation contracts; M1 must distinguish immutable ontology from mutable scoped state.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "yggdrasil-instructions.json",
+          "locator": "/cosmological_invariants/8"
+        },
+        {
+          "kind": "repository_path",
+          "path": "docs/architecture/worldstate_location_mutation_v1.md",
+          "locator": "Purpose and truth-scope rules"
+        },
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/milestones/1/deliverables/2"
+        }
+      ],
+      "owner_role": "Canon and governance maintainers",
+      "assigned_milestone": "M1",
+      "severity": "high",
+      "ratchet_key": "m1:ontology_worldstate",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "One canonical distinction between immutable ontology and mutable scoped worldstate is adopted and all normative references agree.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-064",
+      "category": "terminology_and_authority_normalization",
+      "title": "Realm and plane coordinate terminology",
+      "description": "Realm, plane, coordinate, bit position, ordinal, and presentation-order language is not yet normalized into one canonical model.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "wiki.md",
+          "locator": "1. Cosmology Deep Dive > The Nine Realms"
+        },
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/milestones/1/deliverables/3"
+        }
+      ],
+      "owner_role": "Canon and governance maintainers",
+      "assigned_milestone": "M1",
+      "severity": "high",
+      "ratchet_key": "m1:realm_coordinate_terms",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "M1 defines each term, migrates conflicting normative usage, and supplies durable rationale.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-065",
+      "category": "terminology_and_authority_normalization",
+      "title": "Symbolic grammar ownership and ASH dependency identity",
+      "description": "The repository has corrected top-level authority references, but the exact symbolic-grammar owner and pinned ASH dependency identity remain M1 work.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "docs/architecture/ash_upstream_authority_contract.md",
+          "locator": "Supersession Notice"
+        },
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/milestones/1/deliverables/4"
+        }
+      ],
+      "owner_role": "Canon and governance maintainers",
+      "assigned_milestone": "M1",
+      "severity": "high",
+      "ratchet_key": "m1:ash_dependency_identity",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "M1 records one authoritative symbolic-grammar owner and one pinned ASH dependency identity.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-066",
+      "category": "terminology_and_authority_normalization",
+      "title": "Companion resonance and alignment aliases",
+      "description": "Historical wolf_alignment fields coexist with preferred wolf_resonance and dual-variable terminology.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator": "5. ALIGNMENT SYSTEM > Alignment Rules"
+        },
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/milestones/1/deliverables/5"
+        }
+      ],
+      "owner_role": "Canon and governance maintainers",
+      "assigned_milestone": "M1",
+      "severity": "medium",
+      "ratchet_key": "m1:companion_resonance_aliases",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "M1 defines the canonical term and explicit migration aliases without changing Twin Wolf canon.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-067",
+      "category": "terminology_and_authority_normalization",
+      "title": "Append-only history versus reversible effects",
+      "description": "Append-only history requirements coexist with lawful reversals expressed as new state deltas; their semantic boundary needs one normative statement.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+          "locator": "synthesis_laws.append_only_memory"
+        },
+        {
+          "kind": "repository_path",
+          "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+          "locator": "persistence_rules.reversals_require_new_worldstate_delta"
+        },
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/milestones/1/deliverables/6"
+        }
+      ],
+      "owner_role": "Canon and governance maintainers",
+      "assigned_milestone": "M1",
+      "severity": "medium",
+      "ratchet_key": "m1:history_reversible_effects",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "M1 distinguishes immutable event history from reversible current-state effects and updates all normative terms.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-068",
+      "category": "terminology_and_authority_normalization",
+      "title": "YWE Core and WRW content separation",
+      "description": "WRW reference material appears beside YWE Core contracts and needs complete normative scope separation.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+          "locator": "16. DIVINE CORE ENDGAME"
+        },
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/milestones/1/deliverables/8"
+        }
+      ],
+      "owner_role": "Canon and governance maintainers",
+      "assigned_milestone": "M1",
+      "severity": "high",
+      "ratchet_key": "m1:core_wrw_separation",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Every normative YWE Core artifact and WRW reference-profile artifact has an unambiguous scope and no WRW-specific rule becomes universal core truth.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-069",
+      "category": "terminology_and_authority_normalization",
+      "title": "Duplicated ASH specification mirrors",
+      "description": "The specs tree and core/ash_pattern_engine/canonical tree each contain 32 files; 31 matching relative paths are byte-identical, while each tree has one unique file.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "classification_selector",
+          "locator": "specs/**"
+        },
+        {
+          "kind": "classification_selector",
+          "locator": "core/ash_pattern_engine/canonical/**"
+        },
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/milestones/1/deliverables/9"
+        }
+      ],
+      "owner_role": "Canon and governance maintainers",
+      "assigned_milestone": "M1",
+      "severity": "high",
+      "ratchet_key": "m1:ash_mirror_authority",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "M1 declares one authoritative source or generated-mirror relationship and validates synchronization deterministically.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-070",
+      "category": "phase_acceptance_evidence",
+      "title": "Phase 13, 15, 16, and 17 evidence completion",
+      "description": "Historical foundations and recovery-origin labels exist, but M6 requires complete durable acceptance evidence and neutral scenario coverage.",
+      "status": "open",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/milestones/6/deliverables/4"
+        },
+        {
+          "kind": "repository_path",
+          "path": "docs/architecture/phase_16_17_recovery_and_phase_18_unblock_contract.md",
+          "locator": "Purpose"
+        },
+        {
+          "kind": "repository_path",
+          "path": "docs/project/repository_status.md",
+          "locator": "Accepted Phase Sequence"
+        }
+      ],
+      "owner_role": "Player-system maintainers",
+      "assigned_milestone": "M6",
+      "severity": "high",
+      "ratchet_key": "phase_evidence:13_15_16_17",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "M6 acceptance proves Phases 13, 15, 16, and 17 with durable evidence and passes the same contracts for Ravenfall and a neutral scenario.",
+      "resolution_evidence": []
+    },
+    {
+      "debt_id": "QD-071",
+      "category": "historical_release_wording",
+      "title": "Historical release-worded commit subjects",
+      "description": "Immutable Git history contains 23 commit subjects named Release v2.0.1 through Release v2.0.23; current policy classifies them as repository baseline history, not specification publication.",
+      "status": "accepted_exception",
+      "source_refs": [
+        {
+          "kind": "git_history",
+          "commit_query": "git log --all --format=%H%x09%s --regexp-ignore-case --grep=^Release v2\\.0\\."
+        }
+      ],
+      "owner_role": "Repository governance maintainers",
+      "assigned_milestone": "M0",
+      "severity": "medium",
+      "ratchet_key": "historical:release_subjects",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Retain immutable history while current publication authorities consistently state that the specification is unreleased.",
+      "resolution_evidence": [],
+      "accepted_exception_rationale": "Rewriting published Git history would be destructive; the exception is limited to immutable subjects and cannot excuse an active release claim."
+    },
+    {
+      "debt_id": "QD-072",
+      "category": "source_inventory_semantics",
+      "title": "Source inventory semantics and counts",
+      "description": "Legacy source-ingest lists were presented as current placeholder maturity and disagreed with actual artifact states and repository-wide counts.",
+      "status": "resolved",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "docs/project/source_inventory.md",
+          "locator": "Current Placeholder Authority"
+        },
+        {
+          "kind": "repository_path",
+          "path": "missing_source_documents.md",
+          "locator": "Inventory Status Summary"
+        },
+        {
+          "kind": "repository_path",
+          "path": "SOURCE_AVAILABILITY_MANIFEST.md",
+          "locator": "historical source-ingest provenance"
+        }
+      ],
+      "owner_role": "Repository governance maintainers",
+      "assigned_milestone": "M0",
+      "severity": "blocking",
+      "ratchet_key": "m0:source_inventory_semantics",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "All three inventories identify the machine classification authority, expose truthful counts, and preserve legacy lists only as provenance.",
+      "resolution_evidence": [
+        "data/governance/artifact_classification_manifest.json",
+        "docs/project/source_inventory.md",
+        "missing_source_documents.md",
+        "SOURCE_AVAILABILITY_MANIFEST.md"
+      ]
+    },
+    {
+      "debt_id": "QD-073",
+      "category": "platform_branch_policy_conflict",
+      "title": "Platform branch policy conflict",
+      "description": "Public contribution surfaces previously treated non-main branches as platform implementation work despite the closed M10 platform gate.",
+      "status": "resolved",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "CONTRIBUTING.md",
+          "locator": "Branch Model"
+        },
+        {
+          "kind": "repository_path",
+          "path": "repository-contribution-policy.json",
+          "locator": "operating_modes"
+        },
+        {
+          "kind": "repository_path",
+          "path": "developer-guide.md",
+          "locator": "Platform-gate interpretation"
+        },
+        {
+          "kind": "repository_path",
+          "path": "guide.md",
+          "locator": "Platform-gate interpretation"
+        }
+      ],
+      "owner_role": "Repository governance maintainers",
+      "assigned_milestone": "M0",
+      "severity": "blocking",
+      "ratchet_key": "m0:platform_branch_policy_conflict",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Every branch in this repository remains platform-neutral and platform implementation is limited to separate downstream repositories after M10.",
+      "resolution_evidence": [
+        "CONTRIBUTING.md",
+        "repository-contribution-policy.json",
+        "developer-guide.md",
+        "guide.md",
+        "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+        "adapters/unity/README.md",
+        "adapters/unreal/README.md",
+        "adapters/godot/README.md"
+      ]
+    },
+    {
+      "debt_id": "QD-074",
+      "category": "artifact_classification_incomplete",
+      "title": "Exact-one artifact classification missing",
+      "description": "The audited baseline lacked a complete machine-readable exact-one maturity and scope classification for all tracked paths.",
+      "status": "resolved",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/milestones/0/deliverables/4"
+        },
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/milestones/0/deliverables/5"
+        }
+      ],
+      "owner_role": "Repository governance maintainers",
+      "assigned_milestone": "M0",
+      "severity": "blocking",
+      "ratchet_key": "m0:artifact_classification_incomplete",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The classification and scope manifests cover every tracked path exactly once and their validator passes.",
+      "resolution_evidence": [
+        "data/governance/artifact_classification_manifest.json",
+        "data/governance/scope_partition_manifest.json",
+        "data/governance/m0_acceptance_evidence.json"
+      ]
+    },
+    {
+      "debt_id": "QD-075",
+      "category": "public_promise_register_missing",
+      "title": "Public promise register missing",
+      "description": "The audited baseline had no complete register assigning every active public product promise to a milestone or formal exclusion.",
+      "status": "resolved",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/milestones/0/exit_criteria/1"
+        },
+        {
+          "kind": "repository_path",
+          "path": "README.md",
+          "locator": "Overview; Features"
+        }
+      ],
+      "owner_role": "Repository governance maintainers",
+      "assigned_milestone": "M0",
+      "severity": "blocking",
+      "ratchet_key": "m0:public_promise_register_missing",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The promise register has 33 reviewed semantic records, no unresolved disposition, and hash coverage for all reviewed public surfaces.",
+      "resolution_evidence": [
+        "data/governance/public_promise_register.json",
+        "data/schemas/public_promise_register_schema.json"
+      ]
+    },
+    {
+      "debt_id": "QD-076",
+      "category": "general_quality_debt_not_consolidated",
+      "title": "Repository-wide quality debt not consolidated",
+      "description": "The audited baseline ratcheted schema debt but did not consolidate placeholders, roadmap open work, semantic debt, historical exceptions, and M0 findings.",
+      "status": "resolved",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/milestones/0/exit_criteria/2"
+        },
+        {
+          "kind": "repository_path",
+          "path": "data/validation/schema_quality_baseline.json",
+          "locator": "known_debt"
+        }
+      ],
+      "owner_role": "Repository governance maintainers",
+      "assigned_milestone": "M0",
+      "severity": "blocking",
+      "ratchet_key": "m0:general_quality_debt_not_consolidated",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "The general debt inventory contains every required source, exact-set digests, owners, milestones, and resolution criteria.",
+      "resolution_evidence": [
+        "data/validation/repository_quality_debt_inventory.json",
+        "data/schemas/repository_quality_debt_inventory_schema.json"
+      ]
+    },
+    {
+      "debt_id": "QD-077",
+      "category": "publication_semantics",
+      "title": "Publication and baseline semantics ambiguous",
+      "description": "Historical tags and release-worded records required an explicit policy separating baseline maintenance from specification and product publication.",
+      "status": "resolved",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "README.md",
+          "locator": "Specification Roadmap; Current repository baseline"
+        },
+        {
+          "kind": "repository_path",
+          "path": "CHANGELOG.md",
+          "locator": "historical change records"
+        }
+      ],
+      "owner_role": "Repository governance maintainers",
+      "assigned_milestone": "M0",
+      "severity": "blocking",
+      "ratchet_key": "m0:publication_semantics",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Machine and human publication policies identify VERSION as baseline authority, keep publication unreleased, and gate publication and downstream products through M10.",
+      "resolution_evidence": [
+        "data/governance/release_publication_policy.json",
+        "docs/project/release_and_publication_policy.md",
+        "data/governance/repository_truth_manifest.json"
+      ]
+    },
+    {
+      "debt_id": "QD-078",
+      "category": "owner_alias_not_documented",
+      "title": "Legal owner and recognized alias not documented",
+      "description": "Active ownership surfaces use James Daley and Jim Daley without a canonical repository-local alias rule or commercial licensing email.",
+      "status": "resolved",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "LICENSE",
+          "locator": "Ownership; Contact for Commercial Licensing"
+        },
+        {
+          "kind": "repository_path",
+          "path": "README.md",
+          "locator": "License"
+        },
+        {
+          "kind": "repository_path",
+          "path": "CLA.md",
+          "locator": "Grant of License"
+        }
+      ],
+      "owner_role": "Repository governance maintainers",
+      "assigned_milestone": "M0",
+      "severity": "blocking",
+      "ratchet_key": "m0:owner_alias_not_documented",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Repository truth identifies James Daley as legal owner, rightsholder, and licensor; Jim Daley as the same person's recognized alias; and the commercial licensing contact without changing security reporting.",
+      "resolution_evidence": [
+        "data/governance/repository_truth_manifest.json",
+        "LICENSE",
+        "repository-contribution-policy.json"
+      ]
+    },
+    {
+      "debt_id": "QD-079",
+      "category": "m0_acceptance_evidence_empty",
+      "title": "M0 acceptance evidence absent",
+      "description": "The audited roadmap has an empty M0 acceptance_evidence array and cannot transition without real command and diff evidence.",
+      "status": "resolved",
+      "source_refs": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/milestones/0/acceptance_evidence"
+        }
+      ],
+      "owner_role": "Repository governance maintainers",
+      "assigned_milestone": "M0",
+      "severity": "blocking",
+      "ratchet_key": "m0:m0_acceptance_evidence_empty",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Machine-readable and human-readable M0 acceptance evidence contain actual passing results and the roadmap references them before transition.",
+      "resolution_evidence": [
+        "data/governance/m0_acceptance_evidence.json",
+        "docs/project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md"
+      ]
+    },
+    {
+      "debt_id": "QD-080",
+      "category": "superseded_authority_reference",
+      "title": "Active references to superseded authority",
+      "description": "Active flow, master specification, README, and historical flow notes previously treated a superseded ASH Pattern System authority contract as current.",
+      "status": "resolved",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "docs/architecture/ash_upstream_authority_contract.md",
+          "locator": "Supersession Notice"
+        },
+        {
+          "kind": "repository_path",
+          "path": "core/narrative_engine/ash_runtime_generation_flow.yaml",
+          "locator": "authority_contract"
+        },
+        {
+          "kind": "repository_path",
+          "path": "README.md",
+          "locator": "ASH Rebuild Evidence"
+        }
+      ],
+      "owner_role": "Repository governance maintainers",
+      "assigned_milestone": "M0",
+      "severity": "blocking",
+      "ratchet_key": "m0:superseded_authority_reference",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "All active references name the cosmological-model and component contracts as current and retain the former contract only as superseded packet-spine evidence.",
+      "resolution_evidence": [
+        "core/narrative_engine/ash_runtime_generation_flow.yaml",
+        "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+        "README.md",
+        "docs/architecture/ASH_RUNTIME_GENERATION_FLOW_NOTES.md"
+      ]
+    },
+    {
+      "debt_id": "QD-081",
+      "category": "broken_repository_reference",
+      "title": "Broken repository-local path references",
+      "description": "Two active documentation surfaces referenced repository paths that did not exist.",
+      "status": "resolved",
+      "source_refs": [
+        {
+          "kind": "repository_path",
+          "path": "docs/architecture/ash_cosmological_model_source_map.md",
+          "locator": "YWE Target Areas"
+        },
+        {
+          "kind": "repository_path",
+          "path": "governance/math-change-notes/README.md",
+          "locator": "workflow policy reference"
+        }
+      ],
+      "owner_role": "Repository governance maintainers",
+      "assigned_milestone": "M0",
+      "severity": "high",
+      "ratchet_key": "m0:broken_repository_reference",
+      "introduced_baseline": "2.0.23",
+      "resolution_criteria": "Every corrected local reference resolves to the intended current repository authority.",
+      "resolution_evidence": [
+        "docs/architecture/ash_cosmological_model_source_map.md",
+        "governance/math-change-notes/README.md"
+      ]
+    }
+  ],
+  "summary": {
+    "total": 81,
+    "open": 70,
+    "resolved": 10,
+    "accepted_exception": 1,
+    "by_milestone": {
+      "M0": 11,
+      "M1": 10,
+      "M2": 2,
+      "M3": 15,
+      "M4": 12,
+      "M5": 16,
+      "M6": 5,
+      "M7": 1,
+      "M8": 1,
+      "M9": 7,
+      "M10": 1
+    },
+    "placeholder_count": 46,
+    "roadmap_open_work_count": 15,
+    "placeholder_paths_sha256": "88732d2f26350ec8e1b5c24209906d161e7b186e7453111db98a776216f43bef",
+    "roadmap_open_work_sha256": "349bfee43e2b0aefc6971aa191e5bf05c87f3e8eaec21bbd612d6af58129f240"
+  }
+}

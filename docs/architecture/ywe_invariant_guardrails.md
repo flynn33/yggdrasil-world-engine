@@ -78,9 +78,10 @@ or explicit explanations of invalid design patterns:
 - `forsetti.internal.*` remains reserved
 - `ui_theme_mask` remains reserved for the framework
 
-## Branch Guardrails
+## Repository and Downstream Guardrails
 
-- main remains code-agnostic
+- every branch in this repository remains platform-neutral
 - Forsetti implementation files are not vendored here
-- platform APIs do not belong in this branch
+- platform APIs do not belong in this repository
+- concrete host implementations belong in separate downstream repositories only after M10 acceptance and explicit authorization
 - Forsetti governs activation while YWE governs truth

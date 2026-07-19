@@ -4,6 +4,14 @@ All notable changes to the Yggdrasil World Engine are documented here.
 
 ---
 
+## Unreleased
+
+### Changed
+- Establish the M0 truthful-baseline governance authorities and acceptance evidence.
+- Clarify that repository baseline tags and changelog entries are not published specification releases.
+- Keep platform product implementation deferred until the M10 acceptance gate.
+
+---
 
 ## [2.0.23] — 2026-06-28
 

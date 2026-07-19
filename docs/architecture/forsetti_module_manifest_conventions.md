@@ -6,7 +6,7 @@ Status: authored manifest convention baseline
 
 ## Purpose
 
-This document explains how the code-agnostic YWE branch stores Forsetti-ready manifest templates without pretending the Windows host implementation already exists here.
+This document explains how the code-agnostic YWE repository stores Forsetti-ready manifest templates without pretending a host implementation already exists here.
 
 ## Template Locations
 
@@ -28,8 +28,8 @@ The JSON template manifests remain Forsetti-facing planning artifacts. The YAML
 schema defines what a YWE module must be able to declare about authority,
 dependencies, non-delegable truth responsibilities, delegable-compatible
 realization, and suppression conditions. The applied YAML manifests provide the
-canonical YWE declarations for the current module set before a concrete
-implementation branch binds them into host-specific manifests.
+canonical YWE declarations for the current module set before an authorized
+post-M10 downstream repository binds them into host-specific manifests.
 
 ## Naming Rules
 
@@ -54,10 +54,10 @@ implementation branch binds them into host-specific manifests.
 - schema version `1.0`
 - planning module version `0.1.0`
 - planning minimum Forsetti version `0.1.0`
-- empty capability requests until a platform branch chooses concrete bindings
+- empty capability requests until an authorized post-M10 downstream repository chooses concrete bindings
 - applied capability semantics must be sourced from `data/module_capability/manifests/*.yaml`
 - capability semantics should be derived from the canonical module capability manifest schema rather than improvised per host
-- `null` entitlement product IDs unless a host later gates the module
+- `null` entitlement product IDs unless an authorized downstream host later gates the module
 
 ## Reserved Capability Rule
 

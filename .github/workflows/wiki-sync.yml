@@ -17,6 +17,7 @@ on:
       - 'CONTRIBUTING.md'
       - 'README.md'
       - 'CHANGELOG.md'
+      - 'VERSION'
       - 'version.txt'
 
 permissions:
@@ -44,7 +45,7 @@ jobs:
 
       - name: Read version
         id: version
-        run: echo "version=$(cat main-repo/version.txt | tr -d '[:space:]')" >> "$GITHUB_OUTPUT"
+        run: echo "version=$(cat main-repo/VERSION | tr -d '[:space:]')" >> "$GITHUB_OUTPUT"
 
       - name: Sync wiki pages
         run: |

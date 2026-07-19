@@ -1,0 +1,1676 @@
+{
+  "schema_ref": "data/schemas/artifact_classification_manifest_schema.json",
+  "artifact_type": "repository_artifact_classification_manifest",
+  "artifact_version": "1.0.0",
+  "repository_baseline": "2.0.23",
+  "policy_ref": "docs/project/artifact_classification_policy.md",
+  "scope_manifest_ref": "data/governance/scope_partition_manifest.json",
+  "tracked_path_snapshot": {
+    "source": "git_tracked_and_nonignored_untracked",
+    "path_count": 986,
+    "path_digest": "eeb8dd6be84c12413676d5e488cea8c533878fba6dc9f175adcbd569eafc83a9",
+    "digest_algorithm": "sha256_sorted_posix_paths_nul"
+  },
+  "classes": [
+    {
+      "id": "normative",
+      "definition": "Defines a current requirement, contract, schema, rule, policy, validator, or acceptance authority."
+    },
+    {
+      "id": "informative",
+      "definition": "Explains, indexes, navigates, maps, or summarizes without creating a new requirement."
+    },
+    {
+      "id": "example",
+      "definition": "Provides a positive, boundary, rejection, recovery, replay, migration, or reference-profile fixture."
+    },
+    {
+      "id": "historical",
+      "definition": "Preserves chronology, prior acceptance evidence, immutable history, or source provenance."
+    },
+    {
+      "id": "deprecated",
+      "definition": "Remains for compatibility while discouraged in favor of a named migration target."
+    },
+    {
+      "id": "superseded",
+      "definition": "Has been replaced by a named current authority and remains only for provenance."
+    },
+    {
+      "id": "placeholder",
+      "definition": "Self-declares incomplete content and is explicitly routed to a future milestone."
+    }
+  ],
+  "matching_policy": {
+    "path_style": "repository_relative_posix",
+    "case_sensitive": true,
+    "overrides_terminal": true,
+    "fail_on_zero_matches": true,
+    "fail_on_multiple_matches": true,
+    "fail_on_path_snapshot_drift": true
+  },
+  "ordered_rules": [
+    {
+      "priority": 100,
+      "id": "ACR-100",
+      "classification": "example",
+      "include": [
+        "examples/**"
+      ],
+      "exclude": [],
+      "owner_role": "Conformance fixture maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "Repository example fixtures demonstrate behavior without defining their governing contracts.",
+      "authority_role": "supporting"
+    },
+    {
+      "priority": 200,
+      "id": "ACR-200",
+      "classification": "informative",
+      "include": [
+        "**/README.md",
+        "developer-guide.md",
+        "docs/project/repository_map.md",
+        "docs/project/repository_status.md",
+        "docs/project/source_inventory.md",
+        "guide.md",
+        "missing_source_documents.md",
+        "wiki.md"
+      ],
+      "exclude": [
+        "examples/**"
+      ],
+      "owner_role": "Documentation maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "Indexes, navigation files, and explanatory guides summarize current authorities.",
+      "authority_role": "supporting"
+    },
+    {
+      "priority": 900,
+      "id": "ACR-900",
+      "classification": "normative",
+      "include": [
+        "**"
+      ],
+      "exclude": [
+        "**/README.md",
+        "developer-guide.md",
+        "docs/project/repository_map.md",
+        "docs/project/repository_status.md",
+        "docs/project/source_inventory.md",
+        "examples/**",
+        "guide.md",
+        "missing_source_documents.md",
+        "wiki.md"
+      ],
+      "owner_role": "Relevant subsystem maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "Remaining artifacts define current contracts, data, policies, schemas, or validation behavior.",
+      "authority_role": "primary"
+    }
+  ],
+  "overrides": [
+    {
+      "path": "CHANGELOG.md",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "This artifact preserves chronology, prior acceptance evidence, or immutable change provenance.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "SOURCE_AVAILABILITY_MANIFEST.md",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "This artifact preserves chronology, prior acceptance evidence, or immutable change provenance.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "adapters/godot/activation_policy_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Adapter and authoring maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M9.",
+      "future_milestone": "M9",
+      "debt_ref": "QD-PH-505f98a09bce",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "adapters/godot/delegation_boundary.md",
+      "classification": "placeholder",
+      "owner_role": "Adapter and authoring maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M9.",
+      "future_milestone": "M9",
+      "debt_ref": "QD-PH-7d4b2f24c468",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "adapters/unity/activation_policy_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Adapter and authoring maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M9.",
+      "future_milestone": "M9",
+      "debt_ref": "QD-PH-f14aa312cb9c",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "adapters/unity/delegation_boundary.md",
+      "classification": "placeholder",
+      "owner_role": "Adapter and authoring maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M9.",
+      "future_milestone": "M9",
+      "debt_ref": "QD-PH-4fab3b7b451a",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "adapters/unreal/activation_policy_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Adapter and authoring maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M9.",
+      "future_milestone": "M9",
+      "debt_ref": "QD-PH-4ec4aa349920",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "adapters/unreal/delegation_boundary.md",
+      "classification": "placeholder",
+      "owner_role": "Adapter and authoring maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M9.",
+      "future_milestone": "M9",
+      "debt_ref": "QD-PH-b1aee4b74d09",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "conformance/acceptance-judgment.md",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "This artifact preserves chronology, prior acceptance evidence, or immutable change provenance.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "conformance/governance-boot-record.md",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "This artifact preserves chronology, prior acceptance evidence, or immutable change provenance.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "conformance/phase-7-acceptance-audit.md",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "This artifact preserves chronology, prior acceptance evidence, or immutable change provenance.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "conformance/verification-report.md",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "This artifact preserves chronology, prior acceptance evidence, or immutable change provenance.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/README.md",
+      "classification": "informative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/README.md",
+      "rationale": "This index explains the canonical ASH dependency mirror and its authority role.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/algorithms/averaging-operator-semantics.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/averaging-operator-semantics.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/algorithms/axiom-evaluation.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/axiom-evaluation.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/algorithms/branching-semantics.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/branching-semantics.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/algorithms/codeword-transformation-semantics.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/codeword-transformation-semantics.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/algorithms/containment-safe-failure-semantics.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/containment-safe-failure-semantics.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/algorithms/generation-planning.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/generation-planning.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/algorithms/recovery-fallback-semantics.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/recovery-fallback-semantics.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/algorithms/topology-expansion.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/topology-expansion.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/algorithms/transition-system.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/transition-system.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/core/ash-state-space.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/core/ash-state-space.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/core/codeword-set.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/core/codeword-set.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/core/realm-identity.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/core/realm-identity.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/core/recoverability-semantics.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/core/recoverability-semantics.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/core/state-admissibility.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/core/state-admissibility.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/core/state-validity-diagnostics.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/core/state-validity-diagnostics.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/core/system-state-classification.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/core/system-state-classification.pseudo.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/interfaces/contracts/artifact-emitter-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/artifact-emitter-contract.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/interfaces/contracts/axiom-evaluator-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/axiom-evaluator-contract.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/interfaces/contracts/generation-planner-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/generation-planner-contract.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/interfaces/contracts/realm-encoder-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/realm-encoder-contract.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/interfaces/contracts/recovery-engine-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/recovery-engine-contract.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/interfaces/contracts/state-model-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/state-model-contract.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/interfaces/contracts/topology-generator-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/topology-generator-contract.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/interfaces/contracts/transition-registry-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/transition-registry-contract.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/interfaces/semantic-contracts.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/semantic-contracts.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/verification/conformance-categories.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/verification/conformance-categories.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/verification/implementation-acceptance.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/verification/implementation-acceptance.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/canonical/verification/invariant-spec.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/verification/invariant-spec.md",
+      "rationale": "The repository-local canonical ASH surface is the primary semantic authority.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/module_description.md",
+      "classification": "placeholder",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M3.",
+      "future_milestone": "M3",
+      "debt_ref": "QD-PH-0e2382efbb3a",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "core/ash_pattern_engine/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M3.",
+      "future_milestone": "M3",
+      "debt_ref": "QD-PH-f44561a21008",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "core/cosmology_engine/module_description.md",
+      "classification": "placeholder",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M3.",
+      "future_milestone": "M3",
+      "debt_ref": "QD-PH-ea3e561e2bd6",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "core/cosmology_engine/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M3.",
+      "future_milestone": "M3",
+      "debt_ref": "QD-PH-203397f8ec8b",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "core/narrative_engine/module_description.md",
+      "classification": "placeholder",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M3.",
+      "future_milestone": "M3",
+      "debt_ref": "QD-PH-b1779ee4b306",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "core/narrative_engine/player_origin_arc_rules.yaml",
+      "classification": "placeholder",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M4.",
+      "future_milestone": "M4",
+      "debt_ref": "QD-PH-d6f260b2a191",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "core/narrative_engine/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M3.",
+      "future_milestone": "M3",
+      "debt_ref": "QD-PH-34d905ffbc63",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "core/perception_engine/module_description.md",
+      "classification": "placeholder",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M3.",
+      "future_milestone": "M3",
+      "debt_ref": "QD-PH-fe755f90d742",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "core/perception_engine/perception_layer_persistence_schema.json",
+      "classification": "placeholder",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M4.",
+      "future_milestone": "M4",
+      "debt_ref": "QD-PH-8a1b553f2965",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "core/perception_engine/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M3.",
+      "future_milestone": "M3",
+      "debt_ref": "QD-PH-2b36ea100917",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "core/realm_engine/module_description.md",
+      "classification": "placeholder",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M3.",
+      "future_milestone": "M3",
+      "debt_ref": "QD-PH-70fb761fb72f",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "core/realm_engine/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M3.",
+      "future_milestone": "M3",
+      "debt_ref": "QD-PH-a530bd384362",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "data/bloodline_registry/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M4.",
+      "future_milestone": "M4",
+      "debt_ref": "QD-PH-d268639c54c4",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "data/governance/m0_acceptance_evidence.json",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "This immutable record preserves the completed M0 validation outcome without defining requirements or gate logic.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "data/myth_archetypes/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Content-system maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M5.",
+      "future_milestone": "M5",
+      "debt_ref": "QD-PH-315c76ece83d",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "data/pattern_archetypes/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M3.",
+      "future_milestone": "M3",
+      "debt_ref": "QD-PH-98b83e320af5",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "data/quest_archetypes/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Content-system maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M5.",
+      "future_milestone": "M5",
+      "debt_ref": "QD-PH-9e57acf5fad4",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "data/realm/realm_transition_examples.yaml",
+      "classification": "example",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "data/realm/realm_mechanics_rules.yaml",
+      "rationale": "This artifact provides lawful and unlawful transition examples for the governing realm rules.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "data/realm_registry/README.md",
+      "classification": "placeholder",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M3.",
+      "future_milestone": "M3",
+      "debt_ref": "QD-PH-448afb2353c6",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "data/realm_registry/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M3.",
+      "future_milestone": "M3",
+      "debt_ref": "QD-PH-b795fa216a01",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "data/schemas/README.md",
+      "classification": "informative",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "This repository-facing artifact is part of the explicitly reviewed public surface.",
+      "authority_role": "supporting",
+      "secondary_tags": [
+        "public_surface"
+      ]
+    },
+    {
+      "path": "data/schemas/perception_layer_persistence_schema.json",
+      "classification": "placeholder",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M4.",
+      "future_milestone": "M4",
+      "debt_ref": "QD-PH-5497aa404f1d",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "data/schemas/prophecy_schema_expansion.json",
+      "classification": "placeholder",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M3.",
+      "future_milestone": "M3",
+      "debt_ref": "QD-PH-ef585793944f",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "data/schemas/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Contract and schema maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M2.",
+      "future_milestone": "M2",
+      "debt_ref": "QD-PH-af300d2d8d6e",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_V0_2.md",
+      "classification": "deprecated",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
+      "rationale": "The compatibility redirect remains resolvable but directs consumers to the canonical library.",
+      "migration_ref": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "docs/architecture/ASH_RUNTIME_GENERATION_FLOW_NOTES.md",
+      "classification": "superseded",
+      "owner_role": "Narrative-system maintainers",
+      "governing_source": "core/narrative_engine/ash_runtime_generation_flow.yaml",
+      "rationale": "Historical runtime-flow notes have been replaced by the active structured flow contract.",
+      "superseded_by": "core/narrative_engine/ash_runtime_generation_flow.yaml",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "docs/architecture/MYTH_EMERGENCE_RULES_NOTES.md",
+      "classification": "placeholder",
+      "owner_role": "Content-system maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M5.",
+      "future_milestone": "M5",
+      "debt_ref": "QD-PH-9307d896b969",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "docs/architecture/NPC_SYNTHESIS_NOTES.md",
+      "classification": "placeholder",
+      "owner_role": "Content-system maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M5.",
+      "future_milestone": "M5",
+      "debt_ref": "QD-PH-d3cbb5542fb6",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "docs/architecture/PLAYER_ORIGIN_ARC_NOTES.md",
+      "classification": "placeholder",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M4.",
+      "future_milestone": "M4",
+      "debt_ref": "QD-PH-a669c6cb06ca",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "docs/architecture/PROPHECY_ACTIVATION_RULES_NOTES.md",
+      "classification": "placeholder",
+      "owner_role": "Content-system maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M5.",
+      "future_milestone": "M5",
+      "debt_ref": "QD-PH-9d63847472d5",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "docs/architecture/QUEST_CHAIN_TEMPLATE_NOTES.md",
+      "classification": "placeholder",
+      "owner_role": "Content-system maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M5.",
+      "future_milestone": "M5",
+      "debt_ref": "QD-PH-3e2c091e1f11",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "docs/architecture/README.md",
+      "classification": "informative",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "This repository-facing artifact is part of the explicitly reviewed public surface.",
+      "authority_role": "supporting",
+      "secondary_tags": [
+        "public_surface"
+      ]
+    },
+    {
+      "path": "docs/architecture/WORLDSTATE_DELTA_RULES_NOTES.md",
+      "classification": "placeholder",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M4.",
+      "future_milestone": "M4",
+      "debt_ref": "QD-PH-d4648070d12a",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "docs/architecture/ash_downstream_contract.md",
+      "classification": "superseded",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "docs/architecture/ash_pattern_system_component_contract.md",
+      "rationale": "The former downstream authority framing is replaced by the current component-role contract.",
+      "superseded_by": "docs/architecture/ash_pattern_system_component_contract.md",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "docs/architecture/ash_upstream_authority_contract.md",
+      "classification": "superseded",
+      "owner_role": "Canon and governance maintainers",
+      "governing_source": "docs/architecture/ywe_cosmology_authority_contract.md",
+      "rationale": "The former component-authority framing is retained only as provenance for the current authority stack.",
+      "superseded_by": "docs/architecture/ywe_cosmology_authority_contract.md",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "docs/governance/README.md",
+      "classification": "informative",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "This repository-facing artifact is part of the explicitly reviewed public surface.",
+      "authority_role": "supporting",
+      "secondary_tags": [
+        "public_surface"
+      ]
+    },
+    {
+      "path": "docs/project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "data/governance/m0_acceptance_evidence.json",
+      "rationale": "This human-readable acceptance report preserves M0 chronology and projects the machine evidence without defining new requirements.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "docs/project/repository_map.md",
+      "classification": "informative",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "This repository-facing artifact is part of the explicitly reviewed public surface.",
+      "authority_role": "supporting",
+      "secondary_tags": [
+        "public_surface"
+      ]
+    },
+    {
+      "path": "governance/math-change-notes/2026-05-02-self-contained-canonical-language.md",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "This artifact preserves chronology, prior acceptance evidence, or immutable change provenance.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "governance/math-change-notes/2026-06-06-policy-vocabulary-alignment.md",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "This artifact preserves chronology, prior acceptance evidence, or immutable change provenance.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "governance/math-change-notes/README.md",
+      "classification": "informative",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": ".github/scripts/math_integrity_check.py",
+      "rationale": "This live index explains the enforced math-change-note workflow without defining the executable gate.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "guide.md",
+      "classification": "informative",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "This repository-facing artifact is part of the explicitly reviewed public surface.",
+      "authority_role": "supporting",
+      "secondary_tags": [
+        "public_surface"
+      ]
+    },
+    {
+      "path": "lore/bloodline_history/canon_scope.md",
+      "classification": "placeholder",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M4.",
+      "future_milestone": "M4",
+      "debt_ref": "QD-PH-18e23d8fd76e",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "lore/bloodline_history/source_notes.md",
+      "classification": "placeholder",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M4.",
+      "future_milestone": "M4",
+      "debt_ref": "QD-PH-fe3c556d6927",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "lore/wolf_canon/canon_scope.md",
+      "classification": "placeholder",
+      "owner_role": "Player-system maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M6.",
+      "future_milestone": "M6",
+      "debt_ref": "QD-PH-88f47ace7732",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "lore/wolf_canon/source_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Player-system maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M6.",
+      "future_milestone": "M6",
+      "debt_ref": "QD-PH-1f046ddf9c0e",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "lore/wrw_cosmology/canon_scope.md",
+      "classification": "placeholder",
+      "owner_role": "Canon and governance maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M1.",
+      "future_milestone": "M1",
+      "debt_ref": "QD-PH-dd00c6d30da8",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "lore/wrw_cosmology/source_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Canon and governance maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M1.",
+      "future_milestone": "M1",
+      "debt_ref": "QD-PH-37cd25fd2cac",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "modules/artifact_engine/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Content-system maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M5.",
+      "future_milestone": "M5",
+      "debt_ref": "QD-PH-61393803b79b",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "modules/creature_engine/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Content-system maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M5.",
+      "future_milestone": "M5",
+      "debt_ref": "QD-PH-3b4f4967cd04",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "modules/myth_engine/myth_emergence_rules.yaml",
+      "classification": "placeholder",
+      "owner_role": "Content-system maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M5.",
+      "future_milestone": "M5",
+      "debt_ref": "QD-PH-1a0e9e8c8cbc",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "modules/myth_engine/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Content-system maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M5.",
+      "future_milestone": "M5",
+      "debt_ref": "QD-PH-a7df30bdd32f",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "modules/prophecy_engine/prophecy_activation_rules.yaml",
+      "classification": "placeholder",
+      "owner_role": "Content-system maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M5.",
+      "future_milestone": "M5",
+      "debt_ref": "QD-PH-543eeef7249f",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "modules/prophecy_engine/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Content-system maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M5.",
+      "future_milestone": "M5",
+      "debt_ref": "QD-PH-627da1e33d8e",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "modules/quest_engine/schema_notes.md",
+      "classification": "placeholder",
+      "owner_role": "Content-system maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "The artifact self-declares incomplete content and is routed to M5.",
+      "future_milestone": "M5",
+      "debt_ref": "QD-PH-5a43050666fe",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "repository-contribution-policy.json",
+      "classification": "normative",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "This repository-facing artifact is part of the explicitly reviewed public surface.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "public_surface"
+      ]
+    },
+    {
+      "path": "scripts/github/Test-CanonicalTruthBoundaries.ps1",
+      "classification": "superseded",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "data/validation/repository_checks.json",
+      "rationale": "This unreachable frozen-snippet checker is replaced by cataloged governance, M0 truth, and platform-agnosticism validation.",
+      "superseded_by": "data/validation/repository_checks.json",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "scripts/github/Test-ReleaseReadiness.ps1",
+      "classification": "superseded",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "data/governance/release_publication_policy.json",
+      "rationale": "This unused subset checker conflates artifact presence with publication readiness and is replaced by the M10-gated publication authority.",
+      "superseded_by": "data/governance/release_publication_policy.json",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "scripts/github/Update-VersionAndChangelog.ps1",
+      "classification": "superseded",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": ".github/workflows/versioning.yml",
+      "rationale": "This unused script updates only one version source; the current workflow synchronizes every registered mirror, validates, and opens a review branch.",
+      "superseded_by": ".github/workflows/versioning.yml",
+      "authority_role": "not_applicable"
+    },
+    {
+      "path": "specs/algorithms/averaging-operator-semantics.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/averaging-operator-semantics.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/algorithms/averaging-operator-semantics.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/algorithms/axiom-evaluation.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/axiom-evaluation.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/algorithms/axiom-evaluation.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/algorithms/branching-semantics.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/branching-semantics.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/algorithms/branching-semantics.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/algorithms/codeword-transformation-semantics.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/codeword-transformation-semantics.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/algorithms/codeword-transformation-semantics.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/algorithms/containment-safe-failure-semantics.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/containment-safe-failure-semantics.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/algorithms/containment-safe-failure-semantics.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/algorithms/generation-planning.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/generation-planning.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/algorithms/generation-planning.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/algorithms/recovery-fallback-semantics.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/recovery-fallback-semantics.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/algorithms/recovery-fallback-semantics.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/algorithms/topology-expansion.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/topology-expansion.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/algorithms/topology-expansion.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/algorithms/transition-system.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/algorithms/transition-system.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/algorithms/transition-system.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/core/ash-state-space.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/core/ash-state-space.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/core/ash-state-space.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/core/codeword-set.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/core/codeword-set.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/core/codeword-set.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/core/realm-identity.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/core/realm-identity.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/core/realm-identity.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/core/recoverability-semantics.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/core/recoverability-semantics.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/core/recoverability-semantics.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/core/state-admissibility.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/core/state-admissibility.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/core/state-admissibility.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/core/state-validity-diagnostics.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/core/state-validity-diagnostics.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/core/state-validity-diagnostics.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/core/system-state-classification.pseudo.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/core/system-state-classification.pseudo.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/core/system-state-classification.pseudo.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/interfaces/contracts/artifact-emitter-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/artifact-emitter-contract.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/artifact-emitter-contract.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/interfaces/contracts/axiom-evaluator-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/axiom-evaluator-contract.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/axiom-evaluator-contract.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/interfaces/contracts/diagnostics-module-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/interfaces/contracts/generation-planner-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/generation-planner-contract.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/generation-planner-contract.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/interfaces/contracts/realm-encoder-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/realm-encoder-contract.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/realm-encoder-contract.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/interfaces/contracts/recovery-engine-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/recovery-engine-contract.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/recovery-engine-contract.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/interfaces/contracts/state-model-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/state-model-contract.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/state-model-contract.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/interfaces/contracts/topology-generator-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/topology-generator-contract.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/topology-generator-contract.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/interfaces/contracts/transition-registry-contract.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/contracts/transition-registry-contract.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/interfaces/contracts/transition-registry-contract.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/interfaces/diagnostic-schema.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/interfaces/rule-id-taxonomy.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/interfaces/semantic-contracts.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/interfaces/semantic-contracts.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/interfaces/semantic-contracts.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/registries/fallback-policy-registry.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "specs/registries/fallback-policy-registry.md",
+      "rationale": "This canonical fallback-policy registry currently has no repository-local mirror counterpart.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "ash_dependency"
+      ]
+    },
+    {
+      "path": "specs/verification/conformance-categories.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/verification/conformance-categories.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/verification/conformance-categories.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/verification/implementation-acceptance.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/verification/implementation-acceptance.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/verification/implementation-acceptance.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "specs/verification/invariant-spec.md",
+      "classification": "normative",
+      "owner_role": "ASH mathematics maintainers",
+      "governing_source": "core/ash_pattern_engine/canonical/verification/invariant-spec.md",
+      "rationale": "The native-shape ASH specification is synchronized to the repository-local canonical authority.",
+      "authority_role": "synchronized_mirror",
+      "mirror_of": "core/ash_pattern_engine/canonical/verification/invariant-spec.md",
+      "synchronization_check_ref": ".github/scripts/math_integrity_check.py",
+      "secondary_tags": [
+        "ash_dependency",
+        "ash_mirror"
+      ]
+    },
+    {
+      "path": "yggdrasil-instructions.json",
+      "classification": "normative",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "docs/project/artifact_classification_policy.md",
+      "rationale": "This repository-facing artifact is part of the explicitly reviewed public surface.",
+      "authority_role": "primary",
+      "secondary_tags": [
+        "public_surface"
+      ]
+    }
+  ],
+  "sensitive_source_hash_algorithm": "sha256_utf8_lf_normalized",
+  "sensitive_sources": [
+    {
+      "path": "SOURCE_AVAILABILITY_MANIFEST.md",
+      "sha256": "448c79a1b56c2b5d66e2570b1aa8946e4afb4b319c1b2969f371b36abae1d812"
+    },
+    {
+      "path": "data/governance/specification_roadmap.json",
+      "sha256": "b3e7ba7c60fb195ae958b9c9601d638d7744e88851ec8a835a8dfa85230ef7e0"
+    },
+    {
+      "path": "docs/project/artifact_classification_policy.md",
+      "sha256": "cf39f940e3b6d4c8b0cb99d5e796bd6cde9e9d6a2c3163ee2936b4d188eee841"
+    },
+    {
+      "path": "docs/project/scope_partition_map.md",
+      "sha256": "7113c62e302dfdfc8077fb6090531ac2de96eb7316682a5dbe2e4c3a924fd945"
+    },
+    {
+      "path": "docs/project/source_inventory.md",
+      "sha256": "2f182d1e924a145a3647db244f02028178023fe6b1c9232a6085f35aa4e34496"
+    },
+    {
+      "path": "missing_source_documents.md",
+      "sha256": "9a7cdf9ab4fbd89419cbbc14b22e0158dc85f93a4615c09da7dee10f9cc797cd"
+    }
+  ],
+  "coverage": {
+    "counts_by_class": {
+      "normative": 722,
+      "informative": 41,
+      "example": 160,
+      "historical": 10,
+      "deprecated": 1,
+      "superseded": 6,
+      "placeholder": 46
+    }
+  }
+}

@@ -1,0 +1,1257 @@
+{
+  "artifact_type": "milestone_acceptance_evidence",
+  "artifact_version": "1.0.0",
+  "schema_ref": "data/schemas/milestone_acceptance_evidence_schema.json",
+  "milestone_id": "M0",
+  "outcome": "pass",
+  "recorded_at": "2026-07-19T15:07:44Z",
+  "baseline": {
+    "repository_version": "2.0.23",
+    "base_ref": "origin/main",
+    "base_sha": "fdf78bed7699f19975649ac0e570fdba360e451d",
+    "merge_base": "fdf78bed7699f19975649ac0e570fdba360e451d",
+    "branch": "governance/m0-truthful-baseline-closure",
+    "publication_state": "unreleased",
+    "tags_at_head": [],
+    "platform_work_authorized": false
+  },
+  "authority_and_phase_alignment": {
+    "authority_stack": "pass",
+    "phase_8_9_anchors_present": "pass",
+    "protected_paths_changed": false,
+    "platform_code_added": false
+  },
+  "repository_state_digest_algorithm": "sha256_sorted_path_nul_normalized_utf8_lf_sha256_nul",
+  "repository_state_digest": "da6dcaeeeee5e6b1328bb134c1e06c196c59801c242711786ae197b1e068af26",
+  "digest_exclusions": [
+    "data/governance/m0_acceptance_evidence.json",
+    "docs/project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md"
+  ],
+  "check_catalog": {
+    "path": "data/validation/repository_checks.json",
+    "hash_algorithm": "sha256_utf8_lf_normalized",
+    "sha256": "4149649e7e2a4797fadabf3a82c393d4265565627e0da89998102ff23bb08cb4"
+  },
+  "validation_runs": [
+    {
+      "context": "local",
+      "executed_at": "2026-07-19T15:05:10Z",
+      "results": [
+        {
+          "check_id": "roadmap_governance",
+          "command": [
+            "{python}",
+            "scripts/check_specification_roadmap.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: roadmap_governance completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "8ed056f8398d22abfdf24ecf596bd6889366f2843bf15b30bd11fc14cb79d05c"
+        },
+        {
+          "check_id": "machine_readable_artifacts",
+          "command": [
+            "{python}",
+            "scripts/check_machine_readable_artifacts.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: machine_readable_artifacts completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "768d18d58ae33e3ca259c3d58ac80c232bfbc15991f7ce1a27cec252c6fb2116"
+        },
+        {
+          "check_id": "validation_unit_tests",
+          "command": [
+            "{python}",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-p",
+            "test_*.py"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: validation_unit_tests completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "86117a46f04d4fbab8ae798d9ba11346acb65b4847b27a570100d2e2c64b4e1e"
+        },
+        {
+          "check_id": "architecture_structure",
+          "command": [
+            "{python}",
+            "scripts/validate_architecture.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: architecture_structure completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "23e8c91b57ab78b905b54099b6089fe8ce6c5a129167d8413c66698b0493e062"
+        },
+        {
+          "check_id": "governance_contracts",
+          "command": [
+            "{python}",
+            "scripts/check_governance_contracts.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: governance_contracts completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "ab5816b674dd6e092ea25abf06bf298caf82a0ff59bd6ebde41aa7075818f225"
+        },
+        {
+          "check_id": "m0_truthful_baseline",
+          "command": [
+            "{python}",
+            "scripts/check_m0_truthful_baseline.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: m0_truthful_baseline completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "f5f7ea49f30b3ef246c8f90746a3bc4d83c6d565bd85e109568a1e7a11583b6e"
+        },
+        {
+          "check_id": "legacy_schema_contracts",
+          "command": [
+            "{python}",
+            "scripts/validate_schemas.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: legacy_schema_contracts completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "d37fed5520aba587c9484b7cfe9766f2d31ee5ac98ef40784b33aedf24ad6f90"
+        },
+        {
+          "check_id": "ash_compliance",
+          "command": [
+            "{python}",
+            "scripts/validate_ash_compliance.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: ash_compliance completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "100ee89ad025931b1e8b7169b795baa8f2ad15d1f6d3701a6809b24dc515f971"
+        },
+        {
+          "check_id": "ash_semantic_integrity",
+          "command": [
+            "{python}",
+            ".github/scripts/semantic_integrity_check.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: ash_semantic_integrity completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "732e9b0d56e0fe704d20674007bc0521e4d99d683d455b28a99a27ace6a41b75"
+        },
+        {
+          "check_id": "ash_math_integrity",
+          "command": [
+            "{python}",
+            ".github/scripts/math_integrity_check.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: ash_math_integrity completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "2b86deea7f3c8968e7d5883a7970ca50065511d6916120a0fae24e62abb9895d"
+        },
+        {
+          "check_id": "ash_downstream_conformance",
+          "command": [
+            "{python}",
+            ".github/scripts/downstream_conformance_check.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: ash_downstream_conformance completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "6953f54cb57c2fdaddf3c9009266c1a2810ef589d68cfb7b7da4e16ea1e02418"
+        },
+        {
+          "check_id": "package_acceptance",
+          "command": [
+            "{python}",
+            ".github/scripts/ywe_package_acceptance_check.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: package_acceptance completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "6404be95c27f6301c63f6aad8401223e7a5d8f5507fc60e63108c74eac7b8d54"
+        },
+        {
+          "check_id": "required_authority_contracts",
+          "command": [
+            "{python}",
+            "scripts/check_required_contracts.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: required_authority_contracts completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "8b6eebec4be3558e6a5df21c8f5c140a3b5747abe1867d25eea370c1f105cc6c"
+        },
+        {
+          "check_id": "phase_8_9_required_artifacts",
+          "command": [
+            "{python}",
+            "scripts/check_phase_8_9_required_artifacts.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: phase_8_9_required_artifacts completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "290f14cbfd3ed806a2d0118ac29a9fcb53f94853bfbd5c5decff8965424625a9"
+        },
+        {
+          "check_id": "authority_stack",
+          "command": [
+            "{python}",
+            "scripts/check_authority_stack.py",
+            "--config",
+            "data/validation/repository_drift_guardrail_rules.json",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: authority_stack completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "b8b23cf66a630095172257468627a91de4e6ba595c850540d9924b9941247662"
+        },
+        {
+          "check_id": "branch_reality",
+          "command": [
+            "{python}",
+            "scripts/check_branch_reality_guardrail.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: branch_reality completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "3b1a9e9d4b4c4c7c695fad8bc6962489f46d08cbc2d712796e706013d46125d1"
+        },
+        {
+          "check_id": "phase_9_schema_semantics",
+          "command": [
+            "{python}",
+            "scripts/check_phase_9_schema_semantics.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: phase_9_schema_semantics completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "0b302e6263d43d22e1efde99c30c95240618dc263f1448dcbf336bcd6ac1630e"
+        },
+        {
+          "check_id": "phase_8_9_package_boundary",
+          "command": [
+            "{python}",
+            "scripts/check_phase_8_9_package_boundary.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: phase_8_9_package_boundary completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "25a2be9598de73dc99d5a9e912f315c1142352a1bcfdfbbed151839d9a3fd5ee"
+        },
+        {
+          "check_id": "player_runtime_state",
+          "command": [
+            "{python}",
+            "scripts/check_player_runtime_state.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: player_runtime_state completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "9ddea79d1169159924b11ac07a3622eef8e112b02c8c50c59a4740bf7b641933"
+        },
+        {
+          "check_id": "worldstate_location_mutation",
+          "command": [
+            "{python}",
+            "scripts/check_worldstate_location_mutation.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: worldstate_location_mutation completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "c03e3dd6748c0f936add2779afbae4e0e123f283e5e8d48cb95b5025f7448b76"
+        },
+        {
+          "check_id": "quest_npc_lore",
+          "command": [
+            "{python}",
+            "scripts/check_quest_npc_lore_generation.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: quest_npc_lore completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "70780466bd60e120c044210a709e1ec71304d587375511fb4f4b156886fc5f0a"
+        },
+        {
+          "check_id": "source_truth_alignment",
+          "command": [
+            "{python}",
+            "scripts/check_source_truth_alignment.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: source_truth_alignment completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "4fd58660e01c3817c5bc75f37c06257cebe958760bf3588b21d6db4fd5c08c03"
+        },
+        {
+          "check_id": "ability_power_engine",
+          "command": [
+            "{python}",
+            "scripts/check_ability_power_engine.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: ability_power_engine completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "3822d5e220479df4b534c7968bbea721d70805f2dcd492c6c11bc93c1b5d90c1"
+        },
+        {
+          "check_id": "phase_15a_companion_reward",
+          "command": [
+            "{python}",
+            "scripts/check_phase_15a_companion_reward_foundation.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: phase_15a_companion_reward completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "62f20c603f9dc485187ad22f9a9fae38e6892d8d499df7916cb1655e58f07918"
+        },
+        {
+          "check_id": "phase_16_17_recovery",
+          "command": [
+            "{python}",
+            "scripts/check_phase_16_17_recovery.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: phase_16_17_recovery completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "861fbffc2f6c6b7866816d8a4ecbe4feece324d17a342629f0a6212267960081"
+        },
+        {
+          "check_id": "platform_agnosticism",
+          "command": [
+            "{python}",
+            "scripts/check_platform_agnosticism.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: platform_agnosticism completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "0240c7695aa2c26392cd1a415bda2a27b17f9be4106f5a6aa7c896c1591a81f2"
+        },
+        {
+          "check_id": "repository_attribution_policy",
+          "command": [
+            "{python}",
+            "scripts/check_repository_attribution_policy.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: repository_attribution_policy completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "fe77bd3706c833f5b52bf2d981a5d55c426276cc0fe9f2975c4c2e3ad97848b9"
+        }
+      ]
+    },
+    {
+      "context": "pull_request",
+      "executed_at": "2026-07-19T15:07:44Z",
+      "results": [
+        {
+          "check_id": "roadmap_governance",
+          "command": [
+            "{python}",
+            "scripts/check_specification_roadmap.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: roadmap_governance completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "8ed056f8398d22abfdf24ecf596bd6889366f2843bf15b30bd11fc14cb79d05c"
+        },
+        {
+          "check_id": "machine_readable_artifacts",
+          "command": [
+            "{python}",
+            "scripts/check_machine_readable_artifacts.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: machine_readable_artifacts completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "768d18d58ae33e3ca259c3d58ac80c232bfbc15991f7ce1a27cec252c6fb2116"
+        },
+        {
+          "check_id": "validation_unit_tests",
+          "command": [
+            "{python}",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tests",
+            "-p",
+            "test_*.py"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: validation_unit_tests completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "86117a46f04d4fbab8ae798d9ba11346acb65b4847b27a570100d2e2c64b4e1e"
+        },
+        {
+          "check_id": "architecture_structure",
+          "command": [
+            "{python}",
+            "scripts/validate_architecture.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: architecture_structure completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "23e8c91b57ab78b905b54099b6089fe8ce6c5a129167d8413c66698b0493e062"
+        },
+        {
+          "check_id": "governance_contracts",
+          "command": [
+            "{python}",
+            "scripts/check_governance_contracts.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: governance_contracts completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "ab5816b674dd6e092ea25abf06bf298caf82a0ff59bd6ebde41aa7075818f225"
+        },
+        {
+          "check_id": "m0_truthful_baseline",
+          "command": [
+            "{python}",
+            "scripts/check_m0_truthful_baseline.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: m0_truthful_baseline completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "f5f7ea49f30b3ef246c8f90746a3bc4d83c6d565bd85e109568a1e7a11583b6e"
+        },
+        {
+          "check_id": "legacy_schema_contracts",
+          "command": [
+            "{python}",
+            "scripts/validate_schemas.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: legacy_schema_contracts completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "d37fed5520aba587c9484b7cfe9766f2d31ee5ac98ef40784b33aedf24ad6f90"
+        },
+        {
+          "check_id": "ash_compliance",
+          "command": [
+            "{python}",
+            "scripts/validate_ash_compliance.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: ash_compliance completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "100ee89ad025931b1e8b7169b795baa8f2ad15d1f6d3701a6809b24dc515f971"
+        },
+        {
+          "check_id": "ash_semantic_integrity",
+          "command": [
+            "{python}",
+            ".github/scripts/semantic_integrity_check.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: ash_semantic_integrity completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "732e9b0d56e0fe704d20674007bc0521e4d99d683d455b28a99a27ace6a41b75"
+        },
+        {
+          "check_id": "ash_math_integrity",
+          "command": [
+            "{python}",
+            ".github/scripts/math_integrity_check.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: ash_math_integrity completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "2b86deea7f3c8968e7d5883a7970ca50065511d6916120a0fae24e62abb9895d"
+        },
+        {
+          "check_id": "ash_downstream_conformance",
+          "command": [
+            "{python}",
+            ".github/scripts/downstream_conformance_check.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: ash_downstream_conformance completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "6953f54cb57c2fdaddf3c9009266c1a2810ef589d68cfb7b7da4e16ea1e02418"
+        },
+        {
+          "check_id": "package_acceptance",
+          "command": [
+            "{python}",
+            ".github/scripts/ywe_package_acceptance_check.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: package_acceptance completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "6404be95c27f6301c63f6aad8401223e7a5d8f5507fc60e63108c74eac7b8d54"
+        },
+        {
+          "check_id": "required_authority_contracts",
+          "command": [
+            "{python}",
+            "scripts/check_required_contracts.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: required_authority_contracts completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "8b6eebec4be3558e6a5df21c8f5c140a3b5747abe1867d25eea370c1f105cc6c"
+        },
+        {
+          "check_id": "phase_8_9_required_artifacts",
+          "command": [
+            "{python}",
+            "scripts/check_phase_8_9_required_artifacts.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: phase_8_9_required_artifacts completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "290f14cbfd3ed806a2d0118ac29a9fcb53f94853bfbd5c5decff8965424625a9"
+        },
+        {
+          "check_id": "authority_stack",
+          "command": [
+            "{python}",
+            "scripts/check_authority_stack.py",
+            "--config",
+            "data/validation/repository_drift_guardrail_rules.json",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: authority_stack completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "b8b23cf66a630095172257468627a91de4e6ba595c850540d9924b9941247662"
+        },
+        {
+          "check_id": "branch_reality",
+          "command": [
+            "{python}",
+            "scripts/check_branch_reality_guardrail.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: branch_reality completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "3b1a9e9d4b4c4c7c695fad8bc6962489f46d08cbc2d712796e706013d46125d1"
+        },
+        {
+          "check_id": "phase_9_schema_semantics",
+          "command": [
+            "{python}",
+            "scripts/check_phase_9_schema_semantics.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: phase_9_schema_semantics completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "0b302e6263d43d22e1efde99c30c95240618dc263f1448dcbf336bcd6ac1630e"
+        },
+        {
+          "check_id": "phase_8_9_package_boundary",
+          "command": [
+            "{python}",
+            "scripts/check_phase_8_9_package_boundary.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: phase_8_9_package_boundary completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "25a2be9598de73dc99d5a9e912f315c1142352a1bcfdfbbed151839d9a3fd5ee"
+        },
+        {
+          "check_id": "player_runtime_state",
+          "command": [
+            "{python}",
+            "scripts/check_player_runtime_state.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: player_runtime_state completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "9ddea79d1169159924b11ac07a3622eef8e112b02c8c50c59a4740bf7b641933"
+        },
+        {
+          "check_id": "worldstate_location_mutation",
+          "command": [
+            "{python}",
+            "scripts/check_worldstate_location_mutation.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: worldstate_location_mutation completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "c03e3dd6748c0f936add2779afbae4e0e123f283e5e8d48cb95b5025f7448b76"
+        },
+        {
+          "check_id": "quest_npc_lore",
+          "command": [
+            "{python}",
+            "scripts/check_quest_npc_lore_generation.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: quest_npc_lore completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "70780466bd60e120c044210a709e1ec71304d587375511fb4f4b156886fc5f0a"
+        },
+        {
+          "check_id": "source_truth_alignment",
+          "command": [
+            "{python}",
+            "scripts/check_source_truth_alignment.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: source_truth_alignment completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "4fd58660e01c3817c5bc75f37c06257cebe958760bf3588b21d6db4fd5c08c03"
+        },
+        {
+          "check_id": "ability_power_engine",
+          "command": [
+            "{python}",
+            "scripts/check_ability_power_engine.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: ability_power_engine completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "3822d5e220479df4b534c7968bbea721d70805f2dcd492c6c11bc93c1b5d90c1"
+        },
+        {
+          "check_id": "phase_15a_companion_reward",
+          "command": [
+            "{python}",
+            "scripts/check_phase_15a_companion_reward_foundation.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: phase_15a_companion_reward completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "62f20c603f9dc485187ad22f9a9fae38e6892d8d499df7916cb1655e58f07918"
+        },
+        {
+          "check_id": "phase_16_17_recovery",
+          "command": [
+            "{python}",
+            "scripts/check_phase_16_17_recovery.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: phase_16_17_recovery completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "861fbffc2f6c6b7866816d8a4ecbe4feece324d17a342629f0a6212267960081"
+        },
+        {
+          "check_id": "platform_agnosticism",
+          "command": [
+            "{python}",
+            "scripts/check_platform_agnosticism.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: platform_agnosticism completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "0240c7695aa2c26392cd1a415bda2a27b17f9be4106f5a6aa7c896c1591a81f2"
+        },
+        {
+          "check_id": "repository_attribution_policy",
+          "command": [
+            "{python}",
+            "scripts/check_repository_attribution_policy.py",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: repository_attribution_policy completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "fe77bd3706c833f5b52bf2d981a5d55c426276cc0fe9f2975c4c2e3ad97848b9"
+        },
+        {
+          "check_id": "non_destructive_diff",
+          "command": [
+            "{python}",
+            "scripts/check_non_destructive_diff.py",
+            "--base",
+            "{base}",
+            "--head",
+            "HEAD",
+            "{root}"
+          ],
+          "exit_code": 0,
+          "outcome": "pass",
+          "result_summary": "PASS: non_destructive_diff completed with exit code 0.",
+          "result_summary_hash_algorithm": "sha256_utf8_lf_normalized",
+          "result_summary_sha256": "72482d1fabb64206aabda62180085ccf86bdfca187f2c2873f5e3b478a239672"
+        }
+      ]
+    }
+  ],
+  "deliverables": [
+    {
+      "id": "m0-d1",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/governance/specification_roadmap.json",
+        "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md"
+      ]
+    },
+    {
+      "id": "m0-d2",
+      "outcome": "pass",
+      "evidence_refs": [
+        "docs/project/artifact_classification_policy.md",
+        "data/governance/repository_truth_manifest.json"
+      ]
+    },
+    {
+      "id": "m0-d3",
+      "outcome": "pass",
+      "evidence_refs": [
+        "VERSION",
+        "data/governance/release_publication_policy.json"
+      ]
+    },
+    {
+      "id": "m0-d4",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/governance/repository_truth_manifest.json",
+        "SOURCE_AVAILABILITY_MANIFEST.md",
+        "missing_source_documents.md"
+      ]
+    },
+    {
+      "id": "m0-d5",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/governance/artifact_classification_manifest.json"
+      ]
+    },
+    {
+      "id": "m0-d6",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/governance/scope_partition_manifest.json"
+      ]
+    },
+    {
+      "id": "m0-d7",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/governance/specification_roadmap.json",
+        "data/governance/release_publication_policy.json"
+      ]
+    }
+  ],
+  "exit_criteria": [
+    {
+      "id": "m0-e1",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/governance/repository_truth_manifest.json",
+        "data/governance/release_publication_policy.json",
+        "data/governance/scope_partition_manifest.json"
+      ]
+    },
+    {
+      "id": "m0-e2",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/governance/public_promise_register.json"
+      ]
+    },
+    {
+      "id": "m0-e3",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/validation/repository_quality_debt_inventory.json"
+      ]
+    }
+  ],
+  "safety_criteria": [
+    {
+      "id": "m0-s1",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/validation/required_phase_8_9_artifacts.json",
+        "scripts/check_m0_truthful_baseline.py"
+      ]
+    },
+    {
+      "id": "m0-s2",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/validation/repository_checks.json"
+      ]
+    },
+    {
+      "id": "m0-s3",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/governance/m0_acceptance_evidence.json",
+        "docs/project/artifact_classification_policy.md"
+      ]
+    },
+    {
+      "id": "m0-s4",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/governance/specification_roadmap.json",
+        "data/governance/release_publication_policy.json"
+      ]
+    }
+  ],
+  "foundation_gates": [
+    {
+      "id": "9.3",
+      "outcome": "pass",
+      "evidence_refs": [
+        "scripts/check_branch_reality_guardrail.py"
+      ]
+    },
+    {
+      "id": "9.4",
+      "outcome": "pass",
+      "evidence_refs": [
+        "scripts/check_authority_stack.py"
+      ]
+    },
+    {
+      "id": "9.5",
+      "outcome": "pass",
+      "evidence_refs": [
+        "scripts/check_phase_9_schema_semantics.py"
+      ]
+    },
+    {
+      "id": "9.6",
+      "outcome": "pass",
+      "evidence_refs": [
+        "scripts/check_phase_9_schema_semantics.py"
+      ]
+    },
+    {
+      "id": "9.7",
+      "outcome": "pass",
+      "evidence_refs": [
+        "scripts/check_non_destructive_diff.py",
+        "data/governance/m0_acceptance_evidence.json"
+      ]
+    },
+    {
+      "id": "9.8",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/validation/repository_checks.json"
+      ]
+    }
+  ],
+  "classification_metrics": {
+    "tracked_paths": 986,
+    "classified_paths": 986,
+    "unclassified_paths": 0,
+    "multiply_classified_paths": 0,
+    "normative": 722,
+    "informative": 41,
+    "example": 160,
+    "historical": 10,
+    "deprecated": 1,
+    "superseded": 6,
+    "placeholder": 46
+  },
+  "scope_metrics": {
+    "ash_dependency_material": 77,
+    "governance_validation": 316,
+    "historical_evidence": 17,
+    "later_release_work": 61,
+    "wrw_reference_profile": 242,
+    "ywe_core": 165,
+    "ywe_extension_profile": 108
+  },
+  "promise_metrics": {
+    "reviewed_surfaces": 65,
+    "total": 33,
+    "assigned": 30,
+    "excluded": 3,
+    "unresolved": 0
+  },
+  "promise_source_evidence": {
+    "register_ref": "data/governance/public_promise_register.json",
+    "hash_algorithm": "sha256_utf8_lf_normalized",
+    "source_hash_count": 65,
+    "reviewed_surface_aggregate_sha256": "c1030061ede3b41ada2da1d91ece9f5f2799c24279e215c4c12eba4d73f4d50d"
+  },
+  "debt_metrics": {
+    "total": 81,
+    "open": 70,
+    "accepted_exception": 1,
+    "resolved": 10,
+    "milestone_m0": 11,
+    "milestone_m1": 10,
+    "milestone_m2": 2,
+    "milestone_m3": 15,
+    "milestone_m4": 12,
+    "milestone_m5": 16,
+    "milestone_m6": 5,
+    "milestone_m7": 1,
+    "milestone_m8": 1,
+    "milestone_m9": 7,
+    "milestone_m10": 1
+  },
+  "debt_ownership_metrics": {
+    "unowned_open_count": 0,
+    "unassigned_open_count": 0
+  },
+  "source_inventory_result": "pass",
+  "diff_review": {
+    "base_ref": "origin/main",
+    "files_created": 18,
+    "files_patched": 36,
+    "files_deleted": 0,
+    "files_renamed": 0,
+    "diff_stat": "54 files changed, 14402 insertions(+), 263 deletions(-)",
+    "implementation_tree_hash_algorithm": "sha256_sorted_path_nul_normalized_utf8_lf_sha256_nul",
+    "implementation_tree_hash": "da6dcaeeeee5e6b1328bb134c1e06c196c59801c242711786ae197b1e068af26",
+    "diff_hash_algorithm": "sha256_git_diff_binary",
+    "diff_hash": "095feea8ccac4fec23ff66af403317ca5b662d566fcae40720795e44898f1fb1",
+    "hash_scope": "implementation-state-and-diff-excluding-the-two-m0-acceptance-evidence-files",
+    "change_budget_exceptions": [
+      {
+        "path": "CONTRIBUTING.md",
+        "original_lines": 42,
+        "additions": 7,
+        "deletions": 7,
+        "percentage": 33.33,
+        "authorized_ceiling": 35.0,
+        "rationale": "resolve branch and platform-repository scope conflict",
+        "authority_refs": [
+          "07-change-budget-policy.md",
+          "manifests/change-budget-exceptions.jsonl"
+        ],
+        "result": "within_authorized_ceiling"
+      },
+      {
+        "path": "README.md",
+        "original_lines": 514,
+        "additions": 16,
+        "deletions": 16,
+        "percentage": 6.23,
+        "authorized_ceiling": 10.0,
+        "rationale": "narrow M0 truth corrections including authorized scope outside generated status block",
+        "authority_refs": [
+          "03-owner-preauthorization.md",
+          "07-change-budget-policy.md",
+          "manifests/change-budget-exceptions.jsonl"
+        ],
+        "result": "within_authorized_ceiling"
+      },
+      {
+        "path": "SOURCE_AVAILABILITY_MANIFEST.md",
+        "original_lines": 59,
+        "additions": 14,
+        "deletions": 0,
+        "percentage": 23.73,
+        "authorized_ceiling": 35.0,
+        "rationale": "preserve source-ingest provenance while removing current-authority ambiguity",
+        "authority_refs": [
+          "07-change-budget-policy.md",
+          "manifests/change-budget-exceptions.jsonl"
+        ],
+        "result": "within_authorized_ceiling"
+      },
+      {
+        "path": "adapters/godot/README.md",
+        "original_lines": 17,
+        "additions": 3,
+        "deletions": 0,
+        "percentage": 17.65,
+        "authorized_ceiling": 30.0,
+        "rationale": "clarify future downstream host-target status",
+        "authority_refs": [
+          "07-change-budget-policy.md",
+          "manifests/change-budget-exceptions.jsonl"
+        ],
+        "result": "within_authorized_ceiling"
+      },
+      {
+        "path": "adapters/unity/README.md",
+        "original_lines": 17,
+        "additions": 3,
+        "deletions": 0,
+        "percentage": 17.65,
+        "authorized_ceiling": 30.0,
+        "rationale": "clarify future downstream host-target status",
+        "authority_refs": [
+          "07-change-budget-policy.md",
+          "manifests/change-budget-exceptions.jsonl"
+        ],
+        "result": "within_authorized_ceiling"
+      },
+      {
+        "path": "adapters/unreal/README.md",
+        "original_lines": 17,
+        "additions": 3,
+        "deletions": 0,
+        "percentage": 17.65,
+        "authorized_ceiling": 30.0,
+        "rationale": "clarify future downstream host-target status",
+        "authority_refs": [
+          "07-change-budget-policy.md",
+          "manifests/change-budget-exceptions.jsonl"
+        ],
+        "result": "within_authorized_ceiling"
+      },
+      {
+        "path": "docs/architecture/forsetti_module_manifest_conventions.md",
+        "original_lines": 64,
+        "additions": 5,
+        "deletions": 5,
+        "percentage": 15.62,
+        "authorized_ceiling": 30.0,
+        "rationale": "clarify abstract downstream integration boundary",
+        "authority_refs": [
+          "07-change-budget-policy.md",
+          "manifests/change-budget-exceptions.jsonl"
+        ],
+        "result": "within_authorized_ceiling"
+      },
+      {
+        "path": "docs/governance/README.md",
+        "original_lines": 40,
+        "additions": 9,
+        "deletions": 0,
+        "percentage": 22.5,
+        "authorized_ceiling": 40.0,
+        "rationale": "navigation to current M0 governance authorities",
+        "authority_refs": [
+          "07-change-budget-policy.md",
+          "manifests/change-budget-exceptions.jsonl"
+        ],
+        "result": "within_authorized_ceiling"
+      },
+      {
+        "path": "docs/project/source_inventory.md",
+        "original_lines": 60,
+        "additions": 19,
+        "deletions": 6,
+        "percentage": 41.67,
+        "authorized_ceiling": 50.0,
+        "rationale": "current source-routing authority reconciliation",
+        "authority_refs": [
+          "07-change-budget-policy.md",
+          "manifests/change-budget-exceptions.jsonl"
+        ],
+        "result": "within_authorized_ceiling"
+      },
+      {
+        "path": "guide.md",
+        "original_lines": 81,
+        "additions": 11,
+        "deletions": 8,
+        "percentage": 23.46,
+        "authorized_ceiling": 35.0,
+        "rationale": "correct active status, scope, and authority guidance",
+        "authority_refs": [
+          "07-change-budget-policy.md",
+          "manifests/change-budget-exceptions.jsonl"
+        ],
+        "result": "within_authorized_ceiling"
+      },
+      {
+        "path": "missing_source_documents.md",
+        "original_lines": 104,
+        "additions": 20,
+        "deletions": 20,
+        "percentage": 38.46,
+        "authorized_ceiling": 40.0,
+        "rationale": "synchronize current placeholder and missing-source truth",
+        "authority_refs": [
+          "07-change-budget-policy.md",
+          "manifests/change-budget-exceptions.jsonl"
+        ],
+        "result": "within_authorized_ceiling"
+      }
+    ]
+  },
+  "protected_path_diff": {
+    "base_ref": "origin/main",
+    "query": [
+      "git",
+      "diff",
+      "--name-only",
+      "origin/main",
+      "--",
+      "docs/architecture/base_world_ontology_contract.md",
+      "docs/architecture/leaf_branch_reality_contract.md",
+      "docs/architecture/branch_event_contract.md",
+      "docs/architecture/existential_gameplay_kernel_contract.md",
+      "docs/architecture/pattern_vector_runtime_contract.md",
+      "docs/architecture/runtime_cosmology_foundation_contract.md",
+      "data/schemas/base_world_ontology_schema.json",
+      "data/schemas/leaf_branch_reality_state_schema.json",
+      "data/schemas/branch_event_schema.json",
+      "data/schemas/pattern_vector_schema.json",
+      "data/schemas/existence_potential_schema.json",
+      "data/schemas/axiom_diagnostic_packet_schema.json",
+      "data/schemas/plane_pressure_state_schema.json",
+      "data/schemas/future_generation_bias_update_schema.json",
+      "data/validation/phase_8_9_acceptance_contract.json",
+      "data/validation/branch_reality_guardrail_rules.json",
+      "data/validation/forbidden_branch_language_patterns.json",
+      "examples/branch_reality/"
+    ],
+    "empty_output": true,
+    "changed_paths": []
+  },
+  "roadmap_transition": {
+    "completed_milestone": "M0",
+    "activated_milestone": "M1",
+    "current_milestone": "M1"
+  },
+  "deferred_work": [
+    {
+      "milestone": "M1",
+      "status": "deferred",
+      "scope": "M1 implementation is not claimed by M0 acceptance."
+    },
+    {
+      "milestone": "M2",
+      "status": "deferred",
+      "scope": "M2 implementation is not claimed by M0 acceptance."
+    },
+    {
+      "milestone": "M3",
+      "status": "deferred",
+      "scope": "M3 implementation is not claimed by M0 acceptance."
+    },
+    {
+      "milestone": "M4",
+      "status": "deferred",
+      "scope": "M4 implementation is not claimed by M0 acceptance."
+    },
+    {
+      "milestone": "M5",
+      "status": "deferred",
+      "scope": "M5 implementation is not claimed by M0 acceptance."
+    },
+    {
+      "milestone": "M6",
+      "status": "deferred",
+      "scope": "M6 implementation is not claimed by M0 acceptance."
+    },
+    {
+      "milestone": "M7",
+      "status": "deferred",
+      "scope": "M7 implementation is not claimed by M0 acceptance."
+    },
+    {
+      "milestone": "M8",
+      "status": "deferred",
+      "scope": "M8 implementation is not claimed by M0 acceptance."
+    },
+    {
+      "milestone": "M9",
+      "status": "deferred",
+      "scope": "M9 implementation is not claimed by M0 acceptance."
+    },
+    {
+      "milestone": "M10",
+      "status": "deferred",
+      "scope": "M10 implementation is not claimed by M0 acceptance."
+    }
+  ],
+  "unresolved_issues": []
+}

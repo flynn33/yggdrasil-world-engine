@@ -126,6 +126,7 @@ class RoadmapValidationTests(unittest.TestCase):
     def test_completed_milestone_requires_acceptance_evidence(self):
         roadmap = copy.deepcopy(self.roadmap)
         roadmap["milestones"][0]["status"] = "complete"
+        roadmap["milestones"][0]["acceptance_evidence"] = []
         errors = roadmap_check.milestone_completion_errors(ROOT, roadmap["milestones"])
         self.assertTrue(any("acceptance evidence" in error.lower() for error in errors))
 
@@ -310,33 +311,262 @@ class WorkflowContractTests(unittest.TestCase):
             workflow.write_text("steps:\n  - run: gh release create v1.0.0\n", encoding="utf-8")
             self.assertTrue(roadmap_check.publication_workflow_errors(root, True))
 
-    def test_version_updater_round_trip_in_temporary_tree(self):
-        roadmap = json.loads(
-            (ROOT / "data/governance/specification_roadmap.json").read_text(encoding="utf-8-sig")
+    @staticmethod
+    def _read_json(root: Path, relative_path: str) -> dict:
+        return json.loads((root / relative_path).read_text(encoding="utf-8-sig"))
+
+    @staticmethod
+    def _write_json(root: Path, relative_path: str, value: dict) -> None:
+        (root / relative_path).write_text(
+            json.dumps(value, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
         )
+
+    def _copy_version_update_fixture(self, temporary_root: Path) -> bytes:
+        roadmap = self._read_json(ROOT, version_updater.ROADMAP_PATH)
+        classification = self._read_json(ROOT, version_updater.CLASSIFICATION_PATH)
+        promises = self._read_json(ROOT, version_updater.PROMISE_PATH)
+        paths = {
+            "CHANGELOG.md",
+            version_updater.ROADMAP_PATH,
+            *version_updater.BASELINE_MANIFEST_PATHS,
+        }
+        paths.update(source["path"] for source in roadmap["version_sources"])
+        paths.update(source["path"] for source in classification["sensitive_sources"])
+        paths.update(surface["path"] for surface in promises["reviewed_surfaces"])
+
+        evidence_source = ROOT / version_updater.M0_EVIDENCE_PATH
+        if evidence_source.is_file():
+            paths.add(version_updater.M0_EVIDENCE_PATH)
+
+        for relative_path in sorted(paths):
+            source = ROOT / relative_path
+            self.assertTrue(source.is_file(), relative_path)
+            destination = temporary_root / relative_path
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, destination)
+
+        evidence_path = temporary_root / version_updater.M0_EVIDENCE_PATH
+        if not evidence_path.exists():
+            evidence_path.parent.mkdir(parents=True, exist_ok=True)
+            evidence_path.write_bytes(b'{"immutable_test_sentinel":true}\n')
+
+        promises = self._read_json(temporary_root, version_updater.PROMISE_PATH)
+        for surface in promises["reviewed_surfaces"]:
+            surface["sha256"] = version_updater.normalized_text_sha256(
+                temporary_root / surface["path"]
+            )
+        promises["reviewed_surface_aggregate_sha256"] = (
+            version_updater.reviewed_surface_digest(promises["reviewed_surfaces"])
+        )
+        self._write_json(temporary_root, version_updater.PROMISE_PATH, promises)
+
+        classification = self._read_json(temporary_root, version_updater.CLASSIFICATION_PATH)
+        for source in classification["sensitive_sources"]:
+            source["sha256"] = version_updater.normalized_text_sha256(
+                temporary_root / source["path"]
+            )
+        self._write_json(
+            temporary_root,
+            version_updater.CLASSIFICATION_PATH,
+            classification,
+        )
+        return evidence_path.read_bytes()
+
+    @staticmethod
+    def _tree_bytes(root: Path) -> dict[str, bytes]:
+        return {
+            path.relative_to(root).as_posix(): path.read_bytes()
+            for path in root.rglob("*")
+            if path.is_file()
+        }
+
+    def test_version_updater_round_trip_in_temporary_tree(self):
+        live_version = (ROOT / "VERSION").read_bytes()
         with tempfile.TemporaryDirectory() as directory:
             temporary_root = Path(directory)
-            paths = {"CHANGELOG.md", "data/governance/specification_roadmap.json"}
-            paths.update(source["path"] for source in roadmap["version_sources"])
-            for relative_path in paths:
-                source = ROOT / relative_path
-                destination = temporary_root / relative_path
-                destination.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(source, destination)
-            version_updater.update_version_references(temporary_root, "9.8.7")
+            evidence_before = self._copy_version_update_fixture(temporary_root)
+            old_version = (temporary_root / "VERSION").read_text(
+                encoding="utf-8-sig"
+            ).strip()
+            major, minor, patch = (int(part) for part in old_version.split("."))
+            new_version = f"{major}.{minor}.{patch + 1}"
+            debt_before = self._read_json(temporary_root, version_updater.DEBT_PATH)
+            introduced_before = [
+                debt["introduced_baseline"] for debt in debt_before["debts"]
+            ]
+            classification_before = self._read_json(
+                temporary_root, version_updater.CLASSIFICATION_PATH
+            )
+            sensitive_before = {
+                source["path"]: source["sha256"]
+                for source in classification_before["sensitive_sources"]
+            }
+            promises_before = self._read_json(
+                temporary_root, version_updater.PROMISE_PATH
+            )
+            surfaces_before = {
+                surface["path"]: surface["sha256"]
+                for surface in promises_before["reviewed_surfaces"]
+            }
+
+            self.assertEqual(
+                (old_version, new_version),
+                version_updater.update_version_references(temporary_root, new_version),
+            )
+
+            roadmap = self._read_json(temporary_root, version_updater.ROADMAP_PATH)
+            classification = self._read_json(
+                temporary_root, version_updater.CLASSIFICATION_PATH
+            )
+            scope = self._read_json(temporary_root, version_updater.SCOPE_PATH)
+            truth = self._read_json(temporary_root, version_updater.TRUTH_PATH)
+            release = self._read_json(
+                temporary_root, version_updater.RELEASE_POLICY_PATH
+            )
+            promises = self._read_json(temporary_root, version_updater.PROMISE_PATH)
+            debt = self._read_json(temporary_root, version_updater.DEBT_PATH)
+
+            self.assertEqual(new_version, roadmap["repository_baseline"])
+            self.assertEqual(new_version, classification["repository_baseline"])
+            self.assertEqual(new_version, scope["repository_baseline"])
+            self.assertEqual(new_version, truth["repository_baseline"]["value"])
+            self.assertTrue(truth["repository_baseline"]["mirrors"])
+            self.assertTrue(
+                all(
+                    mirror["value"] == new_version
+                    for mirror in truth["repository_baseline"]["mirrors"]
+                )
+            )
+            self.assertEqual(new_version, release["repository_baseline"]["value"])
+            self.assertEqual(new_version, promises["repository_baseline"])
+            self.assertEqual(new_version, debt["repository_baseline"])
+            self.assertEqual(
+                introduced_before,
+                [item["introduced_baseline"] for item in debt["debts"]],
+            )
+            self.assertEqual(
+                evidence_before,
+                (temporary_root / version_updater.M0_EVIDENCE_PATH).read_bytes(),
+            )
+
+            for source in classification["sensitive_sources"]:
+                self.assertEqual(
+                    version_updater.normalized_text_sha256(
+                        temporary_root / source["path"]
+                    ),
+                    source["sha256"],
+                    source["path"],
+                )
+            self.assertNotEqual(
+                sensitive_before[version_updater.ROADMAP_PATH],
+                next(
+                    source["sha256"]
+                    for source in classification["sensitive_sources"]
+                    if source["path"] == version_updater.ROADMAP_PATH
+                ),
+            )
+
+            for surface in promises["reviewed_surfaces"]:
+                self.assertEqual(
+                    version_updater.normalized_text_sha256(
+                        temporary_root / surface["path"]
+                    ),
+                    surface["sha256"],
+                    surface["path"],
+                )
+            self.assertEqual(
+                version_updater.reviewed_surface_digest(promises["reviewed_surfaces"]),
+                promises["reviewed_surface_aggregate_sha256"],
+            )
+            self.assertNotEqual(
+                surfaces_before["README.md"],
+                next(
+                    surface["sha256"]
+                    for surface in promises["reviewed_surfaces"]
+                    if surface["path"] == "README.md"
+                ),
+            )
+
             changelog = temporary_root / "CHANGELOG.md"
             changelog.write_text(
                 changelog.read_text(encoding="utf-8-sig").replace(
-                    "---\n", "---\n\n## [9.8.7] — 2026-07-18\n", 1
+                    "---\n", f"---\n\n## [{new_version}] — 2026-07-18\n", 1
                 ),
                 encoding="utf-8",
             )
-            updated = json.loads(
-                (temporary_root / "data/governance/specification_roadmap.json").read_text(
-                    encoding="utf-8-sig"
-                )
-            )
-            self.assertEqual([], roadmap_check.version_errors(temporary_root, updated))
+            self.assertEqual([], roadmap_check.version_errors(temporary_root, roadmap))
+
+        self.assertEqual(live_version, (ROOT / "VERSION").read_bytes())
+
+    def test_version_updater_rejects_invalid_semver_without_writes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            temporary_root = Path(directory)
+            version_path = temporary_root / "VERSION"
+            version_path.write_text("2.0.23\n", encoding="utf-8")
+            before = self._tree_bytes(temporary_root)
+            for invalid_version in (
+                "9.8",
+                "01.2.3",
+                "1.02.3",
+                "1.2.03",
+                "v1.2.3",
+                "1.2.3-beta",
+                " 1.2.3",
+            ):
+                with self.subTest(version=invalid_version):
+                    with self.assertRaisesRegex(ValueError, "MAJOR.MINOR.PATCH"):
+                        version_updater.update_version_references(
+                            temporary_root,
+                            invalid_version,
+                        )
+                    self.assertEqual(before, self._tree_bytes(temporary_root))
+
+    def test_version_updater_rolls_back_partial_replacement(self):
+        with tempfile.TemporaryDirectory() as directory:
+            temporary_root = Path(directory)
+            self._copy_version_update_fixture(temporary_root)
+            old_version = (temporary_root / "VERSION").read_text(
+                encoding="utf-8-sig"
+            ).strip()
+            major, minor, patch = (int(part) for part in old_version.split("."))
+            new_version = f"{major}.{minor}.{patch + 1}"
+            before = self._tree_bytes(temporary_root)
+            real_replace = version_updater.os.replace
+            replacement_calls = 0
+
+            def fail_second_replacement(source, destination):
+                nonlocal replacement_calls
+                replacement_calls += 1
+                if replacement_calls == 2:
+                    raise OSError("simulated replacement failure")
+                return real_replace(source, destination)
+
+            with mock.patch.object(
+                version_updater.os,
+                "replace",
+                side_effect=fail_second_replacement,
+            ):
+                with self.assertRaisesRegex(OSError, "simulated replacement failure"):
+                    version_updater.update_version_references(temporary_root, new_version)
+
+            self.assertEqual(before, self._tree_bytes(temporary_root))
+            self.assertGreaterEqual(replacement_calls, 3)
+
+    def test_version_updater_supports_numeric_dotted_segments(self):
+        value = {"repository_baseline": {"mirrors": [{"value": "2.0.23"}]}}
+        version_updater.set_dotted_value(
+            value,
+            "repository_baseline.mirrors.0.value",
+            "9.8.7",
+        )
+        self.assertEqual(
+            "9.8.7",
+            version_updater.dotted_value(
+                value,
+                "repository_baseline.mirrors.0.value",
+            ),
+        )
 
     def test_contributor_identity_gate_remains_independent(self):
         text = (ROOT / ".github/workflows/contributor-identity-policy.yml").read_text(

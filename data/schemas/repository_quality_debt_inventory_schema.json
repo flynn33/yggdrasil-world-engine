@@ -1,0 +1,503 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/repository_quality_debt_inventory_schema.json",
+  "title": "YWE Repository Quality Debt Inventory",
+  "type": "object",
+  "required": [
+    "schema_ref",
+    "artifact_type",
+    "artifact_version",
+    "repository_baseline",
+    "roadmap_ref",
+    "classification_manifest_ref",
+    "ratchet_policy",
+    "schema_debt_subledger",
+    "debts",
+    "summary"
+  ],
+  "properties": {
+    "schema_ref": {
+      "const": "data/schemas/repository_quality_debt_inventory_schema.json"
+    },
+    "artifact_type": {
+      "const": "repository_quality_debt_inventory"
+    },
+    "artifact_version": {
+      "$ref": "#/$defs/semantic_version"
+    },
+    "repository_baseline": {
+      "$ref": "#/$defs/semantic_version"
+    },
+    "roadmap_ref": {
+      "const": "data/governance/specification_roadmap.json"
+    },
+    "classification_manifest_ref": {
+      "const": "data/governance/artifact_classification_manifest.json"
+    },
+    "ratchet_policy": {
+      "type": "object",
+      "required": [
+        "new_debt_requires_registration",
+        "resolved_debt_requires_evidence",
+        "open_debt_requires_owner_and_milestone"
+      ],
+      "properties": {
+        "new_debt_requires_registration": {
+          "const": true
+        },
+        "resolved_debt_requires_evidence": {
+          "const": true
+        },
+        "open_debt_requires_owner_and_milestone": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "schema_debt_subledger": {
+      "type": "object",
+      "required": [
+        "path",
+        "hash_algorithm",
+        "sha256",
+        "category_occurrence_count",
+        "unique_path_count",
+        "counts_by_category"
+      ],
+      "properties": {
+        "path": {
+          "const": "data/validation/schema_quality_baseline.json"
+        },
+        "hash_algorithm": {
+          "const": "sha256_utf8_lf_normalized"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "category_occurrence_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unique_path_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "counts_by_category": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "debts": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/debt"
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "total",
+        "open",
+        "resolved",
+        "accepted_exception",
+        "by_milestone",
+        "placeholder_count",
+        "roadmap_open_work_count",
+        "placeholder_paths_sha256",
+        "roadmap_open_work_sha256"
+      ],
+      "properties": {
+        "total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "open": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "resolved": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "accepted_exception": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "by_milestone": {
+          "type": "object",
+          "required": [
+            "M0",
+            "M1",
+            "M2",
+            "M3",
+            "M4",
+            "M5",
+            "M6",
+            "M7",
+            "M8",
+            "M9",
+            "M10"
+          ],
+          "properties": {
+            "M0": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "M1": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "M2": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "M3": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "M4": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "M5": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "M6": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "M7": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "M8": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "M9": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "M10": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "placeholder_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "roadmap_open_work_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "placeholder_paths_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "roadmap_open_work_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "semantic_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "repository_path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    },
+    "source_ref": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "repository_path",
+            "json_pointer",
+            "git_history",
+            "classification_selector"
+          ]
+        },
+        "path": {
+          "$ref": "#/$defs/repository_path"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "commit_query": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "enum": [
+                  "repository_path",
+                  "json_pointer"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "path",
+              "locator"
+            ],
+            "properties": {
+              "commit_query": false
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "const": "git_history"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "commit_query"
+            ],
+            "properties": {
+              "path": false,
+              "locator": false
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "const": "classification_selector"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "locator"
+            ],
+            "properties": {
+              "commit_query": false
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "debt": {
+      "type": "object",
+      "required": [
+        "debt_id",
+        "category",
+        "title",
+        "description",
+        "status",
+        "source_refs",
+        "owner_role",
+        "assigned_milestone",
+        "severity",
+        "ratchet_key",
+        "introduced_baseline",
+        "resolution_criteria",
+        "resolution_evidence"
+      ],
+      "properties": {
+        "debt_id": {
+          "type": "string",
+          "pattern": "^QD-(?:[0-9]{3,}|PH-[a-f0-9]{8,64}|OW-[0-9]{3,})$"
+        },
+        "category": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 5
+        },
+        "description": {
+          "type": "string",
+          "minLength": 10
+        },
+        "status": {
+          "enum": [
+            "open",
+            "accepted_exception",
+            "resolved"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/source_ref"
+          }
+        },
+        "owner_role": {
+          "type": "string",
+          "minLength": 3
+        },
+        "assigned_milestone": {
+          "type": "string",
+          "pattern": "^M(?:[0-9]|10)$"
+        },
+        "severity": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "blocking"
+          ]
+        },
+        "ratchet_key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.:-]*$"
+        },
+        "introduced_baseline": {
+          "$ref": "#/$defs/semantic_version"
+        },
+        "resolution_criteria": {
+          "type": "string",
+          "minLength": 10
+        },
+        "resolution_evidence": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/repository_path"
+          }
+        },
+        "accepted_exception_rationale": {
+          "type": "string",
+          "minLength": 10
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "status": {
+                "const": "resolved"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resolution_evidence": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "status": {
+                "const": "open"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "resolution_evidence": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "status": {
+                "const": "accepted_exception"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "accepted_exception_rationale"
+            ],
+            "properties": {
+              "resolution_evidence": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "assigned_milestone"
+            ],
+            "properties": {
+              "assigned_milestone": {
+                "const": "M0"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "resolved",
+                  "accepted_exception"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

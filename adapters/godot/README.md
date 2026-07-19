@@ -10,6 +10,9 @@ Translates YWE systems into Godot-specific implementations using GDScript, C#, o
 
 Planned.
 
+This is a platform-neutral planning surface. Concrete Godot implementation
+belongs in a separately authorized downstream repository after M10 acceptance.
+
 ## Files
 
 - `adapter_interface.md` -- Interface specification for the Godot adapter

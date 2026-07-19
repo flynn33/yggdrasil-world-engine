@@ -6,7 +6,7 @@ Status: framework-aligned governance baseline
 
 ## Purpose
 
-This document defines how YWE stays compatible with the Forsetti Framework while remaining code-agnostic on main.
+This document defines how YWE stays compatible with the Forsetti Framework while remaining platform-neutral on every repository branch.
 
 ## Forsetti Rules That Bind YWE
 
@@ -24,7 +24,7 @@ This document defines how YWE stays compatible with the Forsetti Framework while
 
 - `core/*` are planned first-party Forsetti service modules that own truth domains
 - `modules/*` are planned Forsetti service modules that consume core truth and emit manifestations
-- `adapters/*` are downstream bridge specifications; they do not become truth-owning modules in this branch
+- `adapters/*` are future downstream bridge specifications; they do not become truth-owning modules in this repository
 - `data/*`, `lore/*`, and `docs/*` are assets and references, not runtime modules
 
 ## Governance Split
@@ -38,7 +38,7 @@ This document defines how YWE stays compatible with the Forsetti Framework while
 - this repository does not vendor Forsetti implementation files
 - this repository remains governed by its proprietary license and does not inherit a host framework license
 - compliance here means architectural compatibility, not code inclusion
-- platform-specific Forsetti host code belongs in later implementation branches or companion repositories
+- platform-specific Forsetti host code belongs in separate downstream repositories only after M10 acceptance and explicit authorization
 
 ## Required Outcome
 

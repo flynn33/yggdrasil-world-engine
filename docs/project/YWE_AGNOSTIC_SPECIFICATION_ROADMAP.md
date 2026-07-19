@@ -45,8 +45,8 @@ Every subsystem is measured on five independent dimensions:
 
 | Milestone | Indicator | Status | Dependencies | Program outcome |
 |---|---|---|---|---|
-| M0 | 🟡 | `in_progress` | None | One truthful repository baseline |
-| M1 | ⚪ | `planned` | M0 | Normalized canon, terminology, and governance |
+| M0 | 🟢 | `complete` | None | One truthful repository baseline |
+| M1 | 🟡 | `in_progress` | M0 | Normalized canon, terminology, and governance |
 | M2 | ⚪ | `planned` | M1 | Executable contracts, schemas, and fixtures |
 | M3 | ⚪ | `planned` | M2 | Complete deterministic core semantics |
 | M4 | ⚪ | `planned` | M3 | Persistence, branching, and multiplayer protocols |
@@ -113,7 +113,7 @@ role, repository-local evidence, and open work for every row. Status values are
 
 | Area | Current maturity | Remaining work |
 |---|---|---|
-| Repository truth | Inconsistent | Reconcile every version, status, source inventory, placeholder, license, owner, and authority claim |
+| Repository truth | Baseline established | Maintain M0 truth controls while M1 normalizes terminology and authority decisions |
 | Schema system | Incomplete | Complete identifiers, convert descriptive records, bind fixtures, validate instances, and eliminate tracked debt |
 | ASH reference oracle | Partial | Context classification, recovery, fallback, containment, safe halt, topology, axioms, and emitter traceability |
 | Core engine semantics | Partial | Deterministic algorithms, failure modes, persistence, interfaces, and complete conformance |
@@ -143,10 +143,13 @@ role, repository-local evidence, and open work for every row. Status values are
 
 ## M0 — Establish one truthful baseline
 
-Status: `in_progress`
+Status: `complete`
 Dependencies: none
 Indicative effort: 1–2 weeks
 Owner role: Repository governance maintainers
+
+Acceptance evidence: `data/governance/m0_acceptance_evidence.json` and
+`docs/project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md`
 
 Deliverables:
 
@@ -169,7 +172,7 @@ Exit criteria:
 
 ## M1 — Normalize canon terminology and governance
 
-Status: `planned`
+Status: `in_progress`
 Dependencies: M0
 Indicative effort: 2–3 weeks
 Owner role: Canon and governance maintainers

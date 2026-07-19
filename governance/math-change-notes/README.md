@@ -2,7 +2,7 @@
 
 This directory holds the change notes that the Math Integrity Agent requires when any math-critical file in the canonical ASH Pattern System repository is edited.
 
-See `governance/github-agents-governance.md` for the agent's full policy and for the current list of math-critical paths.
+See `.github/agents/math-integrity-agent.md` for the full policy and the current list of math-critical paths.
 
 ## When a note is required
 

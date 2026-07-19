@@ -58,7 +58,7 @@ delegable_compatible_responsibilities:
 suppression_conditions:
   - condition_id: sc_impl_not_ready
     reason: implementation_not_ready
-    description: Runtime declaration may precede executable implementation on main.
+    description: This specification declaration precedes any authorized post-M10 downstream executable implementation.
   - condition_id: sc_no_transition_context
     reason: runtime_context_not_required
     description: Specific realm-transition realization paths may remain dormant when no crossing is active.

@@ -36,8 +36,8 @@ flowchart TB
 | `wiki.md` | Wiki routing index |
 | `repository-contribution-policy.json` | Machine-readable contribution policy |
 | `yggdrasil-instructions.json` | Machine-readable project instruction set |
-| `missing_source_documents.md` | Root source inventory mirror |
-| `SOURCE_AVAILABILITY_MANIFEST.md` | Source availability mirror for validation tooling |
+| `missing_source_documents.md` | Synchronized placeholder and missing-source summary |
+| `SOURCE_AVAILABILITY_MANIFEST.md` | Historical source-ingest provenance retained for validation tooling |
 
 ## Directory Ownership
 

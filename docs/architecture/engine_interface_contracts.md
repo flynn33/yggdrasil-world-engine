@@ -33,8 +33,8 @@ Every YWE runtime module must be representable as a Forsetti module with:
 
 - core engines map to Forsetti `service` modules
 - feature modules map to Forsetti `service` modules
-- any future presentation surface maps to a Forsetti `ui` module only in a platform branch
-- host bridges may map to Forsetti `app` modules or host-layer integrations outside this branch
+- after M10 acceptance, a future downstream presentation surface may map to a Forsetti `ui` module
+- downstream host bridges may map to Forsetti `app` modules or host-layer integrations outside this repository
 
 ## Communication Policy
 

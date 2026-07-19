@@ -4,8 +4,8 @@ Brief description of changes.
 
 ## Type of Change
 
-- [ ] Specification change (main branch)
-- [ ] Engine implementation (engine branch)
+- [ ] Specification or contract change
+- [ ] Governance or validation change
 - [ ] Documentation update
 - [ ] Tooling / scripts
 - [ ] Bug fix
@@ -41,7 +41,7 @@ Brief description of changes.
 - [ ] Roadmap, repository status, and version sources are synchronized
 - [ ] `python scripts/check_repository_attribution_policy.py .` passes
 - [ ] `scripts/run_checks.sh --context pull_request --base origin/main` passes when applicable
-- [ ] No engine-specific code on main branch (if targeting main)
+- [ ] No platform-specific runtime code on any repository branch
 - [ ] Layer dependencies respected
 - [ ] Documentation updated (if applicable)
 

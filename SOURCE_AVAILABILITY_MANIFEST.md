@@ -1,7 +1,17 @@
 # Source Availability Manifest
 
+Status: historical source-ingest provenance
+
 This manifest maps referenced source artifacts to their current repository
 locations.
+
+This record preserves how supplied and placeholder-named sources were routed
+into the repository. It is not the current maturity-class authority. Current
+classification is governed by
+`data/governance/artifact_classification_manifest.json`; current human routing
+and live placeholder status are recorded in `docs/project/source_inventory.md`
+and `missing_source_documents.md`.
+
 ## Supplied with content
 - `ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md` -> `docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md`
 - `ash_pattern_registry_schema.yaml` -> `data/pattern_archetypes/ash_pattern_registry_schema.yaml`
@@ -19,6 +29,10 @@ locations.
 - `cosmology_authority_contracts` -> `docs/architecture/ywe_cosmology_authority_contract.md`, `docs/architecture/ash_pattern_system_component_contract.md`, `docs/architecture/ash_cosmological_model_source_map.md`, `data/validation/cosmology_authority_gate_contract.json`, `data/validation/repository_drift_guardrail_rules.json`
 
 ## Present as placeholders
+
+This heading preserves the source-ingest category. Some listed targets have
+since been promoted; the current authorities above determine their live status.
+
 - `player_origin_arc_rules.yaml` -> `core/narrative_engine/player_origin_arc_rules.yaml`
 - `PLAYER_ORIGIN_ARC_NOTES.md` -> `docs/architecture/PLAYER_ORIGIN_ARC_NOTES.md`
 - `npc_synthesis_rules.yaml` -> `core/narrative_engine/npc_synthesis_rules.yaml`

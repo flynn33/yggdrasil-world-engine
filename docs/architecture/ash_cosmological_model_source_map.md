@@ -27,7 +27,7 @@ This document maps ASH Cosmological Model source concepts into the Yggdrasil Wor
 ```text
 docs/architecture/ywe_cosmology_authority_contract.md
 docs/architecture/leaf_branch_reality_contract.md
-docs/architecture/world_and_location_state_contract.md
+docs/architecture/worldstate_location_mutation_v1.md
 data/schemas/pattern_vector_schema.json
 data/schemas/existence_potential_schema.json
 data/schemas/branch_event_schema.json
