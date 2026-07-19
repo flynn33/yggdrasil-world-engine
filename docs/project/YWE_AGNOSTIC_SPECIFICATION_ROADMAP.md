@@ -46,8 +46,8 @@ Every subsystem is measured on five independent dimensions:
 | Milestone | Indicator | Status | Dependencies | Program outcome |
 |---|---|---|---|---|
 | M0 | 🟢 | `complete` | None | One truthful repository baseline |
-| M1 | 🟡 | `in_progress` | M0 | Normalized canon, terminology, and governance |
-| M2 | ⚪ | `planned` | M1 | Executable contracts, schemas, and fixtures |
+| M1 | 🟢 | `complete` | M0 | Normalized canon, terminology, and governance |
+| M2 | 🟡 | `in_progress` | M1 | Executable contracts, schemas, and fixtures |
 | M3 | ⚪ | `planned` | M2 | Complete deterministic core semantics |
 | M4 | ⚪ | `planned` | M3 | Persistence, branching, and multiplayer protocols |
 | M5 | ⚪ | `planned` | M3, M4 | Complete content-generation engines |
@@ -77,7 +77,7 @@ role, repository-local evidence, and open work for every row. Status values are
 
 | Subsystem | Phase gate | Normative | Schema | Conformance | Release | Next |
 |---|---|---|---|---|---|---|
-| Authority and engine-game boundaries | `not_applicable` | `partial` | `partial` | `partial` | `not_ready` | M1 |
+| Authority and engine-game boundaries | `not_applicable` | `complete` | `complete` | `complete` | `complete` | M1 |
 | ASH algebra and reference oracle | `complete` | `complete` | `partial` | `complete` | `not_ready` | M3 |
 | Cosmology realms and branch reality | `complete` | `partial` | `partial` | `partial` | `not_ready` | M4 |
 | Player runtime origin and progression | `complete` | `partial` | `partial` | `partial` | `not_ready` | M4 |
@@ -113,7 +113,7 @@ role, repository-local evidence, and open work for every row. Status values are
 
 | Area | Current maturity | Remaining work |
 |---|---|---|
-| Repository truth | Baseline established | Maintain M0 truth controls while M1 normalizes terminology and authority decisions |
+| Repository truth | M1 authority closure accepted | Maintain M0 and M1 truth controls while M2 builds executable contracts, schemas, and fixtures |
 | Schema system | Incomplete | Complete identifiers, convert descriptive records, bind fixtures, validate instances, and eliminate tracked debt |
 | ASH reference oracle | Partial | Context classification, recovery, fallback, containment, safe halt, topology, axioms, and emitter traceability |
 | Core engine semantics | Partial | Deterministic algorithms, failure modes, persistence, interfaces, and complete conformance |
@@ -172,10 +172,13 @@ Exit criteria:
 
 ## M1 — Normalize canon terminology and governance
 
-Status: `in_progress`
+Status: `complete`
 Dependencies: M0
 Indicative effort: 2–3 weeks
 Owner role: Canon and governance maintainers
+
+Acceptance evidence: `data/governance/m1_acceptance_evidence.json` and
+`docs/project/M1_CANON_TERMINOLOGY_GOVERNANCE_ACCEPTANCE.md`
 
 Deliverables:
 
@@ -200,7 +203,7 @@ Exit criteria:
 
 ## M2 — Build the canonical contract and schema foundation
 
-Status: `planned`
+Status: `in_progress`
 Dependencies: M1
 Indicative effort: 4–6 weeks
 Owner role: Contract and schema maintainers

@@ -15,6 +15,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 - Establish the M0 truthful-baseline governance authorities and acceptance evidence.
 - Normalize ontology, scoped worldstate, perception, realm-coordinate, companion-resonance, and reversal terminology.
 - Complete the WRW cosmology scope and provenance records and retain the master specification as an informative mixed-scope synthesis.
+- Complete M1 canon terminology and governance closure and advance the active roadmap milestone to M2 while publication remains unreleased and platform work remains unauthorized.
 - Clarify that repository baseline tags and changelog entries are not published specification releases.
 - Keep platform product implementation deferred until the M10 acceptance gate.
 

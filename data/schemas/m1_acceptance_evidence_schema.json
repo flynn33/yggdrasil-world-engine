@@ -20,6 +20,8 @@
     "exit_criteria",
     "debt_closures",
     "authority_metrics",
+    "classification_metrics",
+    "scope_metrics",
     "diff_review",
     "math_change_review",
     "roadmap_transition",
@@ -166,6 +168,12 @@
     },
     "authority_metrics": {
       "$ref": "#/$defs/authority_metrics"
+    },
+    "classification_metrics": {
+      "$ref": "#/$defs/classification_metrics"
+    },
+    "scope_metrics": {
+      "$ref": "#/$defs/scope_metrics"
     },
     "diff_review": {
       "$ref": "#/$defs/diff_review"
@@ -337,7 +345,8 @@
       "required": [
         "debt_id",
         "outcome",
-        "evidence_refs"
+        "evidence_refs",
+        "evidence_details"
       ],
       "properties": {
         "debt_id": {
@@ -364,6 +373,40 @@
           "items": {
             "$ref": "#/$defs/repository_path"
           }
+        },
+        "evidence_details": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/evidence_locator"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidence_locator": {
+      "type": "object",
+      "required": [
+        "kind",
+        "path",
+        "locator"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "heading",
+            "json_pointer",
+            "yaml_path",
+            "exact_text"
+          ]
+        },
+        "path": {
+          "$ref": "#/$defs/repository_path"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
         }
       },
       "additionalProperties": false
@@ -400,6 +443,58 @@
         "ash_source_aggregate_sha256": {
           "$ref": "#/$defs/sha256"
         }
+      },
+      "additionalProperties": false
+    },
+    "classification_metrics": {
+      "type": "object",
+      "required": [
+        "tracked_paths",
+        "classified_paths",
+        "unclassified_paths",
+        "multiply_classified_paths",
+        "normative",
+        "informative",
+        "example",
+        "historical",
+        "deprecated",
+        "superseded",
+        "placeholder"
+      ],
+      "properties": {
+        "tracked_paths": {"type": "integer", "minimum": 1},
+        "classified_paths": {"type": "integer", "minimum": 1},
+        "unclassified_paths": {"const": 0},
+        "multiply_classified_paths": {"const": 0},
+        "normative": {"type": "integer", "minimum": 0},
+        "informative": {"type": "integer", "minimum": 0},
+        "example": {"type": "integer", "minimum": 0},
+        "historical": {"type": "integer", "minimum": 0},
+        "deprecated": {"type": "integer", "minimum": 0},
+        "superseded": {"type": "integer", "minimum": 0},
+        "placeholder": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "scope_metrics": {
+      "type": "object",
+      "required": [
+        "ywe_core",
+        "ywe_extension_profile",
+        "ash_dependency_material",
+        "wrw_reference_profile",
+        "governance_validation",
+        "historical_evidence",
+        "later_release_work"
+      ],
+      "properties": {
+        "ywe_core": {"type": "integer", "minimum": 0},
+        "ywe_extension_profile": {"type": "integer", "minimum": 0},
+        "ash_dependency_material": {"type": "integer", "minimum": 0},
+        "wrw_reference_profile": {"type": "integer", "minimum": 0},
+        "governance_validation": {"type": "integer", "minimum": 0},
+        "historical_evidence": {"type": "integer", "minimum": 0},
+        "later_release_work": {"type": "integer", "minimum": 0}
       },
       "additionalProperties": false
     },

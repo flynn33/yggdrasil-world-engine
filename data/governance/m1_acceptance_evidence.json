@@ -1,0 +1,418 @@
+{
+  "schema_ref": "data/schemas/m1_acceptance_evidence_schema.json",
+  "artifact_type": "milestone_acceptance_evidence",
+  "artifact_version": "1.0.0",
+  "milestone_id": "M1",
+  "outcome": "pass",
+  "recorded_at": "2026-07-19T19:32:42Z",
+  "baseline": {
+    "repository_version": "2.0.23",
+    "base_ref": "origin/main",
+    "base_sha": "dba8ad31f35e680507cb990792e71ef3b173daee",
+    "merge_base": "dba8ad31f35e680507cb990792e71ef3b173daee",
+    "branch": "governance/m1-canon-terminology"
+  },
+  "repository_state_digest_algorithm": "sha256_sorted_path_nul_normalized_utf8_lf_sha256_nul",
+  "repository_state_digest": "dddf0d72267fdc3a692f76c64fdda2aa9141943708de5e30e3b7697325a65633",
+  "digest_exclusions": [
+    "data/governance/m1_acceptance_evidence.json",
+    "docs/project/M1_CANON_TERMINOLOGY_GOVERNANCE_ACCEPTANCE.md"
+  ],
+  "check_catalog": {
+    "path": "data/validation/repository_checks.json",
+    "hash_algorithm": "sha256_utf8_lf_normalized",
+    "sha256": "497fb5c7cb26113ded9e7978d98bf242e6418d9481e04ab6b9052decddb7bca4"
+  },
+  "validation_runs": [
+    {
+      "context": "local",
+      "executed_at": "2026-07-19T19:29:37Z",
+      "check_count": 29,
+      "passed": 29,
+      "blocking_failures": 0,
+      "advisories": 0,
+      "result_summary": "Results: 29 passed, 0 blocking failures, 0 advisories",
+      "result_summary_sha256": "689ff79eb894f8383094add369f6fd8f703186ad46e2282d2589c9f4494e67cb"
+    },
+    {
+      "context": "pull_request",
+      "executed_at": "2026-07-19T19:32:42Z",
+      "check_count": 30,
+      "passed": 30,
+      "blocking_failures": 0,
+      "advisories": 0,
+      "result_summary": "Results: 30 passed, 0 blocking failures, 0 advisories",
+      "result_summary_sha256": "0157bc1be60330d3fe044c43b3b9aa0484148fb00a7fd54332df4b4f8c47cb57"
+    }
+  ],
+  "deliverables": [
+    {
+      "id": "m1-d1",
+      "outcome": "pass",
+      "evidence_refs": [
+        "docs/governance/normative_language_and_requirement_id_policy.md",
+        "data/governance/normative_requirement_register.json",
+        "data/schemas/normative_requirement_register_schema.json",
+        "scripts/check_m1_canon_governance.py"
+      ]
+    },
+    {
+      "id": "m1-d2",
+      "outcome": "pass",
+      "evidence_refs": [
+        "docs/governance/governance_records_policy.md",
+        "data/governance/governance_record_register.json",
+        "data/schemas/governance_record_register_schema.json",
+        "conformance/deviation-log.md"
+      ]
+    },
+    {
+      "id": "m1-d3",
+      "outcome": "pass",
+      "evidence_refs": [
+        "docs/glossary/ywe_design_glossary.md",
+        "docs/architecture/truth_authority_lattice.md",
+        "core/narrative_engine/worldstate_delta_rules.yaml",
+        "data/governance/governance_record_register.json"
+      ]
+    },
+    {
+      "id": "m1-d4",
+      "outcome": "pass",
+      "evidence_refs": [
+        "docs/glossary/ywe_design_glossary.md",
+        "data/governance/canonical_term_index.json",
+        "data/realm_registry/realms.json",
+        "data/ash_state/realm_bit_mapping.yaml"
+      ]
+    },
+    {
+      "id": "m1-d5",
+      "outcome": "pass",
+      "evidence_refs": [
+        "docs/architecture/truth_authority_lattice.md",
+        "data/governance/ash_dependency_identity.json",
+        "core/ash_pattern_engine/canonical/README.md",
+        "data/governance/governance_record_register.json"
+      ]
+    },
+    {
+      "id": "m1-d6",
+      "outcome": "pass",
+      "evidence_refs": [
+        "docs/glossary/ywe_design_glossary.md",
+        "data/player_schema.json",
+        "core/perception_engine/perception_schema.json",
+        "docs/architecture/dual_variable_alignment_model_contract.md"
+      ]
+    },
+    {
+      "id": "m1-d7",
+      "outcome": "pass",
+      "evidence_refs": [
+        "docs/glossary/ywe_design_glossary.md",
+        "core/narrative_engine/npc_synthesis_rules.yaml",
+        "core/narrative_engine/worldstate_delta_rules.yaml"
+      ]
+    },
+    {
+      "id": "m1-d8",
+      "outcome": "pass",
+      "evidence_refs": [
+        "docs/architecture/truth_authority_lattice.md",
+        "data/governance/truth_authority_lattice.json",
+        "data/schemas/truth_authority_lattice_schema.json",
+        "scripts/check_m1_canon_governance.py"
+      ]
+    },
+    {
+      "id": "m1-d9",
+      "outcome": "pass",
+      "evidence_refs": [
+        "docs/architecture/ywe_core_wrw_scope_contract.md",
+        "data/governance/scope_partition_manifest.json",
+        "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+        "lore/wrw_cosmology/canon_scope.md"
+      ]
+    },
+    {
+      "id": "m1-d10",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/governance/ash_dependency_identity.json",
+        "scripts/sync_ash_specifications.py",
+        "core/ash_pattern_engine/canonical/README.md",
+        "core/ash_pattern_engine/canonical/registries/fallback-policy-registry.md",
+        "specs/registries/fallback-policy-registry.md"
+      ]
+    }
+  ],
+  "exit_criteria": [
+    {
+      "id": "m1-e1",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/governance/normative_requirement_register.json",
+        "data/governance/truth_authority_lattice.json",
+        "scripts/check_m1_canon_governance.py",
+        "tests/test_check_m1_canon_governance.py"
+      ]
+    },
+    {
+      "id": "m1-e2",
+      "outcome": "pass",
+      "evidence_refs": [
+        "data/governance/governance_record_register.json",
+        "docs/governance/governance_records_policy.md"
+      ]
+    },
+    {
+      "id": "m1-e3",
+      "outcome": "pass",
+      "evidence_refs": [
+        "docs/glossary/ywe_design_glossary.md",
+        "data/governance/canonical_term_index.json",
+        "scripts/check_m1_canon_governance.py",
+        "tests/test_check_m1_canon_governance.py"
+      ]
+    }
+  ],
+  "debt_closures": [
+    {
+      "debt_id": "QD-PH-dd00c6d30da8",
+      "outcome": "resolved",
+      "evidence_refs": [
+        "lore/wrw_cosmology/canon_scope.md",
+        "lore/wrw_cosmology/first_darkness_and_divine_core.md",
+        "lore/wrw_cosmology/trial_of_return_michael_lucifer_odin.md",
+        "docs/architecture/ywe_core_wrw_scope_contract.md"
+      ],
+      "evidence_details": [
+        {
+          "kind": "heading",
+          "path": "lore/wrw_cosmology/canon_scope.md",
+          "locator": "Canonical Sources; In Scope; Out of Scope; Cross-Scope Rules"
+        }
+      ]
+    },
+    {
+      "debt_id": "QD-PH-37cd25fd2cac",
+      "outcome": "resolved",
+      "evidence_refs": [
+        "lore/wrw_cosmology/source_notes.md",
+        "lore/wrw_cosmology/first_darkness_and_divine_core.md",
+        "lore/wrw_cosmology/trial_of_return_michael_lucifer_odin.md",
+        "data/governance/artifact_classification_manifest.json"
+      ],
+      "evidence_details": [
+        {
+          "kind": "heading",
+          "path": "lore/wrw_cosmology/source_notes.md",
+          "locator": "Source Register; Provenance Rules; Source-to-Claim Map"
+        }
+      ]
+    },
+    {
+      "debt_id": "QD-OW-001",
+      "outcome": "resolved",
+      "evidence_refs": [
+        "data/governance/specification_roadmap.json",
+        "data/governance/truth_authority_lattice.json",
+        "docs/architecture/truth_authority_lattice.md",
+        "docs/architecture/ywe_core_wrw_scope_contract.md",
+        "data/governance/canonical_term_index.json",
+        "docs/glossary/ywe_design_glossary.md"
+      ],
+      "evidence_details": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/specification_roadmap.json",
+          "locator": "/subsystems/0/open_work"
+        }
+      ]
+    },
+    {
+      "debt_id": "QD-063",
+      "outcome": "resolved",
+      "evidence_refs": [
+        "docs/glossary/ywe_design_glossary.md",
+        "data/governance/truth_authority_lattice.json",
+        "docs/architecture/truth_authority_lattice.md",
+        "docs/architecture/worldstate_location_mutation_v1.md",
+        "core/narrative_engine/worldstate_delta_rules.yaml"
+      ],
+      "evidence_details": [
+        {
+          "kind": "heading",
+          "path": "docs/glossary/ywe_design_glossary.md",
+          "locator": "Ontology; Perception Overlay; Worldstate"
+        }
+      ]
+    },
+    {
+      "debt_id": "QD-064",
+      "outcome": "resolved",
+      "evidence_refs": [
+        "docs/glossary/ywe_design_glossary.md",
+        "data/governance/canonical_term_index.json",
+        "data/ash_state/realm_bit_mapping.yaml",
+        "core/ash_pattern_engine/canonical/core/realm-identity.pseudo.md"
+      ],
+      "evidence_details": [
+        {
+          "kind": "heading",
+          "path": "docs/glossary/ywe_design_glossary.md",
+          "locator": "Structural Coordinate; Coordinate Index; Presentation Order; Realm; Ordinal; ASH State Vector; State Identity"
+        }
+      ]
+    },
+    {
+      "debt_id": "QD-065",
+      "outcome": "resolved",
+      "evidence_refs": [
+        "data/governance/truth_authority_lattice.json",
+        "docs/architecture/truth_authority_lattice.md",
+        "data/governance/ash_dependency_identity.json",
+        "core/ash_pattern_engine/canonical/README.md"
+      ],
+      "evidence_details": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/ash_dependency_identity.json",
+          "locator": "/dependency_id"
+        }
+      ]
+    },
+    {
+      "debt_id": "QD-066",
+      "outcome": "resolved",
+      "evidence_refs": [
+        "docs/glossary/ywe_design_glossary.md",
+        "data/governance/canonical_term_index.json",
+        "data/player_schema.json",
+        "modules/artifact_engine/artifact_system_rules.yaml"
+      ],
+      "evidence_details": [
+        {
+          "kind": "heading",
+          "path": "docs/glossary/ywe_design_glossary.md",
+          "locator": "Wolf Resonance"
+        }
+      ]
+    },
+    {
+      "debt_id": "QD-067",
+      "outcome": "resolved",
+      "evidence_refs": [
+        "docs/glossary/ywe_design_glossary.md",
+        "data/governance/canonical_term_index.json",
+        "core/narrative_engine/npc_synthesis_rules.yaml",
+        "core/narrative_engine/worldstate_delta_rules.yaml"
+      ],
+      "evidence_details": [
+        {
+          "kind": "yaml_path",
+          "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+          "locator": "history_and_reversal_semantics.compatibility_aliases.reversals_require_new_worldstate_delta"
+        }
+      ]
+    },
+    {
+      "debt_id": "QD-068",
+      "outcome": "resolved",
+      "evidence_refs": [
+        "docs/architecture/ywe_core_wrw_scope_contract.md",
+        "data/governance/scope_partition_manifest.json",
+        "docs/master_specification/YWE_MASTER_SPECIFICATION.md"
+      ],
+      "evidence_details": [
+        {
+          "kind": "heading",
+          "path": "docs/architecture/ywe_core_wrw_scope_contract.md",
+          "locator": "YWE Core; WRW Reference Profile; Dependency Direction; Routing Rules"
+        }
+      ]
+    },
+    {
+      "debt_id": "QD-069",
+      "outcome": "resolved",
+      "evidence_refs": [
+        "data/governance/ash_dependency_identity.json",
+        "scripts/sync_ash_specifications.py",
+        "docs/architecture/truth_authority_lattice.md",
+        "core/ash_pattern_engine/canonical/README.md"
+      ],
+      "evidence_details": [
+        {
+          "kind": "json_pointer",
+          "path": "data/governance/ash_dependency_identity.json",
+          "locator": "/aggregate_sha256"
+        }
+      ]
+    }
+  ],
+  "authority_metrics": {
+    "requirement_count": 18,
+    "governance_record_count": 27,
+    "term_count": 119,
+    "authority_node_count": 10,
+    "ash_source_file_count": 32,
+    "ash_source_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb"
+  },
+  "classification_metrics": {
+    "tracked_paths": 1010,
+    "classified_paths": 1010,
+    "unclassified_paths": 0,
+    "multiply_classified_paths": 0,
+    "normative": 744,
+    "informative": 43,
+    "example": 160,
+    "historical": 12,
+    "deprecated": 1,
+    "superseded": 6,
+    "placeholder": 44
+  },
+  "scope_metrics": {
+    "ywe_core": 117,
+    "ywe_extension_profile": 121,
+    "ash_dependency_material": 66,
+    "wrw_reference_profile": 289,
+    "governance_validation": 339,
+    "historical_evidence": 19,
+    "later_release_work": 59
+  },
+  "diff_review": {
+    "base_ref": "origin/main",
+    "files_created": 22,
+    "files_patched": 91,
+    "files_deleted": 0,
+    "files_renamed": 0,
+    "m0_acceptance_files_changed": false,
+    "diff_hash_algorithm": "sha256_git_diff_binary_excluding_m1_evidence",
+    "diff_sha256": "af28b1ebe02e520752828ae0ecfde6f8de6dd09b6c274607fff90c1ccf6c3646"
+  },
+  "math_change_review": {
+    "note_path": "governance/math-change-notes/2026-07-19-ash-source-authority-and-realm-identity.md",
+    "required_label": "baseline-approved",
+    "pull_request": {
+      "repository": "flynn33/yggdrasil-world-engine",
+      "number": 69,
+      "url": "https://github.com/flynn33/yggdrasil-world-engine/pull/69"
+    },
+    "label_observation": {
+      "label": "baseline-approved",
+      "state": "present",
+      "actor": "flynn33",
+      "observed_at": "2026-07-19T18:51:44Z"
+    },
+    "baseline_shape_preserved": true
+  },
+  "roadmap_transition": {
+    "completed_milestone": "M1",
+    "activated_milestone": "M2",
+    "current_milestone": "M2"
+  },
+  "publication_state": "unreleased",
+  "platform_work_authorized": false,
+  "unresolved_issues": []
+}

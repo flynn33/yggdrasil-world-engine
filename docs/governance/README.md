@@ -32,6 +32,8 @@ lifecycle rules.
 | `../../data/governance/canonical_term_index.json` | Indexes canonical glossary concepts without duplicating definition prose. |
 | `../../data/validation/repository_quality_debt_inventory.json` | Registers ratcheted repository quality debt. |
 | `../project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md` | Records the human-readable M0 acceptance evidence. |
+| `../../data/governance/m1_acceptance_evidence.json` | Records the machine-readable M1 acceptance evidence. |
+| `../project/M1_CANON_TERMINOLOGY_GOVERNANCE_ACCEPTANCE.md` | Records the human-readable M1 acceptance evidence. |
 
 ## Workflow Entry Points
 

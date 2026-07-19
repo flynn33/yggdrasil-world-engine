@@ -74,10 +74,10 @@ products remain deferred until the M10 specification gate is accepted.
 | Indicator | Current state |
 |---|---|
 | Repository baseline | `v2.0.23` |
-| Current milestone | 🟡 `M1` — Normalize canon terminology and governance (`in_progress`) |
-| Accepted milestone gates | `1 of 11` |
-| Milestone queue | `1` in progress; `9` planned; `0` blocked; `0` deferred |
-| Release-ready subsystems | `0 of 15` |
+| Current milestone | 🟡 `M2` — Build the canonical contract and schema foundation (`in_progress`) |
+| Accepted milestone gates | `2 of 11` |
+| Milestone queue | `1` in progress; `8` planned; `0` blocked; `0` deferred |
+| Release-ready subsystems | `1 of 15` |
 | Specification publication | `unreleased`; `0` GitHub Release objects; `0` agnostic specification releases (verified `2026-07-19`) |
 | Platform product work | ⏸️ `deferred`; authorization requires `M10` acceptance |
 
@@ -86,8 +86,8 @@ Milestone indicators: 🟢 `complete` · 🟡 `in_progress` · ⚪ `planned` · 
 | Milestone | Indicator | Status | Dependencies | Objective |
 |---|:---:|---|---|---|
 | M0 | 🟢 | `complete` | None | Establish one truthful baseline |
-| M1 | 🟡 | `in_progress` | M0 | Normalize canon terminology and governance |
-| M2 | ⚪ | `planned` | M1 | Build the canonical contract and schema foundation |
+| M1 | 🟢 | `complete` | M0 | Normalize canon terminology and governance |
+| M2 | 🟡 | `in_progress` | M1 | Build the canonical contract and schema foundation |
 | M3 | ⚪ | `planned` | M2 | Complete core deterministic semantics and the reference oracle |
 | M4 | ⚪ | `planned` | M3 | Complete state persistence branching and multiplayer |
 | M5 | ⚪ | `planned` | M3, M4 | Finish narrative and content generation engines |
@@ -102,10 +102,10 @@ Milestone indicators: 🟢 `complete` · 🟡 `in_progress` · ⚪ `planned` · 
 | Dimension | Complete | Partial | Not started | Not applicable | Deferred | Not ready |
 |---|---:|---:|---:|---:|---:|---:|
 | Historical phase gate | 6 | 3 | 1 | 5 | 0 | 0 |
-| Normative artifact | 1 | 10 | 4 | 0 | 0 | 0 |
-| Executable schema | 0 | 9 | 6 | 0 | 0 | 0 |
-| Conformance tested | 1 | 11 | 3 | 0 | 0 | 0 |
-| Release readiness | 0 | 0 | 0 | 0 | 0 | 15 |
+| Normative artifact | 2 | 9 | 4 | 0 | 0 | 0 |
+| Executable schema | 1 | 8 | 6 | 0 | 0 | 0 |
+| Conformance tested | 2 | 10 | 3 | 0 | 0 | 0 |
+| Release readiness | 1 | 0 | 0 | 0 | 0 | 14 |
 
 These five maturity dimensions are independent. Accepted gates and maturity
 counts are not an estimated completion percentage: milestones differ in scope

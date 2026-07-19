@@ -19,6 +19,7 @@ if str(SCRIPTS) not in sys.path:
 import check_machine_readable_artifacts as machine_artifacts
 import check_governance_contracts as governance_contracts
 import check_platform_agnosticism as platform_check
+import check_player_runtime_state as player_runtime_check
 import check_repository_attribution_policy as attribution_policy
 import check_specification_roadmap as roadmap_check
 import update_version_references as version_updater
@@ -150,9 +151,61 @@ class RoadmapValidationTests(unittest.TestCase):
 
     def test_release_ready_subsystem_requires_complete_prerequisites(self):
         roadmap = copy.deepcopy(self.roadmap)
-        roadmap["subsystems"][0]["maturity"]["release_ready"] = "complete"
+        subsystem = next(
+            item
+            for item in roadmap["subsystems"]
+            if any(
+                item["maturity"][dimension] != "complete"
+                for dimension in (
+                    "normative_artifact_complete",
+                    "executable_schema_complete",
+                    "conformance_tested",
+                )
+            )
+        )
+        subsystem["maturity"]["release_ready"] = "complete"
         errors = roadmap_check.subsystem_errors(ROOT, roadmap)
         self.assertTrue(any("prerequisite" in error.lower() for error in errors))
+
+    def test_m1_governance_validators_are_platform_guard_exceptions(self):
+        spec = json.loads(
+            (ROOT / "data/validation/check_no_platform_runtime_code_phase_10.spec.json").read_text(
+                encoding="utf-8-sig"
+            )
+        )
+        added_paths = [
+            "scripts/check_m1_canon_governance.py",
+            "scripts/sync_ash_specifications.py",
+            "tests/test_ash_canonical.py",
+            "tests/test_check_m1_canon_governance.py",
+            "tests/test_sync_ash_specifications.py",
+        ]
+        errors: list[str] = []
+        with mock.patch.object(
+            player_runtime_check,
+            "git_change_paths",
+            return_value=[("A", path) for path in added_paths],
+        ):
+            player_runtime_check.check_no_platform_code(ROOT, spec, errors)
+        self.assertEqual([], errors)
+
+    def test_unlisted_python_runtime_file_remains_forbidden(self):
+        spec = json.loads(
+            (ROOT / "data/validation/check_no_platform_runtime_code_phase_10.spec.json").read_text(
+                encoding="utf-8-sig"
+            )
+        )
+        errors: list[str] = []
+        with mock.patch.object(
+            player_runtime_check,
+            "git_change_paths",
+            return_value=[("A", "platform/runtime_adapter.py")],
+        ):
+            player_runtime_check.check_no_platform_code(ROOT, spec, errors)
+        self.assertEqual(
+            ["Phase 10 added forbidden platform/code file: platform/runtime_adapter.py"],
+            errors,
+        )
 
     def test_completed_milestone_requires_acceptance_evidence(self):
         roadmap = copy.deepcopy(self.roadmap)

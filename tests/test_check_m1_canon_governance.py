@@ -67,7 +67,7 @@ def final_roadmap_from_live() -> dict:
 
 
 class LiveM1ContractTests(unittest.TestCase):
-    def test_live_provisional_repository_passes_without_closure_evidence(self):
+    def test_live_closed_repository_passes_with_acceptance_evidence(self):
         self.assertEqual([], m1.validation_errors(ROOT, run_external=False))
 
     def test_live_external_guardrails_pass(self):
@@ -612,17 +612,81 @@ class AshIdentityAndMirrorTests(unittest.TestCase):
 class RoadmapBoundaryAndImmutabilityTests(unittest.TestCase):
     def test_open_m1_debt_rejects_when_roadmap_says_complete(self):
         roadmap = final_roadmap_from_live()
-        debt = load_json(m1.DEBT_PATH)
+        debt = copy.deepcopy(load_json(m1.DEBT_PATH))
+        target = next(
+            item for item in debt["debts"] if item["debt_id"] == "QD-063"
+        )
+        target["status"] = "open"
+        target["resolution_evidence"] = []
+        target.pop("resolution_evidence_details", None)
         errors: list[str] = []
         m1.check_debt_and_roadmap(ROOT, roadmap, debt, errors)
         assert_error_contains(self, errors, "M1 debt is not resolved")
 
     def test_provisional_active_m1_state_accepts_open_assigned_debt(self):
-        roadmap = load_json(m1.ROADMAP_PATH)
-        debt = load_json(m1.DEBT_PATH)
+        roadmap = copy.deepcopy(load_json(m1.ROADMAP_PATH))
+        roadmap["current_milestone"] = "M1"
+        milestones = {item["id"]: item for item in roadmap["milestones"]}
+        milestones["M1"]["status"] = "in_progress"
+        milestones["M1"]["acceptance_evidence"] = []
+        milestones["M2"]["status"] = "planned"
+        debt = copy.deepcopy(load_json(m1.DEBT_PATH))
+        target = next(
+            item for item in debt["debts"] if item["debt_id"] == "QD-063"
+        )
+        target["status"] = "open"
+        target["resolution_evidence"] = []
+        target.pop("resolution_evidence_details", None)
         errors: list[str] = []
         m1.check_provisional_debt_and_roadmap(roadmap, debt, errors)
         self.assertEqual([], errors)
+
+    def test_precise_m1_debt_locators_resolve_and_stale_locator_rejects(self):
+        debt = load_json(m1.DEBT_PATH)
+        target_ids = {
+            item["debt_id"]
+            for item in debt["debts"]
+            if item.get("assigned_milestone") == "M1"
+        }
+        self.assertEqual(m1.EXPECTED_M1_DEBT_IDS, target_ids)
+        errors: list[str] = []
+        for item in debt["debts"]:
+            if item.get("debt_id") in target_ids:
+                m1.check_evidence_locators(
+                    ROOT,
+                    item.get("resolution_evidence_details"),
+                    item["debt_id"],
+                    errors,
+                )
+        self.assertEqual([], errors)
+
+        changed = copy.deepcopy(
+            next(item for item in debt["debts"] if item["debt_id"] == "QD-063")
+        )
+        changed["resolution_evidence_details"][0]["locator"] = "Missing Heading"
+        m1.check_evidence_locators(
+            ROOT,
+            changed["resolution_evidence_details"],
+            changed["debt_id"],
+            errors,
+        )
+        assert_error_contains(self, errors, "does not resolve")
+
+    def test_source_reference_fragments_must_resolve(self):
+        errors: list[str] = []
+        m1.check_reference_paths(
+            ROOT,
+            ["data/governance/specification_roadmap.json#/milestones/99"],
+            "wrong pointer",
+            errors,
+        )
+        m1.check_reference_paths(
+            ROOT,
+            ["docs/architecture/truth_authority_lattice.md#missing-heading"],
+            "wrong heading",
+            errors,
+        )
+        self.assertEqual(2, sum("unresolved repository reference" in error for error in errors))
 
     def test_platform_or_publication_claim_rejects(self):
         roadmap = copy.deepcopy(load_json(m1.ROADMAP_PATH))
@@ -823,6 +887,55 @@ class RoadmapBoundaryAndImmutabilityTests(unittest.TestCase):
             arguments = call.args[0]
             self.assertIn(f":(exclude){m1.EVIDENCE_PATH}", arguments)
             self.assertIn(f":(exclude){m1.EVIDENCE_DOCUMENT_PATH}", arguments)
+
+    def test_evidence_classification_and_scope_metrics_are_snapshot_derived(self):
+        classification = {
+            "tracked_path_snapshot": {"path_count": 12},
+            "coverage": {
+                "counts_by_class": {
+                    "normative": 4,
+                    "informative": 2,
+                    "example": 1,
+                    "historical": 2,
+                    "deprecated": 1,
+                    "superseded": 1,
+                    "placeholder": 1,
+                }
+            },
+        }
+        scope = {
+            "coverage": {
+                "counts_by_partition": {
+                    "ywe_core": 2,
+                    "ywe_extension_profile": 2,
+                    "ash_dependency_material": 2,
+                    "wrw_reference_profile": 2,
+                    "governance_validation": 2,
+                    "historical_evidence": 1,
+                    "later_release_work": 1,
+                }
+            }
+        }
+        self.assertEqual(
+            {
+                "tracked_paths": 12,
+                "classified_paths": 12,
+                "unclassified_paths": 0,
+                "multiply_classified_paths": 0,
+                "normative": 4,
+                "informative": 2,
+                "example": 1,
+                "historical": 2,
+                "deprecated": 1,
+                "superseded": 1,
+                "placeholder": 1,
+            },
+            m1.evidence_classification_metrics(classification),
+        )
+        self.assertEqual(
+            scope["coverage"]["counts_by_partition"],
+            m1.evidence_scope_metrics(scope),
+        )
 
     def test_changed_normative_artifact_outside_static_tuple_requires_id(self):
         with tempfile.TemporaryDirectory() as directory:

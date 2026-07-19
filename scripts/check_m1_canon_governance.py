@@ -45,6 +45,24 @@ M0_IMMUTABLE_PATHS = (
     "docs/project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md",
 )
 M1_EVIDENCE_PATHS = (EVIDENCE_PATH, EVIDENCE_DOCUMENT_PATH)
+CLASSIFICATION_METRIC_KEYS = (
+    "normative",
+    "informative",
+    "example",
+    "historical",
+    "deprecated",
+    "superseded",
+    "placeholder",
+)
+SCOPE_METRIC_KEYS = (
+    "ywe_core",
+    "ywe_extension_profile",
+    "ash_dependency_material",
+    "wrw_reference_profile",
+    "governance_validation",
+    "historical_evidence",
+    "later_release_work",
+)
 NORMATIVE_SURFACES = (
     "docs/governance/normative_language_and_requirement_id_policy.md",
     "docs/governance/governance_records_policy.md",
@@ -552,6 +570,95 @@ def source_reference_paths(value: Any) -> list[str]:
     return paths
 
 
+def repository_ref_bytes(
+    root: Path,
+    relative_path: str,
+    snapshot_files: dict[str, bytes] | None = None,
+) -> bytes | None:
+    if snapshot_files is not None:
+        return snapshot_files.get(relative_path)
+    try:
+        return (root / relative_path).read_bytes()
+    except OSError:
+        return None
+
+
+def markdown_heading_slugs(text: str) -> set[str]:
+    slugs: set[str] = set()
+    counts: Counter[str] = Counter()
+    for match in re.finditer(r"(?m)^#{1,6}\s+(.+?)\s*#*\s*$", text):
+        label = re.sub(r"<[^>]+>", "", match.group(1)).strip().lower()
+        slug = re.sub(r"[^\w\s-]", "", label, flags=re.UNICODE)
+        slug = re.sub(r"\s+", "-", slug)
+        suffix = counts[slug]
+        counts[slug] += 1
+        slugs.add(slug if suffix == 0 else f"{slug}-{suffix}")
+    return slugs
+
+
+def resolve_dotted_path(document: Any, locator: str) -> bool:
+    current = document
+    for token in locator.split("."):
+        if isinstance(current, dict) and token in current:
+            current = current[token]
+        elif isinstance(current, list) and token.isdigit() and int(token) < len(current):
+            current = current[int(token)]
+        else:
+            return False
+    return True
+
+
+def check_evidence_locators(
+    root: Path,
+    value: Any,
+    label: str,
+    errors: list[str],
+    snapshot_files: dict[str, bytes] | None = None,
+) -> None:
+    if not isinstance(value, list) or not value:
+        errors.append(f"{label} lacks precise evidence locators")
+        return
+    for item in value:
+        if not isinstance(item, dict):
+            errors.append(f"{label} contains a malformed evidence locator")
+            continue
+        kind = item.get("kind")
+        path = item.get("path")
+        locator = item.get("locator")
+        if not isinstance(path, str) or not repository_ref_exists(root, path, snapshot_files):
+            errors.append(f"{label} locator references missing repository path {path!r}")
+            continue
+        if not isinstance(locator, str) or not locator:
+            errors.append(f"{label} has an empty evidence locator")
+            continue
+        content = repository_ref_bytes(root, path, snapshot_files)
+        if content is None:
+            errors.append(f"{label} locator cannot read {path!r}")
+            continue
+        try:
+            text = normalized_text_data(content).decode("utf-8")
+            if kind == "heading":
+                headings = {
+                    match.group(1).strip()
+                    for match in re.finditer(r"(?m)^#{1,6}\s+(.+?)\s*#*\s*$", text)
+                }
+                requested = [part.strip() for part in locator.split(";") if part.strip()]
+                valid = bool(requested) and all(part in headings for part in requested)
+            elif kind == "json_pointer":
+                document = json.loads(text, object_pairs_hook=unique_object)
+                valid, _resolved = m0_validation.resolve_json_pointer(document, locator)
+            elif kind == "yaml_path":
+                valid = resolve_dotted_path(yaml.safe_load(text), locator)
+            elif kind == "exact_text":
+                valid = locator in text
+            else:
+                valid = False
+        except (UnicodeDecodeError, json.JSONDecodeError, DuplicateKeyError, yaml.YAMLError):
+            valid = False
+        if not valid:
+            errors.append(f"{label} locator {kind!r} does not resolve: {path}#{locator}")
+
+
 def check_reference_paths(
     root: Path,
     value: Any,
@@ -562,6 +669,31 @@ def check_reference_paths(
     for path in source_reference_paths(value):
         if not repository_ref_exists(root, path, snapshot_files):
             errors.append(f"{label} references missing repository path {path!r}")
+    if not isinstance(value, list):
+        return
+    for item in value:
+        reference = item if isinstance(item, str) else item.get("path") if isinstance(item, dict) else None
+        if not isinstance(reference, str) or "#" not in reference:
+            continue
+        path, fragment = reference.split("#", 1)
+        if not fragment or not repository_ref_exists(root, path, snapshot_files):
+            continue
+        content = repository_ref_bytes(root, path, snapshot_files)
+        if content is None:
+            continue
+        try:
+            text = normalized_text_data(content).decode("utf-8")
+            if fragment.startswith("/"):
+                document = json.loads(text, object_pairs_hook=unique_object)
+                valid, _resolved = m0_validation.resolve_json_pointer(document, fragment)
+            elif path.lower().endswith(".md"):
+                valid = fragment in markdown_heading_slugs(text)
+            else:
+                valid = False
+        except (UnicodeDecodeError, json.JSONDecodeError, DuplicateKeyError):
+            valid = False
+        if not valid:
+            errors.append(f"{label} contains an unresolved repository reference {reference!r}")
 
 
 def duplicates(values: Iterable[Any]) -> list[Any]:
@@ -1947,6 +2079,12 @@ def check_debt_and_roadmap(
             errors.append(f"M1 debt lacks resolution evidence: {debt_id}")
         else:
             check_reference_paths(root, evidence, debt_id, errors)
+        check_evidence_locators(
+            root,
+            record.get("resolution_evidence_details"),
+            f"{debt_id} resolution evidence",
+            errors,
+        )
 
 
 def check_provisional_debt_and_roadmap(
@@ -2386,6 +2524,30 @@ def check_evidence_catalog_and_runs(
                 errors.append(f"M1 {context} validation summary hash is stale")
 
 
+def evidence_classification_metrics(classification: dict[str, Any]) -> dict[str, Any]:
+    class_counts = classification.get("coverage", {}).get("counts_by_class", {})
+    tracked_path_count = classification.get("tracked_path_snapshot", {}).get("path_count")
+    return {
+        "tracked_paths": tracked_path_count,
+        "classified_paths": sum(
+            class_counts.get(metric, 0) for metric in CLASSIFICATION_METRIC_KEYS
+        ),
+        "unclassified_paths": 0,
+        "multiply_classified_paths": 0,
+        **{
+            metric: class_counts.get(metric, 0)
+            for metric in CLASSIFICATION_METRIC_KEYS
+        },
+    }
+
+
+def evidence_scope_metrics(scope_manifest: dict[str, Any]) -> dict[str, int]:
+    scope_counts = scope_manifest.get("coverage", {}).get("counts_by_partition", {})
+    return {
+        metric: scope_counts.get(metric, 0) for metric in SCOPE_METRIC_KEYS
+    }
+
+
 def check_evidence(
     root: Path,
     evidence: dict[str, Any],
@@ -2395,6 +2557,8 @@ def check_evidence(
     lattice: dict[str, Any],
     ash_identity: dict[str, Any],
     catalog: dict[str, Any],
+    classification: dict[str, Any],
+    scope_manifest: dict[str, Any],
     errors: list[str],
     snapshot_files: dict[str, bytes] | None = None,
     evidence_commit: str | None = None,
@@ -2461,6 +2625,13 @@ def check_evidence(
             errors,
             snapshot_files,
         )
+        check_evidence_locators(
+            root,
+            closure.get("evidence_details"),
+            str(closure.get("debt_id", "M1 debt closure")),
+            errors,
+            snapshot_files,
+        )
 
     expected_metrics = {
         "requirement_count": len(requirements.get("requirements", [])),
@@ -2474,6 +2645,21 @@ def check_evidence(
         errors.append(
             f"M1 evidence authority metrics are stale: expected {expected_metrics}, "
             f"found {evidence.get('authority_metrics')}"
+        )
+
+    expected_classification_metrics = evidence_classification_metrics(classification)
+    if evidence.get("classification_metrics") != expected_classification_metrics:
+        errors.append(
+            "M1 evidence classification metrics are stale: "
+            f"expected {expected_classification_metrics}, "
+            f"found {evidence.get('classification_metrics')}"
+        )
+
+    expected_scope_metrics = evidence_scope_metrics(scope_manifest)
+    if evidence.get("scope_metrics") != expected_scope_metrics:
+        errors.append(
+            f"M1 evidence scope metrics are stale: expected {expected_scope_metrics}, "
+            f"found {evidence.get('scope_metrics')}"
         )
 
     diff_review = evidence.get("diff_review")
@@ -2646,6 +2832,8 @@ def validation_errors(
             LATTICE_PATH: lattice,
             ASH_IDENTITY_PATH: ash_identity,
             CHECK_CATALOG_PATH: catalog,
+            CLASSIFICATION_PATH: classification,
+            SCOPE_MANIFEST_PATH: scope_manifest,
         }
         evidence_commit = introduction_commit(root, EVIDENCE_PATH)
         if evidence_commit is not None:
@@ -2676,6 +2864,8 @@ def validation_errors(
             evidence_inputs[LATTICE_PATH],
             evidence_inputs[ASH_IDENTITY_PATH],
             evidence_inputs[CHECK_CATALOG_PATH],
+            evidence_inputs[CLASSIFICATION_PATH],
+            evidence_inputs[SCOPE_MANIFEST_PATH],
             errors,
             snapshot_files,
             evidence_commit,

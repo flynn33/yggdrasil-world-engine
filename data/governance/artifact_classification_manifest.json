@@ -7,8 +7,8 @@
   "scope_manifest_ref": "data/governance/scope_partition_manifest.json",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1008,
-    "path_digest": "65238b870f35705e0441c06af687a6c672f80c124768584025c348c320bdc7ef",
+    "path_count": 1010,
+    "path_digest": "e3338aea36eaeb36a4c194d60c51b97a16ca9449d49a0676aa5d9e443a6bf0fe",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "classes": [
@@ -752,6 +752,14 @@
       "authority_role": "supporting"
     },
     {
+      "path": "data/governance/m1_acceptance_evidence.json",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "This immutable record preserves the completed M1 validation outcome without defining requirements or gate logic.",
+      "authority_role": "supporting"
+    },
+    {
       "path": "data/myth_archetypes/schema_notes.md",
       "classification": "placeholder",
       "owner_role": "Content-system maintainers",
@@ -986,6 +994,14 @@
       "owner_role": "Repository governance maintainers",
       "governing_source": "data/governance/m0_acceptance_evidence.json",
       "rationale": "This human-readable acceptance report preserves M0 chronology and projects the machine evidence without defining new requirements.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "docs/project/M1_CANON_TERMINOLOGY_GOVERNANCE_ACCEPTANCE.md",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "data/governance/m1_acceptance_evidence.json",
+      "rationale": "This human-readable acceptance report preserves M1 chronology and projects the machine evidence without defining new requirements.",
       "authority_role": "supporting"
     },
     {
@@ -1674,7 +1690,7 @@
     },
     {
       "path": "data/governance/specification_roadmap.json",
-      "sha256": "b3e7ba7c60fb195ae958b9c9601d638d7744e88851ec8a835a8dfa85230ef7e0"
+      "sha256": "7cd3757675bd779cd46c93b572dd7414aea7ca59fb69dfb6bcf4d1e6905a46e2"
     },
     {
       "path": "docs/project/artifact_classification_policy.md",
@@ -1698,7 +1714,7 @@
       "normative": 744,
       "informative": 43,
       "example": 160,
-      "historical": 10,
+      "historical": 12,
       "deprecated": 1,
       "superseded": 6,
       "placeholder": 44

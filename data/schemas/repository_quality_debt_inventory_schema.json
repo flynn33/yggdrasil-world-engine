@@ -324,6 +324,32 @@
       ],
       "additionalProperties": false
     },
+    "evidence_locator": {
+      "type": "object",
+      "required": [
+        "kind",
+        "path",
+        "locator"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "heading",
+            "json_pointer",
+            "yaml_path",
+            "exact_text"
+          ]
+        },
+        "path": {
+          "$ref": "#/$defs/repository_path"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
     "debt": {
       "type": "object",
       "required": [
@@ -407,6 +433,14 @@
             "$ref": "#/$defs/repository_path"
           }
         },
+        "resolution_evidence_details": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/evidence_locator"
+          }
+        },
         "accepted_exception_rationale": {
           "type": "string",
           "minLength": 10
@@ -445,9 +479,12 @@
           },
           "then": {
             "properties": {
-              "resolution_evidence": {
-                "maxItems": 0
-              }
+                          "resolution_evidence": {
+                            "maxItems": 0
+                          },
+                          "resolution_evidence_details": {
+                            "maxItems": 0
+                          }
             }
           }
         },
@@ -467,9 +504,12 @@
               "accepted_exception_rationale"
             ],
             "properties": {
-              "resolution_evidence": {
-                "maxItems": 0
-              }
+                          "resolution_evidence": {
+                            "maxItems": 0
+                          },
+                          "resolution_evidence_details": {
+                            "maxItems": 0
+                          }
             }
           }
         },
