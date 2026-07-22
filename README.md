@@ -509,6 +509,7 @@ python3 scripts/check_specification_roadmap.py --print-readme-status
 
 ## License
 
-Proprietary. All rights reserved. Copyright Jim Daley.
+Copyright 2026 James Daley
 
-See [LICENSE](LICENSE) for full terms.
+This project is licensed under the Apache License, Version 2.0.
+See the [LICENSE](LICENSE) file for the full terms.
