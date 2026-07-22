@@ -189,8 +189,8 @@ def main() -> int:
     governance_text = (root / "docs/governance/forsetti_governance_alignment.md").read_text(
         encoding="utf-8-sig"
     )
-    if "Proprietary" not in readme or "All rights reserved" not in license_text:
-        errors.append("README and LICENSE must preserve the proprietary licensing boundary")
+    if "Apache License" not in license_text or "Apache License, Version 2.0" not in readme:
+        errors.append("README and LICENSE must declare the Apache License, Version 2.0")
     if "MIT-licensed" in governance_text:
         errors.append("Forsetti governance documentation conflicts with the repository license")
 
