@@ -27,68 +27,146 @@
     "quality_governance"
   ],
   "properties": {
-    "artifact_type": {"const": "repository_truth_manifest"},
-    "artifact_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
-    "schema_ref": {"const": "data/schemas/repository_truth_manifest_schema.json"},
-    "recorded_on": {"type": "string", "format": "date"},
+    "artifact_type": {
+      "const": "repository_truth_manifest"
+    },
+    "artifact_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "schema_ref": {
+      "const": "data/schemas/repository_truth_manifest_schema.json"
+    },
+    "recorded_on": {
+      "type": "string",
+      "format": "date"
+    },
     "repository_baseline": {
       "type": "object",
-      "required": ["canonical_source", "value", "mirrors", "version_workflow"],
+      "required": [
+        "canonical_source",
+        "value",
+        "mirrors",
+        "version_workflow"
+      ],
       "properties": {
-        "canonical_source": {"const": "VERSION"},
-        "value": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "canonical_source": {
+          "const": "VERSION"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
         "mirrors": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
           "items": {
             "type": "object",
-            "required": ["path", "value"],
+            "required": [
+              "path",
+              "value"
+            ],
             "properties": {
-              "path": {"type": "string", "minLength": 1},
-              "value": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"}
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "value": {
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+              }
             },
             "additionalProperties": false
           }
         },
-        "version_workflow": {"type": "string", "minLength": 1}
+        "version_workflow": {
+          "type": "string",
+          "minLength": 1
+        }
       },
       "additionalProperties": false
     },
     "roadmap": {
       "type": "object",
-      "required": ["machine_authority", "human_mirror", "status_summary", "current_milestone"],
+      "required": [
+        "machine_authority",
+        "human_mirror",
+        "status_summary",
+        "current_milestone"
+      ],
       "properties": {
-        "machine_authority": {"const": "data/governance/specification_roadmap.json"},
-        "human_mirror": {"const": "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md"},
-        "status_summary": {"const": "docs/project/repository_status.md"},
-        "current_milestone": {"type": "string", "pattern": "^M(?:[0-9]|10)$"}
+        "machine_authority": {
+          "const": "data/governance/specification_roadmap.json"
+        },
+        "human_mirror": {
+          "const": "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md"
+        },
+        "status_summary": {
+          "const": "docs/project/repository_status.md"
+        },
+        "current_milestone": {
+          "type": "string",
+          "pattern": "^M(?:[0-9]|10)$"
+        }
       },
       "additionalProperties": false
     },
     "publication": {
       "type": "object",
-      "required": ["state", "github_release_objects", "agnostic_specification_releases"],
+      "required": [
+        "state",
+        "github_release_objects",
+        "agnostic_specification_releases"
+      ],
       "properties": {
-        "state": {"enum": ["unreleased", "published"]},
-        "github_release_objects": {"type": "integer", "minimum": 0},
-        "agnostic_specification_releases": {"type": "integer", "minimum": 0}
+        "state": {
+          "enum": [
+            "unreleased",
+            "published"
+          ]
+        },
+        "github_release_objects": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "agnostic_specification_releases": {
+          "type": "integer",
+          "minimum": 0
+        }
       },
       "additionalProperties": false
     },
     "authority_stack": {
       "type": "object",
-      "required": ["game_layer", "engine", "foundation", "pattern_component", "pattern_component_responsibilities"],
+      "required": [
+        "game_layer",
+        "engine",
+        "foundation",
+        "pattern_component",
+        "pattern_component_responsibilities"
+      ],
       "properties": {
-        "game_layer": {"const": "Where Ravens Wait: Eternal Reckoning"},
-        "engine": {"const": "Yggdrasil World Engine"},
-        "foundation": {"const": "ASH Cosmological Model"},
-        "pattern_component": {"const": "ASH Pattern System"},
+        "game_layer": {
+          "const": "Where Ravens Wait: Eternal Reckoning"
+        },
+        "engine": {
+          "const": "Yggdrasil World Engine"
+        },
+        "foundation": {
+          "const": "ASH Cosmological Model"
+        },
+        "pattern_component": {
+          "const": "ASH Pattern System"
+        },
         "pattern_component_responsibilities": {
           "type": "array",
           "minItems": 7,
           "uniqueItems": true,
-          "items": {"type": "string", "minLength": 4}
+          "items": {
+            "type": "string",
+            "minLength": 4
+          }
         }
       },
       "additionalProperties": false
@@ -98,26 +176,44 @@
       "minItems": 7,
       "maxItems": 7,
       "uniqueItems": true,
-      "items": {"$ref": "#/$defs/authority_level"}
+      "items": {
+        "$ref": "#/$defs/authority_level"
+      }
     },
     "ownership": {
       "type": "object",
-      "required": ["legal_name", "recognized_aliases", "commercial_contact", "identity_surfaces"],
+      "required": [
+        "legal_name",
+        "recognized_aliases",
+        "commercial_contact",
+        "identity_surfaces"
+      ],
       "properties": {
-        "legal_name": {"const": "James Daley"},
+        "legal_name": {
+          "const": "James Daley"
+        },
         "recognized_aliases": {
           "type": "array",
           "minItems": 1,
           "maxItems": 1,
           "uniqueItems": true,
-          "items": {"const": "Jim Daley"}
+          "items": {
+            "const": "Jim Daley"
+          }
         },
         "commercial_contact": {
           "type": "object",
-          "required": ["email", "purpose"],
+          "required": [
+            "email",
+            "purpose"
+          ],
           "properties": {
-            "email": {"const": "contact@ravenforgesoftware.com"},
-            "purpose": {"const": "commercial_licensing"}
+            "email": {
+              "const": "contact@ravenforgesoftware.com"
+            },
+            "purpose": {
+              "const": "commercial_licensing"
+            }
           },
           "additionalProperties": false
         },
@@ -127,10 +223,22 @@
           "uniqueItems": true,
           "items": {
             "type": "object",
-            "required": ["path", "name_form"],
+            "required": [
+              "path",
+              "name_form"
+            ],
             "properties": {
-              "path": {"type": "string", "minLength": 1},
-              "name_form": {"enum": ["legal", "recognized_alias", "legal_with_alias"]}
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "name_form": {
+                "enum": [
+                  "legal",
+                  "recognized_alias",
+                  "legal_with_alias"
+                ]
+              }
             },
             "additionalProperties": false
           }
@@ -140,59 +248,147 @@
     },
     "license": {
       "type": "object",
-      "required": ["authority", "model", "rights_reserved", "commercial_use_requires_separate_written_license"],
+      "required": [
+        "authority",
+        "model",
+        "rights_reserved",
+        "commercial_use_requires_separate_written_license"
+      ],
       "properties": {
-        "authority": {"const": "LICENSE"},
-        "model": {"const": "proprietary"},
-        "rights_reserved": {"const": true},
-        "commercial_use_requires_separate_written_license": {"const": true}
+        "authority": {
+          "const": "LICENSE"
+        },
+        "model": {
+          "const": "Apache-2.0"
+        },
+        "rights_reserved": {
+          "const": false
+        },
+        "commercial_use_requires_separate_written_license": {
+          "const": false
+        }
       },
       "additionalProperties": false
     },
-    "publication_policy_ref": {"const": "data/governance/release_publication_policy.json"},
-    "classification_manifest_ref": {"const": "data/governance/artifact_classification_manifest.json"},
-    "scope_partition_manifest_ref": {"const": "data/governance/scope_partition_manifest.json"},
-    "public_promise_register_ref": {"const": "data/governance/public_promise_register.json"},
-    "quality_debt_inventory_ref": {"const": "data/validation/repository_quality_debt_inventory.json"},
-    "platform_gate_ref": {"const": "data/governance/specification_roadmap.json#/platform_gate"},
+    "publication_policy_ref": {
+      "const": "data/governance/release_publication_policy.json"
+    },
+    "classification_manifest_ref": {
+      "const": "data/governance/artifact_classification_manifest.json"
+    },
+    "scope_partition_manifest_ref": {
+      "const": "data/governance/scope_partition_manifest.json"
+    },
+    "public_promise_register_ref": {
+      "const": "data/governance/public_promise_register.json"
+    },
+    "quality_debt_inventory_ref": {
+      "const": "data/validation/repository_quality_debt_inventory.json"
+    },
+    "platform_gate_ref": {
+      "const": "data/governance/specification_roadmap.json#/platform_gate"
+    },
     "platform_gate": {
       "type": "object",
-      "required": ["authorized_after", "status", "platform_work_authorized", "branch_name_activates_platform_mode", "downstream_repository_required"],
+      "required": [
+        "authorized_after",
+        "status",
+        "platform_work_authorized",
+        "branch_name_activates_platform_mode",
+        "downstream_repository_required"
+      ],
       "properties": {
-        "authorized_after": {"const": "M10"},
-        "status": {"enum": ["deferred", "authorized"]},
-        "platform_work_authorized": {"type": "boolean"},
-        "branch_name_activates_platform_mode": {"const": false},
-        "downstream_repository_required": {"const": true}
+        "authorized_after": {
+          "const": "M10"
+        },
+        "status": {
+          "enum": [
+            "deferred",
+            "authorized"
+          ]
+        },
+        "platform_work_authorized": {
+          "type": "boolean"
+        },
+        "branch_name_activates_platform_mode": {
+          "const": false
+        },
+        "downstream_repository_required": {
+          "const": true
+        }
       },
       "allOf": [
         {
-          "if": {"properties": {"platform_work_authorized": {"const": true}}},
-          "then": {"properties": {"status": {"const": "authorized"}}},
-          "else": {"properties": {"status": {"const": "deferred"}}}
+          "if": {
+            "properties": {
+              "platform_work_authorized": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "status": {
+                "const": "authorized"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "status": {
+                "const": "deferred"
+              }
+            }
+          }
         }
       ],
       "additionalProperties": false
     },
     "protected_foundation": {
       "type": "object",
-      "required": ["status", "change_budget", "acceptance_authority", "guardrail_authority"],
+      "required": [
+        "status",
+        "change_budget",
+        "acceptance_authority",
+        "guardrail_authority"
+      ],
       "properties": {
-        "status": {"const": "preserved"},
-        "change_budget": {"const": "zero"},
-        "acceptance_authority": {"const": "data/validation/phase_8_9_acceptance_contract.json"},
-        "guardrail_authority": {"const": "data/validation/branch_reality_guardrail_rules.json"}
+        "status": {
+          "const": "preserved"
+        },
+        "change_budget": {
+          "const": "zero"
+        },
+        "acceptance_authority": {
+          "const": "data/validation/phase_8_9_acceptance_contract.json"
+        },
+        "guardrail_authority": {
+          "const": "data/validation/branch_reality_guardrail_rules.json"
+        }
       },
       "additionalProperties": false
     },
     "source_routing": {
       "type": "object",
-      "required": ["classification_authority", "human_routing_index", "current_placeholder_summary", "historical_provenance"],
+      "required": [
+        "classification_authority",
+        "human_routing_index",
+        "current_placeholder_summary",
+        "historical_provenance"
+      ],
       "properties": {
-        "classification_authority": {"const": "data/governance/artifact_classification_manifest.json"},
-        "human_routing_index": {"const": "docs/project/source_inventory.md"},
-        "current_placeholder_summary": {"const": "missing_source_documents.md"},
-        "historical_provenance": {"const": "SOURCE_AVAILABILITY_MANIFEST.md"}
+        "classification_authority": {
+          "const": "data/governance/artifact_classification_manifest.json"
+        },
+        "human_routing_index": {
+          "const": "docs/project/source_inventory.md"
+        },
+        "current_placeholder_summary": {
+          "const": "missing_source_documents.md"
+        },
+        "historical_provenance": {
+          "const": "SOURCE_AVAILABILITY_MANIFEST.md"
+        }
       },
       "additionalProperties": false
     },
@@ -205,12 +401,18 @@
         "historical_deviation_provenance"
       ],
       "properties": {
-        "debt_inventory": {"const": "data/validation/repository_quality_debt_inventory.json"},
-        "schema_quality_baseline": {"const": "data/validation/schema_quality_baseline.json"},
+        "debt_inventory": {
+          "const": "data/validation/repository_quality_debt_inventory.json"
+        },
+        "schema_quality_baseline": {
+          "const": "data/validation/schema_quality_baseline.json"
+        },
         "governance_record_authority": {
           "const": "data/governance/governance_record_register.json"
         },
-        "historical_deviation_provenance": {"const": "conformance/deviation-log.md"}
+        "historical_deviation_provenance": {
+          "const": "conformance/deviation-log.md"
+        }
       },
       "additionalProperties": false
     }
@@ -218,9 +420,17 @@
   "$defs": {
     "authority_level": {
       "type": "object",
-      "required": ["precedence", "category", "paths"],
+      "required": [
+        "precedence",
+        "category",
+        "paths"
+      ],
       "properties": {
-        "precedence": {"type": "integer", "minimum": 1, "maximum": 7},
+        "precedence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 7
+        },
         "category": {
           "enum": [
             "machine_governance",
@@ -236,7 +446,10 @@
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
-          "items": {"type": "string", "minLength": 1}
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       },
       "additionalProperties": false
