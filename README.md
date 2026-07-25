@@ -434,7 +434,7 @@ Forsetti governs the engine through **five design principles**:
 | [missing_source_documents.md](missing_source_documents.md) | Synchronized placeholder and missing-source summary |
 | [docs/architecture/authored_override_and_tooling_notes.md](docs/architecture/authored_override_and_tooling_notes.md) | Canonical authored override and tooling guardrail rules |
 | [docs/architecture/realm_truth_boundary_contract.md](docs/architecture/realm_truth_boundary_contract.md) | Canonical boundary contract for realm truth vs interpretive layers |
-| [repository-contribution-policy.json](repository-contribution-policy.json) | Machine-readable contributor automation constraints |
+| [repository-contribution-policy.json](repository-contribution-policy.json) | Machine-readable repository rules; outside contributions are not accepted |
 | [yggdrasil-instructions.json](yggdrasil-instructions.json) | Machine-readable architecture rules |
 
 ### Canonical Rule Artifacts
