@@ -1,42 +1,21 @@
-# Contributing to Yggdrasil World Engine
+# Contributing
 
-Thank you for your interest in contributing to the Yggdrasil World Engine.
+This repository is published as open source under the [Apache License, Version 2.0](LICENSE).
 
-## Contributor License Agreement (CLA)
+You are welcome to use, study, modify, and distribute the code under the terms of that license.
 
-All contributors must agree to the Contributor License Agreement before any contribution can be merged. By submitting a pull request, you agree to the terms outlined in [CLA.md](CLA.md).
+## Outside contributions are not accepted
 
-## Repository and Branch Model
+This project is not open to collaboration. Outside contributions—including pull requests, patches, proposed merges, feature work intended for this repository, and co-maintenance requests—are not accepted and will not be reviewed or merged.
 
-- **All branches in this repository**: Agnostic specification work only. A branch name never activates platform implementation mode.
-- **Downstream platform repositories**: Concrete Unity, Unreal, Godot, or other product implementations may begin only after M10 acceptance and explicit platform authorization.
+Repository access controls and rulesets restrict write access to the owner.
 
-## How to Contribute
+If you want to build on this work, fork the repository under Apache 2.0 and maintain your changes in your own fork or product.
 
-### Specification Changes (main branch)
+## Issues and discussions
 
-1. Fork the repository.
-2. Create a feature branch from `main`.
-3. Make your changes following the Forsetti Framework principles (see `guide.md`).
-4. Ensure all validation scripts pass: `bash scripts/run_checks.sh`
-5. Open a pull request against `main`.
+Please do not open issues or discussions that request collaboration, request features for this repository, or submit patches for merge. Those will be closed without merge.
 
-### Engine Implementations (separate downstream repositories after M10)
+## Security
 
-1. Use a separately authorized downstream platform repository.
-2. Create a feature branch in that downstream repository.
-3. Implement against the contracts defined in `core/*/engine_interface.json`.
-4. Use native engine idioms (C# for Unity, C++ for Unreal, GDScript for Godot).
-5. Open a pull request against that downstream repository.
-
-## Rules
-
-- Do not invent systems outside the master specification.
-- Do not alter cosmology rules or ASH compliance invariants.
-- All procedural systems must derive from ASH Pattern Detection.
-- Follow the Forsetti Framework principles documented in `guide.md`.
-- Run validation scripts before submitting any pull request.
-
-## Code of Conduct
-
-All contributors must follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+If you believe you have found a security vulnerability in published code, report it privately through GitHub's private vulnerability reporting for this repository when that option is available. Do not open a public issue for security reports.

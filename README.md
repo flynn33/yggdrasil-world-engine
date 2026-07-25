@@ -489,8 +489,8 @@ bash scripts/run_checks.sh
 ```
 
 The check catalog at `data/validation/repository_checks.json` is the single
-source for local and GitHub validation. To reproduce pull-request-only diff
-checks locally:
+source for local and GitHub validation. To reproduce diff-scoped validation checks
+locally:
 
 ```bash
 bash scripts/run_checks.sh --context pull_request --base origin/main
@@ -506,6 +506,12 @@ python3 scripts/check_specification_roadmap.py --print-readme-status
 ```
 
 ---
+
+## Contributing
+
+This project is open source under Apache License, Version 2.0. You are welcome to use, modify, and redistribute the code under that license.
+
+Outside contributions to this repository are not accepted. Pull requests and collaboration requests will not be reviewed or merged. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
