@@ -97,6 +97,28 @@ Milestone indicators: 🟢 `complete` · 🟡 `in_progress` · ⚪ `planned` · 
 | M9 | ⚪ | `planned` | M3, M4, M5, M6, M7, M8 | Prove agnosticism and whole-system conformance |
 | M10 | ⚪ | `planned` | M9 | Freeze and release the agnostic specification |
 
+### Subsystem Maturity Matrix
+
+| Subsystem | Phase Gate | Normative | Schema | Conformance | Release | Next |
+|---|---|---|---|---|---|---|
+| Authority & boundaries | N/A | ✅ complete | ✅ complete | ✅ complete | ✅ complete | M1 |
+| ASH algebra & oracle | ✅ complete | ✅ complete | 🟡 partial | ✅ complete | ❌ not ready | M3 |
+| Cosmology realms | ✅ complete | 🟡 partial | 🟡 partial | 🟡 partial | ❌ not ready | M4 |
+| Player runtime | ✅ complete | 🟡 partial | 🟡 partial | 🟡 partial | ❌ not ready | M4 |
+| Perception & worldstate | ✅ complete | 🟡 partial | 🟡 partial | 🟡 partial | ❌ not ready | M4 |
+| Quest/NPC/lore | ✅ complete | 🟡 partial | 🟡 partial | 🟡 partial | ❌ not ready | M5 |
+| Artifact & creature | N/A | 🟡 partial | ❌ not started | 🟡 partial | ❌ not ready | M5 |
+| Myth & prophecy | 🟡 partial | ❌ not started | ❌ not started | 🟡 partial | ❌ not ready | M5 |
+| Ability & power | ✅ complete | 🟡 partial | 🟡 partial | 🟡 partial | ❌ not ready | M6 |
+| Companion & reward | 🟡 partial | 🟡 partial | 🟡 partial | 🟡 partial | ❌ not ready | M6 |
+| Combat & encounter | ❌ not started | ❌ not started | ❌ not started | ❌ not started | ❌ not ready | M7 |
+| Persistence & multiplayer | N/A | ❌ not started | ❌ not started | ❌ not started | ❌ not ready | M4 |
+| Environment & society | N/A | ❌ not started | ❌ not started | ❌ not started | ❌ not ready | M8 |
+| Authoring & adapter | N/A | 🟡 partial | ❌ not started | 🟡 partial | ❌ not ready | M9 |
+| Validation & governance | 🟡 partial | 🟡 partial | 🟡 partial | 🟡 partial | ❌ not ready | M10 |
+
+Legend: ✅ complete · 🟡 partial · ❌ not started · N/A = not applicable to this subsystem
+
 ### Subsystem maturity snapshot
 
 | Dimension | Complete | Partial | Not started | Not applicable | Deferred | Not ready |

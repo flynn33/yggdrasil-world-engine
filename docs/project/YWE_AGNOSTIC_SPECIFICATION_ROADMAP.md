@@ -93,6 +93,8 @@ role, repository-local evidence, and open work for every row. Status values are
 | Authoring and generic adapter protocol | `not_applicable` | `partial` | `not_started` | `partial` | `not_ready` | M9 |
 | Schema conformance and publication governance | `partial` | `partial` | `partial` | `partial` | `not_ready` | M10 |
 
+Legend: `complete` · `partial` · `not_started` · `not_applicable` (N/A) · `not_ready`. The same 15-row matrix is summarized with emoji status markers in the repository `README.md` roadmap-status block for visibility; machine-readable authority remains `data/governance/specification_roadmap.json`.
+
 ### Completed or verified foundations
 
 | Area | Current maturity | Completed work |
