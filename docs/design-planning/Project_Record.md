@@ -1,141 +1,117 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918  
-**Revision:** planning-10  
+**Revision:** planning-11  
 **Date:** September 19, 2026  
 **Authoritative branch:** `main`  
 **Location:** `docs/design-planning/Project_Record.md`  
-**Verified merge anchor:** `13ee11704691b1c562e8e0099ca2b2e4533cb39e`.  
-**Verified post-deletion baseline:** `90f3c00f8b286aa064114575e607f7ce60e13df2`.
+**Verified predecessor:** `7aa5c1b18caf37bb01ca3bdfb0d73b59f8261009`, planning-10.
 
-This is the single current planning record. It supersedes planning-9's statement that the redundant branch names remain. The owner reported deleting the branches; subsequent remote enumeration returned only main. Both planning histories remain reachable from main. Current handoff: [main continuation](handoffs/2026-09-19-consumer-compatibility.md). This record describes observed state; its containing commit supplies its revision identity.
+This is the single current planning record. It supersedes planning-10's next-work status and its overly broad no-new-branches interpretation, not accepted engine requirements or historical evidence. The complete predecessor remains in Git history. The current [handoff](handoffs/2026-09-19-consumer-compatibility.md) points here. This revision's containing commit identifies its storage; remote publication is verified separately rather than predicted.
 
-## 1. Identity and current working brief
+## 1. Current working brief
 
 | Concern | Current state |
 |---|---|
-| Product / owner | Yggdrasil World Engine / Flynn; repository owner `flynn33` |
+| Product / owner | Yggdrasil World Engine / Flynn, repository owner `flynn33` |
 | Product purpose | Platform-neutral, strictly object-oriented and modular engine specification |
 | Repository | `flynn33/yggdrasil-world-engine` |
 | Accepted product version | v2.0.23; unchanged |
-| Roadmap | M0/M1 acceptance preserved; M2 active; no new gate accepted |
-| Authoritative record location | This path on `main`; no other remote branch remains at the latest inspection |
-| Main before consolidation | `2db1230f638cd065d791c05f1adb7b4b51505c57` |
-| Main after verified fast-forward | `13ee11704691b1c562e8e0099ca2b2e4533cb39e` |
-| Main at post-deletion inspection | `90f3c00f8b286aa064114575e607f7ce60e13df2` |
-| Planning histories | Both included in main; the last inspected tips of both deleted branches are ancestors of main |
-| Branch reference deletion | Completed by the owner; subsequent remote enumeration returned only `main` |
-| Recovery required | None identified for committed work at the two verified former branch tips |
-| Validation integration | Classification/scope, experimental discovery and full repository checks remain unfinished |
-| Owner checkout / unpublished work | Not inspected; no local synchronization claim |
-| Native products / hardware | Deferred through M10; not applicable to this verification |
+| Roadmap | M0 and M1 accepted; M2 in progress; no new gate accepted |
+| Current activity | Planning-directory integration: the reviewed-report discovery subtask is implemented and tested |
+| Remaining integration | Classification/scope snapshots, remaining discovery coverage, and complete repository validation are not finished |
+| Source used for this change | Hash-verified selected files from the predecessor, not a complete current checkout |
+| Owner-local state | Uninspected; no local synchronization claim |
+| Runtime/platform work | Deferred until M10 acceptance; not part of this change |
 | Assurance profile | No new profile selected |
 
-The machine-readable roadmap remains milestone/status authority. Focused accepted contracts and requirement/governance registers remain engineering authority. Repository storage does not approve candidate semantics.
+The machine-readable roadmap remains milestone/status authority. Focused accepted contracts and requirement/governance registers remain engineering authority. Storage, maintenance tests and a successful push do not approve an experimental engine design.
 
-### Development method and continuity
+## 2. Approved direction and operating boundaries
 
-Raven Forge Development remains the standing method. The previously adopted revision remains unrecovered. Inspected version 0.6.2 at `ed0028a46bac9c5b92876a6ad6589ca421fd9499` remains an inspection reference, not an adopted upgrade. Source registers retain inherited mandatory-core coverage, source pins and reading limits. No new linked-realization acceptance is claimed.
+The specification is the product. ASH Model Cosmology supplies the foundational cosmological reference; APS and Aeostara supply reference semantics and design. Their repositories are not package, build or runtime dependencies. YWE owns its object contracts. Preserve strict object orientation, explicit invariant ownership, modularity and platform neutrality. WRW and Ravenfall remain reference profiles, not universal Core truth.
 
-The [storage decision](decisions/2026-09-19-planning-location.md) remains applicable. Current planning records belong in this repository directory. Only issued coding-agent instruction packages remain in the external instructions workspace.
+The owner approved `docs/design-planning/` as the maintained home for product design, planning and continuity. Only issued coding-agent instruction packages remain in the external instructions workspace. Do not ask the owner to sort transport archives or reconstruct retrievable history.
 
-## 2. Purpose, scope and exclusions
+**Branch lifecycle clarification, September 19, 2026:** The owner prefers working branches. The concern is abandoned finished branches, not branch creation itself. Use bounded working branches when the available route can complete their lifecycle. Retain needed work, merge completed work, and remove redundant references after verifying preservation. Unfinished work must have an explicit current status rather than being called finished. This clarification replaces the earlier general prohibition on new planning branches; it does not call for restoring the deleted branches.
 
-The specification is the product. ASH Model Cosmology, APS and Aeostara supply reference semantics/design, not runtime repositories to import. YWE owns its object contracts. WRW and Ravenfall remain reference profiles, not universal Core truth.
+Owner-account publishing and existing admin bypass, when necessary, remain authorized. No force push, protection change, workflow restoration, new runner spending, source upgrade, candidate approval or release is implied. The available connection still has no branch-reference deletion action. For this bounded repair, a reviewed commit object can be published by a normal main fast-forward without creating a remote reference that cannot be cleaned up.
 
-The owner explicitly directed merging needed work or deleting unneeded branches and then directed completing the cleanup. The resulting administrative consolidation advanced main to the already reconciled planning history. It did not modify existing engine files, approve the two-value candidate, change source pins, introduce dependencies, resolve normalization, alter platform gates, create another branch or publish a release.
+## 3. Development method and source authority
 
-The owner subsequently completed the outstanding branch deletion. This follow-up verifies surviving committed work and updates only the current record and handoff. It does not recreate deleted branches, redo preserved design work, or claim that the deletion was performed by the current session.
+Raven Forge Development remains the standing method. The previously adopted immutable revision remains unrecovered. Version 0.6.2 at `ed0028a46bac9c5b92876a6ad6589ca421fd9499` remains the recorded inspection reference, not a silently adopted upgrade. Preserve inherited source-reading limits and pins. Current maintenance consulted the applicable interpretation, enforcement, repository-catalog, testing and realization-contract guidance; it did not complete or approve the outstanding linked system-realization contracts.
 
-## 3. Users and workflows
+This repair concerns the existing repository validation tool, not an APS/Aeostara implementation or semantic adoption. It neither resolves nor bypasses those separately scoped prerequisites. The [value source register](m2/ash-values/source-register.json), [readiness source register](m2/readiness/source-register.json) and [compatibility review](m2/consumer-compatibility/README.md) remain the detailed source/evidence records.
 
-Maintainers start on `main` at the directory README, this record and the current handoff. Deleted branches are not recreated for continuation. Earlier records remain historical snapshots, not competing authorities.
+## 4. Preserved work and completed cleanup
 
-The [per-file reconciliation](publication/Branch_Reconciliation.md) documents the disposition of all 24 earlier planning paths. Both source histories remain reachable from main. The current candidate and detailed evidence were retained, while earlier ignore rules, distinct verification summary and publication manifest were preserved. Redundant routing records remain in history.
+Both former planning histories were retained through merge `13ee11704691b1c562e8e0099ca2b2e4533cb39e`; main then advanced to `90f3c00f8b286aa064114575e607f7ce60e13df2`. The owner deleted the redundant branch names. Post-deletion checks established that former tips `13ee11704691b1c562e8e0099ca2b2e4533cb39e` and `c4d505b71e4db829fdb1b84f3c368bf164ea8c31` are ancestors of main. This session's initial branch collection again contained only main at the verified predecessor.
 
-## 4. Requirements and acceptance
+No known committed work needs reconstruction and the completed cleanup is not reopened. The [per-file reconciliation](publication/Branch_Reconciliation.md), older publication manifests, unique earlier verification summary, original detailed evidence, and full preceding histories remain preserved. Never confuse retained history with a second current Project Record.
 
-No new normative requirement ID, candidate approval, debt closure, protocol version or milestone acceptance was issued. M0/M1 evidence, product version, source pins, the roadmap and active engine contracts are unchanged.
+## 5. Substantive M2 design state
 
-Inherited M1 evidence reports 18 requirements, 27 governance records, 119 glossary terms, ten authority nodes and a pinned 32-file corpus. Inherited M2 schema debt remains 132 findings across 119 paths: 31 missing identifiers, 13 annotation-only schemas, 49 descriptive schema-named documents and 39 unbound examples. These are inherited counts, not a fresh whole-repository measurement.
+The [AshState / CanonicalCodeword candidate](m2/ash-values/Ash_Value_Contract.candidate.md) and its [decisions](m2/ash-values/candidate-decisions.json) remain unapproved proposals. Values own immutable coordinates. State representation, codeword membership, operational admission and mutation permission are distinct. The parent packet still contains nine local descriptions and twenty-one delegated records; this work does not redesign those other domains.
 
-The [readiness review](m2/readiness/M2_Readiness_Review.md) retains its permissive-root and direct-conversion findings. A planning merge does not resolve the registered debt or establish a passing repository suite.
+Inherited candidate evidence covers 512 represented states, exactly sixteen accepted codewords, 8,192 transformations, 56 named fixtures, raw parsing/precision, ownership/order, offline references and ten detected schema faults. Its preserved result-section hash is `630cade04dadfc8ae236e34ffdcc1238703695b856b4d336fa0043d68d4ac113`.
 
-## 5. Architecture, sources and unresolved decisions
+Inherited compatibility evidence covers 8,192 matching transformations, 2,048 matching snapshots, 2,048 matching plans, fifteen input probes with seven acceptance differences, and four unchanged identity tests. Its repeated result hash is `43e7f34ad8e185d82eaac5ae5dc887960fda50024b43244c6714aff680e0b8c2`; the verdict remains `not_drop_in_compatible`. These experiments were not rerun for this repair and do not independently prove all helper semantics.
 
-The [two-value contract](m2/ash-values/Ash_Value_Contract.candidate.md) and [candidate decisions](m2/ash-values/candidate-decisions.json) remain proposed. State representation, codeword membership, operational admission and mutation authority remain distinct. Immutable values own coordinates; actual membership is checked rather than trusted from metadata.
+The existing helper coerces fractional, Boolean and string coordinates and accepts padded/Unicode signatures. Direct out-of-contract construction can retain mutable storage or a short tuple; normal factory tuples are not claimed mutable. The next design remains an explicitly typed input boundary and compatibility facade preserving signature fields, ordered sequences and aliases. Do not replace global normalization, add membership members to string sequences, close entire envelopes or infer writer compatibility from the helper comparison.
 
-The parent packet contains nine local descriptions and twenty-one delegated records. Only two values have the experimental contract. Other domains are not redesigned.
+## 6. New completed discovery subtask
 
-The [value source register](m2/ash-values/source-register.json), [readiness source register](m2/readiness/source-register.json) and [compatibility review](m2/consumer-compatibility/README.md) preserve pins, source roles, actual reading and exclusions. Further governance/package consumers remain discovery-only where not read completely.
+Three preserved readiness diagnostic reports were incorrectly counted as schema-named JSON documents lacking declarations. The existing checker used the filename substring `schema`, even though these files record test observations rather than define schemas.
 
-The bounded compatibility review found seven input-acceptance differences, including fractional/Boolean/string coordinate coercion and padded/Unicode signatures. Direct out-of-contract dataclass construction can retain mutable storage or accept a short tuple; normal factory tuples are not claimed mutable. Property/method API shape and exact schema-target selection require explicit migration treatment.
+`ReviewedDiagnosticReports` in `scripts/check_machine_readable_artifacts.py` now recognizes only those three exact paths and their complete reviewed JSON-value fingerprints. Recognition is used solely by the schema-name heuristic. Changed metadata or nested results, copied reports at another path, label-only imitations and real schemas are not recognized. The registry is read-only. Its comparison encoding is local evidence fingerprinting, not a new engine serialization policy.
 
-The proposed next design remains a narrow checked-input boundary preserving signature fields, ordered sequences and aliases. Do not globally replace normalization, add membership fields to string sequences, close entire envelopes or infer writer compatibility from helper comparisons.
+JSON parsing, YAML duplicate-key rejection, declared-schema meta-validation, reference checking, identifier uniqueness and all other quality-debt categories remain active. The original schema-quality baseline is unchanged; no known M2 debt was removed or increased. Original report bytes, candidate models, schemas, fixtures, source pins, versions, roadmap state and M0/M1 acceptance evidence are unchanged.
 
-Still unresolved: prior method binding; reviewed linked System Realization Contracts and independent acceptance/preflight; normalization/classification source reconciliation; Forsetti interface scope; field-specific references/aliases; complete standalone-record consumer inventory; and approval/versioning for membership, closedness, raw parsing, writer output and schema-target binding. Hold only dependent work; do not restart the project.
+Sixteen regression tests were added to the existing `tests/test_validation_foundation.py`. No repository path was added, removed or renamed. Existing test classes were preserved; the main checker implementation and other existing functions were preserved apart from the specific debt predicate and added recognition class/imports. Details and reproduction are in [Repository Integration Requirements](publication/Repository_Integration_Requirements.md).
 
-## 6. Experience and resources
+## 7. New verification and limits
 
-No UI, branding, production asset or device requirement changed. The owner need not download, sort or reconstruct archives. Work is available from the repository's default and only remaining branch, main.
+The original checker and test file were reconstructed and matched their complete Git blob hashes. All three report files recovered from the transport archive matched their current remote blob hashes before use. The archive was not substituted for a complete checkout.
 
-## 7. Verification and limitations
+The original four machine-artifact tests passed. Against a disposable fixture containing only the three reviewed reports and an empty synthetic debt baseline, the original CLI exited 1 and reported all three false positives. The revised CLI exited 0. That fixture's zero debt is not the repository's debt count.
 
-Inherited candidate evidence remains unchanged: 512 represented states, sixteen accepted codewords out of 512 candidates, 8,192 transformations, 56 named fixtures, raw parsing/precision, ownership/order, offline references, ten detected schema faults and repeated equal result sections. The reconciliation's fresh isolated run passed ten groups with result-section hash `630cade04dadfc8ae236e34ffdcc1238703695b856b4d336fa0043d68d4ac113`.
+The four original tests plus sixteen new tests passed twice: 20 tests, zero failures/errors/skips, with hash seeds 17 and 71. Exact AST class extraction isolated these classes from unavailable unrelated imports; this was not execution of the entire test module or repository catalog. The tests invoked the actual checker CLI against disposable valid/invalid fixtures, including invalid schemas, unresolved references, duplicate identifiers, changed/copied reports, malformed JSON and duplicate YAML keys.
 
-The [compatibility results](m2/consumer-compatibility/compatibility-results.json) retain 8,192 matching transformations, 2,048 matching snapshots, 2,048 matching plans, fifteen boundary probes with seven differences, and four unchanged identity tests. Repeated result hash: `43e7f34ad8e185d82eaac5ae5dc887960fda50024b43244c6714aff680e0b8c2`. The verdict remains `not_drop_in_compatible`. These comparisons reuse the existing helper and do not independently prove its complete semantics.
+A final run on the uploaded test-file bytes also passed all 20 tests; whitespace-only presentation differences in existing tests were checked by complete syntax-tree equality.
 
-The earlier consolidation verified the live branch identities, read the complete planning-8 record and handoff, read the reconciliation commit's two parents, compared the reconciled history with main, performed a non-forced main ref update and read back the branch collection. The pre-merge comparison reported seven commits ahead, zero behind, and additions confined to `docs/design-planning/`. No pre-existing main file was modified or deleted by that fast-forward.
+Three intentionally broken checker copies were detected: bypassed fingerprints produced seven test failures, removed report recognition produced three, and disabled meta-schema validation produced one. These are mutation-test observations, not failures of the delivered checker. A combined mutation invocation timed out before its final report; the last mutation was rerun independently and completed. All original report bytes remained unchanged.
 
-The earlier comparison from branch tip `c4d505b71e4db829fdb1b84f3c368bf164ea8c31` to merged main reported five ahead, zero behind, with that earlier tip as merge base. The newer branch tip was identical to merged main. Both inspected planning histories were preserved in main before branch deletion.
+No complete current checkout, full repository suite, owner-local inspection, native build, new candidate acceptance, linked-realization preflight/delivery, independent review or physical-device qualification is claimed. Earlier DNS/archive acquisition failures remain recorded; no workflow or permission changes were used to manufacture an execution route.
 
-### Post-deletion verification — September 19, 2026
+## 8. Remaining obligations
 
-The owner reported deleting the extra branches. A fresh GET of the repository branch collection with `per_page=100` returned exactly one branch, `main`, at `90f3c00f8b286aa064114575e607f7ce60e13df2`. The complete planning-9 Project Record and current handoff were read at that immutable commit.
+The administrative main merge preceded complete technical integration. The primary classification/scope manifests and exact path snapshots remain unreconciled with the planning directory. This repair fixes one schema-discovery false-positive set; it does not finish classification, make experiments normative, or establish a passing repository baseline.
 
-Two fresh comparisons used that main commit as base and the former branch tips as heads:
+The registered M2 inventory still reports 132 findings across 119 paths: 31 missing identifiers, 13 annotation-only declarations, 49 schema-named descriptive documents and 39 unbound examples. These are inherited registered counts, not a newly executed whole-repository measurement. The [readiness review](m2/readiness/M2_Readiness_Review.md) still identifies the real packet-schema deficiencies.
 
-| Former branch | Verified former tip | Result relative to main | Merge base |
-|---|---|---|---|
-| `design-planning/m2-foundations` | `13ee11704691b1c562e8e0099ca2b2e4533cb39e` | `behind`; zero ahead, one behind, zero head-only commits | Exact former tip |
-| `planning/m2-design-records` | `c4d505b71e4db829fdb1b84f3c368bf164ea8c31` | `behind`; zero ahead, six behind, zero head-only commits | Exact former tip |
-
-Both known tips are ancestors of the inspected main. No committed history from either verified tip was lost by removing the branch references, and no reconstruction of that work is required. This conclusion covers the known remote tips; it is not a claim about uninspected owner-local or never-pushed work. History preservation is not a new file-by-file semantic review or a passing test result.
-
-No new experiment run, full repository suite, complete current checkout, owner-local inspection, native build, complete consumer inventory, realization preflight/delivery or independent acceptance is claimed. Earlier direct network acquisition remained unavailable. A recovered historical archive had inconsistent version markers and lacked the current governance manifests; it was not substituted for the current repository or used to claim current validation.
-
-## 8. Administrative merge and remaining technical obligations
-
-The non-forced update of `main` from `2db1230f638cd065d791c05f1adb7b4b51505c57` to `13ee11704691b1c562e8e0099ca2b2e4533cb39e` succeeded. Read-back returned that exact main tip. The target merge commit retains parents `9fd7625241fee529452570cca6f1742cb6976856` and `c4d505b71e4db829fdb1b84f3c368bf164ea8c31` and identifies Jim Daley as author and committer. No force update, protection/configuration change or new workflow was used.
-
-The owner completed deletion of the redundant branch references. Subsequent enumeration and ancestry checks establish the current single-branch state and preservation of the known committed work. The previous session left the deletion unfinished; this follow-up records the owner's action rather than claiming it executed that deletion. No deleted reference was recreated and no missing committed work was identified.
-
-The previously recorded classification/scope snapshots, nonnormative experimental treatment, discovery review and full pre/post checks were not completed before the administrative merge. They remain outstanding on main; no passing result or completed acceptance is inferred from the owner's merge direction or branch deletion. The existing catch-all classification is not evidence that a candidate has been approved. [Repository Integration Requirements](publication/Repository_Integration_Requirements.md) records the remaining technical work.
-
-The older [publication receipt](publication/GitHub_Publication.json), [reconciliation checks](publication/Branch_Reconciliation_Checks.json), [earlier verification summary](m2/ash-values/evidence/verification-summary.json) and [earlier publication manifest](publication/Earlier_Planning_Publication_Manifest.json) retain their original dates, hashes and limitations. This record controls current storage and cleanup status; historical no-merge or pending-deletion fields are not current instructions.
+Still open: prior playbook binding; reviewed linked System Realization Contracts; normalization/classification source reconciliation; Forsetti interface scope; field-specific references/aliases; complete consumer inventory; and approval/versioning of membership, closedness, numeric parsing, writer output and exact schema-target binding. Hold only dependent work. Do not restart accepted milestones.
 
 ## 9. Decisions and permissions
 
 | Decision | State |
 |---|---|
-| Agnosticism, OO modularity, reference-only systems and prior acceptance | Preserved |
-| Dedicated planning directory | Owner approved September 19, 2026 |
-| Owner-account publishing and existing admin bypass if required | Permission retained; normal non-forced updates used |
-| Merge needed branches or delete unneeded branches | Both inspected histories included in main; owner completed reference deletion |
-| Authoritative record location | Same path on main; no competing current record |
-| Branch-name deletion | Owner-reported action; absence of both names independently verified through GitHub |
-| Missing work | Recreate only a demonstrated missing requirement or artifact; no redo is needed for the preserved branch histories |
-| Candidate adoption, method/source upgrade, release or platform work | Not performed or implied |
-| Repository-wide technical acceptance | Not established; outstanding obligations remain visible |
+| Platform-neutral OO engine, reference-only systems, prior acceptance | Preserved |
+| Planning storage and one current record | Existing approved directory on main |
+| Branches | Preferred for bounded work; completion includes merge/preservation and cleanup, not permanent accumulation |
+| Earlier branch cleanup | Completed by owner; verified; not reopened |
+| Reviewed-report recognition | Scoped maintenance repair with focused tests; not a broad discovery exemption |
+| Candidate semantics or method/source upgrade | Not approved or changed |
+| Release/platform implementation | Not part of this task |
+| Complete repository acceptance | Not established; outstanding checks remain visible |
 
-## 10. Current step and next action
+## 10. Checkpoint
 
-**Current step:** Owner-completed branch cleanup verified; committed planning histories remain preserved on main.
+**Current step:** Reviewed diagnostic-report discovery defect corrected and locally verified; broader M2 integration remains open.
 
-**Completed:** Confirmed only main remains, retrieved the full current record and handoff, and verified both former branch tips are ancestors of main. No missing committed history was identified; no branch or design work was recreated.
+**Completed:** Exact source/report recovery, before/after CLI evidence, sixteen new regression tests, two passing 20-test runs, three detected intentional faults, and the owner's clarified branch lifecycle recorded.
 
-**Next action:** Finish the existing planning-directory classification/scope and discovery integration on main, separating inherited failures from regressions through repository checks. Then resume the narrow input-boundary specification. Do not recreate deleted branches, repeat the completed reconciliation, or redo preserved work.
+**Next action:** Reconcile the current planning-directory classification/scope and exact repository path inventory against a verified full tree, then run the catalog checks and distinguish inherited failures from regressions. After integration, continue the already identified typed input-boundary specification.
 
-**Needed from you:** Nothing to approve, download, sort or reconstruct.
+**Needed from you:** Nothing to reconstruct, download, sort or reapprove for this bounded maintenance work.
 
-**Saved at:** `docs/design-planning/` on `main`; post-deletion baseline `90f3c00f8b286aa064114575e607f7ce60e13df2`. This update's containing commit identifies planning-10. Record publication is verified separately by remote read-back.
+**Saved at:** This record and the existing handoff retain their paths on main. The verified predecessor is above; the containing commit and remote read-back establish this revision's actual publication. No full-suite pass is implied by persistence.

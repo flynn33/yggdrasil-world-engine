@@ -3,11 +3,13 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 import sys
 from collections import defaultdict
 from pathlib import Path
+from types import MappingProxyType
 from urllib.parse import unquote
 
 try:
@@ -34,6 +36,47 @@ SCHEMA_KEYWORDS = {
     "additionalProperties",
     "patternProperties",
 }
+
+
+class ReviewedDiagnosticReports:
+    """Recognize three preserved reports, not a directory of exempt artifacts.
+
+    Only the schema-name heuristic uses this registry. JSON parsing, declared
+    schema validation, reference checks and the other debt categories still run.
+    A reviewed path and its complete JSON value must both match. Changes to any
+    report content require another explicit review rather than silent exemption.
+    Digests use sorted-key, compact UTF-8 JSON without ASCII escaping or NaN.
+    This is a local evidence fingerprint, not the engine's wire-format policy.
+    """
+
+    _VALUE_SHA256 = MappingProxyType({
+        "docs/design-planning/m2/readiness/evidence/schema-readiness-final.json":
+            "9a1a3344a8566e70075882e91576d292f207a1c44f4b51c54a697dba9f492ee7",
+        "docs/design-planning/m2/readiness/evidence/schema-readiness-repeat-initial.json":
+            "7fd57ee86274a17d33e20e52bbc862f531c0406841e43dc3e176a827bb82494f",
+        "docs/design-planning/m2/readiness/evidence/schema-readiness.json":
+            "3acefb7e8252bada9dc0403af05e0649f1740d10dca599417bba81a572b2e751",
+    })
+
+    @classmethod
+    def matches(cls, path: str, document: object) -> bool:
+        if not isinstance(path, str) or not isinstance(document, dict):
+            return False
+        expected = cls._VALUE_SHA256.get(path)
+        if expected is None:
+            return False
+        if document.get("artifact_type") != "ywe_schema_readiness_diagnostic":
+            return False
+        if "$schema" in document or SCHEMA_KEYWORDS.intersection(document):
+            return False
+        try:
+            content = json.dumps(
+                document, sort_keys=True, separators=(",", ":"),
+                ensure_ascii=False, allow_nan=False,
+            ).encode("utf-8")
+        except (TypeError, ValueError, UnicodeEncodeError, RecursionError):
+            return False
+        return hashlib.sha256(content).hexdigest() == expected
 
 
 class UniqueKeyLoader(yaml.SafeLoader):
@@ -121,6 +164,7 @@ def quality_debt(
             if path != DEBT_PATH
             and "schema" in Path(path).stem.lower()
             and not (isinstance(document, dict) and "$schema" in document)
+            and not ReviewedDiagnosticReports.matches(path, document)
         ),
         "unbound_json_examples": sorted(
             path

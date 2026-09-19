@@ -249,6 +249,198 @@ class MachineArtifactTests(unittest.TestCase):
         self.assertEqual(["examples/unbound.example.json"], debt["unbound_json_examples"])
 
 
+class ReviewedReportDiscoveryTests(unittest.TestCase):
+    REPORT_DIRECTORY = "docs/design-planning/m2/readiness/evidence/"
+    REPORT_NAMES = (
+        "schema-readiness.json",
+        "schema-readiness-final.json",
+        "schema-readiness-repeat-initial.json",
+    )
+
+    def setUp(self):
+        self.reports = {
+            self.REPORT_DIRECTORY + name: json.loads(
+                (ROOT / self.REPORT_DIRECTORY / name).read_text(encoding="utf-8")
+            )
+            for name in self.REPORT_NAMES
+        }
+        self.path = self.REPORT_DIRECTORY + self.REPORT_NAMES[0]
+        self.document = self.reports[self.path]
+
+    def assert_report_debt(self, path, document):
+        debt = machine_artifacts.quality_debt({}, {path: document})
+        self.assertEqual([path], debt["schema_named_json_without_schema_declaration"])
+
+    def run_checker(self, replacements=None, additions=None):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            documents = copy.deepcopy(self.reports)
+            documents.update(replacements or {})
+            documents.update(additions or {})
+            documents[machine_artifacts.DEBT_PATH] = {
+                "known_debt": {
+                    "declared_schema_missing_id": [],
+                    "annotation_only_schema_documents": [],
+                    "schema_named_json_without_schema_declaration": [],
+                    "unbound_json_examples": [],
+                }
+            }
+            for relative_path, document in documents.items():
+                path = root / relative_path
+                path.parent.mkdir(parents=True, exist_ok=True)
+                if isinstance(document, bytes):
+                    path.write_bytes(document)
+                else:
+                    path.write_text(json.dumps(document), encoding="utf-8")
+            # The CLI inspects a disposable fixture, not the real repository.
+            return subprocess.run(
+                [sys.executable, str(machine_artifacts.__file__), str(root)],
+                check=False, capture_output=True, text=True, timeout=30,
+            )
+
+    def test_exact_reviewed_reports_are_not_schema_name_debt(self):
+        for path, document in self.reports.items():
+            with self.subTest(path=path):
+                self.assertTrue(machine_artifacts.ReviewedDiagnosticReports.matches(path, document))
+        debt = machine_artifacts.quality_debt({}, self.reports)
+        self.assertTrue(all(not paths for paths in debt.values()))
+
+    def test_registry_is_exact_and_read_only(self):
+        registry = machine_artifacts.ReviewedDiagnosticReports._VALUE_SHA256
+        self.assertEqual(set(self.reports), set(registry))
+        with self.assertRaises(TypeError):
+            registry[self.path] = "0" * 64
+
+    def test_another_path_is_not_excluded(self):
+        for path in (
+            "data/schemas/schema-readiness.json",
+            self.REPORT_DIRECTORY + "new-schema-report.json",
+            "./" + self.path,
+        ):
+            with self.subTest(path=path):
+                self.assertFalse(machine_artifacts.ReviewedDiagnosticReports.matches(path, self.document))
+                self.assert_report_debt(path, self.document)
+
+    def test_report_label_alone_is_not_an_exemption(self):
+        fake = {"artifact_type": "ywe_schema_readiness_diagnostic"}
+        self.assertFalse(machine_artifacts.ReviewedDiagnosticReports.matches(self.path, fake))
+        self.assert_report_debt(self.path, fake)
+
+    def test_changed_nested_results_require_review(self):
+        for path, document in self.reports.items():
+            changed = copy.deepcopy(document)
+            changed["root_results"][0]["accepted_by_advertised_root_schema"] = False
+            with self.subTest(path=path):
+                self.assertFalse(machine_artifacts.ReviewedDiagnosticReports.matches(path, changed))
+                self.assert_report_debt(path, changed)
+
+    def test_changed_metadata_requires_review(self):
+        for key, replacement in (
+            ("status", "PASS"),
+            ("observed_at_utc", "2026-09-19T00:00:00Z"),
+            ("artifact_type", "schema"),
+        ):
+            changed = copy.deepcopy(self.document)
+            changed[key] = replacement
+            with self.subTest(key=key):
+                self.assertFalse(machine_artifacts.ReviewedDiagnosticReports.matches(self.path, changed))
+                self.assert_report_debt(self.path, changed)
+
+    def test_schema_declarations_and_keywords_are_never_report_exemptions(self):
+        for key in ("$schema", *sorted(machine_artifacts.SCHEMA_KEYWORDS)):
+            changed = copy.deepcopy(self.document)
+            changed[key] = True
+            with self.subTest(key=key):
+                self.assertFalse(machine_artifacts.ReviewedDiagnosticReports.matches(self.path, changed))
+
+    def test_non_json_and_non_object_values_are_not_recognized(self):
+        values = (None, [], True, 4, "report", {1: "x", "mixed": "keys"})
+        for value in values:
+            with self.subTest(value=value):
+                self.assertFalse(machine_artifacts.ReviewedDiagnosticReports.matches(self.path, value))
+        for value in (float("nan"), float("inf"), object(), "\ud800"):
+            changed = copy.deepcopy(self.document)
+            changed["extra"] = value
+            self.assertFalse(machine_artifacts.ReviewedDiagnosticReports.matches(self.path, changed))
+
+    def test_member_order_and_json_whitespace_do_not_change_identity(self):
+        reversed_keys = dict(reversed(list(self.document.items())))
+        reparsed = json.loads(json.dumps(reversed_keys, indent=4, ensure_ascii=True))
+        self.assertTrue(machine_artifacts.ReviewedDiagnosticReports.matches(self.path, reparsed))
+
+    def test_recognition_preserves_the_report_value(self):
+        before = copy.deepcopy(self.document)
+        machine_artifacts.ReviewedDiagnosticReports.matches(self.path, self.document)
+        self.assertEqual(before, self.document)
+
+    def test_other_debt_categories_are_unchanged(self):
+        schemas = {
+            "missing-id.json": {"$schema": "x", "type": "object"},
+            "annotation.json": {"$schema": "x", "$id": "y", "description": "record"},
+        }
+        documents = {
+            **self.reports, **schemas,
+            "examples/unbound.json": {"value": 1},
+            self.REPORT_DIRECTORY + "real_schema.json": {"properties": {}},
+        }
+        debt = machine_artifacts.quality_debt(schemas, documents)
+        self.assertEqual(["missing-id.json"], debt["declared_schema_missing_id"])
+        self.assertEqual(["annotation.json"], debt["annotation_only_schema_documents"])
+        self.assertEqual(["examples/unbound.json"], debt["unbound_json_examples"])
+        self.assertEqual(
+            [self.REPORT_DIRECTORY + "real_schema.json"],
+            debt["schema_named_json_without_schema_declaration"],
+        )
+
+    def test_cli_accepts_reviewed_reports_alongside_valid_schema(self):
+        result = self.run_checker(additions={"valid_schema.json": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "urn:ywe:test:valid", "type": "object",
+        }})
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+        self.assertIn("1 declared schemas", result.stdout)
+
+    def test_cli_rejects_invalid_declaration_and_unresolved_reference(self):
+        for document, message in (
+            ({"$schema": "https://json-schema.org/draft/2020-12/schema",
+              "$id": "urn:ywe:test:bad", "type": "not-a-type"}, "invalid JSON Schema declaration"),
+            ({"$schema": "https://json-schema.org/draft/2020-12/schema",
+              "$id": "urn:ywe:test:bad", "type": "object",
+              "$ref": "#/$defs/missing"}, "unresolved local reference"),
+        ):
+            with self.subTest(message=message):
+                result = self.run_checker(replacements={self.path: document})
+                self.assertNotEqual(0, result.returncode)
+                self.assertIn(message, result.stdout)
+
+    def test_cli_rejects_duplicate_schema_identifiers(self):
+        schema = {"$schema": "https://json-schema.org/draft/2020-12/schema",
+                  "$id": "urn:ywe:test:duplicate", "type": "object"}
+        result = self.run_checker(additions={"first_schema.json": schema, "second_schema.json": schema})
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("Duplicate schema identifier", result.stdout)
+
+    def test_cli_rejects_changed_and_copied_reports(self):
+        changed = copy.deepcopy(self.document)
+        changed["summary"]["source_mutated"] = True
+        result = self.run_checker(replacements={self.path: changed})
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("Unregistered schema_named_json_without_schema_declaration", result.stdout)
+        result = self.run_checker(additions={self.REPORT_DIRECTORY + "copied-schema.json": self.document})
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("copied-schema.json", result.stdout)
+
+    def test_cli_still_rejects_bad_json_and_duplicate_yaml_keys(self):
+        for additions, message in (
+            ({self.path: b"{invalid"}, "invalid JSON"),
+            ({"duplicate.yaml": b"value: 1\nvalue: 2\n"}, "invalid YAML"),
+        ):
+            with self.subTest(message=message):
+                result = self.run_checker(additions=additions)
+                self.assertNotEqual(0, result.returncode)
+                self.assertIn(message, result.stdout)
+
+
 class AttributionPolicyTests(unittest.TestCase):
     def test_every_policy_rule_matches_its_runtime_value(self):
         active_rules = attribution_policy.rules()
@@ -486,9 +678,7 @@ class WorkflowContractTests(unittest.TestCase):
                 source["path"]: source["sha256"]
                 for source in classification_before["sensitive_sources"]
             }
-            promises_before = self._read_json(
-                temporary_root, version_updater.PROMISE_PATH
-            )
+            promises_before = self._read_json(temporary_root, version_updater.PROMISE_PATH)
             surfaces_before = {
                 surface["path"]: surface["sha256"]
                 for surface in promises_before["reviewed_surfaces"]
@@ -500,14 +690,10 @@ class WorkflowContractTests(unittest.TestCase):
             )
 
             roadmap = self._read_json(temporary_root, version_updater.ROADMAP_PATH)
-            classification = self._read_json(
-                temporary_root, version_updater.CLASSIFICATION_PATH
-            )
+            classification = self._read_json(temporary_root, version_updater.CLASSIFICATION_PATH)
             scope = self._read_json(temporary_root, version_updater.SCOPE_PATH)
             truth = self._read_json(temporary_root, version_updater.TRUTH_PATH)
-            release = self._read_json(
-                temporary_root, version_updater.RELEASE_POLICY_PATH
-            )
+            release = self._read_json(temporary_root, version_updater.RELEASE_POLICY_PATH)
             promises = self._read_json(temporary_root, version_updater.PROMISE_PATH)
             debt = self._read_json(temporary_root, version_updater.DEBT_PATH)
 
@@ -516,48 +702,27 @@ class WorkflowContractTests(unittest.TestCase):
             self.assertEqual(new_version, scope["repository_baseline"])
             self.assertEqual(new_version, truth["repository_baseline"]["value"])
             self.assertTrue(truth["repository_baseline"]["mirrors"])
-            self.assertTrue(
-                all(
-                    mirror["value"] == new_version
-                    for mirror in truth["repository_baseline"]["mirrors"]
-                )
-            )
+            self.assertTrue(all(mirror["value"] == new_version for mirror in truth["repository_baseline"]["mirrors"]))
             self.assertEqual(new_version, release["repository_baseline"]["value"])
             self.assertEqual(new_version, promises["repository_baseline"])
             self.assertEqual(new_version, debt["repository_baseline"])
-            self.assertEqual(
-                introduced_before,
-                [item["introduced_baseline"] for item in debt["debts"]],
-            )
-            self.assertEqual(
-                evidence_before,
-                (temporary_root / version_updater.M0_EVIDENCE_PATH).read_bytes(),
-            )
+            self.assertEqual(introduced_before, [item["introduced_baseline"] for item in debt["debts"]])
+            self.assertEqual(evidence_before, (temporary_root / version_updater.M0_EVIDENCE_PATH).read_bytes())
 
             for source in classification["sensitive_sources"]:
                 self.assertEqual(
-                    version_updater.normalized_text_sha256(
-                        temporary_root / source["path"]
-                    ),
-                    source["sha256"],
-                    source["path"],
+                    version_updater.normalized_text_sha256(temporary_root / source["path"]),
+                    source["sha256"], source["path"],
                 )
             self.assertNotEqual(
                 sensitive_before[version_updater.ROADMAP_PATH],
-                next(
-                    source["sha256"]
-                    for source in classification["sensitive_sources"]
-                    if source["path"] == version_updater.ROADMAP_PATH
-                ),
+                next(source["sha256"] for source in classification["sensitive_sources"] if source["path"] == version_updater.ROADMAP_PATH),
             )
 
             for surface in promises["reviewed_surfaces"]:
                 self.assertEqual(
-                    version_updater.normalized_text_sha256(
-                        temporary_root / surface["path"]
-                    ),
-                    surface["sha256"],
-                    surface["path"],
+                    version_updater.normalized_text_sha256(temporary_root / surface["path"]),
+                    surface["sha256"], surface["path"],
                 )
             self.assertEqual(
                 version_updater.reviewed_surface_digest(promises["reviewed_surfaces"]),
@@ -565,11 +730,7 @@ class WorkflowContractTests(unittest.TestCase):
             )
             self.assertNotEqual(
                 surfaces_before["README.md"],
-                next(
-                    surface["sha256"]
-                    for surface in promises["reviewed_surfaces"]
-                    if surface["path"] == "README.md"
-                ),
+                next(surface["sha256"] for surface in promises["reviewed_surfaces"] if surface["path"] == "README.md"),
             )
 
             changelog = temporary_root / "CHANGELOG.md"
@@ -590,29 +751,18 @@ class WorkflowContractTests(unittest.TestCase):
             version_path.write_text("2.0.23\n", encoding="utf-8")
             before = self._tree_bytes(temporary_root)
             for invalid_version in (
-                "9.8",
-                "01.2.3",
-                "1.02.3",
-                "1.2.03",
-                "v1.2.3",
-                "1.2.3-beta",
-                " 1.2.3",
+                "9.8", "01.2.3", "1.02.3", "1.2.03", "v1.2.3", "1.2.3-beta", " 1.2.3",
             ):
                 with self.subTest(version=invalid_version):
                     with self.assertRaisesRegex(ValueError, "MAJOR.MINOR.PATCH"):
-                        version_updater.update_version_references(
-                            temporary_root,
-                            invalid_version,
-                        )
+                        version_updater.update_version_references(temporary_root, invalid_version)
                     self.assertEqual(before, self._tree_bytes(temporary_root))
 
     def test_version_updater_rolls_back_partial_replacement(self):
         with tempfile.TemporaryDirectory() as directory:
             temporary_root = Path(directory)
             self._copy_version_update_fixture(temporary_root)
-            old_version = (temporary_root / "VERSION").read_text(
-                encoding="utf-8-sig"
-            ).strip()
+            old_version = (temporary_root / "VERSION").read_text(encoding="utf-8-sig").strip()
             major, minor, patch = (int(part) for part in old_version.split("."))
             new_version = f"{major}.{minor}.{patch + 1}"
             before = self._tree_bytes(temporary_root)
@@ -626,11 +776,7 @@ class WorkflowContractTests(unittest.TestCase):
                     raise OSError("simulated replacement failure")
                 return real_replace(source, destination)
 
-            with mock.patch.object(
-                version_updater.os,
-                "replace",
-                side_effect=fail_second_replacement,
-            ):
+            with mock.patch.object(version_updater.os, "replace", side_effect=fail_second_replacement):
                 with self.assertRaisesRegex(OSError, "simulated replacement failure"):
                     version_updater.update_version_references(temporary_root, new_version)
 
@@ -639,23 +785,13 @@ class WorkflowContractTests(unittest.TestCase):
 
     def test_version_updater_supports_numeric_dotted_segments(self):
         value = {"repository_baseline": {"mirrors": [{"value": "2.0.23"}]}}
-        version_updater.set_dotted_value(
-            value,
-            "repository_baseline.mirrors.0.value",
-            "9.8.7",
-        )
+        version_updater.set_dotted_value(value, "repository_baseline.mirrors.0.value", "9.8.7")
         self.assertEqual(
-            "9.8.7",
-            version_updater.dotted_value(
-                value,
-                "repository_baseline.mirrors.0.value",
-            ),
+            "9.8.7", version_updater.dotted_value(value, "repository_baseline.mirrors.0.value"),
         )
 
     def test_contributor_identity_gate_remains_independent(self):
-        text = (ROOT / ".github/workflows/contributor-identity-policy.yml").read_text(
-            encoding="utf-8-sig"
-        )
+        text = (ROOT / ".github/workflows/contributor-identity-policy.yml").read_text(encoding="utf-8-sig")
         self.assertIn("scripts/github/Test-ContributorIdentityPolicy.ps1", text)
 
 
