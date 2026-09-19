@@ -31,5 +31,103 @@
       "sacred_ruin",
       "dimensionally_unstable_location"
     ]
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/core/realm_engine/realm_schema.json",
+  "title": "Realm Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-CORE-REALM-ENGINE-REALM-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "realm_definition",
+    "realm_shift_requirements",
+    "realm_shift_effects",
+    "thin_veil_location"
+  ],
+  "properties": {
+    "realm_definition": {
+      "type": "object",
+      "properties": {
+        "realm_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "meaning": {
+          "type": "string",
+          "minLength": 1
+        },
+        "attunement_threshold": {
+          "type": "integer"
+        },
+        "is_starting_realm": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "realm_shift_requirements": {
+      "type": "object",
+      "properties": {
+        "realm_attunement_threshold_met": {
+          "type": "boolean"
+        },
+        "veil_location_required": {
+          "type": "boolean"
+        },
+        "player_form_changes": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "realm_shift_effects": {
+      "type": "object",
+      "properties": {
+        "npc_change": {
+          "type": "boolean"
+        },
+        "vendor_change": {
+          "type": "boolean"
+        },
+        "trainer_change": {
+          "type": "boolean"
+        },
+        "quest_giver_change": {
+          "type": "boolean"
+        },
+        "realm_only_players_visible": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "thin_veil_location": {
+      "type": "object",
+      "properties": {
+        "location_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "realm_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "types_allowed": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
 }

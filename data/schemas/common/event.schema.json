@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/common/event.schema.json",
+  "description": "YWE M2 common event contract.",
+  "x-ywe-requirement-id": "YWE-M2-COMMON-EVENT",
+  "title": "Event",
+  "type": "object",
+  "required": [
+    "event_id",
+    "event_kind",
+    "occurred_at",
+    "provenance"
+  ],
+  "properties": {
+    "event_id": {
+      "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+    },
+    "event_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "occurred_at": {
+      "$ref": "https://ywe.local/schemas/common/time.schema.json"
+    },
+    "ordering": {
+      "$ref": "https://ywe.local/schemas/common/ordering.schema.json"
+    },
+    "provenance": {
+      "$ref": "https://ywe.local/schemas/common/provenance.schema.json"
+    }
+  },
+  "additionalProperties": true
+}

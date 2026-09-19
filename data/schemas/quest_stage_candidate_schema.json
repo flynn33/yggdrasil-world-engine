@@ -33,5 +33,90 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/quest_stage_candidate_schema.json",
+  "title": "Quest Stage Candidate Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-QUEST-STAGE-CANDIDATE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "stage_candidate_id",
+    "quest_candidate_ref",
+    "stage_kind",
+    "stage_pressure",
+    "required_context_refs",
+    "allowed_player_verbs",
+    "expected_state_reads",
+    "expected_state_write_classes",
+    "truth_scope"
+  ],
+  "properties": {
+    "allowed_player_verbs": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_state_reads": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_state_write_classes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "location_overlay_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "lore_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "npc_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "quest_candidate_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "required_context_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "stage_candidate_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "stage_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stage_pressure": {
+      "type": "string",
+      "minLength": 1
+    },
+    "truth_scope": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

@@ -44,5 +44,66 @@
     "axioms_as_flavor_only",
     "diagnostic_without_target",
     "quest_generation_without_axiom_or_worldstate_pressure"
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/axiom_diagnostic_packet_schema.json",
+  "title": "Axiom Diagnostic Packet Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-AXIOM-DIAGNOSTIC-PACKET-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "axiom_diagnostic_id",
+    "target_ref",
+    "target_kind",
+    "evaluated_axioms",
+    "violations",
+    "pressures",
+    "stabilizers",
+    "recommended_kernel_actions",
+    "asp_component_refs"
+  ],
+  "properties": {
+    "asp_component_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "axiom_diagnostic_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "evaluated_axioms": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pressures": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recommended_kernel_actions": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stabilizers": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "violations": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

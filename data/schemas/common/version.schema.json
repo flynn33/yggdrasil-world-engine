@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/common/version.schema.json",
+  "description": "YWE M2 common version contract.",
+  "x-ywe-requirement-id": "YWE-M2-COMMON-VERSION",
+  "title": "Version",
+  "type": "string",
+  "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][A-Za-z0-9.-]+)?$"
+}

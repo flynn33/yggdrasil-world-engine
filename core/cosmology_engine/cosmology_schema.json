@@ -78,5 +78,202 @@
     "designer_lore_extensible": true,
     "realm_layers_are_structural_simulation_constants": true,
     "game_layer_may_reskin_realm_expression": true
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/core/cosmology_engine/cosmology_schema.json",
+  "title": "Cosmology Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-CORE-COSMOLOGY-ENGINE-COSMOLOGY-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "primordial_state",
+    "creation_event",
+    "realm_count",
+    "realm_term_equivalence",
+    "realms",
+    "wolf_canon",
+    "ash_model_foundation",
+    "engine_cosmology_framework"
+  ],
+  "properties": {
+    "primordial_state": {
+      "type": "object",
+      "properties": {
+        "darkness": {
+          "type": "boolean"
+        },
+        "consciousness_gathering": {
+          "type": "boolean"
+        },
+        "first_singularity": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "type": {
+              "type": "string",
+              "minLength": 1
+            },
+            "components": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "creation_event": {
+      "type": "object",
+      "properties": {
+        "trigger": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sequence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "realm_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "realm_term_equivalence": {
+      "type": "object",
+      "properties": {
+        "plane_equals_realm": {
+          "type": "boolean"
+        },
+        "preferred_repository_term": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "realms": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "wolf_canon": {
+      "type": "object",
+      "properties": {
+        "relationship": {
+          "type": "string",
+          "minLength": 1
+        },
+        "all_consciousness_carries_both": {
+          "type": "boolean"
+        },
+        "growth_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ideal_state": {
+          "type": "string",
+          "minLength": 1
+        },
+        "permanent_death": {
+          "type": "boolean"
+        },
+        "temporary_loss_state": {
+          "type": "string",
+          "minLength": 1
+        },
+        "opposition_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "morality_system": {
+          "type": "boolean"
+        },
+        "good_evil_axis": {
+          "type": "boolean"
+        },
+        "physical_companion_presence": {
+          "type": "boolean"
+        },
+        "quest_assistance": {
+          "type": "boolean"
+        },
+        "combat_assistance": {
+          "type": "boolean"
+        },
+        "temporary_loss_state_aliases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "return_after_decoherence": {
+          "type": "boolean"
+        },
+        "each_has_what_the_other_needs": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "ash_model_foundation": {
+      "type": "object",
+      "properties": {
+        "model_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "engine_framework_foundation": {
+          "type": "boolean"
+        },
+        "layers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "engine_cosmology_framework": {
+      "type": "object",
+      "properties": {
+        "fixed_structural_ontology": {
+          "type": "boolean"
+        },
+        "fixed_setting_bible": {
+          "type": "boolean"
+        },
+        "designer_lore_extensible": {
+          "type": "boolean"
+        },
+        "realm_layers_are_structural_simulation_constants": {
+          "type": "boolean"
+        },
+        "game_layer_may_reskin_realm_expression": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
 }

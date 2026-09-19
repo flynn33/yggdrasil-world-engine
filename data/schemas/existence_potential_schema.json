@@ -41,5 +41,72 @@
     "low_phi_targets_may_require_recovery_or_containment",
     "high_phi_targets_may_be_eligible_for_mythic_or_prophetic_roles",
     "phi_does_not_replace_worldstate_delta_evidence"
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/existence_potential_schema.json",
+  "title": "Existence Potential Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-EXISTENCE-POTENTIAL-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "existence_potential_id",
+    "target_ref",
+    "target_kind",
+    "coefficients",
+    "term_values",
+    "phi_value",
+    "classification",
+    "axiom_diagnostic_refs",
+    "pattern_vector_ref",
+    "interpretation_notes"
+  ],
+  "properties": {
+    "axiom_diagnostic_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "classification": {
+      "type": "string",
+      "minLength": 1
+    },
+    "coefficients": {
+      "type": "string",
+      "minLength": 1
+    },
+    "existence_potential_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "interpretation_notes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pattern_vector_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "phi_value": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "term_values": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

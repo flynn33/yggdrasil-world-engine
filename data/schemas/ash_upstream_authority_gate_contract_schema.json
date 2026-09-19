@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ash_upstream_authority_gate_contract_schema.json",
+  "title": "Ash Upstream Authority Gate Contract",
+  "description": "Executable M2 schema for data/validation/ash_upstream_authority_gate_contract.json.",
+  "type": "object",
+  "required": [
+    "authority_contract",
+    "meaningful_manifest_targets",
+    "reject_if",
+    "required_packet_spine",
+    "required_provenance_fields",
+    "required_validation_command",
+    "schema_id",
+    "schema_ref",
+    "version"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "authority_contract": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required_packet_spine": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "required_provenance_fields": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "meaningful_manifest_targets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "reject_if": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "required_validation_command": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_ref": {
+      "const": "https://ywe.local/schemas/ash_upstream_authority_gate_contract_schema.json"
+    }
+  },
+  "additionalProperties": false,
+  "x-ywe-requirement-id": "YWE-M2-BOUND-DATA-VALIDATION-ASH-UPSTREAM-AUTHORITY-GATE-CONTRACT-JSON"
+}

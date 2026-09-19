@@ -86,5 +86,107 @@
     "branch_event_without_player_consequence",
     "branch_event_without_cosmology_provenance",
     "branch_event_mutates_base_ontology"
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/branch_event_schema.json",
+  "title": "Branch Event Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-BRANCH-EVENT-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "branch_event_id",
+    "agent_ref",
+    "decision_context",
+    "available_actions",
+    "chosen_action",
+    "choice_significance",
+    "base_world_ref",
+    "parent_branch_ref",
+    "location_state_ref",
+    "player_context_ref",
+    "cosmology_source_refs",
+    "asp_component_refs",
+    "worldstate_delta_refs",
+    "future_generation_bias_refs"
+  ],
+  "properties": {
+    "agent_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "asp_component_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "available_actions": {
+      "type": "string",
+      "minLength": 1
+    },
+    "base_world_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "branch_event_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "choice_significance": {
+      "type": "string",
+      "minLength": 1
+    },
+    "chosen_action": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cosmology_source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "decision_context": {
+      "type": "string",
+      "minLength": 1
+    },
+    "future_generation_bias_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "location_state_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "parent_branch_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "player_context_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "worldstate_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": true
 }

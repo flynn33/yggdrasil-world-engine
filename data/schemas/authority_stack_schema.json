@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "ywe.authority_stack.schema.v1",
+  "$id": "https://ywe.local/schemas/authority_stack_schema.json",
   "title": "YWE Authority Stack Schema",
   "type": "object",
   "required": [
@@ -36,5 +36,6 @@
       }
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "x-ywe-legacy-schema-id": "ywe.authority_stack.schema.v1"
 }

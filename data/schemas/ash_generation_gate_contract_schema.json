@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ash_generation_gate_contract_schema.json",
+  "title": "Ash Generation Gate Contract",
+  "description": "Executable M2 schema for data/validation/ash_generation_gate_contract.json.",
+  "type": "object",
+  "required": [
+    "active_package",
+    "adapter_paths",
+    "architecture_extension_package",
+    "authority_contract",
+    "governance",
+    "meaningful_manifest_targets",
+    "reject_if",
+    "required_packet_spine",
+    "required_provenance_fields",
+    "schema_id",
+    "schema_ref",
+    "shared_required_markers",
+    "systems",
+    "upstream_authority_gate_contract",
+    "version"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "active_package": {
+      "type": "string",
+      "minLength": 1
+    },
+    "governance": {
+      "type": "object",
+      "properties": {
+        "mcp_record": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subagent_record": {
+          "type": "string",
+          "minLength": 1
+        },
+        "acceptance_record": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deviation_record": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "shared_required_markers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "systems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "system": {
+            "type": "string",
+            "minLength": 1
+          },
+          "paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required_markers": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "adapter_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "architecture_extension_package": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authority_contract": {
+      "type": "string",
+      "minLength": 1
+    },
+    "upstream_authority_gate_contract": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required_packet_spine": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "required_provenance_fields": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "meaningful_manifest_targets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "reject_if": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "schema_ref": {
+      "const": "https://ywe.local/schemas/ash_generation_gate_contract_schema.json"
+    }
+  },
+  "additionalProperties": false,
+  "x-ywe-requirement-id": "YWE-M2-BOUND-DATA-VALIDATION-ASH-GENERATION-GATE-CONTRACT-JSON"
+}

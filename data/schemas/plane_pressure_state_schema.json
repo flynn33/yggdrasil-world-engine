@@ -44,5 +44,53 @@
     "plane_pressure_must_reference_base_world_ontology",
     "dominant_planes_must_not_delete_other_planes",
     "void_pressure_requires_careful_recovery_or_containment_context"
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/plane_pressure_state_schema.json",
+  "title": "Plane Pressure State Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-PLANE-PRESSURE-STATE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "plane_pressure_id",
+    "target_ref",
+    "target_kind",
+    "base_world_ref",
+    "pressures",
+    "dominant_planes",
+    "interpretation_notes"
+  ],
+  "properties": {
+    "base_world_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "dominant_planes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "interpretation_notes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "plane_pressure_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "pressures": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    }
+  },
+  "additionalProperties": true
 }

@@ -81,5 +81,177 @@
         "target_domain"
       ]
     }
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/core/ash_pattern_engine/pattern_engine_schema.json",
+  "title": "Pattern Engine Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-CORE-ASH-PATTERN-ENGINE-PATTERN-ENGINE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "pattern_node",
+    "pattern_generation_rules",
+    "pattern_outputs",
+    "ash_state_space_contract"
+  ],
+  "properties": {
+    "pattern_node": {
+      "type": "object",
+      "properties": {
+        "pattern_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "realm_bias": {
+          "type": "string",
+          "minLength": 1
+        },
+        "strength": {
+          "type": "number"
+        },
+        "type_options": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "pattern_generation_rules": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "independent_random_allowed": {
+          "type": "boolean"
+        },
+        "must_derive_from_cosmic_state": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "pattern_outputs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "ash_state_space_contract": {
+      "type": "object",
+      "properties": {
+        "authority": {
+          "type": "string",
+          "minLength": 1
+        },
+        "math_basis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required_inputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required_materialization": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provenance_fields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "truth_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "AshState": {
+          "type": "object",
+          "properties": {
+            "coordinates": {
+              "type": "integer"
+            },
+            "field": {
+              "type": "string",
+              "minLength": 1
+            },
+            "state_count": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": true
+        },
+        "CanonicalCodewordSet": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "transition": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": true
+        },
+        "CosmicPatternSnapshot": {
+          "type": "object",
+          "properties": {
+            "required_fields": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "additionalProperties": true
+        },
+        "DiagnosticEnvelope": {
+          "type": "object",
+          "properties": {
+            "required_fields": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "additionalProperties": true
+        },
+        "GenerationPlan": {
+          "type": "object",
+          "properties": {
+            "required_fields": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
 }

@@ -1,0 +1,217 @@
+{
+  "artifact_type": "ywe_m2_protected_contract_migration_manifest",
+  "artifact_version": "1.0.0",
+  "purpose": "Authorizes exact additive JSON Schema 2020-12 migrations of protected Phase 9 descriptive records while preserving every legacy JSON value.",
+  "migration_policy": {
+    "legacy_values_must_match": true,
+    "migrated_values_must_match": true,
+    "renames_or_deletions_allowed": false,
+    "scope": "Only the explicitly listed protected files."
+  },
+  "migrations": [
+    {
+      "path": "data/schemas/axiom_diagnostic_packet_schema.json",
+      "legacy_value_sha256": "3dbef79a8a60bc15cd725c56386c5ffa2e0c148f526ee0c20cb63891aa9e7b39",
+      "migrated_value_sha256": "639196a72e400dac8f11f290b0a2b23318175ba07f6fbd2aeb9f9132b224043c",
+      "added_keywords": [
+        "$id",
+        "$schema",
+        "additionalProperties",
+        "properties",
+        "required",
+        "title",
+        "type",
+        "x-ywe-requirement-id"
+      ],
+      "preserved_legacy_fields": [
+        "authority",
+        "axioms",
+        "description",
+        "forbidden_interpretations",
+        "recommended_kernel_actions",
+        "required_fields",
+        "schema_id",
+        "schema_version",
+        "status"
+      ]
+    },
+    {
+      "path": "data/schemas/base_world_ontology_schema.json",
+      "legacy_value_sha256": "7ac5ca7b69619f7cd867b270a26c903ce9fc188e3dd9fc0eab72dc7f47ac793b",
+      "migrated_value_sha256": "650b89f4980b876c85c25add19010dc52905c2c14791536094b3113dcaf2dbfb",
+      "added_keywords": [
+        "$id",
+        "$schema",
+        "additionalProperties",
+        "properties",
+        "required",
+        "title",
+        "type",
+        "x-ywe-requirement-id"
+      ],
+      "preserved_legacy_fields": [
+        "authority",
+        "description",
+        "forbidden_interpretations",
+        "plane_roles",
+        "planes_required",
+        "required_relationships",
+        "schema_id",
+        "schema_version",
+        "status"
+      ]
+    },
+    {
+      "path": "data/schemas/branch_event_schema.json",
+      "legacy_value_sha256": "ad715c8f92e28869d361f62b0676d476b6f807fdb533f3a5aaf99fc07ff8f59a",
+      "migrated_value_sha256": "d302dad976a463cf4d886f8679e14f5ad88c122837661d31055570dfa61b9dc9",
+      "added_keywords": [
+        "$id",
+        "$schema",
+        "additionalProperties",
+        "properties",
+        "required",
+        "title",
+        "type",
+        "x-ywe-requirement-id"
+      ],
+      "preserved_legacy_fields": [
+        "authority",
+        "branch_qualifiers",
+        "choice_significance_values",
+        "description",
+        "example_shape",
+        "forbidden_interpretations",
+        "non_qualifiers",
+        "required_fields",
+        "schema_id",
+        "schema_version",
+        "status"
+      ]
+    },
+    {
+      "path": "data/schemas/branch_generation_context_schema.json",
+      "legacy_value_sha256": "517da1f31234aefb59e48651f22495689fed9836cbbc291d80791f8f65c309ed",
+      "migrated_value_sha256": "81386531f5308ad3b16598eb98c3122f53704a796238af9d3bd1dc5036c62a38",
+      "added_keywords": [
+        "$id",
+        "$schema",
+        "additionalProperties",
+        "properties",
+        "required",
+        "title",
+        "type",
+        "x-ywe-requirement-id"
+      ],
+      "preserved_legacy_fields": [
+        "asp_component_context_fields",
+        "authority",
+        "cosmology_context_fields",
+        "description",
+        "location_context_fields",
+        "player_context_fields",
+        "required_fields",
+        "schema_id",
+        "schema_version",
+        "status",
+        "world_context_fields"
+      ]
+    },
+    {
+      "path": "data/schemas/existence_potential_schema.json",
+      "legacy_value_sha256": "296b151c315db345ffd729095629edc73591e31c50c161c299f7d99eabccd11f",
+      "migrated_value_sha256": "1263b72c9e307ac241ac87d13f934fc7d726f32a3af7ef1a7b4b761c8af694cc",
+      "added_keywords": [
+        "$id",
+        "$schema",
+        "additionalProperties",
+        "properties",
+        "required",
+        "title",
+        "type",
+        "x-ywe-requirement-id"
+      ],
+      "preserved_legacy_fields": [
+        "authority",
+        "classifications",
+        "description",
+        "formula",
+        "required_fields",
+        "schema_id",
+        "schema_version",
+        "status",
+        "terms",
+        "validation_notes"
+      ]
+    },
+    {
+      "path": "data/schemas/future_generation_bias_update_schema.json",
+      "legacy_value_sha256": "7caf7c8bcaf9174dc07d114ae75320de88c24fecac58a09fd1ae45a0b015d1c4",
+      "migrated_value_sha256": "7caf7c8bcaf9174dc07d114ae75320de88c24fecac58a09fd1ae45a0b015d1c4",
+      "added_keywords": [],
+      "preserved_legacy_fields": [
+        "$id",
+        "$schema",
+        "additionalProperties",
+        "description",
+        "properties",
+        "required",
+        "title",
+        "type"
+      ]
+    },
+    {
+      "path": "data/schemas/leaf_branch_reality_state_schema.json",
+      "legacy_value_sha256": "b9e5db739723691053498a10a6ea1ea8beb2b24d7fd8feab4702de0a24e6ccb1",
+      "migrated_value_sha256": "5c253540263df0e50186f352d10912a2741d68970b2987b3ee98126947537640",
+      "added_keywords": [
+        "$id",
+        "$schema",
+        "additionalProperties",
+        "properties",
+        "required",
+        "title",
+        "type",
+        "x-ywe-requirement-id"
+      ],
+      "preserved_legacy_fields": [
+        "allowed_divergence_domains",
+        "authority",
+        "branch_status_values",
+        "description",
+        "forbidden_divergence_domains",
+        "persistence_policy",
+        "required_fields",
+        "schema_id",
+        "schema_version",
+        "status"
+      ]
+    },
+    {
+      "path": "data/schemas/plane_pressure_state_schema.json",
+      "legacy_value_sha256": "92888f7b5dfcf766952997c412c3d9483eb5a89a1bc0be7437f1d42a9b466ca6",
+      "migrated_value_sha256": "f9b27d74c9e9be14dffcdf0dcb8a55e93b10004524f58eee722a31220d3bbd35",
+      "added_keywords": [
+        "$id",
+        "$schema",
+        "additionalProperties",
+        "properties",
+        "required",
+        "title",
+        "type",
+        "x-ywe-requirement-id"
+      ],
+      "preserved_legacy_fields": [
+        "authority",
+        "description",
+        "pressures",
+        "required_fields",
+        "schema_id",
+        "schema_version",
+        "status",
+        "target_kinds",
+        "validation_notes"
+      ]
+    }
+  ]
+}

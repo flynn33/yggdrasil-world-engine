@@ -34,5 +34,84 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/quest_axiom_pressure_schema.json",
+  "title": "Quest Axiom Pressure Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-QUEST-AXIOM-PRESSURE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "pressure_id",
+    "primary_axiom",
+    "secondary_axioms",
+    "pressure_kind",
+    "severity",
+    "affected_entities",
+    "affected_location_refs",
+    "recommended_quest_verbs",
+    "truth_scope",
+    "provenance"
+  ],
+  "properties": {
+    "affected_entities": {
+      "type": "string",
+      "minLength": 1
+    },
+    "affected_location_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "branch_event_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "existence_potential_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "pattern_vector_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "pressure_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "pressure_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "primary_axiom": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provenance": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recommended_quest_verbs": {
+      "type": "string",
+      "minLength": 1
+    },
+    "secondary_axioms": {
+      "type": "string",
+      "minLength": 1
+    },
+    "severity": {
+      "type": "number"
+    },
+    "truth_scope": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

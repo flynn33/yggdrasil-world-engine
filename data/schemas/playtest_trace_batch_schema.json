@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://yggdrasilworldengine.local/schemas/playtest_trace_batch.json",
+  "$id": "https://ywe.local/schemas/playtest_trace_batch_schema.json",
   "title": "playtest_trace_batch",
   "description": "YWE Phase 17 schema for playtest_trace_batch.",
   "type": "object",
@@ -49,5 +49,6 @@
     "trace_refs",
     "completion_modes_covered",
     "batch_acceptance_result_ref"
-  ]
+  ],
+  "x-ywe-legacy-schema-id": "https://yggdrasilworldengine.local/schemas/playtest_trace_batch.json"
 }

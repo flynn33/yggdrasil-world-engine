@@ -39,5 +39,110 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/generated_lore_fragment_schema.json",
+  "title": "Generated Lore Fragment Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-GENERATED-LORE-FRAGMENT-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "lore_fragment_id",
+    "lore_kind",
+    "pattern_trace_ref",
+    "source_axiom_pressure_refs",
+    "source_worldstate_delta_refs",
+    "source_branch_refs",
+    "source_location_refs",
+    "truth_scope",
+    "visibility_conditions",
+    "generated_text_policy",
+    "provenance"
+  ],
+  "properties": {
+    "display_text_placeholder": {
+      "type": "string",
+      "minLength": 1
+    },
+    "faction_claim_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "generated_text_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lore_fragment_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "lore_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "myth_eligibility": {
+      "type": "string",
+      "minLength": 1
+    },
+    "npc_testimony_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "pattern_trace_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "prophecy_eligibility": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provenance": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_axiom_pressure_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "source_branch_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "source_location_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "source_worldstate_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "truth_scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "visibility_conditions": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

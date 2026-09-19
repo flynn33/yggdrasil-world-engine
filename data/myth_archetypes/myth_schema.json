@@ -2,5 +2,31 @@
   "myth_id": "",
   "source_event": "",
   "title": "",
-  "faction_versions": {}
+  "faction_versions": {},
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/data/myth_archetypes/myth_schema.json",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-MYTH-ARCHETYPES-MYTH-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "myth_id",
+    "source_event",
+    "faction_versions"
+  ],
+  "properties": {
+    "myth_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "source_event": {
+      "type": "string",
+      "minLength": 1
+    },
+    "faction_versions": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
 }

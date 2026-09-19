@@ -32,5 +32,81 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/content_manifest_exchange_schema.json",
+  "title": "Content Manifest Exchange Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-CONTENT-MANIFEST-EXCHANGE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "exchange_id",
+    "candidate_refs",
+    "target_engine",
+    "required_downstream_contracts",
+    "truth_scope",
+    "provenance_ref",
+    "status"
+  ],
+  "properties": {
+    "candidate_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "exchange_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "lore_record_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "myth_engine_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "npc_engine_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "prophecy_engine_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "provenance_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "quest_reward_resolver_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "required_downstream_contracts": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_engine": {
+      "type": "string",
+      "minLength": 1
+    },
+    "truth_scope": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

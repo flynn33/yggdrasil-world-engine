@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://yggdrasilworldengine.local/schemas/player_state_trace.json",
+  "$id": "https://ywe.local/schemas/player_state_trace_schema.json",
   "title": "player_state_trace",
   "description": "YWE Phase 17 schema for player_state_trace.",
   "type": "object",
@@ -44,5 +44,6 @@
     "player_state_after_ref",
     "player_state_update_refs",
     "branch_history_refs"
-  ]
+  ],
+  "x-ywe-legacy-schema-id": "https://yggdrasilworldengine.local/schemas/player_state_trace.json"
 }

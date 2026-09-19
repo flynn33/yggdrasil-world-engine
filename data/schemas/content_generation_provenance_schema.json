@@ -32,5 +32,97 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/content_generation_provenance_schema.json",
+  "title": "Content Generation Provenance Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-CONTENT-GENERATION-PROVENANCE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "provenance_id",
+    "cosmology_source_ref",
+    "branch_context_ref",
+    "player_runtime_state_ref",
+    "worldstate_or_location_ref",
+    "existence_potential_ref",
+    "pattern_vector_refs",
+    "truth_scope"
+  ],
+  "properties": {
+    "asp_diagnostic_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "axiom_diagnostic_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "branch_context_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "cosmology_source_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "existence_potential_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "pattern_vector_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "player_runtime_state_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "provenance_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "source_package_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "truth_scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "validation_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "worldstate_or_location_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    }
+  },
+  "additionalProperties": true
 }

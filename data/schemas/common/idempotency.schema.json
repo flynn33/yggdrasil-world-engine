@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/common/idempotency.schema.json",
+  "description": "YWE M2 common idempotency contract.",
+  "x-ywe-requirement-id": "YWE-M2-COMMON-IDEMPOTENCY",
+  "title": "Idempotency",
+  "type": "object",
+  "required": [
+    "key"
+  ],
+  "properties": {
+    "key": {
+      "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

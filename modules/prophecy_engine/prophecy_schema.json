@@ -1,5 +1,26 @@
 {
   "prophecy_id": "",
   "condition": "",
-  "status": "dormant"
+  "status": "dormant",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/modules/prophecy_engine/prophecy_schema.json",
+  "title": "Prophecy Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-MODULES-PROPHECY-ENGINE-PROPHECY-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "prophecy_id",
+    "condition"
+  ],
+  "properties": {
+    "prophecy_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "condition": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

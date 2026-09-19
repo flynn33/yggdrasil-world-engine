@@ -1,5 +1,4 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_id": "ywe.validation.ash_upstream_authority_gate_contract",
   "version": "1.0.0",
   "authority_contract": "docs/architecture/ash_upstream_authority_contract.md",
@@ -43,5 +42,6 @@
     "feature_engine_claims_math_authority",
     "player_action_mutates_ash_math"
   ],
-  "required_validation_command": "bash scripts/run_checks.sh"
+  "required_validation_command": "bash scripts/run_checks.sh",
+  "schema_ref": "https://ywe.local/schemas/ash_upstream_authority_gate_contract_schema.json"
 }

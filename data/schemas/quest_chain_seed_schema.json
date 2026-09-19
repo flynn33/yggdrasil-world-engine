@@ -31,5 +31,82 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/quest_chain_seed_schema.json",
+  "title": "Quest Chain Seed Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-QUEST-CHAIN-SEED-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "seed_id",
+    "quest_generation_context_ref",
+    "source_pressure_refs",
+    "initial_stage_kind",
+    "allowed_resolution_modes",
+    "expected_consequence_classes",
+    "downstream_resolver_target",
+    "provenance"
+  ],
+  "properties": {
+    "allowed_resolution_modes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "downstream_resolver_target": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_consequence_classes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "initial_stage_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lore_fragment_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "npc_anchor_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "provenance": {
+      "type": "string",
+      "minLength": 1
+    },
+    "quest_generation_context_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "ravenfall_gate_example_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "seed_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "source_pressure_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": true
 }

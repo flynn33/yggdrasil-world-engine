@@ -27,5 +27,103 @@
     "consequence_memory",
     "myth_formation",
     "prophecy_generation"
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/core/narrative_engine/narrative_schema.json",
+  "title": "Narrative Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-CORE-NARRATIVE-ENGINE-NARRATIVE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "player_narrative_memory",
+    "narrative_event",
+    "narrative_loop_stages"
+  ],
+  "properties": {
+    "player_narrative_memory": {
+      "type": "object",
+      "properties": {
+        "player_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "memory_entries": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        },
+        "quests_completed": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "myths_participated": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "prophecies_activated": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "narrative_flags": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "narrative_event": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "event_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_pattern_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "player_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "realm_context": {
+          "type": "string",
+          "minLength": 1
+        },
+        "consequence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "myth_eligible": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "narrative_loop_stages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "additionalProperties": true
 }

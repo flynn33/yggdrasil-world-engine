@@ -9,10 +9,6 @@
   "outputs": [
     "expanded prophecy schema contract"
   ],
-  "dependencies": [
-    "data/schemas/prophecy_schema.json",
-    "modules/prophecy_engine"
-  ],
   "invariants": [
     "all_meaningful_generation_must_be_ash_derived",
     "fixed_cosmology_must_remain_locked",
@@ -50,5 +46,78 @@
     "diagnostic_ref": "DiagnosticEnvelope",
     "generation_plan_ref": "GenerationPlan",
     "source_ash_refs": "SourceASHRefs"
-  }
+  },
+  "x-ywe-legacy-dependencies": [
+    "data/schemas/prophecy_schema.json",
+    "modules/prophecy_engine"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/prophecy_schema_expansion.json",
+  "title": "Prophecy Schema Expansion",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-PROPHECY-SCHEMA-EXPANSION-JSON",
+  "type": "object",
+  "required": [
+    "system",
+    "inputs",
+    "outputs",
+    "invariants",
+    "ash_required_fields"
+  ],
+  "properties": {
+    "system": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "invariants": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "ash_required_fields": {
+      "type": "object",
+      "properties": {
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
 }

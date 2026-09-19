@@ -32,5 +32,81 @@
         "realm_truth_rewrite_by_perception_overlay"
       ]
     }
-  }
+  },
+  "$id": "https://ywe.local/schemas/realm_transition_resolution_schema.json",
+  "title": "Realm Transition Resolution Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-REALM-TRANSITION-RESOLUTION-SCHEMA-JSON",
+  "$defs": {
+    "RealmTransitionResolution": {
+      "title": "RealmTransitionResolution",
+      "type": "object",
+      "required": [
+        "transition_resolution_id",
+        "source_realm",
+        "destination_realm",
+        "boundary_profile_ref",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "worldstate_delta_packet_ref"
+      ],
+      "properties": {
+        "boundary_profile_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "destination_realm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "source_realm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "transition_resolution_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-REALMTRANSITIONRESOLUTION"
+    }
+  },
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/RealmTransitionResolution"
+    }
+  ]
 }

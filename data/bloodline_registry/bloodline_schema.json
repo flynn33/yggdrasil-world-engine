@@ -1,5 +1,34 @@
 {
   "bloodline_id": "",
   "mythic_origin": "",
-  "resonance_effects": []
+  "resonance_effects": [],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/data/bloodline_registry/bloodline_schema.json",
+  "title": "Bloodline Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-BLOODLINE-REGISTRY-BLOODLINE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "bloodline_id",
+    "mythic_origin",
+    "resonance_effects"
+  ],
+  "properties": {
+    "bloodline_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "mythic_origin": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resonance_effects": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "additionalProperties": true
 }

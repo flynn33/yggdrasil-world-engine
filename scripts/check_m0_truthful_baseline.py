@@ -38,6 +38,7 @@ SCHEMA_DEBT_PATH = "data/validation/schema_quality_baseline.json"
 EVIDENCE_PATH = "data/governance/m0_acceptance_evidence.json"
 ACCEPTANCE_DOCUMENT_PATH = "docs/project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md"
 PHASE_8_9_REQUIRED_PATH = "data/validation/required_phase_8_9_artifacts.json"
+M2_SCHEMA_MIGRATION_PATH = "data/validation/m2_contract_migration_manifest.json"
 WIKI_SYNC_WORKFLOW_PATH = ".github/workflows/wiki-sync.yml"
 
 INSTANCE_SCHEMAS = {
@@ -1340,6 +1341,81 @@ def protected_phase_9_paths(root: Path, errors: list[str]) -> tuple[set[str], tu
     return protected, ("examples/branch_reality/",)
 
 
+def m2_schema_migration_document_errors(
+    base_document: Any, current_document: Any, record: dict[str, Any]
+) -> list[str]:
+    errors: list[str] = []
+    if not isinstance(base_document, dict) or not isinstance(current_document, dict):
+        return ["M2 contract migration requires JSON object documents"]
+    try:
+        base_hash = sha256_bytes(
+            json.dumps(
+                base_document,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=False,
+                allow_nan=False,
+            ).encode("utf-8")
+        )
+        current_hash = sha256_bytes(
+            json.dumps(
+                current_document,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=False,
+                allow_nan=False,
+            ).encode("utf-8")
+        )
+    except (TypeError, ValueError, UnicodeEncodeError, RecursionError) as exc:
+        return [f"M2 contract migration cannot be fingerprinted: {exc}"]
+    if record.get("legacy_value_sha256") != base_hash:
+        errors.append("M2 contract migration source fingerprint does not match the protected baseline")
+    if record.get("migrated_value_sha256") != current_hash:
+        errors.append("M2 contract migration result fingerprint does not match the reviewed migration")
+    for key, value in base_document.items():
+        if key not in current_document or current_document[key] != value:
+            errors.append(f"M2 contract migration changed protected legacy field {key!r}")
+    added = sorted(set(current_document) - set(base_document))
+    if record.get("added_keywords") != added:
+        errors.append("M2 contract migration added-keyword inventory is stale")
+    if record.get("preserved_legacy_fields") != sorted(base_document):
+        errors.append("M2 contract migration protected-field inventory is stale")
+    return errors
+
+
+def approved_m2_schema_migration(
+    root: Path,
+    base_ref: str,
+    relative_path: str,
+    manifest: dict[str, Any] | None,
+    errors: list[str],
+) -> bool:
+    if manifest is None:
+        return False
+    records = manifest.get("migrations")
+    record = next(
+        (item for item in records if isinstance(item, dict) and item.get("path") == relative_path),
+        None,
+    ) if isinstance(records, list) else None
+    if record is None:
+        return False
+    base_result = run_git(root, ["show", f"{base_ref}:{relative_path}"])
+    if base_result.returncode != 0:
+        errors.append(f"Unable to read protected M2 migration baseline for {relative_path}")
+        return False
+    try:
+        base_document = json.loads(base_result.stdout)
+        current_document = load_json(root / relative_path)
+    except (OSError, json.JSONDecodeError, DuplicateKeyError) as exc:
+        errors.append(f"Unable to inspect protected M2 contract migration {relative_path}: {exc}")
+        return False
+    migration_errors = m2_schema_migration_document_errors(
+        base_document, current_document, record
+    )
+    errors.extend(f"{relative_path}: {error}" for error in migration_errors)
+    return not migration_errors
+
+
 def protected_diff_errors(root: Path, base_ref: str) -> tuple[list[str], set[str]]:
     errors: list[str] = []
     changed = changed_candidate_paths(root, base_ref, errors)
@@ -1347,9 +1423,18 @@ def protected_diff_errors(root: Path, base_ref: str) -> tuple[list[str], set[str
     hits = sorted(
         path for path in changed if path in protected or any(path.startswith(prefix) for prefix in prefixes)
     )
-    if hits:
-        errors.append(f"M0 diff modifies protected Phase 9 paths: {hits}")
-    return errors, set(hits)
+    manifest_errors: list[str] = []
+    manifest = load_json_object(root, M2_SCHEMA_MIGRATION_PATH, manifest_errors)
+    # A missing manifest is ordinary when no protected path changed.
+    if hits and manifest is None:
+        errors.extend(manifest_errors)
+    unapproved = [
+        path for path in hits
+        if not approved_m2_schema_migration(root, base_ref, path, manifest, errors)
+    ]
+    if unapproved:
+        errors.append(f"M0 diff modifies protected Phase 9 paths: {unapproved}")
+    return errors, set(unapproved)
 
 
 def repository_state_digest(root: Path, paths: Iterable[str], exclusions: set[str]) -> str:

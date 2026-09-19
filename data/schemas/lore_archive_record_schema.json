@@ -62,5 +62,174 @@
         "endgame_truth_protection"
       ]
     }
-  }
+  },
+  "$id": "https://ywe.local/schemas/lore_archive_record_schema.json",
+  "title": "Lore Archive Record Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-LORE-ARCHIVE-RECORD-SCHEMA-JSON",
+  "$defs": {
+    "LoreArchiveRecord": {
+      "title": "LoreArchiveRecord",
+      "type": "object",
+      "required": [
+        "lore_archive_record_id",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "ywe_generation_context_packet_ref",
+        "worldstate_delta_packet_ref",
+        "myth_record_ref",
+        "faction_topology_state_ref",
+        "visibility_scope_ref",
+        "authority_boundary"
+      ],
+      "properties": {
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "faction_topology_state_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "lore_archive_record_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "myth_record_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "visibility_scope_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "ywe_generation_context_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-LOREARCHIVERECORD"
+    },
+    "LoreRecordVariant": {
+      "title": "LoreRecordVariant",
+      "type": "object",
+      "required": [
+        "lore_variant_id",
+        "lore_archive_record_ref",
+        "layer",
+        "source_claim_type",
+        "visibility_scope_ref"
+      ],
+      "properties": {
+        "layer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lore_archive_record_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "lore_variant_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_claim_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "visibility_scope_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-LORERECORDVARIANT"
+    },
+    "VisibilityScope": {
+      "title": "VisibilityScope",
+      "type": "object",
+      "required": [
+        "visibility_scope_id",
+        "audience",
+        "realm_constraints",
+        "progression_constraints",
+        "endgame_truth_protection"
+      ],
+      "properties": {
+        "audience": {
+          "type": "string",
+          "minLength": 1
+        },
+        "endgame_truth_protection": {
+          "type": "string",
+          "minLength": 1
+        },
+        "progression_constraints": {
+          "type": "string",
+          "minLength": 1
+        },
+        "realm_constraints": {
+          "type": "string",
+          "minLength": 1
+        },
+        "visibility_scope_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-VISIBILITYSCOPE"
+    }
+  },
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/LoreArchiveRecord"
+    },
+    {
+      "$ref": "#/$defs/LoreRecordVariant"
+    },
+    {
+      "$ref": "#/$defs/VisibilityScope"
+    }
+  ]
 }

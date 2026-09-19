@@ -39,5 +39,138 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json",
+  "title": "Quest Manifest Candidate Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-QUEST-MANIFEST-CANDIDATE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "quest_candidate_id",
+    "quest_kind",
+    "quest_title_policy",
+    "quest_pressure_summary",
+    "source_axiom_pressure_refs",
+    "source_branch_context_refs",
+    "source_player_context_refs",
+    "source_location_context_refs",
+    "source_worldstate_delta_refs",
+    "truth_scope",
+    "resolution_mode_options",
+    "expected_consequence_classes",
+    "content_provenance",
+    "exchange_target"
+  ],
+  "properties": {
+    "artifact_eligibility_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "content_provenance": {
+      "type": "string",
+      "minLength": 1
+    },
+    "creature_eligibility_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "exchange_target": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_consequence_classes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lore_fragment_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "npc_candidate_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "quest_candidate_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "quest_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "quest_pressure_summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "quest_title_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resolution_mode_options": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_axiom_pressure_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "source_branch_context_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "source_location_context_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "source_player_context_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "source_worldstate_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "truth_scope": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

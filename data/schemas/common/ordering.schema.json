@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/common/ordering.schema.json",
+  "description": "YWE M2 common ordering contract.",
+  "x-ywe-requirement-id": "YWE-M2-COMMON-ORDERING",
+  "title": "Ordering",
+  "type": "object",
+  "required": [
+    "sequence"
+  ],
+  "properties": {
+    "sequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "predecessor": {
+      "$ref": "https://ywe.local/schemas/common/reference.schema.json"
+    },
+    "tie_break": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

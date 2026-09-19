@@ -548,5 +548,1972 @@
     "WorldstateDeltaPacket|DiagnosticNoOp",
     "LocationMutationState|LocationMutationDelta|WorldstateMutationCommit",
     "FutureGenerationBiasUpdate"
+  ],
+  "$id": "https://ywe.local/schemas/ash_generation_packet_schema.json",
+  "title": "Ash Generation Packet Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-ASH-GENERATION-PACKET-SCHEMA-JSON",
+  "$defs": {
+    "AshState": {
+      "title": "AshState",
+      "type": "object",
+      "required": [
+        "state_space",
+        "bits"
+      ],
+      "properties": {
+        "bits": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ]
+          }
+        },
+        "state_space": {
+          "const": "F2^9"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-ASHSTATE"
+    },
+    "CanonicalCodeword": {
+      "title": "CanonicalCodeword",
+      "type": "object",
+      "required": [
+        "state_space",
+        "bits",
+        "membership"
+      ],
+      "properties": {
+        "bits": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ]
+          }
+        },
+        "membership": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state_space": {
+          "const": "F2^9"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-CANONICALCODEWORD"
+    },
+    "CosmicPatternSnapshot": {
+      "title": "CosmicPatternSnapshot",
+      "type": "object",
+      "required": [
+        "snapshot_type",
+        "state_space",
+        "normalized_state",
+        "source_orbit_id",
+        "active_codeword_sequence",
+        "state_identity",
+        "diagnostic_ref",
+        "generation_plan_ref"
+      ],
+      "properties": {
+        "active_codeword_sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "normalized_state": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ]
+          }
+        },
+        "realm_identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "snapshot_type": {
+          "const": "CosmicPatternSnapshot"
+        },
+        "source_orbit_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "state_identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state_space": {
+          "const": "F2^9"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-COSMICPATTERNSNAPSHOT"
+    },
+    "DiagnosticEnvelope": {
+      "title": "DiagnosticEnvelope",
+      "type": "object",
+      "required": [
+        "diagnostic_kind",
+        "severity",
+        "stage",
+        "disposition",
+        "subject_reference",
+        "rule_ids"
+      ],
+      "properties": {
+        "diagnostic_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "disposition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rule_id_taxonomy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rule_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "severity": {
+          "type": "number"
+        },
+        "stage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state_validity_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject_reference": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-DIAGNOSTICENVELOPE"
+    },
+    "GenerationPlan": {
+      "title": "GenerationPlan",
+      "type": "object",
+      "required": [
+        "plan_type",
+        "plan_ref",
+        "cosmic_pattern_snapshot_ref",
+        "normalized_state",
+        "source_state_identity",
+        "destination_state_identity",
+        "diagnostic_ref",
+        "artifacts",
+        "metadata"
+      ],
+      "properties": {
+        "artifacts": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "destination_realm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "destination_state_identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "emitter_contract": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "string",
+          "minLength": 1
+        },
+        "normalized_state": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ]
+          }
+        },
+        "plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "plan_type": {
+          "const": "GenerationPlan"
+        },
+        "planner_contract": {
+          "type": "string",
+          "minLength": 1
+        },
+        "side_effects_allowed": {
+          "const": false
+        },
+        "source_realm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_state_identity": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-GENERATIONPLAN"
+    },
+    "SourceASHRefs": {
+      "title": "SourceASHRefs",
+      "type": "object",
+      "required": [
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "normalized_state",
+        "source_orbit_id",
+        "active_codeword_sequence"
+      ],
+      "properties": {
+        "active_codeword_sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "consumer_authority": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "normalized_state": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ]
+          }
+        },
+        "source_orbit_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "truth_authority": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-SOURCEASHREFS"
+    },
+    "YWEGenerationContextPacket": {
+      "title": "YWEGenerationContextPacket",
+      "type": "object",
+      "required": [
+        "packet_type",
+        "version",
+        "request_id",
+        "trigger_kind",
+        "requested_manifest_kind",
+        "player_runtime_state_ref",
+        "realm_context_ref",
+        "worldstate_delta_refs",
+        "perception_state_ref"
+      ],
+      "properties": {
+        "packet_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "perception_state_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "player_runtime_state_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "realm_context_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "requested_manifest_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "trigger_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-YWEGENERATIONCONTEXTPACKET"
+    },
+    "PlayerRuntimeState": {
+      "title": "PlayerRuntimeState",
+      "type": "object",
+      "required": [
+        "record_type",
+        "state_id",
+        "player_ref",
+        "current_phase",
+        "current_leaf_branch_ref",
+        "branch_generation_context_refs",
+        "branch_event_refs",
+        "authority_boundary",
+        "ash_provenance",
+        "update_policy"
+      ],
+      "properties": {
+        "ash_provenance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "branch_event_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "branch_generation_context_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "current_leaf_branch_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "current_phase": {
+          "type": "string",
+          "minLength": 1
+        },
+        "player_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "record_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "state_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "update_policy": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-PLAYERRUNTIMESTATE"
+    },
+    "PlayerRuntimeStateDelta": {
+      "title": "PlayerRuntimeStateDelta",
+      "type": "object",
+      "required": [
+        "record_type",
+        "delta_id",
+        "target_state_ref",
+        "trigger_trace_ref",
+        "branch_event_ref",
+        "changed_fields",
+        "disposition",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ],
+      "properties": {
+        "branch_event_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "changed_fields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "delta_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "disposition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "record_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "target_state_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "trigger_trace_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-PLAYERRUNTIMESTATEDELTA"
+    },
+    "ASHUpstreamGenerationEnvelope": {
+      "title": "ASHUpstreamGenerationEnvelope",
+      "type": "object",
+      "required": [
+        "packet_type",
+        "version",
+        "request_id",
+        "requested_manifest_kind",
+        "ywe_context_packet_ref",
+        "ash_state_snapshot_ref",
+        "canonical_codeword_trace_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "authority_chain"
+      ],
+      "properties": {
+        "ash_state_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "authority_chain": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonical_codeword_trace_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "packet_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "requested_manifest_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "ywe_context_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-ASHUPSTREAMGENERATIONENVELOPE"
+    },
+    "YWEInterpretationPacket": {
+      "title": "YWEInterpretationPacket",
+      "type": "object",
+      "required": [
+        "packet_type",
+        "version",
+        "interpretation_id",
+        "source_ash_refs",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "requested_manifest_kind",
+        "realm_interpretation",
+        "player_relevance",
+        "manifestation_target",
+        "allowed_feature_engine",
+        "worldstate_delta_policy"
+      ],
+      "properties": {
+        "allowed_feature_engine": {
+          "type": "string",
+          "minLength": 1
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "interpretation_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "manifestation_target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "packet_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "player_relevance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "realm_interpretation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requested_manifest_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "worldstate_delta_policy": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-YWEINTERPRETATIONPACKET"
+    },
+    "PlayerActionTrace": {
+      "title": "PlayerActionTrace",
+      "type": "object",
+      "required": [
+        "trace_id",
+        "player_ref",
+        "action_kind",
+        "local_context_ref",
+        "timestamp_or_sequence_ref",
+        "consequence_channels"
+      ],
+      "properties": {
+        "action_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "consequence_channels": {
+          "type": "string",
+          "minLength": 1
+        },
+        "local_context_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "player_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "timestamp_or_sequence_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "trace_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-PLAYERACTIONTRACE"
+    },
+    "ExplorationFrontierRequest": {
+      "title": "ExplorationFrontierRequest",
+      "type": "object",
+      "required": [
+        "request_id",
+        "frontier_kind",
+        "player_runtime_state_ref",
+        "realm_context_ref",
+        "known_boundary_refs",
+        "requested_manifest_kind"
+      ],
+      "properties": {
+        "frontier_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "known_boundary_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "player_runtime_state_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "realm_context_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "requested_manifest_kind": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-EXPLORATIONFRONTIERREQUEST"
+    },
+    "FutureGenerationBiasUpdate": {
+      "title": "FutureGenerationBiasUpdate",
+      "type": "object",
+      "required": [
+        "bias_update_id",
+        "source_worldstate_delta_ref",
+        "affected_context_channels",
+        "bias_strength",
+        "expiration_policy",
+        "authority_boundary"
+      ],
+      "properties": {
+        "affected_context_channels": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bias_strength": {
+          "type": "number"
+        },
+        "bias_update_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "expiration_policy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_worldstate_delta_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-FUTUREGENERATIONBIASUPDATE"
+    },
+    "WorldstateDeltaPacket": {
+      "title": "WorldstateDeltaPacket",
+      "type": "object",
+      "required": [
+        "record_type",
+        "delta_id",
+        "source_resolution_payload",
+        "source_branch_event_ref",
+        "player_runtime_state_ref",
+        "current_leaf_branch_ref",
+        "affected_location_refs",
+        "location_mutation_refs",
+        "consequence_domains",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "properties": {
+        "affected_location_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "ash_provenance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "consequence_domains": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_leaf_branch_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "delta_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "location_mutation_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "player_runtime_state_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "record_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_branch_event_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_resolution_payload": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-WORLDSTATEDELTAPACKET"
+    },
+    "LocationMutationState": {
+      "title": "LocationMutationState",
+      "type": "object",
+      "required": [
+        "record_type",
+        "location_state_id",
+        "location_ref",
+        "base_world_ref",
+        "current_leaf_branch_ref",
+        "status",
+        "active_mutation_refs",
+        "worldstate_delta_refs",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "properties": {
+        "active_mutation_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "ash_provenance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "base_world_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "current_leaf_branch_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "location_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "location_state_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "record_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-LOCATIONMUTATIONSTATE"
+    },
+    "LocationMutationDelta": {
+      "title": "LocationMutationDelta",
+      "type": "object",
+      "required": [
+        "record_type",
+        "mutation_delta_id",
+        "target_location_state_ref",
+        "source_worldstate_delta_ref",
+        "source_player_runtime_state_ref",
+        "mutation_kind",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "authority_boundary"
+      ],
+      "properties": {
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "mutation_delta_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "mutation_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "source_player_runtime_state_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_worldstate_delta_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "target_location_state_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-LOCATIONMUTATIONDELTA"
+    },
+    "WorldstateMutationCommit": {
+      "title": "WorldstateMutationCommit",
+      "type": "object",
+      "required": [
+        "record_type",
+        "commit_id",
+        "source_worldstate_delta_ref",
+        "committed_record_refs",
+        "commit_scope",
+        "contradiction_policy",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "properties": {
+        "ash_provenance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "commit_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "commit_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "committed_record_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "contradiction_policy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_worldstate_delta_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-WORLDSTATEMUTATIONCOMMIT"
+    },
+    "DiagnosticNoOp": {
+      "title": "DiagnosticNoOp",
+      "type": "object",
+      "required": [
+        "record_type",
+        "no_op_id",
+        "reason",
+        "diagnostic_ref",
+        "cosmic_pattern_snapshot_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ],
+      "properties": {
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "no_op_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-DIAGNOSTICNOOP"
+    },
+    "QuestGenerationRequest": {
+      "title": "QuestGenerationRequest",
+      "type": "object",
+      "required": [
+        "record_type",
+        "request_id",
+        "trigger_kind",
+        "requested_manifest_kind",
+        "ywe_generation_context_packet_ref",
+        "player_runtime_state_ref",
+        "current_leaf_branch_ref",
+        "worldstate_delta_refs",
+        "future_generation_bias_update_refs",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "properties": {
+        "ash_provenance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_leaf_branch_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "future_generation_bias_update_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "player_runtime_state_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "record_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "requested_manifest_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "trigger_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "ywe_generation_context_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-QUESTGENERATIONREQUEST"
+    },
+    "QuestChainManifest": {
+      "title": "QuestChainManifest",
+      "type": "object",
+      "required": [
+        "record_type",
+        "quest_chain_manifest_id",
+        "quest_generation_request_ref",
+        "stage_manifests",
+        "completion_mode_set",
+        "quest_resolution_payload_ref",
+        "affected_location_refs",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "properties": {
+        "affected_location_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "ash_provenance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "completion_mode_set": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quest_chain_manifest_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "quest_generation_request_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "quest_resolution_payload_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "record_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "stage_manifests": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-QUESTCHAINMANIFEST"
+    },
+    "QuestResolutionPayload": {
+      "title": "QuestResolutionPayload",
+      "type": "object",
+      "required": [
+        "record_type",
+        "quest_resolution_payload_id",
+        "quest_chain_manifest_ref",
+        "selected_completion_mode_ref",
+        "player_runtime_state_ref",
+        "current_leaf_branch_ref",
+        "worldstate_delta_packet_ref",
+        "location_mutation_delta_refs",
+        "future_generation_bias_update_ref",
+        "npc_memory_delta_refs",
+        "lore_archive_record_refs",
+        "myth_record_refs",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "properties": {
+        "ash_provenance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_leaf_branch_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "future_generation_bias_update_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "location_mutation_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "lore_archive_record_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "myth_record_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "npc_memory_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "player_runtime_state_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "quest_chain_manifest_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "quest_resolution_payload_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "record_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "selected_completion_mode_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-QUESTRESOLUTIONPAYLOAD"
+    },
+    "NPCManifest": {
+      "title": "NPCManifest",
+      "type": "object",
+      "required": [
+        "record_type",
+        "npc_manifest_id",
+        "source_quest_refs",
+        "relationship_vector",
+        "truth_function",
+        "persistence_state",
+        "worldstate_delta_packet_ref",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "properties": {
+        "ash_provenance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "npc_manifest_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "persistence_state": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "relationship_vector": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_quest_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "truth_function": {
+          "type": "string",
+          "minLength": 1
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-NPCMANIFEST"
+    },
+    "NPCMemoryDelta": {
+      "title": "NPCMemoryDelta",
+      "type": "object",
+      "required": [
+        "record_type",
+        "npc_memory_delta_id",
+        "npc_manifest_ref",
+        "source_resolution_payload_ref",
+        "player_runtime_state_ref",
+        "current_leaf_branch_ref",
+        "memory_claim_refs",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "authority_boundary"
+      ],
+      "properties": {
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_leaf_branch_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "memory_claim_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "npc_manifest_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "npc_memory_delta_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "player_runtime_state_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "record_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "source_resolution_payload_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-NPCMEMORYDELTA"
+    },
+    "LoreArchiveRecord": {
+      "title": "LoreArchiveRecord",
+      "type": "object",
+      "required": [
+        "record_type",
+        "lore_archive_record_id",
+        "layer",
+        "worldstate_delta_packet_ref",
+        "visibility_scope",
+        "lore_variants",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "properties": {
+        "ash_provenance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "layer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lore_archive_record_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "lore_variants": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "visibility_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-LOREARCHIVERECORD"
+    },
+    "MythRecord": {
+      "title": "MythRecord",
+      "type": "object",
+      "required": [
+        "record_type",
+        "myth_record_id",
+        "myth_seed_candidate_ref",
+        "source_worldstate_delta_ref",
+        "myth_lines",
+        "social_distribution_delta_ref",
+        "factual_world_truth_rewrite_allowed",
+        "authority_boundary",
+        "ash_provenance"
+      ],
+      "properties": {
+        "ash_provenance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "factual_world_truth_rewrite_allowed": {
+          "type": "boolean"
+        },
+        "myth_lines": {
+          "type": "string",
+          "minLength": 1
+        },
+        "myth_record_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "myth_seed_candidate_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "record_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "social_distribution_delta_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_worldstate_delta_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-MYTHRECORD"
+    },
+    "SocialDistributionDelta": {
+      "title": "SocialDistributionDelta",
+      "type": "object",
+      "required": [
+        "record_type",
+        "social_distribution_delta_id",
+        "myth_record_ref",
+        "affected_faction_refs",
+        "propagation_scope",
+        "worldstate_delta_packet_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "authority_boundary"
+      ],
+      "properties": {
+        "affected_faction_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "myth_record_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "propagation_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "social_distribution_delta_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-SOCIALDISTRIBUTIONDELTA"
+    },
+    "SystemManifestExchange": {
+      "title": "SystemManifestExchange",
+      "type": "object",
+      "required": [
+        "exchange_id",
+        "requested_manifest_kind",
+        "source_ash_refs",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "allowed_feature_engine",
+        "worldstate_delta_policy"
+      ],
+      "properties": {
+        "allowed_feature_engine": {
+          "type": "string",
+          "minLength": 1
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "exchange_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "feature_engine_claims_math_authority": {
+          "const": false
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "host_adapter_may_author_truth": {
+          "const": false
+        },
+        "planning_precedes_materialization": {
+          "const": true
+        },
+        "requested_manifest_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "worldstate_delta_policy": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-SYSTEMMANIFESTEXCHANGE"
+    },
+    "AshStateSnapshot": {
+      "title": "AshStateSnapshot",
+      "type": "object",
+      "required": [
+        "snapshot_type",
+        "state_space",
+        "normalized_state",
+        "source_orbit_id",
+        "diagnostic_ref"
+      ],
+      "properties": {
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "normalized_state": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ]
+          }
+        },
+        "snapshot_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_orbit_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "state_space": {
+          "const": "F2^9"
+        },
+        "truth_authority": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-ASHSTATESNAPSHOT"
+    },
+    "CanonicalCodewordTrace": {
+      "title": "CanonicalCodewordTrace",
+      "type": "object",
+      "required": [
+        "trace_type",
+        "state_space",
+        "active_codeword_sequence",
+        "transition_rule",
+        "diagnostic_ref"
+      ],
+      "properties": {
+        "active_codeword_sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "codeword_set": {
+          "type": "string",
+          "minLength": 1
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "state_space": {
+          "const": "F2^9"
+        },
+        "trace_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "transition_rule": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-CANONICALCODEWORDTRACE"
+    }
+  },
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/AshState"
+    },
+    {
+      "$ref": "#/$defs/CanonicalCodeword"
+    },
+    {
+      "$ref": "#/$defs/CosmicPatternSnapshot"
+    },
+    {
+      "$ref": "#/$defs/DiagnosticEnvelope"
+    },
+    {
+      "$ref": "#/$defs/GenerationPlan"
+    },
+    {
+      "$ref": "#/$defs/SourceASHRefs"
+    },
+    {
+      "$ref": "#/$defs/YWEGenerationContextPacket"
+    },
+    {
+      "$ref": "#/$defs/PlayerRuntimeState"
+    },
+    {
+      "$ref": "#/$defs/PlayerRuntimeStateDelta"
+    },
+    {
+      "$ref": "#/$defs/ASHUpstreamGenerationEnvelope"
+    },
+    {
+      "$ref": "#/$defs/YWEInterpretationPacket"
+    },
+    {
+      "$ref": "#/$defs/PlayerActionTrace"
+    },
+    {
+      "$ref": "#/$defs/ExplorationFrontierRequest"
+    },
+    {
+      "$ref": "#/$defs/FutureGenerationBiasUpdate"
+    },
+    {
+      "$ref": "#/$defs/WorldstateDeltaPacket"
+    },
+    {
+      "$ref": "#/$defs/LocationMutationState"
+    },
+    {
+      "$ref": "#/$defs/LocationMutationDelta"
+    },
+    {
+      "$ref": "#/$defs/WorldstateMutationCommit"
+    },
+    {
+      "$ref": "#/$defs/DiagnosticNoOp"
+    },
+    {
+      "$ref": "#/$defs/QuestGenerationRequest"
+    },
+    {
+      "$ref": "#/$defs/QuestChainManifest"
+    },
+    {
+      "$ref": "#/$defs/QuestResolutionPayload"
+    },
+    {
+      "$ref": "#/$defs/NPCManifest"
+    },
+    {
+      "$ref": "#/$defs/NPCMemoryDelta"
+    },
+    {
+      "$ref": "#/$defs/LoreArchiveRecord"
+    },
+    {
+      "$ref": "#/$defs/MythRecord"
+    },
+    {
+      "$ref": "#/$defs/SocialDistributionDelta"
+    },
+    {
+      "$ref": "#/$defs/SystemManifestExchange"
+    },
+    {
+      "$ref": "#/$defs/AshStateSnapshot"
+    },
+    {
+      "$ref": "#/$defs/CanonicalCodewordTrace"
+    }
   ]
 }

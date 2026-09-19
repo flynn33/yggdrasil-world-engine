@@ -30,5 +30,82 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/npc_branch_role_schema.json",
+  "title": "Npc Branch Role Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-NPC-BRANCH-ROLE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "branch_role_id",
+    "npc_candidate_ref",
+    "branch_reality_ref",
+    "role_class",
+    "source_branch_event_refs",
+    "worldstate_delta_refs",
+    "location_overlay_refs",
+    "provenance"
+  ],
+  "properties": {
+    "alternate_branch_notes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "branch_reality_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "branch_role_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "celestial_pattern_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "location_overlay_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "npc_candidate_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "provenance": {
+      "type": "string",
+      "minLength": 1
+    },
+    "role_class": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_branch_event_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "worldstate_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": true
 }

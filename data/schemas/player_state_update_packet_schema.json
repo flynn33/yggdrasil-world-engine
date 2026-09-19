@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "ywe.player_state_update_packet.v1",
+  "$id": "https://ywe.local/schemas/player_state_update_packet_schema.json",
   "title": "Player State Update Packet",
   "type": "object",
   "required": [
@@ -166,5 +166,6 @@
       ],
       "default": "proposed"
     }
-  }
+  },
+  "x-ywe-legacy-schema-id": "ywe.player_state_update_packet.v1"
 }

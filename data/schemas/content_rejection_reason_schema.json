@@ -25,5 +25,51 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/content_rejection_reason_schema.json",
+  "title": "Content Rejection Reason Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-CONTENT-REJECTION-REASON-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "reason_id",
+    "reason_kind",
+    "description",
+    "failed_requirements",
+    "recommended_fix"
+  ],
+  "properties": {
+    "candidate_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "failed_requirements": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reason_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "reason_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recommended_fix": {
+      "type": "string",
+      "minLength": 1
+    },
+    "validation_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    }
+  },
+  "additionalProperties": true
 }

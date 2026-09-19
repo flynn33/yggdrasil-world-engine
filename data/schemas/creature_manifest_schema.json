@@ -47,5 +47,155 @@
         "faction_pressure"
       ]
     }
-  }
+  },
+  "$id": "https://ywe.local/schemas/creature_manifest_schema.json",
+  "title": "Creature Manifest Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-CREATURE-MANIFEST-SCHEMA-JSON",
+  "$defs": {
+    "CreatureManifest": {
+      "title": "CreatureManifest",
+      "type": "object",
+      "required": [
+        "creature_manifest_id",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "realm_relevance_map",
+        "behavior_pressure_vector_ref",
+        "encounter_plan_ref"
+      ],
+      "properties": {
+        "behavior_pressure_vector_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "creature_manifest_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "encounter_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "realm_relevance_map": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-CREATUREMANIFEST"
+    },
+    "EncounterPlan": {
+      "title": "EncounterPlan",
+      "type": "object",
+      "required": [
+        "encounter_plan_id",
+        "generation_plan_ref",
+        "diagnostic_ref",
+        "worldstate_delta_route"
+      ],
+      "properties": {
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "encounter_plan_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "worldstate_delta_route": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-ENCOUNTERPLAN"
+    },
+    "BehaviorPressureVector": {
+      "title": "BehaviorPressureVector",
+      "type": "object",
+      "required": [
+        "behavior_pressure_id",
+        "source_ash_refs",
+        "realm_pressure",
+        "myth_pressure",
+        "faction_pressure"
+      ],
+      "properties": {
+        "behavior_pressure_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "faction_pressure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "myth_pressure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "realm_pressure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-BEHAVIORPRESSUREVECTOR"
+    }
+  },
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/CreatureManifest"
+    },
+    {
+      "$ref": "#/$defs/EncounterPlan"
+    },
+    {
+      "$ref": "#/$defs/BehaviorPressureVector"
+    }
+  ]
 }

@@ -86,5 +86,317 @@
         "host_adapter_authored_npc_truth"
       ]
     }
-  }
+  },
+  "$id": "https://ywe.local/schemas/npc_manifest_schema.json",
+  "title": "Npc Manifest Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-NPC-MANIFEST-SCHEMA-JSON",
+  "$defs": {
+    "NPCManifest": {
+      "title": "NPCManifest",
+      "type": "object",
+      "required": [
+        "npc_manifest_id",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "ywe_generation_context_packet_ref",
+        "worldstate_delta_refs",
+        "quest_intent_ref",
+        "faction_topology_state_ref",
+        "relationship_vector_ref",
+        "truth_function_ref",
+        "persistence_state_ref",
+        "authority_boundary"
+      ],
+      "properties": {
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "faction_topology_state_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "npc_manifest_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "persistence_state_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "quest_intent_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "relationship_vector_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "truth_function_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "ywe_generation_context_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-NPCMANIFEST"
+    },
+    "RelationshipVector": {
+      "title": "RelationshipVector",
+      "type": "object",
+      "required": [
+        "relationship_vector_id",
+        "source_ash_refs",
+        "faction_delta_ref",
+        "worldstate_delta_packet_ref"
+      ],
+      "properties": {
+        "faction_delta_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "relationship_vector_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-RELATIONSHIPVECTOR"
+    },
+    "TruthFunction": {
+      "title": "TruthFunction",
+      "type": "object",
+      "required": [
+        "truth_function_id",
+        "known_claims",
+        "hidden_claims",
+        "contested_claims",
+        "truth_boundary",
+        "factual_world_truth_rewrite_allowed"
+      ],
+      "properties": {
+        "contested_claims": {
+          "type": "string",
+          "minLength": 1
+        },
+        "factual_world_truth_rewrite_allowed": {
+          "type": "boolean"
+        },
+        "hidden_claims": {
+          "type": "string",
+          "minLength": 1
+        },
+        "known_claims": {
+          "type": "string",
+          "minLength": 1
+        },
+        "truth_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "truth_function_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-TRUTHFUNCTION"
+    },
+    "PersistenceState": {
+      "title": "PersistenceState",
+      "type": "object",
+      "required": [
+        "persistence_state_id",
+        "scope",
+        "duration",
+        "worldstate_delta_packet_ref",
+        "diagnostic_ref"
+      ],
+      "properties": {
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "duration": {
+          "type": "string",
+          "minLength": 1
+        },
+        "persistence_state_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-PERSISTENCESTATE"
+    },
+    "NPCMemoryDelta": {
+      "title": "NPCMemoryDelta",
+      "type": "object",
+      "required": [
+        "npc_memory_delta_id",
+        "npc_manifest_ref",
+        "source_resolution_payload_ref",
+        "player_runtime_state_ref",
+        "current_leaf_branch_ref",
+        "memory_claim_refs",
+        "relationship_vector_ref",
+        "persistence_scope",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ],
+      "properties": {
+        "current_leaf_branch_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "memory_claim_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "npc_manifest_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "npc_memory_delta_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "persistence_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "player_runtime_state_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "relationship_vector_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "source_resolution_payload_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-NPCMEMORYDELTA"
+    }
+  },
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/NPCManifest"
+    },
+    {
+      "$ref": "#/$defs/RelationshipVector"
+    },
+    {
+      "$ref": "#/$defs/TruthFunction"
+    },
+    {
+      "$ref": "#/$defs/PersistenceState"
+    },
+    {
+      "$ref": "#/$defs/NPCMemoryDelta"
+    }
+  ]
 }

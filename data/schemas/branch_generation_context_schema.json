@@ -56,5 +56,82 @@
     "recovery_status_ref",
     "conformance_ref",
     "containment_ref"
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/branch_generation_context_schema.json",
+  "title": "Branch Generation Context Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-BRANCH-GENERATION-CONTEXT-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "branch_generation_context_id",
+    "branch_event_ref",
+    "base_world_ref",
+    "parent_branch_ref",
+    "player_context",
+    "world_context",
+    "location_context",
+    "cosmology_context",
+    "asp_component_context",
+    "diagnostic_refs",
+    "future_generation_bias_refs"
+  ],
+  "properties": {
+    "asp_component_context": {
+      "type": "string",
+      "minLength": 1
+    },
+    "base_world_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "branch_event_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "branch_generation_context_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "cosmology_context": {
+      "type": "string",
+      "minLength": 1
+    },
+    "diagnostic_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "future_generation_bias_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "location_context": {
+      "type": "string",
+      "minLength": 1
+    },
+    "parent_branch_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "player_context": {
+      "type": "string",
+      "minLength": 1
+    },
+    "world_context": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

@@ -6,5 +6,29 @@
     "consequence_classes",
     "provenance",
     "requires_delta_or_noop"
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/data/validation/check_worldstate_delta_schema.spec.json",
+  "title": "Check Worldstate Delta Schema.Spec",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-VALIDATION-CHECK-WORLDSTATE-DELTA-SCHEMA-SPEC-JSON",
+  "type": "object",
+  "required": [
+    "id",
+    "required_terms"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "required_terms": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "additionalProperties": true
 }

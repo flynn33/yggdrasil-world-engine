@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/game_identity_manifest_schema.json",
+  "title": "Game Identity Manifest",
+  "description": "Executable M2 schema for data/game/where_ravens_wait_eternal_reckoning/game_identity_manifest.json.",
+  "type": "object",
+  "required": [
+    "canonical_position",
+    "game_identity",
+    "manifest_id",
+    "non_goals_for_ywe_repository",
+    "schema_ref"
+  ],
+  "properties": {
+    "manifest_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "game_identity": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "short_title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "abbreviation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "genre": {
+          "type": "string",
+          "minLength": 1
+        },
+        "engine": {
+          "type": "string",
+          "minLength": 1
+        },
+        "initial_platform_target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "runtime_strategy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repository_boundary": {
+          "type": "object",
+          "properties": {
+            "ywe_repository": {
+              "type": "string",
+              "minLength": 1
+            },
+            "product_repository": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "canonical_position": {
+      "type": "object",
+      "properties": {
+        "ash_model_of_the_universe": {
+          "type": "string",
+          "minLength": 1
+        },
+        "yggdrasil_world_engine": {
+          "type": "string",
+          "minLength": 1
+        },
+        "where_ravens_wait_eternal_reckoning": {
+          "type": "string",
+          "minLength": 1
+        },
+        "native_macos_runtime": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "non_goals_for_ywe_repository": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "schema_ref": {
+      "const": "https://ywe.local/schemas/game_identity_manifest_schema.json"
+    }
+  },
+  "additionalProperties": false,
+  "x-ywe-requirement-id": "YWE-M2-BOUND-DATA-GAME-WHERE-RAVENS-WAIT-ETERNAL-RECKONING-GAME-IDENTITY-MANIFEST-JSON"
+}

@@ -71,5 +71,257 @@
         "diagnostic_ref"
       ]
     }
-  }
+  },
+  "$id": "https://ywe.local/schemas/data/quest_archetypes/quest_chain_manifest_schema.json",
+  "title": "Quest Chain Manifest Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-QUEST-ARCHETYPES-QUEST-CHAIN-MANIFEST-SCHEMA-JSON",
+  "$defs": {
+    "QuestChainManifest": {
+      "title": "QuestChainManifest",
+      "type": "object",
+      "required": [
+        "quest_chain_manifest_id",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "ywe_generation_context_packet_ref",
+        "worldstate_delta_refs",
+        "source_ash_refs",
+        "stage_manifests",
+        "completion_mode_set_ref",
+        "quest_resolution_payload_ref",
+        "authority_boundary"
+      ],
+      "properties": {
+        "authority_boundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "completion_mode_set_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "quest_chain_manifest_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "quest_resolution_payload_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "stage_manifests": {
+          "type": "string",
+          "minLength": 1
+        },
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "ywe_generation_context_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-QUESTCHAINMANIFEST"
+    },
+    "StageManifest": {
+      "title": "StageManifest",
+      "type": "object",
+      "required": [
+        "stage_manifest_id",
+        "quest_chain_manifest_ref",
+        "source_state",
+        "source_codeword",
+        "diagnostic_ref",
+        "interpretation_options"
+      ],
+      "properties": {
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "interpretation_options": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quest_chain_manifest_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_codeword": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_state": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stage_manifest_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-STAGEMANIFEST"
+    },
+    "CompletionModeSet": {
+      "title": "CompletionModeSet",
+      "type": "object",
+      "required": [
+        "completion_mode_set_id",
+        "minimum_mode_count",
+        "completion_interpretations",
+        "diagnostic_ref"
+      ],
+      "properties": {
+        "completion_interpretations": {
+          "type": "string",
+          "minLength": 1
+        },
+        "completion_mode_set_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "minimum_mode_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-COMPLETIONMODESET",
+      "x-ywe-minimum-mode-count": 2
+    },
+    "QuestResolutionPayload": {
+      "title": "QuestResolutionPayload",
+      "type": "object",
+      "required": [
+        "quest_resolution_payload_id",
+        "completion_mode_ref",
+        "worldstate_delta_packet_ref",
+        "location_mutation_delta_refs",
+        "future_generation_bias_update_ref",
+        "npc_memory_delta_refs",
+        "lore_archive_record_refs",
+        "myth_record_refs",
+        "diagnostic_ref"
+      ],
+      "properties": {
+        "completion_mode_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "future_generation_bias_update_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "location_mutation_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "lore_archive_record_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "myth_record_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "npc_memory_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "quest_resolution_payload_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-QUESTRESOLUTIONPAYLOAD"
+    }
+  },
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/QuestChainManifest"
+    },
+    {
+      "$ref": "#/$defs/StageManifest"
+    },
+    {
+      "$ref": "#/$defs/CompletionModeSet"
+    },
+    {
+      "$ref": "#/$defs/QuestResolutionPayload"
+    }
+  ]
 }

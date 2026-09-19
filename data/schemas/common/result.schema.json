@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/common/result.schema.json",
+  "description": "YWE M2 common result contract.",
+  "x-ywe-requirement-id": "YWE-M2-COMMON-RESULT",
+  "title": "Result",
+  "type": "object",
+  "required": [
+    "result_id",
+    "status"
+  ],
+  "properties": {
+    "result_id": {
+      "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+    },
+    "status": {
+      "enum": [
+        "succeeded",
+        "rejected",
+        "failed",
+        "deferred",
+        "no_op"
+      ]
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "$ref": "https://ywe.local/schemas/common/diagnostic.schema.json"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "$ref": "https://ywe.local/schemas/common/error.schema.json"
+      }
+    }
+  },
+  "additionalProperties": true
+}

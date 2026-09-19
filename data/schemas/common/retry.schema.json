@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/common/retry.schema.json",
+  "description": "YWE M2 common retry contract.",
+  "x-ywe-requirement-id": "YWE-M2-COMMON-RETRY",
+  "title": "Retry",
+  "type": "object",
+  "required": [
+    "attempt",
+    "maximum_attempts"
+  ],
+  "properties": {
+    "attempt": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "maximum_attempts": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "retry_after": {
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "additionalProperties": false
+}

@@ -43,5 +43,78 @@
     "shadow_as_simple_evil",
     "celestial_as_simple_reward_space",
     "divine_core_as_player_authored_content"
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/base_world_ontology_schema.json",
+  "title": "Base World Ontology Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-BASE-WORLD-ONTOLOGY-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "planes_required",
+    "plane_roles",
+    "required_relationships",
+    "forbidden_interpretations"
+  ],
+  "properties": {
+    "planes_required": {
+      "type": "boolean"
+    },
+    "plane_roles": {
+      "type": "object",
+      "properties": {
+        "P1_Physical": {
+          "type": "string",
+          "minLength": 1
+        },
+        "P2_Etheric": {
+          "type": "string",
+          "minLength": 1
+        },
+        "P3_Astral": {
+          "type": "string",
+          "minLength": 1
+        },
+        "P4_Mental": {
+          "type": "string",
+          "minLength": 1
+        },
+        "P5_Causal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "P6_Celestial": {
+          "type": "string",
+          "minLength": 1
+        },
+        "P7_Shadow": {
+          "type": "string",
+          "minLength": 1
+        },
+        "P8_Void": {
+          "type": "string",
+          "minLength": 1
+        },
+        "P9_Divine_Core": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "required_relationships": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "forbidden_interpretations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "additionalProperties": true
 }

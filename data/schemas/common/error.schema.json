@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/common/error.schema.json",
+  "description": "YWE M2 common error contract.",
+  "x-ywe-requirement-id": "YWE-M2-COMMON-ERROR",
+  "title": "Error",
+  "type": "object",
+  "required": [
+    "error_id",
+    "code",
+    "message"
+  ],
+  "properties": {
+    "error_id": {
+      "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+    },
+    "code": {
+      "type": "string",
+      "minLength": 1
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1
+    },
+    "diagnostic": {
+      "$ref": "https://ywe.local/schemas/common/diagnostic.schema.json"
+    },
+    "retryable": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

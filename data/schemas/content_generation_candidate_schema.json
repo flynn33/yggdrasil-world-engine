@@ -34,5 +34,82 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/content_generation_candidate_schema.json",
+  "title": "Content Generation Candidate Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-CONTENT-GENERATION-CANDIDATE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "candidate_id",
+    "candidate_kind",
+    "generation_context_ref",
+    "provenance_ref",
+    "truth_scope",
+    "eligibility_gate_ref",
+    "rejection_policy",
+    "exchange_target"
+  ],
+  "properties": {
+    "candidate_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "candidate_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "confidence_score": {
+      "type": "string",
+      "minLength": 1
+    },
+    "eligibility_gate_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "exchange_target": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generation_context_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "lore_fragment_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "npc_candidate_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "provenance_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "quest_candidate_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "rejection_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "risk_flags": {
+      "type": "string",
+      "minLength": 1
+    },
+    "truth_scope": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

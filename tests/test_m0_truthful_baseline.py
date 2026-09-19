@@ -941,6 +941,64 @@ class GitDiffTests(unittest.TestCase):
         self.assertIn(self.protected, hits)
         self.assertTrue(errors)
 
+    def prepare_schema_migration(self) -> tuple[str, dict, dict]:
+        protected = "data/schemas/protected_schema.json"
+        contract = json.loads((self.root / m0.PHASE_8_9_REQUIRED_PATH).read_text())
+        contract["phase_9_schemas"] = [protected]
+        write_json(self.root, m0.PHASE_8_9_REQUIRED_PATH, contract)
+        legacy = {"schema_id": "legacy.v1", "required_fields": ["value"]}
+        write_json(self.root, protected, legacy)
+        git(self.root, "add", ".")
+        git(self.root, "commit", "-q", "-m", "Protected schema baseline")
+        migrated = {
+            **legacy,
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "https://ywe.local/schemas/protected_schema.json",
+            "type": "object",
+            "required": ["value"],
+            "properties": {"value": {"type": "string"}},
+            "additionalProperties": False,
+        }
+        write_json(self.root, protected, migrated)
+        def digest(value):
+            return m0.sha256_bytes(json.dumps(
+                value, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+            ).encode("utf-8"))
+        record = {
+            "path": protected,
+            "legacy_value_sha256": digest(legacy),
+            "migrated_value_sha256": digest(migrated),
+            "added_keywords": sorted(set(migrated) - set(legacy)),
+            "preserved_legacy_fields": sorted(legacy),
+        }
+        write_json(self.root, m0.M2_SCHEMA_MIGRATION_PATH, {
+            "artifact_type": "test_m2_contract_migration_manifest",
+            "migrations": [record],
+        })
+        return protected, legacy, migrated
+
+    def test_exact_additive_m2_schema_migration_is_allowed(self):
+        protected, _legacy, _migrated = self.prepare_schema_migration()
+        errors, hits = m0.protected_diff_errors(self.root, "HEAD")
+        self.assertEqual([], errors)
+        self.assertNotIn(protected, hits)
+
+    def test_m2_schema_migration_cannot_change_legacy_fields(self):
+        protected, _legacy, migrated = self.prepare_schema_migration()
+        migrated["schema_id"] = "changed.v2"
+        write_json(self.root, protected, migrated)
+        errors, hits = m0.protected_diff_errors(self.root, "HEAD")
+        self.assertIn(protected, hits)
+        self.assertTrue(any("legacy field" in error or "result fingerprint" in error for error in errors))
+
+    def test_m2_schema_migration_cannot_add_unreviewed_keywords(self):
+        protected, _legacy, migrated = self.prepare_schema_migration()
+        migrated["unevaluatedProperties"] = False
+        write_json(self.root, protected, migrated)
+        errors, hits = m0.protected_diff_errors(self.root, "HEAD")
+        self.assertIn(protected, hits)
+        self.assertTrue(any("fingerprint" in error or "inventory" in error for error in errors))
+
     def test_missing_base_ref_is_rejected(self):
         errors, _hits = m0.protected_diff_errors(self.root, "missing-ref")
         self.assertTrue(any("Unable to resolve" in error for error in errors))

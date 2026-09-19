@@ -20,5 +20,39 @@
     "data/schemas/existence_potential_schema.json",
     "data/schemas/axiom_diagnostic_packet_schema.json"
   ],
-  "reference_policy": "use_string_refs_not_embedded_full_objects"
+  "reference_policy": "use_string_refs_not_embedded_full_objects",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/data/validation/player_state_schema_crossrefs.json",
+  "title": "Player State Schema Crossrefs",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-VALIDATION-PLAYER-STATE-SCHEMA-CROSSREFS-JSON",
+  "type": "object",
+  "required": [
+    "crossref_id",
+    "primary_schema",
+    "requires_refs_to",
+    "reference_policy"
+  ],
+  "properties": {
+    "crossref_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "primary_schema": {
+      "type": "string",
+      "minLength": 1
+    },
+    "requires_refs_to": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "reference_policy": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

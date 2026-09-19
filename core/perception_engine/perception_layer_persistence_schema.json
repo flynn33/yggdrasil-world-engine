@@ -1,21 +1,60 @@
 {
-    "status":  "placeholder_awaiting_finalized_content",
-    "system":  "perception_layer_persistence_schema",
-    "purpose":  "Placeholder copy of the perception layer persistence schema for perception engine reference.",
-    "inputs":  [
-                   "perception engine outputs",
-                   "shared world truth constraints"
-               ],
-    "outputs":  [
-                    "engine-local schema reference"
-                ],
-    "dependencies":  [
-                         "data/schemas/perception_layer_persistence_schema.json"
-                     ],
-    "invariants":  [
-                       "all_meaningful_generation_must_be_ash_derived",
-                       "fixed_cosmology_must_remain_locked",
-                       "perception_must_not_rewrite_shared_world_truth",
-                       "forsetti_governs_activation_ywe_governs_truth"
-                   ]
+  "status": "placeholder_awaiting_finalized_content",
+  "system": "perception_layer_persistence_schema",
+  "purpose": "Placeholder copy of the perception layer persistence schema for perception engine reference.",
+  "inputs": [
+    "perception engine outputs",
+    "shared world truth constraints"
+  ],
+  "outputs": [
+    "engine-local schema reference"
+  ],
+  "invariants": [
+    "all_meaningful_generation_must_be_ash_derived",
+    "fixed_cosmology_must_remain_locked",
+    "perception_must_not_rewrite_shared_world_truth",
+    "forsetti_governs_activation_ywe_governs_truth"
+  ],
+  "x-ywe-legacy-dependencies": [
+    "data/schemas/perception_layer_persistence_schema.json"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/core/perception_engine/perception_layer_persistence_schema.json",
+  "title": "Perception Layer Persistence Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-CORE-PERCEPTION-ENGINE-PERCEPTION-LAYER-PERSISTENCE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "system",
+    "inputs",
+    "outputs",
+    "invariants"
+  ],
+  "properties": {
+    "system": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "invariants": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "additionalProperties": true
 }

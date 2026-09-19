@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/campaign_identity_manifest_schema.json",
+  "title": "Campaign Identity Manifest",
+  "description": "Executable M2 schema for data/game/where_ravens_wait_eternal_reckoning/campaign_identity_manifest.json.",
+  "type": "object",
+  "required": [
+    "campaign_identity_model",
+    "manifest_id",
+    "schema_ref"
+  ],
+  "properties": {
+    "manifest_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "campaign_identity_model": {
+      "type": "object",
+      "properties": {
+        "initial_mode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "available_at_game_start": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "locked_at_game_start": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "unlock_conditions": {
+          "type": "object",
+          "properties": {
+            "custom_wrw_origin": {
+              "type": "object",
+              "properties": {
+                "requires": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "resolver_status": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "future_resolver_authorities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true
+        },
+        "canonical_first_campaign": {
+          "type": "object",
+          "properties": {
+            "player_identity": {
+              "type": "string",
+              "minLength": 1
+            },
+            "source_continuity": {
+              "type": "string",
+              "minLength": 1
+            },
+            "opening_location": {
+              "type": "string",
+              "minLength": 1
+            },
+            "opening_state": {
+              "type": "string",
+              "minLength": 1
+            },
+            "persistent_raven_companion": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "schema_ref": {
+      "const": "https://ywe.local/schemas/campaign_identity_manifest_schema.json"
+    }
+  },
+  "additionalProperties": false,
+  "x-ywe-requirement-id": "YWE-M2-BOUND-DATA-GAME-WHERE-RAVENS-WAIT-ETERNAL-RECKONING-CAMPAIGN-IDENTITY-MANIFEST-JSON"
+}

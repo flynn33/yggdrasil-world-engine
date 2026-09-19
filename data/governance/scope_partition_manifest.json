@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1074,
-    "path_digest": "45017c66a15985568d5a9d10669ec22a3f0f9d9b6ac90ea9ab89f62f7fcbe5cb",
+    "path_count": 1096,
+    "path_digest": "f18935f28a43b78db7134b5d57ee89378e2c32766f6bbbc0ab7e25a093f33bf6",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -174,7 +174,9 @@
         "examples/**",
         "lore/**",
         "modules/companion_engine/**",
-        "modules/quest_engine/*reward*"
+        "modules/quest_engine/*reward*",
+        "data/schemas/campaign_identity_manifest_schema.json",
+        "data/schemas/game_identity_manifest_schema.json"
       ],
       "exclude": [
         ".github/**",
@@ -412,7 +414,9 @@
         "version.txt",
         "wiki.md",
         "yggdrasil-instructions.json",
-        "docs/design-planning/**"
+        "docs/design-planning/**",
+        "data/schemas/campaign_identity_manifest_schema.json",
+        "data/schemas/game_identity_manifest_schema.json"
       ],
       "owner_role": "Core semantics maintainers",
       "governing_source": "docs/project/scope_partition_map.md",
@@ -2136,11 +2140,11 @@
   ],
   "coverage": {
     "counts_by_partition": {
-      "ywe_core": 117,
+      "ywe_core": 136,
       "ywe_extension_profile": 121,
       "ash_dependency_material": 66,
-      "wrw_reference_profile": 289,
-      "governance_validation": 403,
+      "wrw_reference_profile": 291,
+      "governance_validation": 404,
       "historical_evidence": 19,
       "later_release_work": 59
     }

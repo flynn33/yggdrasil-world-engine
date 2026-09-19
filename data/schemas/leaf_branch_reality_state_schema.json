@@ -65,5 +65,92 @@
     "nine_plane_ontology",
     "ASH_Cosmological_Model_axioms",
     "ASH_Pattern_System_component_integrity_rules"
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/leaf_branch_reality_state_schema.json",
+  "title": "Leaf Branch Reality State Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-LEAF-BRANCH-REALITY-STATE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "leaf_branch_id",
+    "base_world_ref",
+    "parent_branch_ref",
+    "created_by_branch_event_ref",
+    "generation_context_ref",
+    "active_plane_pressure_ref",
+    "branch_status",
+    "worldstate_delta_refs",
+    "location_overlay_refs",
+    "manifest_refs",
+    "future_generation_bias_refs"
+  ],
+  "properties": {
+    "active_plane_pressure_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "base_world_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "branch_status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_by_branch_event_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "future_generation_bias_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "generation_context_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "leaf_branch_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "location_overlay_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "manifest_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "parent_branch_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "worldstate_delta_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": true
 }

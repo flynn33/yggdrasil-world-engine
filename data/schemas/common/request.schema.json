@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/common/request.schema.json",
+  "description": "YWE M2 common request contract.",
+  "x-ywe-requirement-id": "YWE-M2-COMMON-REQUEST",
+  "title": "Request",
+  "type": "object",
+  "required": [
+    "request_id",
+    "request_kind",
+    "requested_at",
+    "idempotency"
+  ],
+  "properties": {
+    "request_id": {
+      "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+    },
+    "request_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "requested_at": {
+      "$ref": "https://ywe.local/schemas/common/time.schema.json"
+    },
+    "idempotency": {
+      "$ref": "https://ywe.local/schemas/common/idempotency.schema.json"
+    },
+    "extensions": {
+      "$ref": "https://ywe.local/schemas/common/extension.schema.json"
+    }
+  },
+  "additionalProperties": false
+}

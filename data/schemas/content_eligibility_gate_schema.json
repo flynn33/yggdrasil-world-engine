@@ -30,5 +30,71 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/content_eligibility_gate_schema.json",
+  "title": "Content Eligibility Gate Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-CONTENT-ELIGIBILITY-GATE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "gate_id",
+    "candidate_kind",
+    "required_context_refs",
+    "required_truth_scope",
+    "required_provenance_refs",
+    "required_validation_rules",
+    "failure_policy"
+  ],
+  "properties": {
+    "allowed_axiom_pressures": {
+      "type": "string",
+      "minLength": 1
+    },
+    "candidate_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "failure_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gate_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "minimum_phi_score": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required_context_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "required_plane_pressure": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required_provenance_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "required_truth_scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required_validation_rules": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

@@ -33,5 +33,101 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/lore_pattern_trace_schema.json",
+  "title": "Lore Pattern Trace Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-LORE-PATTERN-TRACE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "pattern_trace_id",
+    "trace_kind",
+    "source_event_refs",
+    "source_branch_refs",
+    "source_location_refs",
+    "source_player_action_refs",
+    "pattern_vector_refs",
+    "axiom_pressure_refs",
+    "truth_scope"
+  ],
+  "properties": {
+    "axiom_pressure_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "myth_eligibility": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pattern_trace_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "pattern_vector_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "prophecy_eligibility": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repeat_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "scale_levels": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_branch_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "source_event_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "source_location_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "source_player_action_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "trace_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "truth_scope": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

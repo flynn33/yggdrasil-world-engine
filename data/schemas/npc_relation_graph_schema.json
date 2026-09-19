@@ -32,5 +32,72 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/npc_relation_graph_schema.json",
+  "title": "Npc Relation Graph Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-NPC-RELATION-GRAPH-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "relation_graph_id",
+    "nodes",
+    "edges",
+    "primary_relation_kind",
+    "relation_to_player",
+    "relation_to_location",
+    "relation_to_branch",
+    "truth_scope"
+  ],
+  "properties": {
+    "edges": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nodes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "primary_relation_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "relation_graph_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "relation_to_axiom_pressure": {
+      "type": "string",
+      "minLength": 1
+    },
+    "relation_to_branch": {
+      "type": "string",
+      "minLength": 1
+    },
+    "relation_to_faction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "relation_to_location": {
+      "type": "string",
+      "minLength": 1
+    },
+    "relation_to_lore": {
+      "type": "string",
+      "minLength": 1
+    },
+    "relation_to_player": {
+      "type": "string",
+      "minLength": 1
+    },
+    "relation_to_quest": {
+      "type": "string",
+      "minLength": 1
+    },
+    "truth_scope": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

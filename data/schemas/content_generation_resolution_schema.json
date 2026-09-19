@@ -31,5 +31,67 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/content_generation_resolution_schema.json",
+  "title": "Content Generation Resolution Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-CONTENT-GENERATION-RESOLUTION-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "resolution_id",
+    "candidate_ref",
+    "decision",
+    "decision_reason",
+    "validation_results",
+    "truth_scope",
+    "exchange_result"
+  ],
+  "properties": {
+    "candidate_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "decision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "decision_reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "diagnostic_noop_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "exchange_result": {
+      "type": "string",
+      "minLength": 1
+    },
+    "future_generation_bias_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "rejection_reason_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "resolution_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "truth_scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "validation_results": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

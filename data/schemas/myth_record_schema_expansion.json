@@ -96,5 +96,227 @@
     "myth_record_without_worldstate_delta_packet_ref",
     "social_distribution_delta_without_worldstate_delta_packet_ref",
     "host_adapter_authored_myth_truth"
+  ],
+  "$id": "https://ywe.local/schemas/myth_record_schema_expansion.json",
+  "title": "Myth Record Schema Expansion",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-MYTH-RECORD-SCHEMA-EXPANSION-JSON",
+  "$defs": {
+    "MythSeedCandidate": {
+      "title": "MythSeedCandidate",
+      "type": "object",
+      "required": [
+        "myth_seed_candidate_id",
+        "source_worldstate_delta_ref",
+        "source_quest_resolution_payload_ref",
+        "eligible_faction_refs",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ],
+      "properties": {
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "eligible_faction_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "myth_seed_candidate_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "source_quest_resolution_payload_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_worldstate_delta_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-MYTHSEEDCANDIDATE"
+    },
+    "MythRecord": {
+      "title": "MythRecord",
+      "type": "object",
+      "required": [
+        "myth_record_id",
+        "myth_seed_candidate_ref",
+        "source_worldstate_delta_ref",
+        "myth_lines",
+        "social_distribution_delta_ref",
+        "factual_world_truth_rewrite_allowed"
+      ],
+      "properties": {
+        "factual_world_truth_rewrite_allowed": {
+          "type": "boolean"
+        },
+        "myth_lines": {
+          "type": "string",
+          "minLength": 1
+        },
+        "myth_record_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "myth_seed_candidate_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "social_distribution_delta_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_worldstate_delta_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-MYTHRECORD"
+    },
+    "MythLine": {
+      "title": "MythLine",
+      "type": "object",
+      "required": [
+        "myth_line_id",
+        "faction_ref",
+        "claim_text",
+        "source_claim_type",
+        "visibility_scope_ref"
+      ],
+      "properties": {
+        "claim_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "faction_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "myth_line_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_claim_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "visibility_scope_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-MYTHLINE"
+    },
+    "SocialDistributionDelta": {
+      "title": "SocialDistributionDelta",
+      "type": "object",
+      "required": [
+        "social_distribution_delta_id",
+        "myth_record_ref",
+        "affected_faction_refs",
+        "propagation_scope",
+        "worldstate_delta_packet_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ],
+      "properties": {
+        "affected_faction_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "myth_record_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "propagation_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "social_distribution_delta_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-SOCIALDISTRIBUTIONDELTA"
+    }
+  },
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/MythSeedCandidate"
+    },
+    {
+      "$ref": "#/$defs/MythRecord"
+    },
+    {
+      "$ref": "#/$defs/MythLine"
+    },
+    {
+      "$ref": "#/$defs/SocialDistributionDelta"
+    }
   ]
 }

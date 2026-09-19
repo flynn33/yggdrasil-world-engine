@@ -69,5 +69,228 @@
         "generation_plan_ref"
       ]
     }
-  }
+  },
+  "$id": "https://ywe.local/schemas/character_progression_schema.json",
+  "title": "Character Progression Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-CHARACTER-PROGRESSION-SCHEMA-JSON",
+  "$defs": {
+    "CharacterSeedManifest": {
+      "title": "CharacterSeedManifest",
+      "type": "object",
+      "required": [
+        "character_seed_id",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "mortal_origin_state",
+        "realm_attunement_seed",
+        "bloodline_resonance_seed",
+        "wolf_balance_fields",
+        "identity_pressure_vector_ref"
+      ],
+      "properties": {
+        "bloodline_resonance_seed": {
+          "type": "string",
+          "minLength": 1
+        },
+        "character_seed_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "identity_pressure_vector_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "mortal_origin_state": {
+          "type": "string",
+          "minLength": 1
+        },
+        "realm_attunement_seed": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "wolf_balance_fields": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-CHARACTERSEEDMANIFEST"
+    },
+    "IdentityPressureVector": {
+      "title": "IdentityPressureVector",
+      "type": "object",
+      "required": [
+        "pressure_id",
+        "source_ash_refs",
+        "realm_pressure",
+        "bloodline_pressure",
+        "memory_pressure",
+        "reveal_through_play_rules"
+      ],
+      "properties": {
+        "bloodline_pressure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "memory_pressure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pressure_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "realm_pressure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reveal_through_play_rules": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-IDENTITYPRESSUREVECTOR"
+    },
+    "ProgressionDelta": {
+      "title": "ProgressionDelta",
+      "type": "object",
+      "required": [
+        "progression_delta_id",
+        "character_seed_ref",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "worldstate_delta_packet_ref"
+      ],
+      "properties": {
+        "character_seed_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "progression_delta_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-PROGRESSIONDELTA"
+    },
+    "PlayerStateDelta": {
+      "title": "PlayerStateDelta",
+      "type": "object",
+      "required": [
+        "player_state_delta_id",
+        "progression_delta_ref",
+        "changed_fields",
+        "diagnostic_ref",
+        "generation_plan_ref"
+      ],
+      "properties": {
+        "changed_fields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "player_state_delta_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "progression_delta_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-PLAYERSTATEDELTA"
+    }
+  },
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/CharacterSeedManifest"
+    },
+    {
+      "$ref": "#/$defs/IdentityPressureVector"
+    },
+    {
+      "$ref": "#/$defs/ProgressionDelta"
+    },
+    {
+      "$ref": "#/$defs/PlayerStateDelta"
+    }
+  ]
 }

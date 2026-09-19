@@ -47,5 +47,154 @@
         "worldstate_delta_packet_ref"
       ]
     }
-  }
+  },
+  "$id": "https://ywe.local/schemas/artifact_manifest_schema.json",
+  "title": "Artifact Manifest Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-ARTIFACT-MANIFEST-SCHEMA-JSON",
+  "$defs": {
+    "ArtifactManifest": {
+      "title": "ArtifactManifest",
+      "type": "object",
+      "required": [
+        "artifact_manifest_id",
+        "artifact_description_ref",
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs",
+        "use_consequence_route_ref",
+        "myth_seed_candidate_ref"
+      ],
+      "properties": {
+        "artifact_description_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "artifact_manifest_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "myth_seed_candidate_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "use_consequence_route_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-ARTIFACTMANIFEST"
+    },
+    "UseConsequenceRoute": {
+      "title": "UseConsequenceRoute",
+      "type": "object",
+      "required": [
+        "route_id",
+        "artifact_manifest_ref",
+        "worldstate_delta_packet_ref",
+        "diagnostic_ref"
+      ],
+      "properties": {
+        "artifact_manifest_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "route_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-USECONSEQUENCEROUTE"
+    },
+    "MythSeedCandidate": {
+      "title": "MythSeedCandidate",
+      "type": "object",
+      "required": [
+        "myth_seed_candidate_id",
+        "artifact_manifest_ref",
+        "source_ash_refs",
+        "worldstate_delta_packet_ref"
+      ],
+      "properties": {
+        "artifact_manifest_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "myth_seed_candidate_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "worldstate_delta_packet_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-M2-MYTHSEEDCANDIDATE"
+    }
+  },
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/$defs/ArtifactManifest"
+    },
+    {
+      "$ref": "#/$defs/UseConsequenceRoute"
+    },
+    {
+      "$ref": "#/$defs/MythSeedCandidate"
+    }
+  ]
 }

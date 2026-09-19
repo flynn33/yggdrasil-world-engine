@@ -15,5 +15,38 @@
     "update_control",
     "forbidden"
   ],
-  "severity": "block"
+  "severity": "block",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/data/validation/check_player_runtime_state_schema.spec.json",
+  "title": "Check Player Runtime State Schema.Spec",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-VALIDATION-CHECK-PLAYER-RUNTIME-STATE-SCHEMA-SPEC-JSON",
+  "type": "object",
+  "required": [
+    "check_id",
+    "target",
+    "required_properties",
+    "severity"
+  ],
+  "properties": {
+    "check_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "target": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required_properties": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "severity": {
+      "type": "number"
+    }
+  },
+  "additionalProperties": true
 }

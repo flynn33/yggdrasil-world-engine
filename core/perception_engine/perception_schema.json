@@ -80,5 +80,238 @@
     "diagnostic_ref": "DiagnosticEnvelope",
     "generation_plan_ref": "GenerationPlan",
     "source_ash_refs": "SourceASHRefs"
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/core/perception_engine/perception_schema.json",
+  "title": "Perception Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-CORE-PERCEPTION-ENGINE-PERCEPTION-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "perception_state",
+    "perception_overlay",
+    "perception_rules",
+    "terminology_compatibility",
+    "ash_required_fields"
+  ],
+  "properties": {
+    "perception_state": {
+      "type": "object",
+      "properties": {
+        "player_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "active_realm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "perception_modifiers": {
+          "type": "object",
+          "properties": {
+            "realm_attunement": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            },
+            "wolf_resonance": {
+              "type": "object",
+              "properties": {
+                "white_wolf": {
+                  "type": "integer"
+                },
+                "dark_wolf": {
+                  "type": "integer"
+                }
+              },
+              "additionalProperties": true
+            },
+            "bloodline_resonance": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            },
+            "narrative_memory_flags": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "perception_overlay": {
+      "type": "object",
+      "properties": {
+        "location_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "base_description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "perceived_description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "npc_variants": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "vendor_variants": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "quest_giver_variants": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "visible_entities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "hidden_entities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "perception_rules": {
+      "type": "object",
+      "properties": {
+        "base_ontology_is_immutable": {
+          "type": "boolean"
+        },
+        "scoped_worldstate_may_change": {
+          "type": "boolean"
+        },
+        "objective_state_change_requires_accepted_delta": {
+          "type": "boolean"
+        },
+        "perception_is_derived_view": {
+          "type": "boolean"
+        },
+        "world_is_static": {
+          "type": "boolean"
+        },
+        "perception_is_player_specific": {
+          "type": "boolean"
+        },
+        "multiplayer_compatible": {
+          "type": "boolean"
+        },
+        "same_location_different_views": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "terminology_compatibility": {
+      "type": "object",
+      "properties": {
+        "world_is_static": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "minLength": 1
+            },
+            "canonical_rule": {
+              "type": "string",
+              "minLength": 1
+            },
+            "interpretation": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": true
+        },
+        "wolf_alignment": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "minLength": 1
+            },
+            "canonical_field": {
+              "type": "string",
+              "minLength": 1
+            },
+            "legacy_read_behavior": {
+              "type": "string",
+              "minLength": 1
+            },
+            "dual_field_requirement": {
+              "type": "string",
+              "minLength": 1
+            },
+            "conflict_behavior": {
+              "type": "string",
+              "minLength": 1
+            },
+            "canonical_write_target": {
+              "type": "string",
+              "minLength": 1
+            },
+            "creates_independent_state": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "ash_required_fields": {
+      "type": "object",
+      "properties": {
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
 }

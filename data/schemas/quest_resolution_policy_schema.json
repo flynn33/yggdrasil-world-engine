@@ -30,5 +30,60 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/quest_resolution_policy_schema.json",
+  "title": "Quest Resolution Policy Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-QUEST-RESOLUTION-POLICY-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "policy_id",
+    "quest_candidate_ref",
+    "allowed_resolution_modes",
+    "required_consequence_packet_types",
+    "diagnostic_noop_allowed",
+    "future_generation_bias_policy",
+    "truth_scope_policy"
+  ],
+  "properties": {
+    "ability_pressure_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "allowed_resolution_modes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "diagnostic_noop_allowed": {
+      "type": "boolean"
+    },
+    "future_generation_bias_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "policy_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "quest_candidate_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "required_consequence_packet_types": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reward_resolver_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "truth_scope_policy": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

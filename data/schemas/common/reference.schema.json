@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/common/reference.schema.json",
+  "description": "YWE M2 common reference contract.",
+  "x-ywe-requirement-id": "YWE-M2-COMMON-REFERENCE",
+  "title": "Reference",
+  "type": "object",
+  "required": [
+    "identifier",
+    "kind"
+  ],
+  "properties": {
+    "identifier": {
+      "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+    },
+    "kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "$ref": "https://ywe.local/schemas/common/version.schema.json"
+    }
+  },
+  "additionalProperties": false
+}

@@ -6,7 +6,32 @@
     "dependency_identity_inclusion": "excluded"
   },
   "pattern_id": "",
-  "type": "",
   "realm_bias": "",
-  "strength": 0
+  "strength": 0,
+  "x-ywe-legacy-field-type": "",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/data/pattern_archetypes/pattern_schema.json",
+  "title": "Pattern Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-PATTERN-ARCHETYPES-PATTERN-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "pattern_id",
+    "realm_bias",
+    "strength"
+  ],
+  "properties": {
+    "pattern_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "realm_bias": {
+      "type": "string",
+      "minLength": 1
+    },
+    "strength": {
+      "type": "number"
+    }
+  },
+  "additionalProperties": true
 }

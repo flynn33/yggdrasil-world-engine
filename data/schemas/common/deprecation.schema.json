@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/common/deprecation.schema.json",
+  "description": "YWE M2 common deprecation contract.",
+  "x-ywe-requirement-id": "YWE-M2-COMMON-DEPRECATION",
+  "title": "Deprecation",
+  "type": "object",
+  "required": [
+    "deprecated",
+    "replacement"
+  ],
+  "properties": {
+    "deprecated": {
+      "const": true
+    },
+    "replacement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "removal_version": {
+      "$ref": "https://ywe.local/schemas/common/version.schema.json"
+    },
+    "migration": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

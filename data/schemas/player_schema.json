@@ -65,5 +65,257 @@
       "oath_chain"
     ],
     "does_not_determine_destiny": true
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/player_schema.json",
+  "title": "Player Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-PLAYER-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "origin",
+    "celestial_memory",
+    "realm_attunement",
+    "bloodline_resonance",
+    "awakening_fragments",
+    "ash_provenance",
+    "wolf_resonance",
+    "wolf_alias_policy",
+    "dual_variable_alignment",
+    "lineage_resonance"
+  ],
+  "properties": {
+    "origin": {
+      "type": "string",
+      "minLength": 1
+    },
+    "celestial_memory": {
+      "type": "string",
+      "minLength": 1
+    },
+    "realm_attunement": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": true
+    },
+    "bloodline_resonance": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": true
+    },
+    "awakening_fragments": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "ash_provenance": {
+      "type": "object",
+      "properties": {
+        "CharacterSeedManifest": {
+          "type": "object",
+          "properties": {
+            "required": {
+              "type": "boolean"
+            },
+            "cosmic_pattern_snapshot_ref": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+            }
+          },
+          "additionalProperties": true
+        },
+        "IdentityPressureVector": {
+          "type": "object",
+          "properties": {
+            "required": {
+              "type": "boolean"
+            },
+            "source_ash_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            }
+          },
+          "additionalProperties": true
+        },
+        "ProgressionDelta": {
+          "type": "object",
+          "properties": {
+            "required": {
+              "type": "boolean"
+            },
+            "diagnostic_ref": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+            }
+          },
+          "additionalProperties": true
+        },
+        "PlayerStateDelta": {
+          "type": "object",
+          "properties": {
+            "required": {
+              "type": "boolean"
+            },
+            "generation_plan_ref": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+            }
+          },
+          "additionalProperties": true
+        },
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "wolf_resonance": {
+      "type": "object",
+      "properties": {
+        "white_wolf": {
+          "type": "integer"
+        },
+        "dark_wolf": {
+          "type": "integer"
+        },
+        "morality_system": {
+          "type": "boolean"
+        },
+        "good_evil_axis": {
+          "type": "boolean"
+        },
+        "both_can_increase_from_same_event": {
+          "type": "boolean"
+        },
+        "canonical_model_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "preferred_model_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compatibility_model_alias": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "wolf_alias_policy": {
+      "type": "object",
+      "properties": {
+        "canonical_field": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonical_write_target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deprecated_field_alias": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compatibility_model_alias": {
+          "type": "string",
+          "minLength": 1
+        },
+        "legacy_read_behavior": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dual_field_requirement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conflict_behavior": {
+          "type": "string",
+          "minLength": 1
+        },
+        "creates_independent_state": {
+          "type": "boolean"
+        },
+        "morality_axis": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "dual_variable_alignment": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonical_field": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "both_variables_may_grow_from_same_event": {
+          "type": "boolean"
+        },
+        "balance_driven_consequences": {
+          "type": "boolean"
+        },
+        "creates_independent_state": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "lineage_resonance": {
+      "type": "object",
+      "properties": {
+        "simulation_level_mechanic": {
+          "type": "boolean"
+        },
+        "theming_options": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "does_not_determine_destiny": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
 }

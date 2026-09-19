@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/common/extension.schema.json",
+  "description": "YWE M2 common extension contract.",
+  "x-ywe-requirement-id": "YWE-M2-COMMON-EXTENSION",
+  "title": "Extension",
+  "type": "object",
+  "propertyNames": {
+    "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$"
+  },
+  "additionalProperties": true
+}

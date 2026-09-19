@@ -31,5 +31,80 @@
     "This is a code-agnostic contract schema unless the repository enforces a specific JSON Schema dialect.",
     "Field names may be adapted to existing repository conventions while preserving semantics.",
     "Generated content must be provenance-bearing, truth-scoped, and context-derived."
-  ]
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/lore_visibility_rule_schema.json",
+  "title": "Lore Visibility Rule Schema",
+  "x-ywe-requirement-id": "YWE-M2-SCHEMA-DATA-SCHEMAS-LORE-VISIBILITY-RULE-SCHEMA-JSON",
+  "type": "object",
+  "required": [
+    "visibility_rule_id",
+    "lore_fragment_ref",
+    "required_player_state_refs",
+    "required_location_state_refs",
+    "required_branch_refs",
+    "required_truth_scope",
+    "visibility_mode"
+  ],
+  "properties": {
+    "bloodline_resonance_requirements": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lore_fragment_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "perception_overlay_requirements": {
+      "type": "string",
+      "minLength": 1
+    },
+    "plane_attunement_requirements": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required_branch_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "required_location_state_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "required_player_state_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "required_truth_scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "visibility_mode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "visibility_rule_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "wolf_resonance_requirements": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
 }

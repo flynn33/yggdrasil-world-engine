@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/common/transaction.schema.json",
+  "description": "YWE M2 common transaction contract.",
+  "x-ywe-requirement-id": "YWE-M2-COMMON-TRANSACTION",
+  "title": "Transaction",
+  "type": "object",
+  "required": [
+    "transaction_id",
+    "status",
+    "idempotency"
+  ],
+  "properties": {
+    "transaction_id": {
+      "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+    },
+    "status": {
+      "enum": [
+        "planned",
+        "active",
+        "committed",
+        "rolled_back",
+        "failed"
+      ]
+    },
+    "idempotency": {
+      "$ref": "https://ywe.local/schemas/common/idempotency.schema.json"
+    },
+    "compensations": {
+      "type": "array",
+      "items": {
+        "$ref": "https://ywe.local/schemas/common/compensation.schema.json"
+      }
+    }
+  },
+  "additionalProperties": false
+}
