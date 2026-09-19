@@ -1,13 +1,14 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918  
-**Revision:** planning-9  
+**Revision:** planning-10  
 **Date:** September 19, 2026  
 **Authoritative branch:** `main`  
 **Location:** `docs/design-planning/Project_Record.md`  
-**Verified merge anchor:** `13ee11704691b1c562e8e0099ca2b2e4533cb39e`.
+**Verified merge anchor:** `13ee11704691b1c562e8e0099ca2b2e4533cb39e`.  
+**Verified post-deletion baseline:** `90f3c00f8b286aa064114575e607f7ce60e13df2`.
 
-This is the single current planning record. It supersedes planning-8's statement that main integration has not occurred. The complete preceding record, both planning histories, all candidate material and original evidence remain in Git history. Current handoff: [main continuation](handoffs/2026-09-19-consumer-compatibility.md). This record describes an observed merge; its own containing commit supplies its revision identity.
+This is the single current planning record. It supersedes planning-9's statement that the redundant branch names remain. The owner reported deleting the branches; subsequent remote enumeration returned only main. Both planning histories remain reachable from main. Current handoff: [main continuation](handoffs/2026-09-19-consumer-compatibility.md). This record describes observed state; its containing commit supplies its revision identity.
 
 ## 1. Identity and current working brief
 
@@ -18,14 +19,16 @@ This is the single current planning record. It supersedes planning-8's statement
 | Repository | `flynn33/yggdrasil-world-engine` |
 | Accepted product version | v2.0.23; unchanged |
 | Roadmap | M0/M1 acceptance preserved; M2 active; no new gate accepted |
-| Authoritative record location | This path on `main`; the extra branches are no longer working authorities |
+| Authoritative record location | This path on `main`; no other remote branch remains at the latest inspection |
 | Main before consolidation | `2db1230f638cd065d791c05f1adb7b4b51505c57` |
 | Main after verified fast-forward | `13ee11704691b1c562e8e0099ca2b2e4533cb39e` |
-| Planning histories | Both included in main; no unique unmerged commits at the inspected branch tips |
-| Branch reference deletion | Not performed; the two redundant names remain |
+| Main at post-deletion inspection | `90f3c00f8b286aa064114575e607f7ce60e13df2` |
+| Planning histories | Both included in main; the last inspected tips of both deleted branches are ancestors of main |
+| Branch reference deletion | Completed by the owner; subsequent remote enumeration returned only `main` |
+| Recovery required | None identified for committed work at the two verified former branch tips |
 | Validation integration | Classification/scope, experimental discovery and full repository checks remain unfinished |
 | Owner checkout / unpublished work | Not inspected; no local synchronization claim |
-| Native products / hardware | Deferred through M10; not applicable to this consolidation |
+| Native products / hardware | Deferred through M10; not applicable to this verification |
 | Assurance profile | No new profile selected |
 
 The machine-readable roadmap remains milestone/status authority. Focused accepted contracts and requirement/governance registers remain engineering authority. Repository storage does not approve candidate semantics.
@@ -42,9 +45,11 @@ The specification is the product. ASH Model Cosmology, APS and Aeostara supply r
 
 The owner explicitly directed merging needed work or deleting unneeded branches and then directed completing the cleanup. The resulting administrative consolidation advanced main to the already reconciled planning history. It did not modify existing engine files, approve the two-value candidate, change source pins, introduce dependencies, resolve normalization, alter platform gates, create another branch or publish a release.
 
+The owner subsequently completed the outstanding branch deletion. This follow-up verifies surviving committed work and updates only the current record and handoff. It does not recreate deleted branches, redo preserved design work, or claim that the deletion was performed by the current session.
+
 ## 3. Users and workflows
 
-Maintainers now start on `main` at the directory README, this record and the current handoff. Do not resume from an older branch record merely because the branch name still exists. Earlier records remain historical snapshots, not competing authorities.
+Maintainers start on `main` at the directory README, this record and the current handoff. Deleted branches are not recreated for continuation. Earlier records remain historical snapshots, not competing authorities.
 
 The [per-file reconciliation](publication/Branch_Reconciliation.md) documents the disposition of all 24 earlier planning paths. Both source histories remain reachable from main. The current candidate and detailed evidence were retained, while earlier ignore rules, distinct verification summary and publication manifest were preserved. Redundant routing records remain in history.
 
@@ -72,7 +77,7 @@ Still unresolved: prior method binding; reviewed linked System Realization Contr
 
 ## 6. Experience and resources
 
-No UI, branding, production asset or device requirement changed. The owner need not download, sort or reconstruct archives. Work is now available from the repository's default branch.
+No UI, branding, production asset or device requirement changed. The owner need not download, sort or reconstruct archives. Work is available from the repository's default and only remaining branch, main.
 
 ## 7. Verification and limitations
 
@@ -80,21 +85,34 @@ Inherited candidate evidence remains unchanged: 512 represented states, sixteen 
 
 The [compatibility results](m2/consumer-compatibility/compatibility-results.json) retain 8,192 matching transformations, 2,048 matching snapshots, 2,048 matching plans, fifteen boundary probes with seven differences, and four unchanged identity tests. Repeated result hash: `43e7f34ad8e185d82eaac5ae5dc887960fda50024b43244c6714aff680e0b8c2`. The verdict remains `not_drop_in_compatible`. These comparisons reuse the existing helper and do not independently prove its complete semantics.
 
-This consolidation verified the live branch identities, read the complete planning-8 record and handoff, read the reconciliation commit's two parents, compared the reconciled history with main, performed a non-forced main ref update and read back the branch collection. The pre-merge comparison reported seven commits ahead, zero behind, and additions confined to `docs/design-planning/`. No pre-existing main file was modified or deleted by that fast-forward.
+The earlier consolidation verified the live branch identities, read the complete planning-8 record and handoff, read the reconciliation commit's two parents, compared the reconciled history with main, performed a non-forced main ref update and read back the branch collection. The pre-merge comparison reported seven commits ahead, zero behind, and additions confined to `docs/design-planning/`. No pre-existing main file was modified or deleted by that fast-forward.
 
-The comparison from earlier branch tip `c4d505b71e4db829fdb1b84f3c368bf164ea8c31` to merged main reported five ahead, zero behind, with that earlier tip as merge base. The newer branch tip was identical to merged main. Both inspected planning histories are therefore preserved in main.
+The earlier comparison from branch tip `c4d505b71e4db829fdb1b84f3c368bf164ea8c31` to merged main reported five ahead, zero behind, with that earlier tip as merge base. The newer branch tip was identical to merged main. Both inspected planning histories were preserved in main before branch deletion.
 
-No new experiment run, full repository suite, complete current checkout, owner-local inspection, native build, complete consumer inventory, realization preflight/delivery or independent acceptance is claimed. Direct network acquisition remained unavailable. A recovered historical archive had inconsistent version markers and lacked the current governance manifests; it was not substituted for the current repository or used to claim current validation.
+### Post-deletion verification — September 19, 2026
+
+The owner reported deleting the extra branches. A fresh GET of the repository branch collection with `per_page=100` returned exactly one branch, `main`, at `90f3c00f8b286aa064114575e607f7ce60e13df2`. The complete planning-9 Project Record and current handoff were read at that immutable commit.
+
+Two fresh comparisons used that main commit as base and the former branch tips as heads:
+
+| Former branch | Verified former tip | Result relative to main | Merge base |
+|---|---|---|---|
+| `design-planning/m2-foundations` | `13ee11704691b1c562e8e0099ca2b2e4533cb39e` | `behind`; zero ahead, one behind, zero head-only commits | Exact former tip |
+| `planning/m2-design-records` | `c4d505b71e4db829fdb1b84f3c368bf164ea8c31` | `behind`; zero ahead, six behind, zero head-only commits | Exact former tip |
+
+Both known tips are ancestors of the inspected main. No committed history from either verified tip was lost by removing the branch references, and no reconstruction of that work is required. This conclusion covers the known remote tips; it is not a claim about uninspected owner-local or never-pushed work. History preservation is not a new file-by-file semantic review or a passing test result.
+
+No new experiment run, full repository suite, complete current checkout, owner-local inspection, native build, complete consumer inventory, realization preflight/delivery or independent acceptance is claimed. Earlier direct network acquisition remained unavailable. A recovered historical archive had inconsistent version markers and lacked the current governance manifests; it was not substituted for the current repository or used to claim current validation.
 
 ## 8. Administrative merge and remaining technical obligations
 
 The non-forced update of `main` from `2db1230f638cd065d791c05f1adb7b4b51505c57` to `13ee11704691b1c562e8e0099ca2b2e4533cb39e` succeeded. Read-back returned that exact main tip. The target merge commit retains parents `9fd7625241fee529452570cca6f1742cb6976856` and `c4d505b71e4db829fdb1b84f3c368bf164ea8c31` and identifies Jim Daley as author and committer. No force update, protection/configuration change or new workflow was used.
 
-The two redundant branch names remain: `design-planning/m2-foundations` at the merged commit and `planning/m2-design-records` at its earlier ancestor. Current discovery exposes file deletion but no branch/ref deletion action. Neither reference has been deleted. Deleting repository files is not a substitute for deleting branch refs. Both names may be removed once a deletion-capable authenticated route is available and their tips are rechecked; no additional owner permission is needed.
+The owner completed deletion of the redundant branch references. Subsequent enumeration and ancestry checks establish the current single-branch state and preservation of the known committed work. The previous session left the deletion unfinished; this follow-up records the owner's action rather than claiming it executed that deletion. No deleted reference was recreated and no missing committed work was identified.
 
-The previously recorded classification/scope snapshots, nonnormative experimental treatment, discovery review and full pre/post checks were not completed before this administrative merge. They remain outstanding on main; no passing result or completed acceptance is inferred from the owner's merge direction. The existing catch-all classification is not evidence that a candidate has been approved. [Repository Integration Requirements](publication/Repository_Integration_Requirements.md) now records this actual state and the remaining work without continuing to claim that main is unchanged.
+The previously recorded classification/scope snapshots, nonnormative experimental treatment, discovery review and full pre/post checks were not completed before the administrative merge. They remain outstanding on main; no passing result or completed acceptance is inferred from the owner's merge direction or branch deletion. The existing catch-all classification is not evidence that a candidate has been approved. [Repository Integration Requirements](publication/Repository_Integration_Requirements.md) records the remaining technical work.
 
-The older [publication receipt](publication/GitHub_Publication.json), [reconciliation checks](publication/Branch_Reconciliation_Checks.json), [earlier verification summary](m2/ash-values/evidence/verification-summary.json) and [earlier publication manifest](publication/Earlier_Planning_Publication_Manifest.json) retain their original dates, hashes and limitations. This record controls the current main-storage status; historical no-merge fields are not current instructions.
+The older [publication receipt](publication/GitHub_Publication.json), [reconciliation checks](publication/Branch_Reconciliation_Checks.json), [earlier verification summary](m2/ash-values/evidence/verification-summary.json) and [earlier publication manifest](publication/Earlier_Planning_Publication_Manifest.json) retain their original dates, hashes and limitations. This record controls current storage and cleanup status; historical no-merge or pending-deletion fields are not current instructions.
 
 ## 9. Decisions and permissions
 
@@ -102,21 +120,22 @@ The older [publication receipt](publication/GitHub_Publication.json), [reconcili
 |---|---|
 | Agnosticism, OO modularity, reference-only systems and prior acceptance | Preserved |
 | Dedicated planning directory | Owner approved September 19, 2026 |
-| Owner-account publishing and existing admin bypass if required | Permission retained; normal non-forced update succeeded |
-| Merge needed branches or delete unneeded branches | Explicit owner instruction; both inspected histories now included in main |
-| Authoritative record location | Same path, now on main; no competing current record |
-| Branch-name deletion | Authorized but not executed; no deletion-capable action exposed |
+| Owner-account publishing and existing admin bypass if required | Permission retained; normal non-forced updates used |
+| Merge needed branches or delete unneeded branches | Both inspected histories included in main; owner completed reference deletion |
+| Authoritative record location | Same path on main; no competing current record |
+| Branch-name deletion | Owner-reported action; absence of both names independently verified through GitHub |
+| Missing work | Recreate only a demonstrated missing requirement or artifact; no redo is needed for the preserved branch histories |
 | Candidate adoption, method/source upgrade, release or platform work | Not performed or implied |
 | Repository-wide technical acceptance | Not established; outstanding obligations remain visible |
 
 ## 10. Current step and next action
 
-**Current step:** Both extra planning histories merged into main; redundant branch names remain.
+**Current step:** Owner-completed branch cleanup verified; committed planning histories remain preserved on main.
 
-**Completed:** Preserved both histories and unique evidence, verified scope and ancestry, advanced main without force, read back the result, and moved current continuity to main.
+**Completed:** Confirmed only main remains, retrieved the full current record and handoff, and verified both former branch tips are ancestors of main. No missing committed history was identified; no branch or design work was recreated.
 
-**Next action:** Finish the planning-directory classification/scope and discovery integration on main, separating inherited failures from regressions through the repository checks. Remove the already-merged refs when a deletion-capable route is available. Then resume the narrow input-boundary specification; do not create another planning branch or repeat the completed reconciliation.
+**Next action:** Finish the existing planning-directory classification/scope and discovery integration on main, separating inherited failures from regressions through repository checks. Then resume the narrow input-boundary specification. Do not recreate deleted branches, repeat the completed reconciliation, or redo preserved work.
 
-**Needed from you:** No further permission, downloads, sorting or reconstruction.
+**Needed from you:** Nothing to approve, download, sort or reconstruct.
 
-**Saved at:** `docs/design-planning/` on `main`; verified merge anchor `13ee11704691b1c562e8e0099ca2b2e4533cb39e`. This closeout's containing commit identifies planning-9. Merge completion is not a branch-deletion or full-validation claim.
+**Saved at:** `docs/design-planning/` on `main`; post-deletion baseline `90f3c00f8b286aa064114575e607f7ce60e13df2`. This update's containing commit identifies planning-10. Record publication is verified separately by remote read-back.
