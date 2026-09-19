@@ -22,3 +22,9 @@ Review existing consumers and fixtures for exact `bits` encodings, membership me
 ## Evidence boundaries
 
 The candidate verifier tests an isolated two-value model and experimental schema. It is not the official M3 oracle, the full engine suite, or an independent human acceptance review. Python and its two verification libraries are testing-only, not runtime dependencies.
+
+## Publication observation — September 19, 2026
+
+The initial 24-file planning snapshot was committed as `fc40753bd01d2d1eab51b99487dcee486621cc67` and the review branch was updated successfully. Remote read-back confirmed that branch head. The planned directory's Git tree matched the staged 24-file snapshot exactly.
+
+Creating the draft pull request returned HTTP 403, `Resource not accessible by integration`. No pull request was created, no merge was attempted, and no permission setting was changed. The branch and files remain saved on GitHub. Do not retry the same pull-request action unchanged; a permitted review route must be established later. This follow-up records the publication result and does not alter the candidate or its verification inputs.
