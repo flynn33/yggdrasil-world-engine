@@ -6,7 +6,7 @@
 
 ## Start here
 
-Read [Project Record](Project_Record.md) for the current state and [latest handoff](handoffs/2026-09-19-planning-publication.md) for continuation. The [storage decision](decisions/2026-09-19-planning-location.md) records the owner's approval to keep this work in the repository.
+Read [Project Record](Project_Record.md) for the current state and [latest handoff](handoffs/2026-09-19-consumer-compatibility.md) for continuation. The [storage decision](decisions/2026-09-19-planning-location.md) records the owner's approval to keep this work in the repository.
 
 This directory is the selected home for design/planning records. It is not a replacement for accepted contracts, the machine-readable roadmap, or acceptance evidence elsewhere in the repository. A draft's presence in Git does not approve its content.
 
@@ -19,6 +19,7 @@ This directory is the selected home for design/planning records. It is not a rep
 | `decisions/` | Planning decisions with their actual authority and scope |
 | `m2/readiness/` | Earlier packet readiness review, packet draft, source references, and diagnostic evidence |
 | `m2/ash-values/` | Two-value candidate contract, proposed decisions, experimental schema, fixtures, verification tools, and original reports |
+| `m2/consumer-compatibility/` | Pinned existing-helper comparisons, actual input/API differences, and proposed migration boundary |
 | `publication/` | File-transfer evidence and outstanding repository-integration requirements |
 
 ## Status and authority
