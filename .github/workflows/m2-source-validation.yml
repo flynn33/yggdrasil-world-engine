@@ -26,6 +26,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -64,18 +65,20 @@ jobs:
           git status --porcelain > source-status.txt
           git branch --show-current > source-branch.txt
 
-      - name: Export exact checked-out source
+      - name: Export exact checked-out repository
         if: always()
         shell: bash
-        run: tar --exclude=.git --exclude=ywe-source.tar.gz -czf ywe-source.tar.gz .
+        run: |
+          tar -czf /tmp/ywe-repository.tar.gz .
+          mv /tmp/ywe-repository.tar.gz ./ywe-repository.tar.gz
 
-      - name: Upload source and validation evidence
+      - name: Upload repository and validation evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ywe-source-${{ github.sha }}
+          name: ywe-repository-${{ github.sha }}
           path: |
-            ywe-source.tar.gz
+            ywe-repository.tar.gz
             canonical-checks.log
             m2-acceptance.log
             source-commit.txt
