@@ -1,20 +1,25 @@
 # Repository Integration Requirements
 
-**Status:** Main-integration obligations remain pending. A dedicated planning-branch save is authorized separately; it does not establish that these checks passed.
-**Prepared baseline:** `flynn33/yggdrasil-world-engine`, `main`, `2db1230f638cd065d791c05f1adb7b4b51505c57`.
+**Current status:** The owner-directed administrative merge into main completed at `13ee11704691b1c562e8e0099ca2b2e4533cb39e`. Technical integration checks below remain outstanding; merging did not establish a passing result.  
+**Original main baseline:** `2db1230f638cd065d791c05f1adb7b4b51505c57`.  
+**Current record:** [Project Record](../Project_Record.md) on main.
 
-## Required integration review
+## Completed repository consolidation
 
-1. Inspect the actual checkout, worktree, branches, and remote before applying these files. Preserve unpublished work. Reconcile any pre-existing authoritative record before replacing it.
-2. Add this dedicated directory and a concise navigation link from the appropriate existing project index. Keep candidate content visibly unapproved.
-3. Apply `docs/project/artifact_classification_policy.md`: update the active classification and scope manifests in the same change, with exact path coverage and counts. Use justified informative/example/historical dispositions for drafts, experimental material, and original evidence rather than the default normative catch-all. Approved planning-record authority is not approval of candidate engine semantics.
-4. Inspect actual schema/fixture discovery before including experiments. A local experimental catalog is not a production registration. Do not create new schema debt or weaken accepted validation simply to store review examples. Where the existing system cannot represent the distinction safely, separate the documentation-only publication from experimental-file integration and record the held paths.
-5. Capture pre-change and post-change results through the existing `scripts/validate_repository.py` / `scripts/run_checks.sh` route. Preserve inherited failures separately from regressions. Do not restore intentionally removed hosted workflows or add runner spending.
-6. Confirm no accepted M0/M1 evidence, ASH source pin, normative rule, product version, release status, platform gate, or candidate decision approval was changed. Inspect the final diff and file-transfer hashes.
-7. Commit and push using the owner's authenticated route and existing branch policy. The owner has explicitly authorized use of the existing admin bypass if needed. Do not disable protections, force-push, or claim remote integration from a local commit alone. Record the resulting commit and read back the target files and hashes.
+The planning histories were reconciled with both parents retained. Main was then advanced without force to that reconciliation commit and read back successfully. The comparison with original main contained only additions under `docs/design-planning/`. Both inspected extra branch tips are now included in main; neither reference has been deleted. No existing engine file, product version, accepted M0/M1 evidence, source pin, roadmap gate, protection setting or workflow was changed by the merge.
 
-## Scope limit
+## Outstanding technical work
 
-This prepared directory is not advertised as an immediately mergeable patch: full checkout inspection, active manifest synchronization, production-discovery review, and repository regression execution remain pending. Connected GitHub write capability was subsequently verified under `flynn33`. The chosen preservation route is branch `design-planning/m2-foundations`, leaving `main` unchanged until these integration obligations are satisfied.
+1. Inspect a verified current checkout and preserve any owner-local staged, unstaged, untracked or ignored work. Do not treat a historical archive or remote metadata as a current owner checkout.
+2. Maintain one Project Record at the existing main path and appropriate navigation. Do not restore historical records as competing authorities or promote candidate content by location alone.
+3. Apply `docs/project/artifact_classification_policy.md`: reconcile active classification/scope manifests, exact path coverage, snapshots and counts. Use justified informative/example/historical dispositions for candidates, experiments and original evidence. Scoped continuity authority is not approval of candidate semantics. The current catch-all classification must not silently supply that approval.
+4. Inspect schema/fixture discovery. Experimental catalogs are not production registration. Resolve false schema-debt findings for diagnostic reports without concealing actual schemas, increasing debt silently or weakening accepted checks. Keep experimental files outside runtime use.
+5. Capture current repository results through the existing `scripts/validate_repository.py` route and compare against the original main baseline where reproducible. Preserve inherited failures separately from changes introduced by planning integration. Do not invent a pre-merge run or call a post-merge run historical pre-change evidence. Do not restore intentionally removed workflows or create runner spending to obtain an execution route.
+6. Verify that accepted evidence, source pins, product version, roadmap status, platform gate and candidate approval states remain unchanged. Inspect final diffs and source/evidence hashes.
+7. Remove the two redundant refs only through a deletion-capable authenticated route, after rereading their tips and confirming ancestry/preservation in main. Owner permission already exists. Do not force-push, disable protection or delete repository files as a substitute for deleting refs.
 
-No implementation package is issued by this document. It records obligations that travel with the design work and its eventual publication.
+## Evidence boundary
+
+The prior prerequisite list was not completed before the administrative merge. This document records that fact and retains each unfinished obligation; it does not claim a waiver, acceptance, full regression pass, debt closure or branch deletion. The source and original records remain available through the retained histories. Further candidate promotion remains dependent on the relevant technical and authority checks.
+
+No coding-agent instruction package is issued by this document.
