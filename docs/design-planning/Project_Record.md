@@ -1,143 +1,105 @@
 # Yggdrasil World Engine — Project Record
 
-**Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-4, owner-authorized branch publication
-**Date:** September 19, 2026
-**Repository location:** `docs/design-planning/Project_Record.md`
-**Persistence:** Publication transaction in progress on `design-planning/m2-foundations`; remote completion is recorded by a subsequent verified receipt.
-**Supersedes:** planning-3 of this recovered continuation record as the current working view. No approved engine contract or acceptance record is replaced.
+**Record ID:** YWE-RECOVERY-20260918  
+**Revision:** planning-5  
+**Date:** September 19, 2026  
+**Authoritative planning branch:** `design-planning/m2-foundations`  
+**Location:** `docs/design-planning/Project_Record.md`  
+**Persistence:** Planning publication saved and verified at commit `56abad1d6db1829feb074c6459466089930bf2a6`. This revision records that observed save; its own containing commit is determined by Git, not a self-referential prediction.
 
-## 1. Identity and current work
+This is the single current planning record. It supersedes planning-4's in-progress publication state, not accepted engine contracts. The complete planning-4 record is preserved at the published commit above. Detailed source coverage, inherited findings, candidates, and original reports remain linked below rather than duplicated.
 
-| Field | State |
+## 1. Identity and current state
+
+| Concern | Current state |
 |---|---|
-| Product / owner | Yggdrasil World Engine / Flynn |
-| Project | Continuing platform-agnostic, strictly object-oriented, modular engine specification |
+| Product / owner | Yggdrasil World Engine / Flynn; authenticated GitHub account `flynn33` |
+| Product purpose | Platform-neutral, strictly object-oriented and modular engine specification |
 | Repository | `flynn33/yggdrasil-world-engine` |
-| Rechecked remote baseline | `main` at `2db1230f638cd065d791c05f1adb7b4b51505c57` |
-| Product version | v2.0.23, unchanged |
-| Recorded roadmap | M0 and M1 accepted; M2 in progress; no new gate judgment |
-| Current activity | Publishing existing planning work on `design-planning/m2-foundations`; not integrating candidates into accepted engine contracts |
-| Platform work | Deferred through M10; not authorized by planning publication |
-| Owner checkout / unpublished work | Uninspected and unknown |
-| Candidate build / physical hardware | Not applicable to this specification-planning step |
-| Assurance | No new assurance profile selected |
+| Accepted product baseline | v2.0.23; main inspected at `2db1230f638cd065d791c05f1adb7b4b51505c57` |
+| Roadmap | Existing M0/M1 acceptance preserved; M2 active; no new gate accepted |
+| Published planning commit | `56abad1d6db1829feb074c6459466089930bf2a6` |
+| Current activity | Planning branch preserved; main-integration review remains pending |
+| Owner checkout / unpublished work | Not inspected; unknown |
+| Native products / hardware | Deferred through M10; not applicable to this publication |
+| Assurance profile | No new profile selected |
 
-### Method binding
+The machine-readable roadmap remains the milestone/status authority. Focused accepted contracts remain implementation-detail authority. This record does not supersede either.
 
-Raven Forge Development remains the standing method. The previously adopted project version and immutable commit remain unrecovered. Preserve inspected reference 0.6.2 at `ed0028a46bac9c5b92876a6ad6589ca421fd9499` as an inspection reference only, not an adopted upgrade. The earlier mandatory-core reading and source coverage are inherited in the M2 source registers. No unchanged source is relabeled as newly read in full.
+### Development method and continuity
 
-### Record authority and saving route
+Raven Forge Development remains the standing method. The previously adopted project revision is unrecovered. Inspected version 0.6.2 at `ed0028a46bac9c5b92876a6ad6589ca421fd9499` is an inspection reference only, not an adopted upgrade. Preserve the mandatory-core reading and actual coverage in the source registers; do not claim new full-repository reading.
 
-The owner has now explicitly approved storing and pushing design/planning work in a dedicated repository directory. Selected path: `docs/design-planning/`. Use this one current record, with [the latest handoff](handoffs/2026-09-19-planning-publication.md), rather than creating independent status copies. The earlier assumed external-record saving instruction is superseded by [the location decision](decisions/2026-09-19-planning-location.md).
+The owner approved this repository directory and publishing as the owner account, with existing admin bypass permitted if needed. The connected GitHub route succeeded without force or bypass. No permissions, protections, workflows, release, or main reference were changed. Current handoff: [planning publication handoff](handoffs/2026-09-19-planning-publication.md). Earlier instructions to file all records in an assumed external workspace are superseded by the [location decision](decisions/2026-09-19-planning-location.md). Issued coding-agent packages remain external.
 
-Repository milestone/status authority remains `data/governance/specification_roadmap.json`; accepted focused contracts remain implementation-detail authority. This record navigates and preserves that authority; it does not redefine it. Reconcile any genuine pre-existing record recovered later without erasing its approvals.
+## 2. Purpose, scope, and exclusions
 
-The authorized saving route is the connected GitHub write interface under the authenticated `flynn33` account. The owner explicitly authorized publishing as that account and using the account's admin bypass if required. Earlier read-only-tool observations are superseded: blob/tree creation and the design branch creation have succeeded. No protection setting, workflow, or repository permission is changed. This transaction publishes a dedicated planning branch; `main` integration remains subject to the separate metadata and regression obligations below. Uploaded Git objects alone are not a completed branch save; record the successful reference update and read-back before declaring persistence verified.
+The specification is the product. ASH Model Cosmology, APS, and Aeostara supply reference semantics/design, not runtime repositories to import. YWE owns its object contracts. WRW and Ravenfall remain reference profiles, not universal Core truth.
 
-### Current working brief
+This publication preserves existing readiness work and the two-value candidate. It does not approve that candidate, replace the active packet artifact, change source pins, introduce dependencies, add gameplay, resolve disputed normalization, or start a native implementation. Original archives and redundant source snapshots were not copied into the repository.
 
-| Concern | State |
-|---|---|
-| Completed | Existing bundles recovered and checksum-verified; all 41 M2 files uploaded with matching Git trees; a fresh candidate test run reproduced all ten passing groups |
-| Next outcome | Commit and verify the dedicated planning branch, with explicit main-integration hold |
-| Permitted | Dedicated planning/documentation publication, preserving draft status and original evidence; necessary scoped integration review |
-| Not permitted by this step | Candidate design acceptance, active packet replacement, source/method upgrade, new runtime dependencies, platform work, release/tag, force-push |
-| Pending prerequisite | Commit/ref read-back for this branch save; active manifest/discovery review and full pre/post repository checks before main integration |
-| Needed from owner | Nothing for the authorized branch publication; no download, credential sharing, or manual file sorting |
-| Completion condition | Scoped planning-only commit published and read back under the owner account; integration obligations retained without false acceptance |
+## 3. Users and workflows
 
-## 2. Purpose and scope
+Maintainers and future implementers start at the directory README and this record, then consult controlling contracts and the exact candidate/source/evidence files. Candidate value construction parses explicitly, validates representation and actual membership where appropriate, creates immutable values, and performs pure transformations without world mutation authority.
 
-The engine specification is the product. ASH Model Cosmology provides foundational reference material; APS provides integrity semantics; Aeostara provides operation-governance reference design. They are not repositories to import as runtime dependencies. YWE owns the resulting object contracts. WRW and Ravenfall remain reference-profile material rather than universal game truth.
+Planning publication and main integration are distinct. A branch save makes review material durable; it does not satisfy classification, production discovery, compatibility, or full-suite acceptance requirements.
 
-The latest design slice covers AshState and CanonicalCodeword construction, immutable value ownership, exact codeword membership, pure XOR transformation, and proposed field-specific serialization. This placement step changes neither that candidate's behavioral rules nor its approval status.
+## 4. Requirements and acceptance
 
-Exclude native implementations, gameplay expansion, operational normalization/classification/recovery decisions, framework decoupling, release work, and new source adoption. Issued coding-agent instruction packages remain external; product planning documents do not.
+Existing requirement and governance registers control. No new normative requirement ID, candidate approval, debt closure, or milestone acceptance was issued.
 
-## 3. Users and workflow
+Inherited M1 evidence reports 18 requirements, 27 governance records, 119 glossary terms, ten authority nodes, and a pinned 32-file corpus. Inherited M2 debt is 132 findings over 119 paths: 31 missing identifiers, 13 annotation-only schemas, 49 descriptive schema-named documents, and 39 unbound examples. These are preserved historical observations, not newly measured counts.
 
-Specification maintainers and later implementers consult the current record, candidate documents, source references, and original evidence. The candidate workflow is: select intended type, parse without information loss, validate shape and membership as appropriate, construct an immutable value, optionally derive a pure transformation, and serialize explicitly. Malformed data does not create a partially valid public object. This is not permission to mutate world state.
+The [readiness review](m2/readiness/M2_Readiness_Review.md) preserves the demonstrated permissive schema behavior and direct-conversion hazards. Publishing its candidate successor does not close that debt.
 
-The workflow distinguishes durable planning-branch publication from main integration. Preserve candidate status and evidence, place files in the chosen directory, verify content identity and the remote branch save, then complete classification/scope, discovery, navigation, and full-suite integration before merging into main. Publishing this review branch does not declare the current catch-all classification correct or waive integration obligations.
+## 5. Architecture, sources, and unresolved decisions
 
-## 4. Requirements and acceptance continuity
+The [two-value contract](m2/ash-values/Ash_Value_Contract.candidate.md) and [candidate decisions](m2/ash-values/candidate-decisions.json) remain proposed. The state is distinct from a codeword, operational admission, and mutation authority. Values own immutable coordinates. Exact membership is checked rather than trusted from metadata; transformation is pure.
 
-Existing requirement/governance registers remain controlling. No new normative engine requirement ID or candidate approval is issued by this storage decision.
+The parent packet still has nine local descriptions and twenty-one delegated records. Only two values have this experimental contract. Other domains are not redesigned here.
 
-Inherited M1 evidence reports 18 requirements, 27 typed governance records, 119 terms, ten authority nodes, and the pinned 32-file corpus. These remain historical acceptance observations, not new measurements.
+The [value source register](m2/ash-values/source-register.json) and [readiness source register](m2/readiness/source-register.json) preserve exact product pins, source paths, reported blob identities, inherited/new reading distinctions, references, and exclusions. This publication did not reread or upgrade all external systems.
 
-Inherited M2 debt remains 132 findings over 119 distinct paths: 31 missing schema identifiers, 13 annotation-only documents, 49 descriptive schema-named records, and 39 unbound examples. This publication claims no debt reduction or M2 completion.
-
-The [earlier readiness report](m2/readiness/M2_Readiness_Review.md) documents permissive root checks, eight invalid standalone descriptions, twenty-two descriptions admitting null, and Boolean-metadata conversion hazards. Those results are preserved, not recast as new repository tests.
-
-## 5. Architecture, candidate decisions, and sources
-
-The [two-value candidate](m2/ash-values/Ash_Value_Contract.candidate.md) separates immutable object responsibilities from codecs. [Candidate decisions](m2/ash-values/candidate-decisions.json) keep source facts separate from proposed membership-field, closed-record, numeric, parser, and writer choices. Proposal approval fields remain unchanged and empty.
-
-State representation is not codeword membership, operational stability, or mutation authority. The fixed codeword set is verified rather than trusted from client metadata. A pure transformation yields a new represented value. No global mutable registry or mandatory framework is introduced.
-
-The parent packet contains nine local record descriptions and twenty-one delegated records. Only two values have an experimental contract. No delegated domain is redesigned here.
-
-### Source identity and reading
-
-Product pin remains `2db1230f638cd065d791c05f1adb7b4b51505c57`. The earlier continuation fully read the state-space, codeword-set, pure transformation, and canonical-routing documents at that pin. [The value source register](m2/ash-values/source-register.json) and [readiness source register](m2/readiness/source-register.json) preserve exact paths, blob identities, inherited coverage, technical references, and exclusions.
-
-For this placement decision, remote main and the complete `docs` directory listing were retrieved. `CONTRIBUTING.md` and the artifact classification policy were read. The latter requires classification/scope synchronization for new paths. This is not a claim to have read or tested the entire live repository.
-
-### Realization and unresolved interpretation
-
-No approved linked System Realization Contract set, preflight, independent reviewer acceptance, or product delivery review was recovered or created. These remain prerequisites before dependent implementation, not obstacles to honestly preserving existing review work.
-
-The normalization/classification disagreement and Forsetti interface-scope issue remain separately unresolved. Do not resolve them by treating a new serialization draft as authority. Production dependency additions: none. Reference repositories, native frameworks, source trees, and redundant original source snapshots are not imported in this prepared change.
+Unresolved: prior method binding; complete linked System Realization Contracts and independent acceptance/preflight; normalization/classification source reconciliation; Forsetti interface scope; field-specific reference/alias rules; and consumer compatibility with membership, closed records, numeric parsing, writer output, and schema-target binding. Hold only dependent work. No new broad reset is required.
 
 ## 6. Experience and resources
 
-There is no UI or production asset change. The directory README gives one entry point, the record gives one current status, and dated handoffs preserve continuity. The owner is not expected to unpack and manually sort multiple transport archives.
+The README is the front door; this record is the current working state; dated handoffs point back to it. No UI, brand, production asset, or device requirement changed. The owner need not download or sort individual archives.
 
-## 7. Evidence and verification boundaries
+## 7. Verification and limitations
 
-### Inherited two-value experiment
+Original experiment evidence remains unchanged: 512 represented states, sixteen accepted codewords out of 512 candidates, 8,192 transformations, 56 named fixtures, raw JSON/precision and ownership/order checks, ten detected schema mutations, offline references, and three repeated result sections. These remain bounded experimental findings, not independent or whole-engine acceptance.
 
-Original reports retain the following scope: all 512 state representations and signatures; all 512 codeword candidates with exactly sixteen admitted; 8,192 transformations with inverse/input-preservation checks; 56 type-bound fixtures; raw JSON/precision cases; defensive copying and sequence order; ten caught deliberate schema faults; offline reference checks; and three identical result sections under different hash seeds.
+During publication, a fresh run passed all ten groups and reproduced result hash `630cade04dadfc8ae236e34ffdcc1238703695b856b4d336fa0043d68d4ac113`. See [publication checks](publication/Publication_Checks.json). All 41 M2 files matched the prepared payload by complete Git subtree identity. All 49 initial publication files matched the local planning tree. Relative Markdown links and attribution scanning passed.
 
-These were candidate experiments under the original recorded environment, not official product regression or independent acceptance. Input bytes in `schemas`, `fixtures`, and `verification` are preserved by this placement.
+No full repository suite, owner-checkout inspection, readiness rerun, consumer compatibility test, native build, realization preflight/delivery, independent approval, or physical-device qualification is claimed. The earlier preparation reports retain their dates and pending fields as historical provenance; the current receipt controls persistence status.
 
-### Checks in this placement session
+## 8. Execution and verified persistence
 
-Both transport archives were checked against their internal manifests: 28 entries for the two-value archive and 21 entries for the readiness archive. Destination copies and documented navigation/status edits are listed in `publication/File_Transfer_Manifest.json`. Local output-integrity results are in `publication/Preparation_Checks.json`.
+[Publication receipt](publication/GitHub_Publication.json) records the successful connected GitHub write and read-back. The initial commit added 49 files, all under `docs/design-planning/`; the compare result reported zero deletions and no unrelated changes. Its planning subtree is `54e35e319184101d7a425b39cb5baaa788bc6479`. The branch read-back returned the expected commit. GitHub identifies both author and committer as Jim Daley under `flynn33`; no attribution trailers were added. The commit is unsigned; content/read-back verification is not a cryptographic signature claim.
 
-The initial placement preparation did not rerun tests. During the subsequent authorized GitHub publication transaction, the existing two-value verifier was executed on September 19, 2026 at 12:16:06 UTC. All ten groups passed and reproduced result SHA-256 `630cade04dadfc8ae236e34ffdcc1238703695b856b4d336fa0043d68d4ac113`. The compact new result is in `publication/Publication_Checks.json`; the earlier reports retain their original dates and bytes. No readiness probe, full repository suite, native build, consumer compatibility test, realization preflight, independent review, or physical-device test is claimed for this publication transaction.
+Main was not updated. This directory is not yet a merge-ready change: the existing catch-all classification and exact path snapshots have not been reconciled for planning material. Full integration obligations remain in [Repository Integration Requirements](publication/Repository_Integration_Requirements.md). Do not claim those checks passed because the branch push succeeded.
 
-## 8. Execution, integrity, and persistence
+## 9. Decisions and permissions
 
-The working filesystem tree is an extracted planning payload, not the owner checkout. The command-line route remains unauthenticated, but connected GitHub write actions are now available and succeeded. Branch `design-planning/m2-foundations` was created at the recorded main baseline; Git objects were uploaded without changing existing product paths. Commit creation, author/committer inspection, non-forced branch update, and remote tree verification are the final publication operations. No PR, main merge, tag, release, or branch-policy change is part of this transaction. Do not infer local checkout cleanliness or full validation from remote identity.
-
-Original conversation archives remain untouched and are identified by checksum in the transfer manifest. Nested ZIPs, superseded prepared records, transport-only reconstruction helpers, and the duplicate packet source snapshot are not committed as planning content. Historical machine-report paths retain their original-run meaning.
-
-The planning branch is the selected durable record route until the same directory is integrated into main. It is not a second product specification. Record the delivered commit and read-back hashes only when observed. Keep issued instruction packages external.
-
-## 9. Decision and change log
-
-| Decision/change | Status and scope |
+| Decision | Status |
 |---|---|
-| Preserve project purpose, strict OO, agnosticism, modularity, and reference-only inputs | Existing owner direction, retained |
-| M0/M1 accepted, M2 active | Existing repository record, retained without recertification |
-| Earlier M1-expansion proposal | Historical recommendation, not proof of an adopted roadmap reset |
-| Two-value construction and wire format | Tested candidate, not approved engine design |
-| Dedicated design/planning directory and GitHub push | Owner approved September 19, 2026; selected `docs/design-planning/` |
-| Assumed external-record filing requirement | Superseded; external requirement applies to issued instruction packages, not all planning records |
-| Method revision | Unresolved prior binding; no silent replacement |
-| Owner-authenticated publication and admin bypass | Explicitly authorized September 19, 2026; no attribution trailers or tool authors; bypass only if required and never by disabling safeguards |
-| Organized publication tree | Uploaded as Git objects; planning branch commit/ref verification in progress; main integration remains pending |
+| Preserve agnosticism, OO modularity, reference-only systems, and existing acceptance | Existing owner/project direction retained |
+| Dedicated repository planning directory | Owner approved September 19, 2026 |
+| Owner-account publishing; existing admin bypass if required; no attribution | Explicitly authorized; owner-account push completed; bypass not needed |
+| Two-value wire/construction choices | Tested proposals; approval fields unchanged |
+| Method/source upgrade | Not performed; prior method binding unresolved |
+| Main integration or release | Not performed; integration checks still pending |
+| Assumed external-record filing | Superseded; only issued instruction packages must stay external |
 
-## 10. Remaining work and next action
+## 10. Current step and next action
 
-**Next action:** Complete and verify the owner-attributed commit on `design-planning/m2-foundations`. Read back the branch, commit identities, and exact planning subtree. Keep `main` unchanged until classification/scope, experimental-discovery behavior, and pre/post full-repository validation are reconciled. The current directory's role is explicitly planning and candidate evidence, not a blanket normative promotion.
+**Current step:** Planning work published and verified on its dedicated branch.
 
-After branch publication, the next repository action is that bounded integration review. The next substantive design task remains consumer compatibility review: check actual standalone `bits` / `membership` consumers, signature fields, unknown-field behavior, numeric parsing, and exact schema targets before proposing adoption. Remaining parent-packet, diagnostics/reference, full realization, source/method-binding, debt-closure, and M2 gate obligations stay open. No new broad audit or project reset is needed.
+**Completed:** Owner-attributed scoped commit/push, exact payload checks, fresh candidate run, remote branch read-back, and this continuity closeout.
 
-**Current step:** Owner-authorized planning-branch publication.
-**Completed:** Complete planning payload in Git storage, exact content checks, fresh candidate verification, and current continuity update.
-**Needed from you:** Nothing for the authorized push; no files to sort or credentials to provide.
-**Saved at:** Branch publication transaction in progress. A verified receipt is required before claiming the branch save completed.
+**Next action:** Complete the bounded main-integration review: inspect the actual checkout and preserve local work; reconcile classification/scope and experimental discovery; add appropriate navigation; run pre/post repository checks; then consider integration without approving candidate semantics. The next substantive design task remains packet-consumer compatibility review.
+
+**Needed from you:** Nothing to download, organize, or reauthorize for this completed branch push.
+
+**Saved at:** `flynn33/yggdrasil-world-engine`, branch `design-planning/m2-foundations`, `docs/design-planning/`; verified initial commit recorded above. Subsequent record commits preserve this same authority rather than creating another project record.

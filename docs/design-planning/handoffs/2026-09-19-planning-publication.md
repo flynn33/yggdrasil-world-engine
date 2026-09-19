@@ -1,45 +1,41 @@
 # YWE Planning Publication Handoff
 
-**Handoff ID:** YWE-HANDOFF-20260919-PLANNING
-**Date:** September 19, 2026
-**Current record:** [Project Record](../Project_Record.md), record YWE-RECOVERY-20260918, planning-4.
-**Supersedes:** The prepared-2 handoff's storage directions and current working view, not approved engine decisions.
-**Persistence:** Owner-authorized design-branch publication transaction in progress; verify the commit/ref receipt before claiming completion.
+**Handoff ID:** YWE-HANDOFF-20260919-PLANNING  
+**Revision:** planning-5  
+**Date:** September 19, 2026  
+**Current record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-5.  
+**Persistence:** Initial planning publication saved and verified at `56abad1d6db1829feb074c6459466089930bf2a6` on `design-planning/m2-foundations`.
 
-## Current state
+This supersedes planning-4's in-progress save state, not accepted engine decisions. The original record and full experimental evidence remain preserved in Git history and this directory.
 
-YWE v2.0.23 remains at `main` commit `2db1230f638cd065d791c05f1adb7b4b51505c57`. M0/M1 acceptance and active M2 are preserved. Owner-local checkout and unpublished work have not been inspected. Native implementations and the M10 platform gate are unchanged.
+## Source and authority
 
-The owner explicitly approved keeping and pushing design/planning work in a dedicated directory. Use `docs/design-planning/`. The old request to save everything in an assumed external record workspace was incorrect and is superseded. Issued coding-agent packages still remain external.
+YWE v2.0.23 remains the accepted product baseline. Main was inspected at `2db1230f638cd065d791c05f1adb7b4b51505c57` and was not updated. M0/M1 acceptance and active M2 are unchanged. Owner-local work is uninspected. Platform work remains deferred through M10.
 
-## Governing material
+Keep the prior method binding unresolved rather than silently adopting inspected Raven Forge 0.6.2 at `ed0028a46bac9c5b92876a6ad6589ca421fd9499`. Preserve source-register reading limits and existing source pins. No linked realization acceptance, source upgrade, candidate approval, or new dependency is implied.
 
-Use the actual recorded product baseline and approved contracts. Prior adopted Raven Forge Development revision remains unresolved. Inspected 0.6.2 at `ed0028a46bac9c5b92876a6ad6589ca421fd9499` is not a replacement adoption. Preserve inherited source registers and reading limits. This is publication of review material, not a method upgrade, linked-contract acceptance, source revision change, or implementation authorization.
+## Completed and verified
 
-## Completed
+The owner-authorized connected GitHub push succeeded. The initial commit adds 49 planning-only files with no unrelated changes or deletions. The complete planning subtree matched `54e35e319184101d7a425b39cb5baaa788bc6479`. Branch read-back returned the expected commit. Author and committer both resolve to Jim Daley / `flynn33`, without attribution trailers. The normal non-forced update succeeded; no admin bypass, protection change, or workflow change was needed.
 
-Recovered and manifest-verified both original archives. Prepared the dedicated directory containing the earlier packet review, tested two-value candidate, experimental schema/fixtures/tools, original evidence, one updated Project Record, this handoff, and the owner storage decision. Test-input files were transferred without behavioral changes. Any navigation/status changes are recorded in the transfer manifest.
+All 41 M2 payload files retain their prepared bytes. A fresh candidate verifier run passed all ten groups with the same result hash as the inherited experiment. See [publication checks](../publication/Publication_Checks.json) and [publication receipt](../publication/GitHub_Publication.json). Full repository tests and owner-checkout inspection were not performed.
 
-No additional design decision has been approved. Prior 512-state / sixteen-codeword / 8,192-transformation evidence remains inherited experimental evidence. In the later authorized publishing transaction, the existing two-value verifier was rerun and passed all ten groups with the identical result hash. See `../publication/Publication_Checks.json`. This is not a full repository result.
+## Remaining work and limits
 
-## Important boundaries
+The branch is durable planning storage, not a completed main integration or specification acceptance. Classification/scope path snapshots, correct nonnormative treatment, generic schema discovery, appropriate navigation, and full pre/post repository validation remain pending. Do not merge under the catch-all normative classification without resolving these obligations.
 
-Do not copy nested archives, redundant source snapshots, or obsolete prepared records into the product. Do not promote experiments under the repository's default normative classification. Do not change original reports to suggest new execution, M2 completion, or successful publication.
+Candidate membership-field, closed-record, numeric-parser, canonical-writer, and exact-type binding choices still require consumer compatibility review. Parent packet/reference/diagnostic semantics, normalization/source reconciliation, Forsetti scope, method/realization binding, debt closure, and the remaining M2 work stay visible in the Project Record.
 
-This planning branch is not a verified merge-ready patch: active classification/scope manifest changes, schema discovery review, actual checkout inspection, and full baseline/post-change validation remain pending before main integration. See [integration requirements](../publication/Repository_Integration_Requirements.md).
-
-The connected GitHub interface now exposes write operations and authenticates as `flynn33` with admin access. The owner explicitly authorized committing/pushing as that account and using admin bypass if required, without attribution. The design branch and content objects have been created. The unauthenticated CLI/DNS limitation does not prevent this connected route. Do not request credentials, change protections, or claim the owner checkout was inspected.
+No archives, superseded working records, source snapshots, or issued instruction packages were copied into the product. Issued packages remain external; the current planning record belongs here.
 
 ## Next eligible action
 
-Finish the connected GitHub publication to `design-planning/m2-foundations`: create a planning-only commit, verify owner attribution, update the branch without force, then read back the branch and planning tree. Do not update main until its integration checks pass. After a verified branch save, amend the current record with the actual receipt; do not fabricate a self-referential future commit hash.
-
-The next design task after that remains consumer compatibility review of the two-value contract. No new broad audit or project reset is needed.
+Perform the bounded main-integration review described in [Repository Integration Requirements](../publication/Repository_Integration_Requirements.md), preserving actual local changes and keeping candidates unapproved. Then continue the two-value consumer compatibility review. Do not restart the project or ask the owner to reconstruct retrievable history.
 
 ## Checkpoint
 
-**Current step:** Dedicated planning-branch publication.
-**Completed:** Organized files, explicit owner push authority, remote object/tree uploads, exact content checks, and fresh candidate verification.
-**Next action:** Complete owner-attributed commit, non-forced branch push, and remote read-back.
-**Needed from owner:** Nothing for the authorized branch push.
-**Saved at:** Publication transaction in progress; final receipt still to be verified.
+**Current step:** Planning branch saved and verified.  
+**Completed:** Scoped owner-account publication, exact hashes, fresh candidate checks, and continuity closeout.  
+**Next action:** Main-integration metadata/discovery and regression review.  
+**Needed from owner:** Nothing to download or sort.  
+**Saved at:** `docs/design-planning/` on `design-planning/m2-foundations`; verified initial commit above. This handoff records that observed save, not its own future commit hash.
