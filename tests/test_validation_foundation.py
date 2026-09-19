@@ -520,6 +520,27 @@ class PlatformBoundaryTests(unittest.TestCase):
             violations, _ = platform_check.platform_violations(root)
             self.assertTrue(any("runtime.py" in violation for violation in violations))
 
+    def test_reviewed_planning_verification_sources_are_allowed_exactly(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for relative_path in sorted(platform_check.APPROVED_REFERENCE_SOURCES):
+                if not relative_path.startswith("docs/design-planning/"):
+                    continue
+                path = root / relative_path
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("value = 1\n", encoding="utf-8")
+            violations, _ = platform_check.platform_violations(root)
+            self.assertEqual([], violations)
+
+    def test_unreviewed_planning_executable_remains_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / "docs/design-planning/m2/unreviewed.py"
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("value = 1\n", encoding="utf-8")
+            violations, _ = platform_check.platform_violations(root)
+            self.assertTrue(any("unreviewed.py" in violation for violation in violations))
+
     def test_platform_project_artifact_is_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -569,6 +590,12 @@ class WorkflowContractTests(unittest.TestCase):
         ):
             text = (ROOT / relative_path).read_text(encoding="utf-8-sig")
             self.assertIn("validate_repository.py", text, relative_path)
+
+    def test_manual_wiki_workflow_uses_canonical_version(self):
+        workflow = (ROOT / ".github/workflows/wiki-sync.yml").read_text(encoding="utf-8-sig")
+        self.assertIn("workflow_dispatch:", workflow)
+        self.assertIn("main-repo/VERSION", workflow)
+        self.assertEqual([], roadmap_check.wiki_version_workflow_errors(ROOT))
 
     def test_version_workflow_does_not_publish_or_tag(self):
         text = (ROOT / ".github/workflows/versioning.yml").read_text(encoding="utf-8-sig")

@@ -1,0 +1,30 @@
+name: YWE Repository Guardrails
+
+on:
+  workflow_dispatch:
+
+jobs:
+  guardrails:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install validation dependencies
+        run: python3 -m pip install -r scripts/requirements.txt
+
+      - name: Run phase and change-safety guardrails
+        run: >-
+          python3 scripts/validate_repository.py
+          --group phase
+          --group attribution
+          --group change-safety

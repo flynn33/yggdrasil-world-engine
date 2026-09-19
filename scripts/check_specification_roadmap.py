@@ -535,8 +535,10 @@ def wiki_version_workflow_errors(root: Path) -> list[str]:
         errors.append("Wiki synchronization must read the canonical VERSION source")
     if "main-repo/version.txt" in text:
         errors.append("Wiki synchronization must not read the version.txt mirror as authority")
-    if "- 'VERSION'" not in text:
-        errors.append("Wiki synchronization must trigger when VERSION changes")
+    if "- 'VERSION'" not in text and "workflow_dispatch:" not in text:
+        errors.append(
+            "Wiki synchronization must trigger when VERSION changes or provide an explicit manual route"
+        )
     return errors
 
 

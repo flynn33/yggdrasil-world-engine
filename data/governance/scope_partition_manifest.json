@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1010,
-    "path_digest": "e3338aea36eaeb36a4c194d60c51b97a16ca9449d49a0676aa5d9e443a6bf0fe",
+    "path_count": 1074,
+    "path_digest": "45017c66a15985568d5a9d10669ec22a3f0f9d9b6ac90ea9ab89f62f7fcbe5cb",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -132,7 +132,8 @@
         "data/schemas/repository_quality_debt_inventory_schema.json",
         "data/schemas/repository_truth_manifest_schema.json",
         "data/schemas/scope_partition_manifest_schema.json",
-        "data/schemas/specification_roadmap_schema.json"
+        "data/schemas/specification_roadmap_schema.json",
+        "docs/design-planning/**"
       ],
       "exclude": [
         "adapters/**",
@@ -410,7 +411,8 @@
         "tests/**",
         "version.txt",
         "wiki.md",
-        "yggdrasil-instructions.json"
+        "yggdrasil-instructions.json",
+        "docs/design-planning/**"
       ],
       "owner_role": "Core semantics maintainers",
       "governing_source": "docs/project/scope_partition_map.md",
@@ -447,7 +449,10 @@
       "owner_role": "ASH mathematics maintainers",
       "governing_source": "data/governance/ash_dependency_identity.json",
       "rationale": "This deterministic executable surface implements the pinned ASH state-space and identity semantics rather than profile-specific YWE Core behavior.",
-      "secondary_tags": ["ash_dependency", "executable_surface"]
+      "secondary_tags": [
+        "ash_dependency",
+        "executable_surface"
+      ]
     },
     {
       "path": "docs/architecture/ash_cosmological_model_source_map.md",
@@ -456,11 +461,17 @@
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This Core routing map uses named WRW concepts only as informative cross-scope source examples and does not adopt them as Core requirements.",
       "wrw_reference_exception": {
-        "markers": ["Divine Core", "Where Ravens Wait"],
+        "markers": [
+          "Divine Core",
+          "Where Ravens Wait"
+        ],
         "rationale": "The exact names occur only in an informative source-routing table that distinguishes profile material from Core authority.",
         "authority_ref": "docs/architecture/ywe_core_wrw_scope_contract.md"
       },
-      "secondary_tags": ["core_boundary", "wrw_informative_example"]
+      "secondary_tags": [
+        "core_boundary",
+        "wrw_informative_example"
+      ]
     },
     {
       "path": "docs/architecture/dual_variable_alignment_model_contract.md",
@@ -469,11 +480,18 @@
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "The contract defines a neutral paired-variable capability and retains WRW names only in an explicitly informative implementation example.",
       "wrw_reference_exception": {
-        "markers": ["Dark Wolf", "Where Ravens Wait", "White Wolf"],
+        "markers": [
+          "Dark Wolf",
+          "Where Ravens Wait",
+          "White Wolf"
+        ],
         "rationale": "These exact names label one informative reference-profile realization of the neutral dual-variable Core capability.",
         "authority_ref": "docs/architecture/ywe_core_wrw_scope_contract.md"
       },
-      "secondary_tags": ["core_boundary", "wrw_informative_example"]
+      "secondary_tags": [
+        "core_boundary",
+        "wrw_informative_example"
+      ]
     },
     {
       "path": "docs/architecture/engine_vs_game_layer_contract.md",
@@ -482,11 +500,17 @@
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "The contract defines the generic engine/profile separation and uses WRW names solely to illustrate the downstream profile side of that boundary.",
       "wrw_reference_exception": {
-        "markers": ["Ravenfall", "Where Ravens Wait"],
+        "markers": [
+          "Ravenfall",
+          "Where Ravens Wait"
+        ],
         "rationale": "The exact names are informative profile examples used to demonstrate which responsibilities remain outside YWE Core.",
         "authority_ref": "docs/architecture/ywe_core_wrw_scope_contract.md"
       },
-      "secondary_tags": ["core_boundary", "wrw_informative_example"]
+      "secondary_tags": [
+        "core_boundary",
+        "wrw_informative_example"
+      ]
     },
     {
       "path": "docs/architecture/leaf_branch_reality_contract.md",
@@ -494,7 +518,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This protected Phase 9 contract binds branch reality to WRW realm, bloodline, and paired-resonance semantics and therefore remains profile-owned.",
-      "secondary_tags": ["wrw", "branch_profile"]
+      "secondary_tags": [
+        "wrw",
+        "branch_profile"
+      ]
     },
     {
       "path": "docs/architecture/pattern_vector_runtime_contract.md",
@@ -502,7 +529,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This protected Phase 9 pattern-vector contract includes WRW paired-resonance interpretation and therefore remains profile-owned.",
-      "secondary_tags": ["wrw", "pattern_profile"]
+      "secondary_tags": [
+        "wrw",
+        "pattern_profile"
+      ]
     },
     {
       "path": "data/schemas/axiom_diagnostic_packet_schema.json",
@@ -510,7 +540,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This protected Phase 9 diagnostic schema explicitly declares WRW game authority and therefore remains reference-profile material.",
-      "secondary_tags": ["wrw", "phase_9_profile"]
+      "secondary_tags": [
+        "wrw",
+        "phase_9_profile"
+      ]
     },
     {
       "path": "data/schemas/existence_potential_schema.json",
@@ -518,7 +551,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This protected Phase 9 existence-potential schema explicitly declares WRW game authority and therefore remains reference-profile material.",
-      "secondary_tags": ["wrw", "phase_9_profile"]
+      "secondary_tags": [
+        "wrw",
+        "phase_9_profile"
+      ]
     },
     {
       "path": "data/schemas/leaf_branch_reality_state_schema.json",
@@ -526,7 +562,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This protected Phase 9 branch-state schema explicitly declares WRW game authority and therefore remains reference-profile material.",
-      "secondary_tags": ["wrw", "phase_9_profile"]
+      "secondary_tags": [
+        "wrw",
+        "phase_9_profile"
+      ]
     },
     {
       "path": "data/schemas/pattern_vector_schema.json",
@@ -534,7 +573,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This protected Phase 9 pattern-vector schema explicitly declares WRW game authority and therefore remains reference-profile material.",
-      "secondary_tags": ["wrw", "phase_9_profile"]
+      "secondary_tags": [
+        "wrw",
+        "phase_9_profile"
+      ]
     },
     {
       "path": "docs/architecture/location_branch_overlay_contract.md",
@@ -543,11 +585,16 @@
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "The contract defines neutral overlay behavior and retains one named WRW location solely as an informative fixture.",
       "wrw_reference_exception": {
-        "markers": ["Ravenfall"],
+        "markers": [
+          "Ravenfall"
+        ],
         "rationale": "The exact location name appears only in an informative example and is not a required Core location or rule.",
         "authority_ref": "docs/architecture/ywe_core_wrw_scope_contract.md"
       },
-      "secondary_tags": ["core_boundary", "wrw_informative_example"]
+      "secondary_tags": [
+        "core_boundary",
+        "wrw_informative_example"
+      ]
     },
     {
       "path": "docs/architecture/product_runtime_boundary_contract.md",
@@ -556,11 +603,16 @@
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "The contract defines the generic product/runtime boundary and names WRW only as an informative downstream layer in the authority chain.",
       "wrw_reference_exception": {
-        "markers": ["Where Ravens Wait"],
+        "markers": [
+          "Where Ravens Wait"
+        ],
         "rationale": "The exact name identifies one informative game-layer example and does not constrain universal Core implementation.",
         "authority_ref": "docs/architecture/ywe_core_wrw_scope_contract.md"
       },
-      "secondary_tags": ["core_boundary", "wrw_informative_example"]
+      "secondary_tags": [
+        "core_boundary",
+        "wrw_informative_example"
+      ]
     },
     {
       "path": "docs/architecture/ywe_cosmology_authority_contract.md",
@@ -569,11 +621,17 @@
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "The contract governs generic authority separation and uses WRW cosmology names only as informative examples of profile-owned material.",
       "wrw_reference_exception": {
-        "markers": ["Divine Core", "Where Ravens Wait"],
+        "markers": [
+          "Divine Core",
+          "Where Ravens Wait"
+        ],
         "rationale": "The exact names occur only while routing reference-profile cosmology away from Core and rejecting invalid authority claims.",
         "authority_ref": "docs/architecture/ywe_core_wrw_scope_contract.md"
       },
-      "secondary_tags": ["core_boundary", "wrw_informative_example"]
+      "secondary_tags": [
+        "core_boundary",
+        "wrw_informative_example"
+      ]
     },
     {
       "path": "docs/architecture/phase_17_github_check_contract.md",
@@ -581,7 +639,10 @@
       "owner_role": "Repository governance maintainers",
       "governing_source": "docs/project/scope_partition_map.md",
       "rationale": "This artifact specifies repository and GitHub validation behavior, including profile fixtures, rather than universal runtime semantics.",
-      "secondary_tags": ["governance", "repository_check"]
+      "secondary_tags": [
+        "governance",
+        "repository_check"
+      ]
     },
     {
       "path": "docs/glossary/ywe_design_glossary.md",
@@ -589,7 +650,10 @@
       "owner_role": "Repository governance maintainers",
       "governing_source": "docs/governance/normative_language_and_requirement_id_policy.md",
       "rationale": "The cross-scope terminology authority intentionally indexes Core, dependency, extension, and WRW terms and therefore belongs to governance validation.",
-      "secondary_tags": ["governance", "terminology"]
+      "secondary_tags": [
+        "governance",
+        "terminology"
+      ]
     },
     {
       "path": "core/cosmology_engine/cosmology_schema.json",
@@ -597,7 +661,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This cosmology schema encodes the WRW named-realm profile and is not a universal YWE Core ontology contract.",
-      "secondary_tags": ["wrw", "named_realm_profile"]
+      "secondary_tags": [
+        "wrw",
+        "named_realm_profile"
+      ]
     },
     {
       "path": "core/narrative_engine/character_creation_progression_interface.json",
@@ -605,7 +672,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This character progression interface binds WRW origin, identity-pressure, and paired-wolf profile semantics around ASH-derived state.",
-      "secondary_tags": ["wrw", "player_profile"]
+      "secondary_tags": [
+        "wrw",
+        "player_profile"
+      ]
     },
     {
       "path": "core/narrative_engine/character_creation_progression_rules.yaml",
@@ -613,7 +683,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "These character creation rules encode WRW origin, destiny, and paired-wolf profile behavior rather than neutral Core requirements.",
-      "secondary_tags": ["wrw", "player_profile"]
+      "secondary_tags": [
+        "wrw",
+        "player_profile"
+      ]
     },
     {
       "path": "core/narrative_engine/player_runtime_state_rules.yaml",
@@ -621,7 +694,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "These runtime-state rules encode WRW player phases, memory, and paired-resonance semantics and therefore remain profile-owned.",
-      "secondary_tags": ["wrw", "player_profile"]
+      "secondary_tags": [
+        "wrw",
+        "player_profile"
+      ]
     },
     {
       "path": "core/narrative_engine/worldstate_location_mutation_rules.yaml",
@@ -629,7 +705,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "These mutation rules include WRW paired-resonance consequence channels and are a reference-profile specialization of neutral state contracts.",
-      "secondary_tags": ["wrw", "worldstate_profile"]
+      "secondary_tags": [
+        "wrw",
+        "worldstate_profile"
+      ]
     },
     {
       "path": "core/perception_engine/perception_schema.json",
@@ -637,7 +716,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This perception schema exposes WRW paired-wolf resonance and compatibility fields, making it a profile contract rather than neutral Core.",
-      "secondary_tags": ["wrw", "perception_profile"]
+      "secondary_tags": [
+        "wrw",
+        "perception_profile"
+      ]
     },
     {
       "path": "data/perception/perception_overlay_rules.yaml",
@@ -645,7 +727,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "These overlay rules contain WRW location and paired-wolf fixtures and therefore specialize perception within the reference profile.",
-      "secondary_tags": ["wrw", "perception_profile"]
+      "secondary_tags": [
+        "wrw",
+        "perception_profile"
+      ]
     },
     {
       "path": "data/player_schema.json",
@@ -653,7 +738,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This player record shape encodes WRW origin-memory and paired-wolf resonance fields rather than a profile-neutral Core player model.",
-      "secondary_tags": ["wrw", "player_profile"]
+      "secondary_tags": [
+        "wrw",
+        "player_profile"
+      ]
     },
     {
       "path": "data/realm/realm_boundary_profiles.yaml",
@@ -661,7 +749,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "These boundary profiles depend on the named WRW realm projection and are not universal structural-coordinate semantics.",
-      "secondary_tags": ["wrw", "realm_profile"]
+      "secondary_tags": [
+        "wrw",
+        "realm_profile"
+      ]
     },
     {
       "path": "data/realm/realm_mechanics_rules.yaml",
@@ -669,7 +760,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "These realm mechanics encode the named WRW realm ontology and remain reference-profile rules rather than mandatory Core truth.",
-      "secondary_tags": ["wrw", "realm_profile"]
+      "secondary_tags": [
+        "wrw",
+        "realm_profile"
+      ]
     },
     {
       "path": "data/realm_registry/realm_definitions.json",
@@ -677,7 +771,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This registry defines the named WRW realm projection and therefore belongs to the reference profile rather than universal Core.",
-      "secondary_tags": ["wrw", "realm_registry"]
+      "secondary_tags": [
+        "wrw",
+        "realm_registry"
+      ]
     },
     {
       "path": "data/schemas/base_world_ontology_schema.json",
@@ -685,7 +782,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This schema specializes the immutable ontology contract with WRW named-realm members and is not the neutral Core ontology schema.",
-      "secondary_tags": ["wrw", "realm_profile"]
+      "secondary_tags": [
+        "wrw",
+        "realm_profile"
+      ]
     },
     {
       "path": "data/schemas/branch_event_schema.json",
@@ -693,7 +793,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This branch-event schema includes WRW paired-resonance mutation channels and is a profile specialization of generic event state.",
-      "secondary_tags": ["wrw", "branch_profile"]
+      "secondary_tags": [
+        "wrw",
+        "branch_profile"
+      ]
     },
     {
       "path": "data/schemas/branch_generation_context_schema.json",
@@ -701,7 +804,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This generation context schema carries WRW paired-resonance context and therefore remains reference-profile material.",
-      "secondary_tags": ["wrw", "branch_profile"]
+      "secondary_tags": [
+        "wrw",
+        "branch_profile"
+      ]
     },
     {
       "path": "data/schemas/character_progression_schema.json",
@@ -709,7 +815,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This schema encodes WRW character-origin and paired-wolf progression concepts while consuming canonical ASH state identity.",
-      "secondary_tags": ["wrw", "player_profile"]
+      "secondary_tags": [
+        "wrw",
+        "player_profile"
+      ]
     },
     {
       "path": "data/schemas/combat_assist_trace_schema.json",
@@ -717,7 +826,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This combat-assist trace names WRW wolf companions and therefore records profile behavior rather than a neutral Core trace.",
-      "secondary_tags": ["wrw", "companion_profile"]
+      "secondary_tags": [
+        "wrw",
+        "companion_profile"
+      ]
     },
     {
       "path": "data/schemas/location_mutation_rule_schema.json",
@@ -725,7 +837,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This location-mutation schema is coupled to the named WRW realm ontology and remains a reference-profile specialization.",
-      "secondary_tags": ["wrw", "location_profile"]
+      "secondary_tags": [
+        "wrw",
+        "location_profile"
+      ]
     },
     {
       "path": "data/schemas/location_mutation_trace_schema.json",
@@ -733,7 +848,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This mutation trace embeds a named WRW location fixture and therefore belongs to reference-profile validation.",
-      "secondary_tags": ["wrw", "location_profile"]
+      "secondary_tags": [
+        "wrw",
+        "location_profile"
+      ]
     },
     {
       "path": "data/schemas/location_resolution_context_schema.json",
@@ -741,7 +859,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This location-resolution context includes WRW paired-resonance interpretation and therefore specializes the profile layer.",
-      "secondary_tags": ["wrw", "location_profile"]
+      "secondary_tags": [
+        "wrw",
+        "location_profile"
+      ]
     },
     {
       "path": "data/schemas/location_state_record_schema.json",
@@ -749,7 +870,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This location-state schema is coupled to the named WRW realm ontology and is profile-owned rather than universal Core.",
-      "secondary_tags": ["wrw", "location_profile"]
+      "secondary_tags": [
+        "wrw",
+        "location_profile"
+      ]
     },
     {
       "path": "data/schemas/plane_attunement_state_schema.json",
@@ -757,7 +881,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This attunement state enumerates the WRW named-realm projection and therefore belongs to the reference profile.",
-      "secondary_tags": ["wrw", "realm_profile"]
+      "secondary_tags": [
+        "wrw",
+        "realm_profile"
+      ]
     },
     {
       "path": "data/schemas/plane_pressure_state_schema.json",
@@ -765,7 +892,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This pressure-state schema explicitly binds the WRW named-realm projection and is not universal Core ontology truth.",
-      "secondary_tags": ["wrw", "realm_profile"]
+      "secondary_tags": [
+        "wrw",
+        "realm_profile"
+      ]
     },
     {
       "path": "data/schemas/player_action_trace_schema.json",
@@ -773,7 +903,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This action trace carries WRW paired-resonance consequence channels and remains a profile-level trace contract.",
-      "secondary_tags": ["wrw", "player_profile"]
+      "secondary_tags": [
+        "wrw",
+        "player_profile"
+      ]
     },
     {
       "path": "data/schemas/player_runtime_state_schema.json",
@@ -781,7 +914,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This player runtime schema encodes WRW phases and paired-resonance state and therefore is reference-profile material.",
-      "secondary_tags": ["wrw", "player_profile"]
+      "secondary_tags": [
+        "wrw",
+        "player_profile"
+      ]
     },
     {
       "path": "data/schemas/player_schema.json",
@@ -789,7 +925,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This player schema encodes WRW origin-memory and paired-wolf resonance fields rather than a profile-neutral Core player model.",
-      "secondary_tags": ["wrw", "player_profile"]
+      "secondary_tags": [
+        "wrw",
+        "player_profile"
+      ]
     },
     {
       "path": "data/schemas/player_state_update_packet_schema.json",
@@ -797,7 +936,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This update packet carries WRW paired-resonance player state and therefore specializes the reference profile.",
-      "secondary_tags": ["wrw", "player_profile"]
+      "secondary_tags": [
+        "wrw",
+        "player_profile"
+      ]
     },
     {
       "path": "data/schemas/worldstate_location_mutation_schema.json",
@@ -805,7 +947,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This worldstate schema includes WRW paired-resonance consequence domains and is a reference-profile specialization of neutral state laws.",
-      "secondary_tags": ["wrw", "worldstate_profile"]
+      "secondary_tags": [
+        "wrw",
+        "worldstate_profile"
+      ]
     },
     {
       "path": "docs/architecture/base_world_ontology_contract.md",
@@ -813,7 +958,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This ontology contract specializes immutable structural law with WRW named realms and therefore remains profile-scoped.",
-      "secondary_tags": ["wrw", "realm_profile"]
+      "secondary_tags": [
+        "wrw",
+        "realm_profile"
+      ]
     },
     {
       "path": "docs/architecture/branch_event_contract.md",
@@ -821,7 +969,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This branch-event contract includes WRW paired-resonance state channels and is reference-profile semantics rather than neutral Core.",
-      "secondary_tags": ["wrw", "branch_profile"]
+      "secondary_tags": [
+        "wrw",
+        "branch_profile"
+      ]
     },
     {
       "path": "docs/architecture/celestial_identity_progression_contract.md",
@@ -829,7 +980,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This identity progression contract expresses WRW celestial-origin and paired-resonance semantics and is profile-owned.",
-      "secondary_tags": ["wrw", "player_profile"]
+      "secondary_tags": [
+        "wrw",
+        "player_profile"
+      ]
     },
     {
       "path": "docs/architecture/location_mutation_rule_contract.md",
@@ -837,7 +991,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This location mutation contract includes WRW paired-resonance consequences and specializes the reference profile.",
-      "secondary_tags": ["wrw", "location_profile"]
+      "secondary_tags": [
+        "wrw",
+        "location_profile"
+      ]
     },
     {
       "path": "docs/architecture/location_state_resolver_contract.md",
@@ -845,7 +1002,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This location resolver consumes WRW paired-resonance context and therefore remains a reference-profile contract.",
-      "secondary_tags": ["wrw", "location_profile"]
+      "secondary_tags": [
+        "wrw",
+        "location_profile"
+      ]
     },
     {
       "path": "docs/architecture/plane_attunement_runtime_contract.md",
@@ -853,7 +1013,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This runtime attunement contract depends on the WRW named-realm projection and is not universal Core behavior.",
-      "secondary_tags": ["wrw", "realm_profile"]
+      "secondary_tags": [
+        "wrw",
+        "realm_profile"
+      ]
     },
     {
       "path": "docs/architecture/player_memory_and_action_trace_contract.md",
@@ -861,7 +1024,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This memory and action trace contract includes WRW paired-resonance channels and remains profile-scoped.",
-      "secondary_tags": ["wrw", "player_profile"]
+      "secondary_tags": [
+        "wrw",
+        "player_profile"
+      ]
     },
     {
       "path": "docs/architecture/player_runtime_state_contract.md",
@@ -869,7 +1035,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This runtime-state contract binds WRW player phases, location fixtures, and paired-resonance behavior and is profile-owned.",
-      "secondary_tags": ["wrw", "player_profile"]
+      "secondary_tags": [
+        "wrw",
+        "player_profile"
+      ]
     },
     {
       "path": "docs/architecture/player_runtime_state_v1.md",
@@ -877,7 +1046,10 @@
       "owner_role": "WRW reference-profile maintainers",
       "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
       "rationale": "This player runtime design defines WRW origin-memory and paired-wolf progression semantics and therefore belongs to the reference profile.",
-      "secondary_tags": ["wrw", "player_profile"]
+      "secondary_tags": [
+        "wrw",
+        "player_profile"
+      ]
     },
     {
       "path": "data/pattern_archetypes/README.md",
@@ -885,7 +1057,10 @@
       "owner_role": "Feature-profile maintainers",
       "governing_source": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
       "rationale": "This routing document describes YWE-owned downstream archetype mappings constrained by, but excluded from, the pinned ASH dependency identity.",
-      "secondary_tags": ["extension_profile", "pattern_mapping"]
+      "secondary_tags": [
+        "extension_profile",
+        "pattern_mapping"
+      ]
     },
     {
       "path": "data/pattern_archetypes/ash_codeword_projection.yaml",
@@ -893,7 +1068,10 @@
       "owner_role": "Feature-profile maintainers",
       "governing_source": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
       "rationale": "This artifact maps pinned ASH codeword-derived input into YWE extension pressure records and is excluded from upstream dependency identity.",
-      "secondary_tags": ["extension_profile", "pattern_mapping"]
+      "secondary_tags": [
+        "extension_profile",
+        "pattern_mapping"
+      ]
     },
     {
       "path": "data/pattern_archetypes/ash_pattern_registry_schema.yaml",
@@ -901,7 +1079,10 @@
       "owner_role": "Feature-profile maintainers",
       "governing_source": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
       "rationale": "This YWE-owned schema validates downstream extension mappings and does not define or enter the pinned upstream ASH identity.",
-      "secondary_tags": ["extension_profile", "pattern_mapping"]
+      "secondary_tags": [
+        "extension_profile",
+        "pattern_mapping"
+      ]
     },
     {
       "path": "data/pattern_archetypes/character_archetypes.yaml",
@@ -909,7 +1090,10 @@
       "owner_role": "Feature-profile maintainers",
       "governing_source": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
       "rationale": "This character archetype registry is a YWE-owned downstream extension mapping excluded from upstream ASH dependency identity.",
-      "secondary_tags": ["extension_profile", "pattern_mapping"]
+      "secondary_tags": [
+        "extension_profile",
+        "pattern_mapping"
+      ]
     },
     {
       "path": "data/pattern_archetypes/compatibility_matrix.yaml",
@@ -917,7 +1101,10 @@
       "owner_role": "Feature-profile maintainers",
       "governing_source": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
       "rationale": "This compatibility matrix relates YWE-owned extension archetypes and is not part of the upstream ASH specification or digest.",
-      "secondary_tags": ["extension_profile", "pattern_mapping"]
+      "secondary_tags": [
+        "extension_profile",
+        "pattern_mapping"
+      ]
     },
     {
       "path": "data/pattern_archetypes/event_archetypes.yaml",
@@ -925,7 +1112,10 @@
       "owner_role": "Feature-profile maintainers",
       "governing_source": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
       "rationale": "This event archetype registry is a YWE-owned downstream extension mapping excluded from upstream ASH dependency identity.",
-      "secondary_tags": ["extension_profile", "pattern_mapping"]
+      "secondary_tags": [
+        "extension_profile",
+        "pattern_mapping"
+      ]
     },
     {
       "path": "data/pattern_archetypes/faction_archetypes.yaml",
@@ -933,7 +1123,10 @@
       "owner_role": "Feature-profile maintainers",
       "governing_source": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
       "rationale": "This faction archetype registry is a YWE-owned downstream extension mapping excluded from upstream ASH dependency identity.",
-      "secondary_tags": ["extension_profile", "pattern_mapping"]
+      "secondary_tags": [
+        "extension_profile",
+        "pattern_mapping"
+      ]
     },
     {
       "path": "data/pattern_archetypes/generation_rules.yaml",
@@ -941,7 +1134,10 @@
       "owner_role": "Feature-profile maintainers",
       "governing_source": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
       "rationale": "These rules govern YWE extension mapping and evaluation downstream of pinned ASH input, not upstream symbolic meaning.",
-      "secondary_tags": ["extension_profile", "pattern_mapping"]
+      "secondary_tags": [
+        "extension_profile",
+        "pattern_mapping"
+      ]
     },
     {
       "path": "data/pattern_archetypes/pattern_clusters.yaml",
@@ -949,7 +1145,10 @@
       "owner_role": "Feature-profile maintainers",
       "governing_source": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
       "rationale": "This cluster registry combines YWE-owned extension mappings and is excluded from upstream ASH dependency identity.",
-      "secondary_tags": ["extension_profile", "pattern_mapping"]
+      "secondary_tags": [
+        "extension_profile",
+        "pattern_mapping"
+      ]
     },
     {
       "path": "data/pattern_archetypes/pattern_schema.json",
@@ -957,7 +1156,10 @@
       "owner_role": "Feature-profile maintainers",
       "governing_source": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
       "rationale": "This record shape belongs to the YWE-owned downstream archetype extension and does not define pinned ASH grammar.",
-      "secondary_tags": ["extension_profile", "pattern_mapping"]
+      "secondary_tags": [
+        "extension_profile",
+        "pattern_mapping"
+      ]
     },
     {
       "path": "data/pattern_archetypes/region_archetypes.yaml",
@@ -965,7 +1167,10 @@
       "owner_role": "Feature-profile maintainers",
       "governing_source": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
       "rationale": "This region archetype registry is a YWE-owned downstream extension mapping excluded from upstream ASH dependency identity.",
-      "secondary_tags": ["extension_profile", "pattern_mapping"]
+      "secondary_tags": [
+        "extension_profile",
+        "pattern_mapping"
+      ]
     },
     {
       "path": "data/pattern_archetypes/transformation_archetypes.yaml",
@@ -973,7 +1178,10 @@
       "owner_role": "Feature-profile maintainers",
       "governing_source": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
       "rationale": "This transformation archetype registry is a YWE-owned downstream extension mapping excluded from upstream ASH dependency identity.",
-      "secondary_tags": ["extension_profile", "pattern_mapping"]
+      "secondary_tags": [
+        "extension_profile",
+        "pattern_mapping"
+      ]
     },
     {
       "path": "adapters/godot/activation_policy_notes.md",
@@ -1353,7 +1561,10 @@
       "owner_role": "Repository governance maintainers",
       "governing_source": "docs/project/scope_partition_map.md",
       "rationale": "This M1 schema validates the governed, content-addressed ASH dependency identity.",
-      "secondary_tags": ["governance", "m1"]
+      "secondary_tags": [
+        "governance",
+        "m1"
+      ]
     },
     {
       "path": "data/schemas/canonical_term_index_schema.json",
@@ -1361,7 +1572,10 @@
       "owner_role": "Repository governance maintainers",
       "governing_source": "docs/project/scope_partition_map.md",
       "rationale": "This M1 schema validates the canonical terminology governance index.",
-      "secondary_tags": ["governance", "m1"]
+      "secondary_tags": [
+        "governance",
+        "m1"
+      ]
     },
     {
       "path": "data/schemas/governance_record_register_schema.json",
@@ -1369,7 +1583,10 @@
       "owner_role": "Repository governance maintainers",
       "governing_source": "docs/project/scope_partition_map.md",
       "rationale": "This M1 schema validates durable typed governance records and their lifecycle contract.",
-      "secondary_tags": ["governance", "m1"]
+      "secondary_tags": [
+        "governance",
+        "m1"
+      ]
     },
     {
       "path": "data/schemas/m1_acceptance_evidence_schema.json",
@@ -1377,7 +1594,10 @@
       "owner_role": "Repository governance maintainers",
       "governing_source": "docs/project/scope_partition_map.md",
       "rationale": "This schema defines the M1 milestone acceptance evidence contract rather than an accepted historical outcome.",
-      "secondary_tags": ["governance", "m1"]
+      "secondary_tags": [
+        "governance",
+        "m1"
+      ]
     },
     {
       "path": "data/schemas/normative_requirement_register_schema.json",
@@ -1385,7 +1605,10 @@
       "owner_role": "Repository governance maintainers",
       "governing_source": "docs/project/scope_partition_map.md",
       "rationale": "This M1 schema validates stable normative requirement identifiers and their authority metadata.",
-      "secondary_tags": ["governance", "m1"]
+      "secondary_tags": [
+        "governance",
+        "m1"
+      ]
     },
     {
       "path": "data/schemas/perception_layer_persistence_schema.json",
@@ -1429,7 +1652,10 @@
       "owner_role": "Repository governance maintainers",
       "governing_source": "docs/project/scope_partition_map.md",
       "rationale": "This M1 schema validates the canonical truth-authority lattice and its governed relationships.",
-      "secondary_tags": ["governance", "m1"]
+      "secondary_tags": [
+        "governance",
+        "m1"
+      ]
     },
     {
       "path": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
@@ -1560,7 +1786,10 @@
       "owner_role": "Repository governance maintainers",
       "governing_source": "docs/project/scope_partition_map.md",
       "rationale": "This M1 contract governs authority precedence and validation across semantic scopes.",
-      "secondary_tags": ["governance", "m1"]
+      "secondary_tags": [
+        "governance",
+        "m1"
+      ]
     },
     {
       "path": "docs/architecture/ywe_core_wrw_scope_contract.md",
@@ -1568,7 +1797,11 @@
       "owner_role": "Repository governance maintainers",
       "governing_source": "docs/project/scope_partition_map.md",
       "rationale": "This M1 contract governs the boundary between reusable YWE Core semantics and the WRW reference profile.",
-      "secondary_tags": ["governance", "m1", "scope_boundary"]
+      "secondary_tags": [
+        "governance",
+        "m1",
+        "scope_boundary"
+      ]
     },
     {
       "path": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
@@ -1907,7 +2140,7 @@
       "ywe_extension_profile": 121,
       "ash_dependency_material": 66,
       "wrw_reference_profile": 289,
-      "governance_validation": 339,
+      "governance_validation": 403,
       "historical_evidence": 19,
       "later_release_work": 59
     }
