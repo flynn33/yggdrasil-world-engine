@@ -1,0 +1,46 @@
+{
+  "record_kind": "planning_branch_reconciliation_checks",
+  "date": "2026-09-19",
+  "first_parent": "9fd7625241fee529452570cca6f1742cb6976856",
+  "second_parent": "c4d505b71e4db829fdb1b84f3c368bf164ea8c31",
+  "main_observed": "2db1230f638cd065d791c05f1adb7b4b51505c57",
+  "json_comparison_method": "Parse current UTF-8 JSON; compact with ensure_ascii=true, sort_keys=false, separators comma/colon; append LF; match Git blob SHA-1 to earlier remote blob.",
+  "json_matches": [
+    {"path":"m2/ash-values/candidate-decisions.json","current_blob":"3b64cb74cfba516bc8688f943c0f94af90cde079","earlier_blob":"2f5e7c52160a3636681fecbfb17b0b019cc21d3a","match":true},
+    {"path":"m2/ash-values/fixtures/catalog.json","current_blob":"f9b8e55eb111857c7f201bf840a0b12843a39a09","earlier_blob":"c819950b988721c94d1cb2496455e26be5e4b58a","match":true},
+    {"path":"m2/ash-values/fixtures/instances.json","current_blob":"e46fb2ae4199d22bb8653baa5ab284f61966cb8d","earlier_blob":"e104e98771b7ddd9134dfe4e2cd6704fe0c421bd","match":true},
+    {"path":"m2/ash-values/fixtures/pinned-codewords.json","current_blob":"d1216190d50feeb7ab46bb0884285a1407eff244","earlier_blob":"36ad8d0638847baa4238e1f08f0fe90ef83df6b3","match":true},
+    {"path":"m2/ash-values/fixtures/raw-json-cases.json","current_blob":"cb3f30ac9becdf82342abdf135fc212e52a81e88","earlier_blob":"90b5c3a781bb357d9b289d299929c4c6b8aafe5c","match":true},
+    {"path":"m2/ash-values/schemas/ash-values.candidate.schema.json","current_blob":"d68bc368615721680809bb8e2003ae30c998b7bb","earlier_blob":"b9a4884ae92846570728533872349e75ae167a05","match":true},
+    {"path":"m2/ash-values/schemas/catalog.json","current_blob":"4c8ad07f80f564fe594fd8c2b4ddd5fe30a34f0c","earlier_blob":"a3a7d4a40beab724870ce09aecf11ed3f536e6b8","match":true},
+    {"path":"m2/readiness/source-register.json","current_blob":"b241b352b25f12f8f4fc0bfc1a071d36e0e7c2e7","earlier_blob":"3240954596a2738379e393c79dd9a0d331a2802d","match":true}
+  ],
+  "identical_verification_blobs": {
+    "requirements.txt":"8790ebe281089c679686d0689ecd59080899c3cb",
+    "value_model.py":"bc85a5735174f93a5552607dff3be71fca0eb3d1",
+    "verify_contract.py":"b07f0467d8388c29b6ba3d924b1b076d4d1242aa"
+  },
+  "candidate_contract": {
+    "earlier_blob":"c1d01af680353e003a0ea7e008d9030e757499fb",
+    "current_blob":"f4e6a279b0553b9854894ed4af3792b848401038",
+    "observed_difference":"Relative path to M2_Packet_Contract.prepared.md now includes ../readiness/; all other lines equal."
+  },
+  "fresh_candidate_execution": {
+    "date":"2026-09-19",
+    "command":"PYTHONDONTWRITEBYTECODE=1 python verification/verify_contract.py --report <new external report path>",
+    "scope":"Hash-matched isolated candidate only; no product checkout or main-integration claim.",
+    "python":"3.13.5",
+    "jsonschema":"4.26.0",
+    "referencing":"0.37.0",
+    "passed_groups":10,
+    "exit_code":0,
+    "result_sha256":"630cade04dadfc8ae236e34ffdcc1238703695b856b4d336fa0043d68d4ac113",
+    "matches_preserved_result":true,
+    "external_full_report_sha256":"542850adff976477b2a967ac6a78cf7e97e99b9b546d1282147fd5fed31073eb",
+    "full_report_committed":false
+  },
+  "main_integration_completed":false,
+  "full_repository_suite_executed":false,
+  "branch_deletion_performed":false,
+  "candidate_adopted":false
+}
