@@ -1,0 +1,40 @@
+{
+  "record_type": "planning_publication_checks",
+  "scope": "candidate rerun and content preservation; not whole-repository acceptance",
+  "observed_at": "2026-09-19T12:16:06.784230+00:00",
+  "source_commit": "2db1230f638cd065d791c05f1adb7b4b51505c57",
+  "candidate_result": "pass",
+  "check_groups": 10,
+  "result_sha256": "630cade04dadfc8ae236e34ffdcc1238703695b856b4d336fa0043d68d4ac113",
+  "matches_historical_result": true,
+  "full_run_report_sha256": "39f2d705ddbb6c531b06734b373069d3655a0bd71d3eac8855797b859aada9bb",
+  "environment": {
+    "python": "3.13.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "jsonschema": "4.26.0",
+    "referencing": "0.37.0",
+    "number_adapter": "ExactJsonValidator accepts exact integral Decimal values per JSON Schema integer semantics"
+  },
+  "input_sha256": {
+    "schemas/ash-values.candidate.schema.json": "079053fb382efcd70f651bb0113ecab39ec09ef08c6141b1c59040e13a6f1780",
+    "schemas/catalog.json": "58ee6daba9c86a36366a02c0b9dd24547fe67eb667594cde7c2575028022207d",
+    "fixtures/catalog.json": "e7c587f2774f5d108205b5bd8715bbefb8cbd03977e4c044c2ae3fbef5db60b1",
+    "fixtures/instances.json": "5df8810dddfc7754c4ab984369fca59133149029852473e688e4e5ee8308375e",
+    "fixtures/pinned-codewords.json": "84d5c98d8cc1cf99a1926af9a81401ed7b096a66b72688308dc19e529876b848",
+    "fixtures/raw-json-cases.json": "e29bbe60fecf8beef9fa67281aeb4d7459fb3467223d1605fb912d3d491c8605",
+    "verification/requirements.txt": "9cba6d4508d006391ab899893990d5ac5d03b4811a0f71f152c5883897ee8120",
+    "verification/value_model.py": "379260e78f59c3c00661d4aa92823a202d712be8c13c20657c8ce1f35787bd65",
+    "verification/verify_contract.py": "bba87ae6151a045b20d6705d1b18a8f1435175cee9652084e0c3bb1685861eab"
+  },
+  "ash_values_git_tree": "587a819b47a02629361e423b84d2d475884ae928",
+  "readiness_git_tree": "01a3360c5496216a930fcde38a3475f4005b3623",
+  "m2_files_preserved_from_prepared_archive": 41,
+  "full_repository_suite_run": false,
+  "candidate_approved": false,
+  "main_integration": "pending",
+  "limits": [
+    "Full run result is byte-equivalent at the results-object level to the preserved historical report; observation time differs.",
+    "Prepared content has been uploaded as Git objects; successful branch ref update/read-back is a separate persistence claim.",
+    "No requirement, source pin, runtime dependency, product version, or release gate is changed."
+  ]
+}

@@ -1,0 +1,1233 @@
+{
+  "observed_at": "2026-09-18T21:57:01.105267+00:00",
+  "environment": {
+    "python": "3.13.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "jsonschema": "4.26.0",
+    "referencing": "0.37.0",
+    "number_adapter": "ExactJsonValidator accepts exact integral Decimal values per JSON Schema integer semantics"
+  },
+  "source_commit": "2db1230f638cd065d791c05f1adb7b4b51505c57",
+  "input_sha256": {
+    "schemas/ash-values.candidate.schema.json": "079053fb382efcd70f651bb0113ecab39ec09ef08c6141b1c59040e13a6f1780",
+    "schemas/catalog.json": "58ee6daba9c86a36366a02c0b9dd24547fe67eb667594cde7c2575028022207d",
+    "fixtures/catalog.json": "e7c587f2774f5d108205b5bd8715bbefb8cbd03977e4c044c2ae3fbef5db60b1",
+    "fixtures/instances.json": "5df8810dddfc7754c4ab984369fca59133149029852473e688e4e5ee8308375e",
+    "fixtures/pinned-codewords.json": "84d5c98d8cc1cf99a1926af9a81401ed7b096a66b72688308dc19e529876b848",
+    "fixtures/raw-json-cases.json": "e29bbe60fecf8beef9fa67281aeb4d7459fb3467223d1605fb912d3d491c8605",
+    "verification/requirements.txt": "9cba6d4508d006391ab899893990d5ac5d03b4811a0f71f152c5883897ee8120",
+    "verification/value_model.py": "379260e78f59c3c00661d4aa92823a202d712be8c13c20657c8ce1f35787bd65",
+    "verification/verify_contract.py": "bba87ae6151a045b20d6705d1b18a8f1435175cee9652084e0c3bb1685861eab"
+  },
+  "result_sha256": "630cade04dadfc8ae236e34ffdcc1238703695b856b4d336fa0043d68d4ac113",
+  "results": {
+    "candidate": "YWE-ASH-VALUES-20260918-1",
+    "status": "pass",
+    "groups": [
+      {
+        "group": "schema_and_fixture_catalog",
+        "status": "pass",
+        "meta_schemas_checked": 8,
+        "bound_fixtures": 56
+      },
+      {
+        "group": "bound_fixtures_and_reasons",
+        "status": "pass",
+        "cases": 56,
+        "accepted_cases": 13,
+        "rejected_cases": 43,
+        "outcomes": [
+          {
+            "id": "state-zero",
+            "expected_valid": true,
+            "schema_valid": true,
+            "model_valid": true,
+            "model_failure": null,
+            "schema_errors": []
+          },
+          {
+            "id": "state-all-ones",
+            "expected_valid": true,
+            "schema_valid": true,
+            "model_valid": true,
+            "model_failure": null,
+            "schema_errors": []
+          },
+          {
+            "id": "state-ninth-one",
+            "expected_valid": true,
+            "schema_valid": true,
+            "model_valid": true,
+            "model_failure": null,
+            "schema_errors": []
+          },
+          {
+            "id": "state-repeated-bits",
+            "expected_valid": true,
+            "schema_valid": true,
+            "model_valid": true,
+            "model_failure": null,
+            "schema_errors": []
+          },
+          {
+            "id": "state-numeric-equivalence",
+            "expected_valid": true,
+            "schema_valid": true,
+            "model_valid": true,
+            "model_failure": null,
+            "schema_errors": []
+          },
+          {
+            "id": "state-root-null",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "RECORD_TYPE",
+              "instance_pointer": "",
+              "message": "Expected a JSON object."
+            },
+            "schema_errors": [
+              {
+                "keyword": "type",
+                "instance_pointer": "",
+                "schema_pointer": "/type"
+              }
+            ]
+          },
+          {
+            "id": "state-root-scalar",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "RECORD_TYPE",
+              "instance_pointer": "",
+              "message": "Expected a JSON object."
+            },
+            "schema_errors": [
+              {
+                "keyword": "type",
+                "instance_pointer": "",
+                "schema_pointer": "/type"
+              }
+            ]
+          },
+          {
+            "id": "state-root-array",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "RECORD_TYPE",
+              "instance_pointer": "",
+              "message": "Expected a JSON object."
+            },
+            "schema_errors": [
+              {
+                "keyword": "type",
+                "instance_pointer": "",
+                "schema_pointer": "/type"
+              }
+            ]
+          },
+          {
+            "id": "state-root-string",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "RECORD_TYPE",
+              "instance_pointer": "",
+              "message": "Expected a JSON object."
+            },
+            "schema_errors": [
+              {
+                "keyword": "type",
+                "instance_pointer": "",
+                "schema_pointer": "/type"
+              }
+            ]
+          },
+          {
+            "id": "state-root-boolean",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "RECORD_TYPE",
+              "instance_pointer": "",
+              "message": "Expected a JSON object."
+            },
+            "schema_errors": [
+              {
+                "keyword": "type",
+                "instance_pointer": "",
+                "schema_pointer": "/type"
+              }
+            ]
+          },
+          {
+            "id": "state-missing-bits",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "REQUIRED_FIELD",
+              "instance_pointer": "/bits",
+              "message": "Required member is absent."
+            },
+            "schema_errors": [
+              {
+                "keyword": "required",
+                "instance_pointer": "",
+                "schema_pointer": "/required"
+              }
+            ]
+          },
+          {
+            "id": "state-missing-space",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "REQUIRED_FIELD",
+              "instance_pointer": "/state_space",
+              "message": "Required member is absent."
+            },
+            "schema_errors": [
+              {
+                "keyword": "required",
+                "instance_pointer": "",
+                "schema_pointer": "/required"
+              }
+            ]
+          },
+          {
+            "id": "state-wrong-space",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "STATE_SPACE",
+              "instance_pointer": "/state_space",
+              "message": "Expected the exact state-space label F2^9."
+            },
+            "schema_errors": [
+              {
+                "keyword": "const",
+                "instance_pointer": "/state_space",
+                "schema_pointer": "/properties/state_space/const"
+              }
+            ]
+          },
+          {
+            "id": "state-bits-short",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "BIT_WIDTH",
+              "instance_pointer": "/bits",
+              "message": "Exactly nine coordinates are required."
+            },
+            "schema_errors": [
+              {
+                "keyword": "minItems",
+                "instance_pointer": "/bits",
+                "schema_pointer": "/properties/bits/minItems"
+              }
+            ]
+          },
+          {
+            "id": "state-bits-long",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "BIT_WIDTH",
+              "instance_pointer": "/bits",
+              "message": "Exactly nine coordinates are required."
+            },
+            "schema_errors": [
+              {
+                "keyword": "maxItems",
+                "instance_pointer": "/bits",
+                "schema_pointer": "/properties/bits/maxItems"
+              }
+            ]
+          },
+          {
+            "id": "state-bits-empty",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "BIT_WIDTH",
+              "instance_pointer": "/bits",
+              "message": "Exactly nine coordinates are required."
+            },
+            "schema_errors": [
+              {
+                "keyword": "minItems",
+                "instance_pointer": "/bits",
+                "schema_pointer": "/properties/bits/minItems"
+              }
+            ]
+          },
+          {
+            "id": "state-bits-text",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "BITS_TYPE",
+              "instance_pointer": "/bits",
+              "message": "Expected an ordered JSON array."
+            },
+            "schema_errors": [
+              {
+                "keyword": "type",
+                "instance_pointer": "/bits",
+                "schema_pointer": "/properties/bits/type"
+              }
+            ]
+          },
+          {
+            "id": "state-bits-null",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "BITS_TYPE",
+              "instance_pointer": "/bits",
+              "message": "Expected an ordered JSON array."
+            },
+            "schema_errors": [
+              {
+                "keyword": "type",
+                "instance_pointer": "/bits",
+                "schema_pointer": "/properties/bits/type"
+              }
+            ]
+          },
+          {
+            "id": "state-bit-two",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "BIT_VALUE",
+              "instance_pointer": "/bits/0",
+              "message": "Expected a numeric value exactly equal to 0 or 1."
+            },
+            "schema_errors": [
+              {
+                "keyword": "enum",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/enum"
+              }
+            ]
+          },
+          {
+            "id": "state-bit-negative",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "BIT_VALUE",
+              "instance_pointer": "/bits/0",
+              "message": "Expected a numeric value exactly equal to 0 or 1."
+            },
+            "schema_errors": [
+              {
+                "keyword": "enum",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/enum"
+              }
+            ]
+          },
+          {
+            "id": "state-bit-fraction",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "BIT_VALUE",
+              "instance_pointer": "/bits/0",
+              "message": "Expected a numeric value exactly equal to 0 or 1."
+            },
+            "schema_errors": [
+              {
+                "keyword": "enum",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/enum"
+              },
+              {
+                "keyword": "type",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/type"
+              }
+            ]
+          },
+          {
+            "id": "state-bit-bool",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "BIT_VALUE",
+              "instance_pointer": "/bits/0",
+              "message": "Expected a numeric value exactly equal to 0 or 1."
+            },
+            "schema_errors": [
+              {
+                "keyword": "enum",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/enum"
+              },
+              {
+                "keyword": "type",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/type"
+              }
+            ]
+          },
+          {
+            "id": "state-bit-false",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "BIT_VALUE",
+              "instance_pointer": "/bits/0",
+              "message": "Expected a numeric value exactly equal to 0 or 1."
+            },
+            "schema_errors": [
+              {
+                "keyword": "enum",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/enum"
+              },
+              {
+                "keyword": "type",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/type"
+              }
+            ]
+          },
+          {
+            "id": "state-bit-text",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "BIT_VALUE",
+              "instance_pointer": "/bits/0",
+              "message": "Expected a numeric value exactly equal to 0 or 1."
+            },
+            "schema_errors": [
+              {
+                "keyword": "enum",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/enum"
+              },
+              {
+                "keyword": "type",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/type"
+              }
+            ]
+          },
+          {
+            "id": "state-bit-null",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "BIT_VALUE",
+              "instance_pointer": "/bits/0",
+              "message": "Expected a numeric value exactly equal to 0 or 1."
+            },
+            "schema_errors": [
+              {
+                "keyword": "enum",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/enum"
+              },
+              {
+                "keyword": "type",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/type"
+              }
+            ]
+          },
+          {
+            "id": "state-bit-object",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "BIT_VALUE",
+              "instance_pointer": "/bits/0",
+              "message": "Expected a numeric value exactly equal to 0 or 1."
+            },
+            "schema_errors": [
+              {
+                "keyword": "enum",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/enum"
+              },
+              {
+                "keyword": "type",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/type"
+              }
+            ]
+          },
+          {
+            "id": "state-bit-array",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "BIT_VALUE",
+              "instance_pointer": "/bits/0",
+              "message": "Expected a numeric value exactly equal to 0 or 1."
+            },
+            "schema_errors": [
+              {
+                "keyword": "enum",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/enum"
+              },
+              {
+                "keyword": "type",
+                "instance_pointer": "/bits/0",
+                "schema_pointer": "/properties/bits/items/type"
+              }
+            ]
+          },
+          {
+            "id": "state-unknown-member",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "UNKNOWN_FIELD",
+              "instance_pointer": "/extra",
+              "message": "This narrow record has no extension members."
+            },
+            "schema_errors": [
+              {
+                "keyword": "additionalProperties",
+                "instance_pointer": "",
+                "schema_pointer": "/additionalProperties"
+              }
+            ]
+          },
+          {
+            "id": "state-do-not-infer-membership",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "UNKNOWN_FIELD",
+              "instance_pointer": "/membership",
+              "message": "This narrow record has no extension members."
+            },
+            "schema_errors": [
+              {
+                "keyword": "additionalProperties",
+                "instance_pointer": "",
+                "schema_pointer": "/additionalProperties"
+              }
+            ]
+          },
+          {
+            "id": "codeword-zero",
+            "expected_valid": true,
+            "schema_valid": true,
+            "model_valid": true,
+            "model_failure": null,
+            "schema_errors": []
+          },
+          {
+            "id": "codeword-last",
+            "expected_valid": true,
+            "schema_valid": true,
+            "model_valid": true,
+            "model_failure": null,
+            "schema_errors": []
+          },
+          {
+            "id": "codeword-numeric-equivalence",
+            "expected_valid": true,
+            "schema_valid": true,
+            "model_valid": true,
+            "model_failure": null,
+            "schema_errors": []
+          },
+          {
+            "id": "codeword-nonmember-claim",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "CODEWORD_MEMBERSHIP",
+              "instance_pointer": "/bits",
+              "message": "Vector is not in the pinned set."
+            },
+            "schema_errors": [
+              {
+                "keyword": "enum",
+                "instance_pointer": "/bits",
+                "schema_pointer": "/properties/bits/enum"
+              }
+            ]
+          },
+          {
+            "id": "codeword-parity-is-insufficient",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "CODEWORD_MEMBERSHIP",
+              "instance_pointer": "/bits",
+              "message": "Vector is not in the pinned set."
+            },
+            "schema_errors": [
+              {
+                "keyword": "enum",
+                "instance_pointer": "/bits",
+                "schema_pointer": "/properties/bits/enum"
+              }
+            ]
+          },
+          {
+            "id": "codeword-ninth-one",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "CODEWORD_MEMBERSHIP",
+              "instance_pointer": "/bits",
+              "message": "Vector is not in the pinned set."
+            },
+            "schema_errors": [
+              {
+                "keyword": "enum",
+                "instance_pointer": "/bits",
+                "schema_pointer": "/properties/bits/enum"
+              }
+            ]
+          },
+          {
+            "id": "codeword-missing-membership",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "REQUIRED_FIELD",
+              "instance_pointer": "/membership",
+              "message": "Required member is absent."
+            },
+            "schema_errors": [
+              {
+                "keyword": "required",
+                "instance_pointer": "",
+                "schema_pointer": "/required"
+              }
+            ]
+          },
+          {
+            "id": "codeword-membership-false",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "MEMBERSHIP_ASSERTION",
+              "instance_pointer": "/membership",
+              "message": "Expected the Boolean true assertion."
+            },
+            "schema_errors": [
+              {
+                "keyword": "const",
+                "instance_pointer": "/membership",
+                "schema_pointer": "/properties/membership/const"
+              }
+            ]
+          },
+          {
+            "id": "codeword-membership-integer",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "MEMBERSHIP_ASSERTION",
+              "instance_pointer": "/membership",
+              "message": "Expected the Boolean true assertion."
+            },
+            "schema_errors": [
+              {
+                "keyword": "const",
+                "instance_pointer": "/membership",
+                "schema_pointer": "/properties/membership/const"
+              },
+              {
+                "keyword": "type",
+                "instance_pointer": "/membership",
+                "schema_pointer": "/properties/membership/type"
+              }
+            ]
+          },
+          {
+            "id": "codeword-membership-string",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "MEMBERSHIP_ASSERTION",
+              "instance_pointer": "/membership",
+              "message": "Expected the Boolean true assertion."
+            },
+            "schema_errors": [
+              {
+                "keyword": "const",
+                "instance_pointer": "/membership",
+                "schema_pointer": "/properties/membership/const"
+              },
+              {
+                "keyword": "type",
+                "instance_pointer": "/membership",
+                "schema_pointer": "/properties/membership/type"
+              }
+            ]
+          },
+          {
+            "id": "codeword-membership-null",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "MEMBERSHIP_ASSERTION",
+              "instance_pointer": "/membership",
+              "message": "Expected the Boolean true assertion."
+            },
+            "schema_errors": [
+              {
+                "keyword": "const",
+                "instance_pointer": "/membership",
+                "schema_pointer": "/properties/membership/const"
+              },
+              {
+                "keyword": "type",
+                "instance_pointer": "/membership",
+                "schema_pointer": "/properties/membership/type"
+              }
+            ]
+          },
+          {
+            "id": "codeword-unknown-member",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "UNKNOWN_FIELD",
+              "instance_pointer": "/extra",
+              "message": "This narrow record has no extension members."
+            },
+            "schema_errors": [
+              {
+                "keyword": "additionalProperties",
+                "instance_pointer": "",
+                "schema_pointer": "/additionalProperties"
+              }
+            ]
+          },
+          {
+            "id": "signature-zero",
+            "expected_valid": true,
+            "schema_valid": true,
+            "model_valid": true,
+            "model_failure": null,
+            "schema_errors": []
+          },
+          {
+            "id": "signature-ninth-one",
+            "expected_valid": true,
+            "schema_valid": true,
+            "model_valid": true,
+            "model_failure": null,
+            "schema_errors": []
+          },
+          {
+            "id": "signature-leading-space",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "SIGNATURE",
+              "instance_pointer": "",
+              "message": "Expected exactly nine ASCII binary digits."
+            },
+            "schema_errors": [
+              {
+                "keyword": "maxLength",
+                "instance_pointer": "",
+                "schema_pointer": "/maxLength"
+              },
+              {
+                "keyword": "pattern",
+                "instance_pointer": "",
+                "schema_pointer": "/pattern"
+              }
+            ]
+          },
+          {
+            "id": "signature-trailing-space",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "SIGNATURE",
+              "instance_pointer": "",
+              "message": "Expected exactly nine ASCII binary digits."
+            },
+            "schema_errors": [
+              {
+                "keyword": "maxLength",
+                "instance_pointer": "",
+                "schema_pointer": "/maxLength"
+              },
+              {
+                "keyword": "pattern",
+                "instance_pointer": "",
+                "schema_pointer": "/pattern"
+              }
+            ]
+          },
+          {
+            "id": "signature-newline",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "SIGNATURE",
+              "instance_pointer": "",
+              "message": "Expected exactly nine ASCII binary digits."
+            },
+            "schema_errors": [
+              {
+                "keyword": "maxLength",
+                "instance_pointer": "",
+                "schema_pointer": "/maxLength"
+              }
+            ]
+          },
+          {
+            "id": "signature-short",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "SIGNATURE",
+              "instance_pointer": "",
+              "message": "Expected exactly nine ASCII binary digits."
+            },
+            "schema_errors": [
+              {
+                "keyword": "minLength",
+                "instance_pointer": "",
+                "schema_pointer": "/minLength"
+              },
+              {
+                "keyword": "pattern",
+                "instance_pointer": "",
+                "schema_pointer": "/pattern"
+              }
+            ]
+          },
+          {
+            "id": "signature-nonbinary",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "SIGNATURE",
+              "instance_pointer": "",
+              "message": "Expected exactly nine ASCII binary digits."
+            },
+            "schema_errors": [
+              {
+                "keyword": "pattern",
+                "instance_pointer": "",
+                "schema_pointer": "/pattern"
+              }
+            ]
+          },
+          {
+            "id": "signature-unicode",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "SIGNATURE",
+              "instance_pointer": "",
+              "message": "Expected exactly nine ASCII binary digits."
+            },
+            "schema_errors": [
+              {
+                "keyword": "pattern",
+                "instance_pointer": "",
+                "schema_pointer": "/pattern"
+              }
+            ]
+          },
+          {
+            "id": "signature-array",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "SIGNATURE",
+              "instance_pointer": "",
+              "message": "Expected exactly nine ASCII binary digits."
+            },
+            "schema_errors": [
+              {
+                "keyword": "type",
+                "instance_pointer": "",
+                "schema_pointer": "/type"
+              }
+            ]
+          },
+          {
+            "id": "codeword-signature-member",
+            "expected_valid": true,
+            "schema_valid": true,
+            "model_valid": true,
+            "model_failure": null,
+            "schema_errors": []
+          },
+          {
+            "id": "codeword-signature-nonmember",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "CODEWORD_MEMBERSHIP",
+              "instance_pointer": "",
+              "message": "The vector is not in the pinned canonical set."
+            },
+            "schema_errors": [
+              {
+                "keyword": "enum",
+                "instance_pointer": "",
+                "schema_pointer": "/enum"
+              }
+            ]
+          },
+          {
+            "id": "sequence-empty",
+            "expected_valid": true,
+            "schema_valid": true,
+            "model_valid": true,
+            "model_failure": null,
+            "schema_errors": []
+          },
+          {
+            "id": "sequence-repeats",
+            "expected_valid": true,
+            "schema_valid": true,
+            "model_valid": true,
+            "model_failure": null,
+            "schema_errors": []
+          },
+          {
+            "id": "sequence-wrong-root",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "SEQUENCE_TYPE",
+              "instance_pointer": "",
+              "message": "Expected an ordered JSON array."
+            },
+            "schema_errors": [
+              {
+                "keyword": "type",
+                "instance_pointer": "",
+                "schema_pointer": "/type"
+              }
+            ]
+          },
+          {
+            "id": "sequence-bad-member",
+            "expected_valid": false,
+            "schema_valid": false,
+            "model_valid": false,
+            "model_failure": {
+              "code": "CODEWORD_MEMBERSHIP",
+              "instance_pointer": "/1",
+              "message": "The vector is not in the pinned canonical set."
+            },
+            "schema_errors": [
+              {
+                "keyword": "enum",
+                "instance_pointer": "/1",
+                "schema_pointer": "/items/enum"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "group": "pinned_canonical_set",
+        "status": "pass",
+        "enumerated_members": 16,
+        "generator_combinations": 16,
+        "pairwise_closure_cases": 256,
+        "ordered_signatures": [
+          "000000000",
+          "000011110",
+          "001100110",
+          "001111000",
+          "010101010",
+          "010110100",
+          "011001100",
+          "011010010",
+          "100101100",
+          "100110010",
+          "101001010",
+          "101010100",
+          "110000110",
+          "110011000",
+          "111100000",
+          "111111110"
+        ]
+      },
+      {
+        "group": "exhaustive_values_and_round_trips",
+        "status": "pass",
+        "state_records": 512,
+        "state_signatures": 512,
+        "codeword_candidates": 512,
+        "accepted_codewords": 16,
+        "rejected_nonmembers": 496,
+        "state_round_trips": 512,
+        "codeword_round_trips": 16,
+        "canonical_wire_corpus_sha256": "ab065daf3b1081b9987da97fb4c3c78b072c852444cce0e46048f5ad47342f57"
+      },
+      {
+        "group": "exhaustive_transformations",
+        "status": "pass",
+        "state_codeword_pairs": 8192,
+        "involution_cases": 8192,
+        "originals_unchanged_cases": 8192,
+        "transformation_corpus_sha256": "5d5e6e612c07c5e0afc9f864f0ffbc2d51b891629bc4ae8e548e628dec662c0d"
+      },
+      {
+        "group": "raw_json_and_numeric_precision",
+        "status": "pass",
+        "raw_json_cases": 12,
+        "invalid_utf8_case": "rejected",
+        "probe_only_budget_case": "rejected",
+        "outcomes": [
+          {
+            "id": "raw-integral-numbers",
+            "valid": true,
+            "parsed": true,
+            "schema_valid": true,
+            "failure": null
+          },
+          {
+            "id": "raw-rounded-fraction",
+            "valid": false,
+            "parsed": true,
+            "schema_valid": false,
+            "failure": "BIT_VALUE"
+          },
+          {
+            "id": "raw-underflow-fraction",
+            "valid": false,
+            "parsed": true,
+            "schema_valid": false,
+            "failure": "BIT_VALUE"
+          },
+          {
+            "id": "raw-duplicate-key",
+            "valid": false,
+            "parsed": false,
+            "schema_valid": null,
+            "failure": "DUPLICATE_KEY"
+          },
+          {
+            "id": "raw-duplicate-escaped-key",
+            "valid": false,
+            "parsed": false,
+            "schema_valid": null,
+            "failure": "DUPLICATE_KEY"
+          },
+          {
+            "id": "raw-nan",
+            "valid": false,
+            "parsed": false,
+            "schema_valid": null,
+            "failure": "JSON_SYNTAX"
+          },
+          {
+            "id": "raw-infinity",
+            "valid": false,
+            "parsed": false,
+            "schema_valid": null,
+            "failure": "JSON_SYNTAX"
+          },
+          {
+            "id": "raw-truncated",
+            "valid": false,
+            "parsed": false,
+            "schema_valid": null,
+            "failure": "JSON_SYNTAX"
+          },
+          {
+            "id": "raw-non-json",
+            "valid": false,
+            "parsed": false,
+            "schema_valid": null,
+            "failure": "JSON_SYNTAX"
+          },
+          {
+            "id": "raw-leading-zero",
+            "valid": false,
+            "parsed": false,
+            "schema_valid": null,
+            "failure": "JSON_SYNTAX"
+          },
+          {
+            "id": "raw-trailing-data",
+            "valid": false,
+            "parsed": false,
+            "schema_valid": null,
+            "failure": "JSON_SYNTAX"
+          },
+          {
+            "id": "raw-trailing-whitespace",
+            "valid": true,
+            "parsed": true,
+            "schema_valid": true,
+            "failure": null
+          }
+        ]
+      },
+      {
+        "group": "ownership_and_order",
+        "status": "pass",
+        "checks": 12,
+        "scope": "input/output aliasing, frozen fields, guarded construction, typed transform, order and duplicates"
+      },
+      {
+        "group": "root_dispatch",
+        "status": "pass",
+        "cases": 41,
+        "limitation": "Root union admits either record; consumers requiring a codeword must use its bound schema/decoder."
+      },
+      {
+        "group": "mutation_detection",
+        "status": "pass",
+        "introduced_faults": 10,
+        "detected_faults": 10,
+        "outcomes": [
+          {
+            "mutation": "missing-minItems",
+            "detected_by": [
+              "state-bits-short",
+              "state-bits-empty"
+            ]
+          },
+          {
+            "mutation": "missing-maxItems",
+            "detected_by": [
+              "state-bits-long"
+            ]
+          },
+          {
+            "mutation": "nonbinary-allowed",
+            "detected_by": [
+              "state-bit-two"
+            ]
+          },
+          {
+            "mutation": "membership-not-checked",
+            "detected_by": [
+              "codeword-nonmember-claim",
+              "codeword-parity-is-insufficient",
+              "codeword-ninth-one"
+            ]
+          },
+          {
+            "mutation": "wrong-space-allowed",
+            "detected_by": [
+              "state-wrong-space"
+            ]
+          },
+          {
+            "mutation": "missing-bits-allowed",
+            "detected_by": [
+              "state-missing-bits"
+            ]
+          },
+          {
+            "mutation": "unknown-fields-allowed",
+            "detected_by": [
+              "state-unknown-member",
+              "state-do-not-infer-membership"
+            ]
+          },
+          {
+            "mutation": "boolean-metadata-lift",
+            "detected_by": [
+              "codeword-zero",
+              "codeword-last",
+              "codeword-numeric-equivalence"
+            ]
+          },
+          {
+            "mutation": "signature-alphabet-unchecked",
+            "detected_by": [
+              "signature-nonbinary",
+              "signature-unicode"
+            ]
+          },
+          {
+            "mutation": "ninth-state-bit-forced-zero",
+            "detected_by": [
+              "state-all-ones",
+              "state-ninth-one",
+              "state-bit-two",
+              "state-bit-negative",
+              "state-bit-fraction",
+              "state-bit-bool",
+              "state-bit-false",
+              "state-bit-text",
+              "state-bit-null",
+              "state-bit-object",
+              "state-bit-array"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "offline_reference_policy",
+        "status": "pass",
+        "normal_validation_external_retrievals": 0,
+        "deliberately_unresolved_reference": "blocked locally before network access"
+      }
+    ]
+  },
+  "limits": [
+    "External review prototype only; not integrated product behavior.",
+    "No full repository suite, independent reviewer acceptance, or realization preflight.",
+    "No recovery, admissibility, game, platform, or release acceptance."
+  ]
+}

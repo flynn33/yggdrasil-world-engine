@@ -1,0 +1,128 @@
+{
+  "status": "diagnostic-order-review",
+  "scope": "Probe report diagnostics, not product state",
+  "record_differences": [
+    {
+      "record": "AshState",
+      "first": {
+        "record": "AshState",
+        "standalone_meta_valid": false,
+        "record_pointer": "/records/AshState",
+        "error_pointer": "/properties/bits",
+        "message": "'full_9_bit_vector' is not of type 'object', 'boolean'"
+      },
+      "repeat": {
+        "record": "AshState",
+        "standalone_meta_valid": false,
+        "record_pointer": "/records/AshState",
+        "error_pointer": "/properties/state_space",
+        "message": "'F2^9' is not of type 'object', 'boolean'"
+      }
+    },
+    {
+      "record": "CanonicalCodeword",
+      "first": {
+        "record": "CanonicalCodeword",
+        "standalone_meta_valid": false,
+        "record_pointer": "/records/CanonicalCodeword",
+        "error_pointer": "/properties/membership",
+        "message": "'must_be_member_of_canonical_C' is not of type 'object', 'boolean'"
+      },
+      "repeat": {
+        "record": "CanonicalCodeword",
+        "standalone_meta_valid": false,
+        "record_pointer": "/records/CanonicalCodeword",
+        "error_pointer": "/properties/state_space",
+        "message": "'F2^9' is not of type 'object', 'boolean'"
+      }
+    },
+    {
+      "record": "CosmicPatternSnapshot",
+      "first": {
+        "record": "CosmicPatternSnapshot",
+        "standalone_meta_valid": false,
+        "record_pointer": "/records/CosmicPatternSnapshot",
+        "error_pointer": "/properties/generation_plan_ref",
+        "message": "'GenerationPlan | null' is not of type 'object', 'boolean'"
+      },
+      "repeat": {
+        "record": "CosmicPatternSnapshot",
+        "standalone_meta_valid": false,
+        "record_pointer": "/records/CosmicPatternSnapshot",
+        "error_pointer": "/properties/diagnostic_ref",
+        "message": "'DiagnosticEnvelope' is not of type 'object', 'boolean'"
+      }
+    },
+    {
+      "record": "DiagnosticEnvelope",
+      "first": {
+        "record": "DiagnosticEnvelope",
+        "standalone_meta_valid": false,
+        "record_pointer": "/records/DiagnosticEnvelope",
+        "error_pointer": "/properties/rule_id_taxonomy",
+        "message": "'specs/interfaces/rule-id-taxonomy.md' is not of type 'object', 'boolean'"
+      },
+      "repeat": {
+        "record": "DiagnosticEnvelope",
+        "standalone_meta_valid": false,
+        "record_pointer": "/records/DiagnosticEnvelope",
+        "error_pointer": "/properties/state_validity_schema",
+        "message": "'specs/interfaces/diagnostic-schema.md' is not of type 'object', 'boolean'"
+      }
+    },
+    {
+      "record": "GenerationPlan",
+      "first": {
+        "record": "GenerationPlan",
+        "standalone_meta_valid": false,
+        "record_pointer": "/records/GenerationPlan",
+        "error_pointer": "/properties/source_state_identity",
+        "message": "'Canonical StateIdentity for the normalized source state' is not of type 'object', 'boolean'"
+      },
+      "repeat": {
+        "record": "GenerationPlan",
+        "standalone_meta_valid": false,
+        "record_pointer": "/records/GenerationPlan",
+        "error_pointer": "/properties/planner_contract",
+        "message": "'GenerationPlanner' is not of type 'object', 'boolean'"
+      }
+    },
+    {
+      "record": "SourceASHRefs",
+      "first": {
+        "record": "SourceASHRefs",
+        "standalone_meta_valid": false,
+        "record_pointer": "/records/SourceASHRefs",
+        "error_pointer": "/properties/consumer_authority",
+        "message": "'YWE domain interpretation' is not of type 'object', 'boolean'"
+      },
+      "repeat": {
+        "record": "SourceASHRefs",
+        "standalone_meta_valid": false,
+        "record_pointer": "/records/SourceASHRefs",
+        "error_pointer": "/properties/truth_authority",
+        "message": "'ASH Pattern System' is not of type 'object', 'boolean'"
+      }
+    },
+    {
+      "record": "AshStateSnapshot",
+      "first": {
+        "record": "AshStateSnapshot",
+        "standalone_meta_valid": false,
+        "record_pointer": "/records/AshStateSnapshot",
+        "error_pointer": "/properties/truth_authority",
+        "message": "'ASH Pattern System' is not of type 'object', 'boolean'"
+      },
+      "repeat": {
+        "record": "AshStateSnapshot",
+        "standalone_meta_valid": false,
+        "record_pointer": "/records/AshStateSnapshot",
+        "error_pointer": "/properties/state_space",
+        "message": "'F2^9' is not of type 'object', 'boolean'"
+      }
+    }
+  ],
+  "summary_equal": true,
+  "root_results_equal": true,
+  "note": "Initial repeatability check compared raw library-selected first errors. Stabilize selected meta-schema diagnostics rather than treating message order as product semantics."
+}

@@ -1,0 +1,74 @@
+{
+  "cases": [
+    {
+      "id": "raw-integral-numbers",
+      "text": "{\"state_space\":\"F2^9\",\"bits\":[1.0,1e0,-0,0.0,0,1,0,1,0]}",
+      "valid": true
+    },
+    {
+      "id": "raw-rounded-fraction",
+      "text": "{\"state_space\":\"F2^9\",\"bits\":[1.00000000000000000001,0,0,0,0,0,0,0,0]}",
+      "valid": false,
+      "code": "BIT_VALUE"
+    },
+    {
+      "id": "raw-underflow-fraction",
+      "text": "{\"state_space\":\"F2^9\",\"bits\":[1e-10000,0,0,0,0,0,0,0,0]}",
+      "valid": false,
+      "code": "BIT_VALUE"
+    },
+    {
+      "id": "raw-duplicate-key",
+      "text": "{\"state_space\":\"F2^8\",\"state_space\":\"F2^9\",\"bits\":[0,0,0,0,0,0,0,0,0]}",
+      "valid": false,
+      "code": "DUPLICATE_KEY"
+    },
+    {
+      "id": "raw-duplicate-escaped-key",
+      "text": "{\"bits\":[],\"b\\u0069ts\":[0,0,0,0,0,0,0,0,0],\"state_space\":\"F2^9\"}",
+      "valid": false,
+      "code": "DUPLICATE_KEY"
+    },
+    {
+      "id": "raw-nan",
+      "text": "{\"state_space\":\"F2^9\",\"bits\":[NaN,0,0,0,0,0,0,0,0]}",
+      "valid": false,
+      "code": "JSON_SYNTAX"
+    },
+    {
+      "id": "raw-infinity",
+      "text": "{\"state_space\":\"F2^9\",\"bits\":[Infinity,0,0,0,0,0,0,0,0]}",
+      "valid": false,
+      "code": "JSON_SYNTAX"
+    },
+    {
+      "id": "raw-truncated",
+      "text": "{\"state_space\":",
+      "valid": false,
+      "code": "JSON_SYNTAX"
+    },
+    {
+      "id": "raw-non-json",
+      "text": "not json",
+      "valid": false,
+      "code": "JSON_SYNTAX"
+    },
+    {
+      "id": "raw-leading-zero",
+      "text": "{\"state_space\":\"F2^9\",\"bits\":[01,0,0,0,0,0,0,0,0]}",
+      "valid": false,
+      "code": "JSON_SYNTAX"
+    },
+    {
+      "id": "raw-trailing-data",
+      "text": "{\"state_space\":\"F2^9\",\"bits\":[0,0,0,0,0,0,0,0,0]}{}",
+      "valid": false,
+      "code": "JSON_SYNTAX"
+    },
+    {
+      "id": "raw-trailing-whitespace",
+      "text": " {\"bits\":[0,0,0,0,0,0,0,0,0],\"state_space\":\"F2^9\"} \n",
+      "valid": true
+    }
+  ]
+}

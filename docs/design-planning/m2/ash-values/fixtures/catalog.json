@@ -1,0 +1,625 @@
+{
+  "status": "candidate test bindings; no normative requirement IDs issued",
+  "cases": [
+    {
+      "id": "state-zero",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-zero",
+      "expected_valid": true,
+      "expected_model_error": null
+    },
+    {
+      "id": "state-all-ones",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-all-ones",
+      "expected_valid": true,
+      "expected_model_error": null
+    },
+    {
+      "id": "state-ninth-one",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-ninth-one",
+      "expected_valid": true,
+      "expected_model_error": null
+    },
+    {
+      "id": "state-repeated-bits",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-repeated-bits",
+      "expected_valid": true,
+      "expected_model_error": null
+    },
+    {
+      "id": "state-numeric-equivalence",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-numeric-equivalence",
+      "expected_valid": true,
+      "expected_model_error": null
+    },
+    {
+      "id": "state-root-null",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-root-null",
+      "expected_valid": false,
+      "expected_model_error": "RECORD_TYPE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "state-root-scalar",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-root-scalar",
+      "expected_valid": false,
+      "expected_model_error": "RECORD_TYPE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "state-root-array",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-root-array",
+      "expected_valid": false,
+      "expected_model_error": "RECORD_TYPE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "state-root-string",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-root-string",
+      "expected_valid": false,
+      "expected_model_error": "RECORD_TYPE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "state-root-boolean",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-root-boolean",
+      "expected_valid": false,
+      "expected_model_error": "RECORD_TYPE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "state-missing-bits",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-missing-bits",
+      "expected_valid": false,
+      "expected_model_error": "REQUIRED_FIELD",
+      "expected_schema_error": {
+        "keyword": "required",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "state-missing-space",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-missing-space",
+      "expected_valid": false,
+      "expected_model_error": "REQUIRED_FIELD",
+      "expected_schema_error": {
+        "keyword": "required",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "state-wrong-space",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-wrong-space",
+      "expected_valid": false,
+      "expected_model_error": "STATE_SPACE",
+      "expected_schema_error": {
+        "keyword": "const",
+        "instance_pointer": "/state_space"
+      }
+    },
+    {
+      "id": "state-bits-short",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-bits-short",
+      "expected_valid": false,
+      "expected_model_error": "BIT_WIDTH",
+      "expected_schema_error": {
+        "keyword": "minItems",
+        "instance_pointer": "/bits"
+      }
+    },
+    {
+      "id": "state-bits-long",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-bits-long",
+      "expected_valid": false,
+      "expected_model_error": "BIT_WIDTH",
+      "expected_schema_error": {
+        "keyword": "maxItems",
+        "instance_pointer": "/bits"
+      }
+    },
+    {
+      "id": "state-bits-empty",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-bits-empty",
+      "expected_valid": false,
+      "expected_model_error": "BIT_WIDTH",
+      "expected_schema_error": {
+        "keyword": "minItems",
+        "instance_pointer": "/bits"
+      }
+    },
+    {
+      "id": "state-bits-text",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-bits-text",
+      "expected_valid": false,
+      "expected_model_error": "BITS_TYPE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": "/bits"
+      }
+    },
+    {
+      "id": "state-bits-null",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-bits-null",
+      "expected_valid": false,
+      "expected_model_error": "BITS_TYPE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": "/bits"
+      }
+    },
+    {
+      "id": "state-bit-two",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-bit-two",
+      "expected_valid": false,
+      "expected_model_error": "BIT_VALUE",
+      "expected_schema_error": {
+        "keyword": "enum",
+        "instance_pointer": "/bits/0"
+      }
+    },
+    {
+      "id": "state-bit-negative",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-bit-negative",
+      "expected_valid": false,
+      "expected_model_error": "BIT_VALUE",
+      "expected_schema_error": {
+        "keyword": "enum",
+        "instance_pointer": "/bits/0"
+      }
+    },
+    {
+      "id": "state-bit-fraction",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-bit-fraction",
+      "expected_valid": false,
+      "expected_model_error": "BIT_VALUE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": "/bits/0"
+      }
+    },
+    {
+      "id": "state-bit-bool",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-bit-bool",
+      "expected_valid": false,
+      "expected_model_error": "BIT_VALUE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": "/bits/0"
+      }
+    },
+    {
+      "id": "state-bit-false",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-bit-false",
+      "expected_valid": false,
+      "expected_model_error": "BIT_VALUE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": "/bits/0"
+      }
+    },
+    {
+      "id": "state-bit-text",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-bit-text",
+      "expected_valid": false,
+      "expected_model_error": "BIT_VALUE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": "/bits/0"
+      }
+    },
+    {
+      "id": "state-bit-null",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-bit-null",
+      "expected_valid": false,
+      "expected_model_error": "BIT_VALUE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": "/bits/0"
+      }
+    },
+    {
+      "id": "state-bit-object",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-bit-object",
+      "expected_valid": false,
+      "expected_model_error": "BIT_VALUE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": "/bits/0"
+      }
+    },
+    {
+      "id": "state-bit-array",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-bit-array",
+      "expected_valid": false,
+      "expected_model_error": "BIT_VALUE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": "/bits/0"
+      }
+    },
+    {
+      "id": "state-unknown-member",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-unknown-member",
+      "expected_valid": false,
+      "expected_model_error": "UNKNOWN_FIELD",
+      "expected_schema_error": {
+        "keyword": "additionalProperties",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "state-do-not-infer-membership",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/AshStateRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/state-do-not-infer-membership",
+      "expected_valid": false,
+      "expected_model_error": "UNKNOWN_FIELD",
+      "expected_schema_error": {
+        "keyword": "additionalProperties",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "codeword-zero",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/codeword-zero",
+      "expected_valid": true,
+      "expected_model_error": null
+    },
+    {
+      "id": "codeword-last",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/codeword-last",
+      "expected_valid": true,
+      "expected_model_error": null
+    },
+    {
+      "id": "codeword-numeric-equivalence",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/codeword-numeric-equivalence",
+      "expected_valid": true,
+      "expected_model_error": null
+    },
+    {
+      "id": "codeword-nonmember-claim",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/codeword-nonmember-claim",
+      "expected_valid": false,
+      "expected_model_error": "CODEWORD_MEMBERSHIP",
+      "expected_schema_error": {
+        "keyword": "enum",
+        "instance_pointer": "/bits"
+      }
+    },
+    {
+      "id": "codeword-parity-is-insufficient",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/codeword-parity-is-insufficient",
+      "expected_valid": false,
+      "expected_model_error": "CODEWORD_MEMBERSHIP",
+      "expected_schema_error": {
+        "keyword": "enum",
+        "instance_pointer": "/bits"
+      }
+    },
+    {
+      "id": "codeword-ninth-one",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/codeword-ninth-one",
+      "expected_valid": false,
+      "expected_model_error": "CODEWORD_MEMBERSHIP",
+      "expected_schema_error": {
+        "keyword": "enum",
+        "instance_pointer": "/bits"
+      }
+    },
+    {
+      "id": "codeword-missing-membership",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/codeword-missing-membership",
+      "expected_valid": false,
+      "expected_model_error": "REQUIRED_FIELD",
+      "expected_schema_error": {
+        "keyword": "required",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "codeword-membership-false",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/codeword-membership-false",
+      "expected_valid": false,
+      "expected_model_error": "MEMBERSHIP_ASSERTION",
+      "expected_schema_error": {
+        "keyword": "const",
+        "instance_pointer": "/membership"
+      }
+    },
+    {
+      "id": "codeword-membership-integer",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/codeword-membership-integer",
+      "expected_valid": false,
+      "expected_model_error": "MEMBERSHIP_ASSERTION",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": "/membership"
+      }
+    },
+    {
+      "id": "codeword-membership-string",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/codeword-membership-string",
+      "expected_valid": false,
+      "expected_model_error": "MEMBERSHIP_ASSERTION",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": "/membership"
+      }
+    },
+    {
+      "id": "codeword-membership-null",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/codeword-membership-null",
+      "expected_valid": false,
+      "expected_model_error": "MEMBERSHIP_ASSERTION",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": "/membership"
+      }
+    },
+    {
+      "id": "codeword-unknown-member",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordRecord",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/codeword-unknown-member",
+      "expected_valid": false,
+      "expected_model_error": "UNKNOWN_FIELD",
+      "expected_schema_error": {
+        "keyword": "additionalProperties",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "signature-zero",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/StateSignature",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/signature-zero",
+      "expected_valid": true,
+      "expected_model_error": null
+    },
+    {
+      "id": "signature-ninth-one",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/StateSignature",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/signature-ninth-one",
+      "expected_valid": true,
+      "expected_model_error": null
+    },
+    {
+      "id": "signature-leading-space",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/StateSignature",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/signature-leading-space",
+      "expected_valid": false,
+      "expected_model_error": "SIGNATURE",
+      "expected_schema_error": {
+        "keyword": "maxLength",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "signature-trailing-space",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/StateSignature",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/signature-trailing-space",
+      "expected_valid": false,
+      "expected_model_error": "SIGNATURE",
+      "expected_schema_error": {
+        "keyword": "maxLength",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "signature-newline",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/StateSignature",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/signature-newline",
+      "expected_valid": false,
+      "expected_model_error": "SIGNATURE",
+      "expected_schema_error": {
+        "keyword": "maxLength",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "signature-short",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/StateSignature",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/signature-short",
+      "expected_valid": false,
+      "expected_model_error": "SIGNATURE",
+      "expected_schema_error": {
+        "keyword": "minLength",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "signature-nonbinary",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/StateSignature",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/signature-nonbinary",
+      "expected_valid": false,
+      "expected_model_error": "SIGNATURE",
+      "expected_schema_error": {
+        "keyword": "pattern",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "signature-unicode",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/StateSignature",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/signature-unicode",
+      "expected_valid": false,
+      "expected_model_error": "SIGNATURE",
+      "expected_schema_error": {
+        "keyword": "pattern",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "signature-array",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/StateSignature",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/signature-array",
+      "expected_valid": false,
+      "expected_model_error": "SIGNATURE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "codeword-signature-member",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CodewordSignature",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/codeword-signature-member",
+      "expected_valid": true,
+      "expected_model_error": null
+    },
+    {
+      "id": "codeword-signature-nonmember",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CodewordSignature",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/codeword-signature-nonmember",
+      "expected_valid": false,
+      "expected_model_error": "CODEWORD_MEMBERSHIP",
+      "expected_schema_error": {
+        "keyword": "enum",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "sequence-empty",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordSequence",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/sequence-empty",
+      "expected_valid": true,
+      "expected_model_error": null
+    },
+    {
+      "id": "sequence-repeats",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordSequence",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/sequence-repeats",
+      "expected_valid": true,
+      "expected_model_error": null
+    },
+    {
+      "id": "sequence-wrong-root",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordSequence",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/sequence-wrong-root",
+      "expected_valid": false,
+      "expected_model_error": "SEQUENCE_TYPE",
+      "expected_schema_error": {
+        "keyword": "type",
+        "instance_pointer": ""
+      }
+    },
+    {
+      "id": "sequence-bad-member",
+      "schema_ref": "urn:ywe:review:ash-values:20260918:1#/$defs/CanonicalCodewordSequence",
+      "instance_file": "fixtures/instances.json",
+      "instance_pointer": "/sequence-bad-member",
+      "expected_valid": false,
+      "expected_model_error": "CODEWORD_MEMBERSHIP",
+      "expected_schema_error": {
+        "keyword": "enum",
+        "instance_pointer": "/1"
+      }
+    }
+  ]
+}

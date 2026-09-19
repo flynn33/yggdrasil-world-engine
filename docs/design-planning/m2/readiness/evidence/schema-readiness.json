@@ -1,0 +1,471 @@
+{
+  "artifact_type": "ywe_schema_readiness_diagnostic",
+  "status": "BLOCKED",
+  "observed_at_utc": "2026-09-18T21:24:20.798566+00:00",
+  "source": {
+    "repository": "flynn33/yggdrasil-world-engine",
+    "commit": "2db1230f638cd065d791c05f1adb7b4b51505c57",
+    "path": "data/schemas/ash_generation_packet_schema.json",
+    "git_blob_sha1": "1d1891fce3138fd87ce69483b47f9b093094fe71",
+    "sha256": "71e76aa73b9ae560f272d1c0ddba34bcd57b6f8554cdcfc84992b55e03579f26",
+    "bytes": 19851
+  },
+  "environment": {
+    "python": "3.13.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "jsonschema": "4.26.0",
+    "referencing": "0.37.0",
+    "remote_reference_retrieval": "denied"
+  },
+  "summary": {
+    "root_meta_schema_valid": true,
+    "root_probes": 16,
+    "root_probes_accepted": 16,
+    "descriptive_records": 30,
+    "invalid_if_lifted_as_schema": 8,
+    "valid_meta_records_accepting_null": 22,
+    "exchange_semantics_probes": 5,
+    "source_mutated": false,
+    "repository_suite_run": false,
+    "product_schema_change_applied": false
+  },
+  "root_results": [
+    {
+      "id": "ROOT-01",
+      "description": "Null",
+      "instance": null,
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    },
+    {
+      "id": "ROOT-02",
+      "description": "Boolean false",
+      "instance": false,
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    },
+    {
+      "id": "ROOT-03",
+      "description": "Boolean true",
+      "instance": true,
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    },
+    {
+      "id": "ROOT-04",
+      "description": "Integer",
+      "instance": 42,
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    },
+    {
+      "id": "ROOT-05",
+      "description": "Non-integral number",
+      "instance": 0.5,
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    },
+    {
+      "id": "ROOT-06",
+      "description": "Arbitrary string",
+      "instance": "not a packet",
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    },
+    {
+      "id": "ROOT-07",
+      "description": "Empty array",
+      "instance": [],
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    },
+    {
+      "id": "ROOT-08",
+      "description": "Empty object",
+      "instance": {},
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    },
+    {
+      "id": "ROOT-09",
+      "description": "Missing state bits",
+      "instance": {
+        "state_space": "F2^9"
+      },
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    },
+    {
+      "id": "ROOT-10",
+      "description": "Incorrect state space",
+      "instance": {
+        "state_space": "F2^8",
+        "bits": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    },
+    {
+      "id": "ROOT-11",
+      "description": "Eight coordinates",
+      "instance": {
+        "state_space": "F2^9",
+        "bits": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    },
+    {
+      "id": "ROOT-12",
+      "description": "Ten coordinates",
+      "instance": {
+        "state_space": "F2^9",
+        "bits": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    },
+    {
+      "id": "ROOT-13",
+      "description": "Nonbinary coordinate",
+      "instance": {
+        "state_space": "F2^9",
+        "bits": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    },
+    {
+      "id": "ROOT-14",
+      "description": "Boolean coordinates",
+      "instance": {
+        "state_space": "F2^9",
+        "bits": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    },
+    {
+      "id": "ROOT-15",
+      "description": "Missing provenance",
+      "instance": {
+        "snapshot_type": "CosmicPatternSnapshot"
+      },
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    },
+    {
+      "id": "ROOT-16",
+      "description": "Unknown discriminator",
+      "instance": {
+        "record_type": "not-a-YWE-type"
+      },
+      "accepted_by_advertised_root_schema": true,
+      "errors": []
+    }
+  ],
+  "record_results": [
+    {
+      "record": "AshState",
+      "standalone_meta_valid": false,
+      "record_pointer": "/records/AshState",
+      "error_pointer": "/properties/bits",
+      "message": "'full_9_bit_vector' is not of type 'object', 'boolean'"
+    },
+    {
+      "record": "CanonicalCodeword",
+      "standalone_meta_valid": false,
+      "record_pointer": "/records/CanonicalCodeword",
+      "error_pointer": "/properties/membership",
+      "message": "'must_be_member_of_canonical_C' is not of type 'object', 'boolean'"
+    },
+    {
+      "record": "CosmicPatternSnapshot",
+      "standalone_meta_valid": false,
+      "record_pointer": "/records/CosmicPatternSnapshot",
+      "error_pointer": "/properties/generation_plan_ref",
+      "message": "'GenerationPlan | null' is not of type 'object', 'boolean'"
+    },
+    {
+      "record": "DiagnosticEnvelope",
+      "standalone_meta_valid": false,
+      "record_pointer": "/records/DiagnosticEnvelope",
+      "error_pointer": "/properties/rule_id_taxonomy",
+      "message": "'specs/interfaces/rule-id-taxonomy.md' is not of type 'object', 'boolean'"
+    },
+    {
+      "record": "GenerationPlan",
+      "standalone_meta_valid": false,
+      "record_pointer": "/records/GenerationPlan",
+      "error_pointer": "/properties/source_state_identity",
+      "message": "'Canonical StateIdentity for the normalized source state' is not of type 'object', 'boolean'"
+    },
+    {
+      "record": "SourceASHRefs",
+      "standalone_meta_valid": false,
+      "record_pointer": "/records/SourceASHRefs",
+      "error_pointer": "/properties/consumer_authority",
+      "message": "'YWE domain interpretation' is not of type 'object', 'boolean'"
+    },
+    {
+      "record": "YWEGenerationContextPacket",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "PlayerRuntimeState",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "PlayerRuntimeStateDelta",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "ASHUpstreamGenerationEnvelope",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "YWEInterpretationPacket",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "PlayerActionTrace",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "ExplorationFrontierRequest",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "FutureGenerationBiasUpdate",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "WorldstateDeltaPacket",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "LocationMutationState",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "LocationMutationDelta",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "WorldstateMutationCommit",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "DiagnosticNoOp",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "QuestGenerationRequest",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "QuestChainManifest",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "QuestResolutionPayload",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "NPCManifest",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "NPCMemoryDelta",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "LoreArchiveRecord",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "MythRecord",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "SocialDistributionDelta",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "SystemManifestExchange",
+      "standalone_meta_valid": true,
+      "accepts_null_when_lifted_unchanged": true
+    },
+    {
+      "record": "AshStateSnapshot",
+      "standalone_meta_valid": false,
+      "record_pointer": "/records/AshStateSnapshot",
+      "error_pointer": "/properties/truth_authority",
+      "message": "'ASH Pattern System' is not of type 'object', 'boolean'"
+    },
+    {
+      "record": "CanonicalCodewordTrace",
+      "standalone_meta_valid": false,
+      "record_pointer": "/records/CanonicalCodewordTrace",
+      "error_pointer": "/properties/state_space",
+      "message": "'F2^9' is not of type 'object', 'boolean'"
+    }
+  ],
+  "exchange_probes": [
+    {
+      "description": "Required keys alone",
+      "instance": {
+        "exchange_id": "probe-only-reference",
+        "requested_manifest_kind": "probe-only-reference",
+        "source_ash_refs": "probe-only-reference",
+        "diagnostic_ref": "probe-only-reference",
+        "generation_plan_ref": "probe-only-reference",
+        "allowed_feature_engine": "probe-only-reference",
+        "worldstate_delta_policy": "probe-only-reference"
+      },
+      "accepted_when_record_lifted_unchanged": true,
+      "messages": []
+    },
+    {
+      "description": "Intended false flag provided",
+      "instance": {
+        "exchange_id": "probe-only-reference",
+        "requested_manifest_kind": "probe-only-reference",
+        "source_ash_refs": "probe-only-reference",
+        "diagnostic_ref": "probe-only-reference",
+        "generation_plan_ref": "probe-only-reference",
+        "allowed_feature_engine": "probe-only-reference",
+        "worldstate_delta_policy": "probe-only-reference",
+        "host_adapter_may_author_truth": false
+      },
+      "accepted_when_record_lifted_unchanged": false,
+      "messages": [
+        "False schema does not allow False"
+      ]
+    },
+    {
+      "description": "Intended false math-authority flag provided",
+      "instance": {
+        "exchange_id": "probe-only-reference",
+        "requested_manifest_kind": "probe-only-reference",
+        "source_ash_refs": "probe-only-reference",
+        "diagnostic_ref": "probe-only-reference",
+        "generation_plan_ref": "probe-only-reference",
+        "allowed_feature_engine": "probe-only-reference",
+        "worldstate_delta_policy": "probe-only-reference",
+        "feature_engine_claims_math_authority": false
+      },
+      "accepted_when_record_lifted_unchanged": false,
+      "messages": [
+        "False schema does not allow False"
+      ]
+    },
+    {
+      "description": "Intended true flag supplied as false",
+      "instance": {
+        "exchange_id": "probe-only-reference",
+        "requested_manifest_kind": "probe-only-reference",
+        "source_ash_refs": "probe-only-reference",
+        "diagnostic_ref": "probe-only-reference",
+        "generation_plan_ref": "probe-only-reference",
+        "allowed_feature_engine": "probe-only-reference",
+        "worldstate_delta_policy": "probe-only-reference",
+        "planning_precedes_materialization": false
+      },
+      "accepted_when_record_lifted_unchanged": true,
+      "messages": []
+    },
+    {
+      "description": "Intended true flag supplied as arbitrary text",
+      "instance": {
+        "exchange_id": "probe-only-reference",
+        "requested_manifest_kind": "probe-only-reference",
+        "source_ash_refs": "probe-only-reference",
+        "diagnostic_ref": "probe-only-reference",
+        "generation_plan_ref": "probe-only-reference",
+        "allowed_feature_engine": "probe-only-reference",
+        "worldstate_delta_policy": "probe-only-reference",
+        "planning_precedes_materialization": "anything"
+      },
+      "accepted_when_record_lifted_unchanged": true,
+      "messages": []
+    }
+  ],
+  "limits": [
+    "One pinned artifact, not the full repository or custom catalog consumers.",
+    "Standalone record evaluation is a counterfactual migration test, not a claim that the baseline dispatches records this way.",
+    "Meta-schema validity does not establish domain conformance.",
+    "No milestone accepted, repository write performed, or source revision upgraded."
+  ]
+}
