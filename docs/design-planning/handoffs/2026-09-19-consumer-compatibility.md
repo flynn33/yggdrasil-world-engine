@@ -1,47 +1,57 @@
-# YWE Consumer Compatibility Handoff
+# YWE Continuation and Branch Cleanup Handoff
 
-**Revision:** planning-6  
+**Revision:** planning-7  
 **Date:** September 19, 2026  
-**Current authority:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-6.  
+**Current authority:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-7.  
 **Planning branch:** `design-planning/m2-foundations`.  
-**Verified predecessor:** `4b5e7b9a5428df37491bec1b820074054b4fef90`.
+**Verified predecessor:** `91cb28ea328ff8a480e082c035a376cbc7f42833`.
 
-This replaces the previous handoff's next-work view, not accepted engine decisions. The prior [publication handoff](2026-09-19-planning-publication.md) and original evidence remain preserved. This handoff's storage identity is its containing commit when retrieved from the named branch.
+This updates the existing handoff in place. Planning-6 and its complete compatibility evidence remain in Git history. The owner has directed branch cleanup before further design work. No new branch, main integration, branch deletion or candidate approval is claimed.
 
-## Current position
+## Current position and preserved authority
 
-M0/M1 acceptance, active M2, v2.0.23 and the platform gate remain unchanged. Main was rechecked at `2db1230f638cd065d791c05f1adb7b4b51505c57`. Owner-local work is uninspected. No main merge, active schema change or release is part of this review.
+M0/M1 acceptance, active M2, v2.0.23 and the closed platform gate remain unchanged. Main was observed at `2db1230f638cd065d791c05f1adb7b4b51505c57`. Owner-local work is uninspected.
 
-The prior adopted method pin remains unresolved. Inspected Raven Forge 0.6.2 at `ed0028a46bac9c5b92876a6ad6589ca421fd9499` remains an inspection reference, not an adopted upgrade. Inherited reading, linked-realization gaps and source conflicts remain in the current record.
+The prior adopted method pin remains unresolved. Inspected Raven Forge 0.6.2 at `ed0028a46bac9c5b92876a6ad6589ca421fd9499` remains an inspection reference, not an adopted upgrade. Inherited reading, linked-realization gaps and source conflicts remain in the current record. Issued coding-agent packages stay external; the project record stays in its selected repository directory.
 
-## New completed work
+## Previously completed design work
 
-[Compatibility review](../m2/consumer-compatibility/README.md) and [full results](../m2/consumer-compatibility/compatibility-results.json) compare the pinned existing helper with the unchanged value candidate. All 512 represented states, sixteen codewords, 8,192 transformations, 2,048 snapshots and 2,048 plans agree on the valid-input path. Four existing identity tests pass unchanged.
+[Compatibility review](../m2/consumer-compatibility/README.md) and [full results](../m2/consumer-compatibility/compatibility-results.json) compare the pinned existing helper with the unchanged value candidate. All 512 represented states, sixteen codewords, 8,192 transformations, 2,048 snapshots and 2,048 plans agree on the tested valid-input path. Four existing identity tests passed unchanged.
 
-Fifteen boundary probes reproduce seven acceptance differences. Baseline coercion accepts fractional, Boolean/string coordinates and padded/Unicode signatures that the candidate rejects. Direct out-of-contract dataclass construction can retain caller-mutable storage; normal helper factories produce tuples. Property/method API shape and exact schema-target selection also need explicit treatment.
+Fifteen boundary probes reproduced seven acceptance differences. Baseline coercion accepts fractional, Boolean/string coordinates and padded/Unicode signatures that the candidate rejects. Direct out-of-contract dataclass construction can retain caller-mutable storage; normal helper factories produce tuples. Property/method API shape and exact schema-target selection need explicit treatment.
 
-The conclusion is not drop-in compatibility. The proposed direction is an explicitly typed input boundary preserving existing signature fields, ordered sequences and aliases. Standalone membership, record closure, raw parsing and writer choices remain unapproved pending complete consumer evidence.
+The conclusion remains `not_drop_in_compatible`. The proposed direction is an explicitly typed input boundary preserving signature fields, ordered sequences and aliases. Standalone membership, closure, raw parsing and writer choices remain unapproved pending complete consumer evidence. The previous two result sections match at `43e7f34ad8e185d82eaac5ae5dc887960fda50024b43244c6714aff680e0b8c2`. These experiments were not rerun for the cleanup audit.
 
-Two result sections match at `43e7f34ad8e185d82eaac5ae5dc887960fda50024b43244c6714aff680e0b8c2`. Source preservation, altered-source rejection and overwrite protection were checked. Python is verification-only. The same existing helper is reused for packet comparisons; this is not independent semantic acceptance.
+## Branch cleanup evidence and current block
 
-## Scope held and failed approaches
+At inspection, GitHub returned exactly three branches:
 
-Direct Git checkout failed on DNS resolution and archive retrieval failed. Only hash-verified selected files were available. Do not repeat the same acquisition attempts unchanged or call this a full checkout.
+- `main`: `2db1230f638cd065d791c05f1adb7b4b51505c57`.
+- `design-planning/m2-foundations`: `91cb28ea328ff8a480e082c035a376cbc7f42833`, three commits ahead of main, zero behind, 55 added planning paths.
+- `planning/m2-design-records`: `c4d505b71e4db829fdb1b84f3c368bf164ea8c31`, two commits ahead of main, zero behind, 24 added planning paths.
 
-Main integration still requires actual checkout inspection, complete classification/scope and discovery treatment, and full repository pre/post validation. No validation rule was weakened to publish experiments. The older `planning/m2-design-records` branch was observed and not changed. The current record remains on `design-planning/m2-foundations`.
+The extra branches diverge from their common main baseline. Neither is already merged into main or contained in the other's history. The older branch contains distinct publication/storage/continuation material and a verification summary. Its complete planning subtree was inventoried, but only the shared verification-code subtree was established as byte-identical. Do not infer that the whole branch can be discarded.
 
-Further governance/package-check consumers were located by search only. Do not promote that discovery to complete reading or a complete consumer inventory. No original candidate approval, requirement ID, source pin, dependency, M0/M1 evidence, roadmap status or product version changed.
+Both the older Integration_Review and the current [Repository Integration Requirements](../publication/Repository_Integration_Requirements.md) retain the same main-integration prerequisites: complete checkout review, exact classification/scope metadata, correct experimental discovery and full repository pre/post checks. Those were not completed in this environment. Do not promote draft designs through default normative classification.
+
+The connection confirms owner-level repository permissions but supplies no branch/ref deletion action. Relevant tool and plugin discovery did not provide another applicable deletion route. The container has Git but no GitHub CLI or configured GH_TOKEN/GITHUB_TOKEN; GitHub DNS resolution failed and archive retrieval did not provide a complete checkout. No actual owner checkout was inspected. Do not repeat these unavailable acquisition routes unchanged or use repository/workflow changes to manufacture an execution channel.
+
+## Permissions and preservation
+
+The current owner request authorizes merge into main and deletion after safe preservation; existing owner-account publishing and admin bypass permission remain. It does not require another approval. It does not authorize losing unmerged work, force-pushing, changing protections, restoring paid workflows, waiving technical acceptance, approving candidate semantics, or publishing a release.
+
+No branch was merged or deleted. No new branch was created. This checkpoint changes only the current Project Record and this existing handoff on the current planning branch, retaining earlier revisions in Git history.
 
 ## Next eligible action
 
-Specify the narrow typed packet-to-value boundary and compatibility facade from the review, with preserved signature outputs and explicit rejection behavior. Keep JSON arrays, signatures, domain tuples and application iterables distinct. Do not globally replace normalization or close whole envelopes. Complete remaining consumer evidence before adopting standalone membership/closure/writer changes.
+Use a complete authenticated checkout to consolidate both existing planning lineages, keeping one current record and preserving unique material and both histories. Reconcile classification/scope and discovery, run the required repository checks, then merge into main. Verify history/content preservation on remote main before deleting either branch and verify the final remote branch list. Do not use a blanket ours/theirs resolution or treat branch naming as merge evidence.
 
-Owner-authorized scoped planning writes and owner-account publishing remain available. No new force-push, protection change, source upgrade, release or platform implementation is authorized. Issued coding-agent packages stay outside the product repository.
+After cleanup, resume the narrow packet-to-value input-boundary specification already identified by the compatibility review. No roadmap restart or new feature scope is required.
 
 ## Checkpoint
 
-**Current step:** First consumer-compatibility slice completed.  
-**Completed:** Pinned-source execution, valid-output comparisons, explicit incompatibility evidence and migration proposal.  
-**Next action:** Narrow input-boundary specification, not another roadmap restart.  
-**Needed from owner:** Nothing to download, sort or reconstruct.  
-**Saved at:** `docs/design-planning/` on the named planning branch; containing commit identifies this revision.
+**Current step:** Branch cleanup prioritized; remote audit complete; execution blocked.  
+**Completed:** Branch enumeration, ancestry comparisons, older-tree inventory, preservation and explicit capability findings.  
+**Next action:** Complete checked main integration in an authenticated checkout, then delete verified-merged branches.  
+**Needed from owner:** A Git-enabled development session, not another approval or reconstructed history.  
+**Saved at:** This record and handoff on the current planning branch; containing Git commit supplies the storage identity. Saving the audit does not complete cleanup.
