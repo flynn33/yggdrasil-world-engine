@@ -7,12 +7,15 @@ import json
 import sys
 from pathlib import Path
 
+from jsonschema import Draft202012Validator
+
 PATTERN_VECTOR_PATH = "data/schemas/pattern_vector_schema.json"
 AXIOM_SCHEMA_PATH = "data/schemas/axiom_diagnostic_packet_schema.json"
 EXISTENCE_SCHEMA_PATH = "data/schemas/existence_potential_schema.json"
 KERNEL_CONTRACT_PATH = "docs/architecture/existential_gameplay_kernel_contract.md"
 BRANCH_EVENT_SCHEMA_PATH = "data/schemas/branch_event_schema.json"
 BRANCH_EVENT_EXAMPLES_DIR = "examples/branch_reality"
+PATTERN_VECTOR_EXAMPLE_PATH = "examples/branch_reality/pattern_vector_location_ravenfall_gate.example.json"
 PATTERN_COMPONENTS = (
     "H_entropy",
     "K_algorithmic_complexity",
@@ -39,6 +42,61 @@ def check_pattern_vector(root: Path) -> list[str]:
     for component in PATTERN_COMPONENTS:
         if component not in components:
             errors.append(f"{PATTERN_VECTOR_PATH}: missing components.{component}")
+
+    try:
+        Draft202012Validator.check_schema(data)
+    except Exception as exc:
+        errors.append(f"{PATTERN_VECTOR_PATH}: invalid JSON Schema: {exc}")
+        return errors
+
+    if data.get("$id") != "https://ywe.local/schemas/pattern_vector_schema.json":
+        errors.append(f"{PATTERN_VECTOR_PATH}: missing canonical M2 $id")
+
+    example_path = root / PATTERN_VECTOR_EXAMPLE_PATH
+    if not example_path.is_file():
+        errors.append(f"missing {PATTERN_VECTOR_EXAMPLE_PATH}")
+        return errors
+
+    example = load_json(root, PATTERN_VECTOR_EXAMPLE_PATH)
+    validator = Draft202012Validator(data)
+    valid_errors = list(validator.iter_errors(example))
+    if valid_errors:
+        errors.append(
+            f"{PATTERN_VECTOR_EXAMPLE_PATH}: expected valid but failed: "
+            f"{valid_errors[0].message}"
+        )
+
+    invalid_cases = {
+        "missing_components": (
+            {key: value for key, value in example.items() if key != "components"},
+            "required",
+        ),
+        "unsupported_target_kind": (
+            {**example, "target_kind": "unsupported_kind"},
+            "enum",
+        ),
+        "entropy_above_one": (
+            {**example, "components": {**example["components"], "H_entropy": 1.01}},
+            "maximum",
+        ),
+        "fractal_dimension_below_one": (
+            {**example, "components": {**example["components"], "D_fractal_dimension": 0.99}},
+            "minimum",
+        ),
+        "unknown_component": (
+            {**example, "components": {**example["components"], "unknown": 0.5}},
+            "additionalProperties",
+        ),
+    }
+    for case_name, (instance, expected_validator) in invalid_cases.items():
+        case_errors = list(validator.iter_errors(instance))
+        if not case_errors:
+            errors.append(f"{PATTERN_VECTOR_PATH}: {case_name} was accepted")
+        elif not any(error.validator == expected_validator for error in case_errors):
+            errors.append(
+                f"{PATTERN_VECTOR_PATH}: {case_name} failed for the wrong reason; "
+                f"expected {expected_validator}, got {[error.validator for error in case_errors]}"
+            )
     return errors
 
 

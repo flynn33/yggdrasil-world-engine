@@ -1,53 +1,156 @@
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/pattern_vector_schema.json",
+  "title": "YWE Pattern Vector",
+  "description": "Defines compact, cosmology-scoped runtime descriptors for entities, locations, branch realities, myths, prophecies, artifacts, creatures, and players.",
   "schema_id": "ywe.pattern_vector.v1",
-  "schema_version": "0.1.0",
-  "status": "draft_for_phase_9",
-  "description": "Defines compact runtime descriptors for entities, locations, branch realities, myths, prophecies, artifacts, creatures, and players.",
+  "schema_version": "1.0.0",
+  "status": "m2_normative_candidate",
   "authority": {
     "game": "Where Ravens Wait: Eternal Reckoning",
     "engine": "Yggdrasil World Engine",
     "foundation": "ASH Cosmological Model",
     "stability_component": "ASH Pattern System"
   },
+  "x-ywe-requirement-id": "YWE-M2-PATTERN-VECTOR-001",
+  "type": "object",
+  "required": [
+    "pattern_vector_id",
+    "target_ref",
+    "target_kind",
+    "components",
+    "interpretation_notes",
+    "source_refs"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pattern_vector_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "x-ywe-requirement-id": "YWE-M2-PATTERN-VECTOR-ID"
+    },
+    "target_ref": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "x-ywe-requirement-id": "YWE-M2-PATTERN-VECTOR-TARGET-REF"
+    },
+    "target_kind": {
+      "enum": [
+        "player",
+        "npc",
+        "location",
+        "artifact",
+        "creature",
+        "myth",
+        "prophecy",
+        "branch",
+        "faction",
+        "lore_fragment"
+      ],
+      "x-ywe-requirement-id": "YWE-M2-PATTERN-VECTOR-TARGET-KIND"
+    },
+    "components": {
+      "type": "object",
+      "required": [
+        "H_entropy",
+        "K_algorithmic_complexity",
+        "D_fractal_dimension",
+        "S_symmetry_index",
+        "L_generator_length"
+      ],
+      "properties": {
+        "H_entropy": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "x-ywe-requirement-id": "YWE-M2-PATTERN-VECTOR-H-RANGE"
+        },
+        "K_algorithmic_complexity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "x-ywe-requirement-id": "YWE-M2-PATTERN-VECTOR-K-RANGE"
+        },
+        "D_fractal_dimension": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 2,
+          "x-ywe-requirement-id": "YWE-M2-PATTERN-VECTOR-D-RANGE"
+        },
+        "S_symmetry_index": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "x-ywe-requirement-id": "YWE-M2-PATTERN-VECTOR-S-RANGE"
+        },
+        "L_generator_length": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "x-ywe-requirement-id": "YWE-M2-PATTERN-VECTOR-L-RANGE"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-M2-PATTERN-VECTOR-COMPONENTS"
+    },
+    "interpretation_notes": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-M2-PATTERN-VECTOR-NOTES"
+    },
+    "source_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "x-ywe-requirement-id": "YWE-M2-PATTERN-VECTOR-SOURCE-REFS"
+    }
+  },
+  "additionalProperties": false,
   "components": {
     "H_entropy": {
       "type": "number",
-      "range": [
-        0,
-        1
-      ],
+      "range": [0, 1],
       "meaning": "instability_disorder_void_pressure_collapse_risk"
     },
     "K_algorithmic_complexity": {
       "type": "number",
-      "range": [
-        0,
-        1
-      ],
+      "range": [0, 1],
       "meaning": "layered_identity_depth_description_complexity"
     },
     "D_fractal_dimension": {
       "type": "number",
-      "suggested_range": [
-        1,
-        2
-      ],
+      "suggested_range": [1, 2],
       "meaning": "branching_influence_multi_scale_recurrence_lore_richness"
     },
     "S_symmetry_index": {
       "type": "number",
-      "range": [
-        0,
-        1
-      ],
+      "range": [0, 1],
       "meaning": "coherence_balance_celestial_stability_harmonic_structure"
     },
     "L_generator_length": {
       "type": "number",
-      "range": [
-        0,
-        1
-      ],
+      "range": [0, 1],
       "meaning": "compactness_or_complexity_of_generating_rule"
     }
   },
