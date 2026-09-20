@@ -1,0 +1,178 @@
+name: M2 Fixture Analysis
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/m2-fixture-analysis.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install validation dependencies
+        run: python -m pip install -r scripts/requirements.txt
+
+      - name: Analyze unresolved M2 fixtures
+        shell: bash
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+
+          import json
+          import re
+          import subprocess
+          from collections import defaultdict
+          from pathlib import Path
+          from typing import Any
+
+          from jsonschema import Draft202012Validator
+          from referencing import Registry, Resource
+
+          root = Path(".")
+          baseline = json.loads(
+              (root / "data/validation/schema_quality_baseline.json").read_text(encoding="utf-8-sig")
+          )
+          unresolved = baseline["known_debt"]["unbound_json_examples"]
+
+          schema_docs: dict[str, dict[str, Any]] = {}
+          id_to_path: dict[str, str] = {}
+          registry = Registry()
+          for path in sorted(root.rglob("*.json")):
+              relative = path.relative_to(root).as_posix()
+              try:
+                  document = json.loads(path.read_text(encoding="utf-8-sig"))
+              except Exception:
+                  continue
+              if isinstance(document, dict) and isinstance(document.get("$schema"), str):
+                  schema_docs[relative] = document
+                  schema_id = document.get("$id")
+                  if isinstance(schema_id, str):
+                      id_to_path[schema_id] = relative
+                      try:
+                          registry = registry.with_resource(
+                              schema_id,
+                              Resource.from_contents(document),
+                          )
+                      except Exception:
+                          pass
+
+          def normalize_tokens(value: str) -> set[str]:
+              value = re.sub(r"\.(example|reject|spec|schema)$", "", value)
+              return {
+                  token
+                  for token in re.split(r"[^a-z0-9]+", value.lower())
+                  if token and token not in {
+                      "example", "examples", "invalid", "reject", "schema",
+                      "ravenfall", "gate", "phase", "json", "record",
+                  }
+              }
+
+          def iter_nodes(value: Any, pointer: str = ""):
+              yield pointer or "/", value
+              if isinstance(value, dict):
+                  for key, item in value.items():
+                      escaped = str(key).replace("~", "~0").replace("/", "~1")
+                      yield from iter_nodes(item, f"{pointer}/{escaped}")
+              elif isinstance(value, list):
+                  for index, item in enumerate(value):
+                      yield from iter_nodes(item, f"{pointer}/{index}")
+
+          def validator(path: str):
+              schema = schema_docs[path]
+              return Draft202012Validator(schema, registry=registry)
+
+          validators = {}
+          for schema_path in schema_docs:
+              try:
+                  validators[schema_path] = validator(schema_path)
+              except Exception:
+                  pass
+
+          report = []
+          for example_path in unresolved:
+              document = json.loads((root / example_path).read_text(encoding="utf-8-sig"))
+              example_tokens = normalize_tokens(Path(example_path).stem)
+              nodes = list(iter_nodes(document))
+              rankings = []
+              valid_matches = []
+              for schema_path, schema in schema_docs.items():
+                  props = schema.get("properties") if isinstance(schema.get("properties"), dict) else {}
+                  required = set(schema.get("required", [])) if isinstance(schema.get("required"), list) else set()
+                  schema_tokens = normalize_tokens(Path(schema_path).stem)
+                  token_score = len(example_tokens & schema_tokens)
+                  best_node_score = -999.0
+                  best_pointer = "/"
+                  best_error_count = 10**9
+                  best_errors = []
+                  instance_valid = False
+                  current_validator = validators.get(schema_path)
+                  if current_validator is None:
+                      continue
+                  for pointer, node in nodes:
+                      if not isinstance(node, (dict, list)):
+                          continue
+                      key_score = 0.0
+                      if isinstance(node, dict):
+                          keys = set(node)
+                          key_score += 3.0 * len(keys & set(props))
+                          key_score += 5.0 * len(keys & required)
+                          key_score -= 1.0 * len(required - keys)
+                      errors = list(current_validator.iter_errors(node))
+                      score = 10.0 * token_score + key_score - min(len(errors), 20)
+                      if score > best_node_score:
+                          best_node_score = score
+                          best_pointer = pointer
+                          best_error_count = len(errors)
+                          best_errors = [error.message for error in errors[:3]]
+                      if not errors:
+                          instance_valid = True
+                          valid_matches.append({
+                              "schema_path": schema_path,
+                              "schema_id": schema.get("$id"),
+                              "instance_pointer": pointer,
+                          })
+                  rankings.append({
+                      "schema_path": schema_path,
+                      "schema_id": schema.get("$id"),
+                      "score": round(best_node_score, 2),
+                      "best_pointer": best_pointer,
+                      "error_count": best_error_count,
+                      "errors": best_errors,
+                      "valid_somewhere": instance_valid,
+                  })
+
+              grep = subprocess.run(
+                  ["git", "grep", "-l", "--fixed-strings", example_path, "--", ":!data/validation/schema_quality_baseline.json"],
+                  check=False,
+                  capture_output=True,
+                  text=True,
+              )
+              mentions = sorted(line for line in grep.stdout.splitlines() if line)
+              rankings.sort(key=lambda item: (-item["score"], item["error_count"], item["schema_path"]))
+              valid_matches.sort(key=lambda item: (item["schema_path"], item["instance_pointer"]))
+              report.append({
+                  "example_path": example_path,
+                  "top_ranked_candidates": rankings[:8],
+                  "valid_matches": valid_matches[:25],
+                  "mentioning_files": mentions,
+              })
+
+          print("M2_FIXTURE_ANALYSIS_BEGIN")
+          print(json.dumps(report, indent=2, ensure_ascii=False))
+          print("M2_FIXTURE_ANALYSIS_END")
+          PY
