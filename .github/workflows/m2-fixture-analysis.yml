@@ -27,15 +27,13 @@ jobs:
       - name: Install validation dependencies
         run: python -m pip install -r scripts/requirements.txt
 
-      - name: Build fixture review table
+      - name: Extract exact valid schema matches
         shell: bash
         run: |
           python - <<'PY'
           from __future__ import annotations
 
           import json
-          import re
-          import subprocess
           from pathlib import Path
           from typing import Any
 
@@ -69,12 +67,6 @@ jobs:
               except Exception:
                   pass
 
-          def tokens(value: str) -> set[str]:
-              value = re.sub(r"\.(example|reject|spec|schema)$", "", value)
-              return {token for token in re.split(r"[^a-z0-9]+", value.lower()) if token and token not in {
-                  "example", "examples", "invalid", "reject", "schema", "ravenfall", "gate", "phase", "json", "record"
-              }}
-
           def nodes(value: Any, pointer: str = ""):
               yield pointer or "/", value
               if isinstance(value, dict):
@@ -86,71 +78,39 @@ jobs:
                       yield from nodes(item, f"{pointer}/{index}")
 
           lines = [
-              "# M2 Fixture Binding Review Table",
+              "# M2 Exact Valid Schema Matches",
               "",
-              "| Fixture | Object shapes | Ranked schema targets | Existing checker references |",
-              "|---|---|---|---|",
+              "Generic extension-schema matches are deliberately excluded.",
+              "",
+              "| Fixture | Exact zero-error schema matches |",
+              "|---|---|",
           ]
           for example_path in unresolved:
               document = json.loads((root / example_path).read_text(encoding="utf-8-sig"))
-              node_list = list(nodes(document))
-              object_shapes = []
-              for pointer, node in node_list:
-                  if isinstance(node, dict) and len(pointer.split("/")) <= 4:
-                      object_shapes.append(f"`{pointer}`: {', '.join(node.keys())}")
-              ranked = []
-              example_tokens = tokens(Path(example_path).stem)
-              for schema_path, schema in schemas.items():
-                  validator = validators.get(schema_path)
-                  if validator is None:
+              matches = []
+              for pointer, node in nodes(document):
+                  if not isinstance(node, (dict, list)):
                       continue
-                  props = schema.get("properties") if isinstance(schema.get("properties"), dict) else {}
-                  required = set(schema.get("required", [])) if isinstance(schema.get("required"), list) else set()
-                  token_score = len(example_tokens & tokens(Path(schema_path).stem))
-                  best = None
-                  for pointer, node in node_list:
-                      if not isinstance(node, (dict, list)):
+                  for schema_path, validator in validators.items():
+                      if schema_path.endswith("common/extension.schema.json"):
                           continue
-                      key_score = 0.0
-                      if isinstance(node, dict):
-                          keys = set(node)
-                          key_score += 3.0 * len(keys & set(props))
-                          key_score += 5.0 * len(keys & required)
-                          key_score -= 1.0 * len(required - keys)
-                      errors = list(validator.iter_errors(node))
-                      score = 10.0 * token_score + key_score - min(len(errors), 20)
-                      candidate = (score, -len(errors), schema_path, pointer, len(errors), sorted({str(error.validator) for error in errors}))
-                      if best is None or candidate[:2] > best[:2]:
-                          best = candidate
-                  if best is not None and not schema_path.endswith("common/extension.schema.json"):
-                      ranked.append(best)
-              ranked.sort(key=lambda item: (-item[0], -item[1], item[2]))
-              target_text = "; ".join(
-                  f"`{Path(item[2]).name}` @ `{item[3]}` — {item[4]} error(s): {','.join(item[5]) or 'valid'}"
-                  for item in ranked[:4]
-              )
-              grep = subprocess.run(
-                  ["git", "grep", "-l", "--fixed-strings", example_path, "--", ":!data/validation/schema_quality_baseline.json"],
-                  check=False,
-                  capture_output=True,
-                  text=True,
-              )
-              mentions = ", ".join(f"`{value}`" for value in sorted(line for line in grep.stdout.splitlines() if line)) or "None"
-              lines.append(
-                  f"| `{example_path}` | {'<br>'.join(object_shapes) or 'No object nodes'} | {target_text} | {mentions} |"
-              )
+                      if validator.is_valid(node):
+                          matches.append((schema_path, pointer))
+              matches = sorted(set(matches))
+              rendered = "; ".join(f"`{schema}` @ `{pointer}`" for schema, pointer in matches) or "None"
+              lines.append(f"| `{example_path}` | {rendered} |")
 
-          Path("/tmp/fixture-analysis-table.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+          Path("/tmp/m2-valid-matches.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
           PY
 
-      - name: Preserve review table
+      - name: Preserve exact-match report
         shell: bash
         run: |
           git config user.name "Jim Daley"
           git config user.email "94642455+flynn33@users.noreply.github.com"
           git fetch origin analysis/m2-fixture-bindings
           git checkout -B analysis/m2-fixture-bindings origin/analysis/m2-fixture-bindings
-          cp /tmp/fixture-analysis-table.md docs/design-planning/m2/fixture-analysis-table.md
-          git add docs/design-planning/m2/fixture-analysis-table.md
-          git commit -m "Add M2 fixture binding review table"
+          cp /tmp/m2-valid-matches.md docs/design-planning/m2/fixture-valid-matches.md
+          git add docs/design-planning/m2/fixture-valid-matches.md
+          git commit -m "Record exact M2 fixture schema matches"
           git push origin HEAD:analysis/m2-fixture-bindings
