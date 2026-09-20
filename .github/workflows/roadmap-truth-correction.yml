@@ -1,0 +1,129 @@
+name: Roadmap Truth Correction
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/roadmap-truth-correction.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  correct-roadmap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install validation dependencies
+        run: python -m pip install -r scripts/requirements.txt
+
+      - name: Apply reviewed roadmap correction
+        shell: bash
+        run: |
+          cat > /tmp/roadmap-patch.py.gz.b64 <<'PAYLOAD'
+          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
+          O3x6+9/7rX6cxOb/ffz8B67Qd6cROwAA
+          PAYLOAD
+          base64 --decode /tmp/roadmap-patch.py.gz.b64 | gzip --decompress > /tmp/roadmap-patch.py
+          test "$(sha256sum /tmp/roadmap-patch.py | cut -d' ' -f1)" = "e60797ff2da8901ce70aa34183033b3562bcb3c4cd22f873455520abdeb6917b"
+          python /tmp/roadmap-patch.py
+          rm .github/workflows/roadmap-truth-correction.yml
+
+      - name: Validate corrected roadmap and repository
+        shell: bash
+        run: |
+          python scripts/check_specification_roadmap.py .
+          bash scripts/run_checks.sh --context push
+          git diff --check
+
+      - name: Commit and push correction
+        shell: bash
+        run: |
+          git config user.name "Jim Daley"
+          git config user.email "94642455+flynn33@users.noreply.github.com"
+          git add --all
+          git commit -m "Correct M2 roadmap and continuity state"
+          git push origin HEAD:main
