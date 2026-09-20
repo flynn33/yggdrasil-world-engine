@@ -1,0 +1,24 @@
+name: Delete Completed Roadmap Correction Branch
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/delete-roadmap-correction-branch.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  delete-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Delete completed branch
+        shell: bash
+        run: git push origin --delete roadmap/m2-truth-correction
