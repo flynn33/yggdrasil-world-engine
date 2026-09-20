@@ -78,7 +78,7 @@ products remain deferred until the M10 specification gate is accepted.
 | Accepted milestone gates | `2 of 11` |
 | Milestone queue | `1` in progress; `8` planned; `0` blocked; `0` deferred |
 | Release-ready subsystems | `1 of 15` |
-| Specification publication | `unreleased`; `0` GitHub Release objects; `0` agnostic specification releases (verified `2026-07-19`) |
+| Specification publication | `unreleased`; `0` GitHub Release objects; `0` agnostic specification releases (verified `2026-09-20`) |
 | Platform product work | ⏸️ `deferred`; authorization requires `M10` acceptance |
 
 Milestone indicators: 🟢 `complete` · 🟡 `in_progress` · ⚪ `planned` · 🔴 `blocked` · ⏸️ `deferred`.

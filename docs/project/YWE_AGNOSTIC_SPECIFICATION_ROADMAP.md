@@ -116,7 +116,7 @@ Legend: `complete` · `partial` · `not_started` · `not_applicable` (N/A) · `n
 | Area | Current maturity | Remaining work |
 |---|---|---|
 | Repository truth | M1 authority closure accepted | Maintain M0 and M1 truth controls while M2 builds executable contracts, schemas, and fixtures |
-| Schema system | Incomplete | Complete identifiers, convert descriptive records, bind fixtures, validate instances, and eliminate tracked debt |
+| Schema system | M2 in progress | JSON Schema profile and protected-record migrations exist; 39 examples remain unbound, and the fixture catalog, acceptance gate, and durable acceptance evidence are not yet present |
 | ASH reference oracle | Partial | Context classification, recovery, fallback, containment, safe halt, topology, axioms, and emitter traceability |
 | Core engine semantics | Partial | Deterministic algorithms, failure modes, persistence, interfaces, and complete conformance |
 | Player origin and perception persistence | Placeholder-backed | Replace placeholders with normative state and lifecycle contracts |
@@ -224,6 +224,7 @@ Deliverables:
 - Positive, boundary, reject, recovery, replay, and migration fixtures.
 - Meta-schema, instance, reference, identifier, dependency, negative,
   property, and mutation validation.
+- Roadmap-derived M2 acceptance gate and durable acceptance evidence.
 
 Exit criteria:
 
@@ -232,6 +233,7 @@ Exit criteria:
 - Every normative fixture is bound to a schema.
 - Every reject fixture fails for its intended requirement.
 - The schema-quality debt inventory is empty.
+- A roadmap-derived M2 acceptance gate passes from a clean offline checkout.
 
 ## M3 — Complete core deterministic semantics and the reference oracle
 

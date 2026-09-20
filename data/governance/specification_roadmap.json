@@ -7,7 +7,7 @@
     "published_releases": 0,
     "github_release_objects": 0,
     "agnostic_specification_releases": 0,
-    "verified_on": "2026-07-19",
+    "verified_on": "2026-09-20",
     "tag_policy": "Existing v2.0.x Git tags, including historical annotations that use release wording, identify repository baselines; they are not published releases."
   },
   "current_milestone": "M2",
@@ -130,7 +130,9 @@
       "required_markers": [
         "| Agnostic specification release readiness | Not ready |",
         "| Published releases | None; no GitHub Release objects or agnostic specification releases have been published |",
-        "| Current roadmap milestone | M2 - Build the canonical contract and schema foundation |",
+        "| Current roadmap milestone | M2 - Build the canonical contract and schema foundation (in progress; acceptance not recorded) |",
+        "| M2 schema-quality debt | 39 unbound JSON examples remain; the other three M2 schema-debt categories are empty |",
+        "| M2 acceptance evidence | Not recorded; the fixture catalog and roadmap-derived acceptance gate/report are still required |",
         "| Platform product work | Deferred through M10 |"
       ]
     },
@@ -432,10 +434,13 @@
       },
       "evidence_refs": [
         "data/governance/specification_roadmap.json",
-        "data/validation/schema_quality_baseline.json"
+        "data/validation/m2_json_contract_profile.json",
+        "data/validation/m2_contract_migration_manifest.json",
+        "data/validation/schema_quality_baseline.json",
+        "data/validation/repository_quality_debt_inventory.json"
       ],
       "open_work": [
-        "Eliminate debt prove traceability and complete independent review"
+        "Bind the remaining 39 JSON examples, complete the M2 fixture catalog and roadmap-derived acceptance evidence, and run the clean offline M2 acceptance gate."
       ]
     }
   ],
@@ -523,14 +528,16 @@
         "YAML structural schemas.",
         "Explicit fixture catalog mapping schema, instance pointer, expected result, and expected requirement or error identifiers.",
         "Positive, boundary, reject, recovery, replay, and migration fixtures.",
-        "Meta-schema, instance, reference, identifier, dependency, negative, property, and mutation validation."
+        "Meta-schema, instance, reference, identifier, dependency, negative, property, and mutation validation.",
+        "Roadmap-derived M2 acceptance gate and durable acceptance evidence."
       ],
       "exit_criteria": [
         "Every normative schema passes its meta-schema.",
         "Every reference resolves without a network dependency.",
         "Every normative fixture is bound to a schema.",
         "Every reject fixture fails for its intended requirement.",
-        "The schema-quality debt inventory is empty."
+        "The schema-quality debt inventory is empty.",
+        "A roadmap-derived M2 acceptance gate passes from a clean offline checkout."
       ]
     },
     {
