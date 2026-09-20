@@ -27,7 +27,7 @@ jobs:
       - name: Install validation dependencies
         run: python -m pip install -r scripts/requirements.txt
 
-      - name: Analyze unresolved M2 fixtures
+      - name: Build concise fixture structure report
         shell: bash
         run: |
           python - <<'PY'
@@ -61,18 +61,21 @@ jobs:
                   schema_id = document.get("$id")
                   if isinstance(schema_id, str):
                       try:
-                          registry = registry.with_resource(
-                              schema_id,
-                              Resource.from_contents(document),
-                          )
+                          registry = registry.with_resource(schema_id, Resource.from_contents(document))
                       except Exception:
                           pass
+
+          validators = {}
+          for schema_path, schema in schema_docs.items():
+              try:
+                  validators[schema_path] = Draft202012Validator(schema, registry=registry)
+              except Exception:
+                  pass
 
           def normalize_tokens(value: str) -> set[str]:
               value = re.sub(r"\.(example|reject|spec|schema)$", "", value)
               return {
-                  token
-                  for token in re.split(r"[^a-z0-9]+", value.lower())
+                  token for token in re.split(r"[^a-z0-9]+", value.lower())
                   if token and token not in {
                       "example", "examples", "invalid", "reject", "schema",
                       "ravenfall", "gate", "phase", "json", "record",
@@ -89,32 +92,33 @@ jobs:
                   for index, item in enumerate(value):
                       yield from iter_nodes(item, f"{pointer}/{index}")
 
-          validators = {}
-          for schema_path, schema in schema_docs.items():
-              try:
-                  validators[schema_path] = Draft202012Validator(schema, registry=registry)
-              except Exception:
-                  pass
+          def shape(value: Any, depth: int = 0) -> Any:
+              if depth >= 3:
+                  return type(value).__name__
+              if isinstance(value, dict):
+                  return {key: shape(item, depth + 1) for key, item in value.items()}
+              if isinstance(value, list):
+                  if not value:
+                      return []
+                  return [shape(value[0], depth + 1), {"length": len(value)}]
+              if value is None:
+                  return "null"
+              return type(value).__name__
 
-          report = []
+          results = []
           for example_path in unresolved:
               document = json.loads((root / example_path).read_text(encoding="utf-8-sig"))
-              example_tokens = normalize_tokens(Path(example_path).stem)
               nodes = list(iter_nodes(document))
+              example_tokens = normalize_tokens(Path(example_path).stem)
               rankings = []
-              valid_matches = []
               for schema_path, schema in schema_docs.items():
                   current_validator = validators.get(schema_path)
                   if current_validator is None:
                       continue
                   props = schema.get("properties") if isinstance(schema.get("properties"), dict) else {}
                   required = set(schema.get("required", [])) if isinstance(schema.get("required"), list) else set()
-                  schema_tokens = normalize_tokens(Path(schema_path).stem)
-                  token_score = len(example_tokens & schema_tokens)
-                  best_node_score = -999.0
-                  best_pointer = "/"
-                  best_error_count = 10**9
-                  best_errors = []
+                  token_score = len(example_tokens & normalize_tokens(Path(schema_path).stem))
+                  best = None
                   for pointer, node in nodes:
                       if not isinstance(node, (dict, list)):
                           continue
@@ -126,66 +130,52 @@ jobs:
                           key_score -= 1.0 * len(required - keys)
                       errors = list(current_validator.iter_errors(node))
                       score = 10.0 * token_score + key_score - min(len(errors), 20)
-                      if score > best_node_score:
-                          best_node_score = score
-                          best_pointer = pointer
-                          best_error_count = len(errors)
-                          best_errors = [error.message for error in errors[:5]]
-                      if not errors:
-                          valid_matches.append({
-                              "schema_path": schema_path,
-                              "schema_id": schema.get("$id"),
-                              "instance_pointer": pointer,
-                          })
-                  rankings.append({
-                      "schema_path": schema_path,
-                      "schema_id": schema.get("$id"),
-                      "score": round(best_node_score, 2),
-                      "best_pointer": best_pointer,
-                      "error_count": best_error_count,
-                      "errors": best_errors,
-                  })
-
+                      candidate = {
+                          "schema_path": schema_path,
+                          "schema_id": schema.get("$id"),
+                          "score": round(score, 2),
+                          "pointer": pointer,
+                          "valid": not errors,
+                          "error_count": len(errors),
+                          "error_validators": sorted({str(error.validator) for error in errors}),
+                          "error_messages": [error.message for error in errors[:8]],
+                      }
+                      if best is None or (candidate["score"], -candidate["error_count"]) > (best["score"], -best["error_count"]):
+                          best = candidate
+                  if best is not None:
+                      rankings.append(best)
+              rankings.sort(key=lambda item: (-item["score"], item["error_count"], item["schema_path"]))
               grep = subprocess.run(
                   ["git", "grep", "-l", "--fixed-strings", example_path, "--", ":!data/validation/schema_quality_baseline.json"],
                   check=False,
                   capture_output=True,
                   text=True,
               )
-              mentions = sorted(line for line in grep.stdout.splitlines() if line)
-              rankings.sort(key=lambda item: (-item["score"], item["error_count"], item["schema_path"]))
-              valid_matches.sort(key=lambda item: (item["schema_path"], item["instance_pointer"]))
-              report.append({
+              results.append({
                   "example_path": example_path,
-                  "top_ranked_candidates": rankings[:12],
-                  "valid_matches": valid_matches,
-                  "mentioning_files": mentions,
+                  "document_shape": shape(document),
+                  "top_candidates": rankings[:6],
+                  "mentioning_files": sorted(line for line in grep.stdout.splitlines() if line),
               })
 
-          output = root / "docs/design-planning/m2/fixture-analysis.json"
-          output.parent.mkdir(parents=True, exist_ok=True)
-          output.write_text(
-              json.dumps(
-                  {
-                      "artifact_type": "m2_fixture_binding_analysis",
-                      "source_baseline": "data/validation/schema_quality_baseline.json",
-                      "unresolved_fixture_count": len(unresolved),
-                      "results": report,
-                  },
-                  indent=2,
-                  ensure_ascii=False,
-              ) + "\n",
+          Path("/tmp/fixture-analysis-summary.json").write_text(
+              json.dumps({
+                  "artifact_type": "m2_fixture_binding_analysis_summary",
+                  "fixture_count": len(results),
+                  "results": results,
+              }, indent=2, ensure_ascii=False) + "\n",
               encoding="utf-8",
           )
-          print(f"Wrote {output} with {len(report)} fixture analyses.")
           PY
 
-      - name: Preserve analysis branch
+      - name: Preserve concise report
         shell: bash
         run: |
           git config user.name "Jim Daley"
           git config user.email "94642455+flynn33@users.noreply.github.com"
-          git checkout -b analysis/m2-fixture-bindings
-          git add docs/design-planning/m2/fixture-analysis.json
-          git commit -m "Preserve M2 fixture binding analysis"
+          git fetch origin analysis/m2-fixture-bindings
+          git checkout -B analysis/m2-fixture-bindings origin/analysis/m2-fixture-bindings
+          cp /tmp/fixture-analysis-summary.json docs/design-planning/m2/fixture-analysis-summary.json
+          git add docs/design-planning/m2/fixture-analysis-summary.json
+          git commit -m "Add concise M2 fixture structure analysis"
           git push origin HEAD:analysis/m2-fixture-bindings
