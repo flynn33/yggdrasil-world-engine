@@ -8,7 +8,7 @@ on:
       - ".github/workflows/m2-fixture-analysis.yml"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   analyze:
@@ -36,7 +36,6 @@ jobs:
           import json
           import re
           import subprocess
-          from collections import defaultdict
           from pathlib import Path
           from typing import Any
 
@@ -50,7 +49,6 @@ jobs:
           unresolved = baseline["known_debt"]["unbound_json_examples"]
 
           schema_docs: dict[str, dict[str, Any]] = {}
-          id_to_path: dict[str, str] = {}
           registry = Registry()
           for path in sorted(root.rglob("*.json")):
               relative = path.relative_to(root).as_posix()
@@ -62,7 +60,6 @@ jobs:
                   schema_docs[relative] = document
                   schema_id = document.get("$id")
                   if isinstance(schema_id, str):
-                      id_to_path[schema_id] = relative
                       try:
                           registry = registry.with_resource(
                               schema_id,
@@ -92,14 +89,10 @@ jobs:
                   for index, item in enumerate(value):
                       yield from iter_nodes(item, f"{pointer}/{index}")
 
-          def validator(path: str):
-              schema = schema_docs[path]
-              return Draft202012Validator(schema, registry=registry)
-
           validators = {}
-          for schema_path in schema_docs:
+          for schema_path, schema in schema_docs.items():
               try:
-                  validators[schema_path] = validator(schema_path)
+                  validators[schema_path] = Draft202012Validator(schema, registry=registry)
               except Exception:
                   pass
 
@@ -111,6 +104,9 @@ jobs:
               rankings = []
               valid_matches = []
               for schema_path, schema in schema_docs.items():
+                  current_validator = validators.get(schema_path)
+                  if current_validator is None:
+                      continue
                   props = schema.get("properties") if isinstance(schema.get("properties"), dict) else {}
                   required = set(schema.get("required", [])) if isinstance(schema.get("required"), list) else set()
                   schema_tokens = normalize_tokens(Path(schema_path).stem)
@@ -119,10 +115,6 @@ jobs:
                   best_pointer = "/"
                   best_error_count = 10**9
                   best_errors = []
-                  instance_valid = False
-                  current_validator = validators.get(schema_path)
-                  if current_validator is None:
-                      continue
                   for pointer, node in nodes:
                       if not isinstance(node, (dict, list)):
                           continue
@@ -138,9 +130,8 @@ jobs:
                           best_node_score = score
                           best_pointer = pointer
                           best_error_count = len(errors)
-                          best_errors = [error.message for error in errors[:3]]
+                          best_errors = [error.message for error in errors[:5]]
                       if not errors:
-                          instance_valid = True
                           valid_matches.append({
                               "schema_path": schema_path,
                               "schema_id": schema.get("$id"),
@@ -153,7 +144,6 @@ jobs:
                       "best_pointer": best_pointer,
                       "error_count": best_error_count,
                       "errors": best_errors,
-                      "valid_somewhere": instance_valid,
                   })
 
               grep = subprocess.run(
@@ -167,12 +157,35 @@ jobs:
               valid_matches.sort(key=lambda item: (item["schema_path"], item["instance_pointer"]))
               report.append({
                   "example_path": example_path,
-                  "top_ranked_candidates": rankings[:8],
-                  "valid_matches": valid_matches[:25],
+                  "top_ranked_candidates": rankings[:12],
+                  "valid_matches": valid_matches,
                   "mentioning_files": mentions,
               })
 
-          print("M2_FIXTURE_ANALYSIS_BEGIN")
-          print(json.dumps(report, indent=2, ensure_ascii=False))
-          print("M2_FIXTURE_ANALYSIS_END")
+          output = root / "docs/design-planning/m2/fixture-analysis.json"
+          output.parent.mkdir(parents=True, exist_ok=True)
+          output.write_text(
+              json.dumps(
+                  {
+                      "artifact_type": "m2_fixture_binding_analysis",
+                      "source_baseline": "data/validation/schema_quality_baseline.json",
+                      "unresolved_fixture_count": len(unresolved),
+                      "results": report,
+                  },
+                  indent=2,
+                  ensure_ascii=False,
+              ) + "\n",
+              encoding="utf-8",
+          )
+          print(f"Wrote {output} with {len(report)} fixture analyses.")
           PY
+
+      - name: Preserve analysis branch
+        shell: bash
+        run: |
+          git config user.name "Jim Daley"
+          git config user.email "94642455+flynn33@users.noreply.github.com"
+          git checkout -b analysis/m2-fixture-bindings
+          git add docs/design-planning/m2/fixture-analysis.json
+          git commit -m "Preserve M2 fixture binding analysis"
+          git push origin HEAD:analysis/m2-fixture-bindings
