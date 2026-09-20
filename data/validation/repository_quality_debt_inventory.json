@@ -13,14 +13,14 @@
   "schema_debt_subledger": {
     "path": "data/validation/schema_quality_baseline.json",
     "hash_algorithm": "sha256_utf8_lf_normalized",
-    "sha256": "1f181e20ca83720450deb197b8714dfaebe211c595e22425017f5bc35cd760f8",
-    "category_occurrence_count": 39,
-    "unique_path_count": 39,
+    "sha256": "2795366f1aab08077647cc600441166dd90d7cbcccca2f236956589f51c5058b",
+    "category_occurrence_count": 0,
+    "unique_path_count": 0,
     "counts_by_category": {
       "declared_schema_missing_id": 0,
       "annotation_only_schema_documents": 0,
       "schema_named_json_without_schema_declaration": 0,
-      "unbound_json_examples": 39
+      "unbound_json_examples": 0
     }
   },
   "debts": [
@@ -29,7 +29,7 @@
       "category": "schema_quality_subledger",
       "title": "Existing schema-quality debt",
       "description": "The linked schema-quality baseline ratchets known schema and fixture debt without duplicating its path lists in this inventory.",
-      "status": "open",
+      "status": "resolved",
       "source_refs": [
         {
           "kind": "repository_path",
@@ -43,7 +43,12 @@
       "ratchet_key": "schema_quality:subledger",
       "introduced_baseline": "2.0.23",
       "resolution_criteria": "All four known-debt categories are empty and the M2 fixture catalog and offline schema-resolution gates pass.",
-      "resolution_evidence": []
+      "resolution_evidence": [
+        "data/validation/m2_fixture_catalog.json",
+        "scripts/check_m2_acceptance.py",
+        "tests/test_m2_acceptance.py",
+        "examples/m2_contract_foundation/m2_common_contract_scenarios.json"
+      ]
     },
     {
       "debt_id": "QD-PH-505f98a09bce",
@@ -2021,12 +2026,13 @@
   ],
   "summary": {
     "total": 81,
-    "open": 60,
-    "resolved": 20,
+    "open": 59,
+    "resolved": 21,
     "accepted_exception": 1,
     "by_milestone": {
       "M0": 11,
       "M1": 10,
+      "M10": 1,
       "M2": 2,
       "M3": 15,
       "M4": 12,
@@ -2034,8 +2040,7 @@
       "M6": 5,
       "M7": 1,
       "M8": 1,
-      "M9": 7,
-      "M10": 1
+      "M9": 7
     },
     "placeholder_count": 44,
     "roadmap_open_work_count": 14,

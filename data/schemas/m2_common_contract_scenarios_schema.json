@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m2_common_contract_scenarios_schema.json",
+  "title": "M2 Common Contract Scenarios",
+  "description": "Boundary, recovery, replay, and migration scenarios for the common M2 contracts.",
+  "x-ywe-requirement-id": "YWE-M2-COMMON-CONTRACT-SCENARIOS",
+  "type": "object",
+  "required": [
+    "schema_ref",
+    "artifact_type",
+    "artifact_version",
+    "scenarios"
+  ],
+  "properties": {
+    "schema_ref": {
+      "const": "data/schemas/m2_common_contract_scenarios_schema.json"
+    },
+    "artifact_type": {
+      "const": "m2_common_contract_scenarios"
+    },
+    "artifact_version": {
+      "$ref": "https://ywe.local/schemas/common/version.schema.json"
+    },
+    "scenarios": {
+      "type": "object",
+      "required": [
+        "boundary",
+        "recovery",
+        "replay",
+        "migration"
+      ],
+      "properties": {
+        "boundary": {
+          "$ref": "https://ywe.local/schemas/common/retry.schema.json"
+        },
+        "recovery": {
+          "$ref": "https://ywe.local/schemas/common/compensation.schema.json"
+        },
+        "replay": {
+          "$ref": "https://ywe.local/schemas/common/idempotency.schema.json"
+        },
+        "migration": {
+          "$ref": "https://ywe.local/schemas/common/deprecation.schema.json"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

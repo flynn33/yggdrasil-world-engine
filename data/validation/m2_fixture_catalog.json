@@ -1,0 +1,587 @@
+{
+  "schema_ref": "data/schemas/m2_fixture_catalog_schema.json",
+  "artifact_type": "m2_fixture_catalog",
+  "artifact_version": "1.0.0",
+  "roadmap_ref": "data/governance/specification_roadmap.json",
+  "entries": [
+    {
+      "fixture_id": "m2.fixture.001.invalid.ability.without.source.refs.example",
+      "fixture_class": "reject",
+      "instance_path": "examples/ability_power_engine/invalid_ability_without_source_refs.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_negative_fixture_policy_schema.json",
+      "expected_result": "reject",
+      "expected_diagnostic_ids": [
+        "check_ability_source_provenance"
+      ],
+      "supporting_check_ids": [
+        "check_ability_source_provenance"
+      ],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.002.invalid.generic.xp.unlock.example",
+      "fixture_class": "reject",
+      "instance_path": "examples/ability_power_engine/invalid_generic_xp_unlock.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_negative_fixture_policy_schema.json",
+      "expected_result": "reject",
+      "expected_diagnostic_ids": [
+        "check_no_generic_skill_tree"
+      ],
+      "supporting_check_ids": [
+        "check_no_generic_skill_tree"
+      ],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.003.invalid.permanent.wolf.death.cost.example",
+      "fixture_class": "reject",
+      "instance_path": "examples/ability_power_engine/invalid_permanent_wolf_death_cost.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_negative_fixture_policy_schema.json",
+      "expected_result": "reject",
+      "expected_diagnostic_ids": [
+        "check_ability_decoherence_not_death"
+      ],
+      "supporting_check_ids": [
+        "check_ability_decoherence_not_death"
+      ],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.004.invalid.white.good.dark.evil.ability.example",
+      "fixture_class": "reject",
+      "instance_path": "examples/ability_power_engine/invalid_white_good_dark_evil_ability.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_negative_fixture_policy_schema.json",
+      "expected_result": "reject",
+      "expected_diagnostic_ids": [
+        "check_no_wolf_morality_ability_drift"
+      ],
+      "supporting_check_ids": [
+        "check_no_wolf_morality_ability_drift"
+      ],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.005.ravenfall.gate.truth.scope.examples",
+      "fixture_class": "positive",
+      "instance_path": "examples/phase_11_worldstate_location_mutation/ravenfall_gate/ravenfall_gate_truth_scope_examples.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_phase_fixture_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.006.ravenfall.gate.phase.12.content.batch.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/phase_12_quest_npc_lore_generation/content_generation_batch/ravenfall_gate_phase_12_content_batch.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_phase_fixture_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.007.lore.invalid.no.pattern.trace.example",
+      "fixture_class": "reject",
+      "instance_path": "examples/phase_12_quest_npc_lore_generation/lore_generation/lore_invalid_no_pattern_trace.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_negative_fixture_policy_schema.json",
+      "expected_result": "reject",
+      "expected_diagnostic_ids": [
+        "check_lore_pattern_trace_provenance",
+        "check_quest_npc_lore_truth_scope"
+      ],
+      "supporting_check_ids": [
+        "check_lore_pattern_trace_provenance",
+        "check_quest_npc_lore_truth_scope"
+      ],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.008.ravenfall.gate.hidden.oath.lore.fragment.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/phase_12_quest_npc_lore_generation/lore_generation/ravenfall_gate_hidden_oath_lore_fragment.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_phase_fixture_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.009.ravenfall.gate.public.oath.lore.fragment.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/phase_12_quest_npc_lore_generation/lore_generation/ravenfall_gate_public_oath_lore_fragment.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_phase_fixture_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.010.npc.invalid.no.relation.example",
+      "fixture_class": "reject",
+      "instance_path": "examples/phase_12_quest_npc_lore_generation/npc_generation/npc_invalid_no_relation.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_negative_fixture_policy_schema.json",
+      "expected_result": "reject",
+      "expected_diagnostic_ids": [
+        "check_npc_relation_and_self_reference"
+      ],
+      "supporting_check_ids": [
+        "check_npc_relation_and_self_reference"
+      ],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.011.ravenfall.gate.keeper.npc.candidate.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/phase_12_quest_npc_lore_generation/npc_generation/ravenfall_gate_keeper_npc_candidate.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/npc_manifest_candidate_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.012.ravenfall.gate.witness.npc.candidate.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/phase_12_quest_npc_lore_generation/npc_generation/ravenfall_gate_witness_npc_candidate.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/npc_manifest_candidate_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.013.axiom.pressure.a1.isolation.to.quest.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/phase_12_quest_npc_lore_generation/quest_generation/axiom_pressure_a1_isolation_to_quest.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_phase_fixture_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.014.axiom.pressure.a4.erasure.cost.to.quest.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/phase_12_quest_npc_lore_generation/quest_generation/axiom_pressure_a4_erasure_cost_to_quest.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_phase_fixture_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.015.invalid.generic.random.quest.candidate.example",
+      "fixture_class": "reject",
+      "instance_path": "examples/phase_12_quest_npc_lore_generation/quest_generation/invalid_generic_random_quest_candidate.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_negative_fixture_policy_schema.json",
+      "expected_result": "reject",
+      "expected_diagnostic_ids": [
+        "check_no_generic_random_quest_generation",
+        "check_no_content_generation_without_context",
+        "check_feature_manifest_provenance_phase_12"
+      ],
+      "supporting_check_ids": [
+        "check_no_generic_random_quest_generation",
+        "check_no_content_generation_without_context",
+        "check_feature_manifest_provenance_phase_12"
+      ],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.016.quest.manifest.candidate.buried.oath.reveal.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/phase_12_quest_npc_lore_generation/quest_generation/quest_manifest_candidate_buried_oath_reveal.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_phase_fixture_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.017.ravenfall.gate.conceal.oath.quest.generation.context.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/phase_12_quest_npc_lore_generation/quest_generation/ravenfall_gate_conceal_oath_quest_generation_context.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/quest_generation_context_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.018.ravenfall.gate.reveal.oath.quest.generation.context.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/phase_12_quest_npc_lore_generation/quest_generation/ravenfall_gate_reveal_oath_quest_generation_context.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/quest_generation_context_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.019.future.generation.bias.from.player.state.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/player_runtime_state/future_generation_bias_from_player_state.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_player_fixture_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.020.player.runtime.state.delta.branch.event.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/player_runtime_state/player_runtime_state_delta_branch_event.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_player_fixture_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.021.player.runtime.state.initial.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/player_runtime_state/player_runtime_state_initial.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_player_fixture_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.022.lore.archive.record.oath.under.gate.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/quest_npc_lore_generation/lore_archive_record_oath_under_gate.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/quest_npc_lore_generation_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.023.myth.record.oath.under.gate.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/quest_npc_lore_generation/myth_record_oath_under_gate.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/quest_npc_lore_generation_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.024.myth.seed.candidate.oath.under.gate.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/quest_npc_lore_generation/myth_seed_candidate_oath_under_gate.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/quest_npc_lore_generation_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.025.npc.manifest.ragna.oathkeeper.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/quest_npc_lore_generation/npc_manifest_ragna_oathkeeper.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/quest_npc_lore_generation_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.026.npc.memory.delta.ragna.oath.revealed.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/quest_npc_lore_generation/npc_memory_delta_ragna_oath_revealed.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/quest_npc_lore_generation_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.027.quest.chain.manifest.ravenfall.gate.oath.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/quest_npc_lore_generation/quest_chain_manifest_ravenfall_gate_oath.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/quest_npc_lore_generation_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.028.quest.generation.request.ravenfall.gate.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/quest_npc_lore_generation/quest_generation_request_ravenfall_gate.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/quest_npc_lore_generation_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.029.quest.resolution.payload.ravenfall.gate.oath.revealed.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/quest_npc_lore_generation/quest_resolution_payload_ravenfall_gate_oath_revealed.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/quest_npc_lore_generation_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.030.social.distribution.delta.oath.under.gate.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/quest_npc_lore_generation/social_distribution_delta_oath_under_gate.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/quest_npc_lore_generation_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.031.invalid.no.reward.packet.trace.reject",
+      "fixture_class": "reject",
+      "instance_path": "examples/ravenfall_gate/phase_17/invalid_no_reward_packet_trace.reject.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_negative_fixture_policy_schema.json",
+      "expected_result": "reject",
+      "expected_diagnostic_ids": [
+        "check_no_feature_consequence_without_packet"
+      ],
+      "supporting_check_ids": [
+        "check_no_feature_consequence_without_packet"
+      ],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.032.invalid.permanent.wolf.death.reject",
+      "fixture_class": "reject",
+      "instance_path": "examples/ravenfall_gate/phase_17/invalid_permanent_wolf_death.reject.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_negative_fixture_policy_schema.json",
+      "expected_result": "reject",
+      "expected_diagnostic_ids": [
+        "check_no_permanent_wolf_death_phase_17"
+      ],
+      "supporting_check_ids": [
+        "check_no_permanent_wolf_death_phase_17"
+      ],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.033.invalid.platform.runtime.trace.reject",
+      "fixture_class": "reject",
+      "instance_path": "examples/ravenfall_gate/phase_17/invalid_platform_runtime_trace.reject.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_negative_fixture_policy_schema.json",
+      "expected_result": "reject",
+      "expected_diagnostic_ids": [
+        "check_no_platform_specific_runtime_phase_17"
+      ],
+      "supporting_check_ids": [
+        "check_no_platform_specific_runtime_phase_17"
+      ],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.034.invalid.static.location.trace.reject",
+      "fixture_class": "reject",
+      "instance_path": "examples/ravenfall_gate/phase_17/invalid_static_location_trace.reject.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_negative_fixture_policy_schema.json",
+      "expected_result": "reject",
+      "expected_diagnostic_ids": [
+        "check_no_static_only_location_model_phase_17"
+      ],
+      "supporting_check_ids": [
+        "check_no_static_only_location_model_phase_17"
+      ],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.035.invalid.wolf.morality.trace.reject",
+      "fixture_class": "reject",
+      "instance_path": "examples/ravenfall_gate/phase_17/invalid_wolf_morality_trace.reject.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/m2_negative_fixture_policy_schema.json",
+      "expected_result": "reject",
+      "expected_diagnostic_ids": [
+        "check_no_wolf_morality_language_phase_17"
+      ],
+      "supporting_check_ids": [
+        "check_no_wolf_morality_language_phase_17"
+      ],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.036.location.mutation.delta.ravenfall.gate.oath.revealed.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/worldstate_location_mutation/location_mutation_delta_ravenfall_gate_oath_revealed.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/worldstate_location_mutation_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.037.location.mutation.state.ravenfall.gate.after.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/worldstate_location_mutation/location_mutation_state_ravenfall_gate_after.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/worldstate_location_mutation_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.038.worldstate.delta.ravenfall.gate.oath.revealed.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/worldstate_location_mutation/worldstate_delta_ravenfall_gate_oath_revealed.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/worldstate_location_mutation_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.039.worldstate.mutation.commit.ravenfall.gate.example",
+      "fixture_class": "positive",
+      "instance_path": "examples/worldstate_location_mutation/worldstate_mutation_commit_ravenfall_gate.example.json",
+      "instance_pointer": "/",
+      "schema_path": "data/schemas/worldstate_location_mutation_schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [],
+      "normative": true,
+      "closes_schema_debt": true
+    },
+    {
+      "fixture_id": "m2.fixture.040.common.boundary",
+      "fixture_class": "boundary",
+      "instance_path": "examples/m2_contract_foundation/m2_common_contract_scenarios.json",
+      "instance_pointer": "/scenarios/boundary",
+      "schema_path": "data/schemas/common/retry.schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [
+        "m2_acceptance"
+      ],
+      "normative": true,
+      "closes_schema_debt": false
+    },
+    {
+      "fixture_id": "m2.fixture.041.common.recovery",
+      "fixture_class": "recovery",
+      "instance_path": "examples/m2_contract_foundation/m2_common_contract_scenarios.json",
+      "instance_pointer": "/scenarios/recovery",
+      "schema_path": "data/schemas/common/compensation.schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [
+        "m2_acceptance"
+      ],
+      "normative": true,
+      "closes_schema_debt": false
+    },
+    {
+      "fixture_id": "m2.fixture.042.common.replay",
+      "fixture_class": "replay",
+      "instance_path": "examples/m2_contract_foundation/m2_common_contract_scenarios.json",
+      "instance_pointer": "/scenarios/replay",
+      "schema_path": "data/schemas/common/idempotency.schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [
+        "m2_acceptance"
+      ],
+      "normative": true,
+      "closes_schema_debt": false
+    },
+    {
+      "fixture_id": "m2.fixture.043.common.migration",
+      "fixture_class": "migration",
+      "instance_path": "examples/m2_contract_foundation/m2_common_contract_scenarios.json",
+      "instance_pointer": "/scenarios/migration",
+      "schema_path": "data/schemas/common/deprecation.schema.json",
+      "expected_result": "pass",
+      "expected_diagnostic_ids": [],
+      "supporting_check_ids": [
+        "m2_acceptance"
+      ],
+      "normative": true,
+      "closes_schema_debt": false
+    }
+  ],
+  "closed_debt_count": 39
+}

@@ -1,0 +1,31 @@
+{
+  "schema_ref": "data/schemas/m2_common_contract_scenarios_schema.json",
+  "artifact_type": "m2_common_contract_scenarios",
+  "artifact_version": "1.0.0",
+  "scenarios": {
+    "boundary": {
+      "attempt": 0,
+      "maximum_attempts": 1,
+      "retry_after": 0
+    },
+    "recovery": {
+      "compensation_id": "compensation.m2.restore_snapshot",
+      "target_transaction_ref": {
+        "identifier": "transaction.m2.fixture",
+        "kind": "transaction"
+      },
+      "action": "restore_preoperation_snapshot",
+      "status": "planned"
+    },
+    "replay": {
+      "key": "request.m2.replay.001",
+      "scope": "fixture_replay"
+    },
+    "migration": {
+      "deprecated": true,
+      "replacement": "https://ywe.local/schemas/common/event.schema.json",
+      "removal_version": "3.0.0",
+      "migration": "Translate legacy event envelopes before deterministic oracle execution."
+    }
+  }
+}

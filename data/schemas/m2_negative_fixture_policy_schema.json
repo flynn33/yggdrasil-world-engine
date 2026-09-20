@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m2_negative_fixture_policy_schema.json",
+  "title": "M2 Negative Fixture Policy Envelope",
+  "description": "Structural envelope plus executable YWE policy dispatch for negative fixtures.",
+  "x-ywe-requirement-id": "YWE-M2-NEGATIVE-FIXTURE-POLICY",
+  "x-ywe-policy": "dispatch_negative_fixture",
+  "type": "object",
+  "oneOf": [
+    {
+      "required": [
+        "invalid_example",
+        "reject_reason",
+        "candidate"
+      ],
+      "properties": {
+        "invalid_example": {
+          "const": true
+        },
+        "reject_reason": {
+          "enum": [
+            "missing_source_provenance",
+            "generic_xp_only_unlock",
+            "permanent_wolf_death_forbidden",
+            "wolf_morality_drift"
+          ]
+        },
+        "candidate": {
+          "type": "object",
+          "minProperties": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "required": [
+        "candidate_id",
+        "invalid_reason",
+        "should_fail_rules"
+      ],
+      "properties": {
+        "candidate_id": {
+          "type": "string",
+          "pattern": "^invalid\\."
+        },
+        "invalid_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "should_fail_rules": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "required": [
+        "reject_reason",
+        "invalid_terms"
+      ],
+      "properties": {
+        "reject_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "invalid_terms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "required": [
+        "reject_reason",
+        "invalid_pattern"
+      ],
+      "properties": {
+        "reject_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "invalid_pattern": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  ]
+}

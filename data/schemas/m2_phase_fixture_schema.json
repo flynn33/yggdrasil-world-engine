@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m2_phase_fixture_schema.json",
+  "title": "M2 Phase Fixture Families",
+  "description": "Structural contracts for composite Phase 11 and Phase 12 fixtures that are not standalone domain records.",
+  "x-ywe-requirement-id": "YWE-M2-PHASE-FIXTURE",
+  "type": "object",
+  "oneOf": [
+    {
+      "required": [
+        "id",
+        "version",
+        "examples"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "version": {
+          "$ref": "https://ywe.local/schemas/common/version.schema.json"
+        },
+        "examples": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "truth_scope",
+              "example"
+            ],
+            "properties": {
+              "truth_scope": {
+                "type": "string",
+                "minLength": 1
+              },
+              "example": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "required": [
+        "batch_id",
+        "generation_context_refs",
+        "candidate_refs",
+        "shared_provenance_ref",
+        "location_state_ref",
+        "branch_reality_ref",
+        "truth_scope_summary"
+      ],
+      "properties": {
+        "batch_id": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "generation_context_refs": {
+          "$ref": "#/$defs/nonempty_identifiers"
+        },
+        "candidate_refs": {
+          "$ref": "#/$defs/nonempty_identifiers"
+        },
+        "shared_provenance_ref": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "location_state_ref": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "branch_reality_ref": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "truth_scope_summary": {
+          "$ref": "#/$defs/nonempty_identifiers"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "required": [
+        "lore_fragment_id",
+        "lore_kind",
+        "pattern_trace_ref",
+        "source_axiom_pressure_refs",
+        "source_worldstate_delta_refs",
+        "source_branch_refs",
+        "source_location_refs",
+        "truth_scope",
+        "visibility_conditions",
+        "generated_text_policy",
+        "myth_eligibility",
+        "prophecy_eligibility",
+        "provenance"
+      ],
+      "properties": {
+        "lore_fragment_id": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "lore_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pattern_trace_ref": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "source_axiom_pressure_refs": {
+          "$ref": "#/$defs/identifier_array"
+        },
+        "source_worldstate_delta_refs": {
+          "$ref": "#/$defs/identifier_array"
+        },
+        "source_branch_refs": {
+          "$ref": "#/$defs/identifier_array"
+        },
+        "source_location_refs": {
+          "$ref": "#/$defs/identifier_array"
+        },
+        "truth_scope": {},
+        "visibility_conditions": {},
+        "generated_text_policy": {},
+        "myth_eligibility": {},
+        "prophecy_eligibility": {},
+        "provenance": {}
+      },
+      "additionalProperties": false
+    },
+    {
+      "required": [
+        "example_id",
+        "context_type",
+        "primary_axiom",
+        "pressure",
+        "location_state_ref",
+        "branch_reality_ref",
+        "worldstate_delta_refs",
+        "suggested_quest_verbs",
+        "quest_candidate_summary",
+        "truth_scope",
+        "provenance_ref"
+      ],
+      "properties": {
+        "example_id": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "context_type": {
+          "const": "QuestGenerationContext"
+        },
+        "primary_axiom": {
+          "type": "string",
+          "pattern": "^A[1-9][0-9]*$"
+        },
+        "pressure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "location_state_ref": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "branch_reality_ref": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "player_runtime_state_ref": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "worldstate_delta_refs": {
+          "$ref": "#/$defs/identifier_array"
+        },
+        "suggested_quest_verbs": {
+          "$ref": "#/$defs/nonempty_strings"
+        },
+        "quest_candidate_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "truth_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provenance_ref": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "required": [
+        "quest_candidate_id",
+        "quest_kind",
+        "quest_pressure_summary",
+        "source_axiom_pressure_refs",
+        "source_branch_context_refs",
+        "source_player_context_refs",
+        "source_location_context_refs",
+        "source_worldstate_delta_refs",
+        "truth_scope",
+        "resolution_mode_options",
+        "expected_consequence_classes",
+        "content_provenance",
+        "exchange_target"
+      ],
+      "properties": {
+        "quest_candidate_id": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "quest_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quest_pressure_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_axiom_pressure_refs": {
+          "$ref": "#/$defs/identifier_array"
+        },
+        "source_branch_context_refs": {
+          "$ref": "#/$defs/identifier_array"
+        },
+        "source_player_context_refs": {
+          "$ref": "#/$defs/identifier_array"
+        },
+        "source_location_context_refs": {
+          "$ref": "#/$defs/identifier_array"
+        },
+        "source_worldstate_delta_refs": {
+          "$ref": "#/$defs/identifier_array"
+        },
+        "truth_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resolution_mode_options": {
+          "$ref": "#/$defs/nonempty_strings"
+        },
+        "expected_consequence_classes": {
+          "$ref": "#/$defs/nonempty_strings"
+        },
+        "content_provenance": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "exchange_target": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  ],
+  "$defs": {
+    "identifier_array": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+      }
+    },
+    "nonempty_identifiers": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+      }
+    },
+    "nonempty_strings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

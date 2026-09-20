@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m2_player_fixture_schema.json",
+  "title": "M2 Player Runtime Fixture Families",
+  "description": "Structural contracts for player-runtime composite examples and deltas.",
+  "x-ywe-requirement-id": "YWE-M2-PLAYER-FIXTURE",
+  "type": "object",
+  "oneOf": [
+    {
+      "required": [
+        "bias_id",
+        "source_player_state_ref",
+        "branch_ref",
+        "bias_sources",
+        "eligible_future_content",
+        "deferred_to_phase"
+      ],
+      "properties": {
+        "bias_id": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "source_player_state_ref": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "branch_ref": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "bias_sources": {
+          "type": "array"
+        },
+        "eligible_future_content": {
+          "type": "array"
+        },
+        "deferred_to_phase": {}
+      },
+      "additionalProperties": false
+    },
+    {
+      "required": [
+        "record_type",
+        "version",
+        "delta_id",
+        "target_state_ref",
+        "sequence_from",
+        "sequence_to",
+        "changed_fields",
+        "disposition",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ],
+      "properties": {
+        "record_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "$ref": "https://ywe.local/schemas/common/version.schema.json"
+        },
+        "delta_id": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "target_state_ref": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "sequence_from": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sequence_to": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "changed_fields": {
+          "type": "array",
+          "minItems": 1
+        },
+        "disposition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "diagnostic_ref": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "generation_plan_ref": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "source_ash_refs": {
+          "type": "array"
+        }
+      },
+      "additionalProperties": true
+    },
+    {
+      "required": [
+        "record_type",
+        "version",
+        "state_id",
+        "player_ref",
+        "sequence_id",
+        "current_phase",
+        "authority_boundary",
+        "ash_provenance",
+        "update_policy"
+      ],
+      "properties": {
+        "record_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "$ref": "https://ywe.local/schemas/common/version.schema.json"
+        },
+        "state_id": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "player_ref": {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        "sequence_id": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "current_phase": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority_boundary": {
+          "type": "object"
+        },
+        "ash_provenance": {
+          "type": "object"
+        },
+        "update_policy": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true
+    }
+  ]
+}

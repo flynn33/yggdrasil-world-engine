@@ -20,6 +20,7 @@ except ImportError:
     raise SystemExit(1)
 
 DEBT_PATH = "data/validation/schema_quality_baseline.json"
+CATALOG_PATH = "data/validation/m2_fixture_catalog.json"
 SCHEMA_KEYWORDS = {
     "type",
     "properties",
@@ -147,10 +148,24 @@ def resolve_json_pointer(document, ref: str) -> bool:
     return True
 
 
+def catalog_bound_example_paths(json_documents: dict[str, object]) -> set[str]:
+    catalog = json_documents.get(CATALOG_PATH)
+    if not isinstance(catalog, dict) or not isinstance(catalog.get("entries"), list):
+        return set()
+    return {
+        entry.get("instance_path")
+        for entry in catalog["entries"]
+        if isinstance(entry, dict)
+        and isinstance(entry.get("instance_path"), str)
+        and entry.get("normative") is True
+    }
+
+
 def quality_debt(
     schema_documents: dict[str, dict], json_documents: dict[str, object] | None = None
 ) -> dict[str, list[str]]:
     json_documents = json_documents or schema_documents
+    bound_example_paths = catalog_bound_example_paths(json_documents)
     return {
         "declared_schema_missing_id": sorted(
             path for path, document in schema_documents.items() if "$id" not in document
@@ -170,6 +185,7 @@ def quality_debt(
             path
             for path, document in json_documents.items()
             if path.startswith("examples/")
+            and path not in bound_example_paths
             and not (
                 isinstance(document, dict)
                 and any(key in document for key in ("$schema", "schema_ref", "schema_id"))

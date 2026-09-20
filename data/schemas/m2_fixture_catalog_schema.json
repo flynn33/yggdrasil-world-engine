@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m2_fixture_catalog_schema.json",
+  "title": "M2 Fixture Catalog",
+  "description": "Executable binding catalog for normative M2 fixtures.",
+  "x-ywe-requirement-id": "YWE-M2-FIXTURE-CATALOG",
+  "type": "object",
+  "required": [
+    "schema_ref",
+    "artifact_type",
+    "artifact_version",
+    "roadmap_ref",
+    "closed_debt_count",
+    "entries"
+  ],
+  "properties": {
+    "schema_ref": {
+      "const": "data/schemas/m2_fixture_catalog_schema.json"
+    },
+    "artifact_type": {
+      "const": "m2_fixture_catalog"
+    },
+    "artifact_version": {
+      "$ref": "https://ywe.local/schemas/common/version.schema.json"
+    },
+    "roadmap_ref": {
+      "const": "data/governance/specification_roadmap.json"
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    },
+    "closed_debt_count": {
+      "const": 39
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "required": [
+        "fixture_id",
+        "fixture_class",
+        "instance_path",
+        "instance_pointer",
+        "schema_path",
+        "expected_result",
+        "expected_diagnostic_ids",
+        "supporting_check_ids",
+        "normative",
+        "closes_schema_debt"
+      ],
+      "properties": {
+        "fixture_id": {
+          "type": "string",
+          "pattern": "^m2\\.fixture\\.[a-z0-9._-]+$"
+        },
+        "fixture_class": {
+          "enum": [
+            "positive",
+            "boundary",
+            "reject",
+            "recovery",
+            "replay",
+            "migration"
+          ]
+        },
+        "instance_path": {
+          "type": "string",
+          "pattern": "^examples/[A-Za-z0-9._/-]+\\.json$"
+        },
+        "instance_pointer": {
+          "type": "string",
+          "pattern": "^/(?:[^~]|~[01])*(?:/(?:[^~]|~[01])*)*$"
+        },
+        "schema_path": {
+          "type": "string",
+          "pattern": "^data/schemas/[A-Za-z0-9._/-]+\\.json$"
+        },
+        "expected_result": {
+          "enum": [
+            "pass",
+            "reject"
+          ]
+        },
+        "expected_diagnostic_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]+$"
+          }
+        },
+        "supporting_check_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]+$"
+          }
+        },
+        "normative": {
+          "type": "boolean"
+        },
+        "closes_schema_debt": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "expected_result": {
+                "const": "reject"
+              }
+            },
+            "required": [
+              "expected_result"
+            ]
+          },
+          "then": {
+            "properties": {
+              "expected_diagnostic_ids": {
+                "minItems": 1
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "expected_diagnostic_ids": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
