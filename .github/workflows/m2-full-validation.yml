@@ -1,0 +1,36 @@
+name: M2 Full Repository Validation
+
+on:
+  push:
+    branches:
+      - m2/complete-canonical-contract-schema-foundation
+    paths:
+      - ".github/workflows/m2-full-validation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out completion branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: m2/complete-canonical-contract-schema-foundation
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install validation dependencies
+        run: python -m pip install -r scripts/requirements.txt
+
+      - name: Run complete repository validation
+        shell: bash
+        run: |
+          python scripts/check_specification_roadmap.py .
+          bash scripts/run_checks.sh --context push
+          git diff --check
