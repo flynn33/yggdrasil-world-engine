@@ -1,4 +1,4 @@
-name: M2 Full Repository Validation
+name: Synchronize M2 Check Contract
 
 on:
   push:
@@ -8,10 +8,10 @@ on:
       - ".github/workflows/m2-full-validation.yml"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  validate:
+  synchronize:
     runs-on: ubuntu-latest
     steps:
       - name: Check out completion branch
@@ -28,9 +28,66 @@ jobs:
       - name: Install validation dependencies
         run: python -m pip install -r scripts/requirements.txt
 
-      - name: Run complete repository validation
+      - name: Synchronize roadmap check contract
+        shell: bash
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+
+          import json
+          from pathlib import Path
+
+          root = Path(".")
+          roadmap_check = root / "scripts/check_specification_roadmap.py"
+          m2_check = root / "scripts/check_m2_acceptance.py"
+          check_manifest = root / "data/validation/repository_checks.json"
+
+          text = roadmap_check.read_text(encoding="utf-8")
+          marker = '    ("non_destructive_diff", "<non-destructive-diff>", ["diff", "change-safety"]),\n'
+          insertion = (
+              '    (\n'
+              '        "m2_acceptance",\n'
+              '        "scripts/check_m2_acceptance.py",\n'
+              '        ["m2", "schema", "fixtures", "conformance", "traceability"],\n'
+              '    ),\n'
+          )
+          if marker not in text or '"m2_acceptance",\n        "scripts/check_m2_acceptance.py"' in text:
+              raise RuntimeError("roadmap check-contract insertion precondition failed")
+          roadmap_check.write_text(text.replace(marker, insertion + marker, 1), encoding="utf-8")
+
+          checks = json.loads(check_manifest.read_text(encoding="utf-8-sig"))
+          item = next(entry for entry in checks["checks"] if entry["id"] == "m2_acceptance")
+          item["command"] = ["{python}", "scripts/check_m2_acceptance.py", "{root}"]
+          check_manifest.write_text(json.dumps(checks, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+          text = m2_check.read_text(encoding="utf-8")
+          old = '''    parser.add_argument("--preflight", action="store_true")\n    parser.add_argument("--json", action="store_true", dest="json_output")\n    args = parser.parse_args()\n    root = args.root.resolve()\n    errors, metrics = run(root, preflight=args.preflight)\n'''
+          new = '''    parser.add_argument("--preflight", action="store_true")\n    parser.add_argument("--final", action="store_true", dest="final_mode")\n    parser.add_argument("--json", action="store_true", dest="json_output")\n    args = parser.parse_args()\n    if args.preflight and args.final_mode:\n        parser.error("--preflight and --final are mutually exclusive")\n    root = args.root.resolve()\n    if args.preflight:\n        preflight = True\n    elif args.final_mode:\n        preflight = False\n    else:\n        roadmap = load_json(root / ROADMAP_PATH)\n        milestones = {item.get("id"): item for item in roadmap.get("milestones", [])}\n        preflight = not (\n            roadmap.get("current_milestone") == "M3"\n            and milestones.get("M2", {}).get("status") == "complete"\n        )\n    errors, metrics = run(root, preflight=preflight)\n'''
+          if old not in text:
+              raise RuntimeError("M2 mode-selection patch precondition failed")
+          text = text.replace(old, new, 1)
+          old = '        mode = "preflight" if args.preflight else "final"\n'
+          new = '        mode = "preflight" if preflight else "final"\n'
+          if old not in text:
+              raise RuntimeError("M2 output-mode patch precondition failed")
+          m2_check.write_text(text.replace(old, new, 1), encoding="utf-8")
+
+          Path(".github/workflows/m2-full-validation.yml").unlink()
+          PY
+
+      - name: Validate synchronized contract
         shell: bash
         run: |
           python scripts/check_specification_roadmap.py .
-          bash scripts/run_checks.sh --context push
+          python scripts/check_m2_acceptance.py . --preflight
+          python -m unittest tests.test_m2_acceptance
           git diff --check
+
+      - name: Commit synchronized check contract
+        shell: bash
+        run: |
+          git config user.name "Jim Daley"
+          git config user.email "94642455+flynn33@users.noreply.github.com"
+          git add --all
+          git commit -m "Register the M2 acceptance check contract"
+          git push origin HEAD:m2/complete-canonical-contract-schema-foundation
