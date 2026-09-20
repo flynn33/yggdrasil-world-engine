@@ -531,10 +531,24 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("root", nargs="?", type=Path, default=Path("."))
     parser.add_argument("--preflight", action="store_true")
+    parser.add_argument("--final", action="store_true", dest="final_mode")
     parser.add_argument("--json", action="store_true", dest="json_output")
     args = parser.parse_args()
+    if args.preflight and args.final_mode:
+        parser.error("--preflight and --final are mutually exclusive")
     root = args.root.resolve()
-    errors, metrics = run(root, preflight=args.preflight)
+    if args.preflight:
+        preflight = True
+    elif args.final_mode:
+        preflight = False
+    else:
+        roadmap = load_json(root / ROADMAP_PATH)
+        milestones = {item.get("id"): item for item in roadmap.get("milestones", [])}
+        preflight = not (
+            roadmap.get("current_milestone") == "M3"
+            and milestones.get("M2", {}).get("status") == "complete"
+        )
+    errors, metrics = run(root, preflight=preflight)
     if args.json_output:
         print(json.dumps({"outcome": "fail" if errors else "pass", "errors": errors, "metrics": metrics}, indent=2))
     elif errors:
@@ -542,7 +556,7 @@ def main() -> int:
         for error in errors:
             print(f"  - {error}")
     else:
-        mode = "preflight" if args.preflight else "final"
+        mode = "preflight" if preflight else "final"
         print(
             f"M2 acceptance check passed ({mode}; {metrics['declared_schema_count']} schemas; "
             f"{metrics['catalog_entry_count']} catalog entries; {metrics['closed_debt_count']} debt closures; "

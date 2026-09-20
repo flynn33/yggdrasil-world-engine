@@ -72,6 +72,11 @@ REQUIRED_CHECK_CONTRACTS = [
     ("phase_16_17_recovery", "scripts/check_phase_16_17_recovery.py", ["phase", "legacy-structural"]),
     ("platform_agnosticism", "scripts/check_platform_agnosticism.py", ["platform", "governance"]),
     ("repository_attribution_policy", "scripts/check_repository_attribution_policy.py", ["attribution", "governance"]),
+    (
+        "m2_acceptance",
+        "scripts/check_m2_acceptance.py",
+        ["m2", "schema", "fixtures", "conformance", "traceability"],
+    ),
     ("non_destructive_diff", "<non-destructive-diff>", ["diff", "change-safety"]),
 ]
 
