@@ -34,8 +34,10 @@ jobs:
           from __future__ import annotations
 
           import importlib.util
+          import hashlib
           import json
           import re
+          from collections import Counter
           from pathlib import Path
 
           ROOT = Path(".")
@@ -47,6 +49,9 @@ jobs:
           HANDOFF_PATH = ROOT / "docs/design-planning/handoffs/2026-09-19-consumer-compatibility.md"
           DEBT_PATH = ROOT / "data/validation/schema_quality_baseline.json"
           TEMP_WORKFLOW_PATH = ROOT / ".github/workflows/roadmap-truth-correction.yml"
+          CLASSIFICATION_PATH = ROOT / "data/governance/artifact_classification_manifest.json"
+          PROMISE_PATH = ROOT / "data/governance/public_promise_register.json"
+          QUALITY_DEBT_PATH = ROOT / "data/validation/repository_quality_debt_inventory.json"
 
           def require(condition: bool, message: str) -> None:
               if not condition:
@@ -55,6 +60,27 @@ jobs:
           def replace_once(text: str, old: str, new: str, label: str) -> str:
               require(text.count(old) == 1, f"{label}: expected one exact match, found {text.count(old)}")
               return text.replace(old, new, 1)
+
+          def normalized_bytes(path: Path) -> bytes:
+              text = path.read_bytes().decode("utf-8-sig", errors="strict")
+              return text.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
+
+          def normalized_sha256(path: Path) -> str:
+              return hashlib.sha256(normalized_bytes(path)).hexdigest()
+
+          def nul_digest(values: list[str]) -> str:
+              payload = b"".join(value.encode("utf-8") + b"\0" for value in sorted(set(values)))
+              return hashlib.sha256(payload).hexdigest()
+
+          def reviewed_surface_digest(entries: list[dict]) -> str:
+              payload = b"".join(
+                  str(entry.get("path", "")).encode("utf-8")
+                  + b"\t"
+                  + str(entry.get("sha256", "")).encode("ascii", errors="strict")
+                  + b"\n"
+                  for entry in sorted(entries, key=lambda item: item.get("path", ""))
+              )
+              return hashlib.sha256(payload).hexdigest()
 
           roadmap = json.loads(ROADMAP_PATH.read_text(encoding="utf-8"))
           milestones = {item["id"]: item for item in roadmap["milestones"]}
@@ -102,9 +128,7 @@ jobs:
               "data/validation/repository_quality_debt_inventory.json",
           ]
           validation["open_work"] = [
-              "Bind the remaining 39 JSON examples to exact schemas and expected outcomes.",
-              "Create the complete M2 fixture catalog and roadmap-derived acceptance gate and evidence.",
-              "Run the consolidated checks and M2 gate from a clean offline checkout before acceptance.",
+              "Bind the remaining 39 JSON examples, complete the M2 fixture catalog and roadmap-derived acceptance evidence, and run the clean offline M2 acceptance gate."
           ]
 
           m2 = milestones["M2"]
@@ -355,6 +379,42 @@ jobs:
           **Saved at:** `main`, in the commit containing this planning-13 handoff.
           """
           HANDOFF_PATH.write_text(handoff, encoding="utf-8")
+
+          quality_debt = json.loads(QUALITY_DEBT_PATH.read_text(encoding="utf-8"))
+          open_work_values: list[str] = []
+          for subsystem in roadmap.get("subsystems", []):
+              subsystem_id = subsystem.get("id", "")
+              for text in subsystem.get("open_work", []):
+                  open_work_values.append(f"{subsystem_id}:{text}")
+          quality_debt["summary"]["roadmap_open_work_count"] = len(open_work_values)
+          quality_debt["summary"]["roadmap_open_work_sha256"] = nul_digest(open_work_values)
+          QUALITY_DEBT_PATH.write_text(
+              json.dumps(quality_debt, indent=2, ensure_ascii=False) + "\n",
+              encoding="utf-8",
+          )
+
+          promises = json.loads(PROMISE_PATH.read_text(encoding="utf-8"))
+          for surface in promises["reviewed_surfaces"]:
+              surface_path = ROOT / surface["path"]
+              require(surface_path.is_file(), f"Missing reviewed public surface: {surface['path']}")
+              surface["sha256"] = normalized_sha256(surface_path)
+          promises["reviewed_surface_aggregate_sha256"] = reviewed_surface_digest(
+              promises["reviewed_surfaces"]
+          )
+          PROMISE_PATH.write_text(
+              json.dumps(promises, indent=2, ensure_ascii=False) + "\n",
+              encoding="utf-8",
+          )
+
+          classification = json.loads(CLASSIFICATION_PATH.read_text(encoding="utf-8"))
+          for source in classification["sensitive_sources"]:
+              source_path = ROOT / source["path"]
+              require(source_path.is_file(), f"Missing classification-sensitive source: {source['path']}")
+              source["sha256"] = normalized_sha256(source_path)
+          CLASSIFICATION_PATH.write_text(
+              json.dumps(classification, indent=2, ensure_ascii=False) + "\n",
+              encoding="utf-8",
+          )
 
           require(TEMP_WORKFLOW_PATH.is_file(), "Temporary correction workflow is missing")
           TEMP_WORKFLOW_PATH.unlink()
