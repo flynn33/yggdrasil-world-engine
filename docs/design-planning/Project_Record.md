@@ -88,7 +88,8 @@ milestone evidence because the stated exit conditions were not actually satisfie
 ## 6. Current work and verification
 
 Starting branch: `main`, base `fc25065304e2392b043c205a57d0564d33a49139`.
-Working branch: `m2/fixture-catalog`. The initial checkout was clean.
+Working branch: `m2/fixture-catalog`, fast-forward integrated into `main`.
+The initial checkout was clean.
 
 The initial consolidated suite returned 26 passing checks and three blocking failures.
 The failed unit, M0, and M1 checks all reported classification/scope snapshot drift:
@@ -113,12 +114,24 @@ status predates the migration and the repository does not define its intended va
 The accepted repository baseline remains `v2.0.23`; this is unreleased M2 work,
 not a new baseline acceptance, Git tag, or specification publication.
 
-The final working-tree consolidated run returned 29 passing checks and one unit-check
-failure captured before the working-branch attribution correction. The exact failing
-`LiveM1ContractTests.test_live_external_guardrails_pass` then passed after that correction;
-the standalone attribution check also passed. Independent diff review found no blocking
-findings. A fresh clean-checkout consolidated run and GitHub publication remain pending
-before delivery. M2 acceptance and M3 activation remain unrecorded.
+The fresh local clone at implementation commit
+`f35911a4a77c93dc6fe32bb2e396c60bcf01fbc2` passed `bash scripts/run_checks.sh`:
+30 checks passed, zero blocking failures, zero advisories, including all 297 unit tests.
+The clone was clean before and after validation. Its external test environment used
+Python 3.12.10, `jsonschema==4.25.1`, and `PyYAML==6.0.3`. Offline references were resolved
+without schema retrieval. The committed non-destructive diff check against the original
+`origin/main` base also passed (23 modified, zero deleted/renamed, ten added files).
+
+The earlier working-tree run captured one attribution test failure before the branch
+name was corrected; the exact failing test passed afterward and the fresh clone suite
+passed in full. Independent diff review found no blocking findings.
+
+Implementation commit `f35911a4a77c93dc6fe32bb2e396c60bcf01fbc2` was pushed under the
+verified owner account and remote `main` was read back at that exact revision. GitHub
+reported the owner's authorized bypass of pull-request and verified-signature rules.
+The following documentation checkpoint records those executed results; executable
+source, schema, fixture, and test contents are unchanged. M2 acceptance and M3 activation
+remain unrecorded.
 
 ## 7. Historical publication continuity
 
@@ -141,5 +154,5 @@ the roadmap-derived M2 acceptance gate and durable evidence.
 
 **Needed from owner:** Nothing for continued M2 engineering.
 
-**Saved at:** The Git commit containing this planning-14 record; publication pending
-verification at the time of this draft.
+**Saved at:** `main`, in the commit containing this planning-14 record. The validated
+implementation save point is `f35911a4a77c93dc6fe32bb2e396c60bcf01fbc2`.

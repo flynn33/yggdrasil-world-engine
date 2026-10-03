@@ -3,7 +3,7 @@
 Date: October 3, 2026
 Authoritative record: `docs/design-planning/Project_Record.md`, planning-14.
 Base: `main` at `fc25065304e2392b043c205a57d0564d33a49139`.
-Working branch: `m2/fixture-catalog`.
+Working branch: `m2/fixture-catalog`, integrated into `main`.
 
 The current work adds an explicit 197-schema offline catalog and 102 executable
 fixture bindings, including 49 intended rejections. Twenty existing examples
@@ -25,11 +25,15 @@ rules or historical M0/M1 acceptance evidence. Independent regression review
 caught and corrected Boolean annotation target confusion and nested resource ID
 shadowing; 42 focused regression tests pass.
 
-The working-tree consolidated run passed 29 checks; its one unit-check failure
-captured the previous branch name before the attribution correction. The exact
-external-guardrail test then passed after the correction. Final clean-checkout
-consolidated verification and publication are pending at this checkpoint.
-The containing commit, once validated and pushed, is the durable save point.
+Implementation commit `f35911a4a77c93dc6fe32bb2e396c60bcf01fbc2` passed all 30
+consolidated checks in a clean local clone, including 297 unit tests. The pinned
+external runtime uses Python 3.12.10, jsonschema 4.25.1, and PyYAML 6.0.3.
+The committed non-destructive diff check passed with zero deletions or renames.
+The earlier branch-name attribution failure was corrected and did not recur in
+the clean run. Remote `main` was read back at the implementation revision after
+the owner-account push. GitHub reported the authorized pull-request/signature
+rule bypass. This documentation checkpoint preserves those executed results;
+its containing commit is the durable continuity save point.
 
 The current method is Raven Forge Development v0.7.0 at
 `87409bc36fb9d4782eab02189adb184f2b3962a7`, deliberately read and bound under the
