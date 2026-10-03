@@ -1,0 +1,390 @@
+{
+  "positive": {
+    "identifier": "record.example.001",
+    "reference": {
+      "identifier": "record.source.001",
+      "kind": "source",
+      "version": "1.0.0"
+    },
+    "version": "1.0.0",
+    "time": "2026-10-03T00:00:00Z",
+    "ordering": {
+      "sequence": 1,
+      "predecessor": {
+        "identifier": "record.source.001",
+        "kind": "source",
+        "version": "1.0.0"
+      },
+      "tie_break": "record.example.001"
+    },
+    "request": {
+      "request_id": "request.example.001",
+      "request_kind": "schema_validation",
+      "requested_at": "2026-10-03T00:00:00Z",
+      "idempotency": {
+        "key": "request.example.001",
+        "scope": "fixture"
+      },
+      "extensions": {
+        "fixture.note": "request-boundary"
+      }
+    },
+    "result": {
+      "result_id": "result.example.001",
+      "status": "succeeded",
+      "diagnostics": [
+        {
+          "diagnostic_id": "diagnostic.validation.001",
+          "severity": "info",
+          "message": "Schema fixture validated.",
+          "rule_ids": [
+            "YWE-M2-COMMON-DIAGNOSTIC"
+          ]
+        }
+      ],
+      "errors": []
+    },
+    "event": {
+      "event_id": "event.example.001",
+      "event_kind": "schema_validation",
+      "occurred_at": "2026-10-03T00:00:00Z",
+      "ordering": {
+        "sequence": 0
+      },
+      "provenance": {
+        "source_refs": [
+          {
+            "identifier": "record.source.001",
+            "kind": "source",
+            "version": "1.0.0"
+          }
+        ],
+        "derived_at": "2026-10-03T00:00:00Z"
+      }
+    },
+    "provenance": {
+      "source_refs": [
+        {
+          "identifier": "record.source.001",
+          "kind": "source",
+          "version": "1.0.0"
+        }
+      ],
+      "derived_at": "2026-10-03T00:00:00Z"
+    },
+    "diagnostic": {
+      "diagnostic_id": "diagnostic.validation.001",
+      "severity": "info",
+      "message": "Schema fixture validated.",
+      "rule_ids": [
+        "YWE-M2-COMMON-DIAGNOSTIC"
+      ]
+    },
+    "error": {
+      "error_id": "error.example.001",
+      "code": "SCHEMA_REJECTED",
+      "message": "Fixture violates its schema.",
+      "diagnostic": {
+        "diagnostic_id": "diagnostic.validation.001",
+        "severity": "info",
+        "message": "Schema fixture validated.",
+        "rule_ids": [
+          "YWE-M2-COMMON-DIAGNOSTIC"
+        ]
+      },
+      "retryable": false
+    },
+    "transaction": {
+      "transaction_id": "transaction.example.001",
+      "status": "planned",
+      "idempotency": {
+        "key": "request.example.001",
+        "scope": "fixture"
+      },
+      "compensations": [
+        {
+          "compensation_id": "compensation.example.001",
+          "target_transaction_ref": {
+            "identifier": "transaction.example.001",
+            "kind": "transaction"
+          },
+          "action": "restore_previous_state",
+          "status": "planned"
+        }
+      ]
+    },
+    "compensation": {
+      "compensation_id": "compensation.example.001",
+      "target_transaction_ref": {
+        "identifier": "transaction.example.001",
+        "kind": "transaction"
+      },
+      "action": "restore_previous_state",
+      "status": "planned"
+    },
+    "idempotency": {
+      "key": "request.example.001",
+      "scope": "fixture"
+    },
+    "retry": {
+      "attempt": 1,
+      "maximum_attempts": 3,
+      "retry_after": 2.0
+    },
+    "extension": {
+      "fixture.note": "extension-value",
+      "vendor.option": {
+        "enabled": true
+      }
+    },
+    "deprecation": {
+      "deprecated": true,
+      "replacement": "record.replacement.001",
+      "removal_version": "2.0.0",
+      "migration": "Copy the named reference to its replacement."
+    }
+  },
+  "boundary": {
+    "identifier_minimum_length": "a",
+    "identifier_maximum_length": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "ordering_zero_sequence": {
+      "sequence": 0
+    },
+    "retry_minimum_values": {
+      "attempt": 0,
+      "maximum_attempts": 1,
+      "retry_after": 0
+    },
+    "extension_empty_object": {}
+  },
+  "reject": {
+    "identifier_overlong": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "reference_missing_kind": {
+      "identifier": "record.source.001",
+      "version": "1.0.0"
+    },
+    "version_missing_component": "1.0",
+    "time_number": 42,
+    "ordering_negative_sequence": {
+      "sequence": -1,
+      "predecessor": {
+        "identifier": "record.source.001",
+        "kind": "source",
+        "version": "1.0.0"
+      },
+      "tie_break": "record.example.001"
+    },
+    "request_missing_idempotency": {
+      "request_id": "request.example.001",
+      "request_kind": "schema_validation",
+      "requested_at": "2026-10-03T00:00:00Z",
+      "extensions": {
+        "fixture.note": "request-boundary"
+      }
+    },
+    "result_unknown_status": {
+      "result_id": "result.example.001",
+      "status": "unknown",
+      "diagnostics": [
+        {
+          "diagnostic_id": "diagnostic.validation.001",
+          "severity": "info",
+          "message": "Schema fixture validated.",
+          "rule_ids": [
+            "YWE-M2-COMMON-DIAGNOSTIC"
+          ]
+        }
+      ],
+      "errors": []
+    },
+    "event_missing_provenance": {
+      "event_id": "event.example.001",
+      "event_kind": "schema_validation",
+      "occurred_at": "2026-10-03T00:00:00Z",
+      "ordering": {
+        "sequence": 0
+      }
+    },
+    "provenance_empty_sources": {
+      "source_refs": [],
+      "derived_at": "2026-10-03T00:00:00Z"
+    },
+    "provenance_duplicate_source": {
+      "source_refs": [
+        {
+          "identifier": "record.source.001",
+          "kind": "source",
+          "version": "1.0.0"
+        },
+        {
+          "identifier": "record.source.001",
+          "kind": "source",
+          "version": "1.0.0"
+        }
+      ],
+      "derived_at": "2026-10-03T00:00:00Z"
+    },
+    "diagnostic_unknown_severity": {
+      "diagnostic_id": "diagnostic.validation.001",
+      "severity": "unknown",
+      "message": "Schema fixture validated.",
+      "rule_ids": [
+        "YWE-M2-COMMON-DIAGNOSTIC"
+      ]
+    },
+    "error_retryable_wrong_type": {
+      "error_id": "error.example.001",
+      "code": "SCHEMA_REJECTED",
+      "message": "Fixture violates its schema.",
+      "diagnostic": {
+        "diagnostic_id": "diagnostic.validation.001",
+        "severity": "info",
+        "message": "Schema fixture validated.",
+        "rule_ids": [
+          "YWE-M2-COMMON-DIAGNOSTIC"
+        ]
+      },
+      "retryable": "false"
+    },
+    "transaction_unknown_status": {
+      "transaction_id": "transaction.example.001",
+      "status": "unknown",
+      "idempotency": {
+        "key": "request.example.001",
+        "scope": "fixture"
+      },
+      "compensations": [
+        {
+          "compensation_id": "compensation.example.001",
+          "target_transaction_ref": {
+            "identifier": "transaction.example.001",
+            "kind": "transaction"
+          },
+          "action": "restore_previous_state",
+          "status": "planned"
+        }
+      ]
+    },
+    "compensation_missing_target_kind": {
+      "compensation_id": "compensation.example.001",
+      "target_transaction_ref": {
+        "identifier": "transaction.example.001"
+      },
+      "action": "restore_previous_state",
+      "status": "planned"
+    },
+    "idempotency_missing_key": {
+      "scope": "fixture"
+    },
+    "retry_negative_delay": {
+      "attempt": 1,
+      "maximum_attempts": 3,
+      "retry_after": -1
+    },
+    "extension_invalid_property_name": {
+      "/invalid": true
+    },
+    "deprecation_false": {
+      "deprecated": false,
+      "replacement": "record.replacement.001",
+      "removal_version": "2.0.0",
+      "migration": "Copy the named reference to its replacement."
+    }
+  },
+  "ability_manifest": {
+    "positive": {
+      "schema_id": "ywe.ability_manifest.v1",
+      "schema_version": "0.1.0",
+      "ability_id": "ability.oath_sight",
+      "display_name": "Oath-Sight",
+      "description": "The White Wolf walks ahead of the player and reveals oath traces, contradictions, and hidden pattern seams.",
+      "ability_family": "revelation_pattern_reading",
+      "state_ref": {
+        "ref_id": "ability.oath_sight.state",
+        "ref_type": "AbilityState"
+      },
+      "source_refs": [
+        {
+          "ref_id": "ravenfall_gate.reveal_oath.delta",
+          "ref_type": "WorldstateDeltaPacket",
+          "source_system": "worldstate"
+        },
+        {
+          "ref_id": "white_wolf.pattern_visibility.event",
+          "ref_type": "WolfGuidanceEvent",
+          "source_system": "twin_wolf_companion"
+        },
+        {
+          "ref_id": "plane.mental_causal.pressure",
+          "ref_type": "PlaneAttunementState",
+          "source_system": "player_runtime"
+        }
+      ],
+      "use_modes": [
+        "quest",
+        "perception",
+        "exploration"
+      ],
+      "manifestation_rule_refs": [
+        {
+          "ref_id": "ability.oath_sight.manifestation_rule",
+          "ref_type": "AbilityManifestationRule"
+        }
+      ],
+      "risk_profile_ref": {
+        "ref_id": "ability.oath_sight.risk",
+        "ref_type": "AbilityRiskProfile"
+      },
+      "consequence_policy_ref": {
+        "ref_id": "ability.oath_sight.consequence_policy",
+        "ref_type": "AbilityConsequencePacket"
+      },
+      "wolf_scope": "white_wolf",
+      "forbidden_interpretations": [
+        "generic_skill_tree_reward",
+        "wolf_morality_meter",
+        "white_good_dark_evil",
+        "permanent_wolf_death_cost"
+      ]
+    },
+    "reject_missing_sources": {
+      "schema_id": "ywe.ability_manifest.v1",
+      "schema_version": "0.1.0",
+      "ability_id": "ability.oath_sight",
+      "display_name": "Oath-Sight",
+      "description": "The White Wolf walks ahead of the player and reveals oath traces, contradictions, and hidden pattern seams.",
+      "ability_family": "revelation_pattern_reading",
+      "state_ref": {
+        "ref_id": "ability.oath_sight.state",
+        "ref_type": "AbilityState"
+      },
+      "source_refs": [],
+      "use_modes": [
+        "quest",
+        "perception",
+        "exploration"
+      ],
+      "manifestation_rule_refs": [
+        {
+          "ref_id": "ability.oath_sight.manifestation_rule",
+          "ref_type": "AbilityManifestationRule"
+        }
+      ],
+      "risk_profile_ref": {
+        "ref_id": "ability.oath_sight.risk",
+        "ref_type": "AbilityRiskProfile"
+      },
+      "consequence_policy_ref": {
+        "ref_id": "ability.oath_sight.consequence_policy",
+        "ref_type": "AbilityConsequencePacket"
+      },
+      "wolf_scope": "white_wolf",
+      "forbidden_interpretations": [
+        "generic_skill_tree_reward",
+        "wolf_morality_meter",
+        "white_good_dark_evil",
+        "permanent_wolf_death_cost"
+      ]
+    }
+  }
+}

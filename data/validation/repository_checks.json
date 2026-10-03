@@ -22,6 +22,15 @@
       "blocking": true
     },
     {
+      "id": "m2_fixture_catalog",
+      "name": "M2 fixture bindings and offline schema references",
+      "command": ["{python}", "scripts/check_fixture_catalog.py", "{root}"],
+      "groups": ["m2", "schema", "conformance"],
+      "roadmap_milestones": ["M2", "M9"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
       "id": "validation_unit_tests",
       "name": "Validation foundation unit tests",
       "command": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-p", "test_*.py"],

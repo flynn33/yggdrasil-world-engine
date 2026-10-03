@@ -87,8 +87,17 @@
       "minLength": 1
     },
     "expected_consequence_classes": {
-      "type": "string",
-      "minLength": 1
+      "type": [
+        "string",
+        "array"
+      ],
+      "minLength": 1,
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0021"
     },
     "lore_fragment_refs": {
       "type": "array",
@@ -124,8 +133,17 @@
       "minLength": 1
     },
     "resolution_mode_options": {
-      "type": "string",
-      "minLength": 1
+      "type": [
+        "string",
+        "array"
+      ],
+      "minLength": 1,
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0021"
     },
     "source_axiom_pressure_refs": {
       "type": "array",

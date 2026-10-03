@@ -1,0 +1,795 @@
+{
+  "schema_ref": "data/schemas/contract_catalog_schema.json",
+  "artifact_type": "ywe_contract_catalog",
+  "artifact_version": "1.0.0",
+  "schemas": [
+    {
+      "schema_id": "https://ywe.local/schemas/core/ash_pattern_engine/pattern_engine_schema.json",
+      "path": "core/ash_pattern_engine/pattern_engine_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/core/cosmology_engine/cosmology_schema.json",
+      "path": "core/cosmology_engine/cosmology_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/core/narrative_engine/narrative_schema.json",
+      "path": "core/narrative_engine/narrative_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/core/perception_engine/perception_layer_persistence_schema.json",
+      "path": "core/perception_engine/perception_layer_persistence_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/core/perception_engine/perception_schema.json",
+      "path": "core/perception_engine/perception_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/core/realm_engine/realm_schema.json",
+      "path": "core/realm_engine/realm_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/data/bloodline_registry/bloodline_schema.json",
+      "path": "data/bloodline_registry/bloodline_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/data/myth_archetypes/myth_schema.json",
+      "path": "data/myth_archetypes/myth_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/data/pattern_archetypes/pattern_schema.json",
+      "path": "data/pattern_archetypes/pattern_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/data/player_schema.json",
+      "path": "data/player_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/data/quest_archetypes/quest_chain_manifest_schema.json",
+      "path": "data/quest_archetypes/quest_chain_manifest_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/quest_seed_schema.json",
+      "path": "data/quest_archetypes/quest_seed_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_artifact_binding_link_schema.json",
+      "path": "data/schemas/ability_artifact_binding_link_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_branch_influence_schema.json",
+      "path": "data/schemas/ability_branch_influence_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_catalog_entry_schema.json",
+      "path": "data/schemas/ability_catalog_entry_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_combat_role_schema.json",
+      "path": "data/schemas/ability_combat_role_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_consequence_packet_schema.json",
+      "path": "data/schemas/ability_consequence_packet_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_cooldown_and_recovery_schema.json",
+      "path": "data/schemas/ability_cooldown_and_recovery_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_decoherence_state_schema.json",
+      "path": "data/schemas/ability_decoherence_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_lineage_resonance_link_schema.json",
+      "path": "data/schemas/ability_lineage_resonance_link_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_loadout_state_schema.json",
+      "path": "data/schemas/ability_loadout_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_manifest_schema.json",
+      "path": "data/schemas/ability_manifest_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_manifestation_rule_schema.json",
+      "path": "data/schemas/ability_manifestation_rule_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_myth_prophecy_link_schema.json",
+      "path": "data/schemas/ability_myth_prophecy_link_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_permission_gate_schema.json",
+      "path": "data/schemas/ability_permission_gate_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_plane_attunement_link_schema.json",
+      "path": "data/schemas/ability_plane_attunement_link_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_progression_event_schema.json",
+      "path": "data/schemas/ability_progression_event_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_quest_application_schema.json",
+      "path": "data/schemas/ability_quest_application_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_risk_profile_schema.json",
+      "path": "data/schemas/ability_risk_profile_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_source_ref_schema.json",
+      "path": "data/schemas/ability_source_ref_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_state_schema.json",
+      "path": "data/schemas/ability_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_state_update_packet_schema.json",
+      "path": "data/schemas/ability_state_update_packet_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_unlock_pressure_schema.json",
+      "path": "data/schemas/ability_unlock_pressure_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_use_context_schema.json",
+      "path": "data/schemas/ability_use_context_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_use_trace_schema.json",
+      "path": "data/schemas/ability_use_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ability_wolf_synergy_schema.json",
+      "path": "data/schemas/ability_wolf_synergy_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/artifact_classification_manifest_schema.json",
+      "path": "data/schemas/artifact_classification_manifest_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/artifact_manifest_schema.json",
+      "path": "data/schemas/artifact_manifest_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ash_dependency_identity_schema.json",
+      "path": "data/schemas/ash_dependency_identity_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ash_generation_gate_contract_schema.json",
+      "path": "data/schemas/ash_generation_gate_contract_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ash_generation_packet_schema.json",
+      "path": "data/schemas/ash_generation_packet_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ash_pattern_system_component_role_schema.json",
+      "path": "data/schemas/ash_pattern_system_component_role_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ash_upstream_authority_gate_contract_schema.json",
+      "path": "data/schemas/ash_upstream_authority_gate_contract_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ash_upstream_generation_envelope_schema.json",
+      "path": "data/schemas/ash_upstream_generation_envelope_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/authority_stack_schema.json",
+      "path": "data/schemas/authority_stack_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/axiom_diagnostic_packet_schema.json",
+      "path": "data/schemas/axiom_diagnostic_packet_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/base_world_ontology_schema.json",
+      "path": "data/schemas/base_world_ontology_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/bloodline_resonance_state_schema.json",
+      "path": "data/schemas/bloodline_resonance_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/branch_event_schema.json",
+      "path": "data/schemas/branch_event_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/branch_generation_context_schema.json",
+      "path": "data/schemas/branch_generation_context_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/branch_reality_trace_schema.json",
+      "path": "data/schemas/branch_reality_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/buried_oath_quest_design_schema.json",
+      "path": "data/schemas/buried_oath_quest_design_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/campaign_identity_manifest_schema.json",
+      "path": "data/schemas/campaign_identity_manifest_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/canonical_term_index_schema.json",
+      "path": "data/schemas/canonical_term_index_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/celestial_identity_state_schema.json",
+      "path": "data/schemas/celestial_identity_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/character_progression_schema.json",
+      "path": "data/schemas/character_progression_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/choice_to_consequence_trace_schema.json",
+      "path": "data/schemas/choice_to_consequence_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/combat_assist_trace_schema.json",
+      "path": "data/schemas/combat_assist_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/compensation.schema.json",
+      "path": "data/schemas/common/compensation.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/deprecation.schema.json",
+      "path": "data/schemas/common/deprecation.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/diagnostic.schema.json",
+      "path": "data/schemas/common/diagnostic.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/error.schema.json",
+      "path": "data/schemas/common/error.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/event.schema.json",
+      "path": "data/schemas/common/event.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/extension.schema.json",
+      "path": "data/schemas/common/extension.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/idempotency.schema.json",
+      "path": "data/schemas/common/idempotency.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/identifier.schema.json",
+      "path": "data/schemas/common/identifier.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/ordering.schema.json",
+      "path": "data/schemas/common/ordering.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/provenance.schema.json",
+      "path": "data/schemas/common/provenance.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/reference.schema.json",
+      "path": "data/schemas/common/reference.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/request.schema.json",
+      "path": "data/schemas/common/request.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/result.schema.json",
+      "path": "data/schemas/common/result.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/retry.schema.json",
+      "path": "data/schemas/common/retry.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/time.schema.json",
+      "path": "data/schemas/common/time.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/transaction.schema.json",
+      "path": "data/schemas/common/transaction.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/common/version.schema.json",
+      "path": "data/schemas/common/version.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/companion_presence_model_schema.json",
+      "path": "data/schemas/companion_presence_model_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/companion_reward_delta_schema.json",
+      "path": "data/schemas/companion_reward_delta_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ywe.consequence_classification.v1.json",
+      "path": "data/schemas/consequence_classification_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/consequence_resolution_packet_schema.json",
+      "path": "data/schemas/consequence_resolution_packet_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/content_eligibility_gate_schema.json",
+      "path": "data/schemas/content_eligibility_gate_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/content_generation_batch_schema.json",
+      "path": "data/schemas/content_generation_batch_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/content_generation_candidate_schema.json",
+      "path": "data/schemas/content_generation_candidate_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/content_generation_provenance_schema.json",
+      "path": "data/schemas/content_generation_provenance_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/content_generation_resolution_schema.json",
+      "path": "data/schemas/content_generation_resolution_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/content_manifest_exchange_schema.json",
+      "path": "data/schemas/content_manifest_exchange_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/content_rejection_reason_schema.json",
+      "path": "data/schemas/content_rejection_reason_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/contract_catalog_schema.json",
+      "path": "data/schemas/contract_catalog_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/creature_manifest_schema.json",
+      "path": "data/schemas/creature_manifest_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ywe.diagnostic_noop.v1.json",
+      "path": "data/schemas/diagnostic_noop_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/dual_variable_alignment_state_schema.json",
+      "path": "data/schemas/dual_variable_alignment_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/engine_authority_stack_schema.json",
+      "path": "data/schemas/engine_authority_stack_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/engine_cosmology_framework_schema.json",
+      "path": "data/schemas/engine_cosmology_framework_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/existence_potential_schema.json",
+      "path": "data/schemas/existence_potential_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/exploration_frontier_request_schema.json",
+      "path": "data/schemas/exploration_frontier_request_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/fixture_catalog_schema.json",
+      "path": "data/schemas/fixture_catalog_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/future_generation_bias_trace_schema.json",
+      "path": "data/schemas/future_generation_bias_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ywe.future_generation_bias_update.v1.json",
+      "path": "data/schemas/future_generation_bias_update_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/game_identity_manifest_schema.json",
+      "path": "data/schemas/game_identity_manifest_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/generated_lore_fragment_schema.json",
+      "path": "data/schemas/generated_lore_fragment_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/governance_record_register_schema.json",
+      "path": "data/schemas/governance_record_register_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/leaf_branch_reality_state_schema.json",
+      "path": "data/schemas/leaf_branch_reality_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/lineage_resonance_state_schema.json",
+      "path": "data/schemas/lineage_resonance_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ywe.location_access_state.v1.json",
+      "path": "data/schemas/location_access_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ywe.location_branch_overlay.v1.json",
+      "path": "data/schemas/location_branch_overlay_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ywe.location_content_eligibility.v1.json",
+      "path": "data/schemas/location_content_eligibility_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ywe.location_mutation_history.v1.json",
+      "path": "data/schemas/location_mutation_history_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ywe.location_mutation_rule.v1.json",
+      "path": "data/schemas/location_mutation_rule_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/location_mutation_trace_schema.json",
+      "path": "data/schemas/location_mutation_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ywe.location_resolution_context.v1.json",
+      "path": "data/schemas/location_resolution_context_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ywe.location_state_record.v1.json",
+      "path": "data/schemas/location_state_record_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/lore_archive_record_schema.json",
+      "path": "data/schemas/lore_archive_record_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/lore_generation_context_schema.json",
+      "path": "data/schemas/lore_generation_context_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/lore_pattern_trace_schema.json",
+      "path": "data/schemas/lore_pattern_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/lore_visibility_rule_schema.json",
+      "path": "data/schemas/lore_visibility_rule_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/m1_acceptance_evidence_schema.json",
+      "path": "data/schemas/m1_acceptance_evidence_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/milestone_acceptance_evidence_schema.json",
+      "path": "data/schemas/milestone_acceptance_evidence_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/myth_prophecy_trace_schema.json",
+      "path": "data/schemas/myth_prophecy_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/myth_record_schema_expansion.json",
+      "path": "data/schemas/myth_record_schema_expansion.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/normative_requirement_register_schema.json",
+      "path": "data/schemas/normative_requirement_register_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/npc_branch_role_schema.json",
+      "path": "data/schemas/npc_branch_role_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/npc_faction_lore_trace_schema.json",
+      "path": "data/schemas/npc_faction_lore_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/npc_generation_context_schema.json",
+      "path": "data/schemas/npc_generation_context_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/npc_manifest_candidate_schema.json",
+      "path": "data/schemas/npc_manifest_candidate_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/npc_manifest_schema.json",
+      "path": "data/schemas/npc_manifest_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/npc_relation_graph_schema.json",
+      "path": "data/schemas/npc_relation_graph_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/npc_self_reference_state_schema.json",
+      "path": "data/schemas/npc_self_reference_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/pattern_vector_schema.json",
+      "path": "data/schemas/pattern_vector_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/perception_layer_persistence_schema.json",
+      "path": "data/schemas/perception_layer_persistence_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/phase_16_traceability_matrix_schema.json",
+      "path": "data/schemas/phase_16_traceability_matrix_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/phase_16_vertical_slice_manifest_schema.json",
+      "path": "data/schemas/phase_16_vertical_slice_manifest_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/plane_attunement_state_schema.json",
+      "path": "data/schemas/plane_attunement_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/plane_pressure_state_schema.json",
+      "path": "data/schemas/plane_pressure_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/player_action_trace_schema.json",
+      "path": "data/schemas/player_action_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/player_agent_state_schema.json",
+      "path": "data/schemas/player_agent_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/player_branch_history_schema.json",
+      "path": "data/schemas/player_branch_history_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/player_memory_record_schema.json",
+      "path": "data/schemas/player_memory_record_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/player_progression_signal_schema.json",
+      "path": "data/schemas/player_progression_signal_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/player_runtime_state_schema.json",
+      "path": "data/schemas/player_runtime_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/player_schema.json",
+      "path": "data/schemas/player_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/player_state_snapshot_schema.json",
+      "path": "data/schemas/player_state_snapshot_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/player_state_trace_schema.json",
+      "path": "data/schemas/player_state_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/player_state_update_packet_schema.json",
+      "path": "data/schemas/player_state_update_packet_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/playtest_trace_batch_schema.json",
+      "path": "data/schemas/playtest_trace_batch_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/prophecy_schema.json",
+      "path": "data/schemas/prophecy_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/prophecy_schema_expansion.json",
+      "path": "data/schemas/prophecy_schema_expansion.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/public_promise_register_schema.json",
+      "path": "data/schemas/public_promise_register_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/quest_axiom_pressure_schema.json",
+      "path": "data/schemas/quest_axiom_pressure_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/quest_chain_seed_schema.json",
+      "path": "data/schemas/quest_chain_seed_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/quest_generation_context_schema.json",
+      "path": "data/schemas/quest_generation_context_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json",
+      "path": "data/schemas/quest_manifest_candidate_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/quest_npc_lore_generation_schema.json",
+      "path": "data/schemas/quest_npc_lore_generation_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/quest_npc_lore_linkage_schema.json",
+      "path": "data/schemas/quest_npc_lore_linkage_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/quest_resolution_policy_schema.json",
+      "path": "data/schemas/quest_resolution_policy_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/quest_reward_resolution_packet_schema.json",
+      "path": "data/schemas/quest_reward_resolution_packet_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/quest_reward_trace_schema.json",
+      "path": "data/schemas/quest_reward_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/quest_stage_candidate_schema.json",
+      "path": "data/schemas/quest_stage_candidate_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/raven_companion_state_schema.json",
+      "path": "data/schemas/raven_companion_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ravenfall_ability_use_example_schema.json",
+      "path": "data/schemas/ravenfall_ability_use_example_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ravenfall_branch_outcome_matrix_schema.json",
+      "path": "data/schemas/ravenfall_branch_outcome_matrix_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ravenfall_combat_encounter_candidate_schema.json",
+      "path": "data/schemas/ravenfall_combat_encounter_candidate_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ravenfall_future_generation_bias_example_schema.json",
+      "path": "data/schemas/ravenfall_future_generation_bias_example_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ravenfall_gate_location_brief_schema.json",
+      "path": "data/schemas/ravenfall_gate_location_brief_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ravenfall_gate_playtest_path_schema.json",
+      "path": "data/schemas/ravenfall_gate_playtest_path_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ravenfall_playtest_scenario_schema.json",
+      "path": "data/schemas/ravenfall_playtest_scenario_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ravenfall_reward_resolution_example_schema.json",
+      "path": "data/schemas/ravenfall_reward_resolution_example_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ravenfall_wolf_scene_schema.json",
+      "path": "data/schemas/ravenfall_wolf_scene_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/realm_transition_resolution_schema.json",
+      "path": "data/schemas/realm_transition_resolution_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/release_publication_policy_schema.json",
+      "path": "data/schemas/release_publication_policy_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/repository_check_manifest_schema.json",
+      "path": "data/schemas/repository_check_manifest_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/repository_quality_debt_inventory_schema.json",
+      "path": "data/schemas/repository_quality_debt_inventory_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/repository_truth_manifest_schema.json",
+      "path": "data/schemas/repository_truth_manifest_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/scope_partition_manifest_schema.json",
+      "path": "data/schemas/scope_partition_manifest_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/specification_roadmap_schema.json",
+      "path": "data/schemas/specification_roadmap_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/truth_authority_lattice_schema.json",
+      "path": "data/schemas/truth_authority_lattice_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ywe.truth_scope.v1.json",
+      "path": "data/schemas/truth_scope_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/twin_wolf_companion_state_schema.json",
+      "path": "data/schemas/twin_wolf_companion_state_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/vertical_slice_acceptance_matrix_schema.json",
+      "path": "data/schemas/vertical_slice_acceptance_matrix_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/vertical_slice_acceptance_result_schema.json",
+      "path": "data/schemas/vertical_slice_acceptance_result_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/vertical_slice_acceptance_trace_schema.json",
+      "path": "data/schemas/vertical_slice_acceptance_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/vertical_slice_issue_record_schema.json",
+      "path": "data/schemas/vertical_slice_issue_record_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/vertical_slice_playtest_trace_schema.json",
+      "path": "data/schemas/vertical_slice_playtest_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/vertical_slice_regression_record_schema.json",
+      "path": "data/schemas/vertical_slice_regression_record_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/wolf_companion_trace_schema.json",
+      "path": "data/schemas/wolf_companion_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/wolf_manifestation_event_schema.json",
+      "path": "data/schemas/wolf_manifestation_event_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/wolf_manifestation_rule_schema.json",
+      "path": "data/schemas/wolf_manifestation_rule_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/wolf_resonance_summary_schema.json",
+      "path": "data/schemas/wolf_resonance_summary_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ywe.worldstate_delta_packet.v1.json",
+      "path": "data/schemas/worldstate_delta_packet_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/worldstate_delta_trace_schema.json",
+      "path": "data/schemas/worldstate_delta_trace_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/worldstate_location_mutation_schema.json",
+      "path": "data/schemas/worldstate_location_mutation_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ywe.worldstate_resolution_result.v1.json",
+      "path": "data/schemas/worldstate_resolution_result_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ywe_generation_context_packet_schema.json",
+      "path": "data/schemas/ywe_generation_context_packet_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/ywe_interpretation_packet_schema.json",
+      "path": "data/schemas/ywe_interpretation_packet_schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/data/validation/check_player_runtime_state_schema.spec.json",
+      "path": "data/validation/check_player_runtime_state_schema.spec.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/data/validation/check_worldstate_delta_schema.spec.json",
+      "path": "data/validation/check_worldstate_delta_schema.spec.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/data/validation/player_state_schema_crossrefs.json",
+      "path": "data/validation/player_state_schema_crossrefs.json"
+    },
+    {
+      "schema_id": "urn:ywe:review:ash-values:20260918:1",
+      "path": "docs/design-planning/m2/ash-values/schemas/ash-values.candidate.schema.json"
+    },
+    {
+      "schema_id": "https://ywe.local/schemas/modules/prophecy_engine/prophecy_schema.json",
+      "path": "modules/prophecy_engine/prophecy_schema.json"
+    }
+  ]
+}

@@ -33,6 +33,7 @@ STATUS_INDICATORS = {
 REQUIRED_CHECK_CONTRACTS = [
     ("roadmap_governance", "scripts/check_specification_roadmap.py", ["bootstrap", "status", "governance"]),
     ("machine_readable_artifacts", "scripts/check_machine_readable_artifacts.py", ["syntax", "schema", "machine-readable"]),
+    ("m2_fixture_catalog", "scripts/check_fixture_catalog.py", ["m2", "schema", "conformance"]),
     ("validation_unit_tests", "<unit-tests>", ["bootstrap", "tests"]),
     ("architecture_structure", "scripts/validate_architecture.py", ["architecture", "governance", "legacy-structural"]),
     ("governance_contracts", "scripts/check_governance_contracts.py", ["governance", "architecture"]),

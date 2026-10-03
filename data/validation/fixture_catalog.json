@@ -1,0 +1,1235 @@
+{
+  "schema_ref": "data/schemas/fixture_catalog_schema.json",
+  "artifact_type": "ywe_fixture_catalog",
+  "artifact_version": "1.0.0",
+  "fixtures": [
+    {
+      "fixture_id": "m2.quest_npc_lore.lore_archive_record_oath_under_gate",
+      "path": "examples/quest_npc_lore_generation/lore_archive_record_oath_under_gate.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/quest_npc_lore_generation_schema.json#/$defs/LoreArchiveRecord",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.quest_npc_lore.myth_record_oath_under_gate",
+      "path": "examples/quest_npc_lore_generation/myth_record_oath_under_gate.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/quest_npc_lore_generation_schema.json#/$defs/MythRecord",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.quest_npc_lore.myth_seed_candidate_oath_under_gate",
+      "path": "examples/quest_npc_lore_generation/myth_seed_candidate_oath_under_gate.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/quest_npc_lore_generation_schema.json#/$defs/MythSeedCandidate",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.quest_npc_lore.npc_manifest_ragna_oathkeeper",
+      "path": "examples/quest_npc_lore_generation/npc_manifest_ragna_oathkeeper.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/quest_npc_lore_generation_schema.json#/$defs/NPCManifest",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.quest_npc_lore.npc_memory_delta_ragna_oath_revealed",
+      "path": "examples/quest_npc_lore_generation/npc_memory_delta_ragna_oath_revealed.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/quest_npc_lore_generation_schema.json#/$defs/NPCMemoryDelta",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.quest_npc_lore.quest_chain_manifest_ravenfall_gate_oath",
+      "path": "examples/quest_npc_lore_generation/quest_chain_manifest_ravenfall_gate_oath.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/quest_npc_lore_generation_schema.json#/$defs/QuestChainManifest",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.quest_npc_lore.quest_generation_request_ravenfall_gate",
+      "path": "examples/quest_npc_lore_generation/quest_generation_request_ravenfall_gate.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/quest_npc_lore_generation_schema.json#/$defs/QuestGenerationRequest",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.quest_npc_lore.quest_resolution_payload_ravenfall_gate_oath_revealed",
+      "path": "examples/quest_npc_lore_generation/quest_resolution_payload_ravenfall_gate_oath_revealed.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/quest_npc_lore_generation_schema.json#/$defs/QuestResolutionPayload",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.quest_npc_lore.social_distribution_delta_oath_under_gate",
+      "path": "examples/quest_npc_lore_generation/social_distribution_delta_oath_under_gate.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/quest_npc_lore_generation_schema.json#/$defs/SocialDistributionDelta",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.worldstate_location.location_mutation_delta_ravenfall_gate_oath_revealed",
+      "path": "examples/worldstate_location_mutation/location_mutation_delta_ravenfall_gate_oath_revealed.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/worldstate_location_mutation_schema.json#/$defs/LocationMutationDelta",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.worldstate_location.location_mutation_state_ravenfall_gate_after",
+      "path": "examples/worldstate_location_mutation/location_mutation_state_ravenfall_gate_after.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/worldstate_location_mutation_schema.json#/$defs/LocationMutationState",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.worldstate_location.worldstate_delta_ravenfall_gate_oath_revealed",
+      "path": "examples/worldstate_location_mutation/worldstate_delta_ravenfall_gate_oath_revealed.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/worldstate_location_mutation_schema.json#/$defs/WorldstateDeltaPacket",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.worldstate_location.worldstate_mutation_commit_ravenfall_gate",
+      "path": "examples/worldstate_location_mutation/worldstate_mutation_commit_ravenfall_gate.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/worldstate_location_mutation_schema.json#/$defs/WorldstateMutationCommit",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.ravenfall_gate_keeper_npc_candidate",
+      "path": "examples/phase_12_quest_npc_lore_generation/npc_generation/ravenfall_gate_keeper_npc_candidate.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/npc_manifest_candidate_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.ravenfall_gate_witness_npc_candidate",
+      "path": "examples/phase_12_quest_npc_lore_generation/npc_generation/ravenfall_gate_witness_npc_candidate.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/npc_manifest_candidate_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.ravenfall_gate_conceal_oath_quest_generation_context",
+      "path": "examples/phase_12_quest_npc_lore_generation/quest_generation/ravenfall_gate_conceal_oath_quest_generation_context.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/quest_generation_context_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.ravenfall_gate_reveal_oath_quest_generation_context",
+      "path": "examples/phase_12_quest_npc_lore_generation/quest_generation/ravenfall_gate_reveal_oath_quest_generation_context.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/quest_generation_context_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.identifier.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/identifier",
+      "schema_id": "https://ywe.local/schemas/common/identifier.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.reference.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/reference",
+      "schema_id": "https://ywe.local/schemas/common/reference.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.version.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/version",
+      "schema_id": "https://ywe.local/schemas/common/version.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.time.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/time",
+      "schema_id": "https://ywe.local/schemas/common/time.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.ordering.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/ordering",
+      "schema_id": "https://ywe.local/schemas/common/ordering.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.request.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/request",
+      "schema_id": "https://ywe.local/schemas/common/request.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.result.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/result",
+      "schema_id": "https://ywe.local/schemas/common/result.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.event.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/event",
+      "schema_id": "https://ywe.local/schemas/common/event.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.provenance.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/provenance",
+      "schema_id": "https://ywe.local/schemas/common/provenance.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.diagnostic.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/diagnostic",
+      "schema_id": "https://ywe.local/schemas/common/diagnostic.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.error.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/error",
+      "schema_id": "https://ywe.local/schemas/common/error.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.transaction.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/transaction",
+      "schema_id": "https://ywe.local/schemas/common/transaction.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.compensation.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/compensation",
+      "schema_id": "https://ywe.local/schemas/common/compensation.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.idempotency.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/idempotency",
+      "schema_id": "https://ywe.local/schemas/common/idempotency.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.retry.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/retry",
+      "schema_id": "https://ywe.local/schemas/common/retry.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.extension.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/extension",
+      "schema_id": "https://ywe.local/schemas/common/extension.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.deprecation.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/positive/deprecation",
+      "schema_id": "https://ywe.local/schemas/common/deprecation.schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.identifier_minimum_length.boundary",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/boundary/identifier_minimum_length",
+      "schema_id": "https://ywe.local/schemas/common/identifier.schema.json",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.identifier_maximum_length.boundary",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/boundary/identifier_maximum_length",
+      "schema_id": "https://ywe.local/schemas/common/identifier.schema.json",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.ordering_zero_sequence.boundary",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/boundary/ordering_zero_sequence",
+      "schema_id": "https://ywe.local/schemas/common/ordering.schema.json",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.retry_minimum_values.boundary",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/boundary/retry_minimum_values",
+      "schema_id": "https://ywe.local/schemas/common/retry.schema.json",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.extension_empty_object.boundary",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/boundary/extension_empty_object",
+      "schema_id": "https://ywe.local/schemas/common/extension.schema.json",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.common.identifier_overlong.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/identifier_overlong",
+      "schema_id": "https://ywe.local/schemas/common/identifier.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MAXLENGTH",
+          "instance_pointer": "",
+          "schema_pointer": "/maxLength"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.reference_missing_kind.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/reference_missing_kind",
+      "schema_id": "https://ywe.local/schemas/common/reference.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "schema_pointer": "/required",
+          "missing_properties": [
+            "kind"
+          ]
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.version_missing_component.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/version_missing_component",
+      "schema_id": "https://ywe.local/schemas/common/version.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_PATTERN",
+          "instance_pointer": "",
+          "schema_pointer": "/pattern"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.time_number.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/time_number",
+      "schema_id": "https://ywe.local/schemas/common/time.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "",
+          "schema_pointer": "/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.ordering_negative_sequence.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/ordering_negative_sequence",
+      "schema_id": "https://ywe.local/schemas/common/ordering.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINIMUM",
+          "instance_pointer": "/sequence",
+          "schema_pointer": "/properties/sequence/minimum"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.request_missing_idempotency.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/request_missing_idempotency",
+      "schema_id": "https://ywe.local/schemas/common/request.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "schema_pointer": "/required",
+          "missing_properties": [
+            "idempotency"
+          ]
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.result_unknown_status.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/result_unknown_status",
+      "schema_id": "https://ywe.local/schemas/common/result.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/status",
+          "schema_pointer": "/properties/status/enum"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.event_missing_provenance.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/event_missing_provenance",
+      "schema_id": "https://ywe.local/schemas/common/event.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "schema_pointer": "/required",
+          "missing_properties": [
+            "provenance"
+          ]
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.provenance_empty_sources.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/provenance_empty_sources",
+      "schema_id": "https://ywe.local/schemas/common/provenance.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINITEMS",
+          "instance_pointer": "/source_refs",
+          "schema_pointer": "/properties/source_refs/minItems"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.provenance_duplicate_source.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/provenance_duplicate_source",
+      "schema_id": "https://ywe.local/schemas/common/provenance.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_UNIQUEITEMS",
+          "instance_pointer": "/source_refs",
+          "schema_pointer": "/properties/source_refs/uniqueItems"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.diagnostic_unknown_severity.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/diagnostic_unknown_severity",
+      "schema_id": "https://ywe.local/schemas/common/diagnostic.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/severity",
+          "schema_pointer": "/properties/severity/enum"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.error_retryable_wrong_type.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/error_retryable_wrong_type",
+      "schema_id": "https://ywe.local/schemas/common/error.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/retryable",
+          "schema_pointer": "/properties/retryable/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.transaction_unknown_status.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/transaction_unknown_status",
+      "schema_id": "https://ywe.local/schemas/common/transaction.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/status",
+          "schema_pointer": "/properties/status/enum"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.compensation_missing_target_kind.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/compensation_missing_target_kind",
+      "schema_id": "https://ywe.local/schemas/common/compensation.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "/target_transaction_ref",
+          "schema_pointer": "/properties/target_transaction_ref/required",
+          "missing_properties": [
+            "kind"
+          ]
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.idempotency_missing_key.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/idempotency_missing_key",
+      "schema_id": "https://ywe.local/schemas/common/idempotency.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "schema_pointer": "/required",
+          "missing_properties": [
+            "key"
+          ]
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.retry_negative_delay.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/retry_negative_delay",
+      "schema_id": "https://ywe.local/schemas/common/retry.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINIMUM",
+          "instance_pointer": "/retry_after",
+          "schema_pointer": "/properties/retry_after/minimum"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.extension_invalid_property_name.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/extension_invalid_property_name",
+      "schema_id": "https://ywe.local/schemas/common/extension.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_PATTERN",
+          "instance_pointer": "",
+          "schema_pointer": "/propertyNames/pattern"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.common.deprecation_false.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/reject/deprecation_false",
+      "schema_id": "https://ywe.local/schemas/common/deprecation.schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/deprecated",
+          "schema_pointer": "/properties/deprecated/const"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.ability_manifest.complete.positive",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/ability_manifest/positive",
+      "schema_id": "https://ywe.local/schemas/ability_manifest_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.ability_manifest.missing_sources.reject",
+      "path": "examples/contract_foundation/common_contract_cases.example.json",
+      "instance_pointer": "/ability_manifest/reject_missing_sources",
+      "schema_id": "https://ywe.local/schemas/ability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINITEMS",
+          "instance_pointer": "/source_refs",
+          "schema_pointer": "/properties/source_refs/minItems"
+        }
+      ],
+      "description": "Complete passing manifest with only source_refs changed to an empty array."
+    },
+    {
+      "fixture_id": "m2.phase12.ravenfall_gate_phase_12_content_batch",
+      "path": "examples/phase_12_quest_npc_lore_generation/content_generation_batch/ravenfall_gate_phase_12_content_batch.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/content_generation_batch_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.ravenfall_gate_public_oath_lore_fragment",
+      "path": "examples/phase_12_quest_npc_lore_generation/lore_generation/ravenfall_gate_public_oath_lore_fragment.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/generated_lore_fragment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.ravenfall_gate_hidden_oath_lore_fragment",
+      "path": "examples/phase_12_quest_npc_lore_generation/lore_generation/ravenfall_gate_hidden_oath_lore_fragment.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/generated_lore_fragment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.representation.content_batch_truth_scopes.legacy_string",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/content_batch_truth_scopes/legacy_string",
+      "schema_id": "https://ywe.local/schemas/content_generation_batch_schema.json#/properties/truth_scope_summary",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.representation.content_batch_truth_scopes.string_array",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/content_batch_truth_scopes/string_array",
+      "schema_id": "https://ywe.local/schemas/content_generation_batch_schema.json#/properties/truth_scope_summary",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.representation.content_batch_truth_scopes.empty_string",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/content_batch_truth_scopes/empty_string",
+      "schema_id": "https://ywe.local/schemas/content_generation_batch_schema.json#/properties/truth_scope_summary",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINLENGTH",
+          "instance_pointer": "",
+          "schema_pointer": "/minLength"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.content_batch_truth_scopes.numeric_array_item",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/content_batch_truth_scopes/numeric_array_item",
+      "schema_id": "https://ywe.local/schemas/content_generation_batch_schema.json#/properties/truth_scope_summary",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/1",
+          "schema_pointer": "/items/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.content_batch_truth_scopes.empty_array_item",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/content_batch_truth_scopes/empty_array_item",
+      "schema_id": "https://ywe.local/schemas/content_generation_batch_schema.json#/properties/truth_scope_summary",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINLENGTH",
+          "instance_pointer": "/0",
+          "schema_pointer": "/items/minLength"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.content_batch_truth_scopes.null_value",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/content_batch_truth_scopes/null_value",
+      "schema_id": "https://ywe.local/schemas/content_generation_batch_schema.json#/properties/truth_scope_summary",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "",
+          "schema_pointer": "/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.content_batch_truth_scopes.object_value",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/content_batch_truth_scopes/object_value",
+      "schema_id": "https://ywe.local/schemas/content_generation_batch_schema.json#/properties/truth_scope_summary",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "",
+          "schema_pointer": "/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.lore_visibility_conditions.legacy_string",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/lore_visibility_conditions/legacy_string",
+      "schema_id": "https://ywe.local/schemas/generated_lore_fragment_schema.json#/properties/visibility_conditions",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.representation.lore_visibility_conditions.string_array",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/lore_visibility_conditions/string_array",
+      "schema_id": "https://ywe.local/schemas/generated_lore_fragment_schema.json#/properties/visibility_conditions",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.representation.lore_visibility_conditions.empty_string",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/lore_visibility_conditions/empty_string",
+      "schema_id": "https://ywe.local/schemas/generated_lore_fragment_schema.json#/properties/visibility_conditions",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINLENGTH",
+          "instance_pointer": "",
+          "schema_pointer": "/minLength"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.lore_visibility_conditions.numeric_array_item",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/lore_visibility_conditions/numeric_array_item",
+      "schema_id": "https://ywe.local/schemas/generated_lore_fragment_schema.json#/properties/visibility_conditions",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/1",
+          "schema_pointer": "/items/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.lore_visibility_conditions.empty_array_item",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/lore_visibility_conditions/empty_array_item",
+      "schema_id": "https://ywe.local/schemas/generated_lore_fragment_schema.json#/properties/visibility_conditions",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINLENGTH",
+          "instance_pointer": "/0",
+          "schema_pointer": "/items/minLength"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.lore_visibility_conditions.null_value",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/lore_visibility_conditions/null_value",
+      "schema_id": "https://ywe.local/schemas/generated_lore_fragment_schema.json#/properties/visibility_conditions",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "",
+          "schema_pointer": "/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.lore_visibility_conditions.object_value",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/lore_visibility_conditions/object_value",
+      "schema_id": "https://ywe.local/schemas/generated_lore_fragment_schema.json#/properties/visibility_conditions",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "",
+          "schema_pointer": "/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_resolution_modes.legacy_string",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_resolution_modes/legacy_string",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/resolution_mode_options",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_resolution_modes.string_array",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_resolution_modes/string_array",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/resolution_mode_options",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_resolution_modes.empty_string",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_resolution_modes/empty_string",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/resolution_mode_options",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINLENGTH",
+          "instance_pointer": "",
+          "schema_pointer": "/minLength"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_resolution_modes.numeric_array_item",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_resolution_modes/numeric_array_item",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/resolution_mode_options",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/1",
+          "schema_pointer": "/items/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_resolution_modes.empty_array_item",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_resolution_modes/empty_array_item",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/resolution_mode_options",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINLENGTH",
+          "instance_pointer": "/0",
+          "schema_pointer": "/items/minLength"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_resolution_modes.null_value",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_resolution_modes/null_value",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/resolution_mode_options",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "",
+          "schema_pointer": "/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_resolution_modes.object_value",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_resolution_modes/object_value",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/resolution_mode_options",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "",
+          "schema_pointer": "/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_consequence_classes.legacy_string",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_consequence_classes/legacy_string",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/expected_consequence_classes",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_consequence_classes.string_array",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_consequence_classes/string_array",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/expected_consequence_classes",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_consequence_classes.empty_string",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_consequence_classes/empty_string",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/expected_consequence_classes",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINLENGTH",
+          "instance_pointer": "",
+          "schema_pointer": "/minLength"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_consequence_classes.numeric_array_item",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_consequence_classes/numeric_array_item",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/expected_consequence_classes",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/1",
+          "schema_pointer": "/items/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_consequence_classes.empty_array_item",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_consequence_classes/empty_array_item",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/expected_consequence_classes",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINLENGTH",
+          "instance_pointer": "/0",
+          "schema_pointer": "/items/minLength"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_consequence_classes.null_value",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_consequence_classes/null_value",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/expected_consequence_classes",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "",
+          "schema_pointer": "/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_consequence_classes.object_value",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_consequence_classes/object_value",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/expected_consequence_classes",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "",
+          "schema_pointer": "/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_seed_consequence_classes.legacy_string",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_seed_consequence_classes/legacy_string",
+      "schema_id": "https://ywe.local/schemas/quest_chain_seed_schema.json#/properties/expected_consequence_classes",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_seed_consequence_classes.string_array",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_seed_consequence_classes/string_array",
+      "schema_id": "https://ywe.local/schemas/quest_chain_seed_schema.json#/properties/expected_consequence_classes",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_seed_consequence_classes.empty_string",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_seed_consequence_classes/empty_string",
+      "schema_id": "https://ywe.local/schemas/quest_chain_seed_schema.json#/properties/expected_consequence_classes",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINLENGTH",
+          "instance_pointer": "",
+          "schema_pointer": "/minLength"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_seed_consequence_classes.numeric_array_item",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_seed_consequence_classes/numeric_array_item",
+      "schema_id": "https://ywe.local/schemas/quest_chain_seed_schema.json#/properties/expected_consequence_classes",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/1",
+          "schema_pointer": "/items/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_seed_consequence_classes.empty_array_item",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_seed_consequence_classes/empty_array_item",
+      "schema_id": "https://ywe.local/schemas/quest_chain_seed_schema.json#/properties/expected_consequence_classes",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINLENGTH",
+          "instance_pointer": "/0",
+          "schema_pointer": "/items/minLength"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_seed_consequence_classes.null_value",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_seed_consequence_classes/null_value",
+      "schema_id": "https://ywe.local/schemas/quest_chain_seed_schema.json#/properties/expected_consequence_classes",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "",
+          "schema_pointer": "/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_seed_consequence_classes.object_value",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_seed_consequence_classes/object_value",
+      "schema_id": "https://ywe.local/schemas/quest_chain_seed_schema.json#/properties/expected_consequence_classes",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "",
+          "schema_pointer": "/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.content_batch_truth_scopes.empty_array",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/content_batch_truth_scopes/empty_array",
+      "schema_id": "https://ywe.local/schemas/content_generation_batch_schema.json#/properties/truth_scope_summary",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINITEMS",
+          "instance_pointer": "",
+          "schema_pointer": "/minItems"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.lore_visibility_conditions.empty_array",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/lore_visibility_conditions/empty_array",
+      "schema_id": "https://ywe.local/schemas/generated_lore_fragment_schema.json#/properties/visibility_conditions",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINITEMS",
+          "instance_pointer": "",
+          "schema_pointer": "/minItems"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_resolution_modes.empty_array",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_resolution_modes/empty_array",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/resolution_mode_options",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINITEMS",
+          "instance_pointer": "",
+          "schema_pointer": "/minItems"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_consequence_classes.empty_array",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_consequence_classes/empty_array",
+      "schema_id": "https://ywe.local/schemas/quest_manifest_candidate_schema.json#/properties/expected_consequence_classes",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINITEMS",
+          "instance_pointer": "",
+          "schema_pointer": "/minItems"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.phase12.representation.quest_seed_consequence_classes.empty_array",
+      "path": "examples/contract_foundation/phase_12_representation_cases.example.json",
+      "instance_pointer": "/quest_seed_consequence_classes/empty_array",
+      "schema_id": "https://ywe.local/schemas/quest_chain_seed_schema.json#/properties/expected_consequence_classes",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINITEMS",
+          "instance_pointer": "",
+          "schema_pointer": "/minItems"
+        }
+      ]
+    }
+  ]
+}

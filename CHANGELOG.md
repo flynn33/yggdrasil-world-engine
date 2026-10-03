@@ -7,11 +7,14 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ## Unreleased
 
 ### Added
+- Add explicit M2 schema and fixture catalogs, offline reference resolution, and exact rejection witnesses for 102 structural fixtures.
 - Add stable normative requirement identifiers and typed governance records for M1.
 - Add the ten-node truth and authority lattice, canonical glossary index, and Core/WRW scope contract.
 - Add a content-addressed ASH dependency identity and deterministic source-to-mirror synchronization check.
 
 ### Changed
+- Reduce unbound JSON example debt from 39 to 19 through executed catalog bindings and reconcile repository classification and scope inventories.
+- Preserve legacy string values while accepting existing string-array representations in five Phase 12 batch, lore, quest candidate, and chain-seed fields.
 - Establish the M0 truthful-baseline governance authorities and acceptance evidence.
 - Normalize ontology, scoped worldstate, perception, realm-coordinate, companion-resonance, and reversal terminology.
 - Complete the WRW cosmology scope and provenance records and retain the master specification as an informative mixed-scope synthesis.

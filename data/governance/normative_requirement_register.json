@@ -2,14 +2,14 @@
   "artifact_type": "normative_requirement_register",
   "artifact_version": "1.0.0",
   "schema_ref": "data/schemas/normative_requirement_register_schema.json",
-  "recorded_on": "2026-07-19",
+  "recorded_on": "2026-10-03",
   "repository_baseline": "2.0.23",
   "policy_ref": "docs/governance/normative_language_and_requirement_id_policy.md",
   "id_policy": {
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0019",
+    "next_available_id": "YWE-REQ-0022",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -364,13 +364,92 @@
         "data/governance/canonical_term_index.json",
         "data/governance/specification_roadmap.json#/milestones/1/exit_criteria/2"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0019",
+      "title": "Exact offline schema catalog coverage",
+      "normative_statement": "The schema catalog MUST cover every declared schema exactly once, match each file's absolute identifier, and resolve all schema references locally without a network dependency.",
+      "normative_level": "MUST",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_fixture_catalog.py",
+        "tests/test_fixture_catalog.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0011"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md",
+        "data/schemas/contract_catalog_schema.json",
+        "data/governance/specification_roadmap.json#/milestones/2/deliverables/0",
+        "data/governance/specification_roadmap.json#/milestones/2/exit_criteria/1"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0020",
+      "title": "Explicit fixture bindings and exact rejection witnesses",
+      "normative_statement": "Each fixture MUST declare an explicit schema identifier and instance pointer, match its recorded result and complete set of rejection error identifiers, instance pointers, and schema pointers, and a failed fixture MUST NOT remove its example from the schema debt inventory.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_fixture_catalog.py",
+        "tests/test_fixture_catalog.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0011"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md",
+        "data/schemas/fixture_catalog_schema.json",
+        "data/governance/specification_roadmap.json#/milestones/2/deliverables/4",
+        "data/governance/specification_roadmap.json#/milestones/2/exit_criteria/3"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0021",
+      "title": "Compatible Phase 12 string and array representations",
+      "normative_statement": "The Phase 12 truth_scope_summary, visibility_conditions, resolution_mode_options, and expected_consequence_classes fields covered by ADR-0012 MUST accept nonempty legacy strings and nonempty arrays of nonempty strings while retaining their required-field lists and existing quest_title_policy contract.",
+      "normative_level": "MUST",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_fixture_catalog.py",
+        "tests/test_fixture_catalog.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0012"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#phase-12-representation-correction",
+        "data/schemas/content_generation_batch_schema.json",
+        "data/schemas/generated_lore_fragment_schema.json",
+        "data/schemas/quest_manifest_candidate_schema.json",
+        "data/schemas/quest_chain_seed_schema.json"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 18,
-    "active": 18,
+    "total_requirements": 21,
+    "active": 21,
     "proposed": 0,
     "terminal": 0,
-    "next_identifier": "YWE-REQ-0019"
+    "next_identifier": "YWE-REQ-0022"
   }
 }

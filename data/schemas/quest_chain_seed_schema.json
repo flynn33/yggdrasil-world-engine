@@ -57,8 +57,17 @@
       "minLength": 1
     },
     "expected_consequence_classes": {
-      "type": "string",
-      "minLength": 1
+      "type": [
+        "string",
+        "array"
+      ],
+      "minLength": 1,
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0021"
     },
     "initial_stage_kind": {
       "type": "string",

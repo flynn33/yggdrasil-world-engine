@@ -132,10 +132,12 @@ class RequirementAndNormativeTests(unittest.TestCase):
 
     def test_later_requirement_can_append_without_rewriting_m1_meanings(self):
         document = copy.deepcopy(load_json(m1.REQUIREMENT_PATH))
+        allocated_id = document["id_policy"]["next_available_id"]
+        next_id = f"YWE-REQ-{int(allocated_id.rsplit('-', 1)[1]) + 1:04d}"
         appended = copy.deepcopy(document["requirements"][-1])
         appended.update(
             {
-                "requirement_id": "YWE-REQ-0019",
+                "requirement_id": allocated_id,
                 "title": "Later governed requirement",
                 "normative_statement": "A later contract MUST retain stable traceability.",
                 "status": "proposed",
@@ -146,13 +148,13 @@ class RequirementAndNormativeTests(unittest.TestCase):
         )
         document["requirements"].append(appended)
         document["summary"] = {
-            "total_requirements": 19,
-            "active": 18,
-            "proposed": 1,
-            "terminal": 0,
-            "next_identifier": "YWE-REQ-0020",
+            "total_requirements": len(document["requirements"]),
+            "active": sum(item["status"] == "active" for item in document["requirements"]),
+            "proposed": sum(item["status"] == "proposed" for item in document["requirements"]),
+            "terminal": sum(item["status"] in {"superseded", "retired"} for item in document["requirements"]),
+            "next_identifier": next_id,
         }
-        document["id_policy"]["next_available_id"] = "YWE-REQ-0020"
+        document["id_policy"]["next_available_id"] = next_id
         errors: list[str] = []
         m1.check_requirements(ROOT, document, errors)
         self.assertEqual([], errors)
@@ -225,11 +227,14 @@ class GovernanceLifecycleTests(unittest.TestCase):
             stripped.pop("record_type")
             arrays[type_to_key[record["record_type"]]].append(stripped)
         flattened = m1.governance_records(arrays)
-        self.assertEqual(27, len(flattened))
-        self.assertEqual(
-            [record["id"] for record in live["records"]],
-            [record["id"] for record in flattened],
-        )
+        self.assertEqual(len(live["records"]), len(flattened))
+        expected = [
+            record
+            for record_type in ("decision", "change_proposal", "risk", "deviation", "question")
+            for record in live["records"]
+            if record["record_type"] == record_type
+        ]
+        self.assertEqual(expected, flattened)
 
     def test_invalid_lifecycle_state_rejects_for_every_record_type(self):
         live = load_json(m1.GOVERNANCE_RECORD_PATH)
@@ -292,10 +297,15 @@ class GovernanceLifecycleTests(unittest.TestCase):
 
     def test_later_governance_record_can_append(self):
         document = copy.deepcopy(load_json(m1.GOVERNANCE_RECORD_PATH))
+        next_number = max(
+            int(record["id"].rsplit("-", 1)[1])
+            for record in document["records"]
+            if record["record_type"] == "decision"
+        ) + 1
         appended = copy.deepcopy(document["records"][0])
         appended.update(
             {
-                "id": "ADR-0011",
+                "id": f"ADR-{next_number:04d}",
                 "title": "Later decision",
                 "status": "proposed",
                 "supersedes": [],

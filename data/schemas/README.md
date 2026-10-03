@@ -42,6 +42,11 @@ generation bias update foundation.
 
 ### M1 governance schemas
 
+The M2 offline resolver catalogs declared schemas in
+`data/validation/contract_catalog.json`. Executed instance bindings, exact target
+fragments, and intended rejection witnesses live in
+`data/validation/fixture_catalog.json`; see `docs/project/m2_fixture_validation.md`.
+
 | File | Role |
 |---|---|
 | `normative_requirement_register_schema.json` | Stable M1 requirement identifiers, lifecycle, authority, scope, and verification references |

@@ -50,6 +50,7 @@ Current source routing uses the following precedence:
 | Twin Wolf validation | `data/validation/twin_wolf_canon_validation_rules.json` |
 | Canonical terminology | `docs/glossary/ywe_design_glossary.md`, `data/governance/canonical_term_index.json` |
 | Normative requirements | `docs/governance/normative_language_and_requirement_id_policy.md`, `data/governance/normative_requirement_register.json` |
+| M2 schema and fixture validation | `data/validation/contract_catalog.json`, `data/validation/fixture_catalog.json`, `docs/project/m2_fixture_validation.md`, `scripts/check_fixture_catalog.py` |
 | Typed governance records | `docs/governance/governance_records_policy.md`, `data/governance/governance_record_register.json` |
 | WRW cosmology scope | `lore/wrw_cosmology/canon_scope.md` |
 | WRW cosmology provenance | `lore/wrw_cosmology/source_notes.md` |

@@ -2,7 +2,7 @@
   "artifact_type": "governance_record_register",
   "artifact_version": "1.0.0",
   "schema_ref": "data/schemas/governance_record_register_schema.json",
-  "recorded_on": "2026-07-19",
+  "recorded_on": "2026-10-03",
   "repository_baseline": "2.0.23",
   "policy_ref": "docs/governance/governance_records_policy.md",
   "requirement_register_ref": "data/governance/normative_requirement_register.json",
@@ -798,12 +798,88 @@
       "resolution_record_ref": "ADR-0010",
       "requirement_refs": ["YWE-REQ-0016"],
       "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/9"]
+    },
+    {
+      "id": "ADR-0011",
+      "record_type": "decision",
+      "title": "Independent offline schema and executable fixture catalogs",
+      "status": "accepted",
+      "recorded_on": "2026-10-03",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Use separate explicit schema and fixture catalogs to validate selected existing instances and exact rejection witnesses offline; retain outstanding schema debt and the M2 in-progress state.",
+      "debt_refs": [
+        "QD-001"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "M2 requires an offline schema catalog and explicit fixture bindings. Existing closed packet contracts omit schema metadata, while several historical invalid examples describe rejection rules without providing a malformed contract instance.",
+      "decision": "Catalog each declared schema by its exact path and absolute identifier. Bind each executable fixture to an explicit schema or subschema and instance pointer, with an expected acceptance result or exact rejection witnesses. Keep these bindings separate from closed instance payloads, and clear example-binding debt only after successful catalog validation.",
+      "rationale": "Independent catalogs preserve accepted closed packet shapes while making schema selection and offline reference resolution auditable. Exact witnesses establish that a negative case fails for its intended assertions. Descriptive rejection records cannot prove those assertions without a selected executable instance; incomplete coverage remains registered debt.",
+      "consequences": [
+        "Existing closed instance contracts keep their current fields and semantics.",
+        "Prose rejection descriptions and incompatible historical examples retain debt until executable bindings exist.",
+        "Catalog inclusion of design candidates supports resolution without adopting candidate semantics as engine authority.",
+        "This increment exercises structural fixtures; recovery, replay, migration, YAML validation, and durable M2 acceptance remain outstanding, so M2 stays in progress."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0019",
+        "YWE-REQ-0020"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md",
+        "data/schemas/contract_catalog_schema.json",
+        "data/schemas/fixture_catalog_schema.json",
+        "data/schemas/quest_npc_lore_generation_schema.json",
+        "examples/phase_12_quest_npc_lore_generation/quest_generation/invalid_generic_random_quest_candidate.example.json",
+        "data/governance/specification_roadmap.json#/milestones/2",
+        "data/validation/schema_quality_baseline.json"
+      ]
+    },
+    {
+      "id": "ADR-0012",
+      "record_type": "decision",
+      "title": "Preserve legacy strings while restoring Phase 12 array representations",
+      "status": "accepted",
+      "recorded_on": "2026-10-03",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Accept nonempty legacy strings or nonempty arrays of nonempty strings for the five identified Phase 12 schema properties; retain required fields, quest_title_policy, and the M2 in-progress state.",
+      "debt_refs": [
+        "QD-001"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "The schema migration workflow at 468f473 decoded a generator with SHA256 0e5534fdcb6e6063ad832b5032f0236f5bc756fc22f1f76633ed7da39afdb6f1. Its convert_descriptor called infer_field without instance values, whose fallback assigned nonempty string types. Commit 5b30dd50533d00b4c0852d45df3dfac61b3a4147 published these generated types, which reject the existing Phase 12 array representations.",
+      "decision": "Permit nonempty strings or nonempty arrays whose members are nonempty strings for content_generation_batch_schema.truth_scope_summary, generated_lore_fragment_schema.visibility_conditions, quest_manifest_candidate_schema.resolution_mode_options and expected_consequence_classes, and quest_chain_seed_schema.expected_consequence_classes. Preserve all required-field lists and the existing quest_title_policy contract without adding uniqueness or combination restrictions.",
+      "rationale": "The decoded generator source shows that these string-only constraints came from generic field-name inference without values. Adding the observed array representation restores the existing example shape while retaining every previously valid nonempty string. A nonempty array preserves the prior nonempty-string boundary and the populated existing examples; the quest generation contract also forbids quests without expected consequence classes. Empty-array semantics are otherwise unspecified, so this correction conservatively rejects them without claiming a complete runtime cardinality contract. Replacing strings with arrays would break that compatibility, and the available source does not justify new title-policy or array-combination semantics.",
+      "consequences": [
+        "Previously valid nonempty legacy strings remain valid for the five corrected properties.",
+        "Nonempty arrays accept nonempty string members without new uniqueness or combination constraints.",
+        "Required-field membership and quest_title_policy retain their existing contracts.",
+        "Explicit fixtures and regressions verify this representation correction; the remaining schema debt and M2 acceptance work stay open."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0021"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#phase-12-representation-correction",
+        "data/schemas/content_generation_batch_schema.json",
+        "data/schemas/generated_lore_fragment_schema.json",
+        "data/schemas/quest_manifest_candidate_schema.json",
+        "data/schemas/quest_chain_seed_schema.json",
+        "data/validation/m2_contract_migration_manifest.json",
+        "docs/architecture/quest_generation_from_axioms_contract.md#forbidden",
+        "data/governance/specification_roadmap.json#/milestones/2"
+      ]
     }
   ],
   "summary": {
-    "total_records": 27,
-    "architecture_decisions": 10,
-    "accepted_decisions": 10,
+    "total_records": 29,
+    "architecture_decisions": 12,
+    "accepted_decisions": 12,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

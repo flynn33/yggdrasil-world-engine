@@ -148,9 +148,11 @@ def resolve_json_pointer(document, ref: str) -> bool:
 
 
 def quality_debt(
-    schema_documents: dict[str, dict], json_documents: dict[str, object] | None = None
+    schema_documents: dict[str, dict], json_documents: dict[str, object] | None = None,
+    bound_example_paths: set[str] | None = None,
 ) -> dict[str, list[str]]:
     json_documents = json_documents or schema_documents
+    bound_example_paths = bound_example_paths or set()
     return {
         "declared_schema_missing_id": sorted(
             path for path, document in schema_documents.items() if "$id" not in document
@@ -170,6 +172,7 @@ def quality_debt(
             path
             for path, document in json_documents.items()
             if path.startswith("examples/")
+            and path not in bound_example_paths
             and not (
                 isinstance(document, dict)
                 and any(key in document for key in ("$schema", "schema_ref", "schema_id"))
@@ -226,7 +229,15 @@ def main() -> int:
     except (OSError, KeyError, json.JSONDecodeError) as exc:
         errors.append(f"Unable to load schema quality baseline: {exc}")
         expected_debt = {}
-    actual_debt = quality_debt(schema_documents, json_documents)
+    bound_example_paths = set()
+    if (root / "data/validation/fixture_catalog.json").is_file():
+        from check_fixture_catalog import validation_errors
+
+        fixture_errors, results = validation_errors(root)
+        errors.extend(fixture_errors)
+        if not fixture_errors:
+            bound_example_paths.update(result["path"] for result in results)
+    actual_debt = quality_debt(schema_documents, json_documents, bound_example_paths)
     for debt_kind, actual in actual_debt.items():
         expected = sorted(expected_debt.get(debt_kind, []))
         if actual != expected:
