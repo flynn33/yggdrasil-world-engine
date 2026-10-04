@@ -58,11 +58,12 @@ RECOVERY_CATEGORY_PAIRS: tuple[tuple[str, str], ...] = (
     ("FAILED", "ESCALATION_REQUIRED"),
     ("SAFE_HALT", "TERMINAL_NO_RECOVERY"),
 )
-RULE_IDS = frozenset((
+ASSESSMENT_RULE_IDS = frozenset((
     "ASH-STATE-STRUCTURE-001", "ASH-STATE-VALIDITY-001", "ASH-STATE-GENERAL-001",
     "ASH-ADMISSIBILITY-CLASSIFICATION-001", "ASH-CLASSIFICATION-MAPPING-001",
     "ASH-RECOVERY-ACTION-001",
 ))
+RULE_IDS = ASSESSMENT_RULE_IDS | frozenset(("ASH-CODEWORD-STRUCTURE-001",))
 INPUT_FAILURE_CODES = frozenset((
     "STATE_WIDTH", "STATE_COORDINATE_TYPE", "STATE_COORDINATE_VALUE",
     "INPUT_KIND_UNSUPPORTED", "INPUT_SIZE_LIMIT", "INPUT_DEPTH_LIMIT", "INPUT_TOKEN_LIMIT",
@@ -735,6 +736,8 @@ class _StatePacket:
         if self.assessment_binding.original_input_reference != self.input_evidence.original_input_reference:
             raise StateContractError(code, "input_evidence.original_input_reference")
         diagnostic = self.state_validity_diagnostic
+        if any(rule not in ASSESSMENT_RULE_IDS for rule in diagnostic.rule_ids):
+            raise StateContractError(code, "state_validity_diagnostic.rule_ids")
         if self.parsed_state is None:
             if (self.input_evidence.failure_code is None or type(diagnostic.input_state) is not RejectedCandidateEvidence
                     or diagnostic.input_state.input_evidence != self.input_evidence):
@@ -765,6 +768,8 @@ class _StatePacket:
     def _validate_emission(self, emission: DiagnosticEmission, index: int) -> None:
         code = "DIAGNOSTIC_ENVELOPE_INVALID"
         envelope = emission.envelope
+        if any(rule not in ASSESSMENT_RULE_IDS for rule in envelope.rule_ids):
+            raise StateContractError(code, "emitted_diagnostics")
         if envelope.diagnostic_kind != "STATE_VALIDITY" or envelope.subject_reference != self.subject_reference:
             raise StateContractError(code, "emitted_diagnostics")
         root = self.assessment_binding.diagnosis_reference

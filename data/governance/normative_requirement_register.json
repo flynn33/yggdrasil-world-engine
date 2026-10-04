@@ -9,7 +9,7 @@
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0040",
+    "next_available_id": "YWE-REQ-0041",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -907,13 +907,47 @@
         "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
         "data/ash_state/realm_bit_mapping.yaml"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0040",
+      "title": "Verified semantic normalization with retained actual computation",
+      "normative_statement": "StateModel MUST preserve the complete submitted diagnosis and current explicit immutable bindings when planning or validating normalization. It MUST rederive original semantics, complete reachable targets, identity-first or full-signature selection and the canonical XOR proof at use. Pure planning MUST NOT require capture or execute correction. Application MUST compute the actual value and validate it under the same profile, immediately capture every required diagnostic and publish normalized output only after matching confirmations. Unverified origins MUST NOT seed acknowledged chains; capture failures MUST preserve actual observations and the confirmed prefix without claiming success.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "tests/test_m3_normalization.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M3",
+      "owner_role": "Core semantics maintainers",
+      "decision_refs": [
+        "ADR-0030"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_normalization_contract.md",
+        "docs/architecture/m3_normalization_policy.md",
+        "data/schemas/m3_normalization_plan_schema.json",
+        "data/schemas/m3_state_normalization_schema.json",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/state-model-contract.md",
+        "core/ash_pattern_engine/canonical/core/state-admissibility.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/codeword-set.pseudo.md",
+        "core/ash_pattern_engine/canonical/algorithms/codeword-transformation-semantics.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/state-validity-diagnostics.pseudo.md",
+        "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
+        "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
+        "core/ash_pattern_engine/canonical/verification/invariant-spec.md"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 39,
-    "active": 39,
+    "total_requirements": 40,
+    "active": 40,
     "proposed": 0,
     "terminal": 0,
-    "next_identifier": "YWE-REQ-0040"
+    "next_identifier": "YWE-REQ-0041"
   }
 }

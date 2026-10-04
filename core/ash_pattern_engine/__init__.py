@@ -13,6 +13,19 @@ from .ash_canonical import (
     transform_state,
 )
 from .state_model import RecordingDiagnosticCapture, StateInputCodec, StateModel
+from .normalization import RecordingNormalizationCapture
+from .normalization_values import (
+    NormalizationCaptureFailure,
+    NormalizationContext,
+    NormalizationContractError,
+    NormalizationDiagnosticRecord,
+    NormalizationFailure,
+    NormalizationPlan,
+    NormalizationPlanValidation,
+    NormalizationPolicyBinding,
+    NormalizationResult,
+    NormalizationStep,
+)
 from .state_values import (
     AshState,
     AvailableProfileBinding,
@@ -54,9 +67,20 @@ __all__ = [
     "DiagnosticContext",
     "EvaluatedPredicate",
     "NotEvaluatedPredicate",
+    "NormalizationCaptureFailure",
+    "NormalizationContext",
+    "NormalizationContractError",
+    "NormalizationDiagnosticRecord",
+    "NormalizationFailure",
+    "NormalizationPlan",
+    "NormalizationPlanValidation",
+    "NormalizationPolicyBinding",
+    "NormalizationResult",
+    "NormalizationStep",
     "PredicateBinding",
     "ProfileSourceBinding",
     "RecordingDiagnosticCapture",
+    "RecordingNormalizationCapture",
     "StateAssessment",
     "StateContractError",
     "StateDiagnosis",

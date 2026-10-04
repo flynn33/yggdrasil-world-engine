@@ -1,7 +1,7 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-22
+**Revision:** planning-23
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
@@ -511,8 +511,43 @@ package acceptance still loaded the facade as a standalone file, and Phase 10's
 exact added-path policy rejected the new reference/test sources. Both boundaries
 now recognize the adopted reference package through scoped source loading and
 exact reviewed Python roles. Loader regressions also reproduce and reject stale
-and source-less bytecode without changing mathematical assertions. A new frozen
-full execution is required for these subsequent integration corrections.
+and source-less bytecode without changing mathematical assertions. The subsequent
+frozen revision `229cb78c1cbc1fea361f5592505e78d649187c30` passed all 36 local
+repository checks and 791 unit tests from a clean unfiltered offline checkout.
+It was pushed without force and independently read back from GitHub main;
+Main CI run `37228903025` passed against that exact revision. Its README checkpoint
+is published. These results do not replace M2's immutable evidence or accept M3.
+
+## 8i. M3 N1 semantic normalization
+
+The normalization contract and exact target policy were independently reviewed
+and adopted before code as YWE-REQ-0040 / ADR-0030. Prior 39 requirements and
+46 governance records were preserved. The policy is a downstream YWE decision:
+keep a recognized original unchanged, otherwise select the lowest full signature
+from the complete reachable recognized set. Canonical ASH sources remain unchanged.
+
+StateModel's new pure planning and explicit validation require no normalization
+capture. Actual application requires its separate explicit collaborator and
+revalidates the original seven semantic fields, ordered source rules, detection
+envelope, full profile and complete target/proof before use. A foreign or forged
+origin retains the submitted diagnosis and current bindings with no inherited
+confirmation or capture call. Scope creation and interface checks precede XOR;
+normalization output waits for computation and complete actual-result diagnostics
+to receive matching confirmations. Each failure retains actual observations,
+confirmed prefixes and complete attempted records.
+
+Working-tree integration matched every one of the independently reviewed 2,048
+profile/state cases. The final combined suite passed 115 tests in 33.877 seconds:
+42 normalization, 68 assessment, four identity and one platform test. A separate
+29-test loader and exact-reference-boundary run passed in 1.214 seconds.
+The wire tests cover thirty actual producer packets and twenty independently
+authored format packets; both new schemas independently passed offline review.
+Constructor and scoped-capture review reproduced invalid post-validation after
+a no-target refusal; both owners now reject it while retaining legitimate
+before/after-computation failures. Named binding-mismatch witnesses must also
+retain an actual difference in the named binding. Full frozen clean repository
+execution remains required before publication.
+No operational session, recovery success, full Diagnostics or M3 gate is claimed.
 
 ## 9. Historical publication continuity
 
@@ -524,22 +559,24 @@ The containing commit is the authoritative save point.
 
 ## 10. Checkpoint
 
-**Current step:** Verify and publish the first M3 StateModel/reference-oracle
-slice, then implement semantic normalization under its reviewed contract.
+**Current step:** Complete verification and publication of the M3 N1 semantic
+normalization reference slice, then adopt and implement recovery execution.
 M2 remains accepted; M3 remains in progress.
 
 **Completed:** M2's immutable foundation acceptance; M3 assessment contract
 adoption and reference values, decoding, diagnosis, contextual classification,
-retained failures, wire schema and independent exhaustive tests.
+retained failures, wire schema and independent exhaustive tests; first-slice
+publication and exact GitHub Main CI; N1 contract/policy adoption and initial
+actual normalization/reference integration.
 
-**Next action:** Complete frozen clean offline repository verification for this
-slice, publish its README checkpoint, adopt the normalization contract and execute
-actual normalized-value/route-proof cases. Continue through recovery, full Diagnostics,
+**Next action:** Run N1 frozen clean offline repository verification, then
+publish its README checkpoint. Continue
+through recovery, full Diagnostics,
 terminal guards and generation before evaluating unchanged M3 exit criteria.
 
 **Needed from owner:** Nothing for continued authorized roadmap development.
 
-**Saved at:** This planning-22 checkpoint follows the published M2/M3 status
-transition `1e2509bc698522a067ab1035bce71aa661d81fb2`, whose GitHub Main CI passed.
-The containing committed revision is the save point for this first M3 slice.
+**Saved at:** This planning-23 checkpoint follows the published first M3 slice
+`229cb78c1cbc1fea361f5592505e78d649187c30`, whose GitHub Main CI passed.
+The containing committed revision is the save point for this N1 work.
 Immutable milestone evidence and earlier checkpoint identities remain preserved.

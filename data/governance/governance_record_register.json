@@ -1416,12 +1416,57 @@
         "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
         "data/ash_state/realm_bit_mapping.yaml"
       ]
+    },
+    {
+      "id": "ADR-0030",
+      "record_type": "decision",
+      "title": "Complete-target semantic normalization and verified capture origin",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Core semantics maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt the independently reviewed N1 policy, interfaces and wire boundaries before dependent reference-oracle code.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "The accepted first StateModel slice owns exact diagnosis and contextual assessment but has no semantic normalization implementation. Canonical StateModel requires unchanged already-valid inputs and codeword correction for compatible inputs; it does not order multiple eligible targets or authenticate portable collector receipts. A real foreign-profile diagnosis can retain the same canonical binding and must be rejected before planning an application.",
+      "decision": "Adopt identity-first selection and otherwise the smallest complete full nine-bit signature under fixed policy YWE-NORMALIZE-LEXICOGRAPHIC-001. Separate pure planning, current-model proof validation and actual value application. Retain required original diagnosis and current full bindings in early comparison witnesses, including plan-null evaluated planning refusals. Permit inherited producer-contract detection only after full original comparison. Use a separate seeded normalization capture scope with STATE_VALIDITY at RECOVERY and zero/one actual XOR steps, followed by complete actual-result diagnosis. Reuse the existing ten-field envelope with the canonical codeword rule while explicitly guarding the prior six-ID assessment boundary.",
+      "rationale": "Complete targets and application-time revalidation make deterministic choice and stale/forged proof observable. Exact origin refusal prevents attaching recovery children to an unverified root. The source-defined codeword rule and owned failure snapshots preserve traceability without claiming operational recovery or complete Diagnostics.",
+      "consequences": [
+        "Canonical ASH sources, generated mirror, dependency identity and prior immutable milestone evidence remain unchanged.",
+        "Existing three positional StateModel parameters and diagnosis-only facade remain compatible; normalization capture is an explicit optional keyword needed only for application.",
+        "New plan/result schemas do not broaden the assessment or M2 formats. Constructors own structure; StateModel owns complete profile/orbit/target/XOR and receipt verification.",
+        "Operational session publication, recovery/fallback, containment, safe halt, full Diagnostics and M3 acceptance remain incomplete until independently executed later work."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0040",
+        "YWE-REQ-0039",
+        "YWE-REQ-0010",
+        "YWE-REQ-0015",
+        "YWE-REQ-0016"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_normalization_contract.md",
+        "docs/architecture/m3_normalization_policy.md",
+        "data/schemas/m3_normalization_plan_schema.json",
+        "data/schemas/m3_state_normalization_schema.json",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/state-model-contract.md",
+        "core/ash_pattern_engine/canonical/core/state-admissibility.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/codeword-set.pseudo.md",
+        "core/ash_pattern_engine/canonical/algorithms/codeword-transformation-semantics.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/state-validity-diagnostics.pseudo.md",
+        "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
+        "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
+        "core/ash_pattern_engine/canonical/verification/invariant-spec.md"
+      ]
     }
   ],
   "summary": {
-    "total_records": 46,
-    "architecture_decisions": 29,
-    "accepted_decisions": 29,
+    "total_records": 47,
+    "architecture_decisions": 30,
+    "accepted_decisions": 30,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

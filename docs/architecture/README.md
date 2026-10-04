@@ -114,6 +114,8 @@ baseline in view:
 ## M3 deterministic Core contracts
 
 - `m3_state_assessment_contract.md` -- Adopted immutable, profile-bound StateModel diagnosis and contextual assessment contract; normalization, runtime recovery and complete Diagnostics remain subsequent M3 work.
+- `m3_normalization_contract.md` -- Adopted N1 pure planning, complete-target proof validation, actual value normalization and immediate retained diagnostics; operational recovery and session publication remain subsequent work.
+- `m3_normalization_policy.md` -- Fixed identity-first and otherwise complete full-signature target ordering, explicitly owned by downstream YWE.
 
 ## Core Engines
 

@@ -18,18 +18,21 @@ class ReferenceBoundaryTests(unittest.TestCase):
             root = Path(directory)
             reference = root / "core/ash_pattern_engine"
             reference.mkdir(parents=True)
-            for name in ("__init__.py", "ash_canonical.py", "state_model.py", "state_values.py"):
+            for name in ("__init__.py", "ash_canonical.py", "state_model.py", "state_values.py",
+                         "normalization.py", "normalization_values.py"):
                 (reference / name).write_text("# Reference fixture\n", encoding="utf-8")
             violations, inspected = platform_violations(root)
             self.assertEqual([], violations)
-            self.assertEqual(4, inspected)
+            self.assertEqual(6, inspected)
 
-            for name in ("state_model_runtime.py", "state_values_extra.py", "product.cpp"):
+            for name in ("state_model_runtime.py", "state_values_extra.py", "normalization_runtime.py",
+                         "normalization_values_extra.py", "product.cpp"):
                 (reference / name).write_text("# Unauthorized neighbor fixture\n", encoding="utf-8")
             violations, inspected = platform_violations(root)
-            self.assertEqual(7, inspected)
-            self.assertEqual(3, len(violations))
-            for name in ("state_model_runtime.py", "state_values_extra.py", "product.cpp"):
+            self.assertEqual(11, inspected)
+            self.assertEqual(5, len(violations))
+            for name in ("state_model_runtime.py", "state_values_extra.py", "normalization_runtime.py",
+                         "normalization_values_extra.py", "product.cpp"):
                 self.assertTrue(any(f"core/ash_pattern_engine/{name}:" in item for item in violations))
 
 

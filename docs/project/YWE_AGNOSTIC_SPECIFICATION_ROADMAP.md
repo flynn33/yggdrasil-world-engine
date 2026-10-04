@@ -248,8 +248,14 @@ Owner role: Core semantics maintainers
 Current checkpoint: the adopted StateModel reference slice implements exact immutable
 values, bounded decoding, profile-bound diagnosis and contextual classification, with
 independent exhaustive state/classifier and retained-failure tests. The contract is
-`docs/architecture/m3_state_assessment_contract.md`. Semantic normalization, operational
-recovery, full Diagnostics and generation remain subsequent work; this checkpoint
+`docs/architecture/m3_state_assessment_contract.md`. The adopted N1 normalization
+contract is `docs/architecture/m3_normalization_contract.md`; its reference slice
+adds pure planning, complete-target proof revalidation and actual value computation.
+All 42 normalization tests pass, including execution of all 2,048 reviewed
+profile/state cases. The combined reference regression suite passes 115 tests,
+and 29 loader/platform-boundary tests pass. Complete clean repository verification
+precedes publication. Operational recovery, full Diagnostics and generation
+remain subsequent work; this checkpoint
 does not complete an M3 exit criterion.
 
 Deliverables:

@@ -80,6 +80,8 @@ APPROVED_REFERENCE_SOURCES = {
     "core/ash_pattern_engine/ash_canonical.py",
     "core/ash_pattern_engine/state_model.py",
     "core/ash_pattern_engine/state_values.py",
+    "core/ash_pattern_engine/normalization.py",
+    "core/ash_pattern_engine/normalization_values.py",
     "docs/design-planning/m2/ash-values/verification/value_model.py",
     "docs/design-planning/m2/ash-values/verification/verify_contract.py",
     "docs/design-planning/m2/consumer-compatibility/verify_compatibility.py",

@@ -1,0 +1,2720 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m3_state_normalization_schema.json",
+  "title": "M3 N1 semantic normalization result and retained failure packets",
+  "description": "Adopted YWE N1 application transport with exact headers, complete original/actual validity payloads, separate inherited and new diagnostic prefixes, immediate computation/post-validation order and closed retaining outcomes. Schema acceptance does not prove original receipt authenticity, full-profile equality, selected-target policy, actual XOR, dynamic record/reference equality or collector acknowledgement.",
+  "x-ywe-requirement-id": "YWE-REQ-0040",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/AlreadyValidResult"
+    },
+    {
+      "$ref": "#/$defs/NormalizedResult"
+    },
+    {
+      "$ref": "#/$defs/SemanticFailure"
+    },
+    {
+      "$ref": "#/$defs/PlanValidationFailure"
+    },
+    {
+      "$ref": "#/$defs/PostValidationFailure"
+    },
+    {
+      "$ref": "#/$defs/DiagnosticCaptureFailure"
+    }
+  ],
+  "$defs": {
+    "FieldPath": {
+      "enum": [
+        "normalization_capture",
+        "normalization_context",
+        "policy_binding",
+        "plan",
+        "plan_validation",
+        "plan_reference",
+        "evidence_reference",
+        "decision",
+        "original_diagnosis",
+        "original_diagnosis.source_binding",
+        "original_diagnosis.profile_binding",
+        "original_diagnosis.assessment_binding",
+        "original_diagnosis.input_evidence",
+        "original_diagnosis.parsed_state",
+        "original_diagnosis.state_validity_diagnostic",
+        "original_diagnosis.emitted_diagnostics",
+        "eligible_targets_complete",
+        "eligible_targets",
+        "selected_target",
+        "codeword_chain",
+        "reason_code",
+        "step_index",
+        "input_state",
+        "codeword",
+        "actual_state",
+        "phase",
+        "emission",
+        "emission.envelope",
+        "emission.envelope.rule_ids",
+        "emission.diagnostic_reference",
+        "operation_reference",
+        "computation_reference",
+        "post_validation_reference",
+        "inherited_diagnostics",
+        "emitted_diagnostics",
+        "steps",
+        "post_validity_diagnostic",
+        "normalized_state",
+        "origin_validation_status",
+        "validation_status",
+        "failure_code",
+        "field_name",
+        "expected_decision",
+        "recomputed_eligible_targets",
+        "recomputed_target",
+        "recomputed_codeword_chain",
+        "policy_binding.policy_id",
+        "policy_binding.policy_version",
+        "policy_binding.source_reference",
+        "policy_binding.source_sha256",
+        "canonical_binding",
+        "profile_binding",
+        "state_validity_diagnostic",
+        "step",
+        "outcome",
+        "operation_binding",
+        "failure_kind",
+        "failed_field",
+        "capture_status",
+        "attempted_diagnostic",
+        "submitted_plan",
+        "validation"
+      ],
+      "description": "Closed local N1 interface field paths, not an upstream ASH rule taxonomy."
+    },
+    "NormalizationContext": {
+      "type": "object",
+      "required": [
+        "operation_reference",
+        "computation_reference",
+        "post_validation_reference"
+      ],
+      "properties": {
+        "operation_reference": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/DiagnosticReference"
+        },
+        "computation_reference": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/DiagnosticReference"
+        },
+        "post_validation_reference": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/DiagnosticReference"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Runtime verifies that computation_reference and post_validation_reference differ from one another and from the inherited detection reference. operation_reference has no additional inequality constraint."
+    },
+    "NormalizationStep": {
+      "type": "object",
+      "required": [
+        "step_index",
+        "input_state",
+        "codeword",
+        "actual_state"
+      ],
+      "properties": {
+        "step_index": {
+          "const": 0
+        },
+        "input_state": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+        },
+        "codeword": {
+          "$ref": "https://ywe.local/schemas/m3_normalization_plan_schema.json#/$defs/CanonicalCodeword"
+        },
+        "actual_state": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+        }
+      },
+      "additionalProperties": false,
+      "description": "One observed full-vector application; runtime verifies actual_state equals input_state XOR codeword."
+    },
+    "OperationRuleIDs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "enum": [
+          "ASH-STATE-STRUCTURE-001",
+          "ASH-STATE-VALIDITY-001",
+          "ASH-STATE-GENERAL-001",
+          "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+          "ASH-CLASSIFICATION-MAPPING-001",
+          "ASH-RECOVERY-ACTION-001",
+          "ASH-CODEWORD-STRUCTURE-001"
+        ]
+      },
+      "maxItems": 5,
+      "uniqueItems": true
+    },
+    "OperationEnvelope": {
+      "type": "object",
+      "required": [
+        "diagnostic_kind",
+        "severity",
+        "stage",
+        "disposition",
+        "subject_reference",
+        "parent_diagnostic_reference",
+        "chain_root_reference",
+        "rule_ids",
+        "summary",
+        "notes"
+      ],
+      "properties": {
+        "diagnostic_kind": {
+          "const": "STATE_VALIDITY"
+        },
+        "severity": {
+          "enum": [
+            "INFO",
+            "WARNING",
+            "ERROR",
+            "CRITICAL"
+          ]
+        },
+        "stage": {
+          "const": "RECOVERY"
+        },
+        "disposition": {
+          "enum": [
+            "RESOLVED",
+            "PENDING",
+            "BLOCKED",
+            "ESCALATED",
+            "TERMINAL"
+          ]
+        },
+        "subject_reference": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/Identifier"
+        },
+        "parent_diagnostic_reference": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/DiagnosticReference"
+        },
+        "chain_root_reference": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/DiagnosticReference"
+        },
+        "rule_ids": {
+          "$ref": "#/$defs/OperationRuleIDs"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "not": {
+            "pattern": "[\\r\\n\\u000b\\u000c\\u001c\\u001d\\u001e\\u0085\\u2028\\u2029]"
+          }
+        },
+        "notes": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/Notes"
+        }
+      },
+      "additionalProperties": false,
+      "description": "The adopted local N1 STATE_VALIDITY/RECOVERY mapping retains exactly ten canonical envelope fields and seven permitted rule identities. It is distinct from the unchanged six-ID assessment envelope. Runtime proves actual evaluation, complete parent/root/subject correspondence and receipt truth.",
+      "x-ywe-requirement-id": "YWE-REQ-0040"
+    },
+    "OperationEmission": {
+      "type": "object",
+      "required": [
+        "diagnostic_reference",
+        "envelope"
+      ],
+      "properties": {
+        "diagnostic_reference": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/DiagnosticReference"
+        },
+        "envelope": {
+          "$ref": "#/$defs/OperationEnvelope"
+        }
+      },
+      "additionalProperties": false
+    },
+    "NormalizationDiagnosticRecord": {
+      "type": "object",
+      "required": [
+        "emission",
+        "phase",
+        "state_validity_diagnostic",
+        "step"
+      ],
+      "properties": {
+        "emission": {
+          "$ref": "#/$defs/OperationEmission"
+        },
+        "phase": {
+          "enum": [
+            "COMPUTATION",
+            "POST_VALIDATION"
+          ]
+        },
+        "state_validity_diagnostic": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/StateValidityDiagnostic"
+        },
+        "step": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/NormalizationStep"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComputationRecord": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/NormalizationDiagnosticRecord"
+        },
+        {
+          "properties": {
+            "phase": {
+              "const": "COMPUTATION"
+            }
+          }
+        }
+      ]
+    },
+    "PostValidationRecord": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/NormalizationDiagnosticRecord"
+        },
+        {
+          "properties": {
+            "phase": {
+              "const": "POST_VALIDATION"
+            }
+          }
+        }
+      ]
+    },
+    "RefusalRecord": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ComputationRecord"
+        },
+        {
+          "properties": {
+            "step": {
+              "type": "null"
+            },
+            "emission": {
+              "properties": {
+                "envelope": {
+                  "properties": {
+                    "disposition": {
+                      "const": "BLOCKED"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ApplicationPlanValidation": {
+      "type": "object",
+      "required": [
+        "plan",
+        "original_diagnosis",
+        "canonical_binding",
+        "profile_binding",
+        "origin_validation_status",
+        "validation_status",
+        "failure_code",
+        "field_name",
+        "expected_decision",
+        "recomputed_eligible_targets",
+        "recomputed_target",
+        "recomputed_codeword_chain"
+      ],
+      "properties": {
+        "plan": {
+          "$ref": "https://ywe.local/schemas/m3_normalization_plan_schema.json"
+        },
+        "original_diagnosis": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/StateDiagnosis"
+        },
+        "canonical_binding": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/CanonicalAshBinding"
+        },
+        "profile_binding": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/ProfileBinding"
+        },
+        "origin_validation_status": {
+          "enum": [
+            "NOT_EVALUATED",
+            "REJECTED",
+            "VERIFIED"
+          ]
+        },
+        "validation_status": {
+          "enum": [
+            "VALIDATED",
+            "REJECTED"
+          ]
+        },
+        "failure_code": {
+          "oneOf": [
+            {
+              "enum": [
+                "NORMALIZATION_CONFIG_INVALID",
+                "NORMALIZATION_CONTEXT_INVALID",
+                "NORMALIZATION_POLICY_INVALID",
+                "NORMALIZATION_PLAN_INVALID",
+                "NORMALIZATION_BINDING_MISMATCH",
+                "NORMALIZATION_ORIGINAL_DIAGNOSIS_MISMATCH",
+                "NORMALIZATION_TARGET_SET_MISMATCH",
+                "NORMALIZATION_SELECTION_MISMATCH",
+                "NORMALIZATION_CODEWORD_MISMATCH"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "field_name": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/FieldPath"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "expected_decision": {
+          "oneOf": [
+            {
+              "enum": [
+                "ALREADY_VALID",
+                "PLAN_READY",
+                "NOT_NORMALIZABLE",
+                "BLOCKED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recomputed_eligible_targets": {
+          "oneOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_normalization_plan_schema.json#/$defs/EligibleTargets"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recomputed_target": {
+          "oneOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recomputed_codeword_chain": {
+          "oneOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_normalization_plan_schema.json#/$defs/CodewordChain"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "origin_validation_status": {
+              "const": "NOT_EVALUATED"
+            },
+            "validation_status": {
+              "const": "REJECTED"
+            },
+            "failure_code": {
+              "enum": [
+                "NORMALIZATION_CONFIG_INVALID",
+                "NORMALIZATION_CONTEXT_INVALID",
+                "NORMALIZATION_POLICY_INVALID",
+                "NORMALIZATION_PLAN_INVALID"
+              ]
+            },
+            "field_name": {
+              "$ref": "#/$defs/FieldPath"
+            },
+            "expected_decision": {
+              "type": "null"
+            },
+            "recomputed_eligible_targets": {
+              "type": "null"
+            },
+            "recomputed_target": {
+              "type": "null"
+            },
+            "recomputed_codeword_chain": {
+              "type": "null"
+            }
+          }
+        },
+        {
+          "properties": {
+            "origin_validation_status": {
+              "const": "REJECTED"
+            },
+            "validation_status": {
+              "const": "REJECTED"
+            },
+            "failure_code": {
+              "enum": [
+                "NORMALIZATION_BINDING_MISMATCH",
+                "NORMALIZATION_ORIGINAL_DIAGNOSIS_MISMATCH"
+              ]
+            },
+            "field_name": {
+              "$ref": "#/$defs/FieldPath"
+            },
+            "expected_decision": {
+              "type": "null"
+            },
+            "recomputed_eligible_targets": {
+              "type": "null"
+            },
+            "recomputed_target": {
+              "type": "null"
+            },
+            "recomputed_codeword_chain": {
+              "type": "null"
+            }
+          }
+        },
+        {
+          "allOf": [
+            {
+              "properties": {
+                "origin_validation_status": {
+                  "const": "VERIFIED"
+                }
+              }
+            },
+            {
+              "oneOf": [
+                {
+                  "properties": {
+                    "expected_decision": {
+                      "const": "ALREADY_VALID"
+                    },
+                    "recomputed_eligible_targets": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 16
+                    },
+                    "recomputed_target": {
+                      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+                    },
+                    "recomputed_codeword_chain": {
+                      "type": "array",
+                      "minItems": 0,
+                      "items": false,
+                      "maxItems": 0
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "expected_decision": {
+                      "const": "PLAN_READY"
+                    },
+                    "recomputed_eligible_targets": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 16
+                    },
+                    "recomputed_target": {
+                      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+                    },
+                    "recomputed_codeword_chain": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 1
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "expected_decision": {
+                      "const": "NOT_NORMALIZABLE"
+                    },
+                    "recomputed_eligible_targets": {
+                      "type": "array",
+                      "minItems": 0,
+                      "items": false,
+                      "maxItems": 0
+                    },
+                    "recomputed_target": {
+                      "type": "null"
+                    },
+                    "recomputed_codeword_chain": {
+                      "type": "array",
+                      "minItems": 0,
+                      "items": false,
+                      "maxItems": 0
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "expected_decision": {
+                      "const": "BLOCKED"
+                    },
+                    "recomputed_eligible_targets": {
+                      "type": "null"
+                    },
+                    "recomputed_target": {
+                      "type": "null"
+                    },
+                    "recomputed_codeword_chain": {
+                      "type": "null"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "oneOf": [
+                {
+                  "properties": {
+                    "validation_status": {
+                      "const": "VALIDATED"
+                    },
+                    "failure_code": {
+                      "type": "null"
+                    },
+                    "field_name": {
+                      "type": "null"
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "validation_status": {
+                      "const": "REJECTED"
+                    },
+                    "failure_code": {
+                      "enum": [
+                        "NORMALIZATION_TARGET_SET_MISMATCH",
+                        "NORMALIZATION_SELECTION_MISMATCH",
+                        "NORMALIZATION_CODEWORD_MISMATCH"
+                      ]
+                    },
+                    "field_name": {
+                      "$ref": "#/$defs/FieldPath"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "NORMALIZATION_BINDING_MISMATCH"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "field_name": {
+                "enum": [
+                  "original_diagnosis.source_binding",
+                  "original_diagnosis.profile_binding"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "NORMALIZATION_ORIGINAL_DIAGNOSIS_MISMATCH"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "field_name": {
+                "enum": [
+                  "original_diagnosis.assessment_binding",
+                  "original_diagnosis.input_evidence",
+                  "original_diagnosis.parsed_state",
+                  "original_diagnosis.state_validity_diagnostic",
+                  "original_diagnosis.emitted_diagnostics"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "description": "Exact twelve-field application observation with a nonnull submitted headered plan and required submitted diagnosis. The nullable-plan exception witness is outside this wire format. Runtime establishes equality with result.plan/original_diagnosis, current complete bindings, rederived facts and the actual failed comparison.",
+      "x-ywe-requirement-id": "YWE-REQ-0040"
+    },
+    "PacketCommon": {
+      "type": "object",
+      "required": [
+        "schema_ref",
+        "artifact_type",
+        "artifact_version",
+        "outcome",
+        "operation_binding",
+        "plan",
+        "plan_validation",
+        "original_diagnosis",
+        "actual_state",
+        "steps",
+        "post_validity_diagnostic",
+        "normalized_state",
+        "inherited_diagnostics",
+        "emitted_diagnostics"
+      ],
+      "properties": {
+        "schema_ref": {
+          "const": "data/schemas/m3_state_normalization_schema.json"
+        },
+        "artifact_type": {
+          "const": "ywe_state_normalization"
+        },
+        "artifact_version": {
+          "const": "1.0.0"
+        },
+        "outcome": {
+          "enum": [
+            "ALREADY_VALID",
+            "NORMALIZED",
+            "NOT_NORMALIZABLE",
+            "BLOCKED",
+            "FAILURE"
+          ]
+        },
+        "operation_binding": {
+          "$ref": "#/$defs/NormalizationContext"
+        },
+        "plan": {
+          "$ref": "https://ywe.local/schemas/m3_normalization_plan_schema.json"
+        },
+        "plan_validation": {
+          "$ref": "#/$defs/ApplicationPlanValidation"
+        },
+        "original_diagnosis": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/StateDiagnosis"
+        },
+        "actual_state": {
+          "oneOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "$ref": "#/$defs/NormalizationStep"
+          },
+          "maxItems": 1
+        },
+        "post_validity_diagnostic": {
+          "oneOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/StateValidityDiagnostic"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "normalized_state": {
+          "oneOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "inherited_diagnostics": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/DetectionEmission"
+          },
+          "maxItems": 1
+        },
+        "emitted_diagnostics": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "$ref": "#/$defs/NormalizationDiagnosticRecord"
+          },
+          "maxItems": 2
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "original_diagnosis": {
+                "properties": {
+                  "emitted_diagnostics": {
+                    "minItems": 1,
+                    "prefixItems": [
+                      {
+                        "properties": {
+                          "envelope": {
+                            "properties": {
+                              "severity": {
+                                "const": "WARNING"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "emitted_diagnostics": {
+                "items": {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "severity": {
+                              "enum": [
+                                "WARNING",
+                                "ERROR",
+                                "CRITICAL"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "attempted_diagnostic": {
+                "properties": {
+                  "emission": {
+                    "properties": {
+                      "envelope": {
+                        "properties": {
+                          "severity": {
+                            "enum": [
+                              "WARNING",
+                              "ERROR",
+                              "CRITICAL"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "emitted_diagnostics": {
+                "minItems": 1,
+                "prefixItems": [
+                  {
+                    "properties": {
+                      "emission": {
+                        "properties": {
+                          "envelope": {
+                            "properties": {
+                              "severity": {
+                                "const": "WARNING"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "emitted_diagnostics": {
+                "prefixItems": [
+                  true,
+                  {
+                    "properties": {
+                      "emission": {
+                        "properties": {
+                          "envelope": {
+                            "properties": {
+                              "severity": {
+                                "enum": [
+                                  "WARNING",
+                                  "ERROR",
+                                  "CRITICAL"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "attempted_diagnostic": {
+                "properties": {
+                  "emission": {
+                    "properties": {
+                      "envelope": {
+                        "properties": {
+                          "severity": {
+                            "enum": [
+                              "WARNING",
+                              "ERROR",
+                              "CRITICAL"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "original_diagnosis": {
+                "properties": {
+                  "emitted_diagnostics": {
+                    "minItems": 1,
+                    "prefixItems": [
+                      {
+                        "properties": {
+                          "envelope": {
+                            "properties": {
+                              "severity": {
+                                "const": "ERROR"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "emitted_diagnostics": {
+                "items": {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "severity": {
+                              "enum": [
+                                "ERROR",
+                                "CRITICAL"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "attempted_diagnostic": {
+                "properties": {
+                  "emission": {
+                    "properties": {
+                      "envelope": {
+                        "properties": {
+                          "severity": {
+                            "enum": [
+                              "ERROR",
+                              "CRITICAL"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "emitted_diagnostics": {
+                "minItems": 1,
+                "prefixItems": [
+                  {
+                    "properties": {
+                      "emission": {
+                        "properties": {
+                          "envelope": {
+                            "properties": {
+                              "severity": {
+                                "const": "ERROR"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "emitted_diagnostics": {
+                "prefixItems": [
+                  true,
+                  {
+                    "properties": {
+                      "emission": {
+                        "properties": {
+                          "envelope": {
+                            "properties": {
+                              "severity": {
+                                "enum": [
+                                  "ERROR",
+                                  "CRITICAL"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "attempted_diagnostic": {
+                "properties": {
+                  "emission": {
+                    "properties": {
+                      "envelope": {
+                        "properties": {
+                          "severity": {
+                            "enum": [
+                              "ERROR",
+                              "CRITICAL"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "original_diagnosis": {
+                "properties": {
+                  "emitted_diagnostics": {
+                    "minItems": 1,
+                    "prefixItems": [
+                      {
+                        "properties": {
+                          "envelope": {
+                            "properties": {
+                              "severity": {
+                                "const": "CRITICAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "emitted_diagnostics": {
+                "items": {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "severity": {
+                              "enum": [
+                                "CRITICAL"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "attempted_diagnostic": {
+                "properties": {
+                  "emission": {
+                    "properties": {
+                      "envelope": {
+                        "properties": {
+                          "severity": {
+                            "enum": [
+                              "CRITICAL"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "emitted_diagnostics": {
+                "minItems": 1,
+                "prefixItems": [
+                  {
+                    "properties": {
+                      "emission": {
+                        "properties": {
+                          "envelope": {
+                            "properties": {
+                              "severity": {
+                                "const": "CRITICAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "emitted_diagnostics": {
+                "prefixItems": [
+                  true,
+                  {
+                    "properties": {
+                      "emission": {
+                        "properties": {
+                          "envelope": {
+                            "properties": {
+                              "severity": {
+                                "enum": [
+                                  "CRITICAL"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "attempted_diagnostic": {
+                "properties": {
+                  "emission": {
+                    "properties": {
+                      "envelope": {
+                        "properties": {
+                          "severity": {
+                            "enum": [
+                              "CRITICAL"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "steps": {
+                "maxItems": 0
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "emitted_diagnostics": {
+                "items": {
+                  "properties": {
+                    "step": {
+                      "type": "null"
+                    }
+                  }
+                }
+              },
+              "attempted_diagnostic": {
+                "properties": {
+                  "step": {
+                    "type": "null"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "steps": {
+                "minItems": 1
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "actual_state": {
+                "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+              },
+              "emitted_diagnostics": {
+                "items": {
+                  "properties": {
+                    "step": {
+                      "$ref": "#/$defs/NormalizationStep"
+                    }
+                  }
+                }
+              },
+              "attempted_diagnostic": {
+                "properties": {
+                  "step": {
+                    "$ref": "#/$defs/NormalizationStep"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "plan": {
+                "properties": {
+                  "decision": {
+                    "enum": [
+                      "ALREADY_VALID",
+                      "NOT_NORMALIZABLE",
+                      "BLOCKED"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "steps": {
+                "type": "array",
+                "minItems": 0,
+                "items": false,
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "AlreadyValidResult": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PacketCommon"
+        },
+        {
+          "type": "object",
+          "required": [
+            "schema_ref",
+            "artifact_type",
+            "artifact_version",
+            "outcome",
+            "operation_binding",
+            "plan",
+            "plan_validation",
+            "original_diagnosis",
+            "actual_state",
+            "steps",
+            "post_validity_diagnostic",
+            "normalized_state",
+            "inherited_diagnostics",
+            "emitted_diagnostics"
+          ],
+          "properties": {
+            "schema_ref": true,
+            "artifact_type": true,
+            "artifact_version": true,
+            "outcome": true,
+            "operation_binding": true,
+            "plan": true,
+            "plan_validation": true,
+            "original_diagnosis": true,
+            "actual_state": true,
+            "steps": true,
+            "post_validity_diagnostic": true,
+            "normalized_state": true,
+            "inherited_diagnostics": true,
+            "emitted_diagnostics": true
+          },
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "ALREADY_VALID"
+            },
+            "plan": {
+              "properties": {
+                "decision": {
+                  "const": "ALREADY_VALID"
+                }
+              }
+            },
+            "plan_validation": {
+              "properties": {
+                "origin_validation_status": {
+                  "const": "VERIFIED"
+                },
+                "validation_status": {
+                  "const": "VALIDATED"
+                },
+                "expected_decision": {
+                  "const": "ALREADY_VALID"
+                }
+              }
+            },
+            "actual_state": {
+              "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+            },
+            "normalized_state": {
+              "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+            },
+            "steps": {
+              "type": "array",
+              "minItems": 0,
+              "items": false,
+              "maxItems": 0
+            },
+            "post_validity_diagnostic": {
+              "allOf": [
+                {
+                  "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/StateValidityDiagnostic"
+                },
+                {
+                  "properties": {
+                    "admissibility_status": {
+                      "const": "VALID"
+                    }
+                  }
+                }
+              ]
+            },
+            "inherited_diagnostics": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1
+            },
+            "emitted_diagnostics": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "prefixItems": [
+                {
+                  "$ref": "#/$defs/PendingComputationRecord"
+                },
+                {
+                  "$ref": "#/$defs/ResolvedPostValidationRecord"
+                }
+              ],
+              "items": false
+            },
+            "original_diagnosis": {
+              "properties": {
+                "state_validity_diagnostic": {
+                  "properties": {
+                    "admissibility_status": {
+                      "const": "VALID"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0040"
+    },
+    "NormalizedResult": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PacketCommon"
+        },
+        {
+          "type": "object",
+          "required": [
+            "schema_ref",
+            "artifact_type",
+            "artifact_version",
+            "outcome",
+            "operation_binding",
+            "plan",
+            "plan_validation",
+            "original_diagnosis",
+            "actual_state",
+            "steps",
+            "post_validity_diagnostic",
+            "normalized_state",
+            "inherited_diagnostics",
+            "emitted_diagnostics"
+          ],
+          "properties": {
+            "schema_ref": true,
+            "artifact_type": true,
+            "artifact_version": true,
+            "outcome": true,
+            "operation_binding": true,
+            "plan": true,
+            "plan_validation": true,
+            "original_diagnosis": true,
+            "actual_state": true,
+            "steps": true,
+            "post_validity_diagnostic": true,
+            "normalized_state": true,
+            "inherited_diagnostics": true,
+            "emitted_diagnostics": true
+          },
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "NORMALIZED"
+            },
+            "plan": {
+              "properties": {
+                "decision": {
+                  "const": "PLAN_READY"
+                }
+              }
+            },
+            "plan_validation": {
+              "properties": {
+                "origin_validation_status": {
+                  "const": "VERIFIED"
+                },
+                "validation_status": {
+                  "const": "VALIDATED"
+                },
+                "expected_decision": {
+                  "const": "PLAN_READY"
+                }
+              }
+            },
+            "actual_state": {
+              "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+            },
+            "normalized_state": {
+              "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+            },
+            "steps": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1
+            },
+            "post_validity_diagnostic": {
+              "allOf": [
+                {
+                  "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/StateValidityDiagnostic"
+                },
+                {
+                  "properties": {
+                    "admissibility_status": {
+                      "const": "VALID"
+                    }
+                  }
+                }
+              ]
+            },
+            "inherited_diagnostics": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1
+            },
+            "emitted_diagnostics": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "prefixItems": [
+                {
+                  "$ref": "#/$defs/PendingComputationRecord"
+                },
+                {
+                  "$ref": "#/$defs/ResolvedPostValidationRecord"
+                }
+              ],
+              "items": false
+            },
+            "original_diagnosis": {
+              "properties": {
+                "state_validity_diagnostic": {
+                  "properties": {
+                    "admissibility_status": {
+                      "const": "TRANSFORMATION_COMPATIBLE"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0040"
+    },
+    "SemanticFailure": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PacketCommon"
+        },
+        {
+          "type": "object",
+          "required": [
+            "schema_ref",
+            "artifact_type",
+            "artifact_version",
+            "outcome",
+            "operation_binding",
+            "plan",
+            "plan_validation",
+            "original_diagnosis",
+            "actual_state",
+            "steps",
+            "post_validity_diagnostic",
+            "normalized_state",
+            "inherited_diagnostics",
+            "emitted_diagnostics",
+            "failure_kind",
+            "failure_code",
+            "failed_field"
+          ],
+          "properties": {
+            "schema_ref": true,
+            "artifact_type": true,
+            "artifact_version": true,
+            "outcome": true,
+            "operation_binding": true,
+            "plan": true,
+            "plan_validation": true,
+            "original_diagnosis": true,
+            "actual_state": true,
+            "steps": true,
+            "post_validity_diagnostic": true,
+            "normalized_state": true,
+            "inherited_diagnostics": true,
+            "emitted_diagnostics": true,
+            "failure_kind": {
+              "const": "semantic"
+            },
+            "failure_code": {
+              "enum": [
+                "NORMALIZATION_NO_TARGET",
+                "NORMALIZATION_INPUT_REJECTED",
+                "NORMALIZATION_PROFILE_UNAVAILABLE"
+              ]
+            },
+            "failed_field": {
+              "$ref": "#/$defs/FieldPath"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "outcome": {
+              "enum": [
+                "NOT_NORMALIZABLE",
+                "BLOCKED"
+              ]
+            },
+            "normalized_state": {
+              "type": "null"
+            },
+            "post_validity_diagnostic": {
+              "type": "null"
+            },
+            "steps": {
+              "type": "array",
+              "minItems": 0,
+              "items": false,
+              "maxItems": 0
+            },
+            "inherited_diagnostics": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1
+            },
+            "emitted_diagnostics": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1,
+              "prefixItems": [
+                {
+                  "$ref": "#/$defs/RefusalRecord"
+                }
+              ],
+              "items": false
+            },
+            "plan_validation": {
+              "properties": {
+                "origin_validation_status": {
+                  "const": "VERIFIED"
+                },
+                "validation_status": {
+                  "const": "VALIDATED"
+                }
+              }
+            }
+          }
+        },
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "outcome": {
+                  "const": "NOT_NORMALIZABLE"
+                },
+                "failure_code": {
+                  "const": "NORMALIZATION_NO_TARGET"
+                },
+                "actual_state": {
+                  "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+                },
+                "plan": {
+                  "properties": {
+                    "decision": {
+                      "const": "NOT_NORMALIZABLE"
+                    }
+                  }
+                },
+                "plan_validation": {
+                  "properties": {
+                    "origin_validation_status": {
+                      "const": "VERIFIED"
+                    },
+                    "validation_status": {
+                      "const": "VALIDATED"
+                    },
+                    "expected_decision": {
+                      "const": "NOT_NORMALIZABLE"
+                    }
+                  }
+                },
+                "original_diagnosis": {
+                  "properties": {
+                    "state_validity_diagnostic": {
+                      "properties": {
+                        "admissibility_status": {
+                          "const": "TRANSFORMATION_INCOMPATIBLE"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "outcome": {
+                  "const": "BLOCKED"
+                },
+                "failure_code": {
+                  "const": "NORMALIZATION_INPUT_REJECTED"
+                },
+                "actual_state": {
+                  "type": "null"
+                },
+                "plan": {
+                  "properties": {
+                    "decision": {
+                      "const": "BLOCKED"
+                    },
+                    "reason_code": {
+                      "const": "NORMALIZATION_INPUT_REJECTED"
+                    }
+                  }
+                },
+                "plan_validation": {
+                  "properties": {
+                    "origin_validation_status": {
+                      "const": "VERIFIED"
+                    },
+                    "validation_status": {
+                      "const": "VALIDATED"
+                    },
+                    "expected_decision": {
+                      "const": "BLOCKED"
+                    }
+                  }
+                },
+                "original_diagnosis": {
+                  "properties": {
+                    "parsed_state": {
+                      "type": "null"
+                    },
+                    "state_validity_diagnostic": {
+                      "properties": {
+                        "admissibility_status": {
+                          "const": "UNCLASSIFIED"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "outcome": {
+                  "const": "BLOCKED"
+                },
+                "failure_code": {
+                  "const": "NORMALIZATION_PROFILE_UNAVAILABLE"
+                },
+                "actual_state": {
+                  "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+                },
+                "plan": {
+                  "properties": {
+                    "decision": {
+                      "const": "BLOCKED"
+                    },
+                    "reason_code": {
+                      "const": "NORMALIZATION_PROFILE_UNAVAILABLE"
+                    }
+                  }
+                },
+                "plan_validation": {
+                  "properties": {
+                    "origin_validation_status": {
+                      "const": "VERIFIED"
+                    },
+                    "validation_status": {
+                      "const": "VALIDATED"
+                    },
+                    "expected_decision": {
+                      "const": "BLOCKED"
+                    }
+                  }
+                },
+                "original_diagnosis": {
+                  "properties": {
+                    "parsed_state": {
+                      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+                    },
+                    "profile_binding": {
+                      "properties": {
+                        "availability": {
+                          "const": "UNAVAILABLE"
+                        }
+                      }
+                    },
+                    "state_validity_diagnostic": {
+                      "properties": {
+                        "admissibility_status": {
+                          "const": "UNCLASSIFIED"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0040"
+    },
+    "PlanValidationFailure": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PacketCommon"
+        },
+        {
+          "type": "object",
+          "required": [
+            "schema_ref",
+            "artifact_type",
+            "artifact_version",
+            "outcome",
+            "operation_binding",
+            "plan",
+            "plan_validation",
+            "original_diagnosis",
+            "actual_state",
+            "steps",
+            "post_validity_diagnostic",
+            "normalized_state",
+            "inherited_diagnostics",
+            "emitted_diagnostics",
+            "failure_kind",
+            "failure_code",
+            "failed_field"
+          ],
+          "properties": {
+            "schema_ref": true,
+            "artifact_type": true,
+            "artifact_version": true,
+            "outcome": true,
+            "operation_binding": true,
+            "plan": true,
+            "plan_validation": true,
+            "original_diagnosis": true,
+            "actual_state": true,
+            "steps": true,
+            "post_validity_diagnostic": true,
+            "normalized_state": true,
+            "inherited_diagnostics": true,
+            "emitted_diagnostics": true,
+            "failure_kind": {
+              "const": "plan_validation"
+            },
+            "failure_code": {
+              "enum": [
+                "NORMALIZATION_BINDING_MISMATCH",
+                "NORMALIZATION_ORIGINAL_DIAGNOSIS_MISMATCH",
+                "NORMALIZATION_TARGET_SET_MISMATCH",
+                "NORMALIZATION_SELECTION_MISMATCH",
+                "NORMALIZATION_CODEWORD_MISMATCH"
+              ]
+            },
+            "failed_field": {
+              "$ref": "#/$defs/FieldPath"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "FAILURE"
+            },
+            "normalized_state": {
+              "type": "null"
+            },
+            "post_validity_diagnostic": {
+              "type": "null"
+            },
+            "steps": {
+              "type": "array",
+              "minItems": 0,
+              "items": false,
+              "maxItems": 0
+            },
+            "plan_validation": {
+              "properties": {
+                "validation_status": {
+                  "const": "REJECTED"
+                }
+              }
+            }
+          }
+        },
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "failure_code": {
+                  "enum": [
+                    "NORMALIZATION_BINDING_MISMATCH",
+                    "NORMALIZATION_ORIGINAL_DIAGNOSIS_MISMATCH"
+                  ]
+                },
+                "plan_validation": {
+                  "properties": {
+                    "origin_validation_status": {
+                      "const": "REJECTED"
+                    }
+                  }
+                },
+                "inherited_diagnostics": {
+                  "type": "array",
+                  "minItems": 0,
+                  "items": false,
+                  "maxItems": 0
+                },
+                "emitted_diagnostics": {
+                  "type": "array",
+                  "minItems": 0,
+                  "items": false,
+                  "maxItems": 0
+                }
+              }
+            },
+            {
+              "properties": {
+                "failure_code": {
+                  "enum": [
+                    "NORMALIZATION_TARGET_SET_MISMATCH",
+                    "NORMALIZATION_SELECTION_MISMATCH",
+                    "NORMALIZATION_CODEWORD_MISMATCH"
+                  ]
+                },
+                "plan_validation": {
+                  "properties": {
+                    "origin_validation_status": {
+                      "const": "VERIFIED"
+                    }
+                  }
+                },
+                "inherited_diagnostics": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "emitted_diagnostics": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "prefixItems": [
+                    {
+                      "$ref": "#/$defs/RefusalRecord"
+                    }
+                  ],
+                  "items": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "NORMALIZATION_BINDING_MISMATCH"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "plan_validation": {
+                "properties": {
+                  "failure_code": {
+                    "const": "NORMALIZATION_BINDING_MISMATCH"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "NORMALIZATION_ORIGINAL_DIAGNOSIS_MISMATCH"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "plan_validation": {
+                "properties": {
+                  "failure_code": {
+                    "const": "NORMALIZATION_ORIGINAL_DIAGNOSIS_MISMATCH"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "NORMALIZATION_TARGET_SET_MISMATCH"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "plan_validation": {
+                "properties": {
+                  "failure_code": {
+                    "const": "NORMALIZATION_TARGET_SET_MISMATCH"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "NORMALIZATION_SELECTION_MISMATCH"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "plan_validation": {
+                "properties": {
+                  "failure_code": {
+                    "const": "NORMALIZATION_SELECTION_MISMATCH"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "NORMALIZATION_CODEWORD_MISMATCH"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "plan_validation": {
+                "properties": {
+                  "failure_code": {
+                    "const": "NORMALIZATION_CODEWORD_MISMATCH"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0040"
+    },
+    "PostValidationFailure": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PacketCommon"
+        },
+        {
+          "type": "object",
+          "required": [
+            "schema_ref",
+            "artifact_type",
+            "artifact_version",
+            "outcome",
+            "operation_binding",
+            "plan",
+            "plan_validation",
+            "original_diagnosis",
+            "actual_state",
+            "steps",
+            "post_validity_diagnostic",
+            "normalized_state",
+            "inherited_diagnostics",
+            "emitted_diagnostics",
+            "failure_kind",
+            "failure_code",
+            "failed_field"
+          ],
+          "properties": {
+            "schema_ref": true,
+            "artifact_type": true,
+            "artifact_version": true,
+            "outcome": true,
+            "operation_binding": true,
+            "plan": true,
+            "plan_validation": true,
+            "original_diagnosis": true,
+            "actual_state": true,
+            "steps": true,
+            "post_validity_diagnostic": true,
+            "normalized_state": true,
+            "inherited_diagnostics": true,
+            "emitted_diagnostics": true,
+            "failure_kind": {
+              "const": "post_validation"
+            },
+            "failure_code": {
+              "const": "NORMALIZATION_POST_VALIDATION_FAILED"
+            },
+            "failed_field": {
+              "$ref": "#/$defs/FieldPath"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "FAILURE"
+            },
+            "actual_state": {
+              "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+            },
+            "normalized_state": {
+              "type": "null"
+            },
+            "post_validity_diagnostic": {
+              "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/StateValidityDiagnostic"
+            },
+            "inherited_diagnostics": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1
+            },
+            "emitted_diagnostics": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "prefixItems": [
+                {
+                  "$ref": "#/$defs/PendingComputationRecord"
+                },
+                {
+                  "$ref": "#/$defs/BlockedPostValidationRecord"
+                }
+              ],
+              "items": false
+            }
+          }
+        },
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "plan": {
+                  "properties": {
+                    "decision": {
+                      "const": "ALREADY_VALID"
+                    }
+                  }
+                },
+                "plan_validation": {
+                  "properties": {
+                    "origin_validation_status": {
+                      "const": "VERIFIED"
+                    },
+                    "validation_status": {
+                      "const": "VALIDATED"
+                    },
+                    "expected_decision": {
+                      "const": "ALREADY_VALID"
+                    }
+                  }
+                },
+                "steps": {
+                  "type": "array",
+                  "minItems": 0,
+                  "items": false,
+                  "maxItems": 0
+                }
+              }
+            },
+            {
+              "properties": {
+                "plan": {
+                  "properties": {
+                    "decision": {
+                      "const": "PLAN_READY"
+                    }
+                  }
+                },
+                "plan_validation": {
+                  "properties": {
+                    "origin_validation_status": {
+                      "const": "VERIFIED"
+                    },
+                    "validation_status": {
+                      "const": "VALIDATED"
+                    },
+                    "expected_decision": {
+                      "const": "PLAN_READY"
+                    }
+                  }
+                },
+                "steps": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0040"
+    },
+    "DiagnosticCaptureFailure": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PacketCommon"
+        },
+        {
+          "type": "object",
+          "required": [
+            "schema_ref",
+            "artifact_type",
+            "artifact_version",
+            "outcome",
+            "operation_binding",
+            "plan",
+            "plan_validation",
+            "original_diagnosis",
+            "actual_state",
+            "steps",
+            "post_validity_diagnostic",
+            "normalized_state",
+            "inherited_diagnostics",
+            "emitted_diagnostics",
+            "failure_kind",
+            "failure_code",
+            "failed_field",
+            "capture_status",
+            "attempted_diagnostic"
+          ],
+          "properties": {
+            "schema_ref": true,
+            "artifact_type": true,
+            "artifact_version": true,
+            "outcome": true,
+            "operation_binding": true,
+            "plan": true,
+            "plan_validation": true,
+            "original_diagnosis": true,
+            "actual_state": true,
+            "steps": true,
+            "post_validity_diagnostic": true,
+            "normalized_state": true,
+            "inherited_diagnostics": true,
+            "emitted_diagnostics": true,
+            "failure_kind": {
+              "const": "diagnostic_capture"
+            },
+            "failure_code": {
+              "enum": [
+                "DIAGNOSTIC_CAPTURE_REJECTED",
+                "DIAGNOSTIC_CAPTURE_UNCONFIRMED"
+              ]
+            },
+            "failed_field": {
+              "$ref": "#/$defs/FieldPath"
+            },
+            "capture_status": {
+              "enum": [
+                "REJECTED",
+                "NOT_CONFIRMED"
+              ]
+            },
+            "attempted_diagnostic": {
+              "$ref": "#/$defs/NormalizationDiagnosticRecord"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "FAILURE"
+            },
+            "normalized_state": {
+              "type": "null"
+            },
+            "inherited_diagnostics": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1
+            },
+            "plan_validation": {
+              "properties": {
+                "origin_validation_status": {
+                  "const": "VERIFIED"
+                }
+              }
+            }
+          }
+        },
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "capture_status": {
+                  "const": "REJECTED"
+                },
+                "failure_code": {
+                  "const": "DIAGNOSTIC_CAPTURE_REJECTED"
+                }
+              }
+            },
+            {
+              "properties": {
+                "capture_status": {
+                  "const": "NOT_CONFIRMED"
+                },
+                "failure_code": {
+                  "const": "DIAGNOSTIC_CAPTURE_UNCONFIRMED"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "oneOf": [
+            {
+              "allOf": [
+                {
+                  "properties": {
+                    "post_validity_diagnostic": {
+                      "type": "null"
+                    },
+                    "emitted_diagnostics": {
+                      "type": "array",
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "items": false
+                    }
+                  }
+                },
+                {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "attempted_diagnostic": {
+                          "$ref": "#/$defs/PendingComputationRecord"
+                        },
+                        "actual_state": {
+                          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+                        },
+                        "plan": {
+                          "properties": {
+                            "decision": {
+                              "const": "ALREADY_VALID"
+                            }
+                          }
+                        },
+                        "plan_validation": {
+                          "properties": {
+                            "origin_validation_status": {
+                              "const": "VERIFIED"
+                            },
+                            "validation_status": {
+                              "const": "VALIDATED"
+                            },
+                            "expected_decision": {
+                              "const": "ALREADY_VALID"
+                            }
+                          }
+                        },
+                        "steps": {
+                          "type": "array",
+                          "minItems": 0,
+                          "maxItems": 0,
+                          "items": false
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "attempted_diagnostic": {
+                          "$ref": "#/$defs/PendingComputationRecord"
+                        },
+                        "actual_state": {
+                          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+                        },
+                        "plan": {
+                          "properties": {
+                            "decision": {
+                              "const": "PLAN_READY"
+                            }
+                          }
+                        },
+                        "plan_validation": {
+                          "properties": {
+                            "origin_validation_status": {
+                              "const": "VERIFIED"
+                            },
+                            "validation_status": {
+                              "const": "VALIDATED"
+                            },
+                            "expected_decision": {
+                              "const": "PLAN_READY"
+                            }
+                          }
+                        },
+                        "steps": {
+                          "type": "array",
+                          "minItems": 1,
+                          "maxItems": 1
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "attempted_diagnostic": {
+                          "$ref": "#/$defs/RefusalRecord"
+                        },
+                        "steps": {
+                          "type": "array",
+                          "minItems": 0,
+                          "maxItems": 0,
+                          "items": false
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "properties": {
+                    "attempted_diagnostic": {
+                      "$ref": "#/$defs/CompletedPostValidationRecord"
+                    },
+                    "post_validity_diagnostic": {
+                      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/StateValidityDiagnostic"
+                    },
+                    "actual_state": {
+                      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+                    },
+                    "emitted_diagnostics": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 1,
+                      "prefixItems": [
+                        {
+                          "$ref": "#/$defs/PendingComputationRecord"
+                        }
+                      ],
+                      "items": false
+                    }
+                  }
+                },
+                {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "plan": {
+                          "properties": {
+                            "decision": {
+                              "const": "ALREADY_VALID"
+                            }
+                          }
+                        },
+                        "plan_validation": {
+                          "properties": {
+                            "origin_validation_status": {
+                              "const": "VERIFIED"
+                            },
+                            "validation_status": {
+                              "const": "VALIDATED"
+                            },
+                            "expected_decision": {
+                              "const": "ALREADY_VALID"
+                            }
+                          }
+                        },
+                        "steps": {
+                          "type": "array",
+                          "minItems": 0,
+                          "items": false,
+                          "maxItems": 0
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "plan": {
+                          "properties": {
+                            "decision": {
+                              "const": "PLAN_READY"
+                            }
+                          }
+                        },
+                        "plan_validation": {
+                          "properties": {
+                            "origin_validation_status": {
+                              "const": "VERIFIED"
+                            },
+                            "validation_status": {
+                              "const": "VALIDATED"
+                            },
+                            "expected_decision": {
+                              "const": "PLAN_READY"
+                            }
+                          }
+                        },
+                        "steps": {
+                          "type": "array",
+                          "minItems": 1,
+                          "maxItems": 1
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "if": {
+            "properties": {
+              "plan_validation": {
+                "properties": {
+                  "validation_status": {
+                    "const": "REJECTED"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "steps": {
+                "type": "array",
+                "minItems": 0,
+                "items": false,
+                "maxItems": 0
+              },
+              "post_validity_diagnostic": {
+                "type": "null"
+              },
+              "attempted_diagnostic": {
+                "$ref": "#/$defs/RefusalRecord"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "steps": {
+                "maxItems": 0
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "attempted_diagnostic": {
+                "properties": {
+                  "step": {
+                    "type": "null"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0040"
+    },
+    "PendingComputationRecord": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ComputationRecord"
+        },
+        {
+          "properties": {
+            "emission": {
+              "properties": {
+                "envelope": {
+                  "properties": {
+                    "disposition": {
+                      "const": "PENDING"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "description": "An actual value computation pending its subsequent post-validation; a BLOCKED refusal or begin failure cannot precede POST_VALIDATION.",
+      "x-ywe-requirement-id": "YWE-REQ-0040"
+    },
+    "ResolvedPostValidationRecord": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PostValidationRecord"
+        },
+        {
+          "properties": {
+            "emission": {
+              "properties": {
+                "envelope": {
+                  "properties": {
+                    "disposition": {
+                      "const": "RESOLVED"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "description": "Completed post-validation of a successful value result; resolution does not reduce inherited severity.",
+      "x-ywe-requirement-id": "YWE-REQ-0040"
+    },
+    "BlockedPostValidationRecord": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PostValidationRecord"
+        },
+        {
+          "properties": {
+            "emission": {
+              "properties": {
+                "envelope": {
+                  "properties": {
+                    "disposition": {
+                      "const": "BLOCKED"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "description": "Completed post-validation that refused normalized output, retaining any complete actual diagnosis row.",
+      "x-ywe-requirement-id": "YWE-REQ-0040"
+    },
+    "CompletedPostValidationRecord": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PostValidationRecord"
+        },
+        {
+          "properties": {
+            "emission": {
+              "properties": {
+                "envelope": {
+                  "properties": {
+                    "disposition": {
+                      "enum": [
+                        "RESOLVED",
+                        "BLOCKED"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state_validity_diagnostic": {
+                "properties": {
+                  "admissibility_status": {
+                    "enum": [
+                      "TRANSFORMATION_COMPATIBLE",
+                      "TRANSFORMATION_INCOMPATIBLE",
+                      "UNCLASSIFIED"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "emission": {
+                "properties": {
+                  "envelope": {
+                    "properties": {
+                      "disposition": {
+                        "const": "BLOCKED"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "description": "A retained attempted post-validation record. A non-VALID actual diagnosis requires BLOCKED. For VALID, runtime determines RESOLVED versus BLOCKED from actual==selected target; VALID alone cannot certify success.",
+      "x-ywe-requirement-id": "YWE-REQ-0040"
+    }
+  }
+}

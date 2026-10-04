@@ -235,15 +235,20 @@ class PlayerRuntimeReferencePolicyTests(unittest.TestCase):
         self.assertEqual([], self.check_added([
             "core/ash_pattern_engine/state_model.py",
             "core/ash_pattern_engine/state_values.py",
+            "core/ash_pattern_engine/normalization.py",
+            "core/ash_pattern_engine/normalization_values.py",
             "tests/test_m3_state_model.py",
             "tests/test_platform_agnosticism.py",
             "tests/test_ywe_package_acceptance_loading.py",
+            "tests/test_m3_normalization.py",
         ]))
 
     def test_neighboring_runtime_native_and_unreviewed_tool_paths_remain_forbidden(self):
         paths = [
             "core/ash_pattern_engine/state_runtime.py",
             "core/ash_pattern_engine/state_model/runtime.py",
+            "core/ash_pattern_engine/normalization_runtime.py",
+            "core/ash_pattern_engine/normalization_values/runtime.py",
             "platform/runtime_adapter.py",
             "platform/runtime_adapter.PY",
             "platform/runtime_adapter.cpp",
@@ -260,7 +265,8 @@ class PlayerRuntimeReferencePolicyTests(unittest.TestCase):
     def test_missing_local_reference_approval_does_not_inherit_the_platform_allowlist(self):
         spec = copy.deepcopy(self.spec)
         del spec["allowed_reference_paths"]
-        paths = ["core/ash_pattern_engine/state_model.py", "core/ash_pattern_engine/state_values.py"]
+        paths = ["core/ash_pattern_engine/state_model.py", "core/ash_pattern_engine/state_values.py",
+                 "core/ash_pattern_engine/normalization.py", "core/ash_pattern_engine/normalization_values.py"]
         self.assertEqual(
             [f"Phase 10 added forbidden platform/code file: {path}" for path in paths],
             self.check_added(paths, spec),

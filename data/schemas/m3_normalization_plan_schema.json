@@ -1,0 +1,439 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m3_normalization_plan_schema.json",
+  "title": "M3 N1 semantic normalization plan packet",
+  "description": "Adopted YWE N1 portable plan format with exact headers, bounded immutable-value representations and structural decision branches. Runtime validates the complete original diagnosis, full profile/source equality, sorted complete orbit intersection, identity-first policy, selected target and requested XOR proof; structural acceptance is not execution or acknowledgement evidence.",
+  "x-ywe-requirement-id": "YWE-REQ-0040",
+  "$ref": "#/$defs/NormalizationPlan",
+  "$defs": {
+    "NormalizationPolicyBinding": {
+      "type": "object",
+      "required": [
+        "policy_id",
+        "policy_version",
+        "source_reference",
+        "source_sha256"
+      ],
+      "properties": {
+        "policy_id": {
+          "const": "YWE-NORMALIZE-LEXICOGRAPHIC-001"
+        },
+        "policy_version": {
+          "const": "1.0.0"
+        },
+        "source_reference": {
+          "const": "docs/architecture/m3_normalization_policy.md"
+        },
+        "source_sha256": {
+          "const": "804eec92cf52b465b7aaf0cb5f139f581ac2899d13203a8c4cfe9f4d7579c383"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0040"
+    },
+    "CanonicalCodeword": {
+      "allOf": [
+        {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+        },
+        {
+          "properties": {
+            "bits": {
+              "enum": [
+                [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  1,
+                  1,
+                  0,
+                  0,
+                  1,
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1,
+                  0,
+                  1,
+                  0,
+                  1,
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  1,
+                  0,
+                  1,
+                  1,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1,
+                  1,
+                  0,
+                  0,
+                  1,
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1,
+                  1,
+                  0,
+                  1,
+                  0,
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  1,
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  0,
+                  0,
+                  1,
+                  1,
+                  0,
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  0,
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  0,
+                  1,
+                  0,
+                  1,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  0,
+                  0,
+                  1,
+                  1,
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  1,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0
+                ]
+              ]
+            }
+          }
+        }
+      ],
+      "description": "Exactly the sixteen full-vector canonical codewords. Membership does not prove a submitted input/target XOR relation.",
+      "x-ywe-source-ref": "core/ash_pattern_engine/canonical/core/codeword-set.pseudo.md#exhaustive-enumeration",
+      "x-ywe-requirement-id": "YWE-REQ-0040"
+    },
+    "EligibleTargets": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+      },
+      "maxItems": 16,
+      "uniqueItems": true
+    },
+    "CodewordChain": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "#/$defs/CanonicalCodeword"
+      },
+      "maxItems": 1
+    },
+    "NormalizationPlan": {
+      "type": "object",
+      "required": [
+        "schema_ref",
+        "artifact_type",
+        "artifact_version",
+        "plan_reference",
+        "evidence_reference",
+        "policy_binding",
+        "original_diagnosis",
+        "decision",
+        "eligible_targets_complete",
+        "eligible_targets",
+        "selected_target",
+        "codeword_chain",
+        "reason_code"
+      ],
+      "properties": {
+        "schema_ref": {
+          "const": "data/schemas/m3_normalization_plan_schema.json"
+        },
+        "artifact_type": {
+          "const": "ywe_state_normalization_plan"
+        },
+        "artifact_version": {
+          "const": "1.0.0"
+        },
+        "plan_reference": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/Identifier"
+        },
+        "evidence_reference": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/Identifier"
+        },
+        "policy_binding": {
+          "$ref": "#/$defs/NormalizationPolicyBinding"
+        },
+        "original_diagnosis": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/StateDiagnosis"
+        },
+        "decision": {
+          "enum": [
+            "ALREADY_VALID",
+            "PLAN_READY",
+            "NOT_NORMALIZABLE",
+            "BLOCKED"
+          ]
+        },
+        "eligible_targets_complete": {
+          "type": "boolean"
+        },
+        "eligible_targets": {
+          "$ref": "#/$defs/EligibleTargets"
+        },
+        "selected_target": {
+          "oneOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "codeword_chain": {
+          "$ref": "#/$defs/CodewordChain"
+        },
+        "reason_code": {
+          "enum": [
+            "NORMALIZATION_ALREADY_VALID",
+            "NORMALIZATION_PLAN_READY",
+            "NORMALIZATION_NO_TARGET",
+            "NORMALIZATION_INPUT_REJECTED",
+            "NORMALIZATION_PROFILE_UNAVAILABLE"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "decision": {
+              "const": "ALREADY_VALID"
+            },
+            "reason_code": {
+              "const": "NORMALIZATION_ALREADY_VALID"
+            },
+            "eligible_targets_complete": {
+              "const": true
+            },
+            "eligible_targets": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 16
+            },
+            "selected_target": {
+              "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+            },
+            "codeword_chain": {
+              "type": "array",
+              "minItems": 0,
+              "items": false,
+              "maxItems": 0
+            }
+          }
+        },
+        {
+          "properties": {
+            "decision": {
+              "const": "PLAN_READY"
+            },
+            "reason_code": {
+              "const": "NORMALIZATION_PLAN_READY"
+            },
+            "eligible_targets_complete": {
+              "const": true
+            },
+            "eligible_targets": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 16
+            },
+            "selected_target": {
+              "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+            },
+            "codeword_chain": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1
+            }
+          }
+        },
+        {
+          "properties": {
+            "decision": {
+              "const": "NOT_NORMALIZABLE"
+            },
+            "reason_code": {
+              "const": "NORMALIZATION_NO_TARGET"
+            },
+            "eligible_targets_complete": {
+              "const": true
+            },
+            "eligible_targets": {
+              "type": "array",
+              "minItems": 0,
+              "items": false,
+              "maxItems": 0
+            },
+            "selected_target": {
+              "type": "null"
+            },
+            "codeword_chain": {
+              "type": "array",
+              "minItems": 0,
+              "items": false,
+              "maxItems": 0
+            }
+          }
+        },
+        {
+          "properties": {
+            "decision": {
+              "const": "BLOCKED"
+            },
+            "reason_code": {
+              "enum": [
+                "NORMALIZATION_INPUT_REJECTED",
+                "NORMALIZATION_PROFILE_UNAVAILABLE"
+              ]
+            },
+            "eligible_targets_complete": {
+              "const": false
+            },
+            "eligible_targets": {
+              "type": "array",
+              "minItems": 0,
+              "items": false,
+              "maxItems": 0
+            },
+            "selected_target": {
+              "type": "null"
+            },
+            "codeword_chain": {
+              "type": "array",
+              "minItems": 0,
+              "items": false,
+              "maxItems": 0
+            }
+          }
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0040"
+    }
+  }
+}

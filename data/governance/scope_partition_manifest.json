@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1166,
-    "path_digest": "dc8e59bd821d1266df8f7b1de2b91a3a70b477df1c77a330d7c990c214f1f389",
+    "path_count": 1174,
+    "path_digest": "a525ed46e21fda6a2b5e3d2394824a1c1991915e3b6aadbfc625fc31f1a3031d",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -2347,16 +2347,27 @@
         "m3_state_assessment",
         "conformance_fixture"
       ]
+    },
+    {
+      "path": "examples/core_state_normalization/normalization_cases.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_normalization_contract.md",
+      "rationale": "Independently authored neutral Core normalization plan/result/capture fixtures bind explicit profiles without defining setting defaults or operational recovery.",
+      "secondary_tags": [
+        "m3_state_normalization",
+        "conformance_fixture"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
       "ash_dependency_material": 66,
-      "governance_validation": 452,
+      "governance_validation": 454,
       "historical_evidence": 21,
       "later_release_work": 59,
       "wrw_reference_profile": 303,
-      "ywe_core": 143,
+      "ywe_core": 149,
       "ywe_extension_profile": 122
     }
   }

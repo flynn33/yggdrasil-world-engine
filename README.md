@@ -133,8 +133,20 @@ classification. Independent tests exercise all 1,536 profile/state combinations,
 capture failures and the separate packet format. Legacy diagnosis now reports
 admissibility without inventing correction, fallback or lifecycle facts.
 
-Next is semantic normalization, followed by recovery/fallback execution, containment,
-safe halt, full Diagnostics and generation semantics. M3 remains in progress; its
+The [semantic normalization slice](docs/architecture/m3_normalization_contract.md)
+adds pure planning, complete target-set validation and actual immutable value
+computation. It preserves already-valid inputs, uses the explicitly adopted
+[full-signature target policy](docs/architecture/m3_normalization_policy.md), and
+revalidates the original diagnosis and full profile before applying a proof.
+All 42 normalization tests pass, including actual execution of all 2,048
+independently reviewed profile/state cases, twenty authored wire packets and
+capture refusal/uncertainty paths. The combined assessment, identity and
+normalization suite passes 115 tests; 29 loader and platform-boundary regressions
+also pass. Capture failures retain actual observations and confirmed diagnostics.
+Complete repository verification precedes publication of this checkpoint.
+
+Next is recovery/fallback execution, containment, safe halt, full Diagnostics
+and generation semantics. M3 remains in progress; its
 five exit criteria and platform authorization are not discharged by this slice.
 Platform products remain deferred until M10 acceptance.
 

@@ -284,9 +284,9 @@ class _RecordingAssessmentCapture:
 
 
 class StateModel:
-    """Own diagnosis and contextual classification without executing recovery."""
+    """Own diagnosis, assessment and normalization reference value operations."""
 
-    def __init__(self, profile_binding, canonical_binding, diagnostic_capture):
+    def __init__(self, profile_binding, canonical_binding, diagnostic_capture, *, normalization_capture=None):
         if type(profile_binding) is not values.AvailableProfileBinding and type(profile_binding) is not values.UnavailableProfileBinding:
             raise values.StateContractError("PROFILE_BINDING_INVALID", "profile_binding")
         if type(canonical_binding) is not values.CanonicalAshBinding:
@@ -294,6 +294,7 @@ class StateModel:
         self._profile_binding = profile_binding
         self._canonical_binding = canonical_binding
         self._capture = diagnostic_capture
+        self._normalization_capture = normalization_capture
         self._codec = StateInputCodec()
 
     @property
@@ -306,6 +307,27 @@ class StateModel:
 
     def diagnose(self, candidate, *, diagnostic_context):
         return self._run(candidate, diagnostic_context, None, None)
+
+    def _normalization_operations(self):
+        from .normalization import _NormalizationOperations
+
+        return _NormalizationOperations(
+            self.profile_binding, self.canonical_binding,
+            lambda state, evidence: self._diagnose(DecodedInput(state, evidence)),
+            self._normalization_capture,
+        )
+
+    def plan_normalization(self, diagnosis, *, plan_reference, evidence_reference, policy_binding):
+        return self._normalization_operations().plan(
+            diagnosis, plan_reference=plan_reference, evidence_reference=evidence_reference,
+            policy_binding=policy_binding,
+        )
+
+    def validate_normalization_plan(self, plan):
+        return self._normalization_operations().validate(plan)
+
+    def apply_normalization(self, plan, *, normalization_context):
+        return self._normalization_operations().apply(plan, normalization_context=normalization_context)
 
     def assess(self, candidate, *, context, classification_evidence, diagnostic_context):
         if type(context) is not values.SystemContext:
