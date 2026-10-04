@@ -6,6 +6,7 @@ import shutil
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -47,6 +48,7 @@ class RejectionScenarioTests(unittest.TestCase):
         self.write("data/validation/terms.json", {"reject_terms": ["Unity", "Godot"]})
         self.write("data/validation/intent.json", {"negative_value": -1})
         self.scenarios = [self.direct()]
+        self.approve_scenarios()
 
     def write(self, relative, value):
         path = self.root / relative
@@ -103,6 +105,14 @@ class RejectionScenarioTests(unittest.TestCase):
             "expected_matches": [{"subject_pointer": "/invalid_content", "term": term} for term in ("Unity", "Godot")],
         }
 
+    def approve_scenarios(self):
+        """Author the test approval before adversarial catalog changes."""
+        self.write(rejection.EXECUTION_CONTRACTS_PATH, {
+            "schema_ref": rejection.PROJECTION_SCHEMA_PATH + "#/$defs/ExecutionContracts",
+            "artifact_type": "ywe_rejection_execution_contracts", "artifact_version": "1.0.0",
+            "contracts": copy.deepcopy(self.scenarios),
+        })
+
     def run_check(self):
         self.write(fixtures.CONTRACT_CATALOG, {
             "schema_ref": "data/schemas/contract_catalog_schema.json", "artifact_type": "ywe_contract_catalog",
@@ -131,11 +141,13 @@ class RejectionScenarioTests(unittest.TestCase):
     def test_explicit_mutation_rejects_and_preserves_original_base(self):
         self.scenarios = [self.mutation()]
         before = (self.root / self.BASE).read_bytes()
+        self.approve_scenarios()
         self.assertEqual([], self.run_check()[0])
         self.assertEqual(before, (self.root / self.BASE).read_bytes())
 
     def test_lexical_matching_is_case_insensitive_with_complete_term_witnesses(self):
         self.scenarios = [self.lexical("unity and GODOT")]
+        self.approve_scenarios()
         self.assertEqual([], self.run_check()[0])
 
     def test_descriptor_digest_catches_changes_to_unselected_metadata(self):
@@ -147,6 +159,7 @@ class RejectionScenarioTests(unittest.TestCase):
         path = self.root / self.DESCRIPTOR
         normalized = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
         path.write_bytes(normalized.replace(b"\n", b"\r\n"))
+        self.approve_scenarios()
         self.assertEqual([], self.run_check()[0])
 
     def test_refreshing_digest_does_not_hide_changed_reason_binding(self):
@@ -224,6 +237,7 @@ class RejectionScenarioTests(unittest.TestCase):
             "error_id": "JSON_SCHEMA_MINIMUM", "instance_pointer": "", "schema_pointer": "/minimum",
         }]
         self.scenarios = [scenario]
+        self.approve_scenarios()
         self.assertEqual([], self.run_check()[0])
 
     def test_referenced_constraint_requires_the_referenced_resource_owner(self):
@@ -238,6 +252,7 @@ class RejectionScenarioTests(unittest.TestCase):
         self.scenarios[0]["owner_bindings"] = [{
             "path": relative, "pointer": "/$defs/NonNegative/minimum", "value": 0,
         }]
+        self.approve_scenarios()
         self.assertEqual([], self.run_check()[0])
         self.scenarios[0]["owner_bindings"] = [{
             "path": self.SCHEMA_PATH, "pointer": "/properties/value/$ref",
@@ -269,6 +284,14 @@ class RejectionScenarioTests(unittest.TestCase):
         self.scenarios[0]["owner_bindings"][0]["pointer"] = "/other_terms"
         self.assert_failure("exact owning reject_terms binding")
 
+    def test_owned_allowed_terms_cannot_be_executed_as_rejection_policy(self):
+        self.scenarios = [self.lexical()]
+        self.write("data/validation/terms.json", {"reject_terms": ["Unity", "Godot"],
+                                                  "allowed_terms": ["Unity", "Godot"]})
+        self.scenarios[0]["reject_terms_pointer"] = "/allowed_terms"
+        self.scenarios[0]["owner_bindings"][0]["pointer"] = "/allowed_terms"
+        self.assert_failure("explicitly declared reject_terms list")
+
     def projection(self):
         self.descriptor["invalid_content"] = ["default_party_member"]
         self.write(self.DESCRIPTOR, self.descriptor)
@@ -296,6 +319,7 @@ class RejectionScenarioTests(unittest.TestCase):
 
     def test_projection_links_the_actual_constraint_to_its_declared_source(self):
         self.scenarios = [self.projection()]
+        self.approve_scenarios()
         self.assertEqual([], self.run_check()[0])
 
     def test_projection_cannot_use_only_its_prose_source_as_the_constraint_owner(self):
@@ -405,6 +429,7 @@ class RejectionScenarioTests(unittest.TestCase):
             {"path": self.SCHEMA_PATH, "pointer": "/required", "value": ["value"]},
             {"path": self.SCHEMA_PATH, "pointer": "/required/0", "value": "value"},
         ]
+        self.approve_scenarios()
         self.assertEqual([], self.run_check()[0])
 
     def test_missing_required_member_cannot_substitute_for_the_intended_member(self):
@@ -435,6 +460,7 @@ class RejectionScenarioTests(unittest.TestCase):
         scenario["operations"] = [{"op": "remove", "path": "/relation_graph_ref"}]
         scenario["expected_errors"][0]["missing_properties"] = ["relation_graph_ref"]
         scenario["owner_bindings"].pop()
+        self.approve_scenarios()
         self.assertEqual([], self.run_check()[0])
 
     def test_whole_required_array_cannot_replace_concrete_missing_member_bindings(self):
@@ -561,6 +587,7 @@ class RejectionScenarioTests(unittest.TestCase):
             {"subject_pointer": "/invalid_content/0", "term": "Unity"},
             {"subject_pointer": "/invalid_content/1", "term": "Godot"},
         ]
+        self.approve_scenarios()
         self.assertEqual([], self.run_check()[0])
 
     def test_lexical_subject_cannot_use_its_descriptor_as_a_rule_file(self):
@@ -613,6 +640,7 @@ class RejectionScenarioTests(unittest.TestCase):
 
     def test_player_collection_reports_each_executed_case_pointer(self):
         self.scenarios = self.player_units()
+        self.approve_scenarios()
         errors, results = self.run_check()
         self.assertEqual([], errors)
         self.assertEqual(["/cases/0", "/cases/1"], [item["descriptor_unit_pointer"] for item in results])
@@ -659,6 +687,7 @@ class RejectionScenarioTests(unittest.TestCase):
                 if schema_id == "unrelated":
                     self.assert_failure("expected-reason binding")
                 else:
+                    self.approve_scenarios()
                     self.assertEqual([], self.run_check()[0])
 
 
@@ -702,7 +731,9 @@ class RegisteredScenarioIntentTests(unittest.TestCase):
     def test_original_catalog_intent_bindings_all_pass(self):
         errors, results = rejection.evaluate_scenarios(ROOT, self.registry, list(self.scenarios.values()))
         self.assertEqual([], errors)
-        self.assertEqual(24, len(results))
+        self.assertEqual(26, len(results))
+        self.assertEqual(2, sum(item["descriptor_path"] == "data/realm/realm_transition_examples.yaml"
+                                for item in results))
 
     def test_npc_required_member_substitution_fails_with_retained_and_appended_owners(self):
         scenario = self.scenario("m2.phase12.npc_missing_relation_graph")
@@ -800,18 +831,18 @@ class RegisteredScenarioIntentTests(unittest.TestCase):
                 errors = self.assert_rejected_catalog_claim(scenario)
                 self.assertTrue(any("exact source literal" in error for error in errors))
 
-    def test_all_eight_boolean_substitutions_preserve_json_scalar_type(self):
-        count = 0
+    def test_all_boolean_substitutions_preserve_json_scalar_type(self):
+        counts = {"original": 0, "realm": 0}
         for original in self.scenarios.values():
             for index, operation in enumerate(original.get("operations", [])):
                 if operation["op"] != "replace" or type(operation["value"]) is not bool:
                     continue
-                count += 1
+                counts["realm" if original["scenario_id"].startswith("realm.") else "original"] += 1
                 with self.subTest(scenario=original["scenario_id"], operation=index):
                     scenario = self.scenario(original["scenario_id"])
                     scenario["operations"][index]["value"] = int(operation["value"])
                     self.assert_rejected_catalog_claim(scenario)
-        self.assertEqual(8, count)
+        self.assertEqual({"original": 8, "realm": 5}, counts)
 
     def test_boolean_inverse_must_use_the_executed_const_at_the_same_target(self):
         scenario = self.scenario("phase17.wolf_morality")
@@ -828,6 +859,271 @@ class RegisteredScenarioIntentTests(unittest.TestCase):
         scenario = self.scenario("phase17.wolf_morality")
         scenario["mutation_value_bindings"][0]["relation"] = "equal"
         self.assert_rejected_catalog_claim(scenario)
+
+
+class RealmRejectionIntentTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.registry, errors = fixtures.load_registry(ROOT)
+        if errors:
+            raise AssertionError(errors)
+        cls.scenarios = [item for item in fixtures.load_json(ROOT / rejection.SCENARIO_CATALOG)["scenarios"]
+                         if item["scenario_id"].startswith("realm.")]
+        if len(cls.scenarios) != 2:
+            raise AssertionError("Both original realm unlawful descriptions must execute")
+
+    def assert_invalid(self, scenario, message):
+        errors, results = rejection.evaluate_scenarios(ROOT, self.registry, [scenario])
+        self.assertEqual([], results)
+        self.assertTrue(any(message in error for error in errors), errors)
+
+    def test_both_units_execute_complete_source_owned_witnesses_without_source_writes(self):
+        paths = {item["descriptor_path"] for item in self.scenarios}
+        paths.update(owner["path"] for item in self.scenarios for owner in item["owner_bindings"])
+        before = {path: (ROOT / path).read_bytes() for path in paths}
+        errors, results = rejection.evaluate_scenarios(ROOT, self.registry, self.scenarios)
+        self.assertEqual([], errors)
+        self.assertEqual(["/unlawful_examples/0", "/unlawful_examples/1"],
+                         [item["descriptor_unit_pointer"] for item in results])
+        self.assertEqual(before, {path: (ROOT / path).read_bytes() for path in paths})
+
+    def test_realm_unit_requires_its_whole_violated_rule_list_and_identity(self):
+        for suffix in ("/violated_rules", "/example_id"):
+            scenario = copy.deepcopy(self.scenarios[0])
+            scenario["descriptor_bindings"] = [item for item in scenario["descriptor_bindings"]
+                                               if not item["pointer"].endswith(suffix)]
+            with self.subTest(suffix=suffix):
+                self.assert_invalid(scenario, "identity and complete violated-rule bindings")
+
+    def test_realm_unit_cannot_borrow_other_units_summary(self):
+        scenario = copy.deepcopy(self.scenarios[1])
+        scenario["descriptor_bindings"][1] = copy.deepcopy(self.scenarios[0]["descriptor_bindings"][1])
+        self.assert_invalid(scenario, "expected-reason binding")
+
+    def test_realm_projection_cannot_map_a_const_to_another_valid_source_rule(self):
+        scenario = copy.deepcopy(self.scenarios[0])
+        scenario["projection_bindings"][0].update({
+            field: scenario["projection_bindings"][1][field]
+            for field in ("source_path", "source_pointer", "source_value")
+        })
+        self.assert_invalid(scenario, "declared owning rule")
+
+    def test_realm_units_require_the_declared_canonical_collection(self):
+        scenario = copy.deepcopy(self.scenarios[0])
+        scenario["descriptor_unit_pointer"] = "/lawful_examples/0"
+        self.assert_invalid(scenario, "declared player rejection collection or realm unlawful collection")
+
+    def test_realm_intended_reason_cannot_be_relabelled_with_the_other_units_vector(self):
+        fields = ("owner_bindings", "projection_bindings", "mutation_value_bindings", "schema_id",
+                  "base_path", "base_pointer", "operations", "expected_errors")
+        for index in range(2):
+            scenario = copy.deepcopy(self.scenarios[index])
+            scenario.update({field: copy.deepcopy(self.scenarios[1 - index][field]) for field in fields})
+            with self.subTest(unit=index):
+                self.assert_invalid(scenario, "own its exact declared unlawful unit")
+
+    def test_realm_rejection_must_execute_all_declared_violated_rules(self):
+        scenario = copy.deepcopy(self.scenarios[0])
+        scenario["operations"].pop()
+        scenario["expected_errors"].pop()
+        scenario["mutation_value_bindings"].pop()
+        removed = scenario["projection_bindings"].pop()
+        scenario["owner_bindings"] = [item for item in scenario["owner_bindings"] if
+                                      (item["path"], item["pointer"]) not in {
+                                          (rejection.PROJECTION_SCHEMA_PATH, removed["assertion_pointer"]),
+                                          (removed["source_path"], removed["source_pointer"]),
+                                      }]
+        self.assert_invalid(scenario, "every declared violated rule")
+
+    def test_realm_reason_text_cannot_be_rejected_by_unrelated_lexical_terms(self):
+        scenario = copy.deepcopy(self.scenarios[1])
+        for field in ("schema_id", "base_path", "base_pointer", "operations", "expected_errors",
+                      "projection_bindings", "mutation_value_bindings"):
+            scenario.pop(field)
+        path = "data/validation/ability_combat_quest_use_validation_rules.json"
+        pointer = "/allowed_use_modes"
+        terms = fixtures.json_pointer(fixtures.load_json(ROOT / path), pointer)
+        scenario.update(mode="lexical", validation_scope="subject", subject_pointer="/unlawful_examples/1/summary",
+                        rule_path=path, reject_terms_pointer=pointer,
+                        owner_bindings=[{"path": path, "pointer": pointer, "value": terms}],
+                        expected_matches=[{"subject_pointer": "/unlawful_examples/1/summary", "term": "perception"}])
+        self.assertEqual([], list(fixtures.Draft202012Validator(
+            {"$ref": rejection.SCENARIO_SCHEMA_ID}, registry=self.registry
+        ).iter_errors({"schema_ref": rejection.PROJECTION_SCHEMA_PATH,
+                       "artifact_type": "ywe_rejection_scenario_catalog", "artifact_version": "1.0.0",
+                       "scenarios": [scenario]})))
+        self.assert_invalid(scenario, "declared assertion projection mutation")
+
+    def test_each_realm_const_requires_its_source_mapping_and_exact_witness(self):
+        for original in self.scenarios:
+            for index in range(len(original["projection_bindings"])):
+                with self.subTest(scenario=original["scenario_id"], assertion=index):
+                    scenario = copy.deepcopy(original)
+                    scenario["projection_bindings"].pop(index)
+                    self.assert_invalid(scenario, "explicit source mapping")
+                    scenario = copy.deepcopy(original)
+                    scenario["expected_errors"].pop(index)
+                    self.assert_invalid(scenario, "complete rejection witnesses")
+
+
+
+
+class ExecutionContractCorrespondenceTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.registry,errors=fixtures.load_registry(ROOT)
+        if errors:
+            raise AssertionError(errors)
+        cls.document=fixtures.load_json(ROOT/rejection.EXECUTION_CONTRACTS_PATH)
+        cls.scenarios=fixtures.load_json(ROOT/rejection.SCENARIO_CATALOG)["scenarios"]
+        errors,cls.approved=rejection.validate_execution_contracts(ROOT,cls.registry,cls.document)
+        if errors:
+            raise AssertionError(errors)
+        cls.by_id={item["scenario_id"]:item for item in cls.scenarios}
+
+    def compare(self,scenario):
+        return rejection.execution_contract_errors(ROOT,self.registry,scenario,self.approved)
+
+    def test_all_26_authentic_executions_and_exact_approved_controls_pass(self):
+        self.assertEqual(26,len(self.approved))
+        self.assertEqual([],rejection.execution_contract_inventory_errors(self.scenarios,self.approved))
+        errors,results=rejection.evaluate_scenarios(ROOT,self.registry,self.scenarios)
+        self.assertEqual([],errors)
+        self.assertEqual(26,len(results))
+        for scenario in self.scenarios:
+            with self.subTest(scenario=scenario["scenario_id"]):
+                self.assertEqual([],self.compare(scenario))
+
+    def test_four_whole_execution_swaps_preserve_descriptor_and_low_level_checks_but_are_rejected(self):
+        keep={"scenario_id","descriptor_path","descriptor_unit_pointer","descriptor_sha256",
+              "hash_algorithm","descriptor_bindings","description"}
+        pairs=(("phase17.wolf_morality","phase17.permanent_wolf_death"),
+               ("phase17.permanent_wolf_death","phase17.wolf_morality"),
+               ("player.asp_top_level_authority","player.wolf_morality"),
+               ("player.wolf_morality","player.asp_top_level_authority"))
+        for target,donor in pairs:
+            with self.subTest(target=target,donor=donor):
+                original=self.by_id[target]
+                swapped={k:copy.deepcopy(v) for k,v in original.items() if k in keep}
+                swapped.update({k:copy.deepcopy(v) for k,v in self.by_id[donor].items() if k not in keep})
+                for key in keep:
+                    self.assertEqual(original.get(key),swapped.get(key))
+                # Isolate the reviewed correspondence guard to reproduce the
+                # original independently valid but unrelated rejection.
+                with patch.object(rejection, "execution_contract_errors", return_value=[]):
+                    errors,results=rejection.evaluate_scenarios(ROOT,self.registry,[swapped])
+                self.assertEqual([],errors)
+                self.assertEqual(1,len(results))
+                errors,results=rejection.evaluate_scenarios(ROOT,self.registry,[swapped])
+                self.assertEqual([],results)
+                self.assertTrue(any("differs from approved descriptor contract" in e for e in errors), errors)
+                self.assertTrue(any("differs from approved descriptor contract" in e for e in self.compare(swapped)))
+
+    def test_same_execution_under_unknown_id_cannot_clear_coverage(self):
+        scenario=copy.deepcopy(self.scenarios[0])
+        scenario["scenario_id"]="unreviewed.claim"
+        self.assertTrue(any("Unapproved" in e for e in self.compare(scenario)))
+        self.assertTrue(rejection.execution_contract_inventory_errors([scenario],self.approved))
+
+    def test_duplicate_approved_id_and_unit_fail_closed(self):
+        document=copy.deepcopy(self.document)
+        document["contracts"].append(copy.deepcopy(document["contracts"][0]))
+        errors,index=rejection.validate_execution_contracts(ROOT,self.registry,document)
+        self.assertEqual({},index)
+        self.assertTrue(any("Duplicate approved rejection scenario ID" in e for e in errors))
+        self.assertTrue(any("Duplicate approved rejection descriptor unit" in e for e in errors))
+
+    def test_duplicate_approved_unit_under_new_id_fails_closed(self):
+        document=copy.deepcopy(self.document)
+        row=copy.deepcopy(document["contracts"][0])
+        row["scenario_id"]="another-approved-id"
+        document["contracts"].append(row)
+        errors,index=rejection.validate_execution_contracts(ROOT,self.registry,document)
+        self.assertEqual({},index)
+        self.assertTrue(any("Duplicate approved rejection descriptor unit" in e for e in errors))
+
+    def test_missing_extra_and_duplicate_catalog_rows_cannot_clear_inventory(self):
+        self.assertTrue(rejection.execution_contract_inventory_errors(self.scenarios[:-1],self.approved))
+        extra=copy.deepcopy(self.scenarios[0]);extra["scenario_id"]="unapproved"
+        self.assertTrue(rejection.execution_contract_inventory_errors(self.scenarios+[extra],self.approved))
+        self.assertTrue(rejection.execution_contract_inventory_errors(self.scenarios+[self.scenarios[0]],self.approved))
+
+    def test_wrong_ledger_wrapper_empty_or_malformed_rows_fail_closed(self):
+        candidates=[]
+        for key,value in (("artifact_type","other"),("artifact_version","2.0.0"),("contracts",[])):
+            value_doc=copy.deepcopy(self.document);value_doc[key]=value;candidates.append(value_doc)
+        value_doc=copy.deepcopy(self.document);value_doc["contracts"][0].pop("owner_bindings");candidates.append(value_doc)
+        value_doc=copy.deepcopy(self.document);value_doc["unrecognized"]=True;candidates.append(value_doc)
+        for document in candidates:
+            with self.subTest(document_key=set(document)):
+                errors,index=rejection.validate_execution_contracts(ROOT,self.registry,document)
+                self.assertTrue(errors)
+                self.assertEqual({},index)
+
+    def test_absent_default_unit_and_cosmetic_description_are_supported_equivalents(self):
+        scenario=copy.deepcopy(self.scenarios[0])
+        scenario["descriptor_unit_pointer"]=""
+        scenario["description"]="A revised human explanation of the same exact scoped assertion."
+        self.assertEqual([],self.compare(scenario))
+        scenario.pop("descriptor_unit_pointer")
+        self.assertEqual([],self.compare(scenario))
+
+    def test_source_reason_digest_and_binding_changes_are_correspondence_critical(self):
+        for field in ("descriptor_sha256","descriptor_path","descriptor_bindings"):
+            scenario=copy.deepcopy(self.scenarios[0])
+            if field=="descriptor_sha256": scenario[field]="0"*64
+            elif field=="descriptor_path": scenario[field]=self.scenarios[1][field]
+            else: scenario[field][0]["value"]="Different intended reason"
+            with self.subTest(field=field): self.assertTrue(self.compare(scenario))
+
+    def test_scalar_boolean_integer_and_float_remain_distinct_json_values(self):
+        original=self.by_id["phase17.wolf_morality"]
+        for value in (1,1.0,"true"):
+            scenario=copy.deepcopy(original);scenario["operations"][0]["value"]=value
+            with self.subTest(value=repr(value)): self.assertTrue(self.compare(scenario))
+
+    def test_same_witness_and_mutation_cannot_swap_source_owner_projection_or_scalar_mapping(self):
+        for identifier,field in (("phase17.wolf_morality","owner_bindings"),
+                                 ("realm.rte_invalid_fast_travel_bypass","projection_bindings"),
+                                 ("phase17.wolf_morality","mutation_value_bindings")):
+            scenario=copy.deepcopy(self.by_id[identifier]);scenario[field][0][next(iter(scenario[field][0]))]="wrong"
+            with self.subTest(field=field): self.assertTrue(self.compare(scenario))
+
+    def test_lexical_subject_rule_terms_and_match_set_all_belong_to_approved_contract(self):
+        original=self.by_id["slice.platform_runtime_subject"]
+        for field in ("subject_pointer","rule_path","reject_terms_pointer","expected_matches"):
+            scenario=copy.deepcopy(original)
+            if field=="expected_matches": scenario[field]=scenario[field][:-1]
+            elif field=="rule_path": scenario[field]="data/validation/another.json"
+            else: scenario[field]="/another"
+            with self.subTest(field=field): self.assertTrue(self.compare(scenario))
+
+    def test_missing_file_does_not_create_approval_from_candidate(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            errors,index=rejection.load_execution_contracts(Path(temporary),self.registry)
+        self.assertTrue(errors)
+        self.assertEqual({},index)
+
+    def test_generic_framework_can_author_one_independent_contract_without_production_rows(self):
+        scenario={"scenario_id":"synthetic.negative_integer","descriptor_path":"examples/rejection.json",
+          "descriptor_sha256":"1"*64,"hash_algorithm":"sha256_utf8_lf_normalized",
+          "descriptor_bindings":[{"pointer":"/invalid_reason","value":"negative value"},
+                                 {"pointer":"/invalid_content","value":{"value":-1}}],
+          "owner_bindings":[{"path":"data/schemas/record.json","pointer":"/properties/value/minimum","value":0}],
+          "mode":"direct","validation_scope":"subject","description":"Authored synthetic integer assertion.",
+          "subject_pointer":"/invalid_content","schema_id":"https://ywe.local/schemas/record.json",
+          "expected_errors":[{"error_id":"JSON_SCHEMA_MINIMUM","instance_pointer":"/value","schema_pointer":"/properties/value/minimum"}]}
+        document={"schema_ref":self.document["schema_ref"],"artifact_type":self.document["artifact_type"],
+                  "artifact_version":"1.0.0","contracts":[copy.deepcopy(scenario)]}
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);path=root/rejection.EXECUTION_CONTRACTS_PATH
+            path.parent.mkdir(parents=True);path.write_text(json.dumps(document),encoding="utf-8")
+            errors,index=rejection.load_execution_contracts(root,self.registry)
+            self.assertEqual([],errors)
+            self.assertEqual([],rejection.execution_contract_errors(root,self.registry,scenario,index))
+            self.assertEqual([],rejection.execution_contract_inventory_errors([scenario],index))
+            scenario["expected_errors"][0]["schema_pointer"]="/properties/value/maximum"
+            self.assertTrue(rejection.execution_contract_errors(root,self.registry,scenario,index))
 
 
 if __name__ == "__main__":

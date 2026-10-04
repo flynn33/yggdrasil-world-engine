@@ -115,6 +115,26 @@ required acceptance evidence.
 See the roadmap inventories of [completed or verified foundations](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#completed-or-verified-foundations), [material work remaining](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#material-work-remaining), and the [15-subsystem maturity matrix](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#subsystem-maturity-matrix).
 <!-- roadmap-status:end -->
 
+### Development checkpoint — 2026-10-04
+
+M2 is in progress. The remaining preview and YAML document formats, governed
+positive fixture identities, four executed validation operations, and eight
+executed validation methods are integrated. Rejection coverage now requires a
+separate reviewed descriptor-to-execution approval, closing the demonstrated
+wrong-requirement substitutions. Original examples and pinned source authority
+remain preserved.
+
+The integrated run passed all 674 unit tests and 35 of 36 applicable repository
+checks. Its remaining branch-language scan failure was traced to formatting of
+two explicitly rejected literals and corrected without changing their values or
+the scanner. The final candidate still requires a frozen clean checkout, complete
+offline verification, and immutable acceptance evidence. M3 remains planned.
+
+Follow the [current development record](docs/design-planning/Project_Record.md#10-checkpoint)
+and [M2 acceptance contract](docs/project/m2_fixture_validation.md#m2-readiness-evaluation)
+for the remaining gate work. This checkpoint will advance with verified work
+and milestone acceptance on GitHub.
+
 Current repository baseline. Existing `v2.0.x` Git tags, including historical
 annotations that use release wording, identify baselines only; no GitHub Release
 objects or YWE Agnostic Specification releases have been published.

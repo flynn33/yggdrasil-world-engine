@@ -143,14 +143,48 @@ class FixtureCoverageTests(unittest.TestCase):
 
     def test_example_override_in_data_directory_is_included(self):
         relative = "data/realm/realm_transition_examples.yaml"
-        self.write(relative, {"lawful_examples": [{"example_id": "record.1"}]})
+        self.write(relative, {"meta": {"system": "realm_transition_examples"},
+                              "lawful_examples": [{"example_id": "record.1"}],
+                              "unlawful_examples": [{"example_id": "record.bad", "summary": "Forbidden shift"}]})
         self.override(relative, "example")
         errors, evidence = self.check()
         self.assertTrue(errors)
         self.assertEqual([relative], evidence["structured_fixture_paths"])
-        self.assertEqual([{"path": relative, "instance_pointer": ""}], evidence["uncovered_units"])
+        self.assertEqual([{"path": relative, "instance_pointer": pointer}
+                          for pointer in ("", "/lawful_examples/0", "/unlawful_examples/0")],
+                         evidence["uncovered_units"])
         self.bind(relative)
+        self.assertEqual(2, len(self.check()[1]["uncovered_units"]))
+        self.bind(relative, "/lawful_examples/0")
+        self.bind(relative, "/unlawful_examples/0")
         self.assertEqual([], self.check()[0])
+
+    def test_realm_collection_requires_both_roles_and_typed_identity(self):
+        relative = "data/realm/realm_transition_examples.yaml"
+        original = {"meta": {"system": "realm_transition_examples"},
+                    "lawful_examples": [{"example_id": "good"}],
+                    "unlawful_examples": [{"example_id": "bad", "summary": "Forbidden shift"}]}
+        for field, value in (("meta", None), ("meta", []), ("meta", {"system": "unknown"}),
+                             ("lawful_examples", []), ("unlawful_examples", [])):
+            with self.subTest(field=field, value=value):
+                self.write(relative, {**original, field: value})
+                self.override(relative, "example")
+                self.assertTrue(self.check()[0])
+                self.classification["overrides"] = []
+
+    def test_realm_unlawful_format_acceptance_cannot_cover_intended_rejection(self):
+        relative = "data/realm/realm_transition_examples.yaml"
+        self.write(relative, {"meta": {"system": "realm_transition_examples"},
+                              "lawful_examples": [{"example_id": "good"}],
+                              "unlawful_examples": [{"example_id": "bad", "summary": "Forbidden shift"}]})
+        self.bind(relative, "/unlawful_examples/0")
+        errors, evidence = acceptance.rejection_coverage(self.root, self.paths, self.catalog["fixtures"], [])
+        self.assertTrue(errors)
+        self.assertEqual([{"path": relative, "instance_pointer": "/unlawful_examples/0"}],
+                         evidence["unwitnessed_rejection_units"])
+        result = {"descriptor_path": relative, "descriptor_unit_pointer": "/unlawful_examples/0",
+                  "scenario_id": "realm.bad", "result": "reject"}
+        self.assertEqual([], acceptance.rejection_coverage(self.root, self.paths, self.catalog["fixtures"], [result])[0])
 
     def test_historical_override_is_excluded_from_current_fixture_coverage(self):
         relative = "examples/historical.json"

@@ -14,6 +14,19 @@
     "scenarios": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/scenario"}}
   },
   "$defs": {
+    "ExecutionContracts": {
+      "description": "Reviewed descriptor-to-execution approvals; candidate scenario catalogs cannot authorize their own rejection coverage.",
+      "x-ywe-requirement-id": "YWE-REQ-0038",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_ref", "artifact_type", "artifact_version", "contracts"],
+      "properties": {
+        "schema_ref": {"const": "data/schemas/rejection_scenario_catalog_schema.json#/$defs/ExecutionContracts"},
+        "artifact_type": {"const": "ywe_rejection_execution_contracts"},
+        "artifact_version": {"const": "1.0.0"},
+        "contracts": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/scenario"}}
+      }
+    },
     "pointer": {"type": "string", "pattern": "^(?:/(?:[^~]|~[01])*)*$"},
     "path": {"type": "string", "minLength": 1},
     "schema_id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9+.-]*:.+$"},
@@ -70,7 +83,7 @@
       "properties": {
         "scenario_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"},
         "descriptor_path": {"$ref": "#/$defs/path"},
-        "descriptor_unit_pointer": {"type": "string", "pattern": "^(?:/cases/(?:0|[1-9][0-9]*))?$"},
+        "descriptor_unit_pointer": {"type": "string", "pattern": "^(?:/(?:cases|unlawful_examples)/(?:0|[1-9][0-9]*))?$"},
         "descriptor_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
         "hash_algorithm": {"const": "sha256_utf8_lf_normalized"},
         "descriptor_bindings": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/binding"}},
@@ -145,6 +158,63 @@
       "type": "array",
       "items": {"type": "string"},
       "not": {"contains": {"const": "default_party_member"}}
+    },
+    "RealmThresholdAssertion": {
+      "description": "A scoped assertion vector for the named realm rules; acceptance does not certify a complete runtime transition.",
+      "x-ywe-requirement-id": "YWE-REQ-0035",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attunement_threshold_met",
+        "boundary_condition_met",
+        "generic_fast_travel_bypass"
+      ],
+      "properties": {
+        "attunement_threshold_met": {
+          "type": "boolean",
+          "const": true,
+          "x-ywe-source-ref": "data/realm/realm_mechanics_rules.yaml#/travel_and_shift_rules/lawful_requirements/required_for_nonphysical_shift/0",
+          "x-ywe-violated-rule": "nonphysical_realm_travel_requires_attunement_plus_threshold_condition"
+        },
+        "boundary_condition_met": {
+          "type": "boolean",
+          "const": true,
+          "x-ywe-source-ref": "data/realm/realm_mechanics_rules.yaml#/travel_and_shift_rules/lawful_requirements/required_for_nonphysical_shift/1",
+          "x-ywe-violated-rule": "nonphysical_realm_travel_requires_attunement_plus_threshold_condition"
+        },
+        "generic_fast_travel_bypass": {
+          "type": "boolean",
+          "const": false,
+          "x-ywe-source-ref": "data/realm/realm_mechanics_rules.yaml#/travel_and_shift_rules/constraints/0",
+          "x-ywe-violated-rule": "realm_shift_is_not_generic_fast_travel"
+        }
+      },
+      "x-ywe-descriptor-unit-ref": "data/realm/realm_transition_examples.yaml#/unlawful_examples/0"
+    },
+    "RealmSharedTruthAssertion": {
+      "description": "A scoped assertion vector for the named realm rules; acceptance does not certify a complete runtime transition.",
+      "x-ywe-requirement-id": "YWE-REQ-0035",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "perception_changes_shared_geography",
+        "shared_truth_reconcilable"
+      ],
+      "properties": {
+        "perception_changes_shared_geography": {
+          "type": "boolean",
+          "const": false,
+          "x-ywe-source-ref": "data/realm/realm_mechanics_rules.yaml#/travel_and_shift_rules/multiplayer_rules/0",
+          "x-ywe-violated-rule": "no_rule_may_change_canonical_geography_through_perception_only"
+        },
+        "shared_truth_reconcilable": {
+          "type": "boolean",
+          "const": true,
+          "x-ywe-source-ref": "data/realm/realm_mechanics_rules.yaml#/travel_and_shift_rules/multiplayer_rules/2",
+          "x-ywe-violated-rule": "shared_objective_state_must_remain_reconcilable"
+        }
+      },
+      "x-ywe-descriptor-unit-ref": "data/realm/realm_transition_examples.yaml#/unlawful_examples/1"
     }
   }
 }

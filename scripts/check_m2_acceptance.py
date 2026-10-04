@@ -12,6 +12,8 @@ from jsonschema import Draft202012Validator
 import check_fixture_catalog as fixtures
 import check_m0_truthful_baseline as baseline
 import check_rejection_scenarios as rejection_scenarios
+import check_m2_validation_operations as validation_operations
+import check_m2_validation_methods as validation_methods
 from check_machine_readable_artifacts import quality_debt
 from validate_repository import check_applies
 
@@ -57,8 +59,26 @@ BUNDLE_PATHS = {
     "examples/contract_foundation/ability_semantic_cases.example.json",
     "examples/contract_foundation/yaml_descriptor_cases.example.yaml",
     "examples/contract_foundation/phase_9_representation_cases.example.json",
+    "examples/contract_foundation/ravenfall_preview_format_cases.example.json",
+    "examples/contract_foundation/m2_validation_operation_cases.example.json",
+    "examples/contract_foundation/yaml_policy_document_cases.example.json",
+    "examples/contract_foundation/realm_assertion_cases.example.json",
 }
 BUNDLE_METADATA = {
+    "examples/contract_foundation/realm_assertion_cases.example.json": {
+        "artifact_type": "realm_assertion_cases", "artifact_version": "1.0.0",
+        "validation_scope": "assertion_projection",
+    },
+    "examples/contract_foundation/yaml_policy_document_cases.example.json": {
+        "artifact_type": "yaml_policy_document_cases", "artifact_version": "1.0.0",
+    },
+    "examples/contract_foundation/ravenfall_preview_format_cases.example.json": {
+        "artifact_type": "ravenfall_preview_format_cases", "artifact_version": "1.0.0",
+    },
+    "examples/contract_foundation/m2_validation_operation_cases.example.json": {
+        "artifact_type": "m2_validation_operation_cases", "artifact_version": "1.0.0",
+        "validation_scope": "schema_validation_operation",
+    },
     "examples/contract_foundation/phase_9_representation_cases.example.json": {
         "artifact_type": "phase_9_representation_cases", "artifact_version": "1.0.0",
     },
@@ -89,6 +109,17 @@ def roadmap_definition_errors(roadmap: dict) -> list[str]:
 
 
 def fixture_units(root: Path, relative: str) -> list[str]:
+    if relative == "data/realm/realm_transition_examples.yaml":
+        document = fixtures.load_instance(root / relative)
+        if not isinstance(document, dict) or not isinstance(document.get("meta"), dict) or document["meta"].get("system") != "realm_transition_examples":
+            raise ValueError("Realm guidance collection must retain its declared document identity")
+        units = [""]
+        for group in ("lawful_examples", "unlawful_examples"):
+            cases = document.get(group)
+            if not isinstance(cases, list) or not cases:
+                raise ValueError("Realm guidance collection must contain both declared case roles")
+            units.extend(f"/{group}/{index}" for index in range(len(cases)))
+        return units
     if relative == "examples/player_runtime_state/invalid_player_state_rejection_cases.example.json":
         document = fixtures.load_instance(root / relative)
         if not isinstance(document, dict) or not isinstance(document.get("cases"), list) or not document["cases"]:
@@ -121,6 +152,10 @@ def rejection_coverage(root: Path, paths: list[str], successful: list[dict],
     designated = [path for path in paths
                   if "invalid" in Path(path).name.lower() or ".reject." in Path(path).name.lower()]
     expected = {(path, pointer) for path in designated for pointer in fixture_units(root, path)}
+    realm = "data/realm/realm_transition_examples.yaml"
+    if realm in paths:
+        expected.update((realm, pointer) for pointer in fixture_units(root, realm)
+                        if pointer.startswith("/unlawful_examples/"))
     witnessed = {(item["path"], item["instance_pointer"]) for item in successful
                  if item["expected_result"] == "reject"}
     witnessed.update((item["descriptor_path"], item.get("descriptor_unit_pointer", ""))
@@ -219,7 +254,7 @@ def obligation(identifier: str, statement: str, errors: list[str], evidence: dic
             "errors": errors, "evidence": evidence or {}}
 
 
-def build_report(root: Path, repository_report: dict | None = None) -> dict:
+def build_report(root: Path, repository_report: dict | None = None, *, verify_historical: bool = True) -> dict:
     root = root.resolve()
     report = {"artifact_type": "ywe_m2_readiness_report", "artifact_version": "1.0.0",
               "ready": False, "criteria": [], "deliverables": [], "errors": []}
@@ -247,7 +282,7 @@ def build_report(root: Path, repository_report: dict | None = None) -> dict:
                 Draft202012Validator.check_schema(schema)
             except Exception as exc:
                 meta_errors.append(f"Invalid normative meta-schema {relative}: {exc}")
-        _, reference_errors = fixtures.load_registry(root)
+        registry, reference_errors = fixtures.load_registry(root)
         fixture_errors, results = fixtures.validation_errors(root)
         catalog = fixtures.load_json(root / fixtures.FIXTURE_CATALOG)
         coverage_errors, coverage = fixture_coverage(root, paths, classification, catalog, results)
@@ -307,36 +342,38 @@ def build_report(root: Path, repository_report: dict | None = None) -> dict:
                            for item in successful) for pointer in units):
                 missing_yaml.append(relative)
         yaml_errors = [f"Domain YAML has no complete structural binding: {path}" for path in missing_yaml]
-        identifier_errors = [f"Accepted fixture lacks explicit expected requirement identifiers: {item['fixture_id']}"
-                             for item in successful if item["expected_result"] == "accept" and not item.get("expected_requirement_ids")]
+        identifier_errors = fixtures.fixture_requirement_errors(root, registry, catalog["fixtures"])
         categories = sorted({item["category"] for item in successful})
-        category_errors = [f"No successful {category} fixture exists" for category in ("positive", "boundary", "reject", "recovery", "replay", "migration") if category not in categories]
-        validation_errors = []
-        if not (root / VALIDATION_COVERAGE).is_file():
-            validation_errors.append("Explicit validation-method coverage inventory is absent")
-        else:
-            validation_errors.append("Declared method mappings have no implemented method-specific acceptance evaluator")
-            methods = fixtures.load_json(root / VALIDATION_COVERAGE).get("methods", {})
-            if set(methods) != set(VALIDATION_METHODS):
-                validation_errors.append("Validation inventory must cover exactly the eight roadmap methods")
-            check_ids = {item["id"] for item in checks["checks"]}
-            for method, mapping in methods.items():
-                if not mapping.get("check_ids") or not set(mapping["check_ids"]).issubset(check_ids):
-                    validation_errors.append(f"Validation method lacks registered checks: {method}")
-                if not mapping.get("evidence_refs"):
-                    validation_errors.append(f"Validation method lacks evidence references: {method}")
-                for reference in mapping.get("evidence_refs", []):
-                    if not fixtures.repository_path(root, reference.split("#", 1)[0]).is_file():
-                        validation_errors.append(f"Missing validation-method evidence: {reference}")
+        category_errors = [f"No successful {category} fixture exists" for category in ("positive", "boundary", "reject") if category not in categories]
+        operation_errors, operation_results = validation_operations.validation_errors(root)
+        lifecycle_errors, lifecycle_evidence = validation_operations.category_coverage(catalog, results, operation_results)
+        category_errors.extend(operation_errors + lifecycle_errors)
+        validation_errors, method_results = validation_methods.validation_errors(root)
+        method_errors, method_evidence = validation_methods.method_coverage(method_results)
+        validation_errors.extend(method_errors)
+        historical_errors = ["Durable M2 acceptance evidence is not recorded"]
+        historical_evidence = {}
+        if verify_historical:
+            try:
+                import check_m2_historical_acceptance as historical_acceptance
+
+                historical_errors, historical_evidence = historical_acceptance.validation_errors(root)
+                if historical_evidence.get("outcome") != "pass":
+                    historical_errors.append("Durable M2 acceptance evidence is not accepted")
+            except ImportError:
+                pass
         report["deliverables"] = [
             obligation("M2-D1", DELIVERABLES[0], profile_errors),
             obligation("M2-D2", DELIVERABLES[1], conversion_errors),
             obligation("M2-D3", DELIVERABLES[2], common_errors),
             obligation("M2-D4", DELIVERABLES[3], yaml_errors, {"domain_yaml_paths": domain_yaml, "uncovered_paths": missing_yaml}),
             obligation("M2-D5", DELIVERABLES[4], fixture_errors + identifier_errors),
-            obligation("M2-D6", DELIVERABLES[5], category_errors, {"successful_categories": categories}),
-            obligation("M2-D7", DELIVERABLES[6], validation_errors, unverified=True),
-            obligation("M2-D8", DELIVERABLES[7], evidence_errors + ["Durable M2 acceptance evidence is not recorded"], unverified=True),
+            obligation("M2-D6", DELIVERABLES[5], category_errors,
+                       {"successful_categories": categories, **lifecycle_evidence}),
+            obligation("M2-D7", DELIVERABLES[6], validation_errors, method_evidence),
+            obligation("M2-D8", DELIVERABLES[7], evidence_errors + historical_errors, historical_evidence,
+                       unverified=repository_report is None or not verify_historical or not historical_evidence
+                       or historical_evidence.get("outcome") == "pending"),
         ]
         report["ready"] = not report["errors"] and all(item["status"] == "pass" for item in report["criteria"] + report["deliverables"])
     except Exception as exc:
@@ -350,6 +387,7 @@ def main() -> int:
     parser.add_argument("--check-definition", action="store_true")
     parser.add_argument("--repository-report", type=Path)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--evidence-formation", action="store_true")
     args = parser.parse_args()
     root = args.root.resolve()
     if args.check_definition:
@@ -363,7 +401,7 @@ def main() -> int:
         print("M2 gate definition check passed (six criteria and eight deliverables mapped; milestone acceptance not evaluated).")
         return 0
     repository_report = fixtures.load_json(args.repository_report) if args.repository_report else None
-    report = build_report(root, repository_report)
+    report = build_report(root, repository_report, verify_historical=not args.evidence_formation)
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

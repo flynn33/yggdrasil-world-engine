@@ -13,6 +13,7 @@ import yaml
 from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 from referencing.exceptions import NoSuchResource
+from referencing.jsonschema import DRAFT202012
 
 from check_machine_readable_artifacts import UniqueKeyLoader, repository_files
 
@@ -262,6 +263,77 @@ def load_registry(root: Path) -> tuple[Registry, list[str]]:
     return registry, errors
 
 
+def fixture_requirement_errors(root: Path, registry: Registry, fixtures: list[dict]) -> list[str]:
+    """Resolve positive expectation identities within their declared foundation scope."""
+    errors = []
+    try:
+        register = load_json(repository_path(root, "data/governance/normative_requirement_register.json"))
+        requirements = {}
+        for item in register["requirements"]:
+            identifier = item["requirement_id"]
+            if identifier in requirements:
+                raise ValueError(f"Duplicate registered requirement identifier: {identifier}")
+            requirements[identifier] = item
+        schema_ids = {item["path"]: item["schema_id"]
+                      for item in load_json(root / CONTRACT_CATALOG)["schemas"]}
+        for fixture in fixtures:
+            if fixture["expected_result"] != "accept" and "expected_requirement_ids" not in fixture:
+                continue
+            identifiers = fixture.get("expected_requirement_ids", [])
+            if not identifiers or len(set(identifiers)) != len(identifiers):
+                errors.append(f"Accepted fixture lacks unique expected requirement identifiers: {fixture['fixture_id']}")
+                continue
+            for identifier in identifiers:
+                requirement = requirements.get(identifier)
+                if requirement is None or requirement.get("status") != "active":
+                    errors.append(f"Fixture {fixture['fixture_id']}: requirement identifier is not registered and active: {identifier}")
+                elif identifier != "YWE-REQ-0020":
+                    target = resolve_schema_target(registry, fixture["schema_id"])
+                    if not isinstance(target.contents, dict) or target.contents.get("x-ywe-requirement-id") != identifier:
+                        errors.append(f"Fixture {fixture['fixture_id']}: requirement identifier does not own its selected contract: {identifier}")
+                        continue
+                    source_owned = False
+                    for reference in requirement.get("source_refs", []):
+                        if not isinstance(reference, str):
+                            continue
+                        path, fragment = urldefrag(reference)
+                        if path not in schema_ids:
+                            continue
+                        try:
+                            owner = resolve_schema_target(registry, schema_ids[path] + "#" + fragment)
+                        except Exception:
+                            continue
+                        resource = Resource.from_contents(owner.contents, default_specification=DRAFT202012)
+                        if any(target.contents is node for node in schema_nodes(resource)):
+                            source_owned = True
+                            break
+                    if not source_owned:
+                        errors.append(f"Fixture {fixture['fixture_id']}: registered requirement source does not own its selected contract: {identifier}")
+    except Exception as exc:
+        errors.append(f"Unable to resolve fixture requirement identifiers: {exc}")
+    return errors
+
+
+def instance_witnesses(root: Path, registry: Registry, schema_id: str, instance) -> set[str]:
+    """Execute the complete registered contract pipeline for one selected input."""
+    target = resolve_schema_target(registry, schema_id)
+    validator = Draft202012Validator({"$ref": schema_id}, registry=registry)
+    witnessed = {
+        signature_key(error_signature(leaf))
+        for error in validator.iter_errors(instance)
+        for leaf in leaf_errors(error)
+    }
+    grammar = DESCRIPTOR_SCHEMAS.get(schema_id)
+    if grammar:
+        if target.contents.get("x-ywe-descriptor-grammar") != grammar:
+            raise ValueError("Descriptor schema differs from its registered grammar")
+        if not witnessed:
+            from check_yaml_descriptor_contracts import descriptor_semantic_errors
+
+            witnessed.update(signature_key(error) for error in descriptor_semantic_errors(instance, grammar, root))
+    return witnessed
+
+
 def evaluate_fixtures(root: Path, registry: Registry, fixtures: list[dict]):
     errors = []
     results = []
@@ -276,26 +348,11 @@ def evaluate_fixtures(root: Path, registry: Registry, fixtures: list[dict]):
         seen_bindings.add(binding)
         try:
             # Resolve even when the instance is empty or the validator would skip it.
-            target = resolve_schema_target(registry, fixture["schema_id"])
+            resolve_schema_target(registry, fixture["schema_id"])
             instance = json_pointer(
                 load_instance(repository_path(root, fixture["path"])), fixture["instance_pointer"]
             )
-            validator = Draft202012Validator(
-                {"$ref": fixture["schema_id"]}, registry=registry
-            )
-            witnessed = {
-                signature_key(error_signature(leaf))
-                for error in validator.iter_errors(instance)
-                for leaf in leaf_errors(error)
-            }
-            grammar = DESCRIPTOR_SCHEMAS.get(fixture["schema_id"])
-            if grammar:
-                if target.contents.get("x-ywe-descriptor-grammar") != grammar:
-                    raise ValueError("Descriptor schema differs from its registered grammar")
-                if not witnessed:
-                    from check_yaml_descriptor_contracts import descriptor_semantic_errors
-
-                    witnessed.update(signature_key(error) for error in descriptor_semantic_errors(instance, grammar, root))
+            witnessed = instance_witnesses(root, registry, fixture["schema_id"], instance)
             expected = {signature_key(error) for error in fixture["expected_errors"]}
             result = "reject" if witnessed else "accept"
             if result != fixture["expected_result"] or witnessed != expected:
@@ -325,6 +382,9 @@ def validation_errors(root: Path) -> tuple[list[str], list[dict]]:
         if errors:
             return errors, []
         catalog = load_json(root / FIXTURE_CATALOG)
+        errors.extend(fixture_requirement_errors(root, registry, catalog["fixtures"]))
+        if errors:
+            return errors, []
         return evaluate_fixtures(root, registry, catalog["fixtures"])
     except Exception as exc:
         return [f"Unable to load fixture/schema catalogs: {exc}"], []

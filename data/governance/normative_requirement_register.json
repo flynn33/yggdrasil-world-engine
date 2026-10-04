@@ -9,7 +9,7 @@
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0031",
+    "next_available_id": "YWE-REQ-0039",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -672,13 +672,213 @@
         "data/schemas/existence_potential_schema.json",
         "data/schemas/branch_event_schema.json"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0031",
+      "title": "Conservative Ravenfall preview formats",
+      "normative_statement": "Ravenfall and recovery preview descriptions MUST satisfy their explicit serialized format grammar while retaining incomplete acceptance status, descriptive truth labels, open containers and source-unrestricted empty values. Format acceptance MUST NOT certify absent canonical runtime packet fields or playtest acceptance.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "wrw_reference_profile",
+      "verification_refs": [
+        "tests/test_ravenfall_preview_formats.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0021"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#ravenfall-preview-formats",
+        "data/schemas/ravenfall_preview_descriptor_schema.json"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0032",
+      "title": "Explicit YAML policy document formats",
+      "normative_statement": "Domain YAML policy and descriptor documents MUST satisfy their declared structural document grammars. Literal descriptor tokens MUST retain their source scalar types, heterogeneous optional records MUST retain their explicit variants, and descriptive policies MUST NOT be executed as unrecorded domain algorithms.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "tests/test_yaml_policy_documents.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0022"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#yaml-policy-document-formats",
+        "data/schemas/ywe_core_policy_document_schema.json",
+        "data/schemas/ywe_domain_policy_document_schema.json",
+        "data/schemas/ywe_module_policy_document_schema.json"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0033",
+      "title": "Executed validation operation cases",
+      "normative_statement": "Recovery, replay and migration fixture categories MUST count only exact accepted operation cases with successful complete executed stages. Recovery MUST reject the diagnosed proposal and accept the restored original; replay MUST independently reload identical inputs; migration MUST execute the immutable protected schema proofs. Validation operations MUST NOT mutate their sources or claim later runtime lifecycle protocols.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_m2_validation_operations.py",
+        "tests/test_m2_validation_operations.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0023"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#validation-operation-fixtures",
+        "data/schemas/m2_validation_operation_case_schema.json",
+        "data/validation/m2_validation_operation_expectations.json",
+        "examples/contract_foundation/m2_validation_operation_cases.example.json"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0034",
+      "title": "Governed positive expectation identities",
+      "normative_statement": "Accepted fixtures MUST carry unique nonempty expected requirement identifiers that resolve to active registered obligations. Additional contract-specific identifiers MUST match the exact selected schema annotation and its registered source ownership. Fixture-governance identity MUST NOT be advertised as complete domain-clause traceability.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_fixture_catalog.py",
+        "tests/test_fixture_catalog.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0024"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#governed-positive-expectation-identities",
+        "data/schemas/fixture_catalog_schema.json#/$defs/fixture/properties/expected_requirement_ids"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0035",
+      "title": "Source-bound realm rejection assertions",
+      "normative_statement": "Each declared unlawful realm guidance unit MUST bind its complete identity, summary and violated-rule list to executed source-owned rejection assertions. Assertion vectors MUST preserve typed boolean inverses and exact witnesses, and MUST NOT certify unrepresented runtime transition fields.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_rejection_scenarios.py",
+        "tests/test_rejection_scenarios.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0025"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#realm-rejection-assertions",
+        "data/schemas/rejection_scenario_catalog_schema.json#/$defs/RealmThresholdAssertion",
+        "data/schemas/rejection_scenario_catalog_schema.json#/$defs/RealmSharedTruthAssertion",
+        "examples/contract_foundation/realm_assertion_cases.example.json"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0036",
+      "title": "Executed M2 validation methods",
+      "normative_statement": "Every roadmap validation method MUST execute concrete nonempty method-specific cases and report complete successful evidence. Source-driven properties MUST exercise source enum members and required-field removals; isolated assertion mutants MUST be killed by their exact accepted and rejecting controls. Method labels alone MUST NOT establish conformance or certify runtime behavior.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_m2_validation_methods.py",
+        "tests/test_m2_validation_methods.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0026"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#executed-validation-methods",
+        "data/schemas/m2_validation_method_expectations_schema.json",
+        "data/validation/m2_validation_method_expectations.json"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0037",
+      "title": "Immutable source-bound M2 acceptance evidence",
+      "normative_statement": "M2 acceptance MUST preserve the actual complete clean unfiltered offline execution report, all roadmap judgments, concrete operation and method executions, and the exact tested source state. Its first passing introduction MUST change only the fixed evidence pair; later evidence changes or deletion MUST fail verification. Historical replay MUST execute the preserved implementation and MUST NOT promote pending or uncommitted claims.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_m2_historical_acceptance.py",
+        "tests/test_m2_historical_acceptance.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0027"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#durable-acceptance-evidence",
+        "data/schemas/m2_historical_acceptance_evidence_schema.json",
+        "data/governance/m2_acceptance_evidence.json",
+        "docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0038",
+      "title": "Approved descriptor execution correspondence",
+      "normative_statement": "Every source-bound rejection scenario MUST match a separately reviewed descriptor-to-execution contract before it can discharge intended-reason coverage. The approved contract MUST preserve the exact descriptor identity and reason bindings, mode, scope, subject or base, operations, complete witnesses, and source owners. Unknown, duplicate, missing, altered or unused approvals MUST fail the complete catalog check. A candidate scenario catalog MUST NOT authorize itself.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_rejection_scenarios.py",
+        "tests/test_rejection_scenarios.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0028"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#approved-descriptor-execution-correspondence",
+        "data/schemas/rejection_scenario_catalog_schema.json#/$defs/ExecutionContracts",
+        "data/validation/rejection_execution_contracts.json"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 30,
-    "active": 30,
+    "total_requirements": 38,
+    "active": 38,
     "proposed": 0,
     "terminal": 0,
-    "next_identifier": "YWE-REQ-0031"
+    "next_identifier": "YWE-REQ-0039"
   }
 }

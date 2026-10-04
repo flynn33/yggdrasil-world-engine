@@ -1716,6 +1716,256 @@
           "relation": "equal"
         }
       ]
+    },
+    {
+      "scenario_id": "realm.rte_invalid_fast_travel_bypass",
+      "descriptor_path": "data/realm/realm_transition_examples.yaml",
+      "descriptor_unit_pointer": "/unlawful_examples/0",
+      "descriptor_sha256": "ec2c14190a3e3184a0d97165dd0215b3b4af574cec688501e1b7b539f847a0db",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/unlawful_examples/0/example_id",
+          "value": "rte_invalid_fast_travel_bypass"
+        },
+        {
+          "pointer": "/unlawful_examples/0/summary",
+          "value": "Direct nonphysical shift granted without attunement threshold or boundary condition due to authored convenience flag.\n"
+        },
+        {
+          "pointer": "/unlawful_examples/0/violated_rules",
+          "value": [
+            "nonphysical_realm_travel_requires_attunement_plus_threshold_condition",
+            "realm_shift_is_not_generic_fast_travel"
+          ]
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/RealmThresholdAssertion/properties/attunement_threshold_met/const",
+          "value": true
+        },
+        {
+          "path": "data/realm/realm_mechanics_rules.yaml",
+          "pointer": "/travel_and_shift_rules/lawful_requirements/required_for_nonphysical_shift/0",
+          "value": "realm_attunement_threshold_met"
+        },
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/RealmThresholdAssertion/properties/boundary_condition_met/const",
+          "value": true
+        },
+        {
+          "path": "data/realm/realm_mechanics_rules.yaml",
+          "pointer": "/travel_and_shift_rules/lawful_requirements/required_for_nonphysical_shift/1",
+          "value": "thin_veil_or_equivalent_site_condition"
+        },
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/RealmThresholdAssertion/properties/generic_fast_travel_bypass/const",
+          "value": false
+        },
+        {
+          "path": "data/realm/realm_mechanics_rules.yaml",
+          "pointer": "/travel_and_shift_rules/constraints/0",
+          "value": "realm_shift_is_not_generic_fast_travel"
+        }
+      ],
+      "projection_bindings": [
+        {
+          "assertion_pointer": "/$defs/RealmThresholdAssertion/properties/attunement_threshold_met/const",
+          "assertion_value": true,
+          "source_path": "data/realm/realm_mechanics_rules.yaml",
+          "source_pointer": "/travel_and_shift_rules/lawful_requirements/required_for_nonphysical_shift/0",
+          "source_value": "realm_attunement_threshold_met"
+        },
+        {
+          "assertion_pointer": "/$defs/RealmThresholdAssertion/properties/boundary_condition_met/const",
+          "assertion_value": true,
+          "source_path": "data/realm/realm_mechanics_rules.yaml",
+          "source_pointer": "/travel_and_shift_rules/lawful_requirements/required_for_nonphysical_shift/1",
+          "source_value": "thin_veil_or_equivalent_site_condition"
+        },
+        {
+          "assertion_pointer": "/$defs/RealmThresholdAssertion/properties/generic_fast_travel_bypass/const",
+          "assertion_value": false,
+          "source_path": "data/realm/realm_mechanics_rules.yaml",
+          "source_pointer": "/travel_and_shift_rules/constraints/0",
+          "source_value": "realm_shift_is_not_generic_fast_travel"
+        }
+      ],
+      "mutation_value_bindings": [
+        {
+          "operation_index": 0,
+          "source_path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "source_pointer": "/$defs/RealmThresholdAssertion/properties/attunement_threshold_met/const",
+          "source_value": true,
+          "relation": "negated_boolean"
+        },
+        {
+          "operation_index": 1,
+          "source_path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "source_pointer": "/$defs/RealmThresholdAssertion/properties/boundary_condition_met/const",
+          "source_value": true,
+          "relation": "negated_boolean"
+        },
+        {
+          "operation_index": 2,
+          "source_path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "source_pointer": "/$defs/RealmThresholdAssertion/properties/generic_fast_travel_bypass/const",
+          "source_value": false,
+          "relation": "negated_boolean"
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "assertion_projection",
+      "description": "Reject the explicit inverses of the source-owned threshold assertions declared by this unlawful description; this is not a complete realm transition.",
+      "schema_id": "https://ywe.local/schemas/rejection_scenario_catalog_schema.json#/$defs/RealmThresholdAssertion",
+      "base_path": "examples/contract_foundation/realm_assertion_cases.example.json",
+      "base_pointer": "/positive/threshold",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/attunement_threshold_met",
+          "value": false
+        },
+        {
+          "op": "replace",
+          "path": "/boundary_condition_met",
+          "value": false
+        },
+        {
+          "op": "replace",
+          "path": "/generic_fast_travel_bypass",
+          "value": true
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/attunement_threshold_met",
+          "schema_pointer": "/properties/attunement_threshold_met/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/boundary_condition_met",
+          "schema_pointer": "/properties/boundary_condition_met/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/generic_fast_travel_bypass",
+          "schema_pointer": "/properties/generic_fast_travel_bypass/const"
+        }
+      ]
+    },
+    {
+      "scenario_id": "realm.rte_invalid_shared_truth_mutation",
+      "descriptor_path": "data/realm/realm_transition_examples.yaml",
+      "descriptor_unit_pointer": "/unlawful_examples/1",
+      "descriptor_sha256": "ec2c14190a3e3184a0d97165dd0215b3b4af574cec688501e1b7b539f847a0db",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/unlawful_examples/1/example_id",
+          "value": "rte_invalid_shared_truth_mutation"
+        },
+        {
+          "pointer": "/unlawful_examples/1/summary",
+          "value": "One player transition rewrites shared geography for all players through perception-only state.\n"
+        },
+        {
+          "pointer": "/unlawful_examples/1/violated_rules",
+          "value": [
+            "no_rule_may_change_canonical_geography_through_perception_only",
+            "shared_objective_state_must_remain_reconcilable"
+          ]
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/RealmSharedTruthAssertion/properties/perception_changes_shared_geography/const",
+          "value": false
+        },
+        {
+          "path": "data/realm/realm_mechanics_rules.yaml",
+          "pointer": "/travel_and_shift_rules/multiplayer_rules/0",
+          "value": "one_player_shift_does_not_rewrite_shared_geography_for_all_players"
+        },
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/RealmSharedTruthAssertion/properties/shared_truth_reconcilable/const",
+          "value": true
+        },
+        {
+          "path": "data/realm/realm_mechanics_rules.yaml",
+          "pointer": "/travel_and_shift_rules/multiplayer_rules/2",
+          "value": "shared_event_truth_must_remain_reconcilable_after_shift episodes"
+        }
+      ],
+      "projection_bindings": [
+        {
+          "assertion_pointer": "/$defs/RealmSharedTruthAssertion/properties/perception_changes_shared_geography/const",
+          "assertion_value": false,
+          "source_path": "data/realm/realm_mechanics_rules.yaml",
+          "source_pointer": "/travel_and_shift_rules/multiplayer_rules/0",
+          "source_value": "one_player_shift_does_not_rewrite_shared_geography_for_all_players"
+        },
+        {
+          "assertion_pointer": "/$defs/RealmSharedTruthAssertion/properties/shared_truth_reconcilable/const",
+          "assertion_value": true,
+          "source_path": "data/realm/realm_mechanics_rules.yaml",
+          "source_pointer": "/travel_and_shift_rules/multiplayer_rules/2",
+          "source_value": "shared_event_truth_must_remain_reconcilable_after_shift episodes"
+        }
+      ],
+      "mutation_value_bindings": [
+        {
+          "operation_index": 0,
+          "source_path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "source_pointer": "/$defs/RealmSharedTruthAssertion/properties/perception_changes_shared_geography/const",
+          "source_value": false,
+          "relation": "negated_boolean"
+        },
+        {
+          "operation_index": 1,
+          "source_path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "source_pointer": "/$defs/RealmSharedTruthAssertion/properties/shared_truth_reconcilable/const",
+          "source_value": true,
+          "relation": "negated_boolean"
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "assertion_projection",
+      "description": "Reject the explicit inverses of the source-owned shared_truth assertions declared by this unlawful description; this is not a complete realm transition.",
+      "schema_id": "https://ywe.local/schemas/rejection_scenario_catalog_schema.json#/$defs/RealmSharedTruthAssertion",
+      "base_path": "examples/contract_foundation/realm_assertion_cases.example.json",
+      "base_pointer": "/positive/shared_truth",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/perception_changes_shared_geography",
+          "value": true
+        },
+        {
+          "op": "replace",
+          "path": "/shared_truth_reconcilable",
+          "value": false
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/perception_changes_shared_geography",
+          "schema_pointer": "/properties/perception_changes_shared_geography/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/shared_truth_reconcilable",
+          "schema_pointer": "/properties/shared_truth_reconcilable/const"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m2_historical_acceptance_evidence_schema.json",
+  "title": "Immutable M2 acceptance evidence record format",
+  "description": "YWE-REQ-0037 record format. Historical source, execution, immutable introduction, and obligation comparisons are enforced by the owning verifier.",
+  "x-ywe-requirement-id": "YWE-REQ-0037",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": ["schema_ref", "artifact_type", "artifact_version", "milestone_id", "outcome"],
+      "properties": {
+        "schema_ref": {"const": "data/schemas/m2_historical_acceptance_evidence_schema.json"},
+        "artifact_type": {"const": "ywe_m2_acceptance_evidence"},
+        "artifact_version": {"const": "1.0.0"},
+        "milestone_id": {"const": "M2"},
+        "outcome": {"const": "pending"}
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": ["schema_ref", "artifact_type", "artifact_version", "milestone_id", "outcome", "implementation_revision", "source_state", "check_catalog", "validation_environment", "repository_report", "repository_report_sha256", "formation_report", "validation_operations", "validation_methods", "acceptance_judgments"],
+      "properties": {
+        "schema_ref": {"const": "data/schemas/m2_historical_acceptance_evidence_schema.json"},
+        "artifact_type": {"const": "ywe_m2_acceptance_evidence"},
+        "artifact_version": {"const": "1.0.0"},
+        "milestone_id": {"const": "M2"},
+        "outcome": {"const": "pass"},
+        "implementation_revision": {"$ref": "#/$defs/revision"},
+        "source_state": {
+          "type": "object",
+          "required": ["algorithm", "digest", "file_count", "digest_exclusions"],
+          "properties": {
+            "algorithm": {"const": "sha256_sorted_path_nul_normalized_utf8_lf_sha256_nul"},
+            "digest": {"$ref": "#/$defs/hash"},
+            "file_count": {"type": "integer", "minimum": 1},
+            "digest_exclusions": {
+              "const": ["data/governance/m2_acceptance_evidence.json", "docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md"]
+            }
+          },
+          "additionalProperties": false
+        },
+        "check_catalog": {
+          "type": "object",
+          "required": ["path", "hash_algorithm", "sha256"],
+          "properties": {
+            "path": {"const": "data/validation/repository_checks.json"},
+            "hash_algorithm": {"const": "sha256_utf8_lf_normalized"},
+            "sha256": {"$ref": "#/$defs/hash"}
+          },
+          "additionalProperties": false
+        },
+        "validation_environment": {
+          "type": "object",
+          "required": ["requirements_ref", "requirements_sha256", "pinned_tool_versions"],
+          "properties": {
+            "requirements_ref": {"const": "scripts/requirements.txt"},
+            "requirements_sha256": {"$ref": "#/$defs/hash"},
+            "pinned_tool_versions": {
+              "type": "object",
+              "required": ["python", "jsonschema", "PyYAML", "referencing"],
+              "properties": {
+                "python": {"type": "string", "minLength": 1},
+                "jsonschema": {"type": "string", "minLength": 1},
+                "PyYAML": {"type": "string", "minLength": 1},
+                "referencing": {"type": "string", "minLength": 1}
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "repository_report": {"type": "object"},
+        "repository_report_sha256": {"$ref": "#/$defs/hash"},
+        "formation_report": {"type": "object"},
+        "validation_operations": {"type": "array", "minItems": 3, "items": {"type": "object"}},
+        "validation_methods": {"type": "array", "minItems": 8, "maxItems": 8, "items": {"type": "object"}},
+        "acceptance_judgments": {
+          "type": "array",
+          "minItems": 14,
+          "maxItems": 14,
+          "items": {
+            "type": "object",
+            "required": ["id", "statement", "status", "basis", "evidence_pointer"],
+            "properties": {
+              "id": {"type": "string", "pattern": "^M2-(?:C[1-6]|D[1-8])$"},
+              "statement": {"type": "string", "minLength": 1},
+              "status": {"const": "pass"},
+              "basis": {"enum": ["formation_report", "immutable_introduction"]},
+              "evidence_pointer": {"type": "string", "pattern": "^/"}
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  ],
+  "$defs": {
+    "revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

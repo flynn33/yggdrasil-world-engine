@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1134,
-    "path_digest": "e57be6b49e6238c032e7d08a3bf66805f8e0bb71d82a0e1de784744c953e78a5",
+    "path_count": 1158,
+    "path_digest": "0ef406c36546d87cf8c835e12aa48e5fac5356883ed2bc358555740d7ce8796b",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -2206,15 +2206,145 @@
       "secondary_tags": [
         "m2_structural_validation"
       ]
+    },
+    {
+      "path": "data/schemas/m2_validation_operation_case_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "Explicit document-format or validation-operation conformance belongs to its reviewed governance or Ravenfall reference scope.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "data/schemas/ywe_core_policy_document_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "Explicit document-format or validation-operation conformance belongs to its reviewed governance or Ravenfall reference scope.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "data/schemas/ywe_domain_policy_document_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "Explicit document-format or validation-operation conformance belongs to its reviewed governance or Ravenfall reference scope.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "data/schemas/ywe_module_policy_document_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "Explicit document-format or validation-operation conformance belongs to its reviewed governance or Ravenfall reference scope.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "examples/contract_foundation/m2_validation_operation_cases.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "Explicit document-format or validation-operation conformance belongs to its reviewed governance or Ravenfall reference scope.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "examples/contract_foundation/yaml_policy_document_cases.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "Explicit document-format or validation-operation conformance belongs to its reviewed governance or Ravenfall reference scope.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "data/schemas/ravenfall_preview_descriptor_schema.json",
+      "primary_partition": "wrw_reference_profile",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "Explicit document-format or validation-operation conformance belongs to its reviewed governance or Ravenfall reference scope.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "data/schemas/m2_validation_method_expectations_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "The expectation schema governs executed validation methods without claiming runtime engine behavior.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "data/schemas/m2_historical_acceptance_evidence_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "Historical source-bound evidence is separate from the normative validation contract and scoped assertion controls.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "data/governance/m2_acceptance_evidence.json",
+      "primary_partition": "historical_evidence",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "Historical source-bound evidence is separate from the normative validation contract and scoped assertion controls.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md",
+      "primary_partition": "historical_evidence",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "Historical source-bound evidence is separate from the normative validation contract and scoped assertion controls.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "examples/contract_foundation/realm_assertion_cases.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "Historical source-bound evidence is separate from the normative validation contract and scoped assertion controls.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "data/validation/rejection_execution_contracts.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "Reviewed descriptor-to-execution approvals govern intended-reason validation coverage.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
       "ash_dependency_material": 66,
-      "governance_validation": 428,
-      "historical_evidence": 19,
+      "governance_validation": 448,
+      "historical_evidence": 21,
       "later_release_work": 59,
-      "wrw_reference_profile": 301,
+      "wrw_reference_profile": 303,
       "ywe_core": 139,
       "ywe_extension_profile": 122
     }

@@ -1,0 +1,2963 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ywe_module_policy_document_schema.json",
+  "title": "YWE reviewed YAML document formats",
+  "description": "New REQ0032 format policy: serialized structure and declared fixed policy values. No certification of runtime execution, nested narrative rejection or cross-file reference integrity.",
+  "x-ywe-requirement-id": "YWE-REQ-0032",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/ArtifactSystemRulesDocument"
+    },
+    {
+      "$ref": "#/$defs/CreatureSystemRulesDocument"
+    },
+    {
+      "$ref": "#/$defs/QuestChainTemplatesDocument"
+    }
+  ],
+  "$defs": {
+    "ArtifactSystemRulesDocument": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "compatibility_aliases": {
+          "type": "object",
+          "properties": {
+            "wolf_alignment": {
+              "type": "string",
+              "const": "wolf_resonance",
+              "x-ywe-source-ref": {
+                "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                "pointer": "/compatibility_aliases/wolf_alignment"
+              }
+            },
+            "wolf_alignment_resonance": {
+              "type": "string",
+              "const": "wolf_resonance",
+              "x-ywe-source-ref": {
+                "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                "pointer": "/compatibility_aliases/wolf_alignment_resonance"
+              }
+            },
+            "policy": {
+              "type": "string",
+              "const": "read_or_migration_only",
+              "x-ywe-source-ref": {
+                "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                "pointer": "/compatibility_aliases/policy"
+              }
+            }
+          },
+          "required": [
+            "wolf_alignment",
+            "wolf_alignment_resonance",
+            "policy"
+          ],
+          "additionalProperties": true
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "system": {
+              "type": "string",
+              "const": "artifact_engine",
+              "x-ywe-source-ref": {
+                "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                "pointer": "/meta/system"
+              }
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "doctrine": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "system",
+            "purpose",
+            "doctrine"
+          ],
+          "additionalProperties": true
+        },
+        "position_in_stack": {
+          "type": "object",
+          "properties": {
+            "conceptual_order": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "notes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "conceptual_order",
+            "notes"
+          ],
+          "additionalProperties": true
+        },
+        "core_concepts": {
+          "type": "object",
+          "properties": {
+            "definitions": {
+              "type": "object",
+              "properties": {
+                "artifact": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "description"
+                  ],
+                  "additionalProperties": true
+                },
+                "artifact_manifest": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "description"
+                  ],
+                  "additionalProperties": true
+                },
+                "artifact_resonance": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "description"
+                  ],
+                  "additionalProperties": true
+                },
+                "artifact_identity": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "description"
+                  ],
+                  "additionalProperties": true
+                },
+                "artifact_residue": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "description"
+                  ],
+                  "additionalProperties": true
+                },
+                "artifact_interpretation": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "description"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "required": [
+                "artifact",
+                "artifact_manifest",
+                "artifact_resonance",
+                "artifact_identity",
+                "artifact_residue",
+                "artifact_interpretation"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "definitions"
+          ],
+          "additionalProperties": true
+        },
+        "artifact_classes": {
+          "type": "object",
+          "properties": {
+            "primary_classes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "relic",
+                  "seal",
+                  "key",
+                  "vessel",
+                  "weapon",
+                  "focus",
+                  "regalia",
+                  "shard",
+                  "token",
+                  "anchor",
+                  "archive_object",
+                  "burden_object",
+                  "omen_object"
+                ]
+              }
+            },
+            "class_guidance": {
+              "type": "object",
+              "properties": {
+                "relic": {
+                  "type": "string"
+                },
+                "seal": {
+                  "type": "string"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "vessel": {
+                  "type": "string"
+                },
+                "weapon": {
+                  "type": "string"
+                },
+                "focus": {
+                  "type": "string"
+                },
+                "regalia": {
+                  "type": "string"
+                },
+                "shard": {
+                  "type": "string"
+                },
+                "token": {
+                  "type": "string"
+                },
+                "anchor": {
+                  "type": "string"
+                },
+                "archive_object": {
+                  "type": "string"
+                },
+                "burden_object": {
+                  "type": "string"
+                },
+                "omen_object": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "relic",
+                "seal",
+                "key",
+                "vessel",
+                "weapon",
+                "focus",
+                "regalia",
+                "shard",
+                "token",
+                "anchor",
+                "archive_object",
+                "burden_object",
+                "omen_object"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "primary_classes",
+            "class_guidance"
+          ],
+          "additionalProperties": true
+        },
+        "artifact_role_taxonomy": {
+          "type": "object",
+          "properties": {
+            "roles": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "roles",
+            "rules"
+          ],
+          "additionalProperties": true
+        },
+        "artifact_generation_inputs": {
+          "type": "object",
+          "properties": {
+            "required": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "optional": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "required",
+            "optional"
+          ],
+          "additionalProperties": true
+        },
+        "artifact_schema": {
+          "type": "object",
+          "properties": {
+            "ArtifactManifest": {
+              "type": "object",
+              "properties": {
+                "artifact_id": {
+                  "type": "string",
+                  "const": "string",
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/artifact_schema/ArtifactManifest/artifact_id"
+                  }
+                },
+                "artifact_class": {
+                  "type": "string",
+                  "const": "string",
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/artifact_schema/ArtifactManifest/artifact_class"
+                  }
+                },
+                "artifact_role_primary": {
+                  "type": "string",
+                  "const": "string",
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/artifact_schema/ArtifactManifest/artifact_role_primary"
+                  }
+                },
+                "artifact_role_secondary": {
+                  "type": "string",
+                  "const": "string | null",
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/artifact_schema/ArtifactManifest/artifact_role_secondary"
+                  }
+                },
+                "title": {
+                  "type": "string",
+                  "const": "string",
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/artifact_schema/ArtifactManifest/title"
+                  }
+                },
+                "symbolic_signature": {
+                  "type": "array",
+                  "const": [
+                    "string"
+                  ],
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/artifact_schema/ArtifactManifest/symbolic_signature"
+                  }
+                },
+                "linked_patterns": {
+                  "type": "array",
+                  "const": [
+                    "string"
+                  ],
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/artifact_schema/ArtifactManifest/linked_patterns"
+                  }
+                },
+                "linked_realms": {
+                  "type": "array",
+                  "const": [
+                    "string"
+                  ],
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/artifact_schema/ArtifactManifest/linked_realms"
+                  }
+                },
+                "linked_sites": {
+                  "type": "array",
+                  "const": [
+                    "string"
+                  ],
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/artifact_schema/ArtifactManifest/linked_sites"
+                  }
+                },
+                "linked_bloodlines": {
+                  "type": "array",
+                  "const": [
+                    "string"
+                  ],
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/artifact_schema/ArtifactManifest/linked_bloodlines"
+                  }
+                },
+                "linked_factions": {
+                  "type": "array",
+                  "const": [
+                    "string"
+                  ],
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/artifact_schema/ArtifactManifest/linked_factions"
+                  }
+                },
+                "linked_prophecies": {
+                  "type": "array",
+                  "const": [
+                    "string"
+                  ],
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/artifact_schema/ArtifactManifest/linked_prophecies"
+                  }
+                },
+                "linked_myth_lines": {
+                  "type": "array",
+                  "const": [
+                    "string"
+                  ],
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/artifact_schema/ArtifactManifest/linked_myth_lines"
+                  }
+                },
+                "linked_wolf_pressure": {
+                  "type": "array",
+                  "const": [
+                    "string"
+                  ],
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/artifact_schema/ArtifactManifest/linked_wolf_pressure"
+                  }
+                },
+                "significance_score": {
+                  "type": "string",
+                  "const": "float",
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/artifact_schema/ArtifactManifest/significance_score"
+                  }
+                },
+                "resonance_profile": {
+                  "type": "object",
+                  "properties": {
+                    "player_eligibility": {
+                      "type": "array",
+                      "const": [
+                        "string"
+                      ],
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/resonance_profile/player_eligibility"
+                      }
+                    },
+                    "realm_affinities": {
+                      "type": "array",
+                      "const": [
+                        "string"
+                      ],
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/resonance_profile/realm_affinities"
+                      }
+                    },
+                    "bloodline_affinities": {
+                      "type": "array",
+                      "const": [
+                        "string"
+                      ],
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/resonance_profile/bloodline_affinities"
+                      }
+                    },
+                    "alignment_affinities": {
+                      "type": "array",
+                      "const": [
+                        "string"
+                      ],
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/resonance_profile/alignment_affinities"
+                      }
+                    },
+                    "site_affinities": {
+                      "type": "array",
+                      "const": [
+                        "string"
+                      ],
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/resonance_profile/site_affinities"
+                      }
+                    }
+                  },
+                  "required": [
+                    "player_eligibility",
+                    "realm_affinities",
+                    "bloodline_affinities",
+                    "alignment_affinities",
+                    "site_affinities"
+                  ],
+                  "additionalProperties": true
+                },
+                "interaction_profile": {
+                  "type": "object",
+                  "properties": {
+                    "activation_modes": {
+                      "type": "array",
+                      "const": [
+                        "string"
+                      ],
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/interaction_profile/activation_modes"
+                      }
+                    },
+                    "costs": {
+                      "type": "array",
+                      "const": [
+                        "string"
+                      ],
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/interaction_profile/costs"
+                      }
+                    },
+                    "risks": {
+                      "type": "array",
+                      "const": [
+                        "string"
+                      ],
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/interaction_profile/risks"
+                      }
+                    },
+                    "outputs": {
+                      "type": "array",
+                      "const": [
+                        "string"
+                      ],
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/interaction_profile/outputs"
+                      }
+                    }
+                  },
+                  "required": [
+                    "activation_modes",
+                    "costs",
+                    "risks",
+                    "outputs"
+                  ],
+                  "additionalProperties": true
+                },
+                "identity_profile": {
+                  "type": "object",
+                  "properties": {
+                    "truth_status": {
+                      "type": "string",
+                      "const": "string",
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/identity_profile/truth_status"
+                      }
+                    },
+                    "legitimacy_weight": {
+                      "type": "string",
+                      "const": "float",
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/identity_profile/legitimacy_weight"
+                      }
+                    },
+                    "concealment_level": {
+                      "type": "string",
+                      "const": "float",
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/identity_profile/concealment_level"
+                      }
+                    },
+                    "corruption_risk": {
+                      "type": "string",
+                      "const": "float",
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/identity_profile/corruption_risk"
+                      }
+                    }
+                  },
+                  "required": [
+                    "truth_status",
+                    "legitimacy_weight",
+                    "concealment_level",
+                    "corruption_risk"
+                  ],
+                  "additionalProperties": true
+                },
+                "persistence_profile": {
+                  "type": "object",
+                  "properties": {
+                    "can_be_lost": {
+                      "type": "string",
+                      "const": "boolean",
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/persistence_profile/can_be_lost"
+                      }
+                    },
+                    "can_be_broken": {
+                      "type": "string",
+                      "const": "boolean",
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/persistence_profile/can_be_broken"
+                      }
+                    },
+                    "can_be_transferred": {
+                      "type": "string",
+                      "const": "boolean",
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/persistence_profile/can_be_transferred"
+                      }
+                    },
+                    "residue_weight": {
+                      "type": "string",
+                      "const": "float",
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/persistence_profile/residue_weight"
+                      }
+                    },
+                    "recurrence_weight": {
+                      "type": "string",
+                      "const": "float",
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/persistence_profile/recurrence_weight"
+                      }
+                    }
+                  },
+                  "required": [
+                    "can_be_lost",
+                    "can_be_broken",
+                    "can_be_transferred",
+                    "residue_weight",
+                    "recurrence_weight"
+                  ],
+                  "additionalProperties": true
+                },
+                "narrative_hooks": {
+                  "type": "object",
+                  "properties": {
+                    "quest_hooks": {
+                      "type": "array",
+                      "const": [
+                        "string"
+                      ],
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/narrative_hooks/quest_hooks"
+                      }
+                    },
+                    "omen_hooks": {
+                      "type": "array",
+                      "const": [
+                        "string"
+                      ],
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/narrative_hooks/omen_hooks"
+                      }
+                    },
+                    "perception_hooks": {
+                      "type": "array",
+                      "const": [
+                        "string"
+                      ],
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/narrative_hooks/perception_hooks"
+                      }
+                    },
+                    "consequence_hooks": {
+                      "type": "array",
+                      "const": [
+                        "string"
+                      ],
+                      "x-ywe-source-ref": {
+                        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                        "pointer": "/artifact_schema/ArtifactManifest/narrative_hooks/consequence_hooks"
+                      }
+                    }
+                  },
+                  "required": [
+                    "quest_hooks",
+                    "omen_hooks",
+                    "perception_hooks",
+                    "consequence_hooks"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "required": [
+                "artifact_id",
+                "artifact_class",
+                "artifact_role_primary",
+                "artifact_role_secondary",
+                "title",
+                "symbolic_signature",
+                "linked_patterns",
+                "linked_realms",
+                "linked_sites",
+                "linked_bloodlines",
+                "linked_factions",
+                "linked_prophecies",
+                "linked_myth_lines",
+                "linked_wolf_pressure",
+                "significance_score",
+                "resonance_profile",
+                "interaction_profile",
+                "identity_profile",
+                "persistence_profile",
+                "narrative_hooks"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "ArtifactManifest"
+          ],
+          "additionalProperties": true
+        },
+        "significance_scoring": {
+          "type": "object",
+          "properties": {
+            "score_bands": {
+              "type": "object",
+              "properties": {
+                "minor": {
+                  "type": "string"
+                },
+                "notable": {
+                  "type": "string"
+                },
+                "major": {
+                  "type": "string"
+                },
+                "mythic": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "minor",
+                "notable",
+                "major",
+                "mythic"
+              ],
+              "additionalProperties": true
+            },
+            "contributing_factors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "modifiers": {
+              "type": "object",
+              "properties": {
+                "if_only_tactical_reward": {
+                  "type": "object",
+                  "properties": {
+                    "significance_penalty": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "significance_penalty"
+                  ],
+                  "additionalProperties": true
+                },
+                "if_site_bound_and_history_loaded": {
+                  "type": "object",
+                  "properties": {
+                    "significance_bonus": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "significance_bonus"
+                  ],
+                  "additionalProperties": true
+                },
+                "if_multiple_systems_link": {
+                  "type": "object",
+                  "properties": {
+                    "significance_bonus": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "significance_bonus"
+                  ],
+                  "additionalProperties": true
+                },
+                "if_myth_and_prophecy_both_linked": {
+                  "type": "object",
+                  "properties": {
+                    "significance_bonus": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "significance_bonus"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "required": [
+                "if_only_tactical_reward",
+                "if_site_bound_and_history_loaded",
+                "if_multiple_systems_link",
+                "if_myth_and_prophecy_both_linked"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "score_bands",
+            "contributing_factors",
+            "modifiers"
+          ],
+          "additionalProperties": true
+        },
+        "generation_pipeline": {
+          "type": "object",
+          "properties": {
+            "steps": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "steps"
+          ],
+          "additionalProperties": true
+        },
+        "artifact_need_rules": {
+          "type": "object",
+          "properties": {
+            "valid_generation_intents": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "anti_spam_rules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "valid_generation_intents",
+            "anti_spam_rules"
+          ],
+          "additionalProperties": true
+        },
+        "symbolic_signature_rules": {
+          "type": "object",
+          "properties": {
+            "minimum_symbols": {
+              "type": "integer",
+              "const": 1,
+              "x-ywe-source-ref": {
+                "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                "pointer": "/symbolic_signature_rules/minimum_symbols"
+              }
+            },
+            "recommended_symbols": {
+              "type": "string"
+            },
+            "symbol_sources": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "guidance": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "minimum_symbols",
+            "recommended_symbols",
+            "symbol_sources",
+            "guidance"
+          ],
+          "additionalProperties": true
+        },
+        "resonance_rules": {
+          "type": "object",
+          "properties": {
+            "resonance_axes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "resonance_axes",
+            "rules"
+          ],
+          "additionalProperties": true
+        },
+        "interaction_modes": {
+          "type": "object",
+          "properties": {
+            "supported": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "notes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "supported",
+            "notes"
+          ],
+          "additionalProperties": true
+        },
+        "cost_and_risk_rules": {
+          "type": "object",
+          "properties": {
+            "cost_types": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "risk_types": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "doctrine": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "cost_types",
+            "risk_types",
+            "doctrine"
+          ],
+          "additionalProperties": true
+        },
+        "truth_and_concealment_rules": {
+          "type": "object",
+          "properties": {
+            "truth_statuses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "concealment_levels": {
+              "type": "object",
+              "properties": {
+                "minimum": {
+                  "type": "number",
+                  "const": 0.0,
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/truth_and_concealment_rules/concealment_levels/minimum"
+                  }
+                },
+                "maximum": {
+                  "type": "number",
+                  "const": 1.0,
+                  "x-ywe-source-ref": {
+                    "path": "modules/artifact_engine/artifact_system_rules.yaml",
+                    "pointer": "/truth_and_concealment_rules/concealment_levels/maximum"
+                  }
+                }
+              },
+              "required": [
+                "minimum",
+                "maximum"
+              ],
+              "additionalProperties": true
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "truth_statuses",
+            "concealment_levels",
+            "rules"
+          ],
+          "additionalProperties": true
+        },
+        "artifact_origin_modes": {
+          "type": "object",
+          "properties": {
+            "supported": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "guidance": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "supported",
+            "guidance"
+          ],
+          "additionalProperties": true
+        },
+        "faction_rules": {
+          "type": "object",
+          "properties": {
+            "relation_modes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "effects": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "relation_modes",
+            "effects"
+          ],
+          "additionalProperties": true
+        },
+        "quest_integration_rules": {
+          "type": "object",
+          "properties": {
+            "artifact_quest_functions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "artifact_quest_functions",
+            "rules"
+          ],
+          "additionalProperties": true
+        },
+        "myth_and_prophecy_rules": {
+          "type": "object",
+          "properties": {
+            "myth_links": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "prophecy_links": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "notes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "myth_links",
+            "prophecy_links",
+            "notes"
+          ],
+          "additionalProperties": true
+        },
+        "perception_rules": {
+          "type": "object",
+          "properties": {
+            "doctrine": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "outputs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "doctrine",
+            "outputs"
+          ],
+          "additionalProperties": true
+        },
+        "worldstate_delta_hooks": {
+          "type": "object",
+          "properties": {
+            "supported_delta_domains": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "supported_delta_domains",
+            "rules"
+          ],
+          "additionalProperties": true
+        },
+        "persistence_rules": {
+          "type": "object",
+          "properties": {
+            "categories": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "guidance": {
+              "type": "object",
+              "properties": {
+                "ephemeral_support": {
+                  "type": "string"
+                },
+                "recurring_support": {
+                  "type": "string"
+                },
+                "persistent_major": {
+                  "type": "string"
+                },
+                "historical_mythic": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "ephemeral_support",
+                "recurring_support",
+                "persistent_major",
+                "historical_mythic"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "categories",
+            "guidance"
+          ],
+          "additionalProperties": true
+        },
+        "forbidden_scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "invariants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "implementation_notes": {
+          "type": "object",
+          "properties": {
+            "recommended_repo_location": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "companion_files_likely_needed_later": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "recommended_repo_location",
+            "companion_files_likely_needed_later"
+          ],
+          "additionalProperties": true
+        },
+        "ash_asp_core_math_rebuild_addendum": {
+          "type": "object",
+          "properties": {
+            "authority": {
+              "type": "string"
+            },
+            "math_basis": {
+              "type": "string"
+            },
+            "transition_semantics": {
+              "type": "string"
+            },
+            "required_packets": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "provenance_fields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "boundary_rule": {
+              "type": "string"
+            },
+            "artifact_records": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "consequence_rule": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "authority",
+            "math_basis",
+            "transition_semantics",
+            "required_packets",
+            "provenance_fields",
+            "boundary_rule",
+            "artifact_records",
+            "consequence_rule"
+          ],
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "version",
+        "compatibility_aliases",
+        "meta",
+        "position_in_stack",
+        "core_concepts",
+        "artifact_classes",
+        "artifact_role_taxonomy",
+        "artifact_generation_inputs",
+        "artifact_schema",
+        "significance_scoring",
+        "generation_pipeline",
+        "artifact_need_rules",
+        "symbolic_signature_rules",
+        "resonance_rules",
+        "interaction_modes",
+        "cost_and_risk_rules",
+        "truth_and_concealment_rules",
+        "artifact_origin_modes",
+        "faction_rules",
+        "quest_integration_rules",
+        "myth_and_prophecy_rules",
+        "perception_rules",
+        "worldstate_delta_hooks",
+        "persistence_rules",
+        "forbidden_scope",
+        "invariants",
+        "implementation_notes",
+        "ash_asp_core_math_rebuild_addendum"
+      ],
+      "additionalProperties": true,
+      "title": "ArtifactSystemRulesDocument",
+      "description": "Draft reviewed YWE document format policy. Structure and declared policy values only; no runtime execution or described semantic rejection certification.",
+      "x-ywe-requirement-id": "YWE-REQ-0032",
+      "x-ywe-source-ref": {
+        "path": "modules/artifact_engine/artifact_system_rules.yaml",
+        "pointer": ""
+      },
+      "x-ywe-format-policy": "Observed named sections are required by this new format policy. Extra fields remain open; unspecified string and array bounds are absent."
+    },
+    "CreatureSystemRulesDocument": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "system": {
+              "type": "string",
+              "const": "creature_system",
+              "x-ywe-source-ref": {
+                "path": "modules/creature_engine/creature_system_rules.yaml",
+                "pointer": "/meta/system"
+              }
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "doctrine": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "system",
+            "purpose",
+            "doctrine"
+          ],
+          "additionalProperties": true
+        },
+        "creature_classification": {
+          "type": "object",
+          "properties": {
+            "tiers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "enum": [
+                      "creature_tier_incidental",
+                      "creature_tier_significant",
+                      "creature_tier_mythic"
+                    ]
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "required_fields": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "optional_fields": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "id",
+                  "name",
+                  "description",
+                  "required_fields"
+                ],
+                "additionalProperties": true
+              }
+            }
+          },
+          "required": [
+            "tiers"
+          ],
+          "additionalProperties": true
+        },
+        "core_schema": {
+          "type": "object",
+          "properties": {
+            "CreatureTemplate": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "const": "string",
+                  "x-ywe-source-ref": {
+                    "path": "modules/creature_engine/creature_system_rules.yaml",
+                    "pointer": "/core_schema/CreatureTemplate/id"
+                  }
+                },
+                "tier": {
+                  "type": "string",
+                  "const": "creature_tier_incidental | creature_tier_significant | creature_tier_mythic",
+                  "x-ywe-source-ref": {
+                    "path": "modules/creature_engine/creature_system_rules.yaml",
+                    "pointer": "/core_schema/CreatureTemplate/tier"
+                  }
+                },
+                "creature_role": {
+                  "type": "string",
+                  "const": "string",
+                  "x-ywe-source-ref": {
+                    "path": "modules/creature_engine/creature_system_rules.yaml",
+                    "pointer": "/core_schema/CreatureTemplate/creature_role"
+                  }
+                },
+                "ecological_function": {
+                  "type": "string",
+                  "const": "string | null",
+                  "x-ywe-source-ref": {
+                    "path": "modules/creature_engine/creature_system_rules.yaml",
+                    "pointer": "/core_schema/CreatureTemplate/ecological_function"
+                  }
+                },
+                "manifestation_mode": {
+                  "type": "string",
+                  "const": "string",
+                  "x-ywe-source-ref": {
+                    "path": "modules/creature_engine/creature_system_rules.yaml",
+                    "pointer": "/core_schema/CreatureTemplate/manifestation_mode"
+                  }
+                },
+                "origin_pattern_cluster": {
+                  "type": "string",
+                  "const": "string",
+                  "x-ywe-source-ref": {
+                    "path": "modules/creature_engine/creature_system_rules.yaml",
+                    "pointer": "/core_schema/CreatureTemplate/origin_pattern_cluster"
+                  }
+                },
+                "realm_bias": {
+                  "type": "string",
+                  "const": "string",
+                  "x-ywe-source-ref": {
+                    "path": "modules/creature_engine/creature_system_rules.yaml",
+                    "pointer": "/core_schema/CreatureTemplate/realm_bias"
+                  }
+                },
+                "wolf_pressure_bias": {
+                  "type": "object",
+                  "properties": {
+                    "white_wolf": {
+                      "type": "string",
+                      "const": "float",
+                      "x-ywe-source-ref": {
+                        "path": "modules/creature_engine/creature_system_rules.yaml",
+                        "pointer": "/core_schema/CreatureTemplate/wolf_pressure_bias/white_wolf"
+                      }
+                    },
+                    "dark_wolf": {
+                      "type": "string",
+                      "const": "float",
+                      "x-ywe-source-ref": {
+                        "path": "modules/creature_engine/creature_system_rules.yaml",
+                        "pointer": "/core_schema/CreatureTemplate/wolf_pressure_bias/dark_wolf"
+                      }
+                    }
+                  },
+                  "required": [
+                    "white_wolf",
+                    "dark_wolf"
+                  ],
+                  "additionalProperties": true
+                },
+                "symbolic_signature": {
+                  "type": "array",
+                  "const": [
+                    "string"
+                  ],
+                  "x-ywe-source-ref": {
+                    "path": "modules/creature_engine/creature_system_rules.yaml",
+                    "pointer": "/core_schema/CreatureTemplate/symbolic_signature"
+                  }
+                },
+                "omen_tags": {
+                  "type": "array",
+                  "const": [
+                    "string"
+                  ],
+                  "x-ywe-source-ref": {
+                    "path": "modules/creature_engine/creature_system_rules.yaml",
+                    "pointer": "/core_schema/CreatureTemplate/omen_tags"
+                  }
+                },
+                "encounter_functions": {
+                  "type": "array",
+                  "const": [
+                    "string"
+                  ],
+                  "x-ywe-source-ref": {
+                    "path": "modules/creature_engine/creature_system_rules.yaml",
+                    "pointer": "/core_schema/CreatureTemplate/encounter_functions"
+                  }
+                },
+                "threat_profile": {
+                  "type": "object",
+                  "properties": {
+                    "aggression_mode": {
+                      "type": "string",
+                      "const": "string",
+                      "x-ywe-source-ref": {
+                        "path": "modules/creature_engine/creature_system_rules.yaml",
+                        "pointer": "/core_schema/CreatureTemplate/threat_profile/aggression_mode"
+                      }
+                    },
+                    "lethality": {
+                      "type": "string",
+                      "const": "float",
+                      "x-ywe-source-ref": {
+                        "path": "modules/creature_engine/creature_system_rules.yaml",
+                        "pointer": "/core_schema/CreatureTemplate/threat_profile/lethality"
+                      }
+                    },
+                    "volatility": {
+                      "type": "string",
+                      "const": "float",
+                      "x-ywe-source-ref": {
+                        "path": "modules/creature_engine/creature_system_rules.yaml",
+                        "pointer": "/core_schema/CreatureTemplate/threat_profile/volatility"
+                      }
+                    },
+                    "pursuit_logic": {
+                      "type": "string",
+                      "const": "string",
+                      "x-ywe-source-ref": {
+                        "path": "modules/creature_engine/creature_system_rules.yaml",
+                        "pointer": "/core_schema/CreatureTemplate/threat_profile/pursuit_logic"
+                      }
+                    }
+                  },
+                  "required": [
+                    "aggression_mode",
+                    "lethality",
+                    "volatility",
+                    "pursuit_logic"
+                  ],
+                  "additionalProperties": true
+                },
+                "truth_function": {
+                  "type": "string",
+                  "const": "string | null",
+                  "x-ywe-source-ref": {
+                    "path": "modules/creature_engine/creature_system_rules.yaml",
+                    "pointer": "/core_schema/CreatureTemplate/truth_function"
+                  }
+                },
+                "relationship_to_site": {
+                  "type": "string",
+                  "const": "string | null",
+                  "x-ywe-source-ref": {
+                    "path": "modules/creature_engine/creature_system_rules.yaml",
+                    "pointer": "/core_schema/CreatureTemplate/relationship_to_site"
+                  }
+                },
+                "relationship_to_faction": {
+                  "type": "string",
+                  "const": "string | null",
+                  "x-ywe-source-ref": {
+                    "path": "modules/creature_engine/creature_system_rules.yaml",
+                    "pointer": "/core_schema/CreatureTemplate/relationship_to_faction"
+                  }
+                },
+                "mythic_weight": {
+                  "type": "string",
+                  "const": "float | null",
+                  "x-ywe-source-ref": {
+                    "path": "modules/creature_engine/creature_system_rules.yaml",
+                    "pointer": "/core_schema/CreatureTemplate/mythic_weight"
+                  }
+                },
+                "perception_variance_profile": {
+                  "type": "object",
+                  "properties": {
+                    "allowed": {
+                      "type": "string",
+                      "const": "boolean",
+                      "x-ywe-source-ref": {
+                        "path": "modules/creature_engine/creature_system_rules.yaml",
+                        "pointer": "/core_schema/CreatureTemplate/perception_variance_profile/allowed"
+                      }
+                    },
+                    "variants": {
+                      "type": "array",
+                      "const": [
+                        "string"
+                      ],
+                      "x-ywe-source-ref": {
+                        "path": "modules/creature_engine/creature_system_rules.yaml",
+                        "pointer": "/core_schema/CreatureTemplate/perception_variance_profile/variants"
+                      }
+                    }
+                  },
+                  "required": [
+                    "allowed",
+                    "variants"
+                  ],
+                  "additionalProperties": true
+                },
+                "persistence_state": {
+                  "type": "object",
+                  "properties": {
+                    "can_recur": {
+                      "type": "string",
+                      "const": "boolean",
+                      "x-ywe-source-ref": {
+                        "path": "modules/creature_engine/creature_system_rules.yaml",
+                        "pointer": "/core_schema/CreatureTemplate/persistence_state/can_recur"
+                      }
+                    },
+                    "world_reactivity": {
+                      "type": "string",
+                      "const": "float",
+                      "x-ywe-source-ref": {
+                        "path": "modules/creature_engine/creature_system_rules.yaml",
+                        "pointer": "/core_schema/CreatureTemplate/persistence_state/world_reactivity"
+                      }
+                    },
+                    "loss_weight": {
+                      "type": "string",
+                      "const": "float",
+                      "x-ywe-source-ref": {
+                        "path": "modules/creature_engine/creature_system_rules.yaml",
+                        "pointer": "/core_schema/CreatureTemplate/persistence_state/loss_weight"
+                      }
+                    }
+                  },
+                  "required": [
+                    "can_recur",
+                    "world_reactivity",
+                    "loss_weight"
+                  ],
+                  "additionalProperties": true
+                },
+                "consequence_profile": {
+                  "type": "object",
+                  "properties": {
+                    "death_significance": {
+                      "type": "string",
+                      "const": "string | null",
+                      "x-ywe-source-ref": {
+                        "path": "modules/creature_engine/creature_system_rules.yaml",
+                        "pointer": "/core_schema/CreatureTemplate/consequence_profile/death_significance"
+                      }
+                    },
+                    "residue_type": {
+                      "type": "string",
+                      "const": "string | null",
+                      "x-ywe-source-ref": {
+                        "path": "modules/creature_engine/creature_system_rules.yaml",
+                        "pointer": "/core_schema/CreatureTemplate/consequence_profile/residue_type"
+                      }
+                    },
+                    "myth_seed_bias": {
+                      "type": "string",
+                      "const": "float | null",
+                      "x-ywe-source-ref": {
+                        "path": "modules/creature_engine/creature_system_rules.yaml",
+                        "pointer": "/core_schema/CreatureTemplate/consequence_profile/myth_seed_bias"
+                      }
+                    }
+                  },
+                  "required": [
+                    "death_significance",
+                    "residue_type",
+                    "myth_seed_bias"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "required": [
+                "id",
+                "tier",
+                "creature_role",
+                "ecological_function",
+                "manifestation_mode",
+                "origin_pattern_cluster",
+                "realm_bias",
+                "wolf_pressure_bias",
+                "symbolic_signature",
+                "omen_tags",
+                "encounter_functions",
+                "threat_profile",
+                "truth_function",
+                "relationship_to_site",
+                "relationship_to_faction",
+                "mythic_weight",
+                "perception_variance_profile",
+                "persistence_state",
+                "consequence_profile"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "CreatureTemplate"
+          ],
+          "additionalProperties": true
+        },
+        "creature_generation_pipeline": {
+          "type": "object",
+          "properties": {
+            "steps": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "steps"
+          ],
+          "additionalProperties": true
+        },
+        "manifestation_modes": {
+          "type": "object",
+          "properties": {
+            "supported": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "supported",
+            "rules"
+          ],
+          "additionalProperties": true
+        },
+        "creature_role_rules": {
+          "type": "object",
+          "properties": {
+            "roles": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "role_bias_by_pattern_cluster": {
+              "type": "object",
+              "properties": {
+                "cluster_hidden_knowledge": {
+                  "type": "object",
+                  "properties": {
+                    "preferred": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "preferred"
+                  ],
+                  "additionalProperties": true
+                },
+                "cluster_protection_oath_continuity": {
+                  "type": "object",
+                  "properties": {
+                    "preferred": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "preferred"
+                  ],
+                  "additionalProperties": true
+                },
+                "cluster_civilization_order_founding": {
+                  "type": "object",
+                  "properties": {
+                    "preferred": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "preferred"
+                  ],
+                  "additionalProperties": true
+                },
+                "cluster_catastrophe_reckoning": {
+                  "type": "object",
+                  "properties": {
+                    "preferred": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "preferred"
+                  ],
+                  "additionalProperties": true
+                },
+                "cluster_awakening_origin_discovery": {
+                  "type": "object",
+                  "properties": {
+                    "preferred": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "preferred"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "required": [
+                "cluster_hidden_knowledge",
+                "cluster_protection_oath_continuity",
+                "cluster_civilization_order_founding",
+                "cluster_catastrophe_reckoning",
+                "cluster_awakening_origin_discovery"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "roles",
+            "role_bias_by_pattern_cluster"
+          ],
+          "additionalProperties": true
+        },
+        "realm_bias_rules": {
+          "type": "object",
+          "properties": {
+            "divine_core": {
+              "type": "object",
+              "properties": {
+                "favored_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "discouraged_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "favored_traits",
+                "discouraged_traits"
+              ],
+              "additionalProperties": true
+            },
+            "celestial": {
+              "type": "object",
+              "properties": {
+                "favored_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "discouraged_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "favored_traits",
+                "discouraged_traits"
+              ],
+              "additionalProperties": true
+            },
+            "causal": {
+              "type": "object",
+              "properties": {
+                "favored_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "discouraged_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "favored_traits",
+                "discouraged_traits"
+              ],
+              "additionalProperties": true
+            },
+            "mental": {
+              "type": "object",
+              "properties": {
+                "favored_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "discouraged_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "favored_traits",
+                "discouraged_traits"
+              ],
+              "additionalProperties": true
+            },
+            "astral": {
+              "type": "object",
+              "properties": {
+                "favored_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "discouraged_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "favored_traits",
+                "discouraged_traits"
+              ],
+              "additionalProperties": true
+            },
+            "etheric": {
+              "type": "object",
+              "properties": {
+                "favored_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "discouraged_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "favored_traits",
+                "discouraged_traits"
+              ],
+              "additionalProperties": true
+            },
+            "physical": {
+              "type": "object",
+              "properties": {
+                "favored_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "discouraged_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "favored_traits",
+                "discouraged_traits"
+              ],
+              "additionalProperties": true
+            },
+            "shadow": {
+              "type": "object",
+              "properties": {
+                "favored_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "discouraged_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "favored_traits",
+                "discouraged_traits"
+              ],
+              "additionalProperties": true
+            },
+            "void": {
+              "type": "object",
+              "properties": {
+                "favored_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "discouraged_traits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "favored_traits",
+                "discouraged_traits"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "divine_core",
+            "celestial",
+            "causal",
+            "mental",
+            "astral",
+            "etheric",
+            "physical",
+            "shadow",
+            "void"
+          ],
+          "additionalProperties": true
+        },
+        "wolf_pressure_bias_rules": {
+          "type": "object",
+          "properties": {
+            "white_wolf_bias_effects": {
+              "type": "object",
+              "properties": {
+                "favored": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "favored"
+              ],
+              "additionalProperties": true
+            },
+            "dark_wolf_bias_effects": {
+              "type": "object",
+              "properties": {
+                "favored": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "favored"
+              ],
+              "additionalProperties": true
+            },
+            "constraints": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "white_wolf_bias_effects",
+            "dark_wolf_bias_effects",
+            "constraints"
+          ],
+          "additionalProperties": true
+        },
+        "symbolic_signature_rules": {
+          "type": "object",
+          "properties": {
+            "source_pools": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "requirements": {
+              "type": "object",
+              "properties": {
+                "minimum": {
+                  "type": "integer",
+                  "const": 1,
+                  "x-ywe-source-ref": {
+                    "path": "modules/creature_engine/creature_system_rules.yaml",
+                    "pointer": "/symbolic_signature_rules/requirements/minimum"
+                  }
+                },
+                "recommended": {
+                  "type": "string"
+                },
+                "rules": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "minimum",
+                "recommended",
+                "rules"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "source_pools",
+            "requirements"
+          ],
+          "additionalProperties": true
+        },
+        "truth_function_rules": {
+          "type": "object",
+          "properties": {
+            "truth_functions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "distribution_guidance": {
+              "type": "object",
+              "properties": {
+                "incidental": {
+                  "type": "object",
+                  "properties": {
+                    "likely": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "likely"
+                  ],
+                  "additionalProperties": true
+                },
+                "significant": {
+                  "type": "object",
+                  "properties": {
+                    "likely": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "likely"
+                  ],
+                  "additionalProperties": true
+                },
+                "mythic": {
+                  "type": "object",
+                  "properties": {
+                    "likely": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "likely"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "required": [
+                "incidental",
+                "significant",
+                "mythic"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "truth_functions",
+            "distribution_guidance"
+          ],
+          "additionalProperties": true
+        },
+        "encounter_function_rules": {
+          "type": "object",
+          "properties": {
+            "encounter_functions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "mandatory_rules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "encounter_functions",
+            "mandatory_rules"
+          ],
+          "additionalProperties": true
+        },
+        "threat_profile_rules": {
+          "type": "object",
+          "properties": {
+            "aggression_modes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "lethality_guidance": {
+              "type": "object",
+              "properties": {
+                "incidental": {
+                  "type": "object",
+                  "properties": {
+                    "range": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "range"
+                  ],
+                  "additionalProperties": true
+                },
+                "significant": {
+                  "type": "object",
+                  "properties": {
+                    "range": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "range"
+                  ],
+                  "additionalProperties": true
+                },
+                "mythic": {
+                  "type": "object",
+                  "properties": {
+                    "range": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "range"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "required": [
+                "incidental",
+                "significant",
+                "mythic"
+              ],
+              "additionalProperties": true
+            },
+            "constraints": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "aggression_modes",
+            "lethality_guidance",
+            "constraints"
+          ],
+          "additionalProperties": true
+        },
+        "site_binding_rules": {
+          "type": "object",
+          "properties": {
+            "relationship_to_site_options": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "relationship_to_site_options",
+            "rules"
+          ],
+          "additionalProperties": true
+        },
+        "faction_binding_rules": {
+          "type": "object",
+          "properties": {
+            "relationship_to_faction_options": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "relationship_to_faction_options",
+            "rules"
+          ],
+          "additionalProperties": true
+        },
+        "myth_and_prophecy_hooks": {
+          "type": "object",
+          "properties": {
+            "myth_hooks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "prophecy_hooks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "myth_hooks",
+            "prophecy_hooks",
+            "rules"
+          ],
+          "additionalProperties": true
+        },
+        "perception_variance_rules": {
+          "type": "object",
+          "properties": {
+            "doctrine": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "allowed_variants": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "forbidden_variants": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "doctrine",
+            "allowed_variants",
+            "forbidden_variants"
+          ],
+          "additionalProperties": true
+        },
+        "persistence_rules": {
+          "type": "object",
+          "properties": {
+            "recurrence_classes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "loss_weight_guidance": {
+              "type": "object",
+              "properties": {
+                "incidental": {
+                  "type": "object",
+                  "properties": {
+                    "default": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "default"
+                  ],
+                  "additionalProperties": true
+                },
+                "significant": {
+                  "type": "object",
+                  "properties": {
+                    "default": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "default"
+                  ],
+                  "additionalProperties": true
+                },
+                "mythic": {
+                  "type": "object",
+                  "properties": {
+                    "default": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "default"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "required": [
+                "incidental",
+                "significant",
+                "mythic"
+              ],
+              "additionalProperties": true
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "recurrence_classes",
+            "loss_weight_guidance",
+            "rules"
+          ],
+          "additionalProperties": true
+        },
+        "consequence_rules": {
+          "type": "object",
+          "properties": {
+            "outcome_domains": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "outcome_domains",
+            "rules"
+          ],
+          "additionalProperties": true
+        },
+        "forbidden_scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validation_rules": {
+          "type": "object",
+          "properties": {
+            "hard_fail": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "soft_fail": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "hard_fail",
+            "soft_fail"
+          ],
+          "additionalProperties": true
+        },
+        "example_generation_frames": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "likely_configuration": {
+                "type": "object",
+                "properties": {
+                  "tier": {
+                    "type": "string",
+                    "enum": [
+                      "creature_tier_incidental",
+                      "creature_tier_significant",
+                      "creature_tier_mythic"
+                    ]
+                  },
+                  "manifestation_mode": {
+                    "type": "string"
+                  },
+                  "creature_role": {
+                    "type": "string"
+                  },
+                  "realm_bias": {
+                    "type": "string"
+                  },
+                  "truth_function": {
+                    "type": "string"
+                  },
+                  "encounter_functions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "tier",
+                  "manifestation_mode",
+                  "creature_role",
+                  "realm_bias",
+                  "truth_function",
+                  "encounter_functions"
+                ],
+                "additionalProperties": true
+              }
+            },
+            "required": [
+              "id",
+              "description",
+              "likely_configuration"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "ash_asp_core_math_rebuild_addendum": {
+          "type": "object",
+          "properties": {
+            "authority": {
+              "type": "string"
+            },
+            "math_basis": {
+              "type": "string"
+            },
+            "transition_semantics": {
+              "type": "string"
+            },
+            "required_packets": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "provenance_fields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "boundary_rule": {
+              "type": "string"
+            },
+            "creature_records": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "behavior_rule": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "authority",
+            "math_basis",
+            "transition_semantics",
+            "required_packets",
+            "provenance_fields",
+            "boundary_rule",
+            "creature_records",
+            "behavior_rule"
+          ],
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "version",
+        "meta",
+        "creature_classification",
+        "core_schema",
+        "creature_generation_pipeline",
+        "manifestation_modes",
+        "creature_role_rules",
+        "realm_bias_rules",
+        "wolf_pressure_bias_rules",
+        "symbolic_signature_rules",
+        "truth_function_rules",
+        "encounter_function_rules",
+        "threat_profile_rules",
+        "site_binding_rules",
+        "faction_binding_rules",
+        "myth_and_prophecy_hooks",
+        "perception_variance_rules",
+        "persistence_rules",
+        "consequence_rules",
+        "forbidden_scope",
+        "validation_rules",
+        "example_generation_frames",
+        "ash_asp_core_math_rebuild_addendum"
+      ],
+      "additionalProperties": true,
+      "title": "CreatureSystemRulesDocument",
+      "description": "Draft reviewed YWE document format policy. Structure and declared policy values only; no runtime execution or described semantic rejection certification.",
+      "x-ywe-requirement-id": "YWE-REQ-0032",
+      "x-ywe-source-ref": {
+        "path": "modules/creature_engine/creature_system_rules.yaml",
+        "pointer": ""
+      },
+      "x-ywe-format-policy": "Observed named sections are required by this new format policy. Extra fields remain open; unspecified string and array bounds are absent."
+    },
+    "QuestChainTemplatesDocument": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "const": "active_contract",
+          "x-ywe-source-ref": {
+            "path": "modules/quest_engine/quest_chain_templates.yaml",
+            "pointer": "/status"
+          }
+        },
+        "contract_id": {
+          "type": "string",
+          "const": "ywe.modules.quest_engine.quest_chain_templates.v1",
+          "x-ywe-source-ref": {
+            "path": "modules/quest_engine/quest_chain_templates.yaml",
+            "pointer": "/contract_id"
+          }
+        },
+        "phase": {
+          "type": "integer",
+          "const": 12,
+          "x-ywe-source-ref": {
+            "path": "modules/quest_engine/quest_chain_templates.yaml",
+            "pointer": "/phase"
+          }
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "system": {
+              "type": "string",
+              "const": "quest_chain_templates",
+              "x-ywe-source-ref": {
+                "path": "modules/quest_engine/quest_chain_templates.yaml",
+                "pointer": "/meta/system"
+              }
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "schema": {
+              "type": "string",
+              "const": "data/schemas/quest_npc_lore_generation_schema.json",
+              "x-ywe-source-ref": {
+                "path": "modules/quest_engine/quest_chain_templates.yaml",
+                "pointer": "/meta/schema"
+              }
+            }
+          },
+          "required": [
+            "system",
+            "purpose",
+            "schema"
+          ],
+          "additionalProperties": true
+        },
+        "authority": {
+          "type": "object",
+          "properties": {
+            "current_authority_sequence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "required_packets": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "provenance_fields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "current_authority_sequence",
+            "required_packets",
+            "provenance_fields"
+          ],
+          "additionalProperties": true
+        },
+        "quest_records": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "template_laws": {
+          "type": "object",
+          "properties": {
+            "independent_random_quest_template_allowed": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "modules/quest_engine/quest_chain_templates.yaml",
+                "pointer": "/template_laws/independent_random_quest_template_allowed"
+              }
+            },
+            "materialization_requires_generation_plan": {
+              "type": "boolean",
+              "const": true,
+              "x-ywe-source-ref": {
+                "path": "modules/quest_engine/quest_chain_templates.yaml",
+                "pointer": "/template_laws/materialization_requires_generation_plan"
+              }
+            },
+            "host_adapter_may_author_quest_truth": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "modules/quest_engine/quest_chain_templates.yaml",
+                "pointer": "/template_laws/host_adapter_may_author_quest_truth"
+              }
+            },
+            "minimum_mode_count": {
+              "type": "integer",
+              "minimum": 2,
+              "x-ywe-source-ref": {
+                "path": "modules/quest_engine/quest_chain_templates.yaml",
+                "pointer": "/template_laws/minimum_mode_count"
+              }
+            },
+            "completion_rule": {
+              "type": "string"
+            },
+            "worldstate_rule": {
+              "type": "string"
+            },
+            "branch_rule": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "independent_random_quest_template_allowed",
+            "materialization_requires_generation_plan",
+            "host_adapter_may_author_quest_truth",
+            "minimum_mode_count",
+            "completion_rule",
+            "worldstate_rule",
+            "branch_rule"
+          ],
+          "additionalProperties": true
+        },
+        "allowed_completion_modes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "reveal",
+              "conceal",
+              "contain",
+              "reconcile",
+              "sacrifice",
+              "defer"
+            ]
+          }
+        },
+        "forbidden_templates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validation_markers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "version",
+        "status",
+        "contract_id",
+        "phase",
+        "meta",
+        "authority",
+        "quest_records",
+        "template_laws",
+        "allowed_completion_modes",
+        "forbidden_templates",
+        "validation_markers"
+      ],
+      "additionalProperties": true,
+      "title": "QuestChainTemplatesDocument",
+      "description": "Draft reviewed YWE document format policy. Structure and declared policy values only; no runtime execution or described semantic rejection certification.",
+      "x-ywe-requirement-id": "YWE-REQ-0032",
+      "x-ywe-source-ref": {
+        "path": "modules/quest_engine/quest_chain_templates.yaml",
+        "pointer": ""
+      },
+      "x-ywe-format-policy": "Observed named sections are required by this new format policy. Extra fields remain open; unspecified string and array bounds are absent."
+    }
+  }
+}

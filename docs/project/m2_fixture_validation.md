@@ -35,9 +35,9 @@ actual schema rather than descriptive metadata.
 
 The dialect remains JSON Schema 2020-12. `format` remains an annotation under
 this profile; this increment does not establish new date/time parser semantics.
-Recovery, replay, and migration categories are reserved for future executable
-coverage. The current cases exercise structural positive, boundary, and reject
-behavior and do not certify runtime recovery, replay, or migration algorithms.
+Recovery, replay, and migration categories also execute the validation operations
+described below. Their scope is schema validation and protected schema proof
+compatibility; runtime lifecycle protocols remain separate roadmap work.
 
 Run the focused check with `python scripts/check_fixture_catalog.py .`. The
 blocking `m2_fixture_catalog` check is also registered in
@@ -47,10 +47,11 @@ uses successful catalog results when computing remaining example-binding debt.
 Examples with historical inline schema labels retain their existing debt
 treatment; those labels alone do not establish executed instance conformance.
 
-This is an incremental catalog. Remaining descriptive examples, incompatible
-historical packets, full lifecycle fixtures, and the roadmap-derived M2
-acceptance evidence still need completion. An empty binding-debt list
-alone would not satisfy every M2 deliverable.
+The catalog now binds the classified structured fixture units, including
+descriptive formats and source-bound intended rejections. The roadmap-derived
+M2 acceptance evidence still needs completion. An empty binding-debt list alone
+does not satisfy every M2 deliverable. Later milestones own full runtime packets
+and lifecycle protocols.
 
 ## M2 Readiness Evaluation
 
@@ -59,8 +60,9 @@ evaluates the roadmap's six exit criteria and eight deliverables. It MUST retain
 an exact ordered mapping of those obligations and return a failing readiness
 result while any obligation is failed or unverified. [YWE-REQ-0023]
 The normal suite runs only `--check-definition`; that passing check verifies the
-mapping and does not accept M2. Method-specific validation coverage and durable
-milestone acceptance evidence still have unverified evaluators.
+mapping and does not accept M2. Method-specific validation now executes the eight
+methods described below. Durable milestone acceptance still requires its recorded
+immutable evidence and the full current clean-checkout gate.
 
 The evaluator enumerates every JSON/YAML path classified as an example, including
 examples outside `examples/`. Historical inline labels provide no executed binding.
@@ -82,7 +84,7 @@ The offline option denies remote Git protocols during the checks. Schema resolut
 independently denies unknown resources through the fixture checker. Dependencies
 must be prepared before execution. These controls do not attest that the host's
 network interfaces were disabled. A passing normal suite alone remains insufficient
-for the unimplemented domain and lifecycle obligations.
+for all fourteen independently evaluated M2 obligations.
 
 ## Historical Representation and Preview Bindings
 
@@ -271,3 +273,138 @@ wrong types or empty legacy strings. The four original full roots are independen
 bound to their complete schemas. The legacy `QD-001` subledger is resolved after
 all four debt categories became empty and all 505 catalog bindings passed with
 offline references; strict M2 coverage and acceptance obligations remain open.
+
+## Ravenfall Preview Formats
+
+The seventeen original recovery-minimum and Phase16 preview roots MUST satisfy
+their explicit serialized format definitions. [YWE-REQ-0031] The definitions type
+the observed metadata, branch outcomes, quest stages, NPC descriptions, lore
+descriptions and eligibility descriptions. Requiring their named fields is a new
+reviewed format policy. The source-owned five completion verbs and exclusion
+flags remain explicit constraints; descriptive truth labels, nullable no-op
+references, open containers and unspecified empty-value boundaries remain available.
+
+Recovery-minimum descriptions retain `acceptance.complete=false`. Format acceptance
+does not supply missing canonical runtime references, establish relation graphs
+from prose, or complete a playtest. The original examples remain unchanged.
+
+## YAML Policy Document Formats
+
+The remaining twenty domain YAML policy and descriptor roots MUST satisfy their
+declared structural document formats. [YWE-REQ-0032] These static definitions type
+the observed named sections, nested fields and heterogeneous optional records.
+Literal descriptor tokens remain source data; `boolean`, `float`, range-looking
+strings and singleton type-token lists do not become runtime values or algorithms.
+
+Source-owned fixed identities and flags have exact annotations. Extra fields and
+unspecified cardinality remain open. Whole-document acceptance establishes format
+conformance; dependency resolution, unlawful-example rejection and domain behavior
+require their own executed evidence. In particular, the realm collection's lawful
+records and unlawful descriptions retain separate roles.
+
+## Validation Operation Fixtures
+
+Recovery, replay and migration categories MUST count only exact accepted operation
+cases with successful complete executed stages. [YWE-REQ-0033] Their separate
+expectation ledger records operation identities, case pointers and stage results.
+Schema-format acceptance or relabelling an unrelated positive fixture cannot
+establish an executed operation.
+
+The recovery case validates a known accepted retry input, rejects its explicitly
+invalid delay with the complete intended witness, restores the original and
+validates it again. Replay independently reloads and validates accepted and rejected
+inputs twice, preserving their complete results. Migration executes the existing
+immutable protected descriptor-to-schema compatibility proofs. Inputs, schemas
+and protected history remain unchanged during execution.
+
+These are actual validation operations. They do not certify engine state restoration,
+event-log application, transactional rollback, multiplayer idempotency or save-data
+conversion; those protocols belong to later milestones.
+
+## Governed Positive Expectation Identities
+
+Accepted fixture entries MUST carry unique, nonempty `expected_requirement_ids`
+that resolve to active registered obligations. Additional contract-specific claims
+MUST match the exact selected schema's requirement annotation and the registered
+source that owns that surface. [YWE-REQ-0034] Unknown, retired and unrelated
+identifiers cannot establish acceptance, including an annotation whose registered
+source belongs elsewhere.
+
+`YWE-REQ-0020` identifies explicit fixture selection and complete result matching.
+Its baseline binding on accepted cases establishes that foundation obligation.
+Preview cases additionally identify their owned format requirement where registered.
+These identities do not claim complete domain-clause coverage. The historical
+`YWE-M2-*` assertion labels remain distinct from governed requirement identities;
+full domain traceability remains an M9 obligation.
+
+## Realm Rejection Assertions
+
+Each unlawful realm guidance unit MUST retain its exact identity, summary and
+complete violated-rule binding when its intended rejection is evaluated.
+[YWE-REQ-0035] The two original descriptions supply no complete transition
+packets. Explicit boolean assertion controls therefore represent only the named
+attunement, boundary, fast-travel and shared-truth constraints.
+
+Each executed constant identifies its exact realm rule source. Strict boolean
+inverses produce complete rejection witnesses; accepted controls establish that
+the assertion can distinguish the permitted and forbidden values. These scoped
+vectors do not certify unrepresented transition fields or runtime realm behavior.
+Serialized acceptance of the unlawful descriptions remains a separate format check.
+
+## Executed Validation Methods
+
+Every M2 validation method MUST execute nonempty, complete, successful cases;
+method names and check mappings alone cannot establish coverage. [YWE-REQ-0036]
+The explicit expectation ledger fixes the eight methods and selected controls.
+The evaluator checks normative meta-schemas, all exact fixture instances, every
+actual schema reference including unused branches, schema and fixture identity
+uniqueness, descriptor dependencies, and complete negative witnesses.
+
+Source-driven property cases exercise every member of the seven module enum
+families and removal of each source-required field. Three isolated assertion
+mutants remove the wolf morality constraint, identifier length bound and reference
+kind requirement. Each must preserve its accepted control and cause the exact
+rejecting control to fail its recorded expectation. Deep-copied offline registries
+keep source schemas unchanged. This method evidence covers schema validation;
+domain state-machine, runtime dependency and scheduling conformance remain later work.
+
+## Approved Descriptor Execution Correspondence
+
+Every source-bound rejection scenario MUST match its separately reviewed entry in
+`data/validation/rejection_execution_contracts.json` before it discharges
+intended-reason coverage. [YWE-REQ-0038] The approval preserves the descriptor identity, source
+digest, reason and content bindings, mode and scope, subject or mutation base,
+operations, complete witnesses, lexical rules, projections and scalar owners.
+Only the cosmetic description is excluded from correspondence; an omitted unit
+pointer denotes the root. The complete catalog MUST have a one-to-one approval
+inventory, with no unknown, duplicate, missing or unused approval.
+
+The evaluator first executes the existing source-binding, exact-witness and
+owning-assertion checks, then compares the successful execution to its approval.
+The candidate catalog MUST NOT authorize itself. A new or changed scenario
+requires a reviewed approval change. These explicit mappings establish scoped
+rejection intent without interpreting prose as executable constraints or
+claiming complete runtime packet acceptance.
+
+## Durable Acceptance Evidence
+
+M2 acceptance MUST preserve the actual complete clean, unfiltered, offline
+repository report, all fourteen roadmap judgments, concrete method and operation
+executions, and the tested source state. [YWE-REQ-0037] A pending record cannot
+establish acceptance. Evidence formation executes C1-C6 and D1-D7 while D8 stays
+explicitly pending; the completed record is introduced only after that source
+revision has passed its actual full suite.
+
+The introduction must change only the fixed JSON and Markdown evidence pair.
+The verifier derives that first passing commit from Git history, verifies the
+same source digest and file modes, and rejects later edits or deletions, including
+edits subsequently restored or merged from a side branch. It replays all thirteen
+substantive obligations and complete D6/D7 case results from the recorded local
+source snapshot. Current clean-checkout evidence remains a separate C6 requirement
+for the final gate and milestone promotion.
+
+Historical replay uses the prepared current Python and libraries. The immutable
+report captures the original tool versions and direct dependency pins; the verifier
+does not recreate an old interpreter installation or recursively execute the
+full repository runner. The captured actual runner report remains executed evidence,
+with its catalog, scope and complete results checked against that exact source.

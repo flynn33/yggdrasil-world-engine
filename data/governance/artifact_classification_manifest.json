@@ -7,8 +7,8 @@
   "scope_manifest_ref": "data/governance/scope_partition_manifest.json",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1134,
-    "path_digest": "e57be6b49e6238c032e7d08a3bf66805f8e0bb71d82a0e1de784744c953e78a5",
+    "path_count": 1158,
+    "path_digest": "0ef406c36546d87cf8c835e12aa48e5fac5356883ed2bc358555740d7ce8796b",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "classes": [
@@ -1682,6 +1682,22 @@
       "secondary_tags": [
         "public_surface"
       ]
+    },
+    {
+      "path": "data/governance/m2_acceptance_evidence.json",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "This pending then immutable record preserves M2 acceptance chronology without defining requirements or gate logic.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "This pending then immutable record preserves M2 acceptance chronology without defining requirements or gate logic.",
+      "authority_role": "supporting"
     }
   ],
   "sensitive_source_hash_algorithm": "sha256_utf8_lf_normalized",
@@ -1692,7 +1708,7 @@
     },
     {
       "path": "data/governance/specification_roadmap.json",
-      "sha256": "d5c684fbe4ade6d711ac24bc24a096dbc031b9fc52fe16f62da9d6d206ec1d32"
+      "sha256": "54aa61e9d70488776a2a84813ab304d24bcacedaf4dd81b3f5cec334ab96b544"
     },
     {
       "path": "docs/project/artifact_classification_policy.md",
@@ -1714,10 +1730,10 @@
   "coverage": {
     "counts_by_class": {
       "deprecated": 1,
-      "example": 169,
-      "historical": 12,
+      "example": 173,
+      "historical": 14,
       "informative": 105,
-      "normative": 797,
+      "normative": 815,
       "placeholder": 44,
       "superseded": 6
     }

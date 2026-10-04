@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-18
+**Revision:** planning-19
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-17; full history remains in Git.
+**Supersedes:** planning-18; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -340,6 +340,66 @@ implementation revision. GitHub reported the authorized pull-request and verifie
 signature rule bypass. M2 remains active, M3 remains planned, and development
 continues with the remaining format bindings and acceptance evaluators.
 
+## 8c. Remaining formats and validation operations
+
+The seventeen original recovery-minimum and Phase16 preview roots now have
+explicit typed formats. The twenty remaining YAML policy roots and five realm
+collection records have exact structural bindings. Original source bytes remain
+unchanged. Recovery-minimum descriptions retain `acceptance.complete=false`;
+format acceptance does not promote descriptive previews to completed runtime
+packets. Governed positive expectation identities establish actual fixture
+selection and result matching, with narrower identities tied to resolved schema
+ownership.
+
+Four concrete validation operations execute recovery, replay and protected
+migration proofs. The full registered descriptor semantic pipeline is included
+in validation replay. Two scoped realm assertion scenarios bind the original
+unlawful units to their actual violated rules, rejecting both cross-unit vector
+swaps and omitted declared-rule witnesses. Focused checks passed 669 exact
+bindings, including 246 structural or semantic rejections, 26 source-bound
+scenarios, 49 fixture tests, 79 rejection tests and 35 operation tests. These
+focused results do not establish clean-checkout M2 acceptance.
+
+Independent review identified the ownership alias and replay semantic omissions
+and the two realm correspondence escapes. The implementation includes regression
+coverage for each. Eight-method execution now passes its actual consumers and focused tests.
+Immutable acceptance evidence is being integrated next. No milestone promotion
+is recorded.
+
+The previous planning-18 checkpoint at
+`3cd1ac6d81bc51ee9231b29e94d80558537d8154` also passed the manual Main CI run
+`37211339161` on GitHub. That CI result belongs to the previous checkpoint.
+The new increment still requires its normal suite, frozen checkout and final
+diff verification before publication.
+
+## 8d. Final integrated verification and rejection correspondence
+
+The initial integrated normal run passed all 674 unit tests and 35 of its 36
+applicable checks. The remaining branch-language check reported two rejected
+literals whose expanded JSON formatting had separated them from their forbidden
+source context. Serialization-only corrections preserved typed JSON values and
+the scanner; the actual branch check now passes.
+
+Independent review reproduced four original whole-execution substitutions:
+both Phase17 wolf morality/permanent-death swaps and both player morality/ASP
+authority swaps. Each retained its descriptor identity and reason but executed
+an unrelated rejection, which the coverage consumer incorrectly counted.
+YWE-REQ-0038 and ADR-0028 introduce a separate reviewed execution-contract ledger.
+All 26 existing mappings were independently audited against their source owners
+and exact scope. The evaluator executes the existing ownership and witness
+checks, then requires exact approval correspondence before returning coverage.
+Unknown, missing, altered, duplicate and unused approvals cannot clear the full
+catalog check. The integrated focused rejection suite passed 95 tests in 24.332
+seconds, including the four original substitutions.
+
+The candidate now binds 672 instances, including 246 intended schema or semantic
+rejections, with 26 separately approved source-bound scenario executions.
+Repository classification covers 1,158 paths and 212 declared schemas. The four
+legacy schema-debt categories remain empty. The frozen clean full-suite execution
+and immutable M2 evidence introduction remain outstanding; M2 is still active
+and M3 remains planned. README now includes this development checkpoint so the
+owner can follow progress on GitHub between accepted milestone gates.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -350,21 +410,22 @@ The containing commit is the authoritative save point.
 
 ## 10. Checkpoint
 
-**Current step:** M2 readiness, complete fixture bindings, and YAML structural conformance; milestone
-acceptance remains outstanding.
+**Current step:** Frozen clean-checkout M2 verification and immutable acceptance
+evidence introduction. All eight methods and reviewed rejection correspondence
+are integrated; final acceptance remains outstanding.
 
 **Completed:** Executable JSON fixture foundation and offline resolver, compatible
 Phase 12 representations, current development-policy intake, and initial YAML
 module-manifest and pattern-archetype structural schemas and bindings, original
 example bindings, and strict readiness/execution reports.
 
-**Next action:** Complete remaining fixture bindings and lifecycle coverage, then build
-the remaining acceptance evaluators and durable evidence. Continue to later
+**Next action:** Execute the complete frozen clean suite, record immutable
+acceptance evidence, and run the complete final gate. Continue to later
 milestones only after verified M2 closure.
 
 **Needed from owner:** Nothing for continued M2 engineering.
 
-**Saved at:** `main`, in the commit containing this planning-18 record. The latest
+**Saved at:** `main`, in the previous planning-18 checkpoint; this planning-19 candidate is not yet published. The latest
 validated implementation is `358f4ad1a9db419ed9cc91b96c1f309f49bf946f`. The prior
 validated implementation is `b0b0a6934fbc96f050d0cd656985a790d984c206`; the preceding
 validated implementation is `ab1080b1c1b60a9e379d5cd25f52db2ec418a729`; the earlier

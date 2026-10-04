@@ -1,0 +1,190 @@
+{
+  "artifact_type": "yaml_policy_document_cases",
+  "artifact_version": "1.0.0",
+  "positive": {
+    "runtime_flow_step": {
+      "step": 1,
+      "name": "sample",
+      "inputs": [],
+      "emits": []
+    },
+    "location_scalar_pipeline": {
+      "step": "sample",
+      "input": "sample",
+      "output": "sample"
+    },
+    "location_array_pipeline": {
+      "step": "sample",
+      "input": [
+        "sample"
+      ],
+      "output": [
+        "sample"
+      ]
+    },
+    "realm_guidance_record_format": {
+      "example_id": "sample",
+      "source_realm": "sample",
+      "target_realm": "sample",
+      "site_class": "sample",
+      "boundary_profile_id": "sample",
+      "attempted_mode": "sample",
+      "allowed_outcome": "sample",
+      "preconditions": {
+        "attunement_band": "",
+        "boundary_state": "",
+        "required_flags": [],
+        "blocked_by": []
+      },
+      "side_effects": [],
+      "reconciliation_requirements": [],
+      "notes": []
+    }
+  },
+  "boundary": {
+    "runtime_flow_optional_sections": {
+      "step": -1,
+      "name": "",
+      "inputs": [],
+      "emits": [],
+      "requires": [],
+      "boundary": "",
+      "future_field": null
+    },
+    "character_empty_rules": [],
+    "lore_unbounded_rule_string": [
+      "",
+      ""
+    ],
+    "npc_open_alias_metadata": {
+      "status": "deprecated",
+      "canonical_rule": "npc_memory_history_append_only",
+      "behavior": "exact_semantic_alias",
+      "future_field": null
+    },
+    "player_pipeline_empty_strings": {
+      "step": "",
+      "input": "",
+      "output": "",
+      "extension": {}
+    },
+    "generation_mode_more_than_two": 3,
+    "worldstate_empty_context_array": [],
+    "location_mixed_empty_pipeline": {
+      "step": "",
+      "input": [],
+      "output": "",
+      "extension": true
+    },
+    "anchor_integer_unspecified_range": -1,
+    "faction_bands_are_strings": "",
+    "compatibility_empty_relations": {
+      "sample": {
+        "compatible": [],
+        "friction": [],
+        "contradiction": []
+      }
+    },
+    "compatibility_duplicate_relations": {
+      "sample": {
+        "compatible": [
+          "sample",
+          "sample"
+        ],
+        "friction": [],
+        "contradiction": []
+      }
+    },
+    "generation_placeholder_open_map": {
+      "future_field": [
+        null,
+        true,
+        1
+      ]
+    },
+    "perception_modifier_unbounded": -100.0,
+    "boundary_catalog_empty_array": [],
+    "realm_optional_profile_notes": {
+      "baseline_meaning": [],
+      "behavior_tags": [],
+      "lawful_bias": {
+        "stability": "",
+        "volatility": "",
+        "permeability": ""
+      },
+      "future_field": null
+    },
+    "realm_unlawful_description_format": {
+      "example_id": "",
+      "summary": "",
+      "violated_rules": [],
+      "extension": null
+    },
+    "artifact_empty_rule_array": [],
+    "creature_optional_tier_fields": {
+      "id": "creature_tier_mythic",
+      "name": "",
+      "description": "",
+      "required_fields": [],
+      "extension": null
+    },
+    "quest_minimum_more_than_two": 3
+  },
+  "reject": {
+    "runtime_step_boolean": true,
+    "character_random_authority": true,
+    "lore_locked_canon_overwrite": true,
+    "npc_host_bool_as_integer": 0,
+    "player_pipeline_wrong_representation": {
+      "step": "sample",
+      "input": [],
+      "output": "sample"
+    },
+    "generation_mode_below_two": 1,
+    "generation_foreign_profile_mode": [
+      "bind"
+    ],
+    "worldstate_erased_history": true,
+    "location_numeric_pipeline": 1,
+    "anchor_coordinate_boolean": true,
+    "faction_float_token_coerced": 0.5,
+    "faction_datetime_token_changed": "2026-10-04T00:00:00Z",
+    "codeword_trailing_newline": "000000000\n",
+    "codeword_wrong_alphabet": "xxxxxxxxx",
+    "compatibility_numeric_string": "0.75",
+    "generation_placeholder_array": [],
+    "generation_literal_list_empty": [],
+    "perception_boolean_token_coerced": false,
+    "perception_band_coerced": 0.2,
+    "boundary_catalog_enum_drift": "unsupported",
+    "realm_band_as_interval": [
+      0.2,
+      0.39
+    ],
+    "realm_fixed_set_reordered": [
+      "void",
+      "shadow",
+      "physical",
+      "etheric",
+      "astral",
+      "mental",
+      "causal",
+      "celestial",
+      "divine_core"
+    ],
+    "realm_guidance_missing_required_flags": {
+      "attunement_band": "",
+      "boundary_state": "",
+      "blocked_by": []
+    },
+    "realm_unlawful_description_rule_type": false,
+    "artifact_nullable_token_coerced": null,
+    "artifact_recommended_band_coerced": 3,
+    "creature_boolean_token_coerced": true,
+    "creature_frame_tier_drift": "unsupported",
+    "quest_minimum_one_mode": 1,
+    "quest_ravenfall_profile_mode": [
+      "weaponize"
+    ]
+  }
+}

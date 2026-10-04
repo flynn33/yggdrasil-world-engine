@@ -77,6 +77,9 @@ REQUIRED_CHECK_CONTRACTS = [
     ("non_destructive_diff", "<non-destructive-diff>", ["diff", "change-safety"]),
     ("m2_yaml_descriptors", "scripts/check_yaml_descriptor_contracts.py", ["m2", "schema", "conformance"]),
     ("m2_rejection_scenarios", "scripts/check_rejection_scenarios.py", ["m2", "schema", "conformance"]),
+    ("m2_validation_operations", "scripts/check_m2_validation_operations.py", ["m2", "schema", "conformance"]),
+    ("m2_validation_methods", "scripts/check_m2_validation_methods.py", ["m2", "schema", "conformance"]),
+    ("m2_historical_acceptance", "scripts/check_m2_historical_acceptance.py", ["m2", "schema", "conformance"]),
 ]
 
 
@@ -218,6 +221,18 @@ def milestone_completion_errors(root: Path, milestones: list[dict]) -> list[str]
             )
         if not evidence:
             errors.append(f"Completed milestone {milestone['id']} requires acceptance evidence")
+        if milestone["id"] == "M2":
+            try:
+                import check_m2_historical_acceptance as historical_acceptance
+
+                if evidence != list(historical_acceptance.EVIDENCE_PATHS):
+                    errors.append("M2 completion requires its exact immutable acceptance evidence pair")
+                historical_errors, historical_evidence = historical_acceptance.validation_errors(root)
+                errors.extend(f"M2 historical acceptance: {error}" for error in historical_errors)
+                if historical_evidence.get("outcome") != "pass":
+                    errors.append("M2 completion requires accepted durable evidence")
+            except Exception as exc:
+                errors.append(f"Unable to verify completed M2 acceptance: {exc}")
     return errors
 
 

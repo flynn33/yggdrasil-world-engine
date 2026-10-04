@@ -1,0 +1,3295 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ywe_core_policy_document_schema.json",
+  "title": "YWE reviewed YAML document formats",
+  "description": "New REQ0032 format policy: serialized structure and declared fixed policy values. No certification of runtime execution, nested narrative rejection or cross-file reference integrity.",
+  "x-ywe-requirement-id": "YWE-REQ-0032",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/AshRuntimeGenerationFlowDocument"
+    },
+    {
+      "$ref": "#/$defs/CharacterCreationProgressionDocument"
+    },
+    {
+      "$ref": "#/$defs/LoreArchiveGenerationDocument"
+    },
+    {
+      "$ref": "#/$defs/NpcSynthesisRulesDocument"
+    },
+    {
+      "$ref": "#/$defs/PlayerRuntimeStateRulesDocument"
+    },
+    {
+      "$ref": "#/$defs/QuestNpcLoreGenerationDocument"
+    },
+    {
+      "$ref": "#/$defs/WorldstateDeltaRulesDocument"
+    },
+    {
+      "$ref": "#/$defs/WorldstateLocationMutationRulesDocument"
+    }
+  ],
+  "$defs": {
+    "AshRuntimeGenerationFlowDocument": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "const": "active_contract",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/ash_runtime_generation_flow.yaml",
+            "pointer": "/status"
+          }
+        },
+        "flow_id": {
+          "type": "string",
+          "const": "ywe.core.narrative_engine.ash_runtime_generation_flow.v1",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/ash_runtime_generation_flow.yaml",
+            "pointer": "/flow_id"
+          }
+        },
+        "authority_contract": {
+          "type": "string",
+          "const": "docs/architecture/ash_upstream_authority_contract.md",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/ash_runtime_generation_flow.yaml",
+            "pointer": "/authority_contract"
+          }
+        },
+        "cosmology_authority_contract": {
+          "type": "string",
+          "const": "docs/architecture/ywe_cosmology_authority_contract.md",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/ash_runtime_generation_flow.yaml",
+            "pointer": "/cosmology_authority_contract"
+          }
+        },
+        "component_contract": {
+          "type": "string",
+          "const": "docs/architecture/ash_pattern_system_component_contract.md",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/ash_runtime_generation_flow.yaml",
+            "pointer": "/component_contract"
+          }
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "system": {
+              "type": "string",
+              "const": "ash_runtime_generation_flow",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/ash_runtime_generation_flow.yaml",
+                "pointer": "/meta/system"
+              }
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "package_basis": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "system",
+            "purpose",
+            "package_basis"
+          ],
+          "additionalProperties": true
+        },
+        "global_invariants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ash_asp_core_math_rebuild_addendum": {
+          "type": "object",
+          "properties": {
+            "authority": {
+              "type": "string"
+            },
+            "math_basis": {
+              "type": "string"
+            },
+            "transition_semantics": {
+              "type": "string"
+            },
+            "required_packets": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "provenance_fields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "boundary_rule": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "authority",
+            "math_basis",
+            "transition_semantics",
+            "required_packets",
+            "provenance_fields",
+            "boundary_rule"
+          ],
+          "additionalProperties": true
+        },
+        "canonical_flow": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "step": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "inputs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "emits": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "requires": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "forbidden": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "allowed_feature_engines": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "boundary": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "step",
+              "name",
+              "inputs",
+              "emits"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "named_flows": {
+          "type": "object",
+          "properties": {
+            "exploration_driven_world_generation": {
+              "type": "object",
+              "properties": {
+                "sequence": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "rule": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "sequence",
+                "rule"
+              ],
+              "additionalProperties": true
+            },
+            "player_action_driven_quest_generation": {
+              "type": "object",
+              "properties": {
+                "sequence": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "rule": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "sequence",
+                "rule"
+              ],
+              "additionalProperties": true
+            },
+            "player_action_driven_npc_generation": {
+              "type": "object",
+              "properties": {
+                "sequence": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "rule": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "sequence",
+                "rule"
+              ],
+              "additionalProperties": true
+            },
+            "consequence_driven_lore_and_myth_generation": {
+              "type": "object",
+              "properties": {
+                "sequence": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "rule": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "sequence",
+                "rule"
+              ],
+              "additionalProperties": true
+            },
+            "consequence_driven_future_generation_bias": {
+              "type": "object",
+              "properties": {
+                "sequence": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "rule": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "sequence",
+                "rule"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "exploration_driven_world_generation",
+            "player_action_driven_quest_generation",
+            "player_action_driven_npc_generation",
+            "consequence_driven_lore_and_myth_generation",
+            "consequence_driven_future_generation_bias"
+          ],
+          "additionalProperties": true
+        },
+        "materialization_boundary": {
+          "type": "object",
+          "properties": {
+            "planning_required_before_materialization": {
+              "type": "boolean",
+              "const": true,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/ash_runtime_generation_flow.yaml",
+                "pointer": "/materialization_boundary/planning_required_before_materialization"
+              }
+            },
+            "host_adapter_may_author_truth": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/ash_runtime_generation_flow.yaml",
+                "pointer": "/materialization_boundary/host_adapter_may_author_truth"
+              }
+            },
+            "host_adapter_may_author_ash_state": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/ash_runtime_generation_flow.yaml",
+                "pointer": "/materialization_boundary/host_adapter_may_author_ash_state"
+              }
+            },
+            "host_adapter_may_create_codewords": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/ash_runtime_generation_flow.yaml",
+                "pointer": "/materialization_boundary/host_adapter_may_create_codewords"
+              }
+            },
+            "allowed_host_role": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "planning_required_before_materialization",
+            "host_adapter_may_author_truth",
+            "host_adapter_may_author_ash_state",
+            "host_adapter_may_create_codewords",
+            "allowed_host_role"
+          ],
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "version",
+        "status",
+        "flow_id",
+        "authority_contract",
+        "cosmology_authority_contract",
+        "component_contract",
+        "meta",
+        "global_invariants",
+        "ash_asp_core_math_rebuild_addendum",
+        "canonical_flow",
+        "named_flows",
+        "materialization_boundary"
+      ],
+      "additionalProperties": true,
+      "title": "AshRuntimeGenerationFlowDocument",
+      "description": "Draft reviewed YWE document format policy. Structure and declared policy values only; no runtime execution or described semantic rejection certification.",
+      "x-ywe-requirement-id": "YWE-REQ-0032",
+      "x-ywe-source-ref": {
+        "path": "core/narrative_engine/ash_runtime_generation_flow.yaml",
+        "pointer": ""
+      },
+      "x-ywe-format-policy": "Observed named sections are required by this new format policy. Extra fields remain open; unspecified string and array bounds are absent."
+    },
+    "CharacterCreationProgressionDocument": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "canonical_ash_derivation": {
+          "type": "object",
+          "properties": {
+            "required_input": {
+              "type": "string",
+              "const": "CosmicPatternSnapshot",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/character_creation_progression_rules.yaml",
+                "pointer": "/canonical_ash_derivation/required_input"
+              }
+            },
+            "required_player_state": {
+              "type": "string",
+              "const": "PlayerState",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/character_creation_progression_rules.yaml",
+                "pointer": "/canonical_ash_derivation/required_player_state"
+              }
+            },
+            "required_state_identity": {
+              "type": "string",
+              "const": "StateIdentity",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/character_creation_progression_rules.yaml",
+                "pointer": "/canonical_ash_derivation/required_state_identity"
+              }
+            },
+            "required_diagnostic": {
+              "type": "string",
+              "const": "DiagnosticEnvelope",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/character_creation_progression_rules.yaml",
+                "pointer": "/canonical_ash_derivation/required_diagnostic"
+              }
+            },
+            "required_plan": {
+              "type": "string",
+              "const": "GenerationPlan",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/character_creation_progression_rules.yaml",
+                "pointer": "/canonical_ash_derivation/required_plan"
+              }
+            },
+            "independent_random_generation_allowed": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/character_creation_progression_rules.yaml",
+                "pointer": "/canonical_ash_derivation/independent_random_generation_allowed"
+              }
+            }
+          },
+          "required": [
+            "required_input",
+            "required_player_state",
+            "required_state_identity",
+            "required_diagnostic",
+            "required_plan",
+            "independent_random_generation_allowed"
+          ],
+          "additionalProperties": true
+        },
+        "compatibility_aliases": {
+          "type": "object",
+          "properties": {
+            "RealmIdentity": {
+              "type": "string",
+              "const": "StateIdentity",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/character_creation_progression_rules.yaml",
+                "pointer": "/compatibility_aliases/RealmIdentity"
+              }
+            },
+            "realm_id": {
+              "type": "string",
+              "const": "vertex_id",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/character_creation_progression_rules.yaml",
+                "pointer": "/compatibility_aliases/realm_id"
+              }
+            }
+          },
+          "required": [
+            "RealmIdentity",
+            "realm_id"
+          ],
+          "additionalProperties": true
+        },
+        "required_outputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "creation_rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "progression_rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validation_rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "version",
+        "canonical_ash_derivation",
+        "compatibility_aliases",
+        "required_outputs",
+        "creation_rules",
+        "progression_rules",
+        "validation_rules"
+      ],
+      "additionalProperties": true,
+      "title": "CharacterCreationProgressionDocument",
+      "description": "Draft reviewed YWE document format policy. Structure and declared policy values only; no runtime execution or described semantic rejection certification.",
+      "x-ywe-requirement-id": "YWE-REQ-0032",
+      "x-ywe-source-ref": {
+        "path": "core/narrative_engine/character_creation_progression_rules.yaml",
+        "pointer": ""
+      },
+      "x-ywe-format-policy": "Observed named sections are required by this new format policy. Extra fields remain open; unspecified string and array bounds are absent."
+    },
+    "LoreArchiveGenerationDocument": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "const": "active_contract",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+            "pointer": "/status"
+          }
+        },
+        "phase": {
+          "type": "integer",
+          "const": 12,
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+            "pointer": "/phase"
+          }
+        },
+        "canonical_ash_derivation": {
+          "type": "object",
+          "properties": {
+            "required_input": {
+              "type": "string",
+              "const": "CosmicPatternSnapshot",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/canonical_ash_derivation/required_input"
+              }
+            },
+            "required_delta": {
+              "type": "string",
+              "const": "WorldstateDeltaPacket",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/canonical_ash_derivation/required_delta"
+              }
+            },
+            "required_myth_context": {
+              "type": "string",
+              "const": "MythRecord",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/canonical_ash_derivation/required_myth_context"
+              }
+            },
+            "required_faction_context": {
+              "type": "string",
+              "const": "FactionTopologyState",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/canonical_ash_derivation/required_faction_context"
+              }
+            },
+            "optional_npc_context": {
+              "type": "string",
+              "const": "NPCManifest",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/canonical_ash_derivation/optional_npc_context"
+              }
+            },
+            "required_diagnostic": {
+              "type": "string",
+              "const": "DiagnosticEnvelope",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/canonical_ash_derivation/required_diagnostic"
+              }
+            },
+            "required_plan": {
+              "type": "string",
+              "const": "GenerationPlan",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/canonical_ash_derivation/required_plan"
+              }
+            },
+            "required_context_packet": {
+              "type": "string",
+              "const": "YWEGenerationContextPacket",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/canonical_ash_derivation/required_context_packet"
+              }
+            },
+            "independent_random_generation_allowed": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/canonical_ash_derivation/independent_random_generation_allowed"
+              }
+            }
+          },
+          "required": [
+            "required_input",
+            "required_delta",
+            "required_myth_context",
+            "required_faction_context",
+            "optional_npc_context",
+            "required_diagnostic",
+            "required_plan",
+            "required_context_packet",
+            "independent_random_generation_allowed"
+          ],
+          "additionalProperties": true
+        },
+        "required_outputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "truth_layer_rules": {
+          "type": "object",
+          "properties": {
+            "locked_canon": {
+              "type": "object",
+              "properties": {
+                "may_be_referenced": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                    "pointer": "/truth_layer_rules/locked_canon/may_be_referenced"
+                  }
+                },
+                "may_be_overwritten_by_generation": {
+                  "type": "boolean",
+                  "const": false,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                    "pointer": "/truth_layer_rules/locked_canon/may_be_overwritten_by_generation"
+                  }
+                }
+              },
+              "required": [
+                "may_be_referenced",
+                "may_be_overwritten_by_generation"
+              ],
+              "additionalProperties": true
+            },
+            "worldstate_occurrence": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "const": "WorldstateDeltaPacket",
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                    "pointer": "/truth_layer_rules/worldstate_occurrence/source"
+                  }
+                },
+                "requires_diagnostic_ref": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                    "pointer": "/truth_layer_rules/worldstate_occurrence/requires_diagnostic_ref"
+                  }
+                }
+              },
+              "required": [
+                "source",
+                "requires_diagnostic_ref"
+              ],
+              "additionalProperties": true
+            },
+            "myth_variant": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "const": "MythRecord",
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                    "pointer": "/truth_layer_rules/myth_variant/source"
+                  }
+                },
+                "must_remain_interpretation": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                    "pointer": "/truth_layer_rules/myth_variant/must_remain_interpretation"
+                  }
+                }
+              },
+              "required": [
+                "source",
+                "must_remain_interpretation"
+              ],
+              "additionalProperties": true
+            },
+            "faction_claim": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "const": "FactionTopologyState",
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                    "pointer": "/truth_layer_rules/faction_claim/source"
+                  }
+                },
+                "must_not_be_factual_substrate": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                    "pointer": "/truth_layer_rules/faction_claim/must_not_be_factual_substrate"
+                  }
+                }
+              },
+              "required": [
+                "source",
+                "must_not_be_factual_substrate"
+              ],
+              "additionalProperties": true
+            },
+            "npc_claim": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "const": "NPCManifest",
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                    "pointer": "/truth_layer_rules/npc_claim/source"
+                  }
+                },
+                "must_not_be_factual_substrate": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                    "pointer": "/truth_layer_rules/npc_claim/must_not_be_factual_substrate"
+                  }
+                }
+              },
+              "required": [
+                "source",
+                "must_not_be_factual_substrate"
+              ],
+              "additionalProperties": true
+            },
+            "perception_overlay": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "const": "PerceptionStateRecord",
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                    "pointer": "/truth_layer_rules/perception_overlay/source"
+                  }
+                },
+                "must_not_rewrite_shared_world_truth": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                    "pointer": "/truth_layer_rules/perception_overlay/must_not_rewrite_shared_world_truth"
+                  }
+                }
+              },
+              "required": [
+                "source",
+                "must_not_rewrite_shared_world_truth"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "locked_canon",
+            "worldstate_occurrence",
+            "myth_variant",
+            "faction_claim",
+            "npc_claim",
+            "perception_overlay"
+          ],
+          "additionalProperties": true
+        },
+        "authority_boundary": {
+          "type": "object",
+          "properties": {
+            "can_influence_generation_context": {
+              "type": "boolean",
+              "const": true,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/authority_boundary/can_influence_generation_context"
+              }
+            },
+            "may_mutate_ash_math": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/authority_boundary/may_mutate_ash_math"
+              }
+            },
+            "may_rewrite_shared_world_truth": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/authority_boundary/may_rewrite_shared_world_truth"
+              }
+            },
+            "may_mutate_base_world_ontology": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/authority_boundary/may_mutate_base_world_ontology"
+              }
+            },
+            "host_adapter_may_author": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/authority_boundary/host_adapter_may_author"
+              }
+            },
+            "may_create_independent_random_content": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/authority_boundary/may_create_independent_random_content"
+              }
+            },
+            "lore_may_overwrite_locked_canon": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/authority_boundary/lore_may_overwrite_locked_canon"
+              }
+            },
+            "myth_may_rewrite_factual_world_truth": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+                "pointer": "/authority_boundary/myth_may_rewrite_factual_world_truth"
+              }
+            }
+          },
+          "required": [
+            "can_influence_generation_context",
+            "may_mutate_ash_math",
+            "may_rewrite_shared_world_truth",
+            "may_mutate_base_world_ontology",
+            "host_adapter_may_author",
+            "may_create_independent_random_content",
+            "lore_may_overwrite_locked_canon",
+            "myth_may_rewrite_factual_world_truth"
+          ],
+          "additionalProperties": true
+        },
+        "validation_rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "version",
+        "status",
+        "phase",
+        "canonical_ash_derivation",
+        "required_outputs",
+        "truth_layer_rules",
+        "authority_boundary",
+        "validation_rules"
+      ],
+      "additionalProperties": true,
+      "title": "LoreArchiveGenerationDocument",
+      "description": "Draft reviewed YWE document format policy. Structure and declared policy values only; no runtime execution or described semantic rejection certification.",
+      "x-ywe-requirement-id": "YWE-REQ-0032",
+      "x-ywe-source-ref": {
+        "path": "core/narrative_engine/lore_archive_generation_rules.yaml",
+        "pointer": ""
+      },
+      "x-ywe-format-policy": "Observed named sections are required by this new format policy. Extra fields remain open; unspecified string and array bounds are absent."
+    },
+    "NpcSynthesisRulesDocument": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "const": "active_contract",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+            "pointer": "/status"
+          }
+        },
+        "contract_id": {
+          "type": "string",
+          "const": "ywe.core.narrative_engine.npc_synthesis_rules.v1",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+            "pointer": "/contract_id"
+          }
+        },
+        "phase": {
+          "type": "integer",
+          "const": 12,
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+            "pointer": "/phase"
+          }
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "system": {
+              "type": "string",
+              "const": "npc_synthesis_rules",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                "pointer": "/meta/system"
+              }
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "schema": {
+              "type": "string",
+              "const": "data/schemas/quest_npc_lore_generation_schema.json",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                "pointer": "/meta/schema"
+              }
+            }
+          },
+          "required": [
+            "system",
+            "purpose",
+            "schema"
+          ],
+          "additionalProperties": true
+        },
+        "authority": {
+          "type": "object",
+          "properties": {
+            "current_authority_sequence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "required_packets": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "provenance_fields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "current_authority_sequence",
+            "required_packets",
+            "provenance_fields"
+          ],
+          "additionalProperties": true
+        },
+        "npc_records": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "synthesis_laws": {
+          "type": "object",
+          "properties": {
+            "independent_random_npc_allowed": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                "pointer": "/synthesis_laws/independent_random_npc_allowed"
+              }
+            },
+            "materialization_requires_generation_plan": {
+              "type": "boolean",
+              "const": true,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                "pointer": "/synthesis_laws/materialization_requires_generation_plan"
+              }
+            },
+            "host_adapter_may_author_npc_truth": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                "pointer": "/synthesis_laws/host_adapter_may_author_npc_truth"
+              }
+            },
+            "npc_claims_are_interpretive": {
+              "type": "boolean",
+              "const": true,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                "pointer": "/synthesis_laws/npc_claims_are_interpretive"
+              }
+            },
+            "npc_claim_may_rewrite_shared_world_truth": {
+              "type": "boolean",
+              "const": false,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                "pointer": "/synthesis_laws/npc_claim_may_rewrite_shared_world_truth"
+              }
+            },
+            "relationship_change_requires_worldstate_delta_packet_ref": {
+              "type": "boolean",
+              "const": true,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                "pointer": "/synthesis_laws/relationship_change_requires_worldstate_delta_packet_ref"
+              }
+            },
+            "npc_memory_delta_requires_resolution_payload": {
+              "type": "boolean",
+              "const": true,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                "pointer": "/synthesis_laws/npc_memory_delta_requires_resolution_payload"
+              }
+            },
+            "npc_memory_history_append_only": {
+              "type": "boolean",
+              "const": true,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                "pointer": "/synthesis_laws/npc_memory_history_append_only"
+              }
+            },
+            "npc_memory_effect_reversal_requires_compensating_delta": {
+              "type": "boolean",
+              "const": true,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                "pointer": "/synthesis_laws/npc_memory_effect_reversal_requires_compensating_delta"
+              }
+            },
+            "append_only_memory": {
+              "type": "boolean",
+              "const": true,
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                "pointer": "/synthesis_laws/append_only_memory"
+              }
+            }
+          },
+          "required": [
+            "independent_random_npc_allowed",
+            "materialization_requires_generation_plan",
+            "host_adapter_may_author_npc_truth",
+            "npc_claims_are_interpretive",
+            "npc_claim_may_rewrite_shared_world_truth",
+            "relationship_change_requires_worldstate_delta_packet_ref",
+            "npc_memory_delta_requires_resolution_payload",
+            "npc_memory_history_append_only",
+            "npc_memory_effect_reversal_requires_compensating_delta",
+            "append_only_memory"
+          ],
+          "additionalProperties": true
+        },
+        "history_compatibility": {
+          "type": "object",
+          "properties": {
+            "append_only_memory": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "const": "deprecated",
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                    "pointer": "/history_compatibility/append_only_memory/status"
+                  }
+                },
+                "canonical_rule": {
+                  "type": "string",
+                  "const": "npc_memory_history_append_only",
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                    "pointer": "/history_compatibility/append_only_memory/canonical_rule"
+                  }
+                },
+                "behavior": {
+                  "type": "string",
+                  "const": "exact_semantic_alias",
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                    "pointer": "/history_compatibility/append_only_memory/behavior"
+                  }
+                }
+              },
+              "required": [
+                "status",
+                "canonical_rule",
+                "behavior"
+              ],
+              "additionalProperties": true
+            },
+            "interpretation": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "append_only_memory",
+            "interpretation"
+          ],
+          "additionalProperties": true
+        },
+        "truth_boundaries": {
+          "type": "object",
+          "properties": {
+            "npc_claim_only": {
+              "type": "object",
+              "properties": {
+                "may_drive_dialogue": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                    "pointer": "/truth_boundaries/npc_claim_only/may_drive_dialogue"
+                  }
+                },
+                "may_drive_memory": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                    "pointer": "/truth_boundaries/npc_claim_only/may_drive_memory"
+                  }
+                },
+                "may_rewrite_shared_world_truth": {
+                  "type": "boolean",
+                  "const": false,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                    "pointer": "/truth_boundaries/npc_claim_only/may_rewrite_shared_world_truth"
+                  }
+                }
+              },
+              "required": [
+                "may_drive_dialogue",
+                "may_drive_memory",
+                "may_rewrite_shared_world_truth"
+              ],
+              "additionalProperties": true
+            },
+            "faction_claim_only": {
+              "type": "object",
+              "properties": {
+                "may_drive_social_pressure": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                    "pointer": "/truth_boundaries/faction_claim_only/may_drive_social_pressure"
+                  }
+                },
+                "may_rewrite_shared_world_truth": {
+                  "type": "boolean",
+                  "const": false,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                    "pointer": "/truth_boundaries/faction_claim_only/may_rewrite_shared_world_truth"
+                  }
+                }
+              },
+              "required": [
+                "may_drive_social_pressure",
+                "may_rewrite_shared_world_truth"
+              ],
+              "additionalProperties": true
+            },
+            "branch_local_claim": {
+              "type": "object",
+              "properties": {
+                "requires_current_leaf_branch_ref": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                    "pointer": "/truth_boundaries/branch_local_claim/requires_current_leaf_branch_ref"
+                  }
+                },
+                "may_escape_branch_without_worldstate_delta": {
+                  "type": "boolean",
+                  "const": false,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                    "pointer": "/truth_boundaries/branch_local_claim/may_escape_branch_without_worldstate_delta"
+                  }
+                }
+              },
+              "required": [
+                "requires_current_leaf_branch_ref",
+                "may_escape_branch_without_worldstate_delta"
+              ],
+              "additionalProperties": true
+            },
+            "worldstate_backed_fact": {
+              "type": "object",
+              "properties": {
+                "requires_worldstate_delta_packet_ref": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                    "pointer": "/truth_boundaries/worldstate_backed_fact/requires_worldstate_delta_packet_ref"
+                  }
+                },
+                "may_mutate_ash_math": {
+                  "type": "boolean",
+                  "const": false,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+                    "pointer": "/truth_boundaries/worldstate_backed_fact/may_mutate_ash_math"
+                  }
+                }
+              },
+              "required": [
+                "requires_worldstate_delta_packet_ref",
+                "may_mutate_ash_math"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "npc_claim_only",
+            "faction_claim_only",
+            "branch_local_claim",
+            "worldstate_backed_fact"
+          ],
+          "additionalProperties": true
+        },
+        "forbidden_synthesis": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validation_markers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "version",
+        "status",
+        "contract_id",
+        "phase",
+        "meta",
+        "authority",
+        "npc_records",
+        "synthesis_laws",
+        "history_compatibility",
+        "truth_boundaries",
+        "forbidden_synthesis",
+        "validation_markers"
+      ],
+      "additionalProperties": true,
+      "title": "NpcSynthesisRulesDocument",
+      "description": "Draft reviewed YWE document format policy. Structure and declared policy values only; no runtime execution or described semantic rejection certification.",
+      "x-ywe-requirement-id": "YWE-REQ-0032",
+      "x-ywe-source-ref": {
+        "path": "core/narrative_engine/npc_synthesis_rules.yaml",
+        "pointer": ""
+      },
+      "x-ywe-format-policy": "Observed named sections are required by this new format policy. Extra fields remain open; unspecified string and array bounds are absent."
+    },
+    "PlayerRuntimeStateRulesDocument": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "const": "canonical_phase_10_contract",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/player_runtime_state_rules.yaml",
+            "pointer": "/status"
+          }
+        },
+        "system": {
+          "type": "string",
+          "const": "player_runtime_state_v1",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/player_runtime_state_rules.yaml",
+            "pointer": "/system"
+          }
+        },
+        "authority_stack": {
+          "type": "object",
+          "properties": {
+            "game_layer": {
+              "type": "string"
+            },
+            "engine_layer": {
+              "type": "string"
+            },
+            "foundation": {
+              "type": "string"
+            },
+            "stability_component": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "game_layer",
+            "engine_layer",
+            "foundation",
+            "stability_component"
+          ],
+          "additionalProperties": true
+        },
+        "purpose": {
+          "type": "object",
+          "properties": {
+            "summary": {
+              "type": "string"
+            },
+            "boundary": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "summary",
+            "boundary"
+          ],
+          "additionalProperties": true
+        },
+        "owned_records": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required_inputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emitted_outputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validation_markers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schema_refs": {
+          "type": "object",
+          "properties": {
+            "player_runtime_state": {
+              "type": "string"
+            },
+            "generation_context_packet": {
+              "type": "string"
+            },
+            "branch_event": {
+              "type": "string"
+            },
+            "branch_generation_context": {
+              "type": "string"
+            },
+            "leaf_branch_reality_state": {
+              "type": "string"
+            },
+            "action_trace": {
+              "type": "string"
+            },
+            "worldstate_delta": {
+              "type": "string"
+            },
+            "future_generation_bias": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "player_runtime_state",
+            "generation_context_packet",
+            "branch_event",
+            "branch_generation_context",
+            "leaf_branch_reality_state",
+            "action_trace",
+            "worldstate_delta",
+            "future_generation_bias"
+          ],
+          "additionalProperties": true
+        },
+        "phase_model": {
+          "type": "object",
+          "properties": {
+            "mortal_unknowing": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            },
+            "first_stirrings": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            },
+            "memory_recovery": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            },
+            "identity_conflict": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            },
+            "chosen_becoming": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            },
+            "world_actor": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "mortal_unknowing",
+            "first_stirrings",
+            "memory_recovery",
+            "identity_conflict",
+            "chosen_becoming",
+            "world_actor"
+          ],
+          "additionalProperties": true
+        },
+        "state_layers": {
+          "type": "object",
+          "properties": {
+            "identity_core": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "owner": {
+                  "type": "string"
+                },
+                "rule": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fields",
+                "owner",
+                "rule"
+              ],
+              "additionalProperties": true
+            },
+            "branch_context": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "owner": {
+                  "type": "string"
+                },
+                "rule": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fields",
+                "owner",
+                "rule"
+              ],
+              "additionalProperties": true
+            },
+            "resonance_channels": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "owner": {
+                  "type": "string"
+                },
+                "rule": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fields",
+                "owner",
+                "rule"
+              ],
+              "additionalProperties": true
+            },
+            "continuity_refs": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "owner": {
+                  "type": "string"
+                },
+                "rule": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fields",
+                "owner",
+                "rule"
+              ],
+              "additionalProperties": true
+            },
+            "perception_posture": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "owner": {
+                  "type": "string"
+                },
+                "rule": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fields",
+                "owner",
+                "rule"
+              ],
+              "additionalProperties": true
+            },
+            "provenance": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "owner": {
+                  "type": "string"
+                },
+                "rule": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fields",
+                "owner",
+                "rule"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "identity_core",
+            "branch_context",
+            "resonance_channels",
+            "continuity_refs",
+            "perception_posture",
+            "provenance"
+          ],
+          "additionalProperties": true
+        },
+        "update_pipeline": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "step": {
+                "type": "string"
+              },
+              "input": {
+                "type": "string"
+              },
+              "output": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "step",
+              "input",
+              "output"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "rejected_mutations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "mutation": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "mutation",
+              "reason"
+            ],
+            "additionalProperties": true
+          }
+        }
+      },
+      "required": [
+        "version",
+        "status",
+        "system",
+        "authority_stack",
+        "purpose",
+        "owned_records",
+        "required_inputs",
+        "emitted_outputs",
+        "validation_markers",
+        "schema_refs",
+        "phase_model",
+        "state_layers",
+        "update_pipeline",
+        "rejected_mutations"
+      ],
+      "additionalProperties": true,
+      "title": "PlayerRuntimeStateRulesDocument",
+      "description": "Draft reviewed YWE document format policy. Structure and declared policy values only; no runtime execution or described semantic rejection certification.",
+      "x-ywe-requirement-id": "YWE-REQ-0032",
+      "x-ywe-source-ref": {
+        "path": "core/narrative_engine/player_runtime_state_rules.yaml",
+        "pointer": ""
+      },
+      "x-ywe-format-policy": "Observed named sections are required by this new format policy. Extra fields remain open; unspecified string and array bounds are absent."
+    },
+    "QuestNpcLoreGenerationDocument": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "const": "active_contract",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+            "pointer": "/status"
+          }
+        },
+        "contract_id": {
+          "type": "string",
+          "const": "ywe.core.narrative_engine.quest_npc_lore_generation_rules.v1",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+            "pointer": "/contract_id"
+          }
+        },
+        "phase": {
+          "type": "integer",
+          "const": 12,
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+            "pointer": "/phase"
+          }
+        },
+        "phase_name": {
+          "type": "string"
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "system": {
+              "type": "string",
+              "const": "quest_npc_lore_generation_rules",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                "pointer": "/meta/system"
+              }
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "schema": {
+              "type": "string",
+              "const": "data/schemas/quest_npc_lore_generation_schema.json",
+              "x-ywe-source-ref": {
+                "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                "pointer": "/meta/schema"
+              }
+            },
+            "upstream_dependencies": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "system",
+            "purpose",
+            "schema",
+            "upstream_dependencies"
+          ],
+          "additionalProperties": true
+        },
+        "global_invariants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ash_asp_core_math_rebuild_addendum": {
+          "type": "object",
+          "properties": {
+            "authority": {
+              "type": "string"
+            },
+            "math_basis": {
+              "type": "string"
+            },
+            "transition_semantics": {
+              "type": "string"
+            },
+            "required_packets": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "provenance_fields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "boundary_rule": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "authority",
+            "math_basis",
+            "transition_semantics",
+            "required_packets",
+            "provenance_fields",
+            "boundary_rule"
+          ],
+          "additionalProperties": true
+        },
+        "pipeline": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "step": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "inputs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "emits": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "required_context": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "requires": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "forbidden": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "rule": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "step",
+              "name",
+              "inputs",
+              "emits"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "quest_generation_rules": {
+          "type": "object",
+          "properties": {
+            "required_records": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "required_boundaries": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "mode_policy": {
+              "type": "object",
+              "properties": {
+                "minimum_mode_count": {
+                  "type": "integer",
+                  "minimum": 2,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/quest_generation_rules/mode_policy/minimum_mode_count"
+                  }
+                },
+                "allowed_mode_kinds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "reveal",
+                      "conceal",
+                      "contain",
+                      "reconcile",
+                      "sacrifice",
+                      "defer"
+                    ]
+                  }
+                },
+                "rule": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "minimum_mode_count",
+                "allowed_mode_kinds",
+                "rule"
+              ],
+              "additionalProperties": true
+            },
+            "consequence_policy": {
+              "type": "object",
+              "properties": {
+                "quest_resolution_payload_requires": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "quest_resolution_payload_requires"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "required_records",
+            "required_boundaries",
+            "mode_policy",
+            "consequence_policy"
+          ],
+          "additionalProperties": true
+        },
+        "npc_generation_rules": {
+          "type": "object",
+          "properties": {
+            "required_records": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "claim_layers": {
+              "type": "object",
+              "properties": {
+                "npc_claim_only": {
+                  "type": "object",
+                  "properties": {
+                    "may_be_known_by_npc": {
+                      "type": "boolean",
+                      "const": true,
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/npc_generation_rules/claim_layers/npc_claim_only/may_be_known_by_npc"
+                      }
+                    },
+                    "may_rewrite_shared_world_truth": {
+                      "type": "boolean",
+                      "const": false,
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/npc_generation_rules/claim_layers/npc_claim_only/may_rewrite_shared_world_truth"
+                      }
+                    }
+                  },
+                  "required": [
+                    "may_be_known_by_npc",
+                    "may_rewrite_shared_world_truth"
+                  ],
+                  "additionalProperties": true
+                },
+                "faction_claim_only": {
+                  "type": "object",
+                  "properties": {
+                    "may_influence_social_distribution": {
+                      "type": "boolean",
+                      "const": true,
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/npc_generation_rules/claim_layers/faction_claim_only/may_influence_social_distribution"
+                      }
+                    },
+                    "may_rewrite_shared_world_truth": {
+                      "type": "boolean",
+                      "const": false,
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/npc_generation_rules/claim_layers/faction_claim_only/may_rewrite_shared_world_truth"
+                      }
+                    }
+                  },
+                  "required": [
+                    "may_influence_social_distribution",
+                    "may_rewrite_shared_world_truth"
+                  ],
+                  "additionalProperties": true
+                },
+                "branch_local_claim": {
+                  "type": "object",
+                  "properties": {
+                    "requires_current_leaf_branch_ref": {
+                      "type": "boolean",
+                      "const": true,
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/npc_generation_rules/claim_layers/branch_local_claim/requires_current_leaf_branch_ref"
+                      }
+                    },
+                    "may_escape_branch_without_worldstate_delta": {
+                      "type": "boolean",
+                      "const": false,
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/npc_generation_rules/claim_layers/branch_local_claim/may_escape_branch_without_worldstate_delta"
+                      }
+                    }
+                  },
+                  "required": [
+                    "requires_current_leaf_branch_ref",
+                    "may_escape_branch_without_worldstate_delta"
+                  ],
+                  "additionalProperties": true
+                },
+                "worldstate_backed_fact": {
+                  "type": "object",
+                  "properties": {
+                    "requires_worldstate_delta_packet_ref": {
+                      "type": "boolean",
+                      "const": true,
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/npc_generation_rules/claim_layers/worldstate_backed_fact/requires_worldstate_delta_packet_ref"
+                      }
+                    },
+                    "still_may_not_rewrite_ash_math": {
+                      "type": "boolean",
+                      "const": true,
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/npc_generation_rules/claim_layers/worldstate_backed_fact/still_may_not_rewrite_ash_math"
+                      }
+                    }
+                  },
+                  "required": [
+                    "requires_worldstate_delta_packet_ref",
+                    "still_may_not_rewrite_ash_math"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "required": [
+                "npc_claim_only",
+                "faction_claim_only",
+                "branch_local_claim",
+                "worldstate_backed_fact"
+              ],
+              "additionalProperties": true
+            },
+            "persistence_policy": {
+              "type": "object",
+              "properties": {
+                "event_history_append_only": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/npc_generation_rules/persistence_policy/event_history_append_only"
+                  }
+                },
+                "accepted_history_records_immutable": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/npc_generation_rules/persistence_policy/accepted_history_records_immutable"
+                  }
+                },
+                "reversible_effect_requires_compensating_delta": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/npc_generation_rules/persistence_policy/reversible_effect_requires_compensating_delta"
+                  }
+                },
+                "append_only": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/npc_generation_rules/persistence_policy/append_only"
+                  }
+                },
+                "memory_delta_requires_resolution_payload": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/npc_generation_rules/persistence_policy/memory_delta_requires_resolution_payload"
+                  }
+                },
+                "relationship_change_requires_worldstate_delta_packet_ref": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/npc_generation_rules/persistence_policy/relationship_change_requires_worldstate_delta_packet_ref"
+                  }
+                },
+                "compatibility_aliases": {
+                  "type": "object",
+                  "properties": {
+                    "append_only": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "const": "deprecated",
+                          "x-ywe-source-ref": {
+                            "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                            "pointer": "/npc_generation_rules/persistence_policy/compatibility_aliases/append_only/status"
+                          }
+                        },
+                        "canonical_rule": {
+                          "type": "string",
+                          "const": "event_history_append_only",
+                          "x-ywe-source-ref": {
+                            "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                            "pointer": "/npc_generation_rules/persistence_policy/compatibility_aliases/append_only/canonical_rule"
+                          }
+                        },
+                        "behavior": {
+                          "type": "string",
+                          "const": "exact_semantic_alias",
+                          "x-ywe-source-ref": {
+                            "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                            "pointer": "/npc_generation_rules/persistence_policy/compatibility_aliases/append_only/behavior"
+                          }
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "canonical_rule",
+                        "behavior"
+                      ],
+                      "additionalProperties": true
+                    }
+                  },
+                  "required": [
+                    "append_only"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "required": [
+                "event_history_append_only",
+                "accepted_history_records_immutable",
+                "reversible_effect_requires_compensating_delta",
+                "append_only",
+                "memory_delta_requires_resolution_payload",
+                "relationship_change_requires_worldstate_delta_packet_ref",
+                "compatibility_aliases"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "required_records",
+            "claim_layers",
+            "persistence_policy"
+          ],
+          "additionalProperties": true
+        },
+        "lore_generation_rules": {
+          "type": "object",
+          "properties": {
+            "required_records": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "allowed_layers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "layer_policy": {
+              "type": "object",
+              "properties": {
+                "locked_canon": {
+                  "type": "object",
+                  "properties": {
+                    "may_be_referenced": {
+                      "type": "boolean",
+                      "const": true,
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/lore_generation_rules/layer_policy/locked_canon/may_be_referenced"
+                      }
+                    },
+                    "may_be_overwritten_by_generation": {
+                      "type": "boolean",
+                      "const": false,
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/lore_generation_rules/layer_policy/locked_canon/may_be_overwritten_by_generation"
+                      }
+                    }
+                  },
+                  "required": [
+                    "may_be_referenced",
+                    "may_be_overwritten_by_generation"
+                  ],
+                  "additionalProperties": true
+                },
+                "worldstate_occurrence": {
+                  "type": "object",
+                  "properties": {
+                    "source": {
+                      "type": "string",
+                      "const": "WorldstateDeltaPacket",
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/lore_generation_rules/layer_policy/worldstate_occurrence/source"
+                      }
+                    },
+                    "requires_diagnostic_ref": {
+                      "type": "boolean",
+                      "const": true,
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/lore_generation_rules/layer_policy/worldstate_occurrence/requires_diagnostic_ref"
+                      }
+                    }
+                  },
+                  "required": [
+                    "source",
+                    "requires_diagnostic_ref"
+                  ],
+                  "additionalProperties": true
+                },
+                "myth_variant": {
+                  "type": "object",
+                  "properties": {
+                    "source": {
+                      "type": "string",
+                      "const": "MythRecord",
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/lore_generation_rules/layer_policy/myth_variant/source"
+                      }
+                    },
+                    "must_remain_interpretation": {
+                      "type": "boolean",
+                      "const": true,
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/lore_generation_rules/layer_policy/myth_variant/must_remain_interpretation"
+                      }
+                    }
+                  },
+                  "required": [
+                    "source",
+                    "must_remain_interpretation"
+                  ],
+                  "additionalProperties": true
+                },
+                "faction_claim": {
+                  "type": "object",
+                  "properties": {
+                    "source": {
+                      "type": "string",
+                      "const": "FactionTopologyState",
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/lore_generation_rules/layer_policy/faction_claim/source"
+                      }
+                    },
+                    "must_not_be_factual_substrate": {
+                      "type": "boolean",
+                      "const": true,
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/lore_generation_rules/layer_policy/faction_claim/must_not_be_factual_substrate"
+                      }
+                    }
+                  },
+                  "required": [
+                    "source",
+                    "must_not_be_factual_substrate"
+                  ],
+                  "additionalProperties": true
+                },
+                "npc_claim": {
+                  "type": "object",
+                  "properties": {
+                    "source": {
+                      "type": "string",
+                      "const": "NPCManifest",
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/lore_generation_rules/layer_policy/npc_claim/source"
+                      }
+                    },
+                    "must_not_be_factual_substrate": {
+                      "type": "boolean",
+                      "const": true,
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/lore_generation_rules/layer_policy/npc_claim/must_not_be_factual_substrate"
+                      }
+                    }
+                  },
+                  "required": [
+                    "source",
+                    "must_not_be_factual_substrate"
+                  ],
+                  "additionalProperties": true
+                },
+                "perception_overlay": {
+                  "type": "object",
+                  "properties": {
+                    "source": {
+                      "type": "string",
+                      "const": "PerceptionStateRecord",
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/lore_generation_rules/layer_policy/perception_overlay/source"
+                      }
+                    },
+                    "must_not_rewrite_shared_world_truth": {
+                      "type": "boolean",
+                      "const": true,
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                        "pointer": "/lore_generation_rules/layer_policy/perception_overlay/must_not_rewrite_shared_world_truth"
+                      }
+                    }
+                  },
+                  "required": [
+                    "source",
+                    "must_not_rewrite_shared_world_truth"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "required": [
+                "locked_canon",
+                "worldstate_occurrence",
+                "myth_variant",
+                "faction_claim",
+                "npc_claim",
+                "perception_overlay"
+              ],
+              "additionalProperties": true
+            },
+            "visibility_policy": {
+              "type": "object",
+              "properties": {
+                "endgame_truth_protection": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/lore_generation_rules/visibility_policy/endgame_truth_protection"
+                  }
+                },
+                "progression_constraints_required": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/lore_generation_rules/visibility_policy/progression_constraints_required"
+                  }
+                },
+                "realm_constraints_allowed": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/lore_generation_rules/visibility_policy/realm_constraints_allowed"
+                  }
+                }
+              },
+              "required": [
+                "endgame_truth_protection",
+                "progression_constraints_required",
+                "realm_constraints_allowed"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "required_records",
+            "allowed_layers",
+            "layer_policy",
+            "visibility_policy"
+          ],
+          "additionalProperties": true
+        },
+        "myth_generation_rules": {
+          "type": "object",
+          "properties": {
+            "required_records": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "seed_policy": {
+              "type": "object",
+              "properties": {
+                "requires_source_worldstate_delta_ref": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/myth_generation_rules/seed_policy/requires_source_worldstate_delta_ref"
+                  }
+                },
+                "requires_source_quest_resolution_payload_ref": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/myth_generation_rules/seed_policy/requires_source_quest_resolution_payload_ref"
+                  }
+                },
+                "myth_threshold_may_create_candidate": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/myth_generation_rules/seed_policy/myth_threshold_may_create_candidate"
+                  }
+                },
+                "myth_threshold_may_rewrite_fact": {
+                  "type": "boolean",
+                  "const": false,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/myth_generation_rules/seed_policy/myth_threshold_may_rewrite_fact"
+                  }
+                }
+              },
+              "required": [
+                "requires_source_worldstate_delta_ref",
+                "requires_source_quest_resolution_payload_ref",
+                "myth_threshold_may_create_candidate",
+                "myth_threshold_may_rewrite_fact"
+              ],
+              "additionalProperties": true
+            },
+            "distribution_policy": {
+              "type": "object",
+              "properties": {
+                "propagation_scope": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "social_distribution_delta_requires_worldstate_delta_packet_ref": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/myth_generation_rules/distribution_policy/social_distribution_delta_requires_worldstate_delta_packet_ref"
+                  }
+                },
+                "faction_versions_may_disagree": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/myth_generation_rules/distribution_policy/faction_versions_may_disagree"
+                  }
+                },
+                "factual_world_truth_rewrite_allowed": {
+                  "type": "boolean",
+                  "const": false,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+                    "pointer": "/myth_generation_rules/distribution_policy/factual_world_truth_rewrite_allowed"
+                  }
+                }
+              },
+              "required": [
+                "propagation_scope",
+                "social_distribution_delta_requires_worldstate_delta_packet_ref",
+                "faction_versions_may_disagree",
+                "factual_world_truth_rewrite_allowed"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "required_records",
+            "seed_policy",
+            "distribution_policy"
+          ],
+          "additionalProperties": true
+        },
+        "rejection_cases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validation_markers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "version",
+        "status",
+        "contract_id",
+        "phase",
+        "phase_name",
+        "meta",
+        "global_invariants",
+        "ash_asp_core_math_rebuild_addendum",
+        "pipeline",
+        "quest_generation_rules",
+        "npc_generation_rules",
+        "lore_generation_rules",
+        "myth_generation_rules",
+        "rejection_cases",
+        "validation_markers"
+      ],
+      "additionalProperties": true,
+      "title": "QuestNpcLoreGenerationDocument",
+      "description": "Draft reviewed YWE document format policy. Structure and declared policy values only; no runtime execution or described semantic rejection certification.",
+      "x-ywe-requirement-id": "YWE-REQ-0032",
+      "x-ywe-source-ref": {
+        "path": "core/narrative_engine/quest_npc_lore_generation_rules.yaml",
+        "pointer": ""
+      },
+      "x-ywe-format-policy": "Observed named sections are required by this new format policy. Extra fields remain open; unspecified string and array bounds are absent."
+    },
+    "WorldstateDeltaRulesDocument": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "const": "canonical_phase_11_contract",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+            "pointer": "/status"
+          }
+        },
+        "system": {
+          "type": "string",
+          "const": "worldstate_delta_rules",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+            "pointer": "/system"
+          }
+        },
+        "authority_stack": {
+          "type": "object",
+          "properties": {
+            "profile_layer": {
+              "type": "string"
+            },
+            "engine_layer": {
+              "type": "string"
+            },
+            "foundation": {
+              "type": "string"
+            },
+            "stability_component": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "profile_layer",
+            "engine_layer",
+            "foundation",
+            "stability_component"
+          ],
+          "additionalProperties": true
+        },
+        "purpose": {
+          "type": "object",
+          "properties": {
+            "summary": {
+              "type": "string"
+            },
+            "boundary_rule": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "summary",
+            "boundary_rule"
+          ],
+          "additionalProperties": true
+        },
+        "ash_asp_core_math_rebuild_addendum": {
+          "type": "object",
+          "properties": {
+            "authority": {
+              "type": "string"
+            },
+            "math_basis": {
+              "type": "string"
+            },
+            "transition_semantics": {
+              "type": "string"
+            },
+            "required_packets": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "provenance_fields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "authority",
+            "math_basis",
+            "transition_semantics",
+            "required_packets",
+            "provenance_fields"
+          ],
+          "additionalProperties": true
+        },
+        "worldstate_delta_records": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required_context": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "persistence_rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "forbidden_mutations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validation_markers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "delta_rule": {
+          "type": "string"
+        },
+        "location_mutation_rule": {
+          "type": "string"
+        },
+        "history_and_reversal_semantics": {
+          "type": "object",
+          "properties": {
+            "event_history": {
+              "type": "object",
+              "properties": {
+                "mutability": {
+                  "type": "string",
+                  "const": "append_only",
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+                    "pointer": "/history_and_reversal_semantics/event_history/mutability"
+                  }
+                },
+                "accepted_records_are_immutable": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+                    "pointer": "/history_and_reversal_semantics/event_history/accepted_records_are_immutable"
+                  }
+                },
+                "deletion_or_in_place_edit_allowed": {
+                  "type": "boolean",
+                  "const": false,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+                    "pointer": "/history_and_reversal_semantics/event_history/deletion_or_in_place_edit_allowed"
+                  }
+                }
+              },
+              "required": [
+                "mutability",
+                "accepted_records_are_immutable",
+                "deletion_or_in_place_edit_allowed"
+              ],
+              "additionalProperties": true
+            },
+            "current_state_effects": {
+              "type": "object",
+              "properties": {
+                "derived_by": {
+                  "type": "string",
+                  "const": "deterministic_fold_of_accepted_history",
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+                    "pointer": "/history_and_reversal_semantics/current_state_effects/derived_by"
+                  }
+                },
+                "may_be_reversible": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+                    "pointer": "/history_and_reversal_semantics/current_state_effects/may_be_reversible"
+                  }
+                },
+                "reversibility_requires_domain_authorization": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+                    "pointer": "/history_and_reversal_semantics/current_state_effects/reversibility_requires_domain_authorization"
+                  }
+                }
+              },
+              "required": [
+                "derived_by",
+                "may_be_reversible",
+                "reversibility_requires_domain_authorization"
+              ],
+              "additionalProperties": true
+            },
+            "reversal": {
+              "type": "object",
+              "properties": {
+                "canonical_operation": {
+                  "type": "string",
+                  "const": "append_compensating_worldstate_delta",
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+                    "pointer": "/history_and_reversal_semantics/reversal/canonical_operation"
+                  }
+                },
+                "requires_provenance": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+                    "pointer": "/history_and_reversal_semantics/reversal/requires_provenance"
+                  }
+                },
+                "preserves_original_event": {
+                  "type": "boolean",
+                  "const": true,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+                    "pointer": "/history_and_reversal_semantics/reversal/preserves_original_event"
+                  }
+                },
+                "may_reorder_history": {
+                  "type": "boolean",
+                  "const": false,
+                  "x-ywe-source-ref": {
+                    "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+                    "pointer": "/history_and_reversal_semantics/reversal/may_reorder_history"
+                  }
+                }
+              },
+              "required": [
+                "canonical_operation",
+                "requires_provenance",
+                "preserves_original_event",
+                "may_reorder_history"
+              ],
+              "additionalProperties": true
+            },
+            "compatibility_aliases": {
+              "type": "object",
+              "properties": {
+                "reversals_require_new_worldstate_delta": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "const": "deprecated",
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+                        "pointer": "/history_and_reversal_semantics/compatibility_aliases/reversals_require_new_worldstate_delta/status"
+                      }
+                    },
+                    "canonical_rule": {
+                      "type": "string",
+                      "const": "reversal_appends_compensating_worldstate_delta",
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+                        "pointer": "/history_and_reversal_semantics/compatibility_aliases/reversals_require_new_worldstate_delta/canonical_rule"
+                      }
+                    },
+                    "behavior": {
+                      "type": "string",
+                      "const": "exact_semantic_alias",
+                      "x-ywe-source-ref": {
+                        "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+                        "pointer": "/history_and_reversal_semantics/compatibility_aliases/reversals_require_new_worldstate_delta/behavior"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "canonical_rule",
+                    "behavior"
+                  ],
+                  "additionalProperties": true
+                }
+              },
+              "required": [
+                "reversals_require_new_worldstate_delta"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "event_history",
+            "current_state_effects",
+            "reversal",
+            "compatibility_aliases"
+          ],
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "version",
+        "status",
+        "system",
+        "authority_stack",
+        "purpose",
+        "ash_asp_core_math_rebuild_addendum",
+        "worldstate_delta_records",
+        "required_context",
+        "persistence_rules",
+        "forbidden_mutations",
+        "validation_markers",
+        "delta_rule",
+        "location_mutation_rule",
+        "history_and_reversal_semantics"
+      ],
+      "additionalProperties": true,
+      "title": "WorldstateDeltaRulesDocument",
+      "description": "Draft reviewed YWE document format policy. Structure and declared policy values only; no runtime execution or described semantic rejection certification.",
+      "x-ywe-requirement-id": "YWE-REQ-0032",
+      "x-ywe-source-ref": {
+        "path": "core/narrative_engine/worldstate_delta_rules.yaml",
+        "pointer": ""
+      },
+      "x-ywe-format-policy": "Observed named sections are required by this new format policy. Extra fields remain open; unspecified string and array bounds are absent."
+    },
+    "WorldstateLocationMutationRulesDocument": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "const": "canonical_phase_11_contract",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/worldstate_location_mutation_rules.yaml",
+            "pointer": "/status"
+          }
+        },
+        "system": {
+          "type": "string",
+          "const": "worldstate_location_mutation_v1",
+          "x-ywe-source-ref": {
+            "path": "core/narrative_engine/worldstate_location_mutation_rules.yaml",
+            "pointer": "/system"
+          }
+        },
+        "authority_stack": {
+          "type": "object",
+          "properties": {
+            "profile_layer": {
+              "type": "string"
+            },
+            "engine_layer": {
+              "type": "string"
+            },
+            "foundation": {
+              "type": "string"
+            },
+            "stability_component": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "profile_layer",
+            "engine_layer",
+            "foundation",
+            "stability_component"
+          ],
+          "additionalProperties": true
+        },
+        "purpose": {
+          "type": "object",
+          "properties": {
+            "summary": {
+              "type": "string"
+            },
+            "boundary": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "summary",
+            "boundary"
+          ],
+          "additionalProperties": true
+        },
+        "owned_records": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required_inputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emitted_outputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "worldstate_domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validation_markers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schema_refs": {
+          "type": "object",
+          "properties": {
+            "worldstate_location_mutation": {
+              "type": "string"
+            },
+            "worldstate_delta_packet": {
+              "type": "string"
+            },
+            "player_runtime_state": {
+              "type": "string"
+            },
+            "branch_event": {
+              "type": "string"
+            },
+            "branch_generation_context": {
+              "type": "string"
+            },
+            "leaf_branch_reality_state": {
+              "type": "string"
+            },
+            "future_generation_bias": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "worldstate_location_mutation",
+            "worldstate_delta_packet",
+            "player_runtime_state",
+            "branch_event",
+            "branch_generation_context",
+            "leaf_branch_reality_state",
+            "future_generation_bias"
+          ],
+          "additionalProperties": true
+        },
+        "location_mutation_states": {
+          "type": "object",
+          "properties": {
+            "base": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            },
+            "observed": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            },
+            "altered": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            },
+            "activated": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            },
+            "suppressed": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            },
+            "threatened": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            },
+            "consecrated": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            },
+            "unstable": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            },
+            "contained": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            },
+            "archived": {
+              "type": "object",
+              "properties": {
+                "meaning": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "meaning"
+              ],
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "base",
+            "observed",
+            "altered",
+            "activated",
+            "suppressed",
+            "threatened",
+            "consecrated",
+            "unstable",
+            "contained",
+            "archived"
+          ],
+          "additionalProperties": true
+        },
+        "mutation_pipeline": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "step": {
+                "type": "string"
+              },
+              "input": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "output": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              }
+            },
+            "required": [
+              "step",
+              "input",
+              "output"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "rejected_mutations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "mutation": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "mutation",
+              "reason"
+            ],
+            "additionalProperties": true
+          }
+        }
+      },
+      "required": [
+        "version",
+        "status",
+        "system",
+        "authority_stack",
+        "purpose",
+        "owned_records",
+        "required_inputs",
+        "emitted_outputs",
+        "worldstate_domains",
+        "validation_markers",
+        "schema_refs",
+        "location_mutation_states",
+        "mutation_pipeline",
+        "rejected_mutations"
+      ],
+      "additionalProperties": true,
+      "title": "WorldstateLocationMutationRulesDocument",
+      "description": "Draft reviewed YWE document format policy. Structure and declared policy values only; no runtime execution or described semantic rejection certification.",
+      "x-ywe-requirement-id": "YWE-REQ-0032",
+      "x-ywe-source-ref": {
+        "path": "core/narrative_engine/worldstate_location_mutation_rules.yaml",
+        "pointer": ""
+      },
+      "x-ywe-format-policy": "Observed named sections are required by this new format policy. Extra fields remain open; unspecified string and array bounds are absent."
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "artifact_type": "m2_validation_operation_cases",
+  "artifact_version": "1.0.0",
+  "validation_scope": "schema_validation_operation",
+  "recovery": {
+    "retry_delay": {
+      "operation_id": "m2.operation.retry_validation_recovery",
+      "category": "recovery",
+      "validation_scope": "schema_validation_operation",
+      "description": "Validate the accepted common retry, diagnose its negative delay proposal, restore its exact original value and validate again.",
+      "fixture_id": "m2.common.retry.positive",
+      "fixture_binding": {
+        "path": "examples/contract_foundation/common_contract_cases.example.json",
+        "instance_pointer": "/positive/retry",
+        "schema_id": "https://ywe.local/schemas/common/retry.schema.json",
+        "category": "positive",
+        "expected_result": "accept",
+        "expected_errors": []
+      },
+      "instance_sha256": "1da18ac1bfb49ee62e71a8e61be9481bfab0c587b70043713a1bb6173ffedede",
+      "replacement": {
+        "pointer": "/retry_after",
+        "invalid_value": -1,
+        "restored_value": 2.0
+      },
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINIMUM",
+          "instance_pointer": "/retry_after",
+          "schema_pointer": "/properties/retry_after/minimum"
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/common/retry.schema.json",
+          "pointer": "/properties/retry_after/minimum",
+          "value": 0
+        }
+      ]
+    }
+  },
+  "replay": {
+    "accepted_retry": {
+      "operation_id": "m2.operation.retry_validation_replay",
+      "category": "replay",
+      "validation_scope": "schema_validation_operation",
+      "description": "Independently reload and validate the registered accepted retry twice with identical structural results.",
+      "fixture_id": "m2.common.retry.positive",
+      "fixture_binding": {
+        "path": "examples/contract_foundation/common_contract_cases.example.json",
+        "instance_pointer": "/positive/retry",
+        "schema_id": "https://ywe.local/schemas/common/retry.schema.json",
+        "category": "positive",
+        "expected_result": "accept",
+        "expected_errors": []
+      },
+      "instance_sha256": "1da18ac1bfb49ee62e71a8e61be9481bfab0c587b70043713a1bb6173ffedede"
+    },
+    "rejected_retry": {
+      "operation_id": "m2.operation.retry_rejection_replay",
+      "category": "replay",
+      "validation_scope": "schema_validation_operation",
+      "description": "Independently reload and validate the registered rejected retry twice with identical complete rejection witnesses.",
+      "fixture_id": "m2.common.retry_negative_delay.reject",
+      "fixture_binding": {
+        "path": "examples/contract_foundation/common_contract_cases.example.json",
+        "instance_pointer": "/reject/retry_negative_delay",
+        "schema_id": "https://ywe.local/schemas/common/retry.schema.json",
+        "category": "reject",
+        "expected_result": "reject",
+        "expected_errors": [
+          {
+            "error_id": "JSON_SCHEMA_MINIMUM",
+            "instance_pointer": "/retry_after",
+            "schema_pointer": "/properties/retry_after/minimum"
+          }
+        ]
+      },
+      "instance_sha256": "20d7472d39027100f3b66d8ed48b6a06f21c16d9b9cb332a6a272ba8f2054f04"
+    }
+  },
+  "migration": {
+    "protected_schema": {
+      "operation_id": "m2.operation.protected_schema_migration",
+      "category": "migration",
+      "validation_scope": "schema_validation_operation",
+      "description": "Validate the explicitly selected axiom diagnostic schema stage through the permanent immutable original migration and append-only assertion reconstruction proofs.",
+      "manifest_path": "data/validation/m2_contract_migration_manifest.json",
+      "migration_path": "data/schemas/axiom_diagnostic_packet_schema.json",
+      "source_revision": "b61b49eaf9dce30058a86b52fd4910087fc9e4da",
+      "migration_revision": "5b30dd50533d00b4c0852d45df3dfac61b3a4147",
+      "record_pointer": "/migrations/0",
+      "record_sha256": "6d3cbd494bb3f31858cbb9636367483b117c55ea1468b8890ca186a287149e28",
+      "assertion_revision_pointer": "/assertion_revisions/0",
+      "assertion_revision_sha256": "5456ea89c39e37b32b0a3fe915e1c9324f9e6b62c13980e4dbc0d994ad2b21cd",
+      "current_stage_sha256": "7ddc3bdaa47d93f7adc0678da137fc5d6c0ec22336b7723af83133c4196f1f41"
+    }
+  }
+}

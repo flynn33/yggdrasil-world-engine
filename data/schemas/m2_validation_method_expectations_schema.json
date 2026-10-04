@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m2_validation_method_expectations_schema.json",
+  "title": "M2 schema validation method execution expectations",
+  "description": "Exact executable foundation method selection, source-driven property owner and isolated assertion-mutation controls. Does not certify runtime behavior.",
+  "x-ywe-requirement-id": "YWE-REQ-0036",
+  "type": "object",
+  "required": [
+    "schema_ref",
+    "artifact_type",
+    "artifact_version",
+    "validation_scope",
+    "methods",
+    "dependency_case_pointers",
+    "module_properties",
+    "mutations"
+  ],
+  "properties": {
+    "schema_ref": {
+      "const": "data/schemas/m2_validation_method_expectations_schema.json"
+    },
+    "artifact_type": {
+      "const": "ywe_m2_validation_method_expectations"
+    },
+    "artifact_version": {
+      "const": "1.0.0"
+    },
+    "validation_scope": {
+      "const": "schema_validation_foundation"
+    },
+    "methods": {
+      "const": [
+        "meta_schema",
+        "instance",
+        "reference",
+        "identifier",
+        "dependency",
+        "negative",
+        "property",
+        "mutation"
+      ]
+    },
+    "dependency_case_pointers": {
+      "const": [
+        "/reject/pattern_unknown_enum_reference",
+        "/reject/pattern_unknown_list_enum_reference",
+        "/reject/pattern_unknown_registry_record_reference",
+        "/reject/pattern_unknown_parent_record_reference",
+        "/reject/pattern_unknown_required_member",
+        "/reject/pattern_unknown_nested_required_member",
+        "/reject/pattern_unknown_extension_required_member",
+        "/reject/pattern_self_inheritance_cycle",
+        "/reject/pattern_two_record_inheritance_cycle",
+        "/reject/module_missing_inline_enum_surface",
+        "/reject/module_inconsistent_inline_enum",
+        "/reject/module_duplicate_inline_enum",
+        "/reject/module_unknown_required_member"
+      ]
+    },
+    "module_properties": {
+      "const": {
+        "source_path": "data/module_capability/module_capability_manifest_schema.yaml",
+        "positive_path": "data/module_capability/manifests/ash_pattern_engine.yaml",
+        "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json"
+      }
+    },
+    "mutations": {
+      "const": [
+        {
+          "mutant_id": "ability_wolf_const",
+          "schema_path": "data/schemas/ability_wolf_synergy_schema.json",
+          "assertion_pointer": "/properties/not_morality_system/const",
+          "before": true,
+          "operations": [
+            {
+              "op": "remove",
+              "path": "/properties/not_morality_system/const"
+            }
+          ],
+          "positive_fixture_id": "m2.ability_safety.positive.wolf_synergy",
+          "reject_fixture_id": "m2.ability_safety.reject.wolf_morality"
+        },
+        {
+          "mutant_id": "identifier_max_length",
+          "schema_path": "data/schemas/common/identifier.schema.json",
+          "assertion_pointer": "/maxLength",
+          "before": 256,
+          "operations": [
+            {
+              "op": "remove",
+              "path": "/maxLength"
+            }
+          ],
+          "positive_fixture_id": "m2.common.identifier.positive",
+          "reject_fixture_id": "m2.common.identifier_overlong.reject"
+        },
+        {
+          "mutant_id": "reference_required_kind",
+          "schema_path": "data/schemas/common/reference.schema.json",
+          "assertion_pointer": "/required",
+          "before": [
+            "identifier",
+            "kind"
+          ],
+          "operations": [
+            {
+              "op": "replace",
+              "path": "/required",
+              "value": [
+                "identifier"
+              ]
+            }
+          ],
+          "positive_fixture_id": "m2.common.reference.positive",
+          "reject_fixture_id": "m2.common.reference_missing_kind.reject"
+        }
+      ]
+    }
+  },
+  "additionalProperties": false
+}

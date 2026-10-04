@@ -1,0 +1,92 @@
+{
+  "artifact_type": "m2_validation_operation_expectations",
+  "artifact_version": "1.0.0",
+  "cases": [
+    {
+      "operation_id": "m2.operation.retry_validation_recovery",
+      "instance_pointer": "/recovery/retry_delay",
+      "category": "recovery",
+      "expected_stages": [
+        {
+          "stage": "positive_control",
+          "result": "accept",
+          "errors": []
+        },
+        {
+          "stage": "invalid_proposal",
+          "result": "reject",
+          "errors": [
+            {
+              "error_id": "JSON_SCHEMA_MINIMUM",
+              "instance_pointer": "/retry_after",
+              "schema_pointer": "/properties/retry_after/minimum"
+            }
+          ]
+        },
+        {
+          "stage": "restored_input",
+          "result": "accept",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "operation_id": "m2.operation.retry_validation_replay",
+      "instance_pointer": "/replay/accepted_retry",
+      "category": "replay",
+      "expected_stages": [
+        {
+          "stage": "first_validation",
+          "result": "accept",
+          "errors": []
+        },
+        {
+          "stage": "replayed_validation",
+          "result": "accept",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "operation_id": "m2.operation.retry_rejection_replay",
+      "instance_pointer": "/replay/rejected_retry",
+      "category": "replay",
+      "expected_stages": [
+        {
+          "stage": "first_validation",
+          "result": "reject",
+          "errors": [
+            {
+              "error_id": "JSON_SCHEMA_MINIMUM",
+              "instance_pointer": "/retry_after",
+              "schema_pointer": "/properties/retry_after/minimum"
+            }
+          ]
+        },
+        {
+          "stage": "replayed_validation",
+          "result": "reject",
+          "errors": [
+            {
+              "error_id": "JSON_SCHEMA_MINIMUM",
+              "instance_pointer": "/retry_after",
+              "schema_pointer": "/properties/retry_after/minimum"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "operation_id": "m2.operation.protected_schema_migration",
+      "instance_pointer": "/migration/protected_schema",
+      "category": "migration",
+      "expected_stages": [
+        {
+          "stage": "protected_proof_reconstruction",
+          "result": "accept",
+          "errors": []
+        }
+      ]
+    }
+  ]
+}

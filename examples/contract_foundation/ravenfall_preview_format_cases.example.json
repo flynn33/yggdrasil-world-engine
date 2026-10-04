@@ -1,0 +1,1667 @@
+{
+  "artifact_type": "ravenfall_preview_format_cases",
+  "artifact_version": "1.0.0",
+  "description": "YWE-REQ-0031: format fixtures; accepted empty/open boundaries do not certify runtime completeness.",
+  "boundary": {
+    "recovery_empty_note": {
+      "schema_ref": "data/schemas/vertical_slice_playtest_trace_schema.json",
+      "trace_id": "ravenfall_gate.reveal.phase17.minimum_trace",
+      "vertical_slice": "ravenfall_gate",
+      "quest": "the_buried_oath_at_ravenfall_gate",
+      "completion_mode": "reveal",
+      "branch_event_ref": "branch.ravenfall_gate.reveal",
+      "quest_reward_trace_ref": "quest_reward_trace.ravenfall_gate.reveal",
+      "wolf_companion_trace_ref": "wolf_trace.ravenfall_gate.reveal",
+      "future_generation_bias_trace_ref": "future_generation_bias.ravenfall_gate.reveal",
+      "worldstate_delta_or_noop_ref": "worldstate_or_noop.ravenfall_gate.reveal",
+      "platform_implementation": "not_present_agnostic_only",
+      "acceptance": {
+        "complete": false,
+        "note": ""
+      }
+    },
+    "recovery_empty_trace_ref": {
+      "schema_ref": "data/schemas/vertical_slice_playtest_trace_schema.json",
+      "trace_id": "ravenfall_gate.reveal.phase17.minimum_trace",
+      "vertical_slice": "ravenfall_gate",
+      "quest": "the_buried_oath_at_ravenfall_gate",
+      "completion_mode": "reveal",
+      "branch_event_ref": "",
+      "quest_reward_trace_ref": "quest_reward_trace.ravenfall_gate.reveal",
+      "wolf_companion_trace_ref": "wolf_trace.ravenfall_gate.reveal",
+      "future_generation_bias_trace_ref": "future_generation_bias.ravenfall_gate.reveal",
+      "worldstate_delta_or_noop_ref": "worldstate_or_noop.ravenfall_gate.reveal",
+      "platform_implementation": "not_present_agnostic_only",
+      "acceptance": {
+        "complete": false,
+        "note": "Example minimum trace shape; Complete or adapt according to repository schema conventions."
+      }
+    },
+    "branch_empty_worldstate_refs": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "completion_mode": "reveal",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [],
+      "diagnostic_noop_ref": null,
+      "future_generation_bias_refs": [
+        "future_generation_bias.ravenfall_gate.public_witness_threads"
+      ]
+    },
+    "branch_noop_string": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "completion_mode": "reveal",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [
+        "worldstate_delta.ravenfall_gate.reveal"
+      ],
+      "diagnostic_noop_ref": "diagnostic.preview.noop",
+      "future_generation_bias_refs": [
+        "future_generation_bias.ravenfall_gate.public_witness_threads"
+      ]
+    },
+    "branch_noop_null": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "completion_mode": "reveal",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [
+        "worldstate_delta.ravenfall_gate.reveal"
+      ],
+      "diagnostic_noop_ref": null,
+      "future_generation_bias_refs": [
+        "future_generation_bias.ravenfall_gate.public_witness_threads"
+      ]
+    },
+    "branch_empty_future_refs": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "completion_mode": "reveal",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [
+        "worldstate_delta.ravenfall_gate.reveal"
+      ],
+      "diagnostic_noop_ref": null,
+      "future_generation_bias_refs": []
+    },
+    "common_empty_source_refs": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "completion_mode": "reveal",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [
+        "worldstate_delta.ravenfall_gate.reveal"
+      ],
+      "diagnostic_noop_ref": null,
+      "future_generation_bias_refs": [
+        "future_generation_bias.ravenfall_gate.public_witness_threads"
+      ]
+    },
+    "common_empty_phase_refs": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [],
+      "completion_mode": "reveal",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [
+        "worldstate_delta.ravenfall_gate.reveal"
+      ],
+      "diagnostic_noop_ref": null,
+      "future_generation_bias_refs": [
+        "future_generation_bias.ravenfall_gate.public_witness_threads"
+      ]
+    },
+    "quest_empty_stages": {
+      "schema_id": "ywe.buried_oath.quest_design.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "quest_id": "the_buried_oath_at_ravenfall_gate",
+      "completion_modes": [
+        "reveal",
+        "conceal",
+        "bind",
+        "study",
+        "weaponize"
+      ],
+      "quest_stages": []
+    },
+    "quest_empty_modes": {
+      "schema_id": "ywe.buried_oath.quest_design.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "quest_id": "the_buried_oath_at_ravenfall_gate",
+      "completion_modes": [],
+      "quest_stages": [
+        {
+          "stage_id": "approach_gate",
+          "purpose": "introduce location pressure and wolf companion response"
+        },
+        {
+          "stage_id": "discover_oath",
+          "purpose": "reveal pattern/lore/choice pressure"
+        },
+        {
+          "stage_id": "choose_oath_response",
+          "purpose": "player selects meaningful branch action"
+        },
+        {
+          "stage_id": "resolve_consequence",
+          "purpose": "quest reward resolver emits delta bundle"
+        },
+        {
+          "stage_id": "revisit_gate",
+          "purpose": "prove location changed"
+        }
+      ]
+    },
+    "npc_empty_relation_text": {
+      "schema_id": "ywe.ravenfall_gate.npc_candidate.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "npc_role": "hidden_keeper",
+      "appears_when": "oath_concealed_or_studied",
+      "relation_context": "",
+      "self_reference_required": true
+    },
+    "npc_self_reference_false": {
+      "schema_id": "ywe.ravenfall_gate.npc_candidate.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "npc_role": "hidden_keeper",
+      "appears_when": "oath_concealed_or_studied",
+      "relation_context": "keeper of hidden oath memory",
+      "self_reference_required": false
+    },
+    "lore_empty_pattern_refs": {
+      "schema_id": "ywe.ravenfall_gate.lore_fragment.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "lore_id": "hidden_oath_memory",
+      "visibility": "branch_specific_after_conceal_or_study",
+      "pattern_trace_refs": [],
+      "not_random_text": true
+    },
+    "artifact_empty_conditions": {
+      "schema_id": "ywe.ravenfall_gate.artifact_eligibility.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "artifact_id": "oath_shard",
+      "eligibility_conditions": [],
+      "not_generic_loot": true
+    },
+    "creature_empty_conditions": {
+      "schema_id": "ywe.ravenfall_gate.creature_eligibility.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "creature_id": "echo_hound",
+      "eligibility_conditions": [],
+      "not_random_enemy": true
+    },
+    "recovery_open_acceptance": {
+      "schema_ref": "data/schemas/vertical_slice_playtest_trace_schema.json",
+      "trace_id": "ravenfall_gate.reveal.phase17.minimum_trace",
+      "vertical_slice": "ravenfall_gate",
+      "quest": "the_buried_oath_at_ravenfall_gate",
+      "completion_mode": "reveal",
+      "branch_event_ref": "branch.ravenfall_gate.reveal",
+      "quest_reward_trace_ref": "quest_reward_trace.ravenfall_gate.reveal",
+      "wolf_companion_trace_ref": "wolf_trace.ravenfall_gate.reveal",
+      "future_generation_bias_trace_ref": "future_generation_bias.ravenfall_gate.reveal",
+      "worldstate_delta_or_noop_ref": "worldstate_or_noop.ravenfall_gate.reveal",
+      "platform_implementation": "not_present_agnostic_only",
+      "acceptance": {
+        "complete": false,
+        "note": "Example minimum trace shape; Complete or adapt according to repository schema conventions.",
+        "profile_extension": {
+          "annotation": "open description"
+        }
+      }
+    },
+    "quest_open_stage": {
+      "schema_id": "ywe.buried_oath.quest_design.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "quest_id": "the_buried_oath_at_ravenfall_gate",
+      "completion_modes": [
+        "reveal",
+        "conceal",
+        "bind",
+        "study",
+        "weaponize"
+      ],
+      "quest_stages": [
+        {
+          "stage_id": "approach_gate",
+          "purpose": "introduce location pressure and wolf companion response",
+          "profile_extension": {
+            "annotation": "open description"
+          }
+        },
+        {
+          "stage_id": "discover_oath",
+          "purpose": "reveal pattern/lore/choice pressure"
+        },
+        {
+          "stage_id": "choose_oath_response",
+          "purpose": "player selects meaningful branch action"
+        },
+        {
+          "stage_id": "resolve_consequence",
+          "purpose": "quest reward resolver emits delta bundle"
+        },
+        {
+          "stage_id": "revisit_gate",
+          "purpose": "prove location changed"
+        }
+      ]
+    },
+    "open_root_recoveryminimumtracedescription": {
+      "schema_ref": "data/schemas/vertical_slice_playtest_trace_schema.json",
+      "trace_id": "ravenfall_gate.reveal.phase17.minimum_trace",
+      "vertical_slice": "ravenfall_gate",
+      "quest": "the_buried_oath_at_ravenfall_gate",
+      "completion_mode": "reveal",
+      "branch_event_ref": "branch.ravenfall_gate.reveal",
+      "quest_reward_trace_ref": "quest_reward_trace.ravenfall_gate.reveal",
+      "wolf_companion_trace_ref": "wolf_trace.ravenfall_gate.reveal",
+      "future_generation_bias_trace_ref": "future_generation_bias.ravenfall_gate.reveal",
+      "worldstate_delta_or_noop_ref": "worldstate_or_noop.ravenfall_gate.reveal",
+      "platform_implementation": "not_present_agnostic_only",
+      "acceptance": {
+        "complete": false,
+        "note": "Example minimum trace shape; Complete or adapt according to repository schema conventions."
+      },
+      "profile_extension": {
+        "annotation": "open description"
+      }
+    },
+    "open_root_ravenfallbranchoutcomedescription": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "completion_mode": "reveal",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [
+        "worldstate_delta.ravenfall_gate.reveal"
+      ],
+      "diagnostic_noop_ref": null,
+      "future_generation_bias_refs": [
+        "future_generation_bias.ravenfall_gate.public_witness_threads"
+      ],
+      "profile_extension": {
+        "annotation": "open description"
+      }
+    },
+    "open_root_ravenfallquestdesigndescription": {
+      "schema_id": "ywe.buried_oath.quest_design.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "quest_id": "the_buried_oath_at_ravenfall_gate",
+      "completion_modes": [
+        "reveal",
+        "conceal",
+        "bind",
+        "study",
+        "weaponize"
+      ],
+      "quest_stages": [
+        {
+          "stage_id": "approach_gate",
+          "purpose": "introduce location pressure and wolf companion response"
+        },
+        {
+          "stage_id": "discover_oath",
+          "purpose": "reveal pattern/lore/choice pressure"
+        },
+        {
+          "stage_id": "choose_oath_response",
+          "purpose": "player selects meaningful branch action"
+        },
+        {
+          "stage_id": "resolve_consequence",
+          "purpose": "quest reward resolver emits delta bundle"
+        },
+        {
+          "stage_id": "revisit_gate",
+          "purpose": "prove location changed"
+        }
+      ],
+      "profile_extension": {
+        "annotation": "open description"
+      }
+    },
+    "open_root_ravenfallnpcdescription": {
+      "schema_id": "ywe.ravenfall_gate.npc_candidate.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "npc_role": "hidden_keeper",
+      "appears_when": "oath_concealed_or_studied",
+      "relation_context": "keeper of hidden oath memory",
+      "self_reference_required": true,
+      "profile_extension": {
+        "annotation": "open description"
+      }
+    },
+    "open_root_ravenfallloredescription": {
+      "schema_id": "ywe.ravenfall_gate.lore_fragment.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "lore_id": "hidden_oath_memory",
+      "visibility": "branch_specific_after_conceal_or_study",
+      "pattern_trace_refs": [
+        "hidden_memory_trace.ravenfall_gate"
+      ],
+      "not_random_text": true,
+      "profile_extension": {
+        "annotation": "open description"
+      }
+    },
+    "open_root_ravenfallartifacteligibilitydescription": {
+      "schema_id": "ywe.ravenfall_gate.artifact_eligibility.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "artifact_id": "oath_shard",
+      "eligibility_conditions": [
+        "oath_revealed_or_bound",
+        "worldstate_delta_exists",
+        "location_phase_changed"
+      ],
+      "not_generic_loot": true,
+      "profile_extension": {
+        "annotation": "open description"
+      }
+    },
+    "open_root_ravenfallcreatureeligibilitydescription": {
+      "schema_id": "ywe.ravenfall_gate.creature_eligibility.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "creature_id": "echo_hound",
+      "eligibility_conditions": [
+        "oath_memory_repeats",
+        "threshold_pressure_active"
+      ],
+      "not_random_enemy": true,
+      "profile_extension": {
+        "annotation": "open description"
+      }
+    }
+  },
+  "reject": {
+    "recovery_complete_true": {
+      "schema_ref": "data/schemas/vertical_slice_playtest_trace_schema.json",
+      "trace_id": "ravenfall_gate.reveal.phase17.minimum_trace",
+      "vertical_slice": "ravenfall_gate",
+      "quest": "the_buried_oath_at_ravenfall_gate",
+      "completion_mode": "reveal",
+      "branch_event_ref": "branch.ravenfall_gate.reveal",
+      "quest_reward_trace_ref": "quest_reward_trace.ravenfall_gate.reveal",
+      "wolf_companion_trace_ref": "wolf_trace.ravenfall_gate.reveal",
+      "future_generation_bias_trace_ref": "future_generation_bias.ravenfall_gate.reveal",
+      "worldstate_delta_or_noop_ref": "worldstate_or_noop.ravenfall_gate.reveal",
+      "platform_implementation": "not_present_agnostic_only",
+      "acceptance": {
+        "complete": true,
+        "note": "Example minimum trace shape; Complete or adapt according to repository schema conventions."
+      }
+    },
+    "recovery_note_number": {
+      "schema_ref": "data/schemas/vertical_slice_playtest_trace_schema.json",
+      "trace_id": "ravenfall_gate.reveal.phase17.minimum_trace",
+      "vertical_slice": "ravenfall_gate",
+      "quest": "the_buried_oath_at_ravenfall_gate",
+      "completion_mode": "reveal",
+      "branch_event_ref": "branch.ravenfall_gate.reveal",
+      "quest_reward_trace_ref": "quest_reward_trace.ravenfall_gate.reveal",
+      "wolf_companion_trace_ref": "wolf_trace.ravenfall_gate.reveal",
+      "future_generation_bias_trace_ref": "future_generation_bias.ravenfall_gate.reveal",
+      "worldstate_delta_or_noop_ref": "worldstate_or_noop.ravenfall_gate.reveal",
+      "platform_implementation": "not_present_agnostic_only",
+      "acceptance": {
+        "complete": false,
+        "note": 4
+      }
+    },
+    "recovery_note_missing": {
+      "schema_ref": "data/schemas/vertical_slice_playtest_trace_schema.json",
+      "trace_id": "ravenfall_gate.reveal.phase17.minimum_trace",
+      "vertical_slice": "ravenfall_gate",
+      "quest": "the_buried_oath_at_ravenfall_gate",
+      "completion_mode": "reveal",
+      "branch_event_ref": "branch.ravenfall_gate.reveal",
+      "quest_reward_trace_ref": "quest_reward_trace.ravenfall_gate.reveal",
+      "wolf_companion_trace_ref": "wolf_trace.ravenfall_gate.reveal",
+      "future_generation_bias_trace_ref": "future_generation_bias.ravenfall_gate.reveal",
+      "worldstate_delta_or_noop_ref": "worldstate_or_noop.ravenfall_gate.reveal",
+      "platform_implementation": "not_present_agnostic_only",
+      "acceptance": {
+        "complete": false
+      }
+    },
+    "recovery_acceptance_array": {
+      "schema_ref": "data/schemas/vertical_slice_playtest_trace_schema.json",
+      "trace_id": "ravenfall_gate.reveal.phase17.minimum_trace",
+      "vertical_slice": "ravenfall_gate",
+      "quest": "the_buried_oath_at_ravenfall_gate",
+      "completion_mode": "reveal",
+      "branch_event_ref": "branch.ravenfall_gate.reveal",
+      "quest_reward_trace_ref": "quest_reward_trace.ravenfall_gate.reveal",
+      "wolf_companion_trace_ref": "wolf_trace.ravenfall_gate.reveal",
+      "future_generation_bias_trace_ref": "future_generation_bias.ravenfall_gate.reveal",
+      "worldstate_delta_or_noop_ref": "worldstate_or_noop.ravenfall_gate.reveal",
+      "platform_implementation": "not_present_agnostic_only",
+      "acceptance": []
+    },
+    "recovery_ref_missing": {
+      "schema_ref": "data/schemas/vertical_slice_playtest_trace_schema.json",
+      "trace_id": "ravenfall_gate.reveal.phase17.minimum_trace",
+      "vertical_slice": "ravenfall_gate",
+      "quest": "the_buried_oath_at_ravenfall_gate",
+      "completion_mode": "reveal",
+      "quest_reward_trace_ref": "quest_reward_trace.ravenfall_gate.reveal",
+      "wolf_companion_trace_ref": "wolf_trace.ravenfall_gate.reveal",
+      "future_generation_bias_trace_ref": "future_generation_bias.ravenfall_gate.reveal",
+      "worldstate_delta_or_noop_ref": "worldstate_or_noop.ravenfall_gate.reveal",
+      "platform_implementation": "not_present_agnostic_only",
+      "acceptance": {
+        "complete": false,
+        "note": "Example minimum trace shape; Complete or adapt according to repository schema conventions."
+      }
+    },
+    "recovery_unknown_completion": {
+      "schema_ref": "data/schemas/vertical_slice_playtest_trace_schema.json",
+      "trace_id": "ravenfall_gate.reveal.phase17.minimum_trace",
+      "vertical_slice": "ravenfall_gate",
+      "quest": "the_buried_oath_at_ravenfall_gate",
+      "completion_mode": "other",
+      "branch_event_ref": "branch.ravenfall_gate.reveal",
+      "quest_reward_trace_ref": "quest_reward_trace.ravenfall_gate.reveal",
+      "wolf_companion_trace_ref": "wolf_trace.ravenfall_gate.reveal",
+      "future_generation_bias_trace_ref": "future_generation_bias.ravenfall_gate.reveal",
+      "worldstate_delta_or_noop_ref": "worldstate_or_noop.ravenfall_gate.reveal",
+      "platform_implementation": "not_present_agnostic_only",
+      "acceptance": {
+        "complete": false,
+        "note": "Example minimum trace shape; Complete or adapt according to repository schema conventions."
+      }
+    },
+    "branch_noop_boolean": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "completion_mode": "reveal",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [
+        "worldstate_delta.ravenfall_gate.reveal"
+      ],
+      "diagnostic_noop_ref": false,
+      "future_generation_bias_refs": [
+        "future_generation_bias.ravenfall_gate.public_witness_threads"
+      ]
+    },
+    "branch_delta_item_number": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "completion_mode": "reveal",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [
+        4
+      ],
+      "diagnostic_noop_ref": null,
+      "future_generation_bias_refs": [
+        "future_generation_bias.ravenfall_gate.public_witness_threads"
+      ]
+    },
+    "branch_future_refs_string": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "completion_mode": "reveal",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [
+        "worldstate_delta.ravenfall_gate.reveal"
+      ],
+      "diagnostic_noop_ref": null,
+      "future_generation_bias_refs": "future"
+    },
+    "branch_noop_missing": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "completion_mode": "reveal",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [
+        "worldstate_delta.ravenfall_gate.reveal"
+      ],
+      "future_generation_bias_refs": [
+        "future_generation_bias.ravenfall_gate.public_witness_threads"
+      ]
+    },
+    "branch_unknown_completion": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "completion_mode": "other",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [
+        "worldstate_delta.ravenfall_gate.reveal"
+      ],
+      "diagnostic_noop_ref": null,
+      "future_generation_bias_refs": [
+        "future_generation_bias.ravenfall_gate.public_witness_threads"
+      ]
+    },
+    "quest_stages_number": {
+      "schema_id": "ywe.buried_oath.quest_design.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "quest_id": "the_buried_oath_at_ravenfall_gate",
+      "completion_modes": [
+        "reveal",
+        "conceal",
+        "bind",
+        "study",
+        "weaponize"
+      ],
+      "quest_stages": 4
+    },
+    "quest_stage_purpose_missing": {
+      "schema_id": "ywe.buried_oath.quest_design.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "quest_id": "the_buried_oath_at_ravenfall_gate",
+      "completion_modes": [
+        "reveal",
+        "conceal",
+        "bind",
+        "study",
+        "weaponize"
+      ],
+      "quest_stages": [
+        {
+          "stage_id": "approach_gate"
+        },
+        {
+          "stage_id": "discover_oath",
+          "purpose": "reveal pattern/lore/choice pressure"
+        },
+        {
+          "stage_id": "choose_oath_response",
+          "purpose": "player selects meaningful branch action"
+        },
+        {
+          "stage_id": "resolve_consequence",
+          "purpose": "quest reward resolver emits delta bundle"
+        },
+        {
+          "stage_id": "revisit_gate",
+          "purpose": "prove location changed"
+        }
+      ]
+    },
+    "quest_stage_purpose_array": {
+      "schema_id": "ywe.buried_oath.quest_design.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "quest_id": "the_buried_oath_at_ravenfall_gate",
+      "completion_modes": [
+        "reveal",
+        "conceal",
+        "bind",
+        "study",
+        "weaponize"
+      ],
+      "quest_stages": [
+        {
+          "stage_id": "approach_gate",
+          "purpose": []
+        },
+        {
+          "stage_id": "discover_oath",
+          "purpose": "reveal pattern/lore/choice pressure"
+        },
+        {
+          "stage_id": "choose_oath_response",
+          "purpose": "player selects meaningful branch action"
+        },
+        {
+          "stage_id": "resolve_consequence",
+          "purpose": "quest reward resolver emits delta bundle"
+        },
+        {
+          "stage_id": "revisit_gate",
+          "purpose": "prove location changed"
+        }
+      ]
+    },
+    "quest_unknown_mode": {
+      "schema_id": "ywe.buried_oath.quest_design.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "quest_id": "the_buried_oath_at_ravenfall_gate",
+      "completion_modes": [
+        "other",
+        "conceal",
+        "bind",
+        "study",
+        "weaponize"
+      ],
+      "quest_stages": [
+        {
+          "stage_id": "approach_gate",
+          "purpose": "introduce location pressure and wolf companion response"
+        },
+        {
+          "stage_id": "discover_oath",
+          "purpose": "reveal pattern/lore/choice pressure"
+        },
+        {
+          "stage_id": "choose_oath_response",
+          "purpose": "player selects meaningful branch action"
+        },
+        {
+          "stage_id": "resolve_consequence",
+          "purpose": "quest reward resolver emits delta bundle"
+        },
+        {
+          "stage_id": "revisit_gate",
+          "purpose": "prove location changed"
+        }
+      ]
+    },
+    "npc_relation_null": {
+      "schema_id": "ywe.ravenfall_gate.npc_candidate.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "npc_role": "hidden_keeper",
+      "appears_when": "oath_concealed_or_studied",
+      "relation_context": null,
+      "self_reference_required": true
+    },
+    "npc_self_reference_integer": {
+      "schema_id": "ywe.ravenfall_gate.npc_candidate.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "npc_role": "hidden_keeper",
+      "appears_when": "oath_concealed_or_studied",
+      "relation_context": "keeper of hidden oath memory",
+      "self_reference_required": 1
+    },
+    "npc_relation_missing": {
+      "schema_id": "ywe.ravenfall_gate.npc_candidate.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "npc_role": "hidden_keeper",
+      "appears_when": "oath_concealed_or_studied",
+      "self_reference_required": true
+    },
+    "npc_role_array": {
+      "schema_id": "ywe.ravenfall_gate.npc_candidate.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "npc_role": [],
+      "appears_when": "oath_concealed_or_studied",
+      "relation_context": "keeper of hidden oath memory",
+      "self_reference_required": true
+    },
+    "lore_pattern_refs_missing": {
+      "schema_id": "ywe.ravenfall_gate.lore_fragment.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "lore_id": "hidden_oath_memory",
+      "visibility": "branch_specific_after_conceal_or_study",
+      "not_random_text": true
+    },
+    "lore_pattern_item_object": {
+      "schema_id": "ywe.ravenfall_gate.lore_fragment.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "lore_id": "hidden_oath_memory",
+      "visibility": "branch_specific_after_conceal_or_study",
+      "pattern_trace_refs": [
+        {}
+      ],
+      "not_random_text": true
+    },
+    "lore_visibility_boolean": {
+      "schema_id": "ywe.ravenfall_gate.lore_fragment.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "lore_id": "hidden_oath_memory",
+      "visibility": false,
+      "pattern_trace_refs": [
+        "hidden_memory_trace.ravenfall_gate"
+      ],
+      "not_random_text": true
+    },
+    "lore_random_text_allowed": {
+      "schema_id": "ywe.ravenfall_gate.lore_fragment.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "lore_id": "hidden_oath_memory",
+      "visibility": "branch_specific_after_conceal_or_study",
+      "pattern_trace_refs": [
+        "hidden_memory_trace.ravenfall_gate"
+      ],
+      "not_random_text": false
+    },
+    "artifact_condition_item_boolean": {
+      "schema_id": "ywe.ravenfall_gate.artifact_eligibility.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "artifact_id": "oath_shard",
+      "eligibility_conditions": [
+        false,
+        "worldstate_delta_exists",
+        "location_phase_changed"
+      ],
+      "not_generic_loot": true
+    },
+    "artifact_id_missing": {
+      "schema_id": "ywe.ravenfall_gate.artifact_eligibility.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "eligibility_conditions": [
+        "oath_revealed_or_bound",
+        "worldstate_delta_exists",
+        "location_phase_changed"
+      ],
+      "not_generic_loot": true
+    },
+    "artifact_generic_loot_allowed": {
+      "schema_id": "ywe.ravenfall_gate.artifact_eligibility.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "artifact_id": "oath_shard",
+      "eligibility_conditions": [
+        "oath_revealed_or_bound",
+        "worldstate_delta_exists",
+        "location_phase_changed"
+      ],
+      "not_generic_loot": false
+    },
+    "creature_conditions_object": {
+      "schema_id": "ywe.ravenfall_gate.creature_eligibility.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "creature_id": "echo_hound",
+      "eligibility_conditions": {},
+      "not_random_enemy": true
+    },
+    "creature_condition_item_boolean": {
+      "schema_id": "ywe.ravenfall_gate.creature_eligibility.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "creature_id": "echo_hound",
+      "eligibility_conditions": [
+        false,
+        "threshold_pressure_active"
+      ],
+      "not_random_enemy": true
+    },
+    "creature_random_enemy_allowed": {
+      "schema_id": "ywe.ravenfall_gate.creature_eligibility.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "creature_id": "echo_hound",
+      "eligibility_conditions": [
+        "oath_memory_repeats",
+        "threshold_pressure_active"
+      ],
+      "not_random_enemy": false
+    },
+    "common_source_refs_boolean": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": false,
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "completion_mode": "reveal",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [
+        "worldstate_delta.ravenfall_gate.reveal"
+      ],
+      "diagnostic_noop_ref": null,
+      "future_generation_bias_refs": [
+        "future_generation_bias.ravenfall_gate.public_witness_threads"
+      ]
+    },
+    "common_phase_item_boolean": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        false,
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "completion_mode": "reveal",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [
+        "worldstate_delta.ravenfall_gate.reveal"
+      ],
+      "diagnostic_noop_ref": null,
+      "future_generation_bias_refs": [
+        "future_generation_bias.ravenfall_gate.public_witness_threads"
+      ]
+    },
+    "common_phase_id_wrong": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_17",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "completion_mode": "reveal",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [
+        "worldstate_delta.ravenfall_gate.reveal"
+      ],
+      "diagnostic_noop_ref": null,
+      "future_generation_bias_refs": [
+        "future_generation_bias.ravenfall_gate.public_witness_threads"
+      ]
+    },
+    "common_source_refs_missing": {
+      "schema_id": "ywe.ravenfall_gate.branch_outcome.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "completion_mode": "reveal",
+      "truth_scope": "shared_world_truth",
+      "location_phase": "oath_revealed",
+      "wolf_companion_emphasis": "white_wolf_reveal_protect",
+      "ability_pressure": "oath_sight",
+      "quest_reward_resolution_ref": "quest_reward_resolution.ravenfall_gate.reveal",
+      "worldstate_delta_refs": [
+        "worldstate_delta.ravenfall_gate.reveal"
+      ],
+      "diagnostic_noop_ref": null,
+      "future_generation_bias_refs": [
+        "future_generation_bias.ravenfall_gate.public_witness_threads"
+      ]
+    },
+    "recovery_complete_string": {
+      "schema_ref": "data/schemas/vertical_slice_playtest_trace_schema.json",
+      "trace_id": "ravenfall_gate.reveal.phase17.minimum_trace",
+      "vertical_slice": "ravenfall_gate",
+      "quest": "the_buried_oath_at_ravenfall_gate",
+      "completion_mode": "reveal",
+      "branch_event_ref": "branch.ravenfall_gate.reveal",
+      "quest_reward_trace_ref": "quest_reward_trace.ravenfall_gate.reveal",
+      "wolf_companion_trace_ref": "wolf_trace.ravenfall_gate.reveal",
+      "future_generation_bias_trace_ref": "future_generation_bias.ravenfall_gate.reveal",
+      "worldstate_delta_or_noop_ref": "worldstate_or_noop.ravenfall_gate.reveal",
+      "platform_implementation": "not_present_agnostic_only",
+      "acceptance": {
+        "complete": "false",
+        "note": "Example minimum trace shape; Complete or adapt according to repository schema conventions."
+      }
+    },
+    "lore_boolean_string": {
+      "schema_id": "ywe.ravenfall_gate.lore_fragment.example",
+      "phase_id": "phase_16",
+      "slice_id": "ravenfall_gate",
+      "status": "example_draft",
+      "source_truth_refs": [
+        "ASH_Model_of_the_Universe",
+        "YWE_engine_cosmology_model",
+        "Where_Ravens_Wait_Eternal_Reckoning_game_layer"
+      ],
+      "requires_phase_refs": [
+        "phase_9",
+        "phase_10",
+        "phase_11",
+        "phase_12",
+        "phase_13",
+        "phase_14",
+        "phase_15"
+      ],
+      "lore_id": "hidden_oath_memory",
+      "visibility": "branch_specific_after_conceal_or_study",
+      "pattern_trace_refs": [
+        "hidden_memory_trace.ravenfall_gate"
+      ],
+      "not_random_text": "true"
+    }
+  }
+}

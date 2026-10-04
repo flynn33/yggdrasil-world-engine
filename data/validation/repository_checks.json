@@ -345,6 +345,69 @@
         "always"
       ],
       "blocking": true
+    },
+    {
+      "id": "m2_validation_operations",
+      "name": "Executed schema validation recovery replay and migration cases",
+      "command": [
+        "{python}",
+        "scripts/check_m2_validation_operations.py",
+        "{root}"
+      ],
+      "groups": [
+        "m2",
+        "schema",
+        "conformance"
+      ],
+      "roadmap_milestones": [
+        "M2"
+      ],
+      "contexts": [
+        "always"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "m2_validation_methods",
+      "name": "Executed eight-method schema validation foundation",
+      "command": [
+        "{python}",
+        "scripts/check_m2_validation_methods.py",
+        "{root}"
+      ],
+      "groups": [
+        "m2",
+        "schema",
+        "conformance"
+      ],
+      "roadmap_milestones": [
+        "M2"
+      ],
+      "contexts": [
+        "always"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "m2_historical_acceptance",
+      "name": "Immutable source-bound M2 historical acceptance evidence",
+      "command": [
+        "{python}",
+        "scripts/check_m2_historical_acceptance.py",
+        "{root}"
+      ],
+      "groups": [
+        "m2",
+        "schema",
+        "conformance"
+      ],
+      "roadmap_milestones": [
+        "M2"
+      ],
+      "contexts": [
+        "always"
+      ],
+      "blocking": true
     }
   ]
 }

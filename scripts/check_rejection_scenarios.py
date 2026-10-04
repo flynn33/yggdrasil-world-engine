@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import copy
+import json
 import re
 import sys
 from pathlib import Path
@@ -21,7 +22,119 @@ PROJECTION_DEFINITIONS = {
     "QuestCompletionConsequenceAssertion",
     "LocationConsequenceAssertion",
     "ConditionalWolfFunctionAssertion",
+    "RealmThresholdAssertion",
+    "RealmSharedTruthAssertion",
 }
+
+
+EXECUTION_CONTRACTS_PATH = "data/validation/rejection_execution_contracts.json"
+EXECUTION_CONTRACTS_ID = "https://ywe.local/schemas/rejection_scenario_catalog_schema.json#/$defs/ExecutionContracts"
+SCENARIO_DEFINITION_ID = "https://ywe.local/schemas/rejection_scenario_catalog_schema.json#/$defs/scenario"
+
+
+def _typed_json(value):
+    return json.dumps(value, ensure_ascii=False, sort_keys=True,
+                      separators=(",", ":"), allow_nan=False)
+
+
+def _contract_value(scenario):
+    # Only description is cosmetic; all existing and future schema-declared
+    # fields are correspondence-critical by default. Root pointer has one
+    # supported equivalent spelling: absent or empty.
+    value = dict(scenario)
+    value.pop("description", None)
+    value["descriptor_unit_pointer"] = value.get("descriptor_unit_pointer", "")
+    return value
+
+
+def validate_execution_contracts(root, registry, document):
+    """Validate an independently authored ledger, then index unique rows."""
+    errors = []
+    contracts = {}
+    try:
+        validator = Draft202012Validator({"$ref": EXECUTION_CONTRACTS_ID}, registry=registry)
+        errors.extend("Execution contract ledger: " + error.message
+                      for error in validator.iter_errors(document))
+        if errors:
+            return errors, {}
+        seen_units = set()
+        for row in document["contracts"]:
+            scenario_id = row["scenario_id"]
+            unit = (row["descriptor_path"], row.get("descriptor_unit_pointer", ""))
+            if scenario_id in contracts:
+                errors.append("Duplicate approved rejection scenario ID: " + scenario_id)
+            if unit in seen_units:
+                errors.append("Duplicate approved rejection descriptor unit: " + repr(unit))
+            seen_units.add(unit)
+            contracts[scenario_id] = row
+        if errors:
+            return errors, {}
+        return [], contracts
+    except Exception as exc:
+        return ["Unable to validate rejection execution contracts: " + str(exc)], {}
+
+
+def load_execution_contracts(root, registry):
+    try:
+        document = fixtures.load_json(fixtures.repository_path(root, EXECUTION_CONTRACTS_PATH))
+    except Exception as exc:
+        return ["Unable to load rejection execution contracts: " + str(exc)], {}
+    return validate_execution_contracts(root, registry, document)
+
+
+def execution_contract_errors(root, registry, scenario, contracts=None):
+    """Require reviewed correspondence before an execution counts as coverage."""
+    if contracts is None:
+        errors, contracts = load_execution_contracts(root, registry)
+        if errors:
+            return errors
+    try:
+        errors = ["Rejection scenario contract: " + error.message
+                  for error in Draft202012Validator(
+                      {"$ref": SCENARIO_DEFINITION_ID}, registry=registry
+                  ).iter_errors(scenario)]
+        if errors:
+            return errors
+        scenario_id = scenario["scenario_id"]
+        if scenario_id not in contracts:
+            return ["Unapproved rejection execution scenario: " + scenario_id]
+        approved = _contract_value(contracts[scenario_id])
+        candidate = _contract_value(scenario)
+        if _typed_json(candidate) != _typed_json(approved):
+            fields = sorted(key for key in set(candidate) | set(approved)
+                            if key not in candidate or key not in approved
+                            or _typed_json(candidate[key]) != _typed_json(approved[key]))
+            return ["Rejection execution differs from approved descriptor contract "
+                    + scenario_id + " at fields: " + ", ".join(fields)]
+        return []
+    except Exception as exc:
+        return ["Unable to compare rejection execution contract: " + str(exc)]
+
+
+def execution_contract_inventory_errors(scenarios, contracts):
+    """Full-catalog caller only: each approved row must execute exactly once."""
+    errors = []
+    seen = set()
+    units = set()
+    for scenario in scenarios:
+        if not isinstance(scenario, dict) or not isinstance(scenario.get("scenario_id"), str):
+            errors.append("Malformed rejection scenario in execution inventory")
+            continue
+        scenario_id = scenario["scenario_id"]
+        if scenario_id in seen:
+            errors.append("Duplicate candidate rejection scenario ID: " + scenario_id)
+        seen.add(scenario_id)
+        unit = (scenario.get("descriptor_path"), scenario.get("descriptor_unit_pointer", ""))
+        if unit in units:
+            errors.append("Duplicate candidate rejection descriptor unit: " + repr(unit))
+        units.add(unit)
+    missing = sorted(set(contracts) - seen)
+    extra = sorted(seen - set(contracts))
+    if missing:
+        errors.append("Approved rejection executions missing from catalog: " + ", ".join(missing))
+    if extra:
+        errors.append("Unapproved rejection executions in catalog: " + ", ".join(extra))
+    return errors
 
 
 def json_equal(left, right) -> bool:
@@ -166,7 +279,10 @@ def validate_schema_owners(root: Path, registry, scenario: dict, errors: list,
         value = fixtures.json_pointer(projection_schema, pointer)
         if not json_equal(value, mapping["assertion_value"]) or not json_equal(owners[key], value):
             raise ValueError("Projection assertion value differs from its exact binding")
-        source_ref = projection_schema["$defs"][definition]["x-ywe-source-ref"]
+        parent_schema = fixtures.json_pointer(projection_schema, parent_pointer)
+        source_ref = parent_schema.get("x-ywe-source-ref") or projection_schema["$defs"][definition].get("x-ywe-source-ref")
+        if not isinstance(source_ref, str) or not source_ref:
+            raise ValueError("Projection assertion has no declared owning rule")
         declared_ref = mapping["source_path"] + "#" + mapping["source_pointer"]
         if declared_ref != source_ref:
             raise ValueError("Projection source differs from its declared owning rule")
@@ -277,6 +393,9 @@ def evaluate_scenarios(root: Path, registry, scenarios: list[dict]) -> tuple[lis
     results = []
     seen_ids = set()
     seen_bindings = set()
+    contract_errors, contracts = load_execution_contracts(root, registry)
+    if contract_errors:
+        return contract_errors, []
     locations = schema_constraint_locations(root, registry)
     for scenario in scenarios:
         scenario_id = scenario["scenario_id"]
@@ -298,15 +417,35 @@ def evaluate_scenarios(root: Path, registry, scenarios: list[dict]) -> tuple[lis
                 raise ValueError("Descriptor source digest differs from its recorded binding")
             descriptor = fixtures.load_instance(descriptor_path)
             reason_pointers = {"/reject_reason", "/invalid_reason"}
+            required_unit_bindings = set()
             if unit_pointer:
-                if not re.fullmatch(r"/cases/(?:0|[1-9][0-9]*)", unit_pointer) or not isinstance(descriptor, dict) or (
-                    descriptor.get("schema_id") != "ywe.phase_10_invalid_player_state_rejection_cases.v1"
-                ):
-                    raise ValueError("Descriptor units are supported only for the declared player rejection collection")
+                player_unit = (
+                    re.fullmatch(r"/cases/(?:0|[1-9][0-9]*)", unit_pointer)
+                    and isinstance(descriptor, dict)
+                    and descriptor.get("schema_id") == "ywe.phase_10_invalid_player_state_rejection_cases.v1"
+                )
+                realm_unit = (
+                    scenario["descriptor_path"] == "data/realm/realm_transition_examples.yaml"
+                    and re.fullmatch(r"/unlawful_examples/(?:0|[1-9][0-9]*)", unit_pointer)
+                    and isinstance(descriptor, dict)
+                    and isinstance(descriptor.get("meta"), dict)
+                    and descriptor["meta"].get("system") == "realm_transition_examples"
+                )
+                if not player_unit and not realm_unit:
+                    raise ValueError("Descriptor units are supported only for the declared player rejection collection or realm unlawful collection")
                 unit = fixtures.json_pointer(descriptor, unit_pointer)
                 if not isinstance(unit, dict):
-                    raise ValueError("Player rejection unit must be an object")
-                reason_pointers = {unit_pointer + "/reason"}
+                    raise ValueError("Rejection unit must be an object")
+                if realm_unit:
+                    if scenario["mode"] != "mutation" or scenario["validation_scope"] != "assertion_projection":
+                        raise ValueError("Realm unlawful units require their declared assertion projection mutation")
+                    reason_pointers = {unit_pointer + "/summary"}
+                    required_unit_bindings = {unit_pointer + "/example_id", unit_pointer + "/violated_rules"}
+                    rules = unit.get("violated_rules")
+                    if not isinstance(rules, list) or not rules or any(not isinstance(rule, str) or not rule.strip() for rule in rules):
+                        raise ValueError("Realm rejection unit requires nonempty declared violated rules")
+                else:
+                    reason_pointers = {unit_pointer + "/reason"}
             elif isinstance(descriptor, dict) and descriptor.get("schema_id") in {
                 "wolf_manifestation_event_schema", "quest_reward_resolution_packet_schema"
             }:
@@ -322,6 +461,8 @@ def evaluate_scenarios(root: Path, registry, scenarios: list[dict]) -> tuple[lis
                     raise ValueError(f"Descriptor value differs at {pointer!r}")
             if not binding_pointers.intersection(reason_pointers):
                 raise ValueError("Descriptor requires an explicit expected-reason binding")
+            if not required_unit_bindings.issubset(binding_pointers):
+                raise ValueError("Realm rejection unit requires exact identity and complete violated-rule bindings")
             for pointer in binding_pointers.intersection(reason_pointers):
                 reason = fixtures.json_pointer(descriptor, pointer)
                 if not isinstance(reason, str) or not reason.strip():
@@ -350,6 +491,8 @@ def evaluate_scenarios(root: Path, registry, scenarios: list[dict]) -> tuple[lis
                     raise ValueError("Lexical reject_terms must belong to a data/validation rule file")
                 rules = fixtures.load_instance(fixtures.repository_path(root, relative))
                 terms = fixtures.json_pointer(rules, scenario["reject_terms_pointer"])
+                if scenario["reject_terms_pointer"].rsplit("/", 1)[-1] not in {"reject_terms", "forbidden_patterns"}:
+                    raise ValueError("Lexical assertions must select an explicitly declared reject_terms list or forbidden_patterns list")
                 exact_owner = (relative, scenario["reject_terms_pointer"])
                 if exact_owner not in owner_pointers or not any(
                     (item["path"], item["pointer"]) == exact_owner
@@ -381,8 +524,19 @@ def evaluate_scenarios(root: Path, registry, scenarios: list[dict]) -> tuple[lis
                 raise ValueError(f"Expected complete rejection witnesses {sorted(expected)}; observed {sorted(witnessed)}")
             if mode in {"direct", "mutation"}:
                 validate_schema_owners(root, registry, scenario, executed_errors, locations)
+                if unit_pointer and realm_unit:
+                    selected = fixtures.resolve_schema_target(registry, scenario["schema_id"]).contents
+                    if not isinstance(selected, dict) or selected.get("x-ywe-descriptor-unit-ref") != scenario["descriptor_path"] + "#" + unit_pointer:
+                        raise ValueError("Realm assertion must own its exact declared unlawful unit")
+                    witnessed_rules = {error.schema.get("x-ywe-violated-rule") for error in executed_errors
+                                       if error.validator == "const" and isinstance(error.schema, dict)}
+                    if not set(unit["violated_rules"]).issubset(witnessed_rules):
+                        raise ValueError("Realm rejection must execute every declared violated rule")
             else:
                 validate_schema_owners(root, registry, scenario, [], locations)
+            correspondence_errors = execution_contract_errors(root, registry, scenario, contracts)
+            if correspondence_errors:
+                raise ValueError("; ".join(correspondence_errors))
             results.append({
                 "descriptor_path": scenario["descriptor_path"],
                 "descriptor_unit_pointer": unit_pointer,
@@ -406,7 +560,12 @@ def validation_errors(root: Path) -> tuple[list[str], list[dict]]:
         errors.extend(f"{SCENARIO_CATALOG}: {error.message}" for error in validator.iter_errors(catalog))
         if errors:
             return errors, []
-        return evaluate_scenarios(root, registry, catalog["scenarios"])
+        errors, results = evaluate_scenarios(root, registry, catalog["scenarios"])
+        contract_errors, contracts = load_execution_contracts(root, registry)
+        errors.extend(contract_errors)
+        if not contract_errors:
+            errors.extend(execution_contract_inventory_errors(catalog["scenarios"], contracts))
+        return errors, results
     except Exception as exc:
         return [f"Unable to load rejection scenario/schema catalogs: {exc}"], []
 

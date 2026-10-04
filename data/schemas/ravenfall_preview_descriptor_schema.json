@@ -1,0 +1,438 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/ravenfall_preview_descriptor_schema.json",
+  "title": "Ravenfall Preview Descriptor Formats",
+  "description": "Validates the existing explanatory preview format only. Acceptance does not certify a complete canonical runtime packet, referenced record existence or lifecycle completion.",
+  "x-ywe-requirement-id": "YWE-REQ-0031",
+  "$defs": {
+    "Phase16RavenfallMetadata": {
+      "title": "Phase16 Ravenfall Preview Metadata",
+      "description": "Validates the existing explanatory preview format only. Acceptance does not certify a complete canonical runtime packet, referenced record existence or lifecycle completion.",
+      "x-ywe-requirement-id": "YWE-REQ-0031",
+      "x-ywe-source-ref": "examples/vertical_slices/ravenfall_gate/buried_oath_quest_design.example.json",
+      "type": "object",
+      "required": [
+        "schema_id",
+        "phase_id",
+        "slice_id",
+        "status",
+        "source_truth_refs",
+        "requires_phase_refs"
+      ],
+      "properties": {
+        "schema_id": {
+          "type": "string"
+        },
+        "phase_id": {
+          "const": "phase_16"
+        },
+        "slice_id": {
+          "const": "ravenfall_gate"
+        },
+        "status": {
+          "const": "example_draft"
+        },
+        "source_truth_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requires_phase_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-owner-source-refs": [
+        "docs/architecture/vertical_slice_design_contract.md#Source-of-Truth Stack",
+        "data/validation/phase_16_required_artifacts.json#/required_example_directory"
+      ]
+    },
+    "RecoveryMinimumTraceDescription": {
+      "title": "Recovery Minimum Trace Description",
+      "description": "Validates the existing explanatory preview format only. Acceptance does not certify a complete canonical runtime packet, referenced record existence or lifecycle completion. The source acceptance.complete remains false. Positive format validation is not a recovery completion result.",
+      "x-ywe-requirement-id": "YWE-REQ-0031",
+      "x-ywe-source-ref": "examples/phase_16_17_recovery/ravenfall_reveal_playtest_trace_minimum.example.json",
+      "type": "object",
+      "required": [
+        "schema_ref",
+        "trace_id",
+        "vertical_slice",
+        "quest",
+        "completion_mode",
+        "branch_event_ref",
+        "quest_reward_trace_ref",
+        "wolf_companion_trace_ref",
+        "future_generation_bias_trace_ref",
+        "worldstate_delta_or_noop_ref",
+        "platform_implementation",
+        "acceptance"
+      ],
+      "properties": {
+        "schema_ref": {
+          "const": "data/schemas/vertical_slice_playtest_trace_schema.json"
+        },
+        "trace_id": {
+          "type": "string"
+        },
+        "vertical_slice": {
+          "const": "ravenfall_gate"
+        },
+        "quest": {
+          "type": "string"
+        },
+        "completion_mode": {
+          "type": "string",
+          "enum": [
+            "reveal",
+            "conceal",
+            "bind",
+            "study",
+            "weaponize"
+          ]
+        },
+        "branch_event_ref": {
+          "type": "string"
+        },
+        "quest_reward_trace_ref": {
+          "type": "string"
+        },
+        "wolf_companion_trace_ref": {
+          "type": "string"
+        },
+        "future_generation_bias_trace_ref": {
+          "type": "string"
+        },
+        "worldstate_delta_or_noop_ref": {
+          "type": "string"
+        },
+        "platform_implementation": {
+          "const": "not_present_agnostic_only"
+        },
+        "acceptance": {
+          "type": "object",
+          "required": [
+            "complete",
+            "note"
+          ],
+          "properties": {
+            "complete": {
+              "type": "boolean",
+              "const": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-owner-source-refs": [
+        "data/validation/phase_16_17_recovery_acceptance_contract.json#/required_gates",
+        "docs/game/vertical_slices/ravenfall_gate/24_phase_17_acceptance_report_requirements.md#Required sections"
+      ]
+    },
+    "RavenfallBranchOutcomeDescription": {
+      "title": "Ravenfall Individual Branch Outcome Description",
+      "description": "Validates the existing explanatory preview format only. Acceptance does not certify a complete canonical runtime packet, referenced record existence or lifecycle completion. truth_scope is a descriptive label, not a canonical TruthScope packet.",
+      "x-ywe-requirement-id": "YWE-REQ-0031",
+      "x-ywe-source-ref": "examples/vertical_slices/ravenfall_gate/branch_outcome_study.example.json",
+      "type": "object",
+      "required": [
+        "completion_mode",
+        "truth_scope",
+        "location_phase",
+        "wolf_companion_emphasis",
+        "ability_pressure",
+        "quest_reward_resolution_ref",
+        "worldstate_delta_refs",
+        "diagnostic_noop_ref",
+        "future_generation_bias_refs"
+      ],
+      "properties": {
+        "completion_mode": {
+          "type": "string",
+          "enum": [
+            "reveal",
+            "conceal",
+            "bind",
+            "study",
+            "weaponize"
+          ]
+        },
+        "truth_scope": {
+          "type": "string"
+        },
+        "location_phase": {
+          "type": "string"
+        },
+        "wolf_companion_emphasis": {
+          "type": "string"
+        },
+        "ability_pressure": {
+          "type": "string"
+        },
+        "quest_reward_resolution_ref": {
+          "type": "string"
+        },
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "diagnostic_noop_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "future_generation_bias_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "schema_id": {
+          "const": "ywe.ravenfall_gate.branch_outcome.example"
+        }
+      },
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "$ref": "#/$defs/Phase16RavenfallMetadata"
+        }
+      ],
+      "x-ywe-owner-source-refs": [
+        "docs/game/vertical_slices/ravenfall_gate/03_branch_outcome_matrix.md#Ravenfall Gate Branch Outcome Matrix"
+      ]
+    },
+    "RavenfallQuestDesignDescription": {
+      "title": "Ravenfall Quest Design Description",
+      "description": "Validates the existing explanatory preview format only. Acceptance does not certify a complete canonical runtime packet, referenced record existence or lifecycle completion.",
+      "x-ywe-requirement-id": "YWE-REQ-0031",
+      "x-ywe-source-ref": "examples/vertical_slices/ravenfall_gate/buried_oath_quest_design.example.json",
+      "type": "object",
+      "required": [
+        "quest_id",
+        "completion_modes",
+        "quest_stages"
+      ],
+      "properties": {
+        "schema_id": {
+          "const": "ywe.buried_oath.quest_design.example"
+        },
+        "quest_id": {
+          "type": "string"
+        },
+        "completion_modes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "reveal",
+              "conceal",
+              "bind",
+              "study",
+              "weaponize"
+            ]
+          }
+        },
+        "quest_stages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "stage_id",
+              "purpose"
+            ],
+            "properties": {
+              "stage_id": {
+                "type": "string"
+              },
+              "purpose": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "$ref": "#/$defs/Phase16RavenfallMetadata"
+        }
+      ],
+      "x-ywe-owner-source-refs": [
+        "docs/game/vertical_slices/ravenfall_gate/02_the_buried_oath_quest_design.md#Completion modes",
+        "docs/game/vertical_slices/ravenfall_gate/02_the_buried_oath_quest_design.md#Quest rule"
+      ]
+    },
+    "RavenfallNPCDescription": {
+      "title": "Ravenfall NPC Description",
+      "description": "Validates the existing explanatory preview format only. Acceptance does not certify a complete canonical runtime packet, referenced record existence or lifecycle completion. self_reference_required is a Boolean design flag, not an actual consciousness classification or self-reference record.",
+      "x-ywe-requirement-id": "YWE-REQ-0031",
+      "x-ywe-source-ref": "examples/vertical_slices/ravenfall_gate/npc_public_witness.example.json",
+      "type": "object",
+      "required": [
+        "npc_role",
+        "appears_when",
+        "relation_context",
+        "self_reference_required"
+      ],
+      "properties": {
+        "schema_id": {
+          "const": "ywe.ravenfall_gate.npc_candidate.example"
+        },
+        "npc_role": {
+          "type": "string"
+        },
+        "appears_when": {
+          "type": "string"
+        },
+        "relation_context": {
+          "type": "string"
+        },
+        "self_reference_required": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "$ref": "#/$defs/Phase16RavenfallMetadata"
+        }
+      ],
+      "x-ywe-owner-source-refs": [
+        "docs/game/vertical_slices/ravenfall_gate/08_npc_and_faction_hooks.md#NPC candidate roles",
+        "docs/game/vertical_slices/ravenfall_gate/08_npc_and_faction_hooks.md#Rule"
+      ]
+    },
+    "RavenfallLoreDescription": {
+      "title": "Ravenfall Lore Description",
+      "description": "Validates the existing explanatory preview format only. Acceptance does not certify a complete canonical runtime packet, referenced record existence or lifecycle completion.",
+      "x-ywe-requirement-id": "YWE-REQ-0031",
+      "x-ywe-source-ref": "examples/vertical_slices/ravenfall_gate/lore_public_oath_inscription.example.json",
+      "type": "object",
+      "required": [
+        "lore_id",
+        "visibility",
+        "pattern_trace_refs",
+        "not_random_text"
+      ],
+      "properties": {
+        "schema_id": {
+          "const": "ywe.ravenfall_gate.lore_fragment.example"
+        },
+        "lore_id": {
+          "type": "string"
+        },
+        "visibility": {
+          "type": "string"
+        },
+        "pattern_trace_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "not_random_text": {
+          "type": "boolean",
+          "const": true
+        }
+      },
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "$ref": "#/$defs/Phase16RavenfallMetadata"
+        }
+      ],
+      "x-ywe-owner-source-refs": [
+        "docs/game/vertical_slices/ravenfall_gate/09_lore_and_myth_hooks.md#Lore generation rule"
+      ]
+    },
+    "RavenfallArtifactEligibilityDescription": {
+      "title": "Ravenfall Artifact Eligibility Description",
+      "description": "Validates the existing explanatory preview format only. Acceptance does not certify a complete canonical runtime packet, referenced record existence or lifecycle completion.",
+      "x-ywe-requirement-id": "YWE-REQ-0031",
+      "x-ywe-source-ref": "examples/vertical_slices/ravenfall_gate/artifact_eligibility_oath_shard.example.json",
+      "type": "object",
+      "required": [
+        "artifact_id",
+        "eligibility_conditions",
+        "not_generic_loot"
+      ],
+      "properties": {
+        "schema_id": {
+          "const": "ywe.ravenfall_gate.artifact_eligibility.example"
+        },
+        "artifact_id": {
+          "type": "string"
+        },
+        "eligibility_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "not_generic_loot": {
+          "type": "boolean",
+          "const": true
+        }
+      },
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "$ref": "#/$defs/Phase16RavenfallMetadata"
+        }
+      ],
+      "x-ywe-owner-source-refs": [
+        "docs/game/vertical_slices/ravenfall_gate/11_artifact_and_creature_eligibility.md#Rule"
+      ]
+    },
+    "RavenfallCreatureEligibilityDescription": {
+      "title": "Ravenfall Creature Eligibility Description",
+      "description": "Validates the existing explanatory preview format only. Acceptance does not certify a complete canonical runtime packet, referenced record existence or lifecycle completion.",
+      "x-ywe-requirement-id": "YWE-REQ-0031",
+      "x-ywe-source-ref": "examples/vertical_slices/ravenfall_gate/creature_eligibility_echo_hound.example.json",
+      "type": "object",
+      "required": [
+        "creature_id",
+        "eligibility_conditions",
+        "not_random_enemy"
+      ],
+      "properties": {
+        "schema_id": {
+          "const": "ywe.ravenfall_gate.creature_eligibility.example"
+        },
+        "creature_id": {
+          "type": "string"
+        },
+        "eligibility_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "not_random_enemy": {
+          "type": "boolean",
+          "const": true
+        }
+      },
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "$ref": "#/$defs/Phase16RavenfallMetadata"
+        }
+      ],
+      "x-ywe-owner-source-refs": [
+        "docs/game/vertical_slices/ravenfall_gate/11_artifact_and_creature_eligibility.md#Rule"
+      ]
+    }
+  }
+}

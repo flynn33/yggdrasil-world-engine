@@ -87,6 +87,9 @@ class FixtureCatalogTests(unittest.TestCase):
             shutil.copyfile(ROOT / relative, destination)
             self.entries.append({"schema_id": "https://ywe.local/schemas/" + name, "path": relative})
         self.write("examples/record.json", {"record": {"value": 1}})
+        self.write("data/governance/normative_requirement_register.json", {
+            "requirements": [{"requirement_id": "YWE-REQ-0020", "status": "active"}]
+        })
         self.fixtures = [self.fixture()]
         self.save_catalogs()
 
@@ -104,8 +107,11 @@ class FixtureCatalogTests(unittest.TestCase):
             "category": "positive",
             "expected_result": "accept",
             "expected_errors": [],
+            "expected_requirement_ids": ["YWE-REQ-0020"],
         }
         result.update(changes)
+        if result["expected_result"] == "reject":
+            result.pop("expected_requirement_ids", None)
         return result
 
     def save_catalogs(self):
@@ -139,6 +145,94 @@ class FixtureCatalogTests(unittest.TestCase):
             [{"fixture_id": "record.positive", "path": "examples/record.json", "result": "accept"}],
             results,
         )
+
+    def test_accepted_fixture_requires_nonempty_unique_requirement_identifiers(self):
+        for identifiers in (None, [], ["YWE-REQ-0020", "YWE-REQ-0020"], "YWE-REQ-0020"):
+            with self.subTest(identifiers=identifiers):
+                self.fixtures = [self.fixture()]
+                if identifiers is None:
+                    self.fixtures[0].pop("expected_requirement_ids")
+                else:
+                    self.fixtures[0]["expected_requirement_ids"] = identifiers
+                self.assert_rejected()
+
+    def test_unknown_or_retired_requirement_identity_cannot_establish_acceptance(self):
+        self.fixtures[0]["expected_requirement_ids"] = ["YWE-REQ-9999"]
+        self.assert_rejected("not registered and active")
+        self.fixtures[0]["expected_requirement_ids"] = ["YWE-REQ-0020"]
+        self.write("data/governance/normative_requirement_register.json", {
+            "requirements": [{"requirement_id": "YWE-REQ-0020", "status": "superseded"}]
+        })
+        self.assert_rejected("not registered and active")
+
+    def test_unrelated_registered_requirement_cannot_own_a_fixture(self):
+        self.write("data/governance/normative_requirement_register.json", {
+            "requirements": [{"requirement_id": "YWE-REQ-0019", "status": "active"}]
+        })
+        self.fixtures[0]["expected_requirement_ids"] = ["YWE-REQ-0019"]
+        self.assert_rejected("does not own its selected contract")
+
+    def test_specific_requirement_needs_both_target_annotation_and_registered_source(self):
+        self.schema["x-ywe-requirement-id"] = "YWE-REQ-0021"
+        self.write(self.SCHEMA_PATH, self.schema)
+        self.fixtures[0]["expected_requirement_ids"] = ["YWE-REQ-0021"]
+        self.write("data/governance/normative_requirement_register.json", {
+            "requirements": [{"requirement_id": "YWE-REQ-0021", "status": "active", "source_refs": ["data/schemas/unrelated.json"]}]
+        })
+        self.assert_rejected("registered requirement source does not own")
+        self.write("data/governance/normative_requirement_register.json", {
+            "requirements": [{"requirement_id": "YWE-REQ-0021", "status": "active", "source_refs": [self.SCHEMA_PATH]}]
+        })
+        self.assertEqual([], self.run_check()[0])
+
+    def test_requirement_source_fragment_cannot_certify_a_different_schema_surface(self):
+        self.schema["properties"]["value"]["x-ywe-requirement-id"] = "YWE-REQ-0021"
+        self.write(self.SCHEMA_PATH, self.schema)
+        self.fixtures[0].update(schema_id=self.SCHEMA_ID + "#/properties/value",
+                                instance_pointer="/record/value", expected_requirement_ids=["YWE-REQ-0021"])
+        self.write("data/governance/normative_requirement_register.json", {
+            "requirements": [{"requirement_id": "YWE-REQ-0021", "status": "active", "source_refs": [self.SCHEMA_PATH + "#/properties/unrelated"]}]
+        })
+        self.assert_rejected("registered requirement source does not own")
+        self.write("data/governance/normative_requirement_register.json", {
+            "requirements": [{"requirement_id": "YWE-REQ-0021", "status": "active", "source_refs": [self.SCHEMA_PATH + "#/properties/value"]}]
+        })
+        self.assertEqual([], self.run_check()[0])
+
+    def test_owned_requirement_resolves_anchor_and_nested_resource_aliases(self):
+        self.schema["$defs"] = {"value": {
+            "$id": "owned.json", "$anchor": "Value", "type": "integer",
+            "x-ywe-requirement-id": "YWE-REQ-0021",
+        }}
+        self.write(self.SCHEMA_PATH, self.schema)
+        self.write("examples/record.json", {"record": 7})
+        self.fixtures[0]["expected_requirement_ids"] = ["YWE-REQ-0021"]
+        register = {"requirements": [{
+            "requirement_id": "YWE-REQ-0021", "status": "active",
+            "source_refs": [self.SCHEMA_PATH + "#/$defs/value"],
+        }]}
+        self.write("data/governance/normative_requirement_register.json", register)
+        for target in (self.SCHEMA_ID + "#/$defs/value", "https://ywe.local/schemas/owned.json",
+                       "https://ywe.local/schemas/owned.json#Value"):
+            with self.subTest(target=target):
+                self.fixtures[0]["schema_id"] = target
+                self.assertEqual([], self.run_check()[0])
+        register["requirements"][0]["source_refs"] = [self.SCHEMA_PATH + "#/properties/value"]
+        self.write("data/governance/normative_requirement_register.json", register)
+        self.assert_rejected("registered requirement source does not own")
+
+    def test_equal_schema_values_do_not_substitute_for_actual_requirement_owner(self):
+        value = {"type": "integer", "x-ywe-requirement-id": "YWE-REQ-0021"}
+        self.schema["$defs"] = {"owned": value, "unrelated": copy.deepcopy(value)}
+        self.write(self.SCHEMA_PATH, self.schema)
+        self.write("examples/record.json", {"record": 7})
+        self.fixtures[0].update(schema_id=self.SCHEMA_ID + "#/$defs/unrelated",
+                                expected_requirement_ids=["YWE-REQ-0021"])
+        self.write("data/governance/normative_requirement_register.json", {
+            "requirements": [{"requirement_id": "YWE-REQ-0021", "status": "active",
+                              "source_refs": [self.SCHEMA_PATH + "#/$defs/owned"]}]
+        })
+        self.assert_rejected("registered requirement source does not own")
 
     def test_invalid_instance_cannot_be_declared_accepted(self):
         self.write("examples/record.json", {"record": {"value": "wrong"}})

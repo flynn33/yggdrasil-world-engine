@@ -1136,12 +1136,246 @@
         "data/schemas/existence_potential_schema.json",
         "data/schemas/branch_event_schema.json"
       ]
+    },
+    {
+      "id": "ADR-0021",
+      "record_type": "decision",
+      "title": "Conservative Ravenfall preview formats",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "wrw_reference_profile",
+      "disposition": "Formalize the seventeen existing preview roots without populating missing runtime provenance or changing their original values.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Ravenfall and recovery preview descriptions MUST satisfy their explicit serialized format grammar while retaining incomplete acceptance status, descriptive truth labels, open containers and source-unrestricted empty values. Format acceptance MUST NOT certify absent canonical runtime packet fields or playtest acceptance.",
+      "decision": "Formalize the seventeen existing preview roots without populating missing runtime provenance or changing their original values.",
+      "rationale": "Exact structural and executed validation evidence closes the selected foundation obligations without fabricating broader runtime acceptance.",
+      "consequences": [
+        "Original source examples, YAML documents and immutable migration history remain unchanged.",
+        "M2 acceptance and later milestone activation require their full recorded gate results."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0031"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#ravenfall-preview-formats",
+        "data/schemas/ravenfall_preview_descriptor_schema.json"
+      ]
+    },
+    {
+      "id": "ADR-0022",
+      "record_type": "decision",
+      "title": "Explicit YAML policy document formats",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Type all twenty remaining document roots using explicit source-owned sections and conservative open format boundaries.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Domain YAML policy and descriptor documents MUST satisfy their declared structural document grammars. Literal descriptor tokens MUST retain their source scalar types, heterogeneous optional records MUST retain their explicit variants, and descriptive policies MUST NOT be executed as unrecorded domain algorithms.",
+      "decision": "Type all twenty remaining document roots using explicit source-owned sections and conservative open format boundaries.",
+      "rationale": "Exact structural and executed validation evidence closes the selected foundation obligations without fabricating broader runtime acceptance.",
+      "consequences": [
+        "Original source examples, YAML documents and immutable migration history remain unchanged.",
+        "M2 acceptance and later milestone activation require their full recorded gate results."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0032"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#yaml-policy-document-formats",
+        "data/schemas/ywe_core_policy_document_schema.json",
+        "data/schemas/ywe_domain_policy_document_schema.json",
+        "data/schemas/ywe_module_policy_document_schema.json"
+      ]
+    },
+    {
+      "id": "ADR-0023",
+      "record_type": "decision",
+      "title": "Executed validation operation cases",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Execute concrete schema validation recovery, replay and historical migration proof cases independently of their description-format acceptance.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Recovery, replay and migration fixture categories MUST count only exact accepted operation cases with successful complete executed stages. Recovery MUST reject the diagnosed proposal and accept the restored original; replay MUST independently reload identical inputs; migration MUST execute the immutable protected schema proofs. Validation operations MUST NOT mutate their sources or claim later runtime lifecycle protocols.",
+      "decision": "Execute concrete schema validation recovery, replay and historical migration proof cases independently of their description-format acceptance.",
+      "rationale": "Exact structural and executed validation evidence closes the selected foundation obligations without fabricating broader runtime acceptance.",
+      "consequences": [
+        "Original source examples, YAML documents and immutable migration history remain unchanged.",
+        "M2 acceptance and later milestone activation require their full recorded gate results."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0033"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#validation-operation-fixtures",
+        "data/schemas/m2_validation_operation_case_schema.json",
+        "data/validation/m2_validation_operation_expectations.json",
+        "examples/contract_foundation/m2_validation_operation_cases.example.json"
+      ]
+    },
+    {
+      "id": "ADR-0024",
+      "record_type": "decision",
+      "title": "Governed positive expectation identities",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Register the foundation result-matching identity on accepted bindings and enforce explicit source ownership for narrower claims.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Accepted fixtures MUST carry unique nonempty expected requirement identifiers that resolve to active registered obligations. Additional contract-specific identifiers MUST match the exact selected schema annotation and its registered source ownership. Fixture-governance identity MUST NOT be advertised as complete domain-clause traceability.",
+      "decision": "Register the foundation result-matching identity on accepted bindings and enforce explicit source ownership for narrower claims.",
+      "rationale": "Exact structural and executed validation evidence closes the selected foundation obligations without fabricating broader runtime acceptance.",
+      "consequences": [
+        "Original source examples, YAML documents and immutable migration history remain unchanged.",
+        "M2 acceptance and later milestone activation require their full recorded gate results."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0034"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#governed-positive-expectation-identities",
+        "data/schemas/fixture_catalog_schema.json#/$defs/fixture/properties/expected_requirement_ids"
+      ]
+    },
+    {
+      "id": "ADR-0025",
+      "record_type": "decision",
+      "title": "Source-bound realm rejection assertions",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Execute intended realm constraint rejection independently from serialized guidance-format acceptance.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Two original realm unlawful units describe attunement/boundary bypass and perception-only shared geography mutation without supplying complete transition packets.",
+      "decision": "Execute explicit scoped boolean assertion vectors against exact realm rule owners, with accepted controls and complete strict inverse rejection witnesses.",
+      "rationale": "Exact structural and executed validation evidence closes the selected foundation obligations without fabricating broader runtime acceptance.",
+      "consequences": [
+        "Original source examples, YAML documents and immutable migration history remain unchanged.",
+        "M2 acceptance and later milestone activation require their full recorded gate results."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0035"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#realm-rejection-assertions",
+        "data/schemas/rejection_scenario_catalog_schema.json#/$defs/RealmThresholdAssertion",
+        "data/schemas/rejection_scenario_catalog_schema.json#/$defs/RealmSharedTruthAssertion",
+        "examples/contract_foundation/realm_assertion_cases.example.json"
+      ]
+    },
+    {
+      "id": "ADR-0026",
+      "record_type": "decision",
+      "title": "Executed M2 validation methods",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Execute method-specific schema-validation foundation consumers and reject missing, failed, duplicated or unexecuted method records.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "The roadmap requires eight distinct executed validation methods; a check-ID inventory alone cannot establish actual method coverage.",
+      "decision": "Execute concrete meta-schema, instance, reference, identifier, descriptor dependency, negative, source-driven property and isolated mutation cases with complete evidence.",
+      "rationale": "Exact structural and executed validation evidence closes the selected foundation obligations without fabricating broader runtime acceptance.",
+      "consequences": [
+        "Original source examples, YAML documents and immutable migration history remain unchanged.",
+        "M2 acceptance and later milestone activation require their full recorded gate results."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0036"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#executed-validation-methods",
+        "data/schemas/m2_validation_method_expectations_schema.json",
+        "data/validation/m2_validation_method_expectations.json"
+      ]
+    },
+    {
+      "id": "ADR-0027",
+      "record_type": "decision",
+      "title": "Immutable source-bound M2 acceptance evidence",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Require immutable first-pass evidence and fixed source exclusions; verify current clean execution independently before milestone promotion.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "M2 requires durable acceptance rather than metadata-only claims, and a source digest cannot include a circular self-SHA.",
+      "decision": "Test a frozen pending implementation, introduce only its accepted evidence pair, preserve the full executed reports, and independently replay all thirteen substantive obligations from the exact local historical source.",
+      "rationale": "Exact structural and executed validation evidence closes the selected foundation obligations without fabricating broader runtime acceptance.",
+      "consequences": [
+        "Original source examples, YAML documents and immutable migration history remain unchanged.",
+        "M2 acceptance and later milestone activation require their full recorded gate results."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0037"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#durable-acceptance-evidence",
+        "data/schemas/m2_historical_acceptance_evidence_schema.json",
+        "data/governance/m2_acceptance_evidence.json",
+        "docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md"
+      ]
+    },
+    {
+      "id": "ADR-0028",
+      "record_type": "decision",
+      "title": "Approved descriptor execution correspondence",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Require a separate reviewed execution approval for each descriptor rejection unit; preserve low-level execution and source-binding checks.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Four original scenarios can retain exact descriptor bindings while substituting another valid rejection execution. Independent source and execution integrity checks do not establish their intended correspondence.",
+      "decision": "Bind all approved scenario fields except cosmetic description in a separate typed source-owned ledger. Execute the existing exact witness and ownership checks, then require correspondence before returning successful coverage. Require a complete one-to-one approval inventory for the full catalog.",
+      "rationale": "Exact reviewed mapping closes the demonstrated wrong-requirement coverage escape without inferring constraints from prose or fabricating complete runtime packets.",
+      "consequences": [
+        "Original descriptor and owner source bytes remain unchanged.",
+        "New or changed scenario execution requires a reviewed approval change; candidate scenarios cannot create their own approvals."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0038"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#approved-descriptor-execution-correspondence",
+        "data/schemas/rejection_scenario_catalog_schema.json#/$defs/ExecutionContracts",
+        "data/validation/rejection_execution_contracts.json"
+      ]
     }
   ],
   "summary": {
-    "total_records": 37,
-    "architecture_decisions": 20,
-    "accepted_decisions": 20,
+    "total_records": 45,
+    "architecture_decisions": 28,
+    "accepted_decisions": 28,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,
