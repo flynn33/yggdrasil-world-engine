@@ -1,7 +1,7 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-23
+**Revision:** planning-24
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
@@ -545,8 +545,16 @@ authored format packets; both new schemas independently passed offline review.
 Constructor and scoped-capture review reproduced invalid post-validation after
 a no-target refusal; both owners now reject it while retaining legitimate
 before/after-computation failures. Named binding-mismatch witnesses must also
-retain an actual difference in the named binding. Full frozen clean repository
-execution remains required before publication.
+retain an actual difference in the named binding.
+
+Frozen revision `5328f018f341b80ad58cdb82f64708992ee2d6ae` passed all 36 applicable
+repository checks, with 833 unit tests in 705.007 seconds. The completed report
+records no selections, offline file-only Git protocols, an empty dirty state
+before and after execution, and no blocking or advisory check failures. The exact
+revision was pushed without force and read back through Git and GitHub's API;
+the remote README bytes matched the frozen implementation. Main CI run
+`37233715205` was dispatched for that exact revision and was still running at this
+record's preparation. Its eventual result must be observed before claiming success.
 No operational session, recovery success, full Diagnostics or M3 gate is claimed.
 
 ## 9. Historical publication continuity
@@ -559,24 +567,25 @@ The containing commit is the authoritative save point.
 
 ## 10. Checkpoint
 
-**Current step:** Complete verification and publication of the M3 N1 semantic
-normalization reference slice, then adopt and implement recovery execution.
+**Current step:** Adopt the reviewed recovery and reference Diagnostics contracts,
+then implement actual recovery/fallback value execution and diagnostic export.
 M2 remains accepted; M3 remains in progress.
 
 **Completed:** M2's immutable foundation acceptance; M3 assessment contract
 adoption and reference values, decoding, diagnosis, contextual classification,
 retained failures, wire schema and independent exhaustive tests; first-slice
-publication and exact GitHub Main CI; N1 contract/policy adoption and initial
-actual normalization/reference integration.
+publication and exact GitHub Main CI; N1 contract/policy adoption, actual
+normalization/reference integration, complete clean offline verification and
+GitHub publication with remote README readback.
 
-**Next action:** Run N1 frozen clean offline repository verification, then
-publish its README checkpoint. Continue
-through recovery, full Diagnostics,
+**Next action:** Complete exact recovery/Diagnostics interface and wire review,
+implement the bounded reference slice and observe N1 GitHub CI. Continue through
+recovery, full Diagnostics,
 terminal guards and generation before evaluating unchanged M3 exit criteria.
 
 **Needed from owner:** Nothing for continued authorized roadmap development.
 
-**Saved at:** This planning-23 checkpoint follows the published first M3 slice
-`229cb78c1cbc1fea361f5592505e78d649187c30`, whose GitHub Main CI passed.
-The containing committed revision is the save point for this N1 work.
+**Saved at:** This planning-24 checkpoint follows the published N1 implementation
+`5328f018f341b80ad58cdb82f64708992ee2d6ae`, whose clean offline execution passed.
+The containing committed revision records this publication and continued M3 work.
 Immutable milestone evidence and earlier checkpoint identities remain preserved.

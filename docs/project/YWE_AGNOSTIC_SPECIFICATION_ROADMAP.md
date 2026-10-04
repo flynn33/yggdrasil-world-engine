@@ -253,8 +253,11 @@ contract is `docs/architecture/m3_normalization_contract.md`; its reference slic
 adds pure planning, complete-target proof revalidation and actual value computation.
 All 42 normalization tests pass, including execution of all 2,048 reviewed
 profile/state cases. The combined reference regression suite passes 115 tests,
-and 29 loader/platform-boundary tests pass. Complete clean repository verification
-precedes publication. Operational recovery, full Diagnostics and generation
+and 29 loader/platform-boundary tests pass. Frozen implementation
+`5328f018f341b80ad58cdb82f64708992ee2d6ae` passed all 36 checks and 833 unit tests
+from a clean, unfiltered offline clone and is published on GitHub main.
+[Main CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37233715205)
+records GitHub execution for that exact revision. Operational recovery, full Diagnostics and generation
 remain subsequent work; this checkpoint
 does not complete an M3 exit criterion.
 

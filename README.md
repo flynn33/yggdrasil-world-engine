@@ -143,7 +143,10 @@ independently reviewed profile/state cases, twenty authored wire packets and
 capture refusal/uncertainty paths. The combined assessment, identity and
 normalization suite passes 115 tests; 29 loader and platform-boundary regressions
 also pass. Capture failures retain actual observations and confirmed diagnostics.
-Complete repository verification precedes publication of this checkpoint.
+The frozen [normalization implementation](https://github.com/flynn33/yggdrasil-world-engine/commit/5328f018f341b80ad58cdb82f64708992ee2d6ae)
+passed all 36 repository checks and 833 unit tests from a clean, unfiltered offline
+clone. [Main CI for that exact revision](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37233715205)
+provides the GitHub execution status.
 
 Next is recovery/fallback execution, containment, safe halt, full Diagnostics
 and generation semantics. M3 remains in progress; its
