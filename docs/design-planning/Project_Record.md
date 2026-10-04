@@ -68,7 +68,7 @@ evidence establishes:
 | Roadmap-derived M2 acceptance gate | Strict readiness evaluator maps six criteria and eight deliverables; method-specific and durable acceptance evaluators remain unverified |
 | Durable M2 acceptance report | Not present |
 | M2 milestone evidence | Empty in the roadmap |
-| M3 activation | Not authorized or recorded |
+| M3 activation | Deferred until verified M2 closure |
 
 The earlier report that all M2 technical work was complete was not supported by the live
 repository and is superseded. The owner's subsequent acceptance statement is not used as
@@ -204,7 +204,35 @@ Additional legacy `scripts/github/Test-SchemaIntegrity.ps1` verification returne
 22 findings on existing quest-seed, myth/perception/prophecy and wolf-canon paths.
 Those paths are unchanged; this supplemental script is outside the canonical check
 catalog. Its findings are recorded for investigation, not treated as passing.
-Full-suite verification of this increment is pending at this save point.
+Implementation commit `b0b0a6934fbc96f050d0cd656985a790d984c206` passed
+`python scripts/validate_repository.py --offline --report <external-report.json>`
+in a fresh local clone: 31 checks, zero blocking failures or advisories, and all
+389 unit tests passed. The checkout was clean before and after the run. The
+external runtime used Python 3.12.10, jsonschema 4.25.1, PyYAML 6.0.3, and
+referencing 0.37.0. The committed non-destructive diff check against the base
+passed with 21 modifications, eight additions, and zero deletions or renames.
+
+The strict report accepted that executed checkout evidence for criterion M2-C6
+and returned the expected failing readiness result. Ninety classified fixture
+units lack successful exact bindings; intended rejection coverage, domain YAML,
+positive requirement traceability, lifecycle categories, method-specific validation,
+and durable milestone evidence remain incomplete. No M2 acceptance or M3
+activation is recorded. Independent source/diff review found no blocking issue.
+
+The earlier working-tree suite reported two blocking checks, including incorrect
+Core routing for two new profile schemas and a boundary test loaded before the
+concurrent family-schema update. Explicit profile/governance assignments and the
+correct case targets resolved them; focused checks and the frozen clone suite
+then passed. The first verification harness completed both checks but failed while
+decoding Windows console output as UTF-8. The structured UTF-8 reports were read
+successfully and the diff check was executed separately; no test pass was inferred
+from the failed harness.
+
+The first publication attempt received a connection reset. Remote state was read
+back at the original base, the retry succeeded, and remote `main` was confirmed at
+that exact implementation revision. GitHub reported the owner's authorized
+pull-request and verified-signature rule bypass. This documentation checkpoint
+records those executed results; development continues after publication.
 
 ## 9. Historical publication continuity
 
@@ -230,7 +258,8 @@ milestones only after verified M2 closure.
 
 **Needed from owner:** Nothing for continued M2 engineering.
 
-**Saved at:** `main`, in the commit containing this planning-16 record. The prior
-validated implementation is `ab1080b1c1b60a9e379d5cd25f52db2ec418a729`. The prior
+**Saved at:** `main`, in the commit containing this planning-16 record. The latest
+validated implementation is `b0b0a6934fbc96f050d0cd656985a790d984c206`. The prior
+validated implementation is `ab1080b1c1b60a9e379d5cd25f52db2ec418a729`; the earlier
 implementation is `f35911a4a77c93dc6fe32bb2e396c60bcf01fbc2`, with its published
 verification checkpoint at `88406268d1e3ef24c15e132fa49e9be7440319cf`.
