@@ -384,7 +384,7 @@ owning-assertion checks, then compares the successful execution to its approval.
 The candidate catalog MUST NOT authorize itself. A new or changed scenario
 requires a reviewed approval change. These explicit mappings establish scoped
 rejection intent without interpreting prose as executable constraints or
-claiming complete runtime packet acceptance.
+claiming complete runtime packet acceptance. [YWE-REQ-0038]
 
 ## Durable Acceptance Evidence
 
@@ -396,7 +396,9 @@ explicitly pending; the completed record is introduced only after that source
 revision has passed its actual full suite.
 
 The introduction must change only the fixed JSON and Markdown evidence pair.
-The verifier derives that first passing commit from Git history, verifies the
+The verifier checks its changed paths against every parent, so an introduction
+cannot restore an intervening source edit while adding the evidence. It derives
+that first passing commit from Git history, verifies the
 same source digest and file modes, and rejects later edits or deletions, including
 edits subsequently restored or merged from a side branch. It replays all thirteen
 substantive obligations and complete D6/D7 case results from the recorded local

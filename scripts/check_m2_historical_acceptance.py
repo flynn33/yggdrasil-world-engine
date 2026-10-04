@@ -225,6 +225,23 @@ def immutable_errors(root: Path, introduction: str, files: dict[str, bytes]) -> 
     return errors
 
 
+def introduction_change_errors(root: Path, introduction: str) -> list[str]:
+    """Require the accepted introduction itself to change only its evidence pair."""
+    parents = git(root, "rev-list", "--parents", "-n", "1", introduction).decode("ascii").split()[1:]
+    if not parents:
+        return ["M2 evidence introduction must follow its tested implementation"]
+    errors = []
+    for parent in parents:
+        changed = {path.decode("utf-8") for path in git(
+            root, "diff", "--name-only", "--no-renames", "-z", parent, introduction
+        ).split(b"\0") if path}
+        unexpected = sorted(changed - set(EVIDENCE_PATHS))
+        if unexpected:
+            errors.append("M2 evidence introduction changes artifacts outside the fixed evidence pair: "
+                          + ", ".join(unexpected))
+    return errors
+
+
 def report_errors(record: dict, files: dict[str, bytes]) -> list[str]:
     errors = []
     report = record["repository_report"]
@@ -418,6 +435,7 @@ def validation_errors(root: Path) -> tuple[list[str], dict]:
             errors.append("Historical tested and introduction source states differ from their exact fixed-exclusion digest")
         if {path: mode for path, mode in modes.items() if path not in EVIDENCE_PATHS} != {path: mode for path, mode in introduction_modes.items() if path not in EVIDENCE_PATHS}:
             errors.append("Historical tested and introduction source file modes differ")
+        errors.extend(introduction_change_errors(root, introduction))
         errors.extend(report_errors(record, files))
         errors.extend(formation_errors(record, files))
         document = normalized_text(introduction_files[DOCUMENT_PATH]).decode("utf-8")

@@ -224,6 +224,58 @@ def build_report(root, repository_report, *, verify_historical=True):
         self.introduce()
         self.assert_invalid("source states differ")
 
+    def test_introduction_cannot_restore_an_intervening_source_edit(self):
+        path = self.root / "synthetic-methods.json"
+        original = path.read_bytes()
+        path.write_bytes(original + b"\n ")
+        self.commit("Synthetic intervening source edit")
+        path.write_bytes(original)
+        self.introduce()
+        # The final snapshot matches the tested source. The introduction's own
+        # source-restoration delta still violates the fixed evidence-pair rule.
+        self.assert_invalid("outside the fixed evidence pair")
+
+    def test_intervening_source_restored_before_introduction_preserves_pair_only_delta(self):
+        path = self.root / "synthetic-methods.json"
+        original = path.read_bytes()
+        path.write_bytes(original + b"\n ")
+        self.commit("Synthetic intervening source edit")
+        path.write_bytes(original)
+        self.commit("Synthetic source restoration before introduction")
+        self.introduce()
+        self.assertEqual([], self.check()[0])
+
+    def merge_introduction(self, other_parent):
+        proposal = self.introduce()
+        tree = historical.git(self.root, "rev-parse", proposal + "^{tree}").decode("ascii").strip()
+        merged = historical.git(self.root, "commit-tree", tree, "-p", self.base, "-p", other_parent,
+                                "-m", "Synthetic merge introduction").decode("ascii").strip()
+        # The proposal commit is not an ancestor of this introduction. Both
+        # parents still carry pending evidence; the merge introduces the pass.
+        historical.git(self.root, "update-ref", "HEAD", merged)
+        return merged
+
+    def test_merge_introduction_cannot_restore_source_from_its_second_parent(self):
+        path = self.root / "synthetic-methods.json"
+        original = path.read_bytes()
+        path.write_bytes(original + b"\n ")
+        other_parent = self.commit("Synthetic second-parent source change")
+        path.write_bytes(original)
+        self.merge_introduction(other_parent)
+        self.assert_invalid("outside the fixed evidence pair")
+
+    def test_merge_introduction_accepts_pair_only_changes_from_both_parents(self):
+        path = self.root / "synthetic-methods.json"
+        original = path.read_bytes()
+        path.write_bytes(original + b"\n ")
+        self.commit("Synthetic second-parent source change")
+        path.write_bytes(original)
+        other_parent = self.commit("Synthetic second-parent restoration")
+        introduction = self.merge_introduction(other_parent)
+        errors, metadata = self.check(replay=False)
+        self.assertEqual([], errors)
+        self.assertEqual(introduction, metadata["introduction_revision"])
+
     def test_fixed_exclusions_cannot_expand(self):
         self.introduce(lambda record: record["source_state"]["digest_exclusions"].append("scripts/check_m2_acceptance.py"))
         self.assert_invalid("historical m2 evidence")

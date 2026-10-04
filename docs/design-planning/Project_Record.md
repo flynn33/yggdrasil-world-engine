@@ -400,6 +400,26 @@ and immutable M2 evidence introduction remain outstanding; M2 is still active
 and M3 remains planned. README now includes this development checkpoint so the
 owner can follow progress on GitHub between accepted milestone gates.
 
+## 8e. Clean-candidate governance correction and introduction delta
+
+The frozen candidate `f2b6896db3e5f25c59a13ebbfc6e280ca4c63461` ran all 36
+applicable checks from a clean offline clone. It passed 34 checks; the unit suite
+and M1 governance check failed on the same uncited new normative paragraph.
+The unit run executed 688 tests in 430.974 seconds with that one failure. The
+paragraph now carries its existing YWE-REQ-0038 citation; the actual M1 governance
+check passes. This failed evidence is preserved at
+`C:/Users/james/AppData/Local/Temp/ywe-m2-final-implementation-evidence-20261004-z6avb427`.
+
+A synthetic history probe also showed that snapshot equality alone allowed an
+acceptance introduction to restore an intervening source edit. The historical
+verifier now checks the introduction's own changed paths against every parent,
+permitting only the fixed evidence pair. Restoration during introduction and
+second-parent restoration reject; restoration completed before introduction and
+pair-only merges remain valid. The unchanged source-state, file-mode and immutable
+history checks still apply. The focused historical suite passed all 38 tests in
+41.407 seconds, and independent actual clone probes passed the relevant controls.
+The corrected implementation still requires a new complete frozen clean run.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
