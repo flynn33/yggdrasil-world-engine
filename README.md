@@ -160,7 +160,9 @@ cases. Complete implementation publication checks remain pending. Diagnostics
 capture, protected storage, paired export and retention verification are underway.
 Its reviewed retention amendment defines physical purge with actual deletion
 receipts and protects supporting evidence still referenced by retained records.
-M3 remains active until the complete slice and milestone acceptance checks pass.
+M3 remains active until the complete slice and milestone acceptance checks pass. The same review
+also adopts complete pure target-diagnostic retention and an explicit incident
+persistence port before their implementation.
 [Adoption CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37238793118)
 passed 35 of 36 checks; package acceptance rejected numeric budget formulas under
 the existing state-language guard. The formulas now use exact sum notation with
