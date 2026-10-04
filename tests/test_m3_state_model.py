@@ -915,12 +915,18 @@ class DiagnosticValueBoundaryTests(ModelTestCase):
         record = values.DiagnosticEnvelope(**args).to_record()
         self.assertEqual(512, len(record['summary']))
         self.assertEqual(8, len(record['notes']))
+        for summary in ('a b', 'a\tb'):
+            accepted = self.envelope_arguments(); accepted['summary'] = summary
+            self.assertEqual(summary, values.DiagnosticEnvelope(**accepted).summary)
         for field, wrong in [('summary', ''), ('summary', 's' * 513), ('summary', 'a\nb'),
-                ('summary', 'a\rb'), ('summary', 'a\u0085b'), ('summary', 'a\u2028b'),
+                ('summary', 'a\rb'), ('summary', 'a\vb'), ('summary', 'a\fb'),
+                ('summary', 'a\x1cb'), ('summary', 'a\x1db'), ('summary', 'a\x1eb'),
+                ('summary', 'a\u0085b'), ('summary', 'a\u2028b'),
                 ('summary', 'a\u2029b'), ('notes', []), ('notes', ['']), ('notes', ['n' * 513]), ('notes', ['n'] * 9)]:
             altered = self.envelope_arguments(); altered[field] = wrong
             with self.subTest(field=field, wrong_kind=type(wrong).__name__):
-                self.assert_code('DIAGNOSTIC_ENVELOPE_INVALID', values.DiagnosticEnvelope, **altered)
+                error = self.assert_code('DIAGNOSTIC_ENVELOPE_INVALID', values.DiagnosticEnvelope, **altered)
+                self.assertEqual(field, error.field_name)
 
     def test_envelope_rule_count_format_and_explicit_uppercase_enums(self):
         five = ['ASH-STATE-STRUCTURE-001', 'ASH-ADMISSIBILITY-CLASSIFICATION-001', 'ASH-STATE-VALIDITY-001',
@@ -1112,7 +1118,7 @@ class StateAssessmentWireSchemaTests(ModelTestCase):
         self.assertEqual({('diagnosis', None), ('assessment', None), ('failure', 'classification_evidence'),
                           ('failure', 'diagnostic_capture')}, set(outcomes))
 
-    def test_all_62_authored_structural_mutations_fail_for_owned_keywords(self):
+    def test_all_68_authored_structural_mutations_fail_for_owned_keywords(self):
         base = self.authored[0]
         assessment = next(p for p in self.authored if p.get('system_state_class') == 'CORRECTABLE')
         failure = next(p for p in self.authored if p.get('capture_status') == 'NOT_CONFIRMED'
@@ -1144,6 +1150,12 @@ class StateAssessmentWireSchemaTests(ModelTestCase):
             ('zero-emissions-for-diagnosis', base, lambda p: p.update(emitted_diagnostics=[]), 'minItems', ('emitted_diagnostics',)),
             ('summary-empty', base, lambda p: p['emitted_diagnostics'][0]['envelope'].update(summary=''), 'minLength', ('emitted_diagnostics', 0, 'envelope', 'summary')),
             ('summary-newline', base, lambda p: p['emitted_diagnostics'][0]['envelope'].update(summary='line1\nline2'), 'not', ('emitted_diagnostics', 0, 'envelope', 'summary')),
+            ('summary-carriage-return', base, lambda p: p['emitted_diagnostics'][0]['envelope'].update(summary='line1\rline2'), 'not', ('emitted_diagnostics', 0, 'envelope', 'summary')),
+            ('summary-vertical-tab', base, lambda p: p['emitted_diagnostics'][0]['envelope'].update(summary='line1\vline2'), 'not', ('emitted_diagnostics', 0, 'envelope', 'summary')),
+            ('summary-form-feed', base, lambda p: p['emitted_diagnostics'][0]['envelope'].update(summary='line1\fline2'), 'not', ('emitted_diagnostics', 0, 'envelope', 'summary')),
+            ('summary-file-separator', base, lambda p: p['emitted_diagnostics'][0]['envelope'].update(summary='line1\x1cline2'), 'not', ('emitted_diagnostics', 0, 'envelope', 'summary')),
+            ('summary-group-separator', base, lambda p: p['emitted_diagnostics'][0]['envelope'].update(summary='line1\x1dline2'), 'not', ('emitted_diagnostics', 0, 'envelope', 'summary')),
+            ('summary-record-separator', base, lambda p: p['emitted_diagnostics'][0]['envelope'].update(summary='line1\x1eline2'), 'not', ('emitted_diagnostics', 0, 'envelope', 'summary')),
             ('summary-next-line', base, lambda p: p['emitted_diagnostics'][0]['envelope'].update(summary='line1\u0085line2'), 'not', ('emitted_diagnostics', 0, 'envelope', 'summary')),
             ('summary-line-separator', base, lambda p: p['emitted_diagnostics'][0]['envelope'].update(summary='line1\u2028line2'), 'not', ('emitted_diagnostics', 0, 'envelope', 'summary')),
             ('summary-paragraph-separator', base, lambda p: p['emitted_diagnostics'][0]['envelope'].update(summary='line1\u2029line2'), 'not', ('emitted_diagnostics', 0, 'envelope', 'summary')),
@@ -1167,7 +1179,11 @@ class StateAssessmentWireSchemaTests(ModelTestCase):
             ('failure-prefix-too-long', failure,
                 lambda p: p['emitted_diagnostics'].append(copy.deepcopy(p['attempted_diagnostic'])), 'maxItems', ('emitted_diagnostics',)),
         ])
-        self.assertEqual(62, len(mutations))
+        self.assertEqual(68, len(mutations))
+        for summary in ('a b', 'a\tb', 's' * 512):
+            accepted = copy.deepcopy(base)
+            accepted['emitted_diagnostics'][0]['envelope']['summary'] = summary
+            self.assert_wire_valid(accepted)
         for name, original, mutate, keyword, instance_path in mutations:
             with self.subTest(case=name):
                 altered = copy.deepcopy(original); mutate(altered)

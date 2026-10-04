@@ -495,7 +495,10 @@ outcomes and does not assert recovery success.
 Review reproduced a metaclass equality hook through tuple membership in type
 guards; identity-only guards now avoid that hook. Constructor-to-wire review also
 removed an unsupported assumption that every truncated string prefix implies an
-original length above 64, and aligned one-line summary separators. The three early
+original length above 64. A further frozen-revision review reproduced five additional
+control separators accepted by the wire schema but rejected by the value owner;
+the schema and exact-location negative tests now cover all ten one-line separators.
+The earlier frozen run does not verify this subsequent correction. The three early
 wire-test failures used the wrong closure keyword; corrected tests require the
 actual unevaluatedProperties rejection at the intended instance location.
 
