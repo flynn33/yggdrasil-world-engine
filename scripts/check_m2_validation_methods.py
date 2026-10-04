@@ -95,7 +95,7 @@ def reference(root: Path, context: dict, expectations: dict):
     errors, cases = list(context["registry_errors"]), []
     for entry, schema in context["resources"]:
         resource = Resource.from_contents(schema)
-        for base, ref in fixtures.schema_references(resource, ""):
+        for base, ref in sorted(fixtures.schema_references(resource, "")):
             case = {"path": entry["path"], "base": base, "reference": ref, "result": "pass"}
             try:
                 fixtures.resolve_schema_target(context["registry"], ref, base)
@@ -116,13 +116,13 @@ def identifier(root: Path, context: dict, expectations: dict):
         if failed:
             errors.append(f"Duplicate schema path or mismatched catalog identifier: {entry['path']}")
         resource = Resource.from_contents(schema)
-        for value in fixtures.resource_identities(resource, ""):
+        for value in sorted(fixtures.resource_identities(resource, "")):
             failed = value in seen_ids
             seen_ids.add(value)
             cases.append({"namespace": "schema_resource_id", "value": value, "result": "fail" if failed else "pass"})
             if failed:
                 errors.append(f"Duplicate effective schema resource identifier: {value}")
-        for value in fixtures.resource_anchors(resource, ""):
+        for value in sorted(fixtures.resource_anchors(resource, "")):
             failed = value in seen_anchors
             seen_anchors.add(value)
             cases.append({"namespace": "schema_anchor", "value": list(value), "result": "fail" if failed else "pass"})

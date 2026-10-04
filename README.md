@@ -124,11 +124,13 @@ separate reviewed descriptor-to-execution approval, closing the demonstrated
 wrong-requirement substitutions. Original examples and pinned source authority
 remain preserved.
 
-The integrated run passed all 674 unit tests and 35 of 36 applicable repository
-checks. Its remaining branch-language scan failure was traced to formatting of
-two explicitly rejected literals and corrected without changing their values or
-the scanner. The final candidate still requires a frozen clean checkout, complete
-offline verification, and immutable acceptance evidence. M3 remains planned.
+The published implementation passed a clean offline run of all 36 applicable
+repository checks and 692 unit tests, plus GitHub Main CI. Its durable-evidence
+rehearsal exposed reference-case ordering that varied between Python processes.
+The evidence producer now orders those cases deterministically, preserving every
+duplicate and the exact historical comparison. This correction requires a new
+clean run and verified immutable introduction before M2 acceptance. M3 remains
+planned.
 
 Follow the [current development record](docs/design-planning/Project_Record.md#10-checkpoint)
 and [M2 acceptance contract](docs/project/m2_fixture_validation.md#m2-readiness-evaluation)

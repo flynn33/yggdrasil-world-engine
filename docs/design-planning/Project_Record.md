@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-19
+**Revision:** planning-20
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-18; full history remains in Git.
+**Supersedes:** planning-19; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -420,6 +420,32 @@ history checks still apply. The focused historical suite passed all 38 tests in
 41.407 seconds, and independent actual clone probes passed the relevant controls.
 The corrected implementation still requires a new complete frozen clean run.
 
+## 8f. Clean execution and deterministic evidence correction
+
+The published implementation `7c17397e4844960430832a9c7c3745237dcf6df1`
+passed all 36 applicable checks and 692 unit tests from a clean offline clone.
+The captured report records no blocking or advisory check failures and a clean
+checkout before and after execution. Manual GitHub Main CI run `37218826994`
+also passed for that exact revision. These results establish the tested
+implementation, not its immutable acceptance introduction.
+
+An external pair-only introduction rehearsal at
+`c5920d16d9502d87703461efea3df87497a4c957` failed its actual historical replay.
+The actual comparison found that only the reference method's case-list order
+differed; its complete duplicate-preserving cases, results and witnesses matched.
+The pinned `referencing` 0.37.0 source traverses subschema keywords through sets.
+The method producer preserved that process-dependent traversal order, which the
+strict historical comparison correctly rejected. The failed introduction was
+not imported into the authoritative repository.
+
+The producer now sorts reference, effective-identifier and anchor enumeration
+before executing and recording those cases. It retains every duplicate and
+does not relax the immutable verifier. A focused subprocess regression executes
+mixed keyword families, nested identifiers, anchors and duplicate references
+under three hash seeds. It fails against the original implementation and passes
+against this correction. A new frozen full execution and formation are required;
+the previous implementation's report cannot discharge the corrected revision.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -445,7 +471,9 @@ milestones only after verified M2 closure.
 
 **Needed from owner:** Nothing for continued M2 engineering.
 
-**Saved at:** `main`, in the previous planning-18 checkpoint; this planning-19 candidate is not yet published. The latest
+**Saved at:** `main`, at the published implementation
+`7c17397e4844960430832a9c7c3745237dcf6df1`; this planning-20 correction is a
+candidate until its new clean execution passes. The previous
 validated implementation is `358f4ad1a9db419ed9cc91b96c1f309f49bf946f`. The prior
 validated implementation is `b0b0a6934fbc96f050d0cd656985a790d984c206`; the preceding
 validated implementation is `ab1080b1c1b60a9e379d5cd25f52db2ec418a729`; the earlier

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -324,6 +325,70 @@ class ValidationMethodTests(unittest.TestCase):
                 else:
                     records[0]["evidence"]["cases"][0]["result"] = "fail"
                 self.assertTrue(methods.method_coverage(records)[0])
+
+
+class EvidenceOrderTests(unittest.TestCase):
+    def test_reference_and_nested_identifier_evidence_survive_hash_seed_changes(self):
+        worker = r'''
+import json, sys
+from pathlib import Path
+root = Path(sys.argv[1])
+sys.path.insert(0, str(root / "scripts"))
+import check_m2_validation_methods as methods
+from referencing import Registry, Resource
+identifier = "https://ywe.local/test/ordering.json"
+schema = {
+    "$schema": "https://json-schema.org/draft/2020-12/schema", "$id": identifier,
+    "$anchor": "root_anchor", "$dynamicAnchor": "root_dynamic",
+    "$defs": {
+        "target": {"type": "string"},
+        "link": {"$ref": "#/$defs/target"},
+        "b": {"$id": "b", "$anchor": "b_anchor", "$ref": "#/$defs/target",
+              "$defs": {"target": True}},
+    },
+    "properties": {
+        "first": {"$ref": "#/$defs/target"},
+        "a": {"$id": "a", "$anchor": "a_anchor", "$ref": "#/$defs/target",
+              "$defs": {"target": True}},
+    },
+    "oneOf": [{"$ref": "#/$defs/target"}],
+}
+resource = Resource.from_contents(schema)
+context = {
+    "resources": [({"path": "test/ordering.json", "schema_id": identifier}, schema)],
+    "registry": Registry(retrieve=methods.fixtures.deny_retrieval).with_resource(identifier, resource).crawl(),
+    "registry_errors": [], "catalog": {"fixtures": []},
+}
+payload = {}
+for name in ("reference", "identifier"):
+    errors, cases, evidence = getattr(methods, name)(root, context, {})
+    payload[name] = {"errors": errors, "cases": cases, "evidence": evidence}
+print(json.dumps(payload, sort_keys=True))
+'''
+        results = []
+        for seed in ("1", "2", "3"):
+            environment = os.environ.copy()
+            environment.update(PYTHONHASHSEED=seed, PYTHONDONTWRITEBYTECODE="1")
+            completed = subprocess.run(
+                [sys.executable, "-B", "-c", worker, str(ROOT)], cwd=ROOT,
+                env=environment, capture_output=True, text=True, check=True,
+            )
+            results.append(json.loads(completed.stdout))
+        self.assertEqual(results[0], results[1])
+        self.assertEqual(results[0], results[2])
+        for name in ("reference", "identifier"):
+            self.assertEqual([], results[0][name]["errors"])
+        references = results[0]["reference"]["cases"]
+        self.assertEqual(5, len(references))
+        self.assertEqual(3, sum(item["base"] == "https://ywe.local/test/ordering.json"
+                                and item["reference"] == "#/$defs/target" for item in references))
+        identities = results[0]["identifier"]["cases"]
+        self.assertEqual(8, len(identities))
+        self.assertEqual(
+            ["https://ywe.local/test/a", "https://ywe.local/test/b", "https://ywe.local/test/ordering.json"],
+            [item["value"] for item in identities if item["namespace"] == "schema_resource_id"],
+        )
+        self.assertEqual(4, sum(item["namespace"] == "schema_anchor" for item in identities))
 
 
 if __name__ == "__main__":
