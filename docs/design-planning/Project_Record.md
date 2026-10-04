@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-28
+**Revision:** planning-29
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-27; full history remains in Git.
+**Supersedes:** planning-28; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -620,6 +620,22 @@ unchanged support and operation byte budgets. Supporting purge grows to1928 keys
 whole-operation alias reservation grows to5931 within the fixed6144 capacity.
 Actual partial incident IO remains partial and unresolved incident roots stay pinned.
 
+The independent normal-import Recovery run passed 53 tests in 86.991 seconds,
+with zero failures, errors or skips. Its actual protected Windows collector cases
+and the unchanged exhaustive 131,072-proof loop executed. The value/registry/schema
+run passed 40 tests in 14.617 seconds, and Diagnostics passed 30 owned tests in
+6.054 seconds before the final review correction. Ten Diagnostics wire controls
+passed in 6.970 seconds after regeneration against all 67 adopted structures.
+These local results do not claim complete clean repository acceptance.
+
+Independent review reproduced false origin admission after an unconfirmed physical
+purge: the actual event files were gone while origin ACKs remained available.
+The owner now invalidates affected unknown acknowledgments and stale snapshots,
+preserving unknown event roots for safe support reachability. The native regression
+passed in 0.277 seconds; the full owned Diagnostics rerun remains pending here.
+Main CI runs 37241153172, 37241878979 and 37242753286 are now observed successful
+for their exact contract revisions. The original failed adoption run is preserved.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -639,15 +655,15 @@ slice; N1 contract, normalization implementation, clean 36-check/833-test execut
 GitHub publication and exact successful CI; N2 contract, safety policy and exact
 interface adoption with independent source/arithmetic review.
 
-**Next action:** Execute independent N2 producer, failure, wire and export controls,
-then freeze and verify the complete repository before publishing implementation
-results. Continue through session/mode/terminal guards, remaining Diagnostics and
+**Next action:** Finish the reviewed purge correction, exact fixture registration
+and inventory refresh, then freeze and verify the complete repository before
+publishing implementation results. Continue through session/mode/terminal guards, remaining Diagnostics and
 generation before evaluating unchanged M3 exit criteria.
 
 **Needed from owner:** Nothing for continued authorized roadmap development.
 
-**Saved at:** This planning-28 checkpoint follows published N1 implementation
+**Saved at:** This planning-29 checkpoint follows published N1 implementation
 `5328f018f341b80ad58cdb82f64708992ee2d6ae` and publication checkpoint
 `4c01af5b01b4690da5cd2a97d5e6025e97a48e1c`. The containing committed revision
-adopts N2 before its dependent code. Immutable milestone evidence and earlier
+records focused N2 verification before its implementation publication. Immutable milestone evidence and earlier
 checkpoint identities remain preserved.

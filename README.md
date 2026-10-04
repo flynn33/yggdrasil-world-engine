@@ -154,10 +154,14 @@ The [N2 recovery contract](docs/architecture/m3_recovery_contract.md),
 are now adopted before implementation as YWE-REQ-0041 / YWE-REQ-0042 and ADR-0031.
 Their exact interfaces cover actual immutable recovery/fallback execution, complete
 safe proof retention, protected local storage and paired JSON/Markdown exports.
-Recovery implementation now passes 43 focused integration tests and 23 owned
-value/registry tests locally, including the exhaustive 131,072 two-codeword proof
-cases. Complete implementation publication checks remain pending. Diagnostics
-capture, protected storage, paired export and retention verification are underway.
+Recovery implementation passes 53 focused integration tests and 40 owned
+value/registry/schema tests locally, including all 131,072 actual two-codeword
+proof cases. Diagnostics has passed 30 focused tests covering protected Windows
+storage, full safe target evidence, incident persistence, paired exports and purge;
+its ten wire controls also pass. Complete implementation publication checks remain
+pending. Independent review reproduced stale origin acknowledgments after an
+unconfirmed physical purge; the fix passed its native regression, and the complete
+Diagnostics rerun is underway before freezing the implementation.
 Its reviewed retention amendment defines physical purge with actual deletion
 receipts and protects supporting evidence still referenced by retained records.
 M3 remains active until the complete slice and milestone acceptance checks pass. The same review
@@ -166,7 +170,11 @@ persistence port before their implementation.
 [Adoption CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37238793118)
 passed 35 of 36 checks; package acceptance rejected numeric budget formulas under
 the existing state-language guard. The formulas now use exact sum notation with
-unchanged event, alias and byte limits. Full replacement CI verification is pending.
+unchanged event and byte limits. [Replacement CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37241153172),
+[purge-contract CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37241878979)
+and [target/incident-contract CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37242753286)
+have now passed at their exact published revisions. Those runs verify the adopted
+contracts; complete clean implementation acceptance is the next publication gate.
 
 Next after this slice are session admission and state commit, actual containment
 and safe halt, remaining canonical Diagnostics producers and generation semantics.
