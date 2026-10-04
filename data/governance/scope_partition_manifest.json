@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1119,
-    "path_digest": "7e2e445a398c20c1eb21dbe843c7404df7353651bc2f05309d77d533e321d7e7",
+    "path_count": 1134,
+    "path_digest": "e57be6b49e6238c032e7d08a3bf66805f8e0bb71d82a0e1de784744c953e78a5",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -2166,17 +2166,57 @@
       "secondary_tags": [
         "m2_structural_validation"
       ]
+    },
+    {
+      "path": "data/schemas/pattern_registry_descriptor_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "This schema governs explicit repository descriptor formats, case expectations or rejection execution evidence; it does not introduce profile assertions into universal Core.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "data/schemas/module_capability_descriptor_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "This schema governs explicit repository descriptor formats, case expectations or rejection execution evidence; it does not introduce profile assertions into universal Core.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "data/schemas/rejection_scenario_catalog_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "This schema governs explicit repository descriptor formats, case expectations or rejection execution evidence; it does not introduce profile assertions into universal Core.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "data/schemas/yaml_descriptor_case_expectations_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "This schema governs explicit repository descriptor formats, case expectations or rejection execution evidence; it does not introduce profile assertions into universal Core.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
-      "ywe_core": 139,
-      "ywe_extension_profile": 122,
       "ash_dependency_material": 66,
-      "wrw_reference_profile": 297,
-      "governance_validation": 417,
+      "governance_validation": 428,
       "historical_evidence": 19,
-      "later_release_work": 59
+      "later_release_work": 59,
+      "wrw_reference_profile": 301,
+      "ywe_core": 139,
+      "ywe_extension_profile": 122
     }
   }
 }

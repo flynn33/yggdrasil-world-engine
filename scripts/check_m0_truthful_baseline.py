@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import io
 import json
@@ -39,6 +40,8 @@ EVIDENCE_PATH = "data/governance/m0_acceptance_evidence.json"
 ACCEPTANCE_DOCUMENT_PATH = "docs/project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md"
 PHASE_8_9_REQUIRED_PATH = "data/validation/required_phase_8_9_artifacts.json"
 M2_SCHEMA_MIGRATION_PATH = "data/validation/m2_contract_migration_manifest.json"
+M2_ORIGINAL_SOURCE_REVISION = "b61b49eaf9dce30058a86b52fd4910087fc9e4da"
+M2_ORIGINAL_MIGRATION_REVISION = "5b30dd50533d00b4c0852d45df3dfac61b3a4147"
 WIKI_SYNC_WORKFLOW_PATH = ".github/workflows/wiki-sync.yml"
 
 INSTANCE_SCHEMAS = {
@@ -1341,6 +1344,12 @@ def protected_phase_9_paths(root: Path, errors: list[str]) -> tuple[set[str], tu
     return protected, ("examples/branch_reality/",)
 
 
+def m2_contract_value_sha256(document: Any) -> str:
+    return sha256_bytes(json.dumps(
+        document, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False
+    ).encode("utf-8"))
+
+
 def m2_schema_migration_document_errors(
     base_document: Any, current_document: Any, record: dict[str, Any]
 ) -> list[str]:
@@ -1348,24 +1357,8 @@ def m2_schema_migration_document_errors(
     if not isinstance(base_document, dict) or not isinstance(current_document, dict):
         return ["M2 contract migration requires JSON object documents"]
     try:
-        base_hash = sha256_bytes(
-            json.dumps(
-                base_document,
-                sort_keys=True,
-                separators=(",", ":"),
-                ensure_ascii=False,
-                allow_nan=False,
-            ).encode("utf-8")
-        )
-        current_hash = sha256_bytes(
-            json.dumps(
-                current_document,
-                sort_keys=True,
-                separators=(",", ":"),
-                ensure_ascii=False,
-                allow_nan=False,
-            ).encode("utf-8")
-        )
+        base_hash = m2_contract_value_sha256(base_document)
+        current_hash = m2_contract_value_sha256(current_document)
     except (TypeError, ValueError, UnicodeEncodeError, RecursionError) as exc:
         return [f"M2 contract migration cannot be fingerprinted: {exc}"]
     if record.get("legacy_value_sha256") != base_hash:
@@ -1383,6 +1376,142 @@ def m2_schema_migration_document_errors(
     return errors
 
 
+def m2_historical_document(root: Path, revision: str, path: str):
+    result = run_git(root, ["show", f"{revision}:{path}"])
+    if result.returncode != 0:
+        raise ValueError(f"Unable to read original assertion proof {revision}:{path}")
+    return json.loads(result.stdout, object_pairs_hook=unique_object)
+
+
+def m2_assertion_revision_inventory(manifest: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
+    inventory = manifest.get("assertion_revisions", [])
+    if not isinstance(inventory, list):
+        raise ValueError("M2 assertion revision inventory must be an array")
+    result = {}
+    for group in inventory:
+        if not isinstance(group, dict) or set(group) != {"path", "source_revision", "migration_revision", "transitions"}:
+            raise ValueError("M2 assertion revision group has an invalid field inventory")
+        path = group["path"]
+        if not isinstance(path, str) or not path or path in result:
+            raise ValueError("M2 assertion revision inventory contains an invalid or duplicate path")
+        transitions = group["transitions"]
+        if not isinstance(transitions, list) or not transitions:
+            raise ValueError("M2 assertion revision path requires a nonempty transition chain")
+        result[path] = []
+        for transition in transitions:
+            if not isinstance(transition, dict) or set(transition) != {
+                "prior_value_sha256", "revised_value_sha256", "replacements", "requirement_id"
+            }:
+                raise ValueError("M2 assertion transition has an invalid field inventory")
+            result[path].append({
+                **{key: group[key] for key in ("path", "source_revision", "migration_revision")},
+                **transition,
+            })
+    return result
+
+
+def m2_assertion_revision_errors(
+    root: Path,
+    base_document: Any,
+    current_document: Any,
+    record: dict[str, Any],
+    revisions: list[dict[str, Any]],
+    manifest: dict[str, Any],
+) -> list[str]:
+    """Prove only declared formal assertions changed after an exact original migration."""
+    try:
+        if not revisions:
+            raise ValueError("Assertion revision proof requires a nonempty transition chain")
+        fields = {
+            "path", "source_revision", "migration_revision", "prior_value_sha256",
+            "revised_value_sha256", "replacements", "requirement_id",
+        }
+        for revision in revisions:
+            if set(revision) != fields or revision["path"] != record["path"]:
+                raise ValueError("Assertion revision has an invalid field or path inventory")
+            for name in ("source_revision", "migration_revision"):
+                if not isinstance(revision[name], str) or not re.fullmatch(r"[a-f0-9]{40}", revision[name]):
+                    raise ValueError(f"Assertion revision requires a full immutable {name}")
+            for name in ("prior_value_sha256", "revised_value_sha256"):
+                if not isinstance(revision[name], str) or not re.fullmatch(r"[a-f0-9]{64}", revision[name]):
+                    raise ValueError(f"Assertion revision has an invalid {name}")
+            if revision["prior_value_sha256"] == revision["revised_value_sha256"]:
+                raise ValueError("Assertion revision must change the reviewed schema value")
+            if not isinstance(revision["requirement_id"], str) or not re.fullmatch(r"YWE-REQ-\d{4}", revision["requirement_id"]):
+                raise ValueError("Assertion revision requires a normative requirement ID")
+            if not isinstance(revision["replacements"], list) or not revision["replacements"]:
+                raise ValueError("Assertion revision requires explicit replacements")
+
+        first = revisions[0]
+        if any(
+            revision[name] != first[name]
+            for revision in revisions
+            for name in ("source_revision", "migration_revision")
+        ):
+            raise ValueError("Assertion revisions disagree on original migration provenance")
+
+        source = m2_historical_document(root, first["source_revision"], record["path"])
+        original = m2_historical_document(root, first["migration_revision"], record["path"])
+        historical_manifest = m2_historical_document(root, first["migration_revision"], M2_SCHEMA_MIGRATION_PATH)
+        original_manifest = {key: value for key, value in manifest.items() if key != "assertion_revisions"}
+        if m2_contract_value_sha256(original_manifest) != m2_contract_value_sha256(historical_manifest):
+            raise ValueError("Original migration manifest differs from its historical proof")
+        original_records = historical_manifest.get("migrations", [])
+        matches = [item for item in original_records if isinstance(item, dict) and item.get("path") == record["path"]]
+        if len(matches) != 1 or m2_contract_value_sha256(matches[0]) != m2_contract_value_sha256(record):
+            raise ValueError("Original migration record differs from its historical proof")
+        original_errors = m2_schema_migration_document_errors(source, original, record)
+        if original_errors:
+            return ["Original assertion migration: " + error for error in original_errors]
+        if "properties" in source:
+            raise ValueError("Assertion revisions cannot replace protected legacy properties")
+        if first["prior_value_sha256"] != record["migrated_value_sha256"]:
+            raise ValueError("Assertion revisions do not begin at the original reviewed migration")
+        for previous, following in zip(revisions, revisions[1:]):
+            if previous["revised_value_sha256"] != following["prior_value_sha256"]:
+                raise ValueError("Assertion revision hash chain is discontinuous")
+
+        reconstructed = copy.deepcopy(current_document)
+        for revision in reversed(revisions):
+            if m2_contract_value_sha256(reconstructed) != revision["revised_value_sha256"]:
+                raise ValueError("Assertion revision result fingerprint differs from the reviewed stage")
+            seen = set()
+            for replacement in revision["replacements"]:
+                if not isinstance(replacement, dict) or set(replacement) != {"pointer", "before", "after"}:
+                    raise ValueError("Assertion replacement requires exactly pointer, before and after")
+                pointer = replacement["pointer"]
+                if not isinstance(pointer, str) or not re.fullmatch(r"/properties/(?:[^~/]|~[01])+", pointer):
+                    raise ValueError("Assertion replacements must select one complete formal property")
+                field = pointer.removeprefix("/properties/").replace("~1", "/").replace("~0", "~")
+                if field in seen:
+                    raise ValueError("Assertion replacements contain duplicate or overlapping pointers")
+                seen.add(field)
+                before, after = replacement["before"], replacement["after"]
+                if not isinstance(before, dict) or not isinstance(after, dict):
+                    raise ValueError("Assertion replacements require object-valued property schemas")
+                if m2_contract_value_sha256(before) == m2_contract_value_sha256(after):
+                    raise ValueError("Assertion replacement must change its property schema")
+                if after.get("x-ywe-requirement-id") != revision["requirement_id"]:
+                    raise ValueError("Assertion replacement requirement annotation differs from its review")
+                properties = reconstructed.get("properties") if isinstance(reconstructed, dict) else None
+                if not isinstance(properties, dict) or field not in properties:
+                    raise ValueError(f"Assertion replacement target is absent: {pointer}")
+                if m2_contract_value_sha256(properties[field]) != m2_contract_value_sha256(after):
+                    raise ValueError(f"Assertion replacement result differs at {pointer}")
+                properties[field] = copy.deepcopy(before)
+            if m2_contract_value_sha256(reconstructed) != revision["prior_value_sha256"]:
+                raise ValueError("Assertion revision source fingerprint differs after reconstruction")
+        if m2_contract_value_sha256(reconstructed) != m2_contract_value_sha256(original):
+            raise ValueError("Assertion revisions do not reconstruct the historical original migration")
+        allowed_bases = {record["legacy_value_sha256"], record["migrated_value_sha256"]}
+        allowed_bases.update(revision["revised_value_sha256"] for revision in revisions)
+        if m2_contract_value_sha256(base_document) not in allowed_bases:
+            raise ValueError("Protected baseline is not an explicitly reviewed assertion stage")
+        return []
+    except (OSError, ValueError, TypeError, KeyError, AttributeError, UnicodeError, RecursionError) as exc:
+        return [f"M2 assertion revision proof failed: {exc}"]
+
+
 def approved_m2_schema_migration(
     root: Path,
     base_ref: str,
@@ -1393,12 +1522,15 @@ def approved_m2_schema_migration(
     if manifest is None:
         return False
     records = manifest.get("migrations")
-    record = next(
-        (item for item in records if isinstance(item, dict) and item.get("path") == relative_path),
-        None,
-    ) if isinstance(records, list) else None
-    if record is None:
+    matches = [
+        item for item in records if isinstance(item, dict) and item.get("path") == relative_path
+    ] if isinstance(records, list) else []
+    if not matches:
         return False
+    if len(matches) != 1:
+        errors.append(f"Duplicate original M2 migration proofs for {relative_path}")
+        return False
+    record = matches[0]
     base_result = run_git(root, ["show", f"{base_ref}:{relative_path}"])
     if base_result.returncode != 0:
         errors.append(f"Unable to read protected M2 migration baseline for {relative_path}")
@@ -1409,11 +1541,76 @@ def approved_m2_schema_migration(
     except (OSError, json.JSONDecodeError, DuplicateKeyError) as exc:
         errors.append(f"Unable to inspect protected M2 contract migration {relative_path}: {exc}")
         return False
-    migration_errors = m2_schema_migration_document_errors(
-        base_document, current_document, record
+    try:
+        selected = m2_assertion_revision_inventory(manifest).get(relative_path, [])
+    except ValueError as exc:
+        errors.append(str(exc))
+        return False
+    migration_errors = (
+        m2_assertion_revision_errors(root, base_document, current_document, record, selected, manifest)
+        if selected else m2_schema_migration_document_errors(base_document, current_document, record)
     )
     errors.extend(f"{relative_path}: {error}" for error in migration_errors)
     return not migration_errors
+
+
+def validate_m2_migration_proofs(
+    root: Path,
+    errors: list[str],
+    source_revision: str = M2_ORIGINAL_SOURCE_REVISION,
+    migration_revision: str = M2_ORIGINAL_MIGRATION_REVISION,
+    base_ref: str = "HEAD",
+) -> None:
+    """Check permanent proof integrity even when a protected target has no diff."""
+    manifest = load_json_object(root, M2_SCHEMA_MIGRATION_PATH, errors)
+    if manifest is None:
+        return
+    try:
+        historical = m2_historical_document(root, migration_revision, M2_SCHEMA_MIGRATION_PATH)
+        original = {key: value for key, value in manifest.items() if key != "assertion_revisions"}
+        if m2_contract_value_sha256(original) != m2_contract_value_sha256(historical):
+            raise ValueError("Original M2 migration manifest differs from its immutable historical proof")
+        inventory = m2_assertion_revision_inventory(manifest)
+        base_commit = resolved_git_commit(root, base_ref)
+        base_tree = run_git(root, ["ls-tree", "-z", base_commit, "--", M2_SCHEMA_MIGRATION_PATH])
+        if base_tree.returncode != 0:
+            raise ValueError("Unable to inspect the comparison baseline migration proof")
+        if base_tree.stdout:
+            prior_manifest = m2_historical_document(root, base_commit, M2_SCHEMA_MIGRATION_PATH)
+            prior_original = {key: value for key, value in prior_manifest.items() if key != "assertion_revisions"}
+            if m2_contract_value_sha256(prior_original) != m2_contract_value_sha256(historical):
+                raise ValueError("Comparison baseline original migration proof differs from immutable history")
+            prior_inventory = m2_assertion_revision_inventory(prior_manifest)
+            if list(inventory)[:len(prior_inventory)] != list(prior_inventory):
+                raise ValueError("M2 assertion revision paths must preserve the committed baseline prefix")
+            for path, prior_chain in prior_inventory.items():
+                current_chain = inventory[path]
+                if len(current_chain) < len(prior_chain) or m2_contract_value_sha256(
+                    current_chain[:len(prior_chain)]
+                ) != m2_contract_value_sha256(prior_chain):
+                    raise ValueError(f"{path}: assertion transition history must preserve the committed baseline prefix")
+        paths = {record["path"] for record in historical["migrations"]}
+        if set(inventory) - paths:
+            raise ValueError("M2 assertion revision inventory contains an unregistered protected target")
+        for path, revisions in inventory.items():
+            if any(
+                revision["source_revision"] != source_revision
+                or revision["migration_revision"] != migration_revision
+                for revision in revisions
+            ):
+                raise ValueError(f"{path}: assertion provenance differs from the pinned original revisions")
+        for record in historical["migrations"]:
+            path = record["path"]
+            current = load_json(root / path)
+            revisions = inventory.get(path, [])
+            if revisions:
+                proof_errors = m2_assertion_revision_errors(root, current, current, record, revisions, manifest)
+            else:
+                source = m2_historical_document(root, source_revision, path)
+                proof_errors = m2_schema_migration_document_errors(source, current, record)
+            errors.extend(f"{path}: {error}" for error in proof_errors)
+    except (OSError, ValueError, TypeError, KeyError, AttributeError, UnicodeError, RecursionError) as exc:
+        errors.append(f"Permanent M2 migration proof validation failed: {exc}")
 
 
 def protected_diff_errors(root: Path, base_ref: str) -> tuple[list[str], set[str]]:
@@ -2374,6 +2571,7 @@ def validate_repository_truth(root: Path, base_ref: str) -> list[str]:
     validate_source_inventories(root, placeholder_paths, errors)
     validate_wiki_sync_version_authority(root, errors)
     validate_platform_and_identity_contracts(root, roadmap, errors)
+    validate_m2_migration_proofs(root, errors, base_ref=base_ref)
     diff_errors, protected_hits = protected_diff_errors(root, base_ref)
     errors.extend(diff_errors)
     errors.extend(transition_errors(root, roadmap))

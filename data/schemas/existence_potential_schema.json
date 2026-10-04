@@ -73,8 +73,27 @@
       "minLength": 1
     },
     "coefficients": {
-      "type": "string",
-      "minLength": 1
+      "type": [
+        "string",
+        "object"
+      ],
+      "minLength": 1,
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-REQ-0030",
+      "properties": {
+        "alpha1": {
+          "type": "number"
+        },
+        "alpha2": {
+          "type": "number"
+        },
+        "alpha3": {
+          "type": "number"
+        },
+        "alpha4": {
+          "type": "number"
+        }
+      }
     },
     "existence_potential_id": {
       "type": "string",
@@ -82,8 +101,15 @@
       "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
     },
     "interpretation_notes": {
-      "type": "string",
-      "minLength": 1
+      "type": [
+        "string",
+        "array"
+      ],
+      "minLength": 1,
+      "items": {
+        "type": "string"
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0030"
     },
     "pattern_vector_ref": {
       "type": "string",
@@ -91,8 +117,12 @@
       "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
     },
     "phi_value": {
-      "type": "string",
-      "minLength": 1
+      "type": [
+        "string",
+        "number"
+      ],
+      "minLength": 1,
+      "x-ywe-requirement-id": "YWE-REQ-0030"
     },
     "target_kind": {
       "type": "string",
@@ -104,8 +134,27 @@
       "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
     },
     "term_values": {
-      "type": "string",
-      "minLength": 1
+      "type": [
+        "string",
+        "object"
+      ],
+      "minLength": 1,
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-REQ-0030",
+      "properties": {
+        "C_compressibility": {
+          "type": "number"
+        },
+        "S_symmetry": {
+          "type": "number"
+        },
+        "P_persistence": {
+          "type": "number"
+        },
+        "H_entropy": {
+          "type": "number"
+        }
+      }
     }
   },
   "additionalProperties": true

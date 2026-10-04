@@ -1,0 +1,1721 @@
+{
+  "schema_ref": "data/schemas/rejection_scenario_catalog_schema.json",
+  "artifact_type": "ywe_rejection_scenario_catalog",
+  "artifact_version": "1.0.0",
+  "scenarios": [
+    {
+      "scenario_id": "phase17.missing_reward_and_consequence",
+      "descriptor_path": "examples/ravenfall_gate/phase_17/invalid_no_reward_packet_trace.reject.json",
+      "descriptor_sha256": "c0a29c25d439a61b817337c3dd3df5ecff4f3ddb11a00904ae186d294afeb2f7",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/reject_reason",
+          "value": "Records quest completion without QuestRewardResolutionPacket or consequence resolution."
+        },
+        {
+          "pointer": "/invalid_pattern",
+          "value": "quest_complete flag only"
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/validation/choice_to_consequence_validation_rules.json",
+          "pointer": "/chain",
+          "value": [
+            "choice",
+            "branch_event",
+            "quest_reward_resolution",
+            "consequence_resolution",
+            "player_state_update",
+            "worldstate_delta_or_diagnostic_noop",
+            "location_mutation_or_noop",
+            "future_generation_bias_or_noop"
+          ]
+        },
+        {
+          "path": "data/validation/choice_to_consequence_validation_rules.json",
+          "pointer": "/reject_if_chain_breaks",
+          "value": true
+        },
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/QuestCompletionConsequenceAssertion/required",
+          "value": [
+            "quest_reward_resolution_ref",
+            "consequence_resolution_refs"
+          ]
+        },
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/QuestCompletionConsequenceAssertion/required/0",
+          "value": "quest_reward_resolution_ref"
+        },
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/QuestCompletionConsequenceAssertion/required/1",
+          "value": "consequence_resolution_refs"
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "materialized_scenario",
+      "description": "Execute the described missing reward/consequence condition on the accepted reveal trace; this descriptor is not a runtime packet.",
+      "base_path": "examples/ravenfall_gate/phase_17/choice_to_consequence_reveal_oath.example.json",
+      "base_pointer": "",
+      "schema_id": "https://ywe.local/schemas/rejection_scenario_catalog_schema.json#/$defs/QuestCompletionConsequenceAssertion",
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/quest_reward_resolution_ref"
+        },
+        {
+          "op": "remove",
+          "path": "/consequence_resolution_refs"
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "schema_pointer": "/required",
+          "missing_properties": [
+            "consequence_resolution_refs",
+            "quest_reward_resolution_ref"
+          ]
+        }
+      ],
+      "projection_bindings": [
+        {
+          "assertion_pointer": "/$defs/QuestCompletionConsequenceAssertion/required",
+          "assertion_value": [
+            "quest_reward_resolution_ref",
+            "consequence_resolution_refs"
+          ],
+          "source_path": "data/validation/choice_to_consequence_validation_rules.json",
+          "source_pointer": "/chain",
+          "source_value": [
+            "choice",
+            "branch_event",
+            "quest_reward_resolution",
+            "consequence_resolution",
+            "player_state_update",
+            "worldstate_delta_or_diagnostic_noop",
+            "location_mutation_or_noop",
+            "future_generation_bias_or_noop"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario_id": "phase17.static_location_without_noop",
+      "descriptor_path": "examples/ravenfall_gate/phase_17/invalid_static_location_trace.reject.json",
+      "descriptor_sha256": "bfa13bf3b4f3cb2324b303d929cede3c6dfb4805ccd291b8657ecce6df2bd93a",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/reject_reason",
+          "value": "Ends at static location state and ignores location mutation or no-op justification."
+        },
+        {
+          "pointer": "/invalid_pattern",
+          "value": "static-only location model"
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/validation/phase_17_trace_coverage_rules.json",
+          "pointer": "/requires_one_of_per_trace/1",
+          "value": [
+            "location_mutation_refs",
+            "location_noop_reason"
+          ]
+        },
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/LocationConsequenceAssertion/anyOf/0/properties/location_mutation_refs/minItems",
+          "value": 1
+        },
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/LocationConsequenceAssertion/anyOf/1/properties/location_noop_reason/type",
+          "value": "string"
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "materialized_scenario",
+      "description": "Execute absent location mutation and no-op evidence on the accepted reveal trace.",
+      "base_path": "examples/ravenfall_gate/phase_17/choice_to_consequence_reveal_oath.example.json",
+      "base_pointer": "",
+      "schema_id": "https://ywe.local/schemas/rejection_scenario_catalog_schema.json#/$defs/LocationConsequenceAssertion",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/location_mutation_refs",
+          "value": []
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINITEMS",
+          "instance_pointer": "/location_mutation_refs",
+          "schema_pointer": "/anyOf/0/properties/location_mutation_refs/minItems"
+        },
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/location_noop_reason",
+          "schema_pointer": "/anyOf/1/properties/location_noop_reason/type"
+        }
+      ],
+      "projection_bindings": [
+        {
+          "assertion_pointer": "/$defs/LocationConsequenceAssertion/anyOf/0/properties/location_mutation_refs/minItems",
+          "assertion_value": 1,
+          "source_path": "data/validation/phase_17_trace_coverage_rules.json",
+          "source_pointer": "/requires_one_of_per_trace/1",
+          "source_value": [
+            "location_mutation_refs",
+            "location_noop_reason"
+          ]
+        },
+        {
+          "assertion_pointer": "/$defs/LocationConsequenceAssertion/anyOf/1/properties/location_noop_reason/type",
+          "assertion_value": "string",
+          "source_path": "data/validation/phase_17_trace_coverage_rules.json",
+          "source_pointer": "/requires_one_of_per_trace/1",
+          "source_value": [
+            "location_mutation_refs",
+            "location_noop_reason"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario_id": "phase17.permanent_wolf_death",
+      "descriptor_path": "examples/ravenfall_gate/phase_17/invalid_permanent_wolf_death.reject.json",
+      "descriptor_sha256": "6f001cd478e3b6369a1051e67e60b4d8c2a5c100397f7df928c8b3f3b79e2926",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/reject_reason",
+          "value": "Models permanent wolf death instead of temporary decoherence and return."
+        },
+        {
+          "pointer": "/invalid_terms",
+          "value": [
+            "kill the wolf",
+            "permanent wolf death"
+          ]
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/wolf_companion_trace_schema.json",
+          "pointer": "/properties/permanent_death/const",
+          "value": false
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "materialized_scenario",
+      "description": "Change exactly one asserted canon flag on the accepted reveal wolf trace.",
+      "base_path": "examples/ravenfall_gate/phase_17/wolf_companion_trace_reveal_oath.example.json",
+      "base_pointer": "",
+      "schema_id": "https://ywe.local/schemas/wolf_companion_trace_schema.json",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/permanent_death",
+          "value": true
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/permanent_death",
+          "schema_pointer": "/properties/permanent_death/const"
+        }
+      ],
+      "mutation_value_bindings": [
+        {
+          "operation_index": 0,
+          "source_path": "data/schemas/wolf_companion_trace_schema.json",
+          "source_pointer": "/properties/permanent_death/const",
+          "source_value": false,
+          "relation": "negated_boolean"
+        }
+      ]
+    },
+    {
+      "scenario_id": "phase17.wolf_morality",
+      "descriptor_path": "examples/ravenfall_gate/phase_17/invalid_wolf_morality_trace.reject.json",
+      "descriptor_sha256": "d4727b3be508360c21b3b6b68b8eedf09ff2133d3f6b8355f913ac06d6b27529",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/reject_reason",
+          "value": "Models White Wolf as good and Dark Wolf as evil, which violates canon."
+        },
+        {
+          "pointer": "/invalid_terms",
+          "value": [
+            "White Wolf = good",
+            "Dark Wolf = evil",
+            "wolf morality meter"
+          ]
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/wolf_companion_trace_schema.json",
+          "pointer": "/properties/morality_model/const",
+          "value": false
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "materialized_scenario",
+      "description": "Change exactly one asserted canon flag on the accepted reveal wolf trace.",
+      "base_path": "examples/ravenfall_gate/phase_17/wolf_companion_trace_reveal_oath.example.json",
+      "base_pointer": "",
+      "schema_id": "https://ywe.local/schemas/wolf_companion_trace_schema.json",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/morality_model",
+          "value": true
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/morality_model",
+          "schema_pointer": "/properties/morality_model/const"
+        }
+      ],
+      "mutation_value_bindings": [
+        {
+          "operation_index": 0,
+          "source_path": "data/schemas/wolf_companion_trace_schema.json",
+          "source_pointer": "/properties/morality_model/const",
+          "source_value": false,
+          "relation": "negated_boolean"
+        }
+      ]
+    },
+    {
+      "scenario_id": "phase17.platform_runtime_terms",
+      "descriptor_path": "examples/ravenfall_gate/phase_17/invalid_platform_runtime_trace.reject.json",
+      "descriptor_sha256": "f44b7767ac0214a469589e04584d74d074c5db2acd0e238d8d610263775cb510",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/reject_reason",
+          "value": "Introduces platform-specific runtime implementation in an agnostic design repository."
+        },
+        {
+          "pointer": "/invalid_terms",
+          "value": [
+            "Unity MonoBehaviour",
+            "Unreal Blueprint class",
+            "Godot GDScript"
+          ]
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/validation/phase_17_guardrail_rules.json",
+          "pointer": "/rules/0/reject_terms",
+          "value": [
+            "Unity",
+            "Unreal",
+            "Godot",
+            "MonoBehaviour",
+            "Blueprint class",
+            "GDScript runtime"
+          ]
+        }
+      ],
+      "mode": "lexical",
+      "validation_scope": "subject",
+      "description": "Reject each actual descriptor term using the source-owned platform guardrail terms.",
+      "subject_pointer": "/invalid_terms",
+      "rule_path": "data/validation/phase_17_guardrail_rules.json",
+      "reject_terms_pointer": "/rules/0/reject_terms",
+      "expected_matches": [
+        {
+          "subject_pointer": "/invalid_terms/0",
+          "term": "Unity"
+        },
+        {
+          "subject_pointer": "/invalid_terms/0",
+          "term": "MonoBehaviour"
+        },
+        {
+          "subject_pointer": "/invalid_terms/1",
+          "term": "Unreal"
+        },
+        {
+          "subject_pointer": "/invalid_terms/1",
+          "term": "Blueprint class"
+        },
+        {
+          "subject_pointer": "/invalid_terms/2",
+          "term": "Godot"
+        }
+      ]
+    },
+    {
+      "scenario_id": "slice.wolf_morality_subject",
+      "descriptor_path": "examples/vertical_slices/ravenfall_gate/invalid_wolf_morality_meter.example.json",
+      "descriptor_sha256": "2a817eaa1b28ee6c07d27335f97d6942961c672956f798ccdc5aca8cbe19dd31",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/invalid_reason",
+          "value": "wolves_are_not_morality_system"
+        },
+        {
+          "pointer": "/invalid_content",
+          "value": "White Wolf = good and Dark Wolf = evil morality meter"
+        },
+        {
+          "pointer": "/must_reject",
+          "value": true
+        }
+      ],
+      "owner_bindings": [
+        {"path": "data/validation/phase_17_forbidden_language_patterns.json", "pointer": "/forbidden_patterns", "value": ["White Wolf = good", "Dark Wolf = evil", "wolf morality meter", "corruption meter", "purity meter", "permanent wolf death", "kill the wolf", "choose one wolf forever", "wolf as only abstract score", "quest complete flag only", "random reward table as primary model", "pre-generated branch tree", "static-only location model"]}
+      ],
+      "mode": "lexical",
+      "validation_scope": "subject",
+      "description": "Reject actual inline content using source-owned wolf morality terms.",
+      "subject_pointer": "/invalid_content",
+      "rule_path": "data/validation/phase_17_forbidden_language_patterns.json",
+      "reject_terms_pointer": "/forbidden_patterns",
+      "expected_matches": [
+        {
+          "subject_pointer": "/invalid_content",
+          "term": "White Wolf = good"
+        },
+        {
+          "subject_pointer": "/invalid_content",
+          "term": "Dark Wolf = evil"
+        }
+      ]
+    },
+    {
+      "scenario_id": "slice.platform_runtime_subject",
+      "descriptor_path": "examples/vertical_slices/ravenfall_gate/invalid_platform_specific_runtime.example.json",
+      "descriptor_sha256": "0b61a9b55b3799f3bdf50fb75f8df3c49236cec91defbf480659e58dc79cb2cf",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/invalid_reason",
+          "value": "phase_16_is_engine_agnostic_design_only"
+        },
+        {
+          "pointer": "/invalid_content",
+          "value": "Implement Ravenfall Gate as a Unity MonoBehaviour"
+        },
+        {
+          "pointer": "/must_reject",
+          "value": true
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/validation/phase_17_guardrail_rules.json",
+          "pointer": "/rules/0/reject_terms",
+          "value": [
+            "Unity",
+            "Unreal",
+            "Godot",
+            "MonoBehaviour",
+            "Blueprint class",
+            "GDScript runtime"
+          ]
+        }
+      ],
+      "mode": "lexical",
+      "validation_scope": "subject",
+      "description": "Reject actual inline content using source-owned platform guardrail terms.",
+      "subject_pointer": "/invalid_content",
+      "rule_path": "data/validation/phase_17_guardrail_rules.json",
+      "reject_terms_pointer": "/rules/0/reject_terms",
+      "expected_matches": [
+        {
+          "subject_pointer": "/invalid_content",
+          "term": "Unity"
+        },
+        {
+          "subject_pointer": "/invalid_content",
+          "term": "MonoBehaviour"
+        }
+      ]
+    },
+    {
+      "scenario_id": "slice.quest_complete_flag_only",
+      "descriptor_path": "examples/vertical_slices/ravenfall_gate/invalid_quest_complete_flag_only.example.json",
+      "descriptor_sha256": "d8058b5d3b1b2f05ba91b37e8dd22d2cd4fcd9fc366329312cffa3d06a05b512",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/invalid_reason",
+          "value": "quest_completion_requires_consequence_resolution"
+        },
+        {
+          "pointer": "/invalid_content",
+          "value": {
+            "quest_completed": true
+          }
+        },
+        {
+          "pointer": "/must_reject",
+          "value": true
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/validation/choice_to_consequence_validation_rules.json",
+          "pointer": "/chain",
+          "value": [
+            "choice",
+            "branch_event",
+            "quest_reward_resolution",
+            "consequence_resolution",
+            "player_state_update",
+            "worldstate_delta_or_diagnostic_noop",
+            "location_mutation_or_noop",
+            "future_generation_bias_or_noop"
+          ]
+        },
+        {
+          "path": "data/validation/choice_to_consequence_validation_rules.json",
+          "pointer": "/reject_if_chain_breaks",
+          "value": true
+        },
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/QuestCompletionConsequenceAssertion/required",
+          "value": [
+            "quest_reward_resolution_ref",
+            "consequence_resolution_refs"
+          ]
+        },
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/QuestCompletionConsequenceAssertion/required/0",
+          "value": "quest_reward_resolution_ref"
+        },
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/QuestCompletionConsequenceAssertion/required/1",
+          "value": "consequence_resolution_refs"
+        }
+      ],
+      "mode": "direct",
+      "validation_scope": "subject",
+      "description": "Apply only the reward/consequence assertion to the actual quest_completed-only object; do not count unrelated runtime fields.",
+      "subject_pointer": "/invalid_content",
+      "schema_id": "https://ywe.local/schemas/rejection_scenario_catalog_schema.json#/$defs/QuestCompletionConsequenceAssertion",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "schema_pointer": "/required",
+          "missing_properties": [
+            "consequence_resolution_refs",
+            "quest_reward_resolution_ref"
+          ]
+        }
+      ],
+      "projection_bindings": [
+        {
+          "assertion_pointer": "/$defs/QuestCompletionConsequenceAssertion/required",
+          "assertion_value": [
+            "quest_reward_resolution_ref",
+            "consequence_resolution_refs"
+          ],
+          "source_path": "data/validation/choice_to_consequence_validation_rules.json",
+          "source_pointer": "/chain",
+          "source_value": [
+            "choice",
+            "branch_event",
+            "quest_reward_resolution",
+            "consequence_resolution",
+            "player_state_update",
+            "worldstate_delta_or_diagnostic_noop",
+            "location_mutation_or_noop",
+            "future_generation_bias_or_noop"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario_id": "slice.static_location_scenario",
+      "descriptor_path": "examples/vertical_slices/ravenfall_gate/invalid_static_location.example.json",
+      "descriptor_sha256": "19317ec24fd7946f1f811e895bea352e51a33620035dc6abd62502384f51e6d2",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/invalid_reason",
+          "value": "locations_must_mutate_after_meaningful_actions"
+        },
+        {
+          "pointer": "/invalid_content",
+          "value": "Ravenfall Gate never changes after player choices"
+        },
+        {
+          "pointer": "/must_reject",
+          "value": true
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/validation/phase_17_trace_coverage_rules.json",
+          "pointer": "/requires_one_of_per_trace/1",
+          "value": [
+            "location_mutation_refs",
+            "location_noop_reason"
+          ]
+        },
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/LocationConsequenceAssertion/anyOf/0/properties/location_mutation_refs/minItems",
+          "value": 1
+        },
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/LocationConsequenceAssertion/anyOf/1/properties/location_noop_reason/type",
+          "value": "string"
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "materialized_scenario",
+      "description": "Bind the static-location prose to an explicit mutation of the accepted reveal trace, without treating prose as trace data.",
+      "base_path": "examples/ravenfall_gate/phase_17/choice_to_consequence_reveal_oath.example.json",
+      "base_pointer": "",
+      "schema_id": "https://ywe.local/schemas/rejection_scenario_catalog_schema.json#/$defs/LocationConsequenceAssertion",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/location_mutation_refs",
+          "value": []
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINITEMS",
+          "instance_pointer": "/location_mutation_refs",
+          "schema_pointer": "/anyOf/0/properties/location_mutation_refs/minItems"
+        },
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/location_noop_reason",
+          "schema_pointer": "/anyOf/1/properties/location_noop_reason/type"
+        }
+      ],
+      "projection_bindings": [
+        {
+          "assertion_pointer": "/$defs/LocationConsequenceAssertion/anyOf/0/properties/location_mutation_refs/minItems",
+          "assertion_value": 1,
+          "source_path": "data/validation/phase_17_trace_coverage_rules.json",
+          "source_pointer": "/requires_one_of_per_trace/1",
+          "source_value": [
+            "location_mutation_refs",
+            "location_noop_reason"
+          ]
+        },
+        {
+          "assertion_pointer": "/$defs/LocationConsequenceAssertion/anyOf/1/properties/location_noop_reason/type",
+          "assertion_value": "string",
+          "source_path": "data/validation/phase_17_trace_coverage_rules.json",
+          "source_pointer": "/requires_one_of_per_trace/1",
+          "source_value": [
+            "location_mutation_refs",
+            "location_noop_reason"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario_id": "slice.pregenerated_branch_assertion",
+      "descriptor_path": "examples/vertical_slices/ravenfall_gate/invalid_pregenerated_branch_tree.example.json",
+      "descriptor_sha256": "70e83d59111050a0f82ad30957ed039b5a21fd79cd53ec6cd2bad75049de2abb",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/invalid_reason",
+          "value": "branches_must_form_from_player_actions"
+        },
+        {
+          "pointer": "/invalid_content",
+          "value": "all Ravenfall branches are pre-generated and selected from a static tree"
+        },
+        {
+          "pointer": "/must_reject",
+          "value": true
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/branch_reality_trace_schema.json",
+          "pointer": "/properties/pre_generated_branch_tree/const",
+          "value": false
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "assertion_projection",
+      "description": "Exercise the existing pre_generated_branch_tree scalar assertion using its recorded false constant as the accepted base. This projection does not construct or certify a complete runtime branch packet.",
+      "base_path": "data/schemas/branch_reality_trace_schema.json",
+      "base_pointer": "/properties/pre_generated_branch_tree/const",
+      "schema_id": "https://ywe.local/schemas/branch_reality_trace_schema.json#/properties/pre_generated_branch_tree",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "",
+          "value": true
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "",
+          "schema_pointer": "/const"
+        }
+      ],
+      "mutation_value_bindings": [
+        {
+          "operation_index": 0,
+          "source_path": "data/schemas/branch_reality_trace_schema.json",
+          "source_pointer": "/properties/pre_generated_branch_tree/const",
+          "source_value": false,
+          "relation": "negated_boolean"
+        }
+      ]
+    },
+    {
+      "scenario_id": "m2.ability.missing_source_provenance",
+      "descriptor_path": "examples/ability_power_engine/invalid_ability_without_source_refs.example.json",
+      "descriptor_sha256": "30dbd9908402b415bdb1d9208f01d073608eccf76618d2ffd5112511c9387341",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/reject_reason",
+          "value": "missing_source_provenance"
+        },
+        {
+          "pointer": "/candidate",
+          "value": {
+            "ability_id": "ability.random_shadow_step",
+            "source_refs": [],
+            "use_modes": [
+              "combat"
+            ]
+          }
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/ability_manifest_schema.json",
+          "pointer": "/properties/source_refs/minItems",
+          "value": 1
+        },
+        {
+          "path": "data/validation/ability_source_ref_validation_rules.json",
+          "pointer": "/min_source_refs_for_manifest",
+          "value": 1
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "materialized_scenario",
+      "description": "Remove source provenance from a complete accepted ability manifest by replacing its source_refs with the empty collection in the original descriptor.",
+      "base_path": "examples/ability_power_engine/oath_sight_manifest.example.json",
+      "base_pointer": "",
+      "schema_id": "https://ywe.local/schemas/ability_manifest_schema.json",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/source_refs",
+          "value": []
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINITEMS",
+          "instance_pointer": "/source_refs",
+          "schema_pointer": "/properties/source_refs/minItems"
+        }
+      ]
+    },
+    {
+      "scenario_id": "m2.ability.generic_xp_only_unlock",
+      "descriptor_path": "examples/ability_power_engine/invalid_generic_xp_unlock.example.json",
+      "descriptor_sha256": "105f21da7be96c109847d683b1a4b85a0fdf7714ca1b4b08b62fc90b20e793c3",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/reject_reason",
+          "value": "generic_xp_only_unlock"
+        },
+        {
+          "pointer": "/candidate",
+          "value": {
+            "ability_id": "ability.generic_fireball",
+            "unlock_condition": "reach_level_5_and_spend_1_skill_point",
+            "source_refs": []
+          }
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/ability_source_ref_schema.json",
+          "pointer": "/properties/source_kind/enum",
+          "value": [
+            "plane_attunement",
+            "lineage_resonance",
+            "bloodline_resonance",
+            "wolf_companion_state",
+            "leaf_branch_history",
+            "branch_event",
+            "worldstate_delta",
+            "location_threshold_event",
+            "quest_resolution",
+            "artifact_binding",
+            "myth_participation",
+            "prophecy_exposure",
+            "celestial_identity_progression",
+            "existence_potential_shift",
+            "pattern_vector_shift",
+            "asp_diagnostic",
+            "recovery_event"
+          ]
+        },
+        {
+          "path": "data/validation/ability_source_ref_validation_rules.json",
+          "pointer": "/allowed_source_kinds",
+          "value": [
+            "plane_attunement",
+            "lineage_resonance",
+            "bloodline_resonance",
+            "wolf_companion_state",
+            "leaf_branch_history",
+            "branch_event",
+            "worldstate_delta",
+            "location_threshold_event",
+            "quest_resolution",
+            "artifact_binding",
+            "myth_participation",
+            "prophecy_exposure",
+            "celestial_identity_progression",
+            "existence_potential_shift",
+            "pattern_vector_shift",
+            "asp_diagnostic",
+            "recovery_event"
+          ]
+        },
+        {
+          "path": "data/validation/ability_no_generic_skill_tree_validation_rules.json",
+          "pointer": "/reject_patterns",
+          "value": [
+            "XP-only",
+            "level-only",
+            "class-only",
+            "skill point purchase only",
+            "currency-only unlock"
+          ]
+        },
+        {
+          "path": "data/validation/ability_no_generic_skill_tree_validation_rules.json",
+          "pointer": "/reject_patterns/0",
+          "value": "XP-only"
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "assertion_projection",
+      "description": "Project the original XP and skill-point unlock description into the explicitly forbidden XP-only source kind of an otherwise accepted complete source reference. This tests source admissibility; a runtime unlock evaluator is not specified here.",
+      "base_path": "examples/contract_foundation/ability_semantic_cases.example.json",
+      "base_pointer": "/positive/source_ref",
+      "schema_id": "https://ywe.local/schemas/ability_source_ref_schema.json",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/source_kind",
+          "value": "XP-only"
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/source_kind",
+          "schema_pointer": "/properties/source_kind/enum"
+        }
+      ],
+      "mutation_value_bindings": [
+        {
+          "operation_index": 0,
+          "source_path": "data/validation/ability_no_generic_skill_tree_validation_rules.json",
+          "source_pointer": "/reject_patterns/0",
+          "source_value": "XP-only",
+          "relation": "equal"
+        }
+      ]
+    },
+    {
+      "scenario_id": "m2.ability.permanent_wolf_death_forbidden",
+      "descriptor_path": "examples/ability_power_engine/invalid_permanent_wolf_death_cost.example.json",
+      "descriptor_sha256": "ac86f63db537b589f391cf99af1084c0cd6391dad45a9d248fdf6b5d0ed0e797",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/reject_reason",
+          "value": "permanent_wolf_death_forbidden"
+        },
+        {
+          "pointer": "/candidate",
+          "value": {
+            "ability_id": "ability.final_bite",
+            "cost": "kill_dark_wolf_permanently"
+          }
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/ability_decoherence_state_schema.json",
+          "pointer": "/properties/temporary/const",
+          "value": true
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "assertion_projection",
+      "description": "Project the original permanent wolf-death cost description into non-temporary decoherence of an otherwise accepted complete state. This proves the temporary-only safety assertion; it does not evaluate the runtime cost expression.",
+      "base_path": "examples/ability_power_engine/ability_decoherence_event_overstrain.example.json",
+      "base_pointer": "",
+      "schema_id": "https://ywe.local/schemas/ability_decoherence_state_schema.json",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/temporary",
+          "value": false
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/temporary",
+          "schema_pointer": "/properties/temporary/const"
+        }
+      ],
+      "mutation_value_bindings": [
+        {
+          "operation_index": 0,
+          "source_path": "data/schemas/ability_decoherence_state_schema.json",
+          "source_pointer": "/properties/temporary/const",
+          "source_value": true,
+          "relation": "negated_boolean"
+        }
+      ]
+    },
+    {
+      "scenario_id": "m2.ability.wolf_morality_drift",
+      "descriptor_path": "examples/ability_power_engine/invalid_white_good_dark_evil_ability.example.json",
+      "descriptor_sha256": "95218f0d8fa9f714e86679fc580363eaa4f8b4db9e96198522a9106afe243eab",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/reject_reason",
+          "value": "wolf_morality_drift"
+        },
+        {
+          "pointer": "/candidate",
+          "value": {
+            "ability_id": "ability.good_light_blast",
+            "description": "White Wolf good power defeats Dark Wolf evil corruption."
+          }
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/ability_wolf_synergy_schema.json",
+          "pointer": "/properties/not_morality_system/const",
+          "value": true
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "assertion_projection",
+      "description": "Project the original good-versus-evil wolf description into an explicit morality-system flag in an otherwise accepted complete synergy record. This proves the no-morality assertion rather than interpreting arbitrary descriptive prose.",
+      "base_path": "examples/ability_power_engine/ability_wolf_synergy_twin_coherence.example.json",
+      "base_pointer": "",
+      "schema_id": "https://ywe.local/schemas/ability_wolf_synergy_schema.json",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/not_morality_system",
+          "value": false
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/not_morality_system",
+          "schema_pointer": "/properties/not_morality_system/const"
+        }
+      ],
+      "mutation_value_bindings": [
+        {
+          "operation_index": 0,
+          "source_path": "data/schemas/ability_wolf_synergy_schema.json",
+          "source_pointer": "/properties/not_morality_system/const",
+          "source_value": true,
+          "relation": "negated_boolean"
+        }
+      ]
+    },
+    {
+      "scenario_id": "m2.phase12.lore_missing_pattern_trace_and_truth_scope",
+      "descriptor_path": "examples/phase_12_quest_npc_lore_generation/lore_generation/lore_invalid_no_pattern_trace.example.json",
+      "descriptor_sha256": "5cc507d732fd82a72058533d652d6148370398db8e430e84eaba690f6ee0b44e",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/invalid_reason",
+          "value": "Generated lore fragment has text-like content but no pattern trace or truth scope."
+        },
+        {
+          "pointer": "/candidate_id",
+          "value": "invalid.lore.no_pattern_trace"
+        },
+        {
+          "pointer": "/should_fail_rules",
+          "value": [
+            "check_lore_pattern_trace_provenance",
+            "check_quest_npc_lore_truth_scope"
+          ]
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/generated_lore_fragment_schema.json",
+          "pointer": "/required",
+          "value": [
+            "lore_fragment_id",
+            "lore_kind",
+            "pattern_trace_ref",
+            "source_axiom_pressure_refs",
+            "source_worldstate_delta_refs",
+            "source_branch_refs",
+            "source_location_refs",
+            "truth_scope",
+            "visibility_conditions",
+            "generated_text_policy",
+            "provenance"
+          ]
+        },
+        {
+          "path": "data/schemas/generated_lore_fragment_schema.json",
+          "pointer": "/required_fields",
+          "value": [
+            "lore_fragment_id",
+            "lore_kind",
+            "pattern_trace_ref",
+            "source_axiom_pressure_refs",
+            "source_worldstate_delta_refs",
+            "source_branch_refs",
+            "source_location_refs",
+            "truth_scope",
+            "visibility_conditions",
+            "generated_text_policy",
+            "provenance"
+          ]
+        },
+        {
+          "path": "data/schemas/generated_lore_fragment_schema.json",
+          "pointer": "/required/2",
+          "value": "pattern_trace_ref"
+        },
+        {
+          "path": "data/schemas/generated_lore_fragment_schema.json",
+          "pointer": "/required/7",
+          "value": "truth_scope"
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "materialized_scenario",
+      "description": "Remove exactly the source context named in the original negative description from a complete accepted canonical record: pattern_trace_ref, truth_scope.",
+      "base_path": "examples/phase_12_quest_npc_lore_generation/lore_generation/ravenfall_gate_public_oath_lore_fragment.example.json",
+      "base_pointer": "",
+      "schema_id": "https://ywe.local/schemas/generated_lore_fragment_schema.json",
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/pattern_trace_ref"
+        },
+        {
+          "op": "remove",
+          "path": "/truth_scope"
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "schema_pointer": "/required",
+          "missing_properties": [
+            "pattern_trace_ref",
+            "truth_scope"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario_id": "m2.phase12.npc_missing_relation_graph",
+      "descriptor_path": "examples/phase_12_quest_npc_lore_generation/npc_generation/npc_invalid_no_relation.example.json",
+      "descriptor_sha256": "f921dabe2b7227c6a46a5b3b8cf2e291570081c61e3daf7da78e17e84aff1fae",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/invalid_reason",
+          "value": "Meaningful NPC candidate has no relation graph or contextual relation edge."
+        },
+        {
+          "pointer": "/candidate_id",
+          "value": "invalid.npc.no_relation"
+        },
+        {
+          "pointer": "/should_fail_rules",
+          "value": [
+            "check_npc_relation_and_self_reference"
+          ]
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/npc_manifest_candidate_schema.json",
+          "pointer": "/required",
+          "value": [
+            "npc_candidate_id",
+            "npc_role_class",
+            "relation_graph_ref",
+            "branch_context_ref",
+            "location_context_ref",
+            "pattern_vector_ref",
+            "existence_potential_ref",
+            "truth_scope",
+            "self_reference_state_ref",
+            "provenance",
+            "exchange_target"
+          ]
+        },
+        {
+          "path": "data/schemas/npc_manifest_candidate_schema.json",
+          "pointer": "/required_fields",
+          "value": [
+            "npc_candidate_id",
+            "npc_role_class",
+            "relation_graph_ref",
+            "branch_context_ref",
+            "location_context_ref",
+            "pattern_vector_ref",
+            "existence_potential_ref",
+            "truth_scope",
+            "self_reference_state_ref",
+            "provenance",
+            "exchange_target"
+          ]
+        },
+        {
+          "path": "data/schemas/npc_manifest_candidate_schema.json",
+          "pointer": "/required/2",
+          "value": "relation_graph_ref"
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "materialized_scenario",
+      "description": "Remove exactly the source context named in the original negative description from a complete accepted canonical record: relation_graph_ref.",
+      "base_path": "examples/phase_12_quest_npc_lore_generation/npc_generation/ravenfall_gate_witness_npc_candidate.example.json",
+      "base_pointer": "",
+      "schema_id": "https://ywe.local/schemas/npc_manifest_candidate_schema.json",
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/relation_graph_ref"
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "schema_pointer": "/required",
+          "missing_properties": [
+            "relation_graph_ref"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario_id": "m2.phase12.quest_missing_generation_context",
+      "descriptor_path": "examples/phase_12_quest_npc_lore_generation/quest_generation/invalid_generic_random_quest_candidate.example.json",
+      "descriptor_sha256": "7f1a6b00cac3fdbac96ac83bd71d518fcf724dec7ab9f95119cff0157461de9b",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/invalid_reason",
+          "value": "No axiom pressure, branch context, player state, location state, worldstate delta, truth scope, or provenance."
+        },
+        {
+          "pointer": "/candidate_id",
+          "value": "invalid.random.fetch_quest"
+        },
+        {
+          "pointer": "/should_fail_rules",
+          "value": [
+            "check_no_generic_random_quest_generation",
+            "check_no_content_generation_without_context",
+            "check_feature_manifest_provenance_phase_12"
+          ]
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/quest_generation_context_schema.json",
+          "pointer": "/required",
+          "value": [
+            "context_id",
+            "branch_reality_ref",
+            "player_runtime_state_ref",
+            "location_state_ref",
+            "worldstate_delta_refs",
+            "axiom_diagnostic_refs",
+            "existence_potential_ref",
+            "pattern_vector_refs",
+            "plane_pressure_refs",
+            "truth_scope",
+            "future_generation_bias_refs",
+            "provenance"
+          ]
+        },
+        {
+          "path": "data/schemas/quest_generation_context_schema.json",
+          "pointer": "/required_fields",
+          "value": [
+            "context_id",
+            "branch_reality_ref",
+            "player_runtime_state_ref",
+            "location_state_ref",
+            "worldstate_delta_refs",
+            "axiom_diagnostic_refs",
+            "existence_potential_ref",
+            "pattern_vector_refs",
+            "plane_pressure_refs",
+            "truth_scope",
+            "future_generation_bias_refs",
+            "provenance"
+          ]
+        },
+        {
+          "path": "data/schemas/quest_generation_context_schema.json",
+          "pointer": "/required/1",
+          "value": "branch_reality_ref"
+        },
+        {
+          "path": "data/schemas/quest_generation_context_schema.json",
+          "pointer": "/required/2",
+          "value": "player_runtime_state_ref"
+        },
+        {
+          "path": "data/schemas/quest_generation_context_schema.json",
+          "pointer": "/required/3",
+          "value": "location_state_ref"
+        },
+        {
+          "path": "data/schemas/quest_generation_context_schema.json",
+          "pointer": "/required/4",
+          "value": "worldstate_delta_refs"
+        },
+        {
+          "path": "data/schemas/quest_generation_context_schema.json",
+          "pointer": "/required/5",
+          "value": "axiom_diagnostic_refs"
+        },
+        {
+          "path": "data/schemas/quest_generation_context_schema.json",
+          "pointer": "/required/9",
+          "value": "truth_scope"
+        },
+        {
+          "path": "data/schemas/quest_generation_context_schema.json",
+          "pointer": "/required/11",
+          "value": "provenance"
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "materialized_scenario",
+      "description": "Remove exactly the source context named in the original negative description from a complete accepted canonical record: axiom_diagnostic_refs, branch_reality_ref, player_runtime_state_ref, location_state_ref, worldstate_delta_refs, truth_scope, provenance.",
+      "base_path": "examples/phase_12_quest_npc_lore_generation/quest_generation/ravenfall_gate_reveal_oath_quest_generation_context.example.json",
+      "base_pointer": "",
+      "schema_id": "https://ywe.local/schemas/quest_generation_context_schema.json",
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/axiom_diagnostic_refs"
+        },
+        {
+          "op": "remove",
+          "path": "/branch_reality_ref"
+        },
+        {
+          "op": "remove",
+          "path": "/player_runtime_state_ref"
+        },
+        {
+          "op": "remove",
+          "path": "/location_state_ref"
+        },
+        {
+          "op": "remove",
+          "path": "/worldstate_delta_refs"
+        },
+        {
+          "op": "remove",
+          "path": "/truth_scope"
+        },
+        {
+          "op": "remove",
+          "path": "/provenance"
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "schema_pointer": "/required",
+          "missing_properties": [
+            "axiom_diagnostic_refs",
+            "branch_reality_ref",
+            "location_state_ref",
+            "player_runtime_state_ref",
+            "provenance",
+            "truth_scope",
+            "worldstate_delta_refs"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario_id": "reward.conditional_wolf_default_function",
+      "descriptor_path": "examples/quest_reward_resolver/invalid_always_present_wolves.example.json",
+      "descriptor_sha256": "c9314d4d63fc07a09eed0232763111bb850cb94107b15435c04ff424e07ad367",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/expected_rejection_reason",
+          "value": "Wolves require a valid conditional manifestation trigger and cannot be default always-present party members."
+        },
+        {
+          "pointer": "/allowed_functions",
+          "value": [
+            "default_party_member"
+          ]
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/validation/check_wolf_conditional_manifestation.spec.json",
+          "pointer": "/must_reject",
+          "value": [
+            "always_present_wolves",
+            "default_party_member",
+            "white_good_dark_evil_score"
+          ]
+        },
+        {
+          "path": "data/schemas/rejection_scenario_catalog_schema.json",
+          "pointer": "/$defs/ConditionalWolfFunctionAssertion/not",
+          "value": {
+            "contains": {
+              "const": "default_party_member"
+            }
+          }
+        }
+      ],
+      "mode": "direct",
+      "validation_scope": "subject",
+      "description": "Reject the actual default_party_member function named by the existing conditional manifestation owner. This witness does not certify trigger execution.",
+      "subject_pointer": "/allowed_functions",
+      "schema_id": "https://ywe.local/schemas/rejection_scenario_catalog_schema.json#/$defs/ConditionalWolfFunctionAssertion",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_NOT",
+          "instance_pointer": "",
+          "schema_pointer": "/not"
+        }
+      ],
+      "projection_bindings": [
+        {
+          "assertion_pointer": "/$defs/ConditionalWolfFunctionAssertion/not",
+          "assertion_value": {
+            "contains": {
+              "const": "default_party_member"
+            }
+          },
+          "source_path": "data/validation/check_wolf_conditional_manifestation.spec.json",
+          "source_pointer": "/must_reject",
+          "source_value": [
+            "always_present_wolves",
+            "default_party_member",
+            "white_good_dark_evil_score"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario_id": "reward.missing_consequence_packet",
+      "descriptor_path": "examples/quest_reward_resolver/invalid_reward_without_consequence_packet.example.json",
+      "descriptor_sha256": "93ae0121f596848fbca009a265383d354b17d075e1b9e534905f94b749d6d57d",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/expected_rejection_reason",
+          "value": "Quest reward resolution cannot mutate systems without a consequence_resolution_packet_ref."
+        },
+        {
+          "pointer": "/consequence_resolution_packet_ref",
+          "value": ""
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/quest_reward_resolution_packet_schema.json",
+          "pointer": "/properties/consequence_resolution_packet_ref/minLength",
+          "value": 1
+        }
+      ],
+      "mode": "direct",
+      "validation_scope": "subject",
+      "description": "Reject the actual empty consequence packet reference using its exact owning property schema; explanatory metadata is not the rejection reason.",
+      "subject_pointer": "/consequence_resolution_packet_ref",
+      "schema_id": "https://ywe.local/schemas/quest_reward_resolution_packet_schema.json#/properties/consequence_resolution_packet_ref",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINLENGTH",
+          "instance_pointer": "",
+          "schema_pointer": "/minLength"
+        }
+      ]
+    },
+    {
+      "scenario_id": "player.initial_identity_upfront",
+      "descriptor_path": "examples/player_runtime_state/invalid_player_state_rejection_cases.example.json",
+      "descriptor_sha256": "e9f0084b4798a85716e56968b1e0331c779fd20f1e21622fb249b55d2704cb92",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/schema_id",
+          "value": "ywe.phase_10_invalid_player_state_rejection_cases.v1"
+        },
+        {
+          "pointer": "/cases/0/case_id",
+          "value": "reject_full_celestial_identity_at_creation"
+        },
+        {
+          "pointer": "/cases/0/reason",
+          "value": "Celestial identity must be veiled and revealed through play."
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/player_runtime_state_schema.json",
+          "pointer": "/$defs/initial_identity/properties/celestial_identity_initial_state/const",
+          "value": "veiled"
+        },
+        {
+          "path": "data/validation/player_state_guardrail_rules.json",
+          "pointer": "/rules/2/require",
+          "value": "celestial_identity_state.identity_state == veiled for initial player state"
+        },
+        {
+          "path": "data/schemas/celestial_identity_state_schema.json",
+          "pointer": "/properties/identity_state/enum/5",
+          "value": "coherent_revelation"
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "assertion_projection",
+      "description": "Project the upfront identity description to a non-veiled value in the accepted initial identity. This exercises the initial-only identity assertion.",
+      "descriptor_unit_pointer": "/cases/0",
+      "base_path": "examples/player_runtime_state/player_runtime_state_initial_mortal_veiled.example.json",
+      "base_pointer": "/identity",
+      "schema_id": "https://ywe.local/schemas/player_runtime_state_schema.json#/$defs/initial_identity",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/celestial_identity_initial_state",
+          "value": "coherent_revelation"
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/celestial_identity_initial_state",
+          "schema_pointer": "/properties/celestial_identity_initial_state/const"
+        }
+      ],
+      "mutation_value_bindings": [
+        {
+          "operation_index": 0,
+          "source_path": "data/schemas/celestial_identity_state_schema.json",
+          "source_pointer": "/properties/identity_state/enum/5",
+          "source_value": "coherent_revelation",
+          "relation": "equal"
+        }
+      ]
+    },
+    {
+      "scenario_id": "player.wolf_morality",
+      "descriptor_path": "examples/player_runtime_state/invalid_player_state_rejection_cases.example.json",
+      "descriptor_sha256": "e9f0084b4798a85716e56968b1e0331c779fd20f1e21622fb249b55d2704cb92",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/schema_id",
+          "value": "ywe.phase_10_invalid_player_state_rejection_cases.v1"
+        },
+        {
+          "pointer": "/cases/1/case_id",
+          "value": "reject_wolf_morality_meter"
+        },
+        {
+          "pointer": "/cases/1/reason",
+          "value": "Wolf resonance is not good/evil scoring."
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/wolf_companion_trace_schema.json",
+          "pointer": "/properties/morality_model/const",
+          "value": false
+        },
+        {
+          "path": "data/validation/player_state_guardrail_rules.json",
+          "pointer": "/rules/3/forbid",
+          "value": "white_good_dark_evil_scoring"
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "assertion_projection",
+      "description": "Project the player wolf-morality description to the existing no-morality trace flag. This does not assign moral meaning to numeric resonance.",
+      "descriptor_unit_pointer": "/cases/1",
+      "base_path": "examples/ravenfall_gate/phase_17/wolf_companion_trace_reveal_oath.example.json",
+      "base_pointer": "",
+      "schema_id": "https://ywe.local/schemas/wolf_companion_trace_schema.json",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/morality_model",
+          "value": true
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/morality_model",
+          "schema_pointer": "/properties/morality_model/const"
+        }
+      ],
+      "mutation_value_bindings": [
+        {
+          "operation_index": 0,
+          "source_path": "data/schemas/wolf_companion_trace_schema.json",
+          "source_pointer": "/properties/morality_model/const",
+          "source_value": false,
+          "relation": "negated_boolean"
+        }
+      ]
+    },
+    {
+      "scenario_id": "player.pregenerated_branch",
+      "descriptor_path": "examples/player_runtime_state/invalid_player_state_rejection_cases.example.json",
+      "descriptor_sha256": "e9f0084b4798a85716e56968b1e0331c779fd20f1e21622fb249b55d2704cb92",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/schema_id",
+          "value": "ywe.phase_10_invalid_player_state_rejection_cases.v1"
+        },
+        {
+          "pointer": "/cases/2/case_id",
+          "value": "reject_pre_generated_branch_tree"
+        },
+        {
+          "pointer": "/cases/2/reason",
+          "value": "Player state must reference generated branch realities, not store prebuilt branch trees."
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/branch_reality_trace_schema.json",
+          "pointer": "/properties/pre_generated_branch_tree/const",
+          "value": false
+        },
+        {
+          "path": "data/validation/player_state_guardrail_rules.json",
+          "pointer": "/rules/1/forbid",
+          "value": "embedding_full_branch_tree_inside_player_state"
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "assertion_projection",
+      "description": "Project the forbidden embedded prebuilt-tree description to the existing pre_generated_branch_tree assertion. No branch packet is constructed.",
+      "descriptor_unit_pointer": "/cases/2",
+      "base_path": "data/schemas/branch_reality_trace_schema.json",
+      "base_pointer": "/properties/pre_generated_branch_tree/const",
+      "schema_id": "https://ywe.local/schemas/branch_reality_trace_schema.json#/properties/pre_generated_branch_tree",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "",
+          "value": true
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "",
+          "schema_pointer": "/const"
+        }
+      ],
+      "mutation_value_bindings": [
+        {
+          "operation_index": 0,
+          "source_path": "data/schemas/branch_reality_trace_schema.json",
+          "source_pointer": "/properties/pre_generated_branch_tree/const",
+          "source_value": false,
+          "relation": "negated_boolean"
+        }
+      ]
+    },
+    {
+      "scenario_id": "player.direct_feature_mutation",
+      "descriptor_path": "examples/player_runtime_state/invalid_player_state_rejection_cases.example.json",
+      "descriptor_sha256": "e9f0084b4798a85716e56968b1e0331c779fd20f1e21622fb249b55d2704cb92",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/schema_id",
+          "value": "ywe.phase_10_invalid_player_state_rejection_cases.v1"
+        },
+        {
+          "pointer": "/cases/3/case_id",
+          "value": "reject_direct_feature_mutation"
+        },
+        {
+          "pointer": "/cases/3/reason",
+          "value": "Feature systems must use PlayerStateUpdatePacket."
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/player_runtime_state_schema.json",
+          "pointer": "/properties/update_control/properties/requires_update_packet/const",
+          "value": true
+        },
+        {
+          "path": "data/validation/player_state_guardrail_rules.json",
+          "pointer": "/rules/6/require",
+          "value": "PlayerStateUpdatePacket for all meaningful state mutations"
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "materialized_scenario",
+      "description": "Disable update-packet control on the complete accepted initial state and require the explicit packet-control failure.",
+      "descriptor_unit_pointer": "/cases/3",
+      "base_path": "examples/player_runtime_state/player_runtime_state_initial_mortal_veiled.example.json",
+      "base_pointer": "",
+      "schema_id": "https://ywe.local/schemas/player_runtime_state_schema.json",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/update_control/requires_update_packet",
+          "value": false
+        }
+      ],
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/update_control/requires_update_packet",
+          "schema_pointer": "/properties/update_control/properties/requires_update_packet/const"
+        }
+      ],
+      "mutation_value_bindings": [
+        {
+          "operation_index": 0,
+          "source_path": "data/schemas/player_runtime_state_schema.json",
+          "source_pointer": "/properties/update_control/properties/requires_update_packet/const",
+          "source_value": true,
+          "relation": "negated_boolean"
+        }
+      ]
+    },
+    {
+      "scenario_id": "player.asp_top_level_authority",
+      "descriptor_path": "examples/player_runtime_state/invalid_player_state_rejection_cases.example.json",
+      "descriptor_sha256": "e9f0084b4798a85716e56968b1e0331c779fd20f1e21622fb249b55d2704cb92",
+      "hash_algorithm": "sha256_utf8_lf_normalized",
+      "descriptor_bindings": [
+        {
+          "pointer": "/schema_id",
+          "value": "ywe.phase_10_invalid_player_state_rejection_cases.v1"
+        },
+        {
+          "pointer": "/cases/4/case_id",
+          "value": "reject_ash_pattern_top_level_cosmology_language"
+        },
+        {
+          "pointer": "/cases/4/reason",
+          "value": "ASH Pattern System is a YWE component, not top-level cosmology."
+        }
+      ],
+      "owner_bindings": [
+        {
+          "path": "data/schemas/player_runtime_state_schema.json",
+          "pointer": "/properties/authority/properties/ash_pattern_system_role/const",
+          "value": "YWE component for diagnostics, recovery, containment, conformance, pattern integrity, code resilience, and patch/update stability"
+        },
+        {
+          "path": "data/validation/player_state_guardrail_rules.json",
+          "pointer": "/rules/7/require",
+          "value": "ASH Pattern System described as YWE component for diagnostics/resilience/stability"
+        },
+        {
+          "path": "data/validation/forbidden_branch_language_patterns.json",
+          "pointer": "/patterns/6/pattern",
+          "value": "ASH Pattern System is the top-level cosmology"
+        }
+      ],
+      "mode": "mutation",
+      "validation_scope": "materialized_scenario",
+      "description": "Replace the declared component role on the complete accepted initial state with the owner-forbidden top-level cosmology claim.",
+      "operations": [
+        {"op": "replace", "path": "/authority/ash_pattern_system_role", "value": "ASH Pattern System is the top-level cosmology"}
+      ],
+      "descriptor_unit_pointer": "/cases/4",
+      "base_path": "examples/player_runtime_state/player_runtime_state_initial_mortal_veiled.example.json",
+      "base_pointer": "",
+      "schema_id": "https://ywe.local/schemas/player_runtime_state_schema.json",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/authority/ash_pattern_system_role",
+          "schema_pointer": "/properties/authority/properties/ash_pattern_system_role/const"
+        }
+      ],
+      "mutation_value_bindings": [
+        {
+          "operation_index": 0,
+          "source_path": "data/validation/forbidden_branch_language_patterns.json",
+          "source_pointer": "/patterns/6/pattern",
+          "source_value": "ASH Pattern System is the top-level cosmology",
+          "relation": "equal"
+        }
+      ]
+    }
+  ]
+}

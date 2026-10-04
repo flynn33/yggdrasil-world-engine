@@ -67,7 +67,9 @@
       "minItems": 1
     },
     "temporary": {
-      "type": "boolean"
+      "type": "boolean",
+      "const": true,
+      "x-ywe-requirement-id": "YWE-REQ-0028"
     },
     "recovery_condition_refs": {
       "type": "array",

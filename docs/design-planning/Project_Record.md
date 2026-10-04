@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-16
+**Revision:** planning-17
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-15; full history remains in Git.
+**Supersedes:** planning-16; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -61,10 +61,10 @@ evidence establishes:
 | Declared schemas missing identifiers | 0 |
 | Annotation-only schema documents | 0 |
 | Schema-named JSON lacking declarations | 0 |
-| Unbound JSON examples | 13 in the legacy debt subledger; the strict report independently checks every classified structured example |
-| Fixture catalog | 326 structural bindings, including 121 exact rejection witnesses; full coverage remains incomplete |
-| Offline resolver | Explicit catalog covers 201 declared schemas and resolves references locally |
-| YAML structural schemas | Module capability manifests and pattern archetype records covered; other YAML domains and descriptor roots remain outstanding |
+| Unbound JSON examples | 0 in the legacy debt subledger; strict classified-fixture coverage remains incomplete |
+| Fixture catalog | 505 registered bindings and 179 declared intended schema rejections; source-bound rejection scenarios are checked separately |
+| Offline resolver | Explicit catalog covers 205 declared schemas; unknown resources remain denied |
+| YAML structural schemas | Module capability manifests, pattern archetype records, and two descriptor grammars covered; other YAML domains remain outstanding |
 | Roadmap-derived M2 acceptance gate | Strict readiness evaluator maps six criteria and eight deliverables; method-specific and durable acceptance evaluators remain unverified |
 | Durable M2 acceptance report | Not present |
 | M2 milestone evidence | Empty in the roadmap |
@@ -234,6 +234,70 @@ that exact implementation revision. GitHub reported the owner's authorized
 pull-request and verified-signature rule bypass. This documentation checkpoint
 records those executed results; development continues after publication.
 
+## 8a. Descriptor and intended-rejection continuation
+
+Working branch: `m2/descriptor-and-rejection-conformance`, starting from
+`faec4b293160b4fb049ddd771e74ef1c73019d34`. Requirements 27-30 and ADRs 17-20
+record four bounded changes: explicit YAML descriptor grammars and meta-reference
+checks, existing ability invariants, source-bound intended rejection execution,
+and exact protected Phase 9 representation corrections.
+
+The catalog adds 23 original branch/Phase17 roots, 24 original Phase16 roots,
+four unchanged Phase9 roots, negative-description format bindings, and independent
+ability, descriptor and Phase9 positive/boundary/reject cases. Original example
+and YAML source bytes are preserved. Format acceptance and selected assertion
+projections do not certify complete runtime packets or domain algorithms.
+
+The scenario checker binds source digests and values to executed assertions.
+Independent review reproduced a same-valued-constant substitution that initially
+allowed a morality description to be witnessed by a permanent-death error. The
+corrected design links executed schema keywords and lexical terms to their exact
+owning assertions, with explicit source mappings for local projections. Unrelated
+errors, unaccepted mutation controls and unexecuted bound constraints cannot
+establish intended rejection. A second shared-keyword review found that changing
+the missing field under the same required array could retain its owner binding;
+exact required-member ownership closes that substitution as well.
+
+Further review reproduced unrelated string replacements under the same enum or
+constant and numeric substitutes for Boolean values in constant-only schemas.
+Scalar mutation bindings now select exact source literals or strictly Boolean
+inverses of the executed constant at the same target. These obligations preserve
+the intended rejected value as well as its error keyword.
+
+A composed probe removed the wrong field and consumed the original required
+member as an unrelated replacement literal. Required-member ownership is now an
+independent obligation that only the actual missing-member witness can satisfy.
+The fresh focused run passed 69 scenario tests and all 24 original controls.
+
+The first working-tree full run reported 30 passing checks and three blocking
+checks. The registered-check contract omitted the two new check identifiers;
+the unit suite detected that mismatch, and the branch-language scanner found two
+negative literals whose existing rejection context was too far away in the new
+catalog serialization. The check contract and context placement were corrected.
+The subsequent working-tree run passed all 33 checks and 525 tests; later
+composed-probe fixes were verified separately in fresh focused processes. A frozen
+clean-checkout run remains required before publication; this dirty run is not M2
+checkout-acceptance evidence.
+
+The Phase9 correction preserves every original migration record and hash and adds
+exact whole-property assertion transitions. The permanent verifier reads the
+actual pre-migration parent `b61b49eaf9dce30058a86b52fd4910087fc9e4da` and original
+migration `5b30dd50533d00b4c0852d45df3dfac61b3a4147`, validates all eight original
+proofs, and reconstructs each corrected original schema. The potential formula,
+legacy example shapes, required fields and protected examples remain unchanged.
+Empty containers and source-unrestricted string-list items remain permitted; the
+old nonempty whole-string constraint remains in force.
+
+The legacy QD-001 subledger is resolved: its four categories are empty and all
+505 catalog bindings and offline references passed the focused evaluator. The
+strict report still identifies
+18 uncovered source roots and 20 YAML paths. The remaining JSON roots are recovery
+minimum descriptions and Phase16 design previews; the realm YAML collection mixes
+lawful records and unlawful descriptions and needs individual units. Positive
+requirement traceability, lifecycle categories, method-specific validation and
+durable acceptance remain outstanding. No M2 acceptance or M3 activation is
+recorded. Development continues after the verification/publication checkpoint.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -258,7 +322,7 @@ milestones only after verified M2 closure.
 
 **Needed from owner:** Nothing for continued M2 engineering.
 
-**Saved at:** `main`, in the commit containing this planning-16 record. The latest
+**Saved at:** `m2/descriptor-and-rejection-conformance`, in the commit containing this planning-17 record. The latest
 validated implementation is `b0b0a6934fbc96f050d0cd656985a790d984c206`. The prior
 validated implementation is `ab1080b1c1b60a9e379d5cd25f52db2ec418a729`; the earlier
 implementation is `f35911a4a77c93dc6fe32bb2e396c60bcf01fbc2`, with its published

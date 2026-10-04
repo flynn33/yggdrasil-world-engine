@@ -1008,12 +1008,140 @@
         "data/schemas/pattern_archetype_registry_schema.json",
         "examples/contract_foundation/pattern_archetype_registry_cases.example.yaml"
       ]
+    },
+    {
+      "id": "ADR-0017",
+      "record_type": "decision",
+      "title": "Explicit descriptor grammar and meta-reference validation",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Define conservative YWE-owned descriptor grammars, validate the unchanged sources and exercise explicit structural and semantic witnesses.",
+      "debt_refs": [
+        "QD-001"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Existing pattern and module YAML descriptors express different formats; record schemas validate their instances rather than the descriptor roots.",
+      "decision": "Define conservative YWE-owned descriptor grammars, validate the unchanged sources and exercise explicit structural and semantic witnesses.",
+      "rationale": "A grammar makes future descriptor edits reviewable without interpreting prose as runtime rules.",
+      "consequences": [
+        "Original negative examples and YAML descriptors remain unchanged.",
+        "This increment does not certify runtime algorithms or complete M2 acceptance."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0027"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#yaml-descriptor-grammars",
+        "data/schemas/pattern_registry_descriptor_schema.json",
+        "data/schemas/module_capability_descriptor_schema.json"
+      ]
+    },
+    {
+      "id": "ADR-0018",
+      "record_type": "decision",
+      "title": "Execute ability invariants and historical negative descriptions",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Encode the two existing constants and retain original negative descriptions with separate explicit valid controls and exact mutations or assertion projections.",
+      "debt_refs": [
+        "QD-001"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Existing owner checks require two true flags, while their schema fields admitted false. Several original negative files describe candidates rather than contain complete runtime records.",
+      "decision": "Encode the two existing constants and retain original negative descriptions with separate explicit valid controls and exact mutations or assertion projections.",
+      "rationale": "Exact intended witnesses preserve the original examples and expose the limited scope of projections.",
+      "consequences": [
+        "Original negative examples and YAML descriptors remain unchanged.",
+        "This increment does not certify runtime algorithms or complete M2 acceptance."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0028"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#ability-and-phase-12-negative-descriptions",
+        "data/schemas/ability_wolf_synergy_schema.json",
+        "data/schemas/ability_decoherence_state_schema.json",
+        "examples/contract_foundation/ability_semantic_cases.example.json"
+      ]
+    },
+    {
+      "id": "ADR-0019",
+      "record_type": "decision",
+      "title": "Source-bound intended rejection evidence",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Execute explicit source-bound subjects, declared mutations and lexical assertions; report projection scope and count each registered rejection-description unit in M2 readiness.",
+      "debt_refs": [
+        "QD-001"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Original negative artifacts mix prose, forbidden terms and sparse invalid subjects; unrelated structural errors cannot establish their stated rejection reason.",
+      "decision": "Execute explicit source-bound subjects, declared mutations and lexical assertions; report projection scope and count each registered rejection-description unit in M2 readiness.",
+      "rationale": "Normalized source digests and exact value bindings detect source drift across Windows and Linux checkouts.",
+      "consequences": [
+        "Original negative examples and YAML descriptors remain unchanged.",
+        "This increment does not certify runtime algorithms or complete M2 acceptance."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0029"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#source-bound-rejection-scenarios",
+        "data/schemas/rejection_scenario_catalog_schema.json",
+        "data/validation/rejection_scenarios.json"
+      ]
+    },
+    {
+      "id": "ADR-0020",
+      "record_type": "decision",
+      "title": "Preserve original protected migration proofs during representation correction",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Append exact whole-property assertion transitions to the original migration manifest, preserve its historical records and hashes, and validate the proof independently of the current protected-path diff.",
+      "debt_refs": [
+        "QD-001"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Four original Phase 9 examples predate the migration and use arrays, objects or a numeric potential value in eleven fields inferred as strings. The existing exact migration proof forbids silently changing those constraints or replacing its hashes.",
+      "decision": "Append exact whole-property assertion transitions to the original migration manifest, preserve its historical records and hashes, and validate the proof independently of the current protected-path diff.",
+      "rationale": "Reconstruction proves that only the declared formal property assertions changed while the original legacy source values, formula, required members and protected examples remain intact.",
+      "consequences": [
+        "The four original examples regain structural acceptance without source edits or invented default values.",
+        "No formula computation, domain oracle, new enum, range, uniqueness or closed-container rule is established.",
+        "M2 acceptance remains outstanding."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0030"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#protected-phase-9-representation-correction",
+        "data/validation/m2_contract_migration_manifest.json",
+        "data/schemas/axiom_diagnostic_packet_schema.json",
+        "data/schemas/existence_potential_schema.json",
+        "data/schemas/branch_event_schema.json"
+      ]
     }
   ],
   "summary": {
-    "total_records": 33,
-    "architecture_decisions": 16,
-    "accepted_decisions": 16,
+    "total_records": 37,
+    "architecture_decisions": 20,
+    "accepted_decisions": 20,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

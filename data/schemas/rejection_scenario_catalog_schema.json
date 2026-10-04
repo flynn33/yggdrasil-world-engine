@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/rejection_scenario_catalog_schema.json",
+  "title": "Source-bound rejection scenario catalog",
+  "description": "Declares rejection subjects, explicit mutations and lexical assertions. Descriptor acceptance and assertion projections do not certify complete runtime packets.",
+  "x-ywe-requirement-id": "YWE-REQ-0029",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_ref", "artifact_type", "artifact_version", "scenarios"],
+  "properties": {
+    "schema_ref": {"const": "data/schemas/rejection_scenario_catalog_schema.json"},
+    "artifact_type": {"const": "ywe_rejection_scenario_catalog"},
+    "artifact_version": {"const": "1.0.0"},
+    "scenarios": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/scenario"}}
+  },
+  "$defs": {
+    "pointer": {"type": "string", "pattern": "^(?:/(?:[^~]|~[01])*)*$"},
+    "path": {"type": "string", "minLength": 1},
+    "schema_id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9+.-]*:.+$"},
+    "binding": {
+      "type": "object", "additionalProperties": false, "required": ["pointer", "value"],
+      "properties": {"pointer": {"$ref": "#/$defs/pointer"}, "value": true}
+    },
+    "owner_binding": {
+      "type": "object", "additionalProperties": false, "required": ["path", "pointer", "value"],
+      "properties": {"path": {"$ref": "#/$defs/path"}, "pointer": {"$ref": "#/$defs/pointer"}, "value": true}
+    },
+    "projection_binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["assertion_pointer", "assertion_value", "source_path", "source_pointer", "source_value"],
+      "properties": {
+        "assertion_pointer": {"$ref": "#/$defs/pointer"},
+        "assertion_value": true,
+        "source_path": {"$ref": "#/$defs/path"},
+        "source_pointer": {"$ref": "#/$defs/pointer"},
+        "source_value": true
+      }
+    },
+    "mutation_value_binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["operation_index", "source_path", "source_pointer", "source_value", "relation"],
+      "properties": {
+        "operation_index": {"type": "integer", "minimum": 0},
+        "source_path": {"$ref": "#/$defs/path"},
+        "source_pointer": {"$ref": "#/$defs/pointer"},
+        "source_value": {"type": ["string", "number", "boolean", "null"]},
+        "relation": {"enum": ["equal", "negated_boolean"]}
+      }
+    },
+    "operation": {
+      "type": "object", "additionalProperties": false, "required": ["op", "path"],
+      "properties": {
+        "op": {"enum": ["remove", "replace"]}, "path": {"$ref": "#/$defs/pointer"}, "value": true
+      },
+      "allOf": [{
+        "if": {"properties": {"op": {"const": "replace"}}},
+        "then": {"required": ["value"]},
+        "else": {"properties": {"path": {"minLength": 1}}, "not": {"required": ["value"]}}
+      }]
+    },
+    "match": {
+      "type": "object", "additionalProperties": false, "required": ["subject_pointer", "term"],
+      "properties": {
+        "subject_pointer": {"$ref": "#/$defs/pointer"}, "term": {"type": "string", "minLength": 1}
+      }
+    },
+    "scenario": {
+      "type": "object", "additionalProperties": false,
+      "required": ["scenario_id", "descriptor_path", "descriptor_sha256", "hash_algorithm", "descriptor_bindings", "owner_bindings", "mode", "validation_scope", "description"],
+      "properties": {
+        "scenario_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"},
+        "descriptor_path": {"$ref": "#/$defs/path"},
+        "descriptor_unit_pointer": {"type": "string", "pattern": "^(?:/cases/(?:0|[1-9][0-9]*))?$"},
+        "descriptor_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "hash_algorithm": {"const": "sha256_utf8_lf_normalized"},
+        "descriptor_bindings": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/binding"}},
+        "owner_bindings": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/owner_binding"}},
+        "projection_bindings": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/projection_binding"}},
+        "mutation_value_bindings": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/mutation_value_binding"}},
+        "mode": {"enum": ["direct", "mutation", "lexical"]},
+        "validation_scope": {"enum": ["subject", "materialized_scenario", "assertion_projection"]},
+        "description": {"type": "string", "minLength": 1},
+        "subject_pointer": {"$ref": "#/$defs/pointer"},
+        "schema_id": {"$ref": "#/$defs/schema_id"},
+        "expected_errors": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "https://ywe.local/schemas/fixture_catalog_schema.json#/$defs/error"}},
+        "base_path": {"$ref": "#/$defs/path"},
+        "base_pointer": {"$ref": "#/$defs/pointer"},
+        "operations": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/operation"}},
+        "rule_path": {"type": "string", "pattern": "^data/validation/.+"},
+        "reject_terms_pointer": {"$ref": "#/$defs/pointer"},
+        "expected_matches": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/match"}}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"mode": {"const": "direct"}}},
+          "then": {
+            "required": ["subject_pointer", "schema_id", "expected_errors"],
+            "properties": {"validation_scope": {"enum": ["subject", "assertion_projection"]}},
+            "not": {"anyOf": [{"required": ["base_path"]}, {"required": ["base_pointer"]}, {"required": ["operations"]}, {"required": ["rule_path"]}, {"required": ["reject_terms_pointer"]}, {"required": ["expected_matches"]}, {"required": ["mutation_value_bindings"]}]}
+          }
+        },
+        {
+          "if": {"properties": {"mode": {"const": "mutation"}}},
+          "then": {
+            "required": ["base_path", "base_pointer", "schema_id", "operations", "expected_errors"],
+            "properties": {"validation_scope": {"enum": ["materialized_scenario", "assertion_projection"]}},
+            "not": {"anyOf": [{"required": ["subject_pointer"]}, {"required": ["rule_path"]}, {"required": ["reject_terms_pointer"]}, {"required": ["expected_matches"]}]}
+          }
+        },
+        {
+          "if": {"properties": {"mode": {"const": "lexical"}}},
+          "then": {
+            "required": ["subject_pointer", "rule_path", "reject_terms_pointer", "expected_matches"],
+            "properties": {"validation_scope": {"const": "subject"}},
+            "not": {"anyOf": [{"required": ["schema_id"]}, {"required": ["expected_errors"]}, {"required": ["base_path"]}, {"required": ["base_pointer"]}, {"required": ["operations"]}, {"required": ["projection_bindings"]}, {"required": ["mutation_value_bindings"]}]}
+          }
+        }
+      ]
+    },
+    "QuestCompletionConsequenceAssertion": {
+      "description": "A scoped consequence-chain assertion on a supplied subject or declared mutation, not a complete quest packet schema.",
+      "x-ywe-requirement-id": "YWE-REQ-0029",
+      "x-ywe-source-ref": "data/validation/choice_to_consequence_validation_rules.json#/chain",
+      "type": "object",
+      "required": ["quest_reward_resolution_ref", "consequence_resolution_refs"],
+      "properties": {
+        "quest_reward_resolution_ref": {"type": "string", "minLength": 1},
+        "consequence_resolution_refs": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "LocationConsequenceAssertion": {
+      "description": "A scoped location mutation-or-noop assertion on a declared complete trace mutation, not a complete trace schema.",
+      "x-ywe-requirement-id": "YWE-REQ-0029",
+      "x-ywe-source-ref": "data/validation/phase_17_trace_coverage_rules.json#/requires_one_of_per_trace/1",
+      "type": "object",
+      "anyOf": [
+        {"required": ["location_mutation_refs"], "properties": {"location_mutation_refs": {"type": "array", "minItems": 1}}},
+        {"required": ["location_noop_reason"], "properties": {"location_noop_reason": {"type": "string", "minLength": 1}}}
+      ]
+    },
+    "ConditionalWolfFunctionAssertion": {
+      "description": "Reject the specifically forbidden default_party_member function on a supplied function list; this does not certify a complete conditional manifestation event.",
+      "x-ywe-requirement-id": "YWE-REQ-0029",
+      "x-ywe-source-ref": "data/validation/check_wolf_conditional_manifestation.spec.json#/must_reject",
+      "type": "array",
+      "items": {"type": "string"},
+      "not": {"contains": {"const": "default_party_member"}}
+    }
+  }
+}

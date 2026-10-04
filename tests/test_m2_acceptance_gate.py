@@ -185,6 +185,45 @@ class FixtureCoverageTests(unittest.TestCase):
         self.assertEqual(0, evidence["successful_unit_count"])
         self.assertEqual([{"path": relative, "instance_pointer": ""}], evidence["uncovered_units"])
 
+    def test_player_rejection_collection_requires_each_case_pointer(self):
+        relative = "examples/player_runtime_state/invalid_player_state_rejection_cases.example.json"
+        self.write(relative, {"schema_id": "example", "cases": [
+            {"case_id": "one", "reason": "first"}, {"case_id": "two", "reason": "second"}]})
+        self.bind(relative)
+        errors, evidence = self.check()
+        self.assertTrue(errors)
+        self.assertEqual([{"path": relative, "instance_pointer": "/cases/0"},
+                          {"path": relative, "instance_pointer": "/cases/1"}], evidence["uncovered_units"])
+        self.bind(relative, "/cases/0")
+        self.bind(relative, "/cases/1")
+        self.assertEqual([], self.check()[0])
+
+    def test_description_format_acceptance_cannot_establish_rejection(self):
+        relative = "examples/invalid_record.example.json"
+        self.write(relative, {"reject_reason": "bad subject"})
+        self.bind(relative)
+        errors, evidence = acceptance.rejection_coverage(self.root, self.paths, self.catalog["fixtures"], [])
+        self.assertTrue(errors)
+        self.assertEqual(0, evidence["executed_rejection_units"])
+
+    def test_executed_source_scenario_covers_its_exact_description_unit(self):
+        relative = "examples/invalid_record.example.json"
+        self.write(relative, {"reject_reason": "bad subject"})
+        result = {"descriptor_path": relative, "scenario_id": "case", "result": "reject"}
+        errors, evidence = acceptance.rejection_coverage(self.root, self.paths, [], [result])
+        self.assertEqual([], errors)
+        self.assertEqual(1, evidence["executed_rejection_units"])
+        result["result"] = "accept"
+        self.assertTrue(acceptance.rejection_coverage(self.root, self.paths, [], [result])[0])
+
+    def test_collection_root_scenario_cannot_cover_individual_rejections(self):
+        relative = "examples/player_runtime_state/invalid_player_state_rejection_cases.example.json"
+        self.write(relative, {"schema_id": "example", "cases": [{"case_id": "one", "reason": "first"}]})
+        result = {"descriptor_path": relative, "scenario_id": "case", "result": "reject"}
+        self.assertTrue(acceptance.rejection_coverage(self.root, self.paths, [], [result])[0])
+        result["descriptor_unit_pointer"] = "/cases/0"
+        self.assertEqual([], acceptance.rejection_coverage(self.root, self.paths, [], [result])[0])
+
     def test_result_for_a_different_fixture_id_or_path_cannot_clear_coverage(self):
         relative = "examples/record.json"
         self.write(relative, {"value": 1})

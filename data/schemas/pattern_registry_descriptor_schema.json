@@ -1,0 +1,336 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/pattern_registry_descriptor_schema.json",
+  "title": "Pattern Registry Descriptor Format",
+  "description": "New YWE descriptor format grammar. Structural and declared meta-reference rules do not certify domain relationships or generation behavior.",
+  "x-ywe-requirement-id": "YWE-REQ-0027",
+  "x-ywe-descriptor-grammar": "pattern",
+  "x-ywe-source-ref": "data/pattern_archetypes/ash_pattern_registry_schema.yaml",
+  "x-ywe-semantic-rules": {
+    "enum_reference": {
+      "requirement_id": "YWE-REQ-0027",
+      "description": "Enum field and list item references resolve to enum declarations in the same descriptor."
+    },
+    "record_reference": {
+      "requirement_id": "YWE-REQ-0027",
+      "description": "Registry item and inheritance references resolve to record declarations in the same descriptor."
+    },
+    "required_name_membership": {
+      "requirement_id": "YWE-REQ-0027",
+      "description": "Required field names identify properties declared in their map or effective inherited record."
+    },
+    "inheritance_cycle": {
+      "requirement_id": "YWE-REQ-0027",
+      "description": "Record inheritance references form an acyclic graph."
+    }
+  },
+  "$defs": {
+    "FieldDescriptor": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "string",
+            "float",
+            "enum",
+            "list",
+            "map"
+          ]
+        },
+        "values_ref": {
+          "type": "string"
+        },
+        "items": {
+          "const": "string"
+        },
+        "items_ref": {
+          "type": "string"
+        },
+        "min_items": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "required": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/FieldDescriptor"
+          }
+        },
+        "pattern_hint": {
+          "type": "string"
+        },
+        "range_hint": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "enum"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "required": [
+              "values_ref"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "list"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "oneOf": [
+              {
+                "required": [
+                  "items"
+                ],
+                "not": {
+                  "required": [
+                    "items_ref"
+                  ]
+                }
+              },
+              {
+                "required": [
+                  "items_ref"
+                ],
+                "not": {
+                  "required": [
+                    "items"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "map"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "required": [
+              "properties"
+            ]
+          }
+        }
+      ]
+    },
+    "RecordDescriptor": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "type": {
+          "const": "map"
+        },
+        "extends": {
+          "type": "string"
+        },
+        "required": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "additional_required": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/FieldDescriptor"
+          }
+        }
+      },
+      "additionalProperties": true,
+      "oneOf": [
+        {
+          "required": [
+            "type"
+          ],
+          "not": {
+            "required": [
+              "extends"
+            ]
+          }
+        },
+        {
+          "required": [
+            "extends"
+          ],
+          "not": {
+            "required": [
+              "type"
+            ]
+          }
+        }
+      ],
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "extends"
+            ]
+          },
+          "then": {
+            "required": [
+              "additional_required"
+            ]
+          }
+        }
+      ]
+    },
+    "RecordListDescriptor": {
+      "type": "object",
+      "required": [
+        "type",
+        "items_ref"
+      ],
+      "properties": {
+        "type": {
+          "const": "list"
+        },
+        "items_ref": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "type": "object",
+  "required": [
+    "version",
+    "meta",
+    "enums",
+    "schema",
+    "registry_shape"
+  ],
+  "properties": {
+    "version": {
+      "const": "1.0"
+    },
+    "meta": {
+      "type": "object",
+      "required": [
+        "system"
+      ],
+      "properties": {
+        "system": {
+          "const": "ash_pattern_registry_schema"
+        },
+        "purpose": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "authority_note": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "authority": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "upstream_constraint_ref": {
+          "type": "string"
+        },
+        "dependency_identity_inclusion": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "enums": {
+      "type": "object",
+      "required": [
+        "record_status",
+        "cluster_stability"
+      ],
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "schema": {
+      "type": "object",
+      "required": [
+        "ArchetypeRecord",
+        "ClusterRecord"
+      ],
+      "additionalProperties": {
+        "$ref": "#/$defs/RecordDescriptor"
+      }
+    },
+    "registry_shape": {
+      "type": "object",
+      "required": [
+        "registry_version",
+        "families"
+      ],
+      "properties": {
+        "registry_version": {
+          "const": "string"
+        },
+        "families": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/RecordListDescriptor"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "seed_registry": {
+      "$ref": "https://ywe.local/schemas/pattern_archetype_registry_schema.json#/$defs/Registry"
+    }
+  },
+  "additionalProperties": true
+}

@@ -213,5 +213,267 @@
         "validation_notes"
       ]
     }
+  ],
+  "assertion_revisions": [
+    {
+      "path": "data/schemas/axiom_diagnostic_packet_schema.json",
+      "source_revision": "b61b49eaf9dce30058a86b52fd4910087fc9e4da",
+      "migration_revision": "5b30dd50533d00b4c0852d45df3dfac61b3a4147",
+      "transitions": [
+        {
+          "prior_value_sha256": "639196a72e400dac8f11f290b0a2b23318175ba07f6fbd2aeb9f9132b224043c",
+          "revised_value_sha256": "7ddc3bdaa47d93f7adc0678da137fc5d6c0ec22336b7723af83133c4196f1f41",
+          "replacements": [
+            {
+              "pointer": "/properties/evaluated_axioms",
+              "before": {
+                "type": "string",
+                "minLength": 1
+              },
+              "after": {
+                "type": [
+                  "string",
+                  "array"
+                ],
+                "minLength": 1,
+                "items": {
+                  "type": "string"
+                },
+                "x-ywe-requirement-id": "YWE-REQ-0030"
+              }
+            },
+            {
+              "pointer": "/properties/pressures",
+              "before": {
+                "type": "string",
+                "minLength": 1
+              },
+              "after": {
+                "type": [
+                  "string",
+                  "array"
+                ],
+                "minLength": 1,
+                "items": {
+                  "type": "string"
+                },
+                "x-ywe-requirement-id": "YWE-REQ-0030"
+              }
+            },
+            {
+              "pointer": "/properties/recommended_kernel_actions",
+              "before": {
+                "type": "string",
+                "minLength": 1
+              },
+              "after": {
+                "type": [
+                  "string",
+                  "array"
+                ],
+                "minLength": 1,
+                "items": {
+                  "type": "string"
+                },
+                "x-ywe-requirement-id": "YWE-REQ-0030"
+              }
+            },
+            {
+              "pointer": "/properties/stabilizers",
+              "before": {
+                "type": "string",
+                "minLength": 1
+              },
+              "after": {
+                "type": [
+                  "string",
+                  "array"
+                ],
+                "minLength": 1,
+                "items": {
+                  "type": "string"
+                },
+                "x-ywe-requirement-id": "YWE-REQ-0030"
+              }
+            },
+            {
+              "pointer": "/properties/violations",
+              "before": {
+                "type": "string",
+                "minLength": 1
+              },
+              "after": {
+                "type": [
+                  "string",
+                  "array"
+                ],
+                "minLength": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": true
+                },
+                "x-ywe-requirement-id": "YWE-REQ-0030"
+              }
+            }
+          ],
+          "requirement_id": "YWE-REQ-0030"
+        }
+      ]
+    },
+    {
+      "path": "data/schemas/existence_potential_schema.json",
+      "source_revision": "b61b49eaf9dce30058a86b52fd4910087fc9e4da",
+      "migration_revision": "5b30dd50533d00b4c0852d45df3dfac61b3a4147",
+      "transitions": [
+        {
+          "prior_value_sha256": "1263b72c9e307ac241ac87d13f934fc7d726f32a3af7ef1a7b4b761c8af694cc",
+          "revised_value_sha256": "8274c0a59834e03a92e72e68cd5a2d0b7f7b2cfcb317a965637150e042fa9b30",
+          "replacements": [
+            {
+              "pointer": "/properties/coefficients",
+              "before": {
+                "type": "string",
+                "minLength": 1
+              },
+              "after": {
+                "type": [
+                  "string",
+                  "object"
+                ],
+                "minLength": 1,
+                "additionalProperties": true,
+                "x-ywe-requirement-id": "YWE-REQ-0030",
+                "properties": {
+                  "alpha1": {
+                    "type": "number"
+                  },
+                  "alpha2": {
+                    "type": "number"
+                  },
+                  "alpha3": {
+                    "type": "number"
+                  },
+                  "alpha4": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            {
+              "pointer": "/properties/interpretation_notes",
+              "before": {
+                "type": "string",
+                "minLength": 1
+              },
+              "after": {
+                "type": [
+                  "string",
+                  "array"
+                ],
+                "minLength": 1,
+                "items": {
+                  "type": "string"
+                },
+                "x-ywe-requirement-id": "YWE-REQ-0030"
+              }
+            },
+            {
+              "pointer": "/properties/phi_value",
+              "before": {
+                "type": "string",
+                "minLength": 1
+              },
+              "after": {
+                "type": [
+                  "string",
+                  "number"
+                ],
+                "minLength": 1,
+                "x-ywe-requirement-id": "YWE-REQ-0030"
+              }
+            },
+            {
+              "pointer": "/properties/term_values",
+              "before": {
+                "type": "string",
+                "minLength": 1
+              },
+              "after": {
+                "type": [
+                  "string",
+                  "object"
+                ],
+                "minLength": 1,
+                "additionalProperties": true,
+                "x-ywe-requirement-id": "YWE-REQ-0030",
+                "properties": {
+                  "C_compressibility": {
+                    "type": "number"
+                  },
+                  "S_symmetry": {
+                    "type": "number"
+                  },
+                  "P_persistence": {
+                    "type": "number"
+                  },
+                  "H_entropy": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          ],
+          "requirement_id": "YWE-REQ-0030"
+        }
+      ]
+    },
+    {
+      "path": "data/schemas/branch_event_schema.json",
+      "source_revision": "b61b49eaf9dce30058a86b52fd4910087fc9e4da",
+      "migration_revision": "5b30dd50533d00b4c0852d45df3dfac61b3a4147",
+      "transitions": [
+        {
+          "prior_value_sha256": "d302dad976a463cf4d886f8679e14f5ad88c122837661d31055570dfa61b9dc9",
+          "revised_value_sha256": "5499ba32019c1ca01d8505efdabf849250213ecdb3aac070c51fe4c5a120fb2d",
+          "replacements": [
+            {
+              "pointer": "/properties/available_actions",
+              "before": {
+                "type": "string",
+                "minLength": 1
+              },
+              "after": {
+                "type": [
+                  "string",
+                  "array"
+                ],
+                "minLength": 1,
+                "items": {
+                  "type": "string"
+                },
+                "x-ywe-requirement-id": "YWE-REQ-0030"
+              }
+            },
+            {
+              "pointer": "/properties/decision_context",
+              "before": {
+                "type": "string",
+                "minLength": 1
+              },
+              "after": {
+                "type": [
+                  "string",
+                  "object"
+                ],
+                "minLength": 1,
+                "additionalProperties": true,
+                "x-ywe-requirement-id": "YWE-REQ-0030"
+              }
+            }
+          ],
+          "requirement_id": "YWE-REQ-0030"
+        }
+      ]
+    }
   ]
 }

@@ -75,6 +75,8 @@ REQUIRED_CHECK_CONTRACTS = [
     ("platform_agnosticism", "scripts/check_platform_agnosticism.py", ["platform", "governance"]),
     ("repository_attribution_policy", "scripts/check_repository_attribution_policy.py", ["attribution", "governance"]),
     ("non_destructive_diff", "<non-destructive-diff>", ["diff", "change-safety"]),
+    ("m2_yaml_descriptors", "scripts/check_yaml_descriptor_contracts.py", ["m2", "schema", "conformance"]),
+    ("m2_rejection_scenarios", "scripts/check_rejection_scenarios.py", ["m2", "schema", "conformance"]),
 ]
 
 

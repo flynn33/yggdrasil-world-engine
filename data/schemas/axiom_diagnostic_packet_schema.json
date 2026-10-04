@@ -76,20 +76,48 @@
       "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
     },
     "evaluated_axioms": {
-      "type": "string",
-      "minLength": 1
+      "type": [
+        "string",
+        "array"
+      ],
+      "minLength": 1,
+      "items": {
+        "type": "string"
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0030"
     },
     "pressures": {
-      "type": "string",
-      "minLength": 1
+      "type": [
+        "string",
+        "array"
+      ],
+      "minLength": 1,
+      "items": {
+        "type": "string"
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0030"
     },
     "recommended_kernel_actions": {
-      "type": "string",
-      "minLength": 1
+      "type": [
+        "string",
+        "array"
+      ],
+      "minLength": 1,
+      "items": {
+        "type": "string"
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0030"
     },
     "stabilizers": {
-      "type": "string",
-      "minLength": 1
+      "type": [
+        "string",
+        "array"
+      ],
+      "minLength": 1,
+      "items": {
+        "type": "string"
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0030"
     },
     "target_kind": {
       "type": "string",
@@ -101,8 +129,16 @@
       "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
     },
     "violations": {
-      "type": "string",
-      "minLength": 1
+      "type": [
+        "string",
+        "array"
+      ],
+      "minLength": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0030"
     }
   },
   "additionalProperties": true

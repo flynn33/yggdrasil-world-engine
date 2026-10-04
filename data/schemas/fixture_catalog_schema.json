@@ -19,7 +19,7 @@
       "additionalProperties": false,
       "required": ["error_id", "instance_pointer", "schema_pointer"],
       "properties": {
-        "error_id": {"type": "string", "pattern": "^JSON_SCHEMA_[A-Z]+$"},
+        "error_id": {"type": "string", "pattern": "^(?:JSON_SCHEMA_[A-Z]+|YAML_DESCRIPTOR_[A-Z_]+)$"},
         "instance_pointer": {"$ref": "#/$defs/pointer"},
         "schema_pointer": {"$ref": "#/$defs/pointer"},
         "missing_properties": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}}

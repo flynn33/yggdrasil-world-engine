@@ -1,0 +1,2097 @@
+artifact_type: yaml_descriptor_cases
+artifact_version: 1.0.0
+description: New descriptor format grammar and meta-reference witnesses. Domain and
+  generation semantics are separate contracts.
+positive:
+  pattern_minimal:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  module_minimal:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+      doctrine:
+      - forsetti_governs_module_lifecycle
+      - external_environments_may_realize_but_may_not_author_ywe_truth
+    classification_enums:
+      module_classification:
+      - core_engine
+      - feature_module
+      dependency_strength:
+      - hard_required
+      - optional
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: core_engine | feature_module
+        provides_capabilities:
+        - capability_id: string
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+boundary:
+  pattern_open_annotations:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: ''
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+            pattern_hint: ''
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+    extension:
+      fixture: true
+  pattern_empty_required_lists:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required: []
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required: []
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_inherited_required_member:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - name
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_forward_record_reference:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+      First:
+        extends: Later
+        additional_required: []
+        properties: {}
+      Later:
+        type: map
+        properties: {}
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  module_open_metadata_empty_prose:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: ''
+      doctrine:
+      - forsetti_governs_module_lifecycle
+      - external_environments_may_realize_but_may_not_author_ywe_truth
+    classification_enums:
+      module_classification:
+      - core_engine
+      - feature_module
+      dependency_strength:
+      - hard_required
+      - optional
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: core_engine | feature_module
+        provides_capabilities:
+        - capability_id: string
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+      uniqueness_constraints: []
+    extension:
+      fixture: true
+  module_union_spacing_and_order:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+      doctrine:
+      - forsetti_governs_module_lifecycle
+      - external_environments_may_realize_but_may_not_author_ywe_truth
+    classification_enums:
+      module_classification:
+      - core_engine
+      - feature_module
+      dependency_strength:
+      - hard_required
+      - optional
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: feature_module  |  core_engine
+        provides_capabilities:
+        - capability_id: string
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+  module_supported_primitive_and_sequence_fields:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+      doctrine:
+      - forsetti_governs_module_lifecycle
+      - external_environments_may_realize_but_may_not_author_ywe_truth
+    classification_enums:
+      module_classification:
+      - core_engine
+      - feature_module
+      dependency_strength:
+      - hard_required
+      - optional
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: core_engine | feature_module
+        provides_capabilities:
+        - capability_id: string
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+        priority: integer
+        enabled: boolean
+        notes:
+        - string
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+reject:
+  pattern_missing_version:
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_missing_field_type:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name: {}
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_unsupported_field_type:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: strnig
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_empty_enum_declaration:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family: []
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_duplicate_enum_declaration:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_enum_missing_selector:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_list_conflicting_selectors:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+            items: string
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_list_missing_selector:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_fractional_minimum:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 1.5
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_negative_minimum:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: -1
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_unknown_enum_reference:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: missing
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_unknown_list_enum_reference:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: missing
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_unknown_registry_record_reference:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: MissingRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_unknown_parent_record_reference:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: MissingRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_unknown_required_member:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - missing
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_unknown_nested_required_member:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - missing
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_unknown_extension_required_member:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - missing
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_self_inheritance_cycle:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ClusterRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_two_record_inheritance_cycle:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        extends: ClusterRecord
+        additional_required: []
+        properties: {}
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+  pattern_seed_registry_wrong_type:
+    version: '1.0'
+    meta:
+      system: ash_pattern_registry_schema
+      purpose: Descriptor fixture
+    enums:
+      record_status:
+      - canonical
+      cluster_stability:
+      - stable
+      family:
+      - character
+      realm:
+      - physical
+    schema:
+      ArchetypeRecord:
+        type: map
+        required:
+        - name
+        properties:
+          name:
+            type: string
+          family:
+            type: enum
+            values_ref: family
+          realm:
+            type: list
+            items_ref: realm
+          attributes:
+            type: map
+            required:
+            - label
+            properties:
+              label:
+                type: string
+          bias:
+            type: float
+            range_hint: Annotation only
+      ClusterRecord:
+        extends: ArchetypeRecord
+        additional_required:
+        - members
+        properties:
+          members:
+            type: list
+            items: string
+            min_items: 2
+    registry_shape:
+      registry_version: string
+      families:
+        character:
+          type: list
+          items_ref: ArchetypeRecord
+        cluster:
+          type: list
+          items_ref: ClusterRecord
+    seed_registry:
+      registry_version: 7
+  module_missing_classifications:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+      doctrine:
+      - forsetti_governs_module_lifecycle
+      - external_environments_may_realize_but_may_not_author_ywe_truth
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: core_engine | feature_module
+        provides_capabilities:
+        - capability_id: string
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+  module_missing_doctrine:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+    classification_enums:
+      module_classification:
+      - core_engine
+      - feature_module
+      dependency_strength:
+      - hard_required
+      - optional
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: core_engine | feature_module
+        provides_capabilities:
+        - capability_id: string
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+  module_missing_manifest_declaration:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+      doctrine:
+      - forsetti_governs_module_lifecycle
+      - external_environments_may_realize_but_may_not_author_ywe_truth
+    classification_enums:
+      module_classification:
+      - core_engine
+      - feature_module
+      dependency_strength:
+      - hard_required
+      - optional
+    core_schema: {}
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+  module_unsupported_primitive:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+      doctrine:
+      - forsetti_governs_module_lifecycle
+      - external_environments_may_realize_but_may_not_author_ywe_truth
+    classification_enums:
+      module_classification:
+      - core_engine
+      - feature_module
+      dependency_strength:
+      - hard_required
+      - optional
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: core_engine | feature_module
+        provides_capabilities:
+        - capability_id: string
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+        enabled: strnig
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+  module_empty_list_template:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+      doctrine:
+      - forsetti_governs_module_lifecycle
+      - external_environments_may_realize_but_may_not_author_ywe_truth
+    classification_enums:
+      module_classification:
+      - core_engine
+      - feature_module
+      dependency_strength:
+      - hard_required
+      - optional
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: core_engine | feature_module
+        provides_capabilities: []
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+  module_multiple_list_templates:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+      doctrine:
+      - forsetti_governs_module_lifecycle
+      - external_environments_may_realize_but_may_not_author_ywe_truth
+    classification_enums:
+      module_classification:
+      - core_engine
+      - feature_module
+      dependency_strength:
+      - hard_required
+      - optional
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: core_engine | feature_module
+        provides_capabilities:
+        - id: string
+        - id: string
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+  module_unsupported_nested_primitive:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+      doctrine:
+      - forsetti_governs_module_lifecycle
+      - external_environments_may_realize_but_may_not_author_ywe_truth
+    classification_enums:
+      module_classification:
+      - core_engine
+      - feature_module
+      dependency_strength:
+      - hard_required
+      - optional
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: core_engine | feature_module
+        provides_capabilities:
+        - capability_id: number
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+  module_missing_inline_enum_surface:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+      doctrine:
+      - forsetti_governs_module_lifecycle
+      - external_environments_may_realize_but_may_not_author_ywe_truth
+    classification_enums:
+      module_classification:
+      - core_engine
+      - feature_module
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: core_engine | feature_module
+        provides_capabilities:
+        - capability_id: string
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+  module_inconsistent_inline_enum:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+      doctrine:
+      - forsetti_governs_module_lifecycle
+      - external_environments_may_realize_but_may_not_author_ywe_truth
+    classification_enums:
+      module_classification:
+      - core_engine
+      - feature_module
+      dependency_strength:
+      - hard_required
+      - optional
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: core_engine | unsupported
+        provides_capabilities:
+        - capability_id: string
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+  module_duplicate_inline_enum:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+      doctrine:
+      - forsetti_governs_module_lifecycle
+      - external_environments_may_realize_but_may_not_author_ywe_truth
+    classification_enums:
+      module_classification:
+      - core_engine
+      - feature_module
+      dependency_strength:
+      - hard_required
+      - optional
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: core_engine | feature_module | feature_module
+        provides_capabilities:
+        - capability_id: string
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+  module_unknown_required_member:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+      doctrine:
+      - forsetti_governs_module_lifecycle
+      - external_environments_may_realize_but_may_not_author_ywe_truth
+    classification_enums:
+      module_classification:
+      - core_engine
+      - feature_module
+      dependency_strength:
+      - hard_required
+      - optional
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: core_engine | feature_module
+        provides_capabilities:
+        - capability_id: string
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+    canonical_validation_rules:
+      required_fields:
+      - missing
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+  module_empty_enum_declaration:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+      doctrine:
+      - forsetti_governs_module_lifecycle
+      - external_environments_may_realize_but_may_not_author_ywe_truth
+    classification_enums:
+      module_classification: []
+      dependency_strength:
+      - hard_required
+      - optional
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: core_engine | feature_module
+        provides_capabilities:
+        - capability_id: string
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []
+  module_wrong_doctrine_type:
+    version: '0.2'
+    meta:
+      system: module_capability_manifest_schema
+      purpose: Descriptor fixture
+      doctrine: forsetti_governs_module_lifecycle
+    classification_enums:
+      module_classification:
+      - core_engine
+      - feature_module
+      dependency_strength:
+      - hard_required
+      - optional
+    core_schema:
+      ModuleCapabilityManifest:
+        module_classification: core_engine | feature_module
+        provides_capabilities:
+        - capability_id: string
+        requires_capabilities:
+        - capability_id: string
+          dependency_strength: hard_required | optional
+        consumes_state:
+        - state_id: string
+        emits_state:
+        - state_id: string
+        non_delegable_responsibilities:
+        - responsibility_id: string
+        delegable_compatible_responsibilities:
+        - responsibility_id: string
+        suppression_conditions:
+        - condition_id: string
+        compatible_external_capabilities:
+        - constraints:
+          - string
+    canonical_validation_rules:
+      required_fields:
+      - module_classification
+      - provides_capabilities
+      truth_boundary_rules: []
+      dependency_rules: []
+      anti_drift_rules: []

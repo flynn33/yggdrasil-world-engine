@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/module_capability_descriptor_schema.json",
+  "title": "Module Capability Descriptor Format",
+  "description": "New YWE compact descriptor grammar. Structural and declared meta-reference rules do not certify lifecycle, dependency ordering, or authority transfer semantics.",
+  "x-ywe-requirement-id": "YWE-REQ-0027",
+  "x-ywe-descriptor-grammar": "module",
+  "x-ywe-source-ref": "data/module_capability/module_capability_manifest_schema.yaml",
+  "x-ywe-semantic-rules": {
+    "enum_reference": {
+      "requirement_id": "YWE-REQ-0027",
+      "description": "Inline classified fields have a declared classification enum surface."
+    },
+    "inline_enum_consistency": {
+      "requirement_id": "YWE-REQ-0027",
+      "description": "Inline classified alternatives match their corresponding classification enum declarations."
+    },
+    "required_name_membership": {
+      "requirement_id": "YWE-REQ-0027",
+      "description": "Required manifest names identify fields in ModuleCapabilityManifest."
+    }
+  },
+  "$defs": {
+    "CompactField": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^(?:string|integer|boolean|[a-z][a-z0-9_]*(?:\\s*\\|\\s*[a-z][a-z0-9_]*)+)$"
+        },
+        {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "oneOf": [
+              {
+                "enum": [
+                  "string",
+                  "integer",
+                  "boolean"
+                ]
+              },
+              {
+                "$ref": "#/$defs/CompactRecord"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "CompactRecord": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/CompactField"
+      }
+    }
+  },
+  "type": "object",
+  "required": [
+    "version",
+    "meta",
+    "classification_enums",
+    "core_schema",
+    "canonical_validation_rules"
+  ],
+  "properties": {
+    "version": {
+      "const": "0.2"
+    },
+    "meta": {
+      "type": "object",
+      "required": [
+        "system",
+        "doctrine"
+      ],
+      "properties": {
+        "system": {
+          "const": "module_capability_manifest_schema"
+        },
+        "purpose": {
+          "type": "string"
+        },
+        "doctrine": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "allOf": [
+            {
+              "contains": {
+                "const": "forsetti_governs_module_lifecycle"
+              }
+            },
+            {
+              "contains": {
+                "const": "external_environments_may_realize_but_may_not_author_ywe_truth"
+              }
+            }
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "classification_enums": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "core_schema": {
+      "type": "object",
+      "required": [
+        "ModuleCapabilityManifest"
+      ],
+      "properties": {
+        "ModuleCapabilityManifest": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/CompactRecord"
+            },
+            {
+              "required": [
+                "provides_capabilities",
+                "requires_capabilities",
+                "consumes_state",
+                "emits_state",
+                "non_delegable_responsibilities",
+                "delegable_compatible_responsibilities",
+                "suppression_conditions",
+                "compatible_external_capabilities"
+              ]
+            }
+          ]
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/CompactRecord"
+      }
+    },
+    "canonical_validation_rules": {
+      "type": "object",
+      "required": [
+        "required_fields",
+        "truth_boundary_rules",
+        "dependency_rules",
+        "anti_drift_rules"
+      ],
+      "properties": {
+        "required_fields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "uniqueness_constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "truth_boundary_rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependency_rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "anti_drift_rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "recommended_state_ids": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "example_manifests": {
+      "type": "array",
+      "items": {
+        "$ref": "https://ywe.local/schemas/module_capability_manifest_schema.json"
+      }
+    }
+  },
+  "additionalProperties": true
+}

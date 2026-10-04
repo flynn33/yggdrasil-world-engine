@@ -174,3 +174,100 @@ rule.
 The catalog includes the existing content batch and two lore fragments as
 positive instances, plus exact field targets that retain legacy strings and
 reject empty strings, empty arrays, numeric/empty array items, nulls, and objects.
+
+
+## YAML Descriptor Grammars
+
+The pattern registry and module capability descriptor roots have distinct,
+explicit YWE-owned format grammars. Descriptors MUST satisfy their grammar
+before semantic checks resolve required-field names, enum/record references,
+duplicate enum values and inheritance cycles. Hints MUST remain annotations.
+[YWE-REQ-0027] This is a conservative new descriptor-format policy, rather than
+an assertion that a historical runtime parser implemented these checks.
+
+`check_yaml_descriptor_contracts.py` executes both unchanged YAML source roots
+and registered positive, boundary and reject cases. The fixture catalog dispatches
+semantic checks only for the two exact descriptor schema root IDs. Semantic
+witnesses identify their actual owned `x-ywe-semantic-rules` annotation; they do
+not invent JSON Schema keywords or dispatch from arbitrary metadata.
+
+## Ability and Phase 12 Negative Descriptions
+
+The existing ability owner check requires `not_morality_system=true` and
+`temporary=true`. The corresponding schema properties MUST retain those constants.
+[YWE-REQ-0028] The two false-valued cases now receive the specific constant errors.
+
+Historical ability and Phase 12 negative files describe candidates or scenarios.
+Their accepted format bindings MUST remain separate from executed subject or
+mutation rejection. [YWE-REQ-0028] Missing source references, missing NPC relation,
+missing lore pattern trace and generic quest description are exercised on explicit
+accepted controls. The XP-only source, wolf-death and morality cases use selected
+assertion projections. Those projections certify only source admissibility,
+temporary decoherence or the morality invariant; they do not implement an unlock,
+cost or leveling algorithm. The unchanged quest candidate lacking its required
+`quest_title_policy` is bound as an exact intended full-root rejection rather than
+receiving an invented title policy.
+
+## Source-bound Rejection Scenarios
+
+The separate scenario catalog records the original description's normalized
+SHA-256 digest, exact selected source values, owning assertions, validation scope,
+and either a direct subject, explicit mutations of an accepted control, or
+lexical subjects against owning forbidden terms. Every scenario MUST validate its
+source bindings and match the complete expected witness set. Mutation controls
+MUST be accepted before mutation. Description-format acceptance MUST NOT establish
+intended rejection, and collection cases MUST each have an executed witness.
+[YWE-REQ-0029]
+
+The checker rejects changed descriptions, changed owning assertions, unaccepted
+controls, mismatched subjects, wrong expected reasons and unrelated error sets.
+Every executed schema keyword has its exact owning file, pointer and value
+binding. Missing-required-member witnesses also bind each exact required-list
+member; a different missing field under the same array cannot stand in for the
+intended reason. Every selected member binding must be exercised by a missing-field
+error, independently of its possible use as a source literal. Scalar
+replacement values bind an exact source literal, or the strictly Boolean inverse
+of their executed constant at the same target. Unrelated strings and numeric
+substitutes for Boolean values cannot witness the intended scenario.
+
+Local projection keywords also have explicit mappings to their source rules.
+These mappings establish mechanical source linkage, rather than executing a
+prose rule or domain algorithm. Bound executable keywords must be exercised or
+used as explicit projection sources. Lexical cases bind the exact owning term
+list they execute.
+
+Hashes normalize UTF-8 line endings so the same source binding works in Windows
+and Linux checkouts. Original negative files remain unchanged. The M2 readiness
+evaluator counts their exact description units independently from schema-format
+coverage. Assertion projections and lexical matches retain their declared limited
+scope; neither establishes complete runtime or lifecycle conformance.
+
+
+## Protected Phase 9 Representation Correction
+
+The original Phase 9 diagnostics, existence-potential and branch-event examples
+predate the descriptor migration. The migration inferred string constraints for
+five diagnostic arrays, two potential-value objects, numeric `phi_value`, notes,
+and branch decision-context/actions. Its generator passed field names without
+instance values to the generic string inference, as recorded above.
+
+The correction MUST preserve original descriptive values and migration proofs,
+retain accepted legacy nonempty strings, and admit the observed typed containers
+or number through exact declared assertion transitions. The proof validator MUST
+reconstruct the immutable original migration and reject undeclared edits or
+unreviewed baseline stages. [YWE-REQ-0030] Original source and migration commits,
+whole-property before/after values, exact value hashes and the requirement ID
+are recorded separately from the original migration records.
+
+This preserves the original potential formula and legacy example shapes. It does
+not implement potential computation or a cosmology oracle. Open containers and
+unspecified array cardinality remain open; no new enum, range, uniqueness or
+nested required-field rule is inferred from the example values. Permanent proof
+validation also applies when the current diff contains no protected target edit.
+
+The 51 Phase9 field cases retain original string acceptance, exercise the observed
+containers/numeric representation, preserve open-container boundaries, and reject
+wrong types or empty legacy strings. The four original full roots are independently
+bound to their complete schemas. The legacy `QD-001` subledger is resolved after
+all four debt categories became empty and all 505 catalog bindings passed with
+offline references; strict M2 coverage and acceptance obligations remain open.

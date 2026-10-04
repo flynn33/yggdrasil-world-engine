@@ -1,0 +1,112 @@
+{
+  "artifact_type": "ability_semantic_cases",
+  "artifact_version": "1.0.0",
+  "description": "Complete positive controls and single-field rejection witnesses for temporary decoherence and wolf morality safety. The source reference control supports a separately registered XP-only source-kind scenario; structural acceptance does not certify runtime unlock algorithms.",
+  "positive": {
+    "wolf_synergy": {
+      "schema_id": "ywe.ability_wolf_synergy.v1",
+      "schema_version": "0.1.0",
+      "synergy_id": "synergy.twin_threshold_step",
+      "ability_id": "ability.twin_threshold_step",
+      "wolf_scope": "twin_wolves",
+      "companion_presence_required": true,
+      "synergy_description": "Both wolves assist by holding complementary sides of the threshold: revelation and containment, not morality.",
+      "not_morality_system": true,
+      "decoherence_risk_ref": {
+        "ref_id": "risk.twin_threshold_step.decoherence"
+      },
+      "recovery_path_refs": [
+        {
+          "ref_id": "recovery.rest_at_stable_threshold"
+        }
+      ]
+    },
+    "temporary_decoherence": {
+      "schema_id": "ywe.ability_decoherence_state.v1",
+      "schema_version": "0.1.0",
+      "decoherence_id": "decoherence.twin_threshold_step.overstrain",
+      "affected_ref": {
+        "ref_id": "ability.twin_threshold_step"
+      },
+      "affected_kind": "ability",
+      "cause_refs": [
+        {
+          "ref_id": "use.threshold_step.overstrained"
+        }
+      ],
+      "temporary": true,
+      "recovery_condition_refs": [
+        {
+          "ref_id": "condition.location_stabilized"
+        },
+        {
+          "ref_id": "condition.wolves_recohere"
+        }
+      ],
+      "forbidden_interpretations": [
+        "permanent_wolf_death",
+        "punishment_for_evil",
+        "corruption_meter"
+      ]
+    },
+    "source_ref": {
+      "schema_id": "ywe.ability_source_ref.v1",
+      "schema_version": "0.1.0",
+      "source_id": "source.oath_sight.worldstate_delta.fixture",
+      "source_kind": "worldstate_delta",
+      "source_ref": {
+        "ref_id": "ravenfall_gate.reveal_oath.delta",
+        "ref_type": "WorldstateDeltaPacket",
+        "source_system": "worldstate"
+      }
+    }
+  },
+  "reject": {
+    "wolf_morality": {
+      "schema_id": "ywe.ability_wolf_synergy.v1",
+      "schema_version": "0.1.0",
+      "synergy_id": "synergy.twin_threshold_step",
+      "ability_id": "ability.twin_threshold_step",
+      "wolf_scope": "twin_wolves",
+      "companion_presence_required": true,
+      "synergy_description": "Both wolves assist by holding complementary sides of the threshold: revelation and containment, not morality.",
+      "not_morality_system": false,
+      "decoherence_risk_ref": {
+        "ref_id": "risk.twin_threshold_step.decoherence"
+      },
+      "recovery_path_refs": [
+        {
+          "ref_id": "recovery.rest_at_stable_threshold"
+        }
+      ]
+    },
+    "permanent_decoherence": {
+      "schema_id": "ywe.ability_decoherence_state.v1",
+      "schema_version": "0.1.0",
+      "decoherence_id": "decoherence.twin_threshold_step.overstrain",
+      "affected_ref": {
+        "ref_id": "ability.twin_threshold_step"
+      },
+      "affected_kind": "ability",
+      "cause_refs": [
+        {
+          "ref_id": "use.threshold_step.overstrained"
+        }
+      ],
+      "temporary": false,
+      "recovery_condition_refs": [
+        {
+          "ref_id": "condition.location_stabilized"
+        },
+        {
+          "ref_id": "condition.wolves_recohere"
+        }
+      ],
+      "forbidden_interpretations": [
+        "permanent_wolf_death",
+        "punishment_for_evil",
+        "corruption_meter"
+      ]
+    }
+  }
+}

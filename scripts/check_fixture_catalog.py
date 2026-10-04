@@ -19,6 +19,10 @@ from check_machine_readable_artifacts import UniqueKeyLoader, repository_files
 CONTRACT_CATALOG = "data/validation/contract_catalog.json"
 FIXTURE_CATALOG = "data/validation/fixture_catalog.json"
 DIALECT = "https://json-schema.org/draft/2020-12/schema"
+DESCRIPTOR_SCHEMAS = {
+    "https://ywe.local/schemas/pattern_registry_descriptor_schema.json": "pattern",
+    "https://ywe.local/schemas/module_capability_descriptor_schema.json": "module",
+}
 
 
 def load_json(path: Path):
@@ -272,7 +276,7 @@ def evaluate_fixtures(root: Path, registry: Registry, fixtures: list[dict]):
         seen_bindings.add(binding)
         try:
             # Resolve even when the instance is empty or the validator would skip it.
-            resolve_schema_target(registry, fixture["schema_id"])
+            target = resolve_schema_target(registry, fixture["schema_id"])
             instance = json_pointer(
                 load_instance(repository_path(root, fixture["path"])), fixture["instance_pointer"]
             )
@@ -284,6 +288,14 @@ def evaluate_fixtures(root: Path, registry: Registry, fixtures: list[dict]):
                 for error in validator.iter_errors(instance)
                 for leaf in leaf_errors(error)
             }
+            grammar = DESCRIPTOR_SCHEMAS.get(fixture["schema_id"])
+            if grammar:
+                if target.contents.get("x-ywe-descriptor-grammar") != grammar:
+                    raise ValueError("Descriptor schema differs from its registered grammar")
+                if not witnessed:
+                    from check_yaml_descriptor_contracts import descriptor_semantic_errors
+
+                    witnessed.update(signature_key(error) for error in descriptor_semantic_errors(instance, grammar, root))
             expected = {signature_key(error) for error in fixture["expected_errors"]}
             result = "reject" if witnessed else "accept"
             if result != fixture["expected_result"] or witnessed != expected:

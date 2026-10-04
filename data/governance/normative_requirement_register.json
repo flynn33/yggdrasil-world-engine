@@ -9,7 +9,7 @@
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0027",
+    "next_available_id": "YWE-REQ-0031",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -569,13 +569,116 @@
         "data/pattern_archetypes/ash_pattern_registry_schema.yaml",
         "data/schemas/pattern_archetype_registry_schema.json"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0027",
+      "title": "Explicit descriptor grammar and meta-reference validation",
+      "normative_statement": "YAML descriptors MUST satisfy their declared structural grammar and owned semantic checks for required-name membership, enum and record references, duplicate enum values and inheritance cycles. Structural validation MUST precede semantic validation; descriptive hints MUST NOT create assertions.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_yaml_descriptor_contracts.py",
+        "tests/test_yaml_descriptor_contracts.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0017"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#yaml-descriptor-grammars",
+        "data/schemas/pattern_registry_descriptor_schema.json",
+        "data/schemas/module_capability_descriptor_schema.json"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0028",
+      "title": "Execute ability invariants and historical negative descriptions",
+      "normative_statement": "Ability synergy MUST retain not_morality_system=true and decoherence MUST retain temporary=true as already required by their owning checks. Historical ability and Phase 12 negative-description format acceptance MUST remain separate from executed source-bound assertion or materialized-scenario rejection.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_rejection_scenarios.py",
+        "tests/test_ability_semantic_assertions.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0018"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#ability-and-phase-12-negative-descriptions",
+        "data/schemas/ability_wolf_synergy_schema.json",
+        "data/schemas/ability_decoherence_state_schema.json",
+        "examples/contract_foundation/ability_semantic_cases.example.json"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0029",
+      "title": "Source-bound intended rejection evidence",
+      "normative_statement": "Every registered rejection scenario MUST bind the unchanged source description and owning assertion, validate a mutation control before changing it, and match its complete intended error or lexical witness set. Rejection-description format acceptance MUST NOT substitute for an executed rejection; collection cases MUST each have an executed witness.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_rejection_scenarios.py",
+        "tests/test_rejection_scenarios.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0019"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#source-bound-rejection-scenarios",
+        "data/schemas/rejection_scenario_catalog_schema.json",
+        "data/validation/rejection_scenarios.json"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0030",
+      "title": "Exact protected Phase 9 representation correction",
+      "normative_statement": "Protected Phase 9 representation corrections MUST preserve every original descriptive value and migration proof, retain formerly accepted nonempty strings, and admit the observed typed container or numeric representations through explicit assertion transitions. Validation MUST reconstruct the immutable original migration and reject undeclared edits or unreviewed baseline stages.",
+      "normative_level": "MUST",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_m0_truthful_baseline.py",
+        "tests/test_phase_9_representation_proofs.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0020"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#protected-phase-9-representation-correction",
+        "data/validation/m2_contract_migration_manifest.json",
+        "data/schemas/axiom_diagnostic_packet_schema.json",
+        "data/schemas/existence_potential_schema.json",
+        "data/schemas/branch_event_schema.json"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 26,
-    "active": 26,
+    "total_requirements": 30,
+    "active": 30,
     "proposed": 0,
     "terminal": 0,
-    "next_identifier": "YWE-REQ-0027"
+    "next_identifier": "YWE-REQ-0031"
   }
 }

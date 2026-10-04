@@ -123,8 +123,15 @@
       "uniqueItems": true
     },
     "available_actions": {
-      "type": "string",
-      "minLength": 1
+      "type": [
+        "string",
+        "array"
+      ],
+      "minLength": 1,
+      "items": {
+        "type": "string"
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0030"
     },
     "base_world_ref": {
       "type": "string",
@@ -153,8 +160,13 @@
       "uniqueItems": true
     },
     "decision_context": {
-      "type": "string",
-      "minLength": 1
+      "type": [
+        "string",
+        "object"
+      ],
+      "minLength": 1,
+      "additionalProperties": true,
+      "x-ywe-requirement-id": "YWE-REQ-0030"
     },
     "future_generation_bias_refs": {
       "type": "array",

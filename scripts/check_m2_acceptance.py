@@ -11,6 +11,7 @@ from jsonschema import Draft202012Validator
 
 import check_fixture_catalog as fixtures
 import check_m0_truthful_baseline as baseline
+import check_rejection_scenarios as rejection_scenarios
 from check_machine_readable_artifacts import quality_debt
 from validate_repository import check_applies
 
@@ -53,8 +54,20 @@ BUNDLE_PATHS = {
     "examples/contract_foundation/module_capability_cases.example.yaml",
     "examples/contract_foundation/legacy_example_representation_cases.example.json",
     "examples/contract_foundation/pattern_archetype_registry_cases.example.yaml",
+    "examples/contract_foundation/ability_semantic_cases.example.json",
+    "examples/contract_foundation/yaml_descriptor_cases.example.yaml",
+    "examples/contract_foundation/phase_9_representation_cases.example.json",
 }
 BUNDLE_METADATA = {
+    "examples/contract_foundation/phase_9_representation_cases.example.json": {
+        "artifact_type": "phase_9_representation_cases", "artifact_version": "1.0.0",
+    },
+    "examples/contract_foundation/ability_semantic_cases.example.json": {
+        "artifact_type": "ability_semantic_cases", "artifact_version": "1.0.0",
+    },
+    "examples/contract_foundation/yaml_descriptor_cases.example.yaml": {
+        "artifact_type": "yaml_descriptor_cases", "artifact_version": "1.0.0",
+    },
     "examples/contract_foundation/pattern_archetype_registry_cases.example.yaml": {
         "artifact_type": "pattern_archetype_registry_cases", "artifact_version": "1.0.0",
     },
@@ -76,6 +89,11 @@ def roadmap_definition_errors(roadmap: dict) -> list[str]:
 
 
 def fixture_units(root: Path, relative: str) -> list[str]:
+    if relative == "examples/player_runtime_state/invalid_player_state_rejection_cases.example.json":
+        document = fixtures.load_instance(root / relative)
+        if not isinstance(document, dict) or not isinstance(document.get("cases"), list) or not document["cases"]:
+            raise ValueError("Player rejection collection must contain individual case descriptions")
+        return [f"/cases/{index}" for index in range(len(document["cases"]))]
     if relative not in BUNDLE_PATHS:
         return [""]
     document = fixtures.load_instance(root / relative)
@@ -95,6 +113,24 @@ def fixture_units(root: Path, relative: str) -> list[str]:
     if not units:
         raise ValueError("Registered fixture bundle must contain at least one case")
     return sorted(units)
+
+
+def rejection_coverage(root: Path, paths: list[str], successful: list[dict],
+                       scenario_results: list[dict]) -> tuple[list[str], dict]:
+    """Require an executed rejection for each source description, independently of format acceptance."""
+    designated = [path for path in paths
+                  if "invalid" in Path(path).name.lower() or ".reject." in Path(path).name.lower()]
+    expected = {(path, pointer) for path in designated for pointer in fixture_units(root, path)}
+    witnessed = {(item["path"], item["instance_pointer"]) for item in successful
+                 if item["expected_result"] == "reject"}
+    witnessed.update((item["descriptor_path"], item.get("descriptor_unit_pointer", ""))
+                     for item in scenario_results if item["result"] == "reject")
+    missing = [{"path": path, "instance_pointer": pointer} for path, pointer in sorted(expected - witnessed)]
+    errors = [f"Rejection-designated units lack executed intended witnesses: {missing}"] if missing else []
+    return errors, {"expected_rejection_units": len(expected),
+                    "executed_rejection_units": len(expected & witnessed),
+                    "unwitnessed_rejection_units": missing,
+                    "unwitnessed_rejection_paths": sorted({item["path"] for item in missing})}
 
 
 def fixture_coverage(root: Path, paths: list[str], classification: dict,
@@ -217,13 +253,10 @@ def build_report(root: Path, repository_report: dict | None = None) -> dict:
         coverage_errors, coverage = fixture_coverage(root, paths, classification, catalog, results)
         successful_ids = {item["fixture_id"] for item in results}
         successful = [item for item in catalog["fixtures"] if item["fixture_id"] in successful_ids]
-        reject_errors = list(fixture_errors)
-        rejection_paths = [path for path in coverage["structured_fixture_paths"]
-                           if "invalid" in Path(path).name.lower() or ".reject." in Path(path).name.lower()]
-        executed_reject_paths = {item["path"] for item in successful if item["expected_result"] == "reject"}
-        unwitnessed = sorted(set(rejection_paths) - executed_reject_paths)
-        if unwitnessed:
-            reject_errors.append(f"Rejection-designated artifacts lack executed rejection witnesses: {unwitnessed}")
+        scenario_errors, scenario_results = rejection_scenarios.validation_errors(root)
+        reject_errors, rejection_evidence = rejection_coverage(
+            root, coverage["structured_fixture_paths"], successful, scenario_results)
+        reject_errors.extend(fixture_errors + scenario_errors)
         actual_debt = quality_debt(declarations, json_documents,
                                    {item["path"] for item in results} if not fixture_errors else set())
         debt_errors = []
@@ -237,7 +270,9 @@ def build_report(root: Path, repository_report: dict | None = None) -> dict:
             obligation("M2-C1", EXIT_CRITERIA[0], meta_errors, {"normative_schema_count": len(normative), "declared_schema_count": len(declarations)}),
             obligation("M2-C2", EXIT_CRITERIA[1], reference_errors, {"retrieval_policy": "deny_unknown_resources"}),
             obligation("M2-C3", EXIT_CRITERIA[2], coverage_errors, coverage),
-            obligation("M2-C4", EXIT_CRITERIA[3], reject_errors, {"executed_rejections": sum(item["expected_result"] == "reject" for item in successful), "unwitnessed_rejection_paths": unwitnessed}),
+            obligation("M2-C4", EXIT_CRITERIA[3], reject_errors,
+                       {**rejection_evidence, "executed_rejections": sum(item["expected_result"] == "reject" for item in successful),
+                        "executed_scenarios": len(scenario_results)}),
             obligation("M2-C5", EXIT_CRITERIA[4], debt_errors, actual_debt),
             obligation("M2-C6", EXIT_CRITERIA[5], evidence_errors,
                        {"scope": "schema resolution and remote Git retrieval denied; dependencies prepared before execution"}, repository_report is None),

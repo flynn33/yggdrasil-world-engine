@@ -303,6 +303,48 @@
       "roadmap_milestones": ["M0", "M10"],
       "contexts": ["pull_request"],
       "blocking": true
+    },
+    {
+      "id": "m2_yaml_descriptors",
+      "name": "YAML descriptor grammar and owned meta references",
+      "command": [
+        "{python}",
+        "scripts/check_yaml_descriptor_contracts.py",
+        "{root}"
+      ],
+      "groups": [
+        "m2",
+        "schema",
+        "conformance"
+      ],
+      "roadmap_milestones": [
+        "M2"
+      ],
+      "contexts": [
+        "always"
+      ],
+      "blocking": true
+    },
+    {
+      "id": "m2_rejection_scenarios",
+      "name": "Source-bound intended rejection scenarios",
+      "command": [
+        "{python}",
+        "scripts/check_rejection_scenarios.py",
+        "{root}"
+      ],
+      "groups": [
+        "m2",
+        "schema",
+        "conformance"
+      ],
+      "roadmap_milestones": [
+        "M2"
+      ],
+      "contexts": [
+        "always"
+      ],
+      "blocking": true
     }
   ]
 }

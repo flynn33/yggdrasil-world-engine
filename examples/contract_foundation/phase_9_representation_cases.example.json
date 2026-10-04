@@ -1,0 +1,76 @@
+{
+  "artifact_type": "phase_9_representation_cases",
+  "artifact_version": "1.0.0",
+  "description": "Source-backed compatibility witnesses for the eleven Phase 9 assertion corrections. Legacy nonempty strings remain accepted; new container and member emptiness stays available where no source restriction was specified. Numeric coefficients and terms carry no new ranges or required-member rules, and numeric Phi validation does not compute the formula.",
+  "positive": {
+    "axiom_diagnostic_packet.evaluated_axioms.legacy_string": "legacy.descriptive.value",
+    "axiom_diagnostic_packet.pressures.legacy_string": "legacy.descriptive.value",
+    "axiom_diagnostic_packet.recommended_kernel_actions.legacy_string": "legacy.descriptive.value",
+    "axiom_diagnostic_packet.stabilizers.legacy_string": "legacy.descriptive.value",
+    "axiom_diagnostic_packet.violations.legacy_string": "legacy.descriptive.value",
+    "existence_potential.coefficients.legacy_string": "legacy.descriptive.value",
+    "existence_potential.interpretation_notes.legacy_string": "legacy.descriptive.value",
+    "existence_potential.phi_value.legacy_string": "legacy.descriptive.value",
+    "existence_potential.term_values.legacy_string": "legacy.descriptive.value",
+    "branch_event.available_actions.legacy_string": "legacy.descriptive.value",
+    "branch_event.decision_context.legacy_string": "legacy.descriptive.value"
+  },
+  "boundary": {
+    "axiom_diagnostic_packet.evaluated_axioms.unspecified_empty_container": [],
+    "axiom_diagnostic_packet.evaluated_axioms.unspecified_empty_member": [
+      ""
+    ],
+    "axiom_diagnostic_packet.pressures.unspecified_empty_container": [],
+    "axiom_diagnostic_packet.pressures.unspecified_empty_member": [
+      ""
+    ],
+    "axiom_diagnostic_packet.recommended_kernel_actions.unspecified_empty_container": [],
+    "axiom_diagnostic_packet.recommended_kernel_actions.unspecified_empty_member": [
+      ""
+    ],
+    "axiom_diagnostic_packet.stabilizers.unspecified_empty_container": [],
+    "axiom_diagnostic_packet.stabilizers.unspecified_empty_member": [
+      ""
+    ],
+    "axiom_diagnostic_packet.violations.unspecified_empty_container": [],
+    "axiom_diagnostic_packet.violations.unspecified_empty_member": [
+      {}
+    ],
+    "existence_potential.coefficients.unspecified_empty_container": {},
+    "existence_potential.interpretation_notes.unspecified_empty_container": [],
+    "existence_potential.interpretation_notes.unspecified_empty_member": [
+      ""
+    ],
+    "existence_potential.phi_value.negative_numeric_phi": -1.0,
+    "existence_potential.term_values.unspecified_empty_container": {},
+    "branch_event.available_actions.unspecified_empty_container": [],
+    "branch_event.available_actions.unspecified_empty_member": [
+      ""
+    ],
+    "branch_event.decision_context.unspecified_empty_container": {}
+  },
+  "reject": {
+    "axiom_diagnostic_packet.evaluated_axioms.empty_legacy_string": "",
+    "axiom_diagnostic_packet.evaluated_axioms.wrong_type": null,
+    "axiom_diagnostic_packet.pressures.empty_legacy_string": "",
+    "axiom_diagnostic_packet.pressures.wrong_type": null,
+    "axiom_diagnostic_packet.recommended_kernel_actions.empty_legacy_string": "",
+    "axiom_diagnostic_packet.recommended_kernel_actions.wrong_type": null,
+    "axiom_diagnostic_packet.stabilizers.empty_legacy_string": "",
+    "axiom_diagnostic_packet.stabilizers.wrong_type": null,
+    "axiom_diagnostic_packet.violations.empty_legacy_string": "",
+    "axiom_diagnostic_packet.violations.wrong_type": null,
+    "existence_potential.coefficients.empty_legacy_string": "",
+    "existence_potential.coefficients.wrong_type": null,
+    "existence_potential.interpretation_notes.empty_legacy_string": "",
+    "existence_potential.interpretation_notes.wrong_type": null,
+    "existence_potential.phi_value.empty_legacy_string": "",
+    "existence_potential.phi_value.wrong_type": true,
+    "existence_potential.term_values.empty_legacy_string": "",
+    "existence_potential.term_values.wrong_type": null,
+    "branch_event.available_actions.empty_legacy_string": "",
+    "branch_event.available_actions.wrong_type": null,
+    "branch_event.decision_context.empty_legacy_string": "",
+    "branch_event.decision_context.wrong_type": null
+  }
+}

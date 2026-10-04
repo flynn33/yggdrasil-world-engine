@@ -151,6 +151,322 @@
         }
       },
       "additionalProperties": true
+    },
+    "AbilityNegativeDescription": {
+      "title": "Ability negative description",
+      "description": "Validates the historical rejection description format only. Executable subject assertions are separate and do not certify complete runtime behavior.",
+      "x-ywe-requirement-id": "YWE-REQ-0028",
+      "x-ywe-source-ref": "examples/ability_power_engine/invalid_ability_without_source_refs.example.json",
+      "type": "object",
+      "required": [
+        "invalid_example",
+        "reject_reason",
+        "candidate"
+      ],
+      "properties": {
+        "invalid_example": {
+          "const": true
+        },
+        "reject_reason": {
+          "type": "string"
+        },
+        "candidate": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "Phase12NegativeDescription": {
+      "title": "Phase 12 negative description",
+      "description": "Validates the historical rejection description format only. Executable subject assertions are separate and do not certify complete runtime behavior.",
+      "x-ywe-requirement-id": "YWE-REQ-0028",
+      "x-ywe-source-ref": "examples/phase_12_quest_npc_lore_generation/quest_generation/invalid_generic_random_quest_candidate.example.json",
+      "type": "object",
+      "required": [
+        "candidate_id",
+        "invalid_reason",
+        "should_fail_rules"
+      ],
+      "properties": {
+        "candidate_id": {
+          "type": "string"
+        },
+        "invalid_reason": {
+          "type": "string"
+        },
+        "should_fail_rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "Phase17NegativeDescription": {
+      "title": "Phase 17 negative description",
+      "description": "Validates the historical rejection description format only. Executable subject assertions are separate and do not certify complete runtime behavior.",
+      "x-ywe-requirement-id": "YWE-REQ-0029",
+      "x-ywe-source-ref": "examples/ravenfall_gate/phase_17/invalid_no_reward_packet_trace.reject.json",
+      "type": "object",
+      "required": [
+        "reject_reason"
+      ],
+      "properties": {
+        "reject_reason": {
+          "type": "string"
+        },
+        "invalid_pattern": {
+          "type": "string"
+        },
+        "invalid_terms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true,
+      "anyOf": [
+        {
+          "required": [
+            "invalid_pattern"
+          ]
+        },
+        {
+          "required": [
+            "invalid_terms"
+          ]
+        }
+      ]
+    },
+    "Phase16NegativeDescription": {
+      "title": "Phase 16 negative description",
+      "description": "Validates the historical rejection description format only. Executable subject assertions are separate and do not certify complete runtime behavior.",
+      "x-ywe-requirement-id": "YWE-REQ-0029",
+      "x-ywe-source-ref": "examples/vertical_slices/ravenfall_gate/invalid_static_location.example.json",
+      "type": "object",
+      "required": [
+        "schema_id",
+        "phase_id",
+        "slice_id",
+        "status",
+        "source_truth_refs",
+        "requires_phase_refs",
+        "invalid_reason",
+        "invalid_content",
+        "must_reject"
+      ],
+      "properties": {
+        "schema_id": {
+          "type": "string"
+        },
+        "phase_id": {
+          "type": "string"
+        },
+        "slice_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "source_truth_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requires_phase_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "invalid_reason": {
+          "type": "string"
+        },
+        "invalid_content": {
+          "type": [
+            "string",
+            "object"
+          ]
+        },
+        "must_reject": {
+          "const": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "PlayerNegativeCase": {
+      "title": "Player rejection case description",
+      "description": "Validates the historical rejection description format only. Executable subject assertions are separate and do not certify complete runtime behavior.",
+      "x-ywe-requirement-id": "YWE-REQ-0029",
+      "x-ywe-source-ref": "examples/player_runtime_state/invalid_player_state_rejection_cases.example.json",
+      "type": "object",
+      "required": [
+        "case_id",
+        "reason"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "PlayerNegativeCollection": {
+      "title": "Player rejection case collection",
+      "description": "Validates the historical rejection description format only. Executable subject assertions are separate and do not certify complete runtime behavior.",
+      "x-ywe-requirement-id": "YWE-REQ-0029",
+      "x-ywe-source-ref": "examples/player_runtime_state/invalid_player_state_rejection_cases.example.json",
+      "type": "object",
+      "required": [
+        "schema_id",
+        "cases"
+      ],
+      "properties": {
+        "schema_id": {
+          "type": "string"
+        },
+        "cases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlayerNegativeCase"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "WolfManifestationNegativeDescription": {
+      "title": "WolfManifestationNegativeDescription",
+      "description": "Format of the original negative example including its expected-reason annotation. Acceptance validates the description, not the invalid runtime operation. Source-bound scenario assertions execute the rejection separately.",
+      "x-ywe-requirement-id": "YWE-REQ-0029",
+      "x-ywe-source-ref": "examples/quest_reward_resolver/invalid_always_present_wolves.example.json",
+      "type": "object",
+      "required": [
+        "schema_id",
+        "version",
+        "manifestation_event_id",
+        "manifesting_companions",
+        "manifestation_trigger",
+        "manifestation_duration",
+        "allowed_functions",
+        "dismissal_condition",
+        "forbidden_interpretations",
+        "source_refs",
+        "validation_status",
+        "expected_rejection_reason"
+      ],
+      "properties": {
+        "schema_id": {
+          "const": "wolf_manifestation_event_schema"
+        },
+        "version": {
+          "type": "string"
+        },
+        "manifestation_event_id": {
+          "type": "string"
+        },
+        "manifesting_companions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manifestation_trigger": {
+          "type": "object"
+        },
+        "manifestation_duration": {
+          "type": "object"
+        },
+        "allowed_functions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dismissal_condition": {
+          "type": "string"
+        },
+        "forbidden_interpretations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validation_status": {
+          "type": "string"
+        },
+        "expected_rejection_reason": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "QuestRewardNegativeDescription": {
+      "title": "QuestRewardNegativeDescription",
+      "description": "Format of the original negative example including its expected-reason annotation. Acceptance validates the description, not the invalid runtime operation. Source-bound scenario assertions execute the rejection separately.",
+      "x-ywe-requirement-id": "YWE-REQ-0029",
+      "x-ywe-source-ref": "examples/quest_reward_resolver/invalid_reward_without_consequence_packet.example.json",
+      "type": "object",
+      "required": [
+        "schema_id",
+        "version",
+        "packet_id",
+        "quest_ref",
+        "resolution_mode",
+        "source_refs",
+        "consequence_resolution_packet_ref",
+        "reward_outputs",
+        "validation_status",
+        "expected_rejection_reason"
+      ],
+      "properties": {
+        "schema_id": {
+          "const": "quest_reward_resolution_packet_schema"
+        },
+        "version": {
+          "type": "string"
+        },
+        "packet_id": {
+          "type": "string"
+        },
+        "quest_ref": {
+          "type": "string"
+        },
+        "resolution_mode": {
+          "type": "string"
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "consequence_resolution_packet_ref": {
+          "type": "string"
+        },
+        "reward_outputs": {
+          "type": "object"
+        },
+        "validation_status": {
+          "type": "string"
+        },
+        "expected_rejection_reason": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
     }
   },
   "anyOf": [
@@ -162,6 +478,27 @@
     },
     {
       "$ref": "#/$defs/QuestAxiomPressurePreview"
+    },
+    {
+      "$ref": "#/$defs/AbilityNegativeDescription"
+    },
+    {
+      "$ref": "#/$defs/Phase12NegativeDescription"
+    },
+    {
+      "$ref": "#/$defs/Phase17NegativeDescription"
+    },
+    {
+      "$ref": "#/$defs/Phase16NegativeDescription"
+    },
+    {
+      "$ref": "#/$defs/PlayerNegativeCollection"
+    },
+    {
+      "$ref": "#/$defs/WolfManifestationNegativeDescription"
+    },
+    {
+      "$ref": "#/$defs/QuestRewardNegativeDescription"
     }
   ]
 }

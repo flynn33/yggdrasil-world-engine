@@ -1,0 +1,525 @@
+{
+  "artifact_type": "yaml_descriptor_case_expectations",
+  "artifact_version": "1.0.0",
+  "cases": [
+    {
+      "instance_pointer": "/positive/pattern_minimal",
+      "grammar": "pattern",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "instance_pointer": "/positive/module_minimal",
+      "grammar": "module",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "instance_pointer": "/boundary/pattern_open_annotations",
+      "grammar": "pattern",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "instance_pointer": "/boundary/pattern_empty_required_lists",
+      "grammar": "pattern",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "instance_pointer": "/boundary/pattern_inherited_required_member",
+      "grammar": "pattern",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "instance_pointer": "/boundary/pattern_forward_record_reference",
+      "grammar": "pattern",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "instance_pointer": "/boundary/module_open_metadata_empty_prose",
+      "grammar": "module",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "instance_pointer": "/boundary/module_union_spacing_and_order",
+      "grammar": "module",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "instance_pointer": "/boundary/module_supported_primitive_and_sequence_fields",
+      "grammar": "module",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "instance_pointer": "/reject/pattern_missing_version",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "schema_pointer": "/required",
+          "missing_properties": [
+            "version"
+          ]
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_missing_field_type",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "/schema/ArchetypeRecord/properties/name",
+          "schema_pointer": "/properties/schema/additionalProperties/properties/properties/additionalProperties/required",
+          "missing_properties": [
+            "type"
+          ]
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_unsupported_field_type",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/schema/ArchetypeRecord/properties/name/type",
+          "schema_pointer": "/properties/schema/additionalProperties/properties/properties/additionalProperties/properties/type/enum"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_empty_enum_declaration",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINITEMS",
+          "instance_pointer": "/enums/family",
+          "schema_pointer": "/properties/enums/additionalProperties/minItems"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_duplicate_enum_declaration",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_UNIQUEITEMS",
+          "instance_pointer": "/enums/family",
+          "schema_pointer": "/properties/enums/additionalProperties/uniqueItems"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_enum_missing_selector",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "/schema/ArchetypeRecord/properties/family",
+          "schema_pointer": "/properties/schema/additionalProperties/properties/properties/additionalProperties/allOf/0/then/required",
+          "missing_properties": [
+            "values_ref"
+          ]
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_list_conflicting_selectors",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_NOT",
+          "instance_pointer": "/schema/ArchetypeRecord/properties/realm",
+          "schema_pointer": "/properties/schema/additionalProperties/properties/properties/additionalProperties/allOf/1/then/oneOf/0/not"
+        },
+        {
+          "error_id": "JSON_SCHEMA_NOT",
+          "instance_pointer": "/schema/ArchetypeRecord/properties/realm",
+          "schema_pointer": "/properties/schema/additionalProperties/properties/properties/additionalProperties/allOf/1/then/oneOf/1/not"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_list_missing_selector",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "/schema/ArchetypeRecord/properties/realm",
+          "schema_pointer": "/properties/schema/additionalProperties/properties/properties/additionalProperties/allOf/1/then/oneOf/0/required",
+          "missing_properties": [
+            "items"
+          ]
+        },
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "/schema/ArchetypeRecord/properties/realm",
+          "schema_pointer": "/properties/schema/additionalProperties/properties/properties/additionalProperties/allOf/1/then/oneOf/1/required",
+          "missing_properties": [
+            "items_ref"
+          ]
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_fractional_minimum",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/schema/ClusterRecord/properties/members/min_items",
+          "schema_pointer": "/properties/schema/additionalProperties/properties/properties/additionalProperties/properties/min_items/type"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_negative_minimum",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINIMUM",
+          "instance_pointer": "/schema/ClusterRecord/properties/members/min_items",
+          "schema_pointer": "/properties/schema/additionalProperties/properties/properties/additionalProperties/properties/min_items/minimum"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_unknown_enum_reference",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "YAML_DESCRIPTOR_ENUM_REFERENCE",
+          "instance_pointer": "/schema/ArchetypeRecord/properties/family/values_ref",
+          "schema_pointer": "/x-ywe-semantic-rules/enum_reference"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_unknown_list_enum_reference",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "YAML_DESCRIPTOR_ENUM_REFERENCE",
+          "instance_pointer": "/schema/ArchetypeRecord/properties/realm/items_ref",
+          "schema_pointer": "/x-ywe-semantic-rules/enum_reference"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_unknown_registry_record_reference",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "YAML_DESCRIPTOR_RECORD_REFERENCE",
+          "instance_pointer": "/registry_shape/families/character/items_ref",
+          "schema_pointer": "/x-ywe-semantic-rules/record_reference"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_unknown_parent_record_reference",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "YAML_DESCRIPTOR_RECORD_REFERENCE",
+          "instance_pointer": "/schema/ClusterRecord/extends",
+          "schema_pointer": "/x-ywe-semantic-rules/record_reference"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_unknown_required_member",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "YAML_DESCRIPTOR_REQUIRED_MEMBER",
+          "instance_pointer": "/schema/ArchetypeRecord/required/0",
+          "schema_pointer": "/x-ywe-semantic-rules/required_name_membership"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_unknown_nested_required_member",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "YAML_DESCRIPTOR_REQUIRED_MEMBER",
+          "instance_pointer": "/schema/ArchetypeRecord/properties/attributes/required/0",
+          "schema_pointer": "/x-ywe-semantic-rules/required_name_membership"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_unknown_extension_required_member",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "YAML_DESCRIPTOR_REQUIRED_MEMBER",
+          "instance_pointer": "/schema/ClusterRecord/additional_required/0",
+          "schema_pointer": "/x-ywe-semantic-rules/required_name_membership"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_self_inheritance_cycle",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "YAML_DESCRIPTOR_INHERITANCE_CYCLE",
+          "instance_pointer": "/schema/ClusterRecord/extends",
+          "schema_pointer": "/x-ywe-semantic-rules/inheritance_cycle"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_two_record_inheritance_cycle",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "YAML_DESCRIPTOR_INHERITANCE_CYCLE",
+          "instance_pointer": "/schema/ArchetypeRecord/extends",
+          "schema_pointer": "/x-ywe-semantic-rules/inheritance_cycle"
+        },
+        {
+          "error_id": "YAML_DESCRIPTOR_INHERITANCE_CYCLE",
+          "instance_pointer": "/schema/ClusterRecord/extends",
+          "schema_pointer": "/x-ywe-semantic-rules/inheritance_cycle"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/pattern_seed_registry_wrong_type",
+      "grammar": "pattern",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/seed_registry/registry_version",
+          "schema_pointer": "/properties/seed_registry/properties/registry_version/type"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/module_missing_classifications",
+      "grammar": "module",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "schema_pointer": "/required",
+          "missing_properties": [
+            "classification_enums"
+          ]
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/module_missing_doctrine",
+      "grammar": "module",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "/meta",
+          "schema_pointer": "/properties/meta/required",
+          "missing_properties": [
+            "doctrine"
+          ]
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/module_missing_manifest_declaration",
+      "grammar": "module",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "/core_schema",
+          "schema_pointer": "/properties/core_schema/required",
+          "missing_properties": [
+            "ModuleCapabilityManifest"
+          ]
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/module_unsupported_primitive",
+      "grammar": "module",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_PATTERN",
+          "instance_pointer": "/core_schema/ModuleCapabilityManifest/enabled",
+          "schema_pointer": "/properties/core_schema/properties/ModuleCapabilityManifest/allOf/0/additionalProperties/oneOf/0/pattern"
+        },
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/core_schema/ModuleCapabilityManifest/enabled",
+          "schema_pointer": "/properties/core_schema/properties/ModuleCapabilityManifest/allOf/0/additionalProperties/oneOf/1/type"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/module_empty_list_template",
+      "grammar": "module",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINITEMS",
+          "instance_pointer": "/core_schema/ModuleCapabilityManifest/provides_capabilities",
+          "schema_pointer": "/properties/core_schema/properties/ModuleCapabilityManifest/allOf/0/additionalProperties/oneOf/1/minItems"
+        },
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/core_schema/ModuleCapabilityManifest/provides_capabilities",
+          "schema_pointer": "/properties/core_schema/properties/ModuleCapabilityManifest/allOf/0/additionalProperties/oneOf/0/type"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/module_multiple_list_templates",
+      "grammar": "module",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MAXITEMS",
+          "instance_pointer": "/core_schema/ModuleCapabilityManifest/provides_capabilities",
+          "schema_pointer": "/properties/core_schema/properties/ModuleCapabilityManifest/allOf/0/additionalProperties/oneOf/1/maxItems"
+        },
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/core_schema/ModuleCapabilityManifest/provides_capabilities",
+          "schema_pointer": "/properties/core_schema/properties/ModuleCapabilityManifest/allOf/0/additionalProperties/oneOf/0/type"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/module_unsupported_nested_primitive",
+      "grammar": "module",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/core_schema/ModuleCapabilityManifest/provides_capabilities/0",
+          "schema_pointer": "/properties/core_schema/properties/ModuleCapabilityManifest/allOf/0/additionalProperties/oneOf/1/items/oneOf/0/enum"
+        },
+        {
+          "error_id": "JSON_SCHEMA_PATTERN",
+          "instance_pointer": "/core_schema/ModuleCapabilityManifest/provides_capabilities/0/capability_id",
+          "schema_pointer": "/properties/core_schema/properties/ModuleCapabilityManifest/allOf/0/additionalProperties/oneOf/1/items/oneOf/1/additionalProperties/oneOf/0/pattern"
+        },
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/core_schema/ModuleCapabilityManifest/provides_capabilities",
+          "schema_pointer": "/properties/core_schema/properties/ModuleCapabilityManifest/allOf/0/additionalProperties/oneOf/0/type"
+        },
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/core_schema/ModuleCapabilityManifest/provides_capabilities/0/capability_id",
+          "schema_pointer": "/properties/core_schema/properties/ModuleCapabilityManifest/allOf/0/additionalProperties/oneOf/1/items/oneOf/1/additionalProperties/oneOf/1/type"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/module_missing_inline_enum_surface",
+      "grammar": "module",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "YAML_DESCRIPTOR_ENUM_REFERENCE",
+          "instance_pointer": "/core_schema/ModuleCapabilityManifest/requires_capabilities/0/dependency_strength",
+          "schema_pointer": "/x-ywe-semantic-rules/enum_reference"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/module_inconsistent_inline_enum",
+      "grammar": "module",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "YAML_DESCRIPTOR_INLINE_ENUM",
+          "instance_pointer": "/core_schema/ModuleCapabilityManifest/module_classification",
+          "schema_pointer": "/x-ywe-semantic-rules/inline_enum_consistency"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/module_duplicate_inline_enum",
+      "grammar": "module",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "YAML_DESCRIPTOR_INLINE_ENUM",
+          "instance_pointer": "/core_schema/ModuleCapabilityManifest/module_classification",
+          "schema_pointer": "/x-ywe-semantic-rules/inline_enum_consistency"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/module_unknown_required_member",
+      "grammar": "module",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "YAML_DESCRIPTOR_REQUIRED_MEMBER",
+          "instance_pointer": "/canonical_validation_rules/required_fields/0",
+          "schema_pointer": "/x-ywe-semantic-rules/required_name_membership"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/module_empty_enum_declaration",
+      "grammar": "module",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINITEMS",
+          "instance_pointer": "/classification_enums/module_classification",
+          "schema_pointer": "/properties/classification_enums/additionalProperties/minItems"
+        }
+      ]
+    },
+    {
+      "instance_pointer": "/reject/module_wrong_doctrine_type",
+      "grammar": "module",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/meta/doctrine",
+          "schema_pointer": "/properties/meta/properties/doctrine/type"
+        }
+      ]
+    }
+  ]
+}

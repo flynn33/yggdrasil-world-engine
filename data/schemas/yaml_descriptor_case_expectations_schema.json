@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/yaml_descriptor_case_expectations_schema.json",
+  "title": "YAML Descriptor Case Expectations",
+  "x-ywe-requirement-id": "YWE-REQ-0027",
+  "type": "object",
+  "required": [
+    "artifact_type",
+    "artifact_version",
+    "cases"
+  ],
+  "properties": {
+    "artifact_type": {
+      "const": "yaml_descriptor_case_expectations"
+    },
+    "artifact_version": {
+      "const": "1.0.0"
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "instance_pointer",
+          "grammar",
+          "expected_result",
+          "expected_errors"
+        ],
+        "properties": {
+          "instance_pointer": {
+            "type": "string",
+            "pattern": "^/(?:positive|boundary|reject)/[^/]+$"
+          },
+          "grammar": {
+            "enum": [
+              "pattern",
+              "module"
+            ]
+          },
+          "expected_result": {
+            "enum": [
+              "accept",
+              "reject"
+            ]
+          },
+          "expected_errors": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/$defs/error"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "expected_result": {
+                  "const": "accept"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "expected_errors": {
+                  "maxItems": 0
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "expected_errors": {
+                  "minItems": 1
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "error": {
+      "type": "object",
+      "required": [
+        "error_id",
+        "instance_pointer",
+        "schema_pointer"
+      ],
+      "properties": {
+        "error_id": {
+          "type": "string",
+          "pattern": "^(?:JSON_SCHEMA_[A-Z]+|YAML_DESCRIPTOR_[A-Z_]+)$"
+        },
+        "instance_pointer": {
+          "type": "string",
+          "pattern": "^(?:/(?:[^~]|~[01])*)*$"
+        },
+        "schema_pointer": {
+          "type": "string",
+          "pattern": "^(?:/(?:[^~]|~[01])*)*$"
+        },
+        "missing_properties": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "error_id": {
+                "const": "JSON_SCHEMA_REQUIRED"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "missing_properties"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

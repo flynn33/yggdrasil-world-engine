@@ -13,14 +13,14 @@
   "schema_debt_subledger": {
     "path": "data/validation/schema_quality_baseline.json",
     "hash_algorithm": "sha256_utf8_lf_normalized",
-    "sha256": "a0f00e3b047836ea7b7c0004de1ed38259c1faa06eeab45acd2a333ecdc4a252",
-    "category_occurrence_count": 13,
-    "unique_path_count": 13,
+    "sha256": "2795366f1aab08077647cc600441166dd90d7cbcccca2f236956589f51c5058b",
+    "category_occurrence_count": 0,
+    "unique_path_count": 0,
     "counts_by_category": {
       "declared_schema_missing_id": 0,
       "annotation_only_schema_documents": 0,
       "schema_named_json_without_schema_declaration": 0,
-      "unbound_json_examples": 13
+      "unbound_json_examples": 0
     }
   },
   "debts": [
@@ -29,7 +29,7 @@
       "category": "schema_quality_subledger",
       "title": "Existing schema-quality debt",
       "description": "The linked schema-quality baseline ratchets known schema and fixture debt without duplicating its path lists in this inventory.",
-      "status": "open",
+      "status": "resolved",
       "source_refs": [
         {
           "kind": "repository_path",
@@ -43,7 +43,13 @@
       "ratchet_key": "schema_quality:subledger",
       "introduced_baseline": "2.0.23",
       "resolution_criteria": "All four known-debt categories are empty and the M2 fixture catalog and offline schema-resolution gates pass.",
-      "resolution_evidence": []
+      "resolution_evidence": [
+        "data/validation/schema_quality_baseline.json",
+        "data/validation/fixture_catalog.json",
+        "data/validation/contract_catalog.json",
+        "scripts/check_fixture_catalog.py",
+        "docs/project/m2_fixture_validation.md"
+      ]
     },
     {
       "debt_id": "QD-PH-505f98a09bce",
@@ -2021,8 +2027,8 @@
   ],
   "summary": {
     "total": 81,
-    "open": 60,
-    "resolved": 20,
+    "open": 59,
+    "resolved": 21,
     "accepted_exception": 1,
     "by_milestone": {
       "M0": 11,
