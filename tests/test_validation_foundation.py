@@ -215,6 +215,100 @@ class RoadmapValidationTests(unittest.TestCase):
         self.assertTrue(any("acceptance evidence" in error.lower() for error in errors))
 
 
+class PlayerRuntimeReferencePolicyTests(unittest.TestCase):
+    def setUp(self):
+        self.spec = json.loads(
+            (ROOT / "data/validation/check_no_platform_runtime_code_phase_10.spec.json").read_text(
+                encoding="utf-8-sig"
+            )
+        )
+
+    def check_added(self, paths, spec=None):
+        errors = []
+        with mock.patch.object(
+            player_runtime_check, "git_change_paths", return_value=[("A", path) for path in paths]
+        ):
+            player_runtime_check.check_no_platform_code(ROOT, self.spec if spec is None else spec, errors)
+        return errors
+
+    def test_reviewed_m3_reference_and_verification_sources_are_allowed(self):
+        self.assertEqual([], self.check_added([
+            "core/ash_pattern_engine/state_model.py",
+            "core/ash_pattern_engine/state_values.py",
+            "tests/test_m3_state_model.py",
+            "tests/test_platform_agnosticism.py",
+            "tests/test_ywe_package_acceptance_loading.py",
+        ]))
+
+    def test_neighboring_runtime_native_and_unreviewed_tool_paths_remain_forbidden(self):
+        paths = [
+            "core/ash_pattern_engine/state_runtime.py",
+            "core/ash_pattern_engine/state_model/runtime.py",
+            "platform/runtime_adapter.py",
+            "platform/runtime_adapter.PY",
+            "platform/runtime_adapter.cpp",
+            "platform/runtime_adapter.CPP",
+            "platform/runtime_adapter.cs",
+            "scripts/unreviewed_runtime.py",
+            "tests/test_unreviewed_runtime.py",
+        ]
+        self.assertEqual(
+            [f"Phase 10 added forbidden platform/code file: {path}" for path in paths],
+            self.check_added(paths),
+        )
+
+    def test_missing_local_reference_approval_does_not_inherit_the_platform_allowlist(self):
+        spec = copy.deepcopy(self.spec)
+        del spec["allowed_reference_paths"]
+        paths = ["core/ash_pattern_engine/state_model.py", "core/ash_pattern_engine/state_values.py"]
+        self.assertEqual(
+            [f"Phase 10 added forbidden platform/code file: {path}" for path in paths],
+            self.check_added(paths, spec),
+        )
+
+    def test_unapproved_reference_cannot_be_authorized_only_by_the_phase10_spec(self):
+        spec = copy.deepcopy(self.spec)
+        path = "core/ash_pattern_engine/state_runtime.py"
+        spec["allowed_reference_paths"].append(path)
+        errors = self.check_added([path], spec)
+        self.assertIn(f"Phase 10 allowed_reference_paths contains an unapproved Python role/path: {path}", errors)
+        self.assertIn(f"Phase 10 added forbidden platform/code file: {path}", errors)
+
+    def test_reference_source_cannot_masquerade_as_repository_tooling(self):
+        spec = copy.deepcopy(self.spec)
+        path = "core/ash_pattern_engine/state_model.py"
+        spec["allowed_reference_paths"] = []
+        spec["allowed_added_paths"].append(path)
+        errors = self.check_added([path], spec)
+        self.assertIn(f"Phase 10 allowed_added_paths contains an unapproved Python role/path: {path}", errors)
+        self.assertIn(f"Phase 10 added forbidden platform/code file: {path}", errors)
+
+    def test_native_file_cannot_masquerade_as_an_approved_python_exception(self):
+        for field in ("allowed_added_paths", "allowed_reference_paths"):
+            with self.subTest(field=field):
+                spec = copy.deepcopy(self.spec)
+                path = "scripts/reviewed_runtime.cpp"
+                spec[field].append(path)
+                errors = self.check_added([path], spec)
+                self.assertIn(f"Phase 10 {field} contains an unapproved Python role/path: {path}", errors)
+                self.assertIn(f"Phase 10 added forbidden platform/code file: {path}", errors)
+
+    def test_path_aliases_and_malformed_exception_inventory_fail_closed(self):
+        for value in ("scripts/../platform/runtime.py", "scripts//check_fixture_catalog.py", "scripts\\check_fixture_catalog.py"):
+            with self.subTest(path=value):
+                spec = copy.deepcopy(self.spec)
+                spec["allowed_added_paths"].append(value)
+                self.assertTrue(any("unapproved Python role/path" in error for error in self.check_added([], spec)))
+        for field in ("allowed_added_paths", "allowed_reference_paths"):
+            with self.subTest(field=field):
+                spec = copy.deepcopy(self.spec)
+                spec[field] = "core/ash_pattern_engine/state_model.py"
+                self.assertIn(
+                    f"Phase 10 {field} must be an explicit list of reviewed Python paths.",
+                    self.check_added([], spec),
+                )
+
+
 class MachineArtifactTests(unittest.TestCase):
     def test_quality_debt_classifies_missing_identifier_and_annotations(self):
         documents = {

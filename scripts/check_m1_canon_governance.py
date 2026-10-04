@@ -1846,7 +1846,9 @@ class _IdentityPackageFinder(importlib.abc.MetaPathFinder):
             source = selected.with_suffix(".py")
             locations = None
         else:
-            return None
+            raise ModuleNotFoundError(
+                f"Selected canonical package has no source for {fullname}", name=fullname
+            )
         return importlib.util.spec_from_file_location(
             fullname, source, loader=_IdentitySourceLoader(fullname, str(source)),
             submodule_search_locations=locations,

@@ -12,7 +12,11 @@
     ".ts",
     ".py"
   ],
-  "allowed_exception": "repository_check_scripts_only_if_explicitly_requested",
+  "allowed_exception": "explicitly_reviewed_repository_validation_tools_and_python_reference_oracles_only",
+  "allowed_reference_paths": [
+    "core/ash_pattern_engine/state_model.py",
+    "core/ash_pattern_engine/state_values.py"
+  ],
   "allowed_added_paths": [
     "scripts/check_fixture_catalog.py",
     "scripts/check_governance_contracts.py",
@@ -52,7 +56,10 @@
     "scripts/check_m2_validation_methods.py",
     "tests/test_m2_validation_methods.py",
     "scripts/check_m2_historical_acceptance.py",
-    "tests/test_m2_historical_acceptance.py"
+    "tests/test_m2_historical_acceptance.py",
+    "tests/test_m3_state_model.py",
+    "tests/test_platform_agnosticism.py",
+    "tests/test_ywe_package_acceptance_loading.py"
   ],
   "severity": "block"
 }

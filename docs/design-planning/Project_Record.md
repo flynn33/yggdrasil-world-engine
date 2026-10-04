@@ -506,6 +506,14 @@ Reference-module integration requires selected-root package loading for M1's
 identity check and two exact platform-guard reference-path approvals. Broader Core
 runtime paths stay denied. M2's immutable evidence pair is preserved verbatim.
 
+The first frozen full run passed 769 unit tests and 34 of 36 repository checks;
+package acceptance still loaded the facade as a standalone file, and Phase 10's
+exact added-path policy rejected the new reference/test sources. Both boundaries
+now recognize the adopted reference package through scoped source loading and
+exact reviewed Python roles. Loader regressions also reproduce and reject stale
+and source-less bytecode without changing mathematical assertions. A new frozen
+full execution is required for these subsequent integration corrections.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`

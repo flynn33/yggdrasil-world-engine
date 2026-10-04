@@ -690,6 +690,17 @@ class ExecutableIdentityLoadingTests(unittest.TestCase):
             errors = self.assert_isolated_check(root)
             assert_error_contains(self, errors, "does not equal")
 
+    def test_missing_selected_source_cannot_fall_back_to_source_less_bytecode(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            package = self.write_package(root)
+            source = package / "identity_impl.py"
+            py_compile.compile(str(source), cfile=str(package / "identity_impl.pyc"), doraise=True)
+            source.unlink()
+            errors = self.assert_isolated_check(root)
+            assert_error_contains(self, errors, "interface raised an error")
+            assert_error_contains(self, errors, "no source")
+
     def test_failed_package_load_removes_eager_children_and_private_finder(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

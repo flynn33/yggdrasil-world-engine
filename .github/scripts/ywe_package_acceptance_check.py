@@ -3,13 +3,18 @@
 
 from __future__ import annotations
 
+import importlib
+import importlib.abc
+import importlib.machinery
 import importlib.util
 import itertools
 import json
 import re
 import subprocess
 import sys
+from contextlib import contextmanager
 from pathlib import Path
+from uuid import uuid4
 
 TEXT_ENCODING = "utf-8-sig"
 
@@ -122,15 +127,76 @@ def find_pattern(root: Path, patterns: list[re.Pattern[str]]) -> list[str]:
     return hits
 
 
+_ASH_PACKAGE_PREFIX = "_ywe_package_acceptance_"
+
+
+class _AshSourceLoader(importlib.machinery.SourceFileLoader):
+    """Check the selected source bytes without reading or writing bytecode."""
+
+    def get_code(self, fullname: str):
+        return self.source_to_code(self.get_data(self.path), self.path)
+
+
+class _AshPackageFinder(importlib.abc.MetaPathFinder):
+    def __init__(self, package_name: str, package_root: Path):
+        self.package_name = package_name
+        self.package_root = package_root
+
+    def find_spec(self, fullname: str, path=None, target=None):
+        prefix = self.package_name + "."
+        if not fullname.startswith(prefix):
+            return None
+        selected = self.package_root.joinpath(*fullname[len(prefix):].split("."))
+        initializer = selected / "__init__.py"
+        if initializer.is_file():
+            source = initializer
+            locations = [str(selected)]
+        elif selected.with_suffix(".py").is_file():
+            source = selected.with_suffix(".py")
+            locations = None
+        else:
+            raise ModuleNotFoundError(
+                f"Selected ASH package has no source for {fullname}", name=fullname
+            )
+        return importlib.util.spec_from_file_location(
+            fullname, source, loader=_AshSourceLoader(fullname, str(source)),
+            submodule_search_locations=locations,
+        )
+
+
+@contextmanager
 def import_ash(root: Path):
-    module_path = root / "core" / "ash_pattern_engine" / "ash_canonical.py"
-    spec = importlib.util.spec_from_file_location("ash_canonical", module_path)
-    if spec is None or spec.loader is None:
-        raise RuntimeError("Unable to import ash_canonical.py")
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
-    return module
+    package_root = root / "core" / "ash_pattern_engine"
+    initializer = package_root / "__init__.py"
+    package_name = _ASH_PACKAGE_PREFIX + uuid4().hex
+    finder = _AshPackageFinder(package_name, package_root)
+    sys.meta_path.insert(0, finder)
+    try:
+        if initializer.is_file():
+            source = initializer
+            locations = [str(package_root)]
+        else:
+            # Historical packages supplied the facade as a standalone source.
+            source = package_root / "ash_canonical.py"
+            locations = None
+        spec = importlib.util.spec_from_file_location(
+            package_name, source, loader=_AshSourceLoader(package_name, str(source)),
+            submodule_search_locations=locations,
+        )
+        if spec is None or spec.loader is None:
+            raise RuntimeError("Unable to import ash_canonical.py")
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[package_name] = module
+        spec.loader.exec_module(module)
+        if locations is not None:
+            module = importlib.import_module(package_name + ".ash_canonical")
+        yield module
+    finally:
+        # Lazy relative imports need the namespace until every assertion finishes.
+        for name in tuple(sys.modules):
+            if name == package_name or name.startswith(package_name + "."):
+                sys.modules.pop(name, None)
+        sys.meta_path[:] = [entry for entry in sys.meta_path if entry is not finder]
 
 
 def xor_bits(left, right):
@@ -187,50 +253,50 @@ def test_rejects_parity_control_bit_baseline(root: Path, sink: FailureSink) -> N
 
 
 def test_codeword_set_exactly_16(root: Path, sink: FailureSink) -> None:
-    ash = import_ash(root)
-    codewords = tuple(tuple(c) for c in ash.CANONICAL_CODEWORDS)
-    sink.require(getattr(ash, "ASH_STATE_BITS", None) == 9, "ASH_STATE_BITS must be 9")
-    sink.require(codewords == EXPECTED_CODEWORDS, "Canonical codeword set must match the locked 16-member set exactly")
-    sink.require(len(codewords) == 16, "Canonical codeword set must contain exactly 16 members")
-    sink.require(len(set(codewords)) == 16, "Canonical codeword set must not contain duplicates")
-    sink.require(all(len(codeword) == 9 for codeword in codewords), "Every codeword must be a full 9-bit vector")
-    sink.require(all(bit in (0, 1) for codeword in codewords for bit in codeword), "Every codeword coordinate must be in F2")
-    codeword_set = set(codewords)
-    for left in codewords:
-        for right in codewords:
-            sink.require(xor_bits(left, right) in codeword_set, "Canonical codeword set must be closed under XOR")
-    orbits = {ash.orbit_id(state) for state in itertools.product((0, 1), repeat=9)}
-    sink.require(len(orbits) == 32, "F2^9 quotient by canonical codeword set must produce 32 orbits")
+    with import_ash(root) as ash:
+        codewords = tuple(tuple(c) for c in ash.CANONICAL_CODEWORDS)
+        sink.require(getattr(ash, "ASH_STATE_BITS", None) == 9, "ASH_STATE_BITS must be 9")
+        sink.require(codewords == EXPECTED_CODEWORDS, "Canonical codeword set must match the locked 16-member set exactly")
+        sink.require(len(codewords) == 16, "Canonical codeword set must contain exactly 16 members")
+        sink.require(len(set(codewords)) == 16, "Canonical codeword set must not contain duplicates")
+        sink.require(all(len(codeword) == 9 for codeword in codewords), "Every codeword must be a full 9-bit vector")
+        sink.require(all(bit in (0, 1) for codeword in codewords for bit in codeword), "Every codeword coordinate must be in F2")
+        codeword_set = set(codewords)
+        for left in codewords:
+            for right in codewords:
+                sink.require(xor_bits(left, right) in codeword_set, "Canonical codeword set must be closed under XOR")
+        orbits = {ash.orbit_id(state) for state in itertools.product((0, 1), repeat=9)}
+        sink.require(len(orbits) == 32, "F2^9 quotient by canonical codeword set must produce 32 orbits")
 
 
 def test_transition_is_full_state_xor(root: Path, sink: FailureSink) -> None:
-    ash = import_ash(root)
-    state = (1, 0, 1, 0, 1, 0, 1, 0, 1)
-    codeword = EXPECTED_CODEWORDS[5]
-    expected = xor_bits(state, codeword)
-    transformed = ash.transform_state(state, codeword)
-    sink.require(tuple(transformed.bits) == expected, "transform_state must apply full 9-coordinate XOR")
-    restored = ash.transform_state(transformed.bits, codeword)
-    sink.require(tuple(restored.bits) == state, "Applying the same codeword twice must restore the source state")
-    for bad_state, bad_codeword, message in (
-        ((1, 0, 1), codeword, "non-9-bit state must be rejected"),
-        (state, (1, 0, 0, 0, 0, 0, 0, 0, 1), "non-codeword transition must be rejected"),
-    ):
-        try:
-            ash.transform_state(bad_state, bad_codeword)
-        except ValueError:
-            continue
-        sink.require(False, message)
+    with import_ash(root) as ash:
+        state = (1, 0, 1, 0, 1, 0, 1, 0, 1)
+        codeword = EXPECTED_CODEWORDS[5]
+        expected = xor_bits(state, codeword)
+        transformed = ash.transform_state(state, codeword)
+        sink.require(tuple(transformed.bits) == expected, "transform_state must apply full 9-coordinate XOR")
+        restored = ash.transform_state(transformed.bits, codeword)
+        sink.require(tuple(restored.bits) == state, "Applying the same codeword twice must restore the source state")
+        for bad_state, bad_codeword, message in (
+            ((1, 0, 1), codeword, "non-9-bit state must be rejected"),
+            (state, (1, 0, 0, 0, 0, 0, 0, 0, 1), "non-codeword transition must be rejected"),
+        ):
+            try:
+                ash.transform_state(bad_state, bad_codeword)
+            except ValueError:
+                continue
+            sink.require(False, message)
 
 
 def test_all_generation_requires_cosmic_pattern_snapshot(root: Path, sink: FailureSink) -> None:
     contract = load_contract(root)
     for system in contract["systems"]:
         require_markers(root, sink, system["paths"], ["CosmicPatternSnapshot"])
-    ash = import_ash(root)
-    snapshot = ash.build_cosmic_pattern_snapshot("000000100", [EXPECTED_CODEWORDS[1]])
-    for key in ("source_orbit_id", "active_codeword_sequence", "diagnostic_ref", "generation_plan_ref"):
-        sink.require(key in snapshot, f"CosmicPatternSnapshot runtime output missing {key}")
+    with import_ash(root) as ash:
+        snapshot = ash.build_cosmic_pattern_snapshot("000000100", [EXPECTED_CODEWORDS[1]])
+        for key in ("source_orbit_id", "active_codeword_sequence", "diagnostic_ref", "generation_plan_ref"):
+            sink.require(key in snapshot, f"CosmicPatternSnapshot runtime output missing {key}")
 
 
 def test_all_generation_requires_diagnostic_envelope(root: Path, sink: FailureSink) -> None:

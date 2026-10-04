@@ -7,8 +7,10 @@ import json
 import os
 import subprocess
 import sys
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
+
+from check_platform_agnosticism import APPROVED_REFERENCE_SOURCES
 
 TEXT_ENCODING = "utf-8-sig"
 REQUIRED_ARTIFACTS = "data/validation/required_phase_10_artifacts.json"
@@ -298,16 +300,46 @@ def git_change_paths(root: Path, errors: list[str]) -> list[tuple[str, str]]:
     return [(status, path) for path, status in paths.items()]
 
 
+def reviewed_python_exceptions(spec: dict[str, Any], errors: list[str]) -> set[str]:
+    allowed: set[str] = set()
+    for field in ("allowed_added_paths", "allowed_reference_paths"):
+        configured = spec.get(field, [])
+        if not isinstance(configured, list):
+            errors.append(f"Phase 10 {field} must be an explicit list of reviewed Python paths.")
+            continue
+        for value in configured:
+            if not isinstance(value, str):
+                errors.append(f"Phase 10 {field} contains a non-string path.")
+                continue
+            path = PurePosixPath(value)
+            canonical = (
+                path.as_posix() == value
+                and not path.is_absolute()
+                and ".." not in path.parts
+                and "\\" not in value
+                and path.suffix == ".py"
+            )
+            if field == "allowed_reference_paths":
+                approved = canonical and value in APPROVED_REFERENCE_SOURCES
+            else:
+                approved = canonical and value.startswith(("scripts/", "tests/", ".github/scripts/"))
+            if not approved:
+                errors.append(f"Phase 10 {field} contains an unapproved Python role/path: {value}")
+                continue
+            allowed.add(value)
+    return allowed
+
+
 def check_no_platform_code(root: Path, spec: dict[str, Any], errors: list[str]) -> None:
     forbidden_extensions = set(spec.get("forbidden_extensions", []))
-    allowed_added_paths = set(spec.get("allowed_added_paths", []))
+    allowed_added_paths = reviewed_python_exceptions(spec, errors)
     for status, rel_path in git_change_paths(root, errors):
         is_added = status.startswith("A")
         if not is_added:
             continue
         if rel_path in allowed_added_paths:
             continue
-        suffix = Path(rel_path).suffix
+        suffix = Path(rel_path).suffix.lower()
         if suffix in forbidden_extensions:
             errors.append(f"Phase 10 added forbidden platform/code file: {rel_path}")
 
