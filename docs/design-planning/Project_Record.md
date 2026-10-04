@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-21
+**Revision:** planning-22
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-20; full history remains in Git.
+**Supersedes:** planning-21; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -80,13 +80,23 @@ M2's six criteria and eight deliverables are discharged by the exact immutable
 acceptance pair and its executed historical evaluator. Original failed candidate
 reports and earlier partial checkpoints below remain historical evidence.
 
-The first bounded M3 slice reviews construction-valid immutable ASH values,
-explicit validity profiles, complete diagnostics, source-ordered contextual
-classification and their compatibility boundary. Adopt reviewed contracts and
-register requirement/decision ownership before implementation. Diagnosis-only
-legacy calls must not invent correction/fallback or lifecycle facts. Preserve all
-512 state identities, fixed codewords, aliases and pinned source history.
+The first bounded M3 StateModel slice is implemented under adopted
+YWE-REQ-0039 / ADR-0029. Immutable values own exact construction and packet
+invariants; StateModel owns bounded decoding, profile-based diagnosis, source-ordered
+contextual classification and its acknowledged diagnostic prefix. The legacy
+facade, snapshot and planner use diagnosis-only records, preserving all 512
+identities, fixed codewords and lossless aliases. Source/profile verification for
+this reference assembly occurs during adoption and publication checks; constructors
+compare immutable reviewed pins without claiming a fresh source load. Production
+and native/platform assembly remain deferred.
 
+Independent tests execute all 1,536 profile/state combinations and 64 classifier
+cases, original identity tests, 8,192 codeword transforms, hostile input boundaries,
+retained capture/evidence failures, twenty separately authored packet fixtures and
+59 structural mutations with exact keyword/location witnesses. Normal repository
+integration additionally checks isolated selected-root identity loading and the
+exact approved reference paths. These are bounded reference/format checks, not
+M3 acceptance or implemented recovery.
 Subsequent M3 work includes actual normalization, recovery, fallback, containment,
 safe halt, deterministic generation, serialization, lifecycle and resource bounds.
 Maintain the M2 catalogs, intended rejection correspondence, permanent migration
@@ -473,6 +483,26 @@ The referenced immutable record and document are the exact source for executed
 suite counts, tool versions, implementation identity and acceptance judgments.
 No later dirty-tree or selected-check report replaces that original evidence.
 
+## 8h. First M3 StateModel reference slice
+
+The assessment contract was adopted before implementation, with YWE-REQ-0039
+and ADR-0029 appended while preserving prior registered records. The new separate
+packet schema does not replace either accepted M2 diagnostic format. Its twenty
+independently authored accepted format fixtures have exact catalog pointers and
+requirement identities; fixture acceptance includes valid serialized failure
+outcomes and does not assert recovery success.
+
+Review reproduced a metaclass equality hook through tuple membership in type
+guards; identity-only guards now avoid that hook. Constructor-to-wire review also
+removed an unsupported assumption that every truncated string prefix implies an
+original length above 64, and aligned one-line summary separators. The three early
+wire-test failures used the wrong closure keyword; corrected tests require the
+actual unevaluatedProperties rejection at the intended instance location.
+
+Reference-module integration requires selected-root package loading for M1's
+identity check and two exact platform-guard reference-path approvals. Broader Core
+runtime paths stay denied. M2's immutable evidence pair is preserved verbatim.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -483,22 +513,22 @@ The containing commit is the authoritative save point.
 
 ## 10. Checkpoint
 
-**Current step:** M3 contract review and first bounded StateModel/reference-oracle
-slice. M2 is accepted with its exact immutable evidence pair.
+**Current step:** Verify and publish the first M3 StateModel/reference-oracle
+slice, then implement semantic normalization under its reviewed contract.
+M2 remains accepted; M3 remains in progress.
 
-**Completed:** M2's schema profile/offline resolver, classified format bindings,
-governed intended rejections, source-bound validation operations, eight executed
-methods, clean offline execution and durable historical acceptance.
+**Completed:** M2's immutable foundation acceptance; M3 assessment contract
+adoption and reference values, decoding, diagnosis, contextual classification,
+retained failures, wire schema and independent exhaustive tests.
 
-**Next action:** Adopt the independently reviewed StateModel contract, register its
-requirement/decision ownership and implement representation, diagnostics and
-contextual classification with source-derived exhaustive cases. Then continue
-through the remaining M3 semantics and unchanged acceptance criteria.
+**Next action:** Complete frozen clean offline repository verification for this
+slice, publish its README checkpoint, adopt the normalization contract and execute
+actual normalized-value/route-proof cases. Continue through recovery, full Diagnostics,
+terminal guards and generation before evaluating unchanged M3 exit criteria.
 
 **Needed from owner:** Nothing for continued authorized roadmap development.
 
-**Saved at:** This planning-21 status transition follows the verified first M2
-acceptance introduction; the containing committed revision is its authoritative
-save point. The immutable acceptance record identifies the executed implementation,
-and historical verification identifies the exact introduction. Earlier published
-checkpoint identities remain preserved in this record and Git history.
+**Saved at:** This planning-22 checkpoint follows the published M2/M3 status
+transition `1e2509bc698522a067ab1035bce71aa661d81fb2`, whose GitHub Main CI passed.
+The containing committed revision is the save point for this first M3 slice.
+Immutable milestone evidence and earlier checkpoint identities remain preserved.

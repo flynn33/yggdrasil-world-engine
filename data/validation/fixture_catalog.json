@@ -8577,6 +8577,266 @@
       "expected_requirement_ids": ["YWE-REQ-0020", "YWE-REQ-0038"],
       "category": "positive",
       "description": "Validate the separately reviewed descriptor-to-execution approval ledger; scenario execution independently checks exact correspondence."
+    },
+    {
+      "fixture_id": "m3.state_assessment.diagnosis-valid",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/0",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.diagnosis-compatible",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/1",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.diagnosis-incompatible",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/2",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.diagnosis-rejected",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/3",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.diagnosis-unavailable",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/4",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.assessment-stable",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/5",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.assessment-unstable",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/6",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.assessment-correctable",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/7",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.assessment-degraded",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/8",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.assessment-failed",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/9",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.assessment-contained",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/10",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.assessment-safe_halt",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/11",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.assessment-degraded-rejected",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/12",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.missing-correction_path_is_known",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/13",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.missing-fallback_is_available",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/14",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.capture-detection-rejected",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/15",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.capture-detection-not_confirmed",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/16",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.capture-classification-rejected",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/17",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.capture-classification-not_confirmed",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/18",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
+    },
+    {
+      "fixture_id": "m3.state_assessment.capture-diagnosis-only",
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "instance_pointer": "/19",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ]
     }
   ]
 }

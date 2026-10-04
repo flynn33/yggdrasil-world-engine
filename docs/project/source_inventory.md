@@ -46,6 +46,7 @@ Current source routing uses the following precedence:
 | ASH generated mirror | `specs/` |
 | ASH dependency identity | `data/governance/ash_dependency_identity.json` |
 | Generation packets | `data/schemas/ash_generation_packet_schema.json` |
+| M3 StateModel assessment | `docs/architecture/m3_state_assessment_contract.md`, `core/ash_pattern_engine/state_values.py`, `core/ash_pattern_engine/state_model.py`, `data/schemas/m3_state_assessment_schema.json` |
 | Source-truth validation | `data/validation/source_truth_alignment_contract.json` |
 | Twin Wolf validation | `data/validation/twin_wolf_canon_validation_rules.json` |
 | Canonical terminology | `docs/glossary/ywe_design_glossary.md`, `data/governance/canonical_term_index.json` |

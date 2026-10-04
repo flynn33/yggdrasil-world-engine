@@ -245,6 +245,13 @@ Dependencies: M2
 Indicative effort: 5–7 weeks
 Owner role: Core semantics maintainers
 
+Current checkpoint: the adopted StateModel reference slice implements exact immutable
+values, bounded decoding, profile-bound diagnosis and contextual classification, with
+independent exhaustive state/classifier and retained-failure tests. The contract is
+`docs/architecture/m3_state_assessment_contract.md`. Semantic normalization, operational
+recovery, full Diagnostics and generation remain subsequent work; this checkpoint
+does not complete an M3 exit criterion.
+
 Deliverables:
 
 - Final Cosmology, Realm, ASH Pattern, Narrative, Perception, and orchestration

@@ -125,11 +125,18 @@ independently replays the implementation and preserves the first accepted eviden
 pair. The schema foundation includes exact fixture bindings, reviewed intended
 rejections, validation operations, and all eight executed validation methods.
 
-M3 is now active. The first bounded slice reviews immutable ASH values,
-profile-owned admissibility, complete diagnostics and context-aware classification
-against pinned source authority. Runtime recovery, fallback, containment, safe halt,
-complete generation semantics and the remaining M3 exit criteria still require
-implementation and evidence. Platform products remain deferred until M10 acceptance.
+M3 is active. The first [StateModel reference slice](docs/architecture/m3_state_assessment_contract.md)
+implements immutable exact ASH values, bounded representation decoding, explicit
+profile-based admissibility, complete diagnostics and source-ordered contextual
+classification. Independent tests exercise all 1,536 profile/state combinations,
+64 classifier cases, 512 identities and 8,192 codeword transforms, plus retained
+capture failures and the separate packet format. Legacy diagnosis now reports
+admissibility without inventing correction, fallback or lifecycle facts.
+
+Next is semantic normalization, followed by recovery/fallback execution, containment,
+safe halt, full Diagnostics and generation semantics. M3 remains in progress; its
+five exit criteria and platform authorization are not discharged by this slice.
+Platform products remain deferred until M10 acceptance.
 
 Follow the [current development record](docs/design-planning/Project_Record.md#10-checkpoint)
 and [M3 roadmap](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#m3--complete-core-deterministic-semantics-and-the-reference-oracle)

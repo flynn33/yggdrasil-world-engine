@@ -1,0 +1,2985 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m3_state_assessment_schema.json",
+  "title": "M3 first-slice state diagnosis and assessment packets",
+  "description": "YWE-owned first-slice transport for complete canonical semantic diagnostic and envelope records, explicit source/profile evidence, bounded input observations and retained failures. Structural conformance is not proof of source verification, dynamic binding equality, orbit computation, capture truth or executed recovery.",
+  "x-ywe-requirement-id": "YWE-REQ-0039",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/StateDiagnosis"
+    },
+    {
+      "$ref": "#/$defs/StateAssessment"
+    },
+    {
+      "$ref": "#/$defs/ClassificationEvidenceFailure"
+    },
+    {
+      "$ref": "#/$defs/DiagnosticCaptureFailure"
+    }
+  ],
+  "$defs": {
+    "Identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+      "not": {
+        "pattern": "[^A-Za-z0-9._:/-]"
+      }
+    },
+    "DiagnosticReference": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/Identifier"
+        },
+        {
+          "not": {
+            "enum": [
+              "NONE",
+              "SELF"
+            ]
+          }
+        }
+      ]
+    },
+    "NormalizedSHA256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "Signature": {
+      "type": "string",
+      "pattern": "^[01]{9}$",
+      "minLength": 9,
+      "maxLength": 9
+    },
+    "BitVector": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {
+        "type": "integer",
+        "enum": [
+          0,
+          1
+        ]
+      }
+    },
+    "AshState": {
+      "type": "object",
+      "required": [
+        "state_space",
+        "bits"
+      ],
+      "properties": {
+        "state_space": {
+          "const": "F2^9"
+        },
+        "bits": {
+          "$ref": "#/$defs/BitVector"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "BoundedExplanation": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "description": "Explicit YWE first-slice producer bound: at most 512 characters for notes and declared unavailable-evidence reasons. This is not an upstream ASH-wide limit."
+    },
+    "Notes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+        "$ref": "#/$defs/BoundedExplanation"
+      }
+    },
+    "RuleIDs": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "ASH-STATE-STRUCTURE-001",
+          "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+          "ASH-STATE-VALIDITY-001",
+          "ASH-CLASSIFICATION-MAPPING-001",
+          "ASH-RECOVERY-ACTION-001",
+          "ASH-STATE-GENERAL-001"
+        ]
+      },
+      "description": "Only reviewed first-slice evaluated/catch-all rule identities; runtime establishes evaluation and order."
+    },
+    "CanonicalAshBinding": {
+      "type": "object",
+      "required": [
+        "dependency_id",
+        "aggregate_sha256",
+        "state_space_sha256",
+        "codeword_source_sha256",
+        "validity_source_sha256",
+        "classification_source_sha256",
+        "recovery_source_sha256",
+        "diagnostic_source_sha256",
+        "taxonomy_source_sha256"
+      ],
+      "properties": {
+        "dependency_id": {
+          "const": "ash_cosmological_model.f2_9.canonical"
+        },
+        "aggregate_sha256": {
+          "const": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb"
+        },
+        "state_space_sha256": {
+          "const": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+        },
+        "codeword_source_sha256": {
+          "const": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+        },
+        "validity_source_sha256": {
+          "const": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e"
+        },
+        "classification_source_sha256": {
+          "const": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff"
+        },
+        "recovery_source_sha256": {
+          "const": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd"
+        },
+        "diagnostic_source_sha256": {
+          "const": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7"
+        },
+        "taxonomy_source_sha256": {
+          "const": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Fixed declared identity pins. Matching these values does not prove that source verification occurred.",
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "ProfileSourceBinding": {
+      "type": "object",
+      "required": [
+        "source_reference",
+        "source_sha256",
+        "evidence_reference"
+      ],
+      "properties": {
+        "source_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/NormalizedSHA256"
+        },
+        "evidence_reference": {
+          "$ref": "#/$defs/Identifier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AvailableProfileBinding": {
+      "type": "object",
+      "required": [
+        "availability",
+        "profile_id",
+        "source_binding",
+        "recognized_valid_signatures"
+      ],
+      "properties": {
+        "availability": {
+          "const": "AVAILABLE"
+        },
+        "profile_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/ProfileSourceBinding"
+        },
+        "recognized_valid_signatures": {
+          "type": "array",
+          "maxItems": 512,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/Signature"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "UnavailableProfileBinding": {
+      "type": "object",
+      "required": [
+        "availability",
+        "profile_id",
+        "source_binding",
+        "reason_code",
+        "reason"
+      ],
+      "properties": {
+        "availability": {
+          "const": "UNAVAILABLE"
+        },
+        "profile_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/ProfileSourceBinding"
+        },
+        "reason_code": {
+          "const": "PROFILE_DATA_UNAVAILABLE"
+        },
+        "reason": {
+          "$ref": "#/$defs/BoundedExplanation"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProfileBinding": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/AvailableProfileBinding"
+        },
+        {
+          "$ref": "#/$defs/UnavailableProfileBinding"
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "AssessmentBinding": {
+      "type": "object",
+      "required": [
+        "assessment_reference",
+        "original_input_reference",
+        "diagnosis_reference"
+      ],
+      "properties": {
+        "assessment_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "original_input_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "diagnosis_reference": {
+          "$ref": "#/$defs/DiagnosticReference"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "DiagnosticContext": {
+      "type": "object",
+      "required": [
+        "assessment_reference",
+        "original_input_reference",
+        "detection_reference",
+        "classification_reference"
+      ],
+      "properties": {
+        "assessment_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "original_input_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "detection_reference": {
+          "$ref": "#/$defs/DiagnosticReference"
+        },
+        "classification_reference": {
+          "$ref": "#/$defs/DiagnosticReference"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Runtime additionally requires the detection and classification references to differ.",
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "SystemContext": {
+      "type": "object",
+      "required": [
+        "is_in_safe_halt",
+        "is_in_containment"
+      ],
+      "properties": {
+        "is_in_safe_halt": {
+          "type": "boolean"
+        },
+        "is_in_containment": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "PredicateBinding": {
+      "type": "object",
+      "required": [
+        "assessment_reference",
+        "diagnosis_reference",
+        "subject_reference",
+        "profile_id",
+        "profile_source_sha256",
+        "ash_dependency_id",
+        "ash_aggregate_sha256",
+        "evidence_reference"
+      ],
+      "properties": {
+        "assessment_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "diagnosis_reference": {
+          "$ref": "#/$defs/DiagnosticReference"
+        },
+        "subject_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "profile_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "profile_source_sha256": {
+          "$ref": "#/$defs/NormalizedSHA256"
+        },
+        "ash_dependency_id": {
+          "const": "ash_cosmological_model.f2_9.canonical"
+        },
+        "ash_aggregate_sha256": {
+          "const": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb"
+        },
+        "evidence_reference": {
+          "$ref": "#/$defs/Identifier"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "EvaluatedPredicate": {
+      "type": "object",
+      "required": [
+        "evaluation",
+        "binding",
+        "value"
+      ],
+      "properties": {
+        "evaluation": {
+          "const": "EVALUATED"
+        },
+        "binding": {
+          "$ref": "#/$defs/PredicateBinding"
+        },
+        "value": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "NotEvaluatedPredicate": {
+      "type": "object",
+      "required": [
+        "evaluation",
+        "binding",
+        "reason"
+      ],
+      "properties": {
+        "evaluation": {
+          "const": "NOT_EVALUATED"
+        },
+        "binding": {
+          "$ref": "#/$defs/PredicateBinding"
+        },
+        "reason": {
+          "$ref": "#/$defs/BoundedExplanation"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PredicateEvidence": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/EvaluatedPredicate"
+        },
+        {
+          "$ref": "#/$defs/NotEvaluatedPredicate"
+        }
+      ]
+    },
+    "ClassificationEvidence": {
+      "type": "object",
+      "required": [
+        "correction_path_is_known",
+        "fallback_is_available"
+      ],
+      "properties": {
+        "correction_path_is_known": {
+          "$ref": "#/$defs/PredicateEvidence"
+        },
+        "fallback_is_available": {
+          "$ref": "#/$defs/PredicateEvidence"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "IntegerBitObservation": {
+      "type": "object",
+      "required": [
+        "index",
+        "scalar_kind",
+        "value"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "scalar_kind": {
+          "const": "INTEGER_BIT"
+        },
+        "value": {
+          "type": "integer",
+          "enum": [
+            0,
+            1
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "IntegerOtherObservation": {
+      "type": "object",
+      "required": [
+        "index",
+        "scalar_kind",
+        "sign",
+        "bit_length"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "scalar_kind": {
+          "const": "INTEGER_OTHER"
+        },
+        "sign": {
+          "type": "integer",
+          "enum": [
+            -1,
+            0,
+            1
+          ]
+        },
+        "bit_length": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "FiniteFloatObservation": {
+      "type": "object",
+      "required": [
+        "index",
+        "scalar_kind",
+        "value"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "scalar_kind": {
+          "const": "FINITE_FLOAT"
+        },
+        "value": {
+          "type": "string",
+          "maxLength": 24,
+          "pattern": "^-?0x[01]\\.(?:0|[0-9a-f]{13})p[+-][0-9]{1,4}$",
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "NonfiniteFloatObservation": {
+      "type": "object",
+      "required": [
+        "index",
+        "scalar_kind",
+        "value"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "scalar_kind": {
+          "const": "NONFINITE_FLOAT"
+        },
+        "value": {
+          "enum": [
+            "NAN",
+            "POSITIVE_INFINITY",
+            "NEGATIVE_INFINITY"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "StringObservation": {
+      "type": "object",
+      "required": [
+        "index",
+        "scalar_kind",
+        "value",
+        "total_length",
+        "truncated"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "scalar_kind": {
+          "const": "STRING"
+        },
+        "value": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "total_length": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "truncated": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "truncated": {
+                "const": false
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "total_length": {
+                "maximum": 64
+              }
+            }
+          }
+        }
+      ]
+    },
+    "UnsupportedObservation": {
+      "type": "object",
+      "required": [
+        "index",
+        "scalar_kind"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "scalar_kind": {
+          "const": "UNSUPPORTED"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CoordinateObservation": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/IntegerBitObservation"
+        },
+        {
+          "$ref": "#/$defs/IntegerOtherObservation"
+        },
+        {
+          "$ref": "#/$defs/FiniteFloatObservation"
+        },
+        {
+          "$ref": "#/$defs/NonfiniteFloatObservation"
+        },
+        {
+          "$ref": "#/$defs/StringObservation"
+        },
+        {
+          "$ref": "#/$defs/UnsupportedObservation"
+        }
+      ]
+    },
+    "InputFailureCode": {
+      "enum": [
+        "STATE_WIDTH",
+        "STATE_COORDINATE_TYPE",
+        "STATE_COORDINATE_VALUE",
+        "INPUT_KIND_UNSUPPORTED",
+        "INPUT_SIZE_LIMIT",
+        "INPUT_DEPTH_LIMIT",
+        "INPUT_TOKEN_LIMIT",
+        "INPUT_UTF8_INVALID",
+        "INPUT_JSON_INVALID",
+        "INPUT_JSON_DUPLICATE_KEY",
+        "INPUT_JSON_NONFINITE",
+        "INPUT_NUMERIC_TOKEN_INVALID",
+        "INPUT_SIGNATURE_INVALID",
+        "INPUT_RECORD_INVALID",
+        "INPUT_RECORD_SIZE_LIMIT",
+        "INPUT_RECORD_KEY_INVALID",
+        "INPUT_STATE_SPACE_INVALID"
+      ]
+    },
+    "InputEvidence": {
+      "type": "object",
+      "required": [
+        "original_input_reference",
+        "representation_kind",
+        "observed_length",
+        "length_unit",
+        "preview",
+        "preview_encoding",
+        "truncated",
+        "coordinate_observations",
+        "failure_code"
+      ],
+      "properties": {
+        "original_input_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "representation_kind": {
+          "enum": [
+            "RAW_JSON",
+            "SIGNATURE",
+            "BIT_SEQUENCE",
+            "STATE_RECORD",
+            "UNSUPPORTED"
+          ]
+        },
+        "observed_length": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "length_unit": {
+          "enum": [
+            "BYTES",
+            "CHARACTERS",
+            "ELEMENTS",
+            "KEYS",
+            "UNKNOWN"
+          ]
+        },
+        "preview": {
+          "oneOf": [
+            {
+              "type": "string",
+              "maxLength": 64
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "preview_encoding": {
+          "enum": [
+            "TEXT",
+            "HEX"
+          ]
+        },
+        "truncated": {
+          "type": "boolean"
+        },
+        "coordinate_observations": {
+          "type": "array",
+          "maxItems": 9,
+          "items": {
+            "$ref": "#/$defs/CoordinateObservation"
+          }
+        },
+        "failure_code": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/InputFailureCode"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "preview_encoding": {
+                "const": "HEX"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "preview": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "maxLength": 64,
+                    "pattern": "^(?:[0-9a-f]{2})*$",
+                    "not": {
+                      "pattern": "[^0-9a-f]"
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "type": "null"
+              },
+              "representation_kind": {
+                "const": "RAW_JSON"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "observed_length": {
+                "oneOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 4096
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "type": "null"
+              },
+              "representation_kind": {
+                "const": "SIGNATURE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "observed_length": {
+                "oneOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 4096
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "type": "null"
+              },
+              "representation_kind": {
+                "const": "STATE_RECORD"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "observed_length": {
+                "oneOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 64
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "type": "null"
+              },
+              "representation_kind": {
+                "const": "BIT_SEQUENCE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "observed_length": {
+                "const": 9
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "representation_kind": {
+                "const": "UNSUPPORTED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "failure_code": {
+                "const": "INPUT_KIND_UNSUPPORTED"
+              }
+            }
+          }
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "RejectedCandidateEvidence": {
+      "type": "object",
+      "required": [
+        "candidate_kind",
+        "input_evidence"
+      ],
+      "properties": {
+        "candidate_kind": {
+          "const": "REJECTED"
+        },
+        "input_evidence": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/InputEvidence"
+            },
+            {
+              "properties": {
+                "failure_code": {
+                  "$ref": "#/$defs/InputFailureCode"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "description": "Local rejected-observation branch; it is not an AshState or a captured full raw object."
+    },
+    "OrbitInfo": {
+      "type": "object",
+      "required": [
+        "orbit_id",
+        "member_count",
+        "contains_known_valid_state"
+      ],
+      "properties": {
+        "orbit_id": {
+          "$ref": "#/$defs/Signature"
+        },
+        "member_count": {
+          "const": 16
+        },
+        "contains_known_valid_state": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "StateValidityDiagnostic": {
+      "type": "object",
+      "required": [
+        "input_state",
+        "admissibility_status",
+        "transformation_compatibility",
+        "normalization_status",
+        "recoverability_relevance",
+        "is_valid",
+        "orbit_info",
+        "rule_ids",
+        "notes"
+      ],
+      "properties": {
+        "input_state": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/BitVector"
+            },
+            {
+              "$ref": "#/$defs/RejectedCandidateEvidence"
+            }
+          ]
+        },
+        "admissibility_status": {
+          "enum": [
+            "VALID",
+            "TRANSFORMATION_COMPATIBLE",
+            "TRANSFORMATION_INCOMPATIBLE",
+            "UNCLASSIFIED"
+          ]
+        },
+        "transformation_compatibility": {
+          "enum": [
+            "COMPATIBLE",
+            "INCOMPATIBLE",
+            "UNKNOWN"
+          ]
+        },
+        "normalization_status": {
+          "enum": [
+            "ALREADY_VALID",
+            "NORMALIZABLE",
+            "NOT_NORMALIZABLE",
+            "BLOCKED"
+          ]
+        },
+        "recoverability_relevance": {
+          "enum": [
+            "NO_RECOVERY_NEEDED",
+            "RECOVERY_APPLICABLE",
+            "NOT_RECOVERABLE",
+            "CONTAINMENT_NEEDED"
+          ]
+        },
+        "is_valid": {
+          "type": "boolean"
+        },
+        "orbit_info": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/OrbitInfo"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rule_ids": {
+          "$ref": "#/$defs/RuleIDs"
+        },
+        "notes": {
+          "$ref": "#/$defs/Notes"
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "admissibility_status": {
+              "const": "VALID"
+            },
+            "transformation_compatibility": {
+              "const": "COMPATIBLE"
+            },
+            "normalization_status": {
+              "const": "ALREADY_VALID"
+            },
+            "recoverability_relevance": {
+              "const": "NO_RECOVERY_NEEDED"
+            },
+            "is_valid": {
+              "const": true
+            },
+            "input_state": {
+              "$ref": "#/$defs/BitVector"
+            },
+            "orbit_info": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/OrbitInfo"
+                },
+                {
+                  "properties": {
+                    "contains_known_valid_state": {
+                      "const": true
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "properties": {
+            "admissibility_status": {
+              "const": "TRANSFORMATION_COMPATIBLE"
+            },
+            "transformation_compatibility": {
+              "const": "COMPATIBLE"
+            },
+            "normalization_status": {
+              "const": "NORMALIZABLE"
+            },
+            "recoverability_relevance": {
+              "const": "RECOVERY_APPLICABLE"
+            },
+            "is_valid": {
+              "const": false
+            },
+            "input_state": {
+              "$ref": "#/$defs/BitVector"
+            },
+            "orbit_info": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/OrbitInfo"
+                },
+                {
+                  "properties": {
+                    "contains_known_valid_state": {
+                      "const": true
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "properties": {
+            "admissibility_status": {
+              "const": "TRANSFORMATION_INCOMPATIBLE"
+            },
+            "transformation_compatibility": {
+              "const": "INCOMPATIBLE"
+            },
+            "normalization_status": {
+              "const": "NOT_NORMALIZABLE"
+            },
+            "recoverability_relevance": {
+              "const": "NOT_RECOVERABLE"
+            },
+            "is_valid": {
+              "const": false
+            },
+            "input_state": {
+              "$ref": "#/$defs/BitVector"
+            },
+            "orbit_info": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/OrbitInfo"
+                },
+                {
+                  "properties": {
+                    "contains_known_valid_state": {
+                      "const": false
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "properties": {
+            "admissibility_status": {
+              "const": "UNCLASSIFIED"
+            },
+            "transformation_compatibility": {
+              "const": "UNKNOWN"
+            },
+            "normalization_status": {
+              "const": "BLOCKED"
+            },
+            "recoverability_relevance": {
+              "const": "CONTAINMENT_NEEDED"
+            },
+            "is_valid": {
+              "const": false
+            },
+            "orbit_info": {
+              "type": "null"
+            }
+          }
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "DiagnosticEnvelope": {
+      "type": "object",
+      "required": [
+        "diagnostic_kind",
+        "severity",
+        "stage",
+        "disposition",
+        "subject_reference",
+        "parent_diagnostic_reference",
+        "chain_root_reference",
+        "rule_ids",
+        "summary",
+        "notes"
+      ],
+      "properties": {
+        "diagnostic_kind": {
+          "const": "STATE_VALIDITY"
+        },
+        "severity": {
+          "enum": [
+            "INFO",
+            "WARNING",
+            "ERROR",
+            "CRITICAL"
+          ]
+        },
+        "stage": {
+          "enum": [
+            "DETECTION",
+            "CLASSIFICATION"
+          ]
+        },
+        "disposition": {
+          "enum": [
+            "RESOLVED",
+            "PENDING",
+            "BLOCKED",
+            "ESCALATED",
+            "TERMINAL"
+          ]
+        },
+        "subject_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "parent_diagnostic_reference": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/DiagnosticReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "chain_root_reference": {
+          "$ref": "#/$defs/DiagnosticReference"
+        },
+        "rule_ids": {
+          "$ref": "#/$defs/RuleIDs"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[^\\r\\n]*$",
+          "not": {
+            "pattern": "[\\r\\n\\u0085\\u2028\\u2029]"
+          }
+        },
+        "notes": {
+          "$ref": "#/$defs/Notes"
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "stage": {
+              "const": "DETECTION"
+            },
+            "parent_diagnostic_reference": {
+              "type": "null"
+            }
+          }
+        },
+        {
+          "properties": {
+            "stage": {
+              "const": "CLASSIFICATION"
+            },
+            "parent_diagnostic_reference": {
+              "$ref": "#/$defs/DiagnosticReference"
+            }
+          }
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "DiagnosticEmission": {
+      "type": "object",
+      "required": [
+        "diagnostic_reference",
+        "envelope"
+      ],
+      "properties": {
+        "diagnostic_reference": {
+          "$ref": "#/$defs/DiagnosticReference"
+        },
+        "envelope": {
+          "$ref": "#/$defs/DiagnosticEnvelope"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "DetectionEmission": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/DiagnosticEmission"
+        },
+        {
+          "properties": {
+            "envelope": {
+              "properties": {
+                "stage": {
+                  "const": "DETECTION"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ClassificationEmission": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/DiagnosticEmission"
+        },
+        {
+          "properties": {
+            "envelope": {
+              "properties": {
+                "stage": {
+                  "const": "CLASSIFICATION"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "CaptureReceipt": {
+      "type": "object",
+      "required": [
+        "diagnostic_reference",
+        "status"
+      ],
+      "properties": {
+        "diagnostic_reference": {
+          "$ref": "#/$defs/DiagnosticReference"
+        },
+        "status": {
+          "enum": [
+            "CONFIRMED",
+            "REJECTED",
+            "NOT_CONFIRMED"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "description": "Structural receipt vocabulary; actual acknowledgment/no-append truth is the collaborator and StateModel obligation.",
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "PacketCommon": {
+      "type": "object",
+      "required": [
+        "schema_ref",
+        "artifact_type",
+        "artifact_version",
+        "outcome",
+        "assessment_binding",
+        "source_binding",
+        "profile_binding",
+        "input_evidence",
+        "parsed_state",
+        "state_validity_diagnostic",
+        "emitted_diagnostics"
+      ],
+      "properties": {
+        "schema_ref": {
+          "const": "data/schemas/m3_state_assessment_schema.json"
+        },
+        "artifact_type": {
+          "const": "ywe_state_assessment"
+        },
+        "artifact_version": {
+          "const": "1.0.0"
+        },
+        "outcome": {
+          "enum": [
+            "diagnosis",
+            "assessment",
+            "failure"
+          ]
+        },
+        "assessment_binding": {
+          "$ref": "#/$defs/AssessmentBinding"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/CanonicalAshBinding"
+        },
+        "profile_binding": {
+          "$ref": "#/$defs/ProfileBinding"
+        },
+        "input_evidence": {
+          "$ref": "#/$defs/InputEvidence"
+        },
+        "parsed_state": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AshState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "state_validity_diagnostic": {
+          "$ref": "#/$defs/StateValidityDiagnostic"
+        },
+        "emitted_diagnostics": {
+          "type": "array",
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/DiagnosticEmission"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "parsed_state": {
+                "type": "null"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "input_evidence": {
+                "properties": {
+                  "failure_code": {
+                    "$ref": "#/$defs/InputFailureCode"
+                  }
+                }
+              },
+              "state_validity_diagnostic": {
+                "properties": {
+                  "input_state": {
+                    "$ref": "#/$defs/RejectedCandidateEvidence"
+                  },
+                  "admissibility_status": {
+                    "const": "UNCLASSIFIED"
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "input_evidence": {
+                "properties": {
+                  "failure_code": {
+                    "type": "null"
+                  }
+                }
+              },
+              "state_validity_diagnostic": {
+                "properties": {
+                  "input_state": {
+                    "$ref": "#/$defs/BitVector"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "parsed_state": {
+                "type": "object"
+              },
+              "profile_binding": {
+                "properties": {
+                  "availability": {
+                    "const": "UNAVAILABLE"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "state_validity_diagnostic": {
+                "properties": {
+                  "admissibility_status": {
+                    "const": "UNCLASSIFIED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "parsed_state": {
+                "type": "object"
+              },
+              "profile_binding": {
+                "properties": {
+                  "availability": {
+                    "const": "AVAILABLE"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "state_validity_diagnostic": {
+                "properties": {
+                  "admissibility_status": {
+                    "enum": [
+                      "VALID",
+                      "TRANSFORMATION_COMPATIBLE",
+                      "TRANSFORMATION_INCOMPATIBLE"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state_validity_diagnostic": {
+                "properties": {
+                  "admissibility_status": {
+                    "const": "VALID"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "emitted_diagnostics": {
+                "prefixItems": [
+                  {
+                    "properties": {
+                      "envelope": {
+                        "properties": {
+                          "severity": {
+                            "const": "INFO"
+                          },
+                          "disposition": {
+                            "const": "RESOLVED"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state_validity_diagnostic": {
+                "properties": {
+                  "admissibility_status": {
+                    "const": "TRANSFORMATION_COMPATIBLE"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "emitted_diagnostics": {
+                "prefixItems": [
+                  {
+                    "properties": {
+                      "envelope": {
+                        "properties": {
+                          "severity": {
+                            "const": "WARNING"
+                          },
+                          "disposition": {
+                            "const": "PENDING"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state_validity_diagnostic": {
+                "properties": {
+                  "admissibility_status": {
+                    "const": "TRANSFORMATION_INCOMPATIBLE"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "emitted_diagnostics": {
+                "prefixItems": [
+                  {
+                    "properties": {
+                      "envelope": {
+                        "properties": {
+                          "severity": {
+                            "const": "ERROR"
+                          },
+                          "disposition": {
+                            "const": "BLOCKED"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state_validity_diagnostic": {
+                "properties": {
+                  "admissibility_status": {
+                    "const": "UNCLASSIFIED"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "emitted_diagnostics": {
+                "prefixItems": [
+                  {
+                    "properties": {
+                      "envelope": {
+                        "properties": {
+                          "severity": {
+                            "const": "ERROR"
+                          },
+                          "disposition": {
+                            "const": "BLOCKED"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "StateDiagnosis": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PacketCommon"
+        },
+        {
+          "type": "object",
+          "required": [
+            "outcome",
+            "emitted_diagnostics"
+          ],
+          "properties": {
+            "outcome": {
+              "const": "diagnosis"
+            },
+            "emitted_diagnostics": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1,
+              "prefixItems": [
+                {
+                  "$ref": "#/$defs/DetectionEmission"
+                }
+              ],
+              "items": false
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "StateAssessment": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PacketCommon"
+        },
+        {
+          "type": "object",
+          "required": [
+            "outcome",
+            "system_context",
+            "classification_evidence",
+            "system_state_class",
+            "recovery_category",
+            "consulted_predicates",
+            "emitted_diagnostics"
+          ],
+          "properties": {
+            "outcome": {
+              "const": "assessment"
+            },
+            "system_context": {
+              "$ref": "#/$defs/SystemContext"
+            },
+            "classification_evidence": {
+              "$ref": "#/$defs/ClassificationEvidence"
+            },
+            "system_state_class": {
+              "enum": [
+                "STABLE",
+                "UNSTABLE",
+                "CORRECTABLE",
+                "DEGRADED",
+                "CONTAINED",
+                "FAILED",
+                "SAFE_HALT"
+              ]
+            },
+            "recovery_category": {
+              "enum": [
+                "NO_ACTION",
+                "NORMALIZE_STATE",
+                "APPLY_CORRECTION",
+                "FALLBACK_REQUIRED",
+                "CONTAINMENT_REQUIRED",
+                "ESCALATION_REQUIRED",
+                "TERMINAL_NO_RECOVERY"
+              ]
+            },
+            "consulted_predicates": {
+              "type": "array",
+              "maxItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "correction_path_is_known",
+                  "fallback_is_available"
+                ]
+              }
+            },
+            "emitted_diagnostics": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "prefixItems": [
+                {
+                  "$ref": "#/$defs/DetectionEmission"
+                },
+                {
+                  "$ref": "#/$defs/ClassificationEmission"
+                }
+              ],
+              "items": false
+            }
+          }
+        },
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "system_context": {
+                  "properties": {
+                    "is_in_safe_halt": {
+                      "const": true
+                    }
+                  }
+                },
+                "system_state_class": {
+                  "const": "SAFE_HALT"
+                },
+                "recovery_category": {
+                  "const": "TERMINAL_NO_RECOVERY"
+                },
+                "consulted_predicates": {
+                  "const": []
+                },
+                "emitted_diagnostics": {
+                  "prefixItems": [
+                    {},
+                    {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "severity": {
+                              "const": "CRITICAL"
+                            },
+                            "disposition": {
+                              "const": "TERMINAL"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "properties": {
+                "system_context": {
+                  "properties": {
+                    "is_in_safe_halt": {
+                      "const": false
+                    },
+                    "is_in_containment": {
+                      "const": true
+                    }
+                  }
+                },
+                "system_state_class": {
+                  "const": "CONTAINED"
+                },
+                "recovery_category": {
+                  "const": "CONTAINMENT_REQUIRED"
+                },
+                "consulted_predicates": {
+                  "const": []
+                },
+                "emitted_diagnostics": {
+                  "prefixItems": [
+                    {},
+                    {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "severity": {
+                              "const": "CRITICAL"
+                            },
+                            "disposition": {
+                              "const": "PENDING"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "properties": {
+                "system_context": {
+                  "properties": {
+                    "is_in_safe_halt": {
+                      "const": false
+                    },
+                    "is_in_containment": {
+                      "const": false
+                    }
+                  }
+                },
+                "state_validity_diagnostic": {
+                  "properties": {
+                    "admissibility_status": {
+                      "const": "VALID"
+                    }
+                  }
+                },
+                "system_state_class": {
+                  "const": "STABLE"
+                },
+                "recovery_category": {
+                  "const": "NO_ACTION"
+                },
+                "consulted_predicates": {
+                  "const": []
+                },
+                "emitted_diagnostics": {
+                  "prefixItems": [
+                    {},
+                    {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "severity": {
+                              "const": "INFO"
+                            },
+                            "disposition": {
+                              "const": "RESOLVED"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "properties": {
+                "system_context": {
+                  "properties": {
+                    "is_in_safe_halt": {
+                      "const": false
+                    },
+                    "is_in_containment": {
+                      "const": false
+                    }
+                  }
+                },
+                "state_validity_diagnostic": {
+                  "properties": {
+                    "admissibility_status": {
+                      "const": "TRANSFORMATION_COMPATIBLE"
+                    }
+                  }
+                },
+                "classification_evidence": {
+                  "properties": {
+                    "correction_path_is_known": {
+                      "properties": {
+                        "evaluation": {
+                          "const": "EVALUATED"
+                        },
+                        "value": {
+                          "const": true
+                        }
+                      }
+                    }
+                  }
+                },
+                "system_state_class": {
+                  "const": "CORRECTABLE"
+                },
+                "recovery_category": {
+                  "const": "APPLY_CORRECTION"
+                },
+                "consulted_predicates": {
+                  "const": [
+                    "correction_path_is_known"
+                  ]
+                },
+                "emitted_diagnostics": {
+                  "prefixItems": [
+                    {},
+                    {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "severity": {
+                              "const": "ERROR"
+                            },
+                            "disposition": {
+                              "const": "PENDING"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "properties": {
+                "system_context": {
+                  "properties": {
+                    "is_in_safe_halt": {
+                      "const": false
+                    },
+                    "is_in_containment": {
+                      "const": false
+                    }
+                  }
+                },
+                "state_validity_diagnostic": {
+                  "properties": {
+                    "admissibility_status": {
+                      "const": "TRANSFORMATION_COMPATIBLE"
+                    }
+                  }
+                },
+                "classification_evidence": {
+                  "properties": {
+                    "correction_path_is_known": {
+                      "properties": {
+                        "evaluation": {
+                          "const": "EVALUATED"
+                        },
+                        "value": {
+                          "const": false
+                        }
+                      }
+                    }
+                  }
+                },
+                "system_state_class": {
+                  "const": "UNSTABLE"
+                },
+                "recovery_category": {
+                  "const": "NORMALIZE_STATE"
+                },
+                "consulted_predicates": {
+                  "const": [
+                    "correction_path_is_known"
+                  ]
+                },
+                "emitted_diagnostics": {
+                  "prefixItems": [
+                    {},
+                    {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "severity": {
+                              "const": "WARNING"
+                            },
+                            "disposition": {
+                              "const": "PENDING"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "properties": {
+                "system_context": {
+                  "properties": {
+                    "is_in_safe_halt": {
+                      "const": false
+                    },
+                    "is_in_containment": {
+                      "const": false
+                    }
+                  }
+                },
+                "state_validity_diagnostic": {
+                  "properties": {
+                    "admissibility_status": {
+                      "const": "TRANSFORMATION_INCOMPATIBLE"
+                    }
+                  }
+                },
+                "classification_evidence": {
+                  "properties": {
+                    "fallback_is_available": {
+                      "properties": {
+                        "evaluation": {
+                          "const": "EVALUATED"
+                        },
+                        "value": {
+                          "const": true
+                        }
+                      }
+                    }
+                  }
+                },
+                "system_state_class": {
+                  "const": "DEGRADED"
+                },
+                "recovery_category": {
+                  "const": "FALLBACK_REQUIRED"
+                },
+                "consulted_predicates": {
+                  "const": [
+                    "fallback_is_available"
+                  ]
+                },
+                "emitted_diagnostics": {
+                  "prefixItems": [
+                    {},
+                    {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "severity": {
+                              "const": "ERROR"
+                            },
+                            "disposition": {
+                              "const": "PENDING"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "properties": {
+                "system_context": {
+                  "properties": {
+                    "is_in_safe_halt": {
+                      "const": false
+                    },
+                    "is_in_containment": {
+                      "const": false
+                    }
+                  }
+                },
+                "state_validity_diagnostic": {
+                  "properties": {
+                    "admissibility_status": {
+                      "const": "TRANSFORMATION_INCOMPATIBLE"
+                    }
+                  }
+                },
+                "classification_evidence": {
+                  "properties": {
+                    "fallback_is_available": {
+                      "properties": {
+                        "evaluation": {
+                          "const": "EVALUATED"
+                        },
+                        "value": {
+                          "const": false
+                        }
+                      }
+                    }
+                  }
+                },
+                "system_state_class": {
+                  "const": "FAILED"
+                },
+                "recovery_category": {
+                  "const": "ESCALATION_REQUIRED"
+                },
+                "consulted_predicates": {
+                  "const": [
+                    "fallback_is_available"
+                  ]
+                },
+                "emitted_diagnostics": {
+                  "prefixItems": [
+                    {},
+                    {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "severity": {
+                              "const": "ERROR"
+                            },
+                            "disposition": {
+                              "const": "BLOCKED"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "properties": {
+                "system_context": {
+                  "properties": {
+                    "is_in_safe_halt": {
+                      "const": false
+                    },
+                    "is_in_containment": {
+                      "const": false
+                    }
+                  }
+                },
+                "state_validity_diagnostic": {
+                  "properties": {
+                    "admissibility_status": {
+                      "const": "UNCLASSIFIED"
+                    }
+                  }
+                },
+                "system_state_class": {
+                  "const": "DEGRADED"
+                },
+                "recovery_category": {
+                  "const": "FALLBACK_REQUIRED"
+                },
+                "consulted_predicates": {
+                  "const": []
+                },
+                "emitted_diagnostics": {
+                  "prefixItems": [
+                    {},
+                    {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "severity": {
+                              "const": "ERROR"
+                            },
+                            "disposition": {
+                              "const": "PENDING"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "unevaluatedProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "ClassificationEvidenceFailure": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PacketCommon"
+        },
+        {
+          "type": "object",
+          "required": [
+            "outcome",
+            "failure_kind",
+            "failure_code",
+            "failed_predicate",
+            "system_context",
+            "classification_evidence",
+            "emitted_diagnostics"
+          ],
+          "properties": {
+            "outcome": {
+              "const": "failure"
+            },
+            "failure_kind": {
+              "const": "classification_evidence"
+            },
+            "failure_code": {
+              "enum": [
+                "PREDICATE_BINDING_MISMATCH",
+                "PREDICATE_NOT_EVALUATED"
+              ]
+            },
+            "failed_predicate": {
+              "enum": [
+                "correction_path_is_known",
+                "fallback_is_available"
+              ]
+            },
+            "system_context": {
+              "$ref": "#/$defs/SystemContext"
+            },
+            "classification_evidence": {
+              "$ref": "#/$defs/ClassificationEvidence"
+            },
+            "emitted_diagnostics": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1,
+              "prefixItems": [
+                {
+                  "$ref": "#/$defs/DetectionEmission"
+                }
+              ],
+              "items": false
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "PREDICATE_NOT_EVALUATED"
+              }
+            }
+          },
+          "then": {
+            "oneOf": [
+              {
+                "properties": {
+                  "failed_predicate": {
+                    "const": "correction_path_is_known"
+                  },
+                  "system_context": {
+                    "properties": {
+                      "is_in_safe_halt": {
+                        "const": false
+                      },
+                      "is_in_containment": {
+                        "const": false
+                      }
+                    }
+                  },
+                  "state_validity_diagnostic": {
+                    "properties": {
+                      "admissibility_status": {
+                        "const": "TRANSFORMATION_COMPATIBLE"
+                      }
+                    }
+                  },
+                  "classification_evidence": {
+                    "properties": {
+                      "correction_path_is_known": {
+                        "properties": {
+                          "evaluation": {
+                            "const": "NOT_EVALUATED"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "failed_predicate": {
+                    "const": "fallback_is_available"
+                  },
+                  "system_context": {
+                    "properties": {
+                      "is_in_safe_halt": {
+                        "const": false
+                      },
+                      "is_in_containment": {
+                        "const": false
+                      }
+                    }
+                  },
+                  "state_validity_diagnostic": {
+                    "properties": {
+                      "admissibility_status": {
+                        "const": "TRANSFORMATION_INCOMPATIBLE"
+                      }
+                    }
+                  },
+                  "classification_evidence": {
+                    "properties": {
+                      "fallback_is_available": {
+                        "properties": {
+                          "evaluation": {
+                            "const": "NOT_EVALUATED"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "unevaluatedProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    },
+    "DiagnosticCaptureFailure": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/PacketCommon"
+        },
+        {
+          "type": "object",
+          "required": [
+            "outcome",
+            "failure_kind",
+            "failure_code",
+            "capture_status",
+            "attempted_diagnostic",
+            "system_context",
+            "classification_evidence",
+            "emitted_diagnostics"
+          ],
+          "properties": {
+            "outcome": {
+              "const": "failure"
+            },
+            "failure_kind": {
+              "const": "diagnostic_capture"
+            },
+            "failure_code": {
+              "enum": [
+                "DIAGNOSTIC_CAPTURE_REJECTED",
+                "DIAGNOSTIC_CAPTURE_UNCONFIRMED"
+              ]
+            },
+            "capture_status": {
+              "enum": [
+                "REJECTED",
+                "NOT_CONFIRMED"
+              ]
+            },
+            "attempted_diagnostic": {
+              "$ref": "#/$defs/DiagnosticEmission"
+            },
+            "system_context": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/SystemContext"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "classification_evidence": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/ClassificationEvidence"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "emitted_diagnostics": {
+              "type": "array",
+              "maxItems": 1
+            }
+          }
+        },
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "capture_status": {
+                  "const": "REJECTED"
+                },
+                "failure_code": {
+                  "const": "DIAGNOSTIC_CAPTURE_REJECTED"
+                }
+              }
+            },
+            {
+              "properties": {
+                "capture_status": {
+                  "const": "NOT_CONFIRMED"
+                },
+                "failure_code": {
+                  "const": "DIAGNOSTIC_CAPTURE_UNCONFIRMED"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "system_context": {
+                  "type": "null"
+                },
+                "classification_evidence": {
+                  "type": "null"
+                }
+              }
+            },
+            {
+              "properties": {
+                "system_context": {
+                  "$ref": "#/$defs/SystemContext"
+                },
+                "classification_evidence": {
+                  "$ref": "#/$defs/ClassificationEvidence"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "emitted_diagnostics": {
+                  "type": "array",
+                  "minItems": 0,
+                  "maxItems": 0,
+                  "items": false
+                },
+                "attempted_diagnostic": {
+                  "$ref": "#/$defs/DetectionEmission"
+                }
+              }
+            },
+            {
+              "allOf": [
+                {
+                  "properties": {
+                    "emitted_diagnostics": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 1,
+                      "prefixItems": [
+                        {
+                          "$ref": "#/$defs/DetectionEmission"
+                        }
+                      ],
+                      "items": false
+                    },
+                    "attempted_diagnostic": {
+                      "$ref": "#/$defs/ClassificationEmission"
+                    },
+                    "system_context": {
+                      "$ref": "#/$defs/SystemContext"
+                    },
+                    "classification_evidence": {
+                      "$ref": "#/$defs/ClassificationEvidence"
+                    }
+                  }
+                },
+                {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "system_context": {
+                          "properties": {
+                            "is_in_safe_halt": {
+                              "const": true
+                            }
+                          }
+                        },
+                        "attempted_diagnostic": {
+                          "properties": {
+                            "envelope": {
+                              "properties": {
+                                "severity": {
+                                  "const": "CRITICAL"
+                                },
+                                "disposition": {
+                                  "const": "TERMINAL"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "system_context": {
+                          "properties": {
+                            "is_in_safe_halt": {
+                              "const": false
+                            },
+                            "is_in_containment": {
+                              "const": true
+                            }
+                          }
+                        },
+                        "attempted_diagnostic": {
+                          "properties": {
+                            "envelope": {
+                              "properties": {
+                                "severity": {
+                                  "const": "CRITICAL"
+                                },
+                                "disposition": {
+                                  "const": "PENDING"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "system_context": {
+                          "properties": {
+                            "is_in_safe_halt": {
+                              "const": false
+                            },
+                            "is_in_containment": {
+                              "const": false
+                            }
+                          }
+                        },
+                        "state_validity_diagnostic": {
+                          "properties": {
+                            "admissibility_status": {
+                              "const": "VALID"
+                            }
+                          }
+                        },
+                        "attempted_diagnostic": {
+                          "properties": {
+                            "envelope": {
+                              "properties": {
+                                "severity": {
+                                  "const": "INFO"
+                                },
+                                "disposition": {
+                                  "const": "RESOLVED"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "system_context": {
+                          "properties": {
+                            "is_in_safe_halt": {
+                              "const": false
+                            },
+                            "is_in_containment": {
+                              "const": false
+                            }
+                          }
+                        },
+                        "state_validity_diagnostic": {
+                          "properties": {
+                            "admissibility_status": {
+                              "const": "TRANSFORMATION_COMPATIBLE"
+                            }
+                          }
+                        },
+                        "classification_evidence": {
+                          "properties": {
+                            "correction_path_is_known": {
+                              "properties": {
+                                "evaluation": {
+                                  "const": "EVALUATED"
+                                },
+                                "value": {
+                                  "const": true
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "attempted_diagnostic": {
+                          "properties": {
+                            "envelope": {
+                              "properties": {
+                                "severity": {
+                                  "const": "ERROR"
+                                },
+                                "disposition": {
+                                  "const": "PENDING"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "system_context": {
+                          "properties": {
+                            "is_in_safe_halt": {
+                              "const": false
+                            },
+                            "is_in_containment": {
+                              "const": false
+                            }
+                          }
+                        },
+                        "state_validity_diagnostic": {
+                          "properties": {
+                            "admissibility_status": {
+                              "const": "TRANSFORMATION_COMPATIBLE"
+                            }
+                          }
+                        },
+                        "classification_evidence": {
+                          "properties": {
+                            "correction_path_is_known": {
+                              "properties": {
+                                "evaluation": {
+                                  "const": "EVALUATED"
+                                },
+                                "value": {
+                                  "const": false
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "attempted_diagnostic": {
+                          "properties": {
+                            "envelope": {
+                              "properties": {
+                                "severity": {
+                                  "const": "WARNING"
+                                },
+                                "disposition": {
+                                  "const": "PENDING"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "system_context": {
+                          "properties": {
+                            "is_in_safe_halt": {
+                              "const": false
+                            },
+                            "is_in_containment": {
+                              "const": false
+                            }
+                          }
+                        },
+                        "state_validity_diagnostic": {
+                          "properties": {
+                            "admissibility_status": {
+                              "const": "TRANSFORMATION_INCOMPATIBLE"
+                            }
+                          }
+                        },
+                        "classification_evidence": {
+                          "properties": {
+                            "fallback_is_available": {
+                              "properties": {
+                                "evaluation": {
+                                  "const": "EVALUATED"
+                                },
+                                "value": {
+                                  "const": true
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "attempted_diagnostic": {
+                          "properties": {
+                            "envelope": {
+                              "properties": {
+                                "severity": {
+                                  "const": "ERROR"
+                                },
+                                "disposition": {
+                                  "const": "PENDING"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "system_context": {
+                          "properties": {
+                            "is_in_safe_halt": {
+                              "const": false
+                            },
+                            "is_in_containment": {
+                              "const": false
+                            }
+                          }
+                        },
+                        "state_validity_diagnostic": {
+                          "properties": {
+                            "admissibility_status": {
+                              "const": "TRANSFORMATION_INCOMPATIBLE"
+                            }
+                          }
+                        },
+                        "classification_evidence": {
+                          "properties": {
+                            "fallback_is_available": {
+                              "properties": {
+                                "evaluation": {
+                                  "const": "EVALUATED"
+                                },
+                                "value": {
+                                  "const": false
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "attempted_diagnostic": {
+                          "properties": {
+                            "envelope": {
+                              "properties": {
+                                "severity": {
+                                  "const": "ERROR"
+                                },
+                                "disposition": {
+                                  "const": "BLOCKED"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "system_context": {
+                          "properties": {
+                            "is_in_safe_halt": {
+                              "const": false
+                            },
+                            "is_in_containment": {
+                              "const": false
+                            }
+                          }
+                        },
+                        "state_validity_diagnostic": {
+                          "properties": {
+                            "admissibility_status": {
+                              "const": "UNCLASSIFIED"
+                            }
+                          }
+                        },
+                        "attempted_diagnostic": {
+                          "properties": {
+                            "envelope": {
+                              "properties": {
+                                "severity": {
+                                  "const": "ERROR"
+                                },
+                                "disposition": {
+                                  "const": "PENDING"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "if": {
+            "properties": {
+              "state_validity_diagnostic": {
+                "properties": {
+                  "admissibility_status": {
+                    "const": "VALID"
+                  }
+                }
+              },
+              "attempted_diagnostic": {
+                "properties": {
+                  "envelope": {
+                    "properties": {
+                      "stage": {
+                        "const": "DETECTION"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "attempted_diagnostic": {
+                "properties": {
+                  "envelope": {
+                    "properties": {
+                      "severity": {
+                        "const": "INFO"
+                      },
+                      "disposition": {
+                        "const": "RESOLVED"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state_validity_diagnostic": {
+                "properties": {
+                  "admissibility_status": {
+                    "const": "TRANSFORMATION_COMPATIBLE"
+                  }
+                }
+              },
+              "attempted_diagnostic": {
+                "properties": {
+                  "envelope": {
+                    "properties": {
+                      "stage": {
+                        "const": "DETECTION"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "attempted_diagnostic": {
+                "properties": {
+                  "envelope": {
+                    "properties": {
+                      "severity": {
+                        "const": "WARNING"
+                      },
+                      "disposition": {
+                        "const": "PENDING"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state_validity_diagnostic": {
+                "properties": {
+                  "admissibility_status": {
+                    "const": "TRANSFORMATION_INCOMPATIBLE"
+                  }
+                }
+              },
+              "attempted_diagnostic": {
+                "properties": {
+                  "envelope": {
+                    "properties": {
+                      "stage": {
+                        "const": "DETECTION"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "attempted_diagnostic": {
+                "properties": {
+                  "envelope": {
+                    "properties": {
+                      "severity": {
+                        "const": "ERROR"
+                      },
+                      "disposition": {
+                        "const": "BLOCKED"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state_validity_diagnostic": {
+                "properties": {
+                  "admissibility_status": {
+                    "const": "UNCLASSIFIED"
+                  }
+                }
+              },
+              "attempted_diagnostic": {
+                "properties": {
+                  "envelope": {
+                    "properties": {
+                      "stage": {
+                        "const": "DETECTION"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "attempted_diagnostic": {
+                "properties": {
+                  "envelope": {
+                    "properties": {
+                      "severity": {
+                        "const": "ERROR"
+                      },
+                      "disposition": {
+                        "const": "BLOCKED"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0039"
+    }
+  },
+  "x-ywe-reference-input-limits": {
+    "utf8_bytes": 4096,
+    "json_container_depth": 32,
+    "numeric_token_bytes": 128,
+    "direct_record_keys": 64,
+    "coordinate_observations": 9,
+    "preview_characters": 64,
+    "raw_byte_preview_bytes": 32
+  }
+}

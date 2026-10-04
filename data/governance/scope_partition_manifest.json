@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1158,
-    "path_digest": "0ef406c36546d87cf8c835e12aa48e5fac5356883ed2bc358555740d7ce8796b",
+    "path_count": 1165,
+    "path_digest": "1ca0408b289169084a4943e1c955d4cfcb1e9b9f444fbf5be60d752243f92234",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -2336,16 +2336,27 @@
       "secondary_tags": [
         "m2_structural_validation"
       ]
+    },
+    {
+      "path": "examples/core_state_assessment/state_assessment_cases.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_state_assessment_contract.md",
+      "rationale": "Independently authored fixtures exercise the neutral Core assessment contract using explicit profile bindings; they do not define WRW defaults or operational recovery.",
+      "secondary_tags": [
+        "m3_state_assessment",
+        "conformance_fixture"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
       "ash_dependency_material": 66,
-      "governance_validation": 448,
+      "governance_validation": 451,
       "historical_evidence": 21,
       "later_release_work": 59,
       "wrw_reference_profile": 303,
-      "ywe_core": 139,
+      "ywe_core": 143,
       "ywe_extension_profile": 122
     }
   }

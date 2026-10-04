@@ -1370,12 +1370,58 @@
         "data/schemas/rejection_scenario_catalog_schema.json#/$defs/ExecutionContracts",
         "data/validation/rejection_execution_contracts.json"
       ]
+    },
+    {
+      "id": "ADR-0029",
+      "record_type": "decision",
+      "title": "Immutable profile-bound StateModel assessment",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Core semantics maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt the independently reviewed assessment-only contract before dependent reference-oracle implementation, after verified M2 closure.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "The current Python facade coerces booleans, fractions, quoted and Unicode coordinates, retains mutable caller storage, publishes partial validity records, and infers contextual class/category without context or evaluated predicate evidence. Canonical malformed-input completeness also conflicts with its declared Vector[9] input type.",
+      "decision": "Separate construction-valid immutable state values from exact bounded representation decoding. StateModel owns profile-bound diagnosis and ordered contextual assessment with explicit context, bound predicate evidence and immediate acknowledged diagnostic capture. Adopt tagged rejected and profile-unavailable evidence, source-derived classifier/category mappings and locally specified finite producer limits. Migrate the no-context legacy facade and its snapshot/planner consumers to diagnosis-only output. Bind WRW privately from the actual pinned nine anchors, independently of the exported mutable compatibility mapping.",
+      "rationale": "The source-owned coherent diagnostic rows and classifier branches are executable without guessing recovery routes or changing the pinned mathematics. Explicit YWE transport variants reconcile malformed completeness while preserving truthful state identity. Diagnosis-only compatibility avoids inventing correction/fallback facts. The finite codec and retained failure snapshots address observed coercion and partial-observability defects at their owning boundaries.",
+      "consequences": [
+        "Canonical ASH source, mirror and dependency identity remain unchanged; all 512 full-vector identities and the fixed sixteen-codeword mathematics are preserved.",
+        "The no-context facade and embedded snapshot/planner diagnostics remove system_state_class and recovery_category; external consumers are unknown and the change is documented before implementation.",
+        "The Python implementation is a platform-neutral reference oracle/testing tool; native production and platform authorization remain governed by the existing policy and M10 gate.",
+        "Independent 64 classifier and 1,536 profile/state cases plus bounded-input/capture/mutation cases validate only this first slice; no M3 acceptance is implied.",
+        "Normalization, recovery/fallback execution, terminal transitions, cross-module Diagnostics meta-diagnostics and all remaining M3 completion obligations stay explicitly incomplete."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0039",
+        "YWE-REQ-0010",
+        "YWE-REQ-0015",
+        "YWE-REQ-0016"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_state_assessment_contract.md",
+        "data/schemas/m3_state_assessment_schema.json",
+        "core/ash_pattern_engine/canonical/core/ash-state-space.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/codeword-set.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/realm-identity.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/state-admissibility.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/state-validity-diagnostics.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/system-state-classification.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/recoverability-semantics.pseudo.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/state-model-contract.md",
+        "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
+        "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
+        "data/ash_state/realm_bit_mapping.yaml"
+      ]
     }
   ],
   "summary": {
-    "total_records": 45,
-    "architecture_decisions": 28,
-    "accepted_decisions": 28,
+    "total_records": 46,
+    "architecture_decisions": 29,
+    "accepted_decisions": 29,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

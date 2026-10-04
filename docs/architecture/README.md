@@ -111,6 +111,10 @@ baseline in view:
 - `../master_specification/YWE_MASTER_SPECIFICATION.md` -- informative WRW-backed mixed-scope composite; focused architecture and canon sources remain authoritative
 - `../../docs/project/repository_map.md` -- repository structure and scaffolding baseline paired with the master specification
 
+## M3 deterministic Core contracts
+
+- `m3_state_assessment_contract.md` -- Adopted immutable, profile-bound StateModel diagnosis and contextual assessment contract; normalization, runtime recovery and complete Diagnostics remain subsequent M3 work.
+
 ## Core Engines
 
 | Engine | Purpose |

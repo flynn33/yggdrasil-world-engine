@@ -9,7 +9,7 @@
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0039",
+    "next_available_id": "YWE-REQ-0040",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -872,13 +872,48 @@
         "data/schemas/rejection_scenario_catalog_schema.json#/$defs/ExecutionContracts",
         "data/validation/rejection_execution_contracts.json"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0039",
+      "title": "Source-bound immutable state assessment",
+      "normative_statement": "StateModel MUST construct immutable exact F2^9 states and produce complete source-bound diagnosis and contextual assessment records using an explicit immutable profile binding and the ordered canonical classifier. Its bounded codec MUST reject lossy numeric or representation coercion and retain truthful malformed-input evidence. Consulted predicates MUST use subject/profile/assessment-bound evaluated facts; unconsulted unavailable facts MUST NOT become inferred boolean values. Acknowledged diagnostics MUST survive subsequent capture or evidence failures. The legacy facade MUST expose diagnosis-only output and MUST NOT infer system class, recovery execution or complete Diagnostics conformance.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "tests/test_m3_state_model.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M3",
+      "owner_role": "Core semantics maintainers",
+      "decision_refs": [
+        "ADR-0029"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_state_assessment_contract.md",
+        "data/schemas/m3_state_assessment_schema.json",
+        "core/ash_pattern_engine/canonical/core/ash-state-space.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/codeword-set.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/realm-identity.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/state-admissibility.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/state-validity-diagnostics.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/system-state-classification.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/recoverability-semantics.pseudo.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/state-model-contract.md",
+        "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
+        "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
+        "data/ash_state/realm_bit_mapping.yaml"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 38,
-    "active": 38,
+    "total_requirements": 39,
+    "active": 39,
     "proposed": 0,
     "terminal": 0,
-    "next_identifier": "YWE-REQ-0039"
+    "next_identifier": "YWE-REQ-0040"
   }
 }

@@ -1,0 +1,3069 @@
+[
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "diagnosis",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:diagnosis-valid",
+      "original_input_reference": "m3_independent:diagnosis-valid:input",
+      "diagnosis_reference": "m3_independent:diagnosis-valid:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:diagnosis-valid:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "100000000",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "admissibility_status": "VALID",
+      "transformation_compatibility": "COMPATIBLE",
+      "normalization_status": "ALREADY_VALID",
+      "recoverability_relevance": "NO_RECOVERY_NEEDED",
+      "is_valid": true,
+      "orbit_info": {
+        "orbit_id": "000101100",
+        "member_count": 16,
+        "contains_known_valid_state": true
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:diagnosis-valid:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "INFO",
+          "stage": "DETECTION",
+          "disposition": "RESOLVED",
+          "subject_reference": "ash_state_100000000",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:diagnosis-valid:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "diagnosis",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:diagnosis-compatible",
+      "original_input_reference": "m3_independent:diagnosis-compatible:input",
+      "diagnosis_reference": "m3_independent:diagnosis-compatible:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:diagnosis-compatible:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "100011110",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "admissibility_status": "TRANSFORMATION_COMPATIBLE",
+      "transformation_compatibility": "COMPATIBLE",
+      "normalization_status": "NORMALIZABLE",
+      "recoverability_relevance": "RECOVERY_APPLICABLE",
+      "is_valid": false,
+      "orbit_info": {
+        "orbit_id": "000101100",
+        "member_count": 16,
+        "contains_known_valid_state": true
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:diagnosis-compatible:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "WARNING",
+          "stage": "DETECTION",
+          "disposition": "PENDING",
+          "subject_reference": "ash_state_100011110",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:diagnosis-compatible:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "diagnosis",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:diagnosis-incompatible",
+      "original_input_reference": "m3_independent:diagnosis-incompatible:input",
+      "diagnosis_reference": "m3_independent:diagnosis-incompatible:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:diagnosis-incompatible:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "000000000",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "admissibility_status": "TRANSFORMATION_INCOMPATIBLE",
+      "transformation_compatibility": "INCOMPATIBLE",
+      "normalization_status": "NOT_NORMALIZABLE",
+      "recoverability_relevance": "NOT_RECOVERABLE",
+      "is_valid": false,
+      "orbit_info": {
+        "orbit_id": "000000000",
+        "member_count": 16,
+        "contains_known_valid_state": false
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:diagnosis-incompatible:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "ERROR",
+          "stage": "DETECTION",
+          "disposition": "BLOCKED",
+          "subject_reference": "ash_state_000000000",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:diagnosis-incompatible:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "diagnosis",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:diagnosis-rejected",
+      "original_input_reference": "m3_independent:diagnosis-rejected:input",
+      "diagnosis_reference": "m3_independent:diagnosis-rejected:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:diagnosis-rejected:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 7,
+      "length_unit": "CHARACTERS",
+      "preview": "invalid",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": "INPUT_SIGNATURE_INVALID"
+    },
+    "parsed_state": null,
+    "state_validity_diagnostic": {
+      "input_state": {
+        "candidate_kind": "REJECTED",
+        "input_evidence": {
+          "original_input_reference": "m3_independent:diagnosis-rejected:input",
+          "representation_kind": "SIGNATURE",
+          "observed_length": 7,
+          "length_unit": "CHARACTERS",
+          "preview": "invalid",
+          "preview_encoding": "TEXT",
+          "truncated": false,
+          "coordinate_observations": [],
+          "failure_code": "INPUT_SIGNATURE_INVALID"
+        }
+      },
+      "admissibility_status": "UNCLASSIFIED",
+      "transformation_compatibility": "UNKNOWN",
+      "normalization_status": "BLOCKED",
+      "recoverability_relevance": "CONTAINMENT_NEEDED",
+      "is_valid": false,
+      "orbit_info": null,
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:diagnosis-rejected:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "ERROR",
+          "stage": "DETECTION",
+          "disposition": "BLOCKED",
+          "subject_reference": "m3_independent:diagnosis-rejected:input",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:diagnosis-rejected:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "diagnosis",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:diagnosis-unavailable",
+      "original_input_reference": "m3_independent:diagnosis-unavailable:input",
+      "diagnosis_reference": "m3_independent:diagnosis-unavailable:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "UNAVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "reason_code": "PROFILE_DATA_UNAVAILABLE",
+      "reason": "Explicit unavailable fixture authority."
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:diagnosis-unavailable:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "100000000",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "admissibility_status": "UNCLASSIFIED",
+      "transformation_compatibility": "UNKNOWN",
+      "normalization_status": "BLOCKED",
+      "recoverability_relevance": "CONTAINMENT_NEEDED",
+      "is_valid": false,
+      "orbit_info": null,
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:diagnosis-unavailable:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "ERROR",
+          "stage": "DETECTION",
+          "disposition": "BLOCKED",
+          "subject_reference": "ash_state_100000000",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:diagnosis-unavailable:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "assessment",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:assessment-stable",
+      "original_input_reference": "m3_independent:assessment-stable:input",
+      "diagnosis_reference": "m3_independent:assessment-stable:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:assessment-stable:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "100000000",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "admissibility_status": "VALID",
+      "transformation_compatibility": "COMPATIBLE",
+      "normalization_status": "ALREADY_VALID",
+      "recoverability_relevance": "NO_RECOVERY_NEEDED",
+      "is_valid": true,
+      "orbit_info": {
+        "orbit_id": "000101100",
+        "member_count": 16,
+        "contains_known_valid_state": true
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:assessment-stable:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "INFO",
+          "stage": "DETECTION",
+          "disposition": "RESOLVED",
+          "subject_reference": "ash_state_100000000",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:assessment-stable:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      },
+      {
+        "diagnostic_reference": "m3_independent:assessment-stable:classification",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "INFO",
+          "stage": "CLASSIFICATION",
+          "disposition": "RESOLVED",
+          "subject_reference": "ash_state_100000000",
+          "parent_diagnostic_reference": "m3_independent:assessment-stable:detection",
+          "chain_root_reference": "m3_independent:assessment-stable:detection",
+          "rule_ids": [
+            "ASH-CLASSIFICATION-MAPPING-001",
+            "ASH-RECOVERY-ACTION-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ],
+    "system_context": {
+      "is_in_safe_halt": false,
+      "is_in_containment": false
+    },
+    "classification_evidence": {
+      "correction_path_is_known": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-stable",
+          "diagnosis_reference": "m3_independent:assessment-stable:detection",
+          "subject_reference": "ash_state_100000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-stable:correction_path_is_known:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      },
+      "fallback_is_available": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-stable",
+          "diagnosis_reference": "m3_independent:assessment-stable:detection",
+          "subject_reference": "ash_state_100000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-stable:fallback_is_available:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      }
+    },
+    "system_state_class": "STABLE",
+    "recovery_category": "NO_ACTION",
+    "consulted_predicates": []
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "assessment",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:assessment-unstable",
+      "original_input_reference": "m3_independent:assessment-unstable:input",
+      "diagnosis_reference": "m3_independent:assessment-unstable:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:assessment-unstable:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "100011110",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "admissibility_status": "TRANSFORMATION_COMPATIBLE",
+      "transformation_compatibility": "COMPATIBLE",
+      "normalization_status": "NORMALIZABLE",
+      "recoverability_relevance": "RECOVERY_APPLICABLE",
+      "is_valid": false,
+      "orbit_info": {
+        "orbit_id": "000101100",
+        "member_count": 16,
+        "contains_known_valid_state": true
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:assessment-unstable:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "WARNING",
+          "stage": "DETECTION",
+          "disposition": "PENDING",
+          "subject_reference": "ash_state_100011110",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:assessment-unstable:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      },
+      {
+        "diagnostic_reference": "m3_independent:assessment-unstable:classification",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "WARNING",
+          "stage": "CLASSIFICATION",
+          "disposition": "PENDING",
+          "subject_reference": "ash_state_100011110",
+          "parent_diagnostic_reference": "m3_independent:assessment-unstable:detection",
+          "chain_root_reference": "m3_independent:assessment-unstable:detection",
+          "rule_ids": [
+            "ASH-CLASSIFICATION-MAPPING-001",
+            "ASH-RECOVERY-ACTION-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ],
+    "system_context": {
+      "is_in_safe_halt": false,
+      "is_in_containment": false
+    },
+    "classification_evidence": {
+      "correction_path_is_known": {
+        "evaluation": "EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-unstable",
+          "diagnosis_reference": "m3_independent:assessment-unstable:detection",
+          "subject_reference": "ash_state_100011110",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-unstable:correction_path_is_known:fixture"
+        },
+        "value": false
+      },
+      "fallback_is_available": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-unstable",
+          "diagnosis_reference": "m3_independent:assessment-unstable:detection",
+          "subject_reference": "ash_state_100011110",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-unstable:fallback_is_available:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      }
+    },
+    "system_state_class": "UNSTABLE",
+    "recovery_category": "NORMALIZE_STATE",
+    "consulted_predicates": [
+      "correction_path_is_known"
+    ]
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "assessment",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:assessment-correctable",
+      "original_input_reference": "m3_independent:assessment-correctable:input",
+      "diagnosis_reference": "m3_independent:assessment-correctable:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:assessment-correctable:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "100011110",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "admissibility_status": "TRANSFORMATION_COMPATIBLE",
+      "transformation_compatibility": "COMPATIBLE",
+      "normalization_status": "NORMALIZABLE",
+      "recoverability_relevance": "RECOVERY_APPLICABLE",
+      "is_valid": false,
+      "orbit_info": {
+        "orbit_id": "000101100",
+        "member_count": 16,
+        "contains_known_valid_state": true
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:assessment-correctable:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "WARNING",
+          "stage": "DETECTION",
+          "disposition": "PENDING",
+          "subject_reference": "ash_state_100011110",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:assessment-correctable:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      },
+      {
+        "diagnostic_reference": "m3_independent:assessment-correctable:classification",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "ERROR",
+          "stage": "CLASSIFICATION",
+          "disposition": "PENDING",
+          "subject_reference": "ash_state_100011110",
+          "parent_diagnostic_reference": "m3_independent:assessment-correctable:detection",
+          "chain_root_reference": "m3_independent:assessment-correctable:detection",
+          "rule_ids": [
+            "ASH-CLASSIFICATION-MAPPING-001",
+            "ASH-RECOVERY-ACTION-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ],
+    "system_context": {
+      "is_in_safe_halt": false,
+      "is_in_containment": false
+    },
+    "classification_evidence": {
+      "correction_path_is_known": {
+        "evaluation": "EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-correctable",
+          "diagnosis_reference": "m3_independent:assessment-correctable:detection",
+          "subject_reference": "ash_state_100011110",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-correctable:correction_path_is_known:fixture"
+        },
+        "value": true
+      },
+      "fallback_is_available": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-correctable",
+          "diagnosis_reference": "m3_independent:assessment-correctable:detection",
+          "subject_reference": "ash_state_100011110",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-correctable:fallback_is_available:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      }
+    },
+    "system_state_class": "CORRECTABLE",
+    "recovery_category": "APPLY_CORRECTION",
+    "consulted_predicates": [
+      "correction_path_is_known"
+    ]
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "assessment",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:assessment-degraded",
+      "original_input_reference": "m3_independent:assessment-degraded:input",
+      "diagnosis_reference": "m3_independent:assessment-degraded:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:assessment-degraded:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "000000000",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "admissibility_status": "TRANSFORMATION_INCOMPATIBLE",
+      "transformation_compatibility": "INCOMPATIBLE",
+      "normalization_status": "NOT_NORMALIZABLE",
+      "recoverability_relevance": "NOT_RECOVERABLE",
+      "is_valid": false,
+      "orbit_info": {
+        "orbit_id": "000000000",
+        "member_count": 16,
+        "contains_known_valid_state": false
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:assessment-degraded:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "ERROR",
+          "stage": "DETECTION",
+          "disposition": "BLOCKED",
+          "subject_reference": "ash_state_000000000",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:assessment-degraded:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      },
+      {
+        "diagnostic_reference": "m3_independent:assessment-degraded:classification",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "ERROR",
+          "stage": "CLASSIFICATION",
+          "disposition": "PENDING",
+          "subject_reference": "ash_state_000000000",
+          "parent_diagnostic_reference": "m3_independent:assessment-degraded:detection",
+          "chain_root_reference": "m3_independent:assessment-degraded:detection",
+          "rule_ids": [
+            "ASH-CLASSIFICATION-MAPPING-001",
+            "ASH-RECOVERY-ACTION-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ],
+    "system_context": {
+      "is_in_safe_halt": false,
+      "is_in_containment": false
+    },
+    "classification_evidence": {
+      "correction_path_is_known": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-degraded",
+          "diagnosis_reference": "m3_independent:assessment-degraded:detection",
+          "subject_reference": "ash_state_000000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-degraded:correction_path_is_known:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      },
+      "fallback_is_available": {
+        "evaluation": "EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-degraded",
+          "diagnosis_reference": "m3_independent:assessment-degraded:detection",
+          "subject_reference": "ash_state_000000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-degraded:fallback_is_available:fixture"
+        },
+        "value": true
+      }
+    },
+    "system_state_class": "DEGRADED",
+    "recovery_category": "FALLBACK_REQUIRED",
+    "consulted_predicates": [
+      "fallback_is_available"
+    ]
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "assessment",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:assessment-failed",
+      "original_input_reference": "m3_independent:assessment-failed:input",
+      "diagnosis_reference": "m3_independent:assessment-failed:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:assessment-failed:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "000000000",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "admissibility_status": "TRANSFORMATION_INCOMPATIBLE",
+      "transformation_compatibility": "INCOMPATIBLE",
+      "normalization_status": "NOT_NORMALIZABLE",
+      "recoverability_relevance": "NOT_RECOVERABLE",
+      "is_valid": false,
+      "orbit_info": {
+        "orbit_id": "000000000",
+        "member_count": 16,
+        "contains_known_valid_state": false
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:assessment-failed:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "ERROR",
+          "stage": "DETECTION",
+          "disposition": "BLOCKED",
+          "subject_reference": "ash_state_000000000",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:assessment-failed:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      },
+      {
+        "diagnostic_reference": "m3_independent:assessment-failed:classification",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "ERROR",
+          "stage": "CLASSIFICATION",
+          "disposition": "BLOCKED",
+          "subject_reference": "ash_state_000000000",
+          "parent_diagnostic_reference": "m3_independent:assessment-failed:detection",
+          "chain_root_reference": "m3_independent:assessment-failed:detection",
+          "rule_ids": [
+            "ASH-CLASSIFICATION-MAPPING-001",
+            "ASH-RECOVERY-ACTION-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ],
+    "system_context": {
+      "is_in_safe_halt": false,
+      "is_in_containment": false
+    },
+    "classification_evidence": {
+      "correction_path_is_known": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-failed",
+          "diagnosis_reference": "m3_independent:assessment-failed:detection",
+          "subject_reference": "ash_state_000000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-failed:correction_path_is_known:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      },
+      "fallback_is_available": {
+        "evaluation": "EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-failed",
+          "diagnosis_reference": "m3_independent:assessment-failed:detection",
+          "subject_reference": "ash_state_000000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-failed:fallback_is_available:fixture"
+        },
+        "value": false
+      }
+    },
+    "system_state_class": "FAILED",
+    "recovery_category": "ESCALATION_REQUIRED",
+    "consulted_predicates": [
+      "fallback_is_available"
+    ]
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "assessment",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:assessment-contained",
+      "original_input_reference": "m3_independent:assessment-contained:input",
+      "diagnosis_reference": "m3_independent:assessment-contained:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:assessment-contained:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "100011110",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "admissibility_status": "TRANSFORMATION_COMPATIBLE",
+      "transformation_compatibility": "COMPATIBLE",
+      "normalization_status": "NORMALIZABLE",
+      "recoverability_relevance": "RECOVERY_APPLICABLE",
+      "is_valid": false,
+      "orbit_info": {
+        "orbit_id": "000101100",
+        "member_count": 16,
+        "contains_known_valid_state": true
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:assessment-contained:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "WARNING",
+          "stage": "DETECTION",
+          "disposition": "PENDING",
+          "subject_reference": "ash_state_100011110",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:assessment-contained:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      },
+      {
+        "diagnostic_reference": "m3_independent:assessment-contained:classification",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "CRITICAL",
+          "stage": "CLASSIFICATION",
+          "disposition": "PENDING",
+          "subject_reference": "ash_state_100011110",
+          "parent_diagnostic_reference": "m3_independent:assessment-contained:detection",
+          "chain_root_reference": "m3_independent:assessment-contained:detection",
+          "rule_ids": [
+            "ASH-CLASSIFICATION-MAPPING-001",
+            "ASH-RECOVERY-ACTION-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ],
+    "system_context": {
+      "is_in_safe_halt": false,
+      "is_in_containment": true
+    },
+    "classification_evidence": {
+      "correction_path_is_known": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-contained",
+          "diagnosis_reference": "m3_independent:assessment-contained:detection",
+          "subject_reference": "ash_state_100011110",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-contained:correction_path_is_known:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      },
+      "fallback_is_available": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-contained",
+          "diagnosis_reference": "m3_independent:assessment-contained:detection",
+          "subject_reference": "ash_state_100011110",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-contained:fallback_is_available:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      }
+    },
+    "system_state_class": "CONTAINED",
+    "recovery_category": "CONTAINMENT_REQUIRED",
+    "consulted_predicates": []
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "assessment",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:assessment-safe_halt",
+      "original_input_reference": "m3_independent:assessment-safe_halt:input",
+      "diagnosis_reference": "m3_independent:assessment-safe_halt:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:assessment-safe_halt:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "100011110",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "admissibility_status": "TRANSFORMATION_COMPATIBLE",
+      "transformation_compatibility": "COMPATIBLE",
+      "normalization_status": "NORMALIZABLE",
+      "recoverability_relevance": "RECOVERY_APPLICABLE",
+      "is_valid": false,
+      "orbit_info": {
+        "orbit_id": "000101100",
+        "member_count": 16,
+        "contains_known_valid_state": true
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:assessment-safe_halt:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "WARNING",
+          "stage": "DETECTION",
+          "disposition": "PENDING",
+          "subject_reference": "ash_state_100011110",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:assessment-safe_halt:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      },
+      {
+        "diagnostic_reference": "m3_independent:assessment-safe_halt:classification",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "CRITICAL",
+          "stage": "CLASSIFICATION",
+          "disposition": "TERMINAL",
+          "subject_reference": "ash_state_100011110",
+          "parent_diagnostic_reference": "m3_independent:assessment-safe_halt:detection",
+          "chain_root_reference": "m3_independent:assessment-safe_halt:detection",
+          "rule_ids": [
+            "ASH-CLASSIFICATION-MAPPING-001",
+            "ASH-RECOVERY-ACTION-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ],
+    "system_context": {
+      "is_in_safe_halt": true,
+      "is_in_containment": true
+    },
+    "classification_evidence": {
+      "correction_path_is_known": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-safe_halt",
+          "diagnosis_reference": "m3_independent:assessment-safe_halt:detection",
+          "subject_reference": "ash_state_100011110",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-safe_halt:correction_path_is_known:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      },
+      "fallback_is_available": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-safe_halt",
+          "diagnosis_reference": "m3_independent:assessment-safe_halt:detection",
+          "subject_reference": "ash_state_100011110",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-safe_halt:fallback_is_available:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      }
+    },
+    "system_state_class": "SAFE_HALT",
+    "recovery_category": "TERMINAL_NO_RECOVERY",
+    "consulted_predicates": []
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "assessment",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:assessment-degraded-rejected",
+      "original_input_reference": "m3_independent:assessment-degraded-rejected:input",
+      "diagnosis_reference": "m3_independent:assessment-degraded-rejected:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:assessment-degraded-rejected:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 7,
+      "length_unit": "CHARACTERS",
+      "preview": "invalid",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": "INPUT_SIGNATURE_INVALID"
+    },
+    "parsed_state": null,
+    "state_validity_diagnostic": {
+      "input_state": {
+        "candidate_kind": "REJECTED",
+        "input_evidence": {
+          "original_input_reference": "m3_independent:assessment-degraded-rejected:input",
+          "representation_kind": "SIGNATURE",
+          "observed_length": 7,
+          "length_unit": "CHARACTERS",
+          "preview": "invalid",
+          "preview_encoding": "TEXT",
+          "truncated": false,
+          "coordinate_observations": [],
+          "failure_code": "INPUT_SIGNATURE_INVALID"
+        }
+      },
+      "admissibility_status": "UNCLASSIFIED",
+      "transformation_compatibility": "UNKNOWN",
+      "normalization_status": "BLOCKED",
+      "recoverability_relevance": "CONTAINMENT_NEEDED",
+      "is_valid": false,
+      "orbit_info": null,
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:assessment-degraded-rejected:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "ERROR",
+          "stage": "DETECTION",
+          "disposition": "BLOCKED",
+          "subject_reference": "m3_independent:assessment-degraded-rejected:input",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:assessment-degraded-rejected:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      },
+      {
+        "diagnostic_reference": "m3_independent:assessment-degraded-rejected:classification",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "ERROR",
+          "stage": "CLASSIFICATION",
+          "disposition": "PENDING",
+          "subject_reference": "m3_independent:assessment-degraded-rejected:input",
+          "parent_diagnostic_reference": "m3_independent:assessment-degraded-rejected:detection",
+          "chain_root_reference": "m3_independent:assessment-degraded-rejected:detection",
+          "rule_ids": [
+            "ASH-CLASSIFICATION-MAPPING-001",
+            "ASH-RECOVERY-ACTION-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ],
+    "system_context": {
+      "is_in_safe_halt": false,
+      "is_in_containment": false
+    },
+    "classification_evidence": {
+      "correction_path_is_known": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-degraded-rejected",
+          "diagnosis_reference": "m3_independent:assessment-degraded-rejected:detection",
+          "subject_reference": "m3_independent:assessment-degraded-rejected:input",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-degraded-rejected:correction_path_is_known:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      },
+      "fallback_is_available": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:assessment-degraded-rejected",
+          "diagnosis_reference": "m3_independent:assessment-degraded-rejected:detection",
+          "subject_reference": "m3_independent:assessment-degraded-rejected:input",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:assessment-degraded-rejected:fallback_is_available:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      }
+    },
+    "system_state_class": "DEGRADED",
+    "recovery_category": "FALLBACK_REQUIRED",
+    "consulted_predicates": []
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "failure",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:missing-correction_path_is_known",
+      "original_input_reference": "m3_independent:missing-correction_path_is_known:input",
+      "diagnosis_reference": "m3_independent:missing-correction_path_is_known:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:missing-correction_path_is_known:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "100011110",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "admissibility_status": "TRANSFORMATION_COMPATIBLE",
+      "transformation_compatibility": "COMPATIBLE",
+      "normalization_status": "NORMALIZABLE",
+      "recoverability_relevance": "RECOVERY_APPLICABLE",
+      "is_valid": false,
+      "orbit_info": {
+        "orbit_id": "000101100",
+        "member_count": 16,
+        "contains_known_valid_state": true
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:missing-correction_path_is_known:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "WARNING",
+          "stage": "DETECTION",
+          "disposition": "PENDING",
+          "subject_reference": "ash_state_100011110",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:missing-correction_path_is_known:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ],
+    "system_context": {
+      "is_in_safe_halt": false,
+      "is_in_containment": false
+    },
+    "classification_evidence": {
+      "correction_path_is_known": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:missing-correction_path_is_known",
+          "diagnosis_reference": "m3_independent:missing-correction_path_is_known:detection",
+          "subject_reference": "ash_state_100011110",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:missing-correction_path_is_known:correction_path_is_known:fixture"
+        },
+        "reason": "Consulted owner evidence unavailable."
+      },
+      "fallback_is_available": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:missing-correction_path_is_known",
+          "diagnosis_reference": "m3_independent:missing-correction_path_is_known:detection",
+          "subject_reference": "ash_state_100011110",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:missing-correction_path_is_known:fallback_is_available:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      }
+    },
+    "failure_kind": "classification_evidence",
+    "failure_code": "PREDICATE_NOT_EVALUATED",
+    "failed_predicate": "correction_path_is_known"
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "failure",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:missing-fallback_is_available",
+      "original_input_reference": "m3_independent:missing-fallback_is_available:input",
+      "diagnosis_reference": "m3_independent:missing-fallback_is_available:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:missing-fallback_is_available:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "000000000",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "admissibility_status": "TRANSFORMATION_INCOMPATIBLE",
+      "transformation_compatibility": "INCOMPATIBLE",
+      "normalization_status": "NOT_NORMALIZABLE",
+      "recoverability_relevance": "NOT_RECOVERABLE",
+      "is_valid": false,
+      "orbit_info": {
+        "orbit_id": "000000000",
+        "member_count": 16,
+        "contains_known_valid_state": false
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:missing-fallback_is_available:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "ERROR",
+          "stage": "DETECTION",
+          "disposition": "BLOCKED",
+          "subject_reference": "ash_state_000000000",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:missing-fallback_is_available:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ],
+    "system_context": {
+      "is_in_safe_halt": false,
+      "is_in_containment": false
+    },
+    "classification_evidence": {
+      "correction_path_is_known": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:missing-fallback_is_available",
+          "diagnosis_reference": "m3_independent:missing-fallback_is_available:detection",
+          "subject_reference": "ash_state_000000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:missing-fallback_is_available:correction_path_is_known:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      },
+      "fallback_is_available": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:missing-fallback_is_available",
+          "diagnosis_reference": "m3_independent:missing-fallback_is_available:detection",
+          "subject_reference": "ash_state_000000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:missing-fallback_is_available:fallback_is_available:fixture"
+        },
+        "reason": "Consulted owner evidence unavailable."
+      }
+    },
+    "failure_kind": "classification_evidence",
+    "failure_code": "PREDICATE_NOT_EVALUATED",
+    "failed_predicate": "fallback_is_available"
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "failure",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:capture-detection-rejected",
+      "original_input_reference": "m3_independent:capture-detection-rejected:input",
+      "diagnosis_reference": "m3_independent:capture-detection-rejected:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:capture-detection-rejected:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "100000000",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "admissibility_status": "VALID",
+      "transformation_compatibility": "COMPATIBLE",
+      "normalization_status": "ALREADY_VALID",
+      "recoverability_relevance": "NO_RECOVERY_NEEDED",
+      "is_valid": true,
+      "orbit_info": {
+        "orbit_id": "000101100",
+        "member_count": 16,
+        "contains_known_valid_state": true
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [],
+    "system_context": {
+      "is_in_safe_halt": false,
+      "is_in_containment": false
+    },
+    "classification_evidence": {
+      "correction_path_is_known": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:capture-detection-rejected",
+          "diagnosis_reference": "m3_independent:capture-detection-rejected:detection",
+          "subject_reference": "ash_state_100000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:capture-detection-rejected:correction_path_is_known:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      },
+      "fallback_is_available": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:capture-detection-rejected",
+          "diagnosis_reference": "m3_independent:capture-detection-rejected:detection",
+          "subject_reference": "ash_state_100000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:capture-detection-rejected:fallback_is_available:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      }
+    },
+    "failure_kind": "diagnostic_capture",
+    "capture_status": "REJECTED",
+    "failure_code": "DIAGNOSTIC_CAPTURE_REJECTED",
+    "attempted_diagnostic": {
+      "diagnostic_reference": "m3_independent:capture-detection-rejected:detection",
+      "envelope": {
+        "diagnostic_kind": "STATE_VALIDITY",
+        "severity": "INFO",
+        "stage": "DETECTION",
+        "disposition": "RESOLVED",
+        "subject_reference": "ash_state_100000000",
+        "parent_diagnostic_reference": null,
+        "chain_root_reference": "m3_independent:capture-detection-rejected:detection",
+        "rule_ids": [
+          "ASH-STATE-VALIDITY-001"
+        ],
+        "summary": "Independently authored bounded state observation.",
+        "notes": [
+          "No recovery or lifecycle operation is asserted."
+        ]
+      }
+    }
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "failure",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:capture-detection-not_confirmed",
+      "original_input_reference": "m3_independent:capture-detection-not_confirmed:input",
+      "diagnosis_reference": "m3_independent:capture-detection-not_confirmed:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:capture-detection-not_confirmed:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "100000000",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "admissibility_status": "VALID",
+      "transformation_compatibility": "COMPATIBLE",
+      "normalization_status": "ALREADY_VALID",
+      "recoverability_relevance": "NO_RECOVERY_NEEDED",
+      "is_valid": true,
+      "orbit_info": {
+        "orbit_id": "000101100",
+        "member_count": 16,
+        "contains_known_valid_state": true
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [],
+    "system_context": {
+      "is_in_safe_halt": false,
+      "is_in_containment": false
+    },
+    "classification_evidence": {
+      "correction_path_is_known": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:capture-detection-not_confirmed",
+          "diagnosis_reference": "m3_independent:capture-detection-not_confirmed:detection",
+          "subject_reference": "ash_state_100000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:capture-detection-not_confirmed:correction_path_is_known:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      },
+      "fallback_is_available": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:capture-detection-not_confirmed",
+          "diagnosis_reference": "m3_independent:capture-detection-not_confirmed:detection",
+          "subject_reference": "ash_state_100000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:capture-detection-not_confirmed:fallback_is_available:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      }
+    },
+    "failure_kind": "diagnostic_capture",
+    "capture_status": "NOT_CONFIRMED",
+    "failure_code": "DIAGNOSTIC_CAPTURE_UNCONFIRMED",
+    "attempted_diagnostic": {
+      "diagnostic_reference": "m3_independent:capture-detection-not_confirmed:detection",
+      "envelope": {
+        "diagnostic_kind": "STATE_VALIDITY",
+        "severity": "INFO",
+        "stage": "DETECTION",
+        "disposition": "RESOLVED",
+        "subject_reference": "ash_state_100000000",
+        "parent_diagnostic_reference": null,
+        "chain_root_reference": "m3_independent:capture-detection-not_confirmed:detection",
+        "rule_ids": [
+          "ASH-STATE-VALIDITY-001"
+        ],
+        "summary": "Independently authored bounded state observation.",
+        "notes": [
+          "No recovery or lifecycle operation is asserted."
+        ]
+      }
+    }
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "failure",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:capture-classification-rejected",
+      "original_input_reference": "m3_independent:capture-classification-rejected:input",
+      "diagnosis_reference": "m3_independent:capture-classification-rejected:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:capture-classification-rejected:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "100000000",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "admissibility_status": "VALID",
+      "transformation_compatibility": "COMPATIBLE",
+      "normalization_status": "ALREADY_VALID",
+      "recoverability_relevance": "NO_RECOVERY_NEEDED",
+      "is_valid": true,
+      "orbit_info": {
+        "orbit_id": "000101100",
+        "member_count": 16,
+        "contains_known_valid_state": true
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:capture-classification-rejected:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "INFO",
+          "stage": "DETECTION",
+          "disposition": "RESOLVED",
+          "subject_reference": "ash_state_100000000",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:capture-classification-rejected:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ],
+    "system_context": {
+      "is_in_safe_halt": false,
+      "is_in_containment": false
+    },
+    "classification_evidence": {
+      "correction_path_is_known": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:capture-classification-rejected",
+          "diagnosis_reference": "m3_independent:capture-classification-rejected:detection",
+          "subject_reference": "ash_state_100000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:capture-classification-rejected:correction_path_is_known:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      },
+      "fallback_is_available": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:capture-classification-rejected",
+          "diagnosis_reference": "m3_independent:capture-classification-rejected:detection",
+          "subject_reference": "ash_state_100000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:capture-classification-rejected:fallback_is_available:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      }
+    },
+    "failure_kind": "diagnostic_capture",
+    "capture_status": "REJECTED",
+    "failure_code": "DIAGNOSTIC_CAPTURE_REJECTED",
+    "attempted_diagnostic": {
+      "diagnostic_reference": "m3_independent:capture-classification-rejected:classification",
+      "envelope": {
+        "diagnostic_kind": "STATE_VALIDITY",
+        "severity": "INFO",
+        "stage": "CLASSIFICATION",
+        "disposition": "RESOLVED",
+        "subject_reference": "ash_state_100000000",
+        "parent_diagnostic_reference": "m3_independent:capture-classification-rejected:detection",
+        "chain_root_reference": "m3_independent:capture-classification-rejected:detection",
+        "rule_ids": [
+          "ASH-CLASSIFICATION-MAPPING-001",
+          "ASH-RECOVERY-ACTION-001"
+        ],
+        "summary": "Independently authored bounded state observation.",
+        "notes": [
+          "No recovery or lifecycle operation is asserted."
+        ]
+      }
+    }
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "failure",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:capture-classification-not_confirmed",
+      "original_input_reference": "m3_independent:capture-classification-not_confirmed:input",
+      "diagnosis_reference": "m3_independent:capture-classification-not_confirmed:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:capture-classification-not_confirmed:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "100000000",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "admissibility_status": "VALID",
+      "transformation_compatibility": "COMPATIBLE",
+      "normalization_status": "ALREADY_VALID",
+      "recoverability_relevance": "NO_RECOVERY_NEEDED",
+      "is_valid": true,
+      "orbit_info": {
+        "orbit_id": "000101100",
+        "member_count": 16,
+        "contains_known_valid_state": true
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [
+      {
+        "diagnostic_reference": "m3_independent:capture-classification-not_confirmed:detection",
+        "envelope": {
+          "diagnostic_kind": "STATE_VALIDITY",
+          "severity": "INFO",
+          "stage": "DETECTION",
+          "disposition": "RESOLVED",
+          "subject_reference": "ash_state_100000000",
+          "parent_diagnostic_reference": null,
+          "chain_root_reference": "m3_independent:capture-classification-not_confirmed:detection",
+          "rule_ids": [
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "summary": "Independently authored bounded state observation.",
+          "notes": [
+            "No recovery or lifecycle operation is asserted."
+          ]
+        }
+      }
+    ],
+    "system_context": {
+      "is_in_safe_halt": false,
+      "is_in_containment": false
+    },
+    "classification_evidence": {
+      "correction_path_is_known": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:capture-classification-not_confirmed",
+          "diagnosis_reference": "m3_independent:capture-classification-not_confirmed:detection",
+          "subject_reference": "ash_state_100000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:capture-classification-not_confirmed:correction_path_is_known:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      },
+      "fallback_is_available": {
+        "evaluation": "NOT_EVALUATED",
+        "binding": {
+          "assessment_reference": "m3_independent:capture-classification-not_confirmed",
+          "diagnosis_reference": "m3_independent:capture-classification-not_confirmed:detection",
+          "subject_reference": "ash_state_100000000",
+          "profile_id": "wrw_reference_profile",
+          "profile_source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+          "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+          "evidence_reference": "m3_independent:capture-classification-not_confirmed:fallback_is_available:fixture"
+        },
+        "reason": "Not consulted by this declared branch."
+      }
+    },
+    "failure_kind": "diagnostic_capture",
+    "capture_status": "NOT_CONFIRMED",
+    "failure_code": "DIAGNOSTIC_CAPTURE_UNCONFIRMED",
+    "attempted_diagnostic": {
+      "diagnostic_reference": "m3_independent:capture-classification-not_confirmed:classification",
+      "envelope": {
+        "diagnostic_kind": "STATE_VALIDITY",
+        "severity": "INFO",
+        "stage": "CLASSIFICATION",
+        "disposition": "RESOLVED",
+        "subject_reference": "ash_state_100000000",
+        "parent_diagnostic_reference": "m3_independent:capture-classification-not_confirmed:detection",
+        "chain_root_reference": "m3_independent:capture-classification-not_confirmed:detection",
+        "rule_ids": [
+          "ASH-CLASSIFICATION-MAPPING-001",
+          "ASH-RECOVERY-ACTION-001"
+        ],
+        "summary": "Independently authored bounded state observation.",
+        "notes": [
+          "No recovery or lifecycle operation is asserted."
+        ]
+      }
+    }
+  },
+  {
+    "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+    "artifact_type": "ywe_state_assessment",
+    "artifact_version": "1.0.0",
+    "outcome": "failure",
+    "assessment_binding": {
+      "assessment_reference": "m3_independent:capture-diagnosis-only",
+      "original_input_reference": "m3_independent:capture-diagnosis-only:input",
+      "diagnosis_reference": "m3_independent:capture-diagnosis-only:detection"
+    },
+    "source_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    },
+    "profile_binding": {
+      "availability": "AVAILABLE",
+      "profile_id": "wrw_reference_profile",
+      "source_binding": {
+        "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+        "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+        "evidence_reference": "wrw_reference_profile:source_binding"
+      },
+      "recognized_valid_signatures": [
+        "000000001",
+        "000000010",
+        "000000100",
+        "000001000",
+        "000010000",
+        "000100000",
+        "001000000",
+        "010000000",
+        "100000000"
+      ]
+    },
+    "input_evidence": {
+      "original_input_reference": "m3_independent:capture-diagnosis-only:input",
+      "representation_kind": "SIGNATURE",
+      "observed_length": 9,
+      "length_unit": "CHARACTERS",
+      "preview": "100000000",
+      "preview_encoding": "TEXT",
+      "truncated": false,
+      "coordinate_observations": [],
+      "failure_code": null
+    },
+    "parsed_state": {
+      "state_space": "F2^9",
+      "bits": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "state_validity_diagnostic": {
+      "input_state": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "admissibility_status": "VALID",
+      "transformation_compatibility": "COMPATIBLE",
+      "normalization_status": "ALREADY_VALID",
+      "recoverability_relevance": "NO_RECOVERY_NEEDED",
+      "is_valid": true,
+      "orbit_info": {
+        "orbit_id": "000101100",
+        "member_count": 16,
+        "contains_known_valid_state": true
+      },
+      "rule_ids": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-STATE-VALIDITY-001"
+      ],
+      "notes": [
+        "Input and classification facts are declared independently of production code."
+      ]
+    },
+    "emitted_diagnostics": [],
+    "failure_kind": "diagnostic_capture",
+    "failure_code": "DIAGNOSTIC_CAPTURE_UNCONFIRMED",
+    "capture_status": "NOT_CONFIRMED",
+    "attempted_diagnostic": {
+      "diagnostic_reference": "m3_independent:capture-diagnosis-only:detection",
+      "envelope": {
+        "diagnostic_kind": "STATE_VALIDITY",
+        "severity": "INFO",
+        "stage": "DETECTION",
+        "disposition": "RESOLVED",
+        "subject_reference": "ash_state_100000000",
+        "parent_diagnostic_reference": null,
+        "chain_root_reference": "m3_independent:capture-diagnosis-only:detection",
+        "rule_ids": [
+          "ASH-STATE-VALIDITY-001"
+        ],
+        "summary": "Independently authored bounded state observation.",
+        "notes": [
+          "No recovery or lifecycle operation is asserted."
+        ]
+      }
+    },
+    "system_context": null,
+    "classification_evidence": null
+  }
+]

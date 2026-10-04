@@ -8,29 +8,11 @@ and planner/emitter materialization boundary.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import Iterable, Sequence
 
-ASH_STATE_BITS = 9
+from .state_values import AshState, CANONICAL_CODEWORDS, StateContractError
 
-CANONICAL_CODEWORDS: tuple[tuple[int, ...], ...] = (
-    (0, 0, 0, 0, 0, 0, 0, 0, 0),
-    (0, 0, 0, 0, 1, 1, 1, 1, 0),
-    (0, 0, 1, 1, 0, 0, 1, 1, 0),
-    (0, 0, 1, 1, 1, 1, 0, 0, 0),
-    (0, 1, 0, 1, 0, 1, 0, 1, 0),
-    (0, 1, 0, 1, 1, 0, 1, 0, 0),
-    (0, 1, 1, 0, 0, 1, 1, 0, 0),
-    (0, 1, 1, 0, 1, 0, 0, 1, 0),
-    (1, 0, 0, 1, 0, 1, 1, 0, 0),
-    (1, 0, 0, 1, 1, 0, 0, 1, 0),
-    (1, 0, 1, 0, 0, 1, 0, 1, 0),
-    (1, 0, 1, 0, 1, 0, 1, 0, 0),
-    (1, 1, 0, 0, 0, 0, 1, 1, 0),
-    (1, 1, 0, 0, 1, 1, 0, 0, 0),
-    (1, 1, 1, 1, 0, 0, 0, 0, 0),
-    (1, 1, 1, 1, 1, 1, 1, 1, 0),
-)
+ASH_STATE_BITS = 9
 
 YWE_REALM_STATE_ANCHORS: dict[str, tuple[int, ...]] = {
     "divine_core": (1, 0, 0, 0, 0, 0, 0, 0, 0),
@@ -44,13 +26,6 @@ YWE_REALM_STATE_ANCHORS: dict[str, tuple[int, ...]] = {
     "void": (0, 0, 0, 0, 0, 0, 0, 0, 1),
 }
 
-SYSTEM_STATE_BY_ADMISSIBILITY = {
-    "VALID": "STABLE",
-    "TRANSFORMATION_COMPATIBLE": "CORRECTABLE",
-    "TRANSFORMATION_INCOMPATIBLE": "CONTAINED",
-    "UNCLASSIFIED": "SAFE_HALT",
-}
-
 RECOVERY_BY_SYSTEM_STATE = {
     "STABLE": "NO_ACTION",
     "UNSTABLE": "NORMALIZE_STATE",
@@ -61,27 +36,15 @@ RECOVERY_BY_SYSTEM_STATE = {
     "SAFE_HALT": "TERMINAL_NO_RECOVERY",
 }
 
-
-@dataclass(frozen=True)
-class AshState:
-    bits: tuple[int, ...]
-
-    @property
-    def signature(self) -> str:
-        return encode_state_signature(self.bits)
-
-
 def normalize_bits(bits: Sequence[int] | str) -> tuple[int, ...]:
-    if isinstance(bits, str):
-        candidate = tuple(int(ch) for ch in bits.strip())
-    else:
-        candidate = tuple(int(bit) for bit in bits)
+    from .state_model import StateInputCodec
 
-    if len(candidate) != ASH_STATE_BITS:
-        raise ValueError("ASH states must be full 9-bit vectors")
-    if any(bit not in (0, 1) for bit in candidate):
-        raise ValueError("ASH state coordinates must be elements of F2")
-    return candidate
+    decoded = StateInputCodec().decode(
+        bits, original_input_reference="legacy:normalization", legacy_whitespace=True
+    )
+    if decoded.state is None:
+        raise StateContractError(decoded.input_evidence.failure_code, "bits")
+    return decoded.state.bits
 
 
 def encode_state_signature(bits: Sequence[int] | str) -> str:
@@ -138,55 +101,15 @@ def encode_realm_identity(state: Sequence[int] | str) -> dict[str, str]:
     return encode_state_identity(state)
 
 
-def _known_valid_orbits() -> set[str]:
-    return {orbit_id(anchor) for anchor in YWE_REALM_STATE_ANCHORS.values()}
-
-
 def classify_admissibility(state: Sequence[int] | str) -> str:
-    try:
-        bits = normalize_bits(state)
-    except (TypeError, ValueError):
-        return "UNCLASSIFIED"
-
-    if bits in YWE_REALM_STATE_ANCHORS.values():
-        return "VALID"
-    if orbit_id(bits) in _known_valid_orbits():
-        return "TRANSFORMATION_COMPATIBLE"
-    return "TRANSFORMATION_INCOMPATIBLE"
+    return diagnose_state(state)["admissibility_status"]
 
 
 def diagnose_state(state: Sequence[int] | str) -> dict[str, object]:
-    status = classify_admissibility(state)
-    system_state = SYSTEM_STATE_BY_ADMISSIBILITY[status]
-    recovery = RECOVERY_BY_SYSTEM_STATE[system_state]
-    severity = "INFO" if system_state == "STABLE" else "ERROR"
-    if system_state in {"CONTAINED", "SAFE_HALT"}:
-        severity = "CRITICAL"
+    """Return complete WRW diagnosis without inferring contextual recovery facts."""
+    from .state_model import legacy_diagnosis
 
-    subject = "malformed"
-    try:
-        subject = encode_state_signature(state)
-    except (TypeError, ValueError):
-        pass
-
-    return {
-        "diagnostic_kind": "STATE_VALIDITY",
-        "severity": severity,
-        "stage": "DETECTION",
-        "disposition": "RESOLVED" if system_state == "STABLE" else "PENDING",
-        "subject_reference": subject,
-        "parent_diagnostic_reference": "NONE",
-        "chain_root_reference": "SELF",
-        "rule_ids": ["ASH-STATE-GENERAL-001"],
-        "summary": f"ASH state classified as {status}",
-        "notes": [
-            "Classification used the canonical F2^9 state space and fixed 16-codeword set.",
-            f"System state: {system_state}; recovery category: {recovery}.",
-        ],
-        "admissibility_status": status,
-        "system_state_class": system_state,
-        "recovery_category": recovery,
-    }
+    return legacy_diagnosis(state)
 
 
 def build_cosmic_pattern_snapshot(

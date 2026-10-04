@@ -4,6 +4,10 @@
 from __future__ import annotations
 
 import hashlib
+import importlib
+import importlib.abc
+import importlib.machinery
+import importlib.util
 import io
 import json
 import re
@@ -14,6 +18,7 @@ import tarfile
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Iterable
+from uuid import uuid4
 
 import yaml
 from jsonschema import FormatChecker
@@ -1813,14 +1818,87 @@ def check_executable_identity_namespace(
         errors.append("GenerationPlan lacks equal canonical and compatibility identity outputs")
 
 
+_IDENTITY_PACKAGE_PREFIX = "_ywe_m1_identity_"
+
+
+class _IdentitySourceLoader(importlib.machinery.SourceFileLoader):
+    """Validate current selected-root source, even when a stale pyc exists."""
+
+    def get_code(self, fullname: str):
+        return self.source_to_code(self.get_data(self.path), self.path)
+
+
+class _IdentityPackageFinder(importlib.abc.MetaPathFinder):
+    def __init__(self, package_name: str, package_root: Path):
+        self.package_name = package_name
+        self.package_root = package_root
+
+    def find_spec(self, fullname: str, path=None, target=None):
+        prefix = self.package_name + "."
+        if not fullname.startswith(prefix):
+            return None
+        selected = self.package_root.joinpath(*fullname[len(prefix):].split("."))
+        initializer = selected / "__init__.py"
+        if initializer.is_file():
+            source = initializer
+            locations = [str(selected)]
+        elif selected.with_suffix(".py").is_file():
+            source = selected.with_suffix(".py")
+            locations = None
+        else:
+            return None
+        return importlib.util.spec_from_file_location(
+            fullname, source, loader=_IdentitySourceLoader(fullname, str(source)),
+            submodule_search_locations=locations,
+        )
+
+
 def check_executable_identity(root: Path, errors: list[str]) -> None:
-    relative_path = "core/ash_pattern_engine/ash_canonical.py"
-    try:
-        namespace = runpy.run_path(str(root / relative_path))
-    except Exception as exc:
-        errors.append(f"Unable to load canonical executable identity interface: {exc}")
+    package_root = root / "core/ash_pattern_engine"
+    initializer = package_root / "__init__.py"
+    if not initializer.is_file():
+        # Historical standalone interfaces do not require a package namespace.
+        try:
+            namespace = runpy.run_path(str(package_root / "ash_canonical.py"))
+        except Exception as exc:
+            errors.append(f"Unable to load canonical executable identity interface: {exc}")
+            return
+        try:
+            check_executable_identity_namespace(namespace, errors)
+        except Exception as exc:
+            errors.append(f"Canonical executable identity interface raised an error: {exc}")
         return
-    check_executable_identity_namespace(namespace, errors)
+
+    package_name = _IDENTITY_PACKAGE_PREFIX + uuid4().hex
+    finder = _IdentityPackageFinder(package_name, package_root)
+    sys.meta_path.insert(0, finder)
+    try:
+        try:
+            spec = importlib.util.spec_from_file_location(
+                package_name, initializer,
+                loader=_IdentitySourceLoader(package_name, str(initializer)),
+                submodule_search_locations=[str(package_root)],
+            )
+            if spec is None or spec.loader is None:
+                raise ImportError("selected canonical package has no source loader")
+            package = importlib.util.module_from_spec(spec)
+            sys.modules[package_name] = package
+            spec.loader.exec_module(package)
+            interface = importlib.import_module(package_name + ".ash_canonical")
+        except Exception as exc:
+            errors.append(f"Unable to load canonical executable identity interface: {exc}")
+            return
+        try:
+            check_executable_identity_namespace(vars(interface), errors)
+        except Exception as exc:
+            errors.append(f"Canonical executable identity interface raised an error: {exc}")
+    finally:
+        # Keep lazy relative imports available through execution, then remove all
+        # modules owned by this check without disturbing the live core package.
+        for name in tuple(sys.modules):
+            if name == package_name or name.startswith(package_name + "."):
+                sys.modules.pop(name, None)
+        sys.meta_path[:] = [entry for entry in sys.meta_path if entry is not finder]
 
 
 def check_semantic_surfaces(root: Path, errors: list[str]) -> None:

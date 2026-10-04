@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import copy
 import json
+import os
+import py_compile
 import subprocess
 import sys
 import tempfile
@@ -585,6 +587,151 @@ class SemanticMigrationTests(unittest.TestCase):
         errors: list[str] = []
         m1.check_executable_identity_namespace(namespace, errors)
         assert_error_contains(self, errors, "does not equal")
+
+
+class ExecutableIdentityLoadingTests(unittest.TestCase):
+    def write_package(self, root: Path, mode: str = "valid") -> Path:
+        package = "core/ash_pattern_engine/"
+        write_text(root, package + "__init__.py", "from .ash_canonical import *\n")
+        write_text(
+            root, package + "values.py",
+            "from __future__ import annotations\n"
+            "from dataclasses import dataclass\n"
+            "@dataclass(frozen=True)\n"
+            "class Signature:\n"
+            "    value: str\n",
+        )
+        write_text(
+            root, package + "identity_impl.py",
+            f'MODE = "{mode}"\n'
+            "def identity(value):\n"
+            "    return {'state_signature': value, 'vertex_id': 'ash_state_' + value,\n"
+            "            'realm_id': 'ash_state_' + value, 'orbit_id': value}\n"
+            "def legacy_identity(value):\n"
+            "    record = identity(value)\n"
+            "    if MODE == 'wrong':\n"
+            "        record['realm_id'] = 'conflict'\n"
+            "    return record\n",
+        )
+        write_text(
+            root, package + "ash_canonical.py",
+            "from .values import Signature\n"
+            "def encode_state_identity(value):\n"
+            "    from .identity_impl import identity\n"
+            "    return identity(Signature(value).value)\n"
+            "def encode_realm_identity(value):\n"
+            "    from .identity_impl import legacy_identity\n"
+            "    return legacy_identity(value)\n"
+            "def build_cosmic_pattern_snapshot(value):\n"
+            "    record = encode_state_identity(value)\n"
+            "    return {'normalized_state': value, 'state_identity': record, 'realm_identity': record}\n"
+            "def plan_generation(name, value):\n"
+            "    record = encode_state_identity(value)\n"
+            "    return {'source_state_identity': record, 'source_realm': record,\n"
+            "            'destination_state_identity': record, 'destination_realm': record}\n",
+        )
+        return root / package
+
+    def assert_isolated_check(self, root: Path) -> list[str]:
+        private_before = {name for name in sys.modules if name.startswith(m1._IDENTITY_PACKAGE_PREFIX)}
+        core_before = {name: module for name, module in sys.modules.items()
+                       if name == "core" or name.startswith("core.")}
+        path_before = list(sys.path)
+        finders_before = tuple(sys.meta_path)
+        errors: list[str] = []
+        m1.check_executable_identity(root, errors)
+        self.assertEqual(private_before,
+                         {name for name in sys.modules if name.startswith(m1._IDENTITY_PACKAGE_PREFIX)})
+        self.assertEqual(path_before, sys.path)
+        self.assertEqual(len(finders_before), len(sys.meta_path))
+        self.assertTrue(all(before is after for before, after in zip(finders_before, sys.meta_path)))
+        self.assertEqual(core_before,
+                         {name: module for name, module in sys.modules.items()
+                          if name == "core" or name.startswith("core.")})
+        return errors
+
+    def test_live_modular_facade_passes_without_changing_global_core_or_import_paths(self):
+        from core.ash_pattern_engine import ash_canonical
+
+        self.assertEqual([], self.assert_isolated_check(ROOT))
+        self.assertIs(ash_canonical, sys.modules["core.ash_pattern_engine.ash_canonical"])
+
+    def test_selected_package_supports_eager_dataclass_and_lazy_relative_imports(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.write_package(root)
+            self.assertEqual([], self.assert_isolated_check(root))
+
+    def test_two_selected_roots_and_cached_live_facade_cannot_mask_changed_alias(self):
+        from core.ash_pattern_engine import ash_canonical
+
+        with tempfile.TemporaryDirectory() as directory:
+            root_a, root_b = Path(directory) / "a", Path(directory) / "b"
+            self.write_package(root_a)
+            self.write_package(root_b, "wrong")
+            self.assertEqual([], self.assert_isolated_check(root_a))
+            errors = self.assert_isolated_check(root_b)
+            assert_error_contains(self, errors, "does not equal")
+            self.assertEqual([], self.assert_isolated_check(root_a))
+            self.assertIs(ash_canonical, sys.modules["core.ash_pattern_engine.ash_canonical"])
+
+    def test_selected_source_mutation_is_not_masked_by_stale_same_size_bytecode(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            package = self.write_package(root)
+            source = package / "identity_impl.py"
+            stamp = source.stat().st_mtime
+            original = source.read_text(encoding="utf-8")
+            py_compile.compile(str(source), doraise=True)
+            changed = original.replace('MODE = "valid"', 'MODE = "wrong"')
+            self.assertEqual(len(original.encode("utf-8")), len(changed.encode("utf-8")))
+            source.write_text(changed, encoding="utf-8")
+            os.utime(source, (stamp, stamp))
+            errors = self.assert_isolated_check(root)
+            assert_error_contains(self, errors, "does not equal")
+
+    def test_failed_package_load_removes_eager_children_and_private_finder(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.write_package(root)
+            write_text(root, "core/ash_pattern_engine/__init__.py",
+                       "from .values import Signature\nraise RuntimeError('load failed')\n")
+            errors = self.assert_isolated_check(root)
+            assert_error_contains(self, errors, "unable to load")
+            assert_error_contains(self, errors, "load failed")
+
+    def test_failed_identity_check_removes_lazy_children_and_private_finder(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.write_package(root)
+
+            def failing_check(namespace, errors):
+                namespace["encode_state_identity"]("100000000")
+                raise RuntimeError("check failed")
+
+            with patch.object(m1, "check_executable_identity_namespace", side_effect=failing_check):
+                errors = self.assert_isolated_check(root)
+            assert_error_contains(self, errors, "interface raised an error")
+            assert_error_contains(self, errors, "check failed")
+
+    def test_historical_standalone_facade_still_passes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            write_text(
+                root, "core/ash_pattern_engine/ash_canonical.py",
+                "def encode_state_identity(value):\n"
+                "    return {'state_signature': value, 'vertex_id': 'ash_state_' + value,\n"
+                "            'realm_id': 'ash_state_' + value, 'orbit_id': value}\n"
+                "encode_realm_identity = encode_state_identity\n"
+                "def build_cosmic_pattern_snapshot(value):\n"
+                "    record = encode_state_identity(value)\n"
+                "    return {'normalized_state': value, 'state_identity': record, 'realm_identity': record}\n"
+                "def plan_generation(name, value):\n"
+                "    record = encode_state_identity(value)\n"
+                "    return {'source_state_identity': record, 'source_realm': record,\n"
+                "            'destination_state_identity': record, 'destination_realm': record}\n",
+            )
+            self.assertEqual([], self.assert_isolated_check(root))
 
 
 class AshIdentityAndMirrorTests(unittest.TestCase):
