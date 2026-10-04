@@ -154,8 +154,13 @@ The [N2 recovery contract](docs/architecture/m3_recovery_contract.md),
 are now adopted before implementation as YWE-REQ-0041 / YWE-REQ-0042 and ADR-0031.
 Their exact interfaces cover actual immutable recovery/fallback execution, complete
 safe proof retention, protected local storage and paired JSON/Markdown exports.
-Implementation and its independent acceptance checks are underway; adoption does
-not claim executed N2 recovery or Diagnostics results.
+Recovery implementation now passes 43 focused integration tests and 23 owned
+value/registry tests locally, including the exhaustive 131,072 two-codeword proof
+cases. Complete implementation publication checks remain pending. Diagnostics
+capture, protected storage, paired export and retention verification are underway.
+Its reviewed retention amendment defines physical purge with actual deletion
+receipts and protects supporting evidence still referenced by retained records.
+M3 remains active until the complete slice and milestone acceptance checks pass.
 [Adoption CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37238793118)
 passed 35 of 36 checks; package acceptance rejected numeric budget formulas under
 the existing state-language guard. The formulas now use exact sum notation with

@@ -12,7 +12,7 @@ This increment realizes bounded reference Diagnostics for actual StateModel, N1 
 
 ## Exact interface and ownership
 
-The authoritative field order, scalar types, closed enums, constructor invariants, method signatures, source mappings and budgets are in the exact interface inventory below. It has 62 closed structures and 75 closed enums. No arbitrary context/error dictionary or unspecified callback conversion is admitted. Constructors use exact builtin primitive types, copy bounded tuples, and retain exact owned children. Headers and limit values are fixed, never caller-selectable. ReferenceDevelopmentDiagnostics and ReferenceReleaseDiagnostics take exact identity, profile, ProtectedStore and DiagnosticsClockPort arguments, with no ambient clock/storage defaults.
+The authoritative field order, scalar types, closed enums, constructor invariants, method signatures, source mappings and budgets are in the exact interface inventory below. It has 66 closed structures and 78 closed enums, including four API-only storage purge controls adopted before their dependent code. No arbitrary context/error dictionary or unspecified callback conversion is admitted. Constructors use exact builtin primitive types, copy bounded tuples, and retain exact owned children. Headers and limit values are fixed, never caller-selectable. ReferenceDevelopmentDiagnostics and ReferenceReleaseDiagnostics take exact identity, profile, ProtectedStore and DiagnosticsClockPort arguments, with no ambient clock/storage defaults.
 
 DiagnosticsClockPort.read returns exact ClockObservation. RecoveryCapture.begin(origin, operation_reference) returns (scope or None, RecoveryAdmissionReceipt); CONFIRMED iff same-collector exact two-record origin attachment and whole fixed reservation succeed. REJECTED/NOT_CONFIRMED has no scope and zero reservations, before provider/evaluator/state effects. Unexpected throw, malformed receipt or wrong operation becomes NOT_CONFIRMED. Main scope.append accepts only exact RecoveryRecord(diagnostic_reference,envelope,record_kind,payload), where payload is RecoveryStepEvidence or RecoveryActionDecision from the N2 owned inventory. It returns the existing three-status CaptureReceipt. Scope.finish accepts the actual five-class RecoveryValuePacket and derives expectations itself. No caller expected count or caller-selected SafeContext bypass exists.
 
@@ -89,13 +89,33 @@ A real disproof also survives: an open directory handle with READ/WRITE sharing 
 
 Microsoft primary references: [CreateDirectoryW](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createdirectoryw), [SDDL conversion](https://learn.microsoft.com/en-us/windows/win32/api/sddl/nf-sddl-convertstringsecuritydescriptortosecuritydescriptorw), [icacls](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/icacls), and [Python3.12 os.chmod](https://docs.python.org/3.12/library/os.html#os.chmod). Windows chmod changes readonly attribute;0o700 is not an ACL security mechanism.
 
+## Capture retention amendment
+
+The October 4 capture-purge amendment closes the previously unspecified physical
+capture-retention port before its dependent implementation. ProtectedStore owns
+fixed private event/support filenames and actual deletion observations; Core owns
+selection of complete, unpinned scopes and the retained safe graph. Four API-only
+closed storage values and three enums describe that boundary. They add no field to
+the exported safe snapshot and leave all capture, export and admission limits intact.
+
+Purge uses two exclusive phases. First request only eligible event sequences and
+apply confirmed removal observations. Events that remain or have unknown deletion
+status stay as pinned graph roots. Recompute reachability from every actually
+retained or unknown event, active/incident root and surviving scope before requesting
+only unreachable supporting nodes. Shared earlier nodes remain protected. Supporting
+keys have a derived maximum of 1664 across the ten existing safe-node domains;
+receipts retain at most 1664 actual observations for one phase. No arbitrary path,
+recursive deletion or pre-existing file adoption crosses this port. Only confirmed
+removed bytes count as expired; partial or unknown deletion retains explicit coverage,
+loss and boundary observations. Paired-export purge remains its separate port.
+
 ## Required implementation acceptance
 
 Exercise real StateModel origin, N1 and N2 through reference collectors, controlled failures, exact original attachment and mandatory completion. Reject detached/mutated/unknown origin with zero effects. Schema/taxonomy/parent/root/stage/terminal/replay/missing-step mutations must retain actual original failure and emit independent bounded meta evidence. Secret sentinels in every arbitrary nested string/location must be absent from store/JSON/Markdown, with explicit redaction counts. Independently extract Markdown full JSON appendix and compare typed equality to JSON. Force JSON/Markdown/manifest/publication, unknown/partial store, clock regression/unavailability, limits/retention and meta-store exhaustion separately; no false success, no silent omission or recursive logger. Run actual protected D:/ synthetic collector capture/export with ACL/file identity checks; keep unsupported native/release/physical-crash evidence explicit.
 
 ## Exact interface inventory
 
-The frozen external prose fingerprint is `ff7898fa2a01ea9166208f054f8438156dbc54ce3efc46141eed9c4a45c83609`; its exact interface inventory fingerprint is `fcfe1335d038ea727c7d7695154098934d7c532b0aceb18e05016919a8431a2c`, byte-bound inventory `2d5b1dd72b0ba261aa1c550e700249b4a0e810953bbf617ac938603887ab5acd`, and freeze manifest `a5ba810b2f4d1991e1f015d07f6d51fda79915d162f64039c605ec0a009fe904`. These identify the independently reviewed proposals. Promotion changes only adoption metadata, live document references, the adopted safety-policy digest and published host-identifier elision. The following62 structures and75 closed enums remain the authoritative adopted interface.
+The frozen external prose fingerprint is `ff7898fa2a01ea9166208f054f8438156dbc54ce3efc46141eed9c4a45c83609`; its exact interface inventory fingerprint is `fcfe1335d038ea727c7d7695154098934d7c532b0aceb18e05016919a8431a2c`, byte-bound inventory `2d5b1dd72b0ba261aa1c550e700249b4a0e810953bbf617ac938603887ab5acd`, and freeze manifest `a5ba810b2f4d1991e1f015d07f6d51fda79915d162f64039c605ec0a009fe904`. These identify the independently reviewed proposals. Promotion changes only adoption metadata, live document references, the adopted safety-policy digest and published host-identifier elision. The original 62 structures and 75 closed enums remain unchanged. The reviewed capture-purge amendment adds four API-only storage control structures and three closed enums; the following 66 structures and 78 enums are the current authoritative interface.
 
 ```json
 {
@@ -740,6 +760,27 @@ The frozen external prose fingerprint is `ff7898fa2a01ea9166208f054f8438156dbc54
       "authority_source_binding": "SafeEvidenceSourceBinding",
       "authority_was_consulted": "bool",
       "directive": "SafeRecoveryDirective|null"
+    },
+    "CaptureObjectKey": {
+      "kind": "enum:CaptureObjectKind",
+      "sequence": "uint64|null",
+      "supporting_kind": "enum:SupportingKind|null",
+      "evidence_reference": "Alias|null"
+    },
+    "CapturePurgeRequest": {
+      "event_sequences": "tuple<uint64,0..1024>",
+      "supporting_keys": "tuple<CaptureObjectKey,0..1664>"
+    },
+    "CaptureRemovalObservation": {
+      "key": "CaptureObjectKey",
+      "status": "enum:CaptureRemovalStatus",
+      "removed_bytes": "uint64|null",
+      "failure_code": "enum:DiagnosticsFailure|null"
+    },
+    "StoreCapturePurgeReceipt": {
+      "status": "enum:CapturePurgeStatus",
+      "observations": "tuple<CaptureRemovalObservation,1..1664>",
+      "failure_code": "enum:DiagnosticsFailure|null"
     }
   },
   "enums": {
@@ -1430,6 +1471,20 @@ The frozen external prose fingerprint is `ff7898fa2a01ea9166208f054f8438156dbc54
     "ExistingModeClass": [
       "CONTAINED",
       "SAFE_HALT"
+    ],
+    "CaptureObjectKind": [
+      "EVENT",
+      "SUPPORTING"
+    ],
+    "CaptureRemovalStatus": [
+      "REMOVED",
+      "NOT_REMOVED",
+      "UNCONFIRMED"
+    ],
+    "CapturePurgeStatus": [
+      "COMPLETED",
+      "PARTIAL",
+      "REJECTED"
     ]
   },
   "conditions": [
@@ -1481,7 +1536,22 @@ The frozen external prose fingerprint is `ff7898fa2a01ea9166208f054f8438156dbc54
     "DiagnosticsCompletionReceipt is the one exact immutable completiontype; COMPLETE has nullfailure and no unconfirmed attemptedindex, exactrawoperationreference and fulfilled actualtypedresult expectations; INCOMPLETE has nonnullfailure, actualknownconfirmedprefix/attemptindex and partial/unavailable coverage. No separate polymorphic completionfailure object. Receipt canretainactualproducer outcome evenwhen capture completionfails; it doesnotchangeactualcandidate or falselypermitRECOVERED. Exact matchingCOMPLETE onlypermitsfinalimmutablebusinessreturn; INCOMPLETE retained failureobservation, wrong-reference typedreceipt retained submittedfailureevidence, throw malformedreceipt mappedclosedfailure, neverrecursivefinish.",
     "StorePurgeReceipt COMPLETED hasnullfailure andverifiedabsenceofallknownownedbundleparts, exactremovedpartcount/bytes, freesoneslot; REJECTED hasnonnullfailure andactualknownpartialremoval facts, leaves slotoccupied. No arbitraryhost Corehealth/RetentionReceipt reconstruction. Explicitpurgeconfinedexactownedbundleidentity andauthorizedoperation; no silent deletion/overwrite.",
     "SafeRecoverySafetyEvidence retains actual submitted propagationSAFE/RISK/UNAVAILABLE and authorityREACHABLE/UNREACHABLE/UNAVAILABLE, their aliasedfullsource triples, explicitconsulted flags and complete typed directive ifactuallyformed. Unconsulted provided evidence isnotclaimedevaluated. SafeRecoveryDirective retains requestedaction, canonicaltriggeror exactexternal/observedmodeunion, originalassessment/causingdecision/evidencerefs, requestorigin, exactreviewedpolicynode andNOT_ENTERED_BY_N2; proseomittedwithreason. Pendingmandate aftercapturefailure persistsasconfirmed supportingnode ifthatcommitcompleted, withactualeventunconfirmed andpartialcoverage, neverfalsemodeentry.",
-    "StorageReceipt.sequence isnullable onlymatching health/fallbackrequestNone. Event/support/meta requests requireexactnonnullmatchingreceiptsequence; null orwrongreceipt isunconfirmed, neverACK. This isalreadyownedrequestcoherence, not hostinference."
+    "StorageReceipt.sequence isnullable onlymatching health/fallbackrequestNone. Event/support/meta requests requireexactnonnullmatchingreceiptsequence; null orwrongreceipt isunconfirmed, neverACK. This isalreadyownedrequestcoherence, not hostinference.",
+    "EVENT keys have exact sequence and null supporting kind/evidence; SUPPORTING keys have null sequence, known kind and Alias; no arbitrary pathname.",
+    "Event sequences sorted unique; supporting keys sorted unique by kind,alias; all exact owned classes; receipt exact requested key order (events then supporting).",
+    "REMOVED records exact actual removed byte count and no failure; NOT_REMOVED zero removed bytes and closed failure; UNCONFIRMED removed_bytes=null and closed failure.",
+    "COMPLETED iff every requested observation REMOVED, no failure; PARTIAL if some REMOVED and others not known removed; REJECTED iff no REMOVED, closed failure retained.",
+    "Core selects whole completed scopes whose every confirmed event lies in requested prefix and which have COMPLETE actual typed completion; incomplete/active/unresolved incident-pinned scope cannot be purged.",
+    "Supporting graph reachability is computed from every retained/active/incident event and scope-owned supporting root with exact safe-field references. Shared reachable nodes remain retained even if their first persistence sequence was earlier than the purge prefix.",
+    "Host admits only keys in its private actual committed file table, verifies protected root and each exact identity/DACL before deleting fixed owned filenames, observes actual disappearance and rechecks root identity. No recursive deletion or pre-existing file adoption.",
+    "Partial/unknown deletion never claims full-prefix expiry. Core removes only confirmed removed nodes/events, emits exact possibly noncontiguous retention observations coalesced to16 ranges with coalesced flag; unknown loss sets lost_count=null and healthPARTIAL. Unknown or remaining origin acknowledgement is invalidated to prevent later attachment to missing storage.",
+    "No supporting node is removed from Core until its own REMOVED observation, and no host purge request is sent unless retained graph reference safety is established. Event prefix-only deletion is forbidden.",
+    "Paired export remains its separate explicit purge_bundle port and quota; snapshot fingerprints become unavailable when their owned backing event/support graph is purged.",
+    "Total requested keys>=1; requests are exclusivephase EVENT-only or SUPPORTING-only; nevercombined.",
+    "First request EVENT-only, then apply actual REMOVED records. NOT_REMOVED/UNCONFIRMED events remain retained/pinned roots. Recompute support reachability from ALL actual retained/unknown events plus active/incident and surviving scope roots before second SUPPORTING-only request; never delete planned-but-unconfirmed event dependencies.",
+    "Four new classes are API_ONLY storage controls; no exported safe graph field addition. New exact enum families CaptureObjectKind(EVENT,SUPPORTING), CaptureRemovalStatus(REMOVED,NOT_REMOVED,UNCONFIRMED), CapturePurgeStatus(COMPLETED,PARTIAL,REJECTED).",
+    "Quota/no admissible completed prefix uses DIAGNOSTICS_RESERVATION_REFUSED; unknown/unowned requested key uses STORAGE_COMMIT_REJECTED; actual access/partial deletion failure uses STORAGE_COMMIT_UNCONFIRMED; source identity change uses STORAGE_IDENTITY_CHANGED. Unknown exceptions cannot fabricate successful deletion or zero loss.",
+    "Exclusive phase maximum=max(EVENT1024,SUPPORTING1664)=1664 observations; supporting1664=16profiles+512assessments+64recoverydiagnostics+16source+8normalization+8correction+8registry+512conditions+512predicateobservations+8safety. Verified source pins are nested in CANONICAL_SOURCE nodes; no standalone raw/business/sourcepin storage keys exist."
   ],
   "budget": {
     "max_new_events": 768,
@@ -1617,7 +1687,8 @@ The frozen external prose fingerprint is `ff7898fa2a01ea9166208f054f8438156dbc54
     "commit_supporting": "commit_supporting(sequence:uint64,kind:enum:SupportingKind,evidence_alias:Alias,redacted_bytes:exactbytes1..32768)->StorageReceipt. Exactlyclosed typed safe node bytes, dependencyorder andkind+alias identity; no arbitrarybackend dictionary. Receipt sequence equalsrequest; supportcommit must actuallycomplete before referencing event CONFIRMED.",
     "commit_meta": "commit_meta(sequence:uint64,redacted_bytes:exactbytes1..3072)->StorageReceipt using independentlyreserved pool; exact MetaDiagnosticRecord only. Failure neverrecursiveappend; actual fallbackhealth retained.",
     "commit_health": "commit_health(sequence:uint64|None,redacted_bytes:exactbytes1..8192)->StorageReceipt; exact current DiagnosticsHealth, one bounded lateststatusslot; priorstatus explicitlysuperseded, notclaimedfullhistory.",
-    "commit_fallback_health": "commit_fallback_health(sequence:uint64|None,redacted_bytes:exactbytes1..8192)->StorageReceipt; exact FallbackHealthRecord, independent nonrecursive latestslot. Failure remainsinmemory/unconfirmed; neverrawfallbacklogs."
+    "commit_fallback_health": "commit_fallback_health(sequence:uint64|None,redacted_bytes:exactbytes1..8192)->StorageReceipt; exact FallbackHealthRecord, independent nonrecursive latestslot. Failure remainsinmemory/unconfirmed; neverrawfallbacklogs.",
+    "purge_capture": "ProtectedStore.purge_capture(request:CapturePurgeRequest)->StoreCapturePurgeReceipt; four API-only storage control classes, two exclusive phases with actual partial observations and graph reachability recomputed between them."
   },
   "primitives_constraints": {
     "UntrustedReference": "API-only exactASCIIidentifier1..256 fromexistingownedvalues. Privatealias keys canretainsuchreferences butneverproducerfreeprose/rawinput/errorstacks; raw keys neverpersist/export. Protectedstoreparent path remainshostfactoryinput, not Core/log data.",
@@ -1641,6 +1712,30 @@ The frozen external prose fingerprint is `ff7898fa2a01ea9166208f054f8438156dbc54
     "calculation": "sum([2048, 1536, 768, 35, 396, 416, 64, 64, 64, 12])=5403",
     "proof_scope": "Conservative distinct reference-token occurrence count under exact N2 payload/context inventories. Reused bound references counted once; actual implementations must enforce capacity beforeeffects and reject unregistered payload.",
     "control_identity": 64
+  },
+  "capture_purge_amendment": {
+    "adopted_before_dependent_code": true,
+    "proposal_sha256": "c9135cc1590917fef7f7c5a1575a161eab5762847e670619d4427b5f344a9390",
+    "interface_only_types": [
+      "CaptureObjectKey",
+      "CapturePurgeRequest",
+      "CaptureRemovalObservation",
+      "StoreCapturePurgeReceipt"
+    ],
+    "supporting_key_limit_derivation": [
+      16,
+      512,
+      64,
+      16,
+      8,
+      8,
+      8,
+      512,
+      512,
+      8
+    ],
+    "safe_export_graph_changed": false,
+    "original_capture_and_export_limits_changed": false
   }
 }
 ```

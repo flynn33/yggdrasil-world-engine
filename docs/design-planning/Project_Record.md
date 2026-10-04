@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-26
+**Revision:** planning-27
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-25; full history remains in Git.
+**Supersedes:** planning-26; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -602,6 +602,16 @@ checks passed and its publication readback matched. Direct rejection precedes
 admission; rejection after a real failed action retains that prior work and stops
 before fallback effects.
 
+The reviewed capture-retention amendment adds the exact physical purge port and
+four API-only closed storage values before implementation. Independent review
+identified the partial-deletion graph hazard and required two exclusive phases:
+events first, actual outcomes applied, then support reachability recomputed from
+retained/unknown roots before support deletion. Existing exported fields and limits
+remain unchanged. The 1664 support-key maximum derives from all ten adopted safe
+node domains. Recovery currently passes 43 integration and 23 value/registry tests
+locally, including 131,072 actual two-codeword proof validations; full published
+N2 acceptance remains pending while Diagnostics checks continue.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -628,7 +638,7 @@ generation before evaluating unchanged M3 exit criteria.
 
 **Needed from owner:** Nothing for continued authorized roadmap development.
 
-**Saved at:** This planning-26 checkpoint follows published N1 implementation
+**Saved at:** This planning-27 checkpoint follows published N1 implementation
 `5328f018f341b80ad58cdb82f64708992ee2d6ae` and publication checkpoint
 `4c01af5b01b4690da5cd2a97d5e6025e97a48e1c`. The containing committed revision
 adopts N2 before its dependent code. Immutable milestone evidence and earlier
