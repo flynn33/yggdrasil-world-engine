@@ -46,6 +46,8 @@ The M2 offline resolver catalogs declared schemas in
 `data/validation/contract_catalog.json`. Executed instance bindings, exact target
 fragments, and intended rejection witnesses live in
 `data/validation/fixture_catalog.json`; see `docs/project/m2_fixture_validation.md`.
+YAML module capability manifests bind to `module_capability_manifest_schema.json`,
+which executes the structural assertions declared in their existing YAML source.
 
 | File | Role |
 |---|---|

@@ -1230,6 +1230,405 @@
           "schema_pointer": "/minItems"
         }
       ]
+    },
+    {
+      "fixture_id": "m2.module_capability.applied.artifact_engine",
+      "path": "data/module_capability/manifests/artifact_engine.yaml",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.applied.ash_pattern_engine",
+      "path": "data/module_capability/manifests/ash_pattern_engine.yaml",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.applied.cosmology_engine",
+      "path": "data/module_capability/manifests/cosmology_engine.yaml",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.applied.creature_engine",
+      "path": "data/module_capability/manifests/creature_engine.yaml",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.applied.myth_engine",
+      "path": "data/module_capability/manifests/myth_engine.yaml",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.applied.narrative_engine",
+      "path": "data/module_capability/manifests/narrative_engine.yaml",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.applied.perception_engine",
+      "path": "data/module_capability/manifests/perception_engine.yaml",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.applied.prophecy_engine",
+      "path": "data/module_capability/manifests/prophecy_engine.yaml",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.applied.quest_engine",
+      "path": "data/module_capability/manifests/quest_engine.yaml",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.applied.realm_engine",
+      "path": "data/module_capability/manifests/realm_engine.yaml",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.source_example.0",
+      "path": "data/module_capability/module_capability_manifest_schema.yaml",
+      "instance_pointer": "/example_manifests/0",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.source_example.1",
+      "path": "data/module_capability/module_capability_manifest_schema.yaml",
+      "instance_pointer": "/example_manifests/1",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.complete_foundational_manifest",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/positive/complete_foundational_manifest",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.complete_feature_manifest",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/positive/complete_feature_manifest",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.optional_fields_omitted",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/boundary/optional_fields_omitted",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.open_root_and_nested_properties",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/boundary/open_root_and_nested_properties",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.nested_member_optional",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/boundary/nested_member_optional",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.empty_optional_collections",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/boundary/empty_optional_collections",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.feature_empty_non_delegable",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/boundary/feature_empty_non_delegable",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "boundary",
+      "expected_result": "accept",
+      "expected_errors": []
+    },
+    {
+      "fixture_id": "m2.module_capability.missing_manifest_id",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/reject/missing_manifest_id",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "schema_pointer": "/required",
+          "missing_properties": [
+            "manifest_id"
+          ]
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.module_capability.module_classification_unknown",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/reject/module_classification_unknown",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/module_classification",
+          "schema_pointer": "/properties/module_classification/enum"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.module_capability.activation_priority_string",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/reject/activation_priority_string",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/activation_priority",
+          "schema_pointer": "/properties/activation_priority/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.module_capability.owned_scope_scalar",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/reject/owned_scope_scalar",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/owned_scope",
+          "schema_pointer": "/properties/owned_scope/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.module_capability.provides_capabilities_object",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/reject/provides_capabilities_object",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/provides_capabilities",
+          "schema_pointer": "/properties/provides_capabilities/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.module_capability.nested_truth_sensitive_string",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/reject/nested_truth_sensitive_string",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/provides_capabilities/0/truth_sensitive",
+          "schema_pointer": "/properties/provides_capabilities/items/properties/truth_sensitive/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.module_capability.dependency_strength_unknown",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/reject/dependency_strength_unknown",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/requires_capabilities/0/dependency_strength",
+          "schema_pointer": "/properties/requires_capabilities/items/properties/dependency_strength/enum"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.module_capability.delegation_rule_unknown",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/reject/delegation_rule_unknown",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/delegable_compatible_responsibilities/0/delegation_rule",
+          "schema_pointer": "/properties/delegable_compatible_responsibilities/items/properties/delegation_rule/enum"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.module_capability.suppression_reason_unknown",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/reject/suppression_reason_unknown",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/suppression_conditions/0/reason",
+          "schema_pointer": "/properties/suppression_conditions/items/properties/reason/enum"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.module_capability.external_capability_class_unknown",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/reject/external_capability_class_unknown",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/compatible_external_capabilities/0/capability_class",
+          "schema_pointer": "/properties/compatible_external_capabilities/items/properties/capability_class/enum"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.module_capability.foundational_truth_empty_responsibilities",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/reject/foundational_truth_empty_responsibilities",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINITEMS",
+          "instance_pointer": "/non_delegable_responsibilities",
+          "schema_pointer": "/allOf/0/then/properties/non_delegable_responsibilities/minItems"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.module_capability.structural_truth_empty_responsibilities",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/reject/structural_truth_empty_responsibilities",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINITEMS",
+          "instance_pointer": "/non_delegable_responsibilities",
+          "schema_pointer": "/allOf/0/then/properties/non_delegable_responsibilities/minItems"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.module_capability.capability_record_wrong_type",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/reject/capability_record_wrong_type",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/provides_capabilities/0",
+          "schema_pointer": "/properties/provides_capabilities/items/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.module_capability.consumed_state_required_wrong_type",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/reject/consumed_state_required_wrong_type",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/consumes_state/0/required",
+          "schema_pointer": "/properties/consumes_state/items/properties/required/type"
+        }
+      ]
+    },
+    {
+      "fixture_id": "m2.module_capability.guardrails_scalar",
+      "path": "examples/contract_foundation/module_capability_cases.example.yaml",
+      "instance_pointer": "/reject/guardrails_scalar",
+      "schema_id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/delegable_compatible_responsibilities/0/guardrails",
+          "schema_pointer": "/properties/delegable_compatible_responsibilities/items/properties/guardrails/type"
+        }
+      ]
     }
   ]
 }

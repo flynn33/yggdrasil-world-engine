@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-14
+**Revision:** planning-15
 **Date:** October 3, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-13; full history remains in Git.
+**Supersedes:** planning-14; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -62,8 +62,9 @@ evidence establishes:
 | Annotation-only schema documents | 0 |
 | Schema-named JSON lacking declarations | 0 |
 | Unbound JSON examples | 19 after executed catalog bindings and Phase 12 corrections |
-| Fixture catalog | Initial 102 structural bindings present; full coverage remains incomplete |
-| Offline resolver | Explicit catalog covers 197 declared schemas and resolves references locally |
+| Fixture catalog | 136 structural bindings, including YAML module manifests; full coverage remains incomplete |
+| Offline resolver | Explicit catalog covers 198 declared schemas and resolves references locally |
+| YAML structural schemas | Module capability contract covered; other YAML domains remain outstanding |
 | Roadmap-derived M2 acceptance gate | Not present |
 | Durable M2 acceptance report | Not present |
 | M2 milestone evidence | Empty in the roadmap |
@@ -85,7 +86,7 @@ milestone evidence because the stated exit conditions were not actually satisfie
    clean offline checkout.
 5. Only after those checks pass, record M2 acceptance and activate M3.
 
-## 6. Current work and verification
+## 6. Fixture foundation verification
 
 Starting branch: `main`, base `fc25065304e2392b043c205a57d0564d33a49139`.
 Working branch: `m2/fixture-catalog`, fast-forward integrated into `main`.
@@ -133,7 +134,34 @@ The following documentation checkpoint records those executed results; executabl
 source, schema, fixture, and test contents are unchanged. M2 acceptance and M3 activation
 remain unrecorded.
 
-## 7. Historical publication continuity
+## 7. YAML structural continuation
+
+Starting branch: `main`, base `88406268d1e3ef24c15e132fa49e9be7440319cf`.
+Working branch: `m2/yaml-module-manifests`. The initial checkout was clean.
+GitHub Main CI passed the published fixture foundation at that base revision:
+`https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37163320518`.
+
+The existing module capability checker reads text markers and checks template
+identifiers; it does not execute the YAML descriptor's field type and enum rules.
+This continuation adds a formal JSON Schema for its 23 declared root properties,
+16 required fields, typed nested members, enums, and the explicit minimum
+non-delegable responsibility for foundational/structural authority. Requirement
+`YWE-REQ-0022` and accepted decision `ADR-0013` record the scope and boundaries.
+
+The loader parses YAML using the existing duplicate-key-rejecting SafeLoader and
+preserves JSON scalar types. YAML-only values and non-string mapping keys cannot
+enter JSON Schema validation. The catalog adds ten applied manifests, two embedded
+source examples, and 22 positive/boundary/reject cases. All 136 bindings and 64
+intended rejections passed the focused catalog check using the pinned runtime.
+
+The original YAML descriptor and applied manifests are unchanged. Open objects,
+optional nested fields, and unspecified empty-value boundaries remain open.
+Registry uniqueness, dependency graphs, prose truth-boundary semantics, other
+YAML domains, and lifecycle conformance remain outstanding. The 19 JSON binding
+debt entries are unchanged. Consolidated clean-checkout verification and
+publication of this continuation are pending at this draft checkpoint.
+
+## 8. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
 failed before modifying roadmap files because its compressed transport payload was
@@ -141,18 +169,20 @@ corrupted. The replacement used an inline reviewed patch, removed the temporary 
 ran the roadmap and consolidated repository checks, and published this planning-13 record.
 The containing commit is the authoritative save point.
 
-## 8. Checkpoint
+## 9. Checkpoint
 
-**Current step:** M2 fixture catalog, offline resolver, and source-backed schema
-representation corrections; milestone acceptance remains outstanding.
+**Current step:** M2 YAML module-manifest structural conformance; milestone
+acceptance remains outstanding.
 
-**Completed:** Initial executable catalog and rejection witnesses; corrected stale
-baseline inventories; recorded current development-policy intake.
+**Completed:** Executable JSON fixture foundation and offline resolver, compatible
+Phase 12 representations, current development-policy intake, and initial YAML
+module-manifest structural schema and bindings.
 
 **Next action:** Complete remaining fixture bindings and lifecycle coverage, then build
 the roadmap-derived M2 acceptance gate and durable evidence.
 
 **Needed from owner:** Nothing for continued M2 engineering.
 
-**Saved at:** `main`, in the commit containing this planning-14 record. The validated
-implementation save point is `f35911a4a77c93dc6fe32bb2e396c60bcf01fbc2`.
+**Saved at:** The commit containing this planning-15 record. The prior validated
+implementation save point is `f35911a4a77c93dc6fe32bb2e396c60bcf01fbc2`, with its
+published verification checkpoint at `88406268d1e3ef24c15e132fa49e9be7440319cf`.

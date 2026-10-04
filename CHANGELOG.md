@@ -7,6 +7,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ## Unreleased
 
 ### Added
+- Add source-backed structural YAML module-manifest validation and explicit YAML fixture bindings with typed rejection witnesses.
 - Add explicit M2 schema and fixture catalogs, offline reference resolution, and exact rejection witnesses for 102 structural fixtures.
 - Add stable normative requirement identifiers and typed governance records for M1.
 - Add the ten-node truth and authority lattice, canonical glossary index, and Core/WRW scope contract.

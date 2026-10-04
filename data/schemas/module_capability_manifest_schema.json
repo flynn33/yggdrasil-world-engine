@@ -1,0 +1,358 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/module_capability_manifest_schema.json",
+  "title": "Module Capability Manifest",
+  "description": "Structural assertions sourced from the existing YAML module capability contract; lifecycle and dependency semantics remain with their owning contracts.",
+  "x-ywe-requirement-id": "YWE-REQ-0022",
+  "x-ywe-source-ref": "data/module_capability/module_capability_manifest_schema.yaml#/core_schema/ModuleCapabilityManifest",
+  "type": "object",
+  "properties": {
+    "manifest_version": {
+      "type": "string"
+    },
+    "manifest_id": {
+      "type": "string"
+    },
+    "module_id": {
+      "type": "string"
+    },
+    "module_name": {
+      "type": "string"
+    },
+    "module_classification": {
+      "type": "string",
+      "enum": [
+        "core_engine",
+        "feature_module",
+        "shared_data_service",
+        "integration_bridge",
+        "validation_service",
+        "authoring_support"
+      ]
+    },
+    "authority_class": {
+      "type": "string",
+      "enum": [
+        "foundational_truth",
+        "structural_runtime_truth",
+        "manifestation_logic",
+        "consequence_logic",
+        "interpretive_logic",
+        "execution_bridge",
+        "tooling_only"
+      ]
+    },
+    "owned_scope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "activation_state": {
+      "type": "string",
+      "enum": [
+        "required",
+        "available",
+        "dormant",
+        "suppressed",
+        "delegated_compatible"
+      ]
+    },
+    "activation_priority": {
+      "type": "integer"
+    },
+    "dependency_order_index": {
+      "type": "integer"
+    },
+    "provides_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "capability_id": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "truth_sensitive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "requires_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "capability_id": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "dependency_strength": {
+            "type": "string",
+            "enum": [
+              "hard_required",
+              "preferred",
+              "optional",
+              "contextual"
+            ]
+          },
+          "rationale": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "consumes_state": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "state_id": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "emits_state": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "state_id": {
+            "type": "string"
+          },
+          "persistence": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "non_delegable_responsibilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "responsibility_id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "rationale": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "delegable_compatible_responsibilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "responsibility_id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "delegation_rule": {
+            "type": "string",
+            "enum": [
+              "never_delegable",
+              "delegable_compatible",
+              "delegable_with_guardrails",
+              "presentation_only"
+            ]
+          },
+          "guardrails": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "suppression_conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "condition_id": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "runtime_context_not_required",
+              "policy_disallows_activation",
+              "overlapping_execution_capability_available",
+              "unresolved_dependency",
+              "incompatible_truth_boundary",
+              "implementation_not_ready",
+              "authored_scope_exclusion",
+              "environment_limit"
+            ]
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "incompatible_with": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "target_module_id": {
+            "type": "string"
+          },
+          "rationale": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "compatible_external_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "capability_class": {
+            "type": "string",
+            "enum": [
+              "rendering",
+              "scene_realization",
+              "npc_embodiment",
+              "animation",
+              "physics_execution",
+              "input_runtime",
+              "ui_presentation",
+              "overlay_rendering",
+              "encounter_presentation",
+              "environment_instantiation",
+              "temporary_space_realization",
+              "save_load_bridge",
+              "analytics_observability"
+            ]
+          },
+          "constraints": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "invariant_guardrails": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "guardrail_id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "validation_requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "validation_id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "manifest_version",
+    "manifest_id",
+    "module_id",
+    "module_name",
+    "module_classification",
+    "authority_class",
+    "owned_scope",
+    "purpose",
+    "activation_state",
+    "activation_priority",
+    "dependency_order_index",
+    "provides_capabilities",
+    "requires_capabilities",
+    "non_delegable_responsibilities",
+    "invariant_guardrails",
+    "validation_requirements"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "authority_class"
+        ],
+        "properties": {
+          "authority_class": {
+            "enum": [
+              "foundational_truth",
+              "structural_runtime_truth"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "non_delegable_responsibilities": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

@@ -874,12 +874,47 @@
         "docs/architecture/quest_generation_from_axioms_contract.md#forbidden",
         "data/governance/specification_roadmap.json#/milestones/2"
       ]
+    },
+    {
+      "id": "ADR-0013",
+      "record_type": "decision",
+      "title": "Execute declared YAML module capability structure without adding domain rules",
+      "status": "accepted",
+      "recorded_on": "2026-10-03",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Use an additive JSON Schema and strict YAML fixture loading for the existing ModuleCapabilityManifest structural contract; preserve open shapes and leave unimplemented registry, dependency, and prose semantic rules outstanding.",
+      "debt_refs": [
+        "QD-001"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "M2 requires YAML structural schemas. The current module capability checker verifies textual markers and template module identifiers, while the source YAML explicitly declares root required fields, field types, enums, and a foundational/structural authority responsibility minimum.",
+      "decision": "Bind the ten applied YAML manifests and two source examples to a JSON Schema expressing only those declared structural rules. Parse YAML with the existing duplicate-key-rejecting SafeLoader, preserve scalar types, and reject YAML-only values before JSON Schema evaluation. Keep objects open and nested members optional where no source restriction exists.",
+      "rationale": "An additive schema executes existing structural authority without changing source manifests, inventing field bounds, or hiding incomplete module semantics. Explicit positive, boundary, and reject fixtures verify both the new assertions and the preserved open shapes.",
+      "consequences": [
+        "Existing YAML source and applied manifest contents remain unchanged.",
+        "Invalid required fields, typed values, enums, and the explicit responsibility minimum now have executable rejection witnesses.",
+        "Registry-wide uniqueness, dependency graphs, and remaining prose semantic rules need their own conformance work.",
+        "Other YAML domains, lifecycle fixture coverage, remaining JSON schema debt, and the M2 acceptance gate remain outstanding."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0022"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#yaml-module-capability-manifests",
+        "data/module_capability/module_capability_manifest_schema.yaml",
+        "data/schemas/module_capability_manifest_schema.json",
+        "examples/contract_foundation/module_capability_cases.example.yaml",
+        "data/governance/specification_roadmap.json#/milestones/2"
+      ]
     }
   ],
   "summary": {
-    "total_records": 29,
-    "architecture_decisions": 12,
-    "accepted_decisions": 12,
+    "total_records": 30,
+    "architecture_decisions": 13,
+    "accepted_decisions": 13,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

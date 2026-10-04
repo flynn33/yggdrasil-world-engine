@@ -1,0 +1,535 @@
+positive:
+  complete_foundational_manifest:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - capability_id: fixture.capability
+      scope: validation
+      description: Typed capability record.
+      truth_sensitive: true
+    requires_capabilities:
+    - capability_id: fixture.input
+      scope: validation
+      dependency_strength: hard_required
+      rationale: Typed dependency record.
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+      description: Typed responsibility record.
+      rationale: Authority remains with its owner.
+    invariant_guardrails:
+    - guardrail_id: fixture.guardrail
+      description: Typed guardrail record.
+    validation_requirements:
+    - validation_id: fixture.validation
+      description: Typed validation record.
+    consumes_state:
+    - state_id: fixture.input
+      required: true
+      notes: Typed input record.
+    emits_state:
+    - state_id: fixture.output
+      persistence: fixture
+      notes: Typed output record.
+    delegable_compatible_responsibilities:
+    - responsibility_id: fixture.presentation
+      description: Typed presentation record.
+      delegation_rule: presentation_only
+      guardrails:
+      - fixture.guardrail
+    suppression_conditions:
+    - condition_id: fixture.condition
+      reason: runtime_context_not_required
+      description: Typed suppression record.
+    incompatible_with:
+    - target_module_id: fixture.other
+      rationale: Typed incompatibility record.
+    compatible_external_capabilities:
+    - capability_class: rendering
+      constraints:
+      - fixture.constraint
+    notes:
+    - Structural fixture only.
+  complete_feature_manifest:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: feature_module
+    authority_class: manifestation_logic
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - capability_id: fixture.capability
+      scope: validation
+      description: Typed capability record.
+      truth_sensitive: true
+    requires_capabilities:
+    - capability_id: fixture.input
+      scope: validation
+      dependency_strength: hard_required
+      rationale: Typed dependency record.
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+      description: Typed responsibility record.
+      rationale: Authority remains with its owner.
+    invariant_guardrails:
+    - guardrail_id: fixture.guardrail
+      description: Typed guardrail record.
+    validation_requirements:
+    - validation_id: fixture.validation
+      description: Typed validation record.
+    consumes_state:
+    - state_id: fixture.input
+      required: true
+      notes: Typed input record.
+    emits_state:
+    - state_id: fixture.output
+      persistence: fixture
+      notes: Typed output record.
+    delegable_compatible_responsibilities:
+    - responsibility_id: fixture.presentation
+      description: Typed presentation record.
+      delegation_rule: presentation_only
+      guardrails:
+      - fixture.guardrail
+    suppression_conditions:
+    - condition_id: fixture.condition
+      reason: runtime_context_not_required
+      description: Typed suppression record.
+    incompatible_with:
+    - target_module_id: fixture.other
+      rationale: Typed incompatibility record.
+    compatible_external_capabilities:
+    - capability_class: rendering
+      constraints:
+      - fixture.constraint
+    notes:
+    - Structural fixture only.
+boundary:
+  optional_fields_omitted:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+  open_root_and_nested_properties:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+      fixture_annotation: true
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+    fixture_annotation: root extension
+  nested_member_optional:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - {}
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+  empty_optional_collections:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+    delegable_compatible_responsibilities: []
+    suppression_conditions: []
+    compatible_external_capabilities: []
+    incompatible_with: []
+    notes: []
+  feature_empty_non_delegable:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: feature_module
+    authority_class: manifestation_logic
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+    requires_capabilities: []
+    non_delegable_responsibilities: []
+    invariant_guardrails: []
+    validation_requirements: []
+reject:
+  missing_manifest_id:
+    manifest_version: '0.2'
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+  module_classification_unknown:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: unknown
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+  activation_priority_string:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: '0'
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+  owned_scope_scalar:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope: validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+  provides_capabilities_object:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities: {}
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+  nested_truth_sensitive_string:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: 'true'
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+  dependency_strength_unknown:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+    requires_capabilities:
+    - dependency_strength: unknown
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+  delegation_rule_unknown:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+    delegable_compatible_responsibilities:
+    - delegation_rule: unknown
+  suppression_reason_unknown:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+    suppression_conditions:
+    - reason: unknown
+  external_capability_class_unknown:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+    compatible_external_capabilities:
+    - capability_class: unknown
+  foundational_truth_empty_responsibilities:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+    requires_capabilities: []
+    non_delegable_responsibilities: []
+    invariant_guardrails: []
+    validation_requirements: []
+  structural_truth_empty_responsibilities:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: structural_runtime_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+    requires_capabilities: []
+    non_delegable_responsibilities: []
+    invariant_guardrails: []
+    validation_requirements: []
+  capability_record_wrong_type:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - 42
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+  consumed_state_required_wrong_type:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+    consumes_state:
+    - required: 'true'
+  guardrails_scalar:
+    manifest_version: '0.2'
+    manifest_id: manifest.structural.fixture
+    module_id: fixture.module
+    module_name: Structural fixture
+    module_classification: core_engine
+    authority_class: foundational_truth
+    owned_scope:
+    - validation
+    purpose: Exercise declared manifest structure.
+    activation_state: available
+    activation_priority: 0
+    dependency_order_index: 0
+    provides_capabilities:
+    - truth_sensitive: true
+    requires_capabilities: []
+    non_delegable_responsibilities:
+    - responsibility_id: fixture.responsibility
+    invariant_guardrails: []
+    validation_requirements: []
+    delegable_compatible_responsibilities:
+    - guardrails: fixture.guardrail

@@ -9,11 +9,12 @@ import sys
 from pathlib import Path
 from urllib.parse import unquote, urldefrag, urljoin
 
+import yaml
 from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 from referencing.exceptions import NoSuchResource
 
-from check_machine_readable_artifacts import repository_files
+from check_machine_readable_artifacts import UniqueKeyLoader, repository_files
 
 CONTRACT_CATALOG = "data/validation/contract_catalog.json"
 FIXTURE_CATALOG = "data/validation/fixture_catalog.json"
@@ -22,6 +23,28 @@ DIALECT = "https://json-schema.org/draft/2020-12/schema"
 
 def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def load_instance(path: Path):
+    if path.suffix.lower() == ".json":
+        return load_json(path)
+    if path.suffix.lower() not in {".yaml", ".yml"}:
+        raise ValueError(f"Unsupported fixture format: {path.suffix!r}")
+    document = yaml.load(path.read_text(encoding="utf-8-sig"), Loader=UniqueKeyLoader)
+    # JSON Schema evaluates JSON values; YAML-only values have no contract here.
+    json.dumps(document, allow_nan=False)
+    pending = [document]
+    while pending:
+        value = pending.pop()
+        if isinstance(value, dict):
+            if any(not isinstance(key, str) for key in value):
+                raise ValueError("YAML fixture mapping keys must be strings")
+            pending.extend(value.values())
+        elif isinstance(value, list):
+            pending.extend(value)
+        elif type(value) not in {type(None), bool, int, float, str}:
+            raise ValueError(f"Unsupported YAML fixture value: {type(value).__name__}")
+    return document
 
 
 def repository_path(root: Path, relative: str) -> Path:
@@ -251,7 +274,7 @@ def evaluate_fixtures(root: Path, registry: Registry, fixtures: list[dict]):
             # Resolve even when the instance is empty or the validator would skip it.
             resolve_schema_target(registry, fixture["schema_id"])
             instance = json_pointer(
-                load_json(repository_path(root, fixture["path"])), fixture["instance_pointer"]
+                load_instance(repository_path(root, fixture["path"])), fixture["instance_pointer"]
             )
             validator = Draft202012Validator(
                 {"$ref": fixture["schema_id"]}, registry=registry

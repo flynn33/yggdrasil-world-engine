@@ -52,6 +52,29 @@ historical packets, full lifecycle fixtures, and the roadmap-derived M2
 acceptance gate and report still need completion. An empty binding-debt list
 alone would not satisfy every M2 deliverable.
 
+## YAML Module Capability Manifests
+
+The fixture loader accepts JSON and YAML (`.yaml` or `.yml`) instances. YAML
+mappings MUST have unique string keys, and YAML values MUST be representable as
+JSON without changing scalar types. [YWE-REQ-0022] Duplicate keys, dates, binary
+values, sets, non-finite numbers, custom tags, and circular aliases are rejected
+at this boundary. Quoted strings remain strings; unquoted Boolean and numeric
+values retain their parsed types. Schema documents and catalogs remain JSON.
+
+`data/schemas/module_capability_manifest_schema.json` expresses the declared
+structural rules in `data/module_capability/module_capability_manifest_schema.yaml`.
+Module manifests MUST satisfy its sixteen root required fields, declared field
+types and enums, and the rule requiring at least one non-delegable responsibility
+for `foundational_truth` or `structural_runtime_truth` authority. [YWE-REQ-0022]
+The ten applied manifests and two embedded source examples are bound to this
+schema. Boundary cases preserve open objects, optional nested fields, empty
+strings, and empty lists wherever the source declares no tighter restriction.
+
+This schema does not implement the source's registry-wide uniqueness, dependency
+graph, or prose truth-boundary rules. Their semantic conformance remains open;
+structural acceptance is not module lifecycle acceptance. The descriptive YAML
+source and existing applied manifests remain unchanged.
+
 ## Phase 12 Representation Correction
 
 The earlier schema migration inferred strings for four plural/list-bearing

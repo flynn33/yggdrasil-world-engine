@@ -9,7 +9,7 @@
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0022",
+    "next_available_id": "YWE-REQ-0023",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -443,13 +443,39 @@
         "data/schemas/quest_manifest_candidate_schema.json",
         "data/schemas/quest_chain_seed_schema.json"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0022",
+      "title": "Source-backed YAML module manifest structural validation",
+      "normative_statement": "YAML fixture mappings MUST have unique string keys and JSON-representable values without scalar type coercion. Module capability manifests MUST satisfy the source-declared root required fields, structural types and enums, and retain at least one non-delegable responsibility for foundational_truth or structural_runtime_truth authority.",
+      "normative_level": "MUST",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_fixture_catalog.py",
+        "tests/test_yaml_fixture_catalog.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0013"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#yaml-module-capability-manifests",
+        "data/module_capability/module_capability_manifest_schema.yaml",
+        "data/schemas/module_capability_manifest_schema.json",
+        "data/governance/specification_roadmap.json#/milestones/2/deliverables/3"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 21,
-    "active": 21,
+    "total_requirements": 22,
+    "active": 22,
     "proposed": 0,
     "terminal": 0,
-    "next_identifier": "YWE-REQ-0022"
+    "next_identifier": "YWE-REQ-0023"
   }
 }

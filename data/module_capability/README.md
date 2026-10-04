@@ -14,6 +14,13 @@ See `module_capability_manifest_schema.yaml` for the canonical schema covering:
 - suppression conditions and compatible external capability hooks
 - validation rules preserving the split where Forsetti governs lifecycle and YWE keeps truth ownership
 
+`../schemas/module_capability_manifest_schema.json` executes the source's declared
+structural types, enums, root required fields, and the non-delegable responsibility
+minimum for foundational/structural authority. The fixture catalog binds all ten
+applied manifests and the source's embedded examples. Registry-wide uniqueness,
+dependency ordering, and the other prose semantic rules still require separate
+conformance work; structural validation does not certify module lifecycle behavior.
+
 ## Applied Capability Manifests
 
 See `manifests/*.yaml` for the canonical applied capability declarations for the
