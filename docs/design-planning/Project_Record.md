@@ -137,7 +137,8 @@ remain unrecorded.
 ## 7. YAML structural continuation
 
 Starting branch: `main`, base `88406268d1e3ef24c15e132fa49e9be7440319cf`.
-Working branch: `m2/yaml-module-manifests`. The initial checkout was clean.
+Working branch: `m2/yaml-module-manifests`, fast-forward integrated into `main`.
+The initial checkout was clean.
 GitHub Main CI passed the published fixture foundation at that base revision:
 `https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37163320518`.
 
@@ -158,8 +159,21 @@ The original YAML descriptor and applied manifests are unchanged. Open objects,
 optional nested fields, and unspecified empty-value boundaries remain open.
 Registry uniqueness, dependency graphs, prose truth-boundary semantics, other
 YAML domains, and lifecycle conformance remain outstanding. The 19 JSON binding
-debt entries are unchanged. Consolidated clean-checkout verification and
-publication of this continuation are pending at this draft checkpoint.
+debt entries are unchanged.
+
+Implementation commit `ab1080b1c1b60a9e379d5cd25f52db2ec418a729` passed the
+consolidated `python scripts/validate_repository.py` suite in a fresh local clone:
+30 checks, zero failures or advisories, and all 323 unit tests passed. The clone
+remained clean. Its pinned external runtime used Python 3.12.10, jsonschema
+4.25.1, and PyYAML 6.0.3; catalog references resolved locally without schema
+retrieval. The committed non-destructive diff check against the base passed with
+15 modified files, four additions, and zero deletions or renames. Independent
+review found no blocking findings, and the focused YAML suite passed 26 tests.
+
+The implementation was pushed under the owner account; remote `main` was read
+back at that exact revision. GitHub reported the authorized pull-request and
+verified-signature rule bypass. The following documentation checkpoint records
+those executed results without changing executable/schema/fixture/test content.
 
 ## 8. Historical publication continuity
 
@@ -183,6 +197,7 @@ the roadmap-derived M2 acceptance gate and durable evidence.
 
 **Needed from owner:** Nothing for continued M2 engineering.
 
-**Saved at:** The commit containing this planning-15 record. The prior validated
-implementation save point is `f35911a4a77c93dc6fe32bb2e396c60bcf01fbc2`, with its
-published verification checkpoint at `88406268d1e3ef24c15e132fa49e9be7440319cf`.
+**Saved at:** `main`, in the commit containing this planning-15 record. The latest
+validated implementation is `ab1080b1c1b60a9e379d5cd25f52db2ec418a729`. The prior
+implementation is `f35911a4a77c93dc6fe32bb2e396c60bcf01fbc2`, with its published
+verification checkpoint at `88406268d1e3ef24c15e132fa49e9be7440319cf`.
