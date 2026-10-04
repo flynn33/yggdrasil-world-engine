@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-25
+**Revision:** planning-26
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-24; full history remains in Git.
+**Supersedes:** planning-25; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -589,6 +589,19 @@ contract adoption is committed. Actual session admission/state publication,
 containment, safe halt and broader canonical producer coverage remain N3/later
 work; unchanged M3 acceptance and M10 platform boundaries remain in force.
 
+The N2 adoption revision `54c9a67beadf3c93dc3d36ea81133d60ede6de2b`
+published with exact Git/GitHub and README-byte readback. Its Main CI run
+`37238793118` passed 35 of 36 checks; package acceptance's existing
+`test_rejects_8_plus_1_language` matched numeric budget formulas. The formulas
+are now represented by exactly equivalent sum lists, independently recomputing
+696 events and 5403 aliases. No guard, test, limit or contract field was weakened.
+Replacement complete CI remains pending; this failure is preserved as evidence.
+The separately reviewed registry route-timing clarification is committed at
+`02b70bc7450e90503bb4825819dde8e8f4f9cc3d`; its clean selected roadmap/M0/M1
+checks passed and its publication readback matched. Direct rejection precedes
+admission; rejection after a real failed action retains that prior work and stops
+before fallback effects.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -615,7 +628,7 @@ generation before evaluating unchanged M3 exit criteria.
 
 **Needed from owner:** Nothing for continued authorized roadmap development.
 
-**Saved at:** This planning-25 checkpoint follows published N1 implementation
+**Saved at:** This planning-26 checkpoint follows published N1 implementation
 `5328f018f341b80ad58cdb82f64708992ee2d6ae` and publication checkpoint
 `4c01af5b01b4690da5cd2a97d5e6025e97a48e1c`. The containing committed revision
 adopts N2 before its dependent code. Immutable milestone evidence and earlier

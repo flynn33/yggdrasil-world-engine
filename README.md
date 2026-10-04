@@ -156,6 +156,10 @@ Their exact interfaces cover actual immutable recovery/fallback execution, compl
 safe proof retention, protected local storage and paired JSON/Markdown exports.
 Implementation and its independent acceptance checks are underway; adoption does
 not claim executed N2 recovery or Diagnostics results.
+[Adoption CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37238793118)
+passed 35 of 36 checks; package acceptance rejected numeric budget formulas under
+the existing state-language guard. The formulas now use exact sum notation with
+unchanged event, alias and byte limits. Full replacement CI verification is pending.
 
 Next after this slice are session admission and state commit, actual containment
 and safe halt, remaining canonical Diagnostics producers and generation semantics.

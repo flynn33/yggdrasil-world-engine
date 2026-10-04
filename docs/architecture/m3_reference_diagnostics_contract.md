@@ -50,7 +50,7 @@ Snapshot determinism requires equal explicit identity, observations, retained st
 
 ## Resource calculation
 
-Registry32 entries, up to8 applicability plus8 additional predicates each, correction chain16, maximum33 linked child assessments and35 action decisions yield696 events by formula32*(8+8+1+1+2+1)+16+1+1+2+1+1+1+1. Reserve768 including72 margin. Hard limits are1024 main event slots,16 independent meta records,32 incidents,8 active operation handles,6144 aliases and33554432 retained serialized bytes. Whole operation reserves31588352 bytes before effects, including events25165824 +support2097152 +incidents1048576 +privatealiases2097152 +health65536 +inheritedorigin65536 +identity/envelope1048576. Existing/pinned/reserved data count; nominal slots do not waive bytes.
+Registry32 entries, up to8 applicability plus8 additional predicates each, correction chain16, maximum33 linked child assessments and35 action decisions yield696 events by formula `sum([32 * sum([8, 8, 1, 1, 2, 1]), 16, 1, 1, 2, 1, 1, 1, 1])`. Reserve768 including72 margin. Hard limits are1024 main event slots,16 independent meta records,32 incidents,8 active operation handles,6144 aliases and33554432 retained serialized bytes. Whole operation reserves31588352 bytes before effects, including events25165824 +support2097152 +incidents1048576 +privatealiases2097152 +health65536 +inheritedorigin65536 +identity/envelope1048576. Existing/pinned/reserved data count; nominal slots do not waive bytes.
 
 Alias occurrence bound5403 includes512 condition bindings*4,512 provider triples*3,768 diagnostic refs,35 action refs,33 post facts*12,32 certifications*13,64 origin/registry/proof refs,16 profile nodes*4,64 control/incident/meta/bundle/identity refs and12 first malformed-return margin. Diagnostic event IDs reuse their actual diagnostic alias; support references reuse typed actual source/event refs. Arbitrary prose is omitted. Admission reserves5403 novel slots and the authoritative2MiB alias bytes before effects. Failed capacity rejects, never discovers an admitted half-operation limit.
 
@@ -1489,7 +1489,7 @@ The frozen external prose fingerprint is `ff7898fa2a01ea9166208f054f8438156dbc54
     "max_action_decisions": 35,
     "audited_worst_case": 696,
     "reserved_health_refusal_margin": 72,
-    "event_formula": "32*(8+8+1+1+2+1)+16+1+1+2+1+1+1+1=696",
+    "event_formula": "sum([32 * sum([8, 8, 1, 1, 2, 1]), 16, 1, 1, 2, 1, 1, 1, 1])=696",
     "new_event_byte_reservation": 25165824,
     "bytes": {
       "new_events": 25165824,
@@ -1638,7 +1638,7 @@ The frozen external prose fingerprint is `ff7898fa2a01ea9166208f054f8438156dbc54
     "origin_registry_proof": 64,
     "profiles": 64,
     "first_malformed_result_margin": 12,
-    "calculation": "2048+1536+768+35+396+416+64+64+64+12=5403",
+    "calculation": "sum([2048, 1536, 768, 35, 396, 416, 64, 64, 64, 12])=5403",
     "proof_scope": "Conservative distinct reference-token occurrence count under exact N2 payload/context inventories. Reused bound references counted once; actual implementations must enforce capacity beforeeffects and reject unregistered payload.",
     "control_identity": 64
   }
