@@ -279,6 +279,14 @@ composed-probe fixes were verified separately in fresh focused processes. A froz
 clean-checkout run remains required before publication; this dirty run is not M2
 checkout-acceptance evidence.
 
+The first clean clone of implementation `3991ebf6e8d851c9e9726b61d9924056d8a7ec92`
+passed 32 checks but failed the Phase10 added-code check. Its explicit validation
+tool allowlist omitted the six newly registered check/test scripts. That dirty
+working run compared committed history and had not inspected uncommitted file
+additions. The existing allowlist now names those six exact validation paths;
+the forbidden extension policy and general platform scanner remain in force.
+The failed clone report is retained, and publication requires a fresh frozen run.
+
 The Phase9 correction preserves every original migration record and hash and adds
 exact whole-property assertion transitions. The permanent verifier reads the
 actual pre-migration parent `b61b49eaf9dce30058a86b52fd4910087fc9e4da` and original
