@@ -1,0 +1,55 @@
+[
+  {
+    "diagnostic_kind": "RECOVERY",
+    "severity": "WARNING",
+    "stage": "RECOVERY",
+    "disposition": "TERMINAL",
+    "subject_reference": "ash_state_111100000",
+    "parent_diagnostic_reference": "n2_reject:classification",
+    "chain_root_reference": "n2_reject:detection",
+    "rule_ids": ["ASH-RECOVERY-ACTION-001"],
+    "summary": "N2 recovery transport cannot assert terminal mode entry.",
+    "notes": ["This otherwise complete recovery envelope deliberately requests the excluded TERMINAL disposition."]
+  },
+  {
+    "policy_id": "FALLBACK-STATE-001",
+    "applicability_conditions": [],
+    "candidate_state_reference": {"state_space": "F2^9", "bits": [0, 0, 0, 0, 0, 0, 0, 0, 0]},
+    "ordering_rank": true,
+    "validation_requirements": [],
+    "escalation_on_failure": "TRY_NEXT",
+    "notes": ["A boolean is not an exact signed integer ordering rank."]
+  },
+  {
+    "policy_id": "YWE-RECOVERY-SAFETY-001",
+    "policy_version": "1.0.0",
+    "source_path": "docs/architecture/m3_recovery_safety_policy.md",
+    "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  {
+    "provider_source_verification": "DECLARED_NOT_AUTHENTICATED",
+    "correction_reference": "n2_reject:known:correction",
+    "original_assessment_reference": "n2_reject:origin",
+    "source_binding": {
+      "source_reference": "n2_reject:declared_provider",
+      "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "evidence_reference": "n2_reject:declared_provider:evidence"
+    },
+    "profile_id": "n2_authored:neutral",
+    "profile_source_sha256": "d0bca111f8628137adc4c16f123496dcdd1d590d06cb5d9acd68b39fe656fb97",
+    "chain": [{"state_space": "F2^9", "bits": [1, 1, 1, 1, 0, 0, 0, 0, 0]}],
+    "expected_target": {"state_space": "F2^9", "bits": [0, 0, 0, 0, 0, 0, 0, 0, 0]},
+    "reason": "The declared g1 correction deliberately omits its original known-path predicate evidence reference.",
+    "canonical_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+      "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+    }
+  }
+]

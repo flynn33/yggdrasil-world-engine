@@ -1126,6 +1126,27 @@ class NormalizationValueTests(NormalizationTestCase):
         self.assertIn(CODEWORD_RULE, result.emitted_diagnostics[0].emission.envelope.rule_ids)
         self.assertNotIn(CODEWORD_RULE, result.emitted_diagnostics[0].state_validity_diagnostic.rule_ids)
 
+    def test_recovery_rule_cannot_broaden_any_normalization_record_boundary(self):
+        model = self.model(capture=normalization.RecordingNormalizationCapture())
+        result = model.apply_normalization(self.plan(model), normalization_context=operation_context())
+        record = result.emitted_diagnostics[0]
+        envelope = dataclasses.replace(record.emission.envelope,
+            rule_ids=record.emission.envelope.rule_ids + ('ASH-FALLBACK-SELECTION-001',))
+        emission = dataclasses.replace(record.emission, envelope=envelope)
+        self.assert_contract_error(lambda: dataclasses.replace(record, emission=emission),
+            'NORMALIZATION_PLAN_INVALID', 'emission.envelope.rule_ids')
+        substituted = copy.deepcopy(record)
+        object.__setattr__(substituted, 'emission', emission)
+        self.assert_contract_error(lambda: dataclasses.replace(result,
+            emitted_diagnostics=(substituted, result.emitted_diagnostics[1])),
+            'NORMALIZATION_PLAN_INVALID', 'emission.envelope.rule_ids')
+        rejected_model = self.model(capture=CaptureDouble('reject', 0))
+        rejected = rejected_model.apply_normalization(self.plan(rejected_model),
+            normalization_context=operation_context())
+        self.assert_contract_error(lambda: dataclasses.replace(rejected,
+            attempted_diagnostic=substituted), 'NORMALIZATION_PLAN_INVALID',
+            'emission.envelope.rule_ids')
+
     def test_actual_computation_is_pending_and_post_disposition_matches_observed_outcome(self):
         for signature in ('100000000', '100011110'):
             with self.subTest(signature=signature):

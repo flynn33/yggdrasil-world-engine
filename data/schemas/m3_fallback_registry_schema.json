@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m3_fallback_registry_schema.json",
+  "title": "M3 N2 declared fallback registry snapshots",
+  "description": "Adopted YWE N2 structural reference format. Runtime owners establish complete source/profile/subject equality, canonical codeword membership and XOR/normalization proofs, ordered predicate and candidate correspondence, contextual classification, actual same-collector acknowledgements/completion, dynamic reference equality and session/mode truth. Schema acceptance alone certifies none of those effects or comparisons. External source declarations are retained provenance, not authenticated authority. Entry/certification mapping, current complete model STABLE certification and use-time revalidation remain FallbackRegistry-owned.",
+  "x-ywe-requirement-id": "YWE-REQ-0041",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/AvailableFallbackRegistry"
+    },
+    {
+      "$ref": "#/$defs/UnavailableFallbackRegistry"
+    }
+  ],
+  "$defs": {
+    "RegistrySourceBinding": {
+      "$ref": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/RegistrySourceBinding"
+    },
+    "FallbackPolicyEntry": {
+      "$ref": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/FallbackPolicyEntry"
+    },
+    "ConditionReference": {
+      "$ref": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/ConditionReference"
+    },
+    "EvidenceSourceBinding": {
+      "$ref": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/EvidenceSourceBinding"
+    },
+    "ContextObservation": {
+      "$ref": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/ContextObservation"
+    },
+    "CandidateCertification": {
+      "$ref": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/CandidateCertification"
+    },
+    "AvailableFallbackRegistry": {
+      "$ref": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/AvailableFallbackRegistry"
+    },
+    "UnavailableFallbackRegistry": {
+      "$ref": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/UnavailableFallbackRegistry"
+    },
+    "RegistryTargetValidation": {
+      "$ref": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/RegistryTargetValidation"
+    },
+    "RegistryValidation": {
+      "$ref": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/RegistryValidation"
+    },
+    "EntryApplicability": {
+      "$ref": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/EntryApplicability"
+    }
+  }
+}

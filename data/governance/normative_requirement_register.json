@@ -951,7 +951,10 @@
       "scope_partition": "ywe_core",
       "verification_refs": [
         "docs/architecture/m3_recovery_contract.md",
-        "docs/design-planning/Project_Record.md"
+        "docs/design-planning/Project_Record.md",
+        "tests/test_m3_recovery.py",
+        "tests/test_m3_recovery_values.py",
+        "tests/test_m3_recovery_schemas.py"
       ],
       "aliases": [],
       "supersedes": [],
@@ -967,7 +970,9 @@
         "core/ash_pattern_engine/canonical/interfaces/contracts/recovery-engine-contract.md",
         "core/ash_pattern_engine/canonical/algorithms/recovery-fallback-semantics.pseudo.md",
         "core/ash_pattern_engine/canonical/core/recoverability-semantics.pseudo.md",
-        "core/ash_pattern_engine/canonical/registries/fallback-policy-registry.md"
+        "core/ash_pattern_engine/canonical/registries/fallback-policy-registry.md",
+        "data/schemas/m3_recovery_value_schema.json",
+        "data/schemas/m3_fallback_registry_schema.json"
       ]
     },
     {
@@ -979,7 +984,9 @@
       "scope_partition": "ywe_core",
       "verification_refs": [
         "docs/architecture/m3_reference_diagnostics_contract.md",
-        "docs/design-planning/Project_Record.md"
+        "docs/design-planning/Project_Record.md",
+        "tests/test_m3_reference_diagnostics.py",
+        "tests/test_m3_diagnostic_schemas.py"
       ],
       "aliases": [],
       "supersedes": [],
@@ -994,7 +1001,8 @@
         "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
         "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
         "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
-        "docs/design-planning/Project_Record.md"
+        "docs/design-planning/Project_Record.md",
+        "data/schemas/m3_reference_diagnostic_bundle_schema.json"
       ]
     }
   ],

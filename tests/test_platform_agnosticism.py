@@ -19,20 +19,23 @@ class ReferenceBoundaryTests(unittest.TestCase):
             reference = root / "core/ash_pattern_engine"
             reference.mkdir(parents=True)
             for name in ("__init__.py", "ash_canonical.py", "state_model.py", "state_values.py",
-                         "normalization.py", "normalization_values.py"):
+                         "normalization.py", "normalization_values.py", "recovery.py", "recovery_values.py",
+                         "fallback_registry.py", "diagnostics.py", "diagnostics_values.py"):
                 (reference / name).write_text("# Reference fixture\n", encoding="utf-8")
             violations, inspected = platform_violations(root)
             self.assertEqual([], violations)
-            self.assertEqual(6, inspected)
+            self.assertEqual(11, inspected)
 
             for name in ("state_model_runtime.py", "state_values_extra.py", "normalization_runtime.py",
-                         "normalization_values_extra.py", "product.cpp"):
+                         "normalization_values_extra.py", "recovery_runtime.py", "recovery_values_extra.py",
+                         "fallback_registry_runtime.py", "diagnostics_runtime.py", "diagnostics_values_extra.py", "product.cpp"):
                 (reference / name).write_text("# Unauthorized neighbor fixture\n", encoding="utf-8")
             violations, inspected = platform_violations(root)
-            self.assertEqual(11, inspected)
-            self.assertEqual(5, len(violations))
+            self.assertEqual(21, inspected)
+            self.assertEqual(10, len(violations))
             for name in ("state_model_runtime.py", "state_values_extra.py", "normalization_runtime.py",
-                         "normalization_values_extra.py", "product.cpp"):
+                         "normalization_values_extra.py", "recovery_runtime.py", "recovery_values_extra.py",
+                         "fallback_registry_runtime.py", "diagnostics_runtime.py", "diagnostics_values_extra.py", "product.cpp"):
                 self.assertTrue(any(f"core/ash_pattern_engine/{name}:" in item for item in violations))
 
 

@@ -1,0 +1,850 @@
+[
+  {
+    "schema_ref": "data/schemas/m3_reference_diagnostic_bundle_schema.json",
+    "artifact_type": "ywe_reference_diagnostic_bundle",
+    "artifact_version": "1.0.0",
+    "bundle_id": "ref:000001",
+    "generated_at_utc": null,
+    "generation_time_reason": "CLOCK_UNAVAILABLE",
+    "identity": {
+      "product_id": "yggdrasil-world-engine-reference",
+      "product_version": "2.0.23",
+      "implementation_id": "REFERENCE_DEVELOPMENT_DIAGNOSTICS",
+      "profile_id": "REFERENCE_DEVELOPMENT",
+      "schema_version": "1.0.0",
+      "build_id": "ref:000002",
+      "source_revision": null,
+      "source_provenance": {
+        "status": "UNKNOWN",
+        "verified_revision": null,
+        "dirty_path_aliases": [],
+        "unavailable_reason": "SOURCE_NOT_VERIFIED"
+      },
+      "session_reference": "ref:000003",
+      "environment": {
+        "os_kind": "UNKNOWN",
+        "runtime_kind": "PYTHON_REFERENCE",
+        "runtime_version": null,
+        "architecture": "UNKNOWN",
+        "host_class": "UNKNOWN",
+        "unavailable_fields": [
+          {
+            "source": "ENVIRONMENT_OS",
+            "status": "UNAVAILABLE",
+            "reason": "NOT_PROVIDED"
+          },
+          {
+            "source": "RUNTIME_VERSION",
+            "status": "UNAVAILABLE",
+            "reason": "NOT_PROVIDED"
+          },
+          {
+            "source": "ARCHITECTURE",
+            "status": "UNAVAILABLE",
+            "reason": "NOT_PROVIDED"
+          },
+          {
+            "source": "HOST_CLASS",
+            "status": "UNAVAILABLE",
+            "reason": "NOT_PROVIDED"
+          }
+        ]
+      }
+    },
+    "profile": {
+      "profile_id": "REFERENCE_DEVELOPMENT",
+      "implementation_id": "REFERENCE_DEVELOPMENT_DIAGNOSTICS",
+      "selection_authority": "ref:000004",
+      "development_payloads_enabled": true,
+      "native_release_replacement_status": "DEFERRED_M10",
+      "native_release_qualification": "NOT_VERIFIED"
+    },
+    "capture_window": {
+      "first_sequence": null,
+      "last_sequence": null,
+      "start": {
+        "observed_utc": null,
+        "monotonic_nanoseconds": null,
+        "utc_reason": "CLOCK_UNAVAILABLE",
+        "monotonic_reason": "CLOCK_UNAVAILABLE"
+      },
+      "end": {
+        "observed_utc": null,
+        "monotonic_nanoseconds": null,
+        "utc_reason": "CLOCK_UNAVAILABLE",
+        "monotonic_reason": "CLOCK_UNAVAILABLE"
+      }
+    },
+    "coverage": [
+      {
+        "source": "STATE_MODEL",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "NORMALIZATION",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "RECOVERY_ENGINE",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "DIAGNOSTICS",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "PROTECTED_STORAGE",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "PAIRED_EXPORT",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "REALM_ENCODER",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "TRANSITION_REGISTRY",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "TOPOLOGY_GENERATOR",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "AXIOM_EVALUATOR",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "GENERATION_PLANNER",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "ARTIFACT_EMITTER",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "NATIVE_RUNTIME",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "NATIVE_RELEASE",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "PHYSICAL_CRASH",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "ENVIRONMENT_OS",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "RUNTIME_VERSION",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "ARCHITECTURE",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "HOST_CLASS",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "UTC_CLOCK",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "MONOTONIC_CLOCK",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      }
+    ],
+    "events": [],
+    "meta_diagnostics": [],
+    "incidents": [],
+    "supporting_evidence": {
+      "verified_source_pins": [],
+      "synthetic_fixture_references": [],
+      "metric_event_references": [],
+      "attachments": [],
+      "attachment_reason": "EXCLUDED_REFERENCE_SCOPE",
+      "profiles": [],
+      "assessments": [],
+      "recovery_diagnostics": [],
+      "source_evidence": [],
+      "normalization_proofs": [],
+      "correction_proofs": [],
+      "registry_proofs": [],
+      "conditions": [],
+      "predicate_observations": [],
+      "recovery_safety_evidence": [],
+      "target_validity": []
+    },
+    "health": {
+      "coverage_status": "UNAVAILABLE",
+      "accepted_count": 0,
+      "rejected_count": 0,
+      "retained_count": 0,
+      "expired_count": 0,
+      "lost_count": 0,
+      "redacted_field_count": 0,
+      "redacted_reference_count": 0,
+      "last_confirmed_sequence": null,
+      "first_unavailable_sequence": null,
+      "last_unavailable_sequence": null,
+      "active_reservations": 0,
+      "used_bytes": 0,
+      "storage_state": "UNAVAILABLE",
+      "last_failure_code": "STORAGE_PROTECTION_UNAVAILABLE",
+      "missing_sources": [
+        {
+          "source": "STATE_MODEL",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "NORMALIZATION",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "RECOVERY_ENGINE",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "DIAGNOSTICS",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "PROTECTED_STORAGE",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "PAIRED_EXPORT",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "REALM_ENCODER",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "TRANSITION_REGISTRY",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "TOPOLOGY_GENERATOR",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "AXIOM_EVALUATOR",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "GENERATION_PLANNER",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "ARTIFACT_EMITTER",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "NATIVE_RUNTIME",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "NATIVE_RELEASE",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "PHYSICAL_CRASH",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "ENVIRONMENT_OS",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "RUNTIME_VERSION",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "ARCHITECTURE",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "HOST_CLASS",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "UTC_CLOCK",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "MONOTONIC_CLOCK",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        }
+      ],
+      "retention_boundaries": [],
+      "range_detail_coalesced": false,
+      "meta_overflow_count": 0,
+      "counter_states": [
+        {
+          "field": "ACCEPTED",
+          "status": "EXACT",
+          "reason": null
+        },
+        {
+          "field": "REJECTED",
+          "status": "EXACT",
+          "reason": null
+        },
+        {
+          "field": "RETAINED",
+          "status": "EXACT",
+          "reason": null
+        },
+        {
+          "field": "EXPIRED",
+          "status": "EXACT",
+          "reason": null
+        },
+        {
+          "field": "LOST",
+          "status": "EXACT",
+          "reason": null
+        },
+        {
+          "field": "REDACTED_FIELDS",
+          "status": "EXACT",
+          "reason": null
+        },
+        {
+          "field": "REDACTED_REFERENCES",
+          "status": "EXACT",
+          "reason": null
+        },
+        {
+          "field": "META_OVERFLOW",
+          "status": "EXACT",
+          "reason": null
+        }
+      ],
+      "meta_record_count": 0,
+      "meta_storage_state": "UNAVAILABLE",
+      "fallback_cause_code": null
+    },
+    "retention": {
+      "configured_limits": {
+        "event_capacity": 1024,
+        "incident_capacity": 32,
+        "alias_capacity": 6144,
+        "max_event_bytes": 32768,
+        "store_byte_capacity": 33554432,
+        "health_capacity": 16,
+        "max_active_operations": 8,
+        "max_operation_events": 768,
+        "capture_duration_milliseconds": 600000,
+        "supporting_byte_capacity": 2097152,
+        "incident_byte_capacity": 1048576,
+        "alias_byte_capacity": 2097152,
+        "health_byte_capacity": 65536,
+        "inherited_origin_byte_capacity": 65536,
+        "envelope_byte_capacity": 1048576,
+        "max_json_bytes": 33554432,
+        "max_markdown_bytes": 50331648,
+        "max_manifest_bytes": 65536,
+        "max_export_bundles": 1,
+        "protected_disk_byte_capacity": 134217728,
+        "logical_serialized_buffer_capacity": 201326592,
+        "raw_business_packet_byte_capacity": 33554432,
+        "max_meta_records": 16,
+        "max_meta_record_bytes": 3072,
+        "health_status_byte_capacity": 8192,
+        "fallback_health_byte_capacity": 8192
+      },
+      "boundaries": [],
+      "active_operation_references": [],
+      "incident_pinned_operation_references": [],
+      "range_detail_coalesced": false
+    },
+    "redaction": {
+      "profile": "OWNED_SAFE_PROJECTION_V1",
+      "field_count": 0,
+      "reference_count": 0,
+      "entries": [],
+      "secondary_check": "PASSED"
+    },
+    "limitations": [
+      {
+        "code": "REFERENCE_IMPLEMENTATION_ONLY",
+        "source": "DIAGNOSTICS"
+      }
+    ]
+  },
+  {
+    "schema_ref": "data/schemas/m3_reference_diagnostic_bundle_schema.json",
+    "artifact_type": "ywe_reference_diagnostic_bundle",
+    "artifact_version": "1.0.0",
+    "bundle_id": "ref:000001",
+    "generated_at_utc": null,
+    "generation_time_reason": "CLOCK_UNAVAILABLE",
+    "identity": {
+      "product_id": "yggdrasil-world-engine-reference",
+      "product_version": "2.0.23",
+      "implementation_id": "REFERENCE_RELEASE_DIAGNOSTICS",
+      "profile_id": "REFERENCE_RELEASE",
+      "schema_version": "1.0.0",
+      "build_id": "ref:000002",
+      "source_revision": null,
+      "source_provenance": {
+        "status": "UNKNOWN",
+        "verified_revision": null,
+        "dirty_path_aliases": [],
+        "unavailable_reason": "SOURCE_NOT_VERIFIED"
+      },
+      "session_reference": "ref:000003",
+      "environment": {
+        "os_kind": "UNKNOWN",
+        "runtime_kind": "PYTHON_REFERENCE",
+        "runtime_version": null,
+        "architecture": "UNKNOWN",
+        "host_class": "UNKNOWN",
+        "unavailable_fields": [
+          {
+            "source": "ENVIRONMENT_OS",
+            "status": "UNAVAILABLE",
+            "reason": "NOT_PROVIDED"
+          },
+          {
+            "source": "RUNTIME_VERSION",
+            "status": "UNAVAILABLE",
+            "reason": "NOT_PROVIDED"
+          },
+          {
+            "source": "ARCHITECTURE",
+            "status": "UNAVAILABLE",
+            "reason": "NOT_PROVIDED"
+          },
+          {
+            "source": "HOST_CLASS",
+            "status": "UNAVAILABLE",
+            "reason": "NOT_PROVIDED"
+          }
+        ]
+      }
+    },
+    "profile": {
+      "profile_id": "REFERENCE_RELEASE",
+      "implementation_id": "REFERENCE_RELEASE_DIAGNOSTICS",
+      "selection_authority": "ref:000004",
+      "development_payloads_enabled": false,
+      "native_release_replacement_status": "DEFERRED_M10",
+      "native_release_qualification": "NOT_VERIFIED"
+    },
+    "capture_window": {
+      "first_sequence": null,
+      "last_sequence": null,
+      "start": {
+        "observed_utc": null,
+        "monotonic_nanoseconds": null,
+        "utc_reason": "CLOCK_UNAVAILABLE",
+        "monotonic_reason": "CLOCK_UNAVAILABLE"
+      },
+      "end": {
+        "observed_utc": null,
+        "monotonic_nanoseconds": null,
+        "utc_reason": "CLOCK_UNAVAILABLE",
+        "monotonic_reason": "CLOCK_UNAVAILABLE"
+      }
+    },
+    "coverage": [
+      {
+        "source": "STATE_MODEL",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "NORMALIZATION",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "RECOVERY_ENGINE",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "DIAGNOSTICS",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "PROTECTED_STORAGE",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "PAIRED_EXPORT",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "REALM_ENCODER",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "TRANSITION_REGISTRY",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "TOPOLOGY_GENERATOR",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "AXIOM_EVALUATOR",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "GENERATION_PLANNER",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "ARTIFACT_EMITTER",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "NATIVE_RUNTIME",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "NATIVE_RELEASE",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "PHYSICAL_CRASH",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "ENVIRONMENT_OS",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "RUNTIME_VERSION",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "ARCHITECTURE",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "HOST_CLASS",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "UTC_CLOCK",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      },
+      {
+        "source": "MONOTONIC_CLOCK",
+        "status": "EXCLUDED",
+        "reason": "EXCLUDED_REFERENCE_SCOPE"
+      }
+    ],
+    "events": [],
+    "meta_diagnostics": [],
+    "incidents": [],
+    "supporting_evidence": {
+      "verified_source_pins": [],
+      "synthetic_fixture_references": [],
+      "metric_event_references": [],
+      "attachments": [],
+      "attachment_reason": "EXCLUDED_REFERENCE_SCOPE",
+      "profiles": [],
+      "assessments": [],
+      "recovery_diagnostics": [],
+      "source_evidence": [],
+      "normalization_proofs": [],
+      "correction_proofs": [],
+      "registry_proofs": [],
+      "conditions": [],
+      "predicate_observations": [],
+      "recovery_safety_evidence": [],
+      "target_validity": []
+    },
+    "health": {
+      "coverage_status": "UNAVAILABLE",
+      "accepted_count": 0,
+      "rejected_count": 0,
+      "retained_count": 0,
+      "expired_count": 0,
+      "lost_count": 0,
+      "redacted_field_count": 0,
+      "redacted_reference_count": 0,
+      "last_confirmed_sequence": null,
+      "first_unavailable_sequence": null,
+      "last_unavailable_sequence": null,
+      "active_reservations": 0,
+      "used_bytes": 0,
+      "storage_state": "UNAVAILABLE",
+      "last_failure_code": "STORAGE_PROTECTION_UNAVAILABLE",
+      "missing_sources": [
+        {
+          "source": "STATE_MODEL",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "NORMALIZATION",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "RECOVERY_ENGINE",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "DIAGNOSTICS",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "PROTECTED_STORAGE",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "PAIRED_EXPORT",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "REALM_ENCODER",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "TRANSITION_REGISTRY",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "TOPOLOGY_GENERATOR",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "AXIOM_EVALUATOR",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "GENERATION_PLANNER",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "ARTIFACT_EMITTER",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "NATIVE_RUNTIME",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "NATIVE_RELEASE",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "PHYSICAL_CRASH",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "ENVIRONMENT_OS",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "RUNTIME_VERSION",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "ARCHITECTURE",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "HOST_CLASS",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "UTC_CLOCK",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        },
+        {
+          "source": "MONOTONIC_CLOCK",
+          "status": "EXCLUDED",
+          "reason": "EXCLUDED_REFERENCE_SCOPE"
+        }
+      ],
+      "retention_boundaries": [],
+      "range_detail_coalesced": false,
+      "meta_overflow_count": 0,
+      "counter_states": [
+        {
+          "field": "ACCEPTED",
+          "status": "EXACT",
+          "reason": null
+        },
+        {
+          "field": "REJECTED",
+          "status": "EXACT",
+          "reason": null
+        },
+        {
+          "field": "RETAINED",
+          "status": "EXACT",
+          "reason": null
+        },
+        {
+          "field": "EXPIRED",
+          "status": "EXACT",
+          "reason": null
+        },
+        {
+          "field": "LOST",
+          "status": "EXACT",
+          "reason": null
+        },
+        {
+          "field": "REDACTED_FIELDS",
+          "status": "EXACT",
+          "reason": null
+        },
+        {
+          "field": "REDACTED_REFERENCES",
+          "status": "EXACT",
+          "reason": null
+        },
+        {
+          "field": "META_OVERFLOW",
+          "status": "EXACT",
+          "reason": null
+        }
+      ],
+      "meta_record_count": 0,
+      "meta_storage_state": "UNAVAILABLE",
+      "fallback_cause_code": null
+    },
+    "retention": {
+      "configured_limits": {
+        "event_capacity": 1024,
+        "incident_capacity": 32,
+        "alias_capacity": 6144,
+        "max_event_bytes": 32768,
+        "store_byte_capacity": 33554432,
+        "health_capacity": 16,
+        "max_active_operations": 8,
+        "max_operation_events": 768,
+        "capture_duration_milliseconds": 600000,
+        "supporting_byte_capacity": 2097152,
+        "incident_byte_capacity": 1048576,
+        "alias_byte_capacity": 2097152,
+        "health_byte_capacity": 65536,
+        "inherited_origin_byte_capacity": 65536,
+        "envelope_byte_capacity": 1048576,
+        "max_json_bytes": 33554432,
+        "max_markdown_bytes": 50331648,
+        "max_manifest_bytes": 65536,
+        "max_export_bundles": 1,
+        "protected_disk_byte_capacity": 134217728,
+        "logical_serialized_buffer_capacity": 201326592,
+        "raw_business_packet_byte_capacity": 33554432,
+        "max_meta_records": 16,
+        "max_meta_record_bytes": 3072,
+        "health_status_byte_capacity": 8192,
+        "fallback_health_byte_capacity": 8192
+      },
+      "boundaries": [],
+      "active_operation_references": [],
+      "incident_pinned_operation_references": [],
+      "range_detail_coalesced": false
+    },
+    "redaction": {
+      "profile": "OWNED_SAFE_PROJECTION_V1",
+      "field_count": 0,
+      "reference_count": 0,
+      "entries": [],
+      "secondary_check": "PASSED"
+    },
+    "limitations": [
+      {
+        "code": "REFERENCE_IMPLEMENTATION_ONLY",
+        "source": "DIAGNOSTICS"
+      }
+    ]
+  }
+]

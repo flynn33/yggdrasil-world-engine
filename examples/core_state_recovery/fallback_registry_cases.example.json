@@ -1,0 +1,276 @@
+[
+  {
+    "schema_ref": "data/schemas/m3_fallback_registry_schema.json",
+    "artifact_type": "ywe_fallback_registry",
+    "artifact_version": "1.0.0",
+    "availability": "AVAILABLE",
+    "source_binding": {
+      "registry_id": "n2_authored:registry",
+      "source_binding": {
+        "source_reference": "n2_authored:registry:source",
+        "source_sha256": "d70a5ce44e897faee793ae4f8a86469a1c937f1ed16d95b3cb02918df190e4a7",
+        "evidence_reference": "n2_authored:registry:source:evidence"
+      },
+      "profile_id": "n2_authored:neutral",
+      "profile_source_sha256": "d0bca111f8628137adc4c16f123496dcdd1d590d06cb5d9acd68b39fe656fb97",
+      "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "source_verification": "DECLARED_NOT_AUTHENTICATED"
+    },
+    "entries": [
+      {
+        "policy_id": "FALLBACK-STATE-001",
+        "applicability_conditions": [],
+        "candidate_state_reference": {
+          "state_space": "F2^9",
+          "bits": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "ordering_rank": -9223372036854775808,
+        "validation_requirements": [],
+        "escalation_on_failure": "TRY_NEXT",
+        "notes": [
+          "Independently declared transport evidence; capture truth is established separately."
+        ]
+      }
+    ],
+    "candidate_certifications": [
+      {
+        "policy_id": "FALLBACK-STATE-001",
+        "context_observation": {
+          "context": {
+            "is_in_safe_halt": false,
+            "is_in_containment": false
+          },
+          "owner_reference": "n2_authored:certification:owner",
+          "observation_reference": "n2_authored:certification:observation",
+          "source_binding": {
+            "source_reference": "n2_authored:certification:source",
+            "source_sha256": "903bb23f4336f4cc91bde4f131a9213ce95b338e99abc4310707338107954766",
+            "evidence_reference": "n2_authored:certification:source:evidence"
+          }
+        },
+        "source_assessment": {
+          "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+          "artifact_type": "ywe_state_assessment",
+          "artifact_version": "1.0.0",
+          "outcome": "assessment",
+          "assessment_binding": {
+            "assessment_reference": "n2_authored:certification",
+            "original_input_reference": "n2_authored:certification:input",
+            "diagnosis_reference": "n2_authored:certification:detection"
+          },
+          "source_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+            "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "n2_authored:neutral",
+            "source_binding": {
+              "source_reference": "tests/test_m3_recovery.py:authored_profile",
+              "source_sha256": "d0bca111f8628137adc4c16f123496dcdd1d590d06cb5d9acd68b39fe656fb97",
+              "evidence_reference": "n2_authored:profile:evidence"
+            },
+            "recognized_valid_signatures": [
+              "000000000"
+            ]
+          },
+          "input_evidence": {
+            "original_input_reference": "n2_authored:certification:input",
+            "representation_kind": "SIGNATURE",
+            "observed_length": 9,
+            "length_unit": "CHARACTERS",
+            "preview": "000000000",
+            "preview_encoding": "TEXT",
+            "truncated": false,
+            "coordinate_observations": [],
+            "failure_code": null
+          },
+          "parsed_state": {
+            "state_space": "F2^9",
+            "bits": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "state_validity_diagnostic": {
+            "input_state": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "admissibility_status": "VALID",
+            "transformation_compatibility": "COMPATIBLE",
+            "normalization_status": "ALREADY_VALID",
+            "recoverability_relevance": "NO_RECOVERY_NEEDED",
+            "is_valid": true,
+            "orbit_info": {
+              "orbit_id": "000000000",
+              "member_count": 16,
+              "contains_known_valid_state": true
+            },
+            "rule_ids": [
+              "ASH-STATE-STRUCTURE-001",
+              "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+              "ASH-STATE-VALIDITY-001"
+            ],
+            "notes": [
+              "Independently declared transport evidence; capture truth is established separately."
+            ]
+          },
+          "emitted_diagnostics": [
+            {
+              "diagnostic_reference": "n2_authored:certification:detection",
+              "envelope": {
+                "diagnostic_kind": "STATE_VALIDITY",
+                "severity": "INFO",
+                "stage": "DETECTION",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_000000000",
+                "parent_diagnostic_reference": null,
+                "chain_root_reference": "n2_authored:certification:detection",
+                "rule_ids": [
+                  "ASH-STATE-STRUCTURE-001",
+                  "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                  "ASH-STATE-VALIDITY-001"
+                ],
+                "summary": "Independently authored bounded recovery observation.",
+                "notes": [
+                  "Independently declared transport evidence; capture truth is established separately."
+                ]
+              }
+            },
+            {
+              "diagnostic_reference": "n2_authored:certification:classification",
+              "envelope": {
+                "diagnostic_kind": "STATE_VALIDITY",
+                "severity": "INFO",
+                "stage": "CLASSIFICATION",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_000000000",
+                "parent_diagnostic_reference": "n2_authored:certification:detection",
+                "chain_root_reference": "n2_authored:certification:detection",
+                "rule_ids": [
+                  "ASH-CLASSIFICATION-MAPPING-001",
+                  "ASH-RECOVERY-ACTION-001"
+                ],
+                "summary": "Independently authored bounded recovery observation.",
+                "notes": [
+                  "Independently declared transport evidence; capture truth is established separately."
+                ]
+              }
+            }
+          ],
+          "system_context": {
+            "is_in_safe_halt": false,
+            "is_in_containment": false
+          },
+          "classification_evidence": {
+            "correction_path_is_known": {
+              "evaluation": "NOT_EVALUATED",
+              "binding": {
+                "assessment_reference": "n2_authored:certification",
+                "diagnosis_reference": "n2_authored:certification:detection",
+                "subject_reference": "ash_state_000000000",
+                "profile_id": "n2_authored:neutral",
+                "profile_source_sha256": "d0bca111f8628137adc4c16f123496dcdd1d590d06cb5d9acd68b39fe656fb97",
+                "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+                "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+                "evidence_reference": "n2_authored:certification:correction_path_is_known:evidence"
+              },
+              "reason": "Explicitly unconsulted declared fact."
+            },
+            "fallback_is_available": {
+              "evaluation": "NOT_EVALUATED",
+              "binding": {
+                "assessment_reference": "n2_authored:certification",
+                "diagnosis_reference": "n2_authored:certification:detection",
+                "subject_reference": "ash_state_000000000",
+                "profile_id": "n2_authored:neutral",
+                "profile_source_sha256": "d0bca111f8628137adc4c16f123496dcdd1d590d06cb5d9acd68b39fe656fb97",
+                "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+                "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+                "evidence_reference": "n2_authored:certification:fallback_is_available:evidence"
+              },
+              "reason": "Explicitly unconsulted declared fact."
+            }
+          },
+          "system_state_class": "STABLE",
+          "recovery_category": "NO_ACTION",
+          "consulted_predicates": []
+        }
+      }
+    ]
+  },
+  {
+    "schema_ref": "data/schemas/m3_fallback_registry_schema.json",
+    "artifact_type": "ywe_fallback_registry",
+    "artifact_version": "1.0.0",
+    "availability": "AVAILABLE",
+    "source_binding": {
+      "registry_id": "n2_authored:registry",
+      "source_binding": {
+        "source_reference": "n2_authored:registry:source",
+        "source_sha256": "d70a5ce44e897faee793ae4f8a86469a1c937f1ed16d95b3cb02918df190e4a7",
+        "evidence_reference": "n2_authored:registry:source:evidence"
+      },
+      "profile_id": "n2_authored:neutral",
+      "profile_source_sha256": "d0bca111f8628137adc4c16f123496dcdd1d590d06cb5d9acd68b39fe656fb97",
+      "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "source_verification": "DECLARED_NOT_AUTHENTICATED"
+    },
+    "entries": [],
+    "candidate_certifications": []
+  },
+  {
+    "schema_ref": "data/schemas/m3_fallback_registry_schema.json",
+    "artifact_type": "ywe_fallback_registry",
+    "artifact_version": "1.0.0",
+    "availability": "UNAVAILABLE",
+    "source_binding": {
+      "registry_id": "n2_authored:registry",
+      "source_binding": {
+        "source_reference": "n2_authored:registry:source",
+        "source_sha256": "d70a5ce44e897faee793ae4f8a86469a1c937f1ed16d95b3cb02918df190e4a7",
+        "evidence_reference": "n2_authored:registry:source:evidence"
+      },
+      "profile_id": "n2_authored:neutral",
+      "profile_source_sha256": "d0bca111f8628137adc4c16f123496dcdd1d590d06cb5d9acd68b39fe656fb97",
+      "ash_dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "ash_aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+      "source_verification": "DECLARED_NOT_AUTHENTICATED"
+    },
+    "reason": "Declared registry unavailable; empty availability is a different fact."
+  }
+]

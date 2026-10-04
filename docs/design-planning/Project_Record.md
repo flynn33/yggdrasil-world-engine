@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-29
+**Revision:** planning-30
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-28; full history remains in Git.
+**Supersedes:** planning-29; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -636,6 +636,34 @@ passed in 0.277 seconds; the full owned Diagnostics rerun remains pending here.
 Main CI runs 37241153172, 37241878979 and 37242753286 are now observed successful
 for their exact contract revisions. The original failed adoption run is preserved.
 
+The final owned Diagnostics/wire run passed 47 tests in 13.944 seconds, including
+37 actual/controlled Diagnostics methods and ten schema methods. Four actual
+assessment/fallback-target/incident/N1 snapshots each passed the bundle schema.
+The combined imported M3 version passed 252 tests in 304.004 seconds, including
+54 Recovery tests. It predates the 55th Recovery method and final registry guard
+correction; its result does not certify those later changes. The two final Recovery
+guard methods passed their narrow controls, and the final values/registry/schema
+suite passed 41 tests in 14.348 seconds.
+
+Independent native review reproduced stale acknowledgments after uncertain purge,
+untracked files after atomic creation without confirmation, omitted incidents
+after capacity exhaustion and false admission after health persistence failed.
+The owner now invalidates uncertain origin witnesses, retains unknown files and
+export slots, reserves incident capacity before effects and requires incident and
+health commit truth before completion/admission. Before-first-event failure
+incidents use actual retained origin events; timeline pinning preserves those
+events without falsely marking the healthy origin operation as failed.
+Pure assessment, correction and registry review also reproduced false binding
+validation through nested non-string equality hooks. Exact owned structural guards
+now precede comparisons, retaining the established semantic mismatch paths and
+performing no capture/provider calls for rejected origins.
+
+The live catalogs now contain 218 schemas and 734 exact fixture bindings, including
+250 intended rejections; all prior 712 fixture entries retain their exact text and
+meaning. The tracked/nonignored path snapshot contains 1195 paths. Schema-quality
+debt remains empty. These are observed local registration results; the containing
+candidate still requires the complete clean unfiltered offline repository run.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -646,24 +674,23 @@ The containing commit is the authoritative save point.
 
 ## 10. Checkpoint
 
-**Current step:** Implement the adopted N2 recovery and reference Diagnostics
-contracts, including actual fallback execution, safe graph persistence and paired
-exports. M2 remains accepted; M3 remains in progress.
+**Current step:** Verify the frozen N2 recovery and reference Diagnostics candidate
+from a clean unfiltered offline checkout, then publish the exact passing revision.
+M2 remains accepted; M3 remains in progress.
 
 **Completed:** M2 immutable foundation acceptance; verified first M3 StateModel
 slice; N1 contract, normalization implementation, clean 36-check/833-test execution,
 GitHub publication and exact successful CI; N2 contract, safety policy and exact
 interface adoption with independent source/arithmetic review.
 
-**Next action:** Finish the reviewed purge correction, exact fixture registration
-and inventory refresh, then freeze and verify the complete repository before
-publishing implementation results. Continue through session/mode/terminal guards, remaining Diagnostics and
+**Next action:** Run complete repository acceptance and publish verified N2 results.
+Continue through session/mode/terminal guards, remaining Diagnostics and
 generation before evaluating unchanged M3 exit criteria.
 
 **Needed from owner:** Nothing for continued authorized roadmap development.
 
-**Saved at:** This planning-29 checkpoint follows published N1 implementation
+**Saved at:** This planning-30 checkpoint follows published N1 implementation
 `5328f018f341b80ad58cdb82f64708992ee2d6ae` and publication checkpoint
 `4c01af5b01b4690da5cd2a97d5e6025e97a48e1c`. The containing committed revision
-records focused N2 verification before its implementation publication. Immutable milestone evidence and earlier
+freezes N2 implementation for complete acceptance before publication. Immutable milestone evidence and earlier
 checkpoint identities remain preserved.

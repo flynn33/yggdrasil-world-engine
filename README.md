@@ -154,14 +154,17 @@ The [N2 recovery contract](docs/architecture/m3_recovery_contract.md),
 are now adopted before implementation as YWE-REQ-0041 / YWE-REQ-0042 and ADR-0031.
 Their exact interfaces cover actual immutable recovery/fallback execution, complete
 safe proof retention, protected local storage and paired JSON/Markdown exports.
-Recovery implementation passes 53 focused integration tests and 40 owned
-value/registry/schema tests locally, including all 131,072 actual two-codeword
-proof cases. Diagnostics has passed 30 focused tests covering protected Windows
-storage, full safe target evidence, incident persistence, paired exports and purge;
-its ten wire controls also pass. Complete implementation publication checks remain
-pending. Independent review reproduced stale origin acknowledgments after an
-unconfirmed physical purge; the fix passed its native regression, and the complete
-Diagnostics rerun is underway before freezing the implementation.
+The implementation candidate is now frozen for complete clean acceptance.
+Diagnostics and its wire controls pass 47 tests; the values/registry/schema suite
+passes 41. A combined M3 run passed 252 tests, including all 131,072 actual
+two-codeword proof cases, before the two final guard tests and registry correction.
+Those final controls passed separately and will run again in the unfiltered suite.
+Independent review corrected stale origin acknowledgments after unknown deletion,
+unconfirmed export-file accounting, incident-capacity and admission-health failures,
+and invalid nested source/profile fields accepted through custom equality hooks.
+Actual protected Windows storage, complete target evidence, durable incidents,
+paired exports and retention controls passed locally. Complete clean implementation
+acceptance and GitHub implementation publication remain pending.
 Its reviewed retention amendment defines physical purge with actual deletion
 receipts and protects supporting evidence still referenced by retained records.
 M3 remains active until the complete slice and milestone acceptance checks pass. The same review

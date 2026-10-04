@@ -14,6 +14,11 @@ from typing import ClassVar
 from . import state_values as values
 
 
+NORMALIZATION_RULE_IDS = frozenset((
+    "ASH-STATE-STRUCTURE-001", "ASH-STATE-VALIDITY-001", "ASH-STATE-GENERAL-001",
+    "ASH-ADMISSIBILITY-CLASSIFICATION-001", "ASH-CLASSIFICATION-MAPPING-001",
+    "ASH-RECOVERY-ACTION-001", "ASH-CODEWORD-STRUCTURE-001",
+))
 NORMALIZATION_POLICY_BINDING_FIELDS = (
     ("policy_id", "YWE-NORMALIZE-LEXICOGRAPHIC-001"),
     ("policy_version", "1.0.0"),
@@ -365,6 +370,8 @@ class NormalizationDiagnosticRecord:
         if any(rule not in values.ASSESSMENT_RULE_IDS for rule in self.state_validity_diagnostic.rule_ids):
             raise NormalizationContractError("NORMALIZATION_PLAN_INVALID", "state_validity_diagnostic")
         envelope = self.emission.envelope
+        if any(rule not in NORMALIZATION_RULE_IDS for rule in envelope.rule_ids):
+            raise NormalizationContractError("NORMALIZATION_PLAN_INVALID", "emission.envelope.rule_ids")
         if envelope.diagnostic_kind != "STATE_VALIDITY" or envelope.stage != "RECOVERY":
             raise NormalizationContractError("NORMALIZATION_PLAN_INVALID", "emission.envelope")
         if self.step is not None:
@@ -429,6 +436,8 @@ class _NormalizationPacket:
         if not self.inherited_diagnostics:
             raise NormalizationContractError("NORMALIZATION_PLAN_INVALID", "inherited_diagnostics")
         envelope = record.emission.envelope
+        if any(rule not in NORMALIZATION_RULE_IDS for rule in envelope.rule_ids):
+            raise NormalizationContractError("NORMALIZATION_PLAN_INVALID", "emission.envelope.rule_ids")
         root = self.original_diagnosis.assessment_binding.diagnosis_reference
         context = self.operation_binding
         reference = context.computation_reference if index == 0 else context.post_validation_reference

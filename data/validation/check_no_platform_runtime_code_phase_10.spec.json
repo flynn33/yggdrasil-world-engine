@@ -17,7 +17,12 @@
     "core/ash_pattern_engine/state_model.py",
     "core/ash_pattern_engine/state_values.py",
     "core/ash_pattern_engine/normalization.py",
-    "core/ash_pattern_engine/normalization_values.py"
+    "core/ash_pattern_engine/normalization_values.py",
+    "core/ash_pattern_engine/recovery.py",
+    "core/ash_pattern_engine/recovery_values.py",
+    "core/ash_pattern_engine/fallback_registry.py",
+    "core/ash_pattern_engine/diagnostics.py",
+    "core/ash_pattern_engine/diagnostics_values.py"
   ],
   "allowed_added_paths": [
     "scripts/check_fixture_catalog.py",
@@ -62,7 +67,13 @@
     "tests/test_m3_state_model.py",
     "tests/test_platform_agnosticism.py",
     "tests/test_ywe_package_acceptance_loading.py",
-    "tests/test_m3_normalization.py"
+    "tests/test_m3_normalization.py",
+    "scripts/reference_diagnostics_host.py",
+    "tests/test_m3_recovery.py",
+    "tests/test_m3_recovery_values.py",
+    "tests/test_m3_recovery_schemas.py",
+    "tests/test_m3_reference_diagnostics.py",
+    "tests/test_m3_diagnostic_schemas.py"
   ],
   "severity": "block"
 }

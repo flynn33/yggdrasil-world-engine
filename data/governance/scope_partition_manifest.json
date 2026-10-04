@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1177,
-    "path_digest": "52f878679f59484fdc4f26c5ef990e64a0abce5848e0af04606716f662d02107",
+    "path_count": 1195,
+    "path_digest": "53e8ebff13eb4afc5446a5bb57224921afe55b632f7adcf9d64e1152deed6b71",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -2358,16 +2358,214 @@
         "m3_state_normalization",
         "conformance_fixture"
       ]
+    },
+    {
+      "path": "core/ash_pattern_engine/recovery.py",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_recovery_contract.md",
+      "rationale": "Exact reviewed neutral Core immutable recovery and fallback reference execution; native/session lifecycle effects remain outside N2.",
+      "secondary_tags": [
+        "m3_recovery",
+        "reference_semantics"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/recovery_values.py",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_recovery_contract.md",
+      "rationale": "Exact reviewed neutral Core immutable recovery and fallback reference execution; native/session lifecycle effects remain outside N2.",
+      "secondary_tags": [
+        "m3_recovery",
+        "reference_semantics"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/fallback_registry.py",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_recovery_contract.md",
+      "rationale": "Exact reviewed neutral Core immutable recovery and fallback reference execution; native/session lifecycle effects remain outside N2.",
+      "secondary_tags": [
+        "m3_recovery",
+        "reference_semantics"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/diagnostics.py",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_reference_diagnostics_contract.md",
+      "rationale": "Exact reviewed Core reference collector uses explicit storage/clock ports and preserves safe graph/completion evidence.",
+      "secondary_tags": [
+        "m3_reference_diagnostics",
+        "reference_semantics"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/diagnostics_values.py",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_reference_diagnostics_contract.md",
+      "rationale": "Exact reviewed Core reference collector uses explicit storage/clock ports and preserves safe graph/completion evidence.",
+      "secondary_tags": [
+        "m3_reference_diagnostics",
+        "reference_semantics"
+      ]
+    },
+    {
+      "path": "scripts/reference_diagnostics_host.py",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_reference_diagnostics_contract.md",
+      "rationale": "Reviewed Windows development reference storage and clock assembly used only for controlled reference qualification; native product/release qualification remains deferred.",
+      "secondary_tags": [
+        "m3_reference_diagnostics",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "data/schemas/m3_recovery_value_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_recovery_contract.md",
+      "rationale": "Reviewed recovery representation and independent runtime conformance controls under explicit source/profile bindings.",
+      "secondary_tags": [
+        "m3_recovery",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "data/schemas/m3_fallback_registry_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_recovery_contract.md",
+      "rationale": "Reviewed recovery representation and independent runtime conformance controls under explicit source/profile bindings.",
+      "secondary_tags": [
+        "m3_recovery",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "tests/test_m3_recovery.py",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_recovery_contract.md",
+      "rationale": "Reviewed recovery representation and independent runtime conformance controls under explicit source/profile bindings.",
+      "secondary_tags": [
+        "m3_recovery",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "tests/test_m3_recovery_values.py",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_recovery_contract.md",
+      "rationale": "Reviewed recovery representation and independent runtime conformance controls under explicit source/profile bindings.",
+      "secondary_tags": [
+        "m3_recovery",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "tests/test_m3_recovery_schemas.py",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_recovery_contract.md",
+      "rationale": "Reviewed recovery representation and independent runtime conformance controls under explicit source/profile bindings.",
+      "secondary_tags": [
+        "m3_recovery",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "examples/core_state_recovery/recovery_cases.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_recovery_contract.md",
+      "rationale": "Reviewed recovery representation and independent runtime conformance controls under explicit source/profile bindings.",
+      "secondary_tags": [
+        "m3_recovery",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "examples/core_state_recovery/fallback_registry_cases.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_recovery_contract.md",
+      "rationale": "Reviewed recovery representation and independent runtime conformance controls under explicit source/profile bindings.",
+      "secondary_tags": [
+        "m3_recovery",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "data/schemas/m3_reference_diagnostic_bundle_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_reference_diagnostics_contract.md",
+      "rationale": "Reviewed safe Diagnostics representation and controlled reference capture/storage/export conformance evidence.",
+      "secondary_tags": [
+        "m3_reference_diagnostics",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "tests/test_m3_reference_diagnostics.py",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_reference_diagnostics_contract.md",
+      "rationale": "Reviewed safe Diagnostics representation and controlled reference capture/storage/export conformance evidence.",
+      "secondary_tags": [
+        "m3_reference_diagnostics",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "tests/test_m3_diagnostic_schemas.py",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_reference_diagnostics_contract.md",
+      "rationale": "Reviewed safe Diagnostics representation and controlled reference capture/storage/export conformance evidence.",
+      "secondary_tags": [
+        "m3_reference_diagnostics",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "examples/core_reference_diagnostics/diagnostic_bundle_cases.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_reference_diagnostics_contract.md",
+      "rationale": "Reviewed safe Diagnostics representation and controlled reference capture/storage/export conformance evidence.",
+      "secondary_tags": [
+        "m3_reference_diagnostics",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "examples/core_state_recovery/recovery_rejections.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_recovery_contract.md",
+      "rationale": "Reviewed recovery representation and independent runtime conformance controls under explicit source/profile bindings.",
+      "secondary_tags": [
+        "m3_recovery",
+        "reference_conformance"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
       "ash_dependency_material": 66,
-      "governance_validation": 454,
+      "governance_validation": 467,
       "historical_evidence": 21,
       "later_release_work": 59,
       "wrw_reference_profile": 303,
-      "ywe_core": 152,
+      "ywe_core": 157,
       "ywe_extension_profile": 122
     }
   }

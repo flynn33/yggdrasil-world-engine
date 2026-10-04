@@ -38,6 +38,10 @@ _DIAGNOSIS_RULES = (
     "ASH-STATE-STRUCTURE-001", "ASH-ADMISSIBILITY-CLASSIFICATION-001",
     "ASH-STATE-VALIDITY-001",
 )
+_SEMANTIC_FIELDS = (
+    "input_state", "admissibility_status", "transformation_compatibility",
+    "normalization_status", "recoverability_relevance", "is_valid", "orbit_info",
+)
 
 
 @dataclass(frozen=True)
@@ -329,6 +333,312 @@ class StateModel:
     def apply_normalization(self, plan, *, normalization_context):
         return self._normalization_operations().apply(plan, normalization_context=normalization_context)
 
+    @staticmethod
+    def _classify(status, context, evidence):
+        if context.is_in_safe_halt:
+            return "SAFE_HALT", (), None
+        if context.is_in_containment:
+            return "CONTAINED", (), None
+        if status == "VALID":
+            return "STABLE", (), None
+        if status == "TRANSFORMATION_COMPATIBLE":
+            field = "correction_path_is_known"
+            fact = evidence.correction_path_is_known
+            if type(fact) is not values.EvaluatedPredicate:
+                return None, (field,), field
+            return ("CORRECTABLE" if fact.value else "UNSTABLE"), (field,), None
+        if status == "TRANSFORMATION_INCOMPATIBLE":
+            field = "fallback_is_available"
+            fact = evidence.fallback_is_available
+            if type(fact) is not values.EvaluatedPredicate:
+                return None, (field,), field
+            return ("DEGRADED" if fact.value else "FAILED"), (field,), None
+        return "DEGRADED", (), None
+
+    def validate_assessment(self, submitted):
+        """Compare a complete reported assessment without decoding or capture."""
+        from . import recovery_values as rv
+
+        if type(submitted) is not values.StateAssessment:
+            raise rv.RecoveryContractError("RECOVERY_INPUT_INVALID", "origin_assessment")
+        expected = classification = category = consulted = None
+
+        def witness(code=None, field=None):
+            return rv.AssessmentValidation(
+                status="VERIFIED" if code is None else "REJECTED",
+                submitted_assessment=submitted, current_source_binding=self.canonical_binding,
+                current_profile_binding=self.profile_binding, expected_diagnostic=expected,
+                expected_system_state_class=classification, expected_recovery_category=category,
+                expected_consulted_predicates=consulted, failure_code=code, field_name=field,
+            )
+
+        if type(submitted.source_binding) is not values.CanonicalAshBinding:
+            return witness("SOURCE_BINDING_MISMATCH", "origin_assessment.source_binding")
+        if (type(submitted.profile_binding) is not values.AvailableProfileBinding and
+                type(submitted.profile_binding) is not values.UnavailableProfileBinding):
+            return witness("PROFILE_BINDING_MISMATCH", "origin_assessment.profile_binding")
+        try:
+            values.CanonicalAshBinding.__post_init__(submitted.source_binding)
+        except values.StateContractError:
+            return witness("SOURCE_BINDING_MISMATCH", "origin_assessment.source_binding")
+        try:
+            binding = submitted.profile_binding
+            type(binding).__post_init__(binding)
+            profile = binding.profile if type(binding) is values.AvailableProfileBinding else binding.evidence
+            values._require_type(profile.source_binding, values.ProfileSourceBinding,
+                                 "PROFILE_BINDING_INVALID", "source_binding")
+            values.ProfileSourceBinding.__post_init__(profile.source_binding)
+            if type(binding) is values.AvailableProfileBinding:
+                states = profile.recognized_valid_states
+                values._require_type(states, frozenset, "PROFILE_BINDING_INVALID", "recognized_valid_states")
+                if len(states) > 512:
+                    raise values.StateContractError("PROFILE_SIZE_LIMIT", "recognized_valid_states")
+                for state in states:
+                    values._require_type(state, values.AshState, "PROFILE_BINDING_INVALID", "recognized_valid_states")
+                    values.AshState.__post_init__(state)
+            type(profile).__post_init__(profile)
+        except values.StateContractError:
+            return witness("PROFILE_BINDING_MISMATCH", "origin_assessment.profile_binding")
+        if submitted.source_binding != self.canonical_binding:
+            return witness("SOURCE_BINDING_MISMATCH", "origin_assessment.source_binding")
+        if submitted.profile_binding != self.profile_binding:
+            return witness("PROFILE_BINDING_MISMATCH", "origin_assessment.profile_binding")
+        try:
+            for field, kind in (
+                ("assessment_binding", values.AssessmentBinding),
+                ("input_evidence", values.InputEvidence),
+                ("system_context", values.SystemContext),
+                ("classification_evidence", values.ClassificationEvidence),
+                ("state_validity_diagnostic", values.StateValidityDiagnostic),
+            ):
+                values._require_type(getattr(submitted, field), kind, "DIAGNOSTIC_ROW_INVALID", field)
+            values.AssessmentBinding.__post_init__(submitted.assessment_binding)
+            values.InputEvidence.__post_init__(submitted.input_evidence)
+            for coordinate in submitted.input_evidence.coordinate_observations:
+                values.CoordinateObservation.__post_init__(coordinate)
+            if submitted.parsed_state is not None:
+                values._require_type(submitted.parsed_state, values.AshState, "DIAGNOSTIC_ROW_INVALID", "parsed_state")
+                values.AshState.__post_init__(submitted.parsed_state)
+            values.SystemContext.__post_init__(submitted.system_context)
+            values.ClassificationEvidence.__post_init__(submitted.classification_evidence)
+        except values.StateContractError as exc:
+            field = exc.field_name.split(".", 1)[0]
+            if field == "system_context" or exc.code == "CONTEXT_INVALID":
+                field = "origin_assessment.system_context"
+            elif field == "parsed_state":
+                field = "origin_assessment.parsed_state"
+            else:
+                field = "origin_assessment.input_evidence"
+            return witness("INPUT_BINDING_MISMATCH", field)
+
+        if submitted.assessment_binding.original_input_reference != submitted.input_evidence.original_input_reference:
+            return witness("INPUT_BINDING_MISMATCH", "origin_assessment.input_evidence")
+        if (type(submitted.emitted_diagnostics) is not tuple or len(submitted.emitted_diagnostics) != 2 or
+                any(type(emission) is not values.DiagnosticEmission for emission in submitted.emitted_diagnostics)):
+            return witness("CLASSIFICATION_ENVELOPE_MISMATCH", "origin_assessment")
+
+        expected = self._diagnose(DecodedInput(submitted.parsed_state, submitted.input_evidence))
+        observed = submitted.state_validity_diagnostic
+        for field in _SEMANTIC_FIELDS:
+            actual = getattr(observed, field)
+            try:
+                if field == "input_state":
+                    values._require_type(actual, (values.AshState, values.RejectedCandidateEvidence),
+                                         "DIAGNOSTIC_ROW_INVALID", field)
+                    type(actual).__post_init__(actual)
+                    if type(actual) is values.RejectedCandidateEvidence:
+                        values.InputEvidence.__post_init__(actual.input_evidence)
+                        for coordinate in actual.input_evidence.coordinate_observations:
+                            values.CoordinateObservation.__post_init__(coordinate)
+                elif field == "orbit_info":
+                    if actual is not None:
+                        values._require_type(actual, values.OrbitInfo, "DIAGNOSTIC_ROW_INVALID", field)
+                        values.OrbitInfo.__post_init__(actual)
+                else:
+                    values._require_type(actual, bool if field == "is_valid" else str,
+                                         "DIAGNOSTIC_ROW_INVALID", field)
+            except values.StateContractError:
+                return witness("DIAGNOSIS_MISMATCH", "origin_assessment.state_validity_diagnostic." + field)
+            if actual != getattr(expected, field):
+                return witness("DIAGNOSIS_MISMATCH", "origin_assessment.state_validity_diagnostic." + field)
+        if type(observed.rule_ids) is not tuple or any(type(rule) is not str for rule in observed.rule_ids):
+            return witness("DIAGNOSIS_MISMATCH", "origin_assessment.state_validity_diagnostic.rule_ids")
+        if observed.rule_ids != _DIAGNOSIS_RULES:
+            return witness("DIAGNOSIS_MISMATCH", "origin_assessment.state_validity_diagnostic.rule_ids")
+        try:
+            values.StateValidityDiagnostic.__post_init__(observed)
+        except values.StateContractError:
+            return witness("DIAGNOSIS_MISMATCH", "origin_assessment.state_validity_diagnostic.notes")
+        subject = submitted.subject_reference
+        root = submitted.assessment_binding.diagnosis_reference
+        for index, emission in enumerate(submitted.emitted_diagnostics):
+            prefix = f"origin_assessment.emitted_diagnostics[{index}]"
+            if type(emission.diagnostic_reference) is not str:
+                return witness("CLASSIFICATION_ENVELOPE_MISMATCH", prefix + ".diagnostic_reference")
+            if type(emission.envelope) is not values.DiagnosticEnvelope:
+                return witness("CLASSIFICATION_ENVELOPE_MISMATCH", prefix + ".envelope")
+            for field in ("diagnostic_kind", "stage", "severity", "disposition", "subject_reference", "chain_root_reference"):
+                if type(getattr(emission.envelope, field)) is not str:
+                    return witness("CLASSIFICATION_ENVELOPE_MISMATCH", prefix + ".envelope." + field)
+            parent = emission.envelope.parent_diagnostic_reference
+            if parent is not None and type(parent) is not str:
+                return witness("CLASSIFICATION_ENVELOPE_MISMATCH", prefix + ".envelope.parent_diagnostic_reference")
+        if submitted.emitted_diagnostics[0].diagnostic_reference != root:
+            return witness("CLASSIFICATION_ENVELOPE_MISMATCH", "origin_assessment.emitted_diagnostics[0].diagnostic_reference")
+        if submitted.emitted_diagnostics[1].diagnostic_reference == root:
+            return witness("CLASSIFICATION_ENVELOPE_MISMATCH", "origin_assessment.emitted_diagnostics[1].diagnostic_reference")
+        diagnostic_context = values.DiagnosticContext(
+            submitted.assessment_binding.assessment_reference,
+            submitted.assessment_binding.original_input_reference,
+            submitted.assessment_binding.diagnosis_reference,
+            submitted.emitted_diagnostics[1].diagnostic_reference,
+        )
+        for name in values.PREDICATE_NAMES:
+            fact = getattr(submitted.classification_evidence, name)
+            prefix = "origin_assessment.classification_evidence." + name
+            try:
+                type(fact).__post_init__(fact)
+                values.PredicateBinding.__post_init__(fact.binding)
+            except values.StateContractError:
+                return witness("PREDICATE_BINDING_MISMATCH", prefix + ".binding.evidence_reference")
+            if not self._matches(fact.binding, diagnostic_context, subject):
+                expected_binding = (
+                    ("assessment_reference", diagnostic_context.assessment_reference),
+                    ("diagnosis_reference", diagnostic_context.detection_reference),
+                    ("subject_reference", subject),
+                    ("profile_id", self.profile_binding.profile_id),
+                    ("profile_source_sha256", self.profile_binding.source_binding.source_sha256),
+                    ("ash_dependency_id", self.canonical_binding.dependency_id),
+                    ("ash_aggregate_sha256", self.canonical_binding.aggregate_sha256),
+                )
+                field = next(field for field, value in expected_binding if getattr(fact.binding, field) != value)
+                return witness("PREDICATE_BINDING_MISMATCH", prefix + ".binding." + field)
+        classification, consulted, missing = self._classify(
+            expected.admissibility_status, submitted.system_context, submitted.classification_evidence,
+        )
+        if missing is not None:
+            return witness("PREDICATE_NOT_EVALUATED", "origin_assessment.classification_evidence." + missing + ".evaluation")
+        category = _RECOVERY[classification]
+        for field, value in (("system_state_class", classification), ("recovery_category", category),
+                             ("consulted_predicates", consulted)):
+            actual = getattr(submitted, field)
+            if (type(actual) is not (tuple if field == "consulted_predicates" else str) or
+                    field == "consulted_predicates" and any(type(item) is not str for item in actual)):
+                return witness("CLASSIFICATION_MISMATCH", "origin_assessment." + field)
+            if actual != value:
+                return witness("CLASSIFICATION_MISMATCH", "origin_assessment." + field)
+        status = expected.admissibility_status
+        detection_impact = (("INFO", "RESOLVED") if status == "VALID" else
+                            ("WARNING", "PENDING") if status == "TRANSFORMATION_COMPATIBLE" else
+                            ("ERROR", "BLOCKED"))
+        for index, emission in enumerate(submitted.emitted_diagnostics):
+            prefix = f"origin_assessment.emitted_diagnostics[{index}]"
+            envelope = emission.envelope
+            try:
+                values.DiagnosticEmission.__post_init__(emission)
+                values.DiagnosticEnvelope.__post_init__(envelope)
+            except values.StateContractError:
+                return witness("CLASSIFICATION_ENVELOPE_MISMATCH", prefix + ".envelope.summary")
+            severity, disposition = detection_impact if index == 0 else _IMPACT[classification]
+            fields = (
+                ("diagnostic_kind", "STATE_VALIDITY"),
+                ("stage", "DETECTION" if index == 0 else "CLASSIFICATION"),
+                ("severity", severity), ("disposition", disposition),
+                ("subject_reference", subject),
+                ("parent_diagnostic_reference", None if index == 0 else diagnostic_context.detection_reference),
+                ("chain_root_reference", diagnostic_context.detection_reference),
+                ("rule_ids", _DIAGNOSIS_RULES if index == 0 else
+                 ("ASH-CLASSIFICATION-MAPPING-001", "ASH-RECOVERY-ACTION-001")),
+            )
+            for field, value in fields:
+                if getattr(envelope, field) != value:
+                    return witness("CLASSIFICATION_ENVELOPE_MISMATCH", prefix + ".envelope." + field)
+            if index == 0 and envelope.notes != observed.notes:
+                return witness("DIAGNOSIS_MISMATCH", prefix + ".envelope.notes")
+        try:
+            values.StateAssessment.__post_init__(submitted)
+        except values.StateContractError:
+            return witness("INPUT_BINDING_MISMATCH", "origin_assessment.input_evidence")
+        return witness()
+
+    def diagnosis_from_assessment(self, submitted):
+        validation = self.validate_assessment(submitted)
+        if validation.status != "VERIFIED":
+            return validation
+        return values.StateDiagnosis(
+            assessment_binding=submitted.assessment_binding, source_binding=submitted.source_binding,
+            profile_binding=submitted.profile_binding, input_evidence=submitted.input_evidence,
+            parsed_state=submitted.parsed_state, state_validity_diagnostic=submitted.state_validity_diagnostic,
+            emitted_diagnostics=(submitted.emitted_diagnostics[0],),
+        )
+
+    def inspect_state(self, state):
+        if type(state) is not values.AshState:
+            raise values.StateContractError("STATE_COORDINATE_TYPE", "state")
+        values.AshState.__post_init__(state)
+        observation = values.InputEvidence(
+            original_input_reference="inspection:state", representation_kind="BIT_SEQUENCE",
+            observed_length=9, length_unit="ELEMENTS", preview=None, preview_encoding="TEXT",
+            truncated=False, coordinate_observations=tuple(
+                values.CoordinateObservation(index=index, scalar_kind="INTEGER_BIT", value=bit)
+                for index, bit in enumerate(state.bits)
+            ), failure_code=None,
+        )
+        return self._diagnose(DecodedInput(state, observation))
+
+    def validate_known_correction(self, submitted, *, origin):
+        from . import recovery_values as rv
+
+        if type(submitted) is not rv.KnownCorrection:
+            raise rv.RecoveryContractError("RECOVERY_PLAN_INVALID", "correction_observation.submitted")
+        validation = self.validate_assessment(origin)
+        target = diagnostic = None
+
+        def witness(code=None, field=None):
+            return rv.CorrectionValidation(
+                status="VERIFIED" if code is None else "REJECTED", submitted_correction=submitted,
+                origin_validation=validation, current_source_binding=self.canonical_binding,
+                current_profile_binding=self.profile_binding, computed_target=target,
+                target_diagnostic=diagnostic, failure_code=code, field_name=field,
+            )
+
+        if validation.status != "VERIFIED" or origin.parsed_state is None:
+            return witness("ORIGIN_MISMATCH", "origin_assessment")
+        rv.KnownCorrection.__post_init__(submitted)
+        rv.EvidenceSourceBinding.__post_init__(submitted.source_binding)
+        try:
+            values.CanonicalAshBinding.__post_init__(submitted.canonical_binding)
+        except values.StateContractError:
+            return witness("SOURCE_BINDING_MISMATCH", "source_binding")
+        if submitted.canonical_binding != self.canonical_binding:
+            return witness("SOURCE_BINDING_MISMATCH", "source_binding")
+        if (submitted.profile_id != self.profile_binding.profile_id or
+                submitted.profile_source_sha256 != self.profile_binding.source_binding.source_sha256):
+            return witness("PROFILE_BINDING_MISMATCH", "profile_binding")
+        if (submitted.original_assessment_reference != origin.assessment_binding.assessment_reference or
+                submitted.classification_evidence_reference !=
+                origin.classification_evidence.correction_path_is_known.binding.evidence_reference):
+            return witness("ORIGIN_MISMATCH", "origin_assessment")
+        target = origin.parsed_state
+        for index, codeword in enumerate(submitted.chain):
+            try:
+                values.AshState.__post_init__(codeword)
+            except values.StateContractError:
+                return witness("CHAIN_MEMBER_INVALID", f"chain[{index}]")
+            if codeword.bits not in values.CANONICAL_CODEWORDS:
+                return witness("CHAIN_MEMBER_INVALID", f"chain[{index}]")
+            target = values.AshState(tuple(a ^ b for a, b in zip(target.bits, codeword.bits)))
+        diagnostic = self.inspect_state(target)
+        try:
+            values.AshState.__post_init__(submitted.expected_target)
+        except values.StateContractError:
+            raise rv.RecoveryContractError("RECOVERY_PLAN_INVALID", "candidate_state") from None
+        if target != submitted.expected_target:
+            return witness("CHAIN_TARGET_MISMATCH", "candidate_state")
+        if not diagnostic.is_valid:
+            return witness("TARGET_NOT_VALID", "candidate_state")
+        return witness()
+
     def assess(self, candidate, *, context, classification_evidence, diagnostic_context):
         if type(context) is not values.SystemContext:
             raise values.StateContractError("CONTEXT_INVALID", "context")
@@ -382,27 +692,9 @@ class StateModel:
                     **common, failure_code="PREDICATE_BINDING_MISMATCH", failed_predicate=name,
                     system_context=context, classification_evidence=evidence,
                 )
-        consulted = ()
-        if context.is_in_safe_halt:
-            classification = "SAFE_HALT"
-        elif context.is_in_containment:
-            classification = "CONTAINED"
-        elif status == "VALID":
-            classification = "STABLE"
-        elif status == "TRANSFORMATION_COMPATIBLE":
-            consulted = ("correction_path_is_known",)
-            fact = evidence.correction_path_is_known
-            if type(fact) is not values.EvaluatedPredicate:
-                return self._predicate_failure(common, consulted[0], context, evidence)
-            classification = "CORRECTABLE" if fact.value else "UNSTABLE"
-        elif status == "TRANSFORMATION_INCOMPATIBLE":
-            consulted = ("fallback_is_available",)
-            fact = evidence.fallback_is_available
-            if type(fact) is not values.EvaluatedPredicate:
-                return self._predicate_failure(common, consulted[0], context, evidence)
-            classification = "DEGRADED" if fact.value else "FAILED"
-        else:
-            classification = "DEGRADED"
+        classification, consulted, missing = self._classify(status, context, evidence)
+        if missing is not None:
+            return self._predicate_failure(common, missing, context, evidence)
         recovery = _RECOVERY[classification]
         severity, disposition = _IMPACT[classification]
         classified = values.DiagnosticEmission(

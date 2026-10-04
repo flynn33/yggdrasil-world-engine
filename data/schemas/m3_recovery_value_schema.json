@@ -1,0 +1,6801 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m3_recovery_value_schema.json",
+  "title": "M3 N2 immutable recovery value packets",
+  "description": "Adopted YWE N2 structural reference format. Runtime owners establish complete source/profile/subject equality, canonical codeword membership and XOR/normalization proofs, ordered predicate and candidate correspondence, contextual classification, actual same-collector acknowledgements/completion, dynamic reference equality and session/mode truth. Schema acceptance alone certifies none of those effects or comparisons.",
+  "x-ywe-requirement-id": "YWE-REQ-0041",
+  "$ref": "#/$defs/RecoveryValuePacket",
+  "$defs": {
+    "Identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+      "not": {
+        "anyOf": [
+          {
+            "pattern": "[^A-Za-z0-9._:/-]"
+          },
+          {
+            "enum": [
+              "NONE",
+              "SELF"
+            ]
+          }
+        ]
+      }
+    },
+    "OperationReference": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 192,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+      "not": {
+        "anyOf": [
+          {
+            "pattern": "[^A-Za-z0-9._:/-]"
+          },
+          {
+            "enum": [
+              "NONE",
+              "SELF"
+            ]
+          }
+        ]
+      }
+    },
+    "ConditionID": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+      "not": {
+        "anyOf": [
+          {
+            "pattern": "[^A-Za-z0-9._:/-]"
+          },
+          {
+            "enum": [
+              "NONE",
+              "SELF"
+            ]
+          }
+        ]
+      }
+    },
+    "PolicyID": {
+      "type": "string",
+      "pattern": "^FALLBACK-[A-Z][A-Z0-9]{0,31}-(?!000)[0-9]{3}$",
+      "not": {
+        "pattern": "[^A-Z0-9-]"
+      }
+    },
+    "Reason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "\\S"
+    },
+    "SHA256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "AshState": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+    },
+    "ProfileBinding": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/ProfileBinding"
+    },
+    "CanonicalAshBinding": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/CanonicalAshBinding"
+    },
+    "StateValidityDiagnostic": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/StateValidityDiagnostic"
+    },
+    "SystemContext": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/SystemContext"
+    },
+    "StateDiagnosis": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/StateDiagnosis"
+    },
+    "StateAssessment": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/StateAssessment"
+    },
+    "ClassificationEvidenceFailure": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/ClassificationEvidenceFailure"
+    },
+    "DiagnosticCaptureFailure": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/DiagnosticCaptureFailure"
+    },
+    "ClassificationEvidence": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/ClassificationEvidence"
+    },
+    "DiagnosticContext": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/DiagnosticContext"
+    },
+    "DiagnosticsCompletionReceipt": {
+      "$ref": "https://ywe.local/schemas/m3_reference_diagnostic_bundle_schema.json#/$defs/DiagnosticsCompletionReceipt"
+    },
+    "NormalizationPolicyBinding": {
+      "$ref": "https://ywe.local/schemas/m3_normalization_plan_schema.json#/$defs/NormalizationPolicyBinding"
+    },
+    "NormalizationPlan": {
+      "$ref": "https://ywe.local/schemas/m3_normalization_plan_schema.json"
+    },
+    "CanonicalCodeword": {
+      "$ref": "https://ywe.local/schemas/m3_normalization_plan_schema.json#/$defs/CanonicalCodeword"
+    },
+    "SystemStateClass": {
+      "enum": [
+        "STABLE",
+        "UNSTABLE",
+        "CORRECTABLE",
+        "DEGRADED",
+        "CONTAINED",
+        "FAILED",
+        "SAFE_HALT"
+      ]
+    },
+    "RecoveryCategory": {
+      "enum": [
+        "NO_ACTION",
+        "NORMALIZE_STATE",
+        "APPLY_CORRECTION",
+        "FALLBACK_REQUIRED",
+        "CONTAINMENT_REQUIRED",
+        "ESCALATION_REQUIRED",
+        "TERMINAL_NO_RECOVERY"
+      ]
+    },
+    "N2RuleID": {
+      "enum": [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-STATE-VALIDITY-001",
+        "ASH-STATE-GENERAL-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-CLASSIFICATION-MAPPING-001",
+        "ASH-RECOVERY-ACTION-001",
+        "ASH-CODEWORD-STRUCTURE-001",
+        "ASH-FALLBACK-SELECTION-001"
+      ]
+    },
+    "RuleIDs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/N2RuleID"
+      },
+      "minItems": 1,
+      "maxItems": 5,
+      "uniqueItems": true
+    },
+    "CanonicalContainmentTrigger": {
+      "enum": [
+        "FALLBACK_FAILURE",
+        "PROPAGATION_RISK",
+        "OPERATOR_REQUEST",
+        "RECOVERY_VALIDATION_FAILURE"
+      ]
+    },
+    "CanonicalSafeHaltTrigger": {
+      "enum": [
+        "ESCALATION_FROM_FAILED",
+        "CONTAINMENT_BREACH",
+        "OPERATOR_HALT_REQUEST",
+        "POLICY_HALT_REQUEST",
+        "UNRESOLVABLE_BLOCKED_RECOVERY"
+      ]
+    },
+    "RecoveryFieldPath": {
+      "enum": [
+        "origin_assessment",
+        "origin_validation",
+        "source_binding",
+        "profile_binding",
+        "registry",
+        "registry.source_binding",
+        "registry.entries",
+        "operation_context",
+        "operation_context.context_observation",
+        "operation_context.propagation_evidence",
+        "operation_context.external_authority_evidence",
+        "normalization_preparation",
+        "normalization_preparation.plan",
+        "normalization_preparation.plan_validation",
+        "correction_observation",
+        "correction_observation.submitted",
+        "correction_observation.validation",
+        "route_authorization",
+        "applicability",
+        "predicate_observation",
+        "post_assessment",
+        "post_assessment.classification_evidence",
+        "post_assessment.system_context",
+        "capture",
+        "capture.admission",
+        "capture.append",
+        "capture.finish",
+        "directive",
+        "candidate_state",
+        "action_decisions",
+        "emitted_diagnostics",
+        "registry.candidate_certifications",
+        "registry_validation",
+        "normalization_preparation.resolution_observation",
+        "normalization_resolver",
+        "correction_provider",
+        "condition_evaluator",
+        "post_facts_provider",
+        "origin_assessment.source_binding",
+        "origin_assessment.profile_binding",
+        "origin_assessment.input_evidence",
+        "origin_assessment.parsed_state",
+        "origin_assessment.system_context",
+        "origin_assessment.system_state_class",
+        "origin_assessment.recovery_category",
+        "origin_assessment.consulted_predicates",
+        "origin_assessment.state_validity_diagnostic.input_state",
+        "origin_assessment.state_validity_diagnostic.admissibility_status",
+        "origin_assessment.state_validity_diagnostic.transformation_compatibility",
+        "origin_assessment.state_validity_diagnostic.normalization_status",
+        "origin_assessment.state_validity_diagnostic.recoverability_relevance",
+        "origin_assessment.state_validity_diagnostic.is_valid",
+        "origin_assessment.state_validity_diagnostic.orbit_info",
+        "origin_assessment.state_validity_diagnostic.rule_ids",
+        "origin_assessment.state_validity_diagnostic.notes",
+        "origin_assessment.assessment_binding.assessment_reference",
+        "origin_assessment.assessment_binding.original_input_reference",
+        "origin_assessment.assessment_binding.diagnosis_reference",
+        "origin_assessment.classification_evidence.correction_path_is_known.evaluation",
+        "origin_assessment.classification_evidence.correction_path_is_known.value",
+        "origin_assessment.classification_evidence.correction_path_is_known.reason",
+        "origin_assessment.classification_evidence.correction_path_is_known.binding.assessment_reference",
+        "origin_assessment.classification_evidence.correction_path_is_known.binding.diagnosis_reference",
+        "origin_assessment.classification_evidence.correction_path_is_known.binding.subject_reference",
+        "origin_assessment.classification_evidence.correction_path_is_known.binding.profile_id",
+        "origin_assessment.classification_evidence.correction_path_is_known.binding.profile_source_sha256",
+        "origin_assessment.classification_evidence.correction_path_is_known.binding.ash_dependency_id",
+        "origin_assessment.classification_evidence.correction_path_is_known.binding.ash_aggregate_sha256",
+        "origin_assessment.classification_evidence.correction_path_is_known.binding.evidence_reference",
+        "origin_assessment.classification_evidence.fallback_is_available.evaluation",
+        "origin_assessment.classification_evidence.fallback_is_available.value",
+        "origin_assessment.classification_evidence.fallback_is_available.reason",
+        "origin_assessment.classification_evidence.fallback_is_available.binding.assessment_reference",
+        "origin_assessment.classification_evidence.fallback_is_available.binding.diagnosis_reference",
+        "origin_assessment.classification_evidence.fallback_is_available.binding.subject_reference",
+        "origin_assessment.classification_evidence.fallback_is_available.binding.profile_id",
+        "origin_assessment.classification_evidence.fallback_is_available.binding.profile_source_sha256",
+        "origin_assessment.classification_evidence.fallback_is_available.binding.ash_dependency_id",
+        "origin_assessment.classification_evidence.fallback_is_available.binding.ash_aggregate_sha256",
+        "origin_assessment.classification_evidence.fallback_is_available.binding.evidence_reference",
+        "origin_assessment.emitted_diagnostics[0].diagnostic_reference",
+        "origin_assessment.emitted_diagnostics[0].envelope.diagnostic_kind",
+        "origin_assessment.emitted_diagnostics[0].envelope.severity",
+        "origin_assessment.emitted_diagnostics[0].envelope.stage",
+        "origin_assessment.emitted_diagnostics[0].envelope.disposition",
+        "origin_assessment.emitted_diagnostics[0].envelope.subject_reference",
+        "origin_assessment.emitted_diagnostics[0].envelope.parent_diagnostic_reference",
+        "origin_assessment.emitted_diagnostics[0].envelope.chain_root_reference",
+        "origin_assessment.emitted_diagnostics[0].envelope.rule_ids",
+        "origin_assessment.emitted_diagnostics[0].envelope.summary",
+        "origin_assessment.emitted_diagnostics[0].envelope.notes",
+        "origin_assessment.emitted_diagnostics[1].diagnostic_reference",
+        "origin_assessment.emitted_diagnostics[1].envelope.diagnostic_kind",
+        "origin_assessment.emitted_diagnostics[1].envelope.severity",
+        "origin_assessment.emitted_diagnostics[1].envelope.stage",
+        "origin_assessment.emitted_diagnostics[1].envelope.disposition",
+        "origin_assessment.emitted_diagnostics[1].envelope.subject_reference",
+        "origin_assessment.emitted_diagnostics[1].envelope.parent_diagnostic_reference",
+        "origin_assessment.emitted_diagnostics[1].envelope.chain_root_reference",
+        "origin_assessment.emitted_diagnostics[1].envelope.rule_ids",
+        "origin_assessment.emitted_diagnostics[1].envelope.summary",
+        "origin_assessment.emitted_diagnostics[1].envelope.notes",
+        "chain[0]",
+        "chain[1]",
+        "chain[2]",
+        "chain[3]",
+        "chain[4]",
+        "chain[5]",
+        "chain[6]",
+        "chain[7]",
+        "chain[8]",
+        "chain[9]",
+        "chain[10]",
+        "chain[11]",
+        "chain[12]",
+        "chain[13]",
+        "chain[14]",
+        "chain[15]",
+        "entries[0]",
+        "entries[1]",
+        "entries[2]",
+        "entries[3]",
+        "entries[4]",
+        "entries[5]",
+        "entries[6]",
+        "entries[7]",
+        "entries[8]",
+        "entries[9]",
+        "entries[10]",
+        "entries[11]",
+        "entries[12]",
+        "entries[13]",
+        "entries[14]",
+        "entries[15]",
+        "entries[16]",
+        "entries[17]",
+        "entries[18]",
+        "entries[19]",
+        "entries[20]",
+        "entries[21]",
+        "entries[22]",
+        "entries[23]",
+        "entries[24]",
+        "entries[25]",
+        "entries[26]",
+        "entries[27]",
+        "entries[28]",
+        "entries[29]",
+        "entries[30]",
+        "entries[31]",
+        "registry.entries[0]",
+        "registry.entries[1]",
+        "registry.entries[2]",
+        "registry.entries[3]",
+        "registry.entries[4]",
+        "registry.entries[5]",
+        "registry.entries[6]",
+        "registry.entries[7]",
+        "registry.entries[8]",
+        "registry.entries[9]",
+        "registry.entries[10]",
+        "registry.entries[11]",
+        "registry.entries[12]",
+        "registry.entries[13]",
+        "registry.entries[14]",
+        "registry.entries[15]",
+        "registry.entries[16]",
+        "registry.entries[17]",
+        "registry.entries[18]",
+        "registry.entries[19]",
+        "registry.entries[20]",
+        "registry.entries[21]",
+        "registry.entries[22]",
+        "registry.entries[23]",
+        "registry.entries[24]",
+        "registry.entries[25]",
+        "registry.entries[26]",
+        "registry.entries[27]",
+        "registry.entries[28]",
+        "registry.entries[29]",
+        "registry.entries[30]",
+        "registry.entries[31]",
+        "registry.candidate_certifications[0]",
+        "registry.candidate_certifications[1]",
+        "registry.candidate_certifications[2]",
+        "registry.candidate_certifications[3]",
+        "registry.candidate_certifications[4]",
+        "registry.candidate_certifications[5]",
+        "registry.candidate_certifications[6]",
+        "registry.candidate_certifications[7]",
+        "registry.candidate_certifications[8]",
+        "registry.candidate_certifications[9]",
+        "registry.candidate_certifications[10]",
+        "registry.candidate_certifications[11]",
+        "registry.candidate_certifications[12]",
+        "registry.candidate_certifications[13]",
+        "registry.candidate_certifications[14]",
+        "registry.candidate_certifications[15]",
+        "registry.candidate_certifications[16]",
+        "registry.candidate_certifications[17]",
+        "registry.candidate_certifications[18]",
+        "registry.candidate_certifications[19]",
+        "registry.candidate_certifications[20]",
+        "registry.candidate_certifications[21]",
+        "registry.candidate_certifications[22]",
+        "registry.candidate_certifications[23]",
+        "registry.candidate_certifications[24]",
+        "registry.candidate_certifications[25]",
+        "registry.candidate_certifications[26]",
+        "registry.candidate_certifications[27]",
+        "registry.candidate_certifications[28]",
+        "registry.candidate_certifications[29]",
+        "registry.candidate_certifications[30]",
+        "registry.candidate_certifications[31]",
+        "steps[0]",
+        "steps[1]",
+        "steps[2]",
+        "steps[3]",
+        "steps[4]",
+        "steps[5]",
+        "steps[6]",
+        "steps[7]",
+        "steps[8]",
+        "steps[9]",
+        "steps[10]",
+        "steps[11]",
+        "steps[12]",
+        "steps[13]",
+        "steps[14]",
+        "steps[15]",
+        "steps[16]",
+        "steps[17]",
+        "steps[18]",
+        "steps[19]",
+        "steps[20]",
+        "steps[21]",
+        "steps[22]",
+        "steps[23]",
+        "steps[24]",
+        "steps[25]",
+        "steps[26]",
+        "steps[27]",
+        "steps[28]",
+        "steps[29]",
+        "steps[30]",
+        "steps[31]",
+        "steps[32]",
+        "steps[33]",
+        "steps[34]",
+        "steps[35]",
+        "steps[36]",
+        "steps[37]",
+        "steps[38]",
+        "steps[39]",
+        "steps[40]",
+        "steps[41]",
+        "steps[42]",
+        "steps[43]",
+        "steps[44]",
+        "steps[45]",
+        "steps[46]",
+        "steps[47]",
+        "steps[48]",
+        "steps[49]",
+        "steps[50]",
+        "steps[51]",
+        "steps[52]",
+        "steps[53]",
+        "steps[54]",
+        "steps[55]",
+        "steps[56]",
+        "steps[57]",
+        "steps[58]",
+        "steps[59]",
+        "steps[60]",
+        "steps[61]",
+        "steps[62]",
+        "steps[63]",
+        "steps[64]",
+        "steps[65]",
+        "steps[66]",
+        "steps[67]",
+        "steps[68]",
+        "steps[69]",
+        "steps[70]",
+        "steps[71]",
+        "steps[72]",
+        "steps[73]",
+        "steps[74]",
+        "steps[75]",
+        "steps[76]",
+        "steps[77]",
+        "steps[78]",
+        "steps[79]",
+        "steps[80]",
+        "steps[81]",
+        "steps[82]",
+        "steps[83]",
+        "steps[84]",
+        "steps[85]",
+        "steps[86]",
+        "steps[87]",
+        "steps[88]",
+        "steps[89]",
+        "steps[90]",
+        "steps[91]",
+        "steps[92]",
+        "steps[93]",
+        "steps[94]",
+        "steps[95]",
+        "steps[96]",
+        "steps[97]",
+        "steps[98]",
+        "steps[99]",
+        "steps[100]",
+        "steps[101]",
+        "steps[102]",
+        "steps[103]",
+        "steps[104]",
+        "steps[105]",
+        "steps[106]",
+        "steps[107]",
+        "steps[108]",
+        "steps[109]",
+        "steps[110]",
+        "steps[111]",
+        "steps[112]",
+        "steps[113]",
+        "steps[114]",
+        "steps[115]",
+        "steps[116]",
+        "steps[117]",
+        "steps[118]",
+        "steps[119]",
+        "steps[120]",
+        "steps[121]",
+        "steps[122]",
+        "steps[123]",
+        "steps[124]",
+        "steps[125]",
+        "steps[126]",
+        "steps[127]",
+        "steps[128]",
+        "steps[129]",
+        "steps[130]",
+        "steps[131]",
+        "steps[132]",
+        "steps[133]",
+        "steps[134]",
+        "steps[135]",
+        "steps[136]",
+        "steps[137]",
+        "steps[138]",
+        "steps[139]",
+        "steps[140]",
+        "steps[141]",
+        "steps[142]",
+        "steps[143]",
+        "steps[144]",
+        "steps[145]",
+        "steps[146]",
+        "steps[147]",
+        "steps[148]",
+        "steps[149]",
+        "steps[150]",
+        "steps[151]",
+        "steps[152]",
+        "steps[153]",
+        "steps[154]",
+        "steps[155]",
+        "steps[156]",
+        "steps[157]",
+        "steps[158]",
+        "steps[159]",
+        "steps[160]",
+        "steps[161]",
+        "steps[162]",
+        "steps[163]",
+        "steps[164]",
+        "steps[165]",
+        "steps[166]",
+        "steps[167]",
+        "steps[168]",
+        "steps[169]",
+        "steps[170]",
+        "steps[171]",
+        "steps[172]",
+        "steps[173]",
+        "steps[174]",
+        "steps[175]",
+        "steps[176]",
+        "steps[177]",
+        "steps[178]",
+        "steps[179]",
+        "steps[180]",
+        "steps[181]",
+        "steps[182]",
+        "steps[183]",
+        "steps[184]",
+        "steps[185]",
+        "steps[186]",
+        "steps[187]",
+        "steps[188]",
+        "steps[189]",
+        "steps[190]",
+        "steps[191]",
+        "steps[192]",
+        "steps[193]",
+        "steps[194]",
+        "steps[195]",
+        "steps[196]",
+        "steps[197]",
+        "steps[198]",
+        "steps[199]",
+        "steps[200]",
+        "steps[201]",
+        "steps[202]",
+        "steps[203]",
+        "steps[204]",
+        "steps[205]",
+        "steps[206]",
+        "steps[207]",
+        "steps[208]",
+        "steps[209]",
+        "steps[210]",
+        "steps[211]",
+        "steps[212]",
+        "steps[213]",
+        "steps[214]",
+        "steps[215]",
+        "steps[216]",
+        "steps[217]",
+        "steps[218]",
+        "steps[219]",
+        "steps[220]",
+        "steps[221]",
+        "steps[222]",
+        "steps[223]",
+        "steps[224]",
+        "steps[225]",
+        "steps[226]",
+        "steps[227]",
+        "steps[228]",
+        "steps[229]",
+        "steps[230]",
+        "steps[231]",
+        "steps[232]",
+        "steps[233]",
+        "steps[234]",
+        "steps[235]",
+        "steps[236]",
+        "steps[237]",
+        "steps[238]",
+        "steps[239]",
+        "steps[240]",
+        "steps[241]",
+        "steps[242]",
+        "steps[243]",
+        "steps[244]",
+        "steps[245]",
+        "steps[246]",
+        "steps[247]",
+        "steps[248]",
+        "steps[249]",
+        "steps[250]",
+        "steps[251]",
+        "steps[252]",
+        "steps[253]",
+        "steps[254]",
+        "steps[255]",
+        "steps[256]",
+        "steps[257]",
+        "steps[258]",
+        "steps[259]",
+        "steps[260]",
+        "steps[261]",
+        "steps[262]",
+        "steps[263]",
+        "steps[264]",
+        "steps[265]",
+        "steps[266]",
+        "steps[267]",
+        "steps[268]",
+        "steps[269]",
+        "steps[270]",
+        "steps[271]",
+        "steps[272]",
+        "steps[273]",
+        "steps[274]",
+        "steps[275]",
+        "steps[276]",
+        "steps[277]",
+        "steps[278]",
+        "steps[279]",
+        "steps[280]",
+        "steps[281]",
+        "steps[282]",
+        "steps[283]",
+        "steps[284]",
+        "steps[285]",
+        "steps[286]",
+        "steps[287]",
+        "steps[288]",
+        "steps[289]",
+        "steps[290]",
+        "steps[291]",
+        "steps[292]",
+        "steps[293]",
+        "steps[294]",
+        "steps[295]",
+        "steps[296]",
+        "steps[297]",
+        "steps[298]",
+        "steps[299]",
+        "steps[300]",
+        "steps[301]",
+        "steps[302]",
+        "steps[303]",
+        "steps[304]",
+        "steps[305]",
+        "steps[306]",
+        "steps[307]",
+        "steps[308]",
+        "steps[309]",
+        "steps[310]",
+        "steps[311]",
+        "steps[312]",
+        "steps[313]",
+        "steps[314]",
+        "steps[315]",
+        "steps[316]",
+        "steps[317]",
+        "steps[318]",
+        "steps[319]",
+        "steps[320]",
+        "steps[321]",
+        "steps[322]",
+        "steps[323]",
+        "steps[324]",
+        "steps[325]",
+        "steps[326]",
+        "steps[327]",
+        "steps[328]",
+        "steps[329]",
+        "steps[330]",
+        "steps[331]",
+        "steps[332]",
+        "steps[333]",
+        "steps[334]",
+        "steps[335]",
+        "steps[336]",
+        "steps[337]",
+        "steps[338]",
+        "steps[339]",
+        "steps[340]",
+        "steps[341]",
+        "steps[342]",
+        "steps[343]",
+        "steps[344]",
+        "steps[345]",
+        "steps[346]",
+        "steps[347]",
+        "steps[348]",
+        "steps[349]",
+        "steps[350]",
+        "steps[351]",
+        "steps[352]",
+        "steps[353]",
+        "steps[354]",
+        "steps[355]",
+        "steps[356]",
+        "steps[357]",
+        "steps[358]",
+        "steps[359]",
+        "steps[360]",
+        "steps[361]",
+        "steps[362]",
+        "steps[363]",
+        "steps[364]",
+        "steps[365]",
+        "steps[366]",
+        "steps[367]",
+        "steps[368]",
+        "steps[369]",
+        "steps[370]",
+        "steps[371]",
+        "steps[372]",
+        "steps[373]",
+        "steps[374]",
+        "steps[375]",
+        "steps[376]",
+        "steps[377]",
+        "steps[378]",
+        "steps[379]",
+        "steps[380]",
+        "steps[381]",
+        "steps[382]",
+        "steps[383]",
+        "steps[384]",
+        "steps[385]",
+        "steps[386]",
+        "steps[387]",
+        "steps[388]",
+        "steps[389]",
+        "steps[390]",
+        "steps[391]",
+        "steps[392]",
+        "steps[393]",
+        "steps[394]",
+        "steps[395]",
+        "steps[396]",
+        "steps[397]",
+        "steps[398]",
+        "steps[399]",
+        "steps[400]",
+        "steps[401]",
+        "steps[402]",
+        "steps[403]",
+        "steps[404]",
+        "steps[405]",
+        "steps[406]",
+        "steps[407]",
+        "steps[408]",
+        "steps[409]",
+        "steps[410]",
+        "steps[411]",
+        "steps[412]",
+        "steps[413]",
+        "steps[414]",
+        "steps[415]",
+        "steps[416]",
+        "steps[417]",
+        "steps[418]",
+        "steps[419]",
+        "steps[420]",
+        "steps[421]",
+        "steps[422]",
+        "steps[423]",
+        "steps[424]",
+        "steps[425]",
+        "steps[426]",
+        "steps[427]",
+        "steps[428]",
+        "steps[429]",
+        "steps[430]",
+        "steps[431]",
+        "steps[432]",
+        "steps[433]",
+        "steps[434]",
+        "steps[435]",
+        "steps[436]",
+        "steps[437]",
+        "steps[438]",
+        "steps[439]",
+        "steps[440]",
+        "steps[441]",
+        "steps[442]",
+        "steps[443]",
+        "steps[444]",
+        "steps[445]",
+        "steps[446]",
+        "steps[447]",
+        "steps[448]",
+        "steps[449]",
+        "steps[450]",
+        "steps[451]",
+        "steps[452]",
+        "steps[453]",
+        "steps[454]",
+        "steps[455]",
+        "steps[456]",
+        "steps[457]",
+        "steps[458]",
+        "steps[459]",
+        "steps[460]",
+        "steps[461]",
+        "steps[462]",
+        "steps[463]",
+        "steps[464]",
+        "steps[465]",
+        "steps[466]",
+        "steps[467]",
+        "steps[468]",
+        "steps[469]",
+        "steps[470]",
+        "steps[471]",
+        "steps[472]",
+        "steps[473]",
+        "steps[474]",
+        "steps[475]",
+        "steps[476]",
+        "steps[477]",
+        "steps[478]",
+        "steps[479]",
+        "steps[480]",
+        "steps[481]",
+        "steps[482]",
+        "steps[483]",
+        "steps[484]",
+        "steps[485]",
+        "steps[486]",
+        "steps[487]",
+        "steps[488]",
+        "steps[489]",
+        "steps[490]",
+        "steps[491]",
+        "steps[492]",
+        "steps[493]",
+        "steps[494]",
+        "steps[495]",
+        "steps[496]",
+        "steps[497]",
+        "steps[498]",
+        "steps[499]",
+        "steps[500]",
+        "steps[501]",
+        "steps[502]",
+        "steps[503]",
+        "steps[504]",
+        "steps[505]",
+        "steps[506]",
+        "steps[507]",
+        "steps[508]",
+        "steps[509]",
+        "steps[510]",
+        "steps[511]",
+        "steps[512]",
+        "steps[513]",
+        "steps[514]",
+        "steps[515]",
+        "steps[516]",
+        "steps[517]",
+        "steps[518]",
+        "steps[519]",
+        "steps[520]",
+        "steps[521]",
+        "steps[522]",
+        "steps[523]",
+        "steps[524]",
+        "steps[525]",
+        "steps[526]",
+        "steps[527]",
+        "steps[528]",
+        "steps[529]",
+        "steps[530]",
+        "steps[531]",
+        "steps[532]",
+        "steps[533]",
+        "steps[534]",
+        "steps[535]",
+        "steps[536]",
+        "steps[537]",
+        "steps[538]",
+        "steps[539]",
+        "steps[540]",
+        "steps[541]",
+        "steps[542]",
+        "steps[543]",
+        "steps[544]",
+        "steps[545]",
+        "steps[546]",
+        "steps[547]",
+        "steps[548]",
+        "steps[549]",
+        "steps[550]",
+        "steps[551]",
+        "steps[552]",
+        "steps[553]",
+        "steps[554]",
+        "steps[555]",
+        "steps[556]",
+        "steps[557]",
+        "steps[558]",
+        "steps[559]",
+        "steps[560]",
+        "steps[561]",
+        "steps[562]",
+        "steps[563]",
+        "steps[564]",
+        "steps[565]",
+        "steps[566]",
+        "steps[567]",
+        "steps[568]",
+        "steps[569]",
+        "steps[570]",
+        "steps[571]",
+        "steps[572]",
+        "steps[573]",
+        "steps[574]",
+        "steps[575]",
+        "steps[576]",
+        "steps[577]",
+        "steps[578]",
+        "steps[579]",
+        "steps[580]",
+        "steps[581]",
+        "steps[582]",
+        "steps[583]",
+        "steps[584]",
+        "steps[585]",
+        "steps[586]",
+        "steps[587]",
+        "steps[588]",
+        "steps[589]",
+        "steps[590]",
+        "steps[591]",
+        "steps[592]",
+        "steps[593]",
+        "steps[594]",
+        "steps[595]",
+        "steps[596]",
+        "steps[597]",
+        "steps[598]",
+        "steps[599]",
+        "steps[600]",
+        "steps[601]",
+        "steps[602]",
+        "steps[603]",
+        "steps[604]",
+        "steps[605]",
+        "steps[606]",
+        "steps[607]",
+        "steps[608]",
+        "steps[609]",
+        "steps[610]",
+        "steps[611]",
+        "steps[612]",
+        "steps[613]",
+        "steps[614]",
+        "steps[615]",
+        "steps[616]",
+        "steps[617]",
+        "steps[618]",
+        "steps[619]",
+        "steps[620]",
+        "steps[621]",
+        "steps[622]",
+        "steps[623]",
+        "steps[624]",
+        "steps[625]",
+        "steps[626]",
+        "steps[627]",
+        "steps[628]",
+        "steps[629]",
+        "steps[630]",
+        "steps[631]",
+        "steps[632]",
+        "steps[633]",
+        "steps[634]",
+        "steps[635]",
+        "steps[636]",
+        "steps[637]",
+        "steps[638]",
+        "steps[639]",
+        "steps[640]",
+        "steps[641]",
+        "steps[642]",
+        "steps[643]",
+        "steps[644]",
+        "steps[645]",
+        "steps[646]",
+        "steps[647]",
+        "steps[648]",
+        "steps[649]",
+        "steps[650]",
+        "steps[651]",
+        "steps[652]",
+        "steps[653]",
+        "steps[654]",
+        "steps[655]",
+        "steps[656]",
+        "steps[657]",
+        "steps[658]",
+        "steps[659]",
+        "steps[660]",
+        "steps[661]",
+        "steps[662]",
+        "steps[663]",
+        "steps[664]",
+        "steps[665]",
+        "steps[666]",
+        "steps[667]",
+        "steps[668]",
+        "steps[669]",
+        "steps[670]",
+        "steps[671]",
+        "steps[672]",
+        "steps[673]",
+        "steps[674]",
+        "steps[675]",
+        "steps[676]",
+        "steps[677]",
+        "steps[678]",
+        "steps[679]",
+        "steps[680]",
+        "steps[681]",
+        "steps[682]",
+        "steps[683]",
+        "steps[684]",
+        "steps[685]",
+        "steps[686]",
+        "steps[687]",
+        "steps[688]",
+        "steps[689]",
+        "steps[690]",
+        "steps[691]",
+        "steps[692]",
+        "steps[693]",
+        "steps[694]",
+        "steps[695]",
+        "steps[696]",
+        "steps[697]",
+        "steps[698]",
+        "steps[699]",
+        "steps[700]",
+        "steps[701]",
+        "steps[702]",
+        "steps[703]",
+        "steps[704]",
+        "steps[705]",
+        "steps[706]",
+        "steps[707]",
+        "steps[708]",
+        "steps[709]",
+        "steps[710]",
+        "steps[711]",
+        "steps[712]",
+        "steps[713]",
+        "steps[714]",
+        "steps[715]",
+        "steps[716]",
+        "steps[717]",
+        "steps[718]",
+        "steps[719]",
+        "steps[720]",
+        "steps[721]",
+        "steps[722]",
+        "steps[723]",
+        "steps[724]",
+        "steps[725]",
+        "steps[726]",
+        "steps[727]",
+        "steps[728]",
+        "steps[729]",
+        "steps[730]",
+        "steps[731]",
+        "steps[732]",
+        "steps[733]",
+        "steps[734]",
+        "steps[735]",
+        "steps[736]",
+        "steps[737]",
+        "steps[738]",
+        "steps[739]",
+        "steps[740]",
+        "steps[741]",
+        "steps[742]",
+        "steps[743]",
+        "steps[744]",
+        "steps[745]",
+        "steps[746]",
+        "steps[747]",
+        "steps[748]",
+        "steps[749]",
+        "steps[750]",
+        "steps[751]",
+        "steps[752]",
+        "steps[753]",
+        "steps[754]",
+        "steps[755]",
+        "steps[756]",
+        "steps[757]",
+        "steps[758]",
+        "steps[759]",
+        "steps[760]",
+        "steps[761]",
+        "steps[762]",
+        "steps[763]",
+        "steps[764]",
+        "steps[765]",
+        "steps[766]",
+        "steps[767]",
+        "post_assessments[0]",
+        "post_assessments[1]",
+        "post_assessments[2]",
+        "post_assessments[3]",
+        "post_assessments[4]",
+        "post_assessments[5]",
+        "post_assessments[6]",
+        "post_assessments[7]",
+        "post_assessments[8]",
+        "post_assessments[9]",
+        "post_assessments[10]",
+        "post_assessments[11]",
+        "post_assessments[12]",
+        "post_assessments[13]",
+        "post_assessments[14]",
+        "post_assessments[15]",
+        "post_assessments[16]",
+        "post_assessments[17]",
+        "post_assessments[18]",
+        "post_assessments[19]",
+        "post_assessments[20]",
+        "post_assessments[21]",
+        "post_assessments[22]",
+        "post_assessments[23]",
+        "post_assessments[24]",
+        "post_assessments[25]",
+        "post_assessments[26]",
+        "post_assessments[27]",
+        "post_assessments[28]",
+        "post_assessments[29]",
+        "post_assessments[30]",
+        "post_assessments[31]",
+        "post_assessments[32]",
+        "action_decisions[0]",
+        "action_decisions[1]",
+        "action_decisions[2]",
+        "action_decisions[3]",
+        "action_decisions[4]",
+        "action_decisions[5]",
+        "action_decisions[6]",
+        "action_decisions[7]",
+        "action_decisions[8]",
+        "action_decisions[9]",
+        "action_decisions[10]",
+        "action_decisions[11]",
+        "action_decisions[12]",
+        "action_decisions[13]",
+        "action_decisions[14]",
+        "action_decisions[15]",
+        "action_decisions[16]",
+        "action_decisions[17]",
+        "action_decisions[18]",
+        "action_decisions[19]",
+        "action_decisions[20]",
+        "action_decisions[21]",
+        "action_decisions[22]",
+        "action_decisions[23]",
+        "action_decisions[24]",
+        "action_decisions[25]",
+        "action_decisions[26]",
+        "action_decisions[27]",
+        "action_decisions[28]",
+        "action_decisions[29]",
+        "action_decisions[30]",
+        "action_decisions[31]",
+        "action_decisions[32]",
+        "action_decisions[33]",
+        "action_decisions[34]",
+        "entries[0].applicability_conditions[0]",
+        "entries[0].applicability_conditions[1]",
+        "entries[0].applicability_conditions[2]",
+        "entries[0].applicability_conditions[3]",
+        "entries[0].applicability_conditions[4]",
+        "entries[0].applicability_conditions[5]",
+        "entries[0].applicability_conditions[6]",
+        "entries[0].applicability_conditions[7]",
+        "entries[0].validation_requirements[0]",
+        "entries[0].validation_requirements[1]",
+        "entries[0].validation_requirements[2]",
+        "entries[0].validation_requirements[3]",
+        "entries[0].validation_requirements[4]",
+        "entries[0].validation_requirements[5]",
+        "entries[0].validation_requirements[6]",
+        "entries[0].validation_requirements[7]",
+        "entries[1].applicability_conditions[0]",
+        "entries[1].applicability_conditions[1]",
+        "entries[1].applicability_conditions[2]",
+        "entries[1].applicability_conditions[3]",
+        "entries[1].applicability_conditions[4]",
+        "entries[1].applicability_conditions[5]",
+        "entries[1].applicability_conditions[6]",
+        "entries[1].applicability_conditions[7]",
+        "entries[1].validation_requirements[0]",
+        "entries[1].validation_requirements[1]",
+        "entries[1].validation_requirements[2]",
+        "entries[1].validation_requirements[3]",
+        "entries[1].validation_requirements[4]",
+        "entries[1].validation_requirements[5]",
+        "entries[1].validation_requirements[6]",
+        "entries[1].validation_requirements[7]",
+        "entries[2].applicability_conditions[0]",
+        "entries[2].applicability_conditions[1]",
+        "entries[2].applicability_conditions[2]",
+        "entries[2].applicability_conditions[3]",
+        "entries[2].applicability_conditions[4]",
+        "entries[2].applicability_conditions[5]",
+        "entries[2].applicability_conditions[6]",
+        "entries[2].applicability_conditions[7]",
+        "entries[2].validation_requirements[0]",
+        "entries[2].validation_requirements[1]",
+        "entries[2].validation_requirements[2]",
+        "entries[2].validation_requirements[3]",
+        "entries[2].validation_requirements[4]",
+        "entries[2].validation_requirements[5]",
+        "entries[2].validation_requirements[6]",
+        "entries[2].validation_requirements[7]",
+        "entries[3].applicability_conditions[0]",
+        "entries[3].applicability_conditions[1]",
+        "entries[3].applicability_conditions[2]",
+        "entries[3].applicability_conditions[3]",
+        "entries[3].applicability_conditions[4]",
+        "entries[3].applicability_conditions[5]",
+        "entries[3].applicability_conditions[6]",
+        "entries[3].applicability_conditions[7]",
+        "entries[3].validation_requirements[0]",
+        "entries[3].validation_requirements[1]",
+        "entries[3].validation_requirements[2]",
+        "entries[3].validation_requirements[3]",
+        "entries[3].validation_requirements[4]",
+        "entries[3].validation_requirements[5]",
+        "entries[3].validation_requirements[6]",
+        "entries[3].validation_requirements[7]",
+        "entries[4].applicability_conditions[0]",
+        "entries[4].applicability_conditions[1]",
+        "entries[4].applicability_conditions[2]",
+        "entries[4].applicability_conditions[3]",
+        "entries[4].applicability_conditions[4]",
+        "entries[4].applicability_conditions[5]",
+        "entries[4].applicability_conditions[6]",
+        "entries[4].applicability_conditions[7]",
+        "entries[4].validation_requirements[0]",
+        "entries[4].validation_requirements[1]",
+        "entries[4].validation_requirements[2]",
+        "entries[4].validation_requirements[3]",
+        "entries[4].validation_requirements[4]",
+        "entries[4].validation_requirements[5]",
+        "entries[4].validation_requirements[6]",
+        "entries[4].validation_requirements[7]",
+        "entries[5].applicability_conditions[0]",
+        "entries[5].applicability_conditions[1]",
+        "entries[5].applicability_conditions[2]",
+        "entries[5].applicability_conditions[3]",
+        "entries[5].applicability_conditions[4]",
+        "entries[5].applicability_conditions[5]",
+        "entries[5].applicability_conditions[6]",
+        "entries[5].applicability_conditions[7]",
+        "entries[5].validation_requirements[0]",
+        "entries[5].validation_requirements[1]",
+        "entries[5].validation_requirements[2]",
+        "entries[5].validation_requirements[3]",
+        "entries[5].validation_requirements[4]",
+        "entries[5].validation_requirements[5]",
+        "entries[5].validation_requirements[6]",
+        "entries[5].validation_requirements[7]",
+        "entries[6].applicability_conditions[0]",
+        "entries[6].applicability_conditions[1]",
+        "entries[6].applicability_conditions[2]",
+        "entries[6].applicability_conditions[3]",
+        "entries[6].applicability_conditions[4]",
+        "entries[6].applicability_conditions[5]",
+        "entries[6].applicability_conditions[6]",
+        "entries[6].applicability_conditions[7]",
+        "entries[6].validation_requirements[0]",
+        "entries[6].validation_requirements[1]",
+        "entries[6].validation_requirements[2]",
+        "entries[6].validation_requirements[3]",
+        "entries[6].validation_requirements[4]",
+        "entries[6].validation_requirements[5]",
+        "entries[6].validation_requirements[6]",
+        "entries[6].validation_requirements[7]",
+        "entries[7].applicability_conditions[0]",
+        "entries[7].applicability_conditions[1]",
+        "entries[7].applicability_conditions[2]",
+        "entries[7].applicability_conditions[3]",
+        "entries[7].applicability_conditions[4]",
+        "entries[7].applicability_conditions[5]",
+        "entries[7].applicability_conditions[6]",
+        "entries[7].applicability_conditions[7]",
+        "entries[7].validation_requirements[0]",
+        "entries[7].validation_requirements[1]",
+        "entries[7].validation_requirements[2]",
+        "entries[7].validation_requirements[3]",
+        "entries[7].validation_requirements[4]",
+        "entries[7].validation_requirements[5]",
+        "entries[7].validation_requirements[6]",
+        "entries[7].validation_requirements[7]",
+        "entries[8].applicability_conditions[0]",
+        "entries[8].applicability_conditions[1]",
+        "entries[8].applicability_conditions[2]",
+        "entries[8].applicability_conditions[3]",
+        "entries[8].applicability_conditions[4]",
+        "entries[8].applicability_conditions[5]",
+        "entries[8].applicability_conditions[6]",
+        "entries[8].applicability_conditions[7]",
+        "entries[8].validation_requirements[0]",
+        "entries[8].validation_requirements[1]",
+        "entries[8].validation_requirements[2]",
+        "entries[8].validation_requirements[3]",
+        "entries[8].validation_requirements[4]",
+        "entries[8].validation_requirements[5]",
+        "entries[8].validation_requirements[6]",
+        "entries[8].validation_requirements[7]",
+        "entries[9].applicability_conditions[0]",
+        "entries[9].applicability_conditions[1]",
+        "entries[9].applicability_conditions[2]",
+        "entries[9].applicability_conditions[3]",
+        "entries[9].applicability_conditions[4]",
+        "entries[9].applicability_conditions[5]",
+        "entries[9].applicability_conditions[6]",
+        "entries[9].applicability_conditions[7]",
+        "entries[9].validation_requirements[0]",
+        "entries[9].validation_requirements[1]",
+        "entries[9].validation_requirements[2]",
+        "entries[9].validation_requirements[3]",
+        "entries[9].validation_requirements[4]",
+        "entries[9].validation_requirements[5]",
+        "entries[9].validation_requirements[6]",
+        "entries[9].validation_requirements[7]",
+        "entries[10].applicability_conditions[0]",
+        "entries[10].applicability_conditions[1]",
+        "entries[10].applicability_conditions[2]",
+        "entries[10].applicability_conditions[3]",
+        "entries[10].applicability_conditions[4]",
+        "entries[10].applicability_conditions[5]",
+        "entries[10].applicability_conditions[6]",
+        "entries[10].applicability_conditions[7]",
+        "entries[10].validation_requirements[0]",
+        "entries[10].validation_requirements[1]",
+        "entries[10].validation_requirements[2]",
+        "entries[10].validation_requirements[3]",
+        "entries[10].validation_requirements[4]",
+        "entries[10].validation_requirements[5]",
+        "entries[10].validation_requirements[6]",
+        "entries[10].validation_requirements[7]",
+        "entries[11].applicability_conditions[0]",
+        "entries[11].applicability_conditions[1]",
+        "entries[11].applicability_conditions[2]",
+        "entries[11].applicability_conditions[3]",
+        "entries[11].applicability_conditions[4]",
+        "entries[11].applicability_conditions[5]",
+        "entries[11].applicability_conditions[6]",
+        "entries[11].applicability_conditions[7]",
+        "entries[11].validation_requirements[0]",
+        "entries[11].validation_requirements[1]",
+        "entries[11].validation_requirements[2]",
+        "entries[11].validation_requirements[3]",
+        "entries[11].validation_requirements[4]",
+        "entries[11].validation_requirements[5]",
+        "entries[11].validation_requirements[6]",
+        "entries[11].validation_requirements[7]",
+        "entries[12].applicability_conditions[0]",
+        "entries[12].applicability_conditions[1]",
+        "entries[12].applicability_conditions[2]",
+        "entries[12].applicability_conditions[3]",
+        "entries[12].applicability_conditions[4]",
+        "entries[12].applicability_conditions[5]",
+        "entries[12].applicability_conditions[6]",
+        "entries[12].applicability_conditions[7]",
+        "entries[12].validation_requirements[0]",
+        "entries[12].validation_requirements[1]",
+        "entries[12].validation_requirements[2]",
+        "entries[12].validation_requirements[3]",
+        "entries[12].validation_requirements[4]",
+        "entries[12].validation_requirements[5]",
+        "entries[12].validation_requirements[6]",
+        "entries[12].validation_requirements[7]",
+        "entries[13].applicability_conditions[0]",
+        "entries[13].applicability_conditions[1]",
+        "entries[13].applicability_conditions[2]",
+        "entries[13].applicability_conditions[3]",
+        "entries[13].applicability_conditions[4]",
+        "entries[13].applicability_conditions[5]",
+        "entries[13].applicability_conditions[6]",
+        "entries[13].applicability_conditions[7]",
+        "entries[13].validation_requirements[0]",
+        "entries[13].validation_requirements[1]",
+        "entries[13].validation_requirements[2]",
+        "entries[13].validation_requirements[3]",
+        "entries[13].validation_requirements[4]",
+        "entries[13].validation_requirements[5]",
+        "entries[13].validation_requirements[6]",
+        "entries[13].validation_requirements[7]",
+        "entries[14].applicability_conditions[0]",
+        "entries[14].applicability_conditions[1]",
+        "entries[14].applicability_conditions[2]",
+        "entries[14].applicability_conditions[3]",
+        "entries[14].applicability_conditions[4]",
+        "entries[14].applicability_conditions[5]",
+        "entries[14].applicability_conditions[6]",
+        "entries[14].applicability_conditions[7]",
+        "entries[14].validation_requirements[0]",
+        "entries[14].validation_requirements[1]",
+        "entries[14].validation_requirements[2]",
+        "entries[14].validation_requirements[3]",
+        "entries[14].validation_requirements[4]",
+        "entries[14].validation_requirements[5]",
+        "entries[14].validation_requirements[6]",
+        "entries[14].validation_requirements[7]",
+        "entries[15].applicability_conditions[0]",
+        "entries[15].applicability_conditions[1]",
+        "entries[15].applicability_conditions[2]",
+        "entries[15].applicability_conditions[3]",
+        "entries[15].applicability_conditions[4]",
+        "entries[15].applicability_conditions[5]",
+        "entries[15].applicability_conditions[6]",
+        "entries[15].applicability_conditions[7]",
+        "entries[15].validation_requirements[0]",
+        "entries[15].validation_requirements[1]",
+        "entries[15].validation_requirements[2]",
+        "entries[15].validation_requirements[3]",
+        "entries[15].validation_requirements[4]",
+        "entries[15].validation_requirements[5]",
+        "entries[15].validation_requirements[6]",
+        "entries[15].validation_requirements[7]",
+        "entries[16].applicability_conditions[0]",
+        "entries[16].applicability_conditions[1]",
+        "entries[16].applicability_conditions[2]",
+        "entries[16].applicability_conditions[3]",
+        "entries[16].applicability_conditions[4]",
+        "entries[16].applicability_conditions[5]",
+        "entries[16].applicability_conditions[6]",
+        "entries[16].applicability_conditions[7]",
+        "entries[16].validation_requirements[0]",
+        "entries[16].validation_requirements[1]",
+        "entries[16].validation_requirements[2]",
+        "entries[16].validation_requirements[3]",
+        "entries[16].validation_requirements[4]",
+        "entries[16].validation_requirements[5]",
+        "entries[16].validation_requirements[6]",
+        "entries[16].validation_requirements[7]",
+        "entries[17].applicability_conditions[0]",
+        "entries[17].applicability_conditions[1]",
+        "entries[17].applicability_conditions[2]",
+        "entries[17].applicability_conditions[3]",
+        "entries[17].applicability_conditions[4]",
+        "entries[17].applicability_conditions[5]",
+        "entries[17].applicability_conditions[6]",
+        "entries[17].applicability_conditions[7]",
+        "entries[17].validation_requirements[0]",
+        "entries[17].validation_requirements[1]",
+        "entries[17].validation_requirements[2]",
+        "entries[17].validation_requirements[3]",
+        "entries[17].validation_requirements[4]",
+        "entries[17].validation_requirements[5]",
+        "entries[17].validation_requirements[6]",
+        "entries[17].validation_requirements[7]",
+        "entries[18].applicability_conditions[0]",
+        "entries[18].applicability_conditions[1]",
+        "entries[18].applicability_conditions[2]",
+        "entries[18].applicability_conditions[3]",
+        "entries[18].applicability_conditions[4]",
+        "entries[18].applicability_conditions[5]",
+        "entries[18].applicability_conditions[6]",
+        "entries[18].applicability_conditions[7]",
+        "entries[18].validation_requirements[0]",
+        "entries[18].validation_requirements[1]",
+        "entries[18].validation_requirements[2]",
+        "entries[18].validation_requirements[3]",
+        "entries[18].validation_requirements[4]",
+        "entries[18].validation_requirements[5]",
+        "entries[18].validation_requirements[6]",
+        "entries[18].validation_requirements[7]",
+        "entries[19].applicability_conditions[0]",
+        "entries[19].applicability_conditions[1]",
+        "entries[19].applicability_conditions[2]",
+        "entries[19].applicability_conditions[3]",
+        "entries[19].applicability_conditions[4]",
+        "entries[19].applicability_conditions[5]",
+        "entries[19].applicability_conditions[6]",
+        "entries[19].applicability_conditions[7]",
+        "entries[19].validation_requirements[0]",
+        "entries[19].validation_requirements[1]",
+        "entries[19].validation_requirements[2]",
+        "entries[19].validation_requirements[3]",
+        "entries[19].validation_requirements[4]",
+        "entries[19].validation_requirements[5]",
+        "entries[19].validation_requirements[6]",
+        "entries[19].validation_requirements[7]",
+        "entries[20].applicability_conditions[0]",
+        "entries[20].applicability_conditions[1]",
+        "entries[20].applicability_conditions[2]",
+        "entries[20].applicability_conditions[3]",
+        "entries[20].applicability_conditions[4]",
+        "entries[20].applicability_conditions[5]",
+        "entries[20].applicability_conditions[6]",
+        "entries[20].applicability_conditions[7]",
+        "entries[20].validation_requirements[0]",
+        "entries[20].validation_requirements[1]",
+        "entries[20].validation_requirements[2]",
+        "entries[20].validation_requirements[3]",
+        "entries[20].validation_requirements[4]",
+        "entries[20].validation_requirements[5]",
+        "entries[20].validation_requirements[6]",
+        "entries[20].validation_requirements[7]",
+        "entries[21].applicability_conditions[0]",
+        "entries[21].applicability_conditions[1]",
+        "entries[21].applicability_conditions[2]",
+        "entries[21].applicability_conditions[3]",
+        "entries[21].applicability_conditions[4]",
+        "entries[21].applicability_conditions[5]",
+        "entries[21].applicability_conditions[6]",
+        "entries[21].applicability_conditions[7]",
+        "entries[21].validation_requirements[0]",
+        "entries[21].validation_requirements[1]",
+        "entries[21].validation_requirements[2]",
+        "entries[21].validation_requirements[3]",
+        "entries[21].validation_requirements[4]",
+        "entries[21].validation_requirements[5]",
+        "entries[21].validation_requirements[6]",
+        "entries[21].validation_requirements[7]",
+        "entries[22].applicability_conditions[0]",
+        "entries[22].applicability_conditions[1]",
+        "entries[22].applicability_conditions[2]",
+        "entries[22].applicability_conditions[3]",
+        "entries[22].applicability_conditions[4]",
+        "entries[22].applicability_conditions[5]",
+        "entries[22].applicability_conditions[6]",
+        "entries[22].applicability_conditions[7]",
+        "entries[22].validation_requirements[0]",
+        "entries[22].validation_requirements[1]",
+        "entries[22].validation_requirements[2]",
+        "entries[22].validation_requirements[3]",
+        "entries[22].validation_requirements[4]",
+        "entries[22].validation_requirements[5]",
+        "entries[22].validation_requirements[6]",
+        "entries[22].validation_requirements[7]",
+        "entries[23].applicability_conditions[0]",
+        "entries[23].applicability_conditions[1]",
+        "entries[23].applicability_conditions[2]",
+        "entries[23].applicability_conditions[3]",
+        "entries[23].applicability_conditions[4]",
+        "entries[23].applicability_conditions[5]",
+        "entries[23].applicability_conditions[6]",
+        "entries[23].applicability_conditions[7]",
+        "entries[23].validation_requirements[0]",
+        "entries[23].validation_requirements[1]",
+        "entries[23].validation_requirements[2]",
+        "entries[23].validation_requirements[3]",
+        "entries[23].validation_requirements[4]",
+        "entries[23].validation_requirements[5]",
+        "entries[23].validation_requirements[6]",
+        "entries[23].validation_requirements[7]",
+        "entries[24].applicability_conditions[0]",
+        "entries[24].applicability_conditions[1]",
+        "entries[24].applicability_conditions[2]",
+        "entries[24].applicability_conditions[3]",
+        "entries[24].applicability_conditions[4]",
+        "entries[24].applicability_conditions[5]",
+        "entries[24].applicability_conditions[6]",
+        "entries[24].applicability_conditions[7]",
+        "entries[24].validation_requirements[0]",
+        "entries[24].validation_requirements[1]",
+        "entries[24].validation_requirements[2]",
+        "entries[24].validation_requirements[3]",
+        "entries[24].validation_requirements[4]",
+        "entries[24].validation_requirements[5]",
+        "entries[24].validation_requirements[6]",
+        "entries[24].validation_requirements[7]",
+        "entries[25].applicability_conditions[0]",
+        "entries[25].applicability_conditions[1]",
+        "entries[25].applicability_conditions[2]",
+        "entries[25].applicability_conditions[3]",
+        "entries[25].applicability_conditions[4]",
+        "entries[25].applicability_conditions[5]",
+        "entries[25].applicability_conditions[6]",
+        "entries[25].applicability_conditions[7]",
+        "entries[25].validation_requirements[0]",
+        "entries[25].validation_requirements[1]",
+        "entries[25].validation_requirements[2]",
+        "entries[25].validation_requirements[3]",
+        "entries[25].validation_requirements[4]",
+        "entries[25].validation_requirements[5]",
+        "entries[25].validation_requirements[6]",
+        "entries[25].validation_requirements[7]",
+        "entries[26].applicability_conditions[0]",
+        "entries[26].applicability_conditions[1]",
+        "entries[26].applicability_conditions[2]",
+        "entries[26].applicability_conditions[3]",
+        "entries[26].applicability_conditions[4]",
+        "entries[26].applicability_conditions[5]",
+        "entries[26].applicability_conditions[6]",
+        "entries[26].applicability_conditions[7]",
+        "entries[26].validation_requirements[0]",
+        "entries[26].validation_requirements[1]",
+        "entries[26].validation_requirements[2]",
+        "entries[26].validation_requirements[3]",
+        "entries[26].validation_requirements[4]",
+        "entries[26].validation_requirements[5]",
+        "entries[26].validation_requirements[6]",
+        "entries[26].validation_requirements[7]",
+        "entries[27].applicability_conditions[0]",
+        "entries[27].applicability_conditions[1]",
+        "entries[27].applicability_conditions[2]",
+        "entries[27].applicability_conditions[3]",
+        "entries[27].applicability_conditions[4]",
+        "entries[27].applicability_conditions[5]",
+        "entries[27].applicability_conditions[6]",
+        "entries[27].applicability_conditions[7]",
+        "entries[27].validation_requirements[0]",
+        "entries[27].validation_requirements[1]",
+        "entries[27].validation_requirements[2]",
+        "entries[27].validation_requirements[3]",
+        "entries[27].validation_requirements[4]",
+        "entries[27].validation_requirements[5]",
+        "entries[27].validation_requirements[6]",
+        "entries[27].validation_requirements[7]",
+        "entries[28].applicability_conditions[0]",
+        "entries[28].applicability_conditions[1]",
+        "entries[28].applicability_conditions[2]",
+        "entries[28].applicability_conditions[3]",
+        "entries[28].applicability_conditions[4]",
+        "entries[28].applicability_conditions[5]",
+        "entries[28].applicability_conditions[6]",
+        "entries[28].applicability_conditions[7]",
+        "entries[28].validation_requirements[0]",
+        "entries[28].validation_requirements[1]",
+        "entries[28].validation_requirements[2]",
+        "entries[28].validation_requirements[3]",
+        "entries[28].validation_requirements[4]",
+        "entries[28].validation_requirements[5]",
+        "entries[28].validation_requirements[6]",
+        "entries[28].validation_requirements[7]",
+        "entries[29].applicability_conditions[0]",
+        "entries[29].applicability_conditions[1]",
+        "entries[29].applicability_conditions[2]",
+        "entries[29].applicability_conditions[3]",
+        "entries[29].applicability_conditions[4]",
+        "entries[29].applicability_conditions[5]",
+        "entries[29].applicability_conditions[6]",
+        "entries[29].applicability_conditions[7]",
+        "entries[29].validation_requirements[0]",
+        "entries[29].validation_requirements[1]",
+        "entries[29].validation_requirements[2]",
+        "entries[29].validation_requirements[3]",
+        "entries[29].validation_requirements[4]",
+        "entries[29].validation_requirements[5]",
+        "entries[29].validation_requirements[6]",
+        "entries[29].validation_requirements[7]",
+        "entries[30].applicability_conditions[0]",
+        "entries[30].applicability_conditions[1]",
+        "entries[30].applicability_conditions[2]",
+        "entries[30].applicability_conditions[3]",
+        "entries[30].applicability_conditions[4]",
+        "entries[30].applicability_conditions[5]",
+        "entries[30].applicability_conditions[6]",
+        "entries[30].applicability_conditions[7]",
+        "entries[30].validation_requirements[0]",
+        "entries[30].validation_requirements[1]",
+        "entries[30].validation_requirements[2]",
+        "entries[30].validation_requirements[3]",
+        "entries[30].validation_requirements[4]",
+        "entries[30].validation_requirements[5]",
+        "entries[30].validation_requirements[6]",
+        "entries[30].validation_requirements[7]",
+        "entries[31].applicability_conditions[0]",
+        "entries[31].applicability_conditions[1]",
+        "entries[31].applicability_conditions[2]",
+        "entries[31].applicability_conditions[3]",
+        "entries[31].applicability_conditions[4]",
+        "entries[31].applicability_conditions[5]",
+        "entries[31].applicability_conditions[6]",
+        "entries[31].applicability_conditions[7]",
+        "entries[31].validation_requirements[0]",
+        "entries[31].validation_requirements[1]",
+        "entries[31].validation_requirements[2]",
+        "entries[31].validation_requirements[3]",
+        "entries[31].validation_requirements[4]",
+        "entries[31].validation_requirements[5]",
+        "entries[31].validation_requirements[6]",
+        "entries[31].validation_requirements[7]"
+      ]
+    },
+    "AssessmentValidation": {
+      "type": "object",
+      "required": [
+        "status",
+        "submitted_assessment",
+        "current_source_binding",
+        "current_profile_binding",
+        "expected_diagnostic",
+        "expected_system_state_class",
+        "expected_recovery_category",
+        "expected_consulted_predicates",
+        "failure_code",
+        "field_name"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "VERIFIED",
+            "REJECTED"
+          ]
+        },
+        "submitted_assessment": {
+          "$ref": "#/$defs/StateAssessment"
+        },
+        "current_source_binding": {
+          "$ref": "#/$defs/CanonicalAshBinding"
+        },
+        "current_profile_binding": {
+          "$ref": "#/$defs/ProfileBinding"
+        },
+        "expected_diagnostic": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/StateValidityDiagnostic"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "expected_system_state_class": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SystemStateClass"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "expected_recovery_category": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RecoveryCategory"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "expected_consulted_predicates": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "correction_path_is_known",
+                  "fallback_is_available"
+                ]
+              },
+              "minItems": 0,
+              "maxItems": 1,
+              "uniqueItems": true
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "failure_code": {
+          "oneOf": [
+            {
+              "enum": [
+                "SOURCE_BINDING_MISMATCH",
+                "PROFILE_BINDING_MISMATCH",
+                "INPUT_BINDING_MISMATCH",
+                "DIAGNOSIS_MISMATCH",
+                "PREDICATE_BINDING_MISMATCH",
+                "PREDICATE_NOT_EVALUATED",
+                "CLASSIFICATION_MISMATCH",
+                "CLASSIFICATION_ENVELOPE_MISMATCH"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "field_name": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RecoveryFieldPath"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "VERIFIED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "expected_diagnostic": {
+                "$ref": "#/$defs/StateValidityDiagnostic"
+              },
+              "expected_system_state_class": {
+                "$ref": "#/$defs/SystemStateClass"
+              },
+              "expected_recovery_category": {
+                "$ref": "#/$defs/RecoveryCategory"
+              },
+              "expected_consulted_predicates": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "correction_path_is_known",
+                    "fallback_is_available"
+                  ]
+                },
+                "minItems": 0,
+                "maxItems": 1,
+                "uniqueItems": true
+              },
+              "failure_code": {
+                "type": "null"
+              },
+              "field_name": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "REJECTED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "failure_code": {
+                "enum": [
+                  "SOURCE_BINDING_MISMATCH",
+                  "PROFILE_BINDING_MISMATCH",
+                  "INPUT_BINDING_MISMATCH",
+                  "DIAGNOSIS_MISMATCH",
+                  "PREDICATE_BINDING_MISMATCH",
+                  "PREDICATE_NOT_EVALUATED",
+                  "CLASSIFICATION_MISMATCH",
+                  "CLASSIFICATION_ENVELOPE_MISMATCH"
+                ]
+              },
+              "field_name": {
+                "$ref": "#/$defs/RecoveryFieldPath"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "SourcePin": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "anyOf": [
+              {
+                "pattern": "[^A-Za-z0-9._:/-]"
+              },
+              {
+                "enum": [
+                  "NONE",
+                  "SELF"
+                ]
+              }
+            ]
+          }
+        },
+        "sha256": {
+          "$ref": "#/$defs/SHA256"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "RecoverySourceBinding": {
+      "type": "object",
+      "required": [
+        "canonical_binding",
+        "contract_pins"
+      ],
+      "properties": {
+        "canonical_binding": {
+          "$ref": "#/$defs/CanonicalAshBinding"
+        },
+        "contract_pins": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "items": false,
+          "prefixItems": [
+            {
+              "type": "object",
+              "required": [
+                "path",
+                "sha256"
+              ],
+              "properties": {
+                "path": {
+                  "const": "interfaces/contracts/recovery-engine-contract.md"
+                },
+                "sha256": {
+                  "const": "27ffacc6218812b280ed236bf9052ee825e903498365d735bf57ee9cb338955b"
+                }
+              },
+              "additionalProperties": false,
+              "x-ywe-requirement-id": "YWE-REQ-0041"
+            },
+            {
+              "type": "object",
+              "required": [
+                "path",
+                "sha256"
+              ],
+              "properties": {
+                "path": {
+                  "const": "interfaces/contracts/diagnostics-module-contract.md"
+                },
+                "sha256": {
+                  "const": "88b8d682fa826f128787e6154151c68b32d677239e17ddf4344a084461554a37"
+                }
+              },
+              "additionalProperties": false,
+              "x-ywe-requirement-id": "YWE-REQ-0041"
+            },
+            {
+              "type": "object",
+              "required": [
+                "path",
+                "sha256"
+              ],
+              "properties": {
+                "path": {
+                  "const": "registries/fallback-policy-registry.md"
+                },
+                "sha256": {
+                  "const": "b108d6c4127da9ea375899e97c34048ded4ea3a7cb624ef24f18bfda5f8deaaa"
+                }
+              },
+              "additionalProperties": false,
+              "x-ywe-requirement-id": "YWE-REQ-0041"
+            },
+            {
+              "type": "object",
+              "required": [
+                "path",
+                "sha256"
+              ],
+              "properties": {
+                "path": {
+                  "const": "algorithms/recovery-fallback-semantics.pseudo.md"
+                },
+                "sha256": {
+                  "const": "0fb8a0750acae0fb263cd842e186ff35881f77b8e498a8f11f159a5d2db270b7"
+                }
+              },
+              "additionalProperties": false,
+              "x-ywe-requirement-id": "YWE-REQ-0041"
+            },
+            {
+              "type": "object",
+              "required": [
+                "path",
+                "sha256"
+              ],
+              "properties": {
+                "path": {
+                  "const": "algorithms/containment-safe-failure-semantics.pseudo.md"
+                },
+                "sha256": {
+                  "const": "83f1a19c1a0f375e02f2044c238786514d64b122ab6ab5a8bda6e6fa307c8256"
+                }
+              },
+              "additionalProperties": false,
+              "x-ywe-requirement-id": "YWE-REQ-0041"
+            },
+            {
+              "type": "object",
+              "required": [
+                "path",
+                "sha256"
+              ],
+              "properties": {
+                "path": {
+                  "const": "interfaces/diagnostic-schema.md"
+                },
+                "sha256": {
+                  "const": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7"
+                }
+              },
+              "additionalProperties": false,
+              "x-ywe-requirement-id": "YWE-REQ-0041"
+            },
+            {
+              "type": "object",
+              "required": [
+                "path",
+                "sha256"
+              ],
+              "properties": {
+                "path": {
+                  "const": "interfaces/rule-id-taxonomy.md"
+                },
+                "sha256": {
+                  "const": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+                }
+              },
+              "additionalProperties": false,
+              "x-ywe-requirement-id": "YWE-REQ-0041"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "EvidenceSourceBinding": {
+      "type": "object",
+      "required": [
+        "source_reference",
+        "source_sha256",
+        "evidence_reference"
+      ],
+      "properties": {
+        "source_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "evidence_reference": {
+          "$ref": "#/$defs/Identifier"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "ContextObservation": {
+      "type": "object",
+      "required": [
+        "context",
+        "owner_reference",
+        "observation_reference",
+        "source_binding"
+      ],
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/SystemContext"
+        },
+        "owner_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "observation_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/EvidenceSourceBinding"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "PropagationEvidence": {
+      "type": "object",
+      "required": [
+        "status",
+        "operation_reference",
+        "origin_assessment_reference",
+        "source_binding",
+        "reason"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "SAFE",
+            "RISK",
+            "UNAVAILABLE"
+          ]
+        },
+        "operation_reference": {
+          "$ref": "#/$defs/OperationReference"
+        },
+        "origin_assessment_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/EvidenceSourceBinding"
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "ExternalAuthorityEvidence": {
+      "type": "object",
+      "required": [
+        "status",
+        "operation_reference",
+        "origin_assessment_reference",
+        "source_binding",
+        "reason"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "REACHABLE",
+            "UNREACHABLE",
+            "UNAVAILABLE"
+          ]
+        },
+        "operation_reference": {
+          "$ref": "#/$defs/OperationReference"
+        },
+        "origin_assessment_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/EvidenceSourceBinding"
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "RecoveryOperationContext": {
+      "type": "object",
+      "required": [
+        "operation_reference",
+        "origin_assessment_reference",
+        "context_observation",
+        "propagation_evidence",
+        "external_authority_evidence"
+      ],
+      "properties": {
+        "operation_reference": {
+          "$ref": "#/$defs/OperationReference"
+        },
+        "origin_assessment_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "context_observation": {
+          "$ref": "#/$defs/ContextObservation"
+        },
+        "propagation_evidence": {
+          "$ref": "#/$defs/PropagationEvidence"
+        },
+        "external_authority_evidence": {
+          "$ref": "#/$defs/ExternalAuthorityEvidence"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "KnownCorrection": {
+      "type": "object",
+      "required": [
+        "correction_reference",
+        "original_assessment_reference",
+        "source_binding",
+        "profile_id",
+        "profile_source_sha256",
+        "chain",
+        "expected_target",
+        "reason",
+        "classification_evidence_reference",
+        "canonical_binding",
+        "provider_source_verification"
+      ],
+      "properties": {
+        "correction_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "original_assessment_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/EvidenceSourceBinding"
+        },
+        "profile_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "profile_source_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "chain": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AshState"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        },
+        "expected_target": {
+          "$ref": "#/$defs/AshState"
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        },
+        "classification_evidence_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "canonical_binding": {
+          "$ref": "#/$defs/CanonicalAshBinding"
+        },
+        "provider_source_verification": {
+          "const": "DECLARED_NOT_AUTHENTICATED"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "UnavailableCorrection": {
+      "type": "object",
+      "required": [
+        "original_assessment_reference",
+        "source_binding",
+        "reason",
+        "classification_evidence_reference",
+        "provider_source_verification"
+      ],
+      "properties": {
+        "original_assessment_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/EvidenceSourceBinding"
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        },
+        "classification_evidence_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "provider_source_verification": {
+          "const": "DECLARED_NOT_AUTHENTICATED"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "CorrectionValidation": {
+      "type": "object",
+      "required": [
+        "status",
+        "submitted_correction",
+        "origin_validation",
+        "current_source_binding",
+        "current_profile_binding",
+        "computed_target",
+        "target_diagnostic",
+        "failure_code",
+        "field_name"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "VERIFIED",
+            "REJECTED"
+          ]
+        },
+        "submitted_correction": {
+          "$ref": "#/$defs/KnownCorrection"
+        },
+        "origin_validation": {
+          "$ref": "#/$defs/AssessmentValidation"
+        },
+        "current_source_binding": {
+          "$ref": "#/$defs/CanonicalAshBinding"
+        },
+        "current_profile_binding": {
+          "$ref": "#/$defs/ProfileBinding"
+        },
+        "computed_target": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AshState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "target_diagnostic": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/StateValidityDiagnostic"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "failure_code": {
+          "oneOf": [
+            {
+              "enum": [
+                "SOURCE_BINDING_MISMATCH",
+                "PROFILE_BINDING_MISMATCH",
+                "ORIGIN_MISMATCH",
+                "CHAIN_MEMBER_INVALID",
+                "CHAIN_TARGET_MISMATCH",
+                "TARGET_NOT_VALID"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "field_name": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RecoveryFieldPath"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "VERIFIED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "origin_validation": {
+                "properties": {
+                  "status": {
+                    "const": "VERIFIED"
+                  }
+                }
+              },
+              "computed_target": {
+                "$ref": "#/$defs/AshState"
+              },
+              "target_diagnostic": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/StateValidityDiagnostic"
+                  },
+                  {
+                    "properties": {
+                      "is_valid": {
+                        "const": true
+                      }
+                    }
+                  }
+                ]
+              },
+              "failure_code": {
+                "type": "null"
+              },
+              "field_name": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "REJECTED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "failure_code": {
+                "enum": [
+                  "SOURCE_BINDING_MISMATCH",
+                  "PROFILE_BINDING_MISMATCH",
+                  "ORIGIN_MISMATCH",
+                  "CHAIN_MEMBER_INVALID",
+                  "CHAIN_TARGET_MISMATCH",
+                  "TARGET_NOT_VALID"
+                ]
+              },
+              "field_name": {
+                "$ref": "#/$defs/RecoveryFieldPath"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "origin_validation": {
+                "properties": {
+                  "status": {
+                    "const": "REJECTED"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "status": {
+                "const": "REJECTED"
+              },
+              "failure_code": {
+                "const": "ORIGIN_MISMATCH"
+              },
+              "computed_target": {
+                "type": "null"
+              },
+              "target_diagnostic": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ConditionReference": {
+      "type": "object",
+      "required": [
+        "condition_id",
+        "source_binding"
+      ],
+      "properties": {
+        "condition_id": {
+          "$ref": "#/$defs/ConditionID"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/EvidenceSourceBinding"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "FallbackPolicyEntry": {
+      "type": "object",
+      "required": [
+        "policy_id",
+        "applicability_conditions",
+        "candidate_state_reference",
+        "ordering_rank",
+        "validation_requirements",
+        "escalation_on_failure",
+        "notes"
+      ],
+      "properties": {
+        "policy_id": {
+          "$ref": "#/$defs/PolicyID"
+        },
+        "applicability_conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ConditionReference"
+          },
+          "minItems": 0,
+          "maxItems": 8
+        },
+        "candidate_state_reference": {
+          "$ref": "#/$defs/AshState"
+        },
+        "ordering_rank": {
+          "type": "integer",
+          "minimum": -9223372036854775808,
+          "maximum": 9223372036854775807
+        },
+        "validation_requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ConditionReference"
+          },
+          "minItems": 0,
+          "maxItems": 8
+        },
+        "escalation_on_failure": {
+          "enum": [
+            "TRY_NEXT",
+            "ESCALATE_TO_CONTAINMENT"
+          ]
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reason"
+          },
+          "minItems": 1,
+          "maxItems": 8
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "RegistrySourceBinding": {
+      "type": "object",
+      "required": [
+        "registry_id",
+        "source_binding",
+        "profile_id",
+        "profile_source_sha256",
+        "ash_dependency_id",
+        "ash_aggregate_sha256",
+        "source_verification"
+      ],
+      "properties": {
+        "registry_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "anyOf": [
+              {
+                "pattern": "[^A-Za-z0-9._:/-]"
+              },
+              {
+                "enum": [
+                  "NONE",
+                  "SELF"
+                ]
+              }
+            ]
+          }
+        },
+        "source_binding": {
+          "$ref": "#/$defs/EvidenceSourceBinding"
+        },
+        "profile_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "profile_source_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "ash_dependency_id": {
+          "const": "ash_cosmological_model.f2_9.canonical"
+        },
+        "ash_aggregate_sha256": {
+          "const": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb"
+        },
+        "source_verification": {
+          "const": "DECLARED_NOT_AUTHENTICATED"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "CandidateCertification": {
+      "type": "object",
+      "required": [
+        "policy_id",
+        "context_observation",
+        "source_assessment"
+      ],
+      "properties": {
+        "policy_id": {
+          "$ref": "#/$defs/PolicyID"
+        },
+        "context_observation": {
+          "$ref": "#/$defs/ContextObservation"
+        },
+        "source_assessment": {
+          "$ref": "#/$defs/StateAssessment"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "AvailableFallbackRegistry": {
+      "type": "object",
+      "required": [
+        "schema_ref",
+        "artifact_type",
+        "artifact_version",
+        "availability",
+        "source_binding",
+        "entries",
+        "candidate_certifications"
+      ],
+      "properties": {
+        "schema_ref": {
+          "const": "data/schemas/m3_fallback_registry_schema.json"
+        },
+        "artifact_type": {
+          "const": "ywe_fallback_registry"
+        },
+        "artifact_version": {
+          "const": "1.0.0"
+        },
+        "availability": {
+          "const": "AVAILABLE"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/RegistrySourceBinding"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FallbackPolicyEntry"
+          },
+          "minItems": 0,
+          "maxItems": 32
+        },
+        "candidate_certifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CandidateCertification"
+          },
+          "minItems": 0,
+          "maxItems": 32
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 0,
+                  "maxItems": 0
+                },
+                "candidate_certifications": {
+                  "minItems": 0,
+                  "maxItems": 0
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "candidate_certifications": {
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "candidate_certifications": {
+                  "minItems": 2,
+                  "maxItems": 2
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                "candidate_certifications": {
+                  "minItems": 3,
+                  "maxItems": 3
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 4,
+                  "maxItems": 4
+                },
+                "candidate_certifications": {
+                  "minItems": 4,
+                  "maxItems": 4
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 5,
+                  "maxItems": 5
+                },
+                "candidate_certifications": {
+                  "minItems": 5,
+                  "maxItems": 5
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 6,
+                  "maxItems": 6
+                },
+                "candidate_certifications": {
+                  "minItems": 6,
+                  "maxItems": 6
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 7,
+                  "maxItems": 7
+                },
+                "candidate_certifications": {
+                  "minItems": 7,
+                  "maxItems": 7
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 8,
+                  "maxItems": 8
+                },
+                "candidate_certifications": {
+                  "minItems": 8,
+                  "maxItems": 8
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 9,
+                  "maxItems": 9
+                },
+                "candidate_certifications": {
+                  "minItems": 9,
+                  "maxItems": 9
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 10,
+                  "maxItems": 10
+                },
+                "candidate_certifications": {
+                  "minItems": 10,
+                  "maxItems": 10
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 11,
+                  "maxItems": 11
+                },
+                "candidate_certifications": {
+                  "minItems": 11,
+                  "maxItems": 11
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 12,
+                  "maxItems": 12
+                },
+                "candidate_certifications": {
+                  "minItems": 12,
+                  "maxItems": 12
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 13,
+                  "maxItems": 13
+                },
+                "candidate_certifications": {
+                  "minItems": 13,
+                  "maxItems": 13
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 14,
+                  "maxItems": 14
+                },
+                "candidate_certifications": {
+                  "minItems": 14,
+                  "maxItems": 14
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 15,
+                  "maxItems": 15
+                },
+                "candidate_certifications": {
+                  "minItems": 15,
+                  "maxItems": 15
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 16,
+                  "maxItems": 16
+                },
+                "candidate_certifications": {
+                  "minItems": 16,
+                  "maxItems": 16
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 17,
+                  "maxItems": 17
+                },
+                "candidate_certifications": {
+                  "minItems": 17,
+                  "maxItems": 17
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 18,
+                  "maxItems": 18
+                },
+                "candidate_certifications": {
+                  "minItems": 18,
+                  "maxItems": 18
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 19,
+                  "maxItems": 19
+                },
+                "candidate_certifications": {
+                  "minItems": 19,
+                  "maxItems": 19
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 20,
+                  "maxItems": 20
+                },
+                "candidate_certifications": {
+                  "minItems": 20,
+                  "maxItems": 20
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 21,
+                  "maxItems": 21
+                },
+                "candidate_certifications": {
+                  "minItems": 21,
+                  "maxItems": 21
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 22,
+                  "maxItems": 22
+                },
+                "candidate_certifications": {
+                  "minItems": 22,
+                  "maxItems": 22
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 23,
+                  "maxItems": 23
+                },
+                "candidate_certifications": {
+                  "minItems": 23,
+                  "maxItems": 23
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 24,
+                  "maxItems": 24
+                },
+                "candidate_certifications": {
+                  "minItems": 24,
+                  "maxItems": 24
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 25,
+                  "maxItems": 25
+                },
+                "candidate_certifications": {
+                  "minItems": 25,
+                  "maxItems": 25
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 26,
+                  "maxItems": 26
+                },
+                "candidate_certifications": {
+                  "minItems": 26,
+                  "maxItems": 26
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 27,
+                  "maxItems": 27
+                },
+                "candidate_certifications": {
+                  "minItems": 27,
+                  "maxItems": 27
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 28,
+                  "maxItems": 28
+                },
+                "candidate_certifications": {
+                  "minItems": 28,
+                  "maxItems": 28
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 29,
+                  "maxItems": 29
+                },
+                "candidate_certifications": {
+                  "minItems": 29,
+                  "maxItems": 29
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 30,
+                  "maxItems": 30
+                },
+                "candidate_certifications": {
+                  "minItems": 30,
+                  "maxItems": 30
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 31,
+                  "maxItems": 31
+                },
+                "candidate_certifications": {
+                  "minItems": 31,
+                  "maxItems": 31
+                }
+              }
+            },
+            {
+              "properties": {
+                "entries": {
+                  "minItems": 32,
+                  "maxItems": 32
+                },
+                "candidate_certifications": {
+                  "minItems": 32,
+                  "maxItems": 32
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "UnavailableFallbackRegistry": {
+      "type": "object",
+      "required": [
+        "schema_ref",
+        "artifact_type",
+        "artifact_version",
+        "availability",
+        "source_binding",
+        "reason"
+      ],
+      "properties": {
+        "schema_ref": {
+          "const": "data/schemas/m3_fallback_registry_schema.json"
+        },
+        "artifact_type": {
+          "const": "ywe_fallback_registry"
+        },
+        "artifact_version": {
+          "const": "1.0.0"
+        },
+        "availability": {
+          "const": "UNAVAILABLE"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/RegistrySourceBinding"
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "RegistrySnapshot": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/AvailableFallbackRegistry"
+        },
+        {
+          "$ref": "#/$defs/UnavailableFallbackRegistry"
+        }
+      ]
+    },
+    "RegistryTargetValidation": {
+      "type": "object",
+      "required": [
+        "policy_id",
+        "submitted_certification",
+        "assessment_validation",
+        "target_diagnostic"
+      ],
+      "properties": {
+        "policy_id": {
+          "$ref": "#/$defs/PolicyID"
+        },
+        "submitted_certification": {
+          "$ref": "#/$defs/CandidateCertification"
+        },
+        "assessment_validation": {
+          "$ref": "#/$defs/AssessmentValidation"
+        },
+        "target_diagnostic": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/StateValidityDiagnostic"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "RegistryValidation": {
+      "type": "object",
+      "required": [
+        "status",
+        "submitted_snapshot",
+        "current_source_binding",
+        "current_profile_binding",
+        "candidate_validations",
+        "failure_code",
+        "failed_policy_id",
+        "field_name"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "VERIFIED",
+            "REJECTED"
+          ]
+        },
+        "submitted_snapshot": {
+          "$ref": "#/$defs/RegistrySnapshot"
+        },
+        "current_source_binding": {
+          "$ref": "#/$defs/CanonicalAshBinding"
+        },
+        "current_profile_binding": {
+          "$ref": "#/$defs/ProfileBinding"
+        },
+        "candidate_validations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RegistryTargetValidation"
+          },
+          "minItems": 0,
+          "maxItems": 32
+        },
+        "failure_code": {
+          "oneOf": [
+            {
+              "enum": [
+                "REGISTRY_SOURCE_MISMATCH",
+                "REGISTRY_PROFILE_MISMATCH",
+                "CERTIFICATION_INVENTORY_MISMATCH",
+                "TARGET_NOT_VALID",
+                "CERTIFICATION_NOT_STABLE"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "failed_policy_id": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PolicyID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "field_name": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RecoveryFieldPath"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "VERIFIED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "failure_code": {
+                "type": "null"
+              },
+              "failed_policy_id": {
+                "type": "null"
+              },
+              "field_name": {
+                "type": "null"
+              },
+              "candidate_validations": {
+                "type": "array",
+                "items": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/RegistryTargetValidation"
+                    },
+                    {
+                      "properties": {
+                        "assessment_validation": {
+                          "properties": {
+                            "status": {
+                              "const": "VERIFIED"
+                            }
+                          }
+                        },
+                        "target_diagnostic": {
+                          "allOf": [
+                            {
+                              "$ref": "#/$defs/StateValidityDiagnostic"
+                            },
+                            {
+                              "properties": {
+                                "is_valid": {
+                                  "const": true
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "submitted_certification": {
+                          "properties": {
+                            "source_assessment": {
+                              "properties": {
+                                "system_state_class": {
+                                  "const": "STABLE"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "minItems": 0,
+                "maxItems": 32
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "REJECTED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "failure_code": {
+                "enum": [
+                  "REGISTRY_SOURCE_MISMATCH",
+                  "REGISTRY_PROFILE_MISMATCH",
+                  "CERTIFICATION_INVENTORY_MISMATCH",
+                  "TARGET_NOT_VALID",
+                  "CERTIFICATION_NOT_STABLE"
+                ]
+              },
+              "field_name": {
+                "$ref": "#/$defs/RecoveryFieldPath"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "FallbackRouteAuthorization": {
+      "type": "object",
+      "required": [
+        "route",
+        "original_system_state_class",
+        "origin_assessment_reference",
+        "failed_action_decision_reference",
+        "failed_outcome",
+        "rule_ids",
+        "origin_predicate_evidence_reference",
+        "active_recovery_category"
+      ],
+      "properties": {
+        "route": {
+          "enum": [
+            "DIRECT_DEGRADED",
+            "AFTER_CORRECTION_FAILURE",
+            "AFTER_NORMALIZATION_FAILURE"
+          ]
+        },
+        "original_system_state_class": {
+          "enum": [
+            "DEGRADED",
+            "CORRECTABLE",
+            "UNSTABLE"
+          ]
+        },
+        "origin_assessment_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "failed_action_decision_reference": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "failed_outcome": {
+          "oneOf": [
+            {
+              "enum": [
+                "BLOCKED",
+                "RECOVERY_FAILED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rule_ids": {
+          "const": [
+            "ASH-RECOVERY-ACTION-001",
+            "ASH-FALLBACK-SELECTION-001"
+          ]
+        },
+        "origin_predicate_evidence_reference": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "active_recovery_category": {
+          "const": "FALLBACK_REQUIRED"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "oneOf": [
+        {
+          "properties": {
+            "route": {
+              "const": "DIRECT_DEGRADED"
+            },
+            "original_system_state_class": {
+              "const": "DEGRADED"
+            },
+            "failed_action_decision_reference": {
+              "type": "null"
+            },
+            "failed_outcome": {
+              "type": "null"
+            },
+            "origin_predicate_evidence_reference": {
+              "$ref": "#/$defs/Identifier"
+            }
+          }
+        },
+        {
+          "properties": {
+            "route": {
+              "const": "AFTER_CORRECTION_FAILURE"
+            },
+            "original_system_state_class": {
+              "const": "CORRECTABLE"
+            },
+            "failed_action_decision_reference": {
+              "$ref": "#/$defs/Identifier"
+            },
+            "failed_outcome": {
+              "enum": [
+                "BLOCKED",
+                "RECOVERY_FAILED"
+              ]
+            },
+            "origin_predicate_evidence_reference": {
+              "$ref": "#/$defs/Identifier"
+            }
+          }
+        },
+        {
+          "properties": {
+            "route": {
+              "const": "AFTER_NORMALIZATION_FAILURE"
+            },
+            "original_system_state_class": {
+              "const": "UNSTABLE"
+            },
+            "failed_action_decision_reference": {
+              "$ref": "#/$defs/Identifier"
+            },
+            "failed_outcome": {
+              "const": "RECOVERY_FAILED"
+            },
+            "origin_predicate_evidence_reference": {
+              "type": "null"
+            }
+          }
+        }
+      ]
+    },
+    "PredicateObservation": {
+      "type": "object",
+      "required": [
+        "status",
+        "condition",
+        "operation_reference",
+        "origin_assessment_reference",
+        "registry_id",
+        "registry_source_sha256",
+        "policy_id",
+        "phase",
+        "candidate_state_reference",
+        "source_binding",
+        "reason"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "TRUE",
+            "FALSE",
+            "UNAVAILABLE"
+          ]
+        },
+        "condition": {
+          "$ref": "#/$defs/ConditionReference"
+        },
+        "operation_reference": {
+          "$ref": "#/$defs/OperationReference"
+        },
+        "origin_assessment_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "registry_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "anyOf": [
+              {
+                "pattern": "[^A-Za-z0-9._:/-]"
+              },
+              {
+                "enum": [
+                  "NONE",
+                  "SELF"
+                ]
+              }
+            ]
+          }
+        },
+        "registry_source_sha256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "policy_id": {
+          "$ref": "#/$defs/PolicyID"
+        },
+        "phase": {
+          "enum": [
+            "APPLICABILITY",
+            "ADDITIONAL_VALIDATION"
+          ]
+        },
+        "candidate_state_reference": {
+          "$ref": "#/$defs/AshState"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/EvidenceSourceBinding"
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "EntryApplicability": {
+      "type": "object",
+      "required": [
+        "policy_id",
+        "observations",
+        "unconsulted_conditions"
+      ],
+      "properties": {
+        "policy_id": {
+          "$ref": "#/$defs/PolicyID"
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PredicateObservation"
+          },
+          "minItems": 0,
+          "maxItems": 8
+        },
+        "unconsulted_conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ConditionReference"
+          },
+          "minItems": 0,
+          "maxItems": 8
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "PostAssessmentFacts": {
+      "type": "object",
+      "required": [
+        "diagnostic_context",
+        "context_observation",
+        "classification_evidence"
+      ],
+      "properties": {
+        "diagnostic_context": {
+          "$ref": "#/$defs/DiagnosticContext"
+        },
+        "context_observation": {
+          "$ref": "#/$defs/ContextObservation"
+        },
+        "classification_evidence": {
+          "$ref": "#/$defs/ClassificationEvidence"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "UnavailablePostAssessmentFacts": {
+      "type": "object",
+      "required": [
+        "operation_reference",
+        "candidate_state_reference",
+        "source_binding",
+        "reason"
+      ],
+      "properties": {
+        "operation_reference": {
+          "$ref": "#/$defs/OperationReference"
+        },
+        "candidate_state_reference": {
+          "$ref": "#/$defs/AshState"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/EvidenceSourceBinding"
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "PostAssessmentLink": {
+      "type": "object",
+      "required": [
+        "parent_operation_reference",
+        "parent_action_reference",
+        "originating_chain_root_reference"
+      ],
+      "properties": {
+        "parent_operation_reference": {
+          "$ref": "#/$defs/OperationReference"
+        },
+        "parent_action_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "originating_chain_root_reference": {
+          "$ref": "#/$defs/Identifier"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "LinkedPostAssessment": {
+      "type": "object",
+      "required": [
+        "link",
+        "candidate_state",
+        "context_observation",
+        "assessment",
+        "capture_status"
+      ],
+      "properties": {
+        "link": {
+          "$ref": "#/$defs/PostAssessmentLink"
+        },
+        "candidate_state": {
+          "$ref": "#/$defs/AshState"
+        },
+        "context_observation": {
+          "$ref": "#/$defs/ContextObservation"
+        },
+        "assessment": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/StateAssessment"
+            },
+            {
+              "$ref": "#/$defs/ClassificationEvidenceFailure"
+            },
+            {
+              "$ref": "#/$defs/DiagnosticCaptureFailure"
+            }
+          ]
+        },
+        "capture_status": {
+          "enum": [
+            "COMPLETE",
+            "REJECTED",
+            "NOT_CONFIRMED"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "assessment": {
+                "required": [
+                  "failure_kind"
+                ],
+                "properties": {
+                  "failure_kind": {
+                    "const": "diagnostic_capture"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "capture_status": {
+                "enum": [
+                  "REJECTED",
+                  "NOT_CONFIRMED"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "NormalizationResolutionObservation": {
+      "type": "object",
+      "required": [
+        "availability",
+        "operation_reference",
+        "origin_assessment_reference",
+        "source_binding",
+        "reason"
+      ],
+      "properties": {
+        "availability": {
+          "enum": [
+            "READY",
+            "UNAVAILABLE"
+          ]
+        },
+        "operation_reference": {
+          "$ref": "#/$defs/OperationReference"
+        },
+        "origin_assessment_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/EvidenceSourceBinding"
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "NormalizationPlanValidation": {
+      "type": "object",
+      "required": [
+        "plan",
+        "original_diagnosis",
+        "canonical_binding",
+        "profile_binding",
+        "origin_validation_status",
+        "validation_status",
+        "failure_code",
+        "field_name",
+        "expected_decision",
+        "recomputed_eligible_targets",
+        "recomputed_target",
+        "recomputed_codeword_chain"
+      ],
+      "properties": {
+        "plan": {
+          "oneOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_normalization_plan_schema.json"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "original_diagnosis": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/StateDiagnosis"
+        },
+        "canonical_binding": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/CanonicalAshBinding"
+        },
+        "profile_binding": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/ProfileBinding"
+        },
+        "origin_validation_status": {
+          "enum": [
+            "NOT_EVALUATED",
+            "REJECTED",
+            "VERIFIED"
+          ]
+        },
+        "validation_status": {
+          "enum": [
+            "VALIDATED",
+            "REJECTED"
+          ]
+        },
+        "failure_code": {
+          "oneOf": [
+            {
+              "enum": [
+                "NORMALIZATION_CONFIG_INVALID",
+                "NORMALIZATION_CONTEXT_INVALID",
+                "NORMALIZATION_POLICY_INVALID",
+                "NORMALIZATION_PLAN_INVALID",
+                "NORMALIZATION_BINDING_MISMATCH",
+                "NORMALIZATION_ORIGINAL_DIAGNOSIS_MISMATCH",
+                "NORMALIZATION_TARGET_SET_MISMATCH",
+                "NORMALIZATION_SELECTION_MISMATCH",
+                "NORMALIZATION_CODEWORD_MISMATCH"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "field_name": {
+          "oneOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_state_normalization_schema.json#/$defs/FieldPath"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "expected_decision": {
+          "oneOf": [
+            {
+              "enum": [
+                "ALREADY_VALID",
+                "PLAN_READY",
+                "NOT_NORMALIZABLE",
+                "BLOCKED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recomputed_eligible_targets": {
+          "oneOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_normalization_plan_schema.json#/$defs/EligibleTargets"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recomputed_target": {
+          "oneOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recomputed_codeword_chain": {
+          "oneOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_normalization_plan_schema.json#/$defs/CodewordChain"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "origin_validation_status": {
+              "const": "NOT_EVALUATED"
+            },
+            "validation_status": {
+              "const": "REJECTED"
+            },
+            "failure_code": {
+              "enum": [
+                "NORMALIZATION_CONFIG_INVALID",
+                "NORMALIZATION_CONTEXT_INVALID",
+                "NORMALIZATION_POLICY_INVALID",
+                "NORMALIZATION_PLAN_INVALID"
+              ]
+            },
+            "field_name": {
+              "$ref": "https://ywe.local/schemas/m3_state_normalization_schema.json#/$defs/FieldPath"
+            },
+            "expected_decision": {
+              "type": "null"
+            },
+            "recomputed_eligible_targets": {
+              "type": "null"
+            },
+            "recomputed_target": {
+              "type": "null"
+            },
+            "recomputed_codeword_chain": {
+              "type": "null"
+            }
+          }
+        },
+        {
+          "properties": {
+            "origin_validation_status": {
+              "const": "REJECTED"
+            },
+            "validation_status": {
+              "const": "REJECTED"
+            },
+            "failure_code": {
+              "enum": [
+                "NORMALIZATION_BINDING_MISMATCH",
+                "NORMALIZATION_ORIGINAL_DIAGNOSIS_MISMATCH"
+              ]
+            },
+            "field_name": {
+              "$ref": "https://ywe.local/schemas/m3_state_normalization_schema.json#/$defs/FieldPath"
+            },
+            "expected_decision": {
+              "type": "null"
+            },
+            "recomputed_eligible_targets": {
+              "type": "null"
+            },
+            "recomputed_target": {
+              "type": "null"
+            },
+            "recomputed_codeword_chain": {
+              "type": "null"
+            }
+          }
+        },
+        {
+          "allOf": [
+            {
+              "properties": {
+                "origin_validation_status": {
+                  "const": "VERIFIED"
+                }
+              }
+            },
+            {
+              "oneOf": [
+                {
+                  "properties": {
+                    "expected_decision": {
+                      "const": "ALREADY_VALID"
+                    },
+                    "recomputed_eligible_targets": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 16
+                    },
+                    "recomputed_target": {
+                      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+                    },
+                    "recomputed_codeword_chain": {
+                      "type": "array",
+                      "minItems": 0,
+                      "items": false,
+                      "maxItems": 0
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "expected_decision": {
+                      "const": "PLAN_READY"
+                    },
+                    "recomputed_eligible_targets": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 16
+                    },
+                    "recomputed_target": {
+                      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+                    },
+                    "recomputed_codeword_chain": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 1
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "expected_decision": {
+                      "const": "NOT_NORMALIZABLE"
+                    },
+                    "recomputed_eligible_targets": {
+                      "type": "array",
+                      "minItems": 0,
+                      "items": false,
+                      "maxItems": 0
+                    },
+                    "recomputed_target": {
+                      "type": "null"
+                    },
+                    "recomputed_codeword_chain": {
+                      "type": "array",
+                      "minItems": 0,
+                      "items": false,
+                      "maxItems": 0
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "expected_decision": {
+                      "const": "BLOCKED"
+                    },
+                    "recomputed_eligible_targets": {
+                      "type": "null"
+                    },
+                    "recomputed_target": {
+                      "type": "null"
+                    },
+                    "recomputed_codeword_chain": {
+                      "type": "null"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "oneOf": [
+                {
+                  "properties": {
+                    "validation_status": {
+                      "const": "VALIDATED"
+                    },
+                    "failure_code": {
+                      "type": "null"
+                    },
+                    "field_name": {
+                      "type": "null"
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "validation_status": {
+                      "const": "REJECTED"
+                    },
+                    "failure_code": {
+                      "enum": [
+                        "NORMALIZATION_TARGET_SET_MISMATCH",
+                        "NORMALIZATION_SELECTION_MISMATCH",
+                        "NORMALIZATION_CODEWORD_MISMATCH"
+                      ]
+                    },
+                    "field_name": {
+                      "$ref": "https://ywe.local/schemas/m3_state_normalization_schema.json#/$defs/FieldPath"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "NORMALIZATION_BINDING_MISMATCH"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "field_name": {
+                "enum": [
+                  "original_diagnosis.source_binding",
+                  "original_diagnosis.profile_binding"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "NORMALIZATION_ORIGINAL_DIAGNOSIS_MISMATCH"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "field_name": {
+                "enum": [
+                  "original_diagnosis.assessment_binding",
+                  "original_diagnosis.input_evidence",
+                  "original_diagnosis.parsed_state",
+                  "original_diagnosis.state_validity_diagnostic",
+                  "original_diagnosis.emitted_diagnostics"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "plan": {
+                "type": "null"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "origin_validation_status": {
+                "enum": [
+                  "NOT_EVALUATED",
+                  "REJECTED"
+                ]
+              },
+              "validation_status": {
+                "const": "REJECTED"
+              },
+              "expected_decision": {
+                "type": "null"
+              },
+              "recomputed_eligible_targets": {
+                "type": "null"
+              },
+              "recomputed_target": {
+                "type": "null"
+              },
+              "recomputed_codeword_chain": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ],
+      "description": "Twelve-field retained N1 pure validation observation. Nullable plan is admitted only for early typed preconditions/origin refusal, with no recomputed mathematical facts. Current source/profile/full proof equality remains StateModel-owned.",
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "NormalizationErrorObservation": {
+      "type": "object",
+      "required": [
+        "code",
+        "field_name",
+        "plan_validation",
+        "reason"
+      ],
+      "properties": {
+        "code": {
+          "enum": [
+            "NORMALIZATION_CONFIG_INVALID",
+            "NORMALIZATION_CONTEXT_INVALID",
+            "NORMALIZATION_POLICY_INVALID",
+            "NORMALIZATION_PLAN_INVALID"
+          ]
+        },
+        "field_name": {
+          "$ref": "https://ywe.local/schemas/m3_state_normalization_schema.json#/$defs/FieldPath"
+        },
+        "plan_validation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/NormalizationPlanValidation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reason": {
+          "const": "NORMALIZATION_PLANNING_REFUSED"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "NormalizationPreparation": {
+      "type": "object",
+      "required": [
+        "status",
+        "original_diagnosis",
+        "policy_binding",
+        "plan",
+        "plan_validation",
+        "planning_error",
+        "resolution_observation"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "READY",
+            "UNAVAILABLE",
+            "REJECTED"
+          ]
+        },
+        "original_diagnosis": {
+          "$ref": "#/$defs/StateDiagnosis"
+        },
+        "policy_binding": {
+          "$ref": "#/$defs/NormalizationPolicyBinding"
+        },
+        "plan": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/NormalizationPlan"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "plan_validation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/NormalizationPlanValidation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "planning_error": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/NormalizationErrorObservation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "resolution_observation": {
+          "$ref": "#/$defs/NormalizationResolutionObservation"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "oneOf": [
+        {
+          "properties": {
+            "status": {
+              "const": "READY"
+            },
+            "plan": {
+              "$ref": "#/$defs/NormalizationPlan"
+            },
+            "plan_validation": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/NormalizationPlanValidation"
+                },
+                {
+                  "properties": {
+                    "plan": {
+                      "$ref": "#/$defs/NormalizationPlan"
+                    },
+                    "validation_status": {
+                      "const": "VALIDATED"
+                    }
+                  }
+                }
+              ]
+            },
+            "planning_error": {
+              "type": "null"
+            },
+            "resolution_observation": {
+              "properties": {
+                "availability": {
+                  "const": "READY"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "const": "UNAVAILABLE"
+            },
+            "plan": {
+              "type": "null"
+            },
+            "plan_validation": {
+              "type": "null"
+            },
+            "planning_error": {
+              "type": "null"
+            },
+            "resolution_observation": {
+              "properties": {
+                "availability": {
+                  "const": "UNAVAILABLE"
+                }
+              }
+            }
+          }
+        },
+        {
+          "allOf": [
+            {
+              "properties": {
+                "status": {
+                  "const": "REJECTED"
+                },
+                "resolution_observation": {
+                  "properties": {
+                    "availability": {
+                      "const": "READY"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "anyOf": [
+                {
+                  "properties": {
+                    "planning_error": {
+                      "$ref": "#/$defs/NormalizationErrorObservation"
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "plan_validation": {
+                      "allOf": [
+                        {
+                          "$ref": "#/$defs/NormalizationPlanValidation"
+                        },
+                        {
+                          "properties": {
+                            "validation_status": {
+                              "const": "REJECTED"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "CorrectionObservation": {
+      "type": "object",
+      "required": [
+        "submitted",
+        "validation"
+      ],
+      "properties": {
+        "submitted": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/KnownCorrection"
+            },
+            {
+              "$ref": "#/$defs/UnavailableCorrection"
+            }
+          ]
+        },
+        "validation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/CorrectionValidation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "submitted": {
+                "required": [
+                  "correction_reference"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "validation": {
+                "$ref": "#/$defs/CorrectionValidation"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "submitted": {
+                "not": {
+                  "required": [
+                    "correction_reference"
+                  ]
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "validation": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RecoverySafetyPolicyBinding": {
+      "type": "object",
+      "required": [
+        "policy_id",
+        "policy_version",
+        "source_path",
+        "source_sha256"
+      ],
+      "properties": {
+        "policy_id": {
+          "const": "YWE-RECOVERY-SAFETY-001"
+        },
+        "policy_version": {
+          "const": "1.0.0"
+        },
+        "source_path": {
+          "const": "docs/architecture/m3_recovery_safety_policy.md"
+        },
+        "source_sha256": {
+          "const": "00fcee810c5cd445dd0baaaf98c754000347489001e21588eb03afdd1e1ebb95"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "ExternalEscalationRequired": {
+      "type": "object",
+      "required": [
+        "trigger_domain",
+        "recovery_category",
+        "authority_status"
+      ],
+      "properties": {
+        "trigger_domain": {
+          "const": "YWE_RECOVERABILITY_CATEGORY"
+        },
+        "recovery_category": {
+          "const": "ESCALATION_REQUIRED"
+        },
+        "authority_status": {
+          "enum": [
+            "REACHABLE",
+            "UNREACHABLE",
+            "UNAVAILABLE"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "ExistingModeBoundary": {
+      "type": "object",
+      "required": [
+        "trigger_domain",
+        "observed_system_state_class",
+        "observed_assessment_reference"
+      ],
+      "properties": {
+        "trigger_domain": {
+          "const": "YWE_OBSERVED_MODE_BOUNDARY"
+        },
+        "observed_system_state_class": {
+          "enum": [
+            "CONTAINED",
+            "SAFE_HALT"
+          ]
+        },
+        "observed_assessment_reference": {
+          "$ref": "#/$defs/Identifier"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "RecoveryDirective": {
+      "type": "object",
+      "required": [
+        "requested_action",
+        "trigger",
+        "origin_assessment_reference",
+        "causing_decision_reference",
+        "evidence_references",
+        "actual_mode_status",
+        "reason",
+        "request_origin",
+        "policy_binding"
+      ],
+      "properties": {
+        "requested_action": {
+          "enum": [
+            "ENTER_CONTAINMENT",
+            "REQUEST_EXTERNAL_AUTHORITY",
+            "ENTER_SAFE_HALT",
+            "REMAIN_CONTAINED",
+            "REMAIN_SAFE_HALT"
+          ]
+        },
+        "trigger": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/CanonicalContainmentTrigger"
+            },
+            {
+              "$ref": "#/$defs/CanonicalSafeHaltTrigger"
+            },
+            {
+              "$ref": "#/$defs/ExternalEscalationRequired"
+            },
+            {
+              "$ref": "#/$defs/ExistingModeBoundary"
+            }
+          ]
+        },
+        "origin_assessment_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "causing_decision_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "evidence_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Identifier"
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "actual_mode_status": {
+          "const": "NOT_ENTERED_BY_N2"
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        },
+        "request_origin": {
+          "enum": [
+            "POLICY",
+            "SOURCE_RECOVERABILITY",
+            "OBSERVED_EXISTING_MODE"
+          ]
+        },
+        "policy_binding": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RecoverySafetyPolicyBinding"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "oneOf": [
+        {
+          "properties": {
+            "requested_action": {
+              "const": "ENTER_CONTAINMENT"
+            },
+            "trigger": {
+              "$ref": "#/$defs/CanonicalContainmentTrigger"
+            }
+          }
+        },
+        {
+          "properties": {
+            "requested_action": {
+              "const": "ENTER_SAFE_HALT"
+            },
+            "trigger": {
+              "$ref": "#/$defs/CanonicalSafeHaltTrigger"
+            }
+          }
+        },
+        {
+          "properties": {
+            "requested_action": {
+              "const": "REQUEST_EXTERNAL_AUTHORITY"
+            },
+            "trigger": {
+              "$ref": "#/$defs/ExternalEscalationRequired"
+            }
+          }
+        },
+        {
+          "properties": {
+            "requested_action": {
+              "const": "REMAIN_CONTAINED"
+            },
+            "trigger": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/ExistingModeBoundary"
+                },
+                {
+                  "properties": {
+                    "observed_system_state_class": {
+                      "const": "CONTAINED"
+                    }
+                  }
+                }
+              ]
+            },
+            "request_origin": {
+              "const": "OBSERVED_EXISTING_MODE"
+            }
+          }
+        },
+        {
+          "properties": {
+            "requested_action": {
+              "const": "REMAIN_SAFE_HALT"
+            },
+            "trigger": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/ExistingModeBoundary"
+                },
+                {
+                  "properties": {
+                    "observed_system_state_class": {
+                      "const": "SAFE_HALT"
+                    }
+                  }
+                }
+              ]
+            },
+            "request_origin": {
+              "const": "OBSERVED_EXISTING_MODE"
+            }
+          }
+        }
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "request_origin": {
+                "const": "POLICY"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "policy_binding": {
+                "$ref": "#/$defs/RecoverySafetyPolicyBinding"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "policy_binding": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "trigger": {
+                "const": "OPERATOR_REQUEST"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "request_origin": {
+                "const": "POLICY"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RecoveryStepEvidence": {
+      "type": "object",
+      "required": [
+        "step_index",
+        "action",
+        "status",
+        "before_state",
+        "codeword",
+        "after_state",
+        "policy_id",
+        "predicate_observation",
+        "post_assessment_reference",
+        "diagnostic_reference",
+        "reason"
+      ],
+      "properties": {
+        "step_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 767
+        },
+        "action": {
+          "enum": [
+            "NORMALIZE_PLAN",
+            "NORMALIZE_XOR",
+            "CORRECTION_RESOLVE",
+            "CORRECTION_XOR",
+            "CANDIDATE_APPLICABILITY",
+            "FALLBACK_SELECT",
+            "CANDIDATE_VALIDATION",
+            "POST_ASSESSMENT",
+            "HANDOFF",
+            "NO_ACTION"
+          ]
+        },
+        "status": {
+          "enum": [
+            "COMPLETED",
+            "BLOCKED",
+            "FAILED"
+          ]
+        },
+        "before_state": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AshState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "codeword": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/CanonicalCodeword"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "after_state": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AshState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "policy_id": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PolicyID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "predicate_observation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PredicateObservation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "post_assessment_reference": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "diagnostic_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "enum": [
+                  "NORMALIZE_XOR",
+                  "CORRECTION_XOR"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "before_state": {
+                "$ref": "#/$defs/AshState"
+              },
+              "codeword": {
+                "$ref": "#/$defs/CanonicalCodeword"
+              },
+              "after_state": {
+                "$ref": "#/$defs/AshState"
+              },
+              "status": {
+                "const": "COMPLETED"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "codeword": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "enum": [
+                  "CANDIDATE_APPLICABILITY",
+                  "CANDIDATE_VALIDATION"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "policy_id": {
+                "$ref": "#/$defs/PolicyID"
+              },
+              "predicate_observation": {
+                "$ref": "#/$defs/PredicateObservation"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "predicate_observation": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "const": "CANDIDATE_APPLICABILITY"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "predicate_observation": {
+                "properties": {
+                  "phase": {
+                    "const": "APPLICABILITY"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "const": "CANDIDATE_VALIDATION"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "predicate_observation": {
+                "properties": {
+                  "phase": {
+                    "const": "ADDITIONAL_VALIDATION"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "const": "POST_ASSESSMENT"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "post_assessment_reference": {
+                "$ref": "#/$defs/Identifier"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "post_assessment_reference": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RecoveryStep": {
+      "type": "object",
+      "required": [
+        "action",
+        "status",
+        "reason"
+      ],
+      "properties": {
+        "action": {
+          "enum": [
+            "normalize",
+            "correct",
+            "validate-recovery",
+            "select-fallback",
+            "validate-fallback",
+            "resolve-normalization",
+            "resolve-correction",
+            "evaluate-applicability",
+            "evaluate-additional-validation",
+            "handoff",
+            "no-action",
+            "fallback-summary"
+          ]
+        },
+        "status": {
+          "enum": [
+            "COMPLETED",
+            "BLOCKED",
+            "FAILED"
+          ]
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "RecoveryDiagnostic": {
+      "type": "object",
+      "required": [
+        "recovery_category",
+        "original_state_class",
+        "original_diagnostic",
+        "steps",
+        "outcome",
+        "corrected_state",
+        "fallback_policy_id",
+        "reason",
+        "rule_ids"
+      ],
+      "properties": {
+        "recovery_category": {
+          "$ref": "#/$defs/RecoveryCategory"
+        },
+        "original_state_class": {
+          "$ref": "#/$defs/SystemStateClass"
+        },
+        "original_diagnostic": {
+          "$ref": "#/$defs/StateValidityDiagnostic"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RecoveryStep"
+          },
+          "minItems": 0,
+          "maxItems": 32
+        },
+        "outcome": {
+          "enum": [
+            "RECOVERED",
+            "RECOVERED_VIA_FALLBACK",
+            "BLOCKED",
+            "RECOVERY_FAILED",
+            "ESCALATE_TO_CONTAINMENT",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "corrected_state": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AshState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fallback_policy_id": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PolicyID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        },
+        "rule_ids": {
+          "$ref": "#/$defs/RuleIDs"
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "original_state_class": {
+                  "const": "STABLE"
+                },
+                "recovery_category": {
+                  "const": "NO_ACTION"
+                }
+              }
+            },
+            {
+              "properties": {
+                "original_state_class": {
+                  "const": "UNSTABLE"
+                },
+                "recovery_category": {
+                  "const": "NORMALIZE_STATE"
+                }
+              }
+            },
+            {
+              "properties": {
+                "original_state_class": {
+                  "const": "CORRECTABLE"
+                },
+                "recovery_category": {
+                  "const": "APPLY_CORRECTION"
+                }
+              }
+            },
+            {
+              "properties": {
+                "original_state_class": {
+                  "const": "DEGRADED"
+                },
+                "recovery_category": {
+                  "const": "FALLBACK_REQUIRED"
+                }
+              }
+            },
+            {
+              "properties": {
+                "original_state_class": {
+                  "const": "CONTAINED"
+                },
+                "recovery_category": {
+                  "const": "CONTAINMENT_REQUIRED"
+                }
+              }
+            },
+            {
+              "properties": {
+                "original_state_class": {
+                  "const": "FAILED"
+                },
+                "recovery_category": {
+                  "const": "ESCALATION_REQUIRED"
+                }
+              }
+            },
+            {
+              "properties": {
+                "original_state_class": {
+                  "const": "SAFE_HALT"
+                },
+                "recovery_category": {
+                  "const": "TERMINAL_NO_RECOVERY"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "RECOVERED",
+                  "RECOVERED_VIA_FALLBACK"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "corrected_state": {
+                "$ref": "#/$defs/AshState"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "RECOVERED_VIA_FALLBACK"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "fallback_policy_id": {
+                "$ref": "#/$defs/PolicyID"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RecoveryActionDecision": {
+      "type": "object",
+      "required": [
+        "action_reference",
+        "action",
+        "diagnostic",
+        "step_indices",
+        "post_assessment_reference",
+        "candidate_context",
+        "directive"
+      ],
+      "properties": {
+        "action_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "action": {
+          "enum": [
+            "NORMALIZE",
+            "CORRECT",
+            "FALLBACK_CANDIDATE",
+            "FALLBACK_SUMMARY",
+            "NO_ACTION",
+            "HANDOFF"
+          ]
+        },
+        "diagnostic": {
+          "$ref": "#/$defs/RecoveryDiagnostic"
+        },
+        "step_indices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 767
+          },
+          "minItems": 0,
+          "maxItems": 768,
+          "uniqueItems": true
+        },
+        "post_assessment_reference": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "candidate_context": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SystemContext"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "directive": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RecoveryDirective"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "const": "HANDOFF"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "directive": {
+                "$ref": "#/$defs/RecoveryDirective"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "directive": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RecoveryEnvelope": {
+      "type": "object",
+      "required": [
+        "diagnostic_kind",
+        "severity",
+        "stage",
+        "disposition",
+        "subject_reference",
+        "parent_diagnostic_reference",
+        "chain_root_reference",
+        "rule_ids",
+        "summary",
+        "notes"
+      ],
+      "properties": {
+        "diagnostic_kind": {
+          "enum": [
+            "RECOVERY",
+            "FALLBACK",
+            "STATE_VALIDITY"
+          ]
+        },
+        "severity": {
+          "enum": [
+            "INFO",
+            "WARNING",
+            "ERROR",
+            "CRITICAL"
+          ]
+        },
+        "stage": {
+          "enum": [
+            "RECOVERY",
+            "ESCALATION",
+            "DETECTION"
+          ]
+        },
+        "disposition": {
+          "enum": [
+            "RESOLVED",
+            "PENDING",
+            "BLOCKED",
+            "ESCALATED"
+          ]
+        },
+        "subject_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "parent_diagnostic_reference": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "chain_root_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "rule_ids": {
+          "$ref": "#/$defs/RuleIDs"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "\\S",
+          "not": {
+            "pattern": "[\r\n\u000b\f\u001c\u001d\u001e\u0085\u2028\u2029]"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reason"
+          },
+          "minItems": 1,
+          "maxItems": 8
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "oneOf": [
+        {
+          "properties": {
+            "stage": {
+              "const": "DETECTION"
+            },
+            "diagnostic_kind": {
+              "const": "STATE_VALIDITY"
+            },
+            "severity": {
+              "const": "CRITICAL"
+            },
+            "disposition": {
+              "const": "BLOCKED"
+            },
+            "parent_diagnostic_reference": {
+              "type": "null"
+            },
+            "rule_ids": {
+              "const": [
+                "ASH-STATE-GENERAL-001",
+                "ASH-RECOVERY-ACTION-001"
+              ]
+            }
+          }
+        },
+        {
+          "properties": {
+            "stage": {
+              "enum": [
+                "RECOVERY",
+                "ESCALATION"
+              ]
+            },
+            "diagnostic_kind": {
+              "enum": [
+                "RECOVERY",
+                "FALLBACK"
+              ]
+            },
+            "parent_diagnostic_reference": {
+              "$ref": "#/$defs/Identifier"
+            }
+          }
+        }
+      ]
+    },
+    "RecoveryRecord": {
+      "type": "object",
+      "required": [
+        "diagnostic_reference",
+        "envelope",
+        "record_kind",
+        "payload"
+      ],
+      "properties": {
+        "diagnostic_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "envelope": {
+          "$ref": "#/$defs/RecoveryEnvelope"
+        },
+        "record_kind": {
+          "enum": [
+            "ACTION_VALUE_COMPUTED",
+            "OPERATION_DECISION"
+          ]
+        },
+        "payload": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RecoveryStepEvidence"
+            },
+            {
+              "$ref": "#/$defs/RecoveryActionDecision"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "oneOf": [
+        {
+          "properties": {
+            "record_kind": {
+              "const": "ACTION_VALUE_COMPUTED"
+            },
+            "payload": {
+              "$ref": "#/$defs/RecoveryStepEvidence"
+            }
+          }
+        },
+        {
+          "properties": {
+            "record_kind": {
+              "const": "OPERATION_DECISION"
+            },
+            "payload": {
+              "$ref": "#/$defs/RecoveryActionDecision"
+            }
+          }
+        }
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "envelope": {
+                "properties": {
+                  "stage": {
+                    "const": "DETECTION"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "record_kind": {
+                "const": "OPERATION_DECISION"
+              },
+              "payload": {
+                "properties": {
+                  "action": {
+                    "const": "HANDOFF"
+                  },
+                  "diagnostic": {
+                    "properties": {
+                      "original_state_class": {
+                        "const": "SAFE_HALT"
+                      },
+                      "outcome": {
+                        "const": "NOT_APPLICABLE"
+                      }
+                    }
+                  },
+                  "directive": {
+                    "properties": {
+                      "requested_action": {
+                        "const": "REMAIN_SAFE_HALT"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "PolicyAttempt": {
+      "type": "object",
+      "required": [
+        "policy_id",
+        "applicability_observations",
+        "unconsulted_applicability",
+        "validation_observations",
+        "unconsulted_validation",
+        "post_assessment_reference",
+        "decision_reference",
+        "result"
+      ],
+      "properties": {
+        "policy_id": {
+          "$ref": "#/$defs/PolicyID"
+        },
+        "applicability_observations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PredicateObservation"
+          },
+          "minItems": 0,
+          "maxItems": 8
+        },
+        "unconsulted_applicability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ConditionReference"
+          },
+          "minItems": 0,
+          "maxItems": 8
+        },
+        "validation_observations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PredicateObservation"
+          },
+          "minItems": 0,
+          "maxItems": 8
+        },
+        "unconsulted_validation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ConditionReference"
+          },
+          "minItems": 0,
+          "maxItems": 8
+        },
+        "post_assessment_reference": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "decision_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "result": {
+          "enum": [
+            "INELIGIBLE",
+            "RECOVERED",
+            "VALIDATION_FAILED",
+            "UNAVAILABLE",
+            "LIFECYCLE_BOUNDARY"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "allOf": [
+        {
+          "properties": {
+            "applicability_observations": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/PredicateObservation"
+                  },
+                  {
+                    "properties": {
+                      "phase": {
+                        "const": "APPLICABILITY"
+                      }
+                    }
+                  }
+                ]
+              },
+              "minItems": 0,
+              "maxItems": 8
+            },
+            "validation_observations": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/PredicateObservation"
+                  },
+                  {
+                    "properties": {
+                      "phase": {
+                        "const": "ADDITIONAL_VALIDATION"
+                      }
+                    }
+                  }
+                ]
+              },
+              "minItems": 0,
+              "maxItems": 8
+            }
+          }
+        }
+      ]
+    },
+    "RecoveryFailureDetail": {
+      "type": "object",
+      "required": [
+        "failure_code",
+        "field_name",
+        "submitted_evidence",
+        "attempted_diagnostic",
+        "capture_status",
+        "pending_directive",
+        "reason",
+        "completion_failure_code",
+        "unconfirmed_completion_observation"
+      ],
+      "properties": {
+        "failure_code": {
+          "enum": [
+            "ORIGIN_REJECTED",
+            "CAPTURE_ADMISSION_REJECTED",
+            "CAPTURE_ADMISSION_UNCONFIRMED",
+            "STEP_CAPTURE_REJECTED",
+            "STEP_CAPTURE_UNCONFIRMED",
+            "POST_EVIDENCE_UNAVAILABLE",
+            "POST_ASSESSMENT_FAILED",
+            "POST_CAPTURE_REJECTED",
+            "POST_CAPTURE_UNCONFIRMED",
+            "COLLABORATOR_FAILED",
+            "RESOURCE_LIMIT",
+            "INTERNAL_INVARIANT_FAILURE",
+            "REGISTRY_BINDING_REJECTED",
+            "COMPLETION_REJECTED",
+            "COMPLETION_UNCONFIRMED"
+          ]
+        },
+        "field_name": {
+          "$ref": "#/$defs/RecoveryFieldPath"
+        },
+        "submitted_evidence": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AssessmentValidation"
+            },
+            {
+              "$ref": "#/$defs/RegistryValidation"
+            },
+            {
+              "$ref": "#/$defs/CorrectionValidation"
+            },
+            {
+              "$ref": "#/$defs/NormalizationPreparation"
+            },
+            {
+              "$ref": "#/$defs/PostAssessmentFacts"
+            },
+            {
+              "$ref": "#/$defs/UnavailablePostAssessmentFacts"
+            },
+            {
+              "$ref": "#/$defs/PredicateObservation"
+            },
+            {
+              "$ref": "#/$defs/DiagnosticsCompletionReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "attempted_diagnostic": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RecoveryRecord"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "capture_status": {
+          "oneOf": [
+            {
+              "enum": [
+                "REJECTED",
+                "NOT_CONFIRMED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pending_directive": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RecoveryDirective"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reason": {
+          "$ref": "#/$defs/Reason"
+        },
+        "completion_failure_code": {
+          "oneOf": [
+            {
+              "enum": [
+                "COMPLETION_REJECTED",
+                "COMPLETION_UNCONFIRMED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "unconfirmed_completion_observation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/DiagnosticsCompletionReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "unconfirmed_completion_observation": {
+                "$ref": "#/$defs/DiagnosticsCompletionReceipt"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "completion_failure_code": {
+                "const": "COMPLETION_UNCONFIRMED"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RecoveryContractError": {
+      "type": "object",
+      "required": [
+        "code",
+        "field_name",
+        "validation",
+        "emitted_diagnostics"
+      ],
+      "properties": {
+        "code": {
+          "enum": [
+            "RECOVERY_INPUT_INVALID",
+            "RECOVERY_BINDING_MISMATCH",
+            "RECOVERY_PLAN_INVALID",
+            "RECOVERY_PORT_INVALID"
+          ]
+        },
+        "field_name": {
+          "$ref": "#/$defs/RecoveryFieldPath"
+        },
+        "validation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AssessmentValidation"
+            },
+            {
+              "$ref": "#/$defs/RegistryValidation"
+            },
+            {
+              "$ref": "#/$defs/CorrectionValidation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "emitted_diagnostics": {
+          "const": []
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "RecoveryPacketCommon": {
+      "type": "object",
+      "required": [
+        "schema_ref",
+        "artifact_type",
+        "artifact_version",
+        "outcome",
+        "execution_scope",
+        "operation_context",
+        "origin_assessment",
+        "origin_validation",
+        "source_binding",
+        "registry_binding",
+        "route_authorization",
+        "steps",
+        "post_assessments",
+        "policy_attempts",
+        "action_decisions",
+        "emitted_diagnostics",
+        "candidate_state",
+        "directive",
+        "failure_detail",
+        "session_effects_performed",
+        "normalization_preparation",
+        "correction_observation",
+        "registry_snapshot",
+        "registry_validation",
+        "completion_observation"
+      ],
+      "properties": {
+        "schema_ref": {
+          "const": "data/schemas/m3_recovery_value_schema.json"
+        },
+        "artifact_type": {
+          "const": "ywe_recovery_value"
+        },
+        "artifact_version": {
+          "const": "1.0.0"
+        },
+        "outcome": {
+          "enum": [
+            "NO_ACTION",
+            "RECOVERED_VALUE",
+            "RECOVERED_FALLBACK_VALUE",
+            "HANDOFF_REQUIRED",
+            "FAILURE"
+          ]
+        },
+        "execution_scope": {
+          "const": "CORE_REFERENCE_IMMUTABLE_VALUE"
+        },
+        "operation_context": {
+          "$ref": "#/$defs/RecoveryOperationContext"
+        },
+        "origin_assessment": {
+          "$ref": "#/$defs/StateAssessment"
+        },
+        "origin_validation": {
+          "$ref": "#/$defs/AssessmentValidation"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/RecoverySourceBinding"
+        },
+        "registry_binding": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RegistrySourceBinding"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "route_authorization": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/FallbackRouteAuthorization"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RecoveryStepEvidence"
+          },
+          "minItems": 0,
+          "maxItems": 768
+        },
+        "post_assessments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LinkedPostAssessment"
+          },
+          "minItems": 0,
+          "maxItems": 33
+        },
+        "policy_attempts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PolicyAttempt"
+          },
+          "minItems": 0,
+          "maxItems": 32
+        },
+        "action_decisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RecoveryActionDecision"
+          },
+          "minItems": 0,
+          "maxItems": 35
+        },
+        "emitted_diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RecoveryRecord"
+          },
+          "minItems": 0,
+          "maxItems": 768
+        },
+        "candidate_state": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AshState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "directive": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RecoveryDirective"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "failure_detail": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RecoveryFailureDetail"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "session_effects_performed": {
+          "const": false
+        },
+        "normalization_preparation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/NormalizationPreparation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "correction_observation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/CorrectionObservation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "registry_snapshot": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RegistrySnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "registry_validation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RegistryValidation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "completion_observation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/DiagnosticsCompletionReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0041",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "registry_snapshot": {
+                "type": "null"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "registry_binding": {
+                "type": "null"
+              },
+              "registry_validation": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "registry_binding": {
+                "$ref": "#/$defs/RegistrySourceBinding"
+              },
+              "registry_validation": {
+                "$ref": "#/$defs/RegistryValidation"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "route_authorization": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/FallbackRouteAuthorization"
+                  },
+                  {
+                    "properties": {
+                      "route": {
+                        "const": "AFTER_CORRECTION_FAILURE"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "correction_observation": {
+                "$ref": "#/$defs/CorrectionObservation"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "route_authorization": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/FallbackRouteAuthorization"
+                  },
+                  {
+                    "properties": {
+                      "route": {
+                        "const": "AFTER_NORMALIZATION_FAILURE"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "normalization_preparation": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/NormalizationPreparation"
+                  },
+                  {
+                    "properties": {
+                      "status": {
+                        "const": "READY"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "completion_observation": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/DiagnosticsCompletionReceipt"
+                  },
+                  {
+                    "properties": {
+                      "status": {
+                        "const": "INCOMPLETE"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "outcome": {
+                "const": "FAILURE"
+              },
+              "failure_detail": {
+                "properties": {
+                  "completion_failure_code": {
+                    "const": "COMPLETION_REJECTED"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RecoveryNoAction": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/RecoveryPacketCommon"
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "NO_ACTION"
+            },
+            "origin_validation": {
+              "properties": {
+                "status": {
+                  "const": "VERIFIED"
+                }
+              }
+            },
+            "origin_assessment": {
+              "properties": {
+                "system_state_class": {
+                  "const": "STABLE"
+                }
+              }
+            },
+            "candidate_state": {
+              "$ref": "#/$defs/AshState"
+            },
+            "directive": {
+              "type": "null"
+            },
+            "failure_detail": {
+              "type": "null"
+            },
+            "steps": {
+              "type": "array",
+              "maxItems": 0
+            },
+            "post_assessments": {
+              "type": "array",
+              "maxItems": 0
+            },
+            "policy_attempts": {
+              "type": "array",
+              "maxItems": 0
+            },
+            "normalization_preparation": {
+              "type": "null"
+            },
+            "correction_observation": {
+              "type": "null"
+            },
+            "registry_snapshot": {
+              "type": "null"
+            },
+            "route_authorization": {
+              "type": "null"
+            },
+            "action_decisions": {
+              "minItems": 1,
+              "maxItems": 1,
+              "items": {
+                "properties": {
+                  "action": {
+                    "const": "NO_ACTION"
+                  },
+                  "diagnostic": {
+                    "properties": {
+                      "outcome": {
+                        "const": "NOT_APPLICABLE"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "emitted_diagnostics": {
+              "minItems": 1,
+              "maxItems": 1,
+              "items": {
+                "properties": {
+                  "record_kind": {
+                    "const": "OPERATION_DECISION"
+                  },
+                  "payload": {
+                    "properties": {
+                      "action": {
+                        "const": "NO_ACTION"
+                      },
+                      "diagnostic": {
+                        "properties": {
+                          "outcome": {
+                            "const": "NOT_APPLICABLE"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "RecoveredValue": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/RecoveryPacketCommon"
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "RECOVERED_VALUE"
+            },
+            "origin_validation": {
+              "properties": {
+                "status": {
+                  "const": "VERIFIED"
+                }
+              }
+            },
+            "candidate_state": {
+              "$ref": "#/$defs/AshState"
+            },
+            "directive": {
+              "type": "null"
+            },
+            "failure_detail": {
+              "type": "null"
+            },
+            "post_assessments": {
+              "contains": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/LinkedPostAssessment"
+                  },
+                  {
+                    "properties": {
+                      "capture_status": {
+                        "const": "COMPLETE"
+                      },
+                      "assessment": {
+                        "allOf": [
+                          {
+                            "$ref": "#/$defs/StateAssessment"
+                          },
+                          {
+                            "properties": {
+                              "system_state_class": {
+                                "const": "STABLE"
+                              },
+                              "state_validity_diagnostic": {
+                                "properties": {
+                                  "is_valid": {
+                                    "const": true
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "minContains": 1
+            },
+            "action_decisions": {
+              "contains": {
+                "properties": {
+                  "diagnostic": {
+                    "properties": {
+                      "outcome": {
+                        "const": "RECOVERED"
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            "emitted_diagnostics": {
+              "contains": {
+                "properties": {
+                  "record_kind": {
+                    "const": "OPERATION_DECISION"
+                  },
+                  "payload": {
+                    "properties": {
+                      "diagnostic": {
+                        "properties": {
+                          "outcome": {
+                            "const": "RECOVERED"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            "origin_assessment": {
+              "properties": {
+                "system_state_class": {
+                  "enum": [
+                    "UNSTABLE",
+                    "CORRECTABLE"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "origin_assessment": {
+                "properties": {
+                  "system_state_class": {
+                    "const": "UNSTABLE"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "normalization_preparation": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/NormalizationPreparation"
+                  },
+                  {
+                    "properties": {
+                      "status": {
+                        "const": "READY"
+                      }
+                    }
+                  }
+                ]
+              },
+              "action_decisions": {
+                "contains": {
+                  "properties": {
+                    "action": {
+                      "const": "NORMALIZE"
+                    },
+                    "diagnostic": {
+                      "properties": {
+                        "outcome": {
+                          "const": "RECOVERED"
+                        }
+                      }
+                    }
+                  }
+                },
+                "minContains": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "origin_assessment": {
+                "properties": {
+                  "system_state_class": {
+                    "const": "CORRECTABLE"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "correction_observation": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/CorrectionObservation"
+                  },
+                  {
+                    "properties": {
+                      "submitted": {
+                        "$ref": "#/$defs/KnownCorrection"
+                      },
+                      "validation": {
+                        "allOf": [
+                          {
+                            "$ref": "#/$defs/CorrectionValidation"
+                          },
+                          {
+                            "properties": {
+                              "status": {
+                                "const": "VERIFIED"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "action_decisions": {
+                "contains": {
+                  "properties": {
+                    "action": {
+                      "const": "CORRECT"
+                    },
+                    "diagnostic": {
+                      "properties": {
+                        "outcome": {
+                          "const": "RECOVERED"
+                        }
+                      }
+                    }
+                  }
+                },
+                "minContains": 1
+              }
+            }
+          }
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "RecoveredFallbackValue": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/RecoveryPacketCommon"
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "RECOVERED_FALLBACK_VALUE"
+            },
+            "origin_validation": {
+              "properties": {
+                "status": {
+                  "const": "VERIFIED"
+                }
+              }
+            },
+            "candidate_state": {
+              "$ref": "#/$defs/AshState"
+            },
+            "directive": {
+              "type": "null"
+            },
+            "failure_detail": {
+              "type": "null"
+            },
+            "post_assessments": {
+              "contains": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/LinkedPostAssessment"
+                  },
+                  {
+                    "properties": {
+                      "capture_status": {
+                        "const": "COMPLETE"
+                      },
+                      "assessment": {
+                        "allOf": [
+                          {
+                            "$ref": "#/$defs/StateAssessment"
+                          },
+                          {
+                            "properties": {
+                              "system_state_class": {
+                                "const": "STABLE"
+                              },
+                              "state_validity_diagnostic": {
+                                "properties": {
+                                  "is_valid": {
+                                    "const": true
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "minContains": 1
+            },
+            "action_decisions": {
+              "contains": {
+                "properties": {
+                  "diagnostic": {
+                    "properties": {
+                      "outcome": {
+                        "const": "RECOVERED_VIA_FALLBACK"
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            "emitted_diagnostics": {
+              "contains": {
+                "properties": {
+                  "record_kind": {
+                    "const": "OPERATION_DECISION"
+                  },
+                  "payload": {
+                    "properties": {
+                      "diagnostic": {
+                        "properties": {
+                          "outcome": {
+                            "const": "RECOVERED_VIA_FALLBACK"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            "origin_assessment": {
+              "properties": {
+                "system_state_class": {
+                  "enum": [
+                    "DEGRADED",
+                    "CORRECTABLE",
+                    "UNSTABLE"
+                  ]
+                }
+              }
+            },
+            "registry_snapshot": {
+              "$ref": "#/$defs/RegistrySnapshot"
+            },
+            "registry_validation": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/RegistryValidation"
+                },
+                {
+                  "properties": {
+                    "status": {
+                      "const": "VERIFIED"
+                    }
+                  }
+                }
+              ]
+            },
+            "route_authorization": {
+              "$ref": "#/$defs/FallbackRouteAuthorization"
+            }
+          }
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "RecoveryHandoff": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/RecoveryPacketCommon"
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "HANDOFF_REQUIRED"
+            },
+            "origin_validation": {
+              "properties": {
+                "status": {
+                  "const": "VERIFIED"
+                }
+              }
+            },
+            "directive": {
+              "$ref": "#/$defs/RecoveryDirective"
+            },
+            "failure_detail": {
+              "type": "null"
+            },
+            "action_decisions": {
+              "contains": {
+                "properties": {
+                  "action": {
+                    "const": "HANDOFF"
+                  },
+                  "directive": {
+                    "$ref": "#/$defs/RecoveryDirective"
+                  }
+                }
+              },
+              "minContains": 1
+            },
+            "emitted_diagnostics": {
+              "contains": {
+                "properties": {
+                  "record_kind": {
+                    "const": "OPERATION_DECISION"
+                  },
+                  "payload": {
+                    "properties": {
+                      "action": {
+                        "const": "HANDOFF"
+                      },
+                      "directive": {
+                        "$ref": "#/$defs/RecoveryDirective"
+                      }
+                    }
+                  }
+                }
+              },
+              "minContains": 1
+            }
+          }
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "RecoveryFailure": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/RecoveryPacketCommon"
+        },
+        {
+          "properties": {
+            "outcome": {
+              "const": "FAILURE"
+            },
+            "failure_detail": {
+              "$ref": "#/$defs/RecoveryFailureDetail"
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_detail": {
+                "properties": {
+                  "failure_code": {
+                    "const": "ORIGIN_REJECTED"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "origin_validation": {
+                "properties": {
+                  "status": {
+                    "const": "REJECTED"
+                  }
+                }
+              },
+              "steps": {
+                "type": "array",
+                "maxItems": 0
+              },
+              "post_assessments": {
+                "type": "array",
+                "maxItems": 0
+              },
+              "policy_attempts": {
+                "type": "array",
+                "maxItems": 0
+              },
+              "action_decisions": {
+                "type": "array",
+                "maxItems": 0
+              },
+              "emitted_diagnostics": {
+                "type": "array",
+                "maxItems": 0
+              },
+              "directive": {
+                "type": "null"
+              },
+              "normalization_preparation": {
+                "type": "null"
+              },
+              "correction_observation": {
+                "type": "null"
+              },
+              "registry_snapshot": {
+                "type": "null"
+              },
+              "route_authorization": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ],
+      "x-ywe-requirement-id": "YWE-REQ-0041"
+    },
+    "RecoveryValuePacket": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/RecoveryNoAction"
+        },
+        {
+          "$ref": "#/$defs/RecoveredValue"
+        },
+        {
+          "$ref": "#/$defs/RecoveredFallbackValue"
+        },
+        {
+          "$ref": "#/$defs/RecoveryHandoff"
+        },
+        {
+          "$ref": "#/$defs/RecoveryFailure"
+        }
+      ]
+    }
+  }
+}

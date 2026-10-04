@@ -263,12 +263,14 @@ The [N2 recovery contract](../architecture/m3_recovery_contract.md),
 [reference Diagnostics contract](../architecture/m3_reference_diagnostics_contract.md)
 are adopted as YWE-REQ-0041 / YWE-REQ-0042 and ADR-0031 before dependent code.
 Exact immutable-value recovery, certified fallback routing, complete safe graph
-persistence, bounded completion and paired JSON/Markdown implementation now pass
-53 integration tests, 40 value/registry/schema tests and 30 Diagnostics tests
-locally, including all 131,072 actual two-codeword proofs and protected Windows
-storage/export execution. Ten Diagnostics wire controls pass. Independent review
-reproduced stale origin acknowledgments after an unconfirmed physical purge; its
-fix passed a native regression, and the complete Diagnostics rerun is underway.
+persistence, bounded completion and paired JSON/Markdown implementation are frozen
+for complete clean acceptance. Diagnostics and its wire controls pass 47 tests;
+values/registry/schema tests pass 41. A combined 252-test M3 run passed, including
+all 131,072 actual two-codeword proofs and protected Windows storage/export
+execution, before the two final guard tests and registry correction. Those final
+controls passed separately. Independent review corrections preserve actual unknown
+purge roots, fail closed on missing incidents/admission-health persistence and
+reject invalid nested source/profile values before custom equality can run.
 The three latest adopted-contract CI checkpoints passed at their exact revisions;
 full clean implementation acceptance and publication remain pending.
 Session publication, actual containment and halt, remaining canonical Diagnostics
