@@ -2,7 +2,7 @@
   "artifact_type": "governance_record_register",
   "artifact_version": "1.0.0",
   "schema_ref": "data/schemas/governance_record_register_schema.json",
-  "recorded_on": "2026-10-03",
+  "recorded_on": "2026-10-04",
   "repository_baseline": "2.0.23",
   "policy_ref": "docs/governance/governance_records_policy.md",
   "requirement_register_ref": "data/governance/normative_requirement_register.json",
@@ -1461,12 +1461,57 @@
         "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
         "core/ash_pattern_engine/canonical/verification/invariant-spec.md"
       ]
+    },
+    {
+      "id": "ADR-0031",
+      "record_type": "decision",
+      "title": "Source-bound immutable recovery and complete bounded reference Diagnostics",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Core semantics maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt the independently reviewed exact N2 contracts, policy and wire inventories before dependent reference code.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "The verified assessment and N1 normalization slices produce immutable values and in-memory capture observations. They do not implement recovery routing, protected Diagnostics persistence, completion or detailed paired exports. Canonical recovery and registry sources require complete contextual STABLE validation while local source tensions require explicit downstream decisions.",
+      "decision": "Adopt pure current-model assessment and correction validation, full source-bound certified immutable registry snapshots, explicit safety/provider/context observations, immediate actual step and fresh child-assessment confirmation, and complete primary/secondary failure retention. Adopt bounded safe Diagnostics graph projection, protected storage commits before confirmations, actual clock and health observations, and consistent paired JSON/Markdown export. Retain source entry escalation decisions, original classes and separately named after-failure routes under fixed YWE-RECOVERY-SAFETY-001 policy.",
+      "rationale": "Exact adopted domains permit review and independent tests before implementation. Retaining full proof and actual capture/completion truth prevents borrowed acknowledgments, forged classes, missing steps, unsafe persistence and provisional success. Typed handoffs preserve the boundary to the next session and mode owner.",
+      "consequences": [
+        "Existing assessment and N1 packet/API boundaries and accepted immutable M2 evidence remain preserved.",
+        "Python remains a reference oracle and testing/tool implementation; Windows storage operations belong the explicit host tool rather than Core.",
+        "N2 does not enter containment or safe halt, contact an authority or commit a recovered value to a live session. N3 and further generation/producer work remain required before M3 acceptance.",
+        "Native Development/Release Diagnostics substitution, physical crash and product release qualification remain downstream M10 work."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0041",
+        "YWE-REQ-0042",
+        "YWE-REQ-0040",
+        "YWE-REQ-0039",
+        "YWE-REQ-0010",
+        "YWE-REQ-0015",
+        "YWE-REQ-0016"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_recovery_contract.md",
+        "docs/architecture/m3_recovery_safety_policy.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/recovery-engine-contract.md",
+        "core/ash_pattern_engine/canonical/algorithms/recovery-fallback-semantics.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/recoverability-semantics.pseudo.md",
+        "core/ash_pattern_engine/canonical/registries/fallback-policy-registry.md",
+        "docs/architecture/m3_reference_diagnostics_contract.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
+        "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
+        "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
+        "docs/design-planning/Project_Record.md"
+      ]
     }
   ],
   "summary": {
-    "total_records": 47,
-    "architecture_decisions": 30,
-    "accepted_decisions": 30,
+    "total_records": 48,
+    "architecture_decisions": 31,
+    "accepted_decisions": 31,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

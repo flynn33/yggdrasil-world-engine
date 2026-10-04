@@ -146,11 +146,21 @@ also pass. Capture failures retain actual observations and confirmed diagnostics
 The frozen [normalization implementation](https://github.com/flynn33/yggdrasil-world-engine/commit/5328f018f341b80ad58cdb82f64708992ee2d6ae)
 passed all 36 repository checks and 833 unit tests from a clean, unfiltered offline
 clone. [Main CI for that exact revision](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37233715205)
-provides the GitHub execution status.
+passed for that exact revision. The subsequent [publication checkpoint CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37234268088) also passed.
 
-Next is recovery/fallback execution, containment, safe halt, full Diagnostics
-and generation semantics. M3 remains in progress; its
-five exit criteria and platform authorization are not discharged by this slice.
+The [N2 recovery contract](docs/architecture/m3_recovery_contract.md),
+[recovery safety policy](docs/architecture/m3_recovery_safety_policy.md), and
+[reference Diagnostics contract](docs/architecture/m3_reference_diagnostics_contract.md)
+are now adopted before implementation as YWE-REQ-0041 / YWE-REQ-0042 and ADR-0031.
+Their exact interfaces cover actual immutable recovery/fallback execution, complete
+safe proof retention, protected local storage and paired JSON/Markdown exports.
+Implementation and its independent acceptance checks are underway; adoption does
+not claim executed N2 recovery or Diagnostics results.
+
+Next after this slice are session admission and state commit, actual containment
+and safe halt, remaining canonical Diagnostics producers and generation semantics.
+M3 remains in progress; its five exit criteria and platform authorization remain
+unchanged.
 Platform products remain deferred until M10 acceptance.
 
 Follow the [current development record](docs/design-planning/Project_Record.md#10-checkpoint)

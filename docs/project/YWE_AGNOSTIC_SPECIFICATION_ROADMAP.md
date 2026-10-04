@@ -257,9 +257,17 @@ and 29 loader/platform-boundary tests pass. Frozen implementation
 `5328f018f341b80ad58cdb82f64708992ee2d6ae` passed all 36 checks and 833 unit tests
 from a clean, unfiltered offline clone and is published on GitHub main.
 [Main CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37233715205)
-records GitHub execution for that exact revision. Operational recovery, full Diagnostics and generation
-remain subsequent work; this checkpoint
-does not complete an M3 exit criterion.
+passed for that exact revision; [publication checkpoint CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37234268088) also passed.
+The [N2 recovery contract](../architecture/m3_recovery_contract.md),
+[fixed recovery safety policy](../architecture/m3_recovery_safety_policy.md), and
+[reference Diagnostics contract](../architecture/m3_reference_diagnostics_contract.md)
+are adopted as YWE-REQ-0041 / YWE-REQ-0042 and ADR-0031 before dependent code.
+Exact immutable-value recovery, certified fallback routing, complete safe graph
+persistence, bounded completion and paired JSON/Markdown implementation are
+underway. No N2 execution or export acceptance result is claimed at adoption.
+Session publication, actual containment and halt, remaining canonical Diagnostics
+producers and generation remain subsequent work. This checkpoint does not complete
+an M3 exit criterion.
 
 Deliverables:
 

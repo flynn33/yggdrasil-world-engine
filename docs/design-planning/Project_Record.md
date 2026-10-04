@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-24
+**Revision:** planning-25
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-21; full history remains in Git.
+**Supersedes:** planning-24; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -557,6 +557,38 @@ the remote README bytes matched the frozen implementation. Main CI run
 record's preparation. Its eventual result must be observed before claiming success.
 No operational session, recovery success, full Diagnostics or M3 gate is claimed.
 
+## 8j. N2 recovery and reference Diagnostics contract adoption
+
+The complete exact N2 interface and wire package was independently reviewed
+outside the repository before adoption. It now becomes active under
+YWE-REQ-0041, YWE-REQ-0042 and ADR-0031. The preceding 40 requirements and 47
+governance records retain their meanings and identities. The adopted documents
+include their exact machine inventories and current fifteen primary source pins
+plus the complete 32-file canonical aggregate; implementation has not yet passed
+its new independent tests or wire/export acceptance checks.
+
+Recovery retains the verified source class, current full model bindings, supplied
+correction proof or certified ordered registry snapshot, every actual computation,
+fresh contextual postassessment and separately observed capture/completion.
+Unknown evidence stops the operation; pending safety directives and the original
+primary failure survive secondary completion failure. Canonical entry escalation
+and separately named after-failure routes are explicit downstream policy decisions.
+
+Reference Diagnostics owns a bounded safe graph, actual typed clock observations,
+protected supporting/event commits before confirmation, explicit loss/health,
+and consistent detailed JSON/Markdown export. Independent external arithmetic
+checks verified the conservative byte/alias reservations. Actual Windows probes
+demonstrated direct protected D-drive child storage and preserved the failed
+C-drive ancestry and same-user rename controls. These are design/capability
+evidence, not implemented collector or native product qualification.
+
+N1 Main CI run 37233715205 and documentation checkpoint run 37234268088 are now
+observed successful at their exact revisions. The earlier 8i preparation-time
+running observation remains historical. N2 implementation starts only after this
+contract adoption is committed. Actual session admission/state publication,
+containment, safe halt and broader canonical producer coverage remain N3/later
+work; unchanged M3 acceptance and M10 platform boundaries remain in force.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -567,25 +599,24 @@ The containing commit is the authoritative save point.
 
 ## 10. Checkpoint
 
-**Current step:** Adopt the reviewed recovery and reference Diagnostics contracts,
-then implement actual recovery/fallback value execution and diagnostic export.
-M2 remains accepted; M3 remains in progress.
+**Current step:** Implement the adopted N2 recovery and reference Diagnostics
+contracts, including actual fallback execution, safe graph persistence and paired
+exports. M2 remains accepted; M3 remains in progress.
 
-**Completed:** M2's immutable foundation acceptance; M3 assessment contract
-adoption and reference values, decoding, diagnosis, contextual classification,
-retained failures, wire schema and independent exhaustive tests; first-slice
-publication and exact GitHub Main CI; N1 contract/policy adoption, actual
-normalization/reference integration, complete clean offline verification and
-GitHub publication with remote README readback.
+**Completed:** M2 immutable foundation acceptance; verified first M3 StateModel
+slice; N1 contract, normalization implementation, clean 36-check/833-test execution,
+GitHub publication and exact successful CI; N2 contract, safety policy and exact
+interface adoption with independent source/arithmetic review.
 
-**Next action:** Complete exact recovery/Diagnostics interface and wire review,
-implement the bounded reference slice and observe N1 GitHub CI. Continue through
-recovery, full Diagnostics,
-terminal guards and generation before evaluating unchanged M3 exit criteria.
+**Next action:** Execute independent N2 producer, failure, wire and export controls,
+then freeze and verify the complete repository before publishing implementation
+results. Continue through session/mode/terminal guards, remaining Diagnostics and
+generation before evaluating unchanged M3 exit criteria.
 
 **Needed from owner:** Nothing for continued authorized roadmap development.
 
-**Saved at:** This planning-24 checkpoint follows the published N1 implementation
-`5328f018f341b80ad58cdb82f64708992ee2d6ae`, whose clean offline execution passed.
-The containing committed revision records this publication and continued M3 work.
-Immutable milestone evidence and earlier checkpoint identities remain preserved.
+**Saved at:** This planning-25 checkpoint follows published N1 implementation
+`5328f018f341b80ad58cdb82f64708992ee2d6ae` and publication checkpoint
+`4c01af5b01b4690da5cd2a97d5e6025e97a48e1c`. The containing committed revision
+adopts N2 before its dependent code. Immutable milestone evidence and earlier
+checkpoint identities remain preserved.

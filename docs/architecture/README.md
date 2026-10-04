@@ -116,6 +116,9 @@ baseline in view:
 - `m3_state_assessment_contract.md` -- Adopted immutable, profile-bound StateModel diagnosis and contextual assessment contract; normalization, runtime recovery and complete Diagnostics remain subsequent M3 work.
 - `m3_normalization_contract.md` -- Adopted N1 pure planning, complete-target proof validation, actual value normalization and immediate retained diagnostics; operational recovery and session publication remain subsequent work.
 - `m3_normalization_policy.md` -- Fixed identity-first and otherwise complete full-signature target ordering, explicitly owned by downstream YWE.
+- `m3_recovery_contract.md` -- Adopted N2 immutable recovery, owned origin/correction validation, certified registry routes and retained actual diagnostics; implementation is in progress.
+- `m3_recovery_safety_policy.md` -- Fixed downstream source-tension decisions and typed containment, authority and halt handoff boundaries.
+- `m3_reference_diagnostics_contract.md` -- Adopted exact safe graph, storage, clock, completion, bounded retention and paired JSON/Markdown contract; reference implementation is in progress.
 
 ## Core Engines
 

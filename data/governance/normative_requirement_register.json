@@ -9,7 +9,7 @@
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0041",
+    "next_available_id": "YWE-REQ-0043",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -941,13 +941,68 @@
         "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
         "core/ash_pattern_engine/canonical/verification/invariant-spec.md"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0041",
+      "title": "Verified immutable recovery and source-bound fallback execution",
+      "normative_statement": "RecoveryEngine MUST validate the complete original assessment under the current model before capture or effects, retain actual original class and source bindings, and use only explicit verified normalization, supplied known correction or deterministically ordered certified registry entries. Each actual value or predicate step and fresh full postassessment MUST receive matching capture confirmation before further effects or recovered-value certification. Every failure MUST retain actual observations and pending directives. N2 handoffs MUST NOT claim mode entry, authority contact or live session publication.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "docs/architecture/m3_recovery_contract.md",
+        "docs/design-planning/Project_Record.md"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M3",
+      "owner_role": "Core semantics maintainers",
+      "decision_refs": [
+        "ADR-0031"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_recovery_contract.md",
+        "docs/architecture/m3_recovery_safety_policy.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/recovery-engine-contract.md",
+        "core/ash_pattern_engine/canonical/algorithms/recovery-fallback-semantics.pseudo.md",
+        "core/ash_pattern_engine/canonical/core/recoverability-semantics.pseudo.md",
+        "core/ash_pattern_engine/canonical/registries/fallback-policy-registry.md"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0042",
+      "title": "Bounded reference Diagnostics with protected safe graph and paired export",
+      "normative_statement": "Reference Diagnostics MUST validate exact producer records, admit bounded operations, persist their complete safe supporting graph before confirmation, and retain actual completion, loss, health and source availability. It MUST redact untrusted data before persistence and independently validate safe output before paired JSON/Markdown publication. Clock and protected storage truth MUST come from explicit typed ports. Unknown capture, completion or storage MUST NOT be reported as confirmed. Reference qualification MUST NOT imply native release substitution or complete canonical producer coverage.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "docs/architecture/m3_reference_diagnostics_contract.md",
+        "docs/design-planning/Project_Record.md"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M3",
+      "owner_role": "Core semantics maintainers",
+      "decision_refs": [
+        "ADR-0031"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_reference_diagnostics_contract.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
+        "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
+        "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
+        "docs/design-planning/Project_Record.md"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 40,
-    "active": 40,
+    "total_requirements": 42,
+    "active": 42,
     "proposed": 0,
     "terminal": 0,
-    "next_identifier": "YWE-REQ-0041"
+    "next_identifier": "YWE-REQ-0043"
   }
 }
