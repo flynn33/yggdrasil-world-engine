@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-17
+**Revision:** planning-18
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-16; full history remains in Git.
+**Supersedes:** planning-17; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -306,6 +306,40 @@ requirement traceability, lifecycle categories, method-specific validation and
 durable acceptance remain outstanding. No M2 acceptance or M3 activation is
 recorded. Development continues after the verification/publication checkpoint.
 
+## 8b. Executed descriptor and rejection checkpoint
+
+Implementation `358f4ad1a9db419ed9cc91b96c1f309f49bf946f` includes the descriptor,
+ability, source-bound rejection and protected representation changes, plus the
+exact Phase10 validation-tool allowlist correction. Both implementation commits
+were authored and committed by Jim Daley under the repository owner's identity.
+
+A fresh local clone passed the canonical offline runner: all 33 checks passed,
+with zero blocking failures or advisories, and all 528 unit tests passed in
+218.456 seconds. The checkout was clean before and after execution, and the
+report captured its completed final state. The external runtime was Python
+3.12.10, jsonschema 4.25.1, PyYAML 6.0.3 and referencing 0.37.0. The separate
+non-destructive diff check against `faec4b293160b4fb049ddd771e74ef1c73019d34`
+passed with 25 modifications, 15 additions, and zero deletions or renames.
+
+Executed reports and logs are preserved outside the repository in
+`C:/Users/james/AppData/Local/Temp/ywe-m2-descriptor-evidence-20261004-yalx_42f`.
+The earlier failed clone evidence is preserved separately; it is not acceptance
+evidence. Independent review passed all 24 original scenarios and rejected all
+18 altered-catalog probes, including both composed source-consumption escapes.
+
+The strict M2 report accepted the clean execution evidence for C6. C1, C2, C4
+and C5 also passed. C3 still reports 18 uncovered source roots: 432 of 450
+classified fixture units have successful exact bindings. All 24 designated
+rejection units have executed intended witnesses, with 179 schema rejection
+bindings and 24 source-bound scenarios. D4 still reports 20 unbound YAML paths;
+D5 lacks governed positive identifiers; D6 lacks executable lifecycle categories;
+D7 and D8 remain unverified. The overall readiness result remains false.
+
+The owner-authorized push succeeded, and remote `main` was read back at the exact
+implementation revision. GitHub reported the authorized pull-request and verified
+signature rule bypass. M2 remains active, M3 remains planned, and development
+continues with the remaining format bindings and acceptance evaluators.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -330,8 +364,9 @@ milestones only after verified M2 closure.
 
 **Needed from owner:** Nothing for continued M2 engineering.
 
-**Saved at:** `m2/descriptor-and-rejection-conformance`, in the commit containing this planning-17 record. The latest
-validated implementation is `b0b0a6934fbc96f050d0cd656985a790d984c206`. The prior
+**Saved at:** `main`, in the commit containing this planning-18 record. The latest
+validated implementation is `358f4ad1a9db419ed9cc91b96c1f309f49bf946f`. The prior
+validated implementation is `b0b0a6934fbc96f050d0cd656985a790d984c206`; the preceding
 validated implementation is `ab1080b1c1b60a9e379d5cd25f52db2ec418a729`; the earlier
 implementation is `f35911a4a77c93dc6fe32bb2e396c60bcf01fbc2`, with its published
 verification checkpoint at `88406268d1e3ef24c15e132fa49e9be7440319cf`.
