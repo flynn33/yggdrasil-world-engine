@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-20
+**Revision:** planning-21
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-19; full history remains in Git.
+**Supersedes:** planning-20; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -13,10 +13,10 @@
 |---|---|
 | Product / owner | Yggdrasil World Engine / Flynn, repository owner `flynn33` |
 | Product purpose | Platform-neutral, strictly object-oriented and modular engine specification |
-| Accepted milestones | M0 and M1 |
-| Active milestone | M2 — Build the canonical contract and schema foundation |
-| Next milestone | M3 remains planned and is not active |
-| M2 acceptance | Not recorded; exit criteria are not yet satisfied |
+| Accepted milestones | M0, M1 and M2 |
+| Active milestone | M3 — Complete core deterministic semantics and the reference oracle |
+| Next milestone | M4 remains planned; its dependency is M3 acceptance |
+| M2 acceptance | Complete; immutable evidence records all six exit criteria and eight deliverables |
 | Platform products | Deferred until M10 acceptance |
 | Publication | Unreleased; no GitHub Release objects exist as verified September 20, 2026 |
 
@@ -61,30 +61,37 @@ evidence establishes:
 | Declared schemas missing identifiers | 0 |
 | Annotation-only schema documents | 0 |
 | Schema-named JSON lacking declarations | 0 |
-| Unbound JSON examples | 0 in the legacy debt subledger; strict classified-fixture coverage remains incomplete |
-| Fixture catalog | 505 registered bindings and 179 declared intended schema rejections; source-bound rejection scenarios are checked separately |
-| Offline resolver | Explicit catalog covers 205 declared schemas; unknown resources remain denied |
-| YAML structural schemas | Module capability manifests, pattern archetype records, and two descriptor grammars covered; other YAML domains remain outstanding |
-| Roadmap-derived M2 acceptance gate | Strict readiness evaluator maps six criteria and eight deliverables; method-specific and durable acceptance evaluators remain unverified |
-| Durable M2 acceptance report | Not present |
-| M2 milestone evidence | Empty in the roadmap |
-| M3 activation | Deferred until verified M2 closure |
+| Unbound JSON examples | 0; strict classified structured-fixture coverage passed |
+| Fixture catalog | 672 exact bindings and 246 intended schema or semantic rejections; reviewed source-bound scenarios checked separately |
+| Offline resolver | Explicit catalog covers 212 declared schemas; unknown resources remain denied |
+| YAML structural schemas | All classified YAML fixture domains have exact format bindings; registered descriptor semantic grammars execute |
+| Roadmap-derived M2 acceptance gate | All six criteria and eight deliverables passed with completed clean offline execution and historical replay |
+| Durable M2 acceptance report | Immutable `data/governance/m2_acceptance_evidence.json` and `docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md` |
+| M2 milestone evidence | Exact immutable evidence pair referenced in the roadmap |
+| M3 activation | Active after verified M2 closure; no M3 acceptance or runtime completion claimed |
 
 The earlier report that all M2 technical work was complete was not supported by the live
 repository and is superseded. The owner's subsequent acceptance statement is not used as
 milestone evidence because the stated exit conditions were not actually satisfied.
 
-## 5. Remaining M2 obligations
+## 5. Active M3 work and preserved M2 controls
 
-1. Bind all remaining JSON examples to exact schemas, instance pointers, expected
-   outcomes, and intended requirement or error identifiers.
-2. Complete the fixture catalog across positive, boundary, reject, recovery, replay, and
-   migration coverage.
-3. Provide a roadmap-derived M2 acceptance gate that verifies meta-schema validity,
-   offline references, fixture bindings, intended reject reasons, and empty M2 schema debt.
-4. Produce durable acceptance evidence and run the consolidated checks and M2 gate from a
-   clean offline checkout.
-5. Only after those checks pass, record M2 acceptance and activate M3.
+M2's six criteria and eight deliverables are discharged by the exact immutable
+acceptance pair and its executed historical evaluator. Original failed candidate
+reports and earlier partial checkpoints below remain historical evidence.
+
+The first bounded M3 slice reviews construction-valid immutable ASH values,
+explicit validity profiles, complete diagnostics, source-ordered contextual
+classification and their compatibility boundary. Adopt reviewed contracts and
+register requirement/decision ownership before implementation. Diagnosis-only
+legacy calls must not invent correction/fallback or lifecycle facts. Preserve all
+512 state identities, fixed codewords, aliases and pinned source history.
+
+Subsequent M3 work includes actual normalization, recovery, fallback, containment,
+safe halt, deterministic generation, serialization, lifecycle and resource bounds.
+Maintain the M2 catalogs, intended rejection correspondence, permanent migration
+proofs and immutable acceptance verifier as new contracts are added. The five M3
+exit criteria remain outstanding; platform products are deferred through M10.
 
 ## 6. Fixture foundation verification
 
@@ -446,6 +453,26 @@ under three hash seeds. It fails against the original implementation and passes
 against this correction. A new frozen full execution and formation are required;
 the previous implementation's report cannot discharge the corrected revision.
 
+## 8g. Durable M2 closure and M3 activation
+
+The immutable M2 record identifies the actual frozen implementation revision,
+completed clean offline repository report, exact source digest and evaluated
+formation judgments. The first accepted introduction changes only the fixed
+record/document pair; subsequent status changes preserve both files verbatim.
+The historical evaluator independently replays the exact implementation snapshot
+and all concrete validation operation/method results. The strict gate passed all
+six criteria and eight deliverables before this status transition.
+
+M2 acceptance covers the contract/schema validation foundation. Its recovery,
+replay and migration operations exercise validation tools; they do not establish
+future runtime recovery, persistence or multiplayer behavior. M3 is activated with
+its existing scope and five unchanged exit criteria. No release or platform
+product authorization follows from M2 acceptance.
+
+The referenced immutable record and document are the exact source for executed
+suite counts, tool versions, implementation identity and acceptance judgments.
+No later dirty-tree or selected-check report replaces that original evidence.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -456,26 +483,22 @@ The containing commit is the authoritative save point.
 
 ## 10. Checkpoint
 
-**Current step:** Frozen clean-checkout M2 verification and immutable acceptance
-evidence introduction. All eight methods and reviewed rejection correspondence
-are integrated; final acceptance remains outstanding.
+**Current step:** M3 contract review and first bounded StateModel/reference-oracle
+slice. M2 is accepted with its exact immutable evidence pair.
 
-**Completed:** Executable JSON fixture foundation and offline resolver, compatible
-Phase 12 representations, current development-policy intake, and initial YAML
-module-manifest and pattern-archetype structural schemas and bindings, original
-example bindings, and strict readiness/execution reports.
+**Completed:** M2's schema profile/offline resolver, classified format bindings,
+governed intended rejections, source-bound validation operations, eight executed
+methods, clean offline execution and durable historical acceptance.
 
-**Next action:** Execute the complete frozen clean suite, record immutable
-acceptance evidence, and run the complete final gate. Continue to later
-milestones only after verified M2 closure.
+**Next action:** Adopt the independently reviewed StateModel contract, register its
+requirement/decision ownership and implement representation, diagnostics and
+contextual classification with source-derived exhaustive cases. Then continue
+through the remaining M3 semantics and unchanged acceptance criteria.
 
-**Needed from owner:** Nothing for continued M2 engineering.
+**Needed from owner:** Nothing for continued authorized roadmap development.
 
-**Saved at:** `main`, at the published implementation
-`7c17397e4844960430832a9c7c3745237dcf6df1`; this planning-20 correction is a
-candidate until its new clean execution passes. The previous
-validated implementation is `358f4ad1a9db419ed9cc91b96c1f309f49bf946f`. The prior
-validated implementation is `b0b0a6934fbc96f050d0cd656985a790d984c206`; the preceding
-validated implementation is `ab1080b1c1b60a9e379d5cd25f52db2ec418a729`; the earlier
-implementation is `f35911a4a77c93dc6fe32bb2e396c60bcf01fbc2`, with its published
-verification checkpoint at `88406268d1e3ef24c15e132fa49e9be7440319cf`.
+**Saved at:** This planning-21 status transition follows the verified first M2
+acceptance introduction; the containing committed revision is its authoritative
+save point. The immutable acceptance record identifies the executed implementation,
+and historical verification identifies the exact introduction. Earlier published
+checkpoint identities remain preserved in this record and Git history.

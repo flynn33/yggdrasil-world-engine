@@ -47,8 +47,8 @@ Every subsystem is measured on five independent dimensions:
 |---|---|---|---|---|
 | M0 | 🟢 | `complete` | None | One truthful repository baseline |
 | M1 | 🟢 | `complete` | M0 | Normalized canon, terminology, and governance |
-| M2 | 🟡 | `in_progress` | M1 | Executable contracts, schemas, and fixtures |
-| M3 | ⚪ | `planned` | M2 | Complete deterministic core semantics |
+| M2 | 🟢 | `complete` | M1 | Executable contracts, schemas, and fixtures |
+| M3 | 🟡 | `in_progress` | M2 | Complete deterministic core semantics |
 | M4 | ⚪ | `planned` | M3 | Persistence, branching, and multiplayer protocols |
 | M5 | ⚪ | `planned` | M3, M4 | Complete content-generation engines |
 | M6 | ⚪ | `planned` | M4, M5 | Complete abilities, companions, rewards, and prior phases |
@@ -115,8 +115,8 @@ Legend: `complete` · `partial` · `not_started` · `not_applicable` (N/A) · `n
 
 | Area | Current maturity | Remaining work |
 |---|---|---|
-| Repository truth | M1 authority closure accepted | Maintain M0 and M1 truth controls while M2 builds executable contracts, schemas, and fixtures |
-| Schema system | M2 in progress | JSON Schema profile and protected-record migrations exist; 13 examples remain unbound; an executable fixture catalog, offline resolver, and strict readiness report exist, while full fixture coverage, final acceptance evaluators, and durable acceptance evidence remain outstanding |
+| Repository truth | M2 foundation accepted | Maintain M0, M1 and immutable M2 evidence while M3 completes deterministic Core semantics |
+| Schema system | M2 foundation accepted | Preserve exact classified-fixture bindings, offline resolution, governed migration proofs, intended rejection approvals and durable acceptance; add schemas and executable semantic evidence as later milestone contracts are completed |
 | ASH reference oracle | Partial | Context classification, recovery, fallback, containment, safe halt, topology, axioms, and emitter traceability |
 | Core engine semantics | Partial | Deterministic algorithms, failure modes, persistence, interfaces, and complete conformance |
 | Player origin and perception persistence | Placeholder-backed | Replace placeholders with normative state and lifecycle contracts |
@@ -205,10 +205,13 @@ Exit criteria:
 
 ## M2 — Build the canonical contract and schema foundation
 
-Status: `in_progress`
+Status: `complete`
 Dependencies: M1
 Indicative effort: 4–6 weeks
 Owner role: Contract and schema maintainers
+
+Acceptance evidence: `data/governance/m2_acceptance_evidence.json` and
+`docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md`
 
 Deliverables:
 
@@ -237,7 +240,7 @@ Exit criteria:
 
 ## M3 — Complete core deterministic semantics and the reference oracle
 
-Status: `planned`
+Status: `in_progress`
 Dependencies: M2
 Indicative effort: 5–7 weeks
 Owner role: Core semantics maintainers

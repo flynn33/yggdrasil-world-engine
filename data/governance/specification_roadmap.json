@@ -10,7 +10,7 @@
     "verified_on": "2026-09-20",
     "tag_policy": "Existing v2.0.x Git tags, including historical annotations that use release wording, identify repository baselines; they are not published releases."
   },
-  "current_milestone": "M2",
+  "current_milestone": "M3",
   "status_vocabulary": [
     "complete",
     "in_progress",
@@ -130,9 +130,9 @@
       "required_markers": [
         "| Agnostic specification release readiness | Not ready |",
         "| Published releases | None; no GitHub Release objects or agnostic specification releases have been published |",
-        "| Current roadmap milestone | M2 - Build the canonical contract and schema foundation (in progress; acceptance not recorded) |",
-        "| M2 schema-quality debt | The four legacy schema-debt categories are empty; strict milestone acceptance remains outstanding |",
-        "| M2 acceptance evidence | Not recorded; exact format bindings, validation operations and all eight methods execute; clean final execution and durable acceptance remain required |",
+        "| Current roadmap milestone | M3 - Complete core deterministic semantics and the reference oracle (in progress) |",
+        "| M2 schema-quality debt | Empty; M2 foundation acceptance recorded |",
+        "| M2 acceptance evidence | Complete; immutable evidence in `data/governance/m2_acceptance_evidence.json` and `docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md` |",
         "| Platform product work | Deferred through M10 |"
       ]
     },
@@ -437,10 +437,12 @@
         "data/validation/m2_json_contract_profile.json",
         "data/validation/m2_contract_migration_manifest.json",
         "data/validation/schema_quality_baseline.json",
-        "data/validation/repository_quality_debt_inventory.json"
+        "data/validation/repository_quality_debt_inventory.json",
+        "data/governance/m2_acceptance_evidence.json",
+        "docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md"
       ],
       "open_work": [
-        "Bind the remaining 13 JSON examples, complete the M2 fixture catalog and roadmap-derived acceptance evidence, and run the clean offline M2 acceptance gate."
+        "Preserve the accepted M2 contract/schema foundation, exact fixture bindings, intended rejection approvals and immutable acceptance evidence while completing later milestone semantic and whole-system conformance and M10 publication controls."
       ]
     }
   ],
@@ -511,7 +513,7 @@
     {
       "id": "M2",
       "title": "Build the canonical contract and schema foundation",
-      "status": "in_progress",
+      "status": "complete",
       "dependencies": [
         "M1"
       ],
@@ -520,7 +522,10 @@
         "maximum": 6
       },
       "owner_role": "Contract and schema maintainers",
-      "acceptance_evidence": [],
+      "acceptance_evidence": [
+        "data/governance/m2_acceptance_evidence.json",
+        "docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md"
+      ],
       "deliverables": [
         "One JSON Schema 2020-12 profile, URI namespace, catalog, and offline resolver.",
         "Convert descriptive schema-named records into schemas or rename them by their actual role.",
@@ -543,7 +548,7 @@
     {
       "id": "M3",
       "title": "Complete core deterministic semantics and the reference oracle",
-      "status": "planned",
+      "status": "in_progress",
       "dependencies": [
         "M2"
       ],

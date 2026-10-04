@@ -74,9 +74,9 @@ products remain deferred until the M10 specification gate is accepted.
 | Indicator | Current state |
 |---|---|
 | Repository baseline | `v2.0.23` |
-| Current milestone | 🟡 `M2` — Build the canonical contract and schema foundation (`in_progress`) |
-| Accepted milestone gates | `2 of 11` |
-| Milestone queue | `1` in progress; `8` planned; `0` blocked; `0` deferred |
+| Current milestone | 🟡 `M3` — Complete core deterministic semantics and the reference oracle (`in_progress`) |
+| Accepted milestone gates | `3 of 11` |
+| Milestone queue | `1` in progress; `7` planned; `0` blocked; `0` deferred |
 | Release-ready subsystems | `1 of 15` |
 | Specification publication | `unreleased`; `0` GitHub Release objects; `0` agnostic specification releases (verified `2026-09-20`) |
 | Platform product work | ⏸️ `deferred`; authorization requires `M10` acceptance |
@@ -87,8 +87,8 @@ Milestone indicators: 🟢 `complete` · 🟡 `in_progress` · ⚪ `planned` · 
 |---|:---:|---|---|---|
 | M0 | 🟢 | `complete` | None | Establish one truthful baseline |
 | M1 | 🟢 | `complete` | M0 | Normalize canon terminology and governance |
-| M2 | 🟡 | `in_progress` | M1 | Build the canonical contract and schema foundation |
-| M3 | ⚪ | `planned` | M2 | Complete core deterministic semantics and the reference oracle |
+| M2 | 🟢 | `complete` | M1 | Build the canonical contract and schema foundation |
+| M3 | 🟡 | `in_progress` | M2 | Complete core deterministic semantics and the reference oracle |
 | M4 | ⚪ | `planned` | M3 | Complete state persistence branching and multiplayer |
 | M5 | ⚪ | `planned` | M3, M4 | Finish narrative and content generation engines |
 | M6 | ⚪ | `planned` | M4, M5 | Close ability companion reward and vertical slice phases |
@@ -117,25 +117,23 @@ See the roadmap inventories of [completed or verified foundations](docs/project/
 
 ### Development checkpoint — 2026-10-04
 
-M2 is in progress. The remaining preview and YAML document formats, governed
-positive fixture identities, four executed validation operations, and eight
-executed validation methods are integrated. Rejection coverage now requires a
-separate reviewed descriptor-to-execution approval, closing the demonstrated
-wrong-requirement substitutions. Original examples and pinned source authority
-remain preserved.
+M2 is complete. Its immutable [acceptance record](data/governance/m2_acceptance_evidence.json)
+and [acceptance document](docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md)
+bind the frozen implementation, completed clean offline repository execution,
+all six exit criteria, and all eight deliverables. Historical verification
+independently replays the implementation and preserves the first accepted evidence
+pair. The schema foundation includes exact fixture bindings, reviewed intended
+rejections, validation operations, and all eight executed validation methods.
 
-The published implementation passed a clean offline run of all 36 applicable
-repository checks and 692 unit tests, plus GitHub Main CI. Its durable-evidence
-rehearsal exposed reference-case ordering that varied between Python processes.
-The evidence producer now orders those cases deterministically, preserving every
-duplicate and the exact historical comparison. This correction requires a new
-clean run and verified immutable introduction before M2 acceptance. M3 remains
-planned.
+M3 is now active. The first bounded slice reviews immutable ASH values,
+profile-owned admissibility, complete diagnostics and context-aware classification
+against pinned source authority. Runtime recovery, fallback, containment, safe halt,
+complete generation semantics and the remaining M3 exit criteria still require
+implementation and evidence. Platform products remain deferred until M10 acceptance.
 
 Follow the [current development record](docs/design-planning/Project_Record.md#10-checkpoint)
-and [M2 acceptance contract](docs/project/m2_fixture_validation.md#m2-readiness-evaluation)
-for the remaining gate work. This checkpoint will advance with verified work
-and milestone acceptance on GitHub.
+and [M3 roadmap](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#m3--complete-core-deterministic-semantics-and-the-reference-oracle)
+for the active work and its acceptance boundaries.
 
 Current repository baseline. Existing `v2.0.x` Git tags, including historical
 annotations that use release wording, identify baselines only; no GitHub Release
