@@ -1,0 +1,645 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/pattern_archetype_registry_schema.json",
+  "title": "Pattern Archetype Registry Structural Contract",
+  "description": "Expresses declared YAML record structure for the optional YWE extension profile. Hint fields, reference resolution, relationship coherence, lawful combination, and generation behavior require their owning semantic contracts.",
+  "x-ywe-requirement-id": "YWE-REQ-0026",
+  "x-ywe-source-ref": "data/pattern_archetypes/ash_pattern_registry_schema.yaml",
+  "$defs": {
+    "ArchetypeRecord": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "family": {
+          "type": "string",
+          "enum": [
+            "character",
+            "quest",
+            "region",
+            "faction",
+            "transformation",
+            "event",
+            "cluster"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "symbolic_function": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "truth_modes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "shadow_modes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "realm_bias": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "divine_core",
+              "celestial",
+              "causal",
+              "mental",
+              "astral",
+              "etheric",
+              "physical",
+              "shadow",
+              "void"
+            ]
+          }
+        },
+        "wolf_bias": {
+          "type": "object",
+          "properties": {
+            "white": {
+              "type": "number"
+            },
+            "dark": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "white",
+            "dark"
+          ]
+        },
+        "player_phase_bias": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "mortal_unknowing",
+              "first_stirrings",
+              "memory_recovery",
+              "identity_conflict",
+              "chosen_becoming",
+              "world_actor"
+            ]
+          }
+        },
+        "compatible_with": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "friction_with": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contradicts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "downstream_affinities": {
+          "type": "object",
+          "properties": {
+            "npc": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "quest": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "myth": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "prophecy": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "artifact": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "creature": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "npc",
+            "quest",
+            "myth",
+            "prophecy",
+            "artifact",
+            "creature"
+          ]
+        },
+        "manifestation_hints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "invariant_notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "canonical",
+            "provisional",
+            "deprecated"
+          ]
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "id",
+        "family",
+        "name",
+        "summary",
+        "symbolic_function",
+        "truth_modes",
+        "shadow_modes",
+        "realm_bias",
+        "wolf_bias",
+        "player_phase_bias",
+        "compatible_with",
+        "friction_with",
+        "contradicts",
+        "downstream_affinities",
+        "manifestation_hints",
+        "invariant_notes",
+        "status"
+      ],
+      "title": "Archetype Record",
+      "x-ywe-source-ref": "data/pattern_archetypes/ash_pattern_registry_schema.yaml#/schema/ArchetypeRecord",
+      "x-ywe-requirement-id": "YWE-REQ-0026"
+    },
+    "ClusterRecord": {
+      "title": "Cluster Record",
+      "x-ywe-source-ref": "data/pattern_archetypes/ash_pattern_registry_schema.yaml#/schema/ClusterRecord",
+      "x-ywe-requirement-id": "YWE-REQ-0026",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ArchetypeRecord"
+        },
+        {
+          "type": "object",
+          "required": [
+            "members",
+            "combined_summary",
+            "lawful_basis",
+            "contradiction_risk",
+            "stability_mode"
+          ],
+          "properties": {
+            "members": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 2
+            },
+            "combined_summary": {
+              "type": "string"
+            },
+            "lawful_basis": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "contradiction_risk": {
+              "type": "string"
+            },
+            "stability_mode": {
+              "type": "string",
+              "enum": [
+                "stable",
+                "unstable",
+                "cyclical",
+                "threshold_based"
+              ]
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "Registry": {
+      "title": "Archetype Registry",
+      "x-ywe-source-ref": "data/pattern_archetypes/ash_pattern_registry_schema.yaml#/registry_shape",
+      "x-ywe-requirement-id": "YWE-REQ-0026",
+      "type": "object",
+      "properties": {
+        "registry_version": {
+          "type": "string"
+        },
+        "families": {
+          "type": "object",
+          "properties": {
+            "character": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ArchetypeRecord"
+              }
+            },
+            "quest": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ArchetypeRecord"
+              }
+            },
+            "region": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ArchetypeRecord"
+              }
+            },
+            "faction": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ArchetypeRecord"
+              }
+            },
+            "transformation": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ArchetypeRecord"
+              }
+            },
+            "event": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ArchetypeRecord"
+              }
+            },
+            "cluster": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ClusterRecord"
+              }
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "FamilyAuthority": {
+      "type": "object",
+      "required": [
+        "prose_spec",
+        "schema_ref",
+        "downstream_contract"
+      ],
+      "properties": {
+        "prose_spec": {
+          "const": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md"
+        },
+        "schema_ref": {
+          "const": "data/pattern_archetypes/ash_pattern_registry_schema.yaml"
+        },
+        "downstream_contract": {
+          "const": "docs/architecture/ash_downstream_contract.md"
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-source-ref": "scripts/github/Test-SchemaIntegrity.ps1#Test-AshRegistryFile",
+      "x-ywe-requirement-id": "YWE-REQ-0026"
+    },
+    "FamilyDocument": {
+      "type": "object",
+      "required": [
+        "registry_version",
+        "status",
+        "authority",
+        "family",
+        "records"
+      ],
+      "properties": {
+        "registry_version": {
+          "const": "1.0"
+        },
+        "status": {
+          "const": "canonical"
+        },
+        "authority": {
+          "$ref": "#/$defs/FamilyAuthority"
+        },
+        "family": {
+          "type": "string",
+          "enum": [
+            "character",
+            "quest",
+            "region",
+            "faction",
+            "transformation",
+            "event",
+            "cluster"
+          ]
+        },
+        "records": {
+          "type": "array",
+          "minItems": 1
+        }
+      },
+      "additionalProperties": true,
+      "x-ywe-source-ref": "scripts/github/Test-SchemaIntegrity.ps1#Test-AshRegistryFile",
+      "x-ywe-requirement-id": "YWE-REQ-0026"
+    },
+    "CharacterFamilyDocument": {
+      "title": "Character Family Document",
+      "x-ywe-source-ref": "scripts/github/Test-SchemaIntegrity.ps1#Test-AshRegistryFile",
+      "x-ywe-requirement-id": "YWE-REQ-0026",
+      "allOf": [
+        {
+          "$ref": "#/$defs/FamilyDocument"
+        },
+        {
+          "properties": {
+            "family": {
+              "const": "character"
+            },
+            "records": {
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/ArchetypeRecord"
+                  },
+                  {
+                    "properties": {
+                      "family": {
+                        "const": "character"
+                      },
+                      "id": {
+                        "type": "string",
+                        "pattern": "^char_[a-z0-9_]+$"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "QuestFamilyDocument": {
+      "title": "Quest Family Document",
+      "x-ywe-source-ref": "scripts/github/Test-SchemaIntegrity.ps1#Test-AshRegistryFile",
+      "x-ywe-requirement-id": "YWE-REQ-0026",
+      "allOf": [
+        {
+          "$ref": "#/$defs/FamilyDocument"
+        },
+        {
+          "properties": {
+            "family": {
+              "const": "quest"
+            },
+            "records": {
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/ArchetypeRecord"
+                  },
+                  {
+                    "properties": {
+                      "family": {
+                        "const": "quest"
+                      },
+                      "id": {
+                        "type": "string",
+                        "pattern": "^quest_[a-z0-9_]+$"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RegionFamilyDocument": {
+      "title": "Region Family Document",
+      "x-ywe-source-ref": "scripts/github/Test-SchemaIntegrity.ps1#Test-AshRegistryFile",
+      "x-ywe-requirement-id": "YWE-REQ-0026",
+      "allOf": [
+        {
+          "$ref": "#/$defs/FamilyDocument"
+        },
+        {
+          "properties": {
+            "family": {
+              "const": "region"
+            },
+            "records": {
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/ArchetypeRecord"
+                  },
+                  {
+                    "properties": {
+                      "family": {
+                        "const": "region"
+                      },
+                      "id": {
+                        "type": "string",
+                        "pattern": "^region_[a-z0-9_]+$"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "FactionFamilyDocument": {
+      "title": "Faction Family Document",
+      "x-ywe-source-ref": "scripts/github/Test-SchemaIntegrity.ps1#Test-AshRegistryFile",
+      "x-ywe-requirement-id": "YWE-REQ-0026",
+      "allOf": [
+        {
+          "$ref": "#/$defs/FamilyDocument"
+        },
+        {
+          "properties": {
+            "family": {
+              "const": "faction"
+            },
+            "records": {
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/ArchetypeRecord"
+                  },
+                  {
+                    "properties": {
+                      "family": {
+                        "const": "faction"
+                      },
+                      "id": {
+                        "type": "string",
+                        "pattern": "^faction_[a-z0-9_]+$"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "TransformationFamilyDocument": {
+      "title": "Transformation Family Document",
+      "x-ywe-source-ref": "scripts/github/Test-SchemaIntegrity.ps1#Test-AshRegistryFile",
+      "x-ywe-requirement-id": "YWE-REQ-0026",
+      "allOf": [
+        {
+          "$ref": "#/$defs/FamilyDocument"
+        },
+        {
+          "properties": {
+            "family": {
+              "const": "transformation"
+            },
+            "records": {
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/ArchetypeRecord"
+                  },
+                  {
+                    "properties": {
+                      "family": {
+                        "const": "transformation"
+                      },
+                      "id": {
+                        "type": "string",
+                        "pattern": "^transformation_[a-z0-9_]+$"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "EventFamilyDocument": {
+      "title": "Event Family Document",
+      "x-ywe-source-ref": "scripts/github/Test-SchemaIntegrity.ps1#Test-AshRegistryFile",
+      "x-ywe-requirement-id": "YWE-REQ-0026",
+      "allOf": [
+        {
+          "$ref": "#/$defs/FamilyDocument"
+        },
+        {
+          "properties": {
+            "family": {
+              "const": "event"
+            },
+            "records": {
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/ArchetypeRecord"
+                  },
+                  {
+                    "properties": {
+                      "family": {
+                        "const": "event"
+                      },
+                      "id": {
+                        "type": "string",
+                        "pattern": "^event_[a-z0-9_]+$"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ClusterFamilyDocument": {
+      "title": "Cluster Family Document",
+      "x-ywe-source-ref": "scripts/github/Test-SchemaIntegrity.ps1#Test-AshRegistryFile",
+      "x-ywe-requirement-id": "YWE-REQ-0026",
+      "allOf": [
+        {
+          "$ref": "#/$defs/FamilyDocument"
+        },
+        {
+          "properties": {
+            "family": {
+              "const": "cluster"
+            },
+            "records": {
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/ClusterRecord"
+                  },
+                  {
+                    "properties": {
+                      "family": {
+                        "const": "cluster"
+                      },
+                      "id": {
+                        "type": "string",
+                        "pattern": "^cluster_[a-z0-9_]+$"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$ref": "#/$defs/Registry"
+}

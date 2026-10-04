@@ -116,7 +116,7 @@ Legend: `complete` · `partial` · `not_started` · `not_applicable` (N/A) · `n
 | Area | Current maturity | Remaining work |
 |---|---|---|
 | Repository truth | M1 authority closure accepted | Maintain M0 and M1 truth controls while M2 builds executable contracts, schemas, and fixtures |
-| Schema system | M2 in progress | JSON Schema profile and protected-record migrations exist; 19 examples remain unbound; an initial executable fixture catalog and offline resolver exist, while full fixture coverage, the acceptance gate, and durable acceptance evidence remain outstanding |
+| Schema system | M2 in progress | JSON Schema profile and protected-record migrations exist; 13 examples remain unbound; an executable fixture catalog, offline resolver, and strict readiness report exist, while full fixture coverage, final acceptance evaluators, and durable acceptance evidence remain outstanding |
 | ASH reference oracle | Partial | Context classification, recovery, fallback, containment, safe halt, topology, axioms, and emitter traceability |
 | Core engine semantics | Partial | Deterministic algorithms, failure modes, persistence, interfaces, and complete conformance |
 | Player origin and perception persistence | Placeholder-backed | Replace placeholders with normative state and lifecycle contracts |

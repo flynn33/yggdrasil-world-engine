@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/contract_example_descriptor_schema.json",
+  "title": "Contract Example Descriptors",
+  "description": "Structural formats for historical explanatory examples. These descriptors are distinct from complete canonical runtime packets.",
+  "x-ywe-requirement-id": "YWE-REQ-0025",
+  "$defs": {
+    "Phase10FutureBiasPreview": {
+      "title": "Phase 10 Future Bias Preview",
+      "description": "Validates this explanatory artifact format only; acceptance does not certify a canonical runtime record or domain operation.",
+      "x-ywe-requirement-id": "YWE-REQ-0025",
+      "x-ywe-source-ref": "examples/player_runtime_state/future_generation_bias_from_player_state.example.json",
+      "type": "object",
+      "required": [
+        "bias_id",
+        "source_player_state_ref",
+        "branch_ref",
+        "bias_sources",
+        "eligible_future_content",
+        "deferred_to_phase"
+      ],
+      "properties": {
+        "bias_id": {
+          "type": "string"
+        },
+        "source_player_state_ref": {
+          "type": "string"
+        },
+        "branch_ref": {
+          "type": "string"
+        },
+        "bias_sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "eligible_future_content": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deferred_to_phase": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "TruthScopeExampleCollection": {
+      "title": "Truth Scope Example Collection",
+      "description": "Validates this explanatory artifact format only; acceptance does not certify a canonical runtime record or domain operation.",
+      "x-ywe-requirement-id": "YWE-REQ-0025",
+      "x-ywe-source-ref": "examples/phase_11_worldstate_location_mutation/ravenfall_gate/ravenfall_gate_truth_scope_examples.json",
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "examples"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "truth_scope",
+              "example"
+            ],
+            "properties": {
+              "truth_scope": {
+                "$ref": "https://ywe.local/schemas/ywe.truth_scope.v1.json#/properties/allowed_truth_scopes/items"
+              },
+              "example": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "QuestAxiomPressurePreview": {
+      "title": "Quest Axiom Pressure Preview",
+      "description": "Validates this explanatory artifact format only; acceptance does not certify a canonical runtime record or domain operation.",
+      "x-ywe-requirement-id": "YWE-REQ-0025",
+      "x-ywe-source-ref": "examples/phase_12_quest_npc_lore_generation/quest_generation/axiom_pressure_a1_isolation_to_quest.example.json",
+      "type": "object",
+      "required": [
+        "example_id",
+        "context_type",
+        "primary_axiom",
+        "pressure",
+        "location_state_ref",
+        "branch_reality_ref",
+        "worldstate_delta_refs",
+        "suggested_quest_verbs",
+        "quest_candidate_summary",
+        "truth_scope",
+        "provenance_ref"
+      ],
+      "properties": {
+        "example_id": {
+          "type": "string"
+        },
+        "context_type": {
+          "type": "string"
+        },
+        "primary_axiom": {
+          "type": "string"
+        },
+        "pressure": {
+          "type": "string"
+        },
+        "location_state_ref": {
+          "type": "string"
+        },
+        "branch_reality_ref": {
+          "type": "string"
+        },
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suggested_quest_verbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "quest_candidate_summary": {
+          "type": "string"
+        },
+        "truth_scope": {
+          "$ref": "https://ywe.local/schemas/ywe.truth_scope.v1.json#/properties/allowed_truth_scopes/items"
+        },
+        "provenance_ref": {
+          "type": "string"
+        },
+        "player_runtime_state_ref": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "anyOf": [
+    {
+      "$ref": "#/$defs/Phase10FutureBiasPreview"
+    },
+    {
+      "$ref": "#/$defs/TruthScopeExampleCollection"
+    },
+    {
+      "$ref": "#/$defs/QuestAxiomPressurePreview"
+    }
+  ]
+}

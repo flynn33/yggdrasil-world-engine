@@ -1,0 +1,1201 @@
+artifact_type: pattern_archetype_registry_cases
+artifact_version: 1.0.0
+description: Declared YAML structure only; these witnesses do not certify reference
+  membership, semantic coherence, numeric hints, or generation behavior.
+positive:
+  archetype:
+    id: fixture_archetype
+    family: character
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+  cluster:
+    id: fixture_cluster
+    family: cluster
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+    members:
+    - fixture_archetype
+    - fixture_other
+    combined_summary: Structural pair
+    lawful_basis: []
+    contradiction_risk: ''
+    stability_mode: stable
+  registry:
+    registry_version: '1.0'
+    families:
+      character:
+      - id: fixture_archetype
+        family: character
+        name: Fixture
+        summary: Structural fixture
+        symbolic_function: []
+        truth_modes: []
+        shadow_modes: []
+        realm_bias: []
+        wolf_bias:
+          white: 0.0
+          dark: 0.0
+        player_phase_bias: []
+        compatible_with: []
+        friction_with: []
+        contradicts: []
+        downstream_affinities:
+          npc: []
+          quest: []
+          myth: []
+          prophecy: []
+          artifact: []
+          creature: []
+        manifestation_hints: []
+        invariant_notes: []
+        status: canonical
+      cluster:
+      - id: fixture_cluster
+        family: cluster
+        name: Fixture
+        summary: Structural fixture
+        symbolic_function: []
+        truth_modes: []
+        shadow_modes: []
+        realm_bias: []
+        wolf_bias:
+          white: 0.0
+          dark: 0.0
+        player_phase_bias: []
+        compatible_with: []
+        friction_with: []
+        contradicts: []
+        downstream_affinities:
+          npc: []
+          quest: []
+          myth: []
+          prophecy: []
+          artifact: []
+          creature: []
+        manifestation_hints: []
+        invariant_notes: []
+        status: canonical
+        members:
+        - fixture_archetype
+        - fixture_other
+        combined_summary: Structural pair
+        lawful_basis: []
+        contradiction_risk: ''
+        stability_mode: stable
+  character_family_document:
+    registry_version: '1.0'
+    status: canonical
+    authority:
+      prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+      schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+      downstream_contract: docs/architecture/ash_downstream_contract.md
+    family: character
+    records:
+    - id: char_fixture
+      family: character
+      name: Fixture
+      summary: Structural fixture
+      symbolic_function: []
+      truth_modes: []
+      shadow_modes: []
+      realm_bias: []
+      wolf_bias:
+        white: 0.0
+        dark: 0.0
+      player_phase_bias: []
+      compatible_with: []
+      friction_with: []
+      contradicts: []
+      downstream_affinities:
+        npc: []
+        quest: []
+        myth: []
+        prophecy: []
+        artifact: []
+        creature: []
+      manifestation_hints: []
+      invariant_notes: []
+      status: canonical
+  cluster_family_document:
+    registry_version: '1.0'
+    status: canonical
+    authority:
+      prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+      schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+      downstream_contract: docs/architecture/ash_downstream_contract.md
+    family: cluster
+    records:
+    - id: cluster_fixture
+      family: cluster
+      name: Fixture
+      summary: Structural fixture
+      symbolic_function: []
+      truth_modes: []
+      shadow_modes: []
+      realm_bias: []
+      wolf_bias:
+        white: 0.0
+        dark: 0.0
+      player_phase_bias: []
+      compatible_with: []
+      friction_with: []
+      contradicts: []
+      downstream_affinities:
+        npc: []
+        quest: []
+        myth: []
+        prophecy: []
+        artifact: []
+        creature: []
+      manifestation_hints: []
+      invariant_notes: []
+      status: canonical
+      members:
+      - fixture_archetype
+      - fixture_other
+      combined_summary: Structural pair
+      lawful_basis: []
+      contradiction_risk: ''
+      stability_mode: stable
+boundary:
+  empty_strings_and_lists:
+    id: ''
+    family: character
+    name: ''
+    summary: ''
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+  integer_numeric_bias:
+    id: fixture_archetype
+    family: character
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 1
+      dark: 0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+  open_root_and_nested_maps:
+    id: fixture_archetype
+    family: character
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+      extension: annotation
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+      extension:
+      - annotation
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+    extension:
+      value: true
+  hints_are_not_assertions:
+    id: identifier with spaces
+    family: character
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 2.0
+      dark: -2.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+  duplicate_list_values:
+    id: fixture_archetype
+    family: character
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function:
+    - fixture
+    - fixture
+    truth_modes: []
+    shadow_modes: []
+    realm_bias:
+    - physical
+    - physical
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+  cluster_exactly_two_members:
+    id: fixture_cluster
+    family: cluster
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+    members:
+    - fixture_archetype
+    - fixture_other
+    combined_summary: Structural pair
+    lawful_basis: []
+    contradiction_risk: ''
+    stability_mode: stable
+  cluster_no_unique_members_rule:
+    id: fixture_cluster
+    family: cluster
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+    members:
+    - fixture_archetype
+    - fixture_archetype
+    combined_summary: Structural pair
+    lawful_basis: []
+    contradiction_risk: ''
+    stability_mode: stable
+  registry_optional_fields_omitted: {}
+  registry_open_empty_family_lists:
+    registry_version: ''
+    families:
+      character: []
+      quest: []
+      region: []
+      faction: []
+      transformation: []
+      event: []
+      cluster: []
+      extension:
+        value: true
+    extension: true
+  character_family_document_open_metadata:
+    registry_version: '1.0'
+    status: canonical
+    authority:
+      prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+      schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+      downstream_contract: docs/architecture/ash_downstream_contract.md
+      extension:
+        fixture: true
+    family: character
+    records:
+    - id: char_fixture
+      family: character
+      name: Fixture
+      summary: Structural fixture
+      symbolic_function: []
+      truth_modes: []
+      shadow_modes: []
+      realm_bias: []
+      wolf_bias:
+        white: 0.0
+        dark: 0.0
+      player_phase_bias: []
+      compatible_with: []
+      friction_with: []
+      contradicts: []
+      downstream_affinities:
+        npc: []
+        quest: []
+        myth: []
+        prophecy: []
+        artifact: []
+        creature: []
+      manifestation_hints: []
+      invariant_notes: []
+      status: canonical
+      extension: annotation
+    extension:
+      fixture: true
+reject:
+  archetype_missing_id:
+    family: character
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+  archetype_family_unknown:
+    id: fixture_archetype
+    family: unsupported
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+  archetype_status_unknown:
+    id: fixture_archetype
+    family: character
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: unsupported
+  archetype_realm_unknown:
+    id: fixture_archetype
+    family: character
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias:
+    - unsupported
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+  archetype_player_phase_unknown:
+    id: fixture_archetype
+    family: character
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias:
+    - unsupported
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+  archetype_symbolic_function_scalar:
+    id: fixture_archetype
+    family: character
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: fixture
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+  archetype_truth_mode_numeric_item:
+    id: fixture_archetype
+    family: character
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes:
+    - 7
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+  archetype_wolf_missing_dark:
+    id: fixture_archetype
+    family: character
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+  archetype_wolf_white_string:
+    id: fixture_archetype
+    family: character
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: '0.5'
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+  archetype_affinities_missing_quest:
+    id: fixture_archetype
+    family: character
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+  archetype_affinities_quest_scalar:
+    id: fixture_archetype
+    family: character
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: fixture
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+  cluster_missing_members:
+    id: fixture_cluster
+    family: cluster
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+    combined_summary: Structural pair
+    lawful_basis: []
+    contradiction_risk: ''
+    stability_mode: stable
+  cluster_one_member:
+    id: fixture_cluster
+    family: cluster
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+    members:
+    - fixture_archetype
+    combined_summary: Structural pair
+    lawful_basis: []
+    contradiction_risk: ''
+    stability_mode: stable
+  cluster_missing_combined_summary:
+    id: fixture_cluster
+    family: cluster
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+    members:
+    - fixture_archetype
+    - fixture_other
+    lawful_basis: []
+    contradiction_risk: ''
+    stability_mode: stable
+  cluster_stability_unknown:
+    id: fixture_cluster
+    family: cluster
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+    members:
+    - fixture_archetype
+    - fixture_other
+    combined_summary: Structural pair
+    lawful_basis: []
+    contradiction_risk: ''
+    stability_mode: unsupported
+  cluster_member_numeric:
+    id: fixture_cluster
+    family: cluster
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+    members:
+    - fixture_archetype
+    - 7
+    combined_summary: Structural pair
+    lawful_basis: []
+    contradiction_risk: ''
+    stability_mode: stable
+  cluster_lawful_basis_scalar:
+    id: fixture_cluster
+    family: cluster
+    name: Fixture
+    summary: Structural fixture
+    symbolic_function: []
+    truth_modes: []
+    shadow_modes: []
+    realm_bias: []
+    wolf_bias:
+      white: 0.0
+      dark: 0.0
+    player_phase_bias: []
+    compatible_with: []
+    friction_with: []
+    contradicts: []
+    downstream_affinities:
+      npc: []
+      quest: []
+      myth: []
+      prophecy: []
+      artifact: []
+      creature: []
+    manifestation_hints: []
+    invariant_notes: []
+    status: canonical
+    members:
+    - fixture_archetype
+    - fixture_other
+    combined_summary: Structural pair
+    lawful_basis: fixture
+    contradiction_risk: ''
+    stability_mode: stable
+  archetype_root_array: []
+  registry_family_scalar:
+    families:
+      character: fixture
+  registry_version_number:
+    registry_version: 1
+  registry_nested_record_scalar:
+    families:
+      character:
+      - fixture
+  character_family_document_missing_authority:
+    registry_version: '1.0'
+    status: canonical
+    family: character
+    records:
+    - id: char_fixture
+      family: character
+      name: Fixture
+      summary: Structural fixture
+      symbolic_function: []
+      truth_modes: []
+      shadow_modes: []
+      realm_bias: []
+      wolf_bias:
+        white: 0.0
+        dark: 0.0
+      player_phase_bias: []
+      compatible_with: []
+      friction_with: []
+      contradicts: []
+      downstream_affinities:
+        npc: []
+        quest: []
+        myth: []
+        prophecy: []
+        artifact: []
+        creature: []
+      manifestation_hints: []
+      invariant_notes: []
+      status: canonical
+  character_family_document_missing_schema_ref:
+    registry_version: '1.0'
+    status: canonical
+    authority:
+      prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+      downstream_contract: docs/architecture/ash_downstream_contract.md
+    family: character
+    records:
+    - id: char_fixture
+      family: character
+      name: Fixture
+      summary: Structural fixture
+      symbolic_function: []
+      truth_modes: []
+      shadow_modes: []
+      realm_bias: []
+      wolf_bias:
+        white: 0.0
+        dark: 0.0
+      player_phase_bias: []
+      compatible_with: []
+      friction_with: []
+      contradicts: []
+      downstream_affinities:
+        npc: []
+        quest: []
+        myth: []
+        prophecy: []
+        artifact: []
+        creature: []
+      manifestation_hints: []
+      invariant_notes: []
+      status: canonical
+  character_family_document_wrong_schema_ref:
+    registry_version: '1.0'
+    status: canonical
+    authority:
+      prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+      schema_ref: other.yaml
+      downstream_contract: docs/architecture/ash_downstream_contract.md
+    family: character
+    records:
+    - id: char_fixture
+      family: character
+      name: Fixture
+      summary: Structural fixture
+      symbolic_function: []
+      truth_modes: []
+      shadow_modes: []
+      realm_bias: []
+      wolf_bias:
+        white: 0.0
+        dark: 0.0
+      player_phase_bias: []
+      compatible_with: []
+      friction_with: []
+      contradicts: []
+      downstream_affinities:
+        npc: []
+        quest: []
+        myth: []
+        prophecy: []
+        artifact: []
+        creature: []
+      manifestation_hints: []
+      invariant_notes: []
+      status: canonical
+  character_family_document_wrong_version:
+    registry_version: '2.0'
+    status: canonical
+    authority:
+      prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+      schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+      downstream_contract: docs/architecture/ash_downstream_contract.md
+    family: character
+    records:
+    - id: char_fixture
+      family: character
+      name: Fixture
+      summary: Structural fixture
+      symbolic_function: []
+      truth_modes: []
+      shadow_modes: []
+      realm_bias: []
+      wolf_bias:
+        white: 0.0
+        dark: 0.0
+      player_phase_bias: []
+      compatible_with: []
+      friction_with: []
+      contradicts: []
+      downstream_affinities:
+        npc: []
+        quest: []
+        myth: []
+        prophecy: []
+        artifact: []
+        creature: []
+      manifestation_hints: []
+      invariant_notes: []
+      status: canonical
+  character_family_document_wrong_status:
+    registry_version: '1.0'
+    status: provisional
+    authority:
+      prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+      schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+      downstream_contract: docs/architecture/ash_downstream_contract.md
+    family: character
+    records:
+    - id: char_fixture
+      family: character
+      name: Fixture
+      summary: Structural fixture
+      symbolic_function: []
+      truth_modes: []
+      shadow_modes: []
+      realm_bias: []
+      wolf_bias:
+        white: 0.0
+        dark: 0.0
+      player_phase_bias: []
+      compatible_with: []
+      friction_with: []
+      contradicts: []
+      downstream_affinities:
+        npc: []
+        quest: []
+        myth: []
+        prophecy: []
+        artifact: []
+        creature: []
+      manifestation_hints: []
+      invariant_notes: []
+      status: canonical
+  character_family_document_record_family_mismatch:
+    registry_version: '1.0'
+    status: canonical
+    authority:
+      prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+      schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+      downstream_contract: docs/architecture/ash_downstream_contract.md
+    family: character
+    records:
+    - id: char_fixture
+      family: quest
+      name: Fixture
+      summary: Structural fixture
+      symbolic_function: []
+      truth_modes: []
+      shadow_modes: []
+      realm_bias: []
+      wolf_bias:
+        white: 0.0
+        dark: 0.0
+      player_phase_bias: []
+      compatible_with: []
+      friction_with: []
+      contradicts: []
+      downstream_affinities:
+        npc: []
+        quest: []
+        myth: []
+        prophecy: []
+        artifact: []
+        creature: []
+      manifestation_hints: []
+      invariant_notes: []
+      status: canonical
+  character_family_document_record_prefix_mismatch:
+    registry_version: '1.0'
+    status: canonical
+    authority:
+      prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+      schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+      downstream_contract: docs/architecture/ash_downstream_contract.md
+    family: character
+    records:
+    - id: quest_fixture
+      family: character
+      name: Fixture
+      summary: Structural fixture
+      symbolic_function: []
+      truth_modes: []
+      shadow_modes: []
+      realm_bias: []
+      wolf_bias:
+        white: 0.0
+        dark: 0.0
+      player_phase_bias: []
+      compatible_with: []
+      friction_with: []
+      contradicts: []
+      downstream_affinities:
+        npc: []
+        quest: []
+        myth: []
+        prophecy: []
+        artifact: []
+        creature: []
+      manifestation_hints: []
+      invariant_notes: []
+      status: canonical
+  character_family_document_empty_records:
+    registry_version: '1.0'
+    status: canonical
+    authority:
+      prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+      schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+      downstream_contract: docs/architecture/ash_downstream_contract.md
+    family: character
+    records: []
+  character_family_document_records_scalar:
+    registry_version: '1.0'
+    status: canonical
+    authority:
+      prose_spec: docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md
+      schema_ref: data/pattern_archetypes/ash_pattern_registry_schema.yaml
+      downstream_contract: docs/architecture/ash_downstream_contract.md
+    family: character
+    records: fixture

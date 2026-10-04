@@ -31,6 +31,28 @@
       "blocking": true
     },
     {
+      "id": "m2_acceptance_definition",
+      "name": "M2 roadmap acceptance evaluator definition",
+      "command": [
+        "{python}",
+        "scripts/check_m2_acceptance.py",
+        "--check-definition",
+        "{root}"
+      ],
+      "groups": [
+        "m2",
+        "governance",
+        "conformance"
+      ],
+      "contexts": [
+        "always"
+      ],
+      "blocking": true,
+      "roadmap_milestones": [
+        "M2"
+      ]
+    },
+    {
       "id": "validation_unit_tests",
       "name": "Validation foundation unit tests",
       "command": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-p", "test_*.py"],

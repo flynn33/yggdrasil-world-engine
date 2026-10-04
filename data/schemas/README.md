@@ -48,6 +48,10 @@ fragments, and intended rejection witnesses live in
 `data/validation/fixture_catalog.json`; see `docs/project/m2_fixture_validation.md`.
 YAML module capability manifests bind to `module_capability_manifest_schema.json`,
 which executes the structural assertions declared in their existing YAML source.
+Pattern archetype records use `pattern_archetype_registry_schema.json`; explanatory
+previews use `contract_example_descriptor_schema.json` and certify their own format.
+`repository_validation_report_schema.json` describes executed check evidence consumed
+by the strict M2 readiness evaluator; readiness and milestone acceptance remain distinct.
 
 | File | Role |
 |---|---|

@@ -2,14 +2,14 @@
   "artifact_type": "normative_requirement_register",
   "artifact_version": "1.0.0",
   "schema_ref": "data/schemas/normative_requirement_register_schema.json",
-  "recorded_on": "2026-10-03",
+  "recorded_on": "2026-10-04",
   "repository_baseline": "2.0.23",
   "policy_ref": "docs/governance/normative_language_and_requirement_id_policy.md",
   "id_policy": {
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0023",
+    "next_available_id": "YWE-REQ-0027",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -469,13 +469,113 @@
         "data/schemas/module_capability_manifest_schema.json",
         "data/governance/specification_roadmap.json#/milestones/2/deliverables/3"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0023",
+      "title": "Truthful roadmap-derived M2 readiness and executed repository evidence",
+      "normative_statement": "The M2 readiness evaluator MUST map every ordered exit criterion and deliverable, fail while any is failed or unverified, and accept repository evidence only for the clean matching revision and catalog with an unfiltered, offline local run of all applicable passing checks.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_m2_acceptance.py",
+        "scripts/validate_repository.py",
+        "tests/test_m2_acceptance_gate.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0014"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#m2-readiness-evaluation",
+        "data/schemas/repository_validation_report_schema.json"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0024",
+      "title": "Compatible historical player object representations",
+      "normative_statement": "Historical PlayerRuntimeState ash_provenance, authority_boundary, update_policy, and PlayerRuntimeStateDelta changed_fields members MUST accept nonempty legacy strings and open objects while preserving existing required members and array constraints.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_fixture_catalog.py",
+        "tests/test_fixture_catalog.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0015"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#historical-representation-and-preview-bindings",
+        "data/schemas/ash_generation_packet_schema.json",
+        "examples/player_runtime_state/player_runtime_state_initial.example.json",
+        "examples/player_runtime_state/player_runtime_state_delta_branch_event.example.json"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0025",
+      "title": "Explicit explanatory example formats",
+      "normative_statement": "Historical future-bias, truth-scope collection, and quest axiom-pressure preview bindings MUST certify only their declared explanatory formats and MUST NOT imply canonical runtime packet or complete domain semantic acceptance.",
+      "normative_level": "mixed",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_fixture_catalog.py",
+        "tests/test_fixture_catalog.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0015"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#historical-representation-and-preview-bindings",
+        "data/schemas/contract_example_descriptor_schema.json"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0026",
+      "title": "Source-declared pattern archetype structural validation",
+      "normative_statement": "Pattern archetype and cluster bindings MUST enforce the structural required fields, types, enums, nested required members, and cluster member minimum explicitly declared by the YWE-owned YAML descriptor without interpreting descriptive hints as new assertions.",
+      "normative_level": "MUST",
+      "authority_node": "forsetti_lifecycle_governance",
+      "scope_partition": "governance_validation",
+      "verification_refs": [
+        "scripts/check_fixture_catalog.py",
+        "tests/test_pattern_archetype_registry_schema.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M2",
+      "owner_role": "Contract and schema maintainers",
+      "decision_refs": [
+        "ADR-0016"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#yaml-pattern-archetype-records",
+        "data/pattern_archetypes/ash_pattern_registry_schema.yaml",
+        "data/schemas/pattern_archetype_registry_schema.json"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 22,
-    "active": 22,
+    "total_requirements": 26,
+    "active": 26,
     "proposed": 0,
     "terminal": 0,
-    "next_identifier": "YWE-REQ-0023"
+    "next_identifier": "YWE-REQ-0027"
   }
 }

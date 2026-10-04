@@ -15,15 +15,15 @@ schema, conformance, or release completion.
 |---|---|
 | Historical phase gates | Accepted through the Phase 16/17 foundation |
 | Normative artifact completion | Partial overall; M1 authority-boundary artifacts complete |
-| Executable schema completion | Partial; schema identifiers and descriptive-record migrations are complete, while 19 JSON examples remain unbound |
+| Executable schema completion | Partial; schema identifiers and descriptive-record migrations are complete, while 13 JSON examples remain unbound |
 | Whole-system conformance | Not complete |
 | Agnostic specification release readiness | Not ready |
 | Published releases | None; no GitHub Release objects or agnostic specification releases have been published |
 | M0 truthful baseline | Complete; evidence recorded in `data/governance/m0_acceptance_evidence.json` and `docs/project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md` |
 | M1 canon terminology and governance | Complete; evidence recorded in `data/governance/m1_acceptance_evidence.json` and `docs/project/M1_CANON_TERMINOLOGY_GOVERNANCE_ACCEPTANCE.md` |
 | Current roadmap milestone | M2 - Build the canonical contract and schema foundation (in progress; acceptance not recorded) |
-| M2 schema-quality debt | 19 unbound JSON examples remain; the other three M2 schema-debt categories are empty |
-| M2 acceptance evidence | Not recorded; an initial fixture catalog exists; complete coverage and the roadmap-derived acceptance gate/report are still required |
+| M2 schema-quality debt | 13 unbound JSON examples remain; the other three M2 schema-debt categories are empty |
+| M2 acceptance evidence | Not recorded; a strict readiness report and fixture catalog exist; complete coverage, final acceptance evaluators, and durable evidence remain required |
 | Platform product work | Deferred through M10 |
 
 ## Authority Stack

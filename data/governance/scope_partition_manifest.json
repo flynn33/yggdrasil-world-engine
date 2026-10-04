@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1111,
-    "path_digest": "84f39af1d47ec7384a9e7cdac6711f5528e83b07bea7d34dcb5ac020324d85aa",
+    "path_count": 1119,
+    "path_digest": "7e2e445a398c20c1eb21dbe843c7404df7353651bc2f05309d77d533e321d7e7",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -2136,15 +2136,45 @@
         "provenance",
         "superseded_utility"
       ]
+    },
+    {
+      "path": "data/schemas/pattern_archetype_registry_schema.json",
+      "primary_partition": "ywe_extension_profile",
+      "owner_role": "Pattern archetype extension maintainers",
+      "governing_source": "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
+      "rationale": "This schema executes the existing optional YWE-owned pattern archetype extension and its declared family formats; it does not introduce those profile enums into universal Core.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "data/schemas/contract_example_descriptor_schema.json",
+      "primary_partition": "wrw_reference_profile",
+      "owner_role": "WRW reference-profile maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "These structural formats bind historical explanatory examples, including Ravenfall truth-scope and quest-pressure previews; they do not establish universal runtime contracts.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
+    },
+    {
+      "path": "data/schemas/repository_validation_report_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/project/m2_fixture_validation.md",
+      "rationale": "This schema describes repository check execution evidence consumed by M2 readiness tooling rather than runtime engine state.",
+      "secondary_tags": [
+        "m2_structural_validation"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
       "ywe_core": 139,
-      "ywe_extension_profile": 121,
+      "ywe_extension_profile": 122,
       "ash_dependency_material": 66,
-      "wrw_reference_profile": 294,
-      "governance_validation": 413,
+      "wrw_reference_profile": 297,
+      "governance_validation": 417,
       "historical_evidence": 19,
       "later_release_work": 59
     }

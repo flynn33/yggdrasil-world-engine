@@ -34,6 +34,7 @@ REQUIRED_CHECK_CONTRACTS = [
     ("roadmap_governance", "scripts/check_specification_roadmap.py", ["bootstrap", "status", "governance"]),
     ("machine_readable_artifacts", "scripts/check_machine_readable_artifacts.py", ["syntax", "schema", "machine-readable"]),
     ("m2_fixture_catalog", "scripts/check_fixture_catalog.py", ["m2", "schema", "conformance"]),
+    ("m2_acceptance_definition", "scripts/check_m2_acceptance.py", ["m2", "governance", "conformance"]),
     ("validation_unit_tests", "<unit-tests>", ["bootstrap", "tests"]),
     ("architecture_structure", "scripts/validate_architecture.py", ["architecture", "governance", "legacy-structural"]),
     ("governance_contracts", "scripts/check_governance_contracts.py", ["governance", "architecture"]),
@@ -104,6 +105,8 @@ def schema_errors(instance, schema: dict, label: str) -> list[str]:
 
 
 def expected_check_command(check_id: str, script: str) -> list[str]:
+    if check_id == "m2_acceptance_definition":
+        return ["{python}", script, "--check-definition", "{root}"]
     if check_id == "validation_unit_tests":
         return ["{python}", "-m", "unittest", "discover", "-s", "tests", "-p", "test_*.py"]
     if check_id == "authority_stack":

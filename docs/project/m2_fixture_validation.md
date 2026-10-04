@@ -49,8 +49,79 @@ treatment; those labels alone do not establish executed instance conformance.
 
 This is an incremental catalog. Remaining descriptive examples, incompatible
 historical packets, full lifecycle fixtures, and the roadmap-derived M2
-acceptance gate and report still need completion. An empty binding-debt list
+acceptance evidence still need completion. An empty binding-debt list
 alone would not satisfy every M2 deliverable.
+
+## M2 Readiness Evaluation
+
+`python scripts/check_m2_acceptance.py . --output <external-report.json>`
+evaluates the roadmap's six exit criteria and eight deliverables. It MUST retain
+an exact ordered mapping of those obligations and return a failing readiness
+result while any obligation is failed or unverified. [YWE-REQ-0023]
+The normal suite runs only `--check-definition`; that passing check verifies the
+mapping and does not accept M2. Method-specific validation coverage and durable
+milestone acceptance evidence still have unverified evaluators.
+
+The evaluator enumerates every JSON/YAML path classified as an example, including
+examples outside `examples/`. Historical inline labels provide no executed binding.
+Registered case bundles require each case's exact pointer; a document-root binding
+cannot cover their cases. Normative YAML needs accepted structural bindings; an
+expected rejection cannot certify its conformance. Historical artifacts keep their
+recorded classification and do not become active examples through this evaluation.
+
+`python scripts/validate_repository.py --offline --report <external-report.json>`
+records executed checks, return codes, context, check-catalog hash, tool versions,
+revision, and checkout state before and after execution. Full acceptance evidence
+MUST use every applicable check in the local context, an unfiltered selection, a
+clean matching revision and catalog, and entirely passing results. [YWE-REQ-0023]
+Pass that report with `--repository-report` when evaluating readiness. Reports
+saved inside the checkout cannot manufacture clean evidence: their newly created
+or modified paths are included in the recorded state.
+
+The offline option denies remote Git protocols during the checks. Schema resolution
+independently denies unknown resources through the fixture checker. Dependencies
+must be prepared before execution. These controls do not attest that the host's
+network interfaces were disabled. A passing normal suite alone remains insufficient
+for the unimplemented domain and lifecycle obligations.
+
+## Historical Representation and Preview Bindings
+
+The historical PlayerRuntimeState provenance, authority boundary, and update policy,
+and PlayerRuntimeStateDelta changed-field members MUST accept nonempty legacy
+strings or open objects while preserving their existing required members and array
+constraints. [YWE-REQ-0024] The original examples contain objects; the migration's
+generic string inference rejected those representations. The newer reference-based
+`player_runtime_state_schema.json` retains its separate contract.
+
+`contract_example_descriptor_schema.json` gives three historical explanatory
+formats explicit structural roles: a Phase 10 future-bias preview, a truth-scope
+example collection, and quest axiom-pressure previews. Their bindings MUST certify
+only those descriptor formats and MUST NOT imply canonical runtime or complete
+domain semantic acceptance. [YWE-REQ-0025] Empty values and open properties remain
+available where the source does not declare tighter constraints; the observed
+missing A4 player reference remains optional for that preview format.
+
+Forty-four additional original examples now have explicit full-root bindings to
+their uniquely matching existing contracts. Each was validated in full before
+registration. The catalogs retain schema IDs and pointers instead of implementing
+a runtime label-guessing resolver. Exact negative witnesses and boundaries cover
+the four compatible historical fields and three preview formats.
+
+## YAML Pattern Archetype Records
+
+`pattern_archetype_registry_schema.json` executes the structural contract in
+`data/pattern_archetypes/ash_pattern_registry_schema.yaml`. Record bindings MUST
+enforce its explicit required fields, types, enums, nested required members, and
+cluster member minimum without turning descriptive hints into assertions.
+[YWE-REQ-0026] Open fields, unspecified empty-value boundaries, and optional
+registry members remain available. The schema belongs to the YWE extension
+profile; it does not change the pinned upstream ASH dependency identity.
+
+The catalog binds 47 records in seven original family registries, two seed
+records, the seed registry, seven whole family documents, and 45 positive/boundary/reject cases. These bindings
+exercise the selected records and seed format. They do not validate the source
+descriptor's entire root or certify reference resolution, relationship coherence,
+lawful combinations, or generation behavior.
 
 ## YAML Module Capability Manifests
 

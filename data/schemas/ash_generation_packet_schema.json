@@ -951,12 +951,24 @@
       ],
       "properties": {
         "ash_provenance": {
-          "type": "string",
-          "minLength": 1
+          "type": [
+            "string",
+            "object"
+          ],
+          "minLength": 1,
+          "additionalProperties": true,
+          "x-ywe-requirement-id": "YWE-REQ-0024",
+          "x-ywe-source-ref": "examples/player_runtime_state/player_runtime_state_initial.example.json#/ash_provenance"
         },
         "authority_boundary": {
-          "type": "string",
-          "minLength": 1
+          "type": [
+            "string",
+            "object"
+          ],
+          "minLength": 1,
+          "additionalProperties": true,
+          "x-ywe-requirement-id": "YWE-REQ-0024",
+          "x-ywe-source-ref": "examples/player_runtime_state/player_runtime_state_initial.example.json#/authority_boundary"
         },
         "branch_event_refs": {
           "type": "array",
@@ -999,8 +1011,14 @@
           "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
         },
         "update_policy": {
-          "type": "string",
-          "minLength": 1
+          "type": [
+            "string",
+            "object"
+          ],
+          "minLength": 1,
+          "additionalProperties": true,
+          "x-ywe-requirement-id": "YWE-REQ-0024",
+          "x-ywe-source-ref": "examples/player_runtime_state/player_runtime_state_initial.example.json#/update_policy"
         }
       },
       "additionalProperties": true,
@@ -1030,8 +1048,14 @@
         "changed_fields": {
           "type": "array",
           "items": {
-            "type": "string",
-            "minLength": 1
+            "type": [
+              "string",
+              "object"
+            ],
+            "minLength": 1,
+            "additionalProperties": true,
+            "x-ywe-requirement-id": "YWE-REQ-0024",
+            "x-ywe-source-ref": "examples/player_runtime_state/player_runtime_state_delta_branch_event.example.json#/changed_fields"
           },
           "uniqueItems": true
         },

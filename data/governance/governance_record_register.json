@@ -909,12 +909,111 @@
         "examples/contract_foundation/module_capability_cases.example.yaml",
         "data/governance/specification_roadmap.json#/milestones/2"
       ]
+    },
+    {
+      "id": "ADR-0014",
+      "record_type": "decision",
+      "title": "Separate readiness from milestone acceptance",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Register an exact roadmap-definition check in the normal suite and provide a strict readiness report covering all classified structured examples and domain YAML. Record full local suite execution evidence; keep unsupported method-specific and durable acceptance evaluations unverified.",
+      "debt_refs": [
+        "QD-001"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "The roadmap requires six exit criteria and eight deliverables; historical inline schema labels can evade the legacy debt heuristic without executed validation. Ordinary suite success therefore does not establish M2 readiness.",
+      "decision": "Register an exact roadmap-definition check in the normal suite and provide a strict readiness report covering all classified structured examples and domain YAML. Record full local suite execution evidence; keep unsupported method-specific and durable acceptance evaluations unverified.",
+      "rationale": "An incremental failing readiness report exposes missing work without weakening normal validation or recording premature milestone acceptance. Explicit context and clean-checkout evidence prevent filtered or dirty runs from being reused as full acceptance.",
+      "consequences": [
+        "Original example and YAML source contents are preserved.",
+        "M2 remains in progress; unresolved domain, YAML, lifecycle, and durable acceptance work remains outstanding."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0023"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#m2-readiness-evaluation",
+        "scripts/check_m2_acceptance.py",
+        "scripts/validate_repository.py",
+        "data/governance/specification_roadmap.json#/milestones/2"
+      ]
+    },
+    {
+      "id": "ADR-0015",
+      "record_type": "decision",
+      "title": "Preserve historical player representations and label explanatory previews",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Add the observed object representation alongside existing nonempty strings in four historical player fields. Add named descriptor subschemas for the observed future-bias, truth-scope collection, and axiom-pressure preview formats, with exact structural positive and negative witnesses.",
+      "debt_refs": [
+        "QD-001"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Existing historical player records use objects in four fields converted to generic strings by the migration. Three other example formats are explanatory previews rather than complete newer runtime packets.",
+      "decision": "Add the observed object representation alongside existing nonempty strings in four historical player fields. Add named descriptor subschemas for the observed future-bias, truth-scope collection, and axiom-pressure preview formats, with exact structural positive and negative witnesses.",
+      "rationale": "This restores historical structural representations without deleting constraints or editing original example contents. Explicit descriptor roles preserve the distinction between format validation and complete domain conformance; the newer reference-based player schema remains separate.",
+      "consequences": [
+        "Original example and YAML source contents are preserved.",
+        "M2 remains in progress; unresolved domain, YAML, lifecycle, and durable acceptance work remains outstanding."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0024",
+        "YWE-REQ-0025"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#historical-representation-and-preview-bindings",
+        "data/schemas/ash_generation_packet_schema.json",
+        "data/schemas/contract_example_descriptor_schema.json",
+        "examples/contract_foundation/legacy_example_representation_cases.example.json"
+      ]
+    },
+    {
+      "id": "ADR-0016",
+      "record_type": "decision",
+      "title": "Execute declared YAML pattern archetype structure",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Contract and schema maintainers",
+      "scope": "governance_validation",
+      "disposition": "Execute those declared structural assertions without adding hint-derived bounds or upstream identity changes.",
+      "debt_refs": [
+        "QD-001"
+      ],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "The YWE-owned archetype descriptor declares record fields, nested required members, enum lists, and cluster members minimum two. Original family registries and seed examples provide 49 source records.",
+      "decision": "Add ArchetypeRecord, ClusterRecord, and Registry structural targets and bind the original records and seed registry with positive, boundary, and exact negative cases. Preserve open objects and optional members where the descriptor has no required list.",
+      "rationale": "This makes explicit source assertions executable while retaining existing source and upstream dependency identity. Pattern hints, range hints, relation/reference resolution, lawful combination, and generation semantics remain with their separate owning contracts.",
+      "consequences": [
+        "The 49 original records and seed registry are structurally exercised without source edits.",
+        "Structural case boundaries preserve unasserted empty values, open fields, and hint ranges.",
+        "Descriptor roots and reference/relationship semantics, and remaining YAML domains still need coverage."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0026"
+      ],
+      "source_refs": [
+        "docs/project/m2_fixture_validation.md#yaml-pattern-archetype-records",
+        "data/pattern_archetypes/ash_pattern_registry_schema.yaml",
+        "docs/architecture/ASH_PATTERN_ARCHETYPE_LIBRARY_CANONICAL.md",
+        "data/schemas/pattern_archetype_registry_schema.json",
+        "examples/contract_foundation/pattern_archetype_registry_cases.example.yaml"
+      ]
     }
   ],
   "summary": {
-    "total_records": 30,
-    "architecture_decisions": 13,
-    "accepted_decisions": 13,
+    "total_records": 33,
+    "architecture_decisions": 16,
+    "accepted_decisions": 16,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-15
-**Date:** October 3, 2026
+**Revision:** planning-16
+**Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-14; full history remains in Git.
+**Supersedes:** planning-15; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -61,11 +61,11 @@ evidence establishes:
 | Declared schemas missing identifiers | 0 |
 | Annotation-only schema documents | 0 |
 | Schema-named JSON lacking declarations | 0 |
-| Unbound JSON examples | 19 after executed catalog bindings and Phase 12 corrections |
-| Fixture catalog | 136 structural bindings, including YAML module manifests; full coverage remains incomplete |
-| Offline resolver | Explicit catalog covers 198 declared schemas and resolves references locally |
-| YAML structural schemas | Module capability contract covered; other YAML domains remain outstanding |
-| Roadmap-derived M2 acceptance gate | Not present |
+| Unbound JSON examples | 13 in the legacy debt subledger; the strict report independently checks every classified structured example |
+| Fixture catalog | 326 structural bindings, including 121 exact rejection witnesses; full coverage remains incomplete |
+| Offline resolver | Explicit catalog covers 201 declared schemas and resolves references locally |
+| YAML structural schemas | Module capability manifests and pattern archetype records covered; other YAML domains and descriptor roots remain outstanding |
+| Roadmap-derived M2 acceptance gate | Strict readiness evaluator maps six criteria and eight deliverables; method-specific and durable acceptance evaluators remain unverified |
 | Durable M2 acceptance report | Not present |
 | M2 milestone evidence | Empty in the roadmap |
 | M3 activation | Not authorized or recorded |
@@ -175,7 +175,38 @@ back at that exact revision. GitHub reported the authorized pull-request and
 verified-signature rule bypass. The following documentation checkpoint records
 those executed results without changing executable/schema/fixture/test content.
 
-## 8. Historical publication continuity
+## 8. Continuous roadmap development
+
+The owner explicitly authorized continued roadmap development and a goal to finish
+it on October 4, 2026. Publication checkpoints do not end that work. Continue M2
+until every deliverable and exit criterion has executed evidence, then proceed in
+dependency order through M10. The development method and publication authorization
+in sections 2–3 remain in force; no owner input is needed for the current work.
+
+Working branch: `m2/acceptance-readiness`, starting from
+`2dc31af8ff70054fa6899de34fb10a0809c05844`. This increment adds explicit bindings for
+44 existing full-root examples and six historical/preview formats, restores four
+observed legacy player object representations, and executes YAML pattern archetype
+structure for 49 original records and a seed registry. Requirements 23–26 and
+ADRs 14–16 record the scope. Original example and YAML source contents are preserved.
+
+The strict report enumerates all classified structured examples, including inline
+labels and examples outside `examples/`; legacy debt counts do not establish full
+coverage. Definition validation is registered in the normal suite and explicitly
+reports that it does not evaluate milestone acceptance. The report retains failed
+and unverified obligations. Executed full-suite reports capture revision, catalog,
+context, selected checks, return codes, tool versions, checkout state, and completion.
+Incomplete final checkout capture cannot create passing evidence. Offline controls
+cover schema retrieval and remote Git protocols, with dependencies prepared first.
+
+The focused fixture check passed all 326 bindings and 121 intended rejections.
+Additional legacy `scripts/github/Test-SchemaIntegrity.ps1` verification returned
+22 findings on existing quest-seed, myth/perception/prophecy and wolf-canon paths.
+Those paths are unchanged; this supplemental script is outside the canonical check
+catalog. Its findings are recorded for investigation, not treated as passing.
+Full-suite verification of this increment is pending at this save point.
+
+## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
 failed before modifying roadmap files because its compressed transport payload was
@@ -183,21 +214,23 @@ corrupted. The replacement used an inline reviewed patch, removed the temporary 
 ran the roadmap and consolidated repository checks, and published this planning-13 record.
 The containing commit is the authoritative save point.
 
-## 9. Checkpoint
+## 10. Checkpoint
 
-**Current step:** M2 YAML module-manifest structural conformance; milestone
+**Current step:** M2 readiness, complete fixture bindings, and YAML structural conformance; milestone
 acceptance remains outstanding.
 
 **Completed:** Executable JSON fixture foundation and offline resolver, compatible
 Phase 12 representations, current development-policy intake, and initial YAML
-module-manifest structural schema and bindings.
+module-manifest and pattern-archetype structural schemas and bindings, original
+example bindings, and strict readiness/execution reports.
 
 **Next action:** Complete remaining fixture bindings and lifecycle coverage, then build
-the roadmap-derived M2 acceptance gate and durable evidence.
+the remaining acceptance evaluators and durable evidence. Continue to later
+milestones only after verified M2 closure.
 
 **Needed from owner:** Nothing for continued M2 engineering.
 
-**Saved at:** `main`, in the commit containing this planning-15 record. The latest
+**Saved at:** `main`, in the commit containing this planning-16 record. The prior
 validated implementation is `ab1080b1c1b60a9e379d5cd25f52db2ec418a729`. The prior
 implementation is `f35911a4a77c93dc6fe32bb2e396c60bcf01fbc2`, with its published
 verification checkpoint at `88406268d1e3ef24c15e132fa49e9be7440319cf`.
