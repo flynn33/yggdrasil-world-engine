@@ -308,9 +308,19 @@ retains mismatch evidence without capture. The StateModel/normalization area pas
 atomic controls. The original 734 fixture rows are preserved with 16 additions.
 All 750 bindings and 260 complete rejection expectations pass offline; 11 selected
 precommit repository checks pass with no blocking or advisory failures.
-Complete clean acceptance and committed current/legacy host source verification
-remain pending. Full N3 session/lifecycle adoption remains separate. The accepted
-mathematical baseline and immutable M2 evidence are preserved.
+The first complete clean offline candidate run at
+`ba76c3b9201a26c0c5549883b27a7ea248dabbff` passed all 1,006 unit tests in
+1035.195 seconds and 35 of 36 repository checks in 1319.469 seconds, with no
+advisories or checkout changes. The one blocking failure was the new source test's
+missing explicit reviewed-path registration in the Phase 10 configuration. That
+exact registration is now added; replacement complete acceptance remains pending.
+Four genuine committed-source Windows host controls passed, including paired
+legacy/current capture and both Recovery collector integration methods. Full N3
+session/lifecycle adoption remains separate: the four-record cause chain, final
+completion observation and closed evidence bound are under independent review.
+Generation's missing topology, axiom and complete planner/emitter owners are being
+specified against canonical source. The accepted mathematical baseline and
+immutable M2 evidence are preserved.
 Session publication, actual containment and halt, remaining canonical Diagnostics
 producers and generation remain subsequent work. This checkpoint does not complete
 an M3 exit criterion.

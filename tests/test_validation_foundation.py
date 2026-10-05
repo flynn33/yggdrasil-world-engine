@@ -241,6 +241,7 @@ class PlayerRuntimeReferencePolicyTests(unittest.TestCase):
             "tests/test_platform_agnosticism.py",
             "tests/test_ywe_package_acceptance_loading.py",
             "tests/test_m3_normalization.py",
+            "tests/test_m3_source_compatibility.py",
         ]))
 
     def test_neighboring_runtime_native_and_unreviewed_tool_paths_remain_forbidden(self):

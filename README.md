@@ -223,10 +223,25 @@ All 750 bindings and 260 complete rejection expectations pass offline. Eleven
 selected precommit repository checks passed without blocking or advisory failures.
 The generated mirror and descriptor identify current aggregate
 `76d59926ce9676b7584c6cdd555f50f56fceda075fa3fc8b37167fd2be43f7c9`.
-Complete clean acceptance and committed-source host verification remain pending in
-this preparation-time checkpoint. Historical source evidence remains intact. Full
-N3 session, containment and halt behavior still needs its separate adopted contract
-and implementation.
+The first complete clean offline run at
+`ba76c3b9201a26c0c5549883b27a7ea248dabbff` passed all 1,006 unit tests in
+1035.195 seconds and 35 of 36 repository checks. The complete run took 1319.469
+seconds, with no advisories or checkout changes. Its one blocking failure was the
+Phase 10 guard's missing explicit registration for the new source compatibility
+test. That exact test path is now registered under the existing reviewed-test
+policy, and the guard's refusal controls remain active. Replacement complete clean
+acceptance is pending. Four genuine committed-source Windows host controls also
+passed, including actual legacy/current source capture, unsafe-parent refusal and
+both Recovery collector integration methods. These results retain their distinct
+scopes. Historical source evidence remains intact.
+
+The next session contract is under review. Later containment requires a separate
+decision bridge for its actual cause; the resulting four-record lifecycle needs a
+recomputed evidence bound. The review also covers terminal publication freshness,
+bounded refused admissions and retention of the actual final completion response.
+Full N3 session, containment and halt behavior still needs its adopted contract
+and implementation. Generation's topology, axioms and complete planner/emitter
+exchange are being specified against the canonical source before implementation.
 
 Next after this slice are session admission and state commit, actual containment
 and safe halt, remaining canonical Diagnostics producers and generation semantics.

@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-34
+**Revision:** planning-35
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-33; full history remains in Git.
+**Supersedes:** planning-34; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -816,6 +816,48 @@ These area results are scoped evidence. Complete clean unfiltered acceptance and
 actual committed-source host execution remain pending. This checkpoint completes
 no M3 exit criterion and adopts no N3 session, containment or halt effects.
 
+## 8o. Complete source candidate execution and reviewed test registration
+
+The exact source candidate `ba76c3b9201a26c0c5549883b27a7ea248dabbff` was
+executed from a separate detached clean clone, offline, with no check selections.
+The run completed in 1319.469 seconds: 35 of 36 applicable repository checks
+passed, one blocking check failed, and no advisories or checkout changes were
+recorded. All 1,006 unit tests passed in 1035.195 seconds. All 750 fixture bindings
+and 260 complete intended rejections passed; the immutable M2 evaluator again
+passed all fourteen source-bound historical obligations. This is a completed
+failed repository acceptance, not a complete passing acceptance.
+
+The one failure was `player_runtime_state`. Its exact output identified
+`tests/test_m3_source_compatibility.py` as a newly added forbidden Python path.
+`check_player_runtime_state.reviewed_python_exceptions` requires each reviewed
+test path to be named in the Phase 10 configuration. The new test was omitted
+from that list. The correction adds only its exact path under the existing
+reviewed verification-tool policy and includes it in the existing positive
+registration test. Native runtime, neighboring unreviewed paths, malformed
+exception inventories and path aliases retain their existing refusal tests.
+The validation-foundation suite passed all 69 tests in 77.670 seconds after
+the correction, including those positive and refusal controls.
+
+Four genuine Windows controls at the exact committed source candidate passed in
+1.651 seconds: current/legacy whole-source capture, explicit unsafe-parent ACL
+refusal, N1 Recovery routes with paired redacted export, and detached/mutated-origin
+refusal without Recovery effects. These native results supplement the complete
+unit run; they do not establish hosted Windows CI acceptance. The failed report,
+execution metadata and complete log remain immutable external observations.
+Replacement full clean acceptance remains pending at this checkpoint.
+
+The external N3 review identified an actual cause-chain requirement: later operator
+containment needs its own Recovery decision bridge after the earlier successful
+Recovery record. A subsequent breach halt makes the lifetime maximum four records.
+The revised support/alias/page graph and byte reservation must be recomputed before
+adoption. The review also closes refused-admission finalization, under-lock terminal
+freshness and a nonrecursive observation of the actual once-finish response. The
+earlier three-record bound is not acceptance evidence for the revised API.
+An independent external generation audit has authored finite XOR, topology, axiom
+and profile-transition controls, with explicit open policies and diagnostic source
+gaps. No N3 lifecycle or generation contract is adopted by this registration fix.
+M3 remains in progress, and all five milestone exit criteria remain unchanged.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -826,8 +868,8 @@ The containing commit is the authoritative save point.
 
 ## 10. Checkpoint
 
-**Current step:** Verify the applied complete source-vector compatibility and
-truthful host provenance increment from a committed clean checkout.
+**Current step:** Verify the exact reviewed-test registration correction and rerun
+complete source compatibility acceptance from a committed clean checkout.
 M2 remains accepted; M3 remains in progress.
 
 **Completed:** M2 immutable foundation acceptance; first M3 StateModel slice;
@@ -835,11 +877,14 @@ N1 contract, normalization implementation and successful complete acceptance/CI;
 N2 source/policy/interface adoption, implementation, clean 36-check/977-test
 offline execution and exact GitHub implementation publication; scoped CI correction
 verification/publication; bounded source compatibility design verification and
-publication; scoped source compatibility implementation controls.
+publication; scoped source compatibility implementation controls; completed
+1,006-test source candidate execution and four genuine committed-source Windows
+controls, with the one failed repository guard preserved.
 
-**Next action:** Finish independent complete clean acceptance and actual current/legacy
-source host controls. Preserve the actual failed Windows CI and verify its deterministic
-native ACL fixture correction. Publish the verified increment and README evidence.
+**Next action:** Verify the exact Phase 10 test registration, publish the scoped
+checkpoint with its failed full-run evidence, and finish replacement complete clean
+acceptance. Preserve actual Windows CI observations and verify the deterministic
+native ACL fixture correction. Update README with exact completed results.
 Resolve the
 remaining N3 session ownership, diagnostic chain and closed retention bounds.
 Implement and verify actual session
@@ -848,8 +893,9 @@ Diagnostics and generation before evaluating the unchanged M3 exit criteria.
 
 **Needed from owner:** Nothing for continued authorized roadmap development.
 
-**Saved at:** This planning-34 checkpoint follows published source design
+**Saved at:** This planning-35 checkpoint follows published source design
 `95f4cd0b98383bc1346e5c9365bb842ffbb52a3f`. It records actual CI observations,
-the deterministic native ACL probe and scoped compatibility controls. Immutable
+the deterministic native ACL probe, committed source candidate execution and
+the exact missing test registration correction. Immutable
 milestone evidence, completed Windows acceptance and earlier failed/pending checkpoint
 identities remain preserved.
