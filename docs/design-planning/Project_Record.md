@@ -1,11 +1,13 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-35
-**Date:** October 4, 2026
+**Revision:** planning-36
+**Date:** October 5, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-34; full history remains in Git.
+**Supersedes:** planning-35 at `13df7079f911b8f6c56e7be263b0de263b209c48`; full history remains in Git.
+
+**Current approval and continuation:** Section 11 records the owner's October 5 approval of source-compatibility checkpoint closure followed by N3. Section 10 is the preserved planning-35 checkpoint, not the current next-action authority. This revision records an approved outcome and permission boundaries; it does not accept M3 or claim a new test execution.
 
 ## 1. Current working brief
 
@@ -773,7 +775,7 @@ The earlier replacement CI
 completed: Ubuntu passed; Windows passed 35 repository checks and ran all 977 tests
 in 1132.275 seconds with one failing assertion. The failure is
 `ReferenceDiagnosticsTests.test_native_parent_with_delete_child_grant_refused`:
-the hosted `C:\` ACL did not cause `WindowsProtectedStore` to refuse. The test had
+the hosted `C:\\` ACL did not cause `WindowsProtectedStore` to refuse. The test had
 assumed the root's grant rather than establishing one. Both genuine Recovery host
 tests completed without a reported failure. The preserved Windows job log SHA256
 is `dce38b890307ea9ae02020cae1f16e121e0882e2bf1c3dd1e474515f5addd1dc`.
@@ -866,7 +868,7 @@ corrupted. The replacement used an inline reviewed patch, removed the temporary 
 ran the roadmap and consolidated repository checks, and published this planning-13 record.
 The containing commit is the authoritative save point.
 
-## 10. Checkpoint
+## 10. Historical checkpoint — planning-35
 
 **Current step:** Verify the exact reviewed-test registration correction and rerun
 complete source compatibility acceptance from a committed clean checkout.
@@ -899,3 +901,149 @@ the deterministic native ACL probe, committed source candidate execution and
 the exact missing test registration correction. Immutable
 milestone evidence, completed Windows acceptance and earlier failed/pending checkpoint
 identities remain preserved.
+
+## 11. Outcome approval and current checkpoint — October 5, 2026
+
+**Approval ID:** YWE-APPROVAL-20261005-SOURCE-CLOSURE-N3
+**Decision status:** Owner-approved outcome and sequence; execution, evidence, acceptance and publication are separate states.
+**Approved by:** Flynn, project owner (`flynn33`).
+**Approval source:** Owner message in the resumed project conversation on October 5, 2026:
+
+> I approve the proposal just described for this outcome. Record exactly
+> what I approved, what remains undecided, and the next eligible action.
+> Keep execution and publication permissions separate.
+
+### 11.1 Exact approved outcome and scope
+
+The approval refers to the immediately preceding resumed-project proposal:
+
+> Close the existing source-compatibility checkpoint at `13df7079…`, then proceed directly to N3.
+
+The full referenced implementation identity is
+`13df7079f911b8f6c56e7be263b0de263b209c48`. The approved work sequence is:
+
+1. Preserve the successful Ubuntu and Windows Main CI result for that exact revision and the original failed candidate evidence. Do not repeat the already-published registration repair or continue describing its hosted CI result as pending.
+2. Retrieve any already-produced matching clean, unfiltered offline acceptance report before rerunning work. Evaluate its exact source identity, actual execution, selections, offline controls and checkout evidence. Complete only verification for which adequate matching evidence remains missing; record actual outcomes without converting approval into acceptance.
+3. Close the source-compatibility checkpoint with evidence-backed Project Record, README and applicable handoff updates. Then continue N3 session admission/state publication, containment, safe halt and terminal-lifecycle work. Resolve and adopt its remaining contract choices before dependent implementation.
+
+This is continuation of the existing project and roadmap, not a restart. M0, M1 and M2 remain accepted; M3 remains in progress. The adopted Raven Forge Development v0.7.0 pin in section 3, approved source pins and engineering decisions remain unchanged. The approval does not adopt historical soft-reset/M1 recommendations from attached discussion material, reopen M2, introduce dependencies, initiate a platform product, or approve an unspecified N3 design.
+
+### 11.2 Actual evidence and remaining verification
+
+During this approval-recording session, GitHub `main` was read at
+`13df7079f911b8f6c56e7be263b0de263b209c48`. Main CI run
+[37254719493](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37254719493)
+was rechecked through its job records: Ubuntu job `111589234920` and Windows job
+`111589235091` both completed successfully against that exact source revision.
+These are observations of existing executions, not newly run tests.
+
+The inspected workflow uses `python scripts/validate_repository.py --context manual`.
+Its successful CI does not by itself establish the separately requested explicit
+offline execution and saved acceptance report. A matching replacement clean,
+unfiltered offline report has not been verified in this session. Its existence
+elsewhere is unknown; lack of retrieval is not proof that no such report exists.
+The owner's local checkout and external N3 review files remain uninspected here.
+
+No new repository test suite, native build, source-compatibility acceptance run,
+N3 implementation, milestone acceptance, package issuance or product release is
+claimed by this recording transaction. Repository-source retrieval through the
+connected GitHub interface succeeded; an auxiliary container download could not
+complete because the container could not resolve the network host. No local clone
+or owner-checkout verification is inferred from remote evidence.
+
+### 11.3 Decisions and obligations still open
+
+| Item | Remaining disposition |
+|---|---|
+| Source-compatibility closure | Approved outcome; acceptance remains evidence-dependent until the matching offline report is retrieved/evaluated or missing verification is executed. |
+| N3 contract | Exact session ownership, admission/state-publication, containment, halt and terminal behavior remain subject to the recorded source review and adoption prerequisites. Approval of sequence is not approval of those unresolved details. |
+| N3 diagnostic and retention bounds | The reviewed four-Recovery-record lifetime case requires its support/alias/page graph and byte reservations to be recomputed and reviewed before adoption. The earlier three-record bound is not reused as proof. |
+| Refused admission and terminal finalization | Final contract treatment of refused-admission finalization, under-lock terminal freshness and once-finish response observation remains part of N3 closure. |
+| Remaining M3 semantics and acceptance | Remaining diagnostic producers, deterministic generation, topology, axiom/emitter traceability, canonical serialization, lifecycle and resource behavior remain unfinished. All five existing M3 exit criteria remain unchanged and unaccepted. |
+| Future publication and platform decisions | This approval selects no new tag, specification release, distribution artifact, platform implementation, external package dispatch or upstream modification. Existing gates and separate authority continue to apply. |
+
+These open technical choices do not require the owner to reconstruct available
+records. Retrieve the existing N3 review before proposing or adopting new details.
+Independent authorized work may continue; only work dependent on an unresolved
+contract or missing evidence remains held.
+
+### 11.4 Execution authority — separate ledger
+
+This message approves the stated outcome and directs accurate recording. It is
+not treated as a new blanket implementation or dispatch authorization.
+
+Previously recorded authority for continued roadmap development in section 8 is
+preserved. That authority covers eligible specification/reference work and its
+verification only within the approved scope, adopted contracts, qualified host
+capabilities and existing review gates. This recording session performs source
+reads and continuity-record maintenance, not the approved implementation sequence.
+
+N3 dependent implementation remains ineligible until its applicable contract and
+source-review prerequisites are resolved and adopted. No authority is inferred to
+change canonical semantics, import reference repositories, waive checks, reopen
+accepted milestones, issue a coding-agent package, or begin platform products.
+Issued coding-agent packages remain in the external project-instructions workspace
+and retain their own qualification and dispatch requirements.
+
+### 11.5 Publication authority — separate ledger
+
+The new outcome approval grants no additional commit/push, pull-request, merge,
+tag, signing, distribution, release, repository-settings or upstream-edit authority.
+It does not revoke previously recorded permissions.
+
+The existing [planning-location decision](decisions/2026-09-19-planning-location.md)
+separately authorizes design/planning record storage and scoped owner-account
+commit/push, including use of an existing authorized admin bypass when necessary.
+Sections 2 and 8 preserve applicable roadmap publication authority. This record
+save relies on that pre-existing record-saving authority, not on interpreting
+outcome approval as permission to publish an implementation.
+
+Only the Project Record and applicable existing handoff are intended write targets
+for this recording transaction. Owner-only authorship and no co-author trailers
+remain required. No force-push, protection/settings change, new release/tag,
+upstream edit or package dispatch is included. Future source publication must
+independently satisfy its applicable authority, review, verification and integrity
+obligations; no obligation is waived here.
+
+### 11.6 Reading and preservation scope
+
+The pinned method's README, Project Start, Repository Catalog, System Interpretation
+and Use, System Realization Enforcement, System Realization Contract, Testing
+Methodology, Development Diagnostics, System Catalog, Project Record and Session
+Handoff templates, and Repository/Project/Version Integrity guidance were read for
+this decision-recording scope. Truncated substantive material was retrieved before
+reliance. This is not a new full reading of every reference-system repository or
+an adoption of new system profiles. Prior technical reading and execution retain
+their original provenance.
+
+The existing planning-35 record, latest applicable handoff and storage decision
+supply the project continuity and inherited permission basis. Sections 1–9 and
+the content of the earlier checkpoint are retained; the earlier checkpoint is
+explicitly labeled historical. No normative requirement, ADR, roadmap milestone,
+schema, fixture, validator, canonical source or immutable acceptance artifact is
+changed by this approval entry.
+
+### 11.7 Current checkpoint and next eligible action
+
+**Current step:** Record the approved source-compatibility closure outcome and its
+separate permission boundaries. The outcome is approved; closure is not yet claimed.
+
+**Completed:** Owner approval captured with its exact scope; unchanged `main`
+implementation identity and successful two-platform CI rechecked; prior decisions,
+method pin, accepted milestones, failed evidence and permission limits preserved.
+No new implementation or test execution is claimed.
+
+**Next action:** Retrieve and assess any existing complete clean, unfiltered offline
+acceptance report for `13df7079f911b8f6c56e7be263b0de263b209c48`. The immediate output is
+one evidence disposition: an adequate matching report with its durable identity,
+or the precisely missing verification to execute on the already-authorized host.
+Do not rerun the repaired work or adopt N3 details merely to fill a retrieval gap.
+
+**Needed from owner:** Nothing for this evidence retrieval and continued work within
+existing authority. A new material decision or permission is requested only when
+its actual absence blocks the next dependent action.
+
+**Saved at:** `docs/design-planning/Project_Record.md`, planning-36. The containing
+commit and subsequent readback are the save receipt; this text does not predeclare
+a successful write or tests for its future containing revision. The applicable
+handoff points to this approval entry and preserves its older checkpoint as history.
