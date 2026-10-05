@@ -5,6 +5,7 @@ import dataclasses
 import hashlib
 import itertools
 import json
+import os
 from pathlib import Path
 import re
 import unittest
@@ -1907,6 +1908,7 @@ class RecoveryIntegrationTests(unittest.TestCase):
                 self.assertEqual(result.completion_observation.status, 'COMPLETE')  # outer failure completed once
                 self.assertEqual(len(diagnostics.finish_inputs), 1)
 
+    @unittest.skipUnless(os.name == "nt", "Actual adopted protected storage is Windows-specific")
     def test_genuine_windows_collector_integrates_n1_recovery_routes_and_paired_redacted_export(self):
         from scripts.reference_diagnostics_host import assemble_reference_diagnostics
         sentinel = 'N2_REFERENCE_SECRET_SENTINEL_349d7'
@@ -1990,6 +1992,7 @@ class RecoveryIntegrationTests(unittest.TestCase):
         finally:
             diagnostics.store.close()
 
+    @unittest.skipUnless(os.name == "nt", "Actual adopted protected storage is Windows-specific")
     def test_genuine_collector_refuses_detached_and_mutated_origin_without_recovery_effects(self):
         from scripts.reference_diagnostics_host import assemble_reference_diagnostics
         diagnostics = assemble_reference_diagnostics(ROOT)

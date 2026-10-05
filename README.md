@@ -169,7 +169,15 @@ account for unconfirmed files, reserve incident capacity before effects, and ref
 admission when health persistence fails. These are reference-slice results; native
 platform product qualification and complete M3 acceptance remain subsequent work.
 The exact passing revision was pushed without force and read back through Git and
-GitHub's API; the remote README bytes match. [Main CI for that exact revision](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37246961196) was dispatched; its result remains pending in this checkpoint.
+GitHub's API; the remote README bytes match. [Implementation CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37246961196)
+and [README checkpoint CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37247262742)
+subsequently failed: each passed 35 of 36 checks, with two unit-test errors because
+the genuine Windows collector tests ran on Ubuntu. The completed Windows acceptance
+above remains evidence for its exact revision. This checkpoint preserves those
+tests and scopes them to Windows; Main CI now runs the complete canonical validator
+on both Ubuntu and Windows with independent job results. Replacement CI results
+remain pending until observed. This CI correction does not change production storage
+or promote M3.
 
 [Adoption CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37238793118)
 passed 35 of 36 checks; the existing package guard rejected numeric budget formulas.

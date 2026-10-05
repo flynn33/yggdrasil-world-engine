@@ -272,7 +272,15 @@ This covers exact immutable-value recovery, certified fallback routing, complete
 safe graph persistence, bounded completion and paired JSON/Markdown export,
 including all 131,072 actual two-codeword proofs and protected Windows reference
 storage. Git and GitHub API readback confirmed the exact SHA and README bytes.
-[Main CI for that exact revision](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37246961196) was dispatched; its result remains pending in this checkpoint.
+[Implementation CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37246961196)
+and [README checkpoint CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37247262742)
+subsequently failed with 35 of 36 checks passing each: two genuine Windows collector
+tests invoked the Windows-specific host on Ubuntu. Their assertions are preserved
+with Windows method guards; Main CI now executes the complete canonical validator
+on both Ubuntu and Windows, without cancelling one job when the other fails.
+Replacement CI results remain pending until observed. The exact completed Windows
+acceptance remains recorded; this test/workflow correction changes no production
+storage behavior and completes no M3 exit criterion.
 The earlier contract and focused-progress CI checkpoints are observed successful;
 the original 35-of-36 adoption failure remains recorded.
 Session publication, actual containment and halt, remaining canonical Diagnostics

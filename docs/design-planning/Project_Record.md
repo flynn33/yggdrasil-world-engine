@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-31
+**Revision:** planning-32
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-30; full history remains in Git.
+**Supersedes:** planning-31; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -690,6 +690,30 @@ review. Actual containment/halt, remaining canonical producers, generation and a
 five unchanged M3 exit criteria remain outstanding. No M3 gate, release or platform
 product authorization is claimed by this reference-slice acceptance.
 
+## 8l. N2 CI platform correction
+
+The implementation run [37246961196](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37246961196)
+at `c78ee7e451e5d35b2f615369433291007e7ee261` and the README checkpoint run
+[37247262742](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37247262742)
+at `e5fbce354fc0ba7eda4c88682b4deabe5f29de6e` are now observed failed.
+Each completed 35 of 36 checks; the unit suite registered 977 tests, 34 Windows
+skips and two errors. Both error traces originate in the genuine collector methods
+of `tests/test_m3_recovery.py::RecoveryIntegrationTests`, which called
+`assemble_reference_diagnostics` on Ubuntu. That factory creates
+`WindowsProtectedStore`, whose drive-root boundary refuses with
+`STORAGE_PARENT_UNTRUSTED` before Windows security assembly. The host also explicitly
+requires Windows. This observed test-platform mismatch does not establish a
+production storage defect or invalidate the separate completed Windows execution.
+
+The two methods receive the same Windows guard already used by the native
+`ReferenceDiagnosticsTests` class. Every method body and assertion remains intact.
+Main CI now has Ubuntu and Windows jobs running the complete canonical validator,
+with `fail-fast: false`, full Git history and Python 3.13 on both. The setup action's
+`python` launcher is used for dependency installation and validation. Actual hosted
+Windows drive/ACL and full-suite results remain unverified until that job runs;
+replacement CI results are pending. No production, canonical-source, fixture or
+immutable milestone evidence changes are part of this correction.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -700,23 +724,25 @@ The containing commit is the authoritative save point.
 
 ## 10. Checkpoint
 
-**Current step:** Complete external review and adopt the N3 session/publication,
-containment and safe-halt contracts before dependent implementation. M2 remains
-accepted; M3 remains in progress.
+**Current step:** Verify and publish the N2 CI platform correction, then adopt
+the reviewed source-compatibility increment before dependent N3 session/publication,
+containment and safe-halt implementation. M2 remains accepted; M3 remains in progress.
 
 **Completed:** M2 immutable foundation acceptance; first M3 StateModel slice;
 N1 contract, normalization implementation and successful complete acceptance/CI;
 N2 source/policy/interface adoption, implementation, clean 36-check/977-test
 offline execution and exact GitHub implementation publication.
 
-**Next action:** Resolve the exact N3 session ownership, source-vector compatibility,
-diagnostic chain and closed retention bounds. Implement and verify actual session
+**Next action:** Observe both replacement CI jobs and investigate any actual failure.
+Adopt exact reviewed source-vector compatibility, then resolve the remaining N3
+session ownership, diagnostic chain and closed retention bounds. Implement and verify actual session
 admission/state publication, containment and terminal guards, then continue remaining
 Diagnostics and generation before evaluating the unchanged M3 exit criteria.
 
 **Needed from owner:** Nothing for continued authorized roadmap development.
 
-**Saved at:** This planning-31 checkpoint follows published N2 implementation
-`c78ee7e451e5d35b2f615369433291007e7ee261`. The containing committed revision records its
-actual complete acceptance and publication. Immutable milestone evidence and earlier
-checkpoint identities remain preserved.
+**Saved at:** This planning-32 checkpoint follows published N2 implementation
+`c78ee7e451e5d35b2f615369433291007e7ee261` and README checkpoint
+`e5fbce354fc0ba7eda4c88682b4deabe5f29de6e`. It records their actual CI failure and the
+scoped replacement. Immutable milestone evidence, completed Windows acceptance and
+earlier checkpoint identities remain preserved.
