@@ -238,7 +238,7 @@ positive requirement traceability, lifecycle categories, method-specific validat
 and durable milestone evidence remain incomplete. No M2 acceptance or M3
 activation is recorded. Independent source/diff review found no blocking issue.
 
-The earlier working-tree suite reported two blocking checks, including incorrect
+The earlier working-tree run reported two blocking checks, including incorrect
 Core routing for two new profile schemas and a boundary test loaded before the
 concurrent family-schema update. Explicit profile/governance assignments and the
 correct case targets resolved them; focused checks and the frozen clone suite
@@ -775,7 +775,7 @@ The earlier replacement CI
 completed: Ubuntu passed; Windows passed 35 repository checks and ran all 977 tests
 in 1132.275 seconds with one failing assertion. The failure is
 `ReferenceDiagnosticsTests.test_native_parent_with_delete_child_grant_refused`:
-the hosted `C:\\` ACL did not cause `WindowsProtectedStore` to refuse. The test had
+the hosted `C:\` ACL did not cause `WindowsProtectedStore` to refuse. The test had
 assumed the root's grant rather than establishing one. Both genuine Recovery host
 tests completed without a reported failure. The preserved Windows job log SHA256
 is `dce38b890307ea9ae02020cae1f16e121e0882e2bf1c3dd1e474515f5addd1dc`.
