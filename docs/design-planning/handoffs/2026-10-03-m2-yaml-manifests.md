@@ -1,3 +1,54 @@
+# YWE Session Handoff — Package Preparation Checkpoint
+
+**Date:** October 5, 2026
+**Handoff checkpoint:** package-preparation-1
+**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-36, section 11; unchanged by this preparation checkpoint.
+**Approved outcome:** YWE-APPROVAL-20261005-SOURCE-CLOSURE-N3; source-compatibility closure within M3, followed by separately reviewed N3 contract work.
+**Inspected planning snapshot:** `c0ca30c78e1697575c062f0fd6fe4c7e478c61f5`.
+**Implementation to verify:** `13df7079f911b8f6c56e7be263b0de263b209c48`.
+**Method:** Raven Forge Development v0.7.0 at `87409bc36fb9d4782eab02189adb184f2b3962a7`.
+
+This checkpoint records package preparation and observed limitations. It changes no approved design, milestone, source pin, acceptance requirement or permission. The approval handoff and its earlier history remain below.
+
+## External artifact receipt
+
+Package `YWE-M3-SOURCE-CLOSURE-001`, revision r1, was prepared as the conversation artifact `YWE-M3-SOURCE-CLOSURE-001-r1.zip`. It is **prepared, not issued**. No package payload, archive, helper tool or source snapshot has been placed in the product repository.
+
+- Archive SHA-256: `e622597e178f31c13a4102860b595d08e439169032d8c00bf7566c16958bad82`.
+- Manifest SHA-256: `4e22568306426dd7f293b82c1ee16d7140df2ac8b4259a7c55f3796cb2df4300`.
+- Contents: 16 manifest-listed files plus the manifest; exact intake opening message included.
+- Package-only verification: ten synthetic integrity-helper tests passed with zero failures, errors or skips. Archive CRC/readback and extracted file-hash verification passed. These are not YWE repository tests, independent instruction review, host qualification or milestone acceptance.
+
+The owner's actual external project-instructions folder path was not established. The artifact is staged outside a Git worktree in the conversation runtime; that staging location is not the owner's folder. **External-folder placement has not been performed or verified.** The archive and extracted instructions must remain outside the product checkout.
+
+## Actual environment and permission observations
+
+The preparation runtime is Linux with Python 3.13.5 and Git available. Windows tools and the owner's filesystem mounts/checkouts are not exposed there. Direct container DNS resolution for GitHub failed; connected GitHub reads succeeded. A filesystem/terminal integration search found an available but uninstalled host connector; no connection or permission setting was changed.
+
+The connected `flynn33` repository account reports admin/push capability and the GitHub app is configured to allow all actions. These are tool capabilities, not new task authority and not proof of the receiving coding environment's credentials. Existing execution and scoped record/publication permissions remain separately preserved under Project Record section 11 and the planning-location decision.
+
+The known successful CI run `37254719493` returned no uploaded artifacts through its artifact endpoint. Searches of accessible Project/Library sources and repository references did not establish a matching offline report or absolute external folder path. This does not prove that the report or folder is absent on the owner's host.
+
+No product suite, native build, source-compatibility acceptance execution or N3 implementation was performed during package preparation. No package reviewer or exact-package dispatch approval is invented.
+
+## Current checkpoint
+
+**Current step:** External package prepared; receiving-environment intake and qualification remain outstanding.
+
+**Completed:** Current approval and handoff retrieved; adopted source-compatibility contract and embedded inventory read in full; actual runner, report schema and check catalogue inspected; pinned package guidance applied; available preparation tools, mounts, network route and connected permissions checked; package files and archive read back.
+
+**Next action:** Transfer the prepared archive to the owner's existing external project-instructions folder and perform receiving-host intake. The first project-work operation remains retrieval and assessment of existing clean, unfiltered offline acceptance evidence for `13df7079f911b8f6c56e7be263b0de263b209c48`. Full verification or product edits under the prepared package remain dependent on actual environment qualification, instruction review and applicable execution authority; publication remains a separate decision and verification path.
+
+**Needed from owner:** The external-folder transfer and handover. No reconstruction of project requirements or approval history is needed.
+
+**Saved at:** This existing handoff contains the preparation receipt only. The authoritative Project Record remains planning-36. The containing commit and subsequent readback establish this receipt's persistence; no passing product tests or external-folder save are predeclared.
+
+N3 implementation and unresolved N3 design choices are not delegated by this package. Its four-Recovery-record graph/resource bounds, lifecycle and terminal decisions still require the actual reviewed contract and adoption. M0–M2 remain accepted, M3 remains in progress, and the platform gate remains deferred through M10.
+
+---
+
+## Prior approval handoff — retained with its original evidence and authority
+
 # YWE Session Handoff — Source-Compatibility Closure Approval
 
 **Current date:** October 5, 2026
