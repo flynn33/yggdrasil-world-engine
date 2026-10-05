@@ -1,3 +1,64 @@
+# YWE Session Handoff — Source-Compatibility Closure Approval
+
+**Current date:** October 5, 2026
+**Handoff revision:** planning-36
+**Authoritative record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-36, section 11.
+**Approval:** YWE-APPROVAL-20261005-SOURCE-CLOSURE-N3.
+**Record save point:** `fe0384102e261ae385957129b720b649c40e9d11`.
+**Implementation under review:** `13df7079f911b8f6c56e7be263b0de263b209c48`.
+**Method:** Raven Forge Development v0.7.0 at `87409bc36fb9d4782eab02189adb184f2b3962a7`.
+**Applicability:** This current continuation supersedes the planning-15 continuation instructions preserved below. The existing filename is retained; its October 3 date does not describe this latest update.
+
+## Approved outcome
+
+The owner approved closing the existing source-compatibility checkpoint at the exact implementation revision above, then proceeding directly to N3. The approval includes preserving the successful two-platform CI result and failed historical evidence, retrieving existing matching offline acceptance evidence before rerunning work, completing only missing verification, and recording actual closure in the Project Record, README and handoff.
+
+Proceeding to N3 means resolving and adopting the remaining session/publication, containment, halt and terminal-lifecycle contract choices before their dependent implementation. It is not approval of an unspecified N3 design. M0, M1 and M2 remain accepted, M3 remains in progress, and platform products remain deferred through M10 acceptance. No historical M1 restart proposal is adopted.
+
+The exact owner message, approval scope, exclusions, unresolved decisions and authority ledgers are maintained in Project Record section 11; this handoff is a navigation view, not a competing specification.
+
+## Evidence and limits
+
+Main CI run `37254719493` was rechecked: Ubuntu job `111589234920` and Windows job `111589235091` both completed successfully for `13df7079f911b8f6c56e7be263b0de263b209c48`. Do not repeat the registration repair or call that CI result pending.
+
+The workflow invokes `python scripts/validate_repository.py --context manual`. This does not establish the separately requested explicit offline run and saved report. A matching complete clean, unfiltered offline acceptance report has not been verified in this session; its existence elsewhere remains unknown.
+
+No new suite, native build, source-compatibility acceptance execution, N3 implementation, package issuance or release occurred in this approval-recording work. The owner's checkout and external review files remain unobserved here. The auxiliary container could not retrieve repository bytes because network name resolution failed; GitHub connector reads and record writes remained available. Do not infer owner-checkout cleanliness or synchronization from these remote observations.
+
+## Remaining decisions and obligations
+
+N3 still requires exact session ownership and lifecycle adoption, reviewed bounds for the four-Recovery-record lifetime case, recalculated support/alias/page and byte reservations, refused-admission finalization, under-lock terminal freshness and once-finish response treatment. Retrieve the existing external review before inventing replacement decisions. Remaining diagnostics/generation/serialization/lifecycle work and all five M3 exit criteria are unchanged and unaccepted.
+
+## Separate permissions
+
+**Execution:** The new message approves the outcome and requests recording; it is not new blanket implementation or dispatch authority. Existing continued-roadmap execution permission is preserved, subject to approved scope, contract adoption, source reading, host capability and verification gates. Dependent N3 implementation remains held until its prerequisites are satisfied.
+
+**Publication:** No new publication permissions are inferred from outcome approval. Existing scoped design/planning record commit/push authority comes from [the storage decision](../decisions/2026-09-19-planning-location.md), with the applicable roadmap authority preserved in the Project Record. This record save uses that prior authorization. Owner-only authorship remains required. No force-push, settings/protection change, tag, release, upstream change or external package dispatch is included. Future source publication retains its separate authority and integrity requirements.
+
+Only the authoritative Project Record and this existing handoff are changed by the recording transaction. The roadmap, README, requirements, schemas, fixtures, validators, source pins, implementation and immutable milestone evidence are not changed. The README closure update remains part of the approved subsequent evidence-backed closure, not a false completion entry now.
+
+## Current checkpoint
+
+**Current step:** Preserve the owner's approved outcome and separate permission boundaries.
+
+**Completed:** Approval recorded in Project Record planning-36; existing source identity and successful CI rechecked; earlier record and handoff instructions preserved as historical rather than current authority.
+
+**Next action:** Retrieve and assess any existing complete clean, unfiltered offline acceptance report for `13df7079f911b8f6c56e7be263b0de263b209c48`. Produce either a verified matching evidence identity or an exact statement of the missing verification to execute under existing authority. Do not begin by repeating the published repair.
+
+**Needed from owner:** Nothing for evidence retrieval within current authority.
+
+**Saved at:** This existing handoff path and `docs/design-planning/Project_Record.md`, planning-36. The containing commit and subsequent readback establish persistence; no passing CI or test execution is claimed for this documentation-only revision.
+
+## Restart instruction
+
+Resume from `docs/design-planning/Project_Record.md`, planning-36, section 11, and this current handoff section. Preserve Raven Forge Development v0.7.0 at the recorded immutable pin, approved decisions and separate execution/publication authority. Retrieve existing source-compatibility offline acceptance evidence for `13df7079f911b8f6c56e7be263b0de263b209c48` before repeating verification; N3 contract adoption and all M3 exit criteria remain outstanding.
+
+---
+
+## Historical October 3 handoff — retained, not current continuation authority
+
+The following original checkpoint is preserved for provenance. Its M2-in-progress/M3-planned instructions and planning-15 reference are superseded by the current continuation above.
+
 # M2 YAML Module Manifest Structural Validation Handoff
 
 Date: October 3, 2026
