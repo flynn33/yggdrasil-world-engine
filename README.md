@@ -151,33 +151,35 @@ passed for that exact revision. The subsequent [publication checkpoint CI](https
 The [N2 recovery contract](docs/architecture/m3_recovery_contract.md),
 [recovery safety policy](docs/architecture/m3_recovery_safety_policy.md), and
 [reference Diagnostics contract](docs/architecture/m3_reference_diagnostics_contract.md)
-are now adopted before implementation as YWE-REQ-0041 / YWE-REQ-0042 and ADR-0031.
-Their exact interfaces cover actual immutable recovery/fallback execution, complete
-safe proof retention, protected local storage and paired JSON/Markdown exports.
-The implementation candidate is now frozen for complete clean acceptance.
-Diagnostics and its wire controls pass 47 tests; the values/registry/schema suite
-passes 41. A combined M3 run passed 252 tests, including all 131,072 actual
-two-codeword proof cases, before the two final guard tests and registry correction.
-Those final controls passed separately and will run again in the unfiltered suite.
-Independent review corrected stale origin acknowledgments after unknown deletion,
-unconfirmed export-file accounting, incident-capacity and admission-health failures,
-and invalid nested source/profile fields accepted through custom equality hooks.
-Actual protected Windows storage, complete target evidence, durable incidents,
-paired exports and retention controls passed locally. Complete clean implementation
-acceptance and GitHub implementation publication remain pending.
-Its reviewed retention amendment defines physical purge with actual deletion
-receipts and protects supporting evidence still referenced by retained records.
-M3 remains active until the complete slice and milestone acceptance checks pass. The same review
-also adopts complete pure target-diagnostic retention and an explicit incident
-persistence port before their implementation.
+were adopted before dependent implementation as YWE-REQ-0041 / YWE-REQ-0042 and ADR-0031.
+The [published recovery and Diagnostics implementation](https://github.com/flynn33/yggdrasil-world-engine/commit/c78ee7e451e5d35b2f615369433291007e7ee261)
+now passes all 36 applicable repository checks and 977 unit tests from a clean,
+unfiltered offline clone. The unit suite took 1036.845 seconds; the complete
+repository run took 1320.484 seconds. It records no blocking failures, advisories,
+check selections or checkout changes. All 734 fixture bindings, including 250 intended
+rejections, pass offline; schema-quality debt remains empty.
+
+The verified slice computes immutable recovery and certified fallback values,
+revalidates complete source/profile and target proofs, retains actual failed attempts,
+and captures the complete safe evidence graph. Its tests execute all 131,072 actual
+two-codeword proof cases, protected Windows storage, durable incidents, paired
+JSON/Markdown exports, physical retention controls and nested binding rejection.
+Independent review corrections preserve unknown purge roots and stale-ACK refusal,
+account for unconfirmed files, reserve incident capacity before effects, and refuse
+admission when health persistence fails. These are reference-slice results; native
+platform product qualification and complete M3 acceptance remain subsequent work.
+The exact passing revision was pushed without force and read back through Git and
+GitHub's API; the remote README bytes match. [Main CI for that exact revision](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37246961196) was dispatched; its result remains pending in this checkpoint.
+
 [Adoption CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37238793118)
-passed 35 of 36 checks; package acceptance rejected numeric budget formulas under
-the existing state-language guard. The formulas now use exact sum notation with
-unchanged event and byte limits. [Replacement CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37241153172),
-[purge-contract CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37241878979)
-and [target/incident-contract CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37242753286)
-have now passed at their exact published revisions. Those runs verify the adopted
-contracts; complete clean implementation acceptance is the next publication gate.
+passed 35 of 36 checks; the existing package guard rejected numeric budget formulas.
+Equivalent sum notation preserves all event and byte limits.
+[Replacement CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37241153172),
+[purge-contract CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37241878979),
+[target/incident-contract CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37242753286)
+and [focused-progress checkpoint CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37244128176)
+passed at their exact published revisions. Historical failed and preparation-time
+pending observations remain in the development record.
 
 Next after this slice are session admission and state commit, actual containment
 and safe halt, remaining canonical Diagnostics producers and generation semantics.

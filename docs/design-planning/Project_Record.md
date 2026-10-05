@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-30
+**Revision:** planning-31
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-29; full history remains in Git.
+**Supersedes:** planning-30; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -664,6 +664,32 @@ meaning. The tracked/nonignored path snapshot contains 1195 paths. Schema-qualit
 debt remains empty. These are observed local registration results; the containing
 candidate still requires the complete clean unfiltered offline repository run.
 
+## 8k. N2 clean acceptance and implementation publication
+
+Frozen implementation `c78ee7e451e5d35b2f615369433291007e7ee261` passed all 36 applicable
+repository checks and 977 unit tests from its independent clean offline clone.
+The unit suite took 1036.845 seconds; the complete repository execution took
+1320.484 seconds. The completed report records empty check/group selections,
+file-only offline Git protocols, an empty dirty state before and after execution,
+and zero blocking or advisory failures. All 734 fixture bindings, including 250
+intended rejections, pass with offline references; all 218 declared schema IDs are
+unique and the schema-quality debt inventory is empty.
+
+This final frozen revision includes the 55th Recovery method and final registry
+guard correction that the earlier 252-test run did not cover. Its actual exhaustive
+131,072-proof and protected Windows reference storage/retention/export controls
+executed in the complete run. The implementation was pushed without force and
+read back through Git and GitHub's API; the published README bytes match the exact
+frozen revision. [Main CI for that exact revision](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37246961196) was dispatched; its result remains pending in this checkpoint.
+Focused-progress checkpoint CI 37244128176 is now observed successful for
+`16ee57d902f360f384ee7cf4dc370e91d024fe5c`. Earlier failed and pending observations
+remain historical; immutable M2 acceptance evidence is preserved.
+
+N3 session publication and lifecycle contracts are under external independent
+review. Actual containment/halt, remaining canonical producers, generation and all
+five unchanged M3 exit criteria remain outstanding. No M3 gate, release or platform
+product authorization is claimed by this reference-slice acceptance.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -674,23 +700,23 @@ The containing commit is the authoritative save point.
 
 ## 10. Checkpoint
 
-**Current step:** Verify the frozen N2 recovery and reference Diagnostics candidate
-from a clean unfiltered offline checkout, then publish the exact passing revision.
-M2 remains accepted; M3 remains in progress.
+**Current step:** Complete external review and adopt the N3 session/publication,
+containment and safe-halt contracts before dependent implementation. M2 remains
+accepted; M3 remains in progress.
 
-**Completed:** M2 immutable foundation acceptance; verified first M3 StateModel
-slice; N1 contract, normalization implementation, clean 36-check/833-test execution,
-GitHub publication and exact successful CI; N2 contract, safety policy and exact
-interface adoption with independent source/arithmetic review.
+**Completed:** M2 immutable foundation acceptance; first M3 StateModel slice;
+N1 contract, normalization implementation and successful complete acceptance/CI;
+N2 source/policy/interface adoption, implementation, clean 36-check/977-test
+offline execution and exact GitHub implementation publication.
 
-**Next action:** Run complete repository acceptance and publish verified N2 results.
-Continue through session/mode/terminal guards, remaining Diagnostics and
-generation before evaluating unchanged M3 exit criteria.
+**Next action:** Resolve the exact N3 session ownership, source-vector compatibility,
+diagnostic chain and closed retention bounds. Implement and verify actual session
+admission/state publication, containment and terminal guards, then continue remaining
+Diagnostics and generation before evaluating the unchanged M3 exit criteria.
 
 **Needed from owner:** Nothing for continued authorized roadmap development.
 
-**Saved at:** This planning-30 checkpoint follows published N1 implementation
-`5328f018f341b80ad58cdb82f64708992ee2d6ae` and publication checkpoint
-`4c01af5b01b4690da5cd2a97d5e6025e97a48e1c`. The containing committed revision
-freezes N2 implementation for complete acceptance before publication. Immutable milestone evidence and earlier
+**Saved at:** This planning-31 checkpoint follows published N2 implementation
+`c78ee7e451e5d35b2f615369433291007e7ee261`. The containing committed revision records its
+actual complete acceptance and publication. Immutable milestone evidence and earlier
 checkpoint identities remain preserved.

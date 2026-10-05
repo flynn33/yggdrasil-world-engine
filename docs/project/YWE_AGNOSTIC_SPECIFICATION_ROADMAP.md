@@ -262,17 +262,19 @@ The [N2 recovery contract](../architecture/m3_recovery_contract.md),
 [fixed recovery safety policy](../architecture/m3_recovery_safety_policy.md), and
 [reference Diagnostics contract](../architecture/m3_reference_diagnostics_contract.md)
 are adopted as YWE-REQ-0041 / YWE-REQ-0042 and ADR-0031 before dependent code.
-Exact immutable-value recovery, certified fallback routing, complete safe graph
-persistence, bounded completion and paired JSON/Markdown implementation are frozen
-for complete clean acceptance. Diagnostics and its wire controls pass 47 tests;
-values/registry/schema tests pass 41. A combined 252-test M3 run passed, including
-all 131,072 actual two-codeword proofs and protected Windows storage/export
-execution, before the two final guard tests and registry correction. Those final
-controls passed separately. Independent review corrections preserve actual unknown
-purge roots, fail closed on missing incidents/admission-health persistence and
-reject invalid nested source/profile values before custom equality can run.
-The three latest adopted-contract CI checkpoints passed at their exact revisions;
-full clean implementation acceptance and publication remain pending.
+The frozen implementation `c78ee7e451e5d35b2f615369433291007e7ee261`
+is published on GitHub main after all 36 applicable repository checks and 977
+unit tests passed from a clean, unfiltered offline clone. The complete execution
+took 1320.484 seconds, records an unchanged checkout before and after execution,
+and has zero blocking or advisory failures. All 734 fixture bindings, including
+250 intended rejections, pass offline; schema-quality debt remains empty.
+This covers exact immutable-value recovery, certified fallback routing, complete
+safe graph persistence, bounded completion and paired JSON/Markdown export,
+including all 131,072 actual two-codeword proofs and protected Windows reference
+storage. Git and GitHub API readback confirmed the exact SHA and README bytes.
+[Main CI for that exact revision](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37246961196) was dispatched; its result remains pending in this checkpoint.
+The earlier contract and focused-progress CI checkpoints are observed successful;
+the original 35-of-36 adoption failure remains recorded.
 Session publication, actual containment and halt, remaining canonical Diagnostics
 producers and generation remain subsequent work. This checkpoint does not complete
 an M3 exit criterion.
