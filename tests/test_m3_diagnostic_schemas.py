@@ -108,6 +108,32 @@ class ReferenceDiagnosticWireTests(unittest.TestCase):
         row = copy.deepcopy(self.fixtures[0]); row["profile"]["development_payloads_enabled"] = False
         self.rejected(row)
 
+    def test_whole_source_vectors_accept_legacy_and_current_and_reject_crossed_pins(self):
+        text = (ROOT / "docs/architecture/m3_source_compatibility_contract.md").read_text(encoding="utf-8")
+        inventory = json.loads(text.split("<!-- EXACT_SOURCE_COMPATIBILITY_INVENTORY -->", 1)[1].split("```json", 1)[1].split("```", 1)[0])
+        rows = []
+        for vector in inventory["vectors"]:
+            pins = [{"source_kind": pin["source_kind"], "revision": inventory["legacy_commit"], "sha256": pin["sha256"]}
+                for pin in vector["diagnostic_pin_fields"]]
+            row = {"evidence_reference":"ref:000001", "dependency_id":"ash_cosmological_model.f2_9.canonical",
+                "verified_pins":pins, "external_source_reference":None, "external_verification":"DECLARED_NOT_AUTHENTICATED"}
+            self.valid(row, "SafeSourceEvidence")
+            rows.append(row)
+        for source, other in ((0,1),(1,0)):
+            mixed = copy.deepcopy(rows[source])
+            mixed["verified_pins"][7] = copy.deepcopy(rows[other]["verified_pins"][7])
+            errors = list(self.fragment("SafeSourceEvidence").iter_errors(mixed))
+            self.assertEqual([("oneOf", ())], [(error.validator, tuple(error.path)) for error in errors])
+            self.assertEqual({("const", ("verified_pins",0,"sha256")), ("const", ("verified_pins",7,"sha256"))},
+                {(error.validator, tuple(error.path)) for error in errors[0].context})
+        reordered = copy.deepcopy(rows[0]); reordered["verified_pins"].reverse()
+        self.rejected(reordered, "SafeSourceEvidence")
+        invalid = copy.deepcopy(rows[1]); invalid["verified_pins"][0]["revision"] = "unverified"
+        errors = list(self.fragment("SafeSourceEvidence").iter_errors(invalid))
+        self.assertTrue(any(error.validator == "pattern" and tuple(error.path) == ("verified_pins",0,"revision") for error in errors))
+        # A structural source node intentionally does not authenticate its Git revision.
+        self.assertEqual(rows[0]["verified_pins"][0]["revision"], rows[1]["verified_pins"][0]["revision"])
+
     def test_coverage_and_counter_observations_are_complete_and_ordered(self):
         row = copy.deepcopy(self.fixtures[0]); row["coverage"].pop()
         self.rejected(row)

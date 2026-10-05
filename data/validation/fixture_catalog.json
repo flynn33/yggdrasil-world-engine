@@ -9414,6 +9414,370 @@
         "YWE-REQ-0041"
       ],
       "description": "The complete declared codeword path must retain the original classification predicate evidence link."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.canonical-mask-0",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/canonical/0/input",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/CanonicalAshBinding",
+      "category": "migration",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.canonical-mask-1",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/canonical/1/input",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/CanonicalAshBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/aggregate_sha256",
+          "schema_pointer": "/oneOf/0/properties/aggregate_sha256/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/taxonomy_source_sha256",
+          "schema_pointer": "/oneOf/1/properties/taxonomy_source_sha256/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.canonical-mask-2",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/canonical/2/input",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/CanonicalAshBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/aggregate_sha256",
+          "schema_pointer": "/oneOf/1/properties/aggregate_sha256/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/taxonomy_source_sha256",
+          "schema_pointer": "/oneOf/0/properties/taxonomy_source_sha256/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.canonical-mask-3",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/canonical/3/input",
+      "schema_id": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/CanonicalAshBinding",
+      "category": "migration",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0039"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.recovery-canonical-mask-0-mask-0",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/recovery/0/input",
+      "schema_id": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/RecoverySourceBinding",
+      "category": "migration",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0041"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.recovery-canonical-mask-0-mask-1",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/recovery/1/input",
+      "schema_id": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/RecoverySourceBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/canonical_binding",
+          "schema_pointer": "/oneOf/1/properties/canonical_binding/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/contract_pins/4",
+          "schema_pointer": "/oneOf/0/properties/contract_pins/prefixItems/4/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/contract_pins/6",
+          "schema_pointer": "/oneOf/1/properties/contract_pins/prefixItems/6/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0041"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.recovery-canonical-mask-0-mask-2",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/recovery/2/input",
+      "schema_id": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/RecoverySourceBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/canonical_binding",
+          "schema_pointer": "/oneOf/1/properties/canonical_binding/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/contract_pins/4",
+          "schema_pointer": "/oneOf/1/properties/contract_pins/prefixItems/4/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/contract_pins/6",
+          "schema_pointer": "/oneOf/0/properties/contract_pins/prefixItems/6/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0041"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.recovery-canonical-mask-0-mask-3",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/recovery/3/input",
+      "schema_id": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/RecoverySourceBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/canonical_binding",
+          "schema_pointer": "/oneOf/1/properties/canonical_binding/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/contract_pins/4",
+          "schema_pointer": "/oneOf/0/properties/contract_pins/prefixItems/4/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/contract_pins/6",
+          "schema_pointer": "/oneOf/0/properties/contract_pins/prefixItems/6/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0041"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.recovery-canonical-mask-3-mask-0",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/recovery/4/input",
+      "schema_id": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/RecoverySourceBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/canonical_binding",
+          "schema_pointer": "/oneOf/0/properties/canonical_binding/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/contract_pins/4",
+          "schema_pointer": "/oneOf/1/properties/contract_pins/prefixItems/4/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/contract_pins/6",
+          "schema_pointer": "/oneOf/1/properties/contract_pins/prefixItems/6/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0041"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.recovery-canonical-mask-3-mask-1",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/recovery/5/input",
+      "schema_id": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/RecoverySourceBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/canonical_binding",
+          "schema_pointer": "/oneOf/0/properties/canonical_binding/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/contract_pins/4",
+          "schema_pointer": "/oneOf/0/properties/contract_pins/prefixItems/4/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/contract_pins/6",
+          "schema_pointer": "/oneOf/1/properties/contract_pins/prefixItems/6/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0041"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.recovery-canonical-mask-3-mask-2",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/recovery/6/input",
+      "schema_id": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/RecoverySourceBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/canonical_binding",
+          "schema_pointer": "/oneOf/0/properties/canonical_binding/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/contract_pins/4",
+          "schema_pointer": "/oneOf/1/properties/contract_pins/prefixItems/4/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/contract_pins/6",
+          "schema_pointer": "/oneOf/0/properties/contract_pins/prefixItems/6/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0041"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.recovery-canonical-mask-3-mask-3",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/recovery/7/input",
+      "schema_id": "https://ywe.local/schemas/m3_recovery_value_schema.json#/$defs/RecoverySourceBinding",
+      "category": "migration",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0041"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.source-canonical-mask-0",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/source_graph/0/input",
+      "schema_id": "https://ywe.local/schemas/m3_reference_diagnostic_bundle_schema.json#/$defs/SafeSourceEvidence",
+      "category": "migration",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0042"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.source-canonical-mask-1",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/source_graph/1/input",
+      "schema_id": "https://ywe.local/schemas/m3_reference_diagnostic_bundle_schema.json#/$defs/SafeSourceEvidence",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/verified_pins/0/sha256",
+          "schema_pointer": "/oneOf/0/properties/verified_pins/prefixItems/0/properties/sha256/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/verified_pins/7/sha256",
+          "schema_pointer": "/oneOf/1/properties/verified_pins/prefixItems/7/properties/sha256/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0042"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.source-canonical-mask-2",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/source_graph/2/input",
+      "schema_id": "https://ywe.local/schemas/m3_reference_diagnostic_bundle_schema.json#/$defs/SafeSourceEvidence",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/verified_pins/0/sha256",
+          "schema_pointer": "/oneOf/1/properties/verified_pins/prefixItems/0/properties/sha256/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/verified_pins/7/sha256",
+          "schema_pointer": "/oneOf/0/properties/verified_pins/prefixItems/7/properties/sha256/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0042"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.source_compatibility.source-canonical-mask-3",
+      "path": "examples/core_source_compatibility/source_vector_cases.example.json",
+      "instance_pointer": "/source_graph/3/input",
+      "schema_id": "https://ywe.local/schemas/m3_reference_diagnostic_bundle_schema.json#/$defs/SafeSourceEvidence",
+      "category": "migration",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0042"
+      ],
+      "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
     }
   ]
 }

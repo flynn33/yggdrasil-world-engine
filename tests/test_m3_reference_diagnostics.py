@@ -1,9 +1,13 @@
 from __future__ import annotations
 
 import dataclasses
+import ctypes
+from ctypes import wintypes
 import json
 import os
 from pathlib import Path
+import subprocess
+import tempfile
 import unittest
 
 from core.ash_pattern_engine import diagnostics as core
@@ -12,6 +16,7 @@ from core.ash_pattern_engine import state_values as sv
 from core.ash_pattern_engine.state_model import StateModel, RecordingDiagnosticCapture
 from core.ash_pattern_engine.recovery import RecoveryEngine
 from scripts.reference_diagnostics_host import assemble_reference_diagnostics, WindowsProtectedStore
+from scripts import reference_diagnostics_host as host
 from tests import test_m3_recovery as fixtures
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -135,10 +140,82 @@ class ReferenceDiagnosticsTests(unittest.TestCase):
         self.assertEqual(pair.parts[-1].part, "MANIFEST")
         self.assertFalse(any(item.source == "NATIVE_RELEASE" and item.status == "AVAILABLE" for item in snapshot.coverage))
 
+    def test_actual_host_captures_current_and_legacy_source_graphs_in_one_pair(self):
+        owner = self.create()
+        actual_head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, check=True,
+            capture_output=True, text=True).stdout.strip()
+        revision, snapshots = host._verified_canonical_source_snapshots(ROOT)
+        self.assertEqual(actual_head, revision)
+        self.assertEqual(actual_head, owner.identity.source_revision)
+        text = (ROOT / "docs/architecture/m3_source_compatibility_contract.md").read_text(encoding="utf-8")
+        inventory = json.loads(text.split("<!-- EXACT_SOURCE_COMPATIBILITY_INVENTORY -->", 1)[1].split("```json", 1)[1].split("```", 1)[0])
+        expected = {}
+        for vector, source_revision in zip(inventory["vectors"], (inventory["legacy_commit"], actual_head)):
+            binding = sv.CanonicalAshBinding(**vector["canonical_binding"])
+            model = StateModel(fixtures.profile(), binding, owner.assessment_capture())
+            result = model.diagnose(fixtures.ash(0),
+                diagnostic_context=fixtures.context("diagnosis:source:" + vector["baseline"]))
+            self.assertEqual("COMPLETE", owner.complete_assessment(result).status)
+            expected[binding.aggregate_sha256] = (source_revision,
+                tuple((pin["source_kind"], pin["sha256"]) for pin in vector["diagnostic_pin_fields"]))
+        self.assertEqual(tuple(("ASH_AGGREGATE", expected[digest][0], digest) for digest in expected),
+            tuple((pin.source_kind, pin.revision, pin.sha256) for pin in snapshots))
+        self.assertEqual(2, len(snapshots))
+        self.assertNotEqual(inventory["legacy_commit"], actual_head)
+        snapshot = owner.snapshot(bundle_reference="bundle:actual:both-sources")
+        nodes = snapshot.supporting_evidence.source_evidence
+        self.assertEqual(2, len(nodes))
+        self.assertEqual(set(expected), {node.verified_pins[0].sha256 for node in nodes})
+        for node in nodes:
+            source_revision, pins = expected[node.verified_pins[0].sha256]
+            self.assertEqual(pins, tuple((pin.source_kind, pin.sha256) for pin in node.verified_pins))
+            self.assertEqual({source_revision}, {pin.revision for pin in node.verified_pins})
+        pair = owner.export_pair(snapshot)
+        self.assertIs(type(pair), dv.ExportReceipt)
+        self.assertEqual("COMPLETE", pair.status)
+        raw = (owner.store.root / "diagnostics.json").read_bytes()
+        markdown = (owner.store.root / "diagnostics.md").read_bytes()
+        embedded = markdown.split(b"```json\n", 1)[1].rsplit(b"\n```", 1)[0]
+        self.assertEqual(snapshot.to_record(), json.loads(raw))
+        self.assertEqual(json.loads(raw), json.loads(embedded))
+
     def test_native_parent_with_delete_child_grant_refused(self):
-        with self.assertRaises(dv.DiagnosticsContractError) as observed:
-            WindowsProtectedStore(Path("C:/"))
-        self.assertEqual(observed.exception.code, "STORAGE_PARENT_UNTRUSTED")
+        native = host._WinSecurity()
+        self.addCleanup(native.close)
+        # Real ACL controls on fresh empty fixtures; no volume-letter assumption
+        # or modification of an existing parent. Store integration is separate.
+        cases = (("trusted", "", None), ("create-only", "(A;;0x4;;;BU)", None),
+            ("delete-child", "(A;;0x40;;;BU)", "STORAGE_PARENT_UNTRUSTED"),
+            ("write-dac", "(A;;0x40000;;;BU)", "STORAGE_PARENT_UNTRUSTED"),
+            ("write-owner", "(A;;0x80000;;;BU)", "STORAGE_PARENT_UNTRUSTED"),
+            ("generic-all", "(A;;GA;;;BU)", "STORAGE_PARENT_UNTRUSTED"))
+        with tempfile.TemporaryDirectory(prefix="ywe-native-acl-") as directory:
+            fixture_root = Path(directory).resolve()
+            for name, grant, failure in cases:
+                with self.subTest(grant=name):
+                    path = (fixture_root / name).resolve()
+                    self.assertEqual(fixture_root, path.parent)
+                    descriptor, handle = wintypes.LPVOID(), None
+                    sddl = f"O:{native.sid}D:P(A;OICI;FA;;;{native.sid})(A;OICI;FA;;;SY)" + grant
+                    native.check(native.a.ConvertStringSecurityDescriptorToSecurityDescriptorW(
+                        sddl, 1, ctypes.byref(descriptor), None))
+                    try:
+                        attributes = host._SecurityAttributes(ctypes.sizeof(host._SecurityAttributes), descriptor, False)
+                        native.check(native.k.CreateDirectoryW(str(path), ctypes.byref(attributes)))
+                        handle = native.open_directory(path)
+                        native.identity(handle, directory=True)
+                        if failure is None:
+                            native.security(handle, private=False)
+                        else:
+                            with self.assertRaises(dv.DiagnosticsContractError) as observed:
+                                native.security(handle, private=False)
+                            self.assertEqual(failure, observed.exception.code)
+                    finally:
+                        if handle is not None:
+                            native.k.CloseHandle(handle)
+                        native.k.LocalFree(descriptor)
+                        if path.exists():
+                            path.rmdir()
 
     def test_nested_parent_is_not_silently_trusted(self):
         with self.assertRaises(dv.DiagnosticsContractError):
@@ -643,6 +720,157 @@ class DiagnosticValueTests(unittest.TestCase):
             dv.StorageReceipt(None, "COMMITTED", "STORAGE_COMMIT_UNCONFIRMED")
         with self.assertRaises(dv.DiagnosticsContractError):
             dv.CaptureRemovalObservation(dv.CaptureObjectKey("EVENT", 0, None, None), "REMOVED", None, None)
+
+
+class ControlledProjectionStore:
+    """Declared port responses for portable Core controls, not native storage proof."""
+    def __init__(self):
+        self.calls = []
+
+    def __getattr__(self, name):
+        def operation(*args):
+            self.calls.append((name, args))
+            if name == "verify":
+                return dv.StorageVerification("VERIFIED", True, True, True,
+                    ("EFFECTIVE_USER", "SYSTEM"), True, True, True, None)
+            return dv.StorageReceipt(args[0], "COMMITTED", None)
+        return operation
+
+
+class CanonicalSourceCompatibilityTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        text = (ROOT / "docs/architecture/m3_source_compatibility_contract.md").read_text(encoding="utf-8")
+        cls.inventory = json.loads(text.split("<!-- EXACT_SOURCE_COMPATIBILITY_INVENTORY -->", 1)[1].split("```json", 1)[1].split("```", 1)[0])
+        cls.legacy, cls.current = cls.inventory["vectors"]
+
+    def identity(self, revision="a" * 40):
+        provenance = dv.SourceProvenance("UNKNOWN" if revision is None else "VERIFIED_CLEAN", revision, (),
+            "SOURCE_NOT_VERIFIED" if revision is None else None)
+        unavailable = tuple(dv.MissingCoverage(name, "UNAVAILABLE", "NOT_MEASURED")
+            for name in ("ENVIRONMENT_OS", "ARCHITECTURE", "HOST_CLASS"))
+        environment = dv.DiagnosticsEnvironment("UNKNOWN", (3, 12, 0), "UNKNOWN", "UNKNOWN", unavailable)
+        return dv.DiagnosticsIdentity("2.0.23", "REFERENCE_DEVELOPMENT_DIAGNOSTICS", "REFERENCE_DEVELOPMENT",
+            "ref:000001", revision, provenance, "ref:000002", environment)
+
+    def pins(self):
+        return (dv.SourcePin("ASH_AGGREGATE", dv.LEGACY_SOURCE_REVISION, self.legacy["canonical_binding"]["aggregate_sha256"]),
+            dv.SourcePin("ASH_AGGREGATE", "a" * 40, self.current["canonical_binding"]["aggregate_sha256"]))
+
+    def owner(self, snapshots=None, revision="a" * 40):
+        store, clock = ControlledProjectionStore(), ControlledClock()
+        profile = dv.DiagnosticsProfile("REFERENCE_DEVELOPMENT", "REFERENCE_DEVELOPMENT_DIAGNOSTICS", "ref:000003", True)
+        owner = core.ReferenceDevelopmentDiagnostics(self.identity(revision), profile, store, clock,
+            canonical_source_snapshots=snapshots)
+        return owner, store, clock
+
+    def test_complete_vectors_project_distinct_actual_configured_source_revisions(self):
+        owner, store, _ = self.owner(self.pins())
+        for vector, revision in ((self.legacy, dv.LEGACY_SOURCE_REVISION), (self.current, "a" * 40)):
+            binding = sv.CanonicalAshBinding(**vector["canonical_binding"])
+            reference = owner._source_support(binding)
+            node = owner._support["CANONICAL_SOURCE"][reference]
+            expected = tuple((row["source_kind"], row["sha256"]) for row in vector["diagnostic_pin_fields"])
+            self.assertEqual(expected, tuple((pin.source_kind, pin.sha256) for pin in node.verified_pins))
+            self.assertEqual({revision}, {pin.revision for pin in node.verified_pins})
+        self.assertEqual(2, len(owner._support["CANONICAL_SOURCE"]))
+        self.assertEqual(2, sum(name == "commit_supporting" for name, _ in store.calls))
+
+    def test_direct_legacy_default_does_not_stamp_implementation_revision_or_enable_current(self):
+        owner, store, _ = self.owner()
+        reference = owner._source_support(sv.CanonicalAshBinding(**self.legacy["canonical_binding"]))
+        self.assertEqual({dv.LEGACY_SOURCE_REVISION}, {p.revision for p in owner._support["CANONICAL_SOURCE"][reference].verified_pins})
+        aliases, calls = dict(owner._aliases), len(store.calls)
+        with self.assertRaises(dv.DiagnosticsContractError) as observed:
+            owner._source_support(sv.CanonicalAshBinding(**self.current["canonical_binding"]))
+        self.assertEqual(("DIAGNOSTICS_ORIGIN_UNAVAILABLE", "ORIGINAL_SOURCE"), (observed.exception.code, observed.exception.failed_field))
+        self.assertEqual(aliases, owner._aliases)
+        self.assertEqual(calls, len(store.calls))
+
+    def test_invalid_configuration_refuses_before_store_clock_or_write(self):
+        legacy, current = self.pins()
+        malformed = object.__new__(dv.SourcePin)
+        object.__setattr__(malformed, "source_kind", "ASH_AGGREGATE")
+        object.__setattr__(malformed, "revision", "bad")
+        object.__setattr__(malformed, "sha256", current.sha256)
+        cases = ([legacy], (current, legacy), (legacy, legacy), (legacy, current, current),
+            (dv.SourcePin("ASH_AGGREGATE", "a" * 40, "f" * 64),),
+            (dv.SourcePin("ASH_AGGREGATE", "a" * 40, legacy.sha256),),
+            (dataclasses.replace(current, revision="b" * 40),),
+            (dv.SourcePin("ASH_TAXONOMY", "a" * 40, current.sha256),), (malformed,))
+        profile = dv.DiagnosticsProfile("REFERENCE_DEVELOPMENT", "REFERENCE_DEVELOPMENT_DIAGNOSTICS", "ref:000003", True)
+        for snapshots in cases:
+            with self.subTest(snapshots_type=type(snapshots).__name__):
+                store, clock = ControlledProjectionStore(), ControlledClock()
+                with self.assertRaises(dv.DiagnosticsContractError) as observed:
+                    core.ReferenceDevelopmentDiagnostics(self.identity(), profile, store, clock, canonical_source_snapshots=snapshots)
+                self.assertEqual(("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE"), (observed.exception.code, observed.exception.failed_field))
+                self.assertEqual([], store.calls)
+                self.assertEqual(100, clock.value)
+
+    def test_reflected_hostile_source_scalars_and_unowned_iterables_invoke_no_hooks(self):
+        calls = []
+        class Hostile(str):
+            def __eq__(self, other):
+                calls.append("equality")
+                return True
+            def __hash__(self):
+                calls.append("hash")
+                return 0
+        def iterable():
+            calls.append("iteration")
+            yield self.pins()[0]
+        invalid = [iterable()]
+        for field in ("source_kind", "revision", "sha256"):
+            pin = dataclasses.replace(self.pins()[0])
+            object.__setattr__(pin, field, Hostile(getattr(pin, field)))
+            invalid.append((pin,))
+        for snapshots in invalid:
+            with self.assertRaises(dv.DiagnosticsContractError):
+                self.owner(snapshots)
+        self.assertEqual([], calls)
+
+    def test_empty_mapping_and_unknown_identity_cannot_admit_source_certified_capture(self):
+        for snapshots, revision in (((), "a" * 40), (self.pins()[:1], None), (None, None)):
+            owner, store, clock = self.owner(snapshots, revision)
+            before = (len(store.calls), clock.value, dict(owner._aliases))
+            with self.assertRaises(dv.DiagnosticsContractError) as observed:
+                owner.assessment_capture().begin("assessment:no-source")
+            self.assertEqual(("DIAGNOSTICS_ORIGIN_UNAVAILABLE", "ORIGINAL_SOURCE"), (observed.exception.code, observed.exception.failed_field))
+            self.assertEqual(before, (len(store.calls), clock.value, dict(owner._aliases)))
+        with self.assertRaises(dv.DiagnosticsContractError):
+            self.owner(self.pins()[1:], None)
+
+    def test_source_nodes_recheck_nested_scalars_and_reject_mixed_complete_vectors(self):
+        vectors = []
+        for row in (self.legacy, self.current):
+            pins = tuple(dv.SourcePin(item["source_kind"], "a" * 40, item["sha256"]) for item in row["diagnostic_pin_fields"])
+            dv.SafeSourceEvidence("ref:000001", pins, None)
+            vectors.append(pins)
+        for mixed in (vectors[0][:-1] + vectors[1][-1:], vectors[1][:-1] + vectors[0][-1:], tuple(reversed(vectors[0]))):
+            with self.assertRaises(dv.DiagnosticsContractError):
+                dv.SafeSourceEvidence("ref:000001", mixed, None)
+        pin = dataclasses.replace(vectors[0][0]); object.__setattr__(pin, "revision", "bad")
+        with self.assertRaises(dv.DiagnosticsContractError):
+            dv.SafeSourceEvidence("ref:000001", (pin,) + vectors[0][1:], None)
+
+    def test_committed_legacy_snapshot_and_dirty_or_extra_source_refusal(self):
+        with tempfile.TemporaryDirectory(prefix="ywe-source-history-") as directory:
+            root = Path(directory) / "repo"
+            subprocess.run(["git", "clone", "--quiet", "--shared", "--no-checkout", str(ROOT), str(root)], check=True, capture_output=True)
+            subprocess.run(["git", "checkout", "--quiet", "--detach", dv.LEGACY_SOURCE_REVISION], cwd=root, check=True, capture_output=True)
+            revision, snapshots = host._verified_canonical_source_snapshots(root)
+            self.assertEqual(dv.LEGACY_SOURCE_REVISION, revision)
+            self.assertEqual(self.pins()[:1], snapshots)
+            taxonomy = root / "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md"
+            original = taxonomy.read_bytes()
+            taxonomy.write_bytes(original + b"\nUncommitted source change\n")
+            with self.assertRaises(dv.DiagnosticsContractError):
+                host._verified_canonical_source_snapshots(root)
+            taxonomy.write_bytes(original)
+            (taxonomy.parent / "unexpected-source.md").write_text("Not a registered canonical source\n", encoding="utf-8")
+            with self.assertRaises(dv.DiagnosticsContractError):
+                host._verified_canonical_source_snapshots(root)
 
 
 if __name__ == "__main__":

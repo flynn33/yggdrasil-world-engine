@@ -8,12 +8,44 @@ from __future__ import annotations
 from dataclasses import dataclass, fields
 import hashlib
 import json
+import re
 import threading
 from typing import Protocol
 
 from . import diagnostics_values as dv
 from . import state_values as sv
 from . import normalization_values as nv
+
+
+def _configured_source_snapshots(identity, snapshots):
+    """Validate declared assembly input before any storage or clock effects."""
+    revision = identity.source_revision
+    if revision is not None and (type(revision) is not str or re.fullmatch(r"[0-9a-f]{40}", revision) is None):
+        raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
+    if snapshots is None:
+        snapshots = () if revision is None else (dv.SourcePin("ASH_AGGREGATE", dv.LEGACY_SOURCE_REVISION,
+            dict(sv.CANONICAL_BINDING_FIELDS)["aggregate_sha256"]),)
+    if type(snapshots) is not tuple or len(snapshots) > 2:
+        raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
+    expected = tuple(dict(fields)["aggregate_sha256"] for _, fields in sv.CANONICAL_BINDING_BASELINES)
+    indexes, result = [], []
+    for pin in snapshots:
+        if type(pin) is not dv.SourcePin:
+            raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
+        try:
+            dv.SourcePin.__post_init__(pin)
+        except (AttributeError, dv.DiagnosticsContractError):
+            raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE") from None
+        if pin.source_kind != "ASH_AGGREGATE" or pin.sha256 not in expected:
+            raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
+        index = expected.index(pin.sha256)
+        if pin.revision != (dv.LEGACY_SOURCE_REVISION if index == 0 else revision) or index == 1 and revision is None:
+            raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
+        indexes.append(index)
+        result.append(dv.SourcePin(pin.source_kind, pin.revision, pin.sha256))
+    if indexes != sorted(set(indexes)):
+        raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
+    return tuple(result)
 
 
 def _encode(value):
@@ -133,9 +165,10 @@ class _RecoveryCapture:
 class _ReferenceDiagnostics:
     _profile_id = None
 
-    def __init__(self, identity, profile, store, clock):
+    def __init__(self, identity, profile, store, clock, *, canonical_source_snapshots=None):
         if type(identity) is not dv.DiagnosticsIdentity or type(profile) is not dv.DiagnosticsProfile:
             raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID")
+        snapshots = _configured_source_snapshots(identity, canonical_source_snapshots)
         if identity.profile_id != self._profile_id or profile.profile_id != self._profile_id or identity.implementation_id != profile.implementation_id:
             raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID")
         methods = ("verify", "commit_event", "commit_supporting", "commit_meta", "commit_health",
@@ -143,6 +176,7 @@ class _ReferenceDiagnostics:
         if any(not callable(getattr(store, method, None)) for method in methods) or not callable(getattr(clock, "read", None)):
             raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID")
         self.identity, self.profile, self.store, self.clock = identity, profile, store, clock
+        self._canonical_source_snapshots = snapshots
         self._lock, self._limits = threading.RLock(), dv.DiagnosticLimits()
         verification = store.verify()
         if type(verification) is not dv.StorageVerification or verification.status != "VERIFIED":
@@ -228,6 +262,8 @@ class _ReferenceDiagnostics:
                reserved_events=2, reserved_bytes=131072, reserved_aliases=64, denial=False):
         sv.InputEvidence.validate_reference(reference)
         with self._lock:
+            if self.identity.source_revision is None or not self._canonical_source_snapshots:
+                raise dv.DiagnosticsContractError("DIAGNOSTICS_ORIGIN_UNAVAILABLE", "ORIGINAL_SOURCE")
             self._observe_clock()
             if reference in self._scopes:
                 raise dv.DiagnosticsContractError("DIAGNOSTICS_REPLAY_REFUSED")
@@ -533,11 +569,15 @@ class _ReferenceDiagnostics:
     def _source_support(self, binding):
         if self.identity.source_revision is None:
             raise dv.DiagnosticsContractError("DIAGNOSTICS_ORIGIN_UNAVAILABLE", "ORIGINAL_SOURCE")
-        alias = self._alias("canonical-source:" + binding.aggregate_sha256)
-        names = ("ASH_AGGREGATE", "ASH_STATE_SPACE", "ASH_CODEWORDS", "ASH_VALIDITY",
-                 "ASH_CLASSIFICATION", "ASH_RECOVERY", "ASH_DIAGNOSTIC_SCHEMA", "ASH_TAXONOMY")
-        pins = tuple(dv.SourcePin(name, self.identity.source_revision, digest)
-                     for name, (_, digest) in zip(names, sv.CANONICAL_BINDING_FIELDS[1:]))
+        try:
+            fields = sv.canonical_diagnostic_pin_fields(binding)
+        except sv.StateContractError:
+            raise dv.DiagnosticsContractError("DIAGNOSTICS_ORIGIN_UNAVAILABLE", "ORIGINAL_SOURCE") from None
+        snapshot = next((pin for pin in self._canonical_source_snapshots if pin.sha256 == fields[0][1]), None)
+        if snapshot is None:
+            raise dv.DiagnosticsContractError("DIAGNOSTICS_ORIGIN_UNAVAILABLE", "ORIGINAL_SOURCE")
+        alias = self._alias("canonical-source:" + fields[0][1])
+        pins = tuple(dv.SourcePin(name, snapshot.revision, digest) for name, digest in fields)
         return self._supporting("CANONICAL_SOURCE", alias, dv.SafeSourceEvidence(alias, pins, None))
 
     def _profile_support(self, binding):

@@ -3,6 +3,7 @@ from copy import copy
 from dataclasses import FrozenInstanceError, replace
 import hashlib
 import inspect
+import json
 from pathlib import Path
 import unittest
 from unittest import mock
@@ -12,6 +13,7 @@ from core.ash_pattern_engine import state_values as s
 from core.ash_pattern_engine.fallback_registry import FallbackRegistry
 from core.ash_pattern_engine.state_model import RecordingDiagnosticCapture, StateModel
 from tests.test_m3_state_model import canonical_record, diagnostic_context, evidence, profile_binding
+from tests.test_m3_recovery import canonical_binding, legacy_source_hash
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,16 +26,20 @@ def source(reference="declared:test"):
     return r.EvidenceSourceBinding(reference, "a" * 64, reference + ":evidence")
 
 
-def assembly():
+def assembly(*, current=False):
     profile = profile_binding("recovery_values_test", ("000000000",))
     capture = RecordingDiagnosticCapture()
-    return StateModel(profile, s.CanonicalAshBinding(**canonical_record()), capture), capture
+    return StateModel(profile, canonical_binding(current=True) if current else s.CanonicalAshBinding(**canonical_record()), capture), capture
 
 
 def assess(model, candidate, reference, *, correction=None, fallback=None, context=None):
     dc = diagnostic_context(reference)
     subject = "ash_state_" + candidate.signature
     facts = evidence(model.profile_binding, dc, subject, correction, fallback)
+    facts = s.ClassificationEvidence(*(replace(fact, binding=replace(fact.binding,
+        ash_dependency_id=model.canonical_binding.dependency_id,
+        ash_aggregate_sha256=model.canonical_binding.aggregate_sha256))
+        for fact in (facts.correction_path_is_known, facts.fallback_is_available)))
     return model.assess(candidate, context=context or s.SystemContext(False, False),
                         classification_evidence=facts, diagnostic_context=dc)
 
@@ -70,7 +76,8 @@ def no_action_packet(model):
         origin.emitted_diagnostics[-1].diagnostic_reference, origin.assessment_binding.diagnosis_reference,
         diagnostic.rule_ids, "No recovery action required.", ("The candidate is unchanged.",))
     record = r.RecoveryRecord("operation:test:decision", envelope, "OPERATION_DECISION", decision)
-    binding = r.RecoverySourceBinding(model.canonical_binding, tuple(r.SourcePin(*pin) for pin in r.RECOVERY_CONTRACT_PIN_FIELDS))
+    binding = r.RecoverySourceBinding(model.canonical_binding,
+        tuple(r.SourcePin(*pin) for pin in r.recovery_contract_pin_fields(model.canonical_binding)))
     return r.RecoveryNoAction(context, origin, model.validate_assessment(origin), binding, None, None,
         (), (), (), (decision,), (record,), ZERO, None, None, None, None, None, None, None)
 
@@ -80,10 +87,8 @@ class RecoveryValueTests(unittest.TestCase):
         self.model, self.capture = assembly()
 
     def test_actual_reviewed_contract_and_policy_pins(self):
-        canonical = ROOT / "core/ash_pattern_engine/canonical"
         for path, expected in r.RECOVERY_CONTRACT_PIN_FIELDS:
-            text = (canonical / path).read_bytes().decode("utf-8-sig").replace("\r\n", "\n").replace("\r", "\n")
-            self.assertEqual(hashlib.sha256(text.encode()).hexdigest(), expected)
+            self.assertEqual(legacy_source_hash(path), expected)
         policy = (ROOT / "docs/architecture/m3_recovery_safety_policy.md").read_bytes().decode("utf-8-sig").replace("\r\n", "\n").replace("\r", "\n")
         self.assertEqual(hashlib.sha256(policy.encode()).hexdigest(), r.RECOVERY_POLICY_BINDING_FIELDS[-1][1])
 
@@ -216,6 +221,92 @@ class RecoveryValueTests(unittest.TestCase):
             with self.assertRaises(r.RecoveryContractError):
                 r.RecoverySourceBinding(self.model.canonical_binding, altered)
 
+    def test_complete_source_pairs_match_adopted_inventory_and_actual_source_bytes(self):
+        text = (ROOT / "docs/architecture/m3_source_compatibility_contract.md").read_text(encoding="utf-8")
+        inventory = json.loads(text.split("```json\n", 1)[1].split("\n```", 1)[0])
+        expected = tuple((row["baseline"], tuple(row["canonical_binding"].items()),
+                          tuple((pin["path"], pin["sha256"]) for pin in row["recovery_contract_pins"]))
+                         for row in inventory["vectors"])
+        self.assertEqual(r.RECOVERY_SOURCE_BASELINES, expected)
+        self.assertEqual(r.RECOVERY_CONTRACT_PIN_FIELDS, expected[0][2])
+        for current, (name, canonical, pins) in zip((False, True), expected):
+            with self.subTest(baseline=name):
+                binding = canonical_binding(current=current)
+                self.assertEqual(tuple(binding.to_record().items()), canonical)
+                self.assertEqual(r.recovery_contract_pin_fields(binding), pins)
+                accepted = r.RecoverySourceBinding(binding, [r.SourcePin(*pin) for pin in pins])
+                self.assertEqual(tuple((pin.path, pin.sha256) for pin in accepted.contract_pins), pins)
+                for path, digest in pins:
+                    actual = ((ROOT / "core/ash_pattern_engine/canonical" / path).read_text(encoding="utf-8-sig")
+                              .replace("\r\n", "\n").replace("\r", "\n")) if current else None
+                    self.assertEqual(hashlib.sha256(actual.encode("utf-8")).hexdigest() if current
+                                     else legacy_source_hash(path), digest)
+
+    def test_canonical_and_recovery_vectors_cannot_be_crossed_or_partially_mixed(self):
+        bindings = (canonical_binding(), canonical_binding(current=True))
+        pins = tuple(tuple(r.SourcePin(*pin) for pin in r.recovery_contract_pin_fields(binding))
+                     for binding in bindings)
+        for index, binding in enumerate(bindings):
+            other = pins[1 - index]
+            for submitted in (other, (*pins[index][:4], other[4], *pins[index][5:]),
+                              (*pins[index][:6], other[6])):
+                with self.subTest(baseline=index, pins=submitted):
+                    with self.assertRaises(r.RecoveryContractError) as error:
+                        r.RecoverySourceBinding(binding, submitted)
+                    self.assertEqual((error.exception.code, error.exception.field_name),
+                                     ("RECOVERY_BINDING_MISMATCH", "source_binding"))
+            altered = copy(binding)
+            object.__setattr__(altered, "taxonomy_source_sha256", bindings[1 - index].taxonomy_source_sha256)
+            with self.assertRaises(r.RecoveryContractError):
+                r.recovery_contract_pin_fields(altered)
+        for current in (False, True):
+            model, _ = assembly(current=current)
+            packet = no_action_packet(model)
+            altered = copy(packet.source_binding)
+            object.__setattr__(altered, "contract_pins", pins[int(not current)])
+            with self.assertRaises(r.RecoveryContractError):
+                replace(packet, source_binding=altered)
+
+    def test_source_pair_nested_scalar_guards_do_not_invoke_equality_hooks(self):
+        calls = []
+        class Hook:
+            def __eq__(self, other):
+                calls.append("equality")
+                return True
+            def __getattr__(self, name):
+                calls.append("attribute")
+                raise AssertionError("Untrusted source attribute hook")
+        for current in (False, True):
+            binding = canonical_binding(current=current)
+            pins = tuple(r.SourcePin(*pin) for pin in r.recovery_contract_pin_fields(binding))
+            for field, _ in s.CANONICAL_BINDING_FIELDS:
+                altered = copy(binding)
+                object.__setattr__(altered, field, Hook())
+                with self.assertRaises(r.RecoveryContractError):
+                    r.RecoverySourceBinding(altered, pins)
+            for field in ("path", "sha256"):
+                altered = copy(pins[0])
+                object.__setattr__(altered, field, Hook())
+                with self.assertRaises(r.RecoveryContractError):
+                    r.RecoverySourceBinding(binding, (altered, *pins[1:]))
+            with self.assertRaises(r.RecoveryContractError):
+                r.recovery_contract_pin_fields(Hook())
+        self.assertEqual(calls, [])
+
+    def test_source_pair_missing_owned_pin_leaves_have_bounded_refusal(self):
+        for current in (False, True):
+            binding = canonical_binding(current=current)
+            pins = tuple(r.SourcePin(*pin) for pin in r.recovery_contract_pin_fields(binding))
+            for present in ((), ("path",), ("sha256",)):
+                partial = object.__new__(r.SourcePin)
+                for field in present:
+                    object.__setattr__(partial, field, getattr(pins[0], field))
+                with self.subTest(current=current, present=present):
+                    with self.assertRaises(r.RecoveryContractError) as error:
+                        r.RecoverySourceBinding(binding, (partial, *pins[1:]))
+                    self.assertEqual((error.exception.code, error.exception.field_name),
+                                     ("RECOVERY_BINDING_MISMATCH", "source_binding"))
+
     def test_policy_request_is_typed_and_never_actual_mode_entry(self):
         policy = r.RecoverySafetyPolicyBinding(**dict(r.RECOVERY_POLICY_BINDING_FIELDS))
         directive = r.RecoveryDirective("ENTER_CONTAINMENT", "OPERATOR_REQUEST", "origin:test", "action:test", ("resolution:test",),
@@ -301,6 +392,33 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(witness.failure_code, "REGISTRY_PROFILE_MISMATCH")
         self.assertEqual(witness.current_profile_binding, different)
         self.assertEqual(witness.candidate_validations, ())
+
+    def test_registry_full_source_comparison_preserves_both_baselines_without_capture(self):
+        models = (self.model, assembly(current=True)[0])
+        for index, owner in enumerate(models):
+            entry, certification = entry_and_cert(owner)
+            snapshot = r.AvailableFallbackRegistry(registry_binding(owner), (entry,), (certification,))
+            registry = FallbackRegistry(snapshot, state_model=owner)
+            with self.subTest(baseline=index):
+                self.assertEqual(registry.validate_for_model(owner).status, "VERIFIED")
+                other = models[1 - index]
+                witness = registry.validate_for_model(other)
+                self.assertEqual((witness.status, witness.failure_code, witness.field_name),
+                                 ("REJECTED", "REGISTRY_SOURCE_MISMATCH", "registry.source_binding"))
+                self.assertIs(witness.submitted_snapshot, snapshot)
+                self.assertIs(witness.current_source_binding, other.canonical_binding)
+                self.assertEqual(witness.candidate_validations, ())
+                with self.assertRaises(r.RecoveryContractError) as error:
+                    FallbackRegistry(snapshot, state_model=other)
+                self.assertEqual(error.exception.validation.failure_code, "REGISTRY_SOURCE_MISMATCH")
+                # Relabelling the metadata still cannot certify the retained foreign assessment.
+                relabelled = replace(snapshot, source_binding=registry_binding(other))
+                with self.assertRaises(r.RecoveryContractError) as error:
+                    FallbackRegistry(relabelled, state_model=other)
+                validation = error.exception.validation
+                self.assertEqual(validation.failure_code, "CERTIFICATION_NOT_STABLE")
+                self.assertEqual(validation.candidate_validations[0].assessment_validation.failure_code,
+                                 "SOURCE_BINDING_MISMATCH")
 
     def test_registry_source_structural_guards_precede_constructor_and_use_time_equality(self):
         touched = []

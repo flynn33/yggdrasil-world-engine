@@ -175,9 +175,8 @@ subsequently failed: each passed 35 of 36 checks, with two unit-test errors beca
 the genuine Windows collector tests ran on Ubuntu. The completed Windows acceptance
 above remains evidence for its exact revision. This checkpoint preserves those
 tests and scopes them to Windows; Main CI now runs the complete canonical validator
-on both Ubuntu and Windows with independent job results. Replacement CI results
-remain pending until observed. This CI correction does not change production storage
-or promote M3.
+on both Ubuntu and Windows with independent job results. This CI correction does
+not change production storage or promote M3.
 
 The [CI correction](https://github.com/flynn33/yggdrasil-world-engine/commit/346ed87977d09aba5549c25f839c11aa34fd2093)
 is published. Its local recovery, Diagnostics and workflow suite passed 103 tests
@@ -185,7 +184,17 @@ in 267.396 seconds with zero skips, including both genuine collector methods.
 Six selected checks passed in 128.969 seconds from a separate clean offline clone;
 these selected checks are not a new unfiltered repository acceptance.
 The [replacement CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37249149545)
-runs both complete jobs; their results remain pending in this checkpoint.
+passed the complete Ubuntu job. Windows ran all 977 tests and failed one assertion:
+a native-parent test assumed that `C:\` grants an unsafe ordinary-user permission.
+The hosted ACL did not produce that refusal. A deterministic native ACL probe passed
+all six controls at the exact correction revision: trusted permissions and ordinary
+directory creation were accepted; explicit ordinary-user delete-child, ACL-write,
+owner-write and generic-all grants were refused. The test now creates its own ACL
+fixture and retains the exact native refusal assertion. Genuine protected-store
+integration remains exercised. Replacement full acceptance is pending below.
+The [source design CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37250452764)
+also passed Ubuntu and failed the same Windows ACL assumption after all 977 tests
+ran. Both failures remain recorded with their exact revisions.
 
 [Adoption CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37238793118)
 passed 35 of 36 checks; the existing package guard rejected numeric budget formulas.
@@ -202,10 +211,22 @@ is now adopted as YWE-REQ-0043 and ADR-0032 before dependent implementation.
 It defines two complete source baselines, paired recovery and Diagnostics pins,
 seven additional trigger-rule assignments, and host verification of actual source
 revisions before storage. The reviewed schema proposal preserves all 734 existing
-fixture results and 250 complete reject expectations. Source application and runtime
-compatibility remain pending; the existing canonical bytes and historical evidence
-are preserved in this design checkpoint. Full N3 session, containment and halt
-behavior still needs its separate adopted contract and implementation.
+fixture results and 250 complete reject expectations. The exact two-file source
+extension and dual-vector implementation are now applied for independent acceptance.
+Both complete vectors pass the source constructor and schema controls; mixed vectors
+are refused. Actual normalization retains the selected source, and pure assessment
+validation preserves both submitted/current roles without capture effects. The
+StateModel/normalization area passed 119 tests; the final source-control suite passed
+nine tests, including 16 independently authored atomic values. The fixture catalog
+retains its original 734 rows and adds six accepted and ten rejected source controls.
+All 750 bindings and 260 complete rejection expectations pass offline. Eleven
+selected precommit repository checks passed without blocking or advisory failures.
+The generated mirror and descriptor identify current aggregate
+`76d59926ce9676b7584c6cdd555f50f56fceda075fa3fc8b37167fd2be43f7c9`.
+Complete clean acceptance and committed-source host verification remain pending in
+this preparation-time checkpoint. Historical source evidence remains intact. Full
+N3 session, containment and halt behavior still needs its separate adopted contract
+and implementation.
 
 Next after this slice are session admission and state commit, actual containment
 and safe halt, remaining canonical Diagnostics producers and generation semantics.

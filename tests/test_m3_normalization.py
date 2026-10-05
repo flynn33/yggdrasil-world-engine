@@ -3,10 +3,12 @@ from __future__ import annotations
 import collections
 import copy
 import dataclasses
+import functools
 import hashlib
 import json
 from pathlib import Path
 import re
+import subprocess
 import unittest
 from unittest import mock
 
@@ -22,6 +24,7 @@ from core.ash_pattern_engine.state_model import StateModel, RecordingDiagnosticC
 ROOT = Path(__file__).resolve().parents[1]
 CANONICAL = ROOT / 'core/ash_pattern_engine/canonical'
 AGGREGATE = '0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb'
+LEGACY_SOURCE_REVISION = 'c78ee7e451e5d35b2f615369433291007e7ee261'
 CODEWORD_PIN = '8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c'
 POLICY_PIN = '804eec92cf52b465b7aaf0cb5f139f581ac2899d13203a8c4cfe9f4d7579c383'
 # Fingerprint of seven expectation columns in the independently reviewed 2,048 rows.
@@ -65,6 +68,14 @@ COMMON_FIELDS = ('outcome', 'operation_binding', 'plan', 'plan_validation', 'ori
 def normalized_hash(path):
     data = path.read_bytes().decode('utf-8-sig').replace('\r\n', '\n').replace('\r', '\n')
     return hashlib.sha256(data.encode('utf-8')).hexdigest()
+
+
+@functools.lru_cache(maxsize=32)
+def legacy_source_hash(relative_path):
+    raw = subprocess.check_output(['git', 'show', LEGACY_SOURCE_REVISION +
+        ':core/ash_pattern_engine/canonical/' + relative_path], cwd=ROOT)
+    text = raw.decode('utf-8-sig').replace('\r\n', '\n').replace('\r', '\n')
+    return hashlib.sha256(text.encode('utf-8')).hexdigest()
 
 
 def generator_codewords():
@@ -118,7 +129,7 @@ def expected_case(signature, recognized, codewords):
 
 def canonical_record():
     return {'dependency_id': 'ash_cosmological_model.f2_9.canonical', 'aggregate_sha256': AGGREGATE,
-            **{field: normalized_hash(CANONICAL / path) for field, path in SOURCE_FIELDS.items()}}
+            **{field: legacy_source_hash(path) for field, path in SOURCE_FIELDS.items()}}
 
 
 def source_record(profile_id, signatures):
@@ -1107,7 +1118,11 @@ class NormalizationValueTests(NormalizationTestCase):
     def test_seventh_rule_is_allowed_for_operations_and_rejected_in_assessment_packets(self):
         model = self.model(capture=normalization.RecordingNormalizationCapture())
         diagnosis = self.diagnose(model)
-        diagnostic = dataclasses.replace(diagnosis.state_validity_diagnostic, rule_ids=DIAGNOSIS_RULES + (CODEWORD_RULE,))
+        with self.assertRaises(sv.StateContractError) as caught:
+            dataclasses.replace(diagnosis.state_validity_diagnostic, rule_ids=DIAGNOSIS_RULES + (CODEWORD_RULE,))
+        self.assertEqual(('DIAGNOSTIC_ROW_INVALID', 'rule_ids'), (caught.exception.code, caught.exception.field_name))
+        diagnostic = dataclasses.replace(diagnosis.state_validity_diagnostic)
+        object.__setattr__(diagnostic, 'rule_ids', DIAGNOSIS_RULES + (CODEWORD_RULE,))
         with self.assertRaises(sv.StateContractError) as caught:
             dataclasses.replace(diagnosis, state_validity_diagnostic=diagnostic)
         self.assertEqual(('DIAGNOSTIC_ROW_INVALID', 'state_validity_diagnostic.rule_ids'), (caught.exception.code, caught.exception.field_name))

@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-33
+**Revision:** planning-34
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-32; full history remains in Git.
+**Supersedes:** planning-33; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -756,6 +756,66 @@ structures and 78 enum families; historical counts remain unchanged. Full N3
 session/publication, containment, safe halt and their closed evidence bounds remain
 under separate review. M3 remains in progress with all five exit criteria unchanged.
 
+## 8n. Source compatibility implementation and actual CI follow-up
+
+Design adoption `95f4cd0b98383bc1346e5c9365bb842ffbb52a3f` passed 11 selected
+checks in 155.391 seconds in a separate clean offline clone, with no blocking or
+advisory failures and no checkout changes. Git and GitHub API readback confirmed
+the exact SHA and byte-identical README. Its complete two-OS CI
+[37250452764](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37250452764)
+passed Ubuntu and failed Windows. The Windows job passed 35 of 36 repository checks;
+all 977 tests ran in 1019.655 seconds with the same native ACL assertion described
+below. The actual failed job log is preserved separately. Earlier preparation-time
+pending observations remain historical facts in section 8m.
+
+The earlier replacement CI
+[37249149545](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37249149545)
+completed: Ubuntu passed; Windows passed 35 repository checks and ran all 977 tests
+in 1132.275 seconds with one failing assertion. The failure is
+`ReferenceDiagnosticsTests.test_native_parent_with_delete_child_grant_refused`:
+the hosted `C:\` ACL did not cause `WindowsProtectedStore` to refuse. The test had
+assumed the root's grant rather than establishing one. Both genuine Recovery host
+tests completed without a reported failure. The preserved Windows job log SHA256
+is `dce38b890307ea9ae02020cae1f16e121e0882e2bf1c3dd1e474515f5addd1dc`.
+
+An independent external probe loaded the exact committed correction host and
+dependencies through Git archive. All six actual native ACL controls passed:
+trusted-only and ordinary directory-create grants were accepted; explicit ordinary
+user DELETE_CHILD, WRITE_DAC, WRITE_OWNER and GENERIC_ALL grants were refused with
+`STORAGE_PARENT_UNTRUSTED`. The narrow test correction supplies fresh ACL-controlled
+directories and invokes the actual native parent verifier. It changes no existing
+host ACL and preserves genuine protected-store integration. No production storage
+defect was established by this CI failure.
+
+The exact reviewed source patch is applied to its two canonical owners, and the
+existing synchronization command regenerated the mirror and source descriptor.
+Current source aggregate is
+`76d59926ce9676b7584c6cdd555f50f56fceda075fa3fc8b37167fd2be43f7c9`.
+The F2^9/C16 mathematics and both normalization/recovery policies remain unchanged.
+Core now recognizes complete legacy/current vectors and their paired recovery pins;
+Diagnostics selects the actual bound vector and declared source snapshot. Host
+assembly verifies actual current HEAD source blobs and the immutable c78 snapshot
+before storage. Dirty new source cannot receive an old containing revision label.
+
+The StateModel/source/normalization area passed 119 tests in 35.329 seconds.
+The final source-control suite passed nine tests, including all 16 independently
+authored constructor controls, both normalization sources, complete mismatch roles,
+fixed earlier rule owners and scalar-hook refusal. The independent authored fixture
+catalog adds six accepted and ten rejected source controls after preserving the
+original 734 rows and all earlier expectation sets. Their new schema rejection
+witnesses come from the frozen independently reviewed proposal. Static revision
+syntax in a source value is explicitly not host provenance.
+
+All 750 fixture bindings and 260 complete rejection expectations now pass offline.
+Eleven selected precommit repository checks passed with zero blocking failures and
+zero advisories, including source synchronization, machine artifacts, requirements,
+package acceptance, attribution, scope and historical M1/M2 governance. This selected
+run is against the working candidate and is not a clean complete acceptance claim.
+
+These area results are scoped evidence. Complete clean unfiltered acceptance and
+actual committed-source host execution remain pending. This checkpoint completes
+no M3 exit criterion and adopts no N3 session, containment or halt effects.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -766,19 +826,21 @@ The containing commit is the authoritative save point.
 
 ## 10. Checkpoint
 
-**Current step:** Verify and publish the bounded source compatibility design,
-then implement its complete source-vector and truthful provenance increment.
+**Current step:** Verify the applied complete source-vector compatibility and
+truthful host provenance increment from a committed clean checkout.
 M2 remains accepted; M3 remains in progress.
 
 **Completed:** M2 immutable foundation acceptance; first M3 StateModel slice;
 N1 contract, normalization implementation and successful complete acceptance/CI;
 N2 source/policy/interface adoption, implementation, clean 36-check/977-test
 offline execution and exact GitHub implementation publication; scoped CI correction
-verification/publication; bounded source compatibility design adoption.
+verification/publication; bounded source compatibility design verification and
+publication; scoped source compatibility implementation controls.
 
-**Next action:** Observe both replacement CI jobs and investigate any actual failure.
-Implement the adopted exact source-vector compatibility, preserve existing fixture
-and historical source truth, and run independent clean acceptance. Resolve the
+**Next action:** Finish independent complete clean acceptance and actual current/legacy
+source host controls. Preserve the actual failed Windows CI and verify its deterministic
+native ACL fixture correction. Publish the verified increment and README evidence.
+Resolve the
 remaining N3 session ownership, diagnostic chain and closed retention bounds.
 Implement and verify actual session
 admission/state publication, containment and terminal guards, then continue remaining
@@ -786,7 +848,8 @@ Diagnostics and generation before evaluating the unchanged M3 exit criteria.
 
 **Needed from owner:** Nothing for continued authorized roadmap development.
 
-**Saved at:** This planning-33 checkpoint follows published CI correction
-`346ed87977d09aba5549c25f839c11aa34fd2093`. It records actual scoped verification
-and the bounded source design adoption. Immutable milestone evidence, completed
-Windows acceptance and earlier failed/pending checkpoint identities remain preserved.
+**Saved at:** This planning-34 checkpoint follows published source design
+`95f4cd0b98383bc1346e5c9365bb842ffbb52a3f`. It records actual CI observations,
+the deterministic native ACL probe and scoped compatibility controls. Immutable
+milestone evidence, completed Windows acceptance and earlier failed/pending checkpoint
+identities remain preserved.

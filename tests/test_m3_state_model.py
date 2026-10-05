@@ -3,12 +3,14 @@ from __future__ import annotations
 import collections
 import copy
 import dataclasses
+import functools
 import hashlib
 import itertools
 import json
 import math
 from pathlib import Path
 import re
+import subprocess
 import unittest
 from unittest import mock
 
@@ -24,6 +26,8 @@ ROOT = Path(__file__).resolve().parents[1]
 CANONICAL = ROOT / 'core/ash_pattern_engine/canonical'
 DEPENDENCY = 'ash_cosmological_model.f2_9.canonical'
 AGGREGATE = '0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb'
+CURRENT_AGGREGATE = '76d59926ce9676b7584c6cdd555f50f56fceda075fa3fc8b37167fd2be43f7c9'
+LEGACY_SOURCE_REVISION = 'c78ee7e451e5d35b2f615369433291007e7ee261'
 SOURCE_FIELDS = {
     'state_space_sha256': 'core/ash-state-space.pseudo.md',
     'codeword_source_sha256': 'core/codeword-set.pseudo.md',
@@ -68,6 +72,14 @@ def normalized_hash(path: Path) -> str:
     return hashlib.sha256(text.encode('utf-8')).hexdigest()
 
 
+@functools.lru_cache(maxsize=32)
+def legacy_source_hash(relative_path: str) -> str:
+    raw = subprocess.check_output(['git', 'show', LEGACY_SOURCE_REVISION +
+        ':core/ash_pattern_engine/canonical/' + relative_path], cwd=ROOT)
+    text = raw.decode('utf-8-sig').replace('\r\n', '\n').replace('\r', '\n')
+    return hashlib.sha256(text.encode('utf-8')).hexdigest()
+
+
 def independently_read_codewords() -> tuple[int, ...]:
     text = (CANONICAL / 'core/codeword-set.pseudo.md').read_text(encoding='utf-8')
     rows = re.findall(r'^\s*(\d+)\s+\(([01](?:, [01]){8})\)\s+[048]\s*$', text, re.M)
@@ -86,7 +98,7 @@ def wrw_signatures() -> tuple[str, ...]:
 
 def canonical_record() -> dict[str, str]:
     return {'dependency_id': DEPENDENCY, 'aggregate_sha256': AGGREGATE,
-            **{field: normalized_hash(CANONICAL / path) for field, path in SOURCE_FIELDS.items()}}
+            **{field: legacy_source_hash(path) for field, path in SOURCE_FIELDS.items()}}
 
 
 def source_binding(profile_id: str, signatures: tuple[str, ...]):
@@ -338,15 +350,22 @@ class StateConstructionTests(ModelTestCase):
                 self.assert_code('CANONICAL_BINDING_INVALID', values.CanonicalAshBinding, **altered)
 
     def test_source_manifest_and_independently_hashed_pins_match(self):
-        identity = json.loads((ROOT / 'data/governance/ash_dependency_identity.json').read_text(encoding='utf-8'))
-        self.assertEqual(DEPENDENCY, identity['dependency_id'])
-        self.assertEqual(32, len(identity['files']))
-        records = []
-        for item in sorted(identity['files'], key=lambda item: item['relative_path']):
-            observed = normalized_hash(CANONICAL / item['relative_path'])
-            self.assertEqual(item['sha256'], observed)
-            records.append(item['relative_path'].encode() + b'\0' + observed.encode() + b'\n')
-        self.assertEqual(AGGREGATE, hashlib.sha256(b''.join(records)).hexdigest())
+        for revision, expected in ((None, CURRENT_AGGREGATE), (LEGACY_SOURCE_REVISION, AGGREGATE)):
+            with self.subTest(revision=revision):
+                raw = ((ROOT / 'data/governance/ash_dependency_identity.json').read_bytes()
+                       if revision is None else subprocess.check_output(['git', 'show',
+                       revision + ':data/governance/ash_dependency_identity.json'], cwd=ROOT))
+                identity = json.loads(raw)
+                self.assertEqual(DEPENDENCY, identity['dependency_id'])
+                self.assertEqual(32, len(identity['files']))
+                records = []
+                for item in sorted(identity['files'], key=lambda item: item['relative_path']):
+                    observed = (normalized_hash(CANONICAL / item['relative_path']) if revision is None
+                                else legacy_source_hash(item['relative_path']))
+                    self.assertEqual(item['sha256'], observed)
+                    records.append(item['relative_path'].encode() + b'\0' + observed.encode() + b'\n')
+                self.assertEqual(expected, identity['aggregate_sha256'])
+                self.assertEqual(expected, hashlib.sha256(b''.join(records)).hexdigest())
 
     def test_context_requires_exact_booleans(self):
         for field in ['is_in_safe_halt', 'is_in_containment']:

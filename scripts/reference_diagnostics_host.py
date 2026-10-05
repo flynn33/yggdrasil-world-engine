@@ -10,6 +10,7 @@ import ctypes
 from ctypes import wintypes as w
 from datetime import datetime, timezone
 import hashlib
+import io
 import json
 import os
 from pathlib import Path
@@ -17,12 +18,14 @@ import platform
 import re
 import subprocess
 import sys
+import tarfile
 import threading
 import time
 import uuid
 
 from core.ash_pattern_engine import diagnostics_values as dv
 from core.ash_pattern_engine import state_values as sv
+from scripts import sync_ash_specifications as ash_sync
 
 
 def _bytes(value):
@@ -421,33 +424,102 @@ class WindowsProtectedStore:
             self._closed = True
 
 
+_CANONICAL_PIN_PATHS = (
+    ("state_space_sha256", "core/ash-state-space.pseudo.md"),
+    ("codeword_source_sha256", "core/codeword-set.pseudo.md"),
+    ("validity_source_sha256", "core/state-validity-diagnostics.pseudo.md"),
+    ("classification_source_sha256", "core/system-state-classification.pseudo.md"),
+    ("recovery_source_sha256", "core/recoverability-semantics.pseudo.md"),
+    ("diagnostic_source_sha256", "interfaces/diagnostic-schema.md"),
+    ("taxonomy_source_sha256", "interfaces/rule-id-taxonomy.md"),
+)
+
+
+def _git_source_material(root, revision):
+    """Read actual committed source blobs and descriptor without network fallback."""
+    archive = subprocess.run(["git", "archive", "--format=tar", revision,
+        ash_sync.SOURCE_ROOT.as_posix(), ash_sync.MANIFEST_PATH.as_posix(), "VERSION"],
+        cwd=root, check=True, capture_output=True).stdout
+    material = {}
+    with tarfile.open(fileobj=io.BytesIO(archive), mode="r:") as source:
+        for member in source.getmembers():
+            if member.isdir():
+                continue
+            if not member.isfile() or member.name in material:
+                raise ValueError("source snapshot contains nonregular or duplicate material")
+            stream = source.extractfile(member)
+            if stream is None:
+                raise ValueError("source snapshot blob is unavailable")
+            material[member.name] = ash_sync.normalized_utf8_data(stream.read(), member.name)
+    return material
+
+
+def _verified_canonical_source_snapshots(root):
+    """Verify current containing tree and the pinned historical 32-file baseline."""
+    try:
+        revision = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, check=True,
+            capture_output=True, text=True).stdout.strip()
+        if re.fullmatch(r"[0-9a-f]{40}", revision) is None:
+            raise ValueError("implementation revision is unavailable")
+        legacy = _git_source_material(root, dv.LEGACY_SOURCE_REVISION)
+        current = _git_source_material(root, revision)
+        prefix = ash_sync.SOURCE_ROOT.as_posix() + "/"
+        source_rows = lambda files: [{"relative_path": name[len(prefix):],
+            "sha256": hashlib.sha256(data).hexdigest()} for name, data in sorted(files.items())
+            if name.startswith(prefix) and name[len(prefix):] not in ash_sync.EXCLUDED_SOURCE_PATHS]
+        legacy_rows = source_rows(legacy)
+        if len(legacy_rows) != 32:
+            raise ValueError("historical source inventory is not the approved 32 files")
+        names = tuple(row["relative_path"] for row in legacy_rows)
+        _actual_material, actual_rows = ash_sync._source_material(root)
+        descriptor = ash_sync._load_json_object(root / ash_sync.MANIFEST_PATH)
+        if len(actual_rows) != 32 or tuple(row["relative_path"] for row in actual_rows) != names:
+            raise ValueError("current source paths differ from the reviewed inventory")
+        if descriptor != ash_sync.expected_manifest(root, actual_rows):
+            raise ValueError("current dependency descriptor differs from actual source")
+        if source_rows(current) != actual_rows:
+            raise ValueError("current source bytes are not in the containing implementation tree")
+        normalized_descriptor = ash_sync.normalized_utf8_data((root / ash_sync.MANIFEST_PATH).read_bytes(), "descriptor")
+        if current.get(ash_sync.MANIFEST_PATH.as_posix()) != normalized_descriptor:
+            raise ValueError("current descriptor is not in the containing implementation tree")
+        legacy_descriptor = json.loads(legacy[ash_sync.MANIFEST_PATH.as_posix()].decode("utf-8"),
+            object_pairs_hook=ash_sync._unique_object)
+        if legacy.get("VERSION", b"").decode("utf-8").strip() != "2.0.23" or legacy_descriptor != ash_sync.expected_manifest(root, legacy_rows):
+            raise ValueError("historical dependency descriptor is not the approved baseline")
+        def binding(rows):
+            digests = {row["relative_path"]: row["sha256"] for row in rows}
+            return sv.CanonicalAshBinding(dependency_id=ash_sync.DEPENDENCY_ID,
+                aggregate_sha256=ash_sync.aggregate_sha256(rows),
+                **{field: digests[path] for field, path in _CANONICAL_PIN_PATHS})
+        legacy_binding, current_binding = binding(legacy_rows), binding(actual_rows)
+        if sv.canonical_source_baseline(legacy_binding) != "LEGACY_C78":
+            raise ValueError("historical source is not the legacy baseline")
+        snapshots = (dv.SourcePin("ASH_AGGREGATE", dv.LEGACY_SOURCE_REVISION, legacy_binding.aggregate_sha256),)
+        if sv.canonical_source_baseline(current_binding) == "N3_LIFECYCLE":
+            snapshots += (dv.SourcePin("ASH_AGGREGATE", revision, current_binding.aggregate_sha256),)
+        return revision, snapshots
+    except (OSError, ValueError, KeyError, subprocess.CalledProcessError, tarfile.TarError):
+        raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE") from None
+
+
 def assemble_reference_diagnostics(root: Path, *, release=False, parent=Path("D:/")):
     """Verify selected checkout/source bytes and assemble actual configured owners."""
     from core.ash_pattern_engine import diagnostics
     root = Path(root).resolve()
-    if Path(sv.__file__).resolve() != root / "core/ash_pattern_engine/state_values.py":
+    if any(Path(module.__file__).resolve() != root / relative for module, relative in (
+        (sv, "core/ash_pattern_engine/state_values.py"), (dv, "core/ash_pattern_engine/diagnostics_values.py"),
+        (diagnostics, "core/ash_pattern_engine/diagnostics.py"), (ash_sync, "scripts/sync_ash_specifications.py"))) or Path(__file__).resolve() != root / "scripts/reference_diagnostics_host.py":
         raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
     if (root / "VERSION").read_text(encoding="utf-8-sig").strip() != "2.0.23":
         raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
     truth = json.loads((root / "data/governance/repository_truth_manifest.json").read_text(encoding="utf-8-sig"))
     if truth.get("repository_baseline", {}).get("value") != "2.0.23":
         raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
-    manifest = json.loads((root / "data/governance/ash_dependency_identity.json").read_text(encoding="utf-8-sig"))
     normalized = lambda p: p.read_text(encoding="utf-8-sig").replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
-    rows = []
-    for entry in manifest["files"]:
-        relative = entry["relative_path"]
-        actual = hashlib.sha256(normalized(root / manifest["canonical_source_root"] / relative)).hexdigest()
-        if actual != entry["sha256"]:
-            raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
-        rows.append((relative, actual))
-    aggregate = hashlib.sha256("".join(p + "\0" + digest + "\n" for p, digest in sorted(rows)).encode("utf-8")).hexdigest()
-    if aggregate != dict(sv.CANONICAL_BINDING_FIELDS)["aggregate_sha256"]:
-        raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
+    revision, source_snapshots = _verified_canonical_source_snapshots(root)
     policy = root / "docs/architecture/m3_recovery_safety_policy.md"
     if hashlib.sha256(normalized(policy)).hexdigest() != dv.SafeRecoverySafetyPolicy.policy_sha256:
         raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
-    revision = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, check=True, capture_output=True, text=True).stdout.strip()
     dirty = subprocess.run(["git", "status", "--porcelain", "--untracked-files=all"], cwd=root, check=True, capture_output=True, text=True).stdout.splitlines()
     if len(dirty) > 128:
         raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
@@ -463,7 +535,7 @@ def assemble_reference_diagnostics(root: Path, *, release=False, parent=Path("D:
     store = WindowsProtectedStore(parent)
     try:
         owner = diagnostics.ReferenceReleaseDiagnostics if release else diagnostics.ReferenceDevelopmentDiagnostics
-        return owner(identity, profile, store, WindowsDiagnosticsClock())
+        return owner(identity, profile, store, WindowsDiagnosticsClock(), canonical_source_snapshots=source_snapshots)
     except BaseException:
         store.close()
         raise

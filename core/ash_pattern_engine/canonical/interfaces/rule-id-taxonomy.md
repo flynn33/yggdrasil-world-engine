@@ -84,6 +84,23 @@ Example: `ASH-STATE-VALIDITY-001`
 | `ASH-CONTAINMENT-TRIGGER-001` | Containment entered due to fallback failure | `containment-safe-failure-semantics.pseudo.md` |
 | `ASH-HALT-TRIGGER-001` | Safe halt entered due to containment breach | `containment-safe-failure-semantics.pseudo.md` |
 
+## Design Package YWE-N3-LIFECYCLE — lifecycle trigger coverage
+
+This extension assigns the remaining containment and safe-halt trigger rules
+already defined by `containment-safe-failure-semantics.pseudo.md`. The two
+previously assigned `TRIGGER-001` meanings remain unchanged. Each diagnostic
+cites the exact trigger evaluated; no trigger is silently mapped to another.
+
+| Rule ID | Meaning | Source |
+|---|---|---|
+| `ASH-CONTAINMENT-TRIGGER-002` | Containment entered due to propagation risk | `containment-safe-failure-semantics.pseudo.md`, PROPAGATION_RISK |
+| `ASH-CONTAINMENT-TRIGGER-003` | Containment entered due to an explicit operator or policy request | `containment-safe-failure-semantics.pseudo.md`, OPERATOR_REQUEST |
+| `ASH-CONTAINMENT-TRIGGER-004` | Containment entered after completed recovery validation failed and no permitted recovery continuation remained | `containment-safe-failure-semantics.pseudo.md`, RECOVERY_VALIDATION_FAILURE |
+| `ASH-HALT-TRIGGER-002` | Safe halt entered from FAILED under the required external-authority or source-defined unreachability escalation | `containment-safe-failure-semantics.pseudo.md`, ESCALATION_FROM_FAILED; `recoverability-semantics.pseudo.md`, ESCALATION_REQUIRED blocked recovery |
+| `ASH-HALT-TRIGGER-003` | Safe halt entered due to an explicit operator request | `containment-safe-failure-semantics.pseudo.md`, OPERATOR_HALT_REQUEST |
+| `ASH-HALT-TRIGGER-004` | Safe halt entered due to an explicit policy request | `containment-safe-failure-semantics.pseudo.md`, POLICY_HALT_REQUEST |
+| `ASH-HALT-TRIGGER-005` | Safe halt entered for blocked recovery with no path forward and no containment option | `containment-safe-failure-semantics.pseudo.md`, UNRESOLVABLE_BLOCKED_RECOVERY |
+
 ## Relation to other specifications
 
 - **diagnostic-schema.md** — requires that every diagnostic envelope include taxonomy-compliant rule IDs

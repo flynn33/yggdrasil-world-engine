@@ -295,6 +295,7 @@ class StateModel:
             raise values.StateContractError("PROFILE_BINDING_INVALID", "profile_binding")
         if type(canonical_binding) is not values.CanonicalAshBinding:
             raise values.StateContractError("CANONICAL_BINDING_INVALID", "canonical_binding")
+        values.canonical_source_baseline(canonical_binding)
         self._profile_binding = profile_binding
         self._canonical_binding = canonical_binding
         self._capture = diagnostic_capture
@@ -817,7 +818,7 @@ def legacy_diagnosis(candidate):
         f"legacy:detection:{digest}", f"legacy:classification:{digest}",
     )
     # Whitespace compatibility is decoded once; no unknown provenance is certified.
-    model = StateModel(wrw_profile_binding(), values.CanonicalAshBinding(**dict(values.CANONICAL_BINDING_FIELDS)), RecordingDiagnosticCapture())
+    model = StateModel(wrw_profile_binding(), values.CanonicalAshBinding(**dict(values.CURRENT_CANONICAL_BINDING_FIELDS)), RecordingDiagnosticCapture())
     result = model.diagnose(decoded.state if decoded.state is not None else candidate, diagnostic_context=context)
     if type(result) is not values.StateDiagnosis:
         raise values.StateContractError("DIAGNOSTIC_CAPTURE_UNCONFIRMED", "legacy_diagnosis")

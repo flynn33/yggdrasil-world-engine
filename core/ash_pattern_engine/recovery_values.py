@@ -1,4 +1,4 @@
-"""Owned N2 recovery values [YWE-REQ-0041]."""
+"""Owned N2 recovery values [YWE-REQ-0041] and reviewed source pairs [YWE-REQ-0043]."""
 
 from __future__ import annotations
 
@@ -38,6 +38,15 @@ RECOVERY_CONTRACT_PIN_FIELDS = (
     ("algorithms/containment-safe-failure-semantics.pseudo.md", "83f1a19c1a0f375e02f2044c238786514d64b122ab6ab5a8bda6e6fa307c8256"),
     ("interfaces/diagnostic-schema.md", "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7"),
     ("interfaces/rule-id-taxonomy.md", "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"),
+)
+RECOVERY_SOURCE_BASELINES = (
+    ("LEGACY_C78", state.CANONICAL_BINDING_FIELDS, RECOVERY_CONTRACT_PIN_FIELDS),
+    ("N3_LIFECYCLE", state.CURRENT_CANONICAL_BINDING_FIELDS, (
+        *RECOVERY_CONTRACT_PIN_FIELDS[:4],
+        ("algorithms/containment-safe-failure-semantics.pseudo.md", "df957dc5c82c2fd0b51e43c6783d8cbb2e3ce565420a765abffd244cdcea98b2"),
+        RECOVERY_CONTRACT_PIN_FIELDS[5],
+        ("interfaces/rule-id-taxonomy.md", "150b45d4c75aa053a8d5276d980b359b0ae768c85ae28896680296920402f250"),
+    )),
 )
 RECOVERY_POLICY_BINDING_FIELDS = (
     ("policy_id", "YWE-RECOVERY-SAFETY-001"), ("policy_version", "1.0.0"),
@@ -154,14 +163,32 @@ class SourcePin(_Record):
         _hash(self.sha256, "source_binding")
 
 
+def recovery_contract_pin_fields(binding: state.CanonicalAshBinding) -> tuple[tuple[str, str], ...]:
+    """Select the whole reviewed recovery vector for an exact canonical binding."""
+    _exact(binding, state.CanonicalAshBinding, "source_binding")
+    try:
+        baseline = state.canonical_source_baseline(binding)
+    except state.StateContractError:
+        _fail("source_binding", "RECOVERY_BINDING_MISMATCH")
+    for name, _canonical_fields, pins in RECOVERY_SOURCE_BASELINES:
+        if baseline == name:
+            return pins
+    _fail("source_binding", "RECOVERY_BINDING_MISMATCH")
+
+
 @dataclass(frozen=True, slots=True)
 class RecoverySourceBinding(_Record):
     canonical_binding: state.CanonicalAshBinding
     contract_pins: tuple[SourcePin, ...]
     def __post_init__(self):
-        _exact(self.canonical_binding, state.CanonicalAshBinding, "source_binding")
+        expected = recovery_contract_pin_fields(self.canonical_binding)
         pins = _sequence(self.contract_pins, lambda v, f: _exact(v, SourcePin, f), "source_binding", 7, 7)
-        if tuple((p.path, p.sha256) for p in pins) != RECOVERY_CONTRACT_PIN_FIELDS:
+        for pin in pins:
+            try:
+                SourcePin.__post_init__(pin)
+            except AttributeError:
+                _fail("source_binding", "RECOVERY_BINDING_MISMATCH")
+        if tuple((p.path, p.sha256) for p in pins) != expected:
             _fail("source_binding", "RECOVERY_BINDING_MISMATCH")
         object.__setattr__(self, "contract_pins", pins)
 
@@ -386,7 +413,11 @@ class RegistrySourceBinding(_Record):
         _reference(self.profile_id, "profile_binding")
         _hash(self.profile_source_sha256, "profile_binding")
         _exact(self.source_binding, EvidenceSourceBinding, "registry.source_binding")
-        if type(self.ash_dependency_id) is not str or self.ash_dependency_id != state.CANONICAL_BINDING_FIELDS[0][1] or type(self.ash_aggregate_sha256) is not str or self.ash_aggregate_sha256 != state.CANONICAL_BINDING_FIELDS[1][1]:
+        if (type(self.ash_dependency_id) is not str or
+                self.ash_dependency_id != state.CANONICAL_BINDING_FIELDS[0][1] or
+                type(self.ash_aggregate_sha256) is not str or
+                self.ash_aggregate_sha256 not in tuple(dict(canonical)["aggregate_sha256"]
+                                                     for _name, canonical, _pins in RECOVERY_SOURCE_BASELINES)):
             _fail("registry.source_binding", "RECOVERY_BINDING_MISMATCH")
 
 
@@ -882,6 +913,10 @@ class RecoveryRecord(_Record):
     def __post_init__(self):
         _reference(self.diagnostic_reference, "emitted_diagnostics")
         _exact(self.envelope, state.DiagnosticEnvelope, "emitted_diagnostics")
+        try:
+            state.DiagnosticEnvelope.__post_init__(self.envelope)
+        except state.StateContractError:
+            _fail("emitted_diagnostics")
         _choice(self.record_kind, ("ACTION_VALUE_COMPUTED", "OPERATION_DECISION"), "emitted_diagnostics")
         kind = RecoveryStepEvidence if self.record_kind == "ACTION_VALUE_COMPUTED" else RecoveryActionDecision
         _exact(self.payload, kind, "emitted_diagnostics")
@@ -941,6 +976,8 @@ class RecoveryFailureDetail(_Record):
         _choice(self.field_name, FIELD_NAMES, "capture")
         _optional(self.submitted_evidence, (AssessmentValidation, RegistryValidation, CorrectionValidation, NormalizationPreparation, PostAssessmentFacts, UnavailablePostAssessmentFacts, PredicateObservation, DiagnosticsCompletionReceipt), "capture")
         _optional(self.attempted_diagnostic, RecoveryRecord, "capture.append")
+        if self.attempted_diagnostic is not None:
+            RecoveryRecord.__post_init__(self.attempted_diagnostic)
         if self.capture_status is not None:
             _choice(self.capture_status, ("REJECTED", "NOT_CONFIRMED"), "capture.append")
         _optional(self.pending_directive, RecoveryDirective, "directive")
@@ -986,16 +1023,21 @@ class RecoveryPacketCommon(_Record):
         _exact(self.origin_assessment, state.StateAssessment, "origin_assessment")
         _exact(self.origin_validation, AssessmentValidation, "origin_validation")
         _exact(self.source_binding, RecoverySourceBinding, "source_binding")
+        RecoverySourceBinding.__post_init__(self.source_binding)
         if self.origin_validation.submitted_assessment != self.origin_assessment or self.operation_context.origin_assessment_reference != self.origin_assessment.assessment_binding.assessment_reference or self.operation_context.context_observation.context != self.origin_assessment.system_context or self.source_binding.canonical_binding != self.origin_validation.current_source_binding:
             _fail("origin_validation", "RECOVERY_BINDING_MISMATCH")
         for name, kind, maximum in (("steps", RecoveryStepEvidence, 768), ("post_assessments", LinkedPostAssessment, 33), ("policy_attempts", PolicyAttempt, 32), ("action_decisions", RecoveryActionDecision, 35), ("emitted_diagnostics", RecoveryRecord, 768)):
             field = "action_decisions" if name in ("steps", "policy_attempts") else ("post_assessment" if name == "post_assessments" else name)
             object.__setattr__(self, name, _sequence(getattr(self, name), lambda v, f, k=kind: _exact(v, k, f), field, maximum))
+        for record in self.emitted_diagnostics:
+            RecoveryRecord.__post_init__(record)
         if tuple(s.step_index for s in self.steps) != tuple(range(len(self.steps))):
             _fail("action_decisions")
         for name, kinds in (("registry_binding", RegistrySourceBinding), ("route_authorization", FallbackRouteAuthorization), ("candidate_state", state.AshState), ("directive", RecoveryDirective), ("failure_detail", RecoveryFailureDetail), ("normalization_preparation", NormalizationPreparation), ("correction_observation", CorrectionObservation), ("registry_snapshot", (AvailableFallbackRegistry, UnavailableFallbackRegistry)), ("registry_validation", RegistryValidation), ("completion_observation", DiagnosticsCompletionReceipt)):
             field = {"failure_detail": "capture", "completion_observation": "capture.finish", "registry_binding": "registry.source_binding", "registry_snapshot": "registry"}.get(name, name)
             _optional(getattr(self, name), kinds, field)
+        if self.failure_detail is not None:
+            RecoveryFailureDetail.__post_init__(self.failure_detail)
         if any(a.diagnostic.original_state_class != self.origin_assessment.system_state_class or a.diagnostic.recovery_category != self.origin_assessment.recovery_category or a.diagnostic.original_diagnostic != self.origin_assessment.state_validity_diagnostic or any(i >= len(self.steps) for i in a.step_indices) for a in self.action_decisions):
             _fail("action_decisions")
         ids = [r.diagnostic_reference for r in self.emitted_diagnostics]

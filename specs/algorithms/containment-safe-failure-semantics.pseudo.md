@@ -39,7 +39,7 @@ FUNCTION enter_containment(diagnostic: StateValidityDiagnostic, trigger: Contain
     record.restricted_operations = determine_safe_operation_subset(diagnostic)
     record.containment_time = current_timestamp()
     record.awaiting_resolution = TRUE
-    record.rule_ids = ["CONTAINMENT-TRIGGER-" + trigger.id]
+    record.rule_ids = [containment_trigger_rule_id(trigger)]
     record.notes = ["Containment entered: " + trigger.reason]
 
     RETURN record
@@ -110,7 +110,7 @@ FUNCTION enter_safe_halt(diagnostic: StateValidityDiagnostic, trigger: SafeHaltT
     record.system_state_class = SAFE_HALT
     record.halt_time = current_timestamp()
     record.is_terminal = TRUE
-    record.rule_ids = ["SAFE-HALT-TRIGGER-" + trigger.id]
+    record.rule_ids = [safe_halt_trigger_rule_id(trigger)]
     record.notes = ["Safe halt entered: " + trigger.reason]
     record.full_diagnostic_chain = collect_full_diagnostic_chain(diagnostic)
 
@@ -197,6 +197,36 @@ Containment and safe-halt diagnostics conform to the shared diagnostic envelope 
 - Containment diagnostics use `diagnostic_kind` = `CONTAINMENT`, `stage` = `ESCALATION`
 - Safe-halt diagnostics use `diagnostic_kind` = `SAFE_HALT`, `stage` = `TERMINAL`
 - `rule_ids` must conform to the `ASH-CONTAINMENT` and `ASH-HALT` families in `specs/interfaces/rule-id-taxonomy.md`
+
+### Exact lifecycle trigger rule bindings
+
+Design Package YWE-N3-LIFECYCLE records these exact source-owned assignments
+in `rule-id-taxonomy.md`. The functions used by the pseudocode above are total
+over the canonical trigger enums and return the following stable identifiers.
+The existing TRIGGER-001 meanings are preserved.
+
+| Trigger | Rule ID |
+|---|---|
+| `FALLBACK_FAILURE` | `ASH-CONTAINMENT-TRIGGER-001` |
+| `PROPAGATION_RISK` | `ASH-CONTAINMENT-TRIGGER-002` |
+| `OPERATOR_REQUEST` | `ASH-CONTAINMENT-TRIGGER-003` |
+| `RECOVERY_VALIDATION_FAILURE` | `ASH-CONTAINMENT-TRIGGER-004` |
+| `CONTAINMENT_BREACH` | `ASH-HALT-TRIGGER-001` |
+| `ESCALATION_FROM_FAILED` | `ASH-HALT-TRIGGER-002` |
+| `OPERATOR_HALT_REQUEST` | `ASH-HALT-TRIGGER-003` |
+| `POLICY_HALT_REQUEST` | `ASH-HALT-TRIGGER-004` |
+| `UNRESOLVABLE_BLOCKED_RECOVERY` | `ASH-HALT-TRIGGER-005` |
+
+ESCALATION_FROM_FAILED also covers the source-defined unreachability
+escalation in `recoverability-semantics.pseudo.md`: ESCALATION_REQUIRED with
+no external authority reachable escalates to TERMINAL_NO_RECOVERY. This
+records actual unreachability evidence; it does not claim an authority issued
+a halt directive. UNAVAILABLE evidence is not proof of unreachability.
+
+A missing or unknown trigger is a diagnostic-conformance failure. It must not
+be renamed to a different trigger or given a fabricated rule identifier.
+Actual mandatory safe-halt behavior remains governed by the preceding safe
+failure requirements even if diagnostic capture itself is unavailable.
 
 ### Diagnostic chaining
 

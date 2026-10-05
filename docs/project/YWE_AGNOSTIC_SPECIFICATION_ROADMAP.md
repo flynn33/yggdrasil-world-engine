@@ -285,16 +285,32 @@ The correction is published at `346ed87977d09aba5549c25f839c11aa34fd2093` after
 103 local recovery/Diagnostics/workflow tests passed with zero skips, including both
 genuine collector methods, and six selected clean offline repository checks passed.
 [Replacement CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37249149545)
-runs both complete jobs; their results remain pending in this checkpoint.
+passed Ubuntu. Windows completed all 977 tests with one failing native ACL assumption:
+`C:\` did not expose the unsafe parent grant expected by the test. A deterministic
+six-control native probe at the exact correction revision confirms the production
+verifier accepts trusted/create-only ACLs and refuses explicit untrusted delete-child,
+ACL-write, owner-write and generic-all grants. The test fixture now supplies the actual
+unsafe ACL; complete replacement acceptance remains pending.
+Source design CI [37250452764](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37250452764)
+also passed Ubuntu and failed the same Windows assumption after all 977 tests ran.
 The earlier contract and focused-progress CI checkpoints are observed successful;
 the original 35-of-36 adoption failure remains recorded.
 The bounded [source compatibility contract](../architecture/m3_source_compatibility_contract.md)
 is adopted as YWE-REQ-0043 and ADR-0032 before dependent code. It binds exactly two
 complete source vectors, their paired recovery/Diagnostics pins and actual source
 revisions. The external proposed-schema audit preserves all 734 existing fixture
-results and 250 complete reject expectations. Canonical source application and
-runtime compatibility are pending; full N3 session/lifecycle adoption remains
-separate. The accepted mathematical baseline and immutable M2 evidence are preserved.
+results and 250 complete reject expectations. The exact two-file source extension,
+generated mirror/descriptor and complete dual-vector implementation are applied for
+independent acceptance. Source constructor/schema controls refuse mixed vectors;
+actual normalization retains each source and pure cross-model assessment validation
+retains mismatch evidence without capture. The StateModel/normalization area passed
+119 tests, and the final nine-test source suite covers all 16 independently authored
+atomic controls. The original 734 fixture rows are preserved with 16 additions.
+All 750 bindings and 260 complete rejection expectations pass offline; 11 selected
+precommit repository checks pass with no blocking or advisory failures.
+Complete clean acceptance and committed current/legacy host source verification
+remain pending. Full N3 session/lifecycle adoption remains separate. The accepted
+mathematical baseline and immutable M2 evidence are preserved.
 Session publication, actual containment and halt, remaining canonical Diagnostics
 producers and generation remain subsequent work. This checkpoint does not complete
 an M3 exit criterion.

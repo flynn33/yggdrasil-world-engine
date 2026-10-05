@@ -1,6 +1,5 @@
 """Authored N2 format controls, independent of recovery producer output."""
 from copy import deepcopy
-import hashlib
 import json
 from pathlib import Path
 import unittest
@@ -8,6 +7,7 @@ import unittest
 from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 from referencing.exceptions import NoSuchResource
+from tests.test_m3_recovery import legacy_source_hash
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -51,8 +51,7 @@ def assessments():
 def contract_binding(origin):
     pins = []
     for path in SOURCE_PATHS:
-        text = (ROOT / "core/ash_pattern_engine/canonical" / path).read_bytes().decode("utf-8-sig").replace("\r\n", "\n").replace("\r", "\n")
-        pins.append({"path": path, "sha256": hashlib.sha256(text.encode()).hexdigest()})
+        pins.append({"path": path, "sha256": legacy_source_hash(path)})
     return {"canonical_binding": deepcopy(origin["source_binding"]), "contract_pins": pins}
 
 
@@ -169,6 +168,53 @@ class RecoverySchemaTests(unittest.TestCase):
         for uri, document in self.documents.items(): walk(document, uri)
         with self.assertRaises(Exception):
             self.registry.resolver(RECOVERY_ID).lookup("https://unregistered.invalid/schema")
+
+    def test_only_complete_adopted_canonical_and_recovery_pin_pairs_are_accepted(self):
+        text = (ROOT / "docs/architecture/m3_source_compatibility_contract.md").read_text(encoding="utf-8")
+        inventory = json.loads(text.split("```json\n", 1)[1].split("\n```", 1)[0])
+        bindings = [{"canonical_binding": deepcopy(row["canonical_binding"]),
+                     "contract_pins": deepcopy(row["recovery_contract_pins"])} for row in inventory["vectors"]]
+        self.assertEqual(len(bindings), 2)
+        for binding in bindings:
+            self.accept(binding, "RecoverySourceBinding")
+            self.reject(binding, lambda x: x.update(unreviewed=True), "additionalProperties", (), "RecoverySourceBinding")
+            self.reject(binding, lambda x: x["contract_pins"].pop(), "minItems", ("contract_pins",), "RecoverySourceBinding")
+        for canonical_index in range(2):
+            for taxonomy_index in range(2):
+                for containment_index in range(2):
+                    for pin_taxonomy_index in range(2):
+                        candidate = deepcopy(bindings[canonical_index])
+                        candidate["canonical_binding"]["taxonomy_source_sha256"] = bindings[taxonomy_index]["canonical_binding"]["taxonomy_source_sha256"]
+                        candidate["contract_pins"][4] = deepcopy(bindings[containment_index]["contract_pins"][4])
+                        candidate["contract_pins"][6] = deepcopy(bindings[pin_taxonomy_index]["contract_pins"][6])
+                        errors = list(self.validator("RecoverySourceBinding").iter_errors(candidate))
+                        with self.subTest(canonical=canonical_index, taxonomy=taxonomy_index,
+                                          containment=containment_index, pin_taxonomy=pin_taxonomy_index):
+                            if canonical_index == taxonomy_index == containment_index == pin_taxonomy_index:
+                                self.assertEqual(errors, [])
+                            else:
+                                self.assertTrue(errors, "A mixed reviewed vector was accepted")
+                                self.assertTrue(any(error.validator == "oneOf" for error in errors))
+
+    def test_registry_aggregate_recognition_does_not_require_relabelling_mismatch_evidence(self):
+        text = (ROOT / "docs/architecture/m3_source_compatibility_contract.md").read_text(encoding="utf-8")
+        inventory = json.loads(text.split("```json\n", 1)[1].split("\n```", 1)[0])
+        old, current = (row["canonical_binding"] for row in inventory["vectors"])
+        for canonical in (old, current):
+            snapshot = registry_snapshot()
+            snapshot["source_binding"]["ash_aggregate_sha256"] = canonical["aggregate_sha256"]
+            self.accept(snapshot, registry=True)
+            self.reject(snapshot, lambda x: x["source_binding"].update(ash_aggregate_sha256="f" * 64),
+                        "enum", ("source_binding", "ash_aggregate_sha256"), registry=True)
+        # Different submitted/current versions are truthful REJECTED comparison evidence.
+        for submitted, model in ((old, current), (current, old)):
+            origin = deepcopy(assessments()[5])
+            origin["source_binding"] = deepcopy(submitted)
+            witness = comparison(origin, status="REJECTED")
+            witness.update(current_source_binding=deepcopy(model), expected_diagnostic=None,
+                           expected_system_state_class=None, expected_recovery_category=None,
+                           failure_code="SOURCE_BINDING_MISMATCH", field_name="origin_assessment.source_binding")
+            self.accept(witness, "AssessmentValidation")
 
     def test_authored_no_action_packet_exact_25_fields_and_header_refusals(self):
         p = packet()

@@ -32,6 +32,7 @@ CANONICAL_CODEWORDS: tuple[tuple[int, ...], ...] = (
     (1, 1, 1, 1, 0, 0, 0, 0, 0),
     (1, 1, 1, 1, 1, 1, 1, 1, 0),
 )
+# Historical alias retained for callers constructing the accepted c78 baseline.
 CANONICAL_BINDING_FIELDS: tuple[tuple[str, str], ...] = (
     ("dependency_id", "ash_cosmological_model.f2_9.canonical"),
     ("aggregate_sha256", "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb"),
@@ -42,6 +43,21 @@ CANONICAL_BINDING_FIELDS: tuple[tuple[str, str], ...] = (
     ("recovery_source_sha256", "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd"),
     ("diagnostic_source_sha256", "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7"),
     ("taxonomy_source_sha256", "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"),
+)
+CURRENT_CANONICAL_BINDING_FIELDS: tuple[tuple[str, str], ...] = (
+    ("dependency_id", "ash_cosmological_model.f2_9.canonical"),
+    ("aggregate_sha256", "76d59926ce9676b7584c6cdd555f50f56fceda075fa3fc8b37167fd2be43f7c9"),
+    ("state_space_sha256", "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"),
+    ("codeword_source_sha256", "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"),
+    ("validity_source_sha256", "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e"),
+    ("classification_source_sha256", "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff"),
+    ("recovery_source_sha256", "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd"),
+    ("diagnostic_source_sha256", "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7"),
+    ("taxonomy_source_sha256", "150b45d4c75aa053a8d5276d980b359b0ae768c85ae28896680296920402f250"),
+)
+CANONICAL_BINDING_BASELINES: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
+    ("LEGACY_C78", CANONICAL_BINDING_FIELDS),
+    ("N3_LIFECYCLE", CURRENT_CANONICAL_BINDING_FIELDS),
 )
 DIAGNOSTIC_ROWS: tuple[tuple[str, str, str, str, bool], ...] = (
     ("VALID", "COMPATIBLE", "ALREADY_VALID", "NO_RECOVERY_NEEDED", True),
@@ -65,6 +81,10 @@ ASSESSMENT_RULE_IDS = frozenset((
 ))
 RULE_IDS = ASSESSMENT_RULE_IDS | frozenset((
     "ASH-CODEWORD-STRUCTURE-001", "ASH-FALLBACK-SELECTION-001",
+    "ASH-CONTAINMENT-TRIGGER-001", "ASH-CONTAINMENT-TRIGGER-002",
+    "ASH-CONTAINMENT-TRIGGER-003", "ASH-CONTAINMENT-TRIGGER-004",
+    "ASH-HALT-TRIGGER-001", "ASH-HALT-TRIGGER-002", "ASH-HALT-TRIGGER-003",
+    "ASH-HALT-TRIGGER-004", "ASH-HALT-TRIGGER-005",
 ))
 INPUT_FAILURE_CODES = frozenset((
     "STATE_WIDTH", "STATE_COORDINATE_TYPE", "STATE_COORDINATE_VALUE",
@@ -182,13 +202,46 @@ class CanonicalAshBinding:
     taxonomy_source_sha256: str
 
     def __post_init__(self) -> None:
-        for field, expected in CANONICAL_BINDING_FIELDS:
-            actual = getattr(self, field)
-            if type(actual) is not str or actual != expected:
-                raise StateContractError("CANONICAL_BINDING_INVALID", field)
+        _canonical_source_fields(self)
 
     def to_record(self) -> dict[str, str]:
         return {field: getattr(self, field) for field, _ in CANONICAL_BINDING_FIELDS}
+
+
+def _canonical_source_fields(binding: CanonicalAshBinding) -> tuple[str, tuple[tuple[str, str], ...]]:
+    if type(binding) is not CanonicalAshBinding:
+        raise StateContractError("CANONICAL_BINDING_INVALID", "canonical_binding")
+    actual = []
+    for field, _ in CANONICAL_BINDING_FIELDS:
+        try:
+            value = getattr(binding, field)
+        except AttributeError:
+            raise StateContractError("CANONICAL_BINDING_INVALID", field) from None
+        if type(value) is not str:
+            raise StateContractError("CANONICAL_BINDING_INVALID", field)
+        actual.append(value)
+    if actual[0] != CANONICAL_BINDING_FIELDS[0][1]:
+        raise StateContractError("CANONICAL_BINDING_INVALID", "dependency_id")
+    for name, fields in CANONICAL_BINDING_BASELINES:
+        if actual[1] == fields[1][1]:
+            for value, (field, expected) in zip(actual, fields):
+                if value != expected:
+                    raise StateContractError("CANONICAL_BINDING_INVALID", field)
+            return name, fields
+    raise StateContractError("CANONICAL_BINDING_INVALID", "aggregate_sha256")
+
+
+def canonical_source_baseline(binding: CanonicalAshBinding) -> str:
+    """Recognize one complete reviewed vector without authenticating its host."""
+    return _canonical_source_fields(binding)[0]
+
+
+def canonical_diagnostic_pin_fields(binding: CanonicalAshBinding) -> tuple[tuple[str, str], ...]:
+    """Return the eight ordered source digests belonging to the exact binding."""
+    _, fields = _canonical_source_fields(binding)
+    names = ("ASH_AGGREGATE", "ASH_STATE_SPACE", "ASH_CODEWORDS", "ASH_VALIDITY",
+             "ASH_CLASSIFICATION", "ASH_RECOVERY", "ASH_DIAGNOSTIC_SCHEMA", "ASH_TAXONOMY")
+    return tuple((name, digest) for name, (_, digest) in zip(names, fields[1:]))
 
 
 @dataclass(frozen=True, slots=True)
@@ -626,7 +679,10 @@ class StateValidityDiagnostic:
             expected_contains = self.admissibility_status in ("VALID", "TRANSFORMATION_COMPATIBLE")
             if self.orbit_info.contains_known_valid_state != expected_contains:
                 raise StateContractError(code, "orbit_info.contains_known_valid_state")
-        object.__setattr__(self, "rule_ids", _text_tuple(self.rule_ids, code, "rule_ids", rules=True))
+        rules = _text_tuple(self.rule_ids, code, "rule_ids", rules=True)
+        if any(rule not in ASSESSMENT_RULE_IDS for rule in rules):
+            raise StateContractError(code, "rule_ids")
+        object.__setattr__(self, "rule_ids", rules)
         object.__setattr__(self, "notes", _text_tuple(self.notes, code, "notes"))
 
     def to_record(self) -> dict[str, object]:

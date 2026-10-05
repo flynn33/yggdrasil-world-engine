@@ -98,7 +98,8 @@ class RecoveryEngine:
         self._post_facts = post_facts_provider
         self._source = rv.RecoverySourceBinding(
             canonical_binding=state_model.canonical_binding,
-            contract_pins=tuple(rv.SourcePin(path, digest) for path, digest in rv.RECOVERY_CONTRACT_PIN_FIELDS),
+            contract_pins=tuple(rv.SourcePin(path, digest)
+                                for path, digest in rv.recovery_contract_pin_fields(state_model.canonical_binding)),
         )
 
     def recover(self, origin, *, operation_context):

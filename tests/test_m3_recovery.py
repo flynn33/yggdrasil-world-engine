@@ -3,11 +3,13 @@ from __future__ import annotations
 import copy
 import dataclasses
 import hashlib
+from functools import lru_cache
 import itertools
 import json
 import os
 from pathlib import Path
 import re
+import subprocess
 import unittest
 from unittest import mock
 
@@ -25,6 +27,8 @@ from core.ash_pattern_engine.state_model import RecordingDiagnosticCapture, Stat
 
 ROOT = Path(__file__).resolve().parents[1]
 CANONICAL = ROOT / 'core/ash_pattern_engine/canonical'
+LEGACY_REVISION = 'c78ee7e451e5d35b2f615369433291007e7ee261'
+CURRENT_AGGREGATE = '76d59926ce9676b7584c6cdd555f50f56fceda075fa3fc8b37167fd2be43f7c9'
 DEPENDENCY = 'ash_cosmological_model.f2_9.canonical'
 AGGREGATE = '0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb'
 CODEWORD_PIN = '8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c'
@@ -54,9 +58,20 @@ def normalized_hash(path):
     return hashlib.sha256(text.encode('utf-8')).hexdigest()
 
 
+@lru_cache(maxsize=40)
+def legacy_text(repository_path):
+    payload = subprocess.check_output(['git', '-C', str(ROOT), 'show',
+                                       LEGACY_REVISION + ':' + repository_path])
+    return payload.decode('utf-8-sig').replace('\r\n', '\n').replace('\r', '\n')
+
+
+def legacy_source_hash(relative_path):
+    return hashlib.sha256(legacy_text('core/ash_pattern_engine/canonical/' + relative_path).encode('utf-8')).hexdigest()
+
+
 def source_codewords():
     """Integer-XOR oracle parsed from pinned source, without a production oracle."""
-    text = (CANONICAL / 'core/codeword-set.pseudo.md').read_text(encoding='utf-8')
+    text = legacy_text('core/ash_pattern_engine/canonical/core/codeword-set.pseudo.md')
     rows = re.findall(r'^g([1-4]) = \(([01](?:, [01]){8})\)$', text, re.M)
     if [number for number, _ in rows] != ['1', '2', '3', '4']:
         raise AssertionError('Expected all four independently pinned source generators')
@@ -80,9 +95,10 @@ def number(state):
     return int(state.signature, 2)
 
 
-def canonical_binding():
-    return sv.CanonicalAshBinding(dependency_id=DEPENDENCY, aggregate_sha256=AGGREGATE,
-                                 **{field: normalized_hash(CANONICAL / path)
+def canonical_binding(*, current=False):
+    return sv.CanonicalAshBinding(dependency_id=DEPENDENCY,
+                                 aggregate_sha256=CURRENT_AGGREGATE if current else AGGREGATE,
+                                 **{field: normalized_hash(CANONICAL / path) if current else legacy_source_hash(path)
                                     for field, path in SOURCE_FIELDS.items()})
 
 
@@ -110,13 +126,15 @@ def context(reference):
                                 reference + ':classification')
 
 
-def classification_facts(binding, diagnostic_context, state, known=False, fallback=False):
+def classification_facts(binding, diagnostic_context, state, known=False, fallback=False, *, canonical=None):
     subject = 'ash_state_' + state.signature if type(state) is sv.AshState else diagnostic_context.original_input_reference
     facts = []
     for name, value in (('correction_path_is_known', known), ('fallback_is_available', fallback)):
         fact_binding = sv.PredicateBinding(
             diagnostic_context.assessment_reference, diagnostic_context.detection_reference, subject,
-            binding.profile_id, binding.source_binding.source_sha256, DEPENDENCY, AGGREGATE,
+            binding.profile_id, binding.source_binding.source_sha256,
+            DEPENDENCY if canonical is None else canonical.dependency_id,
+            AGGREGATE if canonical is None else canonical.aggregate_sha256,
             diagnostic_context.assessment_reference + ':' + name + ':evidence',
         )
         facts.append(sv.NotEvaluatedPredicate(fact_binding, 'Explicitly unconsulted test observation.')
@@ -128,7 +146,8 @@ def assessment(model, state, reference='n2:origin', known=False, fallback=False,
     diagnostic_context = context(reference)
     return model.assess(state, context=sv.SystemContext(halt, contained),
                         classification_evidence=classification_facts(model.profile_binding,
-                                                                      diagnostic_context, state, known, fallback),
+                                                                      diagnostic_context, state, known, fallback,
+                                                                      canonical=model.canonical_binding),
                         diagnostic_context=diagnostic_context)
 
 
@@ -372,7 +391,8 @@ class PostFacts:
         if self.mode == 'UNAVAILABLE':
             return rv.UnavailablePostAssessmentFacts(operation_context.operation_reference, candidate,
                                                      evidence_source('n2:post:facts'), 'Declared post facts unavailable.')
-        facts = classification_facts(self.binding, diagnostic_context, candidate, None, None)
+        facts = classification_facts(self.binding, diagnostic_context, candidate, None, None,
+                                     canonical=origin.source_binding)
         if self.mode == 'BAD_BINDING':
             bad = dataclasses.replace(facts.fallback_is_available.binding, subject_reference='ash_state_111111111')
             facts = dataclasses.replace(facts, fallback_is_available=sv.NotEvaluatedPredicate(bad, 'Unconsulted bad subject.'))
@@ -387,7 +407,7 @@ class PostFacts:
 def registry(model, entries=(), *, unavailable=False):
     binding = rv.RegistrySourceBinding('n2:registry', evidence_source('n2:registry:source'),
                                        model.profile_binding.profile_id, model.profile_binding.source_binding.source_sha256,
-                                       DEPENDENCY, AGGREGATE)
+                                       model.canonical_binding.dependency_id, model.canonical_binding.aggregate_sha256)
     if unavailable:
         snapshot = rv.UnavailableFallbackRegistry(binding, 'Explicitly unavailable synthetic registry.')
     else:
@@ -426,7 +446,7 @@ def authored_wire_cases():
     """
     _, words = source_codewords()
     source = {'dependency_id': DEPENDENCY, 'aggregate_sha256': AGGREGATE,
-              **{field: normalized_hash(CANONICAL / path) for field, path in SOURCE_FIELDS.items()}}
+              **{field: legacy_source_hash(path) for field, path in SOURCE_FIELDS.items()}}
     declared_source = {'source_reference': 'tests/test_m3_recovery.py:authored_profile',
                        'source_sha256': hashlib.sha256(b'[0]').hexdigest(),
                        'evidence_reference': 'n2_authored:profile:evidence'}
@@ -542,7 +562,7 @@ def authored_wire_cases():
                         'source_binding': provenance(reference + ':authority'), 'reason': 'Declared reachable authority.'}},
                 'origin_assessment': copy.deepcopy(assessment), 'origin_validation': validation(assessment),
                 'source_binding': {'canonical_binding': copy.deepcopy(source), 'contract_pins': [
-                    {'path': path, 'sha256': normalized_hash(CANONICAL / path)} for path in contract_paths]},
+                    {'path': path, 'sha256': legacy_source_hash(path)} for path in contract_paths]},
                 'registry_binding': None, 'route_authorization': None, 'steps': [], 'post_assessments': [],
                 'policy_attempts': [], 'action_decisions': [], 'emitted_diagnostics': [], 'candidate_state': copy.deepcopy(assessment['parsed_state']),
                 'directive': None, 'failure_detail': None, 'normalization_preparation': None, 'correction_observation': None,
@@ -769,10 +789,11 @@ class RecoveryIntegrationTests(unittest.TestCase):
 
     def fixture(self, *, states=(0,), original=None, known=False, fallback=False, halt=False, contained=False,
                 entries=(), diagnostics=None, correction=None, norm='READY', post=None, conditions=None,
-                registry_unavailable=False):
+                registry_unavailable=False, canonical=None):
         diagnostics = ControlledDiagnostics() if diagnostics is None else diagnostics
         binding = profile(states)
-        model = StateModel(binding, canonical_binding(), diagnostics.assessment_capture())
+        model = StateModel(binding, canonical_binding() if canonical is None else canonical,
+                           diagnostics.assessment_capture())
         origin = assessment(model, ash(self.g1 if original is None else original), known=known,
                             fallback=fallback, halt=halt, contained=contained)
         actual_registry = registry(model, entries, unavailable=registry_unavailable)
@@ -1709,7 +1730,11 @@ class RecoveryIntegrationTests(unittest.TestCase):
         model, origin, *_ = self.fixture()
         diagnosis = model.diagnosis_from_assessment(origin)
         seven = (*DIAGNOSIS_RULES, 'ASH-CODEWORD-STRUCTURE-001')
-        row = dataclasses.replace(diagnosis.state_validity_diagnostic, rule_ids=seven)
+        with self.assertRaises(sv.StateContractError) as error:
+            dataclasses.replace(diagnosis.state_validity_diagnostic, rule_ids=seven)
+        self.assertEqual((error.exception.code, error.exception.field_name),
+                         ('DIAGNOSTIC_ROW_INVALID', 'rule_ids'))
+        row = reflectively_forged(diagnosis.state_validity_diagnostic, rule_ids=seven)
         with self.assertRaises(sv.StateContractError) as error:
             dataclasses.replace(diagnosis, state_validity_diagnostic=row)
         self.assertEqual((error.exception.code, error.exception.field_name),
@@ -1723,12 +1748,6 @@ class RecoveryIntegrationTests(unittest.TestCase):
         self.assertEqual(result.outcome, 'NORMALIZED')
         for rule in ('ASH-FALLBACK-SELECTION-001', 'ASH-CONTAINMENT-TRIGGER-001', 'ASH-HALT-TRIGGER-001'):
             with self.subTest(rule=rule):
-                if rule != 'ASH-FALLBACK-SELECTION-001':
-                    with self.assertRaises(sv.StateContractError) as error:
-                        dataclasses.replace(result.emitted_diagnostics[0].emission.envelope, rule_ids=(rule,))
-                    self.assertEqual((error.exception.code, error.exception.field_name),
-                                     ('DIAGNOSTIC_ENVELOPE_INVALID', 'rule_ids'))
-                    continue
                 envelope = dataclasses.replace(result.emitted_diagnostics[0].emission.envelope, rule_ids=(rule,))
                 self.assertEqual(envelope.rule_ids, (rule,))  # generic owner recognizes canonical rule
                 emission = dataclasses.replace(result.emitted_diagnostics[0].emission, envelope=envelope)
@@ -1742,6 +1761,32 @@ class RecoveryIntegrationTests(unittest.TestCase):
                         diagnosis.emitted_diagnostics[0].diagnostic_reference, shared),))
                 self.assertEqual((error.exception.code, error.exception.field_name),
                                  ('DIAGNOSTIC_ENVELOPE_INVALID', 'emitted_diagnostics'))
+
+    def test_every_lifecycle_rule_is_refused_by_unchanged_eight_rule_recovery_owners(self):
+        _, origin, engine, *_ = self.fixture(original=0)
+        result = engine.recover(origin, operation_context=operation(origin))
+        record = result.emitted_diagnostics[0]
+        lifecycle_rules = sv.RULE_IDS - rv.N2_RULE_IDS
+        self.assertEqual(len(lifecycle_rules), 9)
+        self.assertEqual(len(rv.N2_RULE_IDS), 8)
+        for rule in sorted(lifecycle_rules):
+            with self.subTest(rule=rule):
+                envelope = dataclasses.replace(record.envelope, rule_ids=(rule,))
+                self.assertEqual(envelope.rule_ids, (rule,))
+                with self.assertRaises(rv.RecoveryContractError) as error:
+                    dataclasses.replace(record, envelope=envelope)
+                self.assertEqual(error.exception.field_name, 'emitted_diagnostics')
+                reflected = reflectively_forged(record, envelope=envelope)
+                with self.assertRaises(rv.RecoveryContractError):
+                    dataclasses.replace(result, emitted_diagnostics=(reflected,))
+                detail = rv.RecoveryFailureDetail('STEP_CAPTURE_REJECTED', 'capture.append', None,
+                    record, 'REJECTED', None, 'Controlled attempted-record refusal.', None, None)
+                with self.assertRaises(rv.RecoveryContractError):
+                    dataclasses.replace(detail, attempted_diagnostic=reflected)
+                reflected_detail = reflectively_forged(detail, attempted_diagnostic=reflected)
+                with self.assertRaises(rv.RecoveryContractError):
+                    rv.RecoveryFailure(**{field.name: getattr(result, field.name) for field in dataclasses.fields(result)}
+                                       | {'failure_detail': reflected_detail})
 
     def test_registry_reported_stability_is_rederived_and_never_a_collector_ack(self):
         model, origin, engine, diagnostics, *_ = self.fixture(original=1, fallback=True)
@@ -1859,8 +1904,8 @@ class RecoveryIntegrationTests(unittest.TestCase):
         self.assertIsNone(result.route_authorization)
 
     def test_all32_dependency_files_and_emitted_seven_source_pins_match_actual_bytes(self):
-        manifest = json.loads((ROOT / 'data/governance/ash_dependency_identity.json').read_text(encoding='utf-8-sig'))
-        rows = [(entry['relative_path'], normalized_hash(CANONICAL / entry['relative_path']))
+        manifest = json.loads(legacy_text('data/governance/ash_dependency_identity.json'))
+        rows = [(entry['relative_path'], legacy_source_hash(entry['relative_path']))
                 for entry in manifest['files']]
         self.assertEqual(len(rows), 32)
         self.assertEqual(len(set(path for path, _ in rows)), 32)
@@ -1873,12 +1918,96 @@ class RecoveryIntegrationTests(unittest.TestCase):
                  'registries/fallback-policy-registry.md', 'algorithms/recovery-fallback-semantics.pseudo.md',
                  'algorithms/containment-safe-failure-semantics.pseudo.md',
                  'interfaces/diagnostic-schema.md', 'interfaces/rule-id-taxonomy.md')
-        expected = tuple((path, normalized_hash(CANONICAL / path)) for path in paths)
+        expected = tuple((path, legacy_source_hash(path)) for path in paths)
         model, origin, engine, *_ = self.fixture(original=0)
         result = engine.recover(origin, operation_context=operation(origin))
         self.assertEqual(tuple((pin.path, pin.sha256) for pin in result.source_binding.contract_pins), expected)
         self.assertEqual(result.source_binding.canonical_binding, canonical_binding())
         self.assertEqual(normalized_hash(ROOT / 'docs/architecture/m3_normalization_policy.md'), N1_POLICY_PIN)
+
+    def test_current32_source_bytes_and_engine_pins_cover_actual_coherent_routes(self):
+        manifest = json.loads((ROOT / 'data/governance/ash_dependency_identity.json').read_text(encoding='utf-8'))
+        rows = [(entry['relative_path'], normalized_hash(CANONICAL / entry['relative_path']))
+                for entry in manifest['files']]
+        self.assertEqual(len(rows), 32)
+        self.assertEqual(len(set(path for path, _ in rows)), 32)
+        self.assertEqual(dict(rows), {entry['relative_path']: entry['sha256'] for entry in manifest['files']})
+        aggregate = hashlib.sha256(''.join(path + '\0' + digest + '\n'
+                                         for path, digest in sorted(rows)).encode('utf-8')).hexdigest()
+        self.assertEqual(aggregate, CURRENT_AGGREGATE)
+        expected = tuple((path, normalized_hash(CANONICAL / path)) for path, _ in rv.RECOVERY_CONTRACT_PIN_FIELDS)
+        cases = [('STABLE', 0, False, False, False, False, 'NO_ACTION'),
+                 ('UNSTABLE', self.g1, False, False, False, False, 'RECOVERED_VALUE'),
+                 ('CORRECTABLE', self.g1, True, False, False, False, 'HANDOFF_REQUIRED'),
+                 ('DEGRADED', 1, False, True, False, False, 'HANDOFF_REQUIRED'),
+                 ('CONTAINED', 0, False, False, False, True, 'HANDOFF_REQUIRED'),
+                 ('FAILED', 1, False, False, False, False, 'HANDOFF_REQUIRED'),
+                 ('SAFE_HALT', 0, False, False, True, False, 'HANDOFF_REQUIRED')]
+        for expected_class, original, known, fallback, halt, contained, expected_outcome in cases:
+            with self.subTest(state_class=expected_class):
+                model, origin, engine, *_ = self.fixture(original=original, known=known, fallback=fallback,
+                    halt=halt, contained=contained, canonical=canonical_binding(current=True))
+                result = engine.recover(origin, operation_context=operation(origin))
+                self.assertEqual(origin.system_state_class, expected_class)
+                self.assertEqual(result.outcome, expected_outcome)
+                self.assertEqual(result.source_binding.canonical_binding, model.canonical_binding)
+                self.assertEqual(tuple((pin.path, pin.sha256) for pin in result.source_binding.contract_pins), expected)
+                self.assertEqual(result.origin_validation.status, 'VERIFIED')
+                self.assertEqual(result.completion_observation.status, 'COMPLETE')
+                self.assertFalse(result.session_effects_performed)
+                for post in result.post_assessments:
+                    self.assertEqual(post.assessment.source_binding, model.canonical_binding)
+
+    def test_current_known_correction_and_fallback_success_keep_exact_source_proofs(self):
+        entries, observations = entries_for()
+        for known in (True, False):
+            model, origin, engine, _, _, provider, _, _ = self.fixture(original=self.g1 if known else 1,
+                known=known, fallback=not known, canonical=canonical_binding(current=True),
+                entries=() if known else entries, conditions=Conditions(observations))
+            if known:
+                provider.result = known_correction(origin, (self.g1,), 0)
+            result = engine.recover(origin, operation_context=operation(origin))
+            with self.subTest(known=known):
+                self.assertEqual(result.outcome, 'RECOVERED_VALUE' if known else 'RECOVERED_FALLBACK_VALUE')
+                self.assertEqual(result.candidate_state, ash(0))
+                self.assertEqual(result.source_binding.canonical_binding, model.canonical_binding)
+                self.assertEqual(result.post_assessments[0].assessment.source_binding, model.canonical_binding)
+                if known:
+                    self.assertEqual(result.correction_observation.validation.status, 'VERIFIED')
+                    self.assertEqual(result.correction_observation.submitted.canonical_binding, model.canonical_binding)
+                else:
+                    self.assertEqual(result.registry_validation.status, 'VERIFIED')
+                    self.assertEqual(result.registry_snapshot.source_binding.ash_aggregate_sha256, CURRENT_AGGREGATE)
+
+    def test_current_and_legacy_origins_and_registries_cannot_cross_model_authority(self):
+        for current in (False, True):
+            model, origin, engine, diagnostics, resolver, provider, evaluator, post = self.fixture(
+                original=1, fallback=True, canonical=canonical_binding(current=current))
+            foreign_model = StateModel(model.profile_binding, canonical_binding(current=not current), RecordingDiagnosticCapture())
+            foreign_origin = assessment(foreign_model, ash(1), fallback=True)
+            before = len(diagnostics.calls)
+            result = engine.recover(foreign_origin, operation_context=operation(foreign_origin))
+            with self.subTest(current=current, role='origin'):
+                self.assertEqual(result.failure_detail.failure_code, 'ORIGIN_REJECTED')
+                self.assertEqual(result.origin_validation.failure_code, 'SOURCE_BINDING_MISMATCH')
+                self.assertIs(result.origin_validation.submitted_assessment, foreign_origin)
+                self.assertEqual(result.origin_validation.current_source_binding, model.canonical_binding)
+                self.assertEqual(result.emitted_diagnostics, ())
+                self.assertEqual(result.steps, ())
+                self.assertEqual(diagnostics.calls[before:], [])
+                self.assertEqual((resolver.calls, provider.calls, evaluator.calls, post.calls), ([], [], [], []))
+            foreign_registry = registry(foreign_model)
+            foreign_engine = RecoveryEngine(model, foreign_registry, diagnostics, resolver, provider, evaluator, post)
+            result = foreign_engine.recover(origin, operation_context=operation(origin))
+            with self.subTest(current=current, role='registry'):
+                self.assertEqual(result.failure_detail.failure_code, 'REGISTRY_BINDING_REJECTED')
+                self.assertEqual(result.registry_validation.failure_code, 'REGISTRY_SOURCE_MISMATCH')
+                self.assertIs(result.registry_validation.submitted_snapshot, foreign_registry.snapshot)
+                self.assertEqual(result.registry_validation.current_source_binding, model.canonical_binding)
+                self.assertEqual(result.emitted_diagnostics, ())
+                self.assertEqual(result.steps, ())
+                self.assertEqual(diagnostics.calls[before:], [])
+                self.assertEqual((resolver.calls, provider.calls, evaluator.calls, post.calls), ([], [], [], []))
 
     def test_child_completion_failures_preserve_actual_complete_assessment_and_stop_retry(self):
         entries, observations = entries_for((2, 1, 1))
@@ -2148,7 +2277,7 @@ class RecoveryWireTests(unittest.TestCase):
             ('lost-normalization-proof', normalized, lambda p: p.update(normalization_preparation=None), 'type', ('normalization_preparation',)),
             ('normalization-incomplete-T', normalized, lambda p: p['normalization_preparation']['plan'].update(eligible_targets_complete=False), 'const', ('normalization_preparation', 'plan', 'eligible_targets_complete')),
             ('known-chain-17', corrected, lambda p: p['correction_observation']['submitted'].update(chain=p['correction_observation']['submitted']['chain'] * 17), 'maxItems', ('correction_observation', 'submitted', 'chain')),
-            ('foreign-source-pin', corrected, lambda p: p['source_binding']['contract_pins'][0].update(sha256='0' * 64), 'const', ('source_binding', 'contract_pins', 0, 'sha256')),
+            ('foreign-source-pin', corrected, lambda p: p['source_binding']['contract_pins'][0].update(sha256='0' * 64), 'const', ('source_binding', 'contract_pins', 0)),
             ('missing-eight-field-envelope', corrected, lambda p: p['emitted_diagnostics'][0]['envelope'].pop('chain_root_reference'), 'required', ('emitted_diagnostics', 0, 'envelope')),
             ('new-N3-rule', corrected, lambda p: p['emitted_diagnostics'][0]['envelope'].update(rule_ids=['ASH-SAFE-HALT-FINALITY-001']), 'enum', ('emitted_diagnostics', 0, 'envelope', 'rule_ids', 0)),
             ('terminal-claim', corrected, lambda p: p['emitted_diagnostics'][0]['envelope'].update(disposition='TERMINAL'), 'enum', ('emitted_diagnostics', 0, 'envelope', 'disposition')),
