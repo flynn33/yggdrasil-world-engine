@@ -1,3 +1,47 @@
+# YWE Session Handoff — Qwen / Forge Package Preparation
+
+**Date:** October 5, 2026
+**Handoff checkpoint:** package-preparation-2
+**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-36, section 11; unchanged.
+**Approved outcome:** YWE-APPROVAL-20261005-SOURCE-CLOSURE-N3.
+**Inspected project snapshot:** `151c6e712aa7b25ad4d64996056a494007bfd80e`.
+**Implementation to verify:** `13df7079f911b8f6c56e7be263b0de263b209c48`.
+**Method:** Raven Forge Development v0.7.0 at `87409bc36fb9d4782eab02189adb184f2b3962a7`.
+
+The owner selected “Qwen Code 3.8 27-b 8bit” using Forge Conductor to complete the approved outcome. This identifies the requested executor, not a verified loaded model, quantization artifact, installed Forge version, independent package review, dispatch receipt or accepted result. Source-compatibility closure remains the bounded assignment; unresolved N3 implementation and all M3 exit criteria remain outside this package.
+
+## Revised external artifact receipt
+
+Package `YWE-M3-SOURCE-CLOSURE-001`, revision `r2-QWEN-FORGE`, is prepared as `YWE-M3-SOURCE-CLOSURE-001-r2-QWEN-FORGE.zip`. It replaces r1's generic executor instructions; the r1 receipt below remains historical.
+
+- Archive SHA-256: `0b44b4c9d78a9e9c4bfd2770759cd3011356857e6a8d16ec75274974780153fd`.
+- Manifest SHA-256: `dc73c907fc1841f8f811cd0b7f033027115c3d9b39b4e2ece67f21039cc0d9d4`.
+- Contents: 29 manifest-listed files plus the manifest.
+- Actual package verification: 48 synthetic helper tests passed, with zero failures, errors or skips. Python syntax, JSON parsing, documented manifest-field/entry checks, CLI help, archive CRC and extracted file-hash readback passed.
+- No YWE product suite, native importer, loaded Qwen model, Forge runtime or owner-host execution was run. Independent instruction review and exact-package dispatch are not claimed.
+
+The inspected Forge macOS source is `d772b6e234ad7ebb05c83cc752a7462861412b1c`; the Windows source is `e47dc5b3e9c4ab1272d4511b6c00a14f7c89b2d2`. Their current usage guides establish normal LM Studio chat, edition-specific package readers and explicit continuity limits. They do not prove the installed editions. The Windows guide documents the 120-second shell limit; the package preserves that boundary and includes a foreground terminal fallback rather than a detached workaround.
+
+The preparation runtime remains Linux with Python and Git; no owner filesystem mount, live Forge tool or loaded Qwen deployment was established. Connected GitHub reads succeeded; direct GitHub DNS resolution failed. A bounded host-connector search found an available but uninstalled filesystem integration. No settings, model, provider, permissions or privacy grants were changed.
+
+The package and all helpers remain outside the product repository. The owner's actual external project-instructions folder is unobserved; no placement there is claimed. This repository entry is a preparation receipt only, saved under the existing scoped record-publication authority. Execution, publication, review, deployment identity and milestone acceptance remain separate.
+
+## Current checkpoint
+
+**Current step:** Executor-specific package prepared; live intake/qualification and required independent review remain outstanding.
+
+**Completed:** Original r1 archive hash verified; current Project Record approval and latest handoff retrieved; actual Forge usage contracts inspected; requested executor preserved; bounded task sequence and external helper verification completed; final archive read back.
+
+**Next action:** Transfer and import the extracted r2 folder from the owner's existing external project-instructions location, then send its exact opening message in the normal LM Studio chat. Begin with actual `get_forge_status` binding and existing offline-evidence retrieval. Continue eligible closure work after actual prerequisites pass; do not repeat valid approvals or the already-published repair.
+
+**Needed from owner:** External-folder handover. No reconstruction of approved project history is needed.
+
+**Saved at:** This existing handoff contains the r2 preparation receipt; the Project Record remains planning-36. The containing commit and readback establish this receipt's persistence, not external-folder placement or product acceptance.
+
+---
+
+## Historical r1 preparation receipt — retained unchanged
+
 # YWE Session Handoff — Package Preparation Checkpoint
 
 **Date:** October 5, 2026
