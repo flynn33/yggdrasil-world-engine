@@ -281,8 +281,20 @@ on both Ubuntu and Windows, without cancelling one job when the other fails.
 Replacement CI results remain pending until observed. The exact completed Windows
 acceptance remains recorded; this test/workflow correction changes no production
 storage behavior and completes no M3 exit criterion.
+The correction is published at `346ed87977d09aba5549c25f839c11aa34fd2093` after
+103 local recovery/Diagnostics/workflow tests passed with zero skips, including both
+genuine collector methods, and six selected clean offline repository checks passed.
+[Replacement CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37249149545)
+runs both complete jobs; their results remain pending in this checkpoint.
 The earlier contract and focused-progress CI checkpoints are observed successful;
 the original 35-of-36 adoption failure remains recorded.
+The bounded [source compatibility contract](../architecture/m3_source_compatibility_contract.md)
+is adopted as YWE-REQ-0043 and ADR-0032 before dependent code. It binds exactly two
+complete source vectors, their paired recovery/Diagnostics pins and actual source
+revisions. The external proposed-schema audit preserves all 734 existing fixture
+results and 250 complete reject expectations. Canonical source application and
+runtime compatibility are pending; full N3 session/lifecycle adoption remains
+separate. The accepted mathematical baseline and immutable M2 evidence are preserved.
 Session publication, actual containment and halt, remaining canonical Diagnostics
 producers and generation remain subsequent work. This checkpoint does not complete
 an M3 exit criterion.

@@ -1,11 +1,11 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-32
+**Revision:** planning-33
 **Date:** October 4, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-31; full history remains in Git.
+**Supersedes:** planning-32; full history remains in Git.
 
 ## 1. Current working brief
 
@@ -714,6 +714,48 @@ Windows drive/ACL and full-suite results remain unverified until that job runs;
 replacement CI results are pending. No production, canonical-source, fixture or
 immutable milestone evidence changes are part of this correction.
 
+## 8m. Bounded source compatibility design adoption
+
+N2 CI correction `346ed87977d09aba5549c25f839c11aa34fd2093` is published and
+read back through Git and GitHub's API with byte-identical README content. Its
+local Recovery/Diagnostics/workflow suite passed 103 tests in 267.396 seconds
+with zero skips, including both genuine collector methods. Six selected checks
+passed in 128.969 seconds in a separate clean offline clone, with no blocking
+or advisory failures and an unchanged checkout. This is scoped verification,
+not a new full unfiltered implementation acceptance. Replacement CI
+[37249149545](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37249149545)
+is observed running its Ubuntu and Windows canonical validation jobs; their results
+remain pending in this preparation-time checkpoint.
+
+The [source compatibility contract](../architecture/m3_source_compatibility_contract.md)
+is adopted as YWE-REQ-0043 / ADR-0032 before dependent implementation. Its exact
+embedded inventory defines legacy c78 and reviewed current source baselines,
+complete canonical nine-field vectors, paired seven recovery pins and eight
+Diagnostics pins. Historical evidence and submitted/current mismatch roles remain
+distinct. Host assembly must verify actual current and pinned legacy Git source
+snapshots before storage; the collector's additive bounded configuration uses
+existing SourcePin values. The earlier six/seven/eight rule owners stay fixed.
+
+Independent external source review verified all 32 legacy Git blobs and the exact
+two-file seven-rule source proposal. The proposed schema branches preserve all
+734 existing fixture results and all 250 complete expected rejection witness sets.
+The adopted five-file patch's SHA256 is
+`3589235bac37947a791916ab0eee8eeae05920a9da8ae9034f8bde76a948878b`;
+its final 13-file review index is
+`0e16697fdd27645dcb5eb529552473a8b6fc220caa2a01c39291008c065cb68a`.
+All indexed bytes were checked before application. The external audit also passed
+actual requirement/governance schemas, references, record preservation and routing.
+There are now 43 active requirements, 49 governance records and 32 accepted ADRs;
+prior requirement/decision record text remains preserved.
+
+Design adoption changes no canonical source bytes, production code, packet schema,
+authored fixture or immutable milestone evidence. The source extension, complete
+runtime compatibility and full clean acceptance remain pending. The active recovery
+contract's two stale Diagnostics descriptions now name its already adopted 67
+structures and 78 enum families; historical counts remain unchanged. Full N3
+session/publication, containment, safe halt and their closed evidence bounds remain
+under separate review. M3 remains in progress with all five exit criteria unchanged.
+
 ## 9. Historical publication continuity
 
 An initial temporary correction workflow at commit `79322d90b7c8e22284064ec44174a866c79c0772`
@@ -724,25 +766,27 @@ The containing commit is the authoritative save point.
 
 ## 10. Checkpoint
 
-**Current step:** Verify and publish the N2 CI platform correction, then adopt
-the reviewed source-compatibility increment before dependent N3 session/publication,
-containment and safe-halt implementation. M2 remains accepted; M3 remains in progress.
+**Current step:** Verify and publish the bounded source compatibility design,
+then implement its complete source-vector and truthful provenance increment.
+M2 remains accepted; M3 remains in progress.
 
 **Completed:** M2 immutable foundation acceptance; first M3 StateModel slice;
 N1 contract, normalization implementation and successful complete acceptance/CI;
 N2 source/policy/interface adoption, implementation, clean 36-check/977-test
-offline execution and exact GitHub implementation publication.
+offline execution and exact GitHub implementation publication; scoped CI correction
+verification/publication; bounded source compatibility design adoption.
 
 **Next action:** Observe both replacement CI jobs and investigate any actual failure.
-Adopt exact reviewed source-vector compatibility, then resolve the remaining N3
-session ownership, diagnostic chain and closed retention bounds. Implement and verify actual session
+Implement the adopted exact source-vector compatibility, preserve existing fixture
+and historical source truth, and run independent clean acceptance. Resolve the
+remaining N3 session ownership, diagnostic chain and closed retention bounds.
+Implement and verify actual session
 admission/state publication, containment and terminal guards, then continue remaining
 Diagnostics and generation before evaluating the unchanged M3 exit criteria.
 
 **Needed from owner:** Nothing for continued authorized roadmap development.
 
-**Saved at:** This planning-32 checkpoint follows published N2 implementation
-`c78ee7e451e5d35b2f615369433291007e7ee261` and README checkpoint
-`e5fbce354fc0ba7eda4c88682b4deabe5f29de6e`. It records their actual CI failure and the
-scoped replacement. Immutable milestone evidence, completed Windows acceptance and
-earlier checkpoint identities remain preserved.
+**Saved at:** This planning-33 checkpoint follows published CI correction
+`346ed87977d09aba5549c25f839c11aa34fd2093`. It records actual scoped verification
+and the bounded source design adoption. Immutable milestone evidence, completed
+Windows acceptance and earlier failed/pending checkpoint identities remain preserved.

@@ -1506,12 +1506,59 @@
         "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
         "docs/design-planning/Project_Record.md"
       ]
+    },
+    {
+      "id": "ADR-0032",
+      "record_type": "decision",
+      "title": "Reviewed local trigger extension with complete historical source compatibility",
+      "status": "accepted",
+      "recorded_on": "2026-10-04",
+      "owner_role": "Core semantics maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt the bounded source compatibility contract and exact source-only extension before dependent implementation; retain full N3 lifecycle design as provisional.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "The authoritative local 32-file canonical source permits governed category-qualified rule additions with a recorded design package. The accepted N2 source assigns only fallback-failure containment and containment-breach halt identifiers, while the complete canonical trigger enums require a precise nine-trigger correspondence. Earlier reference values, packet schemas, authored fixtures and Diagnostics source projection pin the accepted legacy bytes, so changing only current hashes would mislabel historical evidence or reject valid historical packets.",
+      "decision": "Adopt seven explicit new TRIGGER identifiers under YWE-N3-LIFECYCLE while preserving both existing 001 meanings. Recognize exactly LEGACY_C78 and N3_LIFECYCLE complete canonical nine-field vectors, paired seven-pin recovery vectors and ordered eight-pin Diagnostics vectors. Preserve legacy aliases, exact serialized shapes and fixed six-rule assessment, seven-rule normalization and eight-rule recovery boundaries. Add the finite API-only canonical_source_snapshots keyword using at most two existing owned SourcePin values; bind legacy to immutable c78 and current to its host-verified containing Git HEAD. Verify both actual source snapshots before protected storage creation, preserve role-aware rejected comparisons and all existing fixture witnesses, and keep future N3 effects subject to a separate adopted lifecycle contract.",
+      "rationale": "Atomic whole-vector recognition prevents mixing independently allowed hashes. Separate containing-source revisions prevent new source bytes from being labelled with an old commit and historical packets from borrowing current provenance. Existing exact rejection witnesses were independently exercised against proposed branch schemas before adoption. The local source authority supports this extension without inventing external approval or changing state mathematics.",
+      "consequences": [
+        "The governed source-only increment applies exactly two canonical owner changes, regenerates the existing mirror and current dependency identity, and updates binding owners atomically; design adoption alone does not claim those implementation changes have passed.",
+        "Legacy c78 source bytes, all 734 existing fixture entries and original authored examples, immutable M0/M1/M2 evidence and earlier rule ownership remain preserved.",
+        "Current source host verification requires available local Git history and matching current authoritative blobs at HEAD; missing history or uncommitted source changes refuse before storage instead of downloading or substituting current files.",
+        "The direct four-positional collector constructor remains compatible through a truthful legacy-only default. Explicit current source support requires the adopted snapshot mapping; declared Core input does not authenticate host verification.",
+        "The active recovery contract's stale Diagnostics inventory description is corrected to 67 structures and 78 enum families already adopted by the target-validity and incident amendment; historical Project_Record counts stay unchanged.",
+        "No N3 session admission, containment or safe-halt effect, authority contact, live value publication, mathematical change, native qualification or M3 milestone completion is adopted by this increment."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0043",
+        "YWE-REQ-0042",
+        "YWE-REQ-0041",
+        "YWE-REQ-0040",
+        "YWE-REQ-0039",
+        "YWE-REQ-0010",
+        "YWE-REQ-0016"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_source_compatibility_contract.md",
+        "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
+        "core/ash_pattern_engine/canonical/algorithms/containment-safe-failure-semantics.pseudo.md",
+        "data/governance/ash_dependency_identity.json",
+        "data/schemas/m3_state_assessment_schema.json",
+        "data/schemas/m3_recovery_value_schema.json",
+        "data/schemas/m3_reference_diagnostic_bundle_schema.json",
+        "docs/architecture/m3_state_assessment_contract.md",
+        "docs/architecture/m3_normalization_contract.md",
+        "docs/architecture/m3_recovery_contract.md",
+        "docs/architecture/m3_reference_diagnostics_contract.md"
+      ]
     }
   ],
   "summary": {
-    "total_records": 48,
-    "architecture_decisions": 31,
-    "accepted_decisions": 31,
+    "total_records": 49,
+    "architecture_decisions": 32,
+    "accepted_decisions": 32,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

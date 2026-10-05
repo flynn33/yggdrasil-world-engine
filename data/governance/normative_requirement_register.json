@@ -9,7 +9,7 @@
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0043",
+    "next_available_id": "YWE-REQ-0044",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -1004,13 +1004,52 @@
         "docs/design-planning/Project_Record.md",
         "data/schemas/m3_reference_diagnostic_bundle_schema.json"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0043",
+      "title": "Atomic reviewed source baselines and truthful Diagnostics provenance",
+      "normative_statement": "Core source bindings MUST recognize only the two complete reviewed canonical vectors and their exactly paired recovery and Diagnostics pin vectors. Verified evidence roles MUST agree with the actual complete model binding; rejected comparisons MUST retain submitted and current source truth. Reference Diagnostics MUST select source pins from the actual bound baseline and the declared snapshot mapping, and host assembly MUST verify current and pinned legacy Git source bytes before storage effects. Earlier assessment, normalization and recovery rule subsets MUST remain fixed; source compatibility MUST NOT certify N3 lifecycle effects or rewrite historical acceptance evidence.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "docs/architecture/m3_source_compatibility_contract.md",
+        "tests/test_m3_state_model.py",
+        "tests/test_m3_normalization.py",
+        "tests/test_m3_recovery_values.py",
+        "tests/test_m3_recovery_schemas.py",
+        "tests/test_m3_recovery.py",
+        "tests/test_m3_reference_diagnostics.py",
+        "tests/test_m3_diagnostic_schemas.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M3",
+      "owner_role": "Core semantics maintainers",
+      "decision_refs": [
+        "ADR-0032"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_source_compatibility_contract.md",
+        "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
+        "core/ash_pattern_engine/canonical/algorithms/containment-safe-failure-semantics.pseudo.md",
+        "data/governance/ash_dependency_identity.json",
+        "data/schemas/m3_state_assessment_schema.json",
+        "data/schemas/m3_recovery_value_schema.json",
+        "data/schemas/m3_reference_diagnostic_bundle_schema.json",
+        "docs/architecture/m3_state_assessment_contract.md",
+        "docs/architecture/m3_normalization_contract.md",
+        "docs/architecture/m3_recovery_contract.md",
+        "docs/architecture/m3_reference_diagnostics_contract.md"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 42,
-    "active": 42,
+    "total_requirements": 43,
+    "active": 43,
     "proposed": 0,
     "terminal": 0,
-    "next_identifier": "YWE-REQ-0043"
+    "next_identifier": "YWE-REQ-0044"
   }
 }

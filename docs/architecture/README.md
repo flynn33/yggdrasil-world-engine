@@ -12,6 +12,7 @@ Required first-read authority contracts:
 - `engine_vs_game_layer_contract.md` -- YWE engine layer and Where Ravens Wait game/narrative layer separation.
 - `cosmology_framework_extensibility_contract.md` -- Engine cosmology as structural framework, not fixed setting bible.
 - `ash_upstream_authority_contract.md` -- Historical packet-spine authority contract, preserved as superseded component evidence where necessary.
+- `m3_source_compatibility_contract.md` -- Exact reviewed legacy/current source vectors, local trigger-extension correspondence and truthful reference Diagnostics source revisions; full N3 lifecycle effects remain separately governed.
 
 Source-truth and Twin Wolf resonance contracts:
 

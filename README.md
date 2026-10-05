@@ -179,6 +179,14 @@ on both Ubuntu and Windows with independent job results. Replacement CI results
 remain pending until observed. This CI correction does not change production storage
 or promote M3.
 
+The [CI correction](https://github.com/flynn33/yggdrasil-world-engine/commit/346ed87977d09aba5549c25f839c11aa34fd2093)
+is published. Its local recovery, Diagnostics and workflow suite passed 103 tests
+in 267.396 seconds with zero skips, including both genuine collector methods.
+Six selected checks passed in 128.969 seconds from a separate clean offline clone;
+these selected checks are not a new unfiltered repository acceptance.
+The [replacement CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37249149545)
+runs both complete jobs; their results remain pending in this checkpoint.
+
 [Adoption CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37238793118)
 passed 35 of 36 checks; the existing package guard rejected numeric budget formulas.
 Equivalent sum notation preserves all event and byte limits.
@@ -188,6 +196,16 @@ Equivalent sum notation preserves all event and byte limits.
 and [focused-progress checkpoint CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37244128176)
 passed at their exact published revisions. Historical failed and preparation-time
 pending observations remain in the development record.
+
+The bounded [source compatibility contract](docs/architecture/m3_source_compatibility_contract.md)
+is now adopted as YWE-REQ-0043 and ADR-0032 before dependent implementation.
+It defines two complete source baselines, paired recovery and Diagnostics pins,
+seven additional trigger-rule assignments, and host verification of actual source
+revisions before storage. The reviewed schema proposal preserves all 734 existing
+fixture results and 250 complete reject expectations. Source application and runtime
+compatibility remain pending; the existing canonical bytes and historical evidence
+are preserved in this design checkpoint. Full N3 session, containment and halt
+behavior still needs its separate adopted contract and implementation.
 
 Next after this slice are session admission and state commit, actual containment
 and safe halt, remaining canonical Diagnostics producers and generation semantics.
