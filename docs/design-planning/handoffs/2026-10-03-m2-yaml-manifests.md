@@ -1,3 +1,73 @@
+# YWE Session Handoff — Windows Source-Closure Package
+
+**Date:** October 9, 2026
+**Handoff checkpoint:** package-preparation-3
+**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-36, section 11; unchanged.
+**Approved outcome:** YWE-APPROVAL-20261005-SOURCE-CLOSURE-N3, reaffirmed by the October 9 intake/outcome approval below.
+**Inspected project snapshot:** `f58f8503eb8e31960bf42d05b9fa51acab970b27`.
+**Implementation to verify:** `13df7079f911b8f6c56e7be263b0de263b209c48`.
+**Method:** Raven Forge Development v0.7.0 at `87409bc36fb9d4782eab02189adb184f2b3962a7`.
+
+This is an approval/preparation receipt and continuation view of the existing Project Record, not a new engineering specification. The earlier handoff bytes below are retained unchanged. No milestone, source pin, contract, runtime dependency, implementation or immutable acceptance evidence is changed.
+
+## Exact October 9 approval and subsequent request
+
+The owner wrote:
+
+> I approve the proposal just described for this outcome. Record exactly
+> what I approved, what remains undecided, and the next eligible action.
+> Keep execution and publication permissions separate.
+
+The preceding proposal was receiving-host intake of the existing source-closure package, with exact-revision offline-evidence retrieval as its first project operation; close the existing evidence gap, then proceed to N3 contract work rather than rebuild approved architecture. This reaffirms the existing outcome and sequence. It is not actual intake, independent review, dispatch, acceptance of an unverified report, an unspecified N3 design, or new publication permission.
+
+The owner subsequently requested a newly prepared ZIP and exact opening message tailored to Qwen 3.8 27-b 8bit in normal LM Studio chat using Forge Conductor Windows, with current records/contracts, actual capability/permission checks and external package placement. That request authorizes preparation and delivery, not invented host capability or execution. The r3 preparation below supersedes r2 as the prepared handover candidate for that request; r2's original artifact receipts remain historical. Its archive was not available here, so r3 is not represented as a verified byte patch of r2.
+
+## External artifact receipt
+
+Package `YWE-M3-SOURCE-CLOSURE-001`, revision `r3-WINDOWS-QWEN38`, is delivered as `YWE-M3-SOURCE-CLOSURE-001-r3-WINDOWS-QWEN38.zip`.
+
+- Archive SHA-256: `82939641d75c0bee7bd45e66ae4f1c1686aed3d85a1cdba04d837f0274843ebc`.
+- Manifest SHA-256: `f358926ffa5e3dbe63e34fa4883be3c228daa3cb4ae47ef8c805bd7b721f271e`.
+- Archive size: 55,131 bytes; 23 manifest-listed files plus the manifest.
+- Actual package verification: 68 synthetic tests passed, with zero failures, errors or skips. Python syntax, JSON parsing, 16 illustrative requests against 17 selected source-derived schemas, ZIP CRC, safe archive paths, extraction and complete manifest readback passed.
+- Tests ran on Linux x86_64 with Python 3.13.5; illustrative schema checks used jsonschema 4.26.0. These are package tests, not the separately pinned YWE product validation environment or Windows runtime tests.
+
+The package contains the exact opening message, staged work plan, separate authority ledgers, live host/model intake, current Windows durable-job/paging/recovery instructions, reviewed-contract/source locators, fresh read-only reviewer instructions, evidence requirements, continuity guidance and two read-only helpers. Helpers check package integrity and structural report correspondence; neither grants approval or authenticates execution. The execution lane stops before commit/push and unresolved N3 implementation, preserving the separately authorized publication route.
+
+## Source and environment observations
+
+The official Qwen and LM Studio model sources identify Qwen3.8-27B. The actual loaded 8-bit file, quantization, configured context, hardware and provider remain unobserved here. The stated capability attachment was not present in the accessible conversation file inventory. The official Windows capability reference was retrieved instead at `d0a0df0176845a8b31a85017ab2e4cda5f5618e0`, describing implementation `eb071505f00d0b890ca12240cbfdbcc7594516e4` and version 1.3.28. The README, overview/workflows and applicable argument sections were read; this does not claim full reading or qualification of all 112 tool schemas.
+
+Current source documents describe 120-second shell commands and separate durable process/shell jobs up to 3600 seconds, with actual Manager ownership, retained job IDs and terminal receipts. r3 uses those supported long-job routes only after live qualification, rather than assuming the earlier short-command limit is the only available route. This is execution-tool research, not a playbook or semantic-source upgrade.
+
+Connected owner-account GitHub reads succeeded. The preparation runtime had Git but no Windows PowerShell, live Forge/LM Studio connection or owner filesystem mount; direct GitHub DNS retrieval failed. Connector discovery did not establish a matching live Forge/Windows filesystem route. No settings, model, provider, root grants or privacy permissions were changed. No YWE suite, native host control, independent reviewer, package import or dispatch was executed.
+
+The archive and helpers remain outside the product repository in conversation staging. The owner's actual external project-instructions path and placement are unverified. Delivery here is not a claim that files were saved on the owner's Windows host.
+
+## Open obligations and separate permissions
+
+Source-compatibility closure still requires adequate exact-revision clean, unfiltered offline evidence and independent provenance review. Preserve successful CI run `37254719493` and historical failed evidence; do not repeat the published registration repair. N3 contract adoption, four-record graph/resource bounds, terminal freshness/finalization, remaining semantics and all five M3 exit criteria remain open. M0–M2 remain accepted and platform products deferred through M10.
+
+**Execution:** Existing eligible roadmap authority remains subject to actual host grants, adopted contracts and review gates. The owner handover/opening separately starts intake and a fresh read-only instruction review. No blanket implementation, source repair, N3 adoption or package dispatch is inferred from preparation.
+
+**Publication:** The existing September 19 planning-location decision and Project Record permission ledger separately authorize this scoped handoff receipt save. No additional publication permission is inferred from outcome approval. Only this existing handoff is changed by the receipt transaction; no package payload, archive, helper, workflow, settings, release/tag or upstream file is added or changed. Owner-only authorship and no coauthor trailers remain required. Product acceptance and future record publication retain their own integrity gates; no YWE suite result is claimed for this receipt revision.
+
+## Current checkpoint
+
+**Current step:** Windows-specific package prepared for actual receiving-host intake and independent review.
+
+**Completed:** Current authoritative outcome preserved; October 9 approval and preparation scope recorded; exact source-compatibility contract and actual runner examined; official model and Windows capability sources inspected; external package built and its 68 helper tests, schemas, hashes and ZIP readback verified.
+
+**Next action:** Extract/select the r3 directory in the owner's existing external instruction workspace and send its exact OPENING_MESSAGE.txt in normal LM Studio chat. Recover context_get, observe get_forge_status/host_capabilities/provider_status, read the configured package/policy and qualify the actual environment. Retrieve adequate existing offline evidence before running only missing verification after required review.
+
+**Needed from owner:** The external-folder handover; no reconstruction of project history or repeated design approval.
+
+**Saved at:** This existing handoff contains the approval/preparation receipt. The Project Record remains planning-36. The containing commit and readback establish receipt persistence only, not owner-folder placement, product execution or acceptance.
+
+---
+
+## Historical r2 and earlier handoffs — retained unchanged
+
 # YWE Session Handoff — Qwen / Forge Package Preparation
 
 **Date:** October 5, 2026
