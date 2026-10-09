@@ -1,6 +1,42 @@
 # YWE Session Handoff — Windows Source-Closure Package
 
 **Date:** October 9, 2026
+**Handoff checkpoint:** autonomous-n3-1
+**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-38, section 13.
+**Direction:** YWE-DIRECTION-20261009-AUTONOMOUS-N3 (package `YWE-M3-N3-AUTONOMOUS-001` r1).
+**Inspected project snapshot:** `6d3ae6d182553f9a6cb925ec5a79bea13a812156`.
+**Method:** Raven Forge Development v0.7.0 at `87409bc36fb9d4782eab02189adb184f2b3962a7`.
+
+This entry is the current continuation. The package-preparation-3 entry below is preserved as superseded history; its receipt facts remain valid but its "Next action" no longer directs the work.
+
+## Current state
+
+- Source-closure checkpoint evidence published at `6d3ae6d` (Project Record section 12). Inherited result is representation-matched only: `acceptance=false`, `provenance_review_required=true`; it is not N3 acceptance and is not relabeled as such.
+- N3 session lifecycle is the active M3 assignment: admission and ownership, controlled live-state publication, containment and resolution, safe halt and terminal handling, bounded diagnostics.
+- Wiki publication remains unfinished until actual remote readback establishes completion.
+- M3 active; M0–M2 accepted; M4 and platform work not activated.
+- Autonomous execution and owner-account publication are authorized by the current package. No operator approval gates, operator reviews, or mandatory separate reviewer-service sign-off.
+- Historical external N3 review: not recovered; its contents are not asserted. N3 proceeds as new source-grounded engineering.
+
+## Current checkpoint
+
+**Current step:** P0 complete; P1 N3 contract work in progress.
+
+**Completed:** Local/remote reconciled at `6d3ae6d`; record moved to planning-38 with section 13 and a repaired current working brief; the package-preparation-3 entry below is demoted to superseded history; historical N3 review disposition recorded.
+
+**Next action:** Complete the N3 session-lifecycle contract at `docs/architecture/m3_session_lifecycle_contract.md` from the actual controlling sources (N1/N2 contracts, canonical containment/safe-failure semantics, diagnostics contract, source compatibility contract), then freeze it as a commit before dependent implementation.
+
+**Needed from owner:** Nothing; no operator action is assigned.
+
+**Saved at:** This handoff and Project Record planning-38. The containing commit and subsequent readback are the save receipt.
+
+---
+
+## Superseded history — package-preparation-3 entry, retained unchanged
+
+# YWE Session Handoff — Windows Source-Closure Package
+
+**Date:** October 9, 2026
 **Handoff checkpoint:** package-preparation-3
 **Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-36, section 11; unchanged.
 **Approved outcome:** YWE-APPROVAL-20261005-SOURCE-CLOSURE-N3, reaffirmed by the October 9 intake/outcome approval below.

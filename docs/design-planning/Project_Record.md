@@ -1,13 +1,13 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-36
-**Date:** October 5, 2026
+**Revision:** planning-38
+**Date:** October 9, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-35 at `13df7079f911b8f6c56e7be263b0de263b209c48`; full history remains in Git.
+**Supersedes:** planning-37 (section 12 evidence entry at `6d3ae6d182553f9a6cb925ec5a79bea13a812156`); full history remains in Git.
 
-**Current approval and continuation:** Section 11 records the owner's October 5 approval of source-compatibility checkpoint closure followed by N3. Section 10 is the preserved planning-35 checkpoint, not the current next-action authority. This revision records an approved outcome and permission boundaries; it does not accept M3 or claim a new test execution.
+**Current approval and continuation:** Section 13 records the October 9 autonomous N3 direction; sections 11 and 12 preserve the owner-approved source-closure outcome and its bounded evidence. Section 10 is the preserved planning-35 checkpoint. This revision repairs current continuation metadata and opens the N3 session-lifecycle assignment; it does not accept M3 or claim N3 test execution.
 
 ## 1. Current working brief
 
@@ -17,10 +17,13 @@
 | Product purpose | Platform-neutral, strictly object-oriented and modular engine specification |
 | Accepted milestones | M0, M1 and M2 |
 | Active milestone | M3 — Complete core deterministic semantics and the reference oracle |
+| Active M3 assignment | N3 session lifecycle: admission and ownership, controlled live-state publication, containment and resolution, safe halt and terminal handling, and bounded diagnostic evidence |
 | Next milestone | M4 remains planned; its dependency is M3 acceptance |
 | M2 acceptance | Complete; immutable evidence records all six exit criteria and eight deliverables |
-| Platform products | Deferred until M10 acceptance |
+| Source closure | Section 12 evidence published at `6d3ae6d`; representation-matched only, `acceptance=false`, `provenance_review_required=true`; N3 does not reuse it as acceptance |
+| Wiki | Publication unfinished until actual remote readback establishes completion |
 | Publication | Unreleased; no GitHub Release objects exist as verified September 20, 2026 |
+| Workflow | Autonomous execution and owner-account publication authorized by package `YWE-M3-N3-AUTONOMOUS-001` r1 (section 13); no operator approval gates, operator reviews, or mandatory separate reviewer-service sign-off; technical checks and source constraints retained |
 
 The machine-readable roadmap is milestone and status authority. Focused accepted contracts,
 governance records, schemas, fixtures, and validators remain engineering authority.
@@ -1117,3 +1120,69 @@ checkpoint relies on the separately authorized record-storage authority in the
 owner-only authorship and no co-author trailers. The containing commit and
 subsequent readback are the save receipt; this text does not predeclare a
 successful write for its future containing revision.
+
+## 13. Autonomous N3 direction — October 9, 2026
+
+**Direction ID:** YWE-DIRECTION-20261009-AUTONOMOUS-N3
+**Source:** Package `YWE-M3-N3-AUTONOMOUS-001`, revision r1, external at
+`A:\Qwen-Projects\YWE\YWE-M3-N3-AUTONOMOUS-001-r1` (queue row
+`queue-0c8e8a40ed981abd350fe070de09d03d`, revision
+`05ff93d03646e4949292a8af3d192a0a11488a702d17ea5cab5732eb1e0fbe6f`). The package
+stays outside the product repository.
+
+### 13.1 Scope and authority
+
+The owner directs continuation of the N3 reference lifecycle without operator
+approval gates, operator reviews, or required operator actions. Both in-scope
+execution and owner-account publication are authorized. Publication uses the
+existing `flynn33` owner identity, the existing admin-role bypass when
+necessary, and omits AI attribution. This is a project-specific procedural
+exception to the pinned method and earlier package directions: no operator
+sign-off or mandatory separate reviewer-service approval. Technical contract
+completeness, executable checks, source roles, dependency exclusions, safety
+behavior, truthful validation status, and existing immutable evidence are all
+preserved. No independent-review result is forged, and no unchanged
+profile's waived review field is claimed as passed.
+
+### 13.2 Endpoint and preserved state
+
+The package's bounded endpoint is the complete source-grounded N3 technical
+contract, an implemented and verified reference lifecycle, aligned published
+documentation/wiki, and a synchronized local repository. N3 completion does not
+itself satisfy all M3 criteria, and M4 is not activated by this slice.
+
+At the preparation snapshot, GitHub `main` was
+`6d3ae6d182553f9a6cb925ec5a79bea13a812156`. M0–M2 remain accepted. M3 remains
+active. Raven Forge Development v0.7.0 at
+`87409bc36fb9d4782eab02189adb184f2b3962a7` remains the method pin. The
+recorded repository version is 2.0.23; version surfaces are verified before
+edit and no arbitrary bump is ordered.
+
+### 13.3 Historical external N3 review — disposition
+
+The historical external N3 review is not recovered from the inspected
+sources. Its original contents, conclusions, and approval status are not being
+asserted. N3 proceeds as new source-grounded engineering under the current
+autonomous assignment. No repeated whole-drive search is performed, and the
+disposition is not reopened by summaries of the missing review.
+
+### 13.4 Current checkpoint
+
+**Current step:** P0 reconciliation complete; P1 N3 contract work begins.
+
+**Completed:** Current local and remote identity reconciled at
+`6d3ae6d182553f9a6cb925ec5a79bea13a812156`; record revision allocated as
+planning-38; section 1 current working brief repaired to identify the N3
+assignment, source-closure state, wiki-incomplete state, and autonomous
+workflow; historical external N3 review disposition recorded; section 12
+source-closure evidence preserved unchanged.
+
+**Next action:** Read the complete N1/N2/N3-boundary contracts and their exact
+canonical owners, then record the complete N3 session-lifecycle contract in
+`docs/architecture/m3_session_lifecycle_contract.md` with its machine-readable
+inventory, new requirement and decision IDs, and executable expectations.
+
+**Needed from owner:** Nothing; no operator action is assigned.
+
+**Saved at:** This record, planning-38; the applicable handoff points to this
+entry. The containing commit and subsequent readback are the save receipt.
