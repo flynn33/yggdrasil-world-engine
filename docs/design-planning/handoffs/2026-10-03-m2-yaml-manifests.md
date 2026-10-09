@@ -265,3 +265,27 @@ its containing commit is the current continuity save point. Keep M2 in progress,
 M3 planned, and the platform gate deferred through M10. The current development
 method remains Raven Forge Development v0.7.0 at
 `87409bc36fb9d4782eab02189adb184f2b3962a7`.
+
+
+## Source-closure execution checkpoint (2026-10-09)
+
+The sealed `YWE-M3-SOURCE-CLOSURE-001` package revision `r3-WINDOWS-QWEN38`
+completed its source-compatibility evidence collection and independent
+instruction review for implementation
+`13df7079f911b8f6c56e7be263b0de263b209c48`. The full 36-check offline
+validation passed (36/36, 1,006 unit tests, zero blocking failures, clean
+checkout) in a detached external verification checkout on the Windows-11
+reference host. Independent instruction review completed with a bounded
+`text_only` review (run `a767e7c4`): verdict
+`no_blocking_findings_in_reviewed_scope`; the six prior tool-mode attempts
+timed out at the model provider. Full evidence identities, report hashes,
+launch/run receipts and the review receipt are recorded in
+[Project Record section 12](../Project_Record.md#12-bounded-m3-source-closure-evidence-planning-37)
+and retained at the external evidence root.
+
+This checkpoint records the source-compatibility evidence and its review. It
+does not accept M3; M3 remains in progress and N3 remains unimplemented. The
+sealed package stayed external to this repository. Publication of this
+checkpoint relies on the separately authorized record-storage authority in the
+[planning-location decision](../decisions/2026-09-19-planning-location.md),
+with owner-only authorship and no co-author trailers.

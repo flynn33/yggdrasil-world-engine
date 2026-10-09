@@ -234,6 +234,24 @@ acceptance is pending. Four genuine committed-source Windows host controls also
 passed, including actual legacy/current source capture, unsafe-parent refusal and
 both Recovery collector integration methods. These results retain their distinct
 scopes. Historical source evidence remains intact.
+The sealed [source-closure package](docs/design-planning/Project_Record.md#12-bounded-m3-source-closure-evidence-planning-37)
+completed its full 36-check offline validation at
+`13df7079f911b8f6c56e7be263b0de263b209c48` from a clean, unfiltered, detached
+verification checkout: all 36 applicable repository checks passed with zero
+blocking failures, zero advisories and no checkout changes; the non-destructive
+diff recorded 6 modified, 0 deleted, 0 renamed and 0 added files. All 1,006
+unit tests passed in 1070.970 seconds on the Windows-11 reference host. The
+qualified runtime is Python 3.12.10 with jsonschema 4.25.1, PyYAML 6.0.3 and
+referencing 0.37.0. The report identity is representation-matched; independent
+instruction review of the sealed package completed with a bounded `text_only`
+review (run `a767e7c4`): verdict `no_blocking_findings_in_reviewed_scope`,
+with instruction accuracy, dependency boundary and governance conclusions
+consistent. The prior six tool-mode review attempts timed out at the model
+provider; the text-only route completed within its budget. This evidence
+supports the source-compatibility checkpoint but does not accept M3; M3 remains
+in progress and N3 remains unimplemented. The sealed package stayed external to
+this repository; this checkpoint is a documentation save under the separately
+authorized record-publication authority.
 
 The next session contract is under review. Later containment requires a separate
 decision bridge for its actual cause; the resulting four-record lifecycle needs a

@@ -22,6 +22,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 - Complete M1 canon terminology and governance closure and advance the active roadmap milestone to M2 while publication remains unreleased and platform work remains unauthorized.
 - Clarify that repository baseline tags and changelog entries are not published specification releases.
 - Keep platform product implementation deferred until the M10 acceptance gate.
+- Record the bounded M3 source-compatibility closure evidence for 13df7079 (36/36 offline checks, 1,006 unit tests, clean detached verification checkout) and its completed independent instruction review in the Project Record, README, and continuation handoff. Documentation-only checkpoint; M3 remains in progress and M0-M2 remain accepted.
 
 ---
 

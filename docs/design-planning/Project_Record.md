@@ -1047,3 +1047,73 @@ its actual absence blocks the next dependent action.
 commit and subsequent readback are the save receipt; this text does not predeclare
 a successful write or tests for its future containing revision. The applicable
 handoff points to this approval entry and preserves its older checkpoint as history.
+
+
+## 12. Bounded M3 source-closure evidence (planning-37)
+
+The sealed package `YWE-M3-SOURCE-CLOSURE-001` revision
+`r3-WINDOWS-QWEN38` (manifest sha256 `f358926ffa5e3dbe63e34fa4883be3c228daa3cb4ae47ef8c805bd7b721f271e`,
+23 files, package integrity verified by the external `package_guard.py`
+helper) was executed externally, keeping the package outside the product
+repository. The verified implementation is
+`13df7079f911b8f6c56e7be263b0de263b209c48`, checked out detached, clean, with
+full history and pinned blobs verified, in a separate external verification
+checkout at `A:\Qwen-Projects\YWE-EVIDENCE\verification-checkout`. The
+qualified external runtime is Python 3.12.10 with jsonschema 4.25.1, PyYAML
+6.0.3 and referencing 0.37.0.
+
+The full 36-check offline validation was previously executed as one durable
+process job (exit 0) with `GIT_ALLOW_PROTOCOL=file`, `GIT_NO_REPLACE_OBJECTS=1`
+and `PYTHONDONTWRITEBYTECODE=1` on the Windows-11-10.0.26200-SP0 reference
+host. All 36 applicable repository checks passed with zero blocking failures,
+zero advisories, no check selections and no checkout changes before or after;
+the non-destructive diff recorded 6 modified, 0 deleted, 0 renamed and 0 added
+files. All 1,006 unit tests passed in 1070.970 seconds. The report identity is
+representation-matched only (report sha256
+`9a8cbc4106fd416026741705ee233895b362c9727b953e9420911bdb132c1baf`,
+check catalog sha256
+`2c9aec2fb32d3077cd0269c3efd95aa0ba418112ccd1b846930e9462b431c334`,
+validation log sha256
+`41baa9e8ad63969380930802a61276788ffdca6d4a05e51e6305965faaa51551`,
+diff log sha256
+`755543c8e0f29e7f5df4742a64af1faadabee9fa8c5683c64ae932a11634bb9f`). The
+structural audit returned `REPRESENTATION_MATCH_ONLY`; the external
+`evidence_review.py` triage helper recomputed the check-catalog correspondence
+and passed with exit 0 (36/36), with `acceptance=false` and
+`provenance_review_required=true`. Complete evidence, launch and run receipts
+are retained in the external evidence root.
+
+Independent instruction review of the sealed package: six prior tool-mode
+attempts timed out at the model provider (r2-session runs
+`d6f9e7de-eaa0-4887-875c-4c55f36e3afe`,
+`ff1e92b0-4925-46af-99a4-9e27356811b0`,
+`b24c09f5-b670-441c-919e-c672a5873bea`,
+`afe93765-cdb0-47f5-a936-a660a58116be`; r3-session runs
+`bbfc3fb9-11d8-4700-9f7b-0c63982ad953` and
+`fb779054-d2e6-4e2e-9a6f-d28ea9c6d50e`). A bounded `mode=text_only` attempt
+succeeded (run `a767e7c4-e63c-4cb0-b96e-e6d35de3c54b`, evidence sha256
+`759a3d9dd8ff59364c6463f7ad3ccc5ece63b1362ceb37196d50be2db6609cb5`): verdict
+`no_blocking_findings_in_reviewed_scope`; instruction accuracy, dependency
+boundary and governance conclusions are consistent; adherence and
+implementation conformance are `not_evaluated` (no execution artifacts in the
+text-only scope). The text-only review's flagged "unverified" items (manifest
+integrity, checkout state, pinned catalog blob, prior report) were
+independently verified by the executor with actual tool calls:
+`package_guard.py` integrity pass (23 files), `evidence_review.py`
+structural triage pass (36/36, pinned catalog blob verified from local Git),
+verification checkout clean at `13df7079` with full history. The review
+receipt is retained at the external evidence root. This bounded technical
+review is a conclusion about its supplied scope; it is not CLU gate approval,
+milestone acceptance, or publication permission.
+
+This section records the source-compatibility checkpoint evidence. It does not
+accept M3; M3 remains in progress with all five existing exit criteria
+unchanged. N3 remains unimplemented, with no lifecycle effects adopted. The
+package pin Raven Forge Development 0.7.0 at
+`87409bc36fb9d4782eab02189adb184f2b3962a7` and approval
+`YWE-APPROVAL-20261005-SOURCE-CLOSURE-N3` are unchanged. Publication of this
+checkpoint relies on the separately authorized record-storage authority in the
+[planning-location decision](decisions/2026-09-19-planning-location.md), with
+owner-only authorship and no co-author trailers. The containing commit and
+subsequent readback are the save receipt; this text does not predeclare a
+successful write for its future containing revision.
