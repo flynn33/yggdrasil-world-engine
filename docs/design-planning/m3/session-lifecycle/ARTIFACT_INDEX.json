@@ -95,7 +95,9 @@
     "Actual adopted policy hash reconciled in contract, business inventory and safe projection",
     "Repository companion paths and portable representation script source root",
     "Representation specimens/reports regenerated against reconciled inputs",
-    "Explicit lifecycle capture gate, nonblocking scope clock port and once-only final history index semantics; no new wire type or numeric bound"
+    "Explicit lifecycle capture gate, nonblocking scope clock port and once-only final history index semantics; no new wire type or numeric bound",
+    "ADR-0034 retains existing actual partial-child and unavailable-facts outcomes; safe inline failure branch and replayed increased structural bounds within unchanged fixed reservations and caps",
+    "Clarify once-final command/capture truth versus later observer/pin acknowledgment, bounded actual sidecar and authoritative AUDIT_BLOCKED read; no extra observation or wire field"
   ],
   "executed_representation_controls": [
     {
@@ -114,8 +116,8 @@
   "runtime_acceptance": false,
   "files": {
     "docs/architecture/m3_session_lifecycle_contract.md": {
-      "bytes": 49034,
-      "sha256": "72d534601582566789f03df2bdecf62395d26f83385bc8416e44a75cb2036b70"
+      "bytes": 50553,
+      "sha256": "7cf27af49b884c76b36e8f64e735c22d6a03afab0f57ffe5f203f9dc4f281435"
     },
     "docs/architecture/m3_session_lifecycle_policy.md": {
       "bytes": 12667,
@@ -123,35 +125,35 @@
     },
     "docs/design-planning/m3/session-lifecycle/ACTUAL_READ_SOURCE_HASHES.json": {
       "bytes": 1493,
-      "sha256": "e1d42fc37f5acd8439b19ee464c216df44ee66989f2e4edcc5c88d324bc8215d"
+      "sha256": "f340ef437a10ced884a6ed51d52f17280596729486833f0b96d29e187a6ca81a"
     },
     "docs/design-planning/m3/session-lifecycle/BOUND_INPUT_DOMAINS.json": {
       "bytes": 48297,
       "sha256": "8ba34a19a74a4580115106644daa62edee1dab7f47d23e7a89eae12e9807f1e0"
     },
     "docs/design-planning/m3/session-lifecycle/BOUND_REPORT.json": {
-      "bytes": 8286,
-      "sha256": "2795905e178a7307563e71a5028399ddab8900d2fab0349a7a72cf1ac91bbd57"
+      "bytes": 8431,
+      "sha256": "2414f69b4fd9b4e92265efa2030e28882a3cceaf686bf1ed113992857bac4da2"
     },
     "docs/design-planning/m3/session-lifecycle/BUSINESS_API_INVENTORY.bound-input.json": {
-      "bytes": 44206,
-      "sha256": "7ba936a41659524bca9f2c5a9653df704f92de994f1e8682c243ef978df0b0f0"
+      "bytes": 44376,
+      "sha256": "074ab570b02968522ab182e25fa95653d6b113272aac64673d1334382d27738c"
     },
     "docs/design-planning/m3/session-lifecycle/BUSINESS_API_INVENTORY.json": {
-      "bytes": 44206,
-      "sha256": "7ba936a41659524bca9f2c5a9653df704f92de994f1e8682c243ef978df0b0f0"
+      "bytes": 44376,
+      "sha256": "074ab570b02968522ab182e25fa95653d6b113272aac64673d1334382d27738c"
     },
     "docs/design-planning/m3/session-lifecycle/CAPACITY_AND_RETENTION.md": {
-      "bytes": 23803,
-      "sha256": "e635a8e4fc07022912632e047774790fc492fab2b949fed35f4904a51b24b5a6"
+      "bytes": 25002,
+      "sha256": "2a1f769aba3a78feb8ba2e35cd5eace5a650ae470bfc5a1be9dfee049cd3de6a"
     },
     "docs/design-planning/m3/session-lifecycle/derive_bounds.py": {
-      "bytes": 9587,
-      "sha256": "3a12d1206e28eb923c40e1e9f6a1681e79f1426a51dddad9878de51fb38ac908"
+      "bytes": 9631,
+      "sha256": "c069034df274c4fe89ceb93c99e2b66d81f4914a61e1758e1ebc891a6c8d22c2"
     },
     "docs/design-planning/m3/session-lifecycle/derive_command_reservations.py": {
-      "bytes": 4499,
-      "sha256": "a214fae1e64126ecff890d8254236b5da36f45f0498ea4ebbaf8e42b4ccba190"
+      "bytes": 4540,
+      "sha256": "265d66e6741b794ebd7b1eb98ffa3e1a44b0aaf765763e477bcb17391850d43d"
     },
     "docs/design-planning/m3/session-lifecycle/generate_graph_control.py": {
       "bytes": 2796,
@@ -159,11 +161,11 @@
     },
     "docs/design-planning/m3/session-lifecycle/INDEPENDENT_REPLAY.json": {
       "bytes": 2736,
-      "sha256": "53f44db28219584bee2f4561f823591783d048bb4055e562472ded4f752dd786"
+      "sha256": "30045d6144d19ef64ae9614fd30411156c1dc53531690fafe4e3cba7cf66a081"
     },
     "docs/design-planning/m3/session-lifecycle/MAXIMUM_SPECIMENS.json": {
-      "bytes": 573012,
-      "sha256": "97f35d664248e9559d6018f47f5d73d6876b3a6af72e565381344c1e0c99b4a0"
+      "bytes": 573869,
+      "sha256": "b9a4b56079b69c55aa0a9f81498484a87433b346fd8b0482e3a6425fd3fc49b1"
     },
     "docs/design-planning/m3/session-lifecycle/N3_COMPLETE_SOURCE_VECTORS.bound-input.json": {
       "bytes": 5836,
@@ -178,24 +180,31 @@
       "sha256": "11fb7a33f2b63dc22c108efb430979d31fe7b8d1f3afedd2dac249d1abb5efdc"
     },
     "docs/design-planning/m3/session-lifecycle/replay_independent.py": {
-      "bytes": 4608,
-      "sha256": "3d0b27d014c2119013c85d4697c2b72ea22c12de95ad4b28a39731063a0ad134"
+      "bytes": 4712,
+      "sha256": "2a11c21a218ad6b2864e308841172ae993ef4e28a30b3bf08dc0ed79a3eccb41"
     },
     "docs/design-planning/m3/session-lifecycle/REPRESENTATION_GRAPH_CONTROL.json": {
       "bytes": 662633,
       "sha256": "f0400909a816d9e5f9bc9a941a8af69c8485ae733b134fb64f2160d50d5830f2"
     },
     "docs/design-planning/m3/session-lifecycle/SAFE_FIELDS_AND_LIMITS.json": {
-      "bytes": 31438,
-      "sha256": "f348a06893be62fb9c9f6bc5600d622ac2386a078531f0d58cd898762d02f7f0"
+      "bytes": 32330,
+      "sha256": "47f43840884589e39465f9368a0974220b2bdc4ddf24af2edd320d2209856d44"
     },
     "docs/design-planning/m3/session-lifecycle/README.md": {
-      "bytes": 2361,
-      "sha256": "8cf5ba8b0c236628c6ae3a2a12e80601105d9963f34c3545aec8e0c587e02300"
+      "bytes": 2685,
+      "sha256": "daf0668c05814b095e598044dda256f4debb8e90766e6657e8b3975bea765983"
     }
   },
   "adopted_business_types": 38,
   "adopted_api_ports": 35,
   "adopted_artifact_hash_encoding": "utf8_without_bom_lf_normalized_git_blob",
-  "frozen_proposal_hash_encoding": "original_bytes"
+  "frozen_proposal_hash_encoding": "original_bytes",
+  "adoption_amendment_base_revision": "cdbcb68fab4471a2c910a1762038c1551f8fe9e8",
+  "decision_ids": [
+    "ADR-0033",
+    "ADR-0034"
+  ],
+  "closed_origin_correction_external_index_sha256": "9f147748f7703aff6a8877012fd0b55310704d176706b3d16383d26195033699",
+  "actual_read_source_hash_encoding": "sha256_utf8_without_bom_lf_normalized_committed_cdbcb68_blobs"
 }

@@ -70,7 +70,9 @@ representation bounds; session runtime verification remains outstanding. The
 next work is implementing admission, controlled publication, containment,
 authorized resolution, halt and bounded Diagnostics against those contracts.
 
-Owner wiki publication `a44ce7d` is remotely byte-verified from source `4f7cd2e`.
+ADR-0034 corrects the closed actual fresh-origin failure unions before
+dependent implementation; replayed bounds remain within the fixed command
+reservations. Owner wiki `a2d8a5b` is remotely byte-verified from `cdbcb68`.
 The [README development checkpoint](../../README.md#development-checkpoint--2026-10-11)
 and [Project Record section 16](../design-planning/Project_Record.md#16-n3-contract-adoption-and-actual-wiki-publication--october-11-2026)
 carry the actual published verification and continuation. This increment does

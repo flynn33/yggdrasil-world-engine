@@ -1608,12 +1608,53 @@
         "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
         "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md"
       ]
+    },
+    {
+      "id": "ADR-0034",
+      "record_type": "decision",
+      "title": "Retain actual failed and unavailable fresh session origin evidence",
+      "status": "accepted",
+      "recorded_on": "2026-10-11",
+      "owner_role": "Core semantics maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt the source-owned fresh-origin failure union correction and replayed safe projection before dependent constructor and collector implementation. N3 runtime acceptance remains outstanding.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "The cdbcb68 N3 helper contract already returns actual StateAssessment, ClassificationEvidenceFailure, DiagnosticCaptureFailure or UnavailablePostAssessmentFacts. Its result origin field admitted only StateAssessment and its primary evidence union could not retain the explicit unavailable observation. Actual rv.UnavailablePostAssessmentFacts has operation, candidate, source and reason fields; actual StateModel failure variants retain emitted and attempted evidence. Those concrete types exposed the two closed-union gaps during implementation.",
+      "decision": "Permit existing ClassificationEvidenceFailure and DiagnosticCaptureFailure in SessionOperationResult.origin_assessment, and existing UnavailablePostAssessmentFacts in SessionFailureDetail.primary_evidence when no child exists. Retain unavailable operation alias, candidate signature and safe declared source triple inline in SESSION_FAILURE with explicit reason omission and no invented complete assessment association. Preserve every collector cap, command reservation, support kind/node/quota and pin maximum.",
+      "rationale": "These existing owned outcomes preserve observed provenance without manufacturing a successful assessment or discarding an unavailable source. Executed representation controls conservatively charge the inline failure maximum across all eighteen commands; the command bounds still fit the adopted reservations. Partial origins fit the existing two-emission assessment upper bound.",
+      "consequences": [
+        "YWE-REQ-0044 and ADR-0033 remain active. This amendment adds no business field, business type, public port or independent safety-policy change; the exact inventory remains 38 types and 35 ports.",
+        "Safe failure leaf maximum rises from 963 to 1290 bytes. New lifetime safe support is 972678 bytes, contribution 1575258 bytes and rounded structural envelope 1605632 bytes. This paper envelope is not an actual collector scope reservation.",
+        "Ordinary and terminal representation bounds are 324066 and 645088 bytes within unchanged 327680 and 655360 total-byte reservations; per-command alias upper bound 324 remains within 512. Lifetime alias occurrences 4748 remain within structural rounded 4864. Pins remain 2544.",
+        "The adopted independent policy LF hash remains 24e2584279b95b8e3659bd61e6b5149311f344b03b981e88f74ae37775591910. Actual source proof hashes now use normalized committed cdbcb68 blobs; prior raw-checkout hash evidence is preserved in Git and external receipts.",
+        "Replay, graph and raw JSON controls establish representation bounds only. Actual child failure, once completion, interrupted cleanup, protected storage and N3-V01 through N3-V16 require subsequent executed implementation verification. Immutable command status ends at the first scope finish; later observer/pin failure preserves the actual bounded receipt, blocks authoritative read admission and marks collector coverage partial or uncertain without rewriting or reobserving the earlier result."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0044",
+        "YWE-REQ-0043",
+        "YWE-REQ-0042",
+        "YWE-REQ-0041"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_session_lifecycle_contract.md",
+        "docs/architecture/m3_session_lifecycle_policy.md",
+        "docs/design-planning/m3/session-lifecycle/BUSINESS_API_INVENTORY.json",
+        "docs/design-planning/m3/session-lifecycle/SAFE_FIELDS_AND_LIMITS.json",
+        "docs/design-planning/m3/session-lifecycle/CAPACITY_AND_RETENTION.md",
+        "docs/design-planning/m3/session-lifecycle/ARTIFACT_INDEX.json",
+        "core/ash_pattern_engine/recovery_values.py",
+        "core/ash_pattern_engine/state_values.py",
+        "core/ash_pattern_engine/state_model.py"
+      ]
     }
   ],
   "summary": {
-    "total_records": 50,
-    "architecture_decisions": 33,
-    "accepted_decisions": 33,
+    "total_records": 51,
+    "architecture_decisions": 34,
+    "accepted_decisions": 34,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

@@ -269,7 +269,8 @@
       "completion_observation": "SafeSessionCompletionObservation|null",
       "completion_failure_code": "LifecycleCaptureCode|null",
       "unconfirmed_completion_observation": "SafeSessionCompletionObservation|null",
-      "omitted_fields": "fixed:FAILURE_REASON"
+      "omitted_fields": "fixed:FAILURE_REASON",
+      "unavailable_post_assessment_facts": "SafeUnavailablePostAssessmentFacts|null"
     },
     "SafeSessionCommandEvidence": {
       "evidence_reference": "Alias",
@@ -489,6 +490,12 @@
       "terminal_envelope": "SafeDiagnosticEnvelope",
       "actual_terminal_publication_evidence_reference": "Alias",
       "assurance": "fixed:ACTUAL_FINAL_HALT_LINK_NONRECURSIVE_COMPLETE_TYPED_CLOSURE"
+    },
+    "SafeUnavailablePostAssessmentFacts": {
+      "operation_reference": "Alias",
+      "candidate_state": "Signature",
+      "source_binding": "SafeEvidenceSourceBinding",
+      "omitted_fields": "fixed:UNAVAILABLE_POST_FACTS_REASON"
     }
   },
   "source_vector_hash_algorithm": "sha256_compact_ascii_sorted_keys_single_vector_object; approved literal compiled map, never caller verification",
@@ -556,9 +563,9 @@
     "bridge_old_node_refs": 36
   },
   "lifetime_graph_structural_upper": {
-    "scope_encoded_bytes_upper": 1569372,
-    "novel_alias_occurrence_upper": 4676,
-    "new_safe_support_bytes_upper": 966792,
+    "scope_encoded_bytes_upper": 1575258,
+    "novel_alias_occurrence_upper": 4748,
+    "new_safe_support_bytes_upper": 972678,
     "old_domain_additional_allocation_bytes_upper": 373204
   },
   "regular_command_reservation": {
@@ -636,7 +643,7 @@
     "total": 19
   },
   "business_inventory_file": "BUSINESS_API_INVENTORY.bound-input.json",
-  "business_inventory_sha256": "7ba936a41659524bca9f2c5a9653df704f92de994f1e8682c243ef978df0b0f0",
+  "business_inventory_sha256": "074ab570b02968522ab182e25fa95653d6b113272aac64673d1334382d27738c",
   "zero_step_bridge_policy": "Every N3session decision bridge performs0N2math/provider steps and has RecoveryDiagnostic.steps=(). ExistingRECOVERY_DIAGNOSTIC64pool/keyimmutable/leafcap remains binding; charge up to2new nodes perordinarycommand and36lifetime. ActualRecoveryEngine step records remainunchanged.",
   "assessment_completion_projection_policy": "Origin/post-mode completion fields accept only exact collector-owned assessment receipts for the associated scope. Actual assessment scopes admit at most2indices; generic DiagnosticsCompletionReceipt permits768 forN2butisnotacceptedhere. Untrusted/foreign/corrupt receipts remain partial and cannot inherit samecollector authority.",
   "required_post_mode_policy": "Every successful containment or resolution mutation requires2actual post-mode StateModel records in a new childroot under the same4event budget. Containment bridge+containment+pair=4; resolution typedcontrol+pair=3. Puretargetvalidation emits0; no canonical resolutionTEN is fabricated. The16pairbound is conservative;15nonterminalmodecommandscapactuallyapplies.",
@@ -649,5 +656,6 @@
   "approved_source_vector_hashes": {
     "LEGACY_C78": "2f7d39c0921e45f85956cd3e6c4f28e33204ae8487bc2334e25d8d589efef246",
     "N3_LIFECYCLE": "998a5a8d80c112756ce0255ff8542dcb885abd4eee388cfc2b48da2113278730"
-  }
+  },
+  "unavailable_post_facts_projection_policy": "Actual existing UnavailablePostAssessmentFacts retains operation,candidate,source triple and explicit reason omission inline in SESSION_FAILURE; primary_evidence_reference=null for this branch. No new supporting kind/node or quota. Conservative arithmetic charges inline maximum for every18failure occurrence, even though at most2RECOVER attempts can produce it. Partial classification/capture origins retain actual failed prefix/completion and attempted/unknown roots; no invented complete assessment association."
 }

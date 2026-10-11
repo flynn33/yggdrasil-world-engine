@@ -1479,7 +1479,18 @@
         "failure_code": "CAPTURE_FINAL_OBSERVATION_FAILED",
         "assurance": "OBSERVED_CAPTURE_RESPONSE_NOT_STORAGE_PROOF"
       },
-      "omitted_fields": "FAILURE_REASON"
+      "omitted_fields": "FAILURE_REASON",
+      "unavailable_post_assessment_facts": {
+        "operation_reference": "ref:999999",
+        "candidate_state": "111111111",
+        "source_binding": {
+          "source_reference": "ref:999999",
+          "source_digest_reference": "ref:999999",
+          "evidence_reference": "ref:999999",
+          "source_verification": "DECLARED_NOT_AUTHENTICATED"
+        },
+        "omitted_fields": "UNAVAILABLE_POST_FACTS_REASON"
+      }
     },
     "SafeSessionCommandEvidence": {
       "evidence_reference": "ref:999999",
@@ -2572,6 +2583,17 @@
       },
       "actual_terminal_publication_evidence_reference": "ref:999999",
       "assurance": "ACTUAL_FINAL_HALT_LINK_NONRECURSIVE_COMPLETE_TYPED_CLOSURE"
+    },
+    "SafeUnavailablePostAssessmentFacts": {
+      "operation_reference": "ref:999999",
+      "candidate_state": "111111111",
+      "source_binding": {
+        "source_reference": "ref:999999",
+        "source_digest_reference": "ref:999999",
+        "evidence_reference": "ref:999999",
+        "source_verification": "DECLARED_NOT_AUTHENTICATED"
+      },
+      "omitted_fields": "UNAVAILABLE_POST_FACTS_REASON"
     }
   },
   "pages": [

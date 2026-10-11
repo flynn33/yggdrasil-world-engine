@@ -7,6 +7,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ## Unreleased
 
 ### Added
+- Correct the adopted N3 fresh-origin failure unions and inline unavailable-facts provenance under ADR-0034 before dependent code; replay the increased bounds within unchanged command reservations and collector caps.
 - Adopt the complete N3 lifecycle contract, independent policy, exact 38-type/35-port inventory and portable capacity/serialization controls under YWE-REQ-0044 and ADR-0033 before implementation. Runtime acceptance remains outstanding.
 - Add a shared exact-commit wiki projection, owner-authenticated publication routes, preserved manual navigation, and fifteen focused refusal and readback tests.
 - Add source-backed structural YAML module-manifest validation and explicit YAML fixture bindings with typed rejection witnesses.

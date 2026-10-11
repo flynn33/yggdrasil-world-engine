@@ -17,7 +17,11 @@ revision; they do not describe unimplemented N3 behavior as already present.
 [ARTIFACT_INDEX.json](ARTIFACT_INDEX.json) records the frozen external proposal
 hashes, reconciled adopted policy and inventory hashes, and exact repository
 artifact hashes. The adopted policy hash includes its actual adopted status;
-the frozen proposal bytes remain preserved separately.
+the frozen proposal bytes remain preserved separately. ADR-0034 adopts the
+closed fresh-origin failure amendment before its dependent implementation.
+ACTUAL_READ_SOURCE_HASHES.json now names normalized committed cdbcb68 source
+blobs; the preceding checkout-byte hashes remain in the base commit and
+external adoption receipts. Current runtime edits are excluded from this proof.
 The adopted artifact hashes and byte lengths use UTF-8 without a BOM and LF
 line endings, matching committed Git blobs. Normalize checkout line endings
 before comparing them; the frozen proposal hashes retain their original bytes.
@@ -31,7 +35,7 @@ state publication, capture acknowledgments, concurrency or native storage.
 Their synthetic values and storage status labels are representation specimens,
 not accepted semantic lifecycle packets.
 
-The calculated ordinary and terminal bounds are 323,739 and 644,761 bytes,
+The calculated ordinary and terminal bounds are 324,066 and 645,088 bytes,
 within fixed 327,680 and 655,360 byte reservations. Existing retained and
 reserved collector capacity can still refuse admission. No automatic purge,
 capacity increase or shortened history makes an operation fit.

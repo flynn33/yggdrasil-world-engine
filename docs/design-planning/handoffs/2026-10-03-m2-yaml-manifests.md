@@ -1,10 +1,10 @@
 # YWE Session Handoff — N3 Contract Adoption
 
 **Date:** October 11, 2026
-**Handoff checkpoint:** autonomous-n3-4
-**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-41, section 16; autonomous authority remains section 13.
+**Handoff checkpoint:** autonomous-n3-5
+**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-42, section 16.1; autonomous authority remains section 13.
 **Direction:** YWE-DIRECTION-20261009-AUTONOMOUS-N3 (package `YWE-M3-N3-AUTONOMOUS-001` r1).
-**Inspected project snapshot:** local and remote main `4f7cd2e38367e1b3cc75eefffb8f752586e1c7a2`; owner publication and README readback verified.
+**Inspected project snapshot:** local and remote main `cdbcb68fab4471a2c910a1762038c1551f8fe9e8`; owner publication and README readback verified.
 **Method:** Raven Forge Development v0.7.0 at `87409bc36fb9d4782eab02189adb184f2b3962a7`.
 
 This is the current continuation. Earlier preparation receipts below remain
@@ -13,16 +13,18 @@ superseded history with their original scope and evidence preserved.
 ## Current state
 
 - M0–M2 accepted; M3 active; M4 and platform work remain planned/deferred.
-- N3 lifecycle contract, independent policy, exact business/API inventory and capacity controls adopted under YWE-REQ-0044 and ADR-0033 before implementation. Runtime verification remains outstanding.
+- N3 lifecycle contract, independent policy, exact business/API inventory and capacity controls adopted under YWE-REQ-0044 and ADR-0033; ADR-0034 corrects actual fresh-origin failure unions before dependent implementation. Runtime verification remains outstanding.
 - Root and independent review verified the frozen proposal and replayed representation controls. All three portable controls pass after adopted hash reconciliation; no session effects or capture acknowledgments are claimed.
-- Owner wiki `a44ce7d2564984390499b4ea98de9d803d60aa62` actually published from source `4f7cd2e`; fresh remote clone matches all 47 reviewed pages. Home, roadmap and manual navigation are current for that source.
-- `4f7cd2e` passes eleven selected clean checks and nineteen focused tests. Its full CI is running at latest readback; predecessor `0949184` passes Ubuntu/Windows CI.
+- Owner wiki `a2d8a5bc00c3ea0a008c0fcd5b131bd448bb9f7f` actually published from `cdbcb68`; fresh remote clone matches all 47 reviewed pages. Home, roadmap and manual navigation are current for that source.
+- `cdbcb68` passes eleven selected clean checks and both platform-boundary tests; its full CI is dispatched. `4f7cd2e` and predecessor `0949184` pass Ubuntu/Windows CI.
 - Original source `13df7079` retains its directly observed 36/36 clean execution, 1,006 tests and successful exact-revision Ubuntu/Windows CI. Section 12's separate external review remains representation-only, `acceptance=false`, `provenance_review_required=true`.
 - Autonomous execution, owner-authored publication and admin bypass are already authorized. No operator or reviewer-service approval gate is assigned.
 
 ## Current checkpoint
 
-**Current step:** P1 contract adoption complete; P2 lifecycle implementation next.
+**Current step:** P1 contract adoption complete through ADR-0034 failure-union
+correction; P2 lifecycle implementation active. Section 16.1 records its
+bounds and the published cdbcb68/wiki checkpoint.
 
 **Next action:** Implement the adopted exact contract, keeping domain ownership,
 closed values/schema and Diagnostics changes coordinated. Execute all sixteen
@@ -32,7 +34,7 @@ actual evidence. Then continue through remaining M3 exits and M4–M10.
 
 **Needed from owner:** Nothing.
 
-**Saved at:** This handoff and Project Record planning-41. The containing commit
+**Saved at:** This handoff and Project Record planning-42. The containing commit
 and subsequent readback are the save receipt; no own test result is predeclared.
 This checkpoint does not complete the active roadmap goal.
 

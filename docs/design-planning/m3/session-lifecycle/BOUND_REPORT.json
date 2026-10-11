@@ -32,7 +32,7 @@
     "SafeSessionCauseEvidence": 1079,
     "SafeSessionCompletionObservation": 243,
     "SafeSessionOriginCompletionObservation": 395,
-    "SafeSessionFailureEvidence": 963,
+    "SafeSessionFailureEvidence": 1290,
     "SafeSessionCommandEvidence": 2478,
     "SafeResolutionTargetEvidence": 2216,
     "SafeSessionResolutionEvidence": 1302,
@@ -48,7 +48,8 @@
     "SafeZeroStepRecoveryDiagnostic": 383,
     "SafeRecoveryStep": 356,
     "SafeSessionSubmittedRecoveryContextEvidence": 1214,
-    "SafeSessionTerminalClosureEvidence": 1933
+    "SafeSessionTerminalClosureEvidence": 1933,
+    "SafeUnavailablePostAssessmentFacts": 290
   },
   "per_kind_encoded_bytes_upper": {
     "SESSION_BINDING": 11989,
@@ -65,7 +66,7 @@
     "SESSION_BOUNDARY": 17460,
     "SESSION_CAUSE": 19422,
     "SESSION_COMMAND": 44604,
-    "SESSION_FAILURE": 17334,
+    "SESSION_FAILURE": 23220,
     "RESOLUTION_TARGET": 35456,
     "SESSION_RESOLUTION": 20832,
     "SESSION_RECOVERY_CONTEXT": 2428,
@@ -77,21 +78,21 @@
   "new_safe_support_nodes": 616,
   "old_domain_support_node_limit": 1928,
   "non_page_pin_inventory_limit": 2504,
-  "new_safe_support_bytes_upper": 966792,
+  "new_safe_support_bytes_upper": 972678,
   "old_domain_additional_allocation_bytes_upper": 373204,
   "old_domain_formula": "16*profile+16*source+40*freshAssessment+36*zeroStepBridge (4 child assessment nodes across2RECOVER + up to16post-modeassessment nodes +20conservativeunusedallocations; eachassessment emits2records)",
   "four_event_bytes_upper": 131072,
   "incident_health_meta_bytes_upper": 98304,
-  "scope_encoded_bytes_upper": 1569372,
+  "scope_encoded_bytes_upper": 1575258,
   "lifetime_graph_rounded_envelope": {
     "events": 4,
     "incidents": 1,
     "novel_aliases": 4864,
-    "bytes": 1572864,
-    "supporting_bytes": 1343488
+    "bytes": 1605632,
+    "supporting_bytes": 1376256
   },
-  "scope_byte_margin": 3492,
-  "support_byte_margin": 3492,
+  "scope_byte_margin": 30374,
+  "support_byte_margin": 30374,
   "alias_terms": {
     "new_node_aliases": 616,
     "submitted_binding_session_references": 19,
@@ -124,10 +125,11 @@
     "new_zero_step_bridge_nodes": 36,
     "submitted_recovery_context_external_refs": 34,
     "submitted_request_authority_boundary_provenance_refs": 72,
-    "terminal_closure_external_aliases": 6
+    "terminal_closure_external_aliases": 6,
+    "unavailable_post_facts_external_refs": 72
   },
-  "novel_alias_occurrence_upper": 4676,
-  "alias_margin": 188,
+  "novel_alias_occurrence_upper": 4748,
+  "alias_margin": 116,
   "global_caps_unchanged": {
     "events": 1024,
     "aliases": 6144,
@@ -174,7 +176,7 @@
     "SESSION_RESOLUTION": 1,
     "SESSION_LINK": 1
   },
-  "per_command_new_safe_support_bytes_upper": 40941,
+  "per_command_new_safe_support_bytes_upper": 41268,
   "per_command_additional_old_domain_bytes_upper": 53422,
   "per_command_alias_terms": {
     "new_node_keys": 35,
@@ -205,11 +207,12 @@
     "publication_identity": 1,
     "zero_step_bridge_nodes": 2,
     "submitted_recovery_context_external_refs": 17,
-    "submitted_request_authority_boundary_provenance_refs": 4
+    "submitted_request_authority_boundary_provenance_refs": 4,
+    "unavailable_post_facts_external_refs": 4
   },
-  "per_command_alias_occurrence_upper": 320,
-  "per_command_encoded_bytes_upper": 323739,
-  "per_terminal_command_encoded_bytes_upper": 644761,
+  "per_command_alias_occurrence_upper": 324,
+  "per_command_encoded_bytes_upper": 324066,
+  "per_terminal_command_encoded_bytes_upper": 645088,
   "terminal_prior_index_support_bytes_upper": 321022,
   "regular_command_reservation": {
     "events": 4,

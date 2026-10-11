@@ -1,13 +1,13 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-41
+**Revision:** planning-42
 **Date:** October 11, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-40 at `4f7cd2e38367e1b3cc75eefffb8f752586e1c7a2`; full history remains in Git.
+**Supersedes:** planning-41 at `cdbcb68fab4471a2c910a1762038c1551f8fe9e8`; full history remains in Git.
 
-**Current approval and continuation:** Section 16 records actual owner wiki publication and N3 contract adoption with executed representation controls. Sections 14 and 15 preserve source and tooling checkpoints. Section 13 preserves the October 9 autonomous N3 direction; sections 11 and 12 preserve the separately scoped external package outcome. Implement the adopted N3 contract next; this revision does not accept N3 runtime behavior or M3.
+**Current approval and continuation:** Sections 16 and 16.1 record published N3 contract adoption, the closed fresh-origin correction and independently replayed representation controls. Sections 14 and 15 preserve source and tooling checkpoints. Section 13 preserves the October 9 autonomous N3 direction; sections 11 and 12 preserve the separately scoped external package outcome. N3 implementation is active; this revision does not accept runtime behavior or M3.
 
 ## 1. Current working brief
 
@@ -21,7 +21,7 @@
 | Next milestone | M4 remains planned; its dependency is M3 acceptance |
 | M2 acceptance | Complete; immutable evidence records all six exit criteria and eight deliverables |
 | Source closure | Original clean full execution and successful exact-revision Ubuntu/Windows CI verified October 11 (section 14); section 12 external review remains representation-matched only, `acceptance=false`, `provenance_review_required=true`; neither accepts N3 or M3 |
-| Wiki | Owner publication `a44ce7d` verified from source `4f7cd2e`; all 47 remote pages match reviewed bytes (section 16) |
+| Wiki | Owner publication `a2d8a5b` verified from source `cdbcb68`; all 47 remote pages match reviewed bytes (section 16.1) |
 | Publication | Unreleased; no GitHub Release objects exist as verified September 20, 2026 |
 | Workflow | Autonomous execution and owner-account publication authorized by package `YWE-M3-N3-AUTONOMOUS-001` r1 (section 13); no operator approval gates, operator reviews, or mandatory separate reviewer-service sign-off; technical checks and source constraints retained |
 
@@ -1389,3 +1389,64 @@ the remaining M3 exits and M4–M10. M0–M2 remain accepted, M3 remains active 
 platform work remains deferred. No owner action is assigned. This containing
 commit and subsequent readback are the save receipt; their checks are not
 predeclared here.
+
+
+### 16.1. Closed fresh-origin correction and published adoption
+
+The adopted contract checkpoint `cdbcb68fab4471a2c910a1762038c1551f8fe9e8`
+is published on main with owner-only authorship and matching Git/API/README
+readback (README SHA256 `165675e7e2420f13cd008c315dda5b508ba2369fdaad30f40d2f7d82e54c3477`).
+Its separate exact clean checkout passed eleven selected offline checks with
+zero failures/advisories in 231.0 seconds and both platform-boundary tests in
+0.025 seconds. Its full CI 38169258179 is dispatched; no success is predeclared.
+The preceding 4f7cd2e full CI 38167117359 completed successfully on both systems.
+
+Wiki `a2d8a5bc00c3ea0a008c0fcd5b131bd448bb9f7f` is published from cdbcb68.
+A fresh LF-controlled remote clone matches all 47 reviewed Git-blob bytes;
+32 generated surfaces verify with zero changes and fifteen manual pages remain
+preserved. Home SHA256 is
+`b5a09102db864ff21e1fb3b215e1f42ee2f0cf28a3bd72ef287eaa12cc22d186`;
+roadmap SHA256 is
+`4f241cfd0fa002b9ad65ca58a34816ccf3b12217124cefdc6afc518c43150c88`.
+The first default Windows checkout converted LF to CRLF and the strict working
+byte verifier refused it after all remote Git blobs matched. Its clone is
+preserved; the independent LF-controlled readback passed without remote repairs.
+Proof: `C:\Users\james\AppData\Local\Temp\ywe-n3-wiki-cdbcb68-readback-20261011-r2/PUBLICATION_READBACK.json`.
+
+Actual implementation review found that the helper's declared partial child
+outputs did not fit SessionOperationResult.origin_assessment, and its explicit
+UnavailablePostAssessmentFacts could not fit the primary evidence union.
+ADR-0034 adopts both existing owned failure alternatives before their dependent
+constructors/projections. No new business field, business type or public port
+is added. Unavailable provenance is retained inline with explicit prose omission;
+an unavailable provider observation is never manufactured into an assessment.
+
+The amendment also makes once-final ordering explicit: command status records
+truth through its first scope finish, while a subsequent observer or pin failure
+is retained as its actual bounded receipt, blocks authoritative read admission
+and makes collector coverage partial/uncertain. The already observed immutable
+result is never rewritten or observed twice; COMPLETED does not claim that
+later retention was confirmed. No business field, port or numeric bound changes.
+
+The corrected representation controls conservatively charge the larger failure
+leaf across all eighteen commands. New safe support rises by 5,886 bytes to
+972,678; lifetime contribution is 1,575,258 and its rounded structural envelope
+1,605,632. The old 1,572,864 estimate is insufficient for this corrected graph
+and is superseded as an estimate, not enlarged as a collector reservation.
+Ordinary/terminal bounds are 324,066/645,088 within unchanged 327,680/655,360
+reservations; 324 per-command aliases fit 512, 4,748 lifetime occurrences fit
+the structural 4,864 envelope. Node quotas and 2,544 pins remain unchanged.
+The exact policy hash remains unchanged. Normalized committed cdbcb68 source
+hashes replace the proof input's original physical-checkout hashes; old source
+hashes and their successful replay receipts remain preserved in the base commit
+and external evidence. Runtime edits are excluded from this source proof.
+
+Replay, graph and raw JSON controls passed twice in the external corrected
+bundle and reproduced all six reports identically. Root independently verified
+all twenty adopted hashes and twelve normalized committed source hashes, then
+reran all three controls in a fresh external copy; all six reports were identical.
+Runtime acceptance is not inferred. Implementation
+is active in session ownership, closed values/schemas, Diagnostics and engine
+coordination. Continue through the sixteen verification groups and remaining
+roadmap without assigning an owner approval gate. The amendment commit and its
+subsequent readback establish its actual publication checkpoint.

@@ -489,7 +489,7 @@
     "SessionFailureDetail": {
       "failure_code": "SessionFailureCode",
       "field_name": "SessionFieldPath",
-      "primary_evidence": "AssessmentValidation|RecoveryValuePacket|ResolutionTargetValidation|SessionAuthorityObservation|SessionBoundaryObservation|SessionAdmission|SessionPublication|SessionRetentionReceipt|null",
+      "primary_evidence": "AssessmentValidation|RecoveryValuePacket|ResolutionTargetValidation|SessionAuthorityObservation|SessionBoundaryObservation|SessionAdmission|SessionPublication|SessionRetentionReceipt|UnavailablePostAssessmentFacts|null",
       "capture_status": "LifecycleCaptureStatus|null",
       "attempted_lifecycle_record": "LifecycleRecord|null",
       "pending_lifecycle_record": "PendingLifecycleRecord|null",
@@ -507,7 +507,7 @@
       "context_observation": "SessionContextObservation",
       "authority_observation": "SessionAuthorityObservation|null",
       "cause": "SessionCauseObservation|null",
-      "origin_assessment": "StateAssessment|null",
+      "origin_assessment": "StateAssessment|ClassificationEvidenceFailure|DiagnosticCaptureFailure|null; actual fresh-child output, including emitted and attempted capture failure records",
       "origin_completion_observation": "DiagnosticsCompletionReceipt|null",
       "recovery_result": "RecoveryValuePacket|null",
       "publication": "SessionPublication|null",

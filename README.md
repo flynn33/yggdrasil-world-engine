@@ -122,7 +122,10 @@ N3 session lifecycle is the active M3 assignment. The complete
 [safety policy](docs/architecture/m3_session_lifecycle_policy.md) and
 [38-type/35-port inventory with replayable capacity controls](docs/design-planning/m3/session-lifecycle/README.md)
 are adopted under YWE-REQ-0044 and ADR-0033 before dependent implementation.
-Three portable representation controls pass against the adopted inputs. These
+ADR-0034 corrects the actual failed/unavailable fresh-origin evidence unions
+before their dependent implementation. The replayed ordinary and terminal
+bounds are 324,066 and 645,088 bytes within the existing reservations.
+Three portable representation controls pass against the corrected inputs. These
 verify bounds and graph representation; lifecycle implementation and runtime
 acceptance remain outstanding. The next step is implementing session admission,
 controlled state publication, containment and resolution, safe halt, and bounded
@@ -133,13 +136,19 @@ The owner wiki publisher is published at
 Its exact clean checkout passed all eleven selected offline checks with zero
 failures/advisories and all nineteen focused wiki/version-authority tests.
 [Full Ubuntu/Windows CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38167117359)
-is running at the latest readback. The preceding reconciliation's
+completed successfully on both systems. The preceding reconciliation's
 [Ubuntu/Windows CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38164808814)
 completed successfully on both systems.
 
+The adopted contract checkpoint is published at
+[`cdbcb68`](https://github.com/flynn33/yggdrasil-world-engine/commit/cdbcb68fab4471a2c910a1762038c1551f8fe9e8):
+eleven selected clean checks and both platform-boundary tests pass.
+[Its full CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38169258179)
+is dispatched; success is not predeclared.
+
 The [wiki](https://github.com/flynn33/yggdrasil-world-engine/wiki) is published at
-[`a44ce7d`](https://github.com/flynn33/yggdrasil-world-engine/wiki/_history)
-from source `4f7cd2e`. A fresh remote clone matches all 47 reviewed pages,
+[`a2d8a5b`](https://github.com/flynn33/yggdrasil-world-engine/wiki/_history)
+from source `cdbcb68`. A fresh remote clone matches all 47 reviewed pages,
 including Home, the roadmap page and preserved manual navigation. Each published
 development increment updates this README checkpoint and refreshes the wiki
 from committed source. The machine-readable milestone gates remain authoritative;
