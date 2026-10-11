@@ -587,6 +587,35 @@ class StateModel:
         )
         return self._diagnose(DecodedInput(state, observation))
 
+    def validate_resolution_target(self, target, *, prospective_context):
+        """Compute a pure target witness for prospective clear-context resolution."""
+        from . import session_values as session
+
+        if type(target) is not values.AshState:
+            raise session.SessionContractError("SESSION_INPUT_INVALID", "resolution.target")
+        if type(prospective_context) is not values.SystemContext:
+            raise session.SessionContractError("SESSION_INPUT_INVALID", "resolution.target_validation")
+        if not any(type(self.profile_binding) is kind for kind in (values.AvailableProfileBinding, values.UnavailableProfileBinding)):
+            raise session.SessionContractError("SESSION_PROFILE_REJECTED", "binding.profile_binding")
+        try:
+            values.AshState.__post_init__(target)
+            values.SystemContext.__post_init__(prospective_context)
+            values.CanonicalAshBinding.__post_init__(self.canonical_binding)
+            session.revalidate_value(self.profile_binding)
+            values.canonical_source_baseline(self.canonical_binding)
+        except values.StateContractError:
+            raise session.SessionContractError("SESSION_INPUT_INVALID", "resolution.target_validation") from None
+        if prospective_context != values.SystemContext(False, False):
+            raise session.SessionContractError("SESSION_INPUT_INVALID", "resolution.target_validation")
+        diagnostic = self.inspect_state(target)
+        valid = (diagnostic.admissibility_status == "VALID" and diagnostic.is_valid and
+                 diagnostic.input_state == target)
+        return session.ResolutionTargetValidation(
+            "VERIFIED" if valid else "REJECTED", target, self.canonical_binding, self.profile_binding,
+            diagnostic, prospective_context, "STABLE" if valid else None,
+            "NO_ACTION" if valid else None, None if valid else "SESSION_TARGET_NOT_VALID",
+            None if valid else "resolution.target_validation")
+
     def validate_known_correction(self, submitted, *, origin):
         from . import recovery_values as rv
 

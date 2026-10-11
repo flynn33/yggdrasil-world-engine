@@ -71,11 +71,89 @@ class ReferenceNormalizationResolutionProvider:
         )
 
 
+_SERVICE_ISSUER = object()
+
+
+class _SessionEngineServices:
+    """An exact per-engine capability for the privately composed lifecycle owner."""
+
+    __slots__ = ("_engine", "_identity")
+
+    def __init__(self, engine, issuer):
+        if issuer is not _SERVICE_ISSUER or type(engine) is not RecoveryEngine:
+            raise ValueError("private engine service issuance required")
+        self._engine, self._identity = engine, self
+
+    def is_issued(self, engine_identity):
+        if type(self) is not _SessionEngineServices or engine_identity is not self:
+            return False
+        try:
+            return self._identity is self and self._engine._session_services is self
+        except AttributeError:
+            return False
+
+    def matches_composition(self, state_model, diagnostics):
+        return (self.is_issued(self) and self._engine._model is state_model and
+                self._engine._diagnostics is diagnostics)
+
+    def _require(self):
+        if not self.is_issued(self):
+            from .session_values import SessionContractError
+            raise SessionContractError("SESSION_INPUT_INVALID", "collaborator")
+        return self._engine
+
+    def recover(self, origin, *, operation_context, execution_gate):
+        return self._require().recover(origin, operation_context=operation_context,
+                                       execution_gate=execution_gate)
+
+    def assess_origin(self, live_origin, *, diagnostic_context, operation_context, execution_gate):
+        return self._require()._assess_session_origin(self, live_origin,
+            diagnostic_context=diagnostic_context, operation_context=operation_context,
+            execution_gate=execution_gate)
+
+    def assess_mode(self, origin, *, actual_snapshot, diagnostic_context, capture, execution_gate):
+        return self._require()._assess_session_mode(self, origin, actual_snapshot=actual_snapshot,
+            diagnostic_context=diagnostic_context, capture=capture, execution_gate=execution_gate)
+
+    def read_session(self, session):
+        return self._require().read_session(session)
+
+    def execute_session(self, session, command):
+        return self._require().execute_session(session, command)
+
+    def read_session_history(self, session):
+        return self._require().read_session_history(session)
+
+
+class _GrantedAssessmentCapture:
+    """Check stage grants outside collector IO while the actual model captures."""
+
+    def __init__(self, capture, grant, returned):
+        self._capture, self._grant, self._returned = capture, grant, returned
+
+    def begin(self, reference):
+        self._grant("ASSESSMENT_BEGIN")
+        scope = self._capture.begin(reference)
+        self._returned()
+        return _GrantedAssessmentScope(scope, self._grant, self._returned)
+
+
+class _GrantedAssessmentScope:
+    def __init__(self, scope, grant, returned):
+        self._scope, self._grant, self._returned = scope, grant, returned
+
+    def append(self, record):
+        self._grant("ASSESSMENT_APPEND")
+        receipt = self._scope.append(record)
+        self._returned()
+        return receipt
+
+
 class RecoveryEngine:
     """Own one reference operation at a time through explicit collaborators."""
 
     def __init__(self, state_model, registry, diagnostics, normalization_resolver,
-                 correction_provider, condition_evaluator, post_facts_provider):
+                 correction_provider, condition_evaluator, post_facts_provider, *, lifecycle_owner=None):
         if type(state_model) is not StateModel:
             raise rv.RecoveryContractError("RECOVERY_INPUT_INVALID", "origin_assessment")
         if type(registry) is not FallbackRegistry:
@@ -102,7 +180,22 @@ class RecoveryEngine:
                                 for path, digest in rv.recovery_contract_pin_fields(state_model.canonical_binding)),
         )
 
-    def recover(self, origin, *, operation_context):
+        self._lifecycle = lifecycle_owner
+        self._session_services = None
+        if lifecycle_owner is not None:
+            from .session import ReferenceSessionLifecycle
+            if type(lifecycle_owner) is not ReferenceSessionLifecycle:
+                from .session_values import SessionContractError
+                raise SessionContractError("SESSION_INPUT_INVALID", "collaborator")
+            self._session_services = _SessionEngineServices(self, _SERVICE_ISSUER)
+            lifecycle_owner._bind_engine(self._session_services, state_model, diagnostics)
+
+    def recover(self, origin, *, operation_context, execution_gate=None):
+        if execution_gate is not None:
+            from . import session_values as session_values
+            if (self._lifecycle is None or
+                    not session_values._gate_is_issued_by(execution_gate, self._lifecycle)):
+                raise rv.RecoveryContractError("RECOVERY_INPUT_INVALID", "execution_gate")
         validation = self._model.validate_assessment(origin)
         if type(operation_context) is not rv.RecoveryOperationContext:
             raise rv.RecoveryContractError("RECOVERY_INPUT_INVALID", "operation_context")
@@ -110,8 +203,146 @@ class RecoveryEngine:
         if (operation_context.origin_assessment_reference != origin.assessment_binding.assessment_reference or
                 operation_context.context_observation.context != origin.system_context):
             raise rv.RecoveryContractError("RECOVERY_BINDING_MISMATCH", "operation_context")
-        operation = _RecoveryOperation(self, origin, validation, operation_context)
+        operation = _RecoveryOperation(self, origin, validation, operation_context, execution_gate)
         return operation.run()
+
+    def _services(self):
+        if self._session_services is None:
+            from .session_values import SessionContractError
+            raise SessionContractError("SESSION_INPUT_INVALID", "collaborator")
+        return self._session_services
+
+    def open_session(self, origin, *, session_binding):
+        services = self._services()
+        return self._lifecycle._open(services, origin, session_binding=session_binding)
+
+    def execute_session(self, session, command):
+        services = self._services()
+        return self._lifecycle._execute(services, session, command)
+
+    def read_session(self, session):
+        services = self._services()
+        return self._lifecycle._read(services, session)
+
+    def read_session_history(self, session):
+        services = self._services()
+        return self._lifecycle._history(services, session)
+
+    def _session_grant(self, services, gate, stage):
+        from . import session_values as values
+        if (type(services) is not _SessionEngineServices or services is not self._session_services or
+                not services.is_issued(services) or not values._gate_is_issued_by(gate, self._lifecycle)):
+            raise values.SessionContractError("SESSION_INPUT_INVALID", "execution_gate")
+        grant = gate.stage_grant(stage)
+        if type(grant) is not values.SessionStageGrant or grant.status != "GRANTED" or grant.stage != stage:
+            raise values.SessionContractError("SESSION_EXECUTION_CANCELLED", "execution_gate")
+
+    @staticmethod
+    def _session_returned(gate):
+        from .session_values import SessionContractError
+        if gate.capture_disposition() != "ACTIVE":
+            raise SessionContractError("SESSION_EXECUTION_CANCELLED", "execution_gate")
+
+    def _assess_session_origin(self, services, live_origin, *, diagnostic_context,
+                               operation_context, execution_gate):
+        from . import session_values as values
+        self._session_grant(services, execution_gate, "POST_FACTS_PROVIDER")
+        values.revalidate_value(live_origin)
+        values.revalidate_value(operation_context)
+        values.revalidate_value(diagnostic_context)
+        validation = self._model.validate_assessment(live_origin)
+        if (validation.status != "VERIFIED" or type(live_origin.parsed_state) is not sv.AshState or
+                live_origin.system_context != sv.SystemContext(False, False) or
+                operation_context.context_observation.context != live_origin.system_context):
+            raise values.SessionContractError("SESSION_EVIDENCE_MISMATCH", "origin_assessment")
+        link = self._lifecycle._child_link(services, execution_gate)
+        operation = operation_context.operation_reference
+        if (link.child_operation_reference != operation or
+                link.child_origin_assessment_reference != diagnostic_context.assessment_reference or
+                operation_context.origin_assessment_reference != diagnostic_context.assessment_reference or
+                diagnostic_context != sv.DiagnosticContext(operation + ":origin:assessment",
+                    operation + ":origin:input", operation + ":origin:detection", operation + ":origin:classification") or
+                link.live_origin_assessment_reference != live_origin.assessment_binding.assessment_reference):
+            raise values.SessionContractError("SESSION_EVIDENCE_MISMATCH", "operation_context")
+        try:
+            facts = self._post_facts.provide(live_origin.parsed_state, origin=live_origin,
+                action_reference=operation + ":origin", diagnostic_context=diagnostic_context,
+                operation_context=operation_context)
+        except Exception:
+            self._session_returned(execution_gate)
+            raise values.SessionContractError("SESSION_COLLABORATOR_FAILED", "collaborator") from None
+        self._session_returned(execution_gate)
+        if type(facts) is rv.UnavailablePostAssessmentFacts:
+            values.revalidate_value(facts)
+            if facts.operation_reference != operation or facts.candidate_state_reference != live_origin.parsed_state:
+                raise values.SessionContractError("SESSION_EVIDENCE_MISMATCH", "origin_assessment")
+            return facts, None
+        if type(facts) is not rv.PostAssessmentFacts:
+            raise values.SessionContractError("SESSION_COLLABORATOR_FAILED", "collaborator")
+        values.revalidate_value(facts)
+        if facts.diagnostic_context != diagnostic_context:
+            raise values.SessionContractError("SESSION_EVIDENCE_MISMATCH", "origin_assessment")
+        if facts.context_observation.context != live_origin.system_context:
+            raise values.SessionContractError("SESSION_EVIDENCE_MISMATCH", "operation_context.context_observation")
+        for name in sv.PREDICATE_NAMES:
+            bound = getattr(facts.classification_evidence, name).binding
+            if (bound.assessment_reference != diagnostic_context.assessment_reference or
+                    bound.diagnosis_reference != diagnostic_context.detection_reference or
+                    bound.subject_reference != live_origin.subject_reference or
+                    bound.profile_id != self._model.profile_binding.profile_id or
+                    bound.profile_source_sha256 != self._model.profile_binding.source_binding.source_sha256 or
+                    bound.ash_dependency_id != self._model.canonical_binding.dependency_id or
+                    bound.ash_aggregate_sha256 != self._model.canonical_binding.aggregate_sha256):
+                raise values.SessionContractError("SESSION_EVIDENCE_MISMATCH", "origin_assessment")
+        self._session_grant(services, execution_gate, "ASSESSMENT_BEGIN")
+        capture = self._diagnostics.assessment_capture(relation=link, execution_gate=execution_gate)
+        return self._actual_session_assessment(services, execution_gate, capture,
+            live_origin.parsed_state, live_origin.system_context, facts.classification_evidence, diagnostic_context)
+
+    def _assess_session_mode(self, services, origin, *, actual_snapshot, diagnostic_context,
+                             capture, execution_gate):
+        from . import session_values as values
+        self._session_grant(services, execution_gate, "ASSESSMENT_BEGIN")
+        values.revalidate_value(actual_snapshot)
+        values.revalidate_value(origin)
+        values.revalidate_value(diagnostic_context)
+        if type(actual_snapshot) is not values.SessionSnapshot or actual_snapshot.mode not in ("NORMAL", "CONTAINED"):
+            raise values.SessionContractError("SESSION_MODE_FORBIDDEN", "publication.after")
+        if not self._lifecycle._post_mode_snapshot(services, execution_gate, actual_snapshot):
+            raise values.SessionContractError("SESSION_PUBLICATION_STALE", "publication.after")
+        context = sv.SystemContext(False, actual_snapshot.mode == "CONTAINED")
+        if actual_snapshot.mode == "NORMAL":
+            validation = self._model.validate_resolution_target(actual_snapshot.current_state, prospective_context=context)
+            if validation.status != "VERIFIED":
+                raise values.SessionContractError("SESSION_TARGET_NOT_VALID", "resolution.target_validation")
+        facts = []
+        for name in sv.PREDICATE_NAMES:
+            bound = sv.PredicateBinding(diagnostic_context.assessment_reference,
+                diagnostic_context.detection_reference, "ash_state_" + actual_snapshot.current_state.signature,
+                self._model.profile_binding.profile_id, self._model.profile_binding.source_binding.source_sha256,
+                self._model.canonical_binding.dependency_id, self._model.canonical_binding.aggregate_sha256,
+                diagnostic_context.assessment_reference + ":" + name)
+            facts.append(sv.NotEvaluatedPredicate(bound,
+                "Actual contained context or a pure-verified VALID target requires no predicate consultation."))
+        return self._actual_session_assessment(services, execution_gate, capture,
+            actual_snapshot.current_state, context, sv.ClassificationEvidence(*facts), diagnostic_context)
+
+    def _actual_session_assessment(self, services, gate, capture, candidate, context, facts, diagnostic_context):
+        wrapped = _GrantedAssessmentCapture(capture,
+            lambda stage: self._session_grant(services, gate, stage), lambda: self._session_returned(gate))
+        child = StateModel(self._model.profile_binding, self._model.canonical_binding, wrapped)
+        assessed = child.assess(candidate, context=context, classification_evidence=facts,
+                                diagnostic_context=diagnostic_context)
+        if not any(type(assessed) is kind for kind in
+                   (sv.StateAssessment, sv.ClassificationEvidenceFailure, sv.DiagnosticCaptureFailure)):
+            from .session_values import SessionContractError
+            raise SessionContractError("SESSION_INTERNAL_INVARIANT", "origin_assessment")
+        # Complete the actual child once, including cleanup after a revoked append.
+        try:
+            receipt = self._diagnostics.complete_assessment(assessed)
+        except Exception:
+            receipt = None
+        return assessed, receipt
 
 
 class _Abort(Exception):
@@ -120,8 +351,9 @@ class _Abort(Exception):
 
 
 class _RecoveryOperation:
-    def __init__(self, engine, origin, validation, context):
+    def __init__(self, engine, origin, validation, context, execution_gate=None):
         self.engine, self.origin, self.validation, self.context = engine, origin, validation, context
+        self.execution_gate = execution_gate
         self.steps, self.posts, self.attempts, self.actions, self.emissions = [], [], [], [], []
         self.candidate = self.directive = self.normalization = self.correction = None
         self.registry_binding = self.registry_snapshot = self.registry_validation = self.authorization = None
@@ -155,7 +387,25 @@ class _RecoveryOperation:
     def _abort(self, code, field, reason, **kwargs):
         raise _Abort(self._failure(code, field, reason, **kwargs))
 
+    def _grant(self, stage):
+        if self.execution_gate is None:
+            return
+        from .session_values import SessionStageGrant
+        try:
+            grant = self.execution_gate.stage_grant(stage)
+        except Exception:
+            grant = None
+        if type(grant) is not SessionStageGrant or grant.status != "GRANTED" or grant.stage != stage:
+            self._abort("SESSION_EXECUTION_CANCELLED", "execution_gate",
+                        "The issued session lease no longer grants this recovery stage.")
+
+    def _returned(self):
+        if self.execution_gate is not None and self.execution_gate.capture_disposition() != "ACTIVE":
+            self._abort("SESSION_EXECUTION_CANCELLED", "execution_gate",
+                        "The session lease was sealed during the granted callback.")
+
     def _emit(self, record, *, decision=False):
+        self._grant("CAPTURE_APPEND")
         try:
             receipt = self.scope.append(record)
         except Exception:
@@ -168,6 +418,7 @@ class _RecoveryOperation:
                 attempted=record, status="REJECTED" if status == "REJECTED" else "NOT_CONFIRMED")
         self.emissions.append(record)
         self.previous = record.diagnostic_reference
+        self._returned()
 
     def _record(self, reference, payload, kind, *, fallback=False, disposition="PENDING", denial=False):
         rules = _FALLBACK_RULES if fallback else _VALUE_RULES
@@ -235,17 +486,21 @@ class _RecoveryOperation:
         return decision
 
     def _registry(self):
+        self._grant("REGISTRY_READ")
         registry = self.engine._registry
         self.registry_snapshot = registry.snapshot
         self.registry_binding = self.registry_snapshot.source_binding
         self.registry_validation = registry.validate_for_model(self.engine._model)
+        self._returned()
         if self.registry_validation.status != "VERIFIED":
             self._abort("REGISTRY_BINDING_REJECTED", "registry_validation",
                 "The complete registry binding or candidate certification was rejected.", submitted=self.registry_validation)
 
     def _admit(self):
+        self._grant("CAPTURE_BEGIN")
         try:
-            capture = self.engine._diagnostics.recovery_capture()
+            capture = (self.engine._diagnostics.recovery_capture() if self.execution_gate is None else
+                       self.engine._diagnostics.recovery_capture(execution_gate=self.execution_gate))
             method = capture.begin_denial if self.denial else capture.begin
             result = method(self.origin, operation_reference=self.context.operation_reference)
         except Exception:
@@ -259,7 +514,13 @@ class _RecoveryOperation:
             receipt.origin_diagnostic_references == tuple(v.diagnostic_reference for v in self.origin.emitted_diagnostics))
         reserved = (matching and receipt.reserved_events == (1 if self.denial else 768) and
                     receipt.reserved_bytes == (270336 if self.denial else 31588352))
-        if reserved and receipt.status == "CONFIRMED" and scope is not None:
+        if self.execution_gate is None:
+            owned_scope = reserved
+        else:
+            from .diagnostics import _is_issued_recovery_scope
+            owned_scope = _is_issued_recovery_scope(scope, self.engine._diagnostics,
+                self.execution_gate, self.context.operation_reference)
+        if scope is not None and owned_scope:
             try:
                 _port(scope, "append", "capture.append")
                 _port(scope, "finish", "capture.finish")
@@ -267,7 +528,10 @@ class _RecoveryOperation:
                 matching = False
             else:
                 self.scope = scope
-                return
+                self._returned()
+                if reserved and receipt.status == "CONFIRMED":
+                    return
+        self._returned()
         status = "REJECTED" if matching and receipt.status == "REJECTED" else "NOT_CONFIRMED"
         self._abort("CAPTURE_ADMISSION_REJECTED" if status == "REJECTED" else "CAPTURE_ADMISSION_UNCONFIRMED",
             "capture.admission", "Recovery admission was not confirmed before collaborator or value effects.", status=status)
@@ -316,11 +580,13 @@ class _RecoveryOperation:
             self._abort("RESOURCE_LIMIT", "post_assessment", "The admitted child-assessment bound was reached.")
         stem = self.context.operation_reference + f":post:{ordinal:03d}"
         context = sv.DiagnosticContext(stem + ":assessment", stem + ":input", stem + ":detection", stem + ":classification")
+        self._grant("POST_FACTS_PROVIDER")
         try:
             facts = self.engine._post_facts.provide(candidate, origin=self.origin,
                 action_reference=action_reference, diagnostic_context=context, operation_context=self.context)
         except Exception:
             facts = None
+        self._returned()
         if type(facts) is rv.UnavailablePostAssessmentFacts:
             if facts.operation_reference != self.context.operation_reference or facts.candidate_state_reference != candidate:
                 self._abort("COLLABORATOR_FAILED", "post_facts_provider", "The unavailable observation had a mismatched binding.", submitted=facts)
@@ -339,8 +605,12 @@ class _RecoveryOperation:
                 self._abort("COLLABORATOR_FAILED", "post_assessment.classification_evidence",
                     "The supplied predicate binding does not describe this fresh candidate assessment.", submitted=facts)
         link = rv.PostAssessmentLink(self.context.operation_reference, action_reference, self.root)
+        self._grant("ASSESSMENT_BEGIN")
         try:
-            capture = self.engine._diagnostics.assessment_capture(relation=link)
+            capture = (self.engine._diagnostics.assessment_capture(relation=link) if self.execution_gate is None else
+                       self.engine._diagnostics.assessment_capture(relation=link, execution_gate=self.execution_gate))
+            if self.execution_gate is not None:
+                capture = _GrantedAssessmentCapture(capture, self._grant, self._returned)
             child = StateModel(profile, canonical, capture)
             assessed = child.assess(candidate, context=facts.context_observation.context,
                 classification_evidence=facts.classification_evidence, diagnostic_context=context)
@@ -361,6 +631,7 @@ class _RecoveryOperation:
             else "NOT_CONFIRMED")
         linked = rv.LinkedPostAssessment(link, candidate, facts.context_observation, assessed, capture_status)
         self.posts.append(linked)
+        self._returned()
         if not complete:
             code = ("POST_ASSESSMENT_FAILED" if type(assessed) is sv.ClassificationEvidenceFailure else
                     "POST_CAPTURE_REJECTED" if capture_status == "REJECTED" else "POST_CAPTURE_UNCONFIRMED")
@@ -386,10 +657,12 @@ class _RecoveryOperation:
     def _normalize(self):
         start = len(self.steps)
         policy = nv.NormalizationPolicyBinding(**dict(nv.NORMALIZATION_POLICY_BINDING_FIELDS))
+        self._grant("NORMALIZATION_PROVIDER")
         try:
             preparation = self.engine._normalization.resolve(self.origin, operation_context=self.context, policy_binding=policy)
         except Exception:
             preparation = None
+        self._returned()
         if type(preparation) is not rv.NormalizationPreparation:
             self._abort("COLLABORATOR_FAILED", "normalization_resolver", "Normalization resolution returned no owned observation.")
         self.normalization = preparation
@@ -414,6 +687,7 @@ class _RecoveryOperation:
         self._step("NORMALIZE_PLAN", "The complete current-model normalization proof was resolved.")
         self.candidate = self.origin.parsed_state
         for codeword in plan.codeword_chain:
+            self._grant("CANDIDATE_COMPUTATION")
             before = self.candidate
             self.candidate = _apply_codeword(before, codeword)
             self._step("NORMALIZE_XOR", "Actual full-vector normalization XOR was computed.", before=before, codeword=codeword, after=self.candidate)
@@ -432,10 +706,12 @@ class _RecoveryOperation:
 
     def _correct(self):
         start = len(self.steps)
+        self._grant("CORRECTION_PROVIDER")
         try:
             correction = self.engine._correction.resolve(self.origin, operation_context=self.context)
         except Exception:
             correction = None
+        self._returned()
         if type(correction) is not rv.KnownCorrection and type(correction) is not rv.UnavailableCorrection:
             self._abort("COLLABORATOR_FAILED", "correction_provider", "The correction provider returned no exact owned observation.")
         if (correction.original_assessment_reference != self.origin.assessment_binding.assessment_reference or
@@ -451,6 +727,7 @@ class _RecoveryOperation:
             return self._fallback(decision, None)
         self.candidate = self.origin.parsed_state
         for codeword in correction.chain:
+            self._grant("CANDIDATE_COMPUTATION")
             before = self.candidate
             self.candidate = _apply_codeword(before, codeword)
             self._step("CORRECTION_XOR", "Actual supplied full-vector codeword XOR was computed.", before=before, codeword=codeword, after=self.candidate)
@@ -466,11 +743,13 @@ class _RecoveryOperation:
         return self._packet(rv.RecoveredValue) if stable else self._fallback(decision, post)
 
     def _predicate(self, condition, entry, phase):
+        self._grant("CONDITION_PROVIDER")
         try:
             observation = self.engine._conditions.evaluate(condition, origin=self.origin, entry=entry,
                 phase=phase, operation_context=self.context)
         except Exception:
             observation = None
+        self._returned()
         binding = self.registry_binding
         if type(observation) is not rv.PredicateObservation:
             self._abort("COLLABORATOR_FAILED", "condition_evaluator", "The condition evaluator returned no owned observation.")
@@ -505,7 +784,9 @@ class _RecoveryOperation:
         )
         if type(self.registry_snapshot) is rv.UnavailableFallbackRegistry:
             return self._fallback_exhausted("The registry is explicitly unavailable.")
+        self._grant("REGISTRY_READ")
         entries = self.engine._registry.ordered_entries()
+        self._returned()
         inventory, ranges = [], {}
         for entry in entries:
             start = len(self.steps)
@@ -524,6 +805,7 @@ class _RecoveryOperation:
                 self.attempts.append(rv.PolicyAttempt(entry.policy_id, tuple(observations), remaining,
                     (), entry.validation_requirements, None, decision.action_reference, "INELIGIBLE"))
         kwargs = dict(applicability=tuple(inventory))
+        self._grant("REGISTRY_READ")
         if failed_action is None:
             candidates = self.engine._registry.get_candidates(self.origin, **kwargs)
         elif route == "AFTER_CORRECTION_FAILURE":
@@ -532,10 +814,12 @@ class _RecoveryOperation:
         else:
             candidates = self.engine._registry.get_candidates_after_normalization_failure(self.origin,
                 failed_action=failed_action, failed_post_assessment=failed_post, authorization=self.authorization, **kwargs)
+        self._returned()
         for entry in candidates:
             applicability = next(item for item in inventory if item.policy_id == entry.policy_id)
             start = len(self.steps)
             before = self.candidate if self.candidate is not None else self.origin.parsed_state
+            self._grant("CANDIDATE_COMPUTATION")
             self.candidate = entry.candidate_state_reference
             self._step("FALLBACK_SELECT", "The actual eligible canonical registry target was selected.",
                 before=before, after=self.candidate, policy=entry.policy_id, fallback=True)

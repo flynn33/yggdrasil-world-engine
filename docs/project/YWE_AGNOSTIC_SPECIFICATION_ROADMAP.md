@@ -65,17 +65,21 @@ M0–M2 remain accepted and M3 is active. The N3 reference lifecycle
 [contract](../architecture/m3_session_lifecycle_contract.md),
 [policy](../architecture/m3_session_lifecycle_policy.md) and
 [exact inventory/capacity controls](../design-planning/m3/session-lifecycle/README.md)
-are adopted before implementation. Executed structural controls verify their
-representation bounds; session runtime verification remains outstanding. The
-next work is implementing admission, controlled publication, containment,
-authorized resolution, halt and bounded Diagnostics against those contracts.
+are adopted before implementation. The reference candidate implements admission,
+fresh recovery, controlled publication, containment, authorized resolution,
+halt and bounded Diagnostics. Focused controls exercise those owners; exact
+committed-source full runtime acceptance remains outstanding.
 
 ADR-0034 corrects the closed actual fresh-origin failure unions before
 dependent implementation; replayed bounds remain within the fixed command
 reservations. ADR-0035 adds the truthful direct propagation-risk boundary
-cause; all five structural reports replay byte-identically. Runtime
-implementation is underway and acceptance remains outstanding. Owner wiki
-`2353a5d` is remotely byte-verified from `2fb1913`.
+cause; all five structural reports replay byte-identically. The live candidate
+passes twelve selected governance checks and all 930 fixture bindings, including
+382 intended rejections. All 125 integrated session controls pass, including
+actual Windows protected-store paired export and concurrent halt on the dirty
+candidate. Reviewed corrections are included; the full clean run remains
+required. Owner wiki `d3688f0` is remotely
+byte-verified from `b283c40`.
 The [README development checkpoint](../../README.md#development-checkpoint--2026-10-11)
 and [Project Record section 16](../design-planning/Project_Record.md#16-n3-contract-adoption-and-actual-wiki-publication--october-11-2026)
 carry the actual published verification and continuation. This increment does
@@ -360,13 +364,16 @@ Owner wiki publication tooling passes fifteen focused tests and shares one
 committed mapping; actual wiki publication and remote byte verification are the
 next operation. N3's proposed contract now binds current assessment/revision,
 fresh child origins, explicit resolution, concurrent halt and complete evidence
-bounds. Contract adoption and lifecycle implementation remain outstanding.
+bounds. Contract adoption and implementation were outstanding at that preparation
+checkpoint; the current adopted candidate and its scoped evidence are recorded
+in Project Record section 16.3.
 Generation's missing topology, axiom and complete planner/emitter owners are being
 specified against canonical source. The accepted mathematical baseline and
 immutable M2 evidence are preserved.
-Session publication, actual containment and halt, remaining canonical Diagnostics
-producers and generation remain subsequent work. This checkpoint does not complete
-an M3 exit criterion.
+The current reference lifecycle candidate exercises session publication,
+containment, resolution and halt. Full clean acceptance, remaining canonical
+Diagnostics producers, generation and complete core conformance remain subsequent
+work. This checkpoint does not complete an M3 exit criterion.
 
 Deliverables:
 

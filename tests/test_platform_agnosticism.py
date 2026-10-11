@@ -13,6 +13,23 @@ from check_platform_agnosticism import platform_violations
 
 
 class ReferenceBoundaryTests(unittest.TestCase):
+    def test_reviewed_session_reference_files_require_exact_paths(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            reference = root / "core/ash_pattern_engine"
+            reference.mkdir(parents=True)
+            for name in ("session.py", "session_values.py", "diagnostic_session_values.py"):
+                (reference / name).write_text("# Session reference fixture\n", encoding="utf-8")
+            self.assertEqual(([], 3), platform_violations(root))
+            neighbors = ("session_runtime.py", "session_values_extra.py", "diagnostic_session_values_extra.py")
+            for name in neighbors:
+                (reference / name).write_text("# Unreviewed neighbor\n", encoding="utf-8")
+            violations, inspected = platform_violations(root)
+            self.assertEqual(6, inspected)
+            self.assertEqual(3, len(violations))
+            for name in neighbors:
+                self.assertTrue(any(f"core/ash_pattern_engine/{name}:" in item for item in violations))
+
     def test_reviewed_n3_controls_do_not_admit_neighboring_source(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

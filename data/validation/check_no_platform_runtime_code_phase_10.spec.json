@@ -27,7 +27,10 @@
     "docs/design-planning/m3/session-lifecycle/derive_command_reservations.py",
     "docs/design-planning/m3/session-lifecycle/generate_graph_control.py",
     "docs/design-planning/m3/session-lifecycle/raw_business_guard_controls.py",
-    "docs/design-planning/m3/session-lifecycle/replay_independent.py"
+    "docs/design-planning/m3/session-lifecycle/replay_independent.py",
+    "core/ash_pattern_engine/session.py",
+    "core/ash_pattern_engine/session_values.py",
+    "core/ash_pattern_engine/diagnostic_session_values.py"
   ],
   "allowed_added_paths": [
     "scripts/check_fixture_catalog.py",
@@ -81,7 +84,12 @@
     "tests/test_m3_diagnostic_schemas.py",
     "tests/test_m3_source_compatibility.py",
     "scripts/github/prepare_wiki.py",
-    "tests/test_wiki_publication.py"
+    "tests/test_wiki_publication.py",
+    "tests/test_m3_session_values.py",
+    "tests/test_m3_session_schemas.py",
+    "tests/test_m3_session_lifecycle.py",
+    "tests/test_m3_session_diagnostics.py",
+    "tests/test_m3_session_recovery.py"
   ],
   "severity": "block"
 }

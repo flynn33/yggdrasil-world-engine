@@ -1061,7 +1061,9 @@
       "introduced_milestone": "M3",
       "owner_role": "Core semantics maintainers",
       "decision_refs": [
-        "ADR-0033"
+        "ADR-0033",
+        "ADR-0034",
+        "ADR-0035"
       ],
       "source_refs": [
         "docs/architecture/m3_session_lifecycle_contract.md",
@@ -1075,7 +1077,19 @@
         "core/ash_pattern_engine/canonical/interfaces/contracts/recovery-engine-contract.md",
         "core/ash_pattern_engine/canonical/algorithms/containment-safe-failure-semantics.pseudo.md",
         "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
-        "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md"
+        "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
+        "data/schemas/m3_session_lifecycle_schema.json",
+        "core/ash_pattern_engine/session_values.py",
+        "core/ash_pattern_engine/session.py",
+        "core/ash_pattern_engine/diagnostic_session_values.py",
+        "tests/test_m3_session_values.py",
+        "tests/test_m3_session_schemas.py",
+        "tests/test_m3_session_lifecycle.py",
+        "tests/test_m3_session_diagnostics.py",
+        "tests/test_m3_session_recovery.py",
+        "examples/core_session_lifecycle/session_cases.example.json",
+        "examples/core_session_lifecycle/session_rejections.example.json",
+        "examples/core_session_diagnostics/session_diagnostic_bundle_cases.example.json"
       ]
     }
   ],

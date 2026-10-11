@@ -48,6 +48,8 @@ Current source routing uses the following precedence:
 | Generation packets | `data/schemas/ash_generation_packet_schema.json` |
 | M3 StateModel assessment | `docs/architecture/m3_state_assessment_contract.md`, `core/ash_pattern_engine/state_values.py`, `core/ash_pattern_engine/state_model.py`, `data/schemas/m3_state_assessment_schema.json` |
 | M3 semantic normalization | `docs/architecture/m3_normalization_contract.md`, `docs/architecture/m3_normalization_policy.md`, `core/ash_pattern_engine/normalization_values.py`, `core/ash_pattern_engine/normalization.py`, `data/schemas/m3_normalization_plan_schema.json`, `data/schemas/m3_state_normalization_schema.json` |
+| M3 recovery and reference Diagnostics | `docs/architecture/m3_recovery_contract.md`, `docs/architecture/m3_reference_diagnostics_contract.md`, `core/ash_pattern_engine/recovery.py`, `core/ash_pattern_engine/diagnostics.py`, `data/schemas/m3_recovery_value_schema.json`, `data/schemas/m3_reference_diagnostic_bundle_schema.json` |
+| M3 reference session lifecycle candidate | `docs/architecture/m3_session_lifecycle_contract.md`, `docs/architecture/m3_session_lifecycle_policy.md`, `docs/design-planning/m3/session-lifecycle/BUSINESS_API_INVENTORY.json`, `core/ash_pattern_engine/session_values.py`, `core/ash_pattern_engine/session.py`, `core/ash_pattern_engine/diagnostic_session_values.py`, `data/schemas/m3_session_lifecycle_schema.json`; runtime acceptance remains pending |
 | Source-truth validation | `data/validation/source_truth_alignment_contract.json` |
 | Twin Wolf validation | `data/validation/twin_wolf_canon_validation_rules.json` |
 | Canonical terminology | `docs/glossary/ywe_design_glossary.md`, `data/governance/canonical_term_index.json` |

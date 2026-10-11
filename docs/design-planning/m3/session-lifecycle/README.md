@@ -7,12 +7,15 @@ YWE-REQ-0044 and ADR-0033. M3 remains active. Adoption and the representation
 controls below do not establish N3 runtime acceptance.
 
 [BUSINESS_API_INVENTORY.json](BUSINESS_API_INVENTORY.json) defines the 38 closed
-business types, 35 ports, finite domains and planned runtime allocations.
+business types, 35 ports, finite domains and runtime allocations.
 [SAFE_FIELDS_AND_LIMITS.json](SAFE_FIELDS_AND_LIMITS.json) defines the safe
 supporting graph. [CAPACITY_AND_RETENTION.md](CAPACITY_AND_RETENTION.md) connects
 that graph to actual admission, once completion, final observation and retention
 obligations. Its observed implementation boundaries name the preparation
-revision; they do not describe unimplemented N3 behavior as already present.
+revision and remain historical. The implemented reference candidate and scoped
+controls are recorded in [Project Record section 16.3](../../Project_Record.md#163-reference-lifecycle-candidate-and-current-verification).
+Full committed-source runtime acceptance remains outstanding; the structural
+reports below retain their separate representation-only scope.
 
 [ARTIFACT_INDEX.json](ARTIFACT_INDEX.json) records the frozen external proposal
 hashes, reconciled adopted policy and inventory hashes, and exact repository

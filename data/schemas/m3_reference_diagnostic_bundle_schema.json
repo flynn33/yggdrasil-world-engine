@@ -2495,7 +2495,8 @@
               "VALIDATION_STATUS",
               "FAILED_FIELD",
               "PROOF_EVIDENCE_REFERENCE",
-              "RECOVERY_SAFETY_EVIDENCE_REFERENCE"
+              "RECOVERY_SAFETY_EVIDENCE_REFERENCE",
+              "RESOLUTION_EVIDENCE_REFERENCE"
             ]
           },
           "minItems": 0,
@@ -2704,6 +2705,12 @@
               "type": "null"
             }
           ]
+        },
+        "resolution_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
         }
       },
       "additionalProperties": false,
@@ -2851,7 +2858,8 @@
             "RETENTION_REPORTED",
             "EXPORT_COMPLETE",
             "EXPORT_INCOMPLETE",
-            "UNTRUSTED_PROSE_OMITTED"
+            "UNTRUSTED_PROSE_OMITTED",
+            "CONTAINMENT_RESOLUTION_RECORDED"
           ]
         },
         "omitted_error_material": {
@@ -2932,7 +2940,8 @@
             "NORMALIZATION",
             "RECOVERY_ENGINE",
             "DIAGNOSTICS",
-            "REFERENCE_HOST"
+            "REFERENCE_HOST",
+            "SESSION_LIFECYCLE"
           ]
         },
         "event_type": {
@@ -2969,7 +2978,8 @@
             "RETENTION_REPORTED",
             "EXPORT_COMPLETE",
             "EXPORT_INCOMPLETE",
-            "UNTRUSTED_PROSE_OMITTED"
+            "UNTRUSTED_PROSE_OMITTED",
+            "CONTAINMENT_RESOLUTION_RECORDED"
           ]
         },
         "session_reference": {
@@ -3783,10 +3793,302 @@
           },
           "minItems": 0,
           "maxItems": 264
+        },
+        "session_bindings": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 19,
+          "items": {
+            "$ref": "#/$defs/SafeSessionBindingEvidence"
+          }
+        },
+        "session_snapshots": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 214,
+          "items": {
+            "$ref": "#/$defs/SafeSessionSnapshotEvidence"
+          }
+        },
+        "session_contexts": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 53,
+          "items": {
+            "$ref": "#/$defs/SafeSessionContextEvidence"
+          }
+        },
+        "session_publications": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 18,
+          "items": {
+            "$ref": "#/$defs/SafeSessionPublicationEvidence"
+          }
+        },
+        "lifecycle_evidence": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 90,
+          "items": {
+            "$ref": "#/$defs/SafeLifecycleEvidence"
+          }
+        },
+        "session_histories": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/$defs/SafeSessionHistoryEvidence"
+          }
+        },
+        "session_sources": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/SafeSessionSourceEvidence"
+          }
+        },
+        "session_denials": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/SafeSessionDeniedEvidence"
+          }
+        },
+        "session_child_links": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/SafeSessionChildLinkEvidence"
+          }
+        },
+        "session_requests": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 18,
+          "items": {
+            "$ref": "#/$defs/SafeSessionRequestEvidence"
+          }
+        },
+        "session_authorities": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 18,
+          "items": {
+            "$ref": "#/$defs/SafeSessionAuthorityEvidence"
+          }
+        },
+        "session_boundaries": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 36,
+          "items": {
+            "$ref": "#/$defs/SafeSessionBoundaryEvidence"
+          }
+        },
+        "session_causes": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 18,
+          "items": {
+            "$ref": "#/$defs/SafeSessionCauseEvidence"
+          }
+        },
+        "session_commands": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 18,
+          "items": {
+            "$ref": "#/$defs/SafeSessionCommandEvidence"
+          }
+        },
+        "session_failures": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 18,
+          "items": {
+            "$ref": "#/$defs/SafeSessionFailureEvidence"
+          }
+        },
+        "resolution_targets": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/SafeResolutionTargetEvidence"
+          }
+        },
+        "session_resolutions": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/SafeSessionResolutionEvidence"
+          }
+        },
+        "session_history_pages": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 40,
+          "items": {
+            "$ref": "#/$defs/SafeSessionHistoryPage"
+          }
+        },
+        "session_recovery_contexts": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/SafeSessionSubmittedRecoveryContextEvidence"
+          }
+        },
+        "session_terminal_closures": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/$defs/SafeSessionTerminalClosureEvidence"
+          }
         }
       },
       "additionalProperties": false,
-      "x-ywe-requirement-id": "YWE-REQ-0042"
+      "x-ywe-requirement-id": "YWE-REQ-0042",
+      "oneOf": [
+        {
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "session_bindings"
+                ]
+              },
+              {
+                "required": [
+                  "session_snapshots"
+                ]
+              },
+              {
+                "required": [
+                  "session_contexts"
+                ]
+              },
+              {
+                "required": [
+                  "session_publications"
+                ]
+              },
+              {
+                "required": [
+                  "lifecycle_evidence"
+                ]
+              },
+              {
+                "required": [
+                  "session_histories"
+                ]
+              },
+              {
+                "required": [
+                  "session_sources"
+                ]
+              },
+              {
+                "required": [
+                  "session_denials"
+                ]
+              },
+              {
+                "required": [
+                  "session_child_links"
+                ]
+              },
+              {
+                "required": [
+                  "session_requests"
+                ]
+              },
+              {
+                "required": [
+                  "session_authorities"
+                ]
+              },
+              {
+                "required": [
+                  "session_boundaries"
+                ]
+              },
+              {
+                "required": [
+                  "session_causes"
+                ]
+              },
+              {
+                "required": [
+                  "session_commands"
+                ]
+              },
+              {
+                "required": [
+                  "session_failures"
+                ]
+              },
+              {
+                "required": [
+                  "resolution_targets"
+                ]
+              },
+              {
+                "required": [
+                  "session_resolutions"
+                ]
+              },
+              {
+                "required": [
+                  "session_history_pages"
+                ]
+              },
+              {
+                "required": [
+                  "session_recovery_contexts"
+                ]
+              },
+              {
+                "required": [
+                  "session_terminal_closures"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "required": [
+            "session_bindings",
+            "session_snapshots",
+            "session_contexts",
+            "session_publications",
+            "lifecycle_evidence",
+            "session_histories",
+            "session_sources",
+            "session_denials",
+            "session_child_links",
+            "session_requests",
+            "session_authorities",
+            "session_boundaries",
+            "session_causes",
+            "session_commands",
+            "session_failures",
+            "resolution_targets",
+            "session_resolutions",
+            "session_history_pages",
+            "session_recovery_contexts",
+            "session_terminal_closures"
+          ]
+        }
+      ]
     },
     "RedactionEntry": {
       "type": "object",
@@ -5895,7 +6197,8 @@
             "RETENTION_REPORTED",
             "EXPORT_COMPLETE",
             "EXPORT_INCOMPLETE",
-            "UNTRUSTED_PROSE_OMITTED"
+            "UNTRUSTED_PROSE_OMITTED",
+            "CONTAINMENT_RESOLUTION_RECORDED"
           ]
         }
       },
@@ -8899,7 +9202,27 @@
                 "CONDITION",
                 "PREDICATE_OBSERVATION",
                 "RECOVERY_SAFETY",
-                "TARGET_VALIDITY"
+                "TARGET_VALIDITY",
+                "SESSION_BINDING",
+                "SESSION_SNAPSHOT",
+                "SESSION_CONTEXT",
+                "SESSION_PUBLICATION",
+                "LIFECYCLE",
+                "SESSION_HISTORY",
+                "SESSION_SOURCE",
+                "SESSION_DENIED",
+                "SESSION_LINK",
+                "SESSION_REQUEST",
+                "SESSION_AUTHORITY",
+                "SESSION_BOUNDARY",
+                "SESSION_CAUSE",
+                "SESSION_COMMAND",
+                "SESSION_FAILURE",
+                "RESOLUTION_TARGET",
+                "SESSION_RESOLUTION",
+                "SESSION_HISTORY_PAGE",
+                "SESSION_RECOVERY_CONTEXT",
+                "SESSION_TERMINAL_CLOSURE"
               ]
             },
             {
@@ -9414,6 +9737,3849 @@
       },
       "additionalProperties": false,
       "x-ywe-requirement-id": "YWE-REQ-0042"
+    },
+    "SafeSessionBindingEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "session_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "assembly_generation": {
+          "anyOf": [
+            {
+              "const": "LEGACY_PAIR"
+            },
+            {
+              "const": "N3_LIFECYCLE_PAIR"
+            }
+          ]
+        },
+        "canonical_source_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "paired_source_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "profile_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "policy_assurance": {
+          "const": "RECOGNIZED_ADOPTED_POLICY"
+        },
+        "binding_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "initial_assessment_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "policy_id": {
+          "const": "YWE-SESSION-SAFETY-001"
+        },
+        "policy_version": {
+          "const": "1.0.0"
+        },
+        "policy_source_path": {
+          "const": "docs/architecture/m3_session_lifecycle_policy.md"
+        },
+        "policy_source_sha256": {
+          "const": "24e2584279b95b8e3659bd61e6b5149311f344b03b981e88f74ae37775591910"
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "session_reference",
+        "assembly_generation",
+        "canonical_source_evidence_reference",
+        "paired_source_evidence_reference",
+        "profile_evidence_reference",
+        "policy_reference",
+        "policy_assurance",
+        "binding_reference",
+        "initial_assessment_reference",
+        "policy_id",
+        "policy_version",
+        "policy_source_path",
+        "policy_source_sha256"
+      ]
+    },
+    "SafeSessionSnapshotEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "session_binding_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "generation": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "current_state": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "minLength": 9,
+          "maxLength": 9
+        },
+        "mode": {
+          "anyOf": [
+            {
+              "const": "NORMAL"
+            },
+            {
+              "const": "CONTAINED"
+            },
+            {
+              "const": "SAFE_HALT"
+            }
+          ]
+        },
+        "terminal_latched": {
+          "type": "boolean"
+        },
+        "admission_status": {
+          "anyOf": [
+            {
+              "const": "OPEN"
+            },
+            {
+              "const": "AUDIT_BLOCKED"
+            },
+            {
+              "const": "TERMINAL"
+            }
+          ]
+        },
+        "containment_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "halt_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recovery_attempted": {
+          "type": "boolean"
+        },
+        "active_operation_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "snapshot_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "current_assessment_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "observed_system_state_class": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "STABLE",
+                "UNSTABLE",
+                "CORRECTABLE",
+                "DEGRADED",
+                "CONTAINED",
+                "FAILED",
+                "SAFE_HALT"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "session_binding_reference",
+        "generation",
+        "current_state",
+        "mode",
+        "terminal_latched",
+        "admission_status",
+        "containment_reference",
+        "halt_reference",
+        "recovery_attempted",
+        "active_operation_reference",
+        "snapshot_reference",
+        "current_assessment_reference",
+        "observed_system_state_class"
+      ]
+    },
+    "SafeSessionContextEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "snapshot_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "operation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "subject_state": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "minLength": 9,
+          "maxLength": 9
+        },
+        "is_running": {
+          "type": "boolean"
+        },
+        "is_contained": {
+          "type": "boolean"
+        },
+        "is_halted": {
+          "type": "boolean"
+        },
+        "assurance": {
+          "const": "CURRENT_IN_PROCESS_SESSION_OBSERVATION"
+        },
+        "observation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "snapshot_evidence_reference",
+        "operation_reference",
+        "subject_state",
+        "is_running",
+        "is_contained",
+        "is_halted",
+        "assurance",
+        "observation_reference"
+      ]
+    },
+    "SafeSessionPublicationEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "request_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "requested_action": {
+          "anyOf": [
+            {
+              "const": "RECOVER"
+            },
+            {
+              "const": "REQUEST_CONTAINMENT"
+            },
+            {
+              "const": "RESOLVE_CONTAINMENT"
+            },
+            {
+              "const": "REQUEST_HALT"
+            }
+          ]
+        },
+        "lease_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "before_snapshot_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "after_snapshot_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "anyOf": [
+            {
+              "const": "COMMITTED"
+            },
+            {
+              "const": "NOT_COMMITTED"
+            },
+            {
+              "const": "UNCONFIRMED"
+            }
+          ]
+        },
+        "session_effects_performed": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "requested_state": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "minLength": 9,
+          "maxLength": 9
+        },
+        "requested_mode": {
+          "anyOf": [
+            {
+              "const": "NORMAL"
+            },
+            {
+              "const": "CONTAINED"
+            },
+            {
+              "const": "SAFE_HALT"
+            }
+          ]
+        },
+        "cause_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "proof_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "SESSION_INPUT_INVALID",
+                "SESSION_SOURCE_REJECTED",
+                "SESSION_PROFILE_REJECTED",
+                "SESSION_ORIGIN_REJECTED",
+                "SESSION_ORIGIN_FOREIGN",
+                "SESSION_STATE_STALE",
+                "SESSION_OPERATION_DUPLICATE",
+                "SESSION_OPERATION_IN_PROGRESS",
+                "SESSION_MODE_FORBIDDEN",
+                "SESSION_TERMINAL",
+                "SESSION_BUDGET_EXCEEDED",
+                "SESSION_LEASE_REJECTED",
+                "SESSION_EXECUTION_CANCELLED",
+                "SESSION_AUTHORITY_DENIED",
+                "SESSION_AUTHORITY_UNAVAILABLE",
+                "SESSION_EVIDENCE_MISMATCH",
+                "SESSION_BOUNDARY_NOT_SATISFIED",
+                "SESSION_TARGET_NOT_VALID",
+                "SESSION_N2_RESULT_REJECTED",
+                "SESSION_N2_COMPLETION_REJECTED",
+                "SESSION_N2_COMPLETION_UNCONFIRMED",
+                "SESSION_PUBLICATION_STALE",
+                "SESSION_PUBLICATION_UNCONFIRMED",
+                "SESSION_COLLABORATOR_FAILED",
+                "SESSION_CAPTURE_FAILED",
+                "SESSION_RETENTION_FAILED",
+                "SESSION_GENERATION_EXHAUSTED",
+                "SESSION_AUDIT_BLOCKED",
+                "SESSION_RAW_BUSINESS_LIMIT",
+                "SESSION_INTERNAL_INVARIANT"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "omitted_fields": {
+          "const": "PUBLICATION_REASON"
+        },
+        "request_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "authority_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cause_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publication_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "request_reference",
+        "requested_action",
+        "lease_reference",
+        "before_snapshot_reference",
+        "after_snapshot_reference",
+        "status",
+        "session_effects_performed",
+        "requested_state",
+        "requested_mode",
+        "cause_reference",
+        "proof_reference",
+        "failure_code",
+        "omitted_fields",
+        "request_evidence_reference",
+        "authority_evidence_reference",
+        "cause_evidence_reference",
+        "publication_reference"
+      ]
+    },
+    "SafeLifecycleEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "record_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kind": {
+          "anyOf": [
+            {
+              "const": "RECOVERY"
+            },
+            {
+              "const": "CONTAINMENT"
+            },
+            {
+              "const": "SAFE_HALT"
+            }
+          ]
+        },
+        "envelope": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SafeDiagnosticEnvelope"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "original_assessment_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recovery_diagnostic_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "trigger": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "FALLBACK_FAILURE",
+                    "PROPAGATION_RISK",
+                    "OPERATOR_REQUEST",
+                    "RECOVERY_VALIDATION_FAILURE"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "ESCALATION_FROM_FAILED",
+                    "CONTAINMENT_BREACH",
+                    "OPERATOR_HALT_REQUEST",
+                    "POLICY_HALT_REQUEST",
+                    "UNRESOLVABLE_BLOCKED_RECOVERY"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "system_state_class": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "const": "CONTAINED"
+                },
+                {
+                  "const": "SAFE_HALT"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "restricted_operations": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "enum": [
+              "READ_SESSION",
+              "READ_DIAGNOSTICS",
+              "EXPORT_DIAGNOSTICS",
+              "REQUEST_HALT",
+              "RESOLVE_CONTAINMENT"
+            ]
+          }
+        },
+        "utc": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 27,
+              "maxLength": 27,
+              "pattern": "^(?!0000)(?:[0-9]{4}-(?:(?:01|03|05|07|08|10|12)-(?:0[1-9]|[12][0-9]|3[01])|(?:04|06|09|11)-(?:0[1-9]|[12][0-9]|30)|02-(?:0[1-9]|1[0-9]|2[0-8]))|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)T(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]\\.[0-9]{6}Z$",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "monotonic_nanoseconds": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "utc_unavailable_reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "NOT_MEASURED",
+                "NOT_PROVIDED",
+                "EXCLUDED_REFERENCE_SCOPE",
+                "NOT_IMPLEMENTED",
+                "SOURCE_NOT_VERIFIED",
+                "CLOCK_UNAVAILABLE",
+                "LOSS_UNCONFIRMED",
+                "RETENTION_EXPIRED",
+                "STORAGE_UNAVAILABLE",
+                "CLOCK_REGRESSION",
+                "DURATION_LIMIT",
+                "COUNTER_LIMIT"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "monotonic_unavailable_reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "NOT_MEASURED",
+                "NOT_PROVIDED",
+                "EXCLUDED_REFERENCE_SCOPE",
+                "NOT_IMPLEMENTED",
+                "SOURCE_NOT_VERIFIED",
+                "CLOCK_UNAVAILABLE",
+                "LOSS_UNCONFIRMED",
+                "RETENTION_EXPIRED",
+                "STORAGE_UNAVAILABLE",
+                "CLOCK_REGRESSION",
+                "DURATION_LIMIT",
+                "COUNTER_LIMIT"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "awaiting_resolution": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "resolution": {
+          "anyOf": [
+            {
+              "const": "PENDING"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "is_terminal": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "prior_history_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rule_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "string",
+            "enum": [
+              "ASH-STATE-STRUCTURE-001",
+              "ASH-STATE-VALIDITY-001",
+              "ASH-STATE-GENERAL-001",
+              "ASH-CODEWORD-STRUCTURE-001",
+              "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+              "ASH-CLASSIFICATION-MAPPING-001",
+              "ASH-RECOVERY-ACTION-001",
+              "ASH-FALLBACK-SELECTION-001",
+              "ASH-CONTAINMENT-TRIGGER-001",
+              "ASH-HALT-TRIGGER-001",
+              "ASH-CONTAINMENT-TRIGGER-002",
+              "ASH-CONTAINMENT-TRIGGER-003",
+              "ASH-CONTAINMENT-TRIGGER-004",
+              "ASH-HALT-TRIGGER-002",
+              "ASH-HALT-TRIGGER-003",
+              "ASH-HALT-TRIGGER-004",
+              "ASH-HALT-TRIGGER-005"
+            ]
+          }
+        },
+        "capture_status": {
+          "anyOf": [
+            {
+              "const": "CONFIRMED"
+            },
+            {
+              "const": "NOT_CONFIRMED"
+            },
+            {
+              "const": "REJECTED"
+            }
+          ]
+        },
+        "omitted_fields": {
+          "const": "CANONICAL_FREE_NOTES"
+        },
+        "conformance": {
+          "anyOf": [
+            {
+              "const": "CANONICAL_OBSERVATION"
+            },
+            {
+              "const": "PENDING_NONCONFORMANT"
+            }
+          ]
+        },
+        "missing_fields": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 15,
+          "items": {
+            "type": "string",
+            "enum": [
+              "trigger",
+              "original_diagnostic",
+              "system_state_class",
+              "restricted_operations",
+              "containment_time",
+              "awaiting_resolution",
+              "resolution",
+              "halt_time",
+              "full_diagnostic_chain",
+              "is_terminal",
+              "rule_ids",
+              "notes",
+              "envelope",
+              "parent_diagnostic_reference",
+              "chain_root_reference"
+            ]
+          }
+        },
+        "pending_reason_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "ORIGINAL_DIAGNOSIS_UNAVAILABLE",
+                "ORIGINAL_CLASSIFICATION_UNAVAILABLE",
+                "CHAIN_UNCONFIRMED",
+                "CLOCK_UNAVAILABLE",
+                "CAPTURE_UNCONFIRMED",
+                "RAW_BUSINESS_LIMIT"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cause_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "clock_assurance": {
+          "const": "COLLECTOR_OWNED_MEASURED_CLOCK_OBSERVATION"
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "record_reference",
+        "kind",
+        "envelope",
+        "original_assessment_evidence_reference",
+        "recovery_diagnostic_evidence_reference",
+        "trigger",
+        "system_state_class",
+        "restricted_operations",
+        "utc",
+        "monotonic_nanoseconds",
+        "utc_unavailable_reason",
+        "monotonic_unavailable_reason",
+        "awaiting_resolution",
+        "resolution",
+        "is_terminal",
+        "prior_history_evidence_reference",
+        "rule_ids",
+        "capture_status",
+        "omitted_fields",
+        "conformance",
+        "missing_fields",
+        "pending_reason_code",
+        "cause_evidence_reference",
+        "clock_assurance"
+      ]
+    },
+    "SafeSessionChildLink": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "link_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "session_binding_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "admitted_generation": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "live_origin_assessment_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "child_origin_assessment_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "child_operation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        }
+      },
+      "required": [
+        "link_reference",
+        "session_binding_reference",
+        "admitted_generation",
+        "live_origin_assessment_reference",
+        "child_origin_assessment_reference",
+        "child_operation_reference"
+      ]
+    },
+    "SafeSessionHistoryEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "session_binding_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "main_assessment_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "child_link": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SafeSessionChildLink"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recovery_operation_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "context_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 53,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "publication_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 18,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "lifecycle_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 90,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "pending_lifecycle_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "page_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 40,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "confirmed_record_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1024
+        },
+        "unknown_storage_record_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1024
+        },
+        "attempted_lifecycle_record_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 36
+        },
+        "supporting_reference_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2504
+        },
+        "frozen": {
+          "type": "boolean"
+        },
+        "coverage": {
+          "anyOf": [
+            {
+              "const": "COMPLETE_SPECIFIED_SAFE_GRAPH"
+            },
+            {
+              "const": "PARTIAL"
+            },
+            {
+              "const": "STORAGE_UNCERTAIN"
+            }
+          ]
+        },
+        "omitted_fields": {
+          "const": "RAW_BUSINESS_PACKETS_REQUEST_REASON_CANONICAL_FREE_NOTES"
+        },
+        "request_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 18,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "authority_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 18,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "cause_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 18,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "boundary_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 36,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "command_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 18,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "failure_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 18,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "resolution_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 16,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "recovery_operation_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "child_link_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "current_assessment_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "episode_assessment_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 17,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "terminal_closure_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "session_binding_reference",
+        "main_assessment_evidence_reference",
+        "child_link",
+        "recovery_operation_reference",
+        "context_evidence_references",
+        "publication_evidence_references",
+        "lifecycle_evidence_references",
+        "pending_lifecycle_evidence_reference",
+        "page_evidence_references",
+        "confirmed_record_count",
+        "unknown_storage_record_count",
+        "attempted_lifecycle_record_count",
+        "supporting_reference_count",
+        "frozen",
+        "coverage",
+        "omitted_fields",
+        "request_evidence_references",
+        "authority_evidence_references",
+        "cause_evidence_references",
+        "boundary_evidence_references",
+        "command_evidence_references",
+        "failure_evidence_references",
+        "resolution_evidence_references",
+        "recovery_operation_references",
+        "child_link_references",
+        "current_assessment_evidence_reference",
+        "episode_assessment_evidence_references",
+        "terminal_closure_evidence_reference"
+      ]
+    },
+    "SafeHistoryRecordReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "diagnostic_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "event_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "local_sequence": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "storage_status": {
+          "anyOf": [
+            {
+              "const": "CONFIRMED"
+            },
+            {
+              "const": "UNKNOWN"
+            }
+          ]
+        }
+      },
+      "required": [
+        "diagnostic_reference",
+        "event_id",
+        "local_sequence",
+        "storage_status"
+      ]
+    },
+    "SafeSupportingReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "CANONICAL_SOURCE",
+            "PROFILE",
+            "ASSESSMENT",
+            "RECOVERY_DIAGNOSTIC",
+            "NORMALIZATION_PROOF",
+            "CORRECTION_PROOF",
+            "REGISTRY_PROOF",
+            "CONDITION",
+            "PREDICATE_OBSERVATION",
+            "RECOVERY_SAFETY",
+            "TARGET_VALIDITY",
+            "SESSION_BINDING",
+            "SESSION_SNAPSHOT",
+            "SESSION_CONTEXT",
+            "SESSION_PUBLICATION",
+            "LIFECYCLE",
+            "SESSION_HISTORY",
+            "SESSION_SOURCE",
+            "SESSION_DENIED",
+            "SESSION_LINK",
+            "SESSION_REQUEST",
+            "SESSION_AUTHORITY",
+            "SESSION_BOUNDARY",
+            "SESSION_CAUSE",
+            "SESSION_COMMAND",
+            "SESSION_FAILURE",
+            "RESOLUTION_TARGET",
+            "SESSION_RESOLUTION",
+            "SESSION_RECOVERY_CONTEXT",
+            "SESSION_TERMINAL_CLOSURE"
+          ]
+        },
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        }
+      },
+      "required": [
+        "kind",
+        "evidence_reference"
+      ]
+    },
+    "SafeSessionHistoryPage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "history_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "page_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 39
+        },
+        "record_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/SafeHistoryRecordReference"
+          }
+        },
+        "supporting_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/SafeSupportingReference"
+          }
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "history_evidence_reference",
+        "page_index",
+        "record_references",
+        "supporting_references"
+      ]
+    },
+    "SafeSessionSourceEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "assembly_generation": {
+          "anyOf": [
+            {
+              "const": "LEGACY_PAIR"
+            },
+            {
+              "const": "N3_LIFECYCLE_PAIR"
+            }
+          ]
+        },
+        "canonical_binding": {
+          "oneOf": [
+            {
+              "const": {
+                "dependency_id": "ash_cosmological_model.f2_9.canonical",
+                "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+                "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+                "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+                "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+                "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+                "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+                "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+                "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+              }
+            },
+            {
+              "const": {
+                "dependency_id": "ash_cosmological_model.f2_9.canonical",
+                "aggregate_sha256": "76d59926ce9676b7584c6cdd555f50f56fceda075fa3fc8b37167fd2be43f7c9",
+                "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+                "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+                "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+                "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+                "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+                "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+                "taxonomy_source_sha256": "150b45d4c75aa053a8d5276d980b359b0ae768c85ae28896680296920402f250"
+              }
+            }
+          ]
+        },
+        "paired_recovery_sources": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "items": {
+            "enum": [
+              {
+                "path": "interfaces/contracts/recovery-engine-contract.md",
+                "sha256": "27ffacc6218812b280ed236bf9052ee825e903498365d735bf57ee9cb338955b"
+              },
+              {
+                "path": "interfaces/contracts/diagnostics-module-contract.md",
+                "sha256": "88b8d682fa826f128787e6154151c68b32d677239e17ddf4344a084461554a37"
+              },
+              {
+                "path": "registries/fallback-policy-registry.md",
+                "sha256": "b108d6c4127da9ea375899e97c34048ded4ea3a7cb624ef24f18bfda5f8deaaa"
+              },
+              {
+                "path": "algorithms/recovery-fallback-semantics.pseudo.md",
+                "sha256": "0fb8a0750acae0fb263cd842e186ff35881f77b8e498a8f11f159a5d2db270b7"
+              },
+              {
+                "path": "algorithms/containment-safe-failure-semantics.pseudo.md",
+                "sha256": "83f1a19c1a0f375e02f2044c238786514d64b122ab6ab5a8bda6e6fa307c8256"
+              },
+              {
+                "path": "interfaces/diagnostic-schema.md",
+                "sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7"
+              },
+              {
+                "path": "interfaces/rule-id-taxonomy.md",
+                "sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+              },
+              {
+                "path": "interfaces/contracts/recovery-engine-contract.md",
+                "sha256": "27ffacc6218812b280ed236bf9052ee825e903498365d735bf57ee9cb338955b"
+              },
+              {
+                "path": "interfaces/contracts/diagnostics-module-contract.md",
+                "sha256": "88b8d682fa826f128787e6154151c68b32d677239e17ddf4344a084461554a37"
+              },
+              {
+                "path": "registries/fallback-policy-registry.md",
+                "sha256": "b108d6c4127da9ea375899e97c34048ded4ea3a7cb624ef24f18bfda5f8deaaa"
+              },
+              {
+                "path": "algorithms/recovery-fallback-semantics.pseudo.md",
+                "sha256": "0fb8a0750acae0fb263cd842e186ff35881f77b8e498a8f11f159a5d2db270b7"
+              },
+              {
+                "path": "algorithms/containment-safe-failure-semantics.pseudo.md",
+                "sha256": "df957dc5c82c2fd0b51e43c6783d8cbb2e3ce565420a765abffd244cdcea98b2"
+              },
+              {
+                "path": "interfaces/diagnostic-schema.md",
+                "sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7"
+              },
+              {
+                "path": "interfaces/rule-id-taxonomy.md",
+                "sha256": "150b45d4c75aa053a8d5276d980b359b0ae768c85ae28896680296920402f250"
+              }
+            ]
+          }
+        },
+        "source_vector_sha256": {
+          "type": "string",
+          "enum": [
+            "2f7d39c0921e45f85956cd3e6c4f28e33204ae8487bc2334e25d8d589efef246",
+            "998a5a8d80c112756ce0255ff8542dcb885abd4eee388cfc2b48da2113278730"
+          ]
+        },
+        "assembly_assurance": {
+          "const": "RECOGNIZED_COMPLETE_VECTOR"
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "assembly_generation",
+        "canonical_binding",
+        "paired_recovery_sources",
+        "source_vector_sha256",
+        "assembly_assurance"
+      ]
+    },
+    "SafeSessionDeniedEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "session_binding_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "snapshot_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "audit_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "request_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "request_observation": {
+          "anyOf": [
+            {
+              "const": "NOT_INSPECTED_AT_TERMINAL"
+            },
+            {
+              "const": "VALIDATED_REFERENCE_ONLY"
+            }
+          ]
+        },
+        "reason_code": {
+          "anyOf": [
+            {
+              "const": "SESSION_TERMINAL"
+            },
+            {
+              "const": "SESSION_MODE_FORBIDDEN"
+            },
+            {
+              "const": "SESSION_BUDGET_EXCEEDED"
+            }
+          ]
+        },
+        "record_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "capture_status": {
+          "anyOf": [
+            {
+              "const": "CONFIRMED"
+            },
+            {
+              "const": "REJECTED"
+            },
+            {
+              "const": "NOT_CONFIRMED"
+            }
+          ]
+        },
+        "omitted_fields": {
+          "const": "REQUEST_REASON"
+        },
+        "denial_ordinal": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 16
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "completion_observation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SafeSessionCompletionObservation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "session_binding_reference",
+        "snapshot_evidence_reference",
+        "audit_reference",
+        "request_reference",
+        "request_observation",
+        "reason_code",
+        "record_reference",
+        "capture_status",
+        "omitted_fields",
+        "denial_ordinal",
+        "completion_observation"
+      ]
+    },
+    "SafeSessionChildLinkEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "link": {
+          "$ref": "#/$defs/SafeSessionChildLink"
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "link"
+      ]
+    },
+    "SafeSessionRequestEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "command_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "session_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "expected_generation": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "action": {
+          "anyOf": [
+            {
+              "const": "RECOVER"
+            },
+            {
+              "const": "REQUEST_CONTAINMENT"
+            },
+            {
+              "const": "RESOLVE_CONTAINMENT"
+            },
+            {
+              "const": "REQUEST_HALT"
+            }
+          ]
+        },
+        "omitted_fields": {
+          "const": "REQUEST_REASON"
+        },
+        "expected_snapshot_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "submitted_trigger": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "FALLBACK_FAILURE",
+                    "PROPAGATION_RISK",
+                    "OPERATOR_REQUEST",
+                    "RECOVERY_VALIDATION_FAILURE"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "ESCALATION_FROM_FAILED",
+                    "CONTAINMENT_BREACH",
+                    "OPERATOR_HALT_REQUEST",
+                    "POLICY_HALT_REQUEST",
+                    "UNRESOLVABLE_BLOCKED_RECOVERY"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "authority_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "boundary_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "submitted_recovery_operation_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "submitted_recovery_context_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "command_reference",
+        "session_reference",
+        "expected_generation",
+        "action",
+        "omitted_fields",
+        "expected_snapshot_evidence_reference",
+        "submitted_trigger",
+        "authority_evidence_reference",
+        "boundary_evidence_references",
+        "submitted_recovery_operation_reference",
+        "submitted_recovery_context_evidence_reference"
+      ]
+    },
+    "SafeSessionAuthorityEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "request_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "status": {
+          "anyOf": [
+            {
+              "const": "AUTHORIZED"
+            },
+            {
+              "const": "DENIED"
+            },
+            {
+              "const": "UNAVAILABLE"
+            }
+          ]
+        },
+        "request_origin": {
+          "anyOf": [
+            {
+              "const": "OPERATOR"
+            },
+            {
+              "const": "POLICY"
+            },
+            {
+              "const": "SYSTEM_BOUNDARY"
+            }
+          ]
+        },
+        "source_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "source_digest_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "source_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "observation_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "assurance": {
+          "const": "DECLARED_REFERENCE_AUTHORIZATION"
+        },
+        "omitted_fields": {
+          "const": "AUTHORITY_REASON"
+        },
+        "observed_expected_snapshot_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "observed_request_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "request_evidence_reference",
+        "status",
+        "request_origin",
+        "source_reference",
+        "source_digest_reference",
+        "source_evidence_reference",
+        "observation_evidence_reference",
+        "assurance",
+        "omitted_fields",
+        "observed_expected_snapshot_reference",
+        "observed_request_reference"
+      ]
+    },
+    "SafeSessionBoundaryEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "request_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "condition": {
+          "type": "string",
+          "enum": [
+            "CONTAINMENT_BREACH",
+            "CONTAINMENT_UNAVAILABLE",
+            "CONTAINMENT_CLEAR",
+            "RECOVERY_NO_PATH",
+            "RECOVERY_VALIDATION_FAILURE",
+            "PROPAGATION_RISK"
+          ]
+        },
+        "status": {
+          "anyOf": [
+            {
+              "const": "SATISFIED"
+            },
+            {
+              "const": "NOT_SATISFIED"
+            },
+            {
+              "const": "UNAVAILABLE"
+            }
+          ]
+        },
+        "source_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "source_digest_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "source_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "observation_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "assurance": {
+          "const": "DECLARED_REFERENCE_BOUNDARY_OBSERVATION"
+        },
+        "omitted_fields": {
+          "const": "BOUNDARY_REASON"
+        },
+        "observed_expected_snapshot_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "observed_request_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "request_evidence_reference",
+        "condition",
+        "status",
+        "source_reference",
+        "source_digest_reference",
+        "source_evidence_reference",
+        "observation_evidence_reference",
+        "assurance",
+        "omitted_fields",
+        "observed_expected_snapshot_reference",
+        "observed_request_reference"
+      ]
+    },
+    "SafeSessionCauseEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "cause_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "request_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "N2_HANDOFF",
+            "AUTHORITY_REQUEST",
+            "CONTAINMENT_BREACH",
+            "UNRESOLVABLE_BLOCKED_BOUNDARY",
+            "RECOVERY_VALIDATION_BOUNDARY",
+            "N2_RESULT",
+            "PROPAGATION_RISK_BOUNDARY"
+          ]
+        },
+        "trigger": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "FALLBACK_FAILURE",
+                    "PROPAGATION_RISK",
+                    "OPERATOR_REQUEST",
+                    "RECOVERY_VALIDATION_FAILURE"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "ESCALATION_FROM_FAILED",
+                    "CONTAINMENT_BREACH",
+                    "OPERATOR_HALT_REQUEST",
+                    "POLICY_HALT_REQUEST",
+                    "UNRESOLVABLE_BLOCKED_RECOVERY"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recovery_operation_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recovery_outcome": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "const": "NO_ACTION"
+                },
+                {
+                  "const": "RECOVERED_VALUE"
+                },
+                {
+                  "const": "RECOVERED_FALLBACK_VALUE"
+                },
+                {
+                  "const": "HANDOFF_REQUIRED"
+                },
+                {
+                  "const": "FAILURE"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recovery_diagnostic_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 35,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "recovery_safety_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "authority_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "boundary_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "projection_coverage": {
+          "anyOf": [
+            {
+              "const": "COMPLETE_SPECIFIED_SAFE_GRAPH"
+            },
+            {
+              "const": "PARTIAL"
+            },
+            {
+              "const": "STORAGE_UNCERTAIN"
+            }
+          ]
+        },
+        "observed_expected_snapshot_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "observed_request_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "cause_reference",
+        "request_evidence_reference",
+        "kind",
+        "trigger",
+        "recovery_operation_reference",
+        "recovery_outcome",
+        "recovery_diagnostic_evidence_references",
+        "recovery_safety_evidence_reference",
+        "authority_evidence_reference",
+        "boundary_evidence_references",
+        "projection_coverage",
+        "observed_expected_snapshot_reference",
+        "observed_request_reference"
+      ]
+    },
+    "SafeSessionCompletionObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "anyOf": [
+            {
+              "const": "COMPLETE"
+            },
+            {
+              "const": "INCOMPLETE"
+            }
+          ]
+        },
+        "operation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "confirmed_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 4,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "CAPTURE_ADMISSION_REJECTED",
+                "CAPTURE_ADMISSION_UNCONFIRMED",
+                "CAPTURE_APPEND_REJECTED",
+                "CAPTURE_APPEND_UNCONFIRMED",
+                "CAPTURE_COMPLETION_REJECTED",
+                "CAPTURE_COMPLETION_UNCONFIRMED",
+                "CAPTURE_FINAL_OBSERVATION_FAILED",
+                "CAPTURE_RETENTION_FAILED",
+                "CAPTURE_CLOCK_UNAVAILABLE",
+                "CAPTURE_CHAIN_UNCONFIRMED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "assurance": {
+          "const": "OBSERVED_CAPTURE_RESPONSE_NOT_STORAGE_PROOF"
+        }
+      },
+      "required": [
+        "status",
+        "operation_reference",
+        "confirmed_references",
+        "failure_code",
+        "assurance"
+      ]
+    },
+    "SafeSessionOriginCompletionObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "COMPLETE",
+            "INCOMPLETE"
+          ]
+        },
+        "operation_outcome": {
+          "type": "string",
+          "enum": [
+            "OBSERVED",
+            "NOT_EVALUATED",
+            "COMPLETED",
+            "FAILED",
+            "BLOCKED",
+            "NOT_APPLICABLE",
+            "ALREADY_VALID",
+            "NORMALIZED",
+            "NOT_NORMALIZABLE",
+            "RECOVERED",
+            "RECOVERED_VIA_FALLBACK",
+            "RECOVERY_FAILED",
+            "ESCALATE_TO_CONTAINMENT",
+            "CONTAINMENT_HANDOFF",
+            "HALT_HANDOFF",
+            "TERMINAL_REFUSAL",
+            "CONFIRMED",
+            "REJECTED",
+            "NOT_CONFIRMED",
+            "INCOMPLETE"
+          ]
+        },
+        "confirmed_event_indices": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 2,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1023
+          }
+        },
+        "diagnostic_coverage": {
+          "type": "string",
+          "enum": [
+            "COMPLETE_DECLARED_REFERENCE_SCOPE",
+            "PARTIAL",
+            "UNAVAILABLE"
+          ]
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "DIAGNOSTICS_VALUE_INVALID",
+                "DIAGNOSTICS_CONFIG_INVALID",
+                "DIAGNOSTICS_ORIGIN_UNAVAILABLE",
+                "DIAGNOSTICS_ORIGIN_MISMATCH",
+                "DIAGNOSTICS_RESERVATION_REFUSED",
+                "DIAGNOSTICS_EVENT_TOO_LARGE",
+                "DIAGNOSTICS_ALIAS_LIMIT",
+                "DIAGNOSTICS_BYTE_LIMIT",
+                "DIAGNOSTICS_DURATION_LIMIT",
+                "DIAGNOSTICS_SEQUENCE_LIMIT",
+                "DIAGNOSTICS_RECORD_NONCONFORMANT",
+                "DIAGNOSTICS_REQUIRED_STEP_MISSING",
+                "DIAGNOSTICS_META_UNAVAILABLE",
+                "DIAGNOSTICS_COLLECTOR_FAILURE",
+                "STORAGE_PROTECTION_UNAVAILABLE",
+                "STORAGE_PARENT_UNTRUSTED",
+                "STORAGE_IDENTITY_CHANGED",
+                "STORAGE_REPARSE_REFUSED",
+                "STORAGE_PATH_ALREADY_EXISTS",
+                "STORAGE_COMMIT_REJECTED",
+                "STORAGE_COMMIT_UNCONFIRMED",
+                "EXPORT_SNAPSHOT_INVALID",
+                "EXPORT_REDACTION_FAILED",
+                "EXPORT_JSON_FAILED",
+                "EXPORT_MARKDOWN_FAILED",
+                "EXPORT_MANIFEST_FAILED",
+                "EXPORT_PUBLICATION_FAILED",
+                "EXPORT_BYTE_LIMIT",
+                "EXPORT_PARITY_FAILED",
+                "DIAGNOSTICS_COMPLETION_MISSING",
+                "DIAGNOSTICS_COMPLETION_MISMATCH",
+                "DIAGNOSTICS_REPLAY_REFUSED",
+                "DIAGNOSTICS_SUPPORTING_LIMIT",
+                "DIAGNOSTICS_INCIDENT_LIMIT",
+                "DIAGNOSTICS_RAW_PACKET_LIMIT",
+                "EXPORT_SLOT_OCCUPIED",
+                "DIAGNOSTICS_CLOCK_UNAVAILABLE",
+                "DIAGNOSTICS_CLOCK_REGRESSION",
+                "DIAGNOSTICS_COUNTER_LIMIT"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "attempted_event_index": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1023
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "assurance": {
+          "const": "OBSERVED_CAPTURE_RESPONSE_NOT_STORAGE_PROOF"
+        },
+        "omitted_fields": {
+          "const": "RETURNED_RECEIPT_HEALTH_BUSINESS_ONLY"
+        }
+      },
+      "required": [
+        "operation_reference",
+        "status",
+        "operation_outcome",
+        "confirmed_event_indices",
+        "diagnostic_coverage",
+        "failure_code",
+        "attempted_event_index",
+        "assurance",
+        "omitted_fields"
+      ]
+    },
+    "SafeSessionFailureEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "request_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "failure_code": {
+          "type": "string",
+          "enum": [
+            "SESSION_INPUT_INVALID",
+            "SESSION_SOURCE_REJECTED",
+            "SESSION_PROFILE_REJECTED",
+            "SESSION_ORIGIN_REJECTED",
+            "SESSION_ORIGIN_FOREIGN",
+            "SESSION_STATE_STALE",
+            "SESSION_OPERATION_DUPLICATE",
+            "SESSION_OPERATION_IN_PROGRESS",
+            "SESSION_MODE_FORBIDDEN",
+            "SESSION_TERMINAL",
+            "SESSION_BUDGET_EXCEEDED",
+            "SESSION_LEASE_REJECTED",
+            "SESSION_EXECUTION_CANCELLED",
+            "SESSION_AUTHORITY_DENIED",
+            "SESSION_AUTHORITY_UNAVAILABLE",
+            "SESSION_EVIDENCE_MISMATCH",
+            "SESSION_BOUNDARY_NOT_SATISFIED",
+            "SESSION_TARGET_NOT_VALID",
+            "SESSION_N2_RESULT_REJECTED",
+            "SESSION_N2_COMPLETION_REJECTED",
+            "SESSION_N2_COMPLETION_UNCONFIRMED",
+            "SESSION_PUBLICATION_STALE",
+            "SESSION_PUBLICATION_UNCONFIRMED",
+            "SESSION_COLLABORATOR_FAILED",
+            "SESSION_CAPTURE_FAILED",
+            "SESSION_RETENTION_FAILED",
+            "SESSION_GENERATION_EXHAUSTED",
+            "SESSION_AUDIT_BLOCKED",
+            "SESSION_RAW_BUSINESS_LIMIT",
+            "SESSION_INTERNAL_INVARIANT"
+          ]
+        },
+        "field_name": {
+          "type": "string",
+          "enum": [
+            "binding",
+            "binding.canonical_binding",
+            "binding.recovery_binding",
+            "binding.profile_binding",
+            "binding.policy_binding",
+            "request",
+            "request.reference",
+            "request.session_reference",
+            "request.expected_snapshot",
+            "request.action",
+            "origin_assessment",
+            "origin_assessment.source_binding",
+            "origin_assessment.profile_binding",
+            "operation_context",
+            "operation_context.context_observation",
+            "operation_context.propagation_evidence",
+            "operation_context.external_authority_evidence",
+            "authority",
+            "boundary",
+            "cause",
+            "trigger",
+            "lease",
+            "publication",
+            "publication.before",
+            "publication.after",
+            "resolution",
+            "resolution.route",
+            "resolution.target",
+            "resolution.target_validation",
+            "resolution.boundary_clear",
+            "capture",
+            "capture.admission",
+            "capture.append",
+            "capture.finish",
+            "capture.final_observation",
+            "retention",
+            "clock",
+            "history",
+            "generation",
+            "collaborator",
+            "execution_gate",
+            "raw_business_packet"
+          ]
+        },
+        "primary_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "capture_status": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "const": "CONFIRMED"
+                },
+                {
+                  "const": "REJECTED"
+                },
+                {
+                  "const": "NOT_CONFIRMED"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "attempted_lifecycle_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "completion_observation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SafeSessionCompletionObservation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "completion_failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "CAPTURE_ADMISSION_REJECTED",
+                "CAPTURE_ADMISSION_UNCONFIRMED",
+                "CAPTURE_APPEND_REJECTED",
+                "CAPTURE_APPEND_UNCONFIRMED",
+                "CAPTURE_COMPLETION_REJECTED",
+                "CAPTURE_COMPLETION_UNCONFIRMED",
+                "CAPTURE_FINAL_OBSERVATION_FAILED",
+                "CAPTURE_RETENTION_FAILED",
+                "CAPTURE_CLOCK_UNAVAILABLE",
+                "CAPTURE_CHAIN_UNCONFIRMED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "unconfirmed_completion_observation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SafeSessionCompletionObservation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "omitted_fields": {
+          "const": "FAILURE_REASON"
+        },
+        "unavailable_post_assessment_facts": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SafeUnavailablePostAssessmentFacts"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "request_evidence_reference",
+        "failure_code",
+        "field_name",
+        "primary_evidence_reference",
+        "capture_status",
+        "attempted_lifecycle_evidence_reference",
+        "completion_observation",
+        "completion_failure_code",
+        "unconfirmed_completion_observation",
+        "omitted_fields",
+        "unavailable_post_assessment_facts"
+      ]
+    },
+    "SafeSessionCommandEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "request_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "before_snapshot_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "after_snapshot_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "session_effects_performed": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "admission_status": {
+          "anyOf": [
+            {
+              "const": "GRANTED"
+            },
+            {
+              "const": "REJECTED"
+            }
+          ]
+        },
+        "admission_before_snapshot_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "admission_failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "SESSION_INPUT_INVALID",
+                "SESSION_SOURCE_REJECTED",
+                "SESSION_PROFILE_REJECTED",
+                "SESSION_ORIGIN_REJECTED",
+                "SESSION_ORIGIN_FOREIGN",
+                "SESSION_STATE_STALE",
+                "SESSION_OPERATION_DUPLICATE",
+                "SESSION_OPERATION_IN_PROGRESS",
+                "SESSION_MODE_FORBIDDEN",
+                "SESSION_TERMINAL",
+                "SESSION_BUDGET_EXCEEDED",
+                "SESSION_LEASE_REJECTED",
+                "SESSION_EXECUTION_CANCELLED",
+                "SESSION_AUTHORITY_DENIED",
+                "SESSION_AUTHORITY_UNAVAILABLE",
+                "SESSION_EVIDENCE_MISMATCH",
+                "SESSION_BOUNDARY_NOT_SATISFIED",
+                "SESSION_TARGET_NOT_VALID",
+                "SESSION_N2_RESULT_REJECTED",
+                "SESSION_N2_COMPLETION_REJECTED",
+                "SESSION_N2_COMPLETION_UNCONFIRMED",
+                "SESSION_PUBLICATION_STALE",
+                "SESSION_PUBLICATION_UNCONFIRMED",
+                "SESSION_COLLABORATOR_FAILED",
+                "SESSION_CAPTURE_FAILED",
+                "SESSION_RETENTION_FAILED",
+                "SESSION_GENERATION_EXHAUSTED",
+                "SESSION_AUDIT_BLOCKED",
+                "SESSION_RAW_BUSINESS_LIMIT",
+                "SESSION_INTERNAL_INVARIANT"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lease_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lease_expected_snapshot_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lease_action": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "const": "RECOVER"
+                },
+                {
+                  "const": "CONTAIN"
+                },
+                {
+                  "const": "RESOLVE"
+                },
+                {
+                  "const": "HALT"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "authority_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cause_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "origin_assessment_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "origin_completion_observation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SafeSessionOriginCompletionObservation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recovery_operation_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publication_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lifecycle_evidence_references": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "minLength": 10,
+            "maxLength": 10
+          }
+        },
+        "pending_lifecycle_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "capture_completion_observation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SafeSessionCompletionObservation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "failure_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "projection_coverage": {
+          "anyOf": [
+            {
+              "const": "COMPLETE_SPECIFIED_SAFE_GRAPH"
+            },
+            {
+              "const": "PARTIAL"
+            },
+            {
+              "const": "STORAGE_UNCERTAIN"
+            }
+          ]
+        },
+        "omitted_fields": {
+          "const": "ADMISSION_REASON_RAW_BUSINESS_PACKETS"
+        },
+        "resolution_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "submitted_recovery_operation_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lease_active_snapshot_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "admission_failure_field": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "binding",
+                "binding.canonical_binding",
+                "binding.recovery_binding",
+                "binding.profile_binding",
+                "binding.policy_binding",
+                "request",
+                "request.reference",
+                "request.session_reference",
+                "request.expected_snapshot",
+                "request.action",
+                "origin_assessment",
+                "origin_assessment.source_binding",
+                "origin_assessment.profile_binding",
+                "operation_context",
+                "operation_context.context_observation",
+                "operation_context.propagation_evidence",
+                "operation_context.external_authority_evidence",
+                "authority",
+                "boundary",
+                "cause",
+                "trigger",
+                "lease",
+                "publication",
+                "publication.before",
+                "publication.after",
+                "resolution",
+                "resolution.route",
+                "resolution.target",
+                "resolution.target_validation",
+                "resolution.boundary_clear",
+                "capture",
+                "capture.admission",
+                "capture.append",
+                "capture.finish",
+                "capture.final_observation",
+                "retention",
+                "clock",
+                "history",
+                "generation",
+                "collaborator",
+                "execution_gate",
+                "raw_business_packet"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actual_post_assessment_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actual_post_completion_observation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SafeSessionOriginCompletionObservation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "operation_status": {
+          "type": "string",
+          "enum": [
+            "COMPLETED",
+            "REFUSED",
+            "FAILED",
+            "TERMINAL_REFUSAL",
+            "UNCONFIRMED"
+          ]
+        },
+        "raw_business_failure_phase": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "const": "CANDIDATE_RESULT"
+                },
+                {
+                  "const": "PROSPECTIVE_HISTORY"
+                },
+                {
+                  "const": "ANTICIPATED_TERMINAL"
+                },
+                {
+                  "const": "TERMINAL_CHAIN"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "raw_business_failure_coverage": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "const": "API_ONLY"
+                },
+                {
+                  "const": "PARTIAL"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "request_evidence_reference",
+        "before_snapshot_reference",
+        "after_snapshot_reference",
+        "session_effects_performed",
+        "admission_status",
+        "admission_before_snapshot_reference",
+        "admission_failure_code",
+        "lease_reference",
+        "lease_expected_snapshot_reference",
+        "lease_action",
+        "authority_evidence_reference",
+        "cause_evidence_reference",
+        "origin_assessment_evidence_reference",
+        "origin_completion_observation",
+        "recovery_operation_reference",
+        "publication_evidence_reference",
+        "lifecycle_evidence_references",
+        "pending_lifecycle_evidence_reference",
+        "capture_completion_observation",
+        "failure_evidence_reference",
+        "projection_coverage",
+        "omitted_fields",
+        "resolution_evidence_reference",
+        "submitted_recovery_operation_reference",
+        "lease_active_snapshot_reference",
+        "admission_failure_field",
+        "actual_post_assessment_evidence_reference",
+        "actual_post_completion_observation",
+        "operation_status",
+        "raw_business_failure_phase",
+        "raw_business_failure_coverage"
+      ]
+    },
+    "SafeResolutionTargetEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "session_binding_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "request_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "before_snapshot_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "containment_record_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "target_state": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "minLength": 9,
+          "maxLength": 9
+        },
+        "canonical_source_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "profile_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "target_validity": {
+          "$ref": "#/$defs/SafeStateValidity"
+        },
+        "prospective_is_in_safe_halt": {
+          "const": false
+        },
+        "prospective_is_in_containment": {
+          "const": false
+        },
+        "prospective_system_class": {
+          "anyOf": [
+            {
+              "const": "STABLE"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "prospective_recovery_category": {
+          "anyOf": [
+            {
+              "const": "NO_ACTION"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "assurance": {
+          "const": "PURE_TARGET_VALIDATION_PROSPECTIVE_CONTEXT_NOT_ENTERED"
+        },
+        "validation_status": {
+          "anyOf": [
+            {
+              "const": "VERIFIED"
+            },
+            {
+              "const": "REJECTED"
+            }
+          ]
+        },
+        "validation_failure_code": {
+          "anyOf": [
+            {
+              "const": "SESSION_TARGET_NOT_VALID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "validation_field_name": {
+          "anyOf": [
+            {
+              "const": "resolution.target_validation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "session_binding_reference",
+        "request_evidence_reference",
+        "before_snapshot_reference",
+        "containment_record_reference",
+        "target_state",
+        "canonical_source_evidence_reference",
+        "profile_evidence_reference",
+        "target_validity",
+        "prospective_is_in_safe_halt",
+        "prospective_is_in_containment",
+        "prospective_system_class",
+        "prospective_recovery_category",
+        "assurance",
+        "validation_status",
+        "validation_failure_code",
+        "validation_field_name"
+      ]
+    },
+    "SafeSessionResolutionEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "request_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "session_binding_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "containment_record_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "route": {
+          "anyOf": [
+            {
+              "const": "OPERATOR_INTERVENTION"
+            },
+            {
+              "const": "POLICY_DRIVEN"
+            },
+            {
+              "const": "ESCALATE_TO_SAFE_HALT"
+            }
+          ]
+        },
+        "target_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "authority_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "boundary_clear_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "propagation_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "before_snapshot_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "after_snapshot_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publication_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actual_post_assessment_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "anyOf": [
+            {
+              "const": "RESOLVED"
+            },
+            {
+              "const": "REFUSED"
+            },
+            {
+              "const": "UNCONFIRMED"
+            }
+          ]
+        },
+        "session_effects_performed": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "observed_boundary_status": {
+          "anyOf": [
+            {
+              "const": "SATISFIED"
+            },
+            {
+              "const": "NOT_SATISFIED"
+            },
+            {
+              "const": "UNAVAILABLE"
+            }
+          ]
+        },
+        "observed_propagation_status": {
+          "anyOf": [
+            {
+              "const": "SAFE"
+            },
+            {
+              "const": "RISK"
+            },
+            {
+              "const": "UNAVAILABLE"
+            }
+          ]
+        },
+        "actual_resolution_record_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "omitted_fields": {
+          "const": "UNTRUSTED_RESOLUTION_REASON"
+        },
+        "propagation_operation_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "propagation_origin_assessment_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "propagation_source_binding": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SafeEvidenceSourceBinding"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "previous_episode_root_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "actual_new_episode_root_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "resolution_action": {
+          "anyOf": [
+            {
+              "const": "REPLACE_STATE"
+            },
+            {
+              "const": "HALT"
+            }
+          ]
+        },
+        "requested_target_state": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[01]{9}$",
+              "minLength": 9,
+              "maxLength": 9
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "submitted_recovery_operation_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "request_evidence_reference",
+        "session_binding_reference",
+        "containment_record_reference",
+        "route",
+        "target_evidence_reference",
+        "authority_evidence_reference",
+        "boundary_clear_evidence_reference",
+        "propagation_evidence_reference",
+        "before_snapshot_reference",
+        "after_snapshot_reference",
+        "publication_evidence_reference",
+        "actual_post_assessment_reference",
+        "status",
+        "session_effects_performed",
+        "observed_boundary_status",
+        "observed_propagation_status",
+        "actual_resolution_record_reference",
+        "omitted_fields",
+        "propagation_operation_reference",
+        "propagation_origin_assessment_reference",
+        "propagation_source_binding",
+        "previous_episode_root_reference",
+        "actual_new_episode_root_reference",
+        "resolution_action",
+        "requested_target_state",
+        "submitted_recovery_operation_reference"
+      ]
+    },
+    "SafeSessionSubmittedRecoveryContextEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "operation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "origin_assessment_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "context_owner_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "context_observation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "context_source_binding": {
+          "$ref": "#/$defs/SafeEvidenceSourceBinding"
+        },
+        "observed_is_in_safe_halt": {
+          "type": "boolean"
+        },
+        "observed_is_in_containment": {
+          "type": "boolean"
+        },
+        "propagation_operation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "propagation_origin_assessment_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "propagation_status": {
+          "type": "string",
+          "enum": [
+            "SAFE",
+            "RISK",
+            "UNAVAILABLE"
+          ]
+        },
+        "propagation_source_binding": {
+          "$ref": "#/$defs/SafeEvidenceSourceBinding"
+        },
+        "authority_operation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "authority_origin_assessment_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "authority_status": {
+          "type": "string",
+          "enum": [
+            "REACHABLE",
+            "UNREACHABLE",
+            "UNAVAILABLE"
+          ]
+        },
+        "authority_source_binding": {
+          "$ref": "#/$defs/SafeEvidenceSourceBinding"
+        },
+        "omitted_fields": {
+          "const": "PROPAGATION_AND_EXTERNAL_AUTHORITY_REASON"
+        },
+        "assurance": {
+          "const": "SUBMITTED_BOUND_EVIDENCE_NOT_CURRENT_OWNER_CONTEXT"
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "operation_reference",
+        "origin_assessment_reference",
+        "context_owner_reference",
+        "context_observation_reference",
+        "context_source_binding",
+        "observed_is_in_safe_halt",
+        "observed_is_in_containment",
+        "propagation_operation_reference",
+        "propagation_origin_assessment_reference",
+        "propagation_status",
+        "propagation_source_binding",
+        "authority_operation_reference",
+        "authority_origin_assessment_reference",
+        "authority_status",
+        "authority_source_binding",
+        "omitted_fields",
+        "assurance"
+      ]
+    },
+    "SafeSessionTerminalClosureEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "request_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "bridge_record_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "terminal_diagnostic_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "terminal_envelope": {
+          "$ref": "#/$defs/SafeDiagnosticEnvelope"
+        },
+        "actual_terminal_publication_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "assurance": {
+          "const": "ACTUAL_FINAL_HALT_LINK_NONRECURSIVE_COMPLETE_TYPED_CLOSURE"
+        }
+      },
+      "required": [
+        "evidence_reference",
+        "request_evidence_reference",
+        "bridge_record_reference",
+        "terminal_diagnostic_reference",
+        "terminal_envelope",
+        "actual_terminal_publication_evidence_reference",
+        "assurance"
+      ]
+    },
+    "SafeUnavailablePostAssessmentFacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "candidate_state": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "minLength": 9,
+          "maxLength": 9
+        },
+        "source_binding": {
+          "$ref": "#/$defs/SafeEvidenceSourceBinding"
+        },
+        "omitted_fields": {
+          "const": "UNAVAILABLE_POST_FACTS_REASON"
+        }
+      },
+      "required": [
+        "operation_reference",
+        "candidate_state",
+        "source_binding",
+        "omitted_fields"
+      ]
     }
   }
 }

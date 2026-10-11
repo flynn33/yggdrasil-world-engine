@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1221,
-    "path_digest": "99c6f3c969c0b83c1b7a69eb1ba85faa03b843d968128154731efb779def5a35",
+    "path_count": 1233,
+    "path_digest": "651ab07a12465b85fa2d1a83aecc3e68966f0f15e7ce042877388fc161a77dcd",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -2600,16 +2600,148 @@
         "m3_session_lifecycle",
         "reference_conformance"
       ]
+    },
+    {
+      "path": "core/ash_pattern_engine/session.py",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Exact N3 reference lifecycle implementation, representation or conformance control under the adopted source/profile/policy and fixed capacity contract.",
+      "secondary_tags": [
+        "m3_session_lifecycle",
+        "reference_semantics"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/session_values.py",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Exact N3 reference lifecycle implementation, representation or conformance control under the adopted source/profile/policy and fixed capacity contract.",
+      "secondary_tags": [
+        "m3_session_lifecycle",
+        "reference_semantics"
+      ]
+    },
+    {
+      "path": "core/ash_pattern_engine/diagnostic_session_values.py",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Exact N3 reference lifecycle implementation, representation or conformance control under the adopted source/profile/policy and fixed capacity contract.",
+      "secondary_tags": [
+        "m3_session_lifecycle",
+        "reference_semantics"
+      ]
+    },
+    {
+      "path": "tests/test_m3_session_values.py",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Exact N3 reference lifecycle implementation, representation or conformance control under the adopted source/profile/policy and fixed capacity contract.",
+      "secondary_tags": [
+        "m3_session_lifecycle",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "tests/test_m3_session_schemas.py",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Exact N3 reference lifecycle implementation, representation or conformance control under the adopted source/profile/policy and fixed capacity contract.",
+      "secondary_tags": [
+        "m3_session_lifecycle",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "tests/test_m3_session_lifecycle.py",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Exact N3 reference lifecycle implementation, representation or conformance control under the adopted source/profile/policy and fixed capacity contract.",
+      "secondary_tags": [
+        "m3_session_lifecycle",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "tests/test_m3_session_diagnostics.py",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Exact N3 reference lifecycle implementation, representation or conformance control under the adopted source/profile/policy and fixed capacity contract.",
+      "secondary_tags": [
+        "m3_session_lifecycle",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "tests/test_m3_session_recovery.py",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Exact N3 reference lifecycle implementation, representation or conformance control under the adopted source/profile/policy and fixed capacity contract.",
+      "secondary_tags": [
+        "m3_session_lifecycle",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "data/schemas/m3_session_lifecycle_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Exact N3 reference lifecycle implementation, representation or conformance control under the adopted source/profile/policy and fixed capacity contract.",
+      "secondary_tags": [
+        "m3_session_lifecycle",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Exact N3 reference lifecycle implementation, representation or conformance control under the adopted source/profile/policy and fixed capacity contract.",
+      "secondary_tags": [
+        "m3_session_lifecycle",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Exact N3 reference lifecycle implementation, representation or conformance control under the adopted source/profile/policy and fixed capacity contract.",
+      "secondary_tags": [
+        "m3_session_lifecycle",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "examples/core_session_diagnostics/session_diagnostic_bundle_cases.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Actual portable lifecycle supporting-graph controls with declared synthetic clock/store/revision provenance.",
+      "secondary_tags": [
+        "m3_session_lifecycle",
+        "reference_conformance"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
       "ash_dependency_material": 66,
-      "governance_validation": 485,
+      "governance_validation": 494,
       "historical_evidence": 21,
       "later_release_work": 59,
       "wrw_reference_profile": 304,
-      "ywe_core": 164,
+      "ywe_core": 167,
       "ywe_extension_profile": 122
     }
   }

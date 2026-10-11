@@ -128,10 +128,14 @@ bounds are 324,066 and 645,088 bytes within the existing reservations.
 Three portable representation controls pass against the corrected inputs. These
 verify bounds and graph representation. ADR-0035 adds the truthful direct
 propagation-risk boundary cause; all five replayed structural reports remain
-byte-identical. Lifecycle implementation is underway in the coordinated owner,
-values/schema, Diagnostics and engine paths. Runtime acceptance remains
-outstanding while cancellation, quotas, capture completion and retention
-witnesses are exercised. M0–M2 remain accepted and M3 active.
+byte-identical. The reference implementation now includes session admission,
+fresh recovery origins, controlled state publication, containment, authorized
+resolution, all five halt triggers, terminal denials and immutable bounded
+evidence. All 125 integrated session runtime/value/schema controls pass, including
+concurrent provider halt, actual scope cleanup, uncertain evidence retention and
+protected paired export. All 930 fixture bindings pass, with 382 expected
+rejections. The candidate still requires its exact committed-source full run
+before runtime acceptance. M0–M2 remain accepted and M3 active.
 
 The owner wiki publisher is published at
 [`4f7cd2e`](https://github.com/flynn33/yggdrasil-world-engine/commit/4f7cd2e38367e1b3cc75eefffb8f752586e1c7a2).
@@ -154,11 +158,21 @@ The failure-union amendment is published at
 [`2fb1913`](https://github.com/flynn33/yggdrasil-world-engine/commit/2fb19137a0fcf0a012aff4e02a4589331c5ffa9e):
 all eleven selected checks pass from its exact clean checkout.
 [Its full CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38170531295)
-is running at the latest readback.
+failed on both systems with the same five proof-path role errors: each run
+passed 34 checks and failed `validation_unit_tests` and `player_runtime_state`.
+The actual failed logs are preserved.
+
+The propagation-boundary and proof-approval correction is published at
+[`b283c40`](https://github.com/flynn33/yggdrasil-world-engine/commit/b283c4007fbd3d16c07e2a63f7e4f236ca309ecc).
+All twelve selected checks pass from its exact clean checkout with zero
+failures/advisories; eleven focused approval/refusal tests also pass.
+[Its full CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38172321482)
+is running at the latest readback. Those checks cover the adopted contract and
+approval correction; the subsequent runtime candidate requires its own full run.
 
 The [wiki](https://github.com/flynn33/yggdrasil-world-engine/wiki) is published at
-[`2353a5d`](https://github.com/flynn33/yggdrasil-world-engine/wiki/_history)
-from source `2fb1913`. A fresh remote clone matches all 47 reviewed pages,
+[`d3688f0`](https://github.com/flynn33/yggdrasil-world-engine/wiki/_history)
+from source `b283c40`. A fresh remote clone matches all 47 reviewed pages,
 including Home, the roadmap page and preserved manual navigation. Each published
 development increment updates this README checkpoint and refreshes the wiki
 from committed source. The machine-readable milestone gates remain authoritative;
@@ -302,23 +316,21 @@ review (run `a767e7c4`): verdict `no_blocking_findings_in_reviewed_scope`,
 with instruction accuracy, dependency boundary and governance conclusions
 consistent. The prior six tool-mode review attempts timed out at the model
 provider; the text-only route completed within its budget. This evidence
-supports the source-compatibility checkpoint but does not accept M3; M3 remains
-in progress and N3 remains unimplemented. The sealed package stayed external to
+supports that historical source-compatibility checkpoint but does not accept M3;
+N3 was unimplemented at that checkpoint. The sealed package stayed external to
 this repository; this checkpoint is a documentation save under the separately
 authorized record-publication authority.
 
-The current N3 contract work includes exact session ownership and revision checks,
-source admission before effects, real containment and authorized resolution,
-all five canonical halt triggers, once-only completion, and a closed evidence
-budget. A resolution must preserve the original containment chain and record its
-actual state change; it cannot fabricate a normal assessment while still contained.
-The complete contract and its resource proof will be committed before dependent
-implementation. Historical external proposal files are engineering inputs and
-do not establish adoption or runtime acceptance. Generation's topology, axioms
+The current N3 implementation follows the adopted contract and resource proof.
+Focused controls exercise exact source and revision admission, current assessment
+membership, actual recovery/containment/resolution/halt, callback cancellation,
+once-only completion, fixed quotas and protected JSON/Markdown export. The full
+repository run remains required before this slice is accepted. Historical external
+proposal files do not establish runtime acceptance. Generation's topology, axioms
 and complete planner/emitter exchange remain later M3 work.
 
-Next after this slice are session admission and state commit, actual containment
-and safe halt, remaining canonical Diagnostics producers and generation semantics.
+Next after this slice are remaining canonical Diagnostics producers, generation
+semantics and the complete core conformance witnesses.
 M3 remains in progress; its five exit criteria and platform authorization remain
 unchanged.
 Platform products remain deferred until M10 acceptance.

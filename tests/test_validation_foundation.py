@@ -254,6 +254,15 @@ class PlayerRuntimeReferencePolicyTests(unittest.TestCase):
         self.assertEqual([f"Phase 10 added forbidden platform/code file: {path}" for path in paths],
                          self.check_added(paths, spec))
 
+    def test_reviewed_session_reference_requires_both_path_approvals(self):
+        paths = ["core/ash_pattern_engine/" + name for name in (
+            "session.py", "session_values.py", "diagnostic_session_values.py")]
+        self.assertEqual([], self.check_added(paths))
+        spec = copy.deepcopy(self.spec)
+        spec["allowed_reference_paths"] = [path for path in spec["allowed_reference_paths"] if path not in paths]
+        self.assertEqual([f"Phase 10 added forbidden platform/code file: {path}" for path in paths],
+                         self.check_added(paths, spec))
+
     def test_neighboring_unreviewed_n3_proofs_remain_forbidden(self):
         paths = ["docs/design-planning/m3/session-lifecycle/" + name for name in (
             "session_runtime.py", "derive_bounds_extra.py", "product.cpp")]

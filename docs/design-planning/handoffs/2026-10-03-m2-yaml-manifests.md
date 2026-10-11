@@ -1,10 +1,10 @@
-# YWE Session Handoff — N3 Contract Adoption
+# YWE Session Handoff — N3 Reference Implementation
 
 **Date:** October 11, 2026
-**Handoff checkpoint:** autonomous-n3-6
-**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-43, section 16.2; autonomous authority remains section 13.
+**Handoff checkpoint:** autonomous-n3-7
+**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-44, section 16.3; autonomous authority remains section 13.
 **Direction:** YWE-DIRECTION-20261009-AUTONOMOUS-N3 (package `YWE-M3-N3-AUTONOMOUS-001` r1).
-**Inspected project snapshot:** local and remote main `2fb19137a0fcf0a012aff4e02a4589331c5ffa9e`; owner publication and README readback verified.
+**Inspected project snapshot:** local and remote main `b283c4007fbd3d16c07e2a63f7e4f236ca309ecc`; owner publication and README readback verified. Runtime candidate is subsequent work requiring its own committed-source verification.
 **Method:** Raven Forge Development v0.7.0 at `87409bc36fb9d4782eab02189adb184f2b3962a7`.
 
 This is the current continuation. Earlier preparation receipts below remain
@@ -13,32 +13,31 @@ superseded history with their original scope and evidence preserved.
 ## Current state
 
 - M0–M2 accepted; M3 active; M4 and platform work remain planned/deferred.
-- N3 lifecycle contract, independent policy, exact business/API inventory and capacity controls adopted under YWE-REQ-0044 and ADR-0033; ADR-0034 corrects actual fresh-origin failure unions; ADR-0035 corrects direct propagation-boundary causes before dependent implementation. Runtime verification remains outstanding.
-- Root and independent review verified the frozen proposal and replayed representation controls. All three portable controls pass after adopted hash reconciliation; no session effects or capture acknowledgments are claimed.
-- Owner wiki `2353a5d61bf7f59b2bc884135576f05c9ffcfcdb` actually published from `2fb1913`; fresh remote clone matches all 47 reviewed pages. Home, roadmap and manual navigation are current for that source.
+- Adopted N3 contracts and ADR-0033/0034/0035 precede the implementation candidate. Session admission, fresh recovery, actual containment/resolution/halt, revocation and bounded evidence have source-owned runtime controls. Full acceptance remains outstanding.
+- All twelve selected live governance checks pass; catalogs contain 219 schemas and 930 fixture bindings/382 intended rejections. Earlier 750 rows are preserved. All 125 integrated session tests pass, including actual Windows protected-store paired export and concurrent halt on the dirty candidate; 84 Diagnostics area tests pass.
+- Owner wiki `d3688f09740b3e895f8a1d5d2735edc300786d4f` actually published from `b283c40`; fresh remote clone matches all 47 reviewed pages. Home, roadmap and manual navigation are current for that source.
 - `cdbcb68` passes eleven selected clean checks and both platform-boundary tests; its full CI failed the proof-path role checks; the explicit role correction and refusal controls are recorded in section 16.2. `4f7cd2e` and predecessor `0949184` pass Ubuntu/Windows CI.
 - Original source `13df7079` retains its directly observed 36/36 clean execution, 1,006 tests and successful exact-revision Ubuntu/Windows CI. Section 12's separate external review remains representation-only, `acceptance=false`, `provenance_review_required=true`.
 - Autonomous execution, owner-authored publication and admin bypass are already authorized. No operator or reviewer-service approval gate is assigned.
 
 ## Current checkpoint
 
-**Current step:** P1 contract adoption complete through ADR-0035 direct-boundary
-correction; P2 lifecycle implementation active. Sections 16.1 and 16.2 record the corrections, unchanged bounds and published
-2fb1913/wiki checkpoint.
+**Current step:** P2 reference implementation and review corrections frozen;
+integrated runtime controls pass. Section 16.3 records actual scoped evidence and
+verification routing. Complete clean repository execution is next.
 
-**Next action:** Implement the adopted exact contract, keeping domain ownership,
-closed values/schema and Diagnostics changes coordinated. Execute all sixteen
-N3 verification groups, preserve old standalone behavior, run the canonical
-repository suite, publish owner-authored work, and refresh README/wiki with the
-actual evidence. Then continue through remaining M3 exits and M4–M10.
+**Next action:** Commit the frozen candidate and execute the complete unfiltered
+clean repository suite.
+Publish verified owner-authored work and refresh README/wiki with actual results.
+Then continue through remaining M3 exits and M4–M10.
 
 **Needed from owner:** Nothing.
 
-**Saved at:** This handoff and Project Record planning-43. The containing commit
+**Saved at:** This handoff and Project Record planning-44. The containing commit
 and subsequent readback are the save receipt; no own test result is predeclared.
 This checkpoint does not complete the active roadmap goal.
 
-- Root live recovery/composition controls pass 12 scoped tests; full N3 integrated acceptance remains outstanding.
+- The saved scoped tests are not full N3 acceptance. No owner action is needed.
 
 ---
 

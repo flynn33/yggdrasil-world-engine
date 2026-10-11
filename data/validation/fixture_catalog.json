@@ -9778,6 +9778,3285 @@
         "YWE-REQ-0042"
       ],
       "description": "Independently authored complete-vector or mixed-vector digest/type control. Revision syntax in this static value is not host Git provenance."
+    },
+    {
+      "fixture_id": "m3.session.session_cases.wrapper",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionLifecycleCaseCatalog",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Authored format-only catalog metadata; selected case values are evaluated separately."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionPolicyBinding",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/0/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionPolicyBinding",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionBinding",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/1/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionSnapshot",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/2/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionSnapshot",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionContextObservation",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/3/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionContextObservation",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionRequest",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/4/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionRequest",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionAuthorityObservation",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/5/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionAuthorityObservation",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionBoundaryObservation",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/6/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBoundaryObservation",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionRecoveryRequest",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/7/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionRecoveryRequest",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionContainmentRequest",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/8/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionContainmentRequest",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionResolutionRequest",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/9/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionResolutionRequest",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionHaltRequest",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/10/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionHaltRequest",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionCauseObservation",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/11/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionCauseObservation",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionOperationLease",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/12/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionOperationLease",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionAdmission",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/13/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionAdmission",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionAdmissionFailure",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/14/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionAdmissionFailure",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.ResolutionTargetValidation",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/15/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ResolutionTargetValidation",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionPublication",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/16/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionPublication",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.ContainmentDiagnostic:FALLBACK_FAILURE",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/17/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ContainmentDiagnostic",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.ContainmentDiagnostic:PROPAGATION_RISK",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/18/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ContainmentDiagnostic",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.ContainmentDiagnostic:OPERATOR_REQUEST",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/19/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ContainmentDiagnostic",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.ContainmentDiagnostic:RECOVERY_VALIDATION_FAILURE",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/20/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ContainmentDiagnostic",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.LifecycleRecord",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/21/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/LifecycleRecord",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.PendingLifecycleRecord",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/22/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/PendingLifecycleRecord",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionResolutionObservation",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/23/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionResolutionObservation",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionLifecycleCaptureAdmission",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/24/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionLifecycleCaptureAdmission",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionLifecycleCompletion",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/25/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionLifecycleCompletion",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionFailureDetail",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/26/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionFailureDetail",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionOperationResult",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/27/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionOperationResult",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionDeniedAttempt",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/28/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionDeniedAttempt",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionChildLink",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/29/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionChildLink",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionHistory",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/30/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionHistory",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionRetentionReceipt",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/31/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionRetentionReceipt",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionAssessmentLink",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/32/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionAssessmentLink",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionReplayObservation",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/33/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionReplayObservation",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionTerminalChainClosure",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/34/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionTerminalChainClosure",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SafeHaltDiagnostic:CONTAINMENT_BREACH",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/35/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SafeHaltDiagnostic:ESCALATION_FROM_FAILED",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/36/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SafeHaltDiagnostic:OPERATOR_HALT_REQUEST",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/37/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SafeHaltDiagnostic:POLICY_HALT_REQUEST",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/38/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SafeHaltDiagnostic:UNRESOLVABLE_BLOCKED_RECOVERY",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/39/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionRawBusinessFailure",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/40/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionRawBusinessFailure",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionOperationResult:complete-child",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/41/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionOperationResult",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionOperationResult:partial-child",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/42/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionOperationResult",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionOperationResult:zero-emission-child",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/43/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionOperationResult",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionOperationResult:unavailable-fresh-facts",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/44/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionOperationResult",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.positive.SessionCauseObservation:propagation-boundary",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/45/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionCauseObservation",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.session_rejections.wrapper",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionLifecycleRejectionCatalog",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Authored format-only catalog metadata; selected case values are evaluated separately."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionPolicyBinding:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/0/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionPolicyBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionPolicyBinding:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/1/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionPolicyBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "policy_id"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionBinding:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/2/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionBinding:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/3/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "binding_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionSnapshot:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/4/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionSnapshot",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionSnapshot:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/5/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionSnapshot",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "snapshot_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionContextObservation:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/6/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionContextObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionContextObservation:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/7/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionContextObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "observation_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionRequest:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/8/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionRequest",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionRequest:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/9/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionRequest",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "request_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionAuthorityObservation:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/10/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionAuthorityObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionAuthorityObservation:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/11/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionAuthorityObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "request_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionBoundaryObservation:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/12/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBoundaryObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionBoundaryObservation:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/13/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBoundaryObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "request_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionRecoveryRequest:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/14/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionRecoveryRequest",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionRecoveryRequest:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/15/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionRecoveryRequest",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "request"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionContainmentRequest:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/16/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionContainmentRequest",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionContainmentRequest:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/17/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionContainmentRequest",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "request"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionResolutionRequest:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/18/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionResolutionRequest",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionResolutionRequest:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/19/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionResolutionRequest",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "request"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionHaltRequest:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/20/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionHaltRequest",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionHaltRequest:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/21/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionHaltRequest",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "request"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionCauseObservation:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/22/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionCauseObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionCauseObservation:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/23/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionCauseObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "cause_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionOperationLease:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/24/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionOperationLease",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionOperationLease:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/25/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionOperationLease",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "lease_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionAdmission:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/26/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionAdmission",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionAdmission:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/27/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionAdmission",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "status"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionAdmissionFailure:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/28/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionAdmissionFailure",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionAdmissionFailure:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/29/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionAdmissionFailure",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "failure_code"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.ResolutionTargetValidation:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/30/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ResolutionTargetValidation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.ResolutionTargetValidation:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/31/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ResolutionTargetValidation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "status"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionPublication:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/32/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionPublication",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionPublication:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/33/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionPublication",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "publication_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.ContainmentDiagnostic:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/34/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ContainmentDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.ContainmentDiagnostic:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/35/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ContainmentDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/1/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/2/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/3/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "trigger"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.LifecycleRecord:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/36/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/LifecycleRecord",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.LifecycleRecord:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/37/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/LifecycleRecord",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "diagnostic_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.PendingLifecycleRecord:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/38/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/PendingLifecycleRecord",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.PendingLifecycleRecord:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/39/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/PendingLifecycleRecord",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "intended_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionResolutionObservation:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/40/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionResolutionObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionResolutionObservation:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/41/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionResolutionObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "resolution_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionLifecycleCaptureAdmission:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/42/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionLifecycleCaptureAdmission",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionLifecycleCaptureAdmission:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/43/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionLifecycleCaptureAdmission",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "operation_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionLifecycleCompletion:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/44/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionLifecycleCompletion",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionLifecycleCompletion:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/45/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionLifecycleCompletion",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "operation_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionFailureDetail:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/46/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionFailureDetail",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionFailureDetail:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/47/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionFailureDetail",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "failure_code"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionOperationResult:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/48/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionOperationResult",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionOperationResult:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/49/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionOperationResult",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "request"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionDeniedAttempt:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/50/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionDeniedAttempt",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionDeniedAttempt:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/51/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionDeniedAttempt",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "session_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionChildLink:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/52/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionChildLink",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionChildLink:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/53/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionChildLink",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "link_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionHistory:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/54/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionHistory",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionHistory:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/55/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionHistory",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "history_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionRetentionReceipt:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/56/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionRetentionReceipt",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionRetentionReceipt:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/57/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionRetentionReceipt",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "session_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionAssessmentLink:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/58/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionAssessmentLink",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionAssessmentLink:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/59/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionAssessmentLink",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "session_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionReplayObservation:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/60/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionReplayObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionReplayObservation:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/61/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionReplayObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "request_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionTerminalChainClosure:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/62/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionTerminalChainClosure",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionTerminalChainClosure:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/63/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionTerminalChainClosure",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "request_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SafeHaltDiagnostic:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/64/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SafeHaltDiagnostic:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/65/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/1/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/2/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/3/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/4/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "trigger"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionRawBusinessFailure:unknown",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/66/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionRawBusinessFailure",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ADDITIONALPROPERTIES",
+          "instance_pointer": "",
+          "schema_pointer": "/additionalProperties"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionRawBusinessFailure:missing",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/67/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionRawBusinessFailure",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_REQUIRED",
+          "instance_pointer": "",
+          "missing_properties": [
+            "request_reference"
+          ],
+          "schema_pointer": "/required"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Snapshot:generation:type",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/68/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionSnapshot",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/generation",
+          "schema_pointer": "/properties/generation/type"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Snapshot:generation:minimum",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/69/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionSnapshot",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MINIMUM",
+          "instance_pointer": "/generation",
+          "schema_pointer": "/properties/generation/minimum"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Snapshot:generation:maximum",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/70/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionSnapshot",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_MAXIMUM",
+          "instance_pointer": "/generation",
+          "schema_pointer": "/properties/generation/maximum"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Snapshot:snapshot_reference:not",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/71/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionSnapshot",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_NOT",
+          "instance_pointer": "/snapshot_reference",
+          "schema_pointer": "/properties/snapshot_reference/not"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Snapshot:snapshot_reference:not:newline",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/72/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionSnapshot",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_NOT",
+          "instance_pointer": "/snapshot_reference",
+          "schema_pointer": "/properties/snapshot_reference/not"
+        },
+        {
+          "error_id": "JSON_SCHEMA_PATTERN",
+          "instance_pointer": "/snapshot_reference",
+          "schema_pointer": "/properties/snapshot_reference/pattern"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Snapshot:snapshot_reference:pattern",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/73/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionSnapshot",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_NOT",
+          "instance_pointer": "/snapshot_reference",
+          "schema_pointer": "/properties/snapshot_reference/not"
+        },
+        {
+          "error_id": "JSON_SCHEMA_PATTERN",
+          "instance_pointer": "/snapshot_reference",
+          "schema_pointer": "/properties/snapshot_reference/pattern"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Binding:canonical_binding:dependency_id",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/74/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/canonical_binding/dependency_id",
+          "schema_pointer": "/properties/canonical_binding/properties/dependency_id/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Binding:canonical_binding:aggregate_sha256",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/75/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/canonical_binding/aggregate_sha256",
+          "schema_pointer": "/properties/canonical_binding/properties/aggregate_sha256/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Binding:canonical_binding:state_space_sha256",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/76/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/canonical_binding/state_space_sha256",
+          "schema_pointer": "/properties/canonical_binding/properties/state_space_sha256/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Binding:canonical_binding:codeword_source_sha256",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/77/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/canonical_binding/codeword_source_sha256",
+          "schema_pointer": "/properties/canonical_binding/properties/codeword_source_sha256/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Binding:canonical_binding:validity_source_sha256",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/78/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/canonical_binding/validity_source_sha256",
+          "schema_pointer": "/properties/canonical_binding/properties/validity_source_sha256/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Binding:canonical_binding:classification_source_sha256",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/79/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/canonical_binding/classification_source_sha256",
+          "schema_pointer": "/properties/canonical_binding/properties/classification_source_sha256/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Binding:canonical_binding:recovery_source_sha256",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/80/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/canonical_binding/recovery_source_sha256",
+          "schema_pointer": "/properties/canonical_binding/properties/recovery_source_sha256/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Binding:canonical_binding:diagnostic_source_sha256",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/81/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/canonical_binding/diagnostic_source_sha256",
+          "schema_pointer": "/properties/canonical_binding/properties/diagnostic_source_sha256/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Binding:canonical_binding:taxonomy_source_sha256",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/82/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/canonical_binding/taxonomy_source_sha256",
+          "schema_pointer": "/properties/canonical_binding/properties/taxonomy_source_sha256/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Binding:policy_binding:policy_id",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/83/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/policy_binding/policy_id",
+          "schema_pointer": "/properties/policy_binding/properties/policy_id/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Binding:policy_binding:policy_version",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/84/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/policy_binding/policy_version",
+          "schema_pointer": "/properties/policy_binding/properties/policy_version/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Binding:policy_binding:source_path",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/85/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/policy_binding/source_path",
+          "schema_pointer": "/properties/policy_binding/properties/source_path/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Binding:policy_binding:source_sha256",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/86/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionBinding",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/policy_binding/source_sha256",
+          "schema_pointer": "/properties/policy_binding/properties/source_sha256/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.ContainmentDiagnostic:FALLBACK_FAILURE:wrong-rule",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/87/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ContainmentDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/0/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/rule_ids/0",
+          "schema_pointer": "/properties/rule_ids/items/enum"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.ContainmentDiagnostic:FALLBACK_FAILURE:missing-clock",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/88/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ContainmentDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/containment_time/monotonic_nanoseconds",
+          "schema_pointer": "/properties/containment_time/allOf/1/properties/monotonic_nanoseconds/type"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.ContainmentDiagnostic:PROPAGATION_RISK:wrong-rule",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/89/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ContainmentDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/1/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/rule_ids/0",
+          "schema_pointer": "/properties/rule_ids/items/enum"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.ContainmentDiagnostic:PROPAGATION_RISK:missing-clock",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/90/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ContainmentDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/containment_time/monotonic_nanoseconds",
+          "schema_pointer": "/properties/containment_time/allOf/1/properties/monotonic_nanoseconds/type"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.ContainmentDiagnostic:OPERATOR_REQUEST:wrong-rule",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/91/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ContainmentDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/2/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/rule_ids/0",
+          "schema_pointer": "/properties/rule_ids/items/enum"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.ContainmentDiagnostic:OPERATOR_REQUEST:missing-clock",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/92/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ContainmentDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/containment_time/monotonic_nanoseconds",
+          "schema_pointer": "/properties/containment_time/allOf/1/properties/monotonic_nanoseconds/type"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.ContainmentDiagnostic:RECOVERY_VALIDATION_FAILURE:wrong-rule",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/93/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ContainmentDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/3/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/rule_ids/0",
+          "schema_pointer": "/properties/rule_ids/items/enum"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.ContainmentDiagnostic:RECOVERY_VALIDATION_FAILURE:missing-clock",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/94/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/ContainmentDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/containment_time/monotonic_nanoseconds",
+          "schema_pointer": "/properties/containment_time/allOf/1/properties/monotonic_nanoseconds/type"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SafeHaltDiagnostic:CONTAINMENT_BREACH:wrong-rule",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/95/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/0/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/rule_ids/0",
+          "schema_pointer": "/properties/rule_ids/items/enum"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SafeHaltDiagnostic:CONTAINMENT_BREACH:missing-clock",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/96/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/halt_time/monotonic_nanoseconds",
+          "schema_pointer": "/properties/halt_time/allOf/1/properties/monotonic_nanoseconds/type"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SafeHaltDiagnostic:ESCALATION_FROM_FAILED:wrong-rule",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/97/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/1/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/rule_ids/0",
+          "schema_pointer": "/properties/rule_ids/items/enum"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SafeHaltDiagnostic:ESCALATION_FROM_FAILED:missing-clock",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/98/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/halt_time/monotonic_nanoseconds",
+          "schema_pointer": "/properties/halt_time/allOf/1/properties/monotonic_nanoseconds/type"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SafeHaltDiagnostic:OPERATOR_HALT_REQUEST:wrong-rule",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/99/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/2/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/rule_ids/0",
+          "schema_pointer": "/properties/rule_ids/items/enum"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SafeHaltDiagnostic:OPERATOR_HALT_REQUEST:missing-clock",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/100/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/halt_time/monotonic_nanoseconds",
+          "schema_pointer": "/properties/halt_time/allOf/1/properties/monotonic_nanoseconds/type"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SafeHaltDiagnostic:POLICY_HALT_REQUEST:wrong-rule",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/101/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/3/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/rule_ids/0",
+          "schema_pointer": "/properties/rule_ids/items/enum"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SafeHaltDiagnostic:POLICY_HALT_REQUEST:missing-clock",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/102/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/halt_time/monotonic_nanoseconds",
+          "schema_pointer": "/properties/halt_time/allOf/1/properties/monotonic_nanoseconds/type"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SafeHaltDiagnostic:UNRESOLVABLE_BLOCKED_RECOVERY:wrong-rule",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/103/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/rule_ids",
+          "schema_pointer": "/allOf/4/then/properties/rule_ids/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/rule_ids/0",
+          "schema_pointer": "/properties/rule_ids/items/enum"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SafeHaltDiagnostic:UNRESOLVABLE_BLOCKED_RECOVERY:missing-clock",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/104/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SafeHaltDiagnostic",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/halt_time/monotonic_nanoseconds",
+          "schema_pointer": "/properties/halt_time/allOf/1/properties/monotonic_nanoseconds/type"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionStageGrant:wire-forgery",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/105/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionStageGrant",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_NOT",
+          "instance_pointer": "",
+          "schema_pointer": "/not"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionExecutionGate:wire-forgery",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/106/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionExecutionGate",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_NOT",
+          "instance_pointer": "",
+          "schema_pointer": "/not"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionRetentionHandle:wire-forgery",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/107/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionRetentionHandle",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_NOT",
+          "instance_pointer": "",
+          "schema_pointer": "/not"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionContractError:wire-forgery",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/108/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionContractError",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_NOT",
+          "instance_pointer": "",
+          "schema_pointer": "/not"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Resolution:route-target",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/109/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionResolutionRequest",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_ENUM",
+          "instance_pointer": "/route",
+          "schema_pointer": "/allOf/0/else/properties/route/enum"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Capture:mixed-budget",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/110/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionLifecycleCaptureAdmission",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/reserved_bytes",
+          "schema_pointer": "/allOf/0/then/anyOf/1/properties/reserved_bytes/const"
+        },
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/reserved_supporting_bytes",
+          "schema_pointer": "/allOf/0/then/anyOf/0/properties/reserved_supporting_bytes/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Denied:terminal-body-parsed",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/111/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionDeniedAttempt",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/request_reference",
+          "schema_pointer": "/allOf/0/then/properties/request_reference/type"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Retention:false-confirmed-complete",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/112/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionRetentionReceipt",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/coverage",
+          "schema_pointer": "/allOf/0/then/properties/coverage/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Completion:false-complete",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/113/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionLifecycleCompletion",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/failure_code",
+          "schema_pointer": "/allOf/0/then/properties/failure_code/type"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.Lifecycle:stage-regression",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/114/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/LifecycleRecord",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/envelope/stage",
+          "schema_pointer": "/allOf/1/then/properties/envelope/properties/stage/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionCauseObservation:propagation-boundary:wrong-trigger",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/115/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionCauseObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONST",
+          "instance_pointer": "/trigger",
+          "schema_pointer": "/allOf/2/then/properties/trigger/const"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionCauseObservation:propagation-boundary:missing-boundary",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/116/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionCauseObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONTAINS",
+          "instance_pointer": "/boundary_observations",
+          "schema_pointer": "/allOf/2/then/properties/boundary_observations/contains"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionCauseObservation:propagation-boundary:unsatisfied-boundary",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/117/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionCauseObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONTAINS",
+          "instance_pointer": "/boundary_observations",
+          "schema_pointer": "/allOf/2/then/properties/boundary_observations/contains"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionCauseObservation:propagation-boundary:wrong-condition",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/118/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionCauseObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_CONTAINS",
+          "instance_pointer": "/boundary_observations",
+          "schema_pointer": "/allOf/2/then/properties/boundary_observations/contains"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionCauseObservation:propagation-boundary:invented-authority",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/119/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionCauseObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/authority_observation",
+          "schema_pointer": "/allOf/2/then/properties/authority_observation/type"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionCauseObservation:propagation-boundary:invented-n2",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/120/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionCauseObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/recovery_operation_reference",
+          "schema_pointer": "/allOf/2/then/properties/recovery_operation_reference/type"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.reject.SessionCauseObservation:authority-request-without-authority",
+      "path": "examples/core_session_lifecycle/session_rejections.example.json",
+      "instance_pointer": "/cases/121/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json#/$defs/SessionCauseObservation",
+      "category": "reject",
+      "expected_result": "reject",
+      "expected_errors": [
+        {
+          "error_id": "JSON_SCHEMA_TYPE",
+          "instance_pointer": "/authority_observation",
+          "schema_pointer": "/allOf/3/then/properties/authority_observation/type"
+        }
+      ],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020"
+      ],
+      "description": "Independently authored wire control; no actual session effect or capture acknowledgment is asserted."
+    },
+    {
+      "fixture_id": "m3.session.execute-return.SessionOperationResult",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/27/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0044"
+      ],
+      "description": "Complete closed execute-return wire contract; runtime effects remain independently checked."
+    },
+    {
+      "fixture_id": "m3.session.execute-return.SessionReplayObservation",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/33/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0044"
+      ],
+      "description": "Complete closed execute-return wire contract; runtime effects remain independently checked."
+    },
+    {
+      "fixture_id": "m3.session.execute-return.SessionRawBusinessFailure",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/40/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0044"
+      ],
+      "description": "Complete closed execute-return wire contract; runtime effects remain independently checked."
+    },
+    {
+      "fixture_id": "m3.session.execute-return.SessionOperationResult:complete-child",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/41/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0044"
+      ],
+      "description": "Complete closed execute-return wire contract; runtime effects remain independently checked."
+    },
+    {
+      "fixture_id": "m3.session.execute-return.SessionOperationResult:partial-child",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/42/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0044"
+      ],
+      "description": "Complete closed execute-return wire contract; runtime effects remain independently checked."
+    },
+    {
+      "fixture_id": "m3.session.execute-return.SessionOperationResult:zero-emission-child",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/43/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0044"
+      ],
+      "description": "Complete closed execute-return wire contract; runtime effects remain independently checked."
+    },
+    {
+      "fixture_id": "m3.session.execute-return.SessionOperationResult:unavailable-fresh-facts",
+      "path": "examples/core_session_lifecycle/session_cases.example.json",
+      "instance_pointer": "/cases/44/value",
+      "schema_id": "https://ywe.local/schemas/m3_session_lifecycle_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0044"
+      ],
+      "description": "Complete closed execute-return wire contract; runtime effects remain independently checked."
+    },
+    {
+      "fixture_id": "m3.session.diagnostic-bundle.0",
+      "path": "examples/core_session_diagnostics/session_diagnostic_bundle_cases.example.json",
+      "instance_pointer": "/cases/0/snapshot",
+      "schema_id": "https://ywe.local/schemas/m3_reference_diagnostic_bundle_schema.json",
+      "category": "recovery",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0042"
+      ],
+      "description": "Actual portable reference owners with explicitly synthetic clock/store/revision controls; no native qualification is asserted."
+    },
+    {
+      "fixture_id": "m3.session.diagnostic-bundle.1",
+      "path": "examples/core_session_diagnostics/session_diagnostic_bundle_cases.example.json",
+      "instance_pointer": "/cases/1/snapshot",
+      "schema_id": "https://ywe.local/schemas/m3_reference_diagnostic_bundle_schema.json",
+      "category": "recovery",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0042"
+      ],
+      "description": "Actual portable reference owners with explicitly synthetic clock/store/revision controls; no native qualification is asserted."
+    },
+    {
+      "fixture_id": "m3.session.diagnostic-bundle.2",
+      "path": "examples/core_session_diagnostics/session_diagnostic_bundle_cases.example.json",
+      "instance_pointer": "/cases/2/snapshot",
+      "schema_id": "https://ywe.local/schemas/m3_reference_diagnostic_bundle_schema.json",
+      "category": "recovery",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0020",
+        "YWE-REQ-0042"
+      ],
+      "description": "Actual portable reference owners with explicitly synthetic clock/store/revision controls; no native qualification is asserted."
     }
   ]
 }

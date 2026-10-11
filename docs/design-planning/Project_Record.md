@@ -1,13 +1,13 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-43
+**Revision:** planning-44
 **Date:** October 11, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-42 at `2fb19137a0fcf0a012aff4e02a4589331c5ffa9e`; full history remains in Git.
+**Supersedes:** planning-43 at `b283c4007fbd3d16c07e2a63f7e4f236ca309ecc`; full history remains in Git.
 
-**Current approval and continuation:** Sections 16, 16.1 and 16.2 record published N3 contract adoption, the closed fresh-origin and direct propagation-boundary corrections and independently replayed representation controls. Sections 14 and 15 preserve source and tooling checkpoints. Section 13 preserves the October 9 autonomous N3 direction; sections 11 and 12 preserve the separately scoped external package outcome. N3 implementation is active; this revision does not accept runtime behavior or M3.
+**Current approval and continuation:** Sections 16–16.3 record adopted N3 contracts, source corrections, published tooling and the implemented reference candidate with scoped runtime evidence. Section 13 preserves autonomous execution/publication authority; earlier source and external-package receipts remain historical. Full committed-source runtime acceptance and all M3 exit criteria remain outstanding.
 
 ## 1. Current working brief
 
@@ -21,7 +21,7 @@
 | Next milestone | M4 remains planned; its dependency is M3 acceptance |
 | M2 acceptance | Complete; immutable evidence records all six exit criteria and eight deliverables |
 | Source closure | Original clean full execution and successful exact-revision Ubuntu/Windows CI verified October 11 (section 14); section 12 external review remains representation-matched only, `acceptance=false`, `provenance_review_required=true`; neither accepts N3 or M3 |
-| Wiki | Owner publication `2353a5d` verified from source `2fb1913`; all 47 remote pages match reviewed bytes (section 16.2) |
+| Wiki | Owner publication `d3688f0` verified from source `b283c40`; all 47 remote pages match reviewed bytes (section 16.3) |
 | Publication | Unreleased; no GitHub Release objects exist as verified September 20, 2026 |
 | Workflow | Autonomous execution and owner-account publication authorized by package `YWE-M3-N3-AUTONOMOUS-001` r1 (section 13); no operator approval gates, operator reviews, or mandatory separate reviewer-service sign-off; technical checks and source constraints retained |
 
@@ -1509,3 +1509,106 @@ Synthetic clock/store/provider responses remain explicitly scoped controls.
 The final contract overlay also passes 28 RoadmapValidationTests,
 PlayerRuntimeReferencePolicyTests and platform-boundary tests in 74.561 seconds,
 including both new proof-path approval controls and all existing assertions.
+
+### 16.3. Reference lifecycle candidate and current verification
+
+Contract/approval correction `b283c4007fbd3d16c07e2a63f7e4f236ca309ecc`
+is owner-published with exact Git/API/README readback. Its clean twelve-check
+selection passes in 230.922 seconds with zero failures/advisories and an unchanged
+checkout; all eleven focused local approval/platform refusal tests pass in
+0.032 seconds. Full CI 38172321482 remains in progress at the latest observation.
+The preceding 2fb1913 CI 38170531295 completed with failure on both systems:
+34 checks pass, and validation_unit_tests/player_runtime_state fail for the same
+five proof files in the wrong Phase 10 path role. This is observed in each
+actual failed job log, rather than inferred from the earlier cdbcb68 failure.
+
+Wiki `d3688f09740b3e895f8a1d5d2735edc300786d4f` is published from b283c40.
+Separate prepare/verify and owner-authenticated nonforce publication preceded
+fresh remote readback. All 47 Git page blobs match the reviewed and published
+clones; the generator verifies 32 pages with zero changes and preserves 15
+manual pages. Home SHA256 is
+`5e66daee9cedfb2135e3a4b8c0ed031b0bf022a0e27eff7da73620d19370ff35`;
+roadmap SHA256 is
+`a75d593fc7625b8ad81a5ab80b4bbbc7966ce48f82687005a4df7dab27e0ead4`.
+
+The implementation candidate owns the adopted 38 types and 35 ports, with an
+optional privately composed lifecycle owner on RecoveryEngine. Legacy seven
+positional collaborators and ungated call shapes remain exercised. Actual N3
+source/profile/policy admission, current full snapshot/assessment association,
+fresh child capture, successful N2 publication, containment, direct authorized
+resolution, mandatory halt, revocation, terminal denial and immutable history
+have source-owned runtime controls. StateModel's resolution target proof is pure.
+Diagnostics keeps all earlier supporting kinds and adds the separate adopted
+session projection inventory; fixed caps, uncertain storage and separate late
+audit remain explicit. The actual host checks normalized policy bytes against
+the containing Git revision before constructing current-source storage.
+
+The candidate registers 219 schemas and 930 fixture bindings, including 382
+intended rejections and three reproduced runtime bundles. The earlier 750 fixture
+rows and their complete reject expectations remain unchanged. Exact reference
+source approvals are added in both owning guard configurations, with neighboring
+paths and missing approval refused. The live twelve selected governance checks
+pass with zero failures/advisories. This report has dirty_before/dirty_after and
+is not committed-source acceptance.
+
+Root's sixteen live engine tests pass in 2.546 seconds. The command is
+`python -B -m unittest tests.test_m3_session_recovery -v` under Python 3.12.10.
+It includes actual Windows host assembly, current-source capture, containment,
+resolution, halt, denial, closed bundle-schema validation and exact protected
+JSON/Markdown export parity. The native store and clock are real; runtime code
+is the dirty candidate. Other portable controls declare their synthetic
+clock/store/provider inputs and configured revision. Physical crash/power-loss
+behavior and platform product qualification are not claimed.
+
+Review found an admitted N2 scope could be abandoned when its actual receipt had
+a wrong operation/origin/source reference. The corrected engine proves issued
+scope identity independently of admission success, refuses work, and finishes
+that actual scope once; wrong reservation sizes also remain refused. Collector
+review found resolution control events using OBSERVED instead of the adopted
+status mapping, and purge indexing only confirmed support despite pinned UNKNOWN
+support. Focused controls reproduce and correct both paths. Review also reproduced
+reentrant refused halt observation clearing an outer charging scope: a physical
+support write then escaped the reservation, and ordinary projection continued.
+The five new finalizers now restore their entry context; supporting IO captures
+its exact charging scope, records/charges actual late writes and rechecks the
+gate. The control preserves the scope, charges the actual 415 bytes and performs
+no following ordinary authority/request write after cutover.
+
+The final combined command
+`python -B -m unittest tests.test_m3_session_lifecycle tests.test_m3_session_values tests.test_m3_session_schemas tests.test_m3_session_recovery tests.test_m3_session_diagnostics -v`
+passes all 125 tests in 36.680 seconds. The final Diagnostics area, including
+existing collector/schema regressions, passes 84 tests in 32.586 seconds. A new
+Event-controlled concurrent test covers both fresh-origin and admitted-N2 post
+provider waits: authorized halt returns from another thread while recovery is
+still blocked; resumed recovery performs no following provider/value/assessment
+work or publication, finishes its admitted scope once and preserves the actual
+frozen index, including truthful absence when the N2 reservation refuses halt
+capture. Cross-review verified the final six Diagnostics source/fixture hashes
+and logs, all 26 safe fields/specs, twenty quotas and unchanged earlier schema
+maxima. These are live candidate receipts. Full clean execution remains required.
+
+The sixteen adopted verification groups route to these source-owned controls;
+the routing itself is not an acceptance judgment:
+
+| Group | Runtime/test owner |
+|---|---|
+| N3-V01 | SessionLifecycleTests full source/policy/pin mutations; SessionValueTests revalidation; SessionHostPolicyTests actual committed policy |
+| N3-V02 | SessionLifecycleTests initial FAILED, failed allocated admission and mandatory halt despite clock failure |
+| N3-V03 | SessionLifecycleTests full snapshot changes, same-state cycle/foreign packet and copied facade |
+| N3-V04 | FreshOriginIntegrationTests provider/context/binding/unavailable and actual partial child cases |
+| N3-V05 | SessionLifecycleTests finalization exclusivity, stale/duplicate/foreign/replay and mode gates |
+| N3-V06 | SessionLifecycleTests actual normalization/correction/fallback and fresh post validation; RecoveryCancellationIntegrationTests |
+| N3-V07 | SessionLifecycleTests all containment causes, direct risk and actual postpair/capture failure; SessionCollectorTests legal parents |
+| N3-V08 | ResolutionTargetTests all 512 states; SessionLifecycleTests authorized resolution, invalid proof/authority/context and new root |
+| N3-V09 | SessionLifecycleTests five halt triggers and policy/HALT resolution without invented breach |
+| N3-V10 | SessionLifecycleTests final uint64 generation, failed clock/admission and raw overflow Pending truth |
+| N3-V11 | RecoveryCancellationIntegrationTests four provider cutovers; SessionCollectorTests clock/store cutover and nonblocking collector refusal; SessionLifecycleTests concurrent provider halt |
+| N3-V12 | RecoveryCancellationIntegrationTests real issued-scope cleanup; SessionCollectorTests child/late cleanup and identity refusal |
+| N3-V13 | SessionLifecycleTests first finish/observer failure; SessionCollectorTests immutable sidecars/index and bounded final audit |
+| N3-V14 | SessionLifecycleTests hostile hooks, terminal-before-replay, sixteen denials and overflow; SessionCollectorTests separate denial roots |
+| N3-V15 | SessionRawGuardTests and SessionValueTests raw cap/overflow; SessionSchemaTests closed types and reject cases; SessionCollectorTests uncertain purge/native pair/all support kinds |
+| N3-V16 | Canonical unfiltered clean repository execution pending; README, catalogs, source inventory and exact path approvals updated with the candidate |
+
+No N3 acceptance, M3 exit criterion or platform authorization is advanced by this
+candidate record. After exact committed-source verification and publication,
+continue remaining Diagnostics/generation/core conformance and then M4–M10.

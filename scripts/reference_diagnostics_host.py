@@ -517,6 +517,8 @@ def assemble_reference_diagnostics(root: Path, *, release=False, parent=Path("D:
         raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
     normalized = lambda p: p.read_text(encoding="utf-8-sig").replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
     revision, source_snapshots = _verified_canonical_source_snapshots(root)
+    if len(source_snapshots) == 2:
+        _verified_session_policy(root, revision)
     policy = root / "docs/architecture/m3_recovery_safety_policy.md"
     if hashlib.sha256(normalized(policy)).hexdigest() != dv.SafeRecoverySafetyPolicy.policy_sha256:
         raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
@@ -539,3 +541,19 @@ def assemble_reference_diagnostics(root: Path, *, release=False, parent=Path("D:
     except BaseException:
         store.close()
         raise
+
+
+def _verified_session_policy(root, revision):
+    """Bind actual normalized N3 policy bytes to the containing Git revision."""
+    from core.ash_pattern_engine import session_values
+    fields = dict(session_values.SESSION_POLICY_BINDING_FIELDS)
+    relative = fields["source_path"]
+    try:
+        actual = ash_sync.normalized_utf8_data((root / relative).read_bytes(), relative)
+        committed = subprocess.run(["git", "show", revision + ":" + relative], cwd=root,
+            check=True, capture_output=True).stdout
+        committed = ash_sync.normalized_utf8_data(committed, relative)
+        if actual != committed or hashlib.sha256(actual).hexdigest() != fields["source_sha256"]:
+            raise ValueError("session policy differs from adopted committed bytes")
+    except (OSError, UnicodeError, ValueError, subprocess.CalledProcessError):
+        raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE") from None

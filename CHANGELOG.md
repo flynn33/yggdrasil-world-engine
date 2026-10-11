@@ -7,6 +7,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ## Unreleased
 
 ### Added
+- Implement the adopted N3 reference session lifecycle, closed values/schema, controlled state and mode publication, authorized resolution, terminal cancellation and bounded immutable diagnostic sidecars. Full committed-source acceptance remains pending.
 - Adopt the exact direct propagation-risk boundary cause under ADR-0035 before dependent lifecycle code; independent replay preserves all existing capacity bounds.
 - Correct the adopted N3 fresh-origin failure unions and inline unavailable-facts provenance under ADR-0034 before dependent code; replay the increased bounds within unchanged command reservations and collector caps.
 - Adopt the complete N3 lifecycle contract, independent policy, exact 38-type/35-port inventory and portable capacity/serialization controls under YWE-REQ-0044 and ADR-0033 before implementation. Runtime acceptance remains outstanding.
@@ -18,6 +19,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 - Add a content-addressed ASH dependency identity and deterministic source-to-mirror synchronization check.
 
 ### Changed
+- Register 180 session and runtime Diagnostic fixture bindings, preserving the earlier 750 bindings and their rejection expectations; retain exact reference-source approvals and refusal tests.
 - Record actual owner wiki publication and all 47 remotely verified page bytes, successful predecessor CI, and the current N3 implementation step in the README roadmap and Project Record.
 - Correct the PR template's relative license link and document the actual manual wiki workflow, current roadmap navigation and deferred platform boundary.
 - Reconcile the owner's newer Raven Forge dual license and governance guard, and update the visible October 11 roadmap checkpoint with the verified original source compatibility execution and successful Ubuntu/Windows CI. Preserve the external package's representation-only review and keep N3/M3 acceptance outstanding.
