@@ -9,7 +9,7 @@
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0045",
+    "next_available_id": "YWE-REQ-0049",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -1024,7 +1024,7 @@
       ],
       "aliases": [],
       "supersedes": [],
-      "status": "active",
+      "status": "superseded",
       "introduced_milestone": "M3",
       "owner_role": "Core semantics maintainers",
       "decision_refs": [
@@ -1042,7 +1042,8 @@
         "docs/architecture/m3_normalization_contract.md",
         "docs/architecture/m3_recovery_contract.md",
         "docs/architecture/m3_reference_diagnostics_contract.md"
-      ]
+      ],
+      "superseded_by": "YWE-REQ-0045"
     },
     {
       "requirement_id": "YWE-REQ-0044",
@@ -1091,13 +1092,144 @@
         "examples/core_session_lifecycle/session_rejections.example.json",
         "examples/core_session_diagnostics/session_diagnostic_bundle_cases.example.json"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0045",
+      "title": "Complete three-vector module source compatibility and truthful historical provenance",
+      "normative_statement": "Core source bindings MUST recognize exactly the three complete reviewed LEGACY_C78, N3_LIFECYCLE and M3_MODULES vectors with their paired Recovery and Diagnostics pins. New producers MUST additionally bind the exact adopted producer pins. Snapshot mapping and host verification MUST preserve original two-source outcomes and select current/historical provenance by actual baseline presence. Original N3 source/policy eligibility, state mathematics, narrow rule subsets and historical evidence MUST remain unchanged. Source recognition MUST NOT confer producer execution, live N3 effects or M3 acceptance.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "docs/architecture/m3_module_source_compatibility_contract.md",
+        "docs/design-planning/m3/module-diagnostics/SOURCE_VECTOR_INVENTORY.json"
+      ],
+      "aliases": [],
+      "supersedes": [
+        "YWE-REQ-0043"
+      ],
+      "status": "active",
+      "introduced_milestone": "M3",
+      "owner_role": "Core semantics maintainers",
+      "decision_refs": [
+        "ADR-0036"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_module_source_compatibility_contract.md",
+        "docs/design-planning/m3/module-diagnostics/SOURCE_VECTOR_INVENTORY.json",
+        "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
+        "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
+        "data/governance/ash_dependency_identity.json",
+        "docs/architecture/m3_source_compatibility_contract.md"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0046",
+      "title": "Strict realm identity and transitions with shared pure diagnosis validation",
+      "normative_statement": "Strict RealmEncoder and TransitionRegistry MUST use shared StateModel-owned, class-dispatched pure validation of complete source/profile/diagnosis evidence. They MUST require a valid parsed origin, preserve lossless full-state identity, evaluate declared applicability before full-vector XOR, and retain actual target validity without hidden normalization or fabricated assessment/TEN. Resolution MUST retain false availability. Exact immutable catalog, owner issuance and aggregate raw bounds MUST be revalidated; resulting candidates MUST NOT publish live state or redefine legacy algebraic helpers.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "docs/architecture/m3_realm_transition_contract.md",
+        "docs/design-planning/m3/realm-transition/REALM_TRANSITION_API_INVENTORY.json"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M3",
+      "owner_role": "Core semantics maintainers",
+      "decision_refs": [
+        "ADR-0037"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_realm_transition_contract.md",
+        "docs/design-planning/m3/realm-transition/REALM_TRANSITION_API_INVENTORY.json",
+        "docs/design-planning/m3/realm-transition/REALM_TRANSITION_STANDARD_POLICY.json",
+        "docs/design-planning/m3/realm-transition/REALM_TRANSITION_RESTRICTED_TEST_POLICY.json",
+        "docs/design-planning/m3/realm-transition/CODEWORD_ORBIT_TEST_PROFILE.json",
+        "docs/architecture/m3_module_source_compatibility_contract.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/realm-encoder-contract.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/transition-registry-contract.md",
+        "core/ash_pattern_engine/canonical/core/realm-identity.pseudo.md",
+        "core/ash_pattern_engine/canonical/algorithms/transition-system.pseudo.md",
+        "core/ash_pattern_engine/canonical/algorithms/codeword-transformation-semantics.pseudo.md"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0047",
+      "title": "Deterministic final-frontier topology and explained five-axiom evaluation",
+      "normative_statement": "Bounded topology MUST return the complete ordered ternary final frontier with explicit depth and reconstructible parent lineage from a verified normalized origin. Five-axiom evaluation MUST use explicitly declared units, scale and provenance, explain every pass/failure without short-circuiting and distinguish factual A5 from aggregate conjunction. Pure class-owned source/profile validation, exact producer issuance, complete wire/raw guards and actual origin subject/root with cumulative severity MUST hold. Protected persistence MUST use aliases and compiled templates; declared facts MUST NOT imply measurement authenticity, capture acknowledgment or planner/emitter conformance.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "docs/architecture/m3_topology_axiom_reference_contract.md#9-required-independent-verification",
+        "docs/design-planning/m3/topology-axiom/BUSINESS_API_INVENTORY.json#/verification_ids"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M3",
+      "owner_role": "Core semantics maintainers",
+      "decision_refs": [
+        "ADR-0038"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_topology_axiom_reference_contract.md",
+        "docs/architecture/m3_topology_axiom_reference_policy.md",
+        "docs/design-planning/m3/topology-axiom/BUSINESS_API_INVENTORY.json",
+        "docs/architecture/m3_realm_transition_contract.md",
+        "docs/architecture/m3_module_source_compatibility_contract.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/topology-generator-contract.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/axiom-evaluator-contract.md",
+        "core/ash_pattern_engine/canonical/algorithms/topology-expansion.pseudo.md",
+        "core/ash_pattern_engine/canonical/algorithms/axiom-evaluation.pseudo.md"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0048",
+      "title": "Source-bound six-producer diagnostics with bounded truthful capture",
+      "normative_statement": "Reference Diagnostics MUST validate the exact registered producer and complete current bindings and authenticate the first-completed same-collector origin before module admission. Pure captures MUST additionally authenticate class-validated issued results. Whole reservation and safe projection MUST precede acknowledgment; pure per-action production MUST remain separate from ordered persistence. Every admitted scope MUST finish once and expose actual first completion through distinct final observation without rewriting pure results or tentative nodes. Refusal, prefix, interrupted and persistence-failure evidence MUST retain actual truth, protected aliases and combined raw bounds. Existing collector limits MUST remain unchanged; producer kind recognition MUST NOT admit missing planner/emitter business policies.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "docs/architecture/m3_module_diagnostics_capture_contract.md",
+        "docs/design-planning/m3/module-diagnostics/CAPTURE_API_INVENTORY.json",
+        "docs/design-planning/m3/module-diagnostics/PRODUCER_AND_SAFE_GRAPH_INVENTORY.json",
+        "docs/design-planning/m3/module-diagnostics/BOUND_REPORT.json",
+        "docs/design-planning/m3/module-diagnostics/SAFE_MAXIMUM_LEAVES.json"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M3",
+      "owner_role": "Core semantics maintainers",
+      "decision_refs": [
+        "ADR-0039"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_module_diagnostics_capture_contract.md",
+        "docs/design-planning/m3/module-diagnostics/CAPTURE_API_INVENTORY.json",
+        "docs/design-planning/m3/module-diagnostics/PRODUCER_AND_SAFE_GRAPH_INVENTORY.json",
+        "docs/design-planning/m3/module-diagnostics/BOUND_REPORT.json",
+        "docs/design-planning/m3/module-diagnostics/SAFE_MAXIMUM_LEAVES.json",
+        "docs/design-planning/m3/module-diagnostics/SOURCE_VECTOR_INVENTORY.json",
+        "docs/architecture/m3_module_source_compatibility_contract.md",
+        "docs/architecture/m3_reference_diagnostics_contract.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
+        "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
+        "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 44,
-    "active": 44,
+    "total_requirements": 48,
+    "active": 47,
     "proposed": 0,
-    "terminal": 0,
-    "next_identifier": "YWE-REQ-0045"
+    "terminal": 1,
+    "next_identifier": "YWE-REQ-0049"
   }
 }

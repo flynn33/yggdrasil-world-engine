@@ -1,0 +1,203 @@
+{
+  "status": "ADOPTED_CONTRACT_NOT_RUNTIME_ACCEPTANCE",
+  "operation_context_owner": "exact module-specific owned binding/current origin/prepared result or plan; no arbitrary dict admitted",
+  "types": {
+    "ModuleProducerRegistrationReceipt": {
+      "fields": [
+        "producer",
+        "status",
+        "failure_code"
+      ],
+      "producer": "closed producer enum|null; null for unsupported/foreign class without a trusted recognized kind; never arbitrary owner/reference text",
+      "statuses": [
+        "REGISTERED",
+        "REJECTED"
+      ],
+      "failure_codes": [
+        "MODULE_PRODUCER_FOREIGN",
+        "MODULE_PRODUCER_DUPLICATE",
+        "MODULE_PRODUCER_BINDING_MISMATCH",
+        "MODULE_PRODUCER_UNSUPPORTED"
+      ],
+      "effects": "API_ONLY composition acknowledgment; no aliases, clock, storage, scope or canonical event"
+    },
+    "ModuleCaptureContext": {
+      "fields": [
+        "operation_reference",
+        "producer",
+        "source_binding",
+        "origin_diagnosis",
+        "prepared_value",
+        "dependency_results"
+      ],
+      "reference_max": 256,
+      "dependency_max": 6,
+      "origin_diagnosis": "exact current StateDiagnosis with actual first matching samecollector completion and confirmed DETECTION; no reconstructed failurepacket",
+      "prepared_value": "actual pure module result OR prepared complete emitter plan/target; closed perproducer contracts"
+    },
+    "ModuleCaptureAdmission": {
+      "fields": [
+        "operation_reference",
+        "status",
+        "scope",
+        "failure_code"
+      ],
+      "statuses": [
+        "ADMITTED",
+        "REJECTED",
+        "NOT_CONFIRMED"
+      ],
+      "scope": "API_ONLY actual issued ModuleCaptureScope|null; no serialized arbitrary owner"
+    },
+    "ModuleCaptureScope": {
+      "kind": "API_ONLY exact collector-issued self identity, producer/context/gate, fixed reservation and required record sequence; copied/foreign denied"
+    },
+    "ModuleCaptureReceipt": {
+      "fields": [
+        "operation_reference",
+        "status",
+        "result",
+        "confirmed_records",
+        "attempted_record",
+        "completion",
+        "final_observation",
+        "failure_code"
+      ],
+      "statuses": [
+        "CONFIRMED",
+        "REJECTED",
+        "NOT_CONFIRMED"
+      ],
+      "result": "actual immutable owned pure success/failure or prepared-effectful actual result; API-only semantics preserved on capture refusal",
+      "confirmed_records": "tuple of actual acknowledged diagnostic references in source order, maximum65",
+      "attempted_record": "exact actual owned record attempted without confirmation|null",
+      "completion": "actual first DiagnosticsCompletionReceipt|null",
+      "final_observation": "actual ModuleFinalObservationReceipt|null, added only to returned wrapper after observer; no rewriting firstfinish or embedding future ownreceipt on stored sidecar",
+      "record_max": 65
+    },
+    "ModuleFinalObservationReceipt": {
+      "fields": [
+        "operation_reference",
+        "status",
+        "supporting_reference",
+        "coverage",
+        "failure_code"
+      ],
+      "statuses": [
+        "CONFIRMED",
+        "REJECTED",
+        "NOT_CONFIRMED"
+      ],
+      "coverage": [
+        "COMPLETE_SPECIFIED_SAFE_GRAPH",
+        "PARTIAL",
+        "STORAGE_UNCERTAIN"
+      ]
+    },
+    "ModuleReturnAuditObservation": {
+      "fields": [
+        "operation_reference",
+        "status",
+        "missing_kind",
+        "meta_sequence",
+        "coverage",
+        "failure_code"
+      ],
+      "statuses": [
+        "COMPLETE",
+        "MISSING",
+        "ALREADY_OBSERVED",
+        "NOT_CONFIRMED"
+      ],
+      "missing_kind": [
+        "NONE",
+        "REQUIRED_SEMANTIC_RECORD",
+        "REQUIRED_CAPTURE_STEP",
+        "FIRST_COMPLETION"
+      ],
+      "meta_sequence": "uint64|null; no canonicalTEN parent/root asserted"
+    }
+  },
+  "ports": [
+    {
+      "owner": "Diagnostics",
+      "name": "register_module_producer",
+      "signature": "(exact_owned_producer) -> ModuleProducerRegistrationReceipt",
+      "before_io": "once-only fixed six-slot closed producer registry; exact supported class and self-issued owner identity; trusted closed immutable fullcurrent source/profile/policy bindings; no user callbacks, clock/storage or alias effects; duplicate/foreign/mutated owners refuse"
+    },
+    {
+      "owner": "Diagnostics",
+      "name": "module_capture",
+      "signature": "(producer, context, *, execution_gate=None) -> ModuleCaptureAdmission",
+      "before_io": "exact configured producer + exact module binding/actual origin/dependencies; then whole reservation"
+    },
+    {
+      "owner": "ModuleCaptureScope",
+      "name": "append",
+      "signature": "(exact_owned_record) -> existing CaptureReceipt",
+      "guards": "required phase/payload/rules/context/chain/source/profile, gate pre/post, no arbitrary hooks"
+    },
+    {
+      "owner": "ModuleCaptureScope",
+      "name": "finish",
+      "signature": "(exact_owned_result) -> existing DiagnosticsCompletionReceipt",
+      "guards": "once; original real scope retained after unconfirmed admission; actual result/prefix without false completion"
+    },
+    {
+      "owner": "ModuleCaptureScope",
+      "name": "observe_final",
+      "signature": "(exact_owned_result, actual_first_finish_response) -> ModuleFinalObservationReceipt",
+      "guards": "once distinct final sidecar, actual first response matches scope identity/op; failedlater storage marks health/partial without rewriting result"
+    },
+    {
+      "owner": "Diagnostics",
+      "name": "audit_module_return",
+      "signature": "(actual_issued_scope, *, boundary: RETURN|SHUTDOWN) -> ModuleReturnAuditObservation",
+      "guards": "closed expectedwork onceflag; exactscope beforeIO; independent meta bounded16pool; active snapshot notclosedgap"
+    }
+  ],
+  "producer_class_owned_api_only_seams": [
+    {
+      "name": "configuration",
+      "signature": "(exact_self) -> exact immutable producer-specific full source/profile/policy/contract-pin binding",
+      "dispatch": "supported exact producer class method, never instance override; before collector IO; trusted closed owned value revalidation with no caller hooks"
+    },
+    {
+      "name": "validate_owned_result",
+      "signature": "(exact_self, exact_owned_result) -> bool",
+      "dispatch": "supported exact producer class method, never instance override; before collector IO; owner alone checks its construction cookie, exact issuer/self-identity, complete current bindings and semantic record coherence; rejects copied/foreign/corrupt result; no unbounded issuance registry"
+    }
+  ],
+  "configuration_return_branches": {
+    "REALM_ENCODER": "exact RealmTransitionBinding",
+    "TRANSITION_REGISTRY": "exact RealmTransitionBinding",
+    "TOPOLOGY_GENERATOR": "exact immutable tuple(TopologyAxiomSourceBinding, tagged ProfileBinding, TopologyAxiomPolicyBinding)",
+    "AXIOM_EVALUATOR": "exact immutable tuple(TopologyAxiomSourceBinding, tagged ProfileBinding, TopologyAxiomPolicyBinding)",
+    "GENERATION_PLANNER": "NOT_ACCEPTED until exact closed business configuration adopted",
+    "ARTIFACT_EMITTER": "NOT_ACCEPTED until exact closed business configuration adopted"
+  },
+  "planned_implementation_paths": [
+    "core/ash_pattern_engine/diagnostics.py",
+    "core/ash_pattern_engine/diagnostics_values.py",
+    "core/ash_pattern_engine/diagnostic_module_values.py",
+    "core/ash_pattern_engine/diagnostic_module_capture.py",
+    "core/ash_pattern_engine/state_values.py",
+    "core/ash_pattern_engine/recovery_values.py",
+    "scripts/reference_diagnostics_host.py",
+    "data/schemas/m3_reference_diagnostic_bundle_schema.json",
+    "tests/test_m3_module_diagnostics.py",
+    "tests/test_m3_source_compatibility.py",
+    "tests/test_m3_diagnostic_schemas.py"
+  ],
+  "private_ledger_limits": {
+    "registered_producers": 6,
+    "producer_slot_policy": "one exact instance per closed producer kind; no replace/unregister/hidden setter, no serialized capability",
+    "active_scopes": 8,
+    "retained_contexts": 64,
+    "omission_attempt_flag": "one per issued scope; no arbitrary unbounded result-token registry",
+    "closed_missing_scope": "audit once at actual issued scope return; no fabricated scope for an unadmitted input"
+  },
+  "new_module_gate_eligibility": "must match exact collector/session identities AND module fullcurrent binding; MODULES is currentlyN3-ineligible, so standalone None is operational path until explicit lifecyclepolicy migration",
+  "release_semantic_parity_required": true,
+  "future_planner_emitter_semantic_admission": "NOT_ACCEPTED until full business policy/source binding/output target contract adopted"
+}

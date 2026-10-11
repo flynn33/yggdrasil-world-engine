@@ -1,10 +1,10 @@
 # YWE Session Handoff — Verified N3 and Remaining M3
 
 **Date:** October 11, 2026
-**Handoff checkpoint:** autonomous-m3-9
-**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-46, section 16.5.
+**Handoff checkpoint:** autonomous-m3-10
+**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-47, section 17; continuation boundary section 16.5.
 **Direction:** Complete, verify and owner-publish M3, then pause until explicit owner go-ahead before M4. Preserve continuous README publication; bounded N3 authority remains section 13 and the latest owner boundary is section 16.5.
-**Inspected project snapshot:** owner-published progress `d79e5bcf90362048e13abbdcdf7eaa0f85829ef6`, with exact Git/API/README readback; verified runtime remains `a345d1be3e2d635cb79104c153d2628b090ccd88`.
+**Inspected project snapshot:** owner-published boundary `d80785a3aeb1845521bf141237dc1116d211233a`, with exact Git/API/README readback; verified runtime remains `a345d1be3e2d635cb79104c153d2628b090ccd88`.
 **Method:** Raven Forge Development v0.7.0 at `87409bc36fb9d4782eab02189adb184f2b3962a7`.
 
 This is the current continuation. Earlier preparation receipts below remain
@@ -15,26 +15,28 @@ superseded history with their original scope and evidence preserved.
 - M0–M2 accepted; M3 active; all five M3 exits remain open; M4 planned and platform work deferred through M10.
 - Adopted N3 reference lifecycle at a345d1b passes all 36 applicable repository checks and 1151 unit tests from its exact clean, unfiltered offline checkout, with zero failures/advisories and no checkout changes. Report/log/revision hashes and runtime test owners are in Project Record sections 16.3–16.4.
 - All 930 fixture bindings and 382 intended rejections pass; earlier 750 bindings remain preserved. Scoped 125 session controls include genuine Windows protected-store paired export and concurrent provider halt. Physical crash/power-loss and product qualification remain unverified.
-- The preceding b283c40 full CI 38172321482 succeeds on both Ubuntu and Windows, 36 checks and 1,024 tests each. The runtime’s own CI is dispatched and pending observation.
-- Wiki ccd0d59 is published and remotely verified for exact source d79e5bc: all 47 pages match reviewed bytes, 32 generated surfaces and 15 preserved manual pages.
+- Exact a345 runtime CI 38175922165 succeeds on Ubuntu and Windows: 36 checks and 1151 tests run each; Ubuntu 1109 pass/42 explicit native skips, Windows 1151 pass/no skips. Actual jobs/full logs are retrieved.
+- Wiki 78d037e is published and remotely verified for exact source d80785a: all 47 pages match reviewed bytes, 32 generated surfaces and 15 preserved manual pages.
+- REQ0045–0048 / ADR0036–0039 source/RT/TA/capture contracts and finite inventories are adopted before dependent code. Actual source migration, four pure modules and their complete capture remain the next implementation; current-source N3 and planner/emitter policy remain required M3 debt.
 - Current M3 execution/publication/admin bypass and no AI/coauthor attribution remain authorized. After M3 acceptance and publication, pause the goal; explicit owner go-ahead is required before any M4 work.
 
 ## Current checkpoint
 
-**Current step:** Committed N3 reference lifecycle verified and owner-published;
-recording results and continuing the remaining M3 contracts.
+**Current step:** N3 exact-revision local and both-OS execution verified; next
+M3 module contracts adopted before source/runtime migration.
 
-**Next action:** Verify/publish the latest owner-boundary record. Observe runtime
-CI. Adopt strict RealmEncoder/TransitionRegistry and complete ordinary-producer
-source compatibility, then implement and verify those owners. Continue bounded
-topology, five axioms, pure planner/emitter and all remaining M3 conformance.
-After actual M3 acceptance and GitHub publication, pause and wait; do not start
-M4 until the owner explicitly gives go-ahead.
+**Next action:** Verify/publish this bounded contract adoption; issue reviewed
+external module instructions and apply the exact three-page source extension.
+Implement/verify shared diagnosis validation, strict realm/transitions, bounded
+topology/five axioms and complete safe capture. Then adopt complete planner/emitter
+business semantics and coherent current-source lifecycle integration. Keep all
+M3 exit criteria open until their actual full evidence passes. After M3 acceptance
+and GitHub publication, pause and wait; do not start M4 without owner go-ahead.
 
 **Needed from owner:** Nothing during M3. Explicit go-ahead after the M3
 completion/publication checkpoint is required to start M4.
 
-**Saved at:** This handoff and Project Record planning-46; containing commit and
+**Saved at:** This handoff and Project Record planning-47; containing commit and
 readback establish this record’s save receipt. Its own verification/publication
 results are not predeclared. The goal remains active for M3 and will pause after its verified publication.
 

@@ -7,8 +7,8 @@
   "scope_manifest_ref": "data/governance/scope_partition_manifest.json",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1233,
-    "path_digest": "651ab07a12465b85fa2d1a83aecc3e68966f0f15e7ce042877388fc161a77dcd",
+    "path_count": 1250,
+    "path_digest": "77fffe988e8b6ccf9254434dadde741ea467e5bb5c980ed5c7100c15c5c19df3",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "classes": [
@@ -1730,6 +1730,119 @@
       "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
       "rationale": "Adopted exact N3 lifecycle business and safe representation contract companion, distinct from historical or synthetic execution evidence.",
       "authority_role": "primary"
+    },
+    {
+      "path": "docs/architecture/m3_source_compatibility_contract.md",
+      "classification": "superseded",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_module_source_compatibility_contract.md",
+      "superseded_by": "docs/architecture/m3_module_source_compatibility_contract.md",
+      "authority_role": "not_applicable",
+      "rationale": "The full original two-vector adoption body remains historical; the active three-baseline contract replaces its current authority."
+    },
+    {
+      "path": "docs/architecture/m3_module_source_compatibility_contract.md",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_module_source_compatibility_contract.md",
+      "rationale": "Adopted bounded M3 module contract or exact normative companion; runtime acceptance remains separately verified.",
+      "authority_role": "primary"
+    },
+    {
+      "path": "docs/architecture/m3_module_diagnostics_capture_contract.md",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_module_diagnostics_capture_contract.md",
+      "rationale": "Adopted bounded M3 module contract or exact normative companion; runtime acceptance remains separately verified.",
+      "authority_role": "primary"
+    },
+    {
+      "path": "docs/architecture/m3_realm_transition_contract.md",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_realm_transition_contract.md",
+      "rationale": "Adopted bounded M3 module contract or exact normative companion; runtime acceptance remains separately verified.",
+      "authority_role": "primary"
+    },
+    {
+      "path": "docs/architecture/m3_topology_axiom_reference_contract.md",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_topology_axiom_reference_contract.md",
+      "rationale": "Adopted bounded M3 module contract or exact normative companion; runtime acceptance remains separately verified.",
+      "authority_role": "primary"
+    },
+    {
+      "path": "docs/architecture/m3_topology_axiom_reference_policy.md",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_topology_axiom_reference_contract.md",
+      "rationale": "Adopted bounded M3 module contract or exact normative companion; runtime acceptance remains separately verified.",
+      "authority_role": "primary"
+    },
+    {
+      "path": "docs/design-planning/m3/module-diagnostics/SOURCE_VECTOR_INVENTORY.json",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_module_source_compatibility_contract.md",
+      "rationale": "Adopted bounded M3 module contract or exact normative companion; runtime acceptance remains separately verified.",
+      "authority_role": "primary"
+    },
+    {
+      "path": "docs/design-planning/m3/module-diagnostics/CAPTURE_API_INVENTORY.json",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_module_diagnostics_capture_contract.md",
+      "rationale": "Adopted bounded M3 module contract or exact normative companion; runtime acceptance remains separately verified.",
+      "authority_role": "primary"
+    },
+    {
+      "path": "docs/design-planning/m3/module-diagnostics/PRODUCER_AND_SAFE_GRAPH_INVENTORY.json",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_module_diagnostics_capture_contract.md",
+      "rationale": "Adopted bounded M3 module contract or exact normative companion; runtime acceptance remains separately verified.",
+      "authority_role": "primary"
+    },
+    {
+      "path": "docs/design-planning/m3/topology-axiom/BUSINESS_API_INVENTORY.json",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_topology_axiom_reference_contract.md",
+      "rationale": "Adopted bounded M3 module contract or exact normative companion; runtime acceptance remains separately verified.",
+      "authority_role": "primary"
+    },
+    {
+      "path": "docs/design-planning/m3/realm-transition/CODEWORD_ORBIT_TEST_PROFILE.json",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_realm_transition_contract.md",
+      "rationale": "Adopted bounded M3 module contract or exact normative companion; runtime acceptance remains separately verified.",
+      "authority_role": "primary"
+    },
+    {
+      "path": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_API_INVENTORY.json",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_realm_transition_contract.md",
+      "rationale": "Adopted bounded M3 module contract or exact normative companion; runtime acceptance remains separately verified.",
+      "authority_role": "primary"
+    },
+    {
+      "path": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_RESTRICTED_TEST_POLICY.json",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_realm_transition_contract.md",
+      "rationale": "Adopted bounded M3 module contract or exact normative companion; runtime acceptance remains separately verified.",
+      "authority_role": "primary"
+    },
+    {
+      "path": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_STANDARD_POLICY.json",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_realm_transition_contract.md",
+      "rationale": "Adopted bounded M3 module contract or exact normative companion; runtime acceptance remains separately verified.",
+      "authority_role": "primary"
     }
   ],
   "sensitive_source_hash_algorithm": "sha256_utf8_lf_normalized",
@@ -1764,10 +1877,10 @@
       "deprecated": 1,
       "example": 183,
       "historical": 14,
-      "informative": 120,
-      "normative": 865,
+      "informative": 124,
+      "normative": 877,
       "placeholder": 44,
-      "superseded": 6
+      "superseded": 7
     }
   }
 }

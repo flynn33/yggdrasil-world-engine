@@ -1,3 +1,5 @@
+> Superseded for current adoption by [M3 module source compatibility contract](m3_module_source_compatibility_contract.md), YWE-REQ-0045 / ADR-0036. The original two-vector contract and inventory below remain unchanged historical evidence.
+
 # M3 reviewed source baseline compatibility
 
 Status: active bounded M3 source compatibility contract, adopted October 4, 2026 before dependent implementation. Owner and partition: ywe_core. Requirement: [YWE-REQ-0043]. Decision: ADR-0032. Reviewed against accepted N2 implementation c78ee7e451e5d35b2f615369433291007e7ee261 and publication checkpoint e5fbce354fc0ba7eda4c88682b4deabe5f29de6e. This contract adopts only the reviewed local source extension, complete source bindings and reference Diagnostics source provenance. The implementation at 13df7079f911b8f6c56e7be263b0de263b209c48 completed 36 clean unfiltered offline checks and 1,006 unit tests; exact-revision CI run 37254719493 passed on Ubuntu and Windows, verified October 11. The original local execution is distinct from the later external package's representation-only review. Full N3 session/lifecycle behavior and M3 completion remain outside this adoption.

@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1233,
-    "path_digest": "651ab07a12465b85fa2d1a83aecc3e68966f0f15e7ce042877388fc161a77dcd",
+    "path_count": 1250,
+    "path_digest": "77fffe988e8b6ccf9254434dadde741ea467e5bb5c980ed5c7100c15c5c19df3",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -2732,16 +2732,214 @@
         "m3_session_lifecycle",
         "reference_conformance"
       ]
+    },
+    {
+      "path": "docs/architecture/m3_source_compatibility_contract.md",
+      "primary_partition": "historical_evidence",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_module_source_compatibility_contract.md",
+      "rationale": "Preserved original two-vector source-adoption history with an explicit current replacement.",
+      "secondary_tags": [
+        "m3_module_source",
+        "provenance"
+      ]
+    },
+    {
+      "path": "docs/architecture/m3_module_source_compatibility_contract.md",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_module_source_compatibility_contract.md",
+      "rationale": "Adopted platform-neutral source, pure producer, or capture contract companion.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "docs/architecture/m3_module_diagnostics_capture_contract.md",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_module_diagnostics_capture_contract.md",
+      "rationale": "Adopted platform-neutral source, pure producer, or capture contract companion.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "docs/architecture/m3_realm_transition_contract.md",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_realm_transition_contract.md",
+      "rationale": "Adopted platform-neutral source, pure producer, or capture contract companion.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "docs/architecture/m3_topology_axiom_reference_contract.md",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_topology_axiom_reference_contract.md",
+      "rationale": "Adopted platform-neutral source, pure producer, or capture contract companion.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "docs/architecture/m3_topology_axiom_reference_policy.md",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_topology_axiom_reference_contract.md",
+      "rationale": "Adopted platform-neutral source, pure producer, or capture contract companion.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "docs/design-planning/m3/module-diagnostics/SOURCE_VECTOR_INVENTORY.json",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_module_source_compatibility_contract.md",
+      "rationale": "Adopted platform-neutral source, pure producer, or capture contract companion.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "docs/design-planning/m3/module-diagnostics/CAPTURE_API_INVENTORY.json",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_module_diagnostics_capture_contract.md",
+      "rationale": "Adopted platform-neutral source, pure producer, or capture contract companion.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "docs/design-planning/m3/module-diagnostics/PRODUCER_AND_SAFE_GRAPH_INVENTORY.json",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_module_diagnostics_capture_contract.md",
+      "rationale": "Adopted platform-neutral source, pure producer, or capture contract companion.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "docs/design-planning/m3/topology-axiom/BUSINESS_API_INVENTORY.json",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_topology_axiom_reference_contract.md",
+      "rationale": "Adopted platform-neutral source, pure producer, or capture contract companion.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "docs/design-planning/m3/realm-transition/CODEWORD_ORBIT_TEST_PROFILE.json",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_realm_transition_contract.md",
+      "rationale": "Adopted platform-neutral source, pure producer, or capture contract companion.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_API_INVENTORY.json",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_realm_transition_contract.md",
+      "rationale": "Adopted platform-neutral source, pure producer, or capture contract companion.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_RESTRICTED_TEST_POLICY.json",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_realm_transition_contract.md",
+      "rationale": "Adopted platform-neutral source, pure producer, or capture contract companion.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_STANDARD_POLICY.json",
+      "primary_partition": "ywe_core",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_realm_transition_contract.md",
+      "rationale": "Adopted platform-neutral source, pure producer, or capture contract companion.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "docs/design-planning/m3/module-diagnostics/BOUND_REPORT.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_module_diagnostics_capture_contract.md",
+      "rationale": "Adoption provenance, navigation or synthetic representation evidence; not a producer runtime acceptance result.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "representation_evidence"
+      ]
+    },
+    {
+      "path": "docs/design-planning/m3/module-diagnostics/SAFE_MAXIMUM_LEAVES.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_module_diagnostics_capture_contract.md",
+      "rationale": "Adoption provenance, navigation or synthetic representation evidence; not a producer runtime acceptance result.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "representation_evidence"
+      ]
+    },
+    {
+      "path": "docs/design-planning/m3/module-diagnostics/ADOPTION_RECEIPT.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_module_diagnostics_capture_contract.md",
+      "rationale": "Adoption provenance, navigation or synthetic representation evidence; not a producer runtime acceptance result.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "representation_evidence"
+      ]
+    },
+    {
+      "path": "docs/design-planning/m3/module-diagnostics/README.md",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_module_diagnostics_capture_contract.md",
+      "rationale": "Adoption provenance, navigation or synthetic representation evidence; not a producer runtime acceptance result.",
+      "secondary_tags": [
+        "m3_module_contract",
+        "representation_evidence"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
       "ash_dependency_material": 66,
-      "governance_validation": 494,
-      "historical_evidence": 21,
+      "governance_validation": 498,
+      "historical_evidence": 22,
       "later_release_work": 59,
       "wrw_reference_profile": 304,
-      "ywe_core": 167,
+      "ywe_core": 179,
       "ywe_extension_profile": 122
     }
   }

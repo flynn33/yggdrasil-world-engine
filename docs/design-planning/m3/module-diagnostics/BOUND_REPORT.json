@@ -1,0 +1,132 @@
+{
+  "status": "SYNTHETIC_STRUCTURAL_BOUND_ONLY",
+  "base_commit": "a345d1be3e2d635cb79104c153d2628b090ccd88",
+  "leaf_bytes": {
+    "PRODUCER_CONTEXT": 543,
+    "PRODUCER_SOURCE": 1732,
+    "PRODUCER_OPERATION": 4880,
+    "PRODUCER_FINAL_OBSERVATION": 331,
+    "PRODUCER_RECORD": 2135,
+    "REALM_IDENTITY": 175,
+    "TRANSITION_REGISTRY": 400,
+    "TRANSITION_DEFINITION": 763,
+    "TOPOLOGY": 1067,
+    "TOPOLOGY_PAGE": 1629,
+    "AXIOM_SUBJECT": 672,
+    "AXIOM_CHECK": 294,
+    "GENERATION_PLAN": 1586,
+    "ROLE_PAGE": 2015,
+    "ARTIFACT_PAGE": 8780,
+    "TARGET_CONSTRAINTS": 3218,
+    "EMISSION_OUTPUT": 533
+  },
+  "leaf_alias_slots": {
+    "PRODUCER_CONTEXT": 14,
+    "PRODUCER_SOURCE": 17,
+    "PRODUCER_OPERATION": 138,
+    "PRODUCER_FINAL_OBSERVATION": 4,
+    "PRODUCER_RECORD": 6,
+    "REALM_IDENTITY": 0,
+    "TRANSITION_REGISTRY": 19,
+    "TRANSITION_DEFINITION": 4,
+    "TOPOLOGY": 49,
+    "TOPOLOGY_PAGE": 1,
+    "AXIOM_SUBJECT": 5,
+    "AXIOM_CHECK": 1,
+    "GENERATION_PLAN": 74,
+    "ROLE_PAGE": 49,
+    "ARTIFACT_PAGE": 337,
+    "TARGET_CONSTRAINTS": 35,
+    "EMISSION_OUTPUT": 6
+  },
+  "operations": {
+    "REALM_ENCODER": {
+      "records": 2,
+      "support_nodes": 7,
+      "new_safe_support_bytes": 11931,
+      "complete_support_upper": 77467,
+      "distinct_alias_upper": 266,
+      "retained_bytes_upper": 325787,
+      "reservation": {
+        "bytes": 524288,
+        "supporting_bytes": 131072,
+        "aliases": 320
+      },
+      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256"
+    },
+    "TRANSITION_REGISTRY": {
+      "records": 17,
+      "support_nodes": 38,
+      "new_safe_support_bytes": 56389,
+      "complete_support_upper": 121925,
+      "distinct_alias_upper": 545,
+      "retained_bytes_upper": 1056069,
+      "reservation": {
+        "bytes": 2097152,
+        "supporting_bytes": 262144,
+        "aliases": 1024
+      },
+      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256"
+    },
+    "TOPOLOGY_GENERATOR": {
+      "records": 1,
+      "support_nodes": 52,
+      "new_safe_support_bytes": 85622,
+      "complete_support_upper": 151158,
+      "distinct_alias_upper": 395,
+      "retained_bytes_upper": 391542,
+      "reservation": {
+        "bytes": 2097152,
+        "supporting_bytes": 524288,
+        "aliases": 512
+      },
+      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256"
+    },
+    "AXIOM_EVALUATOR": {
+      "records": 5,
+      "support_nodes": 15,
+      "new_safe_support_bytes": 20303,
+      "complete_support_upper": 85839,
+      "distinct_alias_upper": 317,
+      "retained_bytes_upper": 470095,
+      "reservation": {
+        "bytes": 1048576,
+        "supporting_bytes": 262144,
+        "aliases": 512
+      },
+      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256"
+    },
+    "GENERATION_PLANNER": {
+      "records": 1,
+      "support_nodes": 110,
+      "new_safe_support_bytes": 203168,
+      "complete_support_upper": 268704,
+      "distinct_alias_upper": 3500,
+      "retained_bytes_upper": 1303968,
+      "reservation": {
+        "bytes": 4194304,
+        "supporting_bytes": 1048576,
+        "aliases": 4096
+      },
+      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256"
+    },
+    "ARTIFACT_EMITTER": {
+      "records": 65,
+      "support_nodes": 206,
+      "new_safe_support_bytes": 356864,
+      "complete_support_upper": 422400,
+      "distinct_alias_upper": 4492,
+      "retained_bytes_upper": 4333056,
+      "reservation": {
+        "bytes": 8388608,
+        "supporting_bytes": 1048576,
+        "aliases": 5120
+      },
+      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256"
+    }
+  },
+  "fixed_old_support_allowance": 65536,
+  "native_io_claim": false,
+  "runtime_producer_claim": false,
+  "caps_changed": false
+}

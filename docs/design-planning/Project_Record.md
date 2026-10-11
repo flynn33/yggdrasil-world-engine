@@ -1,13 +1,13 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-46
+**Revision:** planning-47
 **Date:** October 11, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-45 at `d79e5bcf90362048e13abbdcdf7eaa0f85829ef6`; full history remains in Git.
+**Supersedes:** planning-46 at `d80785a3aeb1845521bf141237dc1116d211233a`; full history remains in Git.
 
-**Current approval and continuation:** Sections 16–16.4 retain adopted N3 contracts and verified published reference lifecycle evidence. Section 16.5 records the latest direct owner limit: complete, verify and publish M3, then pause for explicit go-ahead before M4. Section 13 remains bounded N3 authority; the earlier full-roadmap goal is subject to this new continuation boundary. All M3 exit criteria remain outstanding.
+**Current approval and continuation:** Section 17 records adopted source, Realm/Transition, topology/axiom and module Diagnostics contracts before dependent implementation. Sections 16–16.4 retain verified published N3 lifecycle evidence. Section 16.5 governs continuation: finish, verify and publish M3, then pause for explicit go-ahead before M4. All five M3 exits remain open.
 
 ## 1. Current working brief
 
@@ -17,11 +17,11 @@
 | Product purpose | Platform-neutral, strictly object-oriented and modular engine specification |
 | Accepted milestones | M0, M1 and M2 |
 | Active milestone | M3 — Complete core deterministic semantics and the reference oracle |
-| Active M3 assignment | N3 reference lifecycle verified; strict RealmEncoder and TransitionRegistry contracts/source adoption next, followed by topology, five-axiom evaluation and pure planner/emitter conformance |
+| Active M3 assignment | Source, strict Realm/Transition, bounded topology/axiom and capture contracts adopted (section 17); dependent reference implementation next, then complete planner/emitter and current-source lifecycle conformance |
 | Next milestone | M4 remains planned; its dependency is M3 acceptance |
 | M2 acceptance | Complete; immutable evidence records all six exit criteria and eight deliverables |
 | Source closure | Original clean full execution and successful exact-revision Ubuntu/Windows CI verified October 11 (section 14); section 12 external review remains representation-matched only, `acceptance=false`, `provenance_review_required=true`; neither accepts N3 or M3 |
-| Wiki | Owner publication `ccd0d59` verified from source `d79e5bc`; all 47 remote pages match reviewed bytes (section 16.5) |
+| Wiki | Owner publication `78d037e` verified from source `d80785a`; all 47 remote pages match reviewed bytes (section 17) |
 | Publication | Unreleased; no GitHub Release objects exist as verified September 20, 2026 |
 | Workflow | Continue adopted M3 work and owner publication; after M3 acceptance and publication pause for explicit owner go-ahead before M4 (section 16.5). No additional M3 operator or mandatory separate reviewer-service approval is assigned; technical checks and source constraints remain required |
 
@@ -1707,3 +1707,126 @@ M0–M2 remain accepted, M3 active and M4 planned. This owner-boundary record
 claims no additional M3 exit acceptance or cross-platform CI result. Earlier
 full-roadmap continuation statements remain historical and are superseded by
 this section at the M3/M4 boundary. Needed from owner now: nothing.
+
+## 17. Adopted M3 module contracts and bounded implementation
+
+The owner’s standing M3 development/publication instruction authorizes this next
+bounded increment. The conditional pause in section 16.5 remains controlling.
+Adopt four new permanent requirements and decisions before dependent code:
+
+| Requirement / decision | Active contract and scope |
+|---|---|
+| YWE-REQ-0045 / ADR-0036 | m3_module_source_compatibility_contract.md: exactly three complete 9-field source vectors with paired 7-field Recovery/8-field Diagnostics pins |
+| YWE-REQ-0046 / ADR-0037 | m3_realm_transition_contract.md: shared StateModel DiagnosisValidation and strict RealmEncoder/TransitionRegistry values, pure operations and explicit capture composition |
+| YWE-REQ-0047 / ADR-0038 | m3_topology_axiom_reference_contract.md and policy: bounded ternary frontier, lineage and ordered five checks from exact declared facts |
+| YWE-REQ-0048 / ADR-0039 | m3_module_diagnostics_capture_contract.md: fixed producer registration, complete closed safe graph, whole admission and immutable first/final observations |
+
+YWE-REQ-0043 and ADR-0032 retain their original text as superseded records with
+reciprocal 0045/0036 links. The original two-vector source contract body and embedded
+inventory remain byte-for-byte preserved beneath one superseded header. Existing
+fixture outcomes, legacy aliases and narrow 6 assessment/7 normalization/8 N2 rule sets
+remain required. Material three-vector meaning receives a new requirement, rather
+than changing the earlier permanent requirement text. Counts after adoption are
+48 requirements (47 active/1 superseded), 56 governance records and 39 ADRs (38 accepted/
+1 superseded); next requirement 0049. Register validation is separately executed.
+
+Source extension authorizes exactly interfaces/diagnostic-schema.md,
+interfaces/rule-id-taxonomy.md and interfaces/contracts/diagnostics-module-contract.md
+under the repository-owned canonical tree, followed by deterministic mirror and
+descriptor regeneration. All 29 other actual a345 source blobs/math remain exact.
+The complete M3_MODULES aggregate is
+f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400.
+At this documentation adoption checkpoint that source/runtime migration is the
+next action, not a completed implementation. No future containing revision is
+guessed. M3_MODULES remains N3-ineligible in this increment; a coherent current-
+source lifecycle policy/source pair and complete integration remain required
+debt before M3 acceptance. Complete planner/emitter business policy is also still
+required. All five M3 exits remain outstanding.
+
+The contracts and exact normative companions are indexed in
+`docs/design-planning/m3/module-diagnostics/README.md`. Actual copied artifact hashes
+and metadata transformations are in ADOPTION_RECEIPT.json. Frozen external inputs
+remain preserved: Diagnostics 54-file index 05d83a5cbece83f504fc0d35435df437e1a9b0264a581c7f5038c276f3117c9a,
+RT 10-file index c5c244cfcb60d6f5570e64763b85068ceb86d8e0c2561db16418392851cb51b0,
+and TA contract 8846b0f17359aef72d90504dbc8dd0c1b9871adb5020bd6a83453bfb0ea956e2,
+policy dc1ed8e7eb92f1e76853a9ca3e95577bf695874b5dbc8ec000001de52a70c9d8,
+inventory 3a12566668b4a7ac6c7951cb509a94e16afd3a137aaabfe96680e6c4023876f6.
+The active contracts include the exact registered MUST clauses. Current copies
+also change adoption-state metadata; TA’s small semantic-operation
+wording clarification agrees with its already-listed public composition ports.
+The adopted topology policy removes only its trailing blank line; its statements
+are identical and its active byte hash is ab645a078e9aaee04e3eb01ac1ced01de986340d8f0242057eb3e4567196c7ae.
+The contract and inventory bind that normalized hash. Source hashes and
+business semantics remain unchanged; frozen external bytes retain their own hashes.
+
+The source/representation independent replay from an actual fresh external copy
+exited 0 in 2.269454s; receipt
+`C:\Users\james\AppData\Local\Temp\ywe-m3-diagnostics-root-independent-20261011-69c35af8\ROOT_INDEPENDENT_REPLAY_RECEIPT.json`
+SHA e7653203269b1033f827824b790fc24fca82aa22e6b45226e03a5ebdb7296ac3.
+All 54 frozen raw hashes and 32 separately normalized source hashes match.
+Replay receipt/stdout c7c52019bd75dd0dd15cfc25866616c3f01e6c3c2b6f798b655a98f01bfa3899
+are byte-identical to the frozen run; empty stderr is recorded. The scopes are
+432 mixed source/pin candidates with exactly 3 complete pairs, 8 new snapshot subsets,
+actual old helper subsets/defaults/refusals, 17 closed safe leaves, whole raw guard
+and conservative representation bounds. Raw log/receipt line endings are preserved;
+canonical normalization is a separate check. This does not claim a replay of the
+changed adoption metadata or any new producer/native runtime acceptance.
+
+Independent API/source review verifies shared 7-field DiagnosisValidation, 5 codes/
+26 fields, exact RT 11/TA 7 pins, four current public class-owned configuration/bool
+ports, fixed 6 producer slots, actual N1 subject/root and 8-field capture wrappers.
+Pure target validity uses the existing complete SafeStateValidity inline projection;
+no target assessment/emission is fabricated. Reservations keep all global limits
+unchanged. Bound reports are synthetic structural witnesses; the inherited 65536 B
+support allowance remains a measured runtime refusal obligation.
+
+The local source and product-owned realization remain the selected technical
+authority; Raven v0.7.0 remains the method intake. Existing external reference-system
+pins/statuses are preserved. The supplied APS canonical profile’s external 7bb source
+is not selected or relabelled as local acceptance. General source/realization,
+dependency prohibition, governance and verification obligations apply. No external
+realization-validator execution or new upstream system adoption is claimed.
+Reviewed applicability SHA 5591a847ea6c17dcd0bc8516750db3483bc50b0c6bc74a49c5d99983ca752ce7
+is saved in the same external independent-review directory.
+
+Prepared bounded implementation package YWE-M3-MODULES-AUTONOMOUS-001 r1 remains
+external at `C:\Users\james\AppData\Local\Temp\YWE-M3-MODULES-AUTONOMOUS-001-r1`.
+It identifies the exact contracts/hashes, assigned host, pure/capture ownership,
+concrete source/module/schema/test paths, no new dependencies, full diagnostics,
+required verification and the M4 pause. Its actual instruction-accuracy review
+and issuance receipt must precede dependent code; preparation is not issuance.
+Root owns publication; bounded module agents do not commit/push. The first runtime
+increment implements the four pure producers. Future planner/emitter registration
+must refuse until their complete business policy and exact owned types exist.
+
+### 17.1. Verified preceding publication and cross-platform execution
+
+The owner pause-boundary commit d80785a3aeb1845521bf141237dc1116d211233a passed
+12 selected clean offline documentation/governance checks in 259.703s, with zero
+failures/advisories and no checkout changes. Normal nonforce owner publication
+passed actual Git, GitHub API and exact README readback; README raw SHA
+7cd8c9e3611649789483dbf75bb01b8badeee57d44b37fcc05c553f1465f6613.
+These selected checks do not replace the earlier complete runtime execution.
+
+The exact a345 N3 runtime CI 38175922165 completed successfully on Ubuntu and
+Windows. Each passes all 36 checks and runs 1151 unit tests; Ubuntu 1109 pass/42 explicit
+native skips in 573.650s, Windows 1151 pass/no skips in 1041.652s. The completed job list and full log
+were retrieved and read, separately from the prior local 1151-test/36-check proof.
+Logs are external at `C:\Users\james\AppData\Local\Temp\ywe-n3-a345d1b-ci-complete-log-20261011-1.log`.
+This verifies that exact bounded reference revision, not physical power-loss,
+product qualification or complete M3 acceptance.
+
+Wiki 78d037e8e4703d283b3a3b0b7de41dfdf1d360a2 is owner-published from exact d807.
+Fresh remote Git readback matches all 47 reviewed page bytes, 32 generated surfaces
+and 15 preserved manual pages. Proof is external at
+`C:\Users\james\AppData\Local\Temp\ywe-m3-wiki-d80785a-readback-20261011\PUBLICATION_READBACK.json`.
+Home SHA 7e91124f48a3fac9e17fde292c45cf6f6fddd749a500f8e958c9de3997367a87;
+roadmap 00180fd94c3dbcb59f765275a51d3b4f2e85e2d36976da7d8af518afd6a798df.
+
+M0–M2 remain accepted, M3 active and M4 planned. No M3 exit or subsystem maturity
+status changes in this contract-adoption checkpoint. Next: verify/publish adopted
+contracts, issue reviewed bounded instructions, apply the exact source amendment,
+then implement and verify the four pure owners and complete capture integration.
+After all M3 work/exit evidence is accepted and owner-published, pause the goal
+and wait for explicit owner go-ahead before starting M4. Needed from owner now:
+nothing; current M3 execution/publication remain authorized.

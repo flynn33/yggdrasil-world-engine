@@ -1,0 +1,519 @@
+{
+  "status": "ACTIVE_CONTRACT_NO_IMPLEMENTATION_ACCEPTANCE",
+  "observed_head": "a345d1be3e2d635cb79104c153d2628b090ccd88",
+  "type_count": 17,
+  "types": [
+    {
+      "name": "RealmTransitionSourcePin",
+      "fields": [
+        "source_id",
+        "source_sha256"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    },
+    {
+      "name": "RealmTransitionBinding",
+      "fields": [
+        "canonical_binding",
+        "profile_binding",
+        "contract_pins",
+        "policy_source_reference",
+        "policy_source_sha256",
+        "policy_evidence_reference"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    },
+    {
+      "name": "TransitionDefinition",
+      "fields": [
+        "transition_id",
+        "display_name",
+        "description",
+        "codeword",
+        "applicability_mask"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    },
+    {
+      "name": "TransitionCatalog",
+      "fields": [
+        "binding",
+        "definitions"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    },
+    {
+      "name": "TransitionSelection",
+      "fields": [
+        "selection_kind",
+        "transition_id",
+        "codeword"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    },
+    {
+      "name": "DiagnosisValidation",
+      "fields": [
+        "status",
+        "submitted_diagnosis",
+        "current_source_binding",
+        "current_profile_binding",
+        "derived_diagnostic",
+        "failure_code",
+        "failed_field"
+      ],
+      "owner": "StateModel/state_values.py"
+    },
+    {
+      "name": "RealmIdentity",
+      "fields": [
+        "state_signature",
+        "vertex_id",
+        "realm_id",
+        "orbit_id"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    },
+    {
+      "name": "RealmTransitionGate",
+      "fields": [
+        "origin_assessment_reference",
+        "verification_status",
+        "admissibility_status",
+        "is_valid"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    },
+    {
+      "name": "TransitionApplicabilityObservation",
+      "fields": [
+        "transition_id",
+        "codeword",
+        "source_state",
+        "is_applicable",
+        "reason_code"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    },
+    {
+      "name": "TransitionSelectionObservation",
+      "fields": [
+        "selection",
+        "transition_id",
+        "codeword",
+        "status",
+        "failure_code"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    },
+    {
+      "name": "TransitionTransformationObservation",
+      "fields": [
+        "transition_id",
+        "codeword",
+        "source_state",
+        "candidate",
+        "target_diagnosis"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    },
+    {
+      "name": "RealmTransitionRecord",
+      "fields": [
+        "record_reference",
+        "phase",
+        "emission",
+        "payload"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    },
+    {
+      "name": "RealmEncodingResult",
+      "fields": [
+        "operation_reference",
+        "binding",
+        "origin",
+        "origin_validation",
+        "identity",
+        "constructed_records"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    },
+    {
+      "name": "TransitionResolutionResult",
+      "fields": [
+        "operation_reference",
+        "binding",
+        "origin",
+        "origin_validation",
+        "catalog",
+        "availability",
+        "constructed_records"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    },
+    {
+      "name": "TransitionApplicationResult",
+      "fields": [
+        "operation_reference",
+        "binding",
+        "origin",
+        "origin_validation",
+        "selection",
+        "selected_definition",
+        "candidate",
+        "target_diagnosis",
+        "constructed_records"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    },
+    {
+      "name": "RealmTransitionFailure",
+      "fields": [
+        "operation_reference",
+        "binding",
+        "origin",
+        "origin_validation",
+        "action",
+        "failed_phase",
+        "failure_code",
+        "selection",
+        "selected_definition",
+        "constructed_records"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    },
+    {
+      "name": "RealmTransitionCaptureReceipt",
+      "fields": [
+        "operation_reference",
+        "status",
+        "result",
+        "confirmed_records",
+        "attempted_record",
+        "completion",
+        "final_observation",
+        "failure_code"
+      ],
+      "owner": "RealmEncoder/TransitionRegistry reference"
+    }
+  ],
+  "enums": {
+    "Phase": [
+      "VALID_SOURCE",
+      "IDENTITY",
+      "SELECTION",
+      "APPLICABILITY",
+      "TRANSFORMATION"
+    ],
+    "SelectionKind": [
+      "IDENTIFIER",
+      "CODEWORD"
+    ],
+    "VerificationStatus": [
+      "VERIFIED",
+      "REJECTED"
+    ],
+    "ApplicabilityReason": [
+      "SOURCE_ALLOWED",
+      "SOURCE_NOT_ALLOWED"
+    ],
+    "SelectionStatus": [
+      "SELECTED",
+      "REFUSED"
+    ],
+    "Action": [
+      "ENCODE",
+      "RESOLVE",
+      "APPLY"
+    ],
+    "CaptureStatus": [
+      "CONFIRMED",
+      "REJECTED",
+      "NOT_CONFIRMED"
+    ],
+    "BusinessFailure": [
+      "STATE_NOT_VALID",
+      "PROFILE_UNAVAILABLE",
+      "TRANSITION_UNKNOWN",
+      "CODEWORD_NOT_CANONICAL",
+      "TRANSITION_NOT_APPLICABLE"
+    ],
+    "DiagnosisFailure": [
+      "SOURCE_BINDING_MISMATCH",
+      "PROFILE_BINDING_MISMATCH",
+      "INPUT_BINDING_MISMATCH",
+      "DIAGNOSIS_MISMATCH",
+      "DIAGNOSIS_ENVELOPE_MISMATCH"
+    ],
+    "DiagnosisFailureField": [
+      "origin_diagnosis.source_binding",
+      "origin_diagnosis.profile_binding",
+      "origin_diagnosis.input_evidence",
+      "origin_diagnosis.parsed_state",
+      "origin_diagnosis.assessment_binding",
+      "origin_diagnosis.emitted_diagnostics",
+      "origin_diagnosis.emitted_diagnostics[0].diagnostic_reference",
+      "origin_diagnosis.state_validity_diagnostic.input_state",
+      "origin_diagnosis.state_validity_diagnostic.admissibility_status",
+      "origin_diagnosis.state_validity_diagnostic.transformation_compatibility",
+      "origin_diagnosis.state_validity_diagnostic.normalization_status",
+      "origin_diagnosis.state_validity_diagnostic.recoverability_relevance",
+      "origin_diagnosis.state_validity_diagnostic.is_valid",
+      "origin_diagnosis.state_validity_diagnostic.orbit_info",
+      "origin_diagnosis.state_validity_diagnostic.rule_ids",
+      "origin_diagnosis.state_validity_diagnostic.notes",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.diagnostic_kind",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.severity",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.stage",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.disposition",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.subject_reference",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.parent_diagnostic_reference",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.chain_root_reference",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.rule_ids",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.summary",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.notes"
+    ],
+    "BoundaryErrorCodes": [
+      "REALM_TRANSITION_VALUE_INVALID",
+      "REALM_TRANSITION_CATALOG_INVALID",
+      "REALM_TRANSITION_SELECTION_INVALID",
+      "REALM_TRANSITION_ORIGIN_REJECTED",
+      "REALM_TRANSITION_RAW_PACKET_LIMIT"
+    ]
+  },
+  "limits": {
+    "catalog_definitions": 16,
+    "state_bits": 9,
+    "applicability_mask_ascii_bits": 512,
+    "recognized_valid_states": 512,
+    "identifier_characters": 256,
+    "text_unicode_scalars": 512,
+    "notes_per_record": 1,
+    "raw_business_bytes": 1048576,
+    "realm_constructed_records": 2,
+    "resolve_constructed_records": 17,
+    "apply_constructed_records": 4,
+    "byte_alias_support_incident_grants": "NOT_YET_DERIVED; diagnostics peer owns independent proof before integration",
+    "new_module_compact_ascii_envelope_bytes": 8192,
+    "raw_limit_scope": "COMBINED_ACTUAL_RESULT_FIRST_COMPLETION_FINAL_OBSERVATION; bounded remaining shapes preflighted before capture",
+    "legacy_raw_business_bytes_unchanged": 33554432
+  },
+  "payloads": {
+    "VALID_SOURCE": "RealmTransitionGate",
+    "IDENTITY": "RealmIdentity",
+    "SELECTION": "TransitionSelectionObservation",
+    "APPLICABILITY": "TransitionApplicabilityObservation",
+    "TRANSFORMATION": "TransitionTransformationObservation"
+  },
+  "source_contract_pins": [
+    "REALM_ENCODER_CONTRACT",
+    "REALM_IDENTITY",
+    "TRANSITION_REGISTRY_CONTRACT",
+    "TRANSITION_SYSTEM",
+    "TRANSFORMATION",
+    "CODEWORDS",
+    "ASH_STATE_SPACE",
+    "STATE_ADMISSIBILITY",
+    "DIAGNOSTIC_SCHEMA",
+    "RULE_TAXONOMY",
+    "DIAGNOSTICS_MODULE_CONTRACT"
+  ],
+  "source_adoption_scope": "EXACT_M3_MODULES_VECTOR_N3_INELIGIBLE; preserve historical legacy/N3 vectors and subsets",
+  "revision": 2,
+  "supersedes_r1_index_sha256": "a849c2a538212f0789a78a7d14a6fab594678d147ea506687af5519d7a08a436",
+  "api_only_error": {
+    "name": "RealmTransitionContractError",
+    "signature": "(code, field_name)",
+    "owner": "realm/transition values module",
+    "codes": [
+      "REALM_TRANSITION_VALUE_INVALID",
+      "REALM_TRANSITION_CATALOG_INVALID",
+      "REALM_TRANSITION_SELECTION_INVALID",
+      "REALM_TRANSITION_ORIGIN_REJECTED",
+      "REALM_TRANSITION_RAW_PACKET_LIMIT"
+    ],
+    "field_ids": [
+      "state_model",
+      "diagnostics",
+      "realm_transition_binding",
+      "transition_catalog",
+      "transition_selection",
+      "origin_diagnosis",
+      "operation_reference",
+      "producer_result",
+      "capture_scope",
+      "raw_business_packet"
+    ],
+    "submitted_body": "NEVER_RETAINED"
+  },
+  "issuance": "API_ONLY exact producer/cookie/self identity; mathematical immutable copies are not live capture issuance",
+  "capture_protocol": "PURE_RESULT_THEN_WHOLE_MODULE_CAPTURE_ADMISSION_BEFORE_CAPTURE_OR_EFFECT",
+  "requirement_id": "YWE-REQ-0046",
+  "decision_id": "ADR-0037",
+  "preserved_r2_index_sha256": "d3b1f1f7281ac7a99d5b10d1457d685e8ca5f05e9a42080e5e689aadab5eeaa4",
+  "compiled_policy_and_test_profile_identities": [
+    {
+      "filename": "REALM_TRANSITION_STANDARD_POLICY.json",
+      "policy_id": "ywe.reference.realm-transition.v1",
+      "repository_path": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_STANDARD_POLICY.json",
+      "bytes": 12400,
+      "raw_sha256": "6df6e573a27612e513a673ac54d89338fc72bce19c77357ddb3c9f80501f6149",
+      "meaning": "COMPILED_STANDARD_ALL_512_BITS_ALLOWED"
+    },
+    {
+      "filename": "REALM_TRANSITION_RESTRICTED_TEST_POLICY.json",
+      "policy_id": "ywe.validation.restricted-transition.v1",
+      "repository_path": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_RESTRICTED_TEST_POLICY.json",
+      "bytes": 12406,
+      "raw_sha256": "608730096b94094a0f247011946c5e7093b82d8713b5c1122e57a5a15a6aee4d",
+      "meaning": "COMPILED_TEST_ONLY_CODEWORD00_SOURCE_ZERO_ONLY"
+    },
+    {
+      "filename": "CODEWORD_ORBIT_TEST_PROFILE.json",
+      "policy_id": "ywe.validation.codeword-orbit.v1",
+      "repository_path": "docs/design-planning/m3/realm-transition/CODEWORD_ORBIT_TEST_PROFILE.json",
+      "bytes": 573,
+      "raw_sha256": "1e5e6e6b8388dfb11a6f0dad2b301e7c8d6491386fa1f63319e41ffcc96798ce",
+      "meaning": "TEST_ONLY_NO_WRW_DEFAULT"
+    }
+  ],
+  "reused_diagnostics_type": {
+    "name": "ModuleFinalObservationReceipt",
+    "owner": "Diagnostics",
+    "fields": [
+      "operation_reference",
+      "status",
+      "supporting_reference",
+      "coverage",
+      "failure_code"
+    ],
+    "nullability": "null only when no actual observer call occurred",
+    "safe_node": "NO_NEW_NODE; API/raw wrapper-only exact observation"
+  },
+  "planned_implementation": {
+    "status": "PLANNED_NOT_IMPLEMENTED",
+    "module_paths": [
+      "core/ash_pattern_engine/realm_transition_values.py",
+      "core/ash_pattern_engine/realm_transition.py"
+    ],
+    "shared_state_model_paths": [
+      "core/ash_pattern_engine/state_values.py",
+      "core/ash_pattern_engine/state_model.py"
+    ],
+    "schema_path": "data/schemas/m3_realm_transition_schema.json",
+    "test_paths": [
+      "tests/test_m3_realm_transition_values.py",
+      "tests/test_m3_realm_transition.py",
+      "tests/test_m3_realm_transition_schemas.py"
+    ],
+    "cohesion": "Two pure owners and explicit local runner share one module; value/error ownership stays in sibling values module."
+  },
+  "public_api_only_capture_ports": [
+    {
+      "owners": [
+        "RealmEncoder",
+        "TransitionRegistry"
+      ],
+      "name": "configuration",
+      "signature": "() -> exact RealmTransitionBinding",
+      "dispatch": "Exact registered class-owned call before collector IO",
+      "semantics": "Returns actual immutable complete source/profile/policy/elevenpins; revalidates own actual configuration; no instance dispatch or source IO."
+    },
+    {
+      "owners": [
+        "RealmEncoder",
+        "TransitionRegistry"
+      ],
+      "name": "validate_owned_result",
+      "signature": "(result) -> exact bool",
+      "dispatch": "Exact registered class-owned call before collector IO",
+      "semantics": "Owner-only issuer/cookie/resultself identity and exact current binding/origin/record coherence; rejects copied/unissued/corrupt/foreign values without hooks or peer private access. No mutable issuance ledger or wire fields."
+    }
+  ],
+  "source_contract_pin_values": [
+    {
+      "source_id": "REALM_ENCODER_CONTRACT",
+      "path": "interfaces/contracts/realm-encoder-contract.md",
+      "source_sha256": "b3fa0deb71ae136c712f402f2b8159b7448ef8756a884369931ab7098bc83fbb"
+    },
+    {
+      "source_id": "REALM_IDENTITY",
+      "path": "core/realm-identity.pseudo.md",
+      "source_sha256": "43f274d9c8c1b7269938bf8661c42e91cf020d215683cb6dfa4b340ff975cad5"
+    },
+    {
+      "source_id": "TRANSITION_REGISTRY_CONTRACT",
+      "path": "interfaces/contracts/transition-registry-contract.md",
+      "source_sha256": "f123b02c3390253cba5f50a04e9c69e9c20771c6dc7cff5bcdc7a3c85aa6471f"
+    },
+    {
+      "source_id": "TRANSITION_SYSTEM",
+      "path": "algorithms/transition-system.pseudo.md",
+      "source_sha256": "26c456f60fbb5c847714c4a9a49cf8d11ac48ef0a7d0c127da53bd893dd527c2"
+    },
+    {
+      "source_id": "TRANSFORMATION",
+      "path": "algorithms/codeword-transformation-semantics.pseudo.md",
+      "source_sha256": "80623862ac8dfe72bdecea670f15f4f339c0096da1f63b9058a73458eeedd88e"
+    },
+    {
+      "source_id": "CODEWORDS",
+      "path": "core/codeword-set.pseudo.md",
+      "source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+    },
+    {
+      "source_id": "ASH_STATE_SPACE",
+      "path": "core/ash-state-space.pseudo.md",
+      "source_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+    },
+    {
+      "source_id": "STATE_ADMISSIBILITY",
+      "path": "core/state-admissibility.pseudo.md",
+      "source_sha256": "5d9231331849a6359a8d8e537d0434ee78787bb14efe5da03f60e68ba3c1978e"
+    },
+    {
+      "source_id": "DIAGNOSTIC_SCHEMA",
+      "path": "interfaces/diagnostic-schema.md",
+      "source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+    },
+    {
+      "source_id": "RULE_TAXONOMY",
+      "path": "interfaces/rule-id-taxonomy.md",
+      "source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+    },
+    {
+      "source_id": "DIAGNOSTICS_MODULE_CONTRACT",
+      "path": "interfaces/contracts/diagnostics-module-contract.md",
+      "source_sha256": "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+    }
+  ],
+  "source_pin_derivation": {
+    "status": "VERIFIED_FINAL_EXTERNAL_SOURCE_VECTOR_NOT_HOST_ADOPTION",
+    "source_vector_input_sha256": "26cd7666820e7897899a158220a28af67889590c90db7945144b4020cc1ac5d1",
+    "baseline": "M3_MODULES",
+    "canonical_binding": {
+      "dependency_id": "ash_cosmological_model.f2_9.canonical",
+      "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+      "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+      "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+      "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+      "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+      "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+      "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+      "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+    },
+    "normalized_source_rows": 32,
+    "unchanged_actual_a345_blobs": 29,
+    "changed_actual_a345_blobs": 3,
+    "actual_containing_commit": "OWNER_ADOPTION_WILL_ESTABLISH; no future SHA asserted",
+    "old_vectors_and_rule_subsets": "EXACT_REVIEWED_LEGACY_C78_AND_N3_PRESERVED"
+  },
+  "new_rules": [
+    "ASH-STATE-IDENTITY-001",
+    "ASH-CODEWORD-REGISTRY-001",
+    "ASH-CODEWORD-SELECTION-001",
+    "ASH-CODEWORD-APPLICABILITY-001",
+    "ASH-CODEWORD-TRANSFORMATION-001"
+  ]
+}

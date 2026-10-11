@@ -73,15 +73,21 @@ checkout changes. All 930 fixture bindings and 382 intended rejections pass.
 The scoped 125 session controls cover actual Windows protected-store export,
 source/policy admission, fresh recovery, controlled publication, containment,
 resolution, all five halt causes, concurrent revocation and terminal evidence.
-The earlier contract checkpoint b283c40 passes full Ubuntu/Windows CI; the
-runtime implementation’s own CI is dispatched and pending observation.
+The runtime implementation’s exact-revision [Ubuntu/Windows CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38175922165)
+completed successfully: each OS passes all 36 checks and runs 1151 unit tests.
+Ubuntu passes 1109 with 42 explicit native skips; Windows passes all 1151
+with no skips.
 
 Strict RealmEncoder and TransitionRegistry ownership is next, preserving the
-existing full-state algebra helpers. Bounded topology, five-axiom evaluation,
+existing full-state algebra helpers. The [source, producer and capture contracts](../design-planning/m3/module-diagnostics/README.md)
+are adopted under YWE-REQ-0045–0048 / ADR-0036–0039 before dependent implementation.
+Their source/representation controls pass; new producer runtime acceptance is
+not yet executed. Complete planner/emitter business policy and coherent current-
+source lifecycle integration remain required before M3 acceptance. Bounded topology, five-axiom evaluation,
 pure planning, independent emission and complete Diagnostics producer coverage
 remain required. All five M3 exit criteria remain open; N3 verification does
-not activate M4 or platform work. Owner wiki ccd0d59 is published from exact
-source d79e5bc and all 47 remote pages match reviewed bytes.
+not activate M4 or platform work. Owner wiki 78d037e is published from exact
+source d80785a and all 47 remote pages match reviewed bytes.
 
 The [README checkpoint](../../README.md#development-checkpoint--2026-10-11)
 and [Project Record section 16.4](../design-planning/Project_Record.md#164-committed-lifecycle-verification-and-roadmap-continuation)

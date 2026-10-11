@@ -123,7 +123,17 @@ needed. After M3 acceptance and GitHub publication, pause and wait for the
 owner’s explicit go-ahead before starting any M4 work. M3 development continues
 now; the broader roadmap goal remains active until that checkpoint.
 
-N3 session lifecycle is the active M3 assignment. The complete
+Strict RealmEncoder/TransitionRegistry, bounded topology and five-axiom
+reference implementation are the next active M3 assignment. Their
+[adopted contracts and finite inventories](docs/design-planning/m3/module-diagnostics/README.md)
+precede dependent code under YWE-REQ-0045–0048 / ADR-0036–0039. The reviewed
+source extension changes three Diagnostics pages and preserves the other
+29 canonical files, earlier vectors and full-state algebra. These contract
+and structural bounds do not establish new runtime acceptance. Complete
+planner/emitter business policies and current-source lifecycle integration
+remain required before M3 acceptance.
+
+N3 session lifecycle is verified at its committed reference revision. The complete
 [lifecycle contract](docs/architecture/m3_session_lifecycle_contract.md),
 [safety policy](docs/architecture/m3_session_lifecycle_policy.md) and
 [38-type/35-port inventory with replayable capacity controls](docs/design-planning/m3/session-lifecycle/README.md)
@@ -148,7 +158,10 @@ blocking failures, advisories or checkout changes. Git and GitHub API readback
 confirm the published implementation and exact README bytes. This verifies the
 bounded N3 reference lifecycle. Its
 [Ubuntu/Windows CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38175922165)
-is running at the latest readback. M0–M2 remain accepted and M3 active.
+completed successfully on both systems at the exact a345 revision. Each
+passes all 36 checks and runs 1151 unit tests: Ubuntu passes 1109 with
+42 explicit native skips; Windows passes all 1151 with no skips.
+M0–M2 remain accepted and M3 active.
 
 Next work is strict RealmEncoder and TransitionRegistry admission, followed
 by bounded topology, five-axiom evaluation and complete pure planner/emitter
@@ -191,8 +204,8 @@ Those results cover the adopted contract and approval correction. The lifecycle
 implementation has the separate committed-source full run recorded above.
 
 The [wiki](https://github.com/flynn33/yggdrasil-world-engine/wiki) is published at
-[`d3688f0`](https://github.com/flynn33/yggdrasil-world-engine/wiki/_history)
-from source `b283c40`. A fresh remote clone matches all 47 reviewed pages,
+[`78d037e`](https://github.com/flynn33/yggdrasil-world-engine/wiki/_history)
+from source `d80785a`. A fresh remote clone matches all 47 reviewed pages,
 including Home, the roadmap page and preserved manual navigation. Each published
 development increment updates this README checkpoint and refreshes the wiki
 from committed source. The machine-readable milestone gates remain authoritative;

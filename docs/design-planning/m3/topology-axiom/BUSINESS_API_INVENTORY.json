@@ -1,0 +1,1460 @@
+{
+  "artifact_type": "topology_axiom_business_inventory",
+  "status": "ACTIVE_REFERENCE_CONTRACT; runtime implementation and acceptance remain separate.",
+  "prepared_against_commit": "a345d1be3e2d635cb79104c153d2628b090ccd88",
+  "method_pin": "87409bc36fb9d4782eab02189adb184f2b3962a7",
+  "governance_allocation_owner": "Root owns register/adoption/publication. YWE-REQ-0047 and ADR-0038 are reserved for this adoption; no containing implementation commit is invented.",
+  "policy_file": "docs/architecture/m3_topology_axiom_reference_policy.md",
+  "policy_sha256": "ab645a078e9aaee04e3eb01ac1ced01de986340d8f0242057eb3e4567196c7ae",
+  "type_count": 21,
+  "types": [
+    {
+      "name": "TopologyAxiomPolicyBinding",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "policy_id",
+          "type": "literal YWE-TOPOLOGY-AXIOM-REFERENCE-001",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "policy_version",
+          "type": "literal 1.0.0",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "policy_sha256",
+          "type": "literal ab645a078e9aaee04e3eb01ac1ced01de986340d8f0242057eb3e4567196c7ae",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": null,
+      "invariants": [
+        "Exact active policy bytes are bound by their actual LF UTF-8 digest; source_path is registered metadata rather than a caller field.",
+        "This adoption candidate reconciles status/requirement routing, actual policy hash, class-owned pure dispatch and the source-preserving origin-subject correction while preserving original R2 separately. Future material policy changes require their proper reviewed identity/version."
+      ]
+    },
+    {
+      "name": "TopologyAxiomSourceBinding",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "canonical_binding",
+          "type": "CanonicalAshBinding",
+          "rule": "Exact source-owned value for one complete reviewed LEGACY_C78, N3_LIFECYCLE or M3_MODULES vector governed by YWE-REQ-0045."
+        },
+        {
+          "name": "contract_pins",
+          "type": "tuple exactly7 of exact tuple(path: ASCII1..256, sha256: lowercasehex64)",
+          "rule": "Exact ordered path/digest pairs selected by canonical baseline; copied tuple. Wire representation is an array of two-item arrays, with no new arbitrary SourcePin payload type."
+        }
+      ],
+      "wire_header": null,
+      "invariants": [
+        "canonical_binding is revalidated in its complete nine-field domain; contract_pins equals the whole baseline table below, including every path/order/digest.",
+        "Operation success or produced new-kind TEN requires the M3_MODULES vector. Older reviewed variants exist only to truthfully retain a source-refusal value if current source is rechecked after configuration.",
+        "No host verification or live authority is asserted by source-value construction. Unknown/mixed vectors and mismatched pins refuse at the boundary."
+      ]
+    },
+    {
+      "name": "TopologyRequest",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "request_reference",
+          "type": "Reference160",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "origin_diagnosis",
+          "type": "StateDiagnosis",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "depth",
+          "type": "Signed64",
+          "rule": "Represents negative and excessive requested depths; owner semantically supports 0..6."
+        },
+        {
+          "name": "seed_token",
+          "type": "ASCII [A-Za-z0-9_-]{1,32}",
+          "rule": "Explicit default F; always serialized."
+        }
+      ],
+      "wire_header": null,
+      "invariants": [
+        "No supplied diagnostic IDs, caller budgets, context flags, callbacks or live-session authorization.",
+        "The derived topology and diagnostic references are request_reference+':topology' and request_reference+':diagnostic:topology'."
+      ]
+    },
+    {
+      "name": "TopologyNode",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "node_id",
+          "type": "ASCII1..49",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "parent_id",
+          "type": "ASCII1..48|null",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "depth",
+          "type": "integer0..6",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "ordinal",
+          "type": "integer0..728",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "branch_kind",
+          "type": "enum root|continuation|positive|negative",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "path_token",
+          "type": "ASCII r[012]{0,6}",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": null,
+      "invariants": [
+        "node_id is topology:<seed>:<path>; parse exact three components with seed grammar from policy.",
+        "depth=len(path)-1; ordinal=base3(path[1:]) or0.",
+        "Root alone has null parent_id, depth0, ordinal0, kindroot. Nonroot parent uses same seed/path[:-1], kind determined by final digit."
+      ]
+    },
+    {
+      "name": "TopologyDiagnostic",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "request_reference",
+          "type": "Reference160",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "topology_reference",
+          "type": "Reference256|null",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "input_state",
+          "type": "AshState|null",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "seed_token",
+          "type": "ASCII [A-Za-z0-9_-]{1,32}",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "depth",
+          "type": "Signed64",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "frontier_count",
+          "type": "integer1..729|null",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "visited_node_count",
+          "type": "integer0..1093",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "outcome",
+          "type": "enum COMPLETE|REJECTED",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "failure_code",
+          "type": "TopologyFailureCode|null",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "notes",
+          "type": "tuple1..8 of Text512",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": null,
+      "invariants": [
+        "COMPLETE requires nonnull topology/input/frontier, supporteddepth, frontier=3**depth, visited=sum(3**k,k0..depth), failure null.",
+        "REJECTED requires null topology/frontier, visited0 and actual nonnull failurecode. input_state is actual parsed origin or null, never invented.",
+        "notes are exact compiled outcome/failure templates using only owned enum/numeric facts; caller prose or raw seed/reference echo is not admitted."
+      ]
+    },
+    {
+      "name": "AxiomSubjectProvenance",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "source_kind",
+          "type": "literal DECLARED_REFERENCE_INPUT",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "source_reference",
+          "type": "Reference160",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "method_id",
+          "type": "Identifier64",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "method_revision",
+          "type": "Identifier32",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "origin_diagnosis_reference",
+          "type": "Reference256",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": null,
+      "invariants": [
+        "Declared source/method identity is retained data, not authenticated measurement, actual measurement execution or authority."
+      ]
+    },
+    {
+      "name": "AxiomMeasure",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "ticks",
+          "type": "NonNegativeInt63",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "unit",
+          "type": "enum STRUCTURE_TICK|ERASURE_TICK",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "ticks_per_unit",
+          "type": "integer1..1000000000",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": null,
+      "invariants": [
+        "No float, bool-as-int, nonfinite, negative or coerced number.",
+        "Both supported unit names are explicit abstract reference units."
+      ]
+    },
+    {
+      "name": "AxiomSubject",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "subject_reference",
+          "type": "Reference160",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "state",
+          "type": "AshState",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "relation_count",
+          "type": "NonNegativeInt63",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "raw_measure",
+          "type": "AxiomMeasure",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "compressed_measure",
+          "type": "AxiomMeasure",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "scale_count",
+          "type": "NonNegativeInt63",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "erasure_cost",
+          "type": "AxiomMeasure",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "self_reference_capable",
+          "type": "exact bool",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "self_model_available",
+          "type": "exact bool",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "provenance",
+          "type": "AxiomSubjectProvenance",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": null,
+      "invariants": [
+        "All seven subject facts are supplied explicitly. No state/topology/role-derived metrics.",
+        "Unit and state/provenance matching are semantic owner checks with retained refusal, not silent conversion.",
+        "This value may represent cross-field semantic mismatches so the evaluator can emit an explained input refusal."
+      ]
+    },
+    {
+      "name": "AxiomRequest",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "request_reference",
+          "type": "Reference160",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "origin_diagnosis",
+          "type": "StateDiagnosis",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "subject",
+          "type": "AxiomSubject",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": null,
+      "invariants": [
+        "Fullfive axiom profile is fixed; no subset, enforced action, caller diagnostics or capture configuration.",
+        "evaluation_reference=request_reference+':axioms'; check references=request_reference+':diagnostic:A1' through ':diagnostic:A5'; refusal=request_reference+':diagnostic:axiom-input'."
+      ]
+    },
+    {
+      "name": "AxiomCheckDiagnostic",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "axiom_id",
+          "type": "enum A1|A2|A3|A4|A5",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "subject",
+          "type": "AxiomSubject",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "passed",
+          "type": "exact bool",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "current_impact",
+          "type": "enum INFO|WARNING",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "operator",
+          "type": "enum GT_ZERO|LT|GT_ONE|BOTH_TRUE",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "operand_names",
+          "type": "tuple1..2 of AxiomOperandName",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "overall_pass",
+          "type": "exact bool|null",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "explanation",
+          "type": "Text512",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": null,
+      "invariants": [
+        "A1 GT_ZERO/relation_count; A2 LT/compressed_measure,raw_measure; A3 GT_ONE/scale_count; A4 GT_ZERO/erasure_cost; A5 BOTH_TRUE/self_reference_capable,self_model_available.",
+        "passed is rederived from actual subject; INFO iff passed, WARNING otherwise.",
+        "A1..A4 overall null; A5 overall equals conjunction of allfive subject conditions; A5 rule list includes CONJUNCTION001.",
+        "Each payload retains the same complete immutable subject, including exact units/scales/provenance.",
+        "explanation is the exact compiled axiom/aggregate template derived from owned facts; no caller prose/source token echo."
+      ]
+    },
+    {
+      "name": "AxiomInputDiagnostic",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "request_reference",
+          "type": "Reference160",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "subject",
+          "type": "AxiomSubject",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "failure_code",
+          "type": "AxiomFailureCode",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "failed_field",
+          "type": "FailureField",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "explanation",
+          "type": "Text512",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": null,
+      "invariants": [
+        "No axiom component is reported evaluated. Subject is the submitted immutable fact set, including mismatched state/units if present.",
+        "explanation is the exact compiled failure template using only controlled enum/field names; no caller prose."
+      ]
+    },
+    {
+      "name": "GenerationDiagnosticRecord",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "diagnostic_reference",
+          "type": "Reference256",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "envelope",
+          "type": "DiagnosticEnvelope after source adoption",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "payload",
+          "type": "TopologyDiagnostic|AxiomCheckDiagnostic|AxiomInputDiagnostic",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": null,
+      "invariants": [
+        "Exact threeway payload union, no arbitrary dict and no old DiagnosticEmission union expansion.",
+        "TOPOLOGY kind iff topology payload; AXIOM iff either axiom payload; stagePROCESSING.",
+        "Record references, subject, rule ordering, outcome/disposition and ancestor/root associations are revalidated from the enclosing actual request/result.",
+        "Pure production confers no CaptureReceipt or persistence status.",
+        "Generated summary/notes equal compiled deterministic templates; compact ensure_ascii TEN byte size <=8192; no lower old-envelope limit is claimed."
+      ]
+    },
+    {
+      "name": "PendingGenerationDiagnostic",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "diagnostic_reference",
+          "type": "Reference256",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "intended_kind",
+          "type": "enum TOPOLOGY|AXIOM",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "intended_rule_ids",
+          "type": "tuple1..5 of source-adopted topology/axiom exact rule IDs",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "failure_code",
+          "type": "enum ORIGIN_REJECTED|REFERENCE_COLLISION|SOURCE_UNSUPPORTED|VALIDATION_UNAVAILABLE",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "missing_requirements",
+          "type": "tuple1..4 unique of CURRENT_SOURCE|VERIFIED_ORIGIN|VALIDATION_RESULT|DISTINCT_REFERENCES",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "reason",
+          "type": "Text512",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": null,
+      "invariants": [
+        "No TEN envelope, invented root, source diagnostic payload, capture acknowledgment or fabricated time. This is explicit unavailable semantic production."
+      ]
+    },
+    {
+      "name": "TopologyResult",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "topology_reference",
+          "type": "Reference256",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "request",
+          "type": "TopologyRequest",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "policy_binding",
+          "type": "TopologyAxiomPolicyBinding",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "source_binding",
+          "type": "TopologyAxiomSourceBinding",
+          "rule": "Exact actual current source/module pin binding. Matches the current_source_binding of nonnull origin_validation; produced TEN requires M3_MODULES."
+        },
+        {
+          "name": "origin_validation",
+          "type": "DiagnosisValidation",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "input_state",
+          "type": "AshState",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "nodes",
+          "type": "tuple1..729 of TopologyNode",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "visited_node_count",
+          "type": "integer1..1093",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "produced_diagnostics",
+          "type": "tuple exactly1 GenerationDiagnosticRecord",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": {
+        "schema_version": "1.0.0",
+        "packet_kind": "topology_result"
+      },
+      "invariants": [
+        "VERIFIED current origin; parsed VALID/ALREADY_VALID under available full current profile.",
+        "Every node/ordinal/lineage/seed/count is rederived; final frontier only, ordered0..3**depth-1.",
+        "Single exact complete topology diagnostic; input_state equals current verified parsed origin.",
+        "Only complete output is published.",
+        "source_binding is the actual current complete canonical/module binding rederived from model configuration at operation; no arbitrary caller digest is accepted."
+      ],
+      "api_only_owner_seal": {
+        "constructor_argument": false,
+        "wire_field": false,
+        "meaning": "Trusted actual producer factory alone installs an issuer/cookie plus exact result self-identity seal. It proves configured local execution only. Public construction/copies are values without producer capability.",
+        "validation": "Only actual issuer's class-owned validate_owned_result checks seal and deep current coherence; caller booleans, value equality and copied token metadata grant nothing."
+      }
+    },
+    {
+      "name": "TopologyFailure",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "request",
+          "type": "TopologyRequest",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "policy_binding",
+          "type": "TopologyAxiomPolicyBinding",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "source_binding",
+          "type": "TopologyAxiomSourceBinding",
+          "rule": "Exact actual current source/module pin binding. Matches the current_source_binding of nonnull origin_validation; produced TEN requires M3_MODULES."
+        },
+        {
+          "name": "origin_validation",
+          "type": "DiagnosisValidation|null",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "failure_code",
+          "type": "TopologyFailureCode",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "failed_field",
+          "type": "FailureField",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "produced_diagnostics",
+          "type": "tuple0..1 GenerationDiagnosticRecord",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "pending_diagnostic",
+          "type": "PendingGenerationDiagnostic|null",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": {
+        "schema_version": "1.0.0",
+        "packet_kind": "topology_failure"
+      },
+      "invariants": [
+        "No topology node output, partial frontier, successful topology_reference or inferred normalization.",
+        "A verified coherent origin and distinct refs produce exactlyone rejection TEN and null pending.",
+        "Rejected/unavailable validation, unsupportedsource or refcollision produce zero TEN and nonnull pending.",
+        "origin_validation null only for SOURCE_UNSUPPORTED before pure validation or unavailable pure collaborator outcome; no unowned returned object/exception text retained.",
+        "source_binding is the actual current complete canonical/module binding rederived from model configuration at operation; no arbitrary caller digest is accepted."
+      ],
+      "api_only_owner_seal": {
+        "constructor_argument": false,
+        "wire_field": false,
+        "meaning": "Trusted actual producer factory alone installs an issuer/cookie plus exact result self-identity seal. It proves configured local execution only. Public construction/copies are values without producer capability.",
+        "validation": "Only actual issuer's class-owned validate_owned_result checks seal and deep current coherence; caller booleans, value equality and copied token metadata grant nothing."
+      }
+    },
+    {
+      "name": "AxiomDiagnostic",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "a1_relational_existence",
+          "type": "exact bool",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "a2_structural_compressibility",
+          "type": "exact bool",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "a3_multi_scale_persistence",
+          "type": "exact bool",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "a4_energetic_cost_of_erasure",
+          "type": "exact bool",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "a5_self_reference_for_consciousness",
+          "type": "exact bool",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "overall_pass",
+          "type": "exact bool",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "notes",
+          "type": "tuple exactly5 Text512",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": null,
+      "invariants": [
+        "Exact seven canonical fields; overall_pass is conjunction; one explanation percheck in A1..A5 order.",
+        "No A6, pressure, stabilization action, recovery category or state-class validity claim."
+      ]
+    },
+    {
+      "name": "AxiomEvaluationResult",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "evaluation_reference",
+          "type": "Reference256",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "request",
+          "type": "AxiomRequest",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "policy_binding",
+          "type": "TopologyAxiomPolicyBinding",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "source_binding",
+          "type": "TopologyAxiomSourceBinding",
+          "rule": "Exact actual current source/module pin binding. Matches the current_source_binding of nonnull origin_validation; produced TEN requires M3_MODULES."
+        },
+        {
+          "name": "origin_validation",
+          "type": "DiagnosisValidation",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "axiom_diagnostic",
+          "type": "AxiomDiagnostic",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "produced_diagnostics",
+          "type": "tuple exactly5 GenerationDiagnosticRecord",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": {
+        "schema_version": "1.0.0",
+        "packet_kind": "axiom_evaluation_result"
+      },
+      "invariants": [
+        "All subject semantic admissions verified; A1..A5 performed regardless of earlier false.",
+        "Subject.state/provenance bind exact actual origin; measurements stay DECLARED_REFERENCE_INPUT.",
+        "All summary/body/TEN results are rederived; root is origin detection, first parent is that detection, remaining parents are prior actual check.",
+        "Severity is cumulative max of origin and every component to date. A1..A4 disposition derives from component_pass; fifth disposition derives from overall_pass independently of factual A5 component_pass.",
+        "Allfive records constructed immediately one at a time, with no callbacks/IO; no capture-complete field.",
+        "source_binding is the actual current complete canonical/module binding rederived from model configuration at operation; no arbitrary caller digest is accepted."
+      ],
+      "api_only_owner_seal": {
+        "constructor_argument": false,
+        "wire_field": false,
+        "meaning": "Trusted actual producer factory alone installs an issuer/cookie plus exact result self-identity seal. It proves configured local execution only. Public construction/copies are values without producer capability.",
+        "validation": "Only actual issuer's class-owned validate_owned_result checks seal and deep current coherence; caller booleans, value equality and copied token metadata grant nothing."
+      }
+    },
+    {
+      "name": "AxiomEvaluationFailure",
+      "representation": "WIRE_VALUE",
+      "constructor_fields": [
+        {
+          "name": "request",
+          "type": "AxiomRequest",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "policy_binding",
+          "type": "TopologyAxiomPolicyBinding",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "source_binding",
+          "type": "TopologyAxiomSourceBinding",
+          "rule": "Exact actual current source/module pin binding. Matches the current_source_binding of nonnull origin_validation; produced TEN requires M3_MODULES."
+        },
+        {
+          "name": "origin_validation",
+          "type": "DiagnosisValidation|null",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "failure_code",
+          "type": "AxiomFailureCode",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "failed_field",
+          "type": "FailureField",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "produced_diagnostics",
+          "type": "tuple0..1 GenerationDiagnosticRecord",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "pending_diagnostic",
+          "type": "PendingGenerationDiagnostic|null",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "wire_header": {
+        "schema_version": "1.0.0",
+        "packet_kind": "axiom_evaluation_failure"
+      },
+      "invariants": [
+        "No component evaluations or AxiomDiagnostic result.",
+        "Verified coherent origin and distinct refs produce exactlyone AXIOM SUBJECT001 input rejection, nullpending.",
+        "Rejected/unavailablevalidation, unsupportedsource or refcollision produce zero TEN and nonnull pending.",
+        "No raw collaborator object or guessed assessment/provenance.",
+        "source_binding is the actual current complete canonical/module binding rederived from model configuration at operation; no arbitrary caller digest is accepted."
+      ],
+      "api_only_owner_seal": {
+        "constructor_argument": false,
+        "wire_field": false,
+        "meaning": "Trusted actual producer factory alone installs an issuer/cookie plus exact result self-identity seal. It proves configured local execution only. Public construction/copies are values without producer capability.",
+        "validation": "Only actual issuer's class-owned validate_owned_result checks seal and deep current coherence; caller booleans, value equality and copied token metadata grant nothing."
+      }
+    },
+    {
+      "name": "GenerationContractError",
+      "representation": "API_ONLY",
+      "constructor_fields": [
+        {
+          "name": "code",
+          "type": "enum GENERATION_INPUT_INVALID|GENERATION_POLICY_MISMATCH|GENERATION_SOURCE_UNSUPPORTED|GENERATION_COMPOSITION_INVALID|GENERATION_RAW_BYTE_LIMIT",
+          "rule": "Exact owned construction; retained immutably."
+        },
+        {
+          "name": "field_name",
+          "type": "ASCII1..128",
+          "rule": "Exact owned construction; retained immutably."
+        }
+      ],
+      "invariants": [
+        "Boundary construction/serialization/configuration error, no arbitrary caller-object serialization, repr or exception text.",
+        "No to_record/wire constructor."
+      ]
+    },
+    {
+      "name": "ReferenceTopologyGenerator",
+      "representation": "API_ONLY_OWNER",
+      "invariants": [
+        "Cohesive stateless final reference owner; explicit StateModel and policy binding; no effectful collaborators/global cache.",
+        "Public class-owned configuration()->exact immutable complete source/profile/policy tuple; validate_owned_result(result)->exactbool; no mutable issuance ledger/global registry or arbitrary collaborator dispatch."
+      ]
+    },
+    {
+      "name": "ReferenceAxiomEvaluator",
+      "representation": "API_ONLY_OWNER",
+      "invariants": [
+        "Cohesive stateless final reference owner; explicit StateModel and policy binding; no effectful collaborators/global cache.",
+        "Public class-owned configuration()->exact immutable complete source/profile/policy tuple; validate_owned_result(result)->exactbool; no mutable issuance ledger/global registry or arbitrary collaborator dispatch."
+      ]
+    }
+  ],
+  "scalar_domains": {
+    "Reference160": "Exact built-in str, [A-Za-z0-9][A-Za-z0-9._:/-]{0,159}, excludes NONE and SELF",
+    "Reference256": "Exact built-in str, [A-Za-z0-9][A-Za-z0-9._:/-]{0,255}, excludes NONE and SELF",
+    "Identifier64": "Exact str,[A-Za-z0-9][A-Za-z0-9._-]{0,63}",
+    "Identifier32": "Exact str,[A-Za-z0-9][A-Za-z0-9._-]{0,31}",
+    "Text512": "Exact str,1..512 Unicode scalar values, nonempty; no unpaired surrogates; payload explanatory text deterministic where owner-produced.",
+    "Signed64": "Exact int excluding bool, -9223372036854775808..9223372036854775807",
+    "NonNegativeInt63": "Exact int excluding bool,0..9223372036854775807",
+    "FailureField": [
+      "request.origin_diagnosis",
+      "request.depth",
+      "request.subject.state",
+      "request.subject.provenance.origin_diagnosis_reference",
+      "request.subject.raw_measure.unit",
+      "request.subject.compressed_measure.unit",
+      "request.subject.erasure_cost.unit",
+      "request.subject.compressed_measure.ticks_per_unit",
+      "request.reference_set",
+      "model.canonical_binding",
+      "model.validation"
+    ],
+    "TopologyFailureCode": [
+      "ORIGIN_REJECTED",
+      "ORIGIN_UNPARSED",
+      "PROFILE_UNAVAILABLE",
+      "STATE_NOT_NORMALIZED",
+      "DEPTH_RANGE_EXCEEDED",
+      "REFERENCE_COLLISION",
+      "SOURCE_UNSUPPORTED",
+      "VALIDATION_UNAVAILABLE"
+    ],
+    "AxiomFailureCode": [
+      "ORIGIN_REJECTED",
+      "ORIGIN_UNPARSED",
+      "PROFILE_UNAVAILABLE",
+      "SUBJECT_STATE_MISMATCH",
+      "SUBJECT_ORIGIN_MISMATCH",
+      "SUBJECT_UNIT_MISMATCH",
+      "REFERENCE_COLLISION",
+      "SOURCE_UNSUPPORTED",
+      "VALIDATION_UNAVAILABLE"
+    ],
+    "AxiomOperandName": [
+      "relation_count",
+      "compressed_measure",
+      "raw_measure",
+      "scale_count",
+      "erasure_cost",
+      "self_reference_capable",
+      "self_model_available"
+    ]
+  },
+  "limits": {
+    "supported_topology_depth_max": 6,
+    "final_frontier_nodes_max": 729,
+    "constructed_nodes_max": 1093,
+    "seed_token_chars_max": 32,
+    "node_id_chars_max": 49,
+    "path_token_chars_max": 7,
+    "topology_diagnostic_records_exact": 1,
+    "axiom_diagnostic_records_exact": 5,
+    "semantic_refusal_records_max": 1,
+    "raw_business_ascii_bytes_max": 1048576,
+    "new_ten_ascii_bytes_max": 8192
+  },
+  "proposed_rule_ids": {
+    "topology_complete": [
+      "ASH-TOPOLOGY-STRUCTURE-001",
+      "ASH-TOPOLOGY-EXPANSION-001",
+      "ASH-TOPOLOGY-ORDER-001",
+      "ASH-TOPOLOGY-LINEAGE-001"
+    ],
+    "topology_refusal": [
+      "ASH-TOPOLOGY-ADMISSION-001"
+    ],
+    "axiom_A1": [
+      "ASH-AXIOM-RELATION-001"
+    ],
+    "axiom_A2": [
+      "ASH-AXIOM-COMPRESSION-001"
+    ],
+    "axiom_A3": [
+      "ASH-AXIOM-SCALE-001"
+    ],
+    "axiom_A4": [
+      "ASH-AXIOM-ERASURE-001"
+    ],
+    "axiom_A5": [
+      "ASH-AXIOM-SELFREFERENCE-001",
+      "ASH-AXIOM-CONJUNCTION-001"
+    ],
+    "axiom_refusal": [
+      "ASH-AXIOM-SUBJECT-001"
+    ]
+  },
+  "public_ports": [
+    {
+      "name": "ReferenceTopologyGenerator.__init__",
+      "signature": "(state_model: StateModel, policy_binding: TopologyAxiomPolicyBinding)",
+      "returns": "ReferenceTopologyGenerator",
+      "effect": "Pure owned configuration validation; rejects unsupported source before any operation. Exact class-owned StateModel dispatch, no instance override callbacks."
+    },
+    {
+      "name": "ReferenceTopologyGenerator.generate",
+      "signature": "(request: TopologyRequest)",
+      "returns": "TopologyResult|TopologyFailure",
+      "effect": "Pure current diagnosis revalidation, bounded canonical expansion and immediate owned record production. Exact class-owned StateModel dispatch, no instance override callbacks."
+    },
+    {
+      "name": "ReferenceAxiomEvaluator.__init__",
+      "signature": "(state_model: StateModel, policy_binding: TopologyAxiomPolicyBinding)",
+      "returns": "ReferenceAxiomEvaluator",
+      "effect": "Pure owned configuration validation; rejects unsupported source before any operation. Exact class-owned StateModel dispatch, no instance override callbacks."
+    },
+    {
+      "name": "ReferenceAxiomEvaluator.evaluate",
+      "signature": "(request: AxiomRequest)",
+      "returns": "AxiomEvaluationResult|AxiomEvaluationFailure",
+      "effect": "Pure current diagnosis revalidation, completefive checks and immediate owned record production. Exact class-owned StateModel dispatch, no instance override callbacks."
+    },
+    {
+      "name": "WIRE_VALUE.to_record",
+      "signature": "()",
+      "returns": "Exact fresh built-in dict/list/scalar JSON DAG",
+      "effect": "Revalidates closed owned graph and bounded compact ASCII size; noIO. Packet class variables add only declared headers."
+    },
+    {
+      "name": "WIRE_VALUE.canonical_bytes",
+      "signature": "()",
+      "returns": "bytes <=1048576",
+      "effect": "json.dumps(record,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode('ascii'), with prewalk/stream byte ceiling; no partial output."
+    },
+    {
+      "name": "ReferenceTopologyGenerator.configuration",
+      "signature": "()",
+      "returns": "exact immutable tuple(TopologyAxiomSourceBinding, AvailableProfileBinding|UnavailableProfileBinding, TopologyAxiomPolicyBinding)",
+      "effect": "Pure exact class-owned current configuration revalidation. Collector dispatches ReferenceTopologyGenerator.configuration(owner) outside IO, with no instance/property dispatch or private-field read."
+    },
+    {
+      "name": "ReferenceTopologyGenerator.validate_owned_result",
+      "signature": "(result: object)",
+      "returns": "exact bool",
+      "effect": "Pure exact class-owned ownership validation outside collector IO. True only for exact family result/failure carrying actual issuer/cookie/result self-identity and full current source/profile/policy/origin/record/wire coherence. False for unissued/copied/corrupt/foreign/unknown result with zero caller hooks. No host/capture authentication."
+    },
+    {
+      "name": "ReferenceAxiomEvaluator.configuration",
+      "signature": "()",
+      "returns": "exact immutable tuple(TopologyAxiomSourceBinding, AvailableProfileBinding|UnavailableProfileBinding, TopologyAxiomPolicyBinding)",
+      "effect": "Pure exact class-owned current configuration revalidation. Collector dispatches ReferenceAxiomEvaluator.configuration(owner) outside IO, with no instance/property dispatch or private-field read."
+    },
+    {
+      "name": "ReferenceAxiomEvaluator.validate_owned_result",
+      "signature": "(result: object)",
+      "returns": "exact bool",
+      "effect": "Pure exact class-owned ownership validation outside collector IO. True only for exact family result/failure carrying actual issuer/cookie/result self-identity and full current source/profile/policy/origin/record/wire coherence. False for unissued/copied/corrupt/foreign/unknown result with zero caller hooks. No host/capture authentication."
+    }
+  ],
+  "external_shared_dependency": {
+    "name": "StateModel.validate_diagnosis",
+    "signature": "(submitted: StateDiagnosis) -> DiagnosisValidation",
+    "fields": [
+      "status",
+      "submitted_diagnosis",
+      "current_source_binding",
+      "current_profile_binding",
+      "derived_diagnostic",
+      "failure_code",
+      "failed_field"
+    ],
+    "semantics": "Peer-owned proposed pure current complete source/profile/diagnosis/emission revalidation. VERIFIED failures null; REJECTED retains actual submitted/current evidence. Exact unknown/corrupt primitives raise owned StateContractError. No capture, source IO, callback, live association or host authentication. Bounded/truncated InputEvidence validates retained associations only; discarded lexical input is not authenticated or reconstructed. Byte-equivalent immutable diagnosis copies retain value semantics; collector issuance/ACK authentication is separate.",
+    "owner": "StateModel/state_values.py; source-owned shared value. Topology/axiom import directly, with no realm/transition module dependency.",
+    "failure_codes": [
+      "SOURCE_BINDING_MISMATCH",
+      "PROFILE_BINDING_MISMATCH",
+      "INPUT_BINDING_MISMATCH",
+      "DIAGNOSIS_MISMATCH",
+      "DIAGNOSIS_ENVELOPE_MISMATCH"
+    ],
+    "failure_fields": [
+      "origin_diagnosis.source_binding",
+      "origin_diagnosis.profile_binding",
+      "origin_diagnosis.input_evidence",
+      "origin_diagnosis.parsed_state",
+      "origin_diagnosis.assessment_binding",
+      "origin_diagnosis.emitted_diagnostics",
+      "origin_diagnosis.emitted_diagnostics[0].diagnostic_reference",
+      "origin_diagnosis.state_validity_diagnostic.input_state",
+      "origin_diagnosis.state_validity_diagnostic.admissibility_status",
+      "origin_diagnosis.state_validity_diagnostic.transformation_compatibility",
+      "origin_diagnosis.state_validity_diagnostic.normalization_status",
+      "origin_diagnosis.state_validity_diagnostic.recoverability_relevance",
+      "origin_diagnosis.state_validity_diagnostic.is_valid",
+      "origin_diagnosis.state_validity_diagnostic.orbit_info",
+      "origin_diagnosis.state_validity_diagnostic.rule_ids",
+      "origin_diagnosis.state_validity_diagnostic.notes",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.diagnostic_kind",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.severity",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.stage",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.disposition",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.subject_reference",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.parent_diagnostic_reference",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.chain_root_reference",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.rule_ids",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.summary",
+      "origin_diagnosis.emitted_diagnostics[0].envelope.notes"
+    ],
+    "status": "REQUIRED_SHARED_CONTRACT_DEPENDENCY_YWE_REQ_0046",
+    "requirement_id": "YWE-REQ-0046",
+    "dispatch": "Exact StateModel class-owned public implementation: StateModel.validate_diagnosis(model, submitted), after exact model/value configuration guards; never model instance-supplied method dispatch."
+  },
+  "source_dependencies": [
+    "YWE-REQ-0045 source/taxonomy/vector adoption and YWE-REQ-0048 producer Diagnostics define TOPOLOGY/AXIOM kinds, PROCESSING stage and the exact rules above; preserve TEN10fields and old meanings.",
+    "Exact complete M3_MODULES canonical vector and matching Diagnostics source mapping; unknown/mixed vector refusal remains mandatory.",
+    "Standalone module assembly selects its explicitly reviewed source baseline. This draft does not change N3 baseline eligibility or silently replace its source factory.",
+    "Diagnostics semantic capture wrapper is separately owned; pure packet production is not persistent capture completion."
+  ],
+  "planned_runtime_paths": [
+    "core/ash_pattern_engine/generation_values.py",
+    "core/ash_pattern_engine/topology.py",
+    "core/ash_pattern_engine/axioms.py"
+  ],
+  "planned_schema_path": "data/schemas/m3_topology_axiom_schema.json",
+  "planned_test_paths": [
+    "tests/test_m3_topology.py",
+    "tests/test_m3_axioms.py",
+    "tests/test_m3_generation_values.py",
+    "tests/test_m3_generation_schemas.py"
+  ],
+  "verification_ids": [
+    "TOPO-BOUND-001",
+    "TOPO-ORDER-LINEAGE-001",
+    "TOPO-REFUSAL-001",
+    "AXIOM-TRUTH32-001",
+    "AXIOM-SELF4-001",
+    "AXIOM-THRESHOLD-001",
+    "AXIOM-UNIT-PROVENANCE-001",
+    "PURE-NOIO-001",
+    "SOURCE-BINDING-001",
+    "WIRE-CLOSED-001",
+    "RAW-BOUND-001",
+    "DIAGNOSTIC-PRODUCTION-001",
+    "DIAGNOSTIC-PERSISTENCE-001",
+    "LEGACY-PRESERVATION-001",
+    "DIAGNOSTIC-SUBJECT-ASSOCIATION-001",
+    "PRODUCER-OWNERSHIP-001"
+  ],
+  "safe_projection_dependency": {
+    "owner": "ReferenceDiagnostics semantic wrapper, separate peer contract.",
+    "seed": "Alias+bounded length only; never persist raw seed token.",
+    "nodes": "Raw node_id/parent_id become issued bounded aliases. Retain depth/ordinal/branch_kind and policy-derived seed-independent path digits; complete frontier in <=46 pages of16nodes.",
+    "subject": "Retain exact allowed units/scales/counts/ticks/booleans; source/method/revision/subject references become aliases. Provenance stays DECLARED_REFERENCE_INPUT.",
+    "text": "Protected summaries/notes use independently rederived allowlisted templates from retained semantic fields; never copy raw caller prose or untrusted source labels.",
+    "receipts": "Tentative producer operation and actual once-final observation use distinct immutable nodes; no result rewrite or self-authentication.",
+    "coverage": "Pending/unavailable projection/capture remains explicit; pure production is not persistence or healthy completed producer coverage.",
+    "caller_content": "All raw caller seed/IDs/reference/method labels remain alias-only protected data; explanatory strings are independently regenerated exact allowed templates before persistence.",
+    "requirement_id": "YWE-REQ-0048"
+  },
+  "explanation_templates": {
+    "formatting": "Exact unsigned decimal for integers and lowercase true/false for booleans; only the listed owned enum/numeric placeholders are substituted. No raw seed, caller reference, method/source label or prose is echoed.",
+    "topology_complete": {
+      "summary": "Topology expansion completed.",
+      "notes": [
+        "Input is VALID and ALREADY_VALID under the current complete profile.",
+        "Ternary child order is continuation, positive, negative.",
+        "Final frontier has {frontier_count} nodes at depth {depth}.",
+        "Constructed {visited_node_count} nodes across all levels.",
+        "Lineage is encoded by the explicit seed and base-three path."
+      ]
+    },
+    "topology_refusal": {
+      "summary": "Topology request rejected.",
+      "notes": [
+        "Reason: {failure_code}.",
+        "No topology nodes were constructed.",
+        "Complete normalized origin and supported depth 0..6 are required."
+      ]
+    },
+    "axiom_explanations": {
+      "A1": "A1: relation_count={relation_count}; requires relation_count>0; component_pass={passed}.",
+      "A2": "A2: compressed_measure={compressed_ticks} STRUCTURE_TICK, raw_measure={raw_ticks} STRUCTURE_TICK, ticks_per_unit={structural_scale}; requires compressed<raw; component_pass={passed}.",
+      "A3": "A3: scale_count={scale_count}; requires scale_count>1; component_pass={passed}.",
+      "A4": "A4: erasure_cost={erasure_ticks} ERASURE_TICK, ticks_per_unit={erasure_scale}; requires cost>0; component_pass={passed}.",
+      "A5": "A5: self_reference_capable={self_reference_capable}, self_model_available={self_model_available}; requires both true; component_pass={passed}; overall_pass={overall_pass}."
+    },
+    "axiom_summaries": {
+      "A1_A4": "{axiom_id} axiom check {passed_word}.",
+      "A5": "A5 component {passed_word}; overall {overall_word}."
+    },
+    "passed_word_map": {
+      "true": "passed",
+      "false": "failed"
+    },
+    "axiom_notes": [
+      "{explanation}",
+      "Measurements and subject provenance are declared reference input."
+    ],
+    "axiom_refusal": {
+      "summary": "Axiom subject rejected.",
+      "explanation": "Axiom input refusal: {failure_code}; field={failed_field}.",
+      "notes": [
+        "{explanation}",
+        "No axiom components were evaluated.",
+        "Measurements and subject provenance are declared reference input."
+      ]
+    },
+    "pending_reason": "Canonical {intended_kind} production unavailable: {failure_code}; missing={comma_joined_missing_requirements}."
+  },
+  "source_binding_baselines": [
+    {
+      "baseline": "LEGACY_C78",
+      "canonical_binding": {
+        "dependency_id": "ash_cosmological_model.f2_9.canonical",
+        "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+        "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+        "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+        "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+        "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+        "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+        "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+        "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+      },
+      "contract_pins": [
+        {
+          "path": "interfaces/contracts/topology-generator-contract.md",
+          "sha256": "a408b335ecacff01e38113bcd6cc6089142e40219d521e7081e87406fac11147"
+        },
+        {
+          "path": "interfaces/contracts/axiom-evaluator-contract.md",
+          "sha256": "dc2edf80d2ded0b89b31df15416e24c13139988ab6fd38adaa6195921a692faf"
+        },
+        {
+          "path": "algorithms/topology-expansion.pseudo.md",
+          "sha256": "1b6ab5d3d13b678c67f185f2f91a60d0dae7a976dcbb6df2b169efa6d15c9a3d"
+        },
+        {
+          "path": "algorithms/axiom-evaluation.pseudo.md",
+          "sha256": "0f205842840399aaf08932e20cde34761874a3296b260f139dc6a04df0e707ba"
+        },
+        {
+          "path": "interfaces/diagnostic-schema.md",
+          "sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7"
+        },
+        {
+          "path": "interfaces/rule-id-taxonomy.md",
+          "sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+        },
+        {
+          "path": "interfaces/contracts/diagnostics-module-contract.md",
+          "sha256": "88b8d682fa826f128787e6154151c68b32d677239e17ddf4344a084461554a37"
+        }
+      ],
+      "new_producer_operation_eligible": false,
+      "status": "HISTORICAL_RECOGNIZED_BASELINE_PRESERVED"
+    },
+    {
+      "baseline": "N3_LIFECYCLE",
+      "canonical_binding": {
+        "dependency_id": "ash_cosmological_model.f2_9.canonical",
+        "aggregate_sha256": "76d59926ce9676b7584c6cdd555f50f56fceda075fa3fc8b37167fd2be43f7c9",
+        "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+        "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+        "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+        "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+        "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+        "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+        "taxonomy_source_sha256": "150b45d4c75aa053a8d5276d980b359b0ae768c85ae28896680296920402f250"
+      },
+      "contract_pins": [
+        {
+          "path": "interfaces/contracts/topology-generator-contract.md",
+          "sha256": "a408b335ecacff01e38113bcd6cc6089142e40219d521e7081e87406fac11147"
+        },
+        {
+          "path": "interfaces/contracts/axiom-evaluator-contract.md",
+          "sha256": "dc2edf80d2ded0b89b31df15416e24c13139988ab6fd38adaa6195921a692faf"
+        },
+        {
+          "path": "algorithms/topology-expansion.pseudo.md",
+          "sha256": "1b6ab5d3d13b678c67f185f2f91a60d0dae7a976dcbb6df2b169efa6d15c9a3d"
+        },
+        {
+          "path": "algorithms/axiom-evaluation.pseudo.md",
+          "sha256": "0f205842840399aaf08932e20cde34761874a3296b260f139dc6a04df0e707ba"
+        },
+        {
+          "path": "interfaces/diagnostic-schema.md",
+          "sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7"
+        },
+        {
+          "path": "interfaces/rule-id-taxonomy.md",
+          "sha256": "150b45d4c75aa053a8d5276d980b359b0ae768c85ae28896680296920402f250"
+        },
+        {
+          "path": "interfaces/contracts/diagnostics-module-contract.md",
+          "sha256": "88b8d682fa826f128787e6154151c68b32d677239e17ddf4344a084461554a37"
+        }
+      ],
+      "new_producer_operation_eligible": false,
+      "status": "HISTORICAL_RECOGNIZED_BASELINE_PRESERVED"
+    },
+    {
+      "baseline": "M3_MODULES",
+      "canonical_binding": {
+        "dependency_id": "ash_cosmological_model.f2_9.canonical",
+        "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+        "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+        "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+        "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+        "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+        "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+        "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+        "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+      },
+      "contract_pins": [
+        {
+          "path": "interfaces/contracts/topology-generator-contract.md",
+          "sha256": "a408b335ecacff01e38113bcd6cc6089142e40219d521e7081e87406fac11147"
+        },
+        {
+          "path": "interfaces/contracts/axiom-evaluator-contract.md",
+          "sha256": "dc2edf80d2ded0b89b31df15416e24c13139988ab6fd38adaa6195921a692faf"
+        },
+        {
+          "path": "algorithms/topology-expansion.pseudo.md",
+          "sha256": "1b6ab5d3d13b678c67f185f2f91a60d0dae7a976dcbb6df2b169efa6d15c9a3d"
+        },
+        {
+          "path": "algorithms/axiom-evaluation.pseudo.md",
+          "sha256": "0f205842840399aaf08932e20cde34761874a3296b260f139dc6a04df0e707ba"
+        },
+        {
+          "path": "interfaces/diagnostic-schema.md",
+          "sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+        },
+        {
+          "path": "interfaces/rule-id-taxonomy.md",
+          "sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+        },
+        {
+          "path": "interfaces/contracts/diagnostics-module-contract.md",
+          "sha256": "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+        }
+      ],
+      "new_producer_operation_eligible": true,
+      "status": "SOURCE_ADOPTION_REQUIRED_BEFORE_DEPENDENT_CODE"
+    }
+  ],
+  "source_binding_contract_path_order": [
+    "interfaces/contracts/topology-generator-contract.md",
+    "interfaces/contracts/axiom-evaluator-contract.md",
+    "algorithms/topology-expansion.pseudo.md",
+    "algorithms/axiom-evaluation.pseudo.md",
+    "interfaces/diagnostic-schema.md",
+    "interfaces/rule-id-taxonomy.md",
+    "interfaces/contracts/diagnostics-module-contract.md"
+  ],
+  "external_source_dependency": {
+    "path": "C:/Users/james/AppData/Local/Temp/ywe-m3-six-producer-diagnostics-proposal-20261011-366bb3f2f09942e1b734c678f43f4166/SOURCE_VECTOR_INVENTORY.proposed.json",
+    "status": "FINALIZED_EXTERNAL_SOURCE_CANDIDATE_FOR_YWE_REQ_0045; owner adoption required before dependent code.",
+    "branch": "M3_MODULES.reviewed_producer_pin_branches.TOPOLOGY_AXIOM",
+    "digest_normalization": "UTF-8 LF bytes selected by reviewed full-vector table. Actual adoption may change source bytes and must reconcile the whole table before implementation.",
+    "m3_modules_aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+    "requirement_id": "YWE-REQ-0045",
+    "source_inventory_sha256": "26cd7666820e7897899a158220a28af67889590c90db7945144b4020cc1ac5d1",
+    "runtime_path_dependency": false,
+    "path_role": "Preserved external source derivation provenance; actual canonical/module pins are complete literal rows in this inventory, with no runtime file dependency."
+  },
+  "proposal_revision": "Adoption candidate derived from frozen external R2; R2 remains unchanged.",
+  "diagnostic_subject_policy": {
+    "ALL_TOPOLOGY_AXIOM_PROCESSING": "envelope.subject_reference equals actual verified origin.emitted_diagnostics[0].envelope.subject_reference",
+    "typed_payload_identities": "Request, topology and declared AxiomSubject IDs remain exact distinct typed payload facts. No equality to origin subject is required or inferred.",
+    "root_and_parent": "First parent is actual verified origin detection; later parent is immediate actual prior check. Every envelope has the actual StateModel origin subject/root. No new record follows terminal disposition."
+  },
+  "operation_admission_order": {
+    "common": [
+      {
+        "order": 1,
+        "test": "Revalidate exact current known full canonical/module binding and policy; changed-to-known non-M3 source after configuration refuses before validator",
+        "failure_code": "SOURCE_UNSUPPORTED",
+        "failed_field": "model.canonical_binding",
+        "validation": null,
+        "production": "PENDING",
+        "missing_requirements": [
+          "CURRENT_SOURCE"
+        ]
+      },
+      {
+        "order": 2,
+        "test": "Call only proposed pure StateModel.validate_diagnosis; wrong-type/mismatched returned witness or unexpected failure",
+        "failure_code": "VALIDATION_UNAVAILABLE",
+        "failed_field": "model.validation",
+        "validation": null,
+        "production": "PENDING",
+        "missing_requirements": [
+          "VALIDATION_RESULT"
+        ]
+      },
+      {
+        "order": 3,
+        "test": "Actual shared validation is REJECTED",
+        "failure_code": "ORIGIN_REJECTED",
+        "failed_field": "request.origin_diagnosis",
+        "validation": "actual rejected witness",
+        "production": "PENDING",
+        "missing_requirements": [
+          "VERIFIED_ORIGIN"
+        ]
+      },
+      {
+        "order": 4,
+        "test": "Derived diagnostic refs collide with verified origin diagnostic/root or each other",
+        "failure_code": "REFERENCE_COLLISION",
+        "failed_field": "request.reference_set",
+        "validation": "actual verified witness",
+        "production": "PENDING",
+        "missing_requirements": [
+          "DISTINCT_REFERENCES"
+        ]
+      },
+      {
+        "order": 5,
+        "test": "Verified actual current profile is unavailable",
+        "failure_code": "PROFILE_UNAVAILABLE",
+        "failed_field": "request.origin_diagnosis",
+        "validation": "actual verified witness",
+        "production": "one canonical refusal"
+      },
+      {
+        "order": 6,
+        "test": "Verified actual origin parsed_state is null",
+        "failure_code": "ORIGIN_UNPARSED",
+        "failed_field": "request.origin_diagnosis",
+        "validation": "actual verified witness",
+        "production": "one canonical refusal"
+      }
+    ],
+    "topology": [
+      {
+        "order": 7,
+        "test": "Origin not VALID/is_valid/ALREADY_VALID as required",
+        "failure_code": "STATE_NOT_NORMALIZED",
+        "failed_field": "request.origin_diagnosis"
+      },
+      {
+        "order": 8,
+        "test": "Exact requested depth outside0..6",
+        "failure_code": "DEPTH_RANGE_EXCEEDED",
+        "failed_field": "request.depth"
+      }
+    ],
+    "axiom": [
+      {
+        "order": 7,
+        "test": "Submitted state differs from verified parsed origin",
+        "failure_code": "SUBJECT_STATE_MISMATCH",
+        "failed_field": "request.subject.state"
+      },
+      {
+        "order": 8,
+        "test": "Declared origin ref differs from actual origin detection ref",
+        "failure_code": "SUBJECT_ORIGIN_MISMATCH",
+        "failed_field": "request.subject.provenance.origin_diagnosis_reference"
+      },
+      {
+        "order": 9,
+        "test": "raw_measure.unit is not STRUCTURE_TICK",
+        "failure_code": "SUBJECT_UNIT_MISMATCH",
+        "failed_field": "request.subject.raw_measure.unit"
+      },
+      {
+        "order": 10,
+        "test": "compressed_measure.unit is not STRUCTURE_TICK",
+        "failure_code": "SUBJECT_UNIT_MISMATCH",
+        "failed_field": "request.subject.compressed_measure.unit"
+      },
+      {
+        "order": 11,
+        "test": "compressed/raw ticks_per_unit differ",
+        "failure_code": "SUBJECT_UNIT_MISMATCH",
+        "failed_field": "request.subject.compressed_measure.ticks_per_unit"
+      },
+      {
+        "order": 12,
+        "test": "erasure_cost.unit is not ERASURE_TICK",
+        "failure_code": "SUBJECT_UNIT_MISMATCH",
+        "failed_field": "request.subject.erasure_cost.unit"
+      }
+    ],
+    "first_failure_only": "First applicable semantic condition in this exact order selects the failure code/field. No node/component evaluation precedes successful admission. A pending diagnostic intends the one module admission/refusal rule, derived actual desired reference, and exact listed missing requirement.",
+    "structural_boundary": "Unknown/corrupt primitive, reflected incoherent owned graph or mixed source fields raise GenerationContractError at this slice's boundary. Structural shared-validator failures preserve its StateContractError before a receipt; no arbitrary exception text is retained. Unexpected collaborator failure uses only controlled VALIDATION_UNAVAILABLE.",
+    "initial_configuration": "Both constructors require exact current M3_MODULES and adopted local policy; unsupported known baseline raises GENERATION_SOURCE_UNSUPPORTED before any request."
+  },
+  "requirement_id": "YWE-REQ-0047",
+  "decision_id": "ADR-0038",
+  "governance_identifiers": {
+    "requirement_id": "YWE-REQ-0047",
+    "decision_id": "ADR-0038",
+    "allocation_state": "OWNER_ASSIGNED_FOR_ADOPTION"
+  },
+  "adoption_targets": {
+    "contract": "docs/architecture/m3_topology_axiom_reference_contract.md",
+    "policy": "docs/architecture/m3_topology_axiom_reference_policy.md",
+    "inventory": "docs/design-planning/m3/topology-axiom/BUSINESS_API_INVENTORY.json"
+  },
+  "preserved_proposal": {
+    "directory": "C:/Users/james/AppData/Local/Temp/ywe-m3-topology-axiom-proposal-r2-a85fba6290f0418aa2c31ca9ebddc93e",
+    "policy_sha256": "5d21fe0c81b9bbe5e71635adad15eea174f794224b43cdeb4b671128227bcb74",
+    "inventory_sha256": "2fdde002927ad1c79996bac42f2253e0d7e4bffa2e476222a285f560c0a2d434",
+    "contract_sha256": "8118564769bd82d5f43f1e32aecf77c0715b3e33ff61e073ea5eb12580d4d96f"
+  },
+  "owner_dispatch_test_requirement": "PURE-NOIO-001 must inject an instance validate_diagnosis hook that would perform IO and prove it is never called, while the actual StateModel-owned implementation validates origin. Exact class/configuration guards precede class-owned calls. A declared PURE flag is insufficient. Shared StateModel validator also avoids instance-visible nested math/codec override dispatch; inject IO-performing _orbit/_diagnose overrides and prove zero entries through producer path.",
+  "adoption_corrections": [
+    "Requirement/status/policy hash routing from frozen R2 to YWE-REQ-0047 / ADR-0038.",
+    "StateModel class-owned pure dispatch, excluding instance-supplied callback hooks.",
+    "All PROCESSING TEN subjects retain actual verified origin DETECTION subject; typed payload entity IDs remain distinct, preserving existing source chain invariant without a waiver.",
+    "Final M3_MODULES vector and seven module pins reconciled to frozen Diagnostics source bytes/26cd7666820e7897899a158220a28af67889590c90db7945144b4020cc1ac5d1 input; canonical aggregate f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400.",
+    "Public class-owned configuration()/validate_owned_result() seam with immutable current configuration and exact issuer/cookie/result-self seal; no wire field, mutable registry or host/capture authentication."
+  ],
+  "subject_association_test_requirement": "Use distinct actual origin subject, request reference, derived topology ID and declared axiom subject ID; all TEN subjects must equal origin DETECTION subject while each typed payload preserves its exact own ID. Same root/actual parent prefix remain; contradictory envelope subject rejects.",
+  "owner_seal_policy": "Owner-only construction token/cookie plus exact issuer and result self identity. Stateless owner; no per-result lifetime ledger or global registry. Actual result owns its private API-only self-bound metadata; declared wire fields alone serialize. No host/capture/measurement authenticity.",
+  "producer_ownership_test_requirement": "Actual same-owner result validates true. Publicly reconstructed byte-equivalent result, shallow/deep copy, foreign owner result, changed source/profile/policy, reflected bad wire field, missing/changed cookie or mismatched result self identity validate false without caller hooks. Collector invokes exact registered class methods before IO and never reads private producer metadata.",
+  "public_port_count": 10
+}
