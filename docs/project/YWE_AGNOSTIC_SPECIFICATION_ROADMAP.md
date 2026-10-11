@@ -80,13 +80,15 @@ Strict RealmEncoder and TransitionRegistry ownership is next, preserving the
 existing full-state algebra helpers. Bounded topology, five-axiom evaluation,
 pure planning, independent emission and complete Diagnostics producer coverage
 remain required. All five M3 exit criteria remain open; N3 verification does
-not activate M4 or platform work. Owner wiki d3688f0 is remotely verified for
-b283c40 until the subsequent projection is actually published and read back.
+not activate M4 or platform work. Owner wiki ccd0d59 is published from exact
+source d79e5bc and all 47 remote pages match reviewed bytes.
 
 The [README checkpoint](../../README.md#development-checkpoint--2026-10-11)
 and [Project Record section 16.4](../design-planning/Project_Record.md#164-committed-lifecycle-verification-and-roadmap-continuation)
-carry exact source, verification and publication evidence. Continue through the
-full roadmap under the owner’s standing direction.
+carry exact source, verification and publication evidence. The latest owner
+direction in [Project Record section 16.5](../design-planning/Project_Record.md#165-owner-pause-boundary-after-verified-m3-publication)
+is to finish and verify M3, publish it as the owner, then pause and wait for
+explicit go-ahead before any M4 work. Current M3 work remains authorized.
 
 ## Repository assessment
 

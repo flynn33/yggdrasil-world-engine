@@ -1,13 +1,13 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-45
+**Revision:** planning-46
 **Date:** October 11, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-44 at `a345d1be3e2d635cb79104c153d2628b090ccd88`; full history remains in Git.
+**Supersedes:** planning-45 at `d79e5bcf90362048e13abbdcdf7eaa0f85829ef6`; full history remains in Git.
 
-**Current approval and continuation:** Sections 16–16.4 record adopted N3 contracts, source corrections, published tooling and completed committed-source reference lifecycle verification. Section 13 preserves bounded N3 execution/publication authority; section 16.4 records the owner’s full-roadmap continuation direction. Earlier source and external-package receipts remain historical. All M3 exit criteria remain outstanding.
+**Current approval and continuation:** Sections 16–16.4 retain adopted N3 contracts and verified published reference lifecycle evidence. Section 16.5 records the latest direct owner limit: complete, verify and publish M3, then pause for explicit go-ahead before M4. Section 13 remains bounded N3 authority; the earlier full-roadmap goal is subject to this new continuation boundary. All M3 exit criteria remain outstanding.
 
 ## 1. Current working brief
 
@@ -21,9 +21,9 @@
 | Next milestone | M4 remains planned; its dependency is M3 acceptance |
 | M2 acceptance | Complete; immutable evidence records all six exit criteria and eight deliverables |
 | Source closure | Original clean full execution and successful exact-revision Ubuntu/Windows CI verified October 11 (section 14); section 12 external review remains representation-matched only, `acceptance=false`, `provenance_review_required=true`; neither accepts N3 or M3 |
-| Wiki | Owner publication `d3688f0` verified from source `b283c40`; all 47 remote pages match reviewed bytes (section 16.3) |
+| Wiki | Owner publication `ccd0d59` verified from source `d79e5bc`; all 47 remote pages match reviewed bytes (section 16.5) |
 | Publication | Unreleased; no GitHub Release objects exist as verified September 20, 2026 |
-| Workflow | Bounded N3 authority is preserved in section 13; the owner's direct full-roadmap continuation and README publication direction is recorded in section 16.4. No operator approval gate or mandatory separate reviewer-service sign-off is assigned; technical checks and source constraints remain required |
+| Workflow | Continue adopted M3 work and owner publication; after M3 acceptance and publication pause for explicit owner go-ahead before M4 (section 16.5). No additional M3 operator or mandatory separate reviewer-service approval is assigned; technical checks and source constraints remain required |
 
 The machine-readable roadmap is milestone and status authority. Focused accepted contracts,
 governance records, schemas, fixtures, and validators remain engineering authority.
@@ -1669,3 +1669,41 @@ Current wiki d3688f0 remains verified for b283c40 until the next actual source
 projection is published and remotely read back. This checkpoint updates README
 and roadmap with observed results; its own record checks are not predeclared.
 Continue through all remaining M3 exits and M4–M10. Needed from owner: nothing.
+
+### 16.5. Owner pause boundary after verified M3 publication
+
+The owner directly instructs on October 11, 2026:
+
+> after you complete M3 and push to github as me, no ai attribution, you may
+> use my admin role bypass. I want you to pause and wait for my go ahead
+> before starting work on M4.
+
+This latest direction limits continuation of the existing full-roadmap goal.
+Continue the remaining M3 contracts, implementation, complete exit verification
+and truthful README/wiki updates now. Once M3 is actually accepted and pushed
+to GitHub, pause the goal and stop before any M4 implementation, adoption or
+activation work. Resume M4 only after the owner explicitly gives go-ahead.
+Elapsed time, a completed prerequisite or an automatic goal continuation is not
+that authorization. No additional owner confirmation is needed for current M3
+work or its already authorized publication. Owner Jim Daley/flynn33 authorship,
+no AI/coauthor attribution and admin bypass when needed remain authorized.
+
+The README progress commit d79e5bcf90362048e13abbdcdf7eaa0f85829ef6 passed
+12 selected clean offline governance/documentation checks in 275.734 seconds,
+with zero failures/advisories and no checkout changes. These selected checks
+do not replace the separate full a345 reference-runtime execution. Normal
+nonforce publication passed exact Git, GitHub API and README-byte readback;
+its README SHA256 is ef4765ea72b714c52df476c4baaee735233daf946ef7f187e109ced03e1353eb.
+
+Wiki master ccd0d59182f91025a8cfcc904898023b618022fc is published from that
+exact d79 source. Fresh remote Git readback matches all 47 reviewed page bytes;
+32 generated surfaces verify with zero changes and all 15 manual pages remain
+preserved. Proof is saved externally at
+`C:\Users\james\AppData\Local\Temp\ywe-n3-wiki-d79e5bc-readback-20261011\PUBLICATION_READBACK.json`.
+Home SHA256 is 11979f466b4397979b5a3a4e5844d817b141e7e43ebdc930ef6cd505c49f62d5;
+roadmap page SHA256 is 8f79e4f2de7a9b6ce2ffd65c25895938a4d4db32f3750741c31498bb939bd3fb.
+
+M0–M2 remain accepted, M3 active and M4 planned. This owner-boundary record
+claims no additional M3 exit acceptance or cross-platform CI result. Earlier
+full-roadmap continuation statements remain historical and are superseded by
+this section at the M3/M4 boundary. Needed from owner now: nothing.

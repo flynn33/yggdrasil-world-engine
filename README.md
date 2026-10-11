@@ -117,6 +117,12 @@ See the roadmap inventories of [completed or verified foundations](docs/project/
 
 ### Development checkpoint — 2026-10-11
 
+**Owner continuation boundary:** Complete and verify M3, then publish it as the
+owner with no AI/coauthor attribution and the authorized admin bypass when
+needed. After M3 acceptance and GitHub publication, pause and wait for the
+owner’s explicit go-ahead before starting any M4 work. M3 development continues
+now; the broader roadmap goal remains active until that checkpoint.
+
 N3 session lifecycle is the active M3 assignment. The complete
 [lifecycle contract](docs/architecture/m3_session_lifecycle_contract.md),
 [safety policy](docs/architecture/m3_session_lifecycle_policy.md) and
