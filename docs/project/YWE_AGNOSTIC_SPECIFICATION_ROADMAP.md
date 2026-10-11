@@ -331,6 +331,14 @@ must cover actual containment and authorized resolution, all five halt triggers,
 session/revision ownership, final completion observation and the closed evidence
 bound. Current work and publication receipts are recorded in the Project Record
 and README. No N3 execution or M3 exit criterion is accepted by this checkpoint.
+The October 11 reconciliation at `0949184b7f1be0960fec9dd409cbf09647921e61`
+is published with matching README readback and eight selected clean offline
+checks passing. Full exact-revision CI is running at the latest readback.
+Owner wiki publication tooling passes fifteen focused tests and shares one
+committed mapping; actual wiki publication and remote byte verification are the
+next operation. N3's proposed contract now binds current assessment/revision,
+fresh child origins, explicit resolution, concurrent halt and complete evidence
+bounds. Contract adoption and lifecycle implementation remain outstanding.
 Generation's missing topology, axiom and complete planner/emitter owners are being
 specified against canonical source. The accepted mathematical baseline and
 immutable M2 evidence are preserved.

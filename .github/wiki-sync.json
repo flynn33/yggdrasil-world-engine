@@ -35,6 +35,201 @@
     {
       "source": "CHANGELOG.md",
       "destination": "Changelog.md"
+    },
+    {
+      "source": "docs/architecture/README.md",
+      "destination": "Architecture-Overview.md"
+    },
+    {
+      "source": "docs/architecture/ARCHITECTURE_LAYERS.md",
+      "destination": "Architecture-Layers.md"
+    },
+    {
+      "source": "lore/wrw_cosmology/README.md",
+      "destination": "WRW-Cosmology.md"
+    },
+    {
+      "source": "lore/wolf_canon/README.md",
+      "destination": "Wolf-Canon.md"
+    },
+    {
+      "source": "lore/bloodline_history/README.md",
+      "destination": "Bloodline-History.md"
+    },
+    {
+      "source": "guide.md",
+      "destination": "Forsetti-Integration-Rules.md"
+    },
+    {
+      "source": "developer-guide.md",
+      "destination": "Developer-Guide.md"
+    },
+    {
+      "source": "CONTRIBUTING.md",
+      "destination": "Contributing-Guide.md"
+    },
+    {
+      "source": "docs/ash_compliance/README.md",
+      "destination": "ASH-Compliance.md",
+      "kind": "composite",
+      "title": "ASH Compliance",
+      "introduction": "Repository compliance guidance and checklist.",
+      "sources": [
+        "docs/ash_compliance/README.md",
+        "docs/ash_compliance/ash_compliance_checklist.md"
+      ]
+    },
+    {
+      "source": "core/cosmology_engine/README.md",
+      "destination": "Core-Engines.md",
+      "kind": "composite",
+      "title": "Core Engines",
+      "introduction": "The five Core specification owners and their current reference contracts.",
+      "sources": [
+        "core/cosmology_engine/README.md",
+        "core/realm_engine/README.md",
+        "core/ash_pattern_engine/README.md",
+        "core/narrative_engine/README.md",
+        "core/perception_engine/README.md"
+      ]
+    },
+    {
+      "source": "modules/quest_engine/module_description.md",
+      "destination": "Expansion-Modules.md",
+      "kind": "composite",
+      "title": "Expansion Modules",
+      "introduction": "Expansion module specification surfaces; completion follows the roadmap evidence.",
+      "sources": [
+        "modules/quest_engine/module_description.md",
+        "modules/myth_engine/module_description.md",
+        "modules/prophecy_engine/module_description.md",
+        "modules/artifact_engine/module_description.md",
+        "modules/creature_engine/module_description.md"
+      ]
+    },
+    {
+      "source": "adapters/unity/adapter_interface.md",
+      "destination": "Adapter-Specifications.md",
+      "kind": "composite",
+      "title": "Adapter Specifications",
+      "introduction": "Platform-neutral interface contracts. Separate downstream product work remains deferred until M10 acceptance and explicit authorization.",
+      "sources": [
+        "adapters/unity/adapter_interface.md",
+        "adapters/unreal/adapter_interface.md",
+        "adapters/godot/adapter_interface.md"
+      ]
+    },
+    {
+      "source": "data/player_schema.json",
+      "destination": "Data-Schemas.md",
+      "kind": "index",
+      "title": "Data Schemas",
+      "introduction": "Selected schema and registry navigation. Structural schema validity alone does not establish runtime or milestone acceptance.",
+      "entries": [
+        {
+          "label": "Player State",
+          "source": "data/player_schema.json"
+        },
+        {
+          "label": "Realm Registry",
+          "source": "data/realm_registry/realms.json"
+        },
+        {
+          "label": "Realm Definitions",
+          "source": "data/realm_registry/realm_definitions.json"
+        },
+        {
+          "label": "Pattern Archetypes",
+          "source": "data/pattern_archetypes/pattern_schema.json"
+        },
+        {
+          "label": "Quest Seeds",
+          "source": "data/quest_archetypes/quest_seed_schema.json"
+        },
+        {
+          "label": "Myth Records",
+          "source": "data/myth_archetypes/myth_schema.json"
+        },
+        {
+          "label": "Bloodlines",
+          "source": "data/bloodline_registry/bloodline_schema.json"
+        },
+        {
+          "label": "Prophecies",
+          "source": "modules/prophecy_engine/prophecy_schema.json"
+        },
+        {
+          "label": "Player Runtime State",
+          "source": "data/schemas/player_runtime_state_schema.json"
+        },
+        {
+          "label": "Worldstate Location Mutation",
+          "source": "data/schemas/worldstate_location_mutation_schema.json"
+        },
+        {
+          "label": "Quest / NPC / Lore Generation",
+          "source": "data/schemas/quest_npc_lore_generation_schema.json"
+        },
+        {
+          "label": "Ability Manifest",
+          "source": "data/schemas/ability_manifest_schema.json"
+        },
+        {
+          "label": "Ability Consequence",
+          "source": "data/schemas/ability_consequence_packet_schema.json"
+        },
+        {
+          "label": "Ability State Update",
+          "source": "data/schemas/ability_state_update_packet_schema.json"
+        }
+      ],
+      "sections": [
+        "data/pattern_archetypes/README.md",
+        "data/quest_archetypes/README.md",
+        "data/myth_archetypes/README.md",
+        "data/bloodline_registry/README.md"
+      ]
+    },
+    {
+      "source": "docs/master_specification/YWE_MASTER_SPECIFICATION.md",
+      "destination": "Master-Specification.md",
+      "kind": "reference",
+      "title": "Master Specification",
+      "introduction": "The foundational design remains in the repository. Current milestone status and accepted focused contracts govern implementation readiness."
+    },
+    {
+      "source": "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md",
+      "destination": "Specification-Roadmap.md"
+    },
+    {
+      "source": "docs/architecture/m3_state_assessment_contract.md",
+      "destination": "State-Assessment-Contract.md"
+    },
+    {
+      "source": "docs/architecture/m3_normalization_contract.md",
+      "destination": "Normalization-Contract.md"
+    },
+    {
+      "source": "docs/architecture/m3_normalization_policy.md",
+      "destination": "Normalization-Policy.md"
+    },
+    {
+      "source": "docs/architecture/m3_recovery_contract.md",
+      "destination": "Recovery-Contract.md"
+    },
+    {
+      "source": "docs/architecture/m3_recovery_safety_policy.md",
+      "destination": "Recovery-Safety-Policy.md"
+    },
+    {
+      "source": "docs/architecture/m3_reference_diagnostics_contract.md",
+      "destination": "Reference-Diagnostics-Contract.md"
+    },
+    {
+      "source": "docs/architecture/m3_source_compatibility_contract.md",
+      "destination": "Source-Compatibility-Contract.md"
     }
-  ]
+  ],
+  "repository": "flynn33/yggdrasil-world-engine",
+  "roadmap_destination": "Specification-Roadmap.md"
 }

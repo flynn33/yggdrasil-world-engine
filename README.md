@@ -124,6 +124,18 @@ progress; lifecycle implementation and acceptance are still outstanding. The
 README checkpoint is updated with each published increment so it records the
 work completed and the next step. M0–M2 remain accepted and M3 remains active.
 
+The October 11 reconciliation is published at
+[`0949184`](https://github.com/flynn33/yggdrasil-world-engine/commit/0949184b7f1be0960fec9dd409cbf09647921e61).
+Its clean offline verification passed eight selected repository checks with no
+failures or advisories; [full Ubuntu/Windows CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38164808814)
+is still running at the latest readback. The wiki publisher now uses one exact
+committed source mapping, preserves manual pages and navigation, and checks the
+owner account before publication. Fifteen focused publication tests pass. The
+next publication step is to refresh wiki Home and its roadmap from the committed
+source and verify their remote bytes. N3 contract work is closing the session
+revision, containment resolution, concurrent halt and complete evidence bounds
+before implementation.
+
 M2 is complete. Its immutable [acceptance record](data/governance/m2_acceptance_evidence.json)
 and [acceptance document](docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md)
 bind the frozen implementation, completed clean offline repository execution,
