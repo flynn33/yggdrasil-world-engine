@@ -28,12 +28,12 @@ An external proposal receipt does not claim a replay of changed adoption metadat
 
 | Producer | Records | Structural retained bound | Reserved bytes |
 |---|---:|---:|---:|
-| RealmEncoder | 2 | 325,787 | 524,288 |
-| TransitionRegistry | 17 | 1,056,069 | 2,097,152 |
-| TopologyGenerator | 1 | 391,542 | 2,097,152 |
-| AxiomEvaluator | 5 | 470,095 | 1,048,576 |
-| GenerationPlanner | 1 | 1,303,968 | 4,194,304 |
-| ArtifactEmitter | 65 | 4,333,056 | 8,388,608 |
+| RealmEncoder | 2 | 326,345 | 524,288 |
+| TransitionRegistry | 17 | 1,058,960 | 2,097,152 |
+| TopologyGenerator | 1 | 395,242 | 2,097,152 |
+| AxiomEvaluator | 5 | 471,208 | 1,048,576 |
+| GenerationPlanner | 1 | 1,311,543 | 4,194,304 |
+| ArtifactEmitter | 65 | 4,347,543 | 8,388,608 |
 
 The table represents conservative encoded shapes, not observed producer executions.
 The existing 65,536-byte source/profile/origin support allowance must be measured
@@ -49,3 +49,11 @@ integration remain required before M3 acceptance. All five M3 exits remain open.
 The owner instruction is to finish, verify and publish M3, then pause for explicit
 go-ahead before any M4 work. The current reference work does not activate M4 or
 platform products.
+
+ADR-0040 corrects the array export address gap before projection implementation.
+Each of the 17 unchanged payload definitions now has a closed wrapper containing
+its actual evidence alias. Maximum specimens and the table include complete
+wrapper and collection framing. The original own-node alias allocation already
+covered that identity, so alias bounds and reservations are unchanged.
+[The amendment receipt](WRAPPER_AMENDMENT_RECEIPT.json) preserves original hashes
+and records the independent 17-branch/68-negative-control representation review.

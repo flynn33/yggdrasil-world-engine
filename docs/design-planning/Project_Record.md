@@ -1,13 +1,13 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-47
+**Revision:** planning-48
 **Date:** October 11, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-46 at `d80785a3aeb1845521bf141237dc1116d211233a`; full history remains in Git.
+**Supersedes:** planning-47 at `9c19c6beb6eff138b7fb1d98a7c9eaa552f08d71`; full history remains in Git.
 
-**Current approval and continuation:** Section 17 records adopted source, Realm/Transition, topology/axiom and module Diagnostics contracts before dependent implementation. Sections 16–16.4 retain verified published N3 lifecycle evidence. Section 16.5 governs continuation: finish, verify and publish M3, then pause for explicit go-ahead before M4. All five M3 exits remain open.
+**Current approval and continuation:** Section 18 records issued module instructions, the applied source extension, the adopted alias-wrapper correction and bounded implementation verification. Section 17 preserves contract adoption; sections 16–16.4 retain verified published N3 lifecycle evidence. Section 16.5 governs continuation: finish, verify and publish M3, then pause for explicit go-ahead before M4. All five M3 exits remain open.
 
 ## 1. Current working brief
 
@@ -17,11 +17,11 @@
 | Product purpose | Platform-neutral, strictly object-oriented and modular engine specification |
 | Accepted milestones | M0, M1 and M2 |
 | Active milestone | M3 — Complete core deterministic semantics and the reference oracle |
-| Active M3 assignment | Source, strict Realm/Transition, bounded topology/axiom and capture contracts adopted (section 17); dependent reference implementation next, then complete planner/emitter and current-source lifecycle conformance |
+| Active M3 assignment | Strict Realm/Transition and bounded topology/axiom owners implemented; complete module capture and integrated verification in progress (section 18), followed by complete planner/emitter and current-source lifecycle conformance |
 | Next milestone | M4 remains planned; its dependency is M3 acceptance |
 | M2 acceptance | Complete; immutable evidence records all six exit criteria and eight deliverables |
 | Source closure | Original clean full execution and successful exact-revision Ubuntu/Windows CI verified October 11 (section 14); section 12 external review remains representation-matched only, `acceptance=false`, `provenance_review_required=true`; neither accepts N3 or M3 |
-| Wiki | Owner publication `78d037e` verified from source `d80785a`; all 47 remote pages match reviewed bytes (section 17) |
+| Wiki | Owner publication `f31ef00` verified from source `9c19c6b`; all 47 remote pages match reviewed bytes (section 18) |
 | Publication | Unreleased; no GitHub Release objects exist as verified September 20, 2026 |
 | Workflow | Continue adopted M3 work and owner publication; after M3 acceptance and publication pause for explicit owner go-ahead before M4 (section 16.5). No additional M3 operator or mandatory separate reviewer-service approval is assigned; technical checks and source constraints remain required |
 
@@ -1830,3 +1830,311 @@ then implement and verify the four pure owners and complete capture integration.
 After all M3 work/exit evidence is accepted and owner-published, pause the goal
 and wait for explicit owner go-ahead before starting M4. Needed from owner now:
 nothing; current M3 execution/publication remain authorized.
+
+## 18. Issued module implementation and addressable diagnostic evidence
+
+The owner boundary in section 16.5 remains controlling. The broader goal stays
+active through M3 development, complete exit verification and owner publication;
+after that checkpoint pause it and wait for explicit go-ahead before M4.
+
+### 18.1. Observed preceding publication
+
+Contract commit 9c19c6beb6eff138b7fb1d98a7c9eaa552f08d71 is owner-published after
+12 selected clean offline checks passed in 264.609 seconds with zero failures,
+advisories or checkout changes. Actual Git and GitHub API readback match its
+README bytes, SHA256 54e236e11a674deb0435f3310e3d102789c82a0ae2b8059ff9244a7d4ab12bbf.
+Normal nonforce publication used the authorized owner bypass without changing
+repository protection. Selected documentation checks do not replace runtime
+acceptance. The earlier CI snapshot recorded an unfinished Windows job. A fresh
+authenticated October 11 snapshot now reports CI 38179664940 completed with
+success at exact 9c19; both Ubuntu and Windows jobs succeeded. The API update
+time is 2026-10-11T22:46:24Z. The snapshot is preserved externally as
+`ywe-m3-9c19c6b-ci-snapshot-20261011-4.json`; full job logs and test counts were
+not retrieved for this run, so this record makes no count claim.
+
+Wiki f31ef00df2d94e29e6e3076e2b63651789033d28 is owner-published from exact 9c19.
+All 47 fresh remote Git page blobs match reviewed bytes: 32 generated surfaces
+and 15 preserved manual pages. The independent publication readback is
+`C:\Users\james\AppData\Local\Temp\ywe-m3-wiki-9c19c6b-readback-20261011\PUBLICATION_READBACK.json`.
+Home SHA256 435290b4d634ee1bc2037f11460e4126d5844a57cbbc8ce795aff7ebcc6f624a;
+roadmap c012e3dba3fea4d905132c9271eec5d91d8b8d7e7fd6ba139a07005c6911e6a8.
+
+### 18.2. Instructions, source and narrow wrapper amendment
+
+The external YWE-M3-MODULES-AUTONOMOUS-001 r1 package was reviewed and issued
+before dependent code. Original issuance receipt SHA256
+3e77ce8e257ea58c86fcf2c1e6931aae855427aa4e22b02c5f9383e8583cf92f;
+its original 24-pin manifest a2dd7b2c1cf5a85bb1c34b3e7ce64c92e871ed8c314544e6af884d747cc609bc
+and instructions remain preserved. All three assigned owners returned contract
+readback before implementation. The root source apply receipt
+366365fd8cd82a1649a3ca8e2a9348283b786bfef7d3327036f7704c2d06513e
+verifies all 32 original a345 source blobs before writing, exactly three changed
+and 29 preserved, followed by successful deterministic mirror write/check.
+Local source commit 171eda7e5754e8a3153018ea575a0916c3634c6c contains seven
+canonical/mirror/descriptor paths; it is not separately published or runtime
+accepted. Its M3_MODULES aggregate is the adopted f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400.
+
+During capture review the original 17 safe payloads lacked their own evidence
+alias, while exported support uses arrays. ADR-0040 therefore adopts exactly
+SafeModuleEvidence(kind, evidence_reference, payload), with unchanged payload
+branches and globally unique wrapper aliases. SupportingEvidence.module_evidence
+is optional, omitted when empty, and bounded by the existing 2,784 total per-kind
+quota. This preserves old source/policy vectors, original payload fields, all
+collector capacities and whole reservations. Every original alias formula
+already reserved the owning node. Independent root review validates all 17
+complete wrapped maximum leaves, 68 negative controls and actual array framing.
+Receipt SHA256 b50cbe85b9420347998c495874d7d61c0f125768a4eaaada004ba73f2cef3dc6
+is external under ywe-m3-module-wrapper-root-review-20261011. These are structural
+proofs, not producer execution or native persistence acceptance.
+
+| Producer | Complete safe support bound | Alias bound | Conservative retained-byte bound |
+|---|---:|---:|---:|
+| RealmEncoder | 78,025 | 266 | 326,345 |
+| TransitionRegistry | 124,816 | 545 | 1,058,960 |
+| TopologyGenerator | 154,858 | 395 | 395,242 |
+| AxiomEvaluator | 86,952 | 317 | 471,208 |
+| Future GenerationPlanner | 276,279 | 3,500 | 1,311,543 |
+| Future ArtifactEmitter | 436,887 | 4,492 | 4,347,543 |
+
+All six bounds fit their unchanged whole reservations. The future producer rows
+remain representation reservations, not business-policy adoption or eligibility.
+The wrapper amendment's effective 24-pin manifest is
+17f53c02fd8befd662375826e9c8603f4be6c01d6a661673bb734f43f1975e4d;
+its instructions and issuance receipts are c1c77c14eb7a12bf47cf69d975d3b6a566444d72aba0d972d6367505ebb62900
+and f62478c85a0cf6be0be37fabcfbc518aa486ec852266de1158206884e981ac0e.
+The Diagnostics owner returned exact readback before projection edits. A later
+format-only restoration preserves prior governance-register formatting and
+semantic values; original adopted pretty bytes remain external. Its separate
+receipt is a917d5c29659885617ce95f027363366b11a6fe75dd3ff3397a403e56bc81ff6.
+Counts are 48 requirements (47 active, one superseded), 57 governance records
+and 40 ADRs (39 accepted, one superseded); next requirement remains 0049.
+
+### 18.3. Current bounded verification and remaining work
+
+The four exact pure owners and immutable RT/TA value/schema surfaces are
+implemented under the adopted contracts. Public package exports include their
+named APIs and StateModel-owned seven-field DiagnosisValidation. Root's actual
+20 topology/axiom/value controls passed in 1.823 seconds. The completed focused
+TA plus preserved legacy-helper suite subsequently passes 31 tests in 3.238
+seconds, including actual malformed N1 previews without losing refusal evidence.
+RT's three focused modules, full N1 suite and independent 2,048-row Recovery
+membership witness pass 89 tests in 66.528 seconds. Later malformed-origin and
+capture integration are subsequently verified by 96 tests in 74.464 seconds
+with zero skips, including actual protected RT captures, paired export and
+failure prefixes. Two blank separator corrections retain exact AST meaning;
+the subsequent 13 focused controls pass in 6.534 seconds. Root read the actual
+logs and independently verified all eight frozen RT/shared path hashes. Freeze
+receipt a4565c1e400bf4f0009817fee2df3658a8c116558f2d150b23ab9244ceafb052
+is external under ywe-m3-realm-transition-final-b7ddcae2ddf24844909c1440e8a2acc4.
+The final RT schema 4ad0f606739f207d60d1990544cf7431ac931aa44325079495089bbd00750b00
+accepts the unchanged 21 authored positive cases and rejects all 18 original
+controls at their intended observed validation nodes. Complete catalog and
+combined clean verification remain separate obligations. The original
+N1 source-witness failure was corrected by independently hashing all 32 current
+MODULES files and both historical N3 and legacy Git vectors; its isolated
+original failure test passes. Earlier source identities remain preserved.
+
+Platform-reference approvals enumerate exactly seven new owned source paths
+and eight new test paths. Four boundary controls pass in 0.040 seconds and the
+75-test validation-foundation suite passes in 85.277 seconds with zero skips.
+Nearby unapproved runtime paths remain negative controls. The first governance
+check during concurrent file creation reports two stale inventory counts; it
+does not report a pass. Refreshing classification, scope, fixture/schema quality
+and public-surface inventories is required after the candidate settles.
+
+Complete same-collector module admission, ordered capture, immutable first finish,
+distinct final observation, return/shutdown omission audit, concurrent refusal
+and protected paired export are being integrated. Wire-format examples and
+their complete rejection signatures are separately reviewed and registered;
+they do not establish runtime effects. The full unfiltered clean repository
+execution, final diff review and exact owner Git/README/wiki readback remain
+required before this runtime increment is published. Its future containing
+revision and verification results are not predeclared here.
+
+Root's boundary review reproduced two failures before the final freeze: shallow
+and deep copies of either TA producer could mint authenticated results and
+register, and several module/generation raw guards called a hostile metaclass
+equality hook before rejection. The corrected exact-owner checks bind private
+issuance to the original producer, model and policy; untrusted type guards use
+identity comparisons. The same independent root probe subsequently passes all
+eight controls: all four raw/canonical boundaries reject without caller hooks,
+and both producers' shallow/deep copies refuse minting and registration without
+store or clock effects. Deep copies preserve the actual model reference rather
+than traversing a peer collector. Before and after observations remain external
+as `ywe-m3-root-owner-boundary-before-20261011.json` and
+`ywe-m3-root-owner-boundary-after-20261011.json`. Final combined tests and the
+containing clean revision remain separate verification obligations.
+
+The completed TA owner-fix command subsequently passes 49 tests in 20.307
+seconds, covering all four owned TA modules, canonical helpers and actual module
+capture. Its tool transcript reports exit zero and plain OK; it was not redirected
+to a raw log. Root independently verifies all eight frozen file hashes against
+receipt e2410cf48177922d1fe6ed5127bd36d3673c3bd85965573f3ac73cdf465a6117,
+external `ywe-m3-ta-owner-fix-freeze-20261011.json`. The wire schema remains
+46d037b8c9c9ea9bb9a3ca17fe1cc62dc08fb9e59e64caf8b02d6786324ac5d4.
+
+The subsequent five-module Diagnostics regression passes 111 tests in 50.043
+seconds (50.485 seconds elapsed), including reference, session and module
+Diagnostics, three-vector compatibility and closed diagnostic schemas. Root
+reads the actual receipt/log under external
+`ywe-m3-module-diagnostics-final-12e39a8bd9be4787917c6acbdd097bfa`;
+log SHA256 is 7a8852096042d2bffe2fd162db71aadc08e0c89eceaf30f0a540a763f998bdb2.
+All Diagnostics-owned and TA fixes predate its start. The separate RT runner
+constructor identity correction occurs after that run starts and requires its
+own fresh controls; this 111-test result does not claim the later revision ran.
+Protected four-producer maximum capture/paired export is included, with the
+729-node topology and all five axiom results retained. This remains reference
+execution under a potentially VERIFIED_DIRTY source candidate.
+Root verifies all 14 frozen Diagnostics-owned paths, seven shared input hashes
+and the actual log hash against freeze receipt
+a887fac4d703357723240dbf561626cdad2a18b60b0af9cb53724a864ae924e7,
+external `ywe-m3-module-diagnostics-freeze-d7f981f9b4814f289ecf638f10be1fc6`.
+
+The later RT constructor correction passes the three-module RT suite: 28 tests
+in 64.505 seconds. Its final nested hostile-value control passes in 0.008
+seconds. The separately executed exhaustive reference-registry control passes
+all 8,192 source/codeword pairs through 16,384 actual applications in 850.835
+seconds, with tool exit zero and plain OK. The test constructs 32 disjoint
+complete coset profiles from independently read canonical C16 rows and integer
+XOR, covers every one of the 512 source states exactly once, verifies the actual
+target is VALID and compares the whole repeated canonical output. It does not
+use the legacy algebra helper as its application witness. Root reads all three
+actual logs and verifies all 15 indexed artifacts and eight final file hashes
+against external `ywe-m3-realm-transition-final-correction-ea93fc3af80844db8e6505b2c83996a1`.
+Final freeze receipt SHA256 is
+68b07a2c1e9b610038b8e8d6aab2b52a23b7d1d3c08d33f64aef61a8b26fa72e;
+the exhaustive execution receipt is
+2989fc9e7d223f6c4ac4facaeaa49fa4ca2481061988f9a0c325ff223e10f35c.
+Only the RT runner and its test file differ from the preserved original RT
+freeze; the six other paths and original closed RT schema remain identical.
+The independent root review is external `ywe-m3-root-rt-refreeze-review-20261011.json`.
+Fresh governance contracts and M1 canon checks pass with 48 requirements,
+57 governance records, 119 canonical terms and all 32 canonical source files.
+The complete clean containing-revision checks remain required before publication.
+Root's first M0 preflight incorrectly supplied the latest publication SHA as
+the historical acceptance base label and reports three wrong-base-ref errors.
+The actual catalog invokes `check_m0_truthful_baseline.py .` with its recorded
+`origin/main` label; that normal invocation subsequently passes without changing
+the validator or historical evidence. The failed invocation is not a pass.
+
+Root independently reviewed 114 positive and 79 rejection bodies against their
+selected closed offline RT/TA definitions, then adopted 291 fixture bindings
+(212 accepted-format bindings, 79 intended rejections). The original 930
+fixture identities, bodies and outcomes are preserved. A subsequent full fixture
+run exposed ten historical source-rejection signature arrays missing errors
+from the newly adopted third union branch. Independent replay of all 16 source
+fixtures passes after adding only those observed third-branch const errors;
+every earlier expected error remains required. All other 1,211 fixture records
+remain identical at this point. The original full catalog bytes and exact update
+receipt are preserved externally under ywe-m3-source-fixture-signature-review-20261011.
+This is an additive diagnostic-signature change, not a changed acceptance
+outcome. The earlier full failing run is retained as an observation, not a pass.
+The subsequent complete offline fixture catalog check passes all 1,221 bindings
+and 461 intended rejections. Root then independently reviews and adopts the
+frozen capture proposal: six actual portable wire cases, 21 structural rejection
+controls and the complete 110-wrapper safe graph. Their 146 new bindings
+(125 accepted-format bindings and 21 rejections) preserve every prior fixture
+record, giving 1,367 bindings and 482 intended rejections. The exact external
+index 85120a42a58805edef0e2f44a7327255191e9f2a0817ada34e896c7c8489d1ec
+and all indexed bytes match before adoption; all 146 independently replayed
+bindings and their selected requirement ownership pass. The three examples
+retain declared synthetic clock/storage/source provenance, with no host or
+native qualification inferred from their schema-valid bodies. The root receipt
+is under external `ywe-m3-module-capture-fixture-root-review-20261011`.
+The subsequently refreshed complete offline inventory passes all 1,367 fixture
+bindings and 482 rejections, with 1,276 candidate paths and 222 executable
+schemas. All four schema-quality debt categories remain empty. Classification,
+scope counts, debt and reviewed public-surface hashes are recomputed from actual
+current files; the candidate still requires the unfiltered clean normal checks.
+
+Parallel review of the unpublished runtime candidate reproduces two schema
+gaps: actual M3_MODULES evaluated predicates and fallback-registry bindings
+pass their runtime owners but fail the older two-aggregate schema enums. The
+correction appends only the adopted f431 aggregate to PredicateBinding and
+RegistrySourceBinding, preserving both historical aggregates and full-pair
+guards. Root independently replays the original actual records: each has one
+enum error before the correction and zero afterward; all three known aggregate
+leaves pass and an unknown aggregate refuses. The actual all-three-vector
+assessment/registry test includes complete first capture, model validation,
+cross-vector refusal and unknown-aggregate refusal. The subsequent focused
+26-test source/diagnostic-schema/N1-wire command passes in 11.755 seconds;
+its raw log hash is f93147ef13e43f1aed4e34641e0131670c65ec53e395187411edf248e0e03a32
+and frozen three-path receipt is a1ea3a66d3cb80046f002c96c84829ab89ce5436df1acceb4deaff6ec26efbaa,
+external `ywe-m3-current-schema-correction-final-7bcabf271a4e41778a21177806ff9dcc`.
+The broader 57-test command reports one failure and four errors from recovery
+test consumers still reading the two-vector inventory or combining the N3
+aggregate with current MODULES file hashes. That failed log remains preserved;
+correcting those consumers and rerunning their controls is required.
+
+The subsequent correction preserves `current=True` as historical N3, deriving
+its leaves from actual a345 Git bytes, and adds an explicit MODULES selector
+using current canonical bytes. The original seven N3 recovery routes and
+correction/fallback witnesses remain exercised; matching MODULES routes and
+all-three-vector full/partial mismatch, missing-leaf and hostile-scalar controls
+are added. The active inventory's exact historical nine/seven/eight source fields
+are preserved; its separately adopted N3 revision routing is asserted as a345.
+The combined command passes 60 tests in 13.305 seconds, including all 31 recovery
+value tests and actual route controls. Root reads the complete test diff and
+actual log and verifies all five current/frozen raw hashes against receipt
+67083b9d6fe2510dfb4a74bae404c1740a00e7b031d44d63882778c35b9439ee,
+external `ywe-m3-current-schema-correction-final-7dd92c329a0746439aa322e4a0bd62d7`.
+Its log hash is 10bf687f50e16b283c26f07dfe714371ddaf3333f600b20df35029d3badccf71.
+No runtime source vector, policy or N3 session schema changes in this correction.
+Fresh complete offline inventory replay still passes 1,367 bindings/482 rejects
+with empty quality debt. Correct normal M0 and roadmap checks pass after the
+README and roadmap checkpoint updates. Complete clean execution remains required.
+
+The initial full clean attempt at unpublished 467f66fc0939e6e73c3f06800c7590f51e7677a4
+is deliberately stopped after the actual schema gap is confirmed, before its
+unit phase. Roadmap governance and machine-readable checks pass in its raw log;
+it does not complete the repository run and supplies no whole-suite judgment.
+The execution receipt records return code 4294967295, 177.141 seconds elapsed
+and an unchanged clean checkout. Its clone/log/receipt remain external under
+`ywe-m3-modules-clean-467f66f-20261011`; the corrected containing revision needs
+a fresh unfiltered clean execution before owner publication.
+
+The next complete unfiltered clean execution at unpublished
+`b4e5b7c73d0c9f72c9d981e52bdf8cf23082da58` passes 35 checks and fails
+`validation_unit_tests`, with zero advisories and unchanged checkout. Its unit
+suite runs 1,232 tests in 2100.497 seconds and reports exactly two failures;
+full execution takes 2456.922 seconds and returns 1. The policy-byte test hashes
+Windows CRLF checkout bytes against the explicitly documented Raw LF UTF-8
+policy identity. Independently replacing CRLF with LF reproduces both exact
+Git policy blobs and their compiled hashes. The Recovery test subtracts the
+unchanged eight N2 rules from the expanded 39-rule taxonomy but still expects
+only nine lifecycle rules, omitting 22 module rules. Both actual failures are
+reproduced in the immutable clean checkout. No full pass is claimed.
+Its report/log/execution hashes are respectively
+46b4550a09d253735d61c9d020d1ac8b2816310d939a6b33c6326a4cc88f5efe,
+b7f4d7719c4fd1efc6ffb0cbea54c90029ec87c0ebc16008194d6bb536e056f8 and
+e1e67dbd06deb25977d83f009d459845949bd8007207138e9f794576ed6d1a47,
+under external `ywe-m3-modules-clean-b4e5b7c-20261011`.
+
+The subsequent two-test-consumer correction hashes documented LF policy bytes,
+preserves all nine lifecycle and eight N2 rule assertions, and extends the same
+four forgery/refusal assertions to the exact 22 module rules. It also asserts
+the complete 31-rule non-N2 set. Runtime, source and policy bytes remain
+unchanged. The complete two-area command
+`python -B -m unittest -v tests.test_m3_realm_transition_values tests.test_m3_recovery`
+passes all 66 tests in 255.122 seconds, elapsed 255.609 seconds, return code 0.
+Its frozen originals, corrected bytes, command, receipt and raw log are retained
+under external `ywe-m3-test-consumer-corrections-20261011`; log SHA256 is
+90277498285a3dd7d050247e5b2197ea0a1481fd2f5caa66b482d0ff6efd457f.
+The final diff retains every original semantic assertion. The amended containing
+revision requires a fresh complete clean execution before publication.
+
+Final acceptance still needs an explicit audited 28-invariant and five-category
+executable mapping. The actual exhaustive 512-by-16 TransitionRegistry
+application control now passes, alongside the distinct legacy algebra witness,
+WRW 9-VALID/135-TC behavior and complete-profile resource controls. This closes
+the reference-registry exhaustive application obligation; it does not establish
+all 28 invariant or five-category judgments or complete M3 acceptance.
+
+M3_MODULES remains ineligible for the original N3 v1.0 source/policy pair. Adopt
+and verify a coherent current-source lifecycle pair while preserving the old
+pair. Complete planner/emitter business policy, implementation and trace,
+remaining Core module/registry/schema contracts, deterministic bias/conflict
+rules, all 28 invariant obligations and all five canonical conformance
+categories remain required before M3 acceptance. All five M3 exits stay open.
+M0–M2 remain accepted, M4 planned and platform work deferred through M10. No
+additional owner input is needed for current M3 work.

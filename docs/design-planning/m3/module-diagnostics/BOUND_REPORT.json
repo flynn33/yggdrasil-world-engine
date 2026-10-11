@@ -1,7 +1,154 @@
 {
-  "status": "SYNTHETIC_STRUCTURAL_BOUND_ONLY",
+  "status": "SYNTHETIC_WRAPPED_STRUCTURAL_BOUND_ONLY",
   "base_commit": "a345d1be3e2d635cb79104c153d2628b090ccd88",
   "leaf_bytes": {
+    "PRODUCER_CONTEXT": 615,
+    "PRODUCER_SOURCE": 1803,
+    "PRODUCER_OPERATION": 4954,
+    "PRODUCER_FINAL_OBSERVATION": 413,
+    "PRODUCER_RECORD": 2206,
+    "REALM_IDENTITY": 245,
+    "TRANSITION_REGISTRY": 475,
+    "TRANSITION_DEFINITION": 840,
+    "TOPOLOGY": 1131,
+    "TOPOLOGY_PAGE": 1698,
+    "AXIOM_SUBJECT": 741,
+    "AXIOM_CHECK": 361,
+    "GENERATION_PLAN": 1657,
+    "ROLE_PAGE": 2080,
+    "ARTIFACT_PAGE": 8849,
+    "TARGET_CONSTRAINTS": 3292,
+    "EMISSION_OUTPUT": 604
+  },
+  "leaf_alias_slots": {
+    "PRODUCER_CONTEXT": 15,
+    "PRODUCER_SOURCE": 18,
+    "PRODUCER_OPERATION": 139,
+    "PRODUCER_FINAL_OBSERVATION": 5,
+    "PRODUCER_RECORD": 7,
+    "REALM_IDENTITY": 1,
+    "TRANSITION_REGISTRY": 20,
+    "TRANSITION_DEFINITION": 5,
+    "TOPOLOGY": 50,
+    "TOPOLOGY_PAGE": 2,
+    "AXIOM_SUBJECT": 6,
+    "AXIOM_CHECK": 2,
+    "GENERATION_PLAN": 75,
+    "ROLE_PAGE": 50,
+    "ARTIFACT_PAGE": 338,
+    "TARGET_CONSTRAINTS": 36,
+    "EMISSION_OUTPUT": 7
+  },
+  "operations": {
+    "REALM_ENCODER": {
+      "records": 2,
+      "support_nodes": 7,
+      "new_safe_support_bytes": 12442,
+      "complete_support_upper": 78025,
+      "distinct_alias_upper": 266,
+      "retained_bytes_upper": 326345,
+      "reservation": {
+        "bytes": 524288,
+        "supporting_bytes": 131072,
+        "aliases": 320
+      },
+      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256",
+      "wrapper_byte_increment": 511,
+      "wrapper_alias_increment": 0,
+      "collection_framing_upper": 47
+    },
+    "TRANSITION_REGISTRY": {
+      "records": 17,
+      "support_nodes": 38,
+      "new_safe_support_bytes": 59202,
+      "complete_support_upper": 124816,
+      "distinct_alias_upper": 545,
+      "retained_bytes_upper": 1058960,
+      "reservation": {
+        "bytes": 2097152,
+        "supporting_bytes": 262144,
+        "aliases": 1024
+      },
+      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256",
+      "wrapper_byte_increment": 2813,
+      "wrapper_alias_increment": 0,
+      "collection_framing_upper": 78
+    },
+    "TOPOLOGY_GENERATOR": {
+      "records": 1,
+      "support_nodes": 52,
+      "new_safe_support_bytes": 89230,
+      "complete_support_upper": 154858,
+      "distinct_alias_upper": 395,
+      "retained_bytes_upper": 395242,
+      "reservation": {
+        "bytes": 2097152,
+        "supporting_bytes": 524288,
+        "aliases": 512
+      },
+      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256",
+      "wrapper_byte_increment": 3608,
+      "wrapper_alias_increment": 0,
+      "collection_framing_upper": 92
+    },
+    "AXIOM_EVALUATOR": {
+      "records": 5,
+      "support_nodes": 15,
+      "new_safe_support_bytes": 21361,
+      "complete_support_upper": 86952,
+      "distinct_alias_upper": 317,
+      "retained_bytes_upper": 471208,
+      "reservation": {
+        "bytes": 1048576,
+        "supporting_bytes": 262144,
+        "aliases": 512
+      },
+      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256",
+      "wrapper_byte_increment": 1058,
+      "wrapper_alias_increment": 0,
+      "collection_framing_upper": 55
+    },
+    "GENERATION_PLANNER": {
+      "records": 1,
+      "support_nodes": 110,
+      "new_safe_support_bytes": 210593,
+      "complete_support_upper": 276279,
+      "distinct_alias_upper": 3500,
+      "retained_bytes_upper": 1311543,
+      "reservation": {
+        "bytes": 4194304,
+        "supporting_bytes": 1048576,
+        "aliases": 4096
+      },
+      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256",
+      "wrapper_byte_increment": 7425,
+      "wrapper_alias_increment": 0,
+      "collection_framing_upper": 150
+    },
+    "ARTIFACT_EMITTER": {
+      "records": 65,
+      "support_nodes": 206,
+      "new_safe_support_bytes": 371105,
+      "complete_support_upper": 436887,
+      "distinct_alias_upper": 4492,
+      "retained_bytes_upper": 4347543,
+      "reservation": {
+        "bytes": 8388608,
+        "supporting_bytes": 1048576,
+        "aliases": 5120
+      },
+      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256",
+      "wrapper_byte_increment": 14241,
+      "wrapper_alias_increment": 0,
+      "collection_framing_upper": 246
+    }
+  },
+  "fixed_old_support_allowance": 65536,
+  "native_io_claim": false,
+  "runtime_producer_claim": false,
+  "caps_changed": false,
+  "leaf_representation": "Complete SafeModuleEvidence(kind,evidence_reference,payload); payload definitions unchanged.",
+  "payload_leaf_bytes": {
     "PRODUCER_CONTEXT": 543,
     "PRODUCER_SOURCE": 1732,
     "PRODUCER_OPERATION": 4880,
@@ -20,113 +167,7 @@
     "TARGET_CONSTRAINTS": 3218,
     "EMISSION_OUTPUT": 533
   },
-  "leaf_alias_slots": {
-    "PRODUCER_CONTEXT": 14,
-    "PRODUCER_SOURCE": 17,
-    "PRODUCER_OPERATION": 138,
-    "PRODUCER_FINAL_OBSERVATION": 4,
-    "PRODUCER_RECORD": 6,
-    "REALM_IDENTITY": 0,
-    "TRANSITION_REGISTRY": 19,
-    "TRANSITION_DEFINITION": 4,
-    "TOPOLOGY": 49,
-    "TOPOLOGY_PAGE": 1,
-    "AXIOM_SUBJECT": 5,
-    "AXIOM_CHECK": 1,
-    "GENERATION_PLAN": 74,
-    "ROLE_PAGE": 49,
-    "ARTIFACT_PAGE": 337,
-    "TARGET_CONSTRAINTS": 35,
-    "EMISSION_OUTPUT": 6
-  },
-  "operations": {
-    "REALM_ENCODER": {
-      "records": 2,
-      "support_nodes": 7,
-      "new_safe_support_bytes": 11931,
-      "complete_support_upper": 77467,
-      "distinct_alias_upper": 266,
-      "retained_bytes_upper": 325787,
-      "reservation": {
-        "bytes": 524288,
-        "supporting_bytes": 131072,
-        "aliases": 320
-      },
-      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256"
-    },
-    "TRANSITION_REGISTRY": {
-      "records": 17,
-      "support_nodes": 38,
-      "new_safe_support_bytes": 56389,
-      "complete_support_upper": 121925,
-      "distinct_alias_upper": 545,
-      "retained_bytes_upper": 1056069,
-      "reservation": {
-        "bytes": 2097152,
-        "supporting_bytes": 262144,
-        "aliases": 1024
-      },
-      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256"
-    },
-    "TOPOLOGY_GENERATOR": {
-      "records": 1,
-      "support_nodes": 52,
-      "new_safe_support_bytes": 85622,
-      "complete_support_upper": 151158,
-      "distinct_alias_upper": 395,
-      "retained_bytes_upper": 391542,
-      "reservation": {
-        "bytes": 2097152,
-        "supporting_bytes": 524288,
-        "aliases": 512
-      },
-      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256"
-    },
-    "AXIOM_EVALUATOR": {
-      "records": 5,
-      "support_nodes": 15,
-      "new_safe_support_bytes": 20303,
-      "complete_support_upper": 85839,
-      "distinct_alias_upper": 317,
-      "retained_bytes_upper": 470095,
-      "reservation": {
-        "bytes": 1048576,
-        "supporting_bytes": 262144,
-        "aliases": 512
-      },
-      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256"
-    },
-    "GENERATION_PLANNER": {
-      "records": 1,
-      "support_nodes": 110,
-      "new_safe_support_bytes": 203168,
-      "complete_support_upper": 268704,
-      "distinct_alias_upper": 3500,
-      "retained_bytes_upper": 1303968,
-      "reservation": {
-        "bytes": 4194304,
-        "supporting_bytes": 1048576,
-        "aliases": 4096
-      },
-      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256"
-    },
-    "ARTIFACT_EMITTER": {
-      "records": 65,
-      "support_nodes": 206,
-      "new_safe_support_bytes": 356864,
-      "complete_support_upper": 422400,
-      "distinct_alias_upper": 4492,
-      "retained_bytes_upper": 4333056,
-      "reservation": {
-        "bytes": 8388608,
-        "supporting_bytes": 1048576,
-        "aliases": 5120
-      },
-      "formula": "support + records*(32768+8192) + 32768 incident + 65536 inherited root + aliases*256"
-    }
-  },
-  "fixed_old_support_allowance": 65536,
-  "native_io_claim": false,
-  "runtime_producer_claim": false,
-  "caps_changed": false
+  "alias_formula": "64 + 5*records + sum(complete_wrapper_alias_slots[kind]*count); original own-node alias already allocated.",
+  "support_formula": "65536 + sum(complete_wrapper_leaf_bytes[kind]*count) + 40 + support_nodes",
+  "decision_id": "ADR-0040"
 }

@@ -27,7 +27,9 @@ CANONICAL = ROOT / 'core/ash_pattern_engine/canonical'
 DEPENDENCY = 'ash_cosmological_model.f2_9.canonical'
 AGGREGATE = '0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb'
 CURRENT_AGGREGATE = '76d59926ce9676b7584c6cdd555f50f56fceda075fa3fc8b37167fd2be43f7c9'
+MODULE_AGGREGATE = 'f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400'
 LEGACY_SOURCE_REVISION = 'c78ee7e451e5d35b2f615369433291007e7ee261'
+N3_SOURCE_REVISION = 'a345d1be3e2d635cb79104c153d2628b090ccd88'
 SOURCE_FIELDS = {
     'state_space_sha256': 'core/ash-state-space.pseudo.md',
     'codeword_source_sha256': 'core/codeword-set.pseudo.md',
@@ -350,7 +352,9 @@ class StateConstructionTests(ModelTestCase):
                 self.assert_code('CANONICAL_BINDING_INVALID', values.CanonicalAshBinding, **altered)
 
     def test_source_manifest_and_independently_hashed_pins_match(self):
-        for revision, expected in ((None, CURRENT_AGGREGATE), (LEGACY_SOURCE_REVISION, AGGREGATE)):
+        for revision, expected in ((None, MODULE_AGGREGATE),
+                                   (N3_SOURCE_REVISION, CURRENT_AGGREGATE),
+                                   (LEGACY_SOURCE_REVISION, AGGREGATE)):
             with self.subTest(revision=revision):
                 raw = ((ROOT / 'data/governance/ash_dependency_identity.json').read_bytes()
                        if revision is None else subprocess.check_output(['git', 'show',
@@ -360,8 +364,13 @@ class StateConstructionTests(ModelTestCase):
                 self.assertEqual(32, len(identity['files']))
                 records = []
                 for item in sorted(identity['files'], key=lambda item: item['relative_path']):
-                    observed = (normalized_hash(CANONICAL / item['relative_path']) if revision is None
-                                else legacy_source_hash(item['relative_path']))
+                    if revision is None:
+                        observed = normalized_hash(CANONICAL / item['relative_path'])
+                    else:
+                        source = subprocess.check_output(['git', 'show', revision +
+                            ':core/ash_pattern_engine/canonical/' + item['relative_path']], cwd=ROOT)
+                        normalized = source.decode('utf-8-sig').replace('\r\n', '\n').replace('\r', '\n')
+                        observed = hashlib.sha256(normalized.encode('utf-8')).hexdigest()
                     self.assertEqual(item['sha256'], observed)
                     records.append(item['relative_path'].encode() + b'\0' + observed.encode() + b'\n')
                 self.assertEqual(expected, identity['aggregate_sha256'])

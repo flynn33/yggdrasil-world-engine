@@ -109,7 +109,7 @@ class ReferenceDiagnosticWireTests(unittest.TestCase):
         self.rejected(row)
 
     def test_whole_source_vectors_accept_legacy_and_current_and_reject_crossed_pins(self):
-        text = (ROOT / "docs/architecture/m3_source_compatibility_contract.md").read_text(encoding="utf-8")
+        text = (ROOT / "docs/architecture/m3_module_source_compatibility_contract.md").read_text(encoding="utf-8")
         inventory = json.loads(text.split("<!-- EXACT_SOURCE_COMPATIBILITY_INVENTORY -->", 1)[1].split("```json", 1)[1].split("```", 1)[0])
         rows = []
         for vector in inventory["vectors"]:
@@ -119,13 +119,22 @@ class ReferenceDiagnosticWireTests(unittest.TestCase):
                 "verified_pins":pins, "external_source_reference":None, "external_verification":"DECLARED_NOT_AUTHENTICATED"}
             self.valid(row, "SafeSourceEvidence")
             rows.append(row)
-        for source, other in ((0,1),(1,0)):
+        for source, other in ((0,1),(1,0),(0,2),(2,0),(1,2),(2,1)):
             mixed = copy.deepcopy(rows[source])
             mixed["verified_pins"][7] = copy.deepcopy(rows[other]["verified_pins"][7])
             errors = list(self.fragment("SafeSourceEvidence").iter_errors(mixed))
             self.assertEqual([("oneOf", ())], [(error.validator, tuple(error.path)) for error in errors])
-            self.assertEqual({("const", ("verified_pins",0,"sha256")), ("const", ("verified_pins",7,"sha256"))},
-                {(error.validator, tuple(error.path)) for error in errors[0].context})
+            expected = {("const", ("verified_pins", index, "sha256"))
+                for baseline in rows for index, pin in enumerate(baseline['verified_pins'])
+                if pin['sha256'] != mixed['verified_pins'][index]['sha256']}
+            self.assertEqual(expected, {(error.validator, tuple(error.path)) for error in errors[0].context})
+            if source < 2 and other < 2:
+                historical = copy.deepcopy(self.schema)
+                historical['$defs']['SafeSourceEvidence']['oneOf'] = historical['$defs']['SafeSourceEvidence']['oneOf'][:2]
+                prior = Draft202012Validator({'$ref': '#/$defs/SafeSourceEvidence', '$defs': historical['$defs']})
+                old_errors = list(prior.iter_errors(mixed))
+                self.assertEqual({('const', ('verified_pins',0,'sha256')), ('const', ('verified_pins',7,'sha256'))},
+                    {(error.validator, tuple(error.path)) for error in old_errors[0].context})
         reordered = copy.deepcopy(rows[0]); reordered["verified_pins"].reverse()
         self.rejected(reordered, "SafeSourceEvidence")
         invalid = copy.deepcopy(rows[1]); invalid["verified_pins"][0]["revision"] = "unverified"

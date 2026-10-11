@@ -495,8 +495,23 @@ def _verified_canonical_source_snapshots(root):
         if sv.canonical_source_baseline(legacy_binding) != "LEGACY_C78":
             raise ValueError("historical source is not the legacy baseline")
         snapshots = (dv.SourcePin("ASH_AGGREGATE", dv.LEGACY_SOURCE_REVISION, legacy_binding.aggregate_sha256),)
-        if sv.canonical_source_baseline(current_binding) == "N3_LIFECYCLE":
+        current_baseline = sv.canonical_source_baseline(current_binding)
+        if current_baseline == "N3_LIFECYCLE":
             snapshots += (dv.SourcePin("ASH_AGGREGATE", revision, current_binding.aggregate_sha256),)
+        elif current_baseline == "M3_MODULES":
+            historical = _git_source_material(root, dv.HISTORICAL_N3_SOURCE_REVISION)
+            historical_rows = source_rows(historical)
+            if tuple(row["relative_path"] for row in historical_rows) != names:
+                raise ValueError("historical N3 source paths differ from the reviewed inventory")
+            historical_descriptor = json.loads(historical[ash_sync.MANIFEST_PATH.as_posix()].decode("utf-8"),
+                object_pairs_hook=ash_sync._unique_object)
+            if historical.get("VERSION", b"").decode("utf-8").strip() != "2.0.23" or historical_descriptor != ash_sync.expected_manifest(root, historical_rows):
+                raise ValueError("historical N3 descriptor differs from actual pinned source")
+            historical_binding = binding(historical_rows)
+            if sv.canonical_source_baseline(historical_binding) != "N3_LIFECYCLE":
+                raise ValueError("historical N3 source is not the reviewed complete vector")
+            snapshots += (dv.SourcePin("ASH_AGGREGATE", dv.HISTORICAL_N3_SOURCE_REVISION, historical_binding.aggregate_sha256),
+                dv.SourcePin("ASH_AGGREGATE", revision, current_binding.aggregate_sha256))
         return revision, snapshots
     except (OSError, ValueError, KeyError, subprocess.CalledProcessError, tarfile.TarError):
         raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE") from None
@@ -517,8 +532,10 @@ def assemble_reference_diagnostics(root: Path, *, release=False, parent=Path("D:
         raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
     normalized = lambda p: p.read_text(encoding="utf-8-sig").replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
     revision, source_snapshots = _verified_canonical_source_snapshots(root)
-    if len(source_snapshots) == 2:
+    if any(pin.sha256 == dict(sv.CURRENT_CANONICAL_BINDING_FIELDS)["aggregate_sha256"] for pin in source_snapshots):
         _verified_session_policy(root, revision)
+    if any(pin.sha256 == dict(sv.MODULE_CANONICAL_BINDING_FIELDS)["aggregate_sha256"] for pin in source_snapshots):
+        _verified_historical_session_policy(root)
     policy = root / "docs/architecture/m3_recovery_safety_policy.md"
     if hashlib.sha256(normalized(policy)).hexdigest() != dv.SafeRecoverySafetyPolicy.policy_sha256:
         raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
@@ -555,5 +572,20 @@ def _verified_session_policy(root, revision):
         committed = ash_sync.normalized_utf8_data(committed, relative)
         if actual != committed or hashlib.sha256(actual).hexdigest() != fields["source_sha256"]:
             raise ValueError("session policy differs from adopted committed bytes")
+    except (OSError, UnicodeError, ValueError, subprocess.CalledProcessError):
+        raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE") from None
+
+
+def _verified_historical_session_policy(root):
+    """Prove the unchanged N3 policy from its actual pinned historical Git blob."""
+    from core.ash_pattern_engine import session_values
+    fields = dict(session_values.SESSION_POLICY_BINDING_FIELDS)
+    relative = fields["source_path"]
+    try:
+        committed = subprocess.run(["git", "show", dv.HISTORICAL_N3_SOURCE_REVISION + ":" + relative], cwd=root,
+            check=True, capture_output=True).stdout
+        normalized = ash_sync.normalized_utf8_data(committed, relative)
+        if hashlib.sha256(normalized).hexdigest() != fields["source_sha256"]:
+            raise ValueError("historical N3 policy differs from its reviewed immutable pin")
     except (OSError, UnicodeError, ValueError, subprocess.CalledProcessError):
         raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE") from None

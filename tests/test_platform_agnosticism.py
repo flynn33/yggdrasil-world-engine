@@ -13,6 +13,24 @@ from check_platform_agnosticism import platform_violations
 
 
 class ReferenceBoundaryTests(unittest.TestCase):
+    def test_reviewed_module_reference_paths_do_not_admit_adjacent_runtime(self):
+        names = ("realm_transition_values.py", "realm_transition.py", "generation_values.py",
+                 "topology.py", "axioms.py", "diagnostic_module_values.py", "diagnostic_module_capture.py")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            reference = root / "core/ash_pattern_engine"
+            reference.mkdir(parents=True)
+            for name in names:
+                (reference / name).write_text("# Reviewed reference control\n", encoding="utf-8")
+            self.assertEqual(([], 7), platform_violations(root))
+            for name in names:
+                (reference / (name[:-3] + "_runtime.py")).write_text("# Unreviewed neighbor\n", encoding="utf-8")
+            violations, inspected = platform_violations(root)
+            self.assertEqual(14, inspected)
+            self.assertEqual(7, len(violations))
+            for name in names:
+                self.assertTrue(any(f"/{name[:-3]}_runtime.py:" in item for item in violations))
+
     def test_reviewed_session_reference_files_require_exact_paths(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

@@ -78,19 +78,24 @@ completed successfully: each OS passes all 36 checks and runs 1151 unit tests.
 Ubuntu passes 1109 with 42 explicit native skips; Windows passes all 1151
 with no skips.
 
-Strict RealmEncoder and TransitionRegistry ownership is next, preserving the
-existing full-state algebra helpers. The [source, producer and capture contracts](../design-planning/m3/module-diagnostics/README.md)
-are adopted under YWE-REQ-0045–0048 / ADR-0036–0039 before dependent implementation.
-Their source/representation controls pass; new producer runtime acceptance is
-not yet executed. Complete planner/emitter business policy and coherent current-
-source lifecycle integration remain required before M3 acceptance. Bounded topology, five-axiom evaluation,
-pure planning, independent emission and complete Diagnostics producer coverage
-remain required. All five M3 exit criteria remain open; N3 verification does
-not activate M4 or platform work. Owner wiki 78d037e is published from exact
-source d80785a and all 47 remote pages match reviewed bytes.
+Strict RealmEncoder/TransitionRegistry, bounded topology and five-axiom owners
+and their capture integration are implemented, preserving existing full-state
+algebra helpers. The [source, producer and capture contracts](../design-planning/m3/module-diagnostics/README.md)
+precede implementation under YWE-REQ-0045–0048 / ADR-0036–0040. Focused controls
+include actual protected Windows capture/export, exact producer ownership and
+all 8,192 transition pairs through 16,384 actual applications. The expanded
+offline catalog passes 1,367 bindings, including 482 intended rejections.
+The corrected combined runtime candidate requires a fresh complete clean run
+before publication. The completed unpublished b4e5b7c run passes 35 checks and
+fails the unit check: two test assumptions fail among 1,232 tests. Corrected LF
+policy hashing and refusal coverage for all 31 rules outside N2 pass all 66 tests
+in the affected areas; a fresh full clean result remains required. Complete planner/emitter business policy, current-source
+lifecycle integration and remaining Core conformance remain required before
+M3 acceptance. All five M3 exits remain open. Owner wiki f31ef00 is published
+from exact source 9c19c6b and all 47 remote pages match reviewed bytes.
 
 The [README checkpoint](../../README.md#development-checkpoint--2026-10-11)
-and [Project Record section 16.4](../design-planning/Project_Record.md#164-committed-lifecycle-verification-and-roadmap-continuation)
+and [Project Record section 18](../design-planning/Project_Record.md#18-issued-module-implementation-and-addressable-diagnostic-evidence)
 carry exact source, verification and publication evidence. The latest owner
 direction in [Project Record section 16.5](../design-planning/Project_Record.md#165-owner-pause-boundary-after-verified-m3-publication)
 is to finish and verify M3, publish it as the owner, then pause and wait for

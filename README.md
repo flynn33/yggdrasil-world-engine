@@ -124,14 +124,37 @@ owner’s explicit go-ahead before starting any M4 work. M3 development continue
 now; the broader roadmap goal remains active until that checkpoint.
 
 Strict RealmEncoder/TransitionRegistry, bounded topology and five-axiom
-reference implementation are the next active M3 assignment. Their
+reference owners and their complete capture integration are implemented. Their
 [adopted contracts and finite inventories](docs/design-planning/m3/module-diagnostics/README.md)
-precede dependent code under YWE-REQ-0045–0048 / ADR-0036–0039. The reviewed
+precede dependent code under YWE-REQ-0045–0048 / ADR-0036–0040. The applied
 source extension changes three Diagnostics pages and preserves the other
-29 canonical files, earlier vectors and full-state algebra. These contract
-and structural bounds do not establish new runtime acceptance. Complete
-planner/emitter business policies and current-source lifecycle integration
-remain required before M3 acceptance.
+29 canonical files, earlier vectors and full-state algebra. Focused pure,
+closed-value and schema tests pass; the Diagnostics regression passes 111 tests,
+including actual Windows protected capture and paired export for all four
+producers. Independent controls verify copied-producer refusal and hostile-value
+rejection without caller hooks. The exhaustive reference-registry control passes
+all 8,192 source/codeword pairs, with 16,384 actual applications, independent XOR
+expectations and repeated complete canonical bytes, in 850.835 seconds.
+Current-source predicate and fallback-registry schema bindings now include the
+adopted third vector; actual three-vector compatibility checks pass. Publication
+of this increment requires a complete clean repository run at the corrected revision.
+The unpublished b4e5b7c clean run completes 36 checks: 35 pass, with the unit
+check reporting two failures among 1,232 tests. One test hashed Windows CRLF
+checkout bytes against the documented LF policy identity; another still expected
+only nine lifecycle rules outside N2, omitting the 22 added module rules.
+The corrections retain the LF identity and all nine lifecycle refusal controls,
+and apply the same refusal controls to all 31 rules outside N2's eight-rule set.
+All 66 tests in the two affected areas pass in 255.122 seconds. A fresh full
+clean run is required before this corrected increment is published.
+ADR-0040 gives each of the 17 safe support payloads an explicit evidence alias;
+all corrected structural byte bounds fit the existing reservations. Complete
+planner/emitter business policies, current-source lifecycle integration and the
+remaining core conformance evidence are still required before M3 acceptance.
+The expanded offline format catalog passes all 1,367 bindings, including 482
+intended rejections. The 146 newly adopted capture bindings cover six actual portable
+wire cases, 21 rejection controls and 110 safe wrappers under explicitly declared
+source, clock and storage ports. Earlier fixture bodies and outcomes are
+preserved; source-rejection signatures include the added third source branch.
 
 N3 session lifecycle is verified at its committed reference revision. The complete
 [lifecycle contract](docs/architecture/m3_session_lifecycle_contract.md),
@@ -163,10 +186,12 @@ passes all 36 checks and runs 1151 unit tests: Ubuntu passes 1109 with
 42 explicit native skips; Windows passes all 1151 with no skips.
 M0–M2 remain accepted and M3 active.
 
-Next work is strict RealmEncoder and TransitionRegistry admission, followed
-by bounded topology, five-axiom evaluation and complete pure planner/emitter
-behavior. The existing identity/XOR helpers retain their full algebra domain.
-These remaining module and Diagnostics obligations keep all M3 exits open.
+Current work completes strict module capture and verifies its failure, concurrent
+completion and protected export paths. Complete planner/emitter policy and
+current-source lifecycle integration follow within M3. The existing identity/XOR
+helpers retain their full algebra domain. These remaining module, core-contract
+and conformance obligations keep all five M3 exits open. M4 remains planned and
+will wait for the owner’s go-ahead after M3 is accepted and published.
 
 The owner wiki publisher is published at
 [`4f7cd2e`](https://github.com/flynn33/yggdrasil-world-engine/commit/4f7cd2e38367e1b3cc75eefffb8f752586e1c7a2).
@@ -204,8 +229,8 @@ Those results cover the adopted contract and approval correction. The lifecycle
 implementation has the separate committed-source full run recorded above.
 
 The [wiki](https://github.com/flynn33/yggdrasil-world-engine/wiki) is published at
-[`78d037e`](https://github.com/flynn33/yggdrasil-world-engine/wiki/_history)
-from source `d80785a`. A fresh remote clone matches all 47 reviewed pages,
+[`f31ef00`](https://github.com/flynn33/yggdrasil-world-engine/wiki/_history)
+from source `9c19c6b`. A fresh remote clone matches all 47 reviewed pages,
 including Home, the roadmap page and preserved manual navigation. Each published
 development increment updates this README checkpoint and refreshes the wiki
 from committed source. The machine-readable milestone gates remain authoritative;

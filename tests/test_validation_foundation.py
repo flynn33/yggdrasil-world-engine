@@ -263,6 +263,41 @@ class PlayerRuntimeReferencePolicyTests(unittest.TestCase):
         self.assertEqual([f"Phase 10 added forbidden platform/code file: {path}" for path in paths],
                          self.check_added(paths, spec))
 
+    def test_module_reference_paths_require_both_exact_approvals(self):
+        paths = ["core/ash_pattern_engine/" + name for name in (
+            "realm_transition_values.py", "realm_transition.py", "generation_values.py",
+            "topology.py", "axioms.py", "diagnostic_module_values.py", "diagnostic_module_capture.py")]
+        self.assertEqual([], self.check_added(paths))
+        spec = copy.deepcopy(self.spec)
+        spec["allowed_reference_paths"] = [path for path in spec["allowed_reference_paths"] if path not in paths]
+        self.assertEqual([f"Phase 10 added forbidden platform/code file: {path}" for path in paths],
+                         self.check_added(paths, spec))
+
+    def test_module_verification_paths_are_explicitly_allowed(self):
+        paths = ["tests/" + name for name in (
+            "test_m3_realm_transition_values.py", "test_m3_realm_transition.py",
+            "test_m3_realm_transition_schemas.py", "test_m3_topology.py", "test_m3_axioms.py",
+            "test_m3_generation_values.py", "test_m3_generation_schemas.py", "test_m3_module_diagnostics.py")]
+        self.assertEqual([], self.check_added(paths))
+        spec = copy.deepcopy(self.spec)
+        spec["allowed_added_paths"] = [path for path in spec["allowed_added_paths"] if path not in paths]
+        self.assertEqual([f"Phase 10 added forbidden platform/code file: {path}" for path in paths],
+                         self.check_added(paths, spec))
+
+    def test_module_reference_neighbors_and_wrong_roles_remain_forbidden(self):
+        for name in ("realm_transition_values", "realm_transition", "generation_values", "topology",
+                     "axioms", "diagnostic_module_values", "diagnostic_module_capture"):
+            neighbor = "core/ash_pattern_engine/" + name + "_runtime.py"
+            self.assertEqual([f"Phase 10 added forbidden platform/code file: {neighbor}"],
+                             self.check_added([neighbor]))
+            spec = copy.deepcopy(self.spec)
+            path = "core/ash_pattern_engine/" + name + ".py"
+            spec["allowed_reference_paths"].remove(path)
+            spec["allowed_added_paths"].append(path)
+            errors = self.check_added([path], spec)
+            self.assertIn(f"Phase 10 allowed_added_paths contains an unapproved Python role/path: {path}", errors)
+            self.assertIn(f"Phase 10 added forbidden platform/code file: {path}", errors)
+
     def test_neighboring_unreviewed_n3_proofs_remain_forbidden(self):
         paths = ["docs/design-planning/m3/session-lifecycle/" + name for name in (
             "session_runtime.py", "derive_bounds_extra.py", "product.cpp")]

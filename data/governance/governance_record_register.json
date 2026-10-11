@@ -1876,12 +1876,49 @@
         "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
         "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md"
       ]
+    },
+    {
+      "id": "ADR-0040",
+      "record_type": "decision",
+      "title": "Make module support nodes addressable in protected array exports",
+      "status": "accepted",
+      "recorded_on": "2026-10-11",
+      "owner_role": "Core semantics maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt the independently reviewed representation correction before dependent module projection implementation; complete runtime/M3 acceptance remain separate.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Observed SupportingEvidence.to_record serializes support as arrays. All seventeen adopted module safe payload schemas omit their own evidence_reference; PRODUCER_SOURCE, PRODUCER_RECORD and TOPOLOGY_PAGE also have no unique own alias field. Consequently aliases to these payloads would not identify their nodes in exported JSON.",
+      "decision": "Serialize every new module support node using the exact immutable SafeModuleEvidence(kind,evidence_reference,payload) wrapper in optional nonempty SupportingEvidence.module_evidence. Close the kind-to-payload union over the original seventeen definitions. Require evidence_reference uniqueness across retained module wrappers and exact alias resolution without reconstructing identities from order. Protect and export the same complete wrapper bytes. Preserve prior empty shapes, payload definitions, per-kind ceilings, whole reservations and all global caps.",
+      "rationale": "A single wrapper restores actual node identity in the existing array transport without adding seventeen incompatible payload fields or arbitrary maps. The original alias formula already allocated each node identity. Charging wrapper and collection framing makes the representation proof match exported bytes.",
+      "consequences": [
+        "YWE-REQ-0048 and ADR-0039 remain active; this correction adds a concrete addressable wire representation before dependent implementation. Original frozen proposals and adoption receipts retain their own actual hashes.",
+        "All seventeen payload definitions remain exact; the additive module_evidence field is omitted when empty. Its global maximum2784 is the sum of unchanged per-kind quotas, subject to unchanged actual support/store capacity.",
+        "Independent root review validates all17 maximum wrappers, rejects68 wrong-kind/extra-field/invalid-alias controls, and recomputes all6 support/alias/retained bounds from actual compact JSON.",
+        "Corrected retained bounds are326345/1058960/395242/471208/1311543/4347543 bytes for realm/transition/topology/axiom/planner/emitter. Alias bounds remain266/545/395/317/3500/4492; all existing reservations fit.",
+        "These are synthetic conservative representation controls. Real alias resolution, uncertain support pinning, paired export, runtime failure coverage and whole M3 acceptance still require executed implementation checks."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0048",
+        "YWE-REQ-0045",
+        "YWE-REQ-0012",
+        "YWE-REQ-0017"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_module_diagnostics_capture_contract.md",
+        "docs/design-planning/m3/module-diagnostics/PRODUCER_AND_SAFE_GRAPH_INVENTORY.json",
+        "docs/design-planning/m3/module-diagnostics/BOUND_REPORT.json",
+        "docs/design-planning/m3/module-diagnostics/SAFE_MAXIMUM_LEAVES.json",
+        "docs/design-planning/m3/module-diagnostics/WRAPPER_AMENDMENT_RECEIPT.json"
+      ]
     }
   ],
   "summary": {
-    "total_records": 56,
-    "architecture_decisions": 39,
-    "accepted_decisions": 38,
+    "total_records": 57,
+    "architecture_decisions": 40,
+    "accepted_decisions": 39,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

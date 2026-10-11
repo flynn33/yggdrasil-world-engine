@@ -1,4 +1,4 @@
-"""Owned N2 recovery values [YWE-REQ-0041] and reviewed source pairs [YWE-REQ-0043]."""
+"""Owned N2 recovery values [YWE-REQ-0041] and reviewed source pairs [YWE-REQ-0045]."""
 
 from __future__ import annotations
 
@@ -46,6 +46,14 @@ RECOVERY_SOURCE_BASELINES = (
         ("algorithms/containment-safe-failure-semantics.pseudo.md", "df957dc5c82c2fd0b51e43c6783d8cbb2e3ce565420a765abffd244cdcea98b2"),
         RECOVERY_CONTRACT_PIN_FIELDS[5],
         ("interfaces/rule-id-taxonomy.md", "150b45d4c75aa053a8d5276d980b359b0ae768c85ae28896680296920402f250"),
+    )),
+    ("M3_MODULES", state.MODULE_CANONICAL_BINDING_FIELDS, (
+        RECOVERY_CONTRACT_PIN_FIELDS[0],
+        ("interfaces/contracts/diagnostics-module-contract.md", "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"),
+        *RECOVERY_CONTRACT_PIN_FIELDS[2:4],
+        ("algorithms/containment-safe-failure-semantics.pseudo.md", "df957dc5c82c2fd0b51e43c6783d8cbb2e3ce565420a765abffd244cdcea98b2"),
+        ("interfaces/diagnostic-schema.md", "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"),
+        ("interfaces/rule-id-taxonomy.md", "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"),
     )),
 )
 RECOVERY_POLICY_BINDING_FIELDS = (

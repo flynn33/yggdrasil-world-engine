@@ -199,6 +199,31 @@ erase the outer budget. Late cancellation audit has a separate correlated root
 outside sealed/frozen main membership. Existing mandatory halt latches before IO
 and never depends on a new module reservation or completion.
 
+## Addressable support export correction — ADR-0040
+
+[YWE-REQ-0048] Every retained new module support node MUST serialize as the
+exact immutable SafeModuleEvidence(kind, evidence_reference, payload) wrapper.
+kind selects exactly one of the seventeen existing closed payload definitions;
+evidence_reference is the node's actual ref:NNNNNN alias and MUST be unique across
+all retained module wrappers. Every alias referring to a module node MUST resolve
+to that wrapper. A consumer MUST NOT infer node identity from array position or
+from an unrelated payload field. Protected support writes, snapshot JSON and
+paired Markdown MUST retain the same actual wrapper identity and payload.
+
+SupportingEvidence.module_evidence is one optional additive array, emitted only
+when nonempty so earlier empty wire records retain their exact shapes. Its
+maximum is 2784 members, the sum of existing per-kind ceilings; each of those
+ceilings remains authoritative. Every wrapper has exactly kind,
+evidence_reference and payload, with no arbitrary payload class or extra field.
+The seventeen payload schemas and original own-node alias allocations remain
+exact. The corrected bound report charges complete wrapper encoding plus
+40+node_count bytes for collection field/array/comma framing. All six existing
+whole reservations and global caps are unchanged. Maximum specimens now contain
+complete wrappers rather than bare payloads. ADR-0039's original representation
+proof and source/contract adoption receipt remain historical inputs; the
+WRAPPER_AMENDMENT_RECEIPT.json records this correction and independent replay.
+This amendment establishes representation, not actual capture or M3 acceptance.
+
 ## Finite graph and whole-wire limits
 
 ../design-planning/m3/module-diagnostics/PRODUCER_AND_SAFE_GRAPH_INVENTORY.json defines all safe properties,

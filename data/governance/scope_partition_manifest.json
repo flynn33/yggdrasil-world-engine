@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1250,
-    "path_digest": "77fffe988e8b6ccf9254434dadde741ea467e5bb5c980ed5c7100c15c5c19df3",
+    "path_count": 1276,
+    "path_digest": "0fd6a10a7d51b33f48ee910c5d1bd5d4d75b2137d6f261aecfcb20528226e4d8",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -2930,16 +2930,93 @@
         "m3_module_contract",
         "representation_evidence"
       ]
+    },
+    {
+      "path": "examples/core_realm_transition/realm_transition_cases.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_realm_transition_contract.md",
+      "rationale": "Fixed authored module wire representations and complete structural rejection witnesses under the adopted M3 contract.",
+      "secondary_tags": [
+        "m3_module_reference",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "examples/core_realm_transition/realm_transition_rejections.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_realm_transition_contract.md",
+      "rationale": "Fixed authored module wire representations and complete structural rejection witnesses under the adopted M3 contract.",
+      "secondary_tags": [
+        "m3_module_reference",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "examples/core_topology_axiom/topology_axiom_cases.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_topology_axiom_reference_contract.md",
+      "rationale": "Fixed authored module wire representations and complete structural rejection witnesses under the adopted M3 contract.",
+      "secondary_tags": [
+        "m3_module_reference",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "examples/core_topology_axiom/topology_axiom_rejections.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_topology_axiom_reference_contract.md",
+      "rationale": "Fixed authored module wire representations and complete structural rejection witnesses under the adopted M3 contract.",
+      "secondary_tags": [
+        "m3_module_reference",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "examples/core_module_diagnostics/module_capture_cases.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_module_diagnostics_capture_contract.md",
+      "rationale": "Fixed actual portable capture wire controls under declared synthetic source/clock/store ports; separate native qualification.",
+      "secondary_tags": [
+        "m3_module_reference",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "examples/core_module_diagnostics/module_capture_rejections.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_module_diagnostics_capture_contract.md",
+      "rationale": "Fixed actual portable capture wire controls under declared synthetic source/clock/store ports; separate native qualification.",
+      "secondary_tags": [
+        "m3_module_reference",
+        "reference_conformance"
+      ]
+    },
+    {
+      "path": "examples/core_module_diagnostics/module_safe_graph.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Core conformance maintainers",
+      "governing_source": "docs/architecture/m3_module_diagnostics_capture_contract.md",
+      "rationale": "Fixed actual portable capture wire controls under declared synthetic source/clock/store ports; separate native qualification.",
+      "secondary_tags": [
+        "m3_module_reference",
+        "reference_conformance"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
       "ash_dependency_material": 66,
-      "governance_validation": 498,
+      "governance_validation": 514,
       "historical_evidence": 22,
       "later_release_work": 59,
       "wrw_reference_profile": 304,
-      "ywe_core": 179,
+      "ywe_core": 189,
       "ywe_extension_profile": 122
     }
   }

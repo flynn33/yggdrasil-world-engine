@@ -1154,7 +1154,17 @@
         "core/ash_pattern_engine/canonical/interfaces/contracts/transition-registry-contract.md",
         "core/ash_pattern_engine/canonical/core/realm-identity.pseudo.md",
         "core/ash_pattern_engine/canonical/algorithms/transition-system.pseudo.md",
-        "core/ash_pattern_engine/canonical/algorithms/codeword-transformation-semantics.pseudo.md"
+        "core/ash_pattern_engine/canonical/algorithms/codeword-transformation-semantics.pseudo.md",
+        "core/ash_pattern_engine/realm_transition_values.py",
+        "core/ash_pattern_engine/realm_transition.py",
+        "core/ash_pattern_engine/state_model.py",
+        "core/ash_pattern_engine/state_values.py",
+        "data/schemas/m3_realm_transition_schema.json",
+        "tests/test_m3_realm_transition.py",
+        "tests/test_m3_realm_transition_values.py",
+        "tests/test_m3_realm_transition_schemas.py",
+        "examples/core_realm_transition/realm_transition_cases.example.json",
+        "examples/core_realm_transition/realm_transition_rejections.example.json"
       ]
     },
     {
@@ -1185,7 +1195,17 @@
         "core/ash_pattern_engine/canonical/interfaces/contracts/topology-generator-contract.md",
         "core/ash_pattern_engine/canonical/interfaces/contracts/axiom-evaluator-contract.md",
         "core/ash_pattern_engine/canonical/algorithms/topology-expansion.pseudo.md",
-        "core/ash_pattern_engine/canonical/algorithms/axiom-evaluation.pseudo.md"
+        "core/ash_pattern_engine/canonical/algorithms/axiom-evaluation.pseudo.md",
+        "core/ash_pattern_engine/generation_values.py",
+        "core/ash_pattern_engine/topology.py",
+        "core/ash_pattern_engine/axioms.py",
+        "data/schemas/m3_topology_axiom_schema.json",
+        "tests/test_m3_generation_values.py",
+        "tests/test_m3_generation_schemas.py",
+        "tests/test_m3_topology.py",
+        "tests/test_m3_axioms.py",
+        "examples/core_topology_axiom/topology_axiom_cases.example.json",
+        "examples/core_topology_axiom/topology_axiom_rejections.example.json"
       ]
     },
     {
@@ -1208,7 +1228,8 @@
       "introduced_milestone": "M3",
       "owner_role": "Core semantics maintainers",
       "decision_refs": [
-        "ADR-0039"
+        "ADR-0039",
+        "ADR-0040"
       ],
       "source_refs": [
         "docs/architecture/m3_module_diagnostics_capture_contract.md",
@@ -1221,7 +1242,19 @@
         "docs/architecture/m3_reference_diagnostics_contract.md",
         "core/ash_pattern_engine/canonical/interfaces/contracts/diagnostics-module-contract.md",
         "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
-        "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md"
+        "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md",
+        "docs/design-planning/m3/module-diagnostics/WRAPPER_AMENDMENT_RECEIPT.json",
+        "core/ash_pattern_engine/diagnostic_module_values.py",
+        "core/ash_pattern_engine/diagnostic_module_capture.py",
+        "core/ash_pattern_engine/diagnostics.py",
+        "core/ash_pattern_engine/diagnostics_values.py",
+        "data/schemas/m3_module_capture_schema.json",
+        "data/schemas/m3_reference_diagnostic_bundle_schema.json",
+        "scripts/reference_diagnostics_host.py",
+        "tests/test_m3_module_diagnostics.py",
+        "examples/core_module_diagnostics/module_capture_cases.example.json",
+        "examples/core_module_diagnostics/module_capture_rejections.example.json",
+        "examples/core_module_diagnostics/module_safe_graph.example.json"
       ]
     }
   ],

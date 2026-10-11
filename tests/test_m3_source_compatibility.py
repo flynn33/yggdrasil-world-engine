@@ -11,15 +11,17 @@ from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 
 from core.ash_pattern_engine import normalization, normalization_values as nv
-from core.ash_pattern_engine import diagnostics_values as dv, recovery_values as rv
+from core.ash_pattern_engine import diagnostics as diagnostics_owner, diagnostics_values as dv, recovery_values as rv
 from core.ash_pattern_engine import state_values as sv
 from core.ash_pattern_engine.state_model import RecordingDiagnosticCapture, StateModel
 from tests import test_m3_normalization as n1
 from tests import test_m3_state_model as assessment
+from tests import test_m3_recovery as recovery_fixture
+from tests import test_m3_reference_diagnostics as diagnostics_fixture
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CONTRACT = ROOT / 'docs/architecture/m3_source_compatibility_contract.md'
+CONTRACT = ROOT / 'docs/architecture/m3_module_source_compatibility_contract.md'
 
 
 def reviewed_inventory():
@@ -98,6 +100,11 @@ class SourceCompatibilityTests(unittest.TestCase):
                 self.assertEqual(list(validator.iter_errors(binding.to_record())), [])
         self.assertEqual(sv.CANONICAL_BINDING_FIELDS, tuple(self.vectors[0]['canonical_binding'].items()))
         self.assertEqual(sv.CURRENT_CANONICAL_BINDING_FIELDS, tuple(self.vectors[1]['canonical_binding'].items()))
+        self.assertEqual(sv.MODULE_CANONICAL_BINDING_FIELDS, tuple(self.vectors[2]['canonical_binding'].items()))
+        historical = (ROOT / 'docs/architecture/m3_source_compatibility_contract.md').read_text(encoding='utf-8')
+        old = json.loads(re.search(r'<!-- EXACT_SOURCE_COMPATIBILITY_INVENTORY -->\s*```json\s*(.*?)```', historical, re.S).group(1))
+        self.assertEqual([row['canonical_binding'] for row in self.vectors[:2]],
+                         [row['canonical_binding'] for row in old['vectors']])
 
     def test_aggregate_and_taxonomy_are_paired_in_constructor_and_schema(self):
         validator = binding_schema()
@@ -214,10 +221,64 @@ class SourceCompatibilityTests(unittest.TestCase):
                         self.assertIsNone(witness.expected_diagnostic)
                     self.assertEqual(capture.begins, [])
 
+    def test_all_three_evaluated_predicate_and_registry_bindings_match_actual_schema_and_model(self):
+        schemas = [json.loads((ROOT / 'data/schemas' / name).read_text(encoding='utf-8'))
+                   for name in ('m3_state_assessment_schema.json', 'm3_recovery_value_schema.json')]
+        registry = Registry().with_resources([(schema['$id'], Resource.from_contents(schema)) for schema in schemas])
+        assessment_wire = Draft202012Validator(schemas[0], registry=registry)
+        def fragment(schema, name):
+            return Draft202012Validator({'$ref': schema['$id'] + '#/$defs/' + name}, registry=registry)
+        predicate_wire = fragment(schemas[0], 'PredicateBinding')
+        registry_wire = fragment(schemas[1], 'RegistrySourceBinding')
+        snapshot_wire = fragment(schemas[1], 'AvailableFallbackRegistry')
+        identity = diagnostics_fixture.CanonicalSourceCompatibilityTests().identity()
+        collector = diagnostics_owner.ReferenceDevelopmentDiagnostics(identity,
+            dv.DiagnosticsProfile(identity.profile_id, identity.implementation_id, 'ref:000003', True),
+            diagnostics_fixture.ControlledProjectionStore(), diagnostics_fixture.ControlledClock(),
+            canonical_source_snapshots=(
+                dv.SourcePin('ASH_AGGREGATE', self.inventory['legacy_commit'], self.vectors[0]['canonical_binding']['aggregate_sha256']),
+                dv.SourcePin('ASH_AGGREGATE', dv.HISTORICAL_N3_SOURCE_REVISION, self.vectors[1]['canonical_binding']['aggregate_sha256']),
+                dv.SourcePin('ASH_AGGREGATE', identity.source_revision, self.vectors[2]['canonical_binding']['aggregate_sha256'])))
+        models = [self.model(vector, collector.assessment_capture()) for vector in self.vectors]
+        for index, (vector, model) in enumerate(zip(self.vectors, models)):
+            fallback = recovery_fixture.registry(model)
+            with self.subTest(baseline=vector['baseline'], binding='actual-registry'):
+                record = fallback.snapshot.source_binding.to_record()
+                self.assertEqual(record['ash_aggregate_sha256'], vector['canonical_binding']['aggregate_sha256'])
+                self.assertEqual([], list(registry_wire.iter_errors(record)))
+                self.assertEqual([], list(snapshot_wire.iter_errors(fallback.snapshot.to_record())))
+                self.assertEqual('VERIFIED', fallback.validate_for_model(model).status)
+                for other_index, other_model in enumerate(models):
+                    if other_index != index:
+                        self.assertEqual('REGISTRY_SOURCE_MISMATCH', fallback.validate_for_model(other_model).failure_code)
+                unknown = dict(record, ash_aggregate_sha256='0' * 64)
+                self.assertTrue(list(registry_wire.iter_errors(unknown)))
+            for status, known, available, expected_class, consulted in (
+                    ('TRANSFORMATION_COMPATIBLE', True, False, 'CORRECTABLE', 'correction_path_is_known'),
+                    ('TRANSFORMATION_INCOMPATIBLE', None, True, 'DEGRADED', 'fallback_is_available')):
+                candidate = next(recovery_fixture.ash(n) for n in range(512)
+                                 if model.inspect_state(recovery_fixture.ash(n)).admissibility_status == status)
+                with self.subTest(baseline=vector['baseline'], classification=expected_class):
+                    actual = recovery_fixture.assessment(model, candidate,
+                        'source_compat:evaluated:' + str(index) + ':' + expected_class, known=known, fallback=available)
+                    first = collector.complete_assessment(actual)
+                    self.assertEqual('COMPLETE', first.status)
+                    self.assertEqual(expected_class, actual.system_state_class)
+                    self.assertEqual((consulted,), actual.consulted_predicates)
+                    self.assertEqual('EVALUATED', getattr(actual.classification_evidence, consulted).to_record()['evaluation'])
+                    self.assertEqual([], list(assessment_wire.iter_errors(actual.to_record())))
+                    self.assertEqual('VERIFIED', model.validate_assessment(actual).status)
+                    binding = getattr(actual.classification_evidence, consulted).binding.to_record()
+                    self.assertEqual([], list(predicate_wire.iter_errors(binding)))
+                    self.assertTrue(list(predicate_wire.iter_errors(dict(binding, ash_aggregate_sha256='0' * 64))))
+                    for other_index, other_model in enumerate(models):
+                        if other_index != index:
+                            self.assertEqual('REJECTED', other_model.validate_assessment(actual).status)
+
     def test_generic_lifecycle_ids_do_not_widen_state_or_normalization_owners(self):
         added = tuple('ASH-CONTAINMENT-TRIGGER-' + str(i).zfill(3) for i in range(1, 5)) + tuple(
             'ASH-HALT-TRIGGER-' + str(i).zfill(3) for i in range(1, 6))
-        self.assertEqual(len(sv.RULE_IDS), 17)
+        self.assertEqual(len(sv.RULE_IDS), 39)
         self.assertEqual(len(sv.ASSESSMENT_RULE_IDS), 6)
         self.assertEqual(len(nv.NORMALIZATION_RULE_IDS), 7)
         diagnostic = self.model(self.vectors[1]).diagnose(
@@ -257,11 +318,14 @@ class SourceCompatibilityTests(unittest.TestCase):
         for index, vector in enumerate(self.vectors):
             capture = CountingCapture()
             model = self.model(vector, capture, capture)
-            witness = model.validate_normalization_plan(plans[1 - index])
-            self.assertEqual(witness.validation_status, 'REJECTED')
-            self.assertEqual(witness.field_name, 'original_diagnosis.source_binding')
-            self.assertEqual(witness.origin_validation_status, 'REJECTED')
-            self.assertEqual(capture.begins, [])
+            for foreign_index, plan in enumerate(plans):
+                if foreign_index == index:
+                    continue
+                witness = model.validate_normalization_plan(plan)
+                self.assertEqual(witness.validation_status, 'REJECTED')
+                self.assertEqual(witness.field_name, 'original_diagnosis.source_binding')
+                self.assertEqual(witness.origin_validation_status, 'REJECTED')
+                self.assertEqual(capture.begins, [])
 
 
 if __name__ == '__main__':

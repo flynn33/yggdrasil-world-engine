@@ -1,0 +1,4937 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m3_realm_transition_schema.json",
+  "title": "M3 strict realm and transition reference values",
+  "description": "Closed representation for YWE-REQ-0046. Structural conformance is not source verification, diagnosis mathematics, producer issuance, actual capture or session publication.",
+  "x-ywe-requirement-id": "YWE-REQ-0046",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/RealmTransitionSourcePin"
+    },
+    {
+      "$ref": "#/$defs/RealmTransitionBinding"
+    },
+    {
+      "$ref": "#/$defs/TransitionDefinition"
+    },
+    {
+      "$ref": "#/$defs/TransitionCatalog"
+    },
+    {
+      "$ref": "#/$defs/TransitionSelection"
+    },
+    {
+      "$ref": "#/$defs/DiagnosisValidation"
+    },
+    {
+      "$ref": "#/$defs/RealmIdentity"
+    },
+    {
+      "$ref": "#/$defs/RealmTransitionGate"
+    },
+    {
+      "$ref": "#/$defs/TransitionApplicabilityObservation"
+    },
+    {
+      "$ref": "#/$defs/TransitionSelectionObservation"
+    },
+    {
+      "$ref": "#/$defs/TransitionTransformationObservation"
+    },
+    {
+      "$ref": "#/$defs/RealmTransitionRecord"
+    },
+    {
+      "$ref": "#/$defs/RealmEncodingResult"
+    },
+    {
+      "$ref": "#/$defs/TransitionResolutionResult"
+    },
+    {
+      "$ref": "#/$defs/TransitionApplicationResult"
+    },
+    {
+      "$ref": "#/$defs/RealmTransitionFailure"
+    },
+    {
+      "$ref": "#/$defs/RealmTransitionCaptureReceipt"
+    }
+  ],
+  "$defs": {
+    "AshState": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/AshState"
+    },
+    "Signature": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/Signature"
+    },
+    "ProfileBinding": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/ProfileBinding"
+    },
+    "StateDiagnosis": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/StateDiagnosis"
+    },
+    "StateValidityDiagnostic": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/StateValidityDiagnostic"
+    },
+    "CanonicalAshBinding": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/CanonicalAshBinding"
+    },
+    "Identifier": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/DiagnosticReference"
+    },
+    "Hash": {
+      "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/NormalizedSHA256"
+    },
+    "Text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^[^\\ud800-\\udfff]*$"
+    },
+    "RealmTransitionSourcePin": {
+      "type": "object",
+      "required": [
+        "source_id",
+        "source_sha256"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "enum": [
+            "REALM_ENCODER_CONTRACT",
+            "REALM_IDENTITY",
+            "TRANSITION_REGISTRY_CONTRACT",
+            "TRANSITION_SYSTEM",
+            "TRANSFORMATION",
+            "CODEWORDS",
+            "ASH_STATE_SPACE",
+            "STATE_ADMISSIBILITY",
+            "DIAGNOSTIC_SCHEMA",
+            "RULE_TAXONOMY",
+            "DIAGNOSTICS_MODULE_CONTRACT"
+          ]
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/Hash"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RealmTransitionBinding": {
+      "type": "object",
+      "required": [
+        "canonical_binding",
+        "profile_binding",
+        "contract_pins",
+        "policy_source_reference",
+        "policy_source_sha256",
+        "policy_evidence_reference"
+      ],
+      "properties": {
+        "canonical_binding": {
+          "type": "object",
+          "required": [
+            "dependency_id",
+            "aggregate_sha256",
+            "state_space_sha256",
+            "codeword_source_sha256",
+            "validity_source_sha256",
+            "classification_source_sha256",
+            "recovery_source_sha256",
+            "diagnostic_source_sha256",
+            "taxonomy_source_sha256"
+          ],
+          "properties": {
+            "dependency_id": {
+              "const": "ash_cosmological_model.f2_9.canonical"
+            },
+            "aggregate_sha256": {
+              "const": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400"
+            },
+            "state_space_sha256": {
+              "const": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+            },
+            "codeword_source_sha256": {
+              "const": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+            },
+            "validity_source_sha256": {
+              "const": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e"
+            },
+            "classification_source_sha256": {
+              "const": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff"
+            },
+            "recovery_source_sha256": {
+              "const": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd"
+            },
+            "diagnostic_source_sha256": {
+              "const": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+            },
+            "taxonomy_source_sha256": {
+              "const": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+            }
+          },
+          "additionalProperties": false
+        },
+        "profile_binding": {
+          "$ref": "#/$defs/ProfileBinding"
+        },
+        "contract_pins": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "object",
+              "required": [
+                "source_id",
+                "source_sha256"
+              ],
+              "properties": {
+                "source_id": {
+                  "const": "REALM_ENCODER_CONTRACT"
+                },
+                "source_sha256": {
+                  "const": "b3fa0deb71ae136c712f402f2b8159b7448ef8756a884369931ab7098bc83fbb"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "source_id",
+                "source_sha256"
+              ],
+              "properties": {
+                "source_id": {
+                  "const": "REALM_IDENTITY"
+                },
+                "source_sha256": {
+                  "const": "43f274d9c8c1b7269938bf8661c42e91cf020d215683cb6dfa4b340ff975cad5"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "source_id",
+                "source_sha256"
+              ],
+              "properties": {
+                "source_id": {
+                  "const": "TRANSITION_REGISTRY_CONTRACT"
+                },
+                "source_sha256": {
+                  "const": "f123b02c3390253cba5f50a04e9c69e9c20771c6dc7cff5bcdc7a3c85aa6471f"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "source_id",
+                "source_sha256"
+              ],
+              "properties": {
+                "source_id": {
+                  "const": "TRANSITION_SYSTEM"
+                },
+                "source_sha256": {
+                  "const": "26c456f60fbb5c847714c4a9a49cf8d11ac48ef0a7d0c127da53bd893dd527c2"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "source_id",
+                "source_sha256"
+              ],
+              "properties": {
+                "source_id": {
+                  "const": "TRANSFORMATION"
+                },
+                "source_sha256": {
+                  "const": "80623862ac8dfe72bdecea670f15f4f339c0096da1f63b9058a73458eeedd88e"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "source_id",
+                "source_sha256"
+              ],
+              "properties": {
+                "source_id": {
+                  "const": "CODEWORDS"
+                },
+                "source_sha256": {
+                  "const": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "source_id",
+                "source_sha256"
+              ],
+              "properties": {
+                "source_id": {
+                  "const": "ASH_STATE_SPACE"
+                },
+                "source_sha256": {
+                  "const": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "source_id",
+                "source_sha256"
+              ],
+              "properties": {
+                "source_id": {
+                  "const": "STATE_ADMISSIBILITY"
+                },
+                "source_sha256": {
+                  "const": "5d9231331849a6359a8d8e537d0434ee78787bb14efe5da03f60e68ba3c1978e"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "source_id",
+                "source_sha256"
+              ],
+              "properties": {
+                "source_id": {
+                  "const": "DIAGNOSTIC_SCHEMA"
+                },
+                "source_sha256": {
+                  "const": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "source_id",
+                "source_sha256"
+              ],
+              "properties": {
+                "source_id": {
+                  "const": "RULE_TAXONOMY"
+                },
+                "source_sha256": {
+                  "const": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "source_id",
+                "source_sha256"
+              ],
+              "properties": {
+                "source_id": {
+                  "const": "DIAGNOSTICS_MODULE_CONTRACT"
+                },
+                "source_sha256": {
+                  "const": "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+                }
+              },
+              "additionalProperties": false
+            }
+          ],
+          "minItems": 11,
+          "maxItems": 11,
+          "items": false
+        },
+        "policy_source_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "policy_source_sha256": {
+          "$ref": "#/$defs/Hash"
+        },
+        "policy_evidence_reference": {
+          "$ref": "#/$defs/Identifier"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "policy_source_reference": {
+                  "const": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_STANDARD_POLICY.json"
+                },
+                "policy_source_sha256": {
+                  "const": "6df6e573a27612e513a673ac54d89338fc72bce19c77357ddb3c9f80501f6149"
+                }
+              }
+            },
+            {
+              "properties": {
+                "policy_source_reference": {
+                  "const": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_RESTRICTED_TEST_POLICY.json"
+                },
+                "policy_source_sha256": {
+                  "const": "608730096b94094a0f247011946c5e7093b82d8713b5c1122e57a5a15a6aee4d"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "TransitionDefinition": {
+      "type": "object",
+      "required": [
+        "transition_id",
+        "display_name",
+        "description",
+        "codeword",
+        "applicability_mask"
+      ],
+      "properties": {
+        "transition_id": {
+          "type": "string",
+          "pattern": "^ash_codeword_(?:0[0-9]|1[0-5])$"
+        },
+        "display_name": {
+          "$ref": "#/$defs/Text"
+        },
+        "description": {
+          "$ref": "#/$defs/Text"
+        },
+        "codeword": {
+          "$ref": "#/$defs/AshState"
+        },
+        "applicability_mask": {
+          "type": "string",
+          "minLength": 512,
+          "maxLength": 512,
+          "pattern": "^[01]{512}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TransitionCatalog": {
+      "type": "object",
+      "required": [
+        "binding",
+        "definitions"
+      ],
+      "properties": {
+        "binding": {
+          "$ref": "#/$defs/RealmTransitionBinding"
+        },
+        "definitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TransitionDefinition"
+          },
+          "minItems": 16,
+          "maxItems": 16
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "binding": {
+                "properties": {
+                  "policy_source_sha256": {
+                    "const": "608730096b94094a0f247011946c5e7093b82d8713b5c1122e57a5a15a6aee4d"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "definitions": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_00"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 00"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_01"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 01"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            0,
+                            0,
+                            0,
+                            1,
+                            1,
+                            1,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_02"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 02"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            0,
+                            1,
+                            1,
+                            0,
+                            0,
+                            1,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_03"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 03"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            0,
+                            1,
+                            1,
+                            1,
+                            1,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_04"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 04"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            1,
+                            0,
+                            1,
+                            0,
+                            1,
+                            0,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_05"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 05"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            1,
+                            0,
+                            1,
+                            1,
+                            0,
+                            1,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_06"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 06"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            1,
+                            1,
+                            0,
+                            0,
+                            1,
+                            1,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_07"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 07"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            1,
+                            1,
+                            0,
+                            1,
+                            0,
+                            0,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_08"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 08"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            0,
+                            0,
+                            1,
+                            0,
+                            1,
+                            1,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_09"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 09"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            0,
+                            0,
+                            1,
+                            1,
+                            0,
+                            0,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_10"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 10"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            0,
+                            1,
+                            0,
+                            0,
+                            1,
+                            0,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_11"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 11"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            0,
+                            1,
+                            0,
+                            1,
+                            0,
+                            1,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_12"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 12"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            1,
+                            0,
+                            0,
+                            0,
+                            0,
+                            1,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_13"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 13"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            1,
+                            0,
+                            0,
+                            1,
+                            1,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_14"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 14"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            1,
+                            1,
+                            1,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_15"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 15"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                ],
+                "minItems": 16,
+                "maxItems": 16,
+                "items": false
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "definitions": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_00"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 00"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_01"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 01"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            0,
+                            0,
+                            0,
+                            1,
+                            1,
+                            1,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_02"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 02"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            0,
+                            1,
+                            1,
+                            0,
+                            0,
+                            1,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_03"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 03"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            0,
+                            1,
+                            1,
+                            1,
+                            1,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_04"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 04"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            1,
+                            0,
+                            1,
+                            0,
+                            1,
+                            0,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_05"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 05"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            1,
+                            0,
+                            1,
+                            1,
+                            0,
+                            1,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_06"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 06"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            1,
+                            1,
+                            0,
+                            0,
+                            1,
+                            1,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_07"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 07"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            0,
+                            1,
+                            1,
+                            0,
+                            1,
+                            0,
+                            0,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_08"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 08"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            0,
+                            0,
+                            1,
+                            0,
+                            1,
+                            1,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_09"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 09"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            0,
+                            0,
+                            1,
+                            1,
+                            0,
+                            0,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_10"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 10"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            0,
+                            1,
+                            0,
+                            0,
+                            1,
+                            0,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_11"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 11"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            0,
+                            1,
+                            0,
+                            1,
+                            0,
+                            1,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_12"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 12"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            1,
+                            0,
+                            0,
+                            0,
+                            0,
+                            1,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_13"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 13"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            1,
+                            0,
+                            0,
+                            1,
+                            1,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_14"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 14"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            1,
+                            1,
+                            1,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "transition_id",
+                      "display_name",
+                      "description",
+                      "codeword",
+                      "applicability_mask"
+                    ],
+                    "properties": {
+                      "transition_id": {
+                        "const": "ash_codeword_15"
+                      },
+                      "display_name": {
+                        "const": "ASH codeword 15"
+                      },
+                      "description": {
+                        "const": "Apply the complete canonical nine-coordinate XOR codeword."
+                      },
+                      "codeword": {
+                        "const": {
+                          "state_space": "F2^9",
+                          "bits": [
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            0
+                          ]
+                        }
+                      },
+                      "applicability_mask": {
+                        "const": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                ],
+                "minItems": 16,
+                "maxItems": 16,
+                "items": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    "TransitionSelection": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "selection_kind",
+            "transition_id",
+            "codeword"
+          ],
+          "properties": {
+            "selection_kind": {
+              "const": "IDENTIFIER"
+            },
+            "transition_id": {
+              "$ref": "#/$defs/Identifier"
+            },
+            "codeword": {
+              "const": null
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "selection_kind",
+            "transition_id",
+            "codeword"
+          ],
+          "properties": {
+            "selection_kind": {
+              "const": "CODEWORD"
+            },
+            "transition_id": {
+              "const": null
+            },
+            "codeword": {
+              "$ref": "#/$defs/AshState"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "DiagnosisValidation": {
+      "type": "object",
+      "required": [
+        "status",
+        "submitted_diagnosis",
+        "current_source_binding",
+        "current_profile_binding",
+        "derived_diagnostic",
+        "failure_code",
+        "failed_field"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "VERIFIED",
+            "REJECTED"
+          ]
+        },
+        "submitted_diagnosis": {
+          "$ref": "#/$defs/StateDiagnosis"
+        },
+        "current_source_binding": {
+          "$ref": "#/$defs/CanonicalAshBinding"
+        },
+        "current_profile_binding": {
+          "$ref": "#/$defs/ProfileBinding"
+        },
+        "derived_diagnostic": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StateValidityDiagnostic"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "SOURCE_BINDING_MISMATCH",
+                "PROFILE_BINDING_MISMATCH",
+                "INPUT_BINDING_MISMATCH",
+                "DIAGNOSIS_MISMATCH",
+                "DIAGNOSIS_ENVELOPE_MISMATCH"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "failed_field": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "origin_diagnosis.source_binding",
+                "origin_diagnosis.profile_binding",
+                "origin_diagnosis.input_evidence",
+                "origin_diagnosis.parsed_state",
+                "origin_diagnosis.assessment_binding",
+                "origin_diagnosis.emitted_diagnostics",
+                "origin_diagnosis.emitted_diagnostics[0].diagnostic_reference",
+                "origin_diagnosis.state_validity_diagnostic.input_state",
+                "origin_diagnosis.state_validity_diagnostic.admissibility_status",
+                "origin_diagnosis.state_validity_diagnostic.transformation_compatibility",
+                "origin_diagnosis.state_validity_diagnostic.normalization_status",
+                "origin_diagnosis.state_validity_diagnostic.recoverability_relevance",
+                "origin_diagnosis.state_validity_diagnostic.is_valid",
+                "origin_diagnosis.state_validity_diagnostic.orbit_info",
+                "origin_diagnosis.state_validity_diagnostic.rule_ids",
+                "origin_diagnosis.state_validity_diagnostic.notes",
+                "origin_diagnosis.emitted_diagnostics[0].envelope.diagnostic_kind",
+                "origin_diagnosis.emitted_diagnostics[0].envelope.severity",
+                "origin_diagnosis.emitted_diagnostics[0].envelope.stage",
+                "origin_diagnosis.emitted_diagnostics[0].envelope.disposition",
+                "origin_diagnosis.emitted_diagnostics[0].envelope.subject_reference",
+                "origin_diagnosis.emitted_diagnostics[0].envelope.parent_diagnostic_reference",
+                "origin_diagnosis.emitted_diagnostics[0].envelope.chain_root_reference",
+                "origin_diagnosis.emitted_diagnostics[0].envelope.rule_ids",
+                "origin_diagnosis.emitted_diagnostics[0].envelope.summary",
+                "origin_diagnosis.emitted_diagnostics[0].envelope.notes"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "VERIFIED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "derived_diagnostic": {
+                "$ref": "#/$defs/StateValidityDiagnostic"
+              },
+              "failure_code": {
+                "const": null
+              },
+              "failed_field": {
+                "const": null
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "failure_code": {
+                "type": "string",
+                "enum": [
+                  "SOURCE_BINDING_MISMATCH",
+                  "PROFILE_BINDING_MISMATCH",
+                  "INPUT_BINDING_MISMATCH",
+                  "DIAGNOSIS_MISMATCH",
+                  "DIAGNOSIS_ENVELOPE_MISMATCH"
+                ]
+              },
+              "failed_field": {
+                "type": "string",
+                "enum": [
+                  "origin_diagnosis.source_binding",
+                  "origin_diagnosis.profile_binding",
+                  "origin_diagnosis.input_evidence",
+                  "origin_diagnosis.parsed_state",
+                  "origin_diagnosis.assessment_binding",
+                  "origin_diagnosis.emitted_diagnostics",
+                  "origin_diagnosis.emitted_diagnostics[0].diagnostic_reference",
+                  "origin_diagnosis.state_validity_diagnostic.input_state",
+                  "origin_diagnosis.state_validity_diagnostic.admissibility_status",
+                  "origin_diagnosis.state_validity_diagnostic.transformation_compatibility",
+                  "origin_diagnosis.state_validity_diagnostic.normalization_status",
+                  "origin_diagnosis.state_validity_diagnostic.recoverability_relevance",
+                  "origin_diagnosis.state_validity_diagnostic.is_valid",
+                  "origin_diagnosis.state_validity_diagnostic.orbit_info",
+                  "origin_diagnosis.state_validity_diagnostic.rule_ids",
+                  "origin_diagnosis.state_validity_diagnostic.notes",
+                  "origin_diagnosis.emitted_diagnostics[0].envelope.diagnostic_kind",
+                  "origin_diagnosis.emitted_diagnostics[0].envelope.severity",
+                  "origin_diagnosis.emitted_diagnostics[0].envelope.stage",
+                  "origin_diagnosis.emitted_diagnostics[0].envelope.disposition",
+                  "origin_diagnosis.emitted_diagnostics[0].envelope.subject_reference",
+                  "origin_diagnosis.emitted_diagnostics[0].envelope.parent_diagnostic_reference",
+                  "origin_diagnosis.emitted_diagnostics[0].envelope.chain_root_reference",
+                  "origin_diagnosis.emitted_diagnostics[0].envelope.rule_ids",
+                  "origin_diagnosis.emitted_diagnostics[0].envelope.summary",
+                  "origin_diagnosis.emitted_diagnostics[0].envelope.notes"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RealmIdentity": {
+      "type": "object",
+      "required": [
+        "state_signature",
+        "vertex_id",
+        "realm_id",
+        "orbit_id"
+      ],
+      "properties": {
+        "state_signature": {
+          "$ref": "#/$defs/Signature"
+        },
+        "vertex_id": {
+          "type": "string",
+          "pattern": "^ash_state_[01]{9}$"
+        },
+        "realm_id": {
+          "type": "string",
+          "pattern": "^ash_state_[01]{9}$"
+        },
+        "orbit_id": {
+          "$ref": "#/$defs/Signature"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RealmTransitionGate": {
+      "type": "object",
+      "required": [
+        "origin_assessment_reference",
+        "verification_status",
+        "admissibility_status",
+        "is_valid"
+      ],
+      "properties": {
+        "origin_assessment_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "verification_status": {
+          "const": "VERIFIED"
+        },
+        "admissibility_status": {
+          "type": "string",
+          "enum": [
+            "VALID",
+            "TRANSFORMATION_COMPATIBLE",
+            "TRANSFORMATION_INCOMPATIBLE",
+            "UNCLASSIFIED"
+          ]
+        },
+        "is_valid": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "admissibility_status": {
+                "const": "VALID"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "is_valid": {
+                "const": true
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "is_valid": {
+                "const": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    "TransitionApplicabilityObservation": {
+      "type": "object",
+      "required": [
+        "transition_id",
+        "codeword",
+        "source_state",
+        "is_applicable",
+        "reason_code"
+      ],
+      "properties": {
+        "transition_id": {
+          "type": "string",
+          "pattern": "^ash_codeword_(?:0[0-9]|1[0-5])$"
+        },
+        "codeword": {
+          "$ref": "#/$defs/AshState"
+        },
+        "source_state": {
+          "$ref": "#/$defs/AshState"
+        },
+        "is_applicable": {
+          "type": "boolean"
+        },
+        "reason_code": {
+          "type": "string",
+          "enum": [
+            "SOURCE_ALLOWED",
+            "SOURCE_NOT_ALLOWED"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "is_applicable": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "reason_code": {
+                "const": "SOURCE_ALLOWED"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "reason_code": {
+                "const": "SOURCE_NOT_ALLOWED"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "TransitionSelectionObservation": {
+      "type": "object",
+      "required": [
+        "selection",
+        "transition_id",
+        "codeword",
+        "status",
+        "failure_code"
+      ],
+      "properties": {
+        "selection": {
+          "$ref": "#/$defs/TransitionSelection"
+        },
+        "transition_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ash_codeword_(?:0[0-9]|1[0-5])$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "codeword": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AshState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "SELECTED",
+            "REFUSED"
+          ]
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "TRANSITION_UNKNOWN",
+                "CODEWORD_NOT_CANONICAL"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "SELECTED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "transition_id": {
+                "type": "string",
+                "pattern": "^ash_codeword_(?:0[0-9]|1[0-5])$"
+              },
+              "codeword": {
+                "$ref": "#/$defs/AshState"
+              },
+              "failure_code": {
+                "const": null
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "transition_id": {
+                "const": null
+              },
+              "codeword": {
+                "const": null
+              },
+              "failure_code": {
+                "type": "string",
+                "enum": [
+                  "TRANSITION_UNKNOWN",
+                  "CODEWORD_NOT_CANONICAL"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "TransitionTransformationObservation": {
+      "type": "object",
+      "required": [
+        "transition_id",
+        "codeword",
+        "source_state",
+        "candidate",
+        "target_diagnosis"
+      ],
+      "properties": {
+        "transition_id": {
+          "type": "string",
+          "pattern": "^ash_codeword_(?:0[0-9]|1[0-5])$"
+        },
+        "codeword": {
+          "$ref": "#/$defs/AshState"
+        },
+        "source_state": {
+          "$ref": "#/$defs/AshState"
+        },
+        "candidate": {
+          "$ref": "#/$defs/AshState"
+        },
+        "target_diagnosis": {
+          "$ref": "#/$defs/StateValidityDiagnostic"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ModuleEnvelope": {
+      "type": "object",
+      "required": [
+        "diagnostic_kind",
+        "severity",
+        "stage",
+        "disposition",
+        "subject_reference",
+        "parent_diagnostic_reference",
+        "chain_root_reference",
+        "rule_ids",
+        "summary",
+        "notes"
+      ],
+      "properties": {
+        "diagnostic_kind": {
+          "type": "string",
+          "enum": [
+            "REALM_ENCODING",
+            "TRANSITION"
+          ]
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "INFO",
+            "WARNING",
+            "ERROR",
+            "CRITICAL"
+          ]
+        },
+        "stage": {
+          "const": "PROCESSING"
+        },
+        "disposition": {
+          "type": "string",
+          "enum": [
+            "RESOLVED",
+            "BLOCKED"
+          ]
+        },
+        "subject_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "parent_diagnostic_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "chain_root_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "rule_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ASH-TOPOLOGY-LINEAGE-001",
+              "ASH-CODEWORD-STRUCTURE-001",
+              "ASH-RECOVERY-ACTION-001",
+              "ASH-AXIOM-ERASURE-001",
+              "ASH-FALLBACK-SELECTION-001",
+              "ASH-HALT-TRIGGER-005",
+              "ASH-CONTAINMENT-TRIGGER-004",
+              "ASH-CONTAINMENT-TRIGGER-003",
+              "ASH-AXIOM-SELFREFERENCE-001",
+              "ASH-CODEWORD-APPLICABILITY-001",
+              "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+              "ASH-TOPOLOGY-ADMISSION-001",
+              "ASH-GENERATION-BOUNDARY-001",
+              "ASH-STATE-GENERAL-001",
+              "ASH-CODEWORD-SELECTION-001",
+              "ASH-HALT-TRIGGER-002",
+              "ASH-AXIOM-SCALE-001",
+              "ASH-GENERATION-PLANFIDELITY-001",
+              "ASH-CODEWORD-REGISTRY-001",
+              "ASH-CONTAINMENT-TRIGGER-002",
+              "ASH-CONTAINMENT-TRIGGER-001",
+              "ASH-HALT-TRIGGER-001",
+              "ASH-HALT-TRIGGER-003",
+              "ASH-GENERATION-TRACEABILITY-001",
+              "ASH-HALT-TRIGGER-004",
+              "ASH-AXIOM-SUBJECT-001",
+              "ASH-STATE-VALIDITY-001",
+              "ASH-GENERATION-EMISSION-001",
+              "ASH-TOPOLOGY-STRUCTURE-001",
+              "ASH-AXIOM-RELATION-001",
+              "ASH-TOPOLOGY-EXPANSION-001",
+              "ASH-TOPOLOGY-ORDER-001",
+              "ASH-GENERATION-PLAN-001",
+              "ASH-STATE-IDENTITY-001",
+              "ASH-CLASSIFICATION-MAPPING-001",
+              "ASH-CODEWORD-TRANSFORMATION-001",
+              "ASH-AXIOM-CONJUNCTION-001",
+              "ASH-STATE-STRUCTURE-001",
+              "ASH-AXIOM-COMPRESSION-001"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 2
+        },
+        "summary": {
+          "$ref": "#/$defs/LineText"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LineText"
+          },
+          "minItems": 1,
+          "maxItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "ModuleEmission": {
+      "type": "object",
+      "required": [
+        "diagnostic_reference",
+        "envelope"
+      ],
+      "properties": {
+        "diagnostic_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "envelope": {
+          "$ref": "#/$defs/ModuleEnvelope"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RealmTransitionRecord": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "record_reference",
+            "phase",
+            "emission",
+            "payload"
+          ],
+          "properties": {
+            "record_reference": {
+              "type": "string",
+              "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+            },
+            "phase": {
+              "const": "VALID_SOURCE"
+            },
+            "emission": {
+              "$ref": "#/$defs/ModuleEmission"
+            },
+            "payload": {
+              "$ref": "#/$defs/RealmTransitionGate"
+            }
+          },
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "oneOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "REALM_ENCODING"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-STATE-VALIDITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-STATE-VALIDITY-001",
+                                "ASH-CODEWORD-REGISTRY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "record_reference",
+            "phase",
+            "emission",
+            "payload"
+          ],
+          "properties": {
+            "record_reference": {
+              "type": "string",
+              "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+            },
+            "phase": {
+              "const": "IDENTITY"
+            },
+            "emission": {
+              "$ref": "#/$defs/ModuleEmission"
+            },
+            "payload": {
+              "$ref": "#/$defs/RealmIdentity"
+            }
+          },
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "properties": {
+                "emission": {
+                  "properties": {
+                    "envelope": {
+                      "properties": {
+                        "diagnostic_kind": {
+                          "const": "REALM_ENCODING"
+                        },
+                        "rule_ids": {
+                          "const": [
+                            "ASH-STATE-IDENTITY-001"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "record_reference",
+            "phase",
+            "emission",
+            "payload"
+          ],
+          "properties": {
+            "record_reference": {
+              "type": "string",
+              "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+            },
+            "phase": {
+              "const": "SELECTION"
+            },
+            "emission": {
+              "$ref": "#/$defs/ModuleEmission"
+            },
+            "payload": {
+              "$ref": "#/$defs/TransitionSelectionObservation"
+            }
+          },
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "properties": {
+                "emission": {
+                  "properties": {
+                    "envelope": {
+                      "properties": {
+                        "diagnostic_kind": {
+                          "const": "TRANSITION"
+                        },
+                        "rule_ids": {
+                          "const": [
+                            "ASH-CODEWORD-SELECTION-001",
+                            "ASH-CODEWORD-STRUCTURE-001"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "record_reference",
+            "phase",
+            "emission",
+            "payload"
+          ],
+          "properties": {
+            "record_reference": {
+              "type": "string",
+              "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+            },
+            "phase": {
+              "const": "APPLICABILITY"
+            },
+            "emission": {
+              "$ref": "#/$defs/ModuleEmission"
+            },
+            "payload": {
+              "$ref": "#/$defs/TransitionApplicabilityObservation"
+            }
+          },
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "properties": {
+                "emission": {
+                  "properties": {
+                    "envelope": {
+                      "properties": {
+                        "diagnostic_kind": {
+                          "const": "TRANSITION"
+                        },
+                        "rule_ids": {
+                          "const": [
+                            "ASH-CODEWORD-APPLICABILITY-001"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "record_reference",
+            "phase",
+            "emission",
+            "payload"
+          ],
+          "properties": {
+            "record_reference": {
+              "type": "string",
+              "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+            },
+            "phase": {
+              "const": "TRANSFORMATION"
+            },
+            "emission": {
+              "$ref": "#/$defs/ModuleEmission"
+            },
+            "payload": {
+              "$ref": "#/$defs/TransitionTransformationObservation"
+            }
+          },
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "properties": {
+                "emission": {
+                  "properties": {
+                    "envelope": {
+                      "properties": {
+                        "diagnostic_kind": {
+                          "const": "TRANSITION"
+                        },
+                        "rule_ids": {
+                          "const": [
+                            "ASH-CODEWORD-TRANSFORMATION-001"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "RealmEncodingResult": {
+      "type": "object",
+      "required": [
+        "operation_reference",
+        "binding",
+        "origin",
+        "origin_validation",
+        "identity",
+        "constructed_records"
+      ],
+      "properties": {
+        "operation_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "binding": {
+          "$ref": "#/$defs/RealmTransitionBinding"
+        },
+        "origin": {
+          "$ref": "#/$defs/StateDiagnosis"
+        },
+        "origin_validation": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/DiagnosisValidation"
+            },
+            {
+              "properties": {
+                "status": {
+                  "const": "VERIFIED"
+                }
+              }
+            }
+          ]
+        },
+        "identity": {
+          "$ref": "#/$defs/RealmIdentity"
+        },
+        "constructed_records": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "VALID_SOURCE"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/RealmTransitionGate"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "emission": {
+                          "properties": {
+                            "envelope": {
+                              "properties": {
+                                "diagnostic_kind": {
+                                  "const": "REALM_ENCODING"
+                                },
+                                "rule_ids": {
+                                  "const": [
+                                    "ASH-STATE-VALIDITY-001"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "emission": {
+                          "properties": {
+                            "envelope": {
+                              "properties": {
+                                "diagnostic_kind": {
+                                  "const": "TRANSITION"
+                                },
+                                "rule_ids": {
+                                  "const": [
+                                    "ASH-STATE-VALIDITY-001",
+                                    "ASH-CODEWORD-REGISTRY-001"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "IDENTITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/RealmIdentity"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "REALM_ENCODING"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-STATE-IDENTITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "TransitionResolutionResult": {
+      "type": "object",
+      "required": [
+        "operation_reference",
+        "binding",
+        "origin",
+        "origin_validation",
+        "catalog",
+        "availability",
+        "constructed_records"
+      ],
+      "properties": {
+        "operation_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "binding": {
+          "$ref": "#/$defs/RealmTransitionBinding"
+        },
+        "origin": {
+          "$ref": "#/$defs/StateDiagnosis"
+        },
+        "origin_validation": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/DiagnosisValidation"
+            },
+            {
+              "properties": {
+                "status": {
+                  "const": "VERIFIED"
+                }
+              }
+            }
+          ]
+        },
+        "catalog": {
+          "$ref": "#/$defs/TransitionCatalog"
+        },
+        "availability": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TransitionApplicabilityObservation"
+          },
+          "minItems": 16,
+          "maxItems": 16
+        },
+        "constructed_records": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "VALID_SOURCE"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/RealmTransitionGate"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "emission": {
+                          "properties": {
+                            "envelope": {
+                              "properties": {
+                                "diagnostic_kind": {
+                                  "const": "REALM_ENCODING"
+                                },
+                                "rule_ids": {
+                                  "const": [
+                                    "ASH-STATE-VALIDITY-001"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "emission": {
+                          "properties": {
+                            "envelope": {
+                              "properties": {
+                                "diagnostic_kind": {
+                                  "const": "TRANSITION"
+                                },
+                                "rule_ids": {
+                                  "const": [
+                                    "ASH-STATE-VALIDITY-001",
+                                    "ASH-CODEWORD-REGISTRY-001"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "minItems": 17,
+          "maxItems": 17,
+          "items": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "TransitionApplicationResult": {
+      "type": "object",
+      "required": [
+        "operation_reference",
+        "binding",
+        "origin",
+        "origin_validation",
+        "selection",
+        "selected_definition",
+        "candidate",
+        "target_diagnosis",
+        "constructed_records"
+      ],
+      "properties": {
+        "operation_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "binding": {
+          "$ref": "#/$defs/RealmTransitionBinding"
+        },
+        "origin": {
+          "$ref": "#/$defs/StateDiagnosis"
+        },
+        "origin_validation": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/DiagnosisValidation"
+            },
+            {
+              "properties": {
+                "status": {
+                  "const": "VERIFIED"
+                }
+              }
+            }
+          ]
+        },
+        "selection": {
+          "$ref": "#/$defs/TransitionSelection"
+        },
+        "selected_definition": {
+          "$ref": "#/$defs/TransitionDefinition"
+        },
+        "candidate": {
+          "$ref": "#/$defs/AshState"
+        },
+        "target_diagnosis": {
+          "$ref": "#/$defs/StateValidityDiagnostic"
+        },
+        "constructed_records": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "VALID_SOURCE"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/RealmTransitionGate"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "emission": {
+                          "properties": {
+                            "envelope": {
+                              "properties": {
+                                "diagnostic_kind": {
+                                  "const": "REALM_ENCODING"
+                                },
+                                "rule_ids": {
+                                  "const": [
+                                    "ASH-STATE-VALIDITY-001"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "emission": {
+                          "properties": {
+                            "envelope": {
+                              "properties": {
+                                "diagnostic_kind": {
+                                  "const": "TRANSITION"
+                                },
+                                "rule_ids": {
+                                  "const": [
+                                    "ASH-STATE-VALIDITY-001",
+                                    "ASH-CODEWORD-REGISTRY-001"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "SELECTION"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionSelectionObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-SELECTION-001",
+                                "ASH-CODEWORD-STRUCTURE-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "APPLICABILITY"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionApplicabilityObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-APPLICABILITY-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "required": [
+                "record_reference",
+                "phase",
+                "emission",
+                "payload"
+              ],
+              "properties": {
+                "record_reference": {
+                  "type": "string",
+                  "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                },
+                "phase": {
+                  "const": "TRANSFORMATION"
+                },
+                "emission": {
+                  "$ref": "#/$defs/ModuleEmission"
+                },
+                "payload": {
+                  "$ref": "#/$defs/TransitionTransformationObservation"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "properties": {
+                    "emission": {
+                      "properties": {
+                        "envelope": {
+                          "properties": {
+                            "diagnostic_kind": {
+                              "const": "TRANSITION"
+                            },
+                            "rule_ids": {
+                              "const": [
+                                "ASH-CODEWORD-TRANSFORMATION-001"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "minItems": 4,
+          "maxItems": 4,
+          "items": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "RealmTransitionFailure": {
+      "type": "object",
+      "required": [
+        "operation_reference",
+        "binding",
+        "origin",
+        "origin_validation",
+        "action",
+        "failed_phase",
+        "failure_code",
+        "selection",
+        "selected_definition",
+        "constructed_records"
+      ],
+      "properties": {
+        "operation_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "binding": {
+          "$ref": "#/$defs/RealmTransitionBinding"
+        },
+        "origin": {
+          "$ref": "#/$defs/StateDiagnosis"
+        },
+        "origin_validation": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/DiagnosisValidation"
+            },
+            {
+              "properties": {
+                "status": {
+                  "const": "VERIFIED"
+                }
+              }
+            }
+          ]
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "ENCODE",
+            "RESOLVE",
+            "APPLY"
+          ]
+        },
+        "failed_phase": {
+          "type": "string",
+          "enum": [
+            "VALID_SOURCE",
+            "SELECTION",
+            "APPLICABILITY"
+          ]
+        },
+        "failure_code": {
+          "type": "string",
+          "enum": [
+            "STATE_NOT_VALID",
+            "PROFILE_UNAVAILABLE",
+            "TRANSITION_UNKNOWN",
+            "CODEWORD_NOT_CANONICAL",
+            "TRANSITION_NOT_APPLICABLE"
+          ]
+        },
+        "selection": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TransitionSelection"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "selected_definition": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TransitionDefinition"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "constructed_records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RealmTransitionRecord"
+          },
+          "minItems": 1,
+          "maxItems": 3
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "failed_phase": {
+                  "const": "VALID_SOURCE"
+                },
+                "constructed_records": {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "record_reference",
+                        "phase",
+                        "emission",
+                        "payload"
+                      ],
+                      "properties": {
+                        "record_reference": {
+                          "type": "string",
+                          "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                        },
+                        "phase": {
+                          "const": "VALID_SOURCE"
+                        },
+                        "emission": {
+                          "$ref": "#/$defs/ModuleEmission"
+                        },
+                        "payload": {
+                          "$ref": "#/$defs/RealmTransitionGate"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "oneOf": [
+                            {
+                              "properties": {
+                                "emission": {
+                                  "properties": {
+                                    "envelope": {
+                                      "properties": {
+                                        "diagnostic_kind": {
+                                          "const": "REALM_ENCODING"
+                                        },
+                                        "rule_ids": {
+                                          "const": [
+                                            "ASH-STATE-VALIDITY-001"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "properties": {
+                                "emission": {
+                                  "properties": {
+                                    "envelope": {
+                                      "properties": {
+                                        "diagnostic_kind": {
+                                          "const": "TRANSITION"
+                                        },
+                                        "rule_ids": {
+                                          "const": [
+                                            "ASH-STATE-VALIDITY-001",
+                                            "ASH-CODEWORD-REGISTRY-001"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "items": false
+                },
+                "failure_code": {
+                  "type": "string",
+                  "enum": [
+                    "STATE_NOT_VALID",
+                    "PROFILE_UNAVAILABLE"
+                  ]
+                }
+              }
+            },
+            {
+              "properties": {
+                "failed_phase": {
+                  "const": "SELECTION"
+                },
+                "constructed_records": {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "record_reference",
+                        "phase",
+                        "emission",
+                        "payload"
+                      ],
+                      "properties": {
+                        "record_reference": {
+                          "type": "string",
+                          "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                        },
+                        "phase": {
+                          "const": "VALID_SOURCE"
+                        },
+                        "emission": {
+                          "$ref": "#/$defs/ModuleEmission"
+                        },
+                        "payload": {
+                          "$ref": "#/$defs/RealmTransitionGate"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "oneOf": [
+                            {
+                              "properties": {
+                                "emission": {
+                                  "properties": {
+                                    "envelope": {
+                                      "properties": {
+                                        "diagnostic_kind": {
+                                          "const": "REALM_ENCODING"
+                                        },
+                                        "rule_ids": {
+                                          "const": [
+                                            "ASH-STATE-VALIDITY-001"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "properties": {
+                                "emission": {
+                                  "properties": {
+                                    "envelope": {
+                                      "properties": {
+                                        "diagnostic_kind": {
+                                          "const": "TRANSITION"
+                                        },
+                                        "rule_ids": {
+                                          "const": [
+                                            "ASH-STATE-VALIDITY-001",
+                                            "ASH-CODEWORD-REGISTRY-001"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "record_reference",
+                        "phase",
+                        "emission",
+                        "payload"
+                      ],
+                      "properties": {
+                        "record_reference": {
+                          "type": "string",
+                          "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                        },
+                        "phase": {
+                          "const": "SELECTION"
+                        },
+                        "emission": {
+                          "$ref": "#/$defs/ModuleEmission"
+                        },
+                        "payload": {
+                          "$ref": "#/$defs/TransitionSelectionObservation"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "properties": {
+                            "emission": {
+                              "properties": {
+                                "envelope": {
+                                  "properties": {
+                                    "diagnostic_kind": {
+                                      "const": "TRANSITION"
+                                    },
+                                    "rule_ids": {
+                                      "const": [
+                                        "ASH-CODEWORD-SELECTION-001",
+                                        "ASH-CODEWORD-STRUCTURE-001"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": false
+                },
+                "failure_code": {
+                  "type": "string",
+                  "enum": [
+                    "TRANSITION_UNKNOWN",
+                    "CODEWORD_NOT_CANONICAL"
+                  ]
+                },
+                "action": {
+                  "const": "APPLY"
+                }
+              }
+            },
+            {
+              "properties": {
+                "failed_phase": {
+                  "const": "APPLICABILITY"
+                },
+                "constructed_records": {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "record_reference",
+                        "phase",
+                        "emission",
+                        "payload"
+                      ],
+                      "properties": {
+                        "record_reference": {
+                          "type": "string",
+                          "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                        },
+                        "phase": {
+                          "const": "VALID_SOURCE"
+                        },
+                        "emission": {
+                          "$ref": "#/$defs/ModuleEmission"
+                        },
+                        "payload": {
+                          "$ref": "#/$defs/RealmTransitionGate"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "oneOf": [
+                            {
+                              "properties": {
+                                "emission": {
+                                  "properties": {
+                                    "envelope": {
+                                      "properties": {
+                                        "diagnostic_kind": {
+                                          "const": "REALM_ENCODING"
+                                        },
+                                        "rule_ids": {
+                                          "const": [
+                                            "ASH-STATE-VALIDITY-001"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "properties": {
+                                "emission": {
+                                  "properties": {
+                                    "envelope": {
+                                      "properties": {
+                                        "diagnostic_kind": {
+                                          "const": "TRANSITION"
+                                        },
+                                        "rule_ids": {
+                                          "const": [
+                                            "ASH-STATE-VALIDITY-001",
+                                            "ASH-CODEWORD-REGISTRY-001"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "record_reference",
+                        "phase",
+                        "emission",
+                        "payload"
+                      ],
+                      "properties": {
+                        "record_reference": {
+                          "type": "string",
+                          "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                        },
+                        "phase": {
+                          "const": "SELECTION"
+                        },
+                        "emission": {
+                          "$ref": "#/$defs/ModuleEmission"
+                        },
+                        "payload": {
+                          "$ref": "#/$defs/TransitionSelectionObservation"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "properties": {
+                            "emission": {
+                              "properties": {
+                                "envelope": {
+                                  "properties": {
+                                    "diagnostic_kind": {
+                                      "const": "TRANSITION"
+                                    },
+                                    "rule_ids": {
+                                      "const": [
+                                        "ASH-CODEWORD-SELECTION-001",
+                                        "ASH-CODEWORD-STRUCTURE-001"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "record_reference",
+                        "phase",
+                        "emission",
+                        "payload"
+                      ],
+                      "properties": {
+                        "record_reference": {
+                          "type": "string",
+                          "pattern": "^rt:[0-9a-f]{64}:[0-9]{1,2}$"
+                        },
+                        "phase": {
+                          "const": "APPLICABILITY"
+                        },
+                        "emission": {
+                          "$ref": "#/$defs/ModuleEmission"
+                        },
+                        "payload": {
+                          "$ref": "#/$defs/TransitionApplicabilityObservation"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "allOf": [
+                        {
+                          "properties": {
+                            "emission": {
+                              "properties": {
+                                "envelope": {
+                                  "properties": {
+                                    "diagnostic_kind": {
+                                      "const": "TRANSITION"
+                                    },
+                                    "rule_ids": {
+                                      "const": [
+                                        "ASH-CODEWORD-APPLICABILITY-001"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "items": false
+                },
+                "failure_code": {
+                  "type": "string",
+                  "enum": [
+                    "TRANSITION_NOT_APPLICABLE"
+                  ]
+                },
+                "action": {
+                  "const": "APPLY"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "ModuleFinalObservationReceipt": {
+      "type": "object",
+      "required": [
+        "operation_reference",
+        "status",
+        "supporting_reference",
+        "coverage",
+        "failure_code"
+      ],
+      "properties": {
+        "operation_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "CONFIRMED",
+            "REJECTED",
+            "NOT_CONFIRMED"
+          ]
+        },
+        "supporting_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "coverage": {
+          "type": "string",
+          "enum": [
+            "COMPLETE_SPECIFIED_SAFE_GRAPH",
+            "PARTIAL",
+            "STORAGE_UNCERTAIN"
+          ]
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "MODULE_PRODUCER_FOREIGN",
+                "MODULE_PRODUCER_DUPLICATE",
+                "MODULE_PRODUCER_BINDING_MISMATCH",
+                "MODULE_PRODUCER_UNSUPPORTED",
+                "MODULE_CONTEXT_REJECTED",
+                "MODULE_ORIGIN_REJECTED",
+                "MODULE_RESULT_REJECTED",
+                "MODULE_RESERVATION_REFUSED",
+                "MODULE_RAW_PACKET_LIMIT",
+                "MODULE_CAPTURE_REJECTED",
+                "MODULE_CAPTURE_UNCONFIRMED",
+                "MODULE_COMPLETION_MISSING",
+                "MODULE_COMPLETION_REJECTED",
+                "MODULE_FINAL_OBSERVATION_REJECTED",
+                "MODULE_REQUIRED_RECORD_MISSING",
+                "MODULE_SCOPE_FOREIGN",
+                "MODULE_REPLAY_REFUSED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "RealmTransitionCaptureReceipt": {
+      "type": "object",
+      "required": [
+        "operation_reference",
+        "status",
+        "result",
+        "confirmed_records",
+        "attempted_record",
+        "completion",
+        "final_observation",
+        "failure_code"
+      ],
+      "properties": {
+        "operation_reference": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "CONFIRMED",
+            "REJECTED",
+            "NOT_CONFIRMED"
+          ]
+        },
+        "result": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RealmEncodingResult"
+            },
+            {
+              "$ref": "#/$defs/TransitionResolutionResult"
+            },
+            {
+              "$ref": "#/$defs/TransitionApplicationResult"
+            },
+            {
+              "$ref": "#/$defs/RealmTransitionFailure"
+            }
+          ]
+        },
+        "confirmed_records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Identifier"
+          },
+          "minItems": 0,
+          "maxItems": 17
+        },
+        "attempted_record": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RealmTransitionRecord"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "completion": {
+          "anyOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_reference_diagnostic_bundle_schema.json#/$defs/DiagnosticsCompletionReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_observation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ModuleFinalObservationReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "MODULE_PRODUCER_FOREIGN",
+                "MODULE_PRODUCER_DUPLICATE",
+                "MODULE_PRODUCER_BINDING_MISMATCH",
+                "MODULE_PRODUCER_UNSUPPORTED",
+                "MODULE_CONTEXT_REJECTED",
+                "MODULE_ORIGIN_REJECTED",
+                "MODULE_RESULT_REJECTED",
+                "MODULE_RESERVATION_REFUSED",
+                "MODULE_RAW_PACKET_LIMIT",
+                "MODULE_CAPTURE_REJECTED",
+                "MODULE_CAPTURE_UNCONFIRMED",
+                "MODULE_COMPLETION_MISSING",
+                "MODULE_COMPLETION_REJECTED",
+                "MODULE_FINAL_OBSERVATION_REJECTED",
+                "MODULE_REQUIRED_RECORD_MISSING",
+                "MODULE_SCOPE_FOREIGN",
+                "MODULE_REPLAY_REFUSED",
+                "DIAGNOSTICS_VALUE_INVALID",
+                "DIAGNOSTICS_CONFIG_INVALID",
+                "DIAGNOSTICS_ORIGIN_UNAVAILABLE",
+                "DIAGNOSTICS_ORIGIN_MISMATCH",
+                "DIAGNOSTICS_RESERVATION_REFUSED",
+                "DIAGNOSTICS_EVENT_TOO_LARGE",
+                "DIAGNOSTICS_ALIAS_LIMIT",
+                "DIAGNOSTICS_BYTE_LIMIT",
+                "DIAGNOSTICS_DURATION_LIMIT",
+                "DIAGNOSTICS_SEQUENCE_LIMIT",
+                "DIAGNOSTICS_RECORD_NONCONFORMANT",
+                "DIAGNOSTICS_REQUIRED_STEP_MISSING",
+                "DIAGNOSTICS_META_UNAVAILABLE",
+                "DIAGNOSTICS_COLLECTOR_FAILURE",
+                "STORAGE_PROTECTION_UNAVAILABLE",
+                "STORAGE_PARENT_UNTRUSTED",
+                "STORAGE_IDENTITY_CHANGED",
+                "STORAGE_REPARSE_REFUSED",
+                "STORAGE_PATH_ALREADY_EXISTS",
+                "STORAGE_COMMIT_REJECTED",
+                "STORAGE_COMMIT_UNCONFIRMED",
+                "EXPORT_SNAPSHOT_INVALID",
+                "EXPORT_REDACTION_FAILED",
+                "EXPORT_JSON_FAILED",
+                "EXPORT_MARKDOWN_FAILED",
+                "EXPORT_MANIFEST_FAILED",
+                "EXPORT_PUBLICATION_FAILED",
+                "EXPORT_BYTE_LIMIT",
+                "EXPORT_PARITY_FAILED",
+                "DIAGNOSTICS_COMPLETION_MISSING",
+                "DIAGNOSTICS_COMPLETION_MISMATCH",
+                "DIAGNOSTICS_REPLAY_REFUSED",
+                "DIAGNOSTICS_SUPPORTING_LIMIT",
+                "DIAGNOSTICS_INCIDENT_LIMIT",
+                "DIAGNOSTICS_RAW_PACKET_LIMIT",
+                "EXPORT_SLOT_OCCUPIED",
+                "DIAGNOSTICS_CLOCK_UNAVAILABLE",
+                "DIAGNOSTICS_CLOCK_REGRESSION",
+                "DIAGNOSTICS_COUNTER_LIMIT"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "RealmTransitionCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "schema_definition",
+        "value"
+      ],
+      "properties": {
+        "case_id": {
+          "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/DiagnosticReference"
+        },
+        "schema_definition": {
+          "enum": [
+            "RealmTransitionSourcePin",
+            "RealmTransitionBinding",
+            "TransitionDefinition",
+            "TransitionCatalog",
+            "TransitionSelection",
+            "DiagnosisValidation",
+            "RealmIdentity",
+            "RealmTransitionGate",
+            "TransitionApplicabilityObservation",
+            "TransitionSelectionObservation",
+            "TransitionTransformationObservation",
+            "RealmTransitionRecord",
+            "RealmEncodingResult",
+            "TransitionResolutionResult",
+            "TransitionApplicationResult",
+            "RealmTransitionFailure",
+            "RealmTransitionCaptureReceipt"
+          ]
+        },
+        "value": {}
+      }
+    },
+    "RealmTransitionCaseCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_ref",
+        "artifact_type",
+        "artifact_version",
+        "evidence_scope",
+        "cases"
+      ],
+      "properties": {
+        "schema_ref": {
+          "const": "data/schemas/m3_realm_transition_schema.json"
+        },
+        "artifact_type": {
+          "const": "ywe_realm_transition_format_cases"
+        },
+        "artifact_version": {
+          "const": "1.0.0"
+        },
+        "evidence_scope": {
+          "const": "AUTHORED_WIRE_FORMAT_ONLY_NO_PERSISTENCE_OR_LIVE_EFFECT_CLAIM"
+        },
+        "cases": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": {
+            "$ref": "#/$defs/RealmTransitionCase"
+          }
+        }
+      }
+    },
+    "RealmTransitionRejectionCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_ref",
+        "artifact_type",
+        "artifact_version",
+        "evidence_scope",
+        "cases"
+      ],
+      "properties": {
+        "schema_ref": {
+          "const": "data/schemas/m3_realm_transition_schema.json"
+        },
+        "artifact_type": {
+          "const": "ywe_realm_transition_rejection_cases"
+        },
+        "artifact_version": {
+          "const": "1.0.0"
+        },
+        "evidence_scope": {
+          "const": "AUTHORED_REJECTION_CONTROL_ONLY_NO_RUNTIME_EFFECT_CLAIM"
+        },
+        "cases": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "case_id",
+              "schema_definition",
+              "value",
+              "expected_keyword",
+              "expected_path"
+            ],
+            "properties": {
+              "case_id": {
+                "$ref": "https://ywe.local/schemas/m3_state_assessment_schema.json#/$defs/DiagnosticReference"
+              },
+              "schema_definition": {
+                "enum": [
+                  "RealmTransitionSourcePin",
+                  "RealmTransitionBinding",
+                  "TransitionDefinition",
+                  "TransitionCatalog",
+                  "TransitionSelection",
+                  "DiagnosisValidation",
+                  "RealmIdentity",
+                  "RealmTransitionGate",
+                  "TransitionApplicabilityObservation",
+                  "TransitionSelectionObservation",
+                  "TransitionTransformationObservation",
+                  "RealmTransitionRecord",
+                  "RealmEncodingResult",
+                  "TransitionResolutionResult",
+                  "TransitionApplicationResult",
+                  "RealmTransitionFailure",
+                  "RealmTransitionCaptureReceipt"
+                ]
+              },
+              "value": {},
+              "expected_keyword": {
+                "enum": [
+                  "additionalProperties",
+                  "required",
+                  "type",
+                  "minimum",
+                  "maximum",
+                  "pattern",
+                  "not",
+                  "const",
+                  "enum",
+                  "minItems",
+                  "maxItems",
+                  "uniqueItems",
+                  "contains",
+                  "anyOf",
+                  "oneOf",
+                  "minLength",
+                  "maxLength"
+                ]
+              },
+              "expected_path": {
+                "type": "array",
+                "maxItems": 32,
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 256
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1024
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "LineText": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/Text"
+        },
+        {
+          "not": {
+            "pattern": "[\r\n\u000b\f\u001c\u001d\u001e\u0085\u2028\u2029]"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -25,7 +25,7 @@ def _configured_source_snapshots(identity, snapshots):
     if snapshots is None:
         snapshots = () if revision is None else (dv.SourcePin("ASH_AGGREGATE", dv.LEGACY_SOURCE_REVISION,
             dict(sv.CANONICAL_BINDING_FIELDS)["aggregate_sha256"]),)
-    if type(snapshots) is not tuple or len(snapshots) > 2:
+    if type(snapshots) is not tuple or len(snapshots) > 3:
         raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
     expected = tuple(dict(fields)["aggregate_sha256"] for _, fields in sv.CANONICAL_BINDING_BASELINES)
     indexes, result = [], []
@@ -36,10 +36,14 @@ def _configured_source_snapshots(identity, snapshots):
             dv.SourcePin.__post_init__(pin)
         except (AttributeError, dv.DiagnosticsContractError):
             raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE") from None
+    module_present = any(pin.sha256 == dict(sv.MODULE_CANONICAL_BINDING_FIELDS)["aggregate_sha256"] for pin in snapshots)
+    for pin in snapshots:
         if pin.source_kind != "ASH_AGGREGATE" or pin.sha256 not in expected:
             raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
         index = expected.index(pin.sha256)
-        if pin.revision != (dv.LEGACY_SOURCE_REVISION if index == 0 else revision) or index == 1 and revision is None:
+        expected_revision = (dv.LEGACY_SOURCE_REVISION if index == 0 else
+            dv.HISTORICAL_N3_SOURCE_REVISION if index == 1 and module_present else revision)
+        if pin.revision != expected_revision or index > 0 and revision is None:
             raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
         indexes.append(index)
         result.append(dv.SourcePin(pin.source_kind, pin.revision, pin.sha256))
@@ -301,6 +305,8 @@ class _ReferenceDiagnostics:
         self._unconfirmed_support = {}
         self._session_handles = {}
         self._lifecycle_scopes = {}
+        from .diagnostic_module_capture import ModuleCaptureService
+        self._module_capture_service = ModuleCaptureService(self)
         self._first_unavailable = self._last_unavailable = None
         self._storage = self._meta_storage = "PROTECTED_VERIFIED"
         self._producer_completed = set()
@@ -501,6 +507,24 @@ class _ReferenceDiagnostics:
         self._check_capture_binding(execution_gate)
         self._check_gate(execution_gate)
         return _AssessmentCapture(self, relation, execution_gate)
+
+    def _modules(self):
+        from .diagnostic_module_capture import ModuleCaptureService
+        if (type(self) is not ReferenceDevelopmentDiagnostics and type(self) is not ReferenceReleaseDiagnostics) or type(self._module_capture_service) is not ModuleCaptureService or self._module_capture_service.collector is not self:
+            raise dv.DiagnosticsContractError('DIAGNOSTICS_CONFIG_INVALID')
+        return self._module_capture_service
+
+    def register_module_producer(self, producer):
+        from .diagnostic_module_capture import ModuleCaptureService
+        return ModuleCaptureService.register(_ReferenceDiagnostics._modules(self), producer)
+
+    def module_capture(self, producer, context, *, execution_gate=None):
+        from .diagnostic_module_capture import ModuleCaptureService
+        return ModuleCaptureService.begin(_ReferenceDiagnostics._modules(self), producer, context, execution_gate)
+
+    def audit_module_return(self, scope, *, boundary):
+        from .diagnostic_module_capture import ModuleCaptureService
+        return ModuleCaptureService.audit(_ReferenceDiagnostics._modules(self), scope, boundary)
 
     def normalization_capture(self):
         return _NormalizationCapture(self)
@@ -1407,6 +1431,9 @@ class _ReferenceDiagnostics:
             "REGISTRY_PROOF": 8, "CONDITION": 512, "PREDICATE_OBSERVATION": 512, "RECOVERY_SAFETY": 8,
             "TARGET_VALIDITY": 264}
         maxima.update({kind: maximum for _field, kind, _cls, maximum in dv.SESSION_SUPPORT_FIELDS})
+        maxima.update(dv.MODULE_KIND_QUOTAS)
+        if kind in dv.MODULE_KIND_QUOTAS and any(alias in self._support[other] or (other, alias) in self._unconfirmed_support for other in dv.MODULE_KIND_QUOTAS if other != kind):
+            raise dv.DiagnosticsContractError('DIAGNOSTICS_COMPLETION_MISMATCH')
         if len(self._support[kind]) + sum(key[0] == kind for key in self._unconfirmed_support) >= maxima[kind]:
             raise dv.DiagnosticsContractError("DIAGNOSTICS_SUPPORTING_LIMIT")
         if len(encoded) > 32768 or self._support_bytes + len(encoded) > 2097152:
@@ -1430,13 +1457,15 @@ class _ReferenceDiagnostics:
         try:
             self._commit("commit_supporting", sequence, encoded, kind, alias)
         except dv.DiagnosticsContractError:
-            if charged is not None and (charged.execution_gate is not None or charged.producer == "SESSION_LIFECYCLE") or kind in {row[1] for row in dv.SESSION_SUPPORT_FIELDS}:
+            if charged is not None and (charged.execution_gate is not None or charged.producer in dv.MODULE_PRODUCERS or charged.producer == "SESSION_LIFECYCLE") or kind in {row[1] for row in dv.SESSION_SUPPORT_FIELDS} or kind in dv.MODULE_KIND_QUOTAS:
                 self._unconfirmed_support[(kind, alias)] = node
                 retain_key()
                 self._support_bytes += len(encoded)
                 self._used += len(encoded)
                 if charged is not None:
                     self._consume_reservation(charged, len(encoded))
+                    if hasattr(charged, 'module_kind_remaining') and kind in charged.module_kind_remaining:
+                        charged.module_kind_remaining[kind] -= 1
                     if charged.reserved_supporting_bytes:
                         charged.remaining_supporting_bytes -= len(encoded)
                 self._mark_failure("STORAGE_COMMIT_UNCONFIRMED")
@@ -1447,6 +1476,8 @@ class _ReferenceDiagnostics:
         self._used += len(encoded)
         if charged is not None:
             self._consume_reservation(charged, len(encoded))
+            if hasattr(charged, 'module_kind_remaining') and kind in charged.module_kind_remaining:
+                charged.module_kind_remaining[kind] -= 1
             if charged is not None and charged.reserved_supporting_bytes:
                 charged.remaining_supporting_bytes -= len(encoded)
             if not charged.audit_cleanup_allowed:
@@ -1787,6 +1818,8 @@ class _ReferenceDiagnostics:
                 "DIAGNOSTICS_DURATION_LIMIT": "DURATION_LIMIT"}.get(self._failure, "CLOCK_UNAVAILABLE")
         available.difference_update(environmental_missing)
         excluded = {"REALM_ENCODER", "TRANSITION_REGISTRY", "TOPOLOGY_GENERATOR", "AXIOM_EVALUATOR", "GENERATION_PLANNER", "ARTIFACT_EMITTER", "NATIVE_RUNTIME", "NATIVE_RELEASE", "PHYSICAL_CRASH"}
+        if self._module_capture_service is not None:
+            excluded.difference_update(self._module_capture_service.registered)
         return tuple(dv.MissingCoverage(source, "EXCLUDED" if source in excluded else "AVAILABLE" if source in available else "UNAVAILABLE",
             "EXCLUDED_REFERENCE_SCOPE" if source in excluded else None if source in available else environmental_missing.get(source, "NOT_MEASURED")) for source in dv.enum_values("CoverageSource"))
 
@@ -1814,13 +1847,21 @@ class _ReferenceDiagnostics:
 
     def _evidence(self):
         support = self._support
+        if self._module_capture_service is not None:
+            support = {kind: dict(nodes) for kind, nodes in support.items()}
+            for scope in self._module_capture_service.scopes.values():
+                for key in scope._native.support_keys:
+                    uncertain = self._unconfirmed_support.get(key)
+                    if uncertain is not None:
+                        support[key[0]][key[1]] = uncertain
         return dv.SupportingEvidence((), (), (), tuple(support["PROFILE"].values()),
             tuple(support["ASSESSMENT"].values()), tuple(support["RECOVERY_DIAGNOSTIC"].values()),
             tuple(support["CANONICAL_SOURCE"].values()), tuple(support["NORMALIZATION_PROOF"].values()),
             tuple(support["CORRECTION_PROOF"].values()), tuple(support["REGISTRY_PROOF"].values()),
             tuple(support["CONDITION"].values()), tuple(support["PREDICATE_OBSERVATION"].values()),
             tuple(support["RECOVERY_SAFETY"].values()), tuple(support["TARGET_VALIDITY"].values()),
-            **{field: tuple(support[kind].values()) for field, kind, _cls, _max in dv.SESSION_SUPPORT_FIELDS})
+            **{field: tuple(support[kind].values()) for field, kind, _cls, _max in dv.SESSION_SUPPORT_FIELDS},
+            module_evidence=tuple(node for kind in dv.MODULE_KIND_QUOTAS for node in support[kind].values()))
 
     def snapshot(self, *, bundle_reference):
         sv.InputEvidence.validate_reference(bundle_reference)
@@ -1831,7 +1872,7 @@ class _ReferenceDiagnostics:
                 self._mark_failure(error.code)
                 observed = dv.ClockObservation(None, None, "CLOCK_UNAVAILABLE", "CLOCK_UNAVAILABLE")
             for scope in self._scopes.values():
-                if not scope.finished:
+                if not scope.finished and scope.producer not in dv.MODULE_PRODUCERS:
                     self._failure = "DIAGNOSTICS_COMPLETION_MISSING"
             self._persist_health()
             bundle_alias = self._alias(bundle_reference)
@@ -1845,10 +1886,14 @@ class _ReferenceDiagnostics:
                 ("NATIVE_RELEASE_DEFERRED", "NATIVE_RELEASE"), ("NO_PHYSICAL_CRASH_PROOF", "PHYSICAL_CRASH"),
                 ("NO_POWER_LOSS_DURABILITY_PROOF", "PROTECTED_STORAGE"), ("NO_ENCRYPTION_CLAIM", "PROTECTED_STORAGE"),
                 ("NO_SECOND_USER_ACCESS_TEST", "PROTECTED_STORAGE"), ("UNTRUSTED_PROSE_OMITTED", "DIAGNOSTICS")))
+            events = tuple(self._events)
+            if self._module_capture_service is not None:
+                events = tuple(sorted((*events, *(event for event in self._unconfirmed_events.values()
+                    if event.source in dv.MODULE_PRODUCERS)), key=lambda event: event.local_sequence))
             snapshot = dv.DiagnosticSnapshot(bundle_alias, observed.observed_utc, observed.utc_reason,
-                self.identity, self.profile, dv.CaptureWindow(self._events[0].local_sequence if self._events else None,
-                    self._events[-1].local_sequence if self._events else None, self._start_clock, observed),
-                self._coverage(), tuple(self._events), tuple(self._meta), tuple(self._incidents), self._evidence(), self.health(),
+                self.identity, self.profile, dv.CaptureWindow(events[0].local_sequence if events else None,
+                    events[-1].local_sequence if events else None, self._start_clock, observed),
+                self._coverage(), events, tuple(self._meta), tuple(self._incidents), self._evidence(), self.health(),
                 dv.RetentionAccount(self._limits, tuple(self._retention),
                     tuple(dict.fromkeys(self._alias(scope.reference) for scope in self._scopes.values() if not scope.finished or scope.final_observation_pending)),
                     tuple(dict.fromkeys(reference for incident in self._incidents if incident.unresolved
@@ -1952,6 +1997,8 @@ class _ReferenceDiagnostics:
             groups = []
             for scope in self._scopes.values():
                 if scope.relation is not None or scope.purged or not scope.finished or scope.failed:
+                    continue
+                if self._module_capture_service is not None and self._module_capture_service.pins_origin(scope.reference):
                     continue
                 group = (scope,) + tuple(self._scopes[reference] for reference in scope.child_operations)
                 if any(member.storage_reference in state.pinned_scopes for state in self._session_handles.values() for member in group):

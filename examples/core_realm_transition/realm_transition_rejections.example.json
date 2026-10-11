@@ -1,0 +1,3887 @@
+{
+  "schema_ref": "data/schemas/m3_realm_transition_schema.json",
+  "artifact_type": "ywe_realm_transition_rejection_cases",
+  "artifact_version": "1.0.0",
+  "evidence_scope": "AUTHORED_REJECTION_CONTROL_ONLY_NO_RUNTIME_EFFECT_CLAIM",
+  "cases": [
+    {
+      "case_id": "rt_reject_extra_field",
+      "schema_definition": "RealmEncodingResult",
+      "value": {
+        "operation_reference": "rt_fixture:encode",
+        "binding": {
+          "canonical_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "contract_pins": [
+            {
+              "source_id": "REALM_ENCODER_CONTRACT",
+              "source_sha256": "b3fa0deb71ae136c712f402f2b8159b7448ef8756a884369931ab7098bc83fbb"
+            },
+            {
+              "source_id": "REALM_IDENTITY",
+              "source_sha256": "43f274d9c8c1b7269938bf8661c42e91cf020d215683cb6dfa4b340ff975cad5"
+            },
+            {
+              "source_id": "TRANSITION_REGISTRY_CONTRACT",
+              "source_sha256": "f123b02c3390253cba5f50a04e9c69e9c20771c6dc7cff5bcdc7a3c85aa6471f"
+            },
+            {
+              "source_id": "TRANSITION_SYSTEM",
+              "source_sha256": "26c456f60fbb5c847714c4a9a49cf8d11ac48ef0a7d0c127da53bd893dd527c2"
+            },
+            {
+              "source_id": "TRANSFORMATION",
+              "source_sha256": "80623862ac8dfe72bdecea670f15f4f339c0096da1f63b9058a73458eeedd88e"
+            },
+            {
+              "source_id": "CODEWORDS",
+              "source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+            },
+            {
+              "source_id": "ASH_STATE_SPACE",
+              "source_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+            },
+            {
+              "source_id": "STATE_ADMISSIBILITY",
+              "source_sha256": "5d9231331849a6359a8d8e537d0434ee78787bb14efe5da03f60e68ba3c1978e"
+            },
+            {
+              "source_id": "DIAGNOSTIC_SCHEMA",
+              "source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+            },
+            {
+              "source_id": "RULE_TAXONOMY",
+              "source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+            },
+            {
+              "source_id": "DIAGNOSTICS_MODULE_CONTRACT",
+              "source_sha256": "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+            }
+          ],
+          "policy_source_reference": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_RESTRICTED_TEST_POLICY.json",
+          "policy_source_sha256": "608730096b94094a0f247011946c5e7093b82d8713b5c1122e57a5a15a6aee4d",
+          "policy_evidence_reference": "test:policy"
+        },
+        "origin": {
+          "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+          "artifact_type": "ywe_state_assessment",
+          "artifact_version": "1.0.0",
+          "outcome": "diagnosis",
+          "assessment_binding": {
+            "assessment_reference": "test:origin",
+            "original_input_reference": "test:origin:input",
+            "diagnosis_reference": "test:origin:detection"
+          },
+          "source_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "input_evidence": {
+            "original_input_reference": "test:origin:input",
+            "representation_kind": "SIGNATURE",
+            "observed_length": 9,
+            "length_unit": "CHARACTERS",
+            "preview": "100000000",
+            "preview_encoding": "TEXT",
+            "truncated": false,
+            "coordinate_observations": [],
+            "failure_code": null
+          },
+          "parsed_state": {
+            "state_space": "F2^9",
+            "bits": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "state_validity_diagnostic": {
+            "input_state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "admissibility_status": "VALID",
+            "transformation_compatibility": "COMPATIBLE",
+            "normalization_status": "ALREADY_VALID",
+            "recoverability_relevance": "NO_RECOVERY_NEEDED",
+            "is_valid": true,
+            "orbit_info": {
+              "orbit_id": "000101100",
+              "member_count": 16,
+              "contains_known_valid_state": true
+            },
+            "rule_ids": [
+              "ASH-STATE-STRUCTURE-001",
+              "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+              "ASH-STATE-VALIDITY-001"
+            ],
+            "notes": [
+              "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+            ]
+          },
+          "emitted_diagnostics": [
+            {
+              "diagnostic_reference": "test:origin:detection",
+              "envelope": {
+                "diagnostic_kind": "STATE_VALIDITY",
+                "severity": "INFO",
+                "stage": "DETECTION",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_100000000",
+                "parent_diagnostic_reference": null,
+                "chain_root_reference": "test:origin:detection",
+                "rule_ids": [
+                  "ASH-STATE-STRUCTURE-001",
+                  "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                  "ASH-STATE-VALIDITY-001"
+                ],
+                "summary": "ASH state diagnosis: VALID",
+                "notes": [
+                  "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+                ]
+              }
+            }
+          ]
+        },
+        "origin_validation": {
+          "status": "VERIFIED",
+          "submitted_diagnosis": {
+            "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+            "artifact_type": "ywe_state_assessment",
+            "artifact_version": "1.0.0",
+            "outcome": "diagnosis",
+            "assessment_binding": {
+              "assessment_reference": "test:origin",
+              "original_input_reference": "test:origin:input",
+              "diagnosis_reference": "test:origin:detection"
+            },
+            "source_binding": {
+              "dependency_id": "ash_cosmological_model.f2_9.canonical",
+              "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+              "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+              "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+              "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+              "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+              "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+              "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+              "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+            },
+            "profile_binding": {
+              "availability": "AVAILABLE",
+              "profile_id": "wrw_reference_profile",
+              "source_binding": {
+                "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+                "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+                "evidence_reference": "wrw_reference_profile:source_binding"
+              },
+              "recognized_valid_signatures": [
+                "000000001",
+                "000000010",
+                "000000100",
+                "000001000",
+                "000010000",
+                "000100000",
+                "001000000",
+                "010000000",
+                "100000000"
+              ]
+            },
+            "input_evidence": {
+              "original_input_reference": "test:origin:input",
+              "representation_kind": "SIGNATURE",
+              "observed_length": 9,
+              "length_unit": "CHARACTERS",
+              "preview": "100000000",
+              "preview_encoding": "TEXT",
+              "truncated": false,
+              "coordinate_observations": [],
+              "failure_code": null
+            },
+            "parsed_state": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "state_validity_diagnostic": {
+              "input_state": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "admissibility_status": "VALID",
+              "transformation_compatibility": "COMPATIBLE",
+              "normalization_status": "ALREADY_VALID",
+              "recoverability_relevance": "NO_RECOVERY_NEEDED",
+              "is_valid": true,
+              "orbit_info": {
+                "orbit_id": "000101100",
+                "member_count": 16,
+                "contains_known_valid_state": true
+              },
+              "rule_ids": [
+                "ASH-STATE-STRUCTURE-001",
+                "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                "ASH-STATE-VALIDITY-001"
+              ],
+              "notes": [
+                "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+              ]
+            },
+            "emitted_diagnostics": [
+              {
+                "diagnostic_reference": "test:origin:detection",
+                "envelope": {
+                  "diagnostic_kind": "STATE_VALIDITY",
+                  "severity": "INFO",
+                  "stage": "DETECTION",
+                  "disposition": "RESOLVED",
+                  "subject_reference": "ash_state_100000000",
+                  "parent_diagnostic_reference": null,
+                  "chain_root_reference": "test:origin:detection",
+                  "rule_ids": [
+                    "ASH-STATE-STRUCTURE-001",
+                    "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                    "ASH-STATE-VALIDITY-001"
+                  ],
+                  "summary": "ASH state diagnosis: VALID",
+                  "notes": [
+                    "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+                  ]
+                }
+              }
+            ]
+          },
+          "current_source_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "current_profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "derived_diagnostic": {
+            "input_state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "admissibility_status": "VALID",
+            "transformation_compatibility": "COMPATIBLE",
+            "normalization_status": "ALREADY_VALID",
+            "recoverability_relevance": "NO_RECOVERY_NEEDED",
+            "is_valid": true,
+            "orbit_info": {
+              "orbit_id": "000101100",
+              "member_count": 16,
+              "contains_known_valid_state": true
+            },
+            "rule_ids": [
+              "ASH-STATE-STRUCTURE-001",
+              "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+              "ASH-STATE-VALIDITY-001"
+            ],
+            "notes": [
+              "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+            ]
+          },
+          "failure_code": null,
+          "failed_field": null
+        },
+        "identity": {
+          "state_signature": "100000000",
+          "vertex_id": "ash_state_100000000",
+          "realm_id": "ash_state_100000000",
+          "orbit_id": "000101100"
+        },
+        "constructed_records": [
+          {
+            "record_reference": "rt:5b1f0c144c0974a04fb7855e7dcaf67f2f5e40c58e480df291d9731c4dd458c8:0",
+            "phase": "VALID_SOURCE",
+            "emission": {
+              "diagnostic_reference": "rt:5b1f0c144c0974a04fb7855e7dcaf67f2f5e40c58e480df291d9731c4dd458c8:0",
+              "envelope": {
+                "diagnostic_kind": "REALM_ENCODING",
+                "severity": "INFO",
+                "stage": "PROCESSING",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_100000000",
+                "parent_diagnostic_reference": "test:origin:detection",
+                "chain_root_reference": "test:origin:detection",
+                "rule_ids": [
+                  "ASH-STATE-VALIDITY-001"
+                ],
+                "summary": "Strict module source validity evaluated.",
+                "notes": [
+                  "The current complete diagnosis and profile govern valid source admission."
+                ]
+              }
+            },
+            "payload": {
+              "origin_assessment_reference": "test:origin",
+              "verification_status": "VERIFIED",
+              "admissibility_status": "VALID",
+              "is_valid": true
+            }
+          },
+          {
+            "record_reference": "rt:5b1f0c144c0974a04fb7855e7dcaf67f2f5e40c58e480df291d9731c4dd458c8:1",
+            "phase": "IDENTITY",
+            "emission": {
+              "diagnostic_reference": "rt:5b1f0c144c0974a04fb7855e7dcaf67f2f5e40c58e480df291d9731c4dd458c8:1",
+              "envelope": {
+                "diagnostic_kind": "REALM_ENCODING",
+                "severity": "INFO",
+                "stage": "PROCESSING",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_100000000",
+                "parent_diagnostic_reference": "rt:5b1f0c144c0974a04fb7855e7dcaf67f2f5e40c58e480df291d9731c4dd458c8:0",
+                "chain_root_reference": "test:origin:detection",
+                "rule_ids": [
+                  "ASH-STATE-IDENTITY-001"
+                ],
+                "summary": "Full nine-coordinate realm identity encoded.",
+                "notes": [
+                  "Vertex and realm are equal lossless full-vector aliases; orbit is distinct."
+                ]
+              }
+            },
+            "payload": {
+              "state_signature": "100000000",
+              "vertex_id": "ash_state_100000000",
+              "realm_id": "ash_state_100000000",
+              "orbit_id": "000101100"
+            }
+          }
+        ],
+        "extra": true
+      },
+      "expected_keyword": "additionalProperties",
+      "expected_path": []
+    },
+    {
+      "case_id": "rt_reject_pin_order",
+      "schema_definition": "RealmTransitionBinding",
+      "value": {
+        "canonical_binding": {
+          "dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+          "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+          "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+          "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+          "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+          "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+          "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+          "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+        },
+        "profile_binding": {
+          "availability": "AVAILABLE",
+          "profile_id": "wrw_reference_profile",
+          "source_binding": {
+            "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+            "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+            "evidence_reference": "wrw_reference_profile:source_binding"
+          },
+          "recognized_valid_signatures": [
+            "000000001",
+            "000000010",
+            "000000100",
+            "000001000",
+            "000010000",
+            "000100000",
+            "001000000",
+            "010000000",
+            "100000000"
+          ]
+        },
+        "contract_pins": [
+          {
+            "source_id": "DIAGNOSTICS_MODULE_CONTRACT",
+            "source_sha256": "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+          },
+          {
+            "source_id": "RULE_TAXONOMY",
+            "source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          {
+            "source_id": "DIAGNOSTIC_SCHEMA",
+            "source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+          },
+          {
+            "source_id": "STATE_ADMISSIBILITY",
+            "source_sha256": "5d9231331849a6359a8d8e537d0434ee78787bb14efe5da03f60e68ba3c1978e"
+          },
+          {
+            "source_id": "ASH_STATE_SPACE",
+            "source_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+          },
+          {
+            "source_id": "CODEWORDS",
+            "source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+          },
+          {
+            "source_id": "TRANSFORMATION",
+            "source_sha256": "80623862ac8dfe72bdecea670f15f4f339c0096da1f63b9058a73458eeedd88e"
+          },
+          {
+            "source_id": "TRANSITION_SYSTEM",
+            "source_sha256": "26c456f60fbb5c847714c4a9a49cf8d11ac48ef0a7d0c127da53bd893dd527c2"
+          },
+          {
+            "source_id": "TRANSITION_REGISTRY_CONTRACT",
+            "source_sha256": "f123b02c3390253cba5f50a04e9c69e9c20771c6dc7cff5bcdc7a3c85aa6471f"
+          },
+          {
+            "source_id": "REALM_IDENTITY",
+            "source_sha256": "43f274d9c8c1b7269938bf8661c42e91cf020d215683cb6dfa4b340ff975cad5"
+          },
+          {
+            "source_id": "REALM_ENCODER_CONTRACT",
+            "source_sha256": "b3fa0deb71ae136c712f402f2b8159b7448ef8756a884369931ab7098bc83fbb"
+          }
+        ],
+        "policy_source_reference": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_RESTRICTED_TEST_POLICY.json",
+        "policy_source_sha256": "608730096b94094a0f247011946c5e7093b82d8713b5c1122e57a5a15a6aee4d",
+        "policy_evidence_reference": "test:policy"
+      },
+      "expected_keyword": "const",
+      "expected_path": [
+        "contract_pins",
+        0,
+        "source_id"
+      ]
+    },
+    {
+      "case_id": "rt_reject_policy_hash",
+      "schema_definition": "RealmTransitionBinding",
+      "value": {
+        "canonical_binding": {
+          "dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+          "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+          "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+          "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+          "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+          "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+          "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+          "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+        },
+        "profile_binding": {
+          "availability": "AVAILABLE",
+          "profile_id": "wrw_reference_profile",
+          "source_binding": {
+            "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+            "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+            "evidence_reference": "wrw_reference_profile:source_binding"
+          },
+          "recognized_valid_signatures": [
+            "000000001",
+            "000000010",
+            "000000100",
+            "000001000",
+            "000010000",
+            "000100000",
+            "001000000",
+            "010000000",
+            "100000000"
+          ]
+        },
+        "contract_pins": [
+          {
+            "source_id": "REALM_ENCODER_CONTRACT",
+            "source_sha256": "b3fa0deb71ae136c712f402f2b8159b7448ef8756a884369931ab7098bc83fbb"
+          },
+          {
+            "source_id": "REALM_IDENTITY",
+            "source_sha256": "43f274d9c8c1b7269938bf8661c42e91cf020d215683cb6dfa4b340ff975cad5"
+          },
+          {
+            "source_id": "TRANSITION_REGISTRY_CONTRACT",
+            "source_sha256": "f123b02c3390253cba5f50a04e9c69e9c20771c6dc7cff5bcdc7a3c85aa6471f"
+          },
+          {
+            "source_id": "TRANSITION_SYSTEM",
+            "source_sha256": "26c456f60fbb5c847714c4a9a49cf8d11ac48ef0a7d0c127da53bd893dd527c2"
+          },
+          {
+            "source_id": "TRANSFORMATION",
+            "source_sha256": "80623862ac8dfe72bdecea670f15f4f339c0096da1f63b9058a73458eeedd88e"
+          },
+          {
+            "source_id": "CODEWORDS",
+            "source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+          },
+          {
+            "source_id": "ASH_STATE_SPACE",
+            "source_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+          },
+          {
+            "source_id": "STATE_ADMISSIBILITY",
+            "source_sha256": "5d9231331849a6359a8d8e537d0434ee78787bb14efe5da03f60e68ba3c1978e"
+          },
+          {
+            "source_id": "DIAGNOSTIC_SCHEMA",
+            "source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+          },
+          {
+            "source_id": "RULE_TAXONOMY",
+            "source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          {
+            "source_id": "DIAGNOSTICS_MODULE_CONTRACT",
+            "source_sha256": "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+          }
+        ],
+        "policy_source_reference": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_RESTRICTED_TEST_POLICY.json",
+        "policy_source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "policy_evidence_reference": "test:policy"
+      },
+      "expected_keyword": "oneOf",
+      "expected_path": []
+    },
+    {
+      "case_id": "rt_reject_mixed_source",
+      "schema_definition": "RealmTransitionBinding",
+      "value": {
+        "canonical_binding": {
+          "dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "aggregate_sha256": "76d59926ce9676b7584c6cdd555f50f56fceda075fa3fc8b37167fd2be43f7c9",
+          "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+          "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+          "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+          "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+          "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+          "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+          "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+        },
+        "profile_binding": {
+          "availability": "AVAILABLE",
+          "profile_id": "wrw_reference_profile",
+          "source_binding": {
+            "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+            "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+            "evidence_reference": "wrw_reference_profile:source_binding"
+          },
+          "recognized_valid_signatures": [
+            "000000001",
+            "000000010",
+            "000000100",
+            "000001000",
+            "000010000",
+            "000100000",
+            "001000000",
+            "010000000",
+            "100000000"
+          ]
+        },
+        "contract_pins": [
+          {
+            "source_id": "REALM_ENCODER_CONTRACT",
+            "source_sha256": "b3fa0deb71ae136c712f402f2b8159b7448ef8756a884369931ab7098bc83fbb"
+          },
+          {
+            "source_id": "REALM_IDENTITY",
+            "source_sha256": "43f274d9c8c1b7269938bf8661c42e91cf020d215683cb6dfa4b340ff975cad5"
+          },
+          {
+            "source_id": "TRANSITION_REGISTRY_CONTRACT",
+            "source_sha256": "f123b02c3390253cba5f50a04e9c69e9c20771c6dc7cff5bcdc7a3c85aa6471f"
+          },
+          {
+            "source_id": "TRANSITION_SYSTEM",
+            "source_sha256": "26c456f60fbb5c847714c4a9a49cf8d11ac48ef0a7d0c127da53bd893dd527c2"
+          },
+          {
+            "source_id": "TRANSFORMATION",
+            "source_sha256": "80623862ac8dfe72bdecea670f15f4f339c0096da1f63b9058a73458eeedd88e"
+          },
+          {
+            "source_id": "CODEWORDS",
+            "source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+          },
+          {
+            "source_id": "ASH_STATE_SPACE",
+            "source_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+          },
+          {
+            "source_id": "STATE_ADMISSIBILITY",
+            "source_sha256": "5d9231331849a6359a8d8e537d0434ee78787bb14efe5da03f60e68ba3c1978e"
+          },
+          {
+            "source_id": "DIAGNOSTIC_SCHEMA",
+            "source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+          },
+          {
+            "source_id": "RULE_TAXONOMY",
+            "source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          {
+            "source_id": "DIAGNOSTICS_MODULE_CONTRACT",
+            "source_sha256": "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+          }
+        ],
+        "policy_source_reference": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_RESTRICTED_TEST_POLICY.json",
+        "policy_source_sha256": "608730096b94094a0f247011946c5e7093b82d8713b5c1122e57a5a15a6aee4d",
+        "policy_evidence_reference": "test:policy"
+      },
+      "expected_keyword": "const",
+      "expected_path": [
+        "canonical_binding",
+        "aggregate_sha256"
+      ]
+    },
+    {
+      "case_id": "rt_reject_C16_order",
+      "schema_definition": "TransitionCatalog",
+      "value": {
+        "binding": {
+          "canonical_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "contract_pins": [
+            {
+              "source_id": "REALM_ENCODER_CONTRACT",
+              "source_sha256": "b3fa0deb71ae136c712f402f2b8159b7448ef8756a884369931ab7098bc83fbb"
+            },
+            {
+              "source_id": "REALM_IDENTITY",
+              "source_sha256": "43f274d9c8c1b7269938bf8661c42e91cf020d215683cb6dfa4b340ff975cad5"
+            },
+            {
+              "source_id": "TRANSITION_REGISTRY_CONTRACT",
+              "source_sha256": "f123b02c3390253cba5f50a04e9c69e9c20771c6dc7cff5bcdc7a3c85aa6471f"
+            },
+            {
+              "source_id": "TRANSITION_SYSTEM",
+              "source_sha256": "26c456f60fbb5c847714c4a9a49cf8d11ac48ef0a7d0c127da53bd893dd527c2"
+            },
+            {
+              "source_id": "TRANSFORMATION",
+              "source_sha256": "80623862ac8dfe72bdecea670f15f4f339c0096da1f63b9058a73458eeedd88e"
+            },
+            {
+              "source_id": "CODEWORDS",
+              "source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+            },
+            {
+              "source_id": "ASH_STATE_SPACE",
+              "source_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+            },
+            {
+              "source_id": "STATE_ADMISSIBILITY",
+              "source_sha256": "5d9231331849a6359a8d8e537d0434ee78787bb14efe5da03f60e68ba3c1978e"
+            },
+            {
+              "source_id": "DIAGNOSTIC_SCHEMA",
+              "source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+            },
+            {
+              "source_id": "RULE_TAXONOMY",
+              "source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+            },
+            {
+              "source_id": "DIAGNOSTICS_MODULE_CONTRACT",
+              "source_sha256": "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+            }
+          ],
+          "policy_source_reference": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_RESTRICTED_TEST_POLICY.json",
+          "policy_source_sha256": "608730096b94094a0f247011946c5e7093b82d8713b5c1122e57a5a15a6aee4d",
+          "policy_evidence_reference": "test:policy"
+        },
+        "definitions": [
+          {
+            "transition_id": "ash_codeword_15",
+            "display_name": "ASH codeword 15",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_14",
+            "display_name": "ASH codeword 14",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_13",
+            "display_name": "ASH codeword 13",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                1,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_12",
+            "display_name": "ASH codeword 12",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_11",
+            "display_name": "ASH codeword 11",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_10",
+            "display_name": "ASH codeword 10",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_09",
+            "display_name": "ASH codeword 09",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_08",
+            "display_name": "ASH codeword 08",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_07",
+            "display_name": "ASH codeword 07",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_06",
+            "display_name": "ASH codeword 06",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                1,
+                1,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_05",
+            "display_name": "ASH codeword 05",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_04",
+            "display_name": "ASH codeword 04",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_03",
+            "display_name": "ASH codeword 03",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_02",
+            "display_name": "ASH codeword 02",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_01",
+            "display_name": "ASH codeword 01",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_00",
+            "display_name": "ASH codeword 00",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ]
+      },
+      "expected_keyword": "const",
+      "expected_path": [
+        "definitions",
+        0,
+        "transition_id"
+      ]
+    },
+    {
+      "case_id": "rt_reject_C16_missing",
+      "schema_definition": "TransitionCatalog",
+      "value": {
+        "binding": {
+          "canonical_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "contract_pins": [
+            {
+              "source_id": "REALM_ENCODER_CONTRACT",
+              "source_sha256": "b3fa0deb71ae136c712f402f2b8159b7448ef8756a884369931ab7098bc83fbb"
+            },
+            {
+              "source_id": "REALM_IDENTITY",
+              "source_sha256": "43f274d9c8c1b7269938bf8661c42e91cf020d215683cb6dfa4b340ff975cad5"
+            },
+            {
+              "source_id": "TRANSITION_REGISTRY_CONTRACT",
+              "source_sha256": "f123b02c3390253cba5f50a04e9c69e9c20771c6dc7cff5bcdc7a3c85aa6471f"
+            },
+            {
+              "source_id": "TRANSITION_SYSTEM",
+              "source_sha256": "26c456f60fbb5c847714c4a9a49cf8d11ac48ef0a7d0c127da53bd893dd527c2"
+            },
+            {
+              "source_id": "TRANSFORMATION",
+              "source_sha256": "80623862ac8dfe72bdecea670f15f4f339c0096da1f63b9058a73458eeedd88e"
+            },
+            {
+              "source_id": "CODEWORDS",
+              "source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+            },
+            {
+              "source_id": "ASH_STATE_SPACE",
+              "source_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+            },
+            {
+              "source_id": "STATE_ADMISSIBILITY",
+              "source_sha256": "5d9231331849a6359a8d8e537d0434ee78787bb14efe5da03f60e68ba3c1978e"
+            },
+            {
+              "source_id": "DIAGNOSTIC_SCHEMA",
+              "source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+            },
+            {
+              "source_id": "RULE_TAXONOMY",
+              "source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+            },
+            {
+              "source_id": "DIAGNOSTICS_MODULE_CONTRACT",
+              "source_sha256": "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+            }
+          ],
+          "policy_source_reference": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_RESTRICTED_TEST_POLICY.json",
+          "policy_source_sha256": "608730096b94094a0f247011946c5e7093b82d8713b5c1122e57a5a15a6aee4d",
+          "policy_evidence_reference": "test:policy"
+        },
+        "definitions": [
+          {
+            "transition_id": "ash_codeword_00",
+            "display_name": "ASH codeword 00",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "transition_id": "ash_codeword_01",
+            "display_name": "ASH codeword 01",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_02",
+            "display_name": "ASH codeword 02",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_03",
+            "display_name": "ASH codeword 03",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_04",
+            "display_name": "ASH codeword 04",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_05",
+            "display_name": "ASH codeword 05",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_06",
+            "display_name": "ASH codeword 06",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                1,
+                1,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_07",
+            "display_name": "ASH codeword 07",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_08",
+            "display_name": "ASH codeword 08",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_09",
+            "display_name": "ASH codeword 09",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_10",
+            "display_name": "ASH codeword 10",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_11",
+            "display_name": "ASH codeword 11",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_12",
+            "display_name": "ASH codeword 12",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_13",
+            "display_name": "ASH codeword 13",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                1,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_14",
+            "display_name": "ASH codeword 14",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          }
+        ]
+      },
+      "expected_keyword": "minItems",
+      "expected_path": [
+        "definitions"
+      ]
+    },
+    {
+      "case_id": "rt_reject_restricted_mask",
+      "schema_definition": "TransitionCatalog",
+      "value": {
+        "binding": {
+          "canonical_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "contract_pins": [
+            {
+              "source_id": "REALM_ENCODER_CONTRACT",
+              "source_sha256": "b3fa0deb71ae136c712f402f2b8159b7448ef8756a884369931ab7098bc83fbb"
+            },
+            {
+              "source_id": "REALM_IDENTITY",
+              "source_sha256": "43f274d9c8c1b7269938bf8661c42e91cf020d215683cb6dfa4b340ff975cad5"
+            },
+            {
+              "source_id": "TRANSITION_REGISTRY_CONTRACT",
+              "source_sha256": "f123b02c3390253cba5f50a04e9c69e9c20771c6dc7cff5bcdc7a3c85aa6471f"
+            },
+            {
+              "source_id": "TRANSITION_SYSTEM",
+              "source_sha256": "26c456f60fbb5c847714c4a9a49cf8d11ac48ef0a7d0c127da53bd893dd527c2"
+            },
+            {
+              "source_id": "TRANSFORMATION",
+              "source_sha256": "80623862ac8dfe72bdecea670f15f4f339c0096da1f63b9058a73458eeedd88e"
+            },
+            {
+              "source_id": "CODEWORDS",
+              "source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+            },
+            {
+              "source_id": "ASH_STATE_SPACE",
+              "source_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+            },
+            {
+              "source_id": "STATE_ADMISSIBILITY",
+              "source_sha256": "5d9231331849a6359a8d8e537d0434ee78787bb14efe5da03f60e68ba3c1978e"
+            },
+            {
+              "source_id": "DIAGNOSTIC_SCHEMA",
+              "source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+            },
+            {
+              "source_id": "RULE_TAXONOMY",
+              "source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+            },
+            {
+              "source_id": "DIAGNOSTICS_MODULE_CONTRACT",
+              "source_sha256": "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+            }
+          ],
+          "policy_source_reference": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_RESTRICTED_TEST_POLICY.json",
+          "policy_source_sha256": "608730096b94094a0f247011946c5e7093b82d8713b5c1122e57a5a15a6aee4d",
+          "policy_evidence_reference": "test:policy"
+        },
+        "definitions": [
+          {
+            "transition_id": "ash_codeword_00",
+            "display_name": "ASH codeword 00",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_01",
+            "display_name": "ASH codeword 01",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_02",
+            "display_name": "ASH codeword 02",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_03",
+            "display_name": "ASH codeword 03",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_04",
+            "display_name": "ASH codeword 04",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_05",
+            "display_name": "ASH codeword 05",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_06",
+            "display_name": "ASH codeword 06",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                1,
+                1,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_07",
+            "display_name": "ASH codeword 07",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_08",
+            "display_name": "ASH codeword 08",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_09",
+            "display_name": "ASH codeword 09",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_10",
+            "display_name": "ASH codeword 10",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_11",
+            "display_name": "ASH codeword 11",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_12",
+            "display_name": "ASH codeword 12",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_13",
+            "display_name": "ASH codeword 13",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                1,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_14",
+            "display_name": "ASH codeword 14",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "transition_id": "ash_codeword_15",
+            "display_name": "ASH codeword 15",
+            "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+            "codeword": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0
+              ]
+            },
+            "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+          }
+        ]
+      },
+      "expected_keyword": "const",
+      "expected_path": [
+        "definitions",
+        0,
+        "applicability_mask"
+      ]
+    },
+    {
+      "case_id": "rt_reject_mask_width",
+      "schema_definition": "TransitionDefinition",
+      "value": {
+        "transition_id": "ash_codeword_01",
+        "display_name": "ASH codeword 01",
+        "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+        "codeword": {
+          "state_space": "F2^9",
+          "bits": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        },
+        "applicability_mask": "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+      },
+      "expected_keyword": "minLength",
+      "expected_path": [
+        "applicability_mask"
+      ]
+    },
+    {
+      "case_id": "rt_reject_mask_ascii",
+      "schema_definition": "TransitionDefinition",
+      "value": {
+        "transition_id": "ash_codeword_01",
+        "display_name": "ASH codeword 01",
+        "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+        "codeword": {
+          "state_space": "F2^9",
+          "bits": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        },
+        "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111112"
+      },
+      "expected_keyword": "pattern",
+      "expected_path": [
+        "applicability_mask"
+      ]
+    },
+    {
+      "case_id": "rt_reject_selector_union",
+      "schema_definition": "TransitionSelection",
+      "value": {
+        "selection_kind": "IDENTIFIER",
+        "transition_id": "ash_codeword_01",
+        "codeword": {
+          "state_space": "F2^9",
+          "bits": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        }
+      },
+      "expected_keyword": "oneOf",
+      "expected_path": []
+    },
+    {
+      "case_id": "rt_reject_reference_sentinel",
+      "schema_definition": "TransitionSelection",
+      "value": {
+        "selection_kind": "IDENTIFIER",
+        "transition_id": "NONE",
+        "codeword": null
+      },
+      "expected_keyword": "oneOf",
+      "expected_path": []
+    },
+    {
+      "case_id": "rt_reject_phase_order",
+      "schema_definition": "TransitionApplicationResult",
+      "value": {
+        "operation_reference": "rt_fixture:apply",
+        "binding": {
+          "canonical_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "contract_pins": [
+            {
+              "source_id": "REALM_ENCODER_CONTRACT",
+              "source_sha256": "b3fa0deb71ae136c712f402f2b8159b7448ef8756a884369931ab7098bc83fbb"
+            },
+            {
+              "source_id": "REALM_IDENTITY",
+              "source_sha256": "43f274d9c8c1b7269938bf8661c42e91cf020d215683cb6dfa4b340ff975cad5"
+            },
+            {
+              "source_id": "TRANSITION_REGISTRY_CONTRACT",
+              "source_sha256": "f123b02c3390253cba5f50a04e9c69e9c20771c6dc7cff5bcdc7a3c85aa6471f"
+            },
+            {
+              "source_id": "TRANSITION_SYSTEM",
+              "source_sha256": "26c456f60fbb5c847714c4a9a49cf8d11ac48ef0a7d0c127da53bd893dd527c2"
+            },
+            {
+              "source_id": "TRANSFORMATION",
+              "source_sha256": "80623862ac8dfe72bdecea670f15f4f339c0096da1f63b9058a73458eeedd88e"
+            },
+            {
+              "source_id": "CODEWORDS",
+              "source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+            },
+            {
+              "source_id": "ASH_STATE_SPACE",
+              "source_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+            },
+            {
+              "source_id": "STATE_ADMISSIBILITY",
+              "source_sha256": "5d9231331849a6359a8d8e537d0434ee78787bb14efe5da03f60e68ba3c1978e"
+            },
+            {
+              "source_id": "DIAGNOSTIC_SCHEMA",
+              "source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+            },
+            {
+              "source_id": "RULE_TAXONOMY",
+              "source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+            },
+            {
+              "source_id": "DIAGNOSTICS_MODULE_CONTRACT",
+              "source_sha256": "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+            }
+          ],
+          "policy_source_reference": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_RESTRICTED_TEST_POLICY.json",
+          "policy_source_sha256": "608730096b94094a0f247011946c5e7093b82d8713b5c1122e57a5a15a6aee4d",
+          "policy_evidence_reference": "test:policy"
+        },
+        "origin": {
+          "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+          "artifact_type": "ywe_state_assessment",
+          "artifact_version": "1.0.0",
+          "outcome": "diagnosis",
+          "assessment_binding": {
+            "assessment_reference": "test:origin",
+            "original_input_reference": "test:origin:input",
+            "diagnosis_reference": "test:origin:detection"
+          },
+          "source_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "input_evidence": {
+            "original_input_reference": "test:origin:input",
+            "representation_kind": "SIGNATURE",
+            "observed_length": 9,
+            "length_unit": "CHARACTERS",
+            "preview": "100000000",
+            "preview_encoding": "TEXT",
+            "truncated": false,
+            "coordinate_observations": [],
+            "failure_code": null
+          },
+          "parsed_state": {
+            "state_space": "F2^9",
+            "bits": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "state_validity_diagnostic": {
+            "input_state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "admissibility_status": "VALID",
+            "transformation_compatibility": "COMPATIBLE",
+            "normalization_status": "ALREADY_VALID",
+            "recoverability_relevance": "NO_RECOVERY_NEEDED",
+            "is_valid": true,
+            "orbit_info": {
+              "orbit_id": "000101100",
+              "member_count": 16,
+              "contains_known_valid_state": true
+            },
+            "rule_ids": [
+              "ASH-STATE-STRUCTURE-001",
+              "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+              "ASH-STATE-VALIDITY-001"
+            ],
+            "notes": [
+              "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+            ]
+          },
+          "emitted_diagnostics": [
+            {
+              "diagnostic_reference": "test:origin:detection",
+              "envelope": {
+                "diagnostic_kind": "STATE_VALIDITY",
+                "severity": "INFO",
+                "stage": "DETECTION",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_100000000",
+                "parent_diagnostic_reference": null,
+                "chain_root_reference": "test:origin:detection",
+                "rule_ids": [
+                  "ASH-STATE-STRUCTURE-001",
+                  "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                  "ASH-STATE-VALIDITY-001"
+                ],
+                "summary": "ASH state diagnosis: VALID",
+                "notes": [
+                  "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+                ]
+              }
+            }
+          ]
+        },
+        "origin_validation": {
+          "status": "VERIFIED",
+          "submitted_diagnosis": {
+            "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+            "artifact_type": "ywe_state_assessment",
+            "artifact_version": "1.0.0",
+            "outcome": "diagnosis",
+            "assessment_binding": {
+              "assessment_reference": "test:origin",
+              "original_input_reference": "test:origin:input",
+              "diagnosis_reference": "test:origin:detection"
+            },
+            "source_binding": {
+              "dependency_id": "ash_cosmological_model.f2_9.canonical",
+              "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+              "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+              "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+              "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+              "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+              "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+              "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+              "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+            },
+            "profile_binding": {
+              "availability": "AVAILABLE",
+              "profile_id": "wrw_reference_profile",
+              "source_binding": {
+                "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+                "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+                "evidence_reference": "wrw_reference_profile:source_binding"
+              },
+              "recognized_valid_signatures": [
+                "000000001",
+                "000000010",
+                "000000100",
+                "000001000",
+                "000010000",
+                "000100000",
+                "001000000",
+                "010000000",
+                "100000000"
+              ]
+            },
+            "input_evidence": {
+              "original_input_reference": "test:origin:input",
+              "representation_kind": "SIGNATURE",
+              "observed_length": 9,
+              "length_unit": "CHARACTERS",
+              "preview": "100000000",
+              "preview_encoding": "TEXT",
+              "truncated": false,
+              "coordinate_observations": [],
+              "failure_code": null
+            },
+            "parsed_state": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "state_validity_diagnostic": {
+              "input_state": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "admissibility_status": "VALID",
+              "transformation_compatibility": "COMPATIBLE",
+              "normalization_status": "ALREADY_VALID",
+              "recoverability_relevance": "NO_RECOVERY_NEEDED",
+              "is_valid": true,
+              "orbit_info": {
+                "orbit_id": "000101100",
+                "member_count": 16,
+                "contains_known_valid_state": true
+              },
+              "rule_ids": [
+                "ASH-STATE-STRUCTURE-001",
+                "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                "ASH-STATE-VALIDITY-001"
+              ],
+              "notes": [
+                "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+              ]
+            },
+            "emitted_diagnostics": [
+              {
+                "diagnostic_reference": "test:origin:detection",
+                "envelope": {
+                  "diagnostic_kind": "STATE_VALIDITY",
+                  "severity": "INFO",
+                  "stage": "DETECTION",
+                  "disposition": "RESOLVED",
+                  "subject_reference": "ash_state_100000000",
+                  "parent_diagnostic_reference": null,
+                  "chain_root_reference": "test:origin:detection",
+                  "rule_ids": [
+                    "ASH-STATE-STRUCTURE-001",
+                    "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                    "ASH-STATE-VALIDITY-001"
+                  ],
+                  "summary": "ASH state diagnosis: VALID",
+                  "notes": [
+                    "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+                  ]
+                }
+              }
+            ]
+          },
+          "current_source_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "current_profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "derived_diagnostic": {
+            "input_state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "admissibility_status": "VALID",
+            "transformation_compatibility": "COMPATIBLE",
+            "normalization_status": "ALREADY_VALID",
+            "recoverability_relevance": "NO_RECOVERY_NEEDED",
+            "is_valid": true,
+            "orbit_info": {
+              "orbit_id": "000101100",
+              "member_count": 16,
+              "contains_known_valid_state": true
+            },
+            "rule_ids": [
+              "ASH-STATE-STRUCTURE-001",
+              "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+              "ASH-STATE-VALIDITY-001"
+            ],
+            "notes": [
+              "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+            ]
+          },
+          "failure_code": null,
+          "failed_field": null
+        },
+        "selection": {
+          "selection_kind": "IDENTIFIER",
+          "transition_id": "ash_codeword_01",
+          "codeword": null
+        },
+        "selected_definition": {
+          "transition_id": "ash_codeword_01",
+          "display_name": "ASH codeword 01",
+          "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+          "codeword": {
+            "state_space": "F2^9",
+            "bits": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          },
+          "applicability_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+        },
+        "candidate": {
+          "state_space": "F2^9",
+          "bits": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        },
+        "target_diagnosis": {
+          "input_state": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          "admissibility_status": "TRANSFORMATION_COMPATIBLE",
+          "transformation_compatibility": "COMPATIBLE",
+          "normalization_status": "NORMALIZABLE",
+          "recoverability_relevance": "RECOVERY_APPLICABLE",
+          "is_valid": false,
+          "orbit_info": {
+            "orbit_id": "000101100",
+            "member_count": 16,
+            "contains_known_valid_state": true
+          },
+          "rule_ids": [
+            "ASH-STATE-STRUCTURE-001",
+            "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "notes": [
+            "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+          ]
+        },
+        "constructed_records": [
+          {
+            "record_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:3",
+            "phase": "TRANSFORMATION",
+            "emission": {
+              "diagnostic_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:3",
+              "envelope": {
+                "diagnostic_kind": "TRANSITION",
+                "severity": "INFO",
+                "stage": "PROCESSING",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_100000000",
+                "parent_diagnostic_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:2",
+                "chain_root_reference": "test:origin:detection",
+                "rule_ids": [
+                  "ASH-CODEWORD-TRANSFORMATION-001"
+                ],
+                "summary": "Complete nine-coordinate XOR candidate constructed.",
+                "notes": [
+                  "Target diagnosis is retained without normalization or session publication."
+                ]
+              }
+            },
+            "payload": {
+              "transition_id": "ash_codeword_01",
+              "codeword": {
+                "state_space": "F2^9",
+                "bits": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0
+                ]
+              },
+              "source_state": {
+                "state_space": "F2^9",
+                "bits": [
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "candidate": {
+                "state_space": "F2^9",
+                "bits": [
+                  1,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0
+                ]
+              },
+              "target_diagnosis": {
+                "input_state": [
+                  1,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0
+                ],
+                "admissibility_status": "TRANSFORMATION_COMPATIBLE",
+                "transformation_compatibility": "COMPATIBLE",
+                "normalization_status": "NORMALIZABLE",
+                "recoverability_relevance": "RECOVERY_APPLICABLE",
+                "is_valid": false,
+                "orbit_info": {
+                  "orbit_id": "000101100",
+                  "member_count": 16,
+                  "contains_known_valid_state": true
+                },
+                "rule_ids": [
+                  "ASH-STATE-STRUCTURE-001",
+                  "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                  "ASH-STATE-VALIDITY-001"
+                ],
+                "notes": [
+                  "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+                ]
+              }
+            }
+          },
+          {
+            "record_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:2",
+            "phase": "APPLICABILITY",
+            "emission": {
+              "diagnostic_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:2",
+              "envelope": {
+                "diagnostic_kind": "TRANSITION",
+                "severity": "INFO",
+                "stage": "PROCESSING",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_100000000",
+                "parent_diagnostic_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:1",
+                "chain_root_reference": "test:origin:detection",
+                "rule_ids": [
+                  "ASH-CODEWORD-APPLICABILITY-001"
+                ],
+                "summary": "Declared transition applicability evaluated.",
+                "notes": [
+                  "Applicability is the declared mask bit indexed by the complete source signature."
+                ]
+              }
+            },
+            "payload": {
+              "transition_id": "ash_codeword_01",
+              "codeword": {
+                "state_space": "F2^9",
+                "bits": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0
+                ]
+              },
+              "source_state": {
+                "state_space": "F2^9",
+                "bits": [
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "is_applicable": true,
+              "reason_code": "SOURCE_ALLOWED"
+            }
+          },
+          {
+            "record_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:1",
+            "phase": "SELECTION",
+            "emission": {
+              "diagnostic_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:1",
+              "envelope": {
+                "diagnostic_kind": "TRANSITION",
+                "severity": "INFO",
+                "stage": "PROCESSING",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_100000000",
+                "parent_diagnostic_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:0",
+                "chain_root_reference": "test:origin:detection",
+                "rule_ids": [
+                  "ASH-CODEWORD-SELECTION-001",
+                  "ASH-CODEWORD-STRUCTURE-001"
+                ],
+                "summary": "Canonical transition selection evaluated.",
+                "notes": [
+                  "Selection uses exact source-order identifiers or a complete canonical codeword."
+                ]
+              }
+            },
+            "payload": {
+              "selection": {
+                "selection_kind": "IDENTIFIER",
+                "transition_id": "ash_codeword_01",
+                "codeword": null
+              },
+              "transition_id": "ash_codeword_01",
+              "codeword": {
+                "state_space": "F2^9",
+                "bits": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0
+                ]
+              },
+              "status": "SELECTED",
+              "failure_code": null
+            }
+          },
+          {
+            "record_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:0",
+            "phase": "VALID_SOURCE",
+            "emission": {
+              "diagnostic_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:0",
+              "envelope": {
+                "diagnostic_kind": "TRANSITION",
+                "severity": "INFO",
+                "stage": "PROCESSING",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_100000000",
+                "parent_diagnostic_reference": "test:origin:detection",
+                "chain_root_reference": "test:origin:detection",
+                "rule_ids": [
+                  "ASH-STATE-VALIDITY-001",
+                  "ASH-CODEWORD-REGISTRY-001"
+                ],
+                "summary": "Strict module source validity evaluated.",
+                "notes": [
+                  "The current complete diagnosis and profile govern valid source admission."
+                ]
+              }
+            },
+            "payload": {
+              "origin_assessment_reference": "test:origin",
+              "verification_status": "VERIFIED",
+              "admissibility_status": "VALID",
+              "is_valid": true
+            }
+          }
+        ]
+      },
+      "expected_keyword": "const",
+      "expected_path": [
+        "constructed_records",
+        0,
+        "phase"
+      ]
+    },
+    {
+      "case_id": "rt_reject_phase_stage",
+      "schema_definition": "RealmTransitionRecord",
+      "value": {
+        "record_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:3",
+        "phase": "TRANSFORMATION",
+        "emission": {
+          "diagnostic_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:3",
+          "envelope": {
+            "diagnostic_kind": "TRANSITION",
+            "severity": "INFO",
+            "stage": "RECOVERY",
+            "disposition": "RESOLVED",
+            "subject_reference": "ash_state_100000000",
+            "parent_diagnostic_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:2",
+            "chain_root_reference": "test:origin:detection",
+            "rule_ids": [
+              "ASH-CODEWORD-TRANSFORMATION-001"
+            ],
+            "summary": "Complete nine-coordinate XOR candidate constructed.",
+            "notes": [
+              "Target diagnosis is retained without normalization or session publication."
+            ]
+          }
+        },
+        "payload": {
+          "transition_id": "ash_codeword_01",
+          "codeword": {
+            "state_space": "F2^9",
+            "bits": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          },
+          "source_state": {
+            "state_space": "F2^9",
+            "bits": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "candidate": {
+            "state_space": "F2^9",
+            "bits": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          },
+          "target_diagnosis": {
+            "input_state": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0
+            ],
+            "admissibility_status": "TRANSFORMATION_COMPATIBLE",
+            "transformation_compatibility": "COMPATIBLE",
+            "normalization_status": "NORMALIZABLE",
+            "recoverability_relevance": "RECOVERY_APPLICABLE",
+            "is_valid": false,
+            "orbit_info": {
+              "orbit_id": "000101100",
+              "member_count": 16,
+              "contains_known_valid_state": true
+            },
+            "rule_ids": [
+              "ASH-STATE-STRUCTURE-001",
+              "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+              "ASH-STATE-VALIDITY-001"
+            ],
+            "notes": [
+              "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+            ]
+          }
+        }
+      },
+      "expected_keyword": "oneOf",
+      "expected_path": []
+    },
+    {
+      "case_id": "rt_reject_phase_rule",
+      "schema_definition": "RealmTransitionRecord",
+      "value": {
+        "record_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:3",
+        "phase": "TRANSFORMATION",
+        "emission": {
+          "diagnostic_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:3",
+          "envelope": {
+            "diagnostic_kind": "TRANSITION",
+            "severity": "INFO",
+            "stage": "PROCESSING",
+            "disposition": "RESOLVED",
+            "subject_reference": "ash_state_100000000",
+            "parent_diagnostic_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:2",
+            "chain_root_reference": "test:origin:detection",
+            "rule_ids": [
+              "ASH-STATE-GENERAL"
+            ],
+            "summary": "Complete nine-coordinate XOR candidate constructed.",
+            "notes": [
+              "Target diagnosis is retained without normalization or session publication."
+            ]
+          }
+        },
+        "payload": {
+          "transition_id": "ash_codeword_01",
+          "codeword": {
+            "state_space": "F2^9",
+            "bits": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          },
+          "source_state": {
+            "state_space": "F2^9",
+            "bits": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "candidate": {
+            "state_space": "F2^9",
+            "bits": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          },
+          "target_diagnosis": {
+            "input_state": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0
+            ],
+            "admissibility_status": "TRANSFORMATION_COMPATIBLE",
+            "transformation_compatibility": "COMPATIBLE",
+            "normalization_status": "NORMALIZABLE",
+            "recoverability_relevance": "RECOVERY_APPLICABLE",
+            "is_valid": false,
+            "orbit_info": {
+              "orbit_id": "000101100",
+              "member_count": 16,
+              "contains_known_valid_state": true
+            },
+            "rule_ids": [
+              "ASH-STATE-STRUCTURE-001",
+              "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+              "ASH-STATE-VALIDITY-001"
+            ],
+            "notes": [
+              "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+            ]
+          }
+        }
+      },
+      "expected_keyword": "oneOf",
+      "expected_path": []
+    },
+    {
+      "case_id": "rt_reject_payload_union",
+      "schema_definition": "RealmTransitionRecord",
+      "value": {
+        "record_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:3",
+        "phase": "TRANSFORMATION",
+        "emission": {
+          "diagnostic_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:3",
+          "envelope": {
+            "diagnostic_kind": "TRANSITION",
+            "severity": "INFO",
+            "stage": "PROCESSING",
+            "disposition": "RESOLVED",
+            "subject_reference": "ash_state_100000000",
+            "parent_diagnostic_reference": "rt:8d0d82e73438ce424b0c824275881eb1c972fb0a82bf7ef006c6820a67c3ab10:2",
+            "chain_root_reference": "test:origin:detection",
+            "rule_ids": [
+              "ASH-CODEWORD-TRANSFORMATION-001"
+            ],
+            "summary": "Complete nine-coordinate XOR candidate constructed.",
+            "notes": [
+              "Target diagnosis is retained without normalization or session publication."
+            ]
+          }
+        },
+        "payload": {
+          "state_signature": "100000000",
+          "vertex_id": "ash_state_100000000",
+          "realm_id": "ash_state_100000000",
+          "orbit_id": "000101100"
+        }
+      },
+      "expected_keyword": "oneOf",
+      "expected_path": []
+    },
+    {
+      "case_id": "rt_reject_verified_failure",
+      "schema_definition": "DiagnosisValidation",
+      "value": {
+        "status": "VERIFIED",
+        "submitted_diagnosis": {
+          "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+          "artifact_type": "ywe_state_assessment",
+          "artifact_version": "1.0.0",
+          "outcome": "diagnosis",
+          "assessment_binding": {
+            "assessment_reference": "test:origin",
+            "original_input_reference": "test:origin:input",
+            "diagnosis_reference": "test:origin:detection"
+          },
+          "source_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "input_evidence": {
+            "original_input_reference": "test:origin:input",
+            "representation_kind": "SIGNATURE",
+            "observed_length": 9,
+            "length_unit": "CHARACTERS",
+            "preview": "100000000",
+            "preview_encoding": "TEXT",
+            "truncated": false,
+            "coordinate_observations": [],
+            "failure_code": null
+          },
+          "parsed_state": {
+            "state_space": "F2^9",
+            "bits": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "state_validity_diagnostic": {
+            "input_state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "admissibility_status": "VALID",
+            "transformation_compatibility": "COMPATIBLE",
+            "normalization_status": "ALREADY_VALID",
+            "recoverability_relevance": "NO_RECOVERY_NEEDED",
+            "is_valid": true,
+            "orbit_info": {
+              "orbit_id": "000101100",
+              "member_count": 16,
+              "contains_known_valid_state": true
+            },
+            "rule_ids": [
+              "ASH-STATE-STRUCTURE-001",
+              "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+              "ASH-STATE-VALIDITY-001"
+            ],
+            "notes": [
+              "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+            ]
+          },
+          "emitted_diagnostics": [
+            {
+              "diagnostic_reference": "test:origin:detection",
+              "envelope": {
+                "diagnostic_kind": "STATE_VALIDITY",
+                "severity": "INFO",
+                "stage": "DETECTION",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_100000000",
+                "parent_diagnostic_reference": null,
+                "chain_root_reference": "test:origin:detection",
+                "rule_ids": [
+                  "ASH-STATE-STRUCTURE-001",
+                  "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                  "ASH-STATE-VALIDITY-001"
+                ],
+                "summary": "ASH state diagnosis: VALID",
+                "notes": [
+                  "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+                ]
+              }
+            }
+          ]
+        },
+        "current_source_binding": {
+          "dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+          "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+          "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+          "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+          "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+          "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+          "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+          "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+        },
+        "current_profile_binding": {
+          "availability": "AVAILABLE",
+          "profile_id": "wrw_reference_profile",
+          "source_binding": {
+            "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+            "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+            "evidence_reference": "wrw_reference_profile:source_binding"
+          },
+          "recognized_valid_signatures": [
+            "000000001",
+            "000000010",
+            "000000100",
+            "000001000",
+            "000010000",
+            "000100000",
+            "001000000",
+            "010000000",
+            "100000000"
+          ]
+        },
+        "derived_diagnostic": {
+          "input_state": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "admissibility_status": "VALID",
+          "transformation_compatibility": "COMPATIBLE",
+          "normalization_status": "ALREADY_VALID",
+          "recoverability_relevance": "NO_RECOVERY_NEEDED",
+          "is_valid": true,
+          "orbit_info": {
+            "orbit_id": "000101100",
+            "member_count": 16,
+            "contains_known_valid_state": true
+          },
+          "rule_ids": [
+            "ASH-STATE-STRUCTURE-001",
+            "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+            "ASH-STATE-VALIDITY-001"
+          ],
+          "notes": [
+            "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+          ]
+        },
+        "failure_code": "DIAGNOSIS_MISMATCH",
+        "failed_field": null
+      },
+      "expected_keyword": "const",
+      "expected_path": [
+        "failure_code"
+      ]
+    },
+    {
+      "case_id": "rt_reject_failure_field",
+      "schema_definition": "DiagnosisValidation",
+      "value": {
+        "status": "REJECTED",
+        "submitted_diagnosis": {
+          "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+          "artifact_type": "ywe_state_assessment",
+          "artifact_version": "1.0.0",
+          "outcome": "diagnosis",
+          "assessment_binding": {
+            "assessment_reference": "test:origin",
+            "original_input_reference": "test:origin:input",
+            "diagnosis_reference": "test:origin:detection"
+          },
+          "source_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "76d59926ce9676b7584c6cdd555f50f56fceda075fa3fc8b37167fd2be43f7c9",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+            "taxonomy_source_sha256": "150b45d4c75aa053a8d5276d980b359b0ae768c85ae28896680296920402f250"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "input_evidence": {
+            "original_input_reference": "test:origin:input",
+            "representation_kind": "SIGNATURE",
+            "observed_length": 9,
+            "length_unit": "CHARACTERS",
+            "preview": "100000000",
+            "preview_encoding": "TEXT",
+            "truncated": false,
+            "coordinate_observations": [],
+            "failure_code": null
+          },
+          "parsed_state": {
+            "state_space": "F2^9",
+            "bits": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "state_validity_diagnostic": {
+            "input_state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "admissibility_status": "VALID",
+            "transformation_compatibility": "COMPATIBLE",
+            "normalization_status": "ALREADY_VALID",
+            "recoverability_relevance": "NO_RECOVERY_NEEDED",
+            "is_valid": true,
+            "orbit_info": {
+              "orbit_id": "000101100",
+              "member_count": 16,
+              "contains_known_valid_state": true
+            },
+            "rule_ids": [
+              "ASH-STATE-STRUCTURE-001",
+              "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+              "ASH-STATE-VALIDITY-001"
+            ],
+            "notes": [
+              "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+            ]
+          },
+          "emitted_diagnostics": [
+            {
+              "diagnostic_reference": "test:origin:detection",
+              "envelope": {
+                "diagnostic_kind": "STATE_VALIDITY",
+                "severity": "INFO",
+                "stage": "DETECTION",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_100000000",
+                "parent_diagnostic_reference": null,
+                "chain_root_reference": "test:origin:detection",
+                "rule_ids": [
+                  "ASH-STATE-STRUCTURE-001",
+                  "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                  "ASH-STATE-VALIDITY-001"
+                ],
+                "summary": "ASH state diagnosis: VALID",
+                "notes": [
+                  "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+                ]
+              }
+            }
+          ]
+        },
+        "current_source_binding": {
+          "dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+          "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+          "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+          "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+          "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+          "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+          "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+          "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+        },
+        "current_profile_binding": {
+          "availability": "AVAILABLE",
+          "profile_id": "wrw_reference_profile",
+          "source_binding": {
+            "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+            "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+            "evidence_reference": "wrw_reference_profile:source_binding"
+          },
+          "recognized_valid_signatures": [
+            "000000001",
+            "000000010",
+            "000000100",
+            "000001000",
+            "000010000",
+            "000100000",
+            "001000000",
+            "010000000",
+            "100000000"
+          ]
+        },
+        "derived_diagnostic": null,
+        "failure_code": "SOURCE_BINDING_MISMATCH",
+        "failed_field": "arbitrary.path"
+      },
+      "expected_keyword": "anyOf",
+      "expected_path": [
+        "failed_field"
+      ]
+    },
+    {
+      "case_id": "rt_reject_failed_prefix",
+      "schema_definition": "RealmTransitionFailure",
+      "value": {
+        "operation_reference": "rt_fixture:refused",
+        "binding": {
+          "canonical_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "contract_pins": [
+            {
+              "source_id": "REALM_ENCODER_CONTRACT",
+              "source_sha256": "b3fa0deb71ae136c712f402f2b8159b7448ef8756a884369931ab7098bc83fbb"
+            },
+            {
+              "source_id": "REALM_IDENTITY",
+              "source_sha256": "43f274d9c8c1b7269938bf8661c42e91cf020d215683cb6dfa4b340ff975cad5"
+            },
+            {
+              "source_id": "TRANSITION_REGISTRY_CONTRACT",
+              "source_sha256": "f123b02c3390253cba5f50a04e9c69e9c20771c6dc7cff5bcdc7a3c85aa6471f"
+            },
+            {
+              "source_id": "TRANSITION_SYSTEM",
+              "source_sha256": "26c456f60fbb5c847714c4a9a49cf8d11ac48ef0a7d0c127da53bd893dd527c2"
+            },
+            {
+              "source_id": "TRANSFORMATION",
+              "source_sha256": "80623862ac8dfe72bdecea670f15f4f339c0096da1f63b9058a73458eeedd88e"
+            },
+            {
+              "source_id": "CODEWORDS",
+              "source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+            },
+            {
+              "source_id": "ASH_STATE_SPACE",
+              "source_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+            },
+            {
+              "source_id": "STATE_ADMISSIBILITY",
+              "source_sha256": "5d9231331849a6359a8d8e537d0434ee78787bb14efe5da03f60e68ba3c1978e"
+            },
+            {
+              "source_id": "DIAGNOSTIC_SCHEMA",
+              "source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+            },
+            {
+              "source_id": "RULE_TAXONOMY",
+              "source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+            },
+            {
+              "source_id": "DIAGNOSTICS_MODULE_CONTRACT",
+              "source_sha256": "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+            }
+          ],
+          "policy_source_reference": "docs/design-planning/m3/realm-transition/REALM_TRANSITION_RESTRICTED_TEST_POLICY.json",
+          "policy_source_sha256": "608730096b94094a0f247011946c5e7093b82d8713b5c1122e57a5a15a6aee4d",
+          "policy_evidence_reference": "test:policy"
+        },
+        "origin": {
+          "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+          "artifact_type": "ywe_state_assessment",
+          "artifact_version": "1.0.0",
+          "outcome": "diagnosis",
+          "assessment_binding": {
+            "assessment_reference": "test:origin",
+            "original_input_reference": "test:origin:input",
+            "diagnosis_reference": "test:origin:detection"
+          },
+          "source_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "input_evidence": {
+            "original_input_reference": "test:origin:input",
+            "representation_kind": "SIGNATURE",
+            "observed_length": 9,
+            "length_unit": "CHARACTERS",
+            "preview": "100000000",
+            "preview_encoding": "TEXT",
+            "truncated": false,
+            "coordinate_observations": [],
+            "failure_code": null
+          },
+          "parsed_state": {
+            "state_space": "F2^9",
+            "bits": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "state_validity_diagnostic": {
+            "input_state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "admissibility_status": "VALID",
+            "transformation_compatibility": "COMPATIBLE",
+            "normalization_status": "ALREADY_VALID",
+            "recoverability_relevance": "NO_RECOVERY_NEEDED",
+            "is_valid": true,
+            "orbit_info": {
+              "orbit_id": "000101100",
+              "member_count": 16,
+              "contains_known_valid_state": true
+            },
+            "rule_ids": [
+              "ASH-STATE-STRUCTURE-001",
+              "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+              "ASH-STATE-VALIDITY-001"
+            ],
+            "notes": [
+              "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+            ]
+          },
+          "emitted_diagnostics": [
+            {
+              "diagnostic_reference": "test:origin:detection",
+              "envelope": {
+                "diagnostic_kind": "STATE_VALIDITY",
+                "severity": "INFO",
+                "stage": "DETECTION",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_100000000",
+                "parent_diagnostic_reference": null,
+                "chain_root_reference": "test:origin:detection",
+                "rule_ids": [
+                  "ASH-STATE-STRUCTURE-001",
+                  "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                  "ASH-STATE-VALIDITY-001"
+                ],
+                "summary": "ASH state diagnosis: VALID",
+                "notes": [
+                  "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+                ]
+              }
+            }
+          ]
+        },
+        "origin_validation": {
+          "status": "VERIFIED",
+          "submitted_diagnosis": {
+            "schema_ref": "data/schemas/m3_state_assessment_schema.json",
+            "artifact_type": "ywe_state_assessment",
+            "artifact_version": "1.0.0",
+            "outcome": "diagnosis",
+            "assessment_binding": {
+              "assessment_reference": "test:origin",
+              "original_input_reference": "test:origin:input",
+              "diagnosis_reference": "test:origin:detection"
+            },
+            "source_binding": {
+              "dependency_id": "ash_cosmological_model.f2_9.canonical",
+              "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+              "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+              "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+              "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+              "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+              "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+              "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+              "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+            },
+            "profile_binding": {
+              "availability": "AVAILABLE",
+              "profile_id": "wrw_reference_profile",
+              "source_binding": {
+                "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+                "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+                "evidence_reference": "wrw_reference_profile:source_binding"
+              },
+              "recognized_valid_signatures": [
+                "000000001",
+                "000000010",
+                "000000100",
+                "000001000",
+                "000010000",
+                "000100000",
+                "001000000",
+                "010000000",
+                "100000000"
+              ]
+            },
+            "input_evidence": {
+              "original_input_reference": "test:origin:input",
+              "representation_kind": "SIGNATURE",
+              "observed_length": 9,
+              "length_unit": "CHARACTERS",
+              "preview": "100000000",
+              "preview_encoding": "TEXT",
+              "truncated": false,
+              "coordinate_observations": [],
+              "failure_code": null
+            },
+            "parsed_state": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "state_validity_diagnostic": {
+              "input_state": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "admissibility_status": "VALID",
+              "transformation_compatibility": "COMPATIBLE",
+              "normalization_status": "ALREADY_VALID",
+              "recoverability_relevance": "NO_RECOVERY_NEEDED",
+              "is_valid": true,
+              "orbit_info": {
+                "orbit_id": "000101100",
+                "member_count": 16,
+                "contains_known_valid_state": true
+              },
+              "rule_ids": [
+                "ASH-STATE-STRUCTURE-001",
+                "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                "ASH-STATE-VALIDITY-001"
+              ],
+              "notes": [
+                "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+              ]
+            },
+            "emitted_diagnostics": [
+              {
+                "diagnostic_reference": "test:origin:detection",
+                "envelope": {
+                  "diagnostic_kind": "STATE_VALIDITY",
+                  "severity": "INFO",
+                  "stage": "DETECTION",
+                  "disposition": "RESOLVED",
+                  "subject_reference": "ash_state_100000000",
+                  "parent_diagnostic_reference": null,
+                  "chain_root_reference": "test:origin:detection",
+                  "rule_ids": [
+                    "ASH-STATE-STRUCTURE-001",
+                    "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                    "ASH-STATE-VALIDITY-001"
+                  ],
+                  "summary": "ASH state diagnosis: VALID",
+                  "notes": [
+                    "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+                  ]
+                }
+              }
+            ]
+          },
+          "current_source_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "current_profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "derived_diagnostic": {
+            "input_state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "admissibility_status": "VALID",
+            "transformation_compatibility": "COMPATIBLE",
+            "normalization_status": "ALREADY_VALID",
+            "recoverability_relevance": "NO_RECOVERY_NEEDED",
+            "is_valid": true,
+            "orbit_info": {
+              "orbit_id": "000101100",
+              "member_count": 16,
+              "contains_known_valid_state": true
+            },
+            "rule_ids": [
+              "ASH-STATE-STRUCTURE-001",
+              "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+              "ASH-STATE-VALIDITY-001"
+            ],
+            "notes": [
+              "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+            ]
+          },
+          "failure_code": null,
+          "failed_field": null
+        },
+        "action": "APPLY",
+        "failed_phase": "APPLICABILITY",
+        "failure_code": "TRANSITION_NOT_APPLICABLE",
+        "selection": {
+          "selection_kind": "IDENTIFIER",
+          "transition_id": "ash_codeword_00",
+          "codeword": null
+        },
+        "selected_definition": {
+          "transition_id": "ash_codeword_00",
+          "display_name": "ASH codeword 00",
+          "description": "Apply the complete canonical nine-coordinate XOR codeword.",
+          "codeword": {
+            "state_space": "F2^9",
+            "bits": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "applicability_mask": "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "constructed_records": [
+          {
+            "record_reference": "rt:af601afde78b19e55b7da56f1b1c619ce68ce853d0760410d996419089863285:0",
+            "phase": "VALID_SOURCE",
+            "emission": {
+              "diagnostic_reference": "rt:af601afde78b19e55b7da56f1b1c619ce68ce853d0760410d996419089863285:0",
+              "envelope": {
+                "diagnostic_kind": "TRANSITION",
+                "severity": "INFO",
+                "stage": "PROCESSING",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_100000000",
+                "parent_diagnostic_reference": "test:origin:detection",
+                "chain_root_reference": "test:origin:detection",
+                "rule_ids": [
+                  "ASH-STATE-VALIDITY-001",
+                  "ASH-CODEWORD-REGISTRY-001"
+                ],
+                "summary": "Strict module source validity evaluated.",
+                "notes": [
+                  "The current complete diagnosis and profile govern valid source admission."
+                ]
+              }
+            },
+            "payload": {
+              "origin_assessment_reference": "test:origin",
+              "verification_status": "VERIFIED",
+              "admissibility_status": "VALID",
+              "is_valid": true
+            }
+          },
+          {
+            "record_reference": "rt:af601afde78b19e55b7da56f1b1c619ce68ce853d0760410d996419089863285:1",
+            "phase": "SELECTION",
+            "emission": {
+              "diagnostic_reference": "rt:af601afde78b19e55b7da56f1b1c619ce68ce853d0760410d996419089863285:1",
+              "envelope": {
+                "diagnostic_kind": "TRANSITION",
+                "severity": "INFO",
+                "stage": "PROCESSING",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_100000000",
+                "parent_diagnostic_reference": "rt:af601afde78b19e55b7da56f1b1c619ce68ce853d0760410d996419089863285:0",
+                "chain_root_reference": "test:origin:detection",
+                "rule_ids": [
+                  "ASH-CODEWORD-SELECTION-001",
+                  "ASH-CODEWORD-STRUCTURE-001"
+                ],
+                "summary": "Canonical transition selection evaluated.",
+                "notes": [
+                  "Selection uses exact source-order identifiers or a complete canonical codeword."
+                ]
+              }
+            },
+            "payload": {
+              "selection": {
+                "selection_kind": "IDENTIFIER",
+                "transition_id": "ash_codeword_00",
+                "codeword": null
+              },
+              "transition_id": "ash_codeword_00",
+              "codeword": {
+                "state_space": "F2^9",
+                "bits": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "status": "SELECTED",
+              "failure_code": null
+            }
+          }
+        ]
+      },
+      "expected_keyword": "oneOf",
+      "expected_path": []
+    }
+  ]
+}

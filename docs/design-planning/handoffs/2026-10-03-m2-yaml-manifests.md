@@ -1,10 +1,10 @@
 # YWE Session Handoff — Verified N3 and Remaining M3
 
 **Date:** October 11, 2026
-**Handoff checkpoint:** autonomous-m3-10
-**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-47, section 17; continuation boundary section 16.5.
+**Handoff checkpoint:** autonomous-m3-11
+**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-48, section 18; continuation boundary section 16.5.
 **Direction:** Complete, verify and owner-publish M3, then pause until explicit owner go-ahead before M4. Preserve continuous README publication; bounded N3 authority remains section 13 and the latest owner boundary is section 16.5.
-**Inspected project snapshot:** owner-published boundary `d80785a3aeb1845521bf141237dc1116d211233a`, with exact Git/API/README readback; verified runtime remains `a345d1be3e2d635cb79104c153d2628b090ccd88`.
+**Inspected project snapshot:** owner-published module contracts `9c19c6beb6eff138b7fb1d98a7c9eaa552f08d71`, with exact Git/API/README readback; preceding verified runtime remains `a345d1be3e2d635cb79104c153d2628b090ccd88`. Local source commit `171eda7` and the current runtime candidate require combined clean verification before publication.
 **Method:** Raven Forge Development v0.7.0 at `87409bc36fb9d4782eab02189adb184f2b3962a7`.
 
 This is the current continuation. Earlier preparation receipts below remain
@@ -14,21 +14,33 @@ superseded history with their original scope and evidence preserved.
 
 - M0–M2 accepted; M3 active; all five M3 exits remain open; M4 planned and platform work deferred through M10.
 - Adopted N3 reference lifecycle at a345d1b passes all 36 applicable repository checks and 1151 unit tests from its exact clean, unfiltered offline checkout, with zero failures/advisories and no checkout changes. Report/log/revision hashes and runtime test owners are in Project Record sections 16.3–16.4.
-- All 930 fixture bindings and 382 intended rejections pass; earlier 750 bindings remain preserved. Scoped 125 session controls include genuine Windows protected-store paired export and concurrent provider halt. Physical crash/power-loss and product qualification remain unverified.
+- At the N3 checkpoint, all 930 fixture bindings and 382 intended rejections pass; earlier 750 bindings remain preserved. Scoped 125 session controls include genuine Windows protected-store paired export and concurrent provider halt. Physical crash/power-loss and product qualification remain unverified.
 - Exact a345 runtime CI 38175922165 succeeds on Ubuntu and Windows: 36 checks and 1151 tests run each; Ubuntu 1109 pass/42 explicit native skips, Windows 1151 pass/no skips. Actual jobs/full logs are retrieved.
-- Wiki 78d037e is published and remotely verified for exact source d80785a: all 47 pages match reviewed bytes, 32 generated surfaces and 15 preserved manual pages.
-- REQ0045–0048 / ADR0036–0039 source/RT/TA/capture contracts and finite inventories are adopted before dependent code. Actual source migration, four pure modules and their complete capture remain the next implementation; current-source N3 and planner/emitter policy remain required M3 debt.
+- Wiki f31ef00 is published and remotely verified for exact source 9c19c6b: all 47 pages match reviewed bytes, 32 generated surfaces and 15 preserved manual pages.
+- Reviewed module instructions were issued before dependent code. The source migration is applied, four pure owners are implemented and complete capture integration is in progress. ADR0040 adopts the explicit 17-branch support alias wrapper before projection; independent structural review passes 68 negative controls and all six reservation bounds.
+- TA owner-fix/legacy/module-capture controls pass 49 tests; the Diagnostics regression passes 111, including actual four-producer protected maximum capture and paired export. Root independently verifies original-producer identity, copied-producer refusal and hostile-value rejection without caller hooks. The earlier RT/N1/independent Recovery command passes 96; the later runner constructor suite passes 28 and its final nested hostile control passes one. The actual exhaustive registry control passes all 8,192 pairs through 16,384 applications in 850.835 seconds, with independently derived expectations and repeated complete canonical bytes. Root verifies all eight final frozen paths and 15 indexed artifacts. Full unfiltered clean checks, final diff and exact publication readback remain required for the combined candidate.
+- Root adopts 146 additional capture bindings after independently reviewing all indexed bytes and replaying six wire cases, 21 rejection controls and 110 safe wrappers. The current complete offline inventory passes 1,367 bindings and 482 intended rejections across 222 schemas; all four quality-debt categories remain empty. Prior fixture bodies and outcomes are preserved.
+- Exact contract checkpoint CI 38179664940 at 9c19c6b now succeeds on Ubuntu and Windows. This snapshot does not establish test counts or verification of the later runtime candidate.
+- Current-source N3 policy/source pairing, complete planner/emitter business semantics, remaining Core contracts and all M3 conformance obligations remain open. No M3 exit is accepted by the current bounded implementation.
 - Current M3 execution/publication/admin bypass and no AI/coauthor attribution remain authorized. After M3 acceptance and publication, pause the goal; explicit owner go-ahead is required before any M4 work.
 
 ## Current checkpoint
 
-**Current step:** N3 exact-revision local and both-OS execution verified; next
-M3 module contracts adopted before source/runtime migration.
+**Current step:** Exhaustive actual transition verification and the third-vector
+schema/test consumer corrections are complete. The combined correction passes
+60 focused tests with historical routes preserved. The unpublished b4e5b7c clean
+run completes 36 checks: 35 pass and the unit check reports two failures among
+1,232 tests. Corrected LF policy hashing and all 31 non-N2 rule refusal controls
+pass all 66 tests in the affected areas. Freeze the corrected combined module
+candidate and run every normal check from a fresh exact clean checkout. The
+superseded clean attempt at unpublished 467f66f was deliberately stopped before
+its unit phase and establishes no complete repository result.
 
-**Next action:** Verify/publish this bounded contract adoption; issue reviewed
-external module instructions and apply the exact three-page source extension.
-Implement/verify shared diagnosis validation, strict realm/transitions, bounded
-topology/five axioms and complete safe capture. Then adopt complete planner/emitter
+**Next action:** Verify strict realm/transitions, topology/five axioms and complete
+safe capture with exact first/final receipts, concurrency, failure and native
+paired export controls. Governed inventories are refreshed; run the complete clean
+offline repository suite and owner-publish verified code and README/wiki progress.
+Then adopt complete planner/emitter
 business semantics and coherent current-source lifecycle integration. Keep all
 M3 exit criteria open until their actual full evidence passes. After M3 acceptance
 and GitHub publication, pause and wait; do not start M4 without owner go-ahead.
@@ -36,7 +48,7 @@ and GitHub publication, pause and wait; do not start M4 without owner go-ahead.
 **Needed from owner:** Nothing during M3. Explicit go-ahead after the M3
 completion/publication checkpoint is required to start M4.
 
-**Saved at:** This handoff and Project Record planning-47; containing commit and
+**Saved at:** This handoff and Project Record planning-48; containing commit and
 readback establish this record’s save receipt. Its own verification/publication
 results are not predeclared. The goal remains active for M3 and will pause after its verified publication.
 

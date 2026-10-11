@@ -7,7 +7,7 @@ source loading belong to StateModel and its explicit collaborators.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 import math
 import re
 from typing import ClassVar
@@ -55,9 +55,22 @@ CURRENT_CANONICAL_BINDING_FIELDS: tuple[tuple[str, str], ...] = (
     ("diagnostic_source_sha256", "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7"),
     ("taxonomy_source_sha256", "150b45d4c75aa053a8d5276d980b359b0ae768c85ae28896680296920402f250"),
 )
+# Separate reviewed module vector; CURRENT keeps its historical N3 meaning.
+MODULE_CANONICAL_BINDING_FIELDS: tuple[tuple[str, str], ...] = (
+    ("dependency_id", "ash_cosmological_model.f2_9.canonical"),
+    ("aggregate_sha256", "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400"),
+    ("state_space_sha256", "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"),
+    ("codeword_source_sha256", "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"),
+    ("validity_source_sha256", "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e"),
+    ("classification_source_sha256", "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff"),
+    ("recovery_source_sha256", "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd"),
+    ("diagnostic_source_sha256", "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"),
+    ("taxonomy_source_sha256", "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"),
+)
 CANONICAL_BINDING_BASELINES: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
     ("LEGACY_C78", CANONICAL_BINDING_FIELDS),
     ("N3_LIFECYCLE", CURRENT_CANONICAL_BINDING_FIELDS),
+    ("M3_MODULES", MODULE_CANONICAL_BINDING_FIELDS),
 )
 DIAGNOSTIC_ROWS: tuple[tuple[str, str, str, str, bool], ...] = (
     ("VALID", "COMPATIBLE", "ALREADY_VALID", "NO_RECOVERY_NEEDED", True),
@@ -85,6 +98,17 @@ RULE_IDS = ASSESSMENT_RULE_IDS | frozenset((
     "ASH-CONTAINMENT-TRIGGER-003", "ASH-CONTAINMENT-TRIGGER-004",
     "ASH-HALT-TRIGGER-001", "ASH-HALT-TRIGGER-002", "ASH-HALT-TRIGGER-003",
     "ASH-HALT-TRIGGER-004", "ASH-HALT-TRIGGER-005",
+    "ASH-STATE-IDENTITY-001", "ASH-CODEWORD-REGISTRY-001",
+    "ASH-CODEWORD-SELECTION-001", "ASH-CODEWORD-APPLICABILITY-001",
+    "ASH-CODEWORD-TRANSFORMATION-001", "ASH-TOPOLOGY-ADMISSION-001",
+    "ASH-TOPOLOGY-STRUCTURE-001", "ASH-TOPOLOGY-EXPANSION-001",
+    "ASH-TOPOLOGY-ORDER-001", "ASH-TOPOLOGY-LINEAGE-001",
+    "ASH-AXIOM-SUBJECT-001", "ASH-AXIOM-RELATION-001",
+    "ASH-AXIOM-COMPRESSION-001", "ASH-AXIOM-SCALE-001",
+    "ASH-AXIOM-ERASURE-001", "ASH-AXIOM-SELFREFERENCE-001",
+    "ASH-AXIOM-CONJUNCTION-001", "ASH-GENERATION-PLAN-001",
+    "ASH-GENERATION-BOUNDARY-001", "ASH-GENERATION-TRACEABILITY-001",
+    "ASH-GENERATION-EMISSION-001", "ASH-GENERATION-PLANFIDELITY-001",
 ))
 INPUT_FAILURE_CODES = frozenset((
     "STATE_WIDTH", "STATE_COORDINATE_TYPE", "STATE_COORDINATE_VALUE",
@@ -711,9 +735,10 @@ class DiagnosticEnvelope:
 
     def __post_init__(self) -> None:
         code = "DIAGNOSTIC_ENVELOPE_INVALID"
-        _choice(self.diagnostic_kind, ("STATE_VALIDITY", "RECOVERY", "FALLBACK", "CONTAINMENT", "SAFE_HALT"), code, "diagnostic_kind")
+        _choice(self.diagnostic_kind, ("STATE_VALIDITY", "RECOVERY", "FALLBACK", "CONTAINMENT", "SAFE_HALT",
+            "REALM_ENCODING", "TRANSITION", "TOPOLOGY", "AXIOM", "GENERATION_PLAN", "ARTIFACT_EMISSION"), code, "diagnostic_kind")
         _choice(self.severity, ("INFO", "WARNING", "ERROR", "CRITICAL"), code, "severity")
-        _choice(self.stage, ("DETECTION", "CLASSIFICATION", "RECOVERY", "ESCALATION", "TERMINAL"), code, "stage")
+        _choice(self.stage, ("DETECTION", "CLASSIFICATION", "PROCESSING", "RECOVERY", "ESCALATION", "TERMINAL"), code, "stage")
         _choice(self.disposition, ("RESOLVED", "PENDING", "BLOCKED", "ESCALATED", "TERMINAL"), code, "disposition")
         _identifier(self.subject_reference, code, "subject_reference", reference=True)
         if self.parent_diagnostic_reference is not None:
@@ -984,3 +1009,82 @@ class DiagnosticCaptureFailure(_StatePacket):
                 "system_context": None if self.system_context is None else self.system_context.to_record(),
                 "classification_evidence": (None if self.classification_evidence is None
                                             else self.classification_evidence.to_record())}
+
+
+DIAGNOSIS_FAILURE_CODES = (
+    "SOURCE_BINDING_MISMATCH", "PROFILE_BINDING_MISMATCH", "INPUT_BINDING_MISMATCH",
+    "DIAGNOSIS_MISMATCH", "DIAGNOSIS_ENVELOPE_MISMATCH",
+)
+DIAGNOSIS_FAILURE_FIELDS = (
+    "origin_diagnosis.source_binding", "origin_diagnosis.profile_binding",
+    "origin_diagnosis.input_evidence", "origin_diagnosis.parsed_state",
+    "origin_diagnosis.assessment_binding", "origin_diagnosis.emitted_diagnostics",
+    "origin_diagnosis.emitted_diagnostics[0].diagnostic_reference",
+    *("origin_diagnosis.state_validity_diagnostic." + name for name in (
+        "input_state", "admissibility_status", "transformation_compatibility",
+        "normalization_status", "recoverability_relevance", "is_valid", "orbit_info", "rule_ids", "notes")),
+    *("origin_diagnosis.emitted_diagnostics[0].envelope." + name for name in (
+        "diagnostic_kind", "severity", "stage", "disposition", "subject_reference",
+        "parent_diagnostic_reference", "chain_root_reference", "rule_ids", "summary", "notes")),
+)
+
+
+def _diagnosis_record(value):
+    """Serialize a closed, fresh field copy without dispatching submitted hooks."""
+    from .state_model import _revalidate_diagnosis_graph
+    _revalidate_diagnosis_graph(value)
+
+    def copy_fields(item):
+        kind = type(item)
+        if item is None or kind in (str, int, bool):
+            return item
+        if kind is tuple:
+            return tuple(copy_fields(child) for child in item)
+        if kind is frozenset:
+            return frozenset(copy_fields(child) for child in item)
+        owned = object.__new__(kind)
+        for field in fields(kind):
+            object.__setattr__(owned, field.name, copy_fields(getattr(item, field.name)))
+        return owned
+
+    owned = copy_fields(value)
+    return type(owned).to_record(owned)
+
+
+@dataclass(frozen=True, slots=True)
+class DiagnosisValidation:
+    """Pure, current-binding comparison; this receipt is not a capture ACK [YWE-REQ-0046]."""
+    status: str
+    submitted_diagnosis: StateDiagnosis
+    current_source_binding: CanonicalAshBinding
+    current_profile_binding: ProfileBinding
+    derived_diagnostic: StateValidityDiagnostic | None
+    failure_code: str | None
+    failed_field: str | None
+
+    def __post_init__(self) -> None:
+        from .state_model import _diagnosis_validation_fields
+        _choice(self.status, ("VERIFIED", "REJECTED"), "DIAGNOSTIC_ROW_INVALID", "status")
+        derived, code, field = _diagnosis_validation_fields(
+            self.submitted_diagnosis, self.current_source_binding, self.current_profile_binding)
+        if self.failure_code is not None:
+            _choice(self.failure_code, DIAGNOSIS_FAILURE_CODES, "DIAGNOSTIC_ROW_INVALID", "failure_code")
+            _choice(self.failed_field, DIAGNOSIS_FAILURE_FIELDS, "DIAGNOSTIC_ROW_INVALID", "failed_field")
+        if self.derived_diagnostic is not None:
+            _require_type(self.derived_diagnostic, StateValidityDiagnostic, "DIAGNOSTIC_ROW_INVALID", "derived_diagnostic")
+            from .state_model import _revalidate_diagnosis_graph
+            _revalidate_diagnosis_graph(self.derived_diagnostic)
+        expected = ("VERIFIED" if code is None else "REJECTED", derived, code, field)
+        if (self.status, self.derived_diagnostic, self.failure_code, self.failed_field) != expected:
+            raise StateContractError("DIAGNOSTIC_ROW_INVALID", "diagnosis_validation")
+
+    def to_record(self) -> dict[str, object]:
+        DiagnosisValidation.__post_init__(self)
+        return {
+            "status": self.status,
+            "submitted_diagnosis": _diagnosis_record(self.submitted_diagnosis),
+            "current_source_binding": _diagnosis_record(self.current_source_binding),
+            "current_profile_binding": _diagnosis_record(self.current_profile_binding),
+            "derived_diagnostic": None if self.derived_diagnostic is None else _diagnosis_record(self.derived_diagnostic),
+            "failure_code": self.failure_code, "failed_field": self.failed_field,
+        }

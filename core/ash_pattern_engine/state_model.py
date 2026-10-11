@@ -6,7 +6,7 @@ contract define the mathematics, branch order and bounded representation policy.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 from decimal import Decimal, DecimalException
 import hashlib
 import json
@@ -313,6 +313,21 @@ class StateModel:
     def diagnose(self, candidate, *, diagnostic_context):
         return self._run(candidate, diagnostic_context, None, None)
 
+    def validate_diagnosis(self, submitted):
+        """Revalidate retained diagnosis values without injected codec, capture or callbacks [YWE-REQ-0046]."""
+        if type(self) is not StateModel:
+            raise values.StateContractError("CANONICAL_BINDING_INVALID", "state_model")
+        try:
+            canonical = StateModel.canonical_binding.fget(self)
+            profile = StateModel.profile_binding.fget(self)
+        except AttributeError:
+            raise values.StateContractError("CANONICAL_BINDING_INVALID", "state_model") from None
+        derived, code, field = _diagnosis_validation_fields(submitted, canonical, profile)
+        return values.DiagnosisValidation(
+            "VERIFIED" if code is None else "REJECTED", submitted, canonical, profile,
+            derived, code, field,
+        )
+
     def _normalization_operations(self):
         from .normalization import _NormalizationOperations
 
@@ -585,7 +600,7 @@ class StateModel:
                 for index, bit in enumerate(state.bits)
             ), failure_code=None,
         )
-        return self._diagnose(DecodedInput(state, observation))
+        return StateModel._diagnose(self, DecodedInput(state, observation))
 
     def validate_resolution_target(self, target, *, prospective_context):
         """Compute a pure target witness for prospective clear-context resolution."""
@@ -751,20 +766,21 @@ class StateModel:
 
     def _diagnose(self, decoded):
         state = decoded.state
+        profile_binding = StateModel.profile_binding.fget(self)
         notes = []
         orbit_info = None
         if state is None:
             status = "UNCLASSIFIED"
             input_state = values.RejectedCandidateEvidence(decoded.input_evidence)
             notes.append(f"Candidate representation rejected: {decoded.input_evidence.failure_code}.")
-        elif type(self.profile_binding) is values.UnavailableProfileBinding:
+        elif type(profile_binding) is values.UnavailableProfileBinding:
             status = "UNCLASSIFIED"
             input_state = state
             notes.append("Authoritative validity-profile data is unavailable; orbit membership was not inferred.")
         else:
             input_state = state
-            members = self._orbit(state)
-            recognized = self.profile_binding.profile.recognized_valid_states
+            members = StateModel._orbit(state)
+            recognized = profile_binding.profile.recognized_valid_states
             contains = any(values.AshState(tuple(int(bit) for bit in signature)) in recognized for signature in members)
             status = "VALID" if state in recognized else "TRANSFORMATION_COMPATIBLE" if contains else "TRANSFORMATION_INCOMPATIBLE"
             orbit_info = values.OrbitInfo(members[0], 16, contains)
@@ -821,6 +837,145 @@ class StateModel:
             **common, failure_code="PREDICATE_NOT_EVALUATED", failed_predicate=name,
             system_context=context, classification_evidence=evidence,
         )
+
+
+def _revalidate_diagnosis_graph(value, ancestors=None, depth=0):
+    """Closed structural walk owned by StateModel and its values, never user dispatch."""
+    if ancestors is None:
+        ancestors = set()
+    kind = type(value)
+    if value is None or any(kind is scalar for scalar in (str, int, bool)):
+        return
+    if depth > 16 or id(value) in ancestors:
+        raise values.StateContractError("DIAGNOSTIC_ROW_INVALID", "origin_diagnosis")
+    owned = (values.AshState, values.CanonicalAshBinding, values.ProfileSourceBinding,
+             values.ValidityProfile, values.UnavailableValidityProfileEvidence,
+             values.AvailableProfileBinding, values.UnavailableProfileBinding,
+             values.AssessmentBinding, values.CoordinateObservation, values.InputEvidence,
+             values.RejectedCandidateEvidence, values.OrbitInfo, values.StateValidityDiagnostic,
+             values.DiagnosticEnvelope, values.DiagnosticEmission, values.StateDiagnosis)
+    if not any(kind is cls for cls in owned) and kind is not tuple and kind is not frozenset:
+        raise values.StateContractError("DIAGNOSTIC_ROW_INVALID", "origin_diagnosis")
+    ancestors.add(id(value))
+    try:
+        if kind is tuple or kind is frozenset:
+            if len(value) > 512:
+                raise values.StateContractError("DIAGNOSTIC_ROW_INVALID", "origin_diagnosis")
+            for child in value:
+                _revalidate_diagnosis_graph(child, ancestors, depth + 1)
+        else:
+            immutable_fields = {
+                values.AshState: (("bits", tuple),),
+                values.ValidityProfile: (("recognized_valid_states", frozenset),),
+                values.InputEvidence: (("coordinate_observations", tuple),),
+                values.StateValidityDiagnostic: (("rule_ids", tuple), ("notes", tuple)),
+                values.DiagnosticEnvelope: (("rule_ids", tuple), ("notes", tuple)),
+                values.StateDiagnosis: (("emitted_diagnostics", tuple),),
+            }
+            for name, container in immutable_fields.get(kind, ()):
+                if type(getattr(value, name, None)) is not container:
+                    raise values.StateContractError("DIAGNOSTIC_ROW_INVALID", "origin_diagnosis")
+            for field in fields(kind):
+                try:
+                    child = getattr(value, field.name)
+                except AttributeError:
+                    raise values.StateContractError("DIAGNOSTIC_ROW_INVALID", "origin_diagnosis") from None
+                _revalidate_diagnosis_graph(child, ancestors, depth + 1)
+            # The packet's old guard dispatches instance helpers. Its associations
+            # are compared below, after all exact child construction guards.
+            if kind is not values.StateDiagnosis:
+                kind.__post_init__(value)
+    finally:
+        ancestors.remove(id(value))
+
+
+def _diagnosis_validation_fields(submitted, canonical, profile):
+    """Pure comparison fields used by the port and its value constructor [YWE-REQ-0046]."""
+    if type(submitted) is not values.StateDiagnosis:
+        raise values.StateContractError("DIAGNOSTIC_ROW_INVALID", "origin_diagnosis")
+    if type(canonical) is not values.CanonicalAshBinding:
+        raise values.StateContractError("CANONICAL_BINDING_INVALID", "canonical_binding")
+    if not any(type(profile) is cls for cls in (values.AvailableProfileBinding, values.UnavailableProfileBinding)):
+        raise values.StateContractError("PROFILE_BINDING_INVALID", "profile_binding")
+    for value in (canonical, profile, submitted):
+        _revalidate_diagnosis_graph(value)
+    root_types = (("source_binding", (values.CanonicalAshBinding,)),
+                  ("profile_binding", (values.AvailableProfileBinding, values.UnavailableProfileBinding)),
+                  ("input_evidence", (values.InputEvidence,)),
+                  ("assessment_binding", (values.AssessmentBinding,)),
+                  ("state_validity_diagnostic", (values.StateValidityDiagnostic,)))
+    for name, allowed in root_types:
+        if not any(type(getattr(submitted, name)) is cls for cls in allowed):
+            raise values.StateContractError("DIAGNOSTIC_ROW_INVALID", "origin_diagnosis")
+    if any(rule not in values.ASSESSMENT_RULE_IDS for rule in submitted.state_validity_diagnostic.rule_ids):
+        raise values.StateContractError("DIAGNOSTIC_ROW_INVALID", "origin_diagnosis")
+    if any(type(row) is not values.DiagnosticEmission for row in submitted.emitted_diagnostics):
+        raise values.StateContractError("DIAGNOSTIC_ROW_INVALID", "origin_diagnosis")
+    for row in submitted.emitted_diagnostics:
+        if any(rule not in values.ASSESSMENT_RULE_IDS for rule in row.envelope.rule_ids):
+            raise values.StateContractError("DIAGNOSTIC_ROW_INVALID", "origin_diagnosis")
+    if submitted.source_binding != canonical:
+        return None, "SOURCE_BINDING_MISMATCH", "origin_diagnosis.source_binding"
+    if submitted.profile_binding != profile:
+        return None, "PROFILE_BINDING_MISMATCH", "origin_diagnosis.profile_binding"
+    evidence = submitted.input_evidence
+    state = submitted.parsed_state
+    if submitted.assessment_binding.original_input_reference != evidence.original_input_reference:
+        return None, "INPUT_BINDING_MISMATCH", "origin_diagnosis.input_evidence"
+    if state is not None and type(state) is not values.AshState:
+        raise values.StateContractError("DIAGNOSTIC_ROW_INVALID", "origin_diagnosis.parsed_state")
+    if (state is None) != (evidence.failure_code is not None):
+        return None, "INPUT_BINDING_MISMATCH", "origin_diagnosis.parsed_state"
+    # A complete preview permits owned decoding of exactly retained bytes/text.
+    # Truncated previews never certify the discarded original lexeme.
+    if evidence.representation_kind in ("SIGNATURE", "RAW_JSON"):
+        width = 64 if evidence.representation_kind == "SIGNATURE" else 32
+        preview_length = len(evidence.preview) if evidence.representation_kind == "SIGNATURE" else len(evidence.preview) // 2
+        if preview_length != min(evidence.observed_length, width) or evidence.truncated != (evidence.observed_length > width):
+            return None, "INPUT_BINDING_MISMATCH", "origin_diagnosis.input_evidence"
+        if not evidence.truncated:
+            retained = evidence.preview if evidence.representation_kind == "SIGNATURE" else bytes.fromhex(evidence.preview)
+            decoded = StateInputCodec.decode(StateInputCodec(), retained,
+                       original_input_reference=evidence.original_input_reference)
+            if decoded.state != state or decoded.input_evidence.failure_code != evidence.failure_code:
+                return None, "INPUT_BINDING_MISMATCH", "origin_diagnosis.input_evidence"
+    if state is not None and evidence.representation_kind in ("BIT_SEQUENCE", "STATE_RECORD"):
+        observed = evidence.coordinate_observations
+        if len(observed) != 9:
+            return None, "INPUT_BINDING_MISMATCH", "origin_diagnosis.input_evidence"
+        for index, coordinate in enumerate(observed):
+            bit = state.bits[index]
+            matches = (coordinate.index == index and
+                       (coordinate.scalar_kind == "INTEGER_BIT" and coordinate.value == bit or
+                        coordinate.scalar_kind == "FINITE_FLOAT" and float.fromhex(coordinate.value) == bit))
+            if not matches:
+                return None, "INPUT_BINDING_MISMATCH", "origin_diagnosis.input_evidence"
+    pure_model = StateModel(profile, canonical, None)
+    expected = StateModel._diagnose(pure_model, DecodedInput(state, evidence))
+    observed = submitted.state_validity_diagnostic
+    for field in (*_SEMANTIC_FIELDS, "rule_ids", "notes"):
+        if getattr(observed, field) != getattr(expected, field):
+            return expected, "DIAGNOSIS_MISMATCH", "origin_diagnosis.state_validity_diagnostic." + field
+    emissions = submitted.emitted_diagnostics
+    if type(emissions) is not tuple or len(emissions) != 1 or type(emissions[0]) is not values.DiagnosticEmission:
+        return expected, "DIAGNOSIS_ENVELOPE_MISMATCH", "origin_diagnosis.emitted_diagnostics"
+    emission = emissions[0]
+    root = submitted.assessment_binding.diagnosis_reference
+    if emission.diagnostic_reference != root:
+        return expected, "DIAGNOSIS_ENVELOPE_MISMATCH", "origin_diagnosis.emitted_diagnostics[0].diagnostic_reference"
+    status = expected.admissibility_status
+    impact = (("INFO", "RESOLVED") if status == "VALID" else
+              ("WARNING", "PENDING") if status == "TRANSFORMATION_COMPATIBLE" else
+              ("ERROR", "BLOCKED"))
+    subject = "ash_state_" + values.AshState.signature.fget(state) if state is not None else evidence.original_input_reference
+    wanted = dict(diagnostic_kind="STATE_VALIDITY", severity=impact[0], stage="DETECTION",
+                  disposition=impact[1], subject_reference=subject, parent_diagnostic_reference=None,
+                  chain_root_reference=root, rule_ids=_DIAGNOSIS_RULES,
+                  summary="ASH state diagnosis: " + status, notes=expected.notes)
+    for field, value in wanted.items():
+        if getattr(emission.envelope, field) != value:
+            return expected, "DIAGNOSIS_ENVELOPE_MISMATCH", "origin_diagnosis.emitted_diagnostics[0].envelope." + field
+    return expected, None, None
 
 
 def wrw_profile_binding():
