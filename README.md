@@ -115,7 +115,14 @@ required acceptance evidence.
 See the roadmap inventories of [completed or verified foundations](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#completed-or-verified-foundations), [material work remaining](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#material-work-remaining), and the [15-subsystem maturity matrix](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#subsystem-maturity-matrix).
 <!-- roadmap-status:end -->
 
-### Development checkpoint — 2026-10-04
+### Development checkpoint — 2026-10-11
+
+The active assignment is N3 session lifecycle under the October 9 autonomous
+direction: admission, controlled state publication, actual containment and
+resolution, safe halt, and bounded diagnostic evidence. Contract design is in
+progress; lifecycle implementation and acceptance are still outstanding. The
+README checkpoint is updated with each published increment so it records the
+work completed and the next step. M0–M2 remain accepted and M3 remains active.
 
 M2 is complete. Its immutable [acceptance record](data/governance/m2_acceptance_evidence.json)
 and [acceptance document](docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md)
@@ -229,8 +236,15 @@ The first complete clean offline run at
 seconds, with no advisories or checkout changes. Its one blocking failure was the
 Phase 10 guard's missing explicit registration for the new source compatibility
 test. That exact test path is now registered under the existing reviewed-test
-policy, and the guard's refusal controls remain active. Replacement complete clean
-acceptance is pending. Four genuine committed-source Windows host controls also
+policy, and the guard's refusal controls remain active. Its replacement at
+`13df7079f911b8f6c56e7be263b0de263b209c48` completed the original clean,
+unfiltered offline run: 36 checks passed with zero blocking failures or advisories,
+1,006 unit tests passed in 1035.712 seconds, and the checkout stayed clean.
+The whole run took 1316.797 seconds. [CI for that exact implementation](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37254719493)
+also passed all 36 checks on Ubuntu and Windows. Ubuntu's unit result records
+37 platform skips; Windows records none. These results were read back on
+October 11 and cover the source compatibility implementation at that revision.
+Four genuine committed-source Windows host controls also
 passed, including actual legacy/current source capture, unsafe-parent refusal and
 both Recovery collector integration methods. These results retain their distinct
 scopes. Historical source evidence remains intact.
@@ -253,13 +267,15 @@ in progress and N3 remains unimplemented. The sealed package stayed external to
 this repository; this checkpoint is a documentation save under the separately
 authorized record-publication authority.
 
-The next session contract is under review. Later containment requires a separate
-decision bridge for its actual cause; the resulting four-record lifecycle needs a
-recomputed evidence bound. The review also covers terminal publication freshness,
-bounded refused admissions and retention of the actual final completion response.
-Full N3 session, containment and halt behavior still needs its adopted contract
-and implementation. Generation's topology, axioms and complete planner/emitter
-exchange are being specified against the canonical source before implementation.
+The current N3 contract work includes exact session ownership and revision checks,
+source admission before effects, real containment and authorized resolution,
+all five canonical halt triggers, once-only completion, and a closed evidence
+budget. A resolution must preserve the original containment chain and record its
+actual state change; it cannot fabricate a normal assessment while still contained.
+The complete contract and its resource proof will be committed before dependent
+implementation. Historical external proposal files are engineering inputs and
+do not establish adoption or runtime acceptance. Generation's topology, axioms
+and complete planner/emitter exchange remain later M3 work.
 
 Next after this slice are session admission and state commit, actual containment
 and safe halt, remaining canonical Diagnostics producers and generation semantics.
@@ -267,7 +283,7 @@ M3 remains in progress; its five exit criteria and platform authorization remain
 unchanged.
 Platform products remain deferred until M10 acceptance.
 
-Follow the [current development record](docs/design-planning/Project_Record.md#10-checkpoint)
+Follow the [current development record](docs/design-planning/Project_Record.md#14-october-11-reconciliation-and-source-execution-readback)
 and [M3 roadmap](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#m3--complete-core-deterministic-semantics-and-the-reference-oracle)
 for the active work and its acceptance boundaries.
 
@@ -665,7 +681,7 @@ python3 scripts/check_specification_roadmap.py --print-readme-status
 
 ## Contributing
 
-This project is open source under Apache License, Version 2.0. You are welcome to use, modify, and redistribute the code under that license.
+This project is dual-licensed. Non-commercial, academic, and personal use is free under [LICENSE](LICENSE). Commercial use requires a separate written license from the copyright holder.
 
 Outside contributions to this repository are not accepted. Pull requests and collaboration requests will not be reviewed or merged. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -673,5 +689,5 @@ Outside contributions to this repository are not accepted. Pull requests and col
 
 Copyright 2026 James Daley
 
-This project is licensed under the Apache License, Version 2.0.
+This project is dual-licensed. Non-commercial, academic, and personal use is free. Commercial use requires a separate written license.
 See the [LICENSE](LICENSE) file for the full terms.

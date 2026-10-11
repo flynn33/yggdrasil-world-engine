@@ -1,17 +1,17 @@
 # YWE Session Handoff — Windows Source-Closure Package
 
-**Date:** October 9, 2026
-**Handoff checkpoint:** autonomous-n3-1
-**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-38, section 13.
+**Date:** October 11, 2026
+**Handoff checkpoint:** autonomous-n3-2
+**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-39, section 14; autonomous authority remains section 13.
 **Direction:** YWE-DIRECTION-20261009-AUTONOMOUS-N3 (package `YWE-M3-N3-AUTONOMOUS-001` r1).
-**Inspected project snapshot:** `6d3ae6d182553f9a6cb925ec5a79bea13a812156`.
+**Inspected project snapshot:** local `f8c468b5e48d453705a544fdfc28623dd53c5c05`, remote `c5a165ee57049355bf2fd17bf841ab826e335af0`; preserve both through a normal merge.
 **Method:** Raven Forge Development v0.7.0 at `87409bc36fb9d4782eab02189adb184f2b3962a7`.
 
 This entry is the current continuation. The package-preparation-3 entry below is preserved as superseded history; its receipt facts remain valid but its "Next action" no longer directs the work.
 
 ## Current state
 
-- Source-closure checkpoint evidence published at `6d3ae6d` (Project Record section 12). Inherited result is representation-matched only: `acceptance=false`, `provenance_review_required=true`; it is not N3 acceptance and is not relabeled as such.
+- Original source implementation `13df7079` has directly observed complete clean offline execution (36/36 checks, 1,006 tests in 1035.712 seconds) and successful exact-revision Ubuntu/Windows CI. Section 12's separate external representation-only review retains `acceptance=false`, `provenance_review_required=true`. Neither accepts N3 or M3.
 - N3 session lifecycle is the active M3 assignment: admission and ownership, controlled live-state publication, containment and resolution, safe halt and terminal handling, bounded diagnostics.
 - Wiki publication remains unfinished until actual remote readback establishes completion.
 - M3 active; M0–M2 accepted; M4 and platform work not activated.
@@ -22,13 +22,13 @@ This entry is the current continuation. The package-preparation-3 entry below is
 
 **Current step:** P0 complete; P1 N3 contract work in progress.
 
-**Completed:** Local/remote reconciled at `6d3ae6d`; record moved to planning-38 with section 13 and a repaired current working brief; the package-preparation-3 entry below is demoted to superseded history; historical N3 review disposition recorded.
+**Completed:** Local/remote changes inspected and merged without conflicts; owner's newer dual license preserved; original source execution and CI read back; record moved to planning-39 and README/detailed roadmap current checkpoint aligned. Untracked lifecycle draft preserved externally; its adoption claim is not accepted. Actual wiki state inspected; owner license update and navigation must be preserved.
 
 **Next action:** Complete the N3 session-lifecycle contract at `docs/architecture/m3_session_lifecycle_contract.md` from the actual controlling sources (N1/N2 contracts, canonical containment/safe-failure semantics, diagnostics contract, source compatibility contract), then freeze it as a commit before dependent implementation.
 
 **Needed from owner:** Nothing; no operator action is assigned.
 
-**Saved at:** This handoff and Project Record planning-38. The containing commit and subsequent readback are the save receipt.
+**Saved at:** This handoff and Project Record planning-39. The containing commit and subsequent readback are the save receipt. Continue through N3 implementation, verification and actual wiki publication, then the remaining M3 and M4–M10 roadmap work; this save does not finish the active goal.
 
 ---
 

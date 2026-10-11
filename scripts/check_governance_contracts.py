@@ -189,8 +189,8 @@ def main() -> int:
     governance_text = (root / "docs/governance/forsetti_governance_alignment.md").read_text(
         encoding="utf-8-sig"
     )
-    if "Apache License" not in license_text or "Apache License, Version 2.0" not in readme:
-        errors.append("README and LICENSE must declare the Apache License, Version 2.0")
+    if "Dual License" not in license_text or "dual-licensed" not in readme:
+        errors.append("README and LICENSE must declare the Raven Forge dual license")
     if "MIT-licensed" in governance_text:
         errors.append("Forsetti governance documentation conflicts with the repository license")
 

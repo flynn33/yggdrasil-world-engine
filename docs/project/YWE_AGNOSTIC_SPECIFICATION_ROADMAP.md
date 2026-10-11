@@ -313,11 +313,24 @@ The first complete clean offline candidate run at
 1035.195 seconds and 35 of 36 repository checks in 1319.469 seconds, with no
 advisories or checkout changes. The one blocking failure was the new source test's
 missing explicit reviewed-path registration in the Phase 10 configuration. That
-exact registration is now added; replacement complete acceptance remains pending.
+exact registration is now added. The replacement implementation at
+`13df7079f911b8f6c56e7be263b0de263b209c48` completed the original clean,
+unfiltered offline execution: all 36 checks passed, 1,006 unit tests passed in
+1035.712 seconds, and there were no blocking failures, advisories or checkout
+changes. The complete run took 1316.797 seconds. Exact-revision
+[CI run 37254719493](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37254719493)
+passed all 36 checks on both Ubuntu and Windows; Ubuntu recorded 37 platform
+skips and Windows recorded none. The October 11 readback verifies those results
+for that source implementation, separately from the later external package's
+representation-only review.
 Four genuine committed-source Windows host controls passed, including paired
 legacy/current capture and both Recovery collector integration methods. Full N3
-session/lifecycle adoption remains separate: the four-record cause chain, final
-completion observation and closed evidence bound are under independent review.
+session/lifecycle adoption remains separate. The October 9 autonomous N3 direction
+is active; its complete contract is being developed before dependent code. It
+must cover actual containment and authorized resolution, all five halt triggers,
+session/revision ownership, final completion observation and the closed evidence
+bound. Current work and publication receipts are recorded in the Project Record
+and README. No N3 execution or M3 exit criterion is accepted by this checkpoint.
 Generation's missing topology, axiom and complete planner/emitter owners are being
 specified against canonical source. The accepted mathematical baseline and
 immutable M2 evidence are preserved.

@@ -1,13 +1,13 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-38
-**Date:** October 9, 2026
+**Revision:** planning-39
+**Date:** October 11, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-37 (section 12 evidence entry at `6d3ae6d182553f9a6cb925ec5a79bea13a812156`); full history remains in Git.
+**Supersedes:** planning-38 at `f8c468b5e48d453705a544fdfc28623dd53c5c05`; full history remains in Git.
 
-**Current approval and continuation:** Section 13 records the October 9 autonomous N3 direction; sections 11 and 12 preserve the owner-approved source-closure outcome and its bounded evidence. Section 10 is the preserved planning-35 checkpoint. This revision repairs current continuation metadata and opens the N3 session-lifecycle assignment; it does not accept M3 or claim N3 test execution.
+**Current approval and continuation:** Section 14 records the October 11 reconciliation and actual source execution readback. Section 13 preserves the October 9 autonomous N3 direction; sections 11 and 12 preserve the separately scoped external package outcome. This revision updates the visible development checkpoint while N3 contract design continues; it does not accept M3 or claim N3 test execution.
 
 ## 1. Current working brief
 
@@ -20,7 +20,7 @@
 | Active M3 assignment | N3 session lifecycle: admission and ownership, controlled live-state publication, containment and resolution, safe halt and terminal handling, and bounded diagnostic evidence |
 | Next milestone | M4 remains planned; its dependency is M3 acceptance |
 | M2 acceptance | Complete; immutable evidence records all six exit criteria and eight deliverables |
-| Source closure | Section 12 evidence published at `6d3ae6d`; representation-matched only, `acceptance=false`, `provenance_review_required=true`; N3 does not reuse it as acceptance |
+| Source closure | Original clean full execution and successful exact-revision Ubuntu/Windows CI verified October 11 (section 14); section 12 external review remains representation-matched only, `acceptance=false`, `provenance_review_required=true`; neither accepts N3 or M3 |
 | Wiki | Publication unfinished until actual remote readback establishes completion |
 | Publication | Unreleased; no GitHub Release objects exist as verified September 20, 2026 |
 | Workflow | Autonomous execution and owner-account publication authorized by package `YWE-M3-N3-AUTONOMOUS-001` r1 (section 13); no operator approval gates, operator reviews, or mandatory separate reviewer-service sign-off; technical checks and source constraints retained |
@@ -1186,3 +1186,60 @@ inventory, new requirement and decision IDs, and executable expectations.
 
 **Saved at:** This record, planning-38; the applicable handoff points to this
 entry. The containing commit and subsequent readback are the save receipt.
+
+## 14. October 11 reconciliation and source execution readback
+
+**Current step:** P1 N3 contract design is in progress; implementation has not begun.
+
+Local continuation `f8c468b5e48d453705a544fdfc28623dd53c5c05` and remote main
+`c5a165ee57049355bf2fd17bf841ab826e335af0` were inspected before a non-conflicting
+merge. The remote owner's dual-license change and its governance guard are
+preserved. The previously untracked lifecycle draft is preserved outside the
+repository at `C:\Users\james\AppData\Local\Temp\ywe-resume-preserved-local-20261011`;
+its SHA256 is `8d562c1c2ed1841f065889e27041ddf38380fc7be0a710323e308664a9e546e5`.
+Its adoption header does not establish an accepted contract. Historical proposal
+files found in Temp likewise remain inputs, with no recovered approval asserted.
+
+The original completed local source run was inspected directly:
+`SOURCE_13DF707_FULL.json` has SHA256
+`9a8cbc4106fd416026741705ee233895b362c9727b953e9420911bdb132c1baf`;
+its original log SHA256 is
+`aa2877c03bb041f44aada70ff0ef4525f195762a58c027ab6dec531fbfd6f34a`.
+Both are in `C:\Users\james\AppData\Local\Temp\ywe-source-compatibility-acceptance-20261004`.
+The exact implementation `13df7079f911b8f6c56e7be263b0de263b209c48`
+completed 36 unfiltered offline checks, zero blocking failures and advisories,
+and 1,006 unit tests in 1035.712 seconds; the execution receipt records 1316.797
+seconds and a clean checkout before and after. This is an executed result for
+that implementation, not evidence for future N3 effects or this merge's changes.
+
+Authenticated readback of
+[CI run 37254719493](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/37254719493)
+and its logs confirms successful complete Ubuntu and Windows jobs at the same
+revision: each reports 36 passed checks with zero failures/advisories. Ubuntu
+ran 1,006 tests in 1091.261 seconds with 37 platform skips; Windows ran 1,006
+tests in 625.850 seconds with no skip marker. Physical platform product
+qualification is not inferred from these results.
+
+The later A: execution has a different log and receipt (1,006 tests in 1070.970
+seconds; log SHA256 `41baa9e8ad63969380930802a61276788ffdca6d4a05e51e6305965faaa51551`).
+Its report bytes match the original report, which has no run timestamp. Matching
+report bytes do not identify the execution that produced them. Section 12's
+external structural review declarations remain unchanged: representation match,
+`acceptance=false`, `provenance_review_required=true`. They neither negate the
+directly observed original run/CI nor supply N3 acceptance.
+
+The new contract must correct once-only N2 completion ownership, bind commands
+to the actual session snapshot, permit explicit authorized containment exit,
+retain actual mandatory halt before diagnostic callbacks, and derive a closed
+resource budget. Canonical stage rules require a new actual post-resolution
+assessment child chain correlated by a typed control observation; the original
+containment chain is preserved. No source patch or N1/N2 capacity relaxation is
+authorized or applied. The complete contract, inventory and new governance IDs
+will be committed before dependent implementation.
+
+The wiki was inspected at `2f0c7ca8d0afe0fa41be3a4d1a3e55bf464432fb`;
+its owner's October 11 contribution-license update is preserved. Roadmap/wiki
+publication remains incomplete until owner-authored push and remote byte readback.
+M0–M2 remain accepted; M3 remains active with all five criteria unchanged.
+No owner action is required. Publication receipts and the containing commit
+establish the saved checkpoint; this entry does not predeclare its own checks.

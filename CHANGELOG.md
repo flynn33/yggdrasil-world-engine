@@ -14,6 +14,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 - Add a content-addressed ASH dependency identity and deterministic source-to-mirror synchronization check.
 
 ### Changed
+- Reconcile the owner's newer Raven Forge dual license and governance guard, and update the visible October 11 roadmap checkpoint with the verified original source compatibility execution and successful Ubuntu/Windows CI. Preserve the external package's representation-only review and keep N3/M3 acceptance outstanding.
 - Reduce unbound JSON example debt from 39 to 19 through executed catalog bindings and reconcile repository classification and scope inventories.
 - Preserve legacy string values while accepting existing string-array representations in five Phase 12 batch, lore, quest candidate, and chain-seed fields.
 - Establish the M0 truthful-baseline governance authorities and acceptance evidence.
