@@ -117,24 +117,33 @@ See the roadmap inventories of [completed or verified foundations](docs/project/
 
 ### Development checkpoint — 2026-10-11
 
-The active assignment is N3 session lifecycle under the October 9 autonomous
-direction: admission, controlled state publication, actual containment and
-resolution, safe halt, and bounded diagnostic evidence. Contract design is in
-progress; lifecycle implementation and acceptance are still outstanding. The
-README checkpoint is updated with each published increment so it records the
-work completed and the next step. M0–M2 remain accepted and M3 remains active.
+N3 session lifecycle is the active M3 assignment. The complete
+[lifecycle contract](docs/architecture/m3_session_lifecycle_contract.md),
+[safety policy](docs/architecture/m3_session_lifecycle_policy.md) and
+[38-type/35-port inventory with replayable capacity controls](docs/design-planning/m3/session-lifecycle/README.md)
+are adopted under YWE-REQ-0044 and ADR-0033 before dependent implementation.
+Three portable representation controls pass against the adopted inputs. These
+verify bounds and graph representation; lifecycle implementation and runtime
+acceptance remain outstanding. The next step is implementing session admission,
+controlled state publication, containment and resolution, safe halt, and bounded
+diagnostic retention against this contract. M0–M2 remain accepted and M3 active.
 
-The October 11 reconciliation is published at
-[`0949184`](https://github.com/flynn33/yggdrasil-world-engine/commit/0949184b7f1be0960fec9dd409cbf09647921e61).
-Its clean offline verification passed eight selected repository checks with no
-failures or advisories; [full Ubuntu/Windows CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38164808814)
-is still running at the latest readback. The wiki publisher now uses one exact
-committed source mapping, preserves manual pages and navigation, and checks the
-owner account before publication. Fifteen focused publication tests pass. The
-next publication step is to refresh wiki Home and its roadmap from the committed
-source and verify their remote bytes. N3 contract work is closing the session
-revision, containment resolution, concurrent halt and complete evidence bounds
-before implementation.
+The owner wiki publisher is published at
+[`4f7cd2e`](https://github.com/flynn33/yggdrasil-world-engine/commit/4f7cd2e38367e1b3cc75eefffb8f752586e1c7a2).
+Its exact clean checkout passed all eleven selected offline checks with zero
+failures/advisories and all nineteen focused wiki/version-authority tests.
+[Full Ubuntu/Windows CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38167117359)
+is running at the latest readback. The preceding reconciliation's
+[Ubuntu/Windows CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38164808814)
+completed successfully on both systems.
+
+The [wiki](https://github.com/flynn33/yggdrasil-world-engine/wiki) is published at
+[`a44ce7d`](https://github.com/flynn33/yggdrasil-world-engine/wiki/_history)
+from source `4f7cd2e`. A fresh remote clone matches all 47 reviewed pages,
+including Home, the roadmap page and preserved manual navigation. Each published
+development increment updates this README checkpoint and refreshes the wiki
+from committed source. The machine-readable milestone gates remain authoritative;
+contract adoption does not complete N3 or M3.
 
 M2 is complete. Its immutable [acceptance record](data/governance/m2_acceptance_evidence.json)
 and [acceptance document](docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md)

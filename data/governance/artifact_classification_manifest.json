@@ -7,8 +7,8 @@
   "scope_manifest_ref": "data/governance/scope_partition_manifest.json",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1200,
-    "path_digest": "e7cea4f6d0af3400de75725e3913da0e385f72e71ea5f103b862987d00ebc6cc",
+    "path_count": 1221,
+    "path_digest": "99c6f3c969c0b83c1b7a69eb1ba85faa03b843d968128154731efb779def5a35",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "classes": [
@@ -1698,6 +1698,38 @@
       "governing_source": "data/governance/specification_roadmap.json",
       "rationale": "This pending then immutable record preserves M2 acceptance chronology without defining requirements or gate logic.",
       "authority_role": "supporting"
+    },
+    {
+      "path": "docs/design-planning/m3/session-lifecycle/BUSINESS_API_INVENTORY.json",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Adopted exact N3 lifecycle business and safe representation contract companion, distinct from historical or synthetic execution evidence.",
+      "authority_role": "primary"
+    },
+    {
+      "path": "docs/design-planning/m3/session-lifecycle/BUSINESS_API_INVENTORY.bound-input.json",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Adopted exact N3 lifecycle business and safe representation contract companion, distinct from historical or synthetic execution evidence.",
+      "authority_role": "primary"
+    },
+    {
+      "path": "docs/design-planning/m3/session-lifecycle/SAFE_FIELDS_AND_LIMITS.json",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Adopted exact N3 lifecycle business and safe representation contract companion, distinct from historical or synthetic execution evidence.",
+      "authority_role": "primary"
+    },
+    {
+      "path": "docs/design-planning/m3/session-lifecycle/CAPACITY_AND_RETENTION.md",
+      "classification": "normative",
+      "owner_role": "Core semantics maintainers",
+      "governing_source": "docs/architecture/m3_session_lifecycle_contract.md",
+      "rationale": "Adopted exact N3 lifecycle business and safe representation contract companion, distinct from historical or synthetic execution evidence.",
+      "authority_role": "primary"
     }
   ],
   "sensitive_source_hash_algorithm": "sha256_utf8_lf_normalized",
@@ -1732,8 +1764,8 @@
       "deprecated": 1,
       "example": 180,
       "historical": 14,
-      "informative": 105,
-      "normative": 850,
+      "informative": 120,
+      "normative": 856,
       "placeholder": 44,
       "superseded": 6
     }

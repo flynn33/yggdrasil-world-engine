@@ -1,0 +1,783 @@
+{
+  "contract_id": "YWE-M3-SESSION-LIFECYCLE-001",
+  "inventory_version": "1.0.0",
+  "status": "ADOPTED_N3_CONTRACT_IMPLEMENTATION_AND_RUNTIME_VERIFICATION_OUTSTANDING",
+  "preparation_revision": "0949184b7f1be0960fec9dd409cbf09647921e61",
+  "authority_direction": "YWE-DIRECTION-20261009-AUTONOMOUS-N3",
+  "scope": "Reference RecoveryEngine session effects, authorized containment resolution, immutable evidence and bounded Diagnostics. No M4 persistence, multiplayer, ordinary TransitionRegistry, native product qualification or complete M3 claim.",
+  "source_guard": "state_values.canonical_source_baseline(exact_complete_binding) == N3_LIFECYCLE before any N3 capture/reservation/provider/mode/publication effect. Recognition is not host-byte verification.",
+  "domains": {
+    "Reference": "exactASCII identifier [A-Za-z0-9][A-Za-z0-9._:/-]{0,255}; NONE/SELF forbidden",
+    "CommandReference": "Reference max160 to leave derived suffix room; no implicit generated randomness",
+    "Reason": "exactstr 1..512 without NUL; stored raw only in bounded caller-owned business values",
+    "Sha256": "exactstr lowercase hex64",
+    "Uint64": "exactint 0..18446744073709551615; bool forbidden",
+    "SessionMode": [
+      "NORMAL",
+      "CONTAINED",
+      "SAFE_HALT"
+    ],
+    "SessionAdmissionStatus": [
+      "OPEN",
+      "AUDIT_BLOCKED",
+      "TERMINAL"
+    ],
+    "SessionAction": [
+      "RECOVER",
+      "REQUEST_CONTAINMENT",
+      "RESOLVE_CONTAINMENT",
+      "REQUEST_HALT"
+    ],
+    "LeaseAction": [
+      "RECOVER",
+      "CONTAIN",
+      "RESOLVE",
+      "HALT"
+    ],
+    "SessionAuthorityStatus": [
+      "AUTHORIZED",
+      "DENIED",
+      "UNAVAILABLE"
+    ],
+    "SessionAuthorityOrigin": [
+      "OPERATOR",
+      "POLICY",
+      "SYSTEM_BOUNDARY"
+    ],
+    "SessionBoundaryCondition": [
+      "CONTAINMENT_BREACH",
+      "CONTAINMENT_UNAVAILABLE",
+      "CONTAINMENT_CLEAR",
+      "RECOVERY_NO_PATH",
+      "RECOVERY_VALIDATION_FAILURE",
+      "PROPAGATION_RISK"
+    ],
+    "SessionBoundaryStatus": [
+      "SATISFIED",
+      "NOT_SATISFIED",
+      "UNAVAILABLE"
+    ],
+    "SessionCauseKind": [
+      "N2_HANDOFF",
+      "AUTHORITY_REQUEST",
+      "CONTAINMENT_BREACH",
+      "UNRESOLVABLE_BLOCKED_BOUNDARY",
+      "RECOVERY_VALIDATION_BOUNDARY",
+      "N2_RESULT"
+    ],
+    "SessionAdmissionDecision": [
+      "GRANTED",
+      "REJECTED"
+    ],
+    "PublicationStatus": [
+      "COMMITTED",
+      "NOT_COMMITTED",
+      "UNCONFIRMED"
+    ],
+    "ResolutionRoute": [
+      "OPERATOR_INTERVENTION",
+      "POLICY_DRIVEN",
+      "ESCALATE_TO_SAFE_HALT"
+    ],
+    "ResolutionAction": [
+      "REPLACE_STATE",
+      "HALT"
+    ],
+    "ResolutionStatus": [
+      "RESOLVED",
+      "REFUSED",
+      "UNCONFIRMED"
+    ],
+    "SessionOperationStatus": [
+      "COMPLETED",
+      "REFUSED",
+      "FAILED",
+      "TERMINAL_REFUSAL",
+      "UNCONFIRMED"
+    ],
+    "LifecycleKind": [
+      "RECOVERY",
+      "CONTAINMENT",
+      "SAFE_HALT"
+    ],
+    "LifecycleCaptureStatus": [
+      "CONFIRMED",
+      "REJECTED",
+      "NOT_CONFIRMED"
+    ],
+    "LifecycleCaptureCode": [
+      "CAPTURE_ADMISSION_REJECTED",
+      "CAPTURE_ADMISSION_UNCONFIRMED",
+      "CAPTURE_APPEND_REJECTED",
+      "CAPTURE_APPEND_UNCONFIRMED",
+      "CAPTURE_COMPLETION_REJECTED",
+      "CAPTURE_COMPLETION_UNCONFIRMED",
+      "CAPTURE_FINAL_OBSERVATION_FAILED",
+      "CAPTURE_RETENTION_FAILED",
+      "CAPTURE_CLOCK_UNAVAILABLE",
+      "CAPTURE_CHAIN_UNCONFIRMED"
+    ],
+    "SessionFailureCode": [
+      "SESSION_INPUT_INVALID",
+      "SESSION_SOURCE_REJECTED",
+      "SESSION_PROFILE_REJECTED",
+      "SESSION_ORIGIN_REJECTED",
+      "SESSION_ORIGIN_FOREIGN",
+      "SESSION_STATE_STALE",
+      "SESSION_OPERATION_DUPLICATE",
+      "SESSION_OPERATION_IN_PROGRESS",
+      "SESSION_MODE_FORBIDDEN",
+      "SESSION_TERMINAL",
+      "SESSION_BUDGET_EXCEEDED",
+      "SESSION_LEASE_REJECTED",
+      "SESSION_EXECUTION_CANCELLED",
+      "SESSION_AUTHORITY_DENIED",
+      "SESSION_AUTHORITY_UNAVAILABLE",
+      "SESSION_EVIDENCE_MISMATCH",
+      "SESSION_BOUNDARY_NOT_SATISFIED",
+      "SESSION_TARGET_NOT_VALID",
+      "SESSION_N2_RESULT_REJECTED",
+      "SESSION_N2_COMPLETION_REJECTED",
+      "SESSION_N2_COMPLETION_UNCONFIRMED",
+      "SESSION_PUBLICATION_STALE",
+      "SESSION_PUBLICATION_UNCONFIRMED",
+      "SESSION_COLLABORATOR_FAILED",
+      "SESSION_CAPTURE_FAILED",
+      "SESSION_RETENTION_FAILED",
+      "SESSION_GENERATION_EXHAUSTED",
+      "SESSION_AUDIT_BLOCKED",
+      "SESSION_RAW_BUSINESS_LIMIT",
+      "SESSION_INTERNAL_INVARIANT"
+    ],
+    "SessionFieldPath": [
+      "binding",
+      "binding.canonical_binding",
+      "binding.recovery_binding",
+      "binding.profile_binding",
+      "binding.policy_binding",
+      "request",
+      "request.reference",
+      "request.session_reference",
+      "request.expected_snapshot",
+      "request.action",
+      "origin_assessment",
+      "origin_assessment.source_binding",
+      "origin_assessment.profile_binding",
+      "operation_context",
+      "operation_context.context_observation",
+      "operation_context.propagation_evidence",
+      "operation_context.external_authority_evidence",
+      "authority",
+      "boundary",
+      "cause",
+      "trigger",
+      "lease",
+      "publication",
+      "publication.before",
+      "publication.after",
+      "resolution",
+      "resolution.route",
+      "resolution.target",
+      "resolution.target_validation",
+      "resolution.boundary_clear",
+      "capture",
+      "capture.admission",
+      "capture.append",
+      "capture.finish",
+      "capture.final_observation",
+      "retention",
+      "clock",
+      "history",
+      "generation",
+      "collaborator",
+      "execution_gate",
+      "raw_business_packet"
+    ],
+    "StageGrantKind": [
+      "REGISTRY_READ",
+      "CAPTURE_BEGIN",
+      "NORMALIZATION_PROVIDER",
+      "CORRECTION_PROVIDER",
+      "CONDITION_PROVIDER",
+      "POST_FACTS_PROVIDER",
+      "CANDIDATE_COMPUTATION",
+      "ASSESSMENT_BEGIN",
+      "ASSESSMENT_APPEND",
+      "ASSESSMENT_COMPLETE",
+      "CAPTURE_APPEND"
+    ],
+    "RestrictedOperation": [
+      "READ_SESSION",
+      "READ_DIAGNOSTICS",
+      "EXPORT_DIAGNOSTICS",
+      "REQUEST_HALT",
+      "RESOLVE_CONTAINMENT"
+    ],
+    "LifecycleCanonicalField": [
+      "trigger",
+      "original_diagnostic",
+      "system_state_class",
+      "restricted_operations",
+      "containment_time",
+      "awaiting_resolution",
+      "resolution",
+      "halt_time",
+      "full_diagnostic_chain",
+      "is_terminal",
+      "rule_ids",
+      "notes",
+      "envelope",
+      "parent_diagnostic_reference",
+      "chain_root_reference"
+    ],
+    "PendingLifecycleReason": [
+      "ORIGINAL_DIAGNOSIS_UNAVAILABLE",
+      "ORIGINAL_CLASSIFICATION_UNAVAILABLE",
+      "CHAIN_UNCONFIRMED",
+      "CLOCK_UNAVAILABLE",
+      "CAPTURE_UNCONFIRMED",
+      "RAW_BUSINESS_LIMIT"
+    ],
+    "SessionRetentionStatus": [
+      "CONFIRMED",
+      "REJECTED",
+      "NOT_CONFIRMED"
+    ],
+    "SessionRetentionPhase": [
+      "REGISTER",
+      "ATTACH",
+      "PIN",
+      "FREEZE",
+      "FINAL_RESULT"
+    ],
+    "SessionRetentionCoverage": [
+      "COMPLETE_SPECIFIED_SAFE_GRAPH",
+      "PARTIAL",
+      "STORAGE_UNCERTAIN"
+    ],
+    "SessionRetentionFailure": [
+      "SESSION_RETENTION_REJECTED",
+      "SESSION_RETENTION_UNCONFIRMED",
+      "SESSION_RETENTION_INCOMPLETE",
+      "SESSION_RETENTION_LIMIT",
+      "SESSION_RETENTION_IDENTITY_MISMATCH",
+      "SESSION_RETENTION_FROZEN"
+    ]
+  },
+  "types": {
+    "SessionPolicyBinding": {
+      "policy_id": "const:YWE-SESSION-SAFETY-001",
+      "policy_version": "const:1.0.0",
+      "source_path": "const:docs/architecture/m3_session_lifecycle_policy.md",
+      "source_sha256": "const:24e2584279b95b8e3659bd61e6b5149311f344b03b981e88f74ae37775591910"
+    },
+    "SessionBinding": {
+      "binding_reference": "Reference",
+      "session_reference": "Reference",
+      "canonical_binding": "CanonicalAshBinding exact complete N3_LIFECYCLE",
+      "recovery_binding": "RecoverySourceBinding exactly paired to canonical_binding",
+      "profile_binding": "AvailableProfileBinding|UnavailableProfileBinding exact current complete binding",
+      "policy_binding": "SessionPolicyBinding",
+      "initial_assessment_reference": "Reference"
+    },
+    "SessionSnapshot": {
+      "snapshot_reference": "Reference",
+      "binding": "SessionBinding",
+      "generation": "Uint64",
+      "current_state": "AshState",
+      "mode": "SessionMode",
+      "terminal_latched": "exactbool",
+      "admission_status": "SessionAdmissionStatus",
+      "containment_reference": "Reference|null",
+      "halt_reference": "Reference|null",
+      "recovery_attempted": "exactbool",
+      "active_operation_reference": "CommandReference|null",
+      "current_assessment_reference": "Reference|null; exact owner-accepted complete assessment for this generation and actual context; null while unassessed or terminal",
+      "observed_system_state_class": "SystemStateClass|null; only actual complete StateModel assessment output, never inferred from mode"
+    },
+    "SessionContextObservation": {
+      "observation_reference": "Reference",
+      "snapshot": "SessionSnapshot",
+      "operation_reference": "CommandReference",
+      "subject_state": "AshState",
+      "is_running": "exactbool",
+      "is_contained": "exactbool",
+      "is_halted": "exactbool"
+    },
+    "SessionRequest": {
+      "request_reference": "CommandReference",
+      "session_reference": "Reference",
+      "expected_snapshot": "SessionSnapshot",
+      "action": "SessionAction",
+      "reason": "Reason"
+    },
+    "SessionAuthorityObservation": {
+      "request_reference": "CommandReference",
+      "expected_snapshot_reference": "Reference",
+      "status": "SessionAuthorityStatus",
+      "request_origin": "SessionAuthorityOrigin",
+      "source_binding": "EvidenceSourceBinding",
+      "observation_reference": "Reference",
+      "reason": "Reason"
+    },
+    "SessionBoundaryObservation": {
+      "request_reference": "CommandReference",
+      "expected_snapshot_reference": "Reference",
+      "condition": "SessionBoundaryCondition",
+      "status": "SessionBoundaryStatus",
+      "source_binding": "EvidenceSourceBinding",
+      "observation_reference": "Reference",
+      "reason": "Reason"
+    },
+    "SessionRecoveryRequest": {
+      "request": "SessionRequest action=RECOVER",
+      "origin_assessment": "StateAssessment; exact owner-associated current_assessment_reference at expected generation, not just same state bits",
+      "operation_context": "RecoveryOperationContext; operation_reference=request.reference; origin_assessment_reference=request.reference + ':origin:assessment'; actual owner NORMAL context; all propagation/external-authority bindings already fresh-child-bound"
+    },
+    "SessionContainmentRequest": {
+      "request": "SessionRequest action=REQUEST_CONTAINMENT",
+      "trigger": "CanonicalContainmentTrigger",
+      "authority_observation": "SessionAuthorityObservation|null",
+      "boundary_observations": "tuple<SessionBoundaryObservation,0..2>",
+      "recovery_operation_reference": "CommandReference|null"
+    },
+    "SessionResolutionRequest": {
+      "request": "SessionRequest action=RESOLVE_CONTAINMENT",
+      "route": "ResolutionRoute",
+      "resolution_action": "ResolutionAction",
+      "target_state": "AshState|null",
+      "authority_observation": "SessionAuthorityObservation",
+      "propagation_evidence": "PropagationEvidence|null",
+      "boundary_observations": "tuple<SessionBoundaryObservation,0..2>",
+      "recovery_operation_reference": "CommandReference|null"
+    },
+    "SessionHaltRequest": {
+      "request": "SessionRequest action=REQUEST_HALT",
+      "trigger": "CanonicalSafeHaltTrigger",
+      "authority_observation": "SessionAuthorityObservation|null",
+      "boundary_observations": "tuple<SessionBoundaryObservation,0..2>",
+      "recovery_operation_reference": "CommandReference|null"
+    },
+    "SessionCauseObservation": {
+      "cause_reference": "Reference",
+      "request_reference": "CommandReference",
+      "expected_snapshot_reference": "Reference",
+      "kind": "SessionCauseKind",
+      "trigger": "CanonicalContainmentTrigger|CanonicalSafeHaltTrigger|null; null only for N2_RESULT publication/no-action",
+      "recovery_operation_reference": "CommandReference|null; mandatory for N2_HANDOFF and N2_RESULT, resolved only in actual owner registry",
+      "authority_observation": "SessionAuthorityObservation|null",
+      "boundary_observations": "tuple<SessionBoundaryObservation,0..2>"
+    },
+    "SessionOperationLease": {
+      "lease_reference": "Reference",
+      "request": "SessionRequest",
+      "before": "SessionSnapshot",
+      "action": "LeaseAction",
+      "active_snapshot": "SessionSnapshot; exact owner-issued admitted snapshot including active_operation_reference"
+    },
+    "SessionAdmission": {
+      "status": "SessionAdmissionDecision",
+      "request": "SessionRequest",
+      "before": "SessionSnapshot",
+      "lease": "SessionOperationLease|null",
+      "failure_code": "SessionFailureCode|null",
+      "field_name": "SessionFieldPath|null",
+      "reason": "Reason"
+    },
+    "SessionAdmissionFailure": {
+      "failure_code": "SessionFailureCode",
+      "field_name": "SessionFieldPath",
+      "submitted_request": "SessionCommand|null",
+      "before": "SessionSnapshot",
+      "reason": "Reason"
+    },
+    "ResolutionTargetValidation": {
+      "status": "VERIFIED|REJECTED",
+      "target_state": "AshState",
+      "current_source_binding": "CanonicalAshBinding",
+      "current_profile_binding": "ProfileBinding",
+      "target_diagnostic": "StateValidityDiagnostic",
+      "prospective_context": "SystemContext exactly(false,false)",
+      "expected_system_state_class": "STABLE|null",
+      "expected_recovery_category": "NO_ACTION|null",
+      "failure_code": "SESSION_TARGET_NOT_VALID|null",
+      "field_name": "resolution.target_validation|null"
+    },
+    "SessionPublication": {
+      "publication_reference": "Reference",
+      "request_reference": "CommandReference",
+      "lease_reference": "Reference",
+      "before": "SessionSnapshot",
+      "after": "SessionSnapshot|null",
+      "status": "PublicationStatus",
+      "session_effects_performed": "exactbool|null",
+      "requested_state": "AshState",
+      "requested_mode": "SessionMode",
+      "cause_reference": "Reference",
+      "proof_reference": "Reference|null",
+      "failure_code": "SessionFailureCode|null",
+      "reason": "Reason"
+    },
+    "ContainmentDiagnostic": {
+      "trigger": "CanonicalContainmentTrigger",
+      "original_diagnostic": "StateValidityDiagnostic",
+      "system_state_class": "const:CONTAINED",
+      "restricted_operations": "tuple<RestrictedOperation,exact5>",
+      "containment_time": "ClockObservation exact measured observation with nonnullmonotonic",
+      "awaiting_resolution": "const_bool:true",
+      "resolution": "const:PENDING",
+      "rule_ids": "tuple<exact mapped containment rule,exact1>",
+      "notes": "tuple<Reason,1..8>"
+    },
+    "SafeHaltDiagnostic": {
+      "trigger": "CanonicalSafeHaltTrigger",
+      "original_diagnostic": "StateValidityDiagnostic",
+      "system_state_class": "const:SAFE_HALT",
+      "halt_time": "ClockObservation exact measured observation with nonnullmonotonic",
+      "full_diagnostic_chain": "tuple<StateAssessment|RecoveryValuePacket|SessionOperationResult|SessionTerminalChainClosure,2..21>; complete initial assessment, actual N2 results and prior command groups in actual order, followed by current terminal closure. Closure holds optional current bridge and final halt envelope; excludes current result/payload to avoid self-reference.",
+      "is_terminal": "const_bool:true",
+      "rule_ids": "tuple<exact mapped halt rule,exact1>",
+      "notes": "tuple<Reason,1..8>"
+    },
+    "LifecycleRecord": {
+      "diagnostic_reference": "Reference",
+      "envelope": "DiagnosticEnvelope exactlyTEN",
+      "payload": "RecoveryDiagnostic|ContainmentDiagnostic|SafeHaltDiagnostic",
+      "cause": "SessionCauseObservation"
+    },
+    "PendingLifecycleRecord": {
+      "intended_reference": "Reference",
+      "kind": "LifecycleKind",
+      "trigger": "CanonicalContainmentTrigger|CanonicalSafeHaltTrigger",
+      "original_assessment": "StateAssessment|null",
+      "before": "SessionSnapshot",
+      "actual_after": "SessionSnapshot|null",
+      "cause": "SessionCauseObservation",
+      "missing_fields": "tuple<LifecycleCanonicalField,1..15>",
+      "reason_code": "PendingLifecycleReason"
+    },
+    "SessionResolutionObservation": {
+      "resolution_reference": "Reference",
+      "request": "SessionRequest",
+      "route": "ResolutionRoute",
+      "containment_record_reference": "Reference",
+      "target_validation": "ResolutionTargetValidation|null",
+      "authority_observation": "SessionAuthorityObservation",
+      "boundary_clear": "SessionBoundaryObservation|null",
+      "propagation_evidence": "PropagationEvidence|null",
+      "publication": "SessionPublication|null",
+      "actual_post_assessment": "StateAssessment|ClassificationEvidenceFailure|DiagnosticCaptureFailure|null",
+      "status": "ResolutionStatus",
+      "session_effects_performed": "exactbool|null",
+      "reason": "Reason"
+    },
+    "SessionLifecycleCaptureAdmission": {
+      "operation_reference": "CommandReference",
+      "status": "CONFIRMED|REJECTED|NOT_CONFIRMED",
+      "reserved_events": "exactint 0|4",
+      "reserved_bytes": "exactint 0|327680|655360",
+      "reserved_aliases": "exactint 0|512",
+      "reserved_supporting_bytes": "exactint 0|98304|425984",
+      "failure_code": "LifecycleCaptureCode|null"
+    },
+    "SessionLifecycleCompletion": {
+      "operation_reference": "CommandReference",
+      "status": "COMPLETE|INCOMPLETE",
+      "confirmed_references": "tuple<Reference,0..4>",
+      "failure_code": "LifecycleCaptureCode|null"
+    },
+    "SessionFailureDetail": {
+      "failure_code": "SessionFailureCode",
+      "field_name": "SessionFieldPath",
+      "primary_evidence": "AssessmentValidation|RecoveryValuePacket|ResolutionTargetValidation|SessionAuthorityObservation|SessionBoundaryObservation|SessionAdmission|SessionPublication|SessionRetentionReceipt|null",
+      "capture_status": "LifecycleCaptureStatus|null",
+      "attempted_lifecycle_record": "LifecycleRecord|null",
+      "pending_lifecycle_record": "PendingLifecycleRecord|null",
+      "completion_failure_code": "LifecycleCaptureCode|null",
+      "unconfirmed_completion_observation": "SessionLifecycleCompletion|null",
+      "reason": "Reason"
+    },
+    "SessionOperationResult": {
+      "request": "SessionCommand",
+      "status": "SessionOperationStatus",
+      "before": "SessionSnapshot",
+      "after": "SessionSnapshot|null",
+      "session_effects_performed": "exactbool|null",
+      "admission": "SessionAdmission",
+      "context_observation": "SessionContextObservation",
+      "authority_observation": "SessionAuthorityObservation|null",
+      "cause": "SessionCauseObservation|null",
+      "origin_assessment": "StateAssessment|null",
+      "origin_completion_observation": "DiagnosticsCompletionReceipt|null",
+      "recovery_result": "RecoveryValuePacket|null",
+      "publication": "SessionPublication|null",
+      "confirmed_lifecycle_records": "tuple<LifecycleRecord,0..2>",
+      "attempted_lifecycle_records": "tuple<LifecycleRecord,0..2>",
+      "pending_lifecycle_record": "PendingLifecycleRecord|null",
+      "resolution_observation": "SessionResolutionObservation|null",
+      "completion_observation": "SessionLifecycleCompletion|null",
+      "failure_detail": "SessionFailureDetail|null",
+      "actual_post_assessment": "StateAssessment|ClassificationEvidenceFailure|DiagnosticCaptureFailure|null; actual post-mode context only",
+      "actual_post_completion_observation": "DiagnosticsCompletionReceipt|null; actual once complete_assessment response"
+    },
+    "SessionDeniedAttempt": {
+      "session_reference": "Reference",
+      "frozen_snapshot": "SessionSnapshot",
+      "denial_ordinal": "exactint1..16|null",
+      "request_reference": "CommandReference|null",
+      "request_observation": "NOT_INSPECTED_AT_TERMINAL|VALIDATED_REFERENCE_ONLY",
+      "reason_code": "SESSION_TERMINAL|SESSION_MODE_FORBIDDEN|SESSION_BUDGET_EXCEEDED",
+      "audit_reference": "Reference|null",
+      "attempted_record": "DiagnosticEmission|null",
+      "capture_status": "LifecycleCaptureStatus",
+      "completion_observation": "SessionLifecycleCompletion|null"
+    },
+    "SessionChildLink": {
+      "link_reference": "Reference",
+      "session_binding_reference": "Reference",
+      "admitted_generation": "Uint64",
+      "live_origin_assessment_reference": "Reference",
+      "child_origin_assessment_reference": "Reference",
+      "child_operation_reference": "CommandReference"
+    },
+    "SessionHistory": {
+      "history_reference": "Reference",
+      "binding": "SessionBinding",
+      "main_assessment": "StateAssessment",
+      "child_links": "tuple<SessionChildLink,0..2>",
+      "recovery_results": "tuple<RecoveryValuePacket,0..2>",
+      "command_results": "tuple<SessionOperationResult,0..18>",
+      "resolution_observations": "tuple<SessionResolutionObservation,0..16>",
+      "confirmed_lifecycle_records": "tuple<LifecycleRecord,0..36>",
+      "attempted_lifecycle_records": "tuple<LifecycleRecord,0..36>",
+      "pending_lifecycle_records": "tuple<PendingLifecycleRecord,0..18>",
+      "terminal_snapshot": "SessionSnapshot|null",
+      "frozen": "exactbool"
+    },
+    "SessionRetentionReceipt": {
+      "session_reference": "Reference",
+      "status": "SessionRetentionStatus",
+      "phase": "SessionRetentionPhase",
+      "coverage": "SessionRetentionCoverage",
+      "confirmed_record_count": "exactint0..1024",
+      "unknown_storage_record_count": "exactint0..1024",
+      "pinned_supporting_count": "exactint0..2544",
+      "failure_code": "SessionRetentionFailure|null"
+    },
+    "SessionAssessmentLink": {
+      "session_reference": "Reference",
+      "parent_operation_reference": "CommandReference",
+      "parent_resolution_reference": "Reference|null; null for containment post-mode assessment",
+      "originating_chain_root_reference": "Reference"
+    },
+    "SessionStageGrant": {
+      "grant_index": "API_ONLY exactint0..8191",
+      "stage": "StageGrantKind",
+      "status": "GRANTED|CANCELLED",
+      "lease_reference": "Reference",
+      "generation": "Uint64"
+    },
+    "SessionExecutionGate": {
+      "construction": "API_ONLY private owner issuance, no public fields/to_record/wire constructor"
+    },
+    "SessionRetentionHandle": {
+      "construction": "API_ONLY exact collector-issued opaque identity, no public wire constructor or to_record; equality/copies are not issuance authority"
+    },
+    "SessionReplayObservation": {
+      "request_reference": "CommandReference",
+      "original_result": "SessionOperationResult",
+      "current_snapshot": "SessionSnapshot",
+      "session_effects_performed": "const_bool:false"
+    },
+    "SessionTerminalChainClosure": {
+      "request_reference": "CommandReference",
+      "bridge_record": "LifecycleRecord payload=RecoveryDiagnostic and steps=()|null",
+      "terminal_emission": "DiagnosticEmission; exact same reference/envelope as outer SafeHalt LifecycleRecord",
+      "actual_terminal_publication": "SessionPublication status=COMMITTED requested_mode=SAFE_HALT"
+    },
+    "SessionContractError": {
+      "construction": "API_ONLY exception with exact failure_code:SessionFailureCode and field_name:SessionFieldPath; no arbitrary caller object, repr, exception text, to_record or untrusted emission"
+    },
+    "SessionRawBusinessFailure": {
+      "request_reference": "CommandReference",
+      "session_reference": "Reference",
+      "history_reference": "Reference; complete immutable API object-DAG location, not claim of protected serialization",
+      "phase": "CANDIDATE_RESULT|PROSPECTIVE_HISTORY|ANTICIPATED_TERMINAL|TERMINAL_CHAIN",
+      "before": "SessionSnapshot",
+      "after": "SessionSnapshot|null",
+      "session_effects_performed": "exactbool|null",
+      "failure_code": "const:SESSION_RAW_BUSINESS_LIMIT",
+      "coverage": "API_ONLY|PARTIAL"
+    }
+  },
+  "unions": {
+    "SessionCommand": [
+      "SessionRecoveryRequest",
+      "SessionContainmentRequest",
+      "SessionResolutionRequest",
+      "SessionHaltRequest"
+    ],
+    "SessionExecuteReturn": [
+      "SessionOperationResult",
+      "SessionDeniedAttempt",
+      "SessionReplayObservation",
+      "SessionRawBusinessFailure"
+    ],
+    "LifecycleBusinessPayload": [
+      "RecoveryDiagnostic",
+      "ContainmentDiagnostic",
+      "SafeHaltDiagnostic"
+    ]
+  },
+  "limits": {
+    "sessions_per_lifecycle_owner": 1,
+    "recover_episodes": 2,
+    "mode_resolution_commands": 16,
+    "nonterminal_mode_commands": 15,
+    "reserved_terminal_mode_command": 1,
+    "ordinary_commands": 18,
+    "separate_terminal_denials": 16,
+    "lifecycle_records_per_command": 2,
+    "lifecycle_confirmed_maximum": 36,
+    "lifecycle_attempted_maximum": 36,
+    "pending_metadata_maximum": 18,
+    "stage_grants_per_recovery": 8192,
+    "raw_business_packet_bytes": 33554432,
+    "request_reason_chars": 512,
+    "history_canonical_group_entries": 21,
+    "revision_terminal_reserve": "ordinary commits <=18446744073709551614; first halt may consume 18446744073709551615; no wrap",
+    "required_post_mode_assessment_pairs_maximum": 16
+  },
+  "operations": {
+    "RecoveryEngine.__init__": "Existing7 positional collaborators, optional keyword lifecycle_owner:ReferenceSessionLifecycle|None=None. Exact class composition validated, one private engine identity capability issued. Legacy None behavior unchanged.",
+    "RecoveryEngine.recover": "recover(origin,*,operation_context,execution_gate:SessionExecutionGate|None=None)->existing RecoveryValuePacket. None unchanged; issued gate checks before each further stage. Cancellation adds exact N2 failure SESSION_EXECUTION_CANCELLED and uses existing RecoveryFailure; scope.finish remains existing once-only finalizer.",
+    "RecoveryEngine.open_session": "open_session(origin:StateAssessment,*,session_binding:SessionBinding)->tuple[ReferenceSession,SessionRetentionReceipt]. Full source/profile/math/current-context checks and origin.parsed_state exact AshState before registration; malformed/unparsed origin rejected. NORMAL initial context only; FAILED classification remains NORMAL observed class. Valid semantic owner exists even when registration/capture is unavailable: return facade with AUDIT_BLOCKED and actual failed retention receipt, allowing authorized mandatory halt. Invalid typed binding/origin raises SessionContractError before effects.",
+    "RecoveryEngine.execute_session": "execute_session(session:ReferenceSession,command:SessionCommand)->SessionExecuteReturn. Exact facade private engine issuance required; no caller mutation provider.",
+    "RecoveryEngine.read_session": "read_session(session:ReferenceSession)->SessionSnapshot; pure owned in-memory copy",
+    "RecoveryEngine.read_session_history": "read_session_history(session:ReferenceSession)->SessionHistory; pure immutable history view, raw business limit",
+    "ReferenceSession.read": "read()->SessionSnapshot delegates its engine only",
+    "ReferenceSession.execute": "execute(command:SessionCommand)->SessionExecuteReturn delegates its engine only",
+    "ReferenceSession.history": "history()->SessionHistory delegates its engine only; complete finite immutable API object-DAG. to_record uses bounded compact ASCII JSON preflight and raises SessionContractError(SESSION_RAW_BUSINESS_LIMIT,history) rather than truncating if aggregate overflowed during mandatory halt.",
+    "ReferenceSessionLifecycle.__init__": "ReferenceSessionLifecycle(state_model:StateModel,diagnostics:ReferenceDevelopmentDiagnostics|ReferenceReleaseDiagnostics,policy_binding:SessionPolicyBinding). Pure binding validation, no storage/clock/provider effect.",
+    "ReferenceSessionLifecycle.bind_engine": "API_ONLY _bind_engine(engine_identity,state_model,diagnostics)->None; once-only exact controlled composition, no peer-private access",
+    "ReferenceSessionLifecycle.execute": "API_ONLY _execute(engine_identity,session_identity,command)->SessionExecuteReturn; semantic owner within RecoveryEngine module, no independent public mutation authority",
+    "SessionExecutionGate.stage_grant": "API_ONLY stage_grant(stage:StageGrantKind)->SessionStageGrant. Atomically verify exact issued identity, live lease, owner-issued current lease phase snapshot, generation and mode under lifecycle lock, then invoke stage outside lock. Initial phase checks immutable lease.active_snapshot; committed post-mode phase checks new owner-held committed active snapshot. Recheck after callback before further stage/publication. Already granted callback is not physically preempted. Cleanup/late-audit finalization has separate once-only permission, never new ordinary grants.",
+    "StateModel.validate_resolution_target": "validate_resolution_target(target:AshState,*,prospective_context:SystemContext)->ResolutionTargetValidation; pure complete current source/profile mathematics; no capture/no entry",
+    "Diagnostics.register_session": "register_session(binding:SessionBinding)->tuple[SessionRetentionHandle|None,SessionRetentionReceipt]",
+    "Diagnostics.attach_result": "attach_result(handle:SessionRetentionHandle,result:StateAssessment|RecoveryValuePacket,*,relation:SessionChildLink|None=None)->SessionRetentionReceipt; actual complete samecollector attached prefixes; no fake reemission",
+    "Diagnostics.lifecycle_capture": "lifecycle_capture(handle:SessionRetentionHandle,*,execution_gate:SessionExecutionGate)->SessionLifecycleCapture; exact private issued gate stored on scope and inherited by post-mode assessment capture. Terminal permit can capture only predetermined current halt slots; ordinary gates remain sealed.",
+    "SessionLifecycleCapture.begin": "begin(command:SessionCommand,*,before:SessionSnapshot,origin_refs:tuple[Reference,1..4],terminal:exactbool=False)->tuple[SessionLifecycleScope|None,SessionLifecycleCaptureAdmission]; exactfixed budget selected byowner",
+    "SessionLifecycleScope.append": "append(record:LifecycleRecord)->CaptureReceipt",
+    "SessionLifecycleScope.assessment_capture": "assessment_capture(relation:SessionAssessmentLink)->assessment-scoped port; required actual StateModel pair after successful containment or resolution consumes parent four slots",
+    "SessionLifecycleScope.append_resolution": "append_resolution(observation:SessionResolutionObservation)->CaptureReceipt; actual ACTION_OBSERVED control event withoutTEN, supportingtyped resolutionlink",
+    "SessionLifecycleScope.finish": "finish(tentative_result:SessionOperationResult)->SessionLifecycleCompletion once; tentative own completion_observation null",
+    "Diagnostics.observe_session_result": "observe_session_result(handle:SessionRetentionHandle,final_result:SessionOperationResult|SessionRawBusinessFailure,*,actual_result:SessionOperationResult|None=None)->SessionRetentionReceipt once; actual_result only for compact raw overflow descriptor. Preserve actual first finish response in final distinct supporting node, no recursive finish or redefinition of tentative immutable key.",
+    "Diagnostics.pin_history": "pin_history(handle:SessionRetentionHandle,history:SessionHistory)->SessionRetentionReceipt; pin exact current immutable leaf/member closure using private issued selector ledger. No evolving SESSION_HISTORY supporting key/event; complete current closure does not claim a persisted terminal index.",
+    "Diagnostics.freeze_terminal": "freeze_terminal(handle:SessionRetentionHandle,history:SessionHistory,actual_terminal_publication:SessionPublication)->SessionRetentionReceipt; after terminal finish/final observation write the single immutable SESSION_HISTORY and <=40 index pages once from actual sealed main history. Owner memory/gate cutover occurs before IO; later denial/interrupted cleanup roots are separate audit, never final main-index successors.",
+    "Diagnostics.denial_capture": "denial_capture(handle:SessionRetentionHandle,frozen_snapshot:SessionSnapshot,*,denial_ordinal:exactint1..16)->SessionDenialScope; reserve1event/270336bytes/64aliases/1incident; separate root, no mainchain append",
+    "SessionDenialScope.append": "append(record:DiagnosticEmission)->CaptureReceipt; exact terminal denial STATE_VALIDITY/DETECTION CRITICAL/BLOCKED ownroot",
+    "SessionDenialScope.finish": "finish(tentative_denial:SessionDeniedAttempt)->SessionLifecycleCompletion once; no authority/cause/caller body inspection",
+    "RecoveryEngine.assess_session_origin": "API_ONLY _assess_session_origin(engine_issued_capability,live_origin:StateAssessment,*,diagnostic_context:DiagnosticContext,operation_context:RecoveryOperationContext,execution_gate:SessionExecutionGate)->tuple[StateAssessment|ClassificationEvidenceFailure|DiagnosticCaptureFailure|UnavailablePostAssessmentFacts,DiagnosticsCompletionReceipt|null]. Existing post_facts_provider.provide(candidate=actual current_state,origin=accepted live_origin,action_reference=request.reference + ':origin',diagnostic_context=fresh request-derived context,operation_context=already fresh-origin-bound submitted context). Validate actual owner context and fresh predicate full bindings, perform real StateModel assessment through assessment_capture(relation=SessionChildLink,execution_gate=issued_gate); complete_assessment once even on revoked cleanup. No rebinding/copying of old predicates.",
+    "RecoveryEngine.assess_session_mode": "API_ONLY _assess_session_mode(engine_issued_capability,origin:StateAssessment,*,actual_snapshot:SessionSnapshot,diagnostic_context:DiagnosticContext,capture,execution_gate:SessionExecutionGate)->tuple[StateAssessment|ClassificationEvidenceFailure|DiagnosticCaptureFailure,DiagnosticsCompletionReceipt|null]. Only actual CONTAINED or pure-certified VALID NORMAL target: StateModel consults no predicates. Create newly bound NotEvaluatedPredicate for each declared predicate with explicit no-consultation reason, use measured actual SystemContext, perform actual captured assessment and once completion. No copied old predicates, no provider assumptions, no prospective context passed as actual.",
+    "Diagnostics.observe_session_denial": "observe_session_denial(handle:SessionRetentionHandle,final_denial:SessionDeniedAttempt)->SessionRetentionReceipt once; final distinct support node retains actual first denial finish response. No additional event, main-chain successor or recursion; unconfirmed retention stays API observation.",
+    "SessionExecutionGate.capture_disposition": "API_ONLY capture_disposition()->ACTIVE|SEALED|UNAVAILABLE. Read exact trusted private capture token under independent tiny nonblocking token lock; no lifecycle lock, stage grant, uncontrolled callback or owner execution. Owner updates immutable phase/seal token during lifecycle-locked admission/publication/halt. Collector checks before/after IO without waiting.",
+    "Diagnostics.recovery_capture": "recovery_capture(*,execution_gate:SessionExecutionGate|None=None)->existing RecoveryCapture adapter. Gate None old standalone call shape unchanged. Session exact ReferenceDiagnostics stores the privately issued gate on scope and checks capture_disposition before/after IO; cleanup finalization is separately authorized.",
+    "Diagnostics.assessment_capture": "assessment_capture(*,relation:PostAssessmentLink|SessionChildLink|SessionAssessmentLink|None=None,execution_gate:SessionExecutionGate|None=None)->assessment adapter. Gate None old standalone call shape unchanged. Session child scopes retain exact issued gate and typed relation; complete_assessment keeps existing signature and reads scope-bound gate/cleanup state.",
+    "SessionLifecycleScope.observe_clock": "observe_clock()->ClockObservation; actual collector clock under nonblocking acquisition, no reentrant external IO, gate checked before/after read. Exact measured monotonic required for canonical lifecycle time; unavailable/busy/regressing clock stays unavailable and produces PendingLifecycleRecord, never fabricated time."
+  },
+  "registration_delta": {
+    "code_paths": [
+      "core/ash_pattern_engine/session_values.py",
+      "core/ash_pattern_engine/session.py"
+    ],
+    "contract_paths": [
+      "docs/architecture/m3_session_lifecycle_contract.md",
+      "docs/architecture/m3_session_lifecycle_policy.md"
+    ],
+    "schemas": [
+      "data/schemas/m3_session_lifecycle_schema.json"
+    ],
+    "examples": [
+      "examples/core_session_lifecycle/session_cases.example.json",
+      "examples/core_session_lifecycle/session_rejections.example.json"
+    ],
+    "tests": [
+      "tests/test_m3_session_values.py",
+      "tests/test_m3_session_lifecycle.py",
+      "tests/test_m3_session_schemas.py",
+      "tests/test_m3_session_diagnostics.py"
+    ],
+    "existing_owners": [
+      "core/ash_pattern_engine/recovery.py",
+      "core/ash_pattern_engine/recovery_values.py",
+      "core/ash_pattern_engine/state_model.py",
+      "core/ash_pattern_engine/diagnostics.py",
+      "core/ash_pattern_engine/diagnostics_values.py",
+      "scripts/reference_diagnostics_host.py",
+      "data/schemas/m3_recovery_value_schema.json",
+      "data/schemas/m3_reference_diagnostic_bundle_schema.json"
+    ]
+  },
+  "verification_ids": [
+    "N3-V01",
+    "N3-V02",
+    "N3-V03",
+    "N3-V04",
+    "N3-V05",
+    "N3-V06",
+    "N3-V07",
+    "N3-V08",
+    "N3-V09",
+    "N3-V10",
+    "N3-V11",
+    "N3-V12",
+    "N3-V13",
+    "N3-V14",
+    "N3-V15",
+    "N3-V16"
+  ],
+  "execution_gate_delta": {
+    "failure_code": "SESSION_EXECUTION_CANCELLED",
+    "owners": [
+      "recovery_values.FAILURE_CODES",
+      "m3_recovery_value_schema RecoveryFailureDetail.failure_code",
+      "Diagnostics closed safe failure mapping"
+    ],
+    "meaning": "A session-issued per-command execution capability was revoked or stale before a further stage. It is not collaborator malfunction or mathematical no-path.",
+    "standalone_behavior": "recover(origin,operation_context=exact RecoveryOperationContext,execution_gate=None) unchanged",
+    "cleanup": "N2 scope.finish remains exactly once whenever admitted, including cancellation. Its cleanup lane can finalize/release resources and retain actual late result/completion in separate correlated audit. After owner terminal sealing, no new ordinary grants or frozen main-chain members are allowed; already granted in-flight storage outcomes remain actual late/unknown-storage evidence, not false NONE. Collector never calls lifecycle lock or session callback while holding its IO lock.",
+    "failure_field": "execution_gate",
+    "additive_field_owners": [
+      "recovery_values.FIELD_NAMES",
+      "m3_recovery_value_schema failure field enums",
+      "Diagnostics safe failure field mapping"
+    ],
+    "collector_locking": "Session terminal/denial/freeze/final retention ports do not wait for collector IO: nonblocking acquisition and no reentrant external callback IO. Busy returns truthful NOT_CONFIRMED, preserving pending evidence. Collector-owned code invokes no lifecycle execution callback; injected clock/store callbacks may reenter owner while collector RLock is held, supported by terminal nonblocking acquisition and IO-depth refusal. Session-owned N2 checks gate after clock/store callbacks; late physical storage stays correlated audit and never frozen main-chain membership. Collector capture_disposition is distinct from stage_grant and acquires only an independent nonblocking token lock, never lifecycle lock.",
+    "finalization_identity": "Lifecycle and denial finish are exactly once. Reservation remains held through actual final-result sidecar observation or explicit expiry; once-final sidecar uses separate immutable reference, never overwrites tentative supporting node. Own retention receipt remains API-only to prevent acknowledgment recursion.",
+    "collector_binding": "With execution_gate None RecoveryEngine calls existing recovery_capture()/assessment_capture(relation=...) without new kwargs, preserving arbitrary legacy collaborators. Session-gated calls pass execution_gate to exact ReferenceDiagnostics additive keyword ports; scope stores trusted gate, and complete_assessment/_complete uses that scope-bound gate for post-IO/late cleanup checks."
+  },
+  "live_origin": {
+    "snapshot_fields": [
+      "current_assessment_reference",
+      "observed_system_state_class"
+    ],
+    "association": "Owner stores exact complete assessment and accepted generation. A current pointer is valid only with actual current state, current context, complete same collector prefix and exact full source/profile bindings. State-cycle equality alone cannot restore membership.",
+    "admission": "Submitted full expected_snapshot must equal actual public snapshot before lease issuance. Private owner creates distinct active snapshot at the same state/mode generation; the exact lease retains before and active_snapshot. Commit checks actual active snapshot against owner-issued active snapshot, not caller before.",
+    "post_commit": "State/mode publication increments generation; current assessment reference/class are null and admission AUDIT_BLOCKED until actual current-context assessment and completion are confirmed. Confirmed N2 postassessment can be associated to recovered publication; containment/resolution perform actual two-event post-mode child pair. Owner-held post-mode active snapshot becomes the gate phase baseline; immutable lease keeps initial active snapshot. Halt leaves both assessment fields null.",
+    "context_unavailable": "No actual assessment class is invented. Mode is independently authoritative terminal/containment state."
+  },
+  "raw_business_guard": {
+    "serializer": "exact owned DAG traversal to plain record; json.dumps(ensure_ascii=True,separators=(',',':'),allow_nan=False) UTF8 bytes; bounded counting stream stops at cap+1 without truncating a valid packet",
+    "ordinary": "Before ordinary CAS, preflight candidate result, prospective complete history, and anticipated terminal closure using actual prior DAG and finite registered maxima for not-yet-known terminal fields. Each must fit33554432. Exact overflow rejects SESSION_RAW_BUSINESS_LIMIT with no ordinary publication. Structural finite ceilings do not prove the aggregate byte limit.",
+    "mandatory_halt": "Latch first even on overflow. Do not label oversize value a valid raw packet. Return PendingLifecycleRecord reason RAW_BUSINESS_LIMIT and actual terminal snapshot; preserve complete immutable API object DAG and PARTIAL persisted coverage. No silently shortened full_diagnostic_chain.",
+    "bounded_return": "SessionRawBusinessFailure is the bounded execute return for ordinary wire-limit refusal or mandatory terminal overflow. Complete immutable actual result/history remain API object-DAG; do not embed oversize N2 packet in the compact descriptor or claim a valid raw serialization."
+  },
+  "bridge_rules": {
+    "payload": "exact existing RecoveryDiagnostic nine fields; steps=()",
+    "authority": "Actual owner session handoff or publication decision only; original_state_class and recovery_category match historical main assessment, original_diagnostic unchanged. Typed cause/context/publication supplies actual live observations.",
+    "outcome": "RECOVERED/RECOVERED_VIA_FALLBACK only for actual committed corresponding N2 success; ESCALATE_TO_CONTAINMENT for actual containment handoff; BLOCKED for actual halt/no-path/blocked request; NOT_APPLICABLE for actual stable no-action. Exact valid source rule subset unchanged.",
+    "graph": "New main decision bridge at RECOVERY follows previous CLASSIFICATION or RECOVERY, then CONTAINMENT at ESCALATION follows that bridge. Direct NORMAL halt bridge precedes TERMINAL. Contained halt uses confirmed CONTAINMENT predecessor. Resolution creates control node and actual independent assessment root, never RECOVERY-after-ESCALATION."
+  },
+  "requirement_id": "YWE-REQ-0044",
+  "decision_id": "ADR-0033"
+}

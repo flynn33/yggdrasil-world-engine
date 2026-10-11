@@ -92,6 +92,11 @@ APPROVED_REFERENCE_SOURCES = {
     "docs/design-planning/m2/consumer-compatibility/verify_compatibility.py",
     "docs/design-planning/m2/readiness/probes/schema_readiness_probe.py",
     "docs/design-planning/m2/readiness/probes/verify_probe.py",
+    "docs/design-planning/m3/session-lifecycle/derive_bounds.py",
+    "docs/design-planning/m3/session-lifecycle/derive_command_reservations.py",
+    "docs/design-planning/m3/session-lifecycle/generate_graph_control.py",
+    "docs/design-planning/m3/session-lifecycle/raw_business_guard_controls.py",
+    "docs/design-planning/m3/session-lifecycle/replay_independent.py",
 }
 
 CODE_PATTERNS = {

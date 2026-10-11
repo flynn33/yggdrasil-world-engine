@@ -13,6 +13,26 @@ from check_platform_agnosticism import platform_violations
 
 
 class ReferenceBoundaryTests(unittest.TestCase):
+    def test_reviewed_n3_controls_do_not_admit_neighboring_source(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            controls = root / "docs/design-planning/m3/session-lifecycle"
+            controls.mkdir(parents=True)
+            for name in ("derive_bounds.py", "derive_command_reservations.py",
+                         "generate_graph_control.py", "raw_business_guard_controls.py",
+                         "replay_independent.py"):
+                (controls / name).write_text("# Representation control\n", encoding="utf-8")
+            violations, inspected = platform_violations(root)
+            self.assertEqual([], violations)
+            self.assertEqual(5, inspected)
+            for name in ("session_runtime.py", "derive_bounds_extra.py", "product.cpp"):
+                (controls / name).write_text("# Unauthorized neighbor\n", encoding="utf-8")
+            violations, inspected = platform_violations(root)
+            self.assertEqual(8, inspected)
+            self.assertEqual(3, len(violations))
+            for name in ("session_runtime.py", "derive_bounds_extra.py", "product.cpp"):
+                self.assertTrue(any(f"session-lifecycle/{name}:" in item for item in violations))
+
     def test_reviewed_state_reference_files_do_not_admit_neighboring_runtime(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

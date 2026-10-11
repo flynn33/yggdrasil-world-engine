@@ -1,13 +1,13 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-40
+**Revision:** planning-41
 **Date:** October 11, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-39 at `0949184b7f1be0960fec9dd409cbf09647921e61`; full history remains in Git.
+**Supersedes:** planning-40 at `4f7cd2e38367e1b3cc75eefffb8f752586e1c7a2`; full history remains in Git.
 
-**Current approval and continuation:** Section 15 records the published reconciliation and tested wiki publication tooling. Section 14 preserves the actual source execution readback. Section 13 preserves the October 9 autonomous N3 direction; sections 11 and 12 preserve the separately scoped external package outcome. N3 contract design continues; this revision does not accept M3 or claim N3 test execution.
+**Current approval and continuation:** Section 16 records actual owner wiki publication and N3 contract adoption with executed representation controls. Sections 14 and 15 preserve source and tooling checkpoints. Section 13 preserves the October 9 autonomous N3 direction; sections 11 and 12 preserve the separately scoped external package outcome. Implement the adopted N3 contract next; this revision does not accept N3 runtime behavior or M3.
 
 ## 1. Current working brief
 
@@ -21,7 +21,7 @@
 | Next milestone | M4 remains planned; its dependency is M3 acceptance |
 | M2 acceptance | Complete; immutable evidence records all six exit criteria and eight deliverables |
 | Source closure | Original clean full execution and successful exact-revision Ubuntu/Windows CI verified October 11 (section 14); section 12 external review remains representation-matched only, `acceptance=false`, `provenance_review_required=true`; neither accepts N3 or M3 |
-| Wiki | Publication unfinished until actual remote readback establishes completion |
+| Wiki | Owner publication `a44ce7d` verified from source `4f7cd2e`; all 47 remote pages match reviewed bytes (section 16) |
 | Publication | Unreleased; no GitHub Release objects exist as verified September 20, 2026 |
 | Workflow | Autonomous execution and owner-account publication authorized by package `YWE-M3-N3-AUTONOMOUS-001` r1 (section 13); no operator approval gates, operator reviews, or mandatory separate reviewer-service sign-off; technical checks and source constraints retained |
 
@@ -1302,3 +1302,90 @@ governance records are committed. No N3 implementation or acceptance is claimed.
 M0–M2 remain accepted; all five M3 exit criteria remain outstanding. No owner
 action is assigned. Continue through wiki publication, N3 implementation and
 verification, then the remaining roadmap.
+
+## 16. N3 contract adoption and actual wiki publication — October 11, 2026
+
+**Current step:** P1 complete through contract adoption. P2 lifecycle
+implementation is next; no N3 runtime acceptance or M3 exit is claimed.
+
+Owner-authored repository checkpoint `4f7cd2e38367e1b3cc75eefffb8f752586e1c7a2`
+is published on GitHub main. Its clean selected execution passed eleven checks,
+zero blocking failures and zero advisories in 226.031 seconds. All nineteen
+focused wiki and existing version-authority tests passed in its exact clean
+checkout in 8.001 seconds. This is a selected run, not full unfiltered execution.
+Reports are external at
+`C:\Users\james\AppData\Local\Temp\ywe-owner-wiki-clean-4f7cd2e-20261011-report`.
+[Exact-revision CI 38167117359](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38167117359)
+was running at the latest readback. The preceding
+[CI 38164808814](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38164808814)
+for `0949184b7f1be0960fec9dd409cbf09647921e61` completed successfully; both actual
+operating-system jobs report successful canonical suite steps.
+
+The wiki is actually published at owner-authored revision
+`a44ce7d2564984390499b4ea98de9d803d60aa62`, from repository source `4f7cd2e`.
+Git remote SHA readback and a separate fresh remote clone confirm all 47 reviewed
+page names and bytes. Thirty-two generated surfaces verify unchanged from their
+exact committed source projection; fifteen manual pages remain preserved, with
+five reviewed manual corrections. Home SHA256 is
+`b9f1f94543be3da37b1761d811ea8b956a148e28bae4e11ed9cca1ce6857d684`;
+Specification-Roadmap SHA256 is
+`8d0db8e8a0725b1f06565911393050e088bd09ffaeca8bb16f586a3a479f3e4a`.
+The actual owner account was verified as `flynn33`; publication used no force
+push. The full proof remains external at
+`C:\Users\james\AppData\Local\Temp\ywe-owner-wiki-publication-20261011-r4/PUBLICATION_READBACK.json`.
+The two frozen patch encoding defects were corrected only in a derived LF patch;
+all five resulting manual pages match their independently frozen UTF-8 copies.
+
+The new [N3 lifecycle contract](../architecture/m3_session_lifecycle_contract.md)
+and [independent safety policy](../architecture/m3_session_lifecycle_policy.md)
+are adopted under YWE-REQ-0044 and ADR-0033 before dependent implementation.
+Their [companion package](m3/session-lifecycle/README.md) defines 38 business
+types, 35 ports and thirteen snapshot fields, with the complete resource ledger,
+safe graph, structural controls and frozen external proposal provenance. The
+policy's actual adopted LF SHA256 is
+`24e2584279b95b8e3659bd61e6b5149311f344b03b981e88f74ae37775591910`;
+the business inventory and safe projection bind those exact bytes.
+
+Root independently verified all twenty frozen proposal hashes and twelve actual
+source hashes, then ran both frozen replay controls in a fresh external copy;
+five regenerated reports were byte-identical. The separate review also repeated
+those checks. Adoption changes include truthful status/IDs, repository locations,
+portable script source roots and reconciled policy/inventory hashes. All three
+portable controls passed after adoption. The new support bound remains 966,792
+bytes; ordinary and terminal bounds remain 323,739 and 644,761 bytes within their
+fixed 327,680 and 655,360 reservations. These are representation controls,
+not capture acknowledgments, session executions, native IO or N3 acceptance.
+
+Implementation seam review also made the issued lifecycle capture gate, the
+scope-owned nonblocking measured clock and once-only final history index explicit
+before implementation. No business wire type or numeric bound was added. A fresh
+external copy verified all twenty adopted artifact hashes and regenerated all
+six indexed representation reports identically. Artifact hashes use normalized
+UTF-8/LF bytes, matching committed Git blobs.
+
+The first precommit selected run passed nine checks and failed M1 and the
+platform boundary because five newly adopted proof scripts were absent from the
+exact approved-reference-source inventory. Its failed report is preserved at
+`C:\Users\james\AppData\Local\Temp\ywe-n3-adoption-precommit-20261011.json`.
+The five exact paths are now approved; neighboring source files remain forbidden.
+Both boundary tests passed, including the new neighboring-file refusal cases.
+The corrected governance, M0, M1 and platform checks passed with zero failures or
+advisories; their separate report is
+`C:\Users\james\AppData\Local\Temp\ywe-n3-adoption-precommit-corrected-20261011.json`.
+No guard or existing test was weakened. Exact-commit verification and publication
+are recorded separately after this candidate is committed.
+
+The implementation must preserve exact full source guards, actual fresh child
+assessment, private exclusive leases, controlled compare-and-swap publication,
+all four containment and five halt triggers, authorized resolution with actual
+post-mode assessment, terminal latch before IO, once completion and final
+observations, bounded denial handling, complete safe retention and aggregate
+raw JSON refusal. Existing standalone N2 behavior and all source-owned TEN
+semantics remain binding. Actual collector capacity can refuse admission;
+automatic purge, cap increases and fabricated evidence remain forbidden.
+
+Continue through implementation and all sixteen N3 verification groups, then
+the remaining M3 exits and M4–M10. M0–M2 remain accepted, M3 remains active and
+platform work remains deferred. No owner action is assigned. This containing
+commit and subsequent readback are the save receipt; their checks are not
+predeclared here.

@@ -59,6 +59,23 @@ Every subsystem is measured on five independent dimensions:
 
 Indicators: 🟢 complete, 🟡 in progress, ⚪ planned, 🔴 blocked, and ⏸️ deferred.
 
+### Current development checkpoint — October 11, 2026
+
+M0–M2 remain accepted and M3 is active. The N3 reference lifecycle
+[contract](../architecture/m3_session_lifecycle_contract.md),
+[policy](../architecture/m3_session_lifecycle_policy.md) and
+[exact inventory/capacity controls](../design-planning/m3/session-lifecycle/README.md)
+are adopted before implementation. Executed structural controls verify their
+representation bounds; session runtime verification remains outstanding. The
+next work is implementing admission, controlled publication, containment,
+authorized resolution, halt and bounded Diagnostics against those contracts.
+
+Owner wiki publication `a44ce7d` is remotely byte-verified from source `4f7cd2e`.
+The [README development checkpoint](../../README.md#development-checkpoint--2026-10-11)
+and [Project Record section 16](../design-planning/Project_Record.md#16-n3-contract-adoption-and-actual-wiki-publication--october-11-2026)
+carry the actual published verification and continuation. This increment does
+not accept N3, any M3 exit criterion or a platform product.
+
 ## Repository assessment
 
 The repository contains a substantial architecture and conformance corpus, but

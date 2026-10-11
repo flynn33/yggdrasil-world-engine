@@ -1,0 +1,1666 @@
+{
+  "enums": [
+    [
+      "SourceStatus",
+      [
+        "VERIFIED_CLEAN",
+        "VERIFIED_DIRTY",
+        "UNKNOWN"
+      ]
+    ],
+    [
+      "UnavailableReason",
+      [
+        "NOT_MEASURED",
+        "NOT_PROVIDED",
+        "EXCLUDED_REFERENCE_SCOPE",
+        "NOT_IMPLEMENTED",
+        "SOURCE_NOT_VERIFIED",
+        "CLOCK_UNAVAILABLE",
+        "LOSS_UNCONFIRMED",
+        "RETENTION_EXPIRED",
+        "STORAGE_UNAVAILABLE",
+        "CLOCK_REGRESSION",
+        "DURATION_LIMIT",
+        "COUNTER_LIMIT"
+      ]
+    ],
+    [
+      "OperatingSystem",
+      [
+        "WINDOWS",
+        "LINUX",
+        "MACOS",
+        "UNKNOWN"
+      ]
+    ],
+    [
+      "Architecture",
+      [
+        "X86_64",
+        "ARM64",
+        "UNKNOWN"
+      ]
+    ],
+    [
+      "HostClass",
+      [
+        "HOST",
+        "VM",
+        "SIMULATOR",
+        "UNKNOWN"
+      ]
+    ],
+    [
+      "Implementation",
+      [
+        "REFERENCE_DEVELOPMENT_DIAGNOSTICS",
+        "REFERENCE_RELEASE_DIAGNOSTICS"
+      ]
+    ],
+    [
+      "ProfileId",
+      [
+        "REFERENCE_DEVELOPMENT",
+        "REFERENCE_RELEASE"
+      ]
+    ],
+    [
+      "CoverageSource",
+      [
+        "STATE_MODEL",
+        "NORMALIZATION",
+        "RECOVERY_ENGINE",
+        "DIAGNOSTICS",
+        "PROTECTED_STORAGE",
+        "PAIRED_EXPORT",
+        "REALM_ENCODER",
+        "TRANSITION_REGISTRY",
+        "TOPOLOGY_GENERATOR",
+        "AXIOM_EVALUATOR",
+        "GENERATION_PLANNER",
+        "ARTIFACT_EMITTER",
+        "NATIVE_RUNTIME",
+        "NATIVE_RELEASE",
+        "PHYSICAL_CRASH",
+        "ENVIRONMENT_OS",
+        "RUNTIME_VERSION",
+        "ARCHITECTURE",
+        "HOST_CLASS",
+        "UTC_CLOCK",
+        "MONOTONIC_CLOCK"
+      ]
+    ],
+    [
+      "CoverageStatus",
+      [
+        "AVAILABLE",
+        "UNAVAILABLE",
+        "EXCLUDED"
+      ]
+    ],
+    [
+      "OverallCoverage",
+      [
+        "COMPLETE_DECLARED_REFERENCE_SCOPE",
+        "PARTIAL",
+        "UNAVAILABLE"
+      ]
+    ],
+    [
+      "RetentionReason",
+      [
+        "EXPLICIT_PURGE",
+        "DURATION_EXPIRED",
+        "WHOLE_OPERATION_ROTATION",
+        "UNCERTAIN_STORAGE_RANGE"
+      ]
+    ],
+    [
+      "StorageState",
+      [
+        "PROTECTED_VERIFIED",
+        "UNAVAILABLE",
+        "UNCERTAIN"
+      ]
+    ],
+    [
+      "CanonicalKind",
+      [
+        "STATE_VALIDITY",
+        "RECOVERY",
+        "FALLBACK",
+        "CONTAINMENT",
+        "SAFE_HALT"
+      ]
+    ],
+    [
+      "CanonicalSeverity",
+      [
+        "INFO",
+        "WARNING",
+        "ERROR",
+        "CRITICAL"
+      ]
+    ],
+    [
+      "CanonicalStage",
+      [
+        "DETECTION",
+        "CLASSIFICATION",
+        "RECOVERY",
+        "ESCALATION",
+        "TERMINAL"
+      ]
+    ],
+    [
+      "CanonicalDisposition",
+      [
+        "RESOLVED",
+        "PENDING",
+        "BLOCKED",
+        "ESCALATED",
+        "TERMINAL"
+      ]
+    ],
+    [
+      "CanonicalRule",
+      [
+        "ASH-STATE-STRUCTURE-001",
+        "ASH-STATE-VALIDITY-001",
+        "ASH-STATE-GENERAL-001",
+        "ASH-CODEWORD-STRUCTURE-001",
+        "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+        "ASH-CLASSIFICATION-MAPPING-001",
+        "ASH-RECOVERY-ACTION-001",
+        "ASH-FALLBACK-SELECTION-001",
+        "ASH-CONTAINMENT-TRIGGER-001",
+        "ASH-HALT-TRIGGER-001",
+        "ASH-CONTAINMENT-TRIGGER-002",
+        "ASH-CONTAINMENT-TRIGGER-003",
+        "ASH-CONTAINMENT-TRIGGER-004",
+        "ASH-HALT-TRIGGER-002",
+        "ASH-HALT-TRIGGER-003",
+        "ASH-HALT-TRIGGER-004",
+        "ASH-HALT-TRIGGER-005"
+      ]
+    ],
+    [
+      "Admissibility",
+      [
+        "VALID",
+        "TRANSFORMATION_COMPATIBLE",
+        "TRANSFORMATION_INCOMPATIBLE",
+        "UNCLASSIFIED"
+      ]
+    ],
+    [
+      "Compatibility",
+      [
+        "COMPATIBLE",
+        "INCOMPATIBLE",
+        "UNKNOWN"
+      ]
+    ],
+    [
+      "NormalizationStatus",
+      [
+        "ALREADY_VALID",
+        "NORMALIZABLE",
+        "NOT_NORMALIZABLE",
+        "BLOCKED"
+      ]
+    ],
+    [
+      "RecoverabilityRelevance",
+      [
+        "NO_RECOVERY_NEEDED",
+        "RECOVERY_APPLICABLE",
+        "NOT_RECOVERABLE",
+        "CONTAINMENT_NEEDED"
+      ]
+    ],
+    [
+      "SystemClass",
+      [
+        "STABLE",
+        "UNSTABLE",
+        "CORRECTABLE",
+        "DEGRADED",
+        "CONTAINED",
+        "FAILED",
+        "SAFE_HALT"
+      ]
+    ],
+    [
+      "RecoveryCategory",
+      [
+        "NO_ACTION",
+        "NORMALIZE_STATE",
+        "APPLY_CORRECTION",
+        "FALLBACK_REQUIRED",
+        "CONTAINMENT_REQUIRED",
+        "ESCALATION_REQUIRED",
+        "TERMINAL_NO_RECOVERY"
+      ]
+    ],
+    [
+      "PredicateName",
+      [
+        "CORRECTION_PATH_IS_KNOWN",
+        "FALLBACK_IS_AVAILABLE",
+        "APPLICABILITY",
+        "ADDITIONAL_VALIDATION"
+      ]
+    ],
+    [
+      "Producer",
+      [
+        "STATE_MODEL",
+        "NORMALIZATION",
+        "RECOVERY_ENGINE",
+        "DIAGNOSTICS",
+        "REFERENCE_HOST"
+      ]
+    ],
+    [
+      "EventType",
+      [
+        "SESSION_START",
+        "SESSION_END",
+        "DIAGNOSTIC",
+        "OPERATION_ADMITTED",
+        "OPERATION_COMPLETED",
+        "ACTION_OBSERVED",
+        "INCIDENT",
+        "META_DIAGNOSTIC",
+        "HEALTH",
+        "RETENTION",
+        "EXPORT"
+      ]
+    ],
+    [
+      "MessageTemplate",
+      [
+        "SESSION_OPENED",
+        "SESSION_CLOSED",
+        "ORIGIN_ATTACHED",
+        "DIAGNOSIS_RECORDED",
+        "CLASSIFICATION_RECORDED",
+        "NORMALIZATION_COMPUTED",
+        "POST_VALIDATION_RECORDED",
+        "RECOVERY_ACTION_RECORDED",
+        "RECOVERY_REFUSED",
+        "RECOVERY_HANDOFF_RECORDED",
+        "DIAGNOSTIC_NONCONFORMANCE",
+        "CAPTURE_UNCONFIRMED",
+        "RETENTION_REPORTED",
+        "EXPORT_COMPLETE",
+        "EXPORT_INCOMPLETE",
+        "UNTRUSTED_PROSE_OMITTED"
+      ]
+    ],
+    [
+      "ObservedOutcome",
+      [
+        "OBSERVED",
+        "NOT_EVALUATED",
+        "COMPLETED",
+        "FAILED",
+        "BLOCKED",
+        "NOT_APPLICABLE",
+        "ALREADY_VALID",
+        "NORMALIZED",
+        "NOT_NORMALIZABLE",
+        "RECOVERED",
+        "RECOVERED_VIA_FALLBACK",
+        "RECOVERY_FAILED",
+        "ESCALATE_TO_CONTAINMENT",
+        "CONTAINMENT_HANDOFF",
+        "HALT_HANDOFF",
+        "TERMINAL_REFUSAL",
+        "CONFIRMED",
+        "REJECTED",
+        "NOT_CONFIRMED",
+        "INCOMPLETE"
+      ]
+    ],
+    [
+      "FailureDomain",
+      [
+        "INPUT",
+        "STATE",
+        "NORMALIZATION",
+        "RECOVERY",
+        "DIAGNOSTICS",
+        "STORAGE",
+        "EXPORT"
+      ]
+    ],
+    [
+      "SafeFailure",
+      [
+        "SOURCE_REPORTED_FAILURE",
+        "ORIGINAL_PROFILE_MISMATCH",
+        "ORIGINAL_SOURCE_MISMATCH",
+        "ORIGINAL_DIAGNOSIS_MISMATCH",
+        "PLAN_TARGET_SET_MISMATCH",
+        "PLAN_SELECTION_MISMATCH",
+        "PLAN_CODEWORD_MISMATCH",
+        "INPUT_REJECTED",
+        "PROFILE_UNAVAILABLE",
+        "NO_TARGET",
+        "POST_VALIDATION_FAILED",
+        "CAPTURE_REJECTED",
+        "CAPTURE_UNCONFIRMED",
+        "REGISTRY_UNAVAILABLE",
+        "NO_APPLICABLE_POLICY",
+        "CORRECTION_PROVIDER_UNAVAILABLE",
+        "CORRECTION_PROOF_INVALID",
+        "NONCONFORMANT_DIAGNOSTIC",
+        "MISSING_REQUIRED_STEP",
+        "STORAGE_FAILURE",
+        "EXPORT_FAILURE"
+      ]
+    ],
+    [
+      "SafeField",
+      [
+        "ORIGINAL_SOURCE",
+        "ORIGINAL_PROFILE",
+        "ORIGINAL_DIAGNOSIS",
+        "ORIGINAL_ASSESSMENT",
+        "TARGET_SET",
+        "SELECTED_TARGET",
+        "CODEWORD_CHAIN",
+        "INPUT",
+        "POST_VALIDATION",
+        "CAPTURE",
+        "REGISTRY",
+        "APPLICABILITY",
+        "ADDITIONAL_VALIDATION",
+        "CANONICAL_ENVELOPE",
+        "CHAIN",
+        "EXPECTED_STEP",
+        "STORE",
+        "EXPORT_PART"
+      ]
+    ],
+    [
+      "FactType",
+      [
+        "ACTUAL_STATE_RETAINED",
+        "STEP_COMPLETED",
+        "POST_STATE_VALID",
+        "POST_STATE_NOT_VALID",
+        "CAPTURE_CONFIRMED",
+        "CAPTURE_NOT_CONFIRMED",
+        "ORIGIN_BINDING_DIFFERED",
+        "PLAN_PROOF_DIFFERED",
+        "REGISTRY_UNAVAILABLE",
+        "NO_CANDIDATE_APPLICABLE",
+        "REQUIRED_STEP_MISSING",
+        "WHOLE_PAIR_COMPLETED",
+        "PAIR_INCOMPLETE"
+      ]
+    ],
+    [
+      "ExpectedInvariant",
+      [
+        "VALID_RETURN",
+        "STABLE_RETURN",
+        "ACKNOWLEDGED_STEPS",
+        "NO_EFFECTS_ON_REFUSAL",
+        "COMPLETE_CHAIN",
+        "PAIRED_EXPORT",
+        "SAFE_PROJECTION"
+      ]
+    ],
+    [
+      "UnknownCause",
+      [
+        "NO_SUPPORTED_CAUSE",
+        "STORAGE_COMMIT_UNCONFIRMED",
+        "CLOCK_NOT_MEASURED",
+        "EXTERNAL_COLLECTOR_TRUTH_NOT_VERIFIED",
+        "NATIVE_RUNTIME_NOT_REALIZED",
+        "PHYSICAL_CRASH_NOT_EXERCISED"
+      ]
+    ],
+    [
+      "PinnedSource",
+      [
+        "YWE_IMPLEMENTATION",
+        "ASH_AGGREGATE",
+        "ASH_STATE_SPACE",
+        "ASH_CODEWORDS",
+        "ASH_VALIDITY",
+        "ASH_CLASSIFICATION",
+        "ASH_RECOVERY",
+        "ASH_DIAGNOSTIC_SCHEMA",
+        "ASH_TAXONOMY",
+        "RAVEN_POLICY",
+        "YWE_NORMALIZATION_POLICY"
+      ]
+    ],
+    [
+      "OmissionCategory",
+      [
+        "SUMMARY",
+        "NOTES",
+        "CALLER_REFERENCE",
+        "PROFILE_ID",
+        "UNVERIFIED_SOURCE_DIGEST",
+        "EVIDENCE_REFERENCE",
+        "INPUT_PREVIEW",
+        "NON_BIT_SCALAR",
+        "URL",
+        "QUERY",
+        "HEADER",
+        "BODY",
+        "EXCEPTION_TEXT",
+        "CAUSAL_TEXT",
+        "STACK",
+        "ABSOLUTE_PATH",
+        "ATTACHMENT",
+        "UNREGISTERED_PAYLOAD",
+        "HYPOTHESIS"
+      ]
+    ],
+    [
+      "RedactionReason",
+      [
+        "UNTRUSTED_FREEFORM",
+        "OPAQUE_REFERENCE_ALIAS",
+        "UNSUPPORTED_SOURCE",
+        "SENSITIVE_CONTENT",
+        "EXCLUDED_REFERENCE_SCOPE"
+      ]
+    ],
+    [
+      "LimitationCode",
+      [
+        "REFERENCE_IMPLEMENTATION_ONLY",
+        "DECLARED_PRODUCERS_ONLY",
+        "TRUSTED_CAPTURE_CONTRACT",
+        "NO_REMOTE_ACK_AUTHENTICATION",
+        "NATIVE_COMPOSITION_DEFERRED",
+        "NATIVE_RELEASE_DEFERRED",
+        "NO_PHYSICAL_CRASH_PROOF",
+        "NO_POWER_LOSS_DURABILITY_PROOF",
+        "NO_ENCRYPTION_CLAIM",
+        "NO_SECOND_USER_ACCESS_TEST",
+        "NO_AMBIENT_ACTIVITY_CAPTURE",
+        "UNTRUSTED_PROSE_OMITTED",
+        "LOSS_RANGE_COALESCED",
+        "PARENT_STORAGE_NOT_VERIFIED"
+      ]
+    ],
+    [
+      "MetaCauseCode",
+      [
+        "REQUIRED_FIELD_MISSING",
+        "SCHEMA_NONCONFORMANCE",
+        "RULE_NOT_APPROVED",
+        "DUPLICATE_REFERENCE",
+        "PARENT_MISMATCH",
+        "ROOT_MISMATCH",
+        "SUBJECT_MISMATCH",
+        "STAGE_REGRESSION",
+        "TERMINAL_SUCCESSOR",
+        "REQUIRED_STEP_MISSING",
+        "PRODUCER_PAYLOAD_MISMATCH",
+        "CLOCK_UNAVAILABLE",
+        "CLOCK_REGRESSION",
+        "DURATION_EXPIRED",
+        "COUNTER_LIMIT",
+        "MAIN_CAPACITY_EXHAUSTED",
+        "COMPLETION_MISSING"
+      ]
+    ],
+    [
+      "ExpectedPhase",
+      [
+        "DETECTION",
+        "CLASSIFICATION",
+        "COMPUTATION",
+        "POST_VALIDATION",
+        "RECOVERY_PREDICATE",
+        "RECOVERY_STEP",
+        "RECOVERY_POST_ASSESSMENT",
+        "BOUNDARY_HANDOFF"
+      ]
+    ],
+    [
+      "StorageCommitStatus",
+      [
+        "COMMITTED",
+        "REJECTED",
+        "UNKNOWN"
+      ]
+    ],
+    [
+      "ExportPart",
+      [
+        "JSON",
+        "MARKDOWN",
+        "MANIFEST",
+        "PUBLICATION"
+      ]
+    ],
+    [
+      "PartName",
+      [
+        "diagnostics.json",
+        "diagnostics.md",
+        "manifest.json"
+      ]
+    ],
+    [
+      "PartStatus",
+      [
+        "NOT_WRITTEN",
+        "WRITTEN_UNCONFIRMED",
+        "CONFIRMED"
+      ]
+    ],
+    [
+      "RetentionReceiptStatus",
+      [
+        "COMPLETED",
+        "REJECTED"
+      ]
+    ],
+    [
+      "StorageVerificationStatus",
+      [
+        "VERIFIED",
+        "REJECTED"
+      ]
+    ],
+    [
+      "StoragePrincipal",
+      [
+        "EFFECTIVE_USER",
+        "SYSTEM"
+      ]
+    ],
+    [
+      "ContextField",
+      [
+        "INPUT_STATE",
+        "ACTUAL_STATE",
+        "SELECTED_TARGET",
+        "ELIGIBLE_TARGETS",
+        "CODEWORD_CHAIN",
+        "ADMISSIBILITY_STATUS",
+        "TRANSFORMATION_COMPATIBILITY",
+        "NORMALIZATION_STATUS",
+        "RECOVERABILITY_RELEVANCE",
+        "IS_VALID",
+        "ORBIT_INFO",
+        "SYSTEM_STATE_CLASS",
+        "RECOVERY_CATEGORY",
+        "PREDICATE_NAME",
+        "PREDICATE_VALUE",
+        "CANDIDATE_ORDER_INDEX",
+        "STEP_INDEX",
+        "PROFILE_REFERENCE",
+        "SOURCE_EVIDENCE_REFERENCE",
+        "FIXTURE_REFERENCE",
+        "PROFILE_EVIDENCE_REFERENCE",
+        "ORIGINAL_ASSESSMENT_REFERENCE",
+        "POST_ASSESSMENT_REFERENCE",
+        "RECOVERY_DIAGNOSTIC_REFERENCE",
+        "BEFORE_STATE",
+        "CODEWORD",
+        "AFTER_STATE",
+        "POLICY_REFERENCE",
+        "VALIDATION_STATUS",
+        "FAILED_FIELD",
+        "PROOF_EVIDENCE_REFERENCE",
+        "RECOVERY_SAFETY_EVIDENCE_REFERENCE"
+      ]
+    ],
+    [
+      "InputFailure",
+      [
+        "INPUT_DEPTH_LIMIT",
+        "INPUT_JSON_DUPLICATE_KEY",
+        "INPUT_JSON_INVALID",
+        "INPUT_JSON_NONFINITE",
+        "INPUT_KIND_UNSUPPORTED",
+        "INPUT_NUMERIC_TOKEN_INVALID",
+        "INPUT_RECORD_INVALID",
+        "INPUT_RECORD_KEY_INVALID",
+        "INPUT_RECORD_SIZE_LIMIT",
+        "INPUT_SIGNATURE_INVALID",
+        "INPUT_SIZE_LIMIT",
+        "INPUT_STATE_SPACE_INVALID",
+        "INPUT_TOKEN_LIMIT",
+        "INPUT_UTF8_INVALID",
+        "STATE_COORDINATE_TYPE",
+        "STATE_COORDINATE_VALUE",
+        "STATE_WIDTH"
+      ]
+    ],
+    [
+      "DiagnosticsFailure",
+      [
+        "DIAGNOSTICS_VALUE_INVALID",
+        "DIAGNOSTICS_CONFIG_INVALID",
+        "DIAGNOSTICS_ORIGIN_UNAVAILABLE",
+        "DIAGNOSTICS_ORIGIN_MISMATCH",
+        "DIAGNOSTICS_RESERVATION_REFUSED",
+        "DIAGNOSTICS_EVENT_TOO_LARGE",
+        "DIAGNOSTICS_ALIAS_LIMIT",
+        "DIAGNOSTICS_BYTE_LIMIT",
+        "DIAGNOSTICS_DURATION_LIMIT",
+        "DIAGNOSTICS_SEQUENCE_LIMIT",
+        "DIAGNOSTICS_RECORD_NONCONFORMANT",
+        "DIAGNOSTICS_REQUIRED_STEP_MISSING",
+        "DIAGNOSTICS_META_UNAVAILABLE",
+        "DIAGNOSTICS_COLLECTOR_FAILURE",
+        "STORAGE_PROTECTION_UNAVAILABLE",
+        "STORAGE_PARENT_UNTRUSTED",
+        "STORAGE_IDENTITY_CHANGED",
+        "STORAGE_REPARSE_REFUSED",
+        "STORAGE_PATH_ALREADY_EXISTS",
+        "STORAGE_COMMIT_REJECTED",
+        "STORAGE_COMMIT_UNCONFIRMED",
+        "EXPORT_SNAPSHOT_INVALID",
+        "EXPORT_REDACTION_FAILED",
+        "EXPORT_JSON_FAILED",
+        "EXPORT_MARKDOWN_FAILED",
+        "EXPORT_MANIFEST_FAILED",
+        "EXPORT_PUBLICATION_FAILED",
+        "EXPORT_BYTE_LIMIT",
+        "EXPORT_PARITY_FAILED",
+        "DIAGNOSTICS_COMPLETION_MISSING",
+        "DIAGNOSTICS_COMPLETION_MISMATCH",
+        "DIAGNOSTICS_REPLAY_REFUSED",
+        "DIAGNOSTICS_SUPPORTING_LIMIT",
+        "DIAGNOSTICS_INCIDENT_LIMIT",
+        "DIAGNOSTICS_RAW_PACKET_LIMIT",
+        "EXPORT_SLOT_OCCUPIED",
+        "DIAGNOSTICS_CLOCK_UNAVAILABLE",
+        "DIAGNOSTICS_CLOCK_REGRESSION",
+        "DIAGNOSTICS_COUNTER_LIMIT"
+      ]
+    ],
+    [
+      "ProfileAvailability",
+      [
+        "AVAILABLE",
+        "UNAVAILABLE"
+      ]
+    ],
+    [
+      "SafeInputKind",
+      [
+        "ASH_STATE",
+        "REJECTED"
+      ]
+    ],
+    [
+      "PredicateEvaluation",
+      [
+        "EVALUATED",
+        "NOT_EVALUATED"
+      ]
+    ],
+    [
+      "RecoveryStepKind",
+      [
+        "NORMALIZE",
+        "CORRECT",
+        "APPLICABILITY",
+        "ADDITIONAL_VALIDATION",
+        "SELECT_FALLBACK",
+        "VALIDATE_RECOVERY",
+        "VALIDATE_FALLBACK",
+        "CANDIDATE_DECISION",
+        "HANDOFF",
+        "SUMMARY"
+      ]
+    ],
+    [
+      "CounterField",
+      [
+        "ACCEPTED",
+        "REJECTED",
+        "RETAINED",
+        "EXPIRED",
+        "LOST",
+        "REDACTED_FIELDS",
+        "REDACTED_REFERENCES",
+        "META_OVERFLOW"
+      ]
+    ],
+    [
+      "CounterStatus",
+      [
+        "EXACT",
+        "SATURATED",
+        "UNAVAILABLE"
+      ]
+    ],
+    [
+      "CounterReason",
+      [
+        "COUNTER_LIMIT",
+        "STORAGE_UNCONFIRMED"
+      ]
+    ],
+    [
+      "AdmissionStatus",
+      [
+        "CONFIRMED",
+        "REJECTED",
+        "NOT_CONFIRMED"
+      ]
+    ],
+    [
+      "ProofStatus",
+      [
+        "NOT_EVALUATED",
+        "VERIFIED",
+        "REJECTED"
+      ]
+    ],
+    [
+      "NormalizationDecision",
+      [
+        "ALREADY_VALID",
+        "PLAN_READY",
+        "NOT_NORMALIZABLE",
+        "BLOCKED"
+      ]
+    ],
+    [
+      "PreparationStatus",
+      [
+        "READY",
+        "UNAVAILABLE",
+        "REJECTED"
+      ]
+    ],
+    [
+      "StepStatus",
+      [
+        "COMPLETED",
+        "BLOCKED",
+        "FAILED"
+      ]
+    ],
+    [
+      "ValidationField",
+      [
+        "ORIGINAL_SOURCE",
+        "ORIGINAL_PROFILE",
+        "ORIGINAL_DIAGNOSIS",
+        "ORIGINAL_ASSESSMENT",
+        "ORIGIN_PROFILE",
+        "ORIGIN_SOURCE",
+        "SUBMITTED_SOURCE",
+        "SUBMITTED_PROFILE",
+        "TARGET_SET",
+        "SELECTED_TARGET",
+        "CODEWORD_CHAIN",
+        "REGISTRY_SOURCE",
+        "REGISTRY_PROFILE",
+        "CERTIFICATION_INVENTORY",
+        "CERTIFICATION_STATE",
+        "POST_VALIDATION",
+        "INPUT",
+        "UNKNOWN_REGISTERED_FIELD"
+      ]
+    ],
+    [
+      "EscalationPolicy",
+      [
+        "TRY_NEXT",
+        "ESCALATE_TO_CONTAINMENT"
+      ]
+    ],
+    [
+      "PredicatePhase",
+      [
+        "APPLICABILITY",
+        "ADDITIONAL_VALIDATION"
+      ]
+    ],
+    [
+      "PredicateObservationStatus",
+      [
+        "TRUE",
+        "FALSE",
+        "UNAVAILABLE"
+      ]
+    ],
+    [
+      "SupportingKind",
+      [
+        "CANONICAL_SOURCE",
+        "PROFILE",
+        "ASSESSMENT",
+        "RECOVERY_DIAGNOSTIC",
+        "NORMALIZATION_PROOF",
+        "CORRECTION_PROOF",
+        "REGISTRY_PROOF",
+        "CONDITION",
+        "PREDICATE_OBSERVATION",
+        "RECOVERY_SAFETY",
+        "TARGET_VALIDITY"
+      ]
+    ],
+    [
+      "CompletionStatus",
+      [
+        "COMPLETE",
+        "INCOMPLETE"
+      ]
+    ],
+    [
+      "PropagationStatus",
+      [
+        "SAFE",
+        "RISK",
+        "UNAVAILABLE"
+      ]
+    ],
+    [
+      "AuthorityStatus",
+      [
+        "REACHABLE",
+        "UNREACHABLE",
+        "UNAVAILABLE"
+      ]
+    ],
+    [
+      "DirectiveAction",
+      [
+        "ENTER_CONTAINMENT",
+        "REQUEST_EXTERNAL_AUTHORITY",
+        "ENTER_SAFE_HALT",
+        "REMAIN_CONTAINED",
+        "REMAIN_SAFE_HALT"
+      ]
+    ],
+    [
+      "RequestOrigin",
+      [
+        "POLICY",
+        "SOURCE_RECOVERABILITY",
+        "OBSERVED_EXISTING_MODE"
+      ]
+    ],
+    [
+      "CanonicalContainmentTrigger",
+      [
+        "FALLBACK_FAILURE",
+        "PROPAGATION_RISK",
+        "OPERATOR_REQUEST",
+        "RECOVERY_VALIDATION_FAILURE"
+      ]
+    ],
+    [
+      "CanonicalSafeHaltTrigger",
+      [
+        "ESCALATION_FROM_FAILED",
+        "CONTAINMENT_BREACH",
+        "OPERATOR_HALT_REQUEST",
+        "POLICY_HALT_REQUEST",
+        "UNRESOLVABLE_BLOCKED_RECOVERY"
+      ]
+    ],
+    [
+      "ExistingModeClass",
+      [
+        "CONTAINED",
+        "SAFE_HALT"
+      ]
+    ],
+    [
+      "CaptureObjectKind",
+      [
+        "EVENT",
+        "SUPPORTING"
+      ]
+    ],
+    [
+      "CaptureRemovalStatus",
+      [
+        "REMOVED",
+        "NOT_REMOVED",
+        "UNCONFIRMED"
+      ]
+    ],
+    [
+      "CapturePurgeStatus",
+      [
+        "COMPLETED",
+        "PARTIAL",
+        "REJECTED"
+      ]
+    ]
+  ],
+  "message_templates": [
+    [
+      "SESSION_OPENED",
+      "Reference diagnostic session opened; capture is limited to the declared producers."
+    ],
+    [
+      "SESSION_CLOSED",
+      "Reference diagnostic session closed; retained evidence and coverage limitations remain explicit."
+    ],
+    [
+      "ORIGIN_ATTACHED",
+      "The exact previously confirmed origin was attached by this collector; no origin record was emitted again."
+    ],
+    [
+      "DIAGNOSIS_RECORDED",
+      "State validity was diagnosed under the explicit complete source and profile bindings."
+    ],
+    [
+      "CLASSIFICATION_RECORDED",
+      "Contextual classification evaluated only the recorded context and consulted predicates."
+    ],
+    [
+      "NORMALIZATION_COMPUTED",
+      "Actual full-vector normalization completed; post-validation acknowledgment is pending."
+    ],
+    [
+      "POST_VALIDATION_RECORDED",
+      "Actual post-operation state was diagnosed and classified in its separately linked assessment chain."
+    ],
+    [
+      "RECOVERY_ACTION_RECORDED",
+      "The consulted predicate or value step completed with the structured outcome shown in this record."
+    ],
+    [
+      "RECOVERY_REFUSED",
+      "Recovery was refused before unapproved effects; the original submitted evidence remains retained."
+    ],
+    [
+      "RECOVERY_HANDOFF_RECORDED",
+      "Only a typed containment or halt request was produced; no runtime mode entry is claimed."
+    ],
+    [
+      "DIAGNOSTIC_NONCONFORMANCE",
+      "A required diagnostic invariant failed; the related operation or record was not silently accepted."
+    ],
+    [
+      "CAPTURE_UNCONFIRMED",
+      "Capture did not acknowledge this attempted record; its external persistence remains unconfirmed."
+    ],
+    [
+      "RETENTION_REPORTED",
+      "A whole declared retention range became unavailable; counts and boundary evidence are retained."
+    ],
+    [
+      "EXPORT_COMPLETE",
+      "The JSON and Markdown parts and manifest completed for one verified sanitized snapshot."
+    ],
+    [
+      "EXPORT_INCOMPLETE",
+      "The paired diagnostic export did not complete; retained part status and failure evidence are explicit."
+    ],
+    [
+      "UNTRUSTED_PROSE_OMITTED",
+      "Untrusted producer prose, previews, paths and exception material were omitted before persistence."
+    ]
+  ],
+  "fields": {
+    "SourceProvenance": {
+      "status": "enum:SourceStatus",
+      "verified_revision": "Revision|null",
+      "dirty_path_aliases": "tuple<Alias,0..128>",
+      "unavailable_reason": "enum:UnavailableReason|null"
+    },
+    "DiagnosticsEnvironment": {
+      "os_kind": "enum:OperatingSystem",
+      "runtime_kind": "const:PYTHON_REFERENCE",
+      "runtime_version": "tuple<uint32,3>|null",
+      "architecture": "enum:Architecture",
+      "host_class": "enum:HostClass",
+      "unavailable_fields": "tuple<MissingCoverage,0..8>"
+    },
+    "DiagnosticsIdentity": {
+      "product_id": "const:yggdrasil-world-engine-reference",
+      "product_version": "TrustedVersion",
+      "implementation_id": "enum:Implementation",
+      "profile_id": "enum:ProfileId",
+      "schema_version": "const:1.0.0",
+      "build_id": "Alias",
+      "source_revision": "Revision|null",
+      "source_provenance": "SourceProvenance",
+      "session_reference": "Alias",
+      "environment": "DiagnosticsEnvironment"
+    },
+    "DiagnosticsProfile": {
+      "profile_id": "enum:ProfileId",
+      "implementation_id": "enum:Implementation",
+      "selection_authority": "Alias",
+      "development_payloads_enabled": "bool",
+      "native_release_replacement_status": "const:DEFERRED_M10",
+      "native_release_qualification": "const:NOT_VERIFIED"
+    },
+    "DiagnosticLimits": {
+      "event_capacity": "const:1024",
+      "incident_capacity": "const:32",
+      "alias_capacity": "const:6144",
+      "max_event_bytes": "const:32768",
+      "store_byte_capacity": "const:33554432",
+      "health_capacity": "const:16",
+      "max_active_operations": "const:8",
+      "max_operation_events": "const:768",
+      "capture_duration_milliseconds": "const:600000",
+      "supporting_byte_capacity": "const:2097152",
+      "incident_byte_capacity": "const:1048576",
+      "alias_byte_capacity": "const:2097152",
+      "health_byte_capacity": "const:65536",
+      "inherited_origin_byte_capacity": "const:65536",
+      "envelope_byte_capacity": "const:1048576",
+      "max_json_bytes": "const:33554432",
+      "max_markdown_bytes": "const:50331648",
+      "max_manifest_bytes": "const:65536",
+      "max_export_bundles": "const:1",
+      "protected_disk_byte_capacity": "const:134217728",
+      "logical_serialized_buffer_capacity": "const:201326592",
+      "raw_business_packet_byte_capacity": "const:33554432",
+      "max_meta_records": "const:16",
+      "max_meta_record_bytes": "const:3072",
+      "health_status_byte_capacity": "const:8192",
+      "fallback_health_byte_capacity": "const:8192"
+    },
+    "CaptureRelation": {
+      "parent_operation_reference": "Alias",
+      "parent_action_reference": "Alias",
+      "originating_chain_root_reference": "Alias"
+    },
+    "MissingCoverage": {
+      "source": "enum:CoverageSource",
+      "status": "enum:CoverageStatus",
+      "reason": "enum:UnavailableReason|null"
+    },
+    "RetentionBoundary": {
+      "first_sequence": "uint64",
+      "last_sequence": "uint64",
+      "record_count": "uint64",
+      "reason": "enum:RetentionReason",
+      "coalesced": "bool"
+    },
+    "DiagnosticsHealth": {
+      "coverage_status": "enum:OverallCoverage",
+      "accepted_count": "uint64|null",
+      "rejected_count": "uint64|null",
+      "retained_count": "uint64|null",
+      "expired_count": "uint64|null",
+      "lost_count": "uint64|null",
+      "redacted_field_count": "uint64|null",
+      "redacted_reference_count": "uint64|null",
+      "last_confirmed_sequence": "uint64|null",
+      "first_unavailable_sequence": "uint64|null",
+      "last_unavailable_sequence": "uint64|null",
+      "active_reservations": "uint32[0..8]",
+      "used_bytes": "uint32[0..33554432]",
+      "storage_state": "enum:StorageState",
+      "last_failure_code": "enum:DiagnosticsFailure|null",
+      "missing_sources": "tuple<MissingCoverage,0..32>",
+      "retention_boundaries": "tuple<RetentionBoundary,0..16>",
+      "range_detail_coalesced": "bool",
+      "meta_overflow_count": "uint64|null",
+      "counter_states": "tuple<DiagnosticCounterState,8>",
+      "meta_record_count": "uint32[0..16]",
+      "meta_storage_state": "enum:StorageState",
+      "fallback_cause_code": "enum:MetaCauseCode|null"
+    },
+    "ClockObservation": {
+      "observed_utc": "UtcTimestamp|null",
+      "monotonic_nanoseconds": "uint64|null",
+      "utc_reason": "enum:UnavailableReason|null",
+      "monotonic_reason": "enum:UnavailableReason|null"
+    },
+    "CaptureWindow": {
+      "first_sequence": "uint64|null",
+      "last_sequence": "uint64|null",
+      "start": "ClockObservation",
+      "end": "ClockObservation"
+    },
+    "SafeDiagnosticEnvelope": {
+      "diagnostic_kind": "enum:CanonicalKind",
+      "severity": "enum:CanonicalSeverity",
+      "stage": "enum:CanonicalStage",
+      "disposition": "enum:CanonicalDisposition",
+      "subject_reference": "Alias",
+      "parent_diagnostic_reference": "Alias|null",
+      "chain_root_reference": "Alias",
+      "rule_ids": "tuple<enum:CanonicalRule,1..10>",
+      "summary": "TrustedTemplateText",
+      "notes": "tuple<TrustedTemplateText,1..8>"
+    },
+    "SafeOrbit": {
+      "orbit_id": "Signature",
+      "member_count": "const:16",
+      "contains_known_valid_state": "bool"
+    },
+    "SafeStateContext": {
+      "input_state": "Signature|null",
+      "actual_state": "Signature|null",
+      "selected_target": "Signature|null",
+      "eligible_targets": "tuple<Signature,0..16>|null",
+      "codeword_chain": "tuple<Signature,0..16>|null",
+      "admissibility_status": "enum:Admissibility|null",
+      "transformation_compatibility": "enum:Compatibility|null",
+      "normalization_status": "enum:NormalizationStatus|null",
+      "recoverability_relevance": "enum:RecoverabilityRelevance|null",
+      "is_valid": "bool|null",
+      "orbit_info": "SafeOrbit|null",
+      "system_state_class": "enum:SystemClass|null",
+      "recovery_category": "enum:RecoveryCategory|null",
+      "predicate_name": "enum:PredicateName|null",
+      "predicate_value": "bool|null",
+      "candidate_order_index": "uint32[0..31]|null",
+      "step_index": "uint32[0..767]|null",
+      "profile_reference": "Alias|null",
+      "source_evidence_reference": "Alias|null",
+      "fixture_reference": "Alias|null",
+      "unavailable_fields": "tuple<enum:ContextField,0..32>",
+      "input_failure_code": "enum:InputFailure|null",
+      "profile_evidence_reference": "Alias|null",
+      "original_assessment_reference": "Alias|null",
+      "post_assessment_reference": "Alias|null",
+      "recovery_diagnostic_reference": "Alias|null",
+      "before_state": "Signature|null",
+      "codeword": "Signature|null",
+      "after_state": "Signature|null",
+      "policy_reference": "Alias|null",
+      "validation_status": "enum:ProofStatus|null",
+      "failed_field": "enum:ValidationField|null",
+      "proof_evidence_reference": "Alias|null",
+      "recovery_safety_evidence_reference": "Alias|null"
+    },
+    "SafeError": {
+      "domain": "enum:FailureDomain",
+      "code": "enum:SafeFailure",
+      "cause_codes": "tuple<enum:SafeFailure,0..8>",
+      "failed_field": "enum:SafeField|null",
+      "source_reference": "Alias|null",
+      "message_template": "enum:MessageTemplate",
+      "omitted_error_material": "tuple<enum:OmissionCategory,0..8>"
+    },
+    "DiagnosticEvent": {
+      "event_id": "Alias",
+      "local_sequence": "uint64",
+      "clock": "ClockObservation",
+      "source": "enum:Producer",
+      "event_type": "enum:EventType",
+      "message_template": "enum:MessageTemplate",
+      "session_reference": "Alias",
+      "operation_reference": "Alias|null",
+      "action_reference": "Alias|null",
+      "relation": "CaptureRelation|null",
+      "diagnostic_reference": "Alias|null",
+      "envelope": "SafeDiagnosticEnvelope|null",
+      "outcome": "enum:ObservedOutcome",
+      "duration_nanoseconds": "uint64|null",
+      "duration_reason": "enum:UnavailableReason|null",
+      "context": "SafeStateContext",
+      "error": "SafeError|null",
+      "redaction_entries": "tuple<RedactionEntry,0..32>"
+    },
+    "EvidenceFact": {
+      "fact_type": "enum:FactType",
+      "event_references": "tuple<Alias,1..8>"
+    },
+    "ExpectedBehavior": {
+      "invariant": "enum:ExpectedInvariant",
+      "source_reference": "Alias",
+      "expected_outcome": "enum:ObservedOutcome"
+    },
+    "DiagnosticIncident": {
+      "incident_id": "Alias",
+      "trigger_event_reference": "Alias",
+      "expected": "ExpectedBehavior",
+      "observed_outcome": "enum:ObservedOutcome",
+      "affected_operation_references": "tuple<Alias,1..8>",
+      "timeline_event_references": "tuple<Alias,1..768>",
+      "attempt_event_references": "tuple<Alias,0..35>",
+      "error": "SafeError",
+      "state_event_references": "tuple<Alias,0..34>",
+      "reproduction_fixture_reference": "Alias|null",
+      "observed_facts": "tuple<EvidenceFact,1..16>",
+      "supported_findings": "tuple<EvidenceFact,0..16>",
+      "hypotheses": "const:empty_tuple",
+      "unknowns": "tuple<enum:UnknownCause,0..16>",
+      "unresolved": "bool"
+    },
+    "SourcePin": {
+      "source_kind": "enum:PinnedSource",
+      "revision": "Revision",
+      "sha256": "Sha256"
+    },
+    "SupportingEvidence": {
+      "verified_source_pins": "tuple<SourcePin,0..40>",
+      "synthetic_fixture_references": "tuple<Alias,0..128>",
+      "metric_event_references": "tuple<Alias,0..1024>",
+      "attachments": "const:empty_tuple",
+      "attachment_reason": "const:EXCLUDED_REFERENCE_SCOPE",
+      "profiles": "tuple<SafeProfileEvidence,0..16>",
+      "assessments": "tuple<SafeAssessmentEvidence,0..512>",
+      "recovery_diagnostics": "tuple<SafeRecoveryDiagnostic,0..64>",
+      "source_evidence": "tuple<SafeSourceEvidence,0..16>",
+      "normalization_proofs": "tuple<SafeNormalizationProof,0..8>",
+      "correction_proofs": "tuple<SafeCorrectionProof,0..8>",
+      "registry_proofs": "tuple<SafeRegistryProof,0..8>",
+      "conditions": "tuple<SafeConditionEvidence,0..512>",
+      "predicate_observations": "tuple<SafePredicateObservationEvidence,0..512>",
+      "recovery_safety_evidence": "tuple<SafeRecoverySafetyEvidence,0..8>",
+      "target_validity": "tuple<SafeTargetValidityEvidence,0..264>"
+    },
+    "RedactionEntry": {
+      "field_category": "enum:OmissionCategory",
+      "reason": "enum:RedactionReason",
+      "count": "uint64"
+    },
+    "RedactionAccount": {
+      "profile": "const:OWNED_SAFE_PROJECTION_V1",
+      "field_count": "uint64",
+      "reference_count": "uint64",
+      "entries": "tuple<RedactionEntry,0..32>",
+      "secondary_check": "const:PASSED"
+    },
+    "RetentionAccount": {
+      "configured_limits": "DiagnosticLimits",
+      "boundaries": "tuple<RetentionBoundary,0..16>",
+      "active_operation_references": "tuple<Alias,0..8>",
+      "incident_pinned_operation_references": "tuple<Alias,0..32>",
+      "range_detail_coalesced": "bool"
+    },
+    "Limitation": {
+      "code": "enum:LimitationCode",
+      "source": "enum:CoverageSource"
+    },
+    "DiagnosticSnapshot": {
+      "bundle_id": "Alias",
+      "generated_at_utc": "UtcTimestamp|null",
+      "generation_time_reason": "enum:UnavailableReason|null",
+      "identity": "DiagnosticsIdentity",
+      "profile": "DiagnosticsProfile",
+      "capture_window": "CaptureWindow",
+      "coverage": "tuple<MissingCoverage,1..32>",
+      "events": "tuple<DiagnosticEvent,0..1024>",
+      "meta_diagnostics": "tuple<MetaDiagnosticRecord,0..16>",
+      "incidents": "tuple<DiagnosticIncident,0..32>",
+      "supporting_evidence": "SupportingEvidence",
+      "health": "DiagnosticsHealth",
+      "retention": "RetentionAccount",
+      "redaction": "RedactionAccount",
+      "limitations": "tuple<Limitation,1..16>"
+    },
+    "MetaCause": {
+      "cause_code": "enum:MetaCauseCode",
+      "related_operation_reference": "Alias|null",
+      "related_diagnostic_reference": "Alias|null",
+      "expected_phase": "enum:ExpectedPhase|null",
+      "observed_phase": "enum:ExpectedPhase|null"
+    },
+    "StorageReceipt": {
+      "sequence": "uint64|null",
+      "status": "enum:StorageCommitStatus",
+      "failure_code": "enum:DiagnosticsFailure|null"
+    },
+    "PartReceipt": {
+      "part": "enum:ExportPart",
+      "relative_name": "enum:PartName",
+      "status": "enum:PartStatus",
+      "bytes": "uint64|null",
+      "sha256": "Sha256|null",
+      "failure_code": "enum:DiagnosticsFailure|null"
+    },
+    "ExportReceipt": {
+      "bundle_id": "Alias",
+      "status": "const:COMPLETE",
+      "parts": "tuple<PartReceipt,3>",
+      "last_included_sequence": "uint64|null",
+      "snapshot": "DiagnosticSnapshot"
+    },
+    "ExportFailure": {
+      "bundle_id": "Alias",
+      "status": "const:INCOMPLETE",
+      "failure_code": "enum:DiagnosticsFailure",
+      "failed_part": "enum:ExportPart",
+      "parts": "tuple<PartReceipt,3>",
+      "snapshot": "DiagnosticSnapshot"
+    },
+    "RetentionReceipt": {
+      "status": "enum:RetentionReceiptStatus",
+      "boundaries": "tuple<RetentionBoundary,0..16>",
+      "health": "DiagnosticsHealth"
+    },
+    "StorageVerification": {
+      "mechanism": "const:WINDOWS_PROTECTED_DACL",
+      "status": "enum:StorageVerificationStatus",
+      "persistent_acls": "bool",
+      "owner_matches_effective_sid": "bool",
+      "dacl_protected": "bool",
+      "grant_principals": "tuple<enum:StoragePrincipal,2>",
+      "no_reparse_path": "bool",
+      "trusted_parent": "bool",
+      "stable_identity": "bool",
+      "failure_code": "enum:DiagnosticsFailure|null"
+    },
+    "SafeProfileEvidence": {
+      "evidence_reference": "Alias",
+      "profile_reference": "Alias",
+      "availability": "enum:ProfileAvailability",
+      "source_reference": "Alias",
+      "source_digest_reference": "Alias",
+      "source_evidence_reference": "Alias",
+      "recognized_valid_states": "tuple<Signature,0..512>|null",
+      "unavailable_reason": "enum:UnavailableReason|null"
+    },
+    "SafeInputState": {
+      "kind": "enum:SafeInputKind",
+      "state": "Signature|null",
+      "input_reference": "Alias",
+      "failure_code": "enum:InputFailure|null"
+    },
+    "SafeStateValidity": {
+      "input_state": "SafeInputState",
+      "admissibility_status": "enum:Admissibility",
+      "transformation_compatibility": "enum:Compatibility",
+      "normalization_status": "enum:NormalizationStatus",
+      "recoverability_relevance": "enum:RecoverabilityRelevance",
+      "is_valid": "bool",
+      "orbit_info": "SafeOrbit|null",
+      "rule_ids": "tuple<enum:CanonicalRule,1..5>",
+      "notes": "tuple<TrustedTemplateText,1..8>"
+    },
+    "SafePredicate": {
+      "evaluation_status": "enum:PredicateEvaluation",
+      "value": "bool|null",
+      "assessment_reference": "Alias",
+      "diagnosis_reference": "Alias",
+      "subject_reference": "Alias",
+      "profile_reference": "Alias",
+      "source_reference": "Alias",
+      "evidence_reference": "Alias"
+    },
+    "SafeAssessmentEvidence": {
+      "evidence_reference": "Alias",
+      "assessment_reference": "Alias",
+      "original_input_reference": "Alias",
+      "parsed_state": "Signature|null",
+      "canonical_source_reference": "Alias",
+      "profile_evidence_reference": "Alias",
+      "state_validity_diagnostic": "SafeStateValidity",
+      "is_in_safe_halt": "bool",
+      "is_in_containment": "bool",
+      "correction_path_is_known": "SafePredicate|null",
+      "fallback_is_available": "SafePredicate|null",
+      "system_state_class": "enum:SystemClass|null",
+      "recovery_category": "enum:RecoveryCategory|null",
+      "consulted_predicates": "tuple<enum:PredicateName,0..2>",
+      "emissions": "tuple<SafeDiagnosticEnvelope,1..2>"
+    },
+    "SafeRecoveryStep": {
+      "action_reference": "Alias",
+      "step_kind": "enum:RecoveryStepKind",
+      "outcome": "enum:ObservedOutcome",
+      "actual_state": "Signature|null",
+      "event_indices": "tuple<uint32[0..1023],0..32>",
+      "reason_template": "enum:MessageTemplate"
+    },
+    "SafeRecoveryDiagnostic": {
+      "recovery_category": "enum:RecoveryCategory",
+      "original_state_class": "enum:SystemClass",
+      "original_diagnostic": "Alias",
+      "steps": "tuple<SafeRecoveryStep,0..32>",
+      "outcome": "enum:ObservedOutcome",
+      "corrected_state": "Signature|null",
+      "fallback_policy_id": "Alias|null",
+      "reason": "TrustedTemplateText",
+      "rule_ids": "tuple<enum:CanonicalRule,1..10>"
+    },
+    "PrivateAcknowledgmentWitness": {
+      "original_reference": "UntrustedReference/API_ONLY",
+      "collector_reference": "Alias",
+      "session_reference": "Alias",
+      "confirmed_sequence": "uint64",
+      "emission_sha256": "Sha256/PRIVATE_ONLY"
+    },
+    "DiagnosticCounterState": {
+      "field": "enum:CounterField",
+      "status": "enum:CounterStatus",
+      "reason": "enum:CounterReason|null"
+    },
+    "MetaDiagnosticRecord": {
+      "meta_reference": "Alias",
+      "local_sequence": "uint64",
+      "clock": "ClockObservation",
+      "envelope": "SafeDiagnosticEnvelope",
+      "cause": "MetaCause",
+      "message_template": "const:DIAGNOSTIC_NONCONFORMANCE"
+    },
+    "RecoveryAdmissionReceipt": {
+      "status": "enum:AdmissionStatus",
+      "operation_reference": "UntrustedOperationReference/API_ONLY",
+      "origin_assessment_reference": "UntrustedReference/API_ONLY",
+      "origin_diagnostic_references": "tuple<UntrustedReference/API_ONLY,2>",
+      "reserved_events": "uint32[0..768]",
+      "reserved_bytes": "uint32[0..31588352]",
+      "failure_code": "enum:DiagnosticsFailure|null"
+    },
+    "SafeSourceEvidence": {
+      "evidence_reference": "Alias",
+      "dependency_id": "const:ash_cosmological_model.f2_9.canonical",
+      "verified_pins": "tuple<SourcePin,8>",
+      "external_source_reference": "Alias|null",
+      "external_verification": "const:DECLARED_NOT_AUTHENTICATED"
+    },
+    "SafeNormalizationProof": {
+      "evidence_reference": "Alias",
+      "preparation_status": "enum:PreparationStatus",
+      "original_assessment_reference": "Alias",
+      "original_diagnosis_reference": "Alias",
+      "submitted_plan_reference": "Alias|null",
+      "policy_reference": "Alias",
+      "submitted_source_reference": "Alias",
+      "current_source_evidence_reference": "Alias",
+      "submitted_profile_evidence_reference": "Alias",
+      "current_profile_evidence_reference": "Alias",
+      "origin_validation_status": "enum:ProofStatus",
+      "plan_validation_status": "enum:ProofStatus",
+      "decision": "enum:NormalizationDecision|null",
+      "submitted_targets": "tuple<Signature,0..16>|null",
+      "expected_targets": "tuple<Signature,0..16>|null",
+      "submitted_target": "Signature|null",
+      "expected_target": "Signature|null",
+      "submitted_chain": "tuple<Signature,0..1>|null",
+      "recomputed_chain": "tuple<Signature,0..1>|null",
+      "failed_field": "enum:ValidationField|null",
+      "safe_failure": "enum:SafeFailure|null"
+    },
+    "SafeCorrectionProof": {
+      "evidence_reference": "Alias",
+      "correction_reference": "Alias",
+      "original_assessment_reference": "Alias",
+      "submitted_source_reference": "Alias",
+      "current_source_evidence_reference": "Alias",
+      "submitted_profile_evidence_reference": "Alias",
+      "current_profile_evidence_reference": "Alias",
+      "declared_source_authentication": "const:DECLARED_NOT_AUTHENTICATED",
+      "origin_validation_status": "enum:ProofStatus",
+      "correction_validation_status": "enum:ProofStatus",
+      "submitted_chain": "tuple<Signature,0..16>",
+      "claimed_target": "Signature",
+      "computed_target": "Signature|null",
+      "target_diagnostic_reference": "Alias|null",
+      "failed_field": "enum:ValidationField|null",
+      "safe_failure": "enum:SafeFailure|null"
+    },
+    "SafeRegistryEntry": {
+      "policy_reference": "Alias",
+      "input_order_index": "uint32[0..31]",
+      "ordering_rank": "int64",
+      "applicability_condition_references": "tuple<Alias,0..8>",
+      "validation_condition_references": "tuple<Alias,0..8>",
+      "candidate_state": "Signature",
+      "escalation_on_failure": "enum:EscalationPolicy",
+      "certification_assessment_reference": "Alias",
+      "certification_validation_status": "enum:ProofStatus",
+      "target_diagnostic_reference": "Alias|null"
+    },
+    "SafeRegistryProof": {
+      "evidence_reference": "Alias",
+      "registry_reference": "Alias",
+      "availability": "enum:ProfileAvailability",
+      "declared_source_authentication": "const:DECLARED_NOT_AUTHENTICATED",
+      "submitted_source_reference": "Alias",
+      "current_source_evidence_reference": "Alias",
+      "submitted_profile_evidence_reference": "Alias",
+      "current_profile_evidence_reference": "Alias",
+      "validation_status": "enum:ProofStatus",
+      "entries": "tuple<SafeRegistryEntry,0..32>",
+      "evaluated_policy_references": "tuple<Alias,0..32>",
+      "failed_policy_reference": "Alias|null",
+      "failed_field": "enum:ValidationField|null",
+      "safe_failure": "enum:SafeFailure|null"
+    },
+    "StorePairReceipt": {
+      "bundle_id": "Alias",
+      "status": "const:COMPLETE",
+      "parts": "tuple<PartReceipt,3>",
+      "last_included_sequence": "uint64|null",
+      "published": "const:true"
+    },
+    "StorePairFailure": {
+      "bundle_id": "Alias",
+      "status": "const:INCOMPLETE",
+      "parts": "tuple<PartReceipt,3>",
+      "last_included_sequence": "uint64|null",
+      "failed_part": "enum:ExportPart",
+      "failure_code": "enum:DiagnosticsFailure",
+      "published": "const:false"
+    },
+    "SafeEvidenceSourceBinding": {
+      "source_reference": "Alias",
+      "source_digest_reference": "Alias",
+      "evidence_reference": "Alias",
+      "source_verification": "const:DECLARED_NOT_AUTHENTICATED"
+    },
+    "SafeConditionEvidence": {
+      "condition_reference": "Alias",
+      "source_binding": "SafeEvidenceSourceBinding"
+    },
+    "SafePredicateObservationEvidence": {
+      "evidence_reference": "Alias",
+      "status": "enum:PredicateObservationStatus",
+      "condition_reference": "Alias",
+      "expected_condition_source": "SafeEvidenceSourceBinding",
+      "observed_provider_source": "SafeEvidenceSourceBinding",
+      "operation_reference": "Alias",
+      "origin_assessment_reference": "Alias",
+      "registry_reference": "Alias",
+      "registry_source_digest_reference": "Alias",
+      "policy_reference": "Alias",
+      "phase": "enum:PredicatePhase",
+      "candidate_state": "Signature",
+      "reason_template": "const:RECOVERY_ACTION_RECORDED"
+    },
+    "FallbackHealthRecord": {
+      "cause_code": "enum:MetaCauseCode",
+      "storage_state": "enum:StorageState",
+      "last_confirmed_sequence": "uint64|null",
+      "first_unavailable_sequence": "uint64|null",
+      "last_unavailable_sequence": "uint64|null",
+      "meta_overflow_count": "uint64|null",
+      "clock": "ClockObservation",
+      "coverage_status": "const:PARTIAL"
+    },
+    "DiagnosticsCompletionReceipt": {
+      "operation_reference": "UntrustedReference/API_ONLY",
+      "status": "enum:CompletionStatus",
+      "operation_outcome": "enum:ObservedOutcome",
+      "confirmed_event_indices": "tuple<uint32[0..1023],0..768>",
+      "diagnostic_coverage": "enum:OverallCoverage",
+      "failure_code": "enum:DiagnosticsFailure|null",
+      "attempted_event_index": "uint32[0..1023]|null",
+      "health": "DiagnosticsHealth"
+    },
+    "StorePurgeReceipt": {
+      "bundle_id": "Alias",
+      "status": "enum:RetentionReceiptStatus",
+      "removed_parts": "uint32[0..3]",
+      "removed_bytes": "uint64",
+      "failure_code": "enum:DiagnosticsFailure|null"
+    },
+    "SafeExternalEscalationRequired": {
+      "trigger_domain": "const:YWE_RECOVERABILITY_CATEGORY",
+      "recovery_category": "const:ESCALATION_REQUIRED",
+      "authority_status": "enum:AuthorityStatus"
+    },
+    "SafeExistingModeBoundary": {
+      "trigger_domain": "const:YWE_OBSERVED_MODE_BOUNDARY",
+      "observed_class": "enum:ExistingModeClass",
+      "assessment_reference": "Alias"
+    },
+    "SafeRecoverySafetyPolicy": {
+      "policy_id": "const:YWE-RECOVERY-SAFETY-001",
+      "policy_version": "const:1.0.0",
+      "policy_document": "const:docs/architecture/m3_recovery_safety_policy.md",
+      "policy_sha256": "const:00fcee810c5cd445dd0baaaf98c754000347489001e21588eb03afdd1e1ebb95"
+    },
+    "SafeRecoveryDirective": {
+      "requested_action": "enum:DirectiveAction",
+      "trigger": "enum:CanonicalContainmentTrigger|enum:CanonicalSafeHaltTrigger|SafeExternalEscalationRequired|SafeExistingModeBoundary",
+      "origin_assessment_reference": "Alias",
+      "causing_decision_reference": "Alias",
+      "evidence_references": "tuple<Alias,1..8>",
+      "actual_mode_status": "const:NOT_ENTERED_BY_N2",
+      "request_origin": "enum:RequestOrigin",
+      "policy_binding": "SafeRecoverySafetyPolicy|null"
+    },
+    "SafeRecoverySafetyEvidence": {
+      "evidence_reference": "Alias",
+      "operation_reference": "Alias",
+      "origin_assessment_reference": "Alias",
+      "propagation_status": "enum:PropagationStatus",
+      "propagation_source_binding": "SafeEvidenceSourceBinding",
+      "propagation_was_consulted": "bool",
+      "authority_status": "enum:AuthorityStatus",
+      "authority_source_binding": "SafeEvidenceSourceBinding",
+      "authority_was_consulted": "bool",
+      "directive": "SafeRecoveryDirective|null"
+    },
+    "CaptureObjectKey": {
+      "kind": "enum:CaptureObjectKind",
+      "sequence": "uint64|null",
+      "supporting_kind": "enum:SupportingKind|null",
+      "evidence_reference": "Alias|null"
+    },
+    "CapturePurgeRequest": {
+      "event_sequences": "tuple<uint64,0..1024>",
+      "supporting_keys": "tuple<CaptureObjectKey,0..1928>"
+    },
+    "CaptureRemovalObservation": {
+      "key": "CaptureObjectKey",
+      "status": "enum:CaptureRemovalStatus",
+      "removed_bytes": "uint64|null",
+      "failure_code": "enum:DiagnosticsFailure|null"
+    },
+    "StoreCapturePurgeReceipt": {
+      "status": "enum:CapturePurgeStatus",
+      "observations": "tuple<CaptureRemovalObservation,1..1928>",
+      "failure_code": "enum:DiagnosticsFailure|null"
+    },
+    "SafeTargetValidityEvidence": {
+      "evidence_reference": "Alias",
+      "source_evidence_reference": "Alias",
+      "profile_evidence_reference": "Alias",
+      "state_validity_diagnostic": "SafeStateValidity"
+    }
+  }
+}

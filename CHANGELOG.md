@@ -7,6 +7,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 ## Unreleased
 
 ### Added
+- Adopt the complete N3 lifecycle contract, independent policy, exact 38-type/35-port inventory and portable capacity/serialization controls under YWE-REQ-0044 and ADR-0033 before implementation. Runtime acceptance remains outstanding.
 - Add a shared exact-commit wiki projection, owner-authenticated publication routes, preserved manual navigation, and fifteen focused refusal and readback tests.
 - Add source-backed structural YAML module-manifest validation and explicit YAML fixture bindings with typed rejection witnesses.
 - Add explicit M2 schema and fixture catalogs, offline reference resolution, and exact rejection witnesses for 102 structural fixtures.
@@ -15,6 +16,7 @@ All notable changes to the Yggdrasil World Engine are documented here.
 - Add a content-addressed ASH dependency identity and deterministic source-to-mirror synchronization check.
 
 ### Changed
+- Record actual owner wiki publication and all 47 remotely verified page bytes, successful predecessor CI, and the current N3 implementation step in the README roadmap and Project Record.
 - Correct the PR template's relative license link and document the actual manual wiki workflow, current roadmap navigation and deferred platform boundary.
 - Reconcile the owner's newer Raven Forge dual license and governance guard, and update the visible October 11 roadmap checkpoint with the verified original source compatibility execution and successful Ubuntu/Windows CI. Preserve the external package's representation-only review and keep N3/M3 acceptance outstanding.
 - Reduce unbound JSON example debt from 39 to 19 through executed catalog bindings and reconcile repository classification and scope inventories.

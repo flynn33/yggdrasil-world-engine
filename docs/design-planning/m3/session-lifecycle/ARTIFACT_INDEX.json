@@ -1,0 +1,201 @@
+{
+  "status": "ADOPTED_CONTRACT_EXECUTED_REPRESENTATION_CONTROLS_NOT_RUNTIME_ACCEPTANCE",
+  "adopted_on": "2026-10-11",
+  "requirement_id": "YWE-REQ-0044",
+  "decision_id": "ADR-0033",
+  "preparation_revision": "0949184b7f1be0960fec9dd409cbf09647921e61",
+  "adoption_base_revision": "4f7cd2e38367e1b3cc75eefffb8f752586e1c7a2",
+  "frozen_proposal_index_sha256": "f93402c6c355ebdac8b7458e604c841899427a71c0841dc53b767683eb051a8d",
+  "frozen_proposal_file_hashes": {
+    "ACTUAL_READ_SOURCE_HASHES.json": {
+      "bytes": 1507,
+      "sha256": "e44fc20bd2573ba06a794bf8254720db60cef49095aa4703876c3fa79619e015"
+    },
+    "BOUND_INPUT_DOMAINS.json": {
+      "bytes": 49963,
+      "sha256": "bceba887bb69fb2b84386b393e08a6b5e4d3ee0a10d97231e6b103429d1a962d"
+    },
+    "BOUND_REPORT.json": {
+      "bytes": 8286,
+      "sha256": "2795905e178a7307563e71a5028399ddab8900d2fab0349a7a72cf1ac91bbd57"
+    },
+    "CAPACITY_ARTIFACT_INDEX.json": {
+      "bytes": 3596,
+      "sha256": "8e904d38b99db0bbf4b0651677023f0b5991e416c28e5439b05f6b1d93295b43"
+    },
+    "derive_bounds.py": {
+      "bytes": 9614,
+      "sha256": "9732948f14ae19331b9286cf6ca380ce684f889e6244922ad406b9b374e89a18"
+    },
+    "derive_command_reservations.py": {
+      "bytes": 4517,
+      "sha256": "2a2f9f1dbfcd16fb8a32a12eba9a8e72b3a9aca480974db281b0353d6c7b8601"
+    },
+    "generate_graph_control.py": {
+      "bytes": 2867,
+      "sha256": "0171480c91dc2110c2ea6dfb4dccb56ffc07a46ca04594c3b5c22da1a3f72d9c"
+    },
+    "INDEPENDENT_REPLAY.json": {
+      "bytes": 2736,
+      "sha256": "53f44db28219584bee2f4561f823591783d048bb4055e562472ded4f752dd786"
+    },
+    "m3_session_lifecycle_contract.proposed.md": {
+      "bytes": 47551,
+      "sha256": "94b005d219c671a80292982a04e8baeb11351e6421bc2e5db768a8016811bf58"
+    },
+    "m3_session_lifecycle_policy.proposed.md": {
+      "bytes": 12598,
+      "sha256": "360e525c437d9e67a0b931488b9cc59456c3313eafa770891fd7123aa8d412db"
+    },
+    "MAXIMUM_SPECIMENS.json": {
+      "bytes": 573012,
+      "sha256": "be8540140cb44581860231ef5c2e6f3df098c7478a54e55613271b16aa04aa19"
+    },
+    "N3_BUSINESS_API_INVENTORY.bound-input.json": {
+      "bytes": 43223,
+      "sha256": "fd18ee3ed7fd1abb8e97190cbee41749df3d25ec707e058142265dc5c9560238"
+    },
+    "N3_BUSINESS_API_INVENTORY.proposed.json": {
+      "bytes": 43223,
+      "sha256": "fd18ee3ed7fd1abb8e97190cbee41749df3d25ec707e058142265dc5c9560238"
+    },
+    "N3_CAPACITY_AND_RETENTION.proposed.md": {
+      "bytes": 22630,
+      "sha256": "db870e25dd031809166262d393b0701498348d22b73ed0f4857f31deff947e73"
+    },
+    "N3_COMPLETE_SOURCE_VECTORS.bound-input.json": {
+      "bytes": 5836,
+      "sha256": "14cbe2949ef974ae720874218c5b8fdc9c0d5aebc0178c6c19b0218b8e1142dd"
+    },
+    "PROPOSED_SAFE_FIELDS_AND_LIMITS.json": {
+      "bytes": 31447,
+      "sha256": "32b118c5af771cc8780d47c28279397c79522fb13c515b2a5ae8b5f7fd783f17"
+    },
+    "RAW_BUSINESS_GUARD_CONTROLS.json": {
+      "bytes": 2073,
+      "sha256": "8d4d40b29945589bfbea74cab95bb3dc51229f46ac277e9be517b61a621ca2d1"
+    },
+    "raw_business_guard_controls.py": {
+      "bytes": 5486,
+      "sha256": "11fb7a33f2b63dc22c108efb430979d31fe7b8d1f3afedd2dac249d1abb5efdc"
+    },
+    "replay_independent.py": {
+      "bytes": 4617,
+      "sha256": "79a732100c669d2ec01daea58c2d62a6ea8a71b604e3924ae84cb89bbcf57e67"
+    },
+    "REPRESENTATION_GRAPH_CONTROL.json": {
+      "bytes": 662633,
+      "sha256": "f0400909a816d9e5f9bc9a941a8af69c8485ae733b134fb64f2160d50d5830f2"
+    }
+  },
+  "adopted_policy_sha256": "24e2584279b95b8e3659bd61e6b5149311f344b03b981e88f74ae37775591910",
+  "adopted_business_inventory_sha256": "7ba936a41659524bca9f2c5a9653df704f92de994f1e8682c243ef978df0b0f0",
+  "adoption_changes": [
+    "Truthful adopted status and allocated requirement/decision references",
+    "Actual adopted policy hash reconciled in contract, business inventory and safe projection",
+    "Repository companion paths and portable representation script source root",
+    "Representation specimens/reports regenerated against reconciled inputs",
+    "Explicit lifecycle capture gate, nonblocking scope clock port and once-only final history index semantics; no new wire type or numeric bound"
+  ],
+  "executed_representation_controls": [
+    {
+      "script": "replay_independent.py",
+      "exit_code": 0
+    },
+    {
+      "script": "generate_graph_control.py",
+      "exit_code": 0
+    },
+    {
+      "script": "raw_business_guard_controls.py",
+      "exit_code": 0
+    }
+  ],
+  "runtime_acceptance": false,
+  "files": {
+    "docs/architecture/m3_session_lifecycle_contract.md": {
+      "bytes": 49034,
+      "sha256": "72d534601582566789f03df2bdecf62395d26f83385bc8416e44a75cb2036b70"
+    },
+    "docs/architecture/m3_session_lifecycle_policy.md": {
+      "bytes": 12667,
+      "sha256": "24e2584279b95b8e3659bd61e6b5149311f344b03b981e88f74ae37775591910"
+    },
+    "docs/design-planning/m3/session-lifecycle/ACTUAL_READ_SOURCE_HASHES.json": {
+      "bytes": 1493,
+      "sha256": "e1d42fc37f5acd8439b19ee464c216df44ee66989f2e4edcc5c88d324bc8215d"
+    },
+    "docs/design-planning/m3/session-lifecycle/BOUND_INPUT_DOMAINS.json": {
+      "bytes": 48297,
+      "sha256": "8ba34a19a74a4580115106644daa62edee1dab7f47d23e7a89eae12e9807f1e0"
+    },
+    "docs/design-planning/m3/session-lifecycle/BOUND_REPORT.json": {
+      "bytes": 8286,
+      "sha256": "2795905e178a7307563e71a5028399ddab8900d2fab0349a7a72cf1ac91bbd57"
+    },
+    "docs/design-planning/m3/session-lifecycle/BUSINESS_API_INVENTORY.bound-input.json": {
+      "bytes": 44206,
+      "sha256": "7ba936a41659524bca9f2c5a9653df704f92de994f1e8682c243ef978df0b0f0"
+    },
+    "docs/design-planning/m3/session-lifecycle/BUSINESS_API_INVENTORY.json": {
+      "bytes": 44206,
+      "sha256": "7ba936a41659524bca9f2c5a9653df704f92de994f1e8682c243ef978df0b0f0"
+    },
+    "docs/design-planning/m3/session-lifecycle/CAPACITY_AND_RETENTION.md": {
+      "bytes": 23803,
+      "sha256": "e635a8e4fc07022912632e047774790fc492fab2b949fed35f4904a51b24b5a6"
+    },
+    "docs/design-planning/m3/session-lifecycle/derive_bounds.py": {
+      "bytes": 9587,
+      "sha256": "3a12d1206e28eb923c40e1e9f6a1681e79f1426a51dddad9878de51fb38ac908"
+    },
+    "docs/design-planning/m3/session-lifecycle/derive_command_reservations.py": {
+      "bytes": 4499,
+      "sha256": "a214fae1e64126ecff890d8254236b5da36f45f0498ea4ebbaf8e42b4ccba190"
+    },
+    "docs/design-planning/m3/session-lifecycle/generate_graph_control.py": {
+      "bytes": 2796,
+      "sha256": "3e72f8e9cd4dae75d21e9ad1b8940565b326f66901ac3ab7c9849a2907b136cf"
+    },
+    "docs/design-planning/m3/session-lifecycle/INDEPENDENT_REPLAY.json": {
+      "bytes": 2736,
+      "sha256": "53f44db28219584bee2f4561f823591783d048bb4055e562472ded4f752dd786"
+    },
+    "docs/design-planning/m3/session-lifecycle/MAXIMUM_SPECIMENS.json": {
+      "bytes": 573012,
+      "sha256": "97f35d664248e9559d6018f47f5d73d6876b3a6af72e565381344c1e0c99b4a0"
+    },
+    "docs/design-planning/m3/session-lifecycle/N3_COMPLETE_SOURCE_VECTORS.bound-input.json": {
+      "bytes": 5836,
+      "sha256": "14cbe2949ef974ae720874218c5b8fdc9c0d5aebc0178c6c19b0218b8e1142dd"
+    },
+    "docs/design-planning/m3/session-lifecycle/RAW_BUSINESS_GUARD_CONTROLS.json": {
+      "bytes": 2073,
+      "sha256": "8d4d40b29945589bfbea74cab95bb3dc51229f46ac277e9be517b61a621ca2d1"
+    },
+    "docs/design-planning/m3/session-lifecycle/raw_business_guard_controls.py": {
+      "bytes": 5486,
+      "sha256": "11fb7a33f2b63dc22c108efb430979d31fe7b8d1f3afedd2dac249d1abb5efdc"
+    },
+    "docs/design-planning/m3/session-lifecycle/replay_independent.py": {
+      "bytes": 4608,
+      "sha256": "3d0b27d014c2119013c85d4697c2b72ea22c12de95ad4b28a39731063a0ad134"
+    },
+    "docs/design-planning/m3/session-lifecycle/REPRESENTATION_GRAPH_CONTROL.json": {
+      "bytes": 662633,
+      "sha256": "f0400909a816d9e5f9bc9a941a8af69c8485ae733b134fb64f2160d50d5830f2"
+    },
+    "docs/design-planning/m3/session-lifecycle/SAFE_FIELDS_AND_LIMITS.json": {
+      "bytes": 31438,
+      "sha256": "f348a06893be62fb9c9f6bc5600d622ac2386a078531f0d58cd898762d02f7f0"
+    },
+    "docs/design-planning/m3/session-lifecycle/README.md": {
+      "bytes": 2361,
+      "sha256": "8cf5ba8b0c236628c6ae3a2a12e80601105d9963f34c3545aec8e0c587e02300"
+    }
+  },
+  "adopted_business_types": 38,
+  "adopted_api_ports": 35,
+  "adopted_artifact_hash_encoding": "utf8_without_bom_lf_normalized_git_blob",
+  "frozen_proposal_hash_encoding": "original_bytes"
+}

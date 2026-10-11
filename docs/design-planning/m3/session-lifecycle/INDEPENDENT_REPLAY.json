@@ -1,0 +1,123 @@
+{
+  "status": "INDEPENDENT_ENCODING_AND_ARITHMETIC_CHECKS_PASS_NOT_RUNTIME_ACCEPTANCE",
+  "encoded_leaf_count": 36,
+  "pages": 40,
+  "record_entries": 1024,
+  "support_entries": 2504,
+  "cases": [
+    {
+      "case": "emptyordinaryevents",
+      "held": 0,
+      "need": 4,
+      "cap": 1024,
+      "admissible": true
+    },
+    {
+      "case": "ordinarylastfit",
+      "held": 1020,
+      "need": 4,
+      "cap": 1024,
+      "admissible": true
+    },
+    {
+      "case": "ordinaryoverflow",
+      "held": 1021,
+      "need": 4,
+      "cap": 1024,
+      "admissible": false
+    },
+    {
+      "case": "2fullN2events",
+      "held": 768,
+      "need": 768,
+      "cap": 1024,
+      "admissible": false
+    },
+    {
+      "case": "N2afterlifealiases",
+      "held": 214,
+      "need": 5931,
+      "cap": 6144,
+      "admissible": false
+    },
+    {
+      "case": "N2exactaliasfit",
+      "held": 213,
+      "need": 5931,
+      "cap": 6144,
+      "admissible": true
+    },
+    {
+      "case": "N2activelifeincident",
+      "held": 1,
+      "need": 32,
+      "cap": 32,
+      "admissible": false
+    },
+    {
+      "case": "afterN2incidentfree",
+      "held": 0,
+      "need": 1,
+      "cap": 32,
+      "admissible": true
+    },
+    {
+      "case": "afterN2retained32incidents",
+      "held": 32,
+      "need": 1,
+      "cap": 32,
+      "admissible": false
+    },
+    {
+      "case": "ordinarysupportfit",
+      "held": 1998848,
+      "need": 98304,
+      "cap": 2097152,
+      "admissible": true
+    },
+    {
+      "case": "ordinarysupportoverflow",
+      "held": 1998849,
+      "need": 98304,
+      "cap": 2097152,
+      "admissible": false
+    },
+    {
+      "case": "terminalsupportfit",
+      "held": 1671168,
+      "need": 425984,
+      "cap": 2097152,
+      "admissible": true
+    },
+    {
+      "case": "terminalsupportoverflow",
+      "held": 1671169,
+      "need": 425984,
+      "cap": 2097152,
+      "admissible": false
+    }
+  ],
+  "unchanged_caps": {
+    "events": 1024,
+    "aliases": 6144,
+    "total_bytes": 33554432,
+    "support_bytes": 2097152,
+    "incidents": 32,
+    "active_scopes": 8,
+    "duration_ms": 600000
+  },
+  "distinct_key_index_control": {
+    "nonpage_roots": 2504,
+    "page_roots": 40,
+    "record_roots": 1024,
+    "unique_aliases": 3568,
+    "largest_actual_index_page_bytes": 11324,
+    "all_nonpage_keys_indexed_exactly_once": true,
+    "pages_never_index_themselves": true
+  },
+  "limitations": [
+    "Specimens are Cartesian structural maxima, not semantically coherent accepted packets.",
+    "No LifecycleCapture/session runtime implementation or native IO is exercised.",
+    "Current actual collector caps and pure arithmetic enforce admission; offered2N2max1628events is not admitted."
+  ]
+}

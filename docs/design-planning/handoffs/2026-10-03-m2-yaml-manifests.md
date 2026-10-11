@@ -1,34 +1,40 @@
-# YWE Session Handoff — Windows Source-Closure Package
+# YWE Session Handoff — N3 Contract Adoption
 
 **Date:** October 11, 2026
-**Handoff checkpoint:** autonomous-n3-3
-**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-40, section 15; autonomous authority remains section 13.
+**Handoff checkpoint:** autonomous-n3-4
+**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-41, section 16; autonomous authority remains section 13.
 **Direction:** YWE-DIRECTION-20261009-AUTONOMOUS-N3 (package `YWE-M3-N3-AUTONOMOUS-001` r1).
-**Inspected project snapshot:** local and remote main `0949184b7f1be0960fec9dd409cbf09647921e61`; reconciliation published with matching README readback.
+**Inspected project snapshot:** local and remote main `4f7cd2e38367e1b3cc75eefffb8f752586e1c7a2`; owner publication and README readback verified.
 **Method:** Raven Forge Development v0.7.0 at `87409bc36fb9d4782eab02189adb184f2b3962a7`.
 
-This entry is the current continuation. The package-preparation-3 entry below is preserved as superseded history; its receipt facts remain valid but its "Next action" no longer directs the work.
+This is the current continuation. Earlier preparation receipts below remain
+superseded history with their original scope and evidence preserved.
 
 ## Current state
 
-- Original source implementation `13df7079` has directly observed complete clean offline execution (36/36 checks, 1,006 tests in 1035.712 seconds) and successful exact-revision Ubuntu/Windows CI. Section 12's separate external representation-only review retains `acceptance=false`, `provenance_review_required=true`. Neither accepts N3 or M3.
-- N3 session lifecycle is the active M3 assignment: admission and ownership, controlled live-state publication, containment and resolution, safe halt and terminal handling, bounded diagnostics.
-- Owner wiki projection tooling passes fifteen focused tests. Wiki publication remains unfinished until actual remote byte readback establishes completion.
-- M3 active; M0–M2 accepted; M4 and platform work not activated.
-- Autonomous execution and owner-account publication are authorized by the current package. No operator approval gates, operator reviews, or mandatory separate reviewer-service sign-off.
-- Historical external N3 review: not recovered; its contents are not asserted. N3 proceeds as new source-grounded engineering.
+- M0–M2 accepted; M3 active; M4 and platform work remain planned/deferred.
+- N3 lifecycle contract, independent policy, exact business/API inventory and capacity controls adopted under YWE-REQ-0044 and ADR-0033 before implementation. Runtime verification remains outstanding.
+- Root and independent review verified the frozen proposal and replayed representation controls. All three portable controls pass after adopted hash reconciliation; no session effects or capture acknowledgments are claimed.
+- Owner wiki `a44ce7d2564984390499b4ea98de9d803d60aa62` actually published from source `4f7cd2e`; fresh remote clone matches all 47 reviewed pages. Home, roadmap and manual navigation are current for that source.
+- `4f7cd2e` passes eleven selected clean checks and nineteen focused tests. Its full CI is running at latest readback; predecessor `0949184` passes Ubuntu/Windows CI.
+- Original source `13df7079` retains its directly observed 36/36 clean execution, 1,006 tests and successful exact-revision Ubuntu/Windows CI. Section 12's separate external review remains representation-only, `acceptance=false`, `provenance_review_required=true`.
+- Autonomous execution, owner-authored publication and admin bypass are already authorized. No operator or reviewer-service approval gate is assigned.
 
 ## Current checkpoint
 
-**Current step:** P0 complete; P1 N3 contract work in progress.
+**Current step:** P1 contract adoption complete; P2 lifecycle implementation next.
 
-**Completed:** Reconciliation published at `0949184b7f1be0960fec9dd409cbf09647921e61` with matching README readback and eight selected clean offline checks passing. Full exact-revision CI remains running at the latest readback. Owner wiki tooling and fifteen focused tests are implemented; record advanced to planning-40. Original source execution and historical external review remain separately scoped. Owner license update and wiki navigation are preserved.
+**Next action:** Implement the adopted exact contract, keeping domain ownership,
+closed values/schema and Diagnostics changes coordinated. Execute all sixteen
+N3 verification groups, preserve old standalone behavior, run the canonical
+repository suite, publish owner-authored work, and refresh README/wiki with the
+actual evidence. Then continue through remaining M3 exits and M4–M10.
 
-**Next action:** Publish and remotely verify the current owner wiki projection; finish and commit the complete N3 session-lifecycle contract, business inventory, closed resource proof and governance IDs before dependent implementation.
+**Needed from owner:** Nothing.
 
-**Needed from owner:** Nothing; no operator action is assigned.
-
-**Saved at:** This handoff and Project Record planning-40. The containing commit and subsequent readback are the save receipt. Continue through N3 implementation, verification and actual wiki publication, then the remaining M3 and M4–M10 roadmap work; this save does not finish the active goal.
+**Saved at:** This handoff and Project Record planning-41. The containing commit
+and subsequent readback are the save receipt; no own test result is predeclared.
+This checkpoint does not complete the active roadmap goal.
 
 ---
 

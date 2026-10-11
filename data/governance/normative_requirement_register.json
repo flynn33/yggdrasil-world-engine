@@ -2,14 +2,14 @@
   "artifact_type": "normative_requirement_register",
   "artifact_version": "1.0.0",
   "schema_ref": "data/schemas/normative_requirement_register_schema.json",
-  "recorded_on": "2026-10-04",
+  "recorded_on": "2026-10-11",
   "repository_baseline": "2.0.23",
   "policy_ref": "docs/governance/normative_language_and_requirement_id_policy.md",
   "id_policy": {
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0044",
+    "next_available_id": "YWE-REQ-0045",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -1043,13 +1043,47 @@
         "docs/architecture/m3_recovery_contract.md",
         "docs/architecture/m3_reference_diagnostics_contract.md"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0044",
+      "title": "Source-bound reference session lifecycle and terminal evidence",
+      "normative_statement": "RecoveryEngine MUST own reference session publication, containment, authorized resolution and deliberate halt through exact current source, profile and policy bindings and privately issued command leases. Ordinary effects MUST require current complete assessment association, full snapshot admission, verified proofs and confirmed bounded capture; halt MUST latch and revoke following grants before observation callbacks, including capture failure. Actual state, mode, completion, partial evidence and late audit MUST remain distinguishable. Immutable history and safe supporting graphs MUST remain bounded and truthful. Contract adoption MUST NOT claim executed N3 behavior, native qualification or complete M3 acceptance.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "docs/architecture/m3_session_lifecycle_contract.md#14-required-verification-and-minimal-implementation-sequence",
+        "docs/design-planning/m3/session-lifecycle/BUSINESS_API_INVENTORY.json#/verification_ids"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M3",
+      "owner_role": "Core semantics maintainers",
+      "decision_refs": [
+        "ADR-0033"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_session_lifecycle_contract.md",
+        "docs/architecture/m3_session_lifecycle_policy.md",
+        "docs/design-planning/m3/session-lifecycle/BUSINESS_API_INVENTORY.json",
+        "docs/design-planning/m3/session-lifecycle/SAFE_FIELDS_AND_LIMITS.json",
+        "docs/design-planning/m3/session-lifecycle/CAPACITY_AND_RETENTION.md",
+        "docs/architecture/m3_source_compatibility_contract.md",
+        "docs/architecture/m3_recovery_contract.md",
+        "docs/architecture/m3_reference_diagnostics_contract.md",
+        "core/ash_pattern_engine/canonical/interfaces/contracts/recovery-engine-contract.md",
+        "core/ash_pattern_engine/canonical/algorithms/containment-safe-failure-semantics.pseudo.md",
+        "core/ash_pattern_engine/canonical/interfaces/diagnostic-schema.md",
+        "core/ash_pattern_engine/canonical/interfaces/rule-id-taxonomy.md"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 43,
-    "active": 43,
+    "total_requirements": 44,
+    "active": 44,
     "proposed": 0,
     "terminal": 0,
-    "next_identifier": "YWE-REQ-0044"
+    "next_identifier": "YWE-REQ-0045"
   }
 }
