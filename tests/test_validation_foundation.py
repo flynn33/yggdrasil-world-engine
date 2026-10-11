@@ -244,6 +244,22 @@ class PlayerRuntimeReferencePolicyTests(unittest.TestCase):
             "tests/test_m3_source_compatibility.py",
         ]))
 
+    def test_reviewed_n3_proofs_require_local_reference_approval(self):
+        paths = ["docs/design-planning/m3/session-lifecycle/" + name for name in (
+            "derive_bounds.py", "derive_command_reservations.py", "generate_graph_control.py",
+            "raw_business_guard_controls.py", "replay_independent.py")]
+        self.assertEqual([], self.check_added(paths))
+        spec = copy.deepcopy(self.spec)
+        spec["allowed_reference_paths"] = [path for path in spec["allowed_reference_paths"] if path not in paths]
+        self.assertEqual([f"Phase 10 added forbidden platform/code file: {path}" for path in paths],
+                         self.check_added(paths, spec))
+
+    def test_neighboring_unreviewed_n3_proofs_remain_forbidden(self):
+        paths = ["docs/design-planning/m3/session-lifecycle/" + name for name in (
+            "session_runtime.py", "derive_bounds_extra.py", "product.cpp")]
+        self.assertEqual([f"Phase 10 added forbidden platform/code file: {path}" for path in paths],
+                         self.check_added(paths))
+
     def test_neighboring_runtime_native_and_unreviewed_tool_paths_remain_forbidden(self):
         paths = [
             "core/ash_pattern_engine/state_runtime.py",

@@ -89,7 +89,7 @@
     }
   },
   "adopted_policy_sha256": "24e2584279b95b8e3659bd61e6b5149311f344b03b981e88f74ae37775591910",
-  "adopted_business_inventory_sha256": "7ba936a41659524bca9f2c5a9653df704f92de994f1e8682c243ef978df0b0f0",
+  "adopted_business_inventory_sha256": "f57bbbe7e13e67c1a2d147d5f4c7834f29deadbd0a5b013ecf214bb3b1b7fe14",
   "adoption_changes": [
     "Truthful adopted status and allocated requirement/decision references",
     "Actual adopted policy hash reconciled in contract, business inventory and safe projection",
@@ -97,7 +97,8 @@
     "Representation specimens/reports regenerated against reconciled inputs",
     "Explicit lifecycle capture gate, nonblocking scope clock port and once-only final history index semantics; no new wire type or numeric bound",
     "ADR-0034 retains existing actual partial-child and unavailable-facts outcomes; safe inline failure branch and replayed increased structural bounds within unchanged fixed reservations and caps",
-    "Clarify once-final command/capture truth versus later observer/pin acknowledgment, bounded actual sidecar and authoritative AUDIT_BLOCKED read; no extra observation or wire field"
+    "Clarify once-final command/capture truth versus later observer/pin acknowledgment, bounded actual sidecar and authoritative AUDIT_BLOCKED read; no extra observation or wire field",
+    "ADR-0035 adds actual direct PROPAGATION_RISK_BOUNDARY cause with matching SATISFIED boundary and null authority/recovery reference; all five structural reports remain byte-identical"
   ],
   "executed_representation_controls": [
     {
@@ -116,8 +117,8 @@
   "runtime_acceptance": false,
   "files": {
     "docs/architecture/m3_session_lifecycle_contract.md": {
-      "bytes": 50553,
-      "sha256": "7cf27af49b884c76b36e8f64e735c22d6a03afab0f57ffe5f203f9dc4f281435"
+      "bytes": 51096,
+      "sha256": "088bc6d8b5eb20398ebc6762a20b8fda97cbeb421afbdfca293bc219625703a1"
     },
     "docs/architecture/m3_session_lifecycle_policy.md": {
       "bytes": 12667,
@@ -136,12 +137,12 @@
       "sha256": "2414f69b4fd9b4e92265efa2030e28882a3cceaf686bf1ed113992857bac4da2"
     },
     "docs/design-planning/m3/session-lifecycle/BUSINESS_API_INVENTORY.bound-input.json": {
-      "bytes": 44376,
-      "sha256": "074ab570b02968522ab182e25fa95653d6b113272aac64673d1334382d27738c"
+      "bytes": 44411,
+      "sha256": "f57bbbe7e13e67c1a2d147d5f4c7834f29deadbd0a5b013ecf214bb3b1b7fe14"
     },
     "docs/design-planning/m3/session-lifecycle/BUSINESS_API_INVENTORY.json": {
-      "bytes": 44376,
-      "sha256": "074ab570b02968522ab182e25fa95653d6b113272aac64673d1334382d27738c"
+      "bytes": 44411,
+      "sha256": "f57bbbe7e13e67c1a2d147d5f4c7834f29deadbd0a5b013ecf214bb3b1b7fe14"
     },
     "docs/design-planning/m3/session-lifecycle/CAPACITY_AND_RETENTION.md": {
       "bytes": 25002,
@@ -189,11 +190,11 @@
     },
     "docs/design-planning/m3/session-lifecycle/SAFE_FIELDS_AND_LIMITS.json": {
       "bytes": 32330,
-      "sha256": "47f43840884589e39465f9368a0974220b2bdc4ddf24af2edd320d2209856d44"
+      "sha256": "cd5420a742af556ae6727f5270e5e79bd3d38b6275df59de1b7cee062d0f3036"
     },
     "docs/design-planning/m3/session-lifecycle/README.md": {
-      "bytes": 2685,
-      "sha256": "daf0668c05814b095e598044dda256f4debb8e90766e6657e8b3975bea765983"
+      "bytes": 2914,
+      "sha256": "1c44c2ca67ba3d2023089415723964506f0a09dcbb3f81280bda6fb72e65115b"
     }
   },
   "adopted_business_types": 38,
@@ -203,8 +204,11 @@
   "adoption_amendment_base_revision": "cdbcb68fab4471a2c910a1762038c1551f8fe9e8",
   "decision_ids": [
     "ADR-0033",
-    "ADR-0034"
+    "ADR-0034",
+    "ADR-0035"
   ],
   "closed_origin_correction_external_index_sha256": "9f147748f7703aff6a8877012fd0b55310704d176706b3d16383d26195033699",
-  "actual_read_source_hash_encoding": "sha256_utf8_without_bom_lf_normalized_committed_cdbcb68_blobs"
+  "actual_read_source_hash_encoding": "sha256_utf8_without_bom_lf_normalized_committed_cdbcb68_blobs",
+  "propagation_boundary_amendment_base_revision": "2fb19137a0fcf0a012aff4e02a4589331c5ffa9e",
+  "propagation_boundary_external_index_sha256": "77ee2b9386ff159ab647423754cc4fdd0ae3ab2b7a2336eb92fff17d66aee179"
 }

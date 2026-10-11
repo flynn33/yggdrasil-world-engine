@@ -4,8 +4,8 @@ Contract identity: YWE-M3-SESSION-LIFECYCLE-001
 Contract version: 1.0.0
 Status: active N3 contract, adopted October 11, 2026 before dependent implementation. Implementation and runtime verification remain outstanding.
 Owner and partition: ywe_core.
-Requirement: [YWE-REQ-0044]. Decisions: ADR-0033 and ADR-0034.
-Adoption amendment: actual fresh-origin failure unions and safe unavailable-facts projection, October 11, 2026, before dependent implementation.
+Requirement: [YWE-REQ-0044]. Decisions: ADR-0033, ADR-0034 and ADR-0035.
+Adoption amendments: actual fresh-origin failure unions and safe unavailable-facts projection (ADR-0034); truthful direct propagation-risk boundary cause (ADR-0035), October 11, 2026, before their dependent implementation.
 Direction: YWE-DIRECTION-20261009-AUTONOMOUS-N3.
 Preparation source: 0949184b7f1be0960fec9dd409cbf09647921e61.
 No historical external review or approval is asserted.
@@ -130,6 +130,8 @@ For each actual containment entry, the cause is one of:
 | PROPAGATION_RISK | owner-retained N2 RISK handoff or matching SATISFIED PROPAGATION_RISK boundary | ASH-CONTAINMENT-TRIGGER-002 |
 | OPERATOR_REQUEST | matching AUTHORIZED OPERATOR/POLICY observation or actual recognized policy decision | ASH-CONTAINMENT-TRIGGER-003 |
 | RECOVERY_VALIDATION_FAILURE | actual failed N2 recovery postvalidation and matching handoff/boundary | ASH-CONTAINMENT-TRIGGER-004 |
+
+A direct propagation-risk boundary uses SessionCauseObservation.kind=PROPAGATION_RISK_BOUNDARY. Its trigger is PROPAGATION_RISK, authority_observation and recovery_operation_reference are null, and at least one actual SATISFIED PROPAGATION_RISK boundary binds the same request and expected snapshot. The N2 handoff alternative retains N2_HANDOFF and the actual retained recovery reference. A boundary observation is never relabeled an authority request.
 
 Boundary UNAVAILABLE is preserved as unknown, not SATISFIED. Route/trigger strings alone are insufficient. Full nested reference/source observations must match the primary command. A source/profile/policy mismatch fails before reservation or effect.
 

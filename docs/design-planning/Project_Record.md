@@ -1,13 +1,13 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-42
+**Revision:** planning-43
 **Date:** October 11, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-41 at `cdbcb68fab4471a2c910a1762038c1551f8fe9e8`; full history remains in Git.
+**Supersedes:** planning-42 at `2fb19137a0fcf0a012aff4e02a4589331c5ffa9e`; full history remains in Git.
 
-**Current approval and continuation:** Sections 16 and 16.1 record published N3 contract adoption, the closed fresh-origin correction and independently replayed representation controls. Sections 14 and 15 preserve source and tooling checkpoints. Section 13 preserves the October 9 autonomous N3 direction; sections 11 and 12 preserve the separately scoped external package outcome. N3 implementation is active; this revision does not accept runtime behavior or M3.
+**Current approval and continuation:** Sections 16, 16.1 and 16.2 record published N3 contract adoption, the closed fresh-origin and direct propagation-boundary corrections and independently replayed representation controls. Sections 14 and 15 preserve source and tooling checkpoints. Section 13 preserves the October 9 autonomous N3 direction; sections 11 and 12 preserve the separately scoped external package outcome. N3 implementation is active; this revision does not accept runtime behavior or M3.
 
 ## 1. Current working brief
 
@@ -21,7 +21,7 @@
 | Next milestone | M4 remains planned; its dependency is M3 acceptance |
 | M2 acceptance | Complete; immutable evidence records all six exit criteria and eight deliverables |
 | Source closure | Original clean full execution and successful exact-revision Ubuntu/Windows CI verified October 11 (section 14); section 12 external review remains representation-matched only, `acceptance=false`, `provenance_review_required=true`; neither accepts N3 or M3 |
-| Wiki | Owner publication `a2d8a5b` verified from source `cdbcb68`; all 47 remote pages match reviewed bytes (section 16.1) |
+| Wiki | Owner publication `2353a5d` verified from source `2fb1913`; all 47 remote pages match reviewed bytes (section 16.2) |
 | Publication | Unreleased; no GitHub Release objects exist as verified September 20, 2026 |
 | Workflow | Autonomous execution and owner-account publication authorized by package `YWE-M3-N3-AUTONOMOUS-001` r1 (section 13); no operator approval gates, operator reviews, or mandatory separate reviewer-service sign-off; technical checks and source constraints retained |
 
@@ -1450,3 +1450,62 @@ is active in session ownership, closed values/schemas, Diagnostics and engine
 coordination. Continue through the sixteen verification groups and remaining
 roadmap without assigning an owner approval gate. The amendment commit and its
 subsequent readback establish its actual publication checkpoint.
+
+
+### 16.2. Direct propagation-boundary correction and active implementation
+
+The failure-union amendment `2fb19137a0fcf0a012aff4e02a4589331c5ffa9e`
+is published with owner authorship, normal nonforce push, and exact Git/API/README
+readback. Its clean eleven selected checks pass with zero failures/advisories
+in 229.734 seconds. README SHA256 is
+`8de5efafaaf9928e5dca256bac078adaf9972192221bcbf2c0d5789c4909a1bb`.
+Full CI 38170531295 is in progress at the observed readback; success is not claimed.
+Wiki `2353a5d61bf7f59b2bc884135576f05c9ffcfcdb` is published from that source.
+A fresh LF-controlled remote clone matches all 47 independently reviewed pages;
+32 generated surfaces verify with zero changes and 15 manual pages remain preserved.
+Home SHA256 is `83339b6d884b20008a69f02a6a51118314ebf636acb0ed6e1c1d3ecee5fbe8a0`;
+roadmap SHA256 is `4a5b1c5a8fc2f0ca8b63da1273c1a804c410bc425628fb773dbcca84ced4e19b`.
+
+Contract section 8 already permits containment from a matching SATISFIED PROPAGATION_RISK
+boundary without authority. The proposed owner selected AUTHORITY_REQUEST, whose
+closed value correctly requires authority; this would reject the permitted route
+or invent authority. ADR-0035 adopts explicit PROPAGATION_RISK_BOUNDARY before
+dependent code. It requires actual matching boundary evidence, the risk trigger,
+and null authority/recovery reference. N2 handoff provenance remains separate.
+The independent policy hash, 38 types, 35 ports, fields, source vectors and every cap
+remain unchanged. Independent root replay verifies external indexed artifacts and
+all five structural reports byte-for-byte. The correction adds no numeric bound.
+
+The actual live standalone recovery integration suite passed 54 tests in 192.229
+seconds with the optional gate path present. Root composition/host-policy controls
+passed 7 tests in 0.309 seconds, including copied/blank service refusal, single owner
+composition, legacy behavior, unissued gate refusal and normalized actual policy
+bytes. Initial root test preparation used a nonexistent fixture function and wrong
+exception attribute; both test errors were corrected before the successful run.
+A temporary public export edit named noninventory types and caused ImportError;
+the export list was corrected to all 38 actual owned types and verified by import
+and the executed inventory-identity test. These are scoped live tests, not exact
+committed N3 acceptance. Values, schema, actual collector and lifecycle controls
+are active; full integrated verification and N3-V01 through N3-V16 remain required.
+Continue through remaining M3 exits and M4–M10 without an owner approval gate.
+
+
+The earlier contract adoption CI 38169258179 completed with failures on both
+Windows and Ubuntu. Each canonical run reports 34 passed checks and 2 blocking
+failures: validation_unit_tests and player_runtime_state. Actual logs name five
+unit-test failures caused by the five proof paths in allowed_added_paths, whose
+validator permits only scripts/tests/.github tooling. The same paths are already
+explicitly approved reference sources. The correction moves only these five
+paths to allowed_reference_paths, retaining both the platform approval and local
+approval requirement. Two new controls exercise removal of local approval and
+three neighboring unreviewed paths; existing refusal tests remain unchanged.
+This fixes the observed role mismatch rather than bypassing a guard or filtering
+its errors. The failed CI logs and original commits remain preserved.
+Root's expanded live recovery/composition integration passed 12 tests in 0.515
+seconds, including actual zero/one-emission child failures, unavailable facts,
+fresh provider binding/context refusal, reentrant provider halt, and exactly-once
+cleanup of a real N2 scope returned before halt with confirmed/unconfirmed receipt.
+Synthetic clock/store/provider responses remain explicitly scoped controls.
+The final contract overlay also passes 28 RoadmapValidationTests,
+PlayerRuntimeReferencePolicyTests and platform-boundary tests in 74.561 seconds,
+including both new proof-path approval controls and all existing assertions.

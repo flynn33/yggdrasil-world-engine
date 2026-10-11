@@ -19,6 +19,9 @@ hashes, reconciled adopted policy and inventory hashes, and exact repository
 artifact hashes. The adopted policy hash includes its actual adopted status;
 the frozen proposal bytes remain preserved separately. ADR-0034 adopts the
 closed fresh-origin failure amendment before its dependent implementation.
+ADR-0035 adds the exact direct PROPAGATION_RISK_BOUNDARY cause before its
+dependent code. Independent replay reproduces all five structural reports
+byte-for-byte; no existing bound, cap, reservation, field, type or port changes.
 ACTUAL_READ_SOURCE_HASHES.json now names normalized committed cdbcb68 source
 blobs; the preceding checkout-byte hashes remain in the base commit and
 external adoption receipts. Current runtime edits are excluded from this proof.

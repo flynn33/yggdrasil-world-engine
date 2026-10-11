@@ -72,7 +72,10 @@ authorized resolution, halt and bounded Diagnostics against those contracts.
 
 ADR-0034 corrects the closed actual fresh-origin failure unions before
 dependent implementation; replayed bounds remain within the fixed command
-reservations. Owner wiki `a2d8a5b` is remotely byte-verified from `cdbcb68`.
+reservations. ADR-0035 adds the truthful direct propagation-risk boundary
+cause; all five structural reports replay byte-identically. Runtime
+implementation is underway and acceptance remains outstanding. Owner wiki
+`2353a5d` is remotely byte-verified from `2fb1913`.
 The [README development checkpoint](../../README.md#development-checkpoint--2026-10-11)
 and [Project Record section 16](../design-planning/Project_Record.md#16-n3-contract-adoption-and-actual-wiki-publication--october-11-2026)
 carry the actual published verification and continuation. This increment does

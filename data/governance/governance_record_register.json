@@ -1649,12 +1649,49 @@
         "core/ash_pattern_engine/state_values.py",
         "core/ash_pattern_engine/state_model.py"
       ]
+    },
+    {
+      "id": "ADR-0035",
+      "record_type": "decision",
+      "title": "Represent direct propagation-risk containment with actual boundary evidence",
+      "status": "accepted",
+      "recorded_on": "2026-10-11",
+      "owner_role": "Core semantics maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt the closed cause enum correction before dependent values and lifecycle implementation; N3 runtime acceptance remains outstanding.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "The adopted lifecycle contract section 8 permits PROPAGATION_RISK containment from an actual matching SATISFIED boundary without authority. The closed cause enum lacks a direct propagation boundary kind; AUTHORITY_REQUEST requires authority. Using it would fabricate authority or reject permitted boundary evidence.",
+      "decision": "Add PROPAGATION_RISK_BOUNDARY to SessionCauseKind and its exact safe projection domain. Require trigger PROPAGATION_RISK, null authority and recovery operation reference, and an actual SATISFIED PROPAGATION_RISK boundary bound to the cause request and expected snapshot. The existing N2_HANDOFF path remains distinct.",
+      "rationale": "The explicit cause preserves the observed boundary and permits the adopted source-required route without invented authority or borrowed recovery evidence. The enum is shorter than the existing structural maximum; independent executed replay establishes unchanged output bounds.",
+      "consequences": [
+        "YWE-REQ-0044 and ADR-0033/0034 remain active. The exact business inventory retains 38 types, 35 ports and every existing field.",
+        "All five independently regenerated structural reports match committed 2fb19137 byte-for-byte. Ordinary/terminal bounds remain 324066/645088, alias upper bound remains 324 per command, supporting nodes remain 616, pins remain 2544. No cap, quota or reservation increases.",
+        "Independent policy SHA256 remains 24e2584279b95b8e3659bd61e6b5149311f344b03b981e88f74ae37775591910. Canonical source, mathematical contracts, legacy source vectors and historical evidence are unchanged.",
+        "External proposed constructor/schema controls check valid boundary, missing/unsatisfied/foreign boundary, stale snapshot, wrong trigger and fabricated authority/recovery reference; these controls do not establish actual lifecycle capture or N3 acceptance."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0044",
+        "YWE-REQ-0043",
+        "YWE-REQ-0042",
+        "YWE-REQ-0041"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_session_lifecycle_contract.md",
+        "docs/architecture/m3_session_lifecycle_policy.md",
+        "docs/design-planning/m3/session-lifecycle/BUSINESS_API_INVENTORY.json",
+        "docs/design-planning/m3/session-lifecycle/SAFE_FIELDS_AND_LIMITS.json",
+        "docs/design-planning/m3/session-lifecycle/BOUND_INPUT_DOMAINS.json",
+        "docs/design-planning/m3/session-lifecycle/ARTIFACT_INDEX.json"
+      ]
     }
   ],
   "summary": {
-    "total_records": 51,
-    "architecture_decisions": 34,
-    "accepted_decisions": 34,
+    "total_records": 52,
+    "architecture_decisions": 35,
+    "accepted_decisions": 35,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

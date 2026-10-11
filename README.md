@@ -126,10 +126,12 @@ ADR-0034 corrects the actual failed/unavailable fresh-origin evidence unions
 before their dependent implementation. The replayed ordinary and terminal
 bounds are 324,066 and 645,088 bytes within the existing reservations.
 Three portable representation controls pass against the corrected inputs. These
-verify bounds and graph representation; lifecycle implementation and runtime
-acceptance remain outstanding. The next step is implementing session admission,
-controlled state publication, containment and resolution, safe halt, and bounded
-diagnostic retention against this contract. M0–M2 remain accepted and M3 active.
+verify bounds and graph representation. ADR-0035 adds the truthful direct
+propagation-risk boundary cause; all five replayed structural reports remain
+byte-identical. Lifecycle implementation is underway in the coordinated owner,
+values/schema, Diagnostics and engine paths. Runtime acceptance remains
+outstanding while cancellation, quotas, capture completion and retention
+witnesses are exercised. M0–M2 remain accepted and M3 active.
 
 The owner wiki publisher is published at
 [`4f7cd2e`](https://github.com/flynn33/yggdrasil-world-engine/commit/4f7cd2e38367e1b3cc75eefffb8f752586e1c7a2).
@@ -144,11 +146,19 @@ The adopted contract checkpoint is published at
 [`cdbcb68`](https://github.com/flynn33/yggdrasil-world-engine/commit/cdbcb68fab4471a2c910a1762038c1551f8fe9e8):
 eleven selected clean checks and both platform-boundary tests pass.
 [Its full CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38169258179)
-is dispatched; success is not predeclared.
+failed on both systems: the five reviewed proof files were configured in the
+wrong Phase 10 path role. They now use explicit local reference approval;
+unreviewed neighbors and missing approvals remain refused.
+
+The failure-union amendment is published at
+[`2fb1913`](https://github.com/flynn33/yggdrasil-world-engine/commit/2fb19137a0fcf0a012aff4e02a4589331c5ffa9e):
+all eleven selected checks pass from its exact clean checkout.
+[Its full CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38170531295)
+is running at the latest readback.
 
 The [wiki](https://github.com/flynn33/yggdrasil-world-engine/wiki) is published at
-[`a2d8a5b`](https://github.com/flynn33/yggdrasil-world-engine/wiki/_history)
-from source `cdbcb68`. A fresh remote clone matches all 47 reviewed pages,
+[`2353a5d`](https://github.com/flynn33/yggdrasil-world-engine/wiki/_history)
+from source `2fb1913`. A fresh remote clone matches all 47 reviewed pages,
 including Home, the roadmap page and preserved manual navigation. Each published
 development increment updates this README checkpoint and refreshes the wiki
 from committed source. The machine-readable milestone gates remain authoritative;
