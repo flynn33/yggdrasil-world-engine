@@ -34,6 +34,12 @@ ENUM DiagnosticKind
     FALLBACK                 -- produced by fallback selection
     CONTAINMENT              -- produced by containment entry or management
     SAFE_HALT                -- produced by safe-halt entry
+    REALM_ENCODING           -- produced by REALM_ENCODER
+    TRANSITION               -- produced by TRANSITION_REGISTRY
+    TOPOLOGY                 -- produced by TOPOLOGY_GENERATOR
+    AXIOM                    -- produced by AXIOM_EVALUATOR
+    GENERATION_PLAN          -- produced by GENERATION_PLANNER
+    ARTIFACT_EMISSION        -- produced by ARTIFACT_EMITTER
 END ENUM
 ```
 
@@ -58,6 +64,7 @@ Severity must reflect the actual system impact, not the diagnostic source. A `ST
 ENUM Stage
     DETECTION                -- initial detection of a condition (state-validity diagnosis)
     CLASSIFICATION           -- system-state classification and recoverability mapping
+    PROCESSING               -- pure module processing or artifact materialization
     RECOVERY                 -- correction, re-derivation, or fallback selection
     ESCALATION               -- escalation from recovery to containment
     TERMINAL                 -- safe halt (no further stages)
@@ -113,7 +120,7 @@ Diagnostics form a **chain** from initial detection through terminal halt:
 1. Every step in the recovery/escalation chain must produce a diagnostic record. No step may be silently skipped.
 2. If a step completes without producing a diagnostic, the implementation is nonconformant.
 3. Silent escalation (changing severity or stage without emitting a diagnostic) is prohibited.
-4. Diagnostics must not be deferred, batched, or conditionally suppressed.
+4. Semantic diagnostic production must not be deferred, batched, or conditionally suppressed. Pure producer construction and subsequent ordered persistence follow the YWE-M3-MODULES amendment below.
 
 ## Relation to other specifications
 
@@ -123,3 +130,41 @@ Diagnostics form a **chain** from initial detection through terminal halt:
 - **rule-id-taxonomy.md** — governs the `rule_ids` field
 - **semantic-contracts.md** — requires downstream implementations to expose diagnostics conforming to this schema
 - **fallback-policy-registry.md** — fallback diagnostics must reference the registry policy_id
+
+## Design Package YWE-M3-MODULES — finite producer extension
+
+The six added kinds are governed by the correspondingly named module contracts.
+They use PROCESSING after actual StateModel DETECTION/CLASSIFICATION and before
+RECOVERY. The exact order is DETECTION < CLASSIFICATION < PROCESSING < RECOVERY
+< ESCALATION < TERMINAL. PROCESSING permits only a DETECTION, CLASSIFICATION or
+PROCESSING parent. It cannot follow RECOVERY, ESCALATION or TERMINAL, and no
+diagnostic may follow a parent whose disposition is TERMINAL. Existing
+ESCALATION and TERMINAL parent restrictions remain exact. DETECTION has a null
+parent and its own reference as root; every other stage has an actual predecessor
+and the same actual StateModel root. Recovered or externally replaced states use
+a new actual StateModel root and typed dependency links outside this envelope.
+Every PROCESSING envelope preserves the actual originating DETECTION envelope's
+subject_reference; producer-specific entity identifiers remain typed payload facts.
+
+Success is INFO/RESOLVED at current impact; malformed/refused processing is
+ERROR/BLOCKED. A false axiom is WARNING/BLOCKED. An inapplicable enumerated
+transition is INFO/RESOLVED with applicability=false: absence is an observed
+catalog decision, not failure of the entire resolution. A producer preserves the
+maximum observed envelope severity along its chain even when a subsequent check
+passes; payload current_impact preserves that check's own result. Axiom checks
+continue after false results and overall_pass is computed only after all five.
+The fifth check retains its actual component result; its final disposition is
+RESOLVED exactly when overall_pass is true, otherwise BLOCKED. A1 through A4
+use RESOLVED exactly when their own component passes, otherwise BLOCKED.
+
+Every evaluated semantic step constructs its immutable typed envelope and payload
+immediately, before the next semantic step. A pure producer performs no clock,
+filesystem, network, collector, storage or arbitrary callback effect. It returns
+its ordered owned records as part of the bounded result. Composition subsequently
+persists each actual record in order and reports actual acknowledgments and once
+completion. This ordered persistence is not deferred diagnostic production;
+production never suppresses, combines or invents records. Capture failure does
+not erase the constructed prefix or become confirmation. An effectful emitter
+reserves the whole operation before first effect, captures actual dispatch and
+receipt steps between effects, and stops further dispatch after failed capture.
+No existing effectful StateModel/RecoveryEngine capture is moved or suppressed.

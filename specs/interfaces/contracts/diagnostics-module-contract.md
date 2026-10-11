@@ -44,7 +44,7 @@ The `Diagnostics` module is the single authority for:
 ### No silent omission
 - Every step in the recovery/escalation chain must produce a diagnostic
 - Silent escalation (changing severity or stage without emitting a diagnostic) is prohibited
-- Diagnostics must not be deferred, batched, or conditionally suppressed
+- Semantic diagnostic production must not be deferred, batched, or conditionally suppressed; pure construction and ordered persistence follow the YWE-M3-MODULES amendment below
 - If any module fails to produce a required diagnostic, the Diagnostics module must detect and report the gap
 
 ### Deterministic output
@@ -83,3 +83,60 @@ The `Diagnostics` module is the single authority for:
 - `axiom-evaluator-contract.md` — produces axiom evaluation diagnostics
 - `generation-planner-contract.md` — produces plan diagnostics
 - `artifact-emitter-contract.md` — produces emission diagnostics
+
+## Design Package YWE-M3-MODULES — producer and capture ownership
+
+RealmEncoder, TransitionRegistry, TopologyGenerator, AxiomEvaluator,
+GenerationPlanner and ArtifactEmitter use the six new kinds and PROCESSING.
+They do not reuse RecoveryDiagnostic, invent GENERATION stages, enlarge the TEN
+envelope, recertify state from a realm identity, or relabel old N1/N2 records.
+Pure mathematical diagnosis validation is distinct from capture authentication:
+the producer validates full current model/source/profile and retains the exact
+validation; the composition capture adapter additionally authenticates the actual
+completed StateModel origin and every earlier dependency in its collector.
+Missing, mismatched, semantically rejected or unconfirmed actual provenance
+retains typed failure and pending evidence without manufacturing a DETECTION root.
+A complete current StateDiagnosis with an actual DETECTION and matching first
+completion preserves that real root even for malformed input (parsed_state NONE),
+TC/TI state or an UNAVAILABLE profile. Its owned producer may emit a valid-source
+refusal from that real root; a producer-specific pending/no-record input policy
+is also explicit. Neither path reconstructs a diagnosis, defaults a state, or
+claims that unavailable profile evidence established validity.
+
+RealmEncoder constructs at most two records: valid-source gate and full-vector
+identity. Transition resolution constructs at most seventeen: valid-source gate
+then all sixteen applicability decisions in exact registry order. Application
+constructs at most four: valid-source gate, selected C16 membership, selected
+applicability, simultaneous full-vector XOR with actual pure target validity.
+A failed required condition stops that application and retains its actual prefix.
+Topology constructs one complete topology or one explained refusal, never a
+per-node event stream or partial success. Axiom evaluation constructs five
+ordered check records without short circuit, or one input refusal before checks.
+The fifth completed check cites conjunction as well as its own axiom rule.
+GenerationPlanner constructs one plan-level record. ArtifactEmitter constructs
+one dispatch and one actual receipt record for each of at most thirty-two plan
+artifacts plus one final operation summary: at most sixty-five records.
+
+Producer record payloads are exact module-owned semantic types; DiagnosticEnvelope
+remains the ten-field common envelope. Actual pure production is not proof of
+host source authentication or retained storage. Capture returns a separate typed
+observation with constructed, attempted, confirmed and pending records and its
+actual first completion response. Supporting evidence is committed before any
+referring acknowledgment; uncertainty is retained and charged. Paired JSON and
+Markdown exports expose the same closed safe graph, complete ordered TEN records,
+actual completion, missing coverage and typed dependency links. Caller prose and
+opaque identifiers are never copied into safe exports.
+
+The selected implementation declares and reserves an entire finite operation
+before external effects or accepted capture, including records, aliases, support,
+incident and bytes. Existing global capacities remain authoritative. New producer
+reservations cannot borrow N3 four-event slots, increase N2 resources, automatically
+purge pinned history, or promise several worst operations coexist. Pure computation
+may return truthful unretained semantics after reservation failure; the emitter
+performs no effect in that case. Every scope finishes once; returning a producer
+without required completion is diagnosed exactly once at its explicit return or
+shutdown closure boundary through the bounded independent meta lane. A live
+snapshot may report a pending active scope without claiming a closed omission.
+Meta exhaustion folds into bounded health counters and never fabricates canonical
+records or recursively reports itself. Missing production and missing persistence
+are reported separately. Completion never retroactively certifies omitted steps.

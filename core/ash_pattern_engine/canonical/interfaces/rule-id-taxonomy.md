@@ -108,3 +108,32 @@ cites the exact trigger evaluated; no trigger is silently mapped to another.
 - **recovery-fallback-semantics.pseudo.md** — uses `ASH-RECOVERY` and `ASH-FALLBACK` family rule IDs
 - **containment-safe-failure-semantics.pseudo.md** — uses `ASH-CONTAINMENT` and `ASH-HALT` family rule IDs
 - **semantic-contracts.md** — requires downstream implementations to emit taxonomy-compliant rule IDs
+
+## Design Package YWE-M3-MODULES — six producer rule assignments
+
+This additive extension activates ASH-TOPOLOGY, ASH-AXIOM and ASH-GENERATION. Existing identifiers, meanings and owner subsets are unchanged. The definitions below name the exact condition, not a downstream claim of implemented conformance.
+
+| Rule ID | Evaluated meaning | Canonical semantic source |
+|---|---|---|
+| `ASH-STATE-IDENTITY-001` | Full-vector state identity encoding; valid-only module input. | `core/realm-identity.pseudo.md; interfaces/contracts/realm-encoder-contract.md` |
+| `ASH-CODEWORD-REGISTRY-001` | Exactly ordered canonical C16 transition definitions; no implicit definition. | `core/codeword-set.pseudo.md; algorithms/transition-system.pseudo.md` |
+| `ASH-CODEWORD-SELECTION-001` | Selected transition resolves to a canonical C16 member. | `algorithms/transition-system.pseudo.md` |
+| `ASH-CODEWORD-APPLICABILITY-001` | Actual selected or enumerated definition applicability under the declared exact policy. | `algorithms/transition-system.pseudo.md; interfaces/contracts/transition-registry-contract.md` |
+| `ASH-CODEWORD-TRANSFORMATION-001` | Simultaneous full-vector XOR and actual derived target validity. | `algorithms/codeword-transformation-semantics.pseudo.md` |
+| `ASH-TOPOLOGY-ADMISSION-001` | Current valid input and declared depth/seed bound before expansion. | `interfaces/contracts/topology-generator-contract.md` |
+| `ASH-TOPOLOGY-STRUCTURE-001` | Typed nodes and declared frontier-only output. | `algorithms/topology-expansion.pseudo.md` |
+| `ASH-TOPOLOGY-EXPANSION-001` | Each leaf expands by continuation, positive and negative branches. | `algorithms/topology-expansion.pseudo.md` |
+| `ASH-TOPOLOGY-ORDER-001` | Deterministic frontier and sibling order. | `algorithms/topology-expansion.pseudo.md` |
+| `ASH-TOPOLOGY-LINEAGE-001` | Every child retains actual parent lineage. | `algorithms/topology-expansion.pseudo.md` |
+| `ASH-AXIOM-SUBJECT-001` | Complete typed subject and comparable declared units before evaluation. | `algorithms/axiom-evaluation.pseudo.md; interfaces/contracts/axiom-evaluator-contract.md` |
+| `ASH-AXIOM-RELATION-001` | relation_count > 0. | `algorithms/axiom-evaluation.pseudo.md` |
+| `ASH-AXIOM-COMPRESSION-001` | compressed_measure < raw_measure in the same declared quantum. | `algorithms/axiom-evaluation.pseudo.md` |
+| `ASH-AXIOM-SCALE-001` | scale_count > 1. | `algorithms/axiom-evaluation.pseudo.md` |
+| `ASH-AXIOM-ERASURE-001` | erasure_cost > 0. | `algorithms/axiom-evaluation.pseudo.md` |
+| `ASH-AXIOM-SELFREFERENCE-001` | self_reference_capable AND self_model_available. | `algorithms/axiom-evaluation.pseudo.md` |
+| `ASH-AXIOM-CONJUNCTION-001` | overall_pass is the conjunction of all five checks; no short circuit. | `algorithms/axiom-evaluation.pseudo.md` |
+| `ASH-GENERATION-PLAN-001` | Complete deterministic abstract plan from exact inputs. | `algorithms/generation-planning.pseudo.md; interfaces/contracts/generation-planner-contract.md` |
+| `ASH-GENERATION-BOUNDARY-001` | Planning performs no observable external effect or artifact emission. | `interfaces/contracts/generation-planner-contract.md` |
+| `ASH-GENERATION-TRACEABILITY-001` | Every materialized artifact traces to its exact plan element. | `interfaces/contracts/artifact-emitter-contract.md` |
+| `ASH-GENERATION-EMISSION-001` | Materialize exactly the selected complete plan with actual effect receipts. | `interfaces/contracts/artifact-emitter-contract.md` |
+| `ASH-GENERATION-PLANFIDELITY-001` | No invention, omitted element, local default, or callback to fill plan semantics. | `interfaces/contracts/artifact-emitter-contract.md` |
