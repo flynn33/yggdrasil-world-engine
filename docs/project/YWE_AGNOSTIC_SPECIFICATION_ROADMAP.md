@@ -61,29 +61,32 @@ Indicators: 🟢 complete, 🟡 in progress, ⚪ planned, 🔴 blocked, and ⏸�
 
 ### Current development checkpoint — October 11, 2026
 
-M0–M2 remain accepted and M3 is active. The N3 reference lifecycle
+M0–M2 remain accepted and M3 is active. The adopted N3 lifecycle
 [contract](../architecture/m3_session_lifecycle_contract.md),
 [policy](../architecture/m3_session_lifecycle_policy.md) and
-[exact inventory/capacity controls](../design-planning/m3/session-lifecycle/README.md)
-are adopted before implementation. The reference candidate implements admission,
-fresh recovery, controlled publication, containment, authorized resolution,
-halt and bounded Diagnostics. Focused controls exercise those owners; exact
-committed-source full runtime acceptance remains outstanding.
+[inventory/capacity controls](../design-planning/m3/session-lifecycle/README.md)
+now have a published, verified reference implementation at
+[`a345d1b`](https://github.com/flynn33/yggdrasil-world-engine/commit/a345d1be3e2d635cb79104c153d2628b090ccd88).
+It passes all 36 applicable repository checks and 1151 unit tests from an
+exact clean, unfiltered offline checkout, with zero failures/advisories and no
+checkout changes. All 930 fixture bindings and 382 intended rejections pass.
+The scoped 125 session controls cover actual Windows protected-store export,
+source/policy admission, fresh recovery, controlled publication, containment,
+resolution, all five halt causes, concurrent revocation and terminal evidence.
+The earlier contract checkpoint b283c40 passes full Ubuntu/Windows CI; the
+runtime implementation’s own CI is dispatched and pending observation.
 
-ADR-0034 corrects the closed actual fresh-origin failure unions before
-dependent implementation; replayed bounds remain within the fixed command
-reservations. ADR-0035 adds the truthful direct propagation-risk boundary
-cause; all five structural reports replay byte-identically. The live candidate
-passes twelve selected governance checks and all 930 fixture bindings, including
-382 intended rejections. All 125 integrated session controls pass, including
-actual Windows protected-store paired export and concurrent halt on the dirty
-candidate. Reviewed corrections are included; the full clean run remains
-required. Owner wiki `d3688f0` is remotely
-byte-verified from `b283c40`.
-The [README development checkpoint](../../README.md#development-checkpoint--2026-10-11)
-and [Project Record section 16](../design-planning/Project_Record.md#16-n3-contract-adoption-and-actual-wiki-publication--october-11-2026)
-carry the actual published verification and continuation. This increment does
-not accept N3, any M3 exit criterion or a platform product.
+Strict RealmEncoder and TransitionRegistry ownership is next, preserving the
+existing full-state algebra helpers. Bounded topology, five-axiom evaluation,
+pure planning, independent emission and complete Diagnostics producer coverage
+remain required. All five M3 exit criteria remain open; N3 verification does
+not activate M4 or platform work. Owner wiki d3688f0 is remotely verified for
+b283c40 until the subsequent projection is actually published and read back.
+
+The [README checkpoint](../../README.md#development-checkpoint--2026-10-11)
+and [Project Record section 16.4](../design-planning/Project_Record.md#164-committed-lifecycle-verification-and-roadmap-continuation)
+carry exact source, verification and publication evidence. Continue through the
+full roadmap under the owner’s standing direction.
 
 ## Repository assessment
 

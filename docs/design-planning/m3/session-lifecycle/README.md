@@ -12,10 +12,12 @@ business types, 35 ports, finite domains and runtime allocations.
 supporting graph. [CAPACITY_AND_RETENTION.md](CAPACITY_AND_RETENTION.md) connects
 that graph to actual admission, once completion, final observation and retention
 obligations. Its observed implementation boundaries name the preparation
-revision and remain historical. The implemented reference candidate and scoped
-controls are recorded in [Project Record section 16.3](../../Project_Record.md#163-reference-lifecycle-candidate-and-current-verification).
-Full committed-source runtime acceptance remains outstanding; the structural
-reports below retain their separate representation-only scope.
+revision and remain historical. Scoped runtime controls are recorded in
+[Project Record section 16.3](../../Project_Record.md#163-reference-lifecycle-candidate-and-current-verification).
+Completed committed-source reference lifecycle verification is recorded in
+[section 16.4](../../Project_Record.md#164-committed-lifecycle-verification-and-roadmap-continuation).
+The structural reports and their runtime_acceptance=false index flag retain
+their representation-only scope; they are not the runtime acceptance receipt.
 
 [ARTIFACT_INDEX.json](ARTIFACT_INDEX.json) records the frozen external proposal
 hashes, reconciled adopted policy and inventory hashes, and exact repository

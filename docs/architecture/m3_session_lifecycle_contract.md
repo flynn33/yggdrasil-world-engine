@@ -2,7 +2,7 @@
 
 Contract identity: YWE-M3-SESSION-LIFECYCLE-001
 Contract version: 1.0.0
-Status: active N3 contract, adopted October 11, 2026 before dependent implementation. Reference implementation candidate exists; full committed-source runtime acceptance remains outstanding.
+Status: active N3 contract, adopted October 11, 2026 before dependent implementation. Bounded N3 reference runtime verified from exact committed implementation a345d1be3e2d635cb79104c153d2628b090ccd88; all 36 applicable checks pass in a clean, unfiltered offline run. Remaining M3 exits and implementation cross-platform CI are separate obligations.
 Owner and partition: ywe_core.
 Requirement: [YWE-REQ-0044]. Decisions: ADR-0033, ADR-0034 and ADR-0035.
 Adoption amendments: actual fresh-origin failure unions and safe unavailable-facts projection (ADR-0034); truthful direct propagation-risk boundary cause (ADR-0035), October 11, 2026, before their dependent implementation.

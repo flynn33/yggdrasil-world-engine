@@ -1,10 +1,10 @@
-# YWE Session Handoff — N3 Reference Implementation
+# YWE Session Handoff — Verified N3 and Remaining M3
 
 **Date:** October 11, 2026
-**Handoff checkpoint:** autonomous-n3-7
-**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-44, section 16.3; autonomous authority remains section 13.
-**Direction:** YWE-DIRECTION-20261009-AUTONOMOUS-N3 (package `YWE-M3-N3-AUTONOMOUS-001` r1).
-**Inspected project snapshot:** local and remote main `b283c4007fbd3d16c07e2a63f7e4f236ca309ecc`; owner publication and README readback verified. Runtime candidate is subsequent work requiring its own committed-source verification.
+**Handoff checkpoint:** autonomous-n3-8
+**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-45, section 16.4.
+**Direction:** Owner's full-roadmap goal and continuous README publication request; bounded N3 authority remains section 13, broader continuation section 16.4.
+**Inspected project snapshot:** owner-published implementation `a345d1be3e2d635cb79104c153d2628b090ccd88` with exact Git/API/README readback.
 **Method:** Raven Forge Development v0.7.0 at `87409bc36fb9d4782eab02189adb184f2b3962a7`.
 
 This is the current continuation. Earlier preparation receipts below remain
@@ -12,32 +12,29 @@ superseded history with their original scope and evidence preserved.
 
 ## Current state
 
-- M0–M2 accepted; M3 active; M4 and platform work remain planned/deferred.
-- Adopted N3 contracts and ADR-0033/0034/0035 precede the implementation candidate. Session admission, fresh recovery, actual containment/resolution/halt, revocation and bounded evidence have source-owned runtime controls. Full acceptance remains outstanding.
-- All twelve selected live governance checks pass; catalogs contain 219 schemas and 930 fixture bindings/382 intended rejections. Earlier 750 rows are preserved. All 125 integrated session tests pass, including actual Windows protected-store paired export and concurrent halt on the dirty candidate; 84 Diagnostics area tests pass.
-- Owner wiki `d3688f09740b3e895f8a1d5d2735edc300786d4f` actually published from `b283c40`; fresh remote clone matches all 47 reviewed pages. Home, roadmap and manual navigation are current for that source.
-- `cdbcb68` passes eleven selected clean checks and both platform-boundary tests; its full CI failed the proof-path role checks; the explicit role correction and refusal controls are recorded in section 16.2. `4f7cd2e` and predecessor `0949184` pass Ubuntu/Windows CI.
-- Original source `13df7079` retains its directly observed 36/36 clean execution, 1,006 tests and successful exact-revision Ubuntu/Windows CI. Section 12's separate external review remains representation-only, `acceptance=false`, `provenance_review_required=true`.
-- Autonomous execution, owner-authored publication and admin bypass are already authorized. No operator or reviewer-service approval gate is assigned.
+- M0–M2 accepted; M3 active; all five M3 exits remain open; M4 planned and platform work deferred through M10.
+- Adopted N3 reference lifecycle at a345d1b passes all 36 applicable repository checks and 1151 unit tests from its exact clean, unfiltered offline checkout, with zero failures/advisories and no checkout changes. Report/log/revision hashes and runtime test owners are in Project Record sections 16.3–16.4.
+- All 930 fixture bindings and 382 intended rejections pass; earlier 750 bindings remain preserved. Scoped 125 session controls include genuine Windows protected-store paired export and concurrent provider halt. Physical crash/power-loss and product qualification remain unverified.
+- The preceding b283c40 full CI 38172321482 succeeds on both Ubuntu and Windows, 36 checks and 1,024 tests each. The runtime’s own CI is dispatched and pending observation.
+- Wiki d3688f0 is remotely verified for source b283c40; publish and verify its next exact source projection.
+- Owner-authored autonomous execution/publication/admin bypass and no AI/coauthor attribution remain authorized. No owner approval gate is assigned.
 
 ## Current checkpoint
 
-**Current step:** P2 reference implementation and review corrections frozen;
-integrated runtime controls pass. Section 16.3 records actual scoped evidence and
-verification routing. Complete clean repository execution is next.
+**Current step:** Committed N3 reference lifecycle verified and owner-published;
+recording results and continuing the remaining M3 contracts.
 
-**Next action:** Commit the frozen candidate and execute the complete unfiltered
-clean repository suite.
-Publish verified owner-authored work and refresh README/wiki with actual results.
-Then continue through remaining M3 exits and M4–M10.
+**Next action:** Verify/publish this README progress record and refresh the wiki.
+Observe runtime CI. Adopt strict RealmEncoder/TransitionRegistry and complete
+ordinary-producer source compatibility, then implement and verify those owners.
+Continue bounded topology, five axioms, pure planner/emitter and remaining M3
+conformance, followed by M4–M10.
 
 **Needed from owner:** Nothing.
 
-**Saved at:** This handoff and Project Record planning-44. The containing commit
-and subsequent readback are the save receipt; no own test result is predeclared.
-This checkpoint does not complete the active roadmap goal.
-
-- The saved scoped tests are not full N3 acceptance. No owner action is needed.
+**Saved at:** This handoff and Project Record planning-45; containing commit and
+readback establish this record’s save receipt. Its own verification/publication
+results are not predeclared. The full-roadmap goal remains active.
 
 ---
 

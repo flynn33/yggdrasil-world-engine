@@ -1,13 +1,13 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-44
+**Revision:** planning-45
 **Date:** October 11, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-43 at `b283c4007fbd3d16c07e2a63f7e4f236ca309ecc`; full history remains in Git.
+**Supersedes:** planning-44 at `a345d1be3e2d635cb79104c153d2628b090ccd88`; full history remains in Git.
 
-**Current approval and continuation:** Sections 16–16.3 record adopted N3 contracts, source corrections, published tooling and the implemented reference candidate with scoped runtime evidence. Section 13 preserves autonomous execution/publication authority; earlier source and external-package receipts remain historical. Full committed-source runtime acceptance and all M3 exit criteria remain outstanding.
+**Current approval and continuation:** Sections 16–16.4 record adopted N3 contracts, source corrections, published tooling and completed committed-source reference lifecycle verification. Section 13 preserves bounded N3 execution/publication authority; section 16.4 records the owner’s full-roadmap continuation direction. Earlier source and external-package receipts remain historical. All M3 exit criteria remain outstanding.
 
 ## 1. Current working brief
 
@@ -17,13 +17,13 @@
 | Product purpose | Platform-neutral, strictly object-oriented and modular engine specification |
 | Accepted milestones | M0, M1 and M2 |
 | Active milestone | M3 — Complete core deterministic semantics and the reference oracle |
-| Active M3 assignment | N3 session lifecycle: admission and ownership, controlled live-state publication, containment and resolution, safe halt and terminal handling, and bounded diagnostic evidence |
+| Active M3 assignment | N3 reference lifecycle verified; strict RealmEncoder and TransitionRegistry contracts/source adoption next, followed by topology, five-axiom evaluation and pure planner/emitter conformance |
 | Next milestone | M4 remains planned; its dependency is M3 acceptance |
 | M2 acceptance | Complete; immutable evidence records all six exit criteria and eight deliverables |
 | Source closure | Original clean full execution and successful exact-revision Ubuntu/Windows CI verified October 11 (section 14); section 12 external review remains representation-matched only, `acceptance=false`, `provenance_review_required=true`; neither accepts N3 or M3 |
 | Wiki | Owner publication `d3688f0` verified from source `b283c40`; all 47 remote pages match reviewed bytes (section 16.3) |
 | Publication | Unreleased; no GitHub Release objects exist as verified September 20, 2026 |
-| Workflow | Autonomous execution and owner-account publication authorized by package `YWE-M3-N3-AUTONOMOUS-001` r1 (section 13); no operator approval gates, operator reviews, or mandatory separate reviewer-service sign-off; technical checks and source constraints retained |
+| Workflow | Bounded N3 authority is preserved in section 13; the owner's direct full-roadmap continuation and README publication direction is recorded in section 16.4. No operator approval gate or mandatory separate reviewer-service sign-off is assigned; technical checks and source constraints remain required |
 
 The machine-readable roadmap is milestone and status authority. Focused accepted contracts,
 governance records, schemas, fixtures, and validators remain engineering authority.
@@ -1612,3 +1612,60 @@ the routing itself is not an acceptance judgment:
 No N3 acceptance, M3 exit criterion or platform authorization is advanced by this
 candidate record. After exact committed-source verification and publication,
 continue remaining Diagnostics/generation/core conformance and then M4–M10.
+
+### 16.4. Committed lifecycle verification and roadmap continuation
+
+The frozen reference lifecycle implementation `a345d1be3e2d635cb79104c153d2628b090ccd88` is owner-published
+on main after its exact committed-source, clean, unfiltered offline run passed
+all 36 applicable checks and 1151 unit tests. The unit suite took
+1191.490 seconds; complete repository execution took
+1516.812 seconds. No check selection, blocking failure,
+advisory or checkout change is recorded. All 930 fixture bindings and 382
+intended rejections pass; the earlier 750 bindings remain preserved. This
+discharges N3-V16 for the scoped reference lifecycle together with the actual
+N3-V01–15 runtime owners and reviewed evidence in section 16.3. The same frozen
+runtime executes the real Windows source/policy guard, protected storage,
+containment/resolution/halt/denial and paired export controls in normal discovery.
+This verifies bounded N3 reference behavior; physical crash/power-loss and a
+platform product are not qualified, and no M3 exit criterion is accepted.
+
+Exact execution/report/log are preserved externally at
+`C:\Users\james\AppData\Local\Temp\ywe-n3-runtime-clean-a345d1b-20261011` with `.json`, `.log` and `_EXECUTION.json` suffixes.
+Report SHA256 is `e141f1901b3ea5bdefafba55ddba3ea3d07396e3ffd63a556a82b154eef7c606`;
+log SHA256 is `474e91bf33288ad2fa2d580de9a89ada5dd6a42d4f3174365e4e3b8f10279721`.
+Owner nonforce publication and exact Git/API/README readback are preserved in
+`C:\Users\james\AppData\Local\Temp\ywe-n2-contract-review-20261004-8jlnue3r\N3_RUNTIME_A345D1B_20261011_PUBLICATION.json`. The implementation's own cross-platform CI is dispatched;
+its result remains pending until directly observed.
+
+The preceding contract/approval checkpoint b283c40 now has observed successful
+Ubuntu and Windows CI 38172321482. Each passes 36 checks and 1,024 tests:
+Ubuntu 1091.957 seconds with 37 native skips; Windows 1345.329 seconds with no
+skips. Actual job responses and complete logs are retained externally as
+`ywe-n3-b283c40-ci-jobs-20261011-2.json` and
+`ywe-n3-b283c40-ci-complete-log-20261011-1.log`. Historical cdbcb68 and 2fb1913
+proof-role failures remain recorded, rather than converted into successful runs.
+
+The owner directs: “set a goal to finish the roadmap” and asks that the GitHub
+roadmap, especially README, be updated along the way while AFK. That direct
+full-roadmap instruction authorizes continuation beyond the bounded N3 package;
+the package itself is not enlarged by inference. Existing owner publication,
+admin bypass and no coauthor/AI attribution directions remain active. Maintain
+Raven Forge Development v0.7.0 at the recorded immutable revision, adoption
+before dependent implementation, complete technical checks and truthful status.
+No operator or separate reviewer-service approval is introduced.
+
+The next smallest M3 slice adds strict RealmEncoder/TransitionRegistry ownership
+without changing the accepted all-512 identity and all-8,192 XOR helper domain.
+Actual WRW validity is not closed under all transitions: its 9 valid inputs and
+16 codewords produce 9 valid and 135 transformation-compatible targets. Strict
+input admission and well-formed result computation must retain that distinction.
+New ordinary diagnostic kinds/rules and a complete reviewed source-vector
+migration require adoption before code. Bounded topology and the five-axiom
+evaluator follow; explicit role/naming/measure/target policies then complete the
+pure planner/emitter exchange. Current canonical Diagnostics excludes these
+six producers; their coverage and whole-operation completion remain open.
+
+Current wiki d3688f0 remains verified for b283c40 until the next actual source
+projection is published and remotely read back. This checkpoint updates README
+and roadmap with observed results; its own record checks are not predeclared.
+Continue through all remaining M3 exits and M4–M10. Needed from owner: nothing.

@@ -134,8 +134,20 @@ resolution, all five halt triggers, terminal denials and immutable bounded
 evidence. All 125 integrated session runtime/value/schema controls pass, including
 concurrent provider halt, actual scope cleanup, uncertain evidence retention and
 protected paired export. All 930 fixture bindings pass, with 382 expected
-rejections. The candidate still requires its exact committed-source full run
-before runtime acceptance. M0–M2 remain accepted and M3 active.
+rejections. The [committed lifecycle implementation](https://github.com/flynn33/yggdrasil-world-engine/commit/a345d1be3e2d635cb79104c153d2628b090ccd88)
+passes all 36 applicable repository checks and 1151 unit tests from an exact,
+clean, unfiltered offline checkout. The unit suite took 1191.490 seconds;
+the full run took 1516.812 seconds. It records zero
+blocking failures, advisories or checkout changes. Git and GitHub API readback
+confirm the published implementation and exact README bytes. This verifies the
+bounded N3 reference lifecycle. Its
+[Ubuntu/Windows CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38175922165)
+is running at the latest readback. M0–M2 remain accepted and M3 active.
+
+Next work is strict RealmEncoder and TransitionRegistry admission, followed
+by bounded topology, five-axiom evaluation and complete pure planner/emitter
+behavior. The existing identity/XOR helpers retain their full algebra domain.
+These remaining module and Diagnostics obligations keep all M3 exits open.
 
 The owner wiki publisher is published at
 [`4f7cd2e`](https://github.com/flynn33/yggdrasil-world-engine/commit/4f7cd2e38367e1b3cc75eefffb8f752586e1c7a2).
@@ -167,8 +179,10 @@ The propagation-boundary and proof-approval correction is published at
 All twelve selected checks pass from its exact clean checkout with zero
 failures/advisories; eleven focused approval/refusal tests also pass.
 [Its full CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38172321482)
-is running at the latest readback. Those checks cover the adopted contract and
-approval correction; the subsequent runtime candidate requires its own full run.
+completed successfully on Ubuntu and Windows. Both pass all 36 checks and
+1,024 unit tests; Ubuntu records 37 explicit native skips and Windows no skips.
+Those results cover the adopted contract and approval correction. The lifecycle
+implementation has the separate committed-source full run recorded above.
 
 The [wiki](https://github.com/flynn33/yggdrasil-world-engine/wiki) is published at
 [`d3688f0`](https://github.com/flynn33/yggdrasil-world-engine/wiki/_history)
