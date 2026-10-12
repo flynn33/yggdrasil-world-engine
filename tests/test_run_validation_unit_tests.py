@@ -43,6 +43,65 @@ class UnitEvidenceTests(unittest.TestCase):
                                 cwd=self.root, env=environment, capture_output=True)
         return result, json.loads(self.receipt.read_text())
 
+    def test_script_entry_preserves_selected_checkout_package_imports_with_and_without_receipt(self):
+        package = self.root / "checkout_package"
+        package.mkdir()
+        (package / "__init__.py").write_text('VALUE = "selected checkout"\n', encoding="utf-8")
+        (self.root / "tests/test_other.py").write_text(
+            'import unittest\nfrom checkout_package import VALUE\nclass OtherCases(unittest.TestCase):\n'
+            '    def test_second_module_import(self):\n        self.assertEqual("selected checkout", VALUE)\n',
+            encoding="utf-8")
+        self.prepare('''
+            import unittest
+            import checkout_package
+            from pathlib import Path
+            class Cases(unittest.TestCase):
+                def test_selected_package(self):
+                    self.assertEqual("selected checkout", checkout_package.VALUE)
+                    self.assertEqual(Path(__file__).resolve().parents[1] / "checkout_package/__init__.py",
+                                     Path(checkout_package.__file__).resolve())
+        ''')
+        environment = os.environ.copy()
+        environment.pop("PYTHONPATH", None)
+        environment.update(PYTHONDONTWRITEBYTECODE="1", PYTHONUTF8="1", GIT_ALLOW_PROTOCOL="file")
+        ordinary = subprocess.run([sys.executable, "-B", "-m", "unittest", "discover", "-s", "tests", "-p", "test_*.py"],
+                                  cwd=self.root, env=environment, capture_output=True)
+        self.assertEqual(0, ordinary.returncode, ordinary.stderr.decode())
+        foreign = Path(self.temporary.name) / "foreign-working-directory"
+        foreign.mkdir()
+        decoy = foreign / "checkout_package"
+        decoy.mkdir()
+        (decoy / "__init__.py").write_text('VALUE = "foreign checkout"\n', encoding="utf-8")
+        for explicit_root in (False, True):
+            for recorded in (False, True):
+                with self.subTest(explicit_root=explicit_root, recorded=recorded):
+                    command = [sys.executable, "-B", str(ROOT / "scripts/run_validation_unit_tests.py")]
+                    current_environment = dict(environment)
+                    if explicit_root:
+                        command += ["--root", str(self.root)]
+                        current_environment["PYTHONPATH"] = str(foreign)
+                    receipt = Path(self.temporary.name) / f"packages-{explicit_root}-{recorded}.json"
+                    if recorded:
+                        command += ["--receipt", str(receipt)]
+                    command += ["discover", "-s", "tests", "-p", "test_*.py"]
+                    result = subprocess.run(command, cwd=foreign if explicit_root else self.root,
+                                            env=current_environment, capture_output=True)
+                    self.assertEqual(0, result.returncode, result.stderr.decode())
+                    self.assertIn(b"Ran 2 tests", result.stderr)
+                    if recorded:
+                        evidence = json.loads(receipt.read_text())
+                        self.assertEqual(2, evidence["summary"]["tests_run"])
+                        self.assertEqual(["test_cases.Cases.test_selected_package", "test_other.OtherCases.test_second_module_import"],
+                                         [row["runtime_id"] for row in evidence["cases"]])
+                        self.assertEqual(["PASS", "PASS"], [row["status"] for row in evidence["cases"]])
+                        self.assertTrue(all(row["runtime_body_verified"] for row in evidence["cases"]))
+                        self.assertEqual([], evidence["fixture_errors"])
+                        self.assertEqual([], evidence["source_integrity_errors"])
+                        self.assertEqual([], evidence["dirty_before"])
+                        self.assertEqual([], evidence["dirty_after"])
+                    else:
+                        self.assertFalse(receipt.exists())
+
     def test_actual_outcomes_and_source_bodies_preserve_standard_discovery(self):
         self.prepare('''
             import unittest

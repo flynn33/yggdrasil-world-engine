@@ -276,6 +276,8 @@ def main(argv=None):
     root = (args.root or Path.cwd()).resolve()
     if args.root:
         os.chdir(root)
+    # Match python -m unittest: imports resolve from the selected checkout first.
+    sys.path.insert(0, str(root))
     unit_args = unit_args or ["discover", "-s", "tests", "-p", "test_*.py"]
     unit_argv = [str(Path(__file__)), *unit_args]
     if args.receipt is None:
