@@ -62,3 +62,30 @@ The `TransitionRegistry` module is the single authority for:
 - `codeword-set.pseudo.md` — canonical codeword structure
 - `ash-state-space.pseudo.md` — canonical F2^9 state definition
 - `diagnostics-module-contract.md` — schema and taxonomy conformance
+
+## Additive bounded ordered-chain application
+
+A reference registry MAY expose a separately declared bounded ordered-chain
+operation in addition to unchanged single selected application and resolution.
+The reference chain bound is four selections; it MUST retain the complete requested
+order, actual evaluated prefix, full intermediate candidates and source/profile
+bindings. It MUST begin from a current valid diagnosis and construct its actual
+valid-source gate. Every evaluated selection, applicability and simultaneous
+full-vector XOR condition MUST immediately construct its own owned record. The
+applicability mask is indexed by the complete current candidate, not the original
+source. Unknown or inapplicable selection MUST stop with an explained actual prefix. [YWE-REQ-0049]
+
+Each computed target retains an actual pure StateModel validity diagnostic. Strict
+chain continuation MUST require that exact target to be VALID under identical full
+source/profile bindings. The next step MAY reuse that already evaluated proof
+without inventing a fresh StateDiagnosis, root or validity evaluation. A nonVALID
+target stops at its actual computed candidate and records the failed continuation
+condition on that transformation; its rule vector additionally cites state validity.
+The original single selected application still returns its well-formed target and
+actual target diagnosis without a new postVALID promise or hidden normalization. [YWE-REQ-0049]
+
+An empty chain is a valid identity after its actual source gate. A four-selection
+reference chain constructs at most thirteen records: one source gate and three
+per evaluated step. All records retain the actual initial DETECTION subject/root
+and previously constructed parent, with nondecreasing severity. No intermediate
+StateModel emission, collector ACK or session publication is manufactured.

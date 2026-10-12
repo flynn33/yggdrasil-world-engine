@@ -140,3 +140,37 @@ snapshot may report a pending active scope without claiming a closed omission.
 Meta exhaustion folds into bounded health counters and never fabricates canonical
 records or recursively reports itself. Missing production and missing persistence
 are reported separately. Completion never retroactively certifies omitted steps.
+
+## Bounded generation-chain and effectful materialization exchange
+
+The additive ordered TransitionRegistry reference chain constructs at most thirteen
+records inside the existing seventeen-record registry reservation. This is a
+separately declared aggregate, not a change to the at-most-four-record single
+selected application above. Its initial source-validity gate and each evaluated
+membership, applicability and XOR/actual-target-validity condition MUST be retained
+immediately. Reuse of an already evaluated valid target for the next source does
+not manufacture another evaluation, intermediate diagnosis/root or acknowledgment.
+Failed membership, applicability or target continuation stops with the actual
+computed/evaluated prefix; no later required condition is falsely recorded. [YWE-REQ-0049]
+
+GenerationPlanner MUST construct its complete immutable plan-level diagnostic
+without invoking storage or capture. Later composition MUST authenticate exact
+issued dependencies and their actual first-completed same-collector origin before
+persisting the pure plan's ordered records. ArtifactEmitter is effectful: admission
+MUST validate its complete prepared plan, target and exact issued preparation and
+reserve the whole operation before ordinary dispatch. Its bounded record reference
+slots/phase order may be fixed before effects; outcome payloads MUST be constructed
+only when their actual condition occurs and cannot be fabricated at admission. [YWE-REQ-0049]
+
+Every artifact action MUST have a matching confirmed dispatch record before its
+single action grant. Target actions and all producer/target callbacks MUST occur
+outside collector and emitter locks. A granted action may return after cancellation;
+its actual effect/outcome/readback remains retained and no following grant occurs.
+An unconfirmed post-effect receipt MUST stop later dispatch without claiming rollback.
+One actual final summary follows the bounded artifact prefix, giving at most65
+records for32artifacts. No-op still produces its actual summary without target entry.
+Each genuine issued scope MUST finish once and expose its actual first completion
+through a distinct immutable final observation, even after admission or capture
+failure. Capability, resource, source and safe-alias closure checks remain separate
+from mathematical value validity; no source/host authentication is inferred.
+ [YWE-REQ-0049]
