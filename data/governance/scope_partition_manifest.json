@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1371,
-    "path_digest": "a750863b02cdcccb095e70bc86d7aae7d6078614d4e8c8d22247b29bd25dcc81",
+    "path_count": 1430,
+    "path_digest": "c914d20c4ced4764e7336b10481e5cfe7be4cd9adaa8c6c944991c7861ca499d",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -100,6 +100,7 @@
       "include": [
         ".github/**",
         ".gitignore",
+        ".gitattributes",
         "CLA.md",
         "CODE_OF_CONDUCT.md",
         "CONTRIBUTING.md",
@@ -334,6 +335,7 @@
       "exclude": [
         ".github/**",
         ".gitignore",
+        ".gitattributes",
         "CLA.md",
         "CODE_OF_CONDUCT.md",
         "CONTRIBUTING.md",
@@ -3009,16 +3011,86 @@
         "m3_module_reference",
         "reference_conformance"
       ]
+    },
+    {
+      "path": "data/governance/m3_acceptance_evidence.json",
+      "primary_partition": "historical_evidence",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/design-planning/m3/unit_evidence_and_acceptance_instruction.md",
+      "rationale": "The pending record preserves no acceptance claim; an accepted record preserves source-bound execution evidence separately from normative gate logic.",
+      "secondary_tags": [
+        "m3_execution_evidence"
+      ]
+    },
+    {
+      "path": "docs/project/M3_CORE_CONTRACTS_ACCEPTANCE.md",
+      "primary_partition": "historical_evidence",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/design-planning/m3/unit_evidence_and_acceptance_instruction.md",
+      "rationale": "The pending record preserves no acceptance claim; an accepted record preserves source-bound execution evidence separately from normative gate logic.",
+      "secondary_tags": [
+        "m3_execution_evidence"
+      ]
+    },
+    {
+      "path": "data/schemas/unit_case_evidence_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/design-planning/m3/unit_evidence_and_acceptance_instruction.md",
+      "rationale": "Closed execution, historical evidence and authored format schemas govern M3 validation rather than runtime business state.",
+      "secondary_tags": [
+        "m3_execution_evidence"
+      ]
+    },
+    {
+      "path": "data/schemas/m3_acceptance_report_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/design-planning/m3/unit_evidence_and_acceptance_instruction.md",
+      "rationale": "Closed execution, historical evidence and authored format schemas govern M3 validation rather than runtime business state.",
+      "secondary_tags": [
+        "m3_execution_evidence"
+      ]
+    },
+    {
+      "path": "data/schemas/m3_historical_acceptance_evidence_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/design-planning/m3/unit_evidence_and_acceptance_instruction.md",
+      "rationale": "Closed execution, historical evidence and authored format schemas govern M3 validation rather than runtime business state.",
+      "secondary_tags": [
+        "m3_execution_evidence"
+      ]
+    },
+    {
+      "path": "data/schemas/m3_core_wire_format_cases_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/design-planning/m3/unit_evidence_and_acceptance_instruction.md",
+      "rationale": "Closed execution, historical evidence and authored format schemas govern M3 validation rather than runtime business state.",
+      "secondary_tags": [
+        "m3_execution_evidence"
+      ]
+    },
+    {
+      "path": "data/schemas/m3_planner_emitter_format_cases_schema.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/design-planning/m3/unit_evidence_and_acceptance_instruction.md",
+      "rationale": "Closed catalog metadata and owned structural definition bindings preserve authored format controls separately from execution authority.",
+      "secondary_tags": [
+        "m3_format_control"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
       "ash_dependency_material": 66,
-      "governance_validation": 593,
-      "historical_evidence": 22,
+      "governance_validation": 632,
+      "historical_evidence": 24,
       "later_release_work": 45,
-      "wrw_reference_profile": 304,
-      "ywe_core": 217,
+      "wrw_reference_profile": 308,
+      "ywe_core": 231,
       "ywe_extension_profile": 124
     }
   }

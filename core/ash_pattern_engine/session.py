@@ -147,10 +147,28 @@ class _Operation:
     interrupted: object = None
 
 
+@dataclass
+class _ModuleOperation:
+    command: object
+    lease: object
+    gate: object
+    admission: object
+    phase: str = 'ADMITTED'
+    origin: object = None
+    origin_completion: object = None
+    pure: object = None
+    scope: object = None
+    control: object = None
+    capture: object = None
+    failure: object = None
+    confirmed: tuple = ()
+    attempted: object = None
+
+
 class ReferenceSessionLifecycle:
     """One controlled semantic owner, bound once to one issuing engine."""
 
-    def __init__(self, state_model, diagnostics, policy_binding):
+    def __init__(self, state_model, diagnostics, policy_binding, *, module_owners=()):
         from .diagnostics import ReferenceDevelopmentDiagnostics, ReferenceReleaseDiagnostics
         if type(state_model) is not StateModel:
             raise v.SessionContractError("SESSION_INPUT_INVALID", "binding")
@@ -159,7 +177,33 @@ class ReferenceSessionLifecycle:
         if type(policy_binding) is not v.SessionPolicyBinding:
             raise v.SessionContractError("SESSION_SOURCE_REJECTED", "binding.policy_binding")
         v.revalidate_value(policy_binding)
+        if type(module_owners) is not tuple or len(module_owners) > 4:
+            raise v.SessionContractError('SESSION_INPUT_INVALID', 'collaborator')
+        from .realm_transition import RealmEncoder, TransitionRegistry
+        from .topology import ReferenceTopologyGenerator
+        from .axioms import ReferenceAxiomEvaluator
+        producer_classes = ((RealmEncoder, 'REALM_ENCODER'), (TransitionRegistry, 'TRANSITION_REGISTRY'),
+            (ReferenceTopologyGenerator, 'TOPOLOGY_GENERATOR'), (ReferenceAxiomEvaluator, 'AXIOM_EVALUATOR'))
+        configured = {}
+        for owner in module_owners:
+            pair = next(((cls, name) for cls, name in producer_classes if type(owner) is cls), None)
+            if pair is None or pair[1] in configured or policy_binding.policy_version != '1.1.0':
+                raise v.SessionContractError('SESSION_SOURCE_REJECTED', 'collaborator')
+            cls, name = pair
+            binding = cls.configuration(owner)
+            source = binding.canonical_binding if type(binding) is not tuple else binding[0].canonical_binding
+            profile = binding.profile_binding if type(binding) is not tuple else binding[1]
+            if source != state_model.canonical_binding or profile != state_model.profile_binding:
+                raise v.SessionContractError('SESSION_SOURCE_REJECTED', 'collaborator')
+            receipt = type(diagnostics).register_module_producer(diagnostics, owner)
+            if receipt.status != 'REGISTERED':
+                raise v.SessionContractError('SESSION_SOURCE_REJECTED', 'collaborator')
+            configured[name] = owner
         self._model, self._diagnostics, self._policy = state_model, diagnostics, policy_binding
+        self._module_owners = configured
+        self._module_ledger, self._module_results, self._module_controls = {}, [], []
+        self._module_producers = set()
+        self._module_cutover = self._module_frozen_history = None
         self._lock = threading.RLock()
         self._services = self._facade = self._binding = self._snapshot = None
         self._initial = self._accepted = self._phase_origin = None
@@ -214,7 +258,9 @@ class ReferenceSessionLifecycle:
             baseline = sv.canonical_source_baseline(binding.canonical_binding)
         except sv.StateContractError:
             raise v.SessionContractError("SESSION_SOURCE_REJECTED", "binding.canonical_binding") from None
-        if baseline != "N3_LIFECYCLE" or binding.canonical_binding != self._model.canonical_binding:
+        eligible = (baseline == "N3_LIFECYCLE" and self._policy.policy_version == "1.0.0" or
+            baseline in ("M3_MODULES", "M3_GENERATION") and self._policy.policy_version == "1.1.0")
+        if not eligible or binding.canonical_binding != self._model.canonical_binding:
             raise v.SessionContractError("SESSION_SOURCE_REJECTED", "binding.canonical_binding")
         expected = tuple(rv.SourcePin(path, digest) for path, digest in
                          rv.recovery_contract_pin_fields(binding.canonical_binding))
@@ -336,7 +382,250 @@ class ReferenceSessionLifecycle:
         return v.SessionHistory(self._prefix + ":history", self._binding, self._initial,
             tuple(self._children), tuple(self._recoveries), results, tuple(self._resolutions),
             tuple(self._confirmed), tuple(self._attempted), tuple(self._pending),
-            self._snapshot if self._snapshot.terminal_latched else None, self._snapshot.terminal_latched)
+            self._snapshot if self._snapshot.terminal_latched else None, self._snapshot.terminal_latched,
+            module_history=self._module_history_value() if self._module_ledger else None)
+
+    def _module_history_value(self):
+        if self._module_frozen_history is not None:
+            return self._module_frozen_history
+        return v.SessionModuleHistory(self._prefix + ':module-history', self._binding.binding_reference,
+            tuple(self._module_results), tuple(self._module_controls), False, None, self._module_cutover)
+
+    def _module_history(self, engine, session):
+        self._identity(engine, session)
+        with self._lock:
+            return self._module_history_value()
+
+    def _module_grant(self, op, stage):
+        self._require_live(op)
+        if op.gate.stage_grant(stage).status != 'GRANTED':
+            raise _Refusal('SESSION_EXECUTION_CANCELLED', 'execution_gate', 'The module phase was revoked.')
+
+    def _module_raw_preflight(self, op):
+        # The pure packet can consume its entire fixed 1MiB allowance. Count it
+        # as an inline future JSON member, together with the actual origin and
+        # all finite response/snapshot fields, before producer computation.
+        result = v.SessionModuleResult(op.command, 'UNCONFIRMED', op.lease.before, self._snapshot,
+            False, op.admission, op.origin, op.origin_completion, None, None, None, 'PARTIAL')
+        record = v.raw_business_record(result)
+        record['actual_pure_result'] = 'x' * 1048576
+        observation = dict(result=record, control_observation=dict(session_reference=self._binding.session_reference,
+            request_reference=op.command.request_reference, phase='FINAL_RESULT', status='NOT_CONFIRMED',
+            coverage='STORAGE_UNCERTAIN', pinned_supporting_count=2663, supporting_reference='ref:999999',
+            failure_code='SESSION_RETENTION_UNCONFIRMED'), current_snapshot=v.raw_business_record(self._snapshot))
+        # Future capture repeats the packet once and adds only finite first/final
+        # receipts; the result never serializes both packet storage branches.
+        record['module_capture'] = dict(operation_reference=op.command.request_reference, status='NOT_CONFIRMED',
+            result=record.pop('actual_pure_result'), confirmed_records=['r' * 256] * 17,
+            attempted_record='x' * 8192, completion=_assessment_completion_sizing_record(),
+            final_observation=dict(operation_reference=op.command.request_reference, status='NOT_CONFIRMED',
+                supporting_reference='ref:999999', coverage='STORAGE_UNCERTAIN', failure_code='MODULE_FINAL_OBSERVATION_REJECTED'),
+            failure_code='MODULE_CAPTURE_UNCONFIRMED')
+        record['actual_pure_result'] = None
+        if _sizing_size(observation, 2097152) > 2097152:
+            raise _Refusal('SESSION_RAW_BUSINESS_LIMIT', 'raw_business_packet', 'The whole future module observation cannot fit.')
+        history = v.raw_business_record(self._history_value())
+        journal = dict(history_reference=self._prefix + ':module-history', session_binding_reference=self._binding.binding_reference,
+            results=[v.raw_business_record(item) for item in self._module_results] + [record],
+            control_observations=[None] * (len(self._module_results)+1), frozen=True,
+            cutover_generation=_MAX_GENERATION, pending_cutover=None)
+        history['module_history'] = journal
+        trace = [v.raw_business_record(self._initial)] + [v.raw_business_record(item) for item in self._chronology] + [journal]
+        terminal = self._anticipated_terminal_record(history, trace,
+            dict(after=v.raw_business_record(self._snapshot), actual_post_assessment=None))
+        if _sizing_size(terminal, v.MAX_RAW_BUSINESS_BYTES) > v.MAX_RAW_BUSINESS_BYTES:
+            raise _Refusal('SESSION_RAW_BUSINESS_LIMIT', 'history', 'The complete anticipated module/terminal history cannot fit.')
+
+    def _execute_module(self, engine, session, command):
+        self._identity(engine, session)
+        with self._lock:
+            terminal = self._snapshot.terminal_latched
+        if terminal:
+            return self._denial(terminal=True)
+        if type(command) is not v.SessionModuleCommand:
+            raise v.SessionContractError('SESSION_INPUT_INVALID', 'request')
+        v.revalidate_value(command)
+        with self._lock:
+            if self._snapshot.terminal_latched:
+                terminal, op = True, None
+            else:
+                terminal, before = False, self._snapshot
+                if before.mode != 'NORMAL':
+                    return self._denial(terminal=False, reference=command.request_reference, reason='SESSION_MODE_FORBIDDEN')
+                old = self._module_ledger.get(command.request_reference)
+                if old is not None:
+                    if old[0] != command:
+                        raise v.SessionContractError('SESSION_OPERATION_DUPLICATE', 'request')
+                    if old[1] is None:
+                        raise v.SessionContractError('SESSION_OPERATION_IN_PROGRESS', 'request')
+                    return v.SessionModuleReplayObservation(command.request_reference, old[1], before)
+                if command.producer in self._module_producers or len(self._module_ledger) >= 4:
+                    return self._denial(terminal=False, reference=command.request_reference, reason='SESSION_BUDGET_EXCEEDED')
+                if self._lease is not None:
+                    raise v.SessionContractError('SESSION_OPERATION_IN_PROGRESS', 'lease')
+                self._module_producers.add(command.producer)
+                self._module_ledger[command.request_reference] = (command, None)
+                failure = ('SESSION_SOURCE_REJECTED' if self._policy.policy_version != '1.1.0' or command.producer not in self._module_owners else
+                    'SESSION_STATE_STALE' if command.expected_snapshot != before else
+                    'SESSION_AUDIT_BLOCKED' if before.admission_status != 'OPEN' else
+                    'SESSION_ORIGIN_REJECTED' if self._accepted_generation != before.generation or not self._assessment_valid(self._accepted, before) else None)
+                if failure is not None:
+                    admission = v.SessionModuleAdmission('REJECTED', command, before, None, failure)
+                    result = v.SessionModuleResult(command, 'REFUSED', before, before, False, admission,
+                        None, None, None, None, failure, 'API_ONLY')
+                    observation = v.SessionModuleExecutionObservation(result, None, before)
+                    self._module_results.append(result); self._module_controls.append(None)
+                    self._module_ledger[command.request_reference] = (command, observation)
+                    return observation
+                self._source(self._binding)
+                active = self._new_snapshot(active_operation_reference=command.request_reference)
+                lease = v.SessionModuleLease(command.request_reference + ':lease', command, before, active, 'MODULE', before.generation)
+                admission = v.SessionModuleAdmission('GRANTED', command, before, lease, None)
+                op = _ModuleOperation(command, lease, self._gate(lease), admission)
+                self._snapshot, self._phase_snapshot, self._lease, self._active = active, active, lease, op
+        if terminal:
+            return self._denial(terminal=True)
+        from . import diagnostic_module_values as module
+        from .diagnostic_module_capture import ModuleCaptureScope
+        try:
+            reserved = type(self._diagnostics).reserve_session_module(self._diagnostics, self._handle, op.lease, execution_gate=op.gate)
+            if type(reserved) is not v.SessionModuleCaptureAdmission or reserved.scope is None or reserved.status != 'ADMITTED':
+                raise _Refusal('SESSION_CAPTURE_FAILED', 'capture', 'The independent module control reservation was refused.')
+            op.control = reserved.scope
+            self._require_live(op)
+            op.phase = 'DIAGNOSING'
+            op.origin, op.origin_completion = engine.diagnose_module_origin(op.lease.before.current_state,
+                diagnostic_context=command.diagnostic_context, execution_gate=op.gate)
+            self._require_live(op)
+            op.phase = 'DIAGNOSED'
+            if (type(op.origin) is not sv.StateDiagnosis or type(op.origin_completion) is not dv.DiagnosticsCompletionReceipt or
+                    op.origin_completion.status != 'COMPLETE' or op.origin.source_binding != self._binding.canonical_binding or
+                    op.origin.profile_binding != self._binding.profile_binding):
+                raise _Refusal('SESSION_ORIGIN_REJECTED', 'origin_assessment', 'The explicit actual diagnosis did not complete.')
+            self._module_raw_preflight(op)
+            self._module_grant(op, 'PURE_MODULE_COMPUTE')
+            op.phase = 'COMPUTING'
+            owner = self._module_owners[command.producer]
+            args = command.arguments
+            if command.operation == 'ENCODE_REALM':
+                op.pure = type(owner).encode(owner, op.origin, operation_reference=command.request_reference)
+            elif command.operation == 'RESOLVE_TRANSITIONS':
+                op.pure = type(owner).resolve(owner, op.origin, operation_reference=command.request_reference)
+            elif command.operation == 'APPLY_TRANSITION':
+                op.pure = type(owner).apply(owner, op.origin, args.selection, operation_reference=command.request_reference)
+            else:
+                from . import generation_values as gen
+                op.pure = (type(owner).generate(owner, gen.TopologyRequest(command.request_reference, op.origin, args.depth, args.seed))
+                    if command.operation == 'GENERATE_TOPOLOGY' else
+                    type(owner).evaluate(owner, gen.AxiomRequest(command.request_reference, op.origin, args.subject)))
+            self._require_live(op)
+            dependencies = []
+            for reference in command.dependency_operation_references:
+                previous = self._module_ledger.get(reference)
+                if previous is None or previous[1] is None or previous[1].result.module_capture is None or previous[1].result.module_capture.status != 'CONFIRMED':
+                    raise _Refusal('SESSION_EVIDENCE_MISMATCH', 'request', 'A dependency is not a previously captured session result.')
+                dependencies.append(previous[1].result.module_capture.result)
+            self._module_grant(op, 'MODULE_CAPTURE_BEGIN')
+            op.phase = 'CAPTURING'
+            context = module.ModuleCaptureContext(command.request_reference, command.producer, type(owner).configuration(owner),
+                op.origin, op.pure, tuple(dependencies))
+            admitted = type(self._diagnostics).module_capture(self._diagnostics, owner, context, execution_gate=op.gate)
+            if type(admitted) is not module.ModuleCaptureAdmission:
+                raise _Refusal('SESSION_CAPTURE_FAILED', 'capture', 'The actual collector returned no owned module admission.')
+            if ModuleCaptureScope.validate_issued_for_context(admitted.scope, self._diagnostics, owner, context,
+                    execution_gate=op.gate) is True:
+                op.scope = admitted.scope
+            if admitted.operation_reference != command.request_reference or admitted.status != 'ADMITTED' or type(op.scope) is not ModuleCaptureScope:
+                raise _Refusal('SESSION_CAPTURE_FAILED', 'capture', 'The whole module reservation was not confirmed.')
+            from . import realm_transition_values as rt
+            records = op.pure.constructed_records if any(type(op.pure) is cls for cls in rt.RESULT_TYPES) else op.pure.produced_diagnostics
+            for record in records:
+                self._module_grant(op, 'CAPTURE_APPEND')
+                op.attempted = record
+                response = ModuleCaptureScope.append(op.scope, record)
+                if type(response) is sv.CaptureReceipt and response.status == 'CONFIRMED':
+                    op.confirmed += (response.diagnostic_reference,)
+                    op.attempted = None
+                self._require_live(op)
+                if type(response) is not sv.CaptureReceipt or response.status != 'CONFIRMED':
+                    raise _Refusal('SESSION_CAPTURE_FAILED', 'capture', 'An actual module append was not confirmed.')
+        except _Refusal as refusal:
+            op.failure = refusal.code
+        except v.SessionContractError as error:
+            op.failure = error.failure_code
+        except (sv.StateContractError, rv.RecoveryContractError, dv.DiagnosticsContractError, module.ModuleContractError):
+            op.failure = 'SESSION_CAPTURE_FAILED'
+        except Exception:
+            op.failure = 'SESSION_COLLABORATOR_FAILED'
+        return self._finalize_module(op)
+
+    def _finalize_module(self, op):
+        from . import diagnostic_module_values as module
+        from .diagnostic_module_capture import ModuleCaptureScope
+        op.phase = 'FINISHING'
+        if op.scope is not None and op.pure is not None:
+            completion = final = None
+            try:
+                completion = ModuleCaptureScope.finish(op.scope, op.pure)
+                final = ModuleCaptureScope.observe_final(op.scope, op.pure, completion)
+                type(self._diagnostics).audit_module_return(self._diagnostics, op.scope, boundary='RETURN')
+            except (module.ModuleContractError, dv.DiagnosticsContractError):
+                op.failure = op.failure or 'SESSION_CAPTURE_FAILED'
+            records = op.confirmed
+            op.capture = module.ModuleCaptureReceipt(op.command.request_reference,
+                'CONFIRMED' if completion is not None and completion.status == 'COMPLETE' and final is not None and final.status == 'CONFIRMED' else 'NOT_CONFIRMED',
+                op.pure, records, op.attempted, completion, final, None if completion is not None and completion.status == 'COMPLETE' and final is not None and final.status == 'CONFIRMED' else 'MODULE_CAPTURE_UNCONFIRMED')
+            if op.capture.status != 'CONFIRMED':
+                op.failure = op.failure or 'SESSION_CAPTURE_FAILED'
+        with self._lock:
+            live = self._live(op)
+            if not live:
+                op.failure = 'SESSION_EXECUTION_CANCELLED'
+            if live and op.failure is not None:
+                self._snapshot = self._new_snapshot(admission_status='AUDIT_BLOCKED')
+                self._phase_snapshot = self._snapshot
+            after = self._snapshot
+        from . import realm_transition_values as rt
+        from . import generation_values as gen
+        semantic_refusal = any(type(op.pure) is cls for cls in (rt.RealmTransitionFailure, gen.TopologyFailure, gen.AxiomEvaluationFailure))
+        result = v.SessionModuleResult(op.command, 'UNCONFIRMED' if not live else 'FAILED' if op.failure else 'REFUSED' if semantic_refusal else 'COMPLETED',
+            op.lease.before, after, False, op.admission, op.origin, op.origin_completion, op.capture,
+            op.pure if op.capture is None else None, op.failure, 'COMPLETE_SPECIFIED_SAFE_GRAPH' if op.failure is None else 'PARTIAL')
+        control = None
+        if op.control is not None:
+            try:
+                from .diagnostics import SessionModuleControlScope
+                if live:
+                    self._module_grant(op, 'MODULE_FINAL_OBSERVATION')
+                control = SessionModuleControlScope.observe_final(op.control, result)
+            except (dv.DiagnosticsContractError, v.SessionContractError, _Refusal):
+                pass
+        with self._lock:
+            self._module_results.append(result); self._module_controls.append(control)
+            if self._live(op):
+                if control is None or control.status != 'CONFIRMED':
+                    self._snapshot = self._new_snapshot(admission_status='AUDIT_BLOCKED')
+                self._snapshot = self._new_snapshot(active_operation_reference=None)
+                self._lease = self._phase_snapshot = self._active = None
+            v._set_capture_disposition(self, op.gate, 'SEALED')
+            observation = v.SessionModuleExecutionObservation(result, control, self._snapshot)
+            self._module_ledger[op.command.request_reference] = (op.command, observation)
+            history = self._module_history_value()
+        if self._handle is not None:
+            try:
+                receipt = type(self._diagnostics).pin_session_module_history(self._diagnostics, self._handle, history)
+                if receipt.status != 'CONFIRMED':
+                    with self._lock:
+                        if not self._snapshot.terminal_latched:
+                            self._snapshot = self._new_snapshot(admission_status='AUDIT_BLOCKED')
+            except (dv.DiagnosticsContractError, AttributeError):
+                with self._lock:
+                    if not self._snapshot.terminal_latched:
+                        self._snapshot = self._new_snapshot(admission_status='AUDIT_BLOCKED')
+        if v.raw_business_size(observation, limit=2097152) > 2097152:
+            return v.SessionModuleRawFailure(op.command.request_reference, self._binding.session_reference,
+                'SESSION_RAW_BUSINESS_LIMIT', 'CANDIDATE_RESULT', False, self._snapshot, 'PARTIAL')
+        return observation
 
     def _history(self, engine, session):
         self._identity(engine, session)
@@ -830,11 +1119,12 @@ class ReferenceSessionLifecycle:
             # reservation acknowledgment fails. Preserve that scope for its
             # single cleanup finish without granting capture or publication.
             op.scope = scope
+        current = self._policy.policy_version == '1.1.0'
         if (not valid or admission.operation_reference != op.command.request.request_reference or
                 admission.status != "CONFIRMED" or scope is None or admission.reserved_events != 4 or
-                admission.reserved_bytes != (655360 if terminal else 327680) or
+                admission.reserved_bytes != ((688128 if current else 655360) if terminal else 327680) or
                 admission.reserved_aliases != 512 or
-                admission.reserved_supporting_bytes != (425984 if terminal else 98304)):
+                admission.reserved_supporting_bytes != ((458752 if current else 425984) if terminal else 98304)):
             raise _Refusal("SESSION_CAPTURE_FAILED", "capture.admission", "Actual fixed lifecycle reservation was not confirmed.")
         if not terminal:
             self._require_live(op)
@@ -1330,16 +1620,28 @@ class ReferenceSessionLifecycle:
             prior_mode = self._snapshot.mode
             incomplete_interrupted = interrupted is not None
             if interrupted is not None:
-                interrupted.failure = self._failure(_Refusal("SESSION_EXECUTION_CANCELLED", "execution_gate",
-                    "First halt sealed this actual interrupted command group."))
-                interrupted.after = self._snapshot
-                if interrupted.effects or interrupted.confirmed:
+                if type(interrupted) is _ModuleOperation:
+                    interrupted.failure = 'SESSION_EXECUTION_CANCELLED'
+                else:
+                    interrupted.failure = self._failure(_Refusal("SESSION_EXECUTION_CANCELLED", "execution_gate",
+                        "First halt sealed this actual interrupted command group."))
+                    interrupted.after = self._snapshot
+                if type(interrupted) is _Operation and (interrupted.effects or interrupted.confirmed):
                     partial = self._result(interrupted, status="UNCONFIRMED")
                     self._retain_main_result(interrupted, partial)
                     self._frozen_partial = self._frozen_partial | frozenset((interrupted.command.request.request_reference,))
             op.terminal = True
             self._publication(op, self._snapshot.current_state, "SAFE_HALT", op.cause, terminal=True)
             self._terminal_reference = op.command.request.request_reference
+            if type(interrupted) is _ModuleOperation:
+                self._module_cutover = v.SessionModuleCutover(interrupted.command.request_reference,
+                    interrupted.lease.lease_reference, interrupted.lease.generation,
+                    interrupted.lease.before.snapshot_reference, interrupted.lease.active_snapshot.snapshot_reference,
+                    interrupted.phase, None if interrupted.origin is None else interrupted.origin.assessment_binding.assessment_reference,
+                    None if interrupted.scope is None else interrupted.command.request_reference, self._snapshot.snapshot_reference)
+            if self._module_ledger:
+                self._module_frozen_history = v.SessionModuleHistory(self._prefix + ':module-history', self._binding.binding_reference,
+                    tuple(self._module_results), tuple(self._module_controls), True, self._snapshot.generation, self._module_cutover)
             for gate, lease, ordinal, terminal in tuple(self._gates.values()):
                 if not terminal:
                     v._set_capture_disposition(self, gate, "SEALED")
@@ -1370,7 +1672,7 @@ class ReferenceSessionLifecycle:
         with self._lock:
             origin = self._phase_origin
             previous, root = self._main_previous, self._main_root
-            trace = (self._initial,) + tuple(self._chronology)
+            trace = (self._initial,) + tuple(self._chronology) + (() if self._module_frozen_history is None else (self._module_frozen_history,))
         bridge = self._bridge(op, "BLOCKED", terminal=True) if prior_mode == "NORMAL" else None
         parent = bridge.diagnostic_reference if bridge is not None else previous
         reference = op.command.request.request_reference + ":halt"

@@ -127,6 +127,42 @@ def save_report(path: Path, report: dict, root: Path) -> None:
     path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
 
 
+def run_unit_evidence(command: list[str], root: Path, environment: dict,
+                      report_path: Path) -> tuple[int, dict]:
+    """Bind the child's case receipt and the complete closed process transcript."""
+    receipt = report_path.with_name(report_path.name + ".unit-cases.json")
+    transcript = report_path.with_name(report_path.name + ".unit-transcript.log")
+    if receipt.exists() or transcript.exists():
+        raise ValueError("Preserve existing unit evidence; choose a new repository report path")
+    transcript.parent.mkdir(parents=True, exist_ok=True)
+    evidence = {"execution_complete": False, "receipt_path": str(receipt), "receipt_sha256": None,
+                "transcript_path": str(transcript), "transcript_sha256": None}
+    recorded_command = [*command[:2], "--receipt", str(receipt), *command[2:]]
+    with transcript.open("xb") as stream:
+        with subprocess.Popen(recorded_command, cwd=root, env=environment,
+                              stdout=subprocess.PIPE, stderr=subprocess.STDOUT) as process:
+            while True:
+                chunk = process.stdout.read(8192)
+                if not chunk:
+                    break
+                stream.write(chunk)
+                if hasattr(sys.stdout, "buffer"):
+                    sys.stdout.buffer.write(chunk)
+                    sys.stdout.buffer.flush()
+                else:
+                    sys.stdout.write(chunk.decode("utf-8", errors="replace"))
+                    sys.stdout.flush()
+            return_code = process.wait()
+    evidence["transcript_sha256"] = hashlib.sha256(transcript.read_bytes()).hexdigest()
+    if receipt.is_file():
+        raw = receipt.read_bytes()
+        evidence["receipt_sha256"] = hashlib.sha256(raw).hexdigest()
+        child = json.loads(raw.decode("utf-8"))
+        evidence["execution_complete"] = (child.get("execution_complete") is True
+                                           and child.get("return_code") == return_code)
+    return return_code, evidence
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", default=None)
@@ -187,18 +223,27 @@ def main() -> int:
         print(f"--- {check['id']}: {check['name']} ---")
         sys.stdout.flush()
         command = expand_command(check["command"], root, base)
+        unit_evidence = None
         try:
-            result = subprocess.run(command, cwd=root, env=environment, check=False)
-            return_code = result.returncode
-        except OSError as exc:
+            if report is not None and check["id"] == "validation_unit_tests":
+                return_code, unit_evidence = run_unit_evidence(command, root, environment, args.report.resolve())
+                if not unit_evidence["execution_complete"]:
+                    return_code = return_code or 1
+            else:
+                result = subprocess.run(command, cwd=root, env=environment, check=False)
+                return_code = result.returncode
+        except (OSError, ValueError) as exc:
             print(f"Unable to run check: {exc}")
             return_code = 1
 
         if report is not None:
-            report["results"].append({
+            row = {
                 "check_id": check["id"], "blocking": check.get("blocking", True),
                 "return_code": return_code,
-            })
+            }
+            if unit_evidence is not None:
+                row["unit_evidence"] = unit_evidence
+            report["results"].append(row)
 
         if return_code == 0:
             print(f"PASS: {check['id']}")

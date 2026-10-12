@@ -173,8 +173,8 @@
     "TRANSITION_REGISTRY": "exact RealmTransitionBinding",
     "TOPOLOGY_GENERATOR": "exact immutable tuple(TopologyAxiomSourceBinding, tagged ProfileBinding, TopologyAxiomPolicyBinding)",
     "AXIOM_EVALUATOR": "exact immutable tuple(TopologyAxiomSourceBinding, tagged ProfileBinding, TopologyAxiomPolicyBinding)",
-    "GENERATION_PLANNER": "NOT_ACCEPTED until exact closed business configuration adopted",
-    "ARTIFACT_EMITTER": "NOT_ACCEPTED until exact closed business configuration adopted"
+    "GENERATION_PLANNER": "exact PlannerEmitterBinding under the adopted M3_GENERATION source and planner/emitter policy; historical source eligibility is unchanged",
+    "ARTIFACT_EMITTER": "exact PlannerEmitterBinding under the adopted M3_GENERATION source and planner/emitter policy; historical source eligibility is unchanged"
   },
   "planned_implementation_paths": [
     "core/ash_pattern_engine/diagnostics.py",
@@ -197,7 +197,17 @@
     "omission_attempt_flag": "one per issued scope; no arbitrary unbounded result-token registry",
     "closed_missing_scope": "audit once at actual issued scope return; no fabricated scope for an unadmitted input"
   },
-  "new_module_gate_eligibility": "must match exact collector/session identities AND module fullcurrent binding; MODULES is currentlyN3-ineligible, so standalone None is operational path until explicit lifecyclepolicy migration",
+  "new_module_gate_eligibility": "Historical MODULES remains N3-ineligible. Current M3_GENERATION and adopted Session v1.1 support only the four exact pure module producers; planner/emitter composition uses its separate original Core gate or standalone None, with no Session publication authority.",
   "release_semantic_parity_required": true,
-  "future_planner_emitter_semantic_admission": "NOT_ACCEPTED until full business policy/source binding/output target contract adopted"
+  "future_planner_emitter_semantic_admission": "ADOPTED only for exact M3_GENERATION business binding, actual complete planner capture and explicit MEMORY_DOCUMENTS target under YWE-REQ-0049",
+  "api_only_capability_methods": [
+    {
+      "owner": "ModuleCaptureScope",
+      "name": "validate_issued_for_context",
+      "signature": "(scope,collector,producer,context,*,execution_gate=None,emitter_control=None)->bool",
+      "contract_path": "docs/design-planning/m3/module-diagnostics/SCOPE_CONTEXT_AUTHENTICATION.md",
+      "contract_sha256": "ade9e618cfc3dbb598b87bff65169806a3beb23f890ef51280685ecbd73d2a14",
+      "semantics": "Pure original live issuance and full saved context association before retention or cleanup; exact expected collector, producer, context, gate and emitter control. No IO, callbacks, lock, append, grant or effect; authentication remains readable after seal/finish."
+    }
+  ]
 }

@@ -11,7 +11,7 @@ class ReferenceAxiomEvaluator:
 
     def __init__(self, state_model, policy_binding):
         configuration = values._model_configuration(state_model, policy_binding)
-        if configuration[0].canonical_binding.aggregate_sha256 != values.MODULES_AGGREGATE:
+        if configuration[0].canonical_binding.aggregate_sha256 not in values.CURRENT_PRODUCER_AGGREGATES:
             values._fail("model.canonical_binding", "GENERATION_SOURCE_UNSUPPORTED")
         self._model, self._policy = state_model, policy_binding
         self._cookie = values._issue_producer_cookie(self, state_model, policy_binding)

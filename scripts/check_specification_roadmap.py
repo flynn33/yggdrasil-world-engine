@@ -35,6 +35,7 @@ REQUIRED_CHECK_CONTRACTS = [
     ("machine_readable_artifacts", "scripts/check_machine_readable_artifacts.py", ["syntax", "schema", "machine-readable"]),
     ("m2_fixture_catalog", "scripts/check_fixture_catalog.py", ["m2", "schema", "conformance"]),
     ("m2_acceptance_definition", "scripts/check_m2_acceptance.py", ["m2", "governance", "conformance"]),
+    ("m3_acceptance_definition", "scripts/check_m3_acceptance.py", ["m3", "governance", "conformance"]),
     ("validation_unit_tests", "<unit-tests>", ["bootstrap", "tests"]),
     ("architecture_structure", "scripts/validate_architecture.py", ["architecture", "governance", "legacy-structural"]),
     ("governance_contracts", "scripts/check_governance_contracts.py", ["governance", "architecture"]),
@@ -110,10 +111,10 @@ def schema_errors(instance, schema: dict, label: str) -> list[str]:
 
 
 def expected_check_command(check_id: str, script: str) -> list[str]:
-    if check_id == "m2_acceptance_definition":
+    if check_id in {"m2_acceptance_definition", "m3_acceptance_definition"}:
         return ["{python}", script, "--check-definition", "{root}"]
     if check_id == "validation_unit_tests":
-        return ["{python}", "-m", "unittest", "discover", "-s", "tests", "-p", "test_*.py"]
+        return ["{python}", "scripts/run_validation_unit_tests.py", "discover", "-s", "tests", "-p", "test_*.py"]
     if check_id == "authority_stack":
         return [
             "{python}",
@@ -233,6 +234,18 @@ def milestone_completion_errors(root: Path, milestones: list[dict]) -> list[str]
                     errors.append("M2 completion requires accepted durable evidence")
             except Exception as exc:
                 errors.append(f"Unable to verify completed M2 acceptance: {exc}")
+        if milestone["id"] == "M3":
+            try:
+                import check_m3_acceptance as core_acceptance
+
+                if evidence != list(core_acceptance.EVIDENCE_PATHS):
+                    errors.append("M3 completion requires its exact immutable acceptance evidence pair")
+                historical_errors, accepted = core_acceptance.historical_validation_errors(root)
+                errors.extend("M3 historical acceptance: " + error for error in historical_errors)
+                if accepted.get("outcome") != "pass":
+                    errors.append("M3 completion requires accepted durable execution evidence")
+            except Exception as exc:
+                errors.append(f"Unable to verify completed M3 acceptance: {exc}")
     return errors
 
 
@@ -244,6 +257,31 @@ def dependency_text(dependencies: list[str]) -> str:
     if len(dependencies) == 2:
         return f"{dependencies[0]} and {dependencies[1]}"
     return f"{', '.join(dependencies[:-1])}, and {dependencies[-1]}"
+
+
+def milestone_execution_errors(roadmap: dict) -> list[str]:
+    """Allow an explicit owner pause at an accepted adjacent milestone boundary."""
+    milestones = roadmap["milestones"]
+    by_id = {item["id"]: item for item in milestones}
+    current = roadmap["current_milestone"]
+    in_progress = [item["id"] for item in milestones if item["status"] == "in_progress"]
+    pause = roadmap.get("execution_pause")
+    if all(item["status"] == "complete" for item in milestones):
+        return [] if current == "M10" and not in_progress and pause is None else ["A completed roadmap must end at M10 with no milestone in progress or pending pause"]
+    if pause is not None:
+        before, after = pause["before_milestone"], pause["after_milestone"]
+        if (current != after or by_id[after]["status"] != "complete" or in_progress
+                or int(before[1:]) != int(after[1:]) + 1 or by_id[before]["status"] != "planned"
+                or by_id[before]["dependencies"] != [after]
+                or any(item["status"] not in {"planned", "deferred"} for item in milestones[int(before[1:]):])):
+            return ["Owner pause requires the current accepted milestone, its adjacent planned successor and no later started work"]
+        return []
+    errors = []
+    if by_id[current]["status"] != "in_progress":
+        errors.append(f"Current milestone {current} must have status in_progress")
+    if in_progress != [current]:
+        errors.append(f"Exactly the current milestone must be in_progress; found {in_progress}")
+    return errors
 
 
 def markdown_bullets(value: str) -> list[str]:
@@ -306,6 +344,9 @@ def render_readme_status(roadmap: dict) -> str:
         f"| Repository baseline | `v{roadmap['repository_baseline']}` |",
         f"| Current milestone | {STATUS_INDICATORS[current['status']]} `{current['id']}` — "
         f"{current['title']} (`{current['status']}`) |",
+        *([f"| Development pause | ⏸️ After `{roadmap['execution_pause']['after_milestone']}`; "
+           f"`{roadmap['execution_pause']['before_milestone']}` remains `planned`; awaiting owner go-ahead |"]
+          if roadmap.get("execution_pause") else []),
         f"| Accepted milestone gates | `{milestone_counts['complete']} of {len(milestones)}` |",
         f"| Milestone queue | `{milestone_counts['in_progress']}` in progress; "
         f"`{milestone_counts['planned']}` planned; `{milestone_counts['blocked']}` blocked; "
@@ -627,16 +668,7 @@ def main() -> int:
     errors.extend(dependency_errors(milestones))
     by_id = {item["id"]: item for item in milestones}
     current = roadmap["current_milestone"]
-    in_progress = [item["id"] for item in milestones if item["status"] == "in_progress"]
-    program_complete = all(item["status"] == "complete" for item in milestones)
-    if program_complete:
-        if current != "M10" or in_progress:
-            errors.append("A completed roadmap must end at M10 with no milestone in progress")
-    else:
-        if by_id[current]["status"] != "in_progress":
-            errors.append(f"Current milestone {current} must have status in_progress")
-        if in_progress != [current]:
-            errors.append(f"Exactly the current milestone must be in_progress; found {in_progress}")
+    errors.extend(milestone_execution_errors(roadmap))
     errors.extend(milestone_completion_errors(root, milestones))
 
     gate = roadmap["platform_gate"]

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/unit_case_evidence_schema.json",
+  "title": "Actual single-discovery unit case evidence",
+  "description": "Closed child execution evidence with exact source receipts and callback outcomes; independent parent transcript binding remains required.",
+  "x-ywe-requirement-id": "YWE-REQ-0051",
+  "type": "object", "additionalProperties": false,
+  "required": ["artifact_type", "artifact_version", "execution_complete", "revision", "dirty_before", "dirty_after", "python_version", "argv", "offline_git_allow_protocol", "discovery_complete", "cases", "fixture_errors", "source_integrity_errors", "summary", "return_code", "discovery_order_sha256", "mapping_before_sha256", "mapping_after_sha256"],
+  "properties": {
+    "artifact_type": {"const": "ywe_unit_case_evidence"}, "artifact_version": {"const": "1.0.0"},
+    "execution_complete": {"type": "boolean"}, "revision": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "dirty_before": {"$ref": "#/$defs/strings"}, "dirty_after": {"$ref": "#/$defs/strings"},
+    "python_version": {"type": "string", "minLength": 1}, "argv": {"$ref": "#/$defs/strings"},
+    "offline_git_allow_protocol": {"type": ["string", "null"]}, "discovery_complete": {"type": "boolean"},
+    "cases": {"type": "array", "maxItems": 16384, "items": {"$ref": "#/$defs/case"}},
+    "fixture_errors": {"type": "array", "maxItems": 16384, "items": {"type": "object", "additionalProperties": false,
+      "required": ["runtime_id", "status"], "properties": {"runtime_id": {"type": "string", "minLength": 1}, "status": {"type": "string", "minLength": 1}}}},
+    "source_integrity_errors": {"$ref": "#/$defs/strings"},
+    "summary": {"oneOf": [{"type": "null"}, {"type": "object", "additionalProperties": false,
+      "required": ["tests_run", "failures", "errors", "skips", "expected_failures", "unexpected_successes", "successful"],
+      "properties": {"tests_run": {"$ref": "#/$defs/count"}, "failures": {"$ref": "#/$defs/count"}, "errors": {"$ref": "#/$defs/count"}, "skips": {"$ref": "#/$defs/count"}, "expected_failures": {"$ref": "#/$defs/count"}, "unexpected_successes": {"$ref": "#/$defs/count"}, "successful": {"type": "boolean"}}}]},
+    "return_code": {"type": ["integer", "null"]},
+    "discovery_order_sha256": {"$ref": "#/$defs/nullableHash"},
+    "mapping_before_sha256": {"$ref": "#/$defs/nullableHash"}, "mapping_after_sha256": {"$ref": "#/$defs/nullableHash"}
+  },
+  "$defs": {
+    "count": {"type": "integer", "minimum": 0},
+    "strings": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "nullableHash": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+    "source": {"type": "object", "additionalProperties": false,
+      "required": ["path", "class", "method", "line", "source_sha256", "body_sha256"],
+      "properties": {"path": {"type": "string", "minLength": 1}, "class": {"type": "string", "minLength": 1}, "method": {"type": "string", "minLength": 1}, "line": {"type": "integer", "minimum": 1}, "source_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "body_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}},
+    "case": {"type": "object", "additionalProperties": false,
+      "required": ["runtime_id", "status", "starts", "stops", "source_before", "source_after", "source_error", "runtime_body_verified"],
+      "properties": {"runtime_id": {"type": "string", "minLength": 1}, "status": {"enum": ["NOT_RUN", "PASS", "FAIL", "ERROR", "SKIP", "EXPECTED_FAILURE", "UNEXPECTED_SUCCESS"]}, "starts": {"$ref": "#/$defs/count"}, "stops": {"$ref": "#/$defs/count"}, "source_before": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/source"}]}, "source_after": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/source"}]}, "source_error": {"type": ["string", "null"]}, "runtime_body_verified": {"type": "boolean"}}}
+  }
+}

@@ -111,6 +111,7 @@ MESSAGE_TEMPLATES += (("MODULE_RECORD_RECORDED", "The actual owned module semant
 
 LEGACY_SOURCE_REVISION = "c78ee7e451e5d35b2f615369433291007e7ee261"
 HISTORICAL_N3_SOURCE_REVISION = "a345d1be3e2d635cb79104c153d2628b090ccd88"
+HISTORICAL_MODULE_SOURCE_REVISION = "c468b35439e2b0254a71b22be3117a711f557b9b"
 
 
 class DiagnosticsContractError(ValueError):
@@ -1087,6 +1088,13 @@ class SupportingEvidence:
     session_recovery_contexts: tuple = ()
     session_terminal_closures: tuple = ()
     module_evidence: tuple = ()
+    session_current_bindings: tuple = ()
+    session_current_sources: tuple = ()
+    session_current_histories: tuple = ()
+    session_current_history_pages: tuple = ()
+    session_module_links: tuple = ()
+    session_module_histories: tuple = ()
+    session_module_cutovers: tuple = ()
 
 
     def __post_init__(self):
@@ -1106,6 +1114,8 @@ class SupportingEvidence:
         object.__setattr__(self, "target_validity", _tuple(self.target_validity, 0, 264, lambda item: _owned(item, SafeTargetValidityEvidence)))
         for name, _kind, cls, maximum in SESSION_SUPPORT_FIELDS:
             object.__setattr__(self, name, _tuple(getattr(self, name), 0, maximum, lambda item, kind=cls: _owned(item, kind)))
+        for name, _kind, cls, maximum in CURRENT_SESSION_SUPPORT_FIELDS:
+            object.__setattr__(self, name, _tuple(getattr(self, name), 0, maximum, lambda item, kind=cls: _owned(item, kind)))
         module = _tuple(self.module_evidence, 0, 2784, lambda item: _owned(item, SafeModuleEvidence))
         for item in module:
             SafeModuleEvidence.__post_init__(item)
@@ -1120,6 +1130,7 @@ class SupportingEvidence:
     def to_record(self):
         session = {name: _record_value(getattr(self, name)) for name, _kind, _cls, _max in SESSION_SUPPORT_FIELDS}
         return {**({'module_evidence': _record_value(self.module_evidence)} if self.module_evidence else {}),
+            **{name: _record_value(getattr(self, name)) for name, _kind, _cls, _maximum in CURRENT_SESSION_SUPPORT_FIELDS if getattr(self, name)},
             **(session if any(getattr(self, row[0]) for row in SESSION_SUPPORT_FIELDS) else {}),
             "verified_source_pins": _record_value(self.verified_source_pins),
             "synthetic_fixture_references": _record_value(self.synthetic_fixture_references),
@@ -2624,6 +2635,7 @@ class SafeTargetValidityEvidence:
 
 from . import diagnostic_session_values as _session_safe
 SESSION_SUPPORT_FIELDS = _session_safe.SUPPORT_FIELDS
+CURRENT_SESSION_SUPPORT_FIELDS = _session_safe.CURRENT_SUPPORT_FIELDS
 SESSION_VALUE_TYPES = _session_safe.VALUE_TYPES
 for _session_type in _session_safe.VALUE_TYPES:
     globals()[_session_type.__name__] = _session_type
@@ -2632,8 +2644,10 @@ from . import diagnostic_module_values as _module_safe
 SafeModuleEvidence = _module_safe.SafeModuleEvidence
 MODULE_KIND_QUOTAS = _module_safe.KIND_QUOTAS
 MODULE_VALUE_TYPES = (*_module_safe.SAFE_TYPES, SafeModuleEvidence)
-_E_SUPPORTING_KIND = _E_SUPPORTING_KIND | frozenset(MODULE_KIND_QUOTAS)
-ENUMS = tuple((name, values + tuple(MODULE_KIND_QUOTAS)) if name == 'SupportingKind' else (name, values)
+_CURRENT_SUPPORT_KINDS = tuple(kind for _field, kind, _cls, _max in CURRENT_SESSION_SUPPORT_FIELDS
+    if kind not in _E_SUPPORTING_KIND)
+_E_SUPPORTING_KIND = _E_SUPPORTING_KIND | frozenset(MODULE_KIND_QUOTAS) | frozenset(_CURRENT_SUPPORT_KINDS)
+ENUMS = tuple((name, values + tuple(MODULE_KIND_QUOTAS) + _CURRENT_SUPPORT_KINDS) if name == 'SupportingKind' else (name, values)
               for name, values in ENUMS)
 
 VALUE_TYPES = (SourceProvenance, DiagnosticsEnvironment, DiagnosticsIdentity, DiagnosticsProfile, DiagnosticLimits, CaptureRelation, MissingCoverage, RetentionBoundary, DiagnosticsHealth, ClockObservation, CaptureWindow, SafeDiagnosticEnvelope, SafeOrbit, SafeStateContext, SafeError, DiagnosticEvent, EvidenceFact, ExpectedBehavior, DiagnosticIncident, SourcePin, SupportingEvidence, RedactionEntry, RedactionAccount, RetentionAccount, Limitation, DiagnosticSnapshot, MetaCause, StorageReceipt, PartReceipt, ExportReceipt, ExportFailure, RetentionReceipt, StorageVerification, SafeProfileEvidence, SafeInputState, SafeStateValidity, SafePredicate, SafeAssessmentEvidence, SafeRecoveryStep, SafeRecoveryDiagnostic, PrivateAcknowledgmentWitness, DiagnosticCounterState, MetaDiagnosticRecord, RecoveryAdmissionReceipt, SafeSourceEvidence, SafeNormalizationProof, SafeCorrectionProof, SafeRegistryEntry, SafeRegistryProof, StorePairReceipt, StorePairFailure, SafeEvidenceSourceBinding, SafeConditionEvidence, SafePredicateObservationEvidence, FallbackHealthRecord, DiagnosticsCompletionReceipt, StorePurgeReceipt, SafeExternalEscalationRequired, SafeExistingModeBoundary, SafeRecoverySafetyPolicy, SafeRecoveryDirective, SafeRecoverySafetyEvidence, CaptureObjectKey, CapturePurgeRequest, CaptureRemovalObservation, StoreCapturePurgeReceipt, SafeTargetValidityEvidence,)

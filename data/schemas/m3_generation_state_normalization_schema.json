@@ -2282,7 +2282,14 @@
               ]
             },
             "attempted_diagnostic": {
-              "$ref": "#/$defs/NormalizationDiagnosticRecord"
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/NormalizationDiagnosticRecord"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             }
           },
           "additionalProperties": false
@@ -2530,6 +2537,136 @@
                   ]
                 }
               ]
+            },
+            {
+              "properties": {
+                "attempted_diagnostic": {
+                  "type": "null"
+                },
+                "capture_status": {
+                  "const": "NOT_CONFIRMED"
+                },
+                "failure_code": {
+                  "const": "DIAGNOSTIC_CAPTURE_UNCONFIRMED"
+                },
+                "failed_field": {
+                  "const": "normalization_capture"
+                },
+                "post_validity_diagnostic": {
+                  "type": "null"
+                },
+                "normalized_state": {
+                  "type": "null"
+                },
+                "actual_state": {
+                  "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/AshState"
+                },
+                "original_diagnosis": {
+                  "properties": {
+                    "source_binding": {
+                      "properties": {
+                        "dependency_id": {
+                          "const": "ash_cosmological_model.f2_9.canonical"
+                        },
+                        "aggregate_sha256": {
+                          "const": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8"
+                        },
+                        "state_space_sha256": {
+                          "const": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+                        },
+                        "codeword_source_sha256": {
+                          "const": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+                        },
+                        "validity_source_sha256": {
+                          "const": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e"
+                        },
+                        "classification_source_sha256": {
+                          "const": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff"
+                        },
+                        "recovery_source_sha256": {
+                          "const": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd"
+                        },
+                        "diagnostic_source_sha256": {
+                          "const": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+                        },
+                        "taxonomy_source_sha256": {
+                          "const": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+                        }
+                      }
+                    }
+                  }
+                },
+                "plan_validation": {
+                  "properties": {
+                    "origin_validation_status": {
+                      "const": "VERIFIED"
+                    },
+                    "validation_status": {
+                      "const": "VALIDATED"
+                    }
+                  }
+                },
+                "emitted_diagnostics": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "prefixItems": [
+                    {
+                      "$ref": "#/$defs/PendingComputationRecord"
+                    }
+                  ],
+                  "items": false
+                }
+              },
+              "oneOf": [
+                {
+                  "properties": {
+                    "plan": {
+                      "properties": {
+                        "decision": {
+                          "const": "ALREADY_VALID"
+                        }
+                      }
+                    },
+                    "plan_validation": {
+                      "properties": {
+                        "expected_decision": {
+                          "const": "ALREADY_VALID"
+                        }
+                      }
+                    },
+                    "steps": {
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "items": false
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "plan": {
+                      "properties": {
+                        "decision": {
+                          "const": "PLAN_READY"
+                        }
+                      }
+                    },
+                    "plan_validation": {
+                      "properties": {
+                        "expected_decision": {
+                          "const": "PLAN_READY"
+                        }
+                      }
+                    },
+                    "steps": {
+                      "minItems": 1,
+                      "maxItems": 1
+                    }
+                  }
+                }
+              ],
+              "description": "Source4 only actual one-COMPUTATION prefix with no entered post-validation; no attempted TEN is fabricated.",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
             }
           ]
         },

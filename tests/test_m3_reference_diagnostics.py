@@ -147,10 +147,9 @@ class ReferenceDiagnosticsTests(unittest.TestCase):
         revision, snapshots = host._verified_canonical_source_snapshots(ROOT)
         self.assertEqual(actual_head, revision)
         self.assertEqual(actual_head, owner.identity.source_revision)
-        text = (ROOT / "docs/architecture/m3_module_source_compatibility_contract.md").read_text(encoding="utf-8")
-        inventory = json.loads(text.split("<!-- EXACT_SOURCE_COMPATIBILITY_INVENTORY -->", 1)[1].split("```json", 1)[1].split("```", 1)[0])
+        inventory = json.loads((ROOT / "docs/design-planning/m3/module-diagnostics/SOURCE_VECTOR_INVENTORY.json").read_text(encoding="utf-8"))
         expected = {}
-        for vector, source_revision in zip(inventory["vectors"], (inventory["legacy_commit"], inventory["historical_n3_containing_revision"], actual_head)):
+        for vector, source_revision in zip(inventory["vectors"], (inventory["legacy_commit"], inventory["historical_n3_containing_revision"], dv.HISTORICAL_MODULE_SOURCE_REVISION, actual_head)):
             binding = sv.CanonicalAshBinding(**vector["canonical_binding"])
             model = StateModel(fixtures.profile(), binding, owner.assessment_capture())
             result = model.diagnose(fixtures.ash(0),
@@ -160,12 +159,13 @@ class ReferenceDiagnosticsTests(unittest.TestCase):
                 tuple((pin["source_kind"], pin["sha256"]) for pin in vector["diagnostic_pin_fields"]))
         self.assertEqual(tuple(("ASH_AGGREGATE", expected[digest][0], digest) for digest in expected),
             tuple((pin.source_kind, pin.revision, pin.sha256) for pin in snapshots))
-        self.assertEqual(3, len(snapshots))
+        self.assertEqual(4, len(snapshots))
         self.assertNotEqual(inventory["legacy_commit"], actual_head)
         self.assertNotEqual(inventory["historical_n3_containing_revision"], actual_head)
-        snapshot = owner.snapshot(bundle_reference="bundle:actual:three-sources")
+        self.assertNotEqual(dv.HISTORICAL_MODULE_SOURCE_REVISION, actual_head)
+        snapshot = owner.snapshot(bundle_reference="bundle:actual:four-sources")
         nodes = snapshot.supporting_evidence.source_evidence
-        self.assertEqual(3, len(nodes))
+        self.assertEqual(4, len(nodes))
         self.assertEqual(set(expected), {node.verified_pins[0].sha256 for node in nodes})
         for node in nodes:
             source_revision, pins = expected[node.verified_pins[0].sha256]

@@ -3187,7 +3187,7 @@
     "OwnerShutdownObservation": [
       "status:SEALED|ALREADY_SEALED",
       "active_operation_count:integer0..8",
-      "unused_preparation_count:integer0..64"
+      "unused_preparation_count:integer0..64|null; null is actual unavailable cleanup-count knowledge"
     ]
   },
   "ports": [
@@ -3272,8 +3272,8 @@
     {
       "owner": "ReferenceGenerationRunner",
       "name": "configuration",
-      "signature": "()->PlannerEmitterBinding",
-      "semantics": "PURE originalrunner/fixedowner/collectorcomposition proof"
+      "signature": "(*,state_model:StateModel|None=None,diagnostics:ReferenceDevelopmentDiagnostics|ReferenceReleaseDiagnostics|None=None)->PlannerEmitterBinding",
+      "semantics": "PURE original runner and fixed constructor composition. Optional supplied expectations must be exact original model and collector before caller hooks or IO; omitted expectations preserve existing checks. No capture, execution or publication grant."
     },
     {
       "owner": "ReferenceGenerationRunner",
@@ -3378,5 +3378,56 @@
   "runtime_acceptance": "NOT_CLAIMED",
   "requirement_id": "YWE-REQ-0049",
   "decision_id": "ADR-0041",
-  "implementation_status": "NOT_ISSUED"
+  "implementation_status": "IMPLEMENTED_REFERENCE_CANDIDATE_NOT_EXECUTION_ACCEPTANCE",
+  "api_only_capability_methods": [
+    {
+      "owner": "PreparedEmission",
+      "name": "configuration",
+      "signature": "(prepared:PreparedEmission)->tuple[EmitterRequest,MemoryDocumentTarget]",
+      "semantics": "Exact original immutable request/target association after issuer/self/ledger/current/unconsumed proof; no effect/grant/planner callback/private peer read; single use claimed only in existing collector module_capture admission.",
+      "contract_path": "docs/design-planning/m3/planner-emitter/PREPARED_EMISSION_PUBLIC_TRANSFER.md",
+      "contract_sha256": "e98dc5b54e2024f733888ca64746c567e5d8ebfcd18544da75418eae209696db"
+    },
+    {
+      "owner": "PreparedEmission",
+      "name": "origin_and_dependency",
+      "signature": "(prepared:PreparedEmission)->tuple[StateDiagnosis,PlannerResult]",
+      "semantics": "Exact original final diagnosis and captured planner dependency under same original/current/unconsumed association checks; repeats no resources/grants/claims/effects; class-owned public dispatch outside collector IO.",
+      "contract_path": "docs/design-planning/m3/planner-emitter/PREPARED_EMISSION_ORIGIN_AND_DEPENDENCY.md",
+      "contract_sha256": "f32b985644290082ffbc4c85f22a851785fe02e969ca34594e45574f1092f30a"
+    },
+    {
+      "owner": "Diagnostics",
+      "name": "release_preparations_for_emitter",
+      "signature": "(emitter:ReferenceArtifactEmitter)->int0..64|None",
+      "semantics": "Seal original emitter preparation eligibility before nonblocking metadata release; exact newly revoked unused count or explicit unavailable None; genuine admitted scopes retain once cleanup; no target/clock/store/grant/effect.",
+      "contract_path": "docs/design-planning/m3/planner-emitter/PREPARATION_RELEASE.md",
+      "contract_sha256": "b0d51ce8b3e85855471ca0b07e9cf465e9bb500c0ebdb173d507ff3494a86bd4"
+    },
+    {
+      "owner": "ReferenceArtifactEmitter",
+      "name": "validate_preparation_composition",
+      "signature": "(emitter:ReferenceArtifactEmitter,collector:Diagnostics,target:MemoryDocumentTarget)->bool",
+      "semantics": "Pure exact original issuer/configuration and constructor collector/target identity proof; remains readable after shutdown; effect eligibility separately sealed. No lock, IO, hook, grant or execution callback.",
+      "contract_path": "docs/design-planning/m3/planner-emitter/EMITTER_COMPOSITION_VALIDATION.md",
+      "contract_sha256": "41ec3d981c669c06fd227a49ced8bc0bea4abb12004a6d3257ac88a17e3e4e71"
+    },
+    {
+      "owner": "IssuedEmitterCaptureControl",
+      "name": "validate_issued_for_collector",
+      "signature": "(control,collector,operation_reference,*,emitter=None,prepared=None,record_slots=None)->bool",
+      "contract_path": "docs/design-planning/m3/planner-emitter/EMITTER_CONTROL_EXPECTED_COMPOSITION.md",
+      "contract_sha256": "e371450753b1c1bc881471e74d164b1b014eac63a09a6aaa50003c609845532a",
+      "semantics": "Existing3arg own issuer authentication preserved. Supplied exact original emitter/prepared identity and validated ordered1..47slot tuple must match. Collector supplies all3 from own ledger before IO; only original disposition insideIO. No grant/effect/clock/store/owner callback."
+    }
+  ],
+  "api_only_behavior_clarifications": [
+    {
+      "owner": "ReferenceGenerationRunner",
+      "name": "configuration",
+      "contract_path": "docs/design-planning/m3/planner-emitter/RUNNER_CONFIGURATION_EXPECTATIONS.md",
+      "contract_sha256": "ae2b99db0bd478b6c5fc0109b800d2eb20588bf65396ff77ac2d720f6016fdcf",
+      "semantics": "The existing configuration port gains only optional keyword exact original dependency expectations. Core constructor and configuration supply both actual dependencies before collector IO. Binding return, 36 wire types, 23 ports, policies and capacities are preserved."
+    }
+  ]
 }

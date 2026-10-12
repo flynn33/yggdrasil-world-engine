@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m3_historical_acceptance_evidence_schema.json",
+  "title": "Immutable M3 execution and acceptance evidence record",
+  "description": "YWE-REQ-0051 closed pending/pass format. The owner verifier checks actual local Git source, immutable introduction, archive bytes and replay of already executed case evidence.",
+  "x-ywe-requirement-id": "YWE-REQ-0051",
+  "type": "object",
+  "required": ["schema_ref", "artifact_type", "artifact_version", "milestone_id", "outcome"],
+  "properties": {
+    "schema_ref": {"const": "data/schemas/m3_historical_acceptance_evidence_schema.json"},
+    "artifact_type": {"const": "ywe_m3_acceptance_evidence"},
+    "artifact_version": {"const": "1.0.0"},
+    "milestone_id": {"const": "M3"},
+    "outcome": {"enum": ["pending", "pass"]},
+    "implementation_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "mapping_sha256": {"$ref": "#/$defs/hash"},
+    "source_state": {
+      "type": "object",
+      "required": ["algorithm", "digest", "file_count", "digest_exclusions"],
+      "properties": {
+        "algorithm": {"const": "sha256_sorted_path_nul_normalized_utf8_lf_sha256_nul"},
+        "digest": {"$ref": "#/$defs/hash"},
+        "file_count": {"type": "integer", "minimum": 1},
+        "digest_exclusions": {"const": [
+          "data/governance/m3_acceptance_evidence.json",
+          "docs/project/M3_CORE_CONTRACTS_ACCEPTANCE.md",
+          "data/governance/evidence/m3/repository-report.json",
+          "data/governance/evidence/m3/unit-cases.json",
+          "data/governance/evidence/m3/unit-transcript.log",
+          "data/governance/evidence/m3/acceptance-report.json"
+        ]}
+      },
+      "additionalProperties": false
+    },
+    "artifacts": {
+      "type": "array", "minItems": 4, "maxItems": 4,
+      "prefixItems": [
+        {"allOf": [{"$ref": "#/$defs/artifact"}, {"properties": {"path": {"const": "data/governance/evidence/m3/repository-report.json"}}}]},
+        {"allOf": [{"$ref": "#/$defs/artifact"}, {"properties": {"path": {"const": "data/governance/evidence/m3/unit-cases.json"}}}]},
+        {"allOf": [{"$ref": "#/$defs/artifact"}, {"properties": {"path": {"const": "data/governance/evidence/m3/unit-transcript.log"}}}]},
+        {"allOf": [{"$ref": "#/$defs/artifact"}, {"properties": {"path": {"const": "data/governance/evidence/m3/acceptance-report.json"}}}]}
+      ],
+      "items": false
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {"properties": {"outcome": {"const": "pass"}}},
+      "then": {"required": ["implementation_revision", "mapping_sha256", "source_state", "artifacts"]},
+      "else": {
+        "not": {"anyOf": [
+          {"required": ["implementation_revision"]}, {"required": ["mapping_sha256"]},
+          {"required": ["source_state"]}, {"required": ["artifacts"]}
+        ]}
+      }
+    }
+  ],
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "artifact": {
+      "type": "object", "required": ["path", "sha256", "size_bytes"],
+      "properties": {
+        "path": {"type": "string"}, "sha256": {"$ref": "#/$defs/hash"},
+        "size_bytes": {"type": "integer", "minimum": 1, "maximum": 67108864}
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -25,7 +25,7 @@ def _configured_source_snapshots(identity, snapshots):
     if snapshots is None:
         snapshots = () if revision is None else (dv.SourcePin("ASH_AGGREGATE", dv.LEGACY_SOURCE_REVISION,
             dict(sv.CANONICAL_BINDING_FIELDS)["aggregate_sha256"]),)
-    if type(snapshots) is not tuple or len(snapshots) > 3:
+    if type(snapshots) is not tuple or len(snapshots) > 4:
         raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
     expected = tuple(dict(fields)["aggregate_sha256"] for _, fields in sv.CANONICAL_BINDING_BASELINES)
     indexes, result = [], []
@@ -37,12 +37,14 @@ def _configured_source_snapshots(identity, snapshots):
         except (AttributeError, dv.DiagnosticsContractError):
             raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE") from None
     module_present = any(pin.sha256 == dict(sv.MODULE_CANONICAL_BINDING_FIELDS)["aggregate_sha256"] for pin in snapshots)
+    generation_present = any(pin.sha256 == dict(sv.GENERATION_CANONICAL_BINDING_FIELDS)["aggregate_sha256"] for pin in snapshots)
     for pin in snapshots:
         if pin.source_kind != "ASH_AGGREGATE" or pin.sha256 not in expected:
             raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
         index = expected.index(pin.sha256)
         expected_revision = (dv.LEGACY_SOURCE_REVISION if index == 0 else
-            dv.HISTORICAL_N3_SOURCE_REVISION if index == 1 and module_present else revision)
+            dv.HISTORICAL_N3_SOURCE_REVISION if index == 1 and (module_present or generation_present) else
+            dv.HISTORICAL_MODULE_SOURCE_REVISION if index == 2 and generation_present else revision)
         if pin.revision != expected_revision or index > 0 and revision is None:
             raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
         indexes.append(index)
@@ -151,6 +153,10 @@ class _AssessmentCapture:
         self.owner, self.relation, self.execution_gate = owner, relation, execution_gate
 
     def begin(self, assessment_reference):
+        if self.execution_gate is not None:
+            with self.owner._session_io():
+                return self.owner._begin(assessment_reference, 'STATE_MODEL', relation=self.relation,
+                    execution_gate=self.execution_gate)
         return self.owner._begin(assessment_reference, "STATE_MODEL", relation=self.relation,
             execution_gate=self.execution_gate)
 
@@ -169,14 +175,26 @@ def _is_issued_recovery_scope(scope, collector, execution_gate, operation_refere
 
 
 class _NormalizationCapture:
-    def __init__(self, owner):
-        self.owner = owner
+    def __init__(self, owner, execution_gate=None):
+        self.owner, self.execution_gate = owner, execution_gate
 
     def begin(self, operation_reference, *, original_diagnosis):
         if type(original_diagnosis) is not sv.StateDiagnosis:
             raise dv.DiagnosticsContractError("DIAGNOSTICS_RECORD_NONCONFORMANT", "ORIGINAL_DIAGNOSIS")
-        self.owner._attached(original_diagnosis.emitted_diagnostics)
-        return self.owner._begin(operation_reference, "NORMALIZATION", original=original_diagnosis)
+        if self.execution_gate is None:
+            self.owner._attached(original_diagnosis.emitted_diagnostics)
+            return self.owner._begin(operation_reference, "NORMALIZATION", original=original_diagnosis)
+        self.owner._check_capture_binding(self.execution_gate, operation_reference=operation_reference)
+        _, _, source, profile, _ = type(self.execution_gate).configuration(self.execution_gate)
+        from .session_values import revalidate_value
+        revalidate_value(original_diagnosis)
+        if original_diagnosis.source_binding != source or original_diagnosis.profile_binding != profile:
+            raise dv.DiagnosticsContractError("DIAGNOSTICS_ORIGIN_MISMATCH")
+        with self.owner._session_io():
+            self.owner._check_gate(self.execution_gate)
+            self.owner._attached(original_diagnosis.emitted_diagnostics)
+            return self.owner._begin(operation_reference, "NORMALIZATION", original=original_diagnosis,
+                execution_gate=self.execution_gate)
 
 
 class _RecoveryCapture:
@@ -201,6 +219,98 @@ class _SessionRetention:
         self.freeze_receipt = None
         self.observed, self.denial_observed = set(), set()
         self.resolution_previous = {}
+        self.module_controls, self.module_results = {}, {}
+        self.module_history_reference = None
+
+
+_MODULE_CONTROL_FACTORY = object()
+
+
+class SessionModuleControlScope:
+    __slots__ = ('_collector', '_state', '_native', '_lease', '_original', '_receipt', '_result')
+    def __new__(cls, marker=None):
+        if cls is not SessionModuleControlScope or marker is not _MODULE_CONTROL_FACTORY:
+            raise dv.DiagnosticsContractError('DIAGNOSTICS_RECORD_NONCONFORMANT')
+        return super().__new__(cls)
+
+    def observe_final(self, actual_result):
+        from . import session_values as v
+        from . import diagnostic_session_values as safe
+        if type(self) is not SessionModuleControlScope:
+            raise dv.DiagnosticsContractError('DIAGNOSTICS_ORIGIN_MISMATCH')
+        try:
+            collector, state, native = self._collector, self._state, self._native
+            if ((type(collector) is not ReferenceDevelopmentDiagnostics and type(collector) is not ReferenceReleaseDiagnostics) or
+                    type(state) is not _SessionRetention or type(native) is not _CaptureScope or
+                    type(self._lease) is not v.SessionModuleLease or self._original is not self or
+                    state.module_controls.get(self._lease.command.request_reference) is not self or
+                    collector._scopes.get(native.storage_reference) is not native or native.owner is not collector):
+                raise dv.DiagnosticsContractError('DIAGNOSTICS_ORIGIN_MISMATCH')
+            v.revalidate_value(actual_result)
+            if type(actual_result) is not v.SessionModuleResult or actual_result.command != self._lease.command or actual_result.admission.lease != self._lease:
+                raise dv.DiagnosticsContractError('DIAGNOSTICS_COMPLETION_MISMATCH')
+            if self._receipt is not None:
+                if actual_result != self._result:
+                    raise dv.DiagnosticsContractError('DIAGNOSTICS_COMPLETION_MISMATCH')
+                return self._receipt
+            with collector._session_io():
+                if self._receipt is not None:
+                    if actual_result != self._result:
+                        raise dv.DiagnosticsContractError('DIAGNOSTICS_COMPLETION_MISMATCH')
+                    return self._receipt
+                self._result = actual_result
+                native.audit_cleanup_allowed = True
+                previous = collector._charging_scope
+                collector._charging_scope = native
+                failure = None
+                alias = None
+                try:
+                    projection = collector._projection(state)
+                    from . import diagnostic_module_values as module_values
+                    origin = actual_result.origin_diagnosis
+                    origin_evidence = None if origin is None or not origin.emitted_diagnostics else collector._assessment_support(origin)
+                    module_scope = _ReferenceDiagnostics._modules(collector).scopes.get(self._lease.command.request_reference)
+                    module_operation = None if module_scope is None else module_scope._projection.operation_alias
+                    module_final = None if module_scope is None or module_scope._final is None else module_scope._final.supporting_reference
+                    def snapshot(value):
+                        return dict(snapshot_reference=projection.alias(value.snapshot_reference), generation=value.generation,
+                            state_signature=value.current_state.signature, mode=value.mode, terminal_latched=value.terminal_latched,
+                            admission_status=value.admission_status, current_assessment_reference=projection.alias(value.current_assessment_reference),
+                            active_operation_reference=projection.alias(value.active_operation_reference))
+                    alias = projection.put('SESSION_MODULE_LINK', safe.SafeSessionModuleLinkEvidence, actual_result,
+                        session_binding_reference=projection.binding(state.binding), session_reference=projection.alias(state.binding.session_reference),
+                        request_reference=projection.alias(actual_result.command.request_reference), lease_reference=projection.alias(self._lease.lease_reference),
+                        producer=actual_result.command.producer, operation=actual_result.command.operation,
+                        before=snapshot(actual_result.before), active=snapshot(self._lease.active_snapshot), after=snapshot(actual_result.after),
+                        actual_origin_evidence_reference=origin_evidence,
+                        actual_origin_completion_reference=None if actual_result.origin_completion is None else origin_evidence,
+                        actual_module_operation_reference=module_operation, actual_module_final_reference=module_final,
+                        status=actual_result.status, failure_code=actual_result.failure_code if actual_result.failure_code in v.SESSION_FAILURE_CODES else None,
+                        module_failure_code=actual_result.failure_code if actual_result.failure_code in module_values.FAILURES else None,
+                        session_effects_performed=False, late_after_cutover=state.frozen, coverage=actual_result.coverage)
+                    state.module_results[actual_result.command.request_reference] = (actual_result, alias)
+                    if origin is not None:
+                        source_scope = collector._scopes.get(origin.assessment_binding.assessment_reference)
+                        if source_scope is not None:
+                            state.pinned_scopes.add(source_scope.storage_reference)
+                            state.pinned_support.update(source_scope.support_keys)
+                    if module_scope is not None:
+                        state.pinned_scopes.add(module_scope._native.storage_reference)
+                        state.pinned_support.update(module_scope._native.support_keys)
+                    state.pinned_support.update(native.support_keys)
+                    collector._select_support(state, state.pinned_support)
+                except (dv.DiagnosticsContractError, v.SessionContractError):
+                    failure = 'SESSION_RETENTION_INCOMPLETE'
+                    collector._mark_failure('DIAGNOSTICS_COMPLETION_MISMATCH')
+                finally:
+                    native.finished, native.audit_cleanup_allowed = True, False
+                    collector._charging_scope = previous
+                self._receipt = v.SessionModuleRetentionReceipt(state.binding.session_reference,
+                    actual_result.command.request_reference, 'FINAL_RESULT', 'CONFIRMED' if failure is None else 'NOT_CONFIRMED',
+                    'COMPLETE_SPECIFIED_SAFE_GRAPH' if failure is None else 'PARTIAL', len(state.pinned_support), alias, failure)
+                return self._receipt
+        except (AttributeError, v.SessionContractError):
+            raise dv.DiagnosticsContractError('DIAGNOSTICS_ORIGIN_MISMATCH') from None
 
 
 class _SessionLifecycleCapture:
@@ -336,6 +446,7 @@ class _ReferenceDiagnostics:
         charged = self._charging_scope
         if charged is not None:
             charged = self._budget_scope(charged)
+            self._check_scope_tokens(charged)
         if charged is not None and charged.remaining_aliases <= 0:
             raise dv.DiagnosticsContractError("DIAGNOSTICS_ALIAS_LIMIT")
         reserved = sum(scope.remaining_aliases for scope in self._scopes.values()
@@ -357,18 +468,49 @@ class _ReferenceDiagnostics:
         if execution_gate is None:
             return
         from . import session_values as session
-        if not session._is_issued_gate(execution_gate):
+        from core.module_lifecycle import CoreExecutionGate
+        if type(execution_gate) is CoreExecutionGate:
+            disposition = CoreExecutionGate.capture_disposition(execution_gate)
+        elif session._is_issued_gate(execution_gate):
+            disposition = session.SessionExecutionGate.capture_disposition(execution_gate)
+        else:
             raise dv.DiagnosticsContractError("DIAGNOSTICS_RECORD_NONCONFORMANT")
-        if execution_gate.capture_disposition() != "ACTIVE":
+        if disposition != "ACTIVE":
             raise dv.DiagnosticsContractError("DIAGNOSTICS_REPLAY_REFUSED")
+
+    def _check_scope_tokens(self, scope):
+        if scope is None or scope.audit_cleanup_allowed:
+            return
+        self._check_gate(scope.execution_gate)
+        control = getattr(scope, 'emitter_control', None)
+        if control is not None:
+            from .planner_emitter_values import IssuedEmitterCaptureControl
+            if IssuedEmitterCaptureControl.capture_disposition(control) != 'ACTIVE':
+                raise dv.DiagnosticsContractError('DIAGNOSTICS_REPLAY_REFUSED')
 
     def _session_io(self):
         return _SessionIO(self)
 
-    def _check_capture_binding(self, gate, handle=None):
+    def _check_capture_binding(self, gate, handle=None, *, operation_reference=None):
         if gate is None:
             return
         from . import session_values as v
+        from core.module_lifecycle import CoreExecutionGate
+        if type(gate) is CoreExecutionGate:
+            if handle is not None:
+                raise dv.DiagnosticsContractError("DIAGNOSTICS_ORIGIN_MISMATCH")
+            try:
+                collector, reference, source, profile, generation = CoreExecutionGate.configuration(gate)
+                if (collector is not self or not CoreExecutionGate.validate_issued_for_collector(gate, self,
+                        operation_reference if operation_reference is not None else reference)):
+                    raise dv.DiagnosticsContractError("DIAGNOSTICS_ORIGIN_MISMATCH")
+                sv.CanonicalAshBinding.__post_init__(source)
+                type(profile).__post_init__(profile)
+                if not any(pin.sha256 == source.aggregate_sha256 for pin in self._canonical_source_snapshots):
+                    raise dv.DiagnosticsContractError("DIAGNOSTICS_ORIGIN_UNAVAILABLE")
+            except (AttributeError, ValueError, TypeError):
+                raise dv.DiagnosticsContractError("DIAGNOSTICS_ORIGIN_MISMATCH") from None
+            return
         if not v._gate_matches_collector(gate, self, handle):
             raise dv.DiagnosticsContractError("DIAGNOSTICS_ORIGIN_MISMATCH")
 
@@ -426,7 +568,7 @@ class _ReferenceDiagnostics:
         sv.InputEvidence.validate_reference(reference)
         with self._lock:
             storage_reference = storage_reference or reference
-            self._check_capture_binding(execution_gate)
+            self._check_capture_binding(execution_gate, operation_reference=reference)
             session_state = None
             if execution_gate is not None:
                 from . import session_values as session
@@ -518,18 +660,37 @@ class _ReferenceDiagnostics:
         from .diagnostic_module_capture import ModuleCaptureService
         return ModuleCaptureService.register(_ReferenceDiagnostics._modules(self), producer)
 
-    def module_capture(self, producer, context, *, execution_gate=None):
+    def module_capture(self, producer, context, *, execution_gate=None, emitter_control=None):
         from .diagnostic_module_capture import ModuleCaptureService
-        return ModuleCaptureService.begin(_ReferenceDiagnostics._modules(self), producer, context, execution_gate)
+        return ModuleCaptureService.begin(_ReferenceDiagnostics._modules(self), producer, context, execution_gate, emitter_control)
 
     def audit_module_return(self, scope, *, boundary):
         from .diagnostic_module_capture import ModuleCaptureService
         return ModuleCaptureService.audit(_ReferenceDiagnostics._modules(self), scope, boundary)
 
-    def normalization_capture(self):
-        return _NormalizationCapture(self)
+    def release_preparations_for_emitter(self, emitter):
+        from .diagnostic_module_capture import ModuleCaptureService
+        return ModuleCaptureService.release_preparations(_ReferenceDiagnostics._modules(self), emitter)
+
+    def prepare_emission(self, planner, result, capture, emitter, target, *, operation_reference, execution_gate=None):
+        from .diagnostic_module_capture import ModuleCaptureService
+        return ModuleCaptureService.prepare(_ReferenceDiagnostics._modules(self), planner, result, capture,
+            emitter, target, operation_reference, execution_gate)
+
+    def normalization_capture(self, *, execution_gate=None):
+        if execution_gate is not None:
+            from core.module_lifecycle import CoreExecutionGate
+            if type(execution_gate) is not CoreExecutionGate:
+                raise dv.DiagnosticsContractError("DIAGNOSTICS_ORIGIN_MISMATCH")
+            self._check_capture_binding(execution_gate)
+            self._check_gate(execution_gate)
+        return _NormalizationCapture(self, execution_gate)
 
     def recovery_capture(self, *, execution_gate=None):
+        if execution_gate is not None:
+            from .session_values import SessionExecutionGate
+            if type(execution_gate) is not SessionExecutionGate:
+                raise dv.DiagnosticsContractError("DIAGNOSTICS_ORIGIN_MISMATCH")
         self._check_capture_binding(execution_gate)
         self._check_gate(execution_gate)
         return _RecoveryCapture(self, execution_gate)
@@ -544,7 +705,8 @@ class _ReferenceDiagnostics:
         code = failure or ("SESSION_RETENTION_UNCONFIRMED" if uncertain or self._storage != "PROTECTED_VERIFIED" else None)
         return v.SessionRetentionReceipt(state.binding.session_reference, "CONFIRMED" if code is None else "NOT_CONFIRMED" if code == "SESSION_RETENTION_UNCONFIRMED" else "REJECTED",
             phase, "STORAGE_UNCERTAIN" if uncertain or self._storage != "PROTECTED_VERIFIED" else "PARTIAL" if code else "COMPLETE_SPECIFIED_SAFE_GRAPH",
-            len(known), len(unknown), len(state.pinned_support), code)
+            len(known), len(unknown), len(state.pinned_support), code,
+            policy_binding=state.binding.policy_binding if state.binding.policy_binding.policy_version == "1.1.0" else None)
 
     def _projection(self, state):
         from .diagnostic_session_values import SessionProjection
@@ -577,7 +739,7 @@ class _ReferenceDiagnostics:
                 raise dv.DiagnosticsContractError("DIAGNOSTICS_REQUIRED_STEP_MISSING")
             selected.add(key)
             pending.extend(references(node.to_record()))
-        if len(selected) > 2544:
+        if len(selected) > (2663 if state.binding.policy_binding.policy_version == '1.1.0' else 2544):
             raise dv.DiagnosticsContractError("DIAGNOSTICS_SUPPORTING_LIMIT")
         state.pinned_support.update(selected)
         return selected
@@ -674,6 +836,39 @@ class _ReferenceDiagnostics:
         self._check_gate(execution_gate)
         return _SessionLifecycleCapture(self, state, execution_gate)
 
+    def reserve_session_module(self, handle, lease, *, execution_gate):
+        from . import session_values as v
+        state = self._session_state(handle)
+        try:
+            v.revalidate_value(lease)
+            if type(lease) is not v.SessionModuleLease or state.binding.policy_binding.policy_version != '1.1.0' or lease.before.binding != state.binding:
+                raise dv.DiagnosticsContractError('DIAGNOSTICS_ORIGIN_MISMATCH')
+            if v.SessionExecutionGate.validate_module_capture(execution_gate, self,
+                    lease.command.request_reference, lease.command.producer) is not True:
+                raise dv.DiagnosticsContractError('DIAGNOSTICS_ORIGIN_MISMATCH')
+            with self._session_io():
+                self._check_gate(execution_gate)
+                reference = lease.command.request_reference
+                active = tuple(scope for scope in self._scopes.values() if not scope.finished or scope.final_observation_pending)
+                if (state.frozen or reference in state.module_controls or len(state.module_controls) >= 4 or len(active) >= 8 or
+                        self._used + sum(scope.remaining_bytes for scope in active) + 65536 > 33554432 or
+                        self._support_bytes + sum(scope.remaining_supporting_bytes for scope in active) + 32768 > 2097152 or
+                        len(self._aliases) + sum(scope.remaining_aliases for scope in active) + 64 > 6144):
+                    raise dv.DiagnosticsContractError('DIAGNOSTICS_RESERVATION_REFUSED')
+                native = _CaptureScope(self, reference, 'SESSION_LIFECYCLE', reserved_events=0,
+                    reserved_bytes=65536, reserved_aliases=64, reserved_supporting_bytes=32768, execution_gate=execution_gate)
+                native.storage_reference = 'session:module:control:' + hashlib.sha256((state.binding.session_reference + ':' + reference).encode('ascii')).hexdigest()
+                native.remaining_incidents = 0
+                scope = SessionModuleControlScope(_MODULE_CONTROL_FACTORY)
+                scope._collector, scope._state, scope._native, scope._lease = self, state, native, lease
+                scope._original, scope._receipt, scope._result = scope, None, None
+                state.module_controls[reference] = scope
+                self._scopes[native.storage_reference] = native
+                state.pinned_scopes.add(native.storage_reference)
+                return v.SessionModuleCaptureAdmission('ADMITTED', scope, None)
+        except (dv.DiagnosticsContractError, v.SessionContractError):
+            return v.SessionModuleCaptureAdmission('REJECTED', None, 'SESSION_RETENTION_REJECTED')
+
     def _session_begin(self, state, gate, command, before, origin_refs, terminal):
         from . import session_values as v
         reference = command.request.request_reference if type(command) in v._COMMANDS else "session:invalid"
@@ -693,7 +888,8 @@ class _ReferenceDiagnostics:
                     sv.InputEvidence.validate_reference(ref)
                     if ref != state.binding.initial_assessment_reference and ref not in self._acks:
                         raise dv.DiagnosticsContractError("DIAGNOSTICS_ORIGIN_UNAVAILABLE")
-                budget = (4, 655360, 512, 425984) if terminal else (4, 327680, 512, 98304)
+                current = state.binding.policy_binding.policy_version == '1.1.0'
+                budget = ((4, 688128, 512, 458752) if current else (4, 655360, 512, 425984)) if terminal else (4, 327680, 512, 98304)
                 scope = self._begin(reference, "SESSION_LIFECYCLE", reserved_events=budget[0], reserved_bytes=budget[1],
                     reserved_aliases=budget[2], reserved_supporting_bytes=budget[3], execution_gate=gate,
                     storage_reference="session:lifecycle:" + hashlib.sha256((state.binding.session_reference + ":" + reference).encode("ascii")).hexdigest())
@@ -955,6 +1151,68 @@ class _ReferenceDiagnostics:
         except (dv.DiagnosticsContractError, v.SessionContractError):
             return self._session_receipt(state, "PIN", "SESSION_RETENTION_INCOMPLETE")
 
+    def pin_session_module_history(self, handle, history):
+        from . import session_values as v
+        state = self._session_state(handle)
+        failure = None
+        try:
+            v.revalidate_value(history)
+            if type(history) is not v.SessionModuleHistory or history.session_binding_reference != state.binding.binding_reference:
+                raise dv.DiagnosticsContractError('DIAGNOSTICS_ORIGIN_MISMATCH')
+            with self._session_io():
+                for result, observation in zip(history.results, history.control_observations):
+                    ref = result.command.request_reference
+                    actual = state.module_results.get(ref)
+                    if observation is None:
+                        if result.admission.status != 'REJECTED':
+                            raise dv.DiagnosticsContractError('DIAGNOSTICS_COMPLETION_MISMATCH')
+                        continue
+                    if actual is None or actual[0] != result or observation.supporting_reference != actual[1]:
+                        raise dv.DiagnosticsContractError('DIAGNOSTICS_COMPLETION_MISMATCH')
+                for reference in state.pinned_scopes:
+                    state.pinned_support.update(self._scopes[reference].support_keys)
+                self._select_support(state, state.pinned_support)
+        except (dv.DiagnosticsContractError, v.SessionContractError):
+            failure = 'SESSION_RETENTION_INCOMPLETE'
+            self._mark_failure('DIAGNOSTICS_COMPLETION_MISMATCH')
+        return v.SessionModuleRetentionReceipt(state.binding.session_reference, None, 'PIN',
+            'CONFIRMED' if failure is None else 'NOT_CONFIRMED', 'COMPLETE_SPECIFIED_SAFE_GRAPH' if failure is None else 'PARTIAL',
+            len(state.pinned_support), state.module_history_reference, failure)
+
+    def _module_history_support(self, state, history):
+        from . import diagnostic_session_values as safe
+        projection = self._projection(state)
+        cutover = history.pending_cutover
+        cutover_alias = None
+        if cutover is not None:
+            source = self._scopes.get(cutover.actual_origin_reference)
+            operation = _ReferenceDiagnostics._modules(self).scopes.get(cutover.actual_module_operation_reference)
+            cutover_alias = projection.key('SESSION_MODULE_CUTOVER', cutover)
+            node = safe.SafeSessionModuleCutoverEvidence(evidence_reference=cutover_alias,
+                session_binding_reference=projection.binding(state.binding), session_reference=projection.alias(state.binding.session_reference),
+                request_reference=projection.alias(cutover.request_reference), lease_reference=projection.alias(cutover.lease_reference),
+                generation=cutover.admitted_generation, before_snapshot_reference=projection.alias(cutover.before_snapshot_reference),
+                active_snapshot_reference=projection.alias(cutover.active_snapshot_reference), cutover_snapshot_reference=projection.alias(cutover.cutover_snapshot_reference),
+                actual_origin_evidence_reference=None if source is None or source.completed_result is None else self._assessment_support(source.completed_result),
+                actual_module_operation_reference=None if operation is None else operation._projection.operation_alias, phase=cutover.phase)
+            try:
+                self._supporting('SESSION_MODULE_CUTOVER', cutover_alias, node)
+            finally:
+                if cutover_alias in self._support['SESSION_MODULE_CUTOVER'] or ('SESSION_MODULE_CUTOVER', cutover_alias) in self._unconfirmed_support:
+                    state.pinned_support.add(('SESSION_MODULE_CUTOVER', cutover_alias))
+        links, controls = [], []
+        for result, receipt in zip(history.results, history.control_observations):
+            actual = state.module_results.get(result.command.request_reference)
+            if actual is not None:
+                links.append(actual[1])
+            controls.append(None if receipt is None else dict(request_reference=projection.alias(receipt.request_reference),
+                status=receipt.status, coverage=receipt.coverage, supporting_reference=receipt.supporting_reference, failure_code=receipt.failure_code))
+        state.module_history_reference = projection.put('SESSION_MODULE_HISTORY', safe.SafeSessionModuleHistoryEvidence, history,
+            session_binding_reference=projection.binding(state.binding), session_reference=projection.alias(state.binding.session_reference),
+            member_link_references=tuple(links), control_observations=tuple(controls), frozen=history.frozen,
+            cutover_generation=history.cutover_generation, pending_cutover_evidence_reference=cutover_alias)
+        return state.module_history_reference
+
     def freeze_terminal(self, handle, history, actual_terminal_publication):
         from . import session_values as v
         from . import diagnostic_session_values as safe
@@ -982,6 +1240,9 @@ class _ReferenceDiagnostics:
                 scope.audit_cleanup_allowed = True
                 self._charging_scope = scope
                 projection = self._projection(state)
+                module_history = None
+                if history.module_history is not None:
+                    module_history = self._module_history_support(state, history.module_history)
                 terminal_closure = None
                 halt_records = tuple(item for item in result.confirmed_lifecycle_records if item.envelope.diagnostic_kind == "SAFE_HALT")
                 if halt_records:
@@ -1001,6 +1262,21 @@ class _ReferenceDiagnostics:
                     for item in history.command_results if item.request.request.request_reference in self._lifecycle_scopes)
                 selected_scopes.update(item.operation_context.operation_reference for item in history.recovery_results)
                 selected_scopes.update(item.child_origin_assessment_reference for item in history.child_links)
+                if history.module_history is not None:
+                    cutover = history.module_history.pending_cutover
+                    if cutover is not None:
+                        if cutover.actual_origin_reference is not None:
+                            selected_scopes.add(cutover.actual_origin_reference)
+                        if cutover.actual_module_operation_reference is not None:
+                            selected_scopes.add(cutover.actual_module_operation_reference)
+                    for module_result in history.module_history.results:
+                        control = state.module_controls.get(module_result.command.request_reference)
+                        if control is not None:
+                            selected_scopes.add(control._native.storage_reference)
+                        if module_result.origin_diagnosis is not None:
+                            selected_scopes.add(module_result.origin_diagnosis.assessment_binding.assessment_reference)
+                        if module_result.module_capture is not None:
+                            selected_scopes.add(module_result.command.request_reference)
                 for ref in tuple(selected_scopes):
                     member = self._scopes.get(ref)
                     if member is not None:
@@ -1011,11 +1287,14 @@ class _ReferenceDiagnostics:
                 seeds.add(("SESSION_BINDING", projection.binding(history.binding)))
                 if terminal_closure is not None:
                     seeds.add(("SESSION_TERMINAL_CLOSURE", terminal_closure))
+                if module_history is not None:
+                    seeds.add(('SESSION_MODULE_HISTORY', module_history))
                 selected = self._select_support(state, seeds)
                 selected = {key for key in selected if key[0] not in ("SESSION_HISTORY", "SESSION_HISTORY_PAGE", "SESSION_DENIED")}
                 history_alias = projection.key("SESSION_HISTORY", history)
                 selected.add(("SESSION_HISTORY", history_alias))
-                if len(selected) > 2504:
+                current = state.binding.policy_binding.policy_version == '1.1.0'
+                if len(selected) > (2622 if current else 2504):
                     raise dv.DiagnosticsContractError("DIAGNOSTICS_SUPPORTING_LIMIT")
                 indices = {index for ref in selected_scopes if ref in self._scopes for index in (*self._scopes[ref].indices, *self._scopes[ref].late_indices)}
                 unknown_indices = {self._scopes[ref].attempted_index for ref in selected_scopes if ref in self._scopes and self._scopes[ref].attempted_index in self._unconfirmed_events}
@@ -1026,20 +1305,25 @@ class _ReferenceDiagnostics:
                         raise dv.DiagnosticsContractError("DIAGNOSTICS_REQUIRED_STEP_MISSING")
                     records.append(safe.SafeHistoryRecordReference(event.diagnostic_reference or event.event_id, event.event_id,
                         index, "UNKNOWN" if index in unknown_indices else "CONFIRMED"))
-                supporting = tuple(safe.SafeSupportingReference(kind, alias) for kind, alias in sorted(selected))
+                reference_cls = safe.SafeCurrentSessionSupportingReference if current else safe.SafeSupportingReference
+                supporting = tuple(reference_cls(kind, alias) for kind, alias in sorted(selected))
                 page_count = max((len(records) + 63) // 64, (len(supporting) + 63) // 64)
-                if page_count > 40:
+                if page_count > (41 if current else 40):
                     raise dv.DiagnosticsContractError("DIAGNOSTICS_SUPPORTING_LIMIT")
                 pages = []
                 for index in range(page_count):
                     alias = self._alias("session:index:" + hashlib.sha256(history.history_reference.encode("ascii")).hexdigest() + ":" + str(index))
-                    node = safe.SafeSessionHistoryPage(alias, history_alias, index, tuple(records[index*64:(index+1)*64]), supporting[index*64:(index+1)*64])
+                    page_cls = safe.SafeCurrentSessionHistoryPage if current else safe.SafeSessionHistoryPage
+                    page_context = {'session_policy_version': '1.1.0'} if current else {}
+                    node = page_cls(alias, history_alias, index, tuple(records[index*64:(index+1)*64]), supporting[index*64:(index+1)*64], **page_context)
                     state.pinned_support.add(("SESSION_HISTORY_PAGE", alias))
                     pages.append(self._supporting("SESSION_HISTORY_PAGE", alias, node))
                 by_kind = {kind: tuple(alias for selected_kind, alias in sorted(selected) if selected_kind == kind) for kind in self._support}
                 assessments = tuple(self._projection(state).assessment(item.actual_post_assessment) for item in history.command_results if item.actual_post_assessment is not None)
                 main_assessment = projection.assessment(history.main_assessment)
-                node = safe.SafeSessionHistoryEvidence(history_alias, projection.binding(history.binding), main_assessment,
+                history_cls = safe.SafeCurrentSessionHistoryEvidence if current else safe.SafeSessionHistoryEvidence
+                history_context = {'module_history_evidence_reference': module_history, 'session_policy_version': '1.1.0'} if current else {}
+                node = history_cls(history_alias, projection.binding(history.binding), main_assessment,
                     None, None, by_kind["SESSION_CONTEXT"], by_kind["SESSION_PUBLICATION"], by_kind["LIFECYCLE"],
                     None if not history.pending_lifecycle_records else projection.lifecycle(history.pending_lifecycle_records[-1], result.request, "NOT_CONFIRMED"),
                     tuple(pages), len(indices), len(unknown_indices), len(history.attempted_lifecycle_records), len(selected), True,
@@ -1047,7 +1331,7 @@ class _ReferenceDiagnostics:
                     "RAW_BUSINESS_PACKETS_REQUEST_REASON_CANONICAL_FREE_NOTES", by_kind["SESSION_REQUEST"], by_kind["SESSION_AUTHORITY"], by_kind["SESSION_CAUSE"],
                     by_kind["SESSION_BOUNDARY"], by_kind["SESSION_COMMAND"], by_kind["SESSION_FAILURE"], by_kind["SESSION_RESOLUTION"],
                     tuple(projection.alias(item.operation_context.operation_reference) for item in history.recovery_results), by_kind["SESSION_LINK"],
-                    None, tuple(dict.fromkeys(item for item in (main_assessment, *assessments) if item is not None)), terminal_closure)
+                    None, tuple(dict.fromkeys(item for item in (main_assessment, *assessments) if item is not None)), terminal_closure, **history_context)
                 state.pinned_support.add(("SESSION_HISTORY", history_alias))
                 self._supporting("SESSION_HISTORY", history_alias, node)
                 state.pinned_support.update(scope.support_keys)
@@ -1431,6 +1715,7 @@ class _ReferenceDiagnostics:
             "REGISTRY_PROOF": 8, "CONDITION": 512, "PREDICATE_OBSERVATION": 512, "RECOVERY_SAFETY": 8,
             "TARGET_VALIDITY": 264}
         maxima.update({kind: maximum for _field, kind, _cls, maximum in dv.SESSION_SUPPORT_FIELDS})
+        maxima.update({kind: maximum for _field, kind, _cls, maximum in dv.CURRENT_SESSION_SUPPORT_FIELDS})
         maxima.update(dv.MODULE_KIND_QUOTAS)
         if kind in dv.MODULE_KIND_QUOTAS and any(alias in self._support[other] or (other, alias) in self._unconfirmed_support for other in dv.MODULE_KIND_QUOTAS if other != kind):
             raise dv.DiagnosticsContractError('DIAGNOSTICS_COMPLETION_MISMATCH')
@@ -1439,9 +1724,9 @@ class _ReferenceDiagnostics:
         if len(encoded) > 32768 or self._support_bytes + len(encoded) > 2097152:
             raise dv.DiagnosticsContractError("DIAGNOSTICS_SUPPORTING_LIMIT")
         charged = None if writing_scope is None else self._budget_scope(writing_scope)
-        if charged is not None and charged.execution_gate is not None:
+        if charged is not None and (charged.execution_gate is not None or getattr(charged, 'emitter_control', None) is not None):
             if not charged.audit_cleanup_allowed:
-                self._check_gate(charged.execution_gate)
+                self._check_scope_tokens(charged)
             if self._io_depth or len(encoded) > charged.remaining_bytes:
                 raise dv.DiagnosticsContractError("DIAGNOSTICS_RESERVATION_REFUSED")
             if charged.reserved_supporting_bytes and len(encoded) > charged.remaining_supporting_bytes:
@@ -1481,7 +1766,7 @@ class _ReferenceDiagnostics:
             if charged is not None and charged.reserved_supporting_bytes:
                 charged.remaining_supporting_bytes -= len(encoded)
             if not charged.audit_cleanup_allowed:
-                self._check_gate(charged.execution_gate)
+                self._check_scope_tokens(charged)
         return alias
 
     def _consume_reservation(self, scope, byte_count, *, event=False):
@@ -1608,16 +1893,50 @@ class _ReferenceDiagnostics:
             raise dv.DiagnosticsContractError("DIAGNOSTICS_RECORD_NONCONFORMANT")
         reference = result.assessment_binding.assessment_reference
         scope = self._scopes.get(reference)
+        if (scope is not None and scope.completion_response is not None and
+                sv.canonical_source_baseline(result.source_binding) == 'M3_GENERATION'):
+            with self._session_io():
+                return self._first_response(scope, result, 'STATE_MODEL', reference)
         return self._complete(scope, result, "STATE_MODEL", reference=reference)
 
-    def complete_normalization(self, result):
+    def _first_response(self, scope, result, producer, reference):
+        from .session_values import revalidate_value
+        revalidate_value(result)
+        if (type(scope) is not _CaptureScope or scope.owner is not self or
+                self._scopes.get(scope.storage_reference) is not scope or scope.purged or not scope.finished or
+                scope.producer != producer or scope.reference != reference or scope.completion_response is None or
+                scope.completion_response.operation_reference != reference or
+                scope.completion_response.confirmed_event_indices != tuple(scope.indices)):
+            raise dv.DiagnosticsContractError('DIAGNOSTICS_COMPLETION_MISMATCH')
+        self._check_capture_binding(scope.execution_gate, operation_reference=reference)
+        raw = self._raw_bytes(result, scope)
+        references = tuple(record.emission.diagnostic_reference if producer == 'NORMALIZATION' else
+            record.diagnostic_reference for record in result.emitted_diagnostics)
+        if (hashlib.sha256(raw).hexdigest() != scope.completed_hash or
+                references != tuple(scope.references) or
+                tuple(hashlib.sha256(self._raw_bytes(record, scope)).hexdigest() for record in result.emitted_diagnostics) != tuple(scope.hashes)):
+            raise dv.DiagnosticsContractError('DIAGNOSTICS_COMPLETION_MISMATCH')
+        return scope.completion_response
+
+    def complete_normalization(self, result, *, execution_gate=None):
         if not any(type(result) is kind for kind in (nv.NormalizationResult, nv.NormalizationFailure, nv.NormalizationCaptureFailure)):
             raise dv.DiagnosticsContractError("DIAGNOSTICS_RECORD_NONCONFORMANT")
         reference = result.operation_binding.operation_reference
-        return self._complete(self._scopes.get(reference), result, "NORMALIZATION", reference=reference)
+        scope = self._scopes.get(reference)
+        if execution_gate is not None:
+            from core.module_lifecycle import CoreExecutionGate
+            if type(execution_gate) is not CoreExecutionGate:
+                raise dv.DiagnosticsContractError("DIAGNOSTICS_ORIGIN_MISMATCH")
+            self._check_capture_binding(execution_gate, operation_reference=reference)
+            if scope is not None and scope.execution_gate is not execution_gate:
+                raise dv.DiagnosticsContractError("DIAGNOSTICS_ORIGIN_MISMATCH")
+        return self._complete(scope, result, "NORMALIZATION", reference=reference)
 
     def _complete(self, scope, result, producer, *, reference=None):
-        with self._lock:
+        with self._session_io() if scope is not None and scope.execution_gate is not None else self._lock:
+            from core.module_lifecycle import CoreExecutionGate
+            if scope is not None and type(scope.execution_gate) is CoreExecutionGate and scope.completion_response is not None:
+                return self._first_response(scope, result, producer, reference or scope.reference)
             self._charging_scope = scope
             if scope is not None and scope.execution_gate is not None:
                 scope.audit_cleanup_allowed = True
@@ -1860,7 +2179,8 @@ class _ReferenceDiagnostics:
             tuple(support["CORRECTION_PROOF"].values()), tuple(support["REGISTRY_PROOF"].values()),
             tuple(support["CONDITION"].values()), tuple(support["PREDICATE_OBSERVATION"].values()),
             tuple(support["RECOVERY_SAFETY"].values()), tuple(support["TARGET_VALIDITY"].values()),
-            **{field: tuple(support[kind].values()) for field, kind, _cls, _max in dv.SESSION_SUPPORT_FIELDS},
+            **{field: tuple(node for node in support[kind].values() if type(node) is cls)
+                for field, kind, cls, _max in (*dv.SESSION_SUPPORT_FIELDS, *dv.CURRENT_SESSION_SUPPORT_FIELDS)},
             module_evidence=tuple(node for kind in dv.MODULE_KIND_QUOTAS for node in support[kind].values()))
 
     def snapshot(self, *, bundle_reference):

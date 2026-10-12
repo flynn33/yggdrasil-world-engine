@@ -53,22 +53,29 @@ def pure_record(value):
     """Serialize only exact owned public module values, without instance hooks."""
     from . import realm_transition_values as rt
     from . import generation_values as gen
+    from . import planner_emitter_values as pe
     if _is(value, rt.OWNED_TYPES):
         rt.revalidate_value(value)
         return json.loads(rt.canonical_bytes(value))
     if _is(value, gen.WIRE_TYPES):
         gen.revalidate_value(value)
         return json.loads(gen.canonical_bytes(value))
+    if _is(value, pe.WIRE_TYPES):
+        pe.revalidate_value(value)
+        return json.loads(pe.canonical_bytes(value))
     _fail("MODULE_RESULT_REJECTED")
 
 
 def pure_bytes(value):
     from . import realm_transition_values as rt
     from . import generation_values as gen
+    from . import planner_emitter_values as pe
     if _is(value, rt.OWNED_TYPES):
         return rt.canonical_bytes(value)
     if _is(value, gen.WIRE_TYPES):
         return gen.canonical_bytes(value)
+    if _is(value, pe.WIRE_TYPES):
+        return pe.canonical_bytes(value)
     _fail("MODULE_RESULT_REJECTED")
 
 
@@ -91,8 +98,19 @@ def _record(value):
     return pure_record(value)
 
 
-def raw_business_bytes(value, *, limit=RAW_LIMIT):
-    if type(limit) is not int or not 0 < limit <= RAW_LIMIT:
+def business_limit(value):
+    from . import planner_emitter_values as pe
+    if type(value) is ModuleCaptureContext and value.producer in ('GENERATION_PLANNER', 'ARTIFACT_EMITTER'):
+        return 2097152
+    if type(value) is ModuleCaptureReceipt and _is(value.result, (pe.PlannerResult, pe.PlannerFailure, pe.EmitterResult)):
+        return 2097152
+    return RAW_LIMIT
+
+
+def raw_business_bytes(value, *, limit=None):
+    maximum = business_limit(value)
+    limit = maximum if limit is None else limit
+    if type(limit) is not int or not 0 < limit <= maximum:
         _fail("MODULE_RAW_PACKET_LIMIT")
     record = _record(value)
     result = bytearray()
@@ -103,7 +121,8 @@ def raw_business_bytes(value, *, limit=RAW_LIMIT):
     return bytes(result)
 
 
-def raw_business_size(value, *, limit=RAW_LIMIT):
+def raw_business_size(value, *, limit=None):
+    limit = business_limit(value) if limit is None else limit
     try:
         return len(raw_business_bytes(value, limit=limit))
     except ModuleContractError as error:
@@ -155,6 +174,43 @@ class ModuleCaptureAdmission:
             _fail()
 
 
+_PREPARATION_FACTORY = object()
+
+
+class PreparedEmission:
+    """Original collector-owned single-use transfer; never a wire value."""
+    __slots__ = ('_factory', '_service', '_reference', '_original')
+
+    def __new__(cls, marker=None):
+        if cls is not PreparedEmission or marker is not _PREPARATION_FACTORY:
+            _fail('MODULE_CONTEXT_REJECTED')
+        return super().__new__(cls)
+
+    def configuration(self):
+        from .diagnostic_module_capture import ModuleCaptureService, _prepared_service
+        return ModuleCaptureService.prepared_configuration(_prepared_service(self), self)
+
+    def origin_and_dependency(self):
+        from .diagnostic_module_capture import ModuleCaptureService, _prepared_service
+        return ModuleCaptureService.prepared_origin(_prepared_service(self), self)
+
+
+@dataclass(frozen=True, slots=True)
+class EmissionPreparationAdmission:
+    receipt: object
+    prepared: PreparedEmission | None
+
+    def __post_init__(self):
+        from . import planner_emitter_values as pe
+        if type(self.receipt) is not pe.EmissionPreparationReceipt:
+            _fail('MODULE_CONTEXT_REJECTED')
+        pe.revalidate_value(self.receipt)
+        if self.prepared is not None and type(self.prepared) is not PreparedEmission:
+            _fail('MODULE_CONTEXT_REJECTED')
+        if (self.receipt.status == 'ISSUED') != (self.prepared is not None):
+            _fail('MODULE_CONTEXT_REJECTED')
+
+
 @dataclass(frozen=True, slots=True)
 class ModuleCaptureReceipt(_Wire):
     operation_reference: str
@@ -190,6 +246,28 @@ WIRE_TYPES = (ModuleProducerRegistrationReceipt, ModuleCaptureContext, ModuleCap
               ModuleFinalObservationReceipt, ModuleReturnAuditObservation)
 
 
+def wire_schema(value):
+    """Dispatch an owned root from its complete source branch, with no selector."""
+    if not _is(value, WIRE_TYPES):
+        _fail('MODULE_CONTEXT_REJECTED')
+    revalidate_value(value)
+    source = None
+    if type(value) is ModuleCaptureContext:
+        source = value.origin_diagnosis.source_binding
+    elif type(value) is ModuleCaptureReceipt:
+        from . import realm_transition_values as rt, generation_values as gen, planner_emitter_values as pe
+        if _is(value.result, rt.RESULT_TYPES) or _is(value.result, (pe.TransitionChainResult, pe.TransitionChainFailure)):
+            source = value.result.origin.source_binding
+        elif _is(value.result, gen.PACKET_TYPES):
+            source = value.result.request.origin_diagnosis.source_binding
+        elif _is(value.result, (pe.PlannerResult, pe.PlannerFailure)):
+            source = value.result.request.final_origin_diagnosis.source_binding
+        elif type(value.result) is pe.EmitterResult:
+            source = value.result.binding.canonical_binding
+    return ('data/schemas/m3_generation_module_capture_schema.json' if source is not None and
+        sv.canonical_source_baseline(source) == 'M3_GENERATION' else 'data/schemas/m3_module_capture_schema.json')
+
+
 def _validate(value):
     from . import diagnostics_values as dv
     kind = type(value)
@@ -210,7 +288,8 @@ def _validate(value):
         sv.StateDiagnosis.__post_init__(value.origin_diagnosis)
         from . import realm_transition_values as rt
         from . import generation_values as gen
-        if type(value.source_binding) is not rt.RealmTransitionBinding and not (
+        from . import planner_emitter_values as pe
+        if not _is(value.source_binding, (rt.RealmTransitionBinding, pe.PlannerEmitterBinding)) and not (
             type(value.source_binding) is tuple and len(value.source_binding) == 3 and
             type(value.source_binding[0]) is gen.TopologyAxiomSourceBinding and
             _is(value.source_binding[1], (sv.AvailableProfileBinding, sv.UnavailableProfileBinding)) and
@@ -227,6 +306,21 @@ def _validate(value):
             expected = 'TOPOLOGY_GENERATOR' if _is(result, (gen.TopologyResult, gen.TopologyFailure)) else 'AXIOM_EVALUATOR'
             if value.producer != expected or type(value.source_binding) is not tuple or value.source_binding != (result.source_binding, result.request.origin_diagnosis.profile_binding, result.policy_binding) or value.operation_reference != result.request.request_reference or value.origin_diagnosis != result.request.origin_diagnosis:
                 _fail('MODULE_CONTEXT_REJECTED')
+        elif _is(result, (pe.TransitionChainResult, pe.TransitionChainFailure)):
+            if (value.producer != 'TRANSITION_REGISTRY' or type(value.source_binding) is not rt.RealmTransitionBinding or
+                    value.source_binding != result.binding or value.operation_reference != result.operation_reference or value.origin_diagnosis != result.origin):
+                _fail('MODULE_CONTEXT_REJECTED')
+        elif _is(result, (pe.PlannerResult, pe.PlannerFailure)):
+            if (value.producer != 'GENERATION_PLANNER' or type(value.source_binding) is not pe.PlannerEmitterBinding or
+                    value.source_binding != result.binding or value.operation_reference != result.request.operation_reference or
+                    value.origin_diagnosis != result.request.final_origin_diagnosis):
+                _fail('MODULE_CONTEXT_REJECTED')
+        elif type(result) is pe.EmitterRequest:
+            if (value.producer != 'ARTIFACT_EMITTER' or type(value.source_binding) is not pe.PlannerEmitterBinding or
+                    value.operation_reference != result.operation_reference or value.source_binding.canonical_binding != value.origin_diagnosis.source_binding or
+                    value.source_binding.profile_binding != value.origin_diagnosis.profile_binding or
+                    result.plan.metadata.destination_diagnosis_reference != value.origin_diagnosis.assessment_binding.diagnosis_reference):
+                _fail('MODULE_CONTEXT_REJECTED')
         else:
             _fail('MODULE_RESULT_REJECTED')
         if type(value.dependency_results) is not tuple or len(value.dependency_results) > 6:
@@ -238,7 +332,10 @@ def _validate(value):
         pure_record(value.result)
         from . import realm_transition_values as rt
         from . import generation_values as gen
-        reference = value.result.operation_reference if _is(value.result, rt.RESULT_TYPES) else value.result.request.request_reference if _is(value.result, gen.PACKET_TYPES) else None
+        from . import planner_emitter_values as pe
+        reference = (value.result.operation_reference if _is(value.result, (*rt.RESULT_TYPES, pe.TransitionChainResult, pe.TransitionChainFailure)) else
+            value.result.request.request_reference if _is(value.result, gen.PACKET_TYPES) else
+            value.result.request.operation_reference if _is(value.result, (pe.PlannerResult, pe.PlannerFailure, pe.EmitterResult)) else None)
         if reference != value.operation_reference:
             _fail('MODULE_CONTEXT_REJECTED')
         if type(value.confirmed_records) is not tuple or len(value.confirmed_records) > 65:
@@ -1643,7 +1740,7 @@ class _SafeValue:
     def __post_init__(self):
         if not _is(self, SAFE_TYPES):
             _fail('MODULE_CAPTURE_REJECTED')
-        schema = SAFE_SCHEMAS[TYPE_KINDS[type(self)]]
+        schema = TYPE_SCHEMAS[type(self)]
         for field in fields(type(self)):
             value = object.__getattribute__(self, field.name)
             object.__setattr__(self, field.name, _safe_validate(value, schema['properties'][field.name], normalize=True))
@@ -1651,6 +1748,453 @@ class _SafeValue:
     def to_record(self):
         return _safe_record(self)
 
+
+GENERATION_SAFE_SCHEMAS = {'PRODUCER_SOURCE': {'type': 'object',
+                     'additionalProperties': False,
+                     'required': ['canonical_evidence_reference',
+                                  'profile_evidence_reference',
+                                  'contract_pins',
+                                  'diagnostics_contract_sha256',
+                                  'diagnostic_schema_sha256',
+                                  'taxonomy_sha256',
+                                  'source_baseline',
+                                  'source_assurance',
+                                  'module_policy_references',
+                                  'projection_version'],
+                     'properties': {'canonical_evidence_reference': {'type': 'string',
+                                                                     'pattern': '^ref:[0-9]{6}$',
+                                                                     'maxLength': 10},
+                                    'profile_evidence_reference': {'type': 'string',
+                                                                   'pattern': '^ref:[0-9]{6}$',
+                                                                   'maxLength': 10},
+                                    'contract_pins': {'type': 'array',
+                                                      'items': {'type': 'object',
+                                                                'additionalProperties': False,
+                                                                'required': ['path_reference', 'sha256'],
+                                                                'properties': {'path_reference': {'type': 'string',
+                                                                                                  'pattern': '^ref:[0-9]{6}$',
+                                                                                                  'maxLength': 10},
+                                                                               'sha256': {'type': 'string',
+                                                                                          'pattern': '^[0-9a-f]{64}$',
+                                                                                          'maxLength': 64}}},
+                                                      'maxItems': 11},
+                                    'diagnostics_contract_sha256': {'type': 'string',
+                                                                    'pattern': '^[0-9a-f]{64}$',
+                                                                    'maxLength': 64},
+                                    'diagnostic_schema_sha256': {'type': 'string',
+                                                                 'pattern': '^[0-9a-f]{64}$',
+                                                                 'maxLength': 64},
+                                    'taxonomy_sha256': {'type': 'string',
+                                                        'pattern': '^[0-9a-f]{64}$',
+                                                        'maxLength': 64},
+                                    'source_baseline': {'const': 'M3_GENERATION'},
+                                    'source_assurance': {'type': 'string',
+                                                         'enum': ['HOST_VERIFIED_COMPLETE_VECTOR',
+                                                                  'RECOGNIZED_COMPLETE_VECTOR']},
+                                    'module_policy_references': {'type': 'array',
+                                                                 'items': {'type': 'string',
+                                                                           'pattern': '^ref:[0-9]{6}$',
+                                                                           'maxLength': 10},
+                                                                 'maxItems': 4},
+                                    'projection_version': {'const': 'M3_GENERATION_1_0'}}},
+ 'ROLE_PAGE': {'type': 'object',
+               'additionalProperties': False,
+               'required': ['plan_reference', 'page_index', 'assignments', 'projection_version'],
+               'properties': {'plan_reference': {'type': 'string',
+                                                 'pattern': '^ref:[0-9]{6}$',
+                                                 'maxLength': 10},
+                              'page_index': {'type': 'integer', 'minimum': 0, 'maximum': 45},
+                              'assignments': {'type': 'array',
+                                              'items': {'type': 'object',
+                                                        'additionalProperties': False,
+                                                        'required': ['node_path',
+                                                                     'role_reference',
+                                                                     'assignment_reference',
+                                                                     'policy_reference',
+                                                                     'role_kind'],
+                                                        'properties': {'node_path': {'type': 'string',
+                                                                                     'pattern': '^r[012]{0,6}$',
+                                                                                     'maxLength': 7},
+                                                                       'role_reference': {'type': 'string',
+                                                                                          'pattern': '^ref:[0-9]{6}$',
+                                                                                          'maxLength': 10},
+                                                                       'assignment_reference': {'type': 'string',
+                                                                                                'pattern': '^ref:[0-9]{6}$',
+                                                                                                'maxLength': 10},
+                                                                       'policy_reference': {'type': 'string',
+                                                                                            'pattern': '^ref:[0-9]{6}$',
+                                                                                            'maxLength': 10},
+                                                                       'role_kind': {'type': 'string',
+                                                                                     'enum': ['ROOT',
+                                                                                              'CONTINUATION',
+                                                                                              'POSITIVE',
+                                                                                              'NEGATIVE']}}},
+                                              'maxItems': 16},
+                              'projection_version': {'const': 'M3_GENERATION_1_0'}}},
+ 'GENERATION_PLAN': {'type': 'object',
+                     'additionalProperties': False,
+                     'required': ['plan_reference',
+                                  'context_reference',
+                                  'normalized_state',
+                                  'source_identity_state',
+                                  'destination_identity_state',
+                                  'topology_reference',
+                                  'axiom_operation_reference',
+                                  'role_pages',
+                                  'artifact_pages',
+                                  'target_constraints_reference',
+                                  'profile_reference',
+                                  'naming_policy_reference',
+                                  'role_policy_reference',
+                                  'subject_policy_reference',
+                                  'artifact_policy_reference',
+                                  'warnings',
+                                  'metadata_references',
+                                  'boundary',
+                                  'chain_operation_reference',
+                                  'source_diagnosis_reference',
+                                  'destination_diagnosis_reference',
+                                  'normalization_mode',
+                                  'emission_choice',
+                                  'target_runtime',
+                                  'projection_version'],
+                     'properties': {'plan_reference': {'type': 'string',
+                                                       'pattern': '^ref:[0-9]{6}$',
+                                                       'maxLength': 10},
+                                    'context_reference': {'type': 'string',
+                                                          'pattern': '^ref:[0-9]{6}$',
+                                                          'maxLength': 10},
+                                    'normalized_state': {'type': 'string',
+                                                         'pattern': '^[01]{9}$',
+                                                         'maxLength': 9},
+                                    'source_identity_state': {'type': 'string',
+                                                              'pattern': '^[01]{9}$',
+                                                              'maxLength': 9},
+                                    'destination_identity_state': {'type': 'string',
+                                                                   'pattern': '^[01]{9}$',
+                                                                   'maxLength': 9},
+                                    'topology_reference': {'type': 'string',
+                                                           'pattern': '^ref:[0-9]{6}$',
+                                                           'maxLength': 10},
+                                    'axiom_operation_reference': {'type': 'string',
+                                                                  'pattern': '^ref:[0-9]{6}$',
+                                                                  'maxLength': 10},
+                                    'role_pages': {'type': 'array',
+                                                   'items': {'type': 'string',
+                                                             'pattern': '^ref:[0-9]{6}$',
+                                                             'maxLength': 10},
+                                                   'maxItems': 46},
+                                    'artifact_pages': {'type': 'array',
+                                                       'items': {'type': 'string',
+                                                                 'pattern': '^ref:[0-9]{6}$',
+                                                                 'maxLength': 10},
+                                                       'maxItems': 2},
+                                    'target_constraints_reference': {'type': 'string',
+                                                                     'pattern': '^ref:[0-9]{6}$',
+                                                                     'maxLength': 10},
+                                    'profile_reference': {'type': 'string',
+                                                          'pattern': '^ref:[0-9]{6}$',
+                                                          'maxLength': 10},
+                                    'naming_policy_reference': {'type': 'string',
+                                                                'pattern': '^ref:[0-9]{6}$',
+                                                                'maxLength': 10},
+                                    'role_policy_reference': {'type': 'string',
+                                                              'pattern': '^ref:[0-9]{6}$',
+                                                              'maxLength': 10},
+                                    'subject_policy_reference': {'type': 'string',
+                                                                 'pattern': '^ref:[0-9]{6}$',
+                                                                 'maxLength': 10},
+                                    'artifact_policy_reference': {'type': 'string',
+                                                                  'pattern': '^ref:[0-9]{6}$',
+                                                                  'maxLength': 10},
+                                    'warnings': {'type': 'array',
+                                                 'items': {'type': 'string',
+                                                           'enum': ['AXIOM_CHECK_FAILED',
+                                                                    'TARGET_CONSTRAINT_UNSATISFIED',
+                                                                    'DECLARED_POLICY_LIMIT']},
+                                                 'maxItems': 5},
+                                    'metadata_references': {'type': 'array',
+                                                            'items': {'type': 'string',
+                                                                      'pattern': '^ref:[0-9]{6}$',
+                                                                      'maxLength': 10},
+                                                            'maxItems': 16},
+                                    'boundary': {'type': 'string',
+                                                 'enum': ['ABSTRACT_NO_EXTERNAL_EFFECTS'],
+                                                 'const': 'ABSTRACT_NO_EXTERNAL_EFFECTS'},
+                                    'chain_operation_reference': {'type': 'string',
+                                                                  'pattern': '^ref:[0-9]{6}$',
+                                                                  'maxLength': 10},
+                                    'source_diagnosis_reference': {'type': 'string',
+                                                                   'pattern': '^ref:[0-9]{6}$',
+                                                                   'maxLength': 10},
+                                    'destination_diagnosis_reference': {'type': 'string',
+                                                                        'pattern': '^ref:[0-9]{6}$',
+                                                                        'maxLength': 10},
+                                    'normalization_mode': {'const': 'ALREADY_VALID'},
+                                    'emission_choice': {'type': 'string',
+                                                        'enum': ['REFERENCE_MANIFEST_PAGES',
+                                                                 'INSPECT_ONLY']},
+                                    'target_runtime': {'const': 'REFERENCE_MEMORY_DOCUMENTS'},
+                                    'projection_version': {'const': 'M3_GENERATION_1_0'}}},
+ 'TARGET_CONSTRAINTS': {'type': 'object',
+                        'additionalProperties': False,
+                        'required': ['target_reference',
+                                     'configuration_reference',
+                                     'constraints',
+                                     'target_kind',
+                                     'policy_reference',
+                                     'target_runtime',
+                                     'emission_choice',
+                                     'max_artifacts',
+                                     'max_document_bytes',
+                                     'max_total_document_bytes',
+                                     'allow_declared_axiom_failures',
+                                     'existing_document_policy',
+                                     'projection_version'],
+                        'properties': {'target_reference': {'type': 'string',
+                                                            'pattern': '^ref:[0-9]{6}$',
+                                                            'maxLength': 10},
+                                       'configuration_reference': {'type': 'string',
+                                                                   'pattern': '^ref:[0-9]{6}$',
+                                                                   'maxLength': 10},
+                                       'constraints': {'type': 'array',
+                                                       'items': {'type': 'object',
+                                                                 'additionalProperties': False,
+                                                                 'required': ['constraint_reference',
+                                                                              'constraint_kind',
+                                                                              'status',
+                                                                              'value_reference',
+                                                                              'limit_value',
+                                                                              'unit'],
+                                                                 'properties': {'constraint_reference': {'type': 'string',
+                                                                                                         'pattern': '^ref:[0-9]{6}$',
+                                                                                                         'maxLength': 10},
+                                                                                'constraint_kind': {'type': 'string',
+                                                                                                    'enum': ['DECLARED_PLATFORM',
+                                                                                                             'DECLARED_RUNTIME',
+                                                                                                             'DECLARED_CAPABILITY',
+                                                                                                             'DECLARED_LIMIT']},
+                                                                                'status': {'type': 'string',
+                                                                                           'enum': ['SATISFIED',
+                                                                                                    'UNSATISFIED',
+                                                                                                    'UNAVAILABLE']},
+                                                                                'value_reference': {'anyOf': [{'type': 'string',
+                                                                                                               'pattern': '^ref:[0-9]{6}$',
+                                                                                                               'maxLength': 10},
+                                                                                                              {'type': 'null'}]},
+                                                                                'limit_value': {'anyOf': [{'type': 'integer',
+                                                                                                           'minimum': 0,
+                                                                                                           'maximum': 18446744073709551615},
+                                                                                                          {'type': 'null'}]},
+                                                                                'unit': {'type': 'string',
+                                                                                         'enum': ['NOT_APPLICABLE',
+                                                                                                  'COUNT',
+                                                                                                  'BYTES']}}},
+                                                       'maxItems': 16},
+                                       'target_kind': {'type': 'string',
+                                                       'enum': ['REFERENCE_DOCUMENT_TARGET',
+                                                                'REFERENCE_MANIFEST_TARGET']},
+                                       'policy_reference': {'type': 'string',
+                                                            'pattern': '^ref:[0-9]{6}$',
+                                                            'maxLength': 10},
+                                       'target_runtime': {'const': 'REFERENCE_MEMORY_DOCUMENTS'},
+                                       'emission_choice': {'type': 'string',
+                                                           'enum': ['REFERENCE_MANIFEST_PAGES',
+                                                                    'INSPECT_ONLY']},
+                                       'max_artifacts': {'type': 'integer', 'minimum': 0, 'maximum': 32},
+                                       'max_document_bytes': {'type': 'integer',
+                                                              'minimum': 0,
+                                                              'maximum': 32768},
+                                       'max_total_document_bytes': {'type': 'integer',
+                                                                    'minimum': 0,
+                                                                    'maximum': 1048576},
+                                       'allow_declared_axiom_failures': {'type': 'boolean'},
+                                       'existing_document_policy': {'const': 'EXACT_BYTES_IDEMPOTENT_OR_REFUSE'},
+                                       'projection_version': {'const': 'M3_GENERATION_1_0'}}},
+ 'EMISSION_OUTPUT': {'type': 'object',
+                     'additionalProperties': False,
+                     'required': ['plan_reference',
+                                  'artifact_reference',
+                                  'dispatch_reference',
+                                  'receipt_reference',
+                                  'target_reference',
+                                  'actual_status',
+                                  'actual_effects',
+                                  'expected_sha256',
+                                  'observed_sha256',
+                                  'expected_byte_count',
+                                  'observed_byte_count',
+                                  'materialization_policy_reference',
+                                  'failure_code',
+                                  'target_revision_before',
+                                  'target_revision_after',
+                                  'readback_assurance',
+                                  'detail_failure_code',
+                                  'projection_version'],
+                     'properties': {'plan_reference': {'type': 'string',
+                                                       'pattern': '^ref:[0-9]{6}$',
+                                                       'maxLength': 10},
+                                    'artifact_reference': {'type': 'string',
+                                                           'pattern': '^ref:[0-9]{6}$',
+                                                           'maxLength': 10},
+                                    'dispatch_reference': {'type': 'string',
+                                                           'pattern': '^ref:[0-9]{6}$',
+                                                           'maxLength': 10},
+                                    'receipt_reference': {'type': 'string',
+                                                          'pattern': '^ref:[0-9]{6}$',
+                                                          'maxLength': 10},
+                                    'target_reference': {'type': 'string',
+                                                         'pattern': '^ref:[0-9]{6}$',
+                                                         'maxLength': 10},
+                                    'actual_status': {'type': 'string',
+                                                      'enum': ['SUCCEEDED',
+                                                               'FAILED',
+                                                               'UNKNOWN',
+                                                               'NO_EFFECT']},
+                                    'actual_effects': {'anyOf': [{'type': 'boolean'}, {'type': 'null'}]},
+                                    'expected_sha256': {'type': 'string',
+                                                        'pattern': '^[0-9a-f]{64}$',
+                                                        'maxLength': 64},
+                                    'observed_sha256': {'anyOf': [{'type': 'string',
+                                                                   'pattern': '^[0-9a-f]{64}$',
+                                                                   'maxLength': 64},
+                                                                  {'type': 'null'}]},
+                                    'expected_byte_count': {'type': 'integer',
+                                                            'minimum': 0,
+                                                            'maximum': 32768},
+                                    'observed_byte_count': {'anyOf': [{'type': 'integer',
+                                                                       'minimum': 0,
+                                                                       'maximum': 32768},
+                                                                      {'type': 'null'}]},
+                                    'materialization_policy_reference': {'type': 'string',
+                                                                         'pattern': '^ref:[0-9]{6}$',
+                                                                         'maxLength': 10},
+                                    'failure_code': {'anyOf': [{'type': 'string',
+                                                                'enum': ['EMITTER_EFFECT_UNCONFIRMED',
+                                                                         'EMITTER_TARGET_UNAVAILABLE',
+                                                                         'EMITTER_PLAN_INCOMPLETE',
+                                                                         'EMITTER_FIDELITY_FAILED']},
+                                                               {'type': 'null'}]},
+                                    'target_revision_before': {'anyOf': [{'type': 'integer',
+                                                                          'minimum': 0,
+                                                                          'maximum': 18446744073709551615},
+                                                                         {'type': 'null'}]},
+                                    'target_revision_after': {'anyOf': [{'type': 'integer',
+                                                                         'minimum': 0,
+                                                                         'maximum': 18446744073709551615},
+                                                                        {'type': 'null'}]},
+                                    'readback_assurance': {'type': 'string',
+                                                           'enum': ['OWNED_EXACT_READBACK', 'UNAVAILABLE']},
+                                    'detail_failure_code': {'anyOf': [{'type': 'string',
+                                                                       'enum': ['DOCUMENT_CONFLICT',
+                                                                                'TARGET_RESOURCE_LIMIT',
+                                                                                'TARGET_BUSY',
+                                                                                'TARGET_STALE_REVISION',
+                                                                                'TARGET_RECEIPT_FOREIGN',
+                                                                                'TARGET_READBACK_MISMATCH',
+                                                                                'TARGET_INTERNAL_FAILURE',
+                                                                                'TARGET_EFFECT_UNKNOWN',
+                                                                                'COMMAND_CANCELLED']},
+                                                                      {'type': 'null'}]},
+                                    'projection_version': {'const': 'M3_GENERATION_1_0'}}},
+ 'TRANSITION_REGISTRY': {'type': 'object',
+                         'additionalProperties': False,
+                         'required': ['registry_reference',
+                                      'source_reference',
+                                      'policy_reference',
+                                      'definitions',
+                                      'policy_status',
+                                      'ordering',
+                                      'chain_status',
+                                      'chain_selections',
+                                      'source_proof_references',
+                                      'step_record_references',
+                                      'computed_step_count',
+                                      'failed_index',
+                                      'failed_phase',
+                                      'last_actual_candidate',
+                                      'chain_failure_code',
+                                      'projection_version'],
+                         'properties': {'registry_reference': {'type': 'string',
+                                                               'pattern': '^ref:[0-9]{6}$',
+                                                               'maxLength': 10},
+                                        'source_reference': {'type': 'string',
+                                                             'pattern': '^ref:[0-9]{6}$',
+                                                             'maxLength': 10},
+                                        'policy_reference': {'type': 'string',
+                                                             'pattern': '^ref:[0-9]{6}$',
+                                                             'maxLength': 10},
+                                        'definitions': {'type': 'array',
+                                                        'items': {'type': 'string',
+                                                                  'pattern': '^ref:[0-9]{6}$',
+                                                                  'maxLength': 10},
+                                                        'maxItems': 16},
+                                        'policy_status': {'type': 'string',
+                                                          'enum': ['DECLARED_REFERENCE_POLICY',
+                                                                   'REJECTED_FOREIGN_POLICY']},
+                                        'ordering': {'type': 'string',
+                                                     'enum': ['CANONICAL_C16_ORDER'],
+                                                     'const': 'CANONICAL_C16_ORDER'},
+                                        'chain_status': {'type': 'string',
+                                                         'enum': ['NOT_CHAIN',
+                                                                  'COMPLETE',
+                                                                  'FAILED_PREFIX']},
+                                        'chain_selections': {'type': 'array',
+                                                             'items': {'type': 'object',
+                                                                       'additionalProperties': False,
+                                                                       'required': ['selection_kind',
+                                                                                    'submitted_identifier_reference',
+                                                                                    'submitted_codeword'],
+                                                                       'properties': {'selection_kind': {'type': 'string',
+                                                                                                         'enum': ['IDENTIFIER',
+                                                                                                                  'CODEWORD']},
+                                                                                      'submitted_identifier_reference': {'anyOf': [{'type': 'string',
+                                                                                                                                    'pattern': '^ref:[0-9]{6}$',
+                                                                                                                                    'maxLength': 10},
+                                                                                                                                   {'type': 'null'}]},
+                                                                                      'submitted_codeword': {'anyOf': [{'type': 'string',
+                                                                                                                        'pattern': '^[01]{9}$',
+                                                                                                                        'maxLength': 9},
+                                                                                                                       {'type': 'null'}]}}},
+                                                             'maxItems': 4},
+                                        'source_proof_references': {'type': 'array',
+                                                                    'items': {'type': 'string',
+                                                                              'pattern': '^ref:[0-9]{6}$',
+                                                                              'maxLength': 10},
+                                                                    'maxItems': 4},
+                                        'step_record_references': {'type': 'array',
+                                                                   'items': {'type': 'array',
+                                                                             'items': {'type': 'string',
+                                                                                       'pattern': '^ref:[0-9]{6}$',
+                                                                                       'maxLength': 10},
+                                                                             'maxItems': 3},
+                                                                   'maxItems': 4},
+                                        'computed_step_count': {'type': 'integer',
+                                                                'minimum': 0,
+                                                                'maximum': 4},
+                                        'failed_index': {'anyOf': [{'type': 'integer',
+                                                                    'minimum': 0,
+                                                                    'maximum': 3},
+                                                                   {'type': 'null'}]},
+                                        'failed_phase': {'anyOf': [{'type': 'string',
+                                                                    'enum': ['VALID_SOURCE',
+                                                                             'SELECTION',
+                                                                             'APPLICABILITY',
+                                                                             'TRANSFORMATION']},
+                                                                   {'type': 'null'}]},
+                                        'last_actual_candidate': {'anyOf': [{'type': 'string',
+                                                                             'pattern': '^[01]{9}$',
+                                                                             'maxLength': 9},
+                                                                            {'type': 'null'}]},
+                                        'chain_failure_code': {'anyOf': [{'type': 'string',
+                                                                          'enum': ['PROFILE_UNAVAILABLE',
+                                                                                   'STATE_NOT_VALID',
+                                                                                   'TRANSITION_UNKNOWN',
+                                                                                   'CODEWORD_NOT_CANONICAL',
+                                                                                   'TRANSITION_NOT_APPLICABLE',
+                                                                                   'CHAIN_TARGET_NOT_VALID']},
+                                                                         {'type': 'null'}]},
+                                        'projection_version': {'const': 'M3_GENERATION_1_0'}}}}
 
 SAFE_CLASSES = {}
 for _kind, _schema in SAFE_SCHEMAS.items():
@@ -1660,7 +2204,17 @@ for _kind, _schema in SAFE_SCHEMAS.items():
     SAFE_CLASSES[_kind] = _cls
     globals()[_name] = _cls
 TYPE_KINDS = {cls: kind for kind, cls in SAFE_CLASSES.items()}
-SAFE_TYPES = tuple(SAFE_CLASSES.values())
+GENERATION_SAFE_CLASSES = {}
+for _kind, _schema in GENERATION_SAFE_SCHEMAS.items():
+    _name = 'SafeGeneration' + ''.join(part.title() for part in _kind.split('_'))
+    _cls = make_dataclass(_name, [(name, object) for name in _schema['properties']],
+        bases=(_SafeValue,), frozen=True, slots=True, namespace={'__module__': __name__})
+    GENERATION_SAFE_CLASSES[_kind] = _cls
+    globals()[_name] = _cls
+TYPE_KINDS.update({cls: kind for kind, cls in GENERATION_SAFE_CLASSES.items()})
+TYPE_SCHEMAS = {cls: SAFE_SCHEMAS[kind] for kind, cls in SAFE_CLASSES.items()}
+TYPE_SCHEMAS.update({cls: GENERATION_SAFE_SCHEMAS[kind] for kind, cls in GENERATION_SAFE_CLASSES.items()})
+SAFE_TYPES = tuple(SAFE_CLASSES.values()) + tuple(GENERATION_SAFE_CLASSES.values())
 
 
 @dataclass(frozen=True, slots=True)
@@ -1673,9 +2227,11 @@ class SafeModuleEvidence:
         _choice(self.kind, tuple(SAFE_CLASSES))
         if type(self.evidence_reference) is not str or re.fullmatch(r'ref:[0-9]{6}', self.evidence_reference, re.ASCII) is None:
             _fail('MODULE_CAPTURE_REJECTED')
-        if type(self.payload) is not SAFE_CLASSES[self.kind]:
+        legacy = SAFE_CLASSES[self.kind]
+        current = GENERATION_SAFE_CLASSES.get(self.kind)
+        if type(self.payload) is not legacy and type(self.payload) is not current:
             _fail('MODULE_CAPTURE_REJECTED')
-        SAFE_CLASSES[self.kind].__post_init__(self.payload)
+        type(self.payload).__post_init__(self.payload)
 
     def to_record(self):
         SafeModuleEvidence.__post_init__(self)

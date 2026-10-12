@@ -109,6 +109,22 @@ def roadmap_definition_errors(roadmap: dict) -> list[str]:
 
 
 def fixture_units(root: Path, relative: str) -> list[str]:
+    if relative in {
+        "examples/core_planner_emitter/planner_emitter_cases.example.json",
+        "examples/core_planner_emitter/planner_emitter_rejections.example.json",
+    }:
+        document = fixtures.load_instance(root / relative)
+        cases = document.get("cases") if isinstance(document, dict) else None
+        if (not isinstance(cases, list) or not 1 <= len(cases) <= 128
+                or any(not isinstance(case, dict) or not isinstance(case.get("value"), dict) for case in cases)):
+            raise ValueError("Planner/emitter format collections need bounded individual object specimens")
+        return ["", *[f"/cases/{index}/value" for index in range(len(cases))]]
+    if relative == "examples/validation_evidence/format_only_examples.json":
+        document = fixtures.load_instance(root / relative)
+        if (not isinstance(document, list) or not 1 <= len(document) <= 64
+                or any(not isinstance(case, dict) for case in document)):
+            raise ValueError("Evidence format collection must contain bounded individual object specimens")
+        return [f"/{index}" for index in range(len(document))]
     if relative == "data/realm/realm_transition_examples.yaml":
         document = fixtures.load_instance(root / relative)
         if not isinstance(document, dict) or not isinstance(document.get("meta"), dict) or document["meta"].get("system") != "realm_transition_examples":
@@ -180,6 +196,11 @@ def fixture_coverage(root: Path, paths: list[str], classification: dict,
         if (item["fixture_id"], item["path"]) not in successful:
             continue
         group = item["instance_pointer"].split("/")[1:2]
+        if (item["path"] == "examples/core_planner_emitter/planner_emitter_rejections.example.json"
+                and group == ["cases"]
+                and (item["category"] != "reject" or item["expected_result"] != "reject")):
+            errors.append(f"Planner/emitter intended rejection differs from binding: {item['fixture_id']}")
+            continue
         if item["path"] in BUNDLE_PATHS and group and group[0] in {"positive", "boundary", "reject"}:
             expected = "reject" if group[0] == "reject" else "accept"
             if item["category"] != group[0] or item["expected_result"] != expected:

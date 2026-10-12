@@ -1,5 +1,5 @@
 {
-  "status": "EXTERNAL_PROPOSED_NOT_ADOPTED",
+  "status": "ADOPTED_CONTRACT_NOT_RUNTIME_ACCEPTANCE",
   "policy_binding": {
     "policy_id": "YWE-SESSION-SAFETY-001",
     "policy_version": "1.1.0",
@@ -214,5 +214,27 @@
     "SessionHistory gains optional module_history omitted when None; original constructor positions and fields preserved for historic pair",
     "Control reservation does not observe clock, allocate aliases or write store during preflight; refused acquisition returns unconfirmed no scope. Actual issued control scope always gets once final attempt, also after seal.",
     "Every actual scope retained independent of receipt status; first receipt/partial prefix immutable. Admission/result claims effects false even after pure candidate construction."
-  ]
+  ],
+  "api_only_constructor_clarifications": [
+    {
+      "owner": "SessionRetentionReceipt",
+      "keyword_only_context": "policy_binding:SessionPolicyBinding|None=None",
+      "historical_default_pinned_supporting_count_maximum": 2544,
+      "exact_current_policy_pinned_supporting_count_maximum": 2663,
+      "wire_fields_preserved": 8,
+      "source_path": "docs/design-planning/m3/current-source-session/RETENTION_CONSTRUCTION_CONTEXT.md",
+      "source_sha256": "0bcf02f09274f58889b316c4fd4c35a686b8de9ae539b16b23c68a957e1593d4",
+      "semantics": "Exact current construction context remains outside dataclass wire fields; every serialization revalidates it; enclosing actual source/policy decides eligibility, and historical/current mismatches refuse. No capture or execution authority."
+    }
+  ],
+  "api_only_behavior_clarifications": [
+    {
+      "owner": "Diagnostics",
+      "port": "complete_assessment",
+      "source_path": "docs/design-planning/m3/current-source-session/FIRST_RESPONSE_READBACK.md",
+      "source_sha256": "44b80703afccad793b9a2398218ccdd48fb364832a81098794a06cd62d5036ef",
+      "semantics": "M3_GENERATION-only exact original finished scope/body/confirmed-prefix association returns actual immutable first response with zero IO; historical None replay unchanged; Core once-cleanup applies same exact-body proof."
+    }
+  ],
+  "implementation_status": "IMPLEMENTED_REFERENCE_CANDIDATE_NOT_EXECUTION_ACCEPTANCE"
 }

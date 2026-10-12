@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m3_acceptance_report_schema.json",
+  "title": "M3 complete acceptance evaluation",
+  "description": "Bounded evaluator output. Structural validity alone grants no acceptance; source-bound clean repository and actual case execution evidence are required.",
+  "x-ywe-requirement-id": "YWE-REQ-0051",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["artifact_type", "artifact_version", "ready", "judgment", "revision", "mapping_sha256", "errors", "invariants", "categories", "modules", "deliverables", "criteria", "excluded_future_core_placeholders"],
+  "properties": {
+    "artifact_type": {"const": "ywe_m3_acceptance_report"},
+    "artifact_version": {"const": "1.0.0"},
+    "ready": {"type": "boolean"},
+    "judgment": {"enum": ["CONFORMANT", "NON-CONFORMANT"]},
+    "revision": {"type": ["string", "null"], "pattern": "^[a-f0-9]{40}$"},
+    "mapping_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+    "errors": {"$ref": "#/$defs/errors"},
+    "invariants": {"type": "array", "maxItems": 28, "items": {"allOf": [{"$ref": "#/$defs/obligation"}, {"properties": {"id": {"pattern": "^INV-[A-Z]+-[0-9]{3}$"}}}]}},
+    "categories": {"type": "array", "maxItems": 5, "items": {"type": "object", "additionalProperties": false,
+      "required": ["id", "status"], "properties": {"id": {"type": "integer", "minimum": 1, "maximum": 5}, "status": {"enum": ["pass", "fail"]}}}},
+    "modules": {"type": "array", "maxItems": 9, "items": {"allOf": [{"$ref": "#/$defs/obligation"}, {"properties": {"id": {"pattern": "^M3-MODULE-[A-Z-]+$"}}}]}},
+    "deliverables": {"type": "array", "maxItems": 7, "items": {"allOf": [{"$ref": "#/$defs/obligation"}, {"properties": {"id": {"pattern": "^M3-D[1-7]$"}}}]}},
+    "criteria": {"type": "array", "maxItems": 5, "items": {"allOf": [{"$ref": "#/$defs/obligation"}, {"properties": {"id": {"pattern": "^M3-C[1-5]$"}}}]}},
+    "excluded_future_core_placeholders": {"type": "array", "maxItems": 128, "items": {"type": "object", "additionalProperties": false,
+      "required": ["path", "milestone", "debt_ref"], "properties": {"path": {"type": "string", "pattern": "^core/[^\\\\]+$"},
+        "milestone": {"type": "string", "pattern": "^M(?:[4-9]|10)$"}, "debt_ref": {"type": ["string", "null"], "minLength": 1}}}}
+  },
+  "$defs": {
+    "errors": {"type": "array", "maxItems": 32768, "items": {"type": "string", "minLength": 1}},
+    "obligation": {"type": "object", "additionalProperties": false, "required": ["id", "text", "status", "errors"],
+      "properties": {"id": {"type": "string", "minLength": 1}, "text": {"type": "string"},
+        "status": {"enum": ["pass", "fail", "unverified"]}, "errors": {"$ref": "#/$defs/errors"}}}
+  },
+  "allOf": [
+    {"if": {"properties": {"ready": {"const": true}}}, "then": {"properties": {
+      "judgment": {"const": "CONFORMANT"}, "revision": {"type": "string"}, "mapping_sha256": {"type": "string"}, "errors": {"maxItems": 0},
+      "invariants": {"minItems": 28, "items": {"properties": {"status": {"const": "pass"}, "errors": {"maxItems": 0}}}},
+      "categories": {"minItems": 5, "items": {"properties": {"status": {"const": "pass"}}}},
+      "modules": {"minItems": 9, "items": {"properties": {"status": {"const": "pass"}, "errors": {"maxItems": 0}}}},
+      "deliverables": {"minItems": 7, "items": {"properties": {"status": {"const": "pass"}, "errors": {"maxItems": 0}}}},
+      "criteria": {"minItems": 5, "items": {"properties": {"status": {"const": "pass"}, "errors": {"maxItems": 0}}}}
+    }}, "else": {"properties": {"judgment": {"const": "NON-CONFORMANT"}}}}
+  ]
+}

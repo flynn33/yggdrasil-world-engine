@@ -1385,5 +1385,30 @@
   "requirement_id": "YWE-REQ-0051",
   "adr_id": "ADR-0043",
   "policy_sha256": "74dfa3b318cd38296c0b86ad9ff5c14e8fb1d7aed5ff1c02274baa4bbd871e91",
-  "schema_sha256": "6038797cd0cb7b2f3882d5bc933ecb3310cba93f08bd5507110f7bf627f33186"
+  "schema_sha256": "6038797cd0cb7b2f3882d5bc933ecb3310cba93f08bd5507110f7bf627f33186",
+  "operational_clarifications": [
+    {
+      "port": "DeterministicPolicy.merge_bias",
+      "terms_type": "tuple[BiasEvent,...]",
+      "weight_mapping": "state-local bias:00..bias:63 ranks in ASCII sorted exact(domain,target) ledger keys",
+      "current_weight_semantics": "decay existing mapped current weights by explicit logical epoch; add only genuinely new event contributions; one final clamp; exact replay never re-adds retained ledger",
+      "source_path": "docs/design-planning/m3/core-domain/CORE_BIAS_WEIGHT_LEDGER_CLARIFICATION.md",
+      "source_sha256": "ba1f830f70b067a2948578e2eb06ab16a13e77e5a0f67345d5da41c576539130",
+      "authored_controls_path": "docs/design-planning/m3/core-domain/CORE_BIAS_LEDGER_AUTHORED_CONTROLS.json",
+      "authored_controls_sha256": "f5604cbd1eac0fa940e0c63772cf2cf7cfbee205a7f67d122fa9f3bb79f828e7"
+    },
+    {
+      "port": "StateModel.apply_normalization",
+      "source_path": "docs/design-planning/m3/core-domain/NORMALIZATION_STOPPED_POST_PREFIX.md",
+      "source_sha256": "966e3e4a6065dc7778c089843933868cc36439e3ab4fdb3da868c8b1ebb24ba4",
+      "semantics": "M3_GENERATION only: null attempted diagnostic represents the exact one-record confirmed computation prefix after revoked or unentered post-validation; preserves actual state/step, requires no post or normalized result and existing unconfirmed failure/code/field. Historical three families remain nonnull."
+    },
+    {
+      "port": "NarrativeEngine.interpret",
+      "source_path": "docs/design-planning/m3/core-domain/PAIR_ID_ENCODING.md",
+      "source_sha256": "bd3c84cd693b4d5c397a13c65a752e58fd89ac8d7988746937ba1bd46ecb9264",
+      "semantics": "Declared unordered pair IDs are pair: plus full lowercase SHA256 of compact ASCII JSON for two exact IDs sorted ASCII, without newline. Declaration permits only coexistence interpretation and retains actual primary relation/penalty; no source/world authority."
+    }
+  ],
+  "implementation_status": "IMPLEMENTED_REFERENCE_CANDIDATE_NOT_EXECUTION_ACCEPTANCE"
 }

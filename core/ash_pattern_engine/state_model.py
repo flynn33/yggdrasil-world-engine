@@ -344,10 +344,49 @@ class StateModel:
         )
 
     def validate_normalization_plan(self, plan):
-        return self._normalization_operations().validate(plan)
+        from .normalization import _NormalizationOperations
+        operations = StateModel._pure_normalization_operations(self)
+        return _NormalizationOperations.validate(operations, plan)
 
-    def apply_normalization(self, plan, *, normalization_context):
-        return self._normalization_operations().apply(plan, normalization_context=normalization_context)
+    def _pure_normalization_operations(self, *, capture=None):
+        from .normalization import _NormalizationOperations
+        from .. import core_values as cv
+        if type(self) is not StateModel:
+            cv._fail('binding', 'CORE_BINDING_MISMATCH')
+        canonical = StateModel.canonical_binding.fget(self)
+        profile = StateModel.profile_binding.fget(self)
+        cv._peer_guard(canonical, set())
+        cv._peer_guard(profile, set())
+        return _NormalizationOperations(profile, canonical,
+            lambda state, evidence: StateModel._diagnose(self, DecodedInput(state, evidence)), capture)
+
+    def apply_normalization(self, plan, *, normalization_context, execution_gate=None):
+        if execution_gate is None:
+            return self._normalization_operations().apply(plan, normalization_context=normalization_context)
+        from .. import core_values as cv
+        from ..module_lifecycle import CoreExecutionGate
+        from . import normalization_values as nv
+        from .normalization import _NormalizationOperations
+        from .diagnostics import ReferenceDevelopmentDiagnostics, ReferenceReleaseDiagnostics
+        # Exact capability checks precede attributes, adapters and user collaborators.
+        if type(execution_gate) is not CoreExecutionGate or type(self) is not StateModel:
+            cv._fail('binding', 'CORE_LIFECYCLE_REJECTED')
+        if type(plan) is not nv.NormalizationPlan or type(normalization_context) is not nv.NormalizationContext:
+            cv._fail('normalization')
+        cv._peer_guard(plan, set())
+        cv._peer_guard(normalization_context, set())
+        collector, reference, canonical, profile, generation = CoreExecutionGate.configuration(execution_gate)
+        if not CoreExecutionGate.validate_issued_for_collector(execution_gate, collector, normalization_context.operation_reference):
+            cv._fail('operation_reference', 'CORE_LIFECYCLE_REJECTED')
+        if not cv._one_of(type(collector), (ReferenceDevelopmentDiagnostics, ReferenceReleaseDiagnostics)):
+            cv._fail('binding', 'CORE_BINDING_MISMATCH')
+        if (cv._wire_digest(canonical) != cv._wire_digest(StateModel.canonical_binding.fget(self)) or
+                cv._wire_digest(profile) != cv._wire_digest(StateModel.profile_binding.fget(self))):
+            cv._fail('binding', 'CORE_BINDING_MISMATCH')
+        capture = type(collector).normalization_capture(collector, execution_gate=execution_gate)
+        operations = StateModel._pure_normalization_operations(self, capture=capture)
+        return _NormalizationOperations.apply(operations, plan, normalization_context=normalization_context,
+                                               execution_gate=execution_gate)
 
     @staticmethod
     def _classify(status, context, evidence):

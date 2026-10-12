@@ -87,7 +87,10 @@ class RoadmapValidationTests(unittest.TestCase):
         text = (ROOT / "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md").read_text(
             encoding="utf-8-sig"
         )
-        drifted = text.replace("Status: `in_progress`", "Status: `planned`", 1)
+        status = self.roadmap["milestones"][0]["status"]
+        wrong_status = "planned" if status != "planned" else "complete"
+        drifted = text.replace(f"Status: `{status}`", f"Status: `{wrong_status}`", 1)
+        self.assertNotEqual(text, drifted)
         errors = roadmap_check.document_errors(drifted, self.roadmap["milestones"])
         self.assertTrue(any("status" in error.lower() for error in errors))
 
@@ -142,6 +145,43 @@ class RoadmapValidationTests(unittest.TestCase):
         self.assertIn("platform-neutral YWE specification has passed", rendered)
         self.assertIn("Platform product work | 🟢 `authorized`", rendered)
         self.assertNotIn("products remain deferred", rendered)
+
+    def test_explicit_owner_pause_keeps_next_milestone_planned_after_accepted_gate(self):
+        changed = copy.deepcopy(self.roadmap)
+        changed["current_milestone"] = "M3"
+        changed["milestones"][3]["status"] = "complete"
+        for milestone in changed["milestones"][4:]:
+            milestone["status"] = "planned"
+        changed["execution_pause"] = {"status": "awaiting_owner_go_ahead", "after_milestone": "M3",
+            "before_milestone": "M4", "reason": "Owner requested a pause after M3 publication before any M4 work."}
+        self.assertEqual([], roadmap_check.milestone_execution_errors(changed))
+        schema = json.loads((ROOT / roadmap_check.ROADMAP_SCHEMA_PATH).read_text())
+        self.assertEqual([], roadmap_check.schema_errors(changed, schema, "pause control"))
+        rendered = roadmap_check.render_readme_status(changed)
+        self.assertIn("Development pause | ⏸️ After `M3`; `M4` remains `planned`", rendered)
+        self.assertIn("| M4 | ⚪ | `planned`", rendered)
+        self.assertNotIn("`M4` —", rendered)
+        for kind in ("unaccepted", "started", "nonadjacent", "wrongcurrent", "laterstarted"):
+            with self.subTest(kind=kind):
+                invalid = copy.deepcopy(changed)
+                if kind == "unaccepted":
+                    invalid["milestones"][3]["status"] = "in_progress"
+                elif kind == "started":
+                    invalid["milestones"][4]["status"] = "in_progress"
+                elif kind == "nonadjacent":
+                    invalid["execution_pause"]["before_milestone"] = "M5"
+                elif kind == "wrongcurrent":
+                    invalid["current_milestone"] = "M4"
+                else:
+                    invalid["milestones"][5]["status"] = "in_progress"
+                self.assertTrue(roadmap_check.milestone_execution_errors(invalid))
+
+    def test_ordinary_milestone_execution_contract_still_requires_one_current_in_progress(self):
+        self.assertEqual([], roadmap_check.milestone_execution_errors(self.roadmap))
+        changed = copy.deepcopy(self.roadmap)
+        changed.pop("execution_pause", None)
+        changed["milestones"][3]["status"] = "complete"
+        self.assertTrue(roadmap_check.milestone_execution_errors(changed))
 
     def test_subsystem_matrix_and_evidence_are_valid(self):
         text = (ROOT / "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md").read_text(
@@ -278,6 +318,50 @@ class PlayerRuntimeReferencePolicyTests(unittest.TestCase):
             "test_m3_realm_transition_values.py", "test_m3_realm_transition.py",
             "test_m3_realm_transition_schemas.py", "test_m3_topology.py", "test_m3_axioms.py",
             "test_m3_generation_values.py", "test_m3_generation_schemas.py", "test_m3_module_diagnostics.py")]
+        self.assertEqual([], self.check_added(paths))
+        spec = copy.deepcopy(self.spec)
+        spec["allowed_added_paths"] = [path for path in spec["allowed_added_paths"] if path not in paths]
+        self.assertEqual([f"Phase 10 added forbidden platform/code file: {path}" for path in paths],
+                         self.check_added(paths, spec))
+
+    def test_remaining_m3_reference_paths_require_both_exact_approvals(self):
+        paths = [
+            "core/core_values.py", "core/deterministic_policy.py", "core/module_lifecycle.py",
+            "core/orchestration.py", "core/cosmology_engine/cosmology.py", "core/realm_engine/realm.py",
+            "core/ash_pattern_engine/core_facade.py", "core/narrative_engine/narrative.py",
+            "core/perception_engine/perception.py",
+            *["core/ash_pattern_engine/" + name + ".py" for name in (
+                "planner_emitter_values", "generation_planner", "artifact_emitter",
+                "memory_document_target", "generation_runner")],
+        ]
+        self.assertEqual([], self.check_added(paths))
+        for path in paths:
+            with self.subTest(path=path):
+                spec = copy.deepcopy(self.spec)
+                spec["allowed_reference_paths"].remove(path)
+                self.assertIn(f"Phase 10 added forbidden platform/code file: {path}",
+                              self.check_added([path], spec))
+                spec["allowed_added_paths"].append(path)
+                self.assertIn(f"Phase 10 allowed_added_paths contains an unapproved Python role/path: {path}",
+                              self.check_added([path], spec))
+                with mock.patch.object(player_runtime_check, "APPROVED_REFERENCE_SOURCES",
+                                       platform_check.APPROVED_REFERENCE_SOURCES - {path}):
+                    self.assertIn(f"Phase 10 added forbidden platform/code file: {path}",
+                                  self.check_added([path]))
+                neighbor = path.removesuffix(".py") + "_runtime.py"
+                self.assertEqual([f"Phase 10 added forbidden platform/code file: {neighbor}"],
+                                 self.check_added([neighbor]))
+
+    def test_remaining_m3_verification_paths_require_explicit_local_approval(self):
+        paths = ["scripts/run_validation_unit_tests.py", "scripts/check_m3_acceptance.py",
+                 "tests/test_m3_current_source_session.py",
+                 "tests/test_run_validation_unit_tests.py", "tests/test_m3_acceptance.py",
+                 *["tests/test_m3_core_" + name + ".py" for name in (
+                     "values", "policy", "lifecycle", "cosmology_realm", "narrative_perception",
+                     "orchestration", "schemas", "conformance")],
+                 *["tests/test_m3_" + name + ".py" for name in (
+                     "transition_chain", "planner_emitter_values", "generation_planner", "artifact_emitter",
+                     "memory_document_target", "generation_runner", "planner_emitter_schemas")]]
         self.assertEqual([], self.check_added(paths))
         spec = copy.deepcopy(self.spec)
         spec["allowed_added_paths"] = [path for path in spec["allowed_added_paths"] if path not in paths]

@@ -124,6 +124,16 @@ class _SessionEngineServices:
     def read_session_history(self, session):
         return self._require().read_session_history(session)
 
+    def diagnose_module_origin(self, state, *, diagnostic_context, execution_gate):
+        return self._require()._diagnose_session_module(self, state,
+            diagnostic_context=diagnostic_context, execution_gate=execution_gate)
+
+    def execute_session_module(self, session, command):
+        return self._require().execute_session_module(session, command)
+
+    def read_session_module_history(self, session):
+        return self._require().read_session_module_history(session)
+
 
 class _GrantedAssessmentCapture:
     """Check stage grants outside collector IO while the actual model captures."""
@@ -227,6 +237,29 @@ class RecoveryEngine:
     def read_session_history(self, session):
         services = self._services()
         return self._lifecycle._history(services, session)
+
+    def execute_session_module(self, session, command):
+        services = self._services()
+        return self._lifecycle._execute_module(services, session, command)
+
+    def read_session_module_history(self, session):
+        services = self._services()
+        return self._lifecycle._module_history(services, session)
+
+    def _diagnose_session_module(self, services, state, *, diagnostic_context, execution_gate):
+        self._session_grant(services, execution_gate, 'MODULE_ORIGIN_DIAGNOSE')
+        capture = type(self._diagnostics).assessment_capture(self._diagnostics, execution_gate=execution_gate)
+        wrapped = _GrantedAssessmentCapture(capture,
+            lambda stage: self._session_grant(services, execution_gate, stage),
+            lambda: self._session_returned(execution_gate))
+        model = StateModel(self._model.profile_binding, self._model.canonical_binding, wrapped)
+        actual = StateModel.diagnose(model, state, diagnostic_context=diagnostic_context)
+        completion = None
+        try:
+            completion = type(self._diagnostics).complete_assessment(self._diagnostics, actual)
+        except (sv.StateContractError, rv.RecoveryContractError):
+            pass
+        return actual, completion
 
     def _session_grant(self, services, gate, stage):
         from . import session_values as values

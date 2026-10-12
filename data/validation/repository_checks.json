@@ -53,9 +53,18 @@
       ]
     },
     {
+      "id": "m3_acceptance_definition",
+      "name": "M3 complete canonical coverage and actual test source definitions",
+      "command": ["{python}", "scripts/check_m3_acceptance.py", "--check-definition", "{root}"],
+      "groups": ["m3", "governance", "conformance"],
+      "roadmap_milestones": ["M3"],
+      "contexts": ["always"],
+      "blocking": true
+    },
+    {
       "id": "validation_unit_tests",
       "name": "Validation foundation unit tests",
-      "command": ["{python}", "-m", "unittest", "discover", "-s", "tests", "-p", "test_*.py"],
+      "command": ["{python}", "scripts/run_validation_unit_tests.py", "discover", "-s", "tests", "-p", "test_*.py"],
       "groups": ["bootstrap", "tests"],
       "roadmap_milestones": ["M0", "M2", "M9"],
       "contexts": ["always"],

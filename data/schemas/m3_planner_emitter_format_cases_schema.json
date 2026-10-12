@@ -1,0 +1,3097 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m3_planner_emitter_format_cases_schema.json",
+  "title": "Bounded authored planner and emitter format controls",
+  "description": "YWE-REQ-0049 authored wire formats and intended refusals only; execution and target effects require separate original-owner evidence.",
+  "x-ywe-requirement-id": "YWE-REQ-0049",
+  "$defs": {
+    "PlannerEmitterPolicyBinding": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerEmitterPolicyBinding",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "PlannerEmitterBinding": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerEmitterBinding",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "GenerationInputs": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/GenerationInputs",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "TargetConstraints": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/TargetConstraints",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "RoleAssignment": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/RoleAssignment",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "PlanMetadata": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlanMetadata",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "ManifestRow": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/ManifestRow",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "ReferenceManifestDocument": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/ReferenceManifestDocument",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "ArtifactDescription": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/ArtifactDescription",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "ReferenceGenerationPlan": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/ReferenceGenerationPlan",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "ChainStep": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/ChainStep",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "ChainRecord": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/ChainRecord",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "ChainDiagnosticEmission": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/ChainDiagnosticEmission",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "ChainEnvelope": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/ChainEnvelope",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "TransitionChainResult": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/TransitionChainResult",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "TransitionChainFailure": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/TransitionChainFailure",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "PlannerRequest": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerRequest",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "PlanDiagnostic": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlanDiagnostic",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "MemoryTargetConfiguration": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/MemoryTargetConfiguration",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "MaterializedDocument": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/MaterializedDocument",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "TargetSnapshot": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/TargetSnapshot",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "EmissionPreparationReceipt": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/EmissionPreparationReceipt",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "EmitterRequest": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/EmitterRequest",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "MemoryTargetReceipt": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/MemoryTargetReceipt",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "EmissionDispatchDiagnostic": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/EmissionDispatchDiagnostic",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "EmissionOutcomeDiagnostic": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/EmissionOutcomeDiagnostic",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "EmissionSummaryDiagnostic": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/EmissionSummaryDiagnostic",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "PlannerEmitterEnvelope": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerEmitterEnvelope",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "PlannerEmitterRecord": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerEmitterRecord",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "PendingPlannerEmitterDiagnostic": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PendingPlannerEmitterDiagnostic",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "PlannerResult": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerResult",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "PlannerFailure": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerFailure",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "EmitterResult": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/EmitterResult",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "PlannerEmitterCaptureReceipt": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerEmitterCaptureReceipt",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "GenerationDependencyCaptureReceipt": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/GenerationDependencyCaptureReceipt",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "GenerationRunReceipt": {
+      "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/GenerationRunReceipt",
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "FormatCases": {
+      "type": "object",
+      "required": [
+        "schema_ref",
+        "artifact_version",
+        "artifact_type",
+        "evidence_scope",
+        "cases"
+      ],
+      "properties": {
+        "schema_ref": {
+          "const": "data/schemas/m3_planner_emitter_schema.json"
+        },
+        "artifact_version": {
+          "const": "1.0.0"
+        },
+        "artifact_type": {
+          "const": "ywe_planner_emitter_format_cases"
+        },
+        "evidence_scope": {
+          "const": "AUTHORED_WIRE_FORMAT_ONLY_NO_PERSISTENCE_OR_LIVE_EFFECT_CLAIM"
+        },
+        "cases": {
+          "type": "array",
+          "minItems": 39,
+          "maxItems": 39,
+          "prefixItems": [
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerEmitterPolicyBinding:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "PlannerEmitterPolicyBinding"
+                },
+                "value": {
+                  "$ref": "#/$defs/PlannerEmitterPolicyBinding"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerEmitterBinding:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "PlannerEmitterBinding"
+                },
+                "value": {
+                  "$ref": "#/$defs/PlannerEmitterBinding"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "GenerationInputs:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "GenerationInputs"
+                },
+                "value": {
+                  "$ref": "#/$defs/GenerationInputs"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "TargetConstraints:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "TargetConstraints"
+                },
+                "value": {
+                  "$ref": "#/$defs/TargetConstraints"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "RoleAssignment:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "RoleAssignment"
+                },
+                "value": {
+                  "$ref": "#/$defs/RoleAssignment"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlanMetadata:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "PlanMetadata"
+                },
+                "value": {
+                  "$ref": "#/$defs/PlanMetadata"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ManifestRow:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "ManifestRow"
+                },
+                "value": {
+                  "$ref": "#/$defs/ManifestRow"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ReferenceManifestDocument:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "ReferenceManifestDocument"
+                },
+                "value": {
+                  "$ref": "#/$defs/ReferenceManifestDocument"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ArtifactDescription:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "ArtifactDescription"
+                },
+                "value": {
+                  "$ref": "#/$defs/ArtifactDescription"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ReferenceGenerationPlan:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "ReferenceGenerationPlan"
+                },
+                "value": {
+                  "$ref": "#/$defs/ReferenceGenerationPlan"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ChainStep:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "ChainStep"
+                },
+                "value": {
+                  "$ref": "#/$defs/ChainStep"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ChainRecord:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "ChainRecord"
+                },
+                "value": {
+                  "$ref": "#/$defs/ChainRecord"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ChainDiagnosticEmission:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "ChainDiagnosticEmission"
+                },
+                "value": {
+                  "$ref": "#/$defs/ChainDiagnosticEmission"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ChainEnvelope:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "ChainEnvelope"
+                },
+                "value": {
+                  "$ref": "#/$defs/ChainEnvelope"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "TransitionChainResult:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "TransitionChainResult"
+                },
+                "value": {
+                  "$ref": "#/$defs/TransitionChainResult"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "TransitionChainFailure:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "TransitionChainFailure"
+                },
+                "value": {
+                  "$ref": "#/$defs/TransitionChainFailure"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerRequest:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "PlannerRequest"
+                },
+                "value": {
+                  "$ref": "#/$defs/PlannerRequest"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlanDiagnostic:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "PlanDiagnostic"
+                },
+                "value": {
+                  "$ref": "#/$defs/PlanDiagnostic"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "MemoryTargetConfiguration:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "MemoryTargetConfiguration"
+                },
+                "value": {
+                  "$ref": "#/$defs/MemoryTargetConfiguration"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "MaterializedDocument:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "MaterializedDocument"
+                },
+                "value": {
+                  "$ref": "#/$defs/MaterializedDocument"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "TargetSnapshot:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "TargetSnapshot"
+                },
+                "value": {
+                  "$ref": "#/$defs/TargetSnapshot"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmissionPreparationReceipt:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "EmissionPreparationReceipt"
+                },
+                "value": {
+                  "$ref": "#/$defs/EmissionPreparationReceipt"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmitterRequest:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "EmitterRequest"
+                },
+                "value": {
+                  "$ref": "#/$defs/EmitterRequest"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "MemoryTargetReceipt:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "MemoryTargetReceipt"
+                },
+                "value": {
+                  "$ref": "#/$defs/MemoryTargetReceipt"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmissionDispatchDiagnostic:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "EmissionDispatchDiagnostic"
+                },
+                "value": {
+                  "$ref": "#/$defs/EmissionDispatchDiagnostic"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmissionOutcomeDiagnostic:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "EmissionOutcomeDiagnostic"
+                },
+                "value": {
+                  "$ref": "#/$defs/EmissionOutcomeDiagnostic"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmissionSummaryDiagnostic:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "EmissionSummaryDiagnostic"
+                },
+                "value": {
+                  "$ref": "#/$defs/EmissionSummaryDiagnostic"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerEmitterEnvelope:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "PlannerEmitterEnvelope"
+                },
+                "value": {
+                  "$ref": "#/$defs/PlannerEmitterEnvelope"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerEmitterRecord:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "PlannerEmitterRecord"
+                },
+                "value": {
+                  "$ref": "#/$defs/PlannerEmitterRecord"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PendingPlannerEmitterDiagnostic:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "PendingPlannerEmitterDiagnostic"
+                },
+                "value": {
+                  "$ref": "#/$defs/PendingPlannerEmitterDiagnostic"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerResult:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "PlannerResult"
+                },
+                "value": {
+                  "$ref": "#/$defs/PlannerResult"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerFailure:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "PlannerFailure"
+                },
+                "value": {
+                  "$ref": "#/$defs/PlannerFailure"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmitterResult:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "EmitterResult"
+                },
+                "value": {
+                  "$ref": "#/$defs/EmitterResult"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerEmitterCaptureReceipt:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "PlannerEmitterCaptureReceipt"
+                },
+                "value": {
+                  "$ref": "#/$defs/PlannerEmitterCaptureReceipt"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "GenerationDependencyCaptureReceipt:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "GenerationDependencyCaptureReceipt"
+                },
+                "value": {
+                  "$ref": "#/$defs/GenerationDependencyCaptureReceipt"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "GenerationRunReceipt:owned_shape"
+                },
+                "schema_definition": {
+                  "const": "GenerationRunReceipt"
+                },
+                "value": {
+                  "$ref": "#/$defs/GenerationRunReceipt"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "minimum-target-limits"
+                },
+                "schema_definition": {
+                  "const": "TargetConstraints"
+                },
+                "value": {
+                  "$ref": "#/$defs/TargetConstraints"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "max-depth-input"
+                },
+                "schema_definition": {
+                  "const": "GenerationInputs"
+                },
+                "value": {
+                  "$ref": "#/$defs/GenerationInputs"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "uint64-target-empty"
+                },
+                "schema_definition": {
+                  "const": "TargetSnapshot"
+                },
+                "value": {
+                  "$ref": "#/$defs/TargetSnapshot"
+                }
+              },
+              "additionalProperties": false
+            }
+          ],
+          "items": false
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    },
+    "RejectionCases": {
+      "type": "object",
+      "required": [
+        "schema_ref",
+        "artifact_version",
+        "artifact_type",
+        "evidence_scope",
+        "cases"
+      ],
+      "properties": {
+        "schema_ref": {
+          "const": "data/schemas/m3_planner_emitter_schema.json"
+        },
+        "artifact_version": {
+          "const": "1.0.0"
+        },
+        "artifact_type": {
+          "const": "ywe_planner_emitter_rejection_cases"
+        },
+        "evidence_scope": {
+          "const": "AUTHORED_REJECTION_CONTROL_ONLY_NO_RUNTIME_EFFECT_CLAIM"
+        },
+        "cases": {
+          "type": "array",
+          "minItems": 72,
+          "maxItems": 72,
+          "prefixItems": [
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerEmitterPolicyBinding:unknown"
+                },
+                "schema_definition": {
+                  "const": "PlannerEmitterPolicyBinding"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerEmitterPolicyBinding:missing"
+                },
+                "schema_definition": {
+                  "const": "PlannerEmitterPolicyBinding"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerEmitterBinding:unknown"
+                },
+                "schema_definition": {
+                  "const": "PlannerEmitterBinding"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerEmitterBinding:missing"
+                },
+                "schema_definition": {
+                  "const": "PlannerEmitterBinding"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "GenerationInputs:unknown"
+                },
+                "schema_definition": {
+                  "const": "GenerationInputs"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "GenerationInputs:missing"
+                },
+                "schema_definition": {
+                  "const": "GenerationInputs"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "TargetConstraints:unknown"
+                },
+                "schema_definition": {
+                  "const": "TargetConstraints"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "TargetConstraints:missing"
+                },
+                "schema_definition": {
+                  "const": "TargetConstraints"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "RoleAssignment:unknown"
+                },
+                "schema_definition": {
+                  "const": "RoleAssignment"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "RoleAssignment:missing"
+                },
+                "schema_definition": {
+                  "const": "RoleAssignment"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlanMetadata:unknown"
+                },
+                "schema_definition": {
+                  "const": "PlanMetadata"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlanMetadata:missing"
+                },
+                "schema_definition": {
+                  "const": "PlanMetadata"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ManifestRow:unknown"
+                },
+                "schema_definition": {
+                  "const": "ManifestRow"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ManifestRow:missing"
+                },
+                "schema_definition": {
+                  "const": "ManifestRow"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ReferenceManifestDocument:unknown"
+                },
+                "schema_definition": {
+                  "const": "ReferenceManifestDocument"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ReferenceManifestDocument:missing"
+                },
+                "schema_definition": {
+                  "const": "ReferenceManifestDocument"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ArtifactDescription:unknown"
+                },
+                "schema_definition": {
+                  "const": "ArtifactDescription"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ArtifactDescription:missing"
+                },
+                "schema_definition": {
+                  "const": "ArtifactDescription"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ReferenceGenerationPlan:unknown"
+                },
+                "schema_definition": {
+                  "const": "ReferenceGenerationPlan"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ReferenceGenerationPlan:missing"
+                },
+                "schema_definition": {
+                  "const": "ReferenceGenerationPlan"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ChainStep:unknown"
+                },
+                "schema_definition": {
+                  "const": "ChainStep"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ChainStep:missing"
+                },
+                "schema_definition": {
+                  "const": "ChainStep"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ChainRecord:unknown"
+                },
+                "schema_definition": {
+                  "const": "ChainRecord"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ChainRecord:missing"
+                },
+                "schema_definition": {
+                  "const": "ChainRecord"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ChainDiagnosticEmission:unknown"
+                },
+                "schema_definition": {
+                  "const": "ChainDiagnosticEmission"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ChainDiagnosticEmission:missing"
+                },
+                "schema_definition": {
+                  "const": "ChainDiagnosticEmission"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ChainEnvelope:unknown"
+                },
+                "schema_definition": {
+                  "const": "ChainEnvelope"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "ChainEnvelope:missing"
+                },
+                "schema_definition": {
+                  "const": "ChainEnvelope"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "TransitionChainResult:unknown"
+                },
+                "schema_definition": {
+                  "const": "TransitionChainResult"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "TransitionChainResult:missing"
+                },
+                "schema_definition": {
+                  "const": "TransitionChainResult"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "TransitionChainFailure:unknown"
+                },
+                "schema_definition": {
+                  "const": "TransitionChainFailure"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "TransitionChainFailure:missing"
+                },
+                "schema_definition": {
+                  "const": "TransitionChainFailure"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerRequest:unknown"
+                },
+                "schema_definition": {
+                  "const": "PlannerRequest"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerRequest:missing"
+                },
+                "schema_definition": {
+                  "const": "PlannerRequest"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlanDiagnostic:unknown"
+                },
+                "schema_definition": {
+                  "const": "PlanDiagnostic"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlanDiagnostic:missing"
+                },
+                "schema_definition": {
+                  "const": "PlanDiagnostic"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "MemoryTargetConfiguration:unknown"
+                },
+                "schema_definition": {
+                  "const": "MemoryTargetConfiguration"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "MemoryTargetConfiguration:missing"
+                },
+                "schema_definition": {
+                  "const": "MemoryTargetConfiguration"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "MaterializedDocument:unknown"
+                },
+                "schema_definition": {
+                  "const": "MaterializedDocument"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "MaterializedDocument:missing"
+                },
+                "schema_definition": {
+                  "const": "MaterializedDocument"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "TargetSnapshot:unknown"
+                },
+                "schema_definition": {
+                  "const": "TargetSnapshot"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "TargetSnapshot:missing"
+                },
+                "schema_definition": {
+                  "const": "TargetSnapshot"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmissionPreparationReceipt:unknown"
+                },
+                "schema_definition": {
+                  "const": "EmissionPreparationReceipt"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmissionPreparationReceipt:missing"
+                },
+                "schema_definition": {
+                  "const": "EmissionPreparationReceipt"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmitterRequest:unknown"
+                },
+                "schema_definition": {
+                  "const": "EmitterRequest"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmitterRequest:missing"
+                },
+                "schema_definition": {
+                  "const": "EmitterRequest"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "MemoryTargetReceipt:unknown"
+                },
+                "schema_definition": {
+                  "const": "MemoryTargetReceipt"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "MemoryTargetReceipt:missing"
+                },
+                "schema_definition": {
+                  "const": "MemoryTargetReceipt"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmissionDispatchDiagnostic:unknown"
+                },
+                "schema_definition": {
+                  "const": "EmissionDispatchDiagnostic"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmissionDispatchDiagnostic:missing"
+                },
+                "schema_definition": {
+                  "const": "EmissionDispatchDiagnostic"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmissionOutcomeDiagnostic:unknown"
+                },
+                "schema_definition": {
+                  "const": "EmissionOutcomeDiagnostic"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmissionOutcomeDiagnostic:missing"
+                },
+                "schema_definition": {
+                  "const": "EmissionOutcomeDiagnostic"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmissionSummaryDiagnostic:unknown"
+                },
+                "schema_definition": {
+                  "const": "EmissionSummaryDiagnostic"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmissionSummaryDiagnostic:missing"
+                },
+                "schema_definition": {
+                  "const": "EmissionSummaryDiagnostic"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerEmitterEnvelope:unknown"
+                },
+                "schema_definition": {
+                  "const": "PlannerEmitterEnvelope"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerEmitterEnvelope:missing"
+                },
+                "schema_definition": {
+                  "const": "PlannerEmitterEnvelope"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerEmitterRecord:unknown"
+                },
+                "schema_definition": {
+                  "const": "PlannerEmitterRecord"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerEmitterRecord:missing"
+                },
+                "schema_definition": {
+                  "const": "PlannerEmitterRecord"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PendingPlannerEmitterDiagnostic:unknown"
+                },
+                "schema_definition": {
+                  "const": "PendingPlannerEmitterDiagnostic"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PendingPlannerEmitterDiagnostic:missing"
+                },
+                "schema_definition": {
+                  "const": "PendingPlannerEmitterDiagnostic"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerResult:unknown"
+                },
+                "schema_definition": {
+                  "const": "PlannerResult"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerResult:missing"
+                },
+                "schema_definition": {
+                  "const": "PlannerResult"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerFailure:unknown"
+                },
+                "schema_definition": {
+                  "const": "PlannerFailure"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerFailure:missing"
+                },
+                "schema_definition": {
+                  "const": "PlannerFailure"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmitterResult:unknown"
+                },
+                "schema_definition": {
+                  "const": "EmitterResult"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "EmitterResult:missing"
+                },
+                "schema_definition": {
+                  "const": "EmitterResult"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerEmitterCaptureReceipt:unknown"
+                },
+                "schema_definition": {
+                  "const": "PlannerEmitterCaptureReceipt"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "PlannerEmitterCaptureReceipt:missing"
+                },
+                "schema_definition": {
+                  "const": "PlannerEmitterCaptureReceipt"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "GenerationDependencyCaptureReceipt:unknown"
+                },
+                "schema_definition": {
+                  "const": "GenerationDependencyCaptureReceipt"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "GenerationDependencyCaptureReceipt:missing"
+                },
+                "schema_definition": {
+                  "const": "GenerationDependencyCaptureReceipt"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "GenerationRunReceipt:unknown"
+                },
+                "schema_definition": {
+                  "const": "GenerationRunReceipt"
+                },
+                "expected_keyword": {
+                  "const": "additionalProperties"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "case_id",
+                "schema_definition",
+                "expected_keyword",
+                "expected_path",
+                "value"
+              ],
+              "properties": {
+                "case_id": {
+                  "const": "GenerationRunReceipt:missing"
+                },
+                "schema_definition": {
+                  "const": "GenerationRunReceipt"
+                },
+                "expected_keyword": {
+                  "const": "required"
+                },
+                "expected_path": {
+                  "const": ""
+                },
+                "value": {
+                  "type": "object",
+                  "maxProperties": 64
+                }
+              },
+              "additionalProperties": false
+            }
+          ],
+          "items": false
+        }
+      },
+      "additionalProperties": false,
+      "x-ywe-requirement-id": "YWE-REQ-0049"
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/FormatCases"
+    },
+    {
+      "$ref": "#/$defs/RejectionCases"
+    }
+  ]
+}

@@ -1339,7 +1339,8 @@
         "tests/test_m3_module_diagnostics.py",
         "examples/core_module_diagnostics/module_capture_cases.example.json",
         "examples/core_module_diagnostics/module_capture_rejections.example.json",
-        "examples/core_module_diagnostics/module_safe_graph.example.json"
+        "examples/core_module_diagnostics/module_safe_graph.example.json",
+        "docs/design-planning/m3/module-diagnostics/SCOPE_CONTEXT_AUTHENTICATION.md"
       ]
     },
     {
@@ -1352,7 +1353,9 @@
       "verification_refs": [
         "docs/design-planning/m3/planner-emitter/ADOPTION_DEFINITION_SPECIMENS.json",
         "docs/design-planning/m3/planner-emitter/ADOPTION_WIRE_SPECIMENS.json",
-        "docs/design-planning/m3/planner-emitter/BOUND_REPORT.json"
+        "docs/design-planning/m3/planner-emitter/BOUND_REPORT.json",
+        "examples/core_planner_emitter/planner_emitter_cases.example.json",
+        "examples/core_planner_emitter/planner_emitter_rejections.example.json"
       ],
       "aliases": [],
       "supersedes": [
@@ -1368,7 +1371,14 @@
         "docs/architecture/m3_generation_source_compatibility_contract.md",
         "docs/architecture/m3_planner_emitter_contract.md",
         "docs/architecture/m3_planner_emitter_reference_policy.md",
-        "docs/design-planning/m3/planner-emitter/SOURCE_EXTENSION_INVENTORY.json"
+        "docs/design-planning/m3/planner-emitter/SOURCE_EXTENSION_INVENTORY.json",
+        "docs/design-planning/m3/planner-emitter/PREPARED_EMISSION_ORIGIN_AND_DEPENDENCY.md",
+        "docs/design-planning/m3/planner-emitter/PREPARATION_RELEASE.md",
+        "docs/design-planning/m3/planner-emitter/EMITTER_COMPOSITION_VALIDATION.md",
+        "docs/design-planning/m3/planner-emitter/EMITTER_CONTROL_EXPECTED_COMPOSITION.md",
+        "docs/design-planning/m3/planner-emitter/RUNNER_CONFIGURATION_EXPECTATIONS.md",
+        "docs/design-planning/m3/module-diagnostics/SCOPE_CONTEXT_AUTHENTICATION.md",
+        "data/schemas/m3_planner_emitter_format_cases_schema.json"
       ]
     },
     {
@@ -1395,7 +1405,9 @@
         "docs/architecture/m3_current_source_session_contract.md",
         "docs/architecture/m3_module_session_lifecycle_policy.md",
         "docs/design-planning/m3/current-source-session/SOURCE_POLICY_COMPATIBILITY.json",
-        "docs/design-planning/m3/current-source-session/SAFE_FIELDS_AND_LIMITS.json"
+        "docs/design-planning/m3/current-source-session/SAFE_FIELDS_AND_LIMITS.json",
+        "docs/design-planning/m3/current-source-session/RETENTION_CONSTRUCTION_CONTEXT.md",
+        "docs/design-planning/m3/module-diagnostics/SCOPE_CONTEXT_AUTHENTICATION.md"
       ]
     },
     {
@@ -1408,7 +1420,9 @@
       "verification_refs": [
         "docs/design-planning/m3/core-domain/CORE_CANONICAL_INVARIANT_MAP.json",
         "docs/design-planning/m3/core-domain/CORE_NUMERIC_BOUNDARIES.json",
-        "docs/design-planning/m3/core-domain/CORE_STAGE_COUNT_AND_HAPPY_PROTOCOL_PROOF.json"
+        "docs/design-planning/m3/core-domain/CORE_STAGE_COUNT_AND_HAPPY_PROTOCOL_PROOF.json",
+        "tests/test_run_validation_unit_tests.py",
+        "tests/test_m3_acceptance.py"
       ],
       "aliases": [],
       "supersedes": [],
@@ -1423,7 +1437,16 @@
         "docs/design-planning/m3/core-domain/CORE_API_INVENTORY.json",
         "docs/design-planning/m3/core-domain/CORE_POLICY.json",
         "docs/design-planning/m3/core-domain/CORE_GATES_AND_NORMALIZATION.md",
-        "core/ash_pattern_engine/canonical/verification/implementation-acceptance.md"
+        "core/ash_pattern_engine/canonical/verification/implementation-acceptance.md",
+        "docs/design-planning/m3/core-domain/CORE_BIAS_WEIGHT_LEDGER_CLARIFICATION.md",
+        "data/schemas/unit_case_evidence_schema.json",
+        "data/schemas/m3_acceptance_report_schema.json",
+        "docs/design-planning/m3/core-domain/NORMALIZATION_STOPPED_POST_PREFIX.md",
+        "docs/design-planning/m3/current-source-session/FIRST_RESPONSE_READBACK.md",
+        "data/schemas/m3_core_wire_format_cases_schema.json",
+        "data/schemas/m3_historical_acceptance_evidence_schema.json",
+        "docs/design-planning/m3/core-domain/PAIR_ID_ENCODING.md",
+        "data/schemas/m3_core_domain_schema.json"
       ]
     }
   ],

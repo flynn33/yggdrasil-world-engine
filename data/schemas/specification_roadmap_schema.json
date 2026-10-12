@@ -56,6 +56,17 @@
       "type": "string",
       "pattern": "^M(?:[0-9]|10)$"
     },
+    "execution_pause": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "after_milestone", "before_milestone", "reason"],
+      "properties": {
+        "status": {"const": "awaiting_owner_go_ahead"},
+        "after_milestone": {"type": "string", "pattern": "^M[0-9]$"},
+        "before_milestone": {"type": "string", "pattern": "^M(?:[1-9]|10)$"},
+        "reason": {"type": "string", "minLength": 20, "maxLength": 512}
+      }
+    },
     "status_vocabulary": {
       "type": "array",
       "minItems": 5,

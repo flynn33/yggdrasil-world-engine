@@ -67,10 +67,23 @@ MODULE_CANONICAL_BINDING_FIELDS: tuple[tuple[str, str], ...] = (
     ("diagnostic_source_sha256", "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"),
     ("taxonomy_source_sha256", "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"),
 )
+# Compound generation is a fourth complete vector, not a module alias.
+GENERATION_CANONICAL_BINDING_FIELDS: tuple[tuple[str, str], ...] = (
+    ("dependency_id", "ash_cosmological_model.f2_9.canonical"),
+    ("aggregate_sha256", "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8"),
+    ("state_space_sha256", "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"),
+    ("codeword_source_sha256", "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"),
+    ("validity_source_sha256", "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e"),
+    ("classification_source_sha256", "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff"),
+    ("recovery_source_sha256", "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd"),
+    ("diagnostic_source_sha256", "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"),
+    ("taxonomy_source_sha256", "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"),
+)
 CANONICAL_BINDING_BASELINES: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
     ("LEGACY_C78", CANONICAL_BINDING_FIELDS),
     ("N3_LIFECYCLE", CURRENT_CANONICAL_BINDING_FIELDS),
     ("M3_MODULES", MODULE_CANONICAL_BINDING_FIELDS),
+    ("M3_GENERATION", GENERATION_CANONICAL_BINDING_FIELDS),
 )
 DIAGNOSTIC_ROWS: tuple[tuple[str, str, str, str, bool], ...] = (
     ("VALID", "COMPATIBLE", "ALREADY_VALID", "NO_RECOVERY_NEEDED", True),
@@ -866,7 +879,7 @@ class _StatePacket:
             raise StateContractError(code, "emitted_diagnostics")
 
     def _common_record(self) -> dict[str, object]:
-        return {"schema_ref": self.schema_ref, "artifact_type": self.artifact_type,
+        return {"schema_ref": wire_schema(self), "artifact_type": self.artifact_type,
                 "artifact_version": self.artifact_version, "outcome": self.outcome,
                 "assessment_binding": self.assessment_binding.to_record(),
                 "source_binding": self.source_binding.to_record(), "profile_binding": self.profile_binding.to_record(),
@@ -1088,3 +1101,15 @@ class DiagnosisValidation:
             "derived_diagnostic": None if self.derived_diagnostic is None else _diagnosis_record(self.derived_diagnostic),
             "failure_code": self.failure_code, "failed_field": self.failed_field,
         }
+
+
+def wire_schema(value) -> str:
+    """Select the packet family from an exact complete source binding."""
+    kinds = (StateDiagnosis, StateAssessment, ClassificationEvidenceFailure,
+             DiagnosticCaptureFailure)
+    if not any(type(value) is kind for kind in kinds):
+        raise StateContractError("DIAGNOSTIC_ROW_INVALID", "source_binding")
+    type(value).__post_init__(value)
+    baseline = canonical_source_baseline(value.source_binding)
+    return ("data/schemas/m3_generation_state_schema.json" if baseline == "M3_GENERATION"
+            else "data/schemas/m3_state_assessment_schema.json")

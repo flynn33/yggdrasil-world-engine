@@ -164,6 +164,19 @@ def _apply(owner, origin, selection, operation_reference):
 
 
 def _validate_owned(owner, expected, result):
+    from . import planner_emitter_values as pe
+    if type(result) is pe.TransitionChainResult or type(result) is pe.TransitionChainFailure:
+        if expected is not TransitionRegistry:
+            return False
+        try:
+            binding = _configuration(owner, expected)
+            if not pe._result_is_owned(result, owner, (pe.TransitionChainResult, pe.TransitionChainFailure)) or result.binding != binding:
+                return False
+            fresh = _chain(owner, result.origin, result.selections, result.operation_reference)
+            return pe.canonical_bytes(result) == pe.canonical_bytes(fresh)
+        except (pe.PlannerEmitterContractError, values.RealmTransitionContractError,
+                state.StateContractError, AttributeError, TypeError, ValueError):
+            return False
     if not any(type(result) is kind for kind in values.RESULT_TYPES):
         return False
     cookie = getattr(result, "_cookie", None)
@@ -241,6 +254,93 @@ class TransitionRegistry:
     def apply(self, origin, selection, *, operation_reference):
         return _apply(self, origin, selection, operation_reference)
 
+    def apply_chain(self, origin, selections, *, operation_reference):
+        return _chain(self, origin, selections, operation_reference)
+
+
+class _ChainRecords:
+    __slots__ = ("operation", "origin", "records")
+
+    def __init__(self, operation, origin):
+        self.operation, self.origin, self.records = operation, origin, []
+
+    def append(self, phase, payload, *, failed=False):
+        from . import planner_emitter_values as pe
+        reference = values.record_reference(self.operation, len(self.records))
+        root = self.origin.emitted_diagnostics[0]
+        previous = root.envelope if not self.records else self.records[-1].emission.envelope
+        severity = max((previous.severity, "ERROR" if failed else "INFO"), key=values.SEVERITIES.index)
+        rules = (("ASH-STATE-VALIDITY-001", "ASH-CODEWORD-REGISTRY-001") if phase == "VALID_SOURCE" else
+                 ("ASH-CODEWORD-TRANSFORMATION-001", "ASH-STATE-VALIDITY-001") if phase == "TRANSFORMATION" else
+                 values.PHASE_RULES[phase])
+        summaries = {"VALID_SOURCE": "Strict chain source validity evaluated.",
+                     "SELECTION": "Canonical chain selection evaluated.",
+                     "APPLICABILITY": "Actual candidate applicability evaluated.",
+                     "TRANSFORMATION": "Full XOR and strict target validity evaluated."}
+        notes = {"VALID_SOURCE": "The current complete diagnosis and profile govern chain admission.",
+                 "SELECTION": "Selection uses the exact canonical catalog and requested order.",
+                 "APPLICABILITY": "The declared mask is indexed by the actual intermediate candidate.",
+                 "TRANSFORMATION": "Only this exact already evaluated VALID proof permits the next step."}
+        envelope = pe.ChainEnvelope("TRANSITION", severity, "PROCESSING", "BLOCKED" if failed else "RESOLVED",
+                   root.envelope.subject_reference,
+                   root.diagnostic_reference if not self.records else self.records[-1].record_reference,
+                   root.envelope.chain_root_reference, rules, summaries[phase], (notes[phase],))
+        record = pe.ChainRecord(reference, phase, pe.ChainDiagnosticEmission(reference, envelope), payload)
+        self.records.append(record)
+        return reference
+
+
+def _chain(owner, origin, selections, operation_reference):
+    from . import planner_emitter_values as pe
+    pe._ref(operation_reference, maximum=160)
+    if type(selections) is not tuple or len(selections) > 4:
+        pe._fail("selections")
+    for selection in selections:
+        values._exact(selection, values.TransitionSelection, "transition_selection")
+        values.revalidate_value(selection)
+    binding, validation = _origin(owner, TransitionRegistry, origin, operation_reference)
+    if state.canonical_source_baseline(binding.canonical_binding) != "M3_GENERATION":
+        pe._fail("binding", "SOURCE_UNRECOGNIZED")
+    builder = _ChainRecords(operation_reference, origin)
+    steps = []
+    current = origin.parsed_state
+
+    def failure(index, phase, code):
+        result = pe.TransitionChainFailure(operation_reference, binding, origin, validation, selections,
+                 tuple(steps), current, tuple(builder.records), index, phase, code, "FAILED_PREFIX")
+        return pe._seal_result(result, owner)
+
+    if not _gate(origin, builder):
+        return failure(None, "VALID_SOURCE", _source_failure(binding))
+    for index, selection in enumerate(selections):
+        definition = next((item for item in owner._catalog.definitions if
+                           item.transition_id == selection.transition_id), None) if selection.selection_kind == "IDENTIFIER" else next(
+                           (item for item in owner._catalog.definitions if item.codeword == selection.codeword), None)
+        if definition is None:
+            code = "TRANSITION_UNKNOWN" if selection.selection_kind == "IDENTIFIER" else "CODEWORD_NOT_CANONICAL"
+            builder.append("SELECTION", values.TransitionSelectionObservation(selection, None, None, "REFUSED", code), failed=True)
+            return failure(index, "SELECTION", code)
+        observation = values.TransitionSelectionObservation(selection, definition.transition_id, definition.codeword, "SELECTED", None)
+        selection_ref = builder.append("SELECTION", observation)
+        applicability = _applicability(definition, current)
+        applicability_ref = builder.append("APPLICABILITY", applicability, failed=not applicability.is_applicable)
+        if not applicability.is_applicable:
+            return failure(index, "APPLICABILITY", "TRANSITION_NOT_APPLICABLE")
+        before = current
+        current = state.AshState(tuple(bit ^ code for bit, code in zip(before.bits, definition.codeword.bits)))
+        target = StateModel.inspect_state(owner._model, current)
+        transformation = values.TransitionTransformationObservation(definition.transition_id, definition.codeword, before, current, target)
+        transformation_ref = builder.append("TRANSFORMATION", transformation, failed=not target.is_valid)
+        proof_ref = origin.emitted_diagnostics[0].diagnostic_reference if index == 0 else steps[-1].record_references[-1]
+        steps.append(pe.ChainStep(index, before, proof_ref, selection, definition, observation, applicability,
+                                 transformation, (selection_ref, applicability_ref, transformation_ref)))
+        if not target.is_valid:
+            return failure(index, "TRANSFORMATION", "CHAIN_TARGET_NOT_VALID")
+    final = steps[-1].transformation_observation.target_diagnosis if steps else origin.state_validity_diagnostic
+    result = pe.TransitionChainResult(operation_reference, binding, origin, validation, selections, tuple(steps),
+                                    current, tuple(builder.records), final, "COMPLETE")
+    return pe._seal_result(result, owner)
+
 
 class RealmTransitionReferenceRunner:
     """Explicit local capture composition; collector ports are checked before use."""
@@ -288,23 +388,27 @@ def _capture(diagnostics, owner, result):
     # The public collector admission owns the independently derived combined
     # future-wire preflight and whole reservation before any capture IO.
     admission = type(diagnostics).module_capture(diagnostics, owner, context)
-    if type(admission) is not ModuleCaptureAdmission or admission.operation_reference != result.operation_reference:
+    if type(admission) is not ModuleCaptureAdmission:
         return values.RealmTransitionCaptureReceipt(result.operation_reference, "NOT_CONFIRMED", result,
                    (), None, None, None, "MODULE_CAPTURE_UNCONFIRMED")
-    if admission.scope is None:
+    scope = admission.scope if ModuleCaptureScope.validate_issued_for_context(
+        admission.scope, diagnostics, owner, context) is True else None
+    try:
+        ModuleCaptureAdmission.__post_init__(admission)
+        matched = admission.operation_reference == result.operation_reference
+    except Exception:
+        matched = False
+    if scope is None:
         receipt = values.RealmTransitionCaptureReceipt(result.operation_reference,
-                  "REJECTED" if admission.status == "REJECTED" else "NOT_CONFIRMED", result,
-                  (), None, None, None, admission.failure_code)
+                  "REJECTED" if matched and admission.scope is None and admission.status == "REJECTED" else "NOT_CONFIRMED", result,
+                  (), None, None, None, admission.failure_code if matched and admission.scope is None else "MODULE_CAPTURE_UNCONFIRMED")
         values.canonical_bytes(receipt)
         return receipt
-    scope = admission.scope
-    if type(scope) is not ModuleCaptureScope:
-        values._fail("capture_scope")
     confirmed, attempted, completion, final = [], None, None, None
-    failure = admission.failure_code
-    status = "CONFIRMED" if admission.status == "ADMITTED" else "NOT_CONFIRMED"
+    failure = admission.failure_code if matched else "MODULE_CAPTURE_UNCONFIRMED"
+    status = "CONFIRMED" if matched and admission.status == "ADMITTED" else "NOT_CONFIRMED"
     try:
-        if admission.status == "ADMITTED":
+        if matched and admission.status == "ADMITTED":
             for record in result.constructed_records:
                 attempted = record
                 try:

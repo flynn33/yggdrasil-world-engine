@@ -75,7 +75,7 @@ The public evaluator seam is build_report(root, repository_report,
 conformance_report), returning a plain bounded report. The conformance input is
 executed per-case evidence, not an accepted assertion that all cases pass. The
 CLI takes [root], --check-definition, --repository-report FILE,
---conformance-report FILE, and --output FILE. --check-definition validates
+--conformance-report FILE, --check-historical, and --output FILE. --check-definition validates
 definitions and exact selectors without claiming execution or completion.
 
 Root MUST bind final module/deliverable/exit coverage to actual read test bodies
@@ -112,3 +112,48 @@ Without a report request the normal inherited-stream path remains available.
 Final acceptance consumes the already-executed exhaustive cases; it does not
 run them again. No implementation starts from this proposal before the scoped
 instruction accuracy and source-understanding review is complete.
+
+## Actual runtime method binding clarification
+
+Independent implementation review reproduced a PASS callback after replacing a
+direct test method with a no-op while its original failing AST body and source
+hashes remained unchanged. Case evidence therefore additionally records
+`runtime_body_verified`. The recorder compiles the complete read source without
+executing it, identifies the direct class/method code, and observes actual entry
+into matching method code during the case. It immediately restores the previous
+profile callback once that entry is observed; a displaced or unavailable observer
+cannot establish body execution. Original unittest outcomes remain unchanged.
+A wrapper grants body evidence only when the actual reviewed direct method code
+enters. A mapped PASS requires this execution fact and no source error alongside
+the original exact before/after receipts and actual callbacks. Filename, method
+name, source hash or `inspect.unwrap` alone is insufficient. [YWE-REQ-0051]
+
+## Durable publication after the executed implementation
+
+The M3 verifier MUST also verify a closed pending/pass acceptance record. Pending
+records discharge no obligation. A pass record MUST name the actual tested
+implementation revision, its complete tracked source digest, and four immutable
+byte archives: the actual repository report, child case receipt, parent transcript
+and resulting CONFORMANT acceptance report. The first accepted introduction MUST
+be a direct child of that tested revision and change only the fixed evidence
+record, acceptance document and four archives. Every other tracked byte and file
+mode MUST retain the tested source identity. [YWE-REQ-0051]
+
+Historical verification MUST read local Git objects, verify the first accepted
+introduction and every later evidence change, verify all archive byte lengths and
+hashes, and evaluate the tested revision's own acceptance implementation in a
+clean offline local snapshot. This replay consumes the archived receipt and
+transcript against their original parent hashes; original external path strings
+remain captured labels and need not exist on another host. It MUST NOT execute
+unit tests or regenerate exhaustive proof. Its recomputed report MUST equal the
+archived actual CONFORMANT report. The normal definition gate MUST verify this
+durable record, and completed M3 MUST reference its exact evidence record and
+acceptance document. README completion and the owner-requested pause follow this
+verified immutable introduction. [YWE-REQ-0051]
+
+The optional keyword-only archived_unit_evidence argument on build_report is
+the historical worker's exact (child_receipt_bytes, transcript_bytes) pair. It
+MUST preserve every original execution, revision, source, mapping, callback and
+parent-hash check; it substitutes only byte retrieval for captured external path
+lookup. A supplied pair is neither an assertion of acceptance nor a capability.
+[YWE-REQ-0051]

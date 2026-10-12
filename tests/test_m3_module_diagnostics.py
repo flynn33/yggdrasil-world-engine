@@ -143,6 +143,93 @@ def runtime_capture_controls():
 
 
 class ModuleCaptureTests(unittest.TestCase):
+    def test_effectful_whole_future_raw_refusal_precedes_scope_claim_and_target_call(self):
+        from tests.test_m3_artifact_emitter import ready
+        from core.ash_pattern_engine.memory_document_target import MemoryDocumentTarget
+        runtime, run = ready()
+        runner, _, _, _, _, target, ports = runtime
+        collector = ports[2]
+        before = dict(collector._aliases)
+        with patch.object(capture, '_anticipated_emitter_raw_size', return_value=2097153), patch.object(MemoryDocumentTarget, 'materialize', wraps=MemoryDocumentTarget.materialize) as action:
+            actual = runner.emit(run.last_observation, target, operation_reference='raw:refusal')
+        self.assertEqual(action.call_count, 0)
+        self.assertEqual(target.snapshot().revision, 0)
+        self.assertEqual(collector._aliases, before)
+        self.assertIsNone(actual.completion)
+        self.assertEqual(actual.result.actual_effects, False)
+
+    def test_source4_first_response_readback_checks_body_before_io_and_preserves_old_replay(self):
+        from tests.test_m3_core_orchestration import current_assembly
+        _, model, collector, store, clock = current_assembly()
+        origin = diagnosis(model, candidate='000000000', reference='readback:origin')
+        response = collector.complete_assessment(origin)
+        before = len(store.calls), clock.value, dict(collector._aliases)
+        self.assertIs(collector.complete_assessment(copy(origin)), response)
+        self.assertEqual((len(store.calls), clock.value, dict(collector._aliases)), before)
+        changed = copy(origin)
+        object.__setattr__(changed, 'emitted_diagnostics', (replace(origin.emitted_diagnostics[0],
+            envelope=replace(origin.emitted_diagnostics[0].envelope, summary='A different legal diagnostic body.')),))
+        with self.assertRaises(dv.DiagnosticsContractError):
+            collector.complete_assessment(changed)
+        self.assertEqual((len(store.calls), clock.value, dict(collector._aliases)), before)
+        old_collector, old_model, owners, old_origin, old_store, old_clock = assembly()
+        rejected = old_collector.complete_assessment(old_origin)
+        self.assertEqual((rejected.status, rejected.failure_code), ('INCOMPLETE', 'DIAGNOSTICS_REPLAY_REFUSED'))
+
+    def test_original_scope_context_authentication_refuses_foreign_copy_and_hostile_reflection(self):
+        diagnostics, model, owners, origin, store, clock = assembly()
+        owner = owners[0]
+        self.assertEqual(diagnostics.register_module_producer(owner).status, 'REGISTERED')
+        result = result_for(owner, origin, 'scope:original')
+        context = m.ModuleCaptureContext('scope:original', 'REALM_ENCODER', type(owner).configuration(owner), origin, result, ())
+        admitted = diagnostics.module_capture(owner, context)
+        scope = admitted.scope
+        method = capture.ModuleCaptureScope.validate_issued_for_context
+        self.assertTrue(method(scope, diagnostics, owner, context))
+        before = len(store.calls), clock.value, dict(diagnostics._aliases)
+        for inputs in ((copy(scope), diagnostics, owner, context), (scope, copy(diagnostics), owner, context),
+                       (scope, diagnostics, copy(owner), context), (scope, diagnostics, owner, copy(context))):
+            self.assertFalse(method(*inputs))
+        duplicate = copy(context)
+        scope._context = duplicate
+        try:
+            self.assertFalse(method(scope, diagnostics, owner, duplicate))
+            self.assertFalse(method(scope, diagnostics, owner, context))
+        finally:
+            scope._context = context
+        self.assertTrue(method(scope, diagnostics, owner, context))
+        hooks = []
+        class Hostile:
+            def __eq__(self, other):
+                hooks.append('eq'); raise AssertionError('unowned equality')
+            def __getitem__(self, key):
+                hooks.append('getitem'); raise AssertionError('unowned indexing')
+            def get(self, key):
+                hooks.append('get'); raise AssertionError('unowned mapping')
+        class HostileKey:
+            def __hash__(self):
+                return hash('REALM_ENCODER')
+            def __eq__(self, other):
+                hooks.append('key-eq'); raise AssertionError('unowned mapping key equality')
+        digest, registered = scope._context_hash, scope._service.registered
+        try:
+            scope._context_hash = Hostile()
+            self.assertFalse(method(scope, diagnostics, owner, context))
+            scope._context_hash = digest
+            scope._service.registered = Hostile()
+            self.assertFalse(method(scope, diagnostics, owner, context))
+            scope._service.registered = {HostileKey(): registered['REALM_ENCODER']}
+            self.assertFalse(method(scope, diagnostics, owner, context))
+        finally:
+            scope._context_hash, scope._service.registered = digest, registered
+        self.assertEqual(hooks, [])
+        self.assertEqual((len(store.calls), clock.value, dict(diagnostics._aliases)), before)
+        for record in result.constructed_records:
+            self.assertEqual(scope.append(record).status, 'CONFIRMED')
+        response = scope.finish(result)
+        self.assertTrue(method(scope, diagnostics, owner, context))
+        self.assertIs(scope.finish(result), response)
+
     @unittest.skipUnless(os.name == 'nt', 'Actual adopted protected storage and paired-file verification are Windows-specific')
     def test_actual_windows_protected_four_producer_max_graph_and_paired_files(self):
         from scripts.reference_diagnostics_host import assemble_reference_diagnostics
@@ -171,7 +258,10 @@ class ModuleCaptureTests(unittest.TestCase):
         self.assertEqual(5,len(checks));self.assertTrue(checks[-1]['passed']);self.assertFalse(checks[-1]['overall_pass'])
         wrappers = snapshot.supporting_evidence.module_evidence
         self.assertEqual(len(wrappers),len({row.evidence_reference for row in wrappers}))
-        self.assertEqual(3,len(diagnostics._canonical_source_snapshots))
+        self.assertEqual(4,len(diagnostics._canonical_source_snapshots))
+        self.assertEqual(tuple(dict(fields)['aggregate_sha256'] for _, fields in s.CANONICAL_BINDING_BASELINES),
+            tuple(pin.sha256 for pin in diagnostics._canonical_source_snapshots))
+        self.assertEqual(dv.HISTORICAL_MODULE_SOURCE_REVISION, diagnostics._canonical_source_snapshots[2].revision)
         self.assertIn(diagnostics.identity.source_provenance.status,('VERIFIED_CLEAN','VERIFIED_DIRTY'))
         exported = diagnostics.export_pair(snapshot)
         self.assertIs(type(exported),dv.ExportReceipt)
@@ -183,6 +273,59 @@ class ModuleCaptureTests(unittest.TestCase):
         self.assertEqual(hashlib.sha256(raw).hexdigest(),manifest['json_sha256'])
         self.assertEqual(hashlib.sha256(markdown).hexdigest(),manifest['markdown_sha256'])
         self.assertEqual('EXACT_EMBEDDED_SNAPSHOT',manifest['parity'])
+        Draft202012Validator(json.loads((ROOT/'data/schemas/m3_reference_diagnostic_bundle_schema.json').read_text())).validate(json.loads(raw))
+
+    @unittest.skipUnless(os.name == 'nt', 'Actual adopted protected storage and paired-file verification are Windows-specific')
+    def test_actual_windows_protected_depth5_emitter_complete_receipt_leaf_graph(self):
+        from scripts.reference_diagnostics_host import assemble_reference_diagnostics
+        from tests import test_m3_generation_runner as runner_tests
+        from tests.test_m3_core_orchestration import H4
+        from tests.test_m3_core_values import core_binding
+        from tests.test_m3_realm_transition_values import profile_from
+        diagnostics = assemble_reference_diagnostics(ROOT)
+        self.addCleanup(diagnostics.store.close)
+        profile = profile_from(H4, 'native:core:h4')
+        core = core_binding(profile=profile)
+        model = StateModel(profile, core.canonical_binding, diagnostics.assessment_capture())
+        def actual_assembly(**kwargs):
+            return core, model, diagnostics, diagnostics.store, diagnostics.clock
+        with patch.object(runner_tests, 'current_assembly', side_effect=actual_assembly):
+            runner, inputs, origin, facts, constraints, target, ports = runner_tests.runtime_assembly(depth=5)
+        run = runner.run(inputs, origin, facts, constraints, operation_reference='native:full:run')
+        self.assertEqual(run.status, 'READY')
+        actual = runner.emit(run.last_observation, target, operation_reference='native:full:emit')
+        self.assertEqual((actual.status, actual.completion.status, actual.final_observation.status), ('CONFIRMED', 'COMPLETE', 'CONFIRMED'))
+        self.assertEqual((len(actual.result.outcomes), len(actual.confirmed_records), target.snapshot().revision), (8, 17, 8))
+        snapshot = diagnostics.snapshot(bundle_reference='native:full:bundle')
+        wrappers = {node.evidence_reference: node for node in snapshot.supporting_evidence.module_evidence}
+        operations = [node.payload.to_record() for node in wrappers.values() if node.kind == 'PRODUCER_OPERATION' and node.payload.producer == 'ARTIFACT_EMITTER']
+        self.assertEqual(len(operations), 1)
+        operation = operations[0]
+        self.assertEqual(len(operation['output_references']), 1)
+        self.assertEqual(wrappers[operation['output_references'][0]].kind, 'GENERATION_PLAN')
+        receipt_roots = []
+        records_by_diagnostic = {node.payload.diagnostic_reference: node for node in wrappers.values() if node.kind == 'PRODUCER_RECORD'}
+        events_by_diagnostic = {event.diagnostic_reference: event for event in snapshot.events if event.diagnostic_reference is not None}
+        for reference in operation['constructed_record_references']:
+            node = records_by_diagnostic[reference]
+            record = node.payload.to_record()
+            self.assertEqual(events_by_diagnostic[reference].context.proof_evidence_reference, node.evidence_reference)
+            if record['value_reference'] in wrappers and wrappers[record['value_reference']].kind == 'EMISSION_OUTPUT':
+                self.assertEqual(record['value_reference'], record['payload_reference'])
+                receipt_roots.append(record['value_reference'])
+        self.assertEqual(len(set(receipt_roots)), 8)
+        for reference in receipt_roots:
+            self.assertEqual(wrappers[reference].payload.actual_status, 'SUCCEEDED')
+        exported = diagnostics.export_pair(snapshot)
+        self.assertIs(type(exported), dv.ExportReceipt)
+        raw = (diagnostics.store.root/'diagnostics.json').read_bytes()
+        markdown = (diagnostics.store.root/'diagnostics.md').read_bytes()
+        manifest = json.loads((diagnostics.store.root/'manifest.json').read_bytes())
+        self.assertEqual(snapshot.to_record(), json.loads(raw))
+        self.assertEqual(json.loads(raw), json.loads(markdown.split(b'```json\n', 1)[1].rsplit(b'\n```', 1)[0]))
+        self.assertEqual(hashlib.sha256(raw).hexdigest(), manifest['json_sha256'])
+        self.assertEqual(hashlib.sha256(markdown).hexdigest(), manifest['markdown_sha256'])
+        self.assertEqual('EXACT_EMBEDDED_SNAPSHOT', manifest['parity'])
         Draft202012Validator(json.loads((ROOT/'data/schemas/m3_reference_diagnostic_bundle_schema.json').read_text())).validate(json.loads(raw))
 
     def test_concurrent_first_registration_has_one_live_registry_without_io(self):

@@ -225,7 +225,9 @@ class _NormalizationOperations:
         )
 
     @staticmethod
-    def _append(scope, record):
+    def _append(scope, record, execution_gate=None):
+        if not _NormalizationOperations._active(execution_gate):
+            return 'NOT_CONFIRMED'
         try:
             receipt = scope.append(record)
         except Exception:
@@ -235,13 +237,36 @@ class _NormalizationOperations:
         return receipt.status
 
     @staticmethod
+    def _active(execution_gate):
+        if execution_gate is None:
+            return True
+        from ..module_lifecycle import CoreExecutionGate
+        return type(execution_gate) is CoreExecutionGate and CoreExecutionGate.capture_disposition(execution_gate) == 'ACTIVE'
+
+    @staticmethod
+    def _grant(execution_gate, stage):
+        if execution_gate is None:
+            return True
+        from ..module_lifecycle import CoreExecutionGate, CoreStageGrant
+        if type(execution_gate) is not CoreExecutionGate:
+            from .. import core_values as cv
+            cv._fail('binding', 'CORE_LIFECYCLE_REJECTED')
+        grant = CoreExecutionGate.stage_grant(execution_gate, stage)
+        return type(grant) is CoreStageGrant and grant.status == 'GRANTED'
+
+    @staticmethod
     def _capture_failure(common, attempted, status):
         return nv.NormalizationCaptureFailure(
             **common, failure_code="DIAGNOSTIC_CAPTURE_REJECTED" if status == "REJECTED" else "DIAGNOSTIC_CAPTURE_UNCONFIRMED",
             failed_field="normalization_capture", capture_status=status, attempted_diagnostic=attempted,
         )
 
-    def apply(self, plan, *, normalization_context):
+    def apply(self, plan, *, normalization_context, execution_gate=None):
+        if execution_gate is not None:
+            from ..module_lifecycle import CoreExecutionGate
+            from .. import core_values as cv
+            if type(execution_gate) is not CoreExecutionGate:
+                cv._fail('binding', 'CORE_LIFECYCLE_REJECTED')
         if type(plan) is not nv.NormalizationPlan:
             self._precondition("NORMALIZATION_PLAN_INVALID", "plan")
         if type(normalization_context) is not nv.NormalizationContext:
@@ -273,6 +298,8 @@ class _NormalizationOperations:
         common["inherited_diagnostics"] = diagnosis.emitted_diagnostics
         blocked = self._record(plan, context, "COMPUTATION", diagnosis.state_validity_diagnostic,
                                None, "BLOCKED", "ASH normalization attempt blocked before value computation.")
+        if not _NormalizationOperations._active(execution_gate):
+            return self._capture_failure(common, blocked, 'NOT_CONFIRMED')
         try:
             scope = begin(context.operation_reference, original_diagnosis=diagnosis)
             if scope is None or not callable(getattr(scope, "append", None)):
@@ -280,7 +307,7 @@ class _NormalizationOperations:
         except Exception:
             return self._capture_failure(common, blocked, "NOT_CONFIRMED")
         if validation.validation_status == "REJECTED" or plan.decision in ("NOT_NORMALIZABLE", "BLOCKED"):
-            status = self._append(scope, blocked)
+            status = self._append(scope, blocked, execution_gate)
             if status != "CONFIRMED":
                 return self._capture_failure(common, blocked, status)
             common["emitted_diagnostics"] = (blocked,)
@@ -296,6 +323,8 @@ class _NormalizationOperations:
                                            failure_code=plan.reason_code, failed_field=field)
         step = None
         actual = diagnosis.parsed_state
+        if not _NormalizationOperations._grant(execution_gate, 'NORMALIZATION_VALUE'):
+            return self._capture_failure(common, blocked, 'NOT_CONFIRMED')
         if plan.decision == "PLAN_READY":
             actual = self._apply_codeword(actual, plan.codeword_chain[0])
             step = nv.NormalizationStep(0, diagnosis.parsed_state, plan.codeword_chain[0], actual)
@@ -303,10 +332,12 @@ class _NormalizationOperations:
         common["actual_state"] = actual
         computation = self._record(plan, context, "COMPUTATION", diagnosis.state_validity_diagnostic,
                                    step, "PENDING", "ASH normalization value computation completed; validation is pending.")
-        status = self._append(scope, computation)
+        status = self._append(scope, computation, execution_gate)
         if status != "CONFIRMED":
             return self._capture_failure(common, computation, status)
         common["emitted_diagnostics"] = (computation,)
+        if not _NormalizationOperations._grant(execution_gate, 'NORMALIZATION_POST_CAPTURE'):
+            return self._capture_failure(common, None, 'NOT_CONFIRMED')
         post = self._diagnose_candidate(actual, diagnosis.input_evidence)
         common["post_validity_diagnostic"] = post
         succeeded = post.is_valid and post.input_state == actual and actual == plan.selected_target
@@ -315,7 +346,7 @@ class _NormalizationOperations:
             "ASH normalization actual result validated." if succeeded else "ASH normalization actual result failed validation.",
             previous=computation,
         )
-        status = self._append(scope, post_record)
+        status = self._append(scope, post_record, execution_gate)
         if status != "CONFIRMED":
             return self._capture_failure(common, post_record, status)
         common["emitted_diagnostics"] = (computation, post_record)

@@ -96,7 +96,8 @@ class SessionValueTests(unittest.TestCase):
             with self.subTest(value=name):
                 kind = getattr(v, name)
                 if name not in api_only:
-                    self.assertEqual([field.name for field in fields(kind)], list(names))
+                    expected = list(names) + (['module_history'] if name == 'SessionHistory' else [])
+                    self.assertEqual([field.name for field in fields(kind)], expected)
         self.assertEqual(len(v._SESSION_TYPES), 34)
 
     def test_policy_pin_is_actual_normalized_adopted_file(self):

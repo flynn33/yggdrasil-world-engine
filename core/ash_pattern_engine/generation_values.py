@@ -398,7 +398,7 @@ def derived_references(request):
 
 
 def admission_failure(request, source, validation):
-    if source.canonical_binding.aggregate_sha256 != MODULES_AGGREGATE:
+    if source.canonical_binding.aggregate_sha256 not in CURRENT_PRODUCER_AGGREGATES:
         return "SOURCE_UNSUPPORTED", "model.canonical_binding"
     if validation is None:
         return "VALIDATION_UNAVAILABLE", "model.validation"
@@ -575,6 +575,8 @@ def _coherent_packet(value):
 
 
 MODULES_AGGREGATE = 'f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400'
+GENERATION_AGGREGATE = '2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8'
+CURRENT_PRODUCER_AGGREGATES = (MODULES_AGGREGATE, GENERATION_AGGREGATE)
 
 SOURCE_BASELINES = (('LEGACY_C78',
   {'dependency_id': 'ash_cosmological_model.f2_9.canonical',
@@ -642,6 +644,29 @@ SOURCE_BASELINES = (('LEGACY_C78',
    ('interfaces/rule-id-taxonomy.md', '7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196'),
    ('interfaces/contracts/diagnostics-module-contract.md',
     '6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b'))))
+
+SOURCE_BASELINES += (('M3_GENERATION',
+ {'dependency_id': 'ash_cosmological_model.f2_9.canonical',
+  'aggregate_sha256': '2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8',
+  'state_space_sha256': '68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e',
+  'codeword_source_sha256': '8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c',
+  'validity_source_sha256': '20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e',
+  'classification_source_sha256': '806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff',
+  'recovery_source_sha256': 'cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd',
+  'diagnostic_source_sha256': '1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa',
+  'taxonomy_source_sha256': '7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196'},
+ (('interfaces/contracts/topology-generator-contract.md',
+   'a408b335ecacff01e38113bcd6cc6089142e40219d521e7081e87406fac11147'),
+  ('interfaces/contracts/axiom-evaluator-contract.md',
+   'dc2edf80d2ded0b89b31df15416e24c13139988ab6fd38adaa6195921a692faf'),
+  ('algorithms/topology-expansion.pseudo.md',
+   '1b6ab5d3d13b678c67f185f2f91a60d0dae7a976dcbb6df2b169efa6d15c9a3d'),
+  ('algorithms/axiom-evaluation.pseudo.md',
+   '0f205842840399aaf08932e20cde34761874a3296b260f139dc6a04df0e707ba'),
+  ('interfaces/diagnostic-schema.md', '1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa'),
+  ('interfaces/rule-id-taxonomy.md', '7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196'),
+  ('interfaces/contracts/diagnostics-module-contract.md',
+   '5ba322a2376bb325e5d58d9341938535ee8d69ff0fc286b3969dfdb77bd8c225'))),)
 
 FIELD_DOMAINS = {'TopologyAxiomPolicyBinding': {'policy_id': 'literal YWE-TOPOLOGY-AXIOM-REFERENCE-001',
                                 'policy_version': 'literal 1.0.0',
@@ -993,7 +1018,7 @@ def _owned_configuration(owner, expected_class):
 def _validate_origin(model, request, configuration):
     from .state_model import StateModel
 
-    if configuration[0].canonical_binding.aggregate_sha256 != MODULES_AGGREGATE:
+    if configuration[0].canonical_binding.aggregate_sha256 not in CURRENT_PRODUCER_AGGREGATES:
         return None
     try:
         witness = StateModel.validate_diagnosis(model, request.origin_diagnosis)
@@ -1083,3 +1108,18 @@ def _failure(request, configuration, validation, code, field):
         records = (GenerationDiagnosticRecord(reference, envelope, payload),)
     cls = TopologyFailure if topo else AxiomEvaluationFailure
     return cls(request, policy, source, validation, code, field, records, pending)
+
+
+def wire_schema(value):
+    _exact(value, WIRE_TYPES, "value")
+    revalidate_value(value)
+    source = None
+    if type(value) is TopologyAxiomSourceBinding:
+        source = value.canonical_binding
+    elif _type_is_one_of(type(value), PACKET_TYPES):
+        source = value.source_binding.canonical_binding
+    elif type(value) is TopologyRequest or type(value) is AxiomRequest:
+        source = value.origin_diagnosis.source_binding
+    if source is not None and state.canonical_source_baseline(source) == "M3_GENERATION":
+        return "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json"
+    return "https://ywe.local/schemas/m3_topology_axiom_schema.json"

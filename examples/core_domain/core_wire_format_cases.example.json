@@ -1,0 +1,1873 @@
+{
+  "artifact_type": "ywe_core_wire_format_cases",
+  "artifact_version": "1.0.0",
+  "evidence_scope": "AUTHORED_FORMAT_ONLY_NOT_RUNTIME_CAPTURE_OR_ACCEPTANCE",
+  "cases": [
+    {
+      "id": "core_format_CoreBinding",
+      "schema_definition": "CoreBinding",
+      "original_raw_sha256": "16a4f079694eff55cc9df513b76d374d4401caffabe72b1033a37ac865e9d71f",
+      "value_sha256": "79f4b76c7e25a3daf4f603dbc6849a53c3380940e68a0ce6430de74d8b152735",
+      "value": {
+        "canonical_binding": {
+          "dependency_id": "ash_cosmological_model.f2_9.canonical",
+          "aggregate_sha256": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8",
+          "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+          "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+          "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+          "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+          "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+          "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+          "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+        },
+        "profile_binding": {
+          "availability": "AVAILABLE",
+          "profile_id": "wrw_reference_profile",
+          "source_binding": {
+            "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+            "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+            "evidence_reference": "wrw_reference_profile:source_binding"
+          },
+          "recognized_valid_signatures": [
+            "000000001",
+            "000000010",
+            "000000100",
+            "000001000",
+            "000010000",
+            "000100000",
+            "001000000",
+            "010000000",
+            "100000000"
+          ]
+        },
+        "policy_id": "ywe_core_reference_q6_v1",
+        "policy_sha256": "74dfa3b318cd38296c0b86ad9ff5c14e8fb1d7aed5ff1c02274baa4bbd871e91",
+        "profile_realms": []
+      }
+    },
+    {
+      "id": "core_format_ProfileRealmDefinition",
+      "schema_definition": "ProfileRealmDefinition",
+      "original_raw_sha256": "309923ad2006ac2f53ec72287bbe7707a66638a0f4117d8801a91704627b70ea",
+      "value_sha256": "7c23f37e677fbc862620486edc0dd9b32c466752b3b4db2f674770a21288eb43",
+      "value": {
+        "realm_id": "core:wire:1",
+        "coordinate": 0,
+        "state_signature": null,
+        "display_name": "core:wire:2",
+        "threshold_q6": 0,
+        "veil_required": false,
+        "allowed_origins": []
+      }
+    },
+    {
+      "id": "core_format_CosmicState",
+      "schema_definition": "CosmicState",
+      "original_raw_sha256": "7be97e4159ff8fb09d5f3dfd20dab543161b6b03a057ea43c36be0b1295585d4",
+      "value_sha256": "e4c915410cd9e34b9b66109ed1e22a860ee84f4fe222bbe57b4e17888fa23879",
+      "value": {
+        "binding": {
+          "canonical_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "policy_id": "ywe_core_reference_q6_v1",
+          "policy_sha256": "74dfa3b318cd38296c0b86ad9ff5c14e8fb1d7aed5ff1c02274baa4bbd871e91",
+          "profile_realms": []
+        },
+        "baseline": {
+          "schema_ref": "data/schemas/m3_generation_state_schema.json",
+          "artifact_type": "ywe_state_assessment",
+          "artifact_version": "1.0.0",
+          "outcome": "diagnosis",
+          "assessment_binding": {
+            "assessment_reference": "core:wire:original",
+            "original_input_reference": "core:wire:original:input",
+            "diagnosis_reference": "core:wire:original:detection"
+          },
+          "source_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "input_evidence": {
+            "original_input_reference": "core:wire:original:input",
+            "representation_kind": "SIGNATURE",
+            "observed_length": 9,
+            "length_unit": "CHARACTERS",
+            "preview": "100000000",
+            "preview_encoding": "TEXT",
+            "truncated": false,
+            "coordinate_observations": [],
+            "failure_code": null
+          },
+          "parsed_state": {
+            "state_space": "F2^9",
+            "bits": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "state_validity_diagnostic": {
+            "input_state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "admissibility_status": "VALID",
+            "transformation_compatibility": "COMPATIBLE",
+            "normalization_status": "ALREADY_VALID",
+            "recoverability_relevance": "NO_RECOVERY_NEEDED",
+            "is_valid": true,
+            "orbit_info": {
+              "orbit_id": "000101100",
+              "member_count": 16,
+              "contains_known_valid_state": true
+            },
+            "rule_ids": [
+              "ASH-STATE-STRUCTURE-001",
+              "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+              "ASH-STATE-VALIDITY-001"
+            ],
+            "notes": [
+              "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+            ]
+          },
+          "emitted_diagnostics": [
+            {
+              "diagnostic_reference": "core:wire:original:detection",
+              "envelope": {
+                "diagnostic_kind": "STATE_VALIDITY",
+                "severity": "INFO",
+                "stage": "DETECTION",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_100000000",
+                "parent_diagnostic_reference": null,
+                "chain_root_reference": "core:wire:original:detection",
+                "rule_ids": [
+                  "ASH-STATE-STRUCTURE-001",
+                  "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                  "ASH-STATE-VALIDITY-001"
+                ],
+                "summary": "ASH state diagnosis: VALID",
+                "notes": [
+                  "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+                ]
+              }
+            }
+          ]
+        },
+        "structural_coordinates": [
+          "b0",
+          "b1",
+          "b2",
+          "b3",
+          "b4",
+          "b5",
+          "b6",
+          "b7",
+          "b8"
+        ]
+      }
+    },
+    {
+      "id": "core_format_CoreProvenance",
+      "schema_definition": "CoreProvenance",
+      "original_raw_sha256": "d520b29c452fc412add26a6d701b47e439cfa51a1adcfeb65fce4b917cf7f370",
+      "value_sha256": "af22b55b17bc26c002862b76e8da25f2535ba15a684538cbe962fba665115677",
+      "value": {
+        "cosmic_pattern_snapshot_ref": "core:wire:3",
+        "diagnostic_ref": "core:wire:4",
+        "generation_plan_ref": "core:wire:5",
+        "source_ash_refs": [
+          "core:wire:6"
+        ]
+      }
+    },
+    {
+      "id": "core_format_DeclaredTruthFact",
+      "schema_definition": "DeclaredTruthFact",
+      "original_raw_sha256": "bb33fc494f76abab9f38b4ffb17e5c26e5708b3f3bfa77d34fcdaa3f30d78ef0",
+      "value_sha256": "0102357ec637e55cb239c08ec368afd31866376ca9a7ca352ef2aef4e18da37a",
+      "value": {
+        "fact_id": "core:wire:7",
+        "authority_tier": "OBJECTIVE_SHARED",
+        "scope_ref": "core:wire:8",
+        "subject_ref": "core:wire:9",
+        "value_token": "core:wire:10",
+        "evidence_refs": [
+          "core:wire:11"
+        ]
+      }
+    },
+    {
+      "id": "core_format_TruthInputSnapshot",
+      "schema_definition": "TruthInputSnapshot",
+      "original_raw_sha256": "ea56191f163ed8237855ed37e1aa2506a4b09fa4aa9519965d1819c2c6147ce3",
+      "value_sha256": "a06434a4c8ad9adc45829f6f11ab5e624e3fece3c4b853e5d9c98b3222d4d507",
+      "value": {
+        "snapshot_ref": "core:wire:12",
+        "scope_ref": "core:wire:13",
+        "facts": [],
+        "entity_refs": [],
+        "evidence_status": "DECLARED_INPUT"
+      }
+    },
+    {
+      "id": "core_format_AttunementFact",
+      "schema_definition": "AttunementFact",
+      "original_raw_sha256": "05a89bc1cb50305ec5feb9e02fdefa274a41e1c1ea7f9dcd2e495b7c47e387a1",
+      "value_sha256": "4312a1417e8415c33542115d46ac604260c527e17f811d7d9eb318d910cd1b69",
+      "value": {
+        "realm_id": "core:wire:14",
+        "attunement_q6": 0,
+        "thin_veil": "TRUE",
+        "evidence_refs": [
+          "core:wire:15"
+        ]
+      }
+    },
+    {
+      "id": "core_format_RealmAccessRequest",
+      "schema_definition": "RealmAccessRequest",
+      "original_raw_sha256": "5f0019ff4d5b0f9bba5b95721fbdf5b63a14d06d95e2e93169834241a6de4edf",
+      "value_sha256": "8f9f718c579d3b057c30c2264943a63aaa5f6c6badbadf2dbc33623c761d7e65",
+      "value": {
+        "request_ref": "core:wire:16",
+        "source_realm_id": "core:wire:17",
+        "target_realm_id": "core:wire:18",
+        "location_ref": "core:wire:19",
+        "facts": []
+      }
+    },
+    {
+      "id": "core_format_RealmAccessResult",
+      "schema_definition": "RealmAccessResult",
+      "original_raw_sha256": "ddf5430a08561ac2a7bd712d46e57467e86c87153683216db4c7b31b683551ef",
+      "value_sha256": "07183340c8af92ed1bede171348bdd7a91dd2ae5466b7f7b24182356cb214b87",
+      "value": {
+        "request": {
+          "request_ref": "core:wire:20",
+          "source_realm_id": "core:wire:21",
+          "target_realm_id": "core:wire:22",
+          "location_ref": "core:wire:23",
+          "facts": []
+        },
+        "eligible": null,
+        "evaluated_rules": [
+          {
+            "diagnostic_ref": "core:wire:24",
+            "owner": "COSMOLOGY",
+            "rule": "BINDING",
+            "status": "COMPLETED",
+            "failure_code": null,
+            "field": null,
+            "evidence_refs": [],
+            "explanation": "core:wire:25"
+          }
+        ]
+      }
+    },
+    {
+      "id": "core_format_RealmShiftProposal",
+      "schema_definition": "RealmShiftProposal",
+      "original_raw_sha256": "e27fc77fb8e8a5e77551dee76d3e5159bdea1df3f6665c66a37058b6dcc78dde",
+      "value_sha256": "5715f802f8707bfa5744de381971737471d7cbe2deb1df798b307e99734e533c",
+      "value": {
+        "proposal_ref": "core:wire:26",
+        "access": {
+          "request": {
+            "request_ref": "core:wire:27",
+            "source_realm_id": "core:wire:28",
+            "target_realm_id": "core:wire:29",
+            "location_ref": "core:wire:30",
+            "facts": []
+          },
+          "eligible": null,
+          "evaluated_rules": [
+            {
+              "diagnostic_ref": "core:wire:31",
+              "owner": "COSMOLOGY",
+              "rule": "BINDING",
+              "status": "COMPLETED",
+              "failure_code": null,
+              "field": null,
+              "evidence_refs": [],
+              "explanation": "core:wire:32"
+            }
+          ]
+        },
+        "before_realm_id": "core:wire:33",
+        "target_realm_id": "core:wire:34",
+        "effect_status": "PROPOSED_ONLY"
+      }
+    },
+    {
+      "id": "core_format_PatternProjectionRule",
+      "schema_definition": "PatternProjectionRule",
+      "original_raw_sha256": "f0308649f9f9896eb8cbc89193e75a087860e3d21ed31dc6a73c838fadd51119",
+      "value_sha256": "21cfe0ad783ae1b799732b4ef9ee3d5f118ad9b9d056bbb38c811d56de50c1f1",
+      "value": {
+        "pattern_id": "core:wire:35",
+        "membership_mask": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
+        "codeword_ids": [],
+        "strength_q6": 0,
+        "tags": [],
+        "evidence_refs": [
+          "core:wire:36"
+        ]
+      }
+    },
+    {
+      "id": "core_format_PatternObservation",
+      "schema_definition": "PatternObservation",
+      "original_raw_sha256": "6d5ec28e68444794af87e20059bfe677209f00a3aee626f37c2aba174a797de3",
+      "value_sha256": "65167d4851584ee4031daabb040761c8f0876ed62cbbc74b366e86ffbba80653",
+      "value": {
+        "pattern_id": "core:wire:37",
+        "matched": false,
+        "strength_q6": 0,
+        "actual_codeword_trace": [],
+        "evidence_refs": [
+          "core:wire:38"
+        ]
+      }
+    },
+    {
+      "id": "core_format_CosmicPatternSnapshot",
+      "schema_definition": "CosmicPatternSnapshot",
+      "original_raw_sha256": "5c938cccc96c117329def24772000e23c1c95901a3f9284df7498dab5e3ff55b",
+      "value_sha256": "80e9dc8898d1cf357314e09e3b128d8ddce4ca0c9de317b97f6283241b1ce0a4",
+      "value": {
+        "snapshot_ref": "core:wire:39",
+        "binding": {
+          "canonical_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "policy_id": "ywe_core_reference_q6_v1",
+          "policy_sha256": "74dfa3b318cd38296c0b86ad9ff5c14e8fb1d7aed5ff1c02274baa4bbd871e91",
+          "profile_realms": []
+        },
+        "original_signature": null,
+        "source_signature": "100000000",
+        "source_identity": {
+          "state_signature": "100000000",
+          "vertex_id": "ash_state_100000000",
+          "realm_id": "ash_state_100000000",
+          "orbit_id": "000101100"
+        },
+        "destination_signature": "100000000",
+        "destination_identity": {
+          "state_signature": "100000000",
+          "vertex_id": "ash_state_100000000",
+          "realm_id": "ash_state_100000000",
+          "orbit_id": "000101100"
+        },
+        "normalization_step": null,
+        "observations": [],
+        "actual_codeword_trace": [],
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "core:wire:40",
+          "diagnostic_ref": "core:wire:41",
+          "generation_plan_ref": "core:wire:42",
+          "source_ash_refs": [
+            "core:wire:43"
+          ]
+        }
+      }
+    },
+    {
+      "id": "core_format_ArchetypeRecord",
+      "schema_definition": "ArchetypeRecord",
+      "original_raw_sha256": "4b817b7873ad430b9c0ec77584c067a4c84bd2c556e91ac4b6584241b9ec2682",
+      "value_sha256": "7911ae34124e9c8b82494ebc231e2d30b6e493e9f292153a0092f2376644ba6c",
+      "value": {
+        "archetype_id": "core:wire:44",
+        "family": "character",
+        "symbolic_tags": [],
+        "truth_tags": [],
+        "shadow_tags": [],
+        "realm_bias": [],
+        "wolf_bias": null,
+        "player_phase_bias": [],
+        "compatible_with": [],
+        "friction_with": [],
+        "contradicts": [],
+        "downstream_affinities": [],
+        "manifestation_hint_refs": [],
+        "evidence_refs": [
+          "core:wire:45"
+        ]
+      }
+    },
+    {
+      "id": "core_format_ArchetypeContext",
+      "schema_definition": "ArchetypeContext",
+      "original_raw_sha256": "048ee4132dc09ce0eea820e8dfbe213b34739408146edf2bf73d0b0c32e89b51",
+      "value_sha256": "2b141c303c8a73199ad5132acf4bd41ba5f922cd9e4a816df02b4219cac435df",
+      "value": {
+        "context_ref": "core:wire:46",
+        "symbolic_tags": [],
+        "truth_tags": [],
+        "shadow_tags": [],
+        "realm_pressure": [],
+        "wolf_pressure": null,
+        "player_phase": null,
+        "recurrence_refs": [],
+        "myth_refs": [],
+        "prophecy_refs": [],
+        "requested_domain": null,
+        "allowed_tension_pairs": [],
+        "higher_order_pairs": [],
+        "satisfied_basis_refs": [],
+        "accepted_risk_refs": []
+      }
+    },
+    {
+      "id": "core_format_ArchetypeScore",
+      "schema_definition": "ArchetypeScore",
+      "original_raw_sha256": "95f3f31f5b4a47278be56fc0b2adcd398f8980d93e3629fb26fed640aa7fed74",
+      "value_sha256": "4b78f48c06279e83ffb15bba579a41938f379ebd5b5d889b40bb654036defd63",
+      "value": {
+        "archetype_id": "core:wire:47",
+        "score_q6": 0,
+        "selected_role": "DOMINANT",
+        "suppressed_by": null,
+        "reasons": []
+      }
+    },
+    {
+      "id": "core_format_ArchetypeEvaluation",
+      "schema_definition": "ArchetypeEvaluation",
+      "original_raw_sha256": "06e4d988a224324a483fa80befaa6c2c1003d186be294326cf40d583810d048e",
+      "value_sha256": "711d03b9e17eea34040e97a3c0c7debec1c4f5404aec3eeab80263921a5e3e93",
+      "value": {
+        "evaluation_ref": "core:wire:48",
+        "snapshot_ref": "core:wire:49",
+        "snapshot_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "context_ref": "core:wire:50",
+        "context_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "registry_ref": "core:wire:51",
+        "registry_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "scores": [],
+        "relationships": [],
+        "cluster_scores": [],
+        "dominant": [],
+        "secondary": [],
+        "activated_clusters": []
+      }
+    },
+    {
+      "id": "core_format_NarrativeInterpretation",
+      "schema_definition": "NarrativeInterpretation",
+      "original_raw_sha256": "aff722c5af0b40dd0e3faf52e54ec10935e2fd8f635935a0bcbdbc2006134475",
+      "value_sha256": "4454548a89c34963be5bee4bfe98376256683f882889d1d8d0d91c7891264210",
+      "value": {
+        "interpretation_ref": "core:wire:52",
+        "evaluation_ref": "core:wire:53",
+        "evaluation_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "scope_ref": "core:wire:54",
+        "fact_refs": [],
+        "pressure_tags": [],
+        "contradiction_refs": [],
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "core:wire:55",
+          "diagnostic_ref": "core:wire:56",
+          "generation_plan_ref": "core:wire:57",
+          "source_ash_refs": [
+            "core:wire:58"
+          ]
+        }
+      }
+    },
+    {
+      "id": "core_format_PerceptionRule",
+      "schema_definition": "PerceptionRule",
+      "original_raw_sha256": "047079e24bd8d748e3fd6de9c23846e9bb012b5b8e7e2eafdee4a6e36a32d328",
+      "value_sha256": "5815b2d7132f81d1bd597aa1e4b618c5ac8687a659b16d1a8e269c15f591004e",
+      "value": {
+        "rule_id": "core:wire:59",
+        "priority": 0,
+        "subject_ref": "core:wire:60",
+        "entity_ref": "core:wire:61",
+        "condition_fact_refs": [],
+        "visible": false,
+        "interpretation_tags": []
+      }
+    },
+    {
+      "id": "core_format_PerceptionRequest",
+      "schema_definition": "PerceptionRequest",
+      "original_raw_sha256": "05d22f5b4e61fbfc34c6fd680a4a7599d8135d6e6cf72b768a4a683ebf28cf5a",
+      "value_sha256": "ead1d61423088a6c070968fdb592c3a6d4db3addbb546b68517ee0c6b52911f4",
+      "value": {
+        "request_ref": "core:wire:62",
+        "subject_ref": "core:wire:63",
+        "truth": {
+          "snapshot_ref": "core:wire:64",
+          "scope_ref": "core:wire:65",
+          "facts": [],
+          "entity_refs": [],
+          "evidence_status": "DECLARED_INPUT"
+        },
+        "rules": [],
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "core:wire:66",
+          "diagnostic_ref": "core:wire:67",
+          "generation_plan_ref": "core:wire:68",
+          "source_ash_refs": [
+            "core:wire:69"
+          ]
+        }
+      }
+    },
+    {
+      "id": "core_format_PerceptionOverlay",
+      "schema_definition": "PerceptionOverlay",
+      "original_raw_sha256": "532e154f6fca943850ca3cade10e104ac4091a3fa9e4b8511859ff1883c3e9e5",
+      "value_sha256": "9c3c9f2d289c031762525d7f479b719c1087814ec8bbfab63567157d4eee640b",
+      "value": {
+        "overlay_ref": "core:wire:70",
+        "request": {
+          "request_ref": "core:wire:71",
+          "subject_ref": "core:wire:72",
+          "truth": {
+            "snapshot_ref": "core:wire:73",
+            "scope_ref": "core:wire:74",
+            "facts": [],
+            "entity_refs": [],
+            "evidence_status": "DECLARED_INPUT"
+          },
+          "rules": [],
+          "provenance": {
+            "cosmic_pattern_snapshot_ref": "core:wire:75",
+            "diagnostic_ref": "core:wire:76",
+            "generation_plan_ref": "core:wire:77",
+            "source_ash_refs": [
+              "core:wire:78"
+            ]
+          }
+        },
+        "truth_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "evaluated_rules": [],
+        "visible_entities": [],
+        "hidden_entities": [],
+        "tags": [],
+        "contradiction_refs": [],
+        "objective_effects": "NONE"
+      }
+    },
+    {
+      "id": "core_format_WeightedOption",
+      "schema_definition": "WeightedOption",
+      "original_raw_sha256": "3510cef37f1e32bf7237abb3c829bfbf2346ee3620462c1b502e9fb5a9162206",
+      "value_sha256": "e2137a12e2d08ec4c2cc6f11f116e924cde2fbc70337e33c93b56b5fadc74917",
+      "value": {
+        "option_id": "core:wire:79",
+        "weight": 0
+      }
+    },
+    {
+      "id": "core_format_WeightedAllocation",
+      "schema_definition": "WeightedAllocation",
+      "original_raw_sha256": "11571cabaa446b86d605c0a8172bceb1807c838ddef7a5589dfaaec995e33d9b",
+      "value_sha256": "3ffaf81ca6b08fa07ff4d9c018a0a55e379054d6522937752a925312489a9133",
+      "value": {
+        "options": [],
+        "total_q6": 0
+      }
+    },
+    {
+      "id": "core_format_SelectionRequest",
+      "schema_definition": "SelectionRequest",
+      "original_raw_sha256": "e3a7bc445d0e152976742c3a058ee86dd392416a639026b80dca8439f4a2d0b5",
+      "value_sha256": "ed2c508eb6240ea26e955d2335e15339b0d35f8c0631d865b89e52a76dc80c16",
+      "value": {
+        "domain": "core:wire:80",
+        "binding_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "context_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "seed_token": "core:wire:81",
+        "options": []
+      }
+    },
+    {
+      "id": "core_format_SelectionResult",
+      "schema_definition": "SelectionResult",
+      "original_raw_sha256": "3a1f38229786ef2ac1edf043fec2dc58973978d7cc9c8259da4032988d55e2db",
+      "value_sha256": "e736d93137e3ac46f7614d78b6fe050032f0226ddd9344c345024b08645dcfb4",
+      "value": {
+        "request": {
+          "domain": "core:wire:82",
+          "binding_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "context_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "seed_token": "core:wire:83",
+          "options": []
+        },
+        "selected_id": null,
+        "counters_used": 0,
+        "accepted_draw": null
+      }
+    },
+    {
+      "id": "core_format_BiasTerm",
+      "schema_definition": "BiasTerm",
+      "original_raw_sha256": "2fdec14cdf21e14db5b55ccc77775505dabafd6e7b557ea8e2fd841b60abe9cc",
+      "value_sha256": "36a7259ebbe1ea7e246d013c3a411ee02d2a8aa034c6fe57f082ba4bb17280df",
+      "value": {
+        "event_id": "core:wire:84",
+        "domain": "core:wire:85",
+        "target_id": "core:wire:86",
+        "contribution_q6": 0,
+        "evidence_refs": [
+          "core:wire:87"
+        ]
+      }
+    },
+    {
+      "id": "core_format_BiasState",
+      "schema_definition": "BiasState",
+      "original_raw_sha256": "e7ac09e87dec90e319159c3a01c96a4e43c0a2423c0819453f74c5a12aa7bbee",
+      "value_sha256": "cbe49dcd82ae82faeb0ae744e1718b77f62215c8574d51a1a6c06a297d31f123",
+      "value": {
+        "state_ref": "core:wire:88",
+        "logical_epoch": 0,
+        "events": [],
+        "weights": []
+      }
+    },
+    {
+      "id": "core_format_BiasUpdateResult",
+      "schema_definition": "BiasUpdateResult",
+      "original_raw_sha256": "073e0f743ca0f7fa5a60d9e049055d9a33bf5e75e0e3fd209a78c77fd3cb1102",
+      "value_sha256": "00bb6fde7cf5f32c15aaaf10911099b9a548ce11dcdd56dd82800cd52723b641",
+      "value": {
+        "before": {
+          "state_ref": "core:wire:89",
+          "logical_epoch": 0,
+          "events": [],
+          "weights": []
+        },
+        "proposed": {
+          "state_ref": "core:wire:90",
+          "logical_epoch": 0,
+          "events": [],
+          "weights": []
+        },
+        "effect_status": "PROPOSED_ONLY"
+      }
+    },
+    {
+      "id": "core_format_ExistentialMetricInputs",
+      "schema_definition": "ExistentialMetricInputs",
+      "original_raw_sha256": "fb69ae25cd6ed64ddb44470bb74c8c72ca030de04bd6897090b323940ae217bb",
+      "value_sha256": "5e2590bf7d1ad7f2f626bc13945786837cf067306ecade4b710a1cd91e88a861",
+      "value": {
+        "context_ref": "core:wire:91",
+        "compressibility_q6": 0,
+        "symmetry_q6": 0,
+        "persistence_q6": 0,
+        "entropy_q6": 0,
+        "coefficient_c": 0,
+        "coefficient_s": 0,
+        "coefficient_p": 0,
+        "coefficient_h": 0,
+        "evidence_refs": [
+          "core:wire:92"
+        ]
+      }
+    },
+    {
+      "id": "core_format_ExistenceMeasure",
+      "schema_definition": "ExistenceMeasure",
+      "original_raw_sha256": "430136cdaf303eb36ad42181046d8dcfc83c91bc97e1fae3580818af36ee87a2",
+      "value_sha256": "bb51b0a8f9724438e2e5de971684c187f20ce3f604010feafdac984208a99c10",
+      "value": {
+        "inputs": {
+          "context_ref": "core:wire:93",
+          "compressibility_q6": 0,
+          "symmetry_q6": 0,
+          "persistence_q6": 0,
+          "entropy_q6": 0,
+          "coefficient_c": 0,
+          "coefficient_s": 0,
+          "coefficient_p": 0,
+          "coefficient_h": 0,
+          "evidence_refs": [
+            "core:wire:94"
+          ]
+        },
+        "potential_q6": 0
+      }
+    },
+    {
+      "id": "core_format_CoreDiagnostic",
+      "schema_definition": "CoreDiagnostic",
+      "original_raw_sha256": "5a95f85be2e06cd440f0f05d7804af39bf776a14c8dd9f930ba42134bc34e689",
+      "value_sha256": "edac461391fccecd588bf25b4e1463284fc1dfbb6952c823d4c66aaeb0391f9e",
+      "value": {
+        "diagnostic_ref": "core:wire:95",
+        "owner": "COSMOLOGY",
+        "rule": "BINDING",
+        "status": "COMPLETED",
+        "failure_code": null,
+        "field": null,
+        "evidence_refs": [],
+        "explanation": "core:wire:96"
+      }
+    },
+    {
+      "id": "core_format_CoreResult",
+      "schema_definition": "CoreResult",
+      "original_raw_sha256": "50400fac3d23f699061633c5b3476ed42a6da4dabc13372f9d91f82c4aa0eaf5",
+      "value_sha256": "1adf6536e02a01bb7d951720a6ff282647b2ff6ec7d3ae39a29cdfdbe9dd38fe",
+      "value": {
+        "operation_reference": "core:wire:97",
+        "binding": {
+          "canonical_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "policy_id": "ywe_core_reference_q6_v1",
+          "policy_sha256": "74dfa3b318cd38296c0b86ad9ff5c14e8fb1d7aed5ff1c02274baa4bbd871e91",
+          "profile_realms": []
+        },
+        "status": "COMPLETED",
+        "value": null,
+        "diagnostics": [
+          {
+            "diagnostic_ref": "core:wire:98",
+            "owner": "COSMOLOGY",
+            "rule": "BINDING",
+            "status": "COMPLETED",
+            "failure_code": null,
+            "field": null,
+            "evidence_refs": [],
+            "explanation": "core:wire:99"
+          }
+        ],
+        "effect_status": "NONE"
+      }
+    },
+    {
+      "id": "core_format_ModuleStatus",
+      "schema_definition": "ModuleStatus",
+      "original_raw_sha256": "5dcb2e7f872f6417f0f2b4ab59a06dca764b0f4329fa0d80996b36736fb212a5",
+      "value_sha256": "32079052ffcb3fc3e43f89d843f450b321e0e733fe594485c4a35cc702895eb6",
+      "value": {
+        "module_id": "COSMOLOGY",
+        "generation": 0,
+        "phase": "STOPPED",
+        "closed": false,
+        "inflight": 0,
+        "ledger_used": 0
+      }
+    },
+    {
+      "id": "core_format_ModuleCompletion",
+      "schema_definition": "ModuleCompletion",
+      "original_raw_sha256": "7a3b65eefd203f676468d0422a22f1380fc6523984a0ce02ea940e1c75be5713",
+      "value_sha256": "ed6681939b9841b6cf384ac39e85cf7604c025867e28748242037f659390af8b",
+      "value": {
+        "request_ref": "core:wire:100",
+        "admitted_generation": 0,
+        "status": "COMPLETED",
+        "result_ref": null,
+        "actual_effect_status": "NONE"
+      }
+    },
+    {
+      "id": "core_format_ProphecyRoute",
+      "schema_definition": "ProphecyRoute",
+      "original_raw_sha256": "c720b1e97eeb2fca68f736190dd1a9b737e7d00e8a95a2d2a4da70b8a99781db",
+      "value_sha256": "3d97f04dbd30551f1f6df50280b7c72c3ee3e6d836dfdb61cae6c56bbfa06f83",
+      "value": {
+        "route_id": "core:wire:101",
+        "condition_refs": [
+          "core:wire:102"
+        ],
+        "destination_interpretation_ref": "core:wire:103"
+      }
+    },
+    {
+      "id": "core_format_ProphecyAttractor",
+      "schema_definition": "ProphecyAttractor",
+      "original_raw_sha256": "e21512c70fa8bc136a44d447cc3037fe2d15e3538411638062539d1231e5b85c",
+      "value_sha256": "fc11bb623b0c85a9d18c7b1ecff5f711bbe4b9e0a71d3217e7fd7050debef069",
+      "value": {
+        "target_domain": "core:wire:104",
+        "target_reference": "core:wire:105",
+        "weight_q6": 0
+      }
+    },
+    {
+      "id": "core_format_ProphecyRecord",
+      "schema_definition": "ProphecyRecord",
+      "original_raw_sha256": "48bedc7f1decc15dd41e9261e6b0427bc9884e7e595b4c696b1aa004724084d4",
+      "value_sha256": "9d1ae6ff9ea91bbdfbdae8bffa17bbf835901485da9e1a34df9af4ec39a571ec",
+      "value": {
+        "prophecy_id": "core:wire:106",
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "core:wire:107",
+          "diagnostic_ref": "core:wire:108",
+          "generation_plan_ref": "core:wire:109",
+          "source_ash_refs": [
+            "core:wire:110"
+          ]
+        },
+        "attractor": {
+          "target_domain": "core:wire:111",
+          "target_reference": "core:wire:112",
+          "weight_q6": 0
+        },
+        "fixed_script": false,
+        "deflection_routes": [],
+        "transmutation_routes": [],
+        "status": "DORMANT",
+        "condition_refs": [
+          "core:wire:113"
+        ]
+      }
+    },
+    {
+      "id": "core_format_OmenCluster",
+      "schema_definition": "OmenCluster",
+      "original_raw_sha256": "5209aeb1f2994aa878b4960f521fe8ebc4fff36f03752437ec017b97fb23743c",
+      "value_sha256": "6aafcae5a23f9d2d0c5f049a9dc7c3aa92320dc5e1d985faaf05f593e0c1070a",
+      "value": {
+        "cluster_id": "core:wire:114",
+        "prophecy_refs": [
+          "core:wire:115",
+          "core:wire:116"
+        ],
+        "observed_symbol_refs": [
+          "core:wire:117"
+        ],
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "core:wire:118",
+          "diagnostic_ref": "core:wire:119",
+          "generation_plan_ref": "core:wire:120",
+          "source_ash_refs": [
+            "core:wire:121"
+          ]
+        }
+      }
+    },
+    {
+      "id": "core_format_RuntimeBiasEffect",
+      "schema_definition": "RuntimeBiasEffect",
+      "original_raw_sha256": "31874ad7cc379c8f0d2ac9b04ee66c43fcdce06d913a444b60009d38ecb7ab05",
+      "value_sha256": "a7412e35e48b1bd91f62eeb4c39aa6370c830f4b8a767e9818aea0e18a1de2db",
+      "value": {
+        "effect_id": "core:wire:122",
+        "before_ref": "core:wire:123",
+        "term": {
+          "event_id": "core:wire:124",
+          "domain": "core:wire:125",
+          "target_id": "core:wire:126",
+          "contribution_q6": 0,
+          "evidence_refs": [
+            "core:wire:127"
+          ]
+        },
+        "effect_status": "PROPOSED_ONLY",
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "core:wire:128",
+          "diagnostic_ref": "core:wire:129",
+          "generation_plan_ref": "core:wire:130",
+          "source_ash_refs": [
+            "core:wire:131"
+          ]
+        }
+      }
+    },
+    {
+      "id": "core_format_RecurringSymbolState",
+      "schema_definition": "RecurringSymbolState",
+      "original_raw_sha256": "96a99225c7df9109adab110ca43f8b73114082f367deca87656b2050dc1551bb",
+      "value_sha256": "4be76f9fae210077a9bc1d666d4ce3ff417933741ba93f44de3fefe73d636e2f",
+      "value": {
+        "state_id": "core:wire:132",
+        "symbol_ref": "core:wire:133",
+        "recurrence_count": 0,
+        "logical_epoch": 0,
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "core:wire:134",
+          "diagnostic_ref": "core:wire:135",
+          "generation_plan_ref": "core:wire:136",
+          "source_ash_refs": [
+            "core:wire:137"
+          ]
+        }
+      }
+    },
+    {
+      "id": "core_format_RegistrySource",
+      "schema_definition": "RegistrySource",
+      "original_raw_sha256": "dbdfee135ccadcfcdef8782515df35a1e2305cc4e98bfbec7e2b0872fbddaeb1",
+      "value_sha256": "93de7b11e43a1dacee65cf8c86cf40feb035ce08dad9d8401eab1dd8e107e0a8",
+      "value": {
+        "source_ref": "core:wire:138",
+        "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "evidence_ref": "core:wire:139"
+      }
+    },
+    {
+      "id": "core_format_WolfPressure",
+      "schema_definition": "WolfPressure",
+      "original_raw_sha256": "abb9e3832fd66f44b65e13a363ef57657b1b06f40feeca6749ed8bd9e87cb6ce",
+      "value_sha256": "6dedcd7547eba41ab5b6c91eeb45b43af797fd0624f1f2d6b1e41f5f29aa18bb",
+      "value": {
+        "white_q6": 0,
+        "dark_q6": 0,
+        "evidence_refs": [
+          "core:wire:140"
+        ]
+      }
+    },
+    {
+      "id": "core_format_WolfBias",
+      "schema_definition": "WolfBias",
+      "original_raw_sha256": "95c33a5b6fff22ab7b333b1da8724a4e5b362822762c18e44ed91eb553c33794",
+      "value_sha256": "8182da917fc65a2c5cafa10b118c86142176b6b7ad954d0f2bf292c5153db7c7",
+      "value": {
+        "white_q6": 0,
+        "dark_q6": 0
+      }
+    },
+    {
+      "id": "core_format_ArchetypeAffinity",
+      "schema_definition": "ArchetypeAffinity",
+      "original_raw_sha256": "2df1d01c068f18135a35954dd4d5d42cc7c654f567fdfd9209b8913771bb2b75",
+      "value_sha256": "aa2d81b5be1424ad3392a7f2069d47ae0cb64e90b7806133df3e32524ecfb309",
+      "value": {
+        "domain": "core:wire:141",
+        "affinity_refs": []
+      }
+    },
+    {
+      "id": "core_format_ClusterRecord",
+      "schema_definition": "ClusterRecord",
+      "original_raw_sha256": "400561fbd84373399f7d203dd23db53ecbb7ce65cb8e93dfe25e96306beaa740",
+      "value_sha256": "6aa44199f5a76f33b30bea2a5c18b7d1ce13207e3226cce5d65d47d56e207c82",
+      "value": {
+        "cluster_id": "core:wire:142",
+        "member_ids": [
+          "core:wire:143",
+          "core:wire:144"
+        ],
+        "lawful_basis_refs": [
+          "core:wire:145"
+        ],
+        "stability": "STABLE",
+        "contradiction_risk_ref": "core:wire:146"
+      }
+    },
+    {
+      "id": "core_format_ArchetypeRegistry",
+      "schema_definition": "ArchetypeRegistry",
+      "original_raw_sha256": "ebdc88f9bfbf2eb9e3e45f4d6779d44f8907b8742384aea53c8e344bbd87c7be",
+      "value_sha256": "14f879925d38187ce905e152e45cda6ce69cd3784f36420803db35b211a174a2",
+      "value": {
+        "registry_id": "core:wire:147",
+        "primary_source": {
+          "source_ref": "core:wire:148",
+          "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "evidence_ref": "core:wire:149"
+        },
+        "relationship_source": {
+          "source_ref": "core:wire:150",
+          "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "evidence_ref": "core:wire:151"
+        },
+        "archetypes": [],
+        "clusters": []
+      }
+    },
+    {
+      "id": "core_format_RelationObservation",
+      "schema_definition": "RelationObservation",
+      "original_raw_sha256": "76c6576e9820a906c2d0ab9cababdfc320a716d095dba2cfad0853b2fbd406c8",
+      "value_sha256": "a1ad53a8a87d34af2e397c38875b3fe741010e3e9b617c3e76301820ac9549eb",
+      "value": {
+        "first_id": "core:wire:152",
+        "second_id": "core:wire:153",
+        "relation": "CONTRADICTION",
+        "score_delta_q6": 0,
+        "coexistence_allowed": false,
+        "suppressed_id": null
+      }
+    },
+    {
+      "id": "core_format_ClusterScore",
+      "schema_definition": "ClusterScore",
+      "original_raw_sha256": "ef669ed2d3c22b54581bc061f961df6593f8efc5b7433c5656a18f6c00421308",
+      "value_sha256": "d6fb40f2bdaf671a95b90dcc20d3b3a20f1a3bc4e6c27128fc3766bdffb3e579",
+      "value": {
+        "cluster_id": "core:wire:154",
+        "qualifying_members": [],
+        "base_score_q6": 0,
+        "stability_bonus_q6": 0,
+        "support_penalty_q6": 0,
+        "final_score_q6": 0,
+        "activated": false,
+        "reasons": []
+      }
+    },
+    {
+      "id": "core_format_BiasEvent",
+      "schema_definition": "BiasEvent",
+      "original_raw_sha256": "3a9a409c7de5eaabcdcb27afac114acc073b5a47c37c252288419d968d09bd62",
+      "value_sha256": "0bfa766c498f9a6239318005a3940235f5c7f982204f1a242284ad136990708e",
+      "value": {
+        "event_id": "core:wire:155",
+        "terms": [
+          {
+            "event_id": "core:wire:156",
+            "domain": "core:wire:157",
+            "target_id": "core:wire:158",
+            "contribution_q6": 0,
+            "evidence_refs": [
+              "core:wire:159"
+            ]
+          }
+        ],
+        "evidence_refs": [
+          "core:wire:160"
+        ]
+      }
+    },
+    {
+      "id": "core_format_ModuleLifecycleReceipt",
+      "schema_definition": "ModuleLifecycleReceipt",
+      "original_raw_sha256": "b311b039127633b16369578ebde428c672d5880bae068eecba8152b3413cb1ed",
+      "value_sha256": "530fd6f7896963a32547ca1d8c9573d6e6c4bb9e397575169f939bcd6c2a9037",
+      "value": {
+        "operation_reference": "core:wire:161",
+        "action": "START",
+        "before": {
+          "module_id": "COSMOLOGY",
+          "generation": 0,
+          "phase": "STOPPED",
+          "closed": false,
+          "inflight": 0,
+          "ledger_used": 0
+        },
+        "after": {
+          "module_id": "COSMOLOGY",
+          "generation": 0,
+          "phase": "STOPPED",
+          "closed": false,
+          "inflight": 0,
+          "ledger_used": 0
+        },
+        "status": "COMPLETED",
+        "failure_code": null
+      }
+    },
+    {
+      "id": "core_format_CoreOrchestrationRequest",
+      "schema_definition": "CoreOrchestrationRequest",
+      "original_raw_sha256": "d980523700c13374f4d4bcc19877802ae99fed16411915d66fc3ec77fa563df0",
+      "value_sha256": "dd4067703ae11732616d539ba3e6821138b6dc01ca2bc6b2156e22da724343cd",
+      "value": {
+        "operation_reference": "core:wire:162",
+        "inputs": {
+          "project_name": "authored",
+          "seed_token": "authored",
+          "topology_depth": 6,
+          "transition_sequence": [
+            {
+              "selection_kind": "IDENTIFIER",
+              "transition_id": "ash_codeword_01",
+              "codeword": null
+            },
+            {
+              "selection_kind": "IDENTIFIER",
+              "transition_id": "ash_codeword_01",
+              "codeword": null
+            },
+            {
+              "selection_kind": "IDENTIFIER",
+              "transition_id": "ash_codeword_02",
+              "codeword": null
+            },
+            {
+              "selection_kind": "IDENTIFIER",
+              "transition_id": "ash_codeword_02",
+              "codeword": null
+            }
+          ],
+          "profile_id": "proposal:full512",
+          "normalization_mode": "ALREADY_VALID",
+          "role_profile_id": "TERNARY_BRANCH_ROLES_001",
+          "naming_policy_id": "YWE_ASCII_DOCUMENT_NAMES_001",
+          "subject_policy_id": "DECLARED_AXIOM_FACTS_001",
+          "artifact_policy_id": "REFERENCE_MANIFEST_PAGES_001",
+          "target_runtime": "REFERENCE_MEMORY_DOCUMENTS",
+          "emission_choice": "REFERENCE_MANIFEST_PAGES"
+        },
+        "origin": {
+          "schema_ref": "data/schemas/m3_generation_state_schema.json",
+          "artifact_type": "ywe_state_assessment",
+          "artifact_version": "1.0.0",
+          "outcome": "diagnosis",
+          "assessment_binding": {
+            "assessment_reference": "core:wire:original",
+            "original_input_reference": "core:wire:original:input",
+            "diagnosis_reference": "core:wire:original:detection"
+          },
+          "source_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "input_evidence": {
+            "original_input_reference": "core:wire:original:input",
+            "representation_kind": "SIGNATURE",
+            "observed_length": 9,
+            "length_unit": "CHARACTERS",
+            "preview": "100000000",
+            "preview_encoding": "TEXT",
+            "truncated": false,
+            "coordinate_observations": [],
+            "failure_code": null
+          },
+          "parsed_state": {
+            "state_space": "F2^9",
+            "bits": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "state_validity_diagnostic": {
+            "input_state": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "admissibility_status": "VALID",
+            "transformation_compatibility": "COMPATIBLE",
+            "normalization_status": "ALREADY_VALID",
+            "recoverability_relevance": "NO_RECOVERY_NEEDED",
+            "is_valid": true,
+            "orbit_info": {
+              "orbit_id": "000101100",
+              "member_count": 16,
+              "contains_known_valid_state": true
+            },
+            "rule_ids": [
+              "ASH-STATE-STRUCTURE-001",
+              "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+              "ASH-STATE-VALIDITY-001"
+            ],
+            "notes": [
+              "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+            ]
+          },
+          "emitted_diagnostics": [
+            {
+              "diagnostic_reference": "core:wire:original:detection",
+              "envelope": {
+                "diagnostic_kind": "STATE_VALIDITY",
+                "severity": "INFO",
+                "stage": "DETECTION",
+                "disposition": "RESOLVED",
+                "subject_reference": "ash_state_100000000",
+                "parent_diagnostic_reference": null,
+                "chain_root_reference": "core:wire:original:detection",
+                "rule_ids": [
+                  "ASH-STATE-STRUCTURE-001",
+                  "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                  "ASH-STATE-VALIDITY-001"
+                ],
+                "summary": "ASH state diagnosis: VALID",
+                "notes": [
+                  "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+                ]
+              }
+            }
+          ]
+        },
+        "normalization": null,
+        "declared_subject": {
+          "compressed_measure": {
+            "ticks": 0,
+            "ticks_per_unit": 100,
+            "unit": "STRUCTURE_TICK"
+          },
+          "erasure_cost": {
+            "ticks": 1,
+            "ticks_per_unit": 10,
+            "unit": "ERASURE_TICK"
+          },
+          "provenance": {
+            "method_id": "test-method",
+            "method_revision": "1",
+            "origin_diagnosis_reference": "core:wire:original:detection",
+            "source_kind": "DECLARED_REFERENCE_INPUT",
+            "source_reference": "declared:source"
+          },
+          "raw_measure": {
+            "ticks": 1,
+            "ticks_per_unit": 100,
+            "unit": "STRUCTURE_TICK"
+          },
+          "relation_count": 1,
+          "scale_count": 2,
+          "self_model_available": true,
+          "self_reference_capable": true,
+          "state": {
+            "bits": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "state_space": "F2^9"
+          },
+          "subject_reference": "declared:subject"
+        },
+        "target_constraints": {
+          "max_artifacts": 32,
+          "max_document_bytes": 32768,
+          "max_total_document_bytes": 1048576,
+          "allow_declared_axiom_failures": true,
+          "existing_document_policy": "EXACT_BYTES_IDEMPOTENT_OR_REFUSE"
+        },
+        "realm_request": null,
+        "archetype_context": null,
+        "truth_input": null,
+        "perception_request": null
+      }
+    },
+    {
+      "id": "core_format_CoreOrchestrationResult",
+      "schema_definition": "CoreOrchestrationResult",
+      "original_raw_sha256": "cec248a31cd408314a2458a27dc80f9b2cf058832ae48746f9773f81c85e6a3a",
+      "value_sha256": "a4c45b6bb10e4896ccd58bd2f5dbf21529f17e584a8773163d85e7c8989d4e25",
+      "value": {
+        "request": {
+          "operation_reference": "core:wire:163",
+          "inputs": {
+            "project_name": "authored",
+            "seed_token": "authored",
+            "topology_depth": 6,
+            "transition_sequence": [
+              {
+                "selection_kind": "IDENTIFIER",
+                "transition_id": "ash_codeword_01",
+                "codeword": null
+              },
+              {
+                "selection_kind": "IDENTIFIER",
+                "transition_id": "ash_codeword_01",
+                "codeword": null
+              },
+              {
+                "selection_kind": "IDENTIFIER",
+                "transition_id": "ash_codeword_02",
+                "codeword": null
+              },
+              {
+                "selection_kind": "IDENTIFIER",
+                "transition_id": "ash_codeword_02",
+                "codeword": null
+              }
+            ],
+            "profile_id": "proposal:full512",
+            "normalization_mode": "ALREADY_VALID",
+            "role_profile_id": "TERNARY_BRANCH_ROLES_001",
+            "naming_policy_id": "YWE_ASCII_DOCUMENT_NAMES_001",
+            "subject_policy_id": "DECLARED_AXIOM_FACTS_001",
+            "artifact_policy_id": "REFERENCE_MANIFEST_PAGES_001",
+            "target_runtime": "REFERENCE_MEMORY_DOCUMENTS",
+            "emission_choice": "REFERENCE_MANIFEST_PAGES"
+          },
+          "origin": {
+            "schema_ref": "data/schemas/m3_generation_state_schema.json",
+            "artifact_type": "ywe_state_assessment",
+            "artifact_version": "1.0.0",
+            "outcome": "diagnosis",
+            "assessment_binding": {
+              "assessment_reference": "core:wire:original",
+              "original_input_reference": "core:wire:original:input",
+              "diagnosis_reference": "core:wire:original:detection"
+            },
+            "source_binding": {
+              "dependency_id": "ash_cosmological_model.f2_9.canonical",
+              "aggregate_sha256": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8",
+              "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+              "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+              "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+              "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+              "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+              "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+              "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+            },
+            "profile_binding": {
+              "availability": "AVAILABLE",
+              "profile_id": "wrw_reference_profile",
+              "source_binding": {
+                "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+                "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+                "evidence_reference": "wrw_reference_profile:source_binding"
+              },
+              "recognized_valid_signatures": [
+                "000000001",
+                "000000010",
+                "000000100",
+                "000001000",
+                "000010000",
+                "000100000",
+                "001000000",
+                "010000000",
+                "100000000"
+              ]
+            },
+            "input_evidence": {
+              "original_input_reference": "core:wire:original:input",
+              "representation_kind": "SIGNATURE",
+              "observed_length": 9,
+              "length_unit": "CHARACTERS",
+              "preview": "100000000",
+              "preview_encoding": "TEXT",
+              "truncated": false,
+              "coordinate_observations": [],
+              "failure_code": null
+            },
+            "parsed_state": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "state_validity_diagnostic": {
+              "input_state": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "admissibility_status": "VALID",
+              "transformation_compatibility": "COMPATIBLE",
+              "normalization_status": "ALREADY_VALID",
+              "recoverability_relevance": "NO_RECOVERY_NEEDED",
+              "is_valid": true,
+              "orbit_info": {
+                "orbit_id": "000101100",
+                "member_count": 16,
+                "contains_known_valid_state": true
+              },
+              "rule_ids": [
+                "ASH-STATE-STRUCTURE-001",
+                "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                "ASH-STATE-VALIDITY-001"
+              ],
+              "notes": [
+                "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+              ]
+            },
+            "emitted_diagnostics": [
+              {
+                "diagnostic_reference": "core:wire:original:detection",
+                "envelope": {
+                  "diagnostic_kind": "STATE_VALIDITY",
+                  "severity": "INFO",
+                  "stage": "DETECTION",
+                  "disposition": "RESOLVED",
+                  "subject_reference": "ash_state_100000000",
+                  "parent_diagnostic_reference": null,
+                  "chain_root_reference": "core:wire:original:detection",
+                  "rule_ids": [
+                    "ASH-STATE-STRUCTURE-001",
+                    "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                    "ASH-STATE-VALIDITY-001"
+                  ],
+                  "summary": "ASH state diagnosis: VALID",
+                  "notes": [
+                    "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+                  ]
+                }
+              }
+            ]
+          },
+          "normalization": null,
+          "declared_subject": {
+            "compressed_measure": {
+              "ticks": 0,
+              "ticks_per_unit": 100,
+              "unit": "STRUCTURE_TICK"
+            },
+            "erasure_cost": {
+              "ticks": 1,
+              "ticks_per_unit": 10,
+              "unit": "ERASURE_TICK"
+            },
+            "provenance": {
+              "method_id": "test-method",
+              "method_revision": "1",
+              "origin_diagnosis_reference": "core:wire:original:detection",
+              "source_kind": "DECLARED_REFERENCE_INPUT",
+              "source_reference": "declared:source"
+            },
+            "raw_measure": {
+              "ticks": 1,
+              "ticks_per_unit": 100,
+              "unit": "STRUCTURE_TICK"
+            },
+            "relation_count": 1,
+            "scale_count": 2,
+            "self_model_available": true,
+            "self_reference_capable": true,
+            "state": {
+              "bits": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "state_space": "F2^9"
+            },
+            "subject_reference": "declared:subject"
+          },
+          "target_constraints": {
+            "max_artifacts": 32,
+            "max_document_bytes": 32768,
+            "max_total_document_bytes": 1048576,
+            "allow_declared_axiom_failures": true,
+            "existing_document_policy": "EXACT_BYTES_IDEMPOTENT_OR_REFUSE"
+          },
+          "realm_request": null,
+          "archetype_context": null,
+          "truth_input": null,
+          "perception_request": null
+        },
+        "binding": {
+          "canonical_binding": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          },
+          "profile_binding": {
+            "availability": "AVAILABLE",
+            "profile_id": "wrw_reference_profile",
+            "source_binding": {
+              "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+              "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+              "evidence_reference": "wrw_reference_profile:source_binding"
+            },
+            "recognized_valid_signatures": [
+              "000000001",
+              "000000010",
+              "000000100",
+              "000001000",
+              "000010000",
+              "000100000",
+              "001000000",
+              "010000000",
+              "100000000"
+            ]
+          },
+          "policy_id": "ywe_core_reference_q6_v1",
+          "policy_sha256": "74dfa3b318cd38296c0b86ad9ff5c14e8fb1d7aed5ff1c02274baa4bbd871e91",
+          "profile_realms": []
+        },
+        "normalization_result": null,
+        "normalization_completion": null,
+        "normalized_origin": null,
+        "normalized_origin_completion": null,
+        "generation_run": null,
+        "cosmology": null,
+        "realm_access": null,
+        "realm_shift": null,
+        "pattern": null,
+        "archetypes": null,
+        "narrative": null,
+        "perception": null,
+        "status": "COMPLETED",
+        "diagnostics": [
+          {
+            "diagnostic_ref": "core:wire:164",
+            "owner": "COSMOLOGY",
+            "rule": "BINDING",
+            "status": "COMPLETED",
+            "failure_code": null,
+            "field": null,
+            "evidence_refs": [],
+            "explanation": "core:wire:165"
+          }
+        ]
+      }
+    },
+    {
+      "id": "core_format_CoreNormalizationRequest",
+      "schema_definition": "CoreNormalizationRequest",
+      "original_raw_sha256": "828081e73c37334e481ad99b6dfce8025ae008a08d64b82683c6433be816f8d1",
+      "value_sha256": "0df6d24ada1afa0e2b3c1754d477351e57e7e26dc89486f085cf79f523595c33",
+      "value": {
+        "plan": {
+          "schema_ref": "data/schemas/m3_generation_normalization_plan_schema.json",
+          "artifact_type": "ywe_state_normalization_plan",
+          "artifact_version": "1.0.0",
+          "plan_reference": "core:wire:normalization:plan",
+          "evidence_reference": "core:wire:normalization:evidence",
+          "policy_binding": {
+            "policy_id": "YWE-NORMALIZE-LEXICOGRAPHIC-001",
+            "policy_version": "1.0.0",
+            "source_reference": "docs/architecture/m3_normalization_policy.md",
+            "source_sha256": "804eec92cf52b465b7aaf0cb5f139f581ac2899d13203a8c4cfe9f4d7579c383"
+          },
+          "original_diagnosis": {
+            "schema_ref": "data/schemas/m3_generation_state_schema.json",
+            "artifact_type": "ywe_state_assessment",
+            "artifact_version": "1.0.0",
+            "outcome": "diagnosis",
+            "assessment_binding": {
+              "assessment_reference": "core:wire:original",
+              "original_input_reference": "core:wire:original:input",
+              "diagnosis_reference": "core:wire:original:detection"
+            },
+            "source_binding": {
+              "dependency_id": "ash_cosmological_model.f2_9.canonical",
+              "aggregate_sha256": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8",
+              "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+              "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+              "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+              "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+              "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+              "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+              "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+            },
+            "profile_binding": {
+              "availability": "AVAILABLE",
+              "profile_id": "wrw_reference_profile",
+              "source_binding": {
+                "source_reference": "data/ash_state/realm_bit_mapping.yaml",
+                "source_sha256": "751879429b53534de04033d500722e87bd35f8994c7aefdc67631bb7f3783455",
+                "evidence_reference": "wrw_reference_profile:source_binding"
+              },
+              "recognized_valid_signatures": [
+                "000000001",
+                "000000010",
+                "000000100",
+                "000001000",
+                "000010000",
+                "000100000",
+                "001000000",
+                "010000000",
+                "100000000"
+              ]
+            },
+            "input_evidence": {
+              "original_input_reference": "core:wire:original:input",
+              "representation_kind": "SIGNATURE",
+              "observed_length": 9,
+              "length_unit": "CHARACTERS",
+              "preview": "100000000",
+              "preview_encoding": "TEXT",
+              "truncated": false,
+              "coordinate_observations": [],
+              "failure_code": null
+            },
+            "parsed_state": {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "state_validity_diagnostic": {
+              "input_state": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "admissibility_status": "VALID",
+              "transformation_compatibility": "COMPATIBLE",
+              "normalization_status": "ALREADY_VALID",
+              "recoverability_relevance": "NO_RECOVERY_NEEDED",
+              "is_valid": true,
+              "orbit_info": {
+                "orbit_id": "000101100",
+                "member_count": 16,
+                "contains_known_valid_state": true
+              },
+              "rule_ids": [
+                "ASH-STATE-STRUCTURE-001",
+                "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                "ASH-STATE-VALIDITY-001"
+              ],
+              "notes": [
+                "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+              ]
+            },
+            "emitted_diagnostics": [
+              {
+                "diagnostic_reference": "core:wire:original:detection",
+                "envelope": {
+                  "diagnostic_kind": "STATE_VALIDITY",
+                  "severity": "INFO",
+                  "stage": "DETECTION",
+                  "disposition": "RESOLVED",
+                  "subject_reference": "ash_state_100000000",
+                  "parent_diagnostic_reference": null,
+                  "chain_root_reference": "core:wire:original:detection",
+                  "rule_ids": [
+                    "ASH-STATE-STRUCTURE-001",
+                    "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                    "ASH-STATE-VALIDITY-001"
+                  ],
+                  "summary": "ASH state diagnosis: VALID",
+                  "notes": [
+                    "Admissibility uses the explicitly bound profile and fixed canonical sixteen-codeword relation."
+                  ]
+                }
+              }
+            ]
+          },
+          "decision": "ALREADY_VALID",
+          "eligible_targets_complete": true,
+          "eligible_targets": [
+            {
+              "state_space": "F2^9",
+              "bits": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "selected_target": {
+            "state_space": "F2^9",
+            "bits": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "codeword_chain": [],
+          "reason_code": "NORMALIZATION_ALREADY_VALID"
+        },
+        "context": {
+          "operation_reference": "core:wire:normalization",
+          "computation_reference": "core:wire:normalization:computation",
+          "post_validation_reference": "core:wire:normalization:post"
+        }
+      }
+    }
+  ]
+}

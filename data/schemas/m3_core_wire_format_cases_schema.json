@@ -1,0 +1,1677 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m3_core_wire_format_cases_schema.json",
+  "title": "All 53 independently authored Core wire format cases",
+  "description": "YWE-REQ-0051 structural specimens only; no execution, capture or milestone claim.",
+  "x-ywe-requirement-id": "YWE-REQ-0051",
+  "type": "object",
+  "required": [
+    "artifact_type",
+    "artifact_version",
+    "evidence_scope",
+    "cases"
+  ],
+  "properties": {
+    "artifact_type": {
+      "const": "ywe_core_wire_format_cases"
+    },
+    "artifact_version": {
+      "const": "1.0.0"
+    },
+    "evidence_scope": {
+      "const": "AUTHORED_FORMAT_ONLY_NOT_RUNTIME_CAPTURE_OR_ACCEPTANCE"
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 53,
+      "maxItems": 53,
+      "prefixItems": [
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_CoreBinding"
+            },
+            "schema_definition": {
+              "const": "CoreBinding"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreBinding",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ProfileRealmDefinition"
+            },
+            "schema_definition": {
+              "const": "ProfileRealmDefinition"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ProfileRealmDefinition",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_CosmicState"
+            },
+            "schema_definition": {
+              "const": "CosmicState"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CosmicState",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_CoreProvenance"
+            },
+            "schema_definition": {
+              "const": "CoreProvenance"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_DeclaredTruthFact"
+            },
+            "schema_definition": {
+              "const": "DeclaredTruthFact"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/DeclaredTruthFact",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_TruthInputSnapshot"
+            },
+            "schema_definition": {
+              "const": "TruthInputSnapshot"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/TruthInputSnapshot",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_AttunementFact"
+            },
+            "schema_definition": {
+              "const": "AttunementFact"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/AttunementFact",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_RealmAccessRequest"
+            },
+            "schema_definition": {
+              "const": "RealmAccessRequest"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/RealmAccessRequest",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_RealmAccessResult"
+            },
+            "schema_definition": {
+              "const": "RealmAccessResult"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/RealmAccessResult",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_RealmShiftProposal"
+            },
+            "schema_definition": {
+              "const": "RealmShiftProposal"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/RealmShiftProposal",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_PatternProjectionRule"
+            },
+            "schema_definition": {
+              "const": "PatternProjectionRule"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/PatternProjectionRule",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_PatternObservation"
+            },
+            "schema_definition": {
+              "const": "PatternObservation"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/PatternObservation",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_CosmicPatternSnapshot"
+            },
+            "schema_definition": {
+              "const": "CosmicPatternSnapshot"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CosmicPatternSnapshot",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ArchetypeRecord"
+            },
+            "schema_definition": {
+              "const": "ArchetypeRecord"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ArchetypeRecord",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ArchetypeContext"
+            },
+            "schema_definition": {
+              "const": "ArchetypeContext"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ArchetypeContext",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ArchetypeScore"
+            },
+            "schema_definition": {
+              "const": "ArchetypeScore"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ArchetypeScore",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ArchetypeEvaluation"
+            },
+            "schema_definition": {
+              "const": "ArchetypeEvaluation"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ArchetypeEvaluation",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_NarrativeInterpretation"
+            },
+            "schema_definition": {
+              "const": "NarrativeInterpretation"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/NarrativeInterpretation",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_PerceptionRule"
+            },
+            "schema_definition": {
+              "const": "PerceptionRule"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/PerceptionRule",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_PerceptionRequest"
+            },
+            "schema_definition": {
+              "const": "PerceptionRequest"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/PerceptionRequest",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_PerceptionOverlay"
+            },
+            "schema_definition": {
+              "const": "PerceptionOverlay"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/PerceptionOverlay",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_WeightedOption"
+            },
+            "schema_definition": {
+              "const": "WeightedOption"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/WeightedOption",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_WeightedAllocation"
+            },
+            "schema_definition": {
+              "const": "WeightedAllocation"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/WeightedAllocation",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_SelectionRequest"
+            },
+            "schema_definition": {
+              "const": "SelectionRequest"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/SelectionRequest",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_SelectionResult"
+            },
+            "schema_definition": {
+              "const": "SelectionResult"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/SelectionResult",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_BiasTerm"
+            },
+            "schema_definition": {
+              "const": "BiasTerm"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/BiasTerm",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_BiasState"
+            },
+            "schema_definition": {
+              "const": "BiasState"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/BiasState",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_BiasUpdateResult"
+            },
+            "schema_definition": {
+              "const": "BiasUpdateResult"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/BiasUpdateResult",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ExistentialMetricInputs"
+            },
+            "schema_definition": {
+              "const": "ExistentialMetricInputs"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ExistentialMetricInputs",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ExistenceMeasure"
+            },
+            "schema_definition": {
+              "const": "ExistenceMeasure"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ExistenceMeasure",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_CoreDiagnostic"
+            },
+            "schema_definition": {
+              "const": "CoreDiagnostic"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreDiagnostic",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_CoreResult"
+            },
+            "schema_definition": {
+              "const": "CoreResult"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreResult",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ModuleStatus"
+            },
+            "schema_definition": {
+              "const": "ModuleStatus"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ModuleStatus",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ModuleCompletion"
+            },
+            "schema_definition": {
+              "const": "ModuleCompletion"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ModuleCompletion",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ProphecyRoute"
+            },
+            "schema_definition": {
+              "const": "ProphecyRoute"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ProphecyRoute",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ProphecyAttractor"
+            },
+            "schema_definition": {
+              "const": "ProphecyAttractor"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ProphecyAttractor",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ProphecyRecord"
+            },
+            "schema_definition": {
+              "const": "ProphecyRecord"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ProphecyRecord",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_OmenCluster"
+            },
+            "schema_definition": {
+              "const": "OmenCluster"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/OmenCluster",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_RuntimeBiasEffect"
+            },
+            "schema_definition": {
+              "const": "RuntimeBiasEffect"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/RuntimeBiasEffect",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_RecurringSymbolState"
+            },
+            "schema_definition": {
+              "const": "RecurringSymbolState"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/RecurringSymbolState",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_RegistrySource"
+            },
+            "schema_definition": {
+              "const": "RegistrySource"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/RegistrySource",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_WolfPressure"
+            },
+            "schema_definition": {
+              "const": "WolfPressure"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/WolfPressure",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_WolfBias"
+            },
+            "schema_definition": {
+              "const": "WolfBias"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/WolfBias",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ArchetypeAffinity"
+            },
+            "schema_definition": {
+              "const": "ArchetypeAffinity"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ArchetypeAffinity",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ClusterRecord"
+            },
+            "schema_definition": {
+              "const": "ClusterRecord"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ClusterRecord",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ArchetypeRegistry"
+            },
+            "schema_definition": {
+              "const": "ArchetypeRegistry"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ArchetypeRegistry",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_RelationObservation"
+            },
+            "schema_definition": {
+              "const": "RelationObservation"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/RelationObservation",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ClusterScore"
+            },
+            "schema_definition": {
+              "const": "ClusterScore"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ClusterScore",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_BiasEvent"
+            },
+            "schema_definition": {
+              "const": "BiasEvent"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/BiasEvent",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_ModuleLifecycleReceipt"
+            },
+            "schema_definition": {
+              "const": "ModuleLifecycleReceipt"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ModuleLifecycleReceipt",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_CoreOrchestrationRequest"
+            },
+            "schema_definition": {
+              "const": "CoreOrchestrationRequest"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreOrchestrationRequest",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_CoreOrchestrationResult"
+            },
+            "schema_definition": {
+              "const": "CoreOrchestrationResult"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreOrchestrationResult",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "schema_definition",
+            "original_raw_sha256",
+            "value_sha256",
+            "value"
+          ],
+          "properties": {
+            "id": {
+              "const": "core_format_CoreNormalizationRequest"
+            },
+            "schema_definition": {
+              "const": "CoreNormalizationRequest"
+            },
+            "original_raw_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreNormalizationRequest",
+              "x-ywe-requirement-id": "YWE-REQ-0051"
+            }
+          },
+          "additionalProperties": false
+        }
+      ],
+      "items": false
+    }
+  },
+  "additionalProperties": false
+}

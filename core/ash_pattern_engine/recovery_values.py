@@ -55,6 +55,14 @@ RECOVERY_SOURCE_BASELINES = (
         ("interfaces/diagnostic-schema.md", "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"),
         ("interfaces/rule-id-taxonomy.md", "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"),
     )),
+    ("M3_GENERATION", state.GENERATION_CANONICAL_BINDING_FIELDS, (
+        RECOVERY_CONTRACT_PIN_FIELDS[0],
+        ("interfaces/contracts/diagnostics-module-contract.md", "5ba322a2376bb325e5d58d9341938535ee8d69ff0fc286b3969dfdb77bd8c225"),
+        *RECOVERY_CONTRACT_PIN_FIELDS[2:4],
+        ("algorithms/containment-safe-failure-semantics.pseudo.md", "df957dc5c82c2fd0b51e43c6783d8cbb2e3ce565420a765abffd244cdcea98b2"),
+        ("interfaces/diagnostic-schema.md", "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"),
+        ("interfaces/rule-id-taxonomy.md", "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"),
+    )),
 )
 RECOVERY_POLICY_BINDING_FIELDS = (
     ("policy_id", "YWE-RECOVERY-SAFETY-001"), ("policy_version", "1.0.0"),
@@ -1127,7 +1135,7 @@ class RecoveryPacketCommon(_Record):
             _fail("capture.finish")
 
     def to_record(self):
-        return {"schema_ref": self.schema_ref, "artifact_type": self.artifact_type, "artifact_version": self.artifact_version, "outcome": self.outcome, "execution_scope": self.execution_scope,
+        return {"schema_ref": wire_schema(self), "artifact_type": self.artifact_type, "artifact_version": self.artifact_version, "outcome": self.outcome, "execution_scope": self.execution_scope,
                 **{f.name: _record(getattr(self, f.name)) for f in fields(self)}, "session_effects_performed": self.session_effects_performed}
 
 
@@ -1157,3 +1165,14 @@ class RecoveryFailure(RecoveryPacketCommon):
 
 
 RecoveryValuePacket = RecoveryNoAction | RecoveredValue | RecoveredFallbackValue | RecoveryHandoff | RecoveryFailure
+
+
+def wire_schema(value) -> str:
+    """Route only owned recovery roots by their full current source vector."""
+    if not any(type(value) is kind for kind in (RecoveryNoAction, RecoveredValue,
+            RecoveredFallbackValue, RecoveryHandoff, RecoveryFailure)):
+        raise RecoveryContractError("RECOVERY_INPUT_INVALID", "source_binding")
+    type(value).__post_init__(value)
+    baseline = state.canonical_source_baseline(value.source_binding.canonical_binding)
+    return ("data/schemas/m3_generation_recovery_value_schema.json" if baseline == "M3_GENERATION"
+            else "data/schemas/m3_recovery_value_schema.json")

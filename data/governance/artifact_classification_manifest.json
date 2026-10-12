@@ -7,8 +7,8 @@
   "scope_manifest_ref": "data/governance/scope_partition_manifest.json",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1371,
-    "path_digest": "a750863b02cdcccb095e70bc86d7aae7d6078614d4e8c8d22247b29bd25dcc81",
+    "path_count": 1430,
+    "path_digest": "c914d20c4ced4764e7336b10481e5cfe7be4cd9adaa8c6c944991c7861ca499d",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "classes": [
@@ -1829,6 +1829,22 @@
       "governing_source": "docs/architecture/m3_realm_transition_contract.md",
       "rationale": "Adopted bounded M3 module contract or exact normative companion; runtime acceptance remains separately verified.",
       "authority_role": "primary"
+    },
+    {
+      "path": "data/governance/m3_acceptance_evidence.json",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "This pending then immutable record preserves M3 acceptance chronology without defining requirements or gate logic.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "docs/project/M3_CORE_CONTRACTS_ACCEPTANCE.md",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "This pending then immutable record preserves M3 acceptance chronology without defining requirements or gate logic.",
+      "authority_role": "supporting"
     }
   ],
   "sensitive_source_hash_algorithm": "sha256_utf8_lf_normalized",
@@ -1861,10 +1877,10 @@
   "coverage": {
     "counts_by_class": {
       "deprecated": 1,
-      "example": 190,
-      "historical": 14,
-      "informative": 204,
-      "normative": 925,
+      "example": 194,
+      "historical": 16,
+      "informative": 217,
+      "normative": 965,
       "placeholder": 30,
       "superseded": 7
     }

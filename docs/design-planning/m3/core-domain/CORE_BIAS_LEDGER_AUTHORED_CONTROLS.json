@@ -1,0 +1,315 @@
+{
+  "scope": "AUTHORED_EXPECTATIONS_AND_INDEPENDENT_INTEGER_REPLAY_NOT_RUNTIME_EXECUTION",
+  "controls": [
+    {
+      "id": "fresh_two_keys",
+      "before_keys": [],
+      "before_weights": [],
+      "new_terms": [
+        [
+          "a",
+          "z",
+          400000
+        ],
+        [
+          "b",
+          "a",
+          300000
+        ]
+      ],
+      "steps": 0,
+      "retention": 1000000,
+      "expected_keys": [
+        [
+          "a",
+          "z"
+        ],
+        [
+          "b",
+          "a"
+        ]
+      ],
+      "expected_weights": [
+        [
+          "bias:00",
+          400000
+        ],
+        [
+          "bias:01",
+          300000
+        ]
+      ]
+    },
+    {
+      "id": "insert_earlier_key",
+      "before_keys": [
+        [
+          "a",
+          "z"
+        ],
+        [
+          "b",
+          "a"
+        ]
+      ],
+      "before_weights": [
+        400000,
+        300000
+      ],
+      "new_terms": [
+        [
+          "a",
+          "a",
+          200000
+        ]
+      ],
+      "steps": 0,
+      "retention": 1000000,
+      "expected_keys": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "a",
+          "z"
+        ],
+        [
+          "b",
+          "a"
+        ]
+      ],
+      "expected_weights": [
+        [
+          "bias:00",
+          200000
+        ],
+        [
+          "bias:01",
+          400000
+        ],
+        [
+          "bias:02",
+          300000
+        ]
+      ]
+    },
+    {
+      "id": "colon_ambiguity",
+      "before_keys": [],
+      "before_weights": [],
+      "new_terms": [
+        [
+          "a:b",
+          "c",
+          70000
+        ],
+        [
+          "a",
+          "b:c",
+          30000
+        ]
+      ],
+      "steps": 0,
+      "retention": 1000000,
+      "expected_keys": [
+        [
+          "a",
+          "b:c"
+        ],
+        [
+          "a:b",
+          "c"
+        ]
+      ],
+      "expected_weights": [
+        [
+          "bias:00",
+          30000
+        ],
+        [
+          "bias:01",
+          70000
+        ]
+      ]
+    },
+    {
+      "id": "duplicate_replay_after_decay",
+      "before_keys": [
+        [
+          "x",
+          "t"
+        ]
+      ],
+      "before_weights": [
+        400000
+      ],
+      "new_terms": [],
+      "steps": 1,
+      "retention": 500000,
+      "expected_keys": [
+        [
+          "x",
+          "t"
+        ]
+      ],
+      "expected_weights": [
+        [
+          "bias:00",
+          200000
+        ]
+      ],
+      "note": "Actual duplicate event has identical retained body; contributeszero."
+    },
+    {
+      "id": "same_epoch_duplicate_again",
+      "before_keys": [
+        [
+          "x",
+          "t"
+        ]
+      ],
+      "before_weights": [
+        200000
+      ],
+      "new_terms": [],
+      "steps": 0,
+      "retention": 500000,
+      "expected_keys": [
+        [
+          "x",
+          "t"
+        ]
+      ],
+      "expected_weights": [
+        [
+          "bias:00",
+          200000
+        ]
+      ]
+    },
+    {
+      "id": "single_clamp_after_all_new",
+      "before_keys": [
+        [
+          "x",
+          "t"
+        ]
+      ],
+      "before_weights": [
+        100000
+      ],
+      "new_terms": [
+        [
+          "x",
+          "t",
+          1000000
+        ],
+        [
+          "x",
+          "t",
+          -800000
+        ]
+      ],
+      "steps": 0,
+      "retention": 1000000,
+      "expected_keys": [
+        [
+          "x",
+          "t"
+        ]
+      ],
+      "expected_weights": [
+        [
+          "bias:00",
+          300000
+        ]
+      ],
+      "note": "Terms belongtodistinct newevent IDs; termwiseclampwouldwronglyyield200000."
+    },
+    {
+      "id": "zero_key_retained",
+      "before_keys": [
+        [
+          "x",
+          "t"
+        ]
+      ],
+      "before_weights": [
+        0
+      ],
+      "new_terms": [],
+      "steps": 1024,
+      "retention": 0,
+      "expected_keys": [
+        [
+          "x",
+          "t"
+        ]
+      ],
+      "expected_weights": [
+        [
+          "bias:00",
+          0
+        ]
+      ]
+    },
+    {
+      "id": "floor_each_step",
+      "before_keys": [
+        [
+          "x",
+          "t"
+        ]
+      ],
+      "before_weights": [
+        3
+      ],
+      "new_terms": [],
+      "steps": 2,
+      "retention": 500000,
+      "expected_keys": [
+        [
+          "x",
+          "t"
+        ]
+      ],
+      "expected_weights": [
+        [
+          "bias:00",
+          0
+        ]
+      ]
+    },
+    {
+      "id": "conflicting_event_body",
+      "expected_status": "REFUSED",
+      "failure_code": "CORE_FACT_CONFLICT",
+      "unchanged_before": true
+    },
+    {
+      "id": "bad_operational_rank",
+      "expected_status": "REFUSED",
+      "failure_code": "CORE_PROVENANCE_MISSING",
+      "field": "weights",
+      "unchanged_before": true
+    },
+    {
+      "id": "key65_or_event513",
+      "expected_status": "REFUSED",
+      "failure_code": "CORE_RESOURCE_LIMIT",
+      "no_eviction": true
+    },
+    {
+      "id": "reversed_epoch_or_gap1025",
+      "expected_status": "REFUSED",
+      "failure_codes": [
+        "CORE_EPOCH_REVERSED",
+        "CORE_RESOURCE_LIMIT"
+      ],
+      "unchanged_before": true
+    }
+  ],
+  "executed_numeric_controls": 8,
+  "production_code_executed": false
+}

@@ -208,7 +208,7 @@ class NormalizationPlan:
         _choice(self.reason_code, (expected,), "reason_code")
 
     def to_record(self):
-        return {"schema_ref": self.schema_ref, "artifact_type": self.artifact_type,
+        return {"schema_ref": wire_schema(self), "artifact_type": self.artifact_type,
                 "artifact_version": self.artifact_version, "plan_reference": self.plan_reference,
                 "evidence_reference": self.evidence_reference, "policy_binding": self.policy_binding.to_record(),
                 "original_diagnosis": self.original_diagnosis.to_record(), "decision": self.decision,
@@ -464,7 +464,7 @@ class _NormalizationPacket:
                 raise NormalizationContractError("NORMALIZATION_PLAN_INVALID", "emission.envelope")
 
     def _common_record(self):
-        return {"schema_ref": self.schema_ref, "artifact_type": self.artifact_type,
+        return {"schema_ref": wire_schema(self), "artifact_type": self.artifact_type,
                 "artifact_version": self.artifact_version, "outcome": self.outcome,
                 "operation_binding": self.operation_binding.to_record(), "plan": self.plan.to_record(),
                 "plan_validation": self.plan_validation.to_record(),
@@ -581,7 +581,7 @@ class NormalizationCaptureFailure(_NormalizationPacket):
     failure_code: str
     failed_field: str
     capture_status: str
-    attempted_diagnostic: NormalizationDiagnosticRecord
+    attempted_diagnostic: NormalizationDiagnosticRecord | None
     outcome: ClassVar[str] = "FAILURE"
     failure_kind: ClassVar[str] = "diagnostic_capture"
 
@@ -594,6 +594,16 @@ class NormalizationCaptureFailure(_NormalizationPacket):
         if (self.plan_validation.origin_validation_status != "VERIFIED" or self.normalized_state is not None
                 or len(self.emitted_diagnostics) > 1):
             raise NormalizationContractError("NORMALIZATION_PLAN_INVALID", "capture_status")
+        if self.attempted_diagnostic is None:
+            current = values.canonical_source_baseline(self.original_diagnosis.source_binding) == 'M3_GENERATION'
+            if (not current or len(self.emitted_diagnostics) != 1 or self.capture_status != 'NOT_CONFIRMED'
+                    or self.failed_field != 'normalization_capture' or self.post_validity_diagnostic is not None
+                    or self.plan_validation.validation_status != 'VALIDATED'
+                    or self.plan.decision not in ('ALREADY_VALID', 'PLAN_READY')
+                    or self.emitted_diagnostics[0].emission.envelope.disposition != 'PENDING'
+                    or len(self.steps) != (0 if self.plan.decision == 'ALREADY_VALID' else 1)):
+                raise NormalizationContractError('NORMALIZATION_PLAN_INVALID', 'attempted_diagnostic')
+            return
         self._validate_record(self.attempted_diagnostic, len(self.emitted_diagnostics))
         if not self.emitted_diagnostics and self.post_validity_diagnostic is not None:
             raise NormalizationContractError("NORMALIZATION_PLAN_INVALID", "post_validity_diagnostic")
@@ -616,4 +626,16 @@ class NormalizationCaptureFailure(_NormalizationPacket):
         return {**self._common_record(), "failure_kind": self.failure_kind,
                 "failure_code": self.failure_code, "failed_field": self.failed_field,
                 "capture_status": self.capture_status,
-                "attempted_diagnostic": self.attempted_diagnostic.to_record()}
+                "attempted_diagnostic": None if self.attempted_diagnostic is None else self.attempted_diagnostic.to_record()}
+
+
+def wire_schema(value):
+    """Select current-source transport without widening historical families."""
+    kind = type(value)
+    if not any(kind is owned for owned in (NormalizationPlan, NormalizationResult, NormalizationFailure, NormalizationCaptureFailure)):
+        raise NormalizationContractError('NORMALIZATION_PLAN_INVALID', 'plan')
+    kind.__post_init__(value)
+    current = values.canonical_source_baseline(value.original_diagnosis.source_binding) == 'M3_GENERATION'
+    if kind is NormalizationPlan:
+        return 'data/schemas/m3_generation_normalization_plan_schema.json' if current else 'data/schemas/m3_normalization_plan_schema.json'
+    return 'data/schemas/m3_generation_state_normalization_schema.json' if current else 'data/schemas/m3_state_normalization_schema.json'

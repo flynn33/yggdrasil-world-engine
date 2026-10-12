@@ -38,6 +38,13 @@ SOURCE_PINS = (
     ("RULE_TAXONOMY", "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"),
     ("DIAGNOSTICS_MODULE_CONTRACT", "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"),
 )
+GENERATION_SOURCE_PINS = tuple(
+    (name, "4460f1c6f3dbc5289d29bfdbb1c7b1ca5dabfa60f425be3d9ca485855eb5d903"
+     if name == "TRANSITION_REGISTRY_CONTRACT" else
+     "5ba322a2376bb325e5d58d9341938535ee8d69ff0fc286b3969dfdb77bd8c225"
+     if name == "DIAGNOSTICS_MODULE_CONTRACT" else digest)
+    for name, digest in SOURCE_PINS
+)
 SEVERITIES = ("INFO", "WARNING", "ERROR", "CRITICAL")
 PHASE_RULES = {
     "IDENTITY": ("ASH-STATE-IDENTITY-001",),
@@ -290,15 +297,18 @@ def _local(value, normalize):
         _text(value.source_sha256, maximum=64, pattern=r"[0-9a-f]{64}")
     elif kind is RealmTransitionBinding:
         _exact(value.canonical_binding, state.CanonicalAshBinding, "realm_transition_binding")
-        _equal(tuple(getattr(value.canonical_binding, name) for name, _ in state.MODULE_CANONICAL_BINDING_FIELDS),
-               tuple(digest for _, digest in state.MODULE_CANONICAL_BINDING_FIELDS), "realm_transition_binding")
+        baseline = state.canonical_source_baseline(value.canonical_binding)
+        if baseline not in ("M3_MODULES", "M3_GENERATION"):
+            _fail("realm_transition_binding")
         _exact(value.profile_binding, (state.AvailableProfileBinding, state.UnavailableProfileBinding), "realm_transition_binding")
         if type(value.profile_binding) is state.UnavailableProfileBinding:
             _text(value.profile_binding.evidence.reason, field="realm_transition_binding")
         pins = _tuple(value.contract_pins, 11, 11, normalize, "realm_transition_binding")
         for pin in pins:
             _exact(pin, RealmTransitionSourcePin, "realm_transition_binding")
-        _equal(tuple((pin.source_id, pin.source_sha256) for pin in pins), SOURCE_PINS, "realm_transition_binding")
+        _equal(tuple((pin.source_id, pin.source_sha256) for pin in pins),
+               GENERATION_SOURCE_PINS if baseline == "M3_GENERATION" else SOURCE_PINS,
+               "realm_transition_binding")
         _equal((value.policy_source_reference, value.policy_source_sha256) in POLICY_IDENTITIES, True, "realm_transition_binding")
         _ref(value.policy_evidence_reference, "realm_transition_binding")
         if normalize:
@@ -655,3 +665,14 @@ def raw_business_size(value, *, limit=RAW_BUSINESS_LIMIT):
         if exc.code == "REALM_TRANSITION_RAW_PACKET_LIMIT":
             return limit + 1
         raise
+
+
+def wire_schema(value):
+    _exact(value, OWNED_TYPES)
+    revalidate_value(value)
+    binding = value if type(value) is RealmTransitionBinding else getattr(value, "binding", None)
+    if type(value) is RealmTransitionCaptureReceipt:
+        binding = value.result.binding
+    if type(binding) is RealmTransitionBinding and state.canonical_source_baseline(binding.canonical_binding) == "M3_GENERATION":
+        return "https://ywe.local/schemas/m3_generation_realm_transition_schema.json"
+    return "https://ywe.local/schemas/m3_realm_transition_schema.json"
