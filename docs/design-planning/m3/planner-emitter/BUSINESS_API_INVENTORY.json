@@ -3378,7 +3378,7 @@
   "runtime_acceptance": "NOT_CLAIMED",
   "requirement_id": "YWE-REQ-0049",
   "decision_id": "ADR-0041",
-  "implementation_status": "IMPLEMENTED_REFERENCE_CANDIDATE_NOT_EXECUTION_ACCEPTANCE",
+  "implementation_status": "ACCEPTED_SOURCE_BOUND_M3_REFERENCE_IMPLEMENTATION",
   "api_only_capability_methods": [
     {
       "owner": "PreparedEmission",
@@ -3429,5 +3429,9 @@
       "contract_sha256": "ae2b99db0bd478b6c5fc0109b800d2eb20588bf65396ff77ac2d720f6016fdcf",
       "semantics": "The existing configuration port gains only optional keyword exact original dependency expectations. Core constructor and configuration supply both actual dependencies before collector IO. Binding return, 36 wire types, 23 ports, policies and capacities are preserved."
     }
+  ],
+  "implementation_acceptance_refs": [
+    "data/governance/m3_acceptance_evidence.json",
+    "docs/project/M3_CORE_CONTRACTS_ACCEPTANCE.md"
   ]
 }

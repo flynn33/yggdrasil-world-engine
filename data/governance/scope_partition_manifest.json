@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1430,
-    "path_digest": "c914d20c4ced4764e7336b10481e5cfe7be4cd9adaa8c6c944991c7861ca499d",
+    "path_count": 1434,
+    "path_digest": "1bbb94502fe2b0a317c8e55a44a51deb7d4fbf0dfb18c5926a40001bf9290bff",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -3081,13 +3081,53 @@
       "secondary_tags": [
         "m3_format_control"
       ]
+    },
+    {
+      "path": "data/governance/evidence/m3/repository-report.json",
+      "primary_partition": "historical_evidence",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/design-planning/m3/unit_evidence_and_acceptance_instruction.md",
+      "rationale": "Immutable actual M3 execution bytes retain source-bound historical acceptance evidence; runtime contracts and gate logic remain separate authorities.",
+      "secondary_tags": [
+        "m3_execution_evidence"
+      ]
+    },
+    {
+      "path": "data/governance/evidence/m3/unit-cases.json",
+      "primary_partition": "historical_evidence",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/design-planning/m3/unit_evidence_and_acceptance_instruction.md",
+      "rationale": "Immutable actual M3 execution bytes retain source-bound historical acceptance evidence; runtime contracts and gate logic remain separate authorities.",
+      "secondary_tags": [
+        "m3_execution_evidence"
+      ]
+    },
+    {
+      "path": "data/governance/evidence/m3/unit-transcript.log",
+      "primary_partition": "historical_evidence",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/design-planning/m3/unit_evidence_and_acceptance_instruction.md",
+      "rationale": "Immutable actual M3 execution bytes retain source-bound historical acceptance evidence; runtime contracts and gate logic remain separate authorities.",
+      "secondary_tags": [
+        "m3_execution_evidence"
+      ]
+    },
+    {
+      "path": "data/governance/evidence/m3/acceptance-report.json",
+      "primary_partition": "historical_evidence",
+      "owner_role": "Conformance maintainers",
+      "governing_source": "docs/design-planning/m3/unit_evidence_and_acceptance_instruction.md",
+      "rationale": "Immutable actual M3 execution bytes retain source-bound historical acceptance evidence; runtime contracts and gate logic remain separate authorities.",
+      "secondary_tags": [
+        "m3_execution_evidence"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
       "ash_dependency_material": 66,
       "governance_validation": 632,
-      "historical_evidence": 24,
+      "historical_evidence": 28,
       "later_release_work": 45,
       "wrw_reference_profile": 308,
       "ywe_core": 231,

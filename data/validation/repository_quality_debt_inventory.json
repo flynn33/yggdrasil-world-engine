@@ -1514,12 +1514,12 @@
       "category": "roadmap_open_work",
       "title": "Roadmap open work: ASH algebra and reference oracle",
       "description": "Complete diagnostics recovery topology and emitter traceability",
-      "status": "open",
+      "status": "resolved",
       "source_refs": [
         {
           "kind": "json_pointer",
           "path": "data/governance/specification_roadmap.json",
-          "locator": "/subsystems/1/open_work/0"
+          "locator": "/subsystems/1"
         }
       ],
       "owner_role": "ASH mathematics maintainers",
@@ -1528,7 +1528,11 @@
       "ratchet_key": "roadmap_open_work:ash_algebra_oracle",
       "introduced_baseline": "2.0.23",
       "resolution_criteria": "The M3 acceptance evidence resolves this exact open-work statement and the roadmap no longer reports it as open.",
-      "resolution_evidence": []
+      "resolution_evidence": [
+        "data/governance/m3_acceptance_evidence.json",
+        "docs/project/M3_CORE_CONTRACTS_ACCEPTANCE.md",
+        "data/governance/evidence/m3/acceptance-report.json"
+      ]
     },
     {
       "debt_id": "QD-OW-003",
@@ -2460,8 +2464,8 @@
   ],
   "summary": {
     "total": 81,
-    "open": 45,
-    "resolved": 35,
+    "open": 44,
+    "resolved": 36,
     "accepted_exception": 1,
     "by_milestone": {
       "M0": 11,
@@ -2477,8 +2481,8 @@
       "M9": 7
     },
     "placeholder_count": 30,
-    "roadmap_open_work_count": 14,
+    "roadmap_open_work_count": 13,
     "placeholder_paths_sha256": "da836fbda1c0960234efffa2549b30e150b9768d4955e66201b4ec76c5c86edf",
-    "roadmap_open_work_sha256": "7644484da1467dd113ff7dc9e8fa634222743b688e0169e465b26ee6360e0b9e"
+    "roadmap_open_work_sha256": "67e4e416520794bee1ecafad42e892eb667beed004e7b2c861e4cd74acf53fa9"
   }
 }

@@ -130,10 +130,11 @@
       "required_markers": [
         "| Agnostic specification release readiness | Not ready |",
         "| Published releases | None; no GitHub Release objects or agnostic specification releases have been published |",
-        "| Current roadmap milestone | M3 - Complete core deterministic semantics and the reference oracle (in progress) |",
+        "| Current roadmap milestone | M3 - Complete core deterministic semantics and the reference oracle (complete; paused before M4 pending owner go-ahead) |",
         "| M2 schema-quality debt | Empty; M2 foundation acceptance recorded |",
         "| M2 acceptance evidence | Complete; immutable evidence in `data/governance/m2_acceptance_evidence.json` and `docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md` |",
-        "| Platform product work | Deferred through M10 |"
+        "| Platform product work | Deferred through M10 |",
+        "| M3 acceptance evidence | Complete; immutable evidence in `data/governance/m3_acceptance_evidence.json` and `docs/project/M3_CORE_CONTRACTS_ACCEPTANCE.md` |"
       ]
     },
     {
@@ -174,17 +175,18 @@
       "maturity": {
         "phase_gate_accepted": "complete",
         "normative_artifact_complete": "complete",
-        "executable_schema_complete": "partial",
+        "executable_schema_complete": "complete",
         "conformance_tested": "complete",
-        "release_ready": "not_ready"
+        "release_ready": "complete"
       },
       "evidence_refs": [
         "core/ash_pattern_engine/ash_canonical.py",
-        "specs/verification/invariant-spec.md"
+        "specs/verification/invariant-spec.md",
+        "data/governance/m3_acceptance_evidence.json",
+        "docs/project/M3_CORE_CONTRACTS_ACCEPTANCE.md",
+        "data/governance/evidence/m3/acceptance-report.json"
       ],
-      "open_work": [
-        "Complete diagnostics recovery topology and emitter traceability"
-      ]
+      "open_work": []
     },
     {
       "id": "cosmology_realm_branch",
@@ -548,7 +550,7 @@
     {
       "id": "M3",
       "title": "Complete core deterministic semantics and the reference oracle",
-      "status": "in_progress",
+      "status": "complete",
       "dependencies": [
         "M2"
       ],
@@ -557,7 +559,10 @@
         "maximum": 7
       },
       "owner_role": "Core semantics maintainers",
-      "acceptance_evidence": [],
+      "acceptance_evidence": [
+        "data/governance/m3_acceptance_evidence.json",
+        "docs/project/M3_CORE_CONTRACTS_ACCEPTANCE.md"
+      ],
       "deliverables": [
         "Final Cosmology, Realm, ASH Pattern, Narrative, Perception, and orchestration contracts.",
         "Context-aware state classification and complete diagnostics.",
@@ -839,5 +844,11 @@
       "id": "RM-11",
       "target": "Normative Core contains no platform product dependency"
     }
-  ]
+  ],
+  "execution_pause": {
+    "status": "awaiting_owner_go_ahead",
+    "after_milestone": "M3",
+    "before_milestone": "M4",
+    "reason": "The owner requested a pause after complete M3 acceptance and GitHub publication, with explicit go-ahead required before any M4 development."
+  }
 }

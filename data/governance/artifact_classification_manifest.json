@@ -7,8 +7,8 @@
   "scope_manifest_ref": "data/governance/scope_partition_manifest.json",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1430,
-    "path_digest": "c914d20c4ced4764e7336b10481e5cfe7be4cd9adaa8c6c944991c7861ca499d",
+    "path_count": 1434,
+    "path_digest": "1bbb94502fe2b0a317c8e55a44a51deb7d4fbf0dfb18c5926a40001bf9290bff",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "classes": [
@@ -1845,6 +1845,38 @@
       "governing_source": "data/governance/specification_roadmap.json",
       "rationale": "This pending then immutable record preserves M3 acceptance chronology without defining requirements or gate logic.",
       "authority_role": "supporting"
+    },
+    {
+      "path": "data/governance/evidence/m3/repository-report.json",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "Immutable actual M3 execution bytes retain source-bound historical acceptance evidence; runtime contracts and gate logic remain separate authorities.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "data/governance/evidence/m3/unit-cases.json",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "Immutable actual M3 execution bytes retain source-bound historical acceptance evidence; runtime contracts and gate logic remain separate authorities.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "data/governance/evidence/m3/unit-transcript.log",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "Immutable actual M3 execution bytes retain source-bound historical acceptance evidence; runtime contracts and gate logic remain separate authorities.",
+      "authority_role": "supporting"
+    },
+    {
+      "path": "data/governance/evidence/m3/acceptance-report.json",
+      "classification": "historical",
+      "owner_role": "Repository governance maintainers",
+      "governing_source": "data/governance/specification_roadmap.json",
+      "rationale": "Immutable actual M3 execution bytes retain source-bound historical acceptance evidence; runtime contracts and gate logic remain separate authorities.",
+      "authority_role": "supporting"
     }
   ],
   "sensitive_source_hash_algorithm": "sha256_utf8_lf_normalized",
@@ -1855,7 +1887,7 @@
     },
     {
       "path": "data/governance/specification_roadmap.json",
-      "sha256": "f32a875ea93df3df2d6d6c95018a176cf3ccd7a81392a8f13a8a2881a8e5fba2"
+      "sha256": "32690e9a1f5e536bbdd5b9ba7434dd728ecd75cee4db4714867aac4f3a31dae2"
     },
     {
       "path": "docs/project/artifact_classification_policy.md",
@@ -1878,7 +1910,7 @@
     "counts_by_class": {
       "deprecated": 1,
       "example": 194,
-      "historical": 16,
+      "historical": 20,
       "informative": 217,
       "normative": 965,
       "placeholder": 30,

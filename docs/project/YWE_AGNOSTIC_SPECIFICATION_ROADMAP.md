@@ -48,7 +48,7 @@ Every subsystem is measured on five independent dimensions:
 | M0 | 🟢 | `complete` | None | One truthful repository baseline |
 | M1 | 🟢 | `complete` | M0 | Normalized canon, terminology, and governance |
 | M2 | 🟢 | `complete` | M1 | Executable contracts, schemas, and fixtures |
-| M3 | 🟡 | `in_progress` | M2 | Complete deterministic core semantics |
+| M3 | 🟢 | `complete` | M2 | Complete deterministic core semantics |
 | M4 | ⚪ | `planned` | M3 | Persistence, branching, and multiplayer protocols |
 | M5 | ⚪ | `planned` | M3, M4 | Complete content-generation engines |
 | M6 | ⚪ | `planned` | M4, M5 | Complete abilities, companions, rewards, and prior phases |
@@ -59,55 +59,43 @@ Every subsystem is measured on five independent dimensions:
 
 Indicators: 🟢 complete, 🟡 in progress, ⚪ planned, 🔴 blocked, and ⏸️ deferred.
 
-### Current development checkpoint — October 11, 2026
+### Current development checkpoint — October 12, 2026
 
-M0–M2 remain accepted and M3 is active. The adopted N3 lifecycle
-[contract](../architecture/m3_session_lifecycle_contract.md),
-[policy](../architecture/m3_session_lifecycle_policy.md) and
-[inventory/capacity controls](../design-planning/m3/session-lifecycle/README.md)
-now have a published, verified reference implementation at
-[`a345d1b`](https://github.com/flynn33/yggdrasil-world-engine/commit/a345d1be3e2d635cb79104c153d2628b090ccd88).
-It passes all 36 applicable repository checks and 1151 unit tests from an
-exact clean, unfiltered offline checkout, with zero failures/advisories and no
-checkout changes. All 930 fixture bindings and 382 intended rejections pass.
-The scoped 125 session controls cover actual Windows protected-store export,
-source/policy admission, fresh recovery, controlled publication, containment,
-resolution, all five halt causes, concurrent revocation and terminal evidence.
-The runtime implementation’s exact-revision [Ubuntu/Windows CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38175922165)
-completed successfully: each OS passes all 36 checks and runs 1151 unit tests.
-Ubuntu passes 1109 with 42 explicit native skips; Windows passes all 1151
-with no skips.
+**M3 is complete. Development is paused before M4, awaiting the owner's explicit go-ahead.**
+M4 and all later milestones remain planned.
 
-Strict RealmEncoder/TransitionRegistry, bounded topology and five-axiom owners
-and their capture integration are implemented, preserving existing full-state
-algebra helpers. The [source, producer and capture contracts](../design-planning/m3/module-diagnostics/README.md)
-precede implementation under YWE-REQ-0045–0048 / ADR-0036–0040. Focused controls
-include actual protected Windows capture/export, exact producer ownership and
-all 8,192 transition pairs through 16,384 actual applications. The expanded
-offline catalog passes 1,367 bindings, including 482 intended rejections.
-The [published corrected implementation](https://github.com/flynn33/yggdrasil-world-engine/commit/c468b35439e2b0254a71b22be3117a711f557b9b)
-passes all 36 checks and 1,232 unit tests from an exact clean, unfiltered offline
-checkout, with zero blocking failures, advisories or file changes. The unit
-suite takes 2071.591 seconds and the full run 2428.110 seconds. The earlier
-unpublished b4e5b7c failure remains recorded: two stale test assumptions fail,
-then all 66 affected tests pass after preserving documented LF identities and
-covering all 31 rules outside the unchanged N2 subset. Exact-revision
-[Ubuntu/Windows CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38191670186)
-is running at the latest readback.
-The remaining generation/planner/emitter, current-source four-pure Session
-and neutral Core contracts are adopted under YWE-REQ-0049–0051 / ADR-0041–0043.
-The fourth canonical vector is accepted pending joint source/runtime migration;
-independent authored format and capacity controls are distinct from actual
-implementation and conformance. These runtime and remaining acceptance
-obligations keep all five M3 exits open. Owner Wiki6182078 is published from
-exact source c468b35, with all 47 remote pages matching reviewed bytes.
+The [tested implementation](https://github.com/flynn33/yggdrasil-world-engine/commit/504e297737fa0a79ab19d6edd63f9fcbc5c139e7) passed all 37
+applicable repository checks through `bash scripts/run_checks.sh` in one clean,
+unfiltered offline clone. Ordinary discovery executed 1393 unit cases, with
+0 failures, 0 errors,
+0 skips and no checkout changes. The source-bound evaluator
+records PASS for all 28 canonical invariants, five conformance categories, nine
+module contracts, seven deliverables and five exit criteria.
 
-The [README checkpoint](../../README.md#development-checkpoint--2026-10-11)
-and [Project Record section 18](../design-planning/Project_Record.md#18-issued-module-implementation-and-addressable-diagnostic-evidence)
-carry exact source, verification and publication evidence. The latest owner
-direction in [Project Record section 16.5](../design-planning/Project_Record.md#165-owner-pause-boundary-after-verified-m3-publication)
-is to finish and verify M3, publish it as the owner, then pause and wait for
-explicit go-ahead before any M4 work. Current M3 work remains authorized.
+[Hosted CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38216385643)
+also passed all 37 repository checks on this same implementation for Windows and
+Ubuntu. Each job reported 1393 unit tests; Windows had zero skips and Ubuntu had
+50 skips. The immutable local acceptance run above had zero skips.
+
+The immutable [acceptance record](../../data/governance/m3_acceptance_evidence.json) and
+[acceptance document](M3_CORE_CONTRACTS_ACCEPTANCE.md) bind the four
+actual execution archives. Their [evidence commit](https://github.com/flynn33/yggdrasil-world-engine/commit/274b2ca2943221e9dabe266bafe32b06ae16bb72)
+is the direct child of the tested implementation and changes only the six fixed
+evidence paths. Historical verification replays that exact evaluator and source
+without rerunning the exhaustive suite or requiring the original temporary files.
+
+Accepted M3 includes deterministic Core policies and lifecycle, neutral Cosmology,
+Realm, ASH, Narrative, Perception and orchestration; the fourth complete source
+vector; transition-chain, topology, axioms, planner and emitter; and current-source
+Session diagnostics, containment, resolution and safe halt. Mapped tests cover the
+depth-five run with 26 grants and eight memory documents, ten emission grants and
+protected diagnostic export. Depth-six capacity refusal retains full API evidence
+and makes no target effects. These are bounded reference implementations.
+
+The two Core-directory files assigned to M4 remain recorded as future placeholders.
+Persistence, branching and multiplayer await M4. Platform products remain deferred
+through M10; the whole specification remains unreleased.
+
 
 ## Repository assessment
 
@@ -128,7 +116,7 @@ role, repository-local evidence, and open work for every row. Status values are
 | Subsystem | Phase gate | Normative | Schema | Conformance | Release | Next |
 |---|---|---|---|---|---|---|
 | Authority and engine-game boundaries | `not_applicable` | `complete` | `complete` | `complete` | `complete` | M1 |
-| ASH algebra and reference oracle | `complete` | `complete` | `partial` | `complete` | `not_ready` | M3 |
+| ASH algebra and reference oracle | `complete` | `complete` | `complete` | `complete` | `complete` | M3 |
 | Cosmology realms and branch reality | `complete` | `partial` | `partial` | `partial` | `not_ready` | M4 |
 | Player runtime origin and progression | `complete` | `partial` | `partial` | `partial` | `not_ready` | M4 |
 | Perception worldstate and location | `complete` | `partial` | `partial` | `partial` | `not_ready` | M4 |
@@ -165,10 +153,10 @@ Legend: `complete` · `partial` · `not_started` · `not_applicable` (N/A) · `n
 
 | Area | Current maturity | Remaining work |
 |---|---|---|
-| Repository truth | M2 foundation accepted | Maintain M0, M1 and immutable M2 evidence while M3 completes deterministic Core semantics |
+| Repository truth | M3 accepted | Preserve M0–M3 evidence and the owner pause before M4 |
 | Schema system | M2 foundation accepted | Preserve exact classified-fixture bindings, offline resolution, governed migration proofs, intended rejection approvals and durable acceptance; add schemas and executable semantic evidence as later milestone contracts are completed |
-| ASH reference oracle | Partial | Context classification, recovery, fallback, containment, safe halt, topology, axioms, and emitter traceability |
-| Core engine semantics | Partial | Deterministic algorithms, failure modes, persistence, interfaces, and complete conformance |
+| ASH reference oracle | M3 accepted | Preserve accepted classification, diagnostics, recovery, topology, axiom and emitter conformance as later milestones add their own contracts |
+| Core engine semantics | M3 accepted; later state work planned | Preserve deterministic policies and module interfaces; persistence and whole-system conformance retain M4–M10 gates |
 | Player origin and perception persistence | Placeholder-backed | Replace placeholders with normative state and lifecycle contracts |
 | Persistence and multiplayer | Protocol absent | Snapshots, event log, migration, replay, authority, synchronization, conflicts, and branch merge |
 | Myth and prophecy | Partial | Emergence, activation, deflection, fulfillment, expiry, propagation, and bounded feedback |
@@ -290,12 +278,22 @@ Exit criteria:
 
 ## M3 — Complete core deterministic semantics and the reference oracle
 
-Status: `in_progress`
+Status: `complete`
 Dependencies: M2
 Indicative effort: 5–7 weeks
 Owner role: Core semantics maintainers
 
-Current checkpoint: the adopted StateModel reference slice implements exact immutable
+Current acceptance: all M3 obligations pass at tested implementation `504e297737fa0a79ab19d6edd63f9fcbc5c139e7`.
+The immutable evidence pair is `data/governance/m3_acceptance_evidence.json` and
+`docs/project/M3_CORE_CONTRACTS_ACCEPTANCE.md`; the four archived execution files
+under `data/governance/evidence/m3/` preserve the actual 37-check and 1393-case
+clean offline run. Development is paused after M3 acceptance and publication;
+M4 remains planned until the owner explicitly authorizes continuation.
+
+<details>
+<summary>Historical M3 slice and publication observations</summary>
+
+Historical checkpoint: the adopted StateModel reference slice implements exact immutable
 values, bounded decoding, profile-bound diagnosis and contextual classification, with
 independent exhaustive state/classifier and retained-failure tests. The contract is
 `docs/architecture/m3_state_assessment_contract.md`. The adopted N1 normalization
@@ -398,6 +396,8 @@ The current reference lifecycle candidate exercises session publication,
 containment, resolution and halt. Full clean acceptance, remaining canonical
 Diagnostics producers, generation and complete core conformance remain subsequent
 work. This checkpoint does not complete an M3 exit criterion.
+
+</details>
 
 Deliverables:
 

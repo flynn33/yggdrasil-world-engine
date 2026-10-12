@@ -74,10 +74,11 @@ products remain deferred until the M10 specification gate is accepted.
 | Indicator | Current state |
 |---|---|
 | Repository baseline | `v2.0.23` |
-| Current milestone | 🟡 `M3` — Complete core deterministic semantics and the reference oracle (`in_progress`) |
-| Accepted milestone gates | `3 of 11` |
-| Milestone queue | `1` in progress; `7` planned; `0` blocked; `0` deferred |
-| Release-ready subsystems | `1 of 15` |
+| Current milestone | 🟢 `M3` — Complete core deterministic semantics and the reference oracle (`complete`) |
+| Development pause | ⏸️ After `M3`; `M4` remains `planned`; awaiting owner go-ahead |
+| Accepted milestone gates | `4 of 11` |
+| Milestone queue | `0` in progress; `7` planned; `0` blocked; `0` deferred |
+| Release-ready subsystems | `2 of 15` |
 | Specification publication | `unreleased`; `0` GitHub Release objects; `0` agnostic specification releases (verified `2026-09-20`) |
 | Platform product work | ⏸️ `deferred`; authorization requires `M10` acceptance |
 
@@ -88,7 +89,7 @@ Milestone indicators: 🟢 `complete` · 🟡 `in_progress` · ⚪ `planned` · 
 | M0 | 🟢 | `complete` | None | Establish one truthful baseline |
 | M1 | 🟢 | `complete` | M0 | Normalize canon terminology and governance |
 | M2 | 🟢 | `complete` | M1 | Build the canonical contract and schema foundation |
-| M3 | 🟡 | `in_progress` | M2 | Complete core deterministic semantics and the reference oracle |
+| M3 | 🟢 | `complete` | M2 | Complete core deterministic semantics and the reference oracle |
 | M4 | ⚪ | `planned` | M3 | Complete state persistence branching and multiplayer |
 | M5 | ⚪ | `planned` | M3, M4 | Finish narrative and content generation engines |
 | M6 | ⚪ | `planned` | M4, M5 | Close ability companion reward and vertical slice phases |
@@ -103,9 +104,9 @@ Milestone indicators: 🟢 `complete` · 🟡 `in_progress` · ⚪ `planned` · 
 |---|---:|---:|---:|---:|---:|---:|
 | Historical phase gate | 6 | 3 | 1 | 5 | 0 | 0 |
 | Normative artifact | 2 | 9 | 4 | 0 | 0 | 0 |
-| Executable schema | 1 | 8 | 6 | 0 | 0 | 0 |
+| Executable schema | 2 | 7 | 6 | 0 | 0 | 0 |
 | Conformance tested | 2 | 10 | 3 | 0 | 0 | 0 |
-| Release readiness | 1 | 0 | 0 | 0 | 0 | 14 |
+| Release readiness | 2 | 0 | 0 | 0 | 0 | 13 |
 
 These five maturity dimensions are independent. Accepted gates and maturity
 counts are not an estimated completion percentage: milestones differ in scope
@@ -115,36 +116,47 @@ required acceptance evidence.
 See the roadmap inventories of [completed or verified foundations](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#completed-or-verified-foundations), [material work remaining](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#material-work-remaining), and the [15-subsystem maturity matrix](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#subsystem-maturity-matrix).
 <!-- roadmap-status:end -->
 
+### M3 acceptance checkpoint — 2026-10-12
+
+**M3 is complete. Development is paused before M4, awaiting the owner's explicit go-ahead.**
+M4 and all later milestones remain planned.
+
+The [tested implementation](https://github.com/flynn33/yggdrasil-world-engine/commit/504e297737fa0a79ab19d6edd63f9fcbc5c139e7) passed all 37
+applicable repository checks through `bash scripts/run_checks.sh` in one clean,
+unfiltered offline clone. Ordinary discovery executed 1393 unit cases, with
+0 failures, 0 errors,
+0 skips and no checkout changes. The source-bound evaluator
+records PASS for all 28 canonical invariants, five conformance categories, nine
+module contracts, seven deliverables and five exit criteria.
+
+[Hosted CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38216385643)
+also passed all 37 repository checks on this same implementation for Windows and
+Ubuntu. Each job reported 1393 unit tests; Windows had zero skips and Ubuntu had
+50 skips. The immutable local acceptance run above had zero skips.
+
+The immutable [acceptance record](data/governance/m3_acceptance_evidence.json) and
+[acceptance document](docs/project/M3_CORE_CONTRACTS_ACCEPTANCE.md) bind the four
+actual execution archives. Their [evidence commit](https://github.com/flynn33/yggdrasil-world-engine/commit/274b2ca2943221e9dabe266bafe32b06ae16bb72)
+is the direct child of the tested implementation and changes only the six fixed
+evidence paths. Historical verification replays that exact evaluator and source
+without rerunning the exhaustive suite or requiring the original temporary files.
+
+Accepted M3 includes deterministic Core policies and lifecycle, neutral Cosmology,
+Realm, ASH, Narrative, Perception and orchestration; the fourth complete source
+vector; transition-chain, topology, axioms, planner and emitter; and current-source
+Session diagnostics, containment, resolution and safe halt. Mapped tests cover the
+depth-five run with 26 grants and eight memory documents, ten emission grants and
+protected diagnostic export. Depth-six capacity refusal retains full API evidence
+and makes no target effects. These are bounded reference implementations.
+
+The two Core-directory files assigned to M4 remain recorded as future placeholders.
+Persistence, branching and multiplayer await M4. Platform products remain deferred
+through M10; the whole specification remains unreleased.
+
+<details>
+<summary>Historical development observations through October 11, 2026</summary>
+
 ### Development checkpoint — 2026-10-11
-
-**Owner continuation boundary:** Complete and verify M3, then publish it as the
-owner with no AI/coauthor attribution and the authorized admin bypass when
-needed. After M3 acceptance and GitHub publication, pause and wait for the
-owner’s explicit go-ahead before starting any M4 work. M3 development continues
-now; the broader roadmap goal remains active until that checkpoint.
-
-#### October 12, 2026 — M3 validation in progress
-
-The corrected [source candidate `7c3a378`](https://github.com/flynn33/yggdrasil-world-engine/commit/7c3a37886a68746c6711706ea702fb1e7fd9d41f)
-is on `m3/source-closure-records`. The preceding clean run at
-[`36c1f1b`](https://github.com/flynn33/yggdrasil-world-engine/commit/36c1f1b9b266e0c2f0dec999d206926b7926056c)
-ran 1,392 unit cases in 3,048.705 seconds, with three failures and one error.
-The full 37-check run took 3,508.312 seconds: 36 checks passed, one blocking
-check failed, no advisories were recorded, and the checkout stayed clean.
-That local run's failures came from stale source-vector fixtures and selecting a historical
-schema for a newer source-bound packet. Corrections preserve the historical
-vectors, independently verified source pins and existing assertions.
-
-All 66 focused source/schema correction controls pass under Python 3.13.15 in 15.155 seconds.
-The preceding [hosted CI run](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38208120997)
-also reports a stop-fixture wait failure on both operating systems. Its cause
-is under investigation; the focused results do not establish full cross-platform
-acceptance.
-A new clean, unfiltered 37-check run and [Ubuntu/Windows Main CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38213628477)
-are in progress at this checkpoint; their complete outcomes remain pending.
-M3 is still in progress and has no acceptance or completion claim. M4 remains
-planned; development will pause after verified M3 acceptance and publication,
-awaiting the owner's explicit go-ahead.
 
 The fourth canonical source vector is recorded in the local source-contract
 checkpoint: current generation, transition-chain and prepared-emission contracts
@@ -458,6 +470,8 @@ objects or YWE Agnostic Specification releases have been published.
 | `v2.0.12` | Phase 10 accepted baseline | Player Runtime State v1 |
 
 ---
+
+</details>
 
 ## Design Goals
 
