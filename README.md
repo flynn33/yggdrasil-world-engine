@@ -123,6 +123,29 @@ needed. After M3 acceptance and GitHub publication, pause and wait for the
 owner’s explicit go-ahead before starting any M4 work. M3 development continues
 now; the broader roadmap goal remains active until that checkpoint.
 
+#### October 12, 2026 — M3 validation in progress
+
+The corrected [source candidate `7c3a378`](https://github.com/flynn33/yggdrasil-world-engine/commit/7c3a37886a68746c6711706ea702fb1e7fd9d41f)
+is on `m3/source-closure-records`. The preceding clean run at
+[`36c1f1b`](https://github.com/flynn33/yggdrasil-world-engine/commit/36c1f1b9b266e0c2f0dec999d206926b7926056c)
+ran 1,392 unit cases in 3,048.705 seconds, with three failures and one error.
+The full 37-check run took 3,508.312 seconds: 36 checks passed, one blocking
+check failed, no advisories were recorded, and the checkout stayed clean.
+That local run's failures came from stale source-vector fixtures and selecting a historical
+schema for a newer source-bound packet. Corrections preserve the historical
+vectors, independently verified source pins and existing assertions.
+
+All 66 focused source/schema correction controls pass under Python 3.13.15 in 15.155 seconds.
+The preceding [hosted CI run](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38208120997)
+also reports a stop-fixture wait failure on both operating systems. Its cause
+is under investigation; the focused results do not establish full cross-platform
+acceptance.
+A new clean, unfiltered 37-check run and [Ubuntu/Windows Main CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38213628477)
+are in progress at this checkpoint; their complete outcomes remain pending.
+M3 is still in progress and has no acceptance or completion claim. M4 remains
+planned; development will pause after verified M3 acceptance and publication,
+awaiting the owner's explicit go-ahead.
+
 The fourth canonical source vector is recorded in the local source-contract
 checkpoint: current generation, transition-chain and prepared-emission contracts
 are bound without changing the earlier three vectors. Dependent runtime work is
