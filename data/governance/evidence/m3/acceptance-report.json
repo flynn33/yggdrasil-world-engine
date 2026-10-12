@@ -1,0 +1,345 @@
+{
+  "artifact_type": "ywe_m3_acceptance_report",
+  "artifact_version": "1.0.0",
+  "ready": true,
+  "judgment": "CONFORMANT",
+  "revision": "504e297737fa0a79ab19d6edd63f9fcbc5c139e7",
+  "mapping_sha256": "326b1ae1e087229fa8445558d2269384c007b9189b7834f451ebfd749cc8ac39",
+  "errors": [],
+  "invariants": [
+    {
+      "id": "INV-STATE-001",
+      "text": "The ASH state is a full 9-bit vector in F2^9. All 9 coordinates participate in the algebraic structure.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-STATE-002",
+      "text": "Normalization is deterministic \u2014 the same candidate state always produces the same result.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-STATE-003",
+      "text": "Normalization fails with a diagnostic for transformation-incompatible states \u2014 it does not silently produce a result.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-CODEWORD-001",
+      "text": "Codeword transformations are XOR-by-codeword: `x' = x \u2295 c` for `c \u2208 C \u2282 F2^9`.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-CODEWORD-002",
+      "text": "Codeword transformations are deterministic and pure \u2014 same inputs always produce same outputs with no side effects.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-CODEWORD-003",
+      "text": "Applying the same codeword twice returns to the original state: `(x \u2295 c) \u2295 c = x`.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-CODEWORD-004",
+      "text": "The codeword set used by the implementation matches the canonical 16-member set \u2014 no invented codewords.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-ADMISSIBILITY-001",
+      "text": "Admissibility classification is deterministic \u2014 the same state always maps to the same status.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-ADMISSIBILITY-002",
+      "text": "Every 9-bit vector maps to exactly one admissibility status (given a specified codeword set).",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-REALM-001",
+      "text": "Realm encoding is deterministic \u2014 equal valid states produce equal realm encodings.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-REALM-002",
+      "text": "Realm encoding operates only on valid states \u2014 invalid states must be rejected with a diagnostic.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-TRANS-001",
+      "text": "Equal input state + equal transition always produce equal output state.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-TRANS-002",
+      "text": "Transitions operate on full 9-bit states via XOR-by-codeword.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-TOPO-001",
+      "text": "Topology generation is deterministic with stable ordering and lineage.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-AXIOM-001",
+      "text": "Every axiom evaluation produces a diagnostic record \u2014 no bare pass/fail.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-RECOVERY-001",
+      "text": "Recovery is deterministic \u2014 the same classification always produces the same recovery category.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-RECOVERY-002",
+      "text": "Fallback selection uses only the canonical fallback-policy registry.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-RECOVERY-003",
+      "text": "Escalation is monotonic \u2014 severity never decreases without external intervention.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-RECOVERY-004",
+      "text": "No silent healing \u2014 every recovery action produces a diagnostic record.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-RECOVERY-005",
+      "text": "SAFE_HALT is terminal \u2014 no transitions from SAFE_HALT.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-PLAN-001",
+      "text": "Planning produces no side effects.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-PLAN-002",
+      "text": "The plan is self-contained \u2014 the emitter needs only the plan.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-BOUNDARY-001",
+      "text": "GenerationPlanner does not emit artifacts.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-BOUNDARY-002",
+      "text": "ArtifactEmitter does not invent semantics not present in the plan.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-DIAG-001",
+      "text": "Every diagnostic record conforms to the shared `DiagnosticEnvelope` schema.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-DIAG-002",
+      "text": "Every rule_id conforms to the canonical taxonomy pattern.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-DIAG-003",
+      "text": "The diagnostic chain is complete \u2014 every step produces a diagnostic with valid chain references.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "INV-DIAG-004",
+      "text": "No silent omission \u2014 diagnostics are never deferred, batched, or suppressed.",
+      "status": "pass",
+      "errors": []
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "status": "pass"
+    },
+    {
+      "id": 2,
+      "status": "pass"
+    },
+    {
+      "id": 3,
+      "status": "pass"
+    },
+    {
+      "id": 4,
+      "status": "pass"
+    },
+    {
+      "id": 5,
+      "status": "pass"
+    }
+  ],
+  "modules": [
+    {
+      "id": "M3-MODULE-ARTIFACT-EMITTER-CONTRACT",
+      "text": "ArtifactEmitter Contract \u2014 implementation contract (Canonical Baseline)",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-MODULE-AXIOM-EVALUATOR-CONTRACT",
+      "text": "AxiomEvaluator Contract \u2014 implementation contract (Canonical Baseline)",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-MODULE-DIAGNOSTICS-MODULE-CONTRACT",
+      "text": "Diagnostics Module Contract \u2014 implementation contract (Canonical Baseline)",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-MODULE-GENERATION-PLANNER-CONTRACT",
+      "text": "GenerationPlanner Contract \u2014 implementation contract (Canonical Baseline)",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-MODULE-REALM-ENCODER-CONTRACT",
+      "text": "RealmEncoder Contract \u2014 implementation contract (Canonical Baseline)",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-MODULE-RECOVERY-ENGINE-CONTRACT",
+      "text": "RecoveryEngine Contract \u2014 implementation contract (Canonical Baseline)",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-MODULE-STATE-MODEL-CONTRACT",
+      "text": "StateModel Contract \u2014 implementation contract (Canonical Baseline)",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-MODULE-TOPOLOGY-GENERATOR-CONTRACT",
+      "text": "TopologyGenerator Contract \u2014 implementation contract (Canonical Baseline)",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-MODULE-TRANSITION-REGISTRY-CONTRACT",
+      "text": "TransitionRegistry Contract \u2014 implementation contract (Canonical Baseline)",
+      "status": "pass",
+      "errors": []
+    }
+  ],
+  "deliverables": [
+    {
+      "id": "M3-D1",
+      "text": "Final Cosmology, Realm, ASH Pattern, Narrative, Perception, and orchestration contracts.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-D2",
+      "text": "Context-aware state classification and complete diagnostics.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-D3",
+      "text": "Recovery, normalization, fallback selection, containment, and safe-halt state machines.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-D4",
+      "text": "Topology generation, role assignment, axiom evaluation, complete generation planning, and artifact-emitter traceability.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-D5",
+      "text": "Deterministic seed, selection, tie-break, numeric, canonical serialization, bias merge, decay, normalization, and conflict semantics.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-D6",
+      "text": "Standard platform-neutral module lifecycle and interface contract.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-D7",
+      "text": "Complete core failure, no-op, diagnostic, and resource-bound behavior.",
+      "status": "pass",
+      "errors": []
+    }
+  ],
+  "criteria": [
+    {
+      "id": "M3-C1",
+      "text": "All 28 canonical invariants have executable tests.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-C2",
+      "text": "All five conformance categories pass.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-C3",
+      "text": "All states and transitions have exhaustive reference coverage.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-C4",
+      "text": "Identical input produces byte-stable canonical output.",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "id": "M3-C5",
+      "text": "No core placeholder remains.",
+      "status": "pass",
+      "errors": []
+    }
+  ],
+  "excluded_future_core_placeholders": [
+    {
+      "path": "core/narrative_engine/player_origin_arc_rules.yaml",
+      "milestone": "M4",
+      "debt_ref": "QD-PH-d6f260b2a191"
+    },
+    {
+      "path": "core/perception_engine/perception_layer_persistence_schema.json",
+      "milestone": "M4",
+      "debt_ref": "QD-PH-8a1b553f2965"
+    }
+  ]
+}

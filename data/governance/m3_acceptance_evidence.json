@@ -3,5 +3,42 @@
   "artifact_type": "ywe_m3_acceptance_evidence",
   "artifact_version": "1.0.0",
   "milestone_id": "M3",
-  "outcome": "pending"
+  "outcome": "pass",
+  "implementation_revision": "504e297737fa0a79ab19d6edd63f9fcbc5c139e7",
+  "mapping_sha256": "326b1ae1e087229fa8445558d2269384c007b9189b7834f451ebfd749cc8ac39",
+  "source_state": {
+    "algorithm": "sha256_sorted_path_nul_normalized_utf8_lf_sha256_nul",
+    "digest": "b539e35aa4abfeb11f1c2f76ec94431520109a77ffae3368c02a269c6ecc5b8c",
+    "file_count": 1428,
+    "digest_exclusions": [
+      "data/governance/m3_acceptance_evidence.json",
+      "docs/project/M3_CORE_CONTRACTS_ACCEPTANCE.md",
+      "data/governance/evidence/m3/repository-report.json",
+      "data/governance/evidence/m3/unit-cases.json",
+      "data/governance/evidence/m3/unit-transcript.log",
+      "data/governance/evidence/m3/acceptance-report.json"
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "data/governance/evidence/m3/repository-report.json",
+      "sha256": "f295707a3bb52d4483f60b7f343001cf363f7e28e18440a79440c7c8d998fa84",
+      "size_bytes": 5264
+    },
+    {
+      "path": "data/governance/evidence/m3/unit-cases.json",
+      "sha256": "bbfd80a9f7a001ad5a4a8a7373a0ea191a6adca862051f3495363afd2d4768f6",
+      "size_bytes": 1585173
+    },
+    {
+      "path": "data/governance/evidence/m3/unit-transcript.log",
+      "sha256": "21d96941ac71b69572cb66f717f1bc61a664a92e86c83789554d7fc302a41a12",
+      "size_bytes": 4064
+    },
+    {
+      "path": "data/governance/evidence/m3/acceptance-report.json",
+      "sha256": "ed60ec8d5bafae057d7d2e54a9d3caab33bf90e2ae51cbd01b4eeceb113e9aa3",
+      "size_bytes": 10033
+    }
+  ]
 }
