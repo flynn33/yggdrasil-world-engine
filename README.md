@@ -125,7 +125,7 @@ now; the broader roadmap goal remains active until that checkpoint.
 
 #### October 12, 2026 — M3 validation in progress
 
-The corrected [source candidate `7c3a378`](https://github.com/flynn33/yggdrasil-world-engine/commit/7c3a37886a68746c6711706ea702fb1e7fd9d41f)
+The current [source candidate `504e297`](https://github.com/flynn33/yggdrasil-world-engine/commit/504e297737fa0a79ab19d6edd63f9fcbc5c139e7)
 is on `m3/source-closure-records`. The preceding clean run at
 [`36c1f1b`](https://github.com/flynn33/yggdrasil-world-engine/commit/36c1f1b9b266e0c2f0dec999d206926b7926056c)
 ran 1,392 unit cases in 3,048.705 seconds, with three failures and one error.
@@ -134,14 +134,20 @@ check failed, no advisories were recorded, and the checkout stayed clean.
 That local run's failures came from stale source-vector fixtures and selecting a historical
 schema for a newer source-bound packet. Corrections preserve the historical
 vectors, independently verified source pins and existing assertions.
-
 All 66 focused source/schema correction controls pass under Python 3.13.15 in 15.155 seconds.
+
 The preceding [hosted CI run](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38208120997)
-also reports a stop-fixture wait failure on both operating systems. Its cause
-is under investigation; the focused results do not establish full cross-platform
-acceptance.
-A new clean, unfiltered 37-check run and [Ubuntu/Windows Main CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38213628477)
-are in progress at this checkpoint; their complete outcomes remain pending.
+also reported a stop-fixture wait failure on both operating systems. A controlled
+experiment added a healthy two-second preparation delay and reproduced the
+fixture's five-second target-entry timeout. The revised test uses a bounded,
+failure-aware Event guard; its stop, actual late-effect, terminal lifecycle and
+no-following-document assertions are preserved. The exact test passes on
+Python 3.12 and 3.13 and with the same controlled delay. The original hosted
+worker latency was not recorded, so the experiment is not a measured hosted-timing claim.
+
+The superseded `7c3a378` local and hosted runs were canceled. A new clean,
+unfiltered 37-check run has 1,393 discovered unit cases, and [Ubuntu/Windows Main CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38216385643)
+is running for `504e297`; their complete outcomes remain pending at this checkpoint.
 M3 is still in progress and has no acceptance or completion claim. M4 remains
 planned; development will pause after verified M3 acceptance and publication,
 awaiting the owner's explicit go-ahead.
