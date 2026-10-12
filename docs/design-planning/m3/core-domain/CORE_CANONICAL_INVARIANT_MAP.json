@@ -1,0 +1,672 @@
+{
+  "status": "PROPOSED_NOT_CONFORMANCE_JUDGMENT",
+  "required_invariants": [
+    {
+      "invariant_id": "INV-STATE-001",
+      "category": 1,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_state_model.LegacyDiagnosisMigrationTests.test_all_512_identities_and_8192_codeword_transforms_preserve_full_vector_algebra"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_state_model.py",
+          "line": 1342,
+          "body_sha256": "b9164589e257a21378d67f2ddb3130ed0a2e332f4c62d3cc7080e9e92d29050f"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "The ASH state is a full 9-bit vector in F2^9. All 9 coordinates participate in the algebraic structure.",
+      "canonical_test_criterion": "State representation uses all 9 coordinates; no coordinate is excluded from processing.",
+      "canonical_sources": "`ash-state-space.pseudo.md`"
+    },
+    {
+      "invariant_id": "INV-STATE-002",
+      "category": 1,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_normalization.IndependentNormalizationTests.test_all_2048_plans_validations_and_actual_applications"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_normalization.py",
+          "line": 483,
+          "body_sha256": "cae9d8b1403f49c1c01bef44b9949b759bd6460c3a9021d777372826b5709f0d"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "Normalization is deterministic \u2014 the same candidate state always produces the same result.",
+      "canonical_test_criterion": "Repeated normalization calls with the same input produce identical outputs.",
+      "canonical_sources": "`ash-state-space.pseudo.md`, `state-model-contract.md`"
+    },
+    {
+      "invariant_id": "INV-STATE-003",
+      "category": 1,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_normalization.IndependentNormalizationTests.test_all_2048_plans_validations_and_actual_applications",
+        "tests.test_m3_normalization.IndependentNormalizationTests.test_unavailable_and_rejected_branches_preserve_full_original_diagnosis"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_normalization.py",
+          "line": 483,
+          "body_sha256": "cae9d8b1403f49c1c01bef44b9949b759bd6460c3a9021d777372826b5709f0d"
+        },
+        {
+          "path": "tests/test_m3_normalization.py",
+          "line": 560,
+          "body_sha256": "0211a1ab35cc2780c2d76f7ff66b7517e1ce6464c82a0c25df6cd861c11e5c3c"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "Normalization fails with a diagnostic for transformation-incompatible states \u2014 it does not silently produce a result.",
+      "canonical_test_criterion": "Normalization of incompatible states produces a diagnostic failure, not a normalized state.",
+      "canonical_sources": "`state-validity-diagnostics.pseudo.md`"
+    },
+    {
+      "invariant_id": "INV-CODEWORD-001",
+      "category": 1,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_realm_transition.StrictRealmTransitionTests.test_actual_all512_times16_apply_under32_complete_cosets_repeats_entire_wire"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_realm_transition.py",
+          "line": 213,
+          "body_sha256": "8bd7e722d66d04c2d2ecf0ede6138661a07589a5a8bb81742dacd439805121eb"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "Codeword transformations are XOR-by-codeword: `x' = x \u2295 c` for `c \u2208 C \u2282 F2^9`.",
+      "canonical_test_criterion": "Every transformation applies coordinate-wise XOR on all 9 bits.",
+      "canonical_sources": "`codeword-transformation-semantics.pseudo.md`"
+    },
+    {
+      "invariant_id": "INV-CODEWORD-002",
+      "category": 1,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_realm_transition.StrictRealmTransitionTests.test_actual_all512_times16_apply_under32_complete_cosets_repeats_entire_wire",
+        "tests.test_m3_realm_transition.SharedDiagnosisValidationTests.test_structural_mutation_cycles_subclasses_and_instance_hooks"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_realm_transition.py",
+          "line": 213,
+          "body_sha256": "8bd7e722d66d04c2d2ecf0ede6138661a07589a5a8bb81742dacd439805121eb"
+        },
+        {
+          "path": "tests/test_m3_realm_transition.py",
+          "line": 72,
+          "body_sha256": "214ca8f2c9048aa746ef563b7b4348f23d7744ddd7a6a7cb929f22786026de21"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "Codeword transformations are deterministic and pure \u2014 same inputs always produce same outputs with no side effects.",
+      "canonical_test_criterion": "Repeated applications with the same state and codeword produce identical results.",
+      "canonical_sources": "`codeword-transformation-semantics.pseudo.md`"
+    },
+    {
+      "invariant_id": "INV-CODEWORD-003",
+      "category": 1,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_state_model.LegacyDiagnosisMigrationTests.test_all_512_identities_and_8192_codeword_transforms_preserve_full_vector_algebra",
+        "tests.test_m3_realm_transition.StrictRealmTransitionTests.test_independent_whole_coset_256_pairs_ID_codeword_parity_and_involution"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_state_model.py",
+          "line": 1342,
+          "body_sha256": "b9164589e257a21378d67f2ddb3130ed0a2e332f4c62d3cc7080e9e92d29050f"
+        },
+        {
+          "path": "tests/test_m3_realm_transition.py",
+          "line": 198,
+          "body_sha256": "e17e6acd1ecf1d14ef56155651f4e04d2580ff3ff2756b365f60cdd51eabc952"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "Applying the same codeword twice returns to the original state: `(x \u2295 c) \u2295 c = x`.",
+      "canonical_test_criterion": "For any state and codeword, double application is identity.",
+      "canonical_sources": "`codeword-transformation-semantics.pseudo.md`"
+    },
+    {
+      "invariant_id": "INV-CODEWORD-004",
+      "category": 1,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_realm_transition_values.RealmTransitionValueTests.test_compiled_catalog_and_policy_bytes_are_exact",
+        "tests.test_m3_realm_transition_values.RealmTransitionValueTests.test_catalog_reorder_replacement_mask_and_mixed_pin_rejected"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_realm_transition_values.py",
+          "line": 53,
+          "body_sha256": "f230b95f85560594ade3e370627869eab26b6c06178d981b61e01990996d2fa4"
+        },
+        {
+          "path": "tests/test_m3_realm_transition_values.py",
+          "line": 67,
+          "body_sha256": "46c002d20b7b1cb46a6520b75dff49bc9bf98ad3f7aa58ed1c399d21fe037c15"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "The codeword set used by the implementation matches the canonical 16-member set \u2014 no invented codewords.",
+      "canonical_test_criterion": "Every codeword used by the implementation matches the canonical enumeration.",
+      "canonical_sources": "`codeword-set.pseudo.md`"
+    },
+    {
+      "invariant_id": "INV-ADMISSIBILITY-001",
+      "category": 1,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_realm_transition.SharedDiagnosisValidationTests.test_complete_2048_state_profile_math_and_current_binding"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_realm_transition.py",
+          "line": 28,
+          "body_sha256": "735a7c17c6a594834578a218695b9ca0a713f4edb06977f321366ae212c2e23a"
+        }
+      ],
+      "remaining_obligation": "Review/add explicit repeated whole business bytes for every declared domain case; expected output checks alone do not prove repetition. No current pass asserted.",
+      "canonical_statement": "Admissibility classification is deterministic \u2014 the same state always maps to the same status.",
+      "canonical_test_criterion": "Repeated classification calls produce identical results.",
+      "canonical_sources": "`state-admissibility.pseudo.md`"
+    },
+    {
+      "invariant_id": "INV-ADMISSIBILITY-002",
+      "category": 1,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_realm_transition.SharedDiagnosisValidationTests.test_complete_2048_state_profile_math_and_current_binding"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_realm_transition.py",
+          "line": 28,
+          "body_sha256": "735a7c17c6a594834578a218695b9ca0a713f4edb06977f321366ae212c2e23a"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "Every 9-bit vector maps to exactly one admissibility status (given a specified codeword set).",
+      "canonical_test_criterion": "No state produces multiple or ambiguous statuses.",
+      "canonical_sources": "`state-admissibility.pseudo.md`"
+    },
+    {
+      "invariant_id": "INV-REALM-001",
+      "category": 5,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_realm_transition.StrictRealmTransitionTests.test_all512_encoder_gate_injective_full_identity_and_no_normalization",
+        "tests.test_m3_realm_transition.SharedDiagnosisValidationTests.test_structural_mutation_cycles_subclasses_and_instance_hooks"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_realm_transition.py",
+          "line": 159,
+          "body_sha256": "c9452b5485f9604029e87bb90f5edcca16be74456bcea7bd68f91d6132b0daed"
+        },
+        {
+          "path": "tests/test_m3_realm_transition.py",
+          "line": 72,
+          "body_sha256": "214ca8f2c9048aa746ef563b7b4348f23d7744ddd7a6a7cb929f22786026de21"
+        }
+      ],
+      "remaining_obligation": "Review/add explicit repeated whole business bytes for every declared domain case; expected output checks alone do not prove repetition. No current pass asserted.",
+      "canonical_statement": "Realm encoding is deterministic \u2014 equal valid states produce equal realm encodings.",
+      "canonical_test_criterion": "Repeated encoding calls with the same state produce identical results.",
+      "canonical_sources": "`realm-identity.pseudo.md`, `realm-encoder-contract.md`"
+    },
+    {
+      "invariant_id": "INV-REALM-002",
+      "category": 5,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_realm_transition.StrictRealmTransitionTests.test_all512_encoder_gate_injective_full_identity_and_no_normalization",
+        "tests.test_m3_realm_transition.StrictRealmTransitionTests.test_actual_WRW_144_pairs_preserve9valid_135TC_and_target_strict_refusal"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_realm_transition.py",
+          "line": 159,
+          "body_sha256": "c9452b5485f9604029e87bb90f5edcca16be74456bcea7bd68f91d6132b0daed"
+        },
+        {
+          "path": "tests/test_m3_realm_transition.py",
+          "line": 181,
+          "body_sha256": "7ebca7a2d2b16628eefffce074154da5b2761c25b14afe5844a215d4f9d823f8"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "Realm encoding operates only on valid states \u2014 invalid states must be rejected with a diagnostic.",
+      "canonical_test_criterion": "Encoding an invalid state produces a diagnostic failure.",
+      "canonical_sources": "`realm-encoder-contract.md`"
+    },
+    {
+      "invariant_id": "INV-TRANS-001",
+      "category": 5,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_realm_transition.StrictRealmTransitionTests.test_actual_all512_times16_apply_under32_complete_cosets_repeats_entire_wire"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_realm_transition.py",
+          "line": 213,
+          "body_sha256": "8bd7e722d66d04c2d2ecf0ede6138661a07589a5a8bb81742dacd439805121eb"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "Equal input state + equal transition always produce equal output state.",
+      "canonical_test_criterion": "Repeated transition applications produce identical results.",
+      "canonical_sources": "`transition-system.pseudo.md`, `transition-registry-contract.md`"
+    },
+    {
+      "invariant_id": "INV-TRANS-002",
+      "category": 5,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_realm_transition.StrictRealmTransitionTests.test_actual_all512_times16_apply_under32_complete_cosets_repeats_entire_wire"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_realm_transition.py",
+          "line": 213,
+          "body_sha256": "8bd7e722d66d04c2d2ecf0ede6138661a07589a5a8bb81742dacd439805121eb"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "Transitions operate on full 9-bit states via XOR-by-codeword.",
+      "canonical_test_criterion": "Transition results match coordinate-wise XOR with the specified codeword.",
+      "canonical_sources": "`transition-registry-contract.md`"
+    },
+    {
+      "invariant_id": "INV-TOPO-001",
+      "category": 5,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_topology.TopologyTests.test_every_supported_depth_final_frontier_and_all_ancestor_strings",
+        "tests.test_m3_topology.TopologyTests.test_pure_class_dispatch_ignores_instance_io_hooks"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_topology.py",
+          "line": 39,
+          "body_sha256": "000021808c1cda29a567cd05eeb413255f041ccb53c326d297c25b2b5c1a33e8"
+        },
+        {
+          "path": "tests/test_m3_topology.py",
+          "line": 148,
+          "body_sha256": "e79099251bb2ebd836343ee302a1aa7f02982bafd5eea362aff312e150e629a4"
+        }
+      ],
+      "remaining_obligation": "Review/add explicit repeated whole business bytes for every declared domain case; expected output checks alone do not prove repetition. No current pass asserted.",
+      "canonical_statement": "Topology generation is deterministic with stable ordering and lineage.",
+      "canonical_test_criterion": "Same input produces identical topology structure across invocations.",
+      "canonical_sources": "`topology-expansion.pseudo.md`, `topology-generator-contract.md`"
+    },
+    {
+      "invariant_id": "INV-AXIOM-001",
+      "category": 3,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_axioms.AxiomTests.test_all32_components_conjunction_order_explanations_and_cumulative_impact",
+        "tests.test_m3_axioms.AxiomTests.test_independent_self_flags_and_earlierfalse_fifthtrue"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_axioms.py",
+          "line": 30,
+          "body_sha256": "52eb4b8a6ff99d7c3859cadb192236a55596c0fe3d50b79a38269eef48d62a10"
+        },
+        {
+          "path": "tests/test_m3_axioms.py",
+          "line": 56,
+          "body_sha256": "bafe37356ae2a8a654b42c9775ee35dbac287b7fba62e01fee34c636e6e11aa4"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "Every axiom evaluation produces a diagnostic record \u2014 no bare pass/fail.",
+      "canonical_test_criterion": "Every evaluation call returns a diagnostic with rule IDs and explanation.",
+      "canonical_sources": "`axiom-evaluator-contract.md`"
+    },
+    {
+      "invariant_id": "INV-RECOVERY-001",
+      "category": 2,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_recovery.RecoveryIntegrationTests.test_all_seven_category_routes_use_actual_coherent_origins"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_recovery.py",
+          "line": 949,
+          "body_sha256": "9628437fdd6fee0622c73b294908d8c19a30483e6d617069fd91b5c98e229c0d"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "Recovery is deterministic \u2014 the same classification always produces the same recovery category.",
+      "canonical_test_criterion": "`classify_recoverability` always returns the same result for the same class.",
+      "canonical_sources": "`recoverability-semantics.pseudo.md`, `recovery-engine-contract.md`"
+    },
+    {
+      "invariant_id": "INV-RECOVERY-002",
+      "category": 2,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_recovery.RecoveryIntegrationTests.test_128_reachable_three_entry_fallback_control_combinations",
+        "tests.test_m3_recovery.RecoveryIntegrationTests.test_signed_rank_then_id_order_and_first_false_short_circuit_are_actual"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_recovery.py",
+          "line": 1078,
+          "body_sha256": "47af24d1379f85efc9ac12b6778cd30830ac16015f92f786d67f683a9c8e1a56"
+        },
+        {
+          "path": "tests/test_m3_recovery.py",
+          "line": 1841,
+          "body_sha256": "a75e87656939ef852da719c32d9ec98ffb8b2e905de83f042ba6c26293cffda9"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "Fallback selection uses only the canonical fallback-policy registry.",
+      "canonical_test_criterion": "Every fallback selection is traceable to a `policy_id` in the registry.",
+      "canonical_sources": "`fallback-policy-registry.md`, `recovery-engine-contract.md`"
+    },
+    {
+      "invariant_id": "INV-RECOVERY-003",
+      "category": 2,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_recovery.RecoveryIntegrationTests.test_128_reachable_three_entry_fallback_control_combinations",
+        "tests.test_m3_recovery.RecoveryIntegrationTests.test_all_seven_category_routes_use_actual_coherent_origins",
+        "tests.test_m3_recovery.RecoveryIntegrationTests.test_every_lifecycle_rule_is_refused_by_unchanged_eight_rule_recovery_owners"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_recovery.py",
+          "line": 1078,
+          "body_sha256": "47af24d1379f85efc9ac12b6778cd30830ac16015f92f786d67f683a9c8e1a56"
+        },
+        {
+          "path": "tests/test_m3_recovery.py",
+          "line": 949,
+          "body_sha256": "9628437fdd6fee0622c73b294908d8c19a30483e6d617069fd91b5c98e229c0d"
+        },
+        {
+          "path": "tests/test_m3_recovery.py",
+          "line": 1780,
+          "body_sha256": "fb13adba0ad313ac1027e6d7775d11657f6c8d697febd7d9e6e6322cd840555a"
+        }
+      ],
+      "remaining_obligation": "Audit actual chain assertion helper/taxonomy source across all producers. Test route/count alone is insufficient; preserve exact canonical semantic rule subsets.",
+      "canonical_statement": "Escalation is monotonic \u2014 severity never decreases without external intervention.",
+      "canonical_test_criterion": "The severity sequence in any recovery chain is non-decreasing.",
+      "canonical_sources": "`recoverability-semantics.pseudo.md`"
+    },
+    {
+      "invariant_id": "INV-RECOVERY-004",
+      "category": 2,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_recovery.RecoveryIntegrationTests.test_18_immediate_two_xor_and_completed_action_capture_boundaries",
+        "tests.test_m3_session_lifecycle.SessionLifecycleTests.test_actual_fallback_failure_risk_and_policy_handoffs_enter_containment_with_source_rule",
+        "tests.test_m3_session_lifecycle.SessionLifecycleTests.test_halt_closure_exactly_matches_final_record_and_source_rule"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_recovery.py",
+          "line": 1180,
+          "body_sha256": "f5f70913db05064fd04b9f2ee0ffe156e3e896fed658f347b0b71d8887c7559c"
+        },
+        {
+          "path": "tests/test_m3_session_lifecycle.py",
+          "line": 385,
+          "body_sha256": "78ff2b7ecb53bee42be0a51c74e1ee61ac91a32d84723123c0f11cbbfe83e65c"
+        },
+        {
+          "path": "tests/test_m3_session_lifecycle.py",
+          "line": 834,
+          "body_sha256": "7e900ca6b2c2ab3124f9bbb93581f7ac8ea755bd9df60c88dfa648055508fffe"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "No silent healing \u2014 every recovery action produces a diagnostic record.",
+      "canonical_test_criterion": "Every recovery/fallback/containment/halt action produces at least one diagnostic.",
+      "canonical_sources": "`recovery-engine-contract.md`"
+    },
+    {
+      "invariant_id": "INV-RECOVERY-005",
+      "category": 2,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_session_lifecycle.SessionLifecycleTests.test_terminal_gate_precedes_replay_and_frozen_history_does_not_grow",
+        "tests.test_m3_session_lifecycle.SessionLifecycleTests.test_concurrent_provider_halt_revokes_following_work_and_keeps_frozen_index"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_session_lifecycle.py",
+          "line": 846,
+          "body_sha256": "b2eceec77fcbc1ec97f6a6b7ff23530887324294554ec9d3a1b6ddd6a0e9a029"
+        },
+        {
+          "path": "tests/test_m3_session_lifecycle.py",
+          "line": 868,
+          "body_sha256": "b2d6ce4d0ac91c088397560aaed54752fd8415bcb2ef97e7ac9422a2832c53c0"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "SAFE_HALT is terminal \u2014 no transitions from SAFE_HALT.",
+      "canonical_test_criterion": "Once in SAFE_HALT, no subsequent state transition succeeds.",
+      "canonical_sources": "`containment-safe-failure-semantics.pseudo.md`"
+    },
+    {
+      "invariant_id": "INV-PLAN-001",
+      "category": 4,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [],
+      "actual_test_source_receipts": [],
+      "remaining_obligation": "Planner/emitter proposal adoption+actual pure/effect/resource implementation and substantive tests required; currently missing.",
+      "canonical_statement": "Planning produces no side effects.",
+      "canonical_test_criterion": "Planning completes without creating, modifying, or deleting any external resource.",
+      "canonical_sources": "`generation-planner-contract.md`"
+    },
+    {
+      "invariant_id": "INV-PLAN-002",
+      "category": 4,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [],
+      "actual_test_source_receipts": [],
+      "remaining_obligation": "Planner/emitter proposal adoption+actual pure/effect/resource implementation and substantive tests required; currently missing.",
+      "canonical_statement": "The plan is self-contained \u2014 the emitter needs only the plan.",
+      "canonical_test_criterion": "The emitter can materialize from the plan without planner interaction.",
+      "canonical_sources": "`generation-planner-contract.md`"
+    },
+    {
+      "invariant_id": "INV-BOUNDARY-001",
+      "category": 4,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [],
+      "actual_test_source_receipts": [],
+      "remaining_obligation": "Planner/emitter proposal adoption+actual pure/effect/resource implementation and substantive tests required; currently missing.",
+      "canonical_statement": "GenerationPlanner does not emit artifacts.",
+      "canonical_test_criterion": "No file, module, or service is created during planning.",
+      "canonical_sources": "`generation-planner-contract.md`"
+    },
+    {
+      "invariant_id": "INV-BOUNDARY-002",
+      "category": 4,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [],
+      "actual_test_source_receipts": [],
+      "remaining_obligation": "Planner/emitter proposal adoption+actual pure/effect/resource implementation and substantive tests required; currently missing.",
+      "canonical_statement": "ArtifactEmitter does not invent semantics not present in the plan.",
+      "canonical_test_criterion": "Every emitted artifact is traceable to a plan element.",
+      "canonical_sources": "`artifact-emitter-contract.md`"
+    },
+    {
+      "invariant_id": "INV-DIAG-001",
+      "category": 3,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_module_diagnostics.ModuleCaptureTests.test_actual_four_producers_complete_all_records_pages_and_exact_bindings",
+        "tests.test_m3_session_diagnostics.SessionCollectorTests.test_new_safe_nodes_and_full_actual_bundle_obey_closed_schema"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_module_diagnostics.py",
+          "line": 206,
+          "body_sha256": "3fdc209a05fb0f954c45fbe16a530c72e5dbecb3f64cb19c35e29f42a6e62830"
+        },
+        {
+          "path": "tests/test_m3_session_diagnostics.py",
+          "line": 479,
+          "body_sha256": "ea8b74cd5754f9e6bfc093730ffc9ca2e860d11198ab14b7f69f95c88125dbd3"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "Every diagnostic record conforms to the shared `DiagnosticEnvelope` schema.",
+      "canonical_test_criterion": "Every diagnostic has all required fields.",
+      "canonical_sources": "`diagnostic-schema.md`, `diagnostics-module-contract.md`"
+    },
+    {
+      "invariant_id": "INV-DIAG-002",
+      "category": 3,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_realm_transition_values.RealmTransitionValueTests.test_compiled_catalog_and_policy_bytes_are_exact",
+        "tests.test_m3_axioms.AxiomTests.test_all32_components_conjunction_order_explanations_and_cumulative_impact",
+        "tests.test_m3_recovery.RecoveryIntegrationTests.test_every_lifecycle_rule_is_refused_by_unchanged_eight_rule_recovery_owners"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_realm_transition_values.py",
+          "line": 53,
+          "body_sha256": "f230b95f85560594ade3e370627869eab26b6c06178d981b61e01990996d2fa4"
+        },
+        {
+          "path": "tests/test_m3_axioms.py",
+          "line": 30,
+          "body_sha256": "52eb4b8a6ff99d7c3859cadb192236a55596c0fe3d50b79a38269eef48d62a10"
+        },
+        {
+          "path": "tests/test_m3_recovery.py",
+          "line": 1780,
+          "body_sha256": "fb13adba0ad313ac1027e6d7775d11657f6c8d697febd7d9e6e6322cd840555a"
+        }
+      ],
+      "remaining_obligation": "Audit actual chain assertion helper/taxonomy source across all producers. Test route/count alone is insufficient; preserve exact canonical semantic rule subsets.",
+      "canonical_statement": "Every rule_id conforms to the canonical taxonomy pattern.",
+      "canonical_test_criterion": "Every rule_id matches `{FAMILY}-{CATEGORY}-{NUMBER}`.",
+      "canonical_sources": "`rule-id-taxonomy.md`"
+    },
+    {
+      "invariant_id": "INV-DIAG-003",
+      "category": 3,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_module_diagnostics.ModuleCaptureTests.test_actual_four_producers_complete_all_records_pages_and_exact_bindings",
+        "tests.test_m3_recovery.RecoveryIntegrationTests.test_18_immediate_two_xor_and_completed_action_capture_boundaries",
+        "tests.test_m3_session_lifecycle.SessionLifecycleTests.test_halt_closure_exactly_matches_final_record_and_source_rule"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_module_diagnostics.py",
+          "line": 206,
+          "body_sha256": "3fdc209a05fb0f954c45fbe16a530c72e5dbecb3f64cb19c35e29f42a6e62830"
+        },
+        {
+          "path": "tests/test_m3_recovery.py",
+          "line": 1180,
+          "body_sha256": "f5f70913db05064fd04b9f2ee0ffe156e3e896fed658f347b0b71d8887c7559c"
+        },
+        {
+          "path": "tests/test_m3_session_lifecycle.py",
+          "line": 834,
+          "body_sha256": "7e900ca6b2c2ab3124f9bbb93581f7ac8ea755bd9df60c88dfa648055508fffe"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "The diagnostic chain is complete \u2014 every step produces a diagnostic with valid chain references.",
+      "canonical_test_criterion": "Chain parent and root references are intact for any recovery sequence.",
+      "canonical_sources": "`diagnostic-schema.md`"
+    },
+    {
+      "invariant_id": "INV-DIAG-004",
+      "category": 3,
+      "status": "REQUIRES_EXACT_BODY_AND_FULL_OBLIGATION_REVIEW_NOT_ACCEPTED",
+      "evidence_note": "Exact candidate source bodies are pinned below. Match their actual assertions to the canonical statement/criterion and complete module obligations before conformance judgment; presence or prior test count alone is insufficient.",
+      "candidate_tests": [
+        "tests.test_m3_normalization.NormalizationCaptureTests.test_computation_is_acknowledged_before_actual_post_diagnosis",
+        "tests.test_m3_recovery.RecoveryIntegrationTests.test_18_immediate_two_xor_and_completed_action_capture_boundaries",
+        "tests.test_m3_module_diagnostics.ModuleCaptureTests.test_unconfirmed_admission_retains_real_scope_and_once_cleanup"
+      ],
+      "actual_test_source_receipts": [
+        {
+          "path": "tests/test_m3_normalization.py",
+          "line": 814,
+          "body_sha256": "d6454d6f2fcbcaba9152c502ad7931dc328eb254789938b38ed473e05789d7b3"
+        },
+        {
+          "path": "tests/test_m3_recovery.py",
+          "line": 1180,
+          "body_sha256": "f5f70913db05064fd04b9f2ee0ffe156e3e896fed658f347b0b71d8887c7559c"
+        },
+        {
+          "path": "tests/test_m3_module_diagnostics.py",
+          "line": 292,
+          "body_sha256": "af0fbb7d71703a01ca5cd7b22d18073e8d2b81d18598bdd79a1e9297b502abc9"
+        }
+      ],
+      "remaining_obligation": "Exact body+new module completion review; full unfiltered actual run and category judgment required.",
+      "canonical_statement": "No silent omission \u2014 diagnostics are never deferred, batched, or suppressed.",
+      "canonical_test_criterion": "Every required diagnostic is emitted at the point of action.",
+      "canonical_sources": "`diagnostics-module-contract.md`"
+    }
+  ],
+  "category_sizes": {
+    "1": 9,
+    "2": 5,
+    "3": 5,
+    "4": 4,
+    "5": 5
+  },
+  "harness_policy": "Exact28 currentIDs, all5categories, fail absent tests/skip/error, run distincttests once, include per-module obligations; resultcomplete onlyafteractual unfiltered full acceptance.",
+  "canonical_invariant_source": {
+    "path": "core/ash_pattern_engine/canonical/verification/invariant-spec.md",
+    "normalized_sha256": "2b7dbd52b539810b3f957ed23bcbcd7fffd068b3f01ea43f24b51a0e8f98866b"
+  },
+  "harness_scope": "Exactly28 canonical rows/five categories. Missing named tests fail, never skip; all distinct tests execute once. Pending planner/emitter rows and remaining explicit byte-repeat/chain/per-module obligations prevent a current conformance judgment."
+}

@@ -1,0 +1,38 @@
+{
+  "scope": "PLANNED_ROOT_ACCEPTANCE_SURFACE_NOT_EXISTING_COMMAND_OR_PASS",
+  "core_owned_test": "tests/test_m3_core_conformance.py",
+  "root_owned_evaluator": "scripts/check_m3_acceptance.py",
+  "proposed_public_seam": "build_report(root,repository_report,conformance_report)->plain bounded report",
+  "proposed_cli": [
+    "[root]",
+    "--check-definition",
+    "--repository-report FILE",
+    "--conformance-report FILE",
+    "--output FILE"
+  ],
+  "exact_count": {
+    "deliverables": 7,
+    "exits": 5,
+    "invariants": 28,
+    "categories": 5
+  },
+  "definition_control": "Require exact canonical ID/category/statement/criterion plus resolved AST-qualified selector/body hash; missing named method fails.",
+  "execution_control": "Require actual selected-case run/status/skipped/error/log SHA and matching clean revision. Missing/skipped/failed selected evidence fails or remains unverified; aggregate module count alone cannot establish each invariant.",
+  "no_duplicate_exhaustive_run": "Execute test_actual_all512_times16_apply_under32_complete_cosets_repeats_entire_wire once in its normal RT suite; reuse its actual per-case observation for every affected row. The Core definition unittest does not nest another8192 execution.",
+  "receipt_fields": [
+    "schema_version",
+    "revision",
+    "check_catalog_sha256",
+    "input_manifest_sha256",
+    "canonical_invariant_source_sha256",
+    "selected_cases",
+    "invariants",
+    "categories",
+    "module_obligations",
+    "deliverables",
+    "exits",
+    "errors",
+    "ready"
+  ],
+  "root_authority": "Root owns actual durable acceptance definition/evidence, registered command and README status. This planned surface confers no acceptance."
+}

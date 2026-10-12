@@ -1,0 +1,1040 @@
+{
+  "status": "PASS_OFFLINE_SCHEMA_AND_ACTUAL_PURE_FOUNDATION_DERIVATION_NOT_FUTURE_RUNTIME",
+  "schema_sha256": "f83826279cfc711f759f383bc7de2c603c5def271d601b40e7567f232237ff86",
+  "input_sha256": {
+    "m3_planner_emitter_schema.proposed.json": "f83826279cfc711f759f383bc7de2c603c5def271d601b40e7567f232237ff86",
+    "BUSINESS_API_INVENTORY.proposed.json": "27653e68f36d881be0e1c0bb1d9be3bf772a0afb8a460313daf1f85646e7613b",
+    "SOURCE_PINS.json": "dc705708c729cf80791f8aeb3dd1a001e9e8af7a142dee0bb36f507882355e10",
+    "SOURCE_EXTENSION_INVENTORY.proposed.json": "e460e0df74a346a40c2f23d86a9a8431529c591810ab2c38f4730eec04e3f419",
+    "PLANNER_EMITTER_POLICY.proposed.md": "c1e5435f3fcc9d69648f752a117b32612f6bc997a80bc7ff8f6886f17db7ff5a",
+    "proposed-schema-dependencies\\m3_generation_module_capture_schema.json": "91a52aa69f1fc0a60d04592fb99ed738305c6e85bb16e5450ca7ea7084a176d2",
+    "proposed-schema-dependencies\\m3_generation_normalization_plan_schema.json": "711095776c00c685643bb849cad9f6288e7137ac952263b465826a39fab6c6d4",
+    "proposed-schema-dependencies\\m3_generation_realm_transition_schema.json": "6c3c6eea14122fb1cb1558797c0e3c048e6d66fa6d3c9c12ee27a9d0c32ec34c",
+    "proposed-schema-dependencies\\m3_generation_recovery_value_schema.json": "aaacadd4e4fbe76b209c0783577e89a833e8b9e4c1aeba5858ad9305cbdafefe",
+    "proposed-schema-dependencies\\m3_generation_state_normalization_schema.json": "451b0f9300e9b9961daadc601eabb970019e3ee64320a1af628c5849f56be4f9",
+    "proposed-schema-dependencies\\m3_generation_state_schema.json": "8cb2dde10184b04a179686ad982e94ef4c33753cb9bda8067100ddf16748ff27",
+    "proposed-schema-dependencies\\m3_generation_topology_axiom_schema.json": "fd92e55c06771a0aa564d08efe18cb4e074e044b57fd30768065b0157d712ee8"
+  },
+  "derivation_status": "Existing F431 StateModel/RT/TA classes actually executed. Plain external wire copies redeclare the exact new candidate source/pin branches; they are not current runtime source admissions or actual new-vector diagnoses. Future chain/planner/emitter/target outcomes are explicitly authored dictionaries, not issued owners, capture ACKs or observed effects.",
+  "chain_checks": [
+    {
+      "kind": "CHAIN_LENGTH",
+      "length": 0,
+      "records": 1,
+      "actual_candidate": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "CHAIN_LENGTH",
+      "length": 1,
+      "records": 4,
+      "actual_candidate": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "kind": "CHAIN_LENGTH",
+      "length": 2,
+      "records": 7,
+      "actual_candidate": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "kind": "CHAIN_LENGTH",
+      "length": 3,
+      "records": 10,
+      "actual_candidate": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "kind": "CHAIN_LENGTH",
+      "length": 4,
+      "records": 13,
+      "actual_candidate": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "axiom_vectors": 32,
+  "warning_checks": [
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "warnings": [
+        "A1_FAILED",
+        "A2_FAILED",
+        "A3_FAILED",
+        "A4_FAILED",
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "warnings": [
+        "A1_FAILED",
+        "A2_FAILED",
+        "A3_FAILED",
+        "A4_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "warnings": [
+        "A1_FAILED",
+        "A2_FAILED",
+        "A3_FAILED",
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        false,
+        false,
+        true,
+        true
+      ],
+      "warnings": [
+        "A1_FAILED",
+        "A2_FAILED",
+        "A3_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        false,
+        true,
+        false,
+        false
+      ],
+      "warnings": [
+        "A1_FAILED",
+        "A2_FAILED",
+        "A4_FAILED",
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        false,
+        true,
+        false,
+        true
+      ],
+      "warnings": [
+        "A1_FAILED",
+        "A2_FAILED",
+        "A4_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      "warnings": [
+        "A1_FAILED",
+        "A2_FAILED",
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        false,
+        true,
+        true,
+        true
+      ],
+      "warnings": [
+        "A1_FAILED",
+        "A2_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "warnings": [
+        "A1_FAILED",
+        "A3_FAILED",
+        "A4_FAILED",
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        true,
+        false,
+        false,
+        true
+      ],
+      "warnings": [
+        "A1_FAILED",
+        "A3_FAILED",
+        "A4_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        true,
+        false,
+        true,
+        false
+      ],
+      "warnings": [
+        "A1_FAILED",
+        "A3_FAILED",
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        true,
+        false,
+        true,
+        true
+      ],
+      "warnings": [
+        "A1_FAILED",
+        "A3_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        true,
+        true,
+        false,
+        false
+      ],
+      "warnings": [
+        "A1_FAILED",
+        "A4_FAILED",
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        true,
+        true,
+        false,
+        true
+      ],
+      "warnings": [
+        "A1_FAILED",
+        "A4_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        true,
+        true,
+        true,
+        false
+      ],
+      "warnings": [
+        "A1_FAILED",
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        false,
+        true,
+        true,
+        true,
+        true
+      ],
+      "warnings": [
+        "A1_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "warnings": [
+        "A2_FAILED",
+        "A3_FAILED",
+        "A4_FAILED",
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        false,
+        false,
+        false,
+        true
+      ],
+      "warnings": [
+        "A2_FAILED",
+        "A3_FAILED",
+        "A4_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        false,
+        false,
+        true,
+        false
+      ],
+      "warnings": [
+        "A2_FAILED",
+        "A3_FAILED",
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        false,
+        false,
+        true,
+        true
+      ],
+      "warnings": [
+        "A2_FAILED",
+        "A3_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        false,
+        true,
+        false,
+        false
+      ],
+      "warnings": [
+        "A2_FAILED",
+        "A4_FAILED",
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        false,
+        true,
+        false,
+        true
+      ],
+      "warnings": [
+        "A2_FAILED",
+        "A4_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        false,
+        true,
+        true,
+        false
+      ],
+      "warnings": [
+        "A2_FAILED",
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        false,
+        true,
+        true,
+        true
+      ],
+      "warnings": [
+        "A2_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        true,
+        false,
+        false,
+        false
+      ],
+      "warnings": [
+        "A3_FAILED",
+        "A4_FAILED",
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        true,
+        false,
+        false,
+        true
+      ],
+      "warnings": [
+        "A3_FAILED",
+        "A4_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        true,
+        false,
+        true,
+        false
+      ],
+      "warnings": [
+        "A3_FAILED",
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        true,
+        false,
+        true,
+        true
+      ],
+      "warnings": [
+        "A3_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "warnings": [
+        "A4_FAILED",
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        true,
+        true,
+        false,
+        true
+      ],
+      "warnings": [
+        "A4_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        true,
+        true,
+        true,
+        false
+      ],
+      "warnings": [
+        "A5_FAILED"
+      ]
+    },
+    {
+      "kind": "DECLARED_AXIOM_WARNING_VECTOR",
+      "components": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "warnings": []
+    }
+  ],
+  "negative_checks": [
+    {
+      "definition": "ArtifactDescription",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "ChainDiagnosticEmission",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "ChainEnvelope",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "ChainRecord",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "ChainStep",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "EmissionDispatchDiagnostic",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "EmissionOutcomeDiagnostic",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "EmissionPreparationReceipt",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "EmissionSummaryDiagnostic",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "EmitterRequest",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "EmitterResult",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "GenerationDependencyCaptureReceipt",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "GenerationInputs",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "GenerationRunReceipt",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "ManifestRow",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "MaterializedDocument",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "MemoryTargetConfiguration",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "MemoryTargetReceipt",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "PendingPlannerEmitterDiagnostic",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "PlanDiagnostic",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "PlanMetadata",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "PlannerEmitterBinding",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "PlannerEmitterCaptureReceipt",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "PlannerEmitterEnvelope",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "PlannerEmitterPolicyBinding",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "PlannerEmitterRecord",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "PlannerFailure",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "PlannerRequest",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "PlannerResult",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "ReferenceGenerationPlan",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "ReferenceManifestDocument",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "RoleAssignment",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "TargetConstraints",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "TargetSnapshot",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "TransitionChainFailure",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "TransitionChainResult",
+      "mutation": "unknown_field",
+      "expected_keyword": "additionalProperties"
+    },
+    {
+      "definition": "ArtifactDescription",
+      "mutation": "missing:artifact_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "ChainDiagnosticEmission",
+      "mutation": "missing:diagnostic_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "ChainEnvelope",
+      "mutation": "missing:diagnostic_kind",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "ChainRecord",
+      "mutation": "missing:record_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "ChainStep",
+      "mutation": "missing:ordinal",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "EmissionDispatchDiagnostic",
+      "mutation": "missing:operation_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "EmissionOutcomeDiagnostic",
+      "mutation": "missing:dispatch_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "EmissionPreparationReceipt",
+      "mutation": "missing:operation_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "EmissionSummaryDiagnostic",
+      "mutation": "missing:operation_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "EmitterRequest",
+      "mutation": "missing:operation_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "EmitterResult",
+      "mutation": "missing:request",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "GenerationDependencyCaptureReceipt",
+      "mutation": "missing:operation_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "GenerationInputs",
+      "mutation": "missing:project_name",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "GenerationRunReceipt",
+      "mutation": "missing:operation_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "ManifestRow",
+      "mutation": "missing:node",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "MaterializedDocument",
+      "mutation": "missing:artifact_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "MemoryTargetConfiguration",
+      "mutation": "missing:target_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "MemoryTargetReceipt",
+      "mutation": "missing:operation_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "PendingPlannerEmitterDiagnostic",
+      "mutation": "missing:diagnostic_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "PlanDiagnostic",
+      "mutation": "missing:operation_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "PlanMetadata",
+      "mutation": "missing:request_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "PlannerEmitterBinding",
+      "mutation": "missing:canonical_binding",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "PlannerEmitterCaptureReceipt",
+      "mutation": "missing:operation_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "PlannerEmitterEnvelope",
+      "mutation": "missing:diagnostic_kind",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "PlannerEmitterPolicyBinding",
+      "mutation": "missing:policy_id",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "PlannerEmitterRecord",
+      "mutation": "missing:diagnostic_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "PlannerFailure",
+      "mutation": "missing:request",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "PlannerRequest",
+      "mutation": "missing:operation_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "PlannerResult",
+      "mutation": "missing:request",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "ReferenceGenerationPlan",
+      "mutation": "missing:plan_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "ReferenceManifestDocument",
+      "mutation": "missing:schema_version",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "RoleAssignment",
+      "mutation": "missing:assignment_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "TargetConstraints",
+      "mutation": "missing:max_artifacts",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "TargetSnapshot",
+      "mutation": "missing:configuration",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "TransitionChainFailure",
+      "mutation": "missing:operation_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "TransitionChainResult",
+      "mutation": "missing:operation_reference",
+      "expected_keyword": "required"
+    },
+    {
+      "definition": "GenerationInputs",
+      "mutation": "topology_depth",
+      "expected_keyword": "maximum"
+    },
+    {
+      "definition": "TargetConstraints",
+      "mutation": "max_document_bytes",
+      "expected_keyword": "maximum"
+    },
+    {
+      "definition": "RoleAssignment",
+      "mutation": "ordinal",
+      "expected_keyword": "maximum"
+    },
+    {
+      "definition": "PlannerEmitterBinding",
+      "mutation": "canonical_binding",
+      "actual_keywords": [
+        "const"
+      ]
+    },
+    {
+      "definition": "PlannerEmitterPolicyBinding",
+      "mutation": "source_sha256",
+      "actual_keywords": [
+        "additionalProperties"
+      ]
+    },
+    {
+      "definition": "GenerationInputs",
+      "mutation": "target_runtime",
+      "actual_keywords": [
+        "const"
+      ]
+    },
+    {
+      "definition": "RoleAssignment",
+      "mutation": "role_kind",
+      "actual_keywords": [
+        "enum"
+      ]
+    },
+    {
+      "definition": "MemoryTargetReceipt",
+      "mutation": "actual_status",
+      "actual_keywords": [
+        "enum"
+      ]
+    }
+  ],
+  "sizes": {
+    "planner_result_bytes": 1144640,
+    "emitter_result_bytes": 876893,
+    "target_snapshot_bytes": 489821,
+    "largest_document_bytes": 18969,
+    "document_total_bytes": 432493,
+    "documents": 23,
+    "assignments": 729,
+    "records": 47
+  },
+  "source_identity_aliases_equal": true,
+  "destination_identity_aliases_equal": true,
+  "external_retrievals": 0,
+  "future_runtime_not_executed": [
+    "new fourth vector constructors/host/current model",
+    "compound chain owner",
+    "planner owner",
+    "emitter owner",
+    "memory target effects",
+    "capture admission/dispatch ACK",
+    "cancellation/locks/first completion/retention"
+  ],
+  "validated_definitions": [
+    "ArtifactDescription",
+    "ChainDiagnosticEmission",
+    "ChainEnvelope",
+    "ChainRecord",
+    "ChainStep",
+    "EmissionDispatchDiagnostic",
+    "EmissionOutcomeDiagnostic",
+    "EmissionPreparationReceipt",
+    "EmissionSummaryDiagnostic",
+    "EmitterRequest",
+    "EmitterResult",
+    "GenerationDependencyCaptureReceipt",
+    "GenerationInputs",
+    "GenerationRunReceipt",
+    "ManifestRow",
+    "MaterializedDocument",
+    "MemoryTargetConfiguration",
+    "MemoryTargetReceipt",
+    "PendingPlannerEmitterDiagnostic",
+    "PlanDiagnostic",
+    "PlanMetadata",
+    "PlannerEmitterBinding",
+    "PlannerEmitterCaptureReceipt",
+    "PlannerEmitterEnvelope",
+    "PlannerEmitterPolicyBinding",
+    "PlannerEmitterRecord",
+    "PlannerFailure",
+    "PlannerRequest",
+    "PlannerResult",
+    "ReferenceGenerationPlan",
+    "ReferenceManifestDocument",
+    "RoleAssignment",
+    "TargetConstraints",
+    "TargetSnapshot",
+    "TransitionChainFailure",
+    "TransitionChainResult"
+  ],
+  "definition_count": 36
+}

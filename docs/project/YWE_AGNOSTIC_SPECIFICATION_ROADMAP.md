@@ -85,14 +85,22 @@ precede implementation under YWE-REQ-0045–0048 / ADR-0036–0040. Focused cont
 include actual protected Windows capture/export, exact producer ownership and
 all 8,192 transition pairs through 16,384 actual applications. The expanded
 offline catalog passes 1,367 bindings, including 482 intended rejections.
-The corrected combined runtime candidate requires a fresh complete clean run
-before publication. The completed unpublished b4e5b7c run passes 35 checks and
-fails the unit check: two test assumptions fail among 1,232 tests. Corrected LF
-policy hashing and refusal coverage for all 31 rules outside N2 pass all 66 tests
-in the affected areas; a fresh full clean result remains required. Complete planner/emitter business policy, current-source
-lifecycle integration and remaining Core conformance remain required before
-M3 acceptance. All five M3 exits remain open. Owner wiki f31ef00 is published
-from exact source 9c19c6b and all 47 remote pages match reviewed bytes.
+The [published corrected implementation](https://github.com/flynn33/yggdrasil-world-engine/commit/c468b35439e2b0254a71b22be3117a711f557b9b)
+passes all 36 checks and 1,232 unit tests from an exact clean, unfiltered offline
+checkout, with zero blocking failures, advisories or file changes. The unit
+suite takes 2071.591 seconds and the full run 2428.110 seconds. The earlier
+unpublished b4e5b7c failure remains recorded: two stale test assumptions fail,
+then all 66 affected tests pass after preserving documented LF identities and
+covering all 31 rules outside the unchanged N2 subset. Exact-revision
+[Ubuntu/Windows CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38191670186)
+is running at the latest readback.
+The remaining generation/planner/emitter, current-source four-pure Session
+and neutral Core contracts are adopted under YWE-REQ-0049–0051 / ADR-0041–0043.
+The fourth canonical vector is accepted pending joint source/runtime migration;
+independent authored format and capacity controls are distinct from actual
+implementation and conformance. These runtime and remaining acceptance
+obligations keep all five M3 exits open. Owner Wiki6182078 is published from
+exact source c468b35, with all 47 remote pages matching reviewed bytes.
 
 The [README checkpoint](../../README.md#development-checkpoint--2026-10-11)
 and [Project Record section 18](../design-planning/Project_Record.md#18-issued-module-implementation-and-addressable-diagnostic-evidence)

@@ -1,0 +1,3723 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json",
+  "title": "Bounded topology and declared five-axiom reference values",
+  "description": "Closed owned wire representations [YWE-REQ-0047]. Source-owned nested state and diagnosis validation representations retain their existing field contracts. Mathematical and cross-record coherence belongs to the exact pure owners. External proposed additive M3_GENERATION source branch; original branches preserved. No runtime constructor acceptance claimed.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/TopologyResult"
+    },
+    {
+      "$ref": "#/$defs/TopologyFailure"
+    },
+    {
+      "$ref": "#/$defs/AxiomEvaluationResult"
+    },
+    {
+      "$ref": "#/$defs/AxiomEvaluationFailure"
+    }
+  ],
+  "$defs": {
+    "TopologyAxiomPolicyBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy_id",
+        "policy_version",
+        "policy_sha256"
+      ],
+      "properties": {
+        "policy_id": {
+          "const": "YWE-TOPOLOGY-AXIOM-REFERENCE-001"
+        },
+        "policy_version": {
+          "const": "1.0.0"
+        },
+        "policy_sha256": {
+          "const": "ab645a078e9aaee04e3eb01ac1ced01de986340d8f0242057eb3e4567196c7ae"
+        }
+      }
+    },
+    "TopologyAxiomSourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_binding",
+        "contract_pins"
+      ],
+      "properties": {
+        "canonical_binding": {
+          "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/CanonicalAshBinding"
+        },
+        "contract_pins": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "prefixItems": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256,
+                "pattern": "^[\\x21-\\x7e]+$"
+              },
+              {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            ],
+            "items": false
+          }
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "canonical_binding": {
+              "const": {
+                "dependency_id": "ash_cosmological_model.f2_9.canonical",
+                "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+                "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+                "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+                "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+                "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+                "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+                "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+                "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+              }
+            },
+            "contract_pins": {
+              "const": [
+                [
+                  "interfaces/contracts/topology-generator-contract.md",
+                  "a408b335ecacff01e38113bcd6cc6089142e40219d521e7081e87406fac11147"
+                ],
+                [
+                  "interfaces/contracts/axiom-evaluator-contract.md",
+                  "dc2edf80d2ded0b89b31df15416e24c13139988ab6fd38adaa6195921a692faf"
+                ],
+                [
+                  "algorithms/topology-expansion.pseudo.md",
+                  "1b6ab5d3d13b678c67f185f2f91a60d0dae7a976dcbb6df2b169efa6d15c9a3d"
+                ],
+                [
+                  "algorithms/axiom-evaluation.pseudo.md",
+                  "0f205842840399aaf08932e20cde34761874a3296b260f139dc6a04df0e707ba"
+                ],
+                [
+                  "interfaces/diagnostic-schema.md",
+                  "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7"
+                ],
+                [
+                  "interfaces/rule-id-taxonomy.md",
+                  "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+                ],
+                [
+                  "interfaces/contracts/diagnostics-module-contract.md",
+                  "88b8d682fa826f128787e6154151c68b32d677239e17ddf4344a084461554a37"
+                ]
+              ]
+            }
+          }
+        },
+        {
+          "properties": {
+            "canonical_binding": {
+              "const": {
+                "dependency_id": "ash_cosmological_model.f2_9.canonical",
+                "aggregate_sha256": "76d59926ce9676b7584c6cdd555f50f56fceda075fa3fc8b37167fd2be43f7c9",
+                "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+                "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+                "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+                "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+                "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+                "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+                "taxonomy_source_sha256": "150b45d4c75aa053a8d5276d980b359b0ae768c85ae28896680296920402f250"
+              }
+            },
+            "contract_pins": {
+              "const": [
+                [
+                  "interfaces/contracts/topology-generator-contract.md",
+                  "a408b335ecacff01e38113bcd6cc6089142e40219d521e7081e87406fac11147"
+                ],
+                [
+                  "interfaces/contracts/axiom-evaluator-contract.md",
+                  "dc2edf80d2ded0b89b31df15416e24c13139988ab6fd38adaa6195921a692faf"
+                ],
+                [
+                  "algorithms/topology-expansion.pseudo.md",
+                  "1b6ab5d3d13b678c67f185f2f91a60d0dae7a976dcbb6df2b169efa6d15c9a3d"
+                ],
+                [
+                  "algorithms/axiom-evaluation.pseudo.md",
+                  "0f205842840399aaf08932e20cde34761874a3296b260f139dc6a04df0e707ba"
+                ],
+                [
+                  "interfaces/diagnostic-schema.md",
+                  "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7"
+                ],
+                [
+                  "interfaces/rule-id-taxonomy.md",
+                  "150b45d4c75aa053a8d5276d980b359b0ae768c85ae28896680296920402f250"
+                ],
+                [
+                  "interfaces/contracts/diagnostics-module-contract.md",
+                  "88b8d682fa826f128787e6154151c68b32d677239e17ddf4344a084461554a37"
+                ]
+              ]
+            }
+          }
+        },
+        {
+          "properties": {
+            "canonical_binding": {
+              "const": {
+                "dependency_id": "ash_cosmological_model.f2_9.canonical",
+                "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+                "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+                "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+                "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+                "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+                "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+                "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+                "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+              }
+            },
+            "contract_pins": {
+              "const": [
+                [
+                  "interfaces/contracts/topology-generator-contract.md",
+                  "a408b335ecacff01e38113bcd6cc6089142e40219d521e7081e87406fac11147"
+                ],
+                [
+                  "interfaces/contracts/axiom-evaluator-contract.md",
+                  "dc2edf80d2ded0b89b31df15416e24c13139988ab6fd38adaa6195921a692faf"
+                ],
+                [
+                  "algorithms/topology-expansion.pseudo.md",
+                  "1b6ab5d3d13b678c67f185f2f91a60d0dae7a976dcbb6df2b169efa6d15c9a3d"
+                ],
+                [
+                  "algorithms/axiom-evaluation.pseudo.md",
+                  "0f205842840399aaf08932e20cde34761874a3296b260f139dc6a04df0e707ba"
+                ],
+                [
+                  "interfaces/diagnostic-schema.md",
+                  "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+                ],
+                [
+                  "interfaces/rule-id-taxonomy.md",
+                  "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+                ],
+                [
+                  "interfaces/contracts/diagnostics-module-contract.md",
+                  "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+                ]
+              ]
+            }
+          }
+        },
+        {
+          "properties": {
+            "canonical_binding": {
+              "const": {
+                "dependency_id": "ash_cosmological_model.f2_9.canonical",
+                "aggregate_sha256": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8",
+                "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+                "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+                "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+                "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+                "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+                "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+                "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+              }
+            },
+            "contract_pins": {
+              "const": [
+                [
+                  "interfaces/contracts/topology-generator-contract.md",
+                  "a408b335ecacff01e38113bcd6cc6089142e40219d521e7081e87406fac11147"
+                ],
+                [
+                  "interfaces/contracts/axiom-evaluator-contract.md",
+                  "dc2edf80d2ded0b89b31df15416e24c13139988ab6fd38adaa6195921a692faf"
+                ],
+                [
+                  "algorithms/topology-expansion.pseudo.md",
+                  "1b6ab5d3d13b678c67f185f2f91a60d0dae7a976dcbb6df2b169efa6d15c9a3d"
+                ],
+                [
+                  "algorithms/axiom-evaluation.pseudo.md",
+                  "0f205842840399aaf08932e20cde34761874a3296b260f139dc6a04df0e707ba"
+                ],
+                [
+                  "interfaces/diagnostic-schema.md",
+                  "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+                ],
+                [
+                  "interfaces/rule-id-taxonomy.md",
+                  "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+                ],
+                [
+                  "interfaces/contracts/diagnostics-module-contract.md",
+                  "5ba322a2376bb325e5d58d9341938535ee8d69ff0fc286b3969dfdb77bd8c225"
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "TopologyRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request_reference",
+        "origin_diagnosis",
+        "depth",
+        "seed_token"
+      ],
+      "properties": {
+        "request_reference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "enum": [
+              "NONE",
+              "SELF"
+            ]
+          }
+        },
+        "origin_diagnosis": {
+          "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/StateDiagnosis"
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": -9223372036854775808,
+          "maximum": 9223372036854775807
+        },
+        "seed_token": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "pattern": "^[A-Za-z0-9_-]{1,32}$"
+        }
+      }
+    },
+    "TopologyNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_id",
+        "parent_id",
+        "depth",
+        "ordinal",
+        "branch_kind",
+        "path_token"
+      ],
+      "properties": {
+        "node_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 49,
+          "pattern": "^[\\x21-\\x7e]+$"
+        },
+        "parent_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 48,
+              "pattern": "^[\\x21-\\x7e]+$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "ordinal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 728
+        },
+        "branch_kind": {
+          "enum": [
+            "root",
+            "continuation",
+            "positive",
+            "negative"
+          ]
+        },
+        "path_token": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 7,
+          "pattern": "^r[012]{0,6}$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "depth": {
+                "const": 0
+              }
+            },
+            "required": [
+              "depth"
+            ]
+          },
+          "then": {
+            "properties": {
+              "parent_id": {
+                "type": "null"
+              },
+              "ordinal": {
+                "const": 0
+              },
+              "branch_kind": {
+                "const": "root"
+              },
+              "path_token": {
+                "const": "r"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "depth": {
+                "minimum": 1
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "parent_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 48,
+                "pattern": "^[\\x21-\\x7e]+$"
+              },
+              "branch_kind": {
+                "enum": [
+                  "continuation",
+                  "positive",
+                  "negative"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "depth": {
+                "const": 0
+              }
+            },
+            "required": [
+              "depth"
+            ]
+          },
+          "then": {
+            "properties": {
+              "path_token": {
+                "pattern": "^r[012]{0}$"
+              },
+              "ordinal": {
+                "maximum": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "depth": {
+                "const": 1
+              }
+            },
+            "required": [
+              "depth"
+            ]
+          },
+          "then": {
+            "properties": {
+              "path_token": {
+                "pattern": "^r[012]{1}$"
+              },
+              "ordinal": {
+                "maximum": 2
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "depth": {
+                "const": 2
+              }
+            },
+            "required": [
+              "depth"
+            ]
+          },
+          "then": {
+            "properties": {
+              "path_token": {
+                "pattern": "^r[012]{2}$"
+              },
+              "ordinal": {
+                "maximum": 8
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "depth": {
+                "const": 3
+              }
+            },
+            "required": [
+              "depth"
+            ]
+          },
+          "then": {
+            "properties": {
+              "path_token": {
+                "pattern": "^r[012]{3}$"
+              },
+              "ordinal": {
+                "maximum": 26
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "depth": {
+                "const": 4
+              }
+            },
+            "required": [
+              "depth"
+            ]
+          },
+          "then": {
+            "properties": {
+              "path_token": {
+                "pattern": "^r[012]{4}$"
+              },
+              "ordinal": {
+                "maximum": 80
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "depth": {
+                "const": 5
+              }
+            },
+            "required": [
+              "depth"
+            ]
+          },
+          "then": {
+            "properties": {
+              "path_token": {
+                "pattern": "^r[012]{5}$"
+              },
+              "ordinal": {
+                "maximum": 242
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "depth": {
+                "const": 6
+              }
+            },
+            "required": [
+              "depth"
+            ]
+          },
+          "then": {
+            "properties": {
+              "path_token": {
+                "pattern": "^r[012]{6}$"
+              },
+              "ordinal": {
+                "maximum": 728
+              }
+            }
+          }
+        }
+      ]
+    },
+    "TopologyDiagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request_reference",
+        "topology_reference",
+        "input_state",
+        "seed_token",
+        "depth",
+        "frontier_count",
+        "visited_node_count",
+        "outcome",
+        "failure_code",
+        "notes"
+      ],
+      "properties": {
+        "request_reference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "enum": [
+              "NONE",
+              "SELF"
+            ]
+          }
+        },
+        "topology_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "not": {
+                "enum": [
+                  "NONE",
+                  "SELF"
+                ]
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "input_state": {
+          "anyOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/AshState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "seed_token": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "pattern": "^[A-Za-z0-9_-]{1,32}$"
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": -9223372036854775808,
+          "maximum": 9223372036854775807
+        },
+        "frontier_count": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 729
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "visited_node_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1093
+        },
+        "outcome": {
+          "enum": [
+            "COMPLETE",
+            "REJECTED"
+          ]
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "enum": [
+                "ORIGIN_REJECTED",
+                "ORIGIN_UNPARSED",
+                "PROFILE_UNAVAILABLE",
+                "STATE_NOT_NORMALIZED",
+                "DEPTH_RANGE_EXCEEDED",
+                "REFERENCE_COLLISION",
+                "SOURCE_UNSUPPORTED",
+                "VALIDATION_UNAVAILABLE"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "notes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "^[^\\ud800-\\udfff]*$"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "COMPLETE"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "properties": {
+              "topology_reference": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "not": {
+                  "enum": [
+                    "NONE",
+                    "SELF"
+                  ]
+                }
+              },
+              "input_state": {
+                "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/AshState"
+              },
+              "depth": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 6
+              },
+              "frontier_count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 729
+              },
+              "visited_node_count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1093
+              },
+              "failure_code": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "outcome": {
+                "const": "REJECTED"
+              }
+            },
+            "required": [
+              "outcome"
+            ]
+          },
+          "then": {
+            "properties": {
+              "topology_reference": {
+                "type": "null"
+              },
+              "frontier_count": {
+                "type": "null"
+              },
+              "visited_node_count": {
+                "const": 0
+              },
+              "failure_code": {
+                "enum": [
+                  "ORIGIN_REJECTED",
+                  "ORIGIN_UNPARSED",
+                  "PROFILE_UNAVAILABLE",
+                  "STATE_NOT_NORMALIZED",
+                  "DEPTH_RANGE_EXCEEDED",
+                  "REFERENCE_COLLISION",
+                  "SOURCE_UNSUPPORTED",
+                  "VALIDATION_UNAVAILABLE"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "allOf": [
+              {
+                "properties": {
+                  "outcome": {
+                    "const": "COMPLETE"
+                  }
+                },
+                "required": [
+                  "outcome"
+                ]
+              },
+              {
+                "properties": {
+                  "depth": {
+                    "const": 0
+                  }
+                },
+                "required": [
+                  "depth"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "frontier_count": {
+                "const": 1
+              },
+              "visited_node_count": {
+                "const": 1
+              },
+              "notes": {
+                "const": [
+                  "Input is VALID and ALREADY_VALID under the current complete profile.",
+                  "Ternary child order is continuation, positive, negative.",
+                  "Final frontier has 1 nodes at depth 0.",
+                  "Constructed 1 nodes across all levels.",
+                  "Lineage is encoded by the explicit seed and base-three path."
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "allOf": [
+              {
+                "properties": {
+                  "outcome": {
+                    "const": "COMPLETE"
+                  }
+                },
+                "required": [
+                  "outcome"
+                ]
+              },
+              {
+                "properties": {
+                  "depth": {
+                    "const": 1
+                  }
+                },
+                "required": [
+                  "depth"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "frontier_count": {
+                "const": 3
+              },
+              "visited_node_count": {
+                "const": 4
+              },
+              "notes": {
+                "const": [
+                  "Input is VALID and ALREADY_VALID under the current complete profile.",
+                  "Ternary child order is continuation, positive, negative.",
+                  "Final frontier has 3 nodes at depth 1.",
+                  "Constructed 4 nodes across all levels.",
+                  "Lineage is encoded by the explicit seed and base-three path."
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "allOf": [
+              {
+                "properties": {
+                  "outcome": {
+                    "const": "COMPLETE"
+                  }
+                },
+                "required": [
+                  "outcome"
+                ]
+              },
+              {
+                "properties": {
+                  "depth": {
+                    "const": 2
+                  }
+                },
+                "required": [
+                  "depth"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "frontier_count": {
+                "const": 9
+              },
+              "visited_node_count": {
+                "const": 13
+              },
+              "notes": {
+                "const": [
+                  "Input is VALID and ALREADY_VALID under the current complete profile.",
+                  "Ternary child order is continuation, positive, negative.",
+                  "Final frontier has 9 nodes at depth 2.",
+                  "Constructed 13 nodes across all levels.",
+                  "Lineage is encoded by the explicit seed and base-three path."
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "allOf": [
+              {
+                "properties": {
+                  "outcome": {
+                    "const": "COMPLETE"
+                  }
+                },
+                "required": [
+                  "outcome"
+                ]
+              },
+              {
+                "properties": {
+                  "depth": {
+                    "const": 3
+                  }
+                },
+                "required": [
+                  "depth"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "frontier_count": {
+                "const": 27
+              },
+              "visited_node_count": {
+                "const": 40
+              },
+              "notes": {
+                "const": [
+                  "Input is VALID and ALREADY_VALID under the current complete profile.",
+                  "Ternary child order is continuation, positive, negative.",
+                  "Final frontier has 27 nodes at depth 3.",
+                  "Constructed 40 nodes across all levels.",
+                  "Lineage is encoded by the explicit seed and base-three path."
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "allOf": [
+              {
+                "properties": {
+                  "outcome": {
+                    "const": "COMPLETE"
+                  }
+                },
+                "required": [
+                  "outcome"
+                ]
+              },
+              {
+                "properties": {
+                  "depth": {
+                    "const": 4
+                  }
+                },
+                "required": [
+                  "depth"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "frontier_count": {
+                "const": 81
+              },
+              "visited_node_count": {
+                "const": 121
+              },
+              "notes": {
+                "const": [
+                  "Input is VALID and ALREADY_VALID under the current complete profile.",
+                  "Ternary child order is continuation, positive, negative.",
+                  "Final frontier has 81 nodes at depth 4.",
+                  "Constructed 121 nodes across all levels.",
+                  "Lineage is encoded by the explicit seed and base-three path."
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "allOf": [
+              {
+                "properties": {
+                  "outcome": {
+                    "const": "COMPLETE"
+                  }
+                },
+                "required": [
+                  "outcome"
+                ]
+              },
+              {
+                "properties": {
+                  "depth": {
+                    "const": 5
+                  }
+                },
+                "required": [
+                  "depth"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "frontier_count": {
+                "const": 243
+              },
+              "visited_node_count": {
+                "const": 364
+              },
+              "notes": {
+                "const": [
+                  "Input is VALID and ALREADY_VALID under the current complete profile.",
+                  "Ternary child order is continuation, positive, negative.",
+                  "Final frontier has 243 nodes at depth 5.",
+                  "Constructed 364 nodes across all levels.",
+                  "Lineage is encoded by the explicit seed and base-three path."
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "allOf": [
+              {
+                "properties": {
+                  "outcome": {
+                    "const": "COMPLETE"
+                  }
+                },
+                "required": [
+                  "outcome"
+                ]
+              },
+              {
+                "properties": {
+                  "depth": {
+                    "const": 6
+                  }
+                },
+                "required": [
+                  "depth"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "frontier_count": {
+                "const": 729
+              },
+              "visited_node_count": {
+                "const": 1093
+              },
+              "notes": {
+                "const": [
+                  "Input is VALID and ALREADY_VALID under the current complete profile.",
+                  "Ternary child order is continuation, positive, negative.",
+                  "Final frontier has 729 nodes at depth 6.",
+                  "Constructed 1093 nodes across all levels.",
+                  "Lineage is encoded by the explicit seed and base-three path."
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "AxiomSubjectProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_kind",
+        "source_reference",
+        "method_id",
+        "method_revision",
+        "origin_diagnosis_reference"
+      ],
+      "properties": {
+        "source_kind": {
+          "const": "DECLARED_REFERENCE_INPUT"
+        },
+        "source_reference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "enum": [
+              "NONE",
+              "SELF"
+            ]
+          }
+        },
+        "method_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+        },
+        "method_revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+        },
+        "origin_diagnosis_reference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "enum": [
+              "NONE",
+              "SELF"
+            ]
+          }
+        }
+      }
+    },
+    "AxiomMeasure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ticks",
+        "unit",
+        "ticks_per_unit"
+      ],
+      "properties": {
+        "ticks": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "unit": {
+          "enum": [
+            "STRUCTURE_TICK",
+            "ERASURE_TICK"
+          ]
+        },
+        "ticks_per_unit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        }
+      }
+    },
+    "AxiomSubject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject_reference",
+        "state",
+        "relation_count",
+        "raw_measure",
+        "compressed_measure",
+        "scale_count",
+        "erasure_cost",
+        "self_reference_capable",
+        "self_model_available",
+        "provenance"
+      ],
+      "properties": {
+        "subject_reference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "enum": [
+              "NONE",
+              "SELF"
+            ]
+          }
+        },
+        "state": {
+          "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/AshState"
+        },
+        "relation_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "raw_measure": {
+          "$ref": "#/$defs/AxiomMeasure"
+        },
+        "compressed_measure": {
+          "$ref": "#/$defs/AxiomMeasure"
+        },
+        "scale_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "erasure_cost": {
+          "$ref": "#/$defs/AxiomMeasure"
+        },
+        "self_reference_capable": {
+          "type": "boolean"
+        },
+        "self_model_available": {
+          "type": "boolean"
+        },
+        "provenance": {
+          "$ref": "#/$defs/AxiomSubjectProvenance"
+        }
+      }
+    },
+    "AxiomRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request_reference",
+        "origin_diagnosis",
+        "subject"
+      ],
+      "properties": {
+        "request_reference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "enum": [
+              "NONE",
+              "SELF"
+            ]
+          }
+        },
+        "origin_diagnosis": {
+          "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/StateDiagnosis"
+        },
+        "subject": {
+          "$ref": "#/$defs/AxiomSubject"
+        }
+      }
+    },
+    "AxiomCheckDiagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "axiom_id",
+        "subject",
+        "passed",
+        "current_impact",
+        "operator",
+        "operand_names",
+        "overall_pass",
+        "explanation"
+      ],
+      "properties": {
+        "axiom_id": {
+          "enum": [
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "A5"
+          ]
+        },
+        "subject": {
+          "$ref": "#/$defs/AxiomSubject"
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "current_impact": {
+          "enum": [
+            "INFO",
+            "WARNING"
+          ]
+        },
+        "operator": {
+          "enum": [
+            "GT_ZERO",
+            "LT",
+            "GT_ONE",
+            "BOTH_TRUE"
+          ]
+        },
+        "operand_names": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "enum": [
+              "relation_count",
+              "compressed_measure",
+              "raw_measure",
+              "scale_count",
+              "erasure_cost",
+              "self_reference_capable",
+              "self_model_available"
+            ]
+          }
+        },
+        "overall_pass": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "explanation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[^\\ud800-\\udfff]*$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "axiom_id": {
+                "const": "A1"
+              }
+            },
+            "required": [
+              "axiom_id"
+            ]
+          },
+          "then": {
+            "properties": {
+              "operator": {
+                "const": "GT_ZERO"
+              },
+              "operand_names": {
+                "const": [
+                  "relation_count"
+                ]
+              },
+              "overall_pass": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "axiom_id": {
+                "const": "A2"
+              }
+            },
+            "required": [
+              "axiom_id"
+            ]
+          },
+          "then": {
+            "properties": {
+              "operator": {
+                "const": "LT"
+              },
+              "operand_names": {
+                "const": [
+                  "compressed_measure",
+                  "raw_measure"
+                ]
+              },
+              "overall_pass": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "axiom_id": {
+                "const": "A3"
+              }
+            },
+            "required": [
+              "axiom_id"
+            ]
+          },
+          "then": {
+            "properties": {
+              "operator": {
+                "const": "GT_ONE"
+              },
+              "operand_names": {
+                "const": [
+                  "scale_count"
+                ]
+              },
+              "overall_pass": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "axiom_id": {
+                "const": "A4"
+              }
+            },
+            "required": [
+              "axiom_id"
+            ]
+          },
+          "then": {
+            "properties": {
+              "operator": {
+                "const": "GT_ZERO"
+              },
+              "operand_names": {
+                "const": [
+                  "erasure_cost"
+                ]
+              },
+              "overall_pass": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "axiom_id": {
+                "const": "A5"
+              }
+            },
+            "required": [
+              "axiom_id"
+            ]
+          },
+          "then": {
+            "properties": {
+              "operator": {
+                "const": "BOTH_TRUE"
+              },
+              "operand_names": {
+                "const": [
+                  "self_reference_capable",
+                  "self_model_available"
+                ]
+              },
+              "overall_pass": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "passed": {
+                "const": true
+              }
+            },
+            "required": [
+              "passed"
+            ]
+          },
+          "then": {
+            "properties": {
+              "current_impact": {
+                "const": "INFO"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "passed": {
+                "const": false
+              }
+            },
+            "required": [
+              "passed"
+            ]
+          },
+          "then": {
+            "properties": {
+              "current_impact": {
+                "const": "WARNING"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "AxiomInputDiagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request_reference",
+        "subject",
+        "failure_code",
+        "failed_field",
+        "explanation"
+      ],
+      "properties": {
+        "request_reference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "enum": [
+              "NONE",
+              "SELF"
+            ]
+          }
+        },
+        "subject": {
+          "$ref": "#/$defs/AxiomSubject"
+        },
+        "failure_code": {
+          "enum": [
+            "ORIGIN_REJECTED",
+            "ORIGIN_UNPARSED",
+            "PROFILE_UNAVAILABLE",
+            "SUBJECT_STATE_MISMATCH",
+            "SUBJECT_ORIGIN_MISMATCH",
+            "SUBJECT_UNIT_MISMATCH",
+            "REFERENCE_COLLISION",
+            "SOURCE_UNSUPPORTED",
+            "VALIDATION_UNAVAILABLE"
+          ]
+        },
+        "failed_field": {
+          "enum": [
+            "request.origin_diagnosis",
+            "request.depth",
+            "request.subject.state",
+            "request.subject.provenance.origin_diagnosis_reference",
+            "request.subject.raw_measure.unit",
+            "request.subject.compressed_measure.unit",
+            "request.subject.erasure_cost.unit",
+            "request.subject.compressed_measure.ticks_per_unit",
+            "request.reference_set",
+            "model.canonical_binding",
+            "model.validation"
+          ]
+        },
+        "explanation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[^\\ud800-\\udfff]*$"
+        }
+      }
+    },
+    "GenerationDiagnosticRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "diagnostic_reference",
+        "envelope",
+        "payload"
+      ],
+      "properties": {
+        "diagnostic_reference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "enum": [
+              "NONE",
+              "SELF"
+            ]
+          }
+        },
+        "envelope": {
+          "$ref": "#/$defs/ModuleEnvelope"
+        },
+        "payload": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TopologyDiagnostic"
+            },
+            {
+              "$ref": "#/$defs/AxiomCheckDiagnostic"
+            },
+            {
+              "$ref": "#/$defs/AxiomInputDiagnostic"
+            }
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "payload": {
+              "$ref": "#/$defs/TopologyDiagnostic"
+            },
+            "envelope": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/ModuleEnvelope"
+                },
+                {
+                  "properties": {
+                    "diagnostic_kind": {
+                      "const": "TOPOLOGY"
+                    },
+                    "stage": {
+                      "const": "PROCESSING"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "properties": {
+            "payload": {
+              "$ref": "#/$defs/AxiomCheckDiagnostic"
+            },
+            "envelope": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/ModuleEnvelope"
+                },
+                {
+                  "properties": {
+                    "diagnostic_kind": {
+                      "const": "AXIOM"
+                    },
+                    "stage": {
+                      "const": "PROCESSING"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "properties": {
+            "payload": {
+              "$ref": "#/$defs/AxiomInputDiagnostic"
+            },
+            "envelope": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/ModuleEnvelope"
+                },
+                {
+                  "properties": {
+                    "diagnostic_kind": {
+                      "const": "AXIOM"
+                    },
+                    "stage": {
+                      "const": "PROCESSING"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "payload": {
+                "properties": {
+                  "outcome": {
+                    "const": "COMPLETE"
+                  }
+                },
+                "required": [
+                  "outcome"
+                ]
+              }
+            },
+            "required": [
+              "payload"
+            ]
+          },
+          "then": {
+            "properties": {
+              "envelope": {
+                "properties": {
+                  "rule_ids": {
+                    "const": [
+                      "ASH-TOPOLOGY-STRUCTURE-001",
+                      "ASH-TOPOLOGY-EXPANSION-001",
+                      "ASH-TOPOLOGY-ORDER-001",
+                      "ASH-TOPOLOGY-LINEAGE-001"
+                    ]
+                  },
+                  "summary": {
+                    "const": "Topology expansion completed."
+                  },
+                  "disposition": {
+                    "const": "RESOLVED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "payload": {
+                "properties": {
+                  "outcome": {
+                    "const": "REJECTED"
+                  }
+                },
+                "required": [
+                  "outcome"
+                ]
+              }
+            },
+            "required": [
+              "payload"
+            ]
+          },
+          "then": {
+            "properties": {
+              "envelope": {
+                "properties": {
+                  "rule_ids": {
+                    "const": [
+                      "ASH-TOPOLOGY-ADMISSION-001"
+                    ]
+                  },
+                  "summary": {
+                    "const": "Topology request rejected."
+                  },
+                  "disposition": {
+                    "const": "BLOCKED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "payload": {
+                "properties": {
+                  "axiom_id": {
+                    "const": "A1"
+                  }
+                },
+                "required": [
+                  "axiom_id"
+                ]
+              }
+            },
+            "required": [
+              "payload"
+            ]
+          },
+          "then": {
+            "properties": {
+              "envelope": {
+                "properties": {
+                  "rule_ids": {
+                    "const": [
+                      "ASH-AXIOM-RELATION-001"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "payload": {
+                "properties": {
+                  "axiom_id": {
+                    "const": "A2"
+                  }
+                },
+                "required": [
+                  "axiom_id"
+                ]
+              }
+            },
+            "required": [
+              "payload"
+            ]
+          },
+          "then": {
+            "properties": {
+              "envelope": {
+                "properties": {
+                  "rule_ids": {
+                    "const": [
+                      "ASH-AXIOM-COMPRESSION-001"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "payload": {
+                "properties": {
+                  "axiom_id": {
+                    "const": "A3"
+                  }
+                },
+                "required": [
+                  "axiom_id"
+                ]
+              }
+            },
+            "required": [
+              "payload"
+            ]
+          },
+          "then": {
+            "properties": {
+              "envelope": {
+                "properties": {
+                  "rule_ids": {
+                    "const": [
+                      "ASH-AXIOM-SCALE-001"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "payload": {
+                "properties": {
+                  "axiom_id": {
+                    "const": "A4"
+                  }
+                },
+                "required": [
+                  "axiom_id"
+                ]
+              }
+            },
+            "required": [
+              "payload"
+            ]
+          },
+          "then": {
+            "properties": {
+              "envelope": {
+                "properties": {
+                  "rule_ids": {
+                    "const": [
+                      "ASH-AXIOM-ERASURE-001"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "payload": {
+                "properties": {
+                  "axiom_id": {
+                    "const": "A5"
+                  }
+                },
+                "required": [
+                  "axiom_id"
+                ]
+              }
+            },
+            "required": [
+              "payload"
+            ]
+          },
+          "then": {
+            "properties": {
+              "envelope": {
+                "properties": {
+                  "rule_ids": {
+                    "const": [
+                      "ASH-AXIOM-SELFREFERENCE-001",
+                      "ASH-AXIOM-CONJUNCTION-001"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "allOf": [
+              {
+                "properties": {
+                  "payload": {
+                    "properties": {
+                      "axiom_id": {
+                        "enum": [
+                          "A1",
+                          "A2",
+                          "A3",
+                          "A4"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "axiom_id"
+                    ]
+                  }
+                },
+                "required": [
+                  "payload"
+                ]
+              },
+              {
+                "properties": {
+                  "payload": {
+                    "properties": {
+                      "passed": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "passed"
+                    ]
+                  }
+                },
+                "required": [
+                  "payload"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "envelope": {
+                "properties": {
+                  "disposition": {
+                    "const": "RESOLVED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "allOf": [
+              {
+                "properties": {
+                  "payload": {
+                    "properties": {
+                      "axiom_id": {
+                        "enum": [
+                          "A1",
+                          "A2",
+                          "A3",
+                          "A4"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "axiom_id"
+                    ]
+                  }
+                },
+                "required": [
+                  "payload"
+                ]
+              },
+              {
+                "properties": {
+                  "payload": {
+                    "properties": {
+                      "passed": {
+                        "const": false
+                      }
+                    },
+                    "required": [
+                      "passed"
+                    ]
+                  }
+                },
+                "required": [
+                  "payload"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "envelope": {
+                "properties": {
+                  "disposition": {
+                    "const": "BLOCKED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "allOf": [
+              {
+                "properties": {
+                  "payload": {
+                    "properties": {
+                      "axiom_id": {
+                        "const": "A5"
+                      }
+                    },
+                    "required": [
+                      "axiom_id"
+                    ]
+                  }
+                },
+                "required": [
+                  "payload"
+                ]
+              },
+              {
+                "properties": {
+                  "payload": {
+                    "properties": {
+                      "overall_pass": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "overall_pass"
+                    ]
+                  }
+                },
+                "required": [
+                  "payload"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "envelope": {
+                "properties": {
+                  "disposition": {
+                    "const": "RESOLVED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "allOf": [
+              {
+                "properties": {
+                  "payload": {
+                    "properties": {
+                      "axiom_id": {
+                        "const": "A5"
+                      }
+                    },
+                    "required": [
+                      "axiom_id"
+                    ]
+                  }
+                },
+                "required": [
+                  "payload"
+                ]
+              },
+              {
+                "properties": {
+                  "payload": {
+                    "properties": {
+                      "overall_pass": {
+                        "const": false
+                      }
+                    },
+                    "required": [
+                      "overall_pass"
+                    ]
+                  }
+                },
+                "required": [
+                  "payload"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "envelope": {
+                "properties": {
+                  "disposition": {
+                    "const": "BLOCKED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "payload": {
+                "properties": {
+                  "failed_field": {}
+                },
+                "required": [
+                  "failed_field"
+                ]
+              }
+            },
+            "required": [
+              "payload"
+            ]
+          },
+          "then": {
+            "properties": {
+              "envelope": {
+                "properties": {
+                  "rule_ids": {
+                    "const": [
+                      "ASH-AXIOM-SUBJECT-001"
+                    ]
+                  },
+                  "disposition": {
+                    "const": "BLOCKED"
+                  },
+                  "summary": {
+                    "const": "Axiom subject rejected."
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "PendingGenerationDiagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "diagnostic_reference",
+        "intended_kind",
+        "intended_rule_ids",
+        "failure_code",
+        "missing_requirements",
+        "reason"
+      ],
+      "properties": {
+        "diagnostic_reference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "enum": [
+              "NONE",
+              "SELF"
+            ]
+          }
+        },
+        "intended_kind": {
+          "enum": [
+            "TOPOLOGY",
+            "AXIOM"
+          ]
+        },
+        "intended_rule_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "enum": [
+              "ASH-TOPOLOGY-STRUCTURE-001",
+              "ASH-TOPOLOGY-EXPANSION-001",
+              "ASH-TOPOLOGY-ORDER-001",
+              "ASH-TOPOLOGY-LINEAGE-001",
+              "ASH-TOPOLOGY-ADMISSION-001",
+              "ASH-AXIOM-RELATION-001",
+              "ASH-AXIOM-COMPRESSION-001",
+              "ASH-AXIOM-SCALE-001",
+              "ASH-AXIOM-ERASURE-001",
+              "ASH-AXIOM-SELFREFERENCE-001",
+              "ASH-AXIOM-CONJUNCTION-001",
+              "ASH-AXIOM-SUBJECT-001"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "failure_code": {
+          "enum": [
+            "ORIGIN_REJECTED",
+            "REFERENCE_COLLISION",
+            "SOURCE_UNSUPPORTED",
+            "VALIDATION_UNAVAILABLE"
+          ]
+        },
+        "missing_requirements": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "enum": [
+              "CURRENT_SOURCE",
+              "VERIFIED_ORIGIN",
+              "VALIDATION_RESULT",
+              "DISTINCT_REFERENCES"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[^\\ud800-\\udfff]*$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "intended_kind": {
+                "const": "TOPOLOGY"
+              }
+            },
+            "required": [
+              "intended_kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "intended_rule_ids": {
+                "const": [
+                  "ASH-TOPOLOGY-ADMISSION-001"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "intended_kind": {
+                "const": "AXIOM"
+              }
+            },
+            "required": [
+              "intended_kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "intended_rule_ids": {
+                "const": [
+                  "ASH-AXIOM-SUBJECT-001"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "SOURCE_UNSUPPORTED"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "missing_requirements": {
+                "const": [
+                  "CURRENT_SOURCE"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "VALIDATION_UNAVAILABLE"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "missing_requirements": {
+                "const": [
+                  "VALIDATION_RESULT"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "ORIGIN_REJECTED"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "missing_requirements": {
+                "const": [
+                  "VERIFIED_ORIGIN"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "REFERENCE_COLLISION"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "missing_requirements": {
+                "const": [
+                  "DISTINCT_REFERENCES"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "TopologyResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "topology_reference",
+        "request",
+        "policy_binding",
+        "source_binding",
+        "origin_validation",
+        "input_state",
+        "nodes",
+        "visited_node_count",
+        "produced_diagnostics",
+        "schema_version",
+        "packet_kind"
+      ],
+      "properties": {
+        "topology_reference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "enum": [
+              "NONE",
+              "SELF"
+            ]
+          }
+        },
+        "request": {
+          "$ref": "#/$defs/TopologyRequest"
+        },
+        "policy_binding": {
+          "$ref": "#/$defs/TopologyAxiomPolicyBinding"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/TopologyAxiomSourceBinding"
+        },
+        "origin_validation": {
+          "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/DiagnosisValidation"
+        },
+        "input_state": {
+          "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/AshState"
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 729,
+          "items": {
+            "$ref": "#/$defs/TopologyNode"
+          }
+        },
+        "visited_node_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1093
+        },
+        "produced_diagnostics": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/$defs/GenerationDiagnosticRecord"
+          }
+        },
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "packet_kind": {
+          "const": "topology_result"
+        }
+      },
+      "allOf": [
+        {
+          "properties": {
+            "origin_validation": {
+              "properties": {
+                "status": {
+                  "const": "VERIFIED"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "source_binding": {
+              "properties": {
+                "canonical_binding": {
+                  "properties": {
+                    "aggregate_sha256": {
+                      "enum": [
+                        "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+                        "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "TopologyFailure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request",
+        "policy_binding",
+        "source_binding",
+        "origin_validation",
+        "failure_code",
+        "failed_field",
+        "produced_diagnostics",
+        "pending_diagnostic",
+        "schema_version",
+        "packet_kind"
+      ],
+      "properties": {
+        "request": {
+          "$ref": "#/$defs/TopologyRequest"
+        },
+        "policy_binding": {
+          "$ref": "#/$defs/TopologyAxiomPolicyBinding"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/TopologyAxiomSourceBinding"
+        },
+        "origin_validation": {
+          "anyOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/DiagnosisValidation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "failure_code": {
+          "enum": [
+            "ORIGIN_REJECTED",
+            "ORIGIN_UNPARSED",
+            "PROFILE_UNAVAILABLE",
+            "STATE_NOT_NORMALIZED",
+            "DEPTH_RANGE_EXCEEDED",
+            "REFERENCE_COLLISION",
+            "SOURCE_UNSUPPORTED",
+            "VALIDATION_UNAVAILABLE"
+          ]
+        },
+        "failed_field": {
+          "enum": [
+            "request.origin_diagnosis",
+            "request.depth",
+            "request.subject.state",
+            "request.subject.provenance.origin_diagnosis_reference",
+            "request.subject.raw_measure.unit",
+            "request.subject.compressed_measure.unit",
+            "request.subject.erasure_cost.unit",
+            "request.subject.compressed_measure.ticks_per_unit",
+            "request.reference_set",
+            "model.canonical_binding",
+            "model.validation"
+          ]
+        },
+        "produced_diagnostics": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/$defs/GenerationDiagnosticRecord"
+          }
+        },
+        "pending_diagnostic": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PendingGenerationDiagnostic"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "packet_kind": {
+          "const": "topology_failure"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "enum": [
+                  "SOURCE_UNSUPPORTED",
+                  "VALIDATION_UNAVAILABLE",
+                  "ORIGIN_REJECTED",
+                  "REFERENCE_COLLISION"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "produced_diagnostics": {
+                "maxItems": 0
+              },
+              "pending_diagnostic": {
+                "$ref": "#/$defs/PendingGenerationDiagnostic"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "produced_diagnostics": {
+                "minItems": 1
+              },
+              "pending_diagnostic": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "enum": [
+                  "SOURCE_UNSUPPORTED",
+                  "VALIDATION_UNAVAILABLE"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "origin_validation": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "origin_validation": {
+                "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/DiagnosisValidation"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "SOURCE_UNSUPPORTED"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "model.canonical_binding"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "VALIDATION_UNAVAILABLE"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "model.validation"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "ORIGIN_REJECTED"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "request.origin_diagnosis"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "ORIGIN_UNPARSED"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "request.origin_diagnosis"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "PROFILE_UNAVAILABLE"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "request.origin_diagnosis"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "REFERENCE_COLLISION"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "request.reference_set"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "STATE_NOT_NORMALIZED"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "request.origin_diagnosis"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "DEPTH_RANGE_EXCEEDED"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "request.depth"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "ORIGIN_REJECTED"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "origin_validation": {
+                "properties": {
+                  "status": {
+                    "const": "REJECTED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "produced_diagnostics": {
+                "minItems": 1
+              }
+            },
+            "required": [
+              "produced_diagnostics"
+            ]
+          },
+          "then": {
+            "allOf": [
+              {
+                "properties": {
+                  "origin_validation": {
+                    "properties": {
+                      "status": {
+                        "const": "VERIFIED"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "source_binding": {
+                    "properties": {
+                      "canonical_binding": {
+                        "properties": {
+                          "aggregate_sha256": {
+                            "enum": [
+                              "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+                              "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "AxiomDiagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "a1_relational_existence",
+        "a2_structural_compressibility",
+        "a3_multi_scale_persistence",
+        "a4_energetic_cost_of_erasure",
+        "a5_self_reference_for_consciousness",
+        "overall_pass",
+        "notes"
+      ],
+      "properties": {
+        "a1_relational_existence": {
+          "type": "boolean"
+        },
+        "a2_structural_compressibility": {
+          "type": "boolean"
+        },
+        "a3_multi_scale_persistence": {
+          "type": "boolean"
+        },
+        "a4_energetic_cost_of_erasure": {
+          "type": "boolean"
+        },
+        "a5_self_reference_for_consciousness": {
+          "type": "boolean"
+        },
+        "overall_pass": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "^[^\\ud800-\\udfff]*$"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "allOf": [
+              {
+                "properties": {
+                  "a1_relational_existence": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "a1_relational_existence"
+                ]
+              },
+              {
+                "properties": {
+                  "a2_structural_compressibility": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "a2_structural_compressibility"
+                ]
+              },
+              {
+                "properties": {
+                  "a3_multi_scale_persistence": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "a3_multi_scale_persistence"
+                ]
+              },
+              {
+                "properties": {
+                  "a4_energetic_cost_of_erasure": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "a4_energetic_cost_of_erasure"
+                ]
+              },
+              {
+                "properties": {
+                  "a5_self_reference_for_consciousness": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "a5_self_reference_for_consciousness"
+                ]
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "overall_pass": {
+                "const": true
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "overall_pass": {
+                "const": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    "AxiomEvaluationResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evaluation_reference",
+        "request",
+        "policy_binding",
+        "source_binding",
+        "origin_validation",
+        "axiom_diagnostic",
+        "produced_diagnostics",
+        "schema_version",
+        "packet_kind"
+      ],
+      "properties": {
+        "evaluation_reference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "enum": [
+              "NONE",
+              "SELF"
+            ]
+          }
+        },
+        "request": {
+          "$ref": "#/$defs/AxiomRequest"
+        },
+        "policy_binding": {
+          "$ref": "#/$defs/TopologyAxiomPolicyBinding"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/TopologyAxiomSourceBinding"
+        },
+        "origin_validation": {
+          "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/DiagnosisValidation"
+        },
+        "axiom_diagnostic": {
+          "$ref": "#/$defs/AxiomDiagnostic"
+        },
+        "produced_diagnostics": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/$defs/GenerationDiagnosticRecord"
+          }
+        },
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "packet_kind": {
+          "const": "axiom_evaluation_result"
+        }
+      },
+      "allOf": [
+        {
+          "properties": {
+            "origin_validation": {
+              "properties": {
+                "status": {
+                  "const": "VERIFIED"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "source_binding": {
+              "properties": {
+                "canonical_binding": {
+                  "properties": {
+                    "aggregate_sha256": {
+                      "enum": [
+                        "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+                        "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "AxiomEvaluationFailure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request",
+        "policy_binding",
+        "source_binding",
+        "origin_validation",
+        "failure_code",
+        "failed_field",
+        "produced_diagnostics",
+        "pending_diagnostic",
+        "schema_version",
+        "packet_kind"
+      ],
+      "properties": {
+        "request": {
+          "$ref": "#/$defs/AxiomRequest"
+        },
+        "policy_binding": {
+          "$ref": "#/$defs/TopologyAxiomPolicyBinding"
+        },
+        "source_binding": {
+          "$ref": "#/$defs/TopologyAxiomSourceBinding"
+        },
+        "origin_validation": {
+          "anyOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/DiagnosisValidation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "failure_code": {
+          "enum": [
+            "ORIGIN_REJECTED",
+            "ORIGIN_UNPARSED",
+            "PROFILE_UNAVAILABLE",
+            "SUBJECT_STATE_MISMATCH",
+            "SUBJECT_ORIGIN_MISMATCH",
+            "SUBJECT_UNIT_MISMATCH",
+            "REFERENCE_COLLISION",
+            "SOURCE_UNSUPPORTED",
+            "VALIDATION_UNAVAILABLE"
+          ]
+        },
+        "failed_field": {
+          "enum": [
+            "request.origin_diagnosis",
+            "request.depth",
+            "request.subject.state",
+            "request.subject.provenance.origin_diagnosis_reference",
+            "request.subject.raw_measure.unit",
+            "request.subject.compressed_measure.unit",
+            "request.subject.erasure_cost.unit",
+            "request.subject.compressed_measure.ticks_per_unit",
+            "request.reference_set",
+            "model.canonical_binding",
+            "model.validation"
+          ]
+        },
+        "produced_diagnostics": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/$defs/GenerationDiagnosticRecord"
+          }
+        },
+        "pending_diagnostic": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PendingGenerationDiagnostic"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "packet_kind": {
+          "const": "axiom_evaluation_failure"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "enum": [
+                  "SOURCE_UNSUPPORTED",
+                  "VALIDATION_UNAVAILABLE",
+                  "ORIGIN_REJECTED",
+                  "REFERENCE_COLLISION"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "produced_diagnostics": {
+                "maxItems": 0
+              },
+              "pending_diagnostic": {
+                "$ref": "#/$defs/PendingGenerationDiagnostic"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "produced_diagnostics": {
+                "minItems": 1
+              },
+              "pending_diagnostic": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "enum": [
+                  "SOURCE_UNSUPPORTED",
+                  "VALIDATION_UNAVAILABLE"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "origin_validation": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "origin_validation": {
+                "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/DiagnosisValidation"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "SOURCE_UNSUPPORTED"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "model.canonical_binding"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "VALIDATION_UNAVAILABLE"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "model.validation"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "ORIGIN_REJECTED"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "request.origin_diagnosis"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "ORIGIN_UNPARSED"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "request.origin_diagnosis"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "PROFILE_UNAVAILABLE"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "request.origin_diagnosis"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "REFERENCE_COLLISION"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "request.reference_set"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "SUBJECT_STATE_MISMATCH"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "request.subject.state"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "SUBJECT_ORIGIN_MISMATCH"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failed_field": {
+                "const": "request.subject.provenance.origin_diagnosis_reference"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "failure_code": {
+                "const": "ORIGIN_REJECTED"
+              }
+            },
+            "required": [
+              "failure_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "origin_validation": {
+                "properties": {
+                  "status": {
+                    "const": "REJECTED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "produced_diagnostics": {
+                "minItems": 1
+              }
+            },
+            "required": [
+              "produced_diagnostics"
+            ]
+          },
+          "then": {
+            "allOf": [
+              {
+                "properties": {
+                  "origin_validation": {
+                    "properties": {
+                      "status": {
+                        "const": "VERIFIED"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "source_binding": {
+                    "properties": {
+                      "canonical_binding": {
+                        "properties": {
+                          "aggregate_sha256": {
+                            "enum": [
+                              "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+                              "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "ModuleEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "diagnostic_kind",
+        "severity",
+        "stage",
+        "disposition",
+        "subject_reference",
+        "parent_diagnostic_reference",
+        "chain_root_reference",
+        "rule_ids",
+        "summary",
+        "notes"
+      ],
+      "properties": {
+        "diagnostic_kind": {
+          "enum": [
+            "TOPOLOGY",
+            "AXIOM"
+          ]
+        },
+        "severity": {
+          "enum": [
+            "INFO",
+            "WARNING",
+            "ERROR",
+            "CRITICAL"
+          ]
+        },
+        "stage": {
+          "const": "PROCESSING"
+        },
+        "disposition": {
+          "enum": [
+            "RESOLVED",
+            "BLOCKED"
+          ]
+        },
+        "subject_reference": {
+          "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/DiagnosticReference"
+        },
+        "parent_diagnostic_reference": {
+          "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/DiagnosticReference"
+        },
+        "chain_root_reference": {
+          "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/DiagnosticReference"
+        },
+        "rule_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "ASH-TOPOLOGY-STRUCTURE-001",
+              "ASH-TOPOLOGY-EXPANSION-001",
+              "ASH-TOPOLOGY-ORDER-001",
+              "ASH-TOPOLOGY-LINEAGE-001",
+              "ASH-TOPOLOGY-ADMISSION-001",
+              "ASH-AXIOM-RELATION-001",
+              "ASH-AXIOM-COMPRESSION-001",
+              "ASH-AXIOM-SCALE-001",
+              "ASH-AXIOM-ERASURE-001",
+              "ASH-AXIOM-SELFREFERENCE-001",
+              "ASH-AXIOM-CONJUNCTION-001",
+              "ASH-AXIOM-SUBJECT-001"
+            ]
+          }
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "not": {
+            "pattern": "[\\r\\n\\u000b\\u000c\\u001c\\u001d\\u001e\\u0085\\u2028\\u2029]"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "^[^\\ud800-\\udfff]*$"
+          }
+        }
+      }
+    },
+    "TopologyAxiomCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "schema_definition",
+        "value"
+      ],
+      "properties": {
+        "case_id": {
+          "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/DiagnosticReference"
+        },
+        "schema_definition": {
+          "enum": [
+            "TopologyAxiomPolicyBinding",
+            "TopologyAxiomSourceBinding",
+            "TopologyRequest",
+            "TopologyNode",
+            "TopologyDiagnostic",
+            "AxiomSubjectProvenance",
+            "AxiomMeasure",
+            "AxiomSubject",
+            "AxiomRequest",
+            "AxiomCheckDiagnostic",
+            "AxiomInputDiagnostic",
+            "GenerationDiagnosticRecord",
+            "PendingGenerationDiagnostic",
+            "TopologyResult",
+            "TopologyFailure",
+            "AxiomDiagnostic",
+            "AxiomEvaluationResult",
+            "AxiomEvaluationFailure"
+          ]
+        },
+        "value": {}
+      }
+    },
+    "TopologyAxiomCaseCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_ref",
+        "artifact_type",
+        "artifact_version",
+        "evidence_scope",
+        "cases"
+      ],
+      "properties": {
+        "schema_ref": {
+          "const": "data/schemas/m3_generation_topology_axiom_schema.json"
+        },
+        "artifact_type": {
+          "const": "ywe_topology_axiom_format_cases"
+        },
+        "artifact_version": {
+          "const": "1.0.0"
+        },
+        "evidence_scope": {
+          "const": "AUTHORED_WIRE_FORMAT_ONLY_NO_PERSISTENCE_OR_LIVE_EFFECT_CLAIM"
+        },
+        "cases": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": {
+            "$ref": "#/$defs/TopologyAxiomCase"
+          }
+        }
+      }
+    },
+    "TopologyAxiomRejectionCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_ref",
+        "artifact_type",
+        "artifact_version",
+        "evidence_scope",
+        "cases"
+      ],
+      "properties": {
+        "schema_ref": {
+          "const": "data/schemas/m3_generation_topology_axiom_schema.json"
+        },
+        "artifact_type": {
+          "const": "ywe_topology_axiom_rejection_cases"
+        },
+        "artifact_version": {
+          "const": "1.0.0"
+        },
+        "evidence_scope": {
+          "const": "AUTHORED_REJECTION_CONTROL_ONLY_NO_RUNTIME_EFFECT_CLAIM"
+        },
+        "cases": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "case_id",
+              "schema_definition",
+              "value",
+              "expected_keyword",
+              "expected_path"
+            ],
+            "properties": {
+              "case_id": {
+                "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/DiagnosticReference"
+              },
+              "schema_definition": {
+                "enum": [
+                  "TopologyAxiomPolicyBinding",
+                  "TopologyAxiomSourceBinding",
+                  "TopologyRequest",
+                  "TopologyNode",
+                  "TopologyDiagnostic",
+                  "AxiomSubjectProvenance",
+                  "AxiomMeasure",
+                  "AxiomSubject",
+                  "AxiomRequest",
+                  "AxiomCheckDiagnostic",
+                  "AxiomInputDiagnostic",
+                  "GenerationDiagnosticRecord",
+                  "PendingGenerationDiagnostic",
+                  "TopologyResult",
+                  "TopologyFailure",
+                  "AxiomDiagnostic",
+                  "AxiomEvaluationResult",
+                  "AxiomEvaluationFailure"
+                ]
+              },
+              "value": {},
+              "expected_keyword": {
+                "enum": [
+                  "additionalProperties",
+                  "required",
+                  "type",
+                  "minimum",
+                  "maximum",
+                  "pattern",
+                  "not",
+                  "const",
+                  "enum",
+                  "minItems",
+                  "maxItems",
+                  "uniqueItems",
+                  "contains",
+                  "anyOf",
+                  "oneOf"
+                ]
+              },
+              "expected_path": {
+                "type": "array",
+                "maxItems": 32,
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 256
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1024
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

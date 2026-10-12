@@ -1,31 +1,9 @@
-# pattern archetypes Schema Notes
+# Pattern-archetype extension schema contract
 
-Date: 2026-03-13
-Project: Yggdrasil World Engine
-Status: placeholder awaiting finalized content
+[YWE-REQ-0051] Decision ADR-0043. Primary family rows own meaning and relationships. The derived compatibility matrix must agree exactly. The Core profile adapter compiles original decimal lexemes to q6 and preserves optional Wolf/player-phase input ownership; these fields are not mandatory neutral Core facts.
 
-## Purpose
-Tracks schema and validation expectations for the pattern archetypes data domain.
+The closed ArchetypeRegistry, ArchetypeContext, ArchetypeScore, RelationObservation, ClusterScore and ArchetypeEvaluation definitions and exact coefficient/rounding order are in docs/design-planning/m3/m3_core_domain_contract.md and core-domain/CORE_API_INVENTORY.json. Full512-state masks and the exact16 canonical codeword IDs preserve ASH mathematics.
 
-## Expected responsibilities
-- record schema intent
-- describe validation expectations
-- keep data-domain boundaries explicit
+Contradiction/friction take precedence over compatibility. Unsupported pairs suppress the documented lower-ranked member. Cluster members must score strictly above800,000; activation requires at least2 qualifying members and final score at least2,100,000 plus declared satisfied basis/risk facts. Dominant scores are at least1,200,000 and secondary scores are in[800,000,1,200,000), so those sets are disjoint. Empty eligible selection is typed NO_OP. Complete score/pair/cluster rows remain observable.
 
-## Inputs
-- shared schema files
-- architecture contracts
-
-## Outputs
-- schema notes
-- validation reminders
-
-## Dependencies
-- data domain files
-- engine interface contracts
-
-## Invariants
-- all meaningful generation must remain ASH-derived
-- fixed cosmology must remain locked
-- perception must not rewrite shared-world truth
-- Forsetti governs activation; YWE governs truth
+The bounds are64 archetypes,256 pairs,16 clusters and1MiB for a whole Core result. No list is clipped. Existing M2 open pattern/extension formats and accepted fixtures remain valid. The adapter refuses unsupported floating input without its original lexeme and conflicting profile data rather than rewriting legacy bodies. Pressure/provenance output does not materialize NPC, quest, myth or prophecy content.

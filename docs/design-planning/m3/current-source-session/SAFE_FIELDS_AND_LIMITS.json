@@ -1,0 +1,882 @@
+{
+  "status": "EXTERNAL_CURRENT_BRANCH_ONLY_OLD_PROOF_IMMUTABLE",
+  "frozen_old_definitions": {
+    "SafeSupportingReference": {
+      "kind": "SupportingKindWithoutHistoryPage",
+      "evidence_reference": "Alias"
+    },
+    "SafeSessionHistoryPage": {
+      "evidence_reference": "Alias",
+      "history_evidence_reference": "Alias",
+      "page_index": "uint8[0..39]",
+      "record_references": "tuple<SafeHistoryRecordReference,0..64>",
+      "supporting_references": "tuple<SafeSupportingReference,0..64>"
+    },
+    "SafeSessionHistoryEvidence": {
+      "evidence_reference": "Alias",
+      "session_binding_reference": "Alias",
+      "main_assessment_evidence_reference": "Alias|null",
+      "child_link": "SafeSessionChildLink|null",
+      "recovery_operation_reference": "Alias|null",
+      "context_evidence_references": "tuple<Alias,0..53>",
+      "publication_evidence_references": "tuple<Alias,0..18>",
+      "lifecycle_evidence_references": "tuple<Alias,0..90>",
+      "pending_lifecycle_evidence_reference": "Alias|null",
+      "page_evidence_references": "tuple<Alias,0..40>",
+      "confirmed_record_count": "uint16[0..1024]",
+      "unknown_storage_record_count": "uint16[0..1024]",
+      "attempted_lifecycle_record_count": "uint8[0..36]",
+      "supporting_reference_count": "uint16[0..2504]",
+      "frozen": "bool",
+      "coverage": "COMPLETE_SPECIFIED_SAFE_GRAPH|PARTIAL|STORAGE_UNCERTAIN",
+      "omitted_fields": "fixed:RAW_BUSINESS_PACKETS_REQUEST_REASON_CANONICAL_FREE_NOTES",
+      "request_evidence_references": "tuple<Alias,0..18>",
+      "authority_evidence_references": "tuple<Alias,0..18>",
+      "cause_evidence_references": "tuple<Alias,0..18>",
+      "boundary_evidence_references": "tuple<Alias,0..36>",
+      "command_evidence_references": "tuple<Alias,0..18>",
+      "failure_evidence_references": "tuple<Alias,0..18>",
+      "resolution_evidence_references": "tuple<Alias,0..16>",
+      "recovery_operation_references": "tuple<Alias,0..2>",
+      "child_link_references": "tuple<Alias,0..2>",
+      "current_assessment_evidence_reference": "Alias|null",
+      "episode_assessment_evidence_references": "tuple<Alias,0..17>",
+      "terminal_closure_evidence_reference": "Alias|null"
+    }
+  },
+  "current_definitions": {
+    "SafeCurrentSessionSupportingReference": {
+      "kind": "CurrentSupportingKindWithoutEitherHistoryPage",
+      "evidence_reference": "Alias"
+    },
+    "SafeCurrentSessionHistoryPage": {
+      "evidence_reference": "Alias",
+      "history_evidence_reference": "Alias",
+      "page_index": "uint8[0..40]",
+      "record_references": "tuple<SafeHistoryRecordReference,0..64>",
+      "supporting_references": "tuple<SafeCurrentSessionSupportingReference,0..64>",
+      "session_policy_version": "const:1.1.0"
+    },
+    "SafeCurrentSessionHistoryEvidence": {
+      "evidence_reference": "Alias",
+      "session_binding_reference": "Alias",
+      "main_assessment_evidence_reference": "Alias|null",
+      "child_link": "SafeSessionChildLink|null",
+      "recovery_operation_reference": "Alias|null",
+      "context_evidence_references": "tuple<Alias,0..53>",
+      "publication_evidence_references": "tuple<Alias,0..18>",
+      "lifecycle_evidence_references": "tuple<Alias,0..90>",
+      "pending_lifecycle_evidence_reference": "Alias|null",
+      "page_evidence_references": "tuple<Alias,0..41>",
+      "confirmed_record_count": "uint16[0..1024]",
+      "unknown_storage_record_count": "uint16[0..1024]",
+      "attempted_lifecycle_record_count": "uint8[0..36]",
+      "supporting_reference_count": "uint16[0..2622]",
+      "frozen": "bool",
+      "coverage": "COMPLETE_SPECIFIED_SAFE_GRAPH|PARTIAL|STORAGE_UNCERTAIN",
+      "omitted_fields": "fixed:RAW_BUSINESS_PACKETS_REQUEST_REASON_CANONICAL_FREE_NOTES",
+      "request_evidence_references": "tuple<Alias,0..18>",
+      "authority_evidence_references": "tuple<Alias,0..18>",
+      "cause_evidence_references": "tuple<Alias,0..18>",
+      "boundary_evidence_references": "tuple<Alias,0..36>",
+      "command_evidence_references": "tuple<Alias,0..18>",
+      "failure_evidence_references": "tuple<Alias,0..18>",
+      "resolution_evidence_references": "tuple<Alias,0..16>",
+      "recovery_operation_references": "tuple<Alias,0..2>",
+      "child_link_references": "tuple<Alias,0..2>",
+      "current_assessment_evidence_reference": "Alias|null",
+      "episode_assessment_evidence_references": "tuple<Alias,0..17>",
+      "terminal_closure_evidence_reference": "Alias|null",
+      "module_history_evidence_reference": "Alias|null",
+      "session_policy_version": "const:1.1.0"
+    },
+    "SafeCurrentSessionBindingEvidence": {
+      "evidence_reference": "Alias",
+      "session_reference": "Alias",
+      "assembly_generation": "M3_MODULES_PAIR|M3_GENERATION_PAIR",
+      "canonical_source_evidence_reference": "Alias",
+      "paired_source_evidence_reference": "Alias:SafeSessionSourceEvidence",
+      "profile_evidence_reference": "Alias",
+      "policy_reference": "Alias",
+      "policy_assurance": "RECOGNIZED_ADOPTED_POLICY",
+      "binding_reference": "Alias",
+      "initial_assessment_reference": "Alias",
+      "policy_id": "const:YWE-SESSION-SAFETY-001",
+      "policy_version": "const:1.1.0",
+      "policy_source_path": "const:docs/architecture/m3_module_session_lifecycle_policy.md",
+      "policy_source_sha256": "const:173e36fd92d6aaf222d61d950a235a6938e0fcdd374f6044b9f0c2c38c342dc7"
+    },
+    "SafeCurrentSessionSourceEvidence": {
+      "evidence_reference": "Alias",
+      "assembly_generation": "M3_MODULES_PAIR|M3_GENERATION_PAIR",
+      "canonical_binding": "exact corresponding current complete nine-field vector",
+      "paired_recovery_sources": "exact corresponding seven-pin tuple",
+      "source_vector_sha256": "exact corresponding compiled three-key vector SHA256",
+      "assembly_assurance": "RECOGNIZED_COMPLETE_VECTOR"
+    }
+  },
+  "new_sidecar_schemas": {
+    "SafeSessionModuleLinkEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_reference",
+        "session_binding_reference",
+        "session_reference",
+        "request_reference",
+        "lease_reference",
+        "producer",
+        "operation",
+        "before",
+        "active",
+        "after",
+        "actual_origin_evidence_reference",
+        "actual_origin_completion_reference",
+        "actual_module_operation_reference",
+        "actual_module_final_reference",
+        "status",
+        "failure_code",
+        "module_failure_code",
+        "session_effects_performed",
+        "late_after_cutover",
+        "coverage"
+      ],
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$"
+        },
+        "session_binding_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$"
+        },
+        "session_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$"
+        },
+        "request_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$"
+        },
+        "lease_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "producer": {
+          "type": "string",
+          "enum": [
+            "REALM_ENCODER",
+            "TRANSITION_REGISTRY",
+            "TOPOLOGY_GENERATOR",
+            "AXIOM_EVALUATOR"
+          ]
+        },
+        "operation": {
+          "type": "string",
+          "enum": [
+            "ENCODE_REALM",
+            "RESOLVE_TRANSITIONS",
+            "APPLY_TRANSITION",
+            "GENERATE_TOPOLOGY",
+            "EVALUATE_AXIOMS"
+          ]
+        },
+        "before": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "snapshot_reference",
+            "generation",
+            "state_signature",
+            "mode",
+            "terminal_latched",
+            "admission_status",
+            "current_assessment_reference",
+            "active_operation_reference"
+          ],
+          "properties": {
+            "snapshot_reference": {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$"
+            },
+            "generation": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            "state_signature": {
+              "type": "string",
+              "pattern": "^[01]{9}$"
+            },
+            "mode": {
+              "type": "string",
+              "enum": [
+                "NORMAL",
+                "CONTAINED",
+                "SAFE_HALT"
+              ]
+            },
+            "terminal_latched": {
+              "type": "boolean"
+            },
+            "admission_status": {
+              "type": "string",
+              "enum": [
+                "OPEN",
+                "AUDIT_BLOCKED",
+                "TERMINAL"
+              ]
+            },
+            "current_assessment_reference": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^ref:[0-9]{6}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "active_operation_reference": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^ref:[0-9]{6}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        "active": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "snapshot_reference",
+                "generation",
+                "state_signature",
+                "mode",
+                "terminal_latched",
+                "admission_status",
+                "current_assessment_reference",
+                "active_operation_reference"
+              ],
+              "properties": {
+                "snapshot_reference": {
+                  "type": "string",
+                  "pattern": "^ref:[0-9]{6}$"
+                },
+                "generation": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                "state_signature": {
+                  "type": "string",
+                  "pattern": "^[01]{9}$"
+                },
+                "mode": {
+                  "type": "string",
+                  "enum": [
+                    "NORMAL",
+                    "CONTAINED",
+                    "SAFE_HALT"
+                  ]
+                },
+                "terminal_latched": {
+                  "type": "boolean"
+                },
+                "admission_status": {
+                  "type": "string",
+                  "enum": [
+                    "OPEN",
+                    "AUDIT_BLOCKED",
+                    "TERMINAL"
+                  ]
+                },
+                "current_assessment_reference": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^ref:[0-9]{6}$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "active_operation_reference": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^ref:[0-9]{6}$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "after": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "snapshot_reference",
+            "generation",
+            "state_signature",
+            "mode",
+            "terminal_latched",
+            "admission_status",
+            "current_assessment_reference",
+            "active_operation_reference"
+          ],
+          "properties": {
+            "snapshot_reference": {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$"
+            },
+            "generation": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            "state_signature": {
+              "type": "string",
+              "pattern": "^[01]{9}$"
+            },
+            "mode": {
+              "type": "string",
+              "enum": [
+                "NORMAL",
+                "CONTAINED",
+                "SAFE_HALT"
+              ]
+            },
+            "terminal_latched": {
+              "type": "boolean"
+            },
+            "admission_status": {
+              "type": "string",
+              "enum": [
+                "OPEN",
+                "AUDIT_BLOCKED",
+                "TERMINAL"
+              ]
+            },
+            "current_assessment_reference": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^ref:[0-9]{6}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "active_operation_reference": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^ref:[0-9]{6}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        "actual_origin_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actual_origin_completion_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actual_module_operation_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actual_module_final_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "COMPLETED",
+            "REFUSED",
+            "FAILED",
+            "UNCONFIRMED"
+          ]
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "SESSION_INPUT_INVALID",
+                "SESSION_SOURCE_REJECTED",
+                "SESSION_PROFILE_REJECTED",
+                "SESSION_ORIGIN_REJECTED",
+                "SESSION_ORIGIN_FOREIGN",
+                "SESSION_STATE_STALE",
+                "SESSION_OPERATION_DUPLICATE",
+                "SESSION_OPERATION_IN_PROGRESS",
+                "SESSION_MODE_FORBIDDEN",
+                "SESSION_TERMINAL",
+                "SESSION_BUDGET_EXCEEDED",
+                "SESSION_LEASE_REJECTED",
+                "SESSION_EXECUTION_CANCELLED",
+                "SESSION_AUTHORITY_DENIED",
+                "SESSION_AUTHORITY_UNAVAILABLE",
+                "SESSION_EVIDENCE_MISMATCH",
+                "SESSION_BOUNDARY_NOT_SATISFIED",
+                "SESSION_TARGET_NOT_VALID",
+                "SESSION_N2_RESULT_REJECTED",
+                "SESSION_N2_COMPLETION_REJECTED",
+                "SESSION_N2_COMPLETION_UNCONFIRMED",
+                "SESSION_PUBLICATION_STALE",
+                "SESSION_PUBLICATION_UNCONFIRMED",
+                "SESSION_COLLABORATOR_FAILED",
+                "SESSION_CAPTURE_FAILED",
+                "SESSION_RETENTION_FAILED",
+                "SESSION_GENERATION_EXHAUSTED",
+                "SESSION_AUDIT_BLOCKED",
+                "SESSION_RAW_BUSINESS_LIMIT",
+                "SESSION_INTERNAL_INVARIANT"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "module_failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "MODULE_PRODUCER_FOREIGN",
+                "MODULE_PRODUCER_DUPLICATE",
+                "MODULE_PRODUCER_BINDING_MISMATCH",
+                "MODULE_PRODUCER_UNSUPPORTED",
+                "MODULE_CONTEXT_REJECTED",
+                "MODULE_ORIGIN_REJECTED",
+                "MODULE_RESULT_REJECTED",
+                "MODULE_RESERVATION_REFUSED",
+                "MODULE_RAW_PACKET_LIMIT",
+                "MODULE_CAPTURE_REJECTED",
+                "MODULE_CAPTURE_UNCONFIRMED",
+                "MODULE_COMPLETION_MISSING",
+                "MODULE_COMPLETION_REJECTED",
+                "MODULE_FINAL_OBSERVATION_REJECTED",
+                "MODULE_REQUIRED_RECORD_MISSING",
+                "MODULE_SCOPE_FOREIGN",
+                "MODULE_REPLAY_REFUSED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "session_effects_performed": {
+          "const": false
+        },
+        "late_after_cutover": {
+          "type": "boolean"
+        },
+        "coverage": {
+          "type": "string",
+          "enum": [
+            "COMPLETE_SPECIFIED_SAFE_GRAPH",
+            "PARTIAL",
+            "API_ONLY",
+            "STORAGE_UNCERTAIN"
+          ]
+        }
+      }
+    },
+    "SafeSessionModuleHistoryEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_reference",
+        "session_binding_reference",
+        "session_reference",
+        "member_link_references",
+        "control_observations",
+        "frozen",
+        "cutover_generation",
+        "pending_cutover_evidence_reference"
+      ],
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$"
+        },
+        "session_binding_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$"
+        },
+        "session_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$"
+        },
+        "member_link_references": {
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$"
+          }
+        },
+        "control_observations": {
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "request_reference",
+                  "status",
+                  "coverage",
+                  "supporting_reference",
+                  "failure_code"
+                ],
+                "properties": {
+                  "request_reference": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^ref:[0-9]{6}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "CONFIRMED",
+                      "REJECTED",
+                      "NOT_CONFIRMED"
+                    ]
+                  },
+                  "coverage": {
+                    "type": "string",
+                    "enum": [
+                      "COMPLETE_SPECIFIED_SAFE_GRAPH",
+                      "PARTIAL",
+                      "STORAGE_UNCERTAIN"
+                    ]
+                  },
+                  "supporting_reference": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^ref:[0-9]{6}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "failure_code": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "enum": [
+                          "SESSION_RETENTION_REJECTED",
+                          "SESSION_RETENTION_UNCONFIRMED",
+                          "SESSION_RETENTION_INCOMPLETE",
+                          "SESSION_RETENTION_LIMIT",
+                          "SESSION_RETENTION_IDENTITY_MISMATCH",
+                          "SESSION_RETENTION_FROZEN"
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "frozen": {
+          "type": "boolean"
+        },
+        "cutover_generation": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pending_cutover_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "SafeSessionModuleCutoverEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_reference",
+        "session_binding_reference",
+        "session_reference",
+        "request_reference",
+        "lease_reference",
+        "generation",
+        "before_snapshot_reference",
+        "active_snapshot_reference",
+        "cutover_snapshot_reference",
+        "actual_origin_evidence_reference",
+        "actual_module_operation_reference",
+        "phase"
+      ],
+      "properties": {
+        "evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$"
+        },
+        "session_binding_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$"
+        },
+        "session_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$"
+        },
+        "request_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$"
+        },
+        "lease_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$"
+        },
+        "generation": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "before_snapshot_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$"
+        },
+        "active_snapshot_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$"
+        },
+        "cutover_snapshot_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$"
+        },
+        "actual_origin_evidence_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actual_module_operation_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "phase": {
+          "type": "string",
+          "enum": [
+            "ADMITTED",
+            "DIAGNOSING",
+            "DIAGNOSED",
+            "COMPUTING",
+            "CAPTURING",
+            "FINISHING"
+          ]
+        }
+      }
+    }
+  },
+  "new_support_kind_quotas": {
+    "SESSION_MODULE_LINK": 4,
+    "SESSION_MODULE_HISTORY": 1,
+    "SESSION_MODULE_CUTOVER": 1
+  },
+  "current_supporting_kind_domain": [
+    "CANONICAL_SOURCE",
+    "PROFILE",
+    "ASSESSMENT",
+    "RECOVERY_DIAGNOSTIC",
+    "NORMALIZATION_PROOF",
+    "CORRECTION_PROOF",
+    "REGISTRY_PROOF",
+    "CONDITION",
+    "PREDICATE_OBSERVATION",
+    "RECOVERY_SAFETY",
+    "TARGET_VALIDITY",
+    "SESSION_BINDING",
+    "SESSION_SNAPSHOT",
+    "SESSION_CONTEXT",
+    "SESSION_PUBLICATION",
+    "LIFECYCLE",
+    "SESSION_HISTORY",
+    "SESSION_SOURCE",
+    "SESSION_DENIED",
+    "SESSION_LINK",
+    "SESSION_REQUEST",
+    "SESSION_AUTHORITY",
+    "SESSION_BOUNDARY",
+    "SESSION_CAUSE",
+    "SESSION_COMMAND",
+    "SESSION_FAILURE",
+    "RESOLUTION_TARGET",
+    "SESSION_RESOLUTION",
+    "SESSION_RECOVERY_CONTEXT",
+    "SESSION_TERMINAL_CLOSURE",
+    "PRODUCER_CONTEXT",
+    "PRODUCER_SOURCE",
+    "PRODUCER_OPERATION",
+    "PRODUCER_FINAL_OBSERVATION",
+    "PRODUCER_RECORD",
+    "REALM_IDENTITY",
+    "TRANSITION_REGISTRY",
+    "TRANSITION_DEFINITION",
+    "TOPOLOGY",
+    "TOPOLOGY_PAGE",
+    "AXIOM_SUBJECT",
+    "AXIOM_CHECK",
+    "GENERATION_PLAN",
+    "ROLE_PAGE",
+    "ARTIFACT_PAGE",
+    "TARGET_CONSTRAINTS",
+    "EMISSION_OUTPUT",
+    "SESSION_MODULE_LINK",
+    "SESSION_MODULE_HISTORY",
+    "SESSION_MODULE_CUTOVER"
+  ],
+  "current_branch_policy_bindings": [
+    {
+      "baseline": "M3_MODULES",
+      "policy_binding": {
+        "policy_id": "YWE-SESSION-SAFETY-001",
+        "policy_version": "1.1.0",
+        "source_path": "docs/architecture/m3_module_session_lifecycle_policy.md",
+        "source_sha256": "173e36fd92d6aaf222d61d950a235a6938e0fcdd374f6044b9f0c2c38c342dc7"
+      },
+      "assembly_generation": "M3_MODULES_PAIR",
+      "module_lane": true
+    },
+    {
+      "baseline": "M3_GENERATION",
+      "policy_binding": {
+        "policy_id": "YWE-SESSION-SAFETY-001",
+        "policy_version": "1.1.0",
+        "source_path": "docs/architecture/m3_module_session_lifecycle_policy.md",
+        "source_sha256": "173e36fd92d6aaf222d61d950a235a6938e0fcdd374f6044b9f0c2c38c342dc7"
+      },
+      "assembly_generation": "M3_GENERATION_PAIR",
+      "module_lane": true
+    }
+  ],
+  "current_binding_assembly_domain": [
+    "M3_MODULES_PAIR",
+    "M3_GENERATION_PAIR"
+  ],
+  "policy_generation_coherence": "Old exact policy tuple only LEGACY_PAIR/N3_LIFECYCLE_PAIR observation branches; current exact v1.1 tuple only M3_MODULES_PAIR/M3_GENERATION_PAIR. Eligible SessionBinding still rejects LEGACY_C78.",
+  "current_binding_field_delta": 8,
+  "current_source_field_delta": 0,
+  "output_arrays": "Existing old reference/page/history/binding/source definitions and arrays remain narrow/unchanged. New session_current_bindings/sources/histories/history_pages and session_module_links/histories/cutovers are optional, omitted empty; each uses its exact current class and closed bounded tuple. No expanded kind or current binding can be projected through an old class.",
+  "limits": {
+    "current_nonpage_supporting": 2622,
+    "current_pages": 41,
+    "current_total_pins": 2663,
+    "old_nonpage_supporting": 2504,
+    "old_pages": 40,
+    "old_total_pins": 2544,
+    "current_raw_halt_groups": 22,
+    "old_raw_halt_groups": 21
+  },
+  "scope": "Root bounded reference closure, no accepted runtime/native semantics"
+}

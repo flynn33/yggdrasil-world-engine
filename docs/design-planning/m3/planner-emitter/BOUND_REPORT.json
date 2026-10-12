@@ -1,0 +1,252 @@
+{
+  "optional_normalization_prefix_guard": {
+    "original_tc_origin_support_bytes": 65536,
+    "normalization_scope_total_bytes": 131072,
+    "additional_complete_retained_allowance": 196608,
+    "meaning": "Additional guarded existing prefix, never new producer nodes or reservation. Actual originalTC/normalization/freshnormalized-initial/final closures measured separately. Normalized initial is counted once in existing two-origin closure. Sequential admitted scopes and actual ledger measurements remain controlling.",
+    "fits_support": true,
+    "fits_store": true
+  },
+  "status": "PASS_CONSERVATIVE_REPRESENTATION_WITNESS_NOT_RUNTIME",
+  "base_inventory_sha256": "78582125b80592c5e7df0d345ae0a57b7ecc3c514277efbccca5e8339942b801",
+  "leaf_rows": {
+    "PRODUCER_CONTEXT": {
+      "bytes": 615,
+      "aliases": 15
+    },
+    "PRODUCER_SOURCE": {
+      "bytes": 1847,
+      "aliases": 18
+    },
+    "PRODUCER_OPERATION": {
+      "bytes": 4954,
+      "aliases": 139
+    },
+    "PRODUCER_FINAL_OBSERVATION": {
+      "bytes": 413,
+      "aliases": 5
+    },
+    "PRODUCER_RECORD": {
+      "bytes": 2206,
+      "aliases": 7
+    },
+    "REALM_IDENTITY": {
+      "bytes": 245,
+      "aliases": 1
+    },
+    "TRANSITION_REGISTRY": {
+      "bytes": 1444,
+      "aliases": 40
+    },
+    "TRANSITION_DEFINITION": {
+      "bytes": 840,
+      "aliases": 5
+    },
+    "TOPOLOGY": {
+      "bytes": 1131,
+      "aliases": 50
+    },
+    "TOPOLOGY_PAGE": {
+      "bytes": 1698,
+      "aliases": 2
+    },
+    "AXIOM_SUBJECT": {
+      "bytes": 741,
+      "aliases": 6
+    },
+    "AXIOM_CHECK": {
+      "bytes": 361,
+      "aliases": 2
+    },
+    "GENERATION_PLAN": {
+      "bytes": 1956,
+      "aliases": 78
+    },
+    "ROLE_PAGE": {
+      "bytes": 2553,
+      "aliases": 50
+    },
+    "ARTIFACT_PAGE": {
+      "bytes": 8849,
+      "aliases": 338
+    },
+    "TARGET_CONSTRAINTS": {
+      "bytes": 3605,
+      "aliases": 36
+    },
+    "EMISSION_OUTPUT": {
+      "bytes": 829,
+      "aliases": 7
+    }
+  },
+  "reports": {
+    "TRANSITION_REGISTRY": {
+      "complete_isolated_closure_counts": {
+        "PRODUCER_CONTEXT": 1,
+        "PRODUCER_SOURCE": 1,
+        "PRODUCER_OPERATION": 1,
+        "PRODUCER_FINAL_OBSERVATION": 1,
+        "PRODUCER_RECORD": 17,
+        "TRANSITION_REGISTRY": 1,
+        "TRANSITION_DEFINITION": 16
+      },
+      "complete_isolated_closure_nodes": 38,
+      "complete_isolated_safe_support_bytes": 60293,
+      "old_actual_closure_allowance": 65536,
+      "complete_support_with_closure": 125829,
+      "events_reserved": 17,
+      "complete_isolated_alias_occurrences": 416,
+      "complete_alias_bytes": 106496,
+      "complete_isolated_total_contribution": 789381,
+      "prospective_novel_counts": {
+        "PRODUCER_CONTEXT": 1,
+        "PRODUCER_SOURCE": 1,
+        "PRODUCER_OPERATION": 1,
+        "PRODUCER_FINAL_OBSERVATION": 1,
+        "PRODUCER_RECORD": 17,
+        "TRANSITION_REGISTRY": 1,
+        "TRANSITION_DEFINITION": 16
+      },
+      "prospective_novel_support_with_actual_origin_allowance": 125829,
+      "prospective_novel_alias_occurrences": 416,
+      "prospective_novel_total": 789381,
+      "reservation": {
+        "bytes": 2097152,
+        "supporting_bytes": 262144,
+        "aliases": 1024
+      },
+      "fits_novel_support": true,
+      "fits_novel_total": true,
+      "fits_novel_aliases": true,
+      "fits_isolated_global_aliases": true,
+      "fits_isolated_global_support": true,
+      "fits_isolated_global_store": true,
+      "existing_new_boundary": "All five required dependencies already have actual retained same-collector first-finish/final nodes before admission. Pin exact existing node keys and aliases without copying them. Prospective novel counts conservatively charge repeated plan facts again; no arbitrary caller dedup assumption. Actual existing ledger + remaining scope reservation + new grant must still fit all unchanged global caps; whole pipelines can refuse.",
+      "old_closure_guard": "actual retained source/profile/origin/dependency closure must measure within explicit allowance; not observed maximum"
+    },
+    "GENERATION_PLANNER": {
+      "complete_isolated_closure_counts": {
+        "PRODUCER_CONTEXT": 6,
+        "PRODUCER_SOURCE": 3,
+        "PRODUCER_OPERATION": 6,
+        "PRODUCER_FINAL_OBSERVATION": 6,
+        "PRODUCER_RECORD": 24,
+        "REALM_IDENTITY": 2,
+        "TOPOLOGY": 1,
+        "TOPOLOGY_PAGE": 46,
+        "AXIOM_SUBJECT": 1,
+        "AXIOM_CHECK": 5,
+        "GENERATION_PLAN": 1,
+        "ROLE_PAGE": 46,
+        "ARTIFACT_PAGE": 2,
+        "TARGET_CONSTRAINTS": 1,
+        "TRANSITION_REGISTRY": 1,
+        "TRANSITION_DEFINITION": 16
+      },
+      "complete_isolated_closure_nodes": 167,
+      "complete_isolated_safe_support_bytes": 332440,
+      "old_actual_closure_allowance": 131072,
+      "complete_support_with_closure": 463512,
+      "events_reserved": 1,
+      "complete_isolated_alias_occurrences": 4546,
+      "complete_alias_bytes": 1163776,
+      "complete_isolated_total_contribution": 1660056,
+      "prospective_novel_counts": {
+        "PRODUCER_CONTEXT": 1,
+        "PRODUCER_SOURCE": 1,
+        "PRODUCER_OPERATION": 1,
+        "PRODUCER_FINAL_OBSERVATION": 1,
+        "PRODUCER_RECORD": 1,
+        "REALM_IDENTITY": 2,
+        "TOPOLOGY": 1,
+        "TOPOLOGY_PAGE": 46,
+        "AXIOM_SUBJECT": 1,
+        "AXIOM_CHECK": 5,
+        "GENERATION_PLAN": 1,
+        "ROLE_PAGE": 46,
+        "ARTIFACT_PAGE": 2,
+        "TARGET_CONSTRAINTS": 1
+      },
+      "prospective_novel_support_with_actual_origin_allowance": 298693,
+      "prospective_novel_alias_occurrences": 3434,
+      "prospective_novel_total": 1210565,
+      "reservation": {
+        "bytes": 4194304,
+        "supporting_bytes": 1048576,
+        "aliases": 4096
+      },
+      "fits_novel_support": true,
+      "fits_novel_total": true,
+      "fits_novel_aliases": true,
+      "fits_isolated_global_aliases": true,
+      "fits_isolated_global_support": true,
+      "fits_isolated_global_store": true,
+      "existing_new_boundary": "All five required dependencies already have actual retained same-collector first-finish/final nodes before admission. Pin exact existing node keys and aliases without copying them. Prospective novel counts conservatively charge repeated plan facts again; no arbitrary caller dedup assumption. Actual existing ledger + remaining scope reservation + new grant must still fit all unchanged global caps; whole pipelines can refuse.",
+      "old_closure_guard": "actual retained source/profile/origin/dependency closure must measure within explicit allowance; not observed maximum"
+    },
+    "ARTIFACT_EMITTER": {
+      "complete_isolated_closure_counts": {
+        "PRODUCER_CONTEXT": 7,
+        "PRODUCER_SOURCE": 3,
+        "PRODUCER_OPERATION": 7,
+        "PRODUCER_FINAL_OBSERVATION": 7,
+        "PRODUCER_RECORD": 89,
+        "REALM_IDENTITY": 2,
+        "TOPOLOGY": 1,
+        "TOPOLOGY_PAGE": 46,
+        "AXIOM_SUBJECT": 1,
+        "AXIOM_CHECK": 5,
+        "GENERATION_PLAN": 1,
+        "ROLE_PAGE": 46,
+        "ARTIFACT_PAGE": 2,
+        "TARGET_CONSTRAINTS": 1,
+        "EMISSION_OUTPUT": 32,
+        "TRANSITION_REGISTRY": 1,
+        "TRANSITION_DEFINITION": 16
+      },
+      "complete_isolated_closure_nodes": 267,
+      "complete_isolated_safe_support_bytes": 508440,
+      "old_actual_closure_allowance": 131072,
+      "complete_support_with_closure": 639512,
+      "events_reserved": 65,
+      "complete_isolated_alias_occurrences": 5384,
+      "complete_alias_bytes": 1378304,
+      "complete_isolated_total_contribution": 4147736,
+      "prospective_novel_counts": {
+        "PRODUCER_CONTEXT": 1,
+        "PRODUCER_SOURCE": 1,
+        "PRODUCER_OPERATION": 1,
+        "PRODUCER_FINAL_OBSERVATION": 1,
+        "PRODUCER_RECORD": 65,
+        "REALM_IDENTITY": 2,
+        "TOPOLOGY": 1,
+        "TOPOLOGY_PAGE": 46,
+        "AXIOM_SUBJECT": 1,
+        "AXIOM_CHECK": 5,
+        "GENERATION_PLAN": 1,
+        "ROLE_PAGE": 46,
+        "ARTIFACT_PAGE": 2,
+        "TARGET_CONSTRAINTS": 1,
+        "EMISSION_OUTPUT": 32
+      },
+      "prospective_novel_support_with_actual_origin_allowance": 466501,
+      "prospective_novel_alias_occurrences": 4106,
+      "prospective_novel_total": 3647557,
+      "reservation": {
+        "bytes": 8388608,
+        "supporting_bytes": 1048576,
+        "aliases": 5120
+      },
+      "fits_novel_support": true,
+      "fits_novel_total": true,
+      "fits_novel_aliases": true,
+      "fits_isolated_global_aliases": true,
+      "fits_isolated_global_support": true,
+      "fits_isolated_global_store": true,
+      "existing_new_boundary": "All five required dependencies already have actual retained same-collector first-finish/final nodes before admission. Pin exact existing node keys and aliases without copying them. Prospective novel counts conservatively charge repeated plan facts again; no arbitrary caller dedup assumption. Actual existing ledger + remaining scope reservation + new grant must still fit all unchanged global caps; whole pipelines can refuse.",
+      "old_closure_guard": "actual retained source/profile/origin/dependency closure must measure within explicit allowance; not observed maximum"
+    }
+  },
+  "hard_caps_unchanged": true,
+  "note": "Synthetic closed schema maxima only. Runtime measures complete guarded closures/records/raw packets; lifetime simultaneous fit is not promised."
+}

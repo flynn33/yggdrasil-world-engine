@@ -2138,3 +2138,76 @@ rules, all 28 invariant obligations and all five canonical conformance
 categories remain required before M3 acceptance. All five M3 exits stay open.
 M0–M2 remain accepted, M4 planned and platform work deferred through M10. No
 additional owner input is needed for current M3 work.
+
+
+### 18.1 Published strict module and capture implementation
+
+The exact corrected implementation c468b35439e2b0254a71b22be3117a711f557b9b
+passes all36 applicable normal checks, unfiltered and offline, in its clean
+full-history checkout. All1232 unit tests pass in2071.591s; full execution
+takes2428.110s and returns0 with no blocking failures, advisories or checkout
+changes. This subsequent result closes the earlier failed b4 test-consumer
+attempt without deleting its failure record. Owner author and committer Jim
+Daley/flynn33 are verified for both published171eda7e andc468b354 commits.
+Git and GitHub API readback confirm main and exact README bytes. Ordinary
+nonforce push uses the authorized PR/signature rule bypass. CI38191670186 is
+running on both OSes at the latest observation; its conclusion is not yet known.
+Wiki6182078863ed8826659988dd256c6d29c68c8f11 projects exactc468 source;
+fresh remote readback matches all47 reviewed pages, preserving15 manual pages.
+
+The external clean evidence fingerprints are:
+- report: `14e21c1d1d8357d76daea78dbbcf469595ca0ea59642c7bd133adb419890bc9c`.
+- log: `a5b63839e05930644e32e9a4f8cc0cb4df47b3f625fabdb6b792ff4ca7a16ce6`.
+- execution: `c675a4db19efe0d7dc98d36defde03fc2f2deabb740d8243487842a97d11e07a`.
+- publication: `e8904823e0bc7043553f7e0b0334e7809f2a5a605d8d7de14ee5496e663f8d41`.
+- wiki_remote_readback: `06774bf48240ccba4436919c78c1c8188a021dc9d9ba7c837ccd70dc31a58fdf`.
+
+### 19. Adopted remaining M3 contracts and bounded implementation direction
+
+REQ0049/ADR0041 adopt the complete fourth generation source vector and exact
+pure chain/planner plus acknowledged memory-document emitter contracts.
+REQ0045/ADR0036 retain their entire original three-vector meanings as
+superseded history. Source4 aggregate2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8
+remains accepted pending canonical/runtime application; current three-vector
+inventory, historical source pairs and original Session eligibility are preserved.
+REQ0050/ADR0042 adopt current-source four-pure Session policyv1.1 while retaining
+the original v1.0 pair, every historical safe definition, fixed global quotas,
+and separately sized current terminal/control reservations. REQ0051/ADR0043
+adopt neutral Core domains, exact integer deterministic policies, logical
+lifecycle/orchestration, substantive final specification documents and actual
+selected-case evidence for28invariants/fivecategories/sevendeliverables/fiveexits.
+Specification-placeholder debt closure is distinct from runtime acceptance.
+
+The controlling frozen indexes are PE R2
+7ccc71ad5a0ee8864650a7e5004a6a75fcf406de04b0ee92eae3a816247b1ab5,
+Core R3 f04c9ea2c2acd2d027a37d4dcda279a61fa94d6f6bc3413d4596d4d296a826cc
+and Session R3 13fc7b5bbbe0f06e765dedd417c241a9ef013f8d0cbae81771865d35d11a3df2.
+Root independently replays each fresh copied package and verifies unchanged
+original/copy indexed bytes: PE36 definitions/72closed-member controls and
+all1367historical bindings; Core53 definitions/129rejects and old prophecy
+validation keywords; Session allfour replay commands with byte-identical outputs.
+Final authority/cross-owner reviews and exact builder teachbacks report no
+concrete source, authority, token, grant or budget contradiction. The single
+reviewed merged diagnostic schema43a863d0a08b1b75daca428392d45527a351271d84c11dfaed1781b65d146129
+preserves17oldmodule payloads/fiveoldSessiondefinitions and taggedPEbranches.
+Whole offered6566aliases genuinely exceed6144 and must refuse. Adoption routing
+preserves external proofs, omits two redundant predecessor snippets and names
+proof reports by their format role without validator exemptions or new debt.
+
+Root owns canonical identity/mirror, registers/catalogs/fixtures/allowlists,
+public exports, executable acceptance tooling and publication. Diagnostics owns
+shared source4 scalar/host migration, current Session/Recovery and collector
+capture/gates. PE owns chain/planner/emitter/target/runner. Core owns nine
+domains/policy/lifecycle files and StateModel plus _NormalizationOperations.apply
+gate seams. Exact grant partition remains11Core+2Normalizer+13Runner=26run;
+0Core+1Runner+9Emitter=10eight-document emission. Rechecks/cleanup mint0.
+All supplied exact source/policy pairs, review provenance and reviewed unit
+evidence instruction precede dependent edits. Local owned realization selects
+no external system/profile/runtime or new dependency; applicability and ordinary
+product checks, source understanding and instruction review remain required.
+
+New source4 grants, Session behavior, complete generation/emission, remaining
+Core semantics and M3 case acceptance require actual implementation and execution.
+No authored sizing packet or aggregate pass count establishes them. M3 remains
+in_progress and allfive exits open. M4 remains planned. Complete, verify and
+publish allM3, then pause the existing goal and wait for explicit owner go-ahead.

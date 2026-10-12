@@ -1,0 +1,18 @@
+{
+  "status": "EXECUTED_EXISTING_PLAIN_JSON_STREAMING_GUARD_PASS_NOT_NEW_OWNED_SESSION_RUNTIME",
+  "cases": {
+    "one1MiBpacket": 1048576,
+    "sameobjectserializedtwice": 2097155,
+    "twoindividual1MiBplusframing_refused": true,
+    "exact2MiB": 2097152,
+    "onebyte2MiBoverflow_sentinel": 2097153,
+    "overflow_record_refused_preserves_input": true,
+    "exact32MiB": 33554432,
+    "onebyte32MiBoverflow_sentinel": 33554433,
+    "authored_observation_fixed_prefix": 35785,
+    "authored_prefix_plus_max_single_module_field": 1084357
+  },
+  "guard_obligation": "Actual admitted request and completed origin are measured first. Before pure work or capture, exact finite typed future snapshots/retention/completion skeletons fill all yet-unobserved fields and one exclusive module field uses its whole1MiB upper; compare composite against2MiB. Before every ordinary operation measure whole anticipated history+terminal including four2MiB observations and all repeated actual N2/history occurrences against32MiB. Refuse before ordinary effects; mandatory halt preserves actual DAG and partial truth. This control proves framing and existing serializer refusal only, not the completeness of future runtime skeleton implementation.",
+  "actual_helper": "session_values.raw_business_size/raw_business_record/raw_business_bytes",
+  "new_dataclasses_executed": false
+}

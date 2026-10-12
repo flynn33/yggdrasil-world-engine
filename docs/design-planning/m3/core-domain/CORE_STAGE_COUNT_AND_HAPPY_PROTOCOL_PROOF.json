@@ -1,0 +1,208 @@
+{
+  "scope": "AUTHORED_EXACT_PROTOCOL_COUNT_AND_INDEPENDENT_MATH_NOT_RUNTIME_GATE_CAPTURE_OR_EFFECT_WITNESS",
+  "run_grants": [
+    {
+      "stage": "ORIGIN_CAPTURE",
+      "count": 1,
+      "condition": "Existing origin validation/captured member association",
+      "grant_caller": "CoreOrchestrator.run"
+    },
+    {
+      "stage": "NORMALIZATION_VALIDATE",
+      "count": 1,
+      "condition": "Requested existing plan validation",
+      "grant_caller": "CoreOrchestrator.run"
+    },
+    {
+      "stage": "NORMALIZATION_CAPTURE",
+      "count": 1,
+      "condition": "Real normalizer scope admission",
+      "grant_caller": "CoreOrchestrator.run"
+    },
+    {
+      "stage": "NORMALIZATION_VALUE",
+      "count": 1,
+      "condition": "Actual bounded XOR",
+      "grant_caller": "StateModel.apply_normalization"
+    },
+    {
+      "stage": "NORMALIZATION_POST_CAPTURE",
+      "count": 1,
+      "condition": "Actual postvalidity/capture",
+      "grant_caller": "StateModel.apply_normalization"
+    },
+    {
+      "stage": "ORIGIN_CAPTURE",
+      "count": 1,
+      "condition": "Fresh actual normalized diagnosis",
+      "grant_caller": "CoreOrchestrator.run"
+    },
+    {
+      "stage": "COSMOLOGY",
+      "count": 1,
+      "condition": "Valid actual baseline read",
+      "grant_caller": "CoreOrchestrator.run"
+    },
+    {
+      "stage": "REALM_ACCESS",
+      "count": 1,
+      "condition": "Optional declared eligibility",
+      "grant_caller": "CoreOrchestrator.run"
+    },
+    {
+      "stage": "REALM_SHIFT_PROPOSAL",
+      "count": 1,
+      "condition": "Optional pure proposed shift",
+      "grant_caller": "CoreOrchestrator.run"
+    },
+    {
+      "stage": "SOURCE_ENCODING",
+      "count": 2,
+      "condition": "Pure computation then actual scope admission",
+      "grant_caller": "ReferenceGenerationRunner.run"
+    },
+    {
+      "stage": "CHAIN",
+      "count": 2,
+      "condition": "Bounded whole pure4step computation then actual scope admission",
+      "grant_caller": "ReferenceGenerationRunner.run"
+    },
+    {
+      "stage": "FINAL_DIAGNOSIS",
+      "count": 1,
+      "condition": "Fresh actual final diagnosis",
+      "grant_caller": "ReferenceGenerationRunner.run"
+    },
+    {
+      "stage": "DESTINATION_ENCODING",
+      "count": 2,
+      "condition": "Pure computation then scope admission",
+      "grant_caller": "ReferenceGenerationRunner.run"
+    },
+    {
+      "stage": "TOPOLOGY",
+      "count": 2,
+      "condition": "Pure computation then scope admission",
+      "grant_caller": "ReferenceGenerationRunner.run"
+    },
+    {
+      "stage": "AXIOMS",
+      "count": 2,
+      "condition": "Pure fivechecks then scope admission",
+      "grant_caller": "ReferenceGenerationRunner.run"
+    },
+    {
+      "stage": "PLANNER",
+      "count": 2,
+      "condition": "Pure plan then scope admission",
+      "grant_caller": "ReferenceGenerationRunner.run"
+    },
+    {
+      "stage": "PATTERN_PROJECTION",
+      "count": 1,
+      "condition": "Actual capturedplan profile interpretation",
+      "grant_caller": "CoreOrchestrator.run"
+    },
+    {
+      "stage": "NARRATIVE",
+      "count": 2,
+      "condition": "Evaluatearchetypes then interpret",
+      "grant_caller": "CoreOrchestrator.run"
+    },
+    {
+      "stage": "PERCEPTION",
+      "count": 1,
+      "condition": "Exact derivedoverlay",
+      "grant_caller": "CoreOrchestrator.run"
+    }
+  ],
+  "max_run_grants": 26,
+  "emit_grants": [
+    {
+      "stage": "EMISSION_PREPARE",
+      "count": 1,
+      "condition": "Before actual collector preparation",
+      "grant_caller": "ReferenceGenerationRunner.emit"
+    },
+    {
+      "stage": "EMISSION_PREPARE",
+      "count": 1,
+      "condition": "Before genuine emitter capture admission",
+      "grant_caller": "ReferenceArtifactEmitter.emit"
+    },
+    {
+      "stage": "EMISSION_DISPATCH",
+      "count": 8,
+      "condition": "One per8artifacts after matchingconfirmeddispatchTEN and beforeprivateactionlease",
+      "grant_caller": "ReferenceArtifactEmitter.emit"
+    }
+  ],
+  "depth5_eight_document_emit_grants": 10,
+  "ticket_limit": 64,
+  "no_additional_grants": [
+    "Eachcapture_dispositionread",
+    "Eachactualrecordappend tokencheck",
+    "Onceactualfirstfinish cleanup",
+    "Onceactualfinalobserver cleanup",
+    "Return audit"
+  ],
+  "over_limit": "TypedCore preflightRESOURCE_LIMIT beforefollowingstage/effect; retainactualprefix/oncecleanup,no capacityexpand",
+  "pure_call_boundary": "Onegrantedboundedpurekernel may physicallycompleteafterstop; actuallatevalue retained,a followingtop-levelordinarycompute/capture/dispatch denied. No lifecyclecallbackinsidepurekernel.",
+  "source_codeword_sha256": "d875e5c83d594d4e4ce856f97bce300870e4f027015d0aab9b05f3f38f37853d",
+  "independent_test_profile": {
+    "profile_id": "CORE_H4_NONTRIVIAL_NORMALIZE_CHAIN_TEST_001",
+    "recognized_valid_signatures": [
+      "000000000",
+      "000011110",
+      "001100110",
+      "001111000"
+    ],
+    "reference_state_signatures": [
+      "000000000",
+      "000011110",
+      "001100110",
+      "001111000"
+    ]
+  },
+  "profile_compact_sha256": "f32952938af582632ad5e1f5f7046b39c2ab191ce2591f5ecc64a8f4986eb436",
+  "original_tc_signature": "010101010",
+  "normalization_target_signature": "000000000",
+  "actual_normalization_expected_codeword": "010101010",
+  "four_step_expected_chain": [
+    {
+      "transition_id": "ash_codeword_01",
+      "input_signature": "000000000",
+      "candidate_signature": "000011110"
+    },
+    {
+      "transition_id": "ash_codeword_01",
+      "input_signature": "000011110",
+      "candidate_signature": "000000000"
+    },
+    {
+      "transition_id": "ash_codeword_02",
+      "input_signature": "000000000",
+      "candidate_signature": "001100110"
+    },
+    {
+      "transition_id": "ash_codeword_02",
+      "input_signature": "001100110",
+      "candidate_signature": "000000000"
+    }
+  ],
+  "topology_depth": 5,
+  "expected_frontier_nodes": 243,
+  "expected_manifest_pages": 8,
+  "runtime_obligation": "Exerciseactualrequestednormalization/fulloncecompletion+freshroot+4validsteps+capture+8memorydocumenteffects underexactnewsource/gates/globalcaps; actual currentproposalproof doesnotclaimthoseeffects.",
+  "run_grant_partition": {
+    "CoreOrchestrator.run": 11,
+    "StateModel.apply_normalization": 2,
+    "ReferenceGenerationRunner.run": 13
+  },
+  "emit_grant_partition": {
+    "CoreOrchestrator.emit": 0,
+    "ReferenceGenerationRunner.emit": 1,
+    "ReferenceArtifactEmitter.emit": 9
+  },
+  "no_double_grant": "Core entry/admission and child-gate issuance do not repeat grants performed inside the named normalizer/runner/emitter owner. Token checks consume no grant."
+}

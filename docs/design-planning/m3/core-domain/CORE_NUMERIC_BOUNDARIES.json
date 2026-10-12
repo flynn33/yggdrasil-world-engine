@@ -1,0 +1,381 @@
+{
+  "scope": "INDEPENDENT_AUTHORED_POLICY_ORACLES; newCore runtime doesnotexist; no runtimeeffect/sourceACK/persistenceclaim.",
+  "normalization_cases": [
+    {
+      "input": [
+        [
+          "a",
+          1
+        ],
+        [
+          "b",
+          1
+        ],
+        [
+          "c",
+          1
+        ]
+      ],
+      "expected": {
+        "a": 333334,
+        "b": 333333,
+        "c": 333333
+      }
+    },
+    {
+      "input": [
+        [
+          "a",
+          0
+        ],
+        [
+          "b",
+          1
+        ]
+      ],
+      "expected": {
+        "a": 0,
+        "b": 1000000
+      }
+    },
+    {
+      "input": [
+        [
+          "a",
+          1
+        ],
+        [
+          "b",
+          2
+        ]
+      ],
+      "expected": {
+        "a": 333333,
+        "b": 666667
+      }
+    },
+    {
+      "input": [
+        [
+          "a",
+          999999
+        ],
+        [
+          "b",
+          1
+        ]
+      ],
+      "expected": {
+        "a": 999999,
+        "b": 1
+      }
+    },
+    {
+      "input": [
+        [
+          "a",
+          0
+        ],
+        [
+          "b",
+          0
+        ]
+      ],
+      "expected": null
+    }
+  ],
+  "normalization_order_and_exactsum_property_cases": 125,
+  "nearest_ties_even": [
+    {
+      "numerator": 500000,
+      "denominator": 1000000,
+      "expected": 0
+    },
+    {
+      "numerator": 1500000,
+      "denominator": 1000000,
+      "expected": 2
+    },
+    {
+      "numerator": 2500000,
+      "denominator": 1000000,
+      "expected": 2
+    },
+    {
+      "numerator": -500000,
+      "denominator": 1000000,
+      "expected": 0
+    },
+    {
+      "numerator": -1500000,
+      "denominator": 1000000,
+      "expected": -2
+    },
+    {
+      "numerator": -2500000,
+      "denominator": 1000000,
+      "expected": -2
+    },
+    {
+      "numerator": 499999,
+      "denominator": 1000000,
+      "expected": 0
+    },
+    {
+      "numerator": 500001,
+      "denominator": 1000000,
+      "expected": 1
+    }
+  ],
+  "threshold_neighbors": [
+    {
+      "rule": "SECONDARY_MINIMUM",
+      "value_q6": 799999,
+      "expected": false
+    },
+    {
+      "rule": "SECONDARY_MINIMUM",
+      "value_q6": 800000,
+      "expected": true
+    },
+    {
+      "rule": "SECONDARY_MINIMUM",
+      "value_q6": 800001,
+      "expected": true
+    },
+    {
+      "rule": "DOMINANT_MINIMUM",
+      "value_q6": 1199999,
+      "expected": false
+    },
+    {
+      "rule": "DOMINANT_MINIMUM",
+      "value_q6": 1200000,
+      "expected": true
+    },
+    {
+      "rule": "DOMINANT_MINIMUM",
+      "value_q6": 1200001,
+      "expected": true
+    },
+    {
+      "rule": "CLUSTER_ACTIVATION_MINIMUM",
+      "value_q6": 2099999,
+      "expected": false
+    },
+    {
+      "rule": "CLUSTER_ACTIVATION_MINIMUM",
+      "value_q6": 2100000,
+      "expected": true
+    },
+    {
+      "rule": "CLUSTER_ACTIVATION_MINIMUM",
+      "value_q6": 2100001,
+      "expected": true
+    },
+    {
+      "rule": "CLUSTER_MEMBER_STRICT_ABOVE_SECONDARY",
+      "value_q6": 799999,
+      "expected": false
+    },
+    {
+      "rule": "CLUSTER_MEMBER_STRICT_ABOVE_SECONDARY",
+      "value_q6": 800000,
+      "expected": false
+    },
+    {
+      "rule": "CLUSTER_MEMBER_STRICT_ABOVE_SECONDARY",
+      "value_q6": 800001,
+      "expected": true
+    }
+  ],
+  "cluster_cases": [
+    {
+      "members": [
+        900000,
+        900000
+      ],
+      "stability": 200000,
+      "expected": 2000000,
+      "activated": false
+    },
+    {
+      "members": [
+        950000,
+        950000
+      ],
+      "stability": 200000,
+      "expected": 2100000,
+      "activated": true
+    },
+    {
+      "members": [
+        1100000,
+        1100000
+      ],
+      "stability": -100000,
+      "expected": 2100000,
+      "activated": true
+    }
+  ],
+  "selection_sha256_case": {
+    "canonical_digest_input_ascii": "{\"algorithm\":\"YWE.CORE.SELECT.V1\",\"binding_hash\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"context_hash\":\"1111111111111111111111111111111111111111111111111111111111111111\",\"counter\":0,\"domain\":\"realm-choice\",\"seed_token\":\"core-seed\"}",
+    "sha256": "06381798ad24b284655fd6c51333932a4d32eef1a32461653a1a90f6f0b95867",
+    "draw_uint64": 448134107430695556,
+    "total": 10,
+    "slot": 6,
+    "expected_selected_id": "c"
+  },
+  "rejection_draw_controls": [
+    {
+      "total": 1,
+      "draw": 0,
+      "threshold": 18446744073709551616,
+      "accepted": true,
+      "slot": 0
+    },
+    {
+      "total": 1,
+      "draw": 18446744073709551615,
+      "threshold": 18446744073709551616,
+      "accepted": true,
+      "slot": 0
+    },
+    {
+      "total": 3,
+      "draw": 0,
+      "threshold": 18446744073709551615,
+      "accepted": true,
+      "slot": 0
+    },
+    {
+      "total": 3,
+      "draw": 18446744073709551614,
+      "threshold": 18446744073709551615,
+      "accepted": true,
+      "slot": 2
+    },
+    {
+      "total": 3,
+      "draw": 18446744073709551615,
+      "threshold": 18446744073709551615,
+      "accepted": false,
+      "slot": null
+    },
+    {
+      "total": 64000000,
+      "draw": 0,
+      "threshold": 18446744073664000000,
+      "accepted": true,
+      "slot": 0
+    },
+    {
+      "total": 64000000,
+      "draw": 18446744073663999999,
+      "threshold": 18446744073664000000,
+      "accepted": true,
+      "slot": 63999999
+    },
+    {
+      "total": 64000000,
+      "draw": 18446744073664000000,
+      "threshold": 18446744073664000000,
+      "accepted": false,
+      "slot": null
+    },
+    {
+      "total": 64000000,
+      "draw": 18446744073709551615,
+      "threshold": 18446744073664000000,
+      "accepted": false,
+      "slot": null
+    }
+  ],
+  "sixteen_rejections_total3": "PENDING/CORE_SELECTION_EXHAUSTED; no selectedid",
+  "selection_bounds": {
+    "maxoptions": 64,
+    "maxweight": 1000000,
+    "maximum_total": 64000000,
+    "above_maximum": "BOUNDARY_REFUSAL_BEFORE_HASH_OR_DIVISION",
+    "all_zero": "NO_OP/CORE_NO_POSITIVE_WEIGHT"
+  },
+  "decay_cases": [
+    {
+      "weight": 3,
+      "retention_q6": 500000,
+      "steps": 1,
+      "expected": 1
+    },
+    {
+      "weight": 3,
+      "retention_q6": 500000,
+      "steps": 2,
+      "expected": 0
+    },
+    {
+      "weight": 1000000,
+      "retention_q6": 1000000,
+      "steps": 1024,
+      "expected": 1000000
+    }
+  ],
+  "merge_cases": [
+    {
+      "contributions": [
+        900000,
+        900000,
+        -1000000
+      ],
+      "expected_final": 800000,
+      "rule": "Sumallthenclamp; pereventclampingwouldincorrectlyproduce0"
+    },
+    {
+      "contributions": [
+        -500000,
+        300000
+      ],
+      "expected_final": 0
+    },
+    {
+      "duplicate_event_id": "samebody",
+      "expected": "EXACT_DEDUP"
+    },
+    {
+      "duplicate_event_id": "differentbody",
+      "expected": "REFUSED_CORE_FACT_CONFLICT"
+    }
+  ],
+  "truth_conflict_controls": [
+    {
+      "same_fact_id": true,
+      "same_scope": false,
+      "same_subject": true,
+      "expected": "DISTINCT_OBSERVATIONS"
+    },
+    {
+      "same_fact_id": true,
+      "same_scope": true,
+      "same_subject": false,
+      "expected": "DISTINCT_OBSERVATIONS"
+    },
+    {
+      "same_fact_id": true,
+      "same_scope": true,
+      "same_subject": true,
+      "same_objective_tier": true,
+      "different_value": true,
+      "expected": "REFUSED_CORE_FACT_CONFLICT"
+    }
+  ],
+  "lifecycle_controls": [
+    "InitialSTOPPED0closedfalse->startACTIVE1",
+    "FailedstartFAILED1; no sameinstancerestart",
+    "stoplatchSTOPPINGgeneration+1beforecleanup",
+    "finalSTOPPEDsamegenerationafteractualinflightclosure",
+    "stoprequestreplaysoriginalPENDINGreceiptwhileauthoritativestatusmaynowSTOPPED",
+    "UINT64MAX-1stop->MAX; no wrap",
+    "UINT64MAX-1startrefuses_reservedstop",
+    "exactcopiedunissuedticketrefusesbeforehooks",
+    "Eventcontrolledotherthreadstoprevokesnextstagewithoutwaitingblockedcallback"
+  ]
+}

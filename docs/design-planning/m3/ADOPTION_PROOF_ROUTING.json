@@ -1,0 +1,55 @@
+{
+  "status": "ADOPTION_PROOF_PATH_ROUTING_ONLY_NOT_RUNTIME_ACCEPTANCE",
+  "renamed": [
+    {
+      "original_review_path": "docs/design-planning/m3/current-source-session/SCHEMA_CONTROL.json",
+      "adopted_path": "docs/design-planning/m3/current-source-session/FORMAT_CONTROL.json",
+      "sha256": "b02f9015aafcaccb6dd01b20115834a6aced47f5ef504ddd1933119aae86b95c",
+      "bytes_unchanged": true
+    },
+    {
+      "original_review_path": "docs/design-planning/m3/current-source-session/SCHEMA_COMPLETION_REVIEW_RECEIPT.json",
+      "adopted_path": "docs/design-planning/m3/current-source-session/FORMAT_COMPLETION_REVIEW_RECEIPT.json",
+      "sha256": "e9a415ffc72846d722f6810aebd52a74b7637477bdd286192f30262692efd5d5",
+      "bytes_unchanged": true
+    },
+    {
+      "original_review_path": "docs/design-planning/m3/current-source-session/JOINT_SCHEMA_REVIEW_RECEIPT.json",
+      "adopted_path": "docs/design-planning/m3/current-source-session/JOINT_FORMAT_REVIEW_RECEIPT.json",
+      "sha256": "eeb73b6f1694d7c25e059dad8f278befdf1a712aae675fbdb1a672105f0a2ff1",
+      "bytes_unchanged": true
+    },
+    {
+      "original_review_path": "docs/design-planning/m3/planner-emitter/SCHEMA_SOURCE_ROUTING_RECEIPT.json",
+      "adopted_path": "docs/design-planning/m3/planner-emitter/FORMAT_SOURCE_ROUTING_RECEIPT.json",
+      "sha256": "0a1c56b3d11b7989457361698af046cdb07cb27742036df38232217a1ee0fce6",
+      "bytes_unchanged": true
+    },
+    {
+      "original_review_path": "docs/design-planning/m3/planner-emitter/proposal-evidence/OFFLINE_SCHEMA_PROOF_RECEIPT.json",
+      "adopted_path": "docs/design-planning/m3/planner-emitter/proposal-evidence/OFFLINE_FORMAT_PROOF_RECEIPT.json",
+      "sha256": "522f7f52ce6937d25db21a6c230765b70af763b193ddef043f17370f39b5cec9",
+      "bytes_unchanged": true
+    }
+  ],
+  "omitted_redundant_inputs": [
+    {
+      "original_review_path": "docs/design-planning/m3/current-source-session/SAFE_SIDECAR_SCHEMA.json",
+      "sha256": "d57e4f00708f12de5ba9a54c7372c3d127e278c65991724e136ca8cc771a27fb",
+      "frozen_external_original_preserved": true,
+      "reason": "Exact current leaf definitions belong to the single governed merged bundle; no runtime consumer of this predecessor resource."
+    },
+    {
+      "original_review_path": "docs/design-planning/m3/current-source-session/CURRENT_SUPPORT_SCHEMA.json",
+      "sha256": "bcaa93dad26c3dcbcf3ce66643cbaa9d8449f13b3bfb5daf8942a979156404eb",
+      "frozen_external_original_preserved": true,
+      "reason": "Exact current leaf definitions belong to the single governed merged bundle; no runtime consumer of this predecessor resource."
+    }
+  ],
+  "historical_review_receipt_contents_preserved": true,
+  "frozen_indexes": {
+    "planner_emitter_r2": "7ccc71ad5a0ee8864650a7e5004a6a75fcf406de04b0ee92eae3a816247b1ab5",
+    "core_r3": "f04c9ea2c2acd2d027a37d4dcda279a61fa94d6f6bc3413d4596d4d296a826cc",
+    "session_r3": "13fc7b5bbbe0f06e765dedd417c241a9ef013f8d0cbae81771865d35d11a3df2"
+  }
+}

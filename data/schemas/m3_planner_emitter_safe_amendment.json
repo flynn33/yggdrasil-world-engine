@@ -1,0 +1,2756 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m3_planner_emitter_safe_amendment.json",
+  "$defs": {
+    "PRODUCER_CONTEXT": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation_reference",
+        "producer",
+        "origin_assessment_reference",
+        "origin_diagnostic_reference",
+        "origin_completion_reference",
+        "root_reference",
+        "predecessor_reference",
+        "source_reference",
+        "profile_reference",
+        "dependency_operation_references",
+        "binding_status",
+        "capture_assurance"
+      ],
+      "properties": {
+        "operation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "producer": {
+          "type": "string",
+          "enum": [
+            "REALM_ENCODER",
+            "TRANSITION_REGISTRY",
+            "TOPOLOGY_GENERATOR",
+            "AXIOM_EVALUATOR",
+            "GENERATION_PLANNER",
+            "ARTIFACT_EMITTER"
+          ]
+        },
+        "origin_assessment_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "origin_diagnostic_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "origin_completion_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "root_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "predecessor_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "source_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "profile_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "dependency_operation_references": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 6
+        },
+        "binding_status": {
+          "type": "string",
+          "enum": [
+            "FULL_CURRENT_BINDINGS_MATCH",
+            "SUBMITTED_BINDINGS_REJECTED"
+          ]
+        },
+        "capture_assurance": {
+          "type": "string",
+          "enum": [
+            "ACTUAL_COMPLETED_ORIGIN",
+            "UNAVAILABLE_OR_FOREIGN_ORIGIN"
+          ]
+        }
+      }
+    },
+    "PRODUCER_SOURCE": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_evidence_reference",
+        "profile_evidence_reference",
+        "contract_pins",
+        "diagnostics_contract_sha256",
+        "diagnostic_schema_sha256",
+        "taxonomy_sha256",
+        "source_baseline",
+        "source_assurance",
+        "module_policy_references"
+      ],
+      "properties": {
+        "canonical_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "profile_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "contract_pins": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path_reference",
+              "sha256"
+            ],
+            "properties": {
+              "path_reference": {
+                "type": "string",
+                "pattern": "^ref:[0-9]{6}$",
+                "maxLength": 10
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$",
+                "maxLength": 64
+              }
+            }
+          },
+          "maxItems": 11
+        },
+        "diagnostics_contract_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "maxLength": 64
+        },
+        "diagnostic_schema_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "maxLength": 64
+        },
+        "taxonomy_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "maxLength": 64
+        },
+        "source_baseline": {
+          "type": "string",
+          "enum": [
+            "M3_MODULES"
+          ],
+          "const": "M3_MODULES"
+        },
+        "source_assurance": {
+          "type": "string",
+          "enum": [
+            "HOST_VERIFIED_COMPLETE_VECTOR",
+            "RECOGNIZED_COMPLETE_VECTOR"
+          ]
+        },
+        "module_policy_references": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 4
+        }
+      }
+    },
+    "PRODUCER_OPERATION": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "context_reference",
+        "producer",
+        "semantic_status",
+        "constructed_record_references",
+        "attempted_event_indices",
+        "confirmed_event_indices",
+        "pending_record_references",
+        "output_references",
+        "completion_observation_reference",
+        "capture_status",
+        "failure_code"
+      ],
+      "properties": {
+        "context_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "producer": {
+          "type": "string",
+          "enum": [
+            "REALM_ENCODER",
+            "TRANSITION_REGISTRY",
+            "TOPOLOGY_GENERATOR",
+            "AXIOM_EVALUATOR",
+            "GENERATION_PLANNER",
+            "ARTIFACT_EMITTER"
+          ]
+        },
+        "semantic_status": {
+          "type": "string",
+          "enum": [
+            "COMPLETE_SEMANTICS",
+            "REJECTED_INPUT",
+            "CONSTRUCTED_PREFIX_ONLY"
+          ]
+        },
+        "constructed_record_references": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 65
+        },
+        "attempted_event_indices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "maxItems": 65
+        },
+        "confirmed_event_indices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "maxItems": 65
+        },
+        "pending_record_references": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 65
+        },
+        "output_references": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 6
+        },
+        "completion_observation_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "capture_status": {
+          "type": "string",
+          "enum": [
+            "COMPLETE",
+            "INCOMPLETE",
+            "NOT_CONFIRMED"
+          ]
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "MODULE_ORIGIN_UNAVAILABLE",
+                "MODULE_REQUIRED_RECORD_MISSING",
+                "MODULE_CAPTURE_UNCONFIRMED",
+                "MODULE_RAW_PACKET_LIMIT",
+                "MODULE_PLAN_POLICY_UNAVAILABLE"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCER_FINAL_OBSERVATION": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation_reference",
+        "tentative_operation_reference",
+        "actual_result_reference",
+        "completion_observation_reference",
+        "first_finish_status",
+        "semantic_status",
+        "capture_status",
+        "failure_code"
+      ],
+      "properties": {
+        "operation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "tentative_operation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "actual_result_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "completion_observation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "first_finish_status": {
+          "type": "string",
+          "enum": [
+            "COMPLETE",
+            "INCOMPLETE",
+            "NOT_CONFIRMED"
+          ]
+        },
+        "semantic_status": {
+          "type": "string",
+          "enum": [
+            "COMPLETE_SEMANTICS",
+            "REJECTED_INPUT",
+            "CONSTRUCTED_PREFIX_ONLY"
+          ]
+        },
+        "capture_status": {
+          "type": "string",
+          "enum": [
+            "COMPLETE",
+            "INCOMPLETE",
+            "NOT_CONFIRMED"
+          ]
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "MODULE_ORIGIN_UNAVAILABLE",
+                "MODULE_REQUIRED_RECORD_MISSING",
+                "MODULE_CAPTURE_UNCONFIRMED",
+                "MODULE_RAW_PACKET_LIMIT",
+                "MODULE_PLAN_POLICY_UNAVAILABLE"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCER_RECORD": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "context_reference",
+        "diagnostic_reference",
+        "payload_reference",
+        "producer",
+        "record_index",
+        "current_impact",
+        "phase",
+        "result",
+        "input_state",
+        "output_state",
+        "codeword",
+        "is_applicable",
+        "verification_status",
+        "admissibility_status",
+        "selection_kind",
+        "selected_definition_reference",
+        "value_reference",
+        "actual_pure_target_diagnostic",
+        "omitted_fields"
+      ],
+      "properties": {
+        "context_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "diagnostic_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "payload_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "producer": {
+          "type": "string",
+          "enum": [
+            "REALM_ENCODER",
+            "TRANSITION_REGISTRY",
+            "TOPOLOGY_GENERATOR",
+            "AXIOM_EVALUATOR",
+            "GENERATION_PLANNER",
+            "ARTIFACT_EMITTER"
+          ]
+        },
+        "record_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 64
+        },
+        "current_impact": {
+          "type": "string",
+          "enum": [
+            "INFO",
+            "WARNING",
+            "ERROR",
+            "CRITICAL"
+          ]
+        },
+        "phase": {
+          "type": "string",
+          "enum": [
+            "INPUT_VALIDATION",
+            "IDENTITY_ENCODING",
+            "DEFINITION_APPLICABILITY",
+            "SELECTED_MEMBERSHIP",
+            "SELECTED_APPLICABILITY",
+            "FULL_VECTOR_TRANSFORMATION",
+            "TOPOLOGY_EXPANSION",
+            "AXIOM_CHECK",
+            "INPUT_REFUSAL",
+            "PLAN_BUILD",
+            "ARTIFACT_DISPATCH",
+            "ARTIFACT_RECEIPT",
+            "OPERATION_SUMMARY"
+          ]
+        },
+        "result": {
+          "type": "string",
+          "enum": [
+            "SUCCEEDED",
+            "REFUSED",
+            "INAPPLICABLE",
+            "FAILED",
+            "UNCONFIRMED"
+          ]
+        },
+        "input_state": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[01]{9}$",
+              "maxLength": 9
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "output_state": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[01]{9}$",
+              "maxLength": 9
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "codeword": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[01]{9}$",
+              "maxLength": 9
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "is_applicable": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "verification_status": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "VERIFIED",
+                "REJECTED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "admissibility_status": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "VALID",
+                "TRANSFORMATION_COMPATIBLE",
+                "TRANSFORMATION_INCOMPATIBLE",
+                "UNCLASSIFIED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "selection_kind": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "TRANSITION_ID",
+                "CODEWORD"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "selected_definition_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "value_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actual_pure_target_diagnostic": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "input_state",
+                "admissibility_status",
+                "transformation_compatibility",
+                "normalization_status",
+                "recoverability_relevance",
+                "is_valid",
+                "orbit_info",
+                "rule_ids",
+                "notes"
+              ],
+              "properties": {
+                "input_state": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "kind",
+                    "state",
+                    "input_reference",
+                    "failure_code"
+                  ],
+                  "properties": {
+                    "kind": {
+                      "type": "string",
+                      "enum": [
+                        "ASH_STATE",
+                        "REJECTED"
+                      ]
+                    },
+                    "state": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "pattern": "^[01]{9}$",
+                          "minLength": 9,
+                          "maxLength": 9
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "input_reference": {
+                      "type": "string",
+                      "pattern": "^ref:[0-9]{6}$",
+                      "minLength": 10,
+                      "maxLength": 10
+                    },
+                    "failure_code": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "enum": [
+                            "INPUT_DEPTH_LIMIT",
+                            "INPUT_JSON_DUPLICATE_KEY",
+                            "INPUT_JSON_INVALID",
+                            "INPUT_JSON_NONFINITE",
+                            "INPUT_KIND_UNSUPPORTED",
+                            "INPUT_NUMERIC_TOKEN_INVALID",
+                            "INPUT_RECORD_INVALID",
+                            "INPUT_RECORD_KEY_INVALID",
+                            "INPUT_RECORD_SIZE_LIMIT",
+                            "INPUT_SIGNATURE_INVALID",
+                            "INPUT_SIZE_LIMIT",
+                            "INPUT_STATE_SPACE_INVALID",
+                            "INPUT_TOKEN_LIMIT",
+                            "INPUT_UTF8_INVALID",
+                            "STATE_COORDINATE_TYPE",
+                            "STATE_COORDINATE_VALUE",
+                            "STATE_WIDTH"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "admissibility_status": {
+                  "type": "string",
+                  "enum": [
+                    "VALID",
+                    "TRANSFORMATION_COMPATIBLE",
+                    "TRANSFORMATION_INCOMPATIBLE",
+                    "UNCLASSIFIED"
+                  ]
+                },
+                "transformation_compatibility": {
+                  "type": "string",
+                  "enum": [
+                    "COMPATIBLE",
+                    "INCOMPATIBLE",
+                    "UNKNOWN"
+                  ]
+                },
+                "normalization_status": {
+                  "type": "string",
+                  "enum": [
+                    "ALREADY_VALID",
+                    "NORMALIZABLE",
+                    "NOT_NORMALIZABLE",
+                    "BLOCKED"
+                  ]
+                },
+                "recoverability_relevance": {
+                  "type": "string",
+                  "enum": [
+                    "NO_RECOVERY_NEEDED",
+                    "RECOVERY_APPLICABLE",
+                    "NOT_RECOVERABLE",
+                    "CONTAINMENT_NEEDED"
+                  ]
+                },
+                "is_valid": {
+                  "type": "boolean"
+                },
+                "orbit_info": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "orbit_id",
+                        "member_count",
+                        "contains_known_valid_state"
+                      ],
+                      "properties": {
+                        "orbit_id": {
+                          "type": "string",
+                          "pattern": "^[01]{9}$",
+                          "minLength": 9,
+                          "maxLength": 9
+                        },
+                        "member_count": {
+                          "const": 16
+                        },
+                        "contains_known_valid_state": {
+                          "type": "boolean"
+                        }
+                      }
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "rule_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "ASH-ADMISSIBILITY-CLASSIFICATION-001",
+                      "ASH-CLASSIFICATION-MAPPING-001",
+                      "ASH-RECOVERY-ACTION-001",
+                      "ASH-STATE-GENERAL-001",
+                      "ASH-STATE-STRUCTURE-001",
+                      "ASH-STATE-VALIDITY-001"
+                    ]
+                  },
+                  "maxItems": 5
+                },
+                "notes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "Reference diagnostic session opened; capture is limited to the declared producers.",
+                      "Reference diagnostic session closed; retained evidence and coverage limitations remain explicit.",
+                      "The exact previously confirmed origin was attached by this collector; no origin record was emitted again.",
+                      "State validity was diagnosed under the explicit complete source and profile bindings.",
+                      "Contextual classification evaluated only the recorded context and consulted predicates.",
+                      "Actual full-vector normalization completed; post-validation acknowledgment is pending.",
+                      "Actual post-operation state was diagnosed and classified in its separately linked assessment chain.",
+                      "The consulted predicate or value step completed with the structured outcome shown in this record.",
+                      "Recovery was refused before unapproved effects; the original submitted evidence remains retained.",
+                      "Only a typed containment or halt request was produced; no runtime mode entry is claimed.",
+                      "A required diagnostic invariant failed; the related operation or record was not silently accepted.",
+                      "Capture did not acknowledge this attempted record; its external persistence remains unconfirmed.",
+                      "A whole declared retention range became unavailable; counts and boundary evidence are retained.",
+                      "The JSON and Markdown parts and manifest completed for one verified sanitized snapshot.",
+                      "The paired diagnostic export did not complete; retained part status and failure evidence are explicit.",
+                      "Untrusted producer prose, previews, paths and exception material were omitted before persistence."
+                    ]
+                  },
+                  "maxItems": 8
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "omitted_fields": {
+          "type": "string",
+          "enum": [
+            "CALLER_EXPLANATION_AND_IDENTIFIERS"
+          ],
+          "const": "CALLER_EXPLANATION_AND_IDENTIFIERS"
+        }
+      }
+    },
+    "REALM_IDENTITY": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state_signature",
+        "vertex_id",
+        "realm_id",
+        "orbit_id",
+        "identity_policy"
+      ],
+      "properties": {
+        "state_signature": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "maxLength": 9
+        },
+        "vertex_id": {
+          "type": "string",
+          "pattern": "^ash_state_[01]{9}$",
+          "maxLength": 19
+        },
+        "realm_id": {
+          "type": "string",
+          "pattern": "^ash_state_[01]{9}$",
+          "maxLength": 19
+        },
+        "orbit_id": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "maxLength": 9
+        },
+        "identity_policy": {
+          "type": "string",
+          "enum": [
+            "FULL_VECTOR_VERTEX_LOSSLESS_ALIAS"
+          ],
+          "const": "FULL_VECTOR_VERTEX_LOSSLESS_ALIAS"
+        }
+      }
+    },
+    "TRANSITION_REGISTRY": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registry_reference",
+        "source_reference",
+        "policy_reference",
+        "definitions",
+        "policy_status",
+        "ordering"
+      ],
+      "properties": {
+        "registry_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "source_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "definitions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 16
+        },
+        "policy_status": {
+          "type": "string",
+          "enum": [
+            "DECLARED_REFERENCE_POLICY",
+            "REJECTED_FOREIGN_POLICY"
+          ]
+        },
+        "ordering": {
+          "type": "string",
+          "enum": [
+            "CANONICAL_C16_ORDER"
+          ],
+          "const": "CANONICAL_C16_ORDER"
+        }
+      }
+    },
+    "TRANSITION_DEFINITION": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "definition_reference",
+        "registry_reference",
+        "transition_reference",
+        "codeword",
+        "catalog_index",
+        "applicability_mask",
+        "policy_reference",
+        "omitted_fields"
+      ],
+      "properties": {
+        "definition_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "registry_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "transition_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "codeword": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "maxLength": 9
+        },
+        "catalog_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15
+        },
+        "applicability_mask": {
+          "type": "string",
+          "pattern": "^[01]{512}$",
+          "minLength": 512,
+          "maxLength": 512
+        },
+        "policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "omitted_fields": {
+          "type": "string",
+          "enum": [
+            "DECLARED_DEFINITION_LABELS"
+          ],
+          "const": "DECLARED_DEFINITION_LABELS"
+        }
+      }
+    },
+    "TOPOLOGY": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "topology_reference",
+        "context_reference",
+        "input_state",
+        "seed_reference",
+        "seed_policy",
+        "depth",
+        "leaf_count",
+        "visited_count",
+        "pages",
+        "node_id_policy",
+        "frontier_policy",
+        "rules"
+      ],
+      "properties": {
+        "topology_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "context_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "input_state": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "maxLength": 9
+        },
+        "seed_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "seed_policy": {
+          "type": "string",
+          "enum": [
+            "ASCII_TOKEN_1_TO_32"
+          ],
+          "const": "ASCII_TOKEN_1_TO_32"
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "leaf_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 729
+        },
+        "visited_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1093
+        },
+        "pages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 46
+        },
+        "node_id_policy": {
+          "type": "string",
+          "enum": [
+            "TOPOLOGY_SEED_BASE3_PATH"
+          ],
+          "const": "TOPOLOGY_SEED_BASE3_PATH"
+        },
+        "frontier_policy": {
+          "type": "string",
+          "enum": [
+            "FINAL_FRONTIER_ONLY_BASE3_ORDER"
+          ],
+          "const": "FINAL_FRONTIER_ONLY_BASE3_ORDER"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ASH-TOPOLOGY-ADMISSION-001",
+              "ASH-TOPOLOGY-STRUCTURE-001",
+              "ASH-TOPOLOGY-EXPANSION-001",
+              "ASH-TOPOLOGY-ORDER-001",
+              "ASH-TOPOLOGY-LINEAGE-001"
+            ]
+          },
+          "maxItems": 5
+        }
+      }
+    },
+    "TOPOLOGY_PAGE": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "topology_reference",
+        "page_index",
+        "nodes"
+      ],
+      "properties": {
+        "topology_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "page_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 45
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "parent_path",
+              "kind",
+              "depth",
+              "frontier_ordinal"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "pattern": "^r[012]{0,6}$",
+                "maxLength": 7
+              },
+              "parent_path": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^r[012]{0,6}$",
+                    "maxLength": 7
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "ROOT",
+                  "CONTINUATION",
+                  "POSITIVE",
+                  "NEGATIVE"
+                ]
+              },
+              "depth": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 6
+              },
+              "frontier_ordinal": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 728
+              }
+            }
+          },
+          "maxItems": 16
+        }
+      }
+    },
+    "AXIOM_SUBJECT": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject_reference",
+        "state",
+        "relation_count",
+        "scale_count",
+        "raw_measure",
+        "compressed_measure",
+        "erasure_cost",
+        "self_reference_capable",
+        "self_model_available",
+        "source_kind",
+        "source_reference",
+        "method_id_reference",
+        "method_revision_reference",
+        "origin_diagnosis_reference"
+      ],
+      "properties": {
+        "subject_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "state": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "maxLength": 9
+        },
+        "relation_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "scale_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "raw_measure": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ticks",
+            "unit",
+            "ticks_per_unit"
+          ],
+          "properties": {
+            "ticks": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9223372036854775807
+            },
+            "unit": {
+              "type": "string",
+              "enum": [
+                "STRUCTURE_TICK",
+                "ERASURE_TICK"
+              ]
+            },
+            "ticks_per_unit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000000
+            }
+          }
+        },
+        "compressed_measure": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ticks",
+            "unit",
+            "ticks_per_unit"
+          ],
+          "properties": {
+            "ticks": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9223372036854775807
+            },
+            "unit": {
+              "type": "string",
+              "enum": [
+                "STRUCTURE_TICK",
+                "ERASURE_TICK"
+              ]
+            },
+            "ticks_per_unit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000000
+            }
+          }
+        },
+        "erasure_cost": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ticks",
+            "unit",
+            "ticks_per_unit"
+          ],
+          "properties": {
+            "ticks": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9223372036854775807
+            },
+            "unit": {
+              "type": "string",
+              "enum": [
+                "STRUCTURE_TICK",
+                "ERASURE_TICK"
+              ]
+            },
+            "ticks_per_unit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000000
+            }
+          }
+        },
+        "self_reference_capable": {
+          "type": "boolean"
+        },
+        "self_model_available": {
+          "type": "boolean"
+        },
+        "source_kind": {
+          "type": "string",
+          "enum": [
+            "DECLARED_REFERENCE_INPUT"
+          ],
+          "const": "DECLARED_REFERENCE_INPUT"
+        },
+        "source_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "method_id_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "method_revision_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "origin_diagnosis_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        }
+      }
+    },
+    "AXIOM_CHECK": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject_reference",
+        "axiom_id",
+        "passed",
+        "current_impact",
+        "operator",
+        "operand_names",
+        "overall_pass",
+        "explanation_code"
+      ],
+      "properties": {
+        "subject_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "axiom_id": {
+          "type": "string",
+          "enum": [
+            "A1_RELATIONAL_EXISTENCE",
+            "A2_STRUCTURAL_COMPRESSIBILITY",
+            "A3_MULTI_SCALE_PERSISTENCE",
+            "A4_ENERGETIC_COST_OF_ERASURE",
+            "A5_SELF_REFERENCE_FOR_CONSCIOUSNESS"
+          ]
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "current_impact": {
+          "type": "string",
+          "enum": [
+            "INFO",
+            "WARNING"
+          ]
+        },
+        "operator": {
+          "type": "string",
+          "enum": [
+            "GREATER_THAN_ZERO",
+            "LESS_THAN_SAME_QUANTUM",
+            "GREATER_THAN_ONE",
+            "BOOLEAN_CONJUNCTION"
+          ]
+        },
+        "operand_names": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "RELATION_COUNT",
+              "COMPRESSED_MEASURE",
+              "RAW_MEASURE",
+              "SCALE_COUNT",
+              "ERASURE_COST",
+              "SELF_REFERENCE_CAPABLE",
+              "SELF_MODEL_AVAILABLE"
+            ]
+          },
+          "maxItems": 2
+        },
+        "overall_pass": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "explanation_code": {
+          "type": "string",
+          "enum": [
+            "CHECK_PASSED",
+            "CHECK_FAILED",
+            "SUBJECT_UNITS_REJECTED",
+            "SUBJECT_STATE_REJECTED"
+          ]
+        }
+      }
+    },
+    "GENERATION_PLAN": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plan_reference",
+        "context_reference",
+        "normalized_state",
+        "source_identity_state",
+        "destination_identity_state",
+        "topology_reference",
+        "axiom_operation_reference",
+        "role_pages",
+        "artifact_pages",
+        "target_constraints_reference",
+        "profile_reference",
+        "naming_policy_reference",
+        "role_policy_reference",
+        "subject_policy_reference",
+        "artifact_policy_reference",
+        "warnings",
+        "metadata_references",
+        "boundary"
+      ],
+      "properties": {
+        "plan_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "context_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "normalized_state": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "maxLength": 9
+        },
+        "source_identity_state": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "maxLength": 9
+        },
+        "destination_identity_state": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "maxLength": 9
+        },
+        "topology_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "axiom_operation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "role_pages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 46
+        },
+        "artifact_pages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 2
+        },
+        "target_constraints_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "profile_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "naming_policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "role_policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "subject_policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "artifact_policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "AXIOM_CHECK_FAILED",
+              "TARGET_CONSTRAINT_UNSATISFIED",
+              "DECLARED_POLICY_LIMIT"
+            ]
+          },
+          "maxItems": 5
+        },
+        "metadata_references": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 16
+        },
+        "boundary": {
+          "type": "string",
+          "enum": [
+            "ABSTRACT_NO_EXTERNAL_EFFECTS"
+          ],
+          "const": "ABSTRACT_NO_EXTERNAL_EFFECTS"
+        }
+      }
+    },
+    "ROLE_PAGE": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plan_reference",
+        "page_index",
+        "assignments"
+      ],
+      "properties": {
+        "plan_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "page_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 45
+        },
+        "assignments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "node_path",
+              "role_reference",
+              "assignment_reference",
+              "policy_reference"
+            ],
+            "properties": {
+              "node_path": {
+                "type": "string",
+                "pattern": "^r[012]{0,6}$",
+                "maxLength": 7
+              },
+              "role_reference": {
+                "type": "string",
+                "pattern": "^ref:[0-9]{6}$",
+                "maxLength": 10
+              },
+              "assignment_reference": {
+                "type": "string",
+                "pattern": "^ref:[0-9]{6}$",
+                "maxLength": 10
+              },
+              "policy_reference": {
+                "type": "string",
+                "pattern": "^ref:[0-9]{6}$",
+                "maxLength": 10
+              }
+            }
+          },
+          "maxItems": 16
+        }
+      }
+    },
+    "ARTIFACT_PAGE": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plan_reference",
+        "page_index",
+        "artifacts"
+      ],
+      "properties": {
+        "plan_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "page_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "artifact_reference",
+              "plan_element_reference",
+              "kind",
+              "name_reference",
+              "role_references",
+              "content_reference",
+              "content_sha256",
+              "content_byte_count",
+              "semantic_policy_reference"
+            ],
+            "properties": {
+              "artifact_reference": {
+                "type": "string",
+                "pattern": "^ref:[0-9]{6}$",
+                "maxLength": 10
+              },
+              "plan_element_reference": {
+                "type": "string",
+                "pattern": "^ref:[0-9]{6}$",
+                "maxLength": 10
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "REFERENCE_DOCUMENT",
+                  "REFERENCE_MANIFEST"
+                ]
+              },
+              "name_reference": {
+                "type": "string",
+                "pattern": "^ref:[0-9]{6}$",
+                "maxLength": 10
+              },
+              "role_references": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^ref:[0-9]{6}$",
+                  "maxLength": 10
+                },
+                "maxItems": 16
+              },
+              "content_reference": {
+                "type": "string",
+                "pattern": "^ref:[0-9]{6}$",
+                "maxLength": 10
+              },
+              "content_sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$",
+                "maxLength": 64
+              },
+              "content_byte_count": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 32768
+              },
+              "semantic_policy_reference": {
+                "type": "string",
+                "pattern": "^ref:[0-9]{6}$",
+                "maxLength": 10
+              }
+            }
+          },
+          "maxItems": 16
+        }
+      }
+    },
+    "TARGET_CONSTRAINTS": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_reference",
+        "configuration_reference",
+        "constraints",
+        "target_kind",
+        "policy_reference"
+      ],
+      "properties": {
+        "target_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "configuration_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "constraint_reference",
+              "constraint_kind",
+              "status",
+              "value_reference",
+              "limit_value",
+              "unit"
+            ],
+            "properties": {
+              "constraint_reference": {
+                "type": "string",
+                "pattern": "^ref:[0-9]{6}$",
+                "maxLength": 10
+              },
+              "constraint_kind": {
+                "type": "string",
+                "enum": [
+                  "DECLARED_PLATFORM",
+                  "DECLARED_RUNTIME",
+                  "DECLARED_CAPABILITY",
+                  "DECLARED_LIMIT"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "SATISFIED",
+                  "UNSATISFIED",
+                  "UNAVAILABLE"
+                ]
+              },
+              "value_reference": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^ref:[0-9]{6}$",
+                    "maxLength": 10
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "limit_value": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 18446744073709551615
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "unit": {
+                "type": "string",
+                "enum": [
+                  "NOT_APPLICABLE",
+                  "COUNT",
+                  "BYTES"
+                ]
+              }
+            }
+          },
+          "maxItems": 16
+        },
+        "target_kind": {
+          "type": "string",
+          "enum": [
+            "REFERENCE_DOCUMENT_TARGET",
+            "REFERENCE_MANIFEST_TARGET"
+          ]
+        },
+        "policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        }
+      }
+    },
+    "EMISSION_OUTPUT": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plan_reference",
+        "artifact_reference",
+        "dispatch_reference",
+        "receipt_reference",
+        "target_reference",
+        "actual_status",
+        "actual_effects",
+        "expected_sha256",
+        "observed_sha256",
+        "expected_byte_count",
+        "observed_byte_count",
+        "materialization_policy_reference",
+        "failure_code"
+      ],
+      "properties": {
+        "plan_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "artifact_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "dispatch_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "receipt_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "target_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "actual_status": {
+          "type": "string",
+          "enum": [
+            "SUCCEEDED",
+            "FAILED",
+            "UNKNOWN",
+            "NO_EFFECT"
+          ]
+        },
+        "actual_effects": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "expected_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "maxLength": 64
+        },
+        "observed_sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$",
+              "maxLength": 64
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "expected_byte_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 32768
+        },
+        "observed_byte_count": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 32768
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "materialization_policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "EMITTER_EFFECT_UNCONFIRMED",
+                "EMITTER_TARGET_UNAVAILABLE",
+                "EMITTER_PLAN_INCOMPLETE",
+                "EMITTER_FIDELITY_FAILED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "GenerationSafe_PRODUCER_SOURCE": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_evidence_reference",
+        "profile_evidence_reference",
+        "contract_pins",
+        "diagnostics_contract_sha256",
+        "diagnostic_schema_sha256",
+        "taxonomy_sha256",
+        "source_baseline",
+        "source_assurance",
+        "module_policy_references",
+        "projection_version"
+      ],
+      "properties": {
+        "canonical_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "profile_evidence_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "contract_pins": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path_reference",
+              "sha256"
+            ],
+            "properties": {
+              "path_reference": {
+                "type": "string",
+                "pattern": "^ref:[0-9]{6}$",
+                "maxLength": 10
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$",
+                "maxLength": 64
+              }
+            }
+          },
+          "maxItems": 11
+        },
+        "diagnostics_contract_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "maxLength": 64
+        },
+        "diagnostic_schema_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "maxLength": 64
+        },
+        "taxonomy_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "maxLength": 64
+        },
+        "source_baseline": {
+          "const": "M3_GENERATION"
+        },
+        "source_assurance": {
+          "type": "string",
+          "enum": [
+            "HOST_VERIFIED_COMPLETE_VECTOR",
+            "RECOGNIZED_COMPLETE_VECTOR"
+          ]
+        },
+        "module_policy_references": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 4
+        },
+        "projection_version": {
+          "const": "M3_GENERATION_1_0"
+        }
+      }
+    },
+    "GenerationSafe_ROLE_PAGE": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plan_reference",
+        "page_index",
+        "assignments",
+        "projection_version"
+      ],
+      "properties": {
+        "plan_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "page_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 45
+        },
+        "assignments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "node_path",
+              "role_reference",
+              "assignment_reference",
+              "policy_reference",
+              "role_kind"
+            ],
+            "properties": {
+              "node_path": {
+                "type": "string",
+                "pattern": "^r[012]{0,6}$",
+                "maxLength": 7
+              },
+              "role_reference": {
+                "type": "string",
+                "pattern": "^ref:[0-9]{6}$",
+                "maxLength": 10
+              },
+              "assignment_reference": {
+                "type": "string",
+                "pattern": "^ref:[0-9]{6}$",
+                "maxLength": 10
+              },
+              "policy_reference": {
+                "type": "string",
+                "pattern": "^ref:[0-9]{6}$",
+                "maxLength": 10
+              },
+              "role_kind": {
+                "type": "string",
+                "enum": [
+                  "ROOT",
+                  "CONTINUATION",
+                  "POSITIVE",
+                  "NEGATIVE"
+                ]
+              }
+            }
+          },
+          "maxItems": 16
+        },
+        "projection_version": {
+          "const": "M3_GENERATION_1_0"
+        }
+      }
+    },
+    "GenerationSafe_GENERATION_PLAN": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plan_reference",
+        "context_reference",
+        "normalized_state",
+        "source_identity_state",
+        "destination_identity_state",
+        "topology_reference",
+        "axiom_operation_reference",
+        "role_pages",
+        "artifact_pages",
+        "target_constraints_reference",
+        "profile_reference",
+        "naming_policy_reference",
+        "role_policy_reference",
+        "subject_policy_reference",
+        "artifact_policy_reference",
+        "warnings",
+        "metadata_references",
+        "boundary",
+        "chain_operation_reference",
+        "source_diagnosis_reference",
+        "destination_diagnosis_reference",
+        "normalization_mode",
+        "emission_choice",
+        "target_runtime",
+        "projection_version"
+      ],
+      "properties": {
+        "plan_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "context_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "normalized_state": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "maxLength": 9
+        },
+        "source_identity_state": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "maxLength": 9
+        },
+        "destination_identity_state": {
+          "type": "string",
+          "pattern": "^[01]{9}$",
+          "maxLength": 9
+        },
+        "topology_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "axiom_operation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "role_pages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 46
+        },
+        "artifact_pages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 2
+        },
+        "target_constraints_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "profile_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "naming_policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "role_policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "subject_policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "artifact_policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "AXIOM_CHECK_FAILED",
+              "TARGET_CONSTRAINT_UNSATISFIED",
+              "DECLARED_POLICY_LIMIT"
+            ]
+          },
+          "maxItems": 5
+        },
+        "metadata_references": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 16
+        },
+        "boundary": {
+          "type": "string",
+          "enum": [
+            "ABSTRACT_NO_EXTERNAL_EFFECTS"
+          ],
+          "const": "ABSTRACT_NO_EXTERNAL_EFFECTS"
+        },
+        "chain_operation_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "source_diagnosis_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "destination_diagnosis_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "normalization_mode": {
+          "const": "ALREADY_VALID"
+        },
+        "emission_choice": {
+          "type": "string",
+          "enum": [
+            "REFERENCE_MANIFEST_PAGES",
+            "INSPECT_ONLY"
+          ]
+        },
+        "target_runtime": {
+          "const": "REFERENCE_MEMORY_DOCUMENTS"
+        },
+        "projection_version": {
+          "const": "M3_GENERATION_1_0"
+        }
+      }
+    },
+    "GenerationSafe_TARGET_CONSTRAINTS": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_reference",
+        "configuration_reference",
+        "constraints",
+        "target_kind",
+        "policy_reference",
+        "target_runtime",
+        "emission_choice",
+        "max_artifacts",
+        "max_document_bytes",
+        "max_total_document_bytes",
+        "allow_declared_axiom_failures",
+        "existing_document_policy",
+        "projection_version"
+      ],
+      "properties": {
+        "target_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "configuration_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "constraint_reference",
+              "constraint_kind",
+              "status",
+              "value_reference",
+              "limit_value",
+              "unit"
+            ],
+            "properties": {
+              "constraint_reference": {
+                "type": "string",
+                "pattern": "^ref:[0-9]{6}$",
+                "maxLength": 10
+              },
+              "constraint_kind": {
+                "type": "string",
+                "enum": [
+                  "DECLARED_PLATFORM",
+                  "DECLARED_RUNTIME",
+                  "DECLARED_CAPABILITY",
+                  "DECLARED_LIMIT"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "SATISFIED",
+                  "UNSATISFIED",
+                  "UNAVAILABLE"
+                ]
+              },
+              "value_reference": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^ref:[0-9]{6}$",
+                    "maxLength": 10
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "limit_value": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 18446744073709551615
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "unit": {
+                "type": "string",
+                "enum": [
+                  "NOT_APPLICABLE",
+                  "COUNT",
+                  "BYTES"
+                ]
+              }
+            }
+          },
+          "maxItems": 16
+        },
+        "target_kind": {
+          "type": "string",
+          "enum": [
+            "REFERENCE_DOCUMENT_TARGET",
+            "REFERENCE_MANIFEST_TARGET"
+          ]
+        },
+        "policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "target_runtime": {
+          "const": "REFERENCE_MEMORY_DOCUMENTS"
+        },
+        "emission_choice": {
+          "type": "string",
+          "enum": [
+            "REFERENCE_MANIFEST_PAGES",
+            "INSPECT_ONLY"
+          ]
+        },
+        "max_artifacts": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 32
+        },
+        "max_document_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 32768
+        },
+        "max_total_document_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1048576
+        },
+        "allow_declared_axiom_failures": {
+          "type": "boolean"
+        },
+        "existing_document_policy": {
+          "const": "EXACT_BYTES_IDEMPOTENT_OR_REFUSE"
+        },
+        "projection_version": {
+          "const": "M3_GENERATION_1_0"
+        }
+      }
+    },
+    "GenerationSafe_EMISSION_OUTPUT": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plan_reference",
+        "artifact_reference",
+        "dispatch_reference",
+        "receipt_reference",
+        "target_reference",
+        "actual_status",
+        "actual_effects",
+        "expected_sha256",
+        "observed_sha256",
+        "expected_byte_count",
+        "observed_byte_count",
+        "materialization_policy_reference",
+        "failure_code",
+        "target_revision_before",
+        "target_revision_after",
+        "readback_assurance",
+        "detail_failure_code",
+        "projection_version"
+      ],
+      "properties": {
+        "plan_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "artifact_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "dispatch_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "receipt_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "target_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "actual_status": {
+          "type": "string",
+          "enum": [
+            "SUCCEEDED",
+            "FAILED",
+            "UNKNOWN",
+            "NO_EFFECT"
+          ]
+        },
+        "actual_effects": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "expected_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "maxLength": 64
+        },
+        "observed_sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$",
+              "maxLength": 64
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "expected_byte_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 32768
+        },
+        "observed_byte_count": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 32768
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "materialization_policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "EMITTER_EFFECT_UNCONFIRMED",
+                "EMITTER_TARGET_UNAVAILABLE",
+                "EMITTER_PLAN_INCOMPLETE",
+                "EMITTER_FIDELITY_FAILED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "target_revision_before": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "target_revision_after": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "readback_assurance": {
+          "type": "string",
+          "enum": [
+            "OWNED_EXACT_READBACK",
+            "UNAVAILABLE"
+          ]
+        },
+        "detail_failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "DOCUMENT_CONFLICT",
+                "TARGET_RESOURCE_LIMIT",
+                "TARGET_BUSY",
+                "TARGET_STALE_REVISION",
+                "TARGET_RECEIPT_FOREIGN",
+                "TARGET_READBACK_MISMATCH",
+                "TARGET_INTERNAL_FAILURE",
+                "TARGET_EFFECT_UNKNOWN",
+                "COMMAND_CANCELLED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "projection_version": {
+          "const": "M3_GENERATION_1_0"
+        }
+      }
+    },
+    "GenerationSafe_TRANSITION_REGISTRY": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registry_reference",
+        "source_reference",
+        "policy_reference",
+        "definitions",
+        "policy_status",
+        "ordering",
+        "chain_status",
+        "chain_selections",
+        "source_proof_references",
+        "step_record_references",
+        "computed_step_count",
+        "failed_index",
+        "failed_phase",
+        "last_actual_candidate",
+        "chain_failure_code",
+        "projection_version"
+      ],
+      "properties": {
+        "registry_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "source_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "policy_reference": {
+          "type": "string",
+          "pattern": "^ref:[0-9]{6}$",
+          "maxLength": 10
+        },
+        "definitions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 16
+        },
+        "policy_status": {
+          "type": "string",
+          "enum": [
+            "DECLARED_REFERENCE_POLICY",
+            "REJECTED_FOREIGN_POLICY"
+          ]
+        },
+        "ordering": {
+          "type": "string",
+          "enum": [
+            "CANONICAL_C16_ORDER"
+          ],
+          "const": "CANONICAL_C16_ORDER"
+        },
+        "chain_status": {
+          "type": "string",
+          "enum": [
+            "NOT_CHAIN",
+            "COMPLETE",
+            "FAILED_PREFIX"
+          ]
+        },
+        "chain_selections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "selection_kind",
+              "submitted_identifier_reference",
+              "submitted_codeword"
+            ],
+            "properties": {
+              "selection_kind": {
+                "type": "string",
+                "enum": [
+                  "IDENTIFIER",
+                  "CODEWORD"
+                ]
+              },
+              "submitted_identifier_reference": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^ref:[0-9]{6}$",
+                    "maxLength": 10
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "submitted_codeword": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^[01]{9}$",
+                    "maxLength": 9
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "maxItems": 4
+        },
+        "source_proof_references": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ref:[0-9]{6}$",
+            "maxLength": 10
+          },
+          "maxItems": 4
+        },
+        "step_record_references": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "maxLength": 10
+            },
+            "maxItems": 3
+          },
+          "maxItems": 4
+        },
+        "computed_step_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "failed_index": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 3
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "failed_phase": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "VALID_SOURCE",
+                "SELECTION",
+                "APPLICABILITY",
+                "TRANSFORMATION"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "last_actual_candidate": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[01]{9}$",
+              "maxLength": 9
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "chain_failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "PROFILE_UNAVAILABLE",
+                "STATE_NOT_VALID",
+                "TRANSITION_UNKNOWN",
+                "CODEWORD_NOT_CANONICAL",
+                "TRANSITION_NOT_APPLICABLE",
+                "CHAIN_TARGET_NOT_VALID"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "projection_version": {
+          "const": "M3_GENERATION_1_0"
+        }
+      }
+    }
+  }
+}

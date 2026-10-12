@@ -1,0 +1,31 @@
+{
+  "status": "ACTUAL_EXISTING_SCHEMA_AND_FORMAT_CONTROLS_PASS",
+  "old_policy_lf_sha256": "24e2584279b95b8e3659bd61e6b5149311f344b03b981e88f74ae37775591910",
+  "unchanged_schema_definitions_against_actual_a345_git_blob": [
+    "SafeSupportingReference",
+    "SafeSessionHistoryPage",
+    "SafeSessionHistoryEvidence",
+    "SafeSessionBindingEvidence",
+    "SafeSessionSourceEvidence"
+  ],
+  "historical_source_owned_bundle_cases_validated": 3,
+  "historical_fixture_file_raw_sha256": "6383e52d072430f2630188c4ebd9473ce3b8859b79d76daf549dffaeeb3f5924",
+  "actual_current_schema_raw_sha256": "b63077b90a4a33bbcb6386fae1320f51302dca2390060c0c21f6fd465a31a414",
+  "historical_bound": {
+    "old_reference_leaf_bytes": 69,
+    "old_page_leaf_bytes": 12877,
+    "old_page_count": 40,
+    "old_nonpage_roots": 2504,
+    "old_pins": 2544,
+    "old_terminal_reservation": {
+      "events": 4,
+      "incidents": 1,
+      "aliases": 512,
+      "bytes": 655360,
+      "supporting_bytes": 425984
+    },
+    "new_page_policy_discriminator": "session_policy_version=1.1.0",
+    "old_safe_reference_and_page_definitions_unchanged": true
+  },
+  "scope": "Existing historical format/schema preservation and actual Git bytes only. No new policy or current Session runtime execution."
+}

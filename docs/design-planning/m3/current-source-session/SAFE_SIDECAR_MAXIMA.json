@@ -1,0 +1,118 @@
+{
+  "scope": "synthetic Cartesian maxima not accepted owned values or native outcomes",
+  "leaves": {
+    "SafeSessionModuleLinkEvidence": {
+      "evidence_reference": "ref:999999",
+      "session_binding_reference": "ref:999999",
+      "session_reference": "ref:999999",
+      "request_reference": "ref:999999",
+      "lease_reference": "ref:999999",
+      "producer": "TRANSITION_REGISTRY",
+      "operation": "RESOLVE_TRANSITIONS",
+      "before": {
+        "snapshot_reference": "ref:999999",
+        "generation": 18446744073709551615,
+        "state_signature": "111111111",
+        "mode": "CONTAINED",
+        "terminal_latched": false,
+        "admission_status": "AUDIT_BLOCKED",
+        "current_assessment_reference": "ref:999999",
+        "active_operation_reference": "ref:999999"
+      },
+      "active": {
+        "snapshot_reference": "ref:999999",
+        "generation": 18446744073709551615,
+        "state_signature": "111111111",
+        "mode": "CONTAINED",
+        "terminal_latched": false,
+        "admission_status": "AUDIT_BLOCKED",
+        "current_assessment_reference": "ref:999999",
+        "active_operation_reference": "ref:999999"
+      },
+      "after": {
+        "snapshot_reference": "ref:999999",
+        "generation": 18446744073709551615,
+        "state_signature": "111111111",
+        "mode": "CONTAINED",
+        "terminal_latched": false,
+        "admission_status": "AUDIT_BLOCKED",
+        "current_assessment_reference": "ref:999999",
+        "active_operation_reference": "ref:999999"
+      },
+      "actual_origin_evidence_reference": "ref:999999",
+      "actual_origin_completion_reference": "ref:999999",
+      "actual_module_operation_reference": "ref:999999",
+      "actual_module_final_reference": "ref:999999",
+      "status": "UNCONFIRMED",
+      "failure_code": "SESSION_N2_COMPLETION_UNCONFIRMED",
+      "module_failure_code": "MODULE_FINAL_OBSERVATION_REJECTED",
+      "session_effects_performed": false,
+      "late_after_cutover": false,
+      "coverage": "COMPLETE_SPECIFIED_SAFE_GRAPH"
+    },
+    "SafeSessionModuleHistoryEvidence": {
+      "evidence_reference": "ref:999999",
+      "session_binding_reference": "ref:999999",
+      "session_reference": "ref:999999",
+      "member_link_references": [
+        "ref:999999",
+        "ref:999999",
+        "ref:999999",
+        "ref:999999"
+      ],
+      "control_observations": [
+        {
+          "request_reference": "ref:999999",
+          "status": "NOT_CONFIRMED",
+          "coverage": "COMPLETE_SPECIFIED_SAFE_GRAPH",
+          "supporting_reference": "ref:999999",
+          "failure_code": "SESSION_RETENTION_IDENTITY_MISMATCH"
+        },
+        {
+          "request_reference": "ref:999999",
+          "status": "NOT_CONFIRMED",
+          "coverage": "COMPLETE_SPECIFIED_SAFE_GRAPH",
+          "supporting_reference": "ref:999999",
+          "failure_code": "SESSION_RETENTION_IDENTITY_MISMATCH"
+        },
+        {
+          "request_reference": "ref:999999",
+          "status": "NOT_CONFIRMED",
+          "coverage": "COMPLETE_SPECIFIED_SAFE_GRAPH",
+          "supporting_reference": "ref:999999",
+          "failure_code": "SESSION_RETENTION_IDENTITY_MISMATCH"
+        },
+        {
+          "request_reference": "ref:999999",
+          "status": "NOT_CONFIRMED",
+          "coverage": "COMPLETE_SPECIFIED_SAFE_GRAPH",
+          "supporting_reference": "ref:999999",
+          "failure_code": "SESSION_RETENTION_IDENTITY_MISMATCH"
+        }
+      ],
+      "frozen": false,
+      "cutover_generation": 18446744073709551615,
+      "pending_cutover_evidence_reference": "ref:999999"
+    },
+    "SafeSessionModuleCutoverEvidence": {
+      "evidence_reference": "ref:999999",
+      "session_binding_reference": "ref:999999",
+      "session_reference": "ref:999999",
+      "request_reference": "ref:999999",
+      "lease_reference": "ref:999999",
+      "generation": 18446744073709551615,
+      "before_snapshot_reference": "ref:999999",
+      "active_snapshot_reference": "ref:999999",
+      "cutover_snapshot_reference": "ref:999999",
+      "actual_origin_evidence_reference": "ref:999999",
+      "actual_module_operation_reference": "ref:999999",
+      "phase": "DIAGNOSING"
+    }
+  },
+  "sizes": {
+    "SafeSessionModuleLinkEvidence": 1489,
+    "SafeSessionModuleHistoryEvidence": 1088,
+    "SafeSessionModuleCutoverEvidence": 449
+  },
+  "negative_structural_cases": 9
+}

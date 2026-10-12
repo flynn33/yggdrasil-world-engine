@@ -72,7 +72,7 @@ Current source routing uses the following precedence:
 
 These source-manifest entries still contain an explicit placeholder marker.
 The classification manifest governs the broader repository placeholder class.
-Current placeholder artifacts: `44`
+Current placeholder artifacts: `30`
 
 - `core/narrative_engine/player_origin_arc_rules.yaml`
 - `docs/architecture/PLAYER_ORIGIN_ARC_NOTES.md`

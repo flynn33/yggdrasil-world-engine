@@ -1,0 +1,31 @@
+{
+  "status": "PASS_ADDITIVE_CURRENT_SAFE_BINDING_SOURCE_AND_ARRAY_COMPLETION",
+  "original65_and_corrected72_packages_preserved": true,
+  "corrected72_index_sha256": "509bf7fb41cecd75a74abf5937c472e3af4455a9572efaca6c9740c369e76bff",
+  "policy173e36_unchanged": true,
+  "observed_prior_omission": "Prior overlay had no current binding/source defs or current supporting arrays; actual changed current binding failed old assembly and policy version/path/hash schema fields.",
+  "added_exact_definitions": [
+    "SafeCurrentSessionBindingEvidence",
+    "SafeCurrentSessionSourceEvidence"
+  ],
+  "new_optional_arrays": [
+    "session_current_bindings",
+    "session_current_histories",
+    "session_current_history_pages",
+    "session_current_sources",
+    "session_module_cutovers",
+    "session_module_histories",
+    "session_module_links"
+  ],
+  "all_original_leaf_definitions_and_old_array_properties_unchanged": true,
+  "exact_complete_pair_and_old_branch_rejection_controls": "Current graph/schema control validates both current bindings and sources, rejects crossed Recovery7 and old branch routing.",
+  "framing_increment": 272,
+  "changed_bound_values": {
+    "normal_lifecycle_bytes_upper": 324346,
+    "terminal_write_increment": 16911,
+    "terminal_bytes_upper": 661999,
+    "terminal_support_upper": 432623
+  },
+  "reservations_quotas_global_alias_cap_pages_policy_source_unchanged": true,
+  "scope": "Representation completion and existing guard controls only; no product edit, new session runtime/native capture/ACK or source4 acceptance."
+}

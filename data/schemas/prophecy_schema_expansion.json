@@ -1,7 +1,7 @@
 {
-  "status": "placeholder_awaiting_finalized_content",
+  "status": "active_m3_reference_transport_contract",
   "system": "prophecy_schema_expansion",
-  "purpose": "Placeholder for expanded prophecy persistence schema.",
+  "purpose": "Finalized M3 prophecy transport and provenance interface; M4 owns persistent acceptance and M5 owns activation and content.",
   "inputs": [
     "prophecy engine outputs",
     "canonical prophecy schema"
@@ -119,5 +119,31 @@
       "additionalProperties": true
     }
   },
-  "additionalProperties": true
+  "additionalProperties": true,
+  "description": "Finalized M3 closed transport definitions. Declared status does not authenticate activation. Core produces proposed attractors/routes; M4 owns persistent acceptance and M5 owns activation/content. Old root validation remains unchanged.",
+  "$defs": {
+    "CoreProvenance": {
+      "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance"
+    },
+    "ProphecyRoute": {
+      "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ProphecyRoute"
+    },
+    "ProphecyAttractor": {
+      "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ProphecyAttractor"
+    },
+    "ProphecyRecord": {
+      "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/ProphecyRecord"
+    },
+    "OmenCluster": {
+      "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/OmenCluster"
+    },
+    "RuntimeBiasEffect": {
+      "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/RuntimeBiasEffect"
+    },
+    "RecurringSymbolState": {
+      "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/RecurringSymbolState"
+    }
+  },
+  "x-ywe-core-requirement-id": "YWE-REQ-0051",
+  "x-ywe-adr-id": "ADR-0043"
 }

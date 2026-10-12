@@ -1,0 +1,39 @@
+{
+  "status": "EXTERNAL_PROPOSED_SCHEMA_AND_FORMAT_CONTROL_PASS_NOT_RUNTIME_ACCEPTANCE",
+  "definitions": 67,
+  "positive_cases": 11,
+  "ordinary_pair_format_cases": 92,
+  "rejection_cases": [
+    "CurrentSessionSnapshot:unknownfield",
+    "SessionModuleCommand:unknownfield",
+    "SessionModuleLease:unknownfield",
+    "SessionModuleAdmission:unknownfield",
+    "SessionModuleResult:unknownfield",
+    "SessionModuleCutover:unknownfield",
+    "SessionModuleHistory:unknownfield",
+    "SessionModuleRawFailure:unknownfield",
+    "SessionModuleRetentionReceipt:unknownfield",
+    "SessionModuleExecutionObservation:unknownfield",
+    "SessionModuleReplayObservation:unknownfield",
+    "currentvector+historicalpolicy",
+    "historicalvector+currentpolicy",
+    "futureproducer",
+    "produceroperationmismatch",
+    "hiddenoriginadaptation",
+    "depthoverflow",
+    "journalentryoverflow",
+    "pinoverflow",
+    "M3_MODULES:crossed-current-recovery-pins",
+    "M3_GENERATION:crossed-current-recovery-pins"
+  ],
+  "required_runtime_guard_obligations": [
+    "Exact producer/operation/result ownership",
+    "Expected/active snapshot and generation equality",
+    "Fresh DiagnosticContext deterministic reference equality",
+    "Request/session/cutover/result linkage",
+    "Source/profile/policy exact class-owned revalidation",
+    "Actual first completion/status/ACK evidence",
+    "Whole streaming raw business guards",
+    "One immutable first final observation and late cleanup truth"
+  ]
+}

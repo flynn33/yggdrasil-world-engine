@@ -1,0 +1,1014 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m3_generation_module_capture_schema.json",
+  "title": "Owned bounded module capture values [YWE-REQ-0048]",
+  "$defs": {
+    "ModuleProducerRegistrationReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "producer",
+        "status",
+        "failure_code"
+      ],
+      "properties": {
+        "producer": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "REALM_ENCODER",
+                "TRANSITION_REGISTRY",
+                "TOPOLOGY_GENERATOR",
+                "AXIOM_EVALUATOR",
+                "GENERATION_PLANNER",
+                "ARTIFACT_EMITTER"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "REGISTERED",
+            "REJECTED"
+          ]
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "MODULE_PRODUCER_FOREIGN",
+                "MODULE_PRODUCER_DUPLICATE",
+                "MODULE_PRODUCER_BINDING_MISMATCH",
+                "MODULE_PRODUCER_UNSUPPORTED",
+                "MODULE_CONTEXT_REJECTED",
+                "MODULE_ORIGIN_REJECTED",
+                "MODULE_RESULT_REJECTED",
+                "MODULE_RESERVATION_REFUSED",
+                "MODULE_RAW_PACKET_LIMIT",
+                "MODULE_CAPTURE_REJECTED",
+                "MODULE_CAPTURE_UNCONFIRMED",
+                "MODULE_COMPLETION_MISSING",
+                "MODULE_COMPLETION_REJECTED",
+                "MODULE_FINAL_OBSERVATION_REJECTED",
+                "MODULE_REQUIRED_RECORD_MISSING",
+                "MODULE_SCOPE_FOREIGN",
+                "MODULE_REPLAY_REFUSED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0048"
+    },
+    "ModuleCaptureContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation_reference",
+        "producer",
+        "source_binding",
+        "origin_diagnosis",
+        "prepared_value",
+        "dependency_results"
+      ],
+      "properties": {
+        "operation_reference": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$",
+          "maxLength": 256
+        },
+        "producer": {
+          "type": "string",
+          "enum": [
+            "REALM_ENCODER",
+            "TRANSITION_REGISTRY",
+            "TOPOLOGY_GENERATOR",
+            "AXIOM_EVALUATOR",
+            "GENERATION_PLANNER",
+            "ARTIFACT_EMITTER"
+          ]
+        },
+        "source_binding": {
+          "oneOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/RealmTransitionBinding"
+            },
+            {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "prefixItems": [
+                {
+                  "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/TopologyAxiomSourceBinding"
+                },
+                {
+                  "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/ProfileBinding"
+                },
+                {
+                  "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/TopologyAxiomPolicyBinding"
+                }
+              ],
+              "items": false
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerEmitterBinding"
+            }
+          ]
+        },
+        "origin_diagnosis": {
+          "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/StateDiagnosis"
+        },
+        "prepared_value": {
+          "oneOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/RealmEncodingResult"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/TransitionResolutionResult"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/TransitionApplicationResult"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/RealmTransitionFailure"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/TopologyResult"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/TopologyFailure"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/AxiomEvaluationResult"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/AxiomEvaluationFailure"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/TransitionChainResult"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/TransitionChainFailure"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerResult"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerFailure"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/EmitterRequest"
+            }
+          ]
+        },
+        "dependency_results": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/RealmEncodingResult"
+              },
+              {
+                "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/TransitionResolutionResult"
+              },
+              {
+                "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/TransitionApplicationResult"
+              },
+              {
+                "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/RealmTransitionFailure"
+              },
+              {
+                "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/TopologyResult"
+              },
+              {
+                "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/TopologyFailure"
+              },
+              {
+                "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/AxiomEvaluationResult"
+              },
+              {
+                "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/AxiomEvaluationFailure"
+              },
+              {
+                "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/TransitionChainResult"
+              },
+              {
+                "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/TransitionChainFailure"
+              },
+              {
+                "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerResult"
+              },
+              {
+                "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerFailure"
+              }
+            ]
+          }
+        }
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0048",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "producer": {
+                "const": "REALM_ENCODER"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "source_binding": {
+                "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/RealmTransitionBinding"
+              },
+              "prepared_value": {
+                "oneOf": [
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/RealmEncodingResult"
+                  },
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/RealmTransitionFailure"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "producer": {
+                "const": "TRANSITION_REGISTRY"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "source_binding": {
+                "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/RealmTransitionBinding"
+              },
+              "prepared_value": {
+                "oneOf": [
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/TransitionResolutionResult"
+                  },
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/TransitionApplicationResult"
+                  },
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/RealmTransitionFailure"
+                  },
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/TransitionChainResult"
+                  },
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/TransitionChainFailure"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "producer": {
+                "const": "TOPOLOGY_GENERATOR"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "source_binding": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "prefixItems": [
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/TopologyAxiomSourceBinding"
+                  },
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/ProfileBinding"
+                  },
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/TopologyAxiomPolicyBinding"
+                  }
+                ],
+                "items": false
+              },
+              "prepared_value": {
+                "oneOf": [
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/TopologyResult"
+                  },
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/TopologyFailure"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "producer": {
+                "const": "AXIOM_EVALUATOR"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "source_binding": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "prefixItems": [
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/TopologyAxiomSourceBinding"
+                  },
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_generation_state_schema.json#/$defs/ProfileBinding"
+                  },
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/TopologyAxiomPolicyBinding"
+                  }
+                ],
+                "items": false
+              },
+              "prepared_value": {
+                "oneOf": [
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/AxiomEvaluationResult"
+                  },
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/AxiomEvaluationFailure"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "producer": {
+                "const": "GENERATION_PLANNER"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "source_binding": {
+                "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerEmitterBinding"
+              },
+              "prepared_value": {
+                "oneOf": [
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerResult"
+                  },
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerFailure"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "producer": {
+                "const": "ARTIFACT_EMITTER"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "source_binding": {
+                "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerEmitterBinding"
+              },
+              "prepared_value": {
+                "oneOf": [
+                  {
+                    "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/EmitterRequest"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ModuleCaptureReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation_reference",
+        "status",
+        "result",
+        "confirmed_records",
+        "attempted_record",
+        "completion",
+        "final_observation",
+        "failure_code"
+      ],
+      "properties": {
+        "operation_reference": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$",
+          "maxLength": 256
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "CONFIRMED",
+            "REJECTED",
+            "NOT_CONFIRMED"
+          ]
+        },
+        "result": {
+          "oneOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/RealmEncodingResult"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/TransitionResolutionResult"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/TransitionApplicationResult"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/RealmTransitionFailure"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/TopologyResult"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/TopologyFailure"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/AxiomEvaluationResult"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/AxiomEvaluationFailure"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/TransitionChainResult"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/TransitionChainFailure"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerResult"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerFailure"
+            },
+            {
+              "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/EmitterResult"
+            }
+          ]
+        },
+        "confirmed_records": {
+          "type": "array",
+          "maxItems": 65,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$",
+            "maxLength": 256
+          }
+        },
+        "attempted_record": {
+          "anyOf": [
+            {
+              "oneOf": [
+                {
+                  "$ref": "https://ywe.local/schemas/m3_generation_realm_transition_schema.json#/$defs/RealmTransitionRecord"
+                },
+                {
+                  "$ref": "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json#/$defs/GenerationDiagnosticRecord"
+                },
+                {
+                  "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/ChainRecord"
+                },
+                {
+                  "$ref": "https://ywe.local/schemas/m3_planner_emitter_schema.json#/$defs/PlannerEmitterRecord"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "completion": {
+          "anyOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m3_reference_diagnostic_bundle_schema.json#/$defs/DiagnosticsCompletionReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_observation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ModuleFinalObservationReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "MODULE_PRODUCER_FOREIGN",
+                "MODULE_PRODUCER_DUPLICATE",
+                "MODULE_PRODUCER_BINDING_MISMATCH",
+                "MODULE_PRODUCER_UNSUPPORTED",
+                "MODULE_CONTEXT_REJECTED",
+                "MODULE_ORIGIN_REJECTED",
+                "MODULE_RESULT_REJECTED",
+                "MODULE_RESERVATION_REFUSED",
+                "MODULE_RAW_PACKET_LIMIT",
+                "MODULE_CAPTURE_REJECTED",
+                "MODULE_CAPTURE_UNCONFIRMED",
+                "MODULE_COMPLETION_MISSING",
+                "MODULE_COMPLETION_REJECTED",
+                "MODULE_FINAL_OBSERVATION_REJECTED",
+                "MODULE_REQUIRED_RECORD_MISSING",
+                "MODULE_SCOPE_FOREIGN",
+                "MODULE_REPLAY_REFUSED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0048"
+    },
+    "ModuleFinalObservationReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation_reference",
+        "status",
+        "supporting_reference",
+        "coverage",
+        "failure_code"
+      ],
+      "properties": {
+        "operation_reference": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$",
+          "maxLength": 256
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "CONFIRMED",
+            "REJECTED",
+            "NOT_CONFIRMED"
+          ]
+        },
+        "supporting_reference": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^ref:[0-9]{6}$",
+              "minLength": 10,
+              "maxLength": 10
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "coverage": {
+          "type": "string",
+          "enum": [
+            "COMPLETE_SPECIFIED_SAFE_GRAPH",
+            "PARTIAL",
+            "STORAGE_UNCERTAIN"
+          ]
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "MODULE_PRODUCER_FOREIGN",
+                "MODULE_PRODUCER_DUPLICATE",
+                "MODULE_PRODUCER_BINDING_MISMATCH",
+                "MODULE_PRODUCER_UNSUPPORTED",
+                "MODULE_CONTEXT_REJECTED",
+                "MODULE_ORIGIN_REJECTED",
+                "MODULE_RESULT_REJECTED",
+                "MODULE_RESERVATION_REFUSED",
+                "MODULE_RAW_PACKET_LIMIT",
+                "MODULE_CAPTURE_REJECTED",
+                "MODULE_CAPTURE_UNCONFIRMED",
+                "MODULE_COMPLETION_MISSING",
+                "MODULE_COMPLETION_REJECTED",
+                "MODULE_FINAL_OBSERVATION_REJECTED",
+                "MODULE_REQUIRED_RECORD_MISSING",
+                "MODULE_SCOPE_FOREIGN",
+                "MODULE_REPLAY_REFUSED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0048"
+    },
+    "ModuleReturnAuditObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation_reference",
+        "status",
+        "missing_kind",
+        "meta_sequence",
+        "coverage",
+        "failure_code"
+      ],
+      "properties": {
+        "operation_reference": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$",
+          "maxLength": 256
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "COMPLETE",
+            "MISSING",
+            "ALREADY_OBSERVED",
+            "NOT_CONFIRMED"
+          ]
+        },
+        "missing_kind": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "REQUIRED_SEMANTIC_RECORD",
+            "REQUIRED_CAPTURE_STEP",
+            "FIRST_COMPLETION"
+          ]
+        },
+        "meta_sequence": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "coverage": {
+          "type": "string",
+          "enum": [
+            "COMPLETE_SPECIFIED_SAFE_GRAPH",
+            "PARTIAL",
+            "STORAGE_UNCERTAIN"
+          ]
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "MODULE_PRODUCER_FOREIGN",
+                "MODULE_PRODUCER_DUPLICATE",
+                "MODULE_PRODUCER_BINDING_MISMATCH",
+                "MODULE_PRODUCER_UNSUPPORTED",
+                "MODULE_CONTEXT_REJECTED",
+                "MODULE_ORIGIN_REJECTED",
+                "MODULE_RESULT_REJECTED",
+                "MODULE_RESERVATION_REFUSED",
+                "MODULE_RAW_PACKET_LIMIT",
+                "MODULE_CAPTURE_REJECTED",
+                "MODULE_CAPTURE_UNCONFIRMED",
+                "MODULE_COMPLETION_MISSING",
+                "MODULE_COMPLETION_REJECTED",
+                "MODULE_FINAL_OBSERVATION_REJECTED",
+                "MODULE_REQUIRED_RECORD_MISSING",
+                "MODULE_SCOPE_FOREIGN",
+                "MODULE_REPLAY_REFUSED"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0048"
+    },
+    "ModuleCaptureCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "type_name",
+        "value"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "type_name": {
+          "type": "string",
+          "enum": [
+            "ModuleProducerRegistrationReceipt",
+            "ModuleCaptureContext",
+            "ModuleCaptureReceipt",
+            "ModuleFinalObservationReceipt",
+            "ModuleReturnAuditObservation"
+          ]
+        },
+        "value": {}
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0048",
+      "oneOf": [
+        {
+          "properties": {
+            "type_name": {
+              "const": "ModuleProducerRegistrationReceipt"
+            },
+            "value": {
+              "$ref": "#/$defs/ModuleProducerRegistrationReceipt"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type_name": {
+              "const": "ModuleCaptureContext"
+            },
+            "value": {
+              "$ref": "#/$defs/ModuleCaptureContext"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type_name": {
+              "const": "ModuleCaptureReceipt"
+            },
+            "value": {
+              "$ref": "#/$defs/ModuleCaptureReceipt"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type_name": {
+              "const": "ModuleFinalObservationReceipt"
+            },
+            "value": {
+              "$ref": "#/$defs/ModuleFinalObservationReceipt"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type_name": {
+              "const": "ModuleReturnAuditObservation"
+            },
+            "value": {
+              "$ref": "#/$defs/ModuleReturnAuditObservation"
+            }
+          }
+        }
+      ]
+    },
+    "ModuleCaptureCaseCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_type",
+        "artifact_version",
+        "requirement_id",
+        "provenance",
+        "cases"
+      ],
+      "properties": {
+        "artifact_type": {
+          "const": "ywe_module_capture_runtime_controls"
+        },
+        "artifact_version": {
+          "const": "1.0.0"
+        },
+        "requirement_id": {
+          "const": "YWE-REQ-0048"
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "execution",
+            "clock",
+            "storage",
+            "source_identity",
+            "evidence_scope"
+          ],
+          "properties": {
+            "execution": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "clock": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "storage": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "source_identity": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "evidence_scope": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            }
+          },
+          "x-ywe-requirement-id": "YWE-REQ-0048"
+        },
+        "cases": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/ModuleCaptureCase"
+          }
+        }
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0048"
+    },
+    "ModuleCaptureRejectionCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "type_name",
+        "input",
+        "expected_validators"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "type_name": {
+          "type": "string",
+          "enum": [
+            "ModuleProducerRegistrationReceipt",
+            "ModuleCaptureContext",
+            "ModuleCaptureReceipt",
+            "ModuleFinalObservationReceipt",
+            "ModuleReturnAuditObservation"
+          ]
+        },
+        "input": {},
+        "expected_validators": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          }
+        }
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0048"
+    },
+    "ModuleCaptureRejectionCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_type",
+        "artifact_version",
+        "requirement_id",
+        "provenance",
+        "cases"
+      ],
+      "properties": {
+        "artifact_type": {
+          "const": "ywe_module_capture_rejection_controls"
+        },
+        "artifact_version": {
+          "const": "1.0.0"
+        },
+        "requirement_id": {
+          "const": "YWE-REQ-0048"
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "execution",
+            "clock",
+            "storage",
+            "source_identity",
+            "evidence_scope"
+          ],
+          "properties": {
+            "execution": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "clock": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "storage": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "source_identity": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "evidence_scope": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            }
+          },
+          "x-ywe-requirement-id": "YWE-REQ-0048"
+        },
+        "cases": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/ModuleCaptureRejectionCase"
+          }
+        }
+      },
+      "x-ywe-requirement-id": "YWE-REQ-0048"
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/ModuleProducerRegistrationReceipt"
+    },
+    {
+      "$ref": "#/$defs/ModuleCaptureContext"
+    },
+    {
+      "$ref": "#/$defs/ModuleCaptureReceipt"
+    },
+    {
+      "$ref": "#/$defs/ModuleFinalObservationReceipt"
+    },
+    {
+      "$ref": "#/$defs/ModuleReturnAuditObservation"
+    },
+    {
+      "$ref": "#/$defs/ModuleCaptureCaseCatalog"
+    },
+    {
+      "$ref": "#/$defs/ModuleCaptureRejectionCatalog"
+    }
+  ],
+  "description": " External proposed additive M3_GENERATION source branch; original branches preserved. No runtime constructor acceptance claimed."
+}

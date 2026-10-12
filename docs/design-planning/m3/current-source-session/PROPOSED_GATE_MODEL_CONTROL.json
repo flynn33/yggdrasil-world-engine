@@ -1,0 +1,140 @@
+{
+  "status": "EXTERNAL_SPECIFICATION_STATE_MACHINE_CONTROL_ONLY",
+  "phase_cases": [
+    {
+      "cutover_phase": "ADMITTED",
+      "ordinary_stage_trace": [
+        "ADMITTED"
+      ],
+      "postseal_ordinary_stages": 0,
+      "actual_issued_origin_cleanup_calls": 0,
+      "actual_issued_module_cleanup_calls": 0,
+      "frozen_main_rewritten": false,
+      "late_audit_entries": 1
+    },
+    {
+      "cutover_phase": "DIAGNOSING",
+      "ordinary_stage_trace": [
+        "ADMITTED",
+        "DIAGNOSING"
+      ],
+      "postseal_ordinary_stages": 0,
+      "actual_issued_origin_cleanup_calls": 1,
+      "actual_issued_module_cleanup_calls": 0,
+      "frozen_main_rewritten": false,
+      "late_audit_entries": 1
+    },
+    {
+      "cutover_phase": "DIAGNOSED",
+      "ordinary_stage_trace": [
+        "ADMITTED",
+        "DIAGNOSING",
+        "DIAGNOSED"
+      ],
+      "postseal_ordinary_stages": 0,
+      "actual_issued_origin_cleanup_calls": 1,
+      "actual_issued_module_cleanup_calls": 0,
+      "frozen_main_rewritten": false,
+      "late_audit_entries": 1
+    },
+    {
+      "cutover_phase": "COMPUTING",
+      "ordinary_stage_trace": [
+        "ADMITTED",
+        "DIAGNOSING",
+        "DIAGNOSED",
+        "COMPUTING"
+      ],
+      "postseal_ordinary_stages": 0,
+      "actual_issued_origin_cleanup_calls": 1,
+      "actual_issued_module_cleanup_calls": 0,
+      "frozen_main_rewritten": false,
+      "late_audit_entries": 1
+    },
+    {
+      "cutover_phase": "CAPTURING",
+      "ordinary_stage_trace": [
+        "ADMITTED",
+        "DIAGNOSING",
+        "DIAGNOSED",
+        "COMPUTING",
+        "CAPTURING"
+      ],
+      "postseal_ordinary_stages": 0,
+      "actual_issued_origin_cleanup_calls": 1,
+      "actual_issued_module_cleanup_calls": 1,
+      "frozen_main_rewritten": false,
+      "late_audit_entries": 1
+    },
+    {
+      "cutover_phase": "FINISHING",
+      "ordinary_stage_trace": [
+        "ADMITTED",
+        "DIAGNOSING",
+        "DIAGNOSED",
+        "COMPUTING",
+        "CAPTURING",
+        "FINISHING"
+      ],
+      "postseal_ordinary_stages": 0,
+      "actual_issued_origin_cleanup_calls": 1,
+      "actual_issued_module_cleanup_calls": 1,
+      "frozen_main_rewritten": false,
+      "late_audit_entries": 1
+    }
+  ],
+  "freshness_cases": [
+    {
+      "case": "same_state_after_containment_cycle",
+      "state_equal": true,
+      "submitted_generation": 0,
+      "current_generation": 2,
+      "admitted": false
+    },
+    {
+      "case": "firstN1completionINCOMPLETE",
+      "pure_computation_calls": 0
+    },
+    {
+      "case": "firstN1completionwrongreference",
+      "pure_computation_calls": 0
+    },
+    {
+      "case": "firstN1completionmissing",
+      "pure_computation_calls": 0
+    },
+    {
+      "case": "purecallgranted_before_halt_returns_after",
+      "actual_return_retained": true,
+      "next_capture_calls": 0
+    },
+    {
+      "case": "terminal_before_body",
+      "body_reads": 0,
+      "only_optional_exact_request_scalar": true
+    },
+    {
+      "case": "preterminalCONTAINED",
+      "pure_computation_calls": 0,
+      "N1calls": 0
+    },
+    {
+      "case": "historicpairmodulecommand",
+      "pure_computation_calls": 0,
+      "N1calls": 0
+    },
+    {
+      "case": "futureplanneroremmitter",
+      "publicregisteredproducereligibility": false,
+      "N1calls": 0
+    },
+    {
+      "case": "modulePURETRANSITIONtarget",
+      "session_state_assignments": 0,
+      "generation_increments": 0
+    }
+  ],
+  "limitations": [
+    "These are executed independent proposed protocol-model controls, not calls to ReferenceSessionLifecycle or ModuleCaptureScope. Actual concurrency, cancellation, omission, callback and native integration tests are required after adoption and issuance."
+  ]
+}

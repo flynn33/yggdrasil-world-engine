@@ -1,3 +1,5 @@
+> Superseded for current adoption by [M3 generation source compatibility contract](m3_generation_source_compatibility_contract.md), YWE-REQ-0049 / ADR-0041. The complete original three-vector contract and inventory below remain unchanged historical evidence.
+
 # M3 module source compatibility contract
 
 [YWE-REQ-0045] Core source bindings MUST recognize exactly the three complete reviewed LEGACY_C78, N3_LIFECYCLE and M3_MODULES vectors with their paired Recovery and Diagnostics pins. New producers MUST additionally bind the exact adopted producer pins. Snapshot mapping and host verification MUST preserve original two-source outcomes and select current/historical provenance by actual baseline presence. Original N3 source/policy eligibility, state mathematics, narrow rule subsets and historical evidence MUST remain unchanged. Source recognition MUST NOT confer producer execution, live N3 effects or M3 acceptance.

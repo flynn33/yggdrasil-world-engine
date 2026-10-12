@@ -1,0 +1,218 @@
+{
+  "status": "EXTERNAL_PROPOSED_NOT_ADOPTED",
+  "policy_binding": {
+    "policy_id": "YWE-SESSION-SAFETY-001",
+    "policy_version": "1.1.0",
+    "source_path": "docs/architecture/m3_module_session_lifecycle_policy.md",
+    "source_sha256": "173e36fd92d6aaf222d61d950a235a6938e0fcdd374f6044b9f0c2c38c342dc7"
+  },
+  "producers": [
+    "REALM_ENCODER",
+    "TRANSITION_REGISTRY",
+    "TOPOLOGY_GENERATOR",
+    "AXIOM_EVALUATOR"
+  ],
+  "future_producers_unsupported": [
+    "GENERATION_PLANNER",
+    "ARTIFACT_EMITTER"
+  ],
+  "operation_mapping": {
+    "ENCODE_REALM": "REALM_ENCODER",
+    "RESOLVE_TRANSITIONS": "TRANSITION_REGISTRY",
+    "APPLY_TRANSITION": "TRANSITION_REGISTRY",
+    "GENERATE_TOPOLOGY": "TOPOLOGY_GENERATOR",
+    "EVALUATE_AXIOMS": "AXIOM_EVALUATOR"
+  },
+  "limits": {
+    "module_attempts": 4,
+    "attempts_per_producer": 1,
+    "dependencies": 3,
+    "active_module_leases": 1,
+    "per_gate_grants": 8192,
+    "module_result_bytes": 2097152,
+    "module_capture_bytes": 1048576,
+    "whole_session_bytes": 33554432
+  },
+  "types": {
+    "SessionModuleCommand": {
+      "request_reference": "Reference160",
+      "session_reference": "Reference256",
+      "expected_snapshot": "SessionSnapshot",
+      "producer": "EligibleModuleProducer",
+      "operation": "SessionModuleOperation",
+      "origin_action": "const:CAPTURE_CURRENT_DIAGNOSIS",
+      "diagnostic_context": "DiagnosticContext",
+      "arguments": "SessionModuleArguments",
+      "dependency_operation_references": "tuple<Reference160,0..3>"
+    },
+    "RealmEncodingArguments": {},
+    "TransitionResolutionArguments": {},
+    "TransitionApplicationArguments": {
+      "selection": "exact realm_transition_values.TransitionSelection"
+    },
+    "TopologyArguments": {
+      "seed": "ASCII [A-Za-z0-9_-]{1,32}",
+      "depth": "uint0..6"
+    },
+    "AxiomArguments": {
+      "subject": "exact generation_values.AxiomSubject"
+    },
+    "SessionModuleLease": {
+      "lease_reference": "Reference256",
+      "command": "SessionModuleCommand",
+      "before": "SessionSnapshot",
+      "active_snapshot": "SessionSnapshot",
+      "action": "const:MODULE",
+      "generation": "uint64"
+    },
+    "SessionModuleAdmission": {
+      "status": "GRANTED|REJECTED",
+      "command": "SessionModuleCommand",
+      "before": "SessionSnapshot",
+      "lease": "SessionModuleLease|null",
+      "failure_code": "SessionFailureCode|null"
+    },
+    "SessionModuleResult": {
+      "command": "SessionModuleCommand",
+      "status": "COMPLETED|REFUSED|FAILED|UNCONFIRMED",
+      "before": "SessionSnapshot",
+      "after": "SessionSnapshot",
+      "session_effects_performed": "const:false",
+      "admission": "SessionModuleAdmission",
+      "origin_diagnosis": "StateDiagnosis|DiagnosticCaptureFailure|null",
+      "origin_completion": "DiagnosticsCompletionReceipt|null",
+      "module_capture": "ModuleCaptureReceipt|null",
+      "actual_pure_result": "ownedRTorTAResult|null",
+      "failure_code": "SessionFailureCode|ModuleFailureCode|null",
+      "coverage": "COMPLETE_SPECIFIED_SAFE_GRAPH|PARTIAL|API_ONLY|STORAGE_UNCERTAIN"
+    },
+    "SessionModuleCutover": {
+      "request_reference": "Reference160",
+      "lease_reference": "Reference256",
+      "admitted_generation": "uint64",
+      "before_snapshot_reference": "Reference256",
+      "active_snapshot_reference": "Reference256",
+      "phase": "ADMITTED|DIAGNOSING|DIAGNOSED|COMPUTING|CAPTURING|FINISHING",
+      "actual_origin_reference": "Reference256|null",
+      "actual_module_operation_reference": "Reference160|null",
+      "cutover_snapshot_reference": "Reference256"
+    },
+    "SessionModuleExecutionObservation": {
+      "result": "SessionModuleResult",
+      "control_observation": "SessionModuleRetentionReceipt|null",
+      "current_snapshot": "SessionSnapshot"
+    },
+    "SessionModuleHistory": {
+      "history_reference": "Reference256",
+      "session_binding_reference": "Reference256",
+      "results": "tuple<SessionModuleResult,0..4>",
+      "control_observations": "tuple<SessionModuleRetentionReceipt|null,0..4>",
+      "frozen": "bool",
+      "cutover_generation": "uint64|null",
+      "pending_cutover": "SessionModuleCutover|null"
+    },
+    "SessionModuleReplayObservation": {
+      "request_reference": "Reference160",
+      "original_result": "SessionModuleExecutionObservation",
+      "current_snapshot": "SessionSnapshot"
+    },
+    "SessionModuleRawFailure": {
+      "request_reference": "Reference160",
+      "session_reference": "Reference256",
+      "failure_code": "const:SESSION_RAW_BUSINESS_LIMIT",
+      "phase": "ORIGIN|CANDIDATE_RESULT|HISTORY|ANTICIPATED_TERMINAL",
+      "session_effects_performed": "const:false",
+      "actual_snapshot": "SessionSnapshot",
+      "coverage": "API_ONLY|PARTIAL"
+    },
+    "SessionModuleRetentionReceipt": {
+      "session_reference": "Reference256",
+      "request_reference": "Reference160|null",
+      "phase": "ADMISSION|FINAL_RESULT|PIN",
+      "status": "CONFIRMED|REJECTED|NOT_CONFIRMED",
+      "coverage": "COMPLETE_SPECIFIED_SAFE_GRAPH|PARTIAL|STORAGE_UNCERTAIN",
+      "pinned_supporting_count": "uint0..2663",
+      "supporting_reference": "Alias|null",
+      "failure_code": "SessionRetentionFailure|null"
+    },
+    "SessionModuleCaptureAdmission": {
+      "status": "ADMITTED|REJECTED|NOT_CONFIRMED",
+      "scope": "SessionModuleControlScope|null",
+      "failure_code": "SessionRetentionFailure|null"
+    },
+    "SessionModuleControlScope": "API_ONLY_issued_exact_collector_session_gate_private_final_receipt_once"
+  },
+  "public_ports": [
+    [
+      "ReferenceSessionLifecycle.__init__",
+      "existing three arguments plus keyword-only module_owners=(); exact bounded tuple of at most one original instance of each eligible producer class; omitted tuple preserves historical assembly"
+    ],
+    [
+      "RecoveryEngine.execute_session_module",
+      "(session,command)->SessionModuleExecutionObservation|SessionModuleRawFailure|SessionDeniedAttempt|SessionModuleReplayObservation"
+    ],
+    [
+      "RecoveryEngine.read_session_module_history",
+      "(session)->SessionModuleHistory"
+    ],
+    [
+      "Diagnostics.reserve_session_module",
+      "(handle,lease,*,execution_gate)->SessionModuleCaptureAdmission"
+    ],
+    [
+      "SessionModuleControlScope.observe_final",
+      "(actual_result)->SessionModuleRetentionReceipt"
+    ],
+    [
+      "Diagnostics.pin_session_module_history",
+      "(handle,history)->SessionModuleRetentionReceipt"
+    ],
+    [
+      "Diagnostics.freeze_terminal",
+      "existing signature plus keyword module_history=None; omitted None preserves old exact calls/shapes"
+    ],
+    [
+      "Diagnostics.module_capture",
+      "(producer,context,*,execution_gate=None,emitter_control=None); existing port admits exact current-pair module gate; Core/emitter branch separately governed; independent capture pre/post checks"
+    ],
+    [
+      "SessionExecutionGate.validate_module_capture",
+      "class-owned (gate,collector,operation_reference,producer)->exact bool; original issued MODULE lease/current complete source-policy/collector/operation/producer metadata only; no owner entry or IO"
+    ],
+    [
+      "session_values.wire_schema",
+      "class-owned exact-owned-root/full source-policy dispatch to unchanged historical schema or new current-source schema; no caller schema selector"
+    ]
+  ],
+  "unchanged_pure_public_ports": [
+    "RealmEncoder.encode",
+    "TransitionRegistry.resolve",
+    "TransitionRegistry.apply",
+    "ReferenceTopologyGenerator.generate",
+    "ReferenceAxiomEvaluator.evaluate",
+    "configuration",
+    "validate_owned_result"
+  ],
+  "new_stage_grant_names": [
+    "MODULE_ORIGIN_DIAGNOSE",
+    "PURE_MODULE_COMPUTE",
+    "MODULE_CAPTURE_BEGIN",
+    "MODULE_FINAL_OBSERVATION"
+  ],
+  "fresh_context_derivation": {
+    "assessment_reference": "request_reference + :module:origin:assessment",
+    "original_input_reference": "request_reference + :module:origin:input",
+    "detection_reference": "request_reference + :module:origin:detection",
+    "classification_reference": "request_reference + :module:origin:classification (never emitted by diagnose)"
+  },
+  "constraints": [
+    "producer/operation/arguments exact mapped union; no untrusted type equality/hash/coercion hooks",
+    "Axiom subject state equals captured admitted state and provenance origin ref equals deterministic fresh diagnosis detection; do not rebind caller evidence",
+    "dependencies resolve only previous complete owner-retained entries and actual original result identities, current full binding/profile and first/final actual capture truth",
+    "actual_pure_result retained once in API DAG; actual_pure_result wire field must be null when module_capture is present, avoiding an extra duplicate serialized packet",
+    "SessionModuleHistory control_observations has exactly one correlated response or null per results entry; its actual final response is external to the immutable session link and preserves unknown status",
+    "SessionHistory gains optional module_history omitted when None; original constructor positions and fields preserved for historic pair",
+    "Control reservation does not observe clock, allocate aliases or write store during preflight; refused acquisition returns unconfirmed no scope. Actual issued control scope always gets once final attempt, also after seal.",
+    "Every actual scope retained independent of receipt status; first receipt/partial prefix immutable. Admission/result claims effects false even after pure candidate construction."
+  ]
+}

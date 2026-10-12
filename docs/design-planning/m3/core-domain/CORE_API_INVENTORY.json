@@ -1,0 +1,1389 @@
+{
+  "status": "ADOPTED_REFERENCE_CONTRACT",
+  "wire_type_count": 53,
+  "types": [
+    {
+      "name": "CoreBinding",
+      "owner": "core_values",
+      "fields": [
+        "canonical_binding",
+        "profile_binding",
+        "policy_id",
+        "policy_sha256",
+        "profile_realms"
+      ],
+      "field_types": {
+        "canonical_binding": "CanonicalAshBinding",
+        "profile_binding": "ProfileBinding",
+        "policy_id": "ID",
+        "policy_sha256": "HASH",
+        "profile_realms": "ProfileRealmDefinition[0..64]"
+      }
+    },
+    {
+      "name": "ProfileRealmDefinition",
+      "owner": "cosmology",
+      "fields": [
+        "realm_id",
+        "coordinate",
+        "state_signature",
+        "display_name",
+        "threshold_q6",
+        "veil_required",
+        "allowed_origins"
+      ],
+      "field_types": {
+        "realm_id": "ID",
+        "coordinate": "0..8",
+        "state_signature": "SIGNATURE?",
+        "display_name": "TEXT",
+        "threshold_q6": "Q6",
+        "veil_required": "bool",
+        "allowed_origins": "ID[0..64]"
+      }
+    },
+    {
+      "name": "CosmicState",
+      "owner": "cosmology",
+      "fields": [
+        "binding",
+        "baseline",
+        "structural_coordinates"
+      ],
+      "field_types": {
+        "binding": "CoreBinding",
+        "baseline": "StateDiagnosis",
+        "structural_coordinates": "COORDINATE[9]"
+      }
+    },
+    {
+      "name": "CoreProvenance",
+      "owner": "core_values",
+      "fields": [
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ],
+      "field_types": {
+        "cosmic_pattern_snapshot_ref": "REF",
+        "diagnostic_ref": "REF",
+        "generation_plan_ref": "REF",
+        "source_ash_refs": "REF[1..65]"
+      }
+    },
+    {
+      "name": "DeclaredTruthFact",
+      "owner": "perception",
+      "fields": [
+        "fact_id",
+        "authority_tier",
+        "scope_ref",
+        "subject_ref",
+        "value_token",
+        "evidence_refs"
+      ],
+      "field_types": {
+        "fact_id": "ID",
+        "authority_tier": "TRUTH_TIER",
+        "scope_ref": "REF",
+        "subject_ref": "REF",
+        "value_token": "TEXT",
+        "evidence_refs": "REF[1..65]"
+      }
+    },
+    {
+      "name": "TruthInputSnapshot",
+      "owner": "perception",
+      "fields": [
+        "snapshot_ref",
+        "scope_ref",
+        "facts",
+        "entity_refs",
+        "evidence_status"
+      ],
+      "field_types": {
+        "snapshot_ref": "REF",
+        "scope_ref": "REF",
+        "facts": "DeclaredTruthFact[0..256]",
+        "entity_refs": "REF[0..256]",
+        "evidence_status": "DECLARED_INPUT"
+      }
+    },
+    {
+      "name": "AttunementFact",
+      "owner": "realm",
+      "fields": [
+        "realm_id",
+        "attunement_q6",
+        "thin_veil",
+        "evidence_refs"
+      ],
+      "field_types": {
+        "realm_id": "ID",
+        "attunement_q6": "Q6",
+        "thin_veil": "OBSERVED_BOOL",
+        "evidence_refs": "REF[1..65]"
+      }
+    },
+    {
+      "name": "RealmAccessRequest",
+      "owner": "realm",
+      "fields": [
+        "request_ref",
+        "source_realm_id",
+        "target_realm_id",
+        "location_ref",
+        "facts"
+      ],
+      "field_types": {
+        "request_ref": "REF",
+        "source_realm_id": "ID",
+        "target_realm_id": "ID",
+        "location_ref": "REF",
+        "facts": "AttunementFact[0..64]"
+      }
+    },
+    {
+      "name": "RealmAccessResult",
+      "owner": "realm",
+      "fields": [
+        "request",
+        "eligible",
+        "evaluated_rules"
+      ],
+      "field_types": {
+        "request": "RealmAccessRequest",
+        "eligible": "bool?",
+        "evaluated_rules": "CoreDiagnostic[1..32]"
+      }
+    },
+    {
+      "name": "RealmShiftProposal",
+      "owner": "realm",
+      "fields": [
+        "proposal_ref",
+        "access",
+        "before_realm_id",
+        "target_realm_id",
+        "effect_status"
+      ],
+      "field_types": {
+        "proposal_ref": "REF",
+        "access": "RealmAccessResult",
+        "before_realm_id": "ID",
+        "target_realm_id": "ID",
+        "effect_status": "PROPOSED_ONLY"
+      }
+    },
+    {
+      "name": "PatternProjectionRule",
+      "owner": "ash_facade",
+      "fields": [
+        "pattern_id",
+        "membership_mask",
+        "codeword_ids",
+        "strength_q6",
+        "tags",
+        "evidence_refs"
+      ],
+      "field_types": {
+        "pattern_id": "ID",
+        "membership_mask": "MASK512",
+        "codeword_ids": "CODEWORD_ID[0..16]",
+        "strength_q6": "Q6",
+        "tags": "ID[0..64]",
+        "evidence_refs": "REF[1..65]"
+      }
+    },
+    {
+      "name": "PatternObservation",
+      "owner": "ash_facade",
+      "fields": [
+        "pattern_id",
+        "matched",
+        "strength_q6",
+        "actual_codeword_trace",
+        "evidence_refs"
+      ],
+      "field_types": {
+        "pattern_id": "ID",
+        "matched": "bool",
+        "strength_q6": "Q6",
+        "actual_codeword_trace": "CODEWORD_ID[0..5]",
+        "evidence_refs": "REF[1..65]"
+      }
+    },
+    {
+      "name": "CosmicPatternSnapshot",
+      "owner": "ash_facade",
+      "fields": [
+        "snapshot_ref",
+        "binding",
+        "original_signature",
+        "source_signature",
+        "source_identity",
+        "destination_signature",
+        "destination_identity",
+        "normalization_step",
+        "observations",
+        "actual_codeword_trace",
+        "provenance"
+      ],
+      "field_types": {
+        "snapshot_ref": "REF",
+        "binding": "CoreBinding",
+        "original_signature": "SIGNATURE?",
+        "source_signature": "SIGNATURE",
+        "source_identity": "RealmIdentity",
+        "destination_signature": "SIGNATURE",
+        "destination_identity": "RealmIdentity",
+        "normalization_step": "NormalizationStep?",
+        "observations": "PatternObservation[0..64]",
+        "actual_codeword_trace": "CODEWORD_ID[0..5]",
+        "provenance": "CoreProvenance"
+      }
+    },
+    {
+      "name": "ArchetypeRecord",
+      "owner": "narrative",
+      "fields": [
+        "archetype_id",
+        "family",
+        "symbolic_tags",
+        "truth_tags",
+        "shadow_tags",
+        "realm_bias",
+        "wolf_bias",
+        "player_phase_bias",
+        "compatible_with",
+        "friction_with",
+        "contradicts",
+        "downstream_affinities",
+        "manifestation_hint_refs",
+        "evidence_refs"
+      ],
+      "field_types": {
+        "archetype_id": "ID",
+        "family": "FAMILY",
+        "symbolic_tags": "ID[0..64]",
+        "truth_tags": "ID[0..64]",
+        "shadow_tags": "ID[0..64]",
+        "realm_bias": "ID[0..64]",
+        "wolf_bias": "WolfBias?",
+        "player_phase_bias": "ID[0..64]",
+        "compatible_with": "ID[0..64]",
+        "friction_with": "ID[0..64]",
+        "contradicts": "ID[0..64]",
+        "downstream_affinities": "ArchetypeAffinity[0..6]",
+        "manifestation_hint_refs": "REF[0..64]",
+        "evidence_refs": "REF[1..65]"
+      }
+    },
+    {
+      "name": "ArchetypeContext",
+      "owner": "narrative",
+      "fields": [
+        "context_ref",
+        "symbolic_tags",
+        "truth_tags",
+        "shadow_tags",
+        "realm_pressure",
+        "wolf_pressure",
+        "player_phase",
+        "recurrence_refs",
+        "myth_refs",
+        "prophecy_refs",
+        "requested_domain",
+        "allowed_tension_pairs",
+        "higher_order_pairs",
+        "satisfied_basis_refs",
+        "accepted_risk_refs"
+      ],
+      "field_types": {
+        "context_ref": "REF",
+        "symbolic_tags": "ID[0..64]",
+        "truth_tags": "ID[0..64]",
+        "shadow_tags": "ID[0..64]",
+        "realm_pressure": "WeightedOption[0..64]",
+        "wolf_pressure": "WolfPressure?",
+        "player_phase": "ID?",
+        "recurrence_refs": "REF[0..64]",
+        "myth_refs": "REF[0..64]",
+        "prophecy_refs": "REF[0..64]",
+        "requested_domain": "ID?",
+        "allowed_tension_pairs": "ID[0..256]",
+        "higher_order_pairs": "ID[0..256]",
+        "satisfied_basis_refs": "REF[0..16]",
+        "accepted_risk_refs": "REF[0..16]"
+      }
+    },
+    {
+      "name": "ArchetypeScore",
+      "owner": "narrative",
+      "fields": [
+        "archetype_id",
+        "score_q6",
+        "selected_role",
+        "suppressed_by",
+        "reasons"
+      ],
+      "field_types": {
+        "archetype_id": "ID",
+        "score_q6": "SIGNED63",
+        "selected_role": "ARCHETYPE_ROLE",
+        "suppressed_by": "ID?",
+        "reasons": "ID[0..32]"
+      }
+    },
+    {
+      "name": "ArchetypeEvaluation",
+      "owner": "narrative",
+      "fields": [
+        "evaluation_ref",
+        "snapshot_ref",
+        "snapshot_sha256",
+        "context_ref",
+        "context_sha256",
+        "registry_ref",
+        "registry_sha256",
+        "scores",
+        "relationships",
+        "cluster_scores",
+        "dominant",
+        "secondary",
+        "activated_clusters"
+      ],
+      "field_types": {
+        "evaluation_ref": "REF",
+        "snapshot_ref": "REF",
+        "snapshot_sha256": "HASH",
+        "context_ref": "REF",
+        "context_sha256": "HASH",
+        "registry_ref": "REF",
+        "registry_sha256": "HASH",
+        "scores": "ArchetypeScore[0..64]",
+        "relationships": "RelationObservation[0..256]",
+        "cluster_scores": "ClusterScore[0..16]",
+        "dominant": "ID[0..64]",
+        "secondary": "ID[0..64]",
+        "activated_clusters": "ID[0..16]"
+      }
+    },
+    {
+      "name": "NarrativeInterpretation",
+      "owner": "narrative",
+      "fields": [
+        "interpretation_ref",
+        "evaluation_ref",
+        "evaluation_sha256",
+        "scope_ref",
+        "fact_refs",
+        "pressure_tags",
+        "contradiction_refs",
+        "provenance"
+      ],
+      "field_types": {
+        "interpretation_ref": "REF",
+        "evaluation_ref": "REF",
+        "evaluation_sha256": "HASH",
+        "scope_ref": "REF",
+        "fact_refs": "REF[0..256]",
+        "pressure_tags": "ID[0..64]",
+        "contradiction_refs": "REF[0..256]",
+        "provenance": "CoreProvenance"
+      }
+    },
+    {
+      "name": "PerceptionRule",
+      "owner": "perception",
+      "fields": [
+        "rule_id",
+        "priority",
+        "subject_ref",
+        "entity_ref",
+        "condition_fact_refs",
+        "visible",
+        "interpretation_tags"
+      ],
+      "field_types": {
+        "rule_id": "ID",
+        "priority": "SIGNED32",
+        "subject_ref": "REF",
+        "entity_ref": "REF",
+        "condition_fact_refs": "REF[0..64]",
+        "visible": "bool",
+        "interpretation_tags": "ID[0..64]"
+      }
+    },
+    {
+      "name": "PerceptionRequest",
+      "owner": "perception",
+      "fields": [
+        "request_ref",
+        "subject_ref",
+        "truth",
+        "rules",
+        "provenance"
+      ],
+      "field_types": {
+        "request_ref": "REF",
+        "subject_ref": "REF",
+        "truth": "TruthInputSnapshot",
+        "rules": "PerceptionRule[0..256]",
+        "provenance": "CoreProvenance"
+      }
+    },
+    {
+      "name": "PerceptionOverlay",
+      "owner": "perception",
+      "fields": [
+        "overlay_ref",
+        "request",
+        "truth_sha256",
+        "evaluated_rules",
+        "visible_entities",
+        "hidden_entities",
+        "tags",
+        "contradiction_refs",
+        "objective_effects"
+      ],
+      "field_types": {
+        "overlay_ref": "REF",
+        "request": "PerceptionRequest",
+        "truth_sha256": "HASH",
+        "evaluated_rules": "CoreDiagnostic[0..256]",
+        "visible_entities": "REF[0..256]",
+        "hidden_entities": "REF[0..256]",
+        "tags": "ID[0..64]",
+        "contradiction_refs": "REF[0..256]",
+        "objective_effects": "NONE"
+      }
+    },
+    {
+      "name": "WeightedOption",
+      "owner": "deterministic_policy",
+      "fields": [
+        "option_id",
+        "weight"
+      ],
+      "field_types": {
+        "option_id": "ID",
+        "weight": "0..1000000"
+      }
+    },
+    {
+      "name": "WeightedAllocation",
+      "owner": "deterministic_policy",
+      "fields": [
+        "options",
+        "total_q6"
+      ],
+      "field_types": {
+        "options": "WeightedOption[0..64]",
+        "total_q6": "0..1000000"
+      }
+    },
+    {
+      "name": "SelectionRequest",
+      "owner": "deterministic_policy",
+      "fields": [
+        "domain",
+        "binding_sha256",
+        "context_sha256",
+        "seed_token",
+        "options"
+      ],
+      "field_types": {
+        "domain": "ID",
+        "binding_sha256": "HASH",
+        "context_sha256": "HASH",
+        "seed_token": "SEED",
+        "options": "WeightedOption[0..64]"
+      }
+    },
+    {
+      "name": "SelectionResult",
+      "owner": "deterministic_policy",
+      "fields": [
+        "request",
+        "selected_id",
+        "counters_used",
+        "accepted_draw"
+      ],
+      "field_types": {
+        "request": "SelectionRequest",
+        "selected_id": "ID?",
+        "counters_used": "0..16",
+        "accepted_draw": "UINT64?"
+      }
+    },
+    {
+      "name": "BiasTerm",
+      "owner": "deterministic_policy",
+      "fields": [
+        "event_id",
+        "domain",
+        "target_id",
+        "contribution_q6",
+        "evidence_refs"
+      ],
+      "field_types": {
+        "event_id": "ID",
+        "domain": "ID",
+        "target_id": "ID",
+        "contribution_q6": "SIGNED_Q6",
+        "evidence_refs": "REF[1..65]"
+      }
+    },
+    {
+      "name": "BiasState",
+      "owner": "deterministic_policy",
+      "fields": [
+        "state_ref",
+        "logical_epoch",
+        "events",
+        "weights"
+      ],
+      "field_types": {
+        "state_ref": "REF",
+        "logical_epoch": "UINT64",
+        "events": "BiasEvent[0..512]",
+        "weights": "WeightedOption[0..64]"
+      }
+    },
+    {
+      "name": "BiasUpdateResult",
+      "owner": "deterministic_policy",
+      "fields": [
+        "before",
+        "proposed",
+        "effect_status"
+      ],
+      "field_types": {
+        "before": "BiasState",
+        "proposed": "BiasState",
+        "effect_status": "PROPOSED_ONLY"
+      }
+    },
+    {
+      "name": "ExistentialMetricInputs",
+      "owner": "deterministic_policy",
+      "fields": [
+        "context_ref",
+        "compressibility_q6",
+        "symmetry_q6",
+        "persistence_q6",
+        "entropy_q6",
+        "coefficient_c",
+        "coefficient_s",
+        "coefficient_p",
+        "coefficient_h",
+        "evidence_refs"
+      ],
+      "field_types": {
+        "context_ref": "REF",
+        "compressibility_q6": "Q6",
+        "symmetry_q6": "Q6",
+        "persistence_q6": "Q6",
+        "entropy_q6": "Q6",
+        "coefficient_c": "Q6",
+        "coefficient_s": "Q6",
+        "coefficient_p": "Q6",
+        "coefficient_h": "Q6",
+        "evidence_refs": "REF[1..65]"
+      }
+    },
+    {
+      "name": "ExistenceMeasure",
+      "owner": "deterministic_policy",
+      "fields": [
+        "inputs",
+        "potential_q6"
+      ],
+      "field_types": {
+        "inputs": "ExistentialMetricInputs",
+        "potential_q6": "SIGNED63"
+      }
+    },
+    {
+      "name": "CoreDiagnostic",
+      "owner": "core_values",
+      "fields": [
+        "diagnostic_ref",
+        "owner",
+        "rule",
+        "status",
+        "failure_code",
+        "field",
+        "evidence_refs",
+        "explanation"
+      ],
+      "field_types": {
+        "diagnostic_ref": "REF",
+        "owner": "CORE_OWNER",
+        "rule": "CORE_RULE",
+        "status": "CORE_STATUS",
+        "failure_code": "CORE_FAILURE?",
+        "field": "CORE_FIELD?",
+        "evidence_refs": "REF[0..65]",
+        "explanation": "TEXT"
+      }
+    },
+    {
+      "name": "CoreResult",
+      "owner": "core_values",
+      "fields": [
+        "operation_reference",
+        "binding",
+        "status",
+        "value",
+        "diagnostics",
+        "effect_status"
+      ],
+      "field_types": {
+        "operation_reference": "ID",
+        "binding": "CoreBinding",
+        "status": "CORE_STATUS",
+        "value": "CORE_OUTPUT?",
+        "diagnostics": "CoreDiagnostic[1..32]",
+        "effect_status": "CORE_EFFECT"
+      }
+    },
+    {
+      "name": "ModuleStatus",
+      "owner": "module_lifecycle",
+      "fields": [
+        "module_id",
+        "generation",
+        "phase",
+        "closed",
+        "inflight",
+        "ledger_used"
+      ],
+      "field_types": {
+        "module_id": "CORE_OWNER",
+        "generation": "UINT64",
+        "phase": "LIFECYCLE_PHASE",
+        "closed": "bool",
+        "inflight": "0..8",
+        "ledger_used": "0..64"
+      }
+    },
+    {
+      "name": "ModuleCompletion",
+      "owner": "module_lifecycle",
+      "fields": [
+        "request_ref",
+        "admitted_generation",
+        "status",
+        "result_ref",
+        "actual_effect_status"
+      ],
+      "field_types": {
+        "request_ref": "REF",
+        "admitted_generation": "UINT64",
+        "status": "LIFECYCLE_COMPLETION",
+        "result_ref": "REF?",
+        "actual_effect_status": "CORE_EFFECT"
+      }
+    },
+    {
+      "name": "ProphecyRoute",
+      "owner": "prophecy_transport",
+      "fields": [
+        "route_id",
+        "condition_refs",
+        "destination_interpretation_ref"
+      ],
+      "field_types": {
+        "route_id": "ID",
+        "condition_refs": "REF[1..64]",
+        "destination_interpretation_ref": "REF"
+      }
+    },
+    {
+      "name": "ProphecyAttractor",
+      "owner": "prophecy_transport",
+      "fields": [
+        "target_domain",
+        "target_reference",
+        "weight_q6"
+      ],
+      "field_types": {
+        "target_domain": "ID",
+        "target_reference": "REF",
+        "weight_q6": "Q6"
+      }
+    },
+    {
+      "name": "ProphecyRecord",
+      "owner": "prophecy_transport",
+      "fields": [
+        "prophecy_id",
+        "provenance",
+        "attractor",
+        "fixed_script",
+        "deflection_routes",
+        "transmutation_routes",
+        "status",
+        "condition_refs"
+      ],
+      "field_types": {
+        "prophecy_id": "ID",
+        "provenance": "CoreProvenance",
+        "attractor": "ProphecyAttractor",
+        "fixed_script": "FALSE",
+        "deflection_routes": "ProphecyRoute[0..16]",
+        "transmutation_routes": "ProphecyRoute[0..16]",
+        "status": "PROPHECY_STATUS",
+        "condition_refs": "REF[1..64]"
+      }
+    },
+    {
+      "name": "OmenCluster",
+      "owner": "prophecy_transport",
+      "fields": [
+        "cluster_id",
+        "prophecy_refs",
+        "observed_symbol_refs",
+        "provenance"
+      ],
+      "field_types": {
+        "cluster_id": "ID",
+        "prophecy_refs": "REF[2..16]",
+        "observed_symbol_refs": "REF[1..64]",
+        "provenance": "CoreProvenance"
+      }
+    },
+    {
+      "name": "RuntimeBiasEffect",
+      "owner": "prophecy_transport",
+      "fields": [
+        "effect_id",
+        "before_ref",
+        "term",
+        "effect_status",
+        "provenance"
+      ],
+      "field_types": {
+        "effect_id": "ID",
+        "before_ref": "REF",
+        "term": "BiasTerm",
+        "effect_status": "PROPOSED_ONLY",
+        "provenance": "CoreProvenance"
+      }
+    },
+    {
+      "name": "RecurringSymbolState",
+      "owner": "prophecy_transport",
+      "fields": [
+        "state_id",
+        "symbol_ref",
+        "recurrence_count",
+        "logical_epoch",
+        "provenance"
+      ],
+      "field_types": {
+        "state_id": "ID",
+        "symbol_ref": "REF",
+        "recurrence_count": "UINT64",
+        "logical_epoch": "UINT64",
+        "provenance": "CoreProvenance"
+      }
+    },
+    {
+      "name": "RegistrySource",
+      "owner": "core_values",
+      "fields": [
+        "source_ref",
+        "source_sha256",
+        "evidence_ref"
+      ],
+      "field_types": {
+        "source_ref": "REF",
+        "source_sha256": "HASH",
+        "evidence_ref": "REF"
+      }
+    },
+    {
+      "name": "WolfPressure",
+      "owner": "narrative",
+      "fields": [
+        "white_q6",
+        "dark_q6",
+        "evidence_refs"
+      ],
+      "field_types": {
+        "white_q6": "Q6",
+        "dark_q6": "Q6",
+        "evidence_refs": "REF[1..65]"
+      }
+    },
+    {
+      "name": "WolfBias",
+      "owner": "narrative",
+      "fields": [
+        "white_q6",
+        "dark_q6"
+      ],
+      "field_types": {
+        "white_q6": "SIGNED_Q6",
+        "dark_q6": "SIGNED_Q6"
+      }
+    },
+    {
+      "name": "ArchetypeAffinity",
+      "owner": "narrative",
+      "fields": [
+        "domain",
+        "affinity_refs"
+      ],
+      "field_types": {
+        "domain": "ID",
+        "affinity_refs": "REF[0..64]"
+      }
+    },
+    {
+      "name": "ClusterRecord",
+      "owner": "narrative",
+      "fields": [
+        "cluster_id",
+        "member_ids",
+        "lawful_basis_refs",
+        "stability",
+        "contradiction_risk_ref"
+      ],
+      "field_types": {
+        "cluster_id": "ID",
+        "member_ids": "ID[2..16]",
+        "lawful_basis_refs": "REF[1..16]",
+        "stability": "CLUSTER_STABILITY",
+        "contradiction_risk_ref": "REF"
+      }
+    },
+    {
+      "name": "ArchetypeRegistry",
+      "owner": "narrative",
+      "fields": [
+        "registry_id",
+        "primary_source",
+        "relationship_source",
+        "archetypes",
+        "clusters"
+      ],
+      "field_types": {
+        "registry_id": "ID",
+        "primary_source": "RegistrySource",
+        "relationship_source": "RegistrySource",
+        "archetypes": "ArchetypeRecord[0..64]",
+        "clusters": "ClusterRecord[0..16]"
+      }
+    },
+    {
+      "name": "RelationObservation",
+      "owner": "narrative",
+      "fields": [
+        "first_id",
+        "second_id",
+        "relation",
+        "score_delta_q6",
+        "coexistence_allowed",
+        "suppressed_id"
+      ],
+      "field_types": {
+        "first_id": "ID",
+        "second_id": "ID",
+        "relation": "RELATION",
+        "score_delta_q6": "SIGNED_Q6",
+        "coexistence_allowed": "bool",
+        "suppressed_id": "ID?"
+      }
+    },
+    {
+      "name": "ClusterScore",
+      "owner": "narrative",
+      "fields": [
+        "cluster_id",
+        "qualifying_members",
+        "base_score_q6",
+        "stability_bonus_q6",
+        "support_penalty_q6",
+        "final_score_q6",
+        "activated",
+        "reasons"
+      ],
+      "field_types": {
+        "cluster_id": "ID",
+        "qualifying_members": "ID[0..16]",
+        "base_score_q6": "SIGNED63",
+        "stability_bonus_q6": "SIGNED_Q6",
+        "support_penalty_q6": "SIGNED_Q6",
+        "final_score_q6": "SIGNED63",
+        "activated": "bool",
+        "reasons": "ID[0..32]"
+      }
+    },
+    {
+      "name": "BiasEvent",
+      "owner": "deterministic_policy",
+      "fields": [
+        "event_id",
+        "terms",
+        "evidence_refs"
+      ],
+      "field_types": {
+        "event_id": "ID",
+        "terms": "BiasTerm[1..64]",
+        "evidence_refs": "REF[1..65]"
+      }
+    },
+    {
+      "name": "ModuleLifecycleReceipt",
+      "owner": "module_lifecycle",
+      "fields": [
+        "operation_reference",
+        "action",
+        "before",
+        "after",
+        "status",
+        "failure_code"
+      ],
+      "field_types": {
+        "operation_reference": "ID",
+        "action": "LIFECYCLE_ACTION",
+        "before": "ModuleStatus",
+        "after": "ModuleStatus",
+        "status": "LIFECYCLE_COMPLETION",
+        "failure_code": "CORE_FAILURE?"
+      }
+    },
+    {
+      "name": "CoreOrchestrationRequest",
+      "owner": "orchestration",
+      "fields": [
+        "operation_reference",
+        "inputs",
+        "origin",
+        "normalization",
+        "declared_subject",
+        "target_constraints",
+        "realm_request",
+        "archetype_context",
+        "truth_input",
+        "perception_request"
+      ],
+      "field_types": {
+        "operation_reference": "ID",
+        "inputs": "GenerationInputs",
+        "origin": "StateDiagnosis",
+        "normalization": "CoreNormalizationRequest?",
+        "declared_subject": "AxiomSubject",
+        "target_constraints": "TargetConstraints",
+        "realm_request": "RealmAccessRequest?",
+        "archetype_context": "ArchetypeContext?",
+        "truth_input": "TruthInputSnapshot?",
+        "perception_request": "PerceptionRequest?"
+      }
+    },
+    {
+      "name": "CoreOrchestrationResult",
+      "owner": "orchestration",
+      "fields": [
+        "request",
+        "binding",
+        "normalization_result",
+        "normalization_completion",
+        "normalized_origin",
+        "normalized_origin_completion",
+        "generation_run",
+        "cosmology",
+        "realm_access",
+        "realm_shift",
+        "pattern",
+        "archetypes",
+        "narrative",
+        "perception",
+        "status",
+        "diagnostics"
+      ],
+      "field_types": {
+        "request": "CoreOrchestrationRequest",
+        "binding": "CoreBinding",
+        "normalization_result": "NormalizationPacket?",
+        "normalization_completion": "DiagnosticsCompletionReceipt?",
+        "normalized_origin": "StateDiagnosis?",
+        "normalized_origin_completion": "DiagnosticsCompletionReceipt?",
+        "generation_run": "GenerationRunReceipt?",
+        "cosmology": "CoreResult?",
+        "realm_access": "CoreResult?",
+        "realm_shift": "CoreResult?",
+        "pattern": "CoreResult?",
+        "archetypes": "CoreResult?",
+        "narrative": "CoreResult?",
+        "perception": "CoreResult?",
+        "status": "CORE_STATUS",
+        "diagnostics": "CoreDiagnostic[1..32]"
+      }
+    },
+    {
+      "name": "CoreNormalizationRequest",
+      "owner": "orchestration",
+      "fields": [
+        "plan",
+        "context"
+      ],
+      "field_types": {
+        "plan": "NormalizationPlan",
+        "context": "NormalizationContext"
+      }
+    }
+  ],
+  "ports": [
+    {
+      "owner": "CosmologyEngine",
+      "signature": "configuration()->CoreBinding"
+    },
+    {
+      "owner": "CosmologyEngine",
+      "signature": "initialize_cosmos(baseline:StateDiagnosis,*,operation_reference)->CoreResult"
+    },
+    {
+      "owner": "CosmologyEngine",
+      "signature": "get_profile_realm_definitions()->tuple[ProfileRealmDefinition]"
+    },
+    {
+      "owner": "CosmologyEngine",
+      "signature": "validate_owned_result(result)->bool"
+    },
+    {
+      "owner": "RealmEngine",
+      "signature": "configuration()->CoreBinding"
+    },
+    {
+      "owner": "RealmEngine",
+      "signature": "evaluate_access(request:RealmAccessRequest)->CoreResult"
+    },
+    {
+      "owner": "RealmEngine",
+      "signature": "propose_shift(access:RealmAccessResult,*,proposal_ref)->CoreResult"
+    },
+    {
+      "owner": "RealmEngine",
+      "signature": "validate_owned_result(result)->bool"
+    },
+    {
+      "owner": "AshCoreFacade",
+      "signature": "configuration()->CoreBinding"
+    },
+    {
+      "owner": "AshCoreFacade",
+      "signature": "project_patterns(permit:CorePlanPermit,projection_rules:tuple[PatternProjectionRule],*,snapshot_ref)->CoreResult"
+    },
+    {
+      "owner": "AshCoreFacade",
+      "signature": "validate_owned_result(result)->bool"
+    },
+    {
+      "owner": "NarrativeEngine",
+      "signature": "configuration()->CoreBinding"
+    },
+    {
+      "owner": "NarrativeEngine",
+      "signature": "evaluate_archetypes(snapshot:CosmicPatternSnapshot,context:ArchetypeContext,registry:ArchetypeRegistry)->CoreResult"
+    },
+    {
+      "owner": "NarrativeEngine",
+      "signature": "interpret(evaluation,truth_input,*,interpretation_ref)->CoreResult"
+    },
+    {
+      "owner": "NarrativeEngine",
+      "signature": "read_memory_view(truth_input)->tuple[DeclaredTruthFact]"
+    },
+    {
+      "owner": "NarrativeEngine",
+      "signature": "validate_owned_result(result)->bool"
+    },
+    {
+      "owner": "PerceptionEngine",
+      "signature": "configuration()->CoreBinding"
+    },
+    {
+      "owner": "PerceptionEngine",
+      "signature": "compose_overlay(request:PerceptionRequest)->CoreResult"
+    },
+    {
+      "owner": "PerceptionEngine",
+      "signature": "validate_owned_result(result)->bool"
+    },
+    {
+      "owner": "DeterministicPolicy",
+      "signature": "configuration()->CoreBinding"
+    },
+    {
+      "owner": "DeterministicPolicy",
+      "signature": "normalize(options)->CoreResult"
+    },
+    {
+      "owner": "DeterministicPolicy",
+      "signature": "select(request:SelectionRequest)->CoreResult"
+    },
+    {
+      "owner": "DeterministicPolicy",
+      "signature": "merge_bias(before,terms,*,logical_epoch,retention_q6)->CoreResult"
+    },
+    {
+      "owner": "DeterministicPolicy",
+      "signature": "measure_existence(inputs)->CoreResult"
+    },
+    {
+      "owner": "CoreValues",
+      "signature": "revalidate_value(value)->None"
+    },
+    {
+      "owner": "CoreValues",
+      "signature": "raw_business_size(value,*,limit=1048576)->int"
+    },
+    {
+      "owner": "CoreValues",
+      "signature": "canonical_bytes(value,*,limit=1048576)->bytes"
+    },
+    {
+      "owner": "CoreModuleLifecycle",
+      "signature": "status()->ModuleStatus"
+    },
+    {
+      "owner": "CoreModuleLifecycle",
+      "signature": "start(request_id,*,expected_generation)->ModuleLifecycleReceipt"
+    },
+    {
+      "owner": "CoreModuleLifecycle",
+      "signature": "admit(request_id,*,expected_generation,operation_bindings:tuple[exact(scope_ref,allowed_stages),...])->ModuleTicket|ModuleCompletion"
+    },
+    {
+      "owner": "CoreModuleLifecycle",
+      "signature": "complete(ticket,actual_result)->ModuleCompletion"
+    },
+    {
+      "owner": "CoreModuleLifecycle",
+      "signature": "stop(request_id,*,expected_generation)->ModuleLifecycleReceipt"
+    },
+    {
+      "owner": "CoreOrchestrator",
+      "signature": "run(request:CoreOrchestrationRequest)->CoreOrchestrationResult"
+    },
+    {
+      "owner": "CoreOrchestrator",
+      "signature": "emit(actual_owned_result,target,*,operation_reference)->PlannerEmitterCaptureReceipt"
+    },
+    {
+      "owner": "CoreOrchestrator",
+      "signature": "validate_owned_result(result)->bool"
+    },
+    {
+      "owner": "CoreOrchestrator",
+      "signature": "validate_plan_permit(permit,*,binding)->bool"
+    },
+    {
+      "owner": "CoreModuleLifecycle",
+      "signature": "execution_gate(ticket,collector)->CoreExecutionGate"
+    },
+    {
+      "owner": "StateModel [PROPOSED_ADDITIVE_KEYWORD]",
+      "signature": "apply_normalization(plan,*,normalization_context,execution_gate:CoreExecutionGate|None=None)->NormalizationResult|NormalizationFailure|NormalizationCaptureFailure"
+    },
+    {
+      "owner": "Diagnostics [PROPOSED_ADDITIVE_KEYWORD]",
+      "signature": "normalization_capture(*,execution_gate:CoreExecutionGate|None=None)->existingownednormalizationadapter"
+    },
+    {
+      "owner": "Diagnostics [PROPOSED_ADDITIVE_GATE_UNION]",
+      "signature": "assessment_capture(*,relation=None,execution_gate:SessionExecutionGate|CoreExecutionGate|None=None)->existingownedassessmentadapter"
+    },
+    {
+      "owner": "Diagnostics [PROPOSED_ADDITIVE_GATE_UNION]",
+      "signature": "module_capture(producer,context,*,execution_gate:SessionExecutionGate|CoreExecutionGate|None=None,emitter_control:IssuedEmitterCaptureControl|None=None)->ModuleCaptureAdmission"
+    },
+    {
+      "owner": "Diagnostics [PROPOSED_ADDITIVE_KEYWORD]",
+      "signature": "complete_normalization(result,*,execution_gate:CoreExecutionGate|None=None)->DiagnosticsCompletionReceipt"
+    },
+    {
+      "owner": "CoreOrchestrator",
+      "signature": "configuration()->CoreBinding"
+    },
+    {
+      "owner": "DeterministicPolicy",
+      "signature": "validate_owned_result(result)->bool"
+    }
+  ],
+  "api_only_capabilities": [
+    "ModuleTicket exact private owner/cookie/selfidentity; not serializable",
+    "Owner/result issuance cookie exact identity; not wire",
+    "CorePlanPermit privately issued by exact orchestrator actual captured plan/current lease; no wire constructor/peer private reads"
+  ],
+  "unresolved_before_freeze": [
+    "Actual owner source adoption, containing Git revision and source4 host mapping precede runtime issuance.",
+    "The joint PE/Diagnostics whole-pipeline proof includes the actual H4 normalization prefix; no current Core gate, chain, planner or emitter execution is claimed.",
+    "The complete 28-invariant/five-category executable judgment remains an implementation acceptance gate."
+  ],
+  "boundary_error": {
+    "name": "CoreContractError",
+    "fields": [
+      "code",
+      "field_name"
+    ],
+    "failure_codes": [
+      "CORE_VALUE_INVALID",
+      "CORE_BINDING_MISMATCH",
+      "CORE_PROFILE_CONFLICT",
+      "CORE_PROVENANCE_MISSING",
+      "CORE_UNKNOWN_REFERENCE",
+      "CORE_FACT_CONFLICT",
+      "CORE_CAPABILITY_UNAVAILABLE",
+      "CORE_RESOURCE_LIMIT",
+      "CORE_LIFECYCLE_REJECTED",
+      "CORE_STAGE_REVOKED",
+      "CORE_NO_POSITIVE_WEIGHT",
+      "CORE_SELECTION_EXHAUSTED",
+      "CORE_EPOCH_REVERSED",
+      "CORE_NUMERIC_OVERFLOW"
+    ]
+  },
+  "api_only_types": [
+    {
+      "name": "CoreStageGrant",
+      "owner": "module_lifecycle",
+      "fields": [
+        "operation_reference",
+        "stage",
+        "generation",
+        "grant_sequence",
+        "status"
+      ],
+      "stage_domain": [
+        "ORIGIN_CAPTURE",
+        "NORMALIZATION_VALIDATE",
+        "NORMALIZATION_CAPTURE",
+        "NORMALIZATION_VALUE",
+        "NORMALIZATION_POST_CAPTURE",
+        "SOURCE_ENCODING",
+        "CHAIN",
+        "FINAL_DIAGNOSIS",
+        "DESTINATION_ENCODING",
+        "TOPOLOGY",
+        "AXIOMS",
+        "PLANNER",
+        "PATTERN_PROJECTION",
+        "NARRATIVE",
+        "PERCEPTION",
+        "EMISSION_PREPARE",
+        "EMISSION_DISPATCH",
+        "COSMOLOGY",
+        "REALM_ACCESS",
+        "REALM_SHIFT_PROPOSAL"
+      ],
+      "status_domain": [
+        "GRANTED",
+        "CANCELLED",
+        "UNAVAILABLE"
+      ],
+      "wire_representation": false
+    },
+    {
+      "name": "CoreExecutionGate",
+      "owner": "module_lifecycle",
+      "public_ports": [
+        "configuration()->exactimmutable(collector,operation_reference,source_binding,profile_binding,generation)",
+        "stage_grant(stage)->CoreStageGrant",
+        "capture_disposition()->ACTIVE|SEALED|UNAVAILABLE",
+        "validate_issued_for_collector(gate,collector,operation_reference)->bool",
+        "for_operation(original_gate,operation_reference,allowed_stage)->CoreExecutionGate"
+      ],
+      "authority": "Exactprivateissuer/cookie/originalgate/selfidentity and ownerledger; grantsCoreoperationonly, noRecoveryauthority/sessionpublication",
+      "scope_binding": "Exactownerregistered(actualscopeoperationref,allowedstagegroup) beforeIO; max64childgates/ticket,no recursive childexpansion/no prefix auth."
+    },
+    {
+      "name": "CorePlanPermit",
+      "owner": "orchestration",
+      "public_ports": [
+        "configuration()->exactimmutable(actualownedGenerationRunReceipt,binding,operation_reference,generation)"
+      ],
+      "authority": "ExactprivateCoreissuer/cookie/originalpermit/selfidentity/currentlease issuedonlyfromactualclass-ownedREADYrunnerreturn+completeactualplancapture"
+    }
+  ],
+  "result_seal": "Pure CoreResult: exact issuer/cookie/original result/self identity/current binding/issued compact-wire SHA; no result ledger. Orchestration run uses the same own seal. Its emit return preserves the exact peer receipt, authenticates through the class-owned runner port, and associates that exact returned object with its actual admitted operation in the existing at-most64-entry operation ledger; no unbounded result registry or peer private reads.",
+  "source_baseline": "M3_GENERATION",
+  "canonical_binding": {
+    "dependency_id": "ash_cosmological_model.f2_9.canonical",
+    "aggregate_sha256": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8",
+    "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+    "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+    "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+    "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+    "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+    "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+    "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+  },
+  "session_authority_boundary": "CoreentryrejectsSessionExecutionGate beforehooks; Session/RecoverypublicationrejectsCoreExecutionGate. No sessiongeneration/emission action proposed; no revival/substitution.",
+  "operation_bindings": "Immutableexactactualscope+stagegroups,64max/ticket; derivedchildgateonlyfromoriginalregisteredtuple/currentissuer; childcannotexpand.",
+  "constructors": [
+    {
+      "owner": "CosmologyEngine",
+      "signature": "CosmologyEngine(binding:CoreBinding,state_model:StateModel)"
+    },
+    {
+      "owner": "RealmEngine",
+      "signature": "RealmEngine(binding:CoreBinding)"
+    },
+    {
+      "owner": "AshCoreFacade",
+      "signature": "AshCoreFacade(binding:CoreBinding,state_model:StateModel)"
+    },
+    {
+      "owner": "NarrativeEngine",
+      "signature": "NarrativeEngine(binding:CoreBinding)"
+    },
+    {
+      "owner": "PerceptionEngine",
+      "signature": "PerceptionEngine(binding:CoreBinding)"
+    },
+    {
+      "owner": "DeterministicPolicy",
+      "signature": "DeterministicPolicy(binding:CoreBinding)"
+    },
+    {
+      "owner": "CoreModuleLifecycle",
+      "signature": "CoreModuleLifecycle(owner:exact_registered_Core_owner)"
+    },
+    {
+      "owner": "CoreOrchestrator",
+      "signature": "CoreOrchestrator(binding:CoreBinding,state_model:StateModel,diagnostics:ReferenceDevelopmentDiagnostics|ReferenceReleaseDiagnostics,generation_runner:ReferenceGenerationRunner,cosmology:CosmologyEngine,realms:RealmEngine,patterns:AshCoreFacade,narrative:NarrativeEngine,perception:PerceptionEngine,*,projection_rules:tuple[PatternProjectionRule,...]=(),archetype_registry:ArchetypeRegistry|None=None)"
+    }
+  ],
+  "constructor_protocol": "Exact class/complete immutable source/profile/policy checks through class-owned public configuration ports before methods or hooks. Configuration/dependency binding performs no diagnosis, callback, storage, grant or activation. The logical lifecycle is bound to one exact original configured owner; no arbitrary owner registry or duck typing.",
+  "lifecycle_completion_protocol": "Only the exact issued ticket may complete, at most once. The exact bound owner authenticates its actual original result via its class-owned owned-result port and same operation reference. Failed/late result remains actual; confirmed target receipts permit KNOWN_COMPLETE, partial receipts KNOWN_PARTIAL, unknown physical outcome UNKNOWN; these statuses do not confer world/branch persistence.",
+  "conditional_inputs": {
+    "narrative": "archetype_context null skips evaluation and interpretation. Nonnull requires configured archetype_registry and effective_truth: explicit truth_input, else actual perception_request.truth. No source yields preflight REFUSED/CORE_PROVENANCE_MISSING/truth_input before new capture or effects; absent registry yields CORE_CAPABILITY_UNAVAILABLE/archetype_context.",
+    "truth_conflict": "When explicit truth_input and perception_request.truth are both supplied, their complete canonical bytes must equal; otherwise preflight REFUSED/CORE_FACT_CONFLICT/truth_input. No empty graph is fabricated.",
+    "perception": "perception_request null skips overlay. Otherwise its actual truth/provenance is validated at the corresponding stage; an existing input graph is used unchanged, never synthesized from bits or narrative output.",
+    "realm": "realm_request null skips access/shift. Otherwise evaluate access; eligible true authorizes pure shift proposal, false/refused or unavailable/pending stops following ordinary stages and retains access result.",
+    "projection": "Configured tuple defaults to empty (typed NO_OP snapshot, no fabricated profile facts). Unique pattern IDs sorted ASCII; mask indexes actual final destination integer0..511. Empty codeword_ids is no trace restriction; otherwise at least one actual canonical trace member must intersect. Matched strength is configured strength, otherwise0; every row retains full actual trace and source refs.",
+    "links": "Each recurrence/myth/prophecy feature contributes its coefficient once iff its own context ref set intersects the record evidence_refs. Those refs remain declared interpretation inputs, not host-verified activation."
+  },
+  "raw_admission": "Exact request plus bounded complete-refusal framing must fit1MiB before ticket/capture/effect. Preserve closing allowance. Oversize actual issued peer return stays complete API-only with REFUSED/CORE_RESOURCE_LIMIT and no following ordinary stage; serializers raise rather than clipping. PE-owned emit receipts retain their own cap and are not relabeled Core packets.",
+  "grant_call_ownership": {
+    "CoreOrchestrator.run": 11,
+    "StateModel.apply_normalization": 2,
+    "ReferenceGenerationRunner.run": 13,
+    "CoreOrchestrator.emit": 0,
+    "ReferenceGenerationRunner.emit": 1,
+    "ReferenceArtifactEmitter.emit_eight_documents": 9,
+    "collector_callback_io": 0
+  },
+  "grant_rule": "The named delegate is the sole stage_grant call site for that stage. The caller issues exact child gates and performs independent disposition rechecks without a duplicate stage grant. Collector admission/append/finish/final/return audit never mint grants or call owner permission while holding I/O locks.",
+  "requirement_id": "YWE-REQ-0051",
+  "adr_id": "ADR-0043",
+  "policy_sha256": "74dfa3b318cd38296c0b86ad9ff5c14e8fb1d7aed5ff1c02274baa4bbd871e91",
+  "schema_sha256": "6038797cd0cb7b2f3882d5bc933ecb3310cba93f08bd5507110f7bf627f33186"
+}

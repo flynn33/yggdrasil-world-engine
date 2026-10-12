@@ -15,7 +15,7 @@ and `SOURCE_AVAILABILITY_MANIFEST.md` is historical source-ingest provenance.
 - Resolved canonical artifacts: `17`
 - Blocking missing artifacts: `0`
 - Intentional placeholder-backed artifacts: `9`
-- Current placeholder artifacts: `44`
+- Current placeholder artifacts: `30`
 - Master spec authority artifact: present at `docs/master_specification/YWE_MASTER_SPECIFICATION.md`
 - Repository map: present at `docs/project/repository_map.md`
 - ASH/ASP core math rebuild: present in the current repository state

@@ -29,7 +29,11 @@
         "Lowercase keyword uses remain descriptive rather than implicitly binding.",
         "Terminal requirement records remain in the register and material semantic changes allocate new identifiers."
       ],
-      "requirement_refs": ["YWE-REQ-0001", "YWE-REQ-0002", "YWE-REQ-0003"],
+      "requirement_refs": [
+        "YWE-REQ-0001",
+        "YWE-REQ-0002",
+        "YWE-REQ-0003"
+      ],
       "source_refs": [
         "docs/governance/normative_language_and_requirement_id_policy.md",
         "data/governance/specification_roadmap.json#/milestones/1/deliverables/0"
@@ -57,7 +61,11 @@
         "The machine register is the current record authority while historical logs remain provenance.",
         "Semantic questions close only through a linked accepted decision, and duplicate concept definitions are governance defects."
       ],
-      "requirement_refs": ["YWE-REQ-0004", "YWE-REQ-0017", "YWE-REQ-0018"],
+      "requirement_refs": [
+        "YWE-REQ-0004",
+        "YWE-REQ-0017",
+        "YWE-REQ-0018"
+      ],
       "source_refs": [
         "docs/governance/governance_records_policy.md",
         "data/governance/specification_roadmap.json#/milestones/1/deliverables/1",
@@ -86,7 +94,11 @@
         "Ontology changes are not represented as ordinary worldstate deltas.",
         "State mutation and perception outputs require explicit truth scope and provenance."
       ],
-      "requirement_refs": ["YWE-REQ-0005", "YWE-REQ-0006", "YWE-REQ-0007"],
+      "requirement_refs": [
+        "YWE-REQ-0005",
+        "YWE-REQ-0006",
+        "YWE-REQ-0007"
+      ],
       "source_refs": [
         "yggdrasil-instructions.json#/cosmological_invariants/2",
         "docs/architecture/worldstate_location_mutation_v1.md",
@@ -115,7 +127,9 @@
         "Mappings between presentation, ordinal, coordinate, and identity representations must be explicit.",
         "Realm and plane remain aliases for the same ontology category rather than separate structures."
       ],
-      "requirement_refs": ["YWE-REQ-0008"],
+      "requirement_refs": [
+        "YWE-REQ-0008"
+      ],
       "source_refs": [
         "lore/wrw_cosmology/first_darkness_and_divine_core.md#the-nine-realms-or-planes",
         "data/governance/specification_roadmap.json#/milestones/1/deliverables/3"
@@ -143,7 +157,10 @@
         "YWE interpretation may consume ASH symbolic output but cannot redefine the upstream grammar.",
         "Any accepted ASH dependency change updates the pinned digest and receives durable governance review."
       ],
-      "requirement_refs": ["YWE-REQ-0009", "YWE-REQ-0010"],
+      "requirement_refs": [
+        "YWE-REQ-0009",
+        "YWE-REQ-0010"
+      ],
       "source_refs": [
         "docs/architecture/ash_upstream_authority_contract.md",
         "data/governance/ash_dependency_identity.json",
@@ -172,7 +189,9 @@
         "New normative schemas and examples use wolf_resonance.",
         "Legacy wolf_alignment input is normalized without treating either variable as good or evil."
       ],
-      "requirement_refs": ["YWE-REQ-0011"],
+      "requirement_refs": [
+        "YWE-REQ-0011"
+      ],
       "source_refs": [
         "docs/master_specification/YWE_MASTER_SPECIFICATION.md#5-wolf-resonance-system",
         "data/governance/specification_roadmap.json#/milestones/1/deliverables/5"
@@ -200,7 +219,10 @@
         "Histories retain both the original event and its compensating delta.",
         "Current state is derived by applying accepted deltas in deterministic order."
       ],
-      "requirement_refs": ["YWE-REQ-0012", "YWE-REQ-0013"],
+      "requirement_refs": [
+        "YWE-REQ-0012",
+        "YWE-REQ-0013"
+      ],
       "source_refs": [
         "core/narrative_engine/npc_synthesis_rules.yaml",
         "core/narrative_engine/worldstate_delta_rules.yaml",
@@ -229,7 +251,9 @@
         "Resolvers compare proposed changes against all higher applicable constraints.",
         "A blocked lower-layer change produces an explicit rejection or diagnostic rather than a hidden overwrite."
       ],
-      "requirement_refs": ["YWE-REQ-0014"],
+      "requirement_refs": [
+        "YWE-REQ-0014"
+      ],
       "source_refs": [
         "docs/architecture/authored_override_and_tooling_notes.md",
         "data/schemas/truth_scope_schema.json",
@@ -260,7 +284,9 @@
         "Every material artifact receives an unambiguous scope classification.",
         "WRW fixtures may prove a generic contract but do not promote WRW-specific canon into YWE Core."
       ],
-      "requirement_refs": ["YWE-REQ-0015"],
+      "requirement_refs": [
+        "YWE-REQ-0015"
+      ],
       "source_refs": [
         "docs/project/scope_partition_map.md",
         "data/governance/scope_partition_manifest.json",
@@ -289,7 +315,9 @@
         "ASH changes begin in the canonical source and regenerate the mirror deterministically.",
         "Synchronization validation blocks drift, untracked mirror-only content, and digest mismatch."
       ],
-      "requirement_refs": ["YWE-REQ-0016"],
+      "requirement_refs": [
+        "YWE-REQ-0016"
+      ],
       "source_refs": [
         "data/governance/ash_dependency_identity.json",
         "scripts/sync_ash_specifications.py",
@@ -328,8 +356,16 @@
       "proposal": "Adopt stable normative requirements, typed governance records, and the ten accepted M1 decisions that normalize authority and canon terminology.",
       "rationale": "The M1 roadmap requires durable governance before later contract, schema, lifecycle, and conformance milestones can depend on one meaning.",
       "affected_record_refs": [
-        "ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005",
-        "ADR-0006", "ADR-0007", "ADR-0008", "ADR-0009", "ADR-0010"
+        "ADR-0001",
+        "ADR-0002",
+        "ADR-0003",
+        "ADR-0004",
+        "ADR-0005",
+        "ADR-0006",
+        "ADR-0007",
+        "ADR-0008",
+        "ADR-0009",
+        "ADR-0010"
       ],
       "implementation_refs": [
         "docs/governance/normative_language_and_requirement_id_policy.md",
@@ -343,13 +379,28 @@
         "scripts/sync_ash_specifications.py"
       ],
       "requirement_refs": [
-        "YWE-REQ-0001", "YWE-REQ-0002", "YWE-REQ-0003", "YWE-REQ-0004",
-        "YWE-REQ-0005", "YWE-REQ-0006", "YWE-REQ-0007", "YWE-REQ-0008",
-        "YWE-REQ-0009", "YWE-REQ-0010", "YWE-REQ-0011", "YWE-REQ-0012",
-        "YWE-REQ-0013", "YWE-REQ-0014", "YWE-REQ-0015", "YWE-REQ-0016",
-        "YWE-REQ-0017", "YWE-REQ-0018"
+        "YWE-REQ-0001",
+        "YWE-REQ-0002",
+        "YWE-REQ-0003",
+        "YWE-REQ-0004",
+        "YWE-REQ-0005",
+        "YWE-REQ-0006",
+        "YWE-REQ-0007",
+        "YWE-REQ-0008",
+        "YWE-REQ-0009",
+        "YWE-REQ-0010",
+        "YWE-REQ-0011",
+        "YWE-REQ-0012",
+        "YWE-REQ-0013",
+        "YWE-REQ-0014",
+        "YWE-REQ-0015",
+        "YWE-REQ-0016",
+        "YWE-REQ-0017",
+        "YWE-REQ-0018"
       ],
-      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1"]
+      "source_refs": [
+        "data/governance/specification_roadmap.json#/milestones/1"
+      ]
     },
     {
       "id": "RISK-0001",
@@ -381,9 +432,15 @@
         "Normalize legacy alias input to wolf_resonance without moral interpretation."
       ],
       "residual_risk": "Legacy artifacts may retain the historical token until migrated, so compatibility reads remain bounded and reviewable.",
-      "related_record_refs": ["ADR-0006"],
-      "requirement_refs": ["YWE-REQ-0011"],
-      "source_refs": ["data/validation/repository_quality_debt_inventory.json#/debts/65"]
+      "related_record_refs": [
+        "ADR-0006"
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0011"
+      ],
+      "source_refs": [
+        "data/validation/repository_quality_debt_inventory.json#/debts/65"
+      ]
     },
     {
       "id": "RISK-0002",
@@ -415,8 +472,12 @@
         "Treat WRW fixtures as evidence for generic contracts rather than as Core authority."
       ],
       "residual_risk": "Mixed prose still requires review where generic contract language and WRW examples appear together.",
-      "related_record_refs": ["ADR-0009"],
-      "requirement_refs": ["YWE-REQ-0015"],
+      "related_record_refs": [
+        "ADR-0009"
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0015"
+      ],
       "source_refs": [
         "data/governance/scope_partition_manifest.json",
         "docs/project/scope_partition_map.md"
@@ -452,8 +513,14 @@
         "Fail synchronization validation on path, content, or pinned-digest drift."
       ],
       "residual_risk": "A governance-reviewed canonical ASH change still requires regeneration and digest refresh in the same accepted change.",
-      "related_record_refs": ["ADR-0005", "ADR-0010"],
-      "requirement_refs": ["YWE-REQ-0010", "YWE-REQ-0016"],
+      "related_record_refs": [
+        "ADR-0005",
+        "ADR-0010"
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0010",
+        "YWE-REQ-0016"
+      ],
       "source_refs": [
         "data/governance/ash_dependency_identity.json",
         "scripts/sync_ash_specifications.py"
@@ -462,7 +529,9 @@
     {
       "id": "DEV-0001",
       "record_type": "deviation",
-      "legacy_ids": ["D-001"],
+      "legacy_ids": [
+        "D-001"
+      ],
       "title": "Superseded authority-chain package",
       "status": "resolved",
       "recorded_on": "2026-07-19",
@@ -480,13 +549,20 @@
       "context": "A superseded authority-chain package predated the accepted ASH and ASP core-math rebuild.",
       "resolution": "The rebuilt ASH authority model supersedes the earlier package, which remains historical and is not active authority.",
       "follow_up": "Preserve the legacy record and prevent the superseded package from re-entering active authority routing.",
-      "requirement_refs": ["YWE-REQ-0009", "YWE-REQ-0017"],
-      "source_refs": ["conformance/deviation-log.md#resolved-items"]
+      "requirement_refs": [
+        "YWE-REQ-0009",
+        "YWE-REQ-0017"
+      ],
+      "source_refs": [
+        "conformance/deviation-log.md#resolved-items"
+      ]
     },
     {
       "id": "DEV-0002",
       "record_type": "deviation",
-      "legacy_ids": ["D-002"],
+      "legacy_ids": [
+        "D-002"
+      ],
       "title": "Fallback policy semantic alignment",
       "status": "resolved",
       "recorded_on": "2026-07-19",
@@ -504,7 +580,10 @@
       "context": "An earlier package described a fallback-policy blocker after the live registry had adopted full nine-bit VALID and STABLE semantics.",
       "resolution": "The live fallback registry and semantic-integrity validation are current authority; the obsolete blocker claim is resolved.",
       "follow_up": "Preserve blocking semantic-integrity checks.",
-      "requirement_refs": ["YWE-REQ-0014", "YWE-REQ-0017"],
+      "requirement_refs": [
+        "YWE-REQ-0014",
+        "YWE-REQ-0017"
+      ],
       "source_refs": [
         "conformance/deviation-log.md#resolved-items",
         "specs/registries/fallback-policy-registry.md"
@@ -513,7 +592,9 @@
     {
       "id": "DEV-0003",
       "record_type": "deviation",
-      "legacy_ids": ["D-003"],
+      "legacy_ids": [
+        "D-003"
+      ],
       "title": "Code-agnostic runtime implementation boundary",
       "status": "resolved",
       "recorded_on": "2026-07-19",
@@ -531,7 +612,10 @@
       "context": "Historical gates referred to runtime implementation surfaces even though this repository is a platform-neutral specification repository.",
       "resolution": "Required behavior is represented here as schemas, interfaces, rule records, fixtures, and validators; concrete host implementations remain outside this repository.",
       "follow_up": "Future authorized hosts must materialize accepted outputs and prove adapter-level conformance separately.",
-      "requirement_refs": ["YWE-REQ-0015", "YWE-REQ-0017"],
+      "requirement_refs": [
+        "YWE-REQ-0015",
+        "YWE-REQ-0017"
+      ],
       "source_refs": [
         "conformance/deviation-log.md#resolved-items",
         "data/governance/repository_truth_manifest.json#/platform_gate"
@@ -540,7 +624,9 @@
     {
       "id": "DEV-0004",
       "record_type": "deviation",
-      "legacy_ids": ["D-004"],
+      "legacy_ids": [
+        "D-004"
+      ],
       "title": "Preservation of restored planning and engine design records",
       "status": "resolved",
       "recorded_on": "2026-07-19",
@@ -558,13 +644,20 @@
       "context": "Alignment work needed to preserve and extend existing engine and planning records instead of replacing them with package-only summaries.",
       "resolution": "Existing records were extended in place with ASH provenance, diagnostics, and materialization contracts.",
       "follow_up": "Continue additive maintenance and retain durable rationale for material replacements.",
-      "requirement_refs": ["YWE-REQ-0014", "YWE-REQ-0017"],
-      "source_refs": ["conformance/deviation-log.md#resolved-items"]
+      "requirement_refs": [
+        "YWE-REQ-0014",
+        "YWE-REQ-0017"
+      ],
+      "source_refs": [
+        "conformance/deviation-log.md#resolved-items"
+      ]
     },
     {
       "id": "DEV-0005",
       "record_type": "deviation",
-      "legacy_ids": ["D-005"],
+      "legacy_ids": [
+        "D-005"
+      ],
       "title": "ASH upstream authority architecture extension",
       "status": "resolved",
       "recorded_on": "2026-07-19",
@@ -582,7 +675,11 @@
       "context": "The ASH upstream authority package added an architecture extension after the accepted alignment baseline.",
       "resolution": "The additive authority contract, generation flow, packet schemas, and validation references preserve existing design content and do not alter canonical ASH math.",
       "follow_up": "Bind continuing ASH authority to ADR-0005, ADR-0010, and the pinned dependency identity.",
-      "requirement_refs": ["YWE-REQ-0009", "YWE-REQ-0010", "YWE-REQ-0017"],
+      "requirement_refs": [
+        "YWE-REQ-0009",
+        "YWE-REQ-0010",
+        "YWE-REQ-0017"
+      ],
       "source_refs": [
         "conformance/deviation-log.md#resolved-items",
         "docs/architecture/ash_upstream_authority_contract.md",
@@ -612,8 +709,14 @@
       "question": "Does lawful worldstate mutation alter the nine-coordinate ontology, and may perception change shared truth?",
       "resolution": "No. The ontology is immutable; mutable state is represented by scoped, typed, provenance-bearing deltas, and perception cannot rewrite shared truth.",
       "resolution_record_ref": "ADR-0003",
-      "requirement_refs": ["YWE-REQ-0005", "YWE-REQ-0006", "YWE-REQ-0007"],
-      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/2"]
+      "requirement_refs": [
+        "YWE-REQ-0005",
+        "YWE-REQ-0006",
+        "YWE-REQ-0007"
+      ],
+      "source_refs": [
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/2"
+      ]
     },
     {
       "id": "Q-0002",
@@ -638,8 +741,12 @@
       "question": "Are realm, plane, bit position, coordinate, ordinal, presentation order, and full state identity interchangeable?",
       "resolution": "Realm and plane are equivalent ontology labels; coordinate index or bit position, ordinal, presentation order, realm or plane identity, and full vector or state identity are distinct concepts.",
       "resolution_record_ref": "ADR-0004",
-      "requirement_refs": ["YWE-REQ-0008"],
-      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/3"]
+      "requirement_refs": [
+        "YWE-REQ-0008"
+      ],
+      "source_refs": [
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/3"
+      ]
     },
     {
       "id": "Q-0003",
@@ -664,8 +771,13 @@
       "question": "Which authority owns upstream symbolic grammar, and what identifies the exact ASH dependency state?",
       "resolution": "The ASH Cosmological Model owns symbolic grammar, and data/governance/ash_dependency_identity.json pins the dependency with a deterministic content digest.",
       "resolution_record_ref": "ADR-0005",
-      "requirement_refs": ["YWE-REQ-0009", "YWE-REQ-0010"],
-      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/4"]
+      "requirement_refs": [
+        "YWE-REQ-0009",
+        "YWE-REQ-0010"
+      ],
+      "source_refs": [
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/4"
+      ]
     },
     {
       "id": "Q-0004",
@@ -690,8 +802,12 @@
       "question": "Do wolf_alignment and wolf_resonance remain independent fields, and does the dual-variable model encode morality?",
       "resolution": "wolf_resonance is canonical; wolf_alignment is a read or migration alias only; the dual-variable model is non-moral.",
       "resolution_record_ref": "ADR-0006",
-      "requirement_refs": ["YWE-REQ-0011"],
-      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/5"]
+      "requirement_refs": [
+        "YWE-REQ-0011"
+      ],
+      "source_refs": [
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/5"
+      ]
     },
     {
       "id": "Q-0005",
@@ -716,8 +832,13 @@
       "question": "Does reversing a current-state effect permit deletion or mutation of the accepted event history?",
       "resolution": "No. Accepted history is append-only, and reversal or correction is a new compensating delta.",
       "resolution_record_ref": "ADR-0007",
-      "requirement_refs": ["YWE-REQ-0012", "YWE-REQ-0013"],
-      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/6"]
+      "requirement_refs": [
+        "YWE-REQ-0012",
+        "YWE-REQ-0013"
+      ],
+      "source_refs": [
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/6"
+      ]
     },
     {
       "id": "Q-0006",
@@ -742,8 +863,12 @@
       "question": "May a lower truth-authority layer overwrite a conflicting higher-layer constraint?",
       "resolution": "No. Lower layers may specialize only within higher constraints; conflicts are rejected or contained.",
       "resolution_record_ref": "ADR-0008",
-      "requirement_refs": ["YWE-REQ-0014"],
-      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/7"]
+      "requirement_refs": [
+        "YWE-REQ-0014"
+      ],
+      "source_refs": [
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/7"
+      ]
     },
     {
       "id": "Q-0007",
@@ -770,8 +895,12 @@
       "question": "Does a WRW reference-profile rule become normative YWE Core merely by residing beside or exercising a Core contract?",
       "resolution": "No. WRW remains a reference profile, fixture, or game-layer specialization and cannot create universal Core truth.",
       "resolution_record_ref": "ADR-0009",
-      "requirement_refs": ["YWE-REQ-0015"],
-      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/8"]
+      "requirement_refs": [
+        "YWE-REQ-0015"
+      ],
+      "source_refs": [
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/8"
+      ]
     },
     {
       "id": "Q-0008",
@@ -796,8 +925,12 @@
       "question": "Do core/ash_pattern_engine/canonical and specs have independent authority, or is one a generated mirror?",
       "resolution": "core/ash_pattern_engine/canonical is authoritative; specs is a deterministic generated mirror maintained by scripts/sync_ash_specifications.py and pinned by data/governance/ash_dependency_identity.json.",
       "resolution_record_ref": "ADR-0010",
-      "requirement_refs": ["YWE-REQ-0016"],
-      "source_refs": ["data/governance/specification_roadmap.json#/milestones/1/deliverables/9"]
+      "requirement_refs": [
+        "YWE-REQ-0016"
+      ],
+      "source_refs": [
+        "data/governance/specification_roadmap.json#/milestones/1/deliverables/9"
+      ]
     },
     {
       "id": "ADR-0011",
@@ -1518,7 +1651,9 @@
       "disposition": "Adopt the bounded source compatibility contract and exact source-only extension before dependent implementation; retain full N3 lifecycle design as provisional.",
       "debt_refs": [],
       "supersedes": [],
-      "superseded_by": ["ADR-0036"],
+      "superseded_by": [
+        "ADR-0036"
+      ],
       "legacy_ids": [],
       "context": "The authoritative local 32-file canonical source permits governed category-qualified rule additions with a recorded design package. The accepted N2 source assigns only fallback-failure containment and containment-breach halt identifiers, while the complete canonical trigger enums require a precise nine-trigger correspondence. Earlier reference values, packet schemas, authored fixtures and Diagnostics source projection pin the accepted legacy bytes, so changing only current hashes would mislabel historical evidence or reject valid historical packets.",
       "decision": "Adopt seven explicit new TRIGGER identifiers under YWE-N3-LIFECYCLE while preserving both existing 001 meanings. Recognize exactly LEGACY_C78 and N3_LIFECYCLE complete canonical nine-field vectors, paired seven-pin recovery vectors and ordered eight-pin Diagnostics vectors. Preserve legacy aliases, exact serialized shapes and fixed six-rule assessment, seven-rule normalization and eight-rule recovery boundaries. Add the finite API-only canonical_source_snapshots keyword using at most two existing owned SourcePin values; bind legacy to immutable c78 and current to its host-verified containing Git HEAD. Verify both actual source snapshots before protected storage creation, preserve role-aware rejected comparisons and all existing fixture witnesses, and keep future N3 effects subject to a separate adopted lifecycle contract.",
@@ -1691,7 +1826,7 @@
       "id": "ADR-0036",
       "record_type": "decision",
       "title": "Extend complete source compatibility to the module producer baseline",
-      "status": "accepted",
+      "status": "superseded",
       "recorded_on": "2026-10-11",
       "owner_role": "Core semantics maintainers",
       "scope": "ywe_core",
@@ -1700,7 +1835,9 @@
       "supersedes": [
         "ADR-0032"
       ],
-      "superseded_by": [],
+      "superseded_by": [
+        "ADR-0041"
+      ],
       "legacy_ids": [],
       "context": "The accepted two-vector source contract recognizes legacy c78 and the N3 lifecycle vector while preserving earlier mathematical and diagnostic witnesses. The remaining M3 modules need assigned kinds, stages and rule domains before they can produce canonical records. The original source requirement and decision cannot be rewritten to mean three vectors or new producer admission.",
       "decision": "Adopt exactly LEGACY_C78, N3_LIFECYCLE and M3_MODULES complete nine-field vectors, paired seven Recovery pins, eight Diagnostics hashes and exact adopted pins additionally required for each new producer. Introduce only the reviewed six producer kinds, PROCESSING stage and twenty-two assigned rule IDs in the three canonical Diagnostics pages, preserving all twenty-nine other normalized source files. Preserve original two-source declared mapping outcomes; when MODULES is present bind legacy to c78, N3 to a345 and MODULES to actual current implementation/source HEAD, selecting by baseline presence rather than tuple length. Authenticate actual Git material before storage. Keep original N3 policy/source eligibility exact, with MODULES and legacy ineligible for lifecycle effects. Supersede YWE-REQ-0043 and ADR-0032 through reciprocal status links while retaining every earlier text and witness.",
@@ -1913,12 +2050,120 @@
         "docs/design-planning/m3/module-diagnostics/SAFE_MAXIMUM_LEAVES.json",
         "docs/design-planning/m3/module-diagnostics/WRAPPER_AMENDMENT_RECEIPT.json"
       ]
+    },
+    {
+      "id": "ADR-0041",
+      "record_type": "decision",
+      "title": "Source-bound generation, complete planning and acknowledged memory emission",
+      "status": "accepted",
+      "recorded_on": "2026-10-11",
+      "owner_role": "Core semantics maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt these independently reviewed contract bytes before dependent implementation; format and sizing controls do not establish runtime or complete M3 acceptance.",
+      "debt_refs": [],
+      "supersedes": [
+        "ADR-0036"
+      ],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "The three-vector contract and four implemented pure module producers do not authorize compound generation or emitter business effects. Canonical single-apply history must remain readable while a complete generation vector and its policies are adopted before dependent code.",
+      "decision": "Adopt the fourth complete source vector and bounded planner/emitter contracts, separate pure planning from explicit acknowledged memory-document emission, preserve actual captured prefix and first/final completion truth, and retain exact class-owned capability and lifecycle boundaries. Reserve unchanged global collector capacity; do not authorize new source4 runtime before its joint issued migration.",
+      "rationale": "One complete source/policy pair and an explicit effect grammar prevent mixed hash acceptance and premature effect permission. Authenticated actual target receipts keep confirmed, partial and unknown effects distinct.",
+      "consequences": [
+        "REQ0045 and ADR0036 retain their entire original three-vector meaning as superseded history with reciprocal links.",
+        "The active three-vector runtime inventory remains unchanged at contract adoption; source4 activation follows its separately reviewed joint source/runtime migration.",
+        "Source/schema and authored sizing controls establish formats only; actual grants, capture, dispatch and full M3 acceptance require executed tests."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0049",
+        "YWE-REQ-0002",
+        "YWE-REQ-0010",
+        "YWE-REQ-0012",
+        "YWE-REQ-0016"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_generation_source_compatibility_contract.md",
+        "docs/architecture/m3_planner_emitter_contract.md",
+        "docs/architecture/m3_planner_emitter_reference_policy.md",
+        "docs/design-planning/m3/planner-emitter/SOURCE_EXTENSION_INVENTORY.json"
+      ]
+    },
+    {
+      "id": "ADR-0042",
+      "record_type": "decision",
+      "title": "Current-source pure-module Session capture and terminal evidence",
+      "status": "accepted",
+      "recorded_on": "2026-10-11",
+      "owner_role": "Core semantics maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt these independently reviewed contract bytes before dependent implementation; format and sizing controls do not establish runtime or complete M3 acceptance.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Historical N3 v1.0 authorizes its original source pair only. The current f431 pure modules and fourth generation source need explicit eligibility, safe current binding/source branches and complete collection framing before current Session integration.",
+      "decision": "Adopt exact source-bound v1.1 eligibility for only RealmEncoder, TransitionRegistry, TopologyGenerator and AxiomEvaluator pure module attempts. Preserve old Session support definitions and historical source/policy pairs while adding separately typed current branches, explicit support arrays, bounded lifetime admission and truthful terminal retention.",
+      "rationale": "Current pure module integration requires new policy provenance and full finite supporting evidence. Distinct original owners and independent sealed gates prevent copied values, stale generations and Core-only capabilities from publishing Session state.",
+      "consequences": [
+        "Historical v1.0 support, complete source/policy eligibility and N2 Recovery rule restrictions remain unchanged.",
+        "Whole collection framing, byte limits and alias reservations require an independently replayed combined safe schema. No global collector cap expansion is authorized; historical v1.0 allocations remain unchanged, and separately sized current grants follow the reviewed BOUND_REPORT.",
+        "Generation/emission stays standalone under the separate Core lifecycle; current Session native export, terminal and concurrency behavior requires actual verification."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0050",
+        "YWE-REQ-0002",
+        "YWE-REQ-0010",
+        "YWE-REQ-0012",
+        "YWE-REQ-0016"
+      ],
+      "source_refs": [
+        "docs/architecture/m3_current_source_session_contract.md",
+        "docs/architecture/m3_module_session_lifecycle_policy.md",
+        "docs/design-planning/m3/current-source-session/SOURCE_POLICY_COMPATIBILITY.json",
+        "docs/design-planning/m3/current-source-session/SAFE_FIELDS_AND_LIMITS.json"
+      ]
+    },
+    {
+      "id": "ADR-0043",
+      "record_type": "decision",
+      "title": "Neutral Core policies, complete modules and executable M3 acceptance",
+      "status": "accepted",
+      "recorded_on": "2026-10-11",
+      "owner_role": "Core semantics maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt these independently reviewed contract bytes before dependent implementation; format and sizing controls do not establish runtime or complete M3 acceptance.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Four strict ASH pure producers and Diagnostics capture do not complete the roadmap cosmology, realm, ASH facade, narrative, perception, deterministic policy, logical lifecycle and complete conformance obligations. Fourteen substantive specification placeholders still require final local contracts and implementations.",
+      "decision": "Adopt neutral Core owner contracts and exact API, source/profile and integer policy bindings. Preserve actual peer returns and all optional stage packets, require explicit truth inputs and exact stop/grant ownership, and issue only the named bounded reference paths. Establish actual selected-case evidence and a roadmap-derived M3 acceptance gate without duplicating exhaustive tests or weakening immutable historical M2 evidence.",
+      "rationale": "Explicit ordered domains, declared facts and exact arithmetic prevent display-order identity guesses, ambient nondeterminism and invented world effects. Actual source-bound test outcomes provide auditable acceptance rather than names or aggregate pass counts.",
+      "consequences": [
+        "Core results and proposals confer no M4 persistence, branch, player or world publication authority and no M5 content activation.",
+        "The exact whole-packet cap preserves genuine oversize API return DAGs while refusing serialization and subsequent ordinary stages; no clipping or capacity increase is authorized.",
+        "Only completed and verified M3 acceptance plus owner GitHub publication triggers the requested pause; M4 remains planned until explicit owner go-ahead."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0051",
+        "YWE-REQ-0002",
+        "YWE-REQ-0010",
+        "YWE-REQ-0012",
+        "YWE-REQ-0016"
+      ],
+      "source_refs": [
+        "docs/design-planning/m3/m3_core_domain_contract.md",
+        "docs/design-planning/m3/core-domain/CORE_API_INVENTORY.json",
+        "docs/design-planning/m3/core-domain/CORE_POLICY.json",
+        "docs/design-planning/m3/core-domain/CORE_GATES_AND_NORMALIZATION.md",
+        "core/ash_pattern_engine/canonical/verification/implementation-acceptance.md"
+      ]
     }
   ],
   "summary": {
-    "total_records": 57,
-    "architecture_decisions": 40,
-    "accepted_decisions": 39,
+    "total_records": 60,
+    "architecture_decisions": 43,
+    "accepted_decisions": 41,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

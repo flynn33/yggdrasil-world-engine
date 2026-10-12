@@ -1,0 +1,68 @@
+{
+  "status": "PASS_COLLISION_REJECTING_JOINT_SAFE_SCHEMA_MERGE",
+  "PE_ready_R2_index_sha256": "7ccc71ad5a0ee8864650a7e5004a6a75fcf406de04b0ee92eae3a816247b1ab5",
+  "PE_active_policy_sha256": "3b4666031a79fec97ed98653bf556ed2d6d8ad538639475813dbd3273b6670b6",
+  "PE_62_file_raw_hashes_validated": 62,
+  "old17_payload_definitions_exact": [
+    "PRODUCER_CONTEXT",
+    "PRODUCER_SOURCE",
+    "PRODUCER_OPERATION",
+    "PRODUCER_FINAL_OBSERVATION",
+    "PRODUCER_RECORD",
+    "REALM_IDENTITY",
+    "TRANSITION_REGISTRY",
+    "TRANSITION_DEFINITION",
+    "TOPOLOGY",
+    "TOPOLOGY_PAGE",
+    "AXIOM_SUBJECT",
+    "AXIOM_CHECK",
+    "GENERATION_PLAN",
+    "ROLE_PAGE",
+    "ARTIFACT_PAGE",
+    "TARGET_CONSTRAINTS",
+    "EMISSION_OUTPUT"
+  ],
+  "old_session_definitions_exact": [
+    "SafeSupportingReference",
+    "SafeSessionHistoryPage",
+    "SafeSessionHistoryEvidence",
+    "SafeSessionBindingEvidence",
+    "SafeSessionSourceEvidence"
+  ],
+  "new_current_types_added": [
+    "SafeCurrentSessionSupportingReference",
+    "SafeCurrentSessionHistoryPage",
+    "SafeCurrentSessionHistoryEvidence",
+    "SafeSessionModuleLinkEvidence",
+    "SafeSessionModuleHistoryEvidence",
+    "SafeSessionModuleCutoverEvidence",
+    "SafeCurrentSessionBindingEvidence",
+    "SafeCurrentSessionSourceEvidence"
+  ],
+  "new_current_arrays_added": [
+    "session_current_bindings",
+    "session_current_histories",
+    "session_current_history_pages",
+    "session_current_sources",
+    "session_module_cutovers",
+    "session_module_histories",
+    "session_module_links"
+  ],
+  "PE_six_tagged_payloads_and_disjoint_wrapper_preserved": true,
+  "shared_differing_target": "data/schemas/m3_reference_diagnostic_bundle_schema.json",
+  "resolution": "One merged target: retain exact PE module_evidence union, add Session-owned unique current defs/optional arrays, and append exact source4 aggregate to generic SourcePin; no shared-name overwrite.",
+  "fourth_SourcePin_leaf_added": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8",
+  "historical_bundle_cases_validated": 3,
+  "PE_maximum_wrappers_validated": 17,
+  "current_pages_validated": 41,
+  "collection_framing_bytes": 272,
+  "tagged_module_leaf_deltas": {
+    "source_bytes_per_producer": 44,
+    "registry_bytes": 969,
+    "registry_alias_slots": 20,
+    "safe_support_increment": 1145,
+    "conservative_total_increment": 6265,
+    "peer_ready_index_sha256": "7ccc71ad5a0ee8864650a7e5004a6a75fcf406de04b0ee92eae3a816247b1ab5"
+  },
+  "scope": "Complete schema/hash/resource representation review only. No actual fourth-source constructor, gate, emission, target effect, native acceptance or new Session runtime."
+}

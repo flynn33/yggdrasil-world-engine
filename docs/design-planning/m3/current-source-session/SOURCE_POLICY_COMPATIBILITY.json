@@ -1,0 +1,457 @@
+{
+  "status": "EXTERNAL_PROPOSED_NOT_ADOPTED",
+  "baseline_order": [
+    "LEGACY_C78",
+    "N3_LIFECYCLE",
+    "M3_MODULES",
+    "M3_GENERATION"
+  ],
+  "vectors": [
+    {
+      "baseline": "LEGACY_C78",
+      "canonical_binding": {
+        "dependency_id": "ash_cosmological_model.f2_9.canonical",
+        "aggregate_sha256": "0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb",
+        "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+        "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+        "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+        "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+        "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+        "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+        "taxonomy_source_sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+      },
+      "recovery_contract_pins": [
+        {
+          "path": "interfaces/contracts/recovery-engine-contract.md",
+          "sha256": "27ffacc6218812b280ed236bf9052ee825e903498365d735bf57ee9cb338955b"
+        },
+        {
+          "path": "interfaces/contracts/diagnostics-module-contract.md",
+          "sha256": "88b8d682fa826f128787e6154151c68b32d677239e17ddf4344a084461554a37"
+        },
+        {
+          "path": "registries/fallback-policy-registry.md",
+          "sha256": "b108d6c4127da9ea375899e97c34048ded4ea3a7cb624ef24f18bfda5f8deaaa"
+        },
+        {
+          "path": "algorithms/recovery-fallback-semantics.pseudo.md",
+          "sha256": "0fb8a0750acae0fb263cd842e186ff35881f77b8e498a8f11f159a5d2db270b7"
+        },
+        {
+          "path": "algorithms/containment-safe-failure-semantics.pseudo.md",
+          "sha256": "83f1a19c1a0f375e02f2044c238786514d64b122ab6ab5a8bda6e6fa307c8256"
+        },
+        {
+          "path": "interfaces/diagnostic-schema.md",
+          "sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7"
+        },
+        {
+          "path": "interfaces/rule-id-taxonomy.md",
+          "sha256": "f5ccaf3063dfe3df749f42dbe4659449a1874a6074e1d8d28ab4cad4a462f892"
+        }
+      ]
+    },
+    {
+      "baseline": "N3_LIFECYCLE",
+      "canonical_binding": {
+        "dependency_id": "ash_cosmological_model.f2_9.canonical",
+        "aggregate_sha256": "76d59926ce9676b7584c6cdd555f50f56fceda075fa3fc8b37167fd2be43f7c9",
+        "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+        "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+        "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+        "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+        "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+        "diagnostic_source_sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7",
+        "taxonomy_source_sha256": "150b45d4c75aa053a8d5276d980b359b0ae768c85ae28896680296920402f250"
+      },
+      "recovery_contract_pins": [
+        {
+          "path": "interfaces/contracts/recovery-engine-contract.md",
+          "sha256": "27ffacc6218812b280ed236bf9052ee825e903498365d735bf57ee9cb338955b"
+        },
+        {
+          "path": "interfaces/contracts/diagnostics-module-contract.md",
+          "sha256": "88b8d682fa826f128787e6154151c68b32d677239e17ddf4344a084461554a37"
+        },
+        {
+          "path": "registries/fallback-policy-registry.md",
+          "sha256": "b108d6c4127da9ea375899e97c34048ded4ea3a7cb624ef24f18bfda5f8deaaa"
+        },
+        {
+          "path": "algorithms/recovery-fallback-semantics.pseudo.md",
+          "sha256": "0fb8a0750acae0fb263cd842e186ff35881f77b8e498a8f11f159a5d2db270b7"
+        },
+        {
+          "path": "algorithms/containment-safe-failure-semantics.pseudo.md",
+          "sha256": "df957dc5c82c2fd0b51e43c6783d8cbb2e3ce565420a765abffd244cdcea98b2"
+        },
+        {
+          "path": "interfaces/diagnostic-schema.md",
+          "sha256": "825de7cfdd8598e940dbbcea73cdd78d2db1ba43df9beaee5e51ebdc0d92f8c7"
+        },
+        {
+          "path": "interfaces/rule-id-taxonomy.md",
+          "sha256": "150b45d4c75aa053a8d5276d980b359b0ae768c85ae28896680296920402f250"
+        }
+      ]
+    },
+    {
+      "baseline": "M3_MODULES",
+      "canonical_binding": {
+        "dependency_id": "ash_cosmological_model.f2_9.canonical",
+        "aggregate_sha256": "f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400",
+        "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+        "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+        "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+        "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+        "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+        "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+        "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+      },
+      "recovery_contract_pins": [
+        {
+          "path": "interfaces/contracts/recovery-engine-contract.md",
+          "sha256": "27ffacc6218812b280ed236bf9052ee825e903498365d735bf57ee9cb338955b"
+        },
+        {
+          "path": "interfaces/contracts/diagnostics-module-contract.md",
+          "sha256": "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+        },
+        {
+          "path": "registries/fallback-policy-registry.md",
+          "sha256": "b108d6c4127da9ea375899e97c34048ded4ea3a7cb624ef24f18bfda5f8deaaa"
+        },
+        {
+          "path": "algorithms/recovery-fallback-semantics.pseudo.md",
+          "sha256": "0fb8a0750acae0fb263cd842e186ff35881f77b8e498a8f11f159a5d2db270b7"
+        },
+        {
+          "path": "algorithms/containment-safe-failure-semantics.pseudo.md",
+          "sha256": "df957dc5c82c2fd0b51e43c6783d8cbb2e3ce565420a765abffd244cdcea98b2"
+        },
+        {
+          "path": "interfaces/diagnostic-schema.md",
+          "sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+        },
+        {
+          "path": "interfaces/rule-id-taxonomy.md",
+          "sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+        }
+      ]
+    },
+    {
+      "baseline": "M3_GENERATION",
+      "canonical_binding": {
+        "dependency_id": "ash_cosmological_model.f2_9.canonical",
+        "aggregate_sha256": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8",
+        "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+        "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+        "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+        "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+        "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+        "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+        "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+      },
+      "recovery_contract_pins": [
+        {
+          "path": "interfaces/contracts/recovery-engine-contract.md",
+          "sha256": "27ffacc6218812b280ed236bf9052ee825e903498365d735bf57ee9cb338955b"
+        },
+        {
+          "path": "interfaces/contracts/diagnostics-module-contract.md",
+          "sha256": "5ba322a2376bb325e5d58d9341938535ee8d69ff0fc286b3969dfdb77bd8c225"
+        },
+        {
+          "path": "registries/fallback-policy-registry.md",
+          "sha256": "b108d6c4127da9ea375899e97c34048ded4ea3a7cb624ef24f18bfda5f8deaaa"
+        },
+        {
+          "path": "algorithms/recovery-fallback-semantics.pseudo.md",
+          "sha256": "0fb8a0750acae0fb263cd842e186ff35881f77b8e498a8f11f159a5d2db270b7"
+        },
+        {
+          "path": "algorithms/containment-safe-failure-semantics.pseudo.md",
+          "sha256": "df957dc5c82c2fd0b51e43c6783d8cbb2e3ce565420a765abffd244cdcea98b2"
+        },
+        {
+          "path": "interfaces/diagnostic-schema.md",
+          "sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+        },
+        {
+          "path": "interfaces/rule-id-taxonomy.md",
+          "sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+        }
+      ]
+    }
+  ],
+  "source_vector_hash_algorithm": "sha256 compact ensure_ascii sorted-keys single three-key vector object",
+  "source_vector_hashes": {
+    "LEGACY_C78": "2f7d39c0921e45f85956cd3e6c4f28e33204ae8487bc2334e25d8d589efef246",
+    "N3_LIFECYCLE": "998a5a8d80c112756ce0255ff8542dcb885abd4eee388cfc2b48da2113278730",
+    "M3_MODULES": "912c60c3be0ffff9e7646a51527ce7a52ef23fc14c643a126052c324a0462a74",
+    "M3_GENERATION": "5e7b58bfeac54050d784f5d11c4ea8fec706c93fe8b9338034b6905aad2a46cb"
+  },
+  "lifecycle_pairs": [
+    {
+      "baseline": "N3_LIFECYCLE",
+      "policy_binding": {
+        "policy_id": "YWE-SESSION-SAFETY-001",
+        "policy_version": "1.0.0",
+        "source_path": "docs/architecture/m3_session_lifecycle_policy.md",
+        "source_sha256": "24e2584279b95b8e3659bd61e6b5149311f344b03b981e88f74ae37775591910"
+      },
+      "assembly_generation": "N3_LIFECYCLE_PAIR",
+      "module_lane": false
+    },
+    {
+      "baseline": "M3_MODULES",
+      "policy_binding": {
+        "policy_id": "YWE-SESSION-SAFETY-001",
+        "policy_version": "1.1.0",
+        "source_path": "docs/architecture/m3_module_session_lifecycle_policy.md",
+        "source_sha256": "173e36fd92d6aaf222d61d950a235a6938e0fcdd374f6044b9f0c2c38c342dc7"
+      },
+      "assembly_generation": "M3_MODULES_PAIR",
+      "module_lane": true
+    },
+    {
+      "baseline": "M3_GENERATION",
+      "policy_binding": {
+        "policy_id": "YWE-SESSION-SAFETY-001",
+        "policy_version": "1.1.0",
+        "source_path": "docs/architecture/m3_module_session_lifecycle_policy.md",
+        "source_sha256": "173e36fd92d6aaf222d61d950a235a6938e0fcdd374f6044b9f0c2c38c342dc7"
+      },
+      "assembly_generation": "M3_GENERATION_PAIR",
+      "module_lane": true
+    }
+  ],
+  "explicitly_ineligible": [
+    "LEGACY_C78"
+  ],
+  "historical_n3_revision": "a345d1be3e2d635cb79104c153d2628b090ccd88",
+  "preserved_aliases": [
+    "CANONICAL_BINDING_FIELDS=LEGACY_C78",
+    "CURRENT_CANONICAL_BINDING_FIELDS=N3_LIFECYCLE",
+    "SESSION_POLICY_BINDING_FIELDS=version1.0.0"
+  ],
+  "new_explicit_alias": "MODULE_SESSION_POLICY_BINDING_FIELDS=version1.1.0",
+  "host": [
+    "Presence of current M3_MODULES: verify actual current32Git source blobs, actual a345 N3 blobs and original policy blob, actual c78 blobs, and new current policy blob.",
+    "Without M3_MODULES or M3_GENERATION preserve N3 snapshot revision==identity HEAD and actual current policy v1.0 blob verification.",
+    "Current M3_GENERATION host verifies current32Git blobs, historical accepted M3_MODULES32 manifest, actuala345 N3 andc78. Historical M3_MODULES containing revision is an explicit owner-filled input after exact clean acceptance/publication; neither failed b4 candidate nor an unknown generation containing revision is invented as accepted evidence.",
+    "Select exact policy by actual baseline, never snapshot count; constructor recognition is separate from host Git proof."
+  ],
+  "producer_pin_branches": {
+    "M3_MODULES": {
+      "REALM_TRANSITION": [
+        {
+          "path": "interfaces/contracts/realm-encoder-contract.md",
+          "sha256": "b3fa0deb71ae136c712f402f2b8159b7448ef8756a884369931ab7098bc83fbb"
+        },
+        {
+          "path": "core/realm-identity.pseudo.md",
+          "sha256": "43f274d9c8c1b7269938bf8661c42e91cf020d215683cb6dfa4b340ff975cad5"
+        },
+        {
+          "path": "interfaces/contracts/transition-registry-contract.md",
+          "sha256": "f123b02c3390253cba5f50a04e9c69e9c20771c6dc7cff5bcdc7a3c85aa6471f"
+        },
+        {
+          "path": "algorithms/transition-system.pseudo.md",
+          "sha256": "26c456f60fbb5c847714c4a9a49cf8d11ac48ef0a7d0c127da53bd893dd527c2"
+        },
+        {
+          "path": "algorithms/codeword-transformation-semantics.pseudo.md",
+          "sha256": "80623862ac8dfe72bdecea670f15f4f339c0096da1f63b9058a73458eeedd88e"
+        },
+        {
+          "path": "core/codeword-set.pseudo.md",
+          "sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+        },
+        {
+          "path": "core/ash-state-space.pseudo.md",
+          "sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+        },
+        {
+          "path": "core/state-admissibility.pseudo.md",
+          "sha256": "5d9231331849a6359a8d8e537d0434ee78787bb14efe5da03f60e68ba3c1978e"
+        },
+        {
+          "path": "interfaces/diagnostic-schema.md",
+          "sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+        },
+        {
+          "path": "interfaces/rule-id-taxonomy.md",
+          "sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+        },
+        {
+          "path": "interfaces/contracts/diagnostics-module-contract.md",
+          "sha256": "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+        }
+      ],
+      "TOPOLOGY_AXIOM": [
+        {
+          "path": "interfaces/contracts/topology-generator-contract.md",
+          "sha256": "a408b335ecacff01e38113bcd6cc6089142e40219d521e7081e87406fac11147"
+        },
+        {
+          "path": "interfaces/contracts/axiom-evaluator-contract.md",
+          "sha256": "dc2edf80d2ded0b89b31df15416e24c13139988ab6fd38adaa6195921a692faf"
+        },
+        {
+          "path": "algorithms/topology-expansion.pseudo.md",
+          "sha256": "1b6ab5d3d13b678c67f185f2f91a60d0dae7a976dcbb6df2b169efa6d15c9a3d"
+        },
+        {
+          "path": "algorithms/axiom-evaluation.pseudo.md",
+          "sha256": "0f205842840399aaf08932e20cde34761874a3296b260f139dc6a04df0e707ba"
+        },
+        {
+          "path": "interfaces/diagnostic-schema.md",
+          "sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+        },
+        {
+          "path": "interfaces/rule-id-taxonomy.md",
+          "sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+        },
+        {
+          "path": "interfaces/contracts/diagnostics-module-contract.md",
+          "sha256": "6bd5dc891960cbd9fcdc878de6b46b715912df43ccd1a2affc9793176776376b"
+        }
+      ]
+    },
+    "M3_GENERATION": {
+      "REALM_TRANSITION": [
+        {
+          "path": "interfaces/contracts/realm-encoder-contract.md",
+          "sha256": "b3fa0deb71ae136c712f402f2b8159b7448ef8756a884369931ab7098bc83fbb"
+        },
+        {
+          "path": "core/realm-identity.pseudo.md",
+          "sha256": "43f274d9c8c1b7269938bf8661c42e91cf020d215683cb6dfa4b340ff975cad5"
+        },
+        {
+          "path": "interfaces/contracts/transition-registry-contract.md",
+          "sha256": "4460f1c6f3dbc5289d29bfdbb1c7b1ca5dabfa60f425be3d9ca485855eb5d903"
+        },
+        {
+          "path": "algorithms/transition-system.pseudo.md",
+          "sha256": "26c456f60fbb5c847714c4a9a49cf8d11ac48ef0a7d0c127da53bd893dd527c2"
+        },
+        {
+          "path": "algorithms/codeword-transformation-semantics.pseudo.md",
+          "sha256": "80623862ac8dfe72bdecea670f15f4f339c0096da1f63b9058a73458eeedd88e"
+        },
+        {
+          "path": "core/codeword-set.pseudo.md",
+          "sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c"
+        },
+        {
+          "path": "core/ash-state-space.pseudo.md",
+          "sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e"
+        },
+        {
+          "path": "core/state-admissibility.pseudo.md",
+          "sha256": "5d9231331849a6359a8d8e537d0434ee78787bb14efe5da03f60e68ba3c1978e"
+        },
+        {
+          "path": "interfaces/diagnostic-schema.md",
+          "sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+        },
+        {
+          "path": "interfaces/rule-id-taxonomy.md",
+          "sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+        },
+        {
+          "path": "interfaces/contracts/diagnostics-module-contract.md",
+          "sha256": "5ba322a2376bb325e5d58d9341938535ee8d69ff0fc286b3969dfdb77bd8c225"
+        }
+      ],
+      "TOPOLOGY_AXIOM": [
+        {
+          "path": "interfaces/contracts/topology-generator-contract.md",
+          "sha256": "a408b335ecacff01e38113bcd6cc6089142e40219d521e7081e87406fac11147"
+        },
+        {
+          "path": "interfaces/contracts/axiom-evaluator-contract.md",
+          "sha256": "dc2edf80d2ded0b89b31df15416e24c13139988ab6fd38adaa6195921a692faf"
+        },
+        {
+          "path": "algorithms/topology-expansion.pseudo.md",
+          "sha256": "1b6ab5d3d13b678c67f185f2f91a60d0dae7a976dcbb6df2b169efa6d15c9a3d"
+        },
+        {
+          "path": "algorithms/axiom-evaluation.pseudo.md",
+          "sha256": "0f205842840399aaf08932e20cde34761874a3296b260f139dc6a04df0e707ba"
+        },
+        {
+          "path": "interfaces/diagnostic-schema.md",
+          "sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+        },
+        {
+          "path": "interfaces/rule-id-taxonomy.md",
+          "sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+        },
+        {
+          "path": "interfaces/contracts/diagnostics-module-contract.md",
+          "sha256": "5ba322a2376bb325e5d58d9341938535ee8d69ff0fc286b3969dfdb77bd8c225"
+        }
+      ],
+      "PLANNER_EMITTER": [
+        {
+          "path": "interfaces/contracts/generation-planner-contract.md",
+          "sha256": "09f2a6c99fa4b39484e5c5497103b3e09d274a6ddfda2c97dc9eba5cfd685708"
+        },
+        {
+          "path": "interfaces/contracts/artifact-emitter-contract.md",
+          "sha256": "cca1c794405f2d85c80f5de2e1efd6a8f1bc395985a39ebf7ebc6daf64b53243"
+        },
+        {
+          "path": "algorithms/generation-planning.pseudo.md",
+          "sha256": "88d474a4e25e297ef59f28245bc6a0f4cfa375d4173433240d993639d8e30ec1"
+        },
+        {
+          "path": "interfaces/contracts/realm-encoder-contract.md",
+          "sha256": "b3fa0deb71ae136c712f402f2b8159b7448ef8756a884369931ab7098bc83fbb"
+        },
+        {
+          "path": "interfaces/contracts/transition-registry-contract.md",
+          "sha256": "4460f1c6f3dbc5289d29bfdbb1c7b1ca5dabfa60f425be3d9ca485855eb5d903"
+        },
+        {
+          "path": "interfaces/contracts/topology-generator-contract.md",
+          "sha256": "a408b335ecacff01e38113bcd6cc6089142e40219d521e7081e87406fac11147"
+        },
+        {
+          "path": "interfaces/contracts/axiom-evaluator-contract.md",
+          "sha256": "dc2edf80d2ded0b89b31df15416e24c13139988ab6fd38adaa6195921a692faf"
+        },
+        {
+          "path": "core/realm-identity.pseudo.md",
+          "sha256": "43f274d9c8c1b7269938bf8661c42e91cf020d215683cb6dfa4b340ff975cad5"
+        },
+        {
+          "path": "interfaces/diagnostic-schema.md",
+          "sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa"
+        },
+        {
+          "path": "interfaces/rule-id-taxonomy.md",
+          "sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+        },
+        {
+          "path": "interfaces/contracts/diagnostics-module-contract.md",
+          "sha256": "5ba322a2376bb325e5d58d9341938535ee8d69ff0fc286b3969dfdb77bd8c225"
+        }
+      ]
+    }
+  },
+  "source4_input_raw_sha256": "e460e0df74a346a40c2f23d86a9a8431529c591810ab2c38f4730eec04e3f419",
+  "source4_reencoding_control": {
+    "normalized_files": 32,
+    "RT_pins": 11,
+    "TA_pins": 7,
+    "aggregate": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8",
+    "scope": "external proposed bytes, not adopted Git snapshot"
+  }
+}

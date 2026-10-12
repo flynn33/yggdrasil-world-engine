@@ -1,0 +1,3195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m3_core_domain_schema.json",
+  "title": "Closed M3 neutral Core reference values; format validation does not confer runtime authority",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/CoreBinding"
+    },
+    {
+      "$ref": "#/$defs/ProfileRealmDefinition"
+    },
+    {
+      "$ref": "#/$defs/CosmicState"
+    },
+    {
+      "$ref": "#/$defs/CoreProvenance"
+    },
+    {
+      "$ref": "#/$defs/DeclaredTruthFact"
+    },
+    {
+      "$ref": "#/$defs/TruthInputSnapshot"
+    },
+    {
+      "$ref": "#/$defs/AttunementFact"
+    },
+    {
+      "$ref": "#/$defs/RealmAccessRequest"
+    },
+    {
+      "$ref": "#/$defs/RealmAccessResult"
+    },
+    {
+      "$ref": "#/$defs/RealmShiftProposal"
+    },
+    {
+      "$ref": "#/$defs/PatternProjectionRule"
+    },
+    {
+      "$ref": "#/$defs/PatternObservation"
+    },
+    {
+      "$ref": "#/$defs/CosmicPatternSnapshot"
+    },
+    {
+      "$ref": "#/$defs/ArchetypeRecord"
+    },
+    {
+      "$ref": "#/$defs/ArchetypeContext"
+    },
+    {
+      "$ref": "#/$defs/ArchetypeScore"
+    },
+    {
+      "$ref": "#/$defs/ArchetypeEvaluation"
+    },
+    {
+      "$ref": "#/$defs/NarrativeInterpretation"
+    },
+    {
+      "$ref": "#/$defs/PerceptionRule"
+    },
+    {
+      "$ref": "#/$defs/PerceptionRequest"
+    },
+    {
+      "$ref": "#/$defs/PerceptionOverlay"
+    },
+    {
+      "$ref": "#/$defs/WeightedOption"
+    },
+    {
+      "$ref": "#/$defs/WeightedAllocation"
+    },
+    {
+      "$ref": "#/$defs/SelectionRequest"
+    },
+    {
+      "$ref": "#/$defs/SelectionResult"
+    },
+    {
+      "$ref": "#/$defs/BiasTerm"
+    },
+    {
+      "$ref": "#/$defs/BiasState"
+    },
+    {
+      "$ref": "#/$defs/BiasUpdateResult"
+    },
+    {
+      "$ref": "#/$defs/ExistentialMetricInputs"
+    },
+    {
+      "$ref": "#/$defs/ExistenceMeasure"
+    },
+    {
+      "$ref": "#/$defs/CoreDiagnostic"
+    },
+    {
+      "$ref": "#/$defs/CoreResult"
+    },
+    {
+      "$ref": "#/$defs/ModuleStatus"
+    },
+    {
+      "$ref": "#/$defs/ModuleCompletion"
+    },
+    {
+      "$ref": "#/$defs/ProphecyRoute"
+    },
+    {
+      "$ref": "#/$defs/ProphecyAttractor"
+    },
+    {
+      "$ref": "#/$defs/ProphecyRecord"
+    },
+    {
+      "$ref": "#/$defs/OmenCluster"
+    },
+    {
+      "$ref": "#/$defs/RuntimeBiasEffect"
+    },
+    {
+      "$ref": "#/$defs/RecurringSymbolState"
+    },
+    {
+      "$ref": "#/$defs/RegistrySource"
+    },
+    {
+      "$ref": "#/$defs/WolfPressure"
+    },
+    {
+      "$ref": "#/$defs/WolfBias"
+    },
+    {
+      "$ref": "#/$defs/ArchetypeAffinity"
+    },
+    {
+      "$ref": "#/$defs/ClusterRecord"
+    },
+    {
+      "$ref": "#/$defs/ArchetypeRegistry"
+    },
+    {
+      "$ref": "#/$defs/RelationObservation"
+    },
+    {
+      "$ref": "#/$defs/ClusterScore"
+    },
+    {
+      "$ref": "#/$defs/BiasEvent"
+    },
+    {
+      "$ref": "#/$defs/ModuleLifecycleReceipt"
+    },
+    {
+      "$ref": "#/$defs/CoreOrchestrationRequest"
+    },
+    {
+      "$ref": "#/$defs/CoreOrchestrationResult"
+    },
+    {
+      "$ref": "#/$defs/CoreNormalizationRequest"
+    }
+  ],
+  "$defs": {
+    "ID": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "HASH": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "TEXT": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "SIGNATURE": {
+      "type": "string",
+      "pattern": "^[01]{9}$"
+    },
+    "MASK512": {
+      "type": "string",
+      "minLength": 512,
+      "maxLength": 512,
+      "pattern": "^[01]+$"
+    },
+    "Q6": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000
+    },
+    "SIGNED_Q6": {
+      "type": "integer",
+      "minimum": -1000000,
+      "maximum": 1000000
+    },
+    "SIGNED63": {
+      "type": "integer",
+      "minimum": -9223372036854775808,
+      "maximum": 9223372036854775807
+    },
+    "SIGNED32": {
+      "type": "integer",
+      "minimum": -2147483648,
+      "maximum": 2147483647
+    },
+    "UINT64": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "SEED": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "COORDINATE": {
+      "enum": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8"
+      ]
+    },
+    "CODEWORD_ID": {
+      "enum": [
+        "ash_codeword_00",
+        "ash_codeword_01",
+        "ash_codeword_02",
+        "ash_codeword_03",
+        "ash_codeword_04",
+        "ash_codeword_05",
+        "ash_codeword_06",
+        "ash_codeword_07",
+        "ash_codeword_08",
+        "ash_codeword_09",
+        "ash_codeword_10",
+        "ash_codeword_11",
+        "ash_codeword_12",
+        "ash_codeword_13",
+        "ash_codeword_14",
+        "ash_codeword_15"
+      ]
+    },
+    "FAMILY": {
+      "enum": [
+        "character",
+        "quest",
+        "region",
+        "faction",
+        "transformation",
+        "event",
+        "cluster"
+      ]
+    },
+    "TRUTH_TIER": {
+      "enum": [
+        "OBJECTIVE_SHARED",
+        "OBJECTIVE_BRANCH",
+        "OBJECTIVE_PLAYER",
+        "DERIVED_INTERPRETATION"
+      ]
+    },
+    "CORE_STATUS": {
+      "enum": [
+        "COMPLETED",
+        "REFUSED",
+        "PENDING",
+        "NO_OP"
+      ]
+    },
+    "CORE_EFFECT": {
+      "enum": [
+        "NONE",
+        "PROPOSED_ONLY",
+        "KNOWN_COMPLETE",
+        "KNOWN_PARTIAL",
+        "UNKNOWN"
+      ]
+    },
+    "CORE_OWNER": {
+      "enum": [
+        "COSMOLOGY",
+        "REALM",
+        "ASH_FACADE",
+        "NARRATIVE",
+        "PERCEPTION",
+        "DETERMINISTIC_POLICY",
+        "ORCHESTRATION"
+      ]
+    },
+    "CORE_RULE": {
+      "enum": [
+        "BINDING",
+        "PROVENANCE",
+        "REALM_ACCESS",
+        "PATTERN_PROJECTION",
+        "ARCHETYPE_SCORE",
+        "RELATION_CONFLICT",
+        "CLUSTER_BASIS",
+        "TRUTH_PRECEDENCE",
+        "VISIBILITY",
+        "NORMALIZATION",
+        "SELECTION",
+        "BIAS_MERGE",
+        "BIAS_DECAY",
+        "EXISTENCE",
+        "CAPABILITY",
+        "RESOURCE_LIMIT",
+        "LIFECYCLE",
+        "STAGE_GATE"
+      ]
+    },
+    "ARCHETYPE_ROLE": {
+      "enum": [
+        "DOMINANT",
+        "SECONDARY",
+        "SUPPRESSED",
+        "INELIGIBLE"
+      ]
+    },
+    "LIFECYCLE_PHASE": {
+      "enum": [
+        "STOPPED",
+        "STARTING",
+        "ACTIVE",
+        "STOPPING",
+        "FAILED"
+      ]
+    },
+    "LIFECYCLE_COMPLETION": {
+      "enum": [
+        "COMPLETED",
+        "REFUSED",
+        "PENDING",
+        "INTERRUPTED"
+      ]
+    },
+    "PROPHECY_STATUS": {
+      "enum": [
+        "DORMANT",
+        "ACTIVE",
+        "FULFILLED",
+        "BROKEN"
+      ]
+    },
+    "OBSERVED_BOOL": {
+      "enum": [
+        "TRUE",
+        "FALSE",
+        "UNAVAILABLE"
+      ]
+    },
+    "CoreBinding": {
+      "type": "object",
+      "required": [
+        "canonical_binding",
+        "profile_binding",
+        "policy_id",
+        "policy_sha256",
+        "profile_realms"
+      ],
+      "properties": {
+        "canonical_binding": {
+          "const": {
+            "dependency_id": "ash_cosmological_model.f2_9.canonical",
+            "aggregate_sha256": "2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8",
+            "state_space_sha256": "68435e731c3663a69c9ec3a596d022d0d937b2f0faa537a2827040bb7f89221e",
+            "codeword_source_sha256": "8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c",
+            "validity_source_sha256": "20d3f3cac028b916524a21bb1fb91afe5bb118eee549c376720ce6049d50a74e",
+            "classification_source_sha256": "806ee1e731d6bddec9326150eb645af90b90d08b3256c81436fa272acf7238ff",
+            "recovery_source_sha256": "cd520d8a9d65c70878dfafe29db8dbee5dcbcbe1e9d2a6b24ef6a6b2e5cf11fd",
+            "diagnostic_source_sha256": "1b0f05c94e8136c536f5bcf156e2299782476e77c1e648db93dcea2c70e1f5fa",
+            "taxonomy_source_sha256": "7eb9e39ac860439e674c3596d5e1cd705915d4de4a98a674786117919caa1196"
+          }
+        },
+        "profile_binding": {
+          "$ref": "m3_generation_state_schema.json#/$defs/ProfileBinding"
+        },
+        "policy_id": {
+          "const": "ywe_core_reference_q6_v1"
+        },
+        "policy_sha256": {
+          "const": "74dfa3b318cd38296c0b86ad9ff5c14e8fb1d7aed5ff1c02274baa4bbd871e91"
+        },
+        "profile_realms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProfileRealmDefinition"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProfileRealmDefinition": {
+      "type": "object",
+      "required": [
+        "realm_id",
+        "coordinate",
+        "state_signature",
+        "display_name",
+        "threshold_q6",
+        "veil_required",
+        "allowed_origins"
+      ],
+      "properties": {
+        "realm_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "coordinate": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "state_signature": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SIGNATURE"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "display_name": {
+          "$ref": "#/$defs/TEXT"
+        },
+        "threshold_q6": {
+          "$ref": "#/$defs/Q6"
+        },
+        "veil_required": {
+          "type": "boolean"
+        },
+        "allowed_origins": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        }
+      },
+      "additionalProperties": false
+    },
+    "CosmicState": {
+      "type": "object",
+      "required": [
+        "binding",
+        "baseline",
+        "structural_coordinates"
+      ],
+      "properties": {
+        "binding": {
+          "$ref": "#/$defs/CoreBinding"
+        },
+        "baseline": {
+          "$ref": "m3_generation_state_schema.json#/$defs/StateDiagnosis"
+        },
+        "structural_coordinates": {
+          "const": [
+            "b0",
+            "b1",
+            "b2",
+            "b3",
+            "b4",
+            "b5",
+            "b6",
+            "b7",
+            "b8"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "CoreProvenance": {
+      "type": "object",
+      "required": [
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ],
+      "properties": {
+        "cosmic_pattern_snapshot_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "diagnostic_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "generation_plan_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 1,
+          "maxItems": 65
+        }
+      },
+      "additionalProperties": false
+    },
+    "DeclaredTruthFact": {
+      "type": "object",
+      "required": [
+        "fact_id",
+        "authority_tier",
+        "scope_ref",
+        "subject_ref",
+        "value_token",
+        "evidence_refs"
+      ],
+      "properties": {
+        "fact_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "authority_tier": {
+          "$ref": "#/$defs/TRUTH_TIER"
+        },
+        "scope_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "value_token": {
+          "$ref": "#/$defs/TEXT"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 1,
+          "maxItems": 65
+        }
+      },
+      "additionalProperties": false
+    },
+    "TruthInputSnapshot": {
+      "type": "object",
+      "required": [
+        "snapshot_ref",
+        "scope_ref",
+        "facts",
+        "entity_refs",
+        "evidence_status"
+      ],
+      "properties": {
+        "snapshot_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "scope_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DeclaredTruthFact"
+          },
+          "minItems": 0,
+          "maxItems": 256
+        },
+        "entity_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 0,
+          "maxItems": 256
+        },
+        "evidence_status": {
+          "const": "DECLARED_INPUT"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AttunementFact": {
+      "type": "object",
+      "required": [
+        "realm_id",
+        "attunement_q6",
+        "thin_veil",
+        "evidence_refs"
+      ],
+      "properties": {
+        "realm_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "attunement_q6": {
+          "$ref": "#/$defs/Q6"
+        },
+        "thin_veil": {
+          "$ref": "#/$defs/OBSERVED_BOOL"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 1,
+          "maxItems": 65
+        }
+      },
+      "additionalProperties": false
+    },
+    "RealmAccessRequest": {
+      "type": "object",
+      "required": [
+        "request_ref",
+        "source_realm_id",
+        "target_realm_id",
+        "location_ref",
+        "facts"
+      ],
+      "properties": {
+        "request_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "source_realm_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "target_realm_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "location_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AttunementFact"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        }
+      },
+      "additionalProperties": false
+    },
+    "RealmAccessResult": {
+      "type": "object",
+      "required": [
+        "request",
+        "eligible",
+        "evaluated_rules"
+      ],
+      "properties": {
+        "request": {
+          "$ref": "#/$defs/RealmAccessRequest"
+        },
+        "eligible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evaluated_rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CoreDiagnostic"
+          },
+          "minItems": 1,
+          "maxItems": 32
+        }
+      },
+      "additionalProperties": false
+    },
+    "RealmShiftProposal": {
+      "type": "object",
+      "required": [
+        "proposal_ref",
+        "access",
+        "before_realm_id",
+        "target_realm_id",
+        "effect_status"
+      ],
+      "properties": {
+        "proposal_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "access": {
+          "$ref": "#/$defs/RealmAccessResult"
+        },
+        "before_realm_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "target_realm_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "effect_status": {
+          "const": "PROPOSED_ONLY"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PatternProjectionRule": {
+      "type": "object",
+      "required": [
+        "pattern_id",
+        "membership_mask",
+        "codeword_ids",
+        "strength_q6",
+        "tags",
+        "evidence_refs"
+      ],
+      "properties": {
+        "pattern_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "membership_mask": {
+          "$ref": "#/$defs/MASK512"
+        },
+        "codeword_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CODEWORD_ID"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        },
+        "strength_q6": {
+          "$ref": "#/$defs/Q6"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 1,
+          "maxItems": 65
+        }
+      },
+      "additionalProperties": false
+    },
+    "PatternObservation": {
+      "type": "object",
+      "required": [
+        "pattern_id",
+        "matched",
+        "strength_q6",
+        "actual_codeword_trace",
+        "evidence_refs"
+      ],
+      "properties": {
+        "pattern_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "matched": {
+          "type": "boolean"
+        },
+        "strength_q6": {
+          "$ref": "#/$defs/Q6"
+        },
+        "actual_codeword_trace": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CODEWORD_ID"
+          },
+          "minItems": 0,
+          "maxItems": 5
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 1,
+          "maxItems": 65
+        }
+      },
+      "additionalProperties": false
+    },
+    "CosmicPatternSnapshot": {
+      "type": "object",
+      "required": [
+        "snapshot_ref",
+        "binding",
+        "original_signature",
+        "source_signature",
+        "source_identity",
+        "destination_signature",
+        "destination_identity",
+        "normalization_step",
+        "observations",
+        "actual_codeword_trace",
+        "provenance"
+      ],
+      "properties": {
+        "snapshot_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "binding": {
+          "$ref": "#/$defs/CoreBinding"
+        },
+        "original_signature": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SIGNATURE"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source_signature": {
+          "$ref": "#/$defs/SIGNATURE"
+        },
+        "source_identity": {
+          "$ref": "m3_generation_realm_transition_schema.json#/$defs/RealmIdentity"
+        },
+        "destination_signature": {
+          "$ref": "#/$defs/SIGNATURE"
+        },
+        "destination_identity": {
+          "$ref": "m3_generation_realm_transition_schema.json#/$defs/RealmIdentity"
+        },
+        "normalization_step": {
+          "anyOf": [
+            {
+              "$ref": "m3_generation_state_normalization_schema.json#/$defs/NormalizationStep"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PatternObservation"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "actual_codeword_trace": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CODEWORD_ID"
+          },
+          "minItems": 0,
+          "maxItems": 5
+        },
+        "provenance": {
+          "$ref": "#/$defs/CoreProvenance"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ArchetypeRecord": {
+      "type": "object",
+      "required": [
+        "archetype_id",
+        "family",
+        "symbolic_tags",
+        "truth_tags",
+        "shadow_tags",
+        "realm_bias",
+        "wolf_bias",
+        "player_phase_bias",
+        "compatible_with",
+        "friction_with",
+        "contradicts",
+        "downstream_affinities",
+        "manifestation_hint_refs",
+        "evidence_refs"
+      ],
+      "properties": {
+        "archetype_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "family": {
+          "$ref": "#/$defs/FAMILY"
+        },
+        "symbolic_tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "truth_tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "shadow_tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "realm_bias": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "wolf_bias": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WolfBias"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "player_phase_bias": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "compatible_with": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "friction_with": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "contradicts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "downstream_affinities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArchetypeAffinity"
+          },
+          "minItems": 0,
+          "maxItems": 6
+        },
+        "manifestation_hint_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 1,
+          "maxItems": 65
+        }
+      },
+      "additionalProperties": false
+    },
+    "ArchetypeContext": {
+      "type": "object",
+      "required": [
+        "context_ref",
+        "symbolic_tags",
+        "truth_tags",
+        "shadow_tags",
+        "realm_pressure",
+        "wolf_pressure",
+        "player_phase",
+        "recurrence_refs",
+        "myth_refs",
+        "prophecy_refs",
+        "requested_domain",
+        "allowed_tension_pairs",
+        "higher_order_pairs",
+        "satisfied_basis_refs",
+        "accepted_risk_refs"
+      ],
+      "properties": {
+        "context_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "symbolic_tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "truth_tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "shadow_tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "realm_pressure": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WeightedOption"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "wolf_pressure": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WolfPressure"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "player_phase": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recurrence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "myth_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "prophecy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "requested_domain": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "allowed_tension_pairs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 256
+        },
+        "higher_order_pairs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 256
+        },
+        "satisfied_basis_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        },
+        "accepted_risk_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        }
+      },
+      "additionalProperties": false
+    },
+    "ArchetypeScore": {
+      "type": "object",
+      "required": [
+        "archetype_id",
+        "score_q6",
+        "selected_role",
+        "suppressed_by",
+        "reasons"
+      ],
+      "properties": {
+        "archetype_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "score_q6": {
+          "$ref": "#/$defs/SIGNED63"
+        },
+        "selected_role": {
+          "$ref": "#/$defs/ARCHETYPE_ROLE"
+        },
+        "suppressed_by": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 32
+        }
+      },
+      "additionalProperties": false
+    },
+    "ArchetypeEvaluation": {
+      "type": "object",
+      "required": [
+        "evaluation_ref",
+        "snapshot_ref",
+        "snapshot_sha256",
+        "context_ref",
+        "context_sha256",
+        "registry_ref",
+        "registry_sha256",
+        "scores",
+        "relationships",
+        "cluster_scores",
+        "dominant",
+        "secondary",
+        "activated_clusters"
+      ],
+      "properties": {
+        "evaluation_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "snapshot_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "snapshot_sha256": {
+          "$ref": "#/$defs/HASH"
+        },
+        "context_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "context_sha256": {
+          "$ref": "#/$defs/HASH"
+        },
+        "registry_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "registry_sha256": {
+          "$ref": "#/$defs/HASH"
+        },
+        "scores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArchetypeScore"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RelationObservation"
+          },
+          "minItems": 0,
+          "maxItems": 256
+        },
+        "cluster_scores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ClusterScore"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        },
+        "dominant": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "secondary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "activated_clusters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        }
+      },
+      "additionalProperties": false
+    },
+    "NarrativeInterpretation": {
+      "type": "object",
+      "required": [
+        "interpretation_ref",
+        "evaluation_ref",
+        "evaluation_sha256",
+        "scope_ref",
+        "fact_refs",
+        "pressure_tags",
+        "contradiction_refs",
+        "provenance"
+      ],
+      "properties": {
+        "interpretation_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "evaluation_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "evaluation_sha256": {
+          "$ref": "#/$defs/HASH"
+        },
+        "scope_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "fact_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 0,
+          "maxItems": 256
+        },
+        "pressure_tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "contradiction_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 0,
+          "maxItems": 256
+        },
+        "provenance": {
+          "$ref": "#/$defs/CoreProvenance"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PerceptionRule": {
+      "type": "object",
+      "required": [
+        "rule_id",
+        "priority",
+        "subject_ref",
+        "entity_ref",
+        "condition_fact_refs",
+        "visible",
+        "interpretation_tags"
+      ],
+      "properties": {
+        "rule_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "priority": {
+          "$ref": "#/$defs/SIGNED32"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "entity_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "condition_fact_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "visible": {
+          "type": "boolean"
+        },
+        "interpretation_tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        }
+      },
+      "additionalProperties": false
+    },
+    "PerceptionRequest": {
+      "type": "object",
+      "required": [
+        "request_ref",
+        "subject_ref",
+        "truth",
+        "rules",
+        "provenance"
+      ],
+      "properties": {
+        "request_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "subject_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "truth": {
+          "$ref": "#/$defs/TruthInputSnapshot"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PerceptionRule"
+          },
+          "minItems": 0,
+          "maxItems": 256
+        },
+        "provenance": {
+          "$ref": "#/$defs/CoreProvenance"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PerceptionOverlay": {
+      "type": "object",
+      "required": [
+        "overlay_ref",
+        "request",
+        "truth_sha256",
+        "evaluated_rules",
+        "visible_entities",
+        "hidden_entities",
+        "tags",
+        "contradiction_refs",
+        "objective_effects"
+      ],
+      "properties": {
+        "overlay_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "request": {
+          "$ref": "#/$defs/PerceptionRequest"
+        },
+        "truth_sha256": {
+          "$ref": "#/$defs/HASH"
+        },
+        "evaluated_rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CoreDiagnostic"
+          },
+          "minItems": 0,
+          "maxItems": 256
+        },
+        "visible_entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 0,
+          "maxItems": 256
+        },
+        "hidden_entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 0,
+          "maxItems": 256
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "contradiction_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 0,
+          "maxItems": 256
+        },
+        "objective_effects": {
+          "const": "NONE"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WeightedOption": {
+      "type": "object",
+      "required": [
+        "option_id",
+        "weight"
+      ],
+      "properties": {
+        "option_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "weight": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        }
+      },
+      "additionalProperties": false
+    },
+    "WeightedAllocation": {
+      "type": "object",
+      "required": [
+        "options",
+        "total_q6"
+      ],
+      "properties": {
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WeightedOption"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "total_q6": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        }
+      },
+      "additionalProperties": false
+    },
+    "SelectionRequest": {
+      "type": "object",
+      "required": [
+        "domain",
+        "binding_sha256",
+        "context_sha256",
+        "seed_token",
+        "options"
+      ],
+      "properties": {
+        "domain": {
+          "$ref": "#/$defs/ID"
+        },
+        "binding_sha256": {
+          "$ref": "#/$defs/HASH"
+        },
+        "context_sha256": {
+          "$ref": "#/$defs/HASH"
+        },
+        "seed_token": {
+          "$ref": "#/$defs/SEED"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WeightedOption"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        }
+      },
+      "additionalProperties": false
+    },
+    "SelectionResult": {
+      "type": "object",
+      "required": [
+        "request",
+        "selected_id",
+        "counters_used",
+        "accepted_draw"
+      ],
+      "properties": {
+        "request": {
+          "$ref": "#/$defs/SelectionRequest"
+        },
+        "selected_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "counters_used": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16
+        },
+        "accepted_draw": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UINT64"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "BiasTerm": {
+      "type": "object",
+      "required": [
+        "event_id",
+        "domain",
+        "target_id",
+        "contribution_q6",
+        "evidence_refs"
+      ],
+      "properties": {
+        "event_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "domain": {
+          "$ref": "#/$defs/ID"
+        },
+        "target_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "contribution_q6": {
+          "$ref": "#/$defs/SIGNED_Q6"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 1,
+          "maxItems": 65
+        }
+      },
+      "additionalProperties": false
+    },
+    "BiasState": {
+      "type": "object",
+      "required": [
+        "state_ref",
+        "logical_epoch",
+        "events",
+        "weights"
+      ],
+      "properties": {
+        "state_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "logical_epoch": {
+          "$ref": "#/$defs/UINT64"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/BiasEvent"
+          },
+          "minItems": 0,
+          "maxItems": 512
+        },
+        "weights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WeightedOption"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        }
+      },
+      "additionalProperties": false
+    },
+    "BiasUpdateResult": {
+      "type": "object",
+      "required": [
+        "before",
+        "proposed",
+        "effect_status"
+      ],
+      "properties": {
+        "before": {
+          "$ref": "#/$defs/BiasState"
+        },
+        "proposed": {
+          "$ref": "#/$defs/BiasState"
+        },
+        "effect_status": {
+          "const": "PROPOSED_ONLY"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ExistentialMetricInputs": {
+      "type": "object",
+      "required": [
+        "context_ref",
+        "compressibility_q6",
+        "symmetry_q6",
+        "persistence_q6",
+        "entropy_q6",
+        "coefficient_c",
+        "coefficient_s",
+        "coefficient_p",
+        "coefficient_h",
+        "evidence_refs"
+      ],
+      "properties": {
+        "context_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "compressibility_q6": {
+          "$ref": "#/$defs/Q6"
+        },
+        "symmetry_q6": {
+          "$ref": "#/$defs/Q6"
+        },
+        "persistence_q6": {
+          "$ref": "#/$defs/Q6"
+        },
+        "entropy_q6": {
+          "$ref": "#/$defs/Q6"
+        },
+        "coefficient_c": {
+          "$ref": "#/$defs/Q6"
+        },
+        "coefficient_s": {
+          "$ref": "#/$defs/Q6"
+        },
+        "coefficient_p": {
+          "$ref": "#/$defs/Q6"
+        },
+        "coefficient_h": {
+          "$ref": "#/$defs/Q6"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 1,
+          "maxItems": 65
+        }
+      },
+      "additionalProperties": false
+    },
+    "ExistenceMeasure": {
+      "type": "object",
+      "required": [
+        "inputs",
+        "potential_q6"
+      ],
+      "properties": {
+        "inputs": {
+          "$ref": "#/$defs/ExistentialMetricInputs"
+        },
+        "potential_q6": {
+          "$ref": "#/$defs/SIGNED63"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CoreDiagnostic": {
+      "type": "object",
+      "required": [
+        "diagnostic_ref",
+        "owner",
+        "rule",
+        "status",
+        "failure_code",
+        "field",
+        "evidence_refs",
+        "explanation"
+      ],
+      "properties": {
+        "diagnostic_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "owner": {
+          "$ref": "#/$defs/CORE_OWNER"
+        },
+        "rule": {
+          "$ref": "#/$defs/CORE_RULE"
+        },
+        "status": {
+          "$ref": "#/$defs/CORE_STATUS"
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CORE_FAILURE"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "field": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CORE_FIELD"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 0,
+          "maxItems": 65
+        },
+        "explanation": {
+          "$ref": "#/$defs/TEXT"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CoreResult": {
+      "type": "object",
+      "required": [
+        "operation_reference",
+        "binding",
+        "status",
+        "value",
+        "diagnostics",
+        "effect_status"
+      ],
+      "properties": {
+        "operation_reference": {
+          "$ref": "#/$defs/ID"
+        },
+        "binding": {
+          "$ref": "#/$defs/CoreBinding"
+        },
+        "status": {
+          "$ref": "#/$defs/CORE_STATUS"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CORE_OUTPUT"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CoreDiagnostic"
+          },
+          "minItems": 1,
+          "maxItems": 32
+        },
+        "effect_status": {
+          "$ref": "#/$defs/CORE_EFFECT"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ModuleStatus": {
+      "type": "object",
+      "required": [
+        "module_id",
+        "generation",
+        "phase",
+        "closed",
+        "inflight",
+        "ledger_used"
+      ],
+      "properties": {
+        "module_id": {
+          "$ref": "#/$defs/CORE_OWNER"
+        },
+        "generation": {
+          "$ref": "#/$defs/UINT64"
+        },
+        "phase": {
+          "$ref": "#/$defs/LIFECYCLE_PHASE"
+        },
+        "closed": {
+          "type": "boolean"
+        },
+        "inflight": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "ledger_used": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 64
+        }
+      },
+      "additionalProperties": false
+    },
+    "ModuleCompletion": {
+      "type": "object",
+      "required": [
+        "request_ref",
+        "admitted_generation",
+        "status",
+        "result_ref",
+        "actual_effect_status"
+      ],
+      "properties": {
+        "request_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "admitted_generation": {
+          "$ref": "#/$defs/UINT64"
+        },
+        "status": {
+          "$ref": "#/$defs/LIFECYCLE_COMPLETION"
+        },
+        "result_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/REF"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actual_effect_status": {
+          "$ref": "#/$defs/CORE_EFFECT"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProphecyRoute": {
+      "type": "object",
+      "required": [
+        "route_id",
+        "condition_refs",
+        "destination_interpretation_ref"
+      ],
+      "properties": {
+        "route_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "condition_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 1,
+          "maxItems": 64
+        },
+        "destination_interpretation_ref": {
+          "$ref": "#/$defs/REF"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProphecyAttractor": {
+      "type": "object",
+      "required": [
+        "target_domain",
+        "target_reference",
+        "weight_q6"
+      ],
+      "properties": {
+        "target_domain": {
+          "$ref": "#/$defs/ID"
+        },
+        "target_reference": {
+          "$ref": "#/$defs/REF"
+        },
+        "weight_q6": {
+          "$ref": "#/$defs/Q6"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProphecyRecord": {
+      "type": "object",
+      "required": [
+        "prophecy_id",
+        "provenance",
+        "attractor",
+        "fixed_script",
+        "deflection_routes",
+        "transmutation_routes",
+        "status",
+        "condition_refs"
+      ],
+      "properties": {
+        "prophecy_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "provenance": {
+          "$ref": "#/$defs/CoreProvenance"
+        },
+        "attractor": {
+          "$ref": "#/$defs/ProphecyAttractor"
+        },
+        "fixed_script": {
+          "const": false
+        },
+        "deflection_routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProphecyRoute"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        },
+        "transmutation_routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProphecyRoute"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        },
+        "status": {
+          "$ref": "#/$defs/PROPHECY_STATUS"
+        },
+        "condition_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 1,
+          "maxItems": 64
+        }
+      },
+      "additionalProperties": false
+    },
+    "OmenCluster": {
+      "type": "object",
+      "required": [
+        "cluster_id",
+        "prophecy_refs",
+        "observed_symbol_refs",
+        "provenance"
+      ],
+      "properties": {
+        "cluster_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "prophecy_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 2,
+          "maxItems": 16
+        },
+        "observed_symbol_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 1,
+          "maxItems": 64
+        },
+        "provenance": {
+          "$ref": "#/$defs/CoreProvenance"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RuntimeBiasEffect": {
+      "type": "object",
+      "required": [
+        "effect_id",
+        "before_ref",
+        "term",
+        "effect_status",
+        "provenance"
+      ],
+      "properties": {
+        "effect_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "before_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "term": {
+          "$ref": "#/$defs/BiasTerm"
+        },
+        "effect_status": {
+          "const": "PROPOSED_ONLY"
+        },
+        "provenance": {
+          "$ref": "#/$defs/CoreProvenance"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RecurringSymbolState": {
+      "type": "object",
+      "required": [
+        "state_id",
+        "symbol_ref",
+        "recurrence_count",
+        "logical_epoch",
+        "provenance"
+      ],
+      "properties": {
+        "state_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "symbol_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "recurrence_count": {
+          "$ref": "#/$defs/UINT64"
+        },
+        "logical_epoch": {
+          "$ref": "#/$defs/UINT64"
+        },
+        "provenance": {
+          "$ref": "#/$defs/CoreProvenance"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CORE_OUTPUT": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ProfileRealmDefinition"
+        },
+        {
+          "$ref": "#/$defs/CosmicState"
+        },
+        {
+          "$ref": "#/$defs/CoreProvenance"
+        },
+        {
+          "$ref": "#/$defs/DeclaredTruthFact"
+        },
+        {
+          "$ref": "#/$defs/TruthInputSnapshot"
+        },
+        {
+          "$ref": "#/$defs/AttunementFact"
+        },
+        {
+          "$ref": "#/$defs/RealmAccessRequest"
+        },
+        {
+          "$ref": "#/$defs/RealmAccessResult"
+        },
+        {
+          "$ref": "#/$defs/RealmShiftProposal"
+        },
+        {
+          "$ref": "#/$defs/PatternProjectionRule"
+        },
+        {
+          "$ref": "#/$defs/PatternObservation"
+        },
+        {
+          "$ref": "#/$defs/CosmicPatternSnapshot"
+        },
+        {
+          "$ref": "#/$defs/ArchetypeRecord"
+        },
+        {
+          "$ref": "#/$defs/ArchetypeContext"
+        },
+        {
+          "$ref": "#/$defs/ArchetypeScore"
+        },
+        {
+          "$ref": "#/$defs/ArchetypeEvaluation"
+        },
+        {
+          "$ref": "#/$defs/NarrativeInterpretation"
+        },
+        {
+          "$ref": "#/$defs/PerceptionRule"
+        },
+        {
+          "$ref": "#/$defs/PerceptionRequest"
+        },
+        {
+          "$ref": "#/$defs/PerceptionOverlay"
+        },
+        {
+          "$ref": "#/$defs/WeightedOption"
+        },
+        {
+          "$ref": "#/$defs/WeightedAllocation"
+        },
+        {
+          "$ref": "#/$defs/SelectionRequest"
+        },
+        {
+          "$ref": "#/$defs/SelectionResult"
+        },
+        {
+          "$ref": "#/$defs/BiasTerm"
+        },
+        {
+          "$ref": "#/$defs/BiasState"
+        },
+        {
+          "$ref": "#/$defs/BiasUpdateResult"
+        },
+        {
+          "$ref": "#/$defs/ExistentialMetricInputs"
+        },
+        {
+          "$ref": "#/$defs/ExistenceMeasure"
+        },
+        {
+          "$ref": "#/$defs/ModuleStatus"
+        },
+        {
+          "$ref": "#/$defs/ModuleCompletion"
+        },
+        {
+          "$ref": "#/$defs/ProphecyRoute"
+        },
+        {
+          "$ref": "#/$defs/ProphecyAttractor"
+        },
+        {
+          "$ref": "#/$defs/ProphecyRecord"
+        },
+        {
+          "$ref": "#/$defs/OmenCluster"
+        },
+        {
+          "$ref": "#/$defs/RuntimeBiasEffect"
+        },
+        {
+          "$ref": "#/$defs/RecurringSymbolState"
+        },
+        {
+          "$ref": "#/$defs/RegistrySource"
+        },
+        {
+          "$ref": "#/$defs/WolfPressure"
+        },
+        {
+          "$ref": "#/$defs/WolfBias"
+        },
+        {
+          "$ref": "#/$defs/ArchetypeAffinity"
+        },
+        {
+          "$ref": "#/$defs/ClusterRecord"
+        },
+        {
+          "$ref": "#/$defs/ArchetypeRegistry"
+        },
+        {
+          "$ref": "#/$defs/RelationObservation"
+        },
+        {
+          "$ref": "#/$defs/ClusterScore"
+        },
+        {
+          "$ref": "#/$defs/BiasEvent"
+        },
+        {
+          "$ref": "#/$defs/ModuleLifecycleReceipt"
+        },
+        {
+          "$ref": "#/$defs/CoreOrchestrationRequest"
+        }
+      ]
+    },
+    "CLUSTER_STABILITY": {
+      "enum": [
+        "STABLE",
+        "CYCLICAL",
+        "THRESHOLD_BASED",
+        "UNSTABLE"
+      ]
+    },
+    "RELATION": {
+      "enum": [
+        "CONTRADICTION",
+        "FRICTION",
+        "COMPATIBILITY",
+        "NEUTRAL"
+      ]
+    },
+    "LIFECYCLE_ACTION": {
+      "enum": [
+        "START",
+        "STOP"
+      ]
+    },
+    "CORE_FAILURE": {
+      "enum": [
+        "CORE_VALUE_INVALID",
+        "CORE_BINDING_MISMATCH",
+        "CORE_PROFILE_CONFLICT",
+        "CORE_PROVENANCE_MISSING",
+        "CORE_UNKNOWN_REFERENCE",
+        "CORE_FACT_CONFLICT",
+        "CORE_CAPABILITY_UNAVAILABLE",
+        "CORE_RESOURCE_LIMIT",
+        "CORE_LIFECYCLE_REJECTED",
+        "CORE_STAGE_REVOKED",
+        "CORE_NO_POSITIVE_WEIGHT",
+        "CORE_SELECTION_EXHAUSTED",
+        "CORE_EPOCH_REVERSED",
+        "CORE_NUMERIC_OVERFLOW"
+      ]
+    },
+    "CORE_FIELD": {
+      "enum": [
+        "accepted_draw",
+        "accepted_risk_refs",
+        "access",
+        "action",
+        "activated",
+        "activated_clusters",
+        "actual_codeword_trace",
+        "actual_effect_status",
+        "admitted_generation",
+        "affinity_refs",
+        "after",
+        "allowed_origins",
+        "allowed_tension_pairs",
+        "archetype_context",
+        "archetype_id",
+        "archetypes",
+        "attractor",
+        "attunement_q6",
+        "authority_tier",
+        "base_score_q6",
+        "baseline",
+        "before",
+        "before_realm_id",
+        "before_ref",
+        "binding",
+        "binding_sha256",
+        "canonical_binding",
+        "closed",
+        "cluster_id",
+        "cluster_scores",
+        "clusters",
+        "codeword_ids",
+        "coefficient_c",
+        "coefficient_h",
+        "coefficient_p",
+        "coefficient_s",
+        "coexistence_allowed",
+        "compatible_with",
+        "compressibility_q6",
+        "condition_fact_refs",
+        "condition_refs",
+        "context",
+        "context_ref",
+        "context_sha256",
+        "contradiction_refs",
+        "contradiction_risk_ref",
+        "contradicts",
+        "contribution_q6",
+        "coordinate",
+        "cosmic_pattern_snapshot_ref",
+        "cosmology",
+        "counters_used",
+        "dark_q6",
+        "declared_subject",
+        "deflection_routes",
+        "destination_identity",
+        "destination_interpretation_ref",
+        "destination_signature",
+        "diagnostic_ref",
+        "diagnostics",
+        "display_name",
+        "domain",
+        "dominant",
+        "downstream_affinities",
+        "effect_id",
+        "effect_status",
+        "eligible",
+        "entity_ref",
+        "entity_refs",
+        "entropy_q6",
+        "evaluated_rules",
+        "evaluation_ref",
+        "evaluation_sha256",
+        "event_id",
+        "events",
+        "evidence_ref",
+        "evidence_refs",
+        "evidence_status",
+        "explanation",
+        "fact_id",
+        "fact_refs",
+        "facts",
+        "failure_code",
+        "family",
+        "field",
+        "final_score_q6",
+        "first_id",
+        "fixed_script",
+        "friction_with",
+        "generation",
+        "generation_plan_ref",
+        "generation_run",
+        "hidden_entities",
+        "higher_order_pairs",
+        "inflight",
+        "inputs",
+        "interpretation_ref",
+        "interpretation_tags",
+        "lawful_basis_refs",
+        "ledger_used",
+        "location_ref",
+        "logical_epoch",
+        "manifestation_hint_refs",
+        "matched",
+        "member_ids",
+        "membership_mask",
+        "module_id",
+        "myth_refs",
+        "narrative",
+        "normalization",
+        "normalization_completion",
+        "normalization_result",
+        "normalization_step",
+        "normalized_origin",
+        "normalized_origin_completion",
+        "objective_effects",
+        "observations",
+        "observed_symbol_refs",
+        "operation_reference",
+        "option_id",
+        "options",
+        "origin",
+        "original_signature",
+        "overlay_ref",
+        "owner",
+        "pattern",
+        "pattern_id",
+        "perception",
+        "perception_request",
+        "persistence_q6",
+        "phase",
+        "plan",
+        "player_phase",
+        "player_phase_bias",
+        "policy_id",
+        "policy_sha256",
+        "potential_q6",
+        "pressure_tags",
+        "primary_source",
+        "priority",
+        "profile_binding",
+        "profile_realms",
+        "prophecy_id",
+        "prophecy_refs",
+        "proposal_ref",
+        "proposed",
+        "provenance",
+        "qualifying_members",
+        "realm_access",
+        "realm_bias",
+        "realm_id",
+        "realm_pressure",
+        "realm_request",
+        "realm_shift",
+        "reasons",
+        "recurrence_count",
+        "recurrence_refs",
+        "registry_id",
+        "registry_ref",
+        "registry_sha256",
+        "relation",
+        "relationship_source",
+        "relationships",
+        "request",
+        "request_ref",
+        "requested_domain",
+        "result_ref",
+        "route_id",
+        "rule",
+        "rule_id",
+        "rules",
+        "satisfied_basis_refs",
+        "scope_ref",
+        "score_delta_q6",
+        "score_q6",
+        "scores",
+        "second_id",
+        "secondary",
+        "seed_token",
+        "selected_id",
+        "selected_role",
+        "shadow_tags",
+        "snapshot_ref",
+        "snapshot_sha256",
+        "source_ash_refs",
+        "source_identity",
+        "source_realm_id",
+        "source_ref",
+        "source_sha256",
+        "source_signature",
+        "stability",
+        "stability_bonus_q6",
+        "state_id",
+        "state_ref",
+        "state_signature",
+        "status",
+        "strength_q6",
+        "structural_coordinates",
+        "subject_ref",
+        "support_penalty_q6",
+        "suppressed_by",
+        "suppressed_id",
+        "symbol_ref",
+        "symbolic_tags",
+        "symmetry_q6",
+        "tags",
+        "target_constraints",
+        "target_domain",
+        "target_id",
+        "target_realm_id",
+        "target_reference",
+        "term",
+        "terms",
+        "thin_veil",
+        "threshold_q6",
+        "total_q6",
+        "transmutation_routes",
+        "truth",
+        "truth_input",
+        "truth_sha256",
+        "truth_tags",
+        "value",
+        "value_token",
+        "veil_required",
+        "visible",
+        "visible_entities",
+        "weight",
+        "weight_q6",
+        "weights",
+        "white_q6",
+        "wolf_bias",
+        "wolf_pressure"
+      ]
+    },
+    "RegistrySource": {
+      "type": "object",
+      "required": [
+        "source_ref",
+        "source_sha256",
+        "evidence_ref"
+      ],
+      "properties": {
+        "source_ref": {
+          "$ref": "#/$defs/REF"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/HASH"
+        },
+        "evidence_ref": {
+          "$ref": "#/$defs/REF"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WolfPressure": {
+      "type": "object",
+      "required": [
+        "white_q6",
+        "dark_q6",
+        "evidence_refs"
+      ],
+      "properties": {
+        "white_q6": {
+          "$ref": "#/$defs/Q6"
+        },
+        "dark_q6": {
+          "$ref": "#/$defs/Q6"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 1,
+          "maxItems": 65
+        }
+      },
+      "additionalProperties": false
+    },
+    "WolfBias": {
+      "type": "object",
+      "required": [
+        "white_q6",
+        "dark_q6"
+      ],
+      "properties": {
+        "white_q6": {
+          "$ref": "#/$defs/SIGNED_Q6"
+        },
+        "dark_q6": {
+          "$ref": "#/$defs/SIGNED_Q6"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ArchetypeAffinity": {
+      "type": "object",
+      "required": [
+        "domain",
+        "affinity_refs"
+      ],
+      "properties": {
+        "domain": {
+          "$ref": "#/$defs/ID"
+        },
+        "affinity_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        }
+      },
+      "additionalProperties": false
+    },
+    "ClusterRecord": {
+      "type": "object",
+      "required": [
+        "cluster_id",
+        "member_ids",
+        "lawful_basis_refs",
+        "stability",
+        "contradiction_risk_ref"
+      ],
+      "properties": {
+        "cluster_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "member_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 2,
+          "maxItems": 16
+        },
+        "lawful_basis_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 1,
+          "maxItems": 16
+        },
+        "stability": {
+          "$ref": "#/$defs/CLUSTER_STABILITY"
+        },
+        "contradiction_risk_ref": {
+          "$ref": "#/$defs/REF"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ArchetypeRegistry": {
+      "type": "object",
+      "required": [
+        "registry_id",
+        "primary_source",
+        "relationship_source",
+        "archetypes",
+        "clusters"
+      ],
+      "properties": {
+        "registry_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "primary_source": {
+          "$ref": "#/$defs/RegistrySource"
+        },
+        "relationship_source": {
+          "$ref": "#/$defs/RegistrySource"
+        },
+        "archetypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArchetypeRecord"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "clusters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ClusterRecord"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        }
+      },
+      "additionalProperties": false
+    },
+    "RelationObservation": {
+      "type": "object",
+      "required": [
+        "first_id",
+        "second_id",
+        "relation",
+        "score_delta_q6",
+        "coexistence_allowed",
+        "suppressed_id"
+      ],
+      "properties": {
+        "first_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "second_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "relation": {
+          "$ref": "#/$defs/RELATION"
+        },
+        "score_delta_q6": {
+          "$ref": "#/$defs/SIGNED_Q6"
+        },
+        "coexistence_allowed": {
+          "type": "boolean"
+        },
+        "suppressed_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ID"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ClusterScore": {
+      "type": "object",
+      "required": [
+        "cluster_id",
+        "qualifying_members",
+        "base_score_q6",
+        "stability_bonus_q6",
+        "support_penalty_q6",
+        "final_score_q6",
+        "activated",
+        "reasons"
+      ],
+      "properties": {
+        "cluster_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "qualifying_members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 16
+        },
+        "base_score_q6": {
+          "$ref": "#/$defs/SIGNED63"
+        },
+        "stability_bonus_q6": {
+          "$ref": "#/$defs/SIGNED_Q6"
+        },
+        "support_penalty_q6": {
+          "$ref": "#/$defs/SIGNED_Q6"
+        },
+        "final_score_q6": {
+          "$ref": "#/$defs/SIGNED63"
+        },
+        "activated": {
+          "type": "boolean"
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 0,
+          "maxItems": 32
+        }
+      },
+      "additionalProperties": false
+    },
+    "BiasEvent": {
+      "type": "object",
+      "required": [
+        "event_id",
+        "terms",
+        "evidence_refs"
+      ],
+      "properties": {
+        "event_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "terms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/BiasTerm"
+          },
+          "minItems": 1,
+          "maxItems": 64
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/REF"
+          },
+          "minItems": 1,
+          "maxItems": 65
+        }
+      },
+      "additionalProperties": false
+    },
+    "ModuleLifecycleReceipt": {
+      "type": "object",
+      "required": [
+        "operation_reference",
+        "action",
+        "before",
+        "after",
+        "status",
+        "failure_code"
+      ],
+      "properties": {
+        "operation_reference": {
+          "$ref": "#/$defs/ID"
+        },
+        "action": {
+          "$ref": "#/$defs/LIFECYCLE_ACTION"
+        },
+        "before": {
+          "$ref": "#/$defs/ModuleStatus"
+        },
+        "after": {
+          "$ref": "#/$defs/ModuleStatus"
+        },
+        "status": {
+          "$ref": "#/$defs/LIFECYCLE_COMPLETION"
+        },
+        "failure_code": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CORE_FAILURE"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "CoreOrchestrationRequest": {
+      "type": "object",
+      "required": [
+        "operation_reference",
+        "inputs",
+        "origin",
+        "normalization",
+        "declared_subject",
+        "target_constraints",
+        "realm_request",
+        "archetype_context",
+        "truth_input",
+        "perception_request"
+      ],
+      "properties": {
+        "operation_reference": {
+          "$ref": "#/$defs/ID"
+        },
+        "inputs": {
+          "$ref": "m3_planner_emitter_schema.json#/$defs/GenerationInputs"
+        },
+        "origin": {
+          "$ref": "m3_generation_state_schema.json#/$defs/StateDiagnosis"
+        },
+        "normalization": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CoreNormalizationRequest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "declared_subject": {
+          "$ref": "m3_generation_topology_axiom_schema.json#/$defs/AxiomSubject"
+        },
+        "target_constraints": {
+          "$ref": "m3_planner_emitter_schema.json#/$defs/TargetConstraints"
+        },
+        "realm_request": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RealmAccessRequest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "archetype_context": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArchetypeContext"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "truth_input": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TruthInputSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "perception_request": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PerceptionRequest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "CoreOrchestrationResult": {
+      "type": "object",
+      "required": [
+        "request",
+        "binding",
+        "normalization_result",
+        "normalization_completion",
+        "normalized_origin",
+        "normalized_origin_completion",
+        "generation_run",
+        "cosmology",
+        "realm_access",
+        "realm_shift",
+        "pattern",
+        "archetypes",
+        "narrative",
+        "perception",
+        "status",
+        "diagnostics"
+      ],
+      "properties": {
+        "request": {
+          "$ref": "#/$defs/CoreOrchestrationRequest"
+        },
+        "binding": {
+          "$ref": "#/$defs/CoreBinding"
+        },
+        "normalization_result": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NormalizationPacket"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "normalization_completion": {
+          "anyOf": [
+            {
+              "$ref": "m3_reference_diagnostic_bundle_schema.json#/$defs/DiagnosticsCompletionReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "normalized_origin": {
+          "anyOf": [
+            {
+              "$ref": "m3_generation_state_schema.json#/$defs/StateDiagnosis"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "normalized_origin_completion": {
+          "anyOf": [
+            {
+              "$ref": "m3_reference_diagnostic_bundle_schema.json#/$defs/DiagnosticsCompletionReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "generation_run": {
+          "anyOf": [
+            {
+              "$ref": "m3_planner_emitter_schema.json#/$defs/GenerationRunReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cosmology": {
+          "anyOf": [
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/CoreResult"
+                },
+                {
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/$defs/CosmicState"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "realm_access": {
+          "anyOf": [
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/CoreResult"
+                },
+                {
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/$defs/RealmAccessResult"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "realm_shift": {
+          "anyOf": [
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/CoreResult"
+                },
+                {
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/$defs/RealmShiftProposal"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pattern": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CoreResult"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "archetypes": {
+          "anyOf": [
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/CoreResult"
+                },
+                {
+                  "properties": {
+                    "value": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/$defs/ArchetypeEvaluation"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "narrative": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CoreResult"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "perception": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CoreResult"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "$ref": "#/$defs/CORE_STATUS"
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CoreDiagnostic"
+          },
+          "minItems": 1,
+          "maxItems": 32
+        }
+      },
+      "additionalProperties": false
+    },
+    "CoreNormalizationRequest": {
+      "type": "object",
+      "required": [
+        "plan",
+        "context"
+      ],
+      "properties": {
+        "plan": {
+          "$ref": "m3_generation_normalization_plan_schema.json#/$defs/NormalizationPlan"
+        },
+        "context": {
+          "$ref": "m3_generation_state_normalization_schema.json#/$defs/NormalizationContext"
+        }
+      },
+      "additionalProperties": false
+    },
+    "NormalizationPacket": {
+      "$ref": "m3_generation_state_normalization_schema.json"
+    },
+    "REF": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    }
+  },
+  "x-ywe-requirement-id": "YWE-REQ-0051",
+  "x-ywe-adr-id": "ADR-0043"
+}

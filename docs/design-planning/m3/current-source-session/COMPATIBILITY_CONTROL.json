@@ -1,0 +1,163 @@
+{
+  "status": "PROPOSAL_PREDICATE_CONTROL_PASS_NOT_RUNTIME_ELIGIBILITY",
+  "actual_public_source_constructor_baselines": [
+    "LEGACY_C78",
+    "N3_LIFECYCLE",
+    "M3_MODULES"
+  ],
+  "pair_cases": [
+    {
+      "case": "LEGACY_C78+historical",
+      "recognized_lifecycle_pair": false
+    },
+    {
+      "case": "LEGACY_C78+current",
+      "recognized_lifecycle_pair": false
+    },
+    {
+      "case": "N3_LIFECYCLE+historical",
+      "recognized_lifecycle_pair": true
+    },
+    {
+      "case": "N3_LIFECYCLE+current",
+      "recognized_lifecycle_pair": false
+    },
+    {
+      "case": "M3_MODULES+historical",
+      "recognized_lifecycle_pair": false
+    },
+    {
+      "case": "M3_MODULES+current",
+      "recognized_lifecycle_pair": true
+    },
+    {
+      "case": "M3_GENERATION+historical",
+      "recognized_lifecycle_pair": false
+    },
+    {
+      "case": "M3_GENERATION+current",
+      "recognized_lifecycle_pair": true
+    },
+    {
+      "case": "policy_leaf_mismatch:1.0.0:policy_id",
+      "recognized_lifecycle_pair": false
+    },
+    {
+      "case": "policy_leaf_mismatch:1.1.0:policy_id",
+      "recognized_lifecycle_pair": false
+    },
+    {
+      "case": "policy_leaf_mismatch:1.0.0:policy_version",
+      "recognized_lifecycle_pair": false
+    },
+    {
+      "case": "policy_leaf_mismatch:1.1.0:policy_version",
+      "recognized_lifecycle_pair": false
+    },
+    {
+      "case": "policy_leaf_mismatch:1.0.0:source_path",
+      "recognized_lifecycle_pair": false
+    },
+    {
+      "case": "policy_leaf_mismatch:1.1.0:source_path",
+      "recognized_lifecycle_pair": false
+    },
+    {
+      "case": "policy_leaf_mismatch:1.0.0:source_sha256",
+      "recognized_lifecycle_pair": false
+    },
+    {
+      "case": "policy_leaf_mismatch:1.1.0:source_sha256",
+      "recognized_lifecycle_pair": false
+    }
+  ],
+  "mixed_fullvector_actual_constructor_rejections": 28,
+  "live_current_policy_control": "LIVE_REJECTS_NOT_ADOPTED",
+  "limitations": [
+    "New pair predicate is external proposed logic. Actual current SessionPolicyBinding still rejects v1.1, as expected.",
+    "No session owner, store, gate or runtime integration is enabled by these controls."
+  ],
+  "exact_recovery_pin_pair_cases": [
+    {
+      "source": "LEGACY_C78",
+      "recovery_pins": "LEGACY_C78",
+      "recognized_exact_pair": true
+    },
+    {
+      "source": "LEGACY_C78",
+      "recovery_pins": "N3_LIFECYCLE",
+      "recognized_exact_pair": false
+    },
+    {
+      "source": "LEGACY_C78",
+      "recovery_pins": "M3_MODULES",
+      "recognized_exact_pair": false
+    },
+    {
+      "source": "LEGACY_C78",
+      "recovery_pins": "M3_GENERATION",
+      "recognized_exact_pair": false
+    },
+    {
+      "source": "N3_LIFECYCLE",
+      "recovery_pins": "LEGACY_C78",
+      "recognized_exact_pair": false
+    },
+    {
+      "source": "N3_LIFECYCLE",
+      "recovery_pins": "N3_LIFECYCLE",
+      "recognized_exact_pair": true
+    },
+    {
+      "source": "N3_LIFECYCLE",
+      "recovery_pins": "M3_MODULES",
+      "recognized_exact_pair": false
+    },
+    {
+      "source": "N3_LIFECYCLE",
+      "recovery_pins": "M3_GENERATION",
+      "recognized_exact_pair": false
+    },
+    {
+      "source": "M3_MODULES",
+      "recovery_pins": "LEGACY_C78",
+      "recognized_exact_pair": false
+    },
+    {
+      "source": "M3_MODULES",
+      "recovery_pins": "N3_LIFECYCLE",
+      "recognized_exact_pair": false
+    },
+    {
+      "source": "M3_MODULES",
+      "recovery_pins": "M3_MODULES",
+      "recognized_exact_pair": true
+    },
+    {
+      "source": "M3_MODULES",
+      "recovery_pins": "M3_GENERATION",
+      "recognized_exact_pair": false
+    },
+    {
+      "source": "M3_GENERATION",
+      "recovery_pins": "LEGACY_C78",
+      "recognized_exact_pair": false
+    },
+    {
+      "source": "M3_GENERATION",
+      "recovery_pins": "N3_LIFECYCLE",
+      "recognized_exact_pair": false
+    },
+    {
+      "source": "M3_GENERATION",
+      "recovery_pins": "M3_MODULES",
+      "recognized_exact_pair": false
+    },
+    {
+      "source": "M3_GENERATION",
+      "recovery_pins": "M3_GENERATION",
+      "recognized_exact_pair": true
+    }
+  ],
+  "source4_live_constructor_control": "REJECTS_UNADOPTED_SOURCE4"
+}

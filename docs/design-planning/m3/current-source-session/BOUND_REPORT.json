@@ -1,0 +1,214 @@
+{
+  "status": "EXTERNAL_INDEPENDENT_REENCODING_ARITHMETIC_PASS_NOT_RUNTIME_ACCEPTANCE",
+  "policy_binding_leaf_delta": 8,
+  "paired_source_leaf_delta": 0,
+  "new_sidecar_leaf_bytes": {
+    "SafeSessionModuleLinkEvidence": 1489,
+    "SafeSessionModuleHistoryEvidence": 1088,
+    "SafeSessionModuleCutoverEvidence": 449
+  },
+  "module_existing_support_nodes": 112,
+  "new_nonpage_roots": 2622,
+  "new_page_count": 41,
+  "pin_count": 2663,
+  "index_encoded_bytes_upper": 328029,
+  "index_byte_increment": 14999,
+  "longest_supporting_kind": "PRODUCER_FINAL_OBSERVATION",
+  "supporting_reference_leaf_delta": 2,
+  "largest_page_bytes": 13038,
+  "normal_lifecycle_bytes_upper": 324346,
+  "existing_normal_reservation_unchanged": {
+    "events": 4,
+    "incidents": 1,
+    "aliases": 512,
+    "bytes": 327680,
+    "supporting_bytes": 98304
+  },
+  "terminal_write_increment": 16911,
+  "terminal_bytes_upper": 661999,
+  "terminal_support_upper": 432623,
+  "proposed_terminal_reservation": {
+    "events": 4,
+    "incidents": 1,
+    "aliases": 512,
+    "bytes": 688128,
+    "supporting_bytes": 458752
+  },
+  "module_control_reservation": {
+    "events": 0,
+    "incidents": 0,
+    "aliases": 64,
+    "bytes": 65536,
+    "supporting_bytes": 32768
+  },
+  "full_offered_support_upper": 1814689,
+  "full_offered_total_bytes_upper": 4112477,
+  "full_offered_alias_occurrences": 6566,
+  "global_alias_cap": 6144,
+  "all_cartesian_maxima_coexist": false,
+  "module_reservations_unchanged": {
+    "REALM_ENCODER": {
+      "bytes": 524288,
+      "supporting_bytes": 131072,
+      "aliases": 320
+    },
+    "TRANSITION_REGISTRY": {
+      "bytes": 2097152,
+      "supporting_bytes": 262144,
+      "aliases": 1024
+    },
+    "TOPOLOGY_GENERATOR": {
+      "bytes": 2097152,
+      "supporting_bytes": 524288,
+      "aliases": 512
+    },
+    "AXIOM_EVALUATOR": {
+      "bytes": 1048576,
+      "supporting_bytes": 262144,
+      "aliases": 512
+    }
+  },
+  "boundary_cases": [
+    {
+      "case": "modulecontrolaliaslastfit",
+      "held": 6080,
+      "needed": 64,
+      "cap": 6144,
+      "admitted": true
+    },
+    {
+      "case": "modulecontrolaliasoverflow",
+      "held": 6081,
+      "needed": 64,
+      "cap": 6144,
+      "admitted": false
+    },
+    {
+      "case": "transitionafterretainedoldcartesian",
+      "held": 4748,
+      "needed": 1024,
+      "cap": 6144,
+      "admitted": true
+    },
+    {
+      "case": "axiomsafterfullfourcartesian",
+      "held": 6054,
+      "needed": 512,
+      "cap": 6144,
+      "admitted": false
+    },
+    {
+      "case": "nativeN2afteroneincident",
+      "held": 1,
+      "needed": 32,
+      "cap": 32,
+      "admitted": false
+    },
+    {
+      "case": "nativeN2afteroriginfinishretained",
+      "held": 1,
+      "needed": 32,
+      "cap": 32,
+      "admitted": false
+    },
+    {
+      "case": "controlsupportlastfit",
+      "held": 2064384,
+      "needed": 32768,
+      "cap": 2097152,
+      "admitted": true
+    },
+    {
+      "case": "controlsupportoverflow",
+      "held": 2064385,
+      "needed": 32768,
+      "cap": 2097152,
+      "admitted": false
+    }
+  ],
+  "limitations": [
+    "All encoded specimens and resource checks are representation/proposed admission controls, not runtime session/gate/ACK/native evidence.",
+    "Old N3 graph full bound and all module alias occurrences intentionally exceed6144; actual all-selected closure may fit through true deduplication, otherwise whole admission must refuse.",
+    "Support includes each old 65536 inherited root allowance again in each module graph; this is deliberate conservative byte doublecharge, not additional support kind quota.",
+    "No global caps, old policy branch or old fixture witnesses are changed.",
+    "Future planner/emitter added gates/targets/session budgets require a separate adopted proof."
+  ],
+  "terminal_alias_occurrence_upper": 401,
+  "page_policy_discriminator_bytes": 33,
+  "optional_current_array_collection_framing_upper": 272,
+  "current_array_counts": {
+    "session_current_bindings": 19,
+    "session_current_sources": 2,
+    "session_current_histories": 1,
+    "session_current_history_pages": 41,
+    "session_module_links": 4,
+    "session_module_histories": 1,
+    "session_module_cutovers": 1
+  },
+  "source4_tagged_module_leaf_deltas": {
+    "source_bytes_per_producer": 44,
+    "registry_bytes": 969,
+    "registry_alias_slots": 20,
+    "safe_support_increment": 1145,
+    "conservative_total_increment": 6265,
+    "peer_ready_index_sha256": "7ccc71ad5a0ee8864650a7e5004a6a75fcf406de04b0ee92eae3a816247b1ab5"
+  },
+  "source4_four_pure_operation_bounds": {
+    "REALM_ENCODER": {
+      "support_upper": 78069,
+      "total_upper": 326389,
+      "alias_upper": 266,
+      "reservation": {
+        "bytes": 524288,
+        "supporting_bytes": 131072,
+        "aliases": 320
+      }
+    },
+    "TRANSITION_REGISTRY": {
+      "support_upper": 125829,
+      "total_upper": 1065093,
+      "alias_upper": 565,
+      "reservation": {
+        "bytes": 2097152,
+        "supporting_bytes": 262144,
+        "aliases": 1024
+      }
+    },
+    "TOPOLOGY_GENERATOR": {
+      "support_upper": 154902,
+      "total_upper": 395286,
+      "alias_upper": 395,
+      "reservation": {
+        "bytes": 2097152,
+        "supporting_bytes": 524288,
+        "aliases": 512
+      }
+    },
+    "AXIOM_EVALUATOR": {
+      "support_upper": 86996,
+      "total_upper": 471252,
+      "alias_upper": 317,
+      "reservation": {
+        "bytes": 1048576,
+        "supporting_bytes": 262144,
+        "aliases": 512
+      }
+    }
+  },
+  "historical_projection_preservation": {
+    "old_reference_leaf_bytes": 69,
+    "old_page_leaf_bytes": 12877,
+    "old_page_count": 40,
+    "old_nonpage_roots": 2504,
+    "old_pins": 2544,
+    "old_terminal_reservation": {
+      "events": 4,
+      "incidents": 1,
+      "aliases": 512,
+      "bytes": 655360,
+      "supporting_bytes": 425984
+    },
+    "new_page_policy_discriminator": "session_policy_version=1.1.0",
+    "old_safe_reference_and_page_definitions_unchanged": true
+  }
+}

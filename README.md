@@ -136,16 +136,21 @@ rejection without caller hooks. The exhaustive reference-registry control passes
 all 8,192 source/codeword pairs, with 16,384 actual applications, independent XOR
 expectations and repeated complete canonical bytes, in 850.835 seconds.
 Current-source predicate and fallback-registry schema bindings now include the
-adopted third vector; actual three-vector compatibility checks pass. Publication
-of this increment requires a complete clean repository run at the corrected revision.
-The unpublished b4e5b7c clean run completes 36 checks: 35 pass, with the unit
-check reporting two failures among 1,232 tests. One test hashed Windows CRLF
+adopted third vector; actual three-vector compatibility checks pass. The [published module implementation](https://github.com/flynn33/yggdrasil-world-engine/commit/c468b35439e2b0254a71b22be3117a711f557b9b)
+passes all 36 applicable checks in an exact clean, unfiltered offline checkout,
+including 1,232 unit tests in 2071.591 seconds. The full run takes 2428.110
+seconds with zero blocking failures, advisories or checkout changes. Git and
+GitHub API readback confirm the revision and exact README bytes. Its
+[Ubuntu/Windows CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38191670186)
+is running at the latest readback; no CI result is claimed yet.
+The earlier unpublished b4e5b7c run passes 35 checks and fails the unit check
+with two failures among 1,232 tests. One test hashed Windows CRLF
 checkout bytes against the documented LF policy identity; another still expected
 only nine lifecycle rules outside N2, omitting the 22 added module rules.
 The corrections retain the LF identity and all nine lifecycle refusal controls,
 and apply the same refusal controls to all 31 rules outside N2's eight-rule set.
-All 66 tests in the two affected areas pass in 255.122 seconds. A fresh full
-clean run is required before this corrected increment is published.
+All 66 tests in the two affected areas pass in 255.122 seconds. The subsequent
++complete clean c468b35 run verifies the corrected increment before publication.
 ADR-0040 gives each of the 17 safe support payloads an explicit evidence alias;
 all corrected structural byte bounds fit the existing reservations. Complete
 planner/emitter business policies, current-source lifecycle integration and the
@@ -186,9 +191,15 @@ passes all 36 checks and runs 1151 unit tests: Ubuntu passes 1109 with
 42 explicit native skips; Windows passes all 1151 with no skips.
 M0–M2 remain accepted and M3 active.
 
-Current work completes strict module capture and verifies its failure, concurrent
-completion and protected export paths. Complete planner/emitter policy and
-current-source lifecycle integration follow within M3. The existing identity/XOR
+The remaining generation/planner/emitter, current-source pure-module Session
+and neutral Core contracts are now adopted under YWE-REQ-0049–0051 /
+ADR-0041–0043 after independent source, format, capacity and authority reviews.
+Their [adoption routing](docs/design-planning/m3/ADOPTION_PROOF_ROUTING.json)
+preserves the frozen review inputs and original three-vector contract. The
+fourth canonical vector is accepted pending its joint source/runtime migration.
+Current work implements these exact contracts, deterministic integer policies,
+bounded logical lifecycle and all remaining conformance obligations. Authored
+format controls do not establish those runtime behaviors. The existing identity/XOR
 helpers retain their full algebra domain. These remaining module, core-contract
 and conformance obligations keep all five M3 exits open. M4 remains planned and
 will wait for the owner’s go-ahead after M3 is accepted and published.
@@ -801,3 +812,7 @@ Copyright 2026 James Daley
 
 This project is dual-licensed. Non-commercial, academic, and personal use is free. Commercial use requires a separate written license.
 See the [LICENSE](LICENSE) file for the full terms.
+
+The owner Wiki is updated to `6182078` from exact repository source `c468b35`.
+A fresh remote clone matches all 47 reviewed pages, including the home and
+specification roadmap projections; 15 manual pages are preserved.
