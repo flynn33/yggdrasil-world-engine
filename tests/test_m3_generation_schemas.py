@@ -14,12 +14,13 @@ from core.ash_pattern_engine import generation_values as g
 from core.ash_pattern_engine import state_values as s
 from core.ash_pattern_engine.topology import ReferenceTopologyGenerator
 from core.ash_pattern_engine.axioms import ReferenceAxiomEvaluator
-from core.ash_pattern_engine.state_model import StateModel
+from core.ash_pattern_engine.state_model import StateModel, RecordingDiagnosticCapture
 from tests.test_m3_topology import module_model, diagnosis, ash
 from tests.test_m3_axioms import subject
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_ID = "https://ywe.local/schemas/m3_topology_axiom_schema.json"
+GENERATION_SCHEMA_ID = "https://ywe.local/schemas/m3_generation_topology_axiom_schema.json"
 
 
 def authored_objects():
@@ -98,8 +99,9 @@ class GenerationSchemaTests(unittest.TestCase):
         cls.objects=authored_objects()
         cls.values=wire_values(cls.objects)
 
-    def validator(self,name):
-        return Draft202012Validator({"$ref":SCHEMA_ID+"#/$defs/"+name},registry=self.registry)
+    def validator(self,name,value=None):
+        schema_id=SCHEMA_ID if value is None else g.wire_schema(value)
+        return Draft202012Validator({"$ref":schema_id+"#/$defs/"+name},registry=self.registry)
 
     def assertRejected(self,name,value,path=None,keyword=None):
         errors=list(self.validator(name).iter_errors(value))
@@ -115,23 +117,84 @@ class GenerationSchemaTests(unittest.TestCase):
                             [(list(e.absolute_path),e.validator) for e in all_errors])
 
     def test_metaschema_and_every_reference_is_resolved_offline(self):
-        Draft202012Validator.check_schema(self.document)
-        def walk(value):
+        def walk(value,schema_id):
             if type(value) is dict:
                 if "$ref" in value:
-                    self.registry.resolver(SCHEMA_ID).lookup(value["$ref"])
-                for child in value.values():walk(child)
+                    self.registry.resolver(schema_id).lookup(value["$ref"])
+                for child in value.values():walk(child,schema_id)
             elif type(value) is list:
-                for child in value:walk(child)
-        walk(self.document)
+                for child in value:walk(child,schema_id)
+        for schema_id in (SCHEMA_ID,GENERATION_SCHEMA_ID):
+            with self.subTest(family=schema_id):
+                document=self.documents[schema_id]
+                Draft202012Validator.check_schema(document)
+                walk(document,schema_id)
 
     def test_actual_all18_definitions_and_packet_refusal_branches(self):
         self.assertEqual(18,len(self.values))
         for name,value in self.values.items():
             with self.subTest(definition=name):
-                self.validator(name).validate(value.to_record())
+                self.validator(name,value).validate(value.to_record())
         for value in self.objects:
-            self.validator(type(value).__name__).validate(value.to_record())
+            self.validator(type(value).__name__,value).validate(value.to_record())
+
+    def test_full_source_family_dispatch_preserves_old_branches_and_refuses_mixed_pins(self):
+        name="TopologyAxiomSourceBinding"
+        old=self.validator(name)
+        current=Draft202012Validator({"$ref":GENERATION_SCHEMA_ID+"#/$defs/"+name},registry=self.registry)
+        old_branches=self.documents[SCHEMA_ID]["$defs"][name]["oneOf"]
+        current_branches=self.documents[GENERATION_SCHEMA_ID]["$defs"][name]["oneOf"]
+        self.assertEqual(len(old_branches),3)
+        self.assertEqual(len(current_branches),4)
+        self.assertEqual(current_branches[:3],old_branches)
+        self.assertEqual(tuple(row[0] for row in g.SOURCE_BASELINES),
+                         ("LEGACY_C78","N3_LIFECYCLE","M3_MODULES","M3_GENERATION"))
+        records=[]
+        for baseline,canonical,pins in g.SOURCE_BASELINES:
+            value=g.TopologyAxiomSourceBinding(s.CanonicalAshBinding(**canonical),pins)
+            expected=GENERATION_SCHEMA_ID if baseline=="M3_GENERATION" else SCHEMA_ID
+            with self.subTest(baseline=baseline):
+                self.assertEqual(g.wire_schema(value),expected)
+                self.validator(name,value).validate(value.to_record())
+                current.validate(value.to_record())
+                if baseline=="M3_GENERATION":
+                    self.assertTrue(list(old.iter_errors(value.to_record())))
+                else:
+                    old.validate(value.to_record())
+            records.append(value.to_record())
+        for source_index,source in enumerate(records):
+            for pin_index,pin_owner in enumerate(records):
+                if source_index==pin_index:continue
+                with self.subTest(source=source_index,pins=pin_index):
+                    mixed=deepcopy(source);mixed["contract_pins"]=pin_owner["contract_pins"]
+                    self.assertTrue(list(current.iter_errors(mixed)))
+        source4=records[-1]
+        for field in source4["canonical_binding"]:
+            with self.subTest(canonical_field=field):
+                changed=deepcopy(source4)
+                changed["canonical_binding"][field]="unknown.dependency" if field=="dependency_id" else "0"*64
+                self.assertTrue(list(current.iter_errors(changed)))
+        for index in range(7):
+            with self.subTest(pin=index):
+                changed=deepcopy(source4);changed["contract_pins"][index][1]="0"*64
+                self.assertTrue(list(current.iter_errors(changed)))
+        changed=deepcopy(source4);changed["contract_pins"][0][0]="interfaces/contracts/unknown.md"
+        self.assertTrue(list(current.iter_errors(changed)))
+        changed=deepcopy(source4)
+        changed["contract_pins"][0],changed["contract_pins"][1]=changed["contract_pins"][1],changed["contract_pins"][0]
+        self.assertTrue(list(current.iter_errors(changed)))
+        legacy_model=module_model()
+        model=StateModel(legacy_model.profile_binding,s.CanonicalAshBinding(**g.SOURCE_BASELINES[-1][1]),
+                         RecordingDiagnosticCapture())
+        origin=diagnosis(model,reference="schema:source4:origin")
+        policy=g.TopologyAxiomPolicyBinding(*g.POLICY_FIELDS)
+        packets=(ReferenceTopologyGenerator(model,policy).generate(g.TopologyRequest("schema:source4:topology",origin,0)),
+                 ReferenceAxiomEvaluator(model,policy).evaluate(g.AxiomRequest("schema:source4:axioms",origin,subject(origin))))
+        for value in packets:
+            with self.subTest(packet=type(value).__name__):
+                self.assertEqual(g.wire_schema(value),GENERATION_SCHEMA_ID)
+                self.validator(type(value).__name__,value).validate(value.to_record())
+                self.assertTrue(list(self.validator(type(value).__name__).iter_errors(value.to_record())))
 
     def test_all_owned_definitions_are_closed_and_have_required_fields(self):
         for name,value in self.values.items():

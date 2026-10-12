@@ -31,6 +31,9 @@ LEGACY_REVISION = 'c78ee7e451e5d35b2f615369433291007e7ee261'
 CURRENT_AGGREGATE = '76d59926ce9676b7584c6cdd555f50f56fceda075fa3fc8b37167fd2be43f7c9'
 N3_SOURCE_REVISION = 'a345d1be3e2d635cb79104c153d2628b090ccd88'
 MODULE_AGGREGATE = 'f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400'
+MODULE_SOURCE_REVISION = 'c468b35439e2b0254a71b22be3117a711f557b9b'
+GENERATION_AGGREGATE = '2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8'
+GENERATION_SOURCE_REVISION = '2edfc3a8f72abc60bfce65ef193f2cd04bdfe92b'
 DEPENDENCY = 'ash_cosmological_model.f2_9.canonical'
 AGGREGATE = '0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb'
 CODEWORD_PIN = '8836c19481b82ce2b4b89fb48911f1b3d37d315e2099af091c69dbaf1d382f0c'
@@ -104,15 +107,31 @@ def n3_source_hash(relative_path):
     return hashlib.sha256(raw.decode('utf-8-sig').replace('\r\n', '\n').replace('\r', '\n').encode()).hexdigest()
 
 
+@lru_cache(maxsize=40)
+def module_source_hash(relative_path):
+    raw = subprocess.check_output(['git', '-C', str(ROOT), 'show',
+        MODULE_SOURCE_REVISION + ':core/ash_pattern_engine/canonical/' + relative_path])
+    return hashlib.sha256(raw.decode('utf-8-sig').replace('\r\n', '\n').replace('\r', '\n').encode()).hexdigest()
+
+
+@lru_cache(maxsize=40)
+def generation_source_hash(relative_path):
+    raw = subprocess.check_output(['git', '-C', str(ROOT), 'show',
+        GENERATION_SOURCE_REVISION + ':core/ash_pattern_engine/canonical/' + relative_path])
+    return hashlib.sha256(raw.decode('utf-8-sig').replace('\r\n', '\n').replace('\r', '\n').encode()).hexdigest()
+
+
 def canonical_binding(*, current=False, baseline=None):
     baseline = ('N3_LIFECYCLE' if current else 'LEGACY_C78') if baseline is None else baseline
     if current and baseline != 'N3_LIFECYCLE':
         raise ValueError('current=True retains the historical N3 source role')
     source_hash = {'LEGACY_C78': legacy_source_hash, 'N3_LIFECYCLE': n3_source_hash,
-                   'M3_MODULES': lambda path: normalized_hash(CANONICAL / path)}[baseline]
+                   'M3_MODULES': module_source_hash,
+                   'M3_GENERATION': lambda path: normalized_hash(CANONICAL / path)}[baseline]
     return sv.CanonicalAshBinding(dependency_id=DEPENDENCY,
                                  aggregate_sha256={'LEGACY_C78': AGGREGATE, 'N3_LIFECYCLE': CURRENT_AGGREGATE,
-                                                   'M3_MODULES': MODULE_AGGREGATE}[baseline],
+                                                   'M3_MODULES': MODULE_AGGREGATE,
+                                                   'M3_GENERATION': GENERATION_AGGREGATE}[baseline],
                                  **{field: source_hash(path)
                                     for field, path in SOURCE_FIELDS.items()})
 
@@ -1965,8 +1984,32 @@ class RecoveryIntegrationTests(unittest.TestCase):
         self.assertEqual(dict(rows), {entry['relative_path']: entry['sha256'] for entry in manifest['files']})
         aggregate = hashlib.sha256(''.join(path + '\0' + digest + '\n'
                                          for path, digest in sorted(rows)).encode('utf-8')).hexdigest()
-        self.assertEqual(aggregate, MODULE_AGGREGATE)
+        self.assertEqual(aggregate, GENERATION_AGGREGATE)
+        source_inventory = json.loads((ROOT / 'docs/design-planning/m3/module-diagnostics/SOURCE_VECTOR_INVENTORY.json')
+                                      .read_text(encoding='utf-8'))
+        self.assertEqual(source_inventory['runtime_current_baseline'], 'M3_GENERATION')
+        self.assertEqual(source_inventory['historical_modules_containing_revision'], MODULE_SOURCE_REVISION)
+        self.assertEqual(source_inventory['historical_n3_containing_revision'], N3_SOURCE_REVISION)
+        containing_manifest = json.loads(subprocess.check_output(['git', '-C', str(ROOT), 'show',
+            GENERATION_SOURCE_REVISION + ':data/governance/ash_dependency_identity.json']))
+        containing_rows = [(entry['relative_path'], generation_source_hash(entry['relative_path']))
+                           for entry in containing_manifest['files']]
+        self.assertEqual(len(containing_rows), 32)
+        self.assertEqual(len(set(path for path, _ in containing_rows)), 32)
+        self.assertEqual(dict(containing_rows), dict(rows))
+        self.assertEqual(containing_manifest['aggregate_sha256'], aggregate)
+        self.assertEqual(containing_manifest['files'], manifest['files'])
         expected = tuple((path, normalized_hash(CANONICAL / path)) for path, _ in rv.RECOVERY_CONTRACT_PIN_FIELDS)
+        module_manifest = json.loads(subprocess.check_output(['git', '-C', str(ROOT), 'show',
+            MODULE_SOURCE_REVISION + ':data/governance/ash_dependency_identity.json']))
+        module_rows = [(entry['relative_path'], module_source_hash(entry['relative_path']))
+                       for entry in module_manifest['files']]
+        self.assertEqual(len(module_rows), 32)
+        self.assertEqual(len(set(path for path, _ in module_rows)), 32)
+        self.assertEqual(dict(module_rows), {entry['relative_path']: entry['sha256'] for entry in module_manifest['files']})
+        self.assertEqual(hashlib.sha256(''.join(path + '\0' + digest + '\n'
+            for path, digest in sorted(module_rows)).encode()).hexdigest(), MODULE_AGGREGATE)
+        module_pins = tuple((path, module_source_hash(path)) for path, _ in rv.RECOVERY_CONTRACT_PIN_FIELDS)
         historical_manifest = json.loads(subprocess.check_output(['git', '-C', str(ROOT), 'show',
             N3_SOURCE_REVISION + ':data/governance/ash_dependency_identity.json']))
         historical_rows = [(entry['relative_path'], n3_source_hash(entry['relative_path']))
@@ -1984,7 +2027,7 @@ class RecoveryIntegrationTests(unittest.TestCase):
                  ('CONTAINED', 0, False, False, False, True, 'HANDOFF_REQUIRED'),
                  ('FAILED', 1, False, False, False, False, 'HANDOFF_REQUIRED'),
                  ('SAFE_HALT', 0, False, False, True, False, 'HANDOFF_REQUIRED')]
-        for baseline, pins in (('N3_LIFECYCLE', historical_pins), ('M3_MODULES', expected)):
+        for baseline, pins in (('N3_LIFECYCLE', historical_pins), ('M3_MODULES', module_pins), ('M3_GENERATION', expected)):
             for expected_class, original, known, fallback, halt, contained, expected_outcome in cases:
                 with self.subTest(baseline=baseline, state_class=expected_class):
                     model, origin, engine, *_ = self.fixture(original=original, known=known, fallback=fallback,
@@ -1997,12 +2040,15 @@ class RecoveryIntegrationTests(unittest.TestCase):
                     self.assertEqual(result.origin_validation.status, 'VERIFIED')
                     self.assertEqual(result.completion_observation.status, 'COMPLETE')
                     self.assertFalse(result.session_effects_performed)
+                    source_row = next(row for row in source_inventory['vectors'] if row['baseline'] == baseline)
+                    self.assertEqual(model.canonical_binding.to_record(), source_row['canonical_binding'])
+                    self.assertEqual(pins, tuple((pin['path'], pin['sha256']) for pin in source_row['recovery_contract_pins']))
                     for post in result.post_assessments:
                         self.assertEqual(post.assessment.source_binding, model.canonical_binding)
 
     def test_current_known_correction_and_fallback_success_keep_exact_source_proofs(self):
         entries, observations = entries_for()
-        for baseline in ('N3_LIFECYCLE', 'M3_MODULES'):
+        for baseline in ('N3_LIFECYCLE', 'M3_MODULES', 'M3_GENERATION'):
             for known in (True, False):
                 model, origin, engine, _, _, provider, _, _ = self.fixture(original=self.g1 if known else 1,
                     known=known, fallback=not known, canonical=canonical_binding(baseline=baseline),

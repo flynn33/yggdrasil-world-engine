@@ -13,7 +13,8 @@ from core.ash_pattern_engine import state_values as s
 from core.ash_pattern_engine.fallback_registry import FallbackRegistry
 from core.ash_pattern_engine.state_model import RecordingDiagnosticCapture, StateModel
 from tests.test_m3_state_model import diagnostic_context, evidence, profile_binding
-from tests.test_m3_recovery import canonical_binding, legacy_source_hash, n3_source_hash, N3_SOURCE_REVISION
+from tests.test_m3_recovery import (canonical_binding, legacy_source_hash, n3_source_hash, module_source_hash,
+                                   N3_SOURCE_REVISION, MODULE_SOURCE_REVISION)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -222,19 +223,24 @@ class RecoveryValueTests(unittest.TestCase):
                 r.RecoverySourceBinding(self.model.canonical_binding, altered)
 
     def test_complete_source_pairs_match_adopted_inventory_and_actual_source_bytes(self):
-        text = (ROOT / "docs/architecture/m3_module_source_compatibility_contract.md").read_text(encoding="utf-8")
-        inventory = json.loads(text.split("```json\n", 1)[1].split("\n```", 1)[0])
+        inventory = json.loads((ROOT / "docs/design-planning/m3/module-diagnostics/SOURCE_VECTOR_INVENTORY.json")
+                               .read_text(encoding="utf-8"))
+        self.assertEqual(inventory['baseline_order'], ['LEGACY_C78', 'N3_LIFECYCLE', 'M3_MODULES', 'M3_GENERATION'])
         expected = tuple((row["baseline"], tuple(row["canonical_binding"].items()),
                           tuple((pin["path"], pin["sha256"]) for pin in row["recovery_contract_pins"]))
                          for row in inventory["vectors"])
         self.assertEqual(r.RECOVERY_SOURCE_BASELINES, expected)
         self.assertEqual(r.RECOVERY_CONTRACT_PIN_FIELDS, expected[0][2])
+        prior = (ROOT / "docs/architecture/m3_module_source_compatibility_contract.md").read_text(encoding="utf-8")
+        prior_inventory = json.loads(prior.split("```json\n", 1)[1].split("\n```", 1)[0])
+        self.assertEqual(inventory['vectors'][:3], prior_inventory['vectors'])
         historical = (ROOT / "docs/architecture/m3_source_compatibility_contract.md").read_text(encoding="utf-8")
         old_inventory = json.loads(historical.split("```json\n", 1)[1].split("\n```", 1)[0])
         for current_row, old_row in zip(inventory['vectors'][:2], old_inventory['vectors']):
             for field in ('baseline', 'canonical_binding', 'recovery_contract_pins', 'diagnostic_pin_fields'):
                 self.assertEqual(current_row[field], old_row[field])
         self.assertEqual(inventory['vectors'][1]['source_snapshot_revision'], N3_SOURCE_REVISION)
+        self.assertEqual(inventory['historical_modules_containing_revision'], MODULE_SOURCE_REVISION)
         self.assertEqual(canonical_binding(current=True).to_record(), inventory['vectors'][1]['canonical_binding'])
         for name, canonical, pins in expected:
             with self.subTest(baseline=name):
@@ -248,13 +254,15 @@ class RecoveryValueTests(unittest.TestCase):
                         actual = legacy_source_hash(path)
                     elif name == 'N3_LIFECYCLE':
                         actual = n3_source_hash(path)
+                    elif name == 'M3_MODULES':
+                        actual = module_source_hash(path)
                     else:
                         actual = hashlib.sha256((ROOT / 'core/ash_pattern_engine/canonical' / path)
                             .read_text(encoding='utf-8-sig').replace('\r\n', '\n').replace('\r', '\n').encode()).hexdigest()
                     self.assertEqual(actual, digest)
 
     def test_canonical_and_recovery_vectors_cannot_be_crossed_or_partially_mixed(self):
-        bindings = tuple(canonical_binding(baseline=name) for name in ('LEGACY_C78', 'N3_LIFECYCLE', 'M3_MODULES'))
+        bindings = tuple(canonical_binding(baseline=name) for name in ('LEGACY_C78', 'N3_LIFECYCLE', 'M3_MODULES', 'M3_GENERATION'))
         pins = tuple(tuple(r.SourcePin(*pin) for pin in r.recovery_contract_pin_fields(binding))
                      for binding in bindings)
         for index, binding in enumerate(bindings):
@@ -270,9 +278,18 @@ class RecoveryValueTests(unittest.TestCase):
                         self.assertEqual((error.exception.code, error.exception.field_name),
                                          ("RECOVERY_BINDING_MISMATCH", "source_binding"))
                 altered = copy(binding)
-                object.__setattr__(altered, "taxonomy_source_sha256", bindings[other_index].taxonomy_source_sha256)
-                with self.assertRaises(r.RecoveryContractError):
-                    r.recovery_contract_pin_fields(altered)
+                if binding.taxonomy_source_sha256 != bindings[other_index].taxonomy_source_sha256:
+                    object.__setattr__(altered, "taxonomy_source_sha256", bindings[other_index].taxonomy_source_sha256)
+                    with self.assertRaises(r.RecoveryContractError):
+                        r.recovery_contract_pin_fields(altered)
+                else:
+                    # MODULES and GENERATION share the seven scalar source pins;
+                    # the other aggregate forms a complete legal scalar vector.
+                    object.__setattr__(altered, "aggregate_sha256", bindings[other_index].aggregate_sha256)
+                    self.assertEqual(r.recovery_contract_pin_fields(altered),
+                                     tuple((pin.path, pin.sha256) for pin in other))
+                    with self.assertRaises(r.RecoveryContractError):
+                        r.RecoverySourceBinding(altered, pins[index])
                 model, _ = assembly(baseline=s.canonical_source_baseline(binding))
                 packet = no_action_packet(model)
                 altered = copy(packet.source_binding)
@@ -289,7 +306,7 @@ class RecoveryValueTests(unittest.TestCase):
             def __getattr__(self, name):
                 calls.append("attribute")
                 raise AssertionError("Untrusted source attribute hook")
-        for baseline in ('LEGACY_C78', 'N3_LIFECYCLE', 'M3_MODULES'):
+        for baseline in ('LEGACY_C78', 'N3_LIFECYCLE', 'M3_MODULES', 'M3_GENERATION'):
             binding = canonical_binding(baseline=baseline)
             pins = tuple(r.SourcePin(*pin) for pin in r.recovery_contract_pin_fields(binding))
             for field, _ in s.CANONICAL_BINDING_FIELDS:

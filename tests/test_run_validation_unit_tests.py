@@ -249,7 +249,12 @@ class UnitEvidenceTests(unittest.TestCase):
         ordinary = subprocess.run([sys.executable, "-B", "-m", "unittest", "discover", "-s", "tests"],
                                   cwd=self.root, capture_output=True)
         self.assertEqual(ordinary.returncode, result.returncode)
-        self.assertEqual(5, result.returncode)
+        self.assertNotEqual(0, result.returncode)
+        self.assertEqual(ordinary.returncode, evidence["return_code"])
+        self.assertTrue(evidence["execution_complete"])
+        self.assertEqual(1, evidence["summary"]["errors"])
+        self.assertEqual(0, evidence["summary"]["failures"])
+        self.assertFalse(evidence["summary"]["successful"])
         self.assertEqual("NOT_RUN", evidence["cases"][0]["status"])
         self.assertEqual((0, 0), (evidence["cases"][0]["starts"], evidence["cases"][0]["stops"]))
         self.assertEqual("ERROR", evidence["fixture_errors"][0]["status"])

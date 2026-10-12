@@ -28,8 +28,10 @@ DEPENDENCY = 'ash_cosmological_model.f2_9.canonical'
 AGGREGATE = '0ed4b3524f5c079298a1d8fd99bdc972992b51ea073111ff4c1bfd91930f0feb'
 CURRENT_AGGREGATE = '76d59926ce9676b7584c6cdd555f50f56fceda075fa3fc8b37167fd2be43f7c9'
 MODULE_AGGREGATE = 'f431a5056601adaf1959fdf0252f0750e5b388177b5e29f168a0ea1375e82400'
+GENERATION_AGGREGATE = '2371f71e570b4e193f5fc3e3e210816b06640204582dbb17046f78ae1d5efcc8'
 LEGACY_SOURCE_REVISION = 'c78ee7e451e5d35b2f615369433291007e7ee261'
 N3_SOURCE_REVISION = 'a345d1be3e2d635cb79104c153d2628b090ccd88'
+MODULE_SOURCE_REVISION = 'c468b35439e2b0254a71b22be3117a711f557b9b'
 SOURCE_FIELDS = {
     'state_space_sha256': 'core/ash-state-space.pseudo.md',
     'codeword_source_sha256': 'core/codeword-set.pseudo.md',
@@ -352,7 +354,9 @@ class StateConstructionTests(ModelTestCase):
                 self.assert_code('CANONICAL_BINDING_INVALID', values.CanonicalAshBinding, **altered)
 
     def test_source_manifest_and_independently_hashed_pins_match(self):
-        for revision, expected in ((None, MODULE_AGGREGATE),
+        source_paths = None
+        for revision, expected in ((None, GENERATION_AGGREGATE),
+                                   (MODULE_SOURCE_REVISION, MODULE_AGGREGATE),
                                    (N3_SOURCE_REVISION, CURRENT_AGGREGATE),
                                    (LEGACY_SOURCE_REVISION, AGGREGATE)):
             with self.subTest(revision=revision):
@@ -362,6 +366,12 @@ class StateConstructionTests(ModelTestCase):
                 identity = json.loads(raw)
                 self.assertEqual(DEPENDENCY, identity['dependency_id'])
                 self.assertEqual(32, len(identity['files']))
+                observed_paths = tuple(sorted(item['relative_path'] for item in identity['files']))
+                self.assertEqual(32, len(set(observed_paths)))
+                if source_paths is None:
+                    source_paths = observed_paths
+                else:
+                    self.assertEqual(source_paths, observed_paths)
                 records = []
                 for item in sorted(identity['files'], key=lambda item: item['relative_path']):
                     if revision is None:
