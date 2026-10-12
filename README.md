@@ -123,6 +123,18 @@ needed. After M3 acceptance and GitHub publication, pause and wait for the
 owner’s explicit go-ahead before starting any M4 work. M3 development continues
 now; the broader roadmap goal remains active until that checkpoint.
 
+The fourth canonical source vector is recorded in the source-contract
+checkpoint: current generation, transition-chain and prepared-emission contracts
+are bound without changing the earlier three vectors. Dependent runtime work is
+under verification. The local H4 runner tests pass with 13 delegated grants,
+seven completed captured members, 243 topology nodes and eight planned documents.
+Current-source containment, resolution and halt tests pass for both module and
+generation source families. Twenty acceptance-tooling controls pass, including
+replay from archived evidence after the original temporary files are removed and
+rejection of changed source or evidence history. These focused results guide the
+remaining implementation; complete Core, emitter-effect and unfiltered clean M3
+acceptance evidence is still being assembled. M4 remains planned.
+
 Strict RealmEncoder/TransitionRegistry, bounded topology and five-axiom
 reference owners and their complete capture integration are implemented. Their
 [adopted contracts and finite inventories](docs/design-planning/m3/module-diagnostics/README.md)
@@ -142,7 +154,9 @@ including 1,232 unit tests in 2071.591 seconds. The full run takes 2428.110
 seconds with zero blocking failures, advisories or checkout changes. Git and
 GitHub API readback confirm the revision and exact README bytes. Its
 [Ubuntu/Windows CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38191670186)
-is running at the latest readback; no CI result is claimed yet.
+passes on both operating systems. The later
+[published contract checkpoint](https://github.com/flynn33/yggdrasil-world-engine/commit/9dcc4747522659530c16de567ad4a458c71c44ee)
+also passes [Ubuntu/Windows CI](https://github.com/flynn33/yggdrasil-world-engine/actions/runs/38193308025).
 The earlier unpublished b4e5b7c run passes 35 checks and fails the unit check
 with two failures among 1,232 tests. One test hashed Windows CRLF
 checkout bytes against the documented LF policy identity; another still expected
@@ -150,7 +164,7 @@ only nine lifecycle rules outside N2, omitting the 22 added module rules.
 The corrections retain the LF identity and all nine lifecycle refusal controls,
 and apply the same refusal controls to all 31 rules outside N2's eight-rule set.
 All 66 tests in the two affected areas pass in 255.122 seconds. The subsequent
-+complete clean c468b35 run verifies the corrected increment before publication.
+complete clean c468b35 run verifies the corrected increment before publication.
 ADR-0040 gives each of the 17 safe support payloads an explicit evidence alias;
 all corrected structural byte bounds fit the existing reservations. Complete
 planner/emitter business policies, current-source lifecycle integration and the
