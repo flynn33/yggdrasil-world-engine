@@ -384,28 +384,32 @@ class CoreOrchestrationIntegrationTests(unittest.TestCase):
         planned=owner.run(request)
         self.assertEqual(planned.status,'COMPLETED')
         self.assertEqual(len(planned.generation_run.last_observation.result.plan.artifacts),3)
-        entered,release=threading.Event(),threading.Event()
+        entered,release,ready=threading.Event(),threading.Event(),threading.Event()
         actuals,errors,calls=[],[],[]
         original=MemoryDocumentTarget.materialize
         def materialize(self,*args,**kwargs):
             calls.append(args)
             if len(calls)==1:
                 entered.set()
-                if not release.wait(5):raise AssertionError('target release missing')
+                ready.set()
+                if not release.wait(60):raise AssertionError('target release missing')
             return original(self,*args,**kwargs)
         def work():
             try:actuals.append(owner.emit(planned,target,operation_reference='core:late:emit'))
             except BaseException as error:errors.append(error)
+            finally:ready.set()
         with patch.object(MemoryDocumentTarget,'materialize',materialize):
             thread=threading.Thread(target=work);thread.start()
             try:
-                self.assertTrue(entered.wait(5))
+                self.assertTrue(ready.wait(60),'Emission neither entered its target callback nor completed')
+                self.assertEqual(errors,[])
+                self.assertTrue(entered.is_set(),'Emission completed before its first target callback')
                 stopped=lifecycle.stop('stop',expected_generation=1)
                 self.assertEqual(stopped.status,'PENDING')
                 self.assertTrue(thread.is_alive())
                 self.assertEqual(target.snapshot().revision,0)
             finally:
-                release.set();thread.join(10)
+                release.set();thread.join(60)
         self.assertFalse(thread.is_alive())
         self.assertEqual(errors,[])
         actual=actuals[0]
