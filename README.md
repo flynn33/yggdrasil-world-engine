@@ -123,7 +123,7 @@ needed. After M3 acceptance and GitHub publication, pause and wait for the
 owner’s explicit go-ahead before starting any M4 work. M3 development continues
 now; the broader roadmap goal remains active until that checkpoint.
 
-The fourth canonical source vector is recorded in the source-contract
+The fourth canonical source vector is recorded in the local source-contract
 checkpoint: current generation, transition-chain and prepared-emission contracts
 are bound without changing the earlier three vectors. Dependent runtime work is
 under verification. The local H4 runner tests pass with 13 delegated grants,
