@@ -13,6 +13,21 @@ from check_platform_agnosticism import platform_violations
 
 
 class ReferenceBoundaryTests(unittest.TestCase):
+    def test_journal_reference_approval_does_not_admit_storage_or_network_runtime(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            reference = root / "core"
+            reference.mkdir()
+            (reference / "state_journal.py").write_text("# Journal reference\n", encoding="utf-8")
+            self.assertEqual(([], 1), platform_violations(root))
+            for name in ("state_journal_storage.py", "state_journal_network.py"):
+                (reference / name).write_text("# Unreviewed neighbor\n", encoding="utf-8")
+            violations, inspected = platform_violations(root)
+            self.assertEqual(3, inspected)
+            self.assertEqual(2, len(violations))
+            self.assertTrue(any("core/state_journal_storage.py:" in item for item in violations))
+            self.assertTrue(any("core/state_journal_network.py:" in item for item in violations))
+
     def test_reviewed_module_reference_paths_do_not_admit_adjacent_runtime(self):
         names = ("realm_transition_values.py", "realm_transition.py", "generation_values.py",
                  "topology.py", "axioms.py", "diagnostic_module_values.py", "diagnostic_module_capture.py")

@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_commit_journal_schema.json",
+  "title": "M4 Scoped Commit Journal Archive",
+  "description": "Structural wire contract only. The scoped journal codec additionally checks scalar Unicode, exact integer tokens, node/depth/UTF-8 limits, scope bindings, owner reduction, retry identity and the trusted complete chain.",
+  "x-ywe-requirement-id": "YWE-REQ-0052",
+  "type": "object",
+  "required": [
+    "format",
+    "scope",
+    "policy_id",
+    "initial_state",
+    "entries",
+    "final_state"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "ywe.scoped_commit_journal.v1"
+    },
+    "scope": {
+      "$ref": "#/$defs/Scope"
+    },
+    "policy_id": {
+      "$ref": "#/$defs/Identifier"
+    },
+    "initial_state": {
+      "$ref": "#/$defs/Object"
+    },
+    "entries": {
+      "type": "array",
+      "maxItems": 128,
+      "items": {
+        "$ref": "#/$defs/Entry"
+      }
+    },
+    "final_state": {
+      "$ref": "#/$defs/Object"
+    }
+  },
+  "$defs": {
+    "Identifier": {
+      "allOf": [
+        {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        {
+          "maxLength": 128,
+          "not": {
+            "pattern": "[\r\n]"
+          }
+        }
+      ]
+    },
+    "Value": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        {
+          "type": "string",
+          "maxLength": 65536
+        },
+        {
+          "type": "array",
+          "maxItems": 4096,
+          "items": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        {
+          "$ref": "#/$defs/Object"
+        }
+      ]
+    },
+    "Object": {
+      "type": "object",
+      "maxProperties": 4096,
+      "propertyNames": {
+        "type": "string",
+        "maxLength": 65536
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/Value"
+      }
+    },
+    "Scope": {
+      "type": "object",
+      "required": [
+        "world_id",
+        "truth_scope",
+        "subject_id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "world_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "truth_scope": {
+          "enum": [
+            "shared_worldstate",
+            "leaf_branch_state",
+            "player_state",
+            "player_perception"
+          ]
+        },
+        "subject_id": {
+          "$ref": "#/$defs/Identifier"
+        }
+      }
+    },
+    "Entry": {
+      "type": "object",
+      "required": [
+        "request_id",
+        "expected_revision",
+        "packet",
+        "compensates",
+        "revision",
+        "previous_digest",
+        "before_state_digest",
+        "after_state_digest",
+        "entry_digest"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "expected_revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 127
+        },
+        "packet": {
+          "$ref": "#/$defs/Object"
+        },
+        "compensates": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "previous_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "minLength": 64,
+          "maxLength": 64
+        },
+        "before_state_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "minLength": 64,
+          "maxLength": 64
+        },
+        "after_state_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "minLength": 64,
+          "maxLength": 64
+        },
+        "entry_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "minLength": 64,
+          "maxLength": 64
+        }
+      }
+    }
+  }
+}

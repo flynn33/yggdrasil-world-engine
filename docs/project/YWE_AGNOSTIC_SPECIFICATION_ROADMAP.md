@@ -69,9 +69,7 @@ until M10 acceptance.
 The current work is to complete branch and player state contracts, persistence
 and migration, scoped truth synchronization, and deterministic multiplayer
 ordering and reconciliation. All five M4 deliverables and five exit criteria
-remain open. Initial work inventories the existing contracts and schemas before
-adopting the missing protocols; no M4 implementation or acceptance is claimed
-by this activation checkpoint.
+remain open. The first implemented slice is the [scoped commit journal](../architecture/m4_commit_journal_contract.md): atomic reference-state updates, exact retry identity, append-only compensation and verified save/load replay. Its archive schema and focused tests cover corruption, concurrent admission and scope isolation. These tests use explicit synthetic owners; final player/branch admission, migrations and multiplayer reconciliation are still under development.
 
 The accepted M3 source and execution archives remain immutable. M4 verification
 will cover save/load and migration truth preservation, event-log replay,

@@ -2,7 +2,7 @@
   "artifact_type": "governance_record_register",
   "artifact_version": "1.0.0",
   "schema_ref": "data/schemas/governance_record_register_schema.json",
-  "recorded_on": "2026-10-11",
+  "recorded_on": "2026-10-14",
   "repository_baseline": "2.0.23",
   "policy_ref": "docs/governance/governance_records_policy.md",
   "requirement_register_ref": "data/governance/normative_requirement_register.json",
@@ -2158,12 +2158,44 @@
         "docs/design-planning/m3/core-domain/CORE_GATES_AND_NORMALIZATION.md",
         "core/ash_pattern_engine/canonical/verification/implementation-acceptance.md"
       ]
+    },
+    {
+      "id": "ADR-0044",
+      "record_type": "decision",
+      "title": "Introduce a bounded scoped commit journal reference protocol",
+      "status": "accepted",
+      "recorded_on": "2026-10-14",
+      "owner_role": "State and synchronization maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt the first-slice interface and representation contract before dependent implementation under owner-authorized M4 development; milestone acceptance remains open.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Existing player update and branch records describe proposals and scoped provenance but do not define the M4 atomic commit, retry and verified event replay boundary.",
+      "decision": "Use one immutable scope and policy per bounded append-only reference journal, explicit trusted pure owner reduction, exact committed identity replay, serialized atomic admission, compensation events and complete replay checked against a trusted head. Approve only core/state_journal.py as a new reference oracle and tests/test_m4_state_journal.py as its validation tool.",
+      "rationale": "Separating journal mechanics from domain authorization preserves the existing truth lattice and avoids granting M3 proposals persistence authority. Full replay checks cached state without treating untrusted hashes as authentication.",
+      "consequences": [
+        "No existing schema, ASH source identity, M3 acceptance evidence or profile authority is changed.",
+        "Reference owner tests establish journal mechanics only; final player rules, migration, distributed ordering and branch merge remain open.",
+        "This is a single-executor contract review and implementation decision, not a claim of independent review or full milestone conformance."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0052",
+        "YWE-REQ-0014",
+        "YWE-REQ-0015"
+      ],
+      "source_refs": [
+        "docs/architecture/m4_commit_journal_contract.md",
+        "docs/architecture/player_runtime_state_contract.md",
+        "docs/architecture/truth_authority_lattice.md"
+      ]
     }
   ],
   "summary": {
-    "total_records": 60,
-    "architecture_decisions": 43,
-    "accepted_decisions": 41,
+    "total_records": 61,
+    "architecture_decisions": 44,
+    "accepted_decisions": 42,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

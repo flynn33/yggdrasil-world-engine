@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1434,
-    "path_digest": "1bbb94502fe2b0a317c8e55a44a51deb7d4fbf0dfb18c5926a40001bf9290bff",
+    "path_count": 1439,
+    "path_digest": "4702826a988107611746238819f2877185a0b295b8bd4bf75f0027b76ba57144",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -3121,16 +3121,27 @@
       "secondary_tags": [
         "m3_execution_evidence"
       ]
+    },
+    {
+      "path": "examples/state_journal/compensated_archive.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_commit_journal_contract.md",
+      "rationale": "Synthetic journal owner fixture verifies storage mechanics without defining WRW content or final player progression.",
+      "secondary_tags": [
+        "m4_state_journal",
+        "conformance_fixture"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
       "ash_dependency_material": 66,
-      "governance_validation": 632,
+      "governance_validation": 634,
       "historical_evidence": 28,
       "later_release_work": 45,
       "wrw_reference_profile": 308,
-      "ywe_core": 231,
+      "ywe_core": 234,
       "ywe_extension_profile": 124
     }
   }

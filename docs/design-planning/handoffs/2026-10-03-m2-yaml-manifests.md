@@ -1,15 +1,17 @@
 # YWE Session Handoff — M4 Resumed
 
 **Date:** October 14, 2026
-**Record:** Project Record planning-50, section 20.
+**Record:** Project Record planning-51, sections 20–21.
 **Owner instruction:** “I'm unpausing it. You may proceed now.”
-**Current step:** M4 contract and integration inventory; all M4 exits remain open.
+**Current step:** Verify and publish the first scoped journal reference slice; all M4 exits remain open.
 **Completed:** M0–M3 acceptance and owner publication, baseline `ce294ec`.
-**Next action:** Complete the state/persistence/synchronization contract inventory,
-then adopt missing protocols and implement their reference conformance paths.
+**Next action:** Run clean committed-tree checks for the journal, then continue domain admission,
+final player/branch schemas, migration and multiplayer protocols.
 **Needed from owner:** Nothing now. Existing owner publication authority remains.
 **Saved at:** This record and the Project Record on `m4/state-protocols`;
-actual verification and publication are not predeclared.
+activation is published at `0ca2a12d26fa2e90faf7f477ae9d8b4dd5afbf8d`.
+The journal working-tree suite passes 26 journal/schema tests and five platform boundary tests;
+clean repository verification and journal publication are not predeclared.
 
 The canonical checkout's uncommitted planning drafts remain untouched. Work is
 isolated at the managed `m4-state-protocols` worktree.

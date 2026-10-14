@@ -1,0 +1,43 @@
+{
+  "entries": [
+    {
+      "after_state_digest": "57413ce83ee1d989e384dfd3a82c6e2d9052a23c4204706bd2d7df11aa4c2d7c",
+      "before_state_digest": "618de7d9f46f3f697d827a1b6d84974760d5deda62e4e592adaa3c646602a94c",
+      "compensates": null,
+      "entry_digest": "f7a634881d8d07ad88432f1ff1a68f67420fac0c9df61604fbb1979c69bec30e",
+      "expected_revision": 0,
+      "packet": {
+        "add": 2
+      },
+      "previous_digest": "90e3b12dec5ca941af0b5fe4fec8eff9ad7d13edf636dc6b1de0b4414741ad5b",
+      "request_id": "request.one",
+      "revision": 1
+    },
+    {
+      "after_state_digest": "618de7d9f46f3f697d827a1b6d84974760d5deda62e4e592adaa3c646602a94c",
+      "before_state_digest": "57413ce83ee1d989e384dfd3a82c6e2d9052a23c4204706bd2d7df11aa4c2d7c",
+      "compensates": "request.one",
+      "entry_digest": "2e84e75fdab6c7b0be9afa046d21126488ff35f866c6d080b4802878711c9928",
+      "expected_revision": 1,
+      "packet": {
+        "add": -2
+      },
+      "previous_digest": "f7a634881d8d07ad88432f1ff1a68f67420fac0c9df61604fbb1979c69bec30e",
+      "request_id": "request.two",
+      "revision": 2
+    }
+  ],
+  "final_state": {
+    "count": 0
+  },
+  "format": "ywe.scoped_commit_journal.v1",
+  "initial_state": {
+    "count": 0
+  },
+  "policy_id": "validation.counter.v1",
+  "scope": {
+    "subject_id": "player.validation",
+    "truth_scope": "player_state",
+    "world_id": "world.validation"
+  }
+}

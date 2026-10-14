@@ -1,7 +1,7 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-50
+**Revision:** planning-51
 **Date:** October 14, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
@@ -2294,3 +2294,30 @@ failure, truth authority and diagnostic failure; platform deployment remains M10
 The README status, machine roadmap, repository truth mirror and detailed roadmap
 now identify M4 as in progress. Publication and check results are recorded only
 after their actual execution; this record does not claim M4 completion.
+
+## 21. M4 scoped commit journal first slice — October 14, 2026
+
+Current step: verify and publish the first scoped journal reference implementation.
+Contract: `docs/architecture/m4_commit_journal_contract.md`, YWE-REQ-0052 / ADR-0044,
+adopted before dependent implementation under the owner's resumed development
+instruction. This is single-executor review; no independent review is claimed.
+
+The implementation owns canonical JSON copies, one immutable scope and policy,
+atomic serialized reduction, committed retry identity, bounded append-only
+history and replay checked against an independently retained trusted head.
+The schema is structural; the codec and replay enforce semantic checks.
+Compensation appends an owner-approved packet and never erases prior events.
+A synthetic counter owner verifies mechanics without claiming player progression.
+
+Observed working-tree validation: 26 journal/schema tests and five platform
+boundary tests cover replay, corrupt archives, duplicate delivery, concurrent
+revision conflict, alias isolation, rejection, capacity, compensation and exact
+reference-path approval. Clean committed-tree repository checks and publication
+are recorded after execution, not assumed from these focused tests.
+
+Compatibility: additive oracle, schema and fixture only; no existing player or
+branch schema, pure M3 producer, frozen acceptance archive or external source
+pin is changed. No M4 debt or deliverable is closed by this first slice.
+Remaining work includes domain admission and final player/branch schemas,
+migrations, realm/location synchronization, distributed ordering, reconciliation
+and branch merge. Needed from owner: nothing for continued authorized work.

@@ -25237,6 +25237,18 @@
         "YWE-REQ-0049"
       ],
       "description": "Closed authored collection metadata; rejection body validation is bound separately to each intended business definition."
+    },
+    {
+      "fixture_id": "m4.state_journal.compensated_archive",
+      "path": "examples/state_journal/compensated_archive.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/m4_commit_journal_schema.json",
+      "category": "replay",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0052"
+      ]
     }
   ]
 }
