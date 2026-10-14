@@ -13,8 +13,10 @@ admission, migrations, realm/location synchronization and multiplayer protocols.
 Journal source `b28ba82` passed 31 focused tests and 35 of 36 selected repository
 checks; correction `ea4c12b` passed the three checks covering its allocation fix.
 Main CI `38550875881` is running on exact `ea4c12b`. Wiki `d2d64c2` has 47 pages
-verified by remote readback. The observer slice passes 62 working-tree focused
-and adjacent tests; clean checks and publication remain to be executed.
+verified by remote readback. The observer slice `57b73bb` passes 62 focused and adjacent tests in a clean
+checkout. Its fixture ownership registration was corrected after the repository
+check found the missing schema source reference. Owner MIT licensing commit
+`9eefe01` was merged at `5a71005`; affected clean checks precede publication.
 
 The canonical checkout's uncommitted planning drafts remain untouched. Work is
 isolated at the managed `m4-state-protocols` worktree.

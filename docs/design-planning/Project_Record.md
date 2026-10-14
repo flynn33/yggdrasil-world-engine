@@ -2371,3 +2371,22 @@ until final player/location integration and consumer migration; existing M3
 schemas, implementation and acceptance archives remain unchanged. All M4
 milestone deliverables and exits remain open. This single-executor review claims
 no independent review. Needed from owner: nothing for continued roadmap work.
+
+
+### 22.1. Concurrent owner update and schema ownership correction
+
+The observer implementation was committed at `57b73bb6065dabcceb9c93e49aa5a1b5cfde692a`.
+Its 62 focused and adjacent tests passed in a clean committed checkout. The
+selected repository run identified a missing schema path in YWE-REQ-0053's
+source references: the fixture's requirement marker was correct, but its
+registered requirement did not name the schema it owned. The catalog validator's
+specific ownership check reproduced the failure and passed after adding
+`data/schemas/m4_perception_state_schema.json`; no validator was weakened.
+
+Meanwhile remote main advanced to owner commit
+`9eefe016ee50059a6f4536d5332216504dd43b42`, replacing the license with MIT and
+updating its repository policy, README, truth manifest/schema and governance
+check. Merge `5a71005` preserves that owner update and the observer implementation
+without conflicts. The README contains both the owner's license text and current
+M4 progress. Derived public-surface hashes were refreshed for the merged content.
+Affected clean repository checks remain required before publication.
