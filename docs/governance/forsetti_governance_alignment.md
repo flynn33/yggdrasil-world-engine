@@ -36,7 +36,7 @@ This document defines how YWE stays compatible with the Forsetti Framework while
 ## Branch Boundary
 
 - this repository does not vendor Forsetti implementation files
-- this repository remains governed by its proprietary license and does not inherit a host framework license
+- this repository remains governed by the MIT License in LICENSE and does not inherit a host framework license
 - compliance here means architectural compatibility, not code inclusion
 - platform-specific Forsetti host code belongs in separate downstream repositories only after M10 acceptance and explicit authorization
 
