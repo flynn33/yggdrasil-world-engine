@@ -1,0 +1,85 @@
+{
+  "actions": [
+    {
+      "action_kind": "choice",
+      "action_trace_id": "first:action:0",
+      "branch_ref": "branch:one",
+      "branch_relevance": "contextual",
+      "player_id": "player:one",
+      "schema_id": "ywe.player_action_trace.v1",
+      "schema_version": "0.1.0",
+      "significance": "meaningful",
+      "source_refs": [
+        "qualified:action"
+      ]
+    },
+    {
+      "action_kind": "choice",
+      "action_trace_id": "first:action:1",
+      "branch_ref": "branch:one",
+      "branch_relevance": "contextual",
+      "player_id": "player:one",
+      "schema_id": "ywe.player_action_trace.v1",
+      "schema_version": "0.1.0",
+      "significance": "meaningful",
+      "source_refs": [
+        "qualified:action"
+      ]
+    }
+  ],
+  "advances": [
+    {
+      "action_refs": [
+        "first:action:0",
+        "first:action:1"
+      ],
+      "evidence_ref": "first",
+      "from_phase": "mortal_unknowing",
+      "request_ref": "request:one",
+      "to_phase": "first_stirrings"
+    }
+  ],
+  "creation": {
+    "identity_status": "veiled",
+    "mortal_identity_ref": "identity:mortal",
+    "provenance": {
+      "cosmic_pattern_snapshot_ref": "snapshot:origin",
+      "diagnostic_ref": "diagnostic:origin",
+      "generation_plan_ref": "plan:origin",
+      "source_ash_refs": [
+        "ash:canonical"
+      ]
+    }
+  },
+  "current_phase": "first_stirrings",
+  "format": "ywe.origin_progression.v1",
+  "memories": [
+    {
+      "branch_ref": "branch:one",
+      "memory_id": "first:memory:0",
+      "memory_kind": "identity_memory",
+      "schema_id": "ywe.player_memory_record.v1",
+      "schema_version": "0.1.0",
+      "source_action_trace_ref": "first:action:0",
+      "source_refs": [
+        "qualified:memory"
+      ],
+      "visibility_state": "felt"
+    },
+    {
+      "branch_ref": "branch:one",
+      "memory_id": "first:memory:1",
+      "memory_kind": "identity_memory",
+      "schema_id": "ywe.player_memory_record.v1",
+      "schema_version": "0.1.0",
+      "source_action_trace_ref": "first:action:1",
+      "source_refs": [
+        "qualified:memory"
+      ],
+      "visibility_state": "felt"
+    }
+  ],
+  "player_id": "player:one",
+  "profile_id": "wrw.origin.v1",
+  "world_id": "world:one"
+}

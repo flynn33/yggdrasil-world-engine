@@ -9,7 +9,7 @@
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0055",
+    "next_available_id": "YWE-REQ-0056",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -1531,13 +1531,37 @@
         "data/schemas/state_migration_plan_schema.json",
         "data/schemas/state_migration_result_schema.json"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0055",
+      "title": "Evidence-bound player origin progression persistence",
+      "normative_statement": "Origin progression MUST start at the configured phase with veiled creation, admit only owner-issued writer capabilities and qualified action/memory evidence, enforce explicit profile edges, retain memory without overwrites, and replay exact policy and source bindings without objective world mutation.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "tests/test_m4_origin_progression.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M4",
+      "owner_role": "State and synchronization maintainers",
+      "decision_refs": [
+        "ADR-0047"
+      ],
+      "source_refs": [
+        "docs/architecture/m4_origin_progression_contract.md",
+        "data/schemas/m4_origin_profile_schema.json",
+        "data/schemas/m4_origin_state_schema.json"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 54,
-    "active": 52,
+    "total_requirements": 55,
+    "active": 53,
     "proposed": 0,
     "terminal": 2,
-    "next_identifier": "YWE-REQ-0055"
+    "next_identifier": "YWE-REQ-0056"
   }
 }

@@ -25340,6 +25340,32 @@
         "YWE-REQ-0054"
       ],
       "description": "Exact v1-to-v2 record migration; source_sha256 binds the legacy fixture bytes with LF line endings, verified by executable migration tests."
+    },
+    {
+      "fixture_id": "m4.origin.profile",
+      "path": "data/profiles/wrw_origin_progression.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/m4_origin_profile_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0055"
+      ],
+      "description": "Origin reference profile; executable tests establish admission and replay semantics."
+    },
+    {
+      "fixture_id": "m4.origin.state",
+      "path": "examples/state_journal/origin_progression.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/m4_origin_state_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0055"
+      ],
+      "description": "Origin reference state; executable tests establish admission and replay semantics."
     }
   ]
 }

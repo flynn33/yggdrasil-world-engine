@@ -1,25 +1,26 @@
 # YWE Session Handoff — M4 Resumed
 
 **Date:** October 14, 2026
-**Record:** Project Record planning-53, sections 20–23.
+**Record:** Project Record planning-54, sections 20–24.
 **Owner instruction:** “I'm unpausing it. You may proceed now.”
-**Current step:** Verify and publish exact resonance-state migration; all M4 exits remain open.
-**Completed:** M0–M3 acceptance; M4 journal and observer persistence published through `e0e941e`.
-**Next action:** Finish migration clean checks, then implement explicit player-state admission,
-origin/progression, branch synchronization and multiplayer contracts.
+**Current step:** Verify and publish origin progression persistence; all M4 exits remain open.
+**Completed:** M0–M3 acceptance; M4 journal, observer persistence and exact
+three-format resonance migration published through `b4cbe16`.
+**Next action:** Finish origin clean checks, then continue final player-state
+assembly/admission, identity revelation, branch synchronization and multiplayer.
 **Needed from owner:** Nothing now. The saved roadmap goal is active.
 **Saved at:** This record and the Project Record on `m4/state-protocols`.
 
-Observer publication preserved owner MIT license commit `9eefe01`. Its 62 focused
-tests passed on clean `57b73bb`; corrected merged `e0e941e` passed the eight
-affected repository checks. Main CI `38553080434` remains executing on `e0e941e`;
-predecessor `38550875881` remains executing on `ea4c12b`. Wiki `af61f2f` has all
-47 pages verified by remote readback. The migration working tree passes 79
-focused tests; clean committed checks and publication are not predeclared.
+Migration `b4cbe16` passed 79 focused tests and all 36 selected repository checks
+on a clean checkout. Main and the M4 branch match; GitHub README readback passed.
+Wiki `67be806` has all 47 pages verified. Main CI `38555791396` remains executing
+on `b4cbe16`; earlier M4 CI runs remain in progress at this record. Full local
+unit discovery is not claimed. Origin working-tree execution passes 105 focused
+and adjacent tests; clean committed checks/publication are not predeclared.
 
-The original canonical-checkout planning drafts remain untouched and their
-saved hashes still match. Work uses the managed M4 worktree.
-Raven Forge v0.7.0 / `87409bc36fb9d4782eab02189adb184f2b3962a7` remains pinned.
+Owner MIT commit `9eefe01` and the canonical checkout's two planning drafts
+remain preserved. Work uses the managed M4 worktree. Raven Forge v0.7.0 /
+`87409bc36fb9d4782eab02189adb184f2b3962a7` remains pinned.
 
 ---
 

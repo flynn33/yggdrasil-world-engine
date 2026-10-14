@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1456,
-    "path_digest": "caca94c8bfb3b873c30e7f6ba4dbe665acba1ca953e85368aaaa1cd68c824a19",
+    "path_count": 1463,
+    "path_digest": "d9516eade50c6aaae23461571e6a54c9cd560957d81433f3db7fe676413f6324",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -3176,16 +3176,38 @@
         "m4_migration",
         "compatibility_schema"
       ]
+    },
+    {
+      "path": "data/profiles/wrw_origin_progression.json",
+      "primary_partition": "wrw_reference_profile",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_origin_progression_contract.md",
+      "rationale": "The six-phase WRW reference admission policy is explicit profile data, not a neutral engine constant.",
+      "secondary_tags": [
+        "m4_origin",
+        "reference_profile"
+      ]
+    },
+    {
+      "path": "examples/state_journal/origin_progression.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_origin_progression_contract.md",
+      "rationale": "Qualified fixture actions illustrate origin persistence; production evidence authentication is not claimed.",
+      "secondary_tags": [
+        "m4_origin",
+        "conformance_fixture"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
       "ash_dependency_material": 66,
-      "governance_validation": 638,
+      "governance_validation": 640,
       "historical_evidence": 28,
       "later_release_work": 45,
-      "wrw_reference_profile": 314,
-      "ywe_core": 241,
+      "wrw_reference_profile": 315,
+      "ywe_core": 245,
       "ywe_extension_profile": 124
     }
   }

@@ -13,6 +13,18 @@ from check_platform_agnosticism import platform_violations
 
 
 class ReferenceBoundaryTests(unittest.TestCase):
+    def test_origin_reference_does_not_admit_neighboring_runtime(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            reference = root / "core/narrative_engine"
+            reference.mkdir(parents=True)
+            (reference / "origin_progression.py").write_text("# Reviewed reference\n", encoding="utf-8")
+            self.assertEqual(([], 1), platform_violations(root))
+            (reference / "origin_progression_network.py").write_text("# Unreviewed\n", encoding="utf-8")
+            violations, inspected = platform_violations(root)
+            self.assertEqual(2, inspected)
+            self.assertEqual(1, len(violations))
+
     def test_state_migration_approval_excludes_host_storage_adapters(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

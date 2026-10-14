@@ -1,7 +1,7 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-53
+**Revision:** planning-54
 **Date:** October 14, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
@@ -2447,3 +2447,49 @@ confers no player/world commit authority. Full player admission and progression,
 branch synchronization, archive migration, compensation policy and multiplayer
 remain open. No M4 deliverable, exit or placeholder is closed by this slice.
 Clean committed-tree checks and publication remain to be executed.
+
+
+### 23.1. Exact migration publication
+
+Commit `b4cbe16828b232e3c892dd2b3c1dfb539d33b881` passed 79 focused tests and
+all 36 selected repository checks in a clean committed checkout (zero failures
+or advisories). This selection excludes ordinary full unit discovery; no full
+local suite is claimed. Main and the M4 branch were owner-published with the
+authorized rule bypass. The GitHub API verified main and exact README bytes.
+Wiki `67be806b002c8831e5cfc83e83a8880b678d3376` projects that source; all 47
+pages matched fresh remote readback. Main CI `38555791396` is running on exact
+`b4cbe16`; earlier M4 runs remain in progress at this record.
+
+## 24. Origin progression persistence — October 14, 2026
+
+Current step: implement and verify the adopted origin progression reference
+contract, YWE-REQ-0055 / ADR-0047. The bounded assignment permits the exact
+origin owner/test paths, additive profile/state schemas and fixtures, and
+governance/docs registration. Existing action/memory schemas are explicit
+validation inputs; no dependency, production host or remote authentication is
+introduced. The existing Raven Forge pin and reference realization apply.
+
+Source review covered runtime phase rules, player runtime/branch/memory/ASP
+contracts, legacy action/memory schemas and the scoped journal. The origin
+component starts veiled and persists qualified phase advances and append-only
+memory using explicit profile rules, immutable evidence and local writer
+capabilities. The host remains responsible for qualifying action and diagnostic
+truth; tests do not promote fixture references to authenticated production facts.
+
+Compatibility is additive; final player assembly, identity revelation,
+compensation and multiplayer are still open. Both origin placeholders remain
+unchanged until their complete integration. No debt or M4 exit closes through
+this slice. This is single-executor review; checks/results will be recorded
+after execution. Needed from owner: nothing for continued authorized work.
+
+
+Observed working-tree execution: 105 focused and adjacent tests pass, including
+25 origin cases plus journal, perception persistence, migration and platform
+boundary tests. Origin cases cover all six phases, complete action/memory
+retention, detached inputs/outputs, exact retry, forged/cross-owner handles,
+grant restrictions, cross-player/branch links, repeated evidence, concurrent
+advances, changed catalogs/policies, forged archives/genesis, compensation
+refusal and catalog/state/memory limits. The capacity retry test initially
+changed expected revision and correctly received IDENTITY_CONFLICT; it now
+asserts that refusal and retries with the original revision. No journal behavior
+or test contract was weakened. Clean committed checks and publication are next.

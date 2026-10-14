@@ -1,0 +1,42 @@
+{
+  "schema_ref": "data/schemas/m4_origin_profile_schema.json",
+  "profile": {
+    "profile_id": "wrw.origin.v1",
+    "initial_phase": "mortal_unknowing",
+    "phases": [
+      "mortal_unknowing",
+      "first_stirrings",
+      "memory_recovery",
+      "identity_conflict",
+      "chosen_becoming",
+      "world_actor"
+    ],
+    "transitions": [
+      {
+        "from_phase": "mortal_unknowing",
+        "to_phase": "first_stirrings",
+        "minimum_actions": 2
+      },
+      {
+        "from_phase": "first_stirrings",
+        "to_phase": "memory_recovery",
+        "minimum_actions": 1
+      },
+      {
+        "from_phase": "memory_recovery",
+        "to_phase": "identity_conflict",
+        "minimum_actions": 1
+      },
+      {
+        "from_phase": "identity_conflict",
+        "to_phase": "chosen_becoming",
+        "minimum_actions": 1
+      },
+      {
+        "from_phase": "chosen_becoming",
+        "to_phase": "world_actor",
+        "minimum_actions": 1
+      }
+    ]
+  }
+}

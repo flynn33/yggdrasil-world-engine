@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_origin_profile_schema.json",
+  "title": "m4 origin profile schema",
+  "x-ywe-requirement-id": "YWE-REQ-0055",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_ref",
+    "profile"
+  ],
+  "properties": {
+    "schema_ref": {
+      "const": "data/schemas/m4_origin_profile_schema.json"
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile_id",
+        "initial_phase",
+        "phases",
+        "transitions"
+      ],
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        },
+        "initial_phase": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        },
+        "phases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "not": {
+              "pattern": "[\\r\\n]"
+            }
+          },
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true
+        },
+        "transitions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "from_phase",
+              "to_phase",
+              "minimum_actions"
+            ],
+            "properties": {
+              "from_phase": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "not": {
+                  "pattern": "[\\r\\n]"
+                }
+              },
+              "to_phase": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "not": {
+                  "pattern": "[\\r\\n]"
+                }
+              },
+              "minimum_actions": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 16
+              }
+            }
+          },
+          "minItems": 0,
+          "maxItems": 32
+        }
+      }
+    }
+  }
+}
