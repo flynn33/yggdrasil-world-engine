@@ -25405,6 +25405,97 @@
         "YWE-REQ-0056"
       ],
       "description": "Explicit player reference qualification fixture; executable tests verify atomic admission and replay without claiming external authentication."
+    },
+    {
+      "fixture_id": "m4.player.migration.result",
+      "path": "examples/state_journal/player_migration.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/m4_player_migration_result_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0057"
+      ],
+      "description": "Actual synthetic qualified migration/continuation output; executable tests establish semantic admission and replay."
+    },
+    {
+      "fixture_id": "m4.player.migration.baseline",
+      "path": "examples/state_journal/player_migration.example.json",
+      "instance_pointer": "/origin_baseline",
+      "schema_id": "https://ywe.local/schemas/m4_origin_baseline_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0057"
+      ],
+      "description": "Actual synthetic qualified migration/continuation output; executable tests establish semantic admission and replay."
+    },
+    {
+      "fixture_id": "m4.player.migration.origin",
+      "path": "examples/state_journal/player_migration.example.json",
+      "instance_pointer": "/baseline/records/origin:one/document",
+      "schema_id": "https://ywe.local/schemas/m4_origin_imported_state_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0057"
+      ],
+      "description": "Actual synthetic qualified migration/continuation output; executable tests establish semantic admission and replay."
+    },
+    {
+      "fixture_id": "m4.player.migration.spine",
+      "path": "examples/state_journal/player_migration.example.json",
+      "instance_pointer": "/baseline/spine",
+      "schema_id": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0057"
+      ],
+      "description": "Actual synthetic qualified migration/continuation output; executable tests establish semantic admission and replay."
+    },
+    {
+      "fixture_id": "m4.player.migration.snapshot",
+      "path": "examples/state_journal/player_migration.example.json",
+      "instance_pointer": "/baseline",
+      "schema_id": "https://ywe.local/schemas/m4_player_snapshot_v2_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0057"
+      ],
+      "description": "Actual synthetic qualified migration/continuation output; executable tests establish semantic admission and replay."
+    },
+    {
+      "fixture_id": "m4.player.migration.context_update",
+      "path": "examples/state_journal/player_context_update.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/m4_player_update_v3_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0057"
+      ],
+      "description": "Actual synthetic qualified migration/continuation output; executable tests establish semantic admission and replay."
+    },
+    {
+      "fixture_id": "m4.player.migration.continued",
+      "path": "examples/state_journal/player_imported_continuation.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/m4_player_snapshot_v2_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0057"
+      ],
+      "description": "Actual synthetic qualified migration/continuation output; executable tests establish semantic admission and replay."
     }
   ]
 }

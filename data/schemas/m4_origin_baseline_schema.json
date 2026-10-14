@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_origin_baseline_schema.json",
+  "title": "Qualified imported origin baseline",
+  "x-ywe-requirement-id": "YWE-REQ-0057",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "world_id",
+    "player_id",
+    "profile_id",
+    "source_sha256",
+    "import_anchor",
+    "current_phase",
+    "actions",
+    "memories",
+    "consumed_action_refs",
+    "provenance"
+  ],
+  "properties": {
+    "format": {
+      "const": "ywe.origin_baseline.v1"
+    },
+    "world_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "player_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "current_phase": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "source_sha256": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "import_anchor": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "consumed_action_refs": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 128,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+        "not": {
+          "pattern": "[\\r\\n]"
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ],
+      "properties": {
+        "cosmic_pattern_snapshot_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        },
+        "diagnostic_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        },
+        "generation_plan_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "not": {
+              "pattern": "[\\r\\n]"
+            }
+          },
+          "minItems": 1,
+          "maxItems": 65,
+          "uniqueItems": true
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 128,
+      "items": {
+        "allOf": [
+          {
+            "$ref": "https://ywe.local/schemas/player_action_trace_schema.json"
+          },
+          {
+            "properties": {
+              "schema_version": {
+                "const": "0.1.0"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "memories": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 128,
+      "items": {
+        "allOf": [
+          {
+            "$ref": "https://ywe.local/schemas/player_memory_record_schema.json"
+          },
+          {
+            "properties": {
+              "schema_version": {
+                "const": "0.1.0"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

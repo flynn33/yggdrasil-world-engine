@@ -1,6 +1,7 @@
 """Atomic player reference admission (YWE-REQ-0056), with explicit trusted inputs."""
 
 import json
+import re
 
 from jsonschema import Draft202012Validator
 from jsonschema.exceptions import SchemaError
@@ -13,6 +14,7 @@ from .state_journal import CommitJournal, JournalError, TruthScope, _identifier,
 
 
 FORMAT = "ywe.player_aggregate.v1"
+IMPORTED_FORMAT = "ywe.player_aggregate.v2"
 SCHEMAS = {
     "spine": "m4_player_runtime_state", "celestial": "celestial_identity_state",
     "agent": "player_agent_state", "branch_history": "player_branch_history",
@@ -64,6 +66,24 @@ CATEGORY_SCOPES = {
     "mortal_identity_ref": {"player_state"},
     "evidence_refs": {"shared_worldstate", "leaf_branch_state", "player_state"},
 }
+CONTEXT_COLLECTIONS = (
+    "branch_generation_context_refs", "branch_event_refs", "awakening_fragments",
+    "narrative_memory_refs", "relationship_state_refs", "faction_stance_refs",
+    "unresolved_tension_refs", "active_quest_refs", "completed_resolution_refs",
+    "generation_context_refs",
+)
+CONTEXT_FIELDS = frozenset(CONTEXT_COLLECTIONS) | {
+    "phase_confidence", "celestial_memory", "active_realm_form", "perception_state_ref",
+}
+CONTEXT_SOURCES = {
+    "narrative_engine": {"phase_confidence", "celestial_memory", "awakening_fragments",
+                         "narrative_memory_refs", "relationship_state_refs", "faction_stance_refs",
+                         "unresolved_tension_refs"},
+    "runtime_cosmology": {"branch_generation_context_refs", "branch_event_refs", "generation_context_refs"},
+    "realm_engine": {"active_realm_form"},
+    "perception_engine": {"perception_state_ref"},
+    "quest_engine": {"active_quest_refs", "completed_resolution_refs"},
+}
 
 
 def _copy(value):
@@ -73,6 +93,19 @@ def _copy(value):
 def _reject(condition):
     if condition:
         raise JournalError("POLICY_REJECTED")
+
+
+def _context_value(field, value):
+    if field in CONTEXT_COLLECTIONS:
+        _refs(value, 0, 128)
+    elif field == "phase_confidence":
+        _closed(value, "coefficient exponent")
+        _reject(type(value["coefficient"]) is not str or len(value["coefficient"]) > 128
+                or re.fullmatch(r"(?:0|-?[1-9](?:[0-9]*[1-9])?)", value["coefficient"]) is None
+                or type(value["exponent"]) is not int or not -10000 <= value["exponent"] <= 10000
+                or value["coefficient"] == "0" and value["exponent"] != 0)
+    else:
+        _identifier(value)
 
 
 def _schema(schema, name):
@@ -131,8 +164,16 @@ class PlayerStateStore:
 
     def __init__(self, world_id, player_id, profile, initial_spine, grants, records,
                  updates, schemas, origin_policy):
+        self._initialize(world_id, player_id, profile, initial_spine, grants, records,
+                         updates, schemas, origin_policy)
+
+    def _initialize(self, world_id, player_id, profile, initial_spine, grants, records,
+                    updates, schemas, origin_policy, migration_result=None, migration_resolution=None):
         self._scope = TruthScope(world_id, "player_state", player_id)
         try:
+            self._imported = migration_result is not None
+            self._realm_form_names = (frozenset(migration_resolution["realm_name_map"]["mappings"])
+                                      if self._imported else frozenset())
             self._profile = _copy(profile)
             self._domain = PlayerDomainPolicy(self._profile)
             self._grants = _copy(grants)
@@ -143,7 +184,8 @@ class PlayerStateStore:
                 _closed(grant, "source_system operations")
                 _refs(grant["operations"], 1, 16)
                 if (grant["source_system"] not in SOURCE_OPERATIONS
-                        or not set(grant["operations"]) <= SOURCE_OPERATIONS[grant["source_system"]]):
+                        or not set(grant["operations"]) <= (
+                            SOURCE_OPERATIONS[grant["source_system"]] | ({"context"} if self._imported else set()))):
                     raise JournalError("INVALID_POLICY")
             if type(origin_policy) is not OriginProgressionPolicy or origin_policy.scope != self._scope:
                 raise JournalError("INVALID_POLICY")
@@ -151,13 +193,15 @@ class PlayerStateStore:
             self._validators, schema_hashes = {}, {}
             _closed(schemas, " ".join(SCHEMAS))
             for kind, name in SCHEMAS.items():
+                if self._imported and kind == "spine":
+                    name = "m4_player_runtime_state_v3"
                 self._validators[kind], schema_hashes[kind] = _schema(schemas[kind], name)
             self._records = self._catalog(records, "ref")
             self._updates = self._catalog(updates, "update_ref")
             self._writers = {principal: object() for principal in self._grants}
             self._spine = _copy(initial_spine)
             if (not self._validators["spine"].is_valid(self._spine)
-                    or self._spine["state_lifecycle"] != "initial"
+                    or not self._imported and self._spine["state_lifecycle"] != "initial"
                     or self._spine["player_id"] != player_id):
                 raise JournalError("INVALID_POLICY")
             self._origin_ref = self._spine["origin_progression_state_ref"]
@@ -165,30 +209,77 @@ class PlayerStateStore:
             if self._origin_ref in self._records:
                 raise JournalError("INVALID_POLICY")
             origin = origin_policy.initial_state()
+            if origin["format"] != ("ywe.origin_progression.v2" if self._imported else "ywe.origin_progression.v1"):
+                raise JournalError("INVALID_POLICY")
             if origin["creation"]["mortal_identity_ref"] != self._spine["identity"]["mortal_identity_ref"]:
                 raise JournalError("INVALID_POLICY")
             self._initial = {"format": FORMAT, "world_id": world_id, "player_id": player_id,
                 "profile_id": profile["profile_id"], "spine": self._spine,
                 "records": {self._origin_ref: self._entry("origin", origin)},
                 "accepted_updates": [], "compensations": []}
-            self._validate_state(self._initial, True, [])
+            if self._imported:
+                self._initial = _copy(migration_result["baseline"])
+                _reject(self._initial["format"] != IMPORTED_FORMAT
+                        or self._initial["spine"] != self._spine
+                        or self._initial["records"].get(self._origin_ref) != self._entry("origin", origin))
+                for ref, entry in self._initial["records"].items():
+                    if ref != self._origin_ref:
+                        source = json.loads(self._records[ref])
+                        _reject(entry != self._entry(source["kind"], source["document"]))
+                original = _copy(self._initial)
+                self._validate_state(self._initial, self._spine["state_lifecycle"] == "initial", [])
+                _reject(original != self._initial)
+            else:
+                self._validate_state(self._initial, True, [])
             # Creation cannot smuggle historical consequences or unreplayed memory.
-            for group in ("memory_refs", "world_links", "relationship_links", "manifestation_links",
-                          "progression_refs", "update_control"):
-                for value in self._spine.get(group, {}).values():
-                    if type(value) is list and value:
-                        raise JournalError("INVALID_POLICY")
-            if self._spine["state_refs"].get("wolf_manifestation_event_refs", []):
-                raise JournalError("INVALID_POLICY")
+            if not self._imported or self._spine["state_lifecycle"] == "initial":
+                for group in ("memory_refs", "world_links", "relationship_links", "manifestation_links",
+                              "progression_refs", "update_control"):
+                    for value in self._spine.get(group, {}).values():
+                        if type(value) is list and value:
+                            raise JournalError("INVALID_POLICY")
+                if self._spine["state_refs"].get("wolf_manifestation_event_refs", []):
+                    raise JournalError("INVALID_POLICY")
             policy = {"format": FORMAT, "scope": self._scope.to_record(), "profile": self._profile,
                       "initial_spine": self._spine, "grants": self._grants,
                       "schema_sha256": schema_hashes, "origin_policy_id": origin_policy.policy_id,
                       "initial_record_sha256": {ref: _digest(self._records[ref])
                           for ref in self._initial["records"] if ref != self._origin_ref}}
-            self._policy_id = "player.v1:" + _digest(_object_bytes(policy))
+            if self._imported:
+                policy.update(format=IMPORTED_FORMAT, migration_id=migration_result["migration_id"],
+                              migration_target_sha256=migration_result["target_sha256"],
+                              import_anchor=migration_result["import_anchor"])
+            self._policy_id = ("player.v2:" if self._imported else "player.v1:") + _digest(_object_bytes(policy))
             self._journal = CommitJournal(self._scope, self._policy_id, self._initial, self._reduce)
         except (JournalError, SchemaError, KeyError, TypeError, ValueError):
             raise JournalError("INVALID_POLICY") from None
+
+    @classmethod
+    def from_migration(cls, result, migration, raw_source, *configuration):
+        """Activate a freshly reverified source-bound baseline, never a bare snapshot."""
+        from .player_state_migration import PlayerStateMigration
+
+        try:
+            _reject(type(migration) is not PlayerStateMigration or len(configuration) != 9)
+            _reject(migration.verify(raw_source, result) is not True)
+            qualification = migration.resolution()
+            world, player, profile, spine, grants, records, updates, schemas, origin = configuration
+            _reject((world, player) != (result["world_id"], result["player_id"])
+                    or profile != qualification["player_profile"] or spine != result["baseline"]["spine"]
+                    or type(origin) is not OriginProgressionPolicy
+                    or origin.profile != qualification["origin_profile"]
+                    or origin.initial_state()["creation"] != qualification["creation"])
+            _closed(schemas, " ".join(SCHEMAS))
+            for kind, schema in schemas.items():
+                _reject(_digest(_object_bytes(schema)) != result["target_schema_digests"][kind])
+            owner = cls.__new__(cls)
+            owner._initialize(*configuration, migration_result=result, migration_resolution=qualification)
+            actual = {ref: _digest(owner._records[ref]) for ref in owner._initial["records"]
+                      if ref != owner._origin_ref}
+            _reject(actual != result["selected_record_sha256"])
+            return owner
+        except (JournalError, KeyError, TypeError, ValueError, AttributeError):
+            raise JournalError("INVALID_MIGRATION") from None
 
     def _catalog(self, sources, identity):
         _items(sources, 0, 128)
@@ -198,7 +289,10 @@ class PlayerStateStore:
             item = json.loads(raw)
             if identity == "ref":
                 _closed(item, "ref kind world_id player_id branch_ref document provenance")
-                if item["kind"] not in set(SCHEMAS) - {"spine"} | {"reference", "consequence"}:
+                kinds = set(SCHEMAS) - {"spine"} | {"reference", "consequence"}
+                if self._imported:
+                    kinds.add("context")
+                if item["kind"] not in kinds:
                     raise JournalError("INVALID_POLICY")
                 _object_bytes(item["document"])
                 if item["kind"] in self._validators and not self._validators[item["kind"]].is_valid(item["document"]):
@@ -207,6 +301,22 @@ class PlayerStateStore:
                     key, version = WIRE_VERSIONS[item["kind"]]
                     if item["document"].get(key) != version:
                         raise JournalError("INVALID_POLICY")
+                if item["kind"] == "context":
+                    keys = "field previous_value value phase"
+                    if "resolution" in item["document"]:
+                        keys += " resolution"
+                        _reject(item["document"].get("field") not in ("active_quest_refs", "unresolved_tension_refs"))
+                    _closed(item["document"], keys)
+                    _reject(item["document"]["field"] not in CONTEXT_FIELDS)
+                    _identifier(item["document"]["phase"])
+                    for key in ("previous_value", "value"):
+                        _context_value(item["document"]["field"], item["document"][key])
+                    if "resolution" in item["document"]:
+                        resolution = item["document"]["resolution"]
+                        _closed(resolution, "removed_refs action_refs reason_refs disposition")
+                        for key in ("removed_refs", "action_refs", "reason_refs"):
+                            _refs(resolution[key], 1, 128)
+                        _reject(resolution["disposition"] not in ("resolved", "cancelled"))
             else:
                 _closed(item, "update_ref world_id player_id branch_ref source_system operations evidence_refs consequence_ref provenance")
                 _items(item["operations"], 1, 16)
@@ -329,8 +439,98 @@ class PlayerStateStore:
             _reject(spine["memory_refs"].get(key, []) != [row[identity] for row in origin[collection]])
             for row in origin[collection]:
                 _reject(state["records"].get(row[identity]) != self._entry(kind, row))
+        if self._imported:
+            for action in origin["actions"]:
+                if "branch_event_ref" in action:
+                    self._record(state, action["branch_event_ref"], "reference", category="branch_event_ref")
+                for ref in action.get("resulting_worldstate_delta_refs", []):
+                    self._record(state, ref, "reference", action["branch_ref"], "worldstate_delta_refs")
+            self._validate_runtime_context(state)
+            for key in ("pending_update_packet_refs", "rejected_update_packet_refs"):
+                for ref in spine["update_control"].get(key, []):
+                    self._record(state, ref, "reference", category=key)
+            imported = state["import_baseline"]
+            known_updates = imported["consumed_update_refs"] + [row["update_ref"] for row in state["accepted_updates"]]
+            _reject(spine["update_control"].get("accepted_update_packet_refs", []) != known_updates)
         _reject(len(state["records"]) > 128 or len(state["accepted_updates"]) > 128)
         _object_bytes(state)
+
+    def _validate_runtime_context(self, state):
+        context = state["spine"].get("runtime_context", {})
+        branch = state["spine"]["current_leaf_branch_ref"]
+        celestial_ref = state["spine"]["identity"]["celestial_identity_state_ref"]
+        celestial = state["records"][celestial_ref]["document"]
+        if "celestial_memory" in context:
+            _reject(context["celestial_memory"] != celestial["identity_state"])
+        if "phase_confidence" in context:
+            _context_value("phase_confidence", context["phase_confidence"])
+        origin = state["records"][self._origin_ref]["document"]
+        actions = {row["action_trace_id"] for row in origin["actions"]}
+        if context.get("last_player_action_trace_ref") is not None:
+            _reject(context["last_player_action_trace_ref"] not in actions)
+        if "active_realm_form" in context:
+            _reject(context["active_realm_form"] not in self._realm_form_names)
+            row = self._record(state, context["active_realm_form"], "reference", branch, "active_realm_form")
+            _reject(row["truth_scope"] not in ("shared_worldstate", "leaf_branch_state"))
+        if "perception_state_ref" in context:
+            row = self._record(state, context["perception_state_ref"], "reference", category="perception_state_ref")
+            _reject(row["truth_scope"] != "player_perception")
+        fragment_hashes = {_digest(_object_bytes(row)) for row in celestial.get("known_fragments", [])}
+        history = state["records"][state["spine"]["state_refs"]["player_branch_history_ref"]]["document"]
+        events = {row["branch_event_ref"] for row in history["entries"]}
+        events.update(row["branch_event_ref"] for row in origin["actions"] if "branch_event_ref" in row)
+        for field in CONTEXT_COLLECTIONS:
+            for ref in context.get(field, []):
+                category = "branch_event_ref" if field == "branch_event_refs" else field
+                row = self._record(state, ref, "reference", category=category)
+                if field == "awakening_fragments":
+                    _reject(row["truth_scope"] != "player_state" or row["source_sha256"] not in fragment_hashes)
+                elif field == "branch_event_refs":
+                    _reject(row["truth_scope"] != "leaf_branch_state" or ref not in events)
+                else:
+                    _reject(row["truth_scope"] == "player_perception")
+        for field, value in context.get("ash_provenance", {}).items():
+            for ref in value if type(value) is list else [value]:
+                row = self._record(state, ref, "reference", category=field)
+                _reject(row["truth_scope"] == "player_perception")
+
+    def _change_context(self, state, operation, context, source, prior_phase, actions):
+        _closed(operation, "kind context_ref condition_refs")
+        _reject(not self._imported)
+        _refs(operation["condition_refs"], 1, 128)
+        _reject(not set(operation["condition_refs"]) <= set(context["evidence_refs"]))
+        change = self._record(state, operation["context_ref"], "context", context["branch_ref"])
+        current = state["spine"].get("runtime_context", {})
+        field = change["field"]
+        phase = state["records"][self._origin_ref]["document"]["current_phase"]
+        _reject(field not in CONTEXT_SOURCES[source] or field not in current
+                or change["phase"] != phase or change["previous_value"] != current[field]
+                or change["value"] == current[field]
+                and not (field == "phase_confidence" and phase != prior_phase))
+        if field in CONTEXT_COLLECTIONS:
+            _refs(change["value"], 0, 128)
+            before, after = current[field], change["value"]
+            if field in ("active_quest_refs", "unresolved_tension_refs"):
+                retained = [ref for ref in before if ref in after]
+                _reject(after[:len(retained)] != retained)
+                removed = [ref for ref in before if ref not in after]
+                if removed:
+                    resolution = change.get("resolution")
+                    _closed(resolution, "removed_refs action_refs reason_refs disposition")
+                    _reject(resolution["removed_refs"] != removed or resolution["disposition"] not in ("resolved", "cancelled"))
+                    _refs(resolution["action_refs"], 1, 16)
+                    _refs(resolution["reason_refs"], 1, 128)
+                    _reject(not set(resolution["reason_refs"]) <= set(operation["condition_refs"]))
+                    selected = [row for row in actions if row["action_trace_id"] in resolution["action_refs"]]
+                    _reject(len(selected) != len(resolution["action_refs"])
+                            or not set(removed) <= {ref for row in selected for ref in row.get("affected_entity_refs", [])}
+                            or field == "active_quest_refs" and any(row["action_kind"] != "quest_resolution" for row in selected))
+                else:
+                    _reject("resolution" in change)
+            else:
+                _reject(after[:len(before)] != before)
+        current[field] = _copy({"value": change["value"]})["value"]
+        return field
 
     def writer(self, principal):
         _identifier(principal)
@@ -364,6 +564,7 @@ class PlayerStateStore:
                 compensates = operation.get("target_request_ref")
                 _identifier(compensates)
             for key in ("previous_ref", "next_ref", "event_ref", "condition_ref", "previous_branch_ref",
+                        "context_ref",
                         "next_branch_ref", "next_location_ref", "agent_ref", "history_ref"):
                 if key in operation and operation[key] is not None:
                     _identifier(operation[key])
@@ -401,6 +602,12 @@ class PlayerStateStore:
                     nested.extend(row.get("resulting_worldstate_delta_refs", []))
             elif record["kind"] == "consequence":
                 nested.extend(document.get("external_result_refs", []))
+            elif record["kind"] == "context":
+                field = document["field"]
+                if field in CONTEXT_COLLECTIONS:
+                    nested.extend(document["value"])
+                elif field in ("active_realm_form", "perception_state_ref"):
+                    nested.append(document["value"])
             pending.extend(nested)
         return {"request_ref": request_id, "principal": principal, "update_ref": update_ref,
                 "update_sha256": _digest(raw), "record_sha256": hashes,
@@ -507,6 +714,9 @@ class PlayerStateStore:
         _reject(scope != self._scope or packet != self._packet(packet["principal"], packet["request_ref"], packet["update_ref"]))
         update = json.loads(self._updates[packet["update_ref"]])
         spine = state["spine"]
+        if self._imported:
+            _reject(packet["request_ref"] in state["import_baseline"]["consumed_request_refs"]
+                    or update["update_ref"] in state["import_baseline"]["consumed_update_refs"])
         _reject(update["branch_ref"] != spine["current_leaf_branch_ref"]
                 or any(row["update_ref"] == update["update_ref"] for row in state["accepted_updates"]))
         for operation in update["operations"]:
@@ -520,6 +730,7 @@ class PlayerStateStore:
         origin_operations = [op for op in update["operations"] if op.get("kind") == "origin"]
         _reject(not compensating and len(origin_operations) != 1)
         actions, changes = [], []
+        prior_phase = state["records"][self._origin_ref]["document"]["current_phase"]
         reversible = not compensating
         if not compensating:
             _closed(origin_operations[0], "kind evidence_ref")
@@ -544,7 +755,9 @@ class PlayerStateStore:
                     ("memory", "memories", "player_memory_record_refs", "memory_id")):
                 for row in bundle[collection]:
                     entry = self._entry(kind, row)
-                    _reject(row[identity] == self._origin_ref or row[identity] in self._records
+                    imported_action = (self._imported and kind == "action"
+                        and self._initial["records"].get(row[identity]) == entry)
+                    _reject(row[identity] == self._origin_ref or row[identity] in self._records and not imported_action
                             or row[identity] in state["records"] and state["records"][row[identity]] != entry)
                     state["records"][row[identity]] = entry
                 spine["memory_refs"][key] = [row[identity] for row in next_origin[collection]]
@@ -557,9 +770,12 @@ class PlayerStateStore:
             self._branch(state, branch_operations[0], context, actions, update["update_ref"])
         destination_context = self._context(state, evidence=update["evidence_refs"])
         seen = set()
+        context_fields = set()
         for operation in update["operations"]:
             kind = operation.get("kind")
             identity = (kind, operation.get("slot", operation.get("ability_id", operation.get("collection", operation.get("event_ref")))))
+            if kind == "context":
+                identity = (kind, operation.get("context_ref"))
             _reject(identity in seen)
             seen.add(identity)
             if kind == "origin":
@@ -573,6 +789,10 @@ class PlayerStateStore:
                     self._ability(state, operation, destination_context)
                 elif kind == "append":
                     self._append(state, operation, update["source_system"])
+                elif kind == "context":
+                    field = self._change_context(state, operation, destination_context, update["source_system"], prior_phase, actions)
+                    _reject(field in context_fields)
+                    context_fields.add(field)
                 elif kind == "branch":
                     pass
                 elif kind in ("manifest", "dismiss"):
@@ -581,6 +801,8 @@ class PlayerStateStore:
                     already_retained = operation["event_ref"] in state["records"]
                     retained_event_ids = {entry["document"]["manifestation_event_id"]
                         for entry in state["records"].values() if entry["kind"] == "manifestation"}
+                    if self._imported:
+                        retained_event_ids.update(state["import_baseline"]["consumed_manifestation_event_ids"])
                     document = self._record(state, operation["event_ref"], "manifestation",
                         destination_context["branch_ref"] if kind == "manifest" else None)
                     self._domain.validate("manifestation", document, destination_context)
@@ -609,6 +831,8 @@ class PlayerStateStore:
                 or set(consequence["action_refs"]) != {action["action_trace_id"] for action in actions})
         effect = [consequence["consequence_id"], consequence["effect_id"], self._scope.subject_id]
         _reject(any(row["effect"] == effect for row in state["accepted_updates"]))
+        if self._imported:
+            _reject(any(row["effect"] == effect for row in state["import_baseline"]["consumed_effects"]))
         results = {ref for action in actions for ref in action.get("resulting_worldstate_delta_refs", [])}
         _reject(set(consequence["external_result_refs"]) != results)
         state["accepted_updates"].append({"request_ref": packet["request_ref"], "update_ref": update["update_ref"],
@@ -617,6 +841,15 @@ class PlayerStateStore:
         spine["update_control"].setdefault("accepted_update_packet_refs", []).append(update["update_ref"])
         spine["state_lifecycle"] = "continuing"
         spine["identity"].pop("celestial_identity_initial_state", None)
+        if self._imported:
+            runtime = spine.get("runtime_context", {})
+            phase = state["records"][self._origin_ref]["document"]["current_phase"]
+            _reject(prior_phase != phase and "phase_confidence" in runtime
+                    and "phase_confidence" not in context_fields)
+            if "sequence_id" in runtime:
+                runtime["sequence_id"] += 1
+            if "last_player_action_trace_ref" in runtime and actions:
+                runtime["last_player_action_trace_ref"] = actions[-1]["action_trace_id"]
         self._validate_state(state, evidence=update["evidence_refs"])
         return state
 
@@ -636,6 +869,15 @@ class PlayerStateStore:
     @classmethod
     def load(cls, raw, trusted_head, *configuration):
         owner = cls(*configuration)
+        return cls._load_journal(owner, raw, trusted_head)
+
+    @classmethod
+    def load_migrated(cls, raw, trusted_head, result, migration, raw_source, *configuration):
+        owner = cls.from_migration(result, migration, raw_source, *configuration)
+        return cls._load_journal(owner, raw, trusted_head)
+
+    @staticmethod
+    def _load_journal(owner, raw, trusted_head):
         journal = CommitJournal.load(raw, owner._scope, owner._policy_id, owner._reduce, trusted_head)
         archive = json.loads(journal.save())
         if archive["initial_state"] != owner._initial or any(

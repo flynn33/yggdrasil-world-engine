@@ -2320,12 +2320,46 @@
         "docs/architecture/ability_state_progression_contract.md",
         "data/validation/player_state_schema_crossrefs.json"
       ]
+    },
+    {
+      "id": "ADR-0049",
+      "record_type": "decision",
+      "title": "Import qualified legacy player continuity through a new explicit dialect",
+      "status": "accepted",
+      "recorded_on": "2026-10-14",
+      "owner_role": "State and synchronization maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt complete player migration and imported origin contract before implementation under continued M4 authorization.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Both actual legacy player formats omit evidence needed by fresh-only player admission; the historical open schema also permits active fields absent from the closed current spine.",
+      "decision": "Adopt the two explicit adapters, new v3 spine/aggregate-v2/origin-v2 schemas, source-bound imported baseline and consumed-identity ledgers, and typed active context admission. Keep old constructors, schema IDs and archives unchanged. Approve core/player_state_migration.py and exact tests listed in the migration contract; continue existing player/domain/origin modules without new dependencies.",
+      "rationale": "Explicit source qualification and usable typed context avoid soft-resetting continuing state or disguising lost behavior as archived source bytes.",
+      "consequences": [
+        "Migration source validation does not authenticate history; trusted composition must supply complete qualified bindings.",
+        "Unknown active extensions and unsupported interpretations fail; no missing scalar or historical commit is invented.",
+        "Cross-owner synchronization, multiplayer and full M4 acceptance remain open. No debt or placeholder closes through adoption."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0057",
+        "YWE-REQ-0056",
+        "YWE-REQ-0055",
+        "YWE-REQ-0054"
+      ],
+      "source_refs": [
+        "docs/architecture/m4_player_migration_contract.md",
+        "docs/architecture/player_runtime_state_v1.md",
+        "docs/architecture/player_runtime_state_contract.md",
+        "core/narrative_engine/player_runtime_state_rules.yaml"
+      ]
     }
   ],
   "summary": {
-    "total_records": 65,
-    "architecture_decisions": 48,
-    "accepted_decisions": 46,
+    "total_records": 66,
+    "architecture_decisions": 49,
+    "accepted_decisions": 47,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

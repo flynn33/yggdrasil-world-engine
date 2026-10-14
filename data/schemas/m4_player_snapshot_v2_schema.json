@@ -1,0 +1,1211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_player_snapshot_v2_schema.json",
+  "title": "M4 imported player aggregate snapshot",
+  "x-ywe-requirement-id": "YWE-REQ-0057",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "world_id",
+    "player_id",
+    "profile_id",
+    "spine",
+    "records",
+    "accepted_updates",
+    "compensations",
+    "import_baseline"
+  ],
+  "properties": {
+    "format": {
+      "const": "ywe.player_aggregate.v2"
+    },
+    "world_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "player_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "profile_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "spine": {
+      "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json"
+    },
+    "records": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 128,
+      "propertyNames": {
+        "$ref": "#/$defs/identifier"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/record"
+      }
+    },
+    "accepted_updates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/accepted_update"
+      },
+      "minItems": 0,
+      "maxItems": 128
+    },
+    "compensations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/compensation"
+      },
+      "minItems": 0,
+      "maxItems": 128
+    },
+    "import_baseline": {
+      "$ref": "#/$defs/import_baseline"
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*(?![\\s\\S])"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}(?![\\s\\S])"
+    },
+    "record": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "celestial"
+            },
+            "document": {
+              "allOf": [
+                {
+                  "$ref": "https://ywe.local/schemas/celestial_identity_state_schema.json"
+                },
+                {
+                  "properties": {
+                    "schema_version": {
+                      "const": "0.1.0"
+                    }
+                  }
+                }
+              ]
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "agent"
+            },
+            "document": {
+              "allOf": [
+                {
+                  "$ref": "https://ywe.local/schemas/player_agent_state_schema.json"
+                },
+                {
+                  "properties": {
+                    "schema_version": {
+                      "const": "0.1.0"
+                    }
+                  }
+                }
+              ]
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "branch_history"
+            },
+            "document": {
+              "allOf": [
+                {
+                  "$ref": "https://ywe.local/schemas/player_branch_history_schema.json"
+                },
+                {
+                  "properties": {
+                    "schema_version": {
+                      "const": "0.1.0"
+                    }
+                  }
+                }
+              ]
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "plane"
+            },
+            "document": {
+              "allOf": [
+                {
+                  "$ref": "https://ywe.local/schemas/m4_plane_attunement_state_schema.json"
+                },
+                {
+                  "properties": {
+                    "schema_version": {
+                      "const": "2.0.0"
+                    }
+                  }
+                }
+              ]
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "bloodline"
+            },
+            "document": {
+              "allOf": [
+                {
+                  "$ref": "https://ywe.local/schemas/m4_bloodline_resonance_state_schema.json"
+                },
+                {
+                  "properties": {
+                    "schema_version": {
+                      "const": "2.0.0"
+                    }
+                  }
+                }
+              ]
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "wolf"
+            },
+            "document": {
+              "allOf": [
+                {
+                  "$ref": "https://ywe.local/schemas/m4_wolf_resonance_summary_schema.json"
+                },
+                {
+                  "properties": {
+                    "schema_version": {
+                      "const": "2.0.0"
+                    }
+                  }
+                }
+              ]
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "raven"
+            },
+            "document": {
+              "allOf": [
+                {
+                  "$ref": "https://ywe.local/schemas/raven_companion_state_schema.json"
+                },
+                {
+                  "properties": {
+                    "version": {
+                      "const": "1.0.0"
+                    }
+                  }
+                }
+              ]
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "ability"
+            },
+            "document": {
+              "allOf": [
+                {
+                  "$ref": "https://ywe.local/schemas/m4_ability_state_schema.json"
+                },
+                {
+                  "properties": {
+                    "schema_version": {
+                      "const": "2.0.0"
+                    }
+                  }
+                }
+              ]
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "manifestation"
+            },
+            "document": {
+              "allOf": [
+                {
+                  "$ref": "https://ywe.local/schemas/wolf_manifestation_event_schema.json"
+                },
+                {
+                  "properties": {
+                    "version": {
+                      "const": "1.0.0"
+                    }
+                  }
+                }
+              ]
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "action"
+            },
+            "document": {
+              "allOf": [
+                {
+                  "$ref": "https://ywe.local/schemas/player_action_trace_schema.json"
+                },
+                {
+                  "properties": {
+                    "schema_version": {
+                      "const": "0.1.0"
+                    }
+                  }
+                }
+              ]
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "memory"
+            },
+            "document": {
+              "allOf": [
+                {
+                  "$ref": "https://ywe.local/schemas/player_memory_record_schema.json"
+                },
+                {
+                  "properties": {
+                    "schema_version": {
+                      "const": "0.1.0"
+                    }
+                  }
+                }
+              ]
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "origin"
+            },
+            "document": {
+              "$ref": "https://ywe.local/schemas/m4_origin_imported_state_schema.json"
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "reference"
+            },
+            "document": {
+              "$ref": "#/$defs/reference"
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "consequence"
+            },
+            "document": {
+              "$ref": "#/$defs/consequence"
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "context"
+            },
+            "document": {
+              "$ref": "#/$defs/context"
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        }
+      ]
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "category",
+        "truth_scope",
+        "subject_id",
+        "source_sha256"
+      ],
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/identifier"
+        },
+        "truth_scope": {
+          "enum": [
+            "shared_worldstate",
+            "leaf_branch_state",
+            "player_state",
+            "player_perception"
+          ]
+        },
+        "subject_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "consequence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "consequence_id",
+        "effect_id",
+        "update_ref",
+        "player_id",
+        "branch_ref",
+        "action_refs",
+        "external_result_refs"
+      ],
+      "properties": {
+        "consequence_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "effect_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "update_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "player_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "branch_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "action_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 16,
+          "uniqueItems": true
+        },
+        "external_result_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        }
+      }
+    },
+    "change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slot",
+        "before",
+        "after"
+      ],
+      "properties": {
+        "slot": {
+          "enum": [
+            "celestial",
+            "agent",
+            "plane",
+            "bloodline",
+            "wolf",
+            "raven"
+          ]
+        },
+        "before": {
+          "$ref": "#/$defs/identifier"
+        },
+        "after": {
+          "$ref": "#/$defs/identifier"
+        }
+      }
+    },
+    "accepted_update": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "request_ref",
+        "update_ref",
+        "consequence_ref",
+        "effect",
+        "reversible",
+        "changes"
+      ],
+      "properties": {
+        "request_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "update_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "consequence_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "effect": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "reversible": {
+          "type": "boolean"
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/change"
+          },
+          "minItems": 0,
+          "maxItems": 6,
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "reversible": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "changes": {
+                "minItems": 1,
+                "items": {
+                  "properties": {
+                    "slot": {
+                      "enum": [
+                        "plane",
+                        "bloodline",
+                        "wolf"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "compensation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "target_request_ref",
+        "reason_refs"
+      ],
+      "properties": {
+        "kind": {
+          "const": "compensate"
+        },
+        "target_request_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reason_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ],
+      "properties": {
+        "cosmic_pattern_snapshot_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "diagnostic_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "generation_plan_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 65,
+          "uniqueItems": true
+        }
+      }
+    },
+    "import_baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_sha256",
+        "import_anchor",
+        "consumed_update_refs",
+        "consumed_request_refs",
+        "consumed_effects",
+        "consumed_manifestation_event_ids",
+        "provenance"
+      ],
+      "properties": {
+        "source_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "import_anchor": {
+          "$ref": "#/$defs/sha256"
+        },
+        "consumed_update_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "consumed_request_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "consumed_effects": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/consumed_effect"
+          }
+        },
+        "consumed_manifestation_event_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        }
+      }
+    },
+    "consumed_effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "update_ref",
+        "consequence_ref",
+        "effect"
+      ],
+      "properties": {
+        "update_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "consequence_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "effect": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      }
+    },
+    "context": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "previous_value",
+            "value",
+            "phase"
+          ],
+          "properties": {
+            "field": {
+              "const": "phase_confidence"
+            },
+            "previous_value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/phase_confidence"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/phase_confidence"
+            },
+            "phase": {
+              "$ref": "#/$defs/identifier"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "previous_value",
+            "value",
+            "phase"
+          ],
+          "properties": {
+            "field": {
+              "const": "celestial_memory"
+            },
+            "previous_value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/celestial_memory"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/celestial_memory"
+            },
+            "phase": {
+              "$ref": "#/$defs/identifier"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "previous_value",
+            "value",
+            "phase"
+          ],
+          "properties": {
+            "field": {
+              "const": "active_realm_form"
+            },
+            "previous_value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/active_realm_form"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/active_realm_form"
+            },
+            "phase": {
+              "$ref": "#/$defs/identifier"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "previous_value",
+            "value",
+            "phase"
+          ],
+          "properties": {
+            "field": {
+              "const": "perception_state_ref"
+            },
+            "previous_value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/perception_state_ref"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/perception_state_ref"
+            },
+            "phase": {
+              "$ref": "#/$defs/identifier"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "previous_value",
+            "value",
+            "phase"
+          ],
+          "properties": {
+            "field": {
+              "const": "branch_generation_context_refs"
+            },
+            "previous_value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/branch_generation_context_refs"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/branch_generation_context_refs"
+            },
+            "phase": {
+              "$ref": "#/$defs/identifier"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "previous_value",
+            "value",
+            "phase"
+          ],
+          "properties": {
+            "field": {
+              "const": "branch_event_refs"
+            },
+            "previous_value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/branch_event_refs"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/branch_event_refs"
+            },
+            "phase": {
+              "$ref": "#/$defs/identifier"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "previous_value",
+            "value",
+            "phase"
+          ],
+          "properties": {
+            "field": {
+              "const": "awakening_fragments"
+            },
+            "previous_value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/awakening_fragments"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/awakening_fragments"
+            },
+            "phase": {
+              "$ref": "#/$defs/identifier"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "previous_value",
+            "value",
+            "phase"
+          ],
+          "properties": {
+            "field": {
+              "const": "narrative_memory_refs"
+            },
+            "previous_value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/narrative_memory_refs"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/narrative_memory_refs"
+            },
+            "phase": {
+              "$ref": "#/$defs/identifier"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "previous_value",
+            "value",
+            "phase"
+          ],
+          "properties": {
+            "field": {
+              "const": "relationship_state_refs"
+            },
+            "previous_value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/relationship_state_refs"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/relationship_state_refs"
+            },
+            "phase": {
+              "$ref": "#/$defs/identifier"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "previous_value",
+            "value",
+            "phase"
+          ],
+          "properties": {
+            "field": {
+              "const": "faction_stance_refs"
+            },
+            "previous_value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/faction_stance_refs"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/faction_stance_refs"
+            },
+            "phase": {
+              "$ref": "#/$defs/identifier"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "previous_value",
+            "value",
+            "phase"
+          ],
+          "properties": {
+            "field": {
+              "const": "unresolved_tension_refs"
+            },
+            "previous_value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/unresolved_tension_refs"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/unresolved_tension_refs"
+            },
+            "phase": {
+              "$ref": "#/$defs/identifier"
+            },
+            "resolution": {
+              "$ref": "#/$defs/context_resolution"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "previous_value",
+            "value",
+            "phase"
+          ],
+          "properties": {
+            "field": {
+              "const": "active_quest_refs"
+            },
+            "previous_value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/active_quest_refs"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/active_quest_refs"
+            },
+            "phase": {
+              "$ref": "#/$defs/identifier"
+            },
+            "resolution": {
+              "$ref": "#/$defs/context_resolution"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "previous_value",
+            "value",
+            "phase"
+          ],
+          "properties": {
+            "field": {
+              "const": "completed_resolution_refs"
+            },
+            "previous_value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/completed_resolution_refs"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/completed_resolution_refs"
+            },
+            "phase": {
+              "$ref": "#/$defs/identifier"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "previous_value",
+            "value",
+            "phase"
+          ],
+          "properties": {
+            "field": {
+              "const": "generation_context_refs"
+            },
+            "previous_value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/generation_context_refs"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/generation_context_refs"
+            },
+            "phase": {
+              "$ref": "#/$defs/identifier"
+            }
+          }
+        }
+      ]
+    },
+    "context_resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "removed_refs",
+        "action_refs",
+        "reason_refs",
+        "disposition"
+      ],
+      "properties": {
+        "removed_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "action_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "reason_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "disposition": {
+          "enum": [
+            "resolved",
+            "cancelled"
+          ]
+        }
+      }
+    }
+  }
+}

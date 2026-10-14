@@ -1,0 +1,382 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "M4 exact player state migration result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "adapter_id",
+    "migration_id",
+    "world_id",
+    "player_id",
+    "source_format",
+    "source_version",
+    "source_sha256",
+    "source_schema_digests",
+    "target_schema_digests",
+    "qualification_sha256",
+    "selected_record_sha256",
+    "import_anchor",
+    "source_presence_map",
+    "field_mapping_rows",
+    "decimal_conversion_rows",
+    "origin_baseline",
+    "baseline",
+    "target_sha256"
+  ],
+  "properties": {
+    "format": {
+      "const": "ywe.player_state_migration.v1"
+    },
+    "adapter_id": {
+      "enum": [
+        "closed_reference_v1",
+        "historical_record_v1"
+      ]
+    },
+    "migration_id": {
+      "enum": [
+        "player.closed_reference_v1.v1",
+        "player.historical_record_v1.v1"
+      ]
+    },
+    "world_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "player_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "source_format": {
+      "enum": [
+        "ywe.player_runtime_state.v1",
+        "PlayerRuntimeState"
+      ]
+    },
+    "source_version": {
+      "enum": [
+        "0.1.0",
+        "1.0.0"
+      ]
+    },
+    "source_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "source_schema_digests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "closed_reference_v1",
+        "historical_record_v1"
+      ],
+      "properties": {
+        "closed_reference_v1": {
+          "$ref": "#/$defs/sha256"
+        },
+        "historical_record_v1": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "target_schema_digests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "spine",
+        "celestial",
+        "agent",
+        "branch_history",
+        "plane",
+        "bloodline",
+        "wolf",
+        "raven",
+        "ability",
+        "manifestation",
+        "action",
+        "memory",
+        "origin",
+        "snapshot"
+      ],
+      "properties": {
+        "spine": {
+          "$ref": "#/$defs/sha256"
+        },
+        "celestial": {
+          "$ref": "#/$defs/sha256"
+        },
+        "agent": {
+          "$ref": "#/$defs/sha256"
+        },
+        "branch_history": {
+          "$ref": "#/$defs/sha256"
+        },
+        "plane": {
+          "$ref": "#/$defs/sha256"
+        },
+        "bloodline": {
+          "$ref": "#/$defs/sha256"
+        },
+        "wolf": {
+          "$ref": "#/$defs/sha256"
+        },
+        "raven": {
+          "$ref": "#/$defs/sha256"
+        },
+        "ability": {
+          "$ref": "#/$defs/sha256"
+        },
+        "manifestation": {
+          "$ref": "#/$defs/sha256"
+        },
+        "action": {
+          "$ref": "#/$defs/sha256"
+        },
+        "memory": {
+          "$ref": "#/$defs/sha256"
+        },
+        "origin": {
+          "$ref": "#/$defs/sha256"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "qualification_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "selected_record_sha256": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 128,
+      "propertyNames": {
+        "$ref": "#/$defs/identifier"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/sha256"
+      }
+    },
+    "import_anchor": {
+      "$ref": "#/$defs/sha256"
+    },
+    "source_presence_map": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 4096,
+      "propertyNames": {
+        "$ref": "#/$defs/pointer"
+      },
+      "additionalProperties": {
+        "enum": [
+          "present",
+          "null"
+        ]
+      }
+    },
+    "field_mapping_rows": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4096,
+      "items": {
+        "$ref": "#/$defs/field_mapping"
+      }
+    },
+    "decimal_conversion_rows": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 4096,
+      "items": {
+        "$ref": "#/$defs/decimal_conversion"
+      }
+    },
+    "origin_baseline": {
+      "$ref": "https://ywe.local/schemas/m4_origin_baseline_schema.json"
+    },
+    "baseline": {
+      "allOf": [
+        {
+          "$ref": "https://ywe.local/schemas/m4_player_snapshot_v2_schema.json"
+        },
+        {
+          "properties": {
+            "accepted_updates": {
+              "maxItems": 0
+            },
+            "compensations": {
+              "maxItems": 0
+            }
+          }
+        }
+      ]
+    },
+    "target_sha256": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*(?![\\s\\S])"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}(?![\\s\\S])"
+    },
+    "pointer": {
+      "type": "string",
+      "maxLength": 4096,
+      "pattern": "^(?:/(?:[^~/]|~[01])*)*(?![\\s\\S])"
+    },
+    "field_mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_pointer",
+        "target_pointer",
+        "operation"
+      ],
+      "properties": {
+        "source_pointer": {
+          "$ref": "#/$defs/pointer"
+        },
+        "target_pointer": {
+          "$ref": "#/$defs/pointer"
+        },
+        "operation": {
+          "enum": [
+            "copy",
+            "schema_version",
+            "protocol",
+            "qualified_component",
+            "exact_q6",
+            "exact_decimal",
+            "source_discriminator"
+          ]
+        }
+      }
+    },
+    "decimal_conversion": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_pointer",
+            "target_pointer",
+            "source_decimal",
+            "target_q6"
+          ],
+          "properties": {
+            "source_pointer": {
+              "$ref": "#/$defs/pointer"
+            },
+            "target_pointer": {
+              "$ref": "#/$defs/pointer"
+            },
+            "source_decimal": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 160,
+              "pattern": "^-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?(?![\\s\\S])"
+            },
+            "target_q6": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_pointer",
+            "target_pointer",
+            "source_decimal",
+            "coefficient",
+            "exponent"
+          ],
+          "properties": {
+            "source_pointer": {
+              "$ref": "#/$defs/pointer"
+            },
+            "target_pointer": {
+              "$ref": "#/$defs/pointer"
+            },
+            "source_decimal": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 160,
+              "pattern": "^-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?(?![\\s\\S])"
+            },
+            "coefficient": {
+              "type": "string",
+              "maxLength": 128,
+              "pattern": "^(0|-?[1-9]([0-9]*[1-9])?)(?![\\s\\S])"
+            },
+            "exponent": {
+              "type": "integer",
+              "minimum": -10000,
+              "maximum": 10000
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "coefficient": {
+                    "const": "0"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "exponent": {
+                    "const": 0
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "adapter_id": {
+          "const": "closed_reference_v1"
+        },
+        "migration_id": {
+          "const": "player.closed_reference_v1.v1"
+        },
+        "source_format": {
+          "const": "ywe.player_runtime_state.v1"
+        },
+        "source_version": {
+          "const": "0.1.0"
+        }
+      }
+    },
+    {
+      "properties": {
+        "adapter_id": {
+          "const": "historical_record_v1"
+        },
+        "migration_id": {
+          "const": "player.historical_record_v1.v1"
+        },
+        "source_format": {
+          "const": "PlayerRuntimeState"
+        },
+        "source_version": {
+          "const": "1.0.0"
+        }
+      }
+    }
+  ],
+  "$id": "https://ywe.local/schemas/m4_player_migration_result_schema.json",
+  "x-ywe-requirement-id": "YWE-REQ-0057"
+}

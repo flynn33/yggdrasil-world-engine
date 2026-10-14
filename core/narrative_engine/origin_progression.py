@@ -11,6 +11,8 @@ from ..state_journal import CommitJournal, JournalError, TruthScope, _identifier
 
 
 FORMAT = "ywe.origin_progression.v1"
+IMPORTED_FORMAT = "ywe.origin_progression.v2"
+BASELINE_FORMAT = "ywe.origin_baseline.v1"
 
 
 def _closed(value, keys):
@@ -152,12 +154,81 @@ class OriginProgressionPolicy:
             policy = {"format": FORMAT, "scope": self._scope.to_record(), "profile": profile,
                       "creation": creation, "grants": grants, "action_schema_sha256": action_digest,
                       "memory_schema_sha256": memory_digest}
+            self._profile = _object_bytes(profile)
             self._policy_id = "origin.v1:" + _digest(_object_bytes(policy))
             self._initial = _object_bytes({"format": FORMAT, "world_id": world_id, "player_id": player_id,
                 "profile_id": profile["profile_id"], "creation": creation,
                 "current_phase": profile["initial_phase"], "actions": [], "memories": [], "advances": []})
         except (JournalError, cv.CoreContractError, SchemaError, KeyError, TypeError, ValueError):
             raise JournalError("INVALID_POLICY") from None
+
+    @classmethod
+    def from_baseline(cls, baseline, world_id, player_id, profile, creation, grants,
+                      evidence, action_schema, memory_schema):
+        """Bind qualified imported history without inventing prior journal entries."""
+        policy = cls(world_id, player_id, profile, creation, grants, evidence,
+                     action_schema, memory_schema)
+        try:
+            baseline = json.loads(_object_bytes(baseline))
+            _closed(baseline, "format world_id player_id profile_id source_sha256 import_anchor "
+                    "current_phase actions memories consumed_action_refs provenance")
+            initial = policy.initial_state()
+            if (baseline["format"] != BASELINE_FORMAT or baseline["world_id"] != world_id
+                    or baseline["player_id"] != player_id or baseline["profile_id"] != initial["profile_id"]
+                    or baseline["current_phase"] not in policy.profile["phases"]):
+                raise JournalError("INVALID_POLICY")
+            for key in ("source_sha256", "import_anchor"):
+                digest = baseline[key]
+                if (type(digest) is not str or len(digest) != 64
+                        or any(char not in "0123456789abcdef" for char in digest)):
+                    raise JournalError("INVALID_POLICY")
+            _provenance(baseline["provenance"])
+            action_validator, _ = _validator(action_schema, "player_action_trace")
+            memory_validator, _ = _validator(memory_schema, "player_memory_record")
+            _items(baseline["actions"], 0, 128)
+            _items(baseline["memories"], 0, 128)
+            actions = {}
+            for action in baseline["actions"]:
+                if (type(action) is not dict or not action_validator.is_valid(action)
+                        or action.get("schema_id") != "ywe.player_action_trace.v1"
+                        or action.get("schema_version") != "0.1.0" or action.get("player_id") != player_id):
+                    raise JournalError("INVALID_POLICY")
+                _identifier(action["action_trace_id"])
+                _refs(action["source_refs"])
+                if "branch_ref" in action:
+                    _identifier(action["branch_ref"])
+                if action["action_trace_id"] in actions:
+                    raise JournalError("INVALID_POLICY")
+                actions[action["action_trace_id"]] = action
+            memory_ids = set()
+            for memory in baseline["memories"]:
+                if (type(memory) is not dict or not memory_validator.is_valid(memory)
+                        or memory.get("schema_id") != "ywe.player_memory_record.v1"
+                        or memory.get("schema_version") != "0.1.0"):
+                    raise JournalError("INVALID_POLICY")
+                _identifier(memory["memory_id"])
+                _refs(memory["source_refs"])
+                action = actions.get(memory["source_action_trace_ref"])
+                if (memory["memory_id"] in memory_ids or action is None
+                        or "branch_ref" in memory and memory["branch_ref"] != action.get("branch_ref")):
+                    raise JournalError("INVALID_POLICY")
+                memory_ids.add(memory["memory_id"])
+            _refs(baseline["consumed_action_refs"], 0, 128)
+            if not set(baseline["consumed_action_refs"]) <= set(actions):
+                raise JournalError("INVALID_POLICY")
+            imported = {key: baseline[key] for key in
+                        ("source_sha256", "import_anchor", "consumed_action_refs", "provenance")}
+            binding = {"format": IMPORTED_FORMAT, "original_policy_id": policy.policy_id,
+                       "baseline": baseline}
+            policy._policy_id = "origin.v2:" + _digest(_object_bytes(binding))
+            policy._initial = _object_bytes({**initial, "format": IMPORTED_FORMAT,
+                "current_phase": baseline["current_phase"], "actions": baseline["actions"],
+                "memories": baseline["memories"], "import_baseline": imported})
+            policy._import_baseline = _object_bytes(imported)
+            policy._imported_consumed = frozenset(baseline["consumed_action_refs"])
+        except (JournalError, cv.CoreContractError, SchemaError, KeyError, TypeError, ValueError):
+            raise JournalError("INVALID_POLICY") from None
+        return policy
 
     @property
     def scope(self):
@@ -166,6 +237,10 @@ class OriginProgressionPolicy:
     @property
     def policy_id(self):
         return self._policy_id
+
+    @property
+    def profile(self):
+        return json.loads(self._profile)
 
     def initial_state(self):
         return json.loads(self._initial)
@@ -190,6 +265,10 @@ class OriginProgressionPolicy:
         """Reduce an owner's verified component; neither argument is mutated."""
         state = json.loads(_object_bytes(state))
         packet = json.loads(_object_bytes(packet))
+        imported = getattr(self, "_import_baseline", None)
+        if imported is not None and (state.get("format") != IMPORTED_FORMAT
+                or state.get("import_baseline") != json.loads(imported)):
+            raise JournalError("POLICY_REJECTED")
         _closed(packet, "request_ref principal evidence_ref evidence_sha256")
         if packet != self.packet(packet["principal"], packet["request_ref"], packet["evidence_ref"]):
             raise JournalError("POLICY_REJECTED")
@@ -203,7 +282,8 @@ class OriginProgressionPolicy:
         old_memories = {row["memory_id"] for row in state["memories"]}
         if any(row["memory_id"] in old_memories for row in item["memories"]):
             raise JournalError("POLICY_REJECTED")
-        if len(state["memories"]) + len(item["memories"]) > 128:
+        if (len(state["memories"]) + len(item["memories"]) > 128
+                or len(set(old_actions) | set(new_actions)) > 128):
             raise JournalError("VALUE_LIMIT")
         if item["operation"] == "remember":
             if item["target_phase"] != state["current_phase"]:
@@ -211,6 +291,7 @@ class OriginProgressionPolicy:
         else:
             minimum = self._edges.get((state["current_phase"], item["target_phase"]))
             used = {ref for row in state["advances"] for ref in row["action_refs"]}
+            used.update(getattr(self, "_imported_consumed", ()))
             if minimum is None or len(new_actions) < minimum or used.intersection(new_actions):
                 raise JournalError("POLICY_REJECTED")
             state["advances"].append({"request_ref": packet["request_ref"], "evidence_ref": item["evidence_ref"],

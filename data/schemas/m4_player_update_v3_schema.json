@@ -1,0 +1,430 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_player_update_v3_schema.json",
+  "title": "M4 imported player typed update catalog record",
+  "x-ywe-requirement-id": "YWE-REQ-0057",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "update_ref",
+    "world_id",
+    "player_id",
+    "branch_ref",
+    "source_system",
+    "operations",
+    "evidence_refs",
+    "consequence_ref",
+    "provenance"
+  ],
+  "properties": {
+    "update_ref": {
+      "$ref": "#/$defs/identifier"
+    },
+    "world_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "player_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "branch_ref": {
+      "$ref": "#/$defs/identifier"
+    },
+    "source_system": {
+      "enum": [
+        "narrative_engine",
+        "runtime_cosmology",
+        "realm_engine",
+        "perception_engine",
+        "quest_engine"
+      ]
+    },
+    "operations": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/origin_operation"
+          },
+          {
+            "$ref": "#/$defs/replace_operation"
+          },
+          {
+            "$ref": "#/$defs/ability_operation"
+          },
+          {
+            "$ref": "#/$defs/manifest_operation"
+          },
+          {
+            "$ref": "#/$defs/dismiss_operation"
+          },
+          {
+            "$ref": "#/$defs/append_operation"
+          },
+          {
+            "$ref": "#/$defs/branch_operation"
+          },
+          {
+            "$ref": "#/$defs/compensate_operation"
+          },
+          {
+            "$ref": "#/$defs/context_operation"
+          }
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 16
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/identifier"
+      },
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "consequence_ref": {
+      "$ref": "#/$defs/identifier"
+    },
+    "provenance": {
+      "$ref": "#/$defs/provenance"
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*(?![\\s\\S])"
+    },
+    "origin_operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "evidence_ref"
+      ],
+      "properties": {
+        "kind": {
+          "const": "origin"
+        },
+        "evidence_ref": {
+          "$ref": "#/$defs/identifier"
+        }
+      }
+    },
+    "replace_operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "slot",
+        "previous_ref",
+        "next_ref",
+        "condition_refs"
+      ],
+      "properties": {
+        "kind": {
+          "const": "replace"
+        },
+        "slot": {
+          "enum": [
+            "celestial",
+            "agent",
+            "plane",
+            "bloodline",
+            "wolf",
+            "raven"
+          ]
+        },
+        "previous_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "next_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "condition_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        }
+      }
+    },
+    "ability_operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "ability_id",
+        "previous_ref",
+        "next_ref",
+        "condition_refs"
+      ],
+      "properties": {
+        "kind": {
+          "const": "ability"
+        },
+        "ability_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "previous_ref": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "next_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "condition_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        }
+      }
+    },
+    "manifest_operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "event_ref"
+      ],
+      "properties": {
+        "kind": {
+          "const": "manifest"
+        },
+        "event_ref": {
+          "$ref": "#/$defs/identifier"
+        }
+      }
+    },
+    "dismiss_operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "event_ref",
+        "condition_ref"
+      ],
+      "properties": {
+        "kind": {
+          "const": "dismiss"
+        },
+        "event_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "condition_ref": {
+          "$ref": "#/$defs/identifier"
+        }
+      }
+    },
+    "append_operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "collection",
+        "refs"
+      ],
+      "properties": {
+        "kind": {
+          "const": "append"
+        },
+        "collection": {
+          "enum": [
+            "memory_refs.quest_history_refs",
+            "memory_refs.major_choice_refs",
+            "memory_refs.oath_refs",
+            "memory_refs.discovery_refs",
+            "progression_refs.progression_signal_refs",
+            "progression_refs.ability_pressure_refs",
+            "progression_refs.identity_reveal_pressure_refs",
+            "progression_refs.threshold_access_refs",
+            "world_links.worldstate_delta_refs",
+            "world_links.location_state_refs",
+            "world_links.location_mutation_refs",
+            "world_links.future_generation_bias_refs",
+            "world_links.diagnostic_noop_refs",
+            "relationship_links.npc_relationship_refs",
+            "relationship_links.faction_standing_refs",
+            "relationship_links.faction_claim_exposure_refs",
+            "manifestation_links.artifact_binding_refs",
+            "manifestation_links.creature_encounter_refs",
+            "manifestation_links.myth_participation_refs",
+            "manifestation_links.myth_seed_refs",
+            "manifestation_links.prophecy_pressure_refs",
+            "manifestation_links.perception_overlay_refs"
+          ]
+        },
+        "refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        }
+      }
+    },
+    "branch_operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "previous_branch_ref",
+        "next_branch_ref",
+        "next_location_ref",
+        "agent_ref",
+        "history_ref",
+        "event_ref"
+      ],
+      "properties": {
+        "kind": {
+          "const": "branch"
+        },
+        "previous_branch_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "next_branch_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "next_location_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "agent_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "history_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "event_ref": {
+          "$ref": "#/$defs/identifier"
+        }
+      }
+    },
+    "compensate_operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "target_request_ref",
+        "reason_refs"
+      ],
+      "properties": {
+        "kind": {
+          "const": "compensate"
+        },
+        "target_request_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "reason_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ],
+      "properties": {
+        "cosmic_pattern_snapshot_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "diagnostic_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "generation_plan_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 65,
+          "uniqueItems": true
+        }
+      }
+    },
+    "context_operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "context_ref",
+        "condition_refs"
+      ],
+      "properties": {
+        "kind": {
+          "const": "context"
+        },
+        "context_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "condition_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 128,
+          "uniqueItems": true
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "operations": {
+          "contains": {
+            "$ref": "#/$defs/origin_operation"
+          },
+          "minContains": 1,
+          "maxContains": 1,
+          "not": {
+            "contains": {
+              "$ref": "#/$defs/compensate_operation"
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "operations": {
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/$defs/compensate_operation"
+          }
+        }
+      }
+    }
+  ]
+}

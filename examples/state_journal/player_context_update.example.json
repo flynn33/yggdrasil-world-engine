@@ -1,0 +1,32 @@
+{
+  "update_ref": "update:resolve",
+  "world_id": "world:one",
+  "player_id": "player:one",
+  "branch_ref": "branch:one",
+  "source_system": "quest_engine",
+  "operations": [
+    {
+      "kind": "origin",
+      "evidence_ref": "origin:resolve"
+    },
+    {
+      "kind": "context",
+      "context_ref": "context:active_quest_refs",
+      "condition_refs": [
+        "evidence:play"
+      ]
+    }
+  ],
+  "evidence_refs": [
+    "evidence:play"
+  ],
+  "consequence_ref": "consequence:resolve",
+  "provenance": {
+    "cosmic_pattern_snapshot_ref": "snapshot:player",
+    "diagnostic_ref": "diagnostic:player",
+    "generation_plan_ref": "plan:player",
+    "source_ash_refs": [
+      "ash:canonical"
+    ]
+  }
+}

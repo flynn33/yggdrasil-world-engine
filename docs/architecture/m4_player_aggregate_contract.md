@@ -182,14 +182,16 @@ state bound and 128-entry limit. Catalogs are limited to 128 records/updates eac
 1 MiB each; grants to 32 principals; operations to 16 per update; references and
 retained accepted receipts to 128. Fail closed before publishing partial state.
 
-The two historical player formats need separate source-bound adapters. Closed
-v1 continuing state requires a qualified origin baseline; historical sparse
-resonance requires complete resolved records and exact agreement with every
-provided scalar. Neither initial defaults nor synthetic past journal entries
-may substitute for missing history. Their migration is remaining work until
-both adapters and preservation tests execute. Fresh construction in this first
-aggregate realization accepts only an initial v2 spine; load provides continuing
-state by replay. No M4 deliverable, placeholder or exit closes from that boundary.
+The [qualified player migration contract](m4_player_migration_contract.md) adds
+two explicit source-bound adapters, imported v3/aggregate-v2 baselines and typed
+active context continuation. Closed v1 continuing state requires a qualified
+origin baseline; historical sparse resonance requires complete resolved records
+and exact agreement with each supplied scalar. Unsupported active fields and
+missing qualification refuse. Imported history starts a separate genesis and
+does not invent historical receipts. The original constructor remains initial-v2
+only, and original archives retain their byte identity. The explicit
+`from_migration` / `load_migrated` factories select the new imported dialect.
+Cross-owner coordination and multiplayer retain their separate M4 gates.
 
 ## Required evidence
 

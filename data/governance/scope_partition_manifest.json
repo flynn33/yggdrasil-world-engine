@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1479,
-    "path_digest": "0d16deb38452b5139a980477c6d92031a75c251068ab4c27304da2893d1cbf47",
+    "path_count": 1495,
+    "path_digest": "c917920f2159bda609e059fd9c4f2d620b0c3e053cdec028be4fbab23cb994b1",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -3253,16 +3253,82 @@
         "m4_player_aggregate",
         "reference_contract"
       ]
+    },
+    {
+      "path": "data/schemas/m4_player_runtime_state_v3_schema.json",
+      "primary_partition": "wrw_reference_profile",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_player_migration_contract.md",
+      "rationale": "Explicit legacy WRW compatibility surface or synthetic qualification fixture; migration mechanics require supplied profiles and mappings.",
+      "secondary_tags": [
+        "m4_player_migration",
+        "reference_contract"
+      ]
+    },
+    {
+      "path": "data/schemas/m4_player_snapshot_v2_schema.json",
+      "primary_partition": "wrw_reference_profile",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_player_migration_contract.md",
+      "rationale": "Explicit legacy WRW compatibility surface or synthetic qualification fixture; migration mechanics require supplied profiles and mappings.",
+      "secondary_tags": [
+        "m4_player_migration",
+        "reference_contract"
+      ]
+    },
+    {
+      "path": "data/schemas/m4_player_migration_result_schema.json",
+      "primary_partition": "wrw_reference_profile",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_player_migration_contract.md",
+      "rationale": "Explicit legacy WRW compatibility surface or synthetic qualification fixture; migration mechanics require supplied profiles and mappings.",
+      "secondary_tags": [
+        "m4_player_migration",
+        "reference_contract"
+      ]
+    },
+    {
+      "path": "examples/state_journal/player_migration.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_player_migration_contract.md",
+      "rationale": "Explicit legacy WRW compatibility surface or synthetic qualification fixture; migration mechanics require supplied profiles and mappings.",
+      "secondary_tags": [
+        "m4_player_migration",
+        "reference_contract"
+      ]
+    },
+    {
+      "path": "examples/state_journal/player_context_update.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_player_migration_contract.md",
+      "rationale": "Explicit legacy WRW compatibility surface or synthetic qualification fixture; migration mechanics require supplied profiles and mappings.",
+      "secondary_tags": [
+        "m4_player_migration",
+        "reference_contract"
+      ]
+    },
+    {
+      "path": "examples/state_journal/player_imported_continuation.example.json",
+      "primary_partition": "governance_validation",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_player_migration_contract.md",
+      "rationale": "Explicit legacy WRW compatibility surface or synthetic qualification fixture; migration mechanics require supplied profiles and mappings.",
+      "secondary_tags": [
+        "m4_player_migration",
+        "reference_contract"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
       "ash_dependency_material": 66,
-      "governance_validation": 647,
+      "governance_validation": 655,
       "historical_evidence": 28,
       "later_release_work": 45,
-      "wrw_reference_profile": 318,
-      "ywe_core": 251,
+      "wrw_reference_profile": 321,
+      "ywe_core": 256,
       "ywe_extension_profile": 124
     }
   }

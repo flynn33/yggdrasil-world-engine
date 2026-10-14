@@ -1,7 +1,7 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-55
+**Revision:** planning-56
 **Date:** October 14, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
@@ -2561,3 +2561,57 @@ player tests; it no longer incorrectly reads not-started. README counts and the
 detailed matrix match the machine roadmap. No dimension becomes complete.
 The complete focused/adjacent selection passed 192 tests with zero failures,
 including both exact-path guardrails and platform checks.
+
+## 26. Qualified player migration adoption — October 14, 2026
+
+Current step: YWE-REQ-0057 / ADR-0049, two explicit legacy player adapters and
+source-bound imported continuity. The preceding committed player checkpoint
+`59cdd141ceab0aa31894242896f5a2ff843211f9` is undergoing its full clean 37-check
+execution; no completed full-suite or publication result is claimed here.
+
+Read-only source/design review bound 40 files to that revision. Independent
+adverse review bound 20 sources and executed nine structural schema probes:
+legacy validation permits unknown active fields and unsafe authority declarations,
+and an initial marker does not establish empty history. Thirty proposed adverse
+vectors are design inputs, not executed implementation tests. The adopted
+migration contract requires usable active context, exact sparse-score agreement,
+qualified consumed action/effect/request/manifestation identities, and explicit
+new versions. It forbids synthetic old journal entries and resets to creation.
+
+Next action: implement and verify the versioned baseline, pure adapters and
+aggregate continuation, preserving actual old archives. Existing Raven v0.7.0
+pin, source roles, dependency limits and owner publication authority persist.
+Needed from owner: none. No M4 deliverable, exit or placeholder closes here.
+
+### 26.1. Implemented imported continuity and focused verification
+
+Both explicit adapters, imported origin baseline, aggregate factories and typed
+active-context continuation are implemented. Six additive schemas and three
+examples describe the actual migrated result, quest resolution and continued
+snapshot. The original schemas remain unchanged. Imported consumption stays
+separate from local receipts; replay verifies the original source and selected
+qualification before admitting the new journal genesis.
+
+Independent review reproduced observer results used as objective consequences,
+unresolved retained-action links, unstable manifestation alias selection, exact
+decimal boundary refusals, leaked parser exceptions and duplicate references.
+Those cases now have permanent regression coverage. Aggregate review also found
+an awakening reference escaping player scope; its correction has an atomic
+refusal test. The final independent adapter rechecks passed seven regression
+tests and the hostile-exponent regression, with no unresolved reproduced finding.
+
+The complete focused and adjacent working-tree selection passed 265 tests in
+78.971 seconds with no failures or errors. It includes both adapters in initial
+and continuing states, actual checked-in example equality, imported continuation
+and replay, consumed identity refusal, context ownership and reasoned removal,
+origin/domain rules, schema checks and platform path guards. Five actual
+pre-migration player archive hashes and ten independently captured owner archive
+reloads remain exact. This is focused verification; the earlier clean full run
+at `59cdd141ceab0aa31894242896f5a2ff843211f9` remains in progress. No full-suite
+pass or publication of this migration checkpoint is claimed yet.
+
+Current step: commit and run clean focused and repository checks, then publish
+the verified checkpoint and matching README/wiki progress. Next implementation
+work is branch/world ownership and deterministic synchronization. All five M4
+deliverables and exits and the existing quality debt remain open. Needed from
+owner: none. Saved in this Project Record and the linked migration contract.

@@ -1,0 +1,970 @@
+{
+  "accepted_updates": [
+    {
+      "changes": [],
+      "consequence_ref": "consequence:resolve",
+      "effect": [
+        "consequence:resolve",
+        "consequence:resolve:effect",
+        "player:one"
+      ],
+      "request_ref": "request:resolve",
+      "reversible": false,
+      "update_ref": "update:resolve"
+    }
+  ],
+  "compensations": [],
+  "format": "ywe.player_aggregate.v2",
+  "import_baseline": {
+    "consumed_effects": [
+      {
+        "consequence_ref": "consequence:first",
+        "effect": [
+          "consequence:first",
+          "consequence:first:effect",
+          "player:one"
+        ],
+        "update_ref": "update:first"
+      }
+    ],
+    "consumed_manifestation_event_ids": [],
+    "consumed_request_refs": [
+      "request:historical:first"
+    ],
+    "consumed_update_refs": [
+      "update:first"
+    ],
+    "import_anchor": "a07ff7989cab2bf62445b961ed49359115cdfcbeb0e62e51339ad51611669c64",
+    "provenance": {
+      "cosmic_pattern_snapshot_ref": "snapshot:player",
+      "diagnostic_ref": "diagnostic:player",
+      "generation_plan_ref": "plan:player",
+      "source_ash_refs": [
+        "ash:canonical"
+      ]
+    },
+    "source_sha256": "48db44127c912f4e8ce8ba76b6720dc985ce4133a35869272dabf86ac94733f0"
+  },
+  "player_id": "player:one",
+  "profile_id": "wrw.player_progression.v1",
+  "records": {
+    "ASH_Cosmological_Model": {
+      "document": {
+        "category": "source_ash_refs",
+        "source_sha256": "af6716d269d8c416002fa5d92ba8cb42159d27a7aed76ac26a80f2827442c73f",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "9aed8c9b934f54a1e060d17bc403c762434c69d11cab17145a414faf5950af80"
+    },
+    "ability:latent": {
+      "document": {
+        "ability_id": "ability:oath",
+        "branch_ref": "branch:one",
+        "current_state": "latent",
+        "history_refs": [],
+        "player_id": "player:one",
+        "schema_id": "ywe.ability_state.v2",
+        "schema_version": "2.0.0",
+        "sealed_reason_refs": [],
+        "source_refs": [
+          "evidence:play"
+        ]
+      },
+      "kind": "ability",
+      "sha256": "82c1f3105663b1d3188c2ffc55d966f688a361cef7c4861ed69dad0020bb863d"
+    },
+    "agent:initial": {
+      "document": {
+        "agent_id": "agent:initial",
+        "agent_kind": "player_mortal_instance",
+        "asp_resilience": {
+          "asp_diagnostic_refs": [
+            "diagnostic:initial"
+          ],
+          "state_integrity_status": "valid"
+        },
+        "branch_event_refs": [],
+        "choice_capacity_status": "ordinary_choice_capacity",
+        "current_leaf_branch_ref": "branch:one",
+        "current_location_ref": "location:one",
+        "mortal_instance_id": "identity:mortal",
+        "recent_action_trace_refs": [],
+        "schema_id": "ywe.player_agent_state.v1",
+        "schema_version": "0.1.0",
+        "self_reference_status": "veiled_self_model"
+      },
+      "kind": "agent",
+      "sha256": "b685991805d51e8cebe993cda0f707d7e07fdcdd4d60221c206cc6b5b0f879a4"
+    },
+    "axiom_diagnostic.initial": {
+      "document": {
+        "category": "axiom_diagnostic_refs",
+        "source_sha256": "a741717d629d19425fc660b9f8be21e5806b24fa9414aaf93b37b624b6620ed7",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "57bc662216b4ee3e2f4e9f084d3c9b1830ad0ebf8e40c0912042d1725a40b4f7"
+    },
+    "bloodline:initial": {
+      "document": {
+        "schema_id": "ywe.bloodline_resonance_state.v2",
+        "schema_version": "2.0.0",
+        "signals": [
+          {
+            "bloodline_id": "lineage:seed",
+            "known_publicly": false,
+            "revealed_to_player": false,
+            "score_q6": 10000,
+            "source_refs": [
+              "qualified:creation"
+            ],
+            "stability": "stable",
+            "status": "unknown"
+          }
+        ],
+        "source_refs": [
+          "qualified:creation"
+        ]
+      },
+      "kind": "bloodline",
+      "sha256": "20c6415d75611d4b0e45f6ff3a7825f2d8fb3456e966e5abdfb03d0eca195663"
+    },
+    "branch:one": {
+      "document": {
+        "category": "current_leaf_branch_ref",
+        "source_sha256": "da5bc8d306614cbdb0fca2eb2b233e872a902e579123549f5aca24f6f7990c9f",
+        "subject_id": "branch:one",
+        "truth_scope": "leaf_branch_state"
+      },
+      "kind": "reference",
+      "sha256": "27a795402b70a9022a8af33d930729a505a499c88bbed858baeb87176349dbfa"
+    },
+    "branch_generation_context.initial": {
+      "document": {
+        "category": "branch_generation_context_refs",
+        "source_sha256": "4545412944702b90b2bdaf69f244a779ff45810977debc0b428da0cb77136f96",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "88bfbadf5530b0b9b3721966424cb623fd6c54db922d7895e63a7747dec7ed56"
+    },
+    "celestial:suspected": {
+      "document": {
+        "evidence_refs": [
+          "evidence:play"
+        ],
+        "forbidden": [
+          "full_celestial_identity_at_character_creation",
+          "identity_reveal_without_provenance"
+        ],
+        "identity_state": "suspected",
+        "known_fragments": [],
+        "reveal_status": "player_suspects",
+        "schema_id": "ywe.celestial_identity_state.v1",
+        "schema_version": "0.1.0"
+      },
+      "kind": "celestial",
+      "sha256": "90fdcfa37be3f3db12a2bb4129e01293be4375ecffc03334db7a0ce8c765c080"
+    },
+    "consequence:first": {
+      "document": {
+        "action_refs": [
+          "origin:first:action:0",
+          "origin:first:action:1"
+        ],
+        "branch_ref": "branch:one",
+        "consequence_id": "consequence:first",
+        "effect_id": "consequence:first:effect",
+        "external_result_refs": [],
+        "player_id": "player:one",
+        "update_ref": "update:first"
+      },
+      "kind": "consequence",
+      "sha256": "0151089af436aed47fd60bb091d82915ce6bbf9e908ee24dbdcc11d5bf35db4e"
+    },
+    "consequence:resolve": {
+      "document": {
+        "action_refs": [
+          "origin:resolve:action:0"
+        ],
+        "branch_ref": "branch:one",
+        "consequence_id": "consequence:resolve",
+        "effect_id": "consequence:resolve:effect",
+        "external_result_refs": [],
+        "player_id": "player:one",
+        "update_ref": "update:resolve"
+      },
+      "kind": "consequence",
+      "sha256": "22e3d9a2069251d6f699cfd0974a0d9216268bc2aea7dc57b8d0fd5a6ceab483"
+    },
+    "context:active_quest_refs": {
+      "document": {
+        "field": "active_quest_refs",
+        "phase": "first_stirrings",
+        "previous_value": [
+          "quest:second",
+          "quest:first"
+        ],
+        "resolution": {
+          "action_refs": [
+            "origin:resolve:action:0"
+          ],
+          "disposition": "resolved",
+          "reason_refs": [
+            "evidence:play"
+          ],
+          "removed_refs": [
+            "quest:second"
+          ]
+        },
+        "value": [
+          "quest:first"
+        ]
+      },
+      "kind": "context",
+      "sha256": "98ded1d37f748feb248b235e7a1350fa729cd4126875ba9ad944938f21afa6c0"
+    },
+    "cosmic_pattern_snapshot.initial": {
+      "document": {
+        "category": "cosmic_pattern_snapshot_ref",
+        "source_sha256": "f8134e3022d719647ced6627fe7d7cd67b7683e6e6c09e272f5c025e3bc1ed3a",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "00bcd227b7f38164549f4b3926fd0165d243fd7756be18e5f0aecb1dbd34528f"
+    },
+    "diagnostic.initial": {
+      "document": {
+        "category": "diagnostic_ref",
+        "source_sha256": "ca282b15efead24f7d563dcae411e18f68aa5538b1eb1896f94a9c6451b58c6f",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "7b5a7f9b7769c6dd1239ce7ea7517c5000d6215070d0283a2ae11b23f4a7ebf0"
+    },
+    "diagnostic:initial": {
+      "document": {
+        "category": "asp_diagnostic_refs",
+        "source_sha256": "fe230b2452afc62c0fe2026f845820d7ea7a4a26f32b0b8ae3df67f3619fa86f",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "86250504225b0db3d1b6b3c981ef219e3928867c8e76ba1e870964bc08a932f6"
+    },
+    "evidence:play": {
+      "document": {
+        "category": "evidence_refs",
+        "source_sha256": "9c672b4849813a08721054121271e84e17f8c886b7379f773488969a1e3d1ac8",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "0485d1c31721fddc3c4cf92bb8adf8e8a68e5c0b9af571324e1c47ac33cece07"
+    },
+    "existence_potential.player.initial": {
+      "document": {
+        "category": "existence_potential_ref",
+        "source_sha256": "944620f03b593830838a11f112b348e704caa854d70cd57126f04681341d13a7",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "e56a64ded1f9d4d001e16025b25e2dd2c4404adcb1855aa1b8485d77d30d7ce3"
+    },
+    "generation:one": {
+      "document": {
+        "category": "generation_context_refs",
+        "source_sha256": "b348477e97a8308b2c6ffa8437a1b3cf3b7cf9e8d865c0e37e55c8f60b120950",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "e13a42b785a22e360b9ecb2e86914525a35c4882a213708aa254d1fc58ca9589"
+    },
+    "generation_plan.initial": {
+      "document": {
+        "category": "generation_plan_ref",
+        "source_sha256": "839977f9586f603d7feabd95e9e3f5d81013386120ce375529ccc499a8e13339",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "40f55ef3404ff5376f9aba222626a84f171b03875dc3dbba2b21b1e221295133"
+    },
+    "history:initial": {
+      "document": {
+        "current_leaf_branch_ref": "branch:one",
+        "entries": [],
+        "player_id": "player:one",
+        "schema_id": "ywe.player_branch_history.v1",
+        "schema_version": "0.1.0"
+      },
+      "kind": "branch_history",
+      "sha256": "caf9cd9dd223536a0cdfb69fdfe7fb6d43454ea2bd8c75237fd19507c2ec9516"
+    },
+    "identity:mortal": {
+      "document": {
+        "category": "mortal_identity_ref",
+        "source_sha256": "456f1c6cc5e13afaabe07f09de89432cadec932538c1a479facf3552cb6094a4",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "27d1b21cf592c40d55cae84f9d2bbafd1955d295b9c39982acd04d423037c509"
+    },
+    "legacy:memory:one": {
+      "document": {
+        "category": "narrative_memory_refs",
+        "source_sha256": "a75928fd24a45d37d3ec95154cc7887ad094a143871bdde21cbcf7c16db029da",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "ed6670123fb3059a7dd98d33b515cecdd64b356af842b46039fb57dfc9c84f63"
+    },
+    "location:one": {
+      "document": {
+        "category": "current_location_ref",
+        "source_sha256": "0cd1b08c13af625301a09481959450b8500311d4b8351e7f6a19ff943490e7bc",
+        "subject_id": "branch:one",
+        "truth_scope": "leaf_branch_state"
+      },
+      "kind": "reference",
+      "sha256": "4712fa8130f8d12c621a22abc62a3550a70b9f65f660d9aaad34955f331e1d08"
+    },
+    "origin:first:action:0": {
+      "document": {
+        "action_kind": "choice",
+        "action_trace_id": "origin:first:action:0",
+        "branch_ref": "branch:one",
+        "branch_relevance": "contextual",
+        "player_id": "player:one",
+        "resulting_player_state_update_refs": [
+          "update:first"
+        ],
+        "schema_id": "ywe.player_action_trace.v1",
+        "schema_version": "0.1.0",
+        "significance": "meaningful",
+        "source_refs": [
+          "evidence:play"
+        ]
+      },
+      "kind": "action",
+      "sha256": "220cf294a33d8c269a2da0420b9f9df3463de0d2ab2b376d6b5dd530bd7d3573"
+    },
+    "origin:first:action:1": {
+      "document": {
+        "action_kind": "choice",
+        "action_trace_id": "origin:first:action:1",
+        "branch_ref": "branch:one",
+        "branch_relevance": "contextual",
+        "player_id": "player:one",
+        "resulting_player_state_update_refs": [
+          "update:first"
+        ],
+        "schema_id": "ywe.player_action_trace.v1",
+        "schema_version": "0.1.0",
+        "significance": "meaningful",
+        "source_refs": [
+          "evidence:play"
+        ]
+      },
+      "kind": "action",
+      "sha256": "a6640b4056975ee5b1aa5c05598fdf7e6a6abb786f6b3a7d6130f5c7016c2564"
+    },
+    "origin:first:memory:0": {
+      "document": {
+        "branch_ref": "branch:one",
+        "memory_id": "origin:first:memory:0",
+        "memory_kind": "identity_memory",
+        "schema_id": "ywe.player_memory_record.v1",
+        "schema_version": "0.1.0",
+        "source_action_trace_ref": "origin:first:action:0",
+        "source_refs": [
+          "qualified:play"
+        ],
+        "visibility_state": "felt"
+      },
+      "kind": "memory",
+      "sha256": "9623ef59b9e06645e92c44f2f2530fd71f2f25560c8e1ddee16698ca3036ac81"
+    },
+    "origin:first:memory:1": {
+      "document": {
+        "branch_ref": "branch:one",
+        "memory_id": "origin:first:memory:1",
+        "memory_kind": "identity_memory",
+        "schema_id": "ywe.player_memory_record.v1",
+        "schema_version": "0.1.0",
+        "source_action_trace_ref": "origin:first:action:1",
+        "source_refs": [
+          "qualified:play"
+        ],
+        "visibility_state": "felt"
+      },
+      "kind": "memory",
+      "sha256": "f2ecd6ac651014b4e08e32f463706261b6fca94cdd795228b1325abcab468fc4"
+    },
+    "origin:one": {
+      "document": {
+        "actions": [
+          {
+            "action_kind": "choice",
+            "action_trace_id": "origin:first:action:0",
+            "branch_ref": "branch:one",
+            "branch_relevance": "contextual",
+            "player_id": "player:one",
+            "resulting_player_state_update_refs": [
+              "update:first"
+            ],
+            "schema_id": "ywe.player_action_trace.v1",
+            "schema_version": "0.1.0",
+            "significance": "meaningful",
+            "source_refs": [
+              "evidence:play"
+            ]
+          },
+          {
+            "action_kind": "choice",
+            "action_trace_id": "origin:first:action:1",
+            "branch_ref": "branch:one",
+            "branch_relevance": "contextual",
+            "player_id": "player:one",
+            "resulting_player_state_update_refs": [
+              "update:first"
+            ],
+            "schema_id": "ywe.player_action_trace.v1",
+            "schema_version": "0.1.0",
+            "significance": "meaningful",
+            "source_refs": [
+              "evidence:play"
+            ]
+          },
+          {
+            "action_kind": "quest_resolution",
+            "action_trace_id": "origin:resolve:action:0",
+            "affected_entity_refs": [
+              "quest:second"
+            ],
+            "branch_ref": "branch:one",
+            "branch_relevance": "contextual",
+            "player_id": "player:one",
+            "resulting_player_state_update_refs": [
+              "update:resolve"
+            ],
+            "schema_id": "ywe.player_action_trace.v1",
+            "schema_version": "0.1.0",
+            "significance": "meaningful",
+            "source_refs": [
+              "evidence:play"
+            ]
+          }
+        ],
+        "advances": [],
+        "creation": {
+          "identity_status": "veiled",
+          "mortal_identity_ref": "identity:mortal",
+          "provenance": {
+            "cosmic_pattern_snapshot_ref": "snapshot:player",
+            "diagnostic_ref": "diagnostic:player",
+            "generation_plan_ref": "plan:player",
+            "source_ash_refs": [
+              "ash:canonical"
+            ]
+          }
+        },
+        "current_phase": "first_stirrings",
+        "format": "ywe.origin_progression.v2",
+        "import_baseline": {
+          "consumed_action_refs": [
+            "origin:first:action:0",
+            "origin:first:action:1"
+          ],
+          "import_anchor": "a07ff7989cab2bf62445b961ed49359115cdfcbeb0e62e51339ad51611669c64",
+          "provenance": {
+            "cosmic_pattern_snapshot_ref": "snapshot:player",
+            "diagnostic_ref": "diagnostic:player",
+            "generation_plan_ref": "plan:player",
+            "source_ash_refs": [
+              "ash:canonical"
+            ]
+          },
+          "source_sha256": "48db44127c912f4e8ce8ba76b6720dc985ce4133a35869272dabf86ac94733f0"
+        },
+        "memories": [
+          {
+            "branch_ref": "branch:one",
+            "memory_id": "origin:first:memory:0",
+            "memory_kind": "identity_memory",
+            "schema_id": "ywe.player_memory_record.v1",
+            "schema_version": "0.1.0",
+            "source_action_trace_ref": "origin:first:action:0",
+            "source_refs": [
+              "qualified:play"
+            ],
+            "visibility_state": "felt"
+          },
+          {
+            "branch_ref": "branch:one",
+            "memory_id": "origin:first:memory:1",
+            "memory_kind": "identity_memory",
+            "schema_id": "ywe.player_memory_record.v1",
+            "schema_version": "0.1.0",
+            "source_action_trace_ref": "origin:first:action:1",
+            "source_refs": [
+              "qualified:play"
+            ],
+            "visibility_state": "felt"
+          },
+          {
+            "branch_ref": "branch:one",
+            "memory_id": "origin:resolve:memory:0",
+            "memory_kind": "identity_memory",
+            "schema_id": "ywe.player_memory_record.v1",
+            "schema_version": "0.1.0",
+            "source_action_trace_ref": "origin:resolve:action:0",
+            "source_refs": [
+              "qualified:play"
+            ],
+            "visibility_state": "felt"
+          }
+        ],
+        "player_id": "player:one",
+        "profile_id": "wrw.origin.v1",
+        "world_id": "world:one"
+      },
+      "kind": "origin",
+      "sha256": "cb05a8f7e92007f515772bdb5373256615451298d66b30b14de7f103633d92c3"
+    },
+    "origin:resolve:action:0": {
+      "document": {
+        "action_kind": "quest_resolution",
+        "action_trace_id": "origin:resolve:action:0",
+        "affected_entity_refs": [
+          "quest:second"
+        ],
+        "branch_ref": "branch:one",
+        "branch_relevance": "contextual",
+        "player_id": "player:one",
+        "resulting_player_state_update_refs": [
+          "update:resolve"
+        ],
+        "schema_id": "ywe.player_action_trace.v1",
+        "schema_version": "0.1.0",
+        "significance": "meaningful",
+        "source_refs": [
+          "evidence:play"
+        ]
+      },
+      "kind": "action",
+      "sha256": "cc32087a187cd1d0e551dc02ff544b01f4ab566e9f3a33e7ed37b99eddf76efe"
+    },
+    "origin:resolve:memory:0": {
+      "document": {
+        "branch_ref": "branch:one",
+        "memory_id": "origin:resolve:memory:0",
+        "memory_kind": "identity_memory",
+        "schema_id": "ywe.player_memory_record.v1",
+        "schema_version": "0.1.0",
+        "source_action_trace_ref": "origin:resolve:action:0",
+        "source_refs": [
+          "qualified:play"
+        ],
+        "visibility_state": "felt"
+      },
+      "kind": "memory",
+      "sha256": "5b0cafd65ef26c2d200e219bd605154927f58c079a92292934c655caeb431594"
+    },
+    "pattern_vector.player.initial": {
+      "document": {
+        "category": "pattern_vector_refs",
+        "source_sha256": "34b8fc0725e4a6d153e1908bc78dbd762192a21241aaad18e12d01eb3cfed5e5",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "8ff7f174f0542a9917e4d37c21c76a205e69e58cba6a8eebe15f0d591d70e37e"
+    },
+    "perception_state.current": {
+      "document": {
+        "category": "perception_state_ref",
+        "source_sha256": "6ede013409c7d6bb66f54c0ff962ce446c2db931766deca6118fdf0f4d07911f",
+        "subject_id": "player:one",
+        "truth_scope": "player_perception"
+      },
+      "kind": "reference",
+      "sha256": "dd4f46bf9561011587e7c361e986ee211e87b7560e9573185ea76f14b52bfa30"
+    },
+    "physical": {
+      "document": {
+        "category": "active_realm_form",
+        "source_sha256": "4f89525e3b45875e51ad9369c508a3fadafdf334bc802f6a832e7c0ebc484c3b",
+        "subject_id": "branch:one",
+        "truth_scope": "leaf_branch_state"
+      },
+      "kind": "reference",
+      "sha256": "6c831f0ccca16ad0097584224ddcd9b6cad4365767936d93bf779cb7e4c0d086"
+    },
+    "plane:stirring": {
+      "document": {
+        "dominant_plane_refs": [],
+        "planes": {
+          "P1_Physical": {
+            "pressure_state": "latent",
+            "score_q6": 10000,
+            "source_refs": [
+              "qualified:creation"
+            ],
+            "trend": "stable"
+          },
+          "P2_Etheric": {
+            "pressure_state": "latent",
+            "score_q6": 10000,
+            "source_refs": [
+              "qualified:creation"
+            ],
+            "trend": "stable"
+          },
+          "P3_Astral": {
+            "pressure_state": "latent",
+            "score_q6": 10000,
+            "source_refs": [
+              "qualified:creation"
+            ],
+            "trend": "stable"
+          },
+          "P4_Mental": {
+            "pressure_state": "rising",
+            "score_q6": 20000,
+            "source_refs": [
+              "qualified:play"
+            ],
+            "trend": "increasing"
+          },
+          "P5_Causal": {
+            "pressure_state": "latent",
+            "score_q6": 10000,
+            "source_refs": [
+              "qualified:creation"
+            ],
+            "trend": "stable"
+          },
+          "P6_Celestial": {
+            "pressure_state": "latent",
+            "score_q6": 10000,
+            "source_refs": [
+              "qualified:creation"
+            ],
+            "trend": "stable"
+          },
+          "P7_Shadow": {
+            "pressure_state": "latent",
+            "score_q6": 10000,
+            "source_refs": [
+              "qualified:creation"
+            ],
+            "trend": "stable"
+          },
+          "P8_Void": {
+            "pressure_state": "latent",
+            "score_q6": 10000,
+            "source_refs": [
+              "qualified:creation"
+            ],
+            "trend": "stable"
+          },
+          "P9_Divine_Core": {
+            "pressure_state": "latent",
+            "score_q6": 10000,
+            "source_refs": [
+              "qualified:creation"
+            ],
+            "trend": "stable"
+          }
+        },
+        "schema_id": "ywe.plane_attunement_state.v2",
+        "schema_version": "2.0.0",
+        "source_refs": [
+          "qualified:creation",
+          "qualified:play"
+        ],
+        "threshold_access_flags": []
+      },
+      "kind": "plane",
+      "sha256": "a7c6a6c6250062e727122b52e5ab82598c5ce016f690fc030dff030f514d6f8d"
+    },
+    "quest:first": {
+      "document": {
+        "category": "active_quest_refs",
+        "source_sha256": "fb9f0da7b01a268148338ec94fc377770879ae65c544f2a2d10417045ba8cc4c",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "365484b7b05b6434a1daa9ca90af788f36533f2b3ad36b2ed09d33d725cd2965"
+    },
+    "quest:second": {
+      "document": {
+        "category": "active_quest_refs",
+        "source_sha256": "26d5d069586cb2c6a679be7080a5d5167959a2f0888387bf136fc35cb2711cca",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "d39444b03727562652f03f074199760ed94862a6fa429e744c35000a7e41a9f1"
+    },
+    "raven:initial": {
+      "document": {
+        "absence_rule": "explicit_consequence_required",
+        "bound_player_identity": "identity:mortal",
+        "companion_id": "floki_hrafen_vilgerson",
+        "display_name": "Floki",
+        "identity_layers": [
+          "player_bound_companion"
+        ],
+        "presence_rule": "always_with_player",
+        "primary_functions": [
+          "threshold_recognition"
+        ],
+        "runtime_status": "active",
+        "schema_id": "raven_companion_state_schema",
+        "source_refs": [
+          "qualified:creation"
+        ],
+        "version": "1.0.0"
+      },
+      "kind": "raven",
+      "sha256": "6404c554a36d0d13d702344aa160865c6c7d97cf59e1e7563cda8c171e424a2e"
+    },
+    "tension:first": {
+      "document": {
+        "category": "unresolved_tension_refs",
+        "source_sha256": "d7ee00b32f161b11fc9f210afb96827ef55f8feaadd3e91a730c5a8baf5c5c6c",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "27de66beca61edfdf07a04bc62a4e337c0bf2e0fdfa5604960e42a8aa57182a7"
+    },
+    "tension:second": {
+      "document": {
+        "category": "unresolved_tension_refs",
+        "source_sha256": "d22e6b87be256c60d71c8eef401b8d0a6b13c71c90074c4549f53e2fd217a798",
+        "subject_id": "player:one",
+        "truth_scope": "player_state"
+      },
+      "kind": "reference",
+      "sha256": "24511e654726ee8b2e91a9064923264ab1d1a25cf666036161a4f29e31abfa80"
+    },
+    "wolf:initial": {
+      "document": {
+        "dark_wolf": {
+          "resonance_q6": 10000,
+          "signal_state": "latent",
+          "source_refs": [
+            "qualified:creation"
+          ]
+        },
+        "forbidden": [
+          "wolf_morality_meter"
+        ],
+        "schema_id": "ywe.wolf_resonance_summary.v2",
+        "schema_version": "2.0.0",
+        "source_refs": [
+          "qualified:creation"
+        ],
+        "twin_coherence": {
+          "coherence_q6": 500000,
+          "coherence_state": "balanced",
+          "source_refs": [
+            "qualified:creation"
+          ]
+        },
+        "white_wolf": {
+          "resonance_q6": 10000,
+          "signal_state": "latent",
+          "source_refs": [
+            "qualified:creation"
+          ]
+        }
+      },
+      "kind": "wolf",
+      "sha256": "816701e0d0ed126fc786b098277555565e12decf0a6336f3fbb7722e45f8bc3b"
+    }
+  },
+  "spine": {
+    "ability_state_refs": [
+      "ability:latent"
+    ],
+    "asp_resilience": {
+      "asp_diagnostic_refs": [
+        "diagnostic:initial"
+      ],
+      "recovery_status": "none",
+      "schema_version_history": [
+        "2.0.0"
+      ],
+      "state_integrity_status": "valid"
+    },
+    "authority": {
+      "ash_pattern_system_role": "YWE component for diagnostics, recovery, containment, conformance, pattern integrity, code resilience, and patch/update stability",
+      "cosmology_foundation": "ASH Cosmological Model",
+      "engine": "Yggdrasil World Engine",
+      "game_layer": "Where Ravens Wait: Eternal Reckoning"
+    },
+    "current_leaf_branch_ref": "branch:one",
+    "current_location_ref": "location:one",
+    "forbidden": [
+      "mutating_base_cosmology",
+      "pre_generated_branch_tree",
+      "full_celestial_identity_at_character_creation",
+      "wolf_morality_meter",
+      "bloodline_static_class_lock",
+      "plane_attunement_static_class_lock",
+      "feature_engine_direct_mutation",
+      "ash_pattern_system_as_top_level_cosmology"
+    ],
+    "identity": {
+      "celestial_identity_state_ref": "celestial:suspected",
+      "mortal_identity_ref": "identity:mortal"
+    },
+    "manifestation_links": {
+      "artifact_binding_refs": [],
+      "creature_encounter_refs": [],
+      "myth_participation_refs": [],
+      "myth_seed_refs": [],
+      "perception_overlay_refs": [],
+      "prophecy_pressure_refs": []
+    },
+    "memory_refs": {
+      "discovery_refs": [],
+      "major_choice_refs": [],
+      "oath_refs": [],
+      "player_action_trace_refs": [
+        "origin:first:action:0",
+        "origin:first:action:1",
+        "origin:resolve:action:0"
+      ],
+      "player_memory_record_refs": [
+        "origin:first:memory:0",
+        "origin:first:memory:1",
+        "origin:resolve:memory:0"
+      ],
+      "quest_history_refs": []
+    },
+    "origin_progression_state_ref": "origin:one",
+    "player_id": "player:one",
+    "progression_refs": {
+      "ability_pressure_refs": [],
+      "identity_reveal_pressure_refs": [],
+      "progression_signal_refs": [],
+      "threshold_access_refs": []
+    },
+    "relationship_links": {
+      "faction_claim_exposure_refs": [],
+      "faction_standing_refs": [],
+      "npc_relationship_refs": []
+    },
+    "runtime_context": {
+      "active_quest_refs": [
+        "quest:first"
+      ],
+      "active_realm_form": "physical",
+      "ash_provenance": {
+        "axiom_diagnostic_refs": [
+          "axiom_diagnostic.initial"
+        ],
+        "cosmic_pattern_snapshot_ref": "cosmic_pattern_snapshot.initial",
+        "diagnostic_ref": "diagnostic.initial",
+        "existence_potential_ref": "existence_potential.player.initial",
+        "generation_plan_ref": "generation_plan.initial",
+        "pattern_vector_refs": [
+          "pattern_vector.player.initial"
+        ],
+        "source_ash_refs": [
+          "ASH_Cosmological_Model"
+        ]
+      },
+      "authority_boundary": {
+        "can_influence_generation_context": true,
+        "host_adapter_may_author": false,
+        "may_mutate_ash_math": false,
+        "may_mutate_base_world_ontology": false,
+        "may_rewrite_shared_world_truth": false
+      },
+      "awakening_fragments": [],
+      "branch_event_refs": [],
+      "branch_generation_context_refs": [
+        "branch_generation_context.initial"
+      ],
+      "celestial_memory": "suspected",
+      "completed_resolution_refs": [],
+      "faction_stance_refs": [],
+      "generation_context_refs": [
+        "generation:one"
+      ],
+      "identity_reveal_policy": "reveal_through_play",
+      "last_player_action_trace_ref": "origin:resolve:action:0",
+      "narrative_memory_refs": [
+        "legacy:memory:one"
+      ],
+      "origin": "mortal",
+      "perception_state_ref": "perception_state.current",
+      "phase_confidence": {
+        "coefficient": "875",
+        "exponent": -3
+      },
+      "relationship_state_refs": [],
+      "sequence_id": 13,
+      "state_id": "player_runtime_state.current",
+      "unresolved_tension_refs": [
+        "tension:second",
+        "tension:first"
+      ],
+      "update_policy": {
+        "append_first_memory": true,
+        "branch_event_required_for_branch_mutation": true,
+        "diagnostic_noop_allowed": true,
+        "requires_delta": true
+      },
+      "wolf_interpretation": "symbiotic_attractors_not_morality_meter"
+    },
+    "schema_id": "ywe.player_runtime_state.v3",
+    "schema_version": "3.0.0",
+    "state_lifecycle": "continuing",
+    "state_refs": {
+      "bloodline_resonance_state_ref": "bloodline:initial",
+      "companion_reward_delta_refs": [],
+      "plane_attunement_state_ref": "plane:stirring",
+      "player_agent_state_ref": "agent:initial",
+      "player_branch_history_ref": "history:initial",
+      "raven_companion_state_ref": "raven:initial",
+      "wolf_manifestation_event_refs": [],
+      "wolf_resonance_summary_ref": "wolf:initial"
+    },
+    "update_control": {
+      "accepted_update_packet_refs": [
+        "update:first",
+        "update:resolve"
+      ],
+      "allowed_update_packet_schema": "ywe.player_state_update_packet.v3",
+      "pending_update_packet_refs": [],
+      "rejected_update_packet_refs": [],
+      "requires_update_packet": true
+    },
+    "world_links": {
+      "diagnostic_noop_refs": [],
+      "future_generation_bias_refs": [],
+      "location_mutation_refs": [],
+      "location_state_refs": [],
+      "worldstate_delta_refs": []
+    }
+  },
+  "world_id": "world:one"
+}

@@ -1,0 +1,344 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_origin_imported_state_schema.json",
+  "title": "Imported origin progression state",
+  "x-ywe-requirement-id": "YWE-REQ-0057",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "world_id",
+    "player_id",
+    "profile_id",
+    "creation",
+    "current_phase",
+    "actions",
+    "memories",
+    "advances",
+    "import_baseline"
+  ],
+  "properties": {
+    "format": {
+      "const": "ywe.origin_progression.v2"
+    },
+    "world_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "player_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "creation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mortal_identity_ref",
+        "identity_status",
+        "provenance"
+      ],
+      "properties": {
+        "mortal_identity_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        },
+        "identity_status": {
+          "const": "veiled"
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "cosmic_pattern_snapshot_ref",
+            "diagnostic_ref",
+            "generation_plan_ref",
+            "source_ash_refs"
+          ],
+          "properties": {
+            "cosmic_pattern_snapshot_ref": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "not": {
+                "pattern": "[\\r\\n]"
+              }
+            },
+            "diagnostic_ref": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "not": {
+                "pattern": "[\\r\\n]"
+              }
+            },
+            "generation_plan_ref": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "not": {
+                "pattern": "[\\r\\n]"
+              }
+            },
+            "source_ash_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "not": {
+                  "pattern": "[\\r\\n]"
+                }
+              },
+              "minItems": 1,
+              "maxItems": 65,
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    },
+    "current_phase": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "actions": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 128,
+      "items": {
+        "allOf": [
+          {
+            "$ref": "https://ywe.local/schemas/player_action_trace_schema.json"
+          },
+          {
+            "properties": {
+              "schema_version": {
+                "const": "0.1.0"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "memories": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 128,
+      "items": {
+        "allOf": [
+          {
+            "$ref": "https://ywe.local/schemas/player_memory_record_schema.json"
+          },
+          {
+            "properties": {
+              "schema_version": {
+                "const": "0.1.0"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "advances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "request_ref",
+          "evidence_ref",
+          "from_phase",
+          "to_phase",
+          "action_refs"
+        ],
+        "properties": {
+          "request_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "not": {
+              "pattern": "[\\r\\n]"
+            }
+          },
+          "evidence_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "not": {
+              "pattern": "[\\r\\n]"
+            }
+          },
+          "from_phase": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "not": {
+              "pattern": "[\\r\\n]"
+            }
+          },
+          "to_phase": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "not": {
+              "pattern": "[\\r\\n]"
+            }
+          },
+          "action_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "not": {
+                "pattern": "[\\r\\n]"
+              }
+            },
+            "minItems": 1,
+            "maxItems": 16,
+            "uniqueItems": true
+          }
+        }
+      },
+      "minItems": 0,
+      "maxItems": 128
+    },
+    "import_baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_sha256",
+        "import_anchor",
+        "consumed_action_refs",
+        "provenance"
+      ],
+      "properties": {
+        "source_sha256": {
+          "type": "string",
+          "minLength": 64,
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        },
+        "import_anchor": {
+          "type": "string",
+          "minLength": 64,
+          "maxLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        },
+        "consumed_action_refs": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "not": {
+              "pattern": "[\\r\\n]"
+            }
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "cosmic_pattern_snapshot_ref",
+            "diagnostic_ref",
+            "generation_plan_ref",
+            "source_ash_refs"
+          ],
+          "properties": {
+            "cosmic_pattern_snapshot_ref": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "not": {
+                "pattern": "[\\r\\n]"
+              }
+            },
+            "diagnostic_ref": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "not": {
+                "pattern": "[\\r\\n]"
+              }
+            },
+            "generation_plan_ref": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "not": {
+                "pattern": "[\\r\\n]"
+              }
+            },
+            "source_ash_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "not": {
+                  "pattern": "[\\r\\n]"
+                }
+              },
+              "minItems": 1,
+              "maxItems": 65,
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

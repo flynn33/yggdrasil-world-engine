@@ -1,0 +1,835 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json",
+  "title": "M4 imported player runtime state spine",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "state_lifecycle",
+    "authority",
+    "player_id",
+    "current_leaf_branch_ref",
+    "identity",
+    "state_refs",
+    "memory_refs",
+    "world_links",
+    "asp_resilience",
+    "update_control",
+    "forbidden",
+    "origin_progression_state_ref",
+    "ability_state_refs"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "state_lifecycle"
+        ],
+        "properties": {
+          "state_lifecycle": {
+            "const": "initial"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/initial_player_runtime_state"
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "state_lifecycle"
+        ],
+        "properties": {
+          "state_lifecycle": {
+            "const": "continuing"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/continuing_player_runtime_state"
+      }
+    }
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.player_runtime_state.v3"
+    },
+    "schema_version": {
+      "const": "3.0.0"
+    },
+    "state_lifecycle": {
+      "type": "string",
+      "enum": [
+        "initial",
+        "continuing"
+      ]
+    },
+    "authority": {
+      "type": "object",
+      "required": [
+        "game_layer",
+        "engine",
+        "cosmology_foundation",
+        "ash_pattern_system_role"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "game_layer": {
+          "const": "Where Ravens Wait: Eternal Reckoning"
+        },
+        "engine": {
+          "const": "Yggdrasil World Engine"
+        },
+        "cosmology_foundation": {
+          "const": "ASH Cosmological Model"
+        },
+        "ash_pattern_system_role": {
+          "const": "YWE component for diagnostics, recovery, containment, conformance, pattern integrity, code resilience, and patch/update stability"
+        }
+      }
+    },
+    "player_id": {
+      "type": "string"
+    },
+    "current_leaf_branch_ref": {
+      "type": "string"
+    },
+    "current_location_ref": {
+      "type": "string"
+    },
+    "identity": {
+      "type": "object"
+    },
+    "state_refs": {
+      "type": "object",
+      "required": [
+        "player_agent_state_ref",
+        "plane_attunement_state_ref",
+        "bloodline_resonance_state_ref",
+        "wolf_resonance_summary_ref",
+        "player_branch_history_ref",
+        "raven_companion_state_ref"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "player_agent_state_ref": {
+          "type": "string"
+        },
+        "plane_attunement_state_ref": {
+          "type": "string"
+        },
+        "bloodline_resonance_state_ref": {
+          "type": "string"
+        },
+        "wolf_resonance_summary_ref": {
+          "type": "string"
+        },
+        "raven_companion_state_ref": {
+          "type": "string"
+        },
+        "wolf_manifestation_event_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "companion_reward_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "player_branch_history_ref": {
+          "type": "string"
+        },
+        "pattern_vector_ref": {
+          "type": "string"
+        },
+        "existence_potential_ref": {
+          "type": "string"
+        }
+      }
+    },
+    "memory_refs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "player_action_trace_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "player_memory_record_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "quest_history_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "major_choice_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "oath_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "discovery_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    },
+    "progression_refs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "progression_signal_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "ability_pressure_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "identity_reveal_pressure_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "threshold_access_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    },
+    "world_links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "worldstate_delta_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "location_state_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "location_mutation_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "future_generation_bias_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "diagnostic_noop_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    },
+    "relationship_links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "npc_relationship_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "faction_standing_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "faction_claim_exposure_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    },
+    "manifestation_links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "artifact_binding_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "creature_encounter_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "myth_participation_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "myth_seed_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "prophecy_pressure_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "perception_overlay_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    },
+    "asp_resilience": {
+      "type": "object",
+      "required": [
+        "state_integrity_status",
+        "asp_diagnostic_refs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "state_integrity_status": {
+          "type": "string",
+          "enum": [
+            "valid",
+            "requires_review",
+            "recoverable",
+            "contained",
+            "invalid"
+          ]
+        },
+        "asp_diagnostic_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "last_valid_snapshot_ref": {
+          "type": "string"
+        },
+        "recovery_status": {
+          "type": "string",
+          "enum": [
+            "none",
+            "normalization_available",
+            "rollback_available",
+            "contained_for_review",
+            "rejected_update"
+          ],
+          "default": "none"
+        },
+        "schema_version_history": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    },
+    "update_control": {
+      "type": "object",
+      "required": [
+        "requires_update_packet",
+        "allowed_update_packet_schema"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "requires_update_packet": {
+          "const": true
+        },
+        "allowed_update_packet_schema": {
+          "const": "ywe.player_state_update_packet.v3"
+        },
+        "pending_update_packet_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "accepted_update_packet_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "rejected_update_packet_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "mutating_base_cosmology",
+        "pre_generated_branch_tree",
+        "full_celestial_identity_at_character_creation",
+        "wolf_morality_meter",
+        "bloodline_static_class_lock",
+        "plane_attunement_static_class_lock",
+        "feature_engine_direct_mutation",
+        "ash_pattern_system_as_top_level_cosmology"
+      ]
+    },
+    "origin_progression_state_ref": {
+      "type": "string"
+    },
+    "ability_state_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "runtime_context": {
+      "$ref": "#/$defs/runtime_context"
+    }
+  },
+  "$defs": {
+    "initial_player_runtime_state": {
+      "title": "Initial mortal veiled player runtime state",
+      "required": [
+        "state_lifecycle",
+        "identity"
+      ],
+      "properties": {
+        "state_lifecycle": {
+          "const": "initial"
+        },
+        "identity": {
+          "$ref": "#/$defs/initial_identity"
+        }
+      }
+    },
+    "continuing_player_runtime_state": {
+      "title": "Continuing player runtime state",
+      "required": [
+        "state_lifecycle",
+        "identity"
+      ],
+      "properties": {
+        "state_lifecycle": {
+          "const": "continuing"
+        },
+        "identity": {
+          "$ref": "#/$defs/continuing_identity"
+        }
+      }
+    },
+    "initial_identity": {
+      "title": "Initial player identity",
+      "type": "object",
+      "required": [
+        "mortal_identity_ref",
+        "celestial_identity_state_ref",
+        "celestial_identity_initial_state"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "mortal_identity_ref": {
+          "type": "string"
+        },
+        "celestial_identity_state_ref": {
+          "type": "string"
+        },
+        "celestial_identity_initial_state": {
+          "const": "veiled"
+        }
+      }
+    },
+    "continuing_identity": {
+      "title": "Continuing player identity",
+      "type": "object",
+      "required": [
+        "mortal_identity_ref",
+        "celestial_identity_state_ref"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "mortal_identity_ref": {
+          "type": "string"
+        },
+        "celestial_identity_state_ref": {
+          "type": "string"
+        }
+      }
+    },
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*(?![\\s\\S])"
+    },
+    "phase_confidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "coefficient",
+        "exponent"
+      ],
+      "properties": {
+        "coefficient": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^(0|-?[1-9]([0-9]*[1-9])?)(?![\\s\\S])"
+        },
+        "exponent": {
+          "type": "integer",
+          "minimum": -10000,
+          "maximum": 10000
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "coefficient": {
+                "const": "0"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "exponent": {
+                "const": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "historical_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ],
+      "properties": {
+        "cosmic_pattern_snapshot_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "diagnostic_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "generation_plan_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 1,
+          "maxItems": 65,
+          "uniqueItems": true
+        },
+        "axiom_diagnostic_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "pattern_vector_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "existence_potential_ref": {
+          "$ref": "#/$defs/identifier"
+        }
+      }
+    },
+    "runtime_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [],
+      "properties": {
+        "state_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sequence_id": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "phase_confidence": {
+          "$ref": "#/$defs/phase_confidence"
+        },
+        "identity_reveal_policy": {
+          "const": "reveal_through_play"
+        },
+        "origin": {
+          "const": "mortal"
+        },
+        "celestial_memory": {
+          "enum": [
+            "veiled",
+            "suspected",
+            "fragmented",
+            "named_fragment",
+            "partial_revelation",
+            "coherent_revelation",
+            "integrated"
+          ]
+        },
+        "active_realm_form": {
+          "$ref": "#/$defs/identifier"
+        },
+        "wolf_interpretation": {
+          "const": "symbiotic_attractors_not_morality_meter"
+        },
+        "branch_generation_context_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "branch_event_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "awakening_fragments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "narrative_memory_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "relationship_state_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "faction_stance_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "unresolved_tension_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "active_quest_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "completed_resolution_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "generation_context_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 0,
+          "maxItems": 128,
+          "uniqueItems": true
+        },
+        "perception_state_ref": {
+          "$ref": "#/$defs/identifier"
+        },
+        "last_player_action_trace_ref": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "authority_boundary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "can_influence_generation_context",
+            "may_mutate_ash_math",
+            "may_rewrite_shared_world_truth",
+            "may_mutate_base_world_ontology",
+            "host_adapter_may_author"
+          ],
+          "properties": {
+            "can_influence_generation_context": {
+              "type": "boolean"
+            },
+            "may_mutate_ash_math": {
+              "const": false
+            },
+            "may_rewrite_shared_world_truth": {
+              "const": false
+            },
+            "may_mutate_base_world_ontology": {
+              "const": false
+            },
+            "host_adapter_may_author": {
+              "const": false
+            }
+          }
+        },
+        "ash_provenance": {
+          "$ref": "#/$defs/historical_provenance"
+        },
+        "update_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requires_delta",
+            "append_first_memory",
+            "diagnostic_noop_allowed",
+            "branch_event_required_for_branch_mutation"
+          ],
+          "properties": {
+            "requires_delta": {
+              "const": true
+            },
+            "append_first_memory": {
+              "const": true
+            },
+            "diagnostic_noop_allowed": {
+              "type": "boolean"
+            },
+            "branch_event_required_for_branch_mutation": {
+              "const": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-ywe-requirement-id": "YWE-REQ-0057"
+}
