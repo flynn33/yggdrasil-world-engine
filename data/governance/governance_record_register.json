@@ -2222,12 +2222,44 @@
         "docs/architecture/m4_commit_journal_contract.md",
         "docs/architecture/shared_truth_vs_branch_truth_contract.md"
       ]
+    },
+    {
+      "id": "ADR-0046",
+      "record_type": "decision",
+      "title": "Version resonance records with exact decimal-to-integer migration",
+      "status": "accepted",
+      "recorded_on": "2026-10-14",
+      "owner_role": "State and synchronization maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt exact source/target migration and bounded reference tooling before dependent implementation under authorized M4 development.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Legacy plane, bloodline and wolf records contain fractional scores, while the scoped journal admits only exact integers.",
+      "decision": "Add explicit v2 schema identities with integer millionths, schema-bound migration plans and the neutral core/state_migration.py reference oracle with tests/test_m4_state_migration.py. Parse decimal tokens exactly and reject unsupported precision; retain existing v1 records and schemas.",
+      "rationale": "Explicit representation changes preserve values and provenance without binary float rounding, guessed defaults or silent source replacement.",
+      "consequences": [
+        "Only the three named resonance record formats are migrated; full player/branch and archive migration remain open.",
+        "Existing jsonschema dependency is used for explicit offline schema validation; no service or new dependency is introduced.",
+        "The codec grants no world/player admission authority and no M4 completion. Single-executor review only."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0054",
+        "YWE-REQ-0052"
+      ],
+      "source_refs": [
+        "docs/architecture/m4_state_migration_contract.md",
+        "docs/architecture/player_state_asp_resilience_contract.md",
+        "docs/architecture/plane_attunement_runtime_contract.md",
+        "docs/architecture/bloodline_resonance_runtime_contract.md"
+      ]
     }
   ],
   "summary": {
-    "total_records": 62,
-    "architecture_decisions": 45,
-    "accepted_decisions": 43,
+    "total_records": 63,
+    "architecture_decisions": 46,
+    "accepted_decisions": 44,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

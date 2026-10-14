@@ -25262,6 +25262,84 @@
         "YWE-REQ-0053"
       ],
       "description": "Format fixture from actual observer composition; executable tests independently establish owner and replay behavior."
+    },
+    {
+      "fixture_id": "m4.migration.plane_attunement_state.receipt",
+      "path": "examples/state_journal/plane_attunement_state_migration.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/state_migration_result_schema.json",
+      "category": "migration",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0054"
+      ],
+      "description": "Exact v1-to-v2 record migration; source_sha256 binds the legacy fixture bytes with LF line endings, verified by executable migration tests."
+    },
+    {
+      "fixture_id": "m4.migration.plane_attunement_state.target",
+      "path": "examples/state_journal/plane_attunement_state_migration.example.json",
+      "instance_pointer": "/target",
+      "schema_id": "https://ywe.local/schemas/m4_plane_attunement_state_schema.json",
+      "category": "migration",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0054"
+      ],
+      "description": "Exact v1-to-v2 record migration; source_sha256 binds the legacy fixture bytes with LF line endings, verified by executable migration tests."
+    },
+    {
+      "fixture_id": "m4.migration.bloodline_resonance_state.receipt",
+      "path": "examples/state_journal/bloodline_resonance_state_migration.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/state_migration_result_schema.json",
+      "category": "migration",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0054"
+      ],
+      "description": "Exact v1-to-v2 record migration; source_sha256 binds the legacy fixture bytes with LF line endings, verified by executable migration tests."
+    },
+    {
+      "fixture_id": "m4.migration.bloodline_resonance_state.target",
+      "path": "examples/state_journal/bloodline_resonance_state_migration.example.json",
+      "instance_pointer": "/target",
+      "schema_id": "https://ywe.local/schemas/m4_bloodline_resonance_state_schema.json",
+      "category": "migration",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0054"
+      ],
+      "description": "Exact v1-to-v2 record migration; source_sha256 binds the legacy fixture bytes with LF line endings, verified by executable migration tests."
+    },
+    {
+      "fixture_id": "m4.migration.wolf_resonance_summary.receipt",
+      "path": "examples/state_journal/wolf_resonance_summary_migration.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/state_migration_result_schema.json",
+      "category": "migration",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0054"
+      ],
+      "description": "Exact v1-to-v2 record migration; source_sha256 binds the legacy fixture bytes with LF line endings, verified by executable migration tests."
+    },
+    {
+      "fixture_id": "m4.migration.wolf_resonance_summary.target",
+      "path": "examples/state_journal/wolf_resonance_summary_migration.example.json",
+      "instance_pointer": "/target",
+      "schema_id": "https://ywe.local/schemas/m4_wolf_resonance_summary_schema.json",
+      "category": "migration",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0054"
+      ],
+      "description": "Exact v1-to-v2 record migration; source_sha256 binds the legacy fixture bytes with LF line endings, verified by executable migration tests."
     }
   ]
 }

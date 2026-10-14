@@ -1,7 +1,7 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-52
+**Revision:** planning-53
 **Date:** October 14, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
@@ -2390,3 +2390,60 @@ check. Merge `5a71005` preserves that owner update and the observer implementati
 without conflicts. The README contains both the owner's license text and current
 M4 progress. Derived public-surface hashes were refreshed for the merged content.
 Affected clean repository checks remain required before publication.
+
+
+### 22.2. Observer checkpoint publication
+
+Observer source `57b73bb` passed 62 focused tests in a clean checkout. Its 36
+selected repository checks completed with 33 passes and three failures, all
+traced to the missing schema source reference in YWE-REQ-0053. The corrected
+merged revision `e0e941eea8c4ce2e4b5c83e2246f1badc93be541` passed all seven
+selected roadmap/artifact/fixture/governance/baseline/attribution checks plus
+separately executed M2 validation methods. All source and test implementation
+bytes were unchanged from `57b73bb`; the license/governance change and source
+registration correction were the affected inputs rechecked on `e0e941e`.
+
+Revision `e0e941e` was owner-published to main and the M4 branch using authorized
+bypass, including the merge needed to preserve owner MIT commit `9eefe01`.
+Remote refs and README bytes matched. Wiki `af61f2f612f5636d57cb7dbf7b5977ddf65a5d58`
+projects that source; all 47 pages matched fresh remote readback. Main CI
+`38553080434` is executing exact `e0e941e`; predecessor run `38550875881` is
+executing `ea4c12b`. Neither full-suite result is claimed complete in this record.
+The saved roadmap goal is active and the owner pause is revoked.
+
+## 23. Exact resonance-state migration — October 14, 2026
+
+Current step: verify and publish the exact migration reference implementation.
+YWE-REQ-0054 / ADR-0046 and `docs/architecture/m4_state_migration_contract.md`
+were adopted before dependent code. The source-bound player-state investigation
+identified decimal scores in three legacy record families and the journal's
+integer-only domain. The v2 representation explicitly renames those scores to
+integer millionths and changes schema ID/version; all other fields and v1
+schemas/fixtures are preserved.
+
+The neutral `core/state_migration.py` oracle receives copied plans and standalone
+schemas explicitly, verifies their canonical digests, uses exact Decimal parsing
+and coefficient/exponent conversion, validates both complete records, and emits
+a verifiable source/plan/target receipt. Existing jsonschema 4.25.1 is reused;
+no dependency, disk service or network retrieval is introduced. Profile-specific
+plane and wolf structure stays in migration data and compatibility schemas.
+This is single-executor review, not independent review.
+
+Observed working-tree execution: 79 tests pass across migration, journal,
+perception persistence and platform boundaries. The 23 migration tests include
+all three existing fixtures, full unconverted-field comparison, exact numerical
+boundaries, hostile Decimal arithmetic context, excess-precision rejection,
+source/schema/version mismatch, receipt corruption, atomic journal rejection,
+input/output bounds and replay. An initial oversize test used too small a payload;
+it was corrected to assert source, target and receipt byte lengths at the boundary.
+No codec limit was relaxed. Published migration receipts bind LF source-fixture
+bytes explicitly so Git checkout line-ending conversion cannot change fixture
+identity; the migration API itself hashes the exact bytes supplied by its caller.
+
+Compatibility: three new v2 record schemas, a plan schema and receipt schema;
+existing v1 files remain unchanged. Unsupported precision fails with the source
+retained, never rounded or silently normalized. The representation conversion
+confers no player/world commit authority. Full player admission and progression,
+branch synchronization, archive migration, compensation policy and multiplayer
+remain open. No M4 deliverable, exit or placeholder is closed by this slice.
+Clean committed-tree checks and publication remain to be executed.

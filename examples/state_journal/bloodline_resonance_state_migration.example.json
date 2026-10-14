@@ -1,0 +1,48 @@
+{
+  "format": "ywe.state_migration.v1",
+  "migration_id": "bloodline_resonance_state.v1_to_v2",
+  "plan_sha256": "bf8e0769f30636687cbacbbeba4885c7f5778233cdb3a9c9135afe378635e437",
+  "source_sha256": "17fe8429c540582ad49f99dd9d6cb20bebdab40cbdcded088955095c7d740201",
+  "target_sha256": "84b4fcd59efafc6c217e1763811dca2df226b95c126c79c56ef78d30b81d4f2c",
+  "target": {
+    "schema_id": "ywe.bloodline_resonance_state.v2",
+    "schema_version": "2.0.0",
+    "signals": [
+      {
+        "bloodline_id": "ravenson",
+        "status": "suspected",
+        "stability": "rising",
+        "known_publicly": false,
+        "revealed_to_player": false,
+        "faction_claim_refs": [],
+        "ancestral_memory_refs": [
+          "memory.ravenson.echo_001"
+        ],
+        "source_refs": [
+          "location.ravenfall_gate.thin_veil"
+        ],
+        "score_q6": 420000
+      }
+    ],
+    "dominant_bloodline_refs": [
+      "ravenson"
+    ],
+    "source_refs": [
+      "player_profile.seed",
+      "location.ravenfall_gate"
+    ],
+    "forbidden": [
+      "bloodline_as_static_class_lock",
+      "bloodline_reveal_without_evidence",
+      "faction_claim_as_automatic_truth"
+    ]
+  },
+  "conversions": [
+    {
+      "source_pointer": "/signals/0/score",
+      "target_pointer": "/signals/0/score_q6",
+      "source_decimal": "0.42",
+      "target_q6": 420000
+    }
+  ]
+}

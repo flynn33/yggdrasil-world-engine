@@ -13,6 +13,18 @@ from check_platform_agnosticism import platform_violations
 
 
 class ReferenceBoundaryTests(unittest.TestCase):
+    def test_state_migration_approval_excludes_host_storage_adapters(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            reference = root / "core"
+            reference.mkdir()
+            (reference / "state_migration.py").write_text("# Reference oracle\n", encoding="utf-8")
+            self.assertEqual(([], 1), platform_violations(root))
+            for name in ("state_migration_runtime.py", "state_migration_storage.py"):
+                (reference / name).write_text("# Unapproved neighbor\n", encoding="utf-8")
+            violations, inspected = platform_violations(root)
+            self.assertEqual((len(violations), inspected), (2, 3))
+
     def test_perception_persistence_approval_excludes_storage_and_network_neighbors(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

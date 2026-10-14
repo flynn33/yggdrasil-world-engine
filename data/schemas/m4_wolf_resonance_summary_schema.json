@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_wolf_resonance_summary_schema.json",
+  "title": "M4 exact integer Wolf Resonance Summary",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "white_wolf",
+    "dark_wolf",
+    "twin_coherence",
+    "source_refs",
+    "forbidden"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.wolf_resonance_summary.v2"
+    },
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "white_wolf": {
+      "type": "object",
+      "required": [
+        "resonance_q6",
+        "signal_state",
+        "source_refs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "signal_state": {
+          "type": "string",
+          "enum": [
+            "latent",
+            "active",
+            "dominant",
+            "unstable",
+            "integrated"
+          ]
+        },
+        "function_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "revelation",
+            "harmony",
+            "pattern_visibility"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "resonance_q6": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        }
+      }
+    },
+    "dark_wolf": {
+      "type": "object",
+      "required": [
+        "resonance_q6",
+        "signal_state",
+        "source_refs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "signal_state": {
+          "type": "string",
+          "enum": [
+            "latent",
+            "active",
+            "dominant",
+            "unstable",
+            "integrated"
+          ]
+        },
+        "function_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "memory",
+            "gravity",
+            "containment",
+            "consequence"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "resonance_q6": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        }
+      }
+    },
+    "twin_coherence": {
+      "type": "object",
+      "required": [
+        "coherence_q6",
+        "coherence_state",
+        "source_refs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "coherence_state": {
+          "type": "string",
+          "enum": [
+            "unresolved",
+            "balanced",
+            "asymmetric",
+            "integrating",
+            "fractured",
+            "coherent"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "coherence_q6": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        }
+      }
+    },
+    "recent_wolf_resonance_event_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "wolf_morality_meter",
+        "white_equals_good_dark_equals_evil",
+        "wolf_state_without_source_refs"
+      ]
+    }
+  },
+  "x-ywe-requirement-id": "YWE-REQ-0054"
+}

@@ -1,25 +1,24 @@
 # YWE Session Handoff — M4 Resumed
 
 **Date:** October 14, 2026
-**Record:** Project Record planning-52, sections 20–22.
+**Record:** Project Record planning-53, sections 20–23.
 **Owner instruction:** “I'm unpausing it. You may proceed now.”
-**Current step:** Verify and publish observer-scoped perception persistence; all M4 exits remain open.
-**Completed:** M0–M3 acceptance; M4 activation and journal checkpoint published through `ea4c12b`.
-**Next action:** Finish clean checks for the observer adapter, then continue final player/branch
-admission, migrations, realm/location synchronization and multiplayer protocols.
-**Needed from owner:** Nothing now. The saved roadmap goal now reports active.
+**Current step:** Verify and publish exact resonance-state migration; all M4 exits remain open.
+**Completed:** M0–M3 acceptance; M4 journal and observer persistence published through `e0e941e`.
+**Next action:** Finish migration clean checks, then implement explicit player-state admission,
+origin/progression, branch synchronization and multiplayer contracts.
+**Needed from owner:** Nothing now. The saved roadmap goal is active.
 **Saved at:** This record and the Project Record on `m4/state-protocols`.
 
-Journal source `b28ba82` passed 31 focused tests and 35 of 36 selected repository
-checks; correction `ea4c12b` passed the three checks covering its allocation fix.
-Main CI `38550875881` is running on exact `ea4c12b`. Wiki `d2d64c2` has 47 pages
-verified by remote readback. The observer slice `57b73bb` passes 62 focused and adjacent tests in a clean
-checkout. Its fixture ownership registration was corrected after the repository
-check found the missing schema source reference. Owner MIT licensing commit
-`9eefe01` was merged at `5a71005`; affected clean checks precede publication.
+Observer publication preserved owner MIT license commit `9eefe01`. Its 62 focused
+tests passed on clean `57b73bb`; corrected merged `e0e941e` passed the eight
+affected repository checks. Main CI `38553080434` remains executing on `e0e941e`;
+predecessor `38550875881` remains executing on `ea4c12b`. Wiki `af61f2f` has all
+47 pages verified by remote readback. The migration working tree passes 79
+focused tests; clean committed checks and publication are not predeclared.
 
-The canonical checkout's uncommitted planning drafts remain untouched. Work is
-isolated at the managed `m4-state-protocols` worktree.
+The original canonical-checkout planning drafts remain untouched and their
+saved hashes still match. Work uses the managed M4 worktree.
 Raven Forge v0.7.0 / `87409bc36fb9d4782eab02189adb184f2b3962a7` remains pinned.
 
 ---

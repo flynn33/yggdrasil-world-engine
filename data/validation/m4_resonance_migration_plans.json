@@ -1,0 +1,146 @@
+{
+  "schema_ref": "data/schemas/state_migration_plan_schema.json",
+  "format": "ywe.state_migration_plans.v1",
+  "plans": [
+    {
+      "migration_id": "plane_attunement_state.v1_to_v2",
+      "source_document_id": "https://ywe.local/schemas/plane_attunement_state_schema.json",
+      "target_document_id": "https://ywe.local/schemas/m4_plane_attunement_state_schema.json",
+      "source_schema_id": "ywe.plane_attunement_state.v1",
+      "target_schema_id": "ywe.plane_attunement_state.v2",
+      "source_version": "0.1.0",
+      "target_version": "2.0.0",
+      "source_schema_sha256": "5f77df203e7d679d60a18fa43d0eb0046ec3856237ca8e8eceee30bd1807efb8",
+      "target_schema_sha256": "607124e21609db3935f7be81fa1560dba8568df5eb0815ac7e2e9706c7478eaa",
+      "rules": [
+        {
+          "parent_path": [
+            "planes",
+            "P1_Physical"
+          ],
+          "source_field": "score",
+          "target_field": "score_q6"
+        },
+        {
+          "parent_path": [
+            "planes",
+            "P2_Etheric"
+          ],
+          "source_field": "score",
+          "target_field": "score_q6"
+        },
+        {
+          "parent_path": [
+            "planes",
+            "P3_Astral"
+          ],
+          "source_field": "score",
+          "target_field": "score_q6"
+        },
+        {
+          "parent_path": [
+            "planes",
+            "P4_Mental"
+          ],
+          "source_field": "score",
+          "target_field": "score_q6"
+        },
+        {
+          "parent_path": [
+            "planes",
+            "P5_Causal"
+          ],
+          "source_field": "score",
+          "target_field": "score_q6"
+        },
+        {
+          "parent_path": [
+            "planes",
+            "P6_Celestial"
+          ],
+          "source_field": "score",
+          "target_field": "score_q6"
+        },
+        {
+          "parent_path": [
+            "planes",
+            "P7_Shadow"
+          ],
+          "source_field": "score",
+          "target_field": "score_q6"
+        },
+        {
+          "parent_path": [
+            "planes",
+            "P8_Void"
+          ],
+          "source_field": "score",
+          "target_field": "score_q6"
+        },
+        {
+          "parent_path": [
+            "planes",
+            "P9_Divine_Core"
+          ],
+          "source_field": "score",
+          "target_field": "score_q6"
+        }
+      ]
+    },
+    {
+      "migration_id": "bloodline_resonance_state.v1_to_v2",
+      "source_document_id": "https://ywe.local/schemas/bloodline_resonance_state_schema.json",
+      "target_document_id": "https://ywe.local/schemas/m4_bloodline_resonance_state_schema.json",
+      "source_schema_id": "ywe.bloodline_resonance_state.v1",
+      "target_schema_id": "ywe.bloodline_resonance_state.v2",
+      "source_version": "0.1.0",
+      "target_version": "2.0.0",
+      "source_schema_sha256": "fd6129dc32927eed1c647fa9abebc01e580f22647f4ac0b3fb4fd231e587c261",
+      "target_schema_sha256": "07374104e5d1408378608c29a3e0c8103c1f6fd5c3440851a637423079e7280e",
+      "rules": [
+        {
+          "parent_path": [
+            "signals",
+            "*"
+          ],
+          "source_field": "score",
+          "target_field": "score_q6"
+        }
+      ]
+    },
+    {
+      "migration_id": "wolf_resonance_summary.v1_to_v2",
+      "source_document_id": "https://ywe.local/schemas/wolf_resonance_summary_schema.json",
+      "target_document_id": "https://ywe.local/schemas/m4_wolf_resonance_summary_schema.json",
+      "source_schema_id": "ywe.wolf_resonance_summary.v1",
+      "target_schema_id": "ywe.wolf_resonance_summary.v2",
+      "source_version": "0.1.0",
+      "target_version": "2.0.0",
+      "source_schema_sha256": "20ff028b5c3c1c342ad16e0927f2bed64135e229d8a04672c7772f63583d3de2",
+      "target_schema_sha256": "5acbcfef7e8b4ddbb3a9afdb4722707011f54f6bac3aba48efaf2a04b915bca9",
+      "rules": [
+        {
+          "parent_path": [
+            "white_wolf"
+          ],
+          "source_field": "resonance",
+          "target_field": "resonance_q6"
+        },
+        {
+          "parent_path": [
+            "dark_wolf"
+          ],
+          "source_field": "resonance",
+          "target_field": "resonance_q6"
+        },
+        {
+          "parent_path": [
+            "twin_coherence"
+          ],
+          "source_field": "coherence_score",
+          "target_field": "coherence_q6"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,468 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_plane_attunement_state_schema.json",
+  "title": "M4 exact integer Plane Attunement State",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "planes",
+    "dominant_plane_refs",
+    "source_refs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": {
+      "const": "ywe.plane_attunement_state.v2"
+    },
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "planes": {
+      "type": "object",
+      "required": [
+        "P1_Physical",
+        "P2_Etheric",
+        "P3_Astral",
+        "P4_Mental",
+        "P5_Causal",
+        "P6_Celestial",
+        "P7_Shadow",
+        "P8_Void",
+        "P9_Divine_Core"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "P1_Physical": {
+          "type": "object",
+          "required": [
+            "score_q6",
+            "pressure_state",
+            "trend",
+            "source_refs"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "pressure_state": {
+              "type": "string",
+              "enum": [
+                "dormant",
+                "latent",
+                "rising",
+                "dominant",
+                "unstable",
+                "integrated"
+              ]
+            },
+            "trend": {
+              "type": "string",
+              "enum": [
+                "stable",
+                "increasing",
+                "decreasing",
+                "volatile"
+              ]
+            },
+            "source_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "score_q6": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
+            }
+          }
+        },
+        "P2_Etheric": {
+          "type": "object",
+          "required": [
+            "score_q6",
+            "pressure_state",
+            "trend",
+            "source_refs"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "pressure_state": {
+              "type": "string",
+              "enum": [
+                "dormant",
+                "latent",
+                "rising",
+                "dominant",
+                "unstable",
+                "integrated"
+              ]
+            },
+            "trend": {
+              "type": "string",
+              "enum": [
+                "stable",
+                "increasing",
+                "decreasing",
+                "volatile"
+              ]
+            },
+            "source_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "score_q6": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
+            }
+          }
+        },
+        "P3_Astral": {
+          "type": "object",
+          "required": [
+            "score_q6",
+            "pressure_state",
+            "trend",
+            "source_refs"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "pressure_state": {
+              "type": "string",
+              "enum": [
+                "dormant",
+                "latent",
+                "rising",
+                "dominant",
+                "unstable",
+                "integrated"
+              ]
+            },
+            "trend": {
+              "type": "string",
+              "enum": [
+                "stable",
+                "increasing",
+                "decreasing",
+                "volatile"
+              ]
+            },
+            "source_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "score_q6": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
+            }
+          }
+        },
+        "P4_Mental": {
+          "type": "object",
+          "required": [
+            "score_q6",
+            "pressure_state",
+            "trend",
+            "source_refs"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "pressure_state": {
+              "type": "string",
+              "enum": [
+                "dormant",
+                "latent",
+                "rising",
+                "dominant",
+                "unstable",
+                "integrated"
+              ]
+            },
+            "trend": {
+              "type": "string",
+              "enum": [
+                "stable",
+                "increasing",
+                "decreasing",
+                "volatile"
+              ]
+            },
+            "source_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "score_q6": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
+            }
+          }
+        },
+        "P5_Causal": {
+          "type": "object",
+          "required": [
+            "score_q6",
+            "pressure_state",
+            "trend",
+            "source_refs"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "pressure_state": {
+              "type": "string",
+              "enum": [
+                "dormant",
+                "latent",
+                "rising",
+                "dominant",
+                "unstable",
+                "integrated"
+              ]
+            },
+            "trend": {
+              "type": "string",
+              "enum": [
+                "stable",
+                "increasing",
+                "decreasing",
+                "volatile"
+              ]
+            },
+            "source_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "score_q6": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
+            }
+          }
+        },
+        "P6_Celestial": {
+          "type": "object",
+          "required": [
+            "score_q6",
+            "pressure_state",
+            "trend",
+            "source_refs"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "pressure_state": {
+              "type": "string",
+              "enum": [
+                "dormant",
+                "latent",
+                "rising",
+                "dominant",
+                "unstable",
+                "integrated"
+              ]
+            },
+            "trend": {
+              "type": "string",
+              "enum": [
+                "stable",
+                "increasing",
+                "decreasing",
+                "volatile"
+              ]
+            },
+            "source_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "score_q6": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
+            }
+          }
+        },
+        "P7_Shadow": {
+          "type": "object",
+          "required": [
+            "score_q6",
+            "pressure_state",
+            "trend",
+            "source_refs"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "pressure_state": {
+              "type": "string",
+              "enum": [
+                "dormant",
+                "latent",
+                "rising",
+                "dominant",
+                "unstable",
+                "integrated"
+              ]
+            },
+            "trend": {
+              "type": "string",
+              "enum": [
+                "stable",
+                "increasing",
+                "decreasing",
+                "volatile"
+              ]
+            },
+            "source_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "score_q6": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
+            }
+          }
+        },
+        "P8_Void": {
+          "type": "object",
+          "required": [
+            "score_q6",
+            "pressure_state",
+            "trend",
+            "source_refs"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "pressure_state": {
+              "type": "string",
+              "enum": [
+                "dormant",
+                "latent",
+                "rising",
+                "dominant",
+                "unstable",
+                "integrated"
+              ]
+            },
+            "trend": {
+              "type": "string",
+              "enum": [
+                "stable",
+                "increasing",
+                "decreasing",
+                "volatile"
+              ]
+            },
+            "source_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "score_q6": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
+            }
+          }
+        },
+        "P9_Divine_Core": {
+          "type": "object",
+          "required": [
+            "score_q6",
+            "pressure_state",
+            "trend",
+            "source_refs"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "pressure_state": {
+              "type": "string",
+              "enum": [
+                "dormant",
+                "latent",
+                "rising",
+                "dominant",
+                "unstable",
+                "integrated"
+              ]
+            },
+            "trend": {
+              "type": "string",
+              "enum": [
+                "stable",
+                "increasing",
+                "decreasing",
+                "volatile"
+              ]
+            },
+            "source_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "score_q6": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
+            }
+          }
+        }
+      }
+    },
+    "dominant_plane_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "threshold_access_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "forbidden": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "fixed_plane_class",
+        "plane_attunement_without_provenance",
+        "plane_attunement_mutating_base_ontology"
+      ]
+    }
+  },
+  "x-ywe-requirement-id": "YWE-REQ-0054"
+}

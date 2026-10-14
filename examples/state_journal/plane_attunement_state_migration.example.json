@@ -1,0 +1,157 @@
+{
+  "format": "ywe.state_migration.v1",
+  "migration_id": "plane_attunement_state.v1_to_v2",
+  "plan_sha256": "1309611755b6767050cbbe1951fd2808b2b54531638e61c50f1402f642aca582",
+  "source_sha256": "d0f2ac48024184eb28fef1f5aa72e6243eb1aefe027588450b1d3831f69e7e0c",
+  "target_sha256": "9beaacc122ace6929387afd31c486e98b2084c58221c0006f959db3bfef16ee1",
+  "target": {
+    "schema_id": "ywe.plane_attunement_state.v2",
+    "schema_version": "2.0.0",
+    "planes": {
+      "P1_Physical": {
+        "pressure_state": "latent",
+        "trend": "stable",
+        "source_refs": [
+          "branch_event.ravenfall_gate.reveal_oath"
+        ],
+        "score_q6": 300000
+      },
+      "P2_Etheric": {
+        "pressure_state": "dormant",
+        "trend": "stable",
+        "source_refs": [
+          "branch_event.ravenfall_gate.reveal_oath"
+        ],
+        "score_q6": 200000
+      },
+      "P3_Astral": {
+        "pressure_state": "latent",
+        "trend": "stable",
+        "source_refs": [
+          "branch_event.ravenfall_gate.reveal_oath"
+        ],
+        "score_q6": 350000
+      },
+      "P4_Mental": {
+        "pressure_state": "rising",
+        "trend": "stable",
+        "source_refs": [
+          "branch_event.ravenfall_gate.reveal_oath"
+        ],
+        "score_q6": 700000
+      },
+      "P5_Causal": {
+        "pressure_state": "rising",
+        "trend": "stable",
+        "source_refs": [
+          "branch_event.ravenfall_gate.reveal_oath"
+        ],
+        "score_q6": 600000
+      },
+      "P6_Celestial": {
+        "pressure_state": "latent",
+        "trend": "stable",
+        "source_refs": [
+          "branch_event.ravenfall_gate.reveal_oath"
+        ],
+        "score_q6": 450000
+      },
+      "P7_Shadow": {
+        "pressure_state": "rising",
+        "trend": "stable",
+        "source_refs": [
+          "branch_event.ravenfall_gate.reveal_oath"
+        ],
+        "score_q6": 650000
+      },
+      "P8_Void": {
+        "pressure_state": "dormant",
+        "trend": "stable",
+        "source_refs": [
+          "branch_event.ravenfall_gate.reveal_oath"
+        ],
+        "score_q6": 150000
+      },
+      "P9_Divine_Core": {
+        "pressure_state": "dormant",
+        "trend": "stable",
+        "source_refs": [
+          "branch_event.ravenfall_gate.reveal_oath"
+        ],
+        "score_q6": 100000
+      }
+    },
+    "dominant_plane_refs": [
+      "P4_Mental",
+      "P7_Shadow",
+      "P5_Causal"
+    ],
+    "threshold_access_flags": [
+      "ravenfall_gate.thin_veil.sensed"
+    ],
+    "source_refs": [
+      "action_trace.ravenfall_gate.reveal_oath"
+    ],
+    "forbidden": [
+      "fixed_plane_class",
+      "plane_attunement_without_provenance",
+      "plane_attunement_mutating_base_ontology"
+    ]
+  },
+  "conversions": [
+    {
+      "source_pointer": "/planes/P1_Physical/score",
+      "target_pointer": "/planes/P1_Physical/score_q6",
+      "source_decimal": "0.3",
+      "target_q6": 300000
+    },
+    {
+      "source_pointer": "/planes/P2_Etheric/score",
+      "target_pointer": "/planes/P2_Etheric/score_q6",
+      "source_decimal": "0.2",
+      "target_q6": 200000
+    },
+    {
+      "source_pointer": "/planes/P3_Astral/score",
+      "target_pointer": "/planes/P3_Astral/score_q6",
+      "source_decimal": "0.35",
+      "target_q6": 350000
+    },
+    {
+      "source_pointer": "/planes/P4_Mental/score",
+      "target_pointer": "/planes/P4_Mental/score_q6",
+      "source_decimal": "0.7",
+      "target_q6": 700000
+    },
+    {
+      "source_pointer": "/planes/P5_Causal/score",
+      "target_pointer": "/planes/P5_Causal/score_q6",
+      "source_decimal": "0.6",
+      "target_q6": 600000
+    },
+    {
+      "source_pointer": "/planes/P6_Celestial/score",
+      "target_pointer": "/planes/P6_Celestial/score_q6",
+      "source_decimal": "0.45",
+      "target_q6": 450000
+    },
+    {
+      "source_pointer": "/planes/P7_Shadow/score",
+      "target_pointer": "/planes/P7_Shadow/score_q6",
+      "source_decimal": "0.65",
+      "target_q6": 650000
+    },
+    {
+      "source_pointer": "/planes/P8_Void/score",
+      "target_pointer": "/planes/P8_Void/score_q6",
+      "source_decimal": "0.15",
+      "target_q6": 150000
+    },
+    {
+      "source_pointer": "/planes/P9_Divine_Core/score",
+      "target_pointer": "/planes/P9_Divine_Core/score_q6",
+      "source_decimal": "0.1",
+      "target_q6": 100000
+    }
+  ]
+}

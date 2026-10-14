@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/state_migration_result_schema.json",
+  "title": "M4 migration result; replay and source trust require semantic verification",
+  "x-ywe-requirement-id": "YWE-REQ-0054",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "migration_id",
+    "plan_sha256",
+    "source_sha256",
+    "target_sha256",
+    "target",
+    "conversions"
+  ],
+  "properties": {
+    "format": {
+      "const": "ywe.state_migration.v1"
+    },
+    "migration_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "plan_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "source_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "target_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "target": {
+      "type": "object",
+      "description": "The selected plan validates this record under its digest-bound target schema; envelope validation alone does not establish target semantics."
+    },
+    "conversions": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_pointer",
+          "target_pointer",
+          "source_decimal",
+          "target_q6"
+        ],
+        "properties": {
+          "source_pointer": {
+            "type": "string",
+            "pattern": "^/"
+          },
+          "target_pointer": {
+            "type": "string",
+            "pattern": "^/"
+          },
+          "source_decimal": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^-?[0-9]+(?:\\.[0-9]+)?(?:E[+-]?[0-9]+)?$"
+          },
+          "target_q6": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000
+          }
+        }
+      }
+    }
+  }
+}

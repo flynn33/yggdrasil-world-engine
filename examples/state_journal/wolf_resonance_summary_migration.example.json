@@ -1,0 +1,74 @@
+{
+  "format": "ywe.state_migration.v1",
+  "migration_id": "wolf_resonance_summary.v1_to_v2",
+  "plan_sha256": "e5e5a264d0138283042ebf5725f5cffb1fbdc89d37c9012a5b8f7653dfae2aac",
+  "source_sha256": "57eb816009d85dc470b5f7476ec1a506bdc120f71e4946c3b6f8ed6a8fe3c6a1",
+  "target_sha256": "a0d873edb8d406d0b243ba69f5947b26931e18c8c38cd65131614c3ac6619d38",
+  "target": {
+    "schema_id": "ywe.wolf_resonance_summary.v2",
+    "schema_version": "2.0.0",
+    "white_wolf": {
+      "signal_state": "active",
+      "function_tags": [
+        "revelation",
+        "harmony",
+        "pattern_visibility"
+      ],
+      "source_refs": [
+        "action_trace.ravenfall_gate.reveal_oath"
+      ],
+      "resonance_q6": 520000
+    },
+    "dark_wolf": {
+      "signal_state": "active",
+      "function_tags": [
+        "memory",
+        "gravity",
+        "containment",
+        "consequence"
+      ],
+      "source_refs": [
+        "location.ravenfall_gate.shadow_pressure"
+      ],
+      "resonance_q6": 480000
+    },
+    "twin_coherence": {
+      "coherence_state": "balanced",
+      "source_refs": [
+        "branch_event.ravenfall_gate.reveal_oath"
+      ],
+      "coherence_q6": 500000
+    },
+    "recent_wolf_resonance_event_refs": [
+      "wolf_event.ravenfall_gate.first_manifestation"
+    ],
+    "source_refs": [
+      "player_state_update.reveal_oath_001"
+    ],
+    "forbidden": [
+      "wolf_morality_meter",
+      "white_equals_good_dark_equals_evil",
+      "wolf_state_without_source_refs"
+    ]
+  },
+  "conversions": [
+    {
+      "source_pointer": "/white_wolf/resonance",
+      "target_pointer": "/white_wolf/resonance_q6",
+      "source_decimal": "0.52",
+      "target_q6": 520000
+    },
+    {
+      "source_pointer": "/dark_wolf/resonance",
+      "target_pointer": "/dark_wolf/resonance_q6",
+      "source_decimal": "0.48",
+      "target_q6": 480000
+    },
+    {
+      "source_pointer": "/twin_coherence/coherence_score",
+      "target_pointer": "/twin_coherence/coherence_q6",
+      "source_decimal": "0.5",
+      "target_q6": 500000
+    }
+  ]
+}

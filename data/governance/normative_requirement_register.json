@@ -9,7 +9,7 @@
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0054",
+    "next_available_id": "YWE-REQ-0055",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -1504,13 +1504,40 @@
         "docs/architecture/truth_authority_lattice.md",
         "data/schemas/m4_perception_state_schema.json"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0054",
+      "title": "Exact versioned resonance-state migration",
+      "normative_statement": "Resonance migration MUST preserve all unconverted fields and exact mathematical scores, reject unrepresentable values and incompatible schema versions without partial output, bind complete schemas and source bytes, and verify complete target receipts without conferring commit authority.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "tests/test_m4_state_migration.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M4",
+      "owner_role": "State and synchronization maintainers",
+      "decision_refs": [
+        "ADR-0046"
+      ],
+      "source_refs": [
+        "docs/architecture/m4_state_migration_contract.md",
+        "data/schemas/m4_plane_attunement_state_schema.json",
+        "data/schemas/m4_bloodline_resonance_state_schema.json",
+        "data/schemas/m4_wolf_resonance_summary_schema.json",
+        "data/schemas/state_migration_plan_schema.json",
+        "data/schemas/state_migration_result_schema.json"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 53,
-    "active": 51,
+    "total_requirements": 54,
+    "active": 52,
     "proposed": 0,
     "terminal": 2,
-    "next_identifier": "YWE-REQ-0054"
+    "next_identifier": "YWE-REQ-0055"
   }
 }

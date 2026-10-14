@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1444,
-    "path_digest": "54a1bb0724de9c70443b85573f7bcbbb182800bc55f0b8c5d338596ebbed28f6",
+    "path_count": 1456,
+    "path_digest": "caca94c8bfb3b873c30e7f6ba4dbe665acba1ca953e85368aaaa1cd68c824a19",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -3143,16 +3143,49 @@
         "m4_perception_persistence",
         "conformance_fixture"
       ]
+    },
+    {
+      "path": "data/schemas/m4_plane_attunement_state_schema.json",
+      "primary_partition": "wrw_reference_profile",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_state_migration_contract.md",
+      "rationale": "Versioned compatibility representation for the existing WRW player resonance records; neutral migration mechanics remain separate.",
+      "secondary_tags": [
+        "m4_migration",
+        "compatibility_schema"
+      ]
+    },
+    {
+      "path": "data/schemas/m4_bloodline_resonance_state_schema.json",
+      "primary_partition": "wrw_reference_profile",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_state_migration_contract.md",
+      "rationale": "Versioned compatibility representation for the existing WRW player resonance records; neutral migration mechanics remain separate.",
+      "secondary_tags": [
+        "m4_migration",
+        "compatibility_schema"
+      ]
+    },
+    {
+      "path": "data/schemas/m4_wolf_resonance_summary_schema.json",
+      "primary_partition": "wrw_reference_profile",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_state_migration_contract.md",
+      "rationale": "Versioned compatibility representation for the existing WRW player resonance records; neutral migration mechanics remain separate.",
+      "secondary_tags": [
+        "m4_migration",
+        "compatibility_schema"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
       "ash_dependency_material": 66,
-      "governance_validation": 636,
+      "governance_validation": 638,
       "historical_evidence": 28,
       "later_release_work": 45,
-      "wrw_reference_profile": 308,
-      "ywe_core": 237,
+      "wrw_reference_profile": 314,
+      "ywe_core": 241,
       "ywe_extension_profile": 124
     }
   }
