@@ -189,10 +189,15 @@ def main() -> int:
     governance_text = (root / "docs/governance/forsetti_governance_alignment.md").read_text(
         encoding="utf-8-sig"
     )
-    if "Dual License" not in license_text or "dual-licensed" not in readme:
-        errors.append("README and LICENSE must declare the Raven Forge dual license")
-    if "MIT-licensed" in governance_text:
-        errors.append("Forsetti governance documentation conflicts with the repository license")
+    if "MIT License" not in license_text or "MIT License" not in readme:
+        errors.append("README and LICENSE must declare the MIT License")
+    lowered_governance = governance_text.lower()
+    if (
+        "proprietary license" in lowered_governance
+        or "dual license" in lowered_governance
+        or "dual-licensed" in lowered_governance
+    ):
+        errors.append("Forsetti governance documentation conflicts with the MIT License")
 
     if errors:
         print("Governance contract check failed:")
