@@ -103,4 +103,22 @@ The checked-in reference profile and complete example component must validate.
 Final player assembly, legacy reference resolution/migration, identity revelation,
 bloodline and companion progression, branch linking, compensation and multiplayer
 remain M4 work. No M4 exit or placeholder closes through this slice. Review is
-single-executor; independent review is not claimed.
+single-executor; independent review is not claimed for the original slice.
+
+## Atomic composition interface
+
+`OriginProgressionPolicy` owns the same validated immutable inputs and exact
+policy identity as the component store. `initial_state()` returns a detached
+initial component; `packet(principal, request_id, evidence_ref)` constructs the
+existing content-bound packet; `reduce(state, packet)` returns a detached next
+component without creating or committing a journal. Its `scope` and `policy_id`
+identify the binding. `evidence(reference)` returns a detached validated bundle
+for aggregate branch/consequence checks. Neither input is mutated, including on failure.
+
+`OriginProgressionStore` remains the compatible capability/journal wrapper.
+Its archive format, genesis, policy serialization and request semantics remain
+unchanged. A player aggregate invokes the pure policy inside its sole journal
+reduction and validates the remaining components before returning a complete
+state. It must not publish to the component store during aggregate reduction.
+This extraction supplies atomic composition; it does not establish complete
+player admission, imported baselines, branch ownership or compensation policy.

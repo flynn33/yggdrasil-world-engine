@@ -2286,12 +2286,46 @@
         "docs/architecture/player_memory_and_action_trace_contract.md",
         "core/narrative_engine/player_runtime_state_rules.yaml"
       ]
+    },
+    {
+      "id": "ADR-0048",
+      "record_type": "decision",
+      "title": "Admit complete player changes through one reference aggregate",
+      "status": "accepted",
+      "recorded_on": "2026-10-14",
+      "owner_role": "State and synchronization maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt player-local aggregate contract and bounded reference realization before implementation under resumed M4 authorization.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Independent origin persistence cannot atomically admit identity, resonance, companion and ability changes; legacy player references and consequence ownership must remain explicit.",
+      "decision": "Add core/player_state.py and core/player_state_rules.py, their exact test paths tests/test_m4_player_state.py and tests/test_m4_player_state_rules.py plus tests/m4_player_fixture.py; preserve the legacy formats through additive v2 schemas. Extract the origin pure policy without changing existing archives. Use one journal and explicit qualified record catalogs, typed operations and append-only compensation. Approve tests/test_m4_player_schemas.py and tests/test_m4_player_review.py for wire and independent regression verification.",
+      "rationale": "One invariant owner validates a complete transition before publication and binds domain consequence identity separately from transport retries.",
+      "consequences": [
+        "No dependency, production host or platform runtime is introduced; exact approved paths remain bounded reference tooling.",
+        "Initial v2 construction and replay precede explicit adapters for both legacy formats; no imported history is fabricated.",
+        "Cross-owner transactions, multiplayer, complete legacy migration and M4 acceptance remain open; no placeholder is closed."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0056",
+        "YWE-REQ-0055",
+        "YWE-REQ-0052"
+      ],
+      "source_refs": [
+        "docs/architecture/m4_player_aggregate_contract.md",
+        "docs/architecture/player_runtime_state_contract.md",
+        "docs/architecture/celestial_identity_progression_contract.md",
+        "docs/architecture/ability_state_progression_contract.md",
+        "data/validation/player_state_schema_crossrefs.json"
+      ]
     }
   ],
   "summary": {
-    "total_records": 64,
-    "architecture_decisions": 47,
-    "accepted_decisions": 45,
+    "total_records": 65,
+    "architecture_decisions": 48,
+    "accepted_decisions": 46,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

@@ -9,7 +9,7 @@
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0056",
+    "next_available_id": "YWE-REQ-0057",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -1555,13 +1555,43 @@
         "data/schemas/m4_origin_profile_schema.json",
         "data/schemas/m4_origin_state_schema.json"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0056",
+      "title": "Atomic player aggregate admission and domain progression",
+      "normative_statement": "Player admission MUST atomically retain all player components and qualified consequence identities in one scoped journal, enforce typed capability-bound transitions and append-only compensation, and reject partial or duplicate effects without changing any component or request identity.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "tests/test_m4_player_state.py",
+        "tests/test_m4_player_state_rules.py",
+        "tests/test_m4_player_schemas.py",
+        "tests/test_m4_player_review.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M4",
+      "owner_role": "State and synchronization maintainers",
+      "decision_refs": [
+        "ADR-0048"
+      ],
+      "source_refs": [
+        "docs/architecture/m4_player_aggregate_contract.md",
+        "data/schemas/m4_player_runtime_state_schema.json",
+        "data/schemas/m4_ability_state_schema.json",
+        "data/schemas/m4_player_profile_schema.json",
+        "data/schemas/m4_player_update_schema.json",
+        "data/schemas/m4_player_snapshot_schema.json"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 55,
-    "active": 53,
+    "total_requirements": 56,
+    "active": 54,
     "proposed": 0,
     "terminal": 2,
-    "next_identifier": "YWE-REQ-0056"
+    "next_identifier": "YWE-REQ-0057"
   }
 }

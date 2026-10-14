@@ -77,6 +77,8 @@ BLOCKED_ARTIFACT_NAMES = {
 TOOL_SOURCE_SUFFIXES = {".ps1", ".py", ".sh"}
 APPROVED_REFERENCE_SOURCES = {
     "core/state_journal.py",
+    "core/player_state.py",
+    "core/player_state_rules.py",
     "core/state_migration.py",
     "core/narrative_engine/origin_progression.py",
     "core/perception_engine/persistence.py",

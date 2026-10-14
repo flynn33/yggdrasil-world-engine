@@ -278,7 +278,8 @@ class RoadmapValidationTests(unittest.TestCase):
 class PlayerRuntimeReferencePolicyTests(unittest.TestCase):
     def test_m4_reference_paths_require_both_approvals_and_reject_neighbors(self):
         paths = ["core/state_journal.py", "core/state_migration.py",
-                 "core/perception_engine/persistence.py", "core/narrative_engine/origin_progression.py"]
+                 "core/perception_engine/persistence.py", "core/narrative_engine/origin_progression.py",
+                 "core/player_state.py", "core/player_state_rules.py"]
         self.assertEqual([], self.check_added(paths))
         for path in paths:
             with self.subTest(path=path):

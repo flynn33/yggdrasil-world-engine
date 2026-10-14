@@ -62,8 +62,8 @@ def _validator(schema, name):
     return Draft202012Validator(schema), _digest(raw)
 
 
-class OriginProgressionStore:
-    """Trusted composition owns catalog/grants; callers receive restricted handles."""
+class OriginProgressionPolicy:
+    """Trusted, detached component reduction without publication authority."""
 
     def __init__(self, world_id, player_id, profile, creation, grants, evidence,
                  action_schema, memory_schema):
@@ -100,7 +100,6 @@ class OriginProgressionStore:
                 if any(operation not in ("remember", "advance") for operation in operations):
                     raise JournalError("INVALID_POLICY")
             self._grants = grants
-            self._writers = {principal: object() for principal in grants}
             action_validator, action_digest = _validator(action_schema, "player_action_trace")
             memory_validator, memory_digest = _validator(memory_schema, "player_memory_record")
             self._evidence = {}
@@ -154,35 +153,45 @@ class OriginProgressionStore:
                       "creation": creation, "grants": grants, "action_schema_sha256": action_digest,
                       "memory_schema_sha256": memory_digest}
             self._policy_id = "origin.v1:" + _digest(_object_bytes(policy))
-            self._initial = {"format": FORMAT, "world_id": world_id, "player_id": player_id,
+            self._initial = _object_bytes({"format": FORMAT, "world_id": world_id, "player_id": player_id,
                 "profile_id": profile["profile_id"], "creation": creation,
-                "current_phase": profile["initial_phase"], "actions": [], "memories": [], "advances": []}
-            self._journal = CommitJournal(self._scope, self._policy_id, self._initial, self._reduce)
+                "current_phase": profile["initial_phase"], "actions": [], "memories": [], "advances": []})
         except (JournalError, cv.CoreContractError, SchemaError, KeyError, TypeError, ValueError):
             raise JournalError("INVALID_POLICY") from None
 
-    def writer(self, principal):
-        """Trusted composition only: issue the principal's restricted local handle."""
-        _identifier(principal)
-        if principal not in self._writers:
-            raise JournalError("UNAUTHORIZED_WRITER")
-        return self._writers[principal]
+    @property
+    def scope(self):
+        return self._scope
 
-    def _packet(self, principal, request_id, evidence_ref):
-        _identifier(request_id)
-        _identifier(evidence_ref)
-        raw = self._evidence.get(evidence_ref)
+    @property
+    def policy_id(self):
+        return self._policy_id
+
+    def initial_state(self):
+        return json.loads(self._initial)
+
+    def evidence(self, reference):
+        """Return a detached validated bundle for trusted aggregate qualification."""
+        _identifier(reference)
+        raw = self._evidence.get(reference)
         if raw is None:
             raise JournalError("UNKNOWN_EVIDENCE")
-        item = json.loads(raw)
+        return json.loads(raw)
+
+    def packet(self, principal, request_id, evidence_ref):
+        _identifier(request_id)
+        item = self.evidence(evidence_ref)
         if principal not in self._grants or item["operation"] not in self._grants[principal]:
             raise JournalError("UNAUTHORIZED_WRITER")
         return {"request_ref": request_id, "principal": principal,
-                "evidence_ref": evidence_ref, "evidence_sha256": _digest(raw)}
+                "evidence_ref": evidence_ref, "evidence_sha256": _digest(self._evidence[evidence_ref])}
 
-    def _reduce(self, scope, state, packet):
+    def reduce(self, state, packet):
+        """Reduce an owner's verified component; neither argument is mutated."""
+        state = json.loads(_object_bytes(state))
+        packet = json.loads(_object_bytes(packet))
         _closed(packet, "request_ref principal evidence_ref evidence_sha256")
-        if scope != self._scope or packet != self._packet(packet["principal"], packet["request_ref"], packet["evidence_ref"]):
+        if packet != self.packet(packet["principal"], packet["request_ref"], packet["evidence_ref"]):
             raise JournalError("POLICY_REJECTED")
         item = json.loads(self._evidence[packet["evidence_ref"]])
         if item["prior_phase"] != state["current_phase"]:
@@ -209,7 +218,36 @@ class OriginProgressionStore:
             state["current_phase"] = item["target_phase"]
         state["actions"].extend(row for key, row in new_actions.items() if key not in old_actions)
         state["memories"].extend(item["memories"])
-        return state
+        return json.loads(_object_bytes(state))
+
+
+class OriginProgressionStore:
+    """Trusted composition owns catalog/grants; callers receive restricted handles."""
+
+    def __init__(self, world_id, player_id, profile, creation, grants, evidence,
+                 action_schema, memory_schema):
+        self._policy = OriginProgressionPolicy(world_id, player_id, profile, creation,
+                                               grants, evidence, action_schema, memory_schema)
+        self._scope = self._policy.scope
+        self._policy_id = self._policy.policy_id
+        self._initial = self._policy.initial_state()
+        self._writers = {principal: object() for principal in self._policy._grants}
+        self._journal = CommitJournal(self._scope, self._policy_id, self._initial, self._reduce)
+
+    def writer(self, principal):
+        """Trusted composition only: issue the principal's restricted local handle."""
+        _identifier(principal)
+        if principal not in self._writers:
+            raise JournalError("UNAUTHORIZED_WRITER")
+        return self._writers[principal]
+
+    def _packet(self, principal, request_id, evidence_ref):
+        return self._policy.packet(principal, request_id, evidence_ref)
+
+    def _reduce(self, scope, state, packet):
+        if scope != self._scope:
+            raise JournalError("POLICY_REJECTED")
+        return self._policy.reduce(state, packet)
 
     def publish(self, writer, request_id, expected_revision, evidence_ref):
         principal = next((name for name, handle in self._writers.items() if writer is handle), None)

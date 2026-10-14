@@ -1,7 +1,7 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-54
+**Revision:** planning-55
 **Date:** October 14, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
@@ -2506,3 +2506,58 @@ reproduced the exact failure. The correction adds that one already-adopted path
 and checks both approvals plus neighboring-path rejection for all four M4
 reference modules. No implementation behavior or guardrail is weakened. The
 affected clean checks must pass before publication; no full-suite pass is claimed.
+
+
+### 24.2. Origin registration publication
+
+Commit `f88d02e650b7288d9642c866f0788f0668913fd0` passed 24 focused guardrail
+and platform tests plus all six selected affected checks from a clean checkout.
+The broader working-tree foundation/platform run passed 89 tests. No full-suite
+pass is claimed. Main and the M4 branch were published under the existing owner
+bypass authority; exact remote README and roadmap bytes were verified. Wiki
+`ab25e2964f93f5c27b0bf7d5b2a03854989436e6` matched all 47 pages on fresh readback.
+Main CI `38558767903` remains in progress at this continuation's API check;
+`38555791396` and `38553080434` also remain in progress. Earlier exact `ea4c12b`
+run `38550875881` completed successfully. No later CI result is inferred.
+
+## 25. Atomic player admission — October 14, 2026
+
+Current assignment: YWE-REQ-0056 / ADR-0048, additive player aggregate and exact
+approved reference/test paths under the recorded Raven Forge v0.7.0 pin. Source
+review covered both actual legacy player formats, reference policy, origin,
+identity, ability, branch, consequence and companion contracts. Before editing,
+parallel read-only investigations identified the one-journal boundary, missing
+legacy resolution, independent ability-state obligation and inconsistent old
+fixtures. The new contract was adopted before aggregate implementation.
+
+The origin pure-policy extraction preserves the published policy/genesis and
+actual empty/populated archives byte-for-byte. The aggregate retains a v2 spine
+and separate resolved records; complete updates, qualified effects, branch
+transfer and explicit resonance compensation use one journal. Exact source
+qualification is bound at genesis and per selected packet. All ten ability
+states use explicit profile transitions and exact decimal coherence; the three
+resonance channels retain q6 schemas. Initial construction requires a coherent
+mortal/veiled state with persistent Raven and no fabricated history.
+
+Independent code review reproduced catalog-extension replay instability,
+unbound initial qualification, unlinked reveal evidence, branch-transfer scope
+and agent-identity gaps, unresolved nested agent references, malformed local
+schema exceptions and observer results masquerading as objective consequences.
+The implementation corrections have permanent regression tests. This is actual
+independent review of the named code paths, not a claim of whole-milestone review.
+
+Working-tree results: 23 aggregate behavioral tests, 23 domain-rule tests,
+nine independent regression tests and eleven offline wire-schema tests pass.
+Origin/journal extraction tests pass (58). These are focused checks; clean
+committed execution and publication are next. The README and detailed roadmap
+record the concrete player work while all five M4 deliverables and exits stay
+open. Both complete legacy adapters, cross-owner synchronization, final branch
+ownership, multiplayer and related placeholders remain active work. No quality
+debt was closed. Owner input needed: none for continued authorized development.
+
+The current persistence subsystem maturity now records partial normative/schema/
+conformance work, supported by the implemented journal, exact migration and
+player tests; it no longer incorrectly reads not-started. README counts and the
+detailed matrix match the machine roadmap. No dimension becomes complete.
+The complete focused/adjacent selection passed 192 tests with zero failures,
+including both exact-path guardrails and platform checks.

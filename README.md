@@ -102,9 +102,9 @@ Milestone indicators: 🟢 `complete` · 🟡 `in_progress` · ⚪ `planned` · 
 | Dimension | Complete | Partial | Not started | Not applicable | Deferred | Not ready |
 |---|---:|---:|---:|---:|---:|---:|
 | Historical phase gate | 6 | 3 | 1 | 5 | 0 | 0 |
-| Normative artifact | 2 | 9 | 4 | 0 | 0 | 0 |
-| Executable schema | 2 | 7 | 6 | 0 | 0 | 0 |
-| Conformance tested | 2 | 10 | 3 | 0 | 0 | 0 |
+| Normative artifact | 2 | 10 | 3 | 0 | 0 | 0 |
+| Executable schema | 2 | 8 | 5 | 0 | 0 | 0 |
+| Conformance tested | 2 | 11 | 2 | 0 | 0 | 0 |
 | Release readiness | 2 | 0 | 0 | 0 | 0 | 13 |
 
 These five maturity dimensions are independent. Accepted gates and maturity
@@ -125,7 +125,7 @@ until M10 acceptance.
 The current work is to complete branch and player state contracts, persistence
 and migration, scoped truth synchronization, and deterministic multiplayer
 ordering and reconciliation. All five M4 deliverables and five exit criteria
-remain open. The first implemented slice is the [scoped commit journal](docs/architecture/m4_commit_journal_contract.md): atomic reference-state updates, exact retry identity, append-only compensation and verified save/load replay. Its archive schema and focused tests cover corruption, concurrent admission and scope isolation. The journal mechanics tests use explicit synthetic owners. The next implemented slice, [observer-scoped perception persistence](docs/architecture/m4_perception_persistence_contract.md), composes actual M3 perception views, retains complete truth and provenance, and verifies replay under the same observer and rules. Archive/head checkpoints now capture one committed revision. [Exact resonance migration](docs/architecture/m4_state_migration_contract.md) converts the three legacy plane, bloodline and wolf record formats to versioned integer millionths, preserving other fields and rejecting excess precision. [Origin progression persistence](docs/architecture/m4_origin_progression_contract.md) adds explicit profile phases, qualified action/memory evidence, scoped writer handles and replay without overwriting memory. Final player/branch assembly and admission, identity revelation, full archive migration, realm/location integration and multiplayer reconciliation remain under development.
+remain open. The first implemented slice is the [scoped commit journal](docs/architecture/m4_commit_journal_contract.md): atomic reference-state updates, exact retry identity, append-only compensation and verified save/load replay. Its archive schema and focused tests cover corruption, concurrent admission and scope isolation. The journal mechanics tests use explicit synthetic owners. The next implemented slice, [observer-scoped perception persistence](docs/architecture/m4_perception_persistence_contract.md), composes actual M3 perception views, retains complete truth and provenance, and verifies replay under the same observer and rules. Archive/head checkpoints now capture one committed revision. [Exact resonance migration](docs/architecture/m4_state_migration_contract.md) converts the three legacy plane, bloodline and wolf record formats to versioned integer millionths, preserving other fields and rejecting excess precision. [Origin progression persistence](docs/architecture/m4_origin_progression_contract.md) adds explicit profile phases, qualified action/memory evidence, scoped writer handles and replay without overwriting memory. [Atomic player admission](docs/architecture/m4_player_aggregate_contract.md) now combines origin, identity, resonance, ability and companion changes in one journal, retains qualified consequences, and supports branch transfer and reasoned resonance compensation without deleting memory. Additive player/update/snapshot schemas preserve the reference-based spine. Both legacy player migrations, branch-owner synchronization, realm/location integration and deterministic multiplayer reconciliation remain under development.
 
 The accepted M3 source and execution archives remain immutable. M4 verification
 will cover save/load and migration truth preservation, event-log replay,

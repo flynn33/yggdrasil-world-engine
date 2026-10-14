@@ -2,14 +2,16 @@
 
 import copy
 from concurrent.futures import ThreadPoolExecutor
+import hashlib
 import json
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 
-from core.narrative_engine.origin_progression import OriginProgressionStore
+from core.narrative_engine.origin_progression import OriginProgressionPolicy, OriginProgressionStore
 from core.state_journal import CommitJournal, JournalError, _object_bytes
 
 
@@ -60,6 +62,101 @@ class OriginProgressionTests(unittest.TestCase):
 
     def publish(self, owner, source="first", request="request:one", revision=0, principal="narrative:owner"):
         return owner.publish(owner.writer(principal), request, revision, source)
+
+    def test_extraction_preserves_preexisting_archive_and_policy_bytes(self):
+        # Captured from the published f88d02e implementation before extraction.
+        expected = (
+            ("771812c2cb93f74e950970f364f6b65c98af2cb434f7a67e928cbb5e0a54f656",
+             "2397893b8ffa4f2c6df677f26afda10b0d95a01d3ed38fd8807f1749f03543e5"),
+            ("ead7aa29066f610eebf520d67ba5a9650b32dbe0030811dc4a39696ebbcb1409",
+             "38a4f23cbc4f7194556f533334eaaa86ed3b7d88339b40de8b363f3cbfbb9518"))
+        args = configuration()
+        owner = OriginProgressionStore(*args)
+        self.assertEqual("origin.v1:ca93c2ffc8e5659da6a7ae69a410309e9acb1ca4cb4005a3e806c1a0773dd429",
+                         owner._policy_id)
+        for index, (digest, expected_head) in enumerate(expected):
+            if index:
+                self.publish(owner)
+            raw, head = owner.checkpoint()
+            self.assertEqual(digest, hashlib.sha256(raw).hexdigest())
+            self.assertEqual(expected_head, head)
+            self.assertEqual((raw, head), OriginProgressionStore.load(raw, head, *args).checkpoint())
+
+    def test_pure_policy_has_no_journal_and_detaches_both_arguments(self):
+        with patch("core.narrative_engine.origin_progression.CommitJournal",
+                   side_effect=AssertionError("pure policy must not construct a journal")):
+            policy = OriginProgressionPolicy(*configuration())
+            state = policy.initial_state()
+            packet = policy.packet("narrative:owner", "request:one", "first")
+            before = copy.deepcopy((state, packet))
+            result = policy.reduce(state, packet)
+        self.assertEqual(before, (state, packet))
+        self.assertEqual("first_stirrings", result["current_phase"])
+        result["creation"]["provenance"]["source_ash_refs"].clear()
+        result["memories"].clear()
+        self.assertEqual(before, (state, packet))
+        self.assertEqual(2, len(policy.reduce(state, packet)["memories"]))
+        state["creation"]["provenance"]["source_ash_refs"].clear()
+        self.assertEqual(["ash:canonical"], policy.initial_state()["creation"]["provenance"]["source_ash_refs"])
+        self.assertFalse(hasattr(policy, "_journal"))
+
+    def test_policy_scope_and_identity_are_read_only_and_evidence_is_detached(self):
+        policy = OriginProgressionPolicy(*configuration())
+        owner = OriginProgressionStore(*configuration())
+        self.assertEqual(owner._scope, policy.scope)
+        self.assertEqual(owner._policy_id, policy.policy_id)
+        for field in ("scope", "policy_id"):
+            with self.assertRaises(AttributeError):
+                setattr(policy, field, "changed")
+        source = policy.evidence("first")
+        source["memories"][0]["visibility_state"] = "mythologized"
+        self.assertEqual("felt", policy.evidence("first")["memories"][0]["visibility_state"])
+        self.assert_code("UNKNOWN_EVIDENCE", policy.evidence, "missing")
+
+    def test_pure_policy_failure_after_reduction_does_not_mutate_inputs(self):
+        first = evidence("one", target="mortal_unknowing", count=1, operation="remember")
+        second = evidence("two", target="mortal_unknowing", count=1, operation="remember")
+        for item in (first, second):
+            item["memories"][0]["cosmological_tags"] = ["x" * 34000]
+        policy = OriginProgressionPolicy(*configuration([first, second, evidence("first")]))
+        state = policy.reduce(policy.initial_state(), policy.packet("memory:owner", "one", "one"))
+        packet = policy.packet("memory:owner", "two", "two")
+        before = copy.deepcopy((state, packet))
+        self.assert_code("VALUE_LIMIT", policy.reduce, state, packet)
+        self.assertEqual(before, (state, packet))
+        corrected = policy.reduce(state, policy.packet("narrative:owner", "two", "first"))
+        self.assertEqual("first_stirrings", corrected["current_phase"])
+        self.assertEqual(before, (state, packet))
+
+    def test_pure_policy_composes_with_one_atomic_journal(self):
+        policy = OriginProgressionPolicy(*configuration())
+        def reduce(scope, state, packet):
+            state["origin"] = policy.reduce(state["origin"], packet["origin"])
+            if packet["consequence"] != "qualified:consequence":
+                raise JournalError("POLICY_REJECTED")
+            state["consequences"].append(packet["consequence"])
+            return state
+        journal = CommitJournal(policy.scope, "test:atomic-origin", {
+            "origin": policy.initial_state(), "consequences": []}, reduce)
+        origin_packet = policy.packet("narrative:owner", "request:one", "first")
+        before = journal.checkpoint()
+        self.assert_code("POLICY_REJECTED", journal.commit, "request:one", 0,
+                         {"origin": origin_packet, "consequence": "invalid"})
+        self.assertEqual(before, journal.checkpoint())
+        packet = {"origin": origin_packet, "consequence": "qualified:consequence"}
+        receipt = journal.commit("request:one", 0, packet)
+        self.assertEqual(1, receipt.revision)
+        state = journal.state()
+        self.assertEqual("first_stirrings", state["origin"]["current_phase"])
+        self.assertEqual(2, len(state["origin"]["memories"]))
+        self.assertEqual(["qualified:consequence"], state["consequences"])
+        raw, head = journal.checkpoint()
+        self.assertEqual(1, len(json.loads(raw)["entries"]))
+        restored = CommitJournal.load(raw, policy.scope, "test:atomic-origin", reduce, head)
+        self.assertEqual((raw, head), restored.checkpoint())
+        with patch.object(OriginProgressionPolicy, "reduce", side_effect=AssertionError("retry must not reduce")):
+            self.assertEqual(receipt, journal.commit("request:one", 0, packet))
+            self.assertEqual(receipt, restored.commit("request:one", 0, packet))
 
     def test_creation_is_veiled_and_cannot_supply_advanced_state(self):
         args = configuration()

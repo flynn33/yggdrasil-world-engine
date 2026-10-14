@@ -221,7 +221,10 @@
         "release_ready": "not_ready"
       },
       "evidence_refs": [
-        "docs/architecture/player_runtime_state_contract.md"
+        "docs/architecture/player_runtime_state_contract.md",
+        "docs/architecture/m4_origin_progression_contract.md",
+        "docs/architecture/m4_player_aggregate_contract.md",
+        "tests/test_m4_player_state.py"
       ],
       "open_work": [
         "Finish origin progression persistence replay and multiplayer rules"
@@ -371,13 +374,19 @@
       "owner_role": "State and synchronization maintainers",
       "maturity": {
         "phase_gate_accepted": "not_applicable",
-        "normative_artifact_complete": "not_started",
-        "executable_schema_complete": "not_started",
-        "conformance_tested": "not_started",
+        "normative_artifact_complete": "partial",
+        "executable_schema_complete": "partial",
+        "conformance_tested": "partial",
         "release_ready": "not_ready"
       },
       "evidence_refs": [
-        "docs/architecture/realm_truth_boundary_contract.md"
+        "docs/architecture/realm_truth_boundary_contract.md",
+        "docs/architecture/m4_commit_journal_contract.md",
+        "docs/architecture/m4_state_migration_contract.md",
+        "docs/architecture/m4_player_aggregate_contract.md",
+        "tests/test_m4_state_journal.py",
+        "tests/test_m4_state_migration.py",
+        "tests/test_m4_player_state.py"
       ],
       "open_work": [
         "Define snapshots logs migration replay authority conflicts and merge"

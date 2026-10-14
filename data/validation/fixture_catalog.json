@@ -25366,6 +25366,45 @@
         "YWE-REQ-0055"
       ],
       "description": "Origin reference state; executable tests establish admission and replay semantics."
+    },
+    {
+      "fixture_id": "m4.player.profile",
+      "path": "data/profiles/wrw_player_progression.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/m4_player_profile_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0056"
+      ],
+      "description": "Explicit player reference qualification fixture; executable tests verify atomic admission and replay without claiming external authentication."
+    },
+    {
+      "fixture_id": "m4.player.state",
+      "path": "examples/state_journal/player_aggregate.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/m4_player_snapshot_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0056"
+      ],
+      "description": "Explicit player reference qualification fixture; executable tests verify atomic admission and replay without claiming external authentication."
+    },
+    {
+      "fixture_id": "m4.player.update",
+      "path": "examples/state_journal/player_update.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/m4_player_update_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0056"
+      ],
+      "description": "Explicit player reference qualification fixture; executable tests verify atomic admission and replay without claiming external authentication."
     }
   ]
 }

@@ -1,0 +1,512 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_player_profile_schema.json",
+  "title": "M4 player progression profile",
+  "x-ywe-requirement-id": "YWE-REQ-0056",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile_id",
+    "identity_states",
+    "identity_reveal_statuses",
+    "identity_transitions",
+    "ability_states",
+    "ability_transitions",
+    "reversible_slots",
+    "raven_companion_id",
+    "wolf_companions"
+  ],
+  "properties": {
+    "profile_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "identity_states": {
+      "const": [
+        "veiled",
+        "suspected",
+        "fragmented",
+        "named_fragment",
+        "partial_revelation",
+        "coherent_revelation",
+        "integrated"
+      ]
+    },
+    "identity_reveal_statuses": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "veiled",
+        "suspected",
+        "fragmented",
+        "named_fragment",
+        "partial_revelation",
+        "coherent_revelation",
+        "integrated"
+      ],
+      "properties": {
+        "veiled": {
+          "const": "not_revealed"
+        },
+        "suspected": {
+          "const": "player_suspects"
+        },
+        "fragmented": {
+          "const": "fragment_revealed"
+        },
+        "named_fragment": {
+          "const": "name_partially_revealed"
+        },
+        "partial_revelation": {
+          "const": "role_partially_revealed"
+        },
+        "coherent_revelation": {
+          "const": "identity_coherent"
+        },
+        "integrated": {
+          "const": "identity_integrated"
+        }
+      }
+    },
+    "identity_transitions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/identity_edge"
+      },
+      "minItems": 1,
+      "maxItems": 21,
+      "uniqueItems": true
+    },
+    "ability_states": {
+      "const": [
+        "latent",
+        "pressured",
+        "eligible",
+        "unlocked",
+        "unstable",
+        "coherent",
+        "mastered",
+        "transformed",
+        "decohered",
+        "sealed"
+      ]
+    },
+    "ability_transitions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ability_edge"
+      },
+      "minItems": 1,
+      "maxItems": 90,
+      "uniqueItems": true
+    },
+    "reversible_slots": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "plane",
+          "bloodline",
+          "wolf"
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 3,
+      "uniqueItems": true
+    },
+    "raven_companion_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "wolf_companions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/identifier"
+      },
+      "minItems": 1,
+      "maxItems": 16,
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*(?![\\s\\S])"
+    },
+    "identity_edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from_state",
+        "to_state"
+      ],
+      "properties": {
+        "from_state": {
+          "enum": [
+            "veiled",
+            "suspected",
+            "fragmented",
+            "named_fragment",
+            "partial_revelation",
+            "coherent_revelation"
+          ]
+        },
+        "to_state": {
+          "enum": [
+            "veiled",
+            "suspected",
+            "fragmented",
+            "named_fragment",
+            "partial_revelation",
+            "coherent_revelation",
+            "integrated"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "veiled"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "enum": [
+                  "suspected",
+                  "fragmented",
+                  "named_fragment",
+                  "partial_revelation",
+                  "coherent_revelation",
+                  "integrated"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "suspected"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "enum": [
+                  "fragmented",
+                  "named_fragment",
+                  "partial_revelation",
+                  "coherent_revelation",
+                  "integrated"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "fragmented"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "enum": [
+                  "named_fragment",
+                  "partial_revelation",
+                  "coherent_revelation",
+                  "integrated"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "named_fragment"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "enum": [
+                  "partial_revelation",
+                  "coherent_revelation",
+                  "integrated"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "partial_revelation"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "enum": [
+                  "coherent_revelation",
+                  "integrated"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "coherent_revelation"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "enum": [
+                  "integrated"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ability_edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from_state",
+        "to_state"
+      ],
+      "properties": {
+        "from_state": {
+          "enum": [
+            "latent",
+            "pressured",
+            "eligible",
+            "unlocked",
+            "unstable",
+            "coherent",
+            "mastered",
+            "transformed",
+            "decohered",
+            "sealed"
+          ]
+        },
+        "to_state": {
+          "enum": [
+            "latent",
+            "pressured",
+            "eligible",
+            "unlocked",
+            "unstable",
+            "coherent",
+            "mastered",
+            "transformed",
+            "decohered",
+            "sealed"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "latent"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "not": {
+                  "const": "latent"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "pressured"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "not": {
+                  "const": "pressured"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "eligible"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "not": {
+                  "const": "eligible"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "unlocked"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "not": {
+                  "const": "unlocked"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "unstable"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "not": {
+                  "const": "unstable"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "coherent"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "not": {
+                  "const": "coherent"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "mastered"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "not": {
+                  "const": "mastered"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "transformed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "not": {
+                  "const": "transformed"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "decohered"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "not": {
+                  "const": "decohered"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "from_state": {
+                "const": "sealed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "to_state": {
+                "not": {
+                  "const": "sealed"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

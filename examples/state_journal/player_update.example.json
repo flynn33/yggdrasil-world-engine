@@ -1,0 +1,46 @@
+{
+  "update_ref": "update:first",
+  "world_id": "world:one",
+  "player_id": "player:one",
+  "branch_ref": "branch:one",
+  "source_system": "narrative_engine",
+  "operations": [
+    {
+      "kind": "origin",
+      "evidence_ref": "origin:first"
+    },
+    {
+      "kind": "replace",
+      "slot": "celestial",
+      "previous_ref": "celestial:initial",
+      "next_ref": "celestial:suspected",
+      "condition_refs": []
+    },
+    {
+      "kind": "replace",
+      "slot": "plane",
+      "previous_ref": "plane:initial",
+      "next_ref": "plane:stirring",
+      "condition_refs": []
+    },
+    {
+      "kind": "ability",
+      "ability_id": "ability:oath",
+      "previous_ref": null,
+      "next_ref": "ability:latent",
+      "condition_refs": []
+    }
+  ],
+  "evidence_refs": [
+    "evidence:play"
+  ],
+  "consequence_ref": "consequence:first",
+  "provenance": {
+    "cosmic_pattern_snapshot_ref": "snapshot:player",
+    "diagnostic_ref": "diagnostic:player",
+    "generation_plan_ref": "plan:player",
+    "source_ash_refs": [
+      "ash:canonical"
+    ]
+  }
+}

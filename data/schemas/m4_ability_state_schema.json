@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_ability_state_schema.json",
+  "title": "M4 exact player ability state",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_id", "schema_version", "ability_id", "player_id", "branch_ref", "current_state", "source_refs", "history_refs", "sealed_reason_refs"],
+  "properties": {
+    "schema_id": {"const": "ywe.ability_state.v2"},
+    "schema_version": {"const": "2.0.0"},
+    "ability_id": {"$ref": "#/$defs/identifier"},
+    "player_id": {"$ref": "#/$defs/identifier"},
+    "branch_ref": {"$ref": "#/$defs/identifier"},
+    "current_state": {"enum": ["latent", "pressured", "eligible", "unlocked", "unstable", "coherent", "mastered", "transformed", "decohered", "sealed"]},
+    "source_refs": {"allOf": [{"$ref": "#/$defs/references"}], "minItems": 1},
+    "history_refs": {"$ref": "#/$defs/references"},
+    "sealed_reason_refs": {"$ref": "#/$defs/references"},
+    "coherence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coefficient", "exponent", "status"],
+      "properties": {
+        "coefficient": {"type": "string", "maxLength": 128, "pattern": "^(0|-?[1-9]([0-9]*[1-9])?)(?![\\s\\S])"},
+        "exponent": {"type": "integer", "minimum": -10000, "maximum": 10000},
+        "status": {"type": "string", "minLength": 1, "pattern": "\\S"}
+      },
+      "allOf": [{"if": {"properties": {"coefficient": {"const": "0"}}}, "then": {"properties": {"exponent": {"const": 0}}}}]
+    }
+  },
+  "allOf": [{"if": {"properties": {"current_state": {"const": "sealed"}}}, "then": {"properties": {"sealed_reason_refs": {"minItems": 1}}}}],
+  "$defs": {
+    "identifier": {"type": "string", "maxLength": 128, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}(?![\\s\\S])"},
+    "references": {"type": "array", "maxItems": 128, "uniqueItems": true, "items": {"$ref": "#/$defs/identifier"}}
+  },
+  "x-ywe-requirement-id": "YWE-REQ-0056"
+}
