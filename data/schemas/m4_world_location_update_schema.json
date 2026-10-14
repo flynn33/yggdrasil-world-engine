@@ -1,0 +1,512 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_world_location_update_schema.json",
+  "title": "M4 World Location Update",
+  "x-ywe-requirement-id": "YWE-REQ-0060",
+  "$ref": "#/$defs/Update",
+  "$defs": {
+    "Retention": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "persistent"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "until_resolved"
+            },
+            "resolution_condition_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "minItems": 1,
+              "maxItems": 16,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "kind",
+            "resolution_condition_refs"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "timeboxed"
+            },
+            "expires_at_round": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "kind",
+            "expires_at_round"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Principals": {
+      "type": "object",
+      "properties": {
+        "narrative_principal": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "realm_principal": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "narrative_principal",
+        "realm_principal"
+      ],
+      "additionalProperties": false
+    },
+    "Resolution": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "fact"
+            },
+            "operation_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "slot_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "before": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TypedValue"
+            },
+            "after": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TypedValue"
+            },
+            "condition_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "minItems": 1,
+              "maxItems": 16,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "kind",
+            "operation_id",
+            "slot_id",
+            "before",
+            "after",
+            "condition_refs"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "location"
+            },
+            "operation_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "location_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "realm_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "before_record_ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "after_record_ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "mutation_ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "rule_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "condition_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "minItems": 1,
+              "maxItems": 16,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "kind",
+            "operation_id",
+            "location_id",
+            "realm_id",
+            "before_record_ref",
+            "after_record_ref",
+            "mutation_ref",
+            "rule_id",
+            "condition_refs"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "overlay"
+            },
+            "operation_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "location_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "realm_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "before_record_ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "after_record_ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "overlay_ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "rule_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "condition_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "minItems": 1,
+              "maxItems": 16,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "kind",
+            "operation_id",
+            "location_id",
+            "realm_id",
+            "before_record_ref",
+            "after_record_ref",
+            "overlay_ref",
+            "rule_id",
+            "condition_refs"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "realm_shift"
+            },
+            "operation_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "player_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "before": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/Place"
+            },
+            "after": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/Place"
+            },
+            "player_component_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "player_state_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "plane_state_ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "veil_slot_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "request_ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "proposal_ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "condition_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "minItems": 1,
+              "maxItems": 16,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "kind",
+            "operation_id",
+            "player_id",
+            "before",
+            "after",
+            "player_component_id",
+            "player_state_sha256",
+            "plane_state_ref",
+            "veil_slot_id",
+            "request_ref",
+            "proposal_ref",
+            "condition_refs"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Update": {
+      "type": "object",
+      "properties": {
+        "update_ref": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "scope": {
+          "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TruthScope"
+        },
+        "component_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "delta_ref": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "effect_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "resolutions": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_world_location_update_schema.json#/$defs/Resolution"
+          },
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true
+        },
+        "source_read_vector_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "retention": {
+          "$ref": "https://ywe.local/schemas/m4_world_location_update_schema.json#/$defs/Retention"
+        },
+        "compensates_effect_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "provenance": {
+          "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance"
+        }
+      },
+      "required": [
+        "update_ref",
+        "scope",
+        "component_id",
+        "delta_ref",
+        "effect_id",
+        "resolutions",
+        "source_read_vector_sha256",
+        "retention",
+        "compensates_effect_id",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "Packet": {
+      "type": "object",
+      "properties": {
+        "request_ref": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "principals": {
+          "$ref": "https://ywe.local/schemas/m4_world_location_update_schema.json#/$defs/Principals"
+        },
+        "update_ref": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "update_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "selected_record_sha256": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "minProperties": 1,
+          "maxProperties": 128
+        },
+        "read_vector_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "request_ref",
+        "principals",
+        "update_ref",
+        "update_sha256",
+        "selected_record_sha256",
+        "read_vector_sha256"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

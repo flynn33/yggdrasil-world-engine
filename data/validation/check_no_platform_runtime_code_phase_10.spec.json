@@ -58,7 +58,11 @@
     "core/narrative_engine/origin_progression.py",
     "core/player_state.py",
     "core/player_state_rules.py",
-    "core/player_state_migration.py"
+    "core/player_state_migration.py",
+    "core/commit_set_journal.py",
+    "core/branch_state.py",
+    "core/branch_state_wrw.py",
+    "core/world_location_state.py"
   ],
   "allowed_added_paths": [
     "scripts/check_fixture_catalog.py",
@@ -159,7 +163,13 @@
     "tests/m4_player_migration_fixture.py",
     "tests/test_m4_player_import.py",
     "tests/test_m4_origin_baseline.py",
-    "tests/test_m4_player_migration_schemas.py"
+    "tests/test_m4_player_migration_schemas.py",
+    "tests/test_m4_commit_set_journal.py",
+    "tests/test_m4_branch_state.py",
+    "tests/m4_branch_fixture.py",
+    "tests/m4_world_location_fixture.py",
+    "tests/test_m4_world_location_state.py",
+    "tests/test_m4_world_location_schemas.py"
   ],
   "severity": "block"
 }

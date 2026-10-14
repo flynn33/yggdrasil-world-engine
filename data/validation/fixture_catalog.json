@@ -25496,6 +25496,32 @@
         "YWE-REQ-0057"
       ],
       "description": "Actual synthetic qualified migration/continuation output; executable tests establish semantic admission and replay."
+    },
+    {
+      "fixture_id": "m4.commit_set.archive",
+      "path": "examples/state_journal/commit_set.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/m4_commit_set_journal_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0058"
+      ],
+      "description": "Actual bounded journal archive from explicitly synthetic mechanics owners; domain and multiplayer authority require separate actual-owner integration."
+    },
+    {
+      "fixture_id": "m4.world_location.result",
+      "path": "data/examples/m4_world_location_example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/m4_world_location_state_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0060"
+      ],
+      "description": "Actual bounded WorldLocationPolicy location-update output from synthetic qualified sources; coordinator publication and cross-owner authority remain separately tested obligations."
     }
   ]
 }

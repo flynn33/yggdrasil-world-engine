@@ -1,0 +1,428 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_world_location_profile_schema.json",
+  "title": "M4 World Location Profile",
+  "x-ywe-requirement-id": "YWE-REQ-0060",
+  "$ref": "#/$defs/Profile",
+  "$defs": {
+    "FactDefinition": {
+      "type": "object",
+      "properties": {
+        "definition_ref": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "slot_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "domain": {
+          "enum": [
+            "npc_availability",
+            "faction_standing",
+            "local_world_condition",
+            "myth_seed_state",
+            "prophecy_weight_state",
+            "temporary_space_residue",
+            "recurring_symbol_recurrence",
+            "future_generation_bias"
+          ]
+        },
+        "subject_ref": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "realm_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "location_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "value_kind": {
+          "enum": [
+            "token",
+            "boolean",
+            "integer",
+            "reference",
+            "references"
+          ]
+        },
+        "allowed_values": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 0,
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "minimum": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "maximum": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mutable": {
+          "type": "boolean"
+        },
+        "mergeable": {
+          "type": "boolean"
+        },
+        "projection_fact_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "definition_ref",
+        "slot_id",
+        "domain",
+        "subject_ref",
+        "realm_id",
+        "location_id",
+        "value_kind",
+        "allowed_values",
+        "minimum",
+        "maximum",
+        "mutable",
+        "mergeable",
+        "projection_fact_id"
+      ],
+      "additionalProperties": false
+    },
+    "LocationDefinition": {
+      "type": "object",
+      "properties": {
+        "location_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "base_location_ref": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "realm_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true
+        },
+        "geography_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "allowed_current_states": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "enum": [
+                  "base",
+                  "observed",
+                  "altered",
+                  "activated",
+                  "suppressed",
+                  "threatened",
+                  "consecrated",
+                  "unstable",
+                  "contained",
+                  "archived"
+                ]
+              },
+              "phase": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "stability": {
+                "enum": [
+                  "dormant",
+                  "stable",
+                  "unstable",
+                  "contained",
+                  "collapsing",
+                  "mythicized",
+                  "prophecy_charged"
+                ]
+              }
+            },
+            "required": [
+              "status",
+              "phase",
+              "stability"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "access_definitions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "access_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "access_kind": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              }
+            },
+            "required": [
+              "access_id",
+              "access_kind"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 16,
+          "uniqueItems": true
+        },
+        "thin_veil_slots": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "target_realm_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "slot_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              }
+            },
+            "required": [
+              "target_realm_id",
+              "slot_id"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 16,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "location_id",
+        "base_location_ref",
+        "realm_ids",
+        "geography_sha256",
+        "allowed_current_states",
+        "access_definitions",
+        "thin_veil_slots"
+      ],
+      "additionalProperties": false
+    },
+    "LocationRule": {
+      "type": "object",
+      "properties": {
+        "rule_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "location_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "source_current": {
+          "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/LocationCurrent"
+        },
+        "target_current": {
+          "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/LocationCurrent"
+        },
+        "condition_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 0,
+          "maxItems": 16,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "rule_id",
+        "location_id",
+        "source_current",
+        "target_current",
+        "condition_refs"
+      ],
+      "additionalProperties": false
+    },
+    "Profile": {
+      "type": "object",
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "component_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "law_ref": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "geography_ref": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "realm_plane_bindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "realm_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "plane_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              }
+            },
+            "required": [
+              "realm_id",
+              "plane_id"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 64,
+          "uniqueItems": true
+        },
+        "fact_definitions": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_world_location_profile_schema.json#/$defs/FactDefinition"
+          },
+          "minItems": 0,
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "location_definitions": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_world_location_profile_schema.json#/$defs/LocationDefinition"
+          },
+          "minItems": 0,
+          "maxItems": 8,
+          "uniqueItems": true
+        },
+        "mutable_rules": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_world_location_profile_schema.json#/$defs/LocationRule"
+          },
+          "minItems": 0,
+          "maxItems": 64,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "profile_id",
+        "component_id",
+        "law_ref",
+        "geography_ref",
+        "realm_plane_bindings",
+        "fact_definitions",
+        "location_definitions",
+        "mutable_rules"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

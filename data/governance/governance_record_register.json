@@ -2354,12 +2354,115 @@
         "docs/architecture/player_runtime_state_contract.md",
         "core/narrative_engine/player_runtime_state_rules.yaml"
       ]
+    },
+    {
+      "id": "ADR-0050",
+      "record_type": "decision",
+      "title": "Coordinate bounded owner components in a distinct atomic journal",
+      "status": "accepted",
+      "recorded_on": "2026-10-14",
+      "owner_role": "State and synchronization maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt the bounded commit-set mechanics contract before dependent implementation under continued M4 authorization.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Existing journals publish one truth scope; sequencing their commits cannot ensure whole-vector atomicity. Actual two-player and two-observer states exceed existing per-owner limits while remaining individually valid. Branch lineage and location partitions can share a governing scope and need distinct component identities.",
+      "decision": "Add a separate CommitSetBinding and CommitSetJournal with bounded aggregate encoding, exact component pins and heads, detached replay-derived history, closed round decisions and typed compensation mappings. Preserve existing CommitJournal APIs, scalar rules, limits and archive bytes. Approve only core/commit_set_journal.py and tests/test_m4_commit_set_journal.py for this mechanics increment.",
+      "rationale": "One private reduction and publication point provides local atomicity without new lock reservations across independent stores, a new truth-authority tier or a general transaction framework.",
+      "consequences": [
+        "The constructor is trusted composition; domain owners and coordinator must separately establish authorization, truthful dependencies and deterministic conflict semantics.",
+        "Finite retention and component capacity refuse without pruning; hashes do not authenticate a replaced archive or supply distributed durability.",
+        "No dependency or platform runtime is added. Branch/world integration, multiplayer acceptance and all M4 deliverable and exit gates remain open."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0058",
+        "YWE-REQ-0052",
+        "YWE-REQ-0053",
+        "YWE-REQ-0056",
+        "YWE-REQ-0057"
+      ],
+      "source_refs": [
+        "docs/architecture/m4_commit_set_contract.md",
+        "docs/architecture/m4_commit_journal_contract.md",
+        "docs/architecture/truth_authority_lattice.md",
+        "docs/architecture/player_state_branch_integration_contract.md"
+      ]
+    },
+    {
+      "id": "ADR-0051",
+      "record_type": "decision",
+      "title": "Admit branch creation and merge through exact lineage and domain evidence",
+      "status": "accepted",
+      "recorded_on": "2026-10-14",
+      "owner_role": "State and synchronization maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt the neutral branch owner and explicitly scoped player bridge before implementation under continued M4 authorization.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Legacy branch schemas cannot prove initial root identity, meaningful choice, exact ancestry or two-parent merge; standalone player references do not establish branch ownership.",
+      "decision": "Add a pure BranchStatePolicy, additive closed branch/event/context/envelope schemas and a separately classified WRW action/effect bridge. Adopt event-free unique bootstrap, meaningful forks with at least two alternatives, exact typed three-way merge, replay-derived maximal common-base proof and complete inherited occurrence/consumption histories. Approve only the source and test paths named in the branch contract.",
+      "rationale": "Explicit invariant owners and exact ancestry avoid guessed roots, arbitrary dictionary merges, private truth promotion and lost history while preserving existing source formats and archives.",
+      "consequences": [
+        "World/location owns actual domain values; lineage projections cannot directly mutate another owner or shared truth.",
+        "Child domain inheritance and additive merge-aware player history remain required integration work before full merge acceptance.",
+        "No dependency, platform runtime or production storage is added; no M4 deliverable, exit or quality debt closes through adoption."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0059",
+        "YWE-REQ-0058",
+        "YWE-REQ-0056",
+        "YWE-REQ-0057"
+      ],
+      "source_refs": [
+        "docs/architecture/m4_branch_owner_contract.md",
+        "docs/architecture/leaf_branch_reality_contract.md",
+        "docs/architecture/branch_event_contract.md",
+        "docs/architecture/player_state_branch_integration_contract.md"
+      ]
+    },
+    {
+      "id": "ADR-0052",
+      "record_type": "decision",
+      "title": "Admit exact world and location consequences under scoped domain owners",
+      "status": "accepted",
+      "recorded_on": "2026-10-14",
+      "owner_role": "State and synchronization maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt the bounded world/location owner contract before implementation under continued M4 authorization.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "Phase 11 deltas describe operation and field-change labels without executable values. M3 Realm evaluates supplied eligibility but does not commit or authenticate current location and player state.",
+      "decision": "Add a pure WorldLocationPolicy with explicit registered typed values, exact location transition tables, qualified Phase 11 source closure, actual value conditions and append-only effects. Derive Realm eligibility from verified pre-operation owner reads, validate original actual M3 access/proposal issuance and repeat it on replay. Keep realm, player-plane and mathematical-state identities distinct. Approve only the exact source, tests, fixture and additive schemas named by the contract.",
+      "rationale": "Typed domain values and actual staged-read qualification make descriptive mutation contracts executable without interpreting prose, guessing defaults or granting world authority to a producer result.",
+      "consequences": [
+        "Each owner keeps its exact governing scope. Policy identity binds semantic configuration and genesis; packets bind complete selected catalog closure so future qualified read heads do not create a catalog/policy identity cycle. Qualified child inheritance needs a separately adopted factory.",
+        "Coordinator integration must bind world actions to actual accepted player results and final occupancy/form/location consistency, and define authorized observer projection.",
+        "No external dependency, producer change or platform runtime is added; all M4 deliverables, exits and quality debt remain open."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0060",
+        "YWE-REQ-0059",
+        "YWE-REQ-0058",
+        "YWE-REQ-0056"
+      ],
+      "source_refs": [
+        "docs/architecture/m4_world_location_owner_contract.md",
+        "docs/architecture/worldstate_location_mutation_v1.md",
+        "docs/architecture/location_mutation_rule_contract.md",
+        "docs/architecture/realm_truth_boundary_contract.md"
+      ]
     }
   ],
   "summary": {
-    "total_records": 66,
-    "architecture_decisions": 49,
-    "accepted_decisions": 47,
+    "total_records": 69,
+    "architecture_decisions": 52,
+    "accepted_decisions": 50,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

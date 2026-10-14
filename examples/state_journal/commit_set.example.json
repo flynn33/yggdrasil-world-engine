@@ -1,0 +1,233 @@
+{
+  "binding": {
+    "container_id": "example.container",
+    "format": "ywe.commit_set_binding.v1",
+    "world_id": "example.world"
+  },
+  "entries": [
+    {
+      "after_state_digest": "67174cfd516a06c89003e9c904852666b0e4ac89b956076e29c2e9a4307456e6",
+      "before_state_digest": "14254bfaaf864560ea237e366166670cf9c22fc715f04c30f61b55779a72f29b",
+      "component_steps": [
+        {
+          "after": {
+            "component_id": "counter.left",
+            "head_digest": "3504658647285bcf0177a055c678c194956ac788ba9b557ba6a67655fcdb5187",
+            "owner_policy_id": "example.counter.v1",
+            "revision": 1,
+            "scope": {
+              "subject_id": "example.branch",
+              "truth_scope": "leaf_branch_state",
+              "world_id": "example.world"
+            },
+            "state_sha256": "6aea6dfe6561984cdc5c54ead84d47d2cf29e48253ae282aef237404adad4661"
+          },
+          "before": {
+            "component_id": "counter.left",
+            "head_digest": "e7ae83c2dcd6666d25f7f7a0a4e66f1f26347383bc1ad4995d96c8469a0f0b07",
+            "owner_policy_id": "example.counter.v1",
+            "revision": 0,
+            "scope": {
+              "subject_id": "example.branch",
+              "truth_scope": "leaf_branch_state",
+              "world_id": "example.world"
+            },
+            "state_sha256": "618de7d9f46f3f697d827a1b6d84974760d5deda62e4e592adaa3c646602a94c"
+          },
+          "component_id": "counter.left",
+          "create": false,
+          "owner_policy_id": "example.counter.v1",
+          "owner_request_ref": "example.request",
+          "packet_sha256": "9d02f8499bc9bee07953a735603c87d6708a2fabd634529c9cfb77d16ac641f5",
+          "principal": "principal",
+          "proposal_id": "example.proposal",
+          "round_id": "example.round",
+          "scope": {
+            "subject_id": "example.branch",
+            "truth_scope": "leaf_branch_state",
+            "world_id": "example.world"
+          }
+        },
+        {
+          "after": {
+            "component_id": "counter.right",
+            "head_digest": "05b89ba7984f35a1135a10a5c86d0e52f385227aab20784896d9e034f7c629b6",
+            "owner_policy_id": "example.counter.v1",
+            "revision": 1,
+            "scope": {
+              "subject_id": "example.branch",
+              "truth_scope": "leaf_branch_state",
+              "world_id": "example.world"
+            },
+            "state_sha256": "57413ce83ee1d989e384dfd3a82c6e2d9052a23c4204706bd2d7df11aa4c2d7c"
+          },
+          "before": {
+            "component_id": "counter.right",
+            "head_digest": "0e057401a62eb4f4c26c8c83ab37199f287064465d1071595e662be354a2381e",
+            "owner_policy_id": "example.counter.v1",
+            "revision": 0,
+            "scope": {
+              "subject_id": "example.branch",
+              "truth_scope": "leaf_branch_state",
+              "world_id": "example.world"
+            },
+            "state_sha256": "618de7d9f46f3f697d827a1b6d84974760d5deda62e4e592adaa3c646602a94c"
+          },
+          "component_id": "counter.right",
+          "create": false,
+          "owner_policy_id": "example.counter.v1",
+          "owner_request_ref": "example.request",
+          "packet_sha256": "23715fa946835efb0e87565369804b8ef9f19b1be720fc0ede260d737b649189",
+          "principal": "principal",
+          "proposal_id": "example.proposal",
+          "round_id": "example.round",
+          "scope": {
+            "subject_id": "example.branch",
+            "truth_scope": "leaf_branch_state",
+            "world_id": "example.world"
+          }
+        }
+      ],
+      "decisions": [
+        {
+          "code": "ACCEPTED",
+          "principal": "principal",
+          "prior_decision": null,
+          "proposal_id": "example.proposal",
+          "proposal_sha256": "77e796795a2e7ce71b19a1e31fc1b826cba3ec02163967c1fc935ede200e8d0b",
+          "status": "ACCEPTED",
+          "step_indices": [
+            0,
+            1
+          ]
+        }
+      ],
+      "entry_digest": "e068369dafd6bf717fc16102bc85375d059c307dc1cb165e0f7b3c98ee6b00d3",
+      "expected_revision": 0,
+      "packet": {
+        "format": "ywe.closed_round.v1",
+        "proposals": [
+          {
+            "compensations": [],
+            "components": [
+              {
+                "component_id": "counter.left",
+                "owner_policy_id": "example.counter.v1",
+                "owner_request_ref": "example.request",
+                "packet": {
+                  "add": 1
+                },
+                "scope": {
+                  "subject_id": "example.branch",
+                  "truth_scope": "leaf_branch_state",
+                  "world_id": "example.world"
+                }
+              },
+              {
+                "component_id": "counter.right",
+                "owner_policy_id": "example.counter.v1",
+                "owner_request_ref": "example.request",
+                "packet": {
+                  "add": 2
+                },
+                "scope": {
+                  "subject_id": "example.branch",
+                  "truth_scope": "leaf_branch_state",
+                  "world_id": "example.world"
+                }
+              }
+            ],
+            "predecessor_refs": [],
+            "principal": "principal",
+            "proposal_id": "example.proposal",
+            "reads": [],
+            "sequence": 0,
+            "writes": [
+              "counter.left",
+              "counter.right"
+            ]
+          }
+        ],
+        "round_id": "example.round",
+        "sequence": 0
+      },
+      "previous_digest": "48023f74d9d8b8c30c900374b901cece4ef9b7c5a540fbadc5d86a2ab1cc2866",
+      "revision": 1,
+      "round_id": "example.round"
+    }
+  ],
+  "final_state": {
+    "components": [
+      {
+        "component_id": "counter.left",
+        "head_digest": "3504658647285bcf0177a055c678c194956ac788ba9b557ba6a67655fcdb5187",
+        "owner_policy_id": "example.counter.v1",
+        "revision": 1,
+        "scope": {
+          "subject_id": "example.branch",
+          "truth_scope": "leaf_branch_state",
+          "world_id": "example.world"
+        },
+        "state": {
+          "count": 1
+        },
+        "state_sha256": "6aea6dfe6561984cdc5c54ead84d47d2cf29e48253ae282aef237404adad4661"
+      },
+      {
+        "component_id": "counter.right",
+        "head_digest": "05b89ba7984f35a1135a10a5c86d0e52f385227aab20784896d9e034f7c629b6",
+        "owner_policy_id": "example.counter.v1",
+        "revision": 1,
+        "scope": {
+          "subject_id": "example.branch",
+          "truth_scope": "leaf_branch_state",
+          "world_id": "example.world"
+        },
+        "state": {
+          "count": 2
+        },
+        "state_sha256": "57413ce83ee1d989e384dfd3a82c6e2d9052a23c4204706bd2d7df11aa4c2d7c"
+      }
+    ],
+    "format": "ywe.commit_set_state.v1",
+    "world_id": "example.world"
+  },
+  "format": "ywe.commit_set_journal.v1",
+  "initial_state": {
+    "components": [
+      {
+        "component_id": "counter.left",
+        "head_digest": "e7ae83c2dcd6666d25f7f7a0a4e66f1f26347383bc1ad4995d96c8469a0f0b07",
+        "owner_policy_id": "example.counter.v1",
+        "revision": 0,
+        "scope": {
+          "subject_id": "example.branch",
+          "truth_scope": "leaf_branch_state",
+          "world_id": "example.world"
+        },
+        "state": {
+          "count": 0
+        },
+        "state_sha256": "618de7d9f46f3f697d827a1b6d84974760d5deda62e4e592adaa3c646602a94c"
+      },
+      {
+        "component_id": "counter.right",
+        "head_digest": "0e057401a62eb4f4c26c8c83ab37199f287064465d1071595e662be354a2381e",
+        "owner_policy_id": "example.counter.v1",
+        "revision": 0,
+        "scope": {
+          "subject_id": "example.branch",
+          "truth_scope": "leaf_branch_state",
+          "world_id": "example.world"
+        },
+        "state": {
+          "count": 0
+        },
+        "state_sha256": "618de7d9f46f3f697d827a1b6d84974760d5deda62e4e592adaa3c646602a94c"
+      }
+    ],
+    "format": "ywe.commit_set_state.v1",
+    "world_id": "example.world"
+  },
+  "policy_id": "example.counter-coordinator.v1"
+}

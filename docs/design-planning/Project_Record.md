@@ -1,7 +1,7 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-56
+**Revision:** planning-59
 **Date:** October 14, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
@@ -22,7 +22,7 @@
 | M2 acceptance | Complete; immutable evidence records all six exit criteria and eight deliverables |
 | M3 acceptance | Complete; immutable evidence `data/governance/m3_acceptance_evidence.json` binds the four executed archives, 28 invariant judgments, five conformance categories, nine module obligations, seven deliverables and five exit criteria |
 | Source closure | Original clean full execution and successful exact-revision Ubuntu/Windows CI verified October 11 (section 14); section 12 external review remains representation-matched only, `acceptance=false`, `provenance_review_required=true`; neither accepts N3 or M3 |
-| Wiki | M3 publication `2df16c1e5b5af0b386bdab02dc7c289b9c7a2c97` from source `ce294ec`; prior publication readback verified all 47 pages |
+| Wiki | M4 publication `220554b93fdea766dc47cdfd3954c3a195dcebf0` from source `93bc352`; fresh readback verified all 47 pages |
 | Publication | Unreleased; no GitHub Release objects exist as verified September 20, 2026 |
 | Workflow | Owner explicitly resumed on October 14. Continue M4 contracts, implementation, verification and owner publication, preserving M0–M3 acceptance and later milestone gates |
 
@@ -2701,3 +2701,250 @@ remote README/roadmap bytes were verified and full CI was dispatched. Wiki
 `476a52a17c0abc37830bda93d86e155b68ea922d` matches all 47 pages on fresh readback.
 The separate full local run at `59cdd` is still pending; this publication claims
 focused and selected verification only. M4 remains in progress.
+
+### 27.1. Pure owner publication and completed earlier full-run result
+
+Clean revision `93bc35208e187a5c8578e4c7e04346dadd057ce2` passed all 292 focused
+tests in 104.001 seconds and all nine affected repository checks through
+`bash scripts/run_checks.sh` in an offline checkout. Both checkout integrity
+checks remained clean. The exact live M1 regression also passed independently
+in 8.648 seconds. This checkpoint was pushed atomically to main and the M4 branch
+as the owner. Remote README and roadmap bytes match; wiki commit
+`220554b93fdea766dc47cdfd3954c3a195dcebf0` matches all 47 pages on fresh readback.
+Full CI `38571710809` and the corrected migration CI `38570544249` are pending
+at this record's update. No full-suite success is inferred from dispatch.
+
+The older clean full run at `59cdd141ceab0aa31894242896f5a2ff843211f9` has now
+finished: 35 of 37 repository checks passed. Its unit selection executed 1,567
+tests with one failure, zero errors and zero skips. The two blocking check
+results were M1 governance and the unit selection containing
+`LiveM1ContractTests.test_live_closed_repository_passes_with_acceptance_evidence`.
+Both exposed the concrete player modules' missing WRW profile assignments.
+Those assignments were corrected in `6e9ffe6`; the exact regression and current
+M1 check now pass. A new complete 37-check execution of `93bc352` is in progress.
+Historical failed reports are retained and are not relabeled as successful.
+
+Current step: adopt and implement the bounded commit-set, branch and world/local
+owner contracts, then integrate deterministic coordinated admission and actual
+M3 Realm/Perception results. Existing scope and archive compatibility remain
+controlling. All M4 deliverables, exits and quality debt remain open. Needed from
+owner: none.
+
+## 28. Bounded commit-set mechanics adoption — October 14, 2026
+
+YWE-REQ-0058 / ADR-0050 adopts the separate commit-set contract before source
+implementation. The existing single-owner journal and all standalone archive
+identities stay unchanged. Distinct component IDs retain exact owner and scope
+pins; one atomic snapshot retains complete round decisions, component heads,
+retry identities and verified historical read views. Finite aggregate limits
+are explicit and capacity refuses without pruning or partial forks.
+
+Actual two-player/two-observer measurement exceeded the old per-owner aggregate
+limit at 68,385 bytes and 4,491 nodes with 16 visibility rules per observer;
+each component individually passed. This is sizing evidence, not synchronization
+proof. Source review also established that historical branch heads must come
+from replay, and that the coordinator needs staged component-head generation
+without an outer-entry hash cycle. The adopted reducer/history API addresses
+both while preserving pure owner interfaces.
+
+The recorded Raven v0.7.0 binding and reference-only scope persist; no external
+system, dependency, service or platform target is selected. Exact new source,
+test, schema and example paths are named in the contract and both source-path
+guards. Next: implement journal mechanics and actual-owner verification while
+separately adopting concrete branch and world/local admission. All M4 gates and
+quality debt remain open. Needed from owner: none.
+
+## 29. Qualified branch lineage adoption — October 14, 2026
+
+YWE-REQ-0059 / ADR-0051 adopts the neutral branch owner before implementation.
+Source review bound 30 files at `93bc352` and identified the open legacy branch
+shape, mandatory nonempty parent, one-parent player history and absence of
+executable meaningful-choice or merge proof. These are observed source limits,
+not implementation failures attributed to an unexamined runtime.
+
+The new additive contract defines explicit event-free bootstrap, qualified
+meaningful forks, exact head-bound lineage and same-player three-way merge.
+Typed values stay owned by the world/location schema; branch projections cannot
+rewrite those owners. A separate WRW bridge handles concrete player fields.
+Actual child-domain inheritance and merge-aware player history require explicit
+later adoption before integrated merge can be claimed. No old schema or archive
+is rewritten, and no status/debt/gate is closed. Next: implement and independently
+exercise branch ownership while completing world/location and coordinator
+contracts. Needed from owner: none.
+
+## 30. Typed world/location ownership adoption — October 14, 2026
+
+YWE-REQ-0060 / ADR-0052 adopts world/location admission before source edits.
+Source review binds 34 files at `93bc352`. Phase 11 operation labels lack actual
+before/after values; M3 Realm checks supplied facts but does not resolve current
+world location. The additive owner closes those gaps through exact typed values,
+complete location transition tables, immutable law/geography anchors and
+qualified conditions evaluated against verified pre-operation owner reads.
+
+Realm eligibility uses actual selected player scores and objective veil state,
+then actual M3 access/proposal calls with original issuer checks before retaining
+records. A requested move cannot use its own prospective effects to qualify.
+Replay repeats actual calls. The owner remains one immutable truth scope, with
+fixed full-catalog policy identity. Child branch inheritance and authorized
+observer projection still need their concrete integration contracts. Next:
+implement this owner and its schemas while journal and branch work proceeds;
+then bind actual owners in the coordinator. No dependency, M3 archive, platform
+scope, debt disposition or milestone gate changes. Needed from owner: none.
+
+### 30.1. Exact path-role verification
+
+The first local guard run failed because six new test/fixture files were placed
+in the reference-implementation list. Reading `reviewed_python_exceptions`
+confirmed that existing test approvals belong in `allowed_added_paths` while
+Core implementations need `allowed_reference_paths` and the platform allowlist.
+The six registrations now use their established validation role; no guard was
+weakened. All 25 affected guard tests pass, including an added wrong-role/missing
+approval regression for those exact six paths. These are boundary checks, not
+new journal/branch/world behavior acceptance. Owner implementations are ongoing.
+
+### 30.2. Catalog identity cycle correction before owner implementation
+
+Review of the new interfaces found a potential binding cycle: a world policy
+hash over its complete update catalog would include branch read heads, while
+branch bootstrap qualification includes the world owner head. Those heads bind
+the corresponding policy identities. This is a design inference from the exact
+adopted hash inputs, not a reproduced runtime fault. Before implementing that
+hash, the contract and ADR now use the established player-policy boundary:
+semantic configuration, initial state, grants, schemas, actual M3 binding and
+immutable anchors define world policy identity; packets bind complete selected
+record/update closure. Every catalog record still validates, and changed selected
+bytes fail replay. Unused qualified catalog extension does not change semantics
+or old packet identity. No existing published archive is affected.
+
+## 31. Commit-set verification and coordinator inputs — October 14, 2026
+
+The new journal, original journal and observer persistence selection passed all
+80 tests in an independent root run (2.151 seconds), including 24 new commit-set
+tests. The initial root command used the nonexistent test module
+`tests.test_state_journal`; 52 actual tests passed and that import failed. File
+discovery identified `tests.test_m4_state_journal`, and the corrected command
+produced the complete 80-test result. No implementation changed for that typo.
+
+A separate actual-owner experiment passed with two qualified migrated players
+and two actual M3 observers, each with sixteen rules. The combined state is
+68,345 bytes and 4,491 nodes; every owner separately meets its original limits.
+A failure in the second observer preserved the exact prior checkpoint. Valid
+retry, exact outputs, checkpoint replay and committed retry without reduction
+passed. The collaborator in this mechanics experiment is explicitly synthetic;
+it does not establish cross-owner authority or qualify the declared truth input.
+The external receipt is `ywe-m4-actual-four-owner-journal-20261014.json`.
+
+Coordinator source review found that PlayerStatePolicy exposed selected record
+wrappers and update hashes but no update body. Its existing pure-owner contract
+now adopts detached `update(update_ref)` before implementation, under the same
+YWE-REQ-0056/0057 scope. This enables deriving dependencies from actual typed
+operations without private-catalog access or inference from reference presence.
+Old hashes, packets, archives and standalone signatures remain unchanged.
+World/location adopts the corresponding accessor and derived read requirements
+within its owner contract. The coordinator contract remains an external draft;
+actual branch/domain integration and all M4 acceptance gates remain open.
+
+The WRW branch bridge also needs the existing owner's domain checks without
+calling a private mutating validator. Before that dependency is implemented,
+the same pure-owner contract adopts `validated_state(state)`: copy and bound,
+check exact owner identity and retained digests, run existing lifecycle-specific
+domain checks, and refuse any implicit record insertion. It expressly consumes
+verified owner outputs and is not a snapshot/history authenticator. This avoids
+duplicating the player's schema rules inside the branch adapter.
+
+The complete player, new commit-set, standalone journal and perception selection
+then passed 114 tests in 19.339 seconds. The new update accessor test initially
+missed its hashlib import; that test-only import was corrected before the pass.
+All twenty frozen original/imported archives had also reproduced unchanged
+after the update accessor addition. Full exact-93bc repository execution remains
+in progress; these focused results do not replace its pending outcome.
+
+### 31.1. Root genesis identity and reference-profile boundary
+
+Actual branch bootstrap review reproduced a hash cycle: changing an actual
+initial player's P4 score changed only the returned root branch's consumed
+request payload digest. The root packet closure binds that player state, while
+the player terminal must bind the final branch document. External receipt
+`ywe-m4-genesis-cycle-reproduction-20261014.json` records both actual player
+hashes and the exact consumed-field difference; its world fixture is synthetic.
+This record adopts, before dependent implementation, an explicit root-only
+joint-genesis factory, which qualifies actual inputs without inventing a
+committed request. Normal journal bootstrap reduction retains request consumption.
+Coordinator genesis must repeat the factory and require exact proposed/actual
+root-document equality before installing any component. No published ledger
+is pruned or rewritten by this still-unpublished implementation correction.
+
+Scope review read WorldLocationPolicy._plane and the exact supplied plane schema:
+the latter requires WRW P1_Physical through P9_Divine_Core members. Under the
+existing YWE-REQ-0015 compatibility rule, this first concrete world/location
+realization is explicitly assigned to wrw_reference_profile. Its neutral typed
+world/authority/Realm invariants remain Core, but its WRW spine and source-format
+binding does not become mandatory neutral player ontology. The matching owner
+contract now carries that explicit scope notice. A neutral player-source adapter and integrated
+cross-owner acceptance remain subsequent work; no agnosticism gate closes.
+
+### 31.2. Independent compatibility and governance checks
+
+All twenty frozen original/imported player and perception archives reproduced
+unchanged after both public player accessors were present. The verifiers consume
+saved configurations without importing current fixture helpers. The live M1
+regression initially found two new branch-contract MUST paragraphs lacking their
+local stable requirement marker. Adding YWE-REQ-0059 to those paragraphs retained
+their meaning; the unchanged regression then passed in 6.295 seconds.
+
+Current derived inventory covers 1,519 candidate paths, with the same 30 declared
+placeholders and 44 open quality debts. That refresh changes counts and reviewed
+surface hashes only; it does not accept the new owners or close a roadmap gate.
+The selected/full repository checks will verify the final committed checkpoint.
+
+Coordinator review also identified a missing public realm mapping query. Before
+implementation, YWE-REQ-0060 now adopts detached WorldLocationPolicy.realm:
+the exact actual M3 realm definition and explicitly configured player-plane ID.
+This accessor avoids private-field access and display-name inference. The initial
+coordinator increment will qualify actual root genesis and player/world/observer
+rounds; runtime branch operations remain explicitly unsupported until child
+inheritance, occupancy handoff and merge-aware player history are adopted.
+Needed from owner: none. Continue implementation and verification.
+
+### 31.3. Published pure-owner checkpoint full verification
+
+The exact clean `93bc35208e187a5c8578e4c7e04346dadd057ce2` full run completed
+successfully through `bash scripts/run_checks.sh`, local/offline, in 3,773.203
+seconds. All 37 repository checks passed. Its actual unit receipt records 1,667
+tests, zero failures, errors, skips, expected failures or unexpected successes.
+The checkout was clean before and after execution. The executed report,
+transcript and case receipt use external prefix
+`ywe-m4-pure-owner-full-20261014`; the unit run itself took 3,243.748 seconds.
+This supersedes only the pending status of that run in earlier entries. The
+earlier failing `59cdd141` execution remains preserved as failure evidence.
+These results cover the published pure-owner checkpoint, not the newer branch
+and world/location files being verified for the next checkpoint. No M4 gate is
+closed by this complete repository pass.
+
+### 31.4. Branch and world/location owner checkpoint
+
+The independent combined player, commit-set, original journal, perception,
+branch, world/location and world schema selection passed all 174 tests in
+160.939 seconds. Its recorder verified that every inspected Python/schema input
+remained unchanged during execution. External evidence is
+`ywe-m4-three-owner-focused-20261014.{json,log}`. Separate branch and world-owner
+receipts each record 30 passing tests and their exact source hashes. The offline
+fixture catalog check passed 1,570 bindings, including 563 intended rejections.
+
+The branch slice now implements event-free genesis, exact current/historical
+reads, bounded authorized intermediate snapshots, actual WRW fork evidence,
+retained local/imported identities and typed automatic three-way merge. Its
+world projections are synthetic qualification inputs; actual child inheritance,
+positive WRW advance/revisit/merged-player admission and coordinator atomic
+publication remain separate work. The world slice implements typed effects,
+explicit location transitions/overlays and actual M3 Realm calls; it verifies
+shared veil basis, original issuance and exact request/access identity and
+refuses qualification from its own prospective veil update. Its final combined
+run also covers full catalog closure, the actual legacy overlay source object,
+Phase 11 integer sequence metadata and detached realm mapping access.
+
+README and detailed roadmap now list these concrete implemented slices while
+all five M4 deliverables and five exits remain open. Next: run the normal checks
+against the exact committed checkpoint, publish through owner authority and
+refresh/read back the wiki, then continue coordinated admission and the remaining
+branch participant contracts. Needed from owner: none.

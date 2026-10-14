@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_branch_owner_schema.json",
+  "title": "m4 branch owner schema",
+  "x-ywe-requirement-id": "YWE-REQ-0059",
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": "ywe.branch_owner.v1"
+    },
+    "world_id": {
+      "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+    },
+    "branch_id": {
+      "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+    },
+    "owner_player_id": {
+      "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+    },
+    "branch": {
+      "anyOf": [
+        {
+          "$ref": "https://ywe.local/schemas/m4_leaf_branch_reality_state_schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "events": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+      },
+      "additionalProperties": {
+        "$ref": "https://ywe.local/schemas/m4_branch_event_schema.json"
+      },
+      "maxProperties": 128
+    }
+  },
+  "required": [
+    "format",
+    "world_id",
+    "branch_id",
+    "owner_player_id",
+    "branch",
+    "events"
+  ],
+  "additionalProperties": false
+}

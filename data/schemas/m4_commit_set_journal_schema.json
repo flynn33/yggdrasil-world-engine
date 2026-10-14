@@ -1,0 +1,710 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_commit_set_journal_schema.json",
+  "title": "M4 Bounded Commit-set Journal Archive",
+  "description": "Structural wire contract only. Exact scalar tokens, UTF-8 byte/node/depth budgets, ordering, membership, identity, scope/policy pins and all digest/reduction/history relationships are verified by the reference journal. The binding is an atomicity container, not a truth scope.",
+  "x-ywe-requirement-id": "YWE-REQ-0058",
+  "type": "object",
+  "required": [
+    "format",
+    "binding",
+    "policy_id",
+    "initial_state",
+    "entries",
+    "final_state"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "ywe.commit_set_journal.v1"
+    },
+    "binding": {
+      "$ref": "#/$defs/Binding"
+    },
+    "policy_id": {
+      "$ref": "#/$defs/Identifier"
+    },
+    "initial_state": {
+      "$ref": "#/$defs/State"
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 64,
+      "items": {
+        "$ref": "#/$defs/Entry"
+      }
+    },
+    "final_state": {
+      "$ref": "#/$defs/State"
+    }
+  },
+  "$defs": {
+    "Identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "Digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "UnsignedInteger": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "Value": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        {
+          "type": "string",
+          "maxLength": 65536
+        },
+        {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 4096,
+          "items": {
+            "$ref": "#/$defs/Value"
+          }
+        },
+        {
+          "$ref": "#/$defs/Object"
+        }
+      ]
+    },
+    "Object": {
+      "type": "object",
+      "maxProperties": 4096,
+      "propertyNames": {
+        "type": "string",
+        "maxLength": 65536
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/Value"
+      }
+    },
+    "Binding": {
+      "type": "object",
+      "required": [
+        "format",
+        "world_id",
+        "container_id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "const": "ywe.commit_set_binding.v1"
+        },
+        "world_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "container_id": {
+          "$ref": "#/$defs/Identifier"
+        }
+      }
+    },
+    "Scope": {
+      "type": "object",
+      "required": [
+        "world_id",
+        "truth_scope",
+        "subject_id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "world_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "truth_scope": {
+          "enum": [
+            "shared_worldstate",
+            "leaf_branch_state",
+            "player_state",
+            "player_perception"
+          ]
+        },
+        "subject_id": {
+          "$ref": "#/$defs/Identifier"
+        }
+      }
+    },
+    "ComponentHead": {
+      "type": "object",
+      "required": [
+        "component_id",
+        "scope",
+        "owner_policy_id",
+        "revision",
+        "head_digest",
+        "state_sha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "component_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "scope": {
+          "$ref": "#/$defs/Scope"
+        },
+        "owner_policy_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "revision": {
+          "$ref": "#/$defs/UnsignedInteger"
+        },
+        "head_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "state_sha256": {
+          "$ref": "#/$defs/Digest"
+        }
+      }
+    },
+    "Component": {
+      "type": "object",
+      "required": [
+        "component_id",
+        "scope",
+        "owner_policy_id",
+        "revision",
+        "head_digest",
+        "state_sha256",
+        "state"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "component_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "scope": {
+          "$ref": "#/$defs/Scope"
+        },
+        "owner_policy_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "revision": {
+          "$ref": "#/$defs/UnsignedInteger"
+        },
+        "head_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "state_sha256": {
+          "$ref": "#/$defs/Digest"
+        },
+        "state": {
+          "$ref": "#/$defs/Object"
+        }
+      }
+    },
+    "State": {
+      "type": "object",
+      "required": [
+        "format",
+        "world_id",
+        "components"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "const": "ywe.commit_set_state.v1"
+        },
+        "world_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "components": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/Component"
+          }
+        }
+      }
+    },
+    "ProposalRef": {
+      "type": "object",
+      "required": [
+        "principal",
+        "proposal_id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "principal": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "proposal_id": {
+          "$ref": "#/$defs/Identifier"
+        }
+      }
+    },
+    "Selection": {
+      "type": "object",
+      "required": [
+        "component_id",
+        "scope",
+        "owner_policy_id",
+        "owner_request_ref",
+        "packet"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "component_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "scope": {
+          "$ref": "#/$defs/Scope"
+        },
+        "owner_policy_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "owner_request_ref": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "packet": {
+          "$ref": "#/$defs/Object"
+        }
+      }
+    },
+    "Compensation": {
+      "type": "object",
+      "required": [
+        "component_id",
+        "component_request_ref",
+        "target_round_id",
+        "target_principal",
+        "target_proposal_id",
+        "target_component_request_ref",
+        "target_component_head"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "component_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "component_request_ref": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "target_round_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "target_principal": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "target_proposal_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "target_component_request_ref": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "target_component_head": {
+          "$ref": "#/$defs/ComponentHead"
+        }
+      }
+    },
+    "Proposal": {
+      "type": "object",
+      "required": [
+        "principal",
+        "proposal_id",
+        "sequence",
+        "predecessor_refs",
+        "reads",
+        "writes",
+        "components",
+        "compensations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "principal": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "proposal_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "sequence": {
+          "$ref": "#/$defs/UnsignedInteger"
+        },
+        "predecessor_refs": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/ProposalRef"
+          }
+        },
+        "reads": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/ComponentHead"
+          }
+        },
+        "writes": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/Identifier"
+          }
+        },
+        "components": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/Selection"
+          }
+        },
+        "compensations": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/Compensation"
+          }
+        }
+      }
+    },
+    "RoundPacket": {
+      "type": "object",
+      "required": [
+        "format",
+        "round_id",
+        "sequence",
+        "proposals"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "const": "ywe.closed_round.v1"
+        },
+        "round_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 64
+        },
+        "proposals": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/Proposal"
+          }
+        }
+      }
+    },
+    "PriorDecision": {
+      "type": "object",
+      "required": [
+        "round_id",
+        "decision_index",
+        "decision_sha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "round_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "decision_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "decision_sha256": {
+          "$ref": "#/$defs/Digest"
+        }
+      }
+    },
+    "Decision": {
+      "type": "object",
+      "required": [
+        "principal",
+        "proposal_id",
+        "proposal_sha256",
+        "status",
+        "code",
+        "prior_decision",
+        "step_indices"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "principal": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "proposal_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "proposal_sha256": {
+          "$ref": "#/$defs/Digest"
+        },
+        "status": {
+          "enum": [
+            "ACCEPTED",
+            "REJECTED",
+            "DUPLICATE"
+          ]
+        },
+        "code": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "prior_decision": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/PriorDecision"
+            }
+          ]
+        },
+        "step_indices": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 32,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 31
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "ACCEPTED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "code": {
+                "const": "ACCEPTED"
+              },
+              "prior_decision": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "REJECTED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "prior_decision": {
+                "type": "null"
+              },
+              "step_indices": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "DUPLICATE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "code": {
+                "const": "DUPLICATE"
+              },
+              "prior_decision": {
+                "$ref": "#/$defs/PriorDecision"
+              },
+              "step_indices": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ComponentStep": {
+      "type": "object",
+      "required": [
+        "round_id",
+        "component_id",
+        "scope",
+        "owner_policy_id",
+        "principal",
+        "proposal_id",
+        "owner_request_ref",
+        "packet_sha256",
+        "before",
+        "after",
+        "create"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "round_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "component_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "scope": {
+          "$ref": "#/$defs/Scope"
+        },
+        "owner_policy_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "principal": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "proposal_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "owner_request_ref": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "packet_sha256": {
+          "$ref": "#/$defs/Digest"
+        },
+        "before": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/ComponentHead"
+            }
+          ]
+        },
+        "after": {
+          "$ref": "#/$defs/ComponentHead"
+        },
+        "create": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "create": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "before": {
+                "type": "null"
+              },
+              "after": {
+                "properties": {
+                  "revision": {
+                    "const": 1
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "before": {
+                "$ref": "#/$defs/ComponentHead"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Entry": {
+      "type": "object",
+      "required": [
+        "round_id",
+        "expected_revision",
+        "packet",
+        "revision",
+        "previous_digest",
+        "before_state_digest",
+        "after_state_digest",
+        "decisions",
+        "component_steps",
+        "entry_digest"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "round_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "expected_revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 64
+        },
+        "packet": {
+          "$ref": "#/$defs/RoundPacket"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64
+        },
+        "previous_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "before_state_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "after_state_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "decisions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/Decision"
+          }
+        },
+        "component_steps": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 32,
+          "items": {
+            "$ref": "#/$defs/ComponentStep"
+          }
+        },
+        "entry_digest": {
+          "$ref": "#/$defs/Digest"
+        }
+      }
+    }
+  }
+}

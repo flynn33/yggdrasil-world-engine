@@ -276,8 +276,27 @@ class RoadmapValidationTests(unittest.TestCase):
 
 
 class PlayerRuntimeReferencePolicyTests(unittest.TestCase):
+    def test_commit_set_owner_verification_paths_require_validation_role(self):
+        paths = ["tests/test_m4_commit_set_journal.py", "tests/test_m4_branch_state.py",
+                 "tests/m4_branch_fixture.py", "tests/m4_world_location_fixture.py",
+                 "tests/test_m4_world_location_state.py", "tests/test_m4_world_location_schemas.py"]
+        self.assertEqual([], self.check_added(paths))
+        for path in paths:
+            with self.subTest(path=path):
+                spec = copy.deepcopy(self.spec)
+                spec["allowed_added_paths"].remove(path)
+                self.assertEqual([f"Phase 10 added forbidden platform/code file: {path}"],
+                                 self.check_added([path], spec))
+                spec["allowed_reference_paths"].append(path)
+                self.assertIn(
+                    f"Phase 10 allowed_reference_paths contains an unapproved Python role/path: {path}",
+                    self.check_added([path], spec))
+
     def test_m4_reference_paths_require_both_approvals_and_reject_neighbors(self):
-        paths = ["core/state_journal.py", "core/state_migration.py",
+        paths = ["core/world_location_state.py",
+                 "core/branch_state.py", "core/branch_state_wrw.py",
+                 "core/commit_set_journal.py",
+                 "core/state_journal.py", "core/state_migration.py",
                  "core/perception_engine/persistence.py", "core/narrative_engine/origin_progression.py",
                  "core/player_state.py", "core/player_state_rules.py", "core/player_state_migration.py"]
         self.assertEqual([], self.check_added(paths))

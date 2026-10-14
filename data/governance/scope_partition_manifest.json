@@ -7,8 +7,8 @@
   "policy_ref": "docs/project/scope_partition_map.md",
   "tracked_path_snapshot": {
     "source": "git_tracked_and_nonignored_untracked",
-    "path_count": 1495,
-    "path_digest": "c917920f2159bda609e059fd9c4f2d620b0c3e053cdec028be4fbab23cb994b1",
+    "path_count": 1519,
+    "path_digest": "1af3aaee032e10d58ad4d9dcd2cf57207ca9d1b30258cf6caa58953d34fe640b",
     "digest_algorithm": "sha256_sorted_posix_paths_nul"
   },
   "partitions": [
@@ -3363,16 +3363,38 @@
         "m4_player_compatibility",
         "reference_profile"
       ]
+    },
+    {
+      "path": "core/branch_state_wrw.py",
+      "primary_partition": "wrw_reference_profile",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_branch_owner_contract.md",
+      "rationale": "Explicit compatibility adapter for actual WRW player actions and semantic projections; named player fields do not become universal Core branch ontology.",
+      "secondary_tags": [
+        "m4_branch_compatibility",
+        "reference_profile"
+      ]
+    },
+    {
+      "path": "core/world_location_state.py",
+      "primary_partition": "wrw_reference_profile",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_world_location_owner_contract.md",
+      "rationale": "This concrete world/location realization binds the existing WRW player spine and named-plane compatibility schema. Neutral world, authority and Realm invariants remain Core; these source-format assumptions do not become universal player ontology.",
+      "secondary_tags": [
+        "m4_world_player_compatibility",
+        "reference_profile"
+      ]
     }
   ],
   "coverage": {
     "counts_by_partition": {
       "ash_dependency_material": 66,
-      "governance_validation": 655,
+      "governance_validation": 661,
       "historical_evidence": 28,
       "later_release_work": 45,
-      "wrw_reference_profile": 325,
-      "ywe_core": 252,
+      "wrw_reference_profile": 328,
+      "ywe_core": 267,
       "ywe_extension_profile": 124
     }
   }

@@ -1,0 +1,1245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_branch_generation_context_schema.json",
+  "title": "M4 branch generation context",
+  "x-ywe-requirement-id": "YWE-REQ-0059",
+  "$ref": "#/$defs/Context",
+  "$defs": {
+    "Identifier": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "Scope": {
+      "type": "object",
+      "properties": {
+        "world_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "truth_scope": {
+          "enum": [
+            "shared_worldstate",
+            "leaf_branch_state",
+            "player_state",
+            "player_perception"
+          ]
+        },
+        "subject_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        }
+      },
+      "required": [
+        "world_id",
+        "truth_scope",
+        "subject_id"
+      ],
+      "additionalProperties": false
+    },
+    "Head": {
+      "type": "object",
+      "properties": {
+        "component_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "scope": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Scope"
+        },
+        "owner_policy_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "head_digest": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Sha256"
+        },
+        "state_sha256": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Sha256"
+        }
+      },
+      "required": [
+        "component_id",
+        "scope",
+        "owner_policy_id",
+        "revision",
+        "head_digest",
+        "state_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "Provenance": {
+      "type": "object",
+      "properties": {
+        "cosmic_pattern_snapshot_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "diagnostic_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "generation_plan_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "source_ash_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 65,
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "cosmic_pattern_snapshot_ref",
+        "diagnostic_ref",
+        "generation_plan_ref",
+        "source_ash_refs"
+      ],
+      "additionalProperties": false
+    },
+    "Law": {
+      "type": "object",
+      "properties": {
+        "dependency_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "ash_sha256": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Sha256"
+        },
+        "core_contract_sha256": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Sha256"
+        },
+        "realm_law_sha256": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Sha256"
+        }
+      },
+      "required": [
+        "dependency_id",
+        "ash_sha256",
+        "core_contract_sha256",
+        "realm_law_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "Presence": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "present": {
+              "const": false
+            }
+          },
+          "required": [
+            "present"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "present": {
+              "const": true
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TypedValue"
+            }
+          },
+          "required": [
+            "present",
+            "value"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Slot": {
+      "type": "object",
+      "properties": {
+        "slot_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "definition_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "value": {
+          "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TypedValue"
+        },
+        "source_event_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        }
+      },
+      "required": [
+        "slot_id",
+        "definition_ref",
+        "value",
+        "source_event_ref"
+      ],
+      "additionalProperties": false
+    },
+    "Change": {
+      "type": "object",
+      "properties": {
+        "slot_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "definition_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "before": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Presence"
+        },
+        "after": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Presence"
+        },
+        "source_occurrence_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        }
+      },
+      "required": [
+        "slot_id",
+        "definition_ref",
+        "before",
+        "after",
+        "source_occurrence_ref"
+      ],
+      "additionalProperties": false
+    },
+    "Resolution": {
+      "type": "object",
+      "properties": {
+        "slot_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "base": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Presence"
+        },
+        "left": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Presence"
+        },
+        "right": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Presence"
+        },
+        "result": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Presence"
+        },
+        "reason_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "source_occurrence_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        }
+      },
+      "required": [
+        "slot_id",
+        "base",
+        "left",
+        "right",
+        "result",
+        "reason_refs",
+        "source_occurrence_ref"
+      ],
+      "additionalProperties": false
+    },
+    "Reference": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "subject_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "source_sha256": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Sha256"
+        }
+      },
+      "required": [
+        "category",
+        "subject_ref",
+        "source_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "Definition": {
+      "type": "object",
+      "properties": {
+        "definition_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "slot_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "domain": {
+          "enum": [
+            "npc_availability",
+            "faction_standing",
+            "local_world_condition",
+            "myth_seed_state",
+            "prophecy_weight_state",
+            "temporary_space_residue",
+            "recurring_symbol_recurrence",
+            "future_generation_bias"
+          ]
+        },
+        "subject_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "realm_id": {
+          "anyOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "location_id": {
+          "anyOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "value_kind": {
+          "enum": [
+            "token",
+            "boolean",
+            "integer",
+            "reference",
+            "references"
+          ]
+        },
+        "allowed_values": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 32,
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "minimum": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "maximum": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mutable": {
+          "type": "boolean"
+        },
+        "mergeable": {
+          "type": "boolean"
+        },
+        "projection_fact_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        }
+      },
+      "required": [
+        "definition_ref",
+        "slot_id",
+        "domain",
+        "subject_ref",
+        "realm_id",
+        "location_id",
+        "value_kind",
+        "allowed_values",
+        "minimum",
+        "maximum",
+        "mutable",
+        "mergeable",
+        "projection_fact_id"
+      ],
+      "additionalProperties": false
+    },
+    "Projection": {
+      "type": "object",
+      "properties": {
+        "projection_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "head": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Head"
+        },
+        "slot": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Slot"
+        }
+      },
+      "required": [
+        "projection_ref",
+        "head",
+        "slot"
+      ],
+      "additionalProperties": false
+    },
+    "Binding": {
+      "type": "object",
+      "properties": {
+        "projection_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "component_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "partition_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "target_kind": {
+          "enum": [
+            "fact",
+            "location_field",
+            "player_component",
+            "derived_view"
+          ]
+        },
+        "target_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "definition_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "mergeable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "projection_ref",
+        "component_id",
+        "partition_id",
+        "target_kind",
+        "target_id",
+        "definition_ref",
+        "mergeable"
+      ],
+      "additionalProperties": false
+    },
+    "Rule": {
+      "type": "object",
+      "properties": {
+        "rule_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "action_kind": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "action_tokens": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "significance_values": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "meaningful",
+              "major",
+              "threshold",
+              "cosmological"
+            ]
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "effect_projection_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "minimum_effects": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16
+        },
+        "required_cosmology_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "required_asp_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "rule_id",
+        "action_kind",
+        "action_tokens",
+        "significance_values",
+        "effect_projection_refs",
+        "minimum_effects",
+        "required_cosmology_refs",
+        "required_asp_refs"
+      ],
+      "additionalProperties": false
+    },
+    "Profile": {
+      "type": "object",
+      "properties": {
+        "profile_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "component_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "partition_id": {
+          "const": "branch_lineage"
+        },
+        "law_bindings": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Law"
+        },
+        "action_adapter_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "choice_rules": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Rule"
+          },
+          "maxItems": 32,
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "projections": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Binding"
+          },
+          "maxItems": 32,
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "bootstrap_ref": {
+          "anyOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "profile_id",
+        "component_id",
+        "partition_id",
+        "law_bindings",
+        "action_adapter_id",
+        "choice_rules",
+        "projections",
+        "bootstrap_ref"
+      ],
+      "additionalProperties": false
+    },
+    "Decision": {
+      "type": "object",
+      "properties": {
+        "decision_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "location_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "player_context_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "available_actions": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 32,
+          "minItems": 2,
+          "uniqueItems": true
+        },
+        "chosen_action": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "choice_significance": {
+          "enum": [
+            "meaningful",
+            "major",
+            "threshold",
+            "cosmological"
+          ]
+        },
+        "qualifier": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "source_action_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        }
+      },
+      "required": [
+        "decision_ref",
+        "location_ref",
+        "player_context_ref",
+        "available_actions",
+        "chosen_action",
+        "choice_significance",
+        "qualifier",
+        "source_action_ref"
+      ],
+      "additionalProperties": false
+    },
+    "Action": {
+      "type": "object",
+      "properties": {
+        "adapter_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "action_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "action_sha256": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Sha256"
+        },
+        "player_component_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "player_before_head": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Head"
+        },
+        "source_branch_head": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Head"
+        },
+        "player_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "source_branch_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "location_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "action_kind": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "chosen_action": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "decision_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "player_update_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "consequence_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "resulting_delta_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 128,
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 128,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "target_branch_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        }
+      },
+      "required": [
+        "adapter_id",
+        "action_ref",
+        "action_sha256",
+        "player_component_id",
+        "player_before_head",
+        "source_branch_head",
+        "player_id",
+        "source_branch_id",
+        "location_ref",
+        "action_kind",
+        "chosen_action",
+        "decision_ref",
+        "player_update_ref",
+        "consequence_ref",
+        "resulting_delta_refs",
+        "source_refs",
+        "target_branch_id"
+      ],
+      "additionalProperties": false
+    },
+    "Effect": {
+      "type": "object",
+      "properties": {
+        "effect_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "projection_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "component_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "before_head": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Head"
+        },
+        "source_event_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "before": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Presence"
+        },
+        "after": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Presence"
+        },
+        "source_occurrence_sha256": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Sha256"
+        }
+      },
+      "required": [
+        "effect_ref",
+        "projection_ref",
+        "component_id",
+        "before_head",
+        "source_event_ref",
+        "before",
+        "after",
+        "source_occurrence_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "Context": {
+      "type": "object",
+      "properties": {
+        "context_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "kind": {
+          "enum": [
+            "root",
+            "choice",
+            "merge"
+          ]
+        },
+        "world_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "owner_player_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "target_branch_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "event_ref": {
+          "anyOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "read_heads": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Head"
+          },
+          "maxItems": 16,
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "player_context_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 128,
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "location_context_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 128,
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "cosmology_source_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 128,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "asp_component_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 128,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "diagnostic_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 128,
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "future_generation_bias_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 128,
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "provenance": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "context_id",
+        "kind",
+        "world_id",
+        "owner_player_id",
+        "target_branch_id",
+        "event_ref",
+        "read_heads",
+        "player_context_refs",
+        "location_context_refs",
+        "cosmology_source_refs",
+        "asp_component_refs",
+        "diagnostic_refs",
+        "future_generation_bias_refs",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "Bootstrap": {
+      "type": "object",
+      "properties": {
+        "bootstrap_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "world_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "owner_player_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "branch_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "world_heads": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Head"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "player_creation_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "initial_location_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "initial_projection_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 128,
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "generation_context_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "provenance": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "bootstrap_ref",
+        "world_id",
+        "owner_player_id",
+        "branch_id",
+        "world_heads",
+        "player_creation_ref",
+        "initial_location_ref",
+        "initial_projection_refs",
+        "generation_context_ref",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "Consumed": {
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "enum": [
+            "branch_event",
+            "action",
+            "memory",
+            "update",
+            "effect",
+            "manifestation",
+            "delta",
+            "resolution"
+          ]
+        },
+        "identity_parts": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 8,
+          "minItems": 1
+        },
+        "payload_sha256": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Sha256"
+        },
+        "origin_component_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "origin_request_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "origin_event_ref": {
+          "anyOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "namespace",
+        "identity_parts",
+        "payload_sha256",
+        "origin_component_id",
+        "origin_request_ref",
+        "origin_event_ref"
+      ],
+      "additionalProperties": false
+    },
+    "Occurrence": {
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "enum": [
+            "branch_event",
+            "action",
+            "memory",
+            "update",
+            "effect",
+            "manifestation",
+            "delta",
+            "resolution"
+          ]
+        },
+        "identity_parts": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+          },
+          "maxItems": 8,
+          "minItems": 1
+        },
+        "payload_sha256": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Sha256"
+        },
+        "origin_component_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "origin_request_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "origin_event_ref": {
+          "anyOf": [
+            {
+              "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "record_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        }
+      },
+      "required": [
+        "namespace",
+        "identity_parts",
+        "payload_sha256",
+        "origin_component_id",
+        "origin_request_ref",
+        "origin_event_ref",
+        "record_ref"
+      ],
+      "additionalProperties": false
+    },
+    "DerivedView": {
+      "type": "object",
+      "properties": {
+        "ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "observer_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "component_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        }
+      },
+      "required": [
+        "ref",
+        "observer_id",
+        "component_id"
+      ],
+      "additionalProperties": false
+    },
+    "Proposal": {
+      "type": "object",
+      "properties": {
+        "proposal_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "world_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "owner_player_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "target_branch_id": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "source_system": {
+          "enum": [
+            "world_bootstrap",
+            "narrative_engine",
+            "runtime_cosmology"
+          ]
+        },
+        "operation": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "bootstrap"
+                },
+                "bootstrap_ref": {
+                  "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+                }
+              },
+              "required": [
+                "kind",
+                "bootstrap_ref"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "fork"
+                },
+                "parent_head": {
+                  "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Head"
+                },
+                "event_ref": {
+                  "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+                },
+                "changes": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Change"
+                  },
+                  "maxItems": 16,
+                  "minItems": 0,
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "kind",
+                "parent_head",
+                "event_ref",
+                "changes"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "advance"
+                },
+                "previous_head": {
+                  "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Head"
+                },
+                "event_ref": {
+                  "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+                },
+                "changes": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Change"
+                  },
+                  "maxItems": 16,
+                  "minItems": 0,
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "kind",
+                "previous_head",
+                "event_ref",
+                "changes"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "merge"
+                },
+                "base_head": {
+                  "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Head"
+                },
+                "parent_heads": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Head"
+                  },
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "uniqueItems": true
+                },
+                "event_ref": {
+                  "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+                },
+                "resolution_refs": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+                  },
+                  "maxItems": 16,
+                  "minItems": 0,
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "kind",
+                "base_head",
+                "parent_heads",
+                "event_ref",
+                "resolution_refs"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "generation_context_ref": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Identifier"
+        },
+        "expected_heads": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Head"
+          },
+          "maxItems": 16,
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "provenance": {
+          "$ref": "https://ywe.local/schemas/m4_branch_generation_context_schema.json#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "proposal_ref",
+        "world_id",
+        "owner_player_id",
+        "target_branch_id",
+        "source_system",
+        "operation",
+        "generation_context_ref",
+        "expected_heads",
+        "provenance"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

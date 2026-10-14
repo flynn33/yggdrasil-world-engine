@@ -122,10 +122,25 @@ See the roadmap inventories of [completed or verified foundations](docs/project/
 M0–M3 remain accepted; M5–M10 remain planned and platform work remains deferred
 until M10 acceptance.
 
-The current work is to complete branch and player state contracts, persistence
-and migration, scoped truth synchronization, and deterministic multiplayer
-ordering and reconciliation. All five M4 deliverables and five exit criteria
-remain open. The first implemented slice is the [scoped commit journal](docs/architecture/m4_commit_journal_contract.md): atomic reference-state updates, exact retry identity, append-only compensation and verified save/load replay. Its archive schema and focused tests cover corruption, concurrent admission and scope isolation. The journal mechanics tests use explicit synthetic owners. The next implemented slice, [observer-scoped perception persistence](docs/architecture/m4_perception_persistence_contract.md), composes actual M3 perception views, retains complete truth and provenance, and verifies replay under the same observer and rules. Archive/head checkpoints now capture one committed revision. [Exact resonance migration](docs/architecture/m4_state_migration_contract.md) converts the three legacy plane, bloodline and wolf record formats to versioned integer millionths, preserving other fields and rejecting excess precision. [Origin progression persistence](docs/architecture/m4_origin_progression_contract.md) adds explicit profile phases, qualified action/memory evidence, scoped writer handles and replay without overwriting memory. [Atomic player admission](docs/architecture/m4_player_aggregate_contract.md) now combines origin, identity, resonance, ability and companion changes in one journal, retains qualified consequences, and supports branch transfer and reasoned resonance compensation without deleting memory. Additive player/update/snapshot schemas preserve the reference-based spine. [Qualified legacy player migration](docs/architecture/m4_player_migration_contract.md) now supports both legacy player formats through explicit imported baselines, preserving current origin phase, exact resonance, active quests/tensions, provenance and consumed identities. Typed continuation and replay use new versioned schemas while existing archives retain their original bytes. Imports require complete qualified history and refuse unsupported active fields. The player and observer owners now expose pure admission policies for detached validation; their standalone journals retain existing archive and retry identities. Branch-owner synchronization, realm/location integration and deterministic multiplayer reconciliation remain under development.
+All five M4 deliverables and five exit criteria remain open. Implemented and
+locally exercised reference slices are:
+
+- [Scoped commit journal](docs/architecture/m4_commit_journal_contract.md): atomic owner updates, exact retry identity, append-only compensation, concurrent checkpoints and verified save/load replay.
+- [Observer persistence](docs/architecture/m4_perception_persistence_contract.md): actual M3 perception composition with complete source truth/provenance and observer-specific replay.
+- [Exact resonance migration](docs/architecture/m4_state_migration_contract.md): explicit conversion of three legacy formats to integer millionths without rounding or unrelated field changes.
+- [Origin progression](docs/architecture/m4_origin_progression_contract.md): profile phases, qualified action/memory evidence, scoped writer handles and preserved memory.
+- [Atomic player admission](docs/architecture/m4_player_aggregate_contract.md): combined origin, identity, resonance, ability and companion updates; qualified consequences, branch transfer and reasoned compensation.
+- [Qualified legacy player migration](docs/architecture/m4_player_migration_contract.md): both legacy player formats, explicit imported baselines, retained history/consumed identities, typed continuation and exact replay. Unsupported active fields refuse.
+- [Commit-set journal](docs/architecture/m4_commit_set_contract.md): one atomic publication for multiple bounded owners, exact component heads, retained decision/request identities and replay. Tests exercise actual player and perception owners, late failure and compensation; the test coordinator is explicitly synthetic.
+- [Branch lineage](docs/architecture/m4_branch_owner_contract.md): event-free roots, actual player fork evidence, exact current/historical heads, retained identities and typed three-way merge. Pure branch tests include synthetic world projections; complete participant integration is pending.
+- [World/location admission](docs/architecture/m4_world_location_owner_contract.md): typed facts, explicit location transitions, scoped overlays, reasoned compensation and actual M3 Realm eligibility from pre-operation state. The concrete player-source adapter is WRW compatibility.
+
+Player and observer owners expose pure admission policies for coordination;
+existing standalone archive and retry identities are preserved. Current work is
+the coordinator that verifies actual cross-owner references, authority, ordering
+and reconnect views. Qualified child-world inheritance, occupancy handoff and
+merge-aware player history are the remaining branch integration work.
+Integrated fork/merge and multiplayer acceptance are still pending.
 
 The accepted M3 source and execution archives remain immutable. M4 verification
 will cover save/load and migration truth preservation, event-log replay,

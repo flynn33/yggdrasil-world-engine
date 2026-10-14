@@ -309,6 +309,34 @@ class PlayerStatePolicy:
             raise JournalError("UNKNOWN_EVIDENCE")
         return json.loads(raw)
 
+    def update(self, update_ref):
+        """Expose the selected typed operations for trusted dependency discovery."""
+        _identifier(update_ref)
+        raw = self._updates.get(update_ref)
+        if raw is None:
+            raise JournalError("UNKNOWN_EVIDENCE")
+        return json.loads(raw)
+
+    def validated_state(self, state):
+        """Recheck a verified owner output without repairing or authenticating it."""
+        state = _copy(state)
+        original = _object_bytes(state)
+        try:
+            _reject(set(state) != set(self._initial))
+            for key in ("format", "world_id", "player_id", "profile_id"):
+                _reject(state[key] != self._initial[key])
+            _reject(state["spine"]["player_id"] != self._scope.subject_id)
+            if self._imported:
+                _reject(state["import_baseline"] != self._initial["import_baseline"])
+            for entry in state["records"].values():
+                _closed(entry, "kind document sha256")
+                _reject(entry["sha256"] != _digest(_object_bytes(entry["document"])))
+            self._validate_state(state, initial=state["spine"]["state_lifecycle"] == "initial")
+            _reject(_object_bytes(state) != original)
+            return state
+        except (KeyError, TypeError, ValueError, AttributeError):
+            raise JournalError("POLICY_REJECTED") from None
+
     def _catalog(self, sources, identity):
         _items(sources, 0, 128)
         catalog, total = {}, 0

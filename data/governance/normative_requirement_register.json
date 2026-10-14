@@ -9,7 +9,7 @@
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0058",
+    "next_available_id": "YWE-REQ-0061",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -1616,13 +1616,89 @@
         "data/schemas/m4_player_update_v3_schema.json",
         "data/schemas/m4_player_migration_result_schema.json"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0058",
+      "title": "Atomic bounded commit sets with exact component history and replay",
+      "normative_statement": "Commit sets MUST preserve every component's exact owner and truth scope, publish complete bounded round transitions atomically, retain deterministic decisions and component identities, and reconstruct all heads and historical read views under the same qualified policy and trusted genesis without changing existing single-owner archives.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "tests/test_m4_commit_set_journal.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M4",
+      "owner_role": "State and synchronization maintainers",
+      "decision_refs": [
+        "ADR-0050"
+      ],
+      "source_refs": [
+        "docs/architecture/m4_commit_set_contract.md",
+        "data/schemas/m4_commit_set_journal_schema.json"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0059",
+      "title": "Qualified branch lineage and deterministic same-player merge",
+      "normative_statement": "Branch admission MUST retain exact player and truth ownership, require qualified meaningful choices for forks, preserve immutable lineage and consumed history, and merge same-player variants only from verified maximal common ancestry with typed domain-validated resolution and atomic participant integration.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "tests/test_m4_branch_state.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M4",
+      "owner_role": "State and synchronization maintainers",
+      "decision_refs": [
+        "ADR-0051"
+      ],
+      "source_refs": [
+        "docs/architecture/m4_branch_owner_contract.md",
+        "data/schemas/m4_leaf_branch_reality_state_schema.json",
+        "data/schemas/m4_branch_event_schema.json",
+        "data/schemas/m4_branch_owner_schema.json",
+        "data/schemas/m4_branch_generation_context_schema.json"
+      ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0060",
+      "title": "Typed world and location admission with actual realm eligibility",
+      "normative_statement": "World and location admission MUST preserve immutable geography and law, resolve qualified deltas into exact scoped before/after effects, evaluate conditions against verified current owner values, and validate actual Realm producer results before admitting a separate append-only effect without promoting perception or private truth.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "tests/test_m4_world_location_state.py",
+        "tests/test_m4_world_location_schemas.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M4",
+      "owner_role": "State and synchronization maintainers",
+      "decision_refs": [
+        "ADR-0052"
+      ],
+      "source_refs": [
+        "docs/architecture/m4_world_location_owner_contract.md",
+        "data/schemas/m4_world_location_source_schema.json",
+        "data/schemas/m4_world_location_profile_schema.json",
+        "data/schemas/m4_world_location_state_schema.json",
+        "data/schemas/m4_world_location_update_schema.json"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 57,
-    "active": 55,
+    "total_requirements": 60,
+    "active": 58,
     "proposed": 0,
     "terminal": 2,
-    "next_identifier": "YWE-REQ-0058"
+    "next_identifier": "YWE-REQ-0061"
   }
 }

@@ -2,6 +2,7 @@
 
 import copy
 from concurrent.futures import ThreadPoolExecutor
+import hashlib
 import json
 import threading
 import unittest
@@ -684,6 +685,69 @@ class PlayerStatePolicyTests(unittest.TestCase):
                 self.assertEqual(before, (state, packet))
         self.assert_code("UNAUTHORIZED_WRITER", policy.packet, "principal:foreign", "request:first", "update:first")
         self.assertEqual(policy.initial_state(), state)
+
+    def test_update_accessor_exposes_exact_packet_bound_operations_without_aliasing(self):
+        args = configuration()
+        policy = PlayerStatePolicy(*args)
+        expected = copy.deepcopy(args[6][0])
+        update = policy.update("update:first")
+        self.assertEqual(expected, update)
+        packet = policy.packet(PRINCIPAL, "request:first", "update:first")
+        self.assertEqual(hashlib.sha256(_object_bytes(update)).hexdigest(), packet["update_sha256"])
+        update["operations"].clear()
+        update["provenance"]["source_ash_refs"].clear()
+        self.assertEqual(expected, policy.update("update:first"))
+        self.assert_code("UNKNOWN_EVIDENCE", policy.update, "update:missing")
+        self.assert_code("UNKNOWN_EVIDENCE", policy.update, "plane:stirring")
+        for malformed in ({}, [], None, 12, True, ""):
+            with self.subTest(malformed=malformed):
+                self.assert_code("INVALID_VALUE", policy.update, malformed)
+
+    def test_validated_state_preserves_initial_and_continuing_owner_outputs(self):
+        policy = PlayerStatePolicy(*configuration())
+        initial = policy.initial_state()
+        continuing = policy.reduce(initial, policy.packet(PRINCIPAL, "request:first", "update:first"))
+        for state in (initial, continuing):
+            with self.subTest(lifecycle=state["spine"]["state_lifecycle"]):
+                self.assertEqual(state, policy.validated_state(state))
+                detached = policy.validated_state(state)
+                detached["records"].clear()
+                self.assertTrue(state["records"])
+        variants = []
+        for field in ("world_id", "player_id", "profile_id", "format"):
+            changed = copy.deepcopy(initial)
+            changed[field] = "foreign"
+            variants.append(changed)
+        changed = copy.deepcopy(initial)
+        changed["spine"]["player_id"] = "player:foreign"
+        variants.append(changed)
+        changed = copy.deepcopy(initial)
+        del changed["records"]["plane:initial"]
+        variants.append(changed)
+        changed = copy.deepcopy(initial)
+        changed["records"]["plane:initial"]["sha256"] = "0" * 64
+        variants.append(changed)
+        variants.extend(({}, {"records": []}))
+        for state in variants:
+            before = copy.deepcopy(state)
+            self.assert_code("POLICY_REJECTED", policy.validated_state, state)
+            self.assertEqual(before, state)
+
+    def test_validated_state_rechecks_imported_baseline_identity(self):
+        from tests.m4_player_migration_fixture import build
+
+        for adapter in ("closed_reference_v1", "historical_record_v1"):
+            for continuing in (False, True):
+                with self.subTest(adapter=adapter, continuing=continuing):
+                    raw, migration, result, args = build(adapter, continuing)
+                    policy = PlayerStatePolicy.from_migration(result, migration, raw, *args)
+                    state = policy.initial_state()
+                    self.assertEqual(state, policy.validated_state(state))
+                    if continuing:
+                        state = policy.reduce(state, policy.packet(PRINCIPAL, "request:new", "update:second"))
+                        self.assertEqual(state, policy.validated_state(state))
+                    state["import_baseline"]["consumed_request_refs"].append("invented:request")
+                    self.assert_code("POLICY_REJECTED", policy.validated_state, state)
 
     def test_imported_policy_matches_store_initial_and_continuing_admission(self):
         from tests.m4_player_migration_fixture import build

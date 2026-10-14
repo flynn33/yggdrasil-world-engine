@@ -1,0 +1,1021 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_world_location_source_schema.json",
+  "title": "M4 World Location Source",
+  "x-ywe-requirement-id": "YWE-REQ-0060",
+  "$ref": "#/$defs/QualifiedRecord",
+  "$defs": {
+    "ComponentHead": {
+      "type": "object",
+      "properties": {
+        "component_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "scope": {
+          "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TruthScope"
+        },
+        "owner_policy_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "head_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "state_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "component_id",
+        "scope",
+        "owner_policy_id",
+        "revision",
+        "head_digest",
+        "state_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "ReadComponent": {
+      "type": "object",
+      "properties": {
+        "component_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "scope": {
+          "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TruthScope"
+        },
+        "owner_policy_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "head_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "state_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "state": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "component_id",
+        "scope",
+        "owner_policy_id",
+        "revision",
+        "head_digest",
+        "state_sha256",
+        "state"
+      ],
+      "additionalProperties": false
+    },
+    "ReadView": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "const": "ywe.owner_read_view.v1"
+        },
+        "world_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "https://ywe.local/schemas/m4_world_location_source_schema.json#/$defs/ReadComponent"
+          },
+          "minItems": 0,
+          "maxItems": 16,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "format",
+        "world_id",
+        "components"
+      ],
+      "additionalProperties": false
+    },
+    "LawAnchor": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "const": "ywe.world_law_anchor.v1"
+        },
+        "profile_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "core_binding_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "location_rule_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 0,
+          "maxItems": 64,
+          "uniqueItems": true
+        },
+        "source_evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "format",
+        "profile_id",
+        "core_binding_sha256",
+        "location_rule_refs",
+        "source_evidence_refs"
+      ],
+      "additionalProperties": false
+    },
+    "GeographyAnchor": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "const": "ywe.world_geography_anchor.v1"
+        },
+        "world_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "location_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "base_location_ref": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "realm_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "minItems": 1,
+                "maxItems": 16,
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "location_id",
+              "base_location_ref",
+              "realm_ids"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true
+        },
+        "fixed_facts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fact_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "subject_ref": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "value": {
+                "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TypedValue"
+              }
+            },
+            "required": [
+              "fact_id",
+              "subject_ref",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "source_evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "format",
+        "world_id",
+        "locations",
+        "fixed_facts",
+        "source_evidence_refs"
+      ],
+      "additionalProperties": false
+    },
+    "SourceEvidence": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "const": "ywe.world_source_evidence.v1"
+        },
+        "source_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "source_kind": {
+          "enum": [
+            "genesis",
+            "declared_condition",
+            "ash_evidence",
+            "generation_bias",
+            "residue"
+          ]
+        },
+        "subject_ref": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "value": {
+          "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TypedValue"
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 0,
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "provenance": {
+          "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance"
+        }
+      },
+      "required": [
+        "format",
+        "source_id",
+        "source_kind",
+        "subject_ref",
+        "value",
+        "source_refs",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "ResolutionPayload": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "const": "ywe.world_resolution.v1"
+        },
+        "resolution_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "world_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "player_head": {
+          "$ref": "https://ywe.local/schemas/m4_world_location_source_schema.json#/$defs/ComponentHead"
+        },
+        "branch_head": {
+          "$ref": "https://ywe.local/schemas/m4_world_location_source_schema.json#/$defs/ComponentHead"
+        },
+        "action_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true
+        },
+        "delta_ref": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "location_mutation_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 0,
+          "maxItems": 32,
+          "uniqueItems": true
+        },
+        "condition_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true
+        },
+        "provenance": {
+          "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance"
+        }
+      },
+      "required": [
+        "format",
+        "resolution_id",
+        "world_id",
+        "player_head",
+        "branch_head",
+        "action_refs",
+        "delta_ref",
+        "location_mutation_refs",
+        "condition_refs",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "Condition": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "current_fact"
+            },
+            "head": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_source_schema.json#/$defs/ComponentHead"
+            },
+            "slot_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "expected_value": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TypedValue"
+            }
+          },
+          "required": [
+            "kind",
+            "head",
+            "slot_id",
+            "expected_value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "location"
+            },
+            "head": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_source_schema.json#/$defs/ComponentHead"
+            },
+            "location_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "realm_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "field": {
+              "enum": [
+                "status",
+                "phase",
+                "stability",
+                "access_state"
+              ]
+            },
+            "access_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "expected_value": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "kind",
+            "head",
+            "location_id",
+            "realm_id",
+            "field",
+            "access_id",
+            "expected_value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "player_plane"
+            },
+            "head": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_source_schema.json#/$defs/ComponentHead"
+            },
+            "player_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "plane_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minimum_q6": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
+            }
+          },
+          "required": [
+            "kind",
+            "head",
+            "player_id",
+            "plane_id",
+            "minimum_q6"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "accepted_effect"
+            },
+            "head": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_source_schema.json#/$defs/ComponentHead"
+            },
+            "effect_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "delta_ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "delta_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "kind",
+            "head",
+            "effect_id",
+            "delta_ref",
+            "delta_sha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "declared_source"
+            },
+            "source_ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "source_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "subject_ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "expected_value": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TypedValue"
+            }
+          },
+          "required": [
+            "kind",
+            "source_ref",
+            "source_sha256",
+            "subject_ref",
+            "expected_value"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "QualifiedRecord": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "kind": {
+              "const": "law"
+            },
+            "scope": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TruthScope"
+            },
+            "document": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_source_schema.json#/$defs/LawAnchor"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "provenance": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance"
+            }
+          },
+          "required": [
+            "ref",
+            "kind",
+            "scope",
+            "document",
+            "sha256",
+            "provenance"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "kind": {
+              "const": "geography"
+            },
+            "scope": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TruthScope"
+            },
+            "document": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_source_schema.json#/$defs/GeographyAnchor"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "provenance": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance"
+            }
+          },
+          "required": [
+            "ref",
+            "kind",
+            "scope",
+            "document",
+            "sha256",
+            "provenance"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "kind": {
+              "const": "source_evidence"
+            },
+            "scope": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TruthScope"
+            },
+            "document": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_source_schema.json#/$defs/SourceEvidence"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "provenance": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance"
+            }
+          },
+          "required": [
+            "ref",
+            "kind",
+            "scope",
+            "document",
+            "sha256",
+            "provenance"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "kind": {
+              "const": "resolution"
+            },
+            "scope": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TruthScope"
+            },
+            "document": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_source_schema.json#/$defs/ResolutionPayload"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "provenance": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance"
+            }
+          },
+          "required": [
+            "ref",
+            "kind",
+            "scope",
+            "document",
+            "sha256",
+            "provenance"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "kind": {
+              "const": "condition"
+            },
+            "scope": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TruthScope"
+            },
+            "document": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_source_schema.json#/$defs/Condition"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "provenance": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance"
+            }
+          },
+          "required": [
+            "ref",
+            "kind",
+            "scope",
+            "document",
+            "sha256",
+            "provenance"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "kind": {
+              "const": "resolved_location"
+            },
+            "scope": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TruthScope"
+            },
+            "document": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/ResolvedLocation"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "provenance": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance"
+            }
+          },
+          "required": [
+            "ref",
+            "kind",
+            "scope",
+            "document",
+            "sha256",
+            "provenance"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "kind": {
+              "const": "delta"
+            },
+            "scope": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TruthScope"
+            },
+            "document": {
+              "$ref": "https://ywe.local/schemas/worldstate_location_mutation_schema.json#/$defs/WorldstateDeltaPacket"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "provenance": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance"
+            }
+          },
+          "required": [
+            "ref",
+            "kind",
+            "scope",
+            "document",
+            "sha256",
+            "provenance"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "kind": {
+              "const": "location_mutation"
+            },
+            "scope": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TruthScope"
+            },
+            "document": {
+              "$ref": "https://ywe.local/schemas/worldstate_location_mutation_schema.json#/$defs/LocationMutationDelta"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "provenance": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance"
+            }
+          },
+          "required": [
+            "ref",
+            "kind",
+            "scope",
+            "document",
+            "sha256",
+            "provenance"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "kind": {
+              "const": "overlay"
+            },
+            "scope": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TruthScope"
+            },
+            "document": {
+              "$ref": "https://ywe.local/schemas/ywe.location_branch_overlay.v1.json"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "provenance": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance"
+            }
+          },
+          "required": [
+            "ref",
+            "kind",
+            "scope",
+            "document",
+            "sha256",
+            "provenance"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "kind": {
+              "const": "action"
+            },
+            "scope": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TruthScope"
+            },
+            "document": {
+              "$ref": "https://ywe.local/schemas/player_action_trace_schema.json"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "provenance": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance"
+            }
+          },
+          "required": [
+            "ref",
+            "kind",
+            "scope",
+            "document",
+            "sha256",
+            "provenance"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "kind": {
+              "const": "diagnostic"
+            },
+            "scope": {
+              "$ref": "https://ywe.local/schemas/m4_world_location_state_schema.json#/$defs/TruthScope"
+            },
+            "document": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreDiagnostic"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "provenance": {
+              "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/CoreProvenance"
+            }
+          },
+          "required": [
+            "ref",
+            "kind",
+            "scope",
+            "document",
+            "sha256",
+            "provenance"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

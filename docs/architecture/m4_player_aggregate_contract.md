@@ -216,6 +216,24 @@ authenticate arbitrary client snapshots. `record(ref)` returns a detached exact
 qualified catalog wrapper for a future coordinator to compare with staged truth.
 Unknown records fail with the existing UNKNOWN_EVIDENCE code.
 
+`update(update_ref)` likewise returns the exact detached selected update body.
+Its identifier is validated and a missing update fails UNKNOWN_EVIDENCE. This
+read-only trusted-composition accessor is adopted before implementation so a
+coordinator can derive dependencies from typed operations and verify the body's
+canonical digest against `packet.update_sha256`; reference presence alone is
+not an access declaration. It changes no policy identity, packet or archive.
+
+`validated_state(state)` returns a detached, byte-identical complete owner state
+after rechecking envelope identity, retained record digests and the existing
+domain/schema rules. Initial semantics are selected from the actual spine
+lifecycle. Validation must not fill missing retained records from the catalog;
+if the internal validator would change state, this accessor refuses it. Imported
+baseline qualification must equal the configured baseline. Malformed or
+inconsistent states fail POLICY_REJECTED; existing scalar/size bounds retain
+their boundary codes. This is for already verified owner outputs in trusted
+composition. It does not authenticate arbitrary snapshots or replace journal
+replay, origin-history verification, or cross-owner source qualification.
+
 `PlayerStateStore` remains the public standalone journal/capability wrapper, with
 unchanged constructors, writer handles, publication, checkpoint and loading.
 Its opaque handles stay local to that store. Policy identities, initial bytes,

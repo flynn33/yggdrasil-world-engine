@@ -76,6 +76,10 @@ BLOCKED_ARTIFACT_NAMES = {
 
 TOOL_SOURCE_SUFFIXES = {".ps1", ".py", ".sh"}
 APPROVED_REFERENCE_SOURCES = {
+    "core/world_location_state.py",
+    "core/branch_state.py",
+    "core/branch_state_wrw.py",
+    "core/commit_set_journal.py",
     "core/state_journal.py",
     "core/player_state.py",
     "core/player_state_rules.py",

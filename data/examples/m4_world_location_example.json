@@ -1,0 +1,927 @@
+{
+  "component_id": "component:world",
+  "consumed_effects": [
+    {
+      "delta_ref": "delta:one",
+      "delta_sha256": "87180c4249e8dcdc62e9c381549fc61383b1ac9c47b03978553caab902f6e77a",
+      "effect_id": "effect:world"
+    }
+  ],
+  "events": [
+    {
+      "changes": [
+        {
+          "after": {
+            "base_location_ref": "base:one",
+            "current": {
+              "access": [
+                {
+                  "access_id": "access:gate",
+                  "condition_refs": [],
+                  "state": "open"
+                }
+              ],
+              "active_plane_pressures": [],
+              "eligible_systems": [],
+              "future_generation_bias_refs": [],
+              "phase": "ordinary",
+              "residue_refs": [],
+              "stability": "stable",
+              "status": "activated"
+            },
+            "location_id": "location:one",
+            "realm_id": "realm:material",
+            "source_delta_ref": "delta:one",
+            "source_mutation_ref": "mutation:one"
+          },
+          "before": {
+            "base_location_ref": "base:one",
+            "current": {
+              "access": [
+                {
+                  "access_id": "access:gate",
+                  "condition_refs": [],
+                  "state": "closed"
+                }
+              ],
+              "active_plane_pressures": [],
+              "eligible_systems": [],
+              "future_generation_bias_refs": [],
+              "phase": "ordinary",
+              "residue_refs": [],
+              "stability": "stable",
+              "status": "base"
+            },
+            "location_id": "location:one",
+            "realm_id": "realm:material",
+            "source_delta_ref": "genesis:location:one",
+            "source_mutation_ref": "genesis:location:one"
+          },
+          "target_id": "location:one",
+          "target_kind": "location"
+        }
+      ],
+      "compensates_effect_id": null,
+      "delta_ref": "delta:one",
+      "effect_id": "effect:world",
+      "event_ref": "world-event:8b8941f60232d356732da7d7eb370081815216204da212b0a180423c1ae44e1e",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "realm_checks": [],
+      "request_ref": "request:world",
+      "retention": {
+        "kind": "persistent"
+      },
+      "source_read_vector_sha256": "3f221fdb0e0e685e06d286d1b684b4fc9bb7232925312990038051c03670b37c",
+      "update_ref": "update:world"
+    }
+  ],
+  "facts": [
+    {
+      "definition_ref": "definition:fact:gate",
+      "slot_id": "fact:gate",
+      "source_event_ref": "genesis:gate",
+      "value": {
+        "kind": "token",
+        "token": "closed"
+      }
+    },
+    {
+      "definition_ref": "definition:fact:veil",
+      "slot_id": "fact:veil",
+      "source_event_ref": "genesis:veil",
+      "value": {
+        "kind": "token",
+        "token": "TRUE"
+      }
+    }
+  ],
+  "format": "ywe.world_location_partition.v1",
+  "geography_sha256": "38db3399c8e9b4bb93e9f66959e810ec245c707893d611a7ce26c960c1759690",
+  "law_sha256": "955a3d59ed0c568e921aa3bd9169bd5a1e8f40f9d65550d558866b226968a109",
+  "locations": [
+    {
+      "current_record_ref": "location:echo:initial",
+      "current_record_sha256": "9cc8f74746409def00350cfc73f44c9f192fb9ea12fc8666436a3d4825edde13",
+      "history_event_refs": [
+        "genesis:location:echo"
+      ],
+      "location_id": "location:echo",
+      "realm_id": "realm:echo"
+    },
+    {
+      "current_record_ref": "location:one:open",
+      "current_record_sha256": "7cc817ddbb24d964d65293143a201a0cf1abaf2a0d0c38401685afe4eedab2df",
+      "history_event_refs": [
+        "genesis:location:one",
+        "world-event:8b8941f60232d356732da7d7eb370081815216204da212b0a180423c1ae44e1e"
+      ],
+      "location_id": "location:one",
+      "realm_id": "realm:material"
+    }
+  ],
+  "occupancies": [
+    {
+      "branch_ref": "branch:one",
+      "location_id": "location:one",
+      "player_id": "player:one",
+      "realm_id": "realm:material",
+      "source_event_ref": "genesis:occupancy"
+    }
+  ],
+  "profile_id": "world:profile",
+  "records": {
+    "action:world": {
+      "document": {
+        "action_kind": "location_state_changed",
+        "action_trace_id": "action:world",
+        "affected_entity_refs": [
+          "location:one"
+        ],
+        "branch_ref": "branch:one",
+        "branch_relevance": "contextual",
+        "location_ref": "location:one",
+        "player_id": "player:one",
+        "resulting_worldstate_delta_refs": [
+          "delta:one"
+        ],
+        "schema_id": "ywe.player_action_trace.v1",
+        "schema_version": "0.1.0",
+        "significance": "meaningful",
+        "source_refs": [
+          "source:ash"
+        ]
+      },
+      "kind": "action",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "action:world",
+      "scope": {
+        "subject_id": "player:one",
+        "truth_scope": "player_state",
+        "world_id": "world:one"
+      },
+      "sha256": "7fc176d0208184498bbe0b9b626d96f47dc382b8ec00dc423050bcd7c2917946"
+    },
+    "anchor:geography": {
+      "document": {
+        "fixed_facts": [],
+        "format": "ywe.world_geography_anchor.v1",
+        "locations": [
+          {
+            "base_location_ref": "base:echo",
+            "location_id": "location:echo",
+            "realm_ids": [
+              "realm:echo"
+            ]
+          },
+          {
+            "base_location_ref": "base:one",
+            "location_id": "location:one",
+            "realm_ids": [
+              "realm:material"
+            ]
+          }
+        ],
+        "source_evidence_refs": [
+          "source:ash"
+        ],
+        "world_id": "world:one"
+      },
+      "kind": "geography",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "anchor:geography",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "38db3399c8e9b4bb93e9f66959e810ec245c707893d611a7ce26c960c1759690"
+    },
+    "anchor:law": {
+      "document": {
+        "core_binding_sha256": "4336d16cd1a0b8b399aae85fe1557608587948a842547f928f88cd119f06afda",
+        "format": "ywe.world_law_anchor.v1",
+        "location_rule_refs": [
+          "rule:open"
+        ],
+        "profile_id": "world:profile",
+        "source_evidence_refs": [
+          "source:ash"
+        ]
+      },
+      "kind": "law",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "anchor:law",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "955a3d59ed0c568e921aa3bd9169bd5a1e8f40f9d65550d558866b226968a109"
+    },
+    "condition:permission": {
+      "document": {
+        "expected_value": {
+          "kind": "boolean",
+          "value": true
+        },
+        "kind": "declared_source",
+        "source_ref": "source:permission",
+        "source_sha256": "7c133bbee449daba010a73ca7dfb573517fb328316b515586c13c34a7d73e693",
+        "subject_ref": "world:one"
+      },
+      "kind": "condition",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "condition:permission",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "c3b5e96b1dae228edfdcccdf6ddd3beb9a4c20ab4a84f58199b8856860ff7352"
+    },
+    "delta:one": {
+      "document": {
+        "affected_location_refs": [
+          "location:one"
+        ],
+        "ash_provenance": {
+          "axiom_diagnostic_refs": [],
+          "cosmic_pattern_snapshot_ref": "source:ash",
+          "diagnostic_ref": "diagnostic:world",
+          "existence_potential_ref": "source:ash",
+          "generation_plan_ref": "source:ash",
+          "pattern_vector_refs": [],
+          "source_ash_refs": [
+            "source:ash"
+          ]
+        },
+        "authority_boundary": {
+          "can_influence_generation_context": true,
+          "host_adapter_may_author": false,
+          "may_mutate_ash_math": false,
+          "may_mutate_base_world_ontology": false,
+          "may_rewrite_shared_world_truth": false
+        },
+        "consequence_domains": [
+          "local_world_condition"
+        ],
+        "current_leaf_branch_ref": "branch:one",
+        "delta_id": "delta:one",
+        "future_generation_bias_update_refs": [],
+        "location_mutation_refs": [
+          "mutation:one"
+        ],
+        "mutations": [
+          {
+            "domain": "local_world_condition",
+            "evidence_refs": [
+              "condition:permission"
+            ],
+            "operation": "set_status",
+            "operation_id": "operation:one",
+            "target_ref": "location:one"
+          }
+        ],
+        "persistence": {
+          "append_only": true,
+          "retention_policy": "persistent",
+          "scope": "shared_world",
+          "visibility": "shared_world"
+        },
+        "player_runtime_state_ref": "component:player",
+        "record_type": "WorldstateDeltaPacket",
+        "reversibility": {
+          "requires_new_delta": true,
+          "reversible": true
+        },
+        "sequence_id": 0,
+        "source_branch_event_ref": null,
+        "source_resolution_payload": "resolution:one",
+        "version": "1.0.0"
+      },
+      "kind": "delta",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "delta:one",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "87180c4249e8dcdc62e9c381549fc61383b1ac9c47b03978553caab902f6e77a"
+    },
+    "diagnostic:world": {
+      "document": {
+        "diagnostic_ref": "diagnostic:world",
+        "evidence_refs": [
+          "source:ash"
+        ],
+        "explanation": "Qualified reference consequence.",
+        "failure_code": null,
+        "field": null,
+        "owner": "NARRATIVE",
+        "rule": "PROVENANCE",
+        "status": "COMPLETED"
+      },
+      "kind": "diagnostic",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "diagnostic:world",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "f41bec95ff706b259412fe361ddb4b2e32742e0b04a6ebc17ffe360be6958b7f"
+    },
+    "genesis:gate": {
+      "document": {
+        "format": "ywe.world_source_evidence.v1",
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "source:ash",
+          "diagnostic_ref": "diagnostic:world",
+          "generation_plan_ref": "source:ash",
+          "source_ash_refs": [
+            "source:ash"
+          ]
+        },
+        "source_id": "genesis:gate",
+        "source_kind": "genesis",
+        "source_refs": [],
+        "subject_ref": "location:one",
+        "value": {
+          "kind": "token",
+          "token": "closed"
+        }
+      },
+      "kind": "source_evidence",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "genesis:gate",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "a42b30b53f2a36ecb5d52b26a9335af51cfc16ee3891528687dce6da23349cfc"
+    },
+    "genesis:location:echo": {
+      "document": {
+        "format": "ywe.world_source_evidence.v1",
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "source:ash",
+          "diagnostic_ref": "diagnostic:world",
+          "generation_plan_ref": "source:ash",
+          "source_ash_refs": [
+            "source:ash"
+          ]
+        },
+        "source_id": "genesis:location:echo",
+        "source_kind": "genesis",
+        "source_refs": [],
+        "subject_ref": "location:echo",
+        "value": {
+          "kind": "token",
+          "token": "625ce0bd4ad96300c24ac151b565287303e56e358c05584764c201d23fabda5d"
+        }
+      },
+      "kind": "source_evidence",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "genesis:location:echo",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "859b8138c871302bf964e4247ca241b566c3532a9515ad7b55ad7cdb12982dda"
+    },
+    "genesis:location:one": {
+      "document": {
+        "format": "ywe.world_source_evidence.v1",
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "source:ash",
+          "diagnostic_ref": "diagnostic:world",
+          "generation_plan_ref": "source:ash",
+          "source_ash_refs": [
+            "source:ash"
+          ]
+        },
+        "source_id": "genesis:location:one",
+        "source_kind": "genesis",
+        "source_refs": [],
+        "subject_ref": "location:one",
+        "value": {
+          "kind": "token",
+          "token": "e7c6e747f7cc7b0c82b048ecb18a5d469dbb9e2b8c98454f886b29fe8292bdf1"
+        }
+      },
+      "kind": "source_evidence",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "genesis:location:one",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "d2e5a3b15aa19531b51e8ee07b080d09b5c945968c72d55fdb4a45e0e7a60b70"
+    },
+    "genesis:occupancy": {
+      "document": {
+        "format": "ywe.world_source_evidence.v1",
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "source:ash",
+          "diagnostic_ref": "diagnostic:world",
+          "generation_plan_ref": "source:ash",
+          "source_ash_refs": [
+            "source:ash"
+          ]
+        },
+        "source_id": "genesis:occupancy",
+        "source_kind": "genesis",
+        "source_refs": [],
+        "subject_ref": "player:one",
+        "value": {
+          "kind": "token",
+          "token": "f2b3818b7166f18cfabac2d3449aded16dd440d95a062edce09b531feaf6769f"
+        }
+      },
+      "kind": "source_evidence",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "genesis:occupancy",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "0bb0326f6e8eb49fe3f105bb69e4a16fed938edec7de5b32bb469114f2100564"
+    },
+    "genesis:veil": {
+      "document": {
+        "format": "ywe.world_source_evidence.v1",
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "source:ash",
+          "diagnostic_ref": "diagnostic:world",
+          "generation_plan_ref": "source:ash",
+          "source_ash_refs": [
+            "source:ash"
+          ]
+        },
+        "source_id": "genesis:veil",
+        "source_kind": "genesis",
+        "source_refs": [],
+        "subject_ref": "location:one",
+        "value": {
+          "kind": "token",
+          "token": "TRUE"
+        }
+      },
+      "kind": "source_evidence",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "genesis:veil",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "63b8da42b0c3cc6dfbb5a6755eab02b80c4ffe7fa2e52f27231b88f9d05bde7c"
+    },
+    "location:echo:initial": {
+      "document": {
+        "base_location_ref": "base:echo",
+        "current": {
+          "access": [
+            {
+              "access_id": "access:gate",
+              "condition_refs": [],
+              "state": "closed"
+            }
+          ],
+          "active_plane_pressures": [],
+          "eligible_systems": [],
+          "future_generation_bias_refs": [],
+          "phase": "ordinary",
+          "residue_refs": [],
+          "stability": "stable",
+          "status": "base"
+        },
+        "location_id": "location:echo",
+        "realm_id": "realm:echo",
+        "source_delta_ref": "genesis:location:echo",
+        "source_mutation_ref": "genesis:location:echo"
+      },
+      "kind": "resolved_location",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "location:echo:initial",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "9cc8f74746409def00350cfc73f44c9f192fb9ea12fc8666436a3d4825edde13"
+    },
+    "location:one:initial": {
+      "document": {
+        "base_location_ref": "base:one",
+        "current": {
+          "access": [
+            {
+              "access_id": "access:gate",
+              "condition_refs": [],
+              "state": "closed"
+            }
+          ],
+          "active_plane_pressures": [],
+          "eligible_systems": [],
+          "future_generation_bias_refs": [],
+          "phase": "ordinary",
+          "residue_refs": [],
+          "stability": "stable",
+          "status": "base"
+        },
+        "location_id": "location:one",
+        "realm_id": "realm:material",
+        "source_delta_ref": "genesis:location:one",
+        "source_mutation_ref": "genesis:location:one"
+      },
+      "kind": "resolved_location",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "location:one:initial",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "7e2a0801cb52d7b878a29b4adb5ebdc483b7e1de5c70992d64c41fb7388ee282"
+    },
+    "location:one:open": {
+      "document": {
+        "base_location_ref": "base:one",
+        "current": {
+          "access": [
+            {
+              "access_id": "access:gate",
+              "condition_refs": [],
+              "state": "open"
+            }
+          ],
+          "active_plane_pressures": [],
+          "eligible_systems": [],
+          "future_generation_bias_refs": [],
+          "phase": "ordinary",
+          "residue_refs": [],
+          "stability": "stable",
+          "status": "activated"
+        },
+        "location_id": "location:one",
+        "realm_id": "realm:material",
+        "source_delta_ref": "delta:one",
+        "source_mutation_ref": "mutation:one"
+      },
+      "kind": "resolved_location",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "location:one:open",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "7cc817ddbb24d964d65293143a201a0cf1abaf2a0d0c38401685afe4eedab2df"
+    },
+    "mutation:one": {
+      "document": {
+        "authority_boundary": {
+          "can_influence_generation_context": true,
+          "host_adapter_may_author": false,
+          "may_mutate_ash_math": false,
+          "may_mutate_base_world_ontology": false,
+          "may_rewrite_shared_world_truth": false
+        },
+        "changed_fields": [
+          {
+            "change_kind": "set_threshold_status",
+            "field_path": "access",
+            "reason": "Qualified open gate."
+          },
+          {
+            "change_kind": "set_status",
+            "field_path": "status",
+            "reason": "Qualified activated site."
+          }
+        ],
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "mutation_delta_id": "mutation:one",
+        "mutation_kind": "public_condition_changed",
+        "persistence_scope": "shared_world",
+        "record_type": "LocationMutationDelta",
+        "source_ash_refs": [
+          "source:ash"
+        ],
+        "source_branch_event_ref": null,
+        "source_player_runtime_state_ref": "component:player",
+        "source_worldstate_delta_ref": "delta:one",
+        "target_location_state_ref": "location:one:initial",
+        "version": "1.0.0"
+      },
+      "kind": "location_mutation",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "mutation:one",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "a2c959a2da160d19cd7ef71d315388d3f679e21c6dc5ef3a35687500505a4e5c"
+    },
+    "resolution:one": {
+      "document": {
+        "action_refs": [
+          "action:world"
+        ],
+        "branch_head": {
+          "component_id": "component:branch",
+          "head_digest": "0e7a3d7d53656151f17536315d612f1cb9717d09adf74ea3c1e926e830a42192",
+          "owner_policy_id": "branch:fixture",
+          "revision": 0,
+          "scope": {
+            "subject_id": "branch:one",
+            "truth_scope": "leaf_branch_state",
+            "world_id": "world:one"
+          },
+          "state_sha256": "daf8e803d53d1c3e06b2cc09cdee500ae9019695009db489f63ad10e0078b734"
+        },
+        "condition_refs": [
+          "condition:permission"
+        ],
+        "delta_ref": "delta:one",
+        "format": "ywe.world_resolution.v1",
+        "location_mutation_refs": [
+          "mutation:one"
+        ],
+        "player_head": {
+          "component_id": "component:player",
+          "head_digest": "250ed92cfb1599346d84842c502d7295fead4c520c77e017fdbf109009c5d544",
+          "owner_policy_id": "player.v1:cdc5262ca897228750722cccdebb17a3cd10ed9a005bea4871b8d54de6678f93",
+          "revision": 0,
+          "scope": {
+            "subject_id": "player:one",
+            "truth_scope": "player_state",
+            "world_id": "world:one"
+          },
+          "state_sha256": "e9ce6a855216d6192e37427c779d5d35a6c801f335d986627a85d2cfbcb83642"
+        },
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "source:ash",
+          "diagnostic_ref": "diagnostic:world",
+          "generation_plan_ref": "source:ash",
+          "source_ash_refs": [
+            "source:ash"
+          ]
+        },
+        "resolution_id": "resolution:one",
+        "world_id": "world:one"
+      },
+      "kind": "resolution",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "resolution:one",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "6f2adb5d3c634d15efc23f53d3f301d03df5ecaa2b191ec52f52a1c1e0b52825"
+    },
+    "source:ash": {
+      "document": {
+        "format": "ywe.world_source_evidence.v1",
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "source:ash",
+          "diagnostic_ref": "diagnostic:world",
+          "generation_plan_ref": "source:ash",
+          "source_ash_refs": [
+            "source:ash"
+          ]
+        },
+        "source_id": "source:ash",
+        "source_kind": "ash_evidence",
+        "source_refs": [],
+        "subject_ref": "world:one",
+        "value": {
+          "kind": "token",
+          "token": "qualified"
+        }
+      },
+      "kind": "source_evidence",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "source:ash",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "3914cc4748fb39863f2e7a6d6a41f52af4a0c689546ae361acbe2750ca2d0352"
+    },
+    "source:genesis": {
+      "document": {
+        "format": "ywe.world_source_evidence.v1",
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "source:ash",
+          "diagnostic_ref": "diagnostic:world",
+          "generation_plan_ref": "source:ash",
+          "source_ash_refs": [
+            "source:ash"
+          ]
+        },
+        "source_id": "source:genesis",
+        "source_kind": "genesis",
+        "source_refs": [],
+        "subject_ref": "world:one",
+        "value": {
+          "kind": "token",
+          "token": "qualified"
+        }
+      },
+      "kind": "source_evidence",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "source:genesis",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "9a71a36b8bfe7b1ff6a30e50a75542142d80a886ee20da5dc4dfffdab2b3a35c"
+    },
+    "source:permission": {
+      "document": {
+        "format": "ywe.world_source_evidence.v1",
+        "provenance": {
+          "cosmic_pattern_snapshot_ref": "source:ash",
+          "diagnostic_ref": "diagnostic:world",
+          "generation_plan_ref": "source:ash",
+          "source_ash_refs": [
+            "source:ash"
+          ]
+        },
+        "source_id": "source:permission",
+        "source_kind": "declared_condition",
+        "source_refs": [],
+        "subject_ref": "world:one",
+        "value": {
+          "kind": "boolean",
+          "value": true
+        }
+      },
+      "kind": "source_evidence",
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "source:ash",
+        "diagnostic_ref": "diagnostic:world",
+        "generation_plan_ref": "source:ash",
+        "source_ash_refs": [
+          "source:ash"
+        ]
+      },
+      "ref": "source:permission",
+      "scope": {
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate",
+        "world_id": "world:one"
+      },
+      "sha256": "7c133bbee449daba010a73ca7dfb573517fb328316b515586c13c34a7d73e693"
+    }
+  },
+  "scope": {
+    "subject_id": "world:one",
+    "truth_scope": "shared_worldstate",
+    "world_id": "world:one"
+  }
+}
