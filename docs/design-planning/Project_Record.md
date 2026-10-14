@@ -2650,3 +2650,54 @@ the existing scope contract, rather than making their legacy field semantics
 universal Core truth. No guardrail was weakened. Clean correction checks are
 next. The earlier full `59cdd` run remains pending; published M4 origin registration
 CI `38558767903` and both earlier pending M4 runs now report success.
+
+## 27. Pure owner policy extraction adoption — October 14, 2026
+
+Current step: separate the existing player and perception domain policies from
+their journal wrappers as a prerequisite for atomic synchronization. The additive
+interfaces are adopted in their existing contracts under YWE-REQ-0053/0056/0057;
+no new dependency, production service, schema or authority level is introduced.
+Edits are confined to the two existing owner modules, their current behavioral
+test modules and the existing contracts/record. The Raven v0.7.0 pin and authorized
+reference realization persist. Repository publication of the preceding migration
+checkpoint remains contingent on its clean checks.
+
+Read-only tracing found journal use confined to construction, publication,
+checkpoint and loading. Domain reduction can therefore be extracted without a
+multi-journal prepare API. Compatibility requires exact old and imported policy,
+genesis, packet, archive and retry bytes; M3 perception issuer checks must run
+before serialization. Public reduction copies caller inputs and enforces the
+existing state bounds. Standalone stores retain their capability and replay
+checks. Narrow detached record/source accessors support later staged truth
+validation without exposing mutable catalogs.
+
+Before extraction, independent frozen configurations reproduced ten original
+archives and ten imported archives, including Quest/Realm continuation and both
+same-form branch-transfer cases. The imported capture hashes 31 sources and
+retains eight complete configurations; it does not rely on future fixture helper
+behavior. These are compatibility baselines, not synchronization evidence.
+Next: implement and test pure policy/store equivalence, input isolation and
+archive compatibility. Cross-owner transactions, branch ownership, ordering and
+merge remain open. Needed from owner: none.
+
+Both pure policy classes and compatible stores are implemented in their existing
+modules. Fifteen added policy tests pass; independent probes verified late
+rejection after three player transitions, input/output and catalog isolation,
+actual resource limits, explicit imported factory re-verification and original
+M3 issuer validation before serialization. Review reproduced malformed public
+player principals leaking TypeError; boundary identifier validation and regression
+tests now return INVALID_VALUE without mutating inputs. Both frozen verifiers
+again reproduced all twenty original/imported archives and retry receipts. No
+unresolved actionable review finding remains. Clean combined verification and
+publication of this extraction are still pending; no synchronization claim or
+milestone closure follows from these focused results.
+
+The preceding corrected migration revision
+`6e9ffe66022216629330209bde25cab3ed796e7b` passed 277 focused tests in 97.031
+seconds and all 36 selected non-unit repository checks from a clean offline
+checkout through the canonical Bash entry point. It was pushed atomically to
+main and the M4 branch as the owner, using the already authorized bypass. Exact
+remote README/roadmap bytes were verified and full CI was dispatched. Wiki
+`476a52a17c0abc37830bda93d86e155b68ea922d` matches all 47 pages on fresh readback.
+The separate full local run at `59cdd` is still pending; this publication claims
+focused and selected verification only. M4 remains in progress.

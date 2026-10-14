@@ -8,8 +8,8 @@ import unittest
 from unittest.mock import patch
 
 from core.narrative_engine.origin_progression import OriginProgressionPolicy
-from core.player_state import PlayerStateStore
-from core.state_journal import CommitJournal, JournalError, _object_bytes
+from core.player_state import PlayerStatePolicy, PlayerStateStore
+from core.state_journal import CommitJournal, JournalError, TruthScope, _object_bytes
 from tests.m4_player_fixture import (
     BRANCH, PLAYER, PRINCIPAL, SOURCE, WORLD, configuration, consequence,
     document, evidence, provenance, record, reference,
@@ -553,6 +553,196 @@ class PlayerStateTests(unittest.TestCase):
         journal.commit("request:compensation", 2, owner._packet(PRINCIPAL, "request:compensation", update),
             compensates="request:first")
         self.assert_code("INVALID_ARCHIVE", PlayerStateStore.load, *journal.checkpoint(), *args)
+
+
+class PlayerStatePolicyTests(unittest.TestCase):
+    def assert_code(self, code, function, *args):
+        with self.assertRaises(JournalError) as caught:
+            function(*args)
+        self.assertEqual(code, caught.exception.code)
+
+    def test_pure_policy_matches_store_packets_states_compensation_and_branch_transfer(self):
+        args = list(configuration())
+        add_compensation(args)
+        add_branch_transfer(args)
+        policy, owner = PlayerStatePolicy(*args), PlayerStateStore(*args)
+        initial = policy.initial_state()
+        state = initial
+        self.assertEqual(owner._scope, policy.scope)
+        self.assertEqual(owner._policy_id, policy.policy_id)
+        self.assertEqual(owner.state(), state)
+        for revision, name in enumerate(("first", "second", "compensation", "branch")):
+            request, update = "request:" + name, "update:" + name
+            packet = policy.packet(PRINCIPAL, request, update)
+            self.assertEqual(owner._packet(PRINCIPAL, request, update), packet)
+            state = policy.reduce(state, packet)
+            owner.publish(owner.writer(PRINCIPAL), request, revision, update)
+            self.assertEqual(owner.state(), state)
+            self.assertEqual(packet, json.loads(owner.checkpoint()[0])["entries"][-1]["packet"])
+        self.assertEqual(initial, policy.initial_state())
+        self.assertFalse(hasattr(policy, "_journal"))
+        self.assertFalse(hasattr(policy, "writer"))
+        for attribute, replacement in (("scope", TruthScope(WORLD, "player_state", "player:other")),
+                                       ("policy_id", "policy:changed")):
+            with self.subTest(attribute=attribute), self.assertRaises(AttributeError):
+                setattr(policy, attribute, replacement)
+        self.assert_code("POLICY_REJECTED", owner._reduce,
+            TruthScope(WORLD, "player_state", "player:other"), initial,
+            policy.packet(PRINCIPAL, "request:first", "update:first"))
+
+    def test_pure_inputs_outputs_and_configuration_are_detached(self):
+        args = list(configuration())
+        policy = PlayerStatePolicy(*args)
+        initial = policy.initial_state()
+        state = policy.initial_state()
+        packet = policy.packet(PRINCIPAL, "request:first", "update:first")
+        original_packet = copy.deepcopy(packet)
+        expected = policy.reduce(state, packet)
+        self.assertEqual(initial, state)
+        self.assertEqual(original_packet, packet)
+        args[2]["raven_companion_id"] = "changed"
+        args[3]["identity"].clear()
+        args[4][PRINCIPAL]["operations"].clear()
+        selected(args, "plane:stirring")["document"]["planes"]["P4_Mental"]["score_q6"] += 1
+        args[6][0]["operations"].clear()
+        args[7]["spine"]["required"].clear()
+        changed_output = policy.reduce(state, packet)
+        changed_output["records"]["origin:one"]["document"]["actions"].clear()
+        changed_output["spine"]["state_refs"].clear()
+        state["records"]["origin:one"]["document"]["creation"]["provenance"].clear()
+        packet["record_sha256"].clear()
+        packet["origin_packet"]["evidence_sha256"] = "0" * 64
+        self.assertEqual(initial, policy.initial_state())
+        self.assertEqual(original_packet, policy.packet(PRINCIPAL, "request:first", "update:first"))
+        self.assertEqual(expected, policy.reduce(policy.initial_state(), original_packet))
+
+    def test_late_failed_pure_reduction_preserves_inputs_and_allows_valid_retry(self):
+        args = list(configuration())
+        bad_source = evidence("origin:bad", "update:bad")
+        bad_update = copy.deepcopy(args[6][0])
+        bad_update.update(update_ref="update:bad", consequence_ref="consequence:bad")
+        bad_update["operations"][0]["evidence_ref"] = "origin:bad"
+        bad_consequence = consequence("consequence:bad", "update:bad", bad_source)
+        bad_consequence["document"]["action_refs"].pop()
+        args[5].append(bad_consequence)
+        args[6].append(bad_update)
+        replace_origin(args, origin_sources(args) + [bad_source])
+        policy, owner = PlayerStatePolicy(*args), PlayerStateStore(*args)
+        state = policy.initial_state()
+        packet = policy.packet(PRINCIPAL, "request:retry", "update:bad")
+        before = copy.deepcopy((state, packet))
+        with patch.object(policy._domain, "transition", wraps=policy._domain.transition) as transitions:
+            self.assert_code("POLICY_REJECTED", policy.reduce, state, packet)
+        self.assertEqual(3, transitions.call_count)
+        self.assertEqual(before, (state, packet))
+        self.assertEqual(state, policy.initial_state())
+        self.assert_code("POLICY_REJECTED", owner.publish,
+            owner.writer(PRINCIPAL), "request:retry", 0, "update:bad")
+        accepted = policy.reduce(state, policy.packet(PRINCIPAL, "request:retry", "update:first"))
+        owner.publish(owner.writer(PRINCIPAL), "request:retry", 0, "update:first")
+        self.assertEqual(owner.state(), accepted)
+
+    def test_direct_policy_enforces_aggregate_bound_without_mutating_inputs(self):
+        args = list(configuration())
+        sources = origin_sources(args)
+        sources[0]["memories"][0]["cosmological_tags"] = ["x" * 30000]
+        replace_origin(args, sources)
+        component = args[8].reduce(args[8].initial_state(),
+            args[8].packet(PRINCIPAL, "request:first", "origin:first"))
+        self.assertLess(len(_object_bytes(component)), 65536)
+        policy = PlayerStatePolicy(*args)
+        state, packet = policy.initial_state(), policy.packet(PRINCIPAL, "request:first", "update:first")
+        before = copy.deepcopy((state, packet))
+        self.assert_code("VALUE_LIMIT", policy.reduce, state, packet)
+        self.assertEqual(before, (state, packet))
+        self.assertEqual(state, policy.initial_state())
+
+    def test_record_accessor_preserves_qualified_wrapper_and_detaches_nested_values(self):
+        args = configuration()
+        policy = PlayerStatePolicy(*args)
+        expected = copy.deepcopy(selected(args, "plane:stirring"))
+        qualified = policy.record("plane:stirring")
+        self.assertEqual(expected, qualified)
+        self.assertEqual({"ref", "kind", "world_id", "player_id", "branch_ref", "document", "provenance"}, set(qualified))
+        qualified["document"]["planes"].clear()
+        qualified["provenance"]["source_ash_refs"].clear()
+        qualified["branch_ref"] = "branch:foreign"
+        self.assertEqual(expected, policy.record("plane:stirring"))
+        self.assert_code("UNKNOWN_EVIDENCE", policy.record, "record:missing")
+        self.assert_code("UNKNOWN_EVIDENCE", policy.record, "origin:one")
+
+    def test_public_packet_and_reduce_reject_malformed_principals_with_stable_codes(self):
+        policy = PlayerStatePolicy(*configuration())
+        state = policy.initial_state()
+        for principal in ({}, [], None, 12, True, ""):
+            with self.subTest(principal=principal):
+                self.assert_code("INVALID_VALUE", policy.packet, principal, "request:first", "update:first")
+                packet = policy.packet(PRINCIPAL, "request:first", "update:first")
+                packet["principal"] = principal
+                before = copy.deepcopy((state, packet))
+                self.assert_code("INVALID_VALUE", policy.reduce, state, packet)
+                self.assertEqual(before, (state, packet))
+        self.assert_code("UNAUTHORIZED_WRITER", policy.packet, "principal:foreign", "request:first", "update:first")
+        self.assertEqual(policy.initial_state(), state)
+
+    def test_imported_policy_matches_store_initial_and_continuing_admission(self):
+        from tests.m4_player_migration_fixture import build
+
+        for adapter in ("closed_reference_v1", "historical_record_v1"):
+            for continuing in (False, True):
+                with self.subTest(adapter=adapter, continuing=continuing):
+                    raw, migration, result, args = build(adapter, continuing)
+                    policy = PlayerStatePolicy.from_migration(result, migration, raw, *args)
+                    owner = PlayerStateStore.from_migration(result, migration, raw, *args)
+                    initial = policy.initial_state()
+                    self.assertEqual(result["baseline"], initial)
+                    self.assertEqual(owner.state(), initial)
+                    self.assertEqual(owner._scope, policy.scope)
+                    self.assertEqual(owner._policy_id, policy.policy_id)
+                    if continuing:
+                        packet = policy.packet(PRINCIPAL, "request:new", "update:second")
+                        before_packet = copy.deepcopy(packet)
+                        reduced = policy.reduce(initial, packet)
+                        owner.publish(owner.writer(PRINCIPAL), "request:new", 0, "update:second")
+                        self.assertEqual(owner.state(), reduced)
+                        self.assertEqual(before_packet, packet)
+                        self.assertEqual(result["baseline"], initial)
+                        self.assert_code("POLICY_REJECTED", policy.reduce, initial,
+                            policy.packet(PRINCIPAL, "request:historical:first", "update:second"))
+                        self.assertEqual(result["baseline"], initial)
+                    result["baseline"]["records"].clear()
+                    args[3]["state_refs"].clear()
+                    self.assertEqual(initial, policy.initial_state())
+
+    def test_imported_policy_factory_reverifies_source_result_and_qualification(self):
+        from tests.m4_player_migration_fixture import build
+
+        raw, migration, result, args = build("historical_record_v1", True)
+        changed = copy.deepcopy(result)
+        changed["baseline"]["spine"]["player_id"] = "player:foreign"
+        for candidate, source in ((changed, raw), (result, raw + b" ")):
+            self.assert_code("INVALID_MIGRATION", PlayerStatePolicy.from_migration,
+                candidate, migration, source, *args)
+        with patch.object(type(migration), "verify", return_value=False):
+            self.assert_code("INVALID_MIGRATION", PlayerStatePolicy.from_migration,
+                result, migration, raw, *args)
+        for defect in ("profile", "record", "schema", "origin"):
+            with self.subTest(defect=defect):
+                modified = list(args)
+                if defect == "profile":
+                    modified[2] = copy.deepcopy(args[2])
+                    modified[2]["profile_id"] = "profile:foreign"
+                elif defect == "record":
+                    modified[5] = copy.deepcopy(args[5])
+                    selected(modified, "plane:stirring")["provenance"]["diagnostic_ref"] = "diagnostic:changed"
+                elif defect == "schema":
+                    modified[7] = copy.deepcopy(args[7])
+                    modified[7]["spine"]["description"] = "Changed qualification."
+                else:
+                    modified[8] = configuration()[8]
+                self.assert_code("INVALID_MIGRATION", PlayerStatePolicy.from_migration,
+                    result, migration, raw, *modified)
+        self.assert_code("INVALID_POLICY", PlayerStatePolicy, *args)
 
 
 if __name__ == "__main__":

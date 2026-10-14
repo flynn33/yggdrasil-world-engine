@@ -6,7 +6,7 @@ import json
 import re
 
 from .. import core_values as cv
-from ..state_journal import CommitJournal, JournalError, TruthScope
+from ..state_journal import CommitJournal, JournalError, TruthScope, _object_bytes
 from .perception import PerceptionEngine
 
 
@@ -29,8 +29,8 @@ def _truth(raw):
     return cv.TruthInputSnapshot(**record)
 
 
-class PerceptionStore:
-    """Trusted composition owns immutable inputs; public publication selects a source."""
+class PerceptionPolicy:
+    """Pure observer reduction over privately retained M3 sources and rules."""
 
     def __init__(self, world_id, observer_id, binding, rules, sources):
         self._scope = TruthScope(world_id, "player_perception", observer_id)
@@ -74,11 +74,29 @@ class PerceptionStore:
                 policy, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode("ascii"))
         except cv.CoreContractError:
             raise JournalError("INVALID_POLICY") from None
-        self._initial = {"format": FORMAT, "world_id": world_id, "observer_id": observer_id,
-                         "truth_substrate_ref": None, "overlay": None, "objective_effects": "NONE"}
-        self._journal = CommitJournal(self._scope, self._policy_id, self._initial, self._reduce)
+        self._initial = _object_bytes({"format": FORMAT, "world_id": world_id, "observer_id": observer_id,
+                         "truth_substrate_ref": None, "overlay": None, "objective_effects": "NONE"})
 
-    def _packet(self, request_id, truth_ref):
+    @property
+    def scope(self):
+        return self._scope
+
+    @property
+    def policy_id(self):
+        return self._policy_id
+
+    def initial_state(self):
+        return json.loads(self._initial)
+
+    def source(self, truth_ref):
+        """Return detached retained truth and provenance for trusted composition."""
+        _identifier(truth_ref)
+        source = self._sources.get(truth_ref)
+        if source is None:
+            raise JournalError("UNKNOWN_TRUTH")
+        return tuple(json.loads(raw) for raw in source)
+
+    def packet(self, request_id, truth_ref):
         _identifier(request_id)
         _identifier(truth_ref)
         source = self._sources.get(truth_ref)
@@ -88,14 +106,17 @@ class PerceptionStore:
         return {"request_ref": request_id, "truth_ref": truth_ref,
                 "truth_sha256": _digest(truth), "provenance_sha256": _digest(provenance)}
 
-    def _reduce(self, scope, state, packet):
-        if scope != self._scope or type(packet) is not dict or set(packet) != {
+    def reduce(self, state, packet):
+        """Compose a bounded next view without mutating either caller input."""
+        state = json.loads(_object_bytes(state))
+        packet = json.loads(_object_bytes(packet))
+        if set(packet) != {
                 "request_ref", "truth_ref", "truth_sha256", "provenance_sha256"}:
             raise JournalError("POLICY_REJECTED")
-        if packet != self._packet(packet["request_ref"], packet["truth_ref"]):
+        if packet != self.packet(packet["request_ref"], packet["truth_ref"]):
             raise JournalError("POLICY_REJECTED")
         truth, provenance = self._sources[packet["truth_ref"]]
-        request = cv.PerceptionRequest(packet["request_ref"], scope.subject_id, _truth(truth),
+        request = cv.PerceptionRequest(packet["request_ref"], self._scope.subject_id, _truth(truth),
             tuple(cv.PerceptionRule(**json.loads(raw)) for raw in self._rules),
             cv.CoreProvenance(**json.loads(provenance)))
         result = self._engine.compose_overlay(request)
@@ -103,8 +124,28 @@ class PerceptionStore:
                 or result.effect_status != "NONE" or type(result.value) is not cv.PerceptionOverlay
                 or result.value.objective_effects != "NONE"):
             raise JournalError("POLICY_REJECTED")
-        return {**self._initial, "truth_substrate_ref": packet["truth_ref"],
-                "overlay": result.value.to_record()}
+        return json.loads(_object_bytes({**self.initial_state(), "truth_substrate_ref": packet["truth_ref"],
+                "overlay": result.value.to_record()}))
+
+
+class PerceptionStore:
+    """Compatible journal wrapper for one observer's pure composition policy."""
+
+    def __init__(self, world_id, observer_id, binding, rules, sources):
+        self._policy = PerceptionPolicy(world_id, observer_id, binding, rules, sources)
+        self._scope = self._policy.scope
+        self._policy_id = self._policy.policy_id
+        self._initial = self._policy.initial_state()
+        self._engine = self._policy._engine
+        self._journal = CommitJournal(self._scope, self._policy_id, self._initial, self._reduce)
+
+    def _packet(self, request_id, truth_ref):
+        return self._policy.packet(request_id, truth_ref)
+
+    def _reduce(self, scope, state, packet):
+        if scope != self._scope:
+            raise JournalError("POLICY_REJECTED")
+        return self._policy.reduce(state, packet)
 
     def publish(self, request_id, expected_revision, truth_ref):
         packet = self._packet(request_id, truth_ref)

@@ -14,7 +14,7 @@ from referencing.exceptions import NoSuchResource
 
 from core import core_values as cv
 from core.perception_engine.perception import PerceptionEngine
-from core.perception_engine.persistence import PerceptionStore
+from core.perception_engine.persistence import PerceptionPolicy, PerceptionStore
 from core.state_journal import CommitJournal, JournalError, TruthScope
 from tests.test_m3_core_cosmology_realm import pure_model
 
@@ -258,6 +258,118 @@ class PerceptionPersistenceTests(unittest.TestCase):
         owner.publish("r" * 128, 0, "truth.127")
         restored = self.reload(owner.checkpoint(), sources=sources)
         self.assertEqual(restored.checkpoint(), owner.checkpoint())
+
+
+class PerceptionPolicyTests(unittest.TestCase):
+    def setUp(self):
+        self.binding, self.rules, self.sources = inputs()
+        self.policy = PerceptionPolicy("world", "alice", self.binding, self.rules, self.sources)
+
+    def assert_code(self, code, action):
+        with self.assertRaises(JournalError) as caught:
+            action()
+        self.assertEqual(code, caught.exception.code)
+
+    def test_pure_reduction_matches_store_without_publishing(self):
+        owner = PerceptionStore("world", "alice", self.binding, self.rules, self.sources)
+        before = owner.checkpoint()
+        self.assertEqual(owner._scope, self.policy.scope)
+        self.assertEqual(owner._policy_id, self.policy.policy_id)
+        self.assertEqual(owner.state(), self.policy.initial_state())
+        packet = self.policy.packet("view", "truth.one")
+        self.assertEqual(owner._packet("view", "truth.one"), packet)
+        reduced = self.policy.reduce(self.policy.initial_state(), packet)
+        self.assertEqual(before, owner.checkpoint())
+        owner.publish("view", 0, "truth.one")
+        self.assertEqual(owner.state(), reduced)
+        for field, value in (("scope", TruthScope("world", "player_perception", "bob")),
+                             ("policy_id", "changed")):
+            with self.assertRaises(AttributeError):
+                setattr(self.policy, field, value)
+
+    def test_reduction_and_initial_results_are_detached(self):
+        state, packet = self.policy.initial_state(), self.policy.packet("view", "truth.one")
+        expected = copy.deepcopy((state, packet))
+        reduced = self.policy.reduce(state, packet)
+        self.assertEqual(expected, (state, packet))
+        reduced["overlay"]["hidden_entities"].clear()
+        reduced["overlay"]["request"]["truth"]["facts"][0]["evidence_refs"].clear()
+        state["observer_id"] = "other"
+        packet["truth_sha256"] = "0" * 64
+        again = self.policy.reduce(self.policy.initial_state(), self.policy.packet("view", "truth.one"))
+        self.assertEqual(["door"], again["overlay"]["hidden_entities"])
+        self.assertEqual(["evidence"], again["overlay"]["request"]["truth"]["facts"][0]["evidence_refs"])
+        self.assertEqual("alice", self.policy.initial_state()["observer_id"])
+
+    def test_source_returns_exact_detached_json_pair(self):
+        expected = tuple(value.to_record() for value in self.sources[0])
+        source = self.policy.source("truth.one")
+        self.assertIs(type(source), tuple)
+        self.assertEqual(expected, source)
+        source[0]["facts"][0]["evidence_refs"].clear()
+        source[1]["source_ash_refs"].append("foreign")
+        object.__setattr__(self.sources[0][0], "entity_refs", ())
+        object.__setattr__(self.sources[0][1], "diagnostic_ref", "changed")
+        self.assertEqual(expected, self.policy.source("truth.one"))
+        reduced = self.policy.reduce(self.policy.initial_state(), self.policy.packet("view", "truth.one"))
+        self.assertEqual(expected, (reduced["overlay"]["request"]["truth"],
+                                    reduced["overlay"]["request"]["provenance"]))
+        self.assert_code("UNKNOWN_TRUTH", lambda: self.policy.source("missing"))
+        self.assert_code("INVALID_VALUE", lambda: self.policy.source("bad value"))
+
+    def test_foreign_or_copied_results_refuse_before_overlay_serialization(self):
+        truth, provenance = self.sources[0]
+        request = cv.PerceptionRequest("view", "alice", truth, self.rules, provenance)
+        foreign = PerceptionEngine(self.binding).compose_overlay(request)
+        original = self.policy._engine.compose_overlay(request)
+        state, packet = self.policy.initial_state(), self.policy.packet("view", "truth.one")
+        before = copy.deepcopy((state, packet))
+        for result in (foreign, copy.copy(original)):
+            with self.subTest(result=result is foreign):
+                with patch.object(PerceptionEngine, "compose_overlay", return_value=result), \
+                        patch.object(cv.PerceptionOverlay, "to_record", side_effect=AssertionError("serialized unissued result")):
+                    self.assert_code("POLICY_REJECTED", lambda: self.policy.reduce(state, packet))
+                self.assertEqual(before, (state, packet))
+        self.assertEqual(["door"], self.policy.reduce(state, packet)["overlay"]["hidden_entities"])
+
+    def test_pure_output_bound_refuses_valid_oversized_m3_result_without_aliasing(self):
+        rules = tuple(replace(self.rules[0], rule_id="rule." + str(i), condition_fact_refs=(),
+                              interpretation_tags=()) for i in range(200))
+        policy = PerceptionPolicy("world", "alice", self.binding, rules, self.sources)
+        state, packet = policy.initial_state(), policy.packet("view", "truth.one")
+        before = copy.deepcopy((state, packet))
+        truth, provenance = self.sources[0]
+        result = policy._engine.compose_overlay(cv.PerceptionRequest("view", "alice", truth, rules, provenance))
+        self.assertEqual("COMPLETED", result.status)
+        self.assertGreater(len(result.value.canonical_bytes()), 65536)
+        self.assert_code("VALUE_LIMIT", lambda: policy.reduce(state, packet))
+        self.assertEqual(before, (state, packet))
+        self.assertEqual(state, policy.initial_state())
+
+    def test_input_bounds_and_changed_packet_refuse_before_composition(self):
+        state, packet = self.policy.initial_state(), self.policy.packet("view", "truth.one")
+        variants = (({**state, "oversized": "x" * 65536}, packet, "VALUE_LIMIT"),
+                    (state, {**packet, "oversized": "x" * 65536}, "VALUE_LIMIT"),
+                    (state, {**packet, "truth_sha256": "0" * 64}, "POLICY_REJECTED"))
+        with patch.object(PerceptionEngine, "compose_overlay", side_effect=AssertionError("composed invalid input")):
+            for candidate_state, candidate_packet, code in variants:
+                before = copy.deepcopy((candidate_state, candidate_packet))
+                self.assert_code(code, lambda: self.policy.reduce(candidate_state, candidate_packet))
+                self.assertEqual(before, (candidate_state, candidate_packet))
+
+    def test_source_extension_preserves_policy_and_selected_packets(self):
+        truth, provenance = self.sources[0]
+        extended = PerceptionPolicy("world", "alice", self.binding, self.rules,
+            (*self.sources, (replace(truth, snapshot_ref="truth.two"), provenance)))
+        self.assertEqual(self.policy.policy_id, extended.policy_id)
+        packet = self.policy.packet("view", "truth.one")
+        self.assertEqual(packet, extended.packet("view", "truth.one"))
+        self.assertEqual(self.policy.reduce(self.policy.initial_state(), packet),
+                         extended.reduce(extended.initial_state(), packet))
+        changed = PerceptionPolicy("world", "alice", self.binding, self.rules,
+            ((truth, replace(provenance, diagnostic_ref="other")),))
+        self.assertEqual(self.policy.policy_id, changed.policy_id)
+        self.assert_code("POLICY_REJECTED", lambda: changed.reduce(changed.initial_state(), packet))
 
 
 class PerceptionStateSchemaTests(unittest.TestCase):

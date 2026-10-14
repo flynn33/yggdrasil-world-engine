@@ -98,6 +98,28 @@ reconstruction remains INVALID_ARCHIVE. Internal exception text is not returned.
 
 ## Compatibility and verification
 
+### Pure observer policy for coordinated admission
+
+`PerceptionPolicy(world_id, observer_id, binding, rules, sources)` is the additive
+pure owner interface adopted under YWE-REQ-0053 before extraction. It exposes
+immutable `scope` and `policy_id`, detached `initial_state()`,
+`packet(request_id, truth_ref)` and `reduce(state, packet)`. Reduction copies both
+inputs and enforces the existing complete-state bounds before returning. It owns
+no journal, revision counter, retry cache or objective write capability.
+`source(truth_ref)` returns the detached JSON pair `(truth, provenance)` using
+the exact retained M3 records; unknown references fail with UNKNOWN_TRUTH.
+
+The private engine still validates the original issued M3 result before any
+serialization. Policy hashing retains its exact ASCII byte domain; journal
+encoding retains its UTF-8 domain. The full source catalog stays outside the
+policy hash, and selected source digests stay inside packets. Store construction,
+publication, checkpoint and load behavior and existing archives remain unchanged.
+The store keeps explicit scope, policy, initial-state, packet, reducer and engine
+hooks needed by existing verification; no generic forwarding is introduced.
+The pure interface consumes verified owner components supplied by trusted
+composition. It neither authenticates client state nor binds a snapshot to an
+external committed vector; that synchronization remains separate M4 work.
+
 This is an additive M4 adapter and record schema. The two legacy perception
 persistence descriptor schemas remain explicit debt until final player/location
 integration and their consumer migration are implemented; neither is relabeled

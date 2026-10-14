@@ -170,8 +170,8 @@ def _schema(schema, name):
     return Draft202012Validator(schema), _digest(_object_bytes(schema))
 
 
-class PlayerStateStore:
-    """Trusted catalog owner; expose only restricted handles to calling systems."""
+class PlayerStatePolicy:
+    """Pure player admission over explicitly qualified catalogs and owner state."""
 
     def __init__(self, world_id, player_id, profile, initial_spine, grants, records,
                  updates, schemas, origin_policy):
@@ -209,7 +209,6 @@ class PlayerStateStore:
                 self._validators[kind], schema_hashes[kind] = _schema(schemas[kind], name)
             self._records = self._catalog(records, "ref")
             self._updates = self._catalog(updates, "update_ref")
-            self._writers = {principal: object() for principal in self._grants}
             self._spine = _copy(initial_spine)
             if (not self._validators["spine"].is_valid(self._spine)
                     or not self._imported and self._spine["state_lifecycle"] != "initial"
@@ -261,7 +260,6 @@ class PlayerStateStore:
                               migration_target_sha256=migration_result["target_sha256"],
                               import_anchor=migration_result["import_anchor"])
             self._policy_id = ("player.v2:" if self._imported else "player.v1:") + _digest(_object_bytes(policy))
-            self._journal = CommitJournal(self._scope, self._policy_id, self._initial, self._reduce)
         except (JournalError, SchemaError, KeyError, TypeError, ValueError):
             raise JournalError("INVALID_POLICY") from None
 
@@ -291,6 +289,25 @@ class PlayerStateStore:
             return owner
         except (JournalError, KeyError, TypeError, ValueError, AttributeError):
             raise JournalError("INVALID_MIGRATION") from None
+
+    @property
+    def scope(self):
+        return self._scope
+
+    @property
+    def policy_id(self):
+        return self._policy_id
+
+    def initial_state(self):
+        return _copy(self._initial)
+
+    def record(self, reference):
+        """Return the exact detached qualified wrapper from the trusted catalog."""
+        _identifier(reference)
+        raw = self._records.get(reference)
+        if raw is None:
+            raise JournalError("UNKNOWN_EVIDENCE")
+        return json.loads(raw)
 
     def _catalog(self, sources, identity):
         _items(sources, 0, 128)
@@ -549,13 +566,8 @@ class PlayerStateStore:
         current[field] = _copy({"value": change["value"]})["value"]
         return field
 
-    def writer(self, principal):
+    def packet(self, principal, request_id, update_ref):
         _identifier(principal)
-        if principal not in self._writers:
-            raise JournalError("UNAUTHORIZED_WRITER")
-        return self._writers[principal]
-
-    def _packet(self, principal, request_id, update_ref):
         _identifier(request_id)
         _identifier(update_ref)
         raw = self._updates.get(update_ref)
@@ -732,9 +744,12 @@ class PlayerStateStore:
             state["spine"][group][key] = change["before"]
         state["compensations"].append(_copy(operation))
 
-    def _reduce(self, scope, state, packet):
+    def reduce(self, state, packet):
+        """Reduce a verified owner state without changing either caller argument."""
+        state = _copy(state)
+        packet = _copy(packet)
         _closed(packet, "request_ref principal update_ref update_sha256 record_sha256 origin_packet compensates")
-        _reject(scope != self._scope or packet != self._packet(packet["principal"], packet["request_ref"], packet["update_ref"]))
+        _reject(packet != self.packet(packet["principal"], packet["request_ref"], packet["update_ref"]))
         update = json.loads(self._updates[packet["update_ref"]])
         spine = state["spine"]
         if self._imported:
@@ -874,7 +889,48 @@ class PlayerStateStore:
             if "last_player_action_trace_ref" in runtime and actions:
                 runtime["last_player_action_trace_ref"] = actions[-1]["action_trace_id"]
         self._validate_state(state, evidence=update["evidence_refs"])
-        return state
+        return _copy(state)
+
+
+class PlayerStateStore:
+    """Journal owner with local writer handles over the pure player policy."""
+
+    def __init__(self, world_id, player_id, profile, initial_spine, grants, records,
+                 updates, schemas, origin_policy):
+        self._initialize(PlayerStatePolicy(world_id, player_id, profile, initial_spine,
+                                          grants, records, updates, schemas, origin_policy))
+
+    def _initialize(self, policy):
+        self._policy = policy
+        self._scope = policy.scope
+        self._policy_id = policy.policy_id
+        self._initial = policy.initial_state()
+        self._domain = policy._domain
+        self._writers = {principal: object() for principal in policy._grants}
+        self._journal = CommitJournal(self._scope, self._policy_id, self._initial, self._reduce)
+
+    @classmethod
+    def from_migration(cls, result, migration, raw_source, *configuration):
+        policy = PlayerStatePolicy.from_migration(result, migration, raw_source, *configuration)
+        owner = cls.__new__(cls)
+        owner._initialize(policy)
+        return owner
+
+    def writer(self, principal):
+        _identifier(principal)
+        if principal not in self._writers:
+            raise JournalError("UNAUTHORIZED_WRITER")
+        return self._writers[principal]
+
+    def _packet(self, principal, request_id, update_ref):
+        return self._policy.packet(principal, request_id, update_ref)
+
+    def _reduce(self, scope, state, packet):
+        _reject(scope != self._scope)
+        return self._policy.reduce(state, packet)
+
+    def _validate_state(self, state, initial=False, evidence=()):
+        return self._policy._validate_state(state, initial, evidence)
 
     def publish(self, writer, request_id, expected_revision, update_ref):
         principal = next((name for name, handle in self._writers.items() if writer is handle), None)

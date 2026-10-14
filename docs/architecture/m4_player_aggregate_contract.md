@@ -198,6 +198,38 @@ Cross-owner coordination and multiplayer retain their separate M4 gates.
 
 ## Required evidence
 
+### Pure owner policy for coordinated admission
+
+`PlayerStatePolicy` provides the same nine-argument trusted configuration and
+the same explicit `from_migration(result, migration, raw_source, *configuration)`
+factory as the store. The factory retains complete source re-verification,
+profile/schema/selected-wrapper binding and imported consumption; a bare imported
+snapshot is never a public constructor. This additive interface is adopted under
+YWE-REQ-0056 and YWE-REQ-0057 before extraction for M4 synchronization.
+
+The policy exposes immutable `scope` and `policy_id`, detached `initial_state()`,
+`packet(principal, request_id, update_ref)` and `reduce(state, packet)`. Reduction
+copies both inputs, validates the same complete domain admission and bounds, and
+returns detached state. It has no journal, revision counter, retry cache or host
+effects. It consumes an owner state verified by trusted composition; it does not
+authenticate arbitrary client snapshots. `record(ref)` returns a detached exact
+qualified catalog wrapper for a future coordinator to compare with staged truth.
+Unknown records fail with the existing UNKNOWN_EVIDENCE code.
+
+`PlayerStateStore` remains the public standalone journal/capability wrapper, with
+unchanged constructors, writer handles, publication, checkpoint and loading.
+Its opaque handles stay local to that store. Policy identities, initial bytes,
+packet bytes, prior refusal codes and all old and imported archive bytes remain
+unchanged. Exact retries continue to bypass reduction in the journal. The store
+retains its documented and tested scope, policy, initial-state, packet, reducer
+and domain-validator hooks explicitly; no generic attribute forwarding is added.
+
+This extraction adds no cross-owner commit authority. A future coordinator must
+independently bind qualified external records to the actual staged owner vector,
+keep participant request/compensation identities distinct from transaction IDs,
+and enforce whole-container bounds. Those behaviors are not implemented merely
+by exposing pure owner policies.
+
 Execute a combined origin/identity/resonance/ability update through one commit
 and exact replay; late failure with no partial mutation; distinct-request effect
 duplication; capability/source mismatch; initial reveal refusal; companion and
