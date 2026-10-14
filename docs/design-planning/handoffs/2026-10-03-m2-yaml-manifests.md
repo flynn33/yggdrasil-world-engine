@@ -1,17 +1,20 @@
 # YWE Session Handoff — M4 Resumed
 
 **Date:** October 14, 2026
-**Record:** Project Record planning-51, sections 20–21.
+**Record:** Project Record planning-52, sections 20–22.
 **Owner instruction:** “I'm unpausing it. You may proceed now.”
-**Current step:** Verify and publish the first scoped journal reference slice; all M4 exits remain open.
-**Completed:** M0–M3 acceptance and owner publication, baseline `ce294ec`.
-**Next action:** Run clean committed-tree checks for the journal, then continue domain admission,
-final player/branch schemas, migration and multiplayer protocols.
-**Needed from owner:** Nothing now. Existing owner publication authority remains.
-**Saved at:** This record and the Project Record on `m4/state-protocols`;
-activation is published at `0ca2a12d26fa2e90faf7f477ae9d8b4dd5afbf8d`.
-The journal working-tree suite passes 26 journal/schema tests and five platform boundary tests;
-clean repository verification and journal publication are not predeclared.
+**Current step:** Verify and publish observer-scoped perception persistence; all M4 exits remain open.
+**Completed:** M0–M3 acceptance; M4 activation and journal checkpoint published through `ea4c12b`.
+**Next action:** Finish clean checks for the observer adapter, then continue final player/branch
+admission, migrations, realm/location synchronization and multiplayer protocols.
+**Needed from owner:** Nothing now. The saved roadmap goal now reports active.
+**Saved at:** This record and the Project Record on `m4/state-protocols`.
+
+Journal source `b28ba82` passed 31 focused tests and 35 of 36 selected repository
+checks; correction `ea4c12b` passed the three checks covering its allocation fix.
+Main CI `38550875881` is running on exact `ea4c12b`. Wiki `d2d64c2` has 47 pages
+verified by remote readback. The observer slice passes 62 working-tree focused
+and adjacent tests; clean checks and publication remain to be executed.
 
 The canonical checkout's uncommitted planning drafts remain untouched. Work is
 isolated at the managed `m4-state-protocols` worktree.

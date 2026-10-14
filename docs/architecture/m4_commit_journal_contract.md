@@ -35,7 +35,7 @@ not yet supply the final player packet adapter, branch merge or authority grants
 
 ## Owned representation
 
-Identifiers use 1–128 ASCII characters: first alphanumeric, then alphanumeric,
+Identifiers use 1â€“128 ASCII characters: first alphanumeric, then alphanumeric,
 dot, underscore, colon, slash or hyphen. Policy identity identifies a fixed
 version of the owner's deterministic validation and reduction rules.
 
@@ -72,6 +72,11 @@ head digest separately to establish archive identity.
 and owns a private state and ordered entries. `state()` returns a detached JSON
 copy. `save()` returns an owned canonical archive byte string. Both observe one
 complete committed revision under the same lock used by `commit`.
+
+The additive `checkpoint()` operation returns `(archive_bytes, trusted_head)`
+from one lock-held revision, including the empty genesis case. Callers needing
+a matching pair use this operation; independent `save()` and `head()` calls can
+observe different revisions during concurrent writes. [YWE-REQ-0053]
 
 `commit(request_id, expected_revision, packet, compensates=None)` validates and
 copies arguments, then serializes admission and reduction. The request identity

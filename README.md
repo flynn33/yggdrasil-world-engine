@@ -125,7 +125,7 @@ until M10 acceptance.
 The current work is to complete branch and player state contracts, persistence
 and migration, scoped truth synchronization, and deterministic multiplayer
 ordering and reconciliation. All five M4 deliverables and five exit criteria
-remain open. The first implemented slice is the [scoped commit journal](docs/architecture/m4_commit_journal_contract.md): atomic reference-state updates, exact retry identity, append-only compensation and verified save/load replay. Its archive schema and focused tests cover corruption, concurrent admission and scope isolation. These tests use explicit synthetic owners; final player/branch admission, migrations and multiplayer reconciliation are still under development.
+remain open. The first implemented slice is the [scoped commit journal](docs/architecture/m4_commit_journal_contract.md): atomic reference-state updates, exact retry identity, append-only compensation and verified save/load replay. Its archive schema and focused tests cover corruption, concurrent admission and scope isolation. The journal mechanics tests use explicit synthetic owners. The next implemented slice, [observer-scoped perception persistence](docs/architecture/m4_perception_persistence_contract.md), composes actual M3 perception views, retains complete truth and provenance, and verifies replay under the same observer and rules. Archive/head checkpoints now capture one committed revision. Final player/branch admission, migrations, realm/location integration and multiplayer reconciliation remain under development.
 
 The accepted M3 source and execution archives remain immutable. M4 verification
 will cover save/load and migration truth preservation, event-log replay,

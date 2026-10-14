@@ -1,7 +1,7 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-51
+**Revision:** planning-52
 **Date:** October 14, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
@@ -2321,3 +2321,53 @@ pin is changed. No M4 debt or deliverable is closed by this first slice.
 Remaining work includes domain admission and final player/branch schemas,
 migrations, realm/location synchronization, distributed ordering, reconciliation
 and branch merge. Needed from owner: nothing for continued authorized work.
+
+
+### 21.1. Journal publication and verification readback
+
+Journal implementation `b28ba82a45d50ca137e965b121833e8088c129ab` passed 31
+focused tests from a clean committed checkout. The actual Bash repository entry
+point selected 36 checks: 35 passed and requirement allocation failed because
+its next-ID policy still named the just-allocated identifier. The two-line
+correction `ea4c12b7b7868d57975b086f4abf39e6793ab8e3` passed clean selected
+machine-readable-artifact, M1 governance and attribution checks. No full local
+suite on that correction is claimed; other check inputs were unchanged.
+
+Both commits were pushed as Jim Daley to `main` and `m4/state-protocols`, with
+the authorized PR/signature rule bypass. Git fetch and the GitHub API read back
+main at `ea4c12b`; README bytes matched the committed source. The corresponding
+wiki commit is `d2d64c22bed591a5f24b5a9fd31e705007d5ab1f`: 32 projected surfaces,
+two explicitly updated orientation statements, and all 47 pages verified
+against a fresh remote checkout. Historical M3 acceptance files remain unchanged.
+GitHub Main CI run `38550875881` was dispatched for exact source `ea4c12b`;
+its Windows and Ubuntu validation jobs were still running at this record.
+
+## 22. M4 observer persistence reference slice — October 14, 2026
+
+Current step: verify the observer persistence adapter and publish its checkpoint.
+Contract `docs/architecture/m4_perception_persistence_contract.md`, YWE-REQ-0053
+and ADR-0045 were adopted before dependent implementation. The existing Raven
+Forge pin and reference-tooling realization remain controlling. The new approved
+reference path is `core/perception_engine/persistence.py`, with its exact test
+path and an additive closed state schema. No runtime dependency is added.
+
+The trusted composition boundary supplies immutable copies of the Core binding,
+visibility rules and truth-owner catalog. Publication selects a source and uses
+the actual M3 PerceptionEngine; original owner results, complete truth/provenance,
+observer scope and policy/source digests govern persistence and replay. There is
+no objective journal capability. Catalog extension retains historical identities;
+missing or changed historical content refuses replay. Journal checkpoint pairs
+archive bytes and trusted head under one lock for concurrent callers.
+
+Observed working-tree execution: 62 tests passed across M4 perception persistence,
+M4 journal, platform boundaries and the existing M3 narrative/perception suite.
+This includes 21 perception adapter/schema cases, actual owner output comparison,
+two observer views, corruption, retries, source loss/change, bounded refusal,
+input/output alias isolation and concurrent checkpoint replay. Clean committed
+checks and this slice's publication are not predeclared.
+
+Compatibility is additive. The two legacy perception descriptors remain open
+until final player/location integration and consumer migration; existing M3
+schemas, implementation and acceptance archives remain unchanged. All M4
+milestone deliverables and exits remain open. This single-executor review claims
+no independent review. Needed from owner: nothing for continued roadmap work.

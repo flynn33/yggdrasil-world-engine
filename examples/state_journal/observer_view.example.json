@@ -1,0 +1,97 @@
+{
+  "format": "ywe.perception_state.v1",
+  "objective_effects": "NONE",
+  "observer_id": "alice",
+  "overlay": {
+    "contradiction_refs": [
+      "door"
+    ],
+    "evaluated_rules": [
+      {
+        "diagnostic_ref": "perception:60b224e50264560afebabe25032fbf1c33cef863f436d8f82a3103668206a8ca:rule:0",
+        "evidence_refs": [
+          "truth.one",
+          "hide"
+        ],
+        "explanation": "Rule subject and declared fact presence matched.",
+        "failure_code": null,
+        "field": "rule_id",
+        "owner": "PERCEPTION",
+        "rule": "VISIBILITY",
+        "status": "COMPLETED"
+      }
+    ],
+    "hidden_entities": [
+      "door"
+    ],
+    "objective_effects": "NONE",
+    "overlay_ref": "perception:60b224e50264560afebabe25032fbf1c33cef863f436d8f82a3103668206a8ca:overlay",
+    "request": {
+      "provenance": {
+        "cosmic_pattern_snapshot_ref": "snapshot",
+        "diagnostic_ref": "diagnostic",
+        "generation_plan_ref": "plan",
+        "source_ash_refs": [
+          "ash"
+        ]
+      },
+      "request_ref": "view",
+      "rules": [
+        {
+          "condition_fact_refs": [
+            "door"
+          ],
+          "entity_ref": "door",
+          "interpretation_tags": [
+            "veiled"
+          ],
+          "priority": 1,
+          "rule_id": "hide",
+          "subject_ref": "alice",
+          "visible": false
+        }
+      ],
+      "subject_ref": "alice",
+      "truth": {
+        "entity_refs": [
+          "door",
+          "tree"
+        ],
+        "evidence_status": "DECLARED_INPUT",
+        "facts": [
+          {
+            "authority_tier": "OBJECTIVE_SHARED",
+            "evidence_refs": [
+              "evidence"
+            ],
+            "fact_id": "door",
+            "scope_ref": "world",
+            "subject_ref": "alice",
+            "value_token": "closed"
+          },
+          {
+            "authority_tier": "DERIVED_INTERPRETATION",
+            "evidence_refs": [
+              "belief"
+            ],
+            "fact_id": "door",
+            "scope_ref": "world",
+            "subject_ref": "alice",
+            "value_token": "open"
+          }
+        ],
+        "scope_ref": "world",
+        "snapshot_ref": "truth.one"
+      }
+    },
+    "tags": [
+      "veiled"
+    ],
+    "truth_sha256": "99decdddfc8e36a919ae7e76ea1e996776b861d1f89f26574e301cd1a4d5b878",
+    "visible_entities": [
+      "tree"
+    ]
+  },
+  "truth_substrate_ref": "truth.one",
+  "world_id": "world"
+}

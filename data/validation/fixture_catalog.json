@@ -25249,6 +25249,19 @@
       "expected_requirement_ids": [
         "YWE-REQ-0052"
       ]
+    },
+    {
+      "fixture_id": "m4.perception.observer_view",
+      "path": "examples/state_journal/observer_view.example.json",
+      "instance_pointer": "",
+      "schema_id": "https://ywe.local/schemas/m4_perception_state_schema.json",
+      "category": "positive",
+      "expected_result": "accept",
+      "expected_errors": [],
+      "expected_requirement_ids": [
+        "YWE-REQ-0053"
+      ],
+      "description": "Format fixture from actual observer composition; executable tests independently establish owner and replay behavior."
     }
   ]
 }

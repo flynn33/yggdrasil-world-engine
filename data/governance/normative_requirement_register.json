@@ -9,7 +9,7 @@
     "series": "YWE-REQ",
     "format": "YWE-REQ-NNNN",
     "allocation": "monotonic",
-    "next_available_id": "YWE-REQ-0053",
+    "next_available_id": "YWE-REQ-0054",
     "renumbering_allowed": false,
     "reuse_allowed": false,
     "deletion_allowed": false,
@@ -1478,13 +1478,38 @@
         "docs/architecture/truth_authority_lattice.md",
         "data/schemas/m4_commit_journal_schema.json"
       ]
+    },
+    {
+      "requirement_id": "YWE-REQ-0053",
+      "title": "Observer-scoped perception persistence and deterministic replay",
+      "normative_statement": "Perception persistence MUST retain only original owner-composed views in an immutable observer scope, preserve complete truth and provenance without objective mutation, and verify exact source, policy and trusted checkpoint identity on replay. Checkpoint archive and head MUST observe the same committed revision.",
+      "normative_level": "mixed",
+      "authority_node": "ywe_core",
+      "scope_partition": "ywe_core",
+      "verification_refs": [
+        "tests/test_m4_perception_persistence.py",
+        "tests/test_m4_state_journal.py"
+      ],
+      "aliases": [],
+      "supersedes": [],
+      "status": "active",
+      "introduced_milestone": "M4",
+      "owner_role": "State and synchronization maintainers",
+      "decision_refs": [
+        "ADR-0045"
+      ],
+      "source_refs": [
+        "docs/architecture/m4_perception_persistence_contract.md",
+        "docs/architecture/m4_commit_journal_contract.md",
+        "docs/architecture/truth_authority_lattice.md"
+      ]
     }
   ],
   "summary": {
-    "total_requirements": 52,
-    "active": 50,
+    "total_requirements": 53,
+    "active": 51,
     "proposed": 0,
     "terminal": 2,
-    "next_identifier": "YWE-REQ-0053"
+    "next_identifier": "YWE-REQ-0054"
   }
 }

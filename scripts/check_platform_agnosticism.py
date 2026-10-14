@@ -77,6 +77,7 @@ BLOCKED_ARTIFACT_NAMES = {
 TOOL_SOURCE_SUFFIXES = {".ps1", ".py", ".sh"}
 APPROVED_REFERENCE_SOURCES = {
     "core/state_journal.py",
+    "core/perception_engine/persistence.py",
     "core/ash_pattern_engine/__init__.py",
     "core/ash_pattern_engine/ash_canonical.py",
     "core/ash_pattern_engine/state_model.py",

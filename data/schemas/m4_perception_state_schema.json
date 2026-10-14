@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ywe.local/schemas/m4_perception_state_schema.json",
+  "title": "M4 observer perception state; replay establishes semantics",
+  "x-ywe-requirement-id": "YWE-REQ-0053",
+  "type": "object",
+  "required": [
+    "format",
+    "world_id",
+    "observer_id",
+    "truth_substrate_ref",
+    "overlay",
+    "objective_effects"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "ywe.perception_state.v1"
+    },
+    "world_id": {
+      "allOf": [
+        {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        {
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        }
+      ]
+    },
+    "observer_id": {
+      "allOf": [
+        {
+          "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+        },
+        {
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        }
+      ]
+    },
+    "truth_substrate_ref": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+            },
+            {
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+              "not": {
+                "pattern": "[\\r\\n]"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "overlay": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "https://ywe.local/schemas/m3_core_domain_schema.json#/$defs/PerceptionOverlay"
+        }
+      ]
+    },
+    "objective_effects": {
+      "const": "NONE"
+    }
+  },
+  "if": {
+    "properties": {
+      "overlay": {
+        "type": "null"
+      }
+    }
+  },
+  "then": {
+    "properties": {
+      "truth_substrate_ref": {
+        "type": "null"
+      }
+    }
+  },
+  "else": {
+    "properties": {
+      "truth_substrate_ref": {
+        "allOf": [
+          {
+            "$ref": "https://ywe.local/schemas/common/identifier.schema.json"
+          },
+          {
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$",
+            "not": {
+              "pattern": "[\\r\\n]"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

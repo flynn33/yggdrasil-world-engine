@@ -2190,12 +2190,44 @@
         "docs/architecture/player_runtime_state_contract.md",
         "docs/architecture/truth_authority_lattice.md"
       ]
+    },
+    {
+      "id": "ADR-0045",
+      "record_type": "decision",
+      "title": "Persist observer views through the original perception owner",
+      "status": "accepted",
+      "recorded_on": "2026-10-14",
+      "owner_role": "State and synchronization maintainers",
+      "scope": "ywe_core",
+      "disposition": "Adopt the first-slice interface and representation contract before dependent implementation under owner-authorized M4 development; milestone acceptance remains open.",
+      "debt_refs": [],
+      "supersedes": [],
+      "superseded_by": [],
+      "legacy_ids": [],
+      "context": "The scoped journal supplies atomic replay mechanics; perception still has no concrete owner for persisting its derived views.",
+      "decision": "Adopt the observer-scoped persistence contract before dependent implementation, approving only core/perception_engine/persistence.py and tests/test_m4_perception_persistence.py as new reference and validation paths. Add a same-revision journal checkpoint operation for archive/head capture.",
+      "rationale": "Recomposition through the accepted M3 engine and retained immutable truth inputs prevents arbitrary client overlays from becoming persisted state and preserves the objective truth boundary.",
+      "consequences": [
+        "Additive reference adapter and state schema; existing M3 source and historical acceptance remain unchanged.",
+        "Legacy perception descriptors remain open debt until final player/location integration and explicit migration.",
+        "Single-executor review; no independent review or full M4 acceptance is claimed."
+      ],
+      "requirement_refs": [
+        "YWE-REQ-0053",
+        "YWE-REQ-0052",
+        "YWE-REQ-0014"
+      ],
+      "source_refs": [
+        "docs/architecture/m4_perception_persistence_contract.md",
+        "docs/architecture/m4_commit_journal_contract.md",
+        "docs/architecture/shared_truth_vs_branch_truth_contract.md"
+      ]
     }
   ],
   "summary": {
-    "total_records": 61,
-    "architecture_decisions": 44,
-    "accepted_decisions": 42,
+    "total_records": 62,
+    "architecture_decisions": 45,
+    "accepted_decisions": 43,
     "change_proposals": 1,
     "implemented_change_proposals": 1,
     "risks": 3,

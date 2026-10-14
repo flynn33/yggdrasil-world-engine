@@ -186,6 +186,11 @@ class CommitJournal:
             return _encode({**self._header(), "entries": [json.loads(entry) for entry in entries],
                             "final_state": json.loads(state)})
 
+    def checkpoint(self) -> tuple[bytes, str]:
+        with self._lock:
+            self._guard()
+            return self.save(), self.head()
+
     def commit(self, request_id: str, expected_revision: int, packet: dict,
                compensates: str | None = None) -> CommitReceipt:
         _identifier(request_id)

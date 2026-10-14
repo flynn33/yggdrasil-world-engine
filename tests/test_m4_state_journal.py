@@ -31,6 +31,41 @@ class CommitJournalTests(unittest.TestCase):
         self.scope = TruthScope("world.one", "player_state", "player.one")
         self.journal = CommitJournal(self.scope, "test.counter.v1", {"count": 0}, reduce_counter)
 
+    def test_checkpoint_pairs_archive_and_head_during_concurrent_commits(self):
+        start = threading.Barrier(2)
+        def write():
+            start.wait(timeout=5)
+            for revision in range(MAX_ENTRIES):
+                self.journal.commit("write." + str(revision), revision, {"add": 1})
+        def read():
+            start.wait(timeout=5)
+            pairs = [self.journal.checkpoint() for _ in range(MAX_ENTRIES)]
+            for raw, head in pairs:
+                restored = CommitJournal.load(raw, self.scope, "test.counter.v1", reduce_counter, head)
+                self.assertEqual((raw, head), restored.checkpoint())
+        raw, head = self.journal.checkpoint()
+        self.assertEqual((raw, head), CommitJournal.load(raw, self.scope, "test.counter.v1",
+                                                        reduce_counter, head).checkpoint())
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            writes, reads = pool.submit(write), pool.submit(read)
+            writes.result(timeout=30)
+            reads.result(timeout=30)
+        raw, head = self.journal.checkpoint()
+        restored = CommitJournal.load(raw, self.scope, "test.counter.v1", reduce_counter, head)
+        self.assertEqual(restored.state(), {"count": MAX_ENTRIES})
+
+    def test_reentrant_checkpoint_rejects_reducer_without_publication(self):
+        def reducer(scope, state, packet):
+            try:
+                journal.checkpoint()
+            except JournalError:
+                pass
+            return state
+        journal = CommitJournal(self.scope, "test.reentry.v1", {}, reducer)
+        before = journal.checkpoint()
+        self.assert_code("POLICY_REJECTED", lambda: journal.commit("r1", 0, {}))
+        self.assertEqual(before, journal.checkpoint())
+
     def assert_code(self, code, action):
         with self.assertRaises(JournalError) as caught:
             action()

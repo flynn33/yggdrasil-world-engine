@@ -13,6 +13,18 @@ from check_platform_agnosticism import platform_violations
 
 
 class ReferenceBoundaryTests(unittest.TestCase):
+    def test_perception_persistence_approval_excludes_storage_and_network_neighbors(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            reference = root / "core/perception_engine"
+            reference.mkdir(parents=True)
+            (reference / "persistence.py").write_text("# Reference oracle\n", encoding="utf-8")
+            self.assertEqual(([], 1), platform_violations(root))
+            for name in ("storage.py", "persistence_runtime.py", "network.py"):
+                (reference / name).write_text("# Unapproved neighbor\n", encoding="utf-8")
+            violations, inspected = platform_violations(root)
+            self.assertEqual((len(violations), inspected), (3, 4))
+
     def test_journal_reference_approval_does_not_admit_storage_or_network_runtime(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
