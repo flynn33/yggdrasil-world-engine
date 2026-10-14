@@ -2493,3 +2493,16 @@ refusal and catalog/state/memory limits. The capacity retry test initially
 changed expected revision and correctly received IDENTITY_CONFLICT; it now
 asserts that refusal and retries with the original revision. No journal behavior
 or test contract was weakened. Clean committed checks and publication are next.
+
+### 24.1. Origin clean checks and exact-path registration correction
+
+Implementation `296d4af89bf01a29501c34786196359f51cc920d` passed all 105 focused
+and adjacent tests from a clean checkout. Its 36 selected repository checks
+finished with 35 passes and one failure: the Phase 10 player guardrail's separate
+`allowed_reference_paths` list lacked the approved origin module, although the
+platform checker and test-source list had been updated. The regression test
+`PlayerRuntimeReferencePolicyTests.test_m4_reference_paths_require_both_approvals_and_reject_neighbors`
+reproduced the exact failure. The correction adds that one already-adopted path
+and checks both approvals plus neighboring-path rejection for all four M4
+reference modules. No implementation behavior or guardrail is weakened. The
+affected clean checks must pass before publication; no full-suite pass is claimed.

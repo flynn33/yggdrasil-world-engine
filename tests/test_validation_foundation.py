@@ -276,6 +276,24 @@ class RoadmapValidationTests(unittest.TestCase):
 
 
 class PlayerRuntimeReferencePolicyTests(unittest.TestCase):
+    def test_m4_reference_paths_require_both_approvals_and_reject_neighbors(self):
+        paths = ["core/state_journal.py", "core/state_migration.py",
+                 "core/perception_engine/persistence.py", "core/narrative_engine/origin_progression.py"]
+        self.assertEqual([], self.check_added(paths))
+        for path in paths:
+            with self.subTest(path=path):
+                spec = copy.deepcopy(self.spec)
+                spec["allowed_reference_paths"].remove(path)
+                self.assertEqual([f"Phase 10 added forbidden platform/code file: {path}"],
+                                 self.check_added([path], spec))
+                with mock.patch.object(player_runtime_check, "APPROVED_REFERENCE_SOURCES",
+                                       platform_check.APPROVED_REFERENCE_SOURCES - {path}):
+                    self.assertIn(f"Phase 10 added forbidden platform/code file: {path}",
+                                  self.check_added([path]))
+                neighbor = path.removesuffix(".py") + "_network.py"
+                self.assertEqual([f"Phase 10 added forbidden platform/code file: {neighbor}"],
+                                 self.check_added([neighbor]))
+
     def setUp(self):
         self.spec = json.loads(
             (ROOT / "data/validation/check_no_platform_runtime_code_phase_10.spec.json").read_text(
