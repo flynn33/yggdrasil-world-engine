@@ -1,13 +1,13 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-48
-**Date:** October 11, 2026
+**Revision:** planning-50
+**Date:** October 14, 2026
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
-**Supersedes:** planning-47 at `9c19c6beb6eff138b7fb1d98a7c9eaa552f08d71`; full history remains in Git.
+**Supersedes:** planning-49 local M3 acceptance reconciliation draft, preserved in section 19.1; committed baseline `ce294ece693996fadf4173a3164ffe199e67c70d` remains in Git.
 
-**Current approval and continuation:** Section 18 records issued module instructions, the applied source extension, the adopted alias-wrapper correction and bounded implementation verification. Section 17 preserves contract adoption; sections 16–16.4 retain verified published N3 lifecycle evidence. Section 16.5 governs continuation: finish, verify and publish M3, then pause for explicit go-ahead before M4. All five M3 exits remain open.
+**Current approval and continuation:** Section 20 records the owner's explicit October 14 resumption. M0–M3 remain accepted; M4 is in progress. Earlier pause instructions in sections 16.5 and 19.1 are historical and superseded by that go-ahead. Continue the roadmap in dependency order under the existing owner publication authority.
 
 ## 1. Current working brief
 
@@ -15,15 +15,16 @@
 |---|---|
 | Product / owner | Yggdrasil World Engine / Flynn, repository owner `flynn33` |
 | Product purpose | Platform-neutral, strictly object-oriented and modular engine specification |
-| Accepted milestones | M0, M1 and M2 |
-| Active milestone | M3 — Complete core deterministic semantics and the reference oracle |
-| Active M3 assignment | Strict Realm/Transition and bounded topology/axiom owners implemented; complete module capture and integrated verification in progress (section 18), followed by complete planner/emitter and current-source lifecycle conformance |
-| Next milestone | M4 remains planned; its dependency is M3 acceptance |
+| Accepted milestones | M0, M1, M2 and M3 |
+| Active milestone | M4 — Complete state persistence branching and multiplayer |
+| Active M3 assignment | None — M3 accepted; all original execution archives remain immutable |
+| Next milestone | M5 remains planned until M4 acceptance; no platform work before M10 |
 | M2 acceptance | Complete; immutable evidence records all six exit criteria and eight deliverables |
+| M3 acceptance | Complete; immutable evidence `data/governance/m3_acceptance_evidence.json` binds the four executed archives, 28 invariant judgments, five conformance categories, nine module obligations, seven deliverables and five exit criteria |
 | Source closure | Original clean full execution and successful exact-revision Ubuntu/Windows CI verified October 11 (section 14); section 12 external review remains representation-matched only, `acceptance=false`, `provenance_review_required=true`; neither accepts N3 or M3 |
-| Wiki | Owner publication `f31ef00` verified from source `9c19c6b`; all 47 remote pages match reviewed bytes (section 18) |
+| Wiki | M3 publication `2df16c1e5b5af0b386bdab02dc7c289b9c7a2c97` from source `ce294ec`; prior publication readback verified all 47 pages |
 | Publication | Unreleased; no GitHub Release objects exist as verified September 20, 2026 |
-| Workflow | Continue adopted M3 work and owner publication; after M3 acceptance and publication pause for explicit owner go-ahead before M4 (section 16.5). No additional M3 operator or mandatory separate reviewer-service approval is assigned; technical checks and source constraints remain required |
+| Workflow | Owner explicitly resumed on October 14. Continue M4 contracts, implementation, verification and owner publication, preserving M0–M3 acceptance and later milestone gates |
 
 The machine-readable roadmap is milestone and status authority. Focused accepted contracts,
 governance records, schemas, fixtures, and validators remain engineering authority.
@@ -2211,3 +2212,85 @@ Core semantics and M3 case acceptance require actual implementation and executio
 No authored sizing packet or aggregate pass count establishes them. M3 remains
 in_progress and allfive exits open. M4 remains planned. Complete, verify and
 publish allM3, then pause the existing goal and wait for explicit owner go-ahead.
+
+### 19.1. Verified M3 acceptance publication and M3/M4 pause — October 12, 2026
+
+**Current step:** M3 acceptance is complete, verified, published and reconciled;
+the goal pauses before M4 per the owner's explicit boundary in section 16.5.
+
+The tested M3 implementation
+`504e297737fa0a79ab19d6edd63f9fcbc5c139e7` passed the actual unfiltered,
+offline, clean full-history repository run: 37 applicable checks with zero
+blocking failures and zero advisories, and ordinary unittest discovery executed
+1,393 cases with 0 failures, 0 errors, 0 skips, 0 expected failures and 0
+unexpected successes. The parent process retained the complete combined
+stdout/stderr transcript; the child receipt records actual case callbacks,
+discovered order, original method-body entry, source/body hashes before and
+after, and the unchanged obligation mapping. Both report clean before/after
+state and file-only Git protocols. Python 3.12.10, jsonschema 4.25.1,
+PyYAML 6.0.3 and referencing 0.37.0 are the recorded tool versions.
+
+The immutable evidence pair is published in the repository:
+`data/governance/m3_acceptance_evidence.json` (outcome `pass`, source digest
+`b539e35aa4abfeb11f1c2f76ec94431520109a77ffae3368c02a269c6ecc5b8c` over 1,428
+files with only the six fixed evidence paths excluded, executable obligation
+mapping SHA256 `326b1ae1e087229fa8445558d2269384c007b9189b7834f451ebfd749cc8ac39`)
+binds `data/governance/evidence/m3/` repository-report.json
+(`f295707a3bb52d4483f60b7f343001cf363f7e28e18440a79440c7c8d998fa84`, 5,264
+bytes), unit-cases.json (`bbfd80a9f7a001ad5a4a8a7373a0ea191a6adca862051f3495363afd2d4768f6`,
+1,585,173 bytes), unit-transcript.log (`21d96941ac71b69572cb66f717f1bc61a664a92e86c83789554d7fc302a41a12`,
+4,064 bytes) and acceptance-report.json
+(`ed60ec8d5bafae057d7d2e54a9d3caab33bf90e2ae51cbd01b4eeceb113e9aa3`, 10,033
+bytes). The acceptance report judges CONFORMANT: all 28 canonical invariants
+pass, all five conformance categories pass, all nine canonical module
+obligations pass, all seven deliverables pass, and all five exit criteria pass.
+The two future core placeholders remain excluded debt assigned to M4.
+`docs/project/M3_CORE_CONTRACTS_ACCEPTANCE.md` records M3 as ACCEPTED.
+
+The acceptance introduction and its history were published on `main` under
+owner authorship (Jim Daley / `flynn33`, no co-author or AI attribution):
+`274b2ca` records the immutable M3 acceptance from the verified
+implementation, `3f8a68e` completes M3 acceptance and pauses development
+before M4, and merge `ce294ec` preserves the published progress history with
+completed M3 status. Local `main`/HEAD, `origin/main` and the GitHub API ref
+all read back at `ce294ece693996fadf4173a3164ffe199e67c70d`. The machine-readable
+roadmap reports M3 status `complete` with the evidence pair as acceptance
+evidence; M4 remains `planned` and dependent on M3. The local working tree at
+`D:\GitHub\YWE` is clean on `m3/source-closure-records` at the same revision as
+`origin/main`; the branch is now an obsolete working name for this completed
+slice and its deletion is a maintenance operation, not a next milestone.
+
+M4 activation requires the owner's explicit go-ahead per section 16.5.
+Elapsed time, a completed prerequisite, or an automatic goal continuation is
+not that authorization. No M4 implementation, adoption or activation work is
+started by this record.
+
+## 20. Owner resumption and M4 activation — October 14, 2026
+
+The owner explicitly stated: “I'm unpausing it. You may proceed now.” This
+revokes the pause after M3 and authorizes continued roadmap work. The earlier
+pause records remain historical evidence, not a current execution restriction.
+
+Current step: M4 contract and integration inventory. Completed: M0–M3 acceptance
+and publication; current main rechecked at `ce294ece693996fadf4173a3164ffe199e67c70d`.
+Next action: trace branch, player and truth-scope consumers; adopt explicit
+persistence/replay and multiplayer contracts before dependent reference code.
+Needed from owner: nothing now. All five M4 deliverables and exits remain open.
+
+The canonical checkout `D:\GitHub\YWE` contains two uncommitted planning drafts.
+They are preserved untouched. Their M3 acceptance reconciliation was consumed
+as the base for this record and handoff in isolated worktree
+the managed `m4-state-protocols` worktree, branch
+`m4/state-protocols`, starting at remote `main` commit `ce294ec`.
+No runtime/source changes are included in this activation checkpoint.
+
+The recorded Raven Forge v0.7.0 pin, external-source roles and local reference
+realization remain unchanged. No external runtime dependency, framework copy,
+new upstream authority or native platform product is selected. Python reference
+execution remains specification verification tooling. Verification must include
+replay, partial writes, retries, conflicting identifiers, concurrency, migration
+failure, truth authority and diagnostic failure; platform deployment remains M10-gated.
+
+The README status, machine roadmap, repository truth mirror and detailed roadmap
+now identify M4 as in progress. Publication and check results are recorded only
+after their actual execution; this record does not claim M4 completion.

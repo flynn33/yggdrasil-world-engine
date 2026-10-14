@@ -74,10 +74,9 @@ products remain deferred until the M10 specification gate is accepted.
 | Indicator | Current state |
 |---|---|
 | Repository baseline | `v2.0.23` |
-| Current milestone | 🟢 `M3` — Complete core deterministic semantics and the reference oracle (`complete`) |
-| Development pause | ⏸️ After `M3`; `M4` remains `planned`; awaiting owner go-ahead |
+| Current milestone | 🟡 `M4` — Complete state persistence branching and multiplayer (`in_progress`) |
 | Accepted milestone gates | `4 of 11` |
-| Milestone queue | `0` in progress; `7` planned; `0` blocked; `0` deferred |
+| Milestone queue | `1` in progress; `6` planned; `0` blocked; `0` deferred |
 | Release-ready subsystems | `2 of 15` |
 | Specification publication | `unreleased`; `0` GitHub Release objects; `0` agnostic specification releases (verified `2026-09-20`) |
 | Platform product work | ⏸️ `deferred`; authorization requires `M10` acceptance |
@@ -90,7 +89,7 @@ Milestone indicators: 🟢 `complete` · 🟡 `in_progress` · ⚪ `planned` · 
 | M1 | 🟢 | `complete` | M0 | Normalize canon terminology and governance |
 | M2 | 🟢 | `complete` | M1 | Build the canonical contract and schema foundation |
 | M3 | 🟢 | `complete` | M2 | Complete core deterministic semantics and the reference oracle |
-| M4 | ⚪ | `planned` | M3 | Complete state persistence branching and multiplayer |
+| M4 | 🟡 | `in_progress` | M3 | Complete state persistence branching and multiplayer |
 | M5 | ⚪ | `planned` | M3, M4 | Finish narrative and content generation engines |
 | M6 | ⚪ | `planned` | M4, M5 | Close ability companion reward and vertical slice phases |
 | M7 | ⚪ | `planned` | M6 | Build the combat and encounter system foundation |
@@ -116,10 +115,28 @@ required acceptance evidence.
 See the roadmap inventories of [completed or verified foundations](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#completed-or-verified-foundations), [material work remaining](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#material-work-remaining), and the [15-subsystem maturity matrix](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#subsystem-maturity-matrix).
 <!-- roadmap-status:end -->
 
+### M4 development checkpoint — 2026-10-14
+
+**M4 is in progress.** The owner explicitly resumed development on October 14,
+2026: “I'm unpausing it. You may proceed now.” This supersedes the M3/M4 pause.
+M0–M3 remain accepted; M5–M10 remain planned and platform work remains deferred
+until M10 acceptance.
+
+The current work is to complete branch and player state contracts, persistence
+and migration, scoped truth synchronization, and deterministic multiplayer
+ordering and reconciliation. All five M4 deliverables and five exit criteria
+remain open. Initial work inventories the existing contracts and schemas before
+adopting the missing protocols; no M4 implementation or acceptance is claimed
+by this activation checkpoint.
+
+The accepted M3 source and execution archives remain immutable. M4 verification
+will cover save/load and migration truth preservation, event-log replay,
+duplicate consequence prevention, concurrent ordering, and perception isolation.
+
 ### M3 acceptance checkpoint — 2026-10-12
 
-**M3 is complete. Development is paused before M4, awaiting the owner's explicit go-ahead.**
-M4 and all later milestones remain planned.
+**M3 is complete.** Its October 12 publication established the owner pause before
+M4; the owner resumed development on October 14 as recorded above.
 
 The [tested implementation](https://github.com/flynn33/yggdrasil-world-engine/commit/504e297737fa0a79ab19d6edd63f9fcbc5c139e7) passed all 37
 applicable repository checks through `bash scripts/run_checks.sh` in one clean,

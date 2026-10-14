@@ -180,8 +180,28 @@ class RoadmapValidationTests(unittest.TestCase):
         self.assertEqual([], roadmap_check.milestone_execution_errors(self.roadmap))
         changed = copy.deepcopy(self.roadmap)
         changed.pop("execution_pause", None)
-        changed["milestones"][3]["status"] = "complete"
+        current = next(item for item in changed["milestones"]
+                       if item["id"] == changed["current_milestone"])
+        current["status"] = "complete"
         self.assertTrue(roadmap_check.milestone_execution_errors(changed))
+
+    def test_owner_resumption_activates_next_milestone_without_weakening_pause(self):
+        resumed = copy.deepcopy(self.roadmap)
+        resumed["current_milestone"] = "M4"
+        for index, milestone in enumerate(resumed["milestones"]):
+            milestone["status"] = "complete" if index < 4 else "planned"
+        resumed["milestones"][4]["status"] = "in_progress"
+        resumed["execution_pause"] = {
+            "status": "awaiting_owner_go_ahead", "after_milestone": "M3",
+            "before_milestone": "M4", "reason": "Historical owner pause."}
+        self.assertTrue(roadmap_check.milestone_execution_errors(resumed))
+        del resumed["execution_pause"]
+        self.assertEqual([], roadmap_check.milestone_execution_errors(resumed))
+        rendered = roadmap_check.render_readme_status(resumed)
+        self.assertIn("`M4` —", rendered)
+        self.assertNotIn("Development pause", rendered)
+        resumed["milestones"][5]["status"] = "in_progress"
+        self.assertTrue(roadmap_check.milestone_execution_errors(resumed))
 
     def test_subsystem_matrix_and_evidence_are_valid(self):
         text = (ROOT / "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md").read_text(

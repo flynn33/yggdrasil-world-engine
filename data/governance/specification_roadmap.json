@@ -10,7 +10,7 @@
     "verified_on": "2026-09-20",
     "tag_policy": "Existing v2.0.x Git tags, including historical annotations that use release wording, identify repository baselines; they are not published releases."
   },
-  "current_milestone": "M3",
+  "current_milestone": "M4",
   "status_vocabulary": [
     "complete",
     "in_progress",
@@ -130,7 +130,7 @@
       "required_markers": [
         "| Agnostic specification release readiness | Not ready |",
         "| Published releases | None; no GitHub Release objects or agnostic specification releases have been published |",
-        "| Current roadmap milestone | M3 - Complete core deterministic semantics and the reference oracle (complete; paused before M4 pending owner go-ahead) |",
+        "| Current roadmap milestone | M4 - Complete state persistence branching and multiplayer (in progress) |",
         "| M2 schema-quality debt | Empty; M2 foundation acceptance recorded |",
         "| M2 acceptance evidence | Complete; immutable evidence in `data/governance/m2_acceptance_evidence.json` and `docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md` |",
         "| Platform product work | Deferred through M10 |",
@@ -583,7 +583,7 @@
     {
       "id": "M4",
       "title": "Complete state persistence branching and multiplayer",
-      "status": "planned",
+      "status": "in_progress",
       "dependencies": [
         "M3"
       ],
@@ -844,11 +844,5 @@
       "id": "RM-11",
       "target": "Normative Core contains no platform product dependency"
     }
-  ],
-  "execution_pause": {
-    "status": "awaiting_owner_go_ahead",
-    "after_milestone": "M3",
-    "before_milestone": "M4",
-    "reason": "The owner requested a pause after complete M3 acceptance and GitHub publication, with explicit go-ahead required before any M4 development."
-  }
+  ]
 }

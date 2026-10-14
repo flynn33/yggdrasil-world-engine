@@ -21,7 +21,7 @@ schema, conformance, or release completion.
 | Published releases | None; no GitHub Release objects or agnostic specification releases have been published |
 | M0 truthful baseline | Complete; evidence recorded in `data/governance/m0_acceptance_evidence.json` and `docs/project/M0_TRUTHFUL_BASELINE_ACCEPTANCE.md` |
 | M1 canon terminology and governance | Complete; evidence recorded in `data/governance/m1_acceptance_evidence.json` and `docs/project/M1_CANON_TERMINOLOGY_GOVERNANCE_ACCEPTANCE.md` |
-| Current roadmap milestone | M3 - Complete core deterministic semantics and the reference oracle (complete; paused before M4 pending owner go-ahead) |
+| Current roadmap milestone | M4 - Complete state persistence branching and multiplayer (in progress) |
 | M3 acceptance evidence | Complete; immutable evidence in `data/governance/m3_acceptance_evidence.json` and `docs/project/M3_CORE_CONTRACTS_ACCEPTANCE.md` |
 | M2 schema-quality debt | Empty; M2 foundation acceptance recorded |
 | M2 acceptance evidence | Complete; immutable evidence in `data/governance/m2_acceptance_evidence.json` and `docs/project/M2_CONTRACT_SCHEMA_FOUNDATION_ACCEPTANCE.md` |

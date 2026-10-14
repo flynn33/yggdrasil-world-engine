@@ -1,3 +1,63 @@
+# YWE Session Handoff — M4 Resumed
+
+**Date:** October 14, 2026
+**Record:** Project Record planning-50, section 20.
+**Owner instruction:** “I'm unpausing it. You may proceed now.”
+**Current step:** M4 contract and integration inventory; all M4 exits remain open.
+**Completed:** M0–M3 acceptance and owner publication, baseline `ce294ec`.
+**Next action:** Complete the state/persistence/synchronization contract inventory,
+then adopt missing protocols and implement their reference conformance paths.
+**Needed from owner:** Nothing now. Existing owner publication authority remains.
+**Saved at:** This record and the Project Record on `m4/state-protocols`;
+actual verification and publication are not predeclared.
+
+The canonical checkout's uncommitted planning drafts remain untouched. Work is
+isolated at the managed `m4-state-protocols` worktree.
+Raven Forge v0.7.0 / `87409bc36fb9d4782eab02189adb184f2b3962a7` remains pinned.
+
+---
+
+## Historical M3 pause checkpoint — superseded by explicit owner resumption
+
+# YWE Session Handoff — M3 Accepted, M4 Paused
+
+**Date:** October 12, 2026
+**Handoff checkpoint:** m3-accepted-01
+**Authoritative Project Record:** [Project Record](../Project_Record.md), YWE-RECOVERY-20260918, planning-49, section 19.1; continuation boundary section 16.5.
+**Direction:** M3 is complete, verified and owner-published; the goal pauses until explicit owner go-ahead before any M4 work.
+**Inspected project snapshot:** `main` at `ce294ece693996fadf4173a3164ffe199e67c70d`; local `D:\GitHub\YWE` clean and at the same revision as `origin/main`; GitHub API ref matches.
+**Method:** Raven Forge Development v0.7.0 at `87409bc36fb9d4782eab02189adb184f2b3962a7`.
+
+This is the current continuation. The earlier `autonomous-m3-11` handoff below
+remains superseded history with its original scope and evidence preserved.
+
+## Current state
+
+- M0–M3 accepted; M4 planned and paused; platform work deferred through M10.
+- M3 acceptance is recorded at tested implementation `504e297737fa0a79ab19d6edd63f9fcbc5c139e7`: the actual unfiltered clean offline repository run passed 37 checks with zero blocking failures and zero advisories, and ordinary unittest discovery executed 1,393 cases with 0 failures, 0 errors, 0 skips. The acceptance report judges CONFORMANT: 28 invariants, five conformance categories, nine module obligations, seven deliverables and all five exit criteria pass.
+- The immutable evidence pair `data/governance/m3_acceptance_evidence.json` plus `data/governance/evidence/m3/` and `docs/project/M3_CORE_CONTRACTS_ACCEPTANCE.md` are published on `main`; the roadmap reports M3 `complete`.
+- The N3 reference lifecycle (section 16) and the strict module and capture implementation (section 18) remain verified published evidence with their original scope; physical crash/power-loss and platform product qualification remain unverified.
+- Wiki `f31ef00` is published and remotely verified for exact source `9c19c6b`; all 47 pages match reviewed bytes.
+
+## Current checkpoint
+
+**Current step:** M3 accepted, verified, published and reconciled; the goal
+pauses before M4 per the owner's explicit boundary in section 16.5.
+
+**Next action:** Wait for the owner's explicit M4 go-ahead. No M4
+implementation, adoption or activation is started by this record, elapsed
+time, a completed prerequisite, or an automatic goal continuation.
+
+**Needed from owner:** Explicit go-ahead to start M4 when desired. Nothing else.
+
+**Saved at:** This handoff and Project Record planning-49; the containing commit
+and subsequent readback establish the save receipt. Its own verification
+results are not predeclared.
+
+---
+
+## Superseded history — handoff autonomous-m3-11, retained unchanged
+
 # YWE Session Handoff — Verified N3 and Remaining M3
 
 **Date:** October 11, 2026

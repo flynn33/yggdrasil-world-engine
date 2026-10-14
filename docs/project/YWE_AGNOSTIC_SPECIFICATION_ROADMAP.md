@@ -49,7 +49,7 @@ Every subsystem is measured on five independent dimensions:
 | M1 | 🟢 | `complete` | M0 | Normalized canon, terminology, and governance |
 | M2 | 🟢 | `complete` | M1 | Executable contracts, schemas, and fixtures |
 | M3 | 🟢 | `complete` | M2 | Complete deterministic core semantics |
-| M4 | ⚪ | `planned` | M3 | Persistence, branching, and multiplayer protocols |
+| M4 | 🟡 | `in_progress` | M3 | Persistence, branching, and multiplayer protocols |
 | M5 | ⚪ | `planned` | M3, M4 | Complete content-generation engines |
 | M6 | ⚪ | `planned` | M4, M5 | Complete abilities, companions, rewards, and prior phases |
 | M7 | ⚪ | `planned` | M6 | Combat and encounter foundation |
@@ -59,10 +59,28 @@ Every subsystem is measured on five independent dimensions:
 
 Indicators: 🟢 complete, 🟡 in progress, ⚪ planned, 🔴 blocked, and ⏸️ deferred.
 
-### Current development checkpoint — October 12, 2026
+### M4 development checkpoint — 2026-10-14
 
-**M3 is complete. Development is paused before M4, awaiting the owner's explicit go-ahead.**
-M4 and all later milestones remain planned.
+**M4 is in progress.** The owner explicitly resumed development on October 14,
+2026: “I'm unpausing it. You may proceed now.” This supersedes the M3/M4 pause.
+M0–M3 remain accepted; M5–M10 remain planned and platform work remains deferred
+until M10 acceptance.
+
+The current work is to complete branch and player state contracts, persistence
+and migration, scoped truth synchronization, and deterministic multiplayer
+ordering and reconciliation. All five M4 deliverables and five exit criteria
+remain open. Initial work inventories the existing contracts and schemas before
+adopting the missing protocols; no M4 implementation or acceptance is claimed
+by this activation checkpoint.
+
+The accepted M3 source and execution archives remain immutable. M4 verification
+will cover save/load and migration truth preservation, event-log replay,
+duplicate consequence prevention, concurrent ordering, and perception isolation.
+
+### Historical M3 acceptance checkpoint — October 12, 2026
+
+**M3 is complete.** The owner resumed development on October 14; the M3 evidence
+and tested implementation described here remain accepted and unchanged.
 
 The [tested implementation](https://github.com/flynn33/yggdrasil-world-engine/commit/504e297737fa0a79ab19d6edd63f9fcbc5c139e7) passed all 37
 applicable repository checks through `bash scripts/run_checks.sh` in one clean,
@@ -153,7 +171,7 @@ Legend: `complete` · `partial` · `not_started` · `not_applicable` (N/A) · `n
 
 | Area | Current maturity | Remaining work |
 |---|---|---|
-| Repository truth | M3 accepted | Preserve M0–M3 evidence and the owner pause before M4 |
+| Repository truth | M3 accepted | Preserve M0–M3 evidence while completing M4 state and synchronization contracts |
 | Schema system | M2 foundation accepted | Preserve exact classified-fixture bindings, offline resolution, governed migration proofs, intended rejection approvals and durable acceptance; add schemas and executable semantic evidence as later milestone contracts are completed |
 | ASH reference oracle | M3 accepted | Preserve accepted classification, diagnostics, recovery, topology, axiom and emitter conformance as later milestones add their own contracts |
 | Core engine semantics | M3 accepted; later state work planned | Preserve deterministic policies and module interfaces; persistence and whole-system conformance retain M4–M10 gates |
@@ -287,8 +305,8 @@ Current acceptance: all M3 obligations pass at tested implementation `504e297737
 The immutable evidence pair is `data/governance/m3_acceptance_evidence.json` and
 `docs/project/M3_CORE_CONTRACTS_ACCEPTANCE.md`; the four archived execution files
 under `data/governance/evidence/m3/` preserve the actual 37-check and 1393-case
-clean offline run. Development is paused after M3 acceptance and publication;
-M4 remains planned until the owner explicitly authorizes continuation.
+clean offline run. The owner pause after M3 publication was lifted by explicit
+go-ahead on October 14, 2026; M4 is now in progress.
 
 <details>
 <summary>Historical M3 slice and publication observations</summary>
@@ -423,7 +441,7 @@ Exit criteria:
 
 ## M4 — Complete state persistence branching and multiplayer
 
-Status: `planned`
+Status: `in_progress`
 Dependencies: M3
 Indicative effort: 4–6 weeks
 Owner role: State and synchronization maintainers
