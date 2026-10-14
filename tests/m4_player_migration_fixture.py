@@ -65,8 +65,13 @@ def inputs(adapter_id="closed_reference_v1", continuing=False):
         context = {key: copy.deepcopy(value) for key, value in source.items() if key in CONTEXT_FIELDS}
         context["phase_confidence"] = {"coefficient": "875", "exponent": -3} if continuing else {"coefficient": "1", "exponent": 0}
         context["wolf_interpretation"] = source["wolf_resonance"]["interpretation"]
+        context["active_realm_form_ref"] = "realm:physical:one"
         spine["runtime_context"] = context
-        records.append(reference("physical", "active_realm_form", "leaf_branch_state", BRANCH))
+        form_source = {"fixture_realm_definition": "physical", "plane_id": "P1_Physical",
+                       "truth_scope": "shared_worldstate", "subject_id": WORLD}
+        records.append(record("realm:physical:one", "realm_form", {
+            "form_name": "physical", "plane_id": "P1_Physical", "truth_scope": "shared_worldstate",
+            "subject_id": WORLD, "source_sha256": hashlib.sha256(encode(form_source)).hexdigest()}))
         records.append(reference(source["perception_state_ref"], "perception_state_ref", "player_perception"))
         for field in ("branch_generation_context_refs", "narrative_memory_refs", "active_quest_refs",
                       "unresolved_tension_refs", "generation_context_refs"):

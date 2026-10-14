@@ -3319,6 +3319,50 @@
         "m4_player_migration",
         "reference_contract"
       ]
+    },
+    {
+      "path": "core/player_state.py",
+      "primary_partition": "wrw_reference_profile",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_player_aggregate_contract.md",
+      "rationale": "This player compatibility realization binds the existing WRW identity, named resonance channels and legacy player records; those profile semantics do not become universal YWE Core truth.",
+      "secondary_tags": [
+        "m4_player_compatibility",
+        "reference_profile"
+      ]
+    },
+    {
+      "path": "core/player_state_rules.py",
+      "primary_partition": "wrw_reference_profile",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_player_aggregate_contract.md",
+      "rationale": "This player compatibility realization binds the existing WRW identity, named resonance channels and legacy player records; those profile semantics do not become universal YWE Core truth.",
+      "secondary_tags": [
+        "m4_player_compatibility",
+        "reference_profile"
+      ]
+    },
+    {
+      "path": "core/player_state_migration.py",
+      "primary_partition": "wrw_reference_profile",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/m4_player_migration_contract.md",
+      "rationale": "This player compatibility realization binds the existing WRW identity, named resonance channels and legacy player records; those profile semantics do not become universal YWE Core truth.",
+      "secondary_tags": [
+        "m4_player_compatibility",
+        "reference_profile"
+      ]
+    },
+    {
+      "path": "docs/architecture/m4_player_migration_contract.md",
+      "primary_partition": "wrw_reference_profile",
+      "owner_role": "State and synchronization maintainers",
+      "governing_source": "docs/architecture/ywe_core_wrw_scope_contract.md",
+      "rationale": "This player compatibility realization binds the existing WRW identity, named resonance channels and legacy player records; those profile semantics do not become universal YWE Core truth.",
+      "secondary_tags": [
+        "m4_player_compatibility",
+        "reference_profile"
+      ]
     }
   ],
   "coverage": {
@@ -3327,8 +3371,8 @@
       "governance_validation": 655,
       "historical_evidence": 28,
       "later_release_work": 45,
-      "wrw_reference_profile": 321,
-      "ywe_core": 256,
+      "wrw_reference_profile": 325,
+      "ywe_core": 252,
       "ywe_extension_profile": 124
     }
   }

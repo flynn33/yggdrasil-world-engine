@@ -176,6 +176,54 @@ class PlayerMigrationTests(unittest.TestCase):
         values[3]["realm_name_map"]["mappings"].pop("physical")
         self.reject(values, code="INVALID_QUALIFICATION")
 
+    def test_realm_label_retains_separate_qualified_binding_and_portable_shared_definition(self):
+        values = inputs("historical_record_v1")
+        binding = next(row for row in values[3]["records"] if row["ref"] == "realm:physical:one")
+        binding["branch_ref"] = "branch:definition:provenance"
+        _, result = self.migration(values)
+        context = result["baseline"]["spine"]["runtime_context"]
+        self.assertEqual("physical", context["active_realm_form"])
+        self.assertEqual("realm:physical:one", context["active_realm_form_ref"])
+        self.assertEqual(binding["document"], result["baseline"]["records"]["realm:physical:one"]["document"])
+        self.assertNotIn("/active_realm_form_ref", result["source_presence_map"])
+
+    def test_realm_binding_requires_exact_name_plane_scope_and_complete_pair(self):
+        mutations = [lambda r: r["document"].update(form_name="mental"),
+            lambda r: r["document"].update(plane_id="P4_Mental"),
+            lambda r: r["document"].update(truth_scope="player_perception", subject_id="player:one"),
+            lambda r: r["document"].update(subject_id="world:other"),
+            lambda r: r["document"].update(source_sha256="bad"),
+            lambda r: r["document"].update(extra=True),
+            lambda r: r["document"].update(truth_scope="leaf_branch_state", subject_id="branch:other")]
+        for mutate in mutations:
+            values = inputs("historical_record_v1")
+            binding = next(row for row in values[3]["records"] if row["ref"] == "realm:physical:one")
+            mutate(binding)
+            self.reject(values)
+        values = inputs("historical_record_v1")
+        values[3]["spine"]["runtime_context"].pop("active_realm_form_ref")
+        self.reject(values)
+        values = inputs("historical_record_v1")
+        values[3]["records"] = [row for row in values[3]["records"] if row["ref"] != "realm:physical:one"]
+        self.reject(values, code="UNRESOLVED_REFERENCE")
+
+    def test_leaf_realm_binding_is_qualified_to_current_branch(self):
+        values = inputs("historical_record_v1")
+        binding = next(row for row in values[3]["records"] if row["ref"] == "realm:physical:one")
+        binding["document"].update(truth_scope="leaf_branch_state", subject_id=BRANCH)
+        self.migration(values)
+        binding["branch_ref"] = "branch:other"
+        self.reject(values, code="INVALID_QUALIFICATION")
+
+    def test_sparse_resonance_cannot_hide_nonexistent_plane_in_active_realm_binding(self):
+        values = inputs("historical_record_v1", True)
+        source = json.loads(values[0])
+        source["realm_attunement"].pop("physical")
+        values[3]["realm_name_map"]["mappings"]["physical"] = "P999_Nonexistent"
+        binding = next(row for row in values[3]["records"] if row["ref"] == "realm:physical:one")
+        binding["document"]["plane_id"] = "P999_Nonexistent"
+        self.reject(values, encode(source), "INVALID_QUALIFICATION")
+
     def test_unknown_historical_fields_and_nested_extensions_do_not_become_archival_success(self):
         mutations = [lambda source: source.update(active_skill_refs=[]), lambda source: source.update(wolf_interpretation="new"),
             lambda source: source["wolf_resonance"].update(moral_score=0),

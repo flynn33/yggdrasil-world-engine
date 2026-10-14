@@ -496,8 +496,59 @@
               "$ref": "#/$defs/sha256"
             }
           }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "document",
+            "sha256"
+          ],
+          "properties": {
+            "kind": {
+              "const": "realm_form"
+            },
+            "document": {
+              "$ref": "#/$defs/realm_form"
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
         }
       ]
+    },
+    "realm_form": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "form_name",
+        "plane_id",
+        "truth_scope",
+        "subject_id",
+        "source_sha256"
+      ],
+      "properties": {
+        "form_name": {
+          "$ref": "#/$defs/identifier"
+        },
+        "plane_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "truth_scope": {
+          "enum": [
+            "shared_worldstate",
+            "leaf_branch_state"
+          ]
+        },
+        "subject_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
     },
     "reference": {
       "type": "object",
@@ -884,6 +935,30 @@
             },
             "value": {
               "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/active_realm_form"
+            },
+            "phase": {
+              "$ref": "#/$defs/identifier"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "previous_value",
+            "value",
+            "phase"
+          ],
+          "properties": {
+            "field": {
+              "const": "active_realm_form_ref"
+            },
+            "previous_value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/active_realm_form_ref"
+            },
+            "value": {
+              "$ref": "https://ywe.local/schemas/m4_player_runtime_state_v3_schema.json#/$defs/runtime_context/properties/active_realm_form_ref"
             },
             "phase": {
               "$ref": "#/$defs/identifier"

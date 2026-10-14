@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_NAMES = (
     "m4_player_runtime_state_v3", "m4_player_snapshot_v2", "m4_player_update_v3",
     "m4_player_migration_result", "m4_origin_imported_state", "m4_origin_baseline",
-    "m4_player_runtime_state", "m4_player_snapshot", "m4_origin_state",
+    "m4_player_runtime_state", "m4_player_snapshot", "m4_player_update", "m4_origin_state",
     "celestial_identity_state", "player_agent_state", "player_branch_history",
     "m4_plane_attunement_state", "m4_bloodline_resonance_state", "m4_wolf_resonance_summary",
     "raven_companion_state", "m4_ability_state", "wolf_manifestation_event",
@@ -59,6 +59,7 @@ class PlayerMigrationWireSchemaTests(unittest.TestCase):
             "phase_confidence": {"coefficient": "-12345678901234567891", "exponent": -19},
             "identity_reveal_policy": "reveal_through_play", "origin": "mortal",
             "celestial_memory": "veiled", "active_realm_form": "physical",
+            "active_realm_form_ref": "realm:physical:one",
             "wolf_interpretation": "symbiotic_attractors_not_morality_meter",
             **{name: ["context:" + name] for name in COLLECTIONS},
             "perception_state_ref": "perception:one", "last_player_action_trace_ref": None,
@@ -79,6 +80,10 @@ class PlayerMigrationWireSchemaTests(unittest.TestCase):
         spine.update(schema_id="ywe.player_runtime_state.v3", schema_version="3.0.0")
         spine["update_control"]["allowed_update_packet_schema"] = "ywe.player_state_update_packet.v3"
         spine["runtime_context"] = self.context()
+        snapshot["records"]["realm:physical:one"] = {"kind": "realm_form", "sha256": "0" * 64,
+            "document": {"form_name": "physical", "plane_id": "P1_Physical",
+                         "truth_scope": "shared_worldstate", "subject_id": snapshot["world_id"],
+                         "source_sha256": "a" * 64}}
         snapshot["import_baseline"] = {"source_sha256": "a" * 64, "import_anchor": "b" * 64,
             "consumed_update_refs": ["update:historical"], "consumed_request_refs": ["request:historical"],
             "consumed_effects": [{"update_ref": "update:historical", "consequence_ref": "consequence:historical",
@@ -176,6 +181,56 @@ class PlayerMigrationWireSchemaTests(unittest.TestCase):
             mutate(value["runtime_context"])
             self.reject("m4_player_runtime_state_v3", value)
 
+    def test_realm_form_name_and_binding_are_present_or_absent_together(self):
+        spine = self.wire_result()["baseline"]["spine"]
+        for context in ({}, {"active_realm_form": "physical", "active_realm_form_ref": "realm:physical:one"}):
+            self.validators["m4_player_runtime_state_v3"].validate({**spine, "runtime_context": context})
+        for context in ({"active_realm_form": "physical"}, {"active_realm_form_ref": "realm:physical:one"},
+                        {"active_realm_form": "physical", "active_realm_form_ref": None},
+                        {"active_realm_form": "physical", "active_realm_form_ref": ""},
+                        {"active_realm_form": "physical", "active_realm_form_ref": "realm:physical:one\n"}):
+            self.reject("m4_player_runtime_state_v3", {**spine, "runtime_context": context})
+
+    def test_realm_form_records_are_closed_and_only_allow_objective_scopes(self):
+        baseline = self.wire_result()["baseline"]
+        for scope, subject in (("shared_worldstate", baseline["world_id"]), ("leaf_branch_state", "branch:one")):
+            value = copy.deepcopy(baseline)
+            value["records"]["realm:physical:one"]["document"].update(truth_scope=scope, subject_id=subject)
+            self.validators["m4_player_snapshot_v2"].validate(value)
+        for field, bad in (("form_name", ""), ("plane_id", False), ("subject_id", None),
+                           ("source_sha256", "a" * 63), ("source_sha256", "A" * 64),
+                           ("source_sha256", "a" * 64 + "\n"), ("truth_scope", "player_state"),
+                           ("truth_scope", "player_perception"), ("truth_scope", "realm_local"),
+                           ("accepted", True)):
+            value = copy.deepcopy(baseline)
+            value["records"]["realm:physical:one"]["document"][field] = bad
+            self.reject("m4_player_snapshot_v2", value)
+        for field in ("form_name", "plane_id", "truth_scope", "subject_id", "source_sha256"):
+            value = copy.deepcopy(baseline)
+            value["records"]["realm:physical:one"]["document"].pop(field)
+            self.reject("m4_player_snapshot_v2", value)
+        for kind in ("reference", "realm_shift_proposal"):
+            value = copy.deepcopy(baseline)
+            value["records"]["realm:physical:one"]["kind"] = kind
+            self.reject("m4_player_snapshot_v2", value)
+        old = PlayerStateStore(*configuration()).state()
+        old["records"]["realm:physical:one"] = baseline["records"]["realm:physical:one"]
+        self.reject("m4_player_snapshot", old)
+
+    def test_imported_branch_operation_accepts_only_typed_optional_realm_binding(self):
+        update = configuration()[6][0]
+        origin = update["operations"][0]
+        branch = {"kind": "branch", "previous_branch_ref": "branch:one", "next_branch_ref": "branch:two",
+                  "next_location_ref": "location:two", "agent_ref": "agent:two", "history_ref": "history:two",
+                  "event_ref": "event:two"}
+        for operation in (branch, {**branch, "next_realm_form_ref": "realm:physical:two"}):
+            self.validators["m4_player_update_v3"].validate({**update, "operations": [origin, operation]})
+        bound = {**branch, "next_realm_form_ref": "realm:physical:two"}
+        self.reject("m4_player_update", {**update, "operations": [origin, bound]})
+        for bad in (None, "", [], {"accepted": True}, "realm:physical:two\n"):
+            self.reject("m4_player_update_v3", {**update, "operations": [origin, {**branch, "next_realm_form_ref": bad}]})
+        self.reject("m4_player_update_v3", {**update, "operations": [origin, {**bound, "next_realm_form": "physical"}]})
+
     def test_confidence_requires_canonical_finite_coefficient_and_bounded_exponent(self):
         base = self.wire_result()["baseline"]["spine"]
         values = [{"coefficient": c, "exponent": 0} for c in ("-0", "00", "+1", "10", "1.5", "NaN", "1\n", "9" * 129)]
@@ -198,7 +253,8 @@ class PlayerMigrationWireSchemaTests(unittest.TestCase):
     def test_context_record_values_are_typed_by_explicit_mutable_field(self):
         base = self.wire_result()["baseline"]
         values = {name: value for name, value in self.context().items()
-                  if name in COLLECTIONS + ("phase_confidence", "celestial_memory", "active_realm_form", "perception_state_ref")}
+                  if name in COLLECTIONS + ("phase_confidence", "celestial_memory", "active_realm_form",
+                                            "active_realm_form_ref", "perception_state_ref")}
         for field, value in values.items():
             document = {"field": field, "previous_value": value, "value": value, "phase": "first_stirrings"}
             snapshot = copy.deepcopy(base)

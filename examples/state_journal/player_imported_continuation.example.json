@@ -34,7 +34,7 @@
     "consumed_update_refs": [
       "update:first"
     ],
-    "import_anchor": "a07ff7989cab2bf62445b961ed49359115cdfcbeb0e62e51339ad51611669c64",
+    "import_anchor": "bfc1d688993025e23c60f7cbe6e386fca5ee1a91597b83a4909089e6d7fa0db9",
     "provenance": {
       "cosmic_pattern_snapshot_ref": "snapshot:player",
       "diagnostic_ref": "diagnostic:player",
@@ -486,7 +486,7 @@
             "origin:first:action:0",
             "origin:first:action:1"
           ],
-          "import_anchor": "a07ff7989cab2bf62445b961ed49359115cdfcbeb0e62e51339ad51611669c64",
+          "import_anchor": "bfc1d688993025e23c60f7cbe6e386fca5ee1a91597b83a4909089e6d7fa0db9",
           "provenance": {
             "cosmic_pattern_snapshot_ref": "snapshot:player",
             "diagnostic_ref": "diagnostic:player",
@@ -540,7 +540,7 @@
         "world_id": "world:one"
       },
       "kind": "origin",
-      "sha256": "cb05a8f7e92007f515772bdb5373256615451298d66b30b14de7f103633d92c3"
+      "sha256": "01213d12aef2fed4125faedd3a244665c4d643045cb56f3455fbfe5870fc5bf7"
     },
     "origin:resolve:action:0": {
       "document": {
@@ -600,16 +600,6 @@
       },
       "kind": "reference",
       "sha256": "dd4f46bf9561011587e7c361e986ee211e87b7560e9573185ea76f14b52bfa30"
-    },
-    "physical": {
-      "document": {
-        "category": "active_realm_form",
-        "source_sha256": "4f89525e3b45875e51ad9369c508a3fadafdf334bc802f6a832e7c0ebc484c3b",
-        "subject_id": "branch:one",
-        "truth_scope": "leaf_branch_state"
-      },
-      "kind": "reference",
-      "sha256": "6c831f0ccca16ad0097584224ddcd9b6cad4365767936d93bf779cb7e4c0d086"
     },
     "plane:stirring": {
       "document": {
@@ -741,6 +731,17 @@
       },
       "kind": "raven",
       "sha256": "6404c554a36d0d13d702344aa160865c6c7d97cf59e1e7563cda8c171e424a2e"
+    },
+    "realm:physical:one": {
+      "document": {
+        "form_name": "physical",
+        "plane_id": "P1_Physical",
+        "source_sha256": "89f039ded12c101e0fac0ac2bc3374f584f4c665ee8449d42ad471cc663b70f7",
+        "subject_id": "world:one",
+        "truth_scope": "shared_worldstate"
+      },
+      "kind": "realm_form",
+      "sha256": "6b3f9008a34265ac704577e871408d817baaab409161b39dd968a1097cee150f"
     },
     "tension:first": {
       "document": {
@@ -876,6 +877,7 @@
         "quest:first"
       ],
       "active_realm_form": "physical",
+      "active_realm_form_ref": "realm:physical:one",
       "ash_provenance": {
         "axiom_diagnostic_refs": [
           "axiom_diagnostic.initial"

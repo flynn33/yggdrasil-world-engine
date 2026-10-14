@@ -635,6 +635,14 @@
       "type": "object",
       "additionalProperties": false,
       "required": [],
+      "dependentRequired": {
+        "active_realm_form": [
+          "active_realm_form_ref"
+        ],
+        "active_realm_form_ref": [
+          "active_realm_form"
+        ]
+      },
       "properties": {
         "state_id": {
           "$ref": "#/$defs/identifier"
@@ -665,6 +673,9 @@
           ]
         },
         "active_realm_form": {
+          "$ref": "#/$defs/identifier"
+        },
+        "active_realm_form_ref": {
           "$ref": "#/$defs/identifier"
         },
         "wolf_interpretation": {

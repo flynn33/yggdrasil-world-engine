@@ -15,6 +15,9 @@ an arbitrary inline object or a serialized accepted flag grants no authority.
 WRW-specific seed records, identity/ability edges and companion identifiers are
 explicit profile/configuration inputs. Core does not derive them from a class,
 morality score, source name, or presentation adapter.
+The concrete player aggregate and domain-rule modules are classified as WRW
+reference-profile realizations because they consume these fixed legacy field
+families. Their compatibility semantics are not universal YWE Core ontology.
 
 `PlayerStateStore(world_id, player_id, profile, initial_spine, grants, records,
 updates, schemas, origin_policy)` is a trusted composition boundary. It owns one

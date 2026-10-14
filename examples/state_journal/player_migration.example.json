@@ -23,7 +23,7 @@
       "consumed_update_refs": [
         "update:first"
       ],
-      "import_anchor": "a07ff7989cab2bf62445b961ed49359115cdfcbeb0e62e51339ad51611669c64",
+      "import_anchor": "bfc1d688993025e23c60f7cbe6e386fca5ee1a91597b83a4909089e6d7fa0db9",
       "provenance": {
         "cosmic_pattern_snapshot_ref": "snapshot:player",
         "diagnostic_ref": "diagnostic:player",
@@ -404,7 +404,7 @@
               "origin:first:action:0",
               "origin:first:action:1"
             ],
-            "import_anchor": "a07ff7989cab2bf62445b961ed49359115cdfcbeb0e62e51339ad51611669c64",
+            "import_anchor": "bfc1d688993025e23c60f7cbe6e386fca5ee1a91597b83a4909089e6d7fa0db9",
             "provenance": {
               "cosmic_pattern_snapshot_ref": "snapshot:player",
               "diagnostic_ref": "diagnostic:player",
@@ -446,7 +446,7 @@
           "world_id": "world:one"
         },
         "kind": "origin",
-        "sha256": "c70decf159deeb3812cea34b90b6fc43ad1044307807e377637bfc8ad21903e0"
+        "sha256": "fa5ce130c00f0772b2abd34ab3458ea64f2ddd81abc1e23ef7f538a890178ab8"
       },
       "pattern_vector.player.initial": {
         "document": {
@@ -467,16 +467,6 @@
         },
         "kind": "reference",
         "sha256": "dd4f46bf9561011587e7c361e986ee211e87b7560e9573185ea76f14b52bfa30"
-      },
-      "physical": {
-        "document": {
-          "category": "active_realm_form",
-          "source_sha256": "4f89525e3b45875e51ad9369c508a3fadafdf334bc802f6a832e7c0ebc484c3b",
-          "subject_id": "branch:one",
-          "truth_scope": "leaf_branch_state"
-        },
-        "kind": "reference",
-        "sha256": "6c831f0ccca16ad0097584224ddcd9b6cad4365767936d93bf779cb7e4c0d086"
       },
       "plane:stirring": {
         "document": {
@@ -608,6 +598,17 @@
         },
         "kind": "raven",
         "sha256": "6404c554a36d0d13d702344aa160865c6c7d97cf59e1e7563cda8c171e424a2e"
+      },
+      "realm:physical:one": {
+        "document": {
+          "form_name": "physical",
+          "plane_id": "P1_Physical",
+          "source_sha256": "89f039ded12c101e0fac0ac2bc3374f584f4c665ee8449d42ad471cc663b70f7",
+          "subject_id": "world:one",
+          "truth_scope": "shared_worldstate"
+        },
+        "kind": "realm_form",
+        "sha256": "6b3f9008a34265ac704577e871408d817baaab409161b39dd968a1097cee150f"
       },
       "tension:first": {
         "document": {
@@ -742,6 +743,7 @@
           "quest:first"
         ],
         "active_realm_form": "physical",
+        "active_realm_form_ref": "realm:physical:one",
         "ash_provenance": {
           "axiom_diagnostic_refs": [
             "axiom_diagnostic.initial"
@@ -1184,7 +1186,7 @@
     }
   ],
   "format": "ywe.player_state_migration.v1",
-  "import_anchor": "a07ff7989cab2bf62445b961ed49359115cdfcbeb0e62e51339ad51611669c64",
+  "import_anchor": "bfc1d688993025e23c60f7cbe6e386fca5ee1a91597b83a4909089e6d7fa0db9",
   "migration_id": "player.historical_record_v1.v1",
   "origin_baseline": {
     "actions": [
@@ -1227,7 +1229,7 @@
     ],
     "current_phase": "first_stirrings",
     "format": "ywe.origin_baseline.v1",
-    "import_anchor": "a07ff7989cab2bf62445b961ed49359115cdfcbeb0e62e51339ad51611669c64",
+    "import_anchor": "bfc1d688993025e23c60f7cbe6e386fca5ee1a91597b83a4909089e6d7fa0db9",
     "memories": [
       {
         "branch_ref": "branch:one",
@@ -1268,7 +1270,7 @@
     "world_id": "world:one"
   },
   "player_id": "player:one",
-  "qualification_sha256": "031dc67f5014fab80fb469c703f981d5c81d79d4511ab22e67cdc5b4cce137de",
+  "qualification_sha256": "63833c899fb9b6e9a040bec93cf684d948dc35836ff8854dda97602d0f9416fd",
   "selected_record_sha256": {
     "ASH_Cosmological_Model": "501a4d998f49798147d8e97f7be8f03d69214d6a51471b89e77586c765dd4a9e",
     "ability:latent": "a4c0529cc47dd6a2e694f50aee687e0d650fe7d6d6c6070c06403372cc13111b",
@@ -1295,11 +1297,11 @@
     "origin:first:memory:1": "1de05718c6cd8f3240fe9035fedc356038529f245525d2ac3f9c46f90c9e815d",
     "pattern_vector.player.initial": "4c7d4c2a506b05c14d0b4d4190dfb675300674aa3a409666e27fe6a8c2c86732",
     "perception_state.current": "e2858ceb923c0ade9686fad3780d4549fc9f398829ddd943dcb7dc407932ccc5",
-    "physical": "210ce0aaf37a25fbbe7b767a15444c3e5b1aaef1ba7e6e571fb692ad60a17198",
     "plane:stirring": "593ec4d5f7deeb8e585d5c88747e359c5507ac65ad6a7ee5679437a2bcb1d6ba",
     "quest:first": "f3b1237501ebbc3d0a307ef29edab9fc90f1bda9db2b4b7d2bb5ab7f03788cce",
     "quest:second": "6fa8f1723717541d903e0c2a0d56e79dc009ede343ce02d4e4b6a31e2e2013ca",
     "raven:initial": "76e2de50cd2361143fab2e4184802949ff264e8575902a3ac90c210b3fa4f490",
+    "realm:physical:one": "68454e6817b318c0e2570c4128dcba24a58204b8e77de0aff7586ef2c5d4c9e5",
     "tension:first": "4c081ba63a6e6d847c96db75a70f031298b0091c8feef95f9aa417321fb0efaf",
     "tension:second": "76b2f95a49d203629f220bf1af91f9ba814fe901bf28eed56b186ad2935334a2",
     "wolf:initial": "5887c8e5cd01f8bf9bd814c0b83c2707b06448a85e4ea8af4c8680c08d197681"
@@ -1378,10 +1380,10 @@
     "origin": "c72336958731cc83198df689e4272b3eb8c4f18f3e636d9a311c649027164340",
     "plane": "607124e21609db3935f7be81fa1560dba8568df5eb0815ac7e2e9706c7478eaa",
     "raven": "0e89ec046f57661dde0b3f12b1bd0e7a58412a1e89a8580f61796a12d287ce41",
-    "snapshot": "035ee2e0caddf622debf3edcd0f2b3368a8a6d94958934c6196964020f0e3231",
-    "spine": "9d9c1cc9d82d549b8c1cfa09d15b85ca450640f5b118864c0c9ed68939c21131",
+    "snapshot": "6e1688a660aaafbf99a720838a165524b6684fe3fd32b0182fa77ea92906bb13",
+    "spine": "132511d6aaffa3bc11812125dd259f25486464af87cdc08e777cf6b0d780495e",
     "wolf": "5acbcfef7e8b4ddbb3a9afdb4722707011f54f6bac3aba48efaf2a04b915bca9"
   },
-  "target_sha256": "8686c8c9eaba252dc42c615d717ff15ddc6e261685cae2fbdbfeb736df58c2e5",
+  "target_sha256": "a1398f1f635cad3cf1d6f352ca66b660158435b8c88e55e38a965b54010ca164",
   "world_id": "world:one"
 }

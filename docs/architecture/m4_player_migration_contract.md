@@ -5,6 +5,9 @@ the player aggregate with explicit imports of the two existing player formats.
 It does not replace the legacy schemas, initial v2 constructor, or existing
 origin/player archive identities. Source interpretation follows the player
 runtime, memory/action, branch integration and exact resonance contracts.
+The concrete legacy adapters and player domain realization belong to the WRW
+reference profile. Their named identity and resonance fields do not establish
+universal YWE Core ontology; the neutral journal remains a separate mechanism.
 
 ## Source boundaries and target versions
 
@@ -174,8 +177,26 @@ perception state, and the reference collections listed above. Nonempty condition
 refs must be qualified current update evidence. An update may write each field
 once. Initial admission and subsequent changes resolve each historical reference
 under its exact field category. An awakening reference's source digest binds the
-corresponding current celestial fragment. Active realm form resolves a qualified
-same-branch shared/leaf reference of category `active_realm_form`. The authority,
+corresponding current celestial fragment. The preserved `active_realm_form` name
+has a separate required `active_realm_form_ref`; either both fields are absent
+or both are present. The latter resolves a qualified `realm_form` record with
+exact fields `form_name`, `plane_id`, `truth_scope`, `subject_id` and
+`source_sha256`. Its name and explicit profile mapping must match the current
+name, and its plane must exist in the qualified complete attunement record even
+when the sparse source omitted that plane's score. Shared-world form definitions
+are portable within their exact world;
+leaf-branch forms require the current branch as both subject and wrapper branch.
+This mapping is an explicit adapter qualification, not an assertion that a realm
+name, plane identity and ASH realm identity are interchangeable. Realm ownership
+may change the binding alone during a same-name branch transfer; both final
+fields must agree before publication. The adapter retains the source name and
+requires the separate binding in the qualified target. A branch operation in
+the imported dialect may include `next_realm_form_ref` to select the destination
+binding without changing the preserved form name or mapped plane. That selection
+belongs to branch admission; semantic form changes still require Realm-owned
+context operations. The extra member is forbidden without an existing form.
+Omission retains the binding and succeeds only if it is valid at the destination.
+The authority,
 identity, source provenance and fixed policy declarations are not generic-editable.
 
 Removing active quest or unresolved tension references additionally requires a

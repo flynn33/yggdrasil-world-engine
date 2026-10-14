@@ -2615,3 +2615,38 @@ the verified checkpoint and matching README/wiki progress. Next implementation
 work is branch/world ownership and deterministic synchronization. All five M4
 deliverables and exits and the existing quality debt remain open. Needed from
 owner: none. Saved in this Project Record and the linked migration contract.
+
+### 26.2. Same-name realm continuation correction
+
+Final independent review reproduced a historical-import branch transfer refusal:
+`active_realm_form` served as both preserved name and immutable branch-bound
+catalog identity. The destination branch could not retain that name with a new
+qualified binding. Before correction, this contract now explicitly separates
+the name from `active_realm_form_ref` and defines a closed qualified `realm_form`
+record. Realm owns binding changes; shared definitions remain scoped to their
+world and branch definitions to their current branch. Final state validation
+must bind name, explicit profile mapping and scope together. This is within
+YWE-REQ-0057 / ADR-0049; no old schema or old archive changes. The current clean
+checks at `f2543d5a4b99598cf49f6f2b90cb4b4299a544f4` are still useful evidence
+for that revision, but the correction requires its own verification before
+publication. No result for that correction is claimed by this adoption.
+
+The correction passed four branch/form behavioral regressions and 14 independent
+adverse probes covering changed destination qualification, catalog extension,
+source authority, one-field semantic changes, shared portability and old-dialect
+refusal. A further reproduced sparse-source case allowed a configured nonexistent
+plane; both migration and continuation now require actual plane membership, with
+regressions. The affected player, migration and schema selection passed 106 tests
+in 90.182 seconds. Independent frozen-configuration verification reproduced ten
+old and ten imported archives, including exact retry receipts without reduction.
+
+Clean revision `f2543d5a4b99598cf49f6f2b90cb4b4299a544f4` passed all 265 focused
+tests in 81.787 seconds. Its 36 selected repository checks finished with 35 passes
+and one blocking M1 governance failure: the requirement allocator was stale, and
+three concrete player modules plus the migration contract lacked explicit WRW
+profile assignment. The allocator now points to YWE-REQ-0058. Those four concrete
+compatibility surfaces are classified as WRW reference-profile artifacts, using
+the existing scope contract, rather than making their legacy field semantics
+universal Core truth. No guardrail was weakened. Clean correction checks are
+next. The earlier full `59cdd` run remains pending; published M4 origin registration
+CI `38558767903` and both earlier pending M4 runs now report success.

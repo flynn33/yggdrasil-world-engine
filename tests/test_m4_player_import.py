@@ -1,4 +1,4 @@
-"""Imported player continuation, source ownership and published archive compatibility."""
+"""Imported player continuation, source ownership and pre-migration archive compatibility."""
 
 import copy
 import hashlib
@@ -55,6 +55,31 @@ def context_change(args, field, value, phase="first_stirrings", resolution=None)
         document["resolution"] = resolution
     args[5].append(record(ref, "context", document))
     return {"kind": "context", "context_ref": ref, "condition_refs": ["evidence:play"]}
+
+
+def imported_branch_transfer(shared=False):
+    raw, sources, targets, resolution, old = inputs("historical_record_v1", True)
+    ref = resolution["spine"]["runtime_context"]["active_realm_form_ref"]
+    form = next(row for row in resolution["records"] if row["ref"] == ref)
+    form["document"].update(truth_scope="shared_worldstate" if shared else "leaf_branch_state",
+                            subject_id=WORLD if shared else form["branch_ref"])
+    migration = PlayerStateMigration("historical_record_v1", sources, targets, resolution)
+    result = migration.migrate(raw)
+    args = list(configuration_for(result, resolution, targets, old))
+    add_branch_transfer(args)
+    bundle = args[8].evidence("origin:branch")
+    args[8] = OriginProgressionPolicy.from_baseline(result["origin_baseline"], WORLD, PLAYER,
+        resolution["origin_profile"], resolution["creation"], {PRINCIPAL: ["advance", "remember"]},
+        [args[8].evidence("origin:first"), args[8].evidence("origin:second"), bundle],
+        args[7]["action"], args[7]["memory"])
+    if not shared:
+        ref = resolution["spine"]["runtime_context"]["active_realm_form_ref"]
+        form = copy.deepcopy(next(row for row in args[5] if row["ref"] == ref))
+        form.update(ref="realm:physical:two", branch_ref="branch:two")
+        form["document"]["subject_id"] = "branch:two"
+        args[5].append(form)
+        args[6][-1]["operations"][1]["next_realm_form_ref"] = form["ref"]
+    return raw, migration, result, args
 
 
 class PlayerImportTests(unittest.TestCase):
@@ -254,6 +279,79 @@ class PlayerImportTests(unittest.TestCase):
         args, principal, update, bundle = add_update(result, migration, original, "manifest", [
             {"kind": "manifest", "event_ref": "manifestation:alias"}])
         args[5].append(record("manifestation:alias", "manifestation", event))
+        owner = PlayerStateStore.from_migration(result, migration, raw, *args)
+        self.rejected(owner, principal, update)
+
+    def test_same_realm_name_survives_qualified_branch_transfer_and_replay(self):
+        for shared in (False, True):
+            with self.subTest(shared=shared):
+                raw, migration, result, args = imported_branch_transfer(shared)
+                owner = PlayerStateStore.from_migration(result, migration, raw, *args)
+                before = owner.state()
+                receipt = owner.publish(owner.writer(PRINCIPAL), "request:branch", 0, "update:branch")
+                after = owner.state()
+                self.assertEqual("branch:two", after["spine"]["current_leaf_branch_ref"])
+                self.assertEqual("physical", after["spine"]["runtime_context"]["active_realm_form"])
+                old_ref = before["spine"]["runtime_context"]["active_realm_form_ref"]
+                self.assertEqual(old_ref if shared else "realm:physical:two",
+                                 after["spine"]["runtime_context"]["active_realm_form_ref"])
+                self.assertEqual(before["records"][old_ref], after["records"][old_ref])
+                archive, head = owner.checkpoint()
+                restored = PlayerStateStore.load_migrated(archive, head, result, migration, raw, *args)
+                self.assertEqual((archive, head), restored.checkpoint())
+                with patch.object(OriginProgressionPolicy, "reduce", side_effect=AssertionError("retry reduced")):
+                    self.assertEqual(receipt, restored.publish(restored.writer(PRINCIPAL), "request:branch", 0, "update:branch"))
+
+    def test_branch_transfer_cannot_reuse_old_leaf_form_binding(self):
+        raw, migration, result, args = imported_branch_transfer()
+        del args[6][-1]["operations"][1]["next_realm_form_ref"]
+        owner = PlayerStateStore.from_migration(result, migration, raw, *args)
+        self.rejected(owner, PRINCIPAL, "update:branch")
+
+    def test_branch_binding_cannot_change_realm_meaning_or_scope(self):
+        for field, value in (("form_name", "mental"), ("plane_id", "P4_Mental"),
+                             ("subject_id", "branch:foreign")):
+            with self.subTest(field=field):
+                raw, migration, result, args = imported_branch_transfer()
+                form = next(row for row in args[5] if row["ref"] == "realm:physical:two")
+                form["document"][field] = value
+                if field == "subject_id":
+                    form["branch_ref"] = value
+                owner = PlayerStateStore.from_migration(result, migration, raw, *args)
+                self.rejected(owner, PRINCIPAL, "update:branch")
+
+    def test_realm_owned_context_changes_name_and_binding_together(self):
+        raw, migration, result, original = build("historical_record_v1", True)
+        args, principal, update, bundle = add_update(result, migration, original, "realm-change", [], source="realm_engine")
+        ref = args[3]["runtime_context"]["active_realm_form_ref"]
+        form = copy.deepcopy(next(row for row in args[5] if row["ref"] == ref))
+        form["ref"] = "realm:mental:one"
+        form["document"].update(form_name="mental", plane_id="P4_Mental")
+        args[5].append(form)
+        args[6][-1]["operations"].extend([
+            context_change(args, "active_realm_form", "mental"),
+            context_change(args, "active_realm_form_ref", form["ref"])])
+        owner = PlayerStateStore.from_migration(result, migration, raw, *args)
+        owner.publish(owner.writer(principal), "request:realm-change", 0, update)
+        self.assertEqual("mental", owner.state()["spine"]["runtime_context"]["active_realm_form"])
+        archive, head = owner.checkpoint()
+        self.assertEqual((archive, head), PlayerStateStore.load_migrated(archive, head, result, migration, raw, *args).checkpoint())
+
+    def test_future_realm_binding_requires_an_existing_qualified_plane(self):
+        raw, sources, targets, resolution, old = inputs("historical_record_v1", True)
+        resolution["realm_name_map"]["mappings"]["newform"] = "P999_Nonexistent"
+        migration = PlayerStateMigration("historical_record_v1", sources, targets, resolution)
+        result = migration.migrate(raw)
+        original = configuration_for(result, resolution, targets, old)
+        args, principal, update, bundle = add_update(result, migration, original, "bad-plane", [], source="realm_engine")
+        ref = args[3]["runtime_context"]["active_realm_form_ref"]
+        form = copy.deepcopy(next(row for row in args[5] if row["ref"] == ref))
+        form["ref"] = "realm:nonexistent"
+        form["document"].update(form_name="newform", plane_id="P999_Nonexistent")
+        args[5].append(form)
+        args[6][-1]["operations"].extend([
+            context_change(args, "active_realm_form", "newform"),
+            context_change(args, "active_realm_form_ref", form["ref"])])
         owner = PlayerStateStore.from_migration(result, migration, raw, *args)
         self.rejected(owner, principal, update)
 

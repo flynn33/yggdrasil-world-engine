@@ -118,6 +118,17 @@ def _refs(value, minimum=0):
     return value
 
 
+def _realm_form(document, world_id, branch):
+    _closed(document, ("form_name", "plane_id", "truth_scope", "subject_id", "source_sha256"))
+    _identifier(document["form_name"])
+    _identifier(document["plane_id"])
+    _sha_value(document["source_sha256"])
+    _fail(document["truth_scope"] not in ("shared_worldstate", "leaf_branch_state"))
+    TruthScope(world_id, document["truth_scope"], document["subject_id"])
+    if document["truth_scope"] == "leaf_branch_state":
+        _fail(document["subject_id"] != branch)
+
+
 def _schemas(bundle, names):
     _closed(bundle, names)
     copied, hashes, by_uri = {}, {}, {}
@@ -284,10 +295,12 @@ class PlayerStateMigration:
                 _fail(row["ref"] in self._records or row["ref"] == r["spine"]["origin_progression_state_ref"]
                       or row["world_id"] != r["world_id"] or row["player_id"] != r["player_id"])
                 kind = row["kind"]
-                _fail(kind not in set(WIRE_VERSIONS) | {"reference", "consequence", "context"})
+                _fail(kind not in set(WIRE_VERSIONS) | {"reference", "consequence", "context", "realm_form"})
                 if kind in WIRE_VERSIONS:
                     key, version = WIRE_VERSIONS[kind]
                     _fail(row["document"].get(key) != version or not self._validators[kind].is_valid(row["document"]))
+                if kind == "realm_form":
+                    _realm_form(row["document"], r["world_id"], row["branch_ref"])
                 self._records[row["ref"]] = row
         except MigrationError:
             raise
@@ -452,8 +465,13 @@ class PlayerStateMigration:
         if context.get("last_player_action_trace_ref") is not None:
             _fail(context["last_player_action_trace_ref"] not in actions, "UNRESOLVED_REFERENCE")
         if "active_realm_form" in context:
-            _fail(context["active_realm_form"] not in r["realm_name_map"]["mappings"])
-            self._select(selected, context["active_realm_form"], "reference", "active_realm_form", branch)
+            name, reference = context["active_realm_form"], context["active_realm_form_ref"]
+            _fail(name not in r["realm_name_map"]["mappings"])
+            doc = self._select(selected, reference, "realm_form")
+            _realm_form(doc, r["world_id"], branch)
+            planes = selected[spine["state_refs"]["plane_attunement_state_ref"]]["document"]["planes"]
+            _fail(doc["form_name"] != name or doc["plane_id"] != r["realm_name_map"]["mappings"][name]
+                  or doc["plane_id"] not in planes)
         for field, value in context.get("ash_provenance", {}).items():
             for ref in value if type(value) is list else [value]:
                 doc = self._select(selected, ref, "reference", field)
@@ -509,6 +527,8 @@ class PlayerStateMigration:
         _fail(source["player_ref"] != r["player_id"] or source["current_leaf_branch_ref"] != spine["current_leaf_branch_ref"]
               or source["current_phase"] != r["current_phase"], "INCONSISTENT_BASELINE")
         context = {key: value for key, value in source.items() if key in CONTEXT_FIELDS}
+        if "active_realm_form" in context:
+            context["active_realm_form_ref"] = spine["runtime_context"]["active_realm_form_ref"]
         if "sequence_id" in context:
             _fail(type(context["sequence_id"]) is not int or abs(context["sequence_id"]) > 9007199254740991, "INVALID_SOURCE")
         if "phase_confidence" in context:

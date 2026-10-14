@@ -73,14 +73,14 @@ CONTEXT_COLLECTIONS = (
     "generation_context_refs",
 )
 CONTEXT_FIELDS = frozenset(CONTEXT_COLLECTIONS) | {
-    "phase_confidence", "celestial_memory", "active_realm_form", "perception_state_ref",
+    "phase_confidence", "celestial_memory", "active_realm_form", "active_realm_form_ref", "perception_state_ref",
 }
 CONTEXT_SOURCES = {
     "narrative_engine": {"phase_confidence", "celestial_memory", "awakening_fragments",
                          "narrative_memory_refs", "relationship_state_refs", "faction_stance_refs",
                          "unresolved_tension_refs"},
     "runtime_cosmology": {"branch_generation_context_refs", "branch_event_refs", "generation_context_refs"},
-    "realm_engine": {"active_realm_form"},
+    "realm_engine": {"active_realm_form", "active_realm_form_ref"},
     "perception_engine": {"perception_state_ref"},
     "quest_engine": {"active_quest_refs", "completed_resolution_refs"},
 }
@@ -106,6 +106,17 @@ def _context_value(field, value):
                 or value["coefficient"] == "0" and value["exponent"] != 0)
     else:
         _identifier(value)
+
+
+def _realm_form(document, world_id, branch):
+    _closed(document, "form_name plane_id truth_scope subject_id source_sha256")
+    for field in ("form_name", "plane_id", "subject_id"):
+        _identifier(document[field])
+    TruthScope(world_id, document["truth_scope"], document["subject_id"])
+    _reject(document["truth_scope"] not in ("shared_worldstate", "leaf_branch_state")
+            or document["truth_scope"] == "leaf_branch_state" and document["subject_id"] != branch)
+    _reject(type(document["source_sha256"]) is not str
+            or re.fullmatch(r"[0-9a-f]{64}", document["source_sha256"]) is None)
 
 
 def _schema(schema, name):
@@ -172,8 +183,8 @@ class PlayerStateStore:
         self._scope = TruthScope(world_id, "player_state", player_id)
         try:
             self._imported = migration_result is not None
-            self._realm_form_names = (frozenset(migration_resolution["realm_name_map"]["mappings"])
-                                      if self._imported else frozenset())
+            self._realm_form_names = (_copy(migration_resolution["realm_name_map"]["mappings"])
+                                      if self._imported else {})
             self._profile = _copy(profile)
             self._domain = PlayerDomainPolicy(self._profile)
             self._grants = _copy(grants)
@@ -291,7 +302,7 @@ class PlayerStateStore:
                 _closed(item, "ref kind world_id player_id branch_ref document provenance")
                 kinds = set(SCHEMAS) - {"spine"} | {"reference", "consequence"}
                 if self._imported:
-                    kinds.add("context")
+                    kinds.update(("context", "realm_form"))
                 if item["kind"] not in kinds:
                     raise JournalError("INVALID_POLICY")
                 _object_bytes(item["document"])
@@ -301,6 +312,8 @@ class PlayerStateStore:
                     key, version = WIRE_VERSIONS[item["kind"]]
                     if item["document"].get(key) != version:
                         raise JournalError("INVALID_POLICY")
+                if item["kind"] == "realm_form":
+                    _realm_form(item["document"], self._scope.world_id, item["branch_ref"])
                 if item["kind"] == "context":
                     keys = "field previous_value value phase"
                     if "resolution" in item["document"]:
@@ -470,8 +483,12 @@ class PlayerStateStore:
             _reject(context["last_player_action_trace_ref"] not in actions)
         if "active_realm_form" in context:
             _reject(context["active_realm_form"] not in self._realm_form_names)
-            row = self._record(state, context["active_realm_form"], "reference", branch, "active_realm_form")
-            _reject(row["truth_scope"] not in ("shared_worldstate", "leaf_branch_state"))
+            row = self._record(state, context["active_realm_form_ref"], "realm_form")
+            _realm_form(row, self._scope.world_id, branch)
+            plane = state["records"][state["spine"]["state_refs"]["plane_attunement_state_ref"]]["document"]
+            _reject(row["form_name"] != context["active_realm_form"]
+                    or row["plane_id"] != self._realm_form_names[context["active_realm_form"]]
+                    or row["plane_id"] not in plane["planes"])
         if "perception_state_ref" in context:
             row = self._record(state, context["perception_state_ref"], "reference", category="perception_state_ref")
             _reject(row["truth_scope"] != "player_perception")
@@ -564,7 +581,7 @@ class PlayerStateStore:
                 compensates = operation.get("target_request_ref")
                 _identifier(compensates)
             for key in ("previous_ref", "next_ref", "event_ref", "condition_ref", "previous_branch_ref",
-                        "context_ref",
+                        "context_ref", "next_realm_form_ref",
                         "next_branch_ref", "next_location_ref", "agent_ref", "history_ref"):
                 if key in operation and operation[key] is not None:
                     _identifier(operation[key])
@@ -606,7 +623,7 @@ class PlayerStateStore:
                 field = document["field"]
                 if field in CONTEXT_COLLECTIONS:
                     nested.extend(document["value"])
-                elif field in ("active_realm_form", "perception_state_ref"):
+                elif field in ("active_realm_form_ref", "perception_state_ref"):
                     nested.append(document["value"])
             pending.extend(nested)
         return {"request_ref": request_id, "principal": principal, "update_ref": update_ref,
@@ -668,7 +685,10 @@ class PlayerStateStore:
         target.extend(operation["refs"])
 
     def _branch(self, state, operation, context, actions, update_ref):
-        _closed(operation, "kind previous_branch_ref next_branch_ref next_location_ref agent_ref history_ref event_ref")
+        keys = "kind previous_branch_ref next_branch_ref next_location_ref agent_ref history_ref event_ref"
+        if self._imported and "next_realm_form_ref" in operation:
+            keys += " next_realm_form_ref"
+        _closed(operation, keys)
         spine = state["spine"]
         _reject(operation["previous_branch_ref"] != context["branch_ref"]
                 or operation["next_branch_ref"] == context["branch_ref"])
@@ -694,6 +714,9 @@ class PlayerStateStore:
         spine["current_location_ref"] = operation["next_location_ref"]
         spine["state_refs"]["player_agent_state_ref"] = operation["agent_ref"]
         spine["state_refs"]["player_branch_history_ref"] = operation["history_ref"]
+        if "next_realm_form_ref" in operation:
+            _reject("active_realm_form" not in spine.get("runtime_context", {}))
+            spine["runtime_context"]["active_realm_form_ref"] = operation["next_realm_form_ref"]
 
     def _compensate(self, state, operation, context):
         _closed(operation, "kind target_request_ref reason_refs")
