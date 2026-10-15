@@ -1,6 +1,14 @@
 # M3 reference Diagnostics contract
 
-Status: active N2 contract, adopted October 4, 2026 before dependent implementation. Owner and partition: `ywe_core`. Requirement: [YWE-REQ-0042]. Decision: ADR-0031. No executed Diagnostics implementation or native product conformance is claimed by adoption. Read against frozen N1 implementation `5328f018f341b80ad58cdb82f64708992ee2d6ae`. Actual product version is 2.0.23. These adopted local choices do not prescribe upstream numeric limits or invent ASH rules.
+Status: active N2 contract, adopted October 4, 2026 before dependent implementation. Owner and partition: `ywe_core`. Requirement: [YWE-REQ-0042]. Decision: ADR-0031. No executed Diagnostics implementation or native product conformance is claimed by adoption. Read against frozen N1 implementation `5328f018f341b80ad58cdb82f64708992ee2d6ae`. The adoption baseline was 2.0.23; the compatible current-baseline clarification below also admits 2.0.24. These adopted local choices do not prescribe upstream numeric limits or invent ASH rules.
+
+## Compatible repository baseline identity
+
+Adopted October 15, 2026 under the existing YWE-REQ-0042 and ADR-0031 boundary before the dependent baseline update: `DiagnosticsIdentity.product_version` and its unchanged `1.0.0` wire format admit exactly `2.0.23` and `2.0.24`. Existing serialized `2.0.23` identities and bundles retain their bytes and remain valid. Admission of an identity value does not authenticate a checkout or convert old evidence into a current-baseline result.
+
+The trusted reference host derives its product version from the selected checkout's canonical `VERSION`, verifies that the repository truth manifest identifies `VERSION` as its canonical source and reports the same value, and verifies that the containing Git snapshot has that same `VERSION`. No host parameter selects or overrides the version. Unsupported versions, malformed or duplicate-key metadata, and mismatched baseline/source metadata fail with `DIAGNOSTICS_CONFIG_INVALID` / `ORIGINAL_SOURCE` before protected storage is created. Existing dirty-source provenance remains explicit; this does not claim that all implementation bytes are committed.
+
+Current canonical dependency metadata is checked against the actual current baseline. Each previously pinned legacy, N3 and module source snapshot instead retains its own independently checked `2.0.23` `VERSION` and dependency descriptor. Only the expected descriptor's repository-baseline field is selected from that pinned historical snapshot; all other expected descriptor fields, exact source inventory, complete canonical binding vectors, source revisions and digests remain checked as before. No historical source, schema/evidence pin or serialized diagnostic fixture is rewritten by this clarification.
 
 ## Owning evidence and bounded scope
 
@@ -156,7 +164,7 @@ The frozen external prose fingerprint is `ff7898fa2a01ea9166208f054f8438156dbc54
     "Signature": "exact str matching ^[01]{9}$",
     "Revision": "exact str40 lowercase hex, supplied only after actual revision verification",
     "Sha256": "exact str64 lowercase hex; retained only for actually verified approved-source/file bytes",
-    "TrustedVersion": "const literal2.0.23 verified against actual VERSION and repository_truth_manifest during assembly; not caller-selected",
+    "TrustedVersion": "exact str enum 2.0.23 or 2.0.24; trusted host derives actual VERSION, verifies repository_truth_manifest canonical_source/value and containing Git VERSION during assembly; not caller-selected; historical serialized versions remain unchanged",
     "TrustedTemplateText": "exact text generated only by MessageTemplate lookup; no constructor-selected arbitrary text",
     "UtcTimestamp": "exact builtin ASCII str length27 YYYY-MM-DDTHH:MM:SS.ffffffZ, year0001..9999 valid Gregorian UTC calendar/time, seconds00..59 and exactly6fractiondigits; produced by trusted clock assembly; no extended fractions/leap-second token/arbitrary offsets",
     "uint32": "exact builtin int0..4294967295 excluding bool/subclasses",

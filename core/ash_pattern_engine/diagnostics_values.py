@@ -287,7 +287,7 @@ class DiagnosticsIdentity:
     environment: DiagnosticsEnvironment
 
     def __post_init__(self):
-        _enum(self.product_version, ("2.0.23",))
+        _enum(self.product_version, ("2.0.23", "2.0.24"))
         _enum(self.implementation_id, _E_IMPLEMENTATION)
         _enum(self.profile_id, _E_PROFILE_ID)
         _string(self.build_id, r"ref:[0-9]{6}", 10)

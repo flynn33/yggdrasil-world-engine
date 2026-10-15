@@ -1,4 +1,4 @@
-# Yggdrasil World Engine (YWE) v2.0.23
+# Yggdrasil World Engine (YWE) v2.0.24
 
 A cosmology-driven procedural narrative simulation engine built on the ASH Model of the Universe and governed by code-agnostic engine contracts.
 
@@ -73,12 +73,12 @@ products remain deferred until the M10 specification gate is accepted.
 
 | Indicator | Current state |
 |---|---|
-| Repository baseline | `v2.0.23` |
+| Repository baseline | `v2.0.24` |
 | Current milestone | 🟡 `M4` — Complete state persistence branching and multiplayer (`in_progress`) |
 | Accepted milestone gates | `4 of 11` |
 | Milestone queue | `1` in progress; `6` planned; `0` blocked; `0` deferred |
 | Release-ready subsystems | `2 of 15` |
-| Specification publication | `unreleased`; `0` GitHub Release objects; `0` agnostic specification releases (verified `2026-09-20`) |
+| Specification publication | `unreleased`; `0` GitHub Release objects; `0` agnostic specification releases (verified `2026-10-15`) |
 | Platform product work | ⏸️ `deferred`; authorization requires `M10` acceptance |
 
 Milestone indicators: 🟢 `complete` · 🟡 `in_progress` · ⚪ `planned` · 🔴 `blocked` · ⏸️ `deferred`.
@@ -115,12 +115,18 @@ required acceptance evidence.
 See the roadmap inventories of [completed or verified foundations](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#completed-or-verified-foundations), [material work remaining](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#material-work-remaining), and the [15-subsystem maturity matrix](docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md#subsystem-maturity-matrix).
 <!-- roadmap-status:end -->
 
-### M4 development checkpoint — 2026-10-14
+### M4 development checkpoint — 2026-10-15
 
 **M4 is in progress.** The owner explicitly resumed development on October 14,
 2026: “I'm unpausing it. You may proceed now.” This supersedes the M3/M4 pause.
 M0–M3 remain accepted; M5–M10 remain planned and platform work remains deferred
 until M10 acceptance.
+
+Repository baseline `2.0.24` records the accepted M0–M3 work and the M4 slices
+below. The exact [branch and world owner checkpoint](https://github.com/flynn33/yggdrasil-world-engine/commit/36d48fb445082526b2b526164b3cd0a63f0af4d4)
+passed all **37 repository checks and 1,755 tests**, with zero failures, errors
+or skips, in a clean local/offline checkout. The version-alignment follow-up
+preserves historical acceptance versions and diagnostic source identities.
 
 All five M4 deliverables and five exit criteria remain open. Implemented and
 locally exercised reference slices are:
@@ -493,7 +499,7 @@ objects or YWE Agnostic Specification releases have been published.
 
 | Baseline | Status | Primary Surface |
 |---|---|---|
-| `v2.0.23` | Current accepted repository baseline | Repository policy hygiene and accepted Phase 16/17 foundation |
+| `v2.0.24` | Current accepted repository baseline | M0–M3 accepted; verified M4 reference slices, with M4 acceptance still open |
 | `v2.0.15` | Authority-drift guardrail baseline | Source-truth and Twin Wolf resonance |
 | `v2.0.14` | Phase 12 accepted baseline | Quest, NPC, lore, myth, and social-distribution generation |
 | `v2.0.13` | Phase 11 accepted baseline | Worldstate and location mutation |

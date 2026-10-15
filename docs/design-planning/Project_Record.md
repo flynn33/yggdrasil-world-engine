@@ -1,8 +1,9 @@
 # Yggdrasil World Engine — Project Record
 
 **Record ID:** YWE-RECOVERY-20260918
-**Revision:** planning-59
-**Date:** October 14, 2026
+**Revision:** planning-60
+**Date:** October 15, 2026
+**Repository baseline:** `v2.0.24`
 **Authoritative branch:** `main`
 **Location:** `docs/design-planning/Project_Record.md`
 **Supersedes:** planning-49 local M3 acceptance reconciliation draft, preserved in section 19.1; committed baseline `ce294ece693996fadf4173a3164ffe199e67c70d` remains in Git.
@@ -23,7 +24,7 @@
 | M3 acceptance | Complete; immutable evidence `data/governance/m3_acceptance_evidence.json` binds the four executed archives, 28 invariant judgments, five conformance categories, nine module obligations, seven deliverables and five exit criteria |
 | Source closure | Original clean full execution and successful exact-revision Ubuntu/Windows CI verified October 11 (section 14); section 12 external review remains representation-matched only, `acceptance=false`, `provenance_review_required=true`; neither accepts N3 or M3 |
 | Wiki | M4 publication `220554b93fdea766dc47cdfd3954c3a195dcebf0` from source `93bc352`; fresh readback verified all 47 pages |
-| Publication | Unreleased; no GitHub Release objects exist as verified September 20, 2026 |
+| Publication | Unreleased; authenticated GitHub API readback found zero Release objects on October 15, 2026 |
 | Workflow | Owner explicitly resumed on October 14. Continue M4 contracts, implementation, verification and owner publication, preserving M0–M3 acceptance and later milestone gates |
 
 The machine-readable roadmap is milestone and status authority. Focused accepted contracts,
@@ -2948,3 +2949,56 @@ all five M4 deliverables and five exits remain open. Next: run the normal checks
 against the exact committed checkpoint, publish through owner authority and
 refresh/read back the wiki, then continue coordinated admission and the remaining
 branch participant contracts. Needed from owner: none.
+
+## 32. October 15 baseline alignment and publication
+
+Current step: publish the completed branch/world checkpoint and align repository
+baseline 2.0.24, changelog, current documentation and wiki. The owner explicitly
+authorized pushing as Jim Daley, admin bypass if needed, and synchronizing the
+local repository. No additional owner decision is needed.
+
+Completed verification: exact clean implementation
+`36d48fb445082526b2b526164b3cd0a63f0af4d4` passed all 37 canonical repository checks
+through `bash scripts/run_checks.sh`, local/offline, in 3,874.828 seconds. Its unit
+receipt records 1,755 tests, zero failures, errors, skips, expected failures or
+unexpected successes. Both pre/post checkout states were clean. Independent
+selected execution passed all 36 non-unit local checks in 499.781 seconds.
+External evidence prefixes are `ywe-m4-three-owner-full-20261014` and
+`ywe-m4-three-owner-selected-20261014`. These results supersede the pending
+execution statement in section 31.4, without accepting an M4 exit criterion.
+
+Observed GitHub CI for predecessor `93bc352` succeeded in run `38571710809`;
+`6e9ffe6` also succeeded in run `38570544249`. Authenticated API inventory on
+October 15 returned zero GitHub Release objects. Baseline 2.0.24 does not create
+a specification release, tag or platform authorization.
+
+Version impact review found five current governance mirrors omitted from the
+version registry, a missing README generated-status mirror, and two M1 schemas
+that incorrectly fixed the current baseline at 2.0.23. The registry now covers
+those current records and the release policy, repository status and this brief.
+The two current-baseline schema properties admit strict MAJOR.MINOR.PATCH values;
+the registered mirror checks enforce equality with VERSION. Historical M0–M3
+evidence, original source snapshots, dependency pins and artifact format versions
+retain their original identifiers. Diagnostics version compatibility is governed
+by the additive clarification in the existing YWE-REQ-0042 contract.
+
+No VS Code workspace, solution or project files were found in either product
+checkout, including hidden/ignored paths and top-level D:/GitHub workspaces.
+The two canonical checkout drafts were copied byte-for-byte, with a binary diff
+and SHA-256 receipt, to `D:/GitHub/YWE-local-drafts-20261015` before synchronization.
+Their historical M3 acceptance/pause content is already retained in section 19.1
+and the continuation handoff; the obsolete pause is not reapplied to current work.
+
+Next: verify the version-alignment delta, publish the exact committed checkpoint,
+regenerate/read back the wiki, and synchronize the canonical checkout. Current
+M4 acceptance remains open. The saved roadmap goal reports usageLimited; this
+publication request continues under the owner's direct instruction. Saved at:
+Project Record planning-60 and the existing continuation handoff.
+
+Initial delta verification passed all 83 validation-foundation tests in 106.083
+seconds, including complete current-mirror synchronization, stale-mirror refusal,
+unchanged historical evidence and rollback after partial replacement. The
+diagnostic compatibility/schema selection passed 22 tests in 13.884 seconds.
+Precommit actual-host cases refused the intentionally uncommitted VERSION and
+descriptor because HEAD still held 2.0.23; the committed-source regression is
+required before publication and those refusals are not reported as passes.

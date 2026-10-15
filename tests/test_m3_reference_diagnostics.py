@@ -9,6 +9,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from core.ash_pattern_engine import diagnostics as core
 from core.ash_pattern_engine import diagnostics_values as dv
@@ -142,6 +143,8 @@ class ReferenceDiagnosticsTests(unittest.TestCase):
 
     def test_actual_host_captures_current_and_legacy_source_graphs_in_one_pair(self):
         owner = self.create()
+        self.assertEqual((ROOT / "VERSION").read_text(encoding="utf-8-sig").strip(),
+            owner.identity.product_version)
         actual_head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, check=True,
             capture_output=True, text=True).stdout.strip()
         revision, snapshots = host._verified_canonical_source_snapshots(ROOT)
@@ -757,6 +760,102 @@ class CanonicalSourceCompatibilityTests(unittest.TestCase):
     def pins(self):
         return (dv.SourcePin("ASH_AGGREGATE", dv.LEGACY_SOURCE_REVISION, self.legacy["canonical_binding"]["aggregate_sha256"]),
             dv.SourcePin("ASH_AGGREGATE", "a" * 40, self.current["canonical_binding"]["aggregate_sha256"]))
+
+    def test_identity_accepts_current_baseline_without_relabeling_historical_values(self):
+        original = self.identity()
+        original_record = original.to_record()
+        current = dataclasses.replace(original, product_version="2.0.24")
+        self.assertEqual("2.0.23", original.product_version)
+        self.assertEqual(original_record, original.to_record())
+        self.assertEqual({**original_record, "product_version": "2.0.24"}, current.to_record())
+        for unsupported in ("2.0.25", "02.0.24", "2.0.24-preview", None, 2):
+            with self.subTest(version=unsupported), self.assertRaises(dv.DiagnosticsContractError):
+                dataclasses.replace(original, product_version=unsupported)
+
+    def test_host_baseline_requires_canonical_truth_and_closed_supported_version(self):
+        with tempfile.TemporaryDirectory(prefix="ywe-diagnostic-baseline-") as directory:
+            root = Path(directory)
+            truth_path = root / "data/governance/repository_truth_manifest.json"
+            truth_path.parent.mkdir(parents=True)
+            def write(version, baseline):
+                (root / "VERSION").write_text(version + "\n", encoding="utf-8")
+                truth_path.write_text(json.dumps({"repository_baseline": baseline}), encoding="utf-8")
+            for version in ("2.0.23", "2.0.24"):
+                write(version, {"canonical_source": "VERSION", "value": version})
+                self.assertEqual(version, host._verified_repository_baseline(root))
+            for version, baseline in (
+                ("2.0.24", {"canonical_source": "VERSION", "value": "2.0.23"}),
+                ("2.0.24", {"canonical_source": "caller", "value": "2.0.24"}),
+                ("2.0.24", "2.0.24"),
+                ("2.0.25", {"canonical_source": "VERSION", "value": "2.0.25"}),
+                ("02.0.24", {"canonical_source": "VERSION", "value": "02.0.24"}),
+            ):
+                with self.subTest(version=version, baseline=baseline):
+                    write(version, baseline)
+                    with self.assertRaises(dv.DiagnosticsContractError) as observed:
+                        host._verified_repository_baseline(root)
+                    self.assertEqual(("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE"),
+                        (observed.exception.code, observed.exception.failed_field))
+            write("2.0.24", {"canonical_source": "VERSION", "value": "2.0.24"})
+            for malformed in ('{"repository_baseline":{},"repository_baseline":{}}', '[]', '{', '\ud800'):
+                truth_path.write_bytes(malformed.encode("utf-8", errors="surrogatepass"))
+                with self.assertRaises(dv.DiagnosticsContractError):
+                    host._verified_repository_baseline(root)
+            truth_path.unlink()
+            with self.assertRaises(dv.DiagnosticsContractError):
+                host._verified_repository_baseline(root)
+
+    def test_current_baseline_snapshot_keeps_all_historical_source_baselines(self):
+        with tempfile.TemporaryDirectory(prefix="ywe-current-source-baseline-") as directory:
+            root = Path(directory) / "repo"
+            subprocess.run(["git", "clone", "--quiet", "--shared", "--no-checkout", str(ROOT), str(root)],
+                check=True, capture_output=True)
+            subprocess.run(["git", "checkout", "--quiet", "--detach", "HEAD"], cwd=root,
+                check=True, capture_output=True)
+            (root / "VERSION").write_text("2.0.24\n", encoding="utf-8")
+            descriptor = host.ash_sync.expected_manifest(root)
+            descriptor_path = root / host.ash_sync.MANIFEST_PATH
+            descriptor_path.write_text(json.dumps(descriptor, indent=2) + "\n", encoding="utf-8")
+            subprocess.run(["git", "add", "VERSION", host.ash_sync.MANIFEST_PATH.as_posix()], cwd=root,
+                check=True, capture_output=True)
+            subprocess.run(["git", "-c", "user.name=YWE Test", "-c", "user.email=test@example.invalid",
+                "commit", "--quiet", "--allow-empty", "-m", "Exercise current diagnostic baseline"],
+                cwd=root, check=True, capture_output=True)
+            revision, snapshots = host._verified_canonical_source_snapshots(root)
+            historical_revisions = (dv.LEGACY_SOURCE_REVISION, dv.HISTORICAL_N3_SOURCE_REVISION,
+                dv.HISTORICAL_MODULE_SOURCE_REVISION)
+            self.assertEqual((*historical_revisions, revision), tuple(pin.revision for pin in snapshots))
+            self.assertEqual(descriptor["aggregate_sha256"], snapshots[-1].sha256)
+            actual_material = host._git_source_material
+            for historical_revision in historical_revisions:
+                historical = actual_material(root, historical_revision)
+                self.assertEqual(b"2.0.23\n", historical["VERSION"])
+                original = json.loads(historical[host.ash_sync.MANIFEST_PATH.as_posix()])
+                self.assertEqual("2.0.23", original["repository_baseline"])
+                for selected in ("VERSION", "descriptor", "source"):
+                    changed = dict(historical)
+                    if selected == "VERSION":
+                        changed["VERSION"] = b"2.0.24\n"
+                    elif selected == "descriptor":
+                        changed[host.ash_sync.MANIFEST_PATH.as_posix()] = json.dumps(
+                            {**original, "repository_baseline": "2.0.24"}).encode("utf-8")
+                    else:
+                        source_path = host.ash_sync.SOURCE_ROOT.as_posix() + "/interfaces/rule-id-taxonomy.md"
+                        changed[source_path] += b"\nUnapproved historical source\n"
+                    def read_material(selected_root, selected_revision):
+                        return changed if selected_revision == historical_revision else actual_material(selected_root, selected_revision)
+                    with self.subTest(revision=historical_revision, selected=selected), patch.object(
+                        host, "_git_source_material", side_effect=read_material):
+                        with self.assertRaises(dv.DiagnosticsContractError) as observed:
+                            host._verified_canonical_source_snapshots(root)
+                        self.assertEqual(("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE"),
+                            (observed.exception.code, observed.exception.failed_field))
+            current = actual_material(root, revision)
+            current["VERSION"] = b"2.0.23\n"
+            with patch.object(host, "_git_source_material", side_effect=lambda selected_root, selected_revision:
+                current if selected_revision == revision else actual_material(selected_root, selected_revision)):
+                with self.assertRaises(dv.DiagnosticsContractError):
+                    host._verified_canonical_source_snapshots(root)
 
     def owner(self, snapshots=None, revision="a" * 40):
         store, clock = ControlledProjectionStore(), ControlledClock()

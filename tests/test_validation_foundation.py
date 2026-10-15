@@ -936,6 +936,8 @@ class WorkflowContractTests(unittest.TestCase):
             "CHANGELOG.md",
             version_updater.ROADMAP_PATH,
             *version_updater.BASELINE_MANIFEST_PATHS,
+            "data/schemas/canonical_term_index_schema.json",
+            "data/schemas/truth_authority_lattice_schema.json",
         }
         paths.update(source["path"] for source in roadmap["version_sources"])
         paths.update(source["path"] for source in classification["sensitive_sources"])
@@ -1039,6 +1041,26 @@ class WorkflowContractTests(unittest.TestCase):
             self.assertEqual(introduced_before, [item["introduced_baseline"] for item in debt["debts"]])
             self.assertEqual(evidence_before, (temporary_root / version_updater.M0_EVIDENCE_PATH).read_bytes())
 
+            for relative_path in (
+                "data/governance/ash_dependency_identity.json",
+                "data/governance/canonical_term_index.json",
+                "data/governance/truth_authority_lattice.json",
+                "data/governance/normative_requirement_register.json",
+                "data/governance/governance_record_register.json",
+            ):
+                self.assertEqual(new_version, self._read_json(temporary_root, relative_path)["repository_baseline"])
+            for schema_name in ("canonical_term_index", "truth_authority_lattice"):
+                schema = self._read_json(temporary_root, f"data/schemas/{schema_name}_schema.json")
+                from jsonschema import Draft202012Validator
+                validator = Draft202012Validator(schema["properties"]["repository_baseline"])
+                self.assertTrue(validator.is_valid(old_version))
+                self.assertTrue(validator.is_valid(new_version))
+                self.assertFalse(validator.is_valid("2.0.024"))
+                self.assertFalse(validator.is_valid("v2.0.24"))
+            self.assertEqual([], roadmap_check.readme_status_errors(
+                (temporary_root / "README.md").read_text(encoding="utf-8-sig"), roadmap,
+            ))
+
             for source in classification["sensitive_sources"]:
                 self.assertEqual(
                     version_updater.normalized_text_sha256(temporary_root / source["path"]),
@@ -1073,6 +1095,25 @@ class WorkflowContractTests(unittest.TestCase):
             self.assertEqual([], roadmap_check.version_errors(temporary_root, roadmap))
 
         self.assertEqual(live_version, (ROOT / "VERSION").read_bytes())
+
+    def test_version_updater_rejects_stale_current_governance_mirror_without_writes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            temporary_root = Path(directory)
+            self._copy_version_update_fixture(temporary_root)
+            relative_path = "data/governance/canonical_term_index.json"
+            document = self._read_json(temporary_root, relative_path)
+            document["repository_baseline"] = "0.0.0"
+            self._write_json(temporary_root, relative_path, document)
+            classification = self._read_json(temporary_root, version_updater.CLASSIFICATION_PATH)
+            for source in classification["sensitive_sources"]:
+                source["sha256"] = version_updater.normalized_text_sha256(
+                    temporary_root / source["path"]
+                )
+            self._write_json(temporary_root, version_updater.CLASSIFICATION_PATH, classification)
+            before = self._tree_bytes(temporary_root)
+            with self.assertRaisesRegex(ValueError, "JSON version source .*canonical_term_index.json"):
+                version_updater.update_version_references(temporary_root, "9.8.7")
+            self.assertEqual(before, self._tree_bytes(temporary_root))
 
     def test_version_updater_rejects_invalid_semver_without_writes(self):
         with tempfile.TemporaryDirectory() as directory:

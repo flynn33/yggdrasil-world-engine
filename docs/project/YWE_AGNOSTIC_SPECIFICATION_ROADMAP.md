@@ -1,7 +1,7 @@
 # Yggdrasil World Engine Agnostic Specification Roadmap
 
 Status: active development authority
-Repository baseline: `v2.0.23`
+Repository baseline: `v2.0.24`
 Machine-readable milestone and status authority: `data/governance/specification_roadmap.json`
 
 Publication status: no GitHub Release objects or YWE Agnostic Specification
@@ -59,12 +59,18 @@ Every subsystem is measured on five independent dimensions:
 
 Indicators: 🟢 complete, 🟡 in progress, ⚪ planned, 🔴 blocked, and ⏸️ deferred.
 
-### M4 development checkpoint — 2026-10-14
+### M4 development checkpoint — 2026-10-15
 
 **M4 is in progress.** The owner explicitly resumed development on October 14,
 2026: “I'm unpausing it. You may proceed now.” This supersedes the M3/M4 pause.
 M0–M3 remain accepted; M5–M10 remain planned and platform work remains deferred
 until M10 acceptance.
+
+Repository baseline `2.0.24` records the accepted M0–M3 work and the M4 slices
+below. The exact [branch and world owner checkpoint](https://github.com/flynn33/yggdrasil-world-engine/commit/36d48fb445082526b2b526164b3cd0a63f0af4d4)
+passed all **37 repository checks and 1,755 tests**, with zero failures, errors
+or skips, in a clean local/offline checkout. The version-alignment follow-up
+preserves historical acceptance versions and diagnostic source identities.
 
 All five M4 deliverables and five exit criteria remain open. Implemented and
 locally exercised reference slices are:

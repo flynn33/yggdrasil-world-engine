@@ -1,6 +1,6 @@
 {
   "artifact_type": "repository_build_instructions",
-  "artifact_version": "2.0.23",
+  "artifact_version": "2.0.24",
   "project": {
     "name": "Yggdrasil World Engine",
     "summary": "Code-agnostic cosmic narrative simulation engine based on the ASH cosmological model",
@@ -24,22 +24,36 @@
       {
         "name": "Data",
         "role": "JSON schemas, data loading, registry parsing, data models",
-        "allowed_dependencies": ["Core"]
+        "allowed_dependencies": [
+          "Core"
+        ]
       },
       {
         "name": "Runtime",
         "role": "Quest generation, myth formation, prophecy tracking, creature spawning",
-        "allowed_dependencies": ["Core", "Data"]
+        "allowed_dependencies": [
+          "Core",
+          "Data"
+        ]
       },
       {
         "name": "Presentation",
         "role": "Realm overlays, perception rendering, UI integration, temporary environments",
-        "allowed_dependencies": ["Core", "Data", "Runtime"]
+        "allowed_dependencies": [
+          "Core",
+          "Data",
+          "Runtime"
+        ]
       },
       {
         "name": "Editor",
         "role": "Build tools, inspectors, world builders, testing utilities",
-        "allowed_dependencies": ["Core", "Data", "Runtime", "Presentation"]
+        "allowed_dependencies": [
+          "Core",
+          "Data",
+          "Runtime",
+          "Presentation"
+        ]
       }
     ]
   },

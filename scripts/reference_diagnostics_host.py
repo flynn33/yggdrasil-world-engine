@@ -454,6 +454,29 @@ def _git_source_material(root, revision):
     return material
 
 
+def _verified_repository_baseline(root):
+    """Read the selected canonical baseline and verify its declared authority."""
+    try:
+        version = ash_sync._repository_baseline(root)
+        truth = ash_sync._load_json_object(root / "data/governance/repository_truth_manifest.json")
+        baseline = truth.get("repository_baseline")
+        if version not in ("2.0.23", "2.0.24") or type(baseline) is not dict or baseline.get("canonical_source") != "VERSION" or baseline.get("value") != version:
+            raise ValueError("repository baseline does not match its canonical source")
+        return version
+    except (OSError, UnicodeError, ValueError):
+        raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE") from None
+
+
+def _historical_expected_manifest(root, material, rows):
+    """Keep the approved historical baseline distinct from the current one."""
+    version = material.get("VERSION", b"").decode("utf-8").strip()
+    if version != "2.0.23":
+        raise ValueError("historical VERSION is not the approved baseline")
+    expected = ash_sync.expected_manifest(root, rows)
+    expected["repository_baseline"] = version
+    return expected
+
+
 def _verified_canonical_source_snapshots(root):
     """Verify current containing tree and the pinned historical 32-file baseline."""
     try:
@@ -463,6 +486,8 @@ def _verified_canonical_source_snapshots(root):
             raise ValueError("implementation revision is unavailable")
         legacy = _git_source_material(root, dv.LEGACY_SOURCE_REVISION)
         current = _git_source_material(root, revision)
+        if current.get("VERSION", b"").decode("utf-8").strip() != ash_sync._repository_baseline(root):
+            raise ValueError("current VERSION is not in the containing implementation tree")
         prefix = ash_sync.SOURCE_ROOT.as_posix() + "/"
         source_rows = lambda files: [{"relative_path": name[len(prefix):],
             "sha256": hashlib.sha256(data).hexdigest()} for name, data in sorted(files.items())
@@ -484,7 +509,7 @@ def _verified_canonical_source_snapshots(root):
             raise ValueError("current descriptor is not in the containing implementation tree")
         legacy_descriptor = json.loads(legacy[ash_sync.MANIFEST_PATH.as_posix()].decode("utf-8"),
             object_pairs_hook=ash_sync._unique_object)
-        if legacy.get("VERSION", b"").decode("utf-8").strip() != "2.0.23" or legacy_descriptor != ash_sync.expected_manifest(root, legacy_rows):
+        if legacy_descriptor != _historical_expected_manifest(root, legacy, legacy_rows):
             raise ValueError("historical dependency descriptor is not the approved baseline")
         def binding(rows):
             digests = {row["relative_path"]: row["sha256"] for row in rows}
@@ -505,7 +530,7 @@ def _verified_canonical_source_snapshots(root):
                 raise ValueError("historical N3 source paths differ from the reviewed inventory")
             historical_descriptor = json.loads(historical[ash_sync.MANIFEST_PATH.as_posix()].decode("utf-8"),
                 object_pairs_hook=ash_sync._unique_object)
-            if historical.get("VERSION", b"").decode("utf-8").strip() != "2.0.23" or historical_descriptor != ash_sync.expected_manifest(root, historical_rows):
+            if historical_descriptor != _historical_expected_manifest(root, historical, historical_rows):
                 raise ValueError("historical N3 descriptor differs from actual pinned source")
             historical_binding = binding(historical_rows)
             if sv.canonical_source_baseline(historical_binding) != "N3_LIFECYCLE":
@@ -518,7 +543,7 @@ def _verified_canonical_source_snapshots(root):
                     raise ValueError("historical module source paths differ from the reviewed inventory")
                 module_descriptor = json.loads(module[ash_sync.MANIFEST_PATH.as_posix()].decode("utf-8"),
                     object_pairs_hook=ash_sync._unique_object)
-                if module.get("VERSION", b"").decode("utf-8").strip() != "2.0.23" or module_descriptor != ash_sync.expected_manifest(root, module_rows):
+                if module_descriptor != _historical_expected_manifest(root, module, module_rows):
                     raise ValueError("historical module descriptor differs from actual pinned source")
                 module_binding = binding(module_rows)
                 if sv.canonical_source_baseline(module_binding) != "M3_MODULES":
@@ -538,11 +563,7 @@ def assemble_reference_diagnostics(root: Path, *, release=False, parent=Path("D:
         (sv, "core/ash_pattern_engine/state_values.py"), (dv, "core/ash_pattern_engine/diagnostics_values.py"),
         (diagnostics, "core/ash_pattern_engine/diagnostics.py"), (ash_sync, "scripts/sync_ash_specifications.py"))) or Path(__file__).resolve() != root / "scripts/reference_diagnostics_host.py":
         raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
-    if (root / "VERSION").read_text(encoding="utf-8-sig").strip() != "2.0.23":
-        raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
-    truth = json.loads((root / "data/governance/repository_truth_manifest.json").read_text(encoding="utf-8-sig"))
-    if truth.get("repository_baseline", {}).get("value") != "2.0.23":
-        raise dv.DiagnosticsContractError("DIAGNOSTICS_CONFIG_INVALID", "ORIGINAL_SOURCE")
+    product_version = _verified_repository_baseline(root)
     normalized = lambda p: p.read_text(encoding="utf-8-sig").replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
     revision, source_snapshots = _verified_canonical_source_snapshots(root)
     current_generation = any(pin.sha256 == dict(sv.GENERATION_CANONICAL_BINDING_FIELDS)["aggregate_sha256"] for pin in source_snapshots)
@@ -565,7 +586,7 @@ def assemble_reference_diagnostics(root: Path, *, release=False, parent=Path("D:
     architecture = {"AMD64": "X86_64", "x86_64": "X86_64", "ARM64": "ARM64", "aarch64": "ARM64"}.get(platform.machine(), "UNKNOWN")
     unavailable = () if architecture != "UNKNOWN" else (dv.MissingCoverage("ARCHITECTURE", "UNAVAILABLE", "NOT_MEASURED"),)
     environment = dv.DiagnosticsEnvironment("WINDOWS", tuple(sys.version_info[:3]), architecture, "HOST", unavailable)
-    identity = dv.DiagnosticsIdentity("2.0.23", implementation, profile_id, "ref:000001", revision, provenance, "ref:000002", environment)
+    identity = dv.DiagnosticsIdentity(product_version, implementation, profile_id, "ref:000001", revision, provenance, "ref:000002", environment)
     profile = dv.DiagnosticsProfile(profile_id, implementation, "ref:000003", not release)
     store = WindowsProtectedStore(parent)
     try:

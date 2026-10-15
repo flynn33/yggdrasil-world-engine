@@ -1,13 +1,13 @@
 {
   "artifact_type": "ywe_agnostic_specification_roadmap",
   "artifact_version": "1.0.0",
-  "repository_baseline": "2.0.23",
+  "repository_baseline": "2.0.24",
   "publication": {
     "state": "unreleased",
     "published_releases": 0,
     "github_release_objects": 0,
     "agnostic_specification_releases": 0,
-    "verified_on": "2026-09-20",
+    "verified_on": "2026-10-15",
     "tag_policy": "Existing v2.0.x Git tags, including historical annotations that use release wording, identify repository baselines; they are not published releases."
   },
   "current_milestone": "M4",
@@ -122,6 +122,51 @@
       "path": "docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md",
       "kind": "text_template",
       "template": "Repository baseline: `v{version}`"
+    },
+    {
+      "path": "data/governance/ash_dependency_identity.json",
+      "kind": "json_field",
+      "field": "repository_baseline"
+    },
+    {
+      "path": "data/governance/canonical_term_index.json",
+      "kind": "json_field",
+      "field": "repository_baseline"
+    },
+    {
+      "path": "data/governance/truth_authority_lattice.json",
+      "kind": "json_field",
+      "field": "repository_baseline"
+    },
+    {
+      "path": "data/governance/normative_requirement_register.json",
+      "kind": "json_field",
+      "field": "repository_baseline"
+    },
+    {
+      "path": "data/governance/governance_record_register.json",
+      "kind": "json_field",
+      "field": "repository_baseline"
+    },
+    {
+      "path": "README.md",
+      "kind": "text_template",
+      "template": "| Repository baseline | `v{version}` |"
+    },
+    {
+      "path": "docs/project/release_and_publication_policy.md",
+      "kind": "text_template",
+      "template": "baseline `{version}` identifies the current repository state"
+    },
+    {
+      "path": "docs/project/repository_status.md",
+      "kind": "text_template",
+      "template": "Current repository baseline: `v{version}`."
+    },
+    {
+      "path": "docs/design-planning/Project_Record.md",
+      "kind": "text_template",
+      "template": "**Repository baseline:** `v{version}`"
     }
   ],
   "status_sources": [

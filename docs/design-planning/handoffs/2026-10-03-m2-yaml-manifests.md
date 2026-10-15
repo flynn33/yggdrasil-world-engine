@@ -1,4 +1,23 @@
-# YWE Session Handoff — M4 Resumed
+# YWE Session Handoff — Baseline 2.0.24 Publication
+
+**Date:** October 15, 2026
+**Record:** Project Record planning-60, section 32.
+**Current step:** Verify and publish the version-alignment delta, refresh the
+wiki, and synchronize the canonical checkout under the owner's instruction.
+**Completed:** M0–M3 accepted; M4 branch/world checkpoint `36d48fb` passed all
+37 local/offline repository checks and 1,755 tests, with zero failures, errors
+or skips and a clean checkout before/after. All five M4 deliverables and exits
+remain open. Predecessor CI `38571710809` passed on `93bc352`.
+**Preservation:** Original canonical drafts and their exact hash receipt are
+saved outside the repository at `D:/GitHub/YWE-local-drafts-20261015`.
+**Next roadmap work:** Cross-owner coordinator admission, qualified child-world
+inheritance, occupancy handoff and merge-aware player history.
+**Needed from owner:** None for publication. The saved roadmap goal currently
+reports usageLimited; do not describe the historical active status below as current.
+
+---
+
+# Historical October 14 Handoff — M4 Resumed
 
 **Date:** October 14, 2026
 **Record:** Project Record planning-54, sections 20–24.

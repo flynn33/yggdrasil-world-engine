@@ -6,11 +6,24 @@ All notable changes to the Yggdrasil World Engine are documented here.
 
 ## Unreleased
 
+M4 remains in progress. Cross-owner coordinator integration, qualified child-world
+inheritance, occupancy handoff, merge-aware player history, and integrated
+multiplayer acceptance remain open. Later milestones remain planned.
+
+---
+
+## [2.0.24] — 2026-10-15
+
+Repository baseline checkpoint; the agnostic specification remains unreleased.
+
 ### Added
-- Implement the adopted N3 reference session lifecycle, closed values/schema, controlled state and mode publication, authorized resolution, terminal cancellation and bounded immutable diagnostic sidecars. Full committed-source acceptance remains pending.
+- Complete M2 contract/schema foundation acceptance and M3 core deterministic semantics/reference oracle acceptance with immutable committed-source evidence.
+- Implement the adopted M3 reference session lifecycle, closed values/schema, controlled state and mode publication, authorized resolution, terminal cancellation and bounded immutable diagnostic sidecars.
+- Add M4 scoped journals, observer persistence, exact resonance migration, origin progression, atomic player admission and qualified legacy player migration.
+- Add the bounded commit-set journal, branch lineage owner and world/location owner, including exact replay, compensation, actual player fork evidence and actual M3 Realm eligibility. Complete cross-owner and multiplayer acceptance remains pending.
 - Adopt the exact direct propagation-risk boundary cause under ADR-0035 before dependent lifecycle code; independent replay preserves all existing capacity bounds.
 - Correct the adopted N3 fresh-origin failure unions and inline unavailable-facts provenance under ADR-0034 before dependent code; replay the increased bounds within unchanged command reservations and collector caps.
-- Adopt the complete N3 lifecycle contract, independent policy, exact 38-type/35-port inventory and portable capacity/serialization controls under YWE-REQ-0044 and ADR-0033 before implementation. Runtime acceptance remains outstanding.
+- Adopt the complete N3 lifecycle contract, independent policy, exact 38-type/35-port inventory and portable capacity/serialization controls under YWE-REQ-0044 and ADR-0033 before implementation; subsequently close M3 reference acceptance.
 - Add a shared exact-commit wiki projection, owner-authenticated publication routes, preserved manual navigation, and fifteen focused refusal and readback tests.
 - Add source-backed structural YAML module-manifest validation and explicit YAML fixture bindings with typed rejection witnesses.
 - Add explicit M2 schema and fixture catalogs, offline reference resolution, and exact rejection witnesses for 102 structural fixtures.
@@ -19,19 +32,22 @@ All notable changes to the Yggdrasil World Engine are documented here.
 - Add a content-addressed ASH dependency identity and deterministic source-to-mirror synchronization check.
 
 ### Changed
+- Align current version mirrors, governance records, documentation and wiki projection with baseline 2.0.24. Extend automatic version synchronization to previously omitted governance and documentation surfaces.
+- Preserve historical 2.0.23 diagnostics while qualifying current diagnostics from the actual committed baseline. Retain immutable acceptance evidence and pinned dependency identities.
+- Record the exact 36d48fb implementation checkpoint's clean local/offline pass: all 37 repository checks and 1,755 unit tests, zero failures, errors or skips. The version-alignment follow-up has separate verification.
 - Register 180 session and runtime Diagnostic fixture bindings, preserving the earlier 750 bindings and their rejection expectations; retain exact reference-source approvals and refusal tests.
-- Record actual owner wiki publication and all 47 remotely verified page bytes, successful predecessor CI, and the current N3 implementation step in the README roadmap and Project Record.
+- Record owner wiki publication with all 47 pages verified, successful predecessor CI, M3 acceptance and current M4 implementation progress in the README roadmap and Project Record.
 - Correct the PR template's relative license link and document the actual manual wiki workflow, current roadmap navigation and deferred platform boundary.
-- Reconcile the owner's newer Raven Forge dual license and governance guard, and update the visible October 11 roadmap checkpoint with the verified original source compatibility execution and successful Ubuntu/Windows CI. Preserve the external package's representation-only review and keep N3/M3 acceptance outstanding.
+- Preserve the owner's MIT license restored in 9eefe016ee50059a6f4536d5332216504dd43b42. Retain the verified October 11 source compatibility execution, successful Ubuntu/Windows CI and the external package's representation-only review as historical evidence.
 - Reduce unbound JSON example debt from 39 to 19 through executed catalog bindings and reconcile repository classification and scope inventories.
 - Preserve legacy string values while accepting existing string-array representations in five Phase 12 batch, lore, quest candidate, and chain-seed fields.
 - Establish the M0 truthful-baseline governance authorities and acceptance evidence.
 - Normalize ontology, scoped worldstate, perception, realm-coordinate, companion-resonance, and reversal terminology.
 - Complete the WRW cosmology scope and provenance records and retain the master specification as an informative mixed-scope synthesis.
-- Complete M1 canon terminology and governance closure and advance the active roadmap milestone to M2 while publication remains unreleased and platform work remains unauthorized.
+- Complete M1 canon terminology and governance closure and later M2/M3 acceptance; advance the active roadmap milestone to M4 while publication remains unreleased and platform work remains unauthorized.
 - Clarify that repository baseline tags and changelog entries are not published specification releases.
 - Keep platform product implementation deferred until the M10 acceptance gate.
-- Record the bounded M3 source-compatibility closure evidence for 13df7079 (36/36 offline checks, 1,006 unit tests, clean detached verification checkout) and its completed independent instruction review in the Project Record, README, and continuation handoff. Documentation-only checkpoint; M3 remains in progress and M0-M2 remain accepted.
+- Preserve the earlier bounded source-compatibility evidence for 13df7079 (36/36 offline checks, 1,006 unit tests, clean detached verification checkout) and its completed instruction review. Final M3 acceptance is recorded separately in the immutable M3 evidence.
 
 ---
 

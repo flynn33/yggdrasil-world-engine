@@ -2,7 +2,7 @@
 
 Project: Yggdrasil World Engine
 Status: active governance index
-Current baseline: `v2.0.23`
+Current baseline: `v2.0.24`
 
 ## Purpose
 

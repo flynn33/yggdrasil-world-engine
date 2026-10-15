@@ -7,7 +7,7 @@ Machine-readable authority: `../../data/governance/release_publication_policy.js
 
 The Yggdrasil World Engine agnostic specification is **unreleased**. There are
 no GitHub Release objects and no agnostic specification releases. Repository
-baseline `2.0.23` identifies the current repository state; it is not a
+baseline `2.0.24` identifies the current repository state; it is not a
 publication claim.
 
 ## Version Authority
@@ -15,6 +15,13 @@ publication claim.
 `VERSION` is the canonical repository-baseline source. `version.txt` and the
 version-bearing governance and documentation surfaces are synchronized mirrors.
 A mismatch is a validation failure; a mirror does not override `VERSION`.
+
+The roadmap's `version_sources` inventory includes current governance records,
+the README status row, the Project Record brief, and this policy. Current term
+index and authority lattice schemas admit a `MAJOR.MINOR.PATCH` baseline; the
+registered mirror checks enforce equality with `VERSION`. Historical acceptance
+evidence, source snapshots, dependency versions, and artifact format versions
+retain their original identifiers when the repository baseline changes.
 
 ## Tags and Changelog
 

@@ -46,6 +46,18 @@ class ReferenceDiagnosticWireTests(unittest.TestCase):
             self.assertEqual("UNAVAILABLE", row["health"]["storage_state"])
             self.assertIsNone(row["generated_at_utc"])
 
+    def test_current_baseline_identity_preserves_historical_bundle_acceptance(self):
+        for original in self.fixtures:
+            self.assertEqual("2.0.23", original["identity"]["product_version"])
+            self.valid(original)
+            current = copy.deepcopy(original)
+            current["identity"]["product_version"] = "2.0.24"
+            self.valid(current)
+            for unsupported in ("2.0.25", "02.0.24", "2.0.24-preview", None, 2):
+                with self.subTest(version=unsupported):
+                    current["identity"]["product_version"] = unsupported
+                    self.rejected(current)
+
     def test_missing_closed_fields_and_untrusted_material_are_refused(self):
         for field in self.fixtures[0]:
             with self.subTest(missing=field):

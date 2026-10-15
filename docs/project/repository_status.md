@@ -4,6 +4,8 @@ This index records the current Yggdrasil World Engine project state in durable
 repository terms. Canonical contracts, schemas, validation rules, examples, and
 conformance files remain the active authority for implementation details.
 
+Current repository baseline: `v2.0.24`.
+
 The active specification roadmap is
 `docs/project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md`. Historical phase acceptance
 below records package provenance; it does not by itself assert normative,
