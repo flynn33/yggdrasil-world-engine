@@ -23,7 +23,7 @@
 | M2 acceptance | Complete; immutable evidence records all six exit criteria and eight deliverables |
 | M3 acceptance | Complete; immutable evidence `data/governance/m3_acceptance_evidence.json` binds the four executed archives, 28 invariant judgments, five conformance categories, nine module obligations, seven deliverables and five exit criteria |
 | Source closure | Original clean full execution and successful exact-revision Ubuntu/Windows CI verified October 11 (section 14); section 12 external review remains representation-matched only, `acceptance=false`, `provenance_review_required=true`; neither accepts N3 or M3 |
-| Wiki | M4 publication `220554b93fdea766dc47cdfd3954c3a195dcebf0` from source `93bc352`; fresh readback verified all 47 pages |
+| Wiki | Exact-commit projection; each generated page identifies its repository source revision. Publication preserves manual pages and verifies fresh remote readback |
 | Publication | Unreleased; authenticated GitHub API readback found zero Release objects on October 15, 2026 |
 | Workflow | Owner explicitly resumed on October 14. Continue M4 contracts, implementation, verification and owner publication, preserving M0–M3 acceptance and later milestone gates |
 
@@ -2991,8 +2991,8 @@ and the continuation handoff; the obsolete pause is not reapplied to current wor
 
 Next: verify the version-alignment delta, publish the exact committed checkpoint,
 regenerate/read back the wiki, and synchronize the canonical checkout. Current
-M4 acceptance remains open. The saved roadmap goal reports usageLimited; this
-publication request continues under the owner's direct instruction. Saved at:
+M4 acceptance remains open. This publication request continues under the owner's
+direct instruction. Saved at:
 Project Record planning-60 and the existing continuation handoff.
 
 Initial delta verification passed all 83 validation-foundation tests in 106.083
@@ -3002,3 +3002,50 @@ diagnostic compatibility/schema selection passed 22 tests in 13.884 seconds.
 Precommit actual-host cases refused the intentionally uncommitted VERSION and
 descriptor because HEAD still held 2.0.23; the committed-source regression is
 required before publication and those refusals are not reported as passes.
+
+### 32.1. Committed baseline verification
+
+Exact clean `c117daf3a0e6db3df46d7c21308b5ea2606a10c2` passed all 36 local
+non-unit repository checks through the canonical Bash entry point in 515.782
+seconds. The run used offline Git access and retained a clean checkout before
+and after. External evidence prefix: `ywe-baseline-selected-20261015`. The full
+1,755-test result in section 32 applies to predecessor `36d48fb`; this selected
+run does not claim a second full unit discovery.
+
+Canonical `D:/GitHub/YWE` was switched to main and fast-forwarded to the published
+predecessor before the final push. The preserved local draft stash is
+`7973f69556db0d061737bed3f8ed9ecbfb98c738`; the exact-byte external backup and
+receipt remain at `D:/GitHub/YWE-local-drafts-20261015`. Authentication readback
+confirmed the repository owner's `flynn33` account with push and admin access.
+Product commits use Jim Daley's configured identity.
+
+### 32.2. Diagnostics regression and publication handoff
+
+The exact clean `c117daf` eight-module regression completed all 218 tests in
+1,242.055 seconds: zero failures, errors, skips, expected failures or unexpected
+successes. The clone remained clean. This includes actual Windows diagnostic
+storage, current/legacy source export, all 8,192 state/codeword pairs with repeat
+serialization, exhaustive recovery proofs, and session diagnostics/recovery.
+The runtime was Python 3.12.10 with UTF-8 and bytecode disabled. External evidence
+prefix: `ywe-v2024-diagnostics-regression-20261015`; log SHA-256:
+`e4748b947425969eba96e0f172d1495f36915110555ea570b1440cab1a9e4ce7`.
+
+Read-only independent review found no actionable issues in the baseline delta
+or planning-document corrections. It directly verified current version mirrors,
+both updated governance schemas, derived surface hashes, actual containing
+revision/source snapshots and preservation of historical evidence. That review
+did not claim an additional test-suite or remote publication execution.
+
+README, changelog and detailed roadmap now identify the source revision for each
+test result. The final follow-up changes documentation and derived hashes only;
+runtime source, scripts, tests and schemas remain identical to `c117daf`.
+Publication readback receipts use `ywe-baseline-publication-20261015.json` and
+`ywe-baseline-wiki-publication-20261015.json` outside the repository. The final
+push route verifies both remote branch tips, remote version/README/changelog/
+roadmap bytes, the clean canonical main checkout and the clean M4 worktree;
+the wiki route checks every page from a fresh clone.
+
+Next roadmap work: actual cross-owner coordinator admission, qualified
+child-world inheritance, occupancy handoff and merge-aware player history.
+M4 remains in progress with all five deliverables and five exits open. No new
+owner decision is needed for this publication checkpoint.

@@ -8,12 +8,17 @@ wiki, and synchronize the canonical checkout under the owner's instruction.
 37 local/offline repository checks and 1,755 tests, with zero failures, errors
 or skips and a clean checkout before/after. All five M4 deliverables and exits
 remain open. Predecessor CI `38571710809` passed on `93bc352`.
+Version-alignment source `c117daf` passed all 36 non-unit repository checks and
+all 218 diagnostics/Realm/recovery/session tests in clean checkouts, with zero
+failures, errors or skips. All 83 validation-foundation tests also passed.
+The final documentation follow-up preserves those source bytes; exact publication
+and wiki readback receipts are external under `ywe-baseline-*-20261015`.
 **Preservation:** Original canonical drafts and their exact hash receipt are
 saved outside the repository at `D:/GitHub/YWE-local-drafts-20261015`.
 **Next roadmap work:** Cross-owner coordinator admission, qualified child-world
 inheritance, occupancy handoff and merge-aware player history.
-**Needed from owner:** None for publication. The saved roadmap goal currently
-reports usageLimited; do not describe the historical active status below as current.
+**Needed from owner:** None for publication. Consult current app state for the
+saved roadmap goal; historical execution-state notes below are not current status.
 
 ---
 

@@ -125,8 +125,12 @@ until M10 acceptance.
 Repository baseline `2.0.24` records the accepted M0–M3 work and the M4 slices
 below. The exact [branch and world owner checkpoint](https://github.com/flynn33/yggdrasil-world-engine/commit/36d48fb445082526b2b526164b3cd0a63f0af4d4)
 passed all **37 repository checks and 1,755 tests**, with zero failures, errors
-or skips, in a clean local/offline checkout. The version-alignment follow-up
-preserves historical acceptance versions and diagnostic source identities.
+or skips, in a clean local/offline checkout. The
+[version-alignment checkpoint](https://github.com/flynn33/yggdrasil-world-engine/commit/c117daf3a0e6db3df46d7c21308b5ea2606a10c2)
+passed all 36 non-unit repository checks and 218 diagnostics, Realm, recovery
+and session regression tests in clean checkouts. All 83 validation-foundation
+tests also passed. Historical acceptance versions and diagnostic source
+identities remain preserved; the 1,755-test full run belongs to `36d48fb`.
 
 All five M4 deliverables and five exit criteria remain open. Implemented and
 locally exercised reference slices are:

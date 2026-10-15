@@ -34,7 +34,7 @@ Repository baseline checkpoint; the agnostic specification remains unreleased.
 ### Changed
 - Align current version mirrors, governance records, documentation and wiki projection with baseline 2.0.24. Extend automatic version synchronization to previously omitted governance and documentation surfaces.
 - Preserve historical 2.0.23 diagnostics while qualifying current diagnostics from the actual committed baseline. Retain immutable acceptance evidence and pinned dependency identities.
-- Record the exact 36d48fb implementation checkpoint's clean local/offline pass: all 37 repository checks and 1,755 unit tests, zero failures, errors or skips. The version-alignment follow-up has separate verification.
+- Record the exact 36d48fb implementation checkpoint's clean local/offline pass: all 37 repository checks and 1,755 unit tests, zero failures, errors or skips. The c117daf version-alignment checkpoint separately passed all 36 non-unit repository checks and 218 diagnostics/Realm/recovery/session tests in clean checkouts; all 83 validation-foundation tests also passed.
 - Register 180 session and runtime Diagnostic fixture bindings, preserving the earlier 750 bindings and their rejection expectations; retain exact reference-source approvals and refusal tests.
 - Record owner wiki publication with all 47 pages verified, successful predecessor CI, M3 acceptance and current M4 implementation progress in the README roadmap and Project Record.
 - Correct the PR template's relative license link and document the actual manual wiki workflow, current roadmap navigation and deferred platform boundary.

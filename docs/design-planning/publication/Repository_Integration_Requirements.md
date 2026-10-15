@@ -1,9 +1,15 @@
 # Repository Integration Requirements
 
-**Current status:** Administrative consolidation and owner-completed branch cleanup are complete. One reviewed-report discovery defect is now corrected and tested. Classification/scope and complete repository verification remain outstanding.  
+**Historical status at the integration baseline:** Administrative consolidation and owner-completed branch cleanup were complete. One reviewed-report discovery defect was corrected and tested. Classification/scope and complete repository verification were outstanding at that checkpoint.
 **Integration baseline:** `7aa5c1b18caf37bb01ca3bdfb0d73b59f8261009`.  
 **Original main baseline:** `2db1230f638cd065d791c05f1adb7b4b51505c57`.  
 **Current authority:** [Project Record](../Project_Record.md).
+
+**October 15 continuation:** This document preserves the September 19 repair and
+its original checklist at baseline 2.0.23. Current M0–M3 acceptance, M4 progress,
+baseline alignment and later exact-commit verification are recorded in the
+Project Record and [roadmap](../../project/YWE_AGNOSTIC_SPECIFICATION_ROADMAP.md).
+Historical pending statements below do not override those later records.
 
 ## Completed repository consolidation
 

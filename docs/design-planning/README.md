@@ -6,7 +6,7 @@
 
 ## Start here
 
-Read [Project Record](Project_Record.md) for current state and [latest handoff](handoffs/2026-09-19-consumer-compatibility.md) for continuation. The [storage decision](decisions/2026-09-19-planning-location.md) records the owner's approval to keep this work in the repository.
+Read [Project Record](Project_Record.md) for current state and [latest handoff](handoffs/2026-10-03-m2-yaml-manifests.md) for continuation. The [storage decision](decisions/2026-09-19-planning-location.md) records the owner's approval to keep this work in the repository.
 
 This directory is not a replacement for accepted contracts, the machine-readable roadmap or acceptance evidence elsewhere. A draft's presence on main does not approve its content.
 
@@ -26,7 +26,11 @@ This directory is not a replacement for accepted contracts, the machine-readable
 
 An approved storage/merge decision is not an approved engine design. Drafts remain proposals. A tested candidate means only that its recorded experiment produced the stated results. Historical evidence retains its source, date and limits.
 
-Preserve M0/M1 acceptance, M2 status, v2.0.23, existing source pins and the closed platform gate. No new dependency or changed engine rule is implied by this directory. Candidate promotion requires a separately recorded engineering decision and integration evidence.
+M0–M3 are accepted and M4 is in progress. The current repository baseline is
+defined by [VERSION](../../VERSION) and mirrored in the Project Record. Preserve
+accepted historical evidence, existing source pins and the closed platform gate.
+No new dependency or changed engine rule is implied by this directory. Candidate
+promotion requires a separately recorded engineering decision and integration evidence.
 
 ## What stays outside
 
@@ -34,8 +38,14 @@ Issued coding-agent instruction packages remain in the external project-instruct
 
 ## Merge status and technical follow-through
 
-Both planning histories have been merged into main. The source branch refs have not been deleted. The Project Record contains the verified commit identities and ancestry observations.
+Both planning histories were merged into main and remain reachable through the
+merge anchor above. The Project Record contains verified commit identities,
+ancestry observations and subsequent working-branch decisions.
 
-The [integration requirements](publication/Repository_Integration_Requirements.md) remain unfinished technical work: synchronize classification/scope coverage, prevent experimental material from being treated as accepted engine authority, review generic discovery and run the repository suite. These checks were not completed before the administrative merge, and no full-suite success is claimed.
+The [integration requirements](publication/Repository_Integration_Requirements.md)
+preserve the September 19 administrative-merge and discovery-repair history. The
+current Project Record records subsequent inventory reconciliation, M2/M3
+acceptance and exact-commit repository verification. Those later results do not
+retroactively change what was verified before the administrative merge.
 
 Experimental catalogs do not register their contents in the engine's production validation catalog. The existing catch-all classification must not be treated as design approval. Original publication/preparation reports retain historical pending/no-push/no-merge fields; the current Project Record controls present storage status.
